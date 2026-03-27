@@ -274,3 +274,50 @@ Key groups: `torn-paper-*`, `brush-stroke-*`, `pedagogy-hero-*`, `schools-*`, `p
 **Breakpoints:** Default = 1440px desktop. Stack to single column at `md` (768px) unless Framer shows different behavior.
 
 **Objective checklist per section:** e.g. "headline font-black uppercase, max-w correct, torn paper 100px strip, no white gap between sections."
+
+---
+
+## Team & Collaboration
+
+### People
+- **Jamie** — CEO/orchestrator. Handles commerce (Stripe), form routing (Beehiiv/Make), API routes, data flow, copy updates. Uses Claude via Cowork.
+- **Aaron** — Lead designer. Handles front-end: visual QA, CSS, layout, component builds, design fidelity, copy updates. Uses Claude Code ($20 plan).
+
+### Important for Claude instances
+- **Read `WORKLOG.md` at the start of every session.** It tracks what each person changed since their last commit. This is how you stay aware of the other person's work.
+- **Update `WORKLOG.md` before every commit.** Add an entry at the top with name, date, and what changed.
+- Aaron and Jamie are both new to terminal (started this week). Give clear, step-by-step instructions. Don't assume they know shortcuts, flags, or conventions. When in doubt, explain what a command does before asking them to run it.
+
+### File ownership (soft boundaries)
+Aaron and Jamie communicate before touching each other's areas, but here's the general split:
+
+**Aaron's lane (front-end):**
+- `app/*/page.tsx` — page layouts and sections
+- `components/` — all UI and section components
+- `app/globals.css` — styles
+- `public/images/`, `public/icons/` — assets
+
+**Jamie's lane (orchestration):**
+- `app/api/` — API routes (Stripe, webhooks, etc.)
+- `.env.local` — environment variables
+- `context/` — app state (modals, etc.)
+- Commerce/payment flow logic
+
+**Shared (both may edit):**
+- `CLAUDE.md`, `WORKLOG.md` — project context
+- Copy text within any page
+- `components/ui/Button.tsx`, `components/ui/ModalButton.tsx` — shared UI primitives
+
+### Git workflow
+Both work on `main`. No branches. Simple rules:
+1. `git pull` before starting work
+2. Tell each other before working (Slack/text) so you don't edit the same file
+3. Commit and push when done
+4. If you get a merge conflict, stop and talk — don't force push
+
+### Preventing overwrites
+Aaron's front-end work will typically be ahead of Jamie's orchestration work. This is fine because they touch different files. The risk is small, but to be safe:
+- Aaron works in `components/` and `app/*/page.tsx`
+- Jamie works in `app/api/` and `context/`
+- If either needs to touch the other's area, communicate first
+- Git will auto-merge changes to different files. Conflicts only happen when both edit the same lines in the same file.
