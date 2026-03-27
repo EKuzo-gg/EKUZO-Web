@@ -1,0 +1,31 @@
+<!-- Page nodeId: N5AbZjoIZ — /privacy-policy -->
+<!-- NOTE: Raw XML exceeded 58KB and was truncated by the system. -->
+<!-- Structural preview shows same pattern as /terms-of-service (I3pvCXQOv): -->
+<!--   DesktopLarge (nodeId: RHqXRNRJv) > Stack > Frame165 > Title + Contents -->
+<!--   Uses Terms component (jXgTuvJAK) and Variant1 layout blocks -->
+<!-- Full content sourced from live site: https://ekuzo.gg/privacy-policy -->
+<DesktopLarge
+    nodeId="RHqXRNRJv"
+    position="absolute"
+    width="1920px"
+    height="fit-content"
+    backgroundColor="white"
+    overflow="clip"
+    layout="stack"
+    stackDirection="vertical"
+    stackDistribution="start"
+    stackAlignment="center"
+>
+  <Stack nodeId="P4ci1xFLT" padding="0px 40px">
+    <Frame165 nodeId="sTy2QvXOC" maxWidth="1232px" padding="188px 0px 0px 0px">
+      <Title nodeId="gj9_ZqW_T">
+        <!-- Title: "Privacy policy" — /Display/Heading 4 -->
+      </Title>
+      <Contents>
+        <!-- 15 sections using Terms component (componentId: jXgTuvJAK, variant G1NZovsKB) -->
+        <!-- Effective Date: February 2026 -->
+        <!-- See privacy-policy.md for full prose content -->
+      </Contents>
+    </Frame165>
+  </Stack>
+</DesktopLarge>

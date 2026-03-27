@@ -1,0 +1,107 @@
+<!-- Page nodeId: lUz6fAJxV — /ekuzo100-4-week-intro -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<DesktopLarge
+    nodeId="UT8paXK9v"
+    position="absolute"
+    width="1920px"
+    height="fit-content"
+    top="0px"
+    left="0px"
+    backgroundColor="white"
+    overflow="clip"
+    layout="stack"
+    stackDirection="vertical"
+    stackDistribution="start"
+    stackAlignment="center"
+>
+  <Form
+      nodeId="xkkQKYHO_"
+      width="1fr"
+      height="fit-content"
+      overflow="clip"
+      layout="stack"
+      gap="26px"
+      padding="0px 40px 0px 40px"
+      stackDirection="horizontal"
+      stackDistribution="center"
+      stackAlignment="center"
+  >
+    <ModalScroll
+        nodeId="kv5QBW9Kx"
+        width="1fr"
+        height="fit-content"
+        maxWidth="1232px"
+        overflow="auto"
+        layout="stack"
+        gap="26px"
+        padding="188px 0px 188px 0px"
+        stackDirection="horizontal"
+        stackDistribution="center"
+        stackAlignment="center"
+    >
+      <ModalScroll
+          nodeId="WTbshhbOS"
+          width="1fr"
+          height="fit-content"
+          backgroundColor="rgba(255,255,255,1)"
+          overflow="hidden"
+          layout="stack"
+          gap="24px"
+          stackDirection="vertical"
+          stackDistribution="start"
+          stackAlignment="start"
+      >
+        <HowTheEkuzoSystemWorks nodeId="FqRvbi_77" inlineTextStyle="/Display/Heading 5">Enroll my gamer</HowTheEkuzoSystemWorks>
+        <Label nodeId="fgV3O6lwZ">
+          <ParentName nodeId="mQ3XsUXJP" inlineTextStyle="/Desktop Body/XS/Regular">Parent name</ParentName>
+          <Node nodeId="dwZCXifxj" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+        </Label>
+        <Label nodeId="stju7Efg0">
+          <ParentEmail nodeId="qD9cECrmH" inlineTextStyle="/Desktop Body/XS/Regular">Parent email</ParentEmail>
+          <Node nodeId="Vd1KL3uOm" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+        </Label>
+        <Label nodeId="Hv9wV1WIK">
+          <StudentName nodeId="WtrEM5YLE" inlineTextStyle="/Desktop Body/XS/Regular">Student name</StudentName>
+          <Node nodeId="yJghbOAGY" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+        </Label>
+        <RadioGroup nodeId="Yz1U2mdNE">
+          <StudentAge nodeId="cOD2Qm188" inlineTextStyle="/Desktop Body/XS/Regular">Student age</StudentAge>
+          <Node nodeId="ysy4kYRpr" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+          <Label nodeId="hnMOmskXl"><1012 nodeId="B3Rb_JovF">10-12</1012></Label>
+          <Label nodeId="ndmesoyym"><1315 nodeId="elFVRf8kT">13-15</1315></Label>
+          <Label nodeId="IJI3cnP1C"><1618 nodeId="a4zxF5QQ0">16-18</1618></Label>
+        </RadioGroup>
+        <RadioGroup2 nodeId="HQXypwLMx">
+          <StudentGender nodeId="XiAAB57MO" inlineTextStyle="/Desktop Body/XS/Regular">Student gender</StudentGender>
+          <Node nodeId="vRoMGAzx4" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+          <Label nodeId="sjbsna49d"><Male nodeId="a6gmb1Gxk">Male</Male></Label>
+          <Label nodeId="ZNmDBdLNV"><Female nodeId="jkmWBkHML">Female</Female></Label>
+          <Label nodeId="TzKMrVyEV"><NonBinary nodeId="wSl_so2XB">Non-binary</NonBinary></Label>
+        </RadioGroup2>
+        <Label nodeId="G64suCX7a">
+          <MainGamesStudentPlays nodeId="eVvPdiCLk" inlineTextStyle="/Desktop Body/XS/Regular">Main games student plays</MainGamesStudentPlays>
+        </Label>
+        <RadioGroup2 nodeId="FTKBIL5LG">
+          <SchedulePreference nodeId="eaUCaEQqH" inlineTextStyle="/Desktop Body/XS/Regular">Schedule preference</SchedulePreference>
+          <Label nodeId="anfn7UHTc"><AfternoonEG400530Pm nodeId="vuwWKPYYW">Afternoon (e.g., 4:00–5:30 PM)</AfternoonEG400530Pm></Label>
+          <Label nodeId="bU35Q_S_s"><EveningEG700830Pm nodeId="Ov3zJEI7i">Evening (e.g., 7:00–8:30 PM)</EveningEG700830Pm></Label>
+        </RadioGroup2>
+        <ButtonForm
+            nodeId="Ta9roGBTA"
+            componentId="F2EGNLJac"
+            variant="aquU0L5jX"
+            O0OBuCrWV="Next"
+            SCU9lztBO="rgb(249, 37, 36)"
+            A_p1JFTmw="rgb(255, 255, 255)"
+         />
+      </ModalScroll>
+    </ModalScroll>
+  </Form>
+  <FooterBannerSection
+      nodeId="xR1MmLsbN"
+      componentId="BNRkYbJEX"
+      variant="QbZSddxCo"
+      ibdR1RB7I="Enroll into a transformational program today"
+      kylqqg5uj="true"
+   />
+</DesktopLarge>

@@ -1,0 +1,133 @@
+<Project>
+  <Pages>
+    <Page nodeId="augiA20Il" path="/" />
+    <Page nodeId="hsGVu9apR" path="/programs" />
+    <Page nodeId="duNUzONol" path="/parents" />
+    <Page nodeId="HMqJHm3uj" path="/games" />
+    <Page nodeId="ODMztkQ5r" path="/about" />
+    <Page nodeId="wbwKCVQlP" path="/faqs" />
+    <Page nodeId="jc5S8rmHK" path="/ekuzoteams-semester-based" />
+    <Page nodeId="lUz6fAJxV" path="/ekuzo100-4-week-intro" />
+    <Page nodeId="CzNR6aatw" path="/ekuzocamps-seasonal" />
+    <Page nodeId="I3pvCXQOv" path="/terms-of-service" />
+    <Page nodeId="N5AbZjoIZ" path="/privacy-policy" />
+    <Page nodeId="IPSPrK_wp" path="/schools" />
+    <Page nodeId="QRvASvvHF" path="/pedagogy" />
+    <Page nodeId="IACUTKl5t" path="/ekuzo100" />
+    <Page nodeId="hgW7CkVpp" path="/ekuzo-team" />
+    <Page nodeId="rvhUJqp10" path="/coaching" />
+    <Page nodeId="yEIHmvXz2" path="/blog" />
+    <Page nodeId="s57VwuSv9" path="/blog/:slug" />
+    <Page nodeId="QxCSkgabT" path="/forms" />
+  </Pages>
+  <DesignPages />
+  <Components>
+    <Component nodeId="G_7udIwcU" name="Button" />
+    <Component nodeId="Z9OcG4X2A" name="Eyebrows" />
+    <Component nodeId="sCSPy3XNh" name="List" />
+    <Component nodeId="WSTEvGlIk" name="Card" />
+    <Component nodeId="mTrbgx1O_" name="Card" />
+    <Component nodeId="rtb4ovQgf" name="Faq Section - Question" />
+    <Component nodeId="HnNOtigLD" name="Ecosystem Section - Card" />
+    <Component nodeId="DEPSJeeiY" name="Header" />
+    <Component nodeId="iop5RYIDR" name="Card" />
+    <Component nodeId="QsAFUtqlA" name="Our Approach Section" />
+    <Component nodeId="QVJuYtM47" name="Programs Section" />
+    <Component nodeId="BNRkYbJEX" name="Footer Banner Section" />
+    <Component nodeId="x3eHpc90M" name="Faq Section" />
+    <Component nodeId="DdV4_HJre" name="Video Card Section" />
+    <Component nodeId="iiumyo07V" name="Button Scroll" />
+    <Component nodeId="J5646SU6d" name="How it works Section - Large Card" />
+    <Component nodeId="jpjISij1R" name="Ten Pillars Section - Card" />
+    <Component nodeId="jIXIWTsEJ" name="Faq Single" />
+    <Component nodeId="E33B1To0_" name="Faq Section - Question - Safety" />
+    <Component nodeId="bWYqlYUpG" name="Faq Section - Question - Program" />
+    <Component nodeId="nSe7o8gij" name="Faq Section - Question - Outcomes" />
+    <Component nodeId="PT1R5edWn" name="Faq Section - Question - Cost &amp; Value" />
+    <Component nodeId="PQAPBF0g1" name="Faq Section - Question - Enrollment" />
+    <Component nodeId="R2ws9cJ3i" name="Blog Card" />
+    <Component nodeId="t00hdMrB6" name="Blog Filter Section" />
+    <Component nodeId="eBYd_25ww" name="Video Card Section Mobile" />
+    <Component nodeId="IwVl9EEIz" name="Footer Banner Section" />
+    <Component nodeId="oQxBiSoT9" name="Blog Page - Button" />
+    <Component nodeId="FnwdX463o" name="Ecosystem - Desktop Section (Deprecated)" />
+    <Component nodeId="CtnHFUGGT" name="Ecosystem - Mobile Section (Deprecated)" />
+    <Component nodeId="yY5pfBKjH" name="Testimonials Section" />
+    <Component nodeId="cllBPIiNd" name="White-2" />
+    <Component nodeId="yEFYiUimY" name="Black-3" />
+    <Component nodeId="VZgZ8tZvl" name="Black-2" />
+    <Component nodeId="lgis88RSC" name="White-1" />
+    <Component nodeId="UdVin8rIr" name="Red-1" />
+    <Component nodeId="xCwzWyfvL" name="Scroll-Button" />
+    <Component nodeId="xXXvJAqHn" name="Black-1" />
+    <Component nodeId="SjKkfkeMv" name="Video - Popup" />
+    <Component nodeId="F2EGNLJac" name="Button - Form" />
+    <Component nodeId="YXsorOdcL" name="Blog Feature Card" />
+    <Component nodeId="iisrDee_L" name="Toggle" />
+    <Component nodeId="nRsTqcN_b" name="Form Modal" />
+    <Component nodeId="uej9tbzM3" name="Left - Image" />
+    <Component nodeId="qVNIekiWp" name="School - Card" />
+    <Component nodeId="hdru6dLe5" name="Home - Card" />
+    <Component nodeId="zBGrVgqJp" name="Mobile - Ecosystem" />
+    <Component nodeId="Q7_Lcju10" name="Open Modal Button" />
+    <Component nodeId="wVUDECIsO" name="Enroll my Gamer popup" />
+    <Component nodeId="jXgTuvJAK" name="Terms" />
+  </Components>
+  <CodeComponents>
+    <CodeComponent codeFileId="Xdh5h_y" path="Rive_Animation/Eco_system.tsx" />
+    <CodeComponent codeFileId="dDNDl2J" path="Rive_Animation/Eco_system_Mobile.tsx" />
+    <CodeComponent codeFileId="frGiDQi" path="Rive_Animation/Home_schools.tsx" />
+    <CodeComponent codeFileId="mpHBfzw" path="Rive_Animation/Home_Schools_Mobile.tsx" />
+  </CodeComponents>
+  <CodeOverrides>
+    <CodeOverride codeFileId="mvZUv8R" path="Rive_Animation/Scroll_Section.tsx" />
+    <CodeOverride codeFileId="LH7jPb8" path="CMS/CMS_Limit_Words.tsx" />
+    <CodeOverride codeFileId="sZN32Oi" path="Webhook.tsx" />
+    <CodeOverride codeFileId="GGMYz6h" path="Disable_auto.tsx" />
+    <CodeOverride codeFileId="qKQSlH5" path="Disable_auto_1.tsx" />
+  </CodeOverrides>
+  <ColorStyles>
+    <ColorStyle path="/Black/Black" light="rgb(0, 0, 0)" dark="" />
+    <ColorStyle path="/Black/70%" light="rgba(0, 0, 0, 0.7)" dark="" />
+    <ColorStyle path="/Black/60%" light="rgba(0, 0, 0, 0.6)" dark="" />
+    <ColorStyle path="/Black/50%" light="rgba(0, 0, 0, 0.5)" dark="" />
+    <ColorStyle path="/Black/40%" light="rgba(0, 0, 0, 0.4)" dark="" />
+    <ColorStyle path="/Grey/Light Grey" light="rgb(239, 238, 237)" dark="" />
+    <ColorStyle path="/Grey/Dark Grey" light="rgb(79, 79, 79)" dark="" />
+    <ColorStyle path="/White/White" light="rgb(255, 255, 255)" dark="" />
+    <ColorStyle path="/White/70%" light="rgba(255, 255, 255, 0.7)" dark="" />
+    <ColorStyle path="/White/60%" light="rgba(255, 255, 255, 0.6)" dark="" />
+    <ColorStyle path="/White/50%" light="rgba(255, 255, 255, 0.5)" dark="" />
+    <ColorStyle path="/White/40%" light="rgba(255, 255, 255, 0.4)" dark="" />
+    <ColorStyle path="/Red/Red" light="rgb(249, 37, 36)" dark="" />
+    <ColorStyle path="/Grey/Grey" light="rgb(204, 204, 204)" dark="" />
+  </ColorStyles>
+  <TextStyles>
+    <TextStyle path="/Display/Heading 1" font="CUSTOMV2;Tungsten Narrow Black" fontSize="256px" lineHeight="228px" letterSpacing="0px" paragraphSpacing="0" transform="uppercase" alignment="left" decoration="none" balance="false" tag="h1" />
+    <TextStyle path="/Display/Heading 2" font="CUSTOMV2;Tungsten Narrow Black" fontSize="160px" lineHeight="140px" letterSpacing="3.2px" paragraphSpacing="40" transform="uppercase" alignment="left" decoration="none" balance="false" tag="h2" />
+    <TextStyle path="/Display/Heading 3" font="CUSTOMV2;Tungsten Narrow Black" fontSize="120px" lineHeight="96px" letterSpacing="1.2px" paragraphSpacing="40" transform="uppercase" alignment="left" decoration="none" balance="false" tag="h3" />
+    <TextStyle path="/Display/Heading 4" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="64px" lineHeight="64px" letterSpacing="-1.28px" paragraphSpacing="40" transform="none" alignment="left" decoration="none" balance="false" tag="h4" />
+    <TextStyle path="/Display/Heading 5" font="CUSTOMV2;Test Die Grotesk C Bold" fontSize="40px" lineHeight="48px" letterSpacing="0.8px" paragraphSpacing="40" transform="none" alignment="left" decoration="none" balance="false" tag="h5" />
+    <TextStyle path="/Display/Heading 6" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="16px" lineHeight="20px" letterSpacing="0.16px" paragraphSpacing="40" transform="none" alignment="left" decoration="none" balance="false" tag="h6" />
+    <TextStyle path="/Label/XS/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="16px" lineHeight="16px" letterSpacing="0.16px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/S/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="20px" lineHeight="20px" letterSpacing="0.2px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/M/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="24px" lineHeight="24px" letterSpacing="0.24px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/XS/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="16px" lineHeight="24px" letterSpacing="0.16px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/S/Regular - Black" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="20px" lineHeight="28px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/M/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="24px" lineHeight="34px" letterSpacing="-0.24px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/L/Regular" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="28px" lineHeight="38px" letterSpacing="-0.56px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/L/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="28px" lineHeight="38px" letterSpacing="-0.56px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/L/Bold" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="28px" lineHeight="38px" letterSpacing="-0.56px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/M/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="24px" lineHeight="34px" letterSpacing="-0.24px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/M/Bold" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="24px" lineHeight="34px" letterSpacing="-0.24px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/S/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="20px" lineHeight="28px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/S/Bold" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="20px" lineHeight="28px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/XS/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="16px" lineHeight="24px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/XS/Bold" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="16px" lineHeight="24px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/M/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="24px" lineHeight="24px" letterSpacing="0.24px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/S/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="20px" lineHeight="20px" letterSpacing="0.2px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/XS/Medium" font="CUSTOMV2;Test Die Grotesk A Medium" fontSize="16px" lineHeight="16px" letterSpacing="0.16px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Label/XS/Bold" font="CUSTOMV2;Test Die Grotesk A Bold" fontSize="16px" lineHeight="16px" letterSpacing="0.16px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+    <TextStyle path="/Desktop Body/S/Regular - White" font="CUSTOMV2;Test Die Grotesk A Regular" fontSize="20px" lineHeight="28px" letterSpacing="0px" paragraphSpacing="20" transform="none" alignment="left" decoration="none" balance="false" tag="p" />
+  </TextStyles>
+</Project>

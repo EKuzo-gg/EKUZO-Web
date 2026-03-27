@@ -1,0 +1,98 @@
+<!-- Page nodeId: ODMztkQ5r — /about (draft) -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<!-- NOTE: Content is a draft variant of the /games page concept — -->
+<!-- same "What Growth Through Games Really Requires" theme but with -->
+<!-- different EcosystemSectionCard arrangement and additional sections -->
+<DesktopLarge nodeId="K2fQlWVyt" backgroundColor="white" layout="stack" stackDirection="vertical">
+  <!-- Hero: Red, full-bleed, H2 -->
+  <Hero nodeId="o31DSnWA9" backgroundColor="/Red/Red" padding="188px 0px 0px 0px">
+    <LearnPlay nodeId="KsuIl1lds" inlineTextStyle="/Display/Heading 2">What Growth Through Games Really Requires</LearnPlay>
+    <White1 nodeId="AKr2wyvi9" height="300px" componentId="lgis88RSC" />
+    <Image nodeId="tRUBHZAdj" backgroundImage="https://framerusercontent.com/images/UfjqtSLCvajiLO8PI8MJak7cXTY.png" />
+  </Hero>
+
+  <!-- Section 2: White — Games spark motivation -->
+  <Stack nodeId="cXCHIA010" padding="144px 0px 144px 0px">
+    <Frame37 nodeId="AiBmruGqW" maxWidth="1232px">
+      <TurningPlayIntoProgress nodeId="CgLA90Rlp" inlineTextStyle="/Display/Heading 4">Games spark motivation.</TurningPlayIntoProgress>
+      <body nodeId="p9Tnmibqh">Structure turns it into growth. Students come to EKUZO through many different games, and we respect the passion they bring with them. But when it comes to teaching — helping students build confidence, leadership, and real-world skills — growth depends on more than just play.</body>
+    </Frame37>
+  </Stack>
+
+  <!-- Section 3: 6 EcosystemSectionCards (sticky scroll) -->
+  <Stack nodeId="mBP0MefNN" padding="144px 0px 188px 0px">
+    <EcosystemSectionCard nodeId="dDSKeCC5_" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="MOTIVATION"
+      l_y1adtIy="Games work because students care. Motivation drives focus, persistence, and the willingness to try again."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <EcosystemSectionCard nodeId="e9Bk3IeM_" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="Challenge"
+      l_y1adtIy="Games naturally push back. Failure isn't the end - it's feedback."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <EcosystemSectionCard nodeId="Kn79_O2xB" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="TEAM CONTEXT"
+      l_y1adtIy="When success depends on others, learning becomes social. Students practice communication, responsibility, and trust."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <EcosystemSectionCard nodeId="CfIa14wQm" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="STRUCTURE"
+      l_y1adtIy="Without structure, progress is inconsistent. With structure, learning becomes intentional, coachable, and safe."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <EcosystemSectionCard nodeId="rljE8BKb5" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="COACHING &amp; REFLECTION"
+      l_y1adtIy="Coaching adds feedback, reflection, and leadership development."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <EcosystemSectionCard nodeId="KhJN4DAw7" componentId="HnNOtigLD" variant="VwEfdN1Q3"
+      bPyNxdgHK="Where All of This Comes Together"
+      l_y1adtIy="Many games support parts of this growth. Very few support it consistently, across different skill levels."
+      GQS4uy98e="rgb(255,255,255)" ckCUOwapZ="rgb(255,255,255)" KBVbUlyOp="rgb(0,0,0)" />
+    <Black1 nodeId="S1RMkw3AY" height="300px" componentId="xXXvJAqHn" />
+  </Stack>
+
+  <!-- Section 4: Black — League of Legends strikes that balance -->
+  <Stack nodeId="WBk9YGI1z" backgroundColor="/Black/Black">
+    <HowItWorksSystem nodeId="d0PvDDYZF" maxWidth="1232px" backgroundColor="/Black/Black" padding="144px 0px 188px 0px">
+      <HowTheEkuzoSystemWorks nodeId="GVGFynFby" inlineTextStyle="/Display/Heading 4">League of Legends strikes that balance</HowTheEkuzoSystemWorks>
+      <HowTheEkuzoSystemWorks nodeId="jdydOuSR3" inlineTextStyle="/Desktop Body/L/Regular">That balance comes from 3 things:</HowTheEkuzoSystemWorks>
+      <Card nodeId="hTrIKTj8H" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Strategic depth"
+        yuVEacWaz="Challenges students to think ahead, adapt, and make meaningful decisions."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+      <Card nodeId="jQwCDK1GK" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Approachable mechanics"
+        yuVEacWaz="Easy to start, forgiving to learn, and accessible without overwhelming beginners."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+      <Card nodeId="Ko1d1tRnl" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Stable roles and systems"
+        yuVEacWaz="Clear roles and systems that make teamwork and leadership teachable."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+    </HowItWorksSystem>
+    <Image nodeId="oolTrXumf" height="300px" backgroundImage="https://framerusercontent.com/images/FeQi62FV9fxmeo1VbqJoycOyQM.png" zIndex="1" />
+  </Stack>
+
+  <!-- Section 5: Red — Where other games fit -->
+  <WhereOtherGames nodeId="jhtyyOAVm" backgroundColor="/Red/Red" padding="144px 0px 144px 0px">
+    <TheTenPillarsOfEkusoPedagogy nodeId="svF41EK9g" inlineTextStyle="/Display/Heading 4">Where other games fit</TheTenPillarsOfEkusoPedagogy>
+    <body nodeId="f1xAA6mRp" inlineTextStyle="/Desktop Body/L/Regular">Other games are often where students start.</body>
+    <!-- Game cards using TenPillarsSectionCard (jpjISij1R) -->
+    <TenPillarsSectionCard nodeId="Kq9wsgprU" componentId="jpjISij1R" variant="nmZm0diHS" pbL5NULgo="MarioKart" ndxmqyydI="Small wins spark big change." />
+    <TenPillarsSectionCard nodeId="HmS0_r5eF" componentId="jpjISij1R" variant="nmZm0diHS" pbL5NULgo="Fortnite" ndxmqyydI="Small wins spark big change." />
+    <TenPillarsSectionCard nodeId="bU4lP2sXz" componentId="jpjISij1R" variant="nmZm0diHS" pbL5NULgo="Roblox" ndxmqyydI="Small wins spark big change." />
+    <TenPillarsSectionCard nodeId="coCITzHiu" componentId="jpjISij1R" variant="yJ_b_yA9T" pbL5NULgo="Experimentation &amp; Feedback" ndxmqyydI="and many other games" />
+    <body nodeId="zPcK1cs9n" inlineTextStyle="/Desktop Body/L/Regular" maxWidth="720px">EKUZO meets students through the games they love, but teaches through the game that allows growth to compound.</body>
+  </WhereOtherGames>
+
+  <!-- Section 6: White — Testimonial carousel -->
+  <TestimonialCarousel nodeId="wE4seFhAc" backgroundColor="rgba(255,255,255,1)" padding="188px 104px 188px 104px">
+    <Red1 nodeId="AESkmKM_t" height="300px" componentId="UdVin8rIr" variant="rX_pxBx9v" />
+    <WhatParentsAreSaying nodeId="fsAtRR6hI" inlineTextStyle="/Display/Heading 4">What parents are saying</WhatParentsAreSaying>
+    <VideoCardSection nodeId="kEXJ3YGcX" componentId="DdV4_HJre" variant="VOVSsOyvw" />
+    <!-- Pull quote -->
+    <WhatParentsAreSaying nodeId="wWJhYfiQ9" inlineTextStyle="/Desktop Body/L/Bold">"It's structure, mentorship, and community all in one place."</WhatParentsAreSaying>
+    <WhatParentsAreSaying nodeId="zMPLMhe_G" inlineTextStyle="/Desktop Body/L/Medium">Rudy May</WhatParentsAreSaying>
+    <WhatParentsAreSaying nodeId="aN72kLD1H" inlineTextStyle="/Desktop Body/M/Regular">EKUZO mom</WhatParentsAreSaying>
+  </TestimonialCarousel>
+
+  <!-- Footer -->
+  <FooterBannerSection nodeId="Mhs7UbMgK" componentId="BNRkYbJEX" variant="QbZSddxCo"
+    ibdR1RB7I="Enroll into a transformational program today" kylqqg5uj="true" />
+</DesktopLarge>

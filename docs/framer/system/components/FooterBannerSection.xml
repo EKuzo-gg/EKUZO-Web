@@ -1,0 +1,88 @@
+<!-- Component nodeId: BNRkYbJEX — FooterBannerSection -->
+<!-- Used on nearly every page as the pre-footer CTA block -->
+<!-- Customizable prop: ibdR1RB7I (heading text) — default "Enroll into a transformational program today" -->
+<!-- CTA Button componentId: G_7udIwcU, variant: GiVk3uoHD -->
+<!-- White1 torn paper divider (lgis88RSC) at bottom, positioned centerY=100% -->
+<!-- Variants: DesktopLarge, Desktop (padding 40px h), Tablet (padding 188px v/40px h), Phone (padding 80px v/16px h) -->
+
+<FooterBannerSection nodeId="BNRkYbJEX">
+  <DesktopLarge
+      nodeId="QbZSddxCo"
+      position="absolute"
+      width="1920px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      backgroundColor="rgba(249, 37, 36, 1)"
+      borderRadius="0px"
+      overflow="visible"
+      layout="stack"
+      padding="120px 0px 144px 0px"
+      stackDirection="horizontal"
+      stackDistribution="center"
+      stackAlignment="center"
+  >
+    <Frame106
+        nodeId="t_p5FBThZ"
+        width="1fr"
+        height="fit-content"
+        maxWidth="1232px"
+        borderRadius="0px"
+        overflow="visible"
+        layout="stack"
+        gap="72px"
+        stackDirection="horizontal"
+        stackDistribution="start"
+        stackAlignment="center"
+    >
+      <Stack
+          nodeId="qFykunSr8"
+          width="1fr"
+          height="fit-content"
+          overflow="clip"
+          layout="stack"
+          gap="72px"
+          stackDirection="vertical"
+          stackDistribution="center"
+          stackAlignment="start"
+      >
+        <EnrollIntoATransformationalProgramToday
+            nodeId="hIHdqYGeQ"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Display/Heading 4"
+        >
+          Enroll into a transformational program today
+        </EnrollIntoATransformationalProgramToday>
+        <Button
+            nodeId="OfQ2L3Ely"
+            width="fit-content"
+            height="fit-content"
+            componentId="G_7udIwcU"
+            variant="GiVk3uoHD"
+            sB5iVgeB8="Start a conversation"
+         />
+      </Stack>
+      <Image
+          nodeId="emf5BnUk9"
+          width="1fr"
+          height="614px"
+       />
+    </Frame106>
+    <White1
+        nodeId="vQOEwWpW3"
+        position="absolute"
+        height="300px"
+        right="0px"
+        left="0px"
+        centerY="100%"
+        componentId="lgis88RSC"
+     />
+  </DesktopLarge>
+  <!-- Desktop: padding 120px 40px 144px 40px — call getNodeXml(tQVyM6lkV) for children -->
+  <Desktop nodeId="tQVyM6lkV" backgroundColor="rgba(249, 37, 36, 1)" width="1200px" />
+  <!-- Tablet: padding 188px 40px — call getNodeXml(MGaUQW792) for children -->
+  <Tablet nodeId="MGaUQW792" backgroundColor="rgba(249, 37, 36, 1)" width="810px" />
+  <!-- Phone: padding 80px 16px — call getNodeXml(FIQAoxagp) for children -->
+  <Phone nodeId="FIQAoxagp" backgroundColor="rgba(249, 37, 36, 1)" width="390px" />
+</FooterBannerSection>

@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ─── Brand colours ─────────────────────────────────────────── */
+  --color-red:   #F92524;
+  --color-grey:  #EFEEED;
+
+  /* ─── Typography ────────────────────────────────────────────── */
+  /* Display font: Tungsten Narrow (Hoefler & Co — personal preview license) */
+  --font-display: var(--font-tungsten), "Tungsten Narrow", "Impact", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-body:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ─── Type scale (mirrors Figma design tokens) ──────────────── */
+  --font-size-h1:  16rem;   /* 256px — hero display */
+  --font-size-h3:  7.5rem;  /* 120px — section display labels */
+  --font-size-h4:  4rem;    /* 64px  — section headings */
+  --font-size-h6:  2.125rem;/* 34px  — pillar titles */
+  --font-size-xl:  1.75rem; /* 28px  — large body */
+  --font-size-lg:  1.5rem;  /* 24px  — medium body */
+  --font-size-md:  1.25rem; /* 20px  — small body */
+  --font-size-sm:  1rem;    /* 16px  — xs body / labels */
+
+  /* ─── Line heights ──────────────────────────────────────────── */
+  --leading-h1:  0.8;
+  --leading-h3:  0.8;
+  --leading-h4:  1.125;   /* 72px / 64px */
+  --leading-h6:  1.059;   /* 36px / 34px */
+  --leading-xl:  1.357;   /* 38px / 28px */
+  --leading-lg:  1.417;   /* 34px / 24px */
+  --leading-md:  1.2;     /* 24px / 20px */
+}
+
+/* ─── Base styles ──────────────────────────────────────────────── */
+body {
+  font-family: var(--font-body);
+  background-color: white;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display font defaults to Black (900) weight — Tungsten Narrow Black
+   is the primary display weight across the entire site. Individual
+   elements can override with font-bold, font-medium, etc. */
+.font-display {
+  font-weight: 900;
+  letter-spacing: 0.02em; /* ~2% — matches Tungsten Narrow global tracking */
+}

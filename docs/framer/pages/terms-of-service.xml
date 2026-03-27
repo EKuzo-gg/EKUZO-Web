@@ -1,0 +1,131 @@
+<!-- Page nodeId: I3pvCXQOv — /terms-of-service -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<DesktopLarge nodeId="ramhKpnuA" backgroundColor="white" layout="stack" stackDirection="vertical">
+  <Stack nodeId="COiMRKbjf" padding="0px 40px">
+    <Frame165 nodeId="TV_Gu0gNA" maxWidth="1232px" padding="188px 0px 0px 0px">
+      <Title nodeId="P9Q5BGytd">
+        <TermsOfService nodeId="fRdLRplhq" inlineTextStyle="/Display/Heading 4">Terms of service</TermsOfService>
+      </Title>
+      <Contents nodeId="WUXYr01CL">
+        <!-- Intro -->
+        <Terms nodeId="Xng5kQMz3" componentId="jXgTuvJAK" variant="G1NZovsKB"
+          qYlPzp8SP="Last Updated" MbUo6swW7="February 2026"
+          iJrZ7McoQ="Thank you for your interest in EKUZO Inc..." UiDUsS9ta="true" />
+        <!-- 1. The Service -->
+        <Variant1 nodeId="C17fVDcE5">
+          <LastUpdated nodeId="i3PAehJeA" inlineTextStyle="/Desktop Body/S/Regular - Black">1. The Service</LastUpdated>
+          <February2026 nodeId="WaQVRnjjd" inlineTextStyle="/Desktop Body/M/Medium">1.1 Description of the Service</February2026>
+          <body>EKUZO provides structured, coach-led esports and learning programs for children and teens (the "Service"). The Service may include: Live scheduled coaching sessions, Team-based esports participation, Voice/video/text communication, Moderated online community spaces, Curriculum-guided drills/activities/reflection, Program administration/safety monitoring/coaching evaluation. Delivered online, in schools, or hybrid formats.</body>
+        </Variant1>
+        <Terms nodeId="Rnj1xpyDT" componentId="jXgTuvJAK"
+          qYlPzp8SP="1. The Service" MbUo6swW7="1.2 Not a Software Platform"
+          iJrZ7McoQ="EKUZO is a service-based program, not a self-serve software product. Participation occurs through scheduled sessions and supervised environments rather than through individual consumer accounts." UiDUsS9ta="true" />
+        <Terms nodeId="eGwuQ9J4r" componentId="jXgTuvJAK"
+          qYlPzp8SP="1. The Service" MbUo6swW7="1.3 Changes to the Service"
+          iJrZ7McoQ="EKUZO reserves the right to modify, suspend, or discontinue any aspect of the Service at any time..." UiDUsS9ta="true" />
+        <!-- 2. Eligibility -->
+        <Terms nodeId="Poo9IxnuV" componentId="jXgTuvJAK"
+          qYlPzp8SP="2. Eligibility and Authority" MbUo6swW7="2.1 Parents and Guardians"
+          iJrZ7McoQ="Parents or legal guardians are the primary contracting parties..." UiDUsS9ta="true" />
+        <Terms nodeId="Cga9sxNnC" componentId="jXgTuvJAK"
+          qYlPzp8SP="2. Eligibility and Authority" MbUo6swW7="2.2 Students"
+          iJrZ7McoQ="Students are minors and participate solely as permitted participants." UiDUsS9ta="true" />
+        <Terms nodeId="DWudx1GQV" componentId="jXgTuvJAK"
+          qYlPzp8SP="2. Eligibility and Authority" MbUo6swW7="2.3 Schools and Organizations"
+          iJrZ7McoQ="Schools or organizations may enroll students under separate written agreements..." UiDUsS9ta="true" />
+        <!-- 3. Age Requirements -->
+        <Terms nodeId="MUxuh9YVL" componentId="jXgTuvJAK"
+          qYlPzp8SP="3. Age Requirements" MbUo6swW7="3.2 Exceptions"
+          iJrZ7McoQ="In limited circumstances, EKUZO may allow participation by younger students by exception..." UiDUsS9ta="true" />
+        <!-- 4. Website Use -->
+        <Terms nodeId="k0vPavODC" componentId="jXgTuvJAK"
+          qYlPzp8SP="4. Website Use" MbUo6swW7="4.1 Permitted Use"
+          iJrZ7McoQ="You may use ekuzo.gg for informational and enrollment purposes only." UiDUsS9ta="true" />
+        <Variant1 nodeId="Ue_2jZDsP">
+          <LastUpdated inlineTextStyle="/Desktop Body/S/Regular - Black">4. Website Use</LastUpdated>
+          <February2026 inlineTextStyle="/Desktop Body/M/Medium">4.2 Prohibited Use</February2026>
+          <body>You agree not to: Interfere with website operation, Attempt unauthorized access, Use the site for unlawful purposes, Copy or misuse content without permission</body>
+        </Variant1>
+        <!-- 5. Enrollment, Fees, Payments -->
+        <Terms nodeId="EpZp7VsB4" qYlPzp8SP="5. Enrollment, Fees, and Payments" MbUo6swW7="5.1 Enrollment"
+          iJrZ7McoQ="Enrollment occurs through online forms or written agreements and is subject to availability, eligibility, and acceptance by EKUZO." UiDUsS9ta="true" />
+        <Terms nodeId="sPvVRAbjf" qYlPzp8SP="5. Enrollment, Fees, and Payments" MbUo6swW7="5.2 Fees"
+          iJrZ7McoQ="Program fees, payment schedules, and billing terms are disclosed at enrollment or in applicable agreements." UiDUsS9ta="true" />
+        <Terms nodeId="IP5ZaKjM8" qYlPzp8SP="5. Enrollment, Fees, and Payments" MbUo6swW7="5.3 Payment Processing"
+          iJrZ7McoQ="Payments are processed through third-party payment providers. EKUZO does not store full payment card details." UiDUsS9ta="true" />
+        <Terms nodeId="LRtMadDSV" qYlPzp8SP="5. Enrollment, Fees, and Payments" MbUo6swW7="5.4 No-Refund Policy"
+          iJrZ7McoQ="All payments are non-refundable once a program begins, except where EKUZO determines a refund is appropriate for reasons other than removal for cause." UiDUsS9ta="true" />
+        <!-- 6. Communication Platforms -->
+        <Terms nodeId="SQFEo_1Xz" qYlPzp8SP="6. Communication Platforms and Third-Party Services" MbUo6swW7="6.2 Third-Party Terms"
+          iJrZ7McoQ="Participants are subject to the terms and policies of those platforms. EKUZO does not control third-party services." UiDUsS9ta="true" />
+        <!-- 7. Recording, Monitoring, Safety -->
+        <Terms nodeId="dBSIos0j9" qYlPzp8SP="7. Recording, Monitoring, and Safety" MbUo6swW7="7.1 Recording"
+          iJrZ7McoQ="All live coaching sessions are recorded for safety, quality assurance, and coaching continuity." UiDUsS9ta="true" />
+        <Terms nodeId="tpX0cyCRJ" qYlPzp8SP="7. Recording, Monitoring, and Safety" MbUo6swW7="7.2 Moderation"
+          iJrZ7McoQ="Team communication spaces are actively moderated. EKUZO may review recordings or communications as needed." UiDUsS9ta="true" />
+        <Terms nodeId="cvtHW2c7K" qYlPzp8SP="7. Recording, Monitoring, and Safety" MbUo6swW7="7.3 Consent"
+          iJrZ7McoQ="Participation constitutes consent to recording and monitoring as described in these Terms and the Privacy Policy." UiDUsS9ta="true" />
+        <!-- 8. Student Conduct -->
+        <Variant1 nodeId="aPfyk0s4K">
+          <LastUpdated inlineTextStyle="/Desktop Body/S/Regular - Black">8. Student Conduct</LastUpdated>
+          <February2026 inlineTextStyle="/Desktop Body/M/Medium">8.1 Expectations</February2026>
+          <body>Students must: Follow coach instructions, Treat others respectfully, Use communication tools appropriately, Avoid harassment/threats/disruptive behavior</body>
+        </Variant1>
+        <Terms nodeId="W29jtXTa1" qYlPzp8SP="8. Student Conduct" MbUo6swW7="8.2 Enforcement"
+          iJrZ7McoQ="EKUZO may take corrective action, including removal from sessions or programs, to protect safety and program integrity." UiDUsS9ta="true" />
+        <!-- 9. Removal and Termination -->
+        <Terms nodeId="uIWSBKJW_" qYlPzp8SP="9. Removal and Termination" MbUo6swW7="9.1 Removal for Cause"
+          iJrZ7McoQ="EKUZO may remove a student from a program without refund if removal is necessary due to conduct issues, safety concerns, or failure to participate in good faith." UiDUsS9ta="true" />
+        <Terms nodeId="WIiapgvoa" qYlPzp8SP="9. Removal and Termination" MbUo6swW7="9.2 Effect of Removal"
+          iJrZ7McoQ="Removal does not relieve payment obligations already incurred." UiDUsS9ta="true" />
+        <!-- 10. Student Data / FERPA -->
+        <Terms nodeId="LAPv7ON2M" qYlPzp8SP="10. Student Data and Educational Records" MbUo6swW7="10.1 Role of EKUZO"
+          iJrZ7McoQ="EKUZO acts as a service provider to parents, guardians, and schools with respect to student information." UiDUsS9ta="true" />
+        <Variant1 nodeId="jj2_MmDsw">
+          <LastUpdated inlineTextStyle="/Desktop Body/S/Regular - Black">10. Student Data and Educational Records</LastUpdated>
+          <February2026 inlineTextStyle="/Desktop Body/M/Medium">10.2 Educational Records (FERPA)</February2026>
+          <body>EKUZO handles student education records consistent with its role as school service provider. Uses records solely for: delivering the Service, supporting student safety/supervision, enabling coaching continuity. Does not use student records for unrelated commercial purposes.</body>
+        </Variant1>
+        <Terms nodeId="fQwYMGLGe" qYlPzp8SP="10. Student Data and Educational Records" MbUo6swW7="10.3 Control and Access"
+          iJrZ7McoQ="Parents, guardians, and schools retain control over student information and education records." UiDUsS9ta="true" />
+        <Terms nodeId="l6XO3gXFT" qYlPzp8SP="10. Student Data and Educational Records" MbUo6swW7="10.4 Privacy Policy"
+          iJrZ7McoQ="Additional details regarding data handling and retention are described in EKUZO's Privacy Policy, which is incorporated by reference." UiDUsS9ta="true" />
+        <!-- 11-22 -->
+        <Terms nodeId="MM0nyIfDA" qYlPzp8SP="11. Media and Recordings" MbUo6swW7="11.1 License"
+          iJrZ7McoQ="By participating, you grant EKUZO a non-exclusive, royalty-free license to use photos, videos, audio, or recordings for operational, training, and promotional purposes." UiDUsS9ta="true" />
+        <Terms nodeId="yDa4uXlKp" qYlPzp8SP="11. Media and Recordings" MbUo6swW7="11.2 Parental Consent"
+          iJrZ7McoQ="Where required, EKUZO will seek parental consent before public use." UiDUsS9ta="true" />
+        <Terms nodeId="uoCQ6puF9" qYlPzp8SP="11. Media and Recordings" MbUo6swW7="12. Privacy"
+          iJrZ7McoQ="Use of the Service is subject to EKUZO's Privacy Policy, which is incorporated by reference." UiDUsS9ta="false" />
+        <Terms nodeId="tsHqQaTur" qYlPzp8SP="13. Intellectual Property" MbUo6swW7="13.1 EKUZO Property"
+          iJrZ7McoQ="All EKUZO content, curriculum, branding, and materials are owned by EKUZO or its licensors." UiDUsS9ta="true" />
+        <Terms nodeId="amDHghjv_" qYlPzp8SP="13. Intellectual Property" MbUo6swW7="13.2 Feedback"
+          iJrZ7McoQ="Any feedback or suggestions you provide may be used by EKUZO without obligation or compensation." UiDUsS9ta="true" />
+        <Variant1 nodeId="N0vyhX_BU">
+          <February2026 inlineTextStyle="/Desktop Body/M/Medium">14. DMCA Notice</February2026>
+          <body>EKUZO respects intellectual property rights. DMCA Agent: EKUZO Inc, 5617 Dolores Street, Houston TX 77057, info@ekuzo.gg</body>
+        </Variant1>
+        <Terms nodeId="rO2ceEJDP" qYlPzp8SP="13. Intellectual Property" MbUo6swW7="15. Disclaimer of Warranties"
+          iJrZ7McoQ='The Service is provided "as is" and "as available." To the maximum extent permitted by law, EKUZO disclaims all warranties, express or implied.' UiDUsS9ta="false" />
+        <Terms nodeId="K7ZsTzRTG" qYlPzp8SP="13. Intellectual Property" MbUo6swW7="16. Limitation of Liability"
+          iJrZ7McoQ="Total liability shall not exceed the amount paid for the applicable program." UiDUsS9ta="false" />
+        <Terms nodeId="TrKMFP8D5" qYlPzp8SP="13. Intellectual Property" MbUo6swW7="17. Indemnification"
+          iJrZ7McoQ="You agree to indemnify and hold harmless EKUZO from claims arising from your or your student's participation or violation of these Terms." UiDUsS9ta="false" />
+        <Terms nodeId="OEYUbCmZ_" qYlPzp8SP="18. Dispute Resolution and Arbitration" MbUo6swW7="18.1 Informal Resolution"
+          iJrZ7McoQ="Parties agree to attempt informal resolution first." UiDUsS9ta="true" />
+        <Terms nodeId="kAaZ6h8_e" qYlPzp8SP="18. Dispute Resolution and Arbitration" MbUo6swW7="18.2 Arbitration"
+          iJrZ7McoQ="Unresolved disputes shall be resolved by binding individual arbitration, not class actions, except where prohibited by law." UiDUsS9ta="true" />
+        <Terms nodeId="xL8Miqs0o" qYlPzp8SP="18. Dispute Resolution and Arbitration" MbUo6swW7="19. Governing Law"
+          iJrZ7McoQ="These Terms are governed by the laws of the State of Texas, without regard to conflict-of-law principles." UiDUsS9ta="false" />
+        <Terms nodeId="IQt1n95FW" MbUo6swW7="20. Changes to These Terms"
+          iJrZ7McoQ="EKUZO may update these Terms from time to time. Continued use constitutes acceptance of the updated Terms." UiDUsS9ta="false" />
+        <Terms nodeId="eRwKzVtoD" qYlPzp8SP="21. Severability and Survival" MbUo6swW7="21. Severability and Survival"
+          iJrZ7McoQ="If any provision is unenforceable, the remaining provisions remain in effect." UiDUsS9ta="false" />
+        <Variant1 nodeId="asia6zmXf">
+          <February2026 inlineTextStyle="/Desktop Body/M/Medium">22. Contact Information</February2026>
+          <body>EKUZO Inc, 5617 Dolores Street, Houston TX 77057, Email: info@ekuzo.gg</body>
+        </Variant1>
+      </Contents>
+    </Frame165>
+  </Stack>
+</DesktopLarge>

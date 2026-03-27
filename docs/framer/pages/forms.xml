@@ -1,0 +1,94 @@
+<!-- Page nodeId: QxCSkgabT — /forms (draft) -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<!-- NOTE: Design reference page — all 4 form variants laid out on a single canvas -->
+<!-- Root breakpoint is Desktop (1200px), not DesktopLarge -->
+<Desktop nodeId="ld4c8PR92" width="1200px" backgroundColor="white" layout="stack" stackDirection="vertical">
+  <Stack nodeId="glfKhvNKz" maxWidth="1232px" padding="160px 0px 0px 0px">
+
+    <!-- FORM 1: Start a conversation (schools/orgs contact form) -->
+    <Form nodeId="TP4H_frFd" backgroundColor="rgba(255,255,255,1)" padding="20px">
+      <HowTheEkuzoSystemWorks nodeId="ojlHAYFR3" inlineTextStyle="/Display/Heading 5">Start a conversation</HowTheEkuzoSystemWorks>
+      <Label nodeId="Iv0YHdr0E">
+        <Name nodeId="qPMjvwPdu" inlineTextStyle="/Desktop Body/XS/Regular">Name</Name>
+        <Node nodeId="imfiuadH1"> *</Node>
+      </Label>
+      <Label nodeId="JD9uUAP1R">
+        <Organization nodeId="kmvoazsLL" inlineTextStyle="/Desktop Body/XS/Regular">Organization</Organization>
+        <!-- Not required — no asterisk -->
+      </Label>
+      <Toggle nodeId="Dyodu57OL" componentId="iisrDee_L" variant="H4LUEc1uL" />
+      <Label nodeId="bL3MVC13h">
+        <WhatAreYouHopingToExplore nodeId="c3PSFQPgH" inlineTextStyle="/Desktop Body/XS/Regular">What are you hoping to explore</WhatAreYouHopingToExplore>
+      </Label>
+      <ButtonForm nodeId="k1QVuYA_M" componentId="F2EGNLJac" variant="aquU0L5jX"
+        O0OBuCrWV="Submit" SCU9lztBO="rgb(255,255,255)" A_p1JFTmw="rgb(249,37,36)" />
+    </Form>
+
+    <!-- FORM 2: EKUZO100 enrollment -->
+    <Form nodeId="GnGUmdFNW" backgroundColor="rgba(255,255,255,1)" padding="20px">
+      <HowTheEkuzoSystemWorks nodeId="WveQBJyTm" inlineTextStyle="/Display/Heading 5">EKUZO100</HowTheEkuzoSystemWorks>
+      <Label nodeId="DEYPU92k9"><ParentName nodeId="nKyvzChjX">Parent name</ParentName><Node> *</Node></Label>
+      <Label nodeId="FkPtSyexS"><ParentEmail nodeId="UrmYx7WXu">Parent email</ParentEmail><Node> *</Node></Label>
+      <Label nodeId="fxxT2jJCX"><StudentName nodeId="u8AypB9Hs">Student name</StudentName><Node> *</Node></Label>
+      <RadioGroup nodeId="SvBlU5Xmz">
+        <StudentAge nodeId="I2O8q9CGm">Student age</StudentAge><Node> *</Node>
+        <Label><1012>10-12</1012></Label>
+        <Label><1315>13-15</1315></Label>
+        <Label><1618>16-18</1618></Label>
+      </RadioGroup>
+      <RadioGroup2 nodeId="bPxwmruM9">
+        <StudentGender nodeId="ok6avcJZ8">Student gender</StudentGender><Node> *</Node>
+        <Label><Male>Male</Male></Label>
+        <Label><Female>Female</Female></Label>
+        <Label><NonBinary>Non-binary</NonBinary></Label>
+      </RadioGroup2>
+      <Label nodeId="UXGbBsAEx"><MainGamesStudentPlays nodeId="MbBg5K_EA">Main games student plays</MainGamesStudentPlays></Label>
+      <RadioGroup2 nodeId="wQ_qq451Z">
+        <SchedulePreference nodeId="qCF8FQThu">Schedule preference</SchedulePreference>
+        <Label><AfternoonEG400530Pm>Afternoon (e.g., 4:00–5:30 PM)</AfternoonEG400530Pm></Label>
+        <Label><EveningEG700830Pm>Evening (e.g., 7:00–8:30 PM)</EveningEG700830Pm></Label>
+      </RadioGroup2>
+      <ButtonForm nodeId="YLHCo5VQT" componentId="F2EGNLJac" variant="aquU0L5jX"
+        O0OBuCrWV="Next" SCU9lztBO="rgb(249,37,36)" A_p1JFTmw="rgb(255,255,255)" />
+    </Form>
+
+    <!-- FORM 3: EKUZOTEAMS enrollment (same as EKUZO100 + "During school day" option) -->
+    <Form nodeId="Re2Vsb9Pg" backgroundColor="rgba(255,255,255,1)" padding="20px">
+      <HowTheEkuzoSystemWorks nodeId="vXNHj9AXs" inlineTextStyle="/Display/Heading 5">EKUZOTEAMS</HowTheEkuzoSystemWorks>
+      <Label><ParentName>Parent name</ParentName><Node> *</Node></Label>
+      <Label><ParentEmail>Parent email</ParentEmail><Node> *</Node></Label>
+      <Label><StudentName>Student name</StudentName><Node> *</Node></Label>
+      <RadioGroup>
+        <StudentAge>Student age</StudentAge><Node> *</Node>
+        <Label><1012>10-12</1012></Label>
+        <Label><1315>13-15</1315></Label>
+        <Label><1618>16-18</1618></Label>
+      </RadioGroup>
+      <RadioGroup2>
+        <StudentGender>Student gender</StudentGender><Node> *</Node>
+        <Label><Male>Male</Male></Label>
+        <Label><Female>Female</Female></Label>
+        <Label><NonBinary>Non-binary</NonBinary></Label>
+      </RadioGroup2>
+      <Label><MainGamesStudentPlays>Main games student plays</MainGamesStudentPlays></Label>
+      <RadioGroup2 nodeId="A8lpReB7Z">
+        <SchedulePreference>Schedule preference</SchedulePreference>
+        <Label><AfternoonEG400530Pm>Afternoon (e.g., 4:00–5:30 PM)</AfternoonEG400530Pm></Label>
+        <Label><EveningEG700830Pm>Evening (e.g., 7:00–8:30 PM)</EveningEG700830Pm></Label>
+        <Label><DuringSchoolDay nodeId="KcXEtFTGR">During school day</DuringSchoolDay></Label>
+      </RadioGroup2>
+      <ButtonForm nodeId="yGRlkiIoq" componentId="F2EGNLJac" variant="aquU0L5jX"
+        O0OBuCrWV="Next" SCU9lztBO="rgb(249,37,36)" A_p1JFTmw="rgb(255,255,255)" />
+    </Form>
+
+    <!-- FORM 4: EKUZOCAMPS waitlist -->
+    <Form nodeId="yYjLJXNXR" backgroundColor="rgba(255,255,255,1)" padding="20px">
+      <HowTheEkuzoSystemWorks nodeId="y5hvGzlYK" inlineTextStyle="/Display/Heading 5">EKUZOCAMPS</HowTheEkuzoSystemWorks>
+      <Label><Name>Name</Name><Node> *</Node></Label>
+      <Label><Email>Email</Email><Node> *</Node></Label>
+      <ButtonForm nodeId="YhF3PjN5I" componentId="F2EGNLJac" variant="aquU0L5jX"
+        O0OBuCrWV="Get notified when available" SCU9lztBO="rgb(255,255,255)" A_p1JFTmw="rgb(249,37,36)" />
+    </Form>
+
+  </Stack>
+</Desktop>

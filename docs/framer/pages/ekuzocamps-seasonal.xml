@@ -1,0 +1,91 @@
+<!-- Page nodeId: CzNR6aatw — /ekuzocamps-seasonal -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<DesktopLarge
+    nodeId="RTSQb_TGz"
+    position="absolute"
+    width="1920px"
+    height="fit-content"
+    top="0px"
+    left="0px"
+    backgroundColor="white"
+    overflow="clip"
+    layout="stack"
+    stackDirection="vertical"
+    stackDistribution="start"
+    stackAlignment="center"
+>
+  <Form
+      nodeId="RRsvYr74m"
+      position="absolute"
+      width="1fr"
+      height="fit-content"
+      centerX="50%"
+      centerY="18%"
+      overflow="clip"
+      layout="stack"
+      gap="26px"
+      padding="0px 40px 0px 40px"
+      stackDirection="horizontal"
+      stackDistribution="center"
+      stackAlignment="center"
+  >
+    <ModalScroll
+        nodeId="g1vAmEYIk"
+        position="absolute"
+        width="1fr"
+        height="fit-content"
+        centerX="50%"
+        centerY="50%"
+        maxWidth="1232px"
+        overflow="hidden"
+        layout="stack"
+        gap="26px"
+        padding="188px 0px 188px 0px"
+        stackDirection="horizontal"
+        stackDistribution="center"
+        stackAlignment="center"
+    >
+      <Form
+          nodeId="ZdxvWFeaP"
+          position="absolute"
+          width="1fr"
+          height="fit-content"
+          centerX="50%"
+          centerY="50%"
+          backgroundColor="rgba(255,255,255,1)"
+          overflow="hidden"
+          layout="stack"
+          gap="24px"
+          padding="20px"
+          stackDirection="vertical"
+          stackDistribution="start"
+          stackAlignment="start"
+      >
+        <HowTheEkuzoSystemWorks nodeId="ZTQlUwJT2" inlineTextStyle="/Display/Heading 5">EKUZOCAMPS</HowTheEkuzoSystemWorks>
+        <Label nodeId="JDULTE09C">
+          <Name nodeId="etAqtoMPj" inlineTextStyle="/Desktop Body/XS/Regular">Name</Name>
+          <Node nodeId="Rp8U0BUj9" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+        </Label>
+        <Label nodeId="Xj3o5OAGS">
+          <Email nodeId="PoidMkkx7" inlineTextStyle="/Desktop Body/XS/Regular">Email</Email>
+          <Node nodeId="nkItn8HMK" inlineTextStyle="/Desktop Body/XS/Regular"> *</Node>
+        </Label>
+        <ButtonForm
+            nodeId="VX7pA2Opv"
+            componentId="F2EGNLJac"
+            variant="aquU0L5jX"
+            O0OBuCrWV="Get notified when available"
+            SCU9lztBO="rgb(255, 255, 255)"
+            A_p1JFTmw="rgb(249, 37, 36)"
+         />
+      </Form>
+    </ModalScroll>
+  </Form>
+  <FooterBannerSection
+      nodeId="iAu2tH1vG"
+      componentId="BNRkYbJEX"
+      variant="QbZSddxCo"
+      ibdR1RB7I="Enroll into a transformational program today"
+      kylqqg5uj="true"
+   />
+</DesktopLarge>

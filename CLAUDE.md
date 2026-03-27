@@ -1,0 +1,276 @@
+# EKUZO Web — Project Context
+
+## What we're building
+Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversion site for EKUZO, a youth esports coaching platform. Goal: match the Framer site visually, fix what was broken (forms, commerce), add what was missing (camps page, newsletter), then launch on Netlify.
+
+**Live Framer reference:** https://ekuzo.gg (use Chrome inspector for layout geometry when building sections)
+**Framer project copy:** https://framer.com/projects/EKUZO-Development-copy--aPeMudXJOotFDscfsQbK-ca3Db
+**Figma file:** https://www.figma.com/design/QNqU4NQ1yygnkpItKD56S6/EKUZO-Web **deprioritize Figma, use as reference only**
+
+---
+
+## Stack
+- **Framework:** Next.js 15 (App Router, Turbopack)
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript
+- **Payments:** Stripe with custom Stripe Elements checkout (NOT hosted checkout)
+- **Email Marketing:** Beehiiv (full email automation platform, not just newsletter — welcome sequences, camp prep, reminders, re-enrollment all handled in Beehiiv after subscriber is added)
+- **Hosting:** Netlify
+- **Node:** ~/.nvm/versions/node/v24.14.0/bin/node
+
+### Architecture Decisions (confirmed)
+- **No Make.com in payment flow** — Make.com was needed for Framer (no server-side). Next.js API routes handle Stripe + Beehiiv directly. Make.com may be revisited as operational layer if non-engineers need to modify automations.
+- **No Discord notifications** — removed from the registration/payment flow.
+- **No Airtable for v1** — Stripe dashboard + Beehiiv subscriber list is sufficient at current scale. Airtable becomes valuable when running multiple programs simultaneously or needing a staff-facing dashboard.
+- **No Cloudflare Worker** — set aside. Next.js API routes replace it entirely.
+
+---
+
+## Typography
+- **Display/hero headings:** Tungsten Narrow (Hoefler & Co — personal/preview license, loaded as local font from `public/fonts/TungstenNarrow-*.otf`). Weights: Black (900), Bold (700), Semibold (600), Medium (500).
+- **Body/UI:** Inter (Google Fonts)
+- **Font class names in Tailwind:** `font-body` = Inter, `font-display` = Tungsten Narrow
+- **Global letter-spacing:** `.font-display` has `letter-spacing: 0.02em` (2%) set in `globals.css` — applies site-wide to all instances of Tungsten font
+- **Heading sizes:** use `clamp()` via `style` prop, not fixed Tailwind text sizes
+
+---
+
+## Colors (Tailwind custom)
+- `red` = EKUZO brand red (check tailwind.config)
+- `black` = #000
+- `grey` / `bg-[#f0edea]` = off-white section background
+
+---
+
+## Products
+1. **EKUZO TEAMS** — school-based semester team program (complex pricing, discuss before building)
+2. **EKUZO CAMPS** — seasonal week-based camps, AM/PM slots (primary commerce priority)
+3. **EKUZO100** — 4-week home-based individual program
+
+---
+
+## Commerce Architecture
+
+### Flow (confirmed — no Make.com, no Discord)
+1. User fills registration form on `/camps/register` (week/slot per gamer, parent info, gamer info)
+2. Submit → Next.js API route (`/api/camps/register`) creates Stripe Payment Intent with all registration data as metadata → returns `client_secret`
+3. Frontend renders Stripe Elements for card payment
+4. Stripe webhook (`/api/webhooks/stripe`) fires on `payment_intent.succeeded` → calls Beehiiv API to add subscriber with custom fields (gamer name, week, slot, etc.)
+5. Frontend redirects to `/camps/success` with booking summary
+
+### API Routes (to build)
+- `POST /api/camps/register` — receives form payload, creates Stripe Payment Intent, returns client_secret
+- `POST /api/webhooks/stripe` — handles `payment_intent.succeeded`, enrolls in Beehiiv
+- Success page reads confirmation from Stripe or URL params
+
+### Stripe (camps)
+- 10 weeks × 2 slots (AM/PM) = 20 combinations
+- **Launch pricing:** $199 early bird for ALL weeks (will manually update in code when ready to raise)
+- Urgency badges are marketing-only (not capacity-driven): "Filling Fast" / "Only a Few Left" set per-slot in the `WEEKS` data array
+- No promo codes for v1
+- Stripe Price IDs: not yet configured. Add to `.env.local` once products created in Stripe dashboard.
+
+### Beehiiv (email marketing — NOT just newsletter)
+- **Registration flow:** subscriber added on successful payment with custom fields (gamer name, week, slot, parent email)
+- **Post-registration automation:** welcome sequences, camp prep emails, week-of reminders, post-camp follow-ups — all managed in Beehiiv's automation builder
+- **Homepage:** first-visit popup (gate with localStorage so it only shows once)
+- **Footer:** inline signup form
+
+### Make.com (deprioritized)
+- URL: https://hook.us2.make.com/xl4bb6oyilsj8cugl8dgal5446a1jfj3
+- Still used by ContactModal for the "Start a conversation" form
+- NOT used in the payment/registration flow — Next.js API routes handle that directly
+- Could be reintroduced as operational layer if non-engineers need to modify automations
+
+---
+
+## Modal System
+Global modal state in `context/ModalContext.tsx`. Use `useModal()` hook.
+- `openModal("contact")` → ContactModal (name, org, email/text, message → Make.com webhook)
+- `openModal("enroll")` → EnrollModal (3 program links: EKUZOTeams, EKUZO100, EKUZOCamps)
+- For server components that need modal buttons: use `components/ui/ModalButton.tsx`
+
+### CTAs
+- **"Start a conversation"** → `openModal("contact")`
+- **"Enroll my gamer"** → `openModal("enroll")`
+- Both wired in Nav, FooterBanner, and individual pages via ModalButton
+
+---
+
+## Page Status
+
+### Built (functional, may need visual polish)
+- [x] `/` — Home page (structure done, needs visual QA)
+- [x] `/methodology` — Full page built (hero video, How It Works cards, quote, 10 pillars, CTA)
+- [x] `/camps/register` — **Full registration form** (hero w/ collage, 10-week grid w/ AM/PM slots, multi-gamer support, parent info, gamer info, summary panel, torn paper overlay). Ready for Stripe + Beehiiv integration.
+- [x] `/success` — Stripe success page (basic)
+- [x] `/terms-of-service` — Static
+- [x] `/privacy-policy` — Static
+- [x] `/faq` — Static accordion
+
+### In Progress (next session — Stripe + Beehiiv integration)
+- [ ] `/api/camps/register` — Create Stripe Payment Intent from form data
+- [ ] `/api/webhooks/stripe` — Handle payment success → Beehiiv enrollment
+- [ ] Stripe Elements payment step on registration page
+- [ ] `/camps/success` — Post-payment confirmation page
+
+### Queued (page builds)
+- [ ] `/programs` — Stub → full build queued
+- [ ] `/parents` — Stub → full build queued
+- [ ] `/schools` — Stub → full build queued
+
+### Stubbed (placeholder only, needs full build)
+- [ ] `/ekuzocamps-seasonal` — **PRIORITY after programs/parents/schools** (see Camps section below)
+- [ ] `/ekuzo100-4-week-intro` — EKUZO100 program page
+- [ ] `/ekuzoteams-semester-based` — EKUZO Teams page (complex commerce)
+- [ ] `/about` — About page
+- [ ] `/blog` — Blog index (static, no CMS)
+- [ ] `/blog/[slug]` — Blog post (static)
+
+### Framer extraction complete
+All page XML + content documented in `/docs/framer/`. Full component hierarchy, exact spacing, all image URLs, typography, and 4-breakpoint specs extracted and saved. Reference these docs as the source of truth for all builds.
+
+### Route aliases (redirect stubs)
+- `/ekuzo100` → `/ekuzo100-4-week-intro`
+- `/camps` → `/ekuzocamps-seasonal`
+- `/teams` → `/ekuzoteams-semester-based`
+
+---
+
+## Camps Page — Build Direction
+
+**Source:** Variant.com wireframe (mood board → zombie wireframe). Build the structure from the wireframe but apply EKUZO's full visual style (red/black/white, Bebas Neue headings, torn paper dividers, brush art).
+
+### Wireframe sections (in order)
+1. **Hero** — "EKUZOCAMP" heading, tagline, stats bar (coaches/virtual/teams counts), hero video (`ekuzo-teams-hero.mp4` or camps-specific), "Register Now" + "Learn More" CTAs
+2. **Value props** — 6 cards: Pro Coaches, Virtual, Teams, Practice, Growth, Balance
+3. **Daily Schedule** — timeline: Check-in & Warm-up → Skill Drills → Tournament Play → VOD Review & Feedback
+4. **Expert Coaches section** — image left, copy right, credentials
+5. **Requirements** — Basic computer + headphones; League of Legends section with checklist
+6. **Testimonials** — video testimonials (use our `/testimonial-videos/` assets)
+7. **Registration form** — choose week (week cards with AM/PM slots + availability + price), parent info, gamer info, payment (Stripe Elements)
+8. **FAQ accordion** — 5 common questions
+9. **Footer CTA** — "Enroll into a transformational program today"
+
+### Separate pages referenced from camps
+- `/camps/schedule` — 6-week grid (Week 1-6, AM/PM slots, availability badges, prices)
+- `/camps/checkout` — custom Stripe Elements checkout (credit card form + order summary sidebar + promo code)
+- `/camps/success` — "LEVEL UP!" confirmation (booking summary, gamer name, status=Paid, total, receipt download, next steps: check inbox / join Discord / download game)
+
+### Parents page (from wireframe — different from Framer /parents)
+- "YOUR GAMER'S GROWTH IS OUR MISSION" hero
+- Safety & Moderation Protocol (3 points with icons)
+- Meet Our Lead Coaches (3 coach cards)
+- Common Parent Questions (FAQ accordion)
+- "Still Have Questions?" CTA (Contact Support + Schedule a Call)
+
+---
+
+## Shared Components
+
+| Component | Location | Notes |
+|-----------|----------|-------|
+| Nav | `components/layout/Nav.tsx` | variant="light"\|"dark", modal wired |
+| Footer | `components/layout/Footer.tsx` | Nav columns + social + copyright |
+| FooterBanner | `components/FooterBanner.tsx` | Red CTA strip above footer, modal wired |
+| Button | `components/ui/Button.tsx` | red-filled, red-outlined, white-filled, white-outlined |
+| ModalButton | `components/ui/ModalButton.tsx` | Client component for modal CTAs in server pages |
+| TornPaper | `components/ui/TornPaper.tsx` | color: white/black/red, flip prop |
+| FAQAccordion | `components/ui/FAQAccordion.tsx` | |
+| Icon | `components/ui/Icon.tsx` | serves from /public/icons/[name].svg |
+| ContactModal | `components/ui/ContactModal.tsx` | Posts to Make.com webhook |
+| EnrollModal | `components/ui/EnrollModal.tsx` | 3 program links |
+| ModalRenderer | `components/ui/ModalRenderer.tsx` | Mounted in root layout |
+| TestimonialsCarousel | `components/TestimonialsCarousel.tsx` | 9 videos, 3 visible |
+| EcosystemAnimation | `components/EcosystemAnimation.tsx` | Rive scroll animation |
+
+---
+
+## Asset Locations
+
+### Videos
+- `public/videos/pedagogy-hero.mp4` — Methodology page hero
+- `public/videos/ekuzo100-hero.mp4` — EKUZO100 page hero
+- `public/videos/ekuzo-teams-hero.mp4` — EKUZOTeams page hero
+
+### Testimonial videos (9 files)
+All in `public/testimonial-videos/`:
+- `becky-parent.mp4`, `brad-parent-girl-gamer.mp4`, `debbie-potter-monroe.mp4`
+- `laura-hogan-mirus-academy.mp4`, `rajitha-parent.mp4`
+- `student-i-learned.mp4`, `student-man-of-my-word.mp4`
+- `student-thank-you-ekuzo.mp4`, `student-you-should-join.mp4`
+
+Captions: matching `.txt` files in same folder (for bots/SEO).
+
+### Icons (SVG, `currentColor`)
+All in `public/icons/`:
+**Black set (29):** clock, swords, book, camada, flame, flash, confidence, heart, leadership, skills, chat, handshake, trophy, handwave, speaking, confidence-2, strategy, key, roles, hard-problem, run-first, easy, youth, calendar, enthusiasm, team, visualize, key-2, swords-2
+**White set (4):** swords-white, clock-white, camada-white, trophy-white
+
+### Images
+All in `public/images/` — see full list with `ls public/images/`.
+Key groups: `torn-paper-*`, `brush-stroke-*`, `pedagogy-hero-*`, `schools-*`, `parents-*`, `coaching-*`, `ekuzoteams-*`, `ekuzo100-*`, `community-*`, `home-*`
+
+---
+
+## Known Issues / Deferred
+
+1. **Rive animation (EcosystemAnimation)** — currently `SCROLL_PX_FOR_FULL_PROGRESS = 10000`. Programs/parents pages need 14000. Consider adding `scrollPx` prop. May also redesign the EKUZO 5 animation entirely.
+2. **Scroll/parallax sections** — Framer has scroll-linked animations throughout. These will be simplified or replaced with CSS-only equivalents in Next.js.
+3. **Stripe Price IDs** — Not yet wired. Add to `.env.local` once products configured.
+4. **Homepage layout** — built, needs full visual QA against live Framer site.
+5. **Social icons in Footer** — currently text placeholders (IG, FB, YT, DC, X, TK). Need real SVG icons.
+6. **Sticky mobile CTA bar** — "Enroll my gamer | Start a conversation" fixed bottom bar. Custom implementation, had issues in Framer that carried over. Revisit behavior.
+7. **Torn paper universal pass** — needs to be done across all pages. See Learning Log for the pattern.
+
+---
+
+## Learning Log
+
+### Torn Paper Transitions (IMPORTANT — reference for universal pass)
+- **Use PNG, not SVG.** The torn paper SVGs are white fill (#fff) with no texture/shadow — invisible against white backgrounds. The PNGs have rasterized edge detail that reads visually.
+- **Pattern:** Place `torn-paper-white-1.png` as an `<Image>` inside an absolutely positioned div at the bottom of the section above. Use `translate-y-[55%]` to push it down so it overlaps into the section below. Set `z-20` to ensure it sits on top.
+- **Hero padding:** Increase the section's `paddingBottom` (e.g. 140px) so the torn paper doesn't overlap the text content — it should only overlap the decorative image/background.
+- **overflow:** Use `overflow: clip` (not `overflow-hidden`) on the parent section so the translated torn paper renders without creating scrollbar issues.
+- **File:** `public/images/torn-paper-white-1.png` (4320×600)
+
+### Figma Asset Downloads
+- Figma MCP asset URLs are blocked by the VM proxy (exit code 56 from curl). When a Figma asset is needed, ask the user to export it from Figma and drop it into the project. Reference the Figma component name so they know what to export.
+
+### Button States
+- All interactive buttons should have: `hover:brightness-110 active:scale-[0.97~0.99] active:brightness-90 transition-all duration-150`
+- Matches the existing `Button.tsx` variant pattern
+
+### Font Display
+- Tungsten Narrow is loaded as a local font (not Google Fonts). Weights: Black (900), Bold (700), Semibold (600), Medium (500).
+- Global `letter-spacing: 0.02em` on `.font-display` in `globals.css` — do not override per-element unless intentional.
+- Remove per-element `letterSpacing` style props on `font-display` elements so the global value applies consistently.
+
+---
+
+## Development
+
+```bash
+# Start dev server
+~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next dev
+
+# TypeScript check
+~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/tsc --noEmit
+
+# Build (note: Turbopack/PostCSS issue in prod build - investigate before deploy)
+~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next build
+```
+
+---
+
+## Build Discipline (from Cursor feedback)
+
+**One section at a time.** Before coding any section:
+1. Screenshot crop of that section from live Framer site
+2. Specify geometry explicitly: container type, min-height, padding, absolute children with offsets
+3. Build to that spec
+4. Verify against screenshot before moving on
+
+**Breakpoints:** Default = 1440px desktop. Stack to single column at `md` (768px) unless Framer shows different behavior.
+
+**Objective checklist per section:** e.g. "headline font-black uppercase, max-w correct, torn paper 100px strip, no white gap between sections."

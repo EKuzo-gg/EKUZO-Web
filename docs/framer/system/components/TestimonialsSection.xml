@@ -1,0 +1,112 @@
+<!-- Component nodeId: yY5pfBKjH — TestimonialsSection -->
+<!-- Red bg rgba(249,37,36,1), padding 144px 40px -->
+<!-- Red1 torn paper dividers: top nodeId Qjl7Q7B1X (top=-112px), bottom nodeId PYK_u6CZw (bottom=-144px) -->
+<!-- componentId for Red1: UdVin8rIr, variant rX_pxBx9v -->
+<!-- Quote icon: https://framerusercontent.com/images/SwwMbwzOWEooWJzx6Yf5dUCvJ0g.png (40x40) -->
+<!-- Default quote: Karlin Oei / Founder EKUZO -->
+<!-- When used on /coaching page: prop dOtkH4aIO overrides quote text to John Wooden quote -->
+<!-- Variants: DesktopLarge, Desktop (padding 144px 0px), Tablet (padding 144px 40px), Phone (padding 80px 16px) -->
+
+<TestimonialsSection nodeId="yY5pfBKjH">
+  <DesktopLarge
+      nodeId="cQaERloUl"
+      position="absolute"
+      width="1920px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      backgroundColor="rgba(249, 37, 36, 1)"
+      borderRadius="0px"
+      overflow="visible"
+      layout="stack"
+      gap="8px"
+      padding="144px 40px 144px 40px"
+      stackDirection="vertical"
+      stackDistribution="center"
+      stackAlignment="center"
+  >
+    <!-- Red1 torn paper divider: top -->
+    <Red1
+        nodeId="Qjl7Q7B1X"
+        position="absolute"
+        height="300px"
+        top="-112px"
+        right="0px"
+        left="0px"
+        componentId="UdVin8rIr"
+        variant="rX_pxBx9v"
+     />
+
+    <!-- Quote block: maxWidth 880px, centered, gap 64px vertical -->
+    <Frame113
+        nodeId="QWTGJ5WGb"
+        width="1fr"
+        height="fit-content"
+        maxWidth="880px"
+        zIndex="1"
+        overflow="visible"
+        layout="stack"
+        gap="64px"
+        stackDirection="vertical"
+        stackDistribution="start"
+        stackAlignment="center"
+    >
+      <!-- Quote icon + text: gap 40px vertical, centered -->
+      <Frame112 nodeId="l0_zNY2or" gap="40px" stackDirection="vertical" stackAlignment="center">
+        <Image
+            nodeId="jrZn1I3QN"
+            width="40px"
+            height="40px"
+            backgroundImage="https://framerusercontent.com/images/SwwMbwzOWEooWJzx6Yf5dUCvJ0g.png"
+         />
+        <QuoteText
+            nodeId="TpWLrQ03c"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Display/Heading 5"
+        >
+          Our job isn't to add pedagogy to games; it's to help students see it, use it, and carry that mindset into school, careers, and life
+        </QuoteText>
+      </Frame112>
+
+      <!-- Attribution: name + title (opacity 0.6) -->
+      <Frame111 nodeId="tQtupghri" stackDirection="vertical" stackAlignment="start">
+        <KarlinOei
+            nodeId="y0Ptu9csx"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Desktop Body/L/Bold"
+        >
+          Karlin Oei
+        </KarlinOei>
+        <FounderEkuzo
+            nodeId="AQByEAgKD"
+            opacity="0.6"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Desktop Body/L/Bold"
+        >
+          Founder EKUZO
+        </FounderEkuzo>
+      </Frame111>
+    </Frame113>
+
+    <!-- Red1 torn paper divider: bottom -->
+    <Red1
+        nodeId="PYK_u6CZw"
+        position="absolute"
+        height="300px"
+        right="0px"
+        bottom="-144px"
+        left="0px"
+        componentId="UdVin8rIr"
+        variant="rX_pxBx9v"
+     />
+  </DesktopLarge>
+  <!-- Desktop: padding 144px 0px — call getNodeXml(R4v3Bbgi5) for children -->
+  <Desktop nodeId="R4v3Bbgi5" backgroundColor="rgba(249, 37, 36, 1)" width="1200px" />
+  <!-- Tablet: padding 144px 40px — call getNodeXml(kbyEDnfsx) for children -->
+  <Tablet nodeId="kbyEDnfsx" backgroundColor="rgba(249, 37, 36, 1)" width="200px" />
+  <!-- Phone: padding 80px 16px — call getNodeXml(QqBXn_kxz) for children -->
+  <Phone nodeId="QqBXn_kxz" backgroundColor="rgba(249, 37, 36, 1)" width="200px" />
+</TestimonialsSection>

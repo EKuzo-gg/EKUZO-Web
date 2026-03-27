@@ -1,0 +1,95 @@
+<!-- Component nodeId: QsAFUtqlA — OurApproachSection -->
+<!-- White bg, padding 188px 104px (DesktopLarge) -->
+<!-- Eyebrows component: Z9OcG4X2A, variant Qrg5PsGSr, text "OUR APPROACH" -->
+<!-- Black3 torn paper divider (yEFYiUimY) at bottom, centerY=99% -->
+<!-- Variants: DesktopLarge, Desktop (padding 40px h), Tablet (padding 40px h), Phone (padding 80px v/16px h) -->
+
+<OurApproachSection nodeId="QsAFUtqlA">
+  <DesktopLarge
+      nodeId="sC1TmQc1L"
+      position="absolute"
+      width="1920px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      backgroundColor="/White/White"
+      borderRadius="0px"
+      overflow="visible"
+      layout="stack"
+      gap="8px"
+      padding="188px 104px 188px 104px"
+      stackDirection="vertical"
+      stackDistribution="start"
+      stackAlignment="center"
+  >
+    <Frame37
+        nodeId="S0ALrxeE9"
+        width="1fr"
+        height="fit-content"
+        maxWidth="1232px"
+        borderRadius="0px"
+        overflow="visible"
+        layout="stack"
+        gap="80px"
+        stackDirection="vertical"
+        stackDistribution="start"
+        stackAlignment="start"
+    >
+      <!-- Eyebrow + heading block: maxWidth 600px -->
+      <Frame35 nodeId="EY0ANx1Yq" maxWidth="600px" gap="16px">
+        <Stack nodeId="A4jPTYk6Z" padding="0px 0px 0px 8px" gap="26px">
+          <Eyebrows
+              nodeId="Isv4pC4Kc"
+              componentId="Z9OcG4X2A"
+              variant="Qrg5PsGSr"
+              AfMUswLyn="OUR APPROACH"
+           />
+        </Stack>
+        <TurningPlayIntoProgress
+            nodeId="FYgBlYB7x"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Display/Heading 4"
+        >
+          Built for growth, on and off the screen
+        </TurningPlayIntoProgress>
+      </Frame35>
+
+      <!-- Two-column: list items + body copy, gap 160px -->
+      <Frame36 nodeId="rorSkMByO" gap="160px" stackDirection="horizontal" stackAlignment="end">
+        <!-- Left: 3 List items (componentId: sCSPy3XNh) -->
+        <Frame34 nodeId="xPO8Xj4xv" gap="16px" stackDirection="vertical">
+          <List nodeId="A7Xk3Wz8h" componentId="sCSPy3XNh" nyDqRXyBf="Structured practice" />
+          <List nodeId="KWhexsGYi" componentId="sCSPy3XNh" nyDqRXyBf="Skilled coaching" />
+          <List nodeId="WVH_3fvyq" componentId="sCSPy3XNh" nyDqRXyBf="Growth through play" />
+        </Frame34>
+        <!-- Right: body copy -->
+        <EveryEkusoProgramFollowsTheSamePlaybook
+            nodeId="GFSfmXZBG"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Desktop Body/M/Regular"
+        >
+          Every Ekuzo program follows the same playbook: structured practice, skilled coaching, and meaningful growth through play.The difference is in how, where, and when students participate.  From one-month introductions to semester-long teams, every experience connects to the same system designed to help students thrive.
+        </EveryEkusoProgramFollowsTheSamePlaybook>
+      </Frame36>
+    </Frame37>
+
+    <!-- Black3 torn paper divider at bottom -->
+    <Black3
+        nodeId="huhnsIMcs"
+        position="absolute"
+        height="300px"
+        right="0px"
+        left="0px"
+        centerY="99%"
+        componentId="yEFYiUimY"
+     />
+  </DesktopLarge>
+  <!-- Desktop: padding 188px 40px — call getNodeXml(qEO_Wt12O) for children -->
+  <Desktop nodeId="qEO_Wt12O" backgroundColor="/White/White" width="1200px" />
+  <!-- Tablet: padding 188px 40px — call getNodeXml(FBpKBz7wN) for children -->
+  <Tablet nodeId="FBpKBz7wN" backgroundColor="/White/White" width="810px" />
+  <!-- Phone: padding 80px 16px — call getNodeXml(zy1cRixw0) for children -->
+  <Phone nodeId="zy1cRixw0" backgroundColor="/White/White" width="390px" />
+</OurApproachSection>

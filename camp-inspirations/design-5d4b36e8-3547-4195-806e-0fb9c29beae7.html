@@ -1,0 +1,876 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">EKUZO Virtual Esports Camp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;0,900;1,800;1,900&amp;family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet" vid="7">
+    <style vid="8">
+        :root {
+            --green: #00b64f;
+            --red: #e8001e;
+            --yellow: #ffe600;
+            --dark-100: #0a0a0a;
+            --dark-200: #1a1a1a;
+            --dark-300: #2a2a2a;
+            --dark-400: #444444;
+            --white: #ffffff;
+            --gray: #aaaaaa;
+            
+            --font-display: 'Barlow Condensed', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --skew-angle: -8deg;
+            --border-thick: 4px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--dark-100);
+            color: var(--white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        .text-italic { font-style: italic; }
+        .text-yellow { color: var(--yellow); }
+        .text-green { color: var(--green); }
+        .text-red { color: var(--red); }
+
+        
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 4vw;
+        }
+
+        .clip-skew {
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+        }
+
+        .clip-skew-reverse {
+            clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
+        }
+
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--yellow);
+            color: var(--dark-100);
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.5rem;
+            font-style: italic;
+            text-decoration: none;
+            padding: 1rem 3rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.1s ease, filter 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: inherit;
+            z-index: -1;
+            transform: skewX(var(--skew-angle));
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            border: 2px solid var(--dark-100);
+        }
+
+        .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.98) translateY(2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+        }
+        
+        .btn-outline::before {
+            background: var(--dark-300);
+            border: var(--border-thick) solid var(--yellow);
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--dark-300);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            z-index: 0;
+        }
+
+        .bg-left {
+            width: 55%;
+            background: var(--green);
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+            position: relative;
+        }
+
+        .bg-right {
+            position: absolute;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: var(--red);
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+            z-index: -1;
+        }
+
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+            opacity: 0.8;
+            filter: contrast(1.2) grayscale(0.2);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 900;
+            font-style: italic;
+            text-shadow: 4px 4px 0 var(--dark-100), 8px 8px 0 rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+            line-height: 0.85;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 800;
+            background: var(--dark-100);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            transform: skewX(var(--skew-angle));
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--yellow);
+        }
+
+        .hero-subtitle span {
+            display: inline-block;
+            transform: skewX(calc(var(--skew-angle) * -1));
+        }
+
+        
+        .hud-bar {
+            background: var(--dark-200);
+            border-top: var(--border-thick) solid var(--dark-300);
+            border-bottom: var(--border-thick) solid var(--dark-300);
+            padding: 1rem 0;
+            position: relative;
+            z-index: 20;
+        }
+
+        .hud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hud-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hud-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--dark-300);
+            transform: skewX(var(--skew-angle));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--dark-400);
+        }
+
+        .hud-icon svg {
+            transform: skewX(calc(var(--skew-angle) * -1));
+            width: 24px;
+            height: 24px;
+            fill: var(--yellow);
+        }
+
+        .hud-text-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .hud-text-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            font-style: italic;
+            line-height: 1;
+        }
+
+        
+        .differentiator {
+            padding: 8vw 0;
+            background: var(--dark-100);
+            position: relative;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4vw;
+            align-items: center;
+        }
+
+        .diff-text h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .diff-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .diff-visual {
+            position: relative;
+        }
+
+        .diff-box {
+            background: var(--dark-200);
+            border: var(--border-thick) solid var(--dark-400);
+            padding: 3rem;
+            transform: skewX(var(--skew-angle));
+            position: relative;
+        }
+
+        .diff-box::after {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 2px solid var(--yellow);
+            z-index: -1;
+            transform: translate(15px, 15px);
+        }
+
+        .diff-box-content {
+            transform: skewX(calc(var(--skew-angle) * -1));
+        }
+
+        .team-roster {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .player-slot {
+            display: flex;
+            align-items: center;
+            background: var(--dark-300);
+            padding: 0.5rem;
+            border-left: 4px solid var(--green);
+        }
+
+        .player-slot.coach { border-left-color: var(--yellow); }
+
+        .player-avatar {
+            width: 40px; height: 40px;
+            background: var(--dark-400);
+            margin-right: 1rem;
+        }
+
+        .player-avatar img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(1);
+        }
+
+        .player-info { flex-grow: 1; }
+        .player-name { font-weight: 800; font-family: var(--font-display); font-size: 1.2rem; text-transform: uppercase;}
+        .player-role { font-size: 0.75rem; color: var(--gray); text-transform: uppercase;}
+
+        
+        .curriculum {
+            padding: 6vw 0;
+            background: var(--dark-200);
+            border-top: 2px solid var(--dark-300);
+            border-bottom: 2px solid var(--dark-300);
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        .stage-select-container {
+            display: flex;
+            gap: 10px;
+            height: 400px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .stage-card {
+            flex: 1;
+            position: relative;
+            transform: skewX(var(--skew-angle));
+            background: var(--dark-300);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid var(--dark-400);
+            filter: grayscale(0.8) brightness(0.6);
+        }
+
+        .stage-card:hover, .stage-card.active {
+            flex: 2.5;
+            filter: grayscale(0) brightness(1);
+            border: 4px solid var(--yellow);
+            box-shadow: 0 0 0 2px var(--dark-100), 0 0 20px rgba(255, 230, 0, 0.3);
+            z-index: 10;
+        }
+
+        .stage-bg {
+            position: absolute;
+            top: 0; left: -20%; width: 140%; height: 100%;
+            object-fit: cover;
+            transform: skewX(calc(var(--skew-angle) * -1));
+        }
+
+        .stage-content {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            transform: skewX(calc(var(--skew-angle) * -1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stage-card:hover .stage-content, .stage-card.active .stage-content {
+            opacity: 1;
+            transition-delay: 0.1s;
+        }
+
+        .stage-step {
+            font-family: var(--font-display);
+            color: var(--yellow);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .stage-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        
+        .coaches {
+            padding: 8vw 0;
+            background: var(--dark-100);
+        }
+
+        .coach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .coach-card {
+            background: var(--dark-200);
+            position: relative;
+            padding: 2rem;
+            border-bottom: var(--border-thick) solid var(--dark-400);
+            transition: border-color 0.2s ease;
+        }
+
+        .coach-card:hover {
+            border-bottom-color: var(--green);
+        }
+
+        .coach-image {
+            width: 100px;
+            height: 100px;
+            background: var(--dark-300);
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .coach-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: contrast(1.2);
+        }
+
+        .coach-name {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .coach-rank {
+            color: var(--yellow);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .coach-bio {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        
+        .trust {
+            padding: 6vw 0;
+            background: var(--dark-200);
+            border-top: 2px solid var(--dark-300);
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--dark-100);
+            padding: 2.5rem;
+            border-left: var(--border-thick) solid var(--dark-400);
+            position: relative;
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem; left: 1rem;
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: var(--dark-300);
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .review-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #ddd;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--yellow);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        
+        .footer-cta {
+            padding: 10vw 0;
+            text-align: center;
+            background: linear-gradient(45deg, var(--dark-100) 0%, var(--dark-200) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.02) 10px,
+                rgba(255,255,255,0.02) 20px
+            );
+            pointer-events: none;
+        }
+
+        .footer-cta h2 {
+            font-size: clamp(4rem, 8vw, 7rem);
+            margin-bottom: 2rem;
+            text-shadow: 4px 4px 0 var(--dark-100);
+        }
+
+        footer {
+            background: var(--dark-100);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--dark-400);
+            border-top: 1px solid var(--dark-300);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 900px) {
+            .diff-grid { grid-template-columns: 1fr; }
+            .bg-left { width: 100%; clip-path: none; }
+            .bg-right { display: none; }
+            .hero-title { font-size: 4.5rem; }
+            .stage-select-container { flex-direction: column; height: 800px; gap: 20px; }
+            .stage-card { transform: none; filter: none; height: 150px; flex: none !important;}
+            .stage-card:hover, .stage-card.active { height: 200px; }
+            .stage-bg { transform: none; width: 100%; left: 0; }
+            .stage-content { transform: none; opacity: 1; padding: 1rem; background: rgba(0,0,0,0.8);}
+            .hud-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body vid="9">
+
+    <nav vid="10">
+        <div class="container nav-content" vid="11">
+            <a href="#" class="logo" vid="12">EKUZO<span vid="13">.gg</span></a>
+            <a href="#register" class="btn" vid="14">Enroll Now</a>
+        </div>
+    </nav>
+
+    <header class="hero" vid="15">
+        <div class="hero-bg" vid="16">
+            <div class="bg-left" vid="17">
+                <img src="https://images.pexels.com/photos/7862590/pexels-photo-7862590.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" alt="Kid gaming" class="bg-image" vid="18">
+            </div>
+            <div class="bg-right" vid="19">
+                <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" alt="Esports stadium" class="bg-image" vid="20">
+            </div>
+        </div>
+        
+        <div class="container hero-content" vid="21">
+            <div class="hero-subtitle" vid="22">
+                <span vid="23">VIRTUAL ESPORTS SUMMER CAMP</span>
+            </div>
+            <h1 class="hero-title" vid="24">
+                LEVEL UP <br vid="25">
+                <span class="text-yellow" vid="26">YOUR GAME.</span>
+            </h1>
+            <a href="#register" class="btn btn-outline" style="margin-top: 2rem;" vid="27">Secure Your Spot</a>
+        </div>
+    </header>
+
+    <div class="hud-bar" vid="28">
+        <div class="container hud-grid" vid="29">
+            <div class="hud-item" vid="30">
+                <div class="hud-icon" vid="31">
+                    <svg viewBox="0 0 24 24" vid="32"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" vid="33"></path></svg>
+                </div>
+                <div vid="34">
+                    <div class="hud-text-label" vid="35">Coach to Student Ratio</div>
+                    <div class="hud-text-value text-green" vid="36">1 : 5</div>
+                </div>
+            </div>
+            <div class="hud-item" vid="37">
+                <div class="hud-icon" vid="38">
+                    <svg viewBox="0 0 24 24" vid="39"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" vid="40"></path></svg>
+                </div>
+                <div vid="41">
+                    <div class="hud-text-label" vid="42">Schedule (Mon - Fri)</div>
+                    <div class="hud-text-value" vid="43">1PM - 4PM EST</div>
+                </div>
+            </div>
+            <div class="hud-item" vid="44">
+                <div class="hud-icon" vid="45">
+                    <svg viewBox="0 0 24 24" vid="46"><path d="M21.58 16.09l-1.09-7.66C20.21 6.46 18.52 5 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.63 3.39 19 4.94 19c.68 0 1.32-.27 1.8-.75L9 16h6l2.25 2.25c.48.48 1.13.75 1.8.75 1.56 0 2.75-1.38 2.53-2.91zm-9.58-1.59H8v-2h4v2zm4-3h-2v-2h2v2z" vid="47"></path></svg>
+                </div>
+                <div vid="48">
+                    <div class="hud-text-label" vid="49">Featured Game</div>
+                    <div class="hud-text-value text-red" vid="50">LEAGUE OF LEGENDS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="differentiator" vid="51">
+        <div class="container diff-grid" vid="52">
+            <div class="diff-text" vid="53">
+                <h2 vid="54">THE SQUAD STAYS <span class="text-yellow" vid="55">TOGETHER.</span></h2>
+                <p vid="56">Most camps end on Friday and the connections disappear. At EKUZO, you're not just learning the game, you're building a team.</p>
+                <p vid="57">Campers are grouped into 5-player rosters based on age and skill. After the 1-week intensive camp concludes, you keep your team, your Discord channels, and the strategies you built together. <strong vid="58">Take your team with you.</strong></p>
+            </div>
+            <div class="diff-visual" vid="59">
+                <div class="diff-box" vid="60">
+                    <div class="diff-box-content" vid="61">
+                        <div class="team-roster" vid="62">
+                            <div class="player-slot coach" vid="63">
+                                <div class="player-avatar" vid="64"><img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100&amp;h=100&amp;dpr=1" alt="Coach" vid="65"></div>
+                                <div class="player-info" vid="66">
+                                    <div class="player-name" vid="67">Coach Alex</div>
+                                    <div class="player-role text-yellow" vid="68">Grandmaster Leader</div>
+                                </div>
+                            </div>
+                            <div class="player-slot" vid="69">
+                                <div class="player-avatar" vid="70"><img src="https://images.pexels.com/photos/7862590/pexels-photo-7862590.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100&amp;h=100&amp;dpr=1" alt="Player" vid="71"></div>
+                                <div class="player-info" vid="72">
+                                    <div class="player-name" vid="73">ShadowStriker</div>
+                                    <div class="player-role" vid="74">Top Lane</div>
+                                </div>
+                            </div>
+                            <div class="player-slot" vid="75">
+                                <div class="player-avatar" vid="76"><img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100&amp;h=100&amp;dpr=1" alt="Player" vid="77"></div>
+                                <div class="player-info" vid="78">
+                                    <div class="player-name" vid="79">NeonMage</div>
+                                    <div class="player-role" vid="80">Mid Lane</div>
+                                </div>
+                            </div>
+                             <div class="player-slot" vid="81">
+                                <div class="player-avatar" vid="82"><img src="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100&amp;h=100&amp;dpr=1" alt="Player" vid="83"></div>
+                                <div class="player-info" vid="84">
+                                    <div class="player-name" vid="85">JungleKing</div>
+                                    <div class="player-role" vid="86">Jungle</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="curriculum" vid="87">
+        <div class="container" vid="88">
+            <div class="section-header" vid="89">
+                <h2 vid="90"><span class="text-green" vid="91">STAGE SELECT:</span> CURRICULUM</h2>
+                <p style="color: var(--gray); font-size: 1.1rem; margin-top: 1rem;" vid="92">A structured 5-day progression balancing mechanics with teamwork.</p>
+            </div>
+            
+            <div class="stage-select-container" vid="93">
+                <div class="stage-card" vid="94">
+                    <img src="https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="stage-bg" alt="Learn" vid="95">
+                    <div class="stage-content" vid="96">
+                        <div class="stage-step" vid="97">DAY 1</div>
+                        <div class="stage-title" vid="98">LEARN TO PLAY</div>
+                        <div class="stage-desc" vid="99">Master the fundamentals. Map awareness, wave management, and economy basics. Establish the baseline for competitive play.</div>
+                    </div>
+                </div>
+                
+                <div class="stage-card" vid="100">
+                    <img src="https://images.pexels.com/photos/163036/mario-luigi-yoshi-figures-163036.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="stage-bg" alt="Role" vid="101">
+                    <div class="stage-content" vid="102">
+                        <div class="stage-step" vid="103">DAY 2</div>
+                        <div class="stage-title" vid="104">FIND YOUR ROLE</div>
+                        <div class="stage-desc" vid="105">Champion specialization. 1-on-1 coaching to identify your strengths. Are you a carry, a tank, or a support mastermind?</div>
+                    </div>
+                </div>
+
+                <div class="stage-card active" vid="106">
+                    <img src="https://images.pexels.com/photos/7915555/pexels-photo-7915555.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="stage-bg" alt="Team" vid="107">
+                    <div class="stage-content" vid="108">
+                        <div class="stage-step" vid="109">DAY 3</div>
+                        <div class="stage-title text-yellow" vid="110">TEAM PLAY</div>
+                        <div class="stage-desc" vid="111">Synergy unlocked. Learning shot-calling, objective control, and playing around win conditions as a synchronized 5-man unit.</div>
+                    </div>
+                </div>
+
+                <div class="stage-card" vid="112">
+                    <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="stage-bg" alt="Skills" vid="113">
+                    <div class="stage-content" vid="114">
+                        <div class="stage-step" vid="115">DAY 4</div>
+                        <div class="stage-title" vid="116">REAL LIFE SKILLS</div>
+                        <div class="stage-desc" vid="117">Tilt management, effective communication under pressure, and healthy gaming habits. Translating game logic to life logic.</div>
+                    </div>
+                </div>
+
+                <div class="stage-card" vid="118">
+                    <img src="https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="stage-bg" alt="Compete" vid="119">
+                    <div class="stage-content" vid="120">
+                        <div class="stage-step" vid="121">DAY 5</div>
+                        <div class="stage-title text-red" vid="122">COMPETE</div>
+                        <div class="stage-desc" vid="123">Tournament day. Put your training to the test in a structured bracket against other EKUZO camp teams.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coaches" vid="124">
+        <div class="container" vid="125">
+            <div class="section-header" vid="126">
+                <h2 vid="127">CHOOSE YOUR <span class="text-red" vid="128">COACH</span></h2>
+                <p style="color: var(--gray); font-size: 1.1rem; margin-top: 1rem;" vid="129">Vetted, high-elo players who know how to teach, not just play.</p>
+            </div>
+
+            <div class="coach-grid" vid="130">
+                <div class="coach-card" vid="131">
+                    <div class="coach-image" vid="132">
+                        <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300" alt="Coach" vid="133">
+                    </div>
+                    <div class="coach-name" vid="134">ALEX "VORTEX" M.</div>
+                    <div class="coach-rank" vid="135">Grandmaster • Mid Lane</div>
+                    <div class="coach-bio" vid="136">Collegiate esports captain with 3 years of coaching experience. Specializes in macro decision making and tilt prevention.</div>
+                </div>
+                
+                <div class="coach-card" vid="137">
+                    <div class="coach-image" vid="138">
+                        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300" alt="Coach" vid="139">
+                    </div>
+                    <div class="coach-name" vid="140">SARAH "ECHO" T.</div>
+                    <div class="coach-rank" vid="141">Master • Jungle</div>
+                    <div class="coach-bio" vid="142">Former semi-pro player. Focuses heavily on clear communication, pathing optimization, and building team morale.</div>
+                </div>
+
+                <div class="coach-card" vid="143">
+                    <div class="coach-image" vid="144">
+                        <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300" alt="Coach" vid="145">
+                    </div>
+                    <div class="coach-name" vid="146">MARCUS "IRON" D.</div>
+                    <div class="coach-rank" vid="147">Challenger • Support</div>
+                    <div class="coach-bio" vid="148">Analytical mastermind. Teaches vision control, win conditions, and how to effectively shot-call from the support position.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust" vid="149">
+        <div class="container" vid="150">
+            <div class="section-header" vid="151">
+                <h2 vid="152">PARENT <span class="text-yellow" vid="153">APPROVED.</span></h2>
+            </div>
+            <div class="review-grid" vid="154">
+                <div class="review-card" vid="155">
+                    <div class="review-text" vid="156">"I was skeptical about a 'gaming camp', but the structure EKUZO provided was incredible. My son actually learned about teamwork, communication, and controlling his frustration. Plus, he made friends he still plays with every weekend."</div>
+                    <div class="review-author" vid="157">- David R., Parent of a 14yo</div>
+                </div>
+                <div class="review-card" vid="158">
+                    <div class="review-text" vid="159">"The 1:5 ratio is the real deal. Coach Sarah knew my daughter's playstyle by day two and gave her specific, encouraging feedback. It felt like real sports coaching, just applied to a digital field."</div>
+                    <div class="review-author" vid="160">- Elena M., Parent of a 16yo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-cta" id="register" vid="161">
+        <div class="container" vid="162">
+            <h2 vid="163">READY TO <span class="text-green" vid="164">PLAY?</span></h2>
+            <p style="font-size: 1.2rem; color: var(--gray); margin-bottom: 2rem;" vid="165">Next camp session begins June 10th. Spots are strictly limited to maintain 1:5 ratio.</p>
+            <a href="#" class="btn" vid="166">Register Your Gamer</a>
+        </div>
+    </section>
+
+    <footer vid="167">
+        <div class="container" vid="168">
+            © 2024 EKUZO Virtual Esports. All rights reserved. Play Hard. Play Smart.
+        </div>
+    </footer>
+
+    <script vid="169">
+        
+        const cards = document.querySelectorAll('.stage-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+    </script>
+
+</body></html>

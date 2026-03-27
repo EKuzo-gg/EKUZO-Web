@@ -1,0 +1,160 @@
+<!-- Component nodeId: DEPSJeeiY — Header -->
+<!-- Variants: DesktopLarge (white), TabletClose (red), TabletOpen (red), DesktopScroll (red), DesktopLargeDark -->
+<!-- CTA Button componentId: G_7udIwcU, variant: u7ScFy9jD -->
+<!-- Logo links to / -->
+
+<Header nodeId="DEPSJeeiY">
+  <DesktopLarge
+      nodeId="Im9jdOMdk"
+      position="absolute"
+      width="1232px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      borderRadius="0px"
+      overflow="hidden"
+      layout="stack"
+      gap="667px"
+      stackDirection="horizontal"
+      stackDistribution="space-between"
+      stackAlignment="center"
+  >
+    <Desktop
+        nodeId="PLaB_rdaq"
+        width="1fr"
+        height="fit-content"
+        borderRadius="0px"
+        overflow="visible"
+        layout="stack"
+        gap="56px"
+        stackDirection="horizontal"
+        stackDistribution="space-between"
+        stackAlignment="center"
+    >
+      <Stack
+          nodeId="DGPdndJo0"
+          width="170px"
+          height="fit-content"
+          overflow="visible"
+          layout="stack"
+          gap="26px"
+          stackDirection="horizontal"
+          stackDistribution="center"
+          stackAlignment="center"
+      >
+        <Image
+            nodeId="WSyS63QSS"
+            width="1fr"
+            height="fit-image"
+            link="/"
+            linkOpenInNewTab="false"
+            backgroundImage="https://framerusercontent.com/images/S8zJ4aw8Vsk7lZinczV4LDVDLPU.svg"
+         />
+      </Stack>
+      <Frame18
+          nodeId="XRaYvdQMD"
+          width="1fr"
+          height="fit-content"
+          borderRadius="0px"
+          overflow="visible"
+          layout="stack"
+          gap="56px"
+          stackDirection="horizontal"
+          stackDistribution="end"
+          stackAlignment="center"
+      >
+        <Stack
+            nodeId="i9j9IhkBi"
+            width="1fr"
+            height="fit-content"
+            overflow="visible"
+            layout="stack"
+            gap="40px"
+            stackDirection="horizontal"
+            stackDistribution="end"
+            stackAlignment="center"
+        >
+          <Programs
+              nodeId="aQnVlXTb2"
+              width="fit-content"
+              height="fit-content"
+              link="/programs"
+              linkOpenInNewTab="false"
+              inlineTextStyle="/Desktop Body/XS/Medium"
+          >
+            Programs
+          </Programs>
+          <Schools
+              nodeId="TrsH_7IXH"
+              width="fit-content"
+              height="fit-content"
+              link="/schools"
+              linkOpenInNewTab="false"
+              inlineTextStyle="/Desktop Body/XS/Medium"
+          >
+            Schools
+          </Schools>
+          <Families
+              nodeId="awlAqLdxD"
+              width="fit-content"
+              height="fit-content"
+              link="/parents"
+              linkOpenInNewTab="false"
+              inlineTextStyle="/Desktop Body/XS/Medium"
+          >
+            Families
+          </Families>
+          <Methodology
+              nodeId="dKA6BQaCd"
+              width="fit-content"
+              height="fit-content"
+              link="/pedagogy"
+              linkOpenInNewTab="false"
+              inlineTextStyle="/Desktop Body/XS/Medium"
+          >
+            Methodology
+          </Methodology>
+          <Resources
+              nodeId="AIRKMI_1j"
+              width="fit-content"
+              height="fit-content"
+              link="/blog"
+              linkOpenInNewTab="false"
+              inlineTextStyle="/Desktop Body/XS/Medium"
+          >
+            Resources
+          </Resources>
+        </Stack>
+        <Frame17
+            nodeId="N_Zc0s4eS"
+            width="fit-content"
+            height="fit-content"
+            borderRadius="2px"
+            overflow="visible"
+            layout="stack"
+            gap="8px"
+            stackDirection="horizontal"
+            stackDistribution="center"
+            stackAlignment="center"
+        >
+          <Button
+              nodeId="o0kPgt4qh"
+              width="fit-content"
+              height="fit-content"
+              componentId="G_7udIwcU"
+              variant="u7ScFy9jD"
+              sB5iVgeB8="Start a conversation"
+           />
+        </Frame17>
+      </Frame18>
+    </Desktop>
+  </DesktopLarge>
+  <!-- TabletClose: red bg /Red/Red, width 810px — call getNodeXml(lYITwzU1Z) for children -->
+  <TabletClose nodeId="lYITwzU1Z" backgroundColor="/Red/Red" width="810px" />
+  <!-- TabletOpen: red bg /Red/Red, width 942px, vertical stack — call getNodeXml(ssIaOFTYU) for children -->
+  <TabletOpen nodeId="ssIaOFTYU" backgroundColor="/Red/Red" width="942px" />
+  <!-- DesktopScroll: red bg /Red/Red, width 1232px — call getNodeXml(O8NRQJfVA) for children -->
+  <DesktopScroll nodeId="O8NRQJfVA" backgroundColor="/Red/Red" width="1232px" />
+  <!-- DesktopLargeDark: dark variant, width 1232px — call getNodeXml(pEORcMzfY) for children -->
+  <DesktopLargeDark nodeId="pEORcMzfY" width="1232px" />
+</Header>

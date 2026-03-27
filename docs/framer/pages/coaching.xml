@@ -1,0 +1,103 @@
+<!-- Page nodeId: rvhUJqp10 — /coaching (draft) -->
+<!-- Extracted from Framer MCP getNodeXml -->
+<DesktopLarge nodeId="cWnLO9Est" backgroundColor="white" layout="stack" stackDirection="vertical">
+  <!-- Hero: White, 2-col, images left/right -->
+  <Hero nodeId="tZWM3v0Tr" backgroundColor="rgba(255,255,255,1)" padding="188px 0px 188px 0px">
+    <LeftImage nodeId="kNCn4Pb77" width="660px" height="560px"
+      backgroundImage="https://framerusercontent.com/images/9sPAo9LK8h4hOfBqfXDwkeH2k.png" zIndex="1" />
+    <LeftImage nodeId="Lc3ejGZH_" width="660px" height="560px"
+      backgroundImage="https://framerusercontent.com/images/Ji5DBCPzDGRkg3TihZZopS1HewI.png" zIndex="1" />
+    <Stack nodeId="jOa2BTMxH" maxWidth="1232px" padding="0px 40px">
+      <PedagogyOfGaming nodeId="fdQT5IAAw" inlineTextStyle="/Display/Heading 2">COACHING</PedagogyOfGaming>
+      <body nodeId="tu8pmrq2R" inlineTextStyle="/Desktop Body/L/Regular">Meeting every learner where they are.</body>
+    </Stack>
+    <Image nodeId="wK7je3wQ3" height="300px"
+      backgroundImage="https://framerusercontent.com/images/8aXKGdobnlhGV66LFUcbTboN6xg.png" zIndex="2" />
+  </Hero>
+
+  <!-- Section 2: Light Grey — Every great athlete has a coach -->
+  <Stack nodeId="b7hmLylyw" backgroundColor="/Grey/Light Grey" padding="144px 0px 188px 0px">
+    <Image nodeId="b0AHpkzcH" width="1131px" height="632px"
+      backgroundImage="https://framerusercontent.com/images/5I9cKE5vflntneL84TuEElhs3QI.png" zIndex="1" />
+    <Frame37 nodeId="ZGpcL29Gt" maxWidth="1232px">
+      <TurningPlayIntoProgress nodeId="fRHTLoYER" inlineTextStyle="/Display/Heading 5">Every great athlete has a coach.</TurningPlayIntoProgress>
+      <body nodeId="J6FXoFXKU">Every successful team has a mentor guiding them. Research across education is clear: coaching is one of the most effective ways to learn. At Ekuzo, coaching is at the center of our model. Our coaches are collegiate esports athletes or former professionals who know the game inside and out, but more importantly, they know how to connect with students</body>
+    </Frame37>
+  </Stack>
+
+  <!-- Section 3: TestimonialsSection — John Wooden quote -->
+  <TestimonialsSection nodeId="C5hSjvNUg" componentId="yY5pfBKjH" variant="cQaERloUl"
+    XTam18xjQ="false"
+    dOtkH4aIO="A coach is someone who can give correction without causing resentment."
+    lGz3lUUzZ="John Wooden" />
+
+  <!-- Section 4: Light Grey — How Coaching Builds Growth (Observe/Reflect/Adjust) -->
+  <HowItWorksSection nodeId="hSn4XyinI" backgroundColor="/Grey/Light Grey" padding="144px 0px 240px 0px">
+    <HowItWorksSectionLargeCard nodeId="r6NBO60Rx" maxWidth="1021px" componentId="J5646SU6d" variant="sxnLSGfXL"
+      rHEVfyfsQ="How Coaching  Builds Growth"
+      q9Hu97N5h="Coaching turns feedback into transformation. It gives structure to practice and purpose to reflection. In games and in learning, growth happens fastest when students can:"
+      WSYAc9UzO="rgb(255,255,255)" lxPomnUF8="false" />
+    <!-- 3 step cards -->
+    <Card nodeId="brufJ7If4" componentId="iop5RYIDR" variant="l_51U7a4c"
+      hdfkG_Lfn="Observe" EsQBVu2bz="See what happened and why it mattered" lzZcVkWjz="rgb(255,255,255)" />
+    <Card nodeId="MoIItZvA4" componentId="iop5RYIDR" variant="l_51U7a4c"
+      hdfkG_Lfn="Reflect" EsQBVu2bz="Get feedback and discuss it safely." lzZcVkWjz="rgb(255,255,255)" />
+    <Card nodeId="nFfIHf2nK" componentId="iop5RYIDR" variant="l_51U7a4c"
+      hdfkG_Lfn="Adjust" EsQBVu2bz="Apply insights in the next round." lzZcVkWjz="rgb(255,255,255)" />
+    <!-- Background circle images -->
+    <LeftCircle nodeId="AM2L9KumJ" backgroundImage="https://framerusercontent.com/images/g3TpENbpNBwnNlbNlBNmJRBdv4.png" zIndex="0" />
+    <RightCircle nodeId="sLbXIbaQ7" backgroundImage="https://framerusercontent.com/images/YLIvJr3GzjSAURCIE9vJpyKBgo.png" zIndex="0" />
+    <!-- Step illustration images -->
+    <Image nodeId="IgK_h2F0S" backgroundImage="https://framerusercontent.com/images/6kTte0WygdO6iS185V3NX1ttNCI.png" />
+    <Image nodeId="sbhYgAG3L" backgroundImage="https://framerusercontent.com/images/L9x6Df5XbWUzR2qKH14ja6hMHPI.png" />
+    <Image nodeId="l53tuiJQN" backgroundImage="https://framerusercontent.com/images/LE4D9ftJOWT5jIR8pzLYokuUQE.png" />
+    <Image nodeId="vp_0DZuix" backgroundImage="https://framerusercontent.com/images/XxdoHvpK71gChYFqJynzAvfYlo.png" />
+    <Image nodeId="VulnvNQMW" backgroundImage="https://framerusercontent.com/images/uOX5Ecsf4vPapJSSDMa4Z6kaNA.png" />
+    <Image nodeId="LAR3bJ4Zo" backgroundImage="https://framerusercontent.com/images/KVXxADs2DXuKVLiKtFJoddntGg.png" />
+    <Image nodeId="DuYRPp51w" backgroundImage="https://framerusercontent.com/images/VmVPXS9N3qAFaZVoTbSAwhxA.png" />
+    <White2 nodeId="SpBQiPwOp" height="300px" componentId="cllBPIiNd" variant="dhGhJLVAy" />
+  </HowItWorksSection>
+
+  <!-- Section 5: White — Meeting the Learner Where They Are (story block) -->
+  <Stack nodeId="e0WrhOR6l" padding="188px 40px 188px 40px">
+    <!-- Red card: "Meeting the Learner Where They Are" H4 -->
+    <StoriesOfGrowthAndGaming nodeId="cjGsF3Eea" inlineTextStyle="/Display/Heading 4">Meeting the Learner Where They Are</StoriesOfGrowthAndGaming>
+    <!-- Body: "One student joined without ranked experience; they were quiet, hesitant, and unsure." -->
+    <StoriesOfGrowthAndGaming nodeId="M1M3IDWus" inlineTextStyle="/Desktop Body/L/Regular">One student joined without ranked experience; they were quiet, hesitant, and unsure.</StoriesOfGrowthAndGaming>
+    <!-- Story image panel -->
+    <Stack nodeId="OdoMBX_QU" height="399px" backgroundImage="https://framerusercontent.com/images/gWpXw5tP65onfWnJW7bPW1HEo4.jpg">
+      <Stack nodeId="ykiWEVXoU" backgroundImage="https://framerusercontent.com/images/19iwluLOc2w9Mn6I5exRGdViM.png">
+        <StoriesOfGrowthAndGaming nodeId="MBGN582DA" inlineTextStyle="/Desktop Body/XS/Regular">His coach didn't push him into competition right away; instead, they focused on team communication and game sense. By the third week, he was calling plays mid-match, the same player teachers said "never spoke up in class."</StoriesOfGrowthAndGaming>
+        <Button nodeId="IT9j3TS0o" componentId="G_7udIwcU" variant="GiVk3uoHD"
+          sB5iVgeB8="Read more stories" YdIsOiXMr="/blog" />
+      </Stack>
+    </Stack>
+    <Black1 nodeId="UJ1PxP8a2" height="300px" componentId="xXXvJAqHn" />
+  </Stack>
+
+  <!-- Section 6: Black — Connected pedagogies (3 cards) -->
+  <Stack nodeId="TgNWoa_4_" backgroundColor="/Black/Black">
+    <HowItWorksSystem nodeId="h0sSP_WwC" maxWidth="1232px" backgroundColor="/Black/Black" padding="144px 0px 188px 0px">
+      <HowTheEkuzoSystemWorks nodeId="gap67zkJa" inlineTextStyle="/Display/Heading 4">Connected pedagogies</HowTheEkuzoSystemWorks>
+      <Card nodeId="TzE5Ef57G" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Motivation"
+        yuVEacWaz="Coaches help students see progress before they feel it."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+      <Card nodeId="NS6ZkrPqW" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Social learning"
+        yuVEacWaz="Feedback becomes conversation — learning happens together."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+      <Card nodeId="xT9YP7D9v" componentId="mTrbgx1O_" variant="beiSYiz3X"
+        WwUUPqZCG="Correct Difficulty"
+        yuVEacWaz="Guidance keeps challenge in the 'just right' zone for each player."
+        B6SQuE7vS="160" QuPqf1vMY="rgb(0,0,0)" />
+    </HowItWorksSystem>
+    <Image nodeId="hJVruANBp" height="300px"
+      backgroundImage="https://framerusercontent.com/images/FeQi62FV9fxmeo1VbqJoycOyQM.png" zIndex="1" />
+  </Stack>
+
+  <!-- Footer -->
+  <FooterBannerSection nodeId="k0qDL3URb" componentId="BNRkYbJEX" variant="QbZSddxCo"
+    ibdR1RB7I="Enroll into a transformational program today"
+    kylqqg5uj="false" />
+</DesktopLarge>

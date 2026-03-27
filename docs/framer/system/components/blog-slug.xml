@@ -1,0 +1,179 @@
+<!-- Page nodeId: s57VwuSv9 — /blog/:slug (blog post template) -->
+<!-- White bg, padding 140px 20px, gap 160px vertical -->
+<!-- Decorative character image: top-right, absolute, 539x677px -->
+<!--   https://framerusercontent.com/images/nYHGu174Hg4FF90bc2Jg0oBK0.png -->
+<!-- FooterBannerSection prop: ibdR1RB7I="Increase attendance and engagement in your school" -->
+<!-- BlogCard componentId: R2ws9cJ3i, variant Ih7ZmoHKy, link="/blog/:slug" -->
+<!-- Variants: DesktopLarge, Desktop, Tablet, Phone (all white, overflow clip, same gap/padding structure) -->
+
+<BlogSlugPage nodeId="s57VwuSv9">
+  <DesktopLarge
+      nodeId="dPO3wwlCn"
+      position="absolute"
+      width="1920px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      backgroundColor="white"
+      overflow="clip"
+      layout="stack"
+      gap="160px"
+      padding="140px 20px 140px 20px"
+      stackDirection="vertical"
+      stackDistribution="start"
+      stackAlignment="center"
+  >
+    <!-- Decorative character image: absolute top-right -->
+    <Image
+        nodeId="QrpNvF1DE"
+        position="absolute"
+        width="539px"
+        height="677px"
+        right="0px"
+        centerY="5%"
+        backgroundImage="https://framerusercontent.com/images/nYHGu174Hg4FF90bc2Jg0oBK0.png"
+        zIndex="1"
+     />
+
+    <!-- Hero section: padding 188px 80px 80px 80px, gap 40px vertical, centered -->
+    <HeroSection
+        nodeId="nR1yU3lWE"
+        position="absolute"
+        width="1fr"
+        height="fit-content"
+        top="0px"
+        left="0px"
+        layout="stack"
+        gap="40px"
+        padding="188px 80px 80px 80px"
+        stackDirection="vertical"
+        stackDistribution="start"
+        stackAlignment="center"
+    >
+      <Stack nodeId="hjDQjxFjg" maxWidth="1232px" gap="26px" stackDirection="vertical" stackAlignment="center">
+        <!-- Title: H4, maxWidth 720px -->
+        <Stack nodeId="PkpYKMPf4" gap="15px" stackDirection="vertical" stackAlignment="start">
+          <Title
+              nodeId="PfW29yQGO"
+              width="1fr"
+              height="fit-content"
+              maxWidth="720px"
+              inlineTextStyle="/Display/Heading 4"
+          >
+            Conquering my Mountain and Giants: How Esports changed my life
+          </Title>
+        </Stack>
+
+        <!-- Hero banner image: 515px height -->
+        <Banner nodeId="dLd1z6mb4" width="1fr" height="515px">
+          <Image
+              nodeId="PEm0BpcVu"
+              position="absolute"
+              width="697px"
+              height="529px"
+              centerX="-12%"
+              centerY="90%"
+              backgroundImage="https://framerusercontent.com/images/rayrSqvu0WBxHZLzpIwTYRQK8.png"
+              zIndex="1"
+           />
+        </Banner>
+
+        <!-- Author byline: padding 144px top, horizontal, gap 138px -->
+        <Stack nodeId="eNMinemEt" padding="144px 0px 0px 0px" gap="138px" stackDirection="horizontal">
+          <Stack nodeId="UNV8H4ENd" maxWidth="392px" gap="512px" stackDirection="vertical">
+            <!-- Byline: "by [First] [Last]" in /Label/XS/Medium -->
+            <Stack nodeId="P7uDFWjx2" stackDirection="vertical">
+              <Date
+                  nodeId="duKxsG8I_"
+                  maxWidth="600px"
+                  inlineTextStyle="/Label/XS/Regular"
+              >
+                Content
+              </Date>
+              <BlogAuthors nodeId="ruTw6jubn" gap="10px" stackDirection="horizontal">
+                <BlogAuthor nodeId="rFcIvFlMo" gap="10px" stackDirection="horizontal">
+                  <Stack nodeId="aJ1I8g6gi" gap="4px" stackDirection="horizontal" stackAlignment="center">
+                    <Title nodeId="rBAactO4R" inlineTextStyle="/Label/XS/Medium">by</Title>
+                    <Title nodeId="gmEejfU2f" inlineTextStyle="/Label/XS/Medium">John</Title>
+                    <Title nodeId="jfJMVwADU" inlineTextStyle="/Label/XS/Medium">Hay</Title>
+                  </Stack>
+                </BlogAuthor>
+              </BlogAuthors>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Stack>
+    </HeroSection>
+
+    <!-- "Keep reading" section: padding 188px top/244px bottom, gap 72px vertical -->
+    <Content
+        nodeId="F0wcs6HjK"
+        position="absolute"
+        width="1fr"
+        height="fit-content"
+        centerX="50%"
+        centerY="78%"
+        maxWidth="1232px"
+        overflow="clip"
+        layout="stack"
+        gap="72px"
+        padding="188px 0px 244px 0px"
+        stackDirection="vertical"
+        stackDistribution="center"
+        stackAlignment="start"
+    >
+      <Frame35 nodeId="HfGKTf38W" gap="16px" stackDirection="vertical" stackAlignment="center">
+        <KeepReading
+            nodeId="HgSsamAbX"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Display/Heading 4"
+        >
+          Keep reading
+        </KeepReading>
+      </Frame35>
+
+      <!-- 3-column blog card grid -->
+      <Blog
+          nodeId="boEFxVItw"
+          position="absolute"
+          width="1fr"
+          height="fit-content"
+          layout="grid"
+          gap="32px 32px"
+          gridColumns="3"
+          gridRows="2"
+          gridAlignment="center"
+          gridColumnWidthType="minmax"
+          gridColumnWidth="200"
+          gridColumnMinWidth="50"
+          gridRowHeightType="auto"
+          gridRowHeight="200"
+      >
+        <BlogItem nodeId="sE4cIxeZq" link="/blog/:slug" gridColumnSpan="1">
+          <BlogCard
+              nodeId="HGlCToa39"
+              componentId="R2ws9cJ3i"
+              variant="Ih7ZmoHKy"
+              cHSMUXxdd="TESTIMONIAL"
+           />
+        </BlogItem>
+      </Blog>
+    </Content>
+
+    <!-- FooterBannerSection with custom heading -->
+    <FooterBannerSection
+        nodeId="P32LRf3Fz"
+        componentId="BNRkYbJEX"
+        variant="QbZSddxCo"
+        ibdR1RB7I="Increase attendance and engagement in your school"
+        kylqqg5uj="true"
+     />
+  </DesktopLarge>
+  <!-- Desktop — call getNodeXml(Vf8qnCqYJ) for children -->
+  <Desktop nodeId="Vf8qnCqYJ" backgroundColor="white" width="1200px" />
+  <!-- Tablet — call getNodeXml(ZfVAdh8AH) for children -->
+  <Tablet nodeId="ZfVAdh8AH" backgroundColor="white" width="810px" />
+  <!-- Phone — call getNodeXml(BqowaoT_N) for children -->
+  <Phone nodeId="BqowaoT_N" backgroundColor="white" width="390px" />
+</BlogSlugPage>

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma__get_design_context",
+      "Bash(npm install:*)",
+      "Skill(update-config)",
+      "Read(//Users/jamiefitch/**)",
+      "Bash(ls ~/.claude/*.json)",
+      "Bash(claude mcp:*)",
+      "mcp__framer__getProjectXml",
+      "mcp__framer__getNodeXml",
+      "Bash(~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/tsc --noEmit)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

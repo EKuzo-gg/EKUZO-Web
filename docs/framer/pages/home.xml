@@ -1,0 +1,68 @@
+<Page path="/" nodeId="augiA20Il">
+<DesktopLarge nodeId="WQLkyLRf1" position="absolute" width="1920px" height="fit-content" top="0px" left="0px" backgroundColor="white" overflow="clip" layout="stack" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+  <Hero nodeId="sOeEtrhGI" width="1fr" height="fit-content" backgroundColor="/Red/Red" borderRadius="0px" overflow="hidden" layout="stack" padding="160px 0px 400px 0px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+    <Bird nodeId="bne7cuWTN" position="absolute" width="332px" height="300px" centerX="50%" centerY="85%" backgroundImage="https://framerusercontent.com/images/mTCs0FtqtFL4rBKT9vJmNrspxaQ.png" zIndex="5" />
+    <Stack nodeId="E0ByAwQUv" width="1fr" height="fit-content" overflow="clip" layout="stack" gap="40px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+      <LearnPlay nodeId="lIINckPin" width="1fr" height="fit-content" inlineTextStyle="/Display/Heading 1" zIndex="1">Every gamerdeserves a team</LearnPlay>
+    </Stack>
+    <Image nodeId="SkS2uMO3b" position="absolute" height="884px" right="0px" left="0px" centerY="59%" backgroundImage="https://framerusercontent.com/images/3pfk2nKVyde0gNwudyObxSp65Qs.png" zIndex="2" />
+    <White2 nodeId="UyJFjb6Rs" position="absolute" height="300px" right="0px" left="0px" centerY="102%" componentId="cllBPIiNd" variant="dhGhJLVAy" />
+  </Hero>
+  <Frame45 nodeId="lIH5pNWHA" width="1fr" height="fit-content" backgroundColor="rgba(239, 238, 237, 1)" borderRadius="0px" overflow="hidden" layout="stack" padding="188px 104px 188px 104px" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+    <GrowthThroughPlay nodeId="cM2iMropC" width="1fr" height="fit-content" maxWidth="1232px" overflow="visible" layout="stack" gap="108px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+      <Stack nodeId="YIw03gbmJ" width="1fr" height="fit-content" overflow="clip" layout="stack" padding="0px 0px 8px 0px" stackDirection="horizontal" stackDistribution="start" stackAlignment="center">
+        <Text nodeId="gRK_EVrpS" width="fit-content" height="fit-content" maxWidth="632px" inlineTextStyle="/Display/Heading 4">Growth through play</Text>
+      </Stack>
+      <Stack nodeId="FpATMBk3f" width="1fr" height="fit-content" overflow="visible" layout="stack" gap="90px" stackDirection="horizontal" stackDistribution="center" stackAlignment="center">
+        <Illustration nodeId="cLj8Z0JR4" width="1fr" height="fit-content" overflow="visible" layout="stack" gap="26px" stackDirection="horizontal" stackDistribution="center" stackAlignment="center">
+          <Image nodeId="Uax_yM79m" width="1fr" height="fit-image" backgroundImage="https://framerusercontent.com/images/2Ams8p5lSZiYc2Fh969Nbt2T90w.png" overflow="visible" />
+        </Illustration>
+        <Stack nodeId="GWHNnbDBb" width="1fr" height="fit-content" maxWidth="400px" overflow="clip" layout="stack" gap="24px" stackDirection="vertical" stackDistribution="center" stackAlignment="start">
+          <Frame34 nodeId="ijXWZMjcC" width="1fr" height="fit-content" borderRadius="0px" overflow="visible" layout="stack" gap="32px" stackDirection="vertical" stackDistribution="start" stackAlignment="start">
+            <List nodeId="A23I3sSFq" width="1fr" height="fit-content" componentId="sCSPy3XNh" nyDqRXyBf="Structured practice" />
+            <List nodeId="ZGHXiUnXv" width="1fr" height="fit-content" componentId="sCSPy3XNh" nyDqRXyBf="Skilled coaching" />
+            <List nodeId="aekVUf9_Y" width="1fr" height="fit-content" componentId="sCSPy3XNh" nyDqRXyBf="Real competition" />
+          </Frame34>
+        </Stack>
+      </Stack>
+    </GrowthThroughPlay>
+    <PaperCut nodeId="sLcLQfY8d" position="absolute" height="300px" right="0px" left="0px" centerY="105%" backgroundImage="https://framerusercontent.com/images/X2LXESaZcp5Pzug20TVOcINWnoM.png" zIndex="1" />
+  </Frame45>
+  <EcoSystem nodeId="Leh5ZxRJI" width="1fr" height="360vh" backgroundColor="/White/White" zIndex="1" overflow="visible" layout="stack" gap="26px" padding="188px 0px 188px 0px" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+    <Black2 nodeId="Nyl4BuS6a" position="absolute" height="300px" right="0px" left="0px" centerY="0%" componentId="VZgZ8tZvl" variant="oJ0ZoyhJs" />
+    <HomeDesktop nodeId="QcC70Fxdz" position="sticky" width="1fr" height="fit-content" top="0px" componentId="frGiDQi" />
+  </EcoSystem>
+  <HowItWorks nodeId="JqhpxNF7y" width="1fr" height="fit-content" backgroundColor="rgba(0, 0, 0, 1)" borderRadius="0px" overflow="visible" layout="stack" gap="200px" padding="188px 0px 188px 0px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+    <Black3 nodeId="ENeTL0prb" position="absolute" height="300px" right="0px" left="0px" centerY="-1%" componentId="yEFYiUimY" />
+    <Frame38 nodeId="bM3M1bgjL" width="1fr" height="fit-content" maxWidth="600px" borderRadius="0px" overflow="visible" layout="stack" gap="16px" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+      <Eyebrows nodeId="GmqkJlhKd" width="fit-content" height="fit-content" componentId="Z9OcG4X2A" variant="ScOOJpHh1" AfMUswLyn="HOW IT WORKS" />
+      <Text nodeId="E5QSLiHen" width="1fr" height="fit-content" inlineTextStyle="/Display/Heading 4">2 ways to play and learn</Text>
+      <Text nodeId="ej4E_9SpU" width="1fr" height="fit-content" inlineTextStyle="/Desktop Body/M/Regular">Students can join EKUZO from home or through school. Both formats build teamwork, coaching, and progress.</Text>
+    </Frame38>
+    <LearnPlay nodeId="fUdOcjMz3" position="absolute" width="fit-content" height="fit-content" centerX="50%" centerY="45%" zIndex="1">LEARN + PLAY</LearnPlay>
+    <Stack nodeId="vsUMhsIzd" width="1fr" height="fit-content" overflow="clip" layout="stack" gap="36px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+      <Frame87 nodeId="b8V7AvYbu" width="1fr" height="fit-content" maxWidth="1022px" borderRadius="0px" zIndex="2" overflow="visible" layout="stack" gap="32px" stackDirection="horizontal" stackDistribution="start" stackAlignment="center">
+        <Card nodeId="Ijlo7HnJg" width="1fr" height="fit-content" componentId="WSTEvGlIk" variant="ACZa5hErJ" WGylBfzde="SCHOOL" A_za6BIJ6="Students meet in person at their school (during or after school hours) with an onsite proctor. EKUZO coaches lead practice online." f05_Bft0W="Learn more about EKUZO100" xIB2J6CN_="false" />
+        <Card nodeId="an89_vNED" width="1fr" height="1fr" componentId="WSTEvGlIk" variant="ACZa5hErJ" WGylBfzde="HOME" A_za6BIJ6="Students join individually from home in a fully online format (during or after school)." f05_Bft0W="Learn more about home programs" xIB2J6CN_="false" />
+      </Frame87>
+      <Button nodeId="qNnbQqEfI" width="fit-content" height="fit-content" componentId="G_7udIwcU" variant="uoB38kCy0" sB5iVgeB8="See programs" YdIsOiXMr="/programs" />
+    </Stack>
+    <Black2 nodeId="eLNQwQB3Z" position="absolute" height="300px" right="0px" left="0px" centerY="101%" componentId="VZgZ8tZvl" variant="oJ0ZoyhJs" />
+  </HowItWorks>
+  <TestimonialCarousel nodeId="HdQhsBFqL" width="1fr" height="fit-content" borderRadius="0px" overflow="hidden" layout="stack" gap="56px" padding="144px 104px 144px 104px" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+    <Frame60 nodeId="z7_EuZCk5" width="1fr" height="fit-content" maxWidth="1022px" borderRadius="0px" overflow="visible" layout="stack" gap="72px" stackDirection="vertical" stackDistribution="start" stackAlignment="center">
+      <Text nodeId="SvoWks8CP" width="1fr" height="fit-content" inlineTextStyle="/Display/Heading 4">What families are saying</Text>
+      <Slideshow nodeId="aT_2kke5y" width="1fr" height="640px" direction="left" autoPlayControl="false" intervalControl="1.5" dragControl="false" startFrom="0" alignment="flex-start" itemAmount="3" gap="10" borderRadius="0" />
+    </Frame60>
+    <Stack nodeId="D9uHJEl6Z" width="1fr" height="fit-content" overflow="clip" layout="stack" gap="24px" stackDirection="vertical" stackDistribution="center" stackAlignment="center">
+      <Text nodeId="PM4MibMDU" width="1fr" height="fit-content" maxWidth="444px" inlineTextStyle="/Desktop Body/L/Bold">"It's structure, mentorship, and community all in one place."</Text>
+      <Text nodeId="MfGGmOG1C" width="1fr" height="fit-content" maxWidth="444px" inlineTextStyle="/Desktop Body/L/Medium">Rudy May</Text>
+      <Text nodeId="davVIZVJP" width="1fr" height="fit-content" maxWidth="444px" inlineTextStyle="/Desktop Body/M/Regular">EKUZO mom</Text>
+    </Stack>
+  </TestimonialCarousel>
+  <FooterBannerSection nodeId="a5rkKYiY1" width="1fr" height="fit-content" componentId="BNRkYbJEX" variant="QbZSddxCo" ibdR1RB7I="Enroll into a transformational program today" kylqqg5uj="true" />
+</DesktopLarge>
+<Desktop nodeId="bZJlbjsU8" position="absolute" width="1200px" height="fit-content" top="0px" left="2020px" backgroundColor="white" overflow="clip" layout="stack" stackDirection="vertical" stackDistribution="start" stackAlignment="center" />
+<Tablet nodeId="hEznlyHXe" position="absolute" width="810px" height="fit-content" top="0px" left="3320px" backgroundColor="white" overflow="clip" layout="stack" stackDirection="vertical" stackDistribution="start" stackAlignment="center" />
+<Phone nodeId="iGa5Ml5Dc" position="absolute" width="390px" height="fit-content" top="0px" left="4230px" backgroundColor="white" overflow="clip" layout="stack" stackDirection="vertical" stackDistribution="start" stackAlignment="center" />
+</Page>

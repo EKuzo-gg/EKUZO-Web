@@ -1,0 +1,231 @@
+<!-- Component nodeId: QVJuYtM47 — ProgramsSection -->
+<!-- Eyebrows: Z9OcG4X2A, variant ScOOJpHh1, text "PROGRAMS" -->
+<!-- Sticky-scroll: 3 cards (position=sticky, top=40/160/240px) inside Frame54 (position=sticky, top=80px) -->
+<!-- Card bg images: EKUZOTEAMS+ekuzo100 share zr6AJ9lUUt8OmVkt0cgXumkn4XQ.png; ekuzocamps aXGtzSjmt9EjBVWYVVpVOsu9wDw.png -->
+<!-- Variants: DesktopLarge, Desktop, Tablet, Phone -->
+
+<ProgramsSection nodeId="QVJuYtM47">
+  <DesktopLarge
+      nodeId="xZ55PUzBl"
+      position="absolute"
+      width="1920px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      overflow="visible"
+      layout="stack"
+      gap="26px"
+      padding="188px 80px 188px 80px"
+      stackDirection="horizontal"
+      stackDistribution="center"
+      stackAlignment="center"
+  >
+    <Programs
+        nodeId="GzAliWW1S"
+        width="1fr"
+        height="fit-content"
+        maxWidth="1232px"
+        zIndex="1"
+        overflow="visible"
+        layout="stack"
+        gap="80px"
+        stackDirection="vertical"
+        stackDistribution="start"
+        stackAlignment="center"
+    >
+      <!-- Eyebrow + heading -->
+      <Frame35 nodeId="NxEPkjgn_" gap="16px" stackDirection="vertical" stackAlignment="center">
+        <Eyebrows
+            nodeId="PmKKOZOhd"
+            componentId="Z9OcG4X2A"
+            variant="ScOOJpHh1"
+            AfMUswLyn="PROGRAMS"
+         />
+        <Heading
+            nodeId="EvaPIWy3T"
+            width="1fr"
+            height="fit-content"
+            inlineTextStyle="/Display/Heading 4"
+        >
+          3 programs. 1 system. 1 esport experience.
+        </Heading>
+      </Frame35>
+
+      <!-- Sticky container: position=sticky, top=80px -->
+      <Frame54
+          nodeId="nPFvYeMdU"
+          position="sticky"
+          width="1fr"
+          height="fit-content"
+          top="80px"
+          zIndex="1"
+          overflow="visible"
+          layout="stack"
+          gap="120px"
+          stackDirection="vertical"
+          stackDistribution="start"
+          stackAlignment="start"
+      >
+        <!-- Card 1: EKUZOTEAMS — sticky top=40px -->
+        <Card
+            nodeId="RkPX6e1qp"
+            position="sticky"
+            width="1fr"
+            height="fit-content"
+            top="40px"
+            backgroundImage="https://framerusercontent.com/images/zr6AJ9lUUt8OmVkt0cgXumkn4XQ.png"
+            zIndex="1"
+            overflow="visible"
+            layout="stack"
+            gap="80px"
+            padding="88px"
+            stackDirection="vertical"
+            stackDistribution="center"
+            stackAlignment="center"
+        >
+          <Frame50 nodeId="gULn8hiQa" gap="24px" stackDirection="vertical">
+            <Title nodeId="DbNFTZizT" inlineTextStyle="/Display/Heading 1">eKUzOteams</Title>
+            <!-- Stats row: gap 48px horizontal -->
+            <Frame48 nodeId="wOXj77FG2" gap="48px" stackDirection="horizontal">
+              <!-- 15 weeks -->
+              <Group16 nodeId="e3p8Jew43" gap="4px">
+                <Stat nodeId="vZozDPIyN" inlineTextStyle="/Display/Heading 5">15</Stat>
+                <Label nodeId="Qcjv9XguC" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">weeks</Label>
+              </Group16>
+              <!-- 2-3x practice weekly -->
+              <Group16 nodeId="rKoxA0Cgy" gap="4px">
+                <Stat nodeId="ujWC9nYul" inlineTextStyle="/Display/Heading 5">2-3x</Stat>
+                <Label nodeId="VhhKCiBNM" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">practice weekly</Label>
+              </Group16>
+              <!-- During or After School -->
+              <Group16 nodeId="c0PGHa7bQ" gap="4px">
+                <Stat nodeId="INVXYq0i_" inlineTextStyle="/Display/Heading 5">During or After</Stat>
+                <Label nodeId="yakpwpb4T" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">School</Label>
+              </Group16>
+            </Frame48>
+          </Frame50>
+          <Frame51 nodeId="tjhgTBTpW" gap="322px" stackDirection="horizontal" stackAlignment="end" stackDistribution="space-between">
+            <Description nodeId="z1Fss1rHw" maxWidth="389px" inlineTextStyle="/Desktop Body/L/Regular">
+              Best for: students and schools ready for ongoing growth.
+            </Description>
+            <Button
+                nodeId="ucQayXA_0"
+                componentId="G_7udIwcU"
+                variant="GiVk3uoHD"
+                sB5iVgeB8="Learn more about EKUZOTEAMS"
+                YdIsOiXMr="/ekuzo-team"
+             />
+          </Frame51>
+        </Card>
+
+        <!-- Card 2: ekuzo100 — sticky top=160px -->
+        <Card
+            nodeId="h4xHtYtpC"
+            position="sticky"
+            width="1fr"
+            height="fit-content"
+            top="160px"
+            backgroundImage="https://framerusercontent.com/images/zr6AJ9lUUt8OmVkt0cgXumkn4XQ.png"
+            zIndex="1"
+            overflow="visible"
+            layout="stack"
+            gap="80px"
+            padding="88px"
+            stackDirection="vertical"
+            stackDistribution="center"
+            stackAlignment="center"
+        >
+          <Frame50 nodeId="tSY3TFFnc" gap="24px" stackDirection="vertical">
+            <Title nodeId="PxXhlBSm9" inlineTextStyle="/Display/Heading 1">ekuzo100</Title>
+            <Frame48 nodeId="Ps_57WB0H" gap="48px" stackDirection="horizontal">
+              <!-- 4 weeks -->
+              <Group16 nodeId="qgili3hsI" gap="4px">
+                <Stat nodeId="IEuVMnTjl" inlineTextStyle="/Display/Heading 5">4</Stat>
+                <Label nodeId="IJQ5rSaDt" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">weeks</Label>
+              </Group16>
+              <!-- 2x weekly -->
+              <Group16 nodeId="GF4BrnXcd" gap="4px">
+                <Stat nodeId="KXshaEv0V" inlineTextStyle="/Display/Heading 5">2x</Stat>
+                <Label nodeId="nizkiVPjb" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">weekly</Label>
+              </Group16>
+              <!-- After school -->
+              <Group16 nodeId="ek60tVwlV" gap="4px">
+                <Stat nodeId="E3ows94hy" inlineTextStyle="/Display/Heading 5">After</Stat>
+                <Label nodeId="CMMlmoovF" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">school</Label>
+              </Group16>
+            </Frame48>
+          </Frame50>
+          <Frame51 nodeId="B9czK6o9e" gap="322px" stackDirection="horizontal" stackAlignment="end" stackDistribution="space-between">
+            <Description nodeId="FV8wB7shw" maxWidth="389px" inlineTextStyle="/Desktop Body/L/Regular">
+              Best for: first-time students or families curious about esports.
+            </Description>
+            <Button
+                nodeId="x86XGQRie"
+                componentId="G_7udIwcU"
+                variant="GiVk3uoHD"
+                sB5iVgeB8="Learn more about EKUZO100"
+                YdIsOiXMr="/ekuzo100"
+             />
+          </Frame51>
+        </Card>
+
+        <!-- Card 3: ekuzocamps — sticky top=240px, different bg image -->
+        <Card
+            nodeId="kiO_9X32K"
+            position="sticky"
+            width="1fr"
+            height="fit-content"
+            top="240px"
+            backgroundImage="https://framerusercontent.com/images/aXGtzSjmt9EjBVWYVVpVOsu9wDw.png"
+            zIndex="1"
+            overflow="visible"
+            layout="stack"
+            gap="80px"
+            padding="88px"
+            stackDirection="vertical"
+            stackDistribution="center"
+            stackAlignment="center"
+        >
+          <Frame50 nodeId="UKZSuk1zV" gap="24px" stackDirection="vertical">
+            <Title nodeId="RqVMPBOfj" inlineTextStyle="/Display/Heading 1">ekuzocamps</Title>
+            <Frame48 nodeId="qUSbDMuAu" gap="48px" stackDirection="horizontal">
+              <!-- 1 week -->
+              <Group16 nodeId="sA5tcnyC2" gap="4px">
+                <Stat nodeId="IjKWjgYSc" inlineTextStyle="/Display/Heading 5">1</Stat>
+                <Label nodeId="I_udb22kR" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">week</Label>
+              </Group16>
+              <!-- 10 teammates -->
+              <Group16 nodeId="sN2yXvRMx" gap="4px">
+                <Stat nodeId="yzdEwArQP" inlineTextStyle="/Display/Heading 5">10</Stat>
+                <Label nodeId="vh0CpKcMZ" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">teammates</Label>
+              </Group16>
+              <!-- Summer / holiday break -->
+              <Group16 nodeId="j7D_c9VpJ" gap="4px">
+                <Stat nodeId="IGLlBlRbG" inlineTextStyle="/Display/Heading 5">Summer / holiday</Stat>
+                <Label nodeId="E_rIp4F3j" opacity="0.7" inlineTextStyle="/Desktop Body/M/Bold">break</Label>
+              </Group16>
+            </Frame48>
+          </Frame50>
+          <Frame51 nodeId="nkBylnPdC" gap="322px" stackDirection="horizontal" stackAlignment="end" stackDistribution="space-between">
+            <Description nodeId="MGiOYRsjW" maxWidth="389px" inlineTextStyle="/Desktop Body/L/Regular">
+              Best for: students who want a burst of activity during breaks.
+            </Description>
+            <!-- No link prop on ekuzocamps button -->
+            <Button
+                nodeId="eBowuWeZp"
+                componentId="G_7udIwcU"
+                variant="GiVk3uoHD"
+                sB5iVgeB8="Learn more about EKUZOCAMPS"
+             />
+          </Frame51>
+        </Card>
+      </Frame54>
+    </Programs>
+  </DesktopLarge>
+  <!-- Desktop: padding 188px 40px — call getNodeXml(vLv_93yBn) for children -->
+  <Desktop nodeId="vLv_93yBn" width="1200px" />
+  <!-- Tablet: padding 188px 40px — call getNodeXml(v0AXdONOt) for children -->
+  <Tablet nodeId="v0AXdONOt" width="810px" />
+  <!-- Phone: padding 80px 16px — call getNodeXml(gR7NynqxB) for children -->
+  <Phone nodeId="gR7NynqxB" width="390px" />
+</ProgramsSection>

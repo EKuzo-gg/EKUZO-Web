@@ -1,0 +1,81 @@
+<!-- Component nodeId: wVUDECIsO — EnrollMyGamerPopup -->
+<!-- Modal: 1024px wide, white bg, border-radius 2px -->
+<!-- X close button: SVG cross (12x12 stroked path) -->
+<!-- 3 OpenModalButton links (componentId: Q7_Lcju10) -->
+
+<EnrollMyGamerPopup nodeId="wVUDECIsO">
+  <Variant1
+      nodeId="gZzXTVcMH"
+      position="absolute"
+      width="1024px"
+      height="fit-content"
+      top="0px"
+      left="0px"
+      maxWidth="1024px"
+      backgroundColor="rgba(255, 255, 255, 1)"
+      borderRadius="2px"
+      overflow="hidden"
+      layout="stack"
+      stackDirection="vertical"
+      stackDistribution="start"
+      stackAlignment="start"
+  >
+    <!-- Close button row: top-right, gap 24px, padding 16px 20px -->
+    <Frame1000007761 nodeId="E5bitQeXj" padding="16px 20px">
+      <Frame1000007760 nodeId="haJ1IssQV" width="40px" height="40px" top="16px" left="754px">
+        <Cross nodeId="UQgqCXF38" width="20px" height="20px">
+          <!-- SVG: two crossing lines, stroke #2F384C, strokeWidth 1.5, linecap round -->
+          <Vector
+              nodeId="CpPXknNFn"
+              svg='<svg width="12" height="12" viewBox="-1 -1 12 12" fill="none"><path d="M0 10L10 0M0 0L10 10" stroke="#2F384C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+           />
+        </Cross>
+      </Frame1000007760>
+    </Frame1000007761>
+
+    <!-- Content: top 72px, padding 0 20px 20px 20px, gap 24px vertical -->
+    <Frame1000007762 nodeId="PygePGECS" top="72px" padding="0px 20px 20px 20px" gap="24px">
+      <!-- Heading -->
+      <Frame1000007743 nodeId="DD9Q4kGhb" gap="8px">
+        <EnrollMyGamer
+            nodeId="UYHpfsPDy"
+            inlineTextStyle="/Display/Heading 5"
+        >
+          Enroll my gamer
+        </EnrollMyGamer>
+      </Frame1000007743>
+
+      <!-- Program selection: top 64px, gap 16px vertical -->
+      <Frame1000007748 nodeId="tNpnqDvls" top="64px" gap="16px">
+        <SelectAProgram
+            nodeId="A0d2t3lPQ"
+            inlineTextStyle="/Desktop Body/XS/Regular"
+        >
+          Select a program
+        </SelectAProgram>
+
+        <!-- 3 program buttons: horizontal stack, gap 8px, top 32px -->
+        <Frame1000007770 nodeId="y1TtIwZpv" top="32px" gap="8px" stackDirection="horizontal">
+          <OpenModalButton
+              nodeId="Nwstkys3B"
+              componentId="Q7_Lcju10"
+              tZnD_Z31c="EKUZOTEAMS – Semester-Based "
+              m7eg7QpjI="/ekuzoteams-semester-based"
+           />
+          <OpenModalButton
+              nodeId="yoGgR0FPb"
+              componentId="Q7_Lcju10"
+              tZnD_Z31c="EKUZO100 – 4-Week Intro"
+              m7eg7QpjI="/ekuzo100-4-week-intro"
+           />
+          <OpenModalButton
+              nodeId="Pb1UXlBQT"
+              componentId="Q7_Lcju10"
+              tZnD_Z31c="EKUZOCamps – Seasonal"
+              m7eg7QpjI="/ekuzocamps-seasonal"
+           />
+        </Frame1000007770>
+      </Frame1000007748>
+    </Frame1000007762>
+  </Variant1>
+</EnrollMyGamerPopup>

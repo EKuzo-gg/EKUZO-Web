@@ -1,0 +1,934 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">EKUZO Camp '24 | League of Legends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" rel="stylesheet" vid="7">
+    <style vid="8">
+        
+
+        :root {
+            --bg-dark: #0F0F0F;
+            --bg-purple: #3B0A66;
+            --bg-purple-light: #5E16A0;
+            --bg-beige: #F2E9DE;
+            --bg-white: #F8F9FA;
+            
+            --neon-lime: #D4FF00;
+            --neon-pink: #FF00E5;
+            --accent-orange: #FF5722;
+            --text-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+            
+            --font-display: 'Teko', sans-serif;
+            --font-ui: 'Rajdhani', sans-serif;
+            
+            --border-thick: 4px solid var(--text-dark);
+            --border-thin: 1px solid rgba(26, 26, 26, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-ui);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 0.85;
+            margin: 0;
+        }
+
+        .ui-text {
+            font-family: var(--font-ui);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .textured-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.05;
+            pointer-events: none;
+            background-image: radial-gradient(var(--text-light) 2px, transparent 2px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .btn-hype {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--neon-lime);
+            color: var(--text-dark);
+            font-family: var(--font-display);
+            font-size: 2rem;
+            padding: 0.5rem 2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: var(--border-thick);
+            position: relative;
+            transform: skew(-10deg);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px var(--text-dark);
+        }
+
+        .btn-hype span {
+            transform: skew(10deg);
+            margin-top: 5px; 
+        }
+
+        .btn-hype:hover {
+            transform: skew(-10deg) translate(2px, 2px);
+            box-shadow: 4px 4px 0px var(--text-dark);
+            background: var(--text-light);
+        }
+
+        
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            background: rgba(15, 15, 15, 0.95);
+            border-bottom: 2px solid var(--bg-purple-light);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 20px; height: 20px;
+            background: var(--neon-lime);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-ui);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--neon-lime); }
+
+        
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-purple), var(--bg-dark));
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 60px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 4px,
+                rgba(255,255,255,0.03) 4px,
+                rgba(255,255,255,0.03) 8px
+            );
+            pointer-events: none;
+        }
+
+        .hero-rays {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 150vw; height: 150vw;
+            background: conic-gradient(from 0deg, transparent 0deg 15deg, rgba(212, 255, 0, 0.05) 15deg 30deg, transparent 30deg 45deg, rgba(212, 255, 0, 0.05) 45deg 60deg, transparent 60deg 75deg, rgba(212, 255, 0, 0.05) 75deg 90deg, transparent 90deg 105deg, rgba(212, 255, 0, 0.05) 105deg 120deg, transparent 120deg 135deg, rgba(212, 255, 0, 0.05) 135deg 150deg, transparent 150deg 165deg, rgba(212, 255, 0, 0.05) 165deg 180deg, transparent 180deg 195deg, rgba(212, 255, 0, 0.05) 195deg 210deg, transparent 210deg 225deg, rgba(212, 255, 0, 0.05) 225deg 240deg, transparent 240deg 255deg, rgba(212, 255, 0, 0.05) 255deg 270deg, transparent 270deg 285deg, rgba(212, 255, 0, 0.05) 285deg 300deg, transparent 300deg 315deg, rgba(212, 255, 0, 0.05) 315deg 330deg, transparent 330deg 345deg, rgba(212, 255, 0, 0.05) 345deg 360deg);
+            transform: translate(-50%, -50%);
+            animation: rotateRays 60s linear infinite;
+        }
+
+        @keyframes rotateRays {
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-meta-left, .hero-meta-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .meta-block {
+            border-left: 3px solid var(--neon-lime);
+            padding-left: 1rem;
+        }
+
+        .meta-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.2rem;
+        }
+
+        .meta-value {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .hero-center {
+            text-align: center;
+            position: relative;
+        }
+
+        .game-badge {
+            display: inline-block;
+            background: var(--text-dark);
+            color: var(--neon-lime);
+            padding: 0.2rem 1rem;
+            font-family: var(--font-ui);
+            font-weight: 700;
+            border: 1px solid var(--neon-lime);
+            margin-bottom: 1rem;
+            transform: skew(-10deg);
+        }
+
+        .hero-title-group {
+            position: relative;
+            transform: skew(-5deg);
+        }
+
+        .hero-title {
+            font-size: clamp(6rem, 12vw, 12rem);
+            color: var(--text-light);
+            text-shadow: 
+                4px 4px 0px var(--bg-dark),
+                8px 8px 0px var(--bg-purple-light),
+                12px 12px 0px var(--neon-pink);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(3rem, 6vw, 6rem);
+            color: var(--neon-lime);
+            margin-top: -1.5rem;
+            text-shadow: 3px 3px 0px var(--bg-dark);
+            -webkit-text-stroke: 1px var(--bg-dark);
+        }
+
+        .floating-char {
+            position: absolute;
+            width: 400px;
+            height: 500px;
+            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            mix-blend-mode: luminosity;
+            opacity: 0.4;
+            z-index: -1;
+            filter: contrast(1.5) brightness(0.8);
+        }
+
+        .char-left { top: 10%; left: -10%; transform: rotate(-5deg); }
+        .char-right { bottom: -10%; right: -10%; transform: rotate(5deg); }
+
+
+        
+        .neon-band {
+            background: var(--neon-lime);
+            padding: 2rem 0;
+            border-top: var(--border-thick);
+            border-bottom: var(--border-thick);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrap {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+        }
+
+        .ticker-item {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            line-height: 1;
+        }
+
+        .ticker-item::after {
+            content: '';
+            display: inline-block;
+            width: 30px; height: 30px;
+            background: var(--text-dark);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        
+        .logistics {
+            background: var(--bg-beige);
+            color: var(--text-dark);
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .logistics .textured-bg {
+            background-image: radial-gradient(rgba(0,0,0,0.1) 2px, transparent 2px);
+            opacity: 1;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header::before {
+            content: '//';
+            color: var(--accent-orange);
+            margin-right: 1rem;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border: var(--border-thick);
+            background: var(--bg-white);
+            position: relative;
+            z-index: 10;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .logic-card {
+            padding: 3rem 2rem;
+            border-right: var(--border-thin);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logic-card:last-child { border-right: none; }
+
+        .logic-icon {
+            width: 40px; height: 40px;
+            background: var(--text-dark);
+            margin-bottom: 2rem;
+            clip-path: polygon(20% 0%, 100% 0, 100% 80%, 80% 100%, 0 100%, 0% 20%);
+        }
+
+        .logic-title {
+            font-size: 1.2rem;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .logic-data {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 0.9;
+        }
+
+        
+        .curriculum {
+            background: var(--bg-dark);
+            padding: 8rem 0;
+            border-top: 10px solid var(--accent-orange);
+        }
+
+        .curr-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .curr-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 2fr;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .curr-row:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--bg-purple-light);
+            transform: translateX(10px);
+        }
+
+        .curr-row::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--neon-lime);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+        .curr-row:hover::before { transform: scaleY(1); }
+
+        .curr-num {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .curr-row:hover .curr-num { color: var(--neon-lime); }
+
+        .curr-title {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .curr-title span { color: var(--accent-orange); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .curr-title h3 { font-family: var(--font-display); font-size: 2.5rem; letter-spacing: 1px; }
+
+        .curr-desc {
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            text-transform: none;
+            font-weight: 500;
+        }
+
+        
+        .roster {
+            background: var(--bg-purple);
+            padding: 8rem 0;
+            position: relative;
+        }
+        .roster::after {
+            content:''; position:absolute; top:0; left:0; right:0; height: 100px;
+            background: linear-gradient(to bottom, var(--bg-dark), transparent);
+        }
+
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .coach-card {
+            background: var(--bg-dark);
+            border: 2px solid var(--neon-pink);
+            position: relative;
+            padding: 2rem;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+        }
+
+        .coach-img {
+            width: 100%;
+            height: 250px;
+            background-color: #333;
+            background-image: url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=800&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center top;
+            filter: grayscale(100%) contrast(1.2);
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--neon-lime);
+        }
+
+        .coach-card:nth-child(2) .coach-img { background-image: url('https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop'); }
+        .coach-card:nth-child(3) .coach-img { background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop'); }
+
+        .coach-card:hover .coach-img { filter: grayscale(0%); }
+
+        .coach-meta { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .coach-role { color: var(--neon-lime); font-size: 0.9rem; }
+        .coach-rank { color: var(--text-light); opacity: 0.5; font-size: 0.9rem; }
+        .coach-name { font-family: var(--font-display); font-size: 3rem; line-height: 1; }
+
+        
+        .trust {
+            background: var(--bg-white);
+            color: var(--text-dark);
+            padding: 8rem 0;
+            border-bottom: var(--border-thick);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .trust-box {
+            border: var(--border-thin);
+            padding: 3rem;
+            position: relative;
+            background: #fff;
+        }
+        .trust-box::before {
+            content:''; position:absolute; top:-10px; left:-10px; width:40px; height:40px;
+            border-top: 4px solid var(--bg-purple); border-left: 4px solid var(--bg-purple);
+        }
+
+        .quote-mark { font-family: var(--font-display); font-size: 6rem; color: var(--bg-beige); position: absolute; top: 1rem; left: 1rem; line-height: 1;}
+        
+        .trust-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-transform: none;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2rem;
+        }
+
+        .trust-author { font-weight: 700; color: var(--bg-purple); }
+
+        
+        .registration {
+            background: var(--bg-beige);
+            padding: 8rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ticket {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            background: var(--bg-white);
+            border: var(--border-thick);
+            box-shadow: 20px 20px 0px var(--neon-lime);
+            position: relative;
+        }
+
+        .ticket-main {
+            flex: 3;
+            padding: 4rem;
+            border-right: 4px dashed var(--text-dark);
+            position: relative;
+        }
+
+        .ticket-stub {
+            flex: 1;
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ticket-price {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--neon-lime);
+            margin-bottom: 1rem;
+        }
+
+        .barcode {
+            width: 100%; height: 60px;
+            background: repeating-linear-gradient(
+                to right,
+                var(--text-light),
+                var(--text-light) 2px,
+                transparent 2px,
+                transparent 6px,
+                var(--text-light) 6px,
+                var(--text-light) 10px,
+                transparent 10px,
+                transparent 12px
+            );
+            margin-top: 2rem;
+            opacity: 0.5;
+        }
+
+        
+        footer {
+            background: var(--bg-dark);
+            padding: 2rem 5vw;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .sponsor-block {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .sponsor-label { margin-right: 1rem; color: var(--text-light); }
+        .s-logo { width: 80px; height: 20px; background: rgba(255,255,255,0.1); border-radius: 2px;}
+
+        
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-meta-left, .hero-meta-right { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+            .logistics-grid { grid-template-columns: repeat(2, 1fr); }
+            .logic-card { border-bottom: var(--border-thin); }
+            .logic-card:nth-child(even) { border-right: none; }
+            .curr-row { grid-template-columns: 80px 1fr; }
+            .curr-desc { grid-column: 1 / -1; padding-top: 0; }
+            .roster-grid { grid-template-columns: 1fr; max-width: 500px; margin: 4rem auto 0; }
+            .trust-grid { grid-template-columns: 1fr; }
+            .ticket { flex-direction: column; }
+            .ticket-main { border-right: none; border-bottom: 4px dashed var(--text-dark); }
+        }
+
+        @media (max-width: 600px) {
+            .logistics-grid { grid-template-columns: 1fr; }
+            .logic-card { border-right: none; }
+            .ticker-item { font-size: 2.5rem; }
+            header { justify-content: center; }
+            .nav-links { display: none; }
+            .sponsor-block { display: none; }
+        }
+
+    </style>
+</head>
+<body vid="9">
+
+    <header vid="10">
+        <a href="#" class="logo" vid="11">EKUZO<span vid="12">.gg</span></a>
+        <nav class="nav-links" vid="13">
+            <a href="#program" vid="14">Program</a>
+            <a href="#curriculum" vid="15">Curriculum</a>
+            <a href="#coaches" vid="16">Coaches</a>
+            <a href="#parents" vid="17">For Parents</a>
+        </nav>
+    </header>
+
+    <section class="hero" vid="18">
+        <div class="hero-rays" vid="19"></div>
+        <div class="floating-char char-left" vid="20"></div>
+        <div class="floating-char char-right" vid="21"></div>
+        
+        <div class="container hero-grid" vid="22">
+            
+            <div class="hero-meta-left ui-text" vid="23">
+                <div class="meta-block" vid="24">
+                    <div class="meta-label" vid="25">FORMAT //</div>
+                    <div class="meta-value" vid="26">100% VIRTUAL</div>
+                </div>
+                <div class="meta-block" vid="27">
+                    <div class="meta-label" vid="28">GAME //</div>
+                    <div class="meta-value" vid="29">LEAGUE OF LEGENDS</div>
+                </div>
+            </div>
+
+            <div class="hero-center" vid="30">
+                <div class="game-badge ui-text" vid="31">SUMMER SPLIT 2024</div>
+                <div class="hero-title-group" vid="32">
+                    <h1 class="display-text hero-title" vid="33">EKUZO</h1>
+                    <h2 class="display-text hero-subtitle" vid="34">CAMP</h2>
+                </div>
+            </div>
+
+            <div class="hero-meta-right ui-text" vid="35">
+                <div class="meta-block" vid="36">
+                    <div class="meta-label" vid="37">SCHEDULE //</div>
+                    <div class="meta-value" vid="38">MON - FRI</div>
+                </div>
+                <div class="meta-block" vid="39">
+                    <div class="meta-label" vid="40">TIMEZONE //</div>
+                    <div class="meta-value" vid="41">1PM - 4PM EST</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <div class="neon-band" vid="42">
+        <div class="ticker-wrap" vid="43">
+            <div class="ticker-item" vid="44">
+                BUILD A SQUAD. KEEP THE SQUAD.
+            </div>
+            <div class="ticker-item" vid="45">
+                TAKE YOUR TEAM WITH YOU
+            </div>
+             <div class="ticker-item" vid="46">
+                BUILD A SQUAD. KEEP THE SQUAD.
+            </div>
+            <div class="ticker-item" vid="47">
+                TAKE YOUR TEAM WITH YOU
+            </div>
+        </div>
+    </div>
+
+    <section id="program" class="logistics" vid="48">
+        <div class="textured-bg" vid="49"></div>
+        <div class="container" vid="50">
+            <h2 class="display-text section-header" style="font-size: 4rem;" vid="51">LOGISTICS <span style="color:var(--accent-orange)" vid="52">//</span> SYSTEM INIT</h2>
+            
+            <div class="logistics-grid" vid="53">
+                <div class="logic-card" vid="54">
+                    <div class="logic-icon" vid="55"></div>
+                    <div class="ui-text logic-title" vid="56">RATIO</div>
+                    <div class="logic-data" vid="57">1 : 5</div>
+                    <div class="ui-text meta-label" style="color: #666; margin-top:1rem;" vid="58">COACH TO STUDENT</div>
+                </div>
+                <div class="logic-card" vid="59">
+                    <div class="logic-icon" style="clip-path: circle(50% at 50% 50%);" vid="60"></div>
+                    <div class="ui-text logic-title" vid="61">DURATION</div>
+                    <div class="logic-data" vid="62">5 DAYS</div>
+                    <div class="ui-text meta-label" style="color: #666; margin-top:1rem;" vid="63">15 HOURS TOTAL</div>
+                </div>
+                <div class="logic-card" vid="64">
+                    <div class="logic-icon" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);" vid="65"></div>
+                    <div class="ui-text logic-title" vid="66">DELIVERY</div>
+                    <div class="logic-data" vid="67">ONLINE</div>
+                    <div class="ui-text meta-label" style="color: #666; margin-top:1rem;" vid="68">DISCORD VOIP SECURE</div>
+                </div>
+                <div class="logic-card" vid="69">
+                    <div class="logic-icon" style="clip-path: polygon(0 0, 100% 0, 100% 20%, 20% 100%, 0 100%);" vid="70"></div>
+                    <div class="ui-text logic-title" vid="71">OUTCOME</div>
+                    <div class="logic-data" vid="72">1 TEAM</div>
+                    <div class="ui-text meta-label" style="color: #666; margin-top:1rem;" vid="73">PLAY TOGETHER AFTER</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="curriculum" class="curriculum" vid="74">
+        <div class="container" vid="75">
+            <h2 class="display-text section-header" style="font-size: 4rem; color: var(--text-light);" vid="76">THE PATHWAY <span style="color:var(--neon-lime)" vid="77">//</span> CURRICULUM</h2>
+            
+            <div class="curr-container" vid="78">
+                <div class="curr-row" vid="79">
+                    <div class="curr-num" vid="80">01</div>
+                    <div class="curr-title ui-text" vid="81">
+                        <span vid="82">PHASE ONE</span>
+                        <h3 vid="83">LEARN TO PLAY</h3>
+                    </div>
+                    <div class="curr-desc" vid="84">
+                        Master the fundamentals. Map awareness, wave management, vision control, and economy. We break down the complex mechanics of League of Legends into digestible, actionable drills.
+                    </div>
+                </div>
+
+                <div class="curr-row" vid="85">
+                    <div class="curr-num" vid="86">02</div>
+                    <div class="curr-title ui-text" vid="87">
+                        <span vid="88">PHASE TWO</span>
+                        <h3 vid="89">FIND YOUR ROLE</h3>
+                    </div>
+                    <div class="curr-desc" vid="90">
+                        Top, Jungle, Mid, ADC, or Support. Students test out different positions and champion pools to find their specific playstyle and where they can best contribute to a unit.
+                    </div>
+                </div>
+
+                <div class="curr-row" vid="91">
+                    <div class="curr-num" style="color: var(--neon-lime);" vid="92">03</div>
+                    <div class="curr-title ui-text" vid="93">
+                        <span style="color: var(--neon-lime);" vid="94">PHASE THREE — CORE DIFFERENCE</span>
+                        <h3 vid="95">TEAM PLAY &amp; COMMS</h3>
+                    </div>
+                    <div class="curr-desc" style="color: var(--text-light);" vid="96">
+                        This is where solo-queue ends. Students are locked into their 5-player squad. Focus shifts entirely to shot-calling, objective trading, drafting synergy, and positive communication under pressure.
+                    </div>
+                </div>
+
+                <div class="curr-row" vid="97">
+                    <div class="curr-num" vid="98">04</div>
+                    <div class="curr-title ui-text" vid="99">
+                        <span vid="100">PHASE FOUR</span>
+                        <h3 vid="101">REAL LIFE SKILLS</h3>
+                    </div>
+                    <div class="curr-desc" vid="102">
+                        Translating in-game leadership to the real world. Emotional regulation after a loss, giving constructive feedback, screen-time management, and understanding healthy competitive mindsets.
+                    </div>
+                </div>
+
+                <div class="curr-row" vid="103">
+                    <div class="curr-num" vid="104">05</div>
+                    <div class="curr-title ui-text" vid="105">
+                        <span vid="106">PHASE FIVE</span>
+                        <h3 vid="107">COMPETE</h3>
+                    </div>
+                    <div class="curr-desc" vid="108">
+                        Friday Tournament Day. The squad puts it all together in a structured, casted bracket against other camp teams. They leave the camp with a Discord group, a team name, and teammates for life.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaches" class="roster" vid="109">
+        <div class="textured-bg" style="opacity: 0.1; background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 10px);" vid="110"></div>
+        <div class="container" vid="111">
+            <h2 class="display-text section-header" style="font-size: 4rem; color: var(--text-light);" vid="112">VERIFIED ROSTER <span style="color:var(--neon-pink)" vid="113">//</span> COACHES</h2>
+            
+            <div class="roster-grid" vid="114">
+                <div class="coach-card" vid="115">
+                    <div class="coach-img" vid="116"></div>
+                    <div class="ui-text coach-meta" vid="117">
+                        <span class="coach-role" vid="118">ROLE: JUNGLE</span>
+                        <span class="coach-rank" vid="119">RANK: MASTER</span>
+                    </div>
+                    <h4 class="display-text coach-name" vid="120">"NEXUS"</h4>
+                    <p class="ui-text" style="color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 1rem; text-transform: none;" vid="121">Collegiate Esports Captain. Specializes in macro-strategy and positive tilt-management.</p>
+                </div>
+
+                <div class="coach-card" vid="122">
+                    <div class="coach-img" vid="123"></div>
+                    <div class="ui-text coach-meta" vid="124">
+                        <span class="coach-role" vid="125">ROLE: MID/ADC</span>
+                        <span class="coach-rank" vid="126">RANK: GRANDMASTER</span>
+                    </div>
+                    <h4 class="display-text coach-name" vid="127">"ECHO"</h4>
+                    <p class="ui-text" style="color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 1rem; text-transform: none;" vid="128">Former Semi-Pro. Focuses on mechanical precision, lane priority, and effective shot-calling.</p>
+                </div>
+
+                <div class="coach-card" vid="129">
+                    <div class="coach-img" vid="130"></div>
+                    <div class="ui-text coach-meta" vid="131">
+                        <span class="coach-role" vid="132">ROLE: SUPPORT</span>
+                        <span class="coach-rank" vid="133">RANK: DIAMOND I</span>
+                    </div>
+                    <h4 class="display-text coach-name" vid="134">"WARDEN"</h4>
+                    <p class="ui-text" style="color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 1rem; text-transform: none;" vid="135">Youth development specialist. Builds team cohesion, vision control, and communication protocols.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="parents" class="trust" vid="136">
+        <div class="container" vid="137">
+            <h2 class="display-text section-header" style="font-size: 4rem; color: var(--bg-purple);" vid="138">PARENT BRIEFING <span style="color:var(--text-dark)" vid="139">//</span> SECURE</h2>
+            
+            <div class="trust-grid" vid="140">
+                <div class="trust-box" vid="141">
+                    <div class="quote-mark" vid="142">"</div>
+                    <p class="trust-text" vid="143">My son has played games for years, but this is the first time he's learned how to actually communicate with a team, handle frustration, and take leadership. The fact that he still plays with his camp squad every weekend is incredible.</p>
+                    <div class="ui-text trust-author" vid="144">SARAH T. — PARENT</div>
+                </div>
+                
+                <div class="trust-box" vid="145">
+                    <div class="quote-mark" vid="146">"</div>
+                    <p class="trust-text" vid="147">EKUZO treats esports with the same structure as a traditional sports camp. Background-checked coaches, a strict code of conduct, and a curriculum that actually develops life skills alongside gaming mechanics. Highly recommended.</p>
+                    <div class="ui-text trust-author" vid="148">DAVID L. — PARENT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="registration" vid="149">
+        <div class="container" style="display: flex; justify-content: center;" vid="150">
+            
+            <div class="ticket" vid="151">
+                <div class="ticket-main" vid="152">
+                    <div class="ui-text meta-label" style="color: var(--accent-orange); margin-bottom: 1rem;" vid="153">[ ADMIT ONE PLAYER ]</div>
+                    <h2 class="display-text" style="font-size: 5rem; color: var(--bg-purple); margin-bottom: 2rem;" vid="154">SECURE YOUR SLOT</h2>
+                    
+                    <div style="display: flex; gap: 2rem; margin-bottom: 3rem;" vid="155">
+                        <div vid="156">
+                            <div class="ui-text meta-label" style="color: #666;" vid="157">START DATE</div>
+                            <div class="ui-text" style="font-size: 1.5rem; color: var(--text-dark);" vid="158">JULY 15, 2024</div>
+                        </div>
+                        <div vid="159">
+                            <div class="ui-text meta-label" style="color: #666;" vid="160">PLATFORM</div>
+                            <div class="ui-text" style="font-size: 1.5rem; color: var(--text-dark);" vid="161">PC / DISCORD</div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-hype" vid="162">
+                        <span vid="163">REGISTER NOW</span>
+                    </a>
+                </div>
+                
+                <div class="ticket-stub" vid="164">
+                    <div class="ui-text meta-label" vid="165">CAMP TUITION</div>
+                    <div class="ticket-price" vid="166">$249</div>
+                    <div class="ui-text" style="font-size: 0.8rem; color: rgba(255,255,255,0.6);" vid="167">INCLUDES 15 HRS COACHING</div>
+                    <div class="ui-text" style="font-size: 0.8rem; color: rgba(255,255,255,0.6);" vid="168">+ SECURE DISCORD ACCESS</div>
+                    <div class="barcode" vid="169"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer vid="170">
+        <div class="ui-text" vid="171">© 2024 EKUZO.GG // ALL RIGHTS RESERVED</div>
+        <div class="sponsor-block" vid="172">
+            <span class="ui-text sponsor-label" vid="173">PARTNERS</span>
+            <div class="s-logo" vid="174"></div>
+            <div class="s-logo" vid="175"></div>
+            <div class="s-logo" vid="176"></div>
+        </div>
+    </footer>
+
+
+</body></html>
