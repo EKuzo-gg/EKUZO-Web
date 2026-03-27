@@ -205,6 +205,39 @@ git push
 
 ---
 
+## Your first task: Homepage Visual QA
+
+Once the site is running, here's your first job.
+
+**1. Open these side by side in Chrome:**
+- **http://localhost:3001** (our Next.js build)
+- **https://ekuzo.gg** (the live Framer site — this is the target)
+
+**2. Go section by section, top to bottom.** For every difference you see — spacing, font size, color, alignment, image positioning, torn paper transitions, anything — write it down. Use Chrome DevTools (right-click → Inspect) to check exact pixel values, colors, and font sizes on the Framer site.
+
+**3. Build a full list** of every difference. Be specific. Example:
+- "Hero heading is 72px on Framer but 64px on ours"
+- "Growth section has 80px top padding on Framer, ours has 40px"
+- "Torn paper between hero and growth section is missing"
+
+**4. Paste the entire list into Claude** and ask it to fix everything. It will work through all the issues in one pass.
+
+**5. Review the result.** Check each fix against the Framer site. Anything still off, note it and paste that shorter list back into Claude for a second pass.
+
+**6. After the homepage is right, ask Claude to create `QA-PATTERNS.md`.** This should capture every recurring fix as a concrete rule with specific values. Example:
+- "Section padding: 80px top/bottom on desktop, 48px on mobile"
+- "Heading font: font-display font-black uppercase, use clamp() not fixed sizes"
+- "Torn paper: use PNG not SVG, translate-y-[55%], z-20, parent needs overflow-clip"
+
+**7. Then move to the next page.** Tell Claude:
+> "Read QA-PATTERNS.md. Apply every pattern to the [programs/schools/parents/etc] page. Compare against ekuzo.gg/[page] and fix anything that matches the same issues we fixed on the homepage."
+
+**8. After each page, review and add any new patterns** to QA-PATTERNS.md. Each pass gets tighter and faster.
+
+The goal: by the time you've gone through all pages, the QA-PATTERNS.md file is a complete design spec and every page matches the Framer reference.
+
+---
+
 ## If something breaks
 
 - **"command not found"** — you might be in the wrong folder. Run `cd ~/Desktop/Projects/EKUZO-Web` and try again
