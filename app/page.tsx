@@ -2,10 +2,10 @@ import Image from "next/image";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
-import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import FooterBanner from "@/components/sections/FooterBanner";
 import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
+import ParallaxBird from "@/components/ui/ParallaxBird";
 
 const growthItems = [
   { label: "Structured practice", icon: "/icons/swords-white.svg" },
@@ -53,24 +53,10 @@ export default function HomePage() {
           </h1>
         </div>
 
-        {/* Bird — absolute, centerX 50%, centerY 85% (bottom 15%) */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none"
-          style={{ bottom: "15%", width: "332px", height: "300px" }}
-          aria-hidden="true"
-        >
-          <Image
-            src="/images/home-hero-bird.png"
-            alt=""
-            fill
-            className="object-contain"
-            sizes="332px"
-          />
-        </div>
+        {/* Bird — parallax scroll effect */}
+        <ParallaxBird />
       </section>
 
-      {/* Torn paper: red → grey */}
-      <TornPaperDivider color="red" />
 
       {/* ─────────────────────────────────────────────────────────────
           2. GROWTH THROUGH PLAY
@@ -86,17 +72,37 @@ export default function HomePage() {
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
+        {/* Torn paper: hero (red) → growth (grey) — white paper with dual torn edges */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/paper-white-1.svg"
+          alt=""
+          className="absolute top-0 left-0 w-full z-20 pointer-events-none select-none"
+          style={{ transform: "translateY(-55%)", filter: "brightness(0) invert(1)" }}
+          aria-hidden="true"
+        />
+
+        {/* Torn paper: growth (grey) → ecosystem (white) — grey paper at bottom */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/paper-grey-bottom-2.svg"
+          alt=""
+          className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
+          style={{ transform: "translateY(55%)" }}
+          aria-hidden="true"
+        />
+
         <div className="max-w-[1232px] mx-auto">
           {/* H4 heading — responsive */}
           <h2
-            className="font-body font-bold text-black leading-[1] mb-16"
+            className="font-body font-bold text-black leading-[1] mb-[108px]"
             style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}
           >
             Growth through play
           </h2>
 
           {/* Two columns: image left, list right */}
-          <div className="flex flex-col md:flex-row gap-16 md:gap-[80px] items-start">
+          <div className="flex flex-col md:flex-row gap-16 md:gap-[90px] items-start">
             {/* Left: illustration */}
             <div className="flex-1 relative overflow-hidden" style={{ borderRadius: "2px" }}>
               <Image
@@ -118,7 +124,7 @@ export default function HomePage() {
                     aria-hidden="true"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={icon} alt="" className="size-8" />
+                    <img src={icon} alt="" className="size-8" style={{ filter: "brightness(0) invert(1)" }} />
                   </div>
                   <p
                     className="font-body font-bold text-black leading-[1.357]"
@@ -133,29 +139,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Torn paper: grey → white (ecosystem) */}
-      <TornPaperDivider color="black" />
 
       {/* ─────────────────────────────────────────────────────────────
           3. ECOSYSTEM ANIMATION
           White bg, 360vh, sticky scroll.
           Container-relative scroll progress (0-12% delay, 12-85% animation, 85-100% hold)
       ───────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-clip" style={{ height: "360vh" }}>
+      <section className="relative bg-white overflow-visible" style={{ height: "360vh" }}>
+        {/* Torn paper: growth (grey) → ecosystem (white) — white paper at top */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/paper-white-top-1.svg"
+          alt=""
+          className="absolute top-0 left-0 w-full z-20 pointer-events-none select-none"
+          style={{ transform: "translateY(-55%)" }}
+          aria-hidden="true"
+        />
+
         <div className="sticky top-0 h-screen">
           <EcosystemAnimation />
         </div>
+
+        {/* Torn paper: ecosystem (white) → how it works (black) — black paper at bottom */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/paper-black-top-2.svg"
+          alt=""
+          className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
+          style={{ transform: "translateY(2px)" }}
+          aria-hidden="true"
+        />
       </section>
 
-      {/* Torn paper: white (ecosystem) → black (how it works) */}
-      <TornPaperDivider color="black" />
 
       {/* ─────────────────────────────────────────────────────────────
           4. HOW IT WORKS — 2 WAYS TO PLAY AND LEARN
           Black bg, watermark, SCHOOL + HOME cards, "See programs" CTA
       ───────────────────────────────────────────────────────────── */}
       <section
-        className="bg-black relative overflow-hidden"
+        className="bg-black relative overflow-visible"
         style={{
           paddingTop: "188px",
           paddingBottom: "188px",
@@ -165,8 +187,8 @@ export default function HomePage() {
       >
         {/* Watermark */}
         <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
-          style={{ zIndex: 1 }}
+          className="absolute inset-x-0 pointer-events-none select-none overflow-hidden flex justify-center"
+          style={{ zIndex: 1, top: "45%", transform: "translateY(-50%)" }}
           aria-hidden="true"
         >
           <span
@@ -179,7 +201,7 @@ export default function HomePage() {
 
         <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2, gap: "clamp(80px, 14vw, 200px)" }}>
           {/* Header block — centered, maxWidth 600px */}
-          <div className="flex flex-col items-center text-center gap-4 max-w-[600px]">
+          <div className="flex flex-col items-center text-center gap-4 max-w-[800px]">
             <p
               className="font-body font-medium text-red uppercase"
               style={{ fontSize: "16px", letterSpacing: "10px" }}
@@ -218,7 +240,7 @@ export default function HomePage() {
                   Students meet in person at their school (during or after school hours) with an onsite proctor. EKUZO coaches lead practice online.
                 </p>
                 <Button variant="red-outlined" href="/schools">
-                  Learn more about schools
+                  Learn more about EKUZO100
                 </Button>
               </div>
 
@@ -247,10 +269,18 @@ export default function HomePage() {
             </Button>
           </div>
         </div>
+
+        {/* Torn paper: how it works (black) → testimonials (white) — black paper at bottom */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/paper-black-bottom-2.svg"
+          alt=""
+          className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
+          style={{ transform: "translateY(calc(100% - 2px))" }}
+          aria-hidden="true"
+        />
       </section>
 
-      {/* Torn paper: black → white (testimonials) */}
-      <TornPaperDivider color="black" />
 
       {/* ─────────────────────────────────────────────────────────────
           5. TESTIMONIALS
@@ -267,19 +297,29 @@ export default function HomePage() {
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
-        <div className="max-w-[1022px] mx-auto flex flex-col gap-14">
+        <div className="max-w-[1022px] mx-auto flex flex-col gap-[72px]">
           <h2
-            className="font-body font-bold text-black leading-[1]"
+            className="font-body font-bold text-black leading-[1] text-center"
             style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}
           >
-            What families are saying
+            What parents{" "}
+            <br />
+            are saying
           </h2>
           <TestimonialsCarousel />
 
           {/* Static featured quote — centered per Framer reference */}
           <div className="flex flex-col items-center text-center gap-6 pt-8">
+            <Image
+              src="/images/testimonial-quote-mark.png"
+              alt=""
+              width={88}
+              height={80}
+              className="mb-4"
+              aria-hidden="true"
+            />
             <p
-              className="font-body font-bold text-black leading-[1.357] max-w-[600px]"
+              className="font-body font-bold text-black leading-[1.357] max-w-[444px]"
               style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
             >
               &ldquo;It&apos;s structure, mentorship, and community all in one place.&rdquo;
