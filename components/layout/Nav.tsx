@@ -43,6 +43,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
           alt="EKUZO"
           width={170}
           height={33}
+          className="w-[110px] md:w-[170px] h-auto"
           priority
         />
       </Link>

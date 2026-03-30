@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Hero phoenix bird with a subtle parallax scroll effect.
- * Centered in the viewport, moves upward slower than the page scroll, creating depth.
+ * Positioned at centerY 85% of its parent (the hero section), matching the Framer spec.
+ * On mobile, smaller size and adjusted position.
  */
 export default function ParallaxBird() {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,12 +30,10 @@ export default function ParallaxBird() {
   return (
     <div
       ref={ref}
-      className="absolute z-10 pointer-events-none"
+      className="absolute z-10 pointer-events-none w-[180px] h-[162px] md:w-[332px] md:h-[300px]"
       style={{
         left: "50%",
-        top: "50vh",
-        width: "332px",
-        height: "300px",
+        top: "85%",
         transform: `translate(-50%, calc(-50% - ${offset}px))`,
         willChange: "transform",
       }}
@@ -45,7 +44,7 @@ export default function ParallaxBird() {
         alt=""
         fill
         className="object-contain"
-        sizes="332px"
+        sizes="(max-width: 768px) 180px, 332px"
       />
     </div>
   );

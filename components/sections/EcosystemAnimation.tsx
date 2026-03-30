@@ -13,8 +13,10 @@ const MOBILE_RIV = "/animations/ecosystem-mobile.riv";
 const STATE_MACHINE = "State Machine 1";
 const INPUT_NAME = "ScrollProgressIllo";
 
-// Rive state machine input range (empirically calibrated to match Framer pacing)
-const PROGRESS_MAX = 200;
+// Rive state machine input range — must match Framer spec:
+// Desktop: 0–1000, Mobile: 0–500
+const PROGRESS_MAX_DESKTOP = 1000;
+const PROGRESS_MAX_MOBILE = 500;
 
 // Scroll zones (as fraction of total scrollable distance through the container)
 // 0–8%: start delay (progress stays at 0)
@@ -62,16 +64,16 @@ function getContainerScrollProgress(container: HTMLElement): number {
 }
 
 /**
- * Maps raw container scroll progress (0→1) to Rive input (0→1000)
+ * Maps raw container scroll progress (0→1) to Rive input (0→progressMax)
  * with start delay and end hold zones.
  */
-function mapToRiveProgress(rawProgress: number): number {
+function mapToRiveProgress(rawProgress: number, progressMax: number): number {
   if (rawProgress <= START_FRACTION) return 0;
-  if (rawProgress >= END_FRACTION) return PROGRESS_MAX;
+  if (rawProgress >= END_FRACTION) return progressMax;
 
   const normalized =
     (rawProgress - START_FRACTION) / (END_FRACTION - START_FRACTION);
-  return normalized * PROGRESS_MAX;
+  return normalized * progressMax;
 }
 
 /**
@@ -87,9 +89,11 @@ function isContainerNearViewport(container: HTMLElement): boolean {
 function EcosystemScroll({
   rivSrc,
   artboard,
+  progressMax,
 }: {
   rivSrc: string;
   artboard: string;
+  progressMax: number;
 }) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -136,7 +140,7 @@ function EcosystemScroll({
     if (!nearViewport) return;
 
     const rawProgress = getContainerScrollProgress(container);
-    const riveProgress = mapToRiveProgress(rawProgress);
+    const riveProgress = mapToRiveProgress(rawProgress, progressMax);
 
     // Debug: update info display
     if (DEBUG) {
@@ -158,7 +162,7 @@ function EcosystemScroll({
       progressRef.current = riveProgress;
       scrollInput.value = riveProgress;
     }
-  }, [scrollInput, riveInstance]);
+  }, [scrollInput, riveInstance, progressMax]);
 
   // Attach scroll listener — always on, uses proximity check internally
   useEffect(() => {
@@ -254,7 +258,7 @@ function EcosystemScroll({
 
       if (e.key === "ArrowUp" || e.key === "ArrowRight") {
         e.preventDefault();
-        manualRef.current = Math.min(1000, manualRef.current + step);
+        manualRef.current = Math.min(progressMax, manualRef.current + step);
         scrollInput.value = manualRef.current;
         progressRef.current = manualRef.current;
         setManualOverride(manualRef.current);
@@ -293,7 +297,7 @@ function EcosystemScroll({
         >
           <div>Scroll: {(debugInfo.rawScroll * 100).toFixed(1)}%</div>
           <div>Rive input: {debugInfo.riveValue.toFixed(1)}</div>
-          <div>PROGRESS_MAX: {PROGRESS_MAX}</div>
+          <div>PROGRESS_MAX: {progressMax}</div>
           <div style={{ borderTop: "1px solid #333", marginTop: 6, paddingTop: 6 }}>
             {manualOverride !== null ? (
               <>
@@ -316,11 +320,11 @@ function EcosystemScroll({
 export default function EcosystemAnimation() {
   return (
     <>
-      <div className="hidden md:block">
-        <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" />
+      <div className="hidden md:block w-full h-full">
+        <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
       </div>
-      <div className="md:hidden">
-        <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" />
+      <div className="md:hidden w-full h-full">
+        <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
       </div>
     </>
   );

@@ -6,6 +6,71 @@
 
 ---
 
+## Aaron — March 30, 2026 (mobile responsive pass + bird position fix)
+
+**What changed:**
+
+**Bird position (components/ui/ParallaxBird.tsx):**
+- Changed from `top: 50vh` (center of viewport) to `top: 85%` (85% of hero section), matching Framer spec `centerY 85%`
+- Bird no longer overlaps the headline on initial load
+- Mobile size reduced to 180×162px (desktop stays 332×300px)
+- Parallax scroll effect preserved
+
+**Mobile: Nav logo (components/layout/Nav.tsx):**
+- Logo width set to 110px on mobile, 170px on desktop (`w-[110px] md:w-[170px]`)
+
+**Mobile: Hero section (app/page.tsx):**
+- Headline font size bumped: `clamp(4.5rem, 20vw, 256px)` — fills container on mobile
+- Horizontal padding: 40px on mobile (`px-[40px]`), 16px on desktop
+- Hero collage image constrained on mobile via responsive height clamp
+- Section top/bottom padding now responsive with clamp values
+
+**Mobile: Growth section (app/page.tsx):**
+- List items (structured practice, skilled coaching, real competition) now appear ABOVE the image on mobile using flex order swap (order-1 mobile → order-2 desktop)
+- Red circle icons reduced to 50×50px on mobile (72px on desktop)
+- Tighter gaps: 40px between sections on mobile (90px desktop), 6px between list items (8px desktop)
+- Section padding reduced on mobile with clamp values
+
+**Mobile: How It Works section (app/page.tsx):**
+- Top/bottom padding reduced to ~100px on mobile via `clamp(100px, 14vw, 188px)`
+- SCHOOL and HOME headers set to 80px on mobile: `clamp(80px, 8vw, 96px)`
+- Card padding and gaps tightened on mobile (p-8 vs p-10, gap-6 vs gap-8)
+
+**Mobile: Testimonials (components/sections/TestimonialsCarousel.tsx):**
+- Single card on mobile centered with `max-width: 340px` for desktop-like proportions
+- Pagination dots and arrows already functional for swiping through all 8 videos
+
+**Footer Banner (components/sections/FooterBanner.tsx):**
+- Swapped brush stroke placeholder with `enroll-promo-graphic.avif` (the two kids illustration)
+
+---
+
+## Aaron — March 30, 2026 (animation fixes + footer banner + video loading)
+
+**What changed:**
+
+**Rive ecosystem animation (components/sections/EcosystemAnimation.tsx):**
+- Fixed PROGRESS_MAX: was 200 (broken), now 1000 for desktop and 500 for mobile (matches Framer spec exactly)
+- Refactored EcosystemScroll to accept `progressMax` prop instead of using a single global constant
+- Both desktop and mobile variants now get their correct Rive input range
+
+**Testimonial videos (components/sections/TestimonialsCarousel.tsx + public/testimonial-videos/):**
+- Generated poster JPG images from video first frames (77–185KB each vs 13–88MB mp4s) — videos now show thumbnails instantly
+- Added `poster` attribute to all video elements pointing to `{slug}-poster.jpg`
+- Set `preload="none"` (poster handles the visual; video data loads on click)
+- Faststart-optimized all 9 MP4 files (moved moov atom from end to beginning) for faster playback start
+
+**Footer Banner (components/sections/FooterBanner.tsx):**
+- Restructured layout to match Framer: horizontal flex with heading+CTA left, decorative image right
+- Added `max-w-[1232px] mx-auto` container matching Framer's 1232px max-width
+- Heading and CTA now stack vertically with 72px gap (matching Framer)
+- Image component uses `enroll-promo-graphic.avif` (hidden on mobile)
+
+**White paper divider gap (previous session, already applied):**
+- `paper-white-1.svg` at hero→growth transition uses `width: calc(100% + 4px)` and `left: -2px` to eliminate right-edge gap caused by SVG viewBox being narrower than full width
+
+---
+
 ## Aaron — March 30, 2026 (torn paper rewrite + testimonial quote)
 
 **What changed (Torn paper system rewrite):**

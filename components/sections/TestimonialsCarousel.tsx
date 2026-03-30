@@ -32,6 +32,7 @@ export default function TestimonialsCarousel() {
 
   const maxIndex = testimonials.length - cardsVisible;
   const cardWidth = 100 / cardsVisible;
+  const isMobile = cardsVisible === 1;
 
   function handleCardClick(i: number) {
     const video = videoRefs.current[i];
@@ -60,10 +61,10 @@ export default function TestimonialsCarousel() {
 
   return (
     <div className="w-full">
-      {/* Track */}
-      <div className="overflow-hidden">
+      {/* Track — on mobile, center the single card with max-width */}
+      <div className={`overflow-hidden ${isMobile ? "flex justify-center" : ""}`}>
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className={`flex transition-transform duration-500 ease-in-out ${isMobile ? "max-w-[340px]" : ""}`}
           style={{ transform: `translateX(${-index * cardWidth}%)` }}
         >
           {testimonials.map((t, i) => (
@@ -82,6 +83,7 @@ export default function TestimonialsCarousel() {
                     videoRefs.current[i] = el;
                   }}
                   src={`/testimonial-videos/${t.slug}.mp4`}
+                  poster={`/testimonial-videos/${t.slug}-poster.jpg`}
                   className="w-full h-full object-cover"
                   playsInline
                   preload="none"
