@@ -79,13 +79,13 @@ It will show a code and open your browser. Paste the code into the browser, clic
 Run this to create a Projects folder on your Desktop:
 
 ```
-mkdir -p ~/Desktop/Projects
+mkdir -p ~/Desktop/EKUZO/Projects
 ```
 
 Then go into it:
 
 ```
-cd ~/Desktop/Projects
+cd ~/Desktop/EKUZO/Projects
 ```
 
 ---
@@ -134,7 +134,7 @@ EKUZO-Web/public/testimonial-videos/  (9 videos + text files)
 EKUZO-Web/public/animations/    (3 .riv files)
 ```
 
-You can do this in Finder — just navigate to `Desktop > Projects > EKUZO-Web > public` and drop them in.
+You can do this in Finder — just navigate to `Desktop > EKUZO > Projects > EKUZO-Web > public` and drop them in.
 
 ---
 
@@ -156,7 +156,7 @@ You should see the EKUZO site. The live Framer reference is at **https://ekuzo.g
 
 You can use Claude to help you make changes. When you start a Claude chat for this project, paste this at the beginning:
 
-> I'm working on the EKUZO web project — a Next.js site at ~/Desktop/Projects/EKUZO-Web. Read the CLAUDE.md file first for full project context. I'm Aaron, the designer — I handle front-end: visual QA, CSS, layout, component builds, and design fidelity. Jamie handles commerce and data. Check WORKLOG.md before starting any work to see what's changed recently. After finishing work, update WORKLOG.md with what you changed before I commit.
+> I'm working on the EKUZO web project — a Next.js site at ~/Desktop/EKUZO/Projects/EKUZO-Web. Read the CLAUDE.md file first for full project context. I'm Aaron, the designer — I handle front-end: visual QA, CSS, layout, component builds, and design fidelity. Jamie handles commerce and data. Check WORKLOG.md before starting any work to see what's changed recently. After finishing work, update WORKLOG.md with what you changed before I commit.
 
 ---
 
@@ -166,7 +166,7 @@ Every time you sit down to work:
 
 **1. Pull the latest changes** (in case Jamie pushed something):
 ```
-cd ~/Desktop/Projects/EKUZO-Web
+cd ~/Desktop/EKUZO/Projects/EKUZO-Web
 git pull
 ```
 
@@ -201,7 +201,7 @@ git push
 | Get latest changes | `git pull` |
 | Save and push your work | `git add .` then `git commit -m "message"` then `git push` |
 | See what files you changed | `git status` |
-| Go to the project folder | `cd ~/Desktop/Projects/EKUZO-Web` |
+| Go to the project folder | `cd ~/Desktop/EKUZO/Projects/EKUZO-Web` |
 
 ---
 
@@ -240,7 +240,7 @@ The goal: by the time you've gone through all pages, the QA-PATTERNS.md file is 
 
 ## If something breaks
 
-- **"command not found"** — you might be in the wrong folder. Run `cd ~/Desktop/Projects/EKUZO-Web` and try again
+- **"command not found"** — you might be in the wrong folder. Run `cd ~/Desktop/EKUZO/Projects/EKUZO-Web` and try again
 - **"index.lock" error** — run `rm -f .git/index.lock` then try again
 - **Merge conflict** — stop and tell Jamie. Don't force anything.
 - **The site won't start** — make sure you ran `npm install` and that you don't have another server already running on port 3001
