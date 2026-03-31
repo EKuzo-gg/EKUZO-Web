@@ -41,8 +41,9 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
         <Image
           src={isDark ? "/images/ekuzo-logo.svg" : "/images/ekuzo-logo-black.svg"}
           alt="EKUZO"
-          width={107}
-          height={21}
+          width={170}
+          height={33}
+          className="w-[110px] md:w-[170px] h-auto"
           priority
         />
       </Link>
@@ -54,9 +55,11 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`relative hover:opacity-60 transition-opacity pb-1 ${
+                className={`relative transition-all pb-1 hover:font-bold hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-[2px] ${
+                  isDark ? "hover:after:bg-white" : "hover:after:bg-black"
+                } ${
                   isActive(l.href)
-                    ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] " +
+                    ? "font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] " +
                       (isDark ? "after:bg-white" : "after:bg-black")
                     : ""
                 }`}
