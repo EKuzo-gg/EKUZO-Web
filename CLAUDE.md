@@ -68,19 +68,34 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 - **Launch pricing:** $199 early bird for ALL weeks (will manually update in code when ready to raise)
 - Urgency badges are marketing-only (not capacity-driven): "Filling Fast" / "Only a Few Left" set per-slot in the `WEEKS` data array
 - No promo codes for v1
-- Stripe Price IDs: not yet configured. Add to `.env.local` once products created in Stripe dashboard.
+- Stripe Price IDs: configured in `.env.local` (`STRIPE_PRICE_CAMPS`). Test + prod products created.
+- Webhook secret (`STRIPE_WEBHOOK_SECRET`): set from Stripe CLI (`whsec_...` in `.env.local`). For production: create webhook endpoint in Stripe Dashboard.
 
 ### Beehiiv (email marketing — NOT just newsletter)
-- **Registration flow:** subscriber added on successful payment with custom fields (gamer name, week, slot, parent email)
-- **Post-registration automation:** welcome sequences, camp prep emails, week-of reminders, post-camp follow-ups — all managed in Beehiiv's automation builder
+- **Setup complete (3/30):** 13 custom fields, 9 tags, welcome automation scaffolded (draft)
+- **Full config reference:** `docs/beehiiv-config.md`
+- **Registration flow (wired + tested 3/30):** subscriber added on successful payment with all 13 custom fields. Tags applied via separate POST endpoint. Automation enrollment via `automation_ids`.
+- **IMPORTANT API quirks (learned the hard way):**
+  - Create subscription does NOT support `tags` — use POST `/v2/publications/:pubId/subscriptions/:subId/tags` with `{ "tags": [...] }`
+  - Create subscription uses `automation_ids` (plural, array), NOT `automation_id` (singular)
+  - PUT update endpoint silently ignores `tags` — do not use for tagging
+  - API silently drops unknown fields (no error response)
+- **Multi-gamer:** `gamer_name` stores comma-separated first names, `camp_week` stores earliest week for automation timing. Per-gamer emails deferred to v2.
+- **Post-registration automation:** welcome sequence scaffolded, camp prep/reminders/follow-up TBD — all managed in Beehiiv's automation builder
+- **Welcome automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` (draft, needs real email content before publishing)
 - **Homepage:** first-visit popup (gate with localStorage so it only shows once)
 - **Footer:** inline signup form
 
-### Make.com (deprioritized)
+### Google Sheets (fulfillment ops layer — built 3/30)
+- One row per gamer written by Stripe webhook on payment success via **Google Apps Script** web app
+- **20 columns:** registration_id, family_id, parent_first_name, parent_last_name, parent_email, parent_phone, gamer_name, gamer_tag, week, slot, week_dates, birthday, skill_level, tshirt_size, preferred_games, timezone, location, amount_paid, stripe_pi_id, registration_date
+- Apps Script URL in `GOOGLE_SHEETS_WEBHOOK_URL` env var (Google service account approach abandoned due to Workspace org policy blocking key creation)
+
+### Make.com (retiring — do not build new integrations)
 - URL: https://hook.us2.make.com/xl4bb6oyilsj8cugl8dgal5446a1jfj3
-- Still used by ContactModal for the "Start a conversation" form
-- NOT used in the payment/registration flow — Next.js API routes handle that directly
-- Could be reintroduced as operational layer if non-engineers need to modify automations
+- Still used by ContactModal for the "Start a conversation" form — replace with `/api/contact` route
+- NOT used in the payment/registration flow
+- No new integrations should use Make.com
 
 ---
 
@@ -108,11 +123,16 @@ Global modal state in `context/ModalContext.tsx`. Use `useModal()` hook.
 - [x] `/privacy-policy` — Static
 - [x] `/faq` — Static accordion
 
-### In Progress (next session — Stripe + Beehiiv integration)
-- [ ] `/api/camps/register` — Create Stripe Payment Intent from form data
-- [ ] `/api/webhooks/stripe` — Handle payment success → Beehiiv enrollment
-- [ ] Stripe Elements payment step on registration page
-- [ ] `/camps/success` — Post-payment confirmation page
+### Complete (tested 3/30)
+- [x] `/api/camps/register` — Creates Stripe Payment Intent from form data
+- [x] `/api/webhooks/stripe` — Full post-payment flow: Beehiiv enrollment (13 fields + 2 tags + automation), Google Sheets (1 row per gamer, 20 columns)
+- [x] Stripe Elements payment step on registration page — wired, tested
+- [x] Beehiiv custom fields + tags + welcome automation — configured + API-verified
+- [x] Google Sheets fulfillment layer — via Apps Script, tested with multi-gamer
+- [x] End-to-end payment test — 3 test payments, single + multi-gamer
+
+### In Progress
+- [ ] `/camps/success` — Post-payment confirmation page (basic version exists, needs full build)
 
 ### Queued (page builds)
 - [ ] `/programs` — Stub → full build queued

@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+// ── Stripe setup ────────────────────────────────────────────────────────────
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -67,9 +75,9 @@ const GAMES = [
 ];
 
 const SKILL_LEVELS = [
-  "Beginner — just getting started",
-  "Intermediate — knows the basics",
-  "Advanced — competitive / ranked",
+  "Beginner — new to gaming or this game",
+  "Intermediate — plays regularly, knows the basics",
+  "Advanced — competitive / plays ranked",
 ];
 
 const TSHIRT_SIZES = ["YS", "YM", "YL", "AS", "AM", "AL", "AXL"];
@@ -115,6 +123,43 @@ function TornPaperClipDefs() {
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
+function getAgeAtCampStart(birthday: string): number | null {
+  if (!birthday) return null;
+  // birthday comes as "YYYY-MM-DD" from date input
+  // Require full valid date with a realistic year before evaluating
+  const match = birthday.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return null;
+  const year = parseInt(match[1], 10);
+  if (year < 1900 || year > 2026) return null;
+  // Camp starts May 18, 2026
+  const campStart = new Date(2026, 4, 18);
+  const bday = new Date(year, parseInt(match[2], 10) - 1, parseInt(match[3], 10));
+  if (isNaN(bday.getTime())) return null;
+  let age = campStart.getFullYear() - bday.getFullYear();
+  const monthDiff = campStart.getMonth() - bday.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && campStart.getDate() < bday.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function getAgeNotice(birthday: string): string | null {
+  const age = getAgeAtCampStart(birthday);
+  if (age === null) return null;
+  if (age < 10 || age > 18) {
+    return "The recommended camp age is 10–18. If your gamer is outside that range, please mention it in the \"Additional Information\" section below so we can plan accordingly.";
+  }
+  return null;
+}
+
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length === 0) return "";
+  if (digits.length <= 3) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
 function emptyGamer(): GamerInfo {
   return {
     firstName: "",
@@ -142,6 +187,11 @@ export default function CampsRegisterPage() {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Payment state
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
+  const [showPayment, setShowPayment] = useState(false);
 
   // ── Gamer management ────────────────────────────────────────────────────
 
@@ -193,14 +243,19 @@ export default function CampsRegisterPage() {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
       if (!g.firstName.trim()) errs.push(`${label} first name is required.`);
       if (!g.lastName.trim()) errs.push(`${label} last name is required.`);
+      if (!g.gamerTag.trim()) errs.push(`${label} gamer tag / username is required.`);
       if (!g.selectedWeek || !g.selectedSlot)
         errs.push(`${label}: please select a camp week and time slot.`);
+      if (!g.birthday) errs.push(`${label} birthday is required.`);
+      if (!g.tshirtSize) errs.push(`${label} t-shirt size is required.`);
+      if (!g.preferredGames || g.preferredGames.length === 0)
+        errs.push(`${label}: please select at least one preferred game.`);
     });
 
     return errs;
   }
 
-  // ── Submit ──────────────────────────────────────────────────────────────
+  // ── Submit — creates Payment Intent and shows payment form ──────────────
 
   async function handleSubmit() {
     const errs = validate();
@@ -213,7 +268,6 @@ export default function CampsRegisterPage() {
     setIsSubmitting(true);
 
     const payload = {
-      type: "camps-registration",
       parent,
       gamers: gamers.map((g) => {
         const week = WEEKS.find((w) => w.number === g.selectedWeek);
@@ -226,27 +280,36 @@ export default function CampsRegisterPage() {
         };
       }),
       additionalInfo,
-      totalPrice: gamers.reduce((sum, g) => {
-        const week = WEEKS.find((w) => w.number === g.selectedWeek);
-        return sum + (week?.price ?? 0);
-      }, 0),
-      submittedAt: new Date().toISOString(),
+      totalPrice,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
 
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+      const res = await fetch("/api/camps/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrors([data.error || "Something went wrong. Please try again."]);
+        setIsSubmitting(false);
+        return;
       }
-      // TODO: Replace with Stripe Elements payment flow
-      window.location.href = "/camps/register?success=1";
+
+      setClientSecret(data.clientSecret);
+      setPaymentIntentId(data.paymentIntentId);
+      setShowPayment(true);
+      setIsSubmitting(false);
+
+      // Scroll to payment section
+      setTimeout(() => {
+        document.getElementById("payment-section")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
     } catch {
       setErrors(["Something went wrong. Please try again."]);
-    } finally {
       setIsSubmitting(false);
     }
   }
@@ -340,7 +403,7 @@ export default function CampsRegisterPage() {
               <p style={{ lineHeight: "32px" }}>&nbsp;</p>
               <p style={{ color: "#374151" }}>
                 If you&apos;re looking for multiple weeks please enroll in{" "}
-                <a href="/ekuzo100" className="font-bold underline" style={{ color: "#374151" }}>
+                <a href="/ekuzo100-4-week-intro" className="font-bold underline" style={{ color: "#374151" }}>
                   EKUZO100
                 </a>
                 . Our month long program perfect for those looking to level up.
@@ -556,13 +619,14 @@ export default function CampsRegisterPage() {
                     type="date"
                     value={gamer.birthday}
                     onChange={(v) => updateGamer(gi, { birthday: v })}
+                    hint={gamer.birthday ? getAgeNotice(gamer.birthday) : null}
                   />
                   <SelectField
-                    label="Skill Level *"
+                    label="Gaming Skill Level *"
                     value={gamer.skillLevel}
                     onChange={(v) => updateGamer(gi, { skillLevel: v })}
                     options={SKILL_LEVELS}
-                    placeholder="Select your skill level"
+                    placeholder="Select gaming experience"
                   />
                   <SelectField
                     label="T-Shirt Size *"
@@ -634,7 +698,7 @@ export default function CampsRegisterPage() {
                 label="Phone Number *"
                 type="tel"
                 value={parent.phone}
-                onChange={(v) => setParent((p) => ({ ...p, phone: v }))}
+                onChange={(v) => setParent((p) => ({ ...p, phone: formatPhone(v) }))}
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -656,12 +720,16 @@ export default function CampsRegisterPage() {
             </label>
             <textarea
               value={additionalInfo}
-              onChange={(e) => setAdditionalInfo(e.target.value)}
+              onChange={(e) => setAdditionalInfo(e.target.value.slice(0, 1500))}
               rows={4}
+              maxLength={1500}
               placeholder="Tell us more."
               className="font-body text-[#0a0a0a] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#0a0a0a] transition-colors resize-y"
               style={{ fontSize: "16px", lineHeight: "24px" }}
             />
+            <p className="font-body text-sm text-[#9ca3af] mt-1 text-right">
+              {additionalInfo.length}/1500
+            </p>
           </div>
 
           {/* ── Summary Overview ────────────────────────────────────── */}
@@ -720,29 +788,168 @@ export default function CampsRegisterPage() {
             </div>
           </div>
 
-          {/* ── CTA Button ─────────────────────────────────────────── */}
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="w-full font-body font-bold text-white bg-red rounded cursor-pointer hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
-            style={{ fontSize: "18px", lineHeight: "28px", padding: "20px" }}
-          >
-            {isSubmitting ? "Processing..." : "Continue to payment"}
-          </button>
+          {/* ── CTA Button / Payment Section ─────────────────────── */}
+          {!showPayment ? (
+            <>
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={isSubmitting || totalPrice <= 0}
+                className="w-full font-body font-bold text-white bg-red rounded cursor-pointer hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
+                style={{ fontSize: "18px", lineHeight: "28px", padding: "20px" }}
+              >
+                {isSubmitting ? "Setting up payment..." : "Continue to payment"}
+              </button>
 
-          <p className="font-body text-black/40 text-center mt-4" style={{ fontSize: "clamp(0.75rem, 1.1vw, 0.8125rem)" }}>
-            You&apos;ll enter payment details on the next screen. By registering you agree to our{" "}
-            <a href="/terms-of-service" className="underline hover:text-black/60">
-              Terms of Service
-            </a>
-            .
-          </p>
+              <p className="font-body text-black/40 text-center mt-4" style={{ fontSize: "clamp(0.75rem, 1.1vw, 0.8125rem)" }}>
+                You&apos;ll enter payment details below. By registering you agree to our{" "}
+                <a href="/terms-of-service" className="underline hover:text-black/60">
+                  Terms of Service
+                </a>
+                .
+              </p>
+            </>
+          ) : clientSecret ? (
+            <div id="payment-section" className="mt-8">
+              <div className="border border-[#e5e7eb] rounded-sm overflow-hidden">
+                <div className="bg-[#0a0a0a] px-6 py-4">
+                  <h3
+                    className="font-display uppercase text-white"
+                    style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
+                  >
+                    Payment
+                  </h3>
+                </div>
+
+                <div className="px-6 py-6">
+                  <Elements
+                    stripe={stripePromise}
+                    options={{
+                      clientSecret,
+                      appearance: {
+                        theme: "stripe",
+                        variables: {
+                          colorPrimary: "#ed2024",
+                          fontFamily: "Inter, system-ui, sans-serif",
+                          borderRadius: "4px",
+                        },
+                      },
+                    }}
+                  >
+                    <CheckoutForm
+                      totalPrice={totalPrice}
+                      paymentIntentId={paymentIntentId}
+                      parentEmail={parent.email}
+                      gamerSummaries={selectedGamerSummaries}
+                    />
+                  </Elements>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPayment(false);
+                  setClientSecret(null);
+                  setPaymentIntentId(null);
+                }}
+                className="w-full mt-4 font-body text-sm text-black/50 hover:text-black/70 cursor-pointer transition-colors"
+              >
+                &larr; Go back and edit registration
+              </button>
+            </div>
+          ) : null}
         </div>
       </section>
 
       <Footer />
     </>
+  );
+}
+
+// ── Stripe Checkout Form ────────────────────────────────────────────────────
+
+function CheckoutForm({
+  totalPrice,
+  paymentIntentId,
+  parentEmail,
+  gamerSummaries,
+}: {
+  totalPrice: number;
+  paymentIntentId: string | null;
+  parentEmail: string;
+  gamerSummaries: any[];
+}) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  async function handlePayment(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!stripe || !elements) return;
+
+    setIsProcessing(true);
+    setPaymentError(null);
+
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${siteUrl}/ekuzo-camps/success?payment_intent=${paymentIntentId}`,
+        receipt_email: parentEmail,
+      },
+    });
+
+    // If error, the user stays on this page (redirect only happens on success)
+    if (error) {
+      setPaymentError(
+        error.type === "card_error" || error.type === "validation_error"
+          ? error.message || "Payment failed. Please try again."
+          : "An unexpected error occurred. Please try again."
+      );
+      setIsProcessing(false);
+    }
+  }
+
+  return (
+    <form onSubmit={handlePayment}>
+      <PaymentElement
+        onReady={() => setIsReady(true)}
+        options={{
+          layout: "tabs",
+          wallets: { applePay: "auto", googlePay: "auto" },
+        }}
+      />
+
+      {paymentError && (
+        <div className="mt-4 p-4 bg-red/10 border border-red/30 rounded-sm">
+          <p className="font-body text-red text-sm">{paymentError}</p>
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={!stripe || !elements || isProcessing || !isReady}
+        className="w-full mt-6 font-body font-bold text-white bg-red rounded cursor-pointer hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
+        style={{ fontSize: "18px", lineHeight: "28px", padding: "20px" }}
+      >
+        {isProcessing ? "Processing payment..." : `Pay $${totalPrice}`}
+      </button>
+
+      <div className="flex items-center justify-center gap-2 mt-4">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-black/30">
+          <path d="M8 1C4.13 1 1 4.13 1 8s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 12.5c-3.03 0-5.5-2.47-5.5-5.5S4.97 2.5 8 2.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5z" fill="currentColor"/>
+          <path d="M7 7h2v5H7V7zm0-3h2v2H7V4z" fill="currentColor"/>
+        </svg>
+        <p className="font-body text-black/40 text-sm">
+          Secured by Stripe. Your payment info never touches our servers.
+        </p>
+      </div>
+    </form>
   );
 }
 
@@ -820,6 +1027,7 @@ function InputField({
   onChange,
   type = "text",
   placeholder,
+  hint,
 }: {
   label: string;
   required?: boolean;
@@ -827,6 +1035,7 @@ function InputField({
   onChange: (v: string) => void;
   type?: string;
   placeholder?: string;
+  hint?: string | null;
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -842,6 +1051,11 @@ function InputField({
         className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
         style={{ fontSize: "16px", lineHeight: "normal" }}
       />
+      {hint && (
+        <p className="font-body text-[#c2410c] text-xs leading-4">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }
