@@ -23,7 +23,7 @@ export default function HomePage() {
           overflow-hidden per Framer
       ───────────────────────────────────────────────────────────── */}
       <section
-        className="relative bg-red overflow-hidden"
+        className="relative bg-red overflow-visible"
         style={{ paddingTop: "clamp(100px, 12vw, 160px)", paddingBottom: "clamp(200px, 30vw, 400px)" }}
       >
         {/* Nav */}
@@ -31,10 +31,10 @@ export default function HomePage() {
           <Nav variant="dark" />
         </div>
 
-        {/* Full-bleed hero image — smaller on mobile via max-height constraint */}
+        {/* Full-bleed hero image — anchored to bottom, covered by torn paper */}
         <div
-          className="absolute inset-x-0 bottom-0 z-0 pointer-events-none md:inset-0"
-          style={{ height: "clamp(280px, 55vw, 100%)" }}
+          className="absolute inset-x-0 bottom-0 z-0 pointer-events-none"
+          style={{ height: "clamp(280px, 65vw, 100%)" }}
           aria-hidden="true"
         >
           <Image
@@ -43,7 +43,7 @@ export default function HomePage() {
             fill
             priority
             className="object-cover"
-            style={{ objectPosition: "center 59%" }}
+            style={{ objectPosition: "center 80%" }}
             sizes="100vw"
           />
         </div>
@@ -60,8 +60,23 @@ export default function HomePage() {
           </h1>
         </div>
 
-        {/* Bird — parallax scroll effect */}
+        {/* Bird — sits on top of the torn paper at hero/growth boundary */}
         <ParallaxBird />
+
+        {/* Torn paper: hero (red) → growth (grey) — PNG for texture detail */}
+        {/* Framer: White2 component, absolute, centerY 102%, responsive heights: 300/300/227/115 */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
+          style={{
+            height: "clamp(115px, 19vw, 300px)",
+            transform: "translateY(52%)",
+            backgroundImage: "url(/images/torn-paper-white-1.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden="true"
+        />
       </section>
 
 
@@ -79,16 +94,6 @@ export default function HomePage() {
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
-        {/* Torn paper: hero (red) → growth (grey) — white paper with dual torn edges */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/paper-white-1.svg"
-          alt=""
-          className="absolute top-0 z-20 pointer-events-none select-none"
-          style={{ width: "calc(100% + 4px)", left: "-2px", transform: "translateY(-55%)", filter: "brightness(0) invert(1)" }}
-          aria-hidden="true"
-        />
-
         {/* Torn paper: growth (grey) → ecosystem (white) — grey paper at bottom */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -100,18 +105,18 @@ export default function HomePage() {
         />
 
         <div className="max-w-[1232px] mx-auto">
-          {/* H4 heading — responsive */}
+          {/* H4 heading — full width above the two-column layout */}
           <h2
-            className="font-body font-bold text-black leading-[1] mb-[40px] md:mb-[108px]"
+            className="font-body font-bold text-black leading-[1] mb-[40px] md:mb-[64px]"
             style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}
           >
             Growth through play
           </h2>
 
-          {/* On mobile: list items ABOVE image. On desktop: image left, list right */}
+          {/* On mobile: list items ABOVE image. On desktop: icons left, image right */}
           <div className="flex flex-col md:flex-row gap-[40px] md:gap-[90px] items-start">
-            {/* List items — shown first on mobile (order-1 mobile, order-2 desktop) */}
-            <div className="flex flex-col gap-6 md:gap-8 md:max-w-[400px] md:pt-4 order-1 md:order-2">
+            {/* List items — shown first on mobile, left on desktop */}
+            <div className="flex flex-col gap-6 md:gap-8 md:max-w-[400px] md:pt-4 order-1">
               {growthItems.map(({ label, icon }) => (
                 <div key={label} className="flex items-center gap-4 md:gap-6">
                   <div
@@ -131,8 +136,8 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Illustration — shown second on mobile (order-2 mobile, order-1 desktop) */}
-            <div className="flex-1 relative overflow-hidden order-2 md:order-1" style={{ borderRadius: "2px" }}>
+            {/* Illustration — right on desktop, below icons on mobile */}
+            <div className="flex-1 relative overflow-hidden order-2" style={{ borderRadius: "2px" }}>
               <Image
                 src="/images/growth-collage.png"
                 alt="EKUZO students gaming together"
@@ -186,8 +191,8 @@ export default function HomePage() {
       <section
         className="bg-black relative overflow-visible"
         style={{
-          paddingTop: "clamp(100px, 14vw, 188px)",
-          paddingBottom: "clamp(100px, 14vw, 188px)",
+          paddingTop: "100px",
+          paddingBottom: "100px",
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
@@ -206,8 +211,8 @@ export default function HomePage() {
           </span>
         </div>
 
-        <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2, gap: "clamp(80px, 14vw, 200px)" }}>
-          {/* Header block — centered, maxWidth 600px */}
+        <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2, gap: "100px" }}>
+          {/* Header block — centered */}
           <div className="flex flex-col items-center text-center gap-4 max-w-[800px]">
             <p
               className="font-body font-medium text-red uppercase"
@@ -231,47 +236,47 @@ export default function HomePage() {
 
           {/* Cards + button */}
           <div className="flex flex-col items-center gap-9 w-full">
-            {/* Cards */}
+            {/* Cards — no CTAs inside */}
             <div className="grid md:grid-cols-2 gap-8 w-full max-w-[1022px]">
-              <div className="bg-grey p-8 md:p-10 flex flex-col gap-6 md:gap-8 min-h-[320px] md:min-h-[480px]" style={{ borderRadius: "2px" }}>
+              <div
+                className="bg-white p-8 md:p-10 flex flex-col gap-[60px] md:gap-[80px] min-h-[280px] md:min-h-[480px]"
+                style={{ clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)" }}
+              >
                 <p
                   className="font-display uppercase text-black leading-none"
-                  style={{ fontSize: "clamp(80px, 8vw, 96px)" }}
+                  style={{ fontSize: "clamp(80px, 8vw, 120px)" }}
                 >
                   SCHOOL
                 </p>
                 <p
-                  className="font-body text-black leading-[1.357] flex-1"
-                  style={{ fontSize: "clamp(1rem, 2vw, 28px)" }}
+                  className="font-body text-black leading-[1.417] mb-[15px] md:mb-[20px]"
+                  style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
                 >
                   Students meet in person at their school (during or after school hours) with an onsite proctor. EKUZO coaches lead practice online.
                 </p>
-                <Button variant="red-outlined" href="/schools">
-                  Learn more about EKUZO100
-                </Button>
               </div>
 
-              <div className="bg-grey p-8 md:p-10 flex flex-col gap-6 md:gap-8 min-h-[320px] md:min-h-[480px]" style={{ borderRadius: "2px" }}>
+              <div
+                className="bg-white p-8 md:p-10 flex flex-col gap-[60px] md:gap-[80px] min-h-[280px] md:min-h-[480px]"
+                style={{ clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)" }}
+              >
                 <p
                   className="font-display uppercase text-black leading-none"
-                  style={{ fontSize: "clamp(80px, 8vw, 96px)" }}
+                  style={{ fontSize: "clamp(80px, 8vw, 120px)" }}
                 >
                   HOME
                 </p>
                 <p
-                  className="font-body text-black leading-[1.357] flex-1"
-                  style={{ fontSize: "clamp(1rem, 2vw, 28px)" }}
+                  className="font-body text-black leading-[1.417] mb-[15px] md:mb-[20px]"
+                  style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
                 >
                   Students join individually from home in a fully online format (during or after school).
                 </p>
-                <Button variant="red-outlined" href="/parents">
-                  Learn more about home programs
-                </Button>
               </div>
             </div>
 
-            {/* See programs CTA */}
-            <Button variant="white-outlined" href="/programs">
+            {/* See programs CTA — red filled */}
+            <Button variant="red-filled" href="/programs">
               See programs
             </Button>
           </div>

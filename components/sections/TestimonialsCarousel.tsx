@@ -18,6 +18,8 @@ export default function TestimonialsCarousel() {
   const [cardsVisible, setCardsVisible] = useState(3);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
 
   useEffect(() => {
     function update() {
@@ -33,6 +35,30 @@ export default function TestimonialsCarousel() {
   const maxIndex = testimonials.length - cardsVisible;
   const cardWidth = 100 / cardsVisible;
   const isMobile = cardsVisible === 1;
+
+  /* ── Touch / swipe handlers ── */
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  }
+  function handleTouchMove(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  }
+  function handleTouchEnd() {
+    const SWIPE_THRESHOLD = 50;
+    if (Math.abs(touchDeltaX.current) > SWIPE_THRESHOLD) {
+      if (touchDeltaX.current < 0) {
+        // swipe left → next
+        setIndex((i) => Math.min(maxIndex, i + 1));
+      } else {
+        // swipe right → prev
+        setIndex((i) => Math.max(0, i - 1));
+      }
+    }
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+  }
 
   function handleCardClick(i: number) {
     const video = videoRefs.current[i];
@@ -61,8 +87,13 @@ export default function TestimonialsCarousel() {
 
   return (
     <div className="w-full">
-      {/* Track — on mobile, center the single card with max-width */}
-      <div className={`overflow-hidden ${isMobile ? "flex justify-center" : ""}`}>
+      {/* Track — on mobile, center the single card with max-width; swipe enabled */}
+      <div
+        className={`overflow-hidden ${isMobile ? "flex justify-center" : ""}`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
           className={`flex transition-transform duration-500 ease-in-out ${isMobile ? "max-w-[340px]" : ""}`}
           style={{ transform: `translateX(${-index * cardWidth}%)` }}
@@ -100,13 +131,6 @@ export default function TestimonialsCarousel() {
                 )}
               </div>
 
-              {/* Name + role */}
-              <div className="mt-3 px-1">
-                <p className="font-display font-black uppercase text-black text-lg leading-tight tracking-[0.02em]">
-                  {t.name}
-                </p>
-                <p className="text-black/50 text-sm mt-0.5">{t.role}</p>
-              </div>
             </div>
           ))}
         </div>

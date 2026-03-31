@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import ModalButton from "@/components/ui/ModalButton";
 
 /* ─── Social icon SVGs ───────────────────────────────────────────────────── */
@@ -66,6 +67,7 @@ const footerColumns = [
     { href: "/programs",  label: "Programs" },
     { href: "/ekuzo100",  label: "EKUZO 100" },
     { href: "/ekuzo-teams", label: "EKUZO Teams" },
+    { href: "/camps",     label: "EKUZO Camps" },
   ],
   [
     { href: "/methodology", label: "Methodology" },
@@ -87,11 +89,10 @@ const footerColumns = [
 export default function Footer() {
   return (
     <footer
-      className="bg-white relative overflow-hidden pt-[130px]"
+      className="bg-white relative pt-[130px] pb-0"
       style={{
         paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
         paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
-        paddingBottom: "calc(72vw * 0.82)",
       }}
     >
 
@@ -141,17 +142,23 @@ export default function Footer() {
       {/* Copyright */}
       <p className="font-body text-sm text-black/40">© All rights reserved.</p>
 
-      {/* Giant EKUZO wordmark — bleeds full width at bottom */}
+      {/* Giant EKUZO wordmark — SVG asset, flush edge-to-edge and flush with page bottom */}
       <div
-        className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none select-none"
+        className="pointer-events-none select-none mt-16"
+        style={{
+          marginLeft: "calc(-1 * clamp(1.5rem, 7.2vw, 104px))",
+          marginRight: "calc(-1 * clamp(1.5rem, 7.2vw, 104px))",
+          marginBottom: "0",
+        }}
         aria-hidden="true"
       >
-        <span
-          className="font-display text-black leading-[0.8]"
-          style={{ fontSize: "clamp(8rem, 72vw, 128rem)" }}
-        >
-          EKUZO
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/ekuzo-huge.svg"
+          alt=""
+          className="block w-full h-auto"
+          style={{ display: "block", marginBottom: "-1px" }}
+        />
       </div>
     </footer>
   );

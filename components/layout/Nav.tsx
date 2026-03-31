@@ -49,7 +49,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
       </Link>
 
       {/* Desktop nav */}
-      <div className="hidden md:flex items-center gap-10">
+      <div className="hidden lg:flex items-center gap-10">
         <ul className="flex gap-10 text-base font-medium">
           {navLinks.map((l) => (
             <li key={l.href}>
@@ -79,7 +79,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
 
       {/* Mobile hamburger — animates to X when open */}
       <button
-        className="md:hidden p-2 relative w-10 h-10 flex flex-col items-center justify-center"
+        className="lg:hidden p-2 relative w-10 h-10 flex flex-col items-center justify-center"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
@@ -103,7 +103,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white text-black shadow-lg z-50 px-6 py-8 flex flex-col gap-6">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white text-black shadow-lg z-50 px-6 py-8 flex flex-col gap-6">
           <ul className="flex flex-col gap-6 text-lg font-medium">
             {navLinks.map((l) => (
               <li key={l.href}>

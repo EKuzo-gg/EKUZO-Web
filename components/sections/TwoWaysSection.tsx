@@ -1,15 +1,27 @@
 import Link from "next/link";
-import TornPaper from "@/components/ui/TornPaper";
+import Button from "@/components/ui/Button";
 
 export default function TwoWaysSection() {
   return (
-    <section className="bg-black relative overflow-hidden">
-      {/* Top torn paper */}
-      <TornPaper color="white" style={2} flip />
+    <section className="bg-black relative overflow-visible">
+      {/* White torn paper at top — Framer: White2, absolute */}
+      <div
+        className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+        style={{
+          height: "clamp(115px, 19vw, 300px)",
+          transform: "translateY(-50%)",
+          backgroundImage: "url(/images/torn-paper-white-1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        aria-hidden="true"
+      />
 
       {/* Watermark */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        style={{ top: "-4%" }}
         aria-hidden="true"
       >
         <span
@@ -25,12 +37,12 @@ export default function TwoWaysSection() {
         style={{
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
-          paddingTop: "188px",
-          paddingBottom: "188px",
+          paddingTop: "clamp(100px, 14vw, 188px)",
+          paddingBottom: "clamp(100px, 14vw, 188px)",
         }}
       >
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-16 max-w-[600px]">
+        {/* Header — centered */}
+        <div className="flex flex-col items-center text-center gap-4 mb-16 max-w-[800px] mx-auto">
           <p
             className="font-body font-medium text-white uppercase"
             style={{ fontSize: "16px", letterSpacing: "10px" }}
@@ -45,58 +57,79 @@ export default function TwoWaysSection() {
           </h4>
           <p
             className="font-body text-white/70 leading-[1.357] mt-4"
-            style={{ fontSize: "28px" }}
+            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
           >
             Students join the same EKUZO experience, either through their school or from home.
           </p>
         </div>
 
-        {/* Two cards */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <Link href="/schools" className="block group">
-            <div className="border border-white/20 p-12 flex flex-col gap-4 hover:bg-white/5 transition-colors duration-200" style={{ borderRadius: "2px" }}>
+        {/* Two cards — white bg with angled clip-path corners, matching homepage SCHOOL/HOME pattern */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div
+            className="bg-white p-8 lg:p-12 flex flex-col justify-between min-h-[280px] lg:min-h-[480px]"
+            style={{ clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)" }}
+          >
+            <div className="flex flex-col gap-6">
               <p
-                className="font-body font-medium text-white/50 uppercase"
-                style={{ fontSize: "16px", letterSpacing: "10px" }}
+                className="font-display uppercase text-black leading-none"
+                style={{ fontSize: "clamp(80px, 8vw, 120px)" }}
               >
-                For schools
+                SCHOOL
               </p>
               <p
-                className="font-body text-white leading-[1.357]"
-                style={{ fontSize: "28px" }}
+                className="font-body text-black leading-[1.417] max-w-[380px]"
+                style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
               >
-                For schools that want to bring EKUZO on campus.
+                For schools that want to bring EKUZO on&nbsp;campus.
               </p>
-              <span className="text-white/50 font-body text-sm mt-4 group-hover:text-white transition-colors">
-                Learn more →
-              </span>
             </div>
-          </Link>
+            <div className="mt-8">
+              <Button variant="red-outlined" href="/schools">
+                For Schools
+              </Button>
+            </div>
+          </div>
 
-          <Link href="/parents" className="block group">
-            <div className="border border-white/20 p-12 flex flex-col gap-4 hover:bg-white/5 transition-colors duration-200" style={{ borderRadius: "2px" }}>
+          <div
+            className="bg-white p-8 lg:p-12 flex flex-col justify-between min-h-[280px] lg:min-h-[480px]"
+            style={{ clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)" }}
+          >
+            <div className="flex flex-col gap-6">
               <p
-                className="font-body font-medium text-white/50 uppercase"
-                style={{ fontSize: "16px", letterSpacing: "10px" }}
+                className="font-display uppercase text-black leading-none"
+                style={{ fontSize: "clamp(80px, 8vw, 120px)" }}
               >
-                For families
+                HOME
               </p>
               <p
-                className="font-body text-white leading-[1.357]"
-                style={{ fontSize: "28px" }}
+                className="font-body text-black leading-[1.417] max-w-[380px]"
+                style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
               >
-                Students join individually from home in a fully online format.
+                Students join individually from home in a fully online&nbsp;format.
               </p>
-              <span className="text-white/50 font-body text-sm mt-4 group-hover:text-white transition-colors">
-                Learn more →
-              </span>
             </div>
-          </Link>
+            <div className="mt-8">
+              <Button variant="red-outlined" href="/parents">
+                For Families
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom torn paper */}
-      <TornPaper color="black" style={2} />
+      {/* Black torn paper at bottom — Framer: Black2 */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
+        style={{
+          height: "clamp(115px, 19vw, 300px)",
+          transform: "translateY(50%)",
+          backgroundImage: "url(/images/torn-paper-black-1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        aria-hidden="true"
+      />
     </section>
   );
 }

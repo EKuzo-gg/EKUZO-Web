@@ -31,7 +31,7 @@ const cards: ProgramCard[] = [
       { value: "During or After", label: "School" },
     ],
     blurb: "Best for: students and schools ready for ongoing growth.",
-    href: "/ekuzo-teams",
+    href: "/ekuzoteams-semester-based",
     btnLabel: "Learn more about EKUZOTEAMS",
     bgImage: "/images/program-card-bg-1.png",
     stickyTop: "40px",
@@ -45,7 +45,7 @@ const cards: ProgramCard[] = [
       { value: "After", label: "school" },
     ],
     blurb: "Best for: first-time students or families curious about esports.",
-    href: "/ekuzo100",
+    href: "/ekuzo100-4-week-intro",
     btnLabel: "Learn more about EKUZO100",
     bgImage: "/images/program-card-bg-1.png",
     stickyTop: "160px",
@@ -59,7 +59,7 @@ const cards: ProgramCard[] = [
       { value: "Summer / holiday", label: "break" },
     ],
     blurb: "Best for: students who want a burst of activity during breaks.",
-    href: "/ekuzo-camps",
+    href: "/ekuzocamps-seasonal",
     btnLabel: "Learn more about EKUZOCAMPS",
     bgImage: "/images/program-card-bg-2.png",
     stickyTop: "240px",
@@ -81,32 +81,37 @@ export default function ProgramsSection({
 
   return (
     <section
-      className="px-6 md:px-[80px]"
-      style={{ paddingTop: "188px", paddingBottom: "188px" }}
+      style={{
+        paddingTop: "clamp(80px, 14vw, 188px)",
+        paddingBottom: "clamp(80px, 14vw, 188px)",
+        paddingLeft: "clamp(1rem, 5.5vw, 80px)",
+        paddingRight: "clamp(1rem, 5.5vw, 80px)",
+      }}
     >
       <div className="max-w-[1232px] mx-auto">
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-[120px] max-w-[600px]">
+        {/* Header — centered, matching homepage pattern */}
+        <div className="flex flex-col items-center gap-4 mb-[80px] lg:mb-[120px] text-center">
           <p
-            className="font-body font-medium text-black/50 uppercase"
+            className="font-body font-medium text-red uppercase"
             style={{ fontSize: "16px", letterSpacing: "10px" }}
           >
             PROGRAMS
           </p>
           <h4
             className="font-body font-bold text-black leading-[1]"
-            style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
+            style={{ fontSize: "clamp(1.5rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
           >
-            3 programs. 1 system. 1 esport experience.
+            3 programs. 1 system.<br />
+            1 esport experience.
           </h4>
         </div>
 
         {/* Cards — sticky scroll on desktop, stacked on mobile */}
-        <div className="flex flex-col gap-[120px]">
+        <div className="flex flex-col gap-[80px] lg:gap-[120px]">
           {visibleCards.map((card) => (
             <div
               key={card.key}
-              className="hidden md:block"
+              className="hidden lg:block"
               style={{ position: "sticky", top: card.stickyTop }}
             >
               <ProgramCard card={card} />
@@ -114,7 +119,7 @@ export default function ProgramsSection({
           ))}
           {/* Mobile: normal stack */}
           {visibleCards.map((card) => (
-            <div key={`mobile-${card.key}`} className="md:hidden">
+            <div key={`mobile-${card.key}`} className="lg:hidden">
               <ProgramCard card={card} />
             </div>
           ))}
@@ -132,56 +137,56 @@ function ProgramCard({ card }: { card: ProgramCard }) {
         backgroundImage: `url('${card.bgImage}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        padding: "88px",
-        borderRadius: "2px",
-        minHeight: "480px",
+        padding: "clamp(2rem, 6vw, 88px)",
+        minHeight: "clamp(320px, 40vw, 480px)",
+        clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)",
       }}
     >
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+      <div className="relative z-10 flex flex-col gap-[24px] lg:gap-[80px] h-full">
+        {/* Top: program name + stats */}
+        <div className="flex flex-col gap-[24px]">
+          {/* Program name */}
+          <h2
+            className="font-display uppercase text-white leading-none"
+            style={{ fontSize: "clamp(3rem, 8vw, 10rem)" }}
+          >
+            {card.name}
+          </h2>
 
-      <div className="relative z-10 flex flex-col gap-10 h-full">
-        {/* Program name */}
-        <h2
-          className="font-display uppercase text-white leading-none"
-          style={{ fontSize: "clamp(3rem, 8vw, 10rem)" }}
-        >
-          {card.name}
-        </h2>
-
-        {/* Stats row */}
-        <div className="flex flex-wrap gap-12">
-          {card.stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-1">
-              <span
-                className="font-body font-bold text-white leading-[1.2]"
-                style={{ fontSize: "40px" }}
-              >
-                {stat.value}
-              </span>
-              <span
-                className="font-body font-bold text-white leading-[1.2]"
-                style={{ fontSize: "24px", opacity: 0.7 }}
-              >
-                {stat.label}
-              </span>
-            </div>
-          ))}
+          {/* Stats row */}
+          <div className="flex flex-wrap gap-8 lg:gap-12">
+            {card.stats.map((stat) => (
+              <div key={stat.label} className="flex items-end gap-1">
+                <span
+                  className="font-display uppercase text-white leading-[1]"
+                  style={{ fontSize: "clamp(1.5rem, 3vw, 40px)" }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className="font-body font-bold text-white/70 leading-[1.2]"
+                  style={{ fontSize: "clamp(0.875rem, 1.5vw, 24px)" }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Blurb */}
-        <p
-          className="font-body text-white leading-[1.357] max-w-[520px]"
-          style={{ fontSize: "28px" }}
-        >
-          {card.blurb}
-        </p>
-
-        {/* CTA */}
-        <div>
-          <Button variant="white-outlined" href={card.href}>
-            {card.btnLabel}
-          </Button>
+        {/* Bottom: blurb left, CTA right — Framer uses space-between */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <p
+            className="font-body text-white leading-[1.357] max-w-[389px]"
+            style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
+          >
+            {card.blurb}
+          </p>
+          <div className="shrink-0">
+            <Button variant="white-outlined" href={card.href}>
+              {card.btnLabel}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

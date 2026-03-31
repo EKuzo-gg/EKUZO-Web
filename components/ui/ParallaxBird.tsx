@@ -30,11 +30,11 @@ export default function ParallaxBird() {
   return (
     <div
       ref={ref}
-      className="absolute z-10 pointer-events-none w-[180px] h-[162px] md:w-[332px] md:h-[300px]"
+      className="absolute z-30 pointer-events-none w-[180px] h-[162px] md:w-[332px] md:h-[300px]"
       style={{
         left: "50%",
-        top: "85%",
-        transform: `translate(-50%, calc(-50% - ${offset}px))`,
+        bottom: "0",
+        transform: `translate(-50%, calc(40% - 100px - ${offset}px))`,
         willChange: "transform",
       }}
       aria-hidden="true"

@@ -14,8 +14,8 @@ export default function FooterBanner({ heading }: FooterBannerProps) {
     <section
       className="relative bg-red overflow-visible"
       style={{
-        paddingTop: "120px",
-        paddingBottom: "144px",
+        paddingTop: "clamp(48px, 6vw, 80px)",
+        paddingBottom: "clamp(48px, 6vw, 80px)",
         paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
         paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
       }}
@@ -40,9 +40,9 @@ export default function FooterBanner({ heading }: FooterBannerProps) {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-[1232px] mx-auto flex flex-col md:flex-row items-center md:items-center gap-[72px]">
-        {/* Left: heading + CTA */}
-        <div className="flex flex-col items-start gap-[72px] flex-1">
+      <div className="relative z-10 mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-12" style={{ maxWidth: "calc(100% - 80px)" }}>
+        {/* Left on desktop / centered on mobile: heading + CTA */}
+        <div className="flex flex-col items-center md:items-start gap-8 md:gap-12 flex-1 text-center md:text-left shrink-0">
           <h2
             className="font-body font-bold text-white leading-tight"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
@@ -54,15 +54,15 @@ export default function FooterBanner({ heading }: FooterBannerProps) {
           </Button>
         </div>
 
-        {/* Right: decorative brush stroke image */}
-        <div className="flex-1 hidden md:block">
+        {/* Right: decorative image — visible on all screens, larger with 40px edge breathing room */}
+        <div className="flex-1 flex justify-center">
           <Image
             src="/images/enroll-promo-graphic.avif"
             alt=""
             width={824}
             height={921}
             className="w-full h-auto object-contain"
-            style={{ maxHeight: "614px" }}
+            style={{ maxHeight: "clamp(280px, 50vw, 700px)" }}
             aria-hidden="true"
           />
         </div>

@@ -18,37 +18,38 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
   const isDark = theme === "dark";
 
   return (
-    <ul className="w-full flex flex-col gap-0">
+    <ul className="w-full flex flex-col">
       {items.map((item, i) => (
-        <li
-          key={i}
-          className={`border-b last:border-b-0 ${
-            isDark ? "border-white/20" : "border-black/10"
-          }`}
-        >
+        <li key={i}>
           <button
-            className="w-full flex items-start gap-6 text-left group cursor-pointer"
-            style={{ paddingTop: "clamp(1.25rem, 1.8vw, 32px)", paddingBottom: "clamp(1.25rem, 1.8vw, 32px)" }}
+            className="w-full flex items-start gap-5 lg:gap-[26px] text-left group cursor-pointer"
+            style={{
+              paddingTop: "clamp(1.25rem, 2.5vw, 40px)",
+              paddingBottom: "clamp(1.25rem, 2.5vw, 40px)",
+            }}
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
           >
-            {/* Chevron */}
+            {/* Arrow icon — 40px circle, Framer pattern */}
             <span
-              className={`mt-1 shrink-0 size-8 rounded-full flex items-center justify-center transition-transform duration-200 ${
+              className={`shrink-0 size-8 lg:size-10 rounded-full flex items-center justify-center transition-transform duration-200 ${
                 open === i ? "rotate-180" : ""
-              } ${isDark ? "bg-white/60" : "bg-black/10"}`}
+              }`}
+              style={{
+                backgroundColor: isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)",
+              }}
             >
               <svg
-                width="12"
+                width="14"
                 height="8"
-                viewBox="0 0 12 8"
+                viewBox="0 0 14 8"
                 fill="none"
                 aria-hidden="true"
               >
                 <path
-                  d="M1 1.5L6 6.5L11 1.5"
-                  stroke={isDark ? "black" : "black"}
-                  strokeWidth="1.5"
+                  d="M1 1L7 7L13 1"
+                  stroke={isDark ? "white" : "black"}
+                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -56,10 +57,10 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
             </span>
 
             <span
-              className={`flex-1 font-bold leading-[1.357] tracking-tight ${
+              className={`flex-1 font-body font-bold leading-[1.357] ${
                 isDark ? "text-white" : "text-black"
               }`}
-              style={{ fontSize: "clamp(1.25rem, 2.2vw, 28px)" }}
+              style={{ fontSize: "clamp(1.125rem, 2vw, 24px)" }}
             >
               {item.question}
             </span>
@@ -68,12 +69,11 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
           {/* Answer */}
           <div
             className={`overflow-hidden transition-all duration-300 ease-out ${
-              open === i ? "max-h-[600px]" : "max-h-0"
+              open === i ? "max-h-[600px] pb-6" : "max-h-0"
             }`}
-            style={{ paddingBottom: open === i ? "clamp(1.25rem, 1.8vw, 32px)" : "0" }}
           >
             <p
-              className={`pl-14 leading-relaxed ${
+              className={`pl-[52px] lg:pl-[66px] leading-relaxed max-w-[600px] ${
                 isDark ? "text-white/70" : "text-black/70"
               }`}
               style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
@@ -81,6 +81,14 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
               {item.answer}
             </p>
           </div>
+
+          {/* Separator line */}
+          <div
+            className="w-full h-[1px]"
+            style={{
+              backgroundColor: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
+            }}
+          />
         </li>
       ))}
     </ul>

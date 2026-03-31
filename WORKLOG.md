@@ -6,6 +6,100 @@
 
 ---
 
+## Aaron — March 31, 2026 (programs page QA + shared component overhaul)
+
+**What changed:**
+
+**Homepage tweaks (app/page.tsx):**
+- Torn paper moved down 20px (`translateY(calc(-55% + 20px))`)
+- SCHOOL/HOME card body copy margin reduced to 20px (was 80px)
+- Card min-height set to 480px (was 512px)
+- Hero torn paper switched to background-image div pattern (responsive heights: 115px phone → 300px desktop) positioned at bottom of hero section, matching Framer's White2 component placement
+- Torn paper now uses `background-size: cover` on a fixed-height div instead of `<img>` — fixes mobile rendering
+
+**Nav (components/layout/Nav.tsx):**
+- Hamburger breakpoint bumped from `md` (768px) to `lg` (1024px) — desktop nav links + button need more room
+
+**StickyCTA (components/ui/StickyCTA.tsx):**
+- Now hides when footer scrolls into view (IntersectionObserver on `<footer>`)
+
+**Programs page full QA pass (app/programs/page.tsx):**
+- Hero: `min-height: 100vh`, Rive animation full-bleed (`programs-hero.riv`, autoplay)
+- Removed all standalone `<TornPaperDivider>` components — replaced with inline background-image divs
+- Ecosystem section: added black torn paper top + white torn paper bottom
+- Testimonials: max-width → 1120px, headline centered with line break to avoid widows
+- FAQ: black background, headline "Frequently asked questions" in Heading 4 size, black torn paper at top
+
+**New file: components/sections/ProgramsHeroRive.tsx**
+- Simple autoplay Rive component for programs hero animation
+
+**OurApproachSection (components/sections/OurApproachSection.tsx) — redesigned:**
+- Eyebrow above columns, 70:30 layout: heading + body left, icon list right
+- Icons match homepage growth section pattern (red circle + white SVG, 50px mobile / 72px desktop)
+- New optional `icons` prop (defaults to homepage icons) — backward compatible
+- Old `<TornPaper>` removed, replaced with background-image black torn paper at bottom
+
+**ProgramsSection (components/sections/ProgramsSection.tsx) — redesigned:**
+- Header centered (matching homepage pattern)
+- Headline: "3 programs. 1 system." / "1 esport experience." (line break)
+- Cards: removed dark overlay, added angled clip-path corners
+- Bottom row: blurb left, CTA button right (`justify-between`)
+- Responsive padding + card sizing with clamp()
+- Card hrefs updated to correct routes
+
+**TwoWaysSection (components/sections/TwoWaysSection.tsx) — redesigned:**
+- Old `<TornPaper>` removed, replaced with background-image torn paper (white top, black bottom)
+- Cards: added "For Schools" and "For Families" CTA buttons (red-outlined)
+- Cards use `justify-between` layout (heading+body top, button bottom)
+- Non-breaking spaces (`&nbsp;`) added to prevent widows in body copy
+- Header items centered
+- Watermark repositioned to centerY -4%
+
+**FAQAccordion (components/ui/FAQAccordion.tsx) — restyled globally:**
+- Arrow icon on the left (chevron in circle, rotates 180° on open)
+- Question text fills remaining space
+- White/black line separator under each item
+- Answer text indented to align with question (padding-left matches icon width + gap)
+
+**QA documentation created:**
+- `docs/QA-CHECKLIST.md` — repeatable checklist from all homepage lessons learned
+- `docs/PAGE-ROLLOUT-PLAN.md` — prioritized plan for remaining pages (3 tiers)
+
+**Design rules established for future pages:**
+- Torn paper: always use PNG background-image on fixed-height div, never `<img>` SVG
+- Cards with angled corners: always use clip-path polygon (40px cuts)
+- No widows (single words on their own line)
+- Nav switches to hamburger at lg (1024px)
+- Testimonials headline always centered
+- FAQ sections: black bg, "Frequently asked questions" heading, chevron icons
+
+---
+
+## Aaron — March 31, 2026 (homepage QA pass — torn paper, cards, footer wordmark)
+
+**What changed:**
+
+**Torn paper hero→growth gap fix (app/page.tsx):**
+- Switched from `paper-white-1.svg` (1440px viewBox, path stops 3px short) to `torn-paper-white-1.svg` (2400px viewBox, `preserveAspectRatio="none"` — stretches to fill any container with zero gaps)
+- Positioned: `left-1/2` + `translateX(-50%)` centered, `width: 125%` so edges overflow both sides of viewport (showing middle ~80% of texture), `height: 150px` for peak/valley control
+- To adjust: change `width %` to show more/less texture, `height` for drama
+- Added `overflow-x-clip` to `<body>` in layout.tsx to prevent horizontal scrollbar from oversized torn paper
+
+**SCHOOL/HOME cards (app/page.tsx):**
+- Changed card background from `bg-grey` to `bg-white` (cards are white against black section bg per Framer)
+- Added `clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)` for 40px angled corners on upper-left and bottom-right (matches Framer SVG mask)
+- Set gap between heading and body to 140px on desktop, 100px on mobile
+- Increased heading size to 120px and min-height to 512px per Framer spec
+
+**EKUZO footer wordmark (components/layout/Footer.tsx):**
+- Replaced JS-based text measurement approach with `ekuzo-huge.svg` asset (dropped in by Aaron)
+- SVG renders as `<img>` at `w-full h-auto` — naturally scales to fill container edge-to-edge
+- Container breaks out of footer padding with negative margins so SVG spans full viewport width
+- Removed footer `paddingBottom` so SVG sits flush with page bottom (no gap below)
+- SVG viewBox is 1442×627, left edge of E and right edge of O flush with viewport
+
+---
+
 ## Jamie — March 30, 2026 (late night — validation + additional_info)
 
 **What changed:**
