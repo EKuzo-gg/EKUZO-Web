@@ -7,13 +7,15 @@ import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import OurApproachSection from "@/components/sections/OurApproachSection";
 import ProgramsSection from "@/components/sections/ProgramsSection";
 import AutoScrollCards from "@/components/ui/AutoScrollCards";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
+import ModalButton from "@/components/ui/ModalButton";
 import Link from "next/link";
 
 export const metadata = {
-  title: "For Parents — EKUZO",
+  title: "For Families — EKUZO",
   description:
     "Learn how EKUZO supports families. Safe, structured, and coached esports programmes for young gamers from home or school.",
 };
@@ -49,9 +51,9 @@ const parentsFAQs = [
 export default function ParentsPage() {
   return (
     <>
-      {/* 1. Hero — white bg */}
+      {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
       <section
-        className="bg-white relative overflow-hidden"
+        className="bg-white relative overflow-clip"
         style={{
           paddingTop: "clamp(160px, 20vw, 280px)",
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
@@ -64,7 +66,7 @@ export default function ParentsPage() {
 
         <div className="max-w-[1232px] mx-auto text-center">
           <h2
-            className="font-display uppercase text-black leading-[0.9]"
+            className="font-display uppercase text-black leading-[0.85]"
             style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
           >
             Learn to Play.<br />Play to Learn.
@@ -84,27 +86,26 @@ export default function ParentsPage() {
         </div>
       </section>
 
-      {/* 2. Our Approach — grey bg with grey torn paper top + bottom */}
-      <OurApproachSection
-        heading="What is EKUZO?"
-        listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
-        icons={[
-          "/icons/swords-white.svg",
-          "/icons/clock-white.svg",
-          "/icons/growth-arrows.svg",
-        ]}
-        body="It&rsquo;s natural for parents to feel tension around screen time, especially when it feels unstructured or hard to trust. EKUZO leans into what students already love and builds a complete, coach-led system around it. Think sports, designed specifically for&nbsp;gamers."
-        bg="bg-[#f0edea]"
-        tornPaper="grey"
-        tornPaperTop
-      />
+      {/* ══ 2. OUR APPROACH — grey bg ════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <OurApproachSection
+          heading="What is EKUZO?"
+          listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
+          icons={[
+            "/icons/swords-white.svg",
+            "/icons/clock-white.svg",
+            "/icons/growth-arrows.svg",
+          ]}
+          body="It&rsquo;s natural for parents to feel tension around screen time, especially when it feels unstructured or hard to trust. EKUZO leans into what students already love and builds a complete, coach-led system around it. Think sports, designed specifically for&nbsp;gamers."
+          bg="bg-[#f0edea]"
+          tornPaper="none"
+        />
+      </div>
 
-      {/* Grey torn paper top — overlaps up into hero */}
-      {/* (placed after OurApproach since it's a sibling in the flow) */}
-
-      {/* 3. Why parents choose EKUZO — styled like schools How It Works */}
+      {/* ══ 3. WHY PARENTS CHOOSE EKUZO — grey bg with zigzag cards ═════════ */}
       <section
-        className="bg-[#f0edea] relative overflow-visible"
+        className="bg-[#f0edea] relative overflow-clip"
         style={{
           paddingTop: "clamp(80px, 14vw, 144px)",
           paddingBottom: "clamp(120px, 18vw, 240px)",
@@ -208,61 +209,28 @@ export default function ParentsPage() {
             ))}
           </div>
         </div>
-
-        {/* White torn paper at bottom — transition to programs */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
       </section>
 
-      {/* 4. Programs */}
+      {/* ══ 4. PROGRAMS ═════════════════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="white" variant="top" style={1} />
+      </div>
       <ProgramsSection showTeams showEkuzo100 showCamps />
 
-      {/* 5. Ecosystem Animation — white torn paper transition from programs */}
-      <section className="relative overflow-visible" style={{ height: "360vh", paddingTop: "40px", paddingBottom: "40px" }}>
-        {/* White torn paper at top */}
-        <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-        <div className="sticky top-0 h-screen">
-          <EcosystemAnimation />
-        </div>
-        {/* White torn paper at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-      </section>
+      {/* ══ 5. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <section className="relative bg-grey overflow-clip" style={{ height: "360vh" }}>
+          <div className="sticky top-0 h-screen">
+            <EcosystemAnimation />
+          </div>
+        </section>
+        <TornPaperDivider color="grey" variant="bottom" style={1} />
+      </div>
 
-      {/* 6. How It Works — What parents see (styled like schools pedagogy) */}
+      {/* ══ 6. WHAT PARENTS SEE — white bg, auto-scroll cards ═══════════════ */}
       <section
-        className="bg-white relative overflow-visible"
+        className="bg-white relative"
         style={{
           paddingTop: "clamp(80px, 14vw, 188px)",
           paddingBottom: "clamp(80px, 14vw, 188px)",
@@ -299,7 +267,7 @@ export default function ParentsPage() {
         </div>
       </section>
 
-      {/* 7. Testimonials */}
+      {/* ══ 7. TESTIMONIALS ══════════════════════════════════════════════════ */}
       <section
         className="bg-white"
         style={{
@@ -320,56 +288,42 @@ export default function ParentsPage() {
         </div>
       </section>
 
-      {/* 8. Blog section */}
+      {/* ══ 8. BLOG SECTION — full-width feature card ═══════════════════════ */}
       <section
         className="bg-white"
         style={{
           paddingTop: "clamp(80px, 14vw, 188px)",
           paddingBottom: "clamp(80px, 14vw, 188px)",
-          paddingLeft: "clamp(1.5rem, 5.5vw, 40px)",
-          paddingRight: "clamp(1.5rem, 5.5vw, 40px)",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
         <div className="max-w-[1232px] mx-auto">
-          {/* Two-panel header */}
-          <div className="flex flex-col lg:flex-row mb-8">
-            <div
-              className="bg-red flex-[0_0_64%] p-8 lg:p-12 relative"
-              style={{ minHeight: "180px" }}
+          {/* Section header */}
+          <div className="flex flex-col gap-4 mb-12 items-start">
+            <Eyebrow>BLOG</Eyebrow>
+            <h4
+              className="font-body font-bold text-black leading-[1]"
+              style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
             >
-              <span className="absolute top-4 left-4 size-3 bg-white rotate-45 opacity-30" aria-hidden="true" />
-              <span className="absolute top-4 right-4 size-3 bg-white rotate-45 opacity-30" aria-hidden="true" />
-              <h4
-                className="font-body font-bold text-white leading-[1]"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 48px)", letterSpacing: "-1px" }}
-              >
-                Stories of Growth and&nbsp;Gaming
-              </h4>
-            </div>
-            <div className="bg-red flex-1 p-8 lg:p-12 flex flex-col justify-between border-l border-white/20">
-              <p
-                className="font-body text-white/80 leading-[1.357]"
-                style={{ fontSize: "clamp(1rem, 1.5vw, 22px)" }}
-              >
-                Explore how esports becomes a tool for learning, connection, and&nbsp;purpose.
-              </p>
-              <div className="flex justify-end mt-6">
-                <Image
-                  src="/images/parents-blog-decor.png"
-                  alt=""
-                  width={135}
-                  height={164}
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
+              Stories of Growth and&nbsp;Gaming
+            </h4>
+            <p
+              className="font-body text-black/70 leading-[1.417] max-w-[540px]"
+              style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
+            >
+              Explore how esports becomes a tool for learning, connection, and&nbsp;purpose.
+            </p>
           </div>
 
-          {/* Feature blog card */}
+          {/* Feature blog card — full-width image with overlay */}
           <Link
             href="/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng"
             className="block relative overflow-hidden group"
-            style={{ height: "clamp(280px, 30vw, 399px)", borderRadius: "2px" }}
+            style={{
+              height: "clamp(320px, 35vw, 500px)",
+              clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
+            }}
           >
             <Image
               src="/images/parents-blog-feature.jpg"
@@ -377,76 +331,74 @@ export default function ParentsPage() {
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
+            {/* Gradient overlay */}
             <div
-              className="absolute inset-y-0 left-0 w-[55%] flex flex-col justify-end p-6 lg:p-10"
-              style={{
-                backgroundImage: "url('/images/parents-blog-card-overlay.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "right center",
-              }}
-            >
-              <div className="mb-3">
-                <Eyebrow>BLOG</Eyebrow>
-              </div>
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)" }}
+            />
+            <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 max-w-[600px]">
               <h5
                 className="font-body font-bold text-white leading-[1.2] mb-3"
-                style={{ fontSize: "clamp(1.25rem, 2.5vw, 32px)" }}
+                style={{ fontSize: "clamp(1.5rem, 3vw, 40px)" }}
               >
                 Our Family&apos;s Esports Journey with EKUZO and the&nbsp;K1ng
               </h5>
               <p
-                className="font-body text-white/70 leading-[1.417] hidden lg:block"
+                className="font-body text-white/70 leading-[1.417] hidden md:block"
                 style={{ fontSize: "clamp(1rem, 1.5vw, 20px)" }}
               >
-                My son Ryan was always a happy kid in his early&nbsp;years.
+                My son Ryan was always a happy kid in his early years. See how EKUZO changed everything.
               </p>
             </div>
           </Link>
         </div>
       </section>
 
-      {/* 9. FAQ — black bg */}
-      <section
-        className="bg-black relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 188px)",
-          paddingBottom: "clamp(80px, 14vw, 188px)",
-          paddingLeft: "clamp(1rem, 7.2vw, 104px)",
-          paddingRight: "clamp(1rem, 7.2vw, 104px)",
-        }}
-      >
-        {/* Black torn paper at top */}
+      {/* ══ 9. FAQ — black bg, dark theme ════════════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="black" variant="top" style={1} />
         <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          className="bg-black"
           style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-50%)",
-            backgroundImage: "url(/images/torn-paper-black-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            paddingTop: "clamp(80px, 14vw, 188px)",
+            paddingBottom: "clamp(80px, 14vw, 188px)",
+            paddingLeft: "clamp(1rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1rem, 7.2vw, 104px)",
           }}
-          aria-hidden="true"
-        />
-
-        <div className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]">
-          <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
-            <h4
-              className="font-body font-bold text-white leading-[1]"
-              style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
-            >
-              Frequently asked questions
-            </h4>
-          </div>
-          <div className="flex-1">
-            <FAQAccordion items={parentsFAQs} theme="dark" />
+        >
+          <div className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]">
+            <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
+              <div className="mb-4">
+                <Eyebrow>FAQ</Eyebrow>
+              </div>
+              <h4
+                className="font-body font-bold text-white leading-[1]"
+                style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
+              >
+                Frequently asked questions
+              </h4>
+            </div>
+            <div className="flex-1">
+              <FAQAccordion items={parentsFAQs} theme="dark" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 10. Footer Banner */}
+      {/* ══ 10. FOOTER BANNER & FOOTER ══════════════════════════════════════ */}
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
+
+      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
+        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
+          Enroll my gamer
+        </ModalButton>
+        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
+          Start a conversation
+        </ModalButton>
+      </div>
+      <div className="md:hidden h-20" />
     </>
   );
 }

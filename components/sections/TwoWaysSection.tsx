@@ -1,23 +1,12 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 
 export default function TwoWaysSection() {
   return (
     <section className="bg-black relative overflow-visible">
-      {/* White torn paper at top — Framer: White2, absolute */}
-      <div
-        className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-        style={{
-          height: "clamp(115px, 19vw, 300px)",
-          transform: "translateY(-50%)",
-          backgroundImage: "url(/images/torn-paper-white-1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        aria-hidden="true"
-      />
+      <TornPaperDivider color="black" variant="top" style={2} />
 
       {/* Watermark */}
       <div
@@ -112,20 +101,6 @@ export default function TwoWaysSection() {
           </div>
         </div>
       </div>
-
-      {/* Black torn paper at bottom — Framer: Black2 */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-        style={{
-          height: "clamp(115px, 19vw, 300px)",
-          transform: "translateY(50%)",
-          backgroundImage: "url(/images/torn-paper-black-1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        aria-hidden="true"
-      />
     </section>
   );
 }

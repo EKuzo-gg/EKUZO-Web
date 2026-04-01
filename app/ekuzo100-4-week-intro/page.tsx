@@ -7,6 +7,8 @@ import OurApproachSection from "@/components/sections/OurApproachSection";
 import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ModalButton from "@/components/ui/ModalButton";
+import Eyebrow from "@/components/ui/Eyebrow";
+import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
 
 export const metadata = {
@@ -40,84 +42,121 @@ const howItWorksSteps = [
 
 const ekuzo100FAQs = [
   {
-    question: "What exactly is included in EKUZO100?",
+    question: "Can homeschool families participate?",
     answer:
-      "Four weeks of structured esports coaching: 8 sessions total (2×/week, 90 min each), on a dedicated 5-player team with a head coach. Includes team scrimmages, VOD review, and a growth debrief at the end of the month.",
+      "Absolutely. EKUZO100 is open to all students aged 10–18, including homeschool families. Sessions are held online, so your student can join from anywhere with a computer and internet connection.",
   },
   {
-    question: "What games does EKUZO100 support?",
+    question: "What happens after E100?",
     answer:
-      "We primarily coach League of Legends and Valorant. When you enroll, you'll be placed on a team matching your preferred game. Other titles may be available — contact us to ask.",
+      "Students who enjoy the program can move into EKUZO Teams — a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. There's no automatic renewal — your family decides.",
   },
   {
-    question: "What age range is EKUZO100 for?",
+    question: "How much do programs cost?",
     answer:
-      "Players aged 10–18. We group by both age and skill level so your student is with peers, not adults or far more experienced players.",
+      "EKUZO100 is $100 for the full four-week program. EKUZO Teams (semester-based) pricing varies — contact us for current rates.",
   },
   {
-    question: "Is there any long-term commitment?",
+    question: "What about college or careers?",
     answer:
-      "None. EKUZO100 is specifically designed as a low-risk, one-month entry point. At the end of the month your family decides whether to continue into EKUZO Teams — there's no automatic renewal.",
+      "Esports teaches communication, leadership, strategic thinking, and teamwork — skills that translate directly to college applications and professional careers. Many universities now offer esports scholarships and programs.",
   },
   {
-    question: "What happens after EKUZO100?",
+    question: "How does this help with school?",
     answer:
-      "Students who enjoy the program can move into EKUZO Teams — a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. It's the natural next step.",
+      "Our coaching methodology is built on proven learning science. Students develop focus, discipline, time management, and collaboration skills that carry over into academics. Parents consistently report improved engagement and confidence.",
+  },
+  {
+    question: "When are practices held?",
+    answer:
+      "Sessions run twice per week, 90 minutes each. We offer after-school and evening time slots on weekdays so students can choose what fits their schedule.",
   },
 ];
 
 export default function Ekuzo100Page() {
   return (
     <>
-      <div className="absolute top-0 left-0 right-0 z-20">
-        <Nav variant="light" />
-      </div>
-
-      {/* ══ 1. HERO ══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-white overflow-hidden"
-        style={{ paddingTop: "188px", paddingBottom: "144px", paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}
+      {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
+      <section
+        className="bg-white relative overflow-visible"
+        style={{
+          paddingTop: "clamp(160px, 18vw, 240px)",
+          paddingBottom: "clamp(160px, 22vw, 300px)",
+        }}
       >
-        <div className="max-w-[1232px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
-            <div>
-              <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-6">
-                4-Week Intro Program
-              </p>
-              <h1
-                className="font-display text-black leading-none mb-6"
-                style={{ fontSize: "clamp(5rem, 12vw, 10rem)" }}
-              >
-                EKUZO
-                <br />
-                100
-              </h1>
-              <p
-                className="font-body text-black/70 font-medium mb-3 max-w-md"
-                style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.5rem)" }}
-              >
-                One Month. $100. Your First Team.
-              </p>
-              <p className="font-body text-black/50 text-base mb-10 max-w-md leading-relaxed">
-                The low-risk way to start with EKUZO. Real coaching, real teammates, and real growth — no long-term commitment.
-              </p>
-              <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
-                Enroll My Gamer
-              </ModalButton>
-            </div>
+        <div className="absolute top-0 left-0 right-0 z-20">
+          <Nav variant="light-red" />
+        </div>
 
-            {/* Right: video */}
-            <div className="relative aspect-[3/4] bg-black overflow-hidden">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src="/videos/ekuzo100-hero.mp4" type="video/mp4" />
-              </video>
-            </div>
+        {/* Smoke decoration — lower-left */}
+        <div
+          className="absolute bottom-0 left-0 pointer-events-none select-none translate-y-[10%]"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/smoke-1@2x.png"
+            alt=""
+            width={900}
+            height={900}
+            className="object-contain w-[clamp(300px,55vw,900px)] h-auto"
+          />
+        </div>
+
+        {/* Smoke decoration — right side, full section height, extends behind nav */}
+        <div
+          className="absolute inset-y-0 right-0 z-10 pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/smoke-2@2x.png"
+            alt=""
+            width={900}
+            height={900}
+            className="h-full w-auto object-cover object-left"
+          />
+        </div>
+
+        <div
+          className="max-w-[1232px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 items-center"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          {/* Left — headline + CTA */}
+          <div>
+            <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-6">
+              4-Week Intro Program
+            </p>
+            <h1
+              className="font-display leading-none mb-6"
+              style={{ fontSize: "clamp(5rem, 12vw, 10rem)" }}
+            >
+              <span className="text-black">EKUZO</span>
+              <br />
+              <span className="text-red">100</span>
+            </h1>
+            <p
+              className="font-body text-black font-medium mb-3 max-w-md"
+              style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.5rem)", letterSpacing: "-0.02em" }}
+            >
+              One Month. $100. Your First Team.
+            </p>
+            <p className="font-body text-black/70 text-base mb-10 max-w-md leading-relaxed">
+              The low-risk way to start with EKUZO.
+            </p>
+            <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
+              Enroll my gamer
+            </ModalButton>
+          </div>
+
+          {/* Right — video reel 9:16, 70vh tall */}
+          <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "70vh" }}>
+            <PlayOnceVideo
+              src="/videos/ekuzo100-hero.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ borderRadius: "2px" }}
+            />
           </div>
         </div>
       </section>
@@ -126,29 +165,37 @@ export default function Ekuzo100Page() {
       <OurApproachSection
         heading="Built for growth, on and off the screen"
         listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
+        icons={["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/camada-white.svg"]}
         body="Parents want to know if EKUZO is the right fit for their child. Students want a chance to prove themselves on a team. EKUZO100 makes it simple: one month, $100, no long-term commitment. The perfect entry point. Your student joins a team, trains with elite coaches, and competes in real matches in just four weeks."
       />
 
-      <TornPaperDivider color="black" />
-
       {/* ══ 3. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
       <section className="relative bg-grey overflow-clip" style={{ height: "360vh" }}>
+        <TornPaperDivider color="black" variant="top" style={2} />
         <div className="sticky top-0 h-screen">
           <EcosystemAnimation />
         </div>
+        <TornPaperDivider color="black" variant="bottom" style={2} />
       </section>
 
-      <TornPaperDivider color="black" />
-
       {/* ══ 4. HOW IT WORKS ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-[144px]" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
+      <section
+        className="relative bg-white overflow-visible"
+        style={{
+          paddingTop: "188px",
+          paddingBottom: "144px",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
+        <TornPaperDivider color="white" variant="top" style={2} />
         <div className="max-w-[1232px] mx-auto">
 
           {/* Large intro card */}
           <div className="bg-grey p-10 md:p-14 mb-16">
-            <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-4">
-              How It Works
-            </p>
+            <div className="mb-4">
+              <Eyebrow>HOW IT WORKS</Eyebrow>
+            </div>
             <h2
               className="font-display text-black leading-none mb-6"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
@@ -192,7 +239,7 @@ export default function Ekuzo100Page() {
                   </h3>
                   <p
                     className={`font-body text-base leading-relaxed max-w-2xl ${
-                      i % 2 === 0 ? "text-white/60" : "text-black/60"
+                      i % 2 === 0 ? "text-white" : "text-black/60"
                     }`}
                   >
                     {step.desc}
@@ -204,33 +251,77 @@ export default function Ekuzo100Page() {
         </div>
       </section>
 
-      <TornPaperDivider color="black" />
-
-      {/* ══ 5. TESTIMONIALS ══════════════════════════════════════════════════ */}
-      <section className="bg-grey py-[144px]" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
-        <div className="max-w-[1232px] mx-auto mb-12">
+      {/* ══ 5. TESTIMONIALS — exact homepage module ══════════════════════════ */}
+      <section
+        className="bg-white"
+        style={{
+          paddingTop: "144px",
+          paddingBottom: "144px",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
+        <div className="max-w-[1022px] mx-auto flex flex-col gap-[72px]">
           <h2
-            className="font-display text-black leading-none"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            className="font-body font-bold text-black leading-[1] text-center"
+            style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}
           >
-            REAL STORIES FROM
+            What parents{" "}
             <br />
-            EKUZO FAMILIES
+            are saying
           </h2>
+          <TestimonialsCarousel />
+
+          {/* Static featured quote */}
+          <div className="flex flex-col items-center text-center gap-6 pt-8">
+            <Image
+              src="/images/testimonial-quote-mark.png"
+              alt=""
+              width={88}
+              height={80}
+              className="mb-4"
+              aria-hidden="true"
+            />
+            <p
+              className="font-body font-bold text-black leading-[1.357] max-w-[444px]"
+              style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
+            >
+              &ldquo;It&apos;s structure, mentorship, and community all in one place.&rdquo;
+            </p>
+            <div className="flex flex-col">
+              <p
+                className="font-body font-medium text-black leading-[1.357]"
+                style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
+              >
+                Rudy May
+              </p>
+              <p
+                className="font-body text-black/60 leading-[1.417]"
+                style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
+              >
+                EKUZO mom
+              </p>
+            </div>
+          </div>
         </div>
-        <TestimonialsCarousel />
       </section>
 
-      <TornPaperDivider color="black" />
-
       {/* ══ 6. WHAT HAPPENS AFTER ════════════════════════════════════════════ */}
-      <section className="bg-white py-[144px]" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
+      <section
+        className="relative bg-grey overflow-visible"
+        style={{
+          paddingTop: "144px",
+          paddingBottom: "188px",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
         <div className="max-w-[1232px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-4">
-                What&apos;s Next
-              </p>
+              <div className="mb-4">
+                <Eyebrow>WHAT&apos;S NEXT</Eyebrow>
+              </div>
               <h2
                 className="font-display text-black leading-none mb-6"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
@@ -240,10 +331,7 @@ export default function Ekuzo100Page() {
                 AFTER EKUZO100
               </h2>
               <p className="font-body text-black/70 text-lg leading-relaxed mb-8">
-                EKUZO100 is an entry point, not a dead end. Students who enjoy their month can move into semester-long <strong className="text-black">EKUZO Teams</strong>, where they stay with consistent teammates, deepen skills, and compete throughout the season.
-              </p>
-              <p className="font-body text-black/60 text-base leading-relaxed mb-10">
-                Families decide next steps after experiencing the program firsthand. No pressure, no automatic renewals.
+                EKUZO100 is an entry point, not a dead end. Students who enjoy their month can move into semester-long <strong className="text-black">EKUZO Teams</strong>, where they stay with consistent teammates, deepen skills, and compete throughout the season. Families decide next steps after experiencing the program firsthand.
               </p>
               <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
                 Start with EKUZO100
@@ -262,24 +350,32 @@ export default function Ekuzo100Page() {
       </section>
 
       {/* ══ 7. FAQ ═══════════════════════════════════════════════════════════ */}
-      <section className="bg-grey py-[144px]" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
+      <section
+        className="bg-white"
+        style={{
+          paddingTop: "144px",
+          paddingBottom: "144px",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
         <div className="max-w-[1232px] mx-auto">
-          <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-4">
-            FAQ
-          </p>
-          <h2
-            className="font-display text-black leading-none mb-14"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
-          >
-            COMMON
-            <br />
-            QUESTIONS
-          </h2>
+          <div className="mb-14">
+            <div className="mb-4">
+              <Eyebrow>FAQ</Eyebrow>
+            </div>
+            <h2
+              className="font-body font-bold text-black leading-[1]"
+              style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
+            >
+              Frequently asked questions
+            </h2>
+          </div>
           <FAQAccordion items={ekuzo100FAQs} theme="light" />
         </div>
       </section>
 
-      <FooterBanner heading="Enroll into a transformational program today" />
+      <FooterBanner heading="Turning pedagogy into progress" />
       <Footer />
     </>
   );

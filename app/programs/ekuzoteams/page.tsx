@@ -22,14 +22,17 @@ const seasonCards = [
   {
     title: "Semester-Based",
     desc: "Designed as a full team season, similar to traditional sports programs. 15 weeks of structured growth.",
+    icon: "/icons/calendar.svg",
   },
   {
     title: "Consistent Team",
     desc: "Players train with the same teammates over time, building real trust, accountability, and chemistry.",
+    icon: "/icons/team.svg",
   },
   {
     title: "Season Arc",
     desc: "Practices and scrimmages build toward a culminating end-of-season showcase — a real competitive event.",
+    icon: "/icons/trophy.svg",
   },
 ];
 
@@ -185,15 +188,15 @@ export default function EkuzoTeamsPage() {
         <OurApproachSection
           heading="Teams Are Where Growth Compounds"
           listItems={["Structured season", "Consistent team", "Coach-led practice"]}
-          icons={["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/camada-white.svg"]}
+          icons={["/icons/swords-white.svg", "/icons/confidence-2.svg", "/icons/speaking.svg"]}
           body="EKUZO Teams mirror traditional sports seasons: the same teammates, a shared rhythm, and clear expectations over time. As relationships deepen, students stop just showing up and start taking ownership of their team, their role, and how they improve together. What starts in practice doesn't stay there. The friendships, collaboration, and confidence spill beyond sessions and into everyday life."
           tornPaper="none"
         />
       </div>
 
-      {/* ══ 3. A REAL TEAM SEASON ════════════════════════════════════════════ */}
+      {/* ══ 3. ONE SEMESTER. ONE TEAM. ═════════════════════════════════════════ */}
       <section
-        className="bg-black"
+        className="relative bg-black overflow-visible"
         style={{
           paddingTop: "144px",
           paddingBottom: "144px",
@@ -201,20 +204,35 @@ export default function EkuzoTeamsPage() {
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
+        <TornPaperDivider color="black" variant="top" style={1} />
+        <TornPaperDivider color="black" variant="bottom" style={1} />
         <div className="max-w-[1232px] mx-auto">
           <div className="mb-4">
             <Eyebrow>THE SEASON</Eyebrow>
           </div>
           <h2
             className="font-display text-white leading-[0.85] mb-14"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
           >
-            A REAL TEAM SEASON
+            ONE SEMESTER. ONE TEAM.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {seasonCards.map((card, i) => (
-              <div key={card.title} className="relative bg-white p-8 flex flex-col gap-4">
-                <div className={`absolute top-0 left-0 w-full h-1 ${i === 0 ? "bg-red" : i === 1 ? "bg-white/30" : "bg-red"}`} />
+            {seasonCards.map((card) => (
+              <div
+                key={card.title}
+                className="relative bg-white p-8 flex flex-col gap-4"
+                style={{
+                  clipPath:
+                    "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
+                }}
+              >
+                <Image
+                  src={card.icon}
+                  alt=""
+                  width={40}
+                  height={40}
+                  aria-hidden="true"
+                />
                 <h3 className="font-body font-bold text-black text-xl">{card.title}</h3>
                 <p className="font-body text-black/60 text-base leading-relaxed">{card.desc}</p>
               </div>
@@ -228,7 +246,7 @@ export default function EkuzoTeamsPage() {
         className="bg-white"
         style={{
           paddingTop: "144px",
-          paddingBottom: "72px",
+          paddingBottom: "144px",
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
@@ -296,12 +314,26 @@ export default function EkuzoTeamsPage() {
           </div>
 
           {/* Red quote strip */}
-          <div className="bg-red px-10 py-12">
+          <div
+            className="bg-red px-10 py-12 flex items-start gap-6"
+            style={{
+              clipPath:
+                "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
+            }}
+          >
+            <Image
+              src="/images/testimonial-quote-mark.png"
+              alt=""
+              width={56}
+              height={50}
+              className="shrink-0 mt-1 brightness-0 invert"
+              aria-hidden="true"
+            />
             <blockquote
-              className="font-display text-white leading-tight max-w-3xl"
-              style={{ fontSize: "clamp(1.5rem, 3vw, 2.5rem)" }}
+              className="font-body font-bold text-white leading-snug max-w-3xl"
+              style={{ fontSize: "clamp(1.25rem, 2.5vw, 2rem)" }}
             >
-              &ldquo;Teams work toward shared goals through recurring competition, with the season culminating in a showcase that brings everything together.&rdquo;
+              Teams work toward shared goals through recurring competition, with the season culminating in a showcase that brings everything together.
             </blockquote>
           </div>
         </div>
@@ -312,20 +344,20 @@ export default function EkuzoTeamsPage() {
 
       {/* ══ 6. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
       <div className="relative overflow-visible">
-        <TornPaperDivider color="grey" variant="top" style={2} />
+        <TornPaperDivider color="grey" variant="top" style={1} />
         <section className="bg-grey overflow-clip" style={{ height: "360vh" }}>
           <div className="sticky top-0 h-screen">
             <EcosystemAnimation />
           </div>
         </section>
-        <TornPaperDivider color="grey" variant="bottom" style={2} />
+        <TornPaperDivider color="grey" variant="bottom" style={1} />
       </div>
 
       {/* ══ 7. TESTIMONIALS — homepage module ════════════════════════════════ */}
       <section
         className="bg-white"
         style={{
-          paddingTop: "72px",
+          paddingTop: "144px",
           paddingBottom: "144px",
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
@@ -388,27 +420,27 @@ export default function EkuzoTeamsPage() {
       >
         <TornPaperDivider color="grey" variant="top" style={1} />
         <div className="max-w-[1232px] mx-auto">
+          <div className="mb-4">
+            <Eyebrow>THE EKUZO SYSTEM</Eyebrow>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
-              <div className="mb-4">
-                <Eyebrow>THE EKUZO SYSTEM</Eyebrow>
-              </div>
               <h2
                 className="font-display text-black leading-[0.85] mb-6"
-                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
               >
                 HOW TEAMS FIT
                 <br />
                 INTO THE SYSTEM
               </h2>
-            </div>
-            <div>
               <p className="font-body text-black/70 text-lg leading-relaxed mb-6">
                 Many students begin with EKUZO100 to experience the system with low commitment. Teams are where most students stay: building habits, relationships, and confidence over time.
               </p>
-              <p className="font-body text-black/70 text-lg leading-relaxed mb-10">
+              <p className="font-body text-black/70 text-lg leading-relaxed">
                 Camps offer short, focused bursts that supplement or accelerate growth. Families decide next steps after experiencing the program firsthand.
               </p>
+            </div>
+            <div>
               {/* Program progression */}
               <div className="flex flex-col gap-3">
                 {[
@@ -419,22 +451,22 @@ export default function EkuzoTeamsPage() {
                   <a
                     key={p.label}
                     href={p.href}
-                    className={`flex items-center justify-between p-5 border-2 transition-colors ${
+                    className={`flex items-center justify-between p-6 border-2 transition-colors ${
                       p.current
                         ? "border-red bg-red text-white pointer-events-none"
-                        : "border-black/15 bg-white text-black hover:border-black"
+                        : "border-black/15 bg-white text-black hover:border-red"
                     }`}
                   >
                     <div>
-                      <span className={`font-body font-bold text-base block ${p.current ? "text-white" : "text-black"}`}>
+                      <span className={`font-body font-bold text-xl block ${p.current ? "text-white" : "text-black"}`}>
                         {p.label}
                       </span>
-                      <span className={`font-body text-sm ${p.current ? "text-white/70" : "text-black/50"}`}>
+                      <span className={`font-body text-base ${p.current ? "text-white/70" : "text-black/70"}`}>
                         {p.desc}
                       </span>
                     </div>
                     {p.current && (
-                      <span className="font-body text-xs font-bold text-white bg-white/20 px-2 py-1 uppercase tracking-wider">
+                      <span className="font-body text-sm font-bold text-white bg-white/20 px-3 py-1.5 uppercase tracking-wider">
                         You&apos;re here
                       </span>
                     )}

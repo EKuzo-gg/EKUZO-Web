@@ -6,85 +6,74 @@ import FAQAccordion from "@/components/ui/FAQAccordion";
 import OurApproachSection from "@/components/sections/OurApproachSection";
 import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
-import TwoWaysSection from "@/components/sections/TwoWaysSection";
 import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
 
 export const metadata = {
-  title: "EKUZO Teams — Semester-Based Esports Program",
+  title: "EKUZO100 — 4-Week Intro Program",
   description:
-    "EKUZO Teams: a semester-based esports program structured like sports. Consistent teammates, coach-led practice, and a real competitive season.",
+    "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO — real coaching, real teammates, real growth.",
 };
 
-const seasonCards = [
-  {
-    title: "Semester-Based",
-    desc: "Designed as a full team season, similar to traditional sports programs. 15 weeks of structured growth.",
-  },
-  {
-    title: "Consistent Team",
-    desc: "Players train with the same teammates over time, building real trust, accountability, and chemistry.",
-  },
-  {
-    title: "Season Arc",
-    desc: "Practices and scrimmages build toward a culminating end-of-season showcase — a real competitive event.",
-  },
-];
-
-const sessionSteps = [
+const howItWorksSteps = [
   {
     number: "1",
-    title: "Learn",
-    desc: "Coach introduces a team focus or skill for the session. Context-first, so players understand the why.",
+    title: "Join",
+    desc: "Choose your schedule: after school or evening (weekdays). You're placed on a team of ~5 players at a similar level.",
   },
   {
     number: "2",
     title: "Practice",
-    desc: "Players apply it through structured drills and team-based play. Reps with purpose.",
+    desc: "90-minute sessions, twice a week. Learn with your coach, alongside your team — structured drills, not just playing games.",
   },
   {
     number: "3",
-    title: "Apply",
-    desc: "Guided scrimmage scenarios reinforce communication and coordination under real game pressure.",
+    title: "Compete",
+    desc: "Apply everything through scrimmages and intra-league competitions. Real stakes, real teamwork under pressure.",
   },
   {
     number: "4",
-    title: "Reflect",
-    desc: "Coach-led discussion connects performance to improvement and team goals. The loop closes here.",
+    title: "Progress",
+    desc: "Reflect on growth with your coach at the end of the month. Then decide what comes next — no pressure, no contracts.",
   },
 ];
 
-const teamsFAQs = [
+const ekuzo100FAQs = [
   {
-    question: "How long is a semester season?",
+    question: "Can homeschool families participate?",
     answer:
-      "Each EKUZO Teams season runs approximately 15 weeks, following the school calendar. Fall and spring seasons are available depending on your school or region.",
+      "Absolutely. EKUZO100 is open to all students aged 10–18, including homeschool families. Sessions are held online, so your student can join from anywhere with a computer and internet connection.",
   },
   {
-    question: "How many sessions per week?",
+    question: "What happens after E100?",
     answer:
-      "Typically 2–3 sessions per week. School-based teams practice during or after school hours. Home-based teams practice in the evenings on a schedule that works for the family.",
+      "Students who enjoy the program can move into EKUZO Teams — a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. There's no automatic renewal — your family decides.",
   },
   {
-    question: "How are teams formed?",
+    question: "How much do programs cost?",
     answer:
-      "Students are grouped in increments of ~5 to create balanced teams. We prioritize local cohorts and skill-level matching. A preference for local players means friendships can extend beyond the screen.",
+      "EKUZO100 is $100 for the full four-week program. EKUZO Teams (semester-based) pricing varies — contact us for current rates.",
   },
   {
-    question: "What's the difference between School and Home tracks?",
+    question: "What about college or careers?",
     answer:
-      "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school (often during or after school hours). The Home track is for families who want to participate independently, with sessions scheduled in evenings.",
+      "Esports teaches communication, leadership, strategic thinking, and teamwork — skills that translate directly to college applications and professional careers. Many universities now offer esports scholarships and programs.",
   },
   {
-    question: "What comes after EKUZO Teams?",
+    question: "How does this help with school?",
     answer:
-      "Students can re-enroll each semester. As relationships and skill deepen, teams often continue together across multiple seasons. Some families also use EKUZO Camps during summer breaks to maintain momentum.",
+      "Our coaching methodology is built on proven learning science. Students develop focus, discipline, time management, and collaboration skills that carry over into academics. Parents consistently report improved engagement and confidence.",
+  },
+  {
+    question: "When are practices held?",
+    answer:
+      "Sessions run twice per week, 90 minutes each. We offer after-school and evening time slots on weekdays so students can choose what fits their schedule.",
   },
 ];
 
-export default function EkuzoTeamsPage() {
+export default function Ekuzo100Page() {
   return (
     <>
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
@@ -137,7 +126,7 @@ export default function EkuzoTeamsPage() {
           {/* Left — headline + CTA */}
           <div>
             <div className="mb-6">
-              <Eyebrow>SEMESTER-BASED PROGRAM</Eyebrow>
+              <Eyebrow>4-WEEK INTRO PROGRAM</Eyebrow>
             </div>
             <h1
               className="font-display leading-[0.85] mb-6"
@@ -145,16 +134,16 @@ export default function EkuzoTeamsPage() {
             >
               <span className="text-black">EKUZO</span>
               <br />
-              <span className="text-red">TEAMS</span>
+              <span className="text-red">100</span>
             </h1>
             <p
               className="font-body text-black font-medium mb-3 max-w-md"
               style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.5rem)", letterSpacing: "-0.02em" }}
             >
-              Structured Like Sports. Built Through Practice.
+              One Month. $100. Your First Team.
             </p>
             <p className="font-body text-black/70 text-base mb-10 max-w-md leading-relaxed">
-              The semester-based team season where growth compounds.
+              The low-risk way to start with EKUZO.
             </p>
             <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
               Enroll my gamer
@@ -171,7 +160,7 @@ export default function EkuzoTeamsPage() {
             }}
           >
             <PlayOnceVideo
-              src="/videos/ekuzo-teams-hero.mp4"
+              src="/videos/ekuzo100-hero.mp4"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ borderRadius: "2px" }}
             />
@@ -183,51 +172,30 @@ export default function EkuzoTeamsPage() {
       <div className="relative overflow-visible">
         <TornPaperDivider color="white" variant="top" style={2} />
         <OurApproachSection
-          heading="Teams Are Where Growth Compounds"
-          listItems={["Structured season", "Consistent team", "Coach-led practice"]}
+          heading="Built for growth, on and off the screen"
+          listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
           icons={["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/camada-white.svg"]}
-          body="EKUZO Teams mirror traditional sports seasons: the same teammates, a shared rhythm, and clear expectations over time. As relationships deepen, students stop just showing up and start taking ownership of their team, their role, and how they improve together. What starts in practice doesn't stay there. The friendships, collaboration, and confidence spill beyond sessions and into everyday life."
+          body="Parents want to know if EKUZO is the right fit for their child. Students want a chance to prove themselves on a team. EKUZO100 makes it simple: one month, $100, no long-term commitment. The perfect entry point. Your student joins a team, trains with elite coaches, and competes in real matches in just four weeks."
           tornPaper="none"
         />
       </div>
 
-      {/* ══ 3. A REAL TEAM SEASON ════════════════════════════════════════════ */}
-      <section
-        className="bg-black"
-        style={{
-          paddingTop: "144px",
-          paddingBottom: "144px",
-          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
-        }}
-      >
-        <div className="max-w-[1232px] mx-auto">
-          <div className="mb-4">
-            <Eyebrow>THE SEASON</Eyebrow>
+      {/* ══ 3. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <section className="bg-grey overflow-clip" style={{ height: "360vh" }}>
+          <div className="sticky top-0 h-screen">
+            <EcosystemAnimation />
           </div>
-          <h2
-            className="font-display text-white leading-[0.85] mb-14"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
-          >
-            A REAL TEAM SEASON
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {seasonCards.map((card, i) => (
-              <div key={card.title} className="relative bg-white p-8 flex flex-col gap-4">
-                <div className={`absolute top-0 left-0 w-full h-1 ${i === 0 ? "bg-red" : i === 1 ? "bg-white/30" : "bg-red"}`} />
-                <h3 className="font-body font-bold text-black text-xl">{card.title}</h3>
-                <p className="font-body text-black/60 text-base leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <TornPaperDivider color="grey" variant="bottom" style={1} />
+      </div>
 
-      {/* ══ 4. SESSION STRUCTURE ══════════════════════════════════════════════ */}
+      {/* ══ 4. HOW IT WORKS ══════════════════════════════════════════════════ */}
       <section
-        className="bg-white"
+        className="relative bg-white overflow-visible"
         style={{
-          paddingTop: "144px",
+          paddingTop: "188px",
           paddingBottom: "72px",
           paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
@@ -235,25 +203,25 @@ export default function EkuzoTeamsPage() {
       >
         <div className="max-w-[1232px] mx-auto">
 
-          {/* Intro card */}
-          <div className="bg-grey p-10 md:p-14 mb-14">
+          {/* Large intro card */}
+          <div className="bg-grey p-10 md:p-14 mb-16">
             <div className="mb-4">
-              <Eyebrow>SESSION STRUCTURE</Eyebrow>
+              <Eyebrow>HOW IT WORKS</Eyebrow>
             </div>
             <h2
               className="font-display text-black leading-[0.85] mb-6"
               style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
             >
-              EVERY SESSION, THE SAME LOOP.
+              ONE MONTH. FOUR STEPS.
             </h2>
             <p className="font-body text-black/60 text-lg leading-relaxed max-w-2xl">
-              Every EKUZO Team session follows the same intentional structure, whether it&apos;s hosted during or after the school day.
+              Each EKUZO100 cohort follows the same one-month structure. Practices are 90 minutes, twice a week — designed to teach teamwork, focus, and growth through play.
             </p>
           </div>
 
           {/* 4-step zigzag */}
-          <div className="flex flex-col gap-6 mb-14">
-            {sessionSteps.map((step, i) => (
+          <div className="flex flex-col gap-6">
+            {howItWorksSteps.map((step, i) => (
               <div
                 key={step.number}
                 className={`flex flex-col md:flex-row items-start gap-8 p-8 ${
@@ -294,34 +262,10 @@ export default function EkuzoTeamsPage() {
               </div>
             ))}
           </div>
-
-          {/* Red quote strip */}
-          <div className="bg-red px-10 py-12">
-            <blockquote
-              className="font-display text-white leading-tight max-w-3xl"
-              style={{ fontSize: "clamp(1.5rem, 3vw, 2.5rem)" }}
-            >
-              &ldquo;Teams work toward shared goals through recurring competition, with the season culminating in a showcase that brings everything together.&rdquo;
-            </blockquote>
-          </div>
         </div>
       </section>
 
-      {/* ══ 5. TWO WAYS TO PARTICIPATE ═══════════════════════════════════════ */}
-      <TwoWaysSection />
-
-      {/* ══ 6. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
-      <div className="relative overflow-visible">
-        <TornPaperDivider color="grey" variant="top" style={2} />
-        <section className="bg-grey overflow-clip" style={{ height: "360vh" }}>
-          <div className="sticky top-0 h-screen">
-            <EcosystemAnimation />
-          </div>
-        </section>
-        <TornPaperDivider color="grey" variant="bottom" style={2} />
-      </div>
-
-      {/* ══ 7. TESTIMONIALS — homepage module ════════════════════════════════ */}
+      {/* ══ 5. TESTIMONIALS — exact homepage module ══════════════════════════ */}
       <section
         className="bg-white"
         style={{
@@ -376,7 +320,7 @@ export default function EkuzoTeamsPage() {
         </div>
       </section>
 
-      {/* ══ 8. HOW TEAMS FIT ═════════════════════════════════════════════════ */}
+      {/* ══ 6. WHAT HAPPENS AFTER ════════════════════════════════════════════ */}
       <section
         className="relative bg-grey overflow-visible"
         style={{
@@ -388,66 +332,40 @@ export default function EkuzoTeamsPage() {
       >
         <TornPaperDivider color="grey" variant="top" style={1} />
         <div className="max-w-[1232px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="mb-4">
-                <Eyebrow>THE EKUZO SYSTEM</Eyebrow>
+                <Eyebrow>WHAT&apos;S NEXT</Eyebrow>
               </div>
               <h2
                 className="font-display text-black leading-[0.85] mb-6"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
               >
-                HOW TEAMS FIT
+                WHAT HAPPENS
                 <br />
-                INTO THE SYSTEM
+                AFTER EKUZO100
               </h2>
+              <p className="font-body text-black/70 text-lg leading-relaxed mb-8">
+                EKUZO100 is an entry point, not a dead end. Students who enjoy their month can move into semester-long <strong className="text-black">EKUZO Teams</strong>, where they stay with consistent teammates, deepen skills, and compete throughout the season. Families decide next steps after experiencing the program firsthand.
+              </p>
+              <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
+                Start with EKUZO100
+              </ModalButton>
             </div>
-            <div>
-              <p className="font-body text-black/70 text-lg leading-relaxed mb-6">
-                Many students begin with EKUZO100 to experience the system with low commitment. Teams are where most students stay: building habits, relationships, and confidence over time.
-              </p>
-              <p className="font-body text-black/70 text-lg leading-relaxed mb-10">
-                Camps offer short, focused bursts that supplement or accelerate growth. Families decide next steps after experiencing the program firsthand.
-              </p>
-              {/* Program progression */}
-              <div className="flex flex-col gap-3">
-                {[
-                  { label: "EKUZO100", desc: "4-week intro · $100 · no commitment", href: "/programs/e100", current: false },
-                  { label: "EKUZO Teams", desc: "Semester program · consistent team · season arc", href: "#", current: true },
-                  { label: "EKUZO Camps", desc: "1-week intensive · summer & breaks", href: "/ekuzocamps-seasonal", current: false },
-                ].map((p) => (
-                  <a
-                    key={p.label}
-                    href={p.href}
-                    className={`flex items-center justify-between p-5 border-2 transition-colors ${
-                      p.current
-                        ? "border-red bg-red text-white pointer-events-none"
-                        : "border-black/15 bg-white text-black hover:border-black"
-                    }`}
-                  >
-                    <div>
-                      <span className={`font-body font-bold text-base block ${p.current ? "text-white" : "text-black"}`}>
-                        {p.label}
-                      </span>
-                      <span className={`font-body text-sm ${p.current ? "text-white/70" : "text-black/50"}`}>
-                        {p.desc}
-                      </span>
-                    </div>
-                    {p.current && (
-                      <span className="font-body text-xs font-bold text-white bg-white/20 px-2 py-1 uppercase tracking-wider">
-                        You&apos;re here
-                      </span>
-                    )}
-                  </a>
-                ))}
-              </div>
+            <div className="relative aspect-square overflow-hidden bg-grey">
+              <Image
+                src="/images/ekuzo100-after-section.png"
+                alt="What happens after EKUZO100"
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
         </div>
         <TornPaperDivider color="grey" variant="bottom" style={2} />
       </section>
 
-      {/* ══ 9. FAQ — black theme ═════════════════════════════════════════════ */}
+      {/* ══ 7. FAQ — black theme ═════════════════════════════════════════════ */}
       <section
         className="bg-black"
         style={{
@@ -469,11 +387,11 @@ export default function EkuzoTeamsPage() {
               Frequently asked questions
             </h2>
           </div>
-          <FAQAccordion items={teamsFAQs} theme="dark" />
+          <FAQAccordion items={ekuzo100FAQs} theme="dark" />
         </div>
       </section>
 
-      <FooterBanner heading="Enroll into a transformational program today" />
+      <FooterBanner heading="Turning pedagogy into progress" />
       <Footer />
     </>
   );

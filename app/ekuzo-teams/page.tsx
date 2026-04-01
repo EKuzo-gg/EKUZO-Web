@@ -8,6 +8,7 @@ import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import TwoWaysSection from "@/components/sections/TwoWaysSection";
 import ModalButton from "@/components/ui/ModalButton";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Image from "next/image";
 
 export const metadata = {
@@ -360,9 +361,9 @@ export default function EkuzoTeamsPage() {
       {/* ══ 9. FAQ ═══════════════════════════════════════════════════════════ */}
       <section className="bg-white py-[144px]" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
         <div className="max-w-[1232px] mx-auto">
-          <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-4">
-            FAQ
-          </p>
+          <div className="mb-4">
+            <Eyebrow>FAQ</Eyebrow>
+          </div>
           <h2
             className="font-display text-black leading-none mb-14"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}

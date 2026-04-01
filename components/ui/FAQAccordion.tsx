@@ -30,29 +30,22 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
           >
-            {/* Arrow icon — 40px circle, Framer pattern */}
+            {/* Camada icon */}
             <span
-              className={`shrink-0 size-8 lg:size-10 rounded-full flex items-center justify-center transition-transform duration-200 ${
-                open === i ? "rotate-180" : ""
+              className={`shrink-0 size-8 lg:size-10 rounded-full flex items-center justify-center transition-all duration-200 ${
+                open === i ? "bg-red rotate-180" : ""
               }`}
               style={{
-                backgroundColor: isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)",
+                backgroundColor: open === i ? undefined : (isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)"),
               }}
             >
               <svg
-                width="14"
-                height="8"
-                viewBox="0 0 14 8"
+                className="w-7 h-7 lg:w-8 lg:h-8"
+                viewBox="0 0 72 72"
                 fill="none"
                 aria-hidden="true"
               >
-                <path
-                  d="M1 1L7 7L13 1"
-                  stroke={isDark ? "white" : "black"}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M13.0491 26.8779L34.956 31.2054L58.9507 16.5L35.1343 55.5L13.0491 26.8779Z" fill={open === i ? "white" : (isDark ? "white" : "black")} />
               </svg>
             </span>
 

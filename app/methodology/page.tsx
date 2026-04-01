@@ -53,9 +53,10 @@ const pillars = [
 export default function MethodologyPage() {
   return (
     <>
-      {/* ── 1. Hero ─────────────────────────────────────────────── */}
+      {/* ══ 1. HERO — white bg, 50/50 grid, smoke graphics ═════════════════ */}
+      <div className="relative overflow-visible" style={{ zIndex: 1 }}>
       <section
-        className="bg-white relative overflow-visible"
+        className="bg-white relative overflow-clip"
         style={{
           paddingTop: "clamp(160px, 18vw, 240px)",
           paddingBottom: "clamp(160px, 22vw, 300px)",
@@ -65,7 +66,7 @@ export default function MethodologyPage() {
           <Nav variant="light-red" />
         </div>
 
-        {/* Smoke decoration — lower-left, oversized so torn paper covers edges */}
+        {/* Smoke decoration — lower-left */}
         <div
           className="absolute bottom-0 left-0 pointer-events-none select-none translate-y-[10%]"
           aria-hidden="true"
@@ -79,9 +80,9 @@ export default function MethodologyPage() {
           />
         </div>
 
-        {/* Smoke decoration — right side, full section height, behind nav */}
+        {/* Smoke decoration — right side, full height */}
         <div
-          className="absolute inset-y-0 right-0 pointer-events-none select-none"
+          className="absolute inset-y-0 right-0 z-10 pointer-events-none select-none"
           aria-hidden="true"
         >
           <Image
@@ -94,17 +95,17 @@ export default function MethodologyPage() {
         </div>
 
         <div
-          className="max-w-[1232px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-12 items-center"
+          className="max-w-[1232px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 items-center"
           style={{
             paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          {/* Left — headline + CTA (70%) */}
+          {/* Left — headline + CTA */}
           <div>
             <h1
-              className="font-display uppercase text-black leading-[0.9] mb-6"
-              style={{ fontSize: "clamp(100px, 14vw, 200px)" }}
+              className="font-display uppercase text-black leading-[0.85] mb-6"
+              style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
             >
               Pedagogy of gaming
             </h1>
@@ -119,8 +120,11 @@ export default function MethodologyPage() {
             </ModalButton>
           </div>
 
-          {/* Right — video reel 9:16, 720px tall */}
-          <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "720px" }}>
+          {/* Right — video reel 9:16, 70vh tall */}
+          <div
+            className="relative mx-auto lg:mx-0"
+            style={{ aspectRatio: "9/16", maxHeight: "70vh", width: "min(100%, calc(70vh * 9 / 16))" }}
+          >
             <PlayOnceVideo
               src="/videos/pedagogy-hero.mp4"
               className="absolute inset-0 w-full h-full object-cover"
@@ -129,156 +133,172 @@ export default function MethodologyPage() {
           </div>
         </div>
       </section>
-
-      {/* ── 2. Why Games Work — grey bg ────────────────────────── */}
-      <section
-        className="bg-[#f0edea] relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 144px)",
-          paddingBottom: "clamp(120px, 18vw, 240px)",
-        }}
-      >
-        <TornPaperDivider color="grey" variant="top" style={1} />
-        {/* Decorative background */}
+        {/* Torn paper: hero (white) → Why Games Work (grey) — outside the overflow-clip section */}
         <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
+          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
           style={{
-            backgroundImage: "url(/images/card-background@2x.png)",
+            height: "clamp(115px, 19vw, 300px)",
+            transform: "translateY(52%)",
+            backgroundImage: "url(/images/new%20torn%20paper/torn-paper-grey-1@2x.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
+          aria-hidden="true"
         />
+      </div>
 
-        <div
-          className="max-w-[1232px] mx-auto relative z-10"
+      {/* ══ 2. WHY GAMES WORK — grey bg, zigzag cards ═══════════════════════ */}
+      <div className="relative overflow-visible" style={{ zIndex: 0 }}>
+        <section
+          className="bg-[#f0edea] relative"
           style={{
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            marginTop: "clamp(-60px, -10vw, -150px)",
+            paddingTop: "clamp(140px, 24vw, 294px)",
+            paddingBottom: "clamp(120px, 18vw, 240px)",
           }}
         >
-          {/* Large intro card with eyebrow */}
+          {/* Decorative background — extends up behind the torn paper */}
           <div
-            className="bg-white mb-8"
-            style={{
-              borderRadius: "2px",
-              padding: "clamp(2rem, 5vw, 64px)",
-            }}
-          >
-            <div className="mb-4">
-              <Eyebrow>HOW IT WORKS</Eyebrow>
-            </div>
-            <h4
-              className="font-body font-bold text-black leading-[1] mb-6"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 64px)",
-                letterSpacing: "-1.28px",
-              }}
-            >
-              Why games work as learning systems?
-            </h4>
-            <p
-              className="font-body text-black/70 leading-[1.357]"
-              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
-            >
-              Every great game is a learning environment. Players stay engaged
-              because they&apos;re motivated, supported, and challenged just
-              enough to grow &mdash; the same best practices that drive effective
-              classrooms.
-            </p>
-          </div>
-
-          {/* Feature cards — zigzag with CircleIcon */}
-          <div className="flex flex-col gap-8">
-            {howItWorksCards.map((card, i) => (
-              <div
-                key={card.title}
-                className={`flex ${i % 2 === 0 ? "lg:justify-end" : "lg:justify-start"}`}
-              >
-                <div
-                  className="bg-white w-full lg:w-[560px]"
-                  style={{
-                    borderRadius: "2px",
-                    padding: "clamp(1.5rem, 4vw, 48px)",
-                  }}
-                >
-                  <CircleIcon src={card.icon} className="mb-5" />
-                  <h5
-                    className="font-body font-bold text-black leading-[1.2] mb-4"
-                    style={{ fontSize: "clamp(1.5rem, 2.8vw, 40px)" }}
-                  >
-                    {card.title}
-                  </h5>
-                  <p
-                    className="font-body text-black/70 leading-[1.417]"
-                    style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
-                  >
-                    {card.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Quote — red bg ─────────────────────────────────── */}
-      <section
-        className="bg-red relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 144px)",
-          paddingBottom: "clamp(80px, 14vw, 144px)",
-        }}
-      >
-        <TornPaperDivider color="red" variant="top" style={1} />
-
-        <div
-          className="max-w-[880px] mx-auto text-center relative z-10"
-          style={{
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
-          }}
-        >
-          {/* Decorative quote icon */}
-          <Image
-            src="/images/quote-white@2x.png"
-            alt=""
-            width={40}
-            height={40}
-            className="mx-auto mb-8"
+            className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
+            style={{
+              backgroundImage: "url(/images/card-background@2x.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
           />
 
-          <blockquote
-            className="font-body font-bold text-white leading-[1.2] mb-10"
-            style={{ fontSize: "clamp(1.25rem, 2.8vw, 40px)" }}
+          <div
+            className="max-w-[1232px] mx-auto relative z-10"
+            style={{
+              paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+              paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            }}
           >
-            &ldquo;Our job isn&apos;t to add pedagogy to games; it&apos;s to
-            help students see it, use it, and carry that mindset into school,
-            careers, and life&rdquo;
-          </blockquote>
+            {/* Large intro card with eyebrow */}
+            <div
+              className="bg-white mb-8"
+              style={{
+                borderRadius: "2px",
+                padding: "clamp(2rem, 5vw, 64px)",
+              }}
+            >
+              <div className="mb-4">
+                <Eyebrow>HOW IT WORKS</Eyebrow>
+              </div>
+              <h4
+                className="font-body font-bold text-black leading-[1] mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 64px)",
+                  letterSpacing: "-1.28px",
+                }}
+              >
+                Why games work as learning systems?
+              </h4>
+              <p
+                className="font-body text-black/70 leading-[1.357]"
+                style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+              >
+                Every great game is a learning environment. Players stay engaged
+                because they&apos;re motivated, supported, and challenged just
+                enough to grow &mdash; the same best practices that drive effective
+                classrooms.
+              </p>
+            </div>
 
-          <p
-            className="font-body font-bold text-white"
-            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            {/* Feature cards — zigzag with CircleIcon */}
+            <div className="flex flex-col gap-8">
+              {howItWorksCards.map((card, i) => (
+                <div
+                  key={card.title}
+                  className={`flex ${i % 2 === 0 ? "lg:justify-end" : "lg:justify-start"}`}
+                >
+                  <div
+                    className="bg-white w-full lg:w-[560px]"
+                    style={{
+                      borderRadius: "2px",
+                      padding: "clamp(1.5rem, 4vw, 48px)",
+                    }}
+                  >
+                    <CircleIcon src={card.icon} className="mb-5" />
+                    <h5
+                      className="font-body font-bold text-black leading-[1.2] mb-4"
+                      style={{ fontSize: "clamp(1.5rem, 2.8vw, 40px)" }}
+                    >
+                      {card.title}
+                    </h5>
+                    <p
+                      className="font-body text-black/70 leading-[1.417]"
+                      style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
+                    >
+                      {card.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* ══ 3. QUOTE — red bg ═══════════════════════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="red" variant="top" style={1} />
+        <div
+          className="bg-red"
+          style={{
+            paddingTop: "clamp(80px, 14vw, 144px)",
+            paddingBottom: "clamp(80px, 14vw, 144px)",
+          }}
+        >
+          <div
+            className="max-w-[880px] mx-auto text-center relative z-10"
+            style={{
+              paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+              paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            }}
           >
-            Karlin Oei
-          </p>
-          <p
-            className="font-body font-bold text-white/60"
-            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
-          >
-            Founder EKUZO
-          </p>
+            {/* Decorative quote icon */}
+            <Image
+              src="/images/quote-white@2x.png"
+              alt=""
+              width={40}
+              height={40}
+              className="mx-auto mb-8"
+              aria-hidden="true"
+            />
+
+            <blockquote
+              className="font-body font-bold text-white leading-[1.2] mb-10"
+              style={{ fontSize: "clamp(1.25rem, 2.8vw, 40px)" }}
+            >
+              &ldquo;Our job isn&apos;t to add pedagogy to games; it&apos;s to
+              help students see it, use it, and carry that mindset into school,
+              careers, and life&rdquo;
+            </blockquote>
+
+            <p
+              className="font-body font-bold text-white"
+              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            >
+              Karlin Oei
+            </p>
+            <p
+              className="font-body font-bold text-white/60"
+              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            >
+              Founder EKUZO
+            </p>
+          </div>
         </div>
-
         <TornPaperDivider color="red" variant="bottom" style={1} />
       </section>
 
-      {/* ── 4. Ten Pillars — black bg ─────────────────────────── */}
+      {/* ══ 4. TEN PILLARS — black bg ═══════════════════════════════════════ */}
       <section
-        className="bg-black relative overflow-visible"
+        className="bg-black relative overflow-clip"
         style={{
           paddingTop: "clamp(80px, 14vw, 188px)",
           paddingBottom: "clamp(80px, 14vw, 188px)",
@@ -324,7 +344,6 @@ export default function MethodologyPage() {
               { cards: [pillars[7], pillars[8], pillars[9]], offset: false },
             ];
 
-            /* Top-left + bottom-right corner clip only */
             const clipOuter =
               "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)";
             const clipInner =
@@ -375,9 +394,20 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      {/* ── 5. Footer Banner + Footer ─────────────────────────── */}
+      {/* ══ 5. FOOTER BANNER & FOOTER ═══════════════════════════════════════ */}
       <FooterBanner heading="Turning pedagogy into progress for every student" />
       <Footer />
+
+      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
+        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
+          Enroll my gamer
+        </ModalButton>
+        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
+          Start a conversation
+        </ModalButton>
+      </div>
+      <div className="md:hidden h-20" />
     </>
   );
 }

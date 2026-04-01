@@ -7,8 +7,10 @@ import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import OurApproachSection from "@/components/sections/OurApproachSection";
 import ProgramsSection from "@/components/sections/ProgramsSection";
 import AutoScrollCards from "@/components/ui/AutoScrollCards";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
+import ModalButton from "@/components/ui/ModalButton";
 
 export const metadata = {
   title: "Schools — EKUZO",
@@ -47,81 +49,71 @@ const schoolsFAQs = [
 export default function SchoolsPage() {
   return (
     <>
-      {/* 1. Hero — white bg */}
-      <section
-        className="bg-white relative overflow-visible"
-        style={{
-          paddingTop: "clamp(160px, 18vw, 240px)",
-          paddingBottom: "clamp(200px, 28vw, 360px)",
-        }}
-      >
-        {/* Nav inside hero */}
-        <div className="absolute top-0 left-0 right-0 z-20">
-          <Nav variant="light-red" />
-        </div>
-
-        <div
-          className="max-w-[1232px] mx-auto relative z-10"
+      {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <section
+          className="bg-white relative overflow-clip"
           style={{
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingTop: "clamp(160px, 18vw, 240px)",
+            paddingBottom: "clamp(200px, 28vw, 360px)",
           }}
         >
-          <h1
-            className="font-display uppercase text-black leading-none text-center md:text-left"
-            style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
+          {/* Nav */}
+          <div className="absolute top-0 left-0 right-0 z-20">
+            <Nav variant="light-red" />
+          </div>
+
+          <div
+            className="max-w-[1232px] mx-auto relative z-10"
+            style={{
+              paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+              paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            }}
           >
-            ESPORTS THAT BELONG IN
-            <br />
-            <span className="hidden md:inline-block" style={{ paddingLeft: "clamp(100px, 30vw, 500px)" }}>SCHOOLS</span>
-            <span className="md:hidden">SCHOOLS</span>
-          </h1>
-        </div>
+            <h1
+              className="font-display uppercase text-black leading-[0.85] text-center md:text-left"
+              style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
+            >
+              ESPORTS THAT BELONG IN
+              <br />
+              <span className="hidden md:inline-block" style={{ paddingLeft: "clamp(100px, 30vw, 500px)" }}>SCHOOLS</span>
+              <span className="md:hidden">SCHOOLS</span>
+            </h1>
+          </div>
 
-        {/* Left character — desktop: absolute left, mobile: bottom center-left */}
-        <div
-          className="absolute z-20 bottom-0 left-1/2 -translate-x-[65%] md:left-[18%] md:-translate-x-1/2 md:translate-y-0"
-        >
-          <Image
-            src="/images/schools-hero-left.png"
-            alt=""
-            width={545}
-            height={732}
-            aria-hidden="true"
-            className="object-contain max-h-[50vh] md:max-h-none w-auto"
-          />
-        </div>
+          {/* Left character */}
+          <div
+            className="absolute z-20 bottom-0 left-1/2 -translate-x-[65%] md:left-[18%] md:-translate-x-1/2 md:translate-y-0"
+          >
+            <Image
+              src="/images/schools-hero-left.png"
+              alt=""
+              width={545}
+              height={732}
+              aria-hidden="true"
+              className="object-contain max-h-[50vh] md:max-h-none w-auto"
+            />
+          </div>
 
-        {/* Right graphic — desktop: absolute right, mobile: bottom center-right */}
-        <div
-          className="absolute z-20 bottom-0 right-0 translate-y-[10%] md:bottom-auto md:top-[34%] md:-translate-y-1/2 md:translate-x-0"
-        >
-          <Image
-            src="/images/schools-hero-right.png"
-            alt=""
-            width={512}
-            height={494}
-            aria-hidden="true"
-            className="object-contain max-h-[35vh] md:max-h-none w-auto"
-          />
-        </div>
+          {/* Right graphic */}
+          <div
+            className="absolute z-20 bottom-0 right-0 translate-y-[10%] md:bottom-auto md:top-[34%] md:-translate-y-1/2 md:translate-x-0"
+          >
+            <Image
+              src="/images/schools-hero-right.png"
+              alt=""
+              width={512}
+              height={494}
+              aria-hidden="true"
+              className="object-contain max-h-[35vh] md:max-h-none w-auto"
+            />
+          </div>
+        </section>
+        {/* White torn paper at bottom — outside overflow-clip */}
+        <TornPaperDivider color="white" variant="bottom" style={1} />
+      </div>
 
-        {/* White torn paper at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(52%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-      </section>
-
-      {/* 2. Our Approach — grey bg */}
+      {/* ══ 2. OUR APPROACH — grey bg ════════════════════════════════════════ */}
       <OurApproachSection
         heading="What is EKUZO?"
         listItems={[
@@ -139,45 +131,20 @@ export default function SchoolsPage() {
         tornPaper="none"
       />
 
-      {/* 3. Ecosystem Animation */}
-      <section
-        className="relative overflow-visible"
-        style={{ height: "360vh", paddingTop: "40px", paddingBottom: "40px" }}
-      >
-        {/* White torn paper at top — 50/50 straddling the section edge */}
-        <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-        <div className="sticky top-0 h-screen">
-          <EcosystemAnimation />
-        </div>
-        {/* White torn paper at bottom — 50/50 straddling the section edge */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-      </section>
+      {/* ══ 3. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <section className="relative bg-grey overflow-clip" style={{ height: "360vh" }}>
+          <div className="sticky top-0 h-screen">
+            <EcosystemAnimation />
+          </div>
+        </section>
+        <TornPaperDivider color="grey" variant="bottom" style={1} />
+      </div>
 
-      {/* 4. Why Schools Choose EKUZO — grey bg with dynamic red decorative elements */}
+      {/* ══ 4. WHY SCHOOLS CHOOSE EKUZO — grey bg with zigzag cards ═════════ */}
       <section
-        className="bg-[#f0edea] relative overflow-visible"
+        className="bg-[#f0edea] relative overflow-clip"
         style={{
           paddingTop: "clamp(80px, 14vw, 144px)",
           paddingBottom: "clamp(120px, 18vw, 240px)",
@@ -270,7 +237,6 @@ export default function SchoolsPage() {
                     padding: "clamp(1.5rem, 4vw, 48px)",
                   }}
                 >
-                  {/* Grey circle icon, grayscale, centered — sized to match OurApproach reference */}
                   <CircleIcon src={feature.icon} className="mb-5" />
                   <h5
                     className="font-body font-bold text-black leading-[1.2] mb-4"
@@ -289,154 +255,108 @@ export default function SchoolsPage() {
             ))}
           </div>
         </div>
-
-        {/* White torn paper at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
       </section>
 
-      {/* 5. Programs — EKUZOTEAMS only */}
+      {/* ══ 5. PROGRAMS — EKUZOTEAMS only ═══════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="white" variant="top" style={1} />
+      </div>
       <ProgramsSection showTeams showEkuzo100={false} showCamps={false} />
 
-      {/* 6. Outcomes — What schools see (dark bg, white cards with chopped corners) */}
-      <section
-        className="bg-black relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 188px)",
-          paddingBottom: "clamp(80px, 14vw, 188px)",
-        }}
-      >
-        {/* Black torn paper at top */}
+      {/* ══ 6. OUTCOMES — black bg, auto-scroll cards ═══════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="black" variant="top" style={1} />
         <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          className="bg-black"
           style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-48%)",
-            backgroundImage: "url(/images/torn-paper-black-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-
-        <div
-          style={{
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingTop: "clamp(80px, 14vw, 188px)",
+            paddingBottom: "clamp(80px, 14vw, 188px)",
           }}
         >
-          {/* Header — centered */}
-          <div className="flex flex-col gap-4 mb-12 items-center text-center">
-            <Eyebrow>PROGRAMS</Eyebrow>
-            <h4
-              className="font-body font-bold leading-[1] text-white"
-              style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
-            >
-              What Schools See in their&nbsp;Students
-            </h4>
+          <div
+            style={{
+              paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+              paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            }}
+          >
+            {/* Header — centered */}
+            <div className="flex flex-col gap-4 mb-12 items-center text-center">
+              <Eyebrow>PROGRAMS</Eyebrow>
+              <h4
+                className="font-body font-bold leading-[1] text-white"
+                style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
+              >
+                What Schools See in their&nbsp;Students
+              </h4>
+            </div>
+
+            {/* Cards — auto-scrolling */}
+            <AutoScrollCards
+              cardBg="white"
+              speed={30}
+              cards={[
+                { title: "Attendance", body: "Students show up more consistently when they belong to a team with shared goals.", icon: "/icons/calendar.svg" },
+                { title: "Engagement", body: "Motivation earned in practice carries into class, behavior, and daily energy.", icon: "/icons/flame.svg" },
+                { title: "Belonging", body: "Students who didn\u2019t connect elsewhere find a place to contribute and be seen.", icon: "/icons/heart.svg" },
+                { title: "Skills", body: "Communication, leadership, and digital skills develop through coached team play.", icon: "/icons/skills.svg" },
+              ]}
+            />
           </div>
-
-          {/* Cards — auto-scrolling on desktop, swipe on mobile */}
-          <AutoScrollCards
-            cardBg="white"
-            speed={30}
-            cards={[
-              { title: "Attendance", body: "Students show up more consistently when they belong to a team with shared goals.", icon: "/icons/calendar.svg" },
-              { title: "Engagement", body: "Motivation earned in practice carries into class, behavior, and daily energy.", icon: "/icons/flame.svg" },
-              { title: "Belonging", body: "Students who didn\u2019t connect elsewhere find a place to contribute and be seen.", icon: "/icons/heart.svg" },
-              { title: "Skills", body: "Communication, leadership, and digital skills develop through coached team play.", icon: "/icons/skills.svg" },
-            ]}
-          />
         </div>
       </section>
 
-      {/* 7. Testimonial quote — red bg (no image, centered quote only) */}
-      <section
-        className="bg-red relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 144px)",
-          paddingBottom: "clamp(80px, 14vw, 144px)",
-        }}
-      >
-        {/* Red torn paper at top */}
+      {/* ══ 7. TESTIMONIAL QUOTE — red bg ═══════════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="red" variant="top" style={1} />
         <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          className="bg-red"
           style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-48%)",
-            backgroundImage: "url(/images/torn-paper-red-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-
-        <div
-          className="max-w-[880px] mx-auto text-center relative z-10"
-          style={{
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingTop: "clamp(80px, 14vw, 144px)",
+            paddingBottom: "clamp(80px, 14vw, 144px)",
           }}
         >
-          <Image
-            src="/images/quote-white@2x.png"
-            alt=""
-            width={40}
-            height={40}
-            className="mx-auto mb-8"
-            aria-hidden="true"
-          />
-          <h5
-            className="font-body font-bold text-white leading-[1.2] mb-10"
-            style={{ fontSize: "clamp(1.25rem, 2.8vw, 40px)" }}
+          <div
+            className="max-w-[880px] mx-auto text-center relative z-10"
+            style={{
+              paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+              paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+            }}
           >
-            &ldquo;Once students see what they&apos;re capable of, you
-            don&apos;t have to push them. They push&nbsp;themselves.&rdquo;
-          </h5>
-          <p
-            className="font-body font-bold text-white"
-            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
-          >
-            Karlin Oei
-          </p>
-          <p
-            className="font-body font-bold text-white/60"
-            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
-          >
-            Founder EKUZO
-          </p>
+            <Image
+              src="/images/quote-white@2x.png"
+              alt=""
+              width={40}
+              height={40}
+              className="mx-auto mb-8"
+              aria-hidden="true"
+            />
+            <h5
+              className="font-body font-bold text-white leading-[1.2] mb-10"
+              style={{ fontSize: "clamp(1.25rem, 2.8vw, 40px)" }}
+            >
+              &ldquo;Once students see what they&apos;re capable of, you
+              don&apos;t have to push them. They push&nbsp;themselves.&rdquo;
+            </h5>
+            <p
+              className="font-body font-bold text-white"
+              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            >
+              Karlin Oei
+            </p>
+            <p
+              className="font-body font-bold text-white/60"
+              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            >
+              Founder EKUZO
+            </p>
+          </div>
         </div>
-
-        {/* Red torn paper at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-red-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
+        <TornPaperDivider color="red" variant="bottom" style={1} />
       </section>
 
-      {/* 8. Pedagogy — white bg, same card style as outcomes */}
+      {/* ══ 8. PEDAGOGY — white bg, auto-scroll cards ═══════════════════════ */}
       <section
-        className="bg-white relative overflow-visible"
+        className="bg-white relative"
         style={{
           paddingTop: "clamp(80px, 14vw, 188px)",
           paddingBottom: "clamp(80px, 14vw, 188px)",
@@ -464,7 +384,7 @@ export default function SchoolsPage() {
             </p>
           </div>
 
-          {/* Cards — auto-scrolling on desktop, swipe on mobile */}
+          {/* Cards — auto-scrolling */}
           <AutoScrollCards
             cardBg="#EFEEEF"
             speed={30}
@@ -489,55 +409,54 @@ export default function SchoolsPage() {
         </div>
       </section>
 
-      {/* 9. FAQ — black bg, dark theme */}
-      <section
-        className="bg-black relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 188px)",
-          paddingBottom: "clamp(80px, 14vw, 188px)",
-        }}
-      >
-        {/* Black torn paper at top */}
+      {/* ══ 9. FAQ — black bg, dark theme ════════════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="black" variant="top" style={1} />
         <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          className="bg-black"
           style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-48%)",
-            backgroundImage: "url(/images/torn-paper-black-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-
-        <div
-          className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]"
-          style={{
+            paddingTop: "clamp(80px, 14vw, 188px)",
+            paddingBottom: "clamp(80px, 14vw, 188px)",
             paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
-            <h4
-              className="font-body font-bold text-white leading-[1]"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 64px)",
-                letterSpacing: "-1.28px",
-              }}
-            >
-              Frequently asked questions
-            </h4>
-          </div>
-          <div className="flex-1">
-            <FAQAccordion items={schoolsFAQs} theme="dark" />
+          <div className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]">
+            <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
+              <div className="mb-4">
+                <Eyebrow>FAQ</Eyebrow>
+              </div>
+              <h4
+                className="font-body font-bold text-white leading-[1]"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 64px)",
+                  letterSpacing: "-1.28px",
+                }}
+              >
+                Frequently asked questions
+              </h4>
+            </div>
+            <div className="flex-1">
+              <FAQAccordion items={schoolsFAQs} theme="dark" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 10. Footer Banner — with coach collage image */}
+      {/* ══ 10. FOOTER BANNER & FOOTER ══════════════════════════════════════ */}
       <FooterBanner heading="Increase attendance and engagement in your school" image="/images/coach-collage@2x.png" />
       <Footer />
+
+      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
+        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
+          Enroll my gamer
+        </ModalButton>
+        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
+          Start a conversation
+        </ModalButton>
+      </div>
+      <div className="md:hidden h-20" />
     </>
   );
 }

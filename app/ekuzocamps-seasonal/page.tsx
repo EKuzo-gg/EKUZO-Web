@@ -1031,6 +1031,9 @@ export default function EkuzoCampsPage() {
       >
         <div className="max-w-[1232px] mx-auto flex flex-col md:flex-row gap-16 md:gap-[120px]">
           <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+            <div className="mb-4">
+              <Eyebrow>FAQ</Eyebrow>
+            </div>
             <h4 className="font-body font-bold text-black leading-tight" style={{ fontSize: "clamp(1.5rem, 1.8vw, 24px)" }}>
               Frequently Asked Questions
             </h4>

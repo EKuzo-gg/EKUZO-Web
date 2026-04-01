@@ -8,6 +8,9 @@ import ProgramsSection from "@/components/sections/ProgramsSection";
 import TwoWaysSection from "@/components/sections/TwoWaysSection";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ProgramsHeroRive from "@/components/sections/ProgramsHeroRive";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
+import Eyebrow from "@/components/ui/Eyebrow";
+import ModalButton from "@/components/ui/ModalButton";
 
 export const metadata = {
   title: "Programs — EKUZO",
@@ -46,93 +49,58 @@ const programsFAQs = [
 export default function ProgramsPage() {
   return (
     <>
-      {/* 1. Hero — Red bg, full-bleed Rive animation (autoplay), ~100vh */}
-      <section
-        className="relative bg-red overflow-hidden lg:overflow-visible"
-        style={{ minHeight: "clamp(560px, 150vw, 100vh)" }}
-      >
-        {/* Nav */}
-        <div className="absolute top-0 left-0 right-0 z-20">
-          <Nav variant="dark" />
-        </div>
-
-        {/* Rive animation — oversized on mobile for crop effect (matches Framer),
-            full-bleed on desktop. On mobile the inner div is wider than the
-            hero so the animation zooms in and overflow-hidden clips edges. */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center">
-          <div className="h-full shrink-0 w-[125%] lg:w-full">
-            <ProgramsHeroRive />
+      {/* ══ 1. HERO — Red bg, full-bleed Rive animation ═════════════════════ */}
+      <div className="relative overflow-visible">
+        <section
+          className="relative bg-red overflow-clip"
+          style={{ minHeight: "clamp(560px, 150vw, 100vh)" }}
+        >
+          {/* Nav */}
+          <div className="absolute top-0 left-0 right-0 z-20">
+            <Nav variant="dark" />
           </div>
-        </div>
 
-        {/* White torn paper at bottom — background-image pattern, responsive heights per Framer */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(52%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-      </section>
+          {/* Rive animation */}
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+            <div className="h-full shrink-0 w-[125%] lg:w-full">
+              <ProgramsHeroRive />
+            </div>
+          </div>
+        </section>
+        {/* Red torn paper at bottom — overlaps into approach section */}
+        <TornPaperDivider color="red" variant="bottom" style={1} />
+      </div>
 
-      {/* 2. Our Approach */}
+      {/* ══ 2. OUR APPROACH ══════════════════════════════════════════════════ */}
       <OurApproachSection
         heading="Built for growth, on and off the screen"
         listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
         icons={["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/growth-arrows.svg"]}
         body="Every EKUZO program is built on the same foundation. What changes is the format: when, where, and how students participate."
         bg="bg-white"
+        tornPaper="none"
       />
 
-      {/* 3. Programs cards */}
+      {/* ══ 3. PROGRAMS CARDS ════════════════════════════════════════════════ */}
       <ProgramsSection showTeams showEkuzo100 showCamps />
 
-      {/* 4. Two Ways section (SCHOOL | HOME) */}
+      {/* ══ 4. TWO WAYS (SCHOOL | HOME) ══════════════════════════════════════ */}
       <TwoWaysSection />
 
-      {/* 5. Ecosystem Animation — Framer: bg light grey, 360vh, Black2 top + White2 bottom */}
-      <section className="relative bg-grey overflow-visible" style={{ height: "360vh" }}>
-        {/* Black torn paper at top */}
-        <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-50%)",
-            backgroundImage: "url(/images/torn-paper-black-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
+      {/* ══ 5. ECOSYSTEM ANIMATION ═══════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <section className="relative bg-grey overflow-clip" style={{ height: "360vh" }}>
+          <div className="sticky top-0 h-screen">
+            <EcosystemAnimation />
+          </div>
+        </section>
+        <TornPaperDivider color="grey" variant="bottom" style={1} />
+      </div>
 
-        <div className="sticky top-0 h-screen">
-          <EcosystemAnimation />
-        </div>
-
-        {/* White torn paper at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-          style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(50%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-          aria-hidden="true"
-        />
-      </section>
-
-      {/* 6. Testimonials — Framer: max-width 1120px */}
+      {/* ══ 6. TESTIMONIALS ══════════════════════════════════════════════════ */}
       <section
-        className="bg-white relative overflow-visible"
+        className="bg-white relative"
         style={{
           paddingTop: "clamp(80px, 10vw, 144px)",
           paddingBottom: "clamp(80px, 10vw, 144px)",
@@ -151,48 +119,53 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* 7. FAQ — black background, Framer FaqSection pattern */}
-      <section
-        className="bg-black relative overflow-visible"
-        style={{
-          paddingTop: "clamp(80px, 14vw, 188px)",
-          paddingBottom: "clamp(80px, 14vw, 188px)",
-          paddingLeft: "clamp(1rem, 7.2vw, 104px)",
-          paddingRight: "clamp(1rem, 7.2vw, 104px)",
-        }}
-      >
-        {/* Black torn paper at top */}
+      {/* ══ 7. FAQ — black bg, dark theme ════════════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="black" variant="top" style={1} />
         <div
-          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          className="bg-black"
           style={{
-            height: "clamp(115px, 19vw, 300px)",
-            transform: "translateY(-50%)",
-            backgroundImage: "url(/images/torn-paper-black-1.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            paddingTop: "clamp(80px, 14vw, 188px)",
+            paddingBottom: "clamp(80px, 14vw, 188px)",
+            paddingLeft: "clamp(1rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1rem, 7.2vw, 104px)",
           }}
-          aria-hidden="true"
-        />
-
-        <div className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]">
-          <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
-            <h4
-              className="font-body font-bold text-white leading-[1]"
-              style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
-            >
-              Frequently asked questions
-            </h4>
-          </div>
-          <div className="flex-1">
-            <FAQAccordion items={programsFAQs} theme="dark" />
+        >
+          <div className="max-w-[1232px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-[120px]">
+            <div className="lg:max-w-[388px] lg:w-[388px] shrink-0">
+              <div className="mb-4">
+                <Eyebrow>FAQ</Eyebrow>
+              </div>
+              <h4
+                className="font-body font-bold text-white leading-[1]"
+                style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
+              >
+                Frequently asked questions
+              </h4>
+            </div>
+            <div className="flex-1">
+              <FAQAccordion items={programsFAQs} theme="dark" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 8. Footer Banner */}
+      {/* ══ 8. FOOTER BANNER & FOOTER ═══════════════════════════════════════ */}
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
+
+      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
+        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
+          Enroll my gamer
+        </ModalButton>
+        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
+          Start a conversation
+        </ModalButton>
+      </div>
+
+      {/* Spacer for fixed button on mobile */}
+      <div className="md:hidden h-20" />
     </>
   );
 }

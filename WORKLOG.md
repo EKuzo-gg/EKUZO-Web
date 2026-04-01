@@ -6,6 +6,129 @@
 
 ---
 
+## Aaron — April 1, 2026 (site-wide consistency pass + FAQ page build)
+
+**What changed:**
+
+**FAQ page — full build (app/faq/page.tsx):**
+- Hero: black bg, smoke graphics, Eyebrow "FAQS", headline `clamp(3rem, 12vw, 160px)`, maxHeight 720px
+- Hero graphic: `faq-hero-graphic.png` at `w-[55%] max-w-[860px]` lower-right
+- Overflow-visible wrapper on hero with `black-bottom-1` divider outside the section
+- 5 FAQ sections alternating: white (Safety) → grey (Programs) → white (Outcomes) → black (Cost) → white (Enrollment)
+- Section headlines: `font-display uppercase leading-[0.85]` at `clamp(2.5rem, 5vw, 4.5rem)` — no eyebrows on content sections
+- Decorative brush art at 6-8% opacity (hidden on mobile)
+- Mobile CTA bar at bottom
+
+**FAQAccordion — global camada-caret icon (components/ui/FAQAccordion.tsx):**
+- Replaced chevron SVG with camada-caret SVG (`viewBox="0 0 72 72"`)
+- Icon: `w-7 h-7 lg:w-8 lg:h-8` (28px mobile, 32px desktop)
+- Open state: `bg-red rotate-180` on circle, white fill on icon
+- Closed state: `rgba(0,0,0,0.08)` (light) or `rgba(255,255,255,0.15)` (dark) circle bg
+- This is a global change — affects all FAQ modules across every page
+
+**FooterBanner fix (components/sections/FooterBanner.tsx):**
+- Heading size adjusted to `clamp(2rem, 4.5vw, 56px)` with `maxWidth: "14em"` to fix "today" orphaning
+
+**Programs page — consistency pass (app/programs/page.tsx):**
+- Hero: overflow-visible wrapper with `red-bottom-1` divider
+- OurApproach: `tornPaper="none"`
+- Animation: overflow-visible wrapper with `grey-top-1` / `grey-bottom-1`
+- FAQ: overflow-visible wrapper with `black-top-1`
+- Mobile CTA bar added
+
+**Parents page — consistency pass + blog redesign (app/parents/page.tsx):**
+- All old background-image torn papers replaced with TornPaperDivider
+- Our Approach: wrapped with `grey-top-1`
+- Animation: standard wrapper with `grey-top-1` / `grey-bottom-1`
+- Blog section redesigned: Eyebrow "BLOG" (light variant) + headline + subtitle, full-width chopped-corner image card with gradient overlay
+- FAQ: overflow-visible wrapper with `black-top-1`
+- Mobile CTA bar added
+
+**Schools page — consistency pass (app/schools/page.tsx):**
+- Hero: overflow-visible wrapper with `white-bottom-1`, heading `leading-[0.85]`
+- Animation: overflow-visible wrapper with `grey-top-1` / `grey-bottom-1`
+- Outcomes: overflow-visible with `black-top-1`
+- Testimonial quote: overflow-visible with `red-top-1` / `red-bottom-1`
+- FAQ: overflow-visible with `black-top-1`
+- Mobile CTA bar added
+
+**Methodology page — consistency pass (app/methodology/page.tsx):**
+- Hero: `overflow-clip`, `leading-[0.85]`, headline bumped to `clamp(100px, 18vw, 256px)`, standard video container sizing
+- Hero → How It Works transition: whole torn paper (`torn-paper-grey-1@2x.png`) using raw background-image div pattern with `translateY(52%)`, hero wrapper `zIndex: 1`, How It Works wrapper `zIndex: 0`, section pulled up with negative margin
+- Why Games Work: `overflow-visible` wrapper, section uses negative `marginTop` + extra `paddingTop`
+- Quote: overflow-visible wrapper with `red-top-1` / `red-bottom-1`
+- Ten Pillars: `overflow-clip`
+- Mobile CTA bar added
+
+**ProgramsSection (components/sections/ProgramsSection.tsx):**
+- Updated canonical routes: `/programs/ekuzoteams`, `/programs/e100`, `/camps`
+- Desktop heading: `leading-[0.85]`
+
+**CLAUDE.md — Learning Log update:**
+- Replaced old torn paper notes with comprehensive two-system documentation
+- System 1: One-sided dividers (tops/bottoms) via `<TornPaperDivider>` component
+- System 2: Whole dividers (both edges) via raw background-image div pattern
+- Documented the common mistake: torn paper inside `overflow-clip` section gets clipped
+
+---
+
+## Aaron — April 1, 2026 (e100, ekuzoteams, games page builds + global QA pass)
+
+**What changed:**
+
+**EKUZO100 page — new canonical location (app/programs/e100/page.tsx):**
+- Hero: methodology template (smoke graphics, light-red nav, 9:16 video at 70vh, PlayOnceVideo with sound on)
+- Headline: `clamp(100px, 18vw, 256px)` with `leading-[0.85]` — global standard for program hero headlines
+- EKUZO in black, 100 in red (matches program card style)
+- Our Approach: `white-top-2` overlapping hero, `tornPaper="none"` on component
+- Ecosystem animation: wrapped in `overflow-visible` div with `grey-top-1` and `grey-bottom-1` — standard for all animation sections
+- How It Works: chopped corners (clip-path) on 1234 cards, "ONE MONTH. FOUR STEPS." single line on desktop
+- Testimonials: exact homepage module (carousel + static featured quote)
+- What's Next: responsive padding `clamp(80px, 14vw, 188px)`, grey-top-1 / grey-bottom-2 dividers
+- FAQ: black bg, dark theme, Eyebrow component
+
+**EKUZOTeams page — new canonical location (app/programs/ekuzoteams/page.tsx):**
+- Hero: methodology template (smoke graphics, light-red nav, 9:16 video at 70vh, PlayOnceVideo)
+- EKUZO in black, TEAMS in red
+- Our Approach: `white-top-2`, icons updated (confidence-2 for consistent team, speaking for coach-led practice)
+- One Semester One Team section: `black-top-1` / `black-bottom-1`, icon cards (calendar, team, trophy), chopped corners
+- Session Structure: chopped corners on 1234 cards, red quote box with quote mark image, Inter font, chopped corners on quote box
+- Two Ways to Participate: updated to use TornPaperDivider `black-top-2` (replaced old background-image torn paper), removed bottom paper
+- Ecosystem animation: `grey-top-1` / `grey-bottom-1` in overflow-visible wrapper
+- Testimonials: homepage module with carousel + quote
+- EKUZO System section: two-column layout, eyebrow above grid, program progression cards with red hover borders, bigger titles/darker descriptions
+- FAQ: black bg, dark theme
+
+**Games page (app/games/page.tsx):**
+- Hero: kept red bg, full-color hero image (removed opacity), Eyebrow `variant="light"` (white bg/red text)
+- Headline: `clamp(100px, 18vw, 256px)` — "GROWTH / THROUGH / GAMES"
+- Why Games: eyebrow above grid so body copy aligns with headline top, `clamp(3.5rem, 7vw, 7rem)` heading
+- Six Pillars sticky scroll: gamer kid collage 2x size (700px wide, -mr-24 overlap behind cards), chopped corners on all 6 cards
+- League of Legends: white cards with black text, no torn paper dividers
+- Beyond LoL: Eyebrow `variant="light"`, full-color illustration (removed opacity)
+- All manual `<p>` eyebrow tags replaced with `<Eyebrow>` component
+- All legacy SVG TornPaperDivider calls converted to new PNG system
+- Testimonial quote: switched to Inter font (font-body font-bold)
+
+**Eyebrow component (components/ui/Eyebrow.tsx):**
+- Added `variant` prop: `"default"` (red bg/white text) and `"light"` (white bg/red text)
+- Light variant is for use on colored background sections (red, black, etc.)
+
+**TwoWaysSection (components/sections/TwoWaysSection.tsx):**
+- Replaced old background-image torn paper with TornPaperDivider `black-top-2`
+- Removed bottom torn paper entirely
+
+**FAQ Eyebrow — global pass (all FAQ sections across the site):**
+- Added `<Eyebrow>FAQ</Eyebrow>` to: parents, schools, programs, ekuzoteams-semester-based, ekuzo-teams, ekuzocamps-seasonal, ekuzo-camps, coaching, faq (FAQSection component)
+- Added Eyebrow imports where missing
+
+**New route locations:**
+- `/programs/e100` — EKUZO100 (canonical)
+- `/programs/ekuzoteams` — EKUZOTeams (canonical)
+- Old routes (`/ekuzo100-4-week-intro`, `/ekuzoteams-semester-based`) still exist but are now out of date
+
+---
+
 ## Aaron — April 1, 2026 (methodology page rebuild + new torn paper system + nav updates)
 
 **What changed:**

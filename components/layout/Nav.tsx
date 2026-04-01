@@ -33,7 +33,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
   return (
     <nav
       className={`w-full flex items-center justify-between py-5 ${
-        isDark ? "text-white" : "bg-white text-black"
+        isDark ? "text-white" : isLightRed ? "text-black" : "bg-white text-black"
       }`}
       style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}
     >

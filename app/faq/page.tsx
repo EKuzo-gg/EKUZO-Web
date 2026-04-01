@@ -1,8 +1,10 @@
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FAQAccordion from "@/components/ui/FAQAccordion";
-import TornPaper from "@/components/ui/TornPaper";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import FooterBanner from "@/components/sections/FooterBanner";
+import Eyebrow from "@/components/ui/Eyebrow";
+import ModalButton from "@/components/ui/ModalButton";
 import Image from "next/image";
 
 export const metadata = {
@@ -110,116 +112,276 @@ const enrollmentFAQs = [
   },
 ];
 
-function FAQSection({
-  label,
-  items,
-  paddingTop = "144px",
-  paddingBottom = "144px",
-}: {
-  label: string;
-  items: { question: string; answer: string }[];
-  paddingTop?: string;
-  paddingBottom?: string;
-}) {
-  return (
-    <section
-      className="bg-white"
-      style={{ paddingTop, paddingBottom, paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}
-    >
-      <div className="max-w-[1232px] mx-auto flex flex-col md:flex-row gap-16 md:gap-[120px]">
-        <div className="md:max-w-[388px] md:w-[388px] shrink-0">
-          <h4 className="font-body font-bold text-black leading-tight" style={{ fontSize: "clamp(1.5rem, 1.8vw, 24px)" }}>
-            {label}
-          </h4>
-        </div>
-        <div className="flex-1">
-          <FAQAccordion items={items} theme="light" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function FAQPage() {
   return (
     <>
-      {/* Section 1 — Hero */}
+      {/* ══ 1. HERO — black bg, smoke graphics ═══════════════════════════════ */}
+      <div className="relative overflow-visible">
       <section
-        className="relative bg-black overflow-hidden"
-        style={{ paddingTop: "360px", paddingBottom: "240px" }}
+        className="relative bg-black overflow-clip"
+        style={{
+          paddingTop: "clamp(140px, 20vw, 260px)",
+          paddingBottom: "clamp(80px, 12vw, 160px)",
+          maxHeight: "720px",
+        }}
       >
-        {/* Nav absolutely positioned at top */}
-        <div className="absolute top-0 left-0 right-0 z-20">
+        {/* Nav */}
+        <div className="absolute top-0 left-0 right-0 z-30">
           <Nav variant="dark" />
         </div>
 
-        <div className="relative z-10" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
-          <h2 className="font-display text-white uppercase leading-none tracking-wide" style={{ fontSize: "clamp(3rem, 8vw, 120px)" }}>
-            PARENT
-            <br />
-            FREQUENTLY ASKED QUESTIONS
-          </h2>
+        {/* Smoke graphics */}
+        <Image
+          src="/images/smoke-1@2x.png"
+          alt=""
+          width={800}
+          height={1000}
+          className="absolute bottom-0 left-0 w-[40%] max-w-[500px] opacity-40 pointer-events-none select-none"
+          aria-hidden="true"
+        />
+        <Image
+          src="/images/smoke-2@2x.png"
+          alt=""
+          width={800}
+          height={1200}
+          className="absolute top-0 right-0 h-full w-auto opacity-30 pointer-events-none select-none"
+          aria-hidden="true"
+        />
+
+        {/* FAQ decorative character */}
+        <Image
+          src="/images/faq-hero-bottom.png"
+          alt=""
+          width={862}
+          height={764}
+          className="absolute bottom-[5%] right-[5%] w-[55%] max-w-[860px] z-[1] opacity-70 pointer-events-none select-none"
+          aria-hidden="true"
+        />
+
+        {/* Headline content */}
+        <div
+          className="relative z-10"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          <div className="max-w-[1232px] mx-auto">
+            <div className="mb-6">
+              <Eyebrow>FAQS</Eyebrow>
+            </div>
+            <h1
+              className="font-display text-white uppercase leading-[0.85]"
+              style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+            >
+              FREQUENTLY ASKED QUESTIONS
+            </h1>
+          </div>
         </div>
 
-        {/* Decorative image — centered, absolute, bottom of section */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10" style={{ bottom: "10%" }}>
-          <Image
-            src="/images/faq-hero-bottom.png"
-            alt=""
-            width={431}
-            height={382}
-            aria-hidden="true"
-          />
-        </div>
+      </section>
+      {/* Torn paper divider at bottom — outside overflow-clip */}
+      <TornPaperDivider color="black" variant="bottom" style={1} />
+      </div>
 
-        {/* TornPaper at absolute bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <TornPaper color="white" style={1} />
+      {/* ══ 2. SAFETY & COACHING — white bg ══════════════════════════════════ */}
+      <section
+        className="relative bg-white overflow-clip"
+        style={{
+          paddingTop: "clamp(80px, 10vw, 144px)",
+          paddingBottom: "clamp(80px, 10vw, 144px)",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
+        {/* Brush stroke deco — left side, partially cropped */}
+        <Image
+          src="/images/faq-left-deco-1.png"
+          alt=""
+          width={400}
+          height={525}
+          className="absolute -left-[5%] bottom-0 w-[30%] max-w-[400px] opacity-[0.08] pointer-events-none select-none hidden md:block"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 max-w-[1232px] mx-auto flex flex-col md:flex-row gap-10 md:gap-[120px]">
+          <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+            <h3
+              className="font-display uppercase text-black leading-[0.85]"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+            >
+              Safety & Coaching
+            </h3>
+          </div>
+          <div className="flex-1">
+            <FAQAccordion items={safetyFAQs} theme="light" />
+          </div>
         </div>
       </section>
 
-      {/* Section 2 — Safety & Coaching */}
-      <FAQSection
-        label="Safety & Coaching"
-        items={safetyFAQs}
-        paddingTop="188px"
-        paddingBottom="144px"
-      />
+      {/* ══ 3. PROGRAMS & SCHEDULING — grey bg ═══════════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <div
+          className="relative bg-[#f0edea] overflow-clip"
+          style={{
+            paddingTop: "clamp(80px, 10vw, 144px)",
+            paddingBottom: "clamp(80px, 10vw, 144px)",
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          {/* Large brush circle — left side */}
+          <Image
+            src="/images/faq-left-deco-2.png"
+            alt=""
+            width={717}
+            height={944}
+            className="absolute -left-[10%] top-1/2 -translate-y-1/2 w-[45%] max-w-[600px] opacity-[0.06] pointer-events-none select-none hidden md:block"
+            aria-hidden="true"
+          />
 
-      {/* Section 3 — Programs & Scheduling */}
-      <FAQSection
-        label="Programs & Scheduling"
-        items={programsFAQs}
-        paddingTop="144px"
-        paddingBottom="144px"
-      />
+          {/* Curvy arrow deco — right side */}
+          <Image
+            src="/images/faq-programs-deco.png"
+            alt=""
+            width={400}
+            height={340}
+            className="absolute right-[5%] top-[15%] w-[18%] max-w-[200px] opacity-[0.07] pointer-events-none select-none hidden md:block"
+            aria-hidden="true"
+          />
 
-      {/* Section 4 — Outcomes & Benefits */}
-      <FAQSection
-        label="Outcomes & Benefits"
-        items={outcomesFAQs}
-        paddingTop="144px"
-        paddingBottom="144px"
-      />
+          <div className="relative z-10 max-w-[1232px] mx-auto flex flex-col md:flex-row gap-10 md:gap-[120px]">
+            <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+              <h3
+                className="font-display uppercase text-black leading-[0.85]"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+              >
+                Programs & Scheduling
+              </h3>
+            </div>
+            <div className="flex-1">
+              <FAQAccordion items={programsFAQs} theme="light" />
+            </div>
+          </div>
+        </div>
+        <TornPaperDivider color="grey" variant="bottom" style={2} />
+      </section>
 
-      {/* Section 5 — Cost & Value */}
-      <FAQSection
-        label="Cost & Value"
-        items={costFAQs}
-        paddingTop="144px"
-        paddingBottom="144px"
-      />
+      {/* ══ 4. OUTCOMES & BENEFITS — white bg ════════════════════════════════ */}
+      <section
+        className="relative bg-white overflow-clip"
+        style={{
+          paddingTop: "clamp(80px, 10vw, 144px)",
+          paddingBottom: "clamp(80px, 10vw, 144px)",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
+        {/* Right side brush claw deco */}
+        <Image
+          src="/images/faq-right-deco.png"
+          alt=""
+          width={569}
+          height={1143}
+          className="absolute -right-[5%] top-1/2 -translate-y-1/2 w-[35%] max-w-[450px] opacity-[0.06] pointer-events-none select-none hidden md:block"
+          aria-hidden="true"
+        />
 
-      {/* Section 6 — Enrollment & Next Steps */}
-      <FAQSection
-        label="Enrollment & Next Steps"
-        items={enrollmentFAQs}
-        paddingTop="144px"
-        paddingBottom="188px"
-      />
+        <div className="relative z-10 max-w-[1232px] mx-auto flex flex-col md:flex-row gap-10 md:gap-[120px]">
+          <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+            <h3
+              className="font-display uppercase text-black leading-[0.85]"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+            >
+              Outcomes & Benefits
+            </h3>
+          </div>
+          <div className="flex-1">
+            <FAQAccordion items={outcomesFAQs} theme="light" />
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 5. COST & VALUE — black bg (dark theme) ══════════════════════════ */}
+      <section className="relative overflow-visible">
+        <TornPaperDivider color="black" variant="top" style={1} />
+        <div
+          className="bg-black"
+          style={{
+            paddingTop: "clamp(80px, 10vw, 144px)",
+            paddingBottom: "clamp(80px, 10vw, 144px)",
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          <div className="max-w-[1232px] mx-auto flex flex-col md:flex-row gap-10 md:gap-[120px]">
+            <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+              <h3
+                className="font-display uppercase text-white leading-[0.85]"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+              >
+                Cost & Value
+              </h3>
+            </div>
+            <div className="flex-1">
+              <FAQAccordion items={costFAQs} theme="dark" />
+            </div>
+          </div>
+        </div>
+        <TornPaperDivider color="black" variant="bottom" style={2} />
+      </section>
+
+      {/* ══ 6. ENROLLMENT & NEXT STEPS — white bg ════════════════════════════ */}
+      <section
+        className="relative bg-white overflow-clip"
+        style={{
+          paddingTop: "clamp(80px, 10vw, 144px)",
+          paddingBottom: "clamp(80px, 10vw, 144px)",
+          paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+          paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+        }}
+      >
+        {/* Brush stroke deco — left side */}
+        <Image
+          src="/images/faq-left-deco-1.png"
+          alt=""
+          width={400}
+          height={525}
+          className="absolute -left-[8%] top-[20%] w-[28%] max-w-[350px] opacity-[0.07] pointer-events-none select-none hidden md:block"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 max-w-[1232px] mx-auto flex flex-col md:flex-row gap-10 md:gap-[120px]">
+          <div className="md:max-w-[388px] md:w-[388px] shrink-0">
+            <h3
+              className="font-display uppercase text-black leading-[0.85]"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+            >
+              Enrollment & Next Steps
+            </h3>
+          </div>
+          <div className="flex-1">
+            <FAQAccordion items={enrollmentFAQs} theme="light" />
+          </div>
+        </div>
+      </section>
 
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
+
+      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ═════════════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
+        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
+          Enroll my gamer
+        </ModalButton>
+        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
+          Start a conversation
+        </ModalButton>
+      </div>
+
+      {/* Spacer for fixed button on mobile */}
+      <div className="md:hidden h-20" />
     </>
   );
 }

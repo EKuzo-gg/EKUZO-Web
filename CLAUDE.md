@@ -247,12 +247,69 @@ Key groups: `torn-paper-*`, `brush-stroke-*`, `pedagogy-hero-*`, `schools-*`, `p
 
 ## Learning Log
 
-### Torn Paper Transitions (IMPORTANT — reference for universal pass)
-- **Use PNG, not SVG.** The torn paper SVGs are white fill (#fff) with no texture/shadow — invisible against white backgrounds. The PNGs have rasterized edge detail that reads visually.
-- **Pattern:** Place `torn-paper-white-1.png` as an `<Image>` inside an absolutely positioned div at the bottom of the section above. Use `translate-y-[55%]` to push it down so it overlaps into the section below. Set `z-20` to ensure it sits on top.
-- **Hero padding:** Increase the section's `paddingBottom` (e.g. 140px) so the torn paper doesn't overlap the text content — it should only overlap the decorative image/background.
-- **overflow:** Use `overflow: clip` (not `overflow-hidden`) on the parent section so the translated torn paper renders without creating scrollbar issues.
-- **File:** `public/images/torn-paper-white-1.png` (4320×600)
+### Torn Paper Dividers — Two Systems
+
+**Assets live in:** `public/images/new torn paper/`
+
+There are two types of torn paper dividers. Know which one you need before building.
+
+#### 1. One-sided dividers (tops & bottoms) — use `<TornPaperDivider>`
+- These are the standard system. Each PNG has texture on ONE edge only (top or bottom).
+- Naming: `torn-paper-{color}-top-{style}@2x.png` / `torn-paper-{color}-bottom-{style}@2x.png`
+- Colors: white, grey, black, red. Styles: 1, 2.
+- Use via `<TornPaperDivider color="grey" variant="top" style={1} />`
+- **Placement rule:** The divider must be OUTSIDE the `overflow-clip` section but INSIDE an `overflow-visible` wrapper div. If you put it inside the clipped section, the overlapping half gets cut off and it won't be visible.
+- Pattern:
+  ```jsx
+  <div className="relative overflow-visible">
+    <TornPaperDivider color="grey" variant="top" style={1} />
+    <section className="bg-[#f0edea] relative overflow-clip">
+      ...
+    </section>
+    <TornPaperDivider color="grey" variant="bottom" style={1} />
+  </div>
+  ```
+
+#### 2. Whole dividers (both edges) — raw background-image div
+- These PNGs have paper texture on BOTH the top and bottom edges. They straddle two sections.
+- Naming: `torn-paper-{color}-{style}@2x.png` (no "top"/"bottom" suffix)
+- **Do NOT use `<TornPaperDivider>` for these.** Use a raw `<div>` with `backgroundImage`.
+- The div is positioned absolutely at the bottom of a wrapper, with `translateY(52%)` so it hangs half into the section below.
+- **Critical:** The div must be a child of the `overflow-visible` wrapper, NOT inside the `overflow-clip` section. Otherwise the bottom half gets clipped and you won't see it overlap.
+- The wrapper needs `zIndex: 1` and the section below needs `zIndex: 0` (or its wrapper does) so the torn paper renders on top.
+- The section below should use negative `marginTop` + extra `paddingTop` so its background extends up behind the torn paper.
+- Pattern (see methodology hero → How It Works for reference):
+  ```jsx
+  {/* Section above */}
+  <div className="relative overflow-visible" style={{ zIndex: 1 }}>
+    <section className="bg-white relative overflow-clip" style={{ paddingBottom: "clamp(160px, 22vw, 300px)" }}>
+      ...
+    </section>
+    {/* Whole torn paper — OUTSIDE section, INSIDE wrapper */}
+    <div
+      className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
+      style={{
+        height: "clamp(115px, 19vw, 300px)",
+        transform: "translateY(52%)",
+        backgroundImage: "url(/images/new%20torn%20paper/torn-paper-grey-1@2x.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+      aria-hidden="true"
+    />
+  </div>
+
+  {/* Section below — pulled up behind the torn paper */}
+  <div className="relative overflow-visible" style={{ zIndex: 0 }}>
+    <section className="bg-[#f0edea] relative"
+      style={{ marginTop: "clamp(-60px, -10vw, -150px)", paddingTop: "clamp(140px, 24vw, 294px)" }}>
+      ...
+    </section>
+  </div>
+  ```
+
+**Common mistake:** Putting the torn paper div inside the `overflow-clip` section. It will look like the bottom is being cut off / overrun by the section below. Move it outside the section into the `overflow-visible` wrapper to fix.
 
 ### Figma Asset Downloads
 - Figma MCP asset URLs are blocked by the VM proxy (exit code 56 from curl). When a Figma asset is needed, ask the user to export it from Figma and drop it into the project. Reference the Figma component name so they know what to export.

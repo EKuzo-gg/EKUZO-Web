@@ -42,7 +42,7 @@ export default function FooterBanner({ heading, image }: FooterBannerProps) {
         <div className="flex flex-col items-center md:items-start gap-8 md:gap-12 flex-1 text-center md:text-left shrink-0">
           <h2
             className="font-body font-bold text-white"
-            style={{ fontSize: "clamp(2rem, 4vw, 64px)", lineHeight: "1.1" }}
+            style={{ fontSize: "clamp(2rem, 4.5vw, 56px)", lineHeight: "1.1", maxWidth: "14em" }}
           >
             {heading}
           </h2>

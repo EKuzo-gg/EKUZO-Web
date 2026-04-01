@@ -36,7 +36,7 @@ const cards: ProgramCard[] = [
       { value: "During or After", label: "School" },
     ],
     blurb: "Best for: students and schools ready for ongoing growth.",
-    href: "/ekuzoteams-semester-based",
+    href: "/programs/ekuzoteams",
     btnLabel: "Learn about EKUZOTEAMS",
     bgImage: "/images/program-card-bg-1.png",
     stickyTop: "40px",
@@ -52,7 +52,7 @@ const cards: ProgramCard[] = [
       { value: "After", label: "school" },
     ],
     blurb: "Best for: first-time students or families curious about esports.",
-    href: "/ekuzo100-4-week-intro",
+    href: "/programs/e100",
     btnLabel: "Learn about EKUZO100",
     bgImage: "/images/program-card-bg-1.png",
     stickyTop: "160px",
@@ -68,7 +68,7 @@ const cards: ProgramCard[] = [
       { value: "Summer / holiday", label: "break" },
     ],
     blurb: "Best for: students who want a burst of activity during breaks.",
-    href: "/ekuzocamps-seasonal",
+    href: "/camps",
     btnLabel: "Learn about EKUZOCAMPS",
     bgImage: "/images/program-card-bg-2.png",
     stickyTop: "240px",
@@ -164,7 +164,7 @@ function ProgramCard({ card }: { card: ProgramCard }) {
           </h2>
           {/* Desktop: single line */}
           <h2
-            className="font-display uppercase text-white leading-none hidden lg:block"
+            className="font-display uppercase text-white leading-[0.85] hidden lg:block"
             style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
           >
             {card.namePrefix}<span className={card.suffixColor}>{card.nameSuffix}</span>

@@ -319,13 +319,13 @@ function EcosystemScroll({
 
 export default function EcosystemAnimation() {
   return (
-    <>
+    <div className="w-full h-full pb-[48px]">
       <div className="hidden md:block w-full h-full">
         <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
       </div>
       <div className="md:hidden w-full h-full">
         <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
       </div>
-    </>
+    </div>
   );
 }
