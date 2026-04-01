@@ -1,3 +1,5 @@
+import Eyebrow from "@/components/ui/Eyebrow";
+
 type OurApproachSectionProps = {
   heading: string;
   listItems: [string, string, string];
@@ -6,6 +8,10 @@ type OurApproachSectionProps = {
   showImage?: boolean;
   /** Icons matching the homepage growth section pattern (red circle + white SVG) */
   icons?: [string, string, string];
+  /** Torn paper color at bottom — defaults to black */
+  tornPaper?: "black" | "white" | "grey" | "none";
+  /** Show torn paper at top too (same color) — defaults to false */
+  tornPaperTop?: boolean;
 };
 
 export default function OurApproachSection({
@@ -15,9 +21,34 @@ export default function OurApproachSection({
   bg = "bg-white",
   showImage = true,
   icons = ["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/trophy-white.svg"],
+  tornPaper = "black",
+  tornPaperTop = false,
 }: OurApproachSectionProps) {
+  const tornPaperImage =
+    tornPaper === "black"
+      ? "/images/torn-paper-black-1.png"
+      : tornPaper === "white"
+        ? "/images/torn-paper-white-1.png"
+        : tornPaper === "grey"
+          ? "/images/torn-paper-grey-1.png"
+          : null;
   return (
     <section className={`${bg} relative overflow-visible`}>
+      {/* Torn paper at top */}
+      {tornPaperTop && tornPaperImage && (
+        <div
+          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          style={{
+            height: "clamp(115px, 19vw, 300px)",
+            transform: "translateY(-50%)",
+            backgroundImage: `url(${tornPaperImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden="true"
+        />
+      )}
       <div
         className="max-w-[1232px] mx-auto"
         style={{
@@ -28,17 +59,14 @@ export default function OurApproachSection({
         }}
       >
         {/* Eyebrow — sits above the two-column layout */}
-        <p
-          className="text-red font-body font-medium uppercase mb-4"
-          style={{ fontSize: "16px", letterSpacing: "10px" }}
-        >
-          OUR APPROACH
-        </p>
+        <div className="mb-4">
+          <Eyebrow>OUR APPROACH</Eyebrow>
+        </div>
 
-        {/* Two-column layout: 70% copy left, 30% icons right */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-[80px] items-start">
-          {/* Left column (~70%): heading + body */}
-          <div className="flex flex-col gap-6 lg:basis-[70%] lg:shrink-0">
+        {/* Two-column layout: 60% copy left, 40% icons right */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-[60px] items-start">
+          {/* Left column (~60%): heading + body */}
+          <div className="flex flex-col gap-6 lg:basis-[58%] lg:shrink-0">
             <h4
               className="font-body font-bold text-black leading-[1]"
               style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
@@ -54,7 +82,7 @@ export default function OurApproachSection({
           </div>
 
           {/* Right column (~30%): icon list items — matches homepage growth section */}
-          <div className="flex flex-col gap-6 lg:gap-8 lg:basis-[30%] lg:pt-2">
+          <div className="flex flex-col gap-6 lg:gap-8 lg:basis-[42%] lg:pt-2">
             {listItems.map((item, i) => (
               <div key={item} className="flex items-center gap-4 lg:gap-5">
                 <div
@@ -65,12 +93,12 @@ export default function OurApproachSection({
                   <img
                     src={icons[i]}
                     alt=""
-                    className="size-6 lg:size-8"
+                    className="size-8 lg:size-11"
                     style={{ filter: "brightness(0) invert(1)" }}
                   />
                 </div>
                 <p
-                  className="font-body font-bold text-black leading-[1.357]"
+                  className="font-body font-bold text-black leading-[1.357] whitespace-nowrap"
                   style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
                 >
                   {item}
@@ -81,19 +109,21 @@ export default function OurApproachSection({
         </div>
       </div>
 
-      {/* Black torn paper at bottom — Framer: Black3, centerY 99% */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-        style={{
-          height: "clamp(115px, 19vw, 300px)",
-          transform: "translateY(50%)",
-          backgroundImage: "url(/images/torn-paper-black-1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        aria-hidden="true"
-      />
+      {/* Torn paper at bottom */}
+      {tornPaperImage && (
+        <div
+          className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
+          style={{
+            height: "clamp(115px, 19vw, 300px)",
+            transform: "translateY(50%)",
+            backgroundImage: `url(${tornPaperImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden="true"
+        />
+      )}
     </section>
   );
 }

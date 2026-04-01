@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 export default function TwoWaysSection() {
   return (
@@ -43,12 +44,7 @@ export default function TwoWaysSection() {
       >
         {/* Header — centered */}
         <div className="flex flex-col items-center text-center gap-4 mb-16 max-w-[800px] mx-auto">
-          <p
-            className="font-body font-medium text-white uppercase"
-            style={{ fontSize: "16px", letterSpacing: "10px" }}
-          >
-            HOW IT WORKS
-          </p>
+          <Eyebrow>HOW IT WORKS</Eyebrow>
           <h4
             className="font-body font-bold text-white leading-[1]"
             style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}

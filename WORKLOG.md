@@ -6,6 +6,48 @@
 
 ---
 
+## Aaron — April 1, 2026 (methodology page rebuild + new torn paper system + nav updates)
+
+**What changed:**
+
+**Methodology page (app/methodology/page.tsx):**
+- Hero: 70/30 grid, smoke-1@2x lower-left, smoke-2@2x full-height right side (100% section height, behind nav, no flat edges)
+- Hero video: 9:16 portrait aspect, 720px max height, play-once behavior with sound on by default (falls back to muted if browser blocks)
+- How It Works: grey bg, new torn paper PNG divider at top
+- Quote section: red bg, new torn paper red-top-1 and red-bottom-1 dividers
+- Ten Pillars: 2/3/2/3 offset column layout, top-left/bottom-right clip-path only, red hover stroke, single-column on mobile
+
+**New reusable component — TornPaperDivider (components/ui/TornPaperDivider.tsx):**
+- **NEW PNG API:** `<TornPaperDivider color="red" variant="top" style={1} />`
+- Colors: red, grey, black, white. Variants: top, bottom. Styles: 1 or 2.
+- Place inside a `relative overflow-visible` section — "top" overlaps section above, "bottom" overlaps section below
+- Fixed minimum width (1440px) so paper texture stays sharp on mobile, centered with `left-1/2 translate(-50%)`
+- 2px overlap to prevent subpixel gap artifacts
+- **Legacy SVG API still works** for existing pages (omit `variant` prop)
+- PNG assets in `public/images/new torn paper/` — full set: 24 files (4 colors × 3 variants × 2 styles)
+
+**PlayOnceVideo component (components/ui/PlayOnceVideo.tsx):**
+- New client component for video that autoplays once then stops
+- Tries sound-on first, falls back to muted if browser blocks
+- Shows native controls for replay
+
+**Nav updates (components/layout/Nav.tsx):**
+- New `light-red` variant: white background + red EKUZO logo
+- Created `public/images/ekuzo-logo-red.svg`
+- Removed black border from mobile hamburger button
+- Schools, Families, Methodology pages now use `variant="light-red"`
+
+**Other site-wide changes:**
+- FooterBanner promo graphic: maxWidth bumped to `clamp(390px, 40vw, 560px)`, maxHeight 800px
+- StickyCTA enroll button: added `border-2 border-red`
+
+**Logo files:**
+- `ekuzo-logo.svg` — white (for dark backgrounds)
+- `ekuzo-logo-black.svg` — black (for light backgrounds)
+- `ekuzo-logo-red.svg` — red (for schools, families, methodology)
+
+---
+
 ## Aaron — March 31, 2026 (programs page QA + shared component overhaul)
 
 **What changed:**

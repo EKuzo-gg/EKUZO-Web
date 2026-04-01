@@ -4,8 +4,9 @@ import { useRive } from "@rive-app/react-canvas";
 
 /**
  * Programs hero Rive animation — autoplay, full-bleed.
- * Matches Framer spec: artboard "Main - Desktop", state machine "State Machine 1",
- * autoplay true, autoBind true.
+ * Single .riv file for all breakpoints. On mobile the animation is rendered
+ * larger than its container and cropped via overflow-hidden on the parent,
+ * matching the Framer implementation.
  */
 export default function ProgramsHeroRive() {
   const { RiveComponent } = useRive({

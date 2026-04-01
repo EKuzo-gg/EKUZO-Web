@@ -6,6 +6,7 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ParallaxBird from "@/components/ui/ParallaxBird";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 const growthItems = [
   { label: "Structured practice", icon: "/icons/swords-white.svg" },
@@ -214,12 +215,7 @@ export default function HomePage() {
         <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2, gap: "100px" }}>
           {/* Header block — centered */}
           <div className="flex flex-col items-center text-center gap-4 max-w-[800px]">
-            <p
-              className="font-body font-medium text-red uppercase"
-              style={{ fontSize: "16px", letterSpacing: "10px" }}
-            >
-              HOW IT WORKS
-            </p>
+            <Eyebrow>HOW IT WORKS</Eyebrow>
             <h2
               className="font-body font-bold text-white leading-[1]"
               style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}

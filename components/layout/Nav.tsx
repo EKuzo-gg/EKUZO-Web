@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { useModal } from "@/context/ModalContext";
 
-type NavVariant = "dark" | "light";
+type NavVariant = "dark" | "light" | "light-red";
 
 const navLinks = [
   { href: "/programs",    label: "Programs" },
@@ -20,6 +20,7 @@ const navLinks = [
 export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isDark = variant === "dark";
+  const isLightRed = variant === "light-red";
   const { openModal } = useModal();
   const pathname = usePathname();
 
@@ -39,7 +40,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
       {/* Logo */}
       <Link href="/" className="shrink-0" aria-label="EKUZO home">
         <Image
-          src={isDark ? "/images/ekuzo-logo.svg" : "/images/ekuzo-logo-black.svg"}
+          src={isDark ? "/images/ekuzo-logo.svg" : isLightRed ? "/images/ekuzo-logo-red.svg" : "/images/ekuzo-logo-black.svg"}
           alt="EKUZO"
           width={170}
           height={33}

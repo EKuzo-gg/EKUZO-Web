@@ -48,17 +48,21 @@ export default function ProgramsPage() {
     <>
       {/* 1. Hero — Red bg, full-bleed Rive animation (autoplay), ~100vh */}
       <section
-        className="relative bg-red overflow-visible"
-        style={{ minHeight: "100vh" }}
+        className="relative bg-red overflow-hidden lg:overflow-visible"
+        style={{ minHeight: "clamp(560px, 150vw, 100vh)" }}
       >
         {/* Nav */}
         <div className="absolute top-0 left-0 right-0 z-20">
           <Nav variant="dark" />
         </div>
 
-        {/* Rive animation — full-bleed behind everything */}
-        <div className="absolute inset-0 z-0">
-          <ProgramsHeroRive />
+        {/* Rive animation — oversized on mobile for crop effect (matches Framer),
+            full-bleed on desktop. On mobile the inner div is wider than the
+            hero so the animation zooms in and overflow-hidden clips edges. */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center">
+          <div className="h-full shrink-0 w-[125%] lg:w-full">
+            <ProgramsHeroRive />
+          </div>
         </div>
 
         {/* White torn paper at bottom — background-image pattern, responsive heights per Framer */}
@@ -80,6 +84,7 @@ export default function ProgramsPage() {
       <OurApproachSection
         heading="Built for growth, on and off the screen"
         listItems={["Structured practice", "Skilled coaching", "Growth through play"]}
+        icons={["/icons/swords-white.svg", "/icons/clock-white.svg", "/icons/growth-arrows.svg"]}
         body="Every EKUZO program is built on the same foundation. What changes is the format: when, where, and how students participate."
         bg="bg-white"
       />

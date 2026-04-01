@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
-import TornPaper from "@/components/ui/TornPaper";
+import FooterBanner from "@/components/sections/FooterBanner";
 import ModalButton from "@/components/ui/ModalButton";
+import Eyebrow from "@/components/ui/Eyebrow";
+import CircleIcon from "@/components/ui/CircleIcon";
+import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 
 export const metadata = {
   title: "Methodology — EKUZO",
@@ -12,28 +16,24 @@ export const metadata = {
 
 const howItWorksCards = [
   {
-    icon: "heart",
+    icon: "/icons/heart.svg",
     title: "Inclusion",
-    desc: "A team for students who've never had one.",
-    align: "right",
+    desc: "A team for students who\u2019ve never had one.",
   },
   {
-    icon: "enthusiasm",
+    icon: "/icons/enthusiasm.svg",
     title: "Engagement",
     desc: "Practices and matches keep students present and energized.",
-    align: "left",
   },
   {
-    icon: "handwave",
+    icon: "/icons/handwave.svg",
     title: "Attendance",
     desc: "Programs become a reason to show up.",
-    align: "right",
   },
   {
-    icon: "leadership",
+    icon: "/icons/leadership.svg",
     title: "Future-ready skills",
     desc: "Leadership, communication, and resilience built in a setting students actually care about.",
-    align: "left",
   },
 ];
 
@@ -42,7 +42,7 @@ const pillars = [
   { title: "Correct Difficulty", desc: "Challenge tuned to ability keeps learners in flow." },
   { title: "Coaching", desc: "Feedback turns practice into progress." },
   { title: "Social Learning", desc: "Teams teach teamwork better than lectures." },
-  { title: "Mastery", desc: "You can't level up until you've learned." },
+  { title: "Mastery", desc: "You can\u2019t level up until you\u2019ve learned." },
   { title: "Intentional Play", desc: "Fun is a feature, not a distraction." },
   { title: "Problem-Based Learning", desc: "Every match is a problem to solve." },
   { title: "Experimentation & Feedback", desc: "Try, fail, adjust, repeat." },
@@ -53,237 +53,330 @@ const pillars = [
 export default function MethodologyPage() {
   return (
     <>
-      <Nav variant="light" />
+      {/* ── 1. Hero ─────────────────────────────────────────────── */}
+      <section
+        className="bg-white relative overflow-visible"
+        style={{
+          paddingTop: "clamp(160px, 18vw, 240px)",
+          paddingBottom: "clamp(160px, 22vw, 300px)",
+        }}
+      >
+        <div className="absolute top-0 left-0 right-0 z-20">
+          <Nav variant="light-red" />
+        </div>
 
-      {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden min-h-[90vh] flex items-center">
-        {/* top-right ink decoration */}
+        {/* Smoke decoration — lower-left, oversized so torn paper covers edges */}
         <div
-          className="absolute top-0 right-0 h-full w-[45%] pointer-events-none select-none"
+          className="absolute bottom-0 left-0 pointer-events-none select-none translate-y-[10%]"
           aria-hidden="true"
         >
           <Image
-            src="/images/pedagogy-hero-right-bg.png"
+            src="/images/smoke-1@2x.png"
             alt=""
-            fill
-            className="object-contain object-right-top"
-            priority
+            width={900}
+            height={900}
+            className="object-contain w-[clamp(300px,55vw,900px)] h-auto"
           />
         </div>
 
-        <div className="relative z-10 w-full grid grid-cols-1 md:grid-cols-2 gap-0 px-6 md:pl-[104px] md:pr-0 pt-12 pb-16 md:pt-0 md:pb-0 items-center">
-          {/* Left */}
-          <div className="py-16 md:py-24">
+        {/* Smoke decoration — right side, full section height, behind nav */}
+        <div
+          className="absolute inset-y-0 right-0 pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/smoke-2@2x.png"
+            alt=""
+            width={900}
+            height={900}
+            className="h-full w-auto object-cover object-left"
+          />
+        </div>
+
+        <div
+          className="max-w-[1232px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-12 items-center"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          {/* Left — headline + CTA (70%) */}
+          <div>
             <h1
-              className="font-body font-black text-black uppercase leading-[0.9] tracking-tight mb-6"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}
+              className="font-display uppercase text-black leading-[0.9] mb-6"
+              style={{ fontSize: "clamp(100px, 14vw, 200px)" }}
             >
               Pedagogy of gaming
             </h1>
-            <p className="text-black max-w-md leading-relaxed mb-10" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
+            <p
+              className="font-body text-black/70 leading-relaxed max-w-md mb-10"
+              style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
+            >
               Why games are the best teachers most students already know.
             </p>
-            <ModalButton modal="enroll" variant="red-outlined">
-              Enroll my gamer
+            <ModalButton modal="contact" variant="red-outlined">
+              Start a conversation
             </ModalButton>
           </div>
 
-          {/* Right – video */}
-          <div className="relative w-full h-[400px] md:h-[90vh]">
-            <video
+          {/* Right — video reel 9:16, 720px tall */}
+          <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "720px" }}>
+            <PlayOnceVideo
               src="/videos/pedagogy-hero.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ borderRadius: "2px" }}
             />
           </div>
         </div>
       </section>
 
-      {/* Hero → grey transition */}
-      <div className="relative bg-grey -mt-1" aria-hidden="true">
-        <Image
-          src="/images/pedagogy-hero-torn.png"
-          alt=""
-          width={1440}
-          height={220}
-          className="w-full h-auto"
+      {/* ── 2. Why Games Work — grey bg ────────────────────────── */}
+      <section
+        className="bg-[#f0edea] relative overflow-visible"
+        style={{
+          paddingTop: "clamp(80px, 14vw, 144px)",
+          paddingBottom: "clamp(120px, 18vw, 240px)",
+        }}
+      >
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        {/* Decorative background */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            backgroundImage: "url(/images/card-background@2x.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
         />
-      </div>
 
-      {/* ── How It Works ──────────────────────────────────────────── */}
-      <section className="bg-grey pb-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-[clamp(1.5rem,7.2vw,104px)]">
-          {/* Intro card */}
-          <div className="bg-white p-10 md:p-14 max-w-2xl mb-16">
-            <span className="inline-block bg-red text-white text-xs font-bold font-body tracking-widest uppercase px-3 py-1.5 mb-6">
-              HOW IT WORKS
-            </span>
-            <h2
-              className="font-body font-black text-black leading-[1.05] tracking-tight mb-6"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}
+        <div
+          className="max-w-[1232px] mx-auto relative z-10"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          {/* Large intro card with eyebrow */}
+          <div
+            className="bg-white mb-8"
+            style={{
+              borderRadius: "2px",
+              padding: "clamp(2rem, 5vw, 64px)",
+            }}
+          >
+            <div className="mb-4">
+              <Eyebrow>HOW IT WORKS</Eyebrow>
+            </div>
+            <h4
+              className="font-body font-bold text-black leading-[1] mb-6"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 64px)",
+                letterSpacing: "-1.28px",
+              }}
             >
               Why games work as learning systems?
-            </h2>
-            <p className="text-black/70 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
+            </h4>
+            <p
+              className="font-body text-black/70 leading-[1.357]"
+              style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+            >
               Every great game is a learning environment. Players stay engaged
               because they&apos;re motivated, supported, and challenged just
-              enough to grow — the same best practices that drive effective
+              enough to grow &mdash; the same best practices that drive effective
               classrooms.
             </p>
           </div>
 
-          {/* Staggered feature cards */}
-          <div className="space-y-10 md:space-y-16">
+          {/* Feature cards — zigzag with CircleIcon */}
+          <div className="flex flex-col gap-8">
             {howItWorksCards.map((card, i) => (
               <div
                 key={card.title}
-                className={`flex ${card.align === "right" ? "justify-end" : "justify-start"}`}
+                className={`flex ${i % 2 === 0 ? "lg:justify-end" : "lg:justify-start"}`}
               >
-                <div className="bg-white p-8 md:p-10 w-full max-w-sm md:max-w-md shadow-sm">
-                  <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mb-6">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`/icons/${card.icon}.svg`}
-                      alt=""
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <h3 className="font-body font-bold text-black mb-3" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
+                <div
+                  className="bg-white w-full lg:w-[560px]"
+                  style={{
+                    borderRadius: "2px",
+                    padding: "clamp(1.5rem, 4vw, 48px)",
+                  }}
+                >
+                  <CircleIcon src={card.icon} className="mb-5" />
+                  <h5
+                    className="font-body font-bold text-black leading-[1.2] mb-4"
+                    style={{ fontSize: "clamp(1.5rem, 2.8vw, 40px)" }}
+                  >
                     {card.title}
-                  </h3>
-                  <p className="text-black/70 leading-relaxed" style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)" }}>{card.desc}</p>
+                  </h5>
+                  <p
+                    className="font-body text-black/70 leading-[1.417]"
+                    style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
+                  >
+                    {card.desc}
+                  </p>
                 </div>
-
-                {/* Decorative offset element */}
-                {i < howItWorksCards.length - 1 && (
-                  <div
-                    className={`hidden md:block w-16 h-2 bg-red self-end mb-10 ${card.align === "right" ? "mr-4" : "ml-4"}`}
-                    aria-hidden="true"
-                  />
-                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* grey → red */}
-      <TornPaper color="red" />
+      {/* ── 3. Quote — red bg ─────────────────────────────────── */}
+      <section
+        className="bg-red relative overflow-visible"
+        style={{
+          paddingTop: "clamp(80px, 14vw, 144px)",
+          paddingBottom: "clamp(80px, 14vw, 144px)",
+        }}
+      >
+        <TornPaperDivider color="red" variant="top" style={1} />
 
-      {/* ── Quote ─────────────────────────────────────────────────── */}
-      <section className="bg-red py-24 md:py-32 px-6 md:px-[clamp(1.5rem,7.2vw,104px)] text-center">
-        {/* EKUZO camada icon */}
-        <div className="flex justify-center mb-10" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/camada-white.svg" alt="" width={40} height={60} />
-        </div>
-
-        <blockquote
-          className="font-body font-black text-white leading-[1.05] max-w-4xl mx-auto mb-10"
-          style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)" }}
+        <div
+          className="max-w-[880px] mx-auto text-center relative z-10"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
         >
-          Our job isn&apos;t to add pedagogy to games; it&apos;s to help
-          students see it, use it, and carry that mindset into school, careers,
-          and life
-        </blockquote>
+          {/* Decorative quote icon */}
+          <Image
+            src="/images/quote-white@2x.png"
+            alt=""
+            width={40}
+            height={40}
+            className="mx-auto mb-8"
+            aria-hidden="true"
+          />
 
-        <p className="text-white font-bold" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>Karlin Oei</p>
-        <p className="text-white/50 mt-1" style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)" }}>Founder EKUZO</p>
+          <blockquote
+            className="font-body font-bold text-white leading-[1.2] mb-10"
+            style={{ fontSize: "clamp(1.25rem, 2.8vw, 40px)" }}
+          >
+            &ldquo;Our job isn&apos;t to add pedagogy to games; it&apos;s to
+            help students see it, use it, and carry that mindset into school,
+            careers, and life&rdquo;
+          </blockquote>
+
+          <p
+            className="font-body font-bold text-white"
+            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+          >
+            Karlin Oei
+          </p>
+          <p
+            className="font-body font-bold text-white/60"
+            style={{ fontSize: "clamp(1.125rem, 2vw, 28px)" }}
+          >
+            Founder EKUZO
+          </p>
+        </div>
+
+        <TornPaperDivider color="red" variant="bottom" style={1} />
       </section>
 
-      {/* red → black */}
-      <TornPaper color="black" />
-
-      {/* ── Ten Pillars ───────────────────────────────────────────── */}
-      <section className="bg-black pt-0 pb-24 px-6 md:px-[clamp(1.5rem,7.2vw,104px)]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2
-              className="font-body font-black text-white leading-tight tracking-tight mb-4"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}
+      {/* ── 4. Ten Pillars — black bg ─────────────────────────── */}
+      <section
+        className="bg-black relative overflow-visible"
+        style={{
+          paddingTop: "clamp(80px, 14vw, 188px)",
+          paddingBottom: "clamp(80px, 14vw, 188px)",
+        }}
+      >
+        <div
+          className="max-w-[1232px] mx-auto"
+          style={{
+            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
+            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+          }}
+        >
+          {/* Header — two-column: heading left, subtext right */}
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 mb-16 items-start">
+            <div className="lg:flex-1">
+              <div className="mb-4">
+                <Eyebrow>PEDAGOGY</Eyebrow>
+              </div>
+              <h2
+                className="font-body font-bold text-white leading-[1]"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 64px)",
+                  letterSpacing: "-1.28px",
+                }}
+              >
+                The ten pillars of EKUZO pedagogy
+              </h2>
+            </div>
+            <p
+              className="font-body text-white/50 leading-[1.417] lg:max-w-[400px] lg:pt-12"
+              style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
             >
-              The ten pillars of EKUZO pedagogy
-            </h2>
-            <p className="text-white/50" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
-              Why games are the best teachers most students already know.
+              Why games are the best teachers most students already&nbsp;know.
             </p>
           </div>
 
-          {/* 4-column staggered grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-            {pillars.map((pillar, i) => {
-              const stagger = Math.floor(i / 4) % 2 === 0
-                ? (i % 2 === 1 ? "md:mt-10" : "")
-                : (i % 2 === 0 ? "md:mt-10" : "");
-              return (
-                <div key={pillar.title} className={`relative ${stagger}`}>
-                  {/* outer white border via clip-path */}
+          {/* 4-column layout: 2 / 3 / 2 / 3 with offset on 2-card columns */}
+          {(() => {
+            const columns = [
+              { cards: [pillars[0], pillars[1]], offset: true },
+              { cards: [pillars[2], pillars[3], pillars[4]], offset: false },
+              { cards: [pillars[5], pillars[6]], offset: true },
+              { cards: [pillars[7], pillars[8], pillars[9]], offset: false },
+            ];
+
+            /* Top-left + bottom-right corner clip only */
+            const clipOuter =
+              "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)";
+            const clipInner =
+              "polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px)";
+
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5">
+                {columns.map((col, colIdx) => (
                   <div
-                    className="bg-white p-px"
-                    style={{
-                      clipPath:
-                        "polygon(20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0% calc(100% - 20px), 0% 20px)",
-                    }}
+                    key={colIdx}
+                    className={`flex flex-col gap-4 md:gap-5 ${col.offset ? "md:mt-16" : ""}`}
                   >
-                    <div
-                      className="bg-black p-6 md:p-7"
-                      style={{
-                        clipPath:
-                          "polygon(19px 0%, calc(100% - 19px) 0%, 100% 19px, 100% calc(100% - 19px), calc(100% - 19px) 100%, 19px 100%, 0% calc(100% - 19px), 0% 19px)",
-                      }}
-                    >
-                      <h3 className="font-body font-bold text-white mb-2" style={{ fontSize: "clamp(0.875rem, 1.2vw, 18px)" }}>
-                        {pillar.title}
-                      </h3>
-                      <p className="text-white/60 leading-relaxed" style={{ fontSize: "clamp(0.75rem, 1vw, 14px)" }}>
-                        {pillar.desc}
-                      </p>
-                    </div>
+                    {col.cards.map((pillar) => (
+                      <div key={pillar.title} className="group flex-1">
+                        <div
+                          className="bg-white/20 group-hover:bg-red h-full transition-colors duration-200"
+                          style={{ clipPath: clipOuter, padding: "2px" }}
+                        >
+                          <div
+                            className="bg-black p-6 md:p-7 h-full flex flex-col"
+                            style={{ clipPath: clipInner }}
+                          >
+                            <h3
+                              className="font-body font-bold text-white mb-2"
+                              style={{
+                                fontSize: "clamp(1.125rem, 1.6vw, 24px)",
+                              }}
+                            >
+                              {pillar.title}
+                            </h3>
+                            <p
+                              className="text-white/60 leading-relaxed"
+                              style={{
+                                fontSize: "clamp(0.875rem, 1.2vw, 18px)",
+                              }}
+                            >
+                              {pillar.desc}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
-      {/* black → red */}
-      <TornPaper color="red" flip />
-
-      {/* ── Turning pedagogy into progress ────────────────────────── */}
-      <section className="bg-red py-24 px-6 md:px-[clamp(1.5rem,7.2vw,104px)] overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2
-              className="font-body font-black text-white leading-tight tracking-tight mb-6"
-              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
-            >
-              Turning pedagogy into progress
-            </h2>
-            <p className="text-white/80 leading-relaxed mb-10" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
-              Games proved what great learning could look like. EKUZO makes it
-              real for every student, in every school.
-            </p>
-            <ModalButton modal="contact" variant="white-outlined">
-              Start a conversation
-            </ModalButton>
-          </div>
-
-          <div className="relative h-[400px] md:h-[500px]">
-            <Image
-              src="/images/community-group.png"
-              alt="EKUZO students"
-              fill
-              className="object-contain object-center grayscale"
-            />
-          </div>
-        </div>
-      </section>
-
+      {/* ── 5. Footer Banner + Footer ─────────────────────────── */}
+      <FooterBanner heading="Turning pedagogy into progress for every student" />
       <Footer />
     </>
   );

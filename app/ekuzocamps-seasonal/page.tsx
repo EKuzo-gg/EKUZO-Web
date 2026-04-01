@@ -7,6 +7,7 @@ import Icon from "@/components/ui/Icon";
 import type { IconName } from "@/components/ui/Icon";
 import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 export const metadata = {
   title: "EKUZO Camp — Level Up Your Game This Summer",
@@ -364,12 +365,9 @@ export default function EkuzoCampsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               {/* Rhombus pill — matches hero tag style */}
-              <span
-                className="inline-block bg-red text-white font-body font-bold text-xs tracking-[0.15em] uppercase px-5 py-2 mb-6"
-                style={{ transform: "skewX(-8deg)" }}
-              >
-                <span style={{ transform: "skewX(8deg)", display: "inline-block" }}>The EKUZO Difference</span>
-              </span>
+              <div className="mb-6">
+                <Eyebrow>The EKUZO Difference</Eyebrow>
+              </div>
               <h2
                 className="font-body font-bold text-black leading-[1] mb-6"
                 style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "0.01em" }}
@@ -583,12 +581,9 @@ export default function EkuzoCampsPage() {
       <section className="bg-white py-24" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
         <div className="max-w-[1232px] mx-auto">
           {/* Red rhombus pill */}
-          <span
-            className="inline-block bg-red text-white font-body font-bold text-xs tracking-[0.15em] uppercase px-5 py-2 mb-6"
-            style={{ transform: "skewX(-8deg)" }}
-          >
-            <span style={{ transform: "skewX(8deg)", display: "inline-block" }}>Parent Briefing</span>
-          </span>
+          <div className="mb-6">
+            <Eyebrow>Parent Briefing</Eyebrow>
+          </div>
 
           <h2
             className="font-body font-bold text-black leading-[1] mb-4"

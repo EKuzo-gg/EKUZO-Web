@@ -6,6 +6,7 @@ import ModalButton from "@/components/ui/ModalButton";
 import Button from "@/components/ui/Button";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import FooterBanner from "@/components/sections/FooterBanner";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 export const metadata = {
   title: "Coaching — EKUZO",
@@ -287,9 +288,9 @@ export default function CoachingPage() {
         <div className="relative z-10 max-w-[1232px] mx-auto px-6 md:px-[104px]">
           {/* Intro card */}
           <div className="bg-white p-10 md:p-14 max-w-2xl mb-16 relative z-20">
-            <span className="inline-block bg-red text-white text-xs font-bold font-body tracking-widest uppercase px-3 py-1.5 mb-6">
-              How It Works
-            </span>
+            <div className="mb-6">
+              <Eyebrow>How It Works</Eyebrow>
+            </div>
             <h2
               className="font-display uppercase text-black leading-tight mb-6"
               style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}

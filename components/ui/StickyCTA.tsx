@@ -50,7 +50,7 @@ export default function StickyCTA() {
       <div className="bg-white flex items-center justify-center gap-2 px-3 pt-3 pb-6 md:gap-4 md:px-4 md:pt-4 md:pb-8">
         <button
           onClick={() => openModal("enroll")}
-          className="flex-1 max-w-[340px] bg-red text-white font-body font-bold text-sm md:text-lg
+          className="flex-1 max-w-[340px] bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
                      py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
                      hover:brightness-110 active:scale-[0.98] active:brightness-90
                      transition-all duration-150"
