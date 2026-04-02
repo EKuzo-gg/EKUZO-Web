@@ -13,7 +13,7 @@ export default function Eyebrow({ children, className = "", variant = "default" 
 
   return (
     <span
-      className={`inline-block font-body font-bold text-sm tracking-[0.15em] uppercase px-5 py-2 ${colorClasses} ${className}`}
+      className={`inline-block self-start font-body font-bold text-sm tracking-[0.15em] uppercase px-3 py-1.5 ${colorClasses} ${className}`}
       style={{ transform: "skewX(-8deg)" }}
     >
       <span style={{ transform: "skewX(8deg)", display: "inline-block" }}>

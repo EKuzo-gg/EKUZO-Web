@@ -54,7 +54,7 @@ export default function TestimonialVideo({ src, name, role }: TestimonialVideoPr
           </div>
         </div>
         {/* Name beneath video */}
-        <div className="mt-4 text-center">
+        <div className="mt-8 text-center">
           <span className="font-body text-black block" style={{ fontSize: "clamp(1rem, 1.6vw, 24px)", lineHeight: "34px" }}>
             {name}
           </span>

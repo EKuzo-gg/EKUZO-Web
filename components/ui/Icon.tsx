@@ -31,6 +31,7 @@ const ICONS = [
   "key-2",
   "swords-2",
   "camada",
+  "loot",
   // White icons
   "swords-white",
   "clock-white",
