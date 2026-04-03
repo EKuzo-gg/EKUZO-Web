@@ -100,7 +100,7 @@ const coachCards = [
     objectPosition: "center top",
   },
   {
-    name: 'NURI "JE" ',
+    name: 'NURI "TEEMO TIME" JE',
     role: "Coach // Diamond Support",
     bio: "Community manager for the University of Texas at Austin and Alienware Ambassador. Nuri brings knowledge from teaching in public schools to understand how children can grow beyond what is taught in schools.",
     image: "/images/coach-nuri-je.png",
@@ -695,9 +695,24 @@ export default function EkuzoCampsPage() {
 
           {/* ── What Do I Need sub-section ── */}
           <div className="max-w-[1232px] mx-auto" style={{ marginTop: "clamp(100px, 16vw, 200px)" }}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Copy — left */}
-              <div className="flex flex-col gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Collage — left on desktop, second on mobile */}
+              <div className="relative overflow-visible order-2 lg:order-1" style={{ aspectRatio: "4/3" }}>
+                <div
+                  className="absolute inset-0 bg-[#e5e0db]"
+                  style={{ clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)" }}
+                />
+                <Image
+                  src="/images/tech-collage@2x.png"
+                  alt="Gaming setup — computer, headset, keyboard, mouse"
+                  width={800}
+                  height={900}
+                  className="relative z-10 w-[110%] max-w-none"
+                  style={{ marginLeft: "-5%", marginTop: "-10%" }}
+                />
+              </div>
+              {/* Copy — right on desktop, first on mobile */}
+              <div className="flex flex-col gap-8 order-1 lg:order-2">
                 <Eyebrow>What Do I Need?</Eyebrow>
                 <h2
                   className="font-body font-black text-black leading-[1]"
@@ -713,21 +728,6 @@ export default function EkuzoCampsPage() {
                     Our camps are moderated and follow a strict code of conduct.
                   </p>
                 </div>
-              </div>
-              {/* Collage — right */}
-              <div className="relative overflow-visible" style={{ aspectRatio: "4/3" }}>
-                <div
-                  className="absolute inset-0 bg-[#e5e0db]"
-                  style={{ clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)" }}
-                />
-                <Image
-                  src="/images/tech-collage@2x.png"
-                  alt="Gaming setup — computer, headset, keyboard, mouse"
-                  width={800}
-                  height={900}
-                  className="relative z-10 w-[110%] max-w-none"
-                  style={{ marginLeft: "-5%", marginTop: "-10%" }}
-                />
               </div>
             </div>
           </div>

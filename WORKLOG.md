@@ -6,6 +6,22 @@
 
 ---
 
+## Aaron — April 3, 2026 (methodology video fix + camps v2 tweaks)
+
+**What changed:**
+
+**Methodology page (app/methodology/page.tsx):**
+- Hero section: changed `overflow-clip` to `overflow-visible` to stop clipping the video (matching e100 pattern)
+- Removed `lg:mx-0` from video container so it centers like e100
+- Reduced hero headline font size from `clamp(100px, 18vw, 256px)` to `clamp(72px, 10vw, 160px)` to give the video more visual space in the 50/50 grid
+
+**Camps v2 page (app/ekuzo-camps/v2/page.tsx):**
+- What Do I Need: swapped layout — image now on left, text on right on desktop. Mobile keeps text-first order using CSS `order` classes
+- What Do I Need: changed grid alignment from `items-start` to `items-center` for vertical centering
+- Nuri gamertag updated: "Je" → "Teemo Time" Je (full name: NURI "TEEMO TIME" JE)
+
+---
+
 ## Aaron — April 2, 2026 evening (camps v2 — continued refinements)
 
 **What changed:**

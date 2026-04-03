@@ -56,7 +56,7 @@ export default function MethodologyPage() {
       {/* ══ 1. HERO — white bg, 50/50 grid, smoke graphics ═════════════════ */}
       <div className="relative overflow-visible" style={{ zIndex: 1 }}>
       <section
-        className="bg-white relative overflow-clip"
+        className="bg-white relative overflow-visible"
         style={{
           paddingTop: "clamp(160px, 18vw, 240px)",
           paddingBottom: "clamp(160px, 22vw, 300px)",
@@ -105,7 +105,7 @@ export default function MethodologyPage() {
           <div>
             <h1
               className="font-display uppercase text-black leading-[0.85] mb-6"
-              style={{ fontSize: "clamp(100px, 18vw, 256px)" }}
+              style={{ fontSize: "clamp(72px, 10vw, 160px)" }}
             >
               Pedagogy of gaming
             </h1>
@@ -122,7 +122,7 @@ export default function MethodologyPage() {
 
           {/* Right — video reel 9:16, 70vh tall */}
           <div
-            className="relative mx-auto lg:mx-0"
+            className="relative mx-auto"
             style={{ aspectRatio: "9/16", maxHeight: "70vh", width: "min(100%, calc(70vh * 9 / 16))" }}
           >
             <PlayOnceVideo
