@@ -87,18 +87,24 @@ const parentBriefing = [
 const coachCards = [
   {
     name: 'KARLIN "FAITH" OEI',
-    role: "Head Coach // Grandmaster Mid",
-    bio: "Former collegiate esports captain. Specializes in macro-rotations and mid-lane priority. Focuses on communication skills.",
+    role: "Founder // Peak Challenger Jungler",
+    bio: "Former national collegiate captain who won $80,000+ in esports scholarships through competitive play — Karlin believes that games (if played correctly) are one of the best teachers of discipline, teamwork, and resilience.",
+    image: "/images/coach-karlin-faith.jpg",
+    objectPosition: "center 20%",
   },
   {
-    name: 'SEBASTIEN "ZZ" DEMONTIGNY',
-    role: "Tactical Coach // Master Support",
-    bio: "2 years coaching youth esports. Expert in vision control and ADC peel. Passionate about tilt-management and mental fortitude.",
+    name: 'SEBASTIEN "ZZLEGENDARY" DEMONTIGNY',
+    role: "Head Coach // Professional Esports Coach",
+    bio: "Coached at professional esports teams like Dignitas & Evil Geniuses and has 4+ years experience working in youth esports. He knows what it takes to bring out the best in young players.",
+    image: "/images/coach-sebastien-ZzLegendary.png",
+    objectPosition: "center top",
   },
   {
-    name: 'MARCUS "RIFT" JOHNSON',
-    role: "Mechanics Coach // Master Jungle",
-    bio: "Analytical pathing expert. Breaks down complex jungle clear timings into digestible concepts. Leads VOD review sessions.",
+    name: 'NURI "JE" ',
+    role: "Coach // Diamond Support",
+    bio: "Community manager for the University of Texas at Austin and Alienware Ambassador. Nuri brings knowledge from teaching in public schools to understand how children can grow beyond what is taught in schools.",
+    image: "/images/coach-nuri-je.png",
+    objectPosition: "center 60%",
   },
 ];
 
@@ -160,8 +166,8 @@ export default function EkuzoCampsPage() {
     <>
       {/* ══ STATS TICKER — above nav ═════════════════════════════════════════ */}
       <div
-        className="bg-red overflow-hidden relative"
-        style={{ zIndex: 30 }}
+        className="overflow-hidden relative"
+        style={{ backgroundColor: "#AE2CF2", zIndex: 30 }}
         aria-hidden="true"
       >
         <div style={{ paddingTop: "14px", paddingBottom: "14px" }}>
@@ -181,10 +187,10 @@ export default function EkuzoCampsPage() {
                   <span
                     key={item}
                     className="font-display text-white text-3xl inline-flex items-center"
-                    style={{ letterSpacing: "0.12em" }}
+                    style={{ letterSpacing: "0.07em" }}
                   >
                     <span className="mx-8">{item}</span>
-                    <span className="text-black">✦</span>
+                    <span style={{ color: "#E0FF4F" }}>✦</span>
                   </span>
                 ))}
               </span>
@@ -604,12 +610,12 @@ export default function EkuzoCampsPage() {
                     <Icon name={item.icon} size={40} className="w-full h-full" />
                   </div>
                   <h4
-                    className="font-display uppercase text-black leading-[1] mb-3"
-                    style={{ fontSize: "clamp(1.5rem, 2.8vw, 32px)" }}
+                    className="font-display uppercase text-black leading-none mb-3"
+                    style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                   >
                     {item.title}
                   </h4>
-                  <p className="font-body text-black/60 text-base leading-relaxed">
+                  <p className="font-body text-black/70 leading-relaxed" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)" }}>
                     {item.desc}
                   </p>
                 </div>
@@ -634,30 +640,37 @@ export default function EkuzoCampsPage() {
           {/* ── Coaches sub-section ── */}
           <div className="max-w-[1232px] mx-auto">
             <div className="flex items-start mb-4">
-              <Eyebrow>Coaches</Eyebrow>
+              <Eyebrow>Our Team</Eyebrow>
             </div>
             <h2
-              className="font-display uppercase text-black leading-[0.85] mb-14"
+              className="font-display uppercase text-black leading-[0.85] mb-4"
               style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
             >
               Learn from the best
             </h2>
+            <p className="font-body text-black/70 leading-relaxed mb-14 max-w-3xl" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
+              Our coaching team combines competitive gaming experience with a passion for teaching. They guide campers through structured practice, teamwork, communication, and healthy gaming habits. Parents can feel confident knowing their kids are learning from mentors who prioritize growth, sportsmanship, and confidence —both on and off the screen. These are just a few of the elite coaches that teach EKUZO.
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {coachCards.map((coach) => (
                 <div
                   key={coach.name}
-                  className="bg-white group overflow-hidden"
-                  style={{
-                    clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
-                  }}
+                  className="group transition-all duration-300 lg:hover:-translate-y-2"
                 >
+                  <div
+                    className="bg-white overflow-hidden"
+                    style={{
+                      clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
+                    }}
+                  >
                   <div className="relative w-full h-[250px] overflow-hidden border-b border-black/8">
                     <Image
-                      src="/images/coaching-learner-photo.jpg"
+                      src={coach.image}
                       alt={coach.name}
                       fill
-                      className="object-cover grayscale contrast-[1.2] group-hover:grayscale-0 transition-all duration-300"
+                      className="object-cover transition-transform duration-300 lg:group-hover:scale-105"
+                      style={{ objectPosition: coach.objectPosition }}
                     />
                   </div>
                   <div className="p-6">
@@ -674,6 +687,7 @@ export default function EkuzoCampsPage() {
                       {coach.bio}
                     </p>
                   </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -681,23 +695,8 @@ export default function EkuzoCampsPage() {
 
           {/* ── What Do I Need sub-section ── */}
           <div className="max-w-[1232px] mx-auto" style={{ marginTop: "clamp(100px, 16vw, 200px)" }}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Image — left */}
-              <div className="relative overflow-visible" style={{ aspectRatio: "4/3" }}>
-                <div
-                  className="absolute inset-0 bg-[#e5e0db]"
-                  style={{ clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)" }}
-                />
-                <Image
-                  src="/images/tech-collage@2x.png"
-                  alt="Gaming setup — computer, headset, keyboard, mouse"
-                  width={800}
-                  height={900}
-                  className="relative z-10 w-[110%] max-w-none"
-                  style={{ marginLeft: "-5%", marginTop: "-10%" }}
-                />
-              </div>
-              {/* Copy — right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+              {/* Copy — left */}
               <div className="flex flex-col gap-8">
                 <Eyebrow>What Do I Need?</Eyebrow>
                 <h2
@@ -714,6 +713,21 @@ export default function EkuzoCampsPage() {
                     Our camps are moderated and follow a strict code of conduct.
                   </p>
                 </div>
+              </div>
+              {/* Collage — right */}
+              <div className="relative overflow-visible" style={{ aspectRatio: "4/3" }}>
+                <div
+                  className="absolute inset-0 bg-[#e5e0db]"
+                  style={{ clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)" }}
+                />
+                <Image
+                  src="/images/tech-collage@2x.png"
+                  alt="Gaming setup — computer, headset, keyboard, mouse"
+                  width={800}
+                  height={900}
+                  className="relative z-10 w-[110%] max-w-none"
+                  style={{ marginLeft: "-5%", marginTop: "-10%" }}
+                />
               </div>
             </div>
           </div>
@@ -815,6 +829,7 @@ export default function EkuzoCampsPage() {
       </div>
 
       {/* ══ 8. TESTIMONIALS — white bg ═══════════════════════════════════════ */}
+      <div className="relative overflow-visible">
         <section
           className="bg-white relative overflow-clip"
           style={{
@@ -954,10 +969,11 @@ export default function EkuzoCampsPage() {
             }
           `}</style>
         </section>
+        <TornPaperDivider color="white" variant="bottom" style={2} />
+      </div>
 
       {/* ══ 9. SECURE YOUR SLOT — red bg ═══════════════════════════════════ */}
       <div className="relative overflow-visible">
-        <TornPaperDivider color="red" variant="top" style={1} />
         <section
           className="bg-red relative overflow-clip"
           style={{
@@ -967,6 +983,25 @@ export default function EkuzoCampsPage() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
           id="register"
+        >
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/register-promo-hero-2.png"
+              alt=""
+              fill
+              className="object-cover"
+              aria-hidden="true"
+            />
+            {/* Center darkening for headline legibility */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse 80% 70% at 50% 45%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)",
+              }}
+            />
+          </div>
+          <div className="relative z-10"
         >
           <div className="max-w-[1232px] mx-auto text-center">
             <div className="flex items-start justify-center mb-4">
@@ -988,16 +1023,16 @@ export default function EkuzoCampsPage() {
                 <div className="flex flex-wrap gap-12 mb-10">
                   <div>
                     <p className="font-body font-bold uppercase mb-2 text-black/40" style={{ fontSize: "16px", letterSpacing: "2px" }}>Start Date</p>
-                    <p className="font-display text-black uppercase" style={{ fontSize: "clamp(1.5rem, 2.2vw, 32px)" }}>Summer 2026</p>
+                    <p className="font-display text-black uppercase leading-none" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>Summer 2026</p>
                   </div>
                   <div>
                     <p className="font-body font-bold uppercase mb-2 text-black/40" style={{ fontSize: "16px", letterSpacing: "2px" }}>Platform</p>
-                    <p className="font-display text-black uppercase" style={{ fontSize: "clamp(1.5rem, 2.2vw, 32px)" }}>PC / Discord</p>
+                    <p className="font-display text-black uppercase leading-none" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>PC / Discord</p>
                   </div>
                 </div>
                 <a
                   href="/camps/register"
-                  className="inline-block font-body font-bold text-white bg-red rounded-sm px-12 py-5 hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150"
+                  className="block text-center font-body font-bold text-white bg-red rounded-sm px-12 py-5 hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150"
                   style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)", letterSpacing: "0.02em", borderRadius: "2px" }}
                 >
                   Register for Camp
@@ -1023,6 +1058,7 @@ export default function EkuzoCampsPage() {
               </div>
             </div>
           </div>
+          </div>
         </section>
       </div>
 
@@ -1043,9 +1079,12 @@ export default function EkuzoCampsPage() {
               <div className="mb-4">
                 <Eyebrow variant="light">FAQ</Eyebrow>
               </div>
-              <h4 className="font-body font-bold text-white leading-tight" style={{ fontSize: "clamp(1.5rem, 1.8vw, 24px)" }}>
+              <h2
+                className="font-display uppercase text-white leading-[0.85]"
+                style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+              >
                 Frequently Asked Questions
-              </h4>
+              </h2>
             </div>
             <div className="flex-1">
               <FAQAccordion items={campsFAQs} theme="dark" />

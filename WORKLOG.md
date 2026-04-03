@@ -6,6 +6,72 @@
 
 ---
 
+## Aaron — April 2, 2026 evening (camps v2 — continued refinements)
+
+**What changed:**
+
+**Camps v2 page (app/ekuzo-camps/v2/page.tsx):**
+- Coach bios updated: Karlin "Faith" Oei (Founder // Peak Challenger Jungler), Sebastien "ZzLegendary" Demontigny (Head Coach // Professional Esports Coach), Nuri "Je" (Coach // Diamond Support)
+- Coach images wired: coach-karlin-faith.jpg, coach-sebastien-ZzLegendary.png, coach-nuri-je.png with per-coach objectPosition (Karlin 20%, Sebastien top, Nuri 60%)
+- Coach section renamed: eyebrow "Coaches" → "Our Team", added body copy paragraph below headline
+- Coach hover: removed grayscale default, images now full color. Desktop hover: card lifts -translate-y-2, image scales 105% (no shadow). Mobile: no hover effects.
+- For Parents cards: white bg with chopped corners, black icons, headline size matched to day cards (`clamp(2rem, 3.5vw, 3rem)`), body copy matched (`clamp(0.95rem, 1.2vw, 1.1rem)` in `text-black/70`)
+- What Do I Need: layout flipped — copy on left, collage image on right. Using tech-collage@2x.png on grey bg container
+- Register section: red bg with register-promo-hero-2.png background image, radial gradient center darkening for legibility, chopped-corner card (white left panel with red button, black price stub), removed red top/bottom torn papers. Summer 2026 / PC Discord text sized to match parent card headlines.
+- Register button: full-width in panel (`block text-center`)
+- FAQ: headline changed to font-display uppercase matching other sections, removed black bottom torn paper
+- Testimonials: added white-bottom-2 torn paper divider
+- Ticker: background color changed to #AE2CF2 (purple), stars changed to #E0FF4F (neon yellow-green), letter spacing tightened to 0.07em
+- "Learn more about games" button: grey style with white fill, tertiary size
+- All buttons confirmed title case site-wide (no uppercase class)
+
+**Eyebrow component (components/ui/Eyebrow.tsx):**
+- Added `self-start` to prevent flex container stretching (fixes eyebrow bg extending full width)
+
+**SVG viewBox fixes (public/icons/):**
+- team.svg, strategy.svg, trophy.svg: recalculated as square centered bounding boxes for proper centering in circle containers
+
+---
+
+## Aaron — April 2, 2026 (camps v2 page — visual QA + new sections)
+
+**What changed:**
+
+**Camps v2 page (app/ekuzo-camps/v2/page.tsx):**
+- Hero: video bg (camp-hero.mp4) with dark gradient + red accent overlay, seamless marquee ticker above nav, white body copy, oversized white "Register for Camp" button (Inter bold, 2px radius)
+- Camp Overview: white bg, white-top-1 overlapping hero, 4-col grid with 60px icons (swords, calendar, chat, loot), values at clamp(4rem, 7vw, 6rem)
+- EKUZO Difference: grey bg with grey-top-2, squad formation visual with chopped-corner wrapper (bg-black/20 outer border, bg-white/50 inner), "SQUAD VANGUARD 67" header at 40px, player rows with hover states, "Your Gamer" callout in solid red
+- 5-Day Progression: day letters in font-display red, red outline on hover (outer wrapper hover:bg-red), titles at clamp(2rem, 3.5vw, 3rem)
+- For Parents: black bg with black torn paper top/bottom, white chopped-corner cards with black icons (CircleIcon), text-base body copy
+- Coaches + What Do I Need + What Do We Play: combined grey section (no grey top divider)
+  - Coaches: grey bg, white chopped-corner cards with grayscale photos
+  - What Do I Need: grey bg container with chopped corners + tech-collage@2x.png overlapping on top, copy on right
+  - What Do We Play: League of Legends copy with 3 checklist items (red circle icons with white graphics via CSS filter invert), sticky chopped-corner image on right, grey tertiary "Learn more about games" and "View more FAQs" buttons, chopped-corner FAQ callout card
+- Testimonials: white bg, quote cards with chopped-corner wrapper borders, video with red play button overlay, increased spacing between video and name (mt-8)
+- Secure Your Slot: red bg with red torn paper top (no bottom), chopped-corner card — white left panel (red register button) + black right price panel ($199)
+- FAQ: black bg, dark theme
+- Mobile CTA bar at bottom
+
+**Eyebrow component (components/ui/Eyebrow.tsx):**
+- Tightened padding from px-5 py-2 to px-3 py-1.5 (fits text closer)
+- Added self-start to prevent stretching in flex containers
+
+**TestimonialVideo component (components/ui/TestimonialVideo.tsx):**
+- Increased gap between video and name/role from mt-4 to mt-8
+
+**SVG icon viewBox fixes (public/icons/):**
+- team.svg: viewBox cropped to "-6 -4.1 43 43" (square, centered on artwork)
+- strategy.svg: viewBox cropped to "-1.5 -1.8 38.7 38.7" (square, centered)
+- trophy.svg: viewBox cropped to "-1.6 -2.1 35.2 35.2" (square, centered)
+
+**Other:**
+- Added "loot" to ICONS array in Icon.tsx
+- Converted camp-hero.mov to camp-hero.mp4 via ffmpeg (67MB → 15MB)
+- Temporarily renamed register page to .bak (missing @stripe/react-stripe-js)
+- Updated CLAUDE.md Learning Log with two-system torn paper documentation
+
+---
+
 ## Aaron — April 1, 2026 (site-wide consistency pass + FAQ page build)
 
 **What changed:**
