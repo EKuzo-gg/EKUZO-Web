@@ -14,10 +14,26 @@ import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ModalButton from "@/components/ui/ModalButton";
 import Link from "next/link";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "For Families — EKUZO",
   description:
-    "Learn how EKUZO supports families. Safe, structured, and coached esports programmes for young gamers from home or school.",
+    "How EKUZO supports families: safe, structured esports programs that build confidence, teamwork, and life skills in young gamers.",
+  openGraph: {
+    title: "For Families | Safe Esports Programs | EKUZO",
+    description: "Learn how EKUZO builds confidence and growth in young gamers through structured, coached esports programs.",
+    url: "https://ekuzo.gg/parents",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO for Families - Youth Esports Coaching",
+      },
+    ],
+  },
 };
 
 const parentsFAQs = [

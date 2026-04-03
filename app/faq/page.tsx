@@ -7,9 +7,26 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
 import Image from "next/image";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "FAQ — EKUZO",
-  description: "Answers to your questions about EKUZO programmes, coaches, safety, scheduling, and more.",
+  description:
+    "Find answers about EKUZO programs, coaching, safety, scheduling, costs, and enrollment. Everything you need to know.",
+  openGraph: {
+    title: "Frequently Asked Questions | EKUZO",
+    description: "Get answers about EKUZO esports programs, coaches, safety, and enrollment.",
+    url: "https://ekuzo.gg/faq",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO FAQ - Questions Answered",
+      },
+    ],
+  },
 };
 
 // Section 2: Safety & Coaching

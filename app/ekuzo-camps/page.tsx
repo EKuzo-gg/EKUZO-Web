@@ -210,7 +210,7 @@ export default function EkuzoCampsPage() {
 
           {/* Single CTA */}
           <div>
-            <Button variant="red-filled" href="/camps/register">
+            <Button variant="red-filled" href="/programs/ekuzo-camps/register">
               Register Now
             </Button>
           </div>
@@ -942,7 +942,7 @@ export default function EkuzoCampsPage() {
                 </div>
 
                 <a
-                  href="/camps/register"
+                  href="/programs/ekuzo-camps/register"
                   className="inline-flex items-center justify-center bg-red font-body font-bold text-white text-center"
                   style={{ fontSize: "clamp(1rem, 1.9vw, 28px)", padding: "24px 48px", letterSpacing: "-0.56px" }}
                 >

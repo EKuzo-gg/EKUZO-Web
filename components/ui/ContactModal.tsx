@@ -26,25 +26,21 @@ export default function ContactModal() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            organization: formData.organization,
-            contactMethod,
-            ...(contactMethod === "email"
-              ? { email: formData.email }
-              : { phone: formData.phone }),
-            message: formData.message,
-            product: "contact-form",
-            pageUrl: window.location.href,
-            submittedAt: new Date().toISOString(),
-          }),
-        });
-      }
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          organization: formData.organization,
+          contactMethod,
+          ...(contactMethod === "email"
+            ? { email: formData.email }
+            : { phone: formData.phone }),
+          message: formData.message,
+          pageUrl: window.location.href,
+        }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
     } catch (err) {
       console.error("Submission error:", err);

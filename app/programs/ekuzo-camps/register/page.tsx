@@ -851,7 +851,7 @@ function CheckoutForm({
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${siteUrl}/camps/success?payment_intent=${paymentIntentId}`,
+        return_url: `${siteUrl}/programs/ekuzo-camps/success?payment_intent=${paymentIntentId}`,
         receipt_email: parentEmail,
       },
     });

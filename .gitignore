@@ -54,3 +54,11 @@ next-dev.log
 # Staging zips / temp folders
 public/place-these-in-ekuzo-web-public/
 public/place-these-in-ekuzo-web-public.zip
+
+# Claude working files
+.claude/
+
+# Scratch/session files
+CAMPS-CLAUDE.md
+CAMPS-PROJECT-PLAN.md
+extras/

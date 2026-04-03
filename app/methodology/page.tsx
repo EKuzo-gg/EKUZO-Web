@@ -8,10 +8,26 @@ import CircleIcon from "@/components/ui/CircleIcon";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Methodology — EKUZO",
   description:
-    "Pedagogy of gaming. Why games are the best teachers most students already know. The EKUZO approach to coaching, growth, and the ten pillars of great learning.",
+    "Learn the EKUZO pedagogy: how games teach leadership, resilience, and teamwork. Built on 10 pillars of youth development and learning science.",
+  openGraph: {
+    title: "The EKUZO Methodology | Pedagogy of Gaming",
+    description: "How EKUZO uses esports to teach leadership, resilience, and teamwork through structured coaching.",
+    url: "https://ekuzo.gg/methodology",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO Methodology - Youth Esports Pedagogy",
+      },
+    ],
+  },
 };
 
 const howItWorksCards = [

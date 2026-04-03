@@ -91,17 +91,15 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 - **20 columns:** registration_id, family_id, parent_first_name, parent_last_name, parent_email, parent_phone, gamer_name, gamer_tag, week, slot, week_dates, birthday, skill_level, tshirt_size, preferred_games, timezone, location, amount_paid, stripe_pi_id, registration_date
 - Apps Script URL in `GOOGLE_SHEETS_WEBHOOK_URL` env var (Google service account approach abandoned due to Workspace org policy blocking key creation)
 
-### Make.com (retiring — do not build new integrations)
-- URL: https://hook.us2.make.com/xl4bb6oyilsj8cugl8dgal5446a1jfj3
-- Still used by ContactModal for the "Start a conversation" form — replace with `/api/contact` route
-- NOT used in the payment/registration flow
-- No new integrations should use Make.com
+### Make.com (RETIRED — no longer used)
+- ContactModal now posts to `/api/contact` (replaced Make.com as of 4/3)
+- No integrations use Make.com
 
 ---
 
 ## Modal System
 Global modal state in `context/ModalContext.tsx`. Use `useModal()` hook.
-- `openModal("contact")` → ContactModal (name, org, email/text, message → Make.com webhook)
+- `openModal("contact")` → ContactModal (name, org, email/text, message → `/api/contact`)
 - `openModal("enroll")` → EnrollModal (3 program links: EKUZOTeams, EKUZO100, EKUZOCamps)
 - For server components that need modal buttons: use `components/ui/ModalButton.tsx`
 
@@ -114,46 +112,42 @@ Global modal state in `context/ModalContext.tsx`. Use `useModal()` hook.
 
 ## Page Status
 
-### Built (functional, may need visual polish)
-- [x] `/` — Home page (structure done, needs visual QA)
-- [x] `/methodology` — Full page built (hero video, How It Works cards, quote, 10 pillars, CTA)
-- [x] `/camps/register` — **Full registration form** (hero w/ collage, 10-week grid w/ AM/PM slots, multi-gamer support, parent info, gamer info, summary panel, torn paper overlay). Ready for Stripe + Beehiiv integration.
-- [x] `/success` — Stripe success page (basic)
+### Canonical Routes (as of 4/3)
+All programs live under `/programs/`:
+- `/programs/ekuzo100` — marketing page
+- `/programs/ekuzo100/register` — registration + Stripe payment ($100)
+- `/programs/ekuzo100/success` — payment confirmation
+- `/programs/ekuzo-teams` — marketing page (no commerce yet — next priority)
+- `/programs/ekuzo-camps` — marketing page (Aaron's v2 build)
+- `/programs/ekuzo-camps/register` — registration + Stripe payment ($199)
+- `/programs/ekuzo-camps/success` — payment confirmation
+
+### Complete (launched)
+- [x] `/` — Home page
+- [x] `/methodology` — Full page (hero video, How It Works, quote, 10 pillars, CTA)
+- [x] `/programs` — Programs index
+- [x] `/parents` — Families page
+- [x] `/schools` — Schools page
+- [x] `/games` — Games page
+- [x] `/faq` — FAQ accordion
 - [x] `/terms-of-service` — Static
 - [x] `/privacy-policy` — Static
-- [x] `/faq` — Static accordion
 
-### Complete (tested 3/30)
-- [x] `/api/camps/register` — Creates Stripe Payment Intent from form data
-- [x] `/api/webhooks/stripe` — Full post-payment flow: Beehiiv enrollment (13 fields + 2 tags + automation), Google Sheets (1 row per gamer, 20 columns)
-- [x] Stripe Elements payment step on registration page — wired, tested
-- [x] Beehiiv custom fields + tags + welcome automation — configured + API-verified
-- [x] Google Sheets fulfillment layer — via Apps Script, tested with multi-gamer
-- [x] End-to-end payment test — 3 test payments, single + multi-gamer
-
-### In Progress
-- [ ] `/camps/success` — Post-payment confirmation page (basic version exists, needs full build)
-
-### Queued (page builds)
-- [ ] `/programs` — Stub → full build queued
-- [ ] `/parents` — Stub → full build queued
-- [ ] `/schools` — Stub → full build queued
-
-### Stubbed (placeholder only, needs full build)
-- [ ] `/ekuzocamps-seasonal` — **PRIORITY after programs/parents/schools** (see Camps section below)
-- [ ] `/ekuzo100-4-week-intro` — EKUZO100 program page
-- [ ] `/ekuzoteams-semester-based` — EKUZO Teams page (complex commerce)
+### Commerce (complete)
+- [x] `/api/camps/register` — Stripe Payment Intent for camps
+- [x] `/api/ekuzo100/register` — Stripe Payment Intent for EKUZO100
+- [x] `/api/webhooks/stripe` — Product-aware post-payment: Beehiiv + Google Sheets (camps + ekuzo100)
+- [x] `/api/contact` — Contact form → Google Sheets + Beehiiv lead capture
+- [x] Camps end-to-end tested (3 test payments, single + multi-gamer)
+- [ ] EKUZO100 end-to-end test (code complete, needs test payment)
+- [ ] Teams commerce (next session)
+### Remaining
 - [ ] `/about` — About page
 - [ ] `/blog` — Blog index (static, no CMS)
 - [ ] `/blog/[slug]` — Blog post (static)
 
-### Framer extraction complete
-All page XML + content documented in `/docs/framer/`. Full component hierarchy, exact spacing, all image URLs, typography, and 4-breakpoint specs extracted and saved. Reference these docs as the source of truth for all builds.
-
-### Route aliases (redirect stubs)
-- `/ekuzo100` → `/ekuzo100-4-week-intro`
-- `/camps` → `/ekuzocamps-seasonal`
-- `/teams` → `/ekuzoteams-semester-based`
+### Redirect rules (next.config.mjs — 12 rules)
+All legacy URLs redirect to canonical `/programs/` routes. See `next.config.mjs` for full list.
 
 ---
 

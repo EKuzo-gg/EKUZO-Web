@@ -11,10 +11,26 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "EKUZO100 — 4-Week Intro Program",
   description:
-    "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO — real coaching, real teammates, real growth.",
+    "Start your esports journey: 4 weeks, $100, real coaching. EKUZO100 is the low-commitment way to experience team play and growth.",
+  openGraph: {
+    title: "EKUZO100 | 4-Week Intro Esports Program",
+    description: "Join EKUZO100: 4 weeks, $100, real coaching and teammates. The easy way to start.",
+    url: "https://ekuzo.gg/ekuzo100-4-week-intro",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO100 - 4-Week Esports Introduction",
+      },
+    ],
+  },
 };
 
 const howItWorksSteps = [

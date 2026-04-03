@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-03-31.basil",
+  apiVersion: "2026-02-25.clover",
 });
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
@@ -12,20 +12,17 @@ const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
  * POST /api/webhooks/stripe
  *
  * Handles Stripe webhook events. On `payment_intent.succeeded`:
- * 1. Extracts registration metadata from the Payment Intent
- * 2. Adds the parent as a Beehiiv subscriber with custom fields
- *    (gamer names, weeks, slots, program type)
- * 3. Beehiiv handles all post-registration email automation
- *    (welcome sequence, camp prep, week-of reminders, etc.)
+ * 1. Detects product type from metadata (camps, ekuzo100, etc.)
+ * 2. Adds the parent as a Beehiiv subscriber with product-specific custom fields + tags
+ * 3. Writes registration data to Google Sheets (one row per gamer)
+ * 4. Beehiiv handles all post-registration email automation
  */
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
 
   // ── Verify webhook signature ──────────────────────────────────────
-  // In development without a webhook secret, skip verification
   let event: Stripe.Event;
-
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (webhookSecret && webhookSecret !== "whsec_...") {
@@ -39,7 +36,6 @@ export async function POST(req: NextRequest) {
       );
     }
   } else {
-    // Dev mode — parse without verification
     console.warn("⚠️  Stripe webhook secret not set — skipping signature verification");
     event = JSON.parse(body) as Stripe.Event;
   }
@@ -48,8 +44,9 @@ export async function POST(req: NextRequest) {
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     const meta = paymentIntent.metadata;
+    const product = meta.product || "camps"; // default to camps for backward compat
 
-    console.log("✅ Payment succeeded:", paymentIntent.id);
+    console.log(`✅ Payment succeeded: ${paymentIntent.id} [${product}]`);
     console.log("   Parent:", meta.parent_first_name, meta.parent_last_name);
     console.log("   Email:", meta.parent_email);
     console.log("   Gamers:", meta.gamer_count);
@@ -68,65 +65,91 @@ export async function POST(req: NextRequest) {
       console.warn("Could not fetch billing location:", err);
     }
 
+    // ── Parse gamer data ─────────────────────────────────────────
+    const gamerCount = parseInt(meta.gamer_count || "0", 10);
+    const gamers: any[] = [];
+    for (let i = 0; i < gamerCount; i++) {
+      try {
+        gamers.push(JSON.parse(meta[`gamer_${i}`] || "{}"));
+      } catch {
+        gamers.push({});
+      }
+    }
+
+    // ── Reassemble additional_info from chunked metadata ─────────
+    let additionalInfo = meta.additional_info || "";
+    if (meta.additional_info_2) additionalInfo += meta.additional_info_2;
+    if (meta.additional_info_3) additionalInfo += meta.additional_info_3;
+
     // ── Enroll in Beehiiv ─────────────────────────────────────────
     try {
-      const gamerCount = parseInt(meta.gamer_count || "0", 10);
-      const gamerSummaries: string[] = [];
-
-      for (let i = 0; i < gamerCount; i++) {
-        try {
-          const gamerData = JSON.parse(meta[`gamer_${i}`] || "{}");
-          gamerSummaries.push(
-            `${gamerData.firstName} ${gamerData.lastName} — ${gamerData.weekLabel} ${gamerData.slot} (${gamerData.weekDates})`
-          );
-        } catch {
-          // Skip malformed gamer data
-        }
-      }
-
-      // ── Build multi-gamer aware Beehiiv fields ────────────────────
-      // Beehiiv has ONE subscriber per email (the parent).
-      // For multi-gamer: comma-separate names, store earliest week
-      // for automation timing. Full detail in registration_summary.
+      // Build gamer summaries and multi-gamer fields
       const allGamerNames: string[] = [];
+      const gamerSummaries: string[] = [];
       let earliestWeek = Infinity;
       let earliestSlot = "";
 
-      for (let i = 0; i < gamerCount; i++) {
-        try {
-          const gamerData = JSON.parse(meta[`gamer_${i}`] || "{}");
-          if (gamerData.firstName) allGamerNames.push(gamerData.firstName);
-          const weekNum = parseInt(gamerData.weekLabel?.replace(/\D/g, "") || "99", 10);
+      for (const gd of gamers) {
+        if (gd.firstName) allGamerNames.push(gd.firstName);
+
+        if (product === "camps") {
+          // Camps: track week/slot for automation timing
+          gamerSummaries.push(
+            `${gd.firstName} ${gd.lastName} — ${gd.weekLabel} ${gd.slot} (${gd.weekDates})`
+          );
+          const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
           if (weekNum < earliestWeek) {
             earliestWeek = weekNum;
-            earliestSlot = gamerData.slot || "";
+            earliestSlot = gd.slot || "";
           }
-        } catch {
-          // Skip malformed gamer data
+        } else if (product === "ekuzo100") {
+          // EKUZO100: cohort month + schedule preference
+          gamerSummaries.push(
+            `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}  ${gd.schedulePreference || ""}`
+          );
         }
+      }
+
+      // Product-specific Beehiiv fields
+      const programName = product === "ekuzo100" ? "EKUZO100" : "EKUZO Camps";
+      const utmSource = product === "ekuzo100"
+        ? "ekuzo100-registration"
+        : "ekuzo-camps-registration";
+
+      // Tags per product
+      const tags = product === "ekuzo100"
+        ? ["ekuzo100-purchased", "source-ekuzo100-registration"]
+        : ["camp-2026-purchased", "source-camp-registration"];
+
+      // Build custom fields — shared base + product-specific
+      const customFields: { name: string; value: string }[] = [
+        { name: "first_name", value: meta.parent_first_name || "" },
+        { name: "last_name", value: meta.parent_last_name || "" },
+        { name: "phone", value: meta.parent_phone || "" },
+        { name: "program", value: programName },
+        { name: "gamer_name", value: allGamerNames.join(", ") },
+        { name: "gamer_count", value: meta.gamer_count || "1" },
+        { name: "registration_summary", value: gamerSummaries.join(" | ").slice(0, 500) },
+        { name: "payment_intent_id", value: paymentIntent.id },
+        { name: "amount_paid", value: `$${(paymentIntent.amount / 100).toFixed(2)}` },
+        { name: "timezone", value: meta.timezone || "" },
+        { name: "location", value: location },
+      ];
+
+      if (product === "camps") {
+        customFields.push(
+          { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
+          { name: "camp_slot", value: earliestSlot }
+        );
       }
 
       const beehiivPayload = {
         email: meta.parent_email,
         reactivate_existing: true,
         send_welcome_email: true,
-        utm_source: "ekuzo-camps-registration",
+        utm_source: utmSource,
         automation_ids: ["aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc"],
-        custom_fields: [
-          { name: "first_name", value: meta.parent_first_name },
-          { name: "last_name", value: meta.parent_last_name },
-          { name: "phone", value: meta.parent_phone || "" },
-          { name: "program", value: "EKUZO Camps" },
-          { name: "gamer_name", value: allGamerNames.join(", ") },
-          { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
-          { name: "camp_slot", value: earliestSlot },
-          { name: "gamer_count", value: meta.gamer_count },
-          { name: "registration_summary", value: gamerSummaries.join(" | ").slice(0, 500) },
-          { name: "payment_intent_id", value: paymentIntent.id },
-          { name: "amount_paid", value: `$${(paymentIntent.amount / 100).toFixed(2)}` },
-          { name: "timezone", value: meta.timezone || "" },
-          { name: "location", value: location },
-        ],
+        custom_fields: customFields,
       };
 
       const beehiivRes = await fetch(
@@ -144,16 +167,12 @@ export async function POST(req: NextRequest) {
       if (!beehiivRes.ok) {
         const errText = await beehiivRes.text();
         console.error("Beehiiv enrollment failed:", beehiivRes.status, errText);
-        // Don't return error — payment already succeeded, we just log the failure
-        // Can retry manually from Stripe dashboard metadata
       } else {
         const beehiivData = await beehiivRes.json();
         const subscriberId = beehiivData?.data?.id;
-        console.log("✅ Beehiiv enrollment successful for", meta.parent_email, "| ID:", subscriberId);
+        console.log(`✅ Beehiiv enrollment successful for ${meta.parent_email} | ID: ${subscriberId}`);
 
         // ── Add tags via dedicated subscription-tags endpoint ────────
-        // POST /v2/publications/:pubId/subscriptions/:subId/tags
-        // with body { "tags": ["tag1", "tag2"] }
         if (subscriberId) {
           try {
             const tagRes = await fetch(
@@ -164,16 +183,14 @@ export async function POST(req: NextRequest) {
                   Authorization: `Bearer ${BEEHIIV_API_KEY}`,
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                  tags: ["camp-2026-purchased", "source-camp-registration"],
-                }),
+                body: JSON.stringify({ tags }),
               }
             );
             if (!tagRes.ok) {
               const tagErr = await tagRes.text();
               console.error("Beehiiv tags failed:", tagRes.status, tagErr);
             } else {
-              console.log("✅ Beehiiv tags applied: camp-2026-purchased, source-camp-registration");
+              console.log(`✅ Beehiiv tags applied: ${tags.join(", ")}`);
             }
           } catch (tagErr: any) {
             console.error("Beehiiv tags error:", tagErr.message);
@@ -182,53 +199,40 @@ export async function POST(req: NextRequest) {
       }
     } catch (err: any) {
       console.error("Beehiiv enrollment error:", err.message);
-      // Same — don't fail the webhook, payment is already captured
     }
 
     // ── Write to Google Sheets (one row per gamer) ──────────────────
     try {
-      const gamerCount = parseInt(meta.gamer_count || "0", 10);
       const familyId = `FAM-${paymentIntent.id.slice(0, 20)}`;
       const registrationTimestamp = Math.floor(Date.now() / 1000);
       const registrationDate = new Date().toISOString();
       const amountPerGamer = `$${(paymentIntent.amount / 100 / gamerCount).toFixed(2)}`;
 
-      // Reassemble additional_info from chunked metadata keys
-      let additionalInfo = meta.additional_info || "";
-      if (meta.additional_info_2) additionalInfo += meta.additional_info_2;
-      if (meta.additional_info_3) additionalInfo += meta.additional_info_3;
-
-      const rows = [];
-      for (let i = 0; i < gamerCount; i++) {
-        try {
-          const gamerData = JSON.parse(meta[`gamer_${i}`] || "{}");
-          rows.push({
-            registration_id: `REG-${registrationTimestamp}-${i}`,
-            family_id: familyId,
-            parent_first_name: meta.parent_first_name || "",
-            parent_last_name: meta.parent_last_name || "",
-            parent_email: meta.parent_email || "",
-            parent_phone: meta.parent_phone || "",
-            gamer_name: `${gamerData.firstName || ""} ${gamerData.lastName || ""}`.trim(),
-            gamer_tag: gamerData.gamerTag || "",
-            week: gamerData.weekLabel || "",
-            slot: gamerData.slot || "",
-            week_dates: gamerData.weekDates || "",
-            birthday: gamerData.birthday || "",
-            skill_level: gamerData.skillLevel || "",
-            tshirt_size: gamerData.tshirtSize || "",
-            preferred_games: gamerData.preferredGames || "",
-            timezone: meta.timezone || "",
-            location: location,
-            amount_paid: amountPerGamer,
-            stripe_pi_id: paymentIntent.id,
-            registration_date: registrationDate,
-            additional_info: additionalInfo,
-          });
-        } catch {
-          console.warn(`Could not parse gamer_${i} for Google Sheets`);
-        }
-      }
+      const rows = gamers.map((gd, i) => ({
+        registration_id: `REG-${registrationTimestamp}-${i}`,
+        family_id: familyId,
+        product: product,
+        parent_first_name: meta.parent_first_name || "",
+        parent_last_name: meta.parent_last_name || "",
+        parent_email: meta.parent_email || "",
+        parent_phone: meta.parent_phone || "",
+        gamer_name: `${gd.firstName || ""} ${gd.lastName || ""}`.trim(),
+        gamer_tag: gd.gamerTag || "",
+        week: product === "camps" ? (gd.weekLabel || "") : (meta.cohort_label || ""),
+        slot: product === "camps" ? (gd.slot || "") : (gd.schedulePreference || ""),
+        week_dates: product === "camps" ? (gd.weekDates || "") : `${meta.cohort_start || ""} – ${meta.cohort_end || ""}`,
+        birthday: gd.birthday || "",
+        gender: gd.gender || "",
+        skill_level: gd.skillLevel || "",
+        tshirt_size: gd.tshirtSize || "",
+        preferred_games: gd.preferredGames || "",
+        timezone: meta.timezone || "",
+        location: location,
+        amount_paid: amountPerGamer,
+        stripe_pi_id: paymentIntent.id,
+        registration_date: registrationDate,
+        additional_info: additionalInfo,
+      }));
 
       if (rows.length > 0) {
         const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
@@ -251,7 +255,6 @@ export async function POST(req: NextRequest) {
       }
     } catch (err: any) {
       console.error("Google Sheets write error:", err.message);
-      // Don't fail the webhook — payment and Beehiiv are more critical
     }
   }
 

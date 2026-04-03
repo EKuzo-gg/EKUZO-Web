@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
@@ -7,6 +8,26 @@ import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ParallaxBird from "@/components/ui/ParallaxBird";
 import Eyebrow from "@/components/ui/Eyebrow";
+
+export const metadata: Metadata = {
+  title: "EKUZO — Every Gamer Deserves a Team",
+  description:
+    "Youth esports coaching programs that turn gaming into growth. Structured practice, skilled coaching, and real competition for every gamer.",
+  openGraph: {
+    title: "EKUZO — Every Gamer Deserves a Team",
+    description: "Transformational esports coaching programs for youth gamers.",
+    url: "https://ekuzo.gg",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO - Youth Esports Coaching Platform",
+      },
+    ],
+  },
+};
 
 const growthItems = [
   { label: "Structured practice", icon: "/icons/swords-white.svg" },

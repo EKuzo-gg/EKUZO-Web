@@ -2,11 +2,28 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 
+import type { Metadata } from "next";
+
 // TODO: Build out full EKUZO CAMPS product page (Figma node 1:3693 "Games page - Web")
 
-export const metadata = {
-  title: "EKUZO Camps — Esports Camps for Young Gamers",
-  description: "Join an EKUZO Camp — immersive esports experiences built around structured play and real competition.",
+export const metadata: Metadata = {
+  title: "EKUZO Camps — Seasonal Esports Programs",
+  description:
+    "Summer and holiday esports camps for young gamers. Week-long intensive programs with elite coaches and competitive play.",
+  openGraph: {
+    title: "EKUZO Camps | Seasonal Esports Intensives",
+    description: "Join EKUZO Camps: week-long esports programs during summer and school breaks.",
+    url: "https://ekuzo.gg/camps",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO Camps - Seasonal Esports Programs",
+      },
+    ],
+  },
 };
 
 export default function CampsPage() {

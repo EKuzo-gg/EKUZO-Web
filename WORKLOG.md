@@ -6,6 +6,48 @@
 
 ---
 
+## Jamie — April 3, 2026 (route canonicalization + EKUZO100 orchestration + contact form + SEO + launch prep)
+
+**What changed:**
+
+**Route canonicalization — all programs now under /programs/:**
+- `/programs/ekuzo100` — marketing page (was /programs/e100)
+- `/programs/ekuzo100/register` — registration + Stripe payment (was /ekuzo100/register)
+- `/programs/ekuzo100/success` — payment confirmation (was /ekuzo100/success)
+- `/programs/ekuzo-teams` — marketing page (was /programs/ekuzoteams)
+- `/programs/ekuzo-camps` — marketing page, using Aaron's v2 (was /ekuzo-camps/v2)
+- `/programs/ekuzo-camps/register` — registration + Stripe payment (was /camps/register)
+- `/programs/ekuzo-camps/success` — payment confirmation (was /camps/success)
+- 12 redirect rules in next.config.mjs catch all legacy URLs
+
+**EKUZO100 orchestration (new files):**
+- `app/api/ekuzo100/register/route.ts` — creates $100 Stripe Payment Intent with product metadata
+- `app/programs/ekuzo100/register/page.tsx` — full registration form (cohort selection, schedule preference, gamer info, parent info, Stripe Elements)
+- `app/programs/ekuzo100/success/page.tsx` — payment confirmation page
+- Webhook (`app/api/webhooks/stripe/route.ts`) rewritten to be product-aware — branches Beehiiv tags, custom fields, and Google Sheets rows by `meta.product` ("camps" or "ekuzo100")
+- Added `product: "camps"` to camps register route metadata (was relying on fallback default)
+
+**Contact form — replaced Make.com:**
+- New `app/api/contact/route.ts` — writes to Google Sheets + adds email leads to Beehiiv with `source-contact-form` tag
+- `ContactModal.tsx` now POSTs to `/api/contact` instead of Make.com webhook
+
+**All internal links updated:**
+- EnrollModal, ProgramsSection, Footer — all point to canonical `/programs/` routes
+- Links within program pages, cross-program references all canonical
+
+**SEO metadata:**
+- Root layout: title template "%s | EKUZO", robots, OpenGraph, Twitter cards
+- Every key page: unique title, description, OG tags
+
+**Stripe API version:** Updated all 4 API routes from `2025-03-31.basil` → `2026-02-25.clover`
+
+**External setup required (not in code):**
+- Beehiiv: create tags `ekuzo100-purchased`, `source-ekuzo100-registration`, `source-contact-form`
+- Google Sheets: add `product` + `gender` columns, add `contact_inquiries` sheet/handler to Apps Script
+- Stripe: EKUZO100 product in live mode, webhook endpoint for production domain
+
+---
+
 ## Aaron — April 3, 2026 (methodology video fix + camps v2 tweaks)
 
 **What changed:**

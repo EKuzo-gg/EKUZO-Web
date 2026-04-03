@@ -12,10 +12,26 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Programs — EKUZO",
   description:
-    "Explore EKUZO's esports programs: Teams, Camps, and EKUZO100. Find the right programme for your young gamer.",
+    "Three esports programs for young gamers: EKUZO Teams (semester-based), EKUZO100 (4-week intro), and Camps (seasonal intensives). Find your fit.",
+  openGraph: {
+    title: "EKUZO Programs | Esports for Young Gamers",
+    description: "Explore EKUZO Teams, EKUZO100, and seasonal Camps — structured esports programs with elite coaching.",
+    url: "https://ekuzo.gg/programs",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO Programs - Esports Coaching Options",
+      },
+    ],
+  },
 };
 
 const programsFAQs = [

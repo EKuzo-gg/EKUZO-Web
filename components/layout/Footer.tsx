@@ -65,9 +65,9 @@ const socialLinks = [
 const footerColumns = [
   [
     { href: "/programs",  label: "Programs" },
-    { href: "/ekuzo100",  label: "EKUZO 100" },
-    { href: "/ekuzo-teams", label: "EKUZO Teams" },
-    { href: "/camps",     label: "EKUZO Camps" },
+    { href: "/programs/ekuzo100",  label: "EKUZO 100" },
+    { href: "/programs/ekuzo-teams", label: "EKUZO Teams" },
+    { href: "/programs/ekuzo-camps",     label: "EKUZO Camps" },
   ],
   [
     { href: "/methodology", label: "Methodology" },

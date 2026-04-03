@@ -12,10 +12,26 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
 import ModalButton from "@/components/ui/ModalButton";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Schools — EKUZO",
   description:
-    "Bring EKUZO esports programming to your school. Partner with us to build a structured, coach-led programme on campus.",
+    "Partner with EKUZO to bring structured esports to your school. Build student attendance, engagement, and leadership through gaming.",
+  openGraph: {
+    title: "EKUZO for Schools | Esports Programs",
+    description: "Bring structured esports to your school to increase attendance, engagement, and student growth.",
+    url: "https://ekuzo.gg/schools",
+    type: "website",
+    images: [
+      {
+        url: "https://ekuzo.gg/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "EKUZO for Schools - Esports Programs",
+      },
+    ],
+  },
 };
 
 const schoolsFAQs = [

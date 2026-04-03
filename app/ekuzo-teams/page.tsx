@@ -324,9 +324,9 @@ export default function EkuzoTeamsPage() {
               {/* Program progression */}
               <div className="flex flex-col gap-3">
                 {[
-                  { label: "EKUZO100", desc: "4-week intro · $100 · no commitment", href: "/ekuzo100", current: false },
+                  { label: "EKUZO100", desc: "4-week intro · $100 · no commitment", href: "/programs/ekuzo100", current: false },
                   { label: "EKUZO Teams", desc: "Semester program · consistent team · season arc", href: "#", current: true },
-                  { label: "EKUZO Camps", desc: "1-week intensive · summer & breaks", href: "/ekuzo-camps", current: false },
+                  { label: "EKUZO Camps", desc: "1-week intensive · summer & breaks", href: "/programs/ekuzo-camps", current: false },
                 ].map((p) => (
                   <a
                     key={p.label}
