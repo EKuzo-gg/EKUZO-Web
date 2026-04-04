@@ -1,11 +1,20 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
-export default function EkuzoTeamsSuccessPage() {
+export default function EkuzoTeamsSuccessPageWrapper() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <EkuzoTeamsSuccessPage />
+    </Suspense>
+  );
+}
+
+function EkuzoTeamsSuccessPage() {
   const searchParams = useSearchParams();
   const redirectStatus = searchParams.get("redirect_status");
   const succeeded = redirectStatus === "succeeded";

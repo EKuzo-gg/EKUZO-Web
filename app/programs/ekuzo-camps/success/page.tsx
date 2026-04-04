@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
@@ -21,7 +21,15 @@ type RegistrationDetails = {
   paymentIntentId: string;
 };
 
-export default function CampsSuccessPage() {
+export default function CampsSuccessPageWrapper() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <CampsSuccessPage />
+    </Suspense>
+  );
+}
+
+function CampsSuccessPage() {
   const searchParams = useSearchParams();
   const [details, setDetails] = useState<RegistrationDetails | null>(null);
   const [loading, setLoading] = useState(true);
