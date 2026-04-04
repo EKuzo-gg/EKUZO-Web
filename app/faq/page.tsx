@@ -32,6 +32,11 @@ export const metadata: Metadata = {
 // Section 2: Safety & Coaching
 const safetyFAQs = [
   {
+    question: "What is EKUZO?",
+    answer:
+      "EKUZO is a youth esports coaching platform for students aged 10\u201318. We use competitive gaming as the medium to develop leadership, communication, resilience, and teamwork through structured coaching, real competition, and intentional practice.",
+  },
+  {
     question: "Who are the coaches?",
     answer:
       "All EKUZO coaches are top 1% collegiate esports athletes or former professional players. They are trained not just in gameplay, but in pedagogy, safety, and social-emotional growth.",
@@ -39,41 +44,46 @@ const safetyFAQs = [
   {
     question: "How do you keep online spaces safe?",
     answer:
-      "Our Discord and online platforms are actively moderated. Coaches and staff enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
+      "All sessions are coach-led and recorded. Our Discord and online platforms are actively moderated. Coaches and staff enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
   },
   {
     question: "Is this safe for beginners?",
     answer:
-      "Yes. Coaches meet students where they are — from casual players to aspiring competitors — and ensure every team is inclusive and supportive.",
+      "Yes. Coaches meet students where they are \u2014 from casual players to aspiring competitors \u2014 and ensure every team is inclusive and supportive.",
+  },
+  {
+    question: "What equipment does my child need?",
+    answer:
+      "A computer (PC or Mac) that can run League of Legends, a stable internet connection, and a headset with a microphone. The game is free to download and doesn\u2019t require high-end hardware.",
   },
 ];
 
 // Section 3: Programs & Scheduling
 const programsFAQs = [
   {
+    question: "What programs does EKUZO offer?",
+    answer:
+      "EKUZO offers three programs: EKUZOTEAMS (semester-based, 15 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
+  },
+  {
     question: "What is EKUZO100?",
     answer:
-      "E100 is our entry program: one month, $100, two practices per week. It's the easiest way to see if Ekuzo is right for your child.",
+      "EKUZO100 is a 4-week competitive bootcamp: $100, two sessions per week in small groups of five. It\u2019s designed to give students a real taste of structured esports coaching \u2014 whether they\u2019re brand new or looking to sharpen their game.",
   },
   {
     question: "When are practices held?",
     answer:
-      "E100: Two evenings per week, after dinner, Mon–Wed or Tue–Thu. After-School: 2 afternoons/evenings per week during the semester. Minimesters: Daily 90-minute sessions for 4 days during breaks.",
+      "EKUZO100: Two evenings per week, after school. EKUZOTEAMS: 2\u20133 sessions per week during or after school. EKUZOCAMPS: Daily sessions during summer or holiday breaks. All sessions are approximately 90 minutes.",
   },
   {
     question: "How are teams formed?",
     answer:
-      "Students are grouped in increments of ~5 to create balanced teams, with a preference for local cohorts whenever possible.",
+      "Students are grouped into small teams of roughly five, balanced by age and skill level, with a preference for local cohorts whenever possible. For EKUZOTEAMS, rosters are 10\u201312 players to support 5v5 match play.",
   },
   {
-    question: "What are Camps?",
+    question: "What\u2019s the difference between the School and Home tracks?",
     answer:
-      "Short, intensive 4-day programs during school breaks (winter or spring).",
-  },
-  {
-    question: "What's the difference between After-School and School Teams?",
-    answer:
-      "After-School: Semester-based extracurricular, available online or as a club. School Teams: Offered during the school day, often for elective credit, with a proctor present.",
+      "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school, often during or after school hours with a proctor present. The Home track is for families who want to participate independently, with sessions scheduled in the evenings.",
   },
 ];
 
@@ -82,50 +92,55 @@ const outcomesFAQs = [
   {
     question: "What outcomes should I expect?",
     answer:
-      "Parents most often notice: Greater confidence and motivation; Improved communication and teamwork; Reduced social anxiety through belonging; Curiosity about STEAM projects and career pathways.",
+      "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and curiosity about STEAM projects and career pathways.",
   },
   {
     question: "How does this help with school?",
     answer:
-      "Motivated students engage more. Educators consistently report improved attendance and focus when kids are involved in structured esports programs.",
+      "Motivated students engage more. Educators consistently report improved attendance and focus when students are involved in structured esports programs. Our coaching methodology is built on proven learning science, developing skills that carry directly into academics.",
   },
   {
     question: "What about college or careers?",
     answer:
-      "Ekuzo builds both soft skills (leadership, resilience, communication) and exposure to pathways in esports, game design, broadcasting, and tech.",
+      "EKUZO builds both soft skills (leadership, resilience, communication) and exposure to pathways in esports, game design, broadcasting, and tech. Many universities now offer esports scholarships and programs.",
   },
 ];
 
-// Section 5: Cost & Value
+// Section 5: Pricing
 const costFAQs = [
   {
-    question: "How much do programs cost?",
+    question: "How is EKUZO priced?",
     answer:
-      "E100: $100 for one month. After-School: Semester-based enrollment. Minimesters: Short, 4-day programs (pricing varies).",
+      "All EKUZO programs are standardized around roughly $20 per session of small-group, coach-led instruction. EKUZO100 is $100 for the full four-week program. EKUZOTEAMS and EKUZOCAMPS pricing varies by format \u2014 visit the program pages or contact us for current details.",
   },
   {
     question: "Why does it cost what it does?",
     answer:
-      "The practices are just the tip of the iceberg. Beneath them is the full system: elite coach training, moderated community spaces, curriculum design, competition infrastructure, guest speakers, and student-led projects.",
+      "The sessions are just the tip of the iceberg. Beneath them is the full system: elite coach training, moderated community spaces, curriculum design, competition infrastructure, guest speakers, and student-led projects.",
   },
 ];
 
-// Section 6: Enrollment & Next Steps
+// Section 6: Getting Started
 const enrollmentFAQs = [
   {
     question: "How do I enroll?",
     answer:
-      "Click Enroll Now → to sign up for E100, our one-month entry program.",
+      "Click \u2018Enroll my gamer\u2019 on any page to see the available programs. EKUZOCAMPS are open for summer registration now. EKUZOTEAMS enrolls each fall and spring semester. EKUZO100 is available year-round as a 4-week on-ramp.",
   },
   {
-    question: "What happens after E100?",
+    question: "What happens after EKUZO100?",
     answer:
-      "Families can: Re-enroll in another E100 cohort; Transition into After-School for ongoing growth; Explore School Teams (through a school partnership).",
+      "Families can re-enroll in another EKUZO100 cohort, transition into EKUZOTEAMS for a full semester of coached competition, or try EKUZOCAMPS during breaks. There\u2019s no automatic renewal \u2014 your family decides what\u2019s next.",
   },
   {
     question: "Can homeschool families participate?",
     answer:
-      "Yes. Homeschoolers can enroll in E100, After-School, or School Teams (as an elective).",
+      "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
+  },
+  {
+    question: "What age range is EKUZO for?",
+    answer:
+      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
   },
 ];
 
@@ -338,7 +353,7 @@ export default function FAQPage() {
                 className="font-display uppercase text-white leading-[0.85]"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
               >
-                Cost & Value
+                Pricing
               </h3>
             </div>
             <div className="flex-1">
@@ -375,7 +390,7 @@ export default function FAQPage() {
               className="font-display uppercase text-black leading-[0.85]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Enrollment & Next Steps
+              Getting Started
             </h3>
           </div>
           <div className="flex-1">
@@ -387,18 +402,6 @@ export default function FAQPage() {
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
 
-      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ═════════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-
-      {/* Spacer for fixed button on mobile */}
-      <div className="md:hidden h-20" />
     </>
   );
 }

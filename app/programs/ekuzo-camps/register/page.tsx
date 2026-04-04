@@ -33,6 +33,7 @@ type GamerInfo = {
   preferredGames: string[];
   birthday: string;
   skillLevel: string;
+  gender: string;
   tshirtSize: string;
   selectedWeek: number | null;
   selectedSlot: "AM" | "PM" | null;
@@ -74,11 +75,9 @@ const GAMES = [
   "Other",
 ];
 
-const SKILL_LEVELS = [
-  "Beginner — just getting started",
-  "Intermediate — knows the basics",
-  "Advanced — competitive / ranked",
-];
+const SKILL_LEVELS = ["Novice", "Amateur", "Experienced", "Pro", "Other"];
+
+const GENDER_OPTIONS = ["Male", "Female", "Non-binary"];
 
 const TSHIRT_SIZES = ["YS", "YM", "YL", "AS", "AM", "AL", "AXL"];
 
@@ -131,6 +130,7 @@ function emptyGamer(): GamerInfo {
     preferredGames: [],
     birthday: "",
     skillLevel: "",
+    gender: "",
     tshirtSize: "",
     selectedWeek: null,
     selectedSlot: null,
@@ -569,8 +569,8 @@ export default function CampsRegisterPage() {
                   </div>
                 </div>
 
-                {/* Birthday / Skill / T-shirt — 3 col */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-6 mt-6">
+                {/* Birthday / Gender / Skill / T-shirt — 2x2 grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-6">
                   <InputField
                     label="Birthday *"
                     type="date"
@@ -578,11 +578,18 @@ export default function CampsRegisterPage() {
                     onChange={(v) => updateGamer(gi, { birthday: v })}
                   />
                   <SelectField
-                    label="Skill Level *"
+                    label="Gender *"
+                    value={gamer.gender}
+                    onChange={(v) => updateGamer(gi, { gender: v })}
+                    options={GENDER_OPTIONS}
+                    placeholder="Select gender"
+                  />
+                  <SelectField
+                    label="Gaming Experience *"
                     value={gamer.skillLevel}
                     onChange={(v) => updateGamer(gi, { skillLevel: v })}
                     options={SKILL_LEVELS}
-                    placeholder="Select your skill level"
+                    placeholder="Select..."
                   />
                   <SelectField
                     label="T-Shirt Size *"
@@ -814,7 +821,7 @@ export default function CampsRegisterPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideTornPaper />
     </>
   );
 }

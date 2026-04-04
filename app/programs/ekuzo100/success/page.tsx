@@ -118,7 +118,7 @@ export default function Ekuzo100SuccessPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideTornPaper />
     </>
   );
 }

@@ -40,17 +40,17 @@ const parentsFAQs = [
   {
     question: "Is gaming really educational?",
     answer:
-      "Yes — when it's structured. EKUZO uses gaming as the medium to develop communication, leadership, resilience, and strategic thinking. These are the same skills coaches in traditional sports spend years trying to teach.",
+      "Yes \u2014 when it\u2019s structured. EKUZO uses gaming as the medium to develop communication, leadership, resilience, and strategic thinking. These are the same skills coaches in traditional sports spend years trying to teach.",
   },
   {
     question: "How do you keep online spaces safe?",
     answer:
-      "Our Discord and online platforms are actively moderated. Coaches enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
+      "All sessions are coach-led and recorded. Our Discord and online platforms are actively moderated. Coaches enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
   },
   {
     question: "What if my child has never played competitively?",
     answer:
-      "That's perfectly fine. EKUZO100 is designed specifically for beginners. Coaches meet students where they are and build from there.",
+      "That\u2019s perfectly fine. EKUZO100 is a 4-week competitive bootcamp designed to meet students exactly where they are \u2014 beginner or experienced. Coaches build from there.",
   },
   {
     question: "What outcomes should I expect?",
@@ -58,9 +58,14 @@ const parentsFAQs = [
       "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and curiosity about STEAM projects and career pathways.",
   },
   {
+    question: "What equipment does my child need?",
+    answer:
+      "A computer (PC or Mac) that can run League of Legends, a stable internet connection, and a headset with a microphone. The game is free to download and doesn\u2019t require high-end hardware.",
+  },
+  {
     question: "How do I enroll?",
     answer:
-      "Click 'Enroll my gamer' on any page to see the available programs and get started.",
+      "Click \u2018Enroll my gamer\u2019 on any page to see the available programs. EKUZOCAMPS are open for summer registration now. EKUZOTEAMS enrolls each fall and spring semester. EKUZO100 is available year-round as a 4-week on-ramp.",
   },
 ];
 
@@ -405,16 +410,6 @@ export default function ParentsPage() {
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
 
-      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-      <div className="md:hidden h-20" />
     </>
   );
 }

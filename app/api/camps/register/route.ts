@@ -74,6 +74,7 @@ export async function POST(req: NextRequest) {
         slotHours: gamer.slotHours,
         price: gamer.price,
         birthday: gamer.birthday,
+        gender: gamer.gender || "",
         skillLevel: gamer.skillLevel,
         tshirtSize: gamer.tshirtSize,
         preferredGames: gamer.preferredGames?.join(", "),

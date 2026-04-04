@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import ModalButton from "@/components/ui/ModalButton";
+import FooterNewsletter from "@/components/ui/FooterNewsletter";
 
 /* ─── Social icon SVGs ───────────────────────────────────────────────────── */
 function IconTikTok() {
@@ -53,9 +53,9 @@ function IconFacebook() {
 
 /* ─── Data ───────────────────────────────────────────────────────────────── */
 const socialLinks = [
-  { href: "https://www.tiktok.com/@ekuzogg",       label: "TikTok",    Icon: IconTikTok },
-  { href: "https://www.instagram.com/ekuzogg/",    label: "Instagram", Icon: IconInstagram },
-  { href: "https://www.linkedin.com/company/ekuzo",label: "LinkedIn",  Icon: IconLinkedIn },
+  { href: "https://www.tiktok.com/@ekuzo.gg",       label: "TikTok",    Icon: IconTikTok },
+  { href: "https://www.instagram.com/ekuzo.gg/",    label: "Instagram", Icon: IconInstagram },
+  { href: "https://www.linkedin.com/company/ekuzogg",label: "LinkedIn",  Icon: IconLinkedIn },
   { href: "https://www.youtube.com/@ekuzogg",      label: "YouTube",   Icon: IconYouTube },
   { href: "https://x.com/ekuzogg",                 label: "X",         Icon: IconX },
   { href: "https://www.facebook.com/ekuzogg",      label: "Facebook",  Icon: IconFacebook },
@@ -86,7 +86,7 @@ const footerColumns = [
 ];
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
-export default function Footer() {
+export default function Footer({ hideTornPaper = false }: { hideTornPaper?: boolean } = {}) {
   return (
     <footer
       className="bg-white relative pt-[130px] pb-0 overflow-visible"
@@ -96,18 +96,20 @@ export default function Footer() {
       }}
     >
       {/* White torn paper at top — overlaps up into the red FooterBanner, cropping the image */}
-      <div
-        className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-        style={{
-          height: "clamp(115px, 19vw, 300px)",
-          transform: "translateY(-50%)",
-          backgroundImage: "url(/images/torn-paper-white-1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        aria-hidden="true"
-      />
+      {!hideTornPaper && (
+        <div
+          className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
+          style={{
+            height: "clamp(115px, 19vw, 300px)",
+            transform: "translateY(-50%)",
+            backgroundImage: "url(/images/torn-paper-white-1.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Top row — social + CTA */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-[100px]">
@@ -129,9 +131,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <ModalButton modal="contact" variant="red-filled">
-          Start a conversation
-        </ModalButton>
+        <FooterNewsletter />
       </div>
 
       {/* Flat nav columns */}

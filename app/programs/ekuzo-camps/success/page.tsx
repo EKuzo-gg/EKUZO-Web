@@ -205,7 +205,7 @@ export default function CampsSuccessPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideTornPaper />
     </>
   );
 }

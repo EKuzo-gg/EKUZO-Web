@@ -8,9 +8,13 @@ type FooterBannerProps = {
   heading: string;
   /** Optional override image for the right side */
   image?: string;
+  /** Override CTA label (default: "Enroll my gamer") */
+  ctaLabel?: string;
+  /** Override CTA modal (default: "enroll") */
+  ctaModal?: "enroll" | "contact";
 };
 
-export default function FooterBanner({ heading, image }: FooterBannerProps) {
+export default function FooterBanner({ heading, image, ctaLabel = "Enroll my gamer", ctaModal = "enroll" }: FooterBannerProps) {
   const { openModal } = useModal();
   return (
     <section
@@ -46,8 +50,8 @@ export default function FooterBanner({ heading, image }: FooterBannerProps) {
           >
             {heading}
           </h2>
-          <Button variant="white-outlined" onClick={() => openModal("contact")}>
-            Start a conversation
+          <Button variant="white-outlined" onClick={() => openModal(ctaModal)}>
+            {ctaLabel}
           </Button>
         </div>
 

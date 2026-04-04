@@ -5,6 +5,7 @@ import "./globals.css";
 import { ModalProvider } from "@/context/ModalContext";
 import ModalRenderer from "@/components/ui/ModalRenderer";
 import StickyCTA from "@/components/ui/StickyCTA";
+import NewsletterPopup from "@/components/ui/NewsletterPopup";
 
 /*
  * Tungsten Narrow — personal/preview use (Hoefler & Co)
@@ -78,6 +79,7 @@ export default function RootLayout({
           {children}
           <ModalRenderer />
           <StickyCTA />
+          <NewsletterPopup />
         </ModalProvider>
       </body>
     </html>

@@ -63,27 +63,32 @@ const teamsFAQs = [
   {
     question: "How long is a semester season?",
     answer:
-      "Each EKUZO Teams season runs approximately 15 weeks, following the school calendar. Fall and spring seasons are available depending on your school or region.",
+      "Each EKUZOTEAMS season runs approximately 15 weeks, following the school calendar. Fall and spring seasons are available depending on your school or region.",
   },
   {
-    question: "How many sessions per week?",
+    question: "How many sessions is it per week?",
     answer:
-      "Typically 2–3 sessions per week. School-based teams practice during or after school hours. Home-based teams practice in the evenings on a schedule that works for the family.",
+      "Typically two 90-minute sessions. School-based teams practice during or after school hours. Home-based teams practice after school (i.e. 4:00\u20135:30) or in the evening (i.e. 7:00\u20138:30).",
   },
   {
     question: "How are teams formed?",
     answer:
-      "Students are grouped in increments of ~5 to create balanced teams. We prioritize local cohorts and skill-level matching. A preference for local players means friendships can extend beyond the screen.",
+      "Rosters are 10\u201312 players to support 5v5 match play. We prioritize local cohorts, age, and skill-level matching. A preference for local players means friendships can extend beyond the screen.",
   },
   {
-    question: "What's the difference between School and Home tracks?",
+    question: "What\u2019s the difference between School and Home tracks?",
     answer:
-      "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school (often during or after school hours). The Home track is for families who want to participate independently, with sessions scheduled in evenings.",
+      "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school (often during or after school hours with a proctor present). The Home track is for families who want to participate independently, with sessions scheduled in evenings.",
   },
   {
-    question: "What comes after EKUZO Teams?",
+    question: "How much does EKUZOTEAMS cost?",
     answer:
-      "Students can re-enroll each semester. As relationships and skill deepen, teams often continue together across multiple seasons. Some families also use EKUZO Camps during summer breaks to maintain momentum.",
+      "EKUZOTEAMS can be paid monthly or up front for a 10% discount. Like all EKUZO programs, instruction is standardized around roughly $20 per session of small-group, coach-led training.",
+  },
+  {
+    question: "What comes after EKUZOTEAMS?",
+    answer:
+      "Students can re-enroll each semester. As relationships and skill deepen, teams often continue together across multiple seasons. Some families also use EKUZOCAMPS during breaks to maintain momentum.",
   },
 ];
 
@@ -159,9 +164,12 @@ export default function EkuzoTeamsPage() {
             <p className="font-body text-black/70 text-base mb-10 max-w-md leading-relaxed">
               The semester-based team season where growth compounds.
             </p>
-            <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
+            <a
+              href="/programs/ekuzo-teams/register"
+              className="inline-flex items-center justify-center font-body font-bold text-white bg-red rounded px-8 py-4 text-base hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150"
+            >
               Enroll my gamer
-            </ModalButton>
+            </a>
           </div>
 
           {/* Right — video reel 9:16, 70vh tall */}
@@ -189,7 +197,10 @@ export default function EkuzoTeamsPage() {
           heading="Teams Are Where Growth Compounds"
           listItems={["Structured season", "Consistent team", "Coach-led practice"]}
           icons={["/icons/swords-white.svg", "/icons/confidence-2.svg", "/icons/speaking.svg"]}
-          body="EKUZO Teams mirror traditional sports seasons: the same teammates, a shared rhythm, and clear expectations over time. As relationships deepen, students stop just showing up and start taking ownership of their team, their role, and how they improve together. What starts in practice doesn't stay there. The friendships, collaboration, and confidence spill beyond sessions and into everyday life."
+          body={<>
+            <p>EKUZO Teams mirror traditional sports seasons: the same teammates, a shared rhythm, and clear expectations over time. As relationships deepen, students stop just showing up and start taking ownership of their team, their role, and how they improve together.</p>
+            <p>What starts in practice doesn&apos;t stay there. The friendships, collaboration, and confidence spill beyond sessions and into everyday life.</p>
+          </>}
           tornPaper="none"
         />
       </div>

@@ -43,7 +43,7 @@ const schoolsFAQs = [
   {
     question: "How does scheduling work?",
     answer:
-      "Sessions run 2–3 times per week during or after school, depending on the program track. EKUZO works around your academic calendar.",
+      "Sessions run 2–3 times per week during (STEAM elective) or after school, depending on your needs. EKUZO works around your academic calendar.",
   },
   {
     question: "Is this only for competitive students?",
@@ -53,12 +53,12 @@ const schoolsFAQs = [
   {
     question: "How does EKUZO handle safety and moderation?",
     answer:
-      "All sessions are coach-led and all communication channels are actively moderated. Students sign a Code of Conduct and coaches are trained in youth safety.",
+      "All sessions are coach-led and recorded. All communication channels are actively moderated. Students sign a Code of Conduct and coaches are trained in youth safety.",
   },
   {
-    question: "What game does EKUZO focus on?",
+    question: "What games does EKUZO play?",
     answer:
-      "Currently League of Legends. It provides rich team dynamics, communication requirements, and deep strategy — exactly what the EKUZO curriculum is designed around.",
+      "Today, EKUZO trains on League of Legends. It provides rich team dynamics, communication requirements, and deep strategy, which is exactly what the EKUZO curriculum is designed around. It\u2019s also free-to-play and doesn\u2019t require bleeding edge machines.",
   },
 ];
 
@@ -142,7 +142,7 @@ export default function SchoolsPage() {
           "/icons/clock-white.svg",
           "/icons/growth-arrows.svg",
         ]}
-        body="Gaming is one of the most powerful motivators young people have — across backgrounds, interests, and ability levels. EKUZO turns that motivation into structured growth through coaching, teamwork, and shared expectations. Students don&rsquo;t just play. They practice, communicate, lead, and&nbsp;reflect. This isn&rsquo;t about fixing kids. It&rsquo;s about building the structure most of them are&nbsp;missing."
+        body={<><p>Gaming is one of the most powerful motivators young people have — across backgrounds, interests, and ability levels.</p><p>EKUZO turns that motivation into structured growth through coaching, teamwork, and shared expectations. Students don&rsquo;t just play. They practice, communicate, lead, and&nbsp;reflect.</p><p>This isn&rsquo;t about fixing kids. It&rsquo;s about building the structure most of them are&nbsp;missing.</p></>}
         bg="bg-[#f0edea]"
         tornPaper="none"
       />
@@ -277,7 +277,7 @@ export default function SchoolsPage() {
       <div className="relative overflow-visible">
         <TornPaperDivider color="white" variant="top" style={1} />
       </div>
-      <ProgramsSection showTeams showEkuzo100={false} showCamps={false} />
+      <ProgramsSection showTeams showEkuzo100={false} showCamps={false} heading="One program. Built for schools." />
 
       {/* ══ 6. OUTCOMES — black bg, auto-scroll cards ═══════════════════════ */}
       <section className="relative overflow-visible">
@@ -460,19 +460,9 @@ export default function SchoolsPage() {
       </section>
 
       {/* ══ 10. FOOTER BANNER & FOOTER ══════════════════════════════════════ */}
-      <FooterBanner heading="Increase attendance and engagement in your school" image="/images/coach-collage@2x.png" />
+      <FooterBanner heading="Increase attendance and engagement in your school" image="/images/coach-collage@2x.png" ctaLabel="Talk to Humans" ctaModal="contact" />
       <Footer />
 
-      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-      <div className="md:hidden h-20" />
     </>
   );
 }

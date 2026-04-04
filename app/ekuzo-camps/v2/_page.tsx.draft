@@ -1100,7 +1100,7 @@ export default function EkuzoCampsPage() {
           Enroll my gamer
         </ModalButton>
         <ModalButton modal="contact" variant="red-filled" className="flex-1">
-          Start a conversation
+          Talk to Humans
         </ModalButton>
       </div>
 

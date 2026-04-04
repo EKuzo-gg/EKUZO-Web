@@ -35,6 +35,7 @@ type GamerInfo = {
   gender: string;
   skillLevel: string;
   preferredGames: string[];
+  tshirtSize: string;
   schedulePreference: string;
 };
 
@@ -59,13 +60,11 @@ const GAMES = [
   "Other",
 ];
 
-const SKILL_LEVELS = [
-  "Beginner — new to gaming or this game",
-  "Intermediate — plays regularly, knows the basics",
-  "Advanced — competitive / plays ranked",
-];
+const SKILL_LEVELS = ["Novice", "Amateur", "Experienced", "Pro", "Other"];
 
 const GENDER_OPTIONS = ["Male", "Female", "Non-binary"];
+
+const TSHIRT_SIZES = ["YS", "YM", "YL", "AS", "AM", "AL", "AXL"];
 
 const SCHEDULE_OPTIONS = [
   { label: "Afternoon (4:00–5:30 PM)", value: "afternoon" },
@@ -171,16 +170,19 @@ export default function Ekuzo100RegisterPage() {
     phone: "",
   });
 
-  const [gamer, setGamer] = useState<GamerInfo>({
-    firstName: "",
-    lastName: "",
-    gamerTag: "",
-    birthday: "",
-    gender: "",
-    skillLevel: "",
-    preferredGames: [],
-    schedulePreference: "",
-  });
+  const [gamers, setGamers] = useState<GamerInfo[]>([
+    {
+      firstName: "",
+      lastName: "",
+      gamerTag: "",
+      birthday: "",
+      gender: "",
+      skillLevel: "",
+      preferredGames: [],
+      tshirtSize: "",
+      schedulePreference: "",
+    },
+  ]);
 
   const [selectedCohort, setSelectedCohort] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
@@ -194,19 +196,53 @@ export default function Ekuzo100RegisterPage() {
 
   const cohorts = getAvailableCohorts();
 
-  // ── Gamer field helpers ──────────────────────────────────────────────────
+  // ── Gamer CRUD ──────────────────────────────────────────────────────────
 
-  function updateGamer(updates: Partial<GamerInfo>) {
-    setGamer((prev) => ({ ...prev, ...updates }));
+  function createEmptyGamer(): GamerInfo {
+    return {
+      firstName: "",
+      lastName: "",
+      gamerTag: "",
+      birthday: "",
+      gender: "",
+      skillLevel: "",
+      preferredGames: [],
+      tshirtSize: "",
+      schedulePreference: "",
+    };
   }
 
-  function toggleGame(game: string) {
-    setGamer((prev) => ({
-      ...prev,
-      preferredGames: prev.preferredGames.includes(game)
-        ? prev.preferredGames.filter((g) => g !== game)
-        : [...prev.preferredGames, game],
-    }));
+  function addGamer() {
+    if (gamers.length < 5) {
+      setGamers((prev) => [...prev, createEmptyGamer()]);
+    }
+  }
+
+  function removeGamer(index: number) {
+    if (gamers.length > 1) {
+      setGamers((prev) => prev.filter((_, i) => i !== index));
+    }
+  }
+
+  function updateGamer(index: number, updates: Partial<GamerInfo>) {
+    setGamers((prev) =>
+      prev.map((g, i) => (i === index ? { ...g, ...updates } : g))
+    );
+  }
+
+  function toggleGame(index: number, game: string) {
+    setGamers((prev) =>
+      prev.map((g, i) =>
+        i === index
+          ? {
+              ...g,
+              preferredGames: g.preferredGames.includes(game)
+                ? g.preferredGames.filter((gm) => gm !== game)
+                : [...g.preferredGames, game],
+            }
+          : g
+      )
+    );
   }
 
   // ── Validation ────────────────────────────────────────────────────────────
@@ -222,16 +258,19 @@ export default function Ekuzo100RegisterPage() {
     // Cohort
     if (!selectedCohort) errs.push("Please select a cohort month.");
 
-    // Gamer
-    if (!gamer.firstName.trim()) errs.push("Gamer first name is required.");
-    if (!gamer.lastName.trim()) errs.push("Gamer last name is required.");
-    if (!gamer.gamerTag.trim()) errs.push("Gamer tag / username is required.");
-    if (!gamer.birthday) errs.push("Gamer birthday is required.");
-    if (!gamer.gender) errs.push("Please select a gender.");
-    if (!gamer.preferredGames.length)
-      errs.push("Please select at least one preferred game.");
-    if (!gamer.schedulePreference)
-      errs.push("Please select a schedule preference.");
+    // Gamers
+    gamers.forEach((gamer, i) => {
+      const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
+      if (!gamer.firstName.trim()) errs.push(`${label}: first name is required.`);
+      if (!gamer.lastName.trim()) errs.push(`${label}: last name is required.`);
+      if (!gamer.gamerTag.trim()) errs.push(`${label}: gamer tag is required.`);
+      if (!gamer.birthday) errs.push(`${label}: birthday is required.`);
+      if (!gamer.gender) errs.push(`${label}: please select a gender.`);
+      if (!gamer.preferredGames.length)
+        errs.push(`${label}: please select at least one preferred game.`);
+      if (!gamer.schedulePreference)
+        errs.push(`${label}: please select a schedule preference.`);
+    });
 
     return errs;
   }
@@ -252,10 +291,7 @@ export default function Ekuzo100RegisterPage() {
 
     const payload = {
       parent,
-      gamer: {
-        ...gamer,
-        preferredGames: gamer.preferredGames,
-      },
+      gamers,
       cohort: {
         value: selectedCohort,
         label: cohortData?.label || "",
@@ -263,7 +299,7 @@ export default function Ekuzo100RegisterPage() {
         endDate: cohortData?.endDate || "",
       },
       additionalInfo,
-      totalPrice: PRICE,
+      totalPrice: PRICE * gamers.length,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
 
@@ -301,6 +337,8 @@ export default function Ekuzo100RegisterPage() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   const cohortData = cohorts.find((c) => c.value === selectedCohort);
+  const gamerCount = gamers.length;
+  const totalPrice = PRICE * gamerCount;
 
   return (
     <>
@@ -535,134 +573,175 @@ export default function Ekuzo100RegisterPage() {
             </div>
           </div>
 
-          {/* ── Schedule Preference ───────────────────────────────────── */}
-          <div className="mb-12">
-            <h3
-              className="font-body font-bold text-[#0a0a0a] mb-2"
-              style={{ fontSize: "20px", lineHeight: "28px" }}
-            >
-              Schedule Preference *
-            </h3>
-            <p className="font-body text-[#6b7280] text-sm mb-6">
-              Sessions are twice a week (days are flexible based on your
-              cohort&apos;s availability). Which window works best?
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              {SCHEDULE_OPTIONS.map((opt) => {
-                const isSelected = gamer.schedulePreference === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => updateGamer({ schedulePreference: opt.value })}
-                    className={`flex-1 py-4 px-6 text-center font-body font-bold transition-all cursor-pointer hover:brightness-110 active:scale-[0.97] active:brightness-90 ${
-                      isSelected
-                        ? "bg-red text-white"
-                        : "bg-[#f5f5f7] text-[#0a0a0a] hover:bg-[#e8e8ea]"
-                    }`}
-                    style={{ fontSize: "16px", lineHeight: "24px" }}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ── Gamer Info ────────────────────────────────────────────── */}
+          {/* ── Gamer(s) ─────────────────────────────────────────────── */}
           <div className="mb-12">
             <h3
               className="font-body font-bold text-[#0a0a0a] mb-6"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
-              Tell us about your gamer
+              Tell us about your gamer{gamers.length > 1 ? "s" : ""}
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
-              <InputField
-                label="First Name *"
-                required
-                value={gamer.firstName}
-                onChange={(v) => updateGamer({ firstName: v })}
-                placeholder="Enter first name"
-              />
-              <InputField
-                label="Last Name *"
-                required
-                value={gamer.lastName}
-                onChange={(v) => updateGamer({ lastName: v })}
-                placeholder="Enter last name"
-              />
-            </div>
-
-            <div className="mt-6">
-              <InputField
-                label="Gamer Tag / Username *"
-                value={gamer.gamerTag}
-                onChange={(v) => updateGamer({ gamerTag: v })}
-                placeholder="Enter gamer tag"
-              />
-            </div>
-
-            {/* Preferred Games */}
-            <div className="mt-6">
-              <label
-                className="font-body font-bold text-[#374151] block mb-3"
-                style={{ fontSize: "14px", lineHeight: "20px" }}
+            {gamers.map((gamer, idx) => (
+              <div
+                key={idx}
+                className={`${idx > 0 ? "mt-8 pt-8 border-t border-[#e5e7eb]" : ""}`}
               >
-                Preferred Games * (Select all that apply)
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
-                {GAMES.map((game) => {
-                  const checked = gamer.preferredGames.includes(game);
-                  return (
-                    <label
-                      key={game}
-                      className="flex items-center gap-3 cursor-pointer"
+                {/* Gamer header + remove */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-body font-bold text-red text-sm uppercase tracking-wider">
+                    Gamer {gamers.length > 1 ? idx + 1 : ""}
+                  </span>
+                  {gamers.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeGamer(idx)}
+                      className="font-body text-sm text-[#6b7280] hover:text-red cursor-pointer transition-colors"
                     >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleGame(game)}
-                        className="w-5 h-5 rounded-sm border border-[#767676] accent-red cursor-pointer"
-                      />
-                      <span className="font-body font-medium text-[#0a0a0a] text-sm leading-5">
-                        {game}
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-            </div>
+                      Remove
+                    </button>
+                  )}
+                </div>
 
-            {/* Birthday / Gender / Skill Level */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-6 mt-6">
-              <InputField
-                label="Birthday *"
-                type="date"
-                value={gamer.birthday}
-                onChange={(v) => updateGamer({ birthday: v })}
-                hint={
-                  gamer.birthday && selectedCohort
-                    ? getAgeNotice(gamer.birthday, selectedCohort)
-                    : null
-                }
-              />
-              <SelectField
-                label="Gender *"
-                value={gamer.gender}
-                onChange={(v) => updateGamer({ gender: v })}
-                options={GENDER_OPTIONS}
-                placeholder="Select gender"
-              />
-              <SelectField
-                label="Gaming Skill Level *"
-                value={gamer.skillLevel}
-                onChange={(v) => updateGamer({ skillLevel: v })}
-                options={SKILL_LEVELS}
-                placeholder="Select gaming experience"
-              />
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                  <InputField
+                    label="First Name *"
+                    required
+                    value={gamer.firstName}
+                    onChange={(v) => updateGamer(idx, { firstName: v })}
+                    placeholder="Enter first name"
+                  />
+                  <InputField
+                    label="Last Name *"
+                    required
+                    value={gamer.lastName}
+                    onChange={(v) => updateGamer(idx, { lastName: v })}
+                    placeholder="Enter last name"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <InputField
+                    label="Gamer Tag / Username *"
+                    value={gamer.gamerTag}
+                    onChange={(v) => updateGamer(idx, { gamerTag: v })}
+                    placeholder="Enter gamer tag"
+                  />
+                </div>
+
+                {/* Preferred Games */}
+                <div className="mt-6">
+                  <label
+                    className="font-body font-bold text-[#374151] block mb-3"
+                    style={{ fontSize: "14px", lineHeight: "20px" }}
+                  >
+                    Preferred Games * (Select all that apply)
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
+                    {GAMES.map((game) => {
+                      const checked = gamer.preferredGames.includes(game);
+                      return (
+                        <label
+                          key={game}
+                          className="flex items-center gap-3 cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggleGame(idx, game)}
+                            className="w-5 h-5 rounded-sm border border-[#767676] accent-red cursor-pointer"
+                          />
+                          <span className="font-body font-medium text-[#0a0a0a] text-sm leading-5">
+                            {game}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Birthday / Gender / Skill Level / T-Shirt */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-6">
+                  <InputField
+                    label="Birthday *"
+                    type="date"
+                    value={gamer.birthday}
+                    onChange={(v) => updateGamer(idx, { birthday: v })}
+                    hint={
+                      gamer.birthday && selectedCohort
+                        ? getAgeNotice(gamer.birthday, selectedCohort)
+                        : null
+                    }
+                  />
+                  <SelectField
+                    label="Gender *"
+                    value={gamer.gender}
+                    onChange={(v) => updateGamer(idx, { gender: v })}
+                    options={GENDER_OPTIONS}
+                    placeholder="Select gender"
+                  />
+                  <SelectField
+                    label="Gaming Experience *"
+                    value={gamer.skillLevel}
+                    onChange={(v) => updateGamer(idx, { skillLevel: v })}
+                    options={SKILL_LEVELS}
+                    placeholder="Select..."
+                  />
+                  <SelectField
+                    label="T-Shirt Size *"
+                    value={gamer.tshirtSize}
+                    onChange={(v) => updateGamer(idx, { tshirtSize: v })}
+                    options={TSHIRT_SIZES}
+                    placeholder="Select size"
+                  />
+                </div>
+
+                {/* Schedule Preference — card-style selector */}
+                <div className="mt-6">
+                  <label
+                    className="font-body font-bold text-[#374151] block mb-2"
+                    style={{ fontSize: "14px", lineHeight: "20px" }}
+                  >
+                    Schedule Preference *
+                  </label>
+                  <p className="font-body text-[#6b7280] text-sm mb-4">
+                    Sessions are twice a week. Which window works best?
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    {SCHEDULE_OPTIONS.map((opt) => {
+                      const isSelected = gamer.schedulePreference === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => updateGamer(idx, { schedulePreference: opt.value })}
+                          className={`flex-1 py-4 px-6 text-center font-body font-bold transition-all cursor-pointer hover:brightness-110 active:scale-[0.97] active:brightness-90 ${
+                            isSelected
+                              ? "bg-red text-white"
+                              : "bg-[#f5f5f7] text-[#0a0a0a] hover:bg-[#e8e8ea]"
+                          }`}
+                          style={{ fontSize: "16px", lineHeight: "24px" }}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Add gamer button */}
+            {gamers.length < 5 && (
+              <button
+                type="button"
+                onClick={addGamer}
+                className="w-full mt-8 py-4 border-2 border-dashed border-[#d1d5db] rounded-sm font-body font-bold text-[#6b7280] hover:border-red hover:text-red cursor-pointer transition-all duration-150"
+                style={{ fontSize: "15px" }}
+              >
+                + Add another gamer
+              </button>
+            )}
           </div>
 
           {/* ── Parent / Guardian Info ─────────────────────────────────── */}
@@ -760,30 +839,45 @@ export default function Ekuzo100RegisterPage() {
                 </p>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <div className="flex items-start justify-between gap-4">
+                  {/* Cohort info */}
+                  <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#e5e7eb]">
                     <div className="flex flex-col gap-1">
                       <span className="font-body font-bold text-[#0a0a0a] text-sm">
-                        {gamer.firstName.trim() || "Your Gamer"} —{" "}
-                        EKUZO100
-                      </span>
-                      <span className="font-body text-[#6b7280] text-sm">
                         {cohortData?.label}
                       </span>
                       <span className="font-body text-[#6b7280] text-sm">
                         {cohortData?.startDate} – {cohortData?.endDate}
                       </span>
-                      {gamer.schedulePreference && (
-                        <span className="font-body text-[#6b7280] text-sm">
-                          {SCHEDULE_OPTIONS.find(
-                            (o) => o.value === gamer.schedulePreference
-                          )?.label || gamer.schedulePreference}
-                        </span>
-                      )}
                     </div>
-                    <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
-                      ${PRICE}
+                    <span className="font-body text-[#6b7280] text-sm">
+                      ${PRICE}/gamer
                     </span>
                   </div>
+
+                  {/* Per-gamer lines */}
+                  {gamers.map((gamer, i) => (
+                    <div key={i} className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col gap-1">
+                        <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          {gamer.firstName.trim() || `Gamer ${i + 1}`}{" "}
+                          {gamer.lastName.trim()}
+                        </span>
+                        <span className="font-body text-[#6b7280] text-sm">
+                          EKUZO100 &middot; {cohortData?.label}
+                        </span>
+                        {gamer.schedulePreference && (
+                          <span className="font-body text-[#6b7280] text-sm">
+                            {SCHEDULE_OPTIONS.find(
+                              (o) => o.value === gamer.schedulePreference
+                            )?.label || gamer.schedulePreference}
+                          </span>
+                        )}
+                      </div>
+                      <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                        ${PRICE}
+                      </span>
+                    </div>
+                  ))}
 
                   <div className="flex items-center justify-between mt-1 pt-4 border-t border-[#e5e7eb]">
                     <span
@@ -796,7 +890,7 @@ export default function Ekuzo100RegisterPage() {
                       className="font-display text-[#0a0a0a]"
                       style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
                     >
-                      ${PRICE}
+                      ${totalPrice}
                     </span>
                   </div>
                 </div>
@@ -820,7 +914,7 @@ export default function Ekuzo100RegisterPage() {
               >
                 {isSubmitting
                   ? "Setting up payment..."
-                  : "Continue to payment — $100"}
+                  : `Continue to payment — $${totalPrice}`}
               </button>
 
               <p
@@ -894,7 +988,7 @@ export default function Ekuzo100RegisterPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideTornPaper />
     </>
   );
 }

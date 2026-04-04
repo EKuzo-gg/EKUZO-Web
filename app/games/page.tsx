@@ -344,18 +344,6 @@ export default function GamesPage() {
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
 
-      {/* ══ 8. FIXED SCROLL BUTTON (Mobile CTA) ══════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-
-      {/* Spacer for fixed button on mobile */}
-      <div className="md:hidden h-20" />
     </>
   );
 }

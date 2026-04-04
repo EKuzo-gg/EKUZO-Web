@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GOOGLE_SHEETS_WEBHOOK_URL = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -18,33 +16,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Phone number is required" }, { status: 400 });
     }
 
-    const submittedAt = new Date().toISOString();
-
-    // 1. Write to Google Sheets via Apps Script (same pattern as registration)
-    if (GOOGLE_SHEETS_WEBHOOK_URL) {
-      try {
-        await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            sheet: "contact_inquiries",
-            name,
-            organization: organization || "",
-            contact_method: contactMethod,
-            email: email || "",
-            phone: phone || "",
-            message: message || "",
-            page_url: pageUrl || "",
-            submitted_at: submittedAt,
-          }),
-        });
-      } catch (sheetErr) {
-        console.error("[Contact] Google Sheets write failed:", sheetErr);
-        // Non-blocking — continue even if Sheets fails
-      }
-    }
-
-    // 2. Add to Beehiiv as a lead (if they provided email)
+    // 1. Add to Beehiiv as a lead (if they provided email)
     const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
     const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
 
@@ -63,9 +35,9 @@ export async function POST(req: NextRequest) {
               utm_source: "contact-form",
               referring_site: pageUrl || "https://ekuzo.gg",
               custom_fields: [
-                { name: "parent_first_name", value: name.split(" ")[0] || name },
-                { name: "parent_last_name", value: name.split(" ").slice(1).join(" ") || "" },
-                ...(phone ? [{ name: "parent_phone", value: phone }] : []),
+                { name: "first_name", value: name.split(" ")[0] || name },
+                { name: "last_name", value: name.split(" ").slice(1).join(" ") || "" },
+                ...(phone ? [{ name: "phone", value: phone }] : []),
               ],
             }),
           }
@@ -92,6 +64,47 @@ export async function POST(req: NextRequest) {
         }
       } catch (beehiivErr) {
         console.error("[Contact] Beehiiv enrollment failed:", beehiivErr);
+        // Non-blocking
+      }
+    }
+
+    // 3. Email notification to Karlin via Resend
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    if (RESEND_API_KEY) {
+      try {
+        const contactInfo = contactMethod === "email"
+          ? `<strong>Email:</strong> <a href="mailto:${email}">${email}</a>`
+          : `<strong>Phone:</strong> ${phone}`;
+
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+          },
+          body: JSON.stringify({
+            from: "EKUZO Website <onboarding@resend.dev>",
+            to: "karlin@ekuzo.gg",
+            subject: `New inquiry from ${name}${organization ? ` (${organization})` : ""}`,
+            html: `
+              <div style="font-family: sans-serif; max-width: 480px;">
+                <h2 style="margin: 0 0 16px;">New "Talk to Humans" inquiry</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                ${organization ? `<p><strong>Organization:</strong> ${organization}</p>` : ""}
+                <p><strong>Preferred contact:</strong> ${contactMethod}</p>
+                <p>${contactInfo}</p>
+                ${message ? `<p><strong>Message:</strong><br/>${message}</p>` : ""}
+                <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;" />
+                <p style="color: #999; font-size: 12px;">
+                  From: ${pageUrl || "ekuzo.gg"}<br/>
+                  Submitted: ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })}
+                </p>
+              </div>
+            `,
+          }),
+        });
+      } catch (emailErr) {
+        console.error("[Contact] Resend email failed:", emailErr);
         // Non-blocking
       }
     }

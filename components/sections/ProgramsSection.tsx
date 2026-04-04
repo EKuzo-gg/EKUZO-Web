@@ -7,6 +7,8 @@ type ProgramsSectionProps = {
   showTeams?: boolean;
   showEkuzo100?: boolean;
   showCamps?: boolean;
+  /** Override the default "3 programs. 1 system." heading */
+  heading?: React.ReactNode;
 };
 
 type Stat = { value: string; label: string };
@@ -79,6 +81,7 @@ export default function ProgramsSection({
   showTeams = true,
   showEkuzo100 = true,
   showCamps = true,
+  heading,
 }: ProgramsSectionProps) {
   const visibilityMap: Record<string, boolean> = {
     teams: showTeams,
@@ -105,8 +108,7 @@ export default function ProgramsSection({
             className="font-body font-bold text-black leading-[1]"
             style={{ fontSize: "clamp(2rem, 4vw, 64px)", letterSpacing: "-1.28px" }}
           >
-            3 programs. 1 system.<br />
-            1 esport experience.
+            {heading ?? (<>3 programs. 1 system.<br />1 esport experience.</>)}
           </h4>
         </div>
 

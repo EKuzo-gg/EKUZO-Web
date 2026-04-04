@@ -179,7 +179,7 @@ export default function HomePage() {
           White bg, 360vh, sticky scroll.
           Container-relative scroll progress (0-12% delay, 12-85% animation, 85-100% hold)
       ───────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-visible" style={{ height: "360vh" }}>
+      <section className="relative bg-white overflow-visible" style={{ height: "360vh", paddingBottom: "clamp(80px, 12vw, 160px)" }}>
         {/* Torn paper: growth (grey) → ecosystem (white) — white paper at top */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

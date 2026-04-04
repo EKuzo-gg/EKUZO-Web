@@ -172,7 +172,7 @@ export default function CoachingPage() {
             {PILLAR_DATA.subtitle}
           </p>
           <ModalButton modal="contact" variant="red-outlined">
-            Start a conversation
+            Talk to Humans
           </ModalButton>
         </div>
 

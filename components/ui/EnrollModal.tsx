@@ -6,7 +6,7 @@ import { useModal } from "@/context/ModalContext";
 const programs = [
   {
     label: "EKUZOTEAMS – Semester-Based",
-    href: "/programs/ekuzo-teams",
+    href: "/programs/ekuzo-teams/register",
   },
   {
     label: "EKUZO100 – 4-Week Intro",

@@ -85,7 +85,7 @@ export default function ContactModal() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <h2 className="font-body font-bold text-black text-2xl md:text-3xl">
-                Start a conversation
+                Talk to Humans
               </h2>
 
               {/* Name */}

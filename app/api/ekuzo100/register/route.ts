@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 /**
  * POST /api/ekuzo100/register
  *
- * Receives the EKUZO100 registration payload (parent info, single gamer,
+ * Receives the EKUZO100 registration payload (parent info, gamers array,
  * cohort selection, schedule preference), creates a Stripe Payment Intent
  * with all registration data as metadata, and returns the client_secret
  * for Stripe Elements on the frontend.
@@ -16,7 +16,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { parent, gamer, cohort, additionalInfo, totalPrice, timezone } =
+    const { parent, gamers, cohort, additionalInfo, totalPrice, timezone } =
       body;
 
     // ── Validate ────────────────────────────────────────────────────
@@ -27,9 +27,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!gamer?.firstName || !gamer?.lastName) {
+    if (!gamers?.length) {
       return NextResponse.json(
-        { error: "Gamer name is required." },
+        { error: "At least one gamer is required." },
         { status: 400 }
       );
     }
@@ -41,7 +41,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!totalPrice || totalPrice !== 100) {
+    const expectedPrice = 100 * gamers.length;
+    if (!totalPrice || totalPrice !== expectedPrice) {
       return NextResponse.json(
         { error: "Invalid total price." },
         { status: 400 }
@@ -56,7 +57,7 @@ export async function POST(req: NextRequest) {
       parent_last_name: parent.lastName,
       parent_email: parent.email,
       parent_phone: parent.phone || "",
-      gamer_count: "1",
+      gamer_count: String(gamers.length),
       timezone: timezone || "",
       cohort_month: cohort.value || "",
       cohort_label: cohort.label || "",
@@ -64,17 +65,20 @@ export async function POST(req: NextRequest) {
       cohort_end: cohort.endDate || "",
     };
 
-    // Single gamer — stored as gamer_0 for webhook compatibility
-    metadata.gamer_0 = JSON.stringify({
-      firstName: gamer.firstName,
-      lastName: gamer.lastName,
-      gamerTag: gamer.gamerTag || "",
-      birthday: gamer.birthday || "",
-      gender: gamer.gender || "",
-      skillLevel: gamer.skillLevel || "",
-      preferredGames: (gamer.preferredGames || []).join(", "),
-      schedulePreference: gamer.schedulePreference || "",
-    }).slice(0, 500);
+    // Per-gamer data
+    gamers.forEach((gamer: any, i: number) => {
+      metadata[`gamer_${i}`] = JSON.stringify({
+        firstName: gamer.firstName,
+        lastName: gamer.lastName,
+        gamerTag: gamer.gamerTag || "",
+        birthday: gamer.birthday || "",
+        gender: gamer.gender || "",
+        skillLevel: gamer.skillLevel || "",
+        tshirtSize: gamer.tshirtSize || "",
+        preferredGames: (gamer.preferredGames || []).join(", "),
+        schedulePreference: gamer.schedulePreference || "",
+      }).slice(0, 500);
+    });
 
     // Split additional_info across multiple metadata keys if >500 chars
     const info = (additionalInfo || "").slice(0, 1500);
@@ -87,12 +91,13 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Create Payment Intent ──────────────────────────────────────
+    const gamerNames = gamers.map((g: any) => `${g.firstName} ${g.lastName}`).join(", ");
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(totalPrice * 100), // cents
       currency: "usd",
       metadata,
       receipt_email: parent.email,
-      description: `EKUZO100 — ${gamer.firstName} ${gamer.lastName} — ${cohort.label}`,
+      description: `EKUZO100 — ${gamerNames} — ${cohort.label}`,
       automatic_payment_methods: { enabled: true },
     });
 

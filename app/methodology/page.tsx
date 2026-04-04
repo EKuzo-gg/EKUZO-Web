@@ -72,7 +72,7 @@ export default function MethodologyPage() {
       {/* ══ 1. HERO — white bg, 50/50 grid, smoke graphics ═════════════════ */}
       <div className="relative overflow-visible" style={{ zIndex: 1 }}>
       <section
-        className="bg-white relative overflow-visible"
+        className="bg-white relative overflow-clip"
         style={{
           paddingTop: "clamp(160px, 18vw, 240px)",
           paddingBottom: "clamp(160px, 22vw, 300px)",
@@ -132,7 +132,7 @@ export default function MethodologyPage() {
               Why games are the best teachers most students already know.
             </p>
             <ModalButton modal="contact" variant="red-outlined">
-              Start a conversation
+              Talk to Humans
             </ModalButton>
           </div>
 
@@ -167,7 +167,7 @@ export default function MethodologyPage() {
       {/* ══ 2. WHY GAMES WORK — grey bg, zigzag cards ═══════════════════════ */}
       <div className="relative overflow-visible" style={{ zIndex: 0 }}>
         <section
-          className="bg-[#f0edea] relative"
+          className="bg-[#f0edea] relative overflow-clip"
           style={{
             marginTop: "clamp(-60px, -10vw, -150px)",
             paddingTop: "clamp(140px, 24vw, 294px)",
@@ -260,10 +260,10 @@ export default function MethodologyPage() {
       </div>
 
       {/* ══ 3. QUOTE — red bg ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-visible">
+      <div className="relative overflow-visible" style={{ zIndex: 2 }}>
         <TornPaperDivider color="red" variant="top" style={1} />
-        <div
-          className="bg-red"
+        <section
+          className="bg-red relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(80px, 14vw, 144px)",
@@ -308,9 +308,9 @@ export default function MethodologyPage() {
               Founder EKUZO
             </p>
           </div>
-        </div>
+        </section>
         <TornPaperDivider color="red" variant="bottom" style={1} />
-      </section>
+      </div>
 
       {/* ══ 4. TEN PILLARS — black bg ═══════════════════════════════════════ */}
       <section
@@ -414,16 +414,6 @@ export default function MethodologyPage() {
       <FooterBanner heading="Turning pedagogy into progress for every student" />
       <Footer />
 
-      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-      <div className="md:hidden h-20" />
     </>
   );
 }

@@ -107,18 +107,30 @@ export async function POST(req: NextRequest) {
           gamerSummaries.push(
             `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}  ${gd.schedulePreference || ""}`
           );
+        } else if (product === "teams") {
+          // Teams: semester + payment plan
+          gamerSummaries.push(
+            `${gd.firstName} ${gd.lastName} — ${meta.semester_label || "Fall 2026"}`
+          );
         }
       }
 
       // Product-specific Beehiiv fields
-      const programName = product === "ekuzo100" ? "EKUZO100" : "EKUZO Camps";
-      const utmSource = product === "ekuzo100"
-        ? "ekuzo100-registration"
+      const programName =
+        product === "ekuzo100" ? "EKUZO100"
+        : product === "teams" ? "EKUZOTeams"
+        : "EKUZO Camps";
+      const utmSource =
+        product === "ekuzo100" ? "ekuzo100-registration"
+        : product === "teams" ? "ekuzo-teams-registration"
         : "ekuzo-camps-registration";
 
       // Tags per product
-      const tags = product === "ekuzo100"
-        ? ["ekuzo100-purchased", "source-ekuzo100-registration"]
+      const tags =
+        product === "ekuzo100"
+          ? ["ekuzo100-purchased", "source-ekuzo100-registration"]
+        : product === "teams"
+          ? ["teams-purchased", "source-teams-registration"]
         : ["camp-2026-purchased", "source-camp-registration"];
 
       // Build custom fields — shared base + product-specific
@@ -141,14 +153,25 @@ export async function POST(req: NextRequest) {
           { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
           { name: "camp_slot", value: earliestSlot }
         );
+      } else if (product === "teams") {
+        customFields.push(
+          { name: "team_semester", value: meta.semester_label || "Fall 2026" },
+          { name: "team_payment_plan", value: meta.payment_plan || "upfront" }
+        );
       }
+
+      // Product-specific welcome automation
+      const automationId =
+        product === "teams"   ? "aut_fea2b01b-eccd-40c7-9d53-2b370c039ddb"
+        : product === "ekuzo100" ? "aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556"
+        : "aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc"; // camps (default)
 
       const beehiivPayload = {
         email: meta.parent_email,
         reactivate_existing: true,
         send_welcome_email: true,
         utm_source: utmSource,
-        automation_ids: ["aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc"],
+        automation_ids: [automationId],
         custom_fields: customFields,
       };
 
@@ -218,13 +241,21 @@ export async function POST(req: NextRequest) {
         parent_phone: meta.parent_phone || "",
         gamer_name: `${gd.firstName || ""} ${gd.lastName || ""}`.trim(),
         gamer_tag: gd.gamerTag || "",
-        week: product === "camps" ? (gd.weekLabel || "") : (meta.cohort_label || ""),
-        slot: product === "camps" ? (gd.slot || "") : (gd.schedulePreference || ""),
-        week_dates: product === "camps" ? (gd.weekDates || "") : `${meta.cohort_start || ""} – ${meta.cohort_end || ""}`,
+        week: product === "camps" ? (gd.weekLabel || "")
+          : product === "teams" ? (meta.semester_label || "Fall 2026")
+          : (meta.cohort_label || ""),
+        slot: product === "camps" ? (gd.slot || "")
+          : product === "teams" ? (meta.payment_plan || "")
+          : (gd.schedulePreference || ""),
+        week_dates: product === "camps" ? (gd.weekDates || "")
+          : product === "teams" ? "Week of Aug 31, 2026"
+          : `${meta.cohort_start || ""} – ${meta.cohort_end || ""}`,
         birthday: gd.birthday || "",
         gender: gd.gender || "",
-        skill_level: gd.skillLevel || "",
+        gaming_experience: gd.skillLevel || "",
         tshirt_size: gd.tshirtSize || "",
+        time_preference: gd.timePreference || "",
+        first_semester: gd.firstSemester || "",
         preferred_games: gd.preferredGames || "",
         timezone: meta.timezone || "",
         location: location,
@@ -255,6 +286,54 @@ export async function POST(req: NextRequest) {
       }
     } catch (err: any) {
       console.error("Google Sheets write error:", err.message);
+    }
+
+    // ── Teams installment: create Subscription for remaining 3 payments ──
+    if (product === "teams" && meta.payment_plan === "installment") {
+      try {
+        const customerId = meta.stripe_customer_id;
+        const installmentPriceId = process.env.STRIPE_PRICE_TEAMS_INSTALLMENTS;
+
+        if (!customerId) {
+          console.error("Teams installment: no stripe_customer_id in metadata");
+        } else if (!installmentPriceId) {
+          console.error("Teams installment: STRIPE_PRICE_TEAMS_INSTALLMENTS env var not set");
+        } else {
+          // Get the saved payment method from the customer
+          const paymentMethods = await stripe.paymentMethods.list({
+            customer: customerId,
+            type: "card",
+          });
+          const pmId = paymentMethods.data[0]?.id;
+
+          if (!pmId) {
+            console.error("Teams installment: no saved payment method found for customer", customerId);
+          } else {
+            // Oct 1 2026 = first auto-charge, cancel Jan 1 2027 (after 3 charges)
+            const oct1 = Math.floor(new Date("2026-10-01T00:00:00Z").getTime() / 1000);
+            const jan1 = Math.floor(new Date("2027-01-01T00:00:00Z").getTime() / 1000);
+
+            const subscription = await stripe.subscriptions.create({
+              customer: customerId,
+              items: [{ price: installmentPriceId }],
+              default_payment_method: pmId,
+              trial_end: oct1,
+              cancel_at: jan1,
+              metadata: {
+                product: "teams",
+                initial_payment_intent: paymentIntent.id,
+                parent_email: meta.parent_email || "",
+                gamer_count: meta.gamer_count || "1",
+              },
+            });
+
+            console.log(`✅ Teams installment subscription created: ${subscription.id}`);
+            console.log(`   Trial until Oct 1 2026, then 3 × $160/mo, cancel Jan 1 2027`);
+          }
+        }
+      } catch (err: any) {
+        console.error("Teams installment subscription error:", err.message);
+      }
     }
   }
 

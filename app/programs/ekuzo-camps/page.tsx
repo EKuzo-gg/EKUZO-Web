@@ -9,7 +9,6 @@ import type { IconName } from "@/components/ui/Icon";
 import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
-import ModalButton from "@/components/ui/ModalButton";
 
 export const metadata = {
   title: "EKUZO Camp — Level Up Your Game This Summer",
@@ -128,14 +127,14 @@ const whatWePlayItems = [
 
 const campsFAQs = [
   {
-    question: "What age range is EKUZO Camp for?",
+    question: "What age range is EKUZOCAMPS for?",
     answer:
-      "EKUZO Camps are designed for players aged 11–18. We group players by age and skill level to ensure the best experience for everyone.",
+      "EKUZOCAMPS are designed for players aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
   },
   {
-    question: "What game does EKUZO Camp use?",
+    question: "What games does EKUZOCAMPS play?",
     answer:
-      "Camps are currently built around League of Legends. It's free to download and requires only a basic PC. Other game options may be added in future seasons.",
+      "Today, EKUZO trains on League of Legends. It provides rich team dynamics, communication requirements, and deep strategy, which is exactly what the EKUZO curriculum is designed around. It\u2019s also free-to-play and doesn\u2019t require bleeding edge machines.",
   },
   {
     question: "Does my child need experience in League of Legends?",
@@ -1091,17 +1090,6 @@ export default function EkuzoCampsPage() {
             </div>
           </div>
         </section>
-      </div>
-
-      {/* ── Mobile CTA bar ──────────────────────────────────────────────────── */}
-      <div className="h-20 md:hidden" />
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-red flex md:hidden">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="red-filled" className="flex-1">
-          Start a conversation
-        </ModalButton>
       </div>
 
       <Footer />

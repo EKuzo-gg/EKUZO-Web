@@ -53,14 +53,12 @@ export default function BlogPage() {
       >
         <div className="max-w-[1232px] mx-auto" style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}>
           <h1
-            className="font-display text-white leading-none text-center mb-20"
-            style={{ fontSize: "clamp(3.5rem, 9vw, 9rem)" }}
+            className="font-display text-white leading-[0.85] text-center mb-20"
+            style={{ fontSize: "clamp(4rem, 11vw, 12rem)" }}
           >
-            STORIES OF
+            STORIES OF GAMING
             <br />
-            GAMING AND
-            <br />
-            GROWTH
+            AND GROWTH
           </h1>
 
           {/* Featured card */}
@@ -69,8 +67,6 @@ export default function BlogPage() {
             className="group grid grid-cols-1 lg:grid-cols-2 overflow-hidden"
           >
             <div className="relative min-h-[400px] overflow-hidden">
-              {/* Red corner accent */}
-              <div className="absolute top-0 left-0 w-16 h-16 bg-red z-10" />
               <Image
                 src={featured.image}
                 alt={featured.title}

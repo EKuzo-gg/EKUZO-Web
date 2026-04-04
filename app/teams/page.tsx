@@ -34,7 +34,7 @@ export default function TeamsPage() {
               Enroll my gamer
             </Button>
             <Button variant="white-outlined" href="#contact">
-              Start a conversation
+              Talk to Humans
             </Button>
           </div>
         </div>

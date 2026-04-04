@@ -44,22 +44,22 @@ const ekuzo100FAQs = [
   {
     question: "Can homeschool families participate?",
     answer:
-      "Absolutely. EKUZO100 is open to all students aged 10–18, including homeschool families. Sessions are held online, so your student can join from anywhere with a computer and internet connection.",
+      "Absolutely. EKUZO100 is open to all students aged 10\u201318, including homeschool families. Sessions are held online, so your student can join from anywhere with a computer and internet connection.",
   },
   {
-    question: "What happens after E100?",
+    question: "What happens after EKUZO100?",
     answer:
-      "Students who enjoy the program can move into EKUZO Teams — a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. There's no automatic renewal — your family decides.",
+      "Students who enjoy the program can move into EKUZOTEAMS \u2014 a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. There\u2019s no automatic renewal \u2014 your family decides.",
   },
   {
-    question: "How much do programs cost?",
+    question: "How much does EKUZO100 cost?",
     answer:
-      "EKUZO100 is $100 for the full four-week program. EKUZO Teams (semester-based) pricing varies — contact us for current rates.",
+      "EKUZO100 is $100 for the full four-week program \u2014 that\u2019s roughly $12.50 per session of small-group, coach-led instruction.",
   },
   {
     question: "What about college or careers?",
     answer:
-      "Esports teaches communication, leadership, strategic thinking, and teamwork — skills that translate directly to college applications and professional careers. Many universities now offer esports scholarships and programs.",
+      "Esports teaches communication, leadership, strategic thinking, and teamwork \u2014 skills that translate directly to college applications and professional careers. Many universities now offer esports scholarships and programs.",
   },
   {
     question: "How does this help with school?",

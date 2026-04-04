@@ -3,7 +3,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 type OurApproachSectionProps = {
   heading: string;
   listItems: [string, string, string];
-  body: string;
+  body: React.ReactNode;
   bg?: string;
   showImage?: boolean;
   /** Icons matching the homepage growth section pattern (red circle + white SVG) */
@@ -73,12 +73,12 @@ export default function OurApproachSection({
             >
               {heading}
             </h4>
-            <p
-              className="font-body text-black/70 leading-[1.417] max-w-[540px]"
+            <div
+              className="font-body text-black/70 leading-[1.417] max-w-[540px] flex flex-col gap-4"
               style={{ fontSize: "clamp(1rem, 1.7vw, 24px)" }}
             >
               {body}
-            </p>
+            </div>
           </div>
 
           {/* Right column (~30%): icon list items — matches homepage growth section */}

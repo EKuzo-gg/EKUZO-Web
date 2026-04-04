@@ -38,27 +38,27 @@ const programsFAQs = [
   {
     question: "What programs does EKUZO offer?",
     answer:
-      "EKUZO offers three programs: EKUZOTEAMS (semester-based, 15 weeks), EKUZO100 (4-week intro), and EKUZO CAMPS (1-week intensive during breaks). Each is built on the same coaching system with a different format.",
-  },
-  {
-    question: "How are teams formed?",
-    answer:
-      "Students are grouped in increments of ~5 to create balanced teams, with a preference for local cohorts whenever possible.",
+      "EKUZO offers three programs: EKUZOTEAMS (semester-based, 15 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
   },
   {
     question: "What is EKUZO100?",
     answer:
-      "EKUZO100 is our entry program: four weeks, two practices per week. It's the easiest way to experience EKUZO and see if it's the right fit.",
+      "EKUZO100 is a 4-week competitive bootcamp: two sessions per week in small groups of five. It\u2019s designed to give students a real taste of structured esports coaching \u2014 whether they\u2019re brand new or looking to sharpen their game.",
   },
   {
     question: "When are practices held?",
     answer:
-      "EKUZO100: Two evenings per week, after school. EKUZOTEAMS: 2–3 sessions per week during or after school. EKUZO CAMPS: Daily sessions during summer or holiday breaks.",
+      "EKUZO100: Two evenings per week, after school. EKUZOTEAMS: 2\u20133 sessions per week during or after school. EKUZOCAMPS: Daily sessions during summer or holiday breaks. All sessions are approximately 90 minutes.",
+  },
+  {
+    question: "What age range is EKUZO for?",
+    answer:
+      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
   },
   {
     question: "Can homeschool families participate?",
     answer:
-      "Yes. Homeschoolers can enroll in EKUZO100, EKUZOTEAMS (home track), or EKUZO CAMPS.",
+      "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
   },
 ];
 
@@ -170,18 +170,6 @@ export default function ProgramsPage() {
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />
 
-      {/* ══ FIXED SCROLL BUTTON (Mobile CTA) ════════════════════════════════ */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-red border-t border-red/50 px-4 py-3 flex gap-2 z-40 safe-area-inset-bottom">
-        <ModalButton modal="enroll" variant="white-filled" className="flex-1">
-          Enroll my gamer
-        </ModalButton>
-        <ModalButton modal="contact" variant="white-outlined" className="flex-1">
-          Start a conversation
-        </ModalButton>
-      </div>
-
-      {/* Spacer for fixed button on mobile */}
-      <div className="md:hidden h-20" />
     </>
   );
 }

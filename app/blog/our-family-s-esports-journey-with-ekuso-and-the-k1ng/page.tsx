@@ -1,6 +1,7 @@
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -207,10 +208,16 @@ export default function PostK1ng() {
           </div>
         </div>
 
-        {/* ══ KEEP READING ══════════════════════════════════════════════════ */}
-        <div
-          className="border-t border-black/10 bg-grey py-20"
+      </article>
+
+      {/* ══ KEEP READING ══════════════════════════════════════════════════ */}
+      <div className="relative overflow-visible">
+        <TornPaperDivider color="grey" variant="top" style={1} />
+        <section
+          className="bg-[#f0edea] relative overflow-clip"
           style={{
+            paddingTop: "clamp(80px, 10vw, 144px)",
+            paddingBottom: "clamp(80px, 10vw, 144px)",
             paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
@@ -242,8 +249,8 @@ export default function PostK1ng() {
               </div>
             </Link>
           </div>
-        </div>
-      </article>
+        </section>
+      </div>
 
       <FooterBanner heading="Enroll into a transformational program today" />
       <Footer />

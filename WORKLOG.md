@@ -6,6 +6,72 @@
 
 ---
 
+## Jamie — April 4, 2026 (newsletter system, CTA overhaul, FAQ audit, Teams commerce, contact form email, launch prep)
+
+**What changed:**
+
+**Newsletter system (new):**
+- `components/ui/NewsletterPopup.tsx` — full-screen split-screen popup (purple left w/ kid+characters image, dark right w/ form). Shows on first visit after 2.5s delay, gated by localStorage. Posts to `/api/newsletter`. Yellow-green (#C8E620) accent color for CTA + "MATTERS." headline.
+- `components/ui/FooterNewsletter.tsx` — inline "Join the Newsletter" + email input in footer. Shows black checkbox + "Subscribed!" on success. Replaces old "Start a conversation" ModalButton in footer.
+- `app/api/newsletter/route.ts` — Beehiiv subscription with `source-newsletter` tag.
+- `app/layout.tsx` — added `<NewsletterPopup />` to root layout.
+- `components/layout/Footer.tsx` — swapped ModalButton import for FooterNewsletter.
+
+**CTA rename — "Start a conversation" → "Talk to Humans":**
+- Updated across 9 files: Nav, StickyCTA, ContactModal, schools, methodology, coaching, teams, and both camps pages.
+
+**CTA swap — default CTAs changed to "Enroll my gamer":**
+- Nav desktop CTA now opens enroll modal (was contact).
+- FooterBanner default CTA now "Enroll my gamer" (was contact). Added `ctaLabel` and `ctaModal` props for per-page override (schools uses "Talk to Humans" / contact).
+
+**Contact form — added Resend email notification:**
+- `app/api/contact/route.ts` — added Resend API call to email karlin@ekuzo.gg on every submission. Removed Google Sheets write (not needed for contact inquiries). Beehiiv subscription still active.
+- Resend API key added to `.env.local` (`RESEND_API_KEY`).
+- From address is `onboarding@resend.dev` until ekuzo.gg domain is verified in Resend (DNS records needed — bundled with Netlify DNS update for Karlin).
+
+**Teams commerce (new):**
+- `app/api/teams/register/route.ts` — Stripe PaymentIntent for Teams. Supports upfront ($576) and installment ($160 first + 3×$160/mo subscription). Creates Stripe Customer for card storage.
+- `app/programs/ekuzo-teams/register/page.tsx` — registration form.
+- `app/programs/ekuzo-teams/success/page.tsx` — confirmation page.
+- Webhook already handled Teams product detection from prior session.
+
+**FAQ audit — 7 pages updated:**
+- Terminology standardized: "E100" → "EKUZO100", "After-School" → "EKUZOTEAMS", "Minimesters" → "EKUZOCAMPS".
+- New questions added: "What is EKUZO?", "What equipment needed?", "What age range?" (10-18).
+- Pricing language: ~$20/session, no hard numbers except EKUZO100=$100.
+- Pages: `/faq`, `/parents`, `/programs`, `/programs/ekuzo-teams`, `/programs/ekuzo100`, `/programs/ekuzo-camps`, `/schools`.
+
+**Mobile nav fix:**
+- Nav mobile drawer now uses `createPortal(…, document.body)` to escape stacking context issues. Full-screen overlay with its own red nav bar + close button.
+
+**Removed page-specific mobile CTA bars:**
+- Removed from: schools, parents, methodology, games, programs, faq, ekuzo-camps (7 pages total). Global `StickyCTA` handles all pages.
+
+**Component enhancements:**
+- `ProgramsSection` — added `heading` prop for per-page override (schools uses "One program. Built for schools.").
+- `OurApproachSection` — body prop now accepts JSX (React.ReactNode), not just string.
+- `FooterBanner` — added `ctaLabel` and `ctaModal` props.
+
+**Draft pages hidden (renamed to _page.tsx.draft):**
+- `/about` — in progress, not ready for launch.
+- `/coaching` — template for future `/methodology/coaching`.
+- `/success` — generic, replaced by per-program success pages.
+- `/ekuzo-camps/v2` — became canonical `/programs/ekuzo-camps`.
+
+**New assets:**
+- `public/images/popup-kid-characters.png` — kid + game characters composite for newsletter popup.
+
+**Data flow summary (all working as of 4/4):**
+- Contact form ("Talk to Humans") → Beehiiv (source-contact-form tag) + Resend email to Karlin
+- Newsletter popup + footer → Beehiiv (source-newsletter tag)
+- Camps registration → Stripe → webhook → Google Sheets (ekuzo-purchases) + Beehiiv
+- EKUZO100 registration → Stripe → webhook → Google Sheets + Beehiiv
+- Teams registration → Stripe → webhook → Google Sheets + Beehiiv
+
+**Pre-deploy note for Aaron:** Major commit with changes across 40+ files. Pull before starting any work. If you see wireframe HTML files or `Home _ EKUZO_files/` in the repo, those are reference assets — not production code.
+
+---
+
 ## Jamie — April 3, 2026 (route canonicalization + EKUZO100 orchestration + contact form + SEO + launch prep)
 
 **What changed:**
