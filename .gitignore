@@ -44,9 +44,6 @@ yarn-error.log*
 next-env.d.ts
 
 # Large media — videos and animations (share via zip, too big for git)
-public/videos/
-public/testimonial-videos/
-public/animations/
 
 # Dev logs
 next-dev.log
