@@ -1,0 +1,10 @@
+# https://ekuzo.gg robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ekuzo.gg/sitemap.xml
+
+# Block internal/draft routes
+Disallow: /api/
+Disallow: /_next/
