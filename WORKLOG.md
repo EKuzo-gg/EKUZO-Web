@@ -6,6 +6,39 @@
 
 ---
 
+## Jamie — April 8, 2026 (favicons + dev branch workflow)
+
+**What changed:**
+
+**Complete favicon set (new):**
+- Generated full favicon suite from `bird-logo.png`: `app/favicon.ico` (16/32/48), `app/apple-icon.png` (180×180), `app/icon.png` (192×192), `public/favicon-16x16.png`, `public/favicon-32x32.png`, `public/android-chrome-192x192.png`, `public/android-chrome-512x512.png`
+- `public/site.webmanifest` — ties Android icons together with EKUZO branding (black theme)
+- `app/layout.tsx` — metadata updated to reference full icon set + manifest
+
+**Dev branch + Netlify branch deploys (new workflow — READ THIS):**
+- Created `dev` branch from `main`. Netlify now deploys both:
+  - `main` → **ekuzo.gg** (production, live site)
+  - `dev` → **dev--ekuzo.netlify.app** (preview, for reviewing before going live)
+- **New workflow for both Jamie and Aaron:**
+  1. Do all day-to-day work on `dev` branch
+  2. Push to `dev` → check at the dev URL
+  3. When confident → merge `dev` into `main` to go live
+- **Aaron action needed:** Switch to `dev` branch before starting work:
+  ```bash
+  git checkout dev
+  git pull origin dev
+  ```
+- To merge dev → main when ready to go live:
+  ```bash
+  git checkout main
+  git pull origin main
+  git merge dev
+  git push origin main
+  git checkout dev
+  ```
+
+---
+
 ## Aaron — April 8, 2026 (camps registration page polish + mobile fixes)
 
 **What changed:**

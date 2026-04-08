@@ -406,12 +406,27 @@ Aaron and Jamie communicate before touching each other's areas, but here's the g
 - Copy text within any page
 - `components/ui/Button.tsx`, `components/ui/ModalButton.tsx` — shared UI primitives
 
-### Git workflow
-Both work on `main`. No branches. Simple rules:
-1. `git pull` before starting work
-2. Tell each other before working (Slack/text) so you don't edit the same file
-3. Commit and push when done
-4. If you get a merge conflict, stop and talk — don't force push
+### Git workflow (updated April 8, 2026)
+Two branches with Netlify deploys:
+- **`dev`** — day-to-day work branch. Both Aaron and Jamie push here. Netlify auto-deploys to `dev--ekuzo.netlify.app` (preview URL).
+- **`main`** — production branch. Deploys to `ekuzo.gg` (live site). Only updated by merging `dev` into `main`.
+
+**Daily rules:**
+1. `git checkout dev` — always work on dev, never push directly to main
+2. `git pull origin dev` before starting work
+3. Tell each other before working (Slack/text) so you don't edit the same file
+4. Commit and push to `dev` when done
+5. Check the dev preview URL to confirm changes look right
+6. If you get a merge conflict, stop and talk — don't force push
+
+**To go live (merge dev → main):**
+```bash
+git checkout main
+git pull origin main
+git merge dev
+git push origin main
+git checkout dev
+```
 
 ### Preventing overwrites
 Aaron's front-end work will typically be ahead of Jamie's orchestration work. This is fine because they touch different files. The risk is small, but to be safe:
