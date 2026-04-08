@@ -11,9 +11,9 @@ import { useModal } from "@/context/ModalContext";
 type NavVariant = "dark" | "light" | "light-red";
 
 const programsSubmenu = [
-  { href: "/programs/ekuzo-teams", label: "EKUZO Teams", description: "School-based semester program", tag: "SCHOOLS" },
-  { href: "/programs/ekuzo100",    label: "EKUZO 100",   description: "4-week individual program",      tag: "HOME" },
-  { href: "/programs/ekuzo-camps", label: "EKUZO Camps",  description: "Seasonal week-long camps",       tag: "SUMMER" },
+  { href: "/programs/ekuzo-teams", label: "EKUZO Teams", description: "School-based semester program" },
+  { href: "/programs/ekuzo100",    label: "EKUZO 100",   description: "4-week individual program" },
+  { href: "/programs/ekuzo-camps", label: "EKUZO Camps",  description: "Seasonal week-long camps" },
 ];
 
 const navLinks = [
@@ -21,15 +21,13 @@ const navLinks = [
   { href: "/schools",     label: "Schools" },
   { href: "/parents",     label: "Families" },
   { href: "/methodology", label: "Methodology" },
-  { href: "/faq",         label: "FAQ" },
+  { href: "/blog",        label: "Resources" },
 ];
 
 export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [programsOpen, setProgramsOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
-  const [megaMenuTop, setMegaMenuTop] = useState(73);
-  const navRef = useRef<HTMLElement>(null);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isDark = variant === "dark";
@@ -51,9 +49,6 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
 
   const handleMouseEnter = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
-    if (navRef.current) {
-      setMegaMenuTop(navRef.current.getBoundingClientRect().bottom);
-    }
     setProgramsOpen(true);
   };
   const handleMouseLeave = () => {
@@ -61,10 +56,8 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
   };
 
   return (
-    <>
     <nav
-      ref={navRef}
-      className={`w-full flex items-center justify-between py-5 relative z-50 ${
+      className={`w-full flex items-center justify-between py-5 ${
         isDark ? "text-white" : isLightRed ? "text-black" : "bg-white text-black"
       }`}
       style={{ paddingLeft: "clamp(1.5rem, 7.2vw, 104px)", paddingRight: "clamp(1.5rem, 7.2vw, 104px)" }}
@@ -109,6 +102,44 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
                     {programsOpen ? "−" : "+"}
                   </span>
                 </Link>
+
+                {/* Dropdown */}
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 ${
+                    programsOpen
+                      ? "opacity-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 -translate-y-1 pointer-events-none"
+                  }`}
+                >
+                  <div
+                    className="bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden"
+                    style={{ minWidth: "280px" }}
+                  >
+                    {/* "All Programs" header link */}
+                    <Link
+                      href="/programs"
+                      className="block px-5 py-3 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-red transition-colors border-b border-gray-100"
+                    >
+                      All Programs
+                    </Link>
+                    {programsSubmenu.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`block px-5 py-4 transition-colors hover:bg-gray-50 group ${
+                          isActive(item.href) ? "bg-gray-50" : ""
+                        }`}
+                      >
+                        <span className="block font-bold text-black group-hover:text-red transition-colors">
+                          {item.label}
+                        </span>
+                        <span className="block text-sm text-gray-500 mt-0.5">
+                          {item.description}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </li>
             ) : (
               <li key={l.href}>
@@ -246,10 +277,10 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
               )}
             </ul>
             <div className="flex flex-col gap-3 pt-4 border-t border-grey">
-              <Button variant="red-filled" onClick={() => { setMobileOpen(false); openModal("enroll"); }}>
+              <Button variant="red-outlined" onClick={() => { setMobileOpen(false); openModal("enroll"); }}>
                 Enroll my gamer
               </Button>
-              <Button variant="red-outlined" onClick={() => { setMobileOpen(false); openModal("contact"); }}>
+              <Button variant="red-filled" onClick={() => { setMobileOpen(false); openModal("contact"); }}>
                 Talk to Humans
               </Button>
             </div>
@@ -258,60 +289,5 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
         document.body
       )}
     </nav>
-
-    {/* ─── Option B: Full-width mega menu panel ─── */}
-    <div
-      className={`hidden lg:block fixed left-0 right-0 z-40 transition-all duration-300 ease-out ${
-        programsOpen
-          ? "opacity-100 translate-y-0 pointer-events-auto"
-          : "opacity-0 -translate-y-2 pointer-events-none"
-      }`}
-      style={{ top: `${megaMenuTop}px` }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="bg-black border-t-[3px] border-red">
-        <div
-          className="mx-auto flex items-stretch gap-0"
-          style={{
-            maxWidth: "1232px",
-            paddingLeft: "clamp(1.5rem, 7.2vw, 104px)",
-            paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
-          }}
-        >
-          {programsSubmenu.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`group flex-1 py-8 px-6 transition-colors relative ${
-                i < programsSubmenu.length - 1 ? "border-r border-white/10" : ""
-              } hover:bg-white/5`}
-            >
-              <span className="inline-block bg-red text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 mb-3" style={{ transform: "skewX(-8deg)" }}>
-                <span style={{ transform: "skewX(8deg)", display: "inline-block" }}>{item.tag}</span>
-              </span>
-              <span className="block font-display uppercase text-white text-4xl leading-none mb-2 group-hover:text-red transition-colors">
-                {item.label}
-              </span>
-              <span className="block font-body text-white/70 text-sm">
-                {item.description}
-              </span>
-            </Link>
-          ))}
-          <Link
-            href="/programs"
-            className="flex items-center justify-center px-8 py-8 text-white/40 hover:text-red transition-colors group"
-          >
-            <span className="font-body text-sm font-bold uppercase tracking-widest whitespace-nowrap">
-              All<br />Programs
-            </span>
-            <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </div>
-    </>
   );
 }

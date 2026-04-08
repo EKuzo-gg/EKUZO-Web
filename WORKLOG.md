@@ -6,6 +6,15 @@
 
 ---
 
+## Aaron — April 7, 2026 (mobile nav button fix)
+
+**What changed:**
+
+**Mobile nav CTA buttons — swapped variants to match desktop:**
+- `components/layout/Nav.tsx` — "Enroll my gamer" changed from `red-outlined` → `red-filled`, "Talk to Humans" changed from `red-filled` → `red-outlined`. Mobile drawer now matches the desktop CTA hierarchy where enroll is the primary button.
+
+---
+
 ## Jamie — April 4, 2026 (newsletter system, CTA overhaul, FAQ audit, Teams commerce, contact form email, launch prep)
 
 **What changed:**

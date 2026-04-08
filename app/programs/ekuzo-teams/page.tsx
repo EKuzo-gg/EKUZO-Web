@@ -185,6 +185,7 @@ export default function EkuzoTeamsPage() {
               src="/videos/ekuzo-teams-hero.mp4"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ borderRadius: "2px" }}
+              delay={3000}
             />
           </div>
         </div>

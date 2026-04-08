@@ -163,6 +163,7 @@ export default function Ekuzo100Page() {
               src="/videos/ekuzo100-hero.mp4"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ borderRadius: "2px" }}
+              delay={3000}
             />
           </div>
         </div>

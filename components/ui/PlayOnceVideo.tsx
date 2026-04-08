@@ -6,6 +6,8 @@ type PlayOnceVideoProps = {
   src: string;
   className?: string;
   style?: React.CSSProperties;
+  /** Delay in milliseconds before autoplay starts (default: 0) */
+  delay?: number;
 };
 
 /**
@@ -13,7 +15,7 @@ type PlayOnceVideoProps = {
  * then stops. Shows native controls so the user can replay.
  * Starts muted only if autoplay with sound is blocked by the browser.
  */
-export default function PlayOnceVideo({ src, className, style }: PlayOnceVideoProps) {
+export default function PlayOnceVideo({ src, className, style, delay = 0 }: PlayOnceVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -26,18 +28,25 @@ export default function PlayOnceVideo({ src, className, style }: PlayOnceVideoPr
 
     video.addEventListener("ended", handleEnded);
 
-    // Try autoplay with sound first
-    video.muted = false;
-    video.play().catch(() => {
-      // Browser blocked unmuted autoplay — fall back to muted
-      video.muted = true;
+    const startPlayback = () => {
+      // Try autoplay with sound first
+      video.muted = false;
       video.play().catch(() => {
-        // Autoplay fully blocked — user can use controls
+        // Browser blocked unmuted autoplay — fall back to muted
+        video.muted = true;
+        video.play().catch(() => {
+          // Autoplay fully blocked — user can use controls
+        });
       });
-    });
+    };
 
-    return () => video.removeEventListener("ended", handleEnded);
-  }, []);
+    const timer = delay > 0 ? setTimeout(startPlayback, delay) : (startPlayback(), undefined);
+
+    return () => {
+      video.removeEventListener("ended", handleEnded);
+      if (timer) clearTimeout(timer);
+    };
+  }, [delay]);
 
   return (
     <video

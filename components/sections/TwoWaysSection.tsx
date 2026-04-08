@@ -1,14 +1,51 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 
 export default function TwoWaysSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const [watermarkOpacity, setWatermarkOpacity] = useState(0.08);
+
+  useEffect(() => {
+    const cards = cardsRef.current;
+    if (!cards) return;
+
+    let raf: number | null = null;
+
+    const onScroll = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const rect = cards.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Progress based on when the cards grid enters the viewport
+        // 0 = cards just entering bottom of viewport, 1 = cards fully in view
+        const progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / viewportHeight));
+
+        // Start white (0.08 = barely visible), darken as cards scroll up over the text
+        const opacity = 0.08 + progress * 0.32;
+        setWatermarkOpacity(opacity);
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section className="bg-black relative overflow-visible">
+    <section ref={sectionRef} className="bg-black relative overflow-visible">
       <TornPaperDivider color="black" variant="top" style={2} />
 
-      {/* Watermark */}
+      {/* Watermark — starts at 40% opacity, gets darker as cards scroll over */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
         style={{ top: "-4%" }}
@@ -16,7 +53,7 @@ export default function TwoWaysSection() {
       >
         <span
           className="font-display uppercase text-white text-center leading-none"
-          style={{ fontSize: "clamp(4rem, 14vw, 16rem)", opacity: 0.08 }}
+          style={{ fontSize: "clamp(4rem, 14vw, 16rem)", opacity: watermarkOpacity }}
         >
           LEARN + PLAY
         </span>
@@ -49,7 +86,7 @@ export default function TwoWaysSection() {
         </div>
 
         {/* Two cards — white bg with angled clip-path corners, matching homepage SCHOOL/HOME pattern */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div ref={cardsRef} className="grid lg:grid-cols-2 gap-8">
           <div
             className="bg-white p-8 lg:p-12 flex flex-col justify-between min-h-[280px] lg:min-h-[480px]"
             style={{ clipPath: "polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px)" }}

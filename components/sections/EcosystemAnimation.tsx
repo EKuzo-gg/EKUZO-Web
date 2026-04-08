@@ -276,7 +276,7 @@ function EcosystemScroll({
   }, [scrollInput, riveInstance]);
 
   return (
-    <div ref={wrapperRef} className="w-full h-screen relative">
+    <div ref={wrapperRef} className="w-full h-full relative">
       <RiveComponent style={{ width: "100%", height: "100%" }} />
       {DEBUG && (
         <div
@@ -319,13 +319,20 @@ function EcosystemScroll({
 
 export default function EcosystemAnimation() {
   return (
-    <div className="w-full h-full pb-[48px]">
-      <div className="hidden md:block w-full h-full">
-        <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
+    <div className="w-full h-full flex flex-col">
+      {/* Top spacer */}
+      <div style={{ flexShrink: 0, height: 40 }} />
+      {/* Animation canvas — fills remaining space */}
+      <div className="flex-1 min-h-0">
+        <div className="hidden md:block w-full h-full">
+          <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
+        </div>
+        <div className="md:hidden w-full h-full">
+          <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
+        </div>
       </div>
-      <div className="md:hidden w-full h-full">
-        <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
-      </div>
+      {/* Bottom spacer — accounts for sticky CTA bar */}
+      <div style={{ flexShrink: 0, height: 120 }} />
     </div>
   );
 }

@@ -334,6 +334,33 @@ There are two types of torn paper dividers. Know which one you need before build
 
 ---
 
+## Troubleshooting
+
+### "Cannot find module" / "ENOENT build-manifest.json"
+Turbopack's build cache gets corrupted when lots of files change in one session. Fix it with these 3 steps:
+
+```bash
+# Step 1: Stop the dev server
+# Press Ctrl+C in the terminal where it's running
+
+# Step 2: Delete the stale build cache
+rm -rf .next
+
+# Step 3: Restart the dev server (rebuilds everything fresh)
+npx next dev -p 3001
+```
+
+**When does this happen?** Usually after rapid edits to shared components (Nav, Footer, layout files) that are imported on every page. The compiled chunks get out of sync.
+
+**One-liner (stop server first with Ctrl+C, then paste this):**
+```bash
+cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
+```
+
+**How to avoid it:** Restart the dev server every so often during heavy editing sessions. If you see any weird "module not found" errors, it's almost always this.
+
+---
+
 ## Build Discipline (from Cursor feedback)
 
 **One section at a time.** Before coding any section:
