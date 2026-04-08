@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
+import Eyebrow from "@/components/ui/Eyebrow";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
@@ -308,41 +309,37 @@ export default function CampsRegisterPage() {
       <section className="relative bg-[#f5f5f7]" style={{ overflow: "clip" }}>
         <div
           className="max-w-[1280px] mx-auto relative"
-          style={{ paddingTop: "128px", paddingBottom: "140px", paddingLeft: "24px", paddingRight: "24px" }}
+          style={{ paddingTop: "40px", paddingBottom: "80px", paddingLeft: "24px", paddingRight: "24px" }}
         >
           {/* Left content */}
           <div className="relative z-10 flex flex-col items-start" style={{ gap: "24px", maxWidth: "544px" }}>
-            {/* Season badge */}
-            <div
-              className="inline-flex items-center rounded-full"
-              style={{ backgroundColor: "#e0f2fe", padding: "8px 16px", gap: "8px" }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#0284c7" strokeWidth="1.5" />
-                <path d="M5 1.5V4M11 1.5V4" stroke="#0284c7" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M2 6.5H14" stroke="#0284c7" strokeWidth="1.5" />
-              </svg>
-              <span
-                className="font-body font-bold"
-                style={{ color: "#0284c7", fontSize: "12px", lineHeight: "16px", letterSpacing: "0.3px" }}
-              >
-                Summer 2026 Season
-              </span>
-            </div>
+            {/* Season eyebrow + heading grouped tighter */}
+            <div className="flex flex-col gap-3">
+              <Eyebrow>
+                <span className="inline-flex items-center gap-2">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M5 1.5V4M11 1.5V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M2 6.5H14" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                  Summer 2026 Season
+                </span>
+              </Eyebrow>
 
-            {/* Heading */}
-            <h1
-              className="font-display uppercase"
-              style={{ fontSize: "clamp(3rem, 6.25vw, 120px)", lineHeight: "96px" }}
-            >
+              {/* Heading */}
+              <h1
+                className="font-display uppercase"
+                style={{ fontSize: "clamp(4rem, 6.25vw, 120px)", lineHeight: "0.85" }}
+              >
               <span style={{ color: "#0a0a0a" }}>CAMP </span>
               <span style={{ color: "#ed2024" }}>REGISTRATION</span>
             </h1>
+            </div>
 
             {/* Red subtitle */}
             <p
               className="font-body font-bold"
-              style={{ color: "#ed2024", fontSize: "clamp(1rem, 1.4vw, 20px)", lineHeight: "28px" }}
+              style={{ color: "#000000", fontSize: "clamp(1rem, 1.4vw, 20px)", lineHeight: "28px" }}
             >
               Join us for an incredible week of gaming, learning, and competition.
             </p>
@@ -360,7 +357,7 @@ export default function CampsRegisterPage() {
               <p style={{ lineHeight: "32px" }}>&nbsp;</p>
               <p style={{ color: "#374151" }}>
                 If you&apos;re looking for multiple weeks please enroll in{" "}
-                <a href="/programs/ekuzo100" className="font-bold underline" style={{ color: "#374151" }}>
+                <a href="/programs/ekuzo100" className="font-bold underline" style={{ color: "#ed2024" }}>
                   EKUZO100
                 </a>
                 . Our month long program perfect for those looking to level up.
@@ -369,10 +366,11 @@ export default function CampsRegisterPage() {
           </div>
         </div>
 
-        {/* Right — Hero collage, aligned to bottom of hero frame */}
+        {/* Hero collage — desktop: absolute right half; mobile: below content */}
+        {/* Desktop */}
         <div
           className="hidden lg:block absolute pointer-events-none"
-          style={{ bottom: "0", left: "51.46%", width: "911px", maxWidth: "48%", height: "556px", overflow: "hidden" }}
+          style={{ bottom: "0", left: "50%", width: "1100px", maxWidth: "55%", height: "100%", overflow: "hidden" }}
         >
           <Image
             src="/images/camp-hero-collage.png"
@@ -380,6 +378,17 @@ export default function CampsRegisterPage() {
             width={1822}
             height={1112}
             className="w-full h-full object-contain object-bottom"
+            priority
+          />
+        </div>
+        {/* Mobile */}
+        <div className="lg:hidden relative w-full -mt-24 mb-0 overflow-hidden">
+          <Image
+            src="/images/camp-hero-collage.png"
+            alt="EKUZO Camp hero collage with game characters and young gamer"
+            width={1822}
+            height={1112}
+            className="w-[115%] max-w-none h-auto object-contain -ml-[5%]"
             priority
           />
         </div>
@@ -437,10 +446,10 @@ export default function CampsRegisterPage() {
               {/* ── Week Selection ──────────────────────────────────── */}
               <div className="mb-10">
                 <h2
-                  className="font-body font-bold text-red"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 24px)", lineHeight: "32px" }}
+                  className="font-display uppercase text-black leading-[0.85]"
+                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
                 >
-                  Choose your camp week:
+                  Choose your camp week
                 </h2>
                 <p
                   className="font-body text-[#4b5563] mt-6"
@@ -471,7 +480,7 @@ export default function CampsRegisterPage() {
                             </span>
                             <span
                               className="font-display text-[#0a0a0a] uppercase"
-                              style={{ fontSize: "clamp(1.5rem, 2.5vw, 36px)", lineHeight: "40px" }}
+                              style={{ fontSize: "clamp(2rem, 2.5vw, 36px)", lineHeight: "1.1" }}
                             >
                               {week.dates}
                             </span>
@@ -509,11 +518,14 @@ export default function CampsRegisterPage() {
 
               </div>
 
+              {/* ── Divider ──────────────────────────────────────────── */}
+              <hr className="border-t border-black/10 my-12" />
+
               {/* ── Gamer Info ──────────────────────────────────────── */}
               <div className="mb-8">
                 <h3
-                  className="font-body font-bold text-[#0a0a0a] mb-6"
-                  style={{ fontSize: "20px", lineHeight: "28px" }}
+                  className="font-display uppercase text-black leading-[0.85] mb-6"
+                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
                 >
                   Tell us about your gamer{gamers.length > 1 ? ` (${gi + 1})` : ""}
                 </h3>
@@ -617,22 +629,15 @@ export default function CampsRegisterPage() {
             + Add Another Gamer
           </button>
 
-          {/* ── Form Heading ───────────────────────────────────────── */}
-          <h2
-            className="font-body font-bold text-red mb-10"
-            style={{ fontSize: "clamp(1.25rem, 2vw, 24px)", lineHeight: "32px" }}
-          >
-            Please fill out the information below:
-          </h2>
-
           {/* ── Parent / Guardian Info ─────────────────────────────── */}
+          <hr className="border-t border-black/10 my-12" />
           <div className="mb-12">
-            <h3
-              className="font-body font-bold text-[#0a0a0a] mb-6"
-              style={{ fontSize: "20px", lineHeight: "28px" }}
+            <h2
+              className="font-display uppercase text-black leading-[0.85] mb-10"
+              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
             >
               Parent Information
-            </h3>
+            </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
               <InputField
@@ -696,7 +701,7 @@ export default function CampsRegisterPage() {
             <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
               <h3
                 className="font-display uppercase text-[#0a0a0a]"
-                style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
+                style={{ fontSize: "clamp(2rem, 3vw, 28px)", lineHeight: "1.1" }}
               >
                 Registration Summary
               </h3>

@@ -6,6 +6,32 @@
 
 ---
 
+## Aaron — April 8, 2026 (camps registration page polish + mobile fixes)
+
+**What changed:**
+
+**Camps registration hero (`app/programs/ekuzo-camps/register/page.tsx`):**
+- Season badge → EKUZO Eyebrow component (red skewed pill, white text) with calendar icon
+- "CAMP REGISTRATION" headline bigger on mobile (`clamp(4rem, 6.25vw, 120px)`), tighter line-height (0.85)
+- Eyebrow-to-headline gap tightened (wrapped in shared div with `gap-3`)
+- Hero padding reduced: top 40px, bottom 80px (was 128/140)
+- "Join us for an incredible week…" subtitle changed from red to black
+- EKUZO100 link changed from grey to red
+- Hero collage: desktop — taller (100% height, 55% width); mobile — now visible below content, 115% width edge-to-edge
+- "Choose your camp week" and "Tell us about your gamer" headers upgraded to Display H2 style (`font-display uppercase text-black`, `clamp(3rem, 6vw, 5.5rem)`)
+- Rule dividers added above "Tell us about your gamer" and "Parent Information" sections
+- "Please fill out the information below" header replaced with "Parent Information" in Display H2, duplicate h3 removed
+- Camp week dates larger on mobile (`clamp(2rem, 2.5vw, 36px)`)
+- Registration Summary header bigger on mobile (`clamp(2rem, 3vw, 28px)`)
+
+**Footer (`components/layout/Footer.tsx`):**
+- "Find us online" now stacks above social icons on mobile (`flex-col` below `sm`)
+
+**Footer newsletter (`components/ui/FooterNewsletter.tsx`):**
+- Email input + Sign up button span full width on mobile at 70/30 ratio
+
+---
+
 ## Aaron — April 7, 2026 (mobile nav button fix)
 
 **What changed:**

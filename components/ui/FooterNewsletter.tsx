@@ -67,12 +67,12 @@ export default function FooterNewsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-10 px-3 rounded-md border border-black/15 bg-white text-black text-sm font-body placeholder:text-black/30 outline-none transition-colors focus:border-red w-full sm:w-[240px]"
+            className="h-10 px-3 rounded-md border border-black/15 bg-white text-black text-sm font-body placeholder:text-black/30 outline-none transition-colors focus:border-red flex-[7] sm:flex-none sm:w-[240px] min-w-0"
           />
           <button
             type="submit"
             disabled={status === "loading"}
-            className="h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-none cursor-pointer transition-all hover:brightness-110 active:scale-[0.98] active:brightness-90 disabled:opacity-60 whitespace-nowrap"
+            className="h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-none cursor-pointer transition-all hover:brightness-110 active:scale-[0.98] active:brightness-90 disabled:opacity-60 whitespace-nowrap flex-[3] sm:flex-none"
           >
             {status === "loading" ? "..." : "Sign up"}
           </button>

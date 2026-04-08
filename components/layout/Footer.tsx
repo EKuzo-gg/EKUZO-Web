@@ -113,7 +113,7 @@ export default function Footer({ hideTornPaper = false }: { hideTornPaper?: bool
 
       {/* Top row — social + CTA */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-[100px]">
-        <div className="flex items-center gap-8">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
           <span className="font-body text-base text-black">Find us online</span>
           <ul className="flex items-center gap-5">
             {socialLinks.map(({ href, label, Icon }) => (
