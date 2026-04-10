@@ -81,6 +81,18 @@ export async function POST(req: NextRequest) {
     if (meta.additional_info_2) additionalInfo += meta.additional_info_2;
     if (meta.additional_info_3) additionalInfo += meta.additional_info_3;
 
+    // ── Squad status (camps only) — transform code → label ──────
+    // Raw values from the form: "building" | "looking" | ""
+    // Stored in Sheets + Beehiiv as human-readable labels so ops can
+    // read them without a legend.
+    const squadStatusCode = meta.squad_status || "";
+    const squadStatusLabel =
+      squadStatusCode === "building"
+        ? "Building a squad"
+        : squadStatusCode === "looking"
+          ? "Looking for a squad"
+          : "";
+
     // ── Enroll in Beehiiv ─────────────────────────────────────────
     try {
       // Build gamer summaries and multi-gamer fields
@@ -153,6 +165,10 @@ export async function POST(req: NextRequest) {
           { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
           { name: "camp_slot", value: earliestSlot }
         );
+        // Note: squad_status is NOT pushed to Beehiiv — team is migrating
+        // email marketing to Klaviyo (as of 4/10/2026). The field is still
+        // captured in Stripe metadata and Google Sheets, so no data is lost;
+        // it will be wired to Klaviyo when the migration happens.
       } else if (product === "teams") {
         customFields.push(
           { name: "team_semester", value: meta.semester_label || "Fall 2026" },
@@ -263,6 +279,9 @@ export async function POST(req: NextRequest) {
         stripe_pi_id: paymentIntent.id,
         registration_date: registrationDate,
         additional_info: additionalInfo,
+        // Camps-only; "" for other products. Add a `squad_status` column
+        // to the ekuzo-purchases sheet via Apps Script for this to land.
+        squad_status: product === "camps" ? squadStatusLabel : "",
       }));
 
       if (rows.length > 0) {

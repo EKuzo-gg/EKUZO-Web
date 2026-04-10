@@ -8,6 +8,7 @@ import CircleIcon from "@/components/ui/CircleIcon";
 import type { IconName } from "@/components/ui/Icon";
 import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
+import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
 
 export const metadata = {
@@ -812,15 +813,11 @@ export default function EkuzoCampsPage() {
                 </div>
               </div>
 
-              {/* Image — right */}
-              <div className="relative overflow-hidden sticky top-8" style={{ aspectRatio: "3/4", minHeight: "600px", clipPath: "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)" }}>
-                <Image
-                  src="/images/coaching-learner-photo.jpg"
-                  alt="League of Legends gameplay"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              {/* Video — right */}
+              <WhatWePlayVideo
+                src="/videos/league-of-legends-camp.mp4"
+                label="League of Legends gameplay at EKUZO camp"
+              />
             </div>
           </div>
         </section>

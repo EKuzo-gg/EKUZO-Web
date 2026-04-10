@@ -6,6 +6,163 @@
 
 ---
 
+## Aaron — April 10, 2026 (What Do We Play video + web optimization)
+
+**What changed:**
+
+Replaced the static "What Do We Play" image on the camps page with a video player for `league-of-legends-camp`. Video does not autoplay, shows a large red play button overlay, and starts with sound ON when the user hits play. Native HTML5 controls appear once playing.
+
+**Video conversion:**
+- Source: `public/videos/league-of-legends-camp.mov` — HEVC, 2160×3840, 21.7s, 51 MB (too big for web)
+- Output: `public/videos/league-of-legends-camp.mp4` — H.264, 720×1280, AAC 96k, `+faststart`, 5.8 MB
+- ffmpeg command used: `ffmpeg -i league-of-legends-camp.mov -vf "scale=720:-2" -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -c:a aac -b:a 96k -movflags +faststart league-of-legends-camp.mp4`
+- 720×1280 is sized for the sticky 3/4-aspect portrait container at retina density; keeps bandwidth low while staying crisp.
+- **Action for Aaron:** the original `.mov` (51 MB) is still in the folder because I couldn't delete it from this session. Delete it before committing: `rm public/videos/league-of-legends-camp.mov`
+
+**New file — `components/ui/WhatWePlayVideo.tsx`:**
+- Client component with `useRef` + `useState`
+- Renders the video element with `controls={playing}` so the native controls only show once the user has hit play
+- Red `bg-red` circular play button overlay (clamp-sized 72–112px) with a dark `bg-black/20` backdrop over the video while paused
+- Hover/active states: brightness + scale transform matching our existing button style
+- On click: sets `v.muted = false`, `v.volume = 1`, then `v.play()`. Falls back to muted playback only if the browser blocks unmuted autoplay (shouldn't, since the play is user-initiated).
+- `preload="metadata"` so the browser doesn't pull the whole file until the user presses play
+- `playsInline` so mobile Safari doesn't kick into full-screen takeover
+- Same clipped-corner 3/4 aspect container as the photo it replaced, so the layout is identical.
+
+**`app/programs/ekuzo-camps/page.tsx`:**
+- Imported `WhatWePlayVideo` from `@/components/ui/WhatWePlayVideo`
+- Swapped the `<Image>`-wrapper block in the "What Do We Play" sub-section for `<WhatWePlayVideo src="/videos/league-of-legends-camp.mp4" label="League of Legends gameplay at EKUZO camp" />`
+
+TypeScript check passes clean.
+
+---
+
+## Aaron — April 10, 2026 (FooterBanner top torn-paper — red-top, color-agnostic)
+
+**What changed:**
+
+Made the red `FooterBanner` render its own top torn-paper divider so every page gets a consistent jagged red transition automatically — and switched the asset to a **red-top** paper so no per-page color prop is needed.
+
+**Why red-top:** My first attempt used `torn-paper-{white|black|grey}-bottom-2@2x.png` half-offset into the red section (`translateY(-50%)`). That exposed the FLAT top edge of the `*-bottom-*` assets in the preceding section, creating a visible horizontal line just above the red. The fix is to use `torn-paper-red-top-2@2x.png` instead: the paper is red, has a torn edge at the TOP, and a solid red edge at the BOTTOM. Positioned flush with `top: 0` and `translateY(-100%)`, the solid red bottom meets the top of the red section seamlessly (red-on-red), and the torn red top extends up into whatever section is above, creating a jagged red silhouette. Works the same over white, black, or grey — no color prop required.
+
+**`components/sections/FooterBanner.tsx`:**
+- Removed the `topPaperColor` prop entirely.
+- Top paper now uses `/images/new torn paper/torn-paper-red-top-2@2x.png` at `top: 0` with `transform: translateY(-100%)`.
+- Section still has `overflow-visible`.
+
+**Pages reverted (removed the `topPaperColor` prop I added earlier in this session):**
+- `app/programs/ekuzo100/page.tsx`
+- `app/programs/ekuzo-teams/page.tsx`
+- `app/schools/page.tsx`
+- `app/programs/page.tsx`
+- `app/programs/ekuzoteams/page.tsx`
+- `app/parents/page.tsx`
+- `app/methodology/page.tsx`
+- `app/ekuzoteams-semester-based/page.tsx`
+- `app/programs/e100/page.tsx`
+- `app/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng/page.tsx`
+- `app/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life/page.tsx`
+- `app/ekuzo100/page.tsx`
+
+All 19 pages that render `<FooterBanner>` now use the default, and the red-top paper handles the transition uniformly.
+
+TypeScript check passes clean.
+
+**Heads up for Jamie:** If you add a new page that renders `<FooterBanner />`, you don't need to configure anything for the top divider. The red-top paper renders automatically and works over any preceding section background.
+
+---
+
+## Aaron — April 10, 2026 (torn paper fixes: Growth + FooterBanner transition)
+
+**What changed:**
+
+Two follow-up fixes to the torn paper migration from earlier today:
+
+1. **Removed the bottom torn paper from the Growth Through Play section** in `app/page.tsx`. The `torn-paper-grey-bottom-2@2x.png` element at the bottom of the grey section has been deleted entirely — the swap was breaking the layout. The grey section now ends cleanly without a divider; the Ecosystem section below still has its own `torn-paper-white-top-1@2x.png` at the top, which handles the grey → white transition on its own.
+
+2. **Reworked the Testimonials → FooterBanner transition.** The top torn paper inside `components/sections/FooterBanner.tsx` (the `torn-paper-red-bottom-2@2x.png` div that was producing visual artifacts) has been removed. In its place, a new `torn-paper-white-bottom-2@2x.png` has been added at the bottom of the testimonials section in `app/page.tsx`, positioned with `translateY(calc(100% - 2px))` so it overlaps down into the red FooterBanner section. The testimonials `<section>` is now `relative overflow-visible` to let the paper hang below its box.
+
+Because the top divider was removed from `FooterBanner.tsx` (a shared component), every page that uses `<FooterBanner>` now renders without a top torn-paper edge. Any page that needs that transition will need to add its own divider on the preceding section, like the home page now does. Pages to audit next session: `/methodology`, `/programs`, `/parents`, `/schools`, `/games`, `/faq`, `/programs/ekuzo100`, `/programs/ekuzo-teams`, `/programs/ekuzo-camps`.
+
+TypeScript check passes clean.
+
+---
+
+## Aaron — April 10, 2026 (home page torn paper migration)
+
+**What changed:**
+
+All torn paper textures on the home page have been migrated from the old SVG/PNG files in `public/images/` to the new `@2x` PNGs in `public/images/new torn paper/`. Each swap uses the exact naming convention documented in the Learning Log (`torn-paper-{color}-{variant}-{style}@2x.png`).
+
+**`app/page.tsx`:**
+- Hero → Growth Through Play (line 96): `/images/torn-paper-white-1.png` → `/images/new%20torn%20paper/torn-paper-white-1@2x.png` (whole divider, background-image div)
+- Growth → Ecosystem bottom (line 123): `/images/paper-grey-bottom-2.svg` → `/images/new%20torn%20paper/torn-paper-grey-bottom-2@2x.png` (direct 1:1 swap)
+- Growth → Ecosystem top (line 187): `/images/paper-white-top-1.svg` → `/images/new%20torn%20paper/torn-paper-white-top-1@2x.png` (direct 1:1 swap)
+- Ecosystem → How It Works (line 201): `/images/paper-black-top-2.svg` → `/images/new%20torn%20paper/torn-paper-black-top-1@2x.png` (changed variant 2 → 1 per request)
+
+**`components/sections/HomeHowItWorks.tsx`:**
+- How It Works → Testimonials (line 147): `/images/paper-black-bottom-2.svg` → `/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png` (changed variant 2 → 1 per request)
+
+**`components/sections/FooterBanner.tsx`:**
+- Testimonials → Enroll section top-edge (line 35): `/images/torn-paper-red-1.png` → `/images/new%20torn%20paper/torn-paper-red-bottom-2@2x.png`
+- **Note:** `FooterBanner` is a shared component rendered on every page. This swap affects every page's Enroll banner visually, not just the home page. If the intent was home-only, we'd need to parameterize the paper asset via props — flag if so.
+
+TypeScript check passes clean.
+
+---
+
+## Aaron — April 10, 2026 (camps register hero padding fix + Squad Status vibe check)
+
+**What changed:**
+
+**Camps registration hero (`app/programs/ekuzo-camps/register/page.tsx`):**
+- Hero content container `paddingBottom` made responsive — `pb-28 lg:pb-60` (112px mobile / 240px desktop). Previously was flat `240px`, which worked fine on desktop (where the collage is absolutely positioned) but created a huge gap on mobile between the text and the flow-layout collage. The `-mt-24` (-96px) on the mobile collage now balances against the 112px mobile padding to leave a ~16px gap below the text. Desktop stays at `pb-60` (240px) to give the white torn paper overlay room to sit below the body copy without clipping it.
+- **History:** original value was `80px` (April 8 — too tight, torn paper overlapped the body copy), then `240px` flat (April 10 — fixed desktop, broke mobile spacing), now `pb-28 lg:pb-60` (fixes both).
+
+**Squad Status — new required question (`app/programs/ekuzo-camps/register/page.tsx`):**
+- New family-level "vibe check" question inserted between the gamer loop (after "+ Add Another Gamer" button) and the Parent Information section. Two torn-paper cards side-by-side ("Building a squad" / "Looking for a squad"), one-tap selection, red ring + shadow when selected.
+- New `SquadStatus` type: `"building" | "looking" | null`. Single family-level state (not per-gamer) — one answer per registration.
+- New `SquadCard` sub-component at the bottom of the file, styled consistently with the existing form aesthetic (torn-paper clipPath, `#f5f5f7` bg, Display heading, Inter subtitle).
+- **Selected state:** SquadCards use a smooth rounded rectangle — torn-paper `clipPath` was tried first but produced jagged edges on both the card and the outline. Without clipPath a normal `ring-2 ring-red` + `shadow-lg shadow-red/10` works cleanly. Unselected shows `ring-1 ring-black/10` for a subtle default border. A red circle check badge appears in the top-right corner on selection; unselected shows a neutral empty circle so the layout doesn't jump. Card background and text colors stay neutral (avoided the red tint — read as an error state). `aria-pressed` set for accessibility.
+- Added to `validate()` as required — users cannot proceed to payment without picking one.
+- `squadStatus` is wired end-to-end through the camps data flow:
+  - **`app/api/camps/register/route.ts`** — accepts `squadStatus` from the payload, coerces to a safe `"building" | "looking" | ""` value, stores in Stripe metadata as `squad_status`.
+  - **`app/api/webhooks/stripe/route.ts`** — reads `meta.squad_status`, transforms the code into a human-readable label (`"Building a squad"` / `"Looking for a squad"`) for ops readability, writes to the Google Sheets row as `squad_status` (camps only; `""` for other products).
+- **Beehiiv intentionally skipped** — team is migrating email marketing to Klaviyo, so no Beehiiv custom field was added. The data is still captured in Stripe metadata + Google Sheets, so nothing is lost; Klaviyo wiring will happen during the migration.
+- TypeScript check passes clean (`tsc --noEmit`).
+
+### 🔧 ACTION REQUIRED — Jamie (backend / ops)
+
+The camps webhook is now sending a `squad_status` field on every camps row, but **it won't land in the sheet until you do the two things below.** Code is fully wired — this is the only missing piece.
+
+**1. Add the column to the Google Sheet**
+- Open the `ekuzo-purchases` Google Sheet.
+- Add a new column header: `squad_status` (exact spelling, lowercase with underscore — the webhook sends this as the key name).
+- Suggested placement: right after `preferred_games` so it lives next to the other gamer-context fields, but anywhere is fine as long as the Apps Script is updated to match.
+
+**2. Update the Apps Script to map the incoming key**
+- Open the Apps Script bound to the sheet (the web app at `GOOGLE_SHEETS_WEBHOOK_URL`).
+- Make sure the row-writing logic reads `row.squad_status` from the incoming POST body and writes it to the new column.
+- If the Apps Script uses a dynamic header-lookup pattern, just adding the column header may be enough. If it has a hardcoded column list, add `squad_status` to that list.
+
+**What the webhook sends**
+- Field name: `squad_status`
+- Values: `"Building a squad"`, `"Looking for a squad"`, or `""` (empty string for non-camps products — EKUZO100 and Teams)
+- Already human-readable — no transform needed in Apps Script.
+
+**Where to find the code** (in case you want to trace it)
+- Front-end form capture: `app/programs/ekuzo-camps/register/page.tsx` (SquadCard component + state)
+- Register API: `app/api/camps/register/route.ts` (stores as `squad_status` in Stripe metadata)
+- Webhook: `app/api/webhooks/stripe/route.ts` (reads metadata, transforms code → label, writes to row)
+
+**Testing the full flow**
+Once the column + Apps Script are updated, run a test camps registration in Stripe test mode with Squad Status selected and confirm the value lands in the sheet. If it doesn't show up, check the webhook logs — the field is sent on every camps row regardless of what the sheet can accept.
+
+**Email marketing (Klaviyo) — separate follow-up**
+I intentionally did NOT wire `squad_status` to Beehiiv since you mentioned the Klaviyo migration. When you set up Klaviyo, add a `squad_status` custom property / profile attribute and wire it into the webhook's Klaviyo enrollment call at the same place the Beehiiv call currently lives. Valid values are the same two strings shown above.
+
+---
+
 ## Aaron — April 8, 2026 (camps registration page polish + mobile fixes)
 
 **What changed:**
