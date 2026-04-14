@@ -6,6 +6,47 @@
 
 ---
 
+## Jamie — April 13, 2026 (DNS + GA4/Meta analytics + Klaviyo webhook + env isolation)
+
+**What changed:**
+
+Two commits tonight on `dev`: `666d720` (analytics + Klaviyo) and `694a0c4` (webhook env isolation). Already pushed. Aaron: nothing you need to do, but read this so you know what's live.
+
+**DNS + Google Workspace (done in Namecheap, no code):**
+- MX records, SPF (merged Google + Amazon SES), DKIM (`google._domainkey` TXT), DMARC (`rua` to `jamie@ekuzo.gg`), Google Search Console verification. All set for `ekuzo.gg`.
+
+**GA4 + Meta Pixel — site-wide tracking (new):**
+- `app/layout.tsx` — added GA4 (`G-8LM45PX53W`) and Meta Pixel (`1284038230557204`) base scripts. Use `next/script` with `afterInteractive` strategy.
+- `lib/analytics.ts` (new) — shared conversion helpers: `trackViewContent`, `trackInitiateCheckout`, `trackPurchase`, `trackLead`. Each fires BOTH GA4 and Meta Pixel in one call.
+- `components/analytics/TrackPageView.tsx` (new) — client component that fires `ViewContent` or `InitiateCheckout` on mount. Use this in server-rendered marketing/landing pages since they can't call browser APIs directly. Pattern: `<TrackPageView program="camps" />` at the top of the JSX.
+- Wired into every funnel step:
+  - `app/programs/ekuzo-camps/page.tsx`, `ekuzo100/page.tsx`, `ekuzo-teams/page.tsx` — fires `ViewContent`
+  - `app/programs/ekuzo-camps/register/page.tsx`, `ekuzo100/register/page.tsx` — fires `InitiateCheckout` when user clicks to payment step
+  - `app/programs/ekuzo-camps/success/page.tsx`, `ekuzo100/success/page.tsx` — fires `Purchase` after successful payment confirmation (guarded with `useRef` to prevent duplicate fires)
+  - `components/ui/ContactModal.tsx` — fires `Lead` after successful form submission
+
+**Klaviyo wired as second webhook destination (new):**
+- `app/api/webhooks/stripe/route.ts` — after Beehiiv enrollment, also does: (1) profile upsert via `/api/profile-import`, (2) add to Purchasers list (`V4Uf7N`) via `/api/lists/:id/relationships/profiles`, (3) track "Placed Order" event via `/api/events`. Both Beehiiv and Klaviyo now receive identical data sets (gamer names, camp week/dates, squad status, cohort info, etc.) so we can sequence pre-product emails from either platform.
+- Env var added in Netlify (secret, all deploy contexts): `KLAVIYO_PRIVATE_API_KEY`
+- Shared gamer summary variables (`allGamerNames`, `gamerSummaries`, `earliestWeek`, `earliestSlot`) hoisted out of the Beehiiv try block so both enrollment sections can use them. Beehiiv and Klaviyo blocks each have their own try/catch so one failing doesn't kill the other.
+- End-to-end tested tonight (single-gamer camps payment). Verified: Stripe payment intent ✓, Gmail receipt ✓, Google Sheets row ✓, Klaviyo profile + "Placed Order" event + Purchasers list ✓, Beehiiv subscriber + tags + welcome automation ✓.
+
+**Stripe webhook environment isolation (bug fix):**
+- Problem discovered during end-to-end test: Stripe fires `payment_intent.succeeded` to **every** registered webhook endpoint. With both a production webhook (`ekuzo.gg`) AND a dev webhook (`dev--ekuzo.netlify.app`) active, a single dev test payment was being processed by both — causing duplicate rows in Google Sheets. (Beehiiv/Klaviyo are upsert-style APIs so they dedupe; Sheets blindly appends.)
+- Fix: each registration API (`camps`, `ekuzo100`, `teams`) now stamps the payment intent metadata with `environment: process.env.CONTEXT` (Netlify auto-sets `CONTEXT` to `production` / `branch-deploy` / `deploy-preview` / `dev`). The webhook skips events whose `environment` doesn't match the current deploy context. Backward-compat: historical payment intents without the field default to `production` so nothing breaks.
+
+**Stripe infra:**
+- New webhook endpoint created in Stripe: "EKUZO Netlify Dev" → `https://dev--ekuzo.netlify.app/api/webhooks/stripe` (listens to `payment_intent.succeeded` only)
+- `STRIPE_WEBHOOK_SECRET` env var in Netlify is now per-context: production keeps the original prod secret; Branch deploys / Deploy Previews / Preview Server use the new dev secret. Prod webhook untouched.
+
+**Known issues / next session:**
+- GA4: `purchase` event firing wasn't confirmed in Realtime (only saw `user_engagement`). Could be sampling delay; need to check Events report in ~24h. Also need to mark `purchase` as a key event in GA4 Admin.
+- Meta Pixel: Events Manager shows 0 events because my browser's ad blocker kills the network request. Need to verify via Meta's Test Events tab (bypasses ad blockers).
+- Google Sheets column alignment: noticed values may be off by one column (e.g., `Week 02` appeared under the `gender` header). Apps Script may append by position instead of mapping by header name. Worth an audit next session.
+- SEO audit: still outstanding from this session's original scope.
+
+---
+
 ## Jamie — April 8, 2026 (favicons + dev branch workflow)
 
 **What changed:**
