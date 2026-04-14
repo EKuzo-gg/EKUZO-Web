@@ -1,11 +1,18 @@
 /**
  * Structured data (JSON-LD) builders for EKUZO.
  *
- * Single source of truth for all Schema.org entities. Server-only.
- * See GEO-SCHEMA-REPORT.md in the repo root for rationale.
+ * Single source of truth for all Schema.org entities. Safe to import
+ * from any server component. See GEO-SCHEMA-REPORT.md for rationale.
+ *
+ * NOTE ON TESTIMONIAL TRANSCRIPTS:
+ * Transcripts are imported from lib/testimonialTranscripts.ts as plain
+ * string literals. They used to be read at module load via fs.readFileSync
+ * from public/testimonial-videos/*.txt, but that caused Next.js file
+ * tracing to bundle the entire testimonial-videos directory (~420MB of
+ * MP4s) into the serverless function, exceeding Netlify's 50MB limit.
+ * Keep the transcripts inline — do NOT reintroduce fs access here.
  */
-import fs from "node:fs";
-import path from "node:path";
+import { testimonialTranscripts } from "./testimonialTranscripts";
 
 const SITE = "https://ekuzo.gg";
 const ORG_ID = `${SITE}/#organization`;
@@ -245,90 +252,31 @@ export function buildFAQPageSchema(items: FAQItem[]) {
 }
 
 // ─── VideoObject schemas for the 9 testimonial videos ──────────────────────
-// Captions are read from public/testimonial-videos/ at module load time and
-// used as the `transcript` field on each VideoObject.
+// Transcripts come from lib/testimonialTranscripts.ts (plain string literals,
+// no fs access — see the top-of-file note).
 type TestimonialMeta = {
   slug: string;
   name: string;
   role: string;
-  captionFile: string;
+  transcriptKey: keyof typeof testimonialTranscripts;
 };
 
 const testimonials: TestimonialMeta[] = [
-  {
-    slug: "becky-parent",
-    name: "Becky",
-    role: "Parent",
-    captionFile: "Becky (Parent) Testimonial.txt",
-  },
-  {
-    slug: "brad-parent-girl-gamer",
-    name: "Brad",
-    role: "Parent (girl gamer)",
-    captionFile: "Brad (Parent) Testimonial (Girl Gamer).txt",
-  },
-  {
-    slug: "debbie-potter-monroe",
-    name: "Debbie Potter",
-    role: "Director of Admissions, Robert F. Monroe Day School",
-    captionFile: "Debbie Potter (Monroe) Testimonial.txt",
-  },
-  {
-    slug: "laura-hogan-mirus-academy",
-    name: "Laura Hogan",
-    role: "Administrator, Mirus Academy",
-    captionFile: "Laura Hogan (Ceo Mirus Academy) Testimonial.txt",
-  },
-  {
-    slug: "rajitha-parent",
-    name: "Rajitha",
-    role: "Parent",
-    captionFile: "Rajitha (Parent) Testimonial.txt",
-  },
-  {
-    slug: "student-i-learned",
-    name: "EKUZO Student",
-    role: "Student",
-    captionFile: "Student Testimonial (I Learned).txt",
-  },
-  {
-    slug: "student-man-of-my-word",
-    name: "EKUZO Student",
-    role: "Student",
-    captionFile: "Student Testimonial (Man of My Word) .txt",
-  },
-  {
-    slug: "student-thank-you-ekuzo",
-    name: "EKUZO Student",
-    role: "Student",
-    captionFile: "Student Testimonial (Thank You Ekuzo).txt",
-  },
-  {
-    slug: "student-you-should-join",
-    name: "EKUZO Student",
-    role: "Student",
-    captionFile: "Student Testimonial (You Should Join).txt",
-  },
+  { slug: "becky-parent", name: "Becky", role: "Parent", transcriptKey: "beckyParent" },
+  { slug: "brad-parent-girl-gamer", name: "Brad", role: "Parent (girl gamer)", transcriptKey: "bradParentGirlGamer" },
+  { slug: "debbie-potter-monroe", name: "Debbie Potter", role: "Director of Admissions, Robert F. Monroe Day School", transcriptKey: "debbiePotterMonroe" },
+  { slug: "laura-hogan-mirus-academy", name: "Laura Hogan", role: "Administrator, Mirus Academy", transcriptKey: "lauraHoganMirusAcademy" },
+  { slug: "rajitha-parent", name: "Rajitha", role: "Parent", transcriptKey: "rajithaParent" },
+  { slug: "student-i-learned", name: "EKUZO Student", role: "Student", transcriptKey: "studentILearned" },
+  { slug: "student-man-of-my-word", name: "EKUZO Student", role: "Student", transcriptKey: "studentManOfMyWord" },
+  { slug: "student-thank-you-ekuzo", name: "EKUZO Student", role: "Student", transcriptKey: "studentThankYouEkuzo" },
+  { slug: "student-you-should-join", name: "EKUZO Student", role: "Student", transcriptKey: "studentYouShouldJoin" },
 ];
-
-function readCaption(filename: string): string {
-  try {
-    const full = path.join(
-      process.cwd(),
-      "public",
-      "testimonial-videos",
-      filename,
-    );
-    return fs.readFileSync(full, "utf8").trim();
-  } catch {
-    return "";
-  }
-}
 
 // NOTE: uploadDate is a placeholder (2024-01-01). Replace with real recording
 // dates once we have them — Google may flag placeholder dates as low-signal.
 const testimonialVideoNodes = testimonials.map((t) => {
-  const transcript = readCaption(t.captionFile);
+  const transcript = testimonialTranscripts[t.transcriptKey] ?? "";
   const videoUrl = `${SITE}/testimonial-videos/${t.slug}.mp4`;
   const thumbnailUrl = `${SITE}/testimonial-videos/${t.slug}-poster.jpg`;
   const description = transcript
