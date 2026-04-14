@@ -45,6 +45,7 @@ export const coachSebastienSchema = {
   jobTitle: "Head Coach",
   description:
     "Professional esports coach who has coached at tier-1 organizations including Dignitas and Evil Geniuses. Elite-level competitive player. 4+ years experience specifically in youth esports coaching. Leads EKUZO's coaching staff and trains every coach on the team.",
+  sameAs: "https://lol.fandom.com/wiki/Zz_(Sebastien_Demontigny)",
   worksFor: { "@id": ORG_ID },
   image: `${SITE}/images/coach-sebastien-ZzLegendary.png`,
 };
@@ -56,6 +57,7 @@ export const coachNuriSchema = {
   jobTitle: "Coach",
   description:
     "Diamond-ranked Support player (top ~1% of League of Legends players). Community manager at the University of Texas at Austin and Alienware Ambassador. Background in public school teaching. One of EKUZO's cadre of collegiate esports athlete coaches.",
+  sameAs: "https://www.linkedin.com/in/nuri-je/",
   worksFor: { "@id": ORG_ID },
   image: `${SITE}/images/coach-nuri-je.png`,
 };
@@ -74,7 +76,7 @@ export const organizationSchema = {
   image: `${SITE}/images/og-default.jpg`,
   description:
     "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
-  foundingDate: "2021-01-01",
+  foundingDate: "2021",
   email: "team@ekuzo.gg",
   address: {
     "@type": "PostalAddress",
@@ -241,7 +243,7 @@ export const ekuzoCampsCourseSchema = {
     price: "199",
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    priceValidUntil: "2026-06-30",
+    priceValidUntil: "2026-08-06",
     url: `${SITE}/programs/ekuzo-camps/register`,
   },
   review: [
@@ -283,10 +285,10 @@ export const ekuzo100CourseSchema = {
     url: `${SITE}/programs/ekuzo100/register`,
   },
   review: [
-    buildTestimonialReview("EKUZO Student", "studentILearned", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student", "studentManOfMyWord", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student", "studentThankYouEkuzo", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student", "studentYouShouldJoin", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student 1", "studentILearned", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student 2", "studentManOfMyWord", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student 3", "studentThankYouEkuzo", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student 4", "studentYouShouldJoin", EKUZO100_COURSE_ID),
   ],
 };
 
