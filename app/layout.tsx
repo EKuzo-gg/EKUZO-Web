@@ -7,6 +7,8 @@ import { ModalProvider } from "@/context/ModalContext";
 import ModalRenderer from "@/components/ui/ModalRenderer";
 import StickyCTA from "@/components/ui/StickyCTA";
 import NewsletterPopup from "@/components/ui/NewsletterPopup";
+import JsonLd from "@/components/JsonLd";
+import { rootGraph } from "@/lib/schema";
 
 const GA_MEASUREMENT_ID = "G-8LM45PX53W";
 const META_PIXEL_ID = "1284038230557204";
@@ -81,93 +83,13 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://ekuzo.gg/#organization",
-      name: "EKUZO",
-      url: "https://ekuzo.gg",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://ekuzo.gg/images/ekuzo-logo-red.svg",
-      },
-      description:
-        "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
-      sameAs: [
-        "https://www.instagram.com/ekuzo.gg",
-        "https://www.facebook.com/ekuzo.gg",
-        "https://www.youtube.com/@ekuzogg",
-        "https://discord.gg/ekuzo",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://ekuzo.gg/#website",
-      url: "https://ekuzo.gg",
-      name: "EKUZO",
-      description: "Every Gamer Deserves a Team",
-      publisher: { "@id": "https://ekuzo.gg/#organization" },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://ekuzo.gg/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@type": "SiteNavigationElement",
-      "@id": "https://ekuzo.gg/#navigation",
-      name: "Main Navigation",
-      hasPart: [
-        {
-          "@type": "WebPage",
-          name: "EKUZO Camps",
-          url: "https://ekuzo.gg/programs/ekuzo-camps",
-          description: "Intensive 1-week summer esports camps with pro coaching, real teams, and daily tournaments.",
-        },
-        {
-          "@type": "WebPage",
-          name: "EKUZO Teams",
-          url: "https://ekuzo.gg/programs/ekuzo-teams",
-          description: "Semester-based esports program structured like sports with consistent teammates and coaches.",
-        },
-        {
-          "@type": "WebPage",
-          name: "EKUZO100",
-          url: "https://ekuzo.gg/programs/ekuzo100",
-          description: "4-week intro program. One month, $100, your first team.",
-        },
-        {
-          "@type": "WebPage",
-          name: "For Families",
-          url: "https://ekuzo.gg/parents",
-        },
-        {
-          "@type": "WebPage",
-          name: "For Schools",
-          url: "https://ekuzo.gg/schools",
-        },
-        {
-          "@type": "WebPage",
-          name: "FAQ",
-          url: "https://ekuzo.gg/faq",
-        },
-      ],
-    },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${tungsten.variable} h-full antialiased`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={rootGraph} />
 
         {/* Google Analytics 4 */}
         <Script
