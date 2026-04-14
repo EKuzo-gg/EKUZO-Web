@@ -400,6 +400,35 @@ cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
 
 **How to avoid it:** Restart the dev server every so often during heavy editing sessions. If you see any weird "module not found" errors, it's almost always this.
 
+### Large Binaries — Git LFS + Pre-Commit Hook
+
+**Tracked via LFS:** `*.mp4`, `*.mov`, `*.webm`, `*.riv` (see `.gitattributes`). New files matching these patterns route through Git LFS automatically when staged.
+
+**Pre-commit hook:** `.husky/pre-commit` blocks any commit containing a file larger than 10MB that isn't LFS-tracked. Activated automatically by `npm install` (the `prepare: husky` script). If you see `BLOCKED: {file} is {N}MB` on commit, you have two options:
+
+1. **Route the file through LFS** (preferred for videos, animations, or any large binary asset):
+   ```bash
+   git lfs track "*.{ext}"      # e.g. git lfs track "*.glb"
+   git add .gitattributes
+   git add path/to/file.{ext}
+   git commit
+   ```
+   The hook will skip LFS-tracked files because their staged content is a tiny pointer, not the binary.
+
+2. **Serve the file externally** (preferred for anything the browser loads at runtime — host on a CDN, S3, or the Netlify static asset layer). Delete the local copy before committing.
+
+**What NOT to do:** don't `--no-verify` past the hook. The 10MB cap is there because Netlify's serverless function bundle limit is 50MB and one stray 20MB asset swept in by Next.js file tracing can break a production deploy (see the earlier Learning Log entry about `fs.readFileSync` from `public/`).
+
+**Verifying the setup after a fresh clone:**
+```bash
+git lfs install         # hooks LFS into this clone
+git lfs track           # lists the 4 tracked patterns
+cat package.json | grep prepare   # confirms husky prepare script
+ls .husky/pre-commit    # confirms hook exists and is executable
+```
+
+**Forward-looking only:** this setup does NOT migrate existing files into LFS. Historical MP4s and RIVs that were committed before this setup stay as-is. New files of tracked extensions go through LFS automatically; a migration pass can be done later if the `.git` directory grows unmanageable.
+
 ---
 
 ## Build Discipline (from Cursor feedback)

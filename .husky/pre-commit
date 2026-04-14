@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+
+# Reject commits that include files larger than 10MB.
+# Large binaries should be routed through Git LFS (see .gitattributes)
+# or served externally, not committed directly to git.
+
+MAX_SIZE_MB=10
+MAX_SIZE_BYTES=$((MAX_SIZE_MB * 1024 * 1024))
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+
+blocked=0
+for file in $staged_files; do
+  if [ -f "$file" ]; then
+    # Check if file is LFS-tracked (its staged content is a pointer, always tiny).
+    # If so, skip the size check — LFS pointers are small by definition.
+    if git check-attr filter "$file" | grep -q "filter: lfs"; then
+      continue
+    fi
+
+    size=$(wc -c < "$file" | tr -d ' ')
+    if [ "$size" -gt "$MAX_SIZE_BYTES" ]; then
+      size_mb=$((size / 1024 / 1024))
+      echo ""
+      echo "  BLOCKED: $file is ${size_mb}MB (limit is ${MAX_SIZE_MB}MB)"
+      echo ""
+      echo "  Large binaries should be tracked via Git LFS, not committed"
+      echo "  directly. To route this file type through LFS:"
+      echo ""
+      echo "    git lfs track \"*.${file##*.}\""
+      echo "    git add .gitattributes"
+      echo "    git add $file"
+      echo "    git commit"
+      echo ""
+      blocked=1
+    fi
+  fi
+done
+
+if [ "$blocked" -eq 1 ]; then
+  exit 1
+fi
+
+exit 0
