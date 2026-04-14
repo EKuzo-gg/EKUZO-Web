@@ -326,6 +326,22 @@ There are two types of torn paper dividers. Know which one you need before build
 
 **Common mistake:** Putting the torn paper div inside the `overflow-clip` section. It will look like the bottom is being cut off / overrun by the section below. Move it outside the section into the `overflow-visible` wrapper to fix.
 
+### Never `fs.readFileSync` from `public/` in server code
+
+**What broke:** April 14, 2026. `lib/schema.ts` read testimonial `.txt` captions at module load via `fs.readFileSync(path.join(process.cwd(), "public", "testimonial-videos", ...))` to populate `VideoObject` structured data. Local builds passed. Netlify **deploy** (not build) failed at the function-upload step — the zipped `___netlify-server-handler.zip` exceeded Netlify's 50MB limit because Next.js file tracing pulled the entire `public/testimonial-videos/` directory (420MB of MP4s) into the serverless function bundle.
+
+**Why:** Files under `public/` are normally served from the CDN and never bundled into server functions. But `fs.readFileSync` with a path under `public/` causes Next.js static analysis to trace that directory into the function bundle — it has no way to know you only wanted the `.txt` files, so it grabs everything. The MP4 siblings got swept up.
+
+**Rules:**
+1. **Never** `fs.readFileSync` (or any `fs` call) against a path under `public/` from server code. Not in server components, not in route handlers, not at module scope.
+2. If you need file content at runtime and it's small and static, inline it as a string literal in a `.ts` module (see `lib/testimonialTranscripts.ts` for the pattern).
+3. If you need file content at build time only, read it in a Node script and write out a generated `.ts` file that gets imported.
+4. If you genuinely need to read a file at runtime, put it outside `public/` (e.g. `data/`) so file tracing can include just that file.
+5. Belt-and-suspenders: `next.config.mjs` now has `outputFileTracingExcludes` to keep `public/testimonial-videos/**` out of all function bundles. Don't remove it — it only costs a line of config and it's a hard guard.
+6. `next build` succeeding locally does NOT prove the Netlify deploy will succeed. It only proves the Next.js build compiled. The function-size limit is enforced at deploy time. Check `.next/server` size (`du -sh .next/server`) and `find .next -name "*.mp4"` before pushing anything that touches file I/O.
+
+Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, exclude videos from trace").
+
 ### Figma Asset Downloads
 - Figma MCP asset URLs are blocked by the VM proxy (exit code 56 from curl). When a Figma asset is needed, ask the user to export it from Figma and drop it into the project. Reference the Figma component name so they know what to export.
 
