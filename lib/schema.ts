@@ -184,6 +184,23 @@ const VIRTUAL_LOCATION = {
   url: SITE,
 };
 
+// Build a Review node from an inlined testimonial transcript. `itemReviewed`
+// must be set to the enclosing Course's @id by the caller.
+const buildTestimonialReview = (
+  authorName: string,
+  transcriptKey: keyof typeof testimonialTranscripts,
+  courseId: string,
+) => ({
+  "@type": "Review",
+  author: { "@type": "Person", name: authorName },
+  reviewBody: testimonialTranscripts[transcriptKey],
+  itemReviewed: { "@id": courseId },
+});
+
+const CAMPS_COURSE_ID = `${SITE}/programs/ekuzo-camps#course`;
+const EKUZO100_COURSE_ID = `${SITE}/programs/ekuzo100#course`;
+const TEAMS_COURSE_ID = `${SITE}/programs/ekuzo-teams#course`;
+
 const sharedCourseFields = {
   "@context": "https://schema.org",
   "@type": "Course",
@@ -194,7 +211,7 @@ const sharedCourseFields = {
 
 export const ekuzoCampsCourseSchema = {
   ...sharedCourseFields,
-  "@id": `${SITE}/programs/ekuzo-camps#course`,
+  "@id": CAMPS_COURSE_ID,
   name: "EKUZO Camp",
   url: `${SITE}/programs/ekuzo-camps`,
   description:
@@ -227,11 +244,16 @@ export const ekuzoCampsCourseSchema = {
     priceValidUntil: "2026-06-30",
     url: `${SITE}/programs/ekuzo-camps/register`,
   },
+  review: [
+    buildTestimonialReview("Becky", "beckyParent", CAMPS_COURSE_ID),
+    buildTestimonialReview("Brad", "bradParentGirlGamer", CAMPS_COURSE_ID),
+    buildTestimonialReview("Rajitha", "rajithaParent", CAMPS_COURSE_ID),
+  ],
 };
 
 export const ekuzo100CourseSchema = {
   ...sharedCourseFields,
-  "@id": `${SITE}/programs/ekuzo100#course`,
+  "@id": EKUZO100_COURSE_ID,
   name: "EKUZO100",
   url: `${SITE}/programs/ekuzo100`,
   description:
@@ -260,11 +282,17 @@ export const ekuzo100CourseSchema = {
     priceValidUntil: "2026-06-30",
     url: `${SITE}/programs/ekuzo100/register`,
   },
+  review: [
+    buildTestimonialReview("EKUZO Student", "studentILearned", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student", "studentManOfMyWord", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student", "studentThankYouEkuzo", EKUZO100_COURSE_ID),
+    buildTestimonialReview("EKUZO Student", "studentYouShouldJoin", EKUZO100_COURSE_ID),
+  ],
 };
 
 export const ekuzoTeamsCourseSchema = {
   ...sharedCourseFields,
-  "@id": `${SITE}/programs/ekuzo-teams#course`,
+  "@id": TEAMS_COURSE_ID,
   name: "EKUZO Teams",
   url: `${SITE}/programs/ekuzo-teams`,
   description:
@@ -307,6 +335,18 @@ export const ekuzoTeamsCourseSchema = {
       priceValidUntil: "2026-08-31",
       url: `${SITE}/programs/ekuzo-teams/register`,
     },
+  ],
+  review: [
+    buildTestimonialReview(
+      "Laura Hogan, Mirus Academy",
+      "lauraHoganMirusAcademy",
+      TEAMS_COURSE_ID,
+    ),
+    buildTestimonialReview(
+      "Debbie Potter, Monroe",
+      "debbiePotterMonroe",
+      TEAMS_COURSE_ID,
+    ),
   ],
 };
 
