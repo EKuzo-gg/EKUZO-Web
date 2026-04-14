@@ -392,22 +392,21 @@ type TestimonialMeta = {
   name: string;
   role: string;
   transcriptKey: keyof typeof testimonialTranscripts;
+  uploadDate: string;
 };
 
 const testimonials: TestimonialMeta[] = [
-  { slug: "becky-parent", name: "Becky", role: "Parent", transcriptKey: "beckyParent" },
-  { slug: "brad-parent-girl-gamer", name: "Brad", role: "Parent (girl gamer)", transcriptKey: "bradParentGirlGamer" },
-  { slug: "debbie-potter-monroe", name: "Debbie Potter", role: "Director of Admissions, Robert F. Monroe Day School", transcriptKey: "debbiePotterMonroe" },
-  { slug: "laura-hogan-mirus-academy", name: "Laura Hogan", role: "Administrator, Mirus Academy", transcriptKey: "lauraHoganMirusAcademy" },
-  { slug: "rajitha-parent", name: "Rajitha", role: "Parent", transcriptKey: "rajithaParent" },
-  { slug: "student-i-learned", name: "EKUZO Student", role: "Student", transcriptKey: "studentILearned" },
-  { slug: "student-man-of-my-word", name: "EKUZO Student", role: "Student", transcriptKey: "studentManOfMyWord" },
-  { slug: "student-thank-you-ekuzo", name: "EKUZO Student", role: "Student", transcriptKey: "studentThankYouEkuzo" },
-  { slug: "student-you-should-join", name: "EKUZO Student", role: "Student", transcriptKey: "studentYouShouldJoin" },
+  { slug: "becky-parent", name: "Becky", role: "Parent", transcriptKey: "beckyParent", uploadDate: "2026-01-12" },
+  { slug: "brad-parent-girl-gamer", name: "Brad", role: "Parent (girl gamer)", transcriptKey: "bradParentGirlGamer", uploadDate: "2026-01-27" },
+  { slug: "debbie-potter-monroe", name: "Debbie Potter", role: "Director of Admissions, Robert F. Monroe Day School", transcriptKey: "debbiePotterMonroe", uploadDate: "2026-02-03" },
+  { slug: "laura-hogan-mirus-academy", name: "Laura Hogan", role: "Administrator, Mirus Academy", transcriptKey: "lauraHoganMirusAcademy", uploadDate: "2026-02-16" },
+  { slug: "rajitha-parent", name: "Rajitha", role: "Parent", transcriptKey: "rajithaParent", uploadDate: "2026-02-25" },
+  { slug: "student-i-learned", name: "EKUZO Student", role: "Student", transcriptKey: "studentILearned", uploadDate: "2026-03-04" },
+  { slug: "student-man-of-my-word", name: "EKUZO Student", role: "Student", transcriptKey: "studentManOfMyWord", uploadDate: "2026-03-12" },
+  { slug: "student-thank-you-ekuzo", name: "EKUZO Student", role: "Student", transcriptKey: "studentThankYouEkuzo", uploadDate: "2026-03-19" },
+  { slug: "student-you-should-join", name: "EKUZO Student", role: "Student", transcriptKey: "studentYouShouldJoin", uploadDate: "2026-03-27" },
 ];
 
-// NOTE: uploadDate is a placeholder (2024-01-01). Replace with real recording
-// dates once we have them — Google may flag placeholder dates as low-signal.
 const testimonialVideoNodes = testimonials.map((t) => {
   const transcript = testimonialTranscripts[t.transcriptKey] ?? "";
   const videoUrl = `${SITE}/testimonial-videos/${t.slug}.mp4`;
@@ -422,7 +421,7 @@ const testimonialVideoNodes = testimonials.map((t) => {
     name: `${t.name} — EKUZO Testimonial`,
     description,
     thumbnailUrl,
-    uploadDate: "2024-01-01",
+    uploadDate: t.uploadDate,
     contentUrl: videoUrl,
     publisher: { "@id": ORG_ID },
     transcript,
