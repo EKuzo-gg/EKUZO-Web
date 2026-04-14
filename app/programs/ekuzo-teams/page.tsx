@@ -11,6 +11,7 @@ import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
+import TrackPageView from "@/components/analytics/TrackPageView";
 
 export const metadata = {
   title: "EKUZO Teams — Semester-Based Esports Program",
@@ -95,6 +96,7 @@ const teamsFAQs = [
 export default function EkuzoTeamsPage() {
   return (
     <>
+      <TrackPageView program="ekuzo-teams" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section
         className="bg-white relative overflow-visible"

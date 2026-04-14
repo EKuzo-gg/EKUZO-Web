@@ -375,6 +375,58 @@ cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
 
 ---
 
+## Coding Behavior Rules (adapted from Karpathy principles)
+
+These apply to both Jamie's and Aaron's Claude instances. They reduce the most common LLM coding mistakes.
+
+### Think before coding
+- State assumptions explicitly. If uncertain, ask before implementing.
+- If multiple approaches exist, present the options — don't pick silently.
+- If something in the request is unclear, stop and ask. Don't guess.
+
+### Simplicity first
+- Write the minimum code that solves the problem. Nothing speculative.
+- No abstractions for single-use code. No "flexibility" that wasn't requested.
+- No error handling for impossible scenarios.
+- If 200 lines could be 50, rewrite it.
+
+### Surgical changes
+- Touch only what the request requires. Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken. Match existing style, even if you'd do it differently.
+- If your changes create unused imports/variables, clean those up. Don't remove pre-existing dead code unless asked.
+- **Every changed line should trace directly to the request.**
+
+### Goal-driven execution
+- Before multi-step work, state a brief plan with verification for each step:
+  ```
+  1. [Step] → verify: [check]
+  2. [Step] → verify: [check]
+  ```
+- Prefer verifiable goals: "write a test that reproduces the bug, then fix it" over "fix the bug."
+- Run the dev server / TypeScript check after changes to confirm nothing broke.
+
+### Verify before done
+- Never mark a task complete without proving it works. Run the dev server, check the page, confirm the output.
+- Diff behavior between `main` and your changes when relevant.
+- Ask yourself: "Would a staff engineer approve this?"
+
+### Autonomous bug fixing
+- When given a bug report: just fix it. Don't ask for hand-holding or extra context you can find yourself.
+- Point at logs, errors, failing tests — then resolve them.
+- Zero context switching required from the user. Go find the problem and fix it.
+
+### Self-improvement loop
+- After ANY correction from Jamie or Aaron, note the pattern so the same mistake doesn't repeat.
+- If a mistake reveals a gap in this CLAUDE.md (missing convention, unclear rule), propose an addition.
+- Review `WORKLOG.md` at session start to learn from recent changes and corrections.
+
+### Demand elegance (for non-trivial changes only)
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution."
+- Skip this for simple, obvious fixes — don't over-engineer. This rule is about quality, not perfectionism.
+
+---
+
 ## Team & Collaboration
 
 ### People

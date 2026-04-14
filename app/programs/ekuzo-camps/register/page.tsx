@@ -7,6 +7,7 @@ import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { trackInitiateCheckout } from "@/lib/analytics";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -271,6 +272,7 @@ export default function CampsRegisterPage() {
       setClientSecret(data.clientSecret);
       setPaymentIntentId(data.paymentIntentId);
       setShowPayment(true);
+      trackInitiateCheckout({ program: "camps", value: totalPrice });
       setIsSubmitting(false);
 
       // Scroll to payment section

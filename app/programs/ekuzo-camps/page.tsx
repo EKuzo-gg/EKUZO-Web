@@ -10,6 +10,7 @@ import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
+import TrackPageView from "@/components/analytics/TrackPageView";
 
 export const metadata = {
   title: "EKUZO Camp — Level Up Your Game This Summer",
@@ -164,6 +165,7 @@ const campsFAQs = [
 export default function EkuzoCampsPage() {
   return (
     <>
+      <TrackPageView program="camps" />
       {/* ══ STATS TICKER — above nav ═════════════════════════════════════════ */}
       <div
         className="overflow-hidden relative"

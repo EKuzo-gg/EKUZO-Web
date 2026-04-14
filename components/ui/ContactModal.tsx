@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useModal } from "@/context/ModalContext";
+import { trackLead } from "@/lib/analytics";
 
 export default function ContactModal() {
   const { closeModal } = useModal();
@@ -42,6 +43,7 @@ export default function ContactModal() {
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
+      trackLead({ source: "contact_form" });
     } catch (err) {
       console.error("Submission error:", err);
     } finally {

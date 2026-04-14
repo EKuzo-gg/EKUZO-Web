@@ -7,6 +7,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
+const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY!;
+const KLAVIYO_PURCHASERS_LIST_ID = "V4Uf7N";
 
 /**
  * POST /api/webhooks/stripe
@@ -93,15 +95,13 @@ export async function POST(req: NextRequest) {
           ? "Looking for a squad"
           : "";
 
-    // ── Enroll in Beehiiv ─────────────────────────────────────────
-    try {
-      // Build gamer summaries and multi-gamer fields
-      const allGamerNames: string[] = [];
-      const gamerSummaries: string[] = [];
-      let earliestWeek = Infinity;
-      let earliestSlot = "";
+    // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────
+    const allGamerNames: string[] = [];
+    const gamerSummaries: string[] = [];
+    let earliestWeek = Infinity;
+    let earliestSlot = "";
 
-      for (const gd of gamers) {
+    for (const gd of gamers) {
         if (gd.firstName) allGamerNames.push(gd.firstName);
 
         if (product === "camps") {
@@ -127,6 +127,8 @@ export async function POST(req: NextRequest) {
         }
       }
 
+    // ── Enroll in Beehiiv ──────────────────────────────────────────
+    try {
       // Product-specific Beehiiv fields
       const programName =
         product === "ekuzo100" ? "EKUZO100"
@@ -163,12 +165,9 @@ export async function POST(req: NextRequest) {
       if (product === "camps") {
         customFields.push(
           { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
-          { name: "camp_slot", value: earliestSlot }
+          { name: "camp_slot", value: earliestSlot },
+          { name: "squad_status", value: squadStatusLabel }
         );
-        // Note: squad_status is NOT pushed to Beehiiv — team is migrating
-        // email marketing to Klaviyo (as of 4/10/2026). The field is still
-        // captured in Stripe metadata and Google Sheets, so no data is lost;
-        // it will be wired to Klaviyo when the migration happens.
       } else if (product === "teams") {
         customFields.push(
           { name: "team_semester", value: meta.semester_label || "Fall 2026" },
@@ -238,6 +237,166 @@ export async function POST(req: NextRequest) {
       }
     } catch (err: any) {
       console.error("Beehiiv enrollment error:", err.message);
+    }
+
+    // ── Enroll in Klaviyo (profile + list + event) ─────────────────
+    try {
+      const klaviyoHeaders = {
+        Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+        "Content-Type": "application/json",
+        revision: "2025-07-15",
+      };
+
+      // Earliest camp week dates for pre-camp sequencing
+      let earliestWeekDates = "";
+      if (product === "camps") {
+        let minWeek = Infinity;
+        for (const gd of gamers) {
+          const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
+          if (weekNum < minWeek) {
+            minWeek = weekNum;
+            earliestWeekDates = gd.weekDates || "";
+          }
+        }
+      }
+
+      // Build custom properties — same data set as Beehiiv
+      const klaviyoProperties: Record<string, string> = {
+        program: product === "ekuzo100" ? "EKUZO100"
+          : product === "teams" ? "EKUZOTeams"
+          : "EKUZO Camps",
+        gamer_name: gamers.map((g) => g.firstName).filter(Boolean).join(", "),
+        gamer_count: meta.gamer_count || "1",
+        registration_summary: gamers.map((gd) => {
+          if (product === "camps") {
+            return `${gd.firstName} ${gd.lastName} — ${gd.weekLabel} ${gd.slot} (${gd.weekDates})`;
+          } else if (product === "ekuzo100") {
+            return `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""} ${gd.schedulePreference || ""}`;
+          } else {
+            return `${gd.firstName} ${gd.lastName} — ${meta.semester_label || "Fall 2026"}`;
+          }
+        }).join(" | ").slice(0, 500),
+        amount_paid: `$${(paymentIntent.amount / 100).toFixed(2)}`,
+        payment_intent_id: paymentIntent.id,
+        timezone: meta.timezone || "",
+        location: location,
+      };
+
+      // Product-specific properties
+      if (product === "camps") {
+        klaviyoProperties.camp_week = earliestWeek === Infinity ? "" : String(earliestWeek);
+        klaviyoProperties.camp_slot = earliestSlot;
+        klaviyoProperties.camp_week_dates = earliestWeekDates;
+        klaviyoProperties.squad_status = squadStatusLabel;
+      } else if (product === "ekuzo100") {
+        klaviyoProperties.cohort_label = meta.cohort_label || "";
+        klaviyoProperties.cohort_start = meta.cohort_start || "";
+        klaviyoProperties.cohort_end = meta.cohort_end || "";
+      } else if (product === "teams") {
+        klaviyoProperties.team_semester = meta.semester_label || "Fall 2026";
+        klaviyoProperties.team_payment_plan = meta.payment_plan || "upfront";
+      }
+
+      // 1. Create or update profile
+      const profilePayload = {
+        data: {
+          type: "profile",
+          attributes: {
+            email: meta.parent_email,
+            first_name: meta.parent_first_name || "",
+            last_name: meta.parent_last_name || "",
+            phone_number: meta.parent_phone || "",
+            properties: klaviyoProperties,
+          },
+        },
+      };
+
+      // Klaviyo's import endpoint upserts (creates if new, merges if existing)
+      const profileRes = await fetch(
+        "https://a.klaviyo.com/api/profile-import",
+        {
+          method: "POST",
+          headers: klaviyoHeaders,
+          body: JSON.stringify(profilePayload),
+        }
+      );
+
+      if (!profileRes.ok) {
+        const errText = await profileRes.text();
+        console.error("Klaviyo profile upsert failed:", profileRes.status, errText);
+      } else {
+        const profileData = await profileRes.json();
+        const profileId = profileData?.data?.id;
+        console.log(`✅ Klaviyo profile upserted for ${meta.parent_email} | ID: ${profileId}`);
+
+        // 2. Add profile to Purchasers list
+        if (profileId) {
+          const listRes = await fetch(
+            `https://a.klaviyo.com/api/lists/${KLAVIYO_PURCHASERS_LIST_ID}/relationships/profiles`,
+            {
+              method: "POST",
+              headers: klaviyoHeaders,
+              body: JSON.stringify({
+                data: [{ type: "profile", id: profileId }],
+              }),
+            }
+          );
+          if (!listRes.ok) {
+            const listErr = await listRes.text();
+            console.error("Klaviyo list add failed:", listRes.status, listErr);
+          } else {
+            console.log(`✅ Klaviyo: added to Purchasers list`);
+          }
+        }
+
+        // 3. Track "Placed Order" event
+        const eventPayload = {
+          data: {
+            type: "event",
+            attributes: {
+              metric: { data: { type: "metric", attributes: { name: "Placed Order" } } },
+              profile: { data: { type: "profile", attributes: { email: meta.parent_email } } },
+              properties: {
+                product: klaviyoProperties.program,
+                value: paymentIntent.amount / 100,
+                currency: "USD",
+                gamer_name: klaviyoProperties.gamer_name,
+                gamer_count: parseInt(meta.gamer_count || "1", 10),
+                ...(product === "camps" && {
+                  camp_week: klaviyoProperties.camp_week,
+                  camp_slot: klaviyoProperties.camp_slot,
+                  camp_week_dates: earliestWeekDates,
+                  squad_status: squadStatusLabel,
+                }),
+                ...(product === "ekuzo100" && {
+                  cohort_label: meta.cohort_label || "",
+                }),
+                ...(product === "teams" && {
+                  team_semester: meta.semester_label || "Fall 2026",
+                  team_payment_plan: meta.payment_plan || "upfront",
+                }),
+              },
+              value: paymentIntent.amount / 100,
+              unique_id: paymentIntent.id,
+              time: new Date().toISOString(),
+            },
+          },
+        };
+
+        const eventRes = await fetch("https://a.klaviyo.com/api/events", {
+          method: "POST",
+          headers: klaviyoHeaders,
+          body: JSON.stringify(eventPayload),
+        });
+        if (!eventRes.ok) {
+          const eventErr = await eventRes.text();
+          console.error("Klaviyo event failed:", eventRes.status, eventErr);
+        } else {
+          console.log(`✅ Klaviyo: "Placed Order" event tracked ($${(paymentIntent.amount / 100).toFixed(2)})`);
+        }
+      }
+    } catch (err: any) {
+      console.error("Klaviyo enrollment error:", err.message);
     }
 
     // ── Write to Google Sheets (one row per gamer) ──────────────────

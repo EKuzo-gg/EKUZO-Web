@@ -10,6 +10,7 @@ import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
+import TrackPageView from "@/components/analytics/TrackPageView";
 
 export const metadata = {
   title: "EKUZO100 — 4-Week Intro Program",
@@ -76,6 +77,7 @@ const ekuzo100FAQs = [
 export default function Ekuzo100Page() {
   return (
     <>
+      <TrackPageView program="ekuzo100" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section
         className="bg-white relative overflow-visible"
