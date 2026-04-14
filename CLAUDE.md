@@ -117,7 +117,7 @@ All programs live under `/programs/`:
 - `/programs/ekuzo100` — marketing page
 - `/programs/ekuzo100/register` — registration + Stripe payment ($100)
 - `/programs/ekuzo100/success` — payment confirmation
-- `/programs/ekuzo-teams` — marketing page (no commerce yet — next priority)
+- `/programs/ekuzo-teams` — marketing page + commerce live ($640/semester with $576 upfront discount or 4× $160 installment plan).
 - `/programs/ekuzo-camps` — marketing page (Aaron's v2 build)
 - `/programs/ekuzo-camps/register` — registration + Stripe payment ($199)
 - `/programs/ekuzo-camps/success` — payment confirmation
@@ -140,7 +140,6 @@ All programs live under `/programs/`:
 - [x] `/api/contact` — Contact form → Google Sheets + Beehiiv lead capture
 - [x] Camps end-to-end tested (3 test payments, single + multi-gamer)
 - [ ] EKUZO100 end-to-end test (code complete, needs test payment)
-- [ ] Teams commerce (next session)
 ### Remaining
 - [ ] `/about` — About page
 - [ ] `/blog` — Blog index (static, no CMS)
@@ -148,6 +147,28 @@ All programs live under `/programs/`:
 
 ### Redirect rules (next.config.mjs — 12 rules)
 All legacy URLs redirect to canonical `/programs/` routes. See `next.config.mjs` for full list.
+
+---
+
+## Structured Data (JSON-LD)
+
+All Schema.org structured data lives in **`lib/schema.ts`** — the single source of truth. Do NOT hand-roll JSON-LD inside page files. Import from `lib/schema.ts` and render with `<JsonLd data={...} />` from `components/JsonLd.tsx`.
+
+**What's already there:**
+- `rootGraph` — `EducationalOrganization` + `WebSite` + `SiteNavigationElement`, rendered once in `app/layout.tsx` and inherited by every page.
+- `ekuzoCampsCourseSchema` / `ekuzo100CourseSchema` / `ekuzoTeamsCourseSchema` — `Course` + `Offer` per program page.
+- `buildBreadcrumbSchema(trail)` — call on every inner page with `[{name, path}, ...]`.
+- `buildFAQPageSchema(items)` — reuse the page's existing FAQ array so content doesn't drift.
+- `testimonialVideoGraph` — consolidated `@graph` of 9 `VideoObject` nodes (homepage), transcripts read at module load from `public/testimonial-videos/*.txt`.
+
+**Rules:**
+1. Server-render JSON-LD. Never JS-inject — AI crawlers may skip late-bound structured data.
+2. One `<JsonLd>` per schema is fine, but prefer `@graph` when emitting multiple related entities on the same page (see `testimonialVideoGraph`).
+3. `JsonLd.tsx` escapes `<` to `\u003c` to prevent `</script>` break-outs — don't bypass it with a raw `<script>` tag.
+4. When adding a new page type (e.g. `/about` with a `Person` schema, or `/blog/[slug]` with `Article`), put the builder in `lib/schema.ts`, not in the page file.
+5. After any schema change, verify with: `curl -s http://localhost:3001/<path> | grep -o 'application/ld+json'` and paste the final `@graph` into https://validator.schema.org/.
+
+Rationale and scoring methodology: see `GEO-SCHEMA-REPORT.md` in the repo root.
 
 ---
 

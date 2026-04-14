@@ -6,6 +6,41 @@
 
 ---
 
+## Jamie — April 14, 2026 (Structured data / GEO schema pass)
+
+**What changed:**
+
+Implemented all 7 schema fixes from `GEO-SCHEMA-REPORT.md` (audit scored the live site at 57/100; target 85–95 post-fix). All JSON-LD is server-rendered via Next.js server components — no JS injection.
+
+**New files:**
+- `lib/schema.ts` — single source of truth for all JSON-LD. Exports: `rootGraph` (Organization + WebSite + SiteNavigation), per-program Course schemas, `buildBreadcrumbSchema`, `buildFAQPageSchema`, and `testimonialVideoSchemas` (reads `.txt` captions from `public/testimonial-videos/` at module load via `fs.readFileSync`).
+- `components/JsonLd.tsx` — thin server component that renders a `<script type="application/ld+json">` tag. Use `<JsonLd data={...} />` on any page.
+
+**Schema fixes landed:**
+1. **Removed fake SearchAction** from WebSite — was pointing at `/?q=` with no backing search endpoint. Validation error gone.
+2. **Upgraded `Organization` → `EducationalOrganization`** in `app/layout.tsx`. Added `foundingDate: "2021"`, `email: team@ekuzo.gg`, `founder: Karlin Oei` (with LinkedIn sameAs), `knowsAbout` array (8 topics), and extended `sameAs` to include LinkedIn company page, TikTok, and X. Dropped Discord from sameAs (not a stable public identifier).
+3. **Course + Offer schemas** on all three `/programs/*` pages via `<JsonLd>` in the server component. EKUZO Camps ($199), EKUZO100 ($100), EKUZO Teams (two Offer nodes: $576 pay-in-full and $640 4-payment plan) — all reference the EducationalOrganization via `@id`.
+4. **FAQPage schema** on `/faq` built from the existing `safetyFAQs / programsFAQs / outcomesFAQs / costFAQs / enrollmentFAQs` data arrays (reused, not duplicated).
+5. Founder Person schema handled via nested `founder` field on the EducationalOrganization — no separate top-level Person entity needed yet.
+6. **BreadcrumbList** added to every inner page: `/programs`, `/programs/ekuzo-camps`, `/programs/ekuzo100`, `/programs/ekuzo-teams`, `/methodology`, `/parents`, `/schools`, `/games`, `/faq`, `/terms-of-service`, `/privacy-policy`. Register/success pages skipped (low SEO value).
+7. **VideoObject schemas** for 9 testimonial videos added to the homepage (`app/page.tsx`). The `transcript` field is populated by reading the matching `.txt` caption files from `public/testimonial-videos/` at build time. `uploadDate` is a placeholder (`2024-01-01`) — update when real dates are known.
+
+**Files touched:**
+- `app/layout.tsx` — swapped inline jsonLd for `rootGraph` import.
+- `app/page.tsx` — added testimonial VideoObject schemas.
+- `app/programs/ekuzo-camps/page.tsx`, `app/programs/ekuzo100/page.tsx`, `app/programs/ekuzo-teams/page.tsx` — Course + Breadcrumb.
+- `app/faq/page.tsx` — FAQPage + Breadcrumb built from existing FAQ arrays.
+- `app/methodology/page.tsx`, `app/parents/page.tsx`, `app/schools/page.tsx`, `app/games/page.tsx`, `app/programs/page.tsx`, `app/terms-of-service/page.tsx`, `app/privacy-policy/page.tsx` — Breadcrumb only.
+- `CLAUDE.md` — removed "Teams commerce (next session)" from Remaining; updated `/programs/ekuzo-teams` status to reflect commerce is live.
+
+**Notes for Aaron:**
+- All schemas are in `lib/schema.ts` — if you rename a program or change pricing, update it there once and it propagates everywhere.
+- `components/JsonLd.tsx` is the only way to render JSON-LD in this codebase. Don't inline `dangerouslySetInnerHTML` anywhere else.
+- To validate after deploy: paste the final @graph from view-source into https://validator.schema.org/ or run `/geo schema https://dev--ekuzo.netlify.app` in Claude Code.
+- Placeholder data that should be replaced with real values: `uploadDate` on each testimonial video (currently `2024-01-01`).
+
+---
+
 ## Jamie — April 13, 2026 (DNS + GA4/Meta analytics + Klaviyo webhook + env isolation)
 
 **What changed:**

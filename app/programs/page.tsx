@@ -11,8 +11,15 @@ import ProgramsHeroRive from "@/components/sections/ProgramsHeroRive";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Programs", path: "/programs" },
+]);
 
 export const metadata: Metadata = {
   title: "Programs — EKUZO",
@@ -65,6 +72,7 @@ const programsFAQs = [
 export default function ProgramsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ══ 1. HERO — Red bg, full-bleed Rive animation ═════════════════════ */}
       <div className="relative overflow-visible">
         <section

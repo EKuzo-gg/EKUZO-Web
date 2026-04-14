@@ -11,8 +11,15 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
 import ModalButton from "@/components/ui/ModalButton";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "For Schools", path: "/schools" },
+]);
 
 export const metadata: Metadata = {
   title: "Schools — EKUZO",
@@ -65,6 +72,7 @@ const schoolsFAQs = [
 export default function SchoolsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
       <div className="relative overflow-visible">
         <section
