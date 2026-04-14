@@ -11,6 +11,11 @@ import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
 import TrackPageView from "@/components/analytics/TrackPageView";
+import JsonLd from "@/components/JsonLd";
+import {
+  ekuzoCampsCourseSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata = {
   title: "EKUZO Camp — Level Up Your Game This Summer",
@@ -162,9 +167,17 @@ const campsFAQs = [
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Programs", path: "/programs" },
+  { name: "EKUZO Camps", path: "/programs/ekuzo-camps" },
+]);
+
 export default function EkuzoCampsPage() {
   return (
     <>
+      <JsonLd data={ekuzoCampsCourseSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <TrackPageView program="camps" />
       {/* ══ STATS TICKER — above nav ═════════════════════════════════════════ */}
       <div

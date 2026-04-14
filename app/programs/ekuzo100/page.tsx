@@ -11,12 +11,20 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
 import TrackPageView from "@/components/analytics/TrackPageView";
+import JsonLd from "@/components/JsonLd";
+import { ekuzo100CourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
   title: "EKUZO100 — 4-Week Intro Program",
   description:
     "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO — real coaching, real teammates, real growth.",
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Programs", path: "/programs" },
+  { name: "EKUZO100", path: "/programs/ekuzo100" },
+]);
 
 const howItWorksSteps = [
   {
@@ -77,6 +85,8 @@ const ekuzo100FAQs = [
 export default function Ekuzo100Page() {
   return (
     <>
+      <JsonLd data={ekuzo100CourseSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <TrackPageView program="ekuzo100" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section
