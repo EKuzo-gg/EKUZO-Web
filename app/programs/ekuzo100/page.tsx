@@ -15,6 +15,7 @@ import JsonLd from "@/components/JsonLd";
 import { ekuzo100CourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/programs/ekuzo100" },
   title: "EKUZO100 — 4-Week Intro Program",
   description:
     "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO — real coaching, real teammates, real growth.",

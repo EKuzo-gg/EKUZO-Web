@@ -18,6 +18,7 @@ import {
 } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/programs/ekuzo-camps" },
   title: "EKUZO Camp — Level Up Your Game This Summer",
   description:
     "Join EKUZO's intensive 1-week summer esports camps. Pro coaching, real teams, daily tournaments. Morning and afternoon slots available.",

@@ -12,6 +12,7 @@ import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title: "FAQ — EKUZO",
   description:
     "Find answers about EKUZO programs, coaching, safety, scheduling, costs, and enrollment. Everything you need to know.",

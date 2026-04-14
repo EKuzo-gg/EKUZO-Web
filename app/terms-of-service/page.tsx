@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/terms-of-service" },
   title: "Terms of Service — EKUZO",
   description: "Terms of Service governing your access to and use of EKUZO programs and website.",
 };

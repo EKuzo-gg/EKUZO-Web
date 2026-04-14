@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy — EKUZO",
   description: "EKUZO's Privacy Policy explaining how we collect, use, store, and protect information about parents, students, and school partners.",
 };

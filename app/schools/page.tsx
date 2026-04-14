@@ -22,6 +22,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/schools" },
   title: "Schools — EKUZO",
   description:
     "Partner with EKUZO to bring structured esports to your school. Build student attendance, engagement, and leadership through gaming.",

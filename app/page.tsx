@@ -13,6 +13,7 @@ import JsonLd from "@/components/JsonLd";
 import { testimonialVideoGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: "EKUZO — Every Gamer Deserves a Team",
   description:
     "Youth esports coaching programs that turn gaming into growth. Structured practice, skilled coaching, and real competition for every gamer.",

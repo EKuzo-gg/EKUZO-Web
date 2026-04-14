@@ -18,6 +18,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/methodology" },
   title: "Methodology — EKUZO",
   description:
     "Learn the EKUZO pedagogy: how games teach leadership, resilience, and teamwork. Built on 10 pillars of youth development and learning science.",

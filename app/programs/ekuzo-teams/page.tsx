@@ -16,6 +16,7 @@ import JsonLd from "@/components/JsonLd";
 import { ekuzoTeamsCourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/programs/ekuzo-teams" },
   title: "EKUZO Teams — Semester-Based Esports Program",
   description:
     "EKUZO Teams: a semester-based esports program structured like sports. Consistent teammates, coach-led practice, and a real competitive season.",

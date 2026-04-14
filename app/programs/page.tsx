@@ -22,6 +22,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/programs" },
   title: "Programs — EKUZO",
   description:
     "Three esports programs for young gamers: EKUZO Teams (semester-based), EKUZO100 (4-week intro), and Camps (seasonal intensives). Find your fit.",

@@ -9,6 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/games" },
   title: "Games — EKUZO",
   description:
     "Discover what growth through games really requires. Learn why League of Legends is the perfect platform for teaching esports skills, teamwork, and resilience.",

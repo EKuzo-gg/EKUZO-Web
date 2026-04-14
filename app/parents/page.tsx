@@ -24,6 +24,7 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/parents" },
   title: "For Families — EKUZO",
   description:
     "How EKUZO supports families: safe, structured esports programs that build confidence, teamwork, and life skills in young gamers.",

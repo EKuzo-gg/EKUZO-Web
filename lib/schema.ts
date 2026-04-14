@@ -17,6 +17,49 @@ import { testimonialTranscripts } from "./testimonialTranscripts";
 const SITE = "https://ekuzo.gg";
 const ORG_ID = `${SITE}/#organization`;
 
+// ─── Coach Person schemas ──────────────────────────────────────────────────
+// These are referenced by @id from EducationalOrganization.founder and from
+// each Course.hasCourseInstance.instructor array. They are emitted as
+// top-level nodes in the root @graph so they exist in the entity graph
+// independent of any single page.
+const KARLIN_ID = `${SITE}/#coach-karlin`;
+const SEBASTIEN_ID = `${SITE}/#coach-sebastien`;
+const NURI_ID = `${SITE}/#coach-nuri`;
+
+export const coachKarlinSchema = {
+  "@type": "Person",
+  "@id": KARLIN_ID,
+  name: 'Karlin "Faith" Oei',
+  jobTitle: "Founder",
+  description:
+    "Peak Challenger jungler in League of Legends — top 0.01% tier. Former national collegiate captain who won $80,000+ in esports scholarships through competitive play. Oversees the full EKUZO student experience.",
+  sameAs: "https://www.linkedin.com/in/karlinoei/",
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/coach-karlin-faith.jpg`,
+};
+
+export const coachSebastienSchema = {
+  "@type": "Person",
+  "@id": SEBASTIEN_ID,
+  name: 'Sebastien "ZzLegendary" DeMontigny',
+  jobTitle: "Head Coach",
+  description:
+    "Professional esports coach who has coached at tier-1 organizations including Dignitas and Evil Geniuses. Elite-level competitive player. 4+ years experience specifically in youth esports coaching. Leads EKUZO's coaching staff and trains every coach on the team.",
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/coach-sebastien-ZzLegendary.png`,
+};
+
+export const coachNuriSchema = {
+  "@type": "Person",
+  "@id": NURI_ID,
+  name: 'Nuri "Teemo Time" Je',
+  jobTitle: "Coach",
+  description:
+    "Diamond-ranked Support player (top ~1% of League of Legends players). Community manager at the University of Texas at Austin and Alienware Ambassador. Background in public school teaching. One of EKUZO's cadre of collegiate esports athlete coaches.",
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/coach-nuri-je.png`,
+};
+
 // ─── Organization (EducationalOrganization) ────────────────────────────────
 export const organizationSchema = {
   "@type": "EducationalOrganization",
@@ -31,13 +74,32 @@ export const organizationSchema = {
   image: `${SITE}/images/og-default.jpg`,
   description:
     "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
-  foundingDate: "2021",
+  foundingDate: "2021-01-01",
   email: "team@ekuzo.gg",
-  founder: {
-    "@type": "Person",
-    name: "Karlin Oei",
-    sameAs: "https://www.linkedin.com/in/karlinoei/",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "5617 Dolores Street",
+    addressLocality: "Houston",
+    addressRegion: "TX",
+    postalCode: "77057",
+    addressCountry: "US",
   },
+  areaServed: ["United States", "North America"],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "team@ekuzo.gg",
+      availableLanguage: "en",
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "legal",
+      email: "info@ekuzo.gg",
+      availableLanguage: "en",
+    },
+  ],
+  founder: { "@id": KARLIN_ID },
   knowsAbout: [
     "Esports coaching",
     "Youth gaming education",
@@ -104,7 +166,14 @@ export const siteNavigationSchema = {
 // ─── Root @graph used by app/layout.tsx ────────────────────────────────────
 export const rootGraph = {
   "@context": "https://schema.org",
-  "@graph": [organizationSchema, websiteSchema, siteNavigationSchema],
+  "@graph": [
+    organizationSchema,
+    websiteSchema,
+    siteNavigationSchema,
+    coachKarlinSchema,
+    coachSebastienSchema,
+    coachNuriSchema,
+  ],
 };
 
 // ─── Course schemas ────────────────────────────────────────────────────────

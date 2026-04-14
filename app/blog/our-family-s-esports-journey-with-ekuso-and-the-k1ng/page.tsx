@@ -6,6 +6,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
+  alternates: {
+    canonical: "/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng",
+  },
   title: "Our Family's Esports Journey with EKUZO and the K1ng — EKUZO Blog",
   description:
     "My son Ryan was always a happy kid in his early years. Then junior high happened — and everything changed. This is how EKUZO gave him back his confidence.",

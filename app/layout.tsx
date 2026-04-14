@@ -35,12 +35,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ekuzo.gg"),
   title: {
     default: "EKUZO — Every Gamer Deserves a Team",
     template: "%s | EKUZO",
   },
   description:
     "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
