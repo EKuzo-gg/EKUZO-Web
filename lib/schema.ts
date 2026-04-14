@@ -177,6 +177,13 @@ export const rootGraph = {
 };
 
 // ─── Course schemas ────────────────────────────────────────────────────────
+// Shared virtual location — all EKUZO programs are online. Reused across
+// every Course.hasCourseInstance.location.
+const VIRTUAL_LOCATION = {
+  "@type": "VirtualLocation",
+  url: SITE,
+};
+
 const sharedCourseFields = {
   "@context": "https://schema.org",
   "@type": "Course",
@@ -201,7 +208,16 @@ export const ekuzoCampsCourseSchema = {
     "@type": "CourseInstance",
     courseMode: "Online",
     courseWorkload: "PT15H",
-    description: "One-week camp, 3 hours per day, Monday–Friday",
+    location: VIRTUAL_LOCATION,
+    startDate: "2026-05-18",
+    endDate: "2026-08-06",
+    description:
+      "Weekly summer cohorts, Monday–Friday, 3 hours per day. Register for any week between May 18 and August 3, 2026.",
+    instructor: [
+      { "@id": KARLIN_ID },
+      { "@id": SEBASTIEN_ID },
+      { "@id": NURI_ID },
+    ],
   },
   offers: {
     "@type": "Offer",
@@ -229,7 +245,12 @@ export const ekuzo100CourseSchema = {
     "@type": "CourseInstance",
     courseMode: "Online",
     courseWorkload: "PT12H",
-    description: "4-week program, two 90-minute sessions per week",
+    location: VIRTUAL_LOCATION,
+    startDate: "2026-06-02",
+    endDate: "2026-06-30",
+    description:
+      "4-week cohort starting Tuesday, June 2, 2026. Two 90-minute sessions per week.",
+    instructor: [{ "@id": KARLIN_ID }, { "@id": SEBASTIEN_ID }],
   },
   offers: {
     "@type": "Offer",
@@ -258,9 +279,12 @@ export const ekuzoTeamsCourseSchema = {
     "@type": "CourseInstance",
     courseMode: "Online",
     courseWorkload: "PT48H",
+    location: VIRTUAL_LOCATION,
     startDate: "2026-08-31",
+    endDate: "2026-12-18",
     description:
       "Fall 2026 semester. Two 90-minute sessions per week, ~16 weeks.",
+    instructor: [{ "@id": KARLIN_ID }, { "@id": SEBASTIEN_ID }],
   },
   offers: [
     {
