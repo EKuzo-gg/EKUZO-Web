@@ -14,7 +14,12 @@ type FooterBannerProps = {
   ctaModal?: "enroll" | "contact";
 };
 
-export default function FooterBanner({ heading, image, ctaLabel = "Enroll my gamer", ctaModal = "enroll" }: FooterBannerProps) {
+export default function FooterBanner({
+  heading,
+  image,
+  ctaLabel = "Enroll my gamer",
+  ctaModal = "enroll",
+}: FooterBannerProps) {
   const { openModal } = useModal();
   return (
     <section
@@ -26,17 +31,17 @@ export default function FooterBanner({ heading, image, ctaLabel = "Enroll my gam
         paddingRight: "clamp(0.75rem, 7.2vw, 104px)",
       }}
     >
-      {/* Red torn paper at top */}
-      <div
-        className="absolute top-0 left-0 right-0 z-20 pointer-events-none select-none"
-        style={{
-          height: "clamp(115px, 19vw, 300px)",
-          transform: "translateY(-48%)",
-          backgroundImage: "url(/images/torn-paper-red-1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+      {/* Red torn-paper cap at the top — uses a `red-top` asset so the SOLID
+          bottom of the paper sits flush with the top of the red section (red
+          on red = seamless), while the TORN top edge extends up into whatever
+          section is above, creating a jagged red silhouette. Works over any
+          preceding background color (white/black/grey) — no per-page prop. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+        alt=""
+        className="absolute top-0 left-0 w-full z-20 pointer-events-none select-none"
+        style={{ transform: "translateY(-100%)" }}
         aria-hidden="true"
       />
 

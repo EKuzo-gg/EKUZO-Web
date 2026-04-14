@@ -93,7 +93,7 @@ export default function HomePage() {
           style={{
             height: "clamp(115px, 19vw, 300px)",
             transform: "translateY(52%)",
-            backgroundImage: "url(/images/torn-paper-white-1.png)",
+            backgroundImage: "url(/images/new%20torn%20paper/torn-paper-white-1@2x.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -117,16 +117,6 @@ export default function HomePage() {
           paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
         }}
       >
-        {/* Torn paper: growth (grey) → ecosystem (white) — grey paper at bottom */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/paper-grey-bottom-2.svg"
-          alt=""
-          className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
-          style={{ transform: "translateY(55%)" }}
-          aria-hidden="true"
-        />
-
         <div className="max-w-[1232px] mx-auto">
           {/* H4 heading — full width above the two-column layout */}
           <h2
@@ -184,7 +174,7 @@ export default function HomePage() {
         {/* Torn paper: growth (grey) → ecosystem (white) — white paper at top */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/paper-white-top-1.svg"
+          src="/images/new%20torn%20paper/torn-paper-white-top-1@2x.png"
           alt=""
           className="absolute top-0 left-0 w-full z-20 pointer-events-none select-none"
           style={{ transform: "translateY(-55%)" }}
@@ -198,7 +188,7 @@ export default function HomePage() {
         {/* Torn paper: ecosystem (white) → how it works (black) — black paper at bottom */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/paper-black-top-2.svg"
+          src="/images/new%20torn%20paper/torn-paper-black-top-1@2x.png"
           alt=""
           className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
           style={{ transform: "translateY(2px)" }}

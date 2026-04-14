@@ -16,7 +16,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { parent, gamers, additionalInfo, totalPrice, timezone } = body;
+    const { parent, gamers, additionalInfo, totalPrice, timezone, squadStatus } = body;
 
     // ── Validate ────────────────────────────────────────────────────
     if (!parent?.email || !parent?.firstName || !parent?.lastName) {
@@ -43,6 +43,11 @@ export async function POST(req: NextRequest) {
     // ── Flatten gamer data into metadata ────────────────────────────
     // Stripe metadata values must be strings ≤500 chars.
     // We store each gamer's info as a JSON string keyed by index.
+    // squad_status: "building" | "looking" (family-level vibe check)
+    // Coerced to a safe string; unknown/missing values become "".
+    const squadStatusSafe =
+      squadStatus === "building" || squadStatus === "looking" ? squadStatus : "";
+
     const metadata: Record<string, string> = {
       product: "camps",
       parent_first_name: parent.firstName,
@@ -51,6 +56,7 @@ export async function POST(req: NextRequest) {
       parent_phone: parent.phone || "",
       gamer_count: String(gamers.length),
       timezone: timezone || "",
+      squad_status: squadStatusSafe,
     };
 
     // Split additional_info across multiple metadata keys if >500 chars

@@ -47,6 +47,9 @@ type ParentInfo = {
   phone: string;
 };
 
+// Squad vibe check — family-level, one answer per registration
+type SquadStatus = "building" | "looking" | null;
+
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const WEEKS: Week[] = [
@@ -148,6 +151,7 @@ export default function CampsRegisterPage() {
     phone: "",
   });
   const [gamers, setGamers] = useState<GamerInfo[]>([emptyGamer()]);
+  const [squadStatus, setSquadStatus] = useState<SquadStatus>(null);
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -211,6 +215,8 @@ export default function CampsRegisterPage() {
         errs.push(`${label}: please select a camp week and time slot.`);
     });
 
+    if (!squadStatus) errs.push("Please let us know your squad status.");
+
     return errs;
   }
 
@@ -238,6 +244,11 @@ export default function CampsRegisterPage() {
           price: week?.price,
         };
       }),
+      // squadStatus: family-level vibe check, "building" | "looking"
+      // Wired: register route → Stripe metadata (squad_status) → webhook
+      // → Google Sheets column (camps only). Email marketing (Klaviyo,
+      // replacing Beehiiv) will be wired during the migration.
+      squadStatus,
       additionalInfo,
       totalPrice,
     };
@@ -308,8 +319,8 @@ export default function CampsRegisterPage() {
       {/* ── Hero Section ───────────────────────────────────────────────── */}
       <section className="relative bg-[#f5f5f7]" style={{ overflow: "clip" }}>
         <div
-          className="max-w-[1280px] mx-auto relative"
-          style={{ paddingTop: "40px", paddingBottom: "80px", paddingLeft: "24px", paddingRight: "24px" }}
+          className="max-w-[1280px] mx-auto relative pb-28 lg:pb-60"
+          style={{ paddingTop: "40px", paddingLeft: "24px", paddingRight: "24px" }}
         >
           {/* Left content */}
           <div className="relative z-10 flex flex-col items-start" style={{ gap: "24px", maxWidth: "544px" }}>
@@ -629,6 +640,38 @@ export default function CampsRegisterPage() {
             + Add Another Gamer
           </button>
 
+          {/* ── Squad Status (vibe check) ──────────────────────────── */}
+          <hr className="border-t border-black/10 my-12" />
+          <div className="mb-12">
+            <h2
+              className="font-display uppercase text-black leading-[0.85] mb-6"
+              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+            >
+              Squad status
+            </h2>
+            <p
+              className="font-body text-[#4b5563] mb-8"
+              style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
+            >
+              How should we think about your gamer&apos;s crew?
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <SquadCard
+                title="Building a squad"
+                subtitle="My gamer is joining with friends"
+                isSelected={squadStatus === "building"}
+                onClick={() => setSquadStatus("building")}
+              />
+              <SquadCard
+                title="Looking for a squad"
+                subtitle="Match my gamer with a great crew"
+                isSelected={squadStatus === "looking"}
+                onClick={() => setSquadStatus("looking")}
+              />
+            </div>
+          </div>
+
           {/* ── Parent / Guardian Info ─────────────────────────────── */}
           <hr className="border-t border-black/10 my-12" />
           <div className="mb-12">
@@ -917,6 +960,73 @@ function CheckoutForm({
 }
 
 // ── Reusable sub-components ─────────────────────────────────────────────────
+
+function SquadCard({
+  title,
+  subtitle,
+  isSelected,
+  onClick,
+}: {
+  title: string;
+  subtitle: string;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  // Smooth rounded rectangle — no torn-paper clipPath here (it produced
+  // jagged edges on both the card and the red outline). Without clipPath we
+  // can use a normal ring for the selected state.
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={isSelected}
+      className={`relative text-left p-8 flex flex-col gap-3 cursor-pointer bg-[#f5f5f7] rounded-lg w-full transition-all duration-150 hover:brightness-[0.98] active:scale-[0.99] active:brightness-95 ${
+        isSelected
+          ? "ring-2 ring-red shadow-lg shadow-red/10"
+          : "ring-1 ring-black/10"
+      }`}
+    >
+      {/* Selection check badge — top right */}
+      <div
+        className={`absolute top-6 right-6 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-150 ${
+          isSelected ? "bg-red" : "bg-white ring-1 ring-black/15"
+        }`}
+      >
+        {isSelected && (
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M2.5 7.5L5.5 10.5L11.5 4"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+      </div>
+
+      <span
+        className="font-display uppercase text-[#0a0a0a] leading-[0.95] pr-10"
+        style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.5rem)" }}
+      >
+        {title}
+      </span>
+      <span
+        className="font-body text-[#4b5563]"
+        style={{ fontSize: "clamp(0.875rem, 1.1vw, 16px)", lineHeight: "24px" }}
+      >
+        {subtitle}
+      </span>
+    </button>
+  );
+}
 
 function SessionCard({
   sessionLabel,

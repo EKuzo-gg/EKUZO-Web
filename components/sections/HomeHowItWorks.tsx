@@ -144,7 +144,7 @@ export default function HomeHowItWorks() {
       {/* Torn paper: how it works (black) → testimonials (white) — black paper at bottom */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/paper-black-bottom-2.svg"
+        src="/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png"
         alt=""
         className="absolute bottom-0 left-0 w-full z-20 pointer-events-none select-none"
         style={{ transform: "translateY(calc(100% - 2px))" }}
