@@ -50,6 +50,10 @@ export async function POST(req: NextRequest) {
 
     const metadata: Record<string, string> = {
       product: "camps",
+      // Environment isolation: webhook skips events whose environment doesn't
+      // match the current deploy context. Prevents dev payments from being
+      // processed by the production webhook (and vice versa).
+      environment: process.env.CONTEXT || "development",
       parent_first_name: parent.firstName,
       parent_last_name: parent.lastName,
       parent_email: parent.email,

@@ -53,6 +53,8 @@ export async function POST(req: NextRequest) {
     // Stripe metadata values must be strings ≤500 chars.
     const metadata: Record<string, string> = {
       product: "ekuzo100",
+      // Environment isolation: see camps/register/route.ts for details.
+      environment: process.env.CONTEXT || "development",
       parent_first_name: parent.firstName,
       parent_last_name: parent.lastName,
       parent_email: parent.email,

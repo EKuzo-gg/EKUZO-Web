@@ -60,6 +60,8 @@ export async function POST(req: NextRequest) {
     // ── Build metadata ──────────────────────────────────────────────
     const metadata: Record<string, string> = {
       product: "teams",
+      // Environment isolation: see camps/register/route.ts for details.
+      environment: process.env.CONTEXT || "development",
       payment_plan: paymentPlan,
       semester: "fall-2026",
       semester_label: "Fall 2026 — Week of Aug 31",
