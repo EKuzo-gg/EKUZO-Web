@@ -170,6 +170,10 @@ All Schema.org structured data lives in **`lib/schema.ts`** — the single sourc
 
 Rationale and scoring methodology: see `GEO-SCHEMA-REPORT.md` in the repo root.
 
+### Canonical URLs (Next.js metadata)
+
+`app/layout.tsx` sets `metadataBase: new URL("https://ekuzo.gg")`. Every page `metadata` export must include `alternates: { canonical: "/route/path" }` (relative to `metadataBase`). Client components (register / success pages) cannot export metadata — add a sibling `layout.tsx` server shim that declares the metadata and returns `children`. Transactional pages go noindex via the same metadata object: register = `robots: { index: false, follow: true }`, success = `robots: { index: false, follow: false }`.
+
 ---
 
 ## Camps Page — Build Direction

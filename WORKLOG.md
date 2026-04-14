@@ -6,6 +6,50 @@
 
 ---
 
+## Jamie — April 14, 2026 (Schema pass #2 — entity graph, canonicals, CourseInstance)
+
+**What changed:** Second pass on structured data after re-auditing dev-branch. Site went from a 78/100 baseline (first pass) to the remaining items in `GEO-SCHEMA-REPORT.md` / `GEO-SCHEMA-PROGRAMS.md`. Target post-deploy: 85+ per page.
+
+**Commits landed on `dev`:**
+- `0bba97d` — Organization updates + canonical URLs + coach Person nodes
+- `06f4fe9` — CourseInstance location + startDate/endDate + instructors
+- `9b6393a` — Review nodes on Courses from testimonial transcripts
+- `cafb784` — Replace placeholder VideoObject uploadDates with real 2026 dates
+
+**Schema fixes landed:**
+1. **Organization (EducationalOrganization)** — ISO `foundingDate: "2021-01-01"`, full `PostalAddress` (5617 Dolores St, Houston, TX 77057, US), `areaServed` (US + North America), `contactPoint` array (customer support = team@, legal = info@), and `founder` now references the Karlin Person node via `@id` instead of inline duplication.
+2. **Coach Person nodes** — added 3 `Person` schemas to `rootGraph`: Karlin "Faith" Oei (founder), Sebastien "ZzLegendary" DeMontigny, Nuri "Teemo Time" Je. Each has `@id`, `jobTitle`, `description`, `sameAs` (LinkedIn), `worksFor` → Org, and image. These inherit to every page via the root graph.
+3. **Canonical URLs** — set `metadataBase: new URL("https://ekuzo.gg")` in `app/layout.tsx` and added `alternates: { canonical: "/path" }` to every page metadata export (14 pages). Register/success pages got sibling `layout.tsx` server shims with canonical + `robots: { index: false }` (register is indexable=false/followable=true, success is noindex/nofollow).
+4. **CourseInstance enrichment** — added `location: VirtualLocation` (new `VIRTUAL_LOCATION` const), `startDate` / `endDate`, and `instructor` arrays (@id refs) to all 3 program Courses:
+   - Camps: 2026-05-18 → 2026-08-06, 3 instructors
+   - EKUZO100: 2026-06-02 → 2026-06-30, 2 instructors
+   - Teams: 2026-08-31 → 2026-12-18, 2 instructors
+5. **Review nodes on Courses** — new `buildTestimonialReview` helper maps the 9 testimonial transcripts into `Review` nodes attached to the appropriate Course via `itemReviewed`. Camps gets 3 parent reviews, EKUZO100 gets 4 student reviews, Teams gets 2 school reviews. `reviewBody` is sourced from `lib/testimonialTranscripts.ts` so content never drifts.
+6. **Real VideoObject uploadDates** — replaced 9x `"2024-01-01"` placeholder with real 2026 dates per testimonial (2026-01-12 through 2026-03-27). `TestimonialMeta` type got an `uploadDate` field; `testimonialVideoGraph` reads it from the per-entry record.
+
+**Deferred (intentionally NOT done this pass):**
+- Per-week CourseInstance array on Camps (10 weeks × 2 slots)
+- `aggregateRating` on Courses
+- Wikidata `sameAs`
+- `Article` / `speakable` schemas (no blog content yet)
+- Expanded `/about` Person schema
+
+**Files touched:**
+- `lib/schema.ts` — coach Persons, VIRTUAL_LOCATION, buildTestimonialReview, Org updates, all 3 Course CourseInstance enrichment + review arrays, testimonial uploadDate.
+- `app/layout.tsx` — metadataBase + canonical.
+- 14 existing page metadata exports — added `alternates.canonical`.
+- 6 new `layout.tsx` files under `app/programs/*/register/` and `app/programs/*/success/` — server shims so client pages get canonical + robots metadata.
+
+**Verification (local `next start`):**
+- `/` — canonical `https://ekuzo.gg`, root graph has 6 nodes (Org + WebSite + SiteNav + 3 coach Persons), testimonial VideoObject graph has 9 nodes with real 2026 uploadDates.
+- `/programs/ekuzo-camps` — Course: 2026-05-18→2026-08-06, 3 instructors, 3 reviews.
+- `/programs/ekuzo100` — Course: 2026-06-02→2026-06-30, 2 instructors, 4 reviews.
+- `/programs/ekuzo-teams` — Course: 2026-08-31→2026-12-18, 2 instructors, 2 reviews.
+
+**TODO after push:** run `/geo schema` audits against `dev--ekuzo.netlify.app` on homepage + 3 program pages; paste final @graph into validator.schema.org for each.
+
+---
+
 ## Jamie — April 14, 2026 (Structured data / GEO schema pass)
 
 **What changed:**
