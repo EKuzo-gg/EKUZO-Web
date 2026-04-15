@@ -6,6 +6,63 @@
 
 ---
 
+## Jamie — April 15, 2026 (evening — squad_link QA verification + dev Stripe env isolation fix)
+
+**⚠ Aaron's Claude: read this entry AND `docs/QA-FLAGGED-ISSUES.md` (items 10–13) before touching the register page.** This session landed zero production code changes but does three things you need to know about: (1) verified squad_link end-to-end on dev, (2) fixed a live-mode Stripe config drift on the dev Netlify context so test cards now work, and (3) logged 4 flagged items, three of which live in your lane.
+
+**What you (Aaron) need to do — summary:**
+1. Pull `dev` — 2 commits ahead of prod now (squad_token ops columns + this QA session's config/docs).
+2. Fix items 10, 11, 12 from `docs/QA-FLAGGED-ISSUES.md` in `app/programs/ekuzo-camps/register/page.tsx`. All three are register-page work; one diff can land all three surgically. Item 12 (Birthday validation on added gamers) is the highest-priority — it's a data-quality bug, not just UX polish.
+3. Finalize the Klaviyo welcome email template (item 13) so confirmation emails actually send. All profile properties (`squad_link`, `camp_week`, `camp_slot`, `camp_week_dates`, `registration_summary`, `order_id`, `squad_status`) are populating correctly in Klaviyo — just need your template and a published automation.
+4. When you're done with items 10–13, merge `dev → main` yourself. Jamie explicitly wants you to drive the merge after your fixes land, not before.
+
+**What was verified in this session (all 7 QA scenarios from `docs/squad-link-build-brief.md`):**
+
+| # | Scenario | Status | Test profile |
+|---|---|---|---|
+| 1 | Building creates crew | ✅ | jamiefosu@gmail.com / token `kzPDaElWFY` / Testy McTester |
+| 2 | Friend joins via link | ✅ (hybrid — see item 10) | jamiefosu+151@gmail.com |
+| 3 | Multi-gamer joining | ✅ | jamiefosu+15111@gmail.com (3 gamers) |
+| 4 | Week-change warning | ✅ | no payment — form-only test |
+| 5 | Invalid token | ✅ | `/squad/nonexistent-test-token` → state 3 |
+| 6 | Past-week page | ✅ | synthetic token `pastweek01` / scheduled re-test 2026-05-25 |
+| 7 | Looking purchase | ✅ | jamiefosu+262@gmail.com |
+
+Data pipeline verified correct across all four surfaces (Stripe PaymentIntent metadata, `ekuzo-purchases` tab, `squads` + `squad_members` tabs, Klaviyo profile properties). Zero column-shift on the 28-column `ekuzo-purchases` writes — the header-mapped `doPost` fix is working against real registration data, not just smoke tests. All `squad_token` / `joining_squad_token` values cross-reference cleanly across all sources.
+
+**Infra work done this session (Aaron: do NOT undo any of this):**
+
+- **Apps Script deployed (new version of existing web app — same URL).** `doPost` now maps row objects to sheet columns by header NAME not position (fixes the gender-column-shift bug for ALL tabs going forward). New `doGet` handler for `?action=squad&token=X` returns the crew owner record for `/squad/[token]` and the register page's `?squad=TOKEN` fetch. Canonical ekuzo-purchases header list grew from 26 → 28 (added `squad_token` + `joining_squad_token` columns for ops visibility). `docs/apps-script-backup-pre-squad.gs` committed as a roll-back snapshot of the pre-squad script.
+- **Google Sheet tabs created:** `squads` (7 columns) and `squad_members` (6 columns) — see spec doc for exact headers. The `ekuzo-purchases` tab has 28 columns now, aligned with the canonical list in the spec.
+- **Webhook updated:** `app/api/webhooks/stripe/route.ts` writes `squad_token` + `joining_squad_token` to the main `ekuzo-purchases` row (not just to `squads` / `squad_members`). This is an ops-visibility add — lets ops filter the main tab by token without needing a JOIN across squad tabs.
+- **Netlify env vars reconfigured for Stripe test mode on dev.** Before this session the dev Netlify context was running with `sk_live_*` and `pk_live_*`, so 4242 test cards were declining as "live mode + test card". We now have `sk_test_*` / `pk_test_*` / test `STRIPE_PRICE_CAMPS` / test `STRIPE_WEBHOOK_SECRET` on **Deploy Previews / Branch deploys / Preview Server & Agent Runners / Local development** contexts. **Production stays on live keys and live webhook** — untouched. If you deploy from dev and see live-mode payments again, the Branch deploys override got overwritten somewhere.
+- **`STRIPE_PRICE_*` added to `SECRETS_SCAN_OMIT_KEYS`.** Netlify was failing dev builds because its scanner treats Stripe price IDs as secrets; they're not (they're public identifiers). Existing omit list now includes all 4 price env vars: `STRIPE_PRICE_CAMPS`, `STRIPE_PRICE_EKUZO100`, `STRIPE_PRICE_TEAMS`, `STRIPE_PRICE_TEAMS_INSTALLMENTS`.
+- **Stripe live secret key was ROTATED.** Old `sk_live_..._xoPS` → new value, 7-day graceful expiration set on the old key. New value was pasted into Netlify Production context. If you see any service outside Netlify still using the old live secret (e.g. a local script, a CLI config), update it before 2026-04-22 when the old key expires. Known consumer was Netlify Functions; no other consumers are expected.
+- **Scheduled task set for 2026-05-25** to run the real post-Week-01 `hasWeekPassed()` verification. You don't need to remember it — it'll fire automatically.
+
+**Test data in dev sheets (safe to ignore or clean up — nothing is real):**
+
+- `squads` tab rows to clean if desired: `smoketest1` (Phase 2 smoke test), `pastweek01` (Scenario 6), `XTruMxZhLb` (Scenario 2 hybrid — Fly McFly profile). The `kzPDaElWFY` row (Testy) is also test data and can be deleted; just note that `/squad/kzPDaElWFY` will flip to "no longer available" once it's gone.
+- `squad_members` tab has 5 test rows all pointing at `kzPDaElWFY` (Fly, Able, daniel, rob, John).
+- `ekuzo-purchases` tab has 6 test rows from today 2026-04-15. Identify by `registration_date` today + `parent_email` containing `jamiefosu+*` or plain `jamiefosu@gmail.com`. None are real sales (we are pre-launch, per Jamie).
+
+**Flagged issues — full detail in `docs/QA-FLAGGED-ISSUES.md` items 10–13:**
+
+- **#10 (Medium, your lane):** squad_status selector stays visible + defaults to "Building" when `?squad=` is in URL. Friend-joining flow accidentally creates parallel crews. Fix: hide selector when `joining_squad_token` is set.
+- **#11 (Low, your lane):** added gamers don't inherit the crew's week/slot. Only gamer 1 gets pre-selected. Fix: extend pre-selection to all gamers when `joining_squad_token` is set.
+- **#12 (High, your lane, pre-existing bug):** Birthday field shows `*` required but can submit blank on added gamers. Surfaced during multi-gamer QA. Audit all per-gamer required-field validation, not just birthday. Pre-exists squad_link — just surfaced because we stress-tested multi-gamer paths harder than before.
+- **#13 (Medium, your Klaviyo work):** welcome email not firing because `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` is still draft. Profile properties are landing correctly — publish the template with the right merge tags and it'll light up.
+
+**Merge plan:**
+1. Aaron lands fixes for items 10, 11, 12 on `dev`.
+2. Aaron publishes Klaviyo welcome template (item 13) and tests end-to-end.
+3. Aaron merges `dev → main` per the CLAUDE.md sequence and verifies prod.
+4. Jamie holds off touching the merge — he wants Aaron to drive.
+
+**Context if the fix for #10–11 needs a product decision:** the build brief explicitly called out the Building-while-joining edge case ("a Building registration that's ALSO joining someone else's crew is a weird edge case; default behavior is that generating your own token wins") and the correct fix is to gate the selector, not change the webhook semantics. The data model already supports pure-join (`squad_token` blank + `joining_squad_token` set + `squad_status` blank). This is purely a UI gating change.
+
+---
+
 ## Jamie — April 15, 2026 (squad_link — crew invite links for camps)
 
 **What changed:** Built the full squad_link feature from `docs/squad-link-build-brief.md`. A parent registering "Building a squad" for camps now gets a personal crew invite link they can share; friends who click it land on `/squad/[token]`, register via `/programs/ekuzo-camps/register?squad=TOKEN`, see a pre-selected week/slot + red crew banner, and get stamped into the inviter's crew in the `squad_members` sheet tab.
