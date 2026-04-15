@@ -375,6 +375,21 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
 
 ---
 
+## Monthly GEO Audit
+
+Run `/audit` in Claude Code from the repo root to generate the full GEO
+audit suite (schema + citability + crawlers + llms.txt across 11 URLs).
+Output goes to `reports/YYYY-MM-DD/` with a SUMMARY.md pulling all scores
+into one table and diffing against the previous month if available.
+
+Default target is prod (`https://ekuzo.gg`). Pass a URL to audit a branch
+preview instead: `/audit https://dev--ekuzo.netlify.app`.
+
+Cadence: monthly (first week of each month works well). The dated folder
+structure gives you a trend line. Regressions get flagged in the summary.
+
+---
+
 ## Troubleshooting
 
 ### "Cannot find module" / "ENOENT build-manifest.json"
