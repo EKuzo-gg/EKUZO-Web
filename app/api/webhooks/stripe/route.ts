@@ -530,9 +530,16 @@ export async function POST(req: NextRequest) {
         stripe_pi_id: paymentIntent.id,
         registration_date: registrationDate,
         additional_info: additionalInfo,
-        // Camps-only; "" for other products. Add a `squad_status` column
-        // to the ekuzo-purchases sheet via Apps Script for this to land.
+        // Camps-only fields; "" for ekuzo100/teams. The sheet has
+        // canonical headers for all three — see the 28-column list in
+        // docs/apps-script-squad-endpoints-spec.md. squad_token +
+        // joining_squad_token are stamped onto EVERY gamer row in the
+        // registration (not just the owner row) so a single-tab FILTER
+        // on ekuzo-purchases by token surfaces the whole crew.
         squad_status: product === "camps" ? squadStatusLabel : "",
+        squad_token: product === "camps" ? (meta.squad_token || "") : "",
+        joining_squad_token:
+          product === "camps" ? (meta.joining_squad_token || "") : "",
       }));
 
       if (rows.length > 0) {

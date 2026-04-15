@@ -131,9 +131,9 @@ function doPost(e) {
 
 ### Canonical header row for the `ekuzo-purchases` tab
 
-The webhook currently sends **these 26 keys**, in this order, for every
-row. The sheet's header row (row 1) should contain exactly these names —
-spelling, underscores, and casing matter. Order doesn't matter with the
+The webhook sends **these 28 keys**, in this order, for every row. The
+sheet's header row (row 1) should contain exactly these names — spelling,
+underscores, and casing matter. Order doesn't matter with the
 header-mapped append, but using this order keeps the sheet readable.
 
 ```
@@ -163,10 +163,29 @@ stripe_pi_id
 registration_date
 additional_info
 squad_status
+squad_token
+joining_squad_token
 ```
 
+**`squad_token` / `joining_squad_token` on the main tab** — added so ops
+has a single-tab view of crew membership. For a Building-a-squad
+registration, every gamer row in the registration carries the same
+`squad_token`. For a family joining someone else's crew, every gamer row
+carries the same `joining_squad_token`. Blank for Looking purchases and
+for ekuzo100/teams. To find everyone in a given crew in one filter:
+
+```
+=FILTER('ekuzo-purchases'!A:AB,
+  ('ekuzo-purchases'!squad_token_col = "abc123") +
+  ('ekuzo-purchases'!joining_squad_token_col = "abc123"))
+```
+
+The normalized `squads` + `squad_members` tabs still exist as the
+lookup-optimized store that `doGet` hits for the squad-link landing
+page.
+
 **To align the existing sheet:** open `ekuzo-purchases`, and make sure
-row 1 contains exactly these 26 names. Add missing columns (`product`,
+row 1 contains exactly these 28 names. Add missing columns (`product`,
 `gender`, `gaming_experience`, `time_preference`, `first_semester`,
 `additional_info`, `squad_status`) — you can insert them anywhere; the
 name-mapped append will fill them correctly. Rename `skill_level` →
