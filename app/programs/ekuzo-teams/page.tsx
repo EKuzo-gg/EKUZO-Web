@@ -11,12 +11,22 @@ import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
+import TrackPageView from "@/components/analytics/TrackPageView";
+import JsonLd from "@/components/JsonLd";
+import { ekuzoTeamsCourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/programs/ekuzo-teams" },
   title: "EKUZO Teams — Semester-Based Esports Program",
   description:
     "EKUZO Teams: a semester-based esports program structured like sports. Consistent teammates, coach-led practice, and a real competitive season.",
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Programs", path: "/programs" },
+  { name: "EKUZO Teams", path: "/programs/ekuzo-teams" },
+]);
 
 const seasonCards = [
   {
@@ -95,6 +105,9 @@ const teamsFAQs = [
 export default function EkuzoTeamsPage() {
   return (
     <>
+      <JsonLd data={ekuzoTeamsCourseSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <TrackPageView program="ekuzo-teams" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section
         className="bg-white relative overflow-visible"

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog — EKUZO",
   description:
     "Stories, insights, and updates from the EKUZO team. Read about gamers who found confidence, leadership, and community through esports.",

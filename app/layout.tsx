@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import { ModalProvider } from "@/context/ModalContext";
 import ModalRenderer from "@/components/ui/ModalRenderer";
 import StickyCTA from "@/components/ui/StickyCTA";
 import NewsletterPopup from "@/components/ui/NewsletterPopup";
+import JsonLd from "@/components/JsonLd";
+import { rootGraph } from "@/lib/schema";
+
+const GA_MEASUREMENT_ID = "G-8LM45PX53W";
+const META_PIXEL_ID = "1284038230557204";
 
 /*
  * Tungsten Narrow — personal/preview use (Hoefler & Co)
@@ -29,12 +35,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ekuzo.gg"),
   title: {
     default: "EKUZO — Every Gamer Deserves a Team",
     template: "%s | EKUZO",
   },
   description:
     "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -77,93 +85,52 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://ekuzo.gg/#organization",
-      name: "EKUZO",
-      url: "https://ekuzo.gg",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://ekuzo.gg/images/ekuzo-logo-red.svg",
-      },
-      description:
-        "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
-      sameAs: [
-        "https://www.instagram.com/ekuzo.gg",
-        "https://www.facebook.com/ekuzo.gg",
-        "https://www.youtube.com/@ekuzogg",
-        "https://discord.gg/ekuzo",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://ekuzo.gg/#website",
-      url: "https://ekuzo.gg",
-      name: "EKUZO",
-      description: "Every Gamer Deserves a Team",
-      publisher: { "@id": "https://ekuzo.gg/#organization" },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://ekuzo.gg/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@type": "SiteNavigationElement",
-      "@id": "https://ekuzo.gg/#navigation",
-      name: "Main Navigation",
-      hasPart: [
-        {
-          "@type": "WebPage",
-          name: "EKUZO Camps",
-          url: "https://ekuzo.gg/programs/ekuzo-camps",
-          description: "Intensive 1-week summer esports camps with pro coaching, real teams, and daily tournaments.",
-        },
-        {
-          "@type": "WebPage",
-          name: "EKUZO Teams",
-          url: "https://ekuzo.gg/programs/ekuzo-teams",
-          description: "Semester-based esports program structured like sports with consistent teammates and coaches.",
-        },
-        {
-          "@type": "WebPage",
-          name: "EKUZO100",
-          url: "https://ekuzo.gg/programs/ekuzo100",
-          description: "4-week intro program. One month, $100, your first team.",
-        },
-        {
-          "@type": "WebPage",
-          name: "For Families",
-          url: "https://ekuzo.gg/parents",
-        },
-        {
-          "@type": "WebPage",
-          name: "For Schools",
-          url: "https://ekuzo.gg/schools",
-        },
-        {
-          "@type": "WebPage",
-          name: "FAQ",
-          url: "https://ekuzo.gg/faq",
-        },
-      ],
-    },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${tungsten.variable} h-full antialiased`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        <JsonLd data={rootGraph} />
+
+        {/* Google Analytics 4 */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
         />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+
+        {/* Meta Pixel */}
+        <Script id="meta-pixel-init" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${META_PIXEL_ID}');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col bg-white text-black">
         <ModalProvider>

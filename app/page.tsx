@@ -9,8 +9,11 @@ import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import HomeHowItWorks from "@/components/sections/HomeHowItWorks";
 import ParallaxBird from "@/components/ui/ParallaxBird";
 import Eyebrow from "@/components/ui/Eyebrow";
+import JsonLd from "@/components/JsonLd";
+import { testimonialVideoGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: "EKUZO — Every Gamer Deserves a Team",
   description:
     "Youth esports coaching programs that turn gaming into growth. Structured practice, skilled coaching, and real competition for every gamer.",
@@ -39,6 +42,7 @@ const growthItems = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={testimonialVideoGraph} />
       {/* ─────────────────────────────────────────────────────────────
           1. HERO
           Red bg, full-bleed bg image centerY 59%, bird centerY 85%

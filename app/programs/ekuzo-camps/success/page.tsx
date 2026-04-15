@@ -1,10 +1,11 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { trackPurchase } from "@/lib/analytics";
 
 type RegistrationDetails = {
   parentName: string;
@@ -33,6 +34,7 @@ function CampsSuccessPage() {
   const searchParams = useSearchParams();
   const [details, setDetails] = useState<RegistrationDetails | null>(null);
   const [loading, setLoading] = useState(true);
+  const tracked = useRef(false);
 
   useEffect(() => {
     // Stripe redirects with ?payment_intent=pi_xxx&payment_intent_client_secret=...&redirect_status=succeeded
@@ -52,6 +54,16 @@ function CampsSuccessPage() {
           console.error("Failed to fetch details:", data.error);
         } else {
           setDetails(data);
+          // Fire purchase conversion once per page load
+          if (!tracked.current) {
+            tracked.current = true;
+            const amount = parseFloat(data.totalPaid?.replace(/[^0-9.]/g, "") || "0");
+            trackPurchase({
+              program: "camps",
+              value: amount,
+              transactionId: paymentIntentId,
+            });
+          }
         }
       })
       .catch((err) => console.error("Error fetching success details:", err))

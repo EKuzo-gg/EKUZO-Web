@@ -6,6 +6,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
+  alternates: {
+    canonical: "/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life",
+  },
   title: "Conquering my Mountain and Giants: How Esports Changed My Life — EKUZO Blog",
   description:
     "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO — and a coach who taught me how to reframe everything.",

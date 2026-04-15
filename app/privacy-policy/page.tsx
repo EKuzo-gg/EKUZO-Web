@@ -1,10 +1,18 @@
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy — EKUZO",
   description: "EKUZO's Privacy Policy explaining how we collect, use, store, and protect information about parents, students, and school partners.",
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Privacy Policy", path: "/privacy-policy" },
+]);
 
 type Section = {
   sectionLabel: string;
@@ -109,6 +117,7 @@ const sections: Section[] = [
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Nav variant="light" />
 
       <main className="bg-white min-h-screen">

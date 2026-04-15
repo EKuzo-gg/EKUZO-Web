@@ -117,7 +117,7 @@ All programs live under `/programs/`:
 - `/programs/ekuzo100` — marketing page
 - `/programs/ekuzo100/register` — registration + Stripe payment ($100)
 - `/programs/ekuzo100/success` — payment confirmation
-- `/programs/ekuzo-teams` — marketing page (no commerce yet — next priority)
+- `/programs/ekuzo-teams` — marketing page + commerce live ($640/semester with $576 upfront discount or 4× $160 installment plan).
 - `/programs/ekuzo-camps` — marketing page (Aaron's v2 build)
 - `/programs/ekuzo-camps/register` — registration + Stripe payment ($199)
 - `/programs/ekuzo-camps/success` — payment confirmation
@@ -140,7 +140,6 @@ All programs live under `/programs/`:
 - [x] `/api/contact` — Contact form → Google Sheets + Beehiiv lead capture
 - [x] Camps end-to-end tested (3 test payments, single + multi-gamer)
 - [ ] EKUZO100 end-to-end test (code complete, needs test payment)
-- [ ] Teams commerce (next session)
 ### Remaining
 - [ ] `/about` — About page
 - [ ] `/blog` — Blog index (static, no CMS)
@@ -148,6 +147,32 @@ All programs live under `/programs/`:
 
 ### Redirect rules (next.config.mjs — 12 rules)
 All legacy URLs redirect to canonical `/programs/` routes. See `next.config.mjs` for full list.
+
+---
+
+## Structured Data (JSON-LD)
+
+All Schema.org structured data lives in **`lib/schema.ts`** — the single source of truth. Do NOT hand-roll JSON-LD inside page files. Import from `lib/schema.ts` and render with `<JsonLd data={...} />` from `components/JsonLd.tsx`.
+
+**What's already there:**
+- `rootGraph` — `EducationalOrganization` + `WebSite` + `SiteNavigationElement`, rendered once in `app/layout.tsx` and inherited by every page.
+- `ekuzoCampsCourseSchema` / `ekuzo100CourseSchema` / `ekuzoTeamsCourseSchema` — `Course` + `Offer` per program page.
+- `buildBreadcrumbSchema(trail)` — call on every inner page with `[{name, path}, ...]`.
+- `buildFAQPageSchema(items)` — reuse the page's existing FAQ array so content doesn't drift.
+- `testimonialVideoGraph` — consolidated `@graph` of 9 `VideoObject` nodes (homepage), transcripts read at module load from `public/testimonial-videos/*.txt`.
+
+**Rules:**
+1. Server-render JSON-LD. Never JS-inject — AI crawlers may skip late-bound structured data.
+2. One `<JsonLd>` per schema is fine, but prefer `@graph` when emitting multiple related entities on the same page (see `testimonialVideoGraph`).
+3. `JsonLd.tsx` escapes `<` to `\u003c` to prevent `</script>` break-outs — don't bypass it with a raw `<script>` tag.
+4. When adding a new page type (e.g. `/about` with a `Person` schema, or `/blog/[slug]` with `Article`), put the builder in `lib/schema.ts`, not in the page file.
+5. After any schema change, verify with: `curl -s http://localhost:3001/<path> | grep -o 'application/ld+json'` and paste the final `@graph` into https://validator.schema.org/.
+
+Rationale and scoring methodology: see `GEO-SCHEMA-REPORT.md` in the repo root.
+
+### Canonical URLs (Next.js metadata)
+
+`app/layout.tsx` sets `metadataBase: new URL("https://ekuzo.gg")`. Every page `metadata` export must include `alternates: { canonical: "/route/path" }` (relative to `metadataBase`). Client components (register / success pages) cannot export metadata — add a sibling `layout.tsx` server shim that declares the metadata and returns `children`. Transactional pages go noindex via the same metadata object: register = `robots: { index: false, follow: true }`, success = `robots: { index: false, follow: false }`.
 
 ---
 
@@ -305,6 +330,22 @@ There are two types of torn paper dividers. Know which one you need before build
 
 **Common mistake:** Putting the torn paper div inside the `overflow-clip` section. It will look like the bottom is being cut off / overrun by the section below. Move it outside the section into the `overflow-visible` wrapper to fix.
 
+### Never `fs.readFileSync` from `public/` in server code
+
+**What broke:** April 14, 2026. `lib/schema.ts` read testimonial `.txt` captions at module load via `fs.readFileSync(path.join(process.cwd(), "public", "testimonial-videos", ...))` to populate `VideoObject` structured data. Local builds passed. Netlify **deploy** (not build) failed at the function-upload step — the zipped `___netlify-server-handler.zip` exceeded Netlify's 50MB limit because Next.js file tracing pulled the entire `public/testimonial-videos/` directory (420MB of MP4s) into the serverless function bundle.
+
+**Why:** Files under `public/` are normally served from the CDN and never bundled into server functions. But `fs.readFileSync` with a path under `public/` causes Next.js static analysis to trace that directory into the function bundle — it has no way to know you only wanted the `.txt` files, so it grabs everything. The MP4 siblings got swept up.
+
+**Rules:**
+1. **Never** `fs.readFileSync` (or any `fs` call) against a path under `public/` from server code. Not in server components, not in route handlers, not at module scope.
+2. If you need file content at runtime and it's small and static, inline it as a string literal in a `.ts` module (see `lib/testimonialTranscripts.ts` for the pattern).
+3. If you need file content at build time only, read it in a Node script and write out a generated `.ts` file that gets imported.
+4. If you genuinely need to read a file at runtime, put it outside `public/` (e.g. `data/`) so file tracing can include just that file.
+5. Belt-and-suspenders: `next.config.mjs` now has `outputFileTracingExcludes` to keep `public/testimonial-videos/**` out of all function bundles. Don't remove it — it only costs a line of config and it's a hard guard.
+6. `next build` succeeding locally does NOT prove the Netlify deploy will succeed. It only proves the Next.js build compiled. The function-size limit is enforced at deploy time. Check `.next/server` size (`du -sh .next/server`) and `find .next -name "*.mp4"` before pushing anything that touches file I/O.
+
+Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, exclude videos from trace").
+
 ### Figma Asset Downloads
 - Figma MCP asset URLs are blocked by the VM proxy (exit code 56 from curl). When a Figma asset is needed, ask the user to export it from Figma and drop it into the project. Reference the Figma component name so they know what to export.
 
@@ -375,6 +416,58 @@ cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
 
 ---
 
+## Coding Behavior Rules (adapted from Karpathy principles)
+
+These apply to both Jamie's and Aaron's Claude instances. They reduce the most common LLM coding mistakes.
+
+### Think before coding
+- State assumptions explicitly. If uncertain, ask before implementing.
+- If multiple approaches exist, present the options — don't pick silently.
+- If something in the request is unclear, stop and ask. Don't guess.
+
+### Simplicity first
+- Write the minimum code that solves the problem. Nothing speculative.
+- No abstractions for single-use code. No "flexibility" that wasn't requested.
+- No error handling for impossible scenarios.
+- If 200 lines could be 50, rewrite it.
+
+### Surgical changes
+- Touch only what the request requires. Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken. Match existing style, even if you'd do it differently.
+- If your changes create unused imports/variables, clean those up. Don't remove pre-existing dead code unless asked.
+- **Every changed line should trace directly to the request.**
+
+### Goal-driven execution
+- Before multi-step work, state a brief plan with verification for each step:
+  ```
+  1. [Step] → verify: [check]
+  2. [Step] → verify: [check]
+  ```
+- Prefer verifiable goals: "write a test that reproduces the bug, then fix it" over "fix the bug."
+- Run the dev server / TypeScript check after changes to confirm nothing broke.
+
+### Verify before done
+- Never mark a task complete without proving it works. Run the dev server, check the page, confirm the output.
+- Diff behavior between `main` and your changes when relevant.
+- Ask yourself: "Would a staff engineer approve this?"
+
+### Autonomous bug fixing
+- When given a bug report: just fix it. Don't ask for hand-holding or extra context you can find yourself.
+- Point at logs, errors, failing tests — then resolve them.
+- Zero context switching required from the user. Go find the problem and fix it.
+
+### Self-improvement loop
+- After ANY correction from Jamie or Aaron, note the pattern so the same mistake doesn't repeat.
+- If a mistake reveals a gap in this CLAUDE.md (missing convention, unclear rule), propose an addition.
+- Review `WORKLOG.md` at session start to learn from recent changes and corrections.
+
+### Demand elegance (for non-trivial changes only)
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution."
+- Skip this for simple, obvious fixes — don't over-engineer. This rule is about quality, not perfectionism.
+
+---
+
 ## Team & Collaboration
 
 ### People
@@ -406,12 +499,27 @@ Aaron and Jamie communicate before touching each other's areas, but here's the g
 - Copy text within any page
 - `components/ui/Button.tsx`, `components/ui/ModalButton.tsx` — shared UI primitives
 
-### Git workflow
-Both work on `main`. No branches. Simple rules:
-1. `git pull` before starting work
-2. Tell each other before working (Slack/text) so you don't edit the same file
-3. Commit and push when done
-4. If you get a merge conflict, stop and talk — don't force push
+### Git workflow (updated April 8, 2026)
+Two branches with Netlify deploys:
+- **`dev`** — day-to-day work branch. Both Aaron and Jamie push here. Netlify auto-deploys to `dev--ekuzo.netlify.app` (preview URL).
+- **`main`** — production branch. Deploys to `ekuzo.gg` (live site). Only updated by merging `dev` into `main`.
+
+**Daily rules:**
+1. `git checkout dev` — always work on dev, never push directly to main
+2. `git pull origin dev` before starting work
+3. Tell each other before working (Slack/text) so you don't edit the same file
+4. Commit and push to `dev` when done
+5. Check the dev preview URL to confirm changes look right
+6. If you get a merge conflict, stop and talk — don't force push
+
+**To go live (merge dev → main):**
+```bash
+git checkout main
+git pull origin main
+git merge dev
+git push origin main
+git checkout dev
+```
 
 ### Preventing overwrites
 Aaron's front-end work will typically be ahead of Jamie's orchestration work. This is fine because they touch different files. The risk is small, but to be safe:

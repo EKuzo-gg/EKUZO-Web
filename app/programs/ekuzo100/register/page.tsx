@@ -11,6 +11,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { trackInitiateCheckout } from "@/lib/analytics";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -321,6 +322,7 @@ export default function Ekuzo100RegisterPage() {
       setClientSecret(data.clientSecret);
       setPaymentIntentId(data.paymentIntentId);
       setShowPayment(true);
+      trackInitiateCheckout({ program: "ekuzo100", value: PRICE * gamers.length });
       setIsSubmitting(false);
 
       setTimeout(() => {

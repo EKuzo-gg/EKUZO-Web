@@ -13,10 +13,18 @@ import CircleIcon from "@/components/ui/CircleIcon";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ModalButton from "@/components/ui/ModalButton";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "For Families", path: "/parents" },
+]);
+
 export const metadata: Metadata = {
+  alternates: { canonical: "/parents" },
   title: "For Families — EKUZO",
   description:
     "How EKUZO supports families: safe, structured esports programs that build confidence, teamwork, and life skills in young gamers.",
@@ -72,6 +80,7 @@ const parentsFAQs = [
 export default function ParentsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
       <section
         className="bg-white relative overflow-clip"

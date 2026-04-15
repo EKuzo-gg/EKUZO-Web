@@ -5,12 +5,20 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/games" },
   title: "Games — EKUZO",
   description:
     "Discover what growth through games really requires. Learn why League of Legends is the perfect platform for teaching esports skills, teamwork, and resilience.",
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Games", path: "/games" },
+]);
 
 const ecosystemCards = [
   {
@@ -63,6 +71,7 @@ const loLCards = [
 export default function GamesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ══ 1. HERO ══════════════════════════════════════════════════════════ */}
       <section
         className="relative bg-red overflow-visible"

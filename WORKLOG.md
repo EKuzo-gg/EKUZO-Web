@@ -14,6 +14,158 @@ Hey Jamie — when you fire up your Claude next, please pass along a big thank-y
 
 ---
 
+## Jamie — April 14, 2026 (Schema pass #2 — entity graph, canonicals, CourseInstance)
+
+**What changed:** Second pass on structured data after re-auditing dev-branch. Site went from a 78/100 baseline (first pass) to the remaining items in `GEO-SCHEMA-REPORT.md` / `GEO-SCHEMA-PROGRAMS.md`. Target post-deploy: 85+ per page.
+
+**Commits landed on `dev`:**
+- `0bba97d` — Organization updates + canonical URLs + coach Person nodes
+- `06f4fe9` — CourseInstance location + startDate/endDate + instructors
+- `9b6393a` — Review nodes on Courses from testimonial transcripts
+- `cafb784` — Replace placeholder VideoObject uploadDates with real 2026 dates
+
+**Schema fixes landed:**
+1. **Organization (EducationalOrganization)** — ISO `foundingDate: "2021-01-01"`, full `PostalAddress` (5617 Dolores St, Houston, TX 77057, US), `areaServed` (US + North America), `contactPoint` array (customer support = team@, legal = info@), and `founder` now references the Karlin Person node via `@id` instead of inline duplication.
+2. **Coach Person nodes** — added 3 `Person` schemas to `rootGraph`: Karlin "Faith" Oei (founder), Sebastien "ZzLegendary" DeMontigny, Nuri "Teemo Time" Je. Each has `@id`, `jobTitle`, `description`, `sameAs` (LinkedIn), `worksFor` → Org, and image. These inherit to every page via the root graph.
+3. **Canonical URLs** — set `metadataBase: new URL("https://ekuzo.gg")` in `app/layout.tsx` and added `alternates: { canonical: "/path" }` to every page metadata export (14 pages). Register/success pages got sibling `layout.tsx` server shims with canonical + `robots: { index: false }` (register is indexable=false/followable=true, success is noindex/nofollow).
+4. **CourseInstance enrichment** — added `location: VirtualLocation` (new `VIRTUAL_LOCATION` const), `startDate` / `endDate`, and `instructor` arrays (@id refs) to all 3 program Courses:
+   - Camps: 2026-05-18 → 2026-08-06, 3 instructors
+   - EKUZO100: 2026-06-02 → 2026-06-30, 2 instructors
+   - Teams: 2026-08-31 → 2026-12-18, 2 instructors
+5. **Review nodes on Courses** — new `buildTestimonialReview` helper maps the 9 testimonial transcripts into `Review` nodes attached to the appropriate Course via `itemReviewed`. Camps gets 3 parent reviews, EKUZO100 gets 4 student reviews, Teams gets 2 school reviews. `reviewBody` is sourced from `lib/testimonialTranscripts.ts` so content never drifts.
+6. **Real VideoObject uploadDates** — replaced 9x `"2024-01-01"` placeholder with real 2026 dates per testimonial (2026-01-12 through 2026-03-27). `TestimonialMeta` type got an `uploadDate` field; `testimonialVideoGraph` reads it from the per-entry record.
+
+**Deferred (intentionally NOT done this pass):**
+- Per-week CourseInstance array on Camps (10 weeks × 2 slots)
+- `aggregateRating` on Courses
+- Wikidata `sameAs`
+- `Article` / `speakable` schemas (no blog content yet)
+- Expanded `/about` Person schema
+
+**Files touched:**
+- `lib/schema.ts` — coach Persons, VIRTUAL_LOCATION, buildTestimonialReview, Org updates, all 3 Course CourseInstance enrichment + review arrays, testimonial uploadDate.
+- `app/layout.tsx` — metadataBase + canonical.
+- 14 existing page metadata exports — added `alternates.canonical`.
+- 6 new `layout.tsx` files under `app/programs/*/register/` and `app/programs/*/success/` — server shims so client pages get canonical + robots metadata.
+
+**Verification (local `next start`):**
+- `/` — canonical `https://ekuzo.gg`, root graph has 6 nodes (Org + WebSite + SiteNav + 3 coach Persons), testimonial VideoObject graph has 9 nodes with real 2026 uploadDates.
+- `/programs/ekuzo-camps` — Course: 2026-05-18→2026-08-06, 3 instructors, 3 reviews.
+- `/programs/ekuzo100` — Course: 2026-06-02→2026-06-30, 2 instructors, 4 reviews.
+- `/programs/ekuzo-teams` — Course: 2026-08-31→2026-12-18, 2 instructors, 2 reviews.
+
+**TODO after push:** run `/geo schema` audits against `dev--ekuzo.netlify.app` on homepage + 3 program pages; paste final @graph into validator.schema.org for each.
+
+---
+
+## Jamie — April 14, 2026 (Structured data / GEO schema pass)
+
+**What changed:**
+
+Implemented all 7 schema fixes from `GEO-SCHEMA-REPORT.md` (audit scored the live site at 57/100; target 85–95 post-fix). All JSON-LD is server-rendered via Next.js server components — no JS injection.
+
+**New files:**
+- `lib/schema.ts` — single source of truth for all JSON-LD. Exports: `rootGraph` (Organization + WebSite + SiteNavigation), per-program Course schemas, `buildBreadcrumbSchema`, `buildFAQPageSchema`, and `testimonialVideoSchemas` (reads `.txt` captions from `public/testimonial-videos/` at module load via `fs.readFileSync`).
+- `components/JsonLd.tsx` — thin server component that renders a `<script type="application/ld+json">` tag. Use `<JsonLd data={...} />` on any page.
+
+**Schema fixes landed:**
+1. **Removed fake SearchAction** from WebSite — was pointing at `/?q=` with no backing search endpoint. Validation error gone.
+2. **Upgraded `Organization` → `EducationalOrganization`** in `app/layout.tsx`. Added `foundingDate: "2021"`, `email: team@ekuzo.gg`, `founder: Karlin Oei` (with LinkedIn sameAs), `knowsAbout` array (8 topics), and extended `sameAs` to include LinkedIn company page, TikTok, and X. Dropped Discord from sameAs (not a stable public identifier).
+3. **Course + Offer schemas** on all three `/programs/*` pages via `<JsonLd>` in the server component. EKUZO Camps ($199), EKUZO100 ($100), EKUZO Teams (two Offer nodes: $576 pay-in-full and $640 4-payment plan) — all reference the EducationalOrganization via `@id`.
+4. **FAQPage schema** on `/faq` built from the existing `safetyFAQs / programsFAQs / outcomesFAQs / costFAQs / enrollmentFAQs` data arrays (reused, not duplicated).
+5. Founder Person schema handled via nested `founder` field on the EducationalOrganization — no separate top-level Person entity needed yet.
+6. **BreadcrumbList** added to every inner page: `/programs`, `/programs/ekuzo-camps`, `/programs/ekuzo100`, `/programs/ekuzo-teams`, `/methodology`, `/parents`, `/schools`, `/games`, `/faq`, `/terms-of-service`, `/privacy-policy`. Register/success pages skipped (low SEO value).
+7. **VideoObject schemas** for 9 testimonial videos added to the homepage (`app/page.tsx`). The `transcript` field is populated by reading the matching `.txt` caption files from `public/testimonial-videos/` at build time. `uploadDate` is a placeholder (`2024-01-01`) — update when real dates are known.
+
+**Files touched:**
+- `app/layout.tsx` — swapped inline jsonLd for `rootGraph` import.
+- `app/page.tsx` — added testimonial VideoObject schemas.
+- `app/programs/ekuzo-camps/page.tsx`, `app/programs/ekuzo100/page.tsx`, `app/programs/ekuzo-teams/page.tsx` — Course + Breadcrumb.
+- `app/faq/page.tsx` — FAQPage + Breadcrumb built from existing FAQ arrays.
+- `app/methodology/page.tsx`, `app/parents/page.tsx`, `app/schools/page.tsx`, `app/games/page.tsx`, `app/programs/page.tsx`, `app/terms-of-service/page.tsx`, `app/privacy-policy/page.tsx` — Breadcrumb only.
+- `CLAUDE.md` — removed "Teams commerce (next session)" from Remaining; updated `/programs/ekuzo-teams` status to reflect commerce is live.
+
+**Notes for Aaron:**
+- All schemas are in `lib/schema.ts` — if you rename a program or change pricing, update it there once and it propagates everywhere.
+- `components/JsonLd.tsx` is the only way to render JSON-LD in this codebase. Don't inline `dangerouslySetInnerHTML` anywhere else.
+- To validate after deploy: paste the final @graph from view-source into https://validator.schema.org/ or run `/geo schema https://dev--ekuzo.netlify.app` in Claude Code.
+- Placeholder data that should be replaced with real values: `uploadDate` on each testimonial video (currently `2024-01-01`).
+
+---
+
+## Jamie — April 13, 2026 (DNS + GA4/Meta analytics + Klaviyo webhook + env isolation)
+
+**What changed:**
+
+Two commits tonight on `dev`: `666d720` (analytics + Klaviyo) and `694a0c4` (webhook env isolation). Already pushed. Aaron: nothing you need to do, but read this so you know what's live.
+
+**DNS + Google Workspace (done in Namecheap, no code):**
+- MX records, SPF (merged Google + Amazon SES), DKIM (`google._domainkey` TXT), DMARC (`rua` to `jamie@ekuzo.gg`), Google Search Console verification. All set for `ekuzo.gg`.
+
+**GA4 + Meta Pixel — site-wide tracking (new):**
+- `app/layout.tsx` — added GA4 (`G-8LM45PX53W`) and Meta Pixel (`1284038230557204`) base scripts. Use `next/script` with `afterInteractive` strategy.
+- `lib/analytics.ts` (new) — shared conversion helpers: `trackViewContent`, `trackInitiateCheckout`, `trackPurchase`, `trackLead`. Each fires BOTH GA4 and Meta Pixel in one call.
+- `components/analytics/TrackPageView.tsx` (new) — client component that fires `ViewContent` or `InitiateCheckout` on mount. Use this in server-rendered marketing/landing pages since they can't call browser APIs directly. Pattern: `<TrackPageView program="camps" />` at the top of the JSX.
+- Wired into every funnel step:
+  - `app/programs/ekuzo-camps/page.tsx`, `ekuzo100/page.tsx`, `ekuzo-teams/page.tsx` — fires `ViewContent`
+  - `app/programs/ekuzo-camps/register/page.tsx`, `ekuzo100/register/page.tsx` — fires `InitiateCheckout` when user clicks to payment step
+  - `app/programs/ekuzo-camps/success/page.tsx`, `ekuzo100/success/page.tsx` — fires `Purchase` after successful payment confirmation (guarded with `useRef` to prevent duplicate fires)
+  - `components/ui/ContactModal.tsx` — fires `Lead` after successful form submission
+
+**Klaviyo wired as second webhook destination (new):**
+- `app/api/webhooks/stripe/route.ts` — after Beehiiv enrollment, also does: (1) profile upsert via `/api/profile-import`, (2) add to Purchasers list (`V4Uf7N`) via `/api/lists/:id/relationships/profiles`, (3) track "Placed Order" event via `/api/events`. Both Beehiiv and Klaviyo now receive identical data sets (gamer names, camp week/dates, squad status, cohort info, etc.) so we can sequence pre-product emails from either platform.
+- Env var added in Netlify (secret, all deploy contexts): `KLAVIYO_PRIVATE_API_KEY`
+- Shared gamer summary variables (`allGamerNames`, `gamerSummaries`, `earliestWeek`, `earliestSlot`) hoisted out of the Beehiiv try block so both enrollment sections can use them. Beehiiv and Klaviyo blocks each have their own try/catch so one failing doesn't kill the other.
+- End-to-end tested tonight (single-gamer camps payment). Verified: Stripe payment intent ✓, Gmail receipt ✓, Google Sheets row ✓, Klaviyo profile + "Placed Order" event + Purchasers list ✓, Beehiiv subscriber + tags + welcome automation ✓.
+
+**Stripe webhook environment isolation (bug fix):**
+- Problem discovered during end-to-end test: Stripe fires `payment_intent.succeeded` to **every** registered webhook endpoint. With both a production webhook (`ekuzo.gg`) AND a dev webhook (`dev--ekuzo.netlify.app`) active, a single dev test payment was being processed by both — causing duplicate rows in Google Sheets. (Beehiiv/Klaviyo are upsert-style APIs so they dedupe; Sheets blindly appends.)
+- Fix: each registration API (`camps`, `ekuzo100`, `teams`) now stamps the payment intent metadata with `environment: process.env.CONTEXT` (Netlify auto-sets `CONTEXT` to `production` / `branch-deploy` / `deploy-preview` / `dev`). The webhook skips events whose `environment` doesn't match the current deploy context. Backward-compat: historical payment intents without the field default to `production` so nothing breaks.
+
+**Stripe infra:**
+- New webhook endpoint created in Stripe: "EKUZO Netlify Dev" → `https://dev--ekuzo.netlify.app/api/webhooks/stripe` (listens to `payment_intent.succeeded` only)
+- `STRIPE_WEBHOOK_SECRET` env var in Netlify is now per-context: production keeps the original prod secret; Branch deploys / Deploy Previews / Preview Server use the new dev secret. Prod webhook untouched.
+
+**Known issues / next session:**
+- GA4: `purchase` event firing wasn't confirmed in Realtime (only saw `user_engagement`). Could be sampling delay; need to check Events report in ~24h. Also need to mark `purchase` as a key event in GA4 Admin.
+- Meta Pixel: Events Manager shows 0 events because my browser's ad blocker kills the network request. Need to verify via Meta's Test Events tab (bypasses ad blockers).
+- Google Sheets column alignment: noticed values may be off by one column (e.g., `Week 02` appeared under the `gender` header). Apps Script may append by position instead of mapping by header name. Worth an audit next session.
+- SEO audit: still outstanding from this session's original scope.
+
+---
+
+## Jamie — April 8, 2026 (favicons + dev branch workflow)
+
+**What changed:**
+
+**Complete favicon set (new):**
+- Generated full favicon suite from `bird-logo.png`: `app/favicon.ico` (16/32/48), `app/apple-icon.png` (180×180), `app/icon.png` (192×192), `public/favicon-16x16.png`, `public/favicon-32x32.png`, `public/android-chrome-192x192.png`, `public/android-chrome-512x512.png`
+- `public/site.webmanifest` — ties Android icons together with EKUZO branding (black theme)
+- `app/layout.tsx` — metadata updated to reference full icon set + manifest
+
+**Dev branch + Netlify branch deploys (new workflow — READ THIS):**
+- Created `dev` branch from `main`. Netlify now deploys both:
+  - `main` → **ekuzo.gg** (production, live site)
+  - `dev` → **dev--ekuzo.netlify.app** (preview, for reviewing before going live)
+- **New workflow for both Jamie and Aaron:**
+  1. Do all day-to-day work on `dev` branch
+  2. Push to `dev` → check at the dev URL
+  3. When confident → merge `dev` into `main` to go live
+- **Aaron action needed:** Switch to `dev` branch before starting work:
+  ```bash
+  git checkout dev
+  git pull origin dev
+  ```
+- To merge dev → main when ready to go live:
+  ```bash
+  git checkout main
+  git pull origin main
+  git merge dev
+  git push origin main
+  git checkout dev
+  ```
+---
+
 ## Aaron — April 10, 2026 (What Do We Play video + web optimization)
 
 **What changed:**

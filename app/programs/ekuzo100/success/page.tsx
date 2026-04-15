@@ -1,10 +1,11 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { trackPurchase } from "@/lib/analytics";
 
 export default function Ekuzo100SuccessPageWrapper() {
   return (
@@ -18,6 +19,18 @@ function Ekuzo100SuccessPage() {
   const searchParams = useSearchParams();
   const redirectStatus = searchParams.get("redirect_status");
   const succeeded = redirectStatus === "succeeded";
+  const tracked = useRef(false);
+
+  useEffect(() => {
+    if (succeeded && !tracked.current) {
+      tracked.current = true;
+      trackPurchase({
+        program: "ekuzo100",
+        value: 100,
+        transactionId: searchParams.get("payment_intent") ?? undefined,
+      });
+    }
+  }, [succeeded, searchParams]);
 
   return (
     <>

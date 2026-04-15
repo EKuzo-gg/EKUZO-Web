@@ -6,10 +6,13 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
 import Image from "next/image";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title: "FAQ — EKUZO",
   description:
     "Find answers about EKUZO programs, coaching, safety, scheduling, costs, and enrollment. Everything you need to know.",
@@ -144,9 +147,24 @@ const enrollmentFAQs = [
   },
 ];
 
+const faqPageSchema = buildFAQPageSchema([
+  ...safetyFAQs,
+  ...programsFAQs,
+  ...outcomesFAQs,
+  ...costFAQs,
+  ...enrollmentFAQs,
+]);
+
+const faqBreadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "FAQ", path: "/faq" },
+]);
+
 export default function FAQPage() {
   return (
     <>
+      <JsonLd data={faqPageSchema} />
+      <JsonLd data={faqBreadcrumbSchema} />
       {/* ══ 1. HERO — black bg, smoke graphics ═══════════════════════════════ */}
       <div className="relative overflow-visible">
       <section

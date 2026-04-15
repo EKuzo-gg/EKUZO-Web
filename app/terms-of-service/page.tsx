@@ -1,10 +1,18 @@
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/terms-of-service" },
   title: "Terms of Service — EKUZO",
   description: "Terms of Service governing your access to and use of EKUZO programs and website.",
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Terms of Service", path: "/terms-of-service" },
+]);
 
 type Section = {
   sectionLabel: string;
@@ -231,6 +239,7 @@ const sections: Section[] = [
 export default function TermsOfServicePage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Nav variant="light" />
 
       <main className="bg-white min-h-screen">

@@ -7,10 +7,18 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
 import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
+import JsonLd from "@/components/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Methodology", path: "/methodology" },
+]);
+
 export const metadata: Metadata = {
+  alternates: { canonical: "/methodology" },
   title: "Methodology — EKUZO",
   description:
     "Learn the EKUZO pedagogy: how games teach leadership, resilience, and teamwork. Built on 10 pillars of youth development and learning science.",
@@ -69,6 +77,7 @@ const pillars = [
 export default function MethodologyPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ══ 1. HERO — white bg, 50/50 grid, smoke graphics ═════════════════ */}
       <div className="relative overflow-visible" style={{ zIndex: 1 }}>
       <section

@@ -10,8 +10,15 @@ import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
+import TrackPageView from "@/components/analytics/TrackPageView";
+import JsonLd from "@/components/JsonLd";
+import {
+  ekuzoCampsCourseSchema,
+  buildBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/programs/ekuzo-camps" },
   title: "EKUZO Camp — Level Up Your Game This Summer",
   description:
     "Join EKUZO's intensive 1-week summer esports camps. Pro coaching, real teams, daily tournaments. Morning and afternoon slots available.",
@@ -161,9 +168,18 @@ const campsFAQs = [
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Programs", path: "/programs" },
+  { name: "EKUZO Camps", path: "/programs/ekuzo-camps" },
+]);
+
 export default function EkuzoCampsPage() {
   return (
     <>
+      <JsonLd data={ekuzoCampsCourseSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <TrackPageView program="camps" />
       {/* ══ STATS TICKER — above nav ═════════════════════════════════════════ */}
       <div
         className="overflow-hidden relative"
