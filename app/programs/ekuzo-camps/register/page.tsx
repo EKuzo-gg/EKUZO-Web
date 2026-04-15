@@ -8,6 +8,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
+import { nanoid } from "nanoid";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -157,10 +158,73 @@ export default function CampsRegisterPage() {
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ── Squad-link state (friend arriving via ?squad=TOKEN) ─────────────
+  // If the URL has a ?squad=TOKEN and Apps Script confirms the crew, we
+  // pre-select the owner's week/slot for the first gamer, show a banner,
+  // and warn if the visitor tries to change away from the crew's slot.
+  const [joiningSquadToken, setJoiningSquadToken] = useState<string | null>(null);
+  const [joiningCrewInfo, setJoiningCrewInfo] = useState<{
+    owner_gamer_name: string;
+    week_label: string;
+    slot: string;
+    week_dates: string;
+  } | null>(null);
+  const [crewOverrideAcknowledged, setCrewOverrideAcknowledged] = useState(false);
+
   // Payment state
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
   const [showPayment, setShowPayment] = useState(false);
+
+  // ── Load crew-owner record on mount if ?squad=TOKEN is present ─────
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("squad");
+    if (!token) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/squad/${encodeURIComponent(token)}`);
+        if (cancelled) return;
+        if (!res.ok) {
+          // 404 / past week / bad token → hand off to /squad/[token],
+          // which handles the terminal states with the right copy.
+          window.location.href = `/squad/${encodeURIComponent(token)}`;
+          return;
+        }
+        const data = await res.json();
+        if (cancelled) return;
+
+        setJoiningSquadToken(token);
+        setJoiningCrewInfo({
+          owner_gamer_name: data.owner_gamer_name,
+          week_label: data.week_label,
+          slot: data.slot,
+          week_dates: data.week_dates,
+        });
+
+        // Pre-select the crew's week + slot for the first gamer.
+        const weekNum = parseInt(String(data.week_label).replace(/\D/g, ""), 10);
+        const slot = data.slot === "AM" || data.slot === "PM" ? data.slot : null;
+        if (!Number.isNaN(weekNum) && slot) {
+          setGamers((prev) =>
+            prev.map((g, i) =>
+              i === 0 ? { ...g, selectedWeek: weekNum, selectedSlot: slot } : g
+            )
+          );
+        }
+      } catch {
+        if (cancelled) return;
+        window.location.href = `/squad/${encodeURIComponent(token)}`;
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // ── Gamer management ────────────────────────────────────────────────────
 
@@ -197,6 +261,29 @@ export default function CampsRegisterPage() {
   // ── Week/slot selection (per gamer) ────────────────────────────────────
 
   function selectSlot(gamerIndex: number, weekNum: number, slot: "AM" | "PM") {
+    // Crew warning: if this visitor arrived via a squad link and is now
+    // trying to pick a different (week, slot) than the crew owner for
+    // the first gamer, make them confirm that they're ok not being at
+    // camp together. Acknowledge once; after that they can edit freely.
+    if (
+      gamerIndex === 0 &&
+      joiningSquadToken &&
+      joiningCrewInfo &&
+      !crewOverrideAcknowledged
+    ) {
+      const crewWeekNum = parseInt(
+        joiningCrewInfo.week_label.replace(/\D/g, ""),
+        10
+      );
+      const isMatch = crewWeekNum === weekNum && joiningCrewInfo.slot === slot;
+      if (!isMatch) {
+        const ok = window.confirm(
+          `You're joining ${joiningCrewInfo.owner_gamer_name}'s crew in ${joiningCrewInfo.week_label} ${joiningCrewInfo.slot}. Changing this means you won't be at camp together. Continue?`
+        );
+        if (!ok) return;
+        setCrewOverrideAcknowledged(true);
+      }
+    }
     updateGamer(gamerIndex, { selectedWeek: weekNum, selectedSlot: slot });
   }
 
@@ -233,6 +320,14 @@ export default function CampsRegisterPage() {
     setErrors([]);
     setIsSubmitting(true);
 
+    // Squad tokens — fresh each submit for Building; joining_squad_token
+    // is whatever the ?squad= query param told us on page load. If the
+    // family is BOTH building and arrived via a crew link (edge case),
+    // generating their own token wins (they become the anchor of a new
+    // crew), which is consistent with the brief.
+    const squadTokenForSubmit =
+      squadStatus === "building" ? nanoid(10) : null;
+
     const payload = {
       parent,
       gamers: gamers.map((g) => {
@@ -247,9 +342,14 @@ export default function CampsRegisterPage() {
       }),
       // squadStatus: family-level vibe check, "building" | "looking"
       // Wired: register route → Stripe metadata (squad_status) → webhook
-      // → Google Sheets column (camps only). Email marketing (Klaviyo,
-      // replacing Beehiiv) will be wired during the migration.
+      // → Google Sheets column (camps only) + Klaviyo profile/event +
+      // Beehiiv custom field. Klaviyo owns the branded post-purchase moments
+      // (Find Your Squad activation lives there); Beehiiv owns the nurture
+      // layer. squad_status is written as the human label ("Building a squad"
+      // / "Looking for a squad"), which is what Klaviyo flow splits match on.
       squadStatus,
+      squad_token: squadTokenForSubmit,
+      joining_squad_token: joiningSquadToken,
       additionalInfo,
       totalPrice,
     };
@@ -422,6 +522,25 @@ export default function CampsRegisterPage() {
       {/* ── Form body ──────────────────────────────────────────────────── */}
       <section className="bg-white">
         <div className="max-w-[1232px] mx-auto px-6 sm:px-10 py-16 md:py-24">
+
+          {/* Crew-join banner — shown when arriving via ?squad=TOKEN */}
+          {joiningCrewInfo && (
+            <div className="mb-8 bg-red text-white px-6 py-5 rounded-sm">
+              <p
+                className="font-display uppercase leading-[0.9]"
+                style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+              >
+                You&apos;re joining {joiningCrewInfo.owner_gamer_name}&apos;s crew
+              </p>
+              <p
+                className="font-body mt-2"
+                style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "24px" }}
+              >
+                EKUZO Camp — {joiningCrewInfo.week_label} ({joiningCrewInfo.week_dates}) {joiningCrewInfo.slot}.
+                We&apos;ve pre-selected this week for you below.
+              </p>
+            </div>
+          )}
 
           {/* Errors */}
           {errors.length > 0 && (
@@ -849,7 +968,6 @@ export default function CampsRegisterPage() {
                       totalPrice={totalPrice}
                       paymentIntentId={paymentIntentId}
                       parentEmail={parent.email}
-                      gamerSummaries={selectedGamerSummaries}
                     />
                   </Elements>
                 </div>
@@ -882,12 +1000,10 @@ function CheckoutForm({
   totalPrice,
   paymentIntentId,
   parentEmail,
-  gamerSummaries,
 }: {
   totalPrice: number;
   paymentIntentId: string | null;
   parentEmail: string;
-  gamerSummaries: any[];
 }) {
   const stripe = useStripe();
   const elements = useElements();

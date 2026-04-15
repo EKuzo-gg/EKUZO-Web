@@ -6,6 +6,54 @@
 
 ---
 
+## Jamie — April 15, 2026 (squad_link — crew invite links for camps)
+
+**What changed:** Built the full squad_link feature from `docs/squad-link-build-brief.md`. A parent registering "Building a squad" for camps now gets a personal crew invite link they can share; friends who click it land on `/squad/[token]`, register via `/programs/ekuzo-camps/register?squad=TOKEN`, see a pre-selected week/slot + red crew banner, and get stamped into the inviter's crew in the `squad_members` sheet tab.
+
+**New files:**
+- `lib/squad.ts` — `fetchSquadOwner(token)` server helper (hits Apps Script `?action=squad&token=X` with 60s revalidate cache), `isValidSquadToken(token)` allow-list validator (`[A-Za-z0-9_-]{4,32}`), `hasWeekPassed(weekDates)` date parser with fail-open semantics. **⚠ `hasWeekPassed` needs a manual test after 2026-05-25** when the first camp week actually ends — no test harness in repo, notes in the file and in `apps-script-squad-endpoints-spec.md`.
+- `app/api/squad/[token]/route.ts` — GET proxy. Validates token shape before any outbound call, fetches from Apps Script, returns 404 for unknown *or* past-week crews (collapses both terminal states into one client code path so the register page hand-off stays in one place).
+- `app/squad/[token]/page.tsx` — server component, three render states (valid upcoming / past week / invalid). Tungsten red CTA, `robots: noindex,nofollow`, uses `next/link` for the CTA. Reads owner record at render time via the shared helper so the SSR'd HTML has the right copy for crawlers + analytics.
+- `docs/apps-script-squad-endpoints-spec.md` — full copy-pasteable Apps Script spec for Jamie to deploy. **Includes the header-mapped `doPost` fix for the `ekuzo-purchases` tab** that resolves the long-standing column-shift bug (see below).
+- `docs/squad-link-build-brief.md` — the source-of-truth build brief from Cowork, committed alongside so Aaron's claude can read it for context.
+
+**Modified:**
+- `package.json` / `package-lock.json` — added `nanoid`.
+- `app/programs/ekuzo-camps/register/page.tsx` (**Aaron's lane — narrow diff, please review**): reads `?squad=TOKEN` on mount, fetches `/api/squad/[token]`, handles 404/past-week by redirecting to `/squad/[token]`. On success pre-selects week+slot for gamer 0, shows a red `bg-red` crew banner above the form, gates week/slot changes on gamer 0 through a `window.confirm` ("Changing this means you won't be at camp together") that acknowledges once per session. On submit, generates a fresh 10-char `nanoid()` `squad_token` when `squadStatus === "building"` and passes `squad_token` + `joining_squad_token` to the API. Also did a review-pass cleanup: removed the unused `gamerSummaries` prop on `CheckoutForm`.
+- `app/api/camps/register/route.ts`: accepts `squad_token` + `joining_squad_token` from the body, validates both through `isValidSquadToken` before stamping Stripe PaymentIntent metadata (strict allow-list, prevents arbitrary client input from flowing downstream). Added local `ClientGamer` type to replace `any` on the `gamers.forEach` callback and narrowed the outer `catch` to use `err instanceof Error`.
+- `app/api/webhooks/stripe/route.ts`: builds `squad_link = https://ekuzo.gg/squad/${meta.squad_token}` (blank if missing) and writes it to Beehiiv custom fields (camps block), Klaviyo profile properties, and the Klaviyo "Placed Order" event properties. New camps-only block after the existing Sheets write: if `meta.squad_token` → POSTs `{ tab: "squads", rows: [...] }` with the earliest-week gamer as owner. If `meta.joining_squad_token` → POSTs `{ tab: "squad_members", rows: [...] }` with one row per gamer. Each has its own try/catch. Also did a cleanup pass: added a local `MetadataGamer` type to replace the `any[]` on the parsed-from-metadata gamers array (catches field-name typos at compile time — exactly the class of bug that caused the gender-shift), and narrowed all seven `catch (err: any)` blocks to `catch (err)` with `err instanceof Error` narrowing.
+
+**Google Sheets column-shift bug (gender column) — diagnosis + fix:**
+
+Jamie spotted on 2026-04-15 that a test submission landed with the `gender` cell empty and every subsequent column shifted one left. This is the same bug flagged in the April 13 WORKLOG entry ("Week 02 appeared under the gender header"). I traced the full pipeline (form state → register API → Stripe metadata → webhook → Sheets POST body) and **confirmed the Next.js side is not the bug** — every field including `gender` is always sent with a `|| ""` fallback, key order is stable, no data is ever dropped. Root cause is Apps Script doing `sheet.appendRow` positionally using `Object.values(row)` or a hardcoded column array; any drift between the JS object key order and the sheet's header row order cascades into a shift starting at the first mismatched position.
+
+**Fix (specced, not yet deployed — requires Jamie to paste into Apps Script):** `docs/apps-script-squad-endpoints-spec.md` now includes a rewritten `doPost` that maps row objects to sheet columns **by header name** for ALL tabs (main + new squad tabs), not just the new squad tabs. The spec also lists the canonical 26-column header row the webhook currently sends so Jamie can align the `ekuzo-purchases` sheet on deploy. Historical rows that were written under the positional append are still corrupt — spec covers three backfill options, recommends leaving them as historical noise unless needed for ops reports.
+
+**Security hardening:**
+- Server-side token validation via `isValidSquadToken` (charset + length allow-list) in both `/api/squad/[token]` and `/api/camps/register` before any outbound call or metadata stamping, so arbitrary client input can't be smuggled into Stripe/Apps Script.
+- `fetchSquadOwner` uses `next: { revalidate: 60 }` instead of `no-store` — crews are immutable after creation so 60s is indistinguishable from fresh, and this caps upstream Apps Script calls at ~1/minute per token regardless of how viral a link goes (Apps Script has hard daily UrlFetch quotas that would otherwise take down the entire webhook path).
+- `/api/squad/[token]` rejects malformed tokens before any outbound call so it can't be used as a free probe against Apps Script.
+- `.trim()` on every string field in `fetchSquadOwner`'s response so a stray whitespace in a Sheets cell can't spuriously fire the "changing your week won't keep you with your crew" confirm dialog.
+
+**Verification (local, against running `next dev` on :3001):**
+- `tsc --noEmit` clean.
+- `eslint` on all six touched files: zero errors, zero warnings. Pre-existing baseline had 10 errors + 1 warning across the modified files; cleanup pass during review reduced it to zero in those files (details in the review conversation).
+- `GET /api/squad/{malformed}` → 404 without Apps Script call.
+- `GET /api/squad/{valid-shape-unknown}` → 404 after Apps Script round trip.
+- `GET /squad/{token}` → 200, "THIS CREW LINK IS NO LONGER AVAILABLE", `<meta robots=noindex,nofollow>`.
+- `GET /programs/ekuzo-camps/register?squad=...` → 200.
+- **NOT verified locally** — the valid-token "join crew" render (requires a real `squads` row in Sheets + `doGet` deployed), full Stripe round-trip with squad_token in metadata, the 7 QA scenarios in the brief. These all depend on the Apps Script side being deployed first.
+
+**What Jamie still needs to do (handoff):**
+1. Paste the updated `doPost` + new `doGet` from `docs/apps-script-squad-endpoints-spec.md` into the Apps Script editor, create the `squads` and `squad_members` tabs with the header rows in the spec, align the `ekuzo-purchases` header row to the canonical 26-column list, and redeploy.
+2. Run the 7 QA scenarios from `docs/squad-link-build-brief.md` against the dev preview once Apps Script is live.
+3. Decide whether to backfill historical column-shifted rows (spec has three options — recommendation is to leave as historical noise).
+4. Put a calendar reminder for 2026-05-25 to manually test `hasWeekPassed` with a real past-week `squads` row.
+
+**Notes for Aaron:** register page diff is scoped to the squad-link hook-in — banner render, `useEffect` for the `?squad=` query param, `selectSlot` confirm dialog, submit-time token passing. Unrelated cleanup while in the file: removed the unused `gamerSummaries` prop on `CheckoutForm`. Nothing else in the file should be touched by this diff.
+
+---
+
 ## Jamie — April 14, 2026 (Schema pass #2 — entity graph, canonicals, CourseInstance)
 
 **What changed:** Second pass on structured data after re-auditing dev-branch. Site went from a 78/100 baseline (first pass) to the remaining items in `GEO-SCHEMA-REPORT.md` / `GEO-SCHEMA-PROGRAMS.md`. Target post-deploy: 85+ per page.
