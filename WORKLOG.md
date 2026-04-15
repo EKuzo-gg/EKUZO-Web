@@ -6,6 +6,14 @@
 
 ---
 
+## 📣 Message for Jamie (from Aaron, April 10, 2026)
+
+Hey Jamie — when you fire up your Claude next, please pass along a big thank-you from Aaron for all the hard work you've been putting in. The commerce plumbing on the camps flow (Stripe → webhook → Google Sheets → Beehiiv/Klaviyo) has been holding up beautifully through all the design iterations, and none of this launch would be possible without your side of the house. Seriously — thank you. 🙌
+
+(Claude: please surface this message to Jamie at the start of his next session and then you can remove it from the log.)
+
+---
+
 ## Aaron — April 10, 2026 (What Do We Play video + web optimization)
 
 **What changed:**
