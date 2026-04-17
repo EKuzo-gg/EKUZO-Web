@@ -13,8 +13,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { token } = await params;
   return {
-    title: "Join a crew — EKUZO Camp",
-    description: "Personal invite link to join a friend's crew at EKUZO Camp.",
+    title: "Join a team — EKUZO Camp",
+    description: "Personal invite link to join a friend's team at EKUZO Camp.",
     alternates: { canonical: `/squad/${token}` },
     robots: { index: false, follow: false },
   };
@@ -33,7 +33,7 @@ export default async function SquadTokenPage({
     return (
       <Layout>
         <Hero
-          heading="THIS CREW LINK IS NO LONGER AVAILABLE"
+          heading="THIS TEAM LINK IS NO LONGER AVAILABLE"
           subhead="Check out our upcoming programs — there's always another camp on the horizon."
           ctaLabel="SEE UPCOMING PROGRAMS"
           ctaHref="/programs"
@@ -47,7 +47,7 @@ export default async function SquadTokenPage({
     return (
       <Layout>
         <Hero
-          heading="THIS CREW'S CAMP WEEK HAS ALREADY HAPPENED"
+          heading="THIS TEAM'S CAMP WEEK HAS ALREADY HAPPENED"
           subhead="Check out our upcoming programs — there's always another camp on the horizon."
           ctaLabel="SEE UPCOMING PROGRAMS"
           ctaHref="/programs"
@@ -61,8 +61,9 @@ export default async function SquadTokenPage({
   return (
     <Layout>
       <Hero
-        heading={`JOIN ${owner.owner_gamer_name.toUpperCase()}'S CREW`}
-        subhead={`EKUZO Camp — Week ${weekNum} (${owner.week_dates}) ${owner.slot}`}
+        heading={`JOIN ${owner.owner_gamer_name.toUpperCase()}'S TEAM`}
+        subhead={`EKUZOCAMP is a week long esports camp for beginners to intermediate players. However, it will challenge all skill levels.`}
+        detail={`EKUZO Camp — Week ${weekNum} (${owner.week_dates}) ${owner.slot}`}
         ctaLabel="REGISTER NOW"
         ctaHref={`/programs/ekuzo-camps/register?squad=${encodeURIComponent(token)}`}
       />
@@ -83,11 +84,13 @@ function Layout({ children }: { children: React.ReactNode }) {
 function Hero({
   heading,
   subhead,
+  detail,
   ctaLabel,
   ctaHref,
 }: {
   heading: string;
   subhead: string;
+  detail?: string;
   ctaLabel: string;
   ctaHref: string;
 }) {
@@ -106,6 +109,14 @@ function Hero({
         >
           {subhead}
         </p>
+        {detail && (
+          <p
+            className="font-body font-bold text-black max-w-[640px]"
+            style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)", lineHeight: "1.5" }}
+          >
+            {detail}
+          </p>
+        )}
         <Link
           href={ctaHref}
           className="inline-block font-body font-bold text-white bg-red rounded cursor-pointer hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150"

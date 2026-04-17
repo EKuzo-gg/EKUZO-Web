@@ -399,13 +399,13 @@ export default function EkuzoCampsPage() {
                   className="font-display uppercase text-black leading-[0.85] mb-6"
                   style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
                 >
-                  The squad stays together.
+                  The team stays together.
                 </h2>
                 <p className="font-body text-black/70 leading-relaxed mb-6" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
                   Most camps end on Friday, and the kids go their separate ways. At EKUZO, we place campers into 5-player squads on Day 1. You train together, compete together, and learn to communicate.
                 </p>
                 <p className="font-body text-black/70 leading-relaxed mb-8" style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}>
-                  When camp ends, the squad remains. Campers leave not just with better skills, but with a reliable, non-toxic team to keep climbing the ranks with.
+                  When the camp ends, the team lives on. Campers leave not just with better skills, but with a reliable, non-toxic team to keep climbing the ranks with.
                 </p>
                 <ul className="flex flex-col gap-4">
                   {[

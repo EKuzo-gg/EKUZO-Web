@@ -80,12 +80,12 @@ function CampsSuccessPage() {
           style={{ paddingTop: "160px", paddingBottom: "80px" }}
         >
           {/* Success icon */}
-          <div className="mx-auto mb-8 w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <div className="mx-auto mb-8 w-28 h-28 bg-[#dcfce7] rounded-full flex items-center justify-center">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
               <path
-                d="M12 20L18 26L28 14"
+                d="M28 50L42 64L72 32"
                 stroke="#15803d"
-                strokeWidth="3"
+                strokeWidth="6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -95,7 +95,7 @@ function CampsSuccessPage() {
           {/* Heading */}
           <h1
             className="font-display uppercase text-black"
-            style={{ fontSize: "clamp(3rem, 6vw, 80px)", lineHeight: "0.95" }}
+            style={{ fontSize: "clamp(4.5rem, 10vw, 120px)", lineHeight: "0.9" }}
           >
             LEVEL <span className="text-red">UP!</span>
           </h1>
@@ -200,7 +200,7 @@ function CampsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">2.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Download the game</span> — make sure your gamer has the game installed and ready before camp starts.
+                  <span className="font-bold text-[#0a0a0a]">Get a head start</span> — Download League of Legends. Create an account for your gamer and get ready to join the rift.
                 </p>
               </div>
               <div className="flex items-start gap-3">

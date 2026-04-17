@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
     // squad_token and this stays empty for them — Klaviyo/Beehiiv fields
     // are blank, no `squads` sheet write happens.
     const squadLink = meta.squad_token
-      ? `https://ekuzo.gg/squad/${meta.squad_token}`
+      ? `https://ekuzo.gg/programs/ekuzo-camps/register?squad=${meta.squad_token}`
       : "";
 
     // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────

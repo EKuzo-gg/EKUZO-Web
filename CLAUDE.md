@@ -373,6 +373,41 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
 ~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next build
 ```
 
+### Local Payment Testing (Stripe webhooks)
+
+When testing payments locally, Stripe needs a way to reach your machine. The Stripe CLI bridges this. You need **two terminal tabs** running side by side:
+
+**Tab 1 — Stripe webhook forwarding:**
+```bash
+stripe listen --forward-to localhost:3001/api/webhooks/stripe
+```
+This prints a webhook signing secret (`whsec_...`). Copy it into `.env.local` as `STRIPE_WEBHOOK_SECRET` (only needed once — it stays the same until you log out of Stripe CLI).
+
+**Tab 2 — Dev server:**
+```bash
+cd ~/Desktop/EKUZO/Projects/EKUZO-Web && npx next dev -p 3001
+```
+
+**Test card:** `4242 4242 4242 4242`, any future expiry, any CVC, any ZIP.
+
+**What happens on a successful test payment:**
+1. Stripe sends `payment_intent.succeeded` → Stripe CLI forwards it to `localhost:3001/api/webhooks/stripe`
+2. Webhook writes gamer data to Google Sheets (ekuzo-purchases, squads, squad_members tabs)
+3. Webhook writes profile properties to Klaviyo (gamer name, camp week, squad link, etc.)
+4. Browser redirects to `/programs/ekuzo-camps/success?payment_intent=pi_xxx&redirect_status=succeeded`
+
+**First-time setup (one-time):**
+```bash
+brew install stripe/stripe-cli/stripe   # install
+stripe login                             # authenticate via browser
+```
+
+**Troubleshooting:**
+- `Invalid API Key` → check `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` in `.env.local` start with `sk_test_` and `pk_test_`
+- `ERR_CONNECTION_REFUSED` on redirect → check `NEXT_PUBLIC_SITE_URL` in `.env.local` matches your dev server port (should be `http://localhost:3001`)
+- `Webhook signature verification failed` → the `STRIPE_WEBHOOK_SECRET` in `.env.local` doesn't match. Copy the `whsec_` value from the `stripe listen` output and restart the dev server.
+- Webhook fires but nothing lands in Sheets/Klaviyo → check the terminal running `stripe listen` for response status codes. 200 = success, 400/500 = check the dev server terminal for error logs.
+
 ---
 
 ## Monthly GEO Audit

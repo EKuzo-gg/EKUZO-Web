@@ -18,11 +18,12 @@ export default function StickyCTA() {
   // Hide on register and success pages — user is already in checkout flow
   const isCheckoutPage = pathname.endsWith("/register") || pathname.endsWith("/success");
 
-  // Context-specific: schools = conversation only, parents = enroll only
+  // Context-specific overrides per page family
   const isSchools = pathname.startsWith("/schools");
   const isParents = pathname.startsWith("/parents");
-  const showEnroll = !isSchools;
-  const showContact = !isParents;
+  const isCamps = pathname === "/programs/ekuzo-camps";
+  const showEnroll = !isSchools && !isCamps;
+  const showContact = !isParents && !isCamps;
 
   useEffect(() => {
     const onScroll = () => {
@@ -58,29 +59,49 @@ export default function StickyCTA() {
       {/* Top shadow for separation */}
       <div className="absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none" />
 
-      <div className="bg-white flex items-center justify-center gap-2 px-3 pt-3 pb-6 md:gap-4 md:px-4 md:pt-4 md:pb-8">
-        {showEnroll && (
-          <button
-            onClick={() => openModal("enroll")}
-            className={`flex-1 ${showContact ? "max-w-[340px]" : "max-w-[680px]"} bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
-                       py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
-                       hover:brightness-110 active:scale-[0.98] active:brightness-90
-                       transition-all duration-150`}
-          >
-            Enroll my gamer
-          </button>
-        )}
+      <div className={`flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 ${isCamps ? "bg-[#AE2CF2]" : "bg-white"}`}>
+        {isCamps ? (
+          <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
+            <span className="font-display uppercase text-white leading-[0.95] hidden sm:block whitespace-nowrap" style={{ fontSize: "clamp(1.5rem, 3.75vw, 3.75em)" }}>
+              Ready to level up this summer?
+            </span>
+            <a
+              href="/programs/ekuzo-camps/register"
+              className="flex-1 sm:flex-none bg-white text-[#AE2CF2] border-2 border-white font-body font-bold text-sm md:text-lg
+                         py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0
+                         hover:bg-[#AE2CF2] hover:text-white hover:border-white
+                         active:scale-[0.98] active:brightness-90
+                         transition-all duration-150"
+            >
+              Register for Camp
+            </a>
+          </div>
+        ) : (
+          <>
+            {showEnroll && (
+              <button
+                onClick={() => openModal("enroll")}
+                className={`flex-1 ${showContact ? "max-w-[340px]" : "max-w-[680px]"} bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
+                           py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
+                           hover:brightness-110 active:scale-[0.98] active:brightness-90
+                           transition-all duration-150`}
+              >
+                Enroll my gamer
+              </button>
+            )}
 
-        {showContact && (
-          <button
-            onClick={() => openModal("contact")}
-            className={`flex-1 ${showEnroll ? "max-w-[340px] bg-transparent text-red" : "max-w-[680px] bg-red text-white"} border-2 border-red font-body font-bold text-sm md:text-lg
-                       py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
-                       hover:bg-red hover:text-white active:scale-[0.98] active:brightness-90
-                       transition-all duration-150`}
-          >
-            Talk to Humans
-          </button>
+            {showContact && (
+              <button
+                onClick={() => openModal("contact")}
+                className={`flex-1 ${showEnroll ? "max-w-[340px] bg-transparent text-red" : "max-w-[680px] bg-red text-white"} border-2 border-red font-body font-bold text-sm md:text-lg
+                           py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
+                           hover:bg-red hover:text-white active:scale-[0.98] active:brightness-90
+                           transition-all duration-150`}
+              >
+                Talk to Humans
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
