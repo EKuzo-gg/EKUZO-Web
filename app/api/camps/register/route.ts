@@ -1,9 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { isValidSquadToken } from "@/lib/squad";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-02-25.clover",
 });
+
+/**
+ * Shape of each gamer as posted by the camps register form. Kept local
+ * to this route because it's the client-form shape (has `selectedSlot`,
+ * `preferredGames` as array) — distinct from the metadata-reconstructed
+ * shape in the Stripe webhook. All fields optional: we defensively
+ * coerce in the body.
+ */
+type ClientGamer = {
+  firstName?: string;
+  lastName?: string;
+  gamerTag?: string;
+  weekLabel?: string;
+  weekDates?: string;
+  selectedSlot?: string;
+  slotHours?: string;
+  price?: number;
+  birthday?: string;
+  gender?: string;
+  skillLevel?: string;
+  tshirtSize?: string;
+  preferredGames?: string[];
+};
 
 /**
  * POST /api/camps/register
@@ -16,7 +40,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { parent, gamers, additionalInfo, totalPrice, timezone, squadStatus } = body;
+    const {
+      parent,
+      gamers,
+      additionalInfo,
+      totalPrice,
+      timezone,
+      squadStatus,
+      squad_token,
+      joining_squad_token,
+    } = body;
 
     // ── Validate ────────────────────────────────────────────────────
     if (!parent?.email || !parent?.firstName || !parent?.lastName) {
@@ -63,6 +96,16 @@ export async function POST(req: NextRequest) {
       squad_status: squadStatusSafe,
     };
 
+    // Squad link tokens (camps only) — 10-char nanoids, validated against
+    // a strict charset/length allow-list before they land in Stripe
+    // metadata so arbitrary client input can't be smuggled downstream.
+    if (isValidSquadToken(squad_token)) {
+      metadata.squad_token = squad_token;
+    }
+    if (isValidSquadToken(joining_squad_token)) {
+      metadata.joining_squad_token = joining_squad_token;
+    }
+
     // Split additional_info across multiple metadata keys if >500 chars
     // Stripe metadata values max 500 chars each, max 50 keys total
     const info = (additionalInfo || "").slice(0, 1500); // cap at 1500 total
@@ -73,7 +116,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    gamers.forEach((gamer: any, i: number) => {
+    gamers.forEach((gamer: ClientGamer, i: number) => {
       metadata[`gamer_${i}`] = JSON.stringify({
         firstName: gamer.firstName,
         lastName: gamer.lastName,
@@ -105,11 +148,10 @@ export async function POST(req: NextRequest) {
       clientSecret: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id,
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Error creating payment intent:", err);
-    return NextResponse.json(
-      { error: err.message || "Failed to create payment intent." },
-      { status: 500 }
-    );
+    const message =
+      err instanceof Error ? err.message : "Failed to create payment intent.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

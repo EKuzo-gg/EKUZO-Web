@@ -264,11 +264,10 @@ export default function Ekuzo100RegisterPage() {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
       if (!gamer.firstName.trim()) errs.push(`${label}: first name is required.`);
       if (!gamer.lastName.trim()) errs.push(`${label}: last name is required.`);
-      if (!gamer.gamerTag.trim()) errs.push(`${label}: gamer tag is required.`);
       if (!gamer.birthday) errs.push(`${label}: birthday is required.`);
       if (!gamer.gender) errs.push(`${label}: please select a gender.`);
       if (!gamer.preferredGames.length)
-        errs.push(`${label}: please select at least one preferred game.`);
+        errs.push(`${label}: please select at least one favorite game.`);
       if (!gamer.schedulePreference)
         errs.push(`${label}: please select a schedule preference.`);
     });
@@ -624,20 +623,20 @@ export default function Ekuzo100RegisterPage() {
 
                 <div className="mt-6">
                   <InputField
-                    label="Gamer Tag / Username *"
+                    label="Gamer Tag / Username"
                     value={gamer.gamerTag}
                     onChange={(v) => updateGamer(idx, { gamerTag: v })}
                     placeholder="Enter gamer tag"
                   />
                 </div>
 
-                {/* Preferred Games */}
+                {/* Favorite Games */}
                 <div className="mt-6">
                   <label
                     className="font-body font-bold text-[#374151] block mb-3"
                     style={{ fontSize: "14px", lineHeight: "20px" }}
                   >
-                    Preferred Games * (Select all that apply)
+                    Favorite Games * (Select all that apply)
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
                     {GAMES.map((game) => {

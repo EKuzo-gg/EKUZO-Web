@@ -373,6 +373,56 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
 ~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next build
 ```
 
+### Local Payment Testing (Stripe webhooks)
+
+When testing payments locally, Stripe needs a way to reach your machine. The Stripe CLI bridges this. You need **two terminal tabs** running side by side:
+
+**Tab 1 — Stripe webhook forwarding:**
+```bash
+stripe listen --forward-to localhost:3001/api/webhooks/stripe
+```
+This prints a webhook signing secret (`whsec_...`). Copy it into `.env.local` as `STRIPE_WEBHOOK_SECRET` (only needed once — it stays the same until you log out of Stripe CLI).
+
+**Tab 2 — Dev server:**
+```bash
+cd ~/Desktop/EKUZO/Projects/EKUZO-Web && npx next dev -p 3001
+```
+
+**Test card:** `4242 4242 4242 4242`, any future expiry, any CVC, any ZIP.
+
+**What happens on a successful test payment:**
+1. Stripe sends `payment_intent.succeeded` → Stripe CLI forwards it to `localhost:3001/api/webhooks/stripe`
+2. Webhook writes gamer data to Google Sheets (ekuzo-purchases, squads, squad_members tabs)
+3. Webhook writes profile properties to Klaviyo (gamer name, camp week, squad link, etc.)
+4. Browser redirects to `/programs/ekuzo-camps/success?payment_intent=pi_xxx&redirect_status=succeeded`
+
+**First-time setup (one-time):**
+```bash
+brew install stripe/stripe-cli/stripe   # install
+stripe login                             # authenticate via browser
+```
+
+**Troubleshooting:**
+- `Invalid API Key` → check `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` in `.env.local` start with `sk_test_` and `pk_test_`
+- `ERR_CONNECTION_REFUSED` on redirect → check `NEXT_PUBLIC_SITE_URL` in `.env.local` matches your dev server port (should be `http://localhost:3001`)
+- `Webhook signature verification failed` → the `STRIPE_WEBHOOK_SECRET` in `.env.local` doesn't match. Copy the `whsec_` value from the `stripe listen` output and restart the dev server.
+- Webhook fires but nothing lands in Sheets/Klaviyo → check the terminal running `stripe listen` for response status codes. 200 = success, 400/500 = check the dev server terminal for error logs.
+
+---
+
+## Monthly GEO Audit
+
+Run `/audit` in Claude Code from the repo root to generate the full GEO
+audit suite (schema + citability + crawlers + llms.txt across 11 URLs).
+Output goes to `reports/YYYY-MM-DD/` with a SUMMARY.md pulling all scores
+into one table and diffing against the previous month if available.
+
+Default target is prod (`https://ekuzo.gg`). Pass a URL to audit a branch
+preview instead: `/audit https://dev--ekuzo.netlify.app`.
+
+Cadence: monthly (first week of each month works well). The dated folder
+structure gives you a trend line. Regressions get flagged in the summary.
+
 ---
 
 ## Troubleshooting
@@ -399,6 +449,35 @@ cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
 ```
 
 **How to avoid it:** Restart the dev server every so often during heavy editing sessions. If you see any weird "module not found" errors, it's almost always this.
+
+### Large Binaries — Git LFS + Pre-Commit Hook
+
+**Tracked via LFS:** `*.mp4`, `*.mov`, `*.webm`, `*.riv` (see `.gitattributes`). New files matching these patterns route through Git LFS automatically when staged.
+
+**Pre-commit hook:** `.husky/pre-commit` blocks any commit containing a file larger than 10MB that isn't LFS-tracked. Activated automatically by `npm install` (the `prepare: husky` script). If you see `BLOCKED: {file} is {N}MB` on commit, you have two options:
+
+1. **Route the file through LFS** (preferred for videos, animations, or any large binary asset):
+   ```bash
+   git lfs track "*.{ext}"      # e.g. git lfs track "*.glb"
+   git add .gitattributes
+   git add path/to/file.{ext}
+   git commit
+   ```
+   The hook will skip LFS-tracked files because their staged content is a tiny pointer, not the binary.
+
+2. **Serve the file externally** (preferred for anything the browser loads at runtime — host on a CDN, S3, or the Netlify static asset layer). Delete the local copy before committing.
+
+**What NOT to do:** don't `--no-verify` past the hook. The 10MB cap is there because Netlify's serverless function bundle limit is 50MB and one stray 20MB asset swept in by Next.js file tracing can break a production deploy (see the earlier Learning Log entry about `fs.readFileSync` from `public/`).
+
+**Verifying the setup after a fresh clone:**
+```bash
+git lfs install         # hooks LFS into this clone
+git lfs track           # lists the 4 tracked patterns
+cat package.json | grep prepare   # confirms husky prepare script
+ls .husky/pre-commit    # confirms hook exists and is executable
+```
+
+**Forward-looking only:** this setup does NOT migrate existing files into LFS. Historical MP4s and RIVs that were committed before this setup stay as-is. New files of tracked extensions go through LFS automatically; a migration pass can be done later if the `.git` directory grows unmanageable.
 
 ---
 

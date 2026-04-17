@@ -52,8 +52,9 @@ next-dev.log
 public/place-these-in-ekuzo-web-public/
 public/place-these-in-ekuzo-web-public.zip
 
-# Claude working files
-.claude/
+# Claude working files — ignore everything under .claude/ except shared commands
+.claude/*
+!.claude/commands/
 
 # Scratch/session files
 CAMPS-CLAUDE.md

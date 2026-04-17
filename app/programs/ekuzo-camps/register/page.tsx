@@ -8,6 +8,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
+import { nanoid } from "nanoid";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -36,7 +37,6 @@ type GamerInfo = {
   birthday: string;
   skillLevel: string;
   gender: string;
-  tshirtSize: string;
   selectedWeek: number | null;
   selectedSlot: "AM" | "PM" | null;
 };
@@ -83,8 +83,6 @@ const GAMES = [
 const SKILL_LEVELS = ["Novice", "Amateur", "Experienced", "Pro", "Other"];
 
 const GENDER_OPTIONS = ["Male", "Female", "Non-binary"];
-
-const TSHIRT_SIZES = ["YS", "YM", "YL", "AS", "AM", "AL", "AXL"];
 
 // ── Torn-paper SVG clip path (irregular edges for card mask) ────────────────
 
@@ -136,7 +134,6 @@ function emptyGamer(): GamerInfo {
     birthday: "",
     skillLevel: "",
     gender: "",
-    tshirtSize: "",
     selectedWeek: null,
     selectedSlot: null,
   };
@@ -157,10 +154,95 @@ export default function CampsRegisterPage() {
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ── Squad-link state (friend arriving via ?squad=TOKEN) ─────────────
+  // If the URL has a ?squad=TOKEN and Apps Script confirms the crew, we
+  // pre-select the owner's week/slot for the first gamer, show a banner,
+  // and warn if the visitor tries to change away from the crew's slot.
+  const [joiningSquadToken, setJoiningSquadToken] = useState<string | null>(null);
+  const [joiningCrewInfo, setJoiningCrewInfo] = useState<{
+    owner_gamer_name: string;
+    week_label: string;
+    slot: string;
+    week_dates: string;
+  } | null>(null);
+  const [crewOverrideAcknowledged, setCrewOverrideAcknowledged] = useState(false);
+
+  // Which added gamers (index > 0) have their week/slot picker force-expanded.
+  // Gamer 0 always shows the full 10-week grid. Added gamers inherit the
+  // previous gamer's selection and render a collapsed summary card until the
+  // parent clicks "Change" — this keeps the page from repeating the entire
+  // slot picker N times for a multi-gamer family.
+  const [expandedSlotPickers, setExpandedSlotPickers] = useState<
+    Record<number, boolean>
+  >({});
+
   // Payment state
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
   const [showPayment, setShowPayment] = useState(false);
+
+  // ── Load crew-owner record on mount if ?squad=TOKEN is present ─────
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("squad");
+    if (!token) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/squad/${encodeURIComponent(token)}`);
+        if (cancelled) return;
+        if (!res.ok) {
+          // 404 / past week / bad token → hand off to /squad/[token],
+          // which handles the terminal states with the right copy.
+          window.location.href = `/squad/${encodeURIComponent(token)}`;
+          return;
+        }
+        const data = await res.json();
+        if (cancelled) return;
+
+        setJoiningSquadToken(token);
+        setJoiningCrewInfo({
+          owner_gamer_name: data.owner_gamer_name,
+          week_label: data.week_label,
+          slot: data.slot,
+          week_dates: data.week_dates,
+        });
+
+        // Pre-select the crew's week + slot for the first gamer.
+        const weekNum = parseInt(String(data.week_label).replace(/\D/g, ""), 10);
+        const slot = data.slot === "AM" || data.slot === "PM" ? data.slot : null;
+        if (!Number.isNaN(weekNum) && slot) {
+          setGamers((prev) =>
+            prev.map((g, i) =>
+              i === 0 ? { ...g, selectedWeek: weekNum, selectedSlot: slot } : g
+            )
+          );
+        }
+      } catch {
+        if (cancelled) return;
+        window.location.href = `/squad/${encodeURIComponent(token)}`;
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // ── Display helpers ─────────────────────────────────────────────────────
+  // One canonical label per gamer — used in the section header, the summary,
+  // and validation errors so they stay in sync as the parent types a name.
+  //   single gamer, no name → "Gamer"
+  //   single gamer, has name → "Marcus"
+  //   multi, no name → "Gamer 2"
+  //   multi, has name → "Gamer 2: Jamie"
+  function gamerLabel(i: number): string {
+    const name = gamers[i]?.firstName.trim() ?? "";
+    if (gamers.length <= 1) return name || "Gamer";
+    return name ? `Gamer ${i + 1}: ${name}` : `Gamer ${i + 1}`;
+  }
 
   // ── Gamer management ────────────────────────────────────────────────────
 
@@ -186,37 +268,149 @@ export default function CampsRegisterPage() {
   }
 
   function addGamer() {
-    setGamers((prev) => [...prev, emptyGamer()]);
+    // Added gamers default to the same camp week/slot as the previous one so
+    // families sign up siblings into the same session by default. Two cases:
+    //
+    //   1. Joining via a crew link (QA #11) — inherit the crew's week/slot.
+    //      The banner tells the parent everyone's joining together; diverging
+    //      from the crew is the exception, not the default.
+    //   2. Normal flow — inherit from the most recent gamer that has a
+    //      complete (week + slot) selection. If nobody upstream has picked
+    //      yet, leave blank.
+    //
+    // Parents can still override — the slot picker is one click away via the
+    // "Change" button on the collapsed summary card.
+    const next = emptyGamer();
+    if (joiningCrewInfo) {
+      const weekNum = parseInt(
+        joiningCrewInfo.week_label.replace(/\D/g, ""),
+        10
+      );
+      const slot =
+        joiningCrewInfo.slot === "AM" || joiningCrewInfo.slot === "PM"
+          ? joiningCrewInfo.slot
+          : null;
+      if (!Number.isNaN(weekNum) && slot) {
+        next.selectedWeek = weekNum;
+        next.selectedSlot = slot;
+      }
+    } else {
+      // Walk from last to first to find the most recent complete selection.
+      for (let i = gamers.length - 1; i >= 0; i--) {
+        const prior = gamers[i];
+        if (prior.selectedWeek && prior.selectedSlot) {
+          next.selectedWeek = prior.selectedWeek;
+          next.selectedSlot = prior.selectedSlot;
+          break;
+        }
+      }
+    }
+    setGamers((prev) => [...prev, next]);
   }
 
   function removeGamer(index: number) {
     if (gamers.length <= 1) return;
     setGamers((prev) => prev.filter((_, i) => i !== index));
+    // Drop the removed gamer's expanded state and shift everything above it
+    // down by one so the indices continue to line up with the gamers array.
+    setExpandedSlotPickers((prev) => {
+      const next: Record<number, boolean> = {};
+      Object.entries(prev).forEach(([k, v]) => {
+        const n = parseInt(k, 10);
+        if (n < index) next[n] = v;
+        else if (n > index) next[n - 1] = v;
+      });
+      return next;
+    });
   }
 
   // ── Week/slot selection (per gamer) ────────────────────────────────────
 
   function selectSlot(gamerIndex: number, weekNum: number, slot: "AM" | "PM") {
+    // Crew warning: if this visitor arrived via a squad link and is now
+    // trying to pick a different (week, slot) than the crew owner — for
+    // ANY gamer in the registration — make them confirm they're ok not
+    // being at camp together. Acknowledge once (shared latch across all
+    // gamers); after that they can edit freely. Per QA-FLAGGED-ISSUES
+    // #11 this used to gate only gamer 0, which let gamers 2+ silently
+    // land on a different week/slot with the same joining_squad_token.
+    if (
+      joiningSquadToken &&
+      joiningCrewInfo &&
+      !crewOverrideAcknowledged
+    ) {
+      const crewWeekNum = parseInt(
+        joiningCrewInfo.week_label.replace(/\D/g, ""),
+        10
+      );
+      const isMatch = crewWeekNum === weekNum && joiningCrewInfo.slot === slot;
+      if (!isMatch) {
+        const ok = window.confirm(
+          `You're joining ${joiningCrewInfo.owner_gamer_name}'s team in ${joiningCrewInfo.week_label} ${joiningCrewInfo.slot}. Changing this means you won't be at camp together. Continue?`
+        );
+        if (!ok) return;
+        setCrewOverrideAcknowledged(true);
+      }
+    }
     updateGamer(gamerIndex, { selectedWeek: weekNum, selectedSlot: slot });
+
+    // Added gamers (index > 0): once they've picked, collapse the grid back
+    // to the summary card. Gamer 0 keeps the full grid visible — it's the
+    // primary decision-making surface and doesn't need to collapse.
+    if (gamerIndex > 0) {
+      setExpandedSlotPickers((prev) => ({ ...prev, [gamerIndex]: false }));
+    }
+
+    // UX guidance: after the parent picks a slot, walk them down to the
+    // next thing to fill in (this gamer's info block). RAF lets the
+    // selection state paint first so the smooth scroll feels connected
+    // to the click rather than racing it. Skips cleanly on SSR / tests
+    // that lack `window` or `document`.
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => {
+        document
+          .getElementById(`gamer-${gamerIndex}-info`)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }
 
   // ── Validation ──────────────────────────────────────────────────────────
 
   function validate(): string[] {
     const errs: string[] = [];
+    // Parent — every field marked * in the UI must be enforced here. The
+    // submit button is type="button" (not a form submit), so the HTML5
+    // `required` attribute does nothing — this function is the only gate.
     if (!parent.firstName.trim()) errs.push("Parent first name is required.");
     if (!parent.lastName.trim()) errs.push("Parent last name is required.");
     if (!parent.email.trim()) errs.push("Parent email is required.");
+    if (!parent.phone.trim()) errs.push("Parent phone number is required.");
 
+    // Gamers — iterate the full array and enforce every starred field per
+    // gamer. Previously only firstName/lastName/week/slot were checked,
+    // which let blank birthdays (and everything else) through on added
+    // gamers — see QA-FLAGGED-ISSUES #12.
     gamers.forEach((g, i) => {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
       if (!g.firstName.trim()) errs.push(`${label} first name is required.`);
       if (!g.lastName.trim()) errs.push(`${label} last name is required.`);
+      if (g.preferredGames.length === 0)
+        errs.push(`${label}: please select at least one favorite game.`);
+      if (!g.birthday.trim()) errs.push(`${label} birthday is required.`);
+      if (!g.gender.trim()) errs.push(`${label} gender is required.`);
+      if (!g.skillLevel.trim())
+        errs.push(`${label} gaming experience is required.`);
       if (!g.selectedWeek || !g.selectedSlot)
         errs.push(`${label}: please select a camp week and time slot.`);
     });
 
-    if (!squadStatus) errs.push("Please let us know your squad status.");
+    // Team status — not required when arriving via a crew link. A joining
+    // visitor is a pure join (see QA-FLAGGED-ISSUES #10); we hide the
+    // selector in the UI and send squadStatus=null so the webhook's
+    // squadStatusSafe guard writes "" (not a building/looking opt-in).
+    if (!joiningSquadToken && !squadStatus)
+      errs.push("Please let us know your team status.");
 
     return errs;
   }
@@ -233,6 +427,20 @@ export default function CampsRegisterPage() {
     setErrors([]);
     setIsSubmitting(true);
 
+    // Squad tokens — fresh each submit for Building; joining_squad_token
+    // is whatever the ?squad= query param told us on page load. Per
+    // QA-FLAGGED-ISSUES #10 a joining visitor is a pure join: never mint
+    // a new squad_token even if squadStatus somehow leaked into state
+    // (the Team Status selector is hidden in the UI when joiningSquadToken
+    // is set, so this is defense-in-depth).
+    const squadTokenForSubmit =
+      joiningSquadToken
+        ? null
+        : squadStatus === "building"
+        ? nanoid(10)
+        : null;
+    const squadStatusForSubmit = joiningSquadToken ? null : squadStatus;
+
     const payload = {
       parent,
       gamers: gamers.map((g) => {
@@ -245,11 +453,18 @@ export default function CampsRegisterPage() {
           price: week?.price,
         };
       }),
-      // squadStatus: family-level vibe check, "building" | "looking"
+      // squadStatus: family-level vibe check, "building" | "looking" | null
       // Wired: register route → Stripe metadata (squad_status) → webhook
-      // → Google Sheets column (camps only). Email marketing (Klaviyo,
-      // replacing Beehiiv) will be wired during the migration.
-      squadStatus,
+      // → Google Sheets column (camps only) + Klaviyo profile/event +
+      // Beehiiv custom field. Klaviyo owns the branded post-purchase moments
+      // (Find Your Squad activation lives there); Beehiiv owns the nurture
+      // layer. squad_status is written as the human label ("Building a squad"
+      // / "Looking for a squad"), which is what Klaviyo flow splits match on.
+      // Forced to null when joining via ?squad=TOKEN (QA #10) so the webhook
+      // writes "" and the visitor doesn't match any building/looking flow.
+      squadStatus: squadStatusForSubmit,
+      squad_token: squadTokenForSubmit,
+      joining_squad_token: joiningSquadToken,
       additionalInfo,
       totalPrice,
     };
@@ -299,7 +514,7 @@ export default function CampsRegisterPage() {
       if (!week) return null;
       return {
         index: i,
-        gamerName: g.firstName.trim() || `Gamer ${i + 1}`,
+        gamerName: gamerLabel(i),
         weekLabel: week.label,
         weekDates: week.dates,
         slot: g.selectedSlot,
@@ -321,8 +536,8 @@ export default function CampsRegisterPage() {
       {/* ── Hero Section ───────────────────────────────────────────────── */}
       <section className="relative bg-[#f5f5f7]" style={{ overflow: "clip" }}>
         <div
-          className="max-w-[1280px] mx-auto relative pb-28 lg:pb-60"
-          style={{ paddingTop: "40px", paddingLeft: "24px", paddingRight: "24px" }}
+          className="max-w-[1280px] mx-auto relative pb-36 lg:pb-72"
+          style={{ paddingTop: "100px", paddingLeft: "24px", paddingRight: "24px" }}
         >
           {/* Left content */}
           <div className="relative z-10 flex flex-col items-start" style={{ gap: "24px", maxWidth: "544px" }}>
@@ -365,7 +580,7 @@ export default function CampsRegisterPage() {
               <p>
                 <span style={{ color: "#374151" }}>EKUZO</span>
                 <span className="font-bold" style={{ color: "#000000" }}>CAMP</span>
-                <span style={{ color: "#374151" }}>{" "}is a week long camp for beginners to intermediate players. However, it will challenge all skill levels.</span>
+                <span style={{ color: "#374151" }}>{" "}is a week long esports camp for beginners to intermediate players. However, it will challenge all skill levels.</span>
               </p>
               <p style={{ lineHeight: "32px" }}>&nbsp;</p>
               <p style={{ color: "#374151" }}>
@@ -383,7 +598,7 @@ export default function CampsRegisterPage() {
         {/* Desktop */}
         <div
           className="hidden lg:block absolute pointer-events-none"
-          style={{ bottom: "0", left: "50%", width: "1100px", maxWidth: "55%", height: "100%", overflow: "hidden" }}
+          style={{ bottom: "0", left: "46%", width: "1300px", maxWidth: "65%", height: "105%", overflow: "hidden" }}
         >
           <Image
             src="/images/camp-hero-collage.png"
@@ -423,6 +638,25 @@ export default function CampsRegisterPage() {
       <section className="bg-white">
         <div className="max-w-[1232px] mx-auto px-6 sm:px-10 py-16 md:py-24">
 
+          {/* Team-join banner — shown when arriving via ?squad=TOKEN */}
+          {joiningCrewInfo && (
+            <div className="mb-8 bg-red text-white px-6 py-5 rounded-lg">
+              <p
+                className="font-display uppercase leading-[0.9]"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
+              >
+                You&apos;ve been invited to join {joiningCrewInfo.owner_gamer_name}&apos;s team
+              </p>
+              <p
+                className="font-body mt-2"
+                style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "24px" }}
+              >
+                EKUZO Camp — {joiningCrewInfo.week_label} ({joiningCrewInfo.week_dates}) {joiningCrewInfo.slot}.
+                We&apos;ve pre-selected this week for you below.
+              </p>
+            </div>
+          )}
+
           {/* Errors */}
           {errors.length > 0 && (
             <div className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm">
@@ -457,85 +691,189 @@ export default function CampsRegisterPage() {
               )}
 
               {/* ── Week Selection ──────────────────────────────────── */}
-              <div className="mb-10">
-                <h2
-                  className="font-display uppercase text-black leading-[0.85]"
-                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-                >
-                  Choose your camp week
-                </h2>
-                <p
-                  className="font-body text-[#4b5563] mt-6"
-                  style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
-                >
-                  Teams will be built on availability per time zone and preferred time slot.
-                </p>
+              {/* Added gamers (gi > 0) with an inherited selection collapse to
+                  a summary card until the parent clicks "Change". Gamer 0
+                  and any added gamer that hasn't picked yet always see the
+                  full 10-week grid. This avoids repeating 30 slot buttons
+                  on every added gamer. */}
+              {(() => {
+                const hasSelection =
+                  gamer.selectedWeek != null && gamer.selectedSlot != null;
+                const collapsible =
+                  (gi > 0 || !!joiningSquadToken) && hasSelection;
+                const showGrid = !collapsible || expandedSlotPickers[gi];
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                  {WEEKS.map((week) => {
-                    const isSelectedWeek = gamer.selectedWeek === week.number;
-                    return (
-                      <div
-                        key={week.number}
-                        className={`relative bg-[#f5f5f7] p-[33px] flex flex-col gap-6 transition-all ${
-                          isSelectedWeek ? "ring-2 ring-red shadow-lg shadow-red/10" : ""
-                        }`}
-                        style={{ clipPath: `url(#${TORN_PAPER_CLIP_ID})` }}
-                      >
-                        {/* Card header */}
-                        <div className="flex items-start justify-between">
-                          <div className="flex flex-col" style={{ gap: "4.5px" }}>
-                            <span
-                              className="font-body font-bold text-red uppercase"
-                              style={{ fontSize: "12px", letterSpacing: "1.2px", lineHeight: "16px" }}
-                            >
-                              {week.label}
-                            </span>
-                            <span
-                              className="font-display text-[#0a0a0a] uppercase"
-                              style={{ fontSize: "clamp(2rem, 2.5vw, 36px)", lineHeight: "1.1" }}
-                            >
-                              {week.dates}
-                            </span>
-                          </div>
-                          <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]">
-                            <span className="font-body font-bold text-[#0a0a0a] text-sm leading-5">
-                              ${week.price}
-                            </span>
-                          </div>
+                if (!showGrid) {
+                  const selectedWeek = WEEKS.find(
+                    (w) => w.number === gamer.selectedWeek
+                  );
+                  return (
+                    <div className="mb-10">
+                      <div className="flex items-center justify-between gap-6 bg-[#f5f5f7] rounded-lg p-6 ring-1 ring-black/10">
+                        <div className="flex flex-col gap-1 min-w-0">
+                          <span
+                            className="font-body font-bold text-red uppercase"
+                            style={{
+                              fontSize: "12px",
+                              letterSpacing: "1.2px",
+                              lineHeight: "16px",
+                            }}
+                          >
+                            Camp week &amp; slot
+                          </span>
+                          <span
+                            className="font-display uppercase text-[#0a0a0a]"
+                            style={{
+                              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                              lineHeight: "1.1",
+                            }}
+                          >
+                            {selectedWeek?.label} — {selectedWeek?.dates}
+                          </span>
+                          <span
+                            className="font-body text-[#0a0a0a]"
+                            style={{ fontSize: "14px", lineHeight: "20px" }}
+                          >
+                            {gamer.selectedSlot === "AM"
+                              ? "Morning"
+                              : "Afternoon"}{" "}
+                            Session (
+                            {gamer.selectedSlot
+                              ? SLOT_HOURS[gamer.selectedSlot]
+                              : ""}
+                            )
+                          </span>
                         </div>
-
-                        {/* Slot cards */}
-                        <div className="flex flex-col gap-4">
-                          <SessionCard
-                            sessionLabel="Morning Session"
-                            slotLabel="AM"
-                            hours={SLOT_HOURS.AM}
-                            urgency={week.amUrgency}
-                            isSelected={isSelectedWeek && gamer.selectedSlot === "AM"}
-                            onClick={() => selectSlot(gi, week.number, "AM")}
-                          />
-                          <SessionCard
-                            sessionLabel="Afternoon Session"
-                            slotLabel="PM"
-                            hours={SLOT_HOURS.PM}
-                            urgency={week.pmUrgency}
-                            isSelected={isSelectedWeek && gamer.selectedSlot === "PM"}
-                            onClick={() => selectSlot(gi, week.number, "PM")}
-                          />
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setExpandedSlotPickers((prev) => ({
+                              ...prev,
+                              [gi]: true,
+                            }))
+                          }
+                          className="font-body font-semibold text-sm text-red hover:underline hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150 cursor-pointer shrink-0"
+                        >
+                          Change
+                        </button>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                }
 
-              </div>
+                return (
+                  <div className="mb-10">
+                    <h2
+                      className="font-display uppercase text-black leading-[0.85]"
+                      style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+                    >
+                      Choose your camp week
+                    </h2>
+                    <p
+                      className="font-body text-[#4b5563] mt-6"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.2vw, 16px)",
+                        lineHeight: "28px",
+                      }}
+                    >
+                      Teams will be built on availability per time zone and
+                      preferred time slot.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                      {WEEKS.map((week) => {
+                        const isSelectedWeek =
+                          gamer.selectedWeek === week.number;
+                        return (
+                          <div
+                            key={week.number}
+                            className={`relative bg-[#f5f5f7] p-[33px] flex flex-col gap-6 transition-all ${
+                              isSelectedWeek
+                                ? "ring-2 ring-red shadow-lg shadow-red/10"
+                                : ""
+                            }`}
+                            style={{ clipPath: `url(#${TORN_PAPER_CLIP_ID})` }}
+                          >
+                            {/* Card header */}
+                            <div className="flex items-start justify-between">
+                              <div
+                                className="flex flex-col"
+                                style={{ gap: "4.5px" }}
+                              >
+                                <span
+                                  className="font-body font-bold text-red uppercase"
+                                  style={{
+                                    fontSize: "12px",
+                                    letterSpacing: "1.2px",
+                                    lineHeight: "16px",
+                                  }}
+                                >
+                                  {week.label}
+                                </span>
+                                <span
+                                  className="font-display text-[#0a0a0a] uppercase"
+                                  style={{
+                                    fontSize: "clamp(2rem, 2.5vw, 36px)",
+                                    lineHeight: "1.1",
+                                  }}
+                                >
+                                  {week.dates}
+                                </span>
+                              </div>
+                              <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]">
+                                <span className="font-body font-bold text-[#0a0a0a] text-sm leading-5">
+                                  ${week.price}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Slot cards */}
+                            <div className="flex flex-col gap-4">
+                              <SessionCard
+                                sessionLabel="Morning Session"
+                                slotLabel="AM"
+                                hours={SLOT_HOURS.AM}
+                                urgency={week.amUrgency}
+                                isSelected={
+                                  isSelectedWeek && gamer.selectedSlot === "AM"
+                                }
+                                onClick={() =>
+                                  selectSlot(gi, week.number, "AM")
+                                }
+                              />
+                              <SessionCard
+                                sessionLabel="Afternoon Session"
+                                slotLabel="PM"
+                                hours={SLOT_HOURS.PM}
+                                urgency={week.pmUrgency}
+                                isSelected={
+                                  isSelectedWeek && gamer.selectedSlot === "PM"
+                                }
+                                onClick={() =>
+                                  selectSlot(gi, week.number, "PM")
+                                }
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* ── Divider ──────────────────────────────────────────── */}
               <hr className="border-t border-black/10 my-12" />
 
               {/* ── Gamer Info ──────────────────────────────────────── */}
-              <div className="mb-8">
+              {/* Scroll target when a time slot is picked (see selectSlot).
+                  scrollMarginTop leaves room for the fixed nav so the h3
+                  doesn't end up hidden behind it. */}
+              <div
+                id={`gamer-${gi}-info`}
+                className="mb-8"
+                style={{ scrollMarginTop: "100px" }}
+              >
                 <h3
                   className="font-display uppercase text-black leading-[0.85] mb-6"
                   style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
@@ -562,17 +900,17 @@ export default function CampsRegisterPage() {
 
                 <div className="mt-6">
                   <InputField
-                    label="Gamer Tag / Username *"
+                    label="Gamer Tag / Username"
                     value={gamer.gamerTag}
                     onChange={(v) => updateGamer(gi, { gamerTag: v })}
                     placeholder="Enter gamer tag"
                   />
                 </div>
 
-                {/* Preferred Games — 4-col checkbox grid */}
+                {/* Favorite Games — 4-col checkbox grid */}
                 <div className="mt-6">
                   <label className="font-body font-bold text-[#374151] block mb-3" style={{ fontSize: "14px", lineHeight: "20px" }}>
-                    Preferred Games * (Select all that apply)
+                    Favorite Games * (Select all that apply)
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
                     {GAMES.map((game) => {
@@ -594,7 +932,7 @@ export default function CampsRegisterPage() {
                   </div>
                 </div>
 
-                {/* Birthday / Gender / Skill / T-shirt — 2x2 grid */}
+                {/* Birthday / Gender / Gaming Experience — 2-col grid; 3rd item wraps to second row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-6">
                   <InputField
                     label="Birthday *"
@@ -616,13 +954,6 @@ export default function CampsRegisterPage() {
                     options={SKILL_LEVELS}
                     placeholder="Select..."
                   />
-                  <SelectField
-                    label="T-Shirt Size *"
-                    value={gamer.tshirtSize}
-                    onChange={(v) => updateGamer(gi, { tshirtSize: v })}
-                    options={TSHIRT_SIZES}
-                    placeholder="Select your t-shirt size"
-                  />
                 </div>
               </div>
 
@@ -642,37 +973,47 @@ export default function CampsRegisterPage() {
             + Add Another Gamer
           </button>
 
-          {/* ── Squad Status (vibe check) ──────────────────────────── */}
-          <hr className="border-t border-black/10 my-12" />
-          <div className="mb-12">
-            <h2
-              className="font-display uppercase text-black leading-[0.85] mb-6"
-              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-            >
-              Squad status
-            </h2>
-            <p
-              className="font-body text-[#4b5563] mb-8"
-              style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
-            >
-              How should we think about your gamer&apos;s crew?
-            </p>
+          {/* ── Team Status (vibe check) ───────────────────────────── */}
+          {/* Hidden when arriving via a crew link (?squad=TOKEN). Per
+              QA-FLAGGED-ISSUES #10, showing this selector to a joining
+              visitor caused accidental double-registration (joiner AND
+              new crew owner with a fresh squad_token). The top banner
+              already tells them they're joining, so we skip the vibe
+              check entirely and submit as a pure join. */}
+          {!joiningSquadToken && (
+            <>
+              <hr className="border-t border-black/10 my-12" />
+              <div className="mb-12">
+                <h2
+                  className="font-display uppercase text-black leading-[0.85] mb-6"
+                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+                >
+                  Team status
+                </h2>
+                <p
+                  className="font-body text-[#4b5563] mb-8"
+                  style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
+                >
+                  How should we think about your gamer&apos;s team?
+                </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <SquadCard
-                title="Building a squad"
-                subtitle="My gamer is joining with friends"
-                isSelected={squadStatus === "building"}
-                onClick={() => setSquadStatus("building")}
-              />
-              <SquadCard
-                title="Looking for a squad"
-                subtitle="Match my gamer with a great crew"
-                isSelected={squadStatus === "looking"}
-                onClick={() => setSquadStatus("looking")}
-              />
-            </div>
-          </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <SquadCard
+                    title="Building a team"
+                    subtitle="My gamer is joining with friends"
+                    isSelected={squadStatus === "building"}
+                    onClick={() => setSquadStatus("building")}
+                  />
+                  <SquadCard
+                    title="Looking for a team"
+                    subtitle="Match my gamer with a great team"
+                    isSelected={squadStatus === "looking"}
+                    onClick={() => setSquadStatus("looking")}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           {/* ── Parent / Guardian Info ─────────────────────────────── */}
           <hr className="border-t border-black/10 my-12" />
@@ -849,7 +1190,6 @@ export default function CampsRegisterPage() {
                       totalPrice={totalPrice}
                       paymentIntentId={paymentIntentId}
                       parentEmail={parent.email}
-                      gamerSummaries={selectedGamerSummaries}
                     />
                   </Elements>
                 </div>
@@ -882,12 +1222,10 @@ function CheckoutForm({
   totalPrice,
   paymentIntentId,
   parentEmail,
-  gamerSummaries,
 }: {
   totalPrice: number;
   paymentIntentId: string | null;
   parentEmail: string;
-  gamerSummaries: any[];
 }) {
   const stripe = useStripe();
   const elements = useElements();

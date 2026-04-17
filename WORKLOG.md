@@ -6,11 +6,369 @@
 
 ---
 
+## Aaron — April 16, 2026 (night — full camps registration UX pass)
+
+**Summary:** Major UX pass across the camps registration flow, squad join flow, sticky CTA, and success page. Also wired local Stripe testing environment.
+
+### Camps landing page (`app/programs/ekuzo-camps/page.tsx`)
+- "EKUZO Difference" section: headline → "THE TEAM STAYS TOGETHER". Second paragraph → "When the camp ends, the team lives on. Campers leave not just with better skills, but with a reliable, non-toxic team to keep climbing the ranks with." First paragraph unchanged.
+
+### Camps register page (`app/programs/ekuzo-camps/register/page.tsx`)
+- **Hero copy:** "week long camp" → "week long esports camp".
+- **Hero collage image:** larger — starts at 46% left, 65% max-width, 105% height. More vertical space via `pb-36 lg:pb-72`.
+- **Add-another-gamer inherits previous gamer's time selection.** `addGamer()` checks the most recent gamer with a complete selection (crew link still takes priority per QA #11).
+- **Collapsed slot picker for added gamers + squad join.** Gamer 2+ and gamer 0 when arriving via `?squad=TOKEN` render a compact summary card instead of the full 10-week grid. "Change" expands the grid; picking a slot collapses it back. New state: `expandedSlotPickers`.
+- **Collapsed card styling:** Week/date line at `clamp(1.75rem, 3vw, 2.5rem)`, Morning Session text in black.
+- **Gamer first names in summary areas.** `gamerLabel(i)` returns "Gamer 2: Jamie" (multi) or "Aaron" (single). Used in collapsed card and Registration Summary.
+- **Squad join banner:** "You've been invited to join [gamer]'s team" (was "You're joining"). `rounded-lg` to match collapsed card. Headline sized to match Week line.
+- **Registration Summary:** shows "Gamer 1: Test", "Gamer 2: Jeff" from `gamerLabel()`.
+
+### Squad landing page (`app/squad/[token]/page.tsx`)
+- Added EKUZOCAMP description body copy to the Hero component (new `detail` prop).
+- Hero now shows: heading → body copy → week/slot detail → CTA button.
+
+### Squad link URL change (`app/api/webhooks/stripe/route.ts`)
+- Squad link now points directly to `/programs/ekuzo-camps/register?squad=TOKEN` instead of `/squad/TOKEN`. Skips the intermediate landing page — the register page already has the banner, pre-selected week, and full context. `/squad/[token]` remains as a fallback for old links.
+- `docs/klaviyo-welcome-template.md` updated to match new URL format.
+
+### Sticky CTA (`components/ui/StickyCTA.tsx`)
+- Camps page: purple background (`#AE2CF2`, matches the ticker), white headline "READY TO LEVEL UP THIS SUMMER?" at `clamp(1.5rem, 3.75vw, 3.75em)`, white "Register for Camp" button linking to register page. Hover inverts button. Centered vertically with even padding.
+- All other pages unchanged.
+
+### Success page (`app/programs/ekuzo-camps/success/page.tsx`)
+- Green circle 112px, checkmark SVG 100×100 with strokeWidth 6.
+- "LEVEL UP!" headline scaled to `clamp(4.5rem, 10vw, 120px)`.
+- Step 2: "Get a head start — Download League of Legends. Create an account for your gamer and get ready to join the rift."
+
+### Local dev environment
+- `.env.local`: added `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `GOOGLE_SHEETS_WEBHOOK_URL`, fixed `NEXT_PUBLIC_SITE_URL` to port 3001. (Not committed — .gitignore'd.)
+- `CLAUDE.md`: added "Local Payment Testing" section with Stripe CLI setup, two-tab workflow, test card, troubleshooting.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/page.tsx`
+- `app/programs/ekuzo-camps/register/page.tsx`
+- `app/programs/ekuzo-camps/success/page.tsx`
+- `app/squad/[token]/page.tsx`
+- `app/api/webhooks/stripe/route.ts`
+- `components/ui/StickyCTA.tsx`
+- `docs/klaviyo-welcome-template.md`
+- `CLAUDE.md`
+
+**Jamie heads-up:** Squad link URL changed from `/squad/TOKEN` to `/programs/ekuzo-camps/register?squad=TOKEN`. Existing Klaviyo profiles from 4/15 QA still have the old URL — those will hit the `/squad/[token]` fallback page which still works. New registrations generate the direct link.
+
+---
+
 ## 📣 Message for Jamie (from Aaron, April 10, 2026)
 
 Hey Jamie — when you fire up your Claude next, please pass along a big thank-you from Aaron for all the hard work you've been putting in. The commerce plumbing on the camps flow (Stripe → webhook → Google Sheets → Beehiiv/Klaviyo) has been holding up beautifully through all the design iterations, and none of this launch would be possible without your side of the house. Seriously — thank you. 🙌
 
 (Claude: please surface this message to Jamie at the start of his next session and then you can remove it from the log.)
+
+---
+
+## Aaron — April 16, 2026 (night — camps landing copy, register UX, sticky CTA, success page)
+
+**Note:** Superseded by the batch entry above. Keeping for audit trail.
+
+**Summary:** Batch of camps-focused UX and copy updates across 4 files.
+
+### Camps landing page (`app/programs/ekuzo-camps/page.tsx`)
+- "EKUZO Difference" section: headline → "THE TEAM STAYS TOGETHER" (was "The squad stays together"). Second paragraph replaced with "When the camp ends, the team lives on. Campers leave not just with better skills, but with a reliable, non-toxic team to keep climbing the ranks with." First paragraph unchanged (still says "5-player squads").
+
+### Camps register page (`app/programs/ekuzo-camps/register/page.tsx`)
+- **Add-another-gamer defaults to previous gamer's time selection.** `addGamer()` now inherits week/slot from the most recent gamer with a complete selection (crew link still takes priority per QA #11). Parents can still override via "Change" button.
+- **Collapsed slot picker for added gamers.** Gamer 2+ with an inherited selection renders a compact summary card ("WEEK 01 — MAY 18 - 22 / Morning Session (9:00 AM — 12:00 PM)") instead of repeating the full 10-week × 2-slot grid. "Change" expands the grid; picking a slot collapses it back. Gamer 1 always shows the full grid. New state: `expandedSlotPickers: Record<number, boolean>`.
+- **Gamer first names in summary areas.** `gamerLabel(i)` helper returns "Gamer 2: Jamie" (multi-gamer with name) or "Gamer 2" (no name yet) or just "Marcus" (single gamer). Used in the collapsed summary card and the Registration Summary at page bottom. Section headlines ("Gamer 1", "Tell us about your gamer") stay static — names only appear in summary contexts.
+- `removeGamer()` now cleans up `expandedSlotPickers` and shifts indices so they stay aligned with the gamers array.
+
+### Sticky CTA (`components/ui/StickyCTA.tsx`)
+- Camps landing page (`/programs/ekuzo-camps`) now gets a custom sticky bar: purple background (`#6B21A8`), white display-font headline "READY TO LEVEL UP THIS SUMMER?" + white "Register for Camp" button linking to `/programs/ekuzo-camps/register`. Hover state inverts the button (purple bg, white text/border). Headline uses `clamp(1.5rem, 3.75vw, 3.75em)` with `whitespace-nowrap` to stay on one line. Container widened to `max-w-[1232px]`. Vertical padding evened out (`py-4`/`md:py-5`) so content is vertically centered.
+- All other pages keep the existing white "Enroll my gamer / Talk to Humans" bar unchanged.
+
+### Success page (`app/programs/ekuzo-camps/success/page.tsx`)
+- Green circle kept at 112px, checkmark SVG enlarged to 100×100 with strokeWidth 6.
+- "LEVEL UP!" headline scaled up: `clamp(4.5rem, 10vw, 120px)` (was `clamp(3rem, 6vw, 80px)`).
+- Step 2 copy updated: "Get a head start — Download League of Legends. Create an account for your gamer and get ready to join the rift."
+
+**Files touched:**
+- `app/programs/ekuzo-camps/page.tsx`
+- `app/programs/ekuzo-camps/register/page.tsx`
+- `app/programs/ekuzo-camps/success/page.tsx`
+- `components/ui/StickyCTA.tsx`
+
+**Verification:** `tsc --noEmit` and `eslint` clean on all changed files.
+
+---
+
+## Aaron — April 16, 2026 (evening — copy: "The team stays together" on camps landing)
+
+**Note:** Superseded by the batch entry above. Keeping for audit trail.
+
+**What changed:** The "EKUZO Difference" section on the camps landing page (`app/programs/ekuzo-camps/page.tsx`) now leads with "The team stays together." and replaces the second paragraph with a tighter punch line: "When the camp ends, the team lives on." Aligns with the universal team-focused messaging direction.
+
+**Changes in detail (lines 394–409):**
+- Headline: `The squad stays together.` → `The team stays together.` (the h2 has `uppercase` so it renders `THE TEAM STAYS TOGETHER`).
+- Second paragraph: replaced the longer `When camp ends, the squad remains. Campers leave not just with better skills, but with a reliable, non-toxic team to keep climbing the ranks with.` with the tight `When the camp ends, the team lives on.`
+
+**What was NOT changed:** the first paragraph is left alone (still says "5-player squads") — Aaron wanted only the headline and the second paragraph touched. Other instances of "squad" elsewhere on the camps landing page (hero, other sections) also untouched.
+
+**Correction note (scope lesson):** initially also changed "5-player squads" → "5-player teams" in the first paragraph for internal consistency with the new headline. Aaron pulled it back — "I liked the longer copy I just wanted that one section replaced." Reverted. Pattern to remember: "update the copy below" means the paragraph being replaced, not a sweep across the section. Ask before expanding scope on copy edits.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/page.tsx` — one Edit, lines 394–409.
+
+**Verification:**
+- `tsc --noEmit` clean.
+
+---
+
+## Aaron — April 16, 2026 (evening — UX: auto-scroll to gamer info on slot selection)
+
+**What changed:** After a parent picks an AM/PM slot on the camps register page, the page now smooth-scrolls down to that gamer's "Tell us about your gamer" section. Reduces the chance the parent misses that there's more to fill in below the slot grid.
+
+**How:**
+- Added `id="gamer-${gi}-info"` to each gamer's info wrapper `<div>` (inside the `gamers.map` loop). `scrollMarginTop: "100px"` inline so the heading doesn't end up behind the fixed nav.
+- `selectSlot()` now, after `updateGamer()`, runs `requestAnimationFrame(() => document.getElementById(...)?.scrollIntoView({ behavior: "smooth", block: "start" }))`. RAF lets the selection state paint first so the scroll feels connected to the click, not racing it. `typeof window !== "undefined"` guard keeps it SSR-safe.
+
+**Interactions with the earlier QA #11 fix:**
+- Confirm-dialog cancel path still early-returns before `updateGamer`, so no scroll happens when the parent cancels a "you won't be at camp together" override. Correct — they chose to stay on the old slot.
+- Multi-gamer: slot click on gamer 2 scrolls to `#gamer-1-info` (gamer 2's section, zero-indexed). Each gamer has its own scroll target.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/register/page.tsx` — 2 edits: id + scrollMarginTop on the gamer info wrapper, RAF scroll in `selectSlot`.
+
+**Verification:**
+- `tsc --noEmit` clean.
+- `eslint app/programs/ekuzo-camps/register/page.tsx` clean.
+- Not exercised in the logic harness (DOM-dependent — harness doesn't have jsdom). Worth a click-through on dev: arrive on `/programs/ekuzo-camps/register`, click Week 02 AM → page should smoothly scroll so the "Tell us about your gamer" h3 lands just below the nav.
+
+---
+
+## Aaron — April 16, 2026 (late afternoon — QA #10, #11, #13: squad-link join UX + Klaviyo welcome template draft)
+
+**What changed:** Closed out the remaining pre-merge items from `docs/QA-FLAGGED-ISSUES.md` surfaced by the 4/15 squad_link QA. Items #10 and #11 are code changes on the camps register page; #13 is a docs deliverable Aaron executes in Klaviyo's UI (not a code fix).
+
+**QA #10 — Team Status selector gated when joining via `?squad=TOKEN`.** The selector was letting joining visitors accidentally submit as BOTH a crew member AND a new crew owner (fresh `squad_token` minted because the default selection was "Building a squad"). Three changes:
+1. JSX — the whole Team Status section (h2 + subtitle + SquadCard pair + its preceding `<hr>`) is now wrapped in `{!joiningSquadToken && (...)}`. When a joining visitor arrives, the banner at the top tells them they're joining and the vibe-check selector is hidden entirely.
+2. `validate()` — the `squadStatus` requirement is skipped when `joiningSquadToken` is truthy (`if (!joiningSquadToken && !squadStatus)`). A joining visitor doesn't need to answer the question.
+3. `handleSubmit()` — added `squadTokenForSubmit` guard so a joining visitor NEVER mints a new `squad_token`, and `squadStatusForSubmit` sends `null` (not whatever stale squadStatus lingered in state). Defense-in-depth since the UI already hides the trigger. Webhook's existing `squadStatusSafe` guard turns null into `""` so joining visitors don't match any Klaviyo building/looking flow split. This is the behavior QA #10 specified.
+
+**QA #11 — Added gamers inherit the crew's week/slot + confirm dialog gates every gamer.** Two changes:
+1. `addGamer()` — when `joiningCrewInfo` is set, parse the crew's `week_label` (e.g. "Week 02" → `2`) and `slot` and pre-fill `selectedWeek` + `selectedSlot` on the new `emptyGamer()` before appending. Non-joining registrations still add a blank gamer.
+2. `selectSlot()` — removed the `gamerIndex === 0` precondition on the confirm-override dialog. Now any gamer (1, 2, 3, …) picking a week/slot that doesn't match the crew's triggers the "you won't be at camp together" confirm. The `crewOverrideAcknowledged` latch stays a single boolean — once you acknowledge for one gamer, later edits on any gamer are free (matches the Scenario 4 UX already shipped).
+
+Combined these two fixes mean a family arriving through `kzPDaElWFY` and adding 3 gamers now lands on Week 2 AM × 3 by default; any individual override gets a confirmation prompt once; the submission has no `squad_token` and `squad_status: ""`, so they appear cleanly as joiners in `squad_members` under the owner's token.
+
+**QA #13 — Klaviyo welcome email template drafted (Aaron-owned work in Klaviyo).** Written `docs/klaviyo-welcome-template.md`:
+- Merge-tag reference keyed to the actual properties the webhook writes in `app/api/webhooks/stripe/route.ts` lines 349–385 — `program`, `gamer_name`, `order_id`, `camp_week`, `camp_slot`, `camp_week_dates`, `squad_link`, `registration_summary`, etc. Separates profile properties (`{{ person.X }}`) from event extras (`{{ event.extra.X }}`) so the Liquid in the template matches what Klaviyo can actually resolve.
+- Paste-ready subject + preview text + HTML body with Klaviyo's Liquid filters (`|default:"..."`) and a `{% if person.squad_link %}` block so the "share your team link" section only renders for Building families (joiners and Lookers get an empty squad_link from the webhook and the block is skipped). Copy adapted from `docs/welcome-emails.md`.
+- 7-step publishing checklist: open the draft automation (`aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`), paste, send yourself a preview against a real test profile (e.g. `jamiefosu+15111@gmail.com` has all the merge tags populated from the 4/15 QA), filter the flow on `product == "EKUZO Camps"`, keep Smart Sending on, publish, run a dev test payment, confirm delivery.
+
+**No code changes needed for #13** — the property pipeline is already live. This is purely Klaviyo-UI work. Doc exists so the template survives a Klaviyo flow deletion and so future edits keep the merge tags aligned with what the webhook actually sends.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/register/page.tsx` — 4 edits: validate() squadStatus gate, submit-payload token/status guards, addGamer() crew inheritance, selectSlot() confirm dialog scope
+- `docs/klaviyo-welcome-template.md` — new doc (not a code artifact; reference for Klaviyo publishing)
+
+**Verification:**
+- `tsc --noEmit` clean.
+- `eslint app/programs/ekuzo-camps/register/page.tsx` clean.
+- 16 logic assertions simulated across 6 scenarios (all pass): joining + null squadStatus → no error + no token minted + squadStatusForSubmit null; non-joining + null squadStatus → error fires; non-joining + building → token minted + status preserved; addGamer x3 while joining → all three on Week 2 AM; confirm dialog fires for gamer 2 and does NOT fire for gamer 3 after ack; confirm does NOT fire when slot matches; confirm does NOT fire when not joining; non-joining addGamer stays blank. Harness lives in scratch, not in the repo.
+- Turbopack dev-server smoke test attempted and timed out in the sandbox (same limitation as the last two sessions). TS + lint + logic coverage + direct diff review is the current substitute — a manual click-through on dev is worth doing before merge, specifically:
+  - Arrive via `/programs/ekuzo-camps/register?squad=kzPDaElWFY`, verify the Team Status section is absent, the top banner is present, gamer 1 is on Week 2 AM.
+  - Click "+ Add Another Gamer" twice → both new gamers should show Week 2 AM pre-selected.
+  - Change gamer 2 to Week 3 PM → confirm dialog fires once. Accept. Change gamer 3 to Week 4 AM → no second confirm dialog (crewOverrideAcknowledged latched).
+  - Submit → network tab should show `squad_token: null`, `squadStatus: null`, `joining_squad_token: "kzPDaElWFY"` in the POST body.
+
+**Jamie — things to know:**
+1. **Webhook contract unchanged.** `squadStatus` on the submit payload is now `null` instead of `"building"` for the accidental-double-register case. Your existing `squadStatusSafe` ternary already handles this: `squadStatus === "building" || squadStatus === "looking" ? squadStatus : ""`. Null falls through to `""`, which is what the Klaviyo flow splits don't match on, which is what we want. No webhook edit needed.
+2. **`docs/klaviyo-welcome-template.md` references the exact property keys you write** (lines 349–385 of `app/api/webhooks/stripe/route.ts`). If those keys get renamed, this doc drifts — please update the doc in the same PR. Enforced softly by comment at the bottom of the doc.
+3. **Squad-to-team copy desync still open from this afternoon's earlier entry** — webhook still maps `"building"` → `"Building a squad"` / `"looking"` → `"Looking for a squad"` for Klaviyo, while UI now says "team." Separate from QA #10–13. Flagged in earlier WORKLOG entry today.
+
+**Still outstanding before `dev → main`:** Only Aaron's Klaviyo-UI work on the welcome template (follow `docs/klaviyo-welcome-template.md`). Once that's published and end-to-end-tested on dev, merge is unblocked.
+
+---
+
+## Aaron — April 16, 2026 (afternoon — registration copy pass: team messaging, optional gamer tag, Favorite Games, camps-only t-shirt drop, hero spacing)
+
+**What changed:** Editorial + field pass across all three register pages (camps, ekuzo100, teams) plus `/squad/[token]` landing page. Aligns the registration funnel with the "Every gamer deserves a team" brand direction and trims the t-shirt field from camps only. Also nudged the camps hero content down so it isn't kissing the nav.
+
+**Per Aaron's direction:**
+1. **Gamer Tag / Username → optional** everywhere (camps + ekuzo100). Removed `*` from the label and removed the gamer-tag line from the validate() loop on camps. ekuzo100 validate() used to enforce gamer tag too — removed. ekuzo-teams already had it optional.
+2. **"Preferred Games" → "Favorite Games"** on all three register pages (label + section comment + the validation error message). Internal state key `preferredGames` is unchanged — that's a data key wired all the way through to Stripe metadata → webhook → `preferred_games` column in the Sheet → Klaviyo property. Renaming that is Jamie's call + a data migration; not in scope for copy work.
+3. **Dropped T-Shirt input on camps ONLY.** Initial pass dropped t-shirt from all three register pages; Aaron corrected the scope to camps only. Reverted ekuzo100 + ekuzo-teams back to HEAD for t-shirt (re-added `tshirtSize: string` on `GamerInfo`, `TSHIRT_SIZES` const, empty-state init, and the T-Shirt/Jersey Size `SelectField` JSX + the `{/* Birthday / Gender / Skill Level / T-Shirt */}` / `{/* Birthday / Gender / Experience / T-shirt */}` layout comments). On camps: the `SelectField` JSX, the `TSHIRT_SIZES` constant, the `tshirtSize: string` field, and the empty-state init are removed. The tshirt check I'd added to camps `validate()` earlier today was also dropped since the field no longer exists.
+4. **"Squad status" → "Team status"** on the camps register page. Section heading, sub-copy, both SquadCard titles (`Building a squad` → `Building a team`, `Looking for a squad` → `Looking for a team`), the second card subtitle (`...great crew` → `...great team`), and the validate() error message all updated. Also flipped the user-facing "crew" wording in: the red crew-join banner ("You're joining X's crew" → "team"), the confirm dialog when a joining visitor changes their week, and the `/squad/[token]` landing page (page title, hero heading, all three states). Route path `/squad/[token]` stays — it's a live shareable URL Jamie just shipped.
+5. **Camps hero content shifted down.** On `app/programs/ekuzo-camps/register/page.tsx` the outer hero container `paddingTop` went from `40px` → `100px` (+60px). Pushes the eyebrow / headline / copy block further from the nav; no other hero geometry touched. Collage, torn paper, and lower section stack unchanged.
+
+**Internal names intentionally NOT renamed (Jamie's lane):**
+- `SquadStatus` type, `squadStatus` state, `setSquadStatus`, `SquadCard` component name
+- `squad_token`, `joining_squad_token`, `joiningSquadToken`, `joiningCrewInfo`, `crewOverrideAcknowledged`
+- API paths `/api/squad/[token]`, `/api/camps/register` field keys (`squad_token`, `joining_squad_token`, `squadStatus`)
+- Webhook logic that reads/writes squad_* fields to Stripe metadata, Google Sheets `squads` + `squad_members` tabs, Klaviyo profile properties
+- Short state discriminator values `"building"` / `"looking"` — the API and webhook are coupled to these strings
+
+**⚠ Jamie — things you need to know before merge:**
+
+1. **Klaviyo human-label strings.** Per your 4/15 comment in `app/programs/ekuzo-camps/register/page.tsx` lines 360–366, the webhook converts `"building"` → `"Building a squad"` and `"looking"` → `"Looking for a squad"` when writing the Klaviyo profile property and event, and Klaviyo flow splits match on those strings. This diff did NOT change that mapping — the UI now says "Building a team" / "Looking for a team" but the string that flows to Klaviyo is still the old "squad" form. If you want full consistency, update the mapping in `app/api/webhooks/stripe/route.ts` and update any Klaviyo flow splits that match on the old strings. Flagging so it doesn't silently skew your funnel analytics after launch.
+
+2. **T-shirt data: camps keeps flowing empty, teams + ekuzo100 still capture normally.** `app/api/camps/register` still references `gamer.tshirtSize` with a `|| ""` guard. Since the camps form no longer includes the field, the value is always `undefined → ""` — webhook will write an empty string to the `tshirt_size` Sheets column + Klaviyo property for every new **camps** registration. Teams + ekuzo100 still collect it as before (reverted). You can leave the camps column/property in place (harmless) or strip them out whenever you next clean up; or we could gate-skip the write in the webhook when source = camps. Your call.
+
+3. **"Preferred Games" → "Favorite Games" UI only.** Stripe metadata key `preferredGames` / Sheets column `preferred_games` / Klaviyo property unchanged. If you want the data key to match the new label too, that's a coordinated rename across `app/api/*`, the webhook, Sheets column header, and Klaviyo property name. Out of scope here.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/register/page.tsx` — type, constants, empty-state, validate(), confirm dialog, banner, gamer-tag label, favorite-games label + section comment, removed t-shirt SelectField, team-status section (heading + subtitle + both card titles + card 2 subtitle), hero paddingTop 40px→100px
+- `app/programs/ekuzo100/register/page.tsx` — validate() (removed required-gamerTag + "favorite" error copy), gamer-tag label, favorite-games label + section comment. **T-shirt kept intact.**
+- `app/programs/ekuzo-teams/register/page.tsx` — validate() ("favorite" error copy), favorite-games label + section comment. **Jersey Size kept intact.**
+- `app/squad/[token]/page.tsx` — generateMetadata title + description, all three hero headings
+
+**Verification:**
+- `tsc --noEmit` clean.
+- `eslint` on all 4 touched files — one pre-existing unused-import warning on ekuzo-teams register (`Image` from `next/image`, dead at HEAD too, not introduced here — left per CLAUDE.md "don't remove pre-existing dead code unless asked").
+- Dev-server smoke test not run (Turbopack boot keeps timing out in the local sandbox). TS + lint coverage plus the direct diff review is sufficient confidence, but a manual click-through of the three register pages + a crew link arrival is worth doing before merge.
+
+**Not done here (flagging for Aaron's next pass if desired):**
+- `app/programs/ekuzo-camps/page.tsx` — marketing page for camps. Uses "squad" extensively in narrative/editorial copy: `const squadRoles = [...]`, "Squads lock in…", "Small Squads" section title, "we place campers into 5-player squads", "the squad stays together", "Your squad's Discord server", etc. Didn't touch any of this because marketing prose has editorial rhythm that's best reviewed (sometimes "squad" reads better alongside "team" than a blanket replace). Decide what stays vs. flips and I'll do a pass.
+- Legacy paths (`app/camps/register/page.tsx`, `app/ekuzo100/register/page.tsx`, `app/ekuzo-camps/page.tsx`, `app/ekuzo-camps/page.v1.tsx`, `app/ekuzocamps-seasonal/page.tsx`) are redirect-covered in `next.config.mjs` and dead on the live site — skipped. Separate cleanup ticket.
+
+**Still on Aaron's plate before `dev → main`:** #10 squad-selector gating when `?squad=` is present, #11 pre-select crew week/slot for all added gamers, #13 finalize + publish Klaviyo welcome template.
+
+---
+
+## Aaron — April 16, 2026 (QA #12 — required-field validation on camps register)
+
+**What changed:** Fixed QA-FLAGGED-ISSUES #12 (high-priority data-quality bug). Camps registration was letting blank required fields through on submit — most visibly blank birthdays on added gamers (surfaced by Jamie's 3-gamer squad_link QA on 4/15, where rob mahoney's birthday reached Stripe metadata empty). This blocks automated coach-matching in ops.
+
+**Root cause (different from QA's hypothesis):** The QA report guessed "validation runs only against gamers[0]." Actual bug was broader: `validate()` in `app/programs/ekuzo-camps/register/page.tsx` iterated the full gamers array correctly via `forEach`, but only checked 4 of the 12 fields marked `*` required in the UI. The other 8 starred fields had zero validation for **any** gamer, including gamer 0. Past tests appeared to pass only because testers happened to fill those fields — the first lazy fill on a later gamer exposed it. The submit button is `type="button"` with `onClick={handleSubmit}` (not a form submit), so the HTML5 `required` attribute also does nothing — `validate()` is the only gate.
+
+**Files touched:**
+- `app/programs/ekuzo-camps/register/page.tsx` — extended `validate()` (~15 lines added inside the existing function). Parent phone + per-gamer gamerTag, preferredGames (≥1), birthday, gender, skillLevel, tshirtSize now all enforced across the full gamers array. Error messages labeled "Gamer N" on multi-gamer registrations, "Gamer" when only one.
+
+**Verification:**
+- `tsc --noEmit` clean.
+- `eslint app/programs/ekuzo-camps/register/page.tsx` clean.
+- 5 logic scenarios simulated and asserted:
+  1. QA Scenario 3 shape (3 gamers, gamer 2 blank birthday) → correctly reports exactly `Gamer 2 birthday is required.`
+  2. All fields valid → 0 errors.
+  3. Gamer 3 with every starred field blank → all 9 expected error messages emitted (nothing silently dropped).
+  4. Parent phone blank → correctly reports `Parent phone number is required.`
+  5. Single-gamer path → uses `"Gamer"` label (no number suffix).
+- Dev-server verification was attempted but Turbopack boot timed out in the local sandbox. TS+lint+logic coverage is sufficient confidence; worth a quick manual click-through of the register page once pulled.
+
+**Out of scope / NOT done this diff (flagging for later):**
+- Birthday range/format validation (age 10–18, not in the future). QA asked for required-field enforcement; content validation is a separate concern. Candidate follow-up if ops sees more bad inputs.
+- Inline red-border styling on invalid fields. Current UX is the bulleted error list at the top + scroll-to-top. Matched existing pattern.
+- Email format validation beyond non-empty. The input has `type="email"` which handles browser-level format hints.
+- **Jamie: server-side validation in `app/api/camps/register/route.ts` still only checks parent email/firstName/lastName + non-zero gamers + non-zero price.** Client is the only gate for the 8 other starred fields now. Not a bug (the client fix solves the QA case), but if you want defense-in-depth against direct API calls, it'd mirror the client `validate()` on the server. Your call — not in my lane.
+
+**What's still on Aaron's plate before `dev → main`:**
+- #10 (medium) — squad_status selector gating when `?squad=` is present
+- #11 (low) — pre-select crew week/slot for all added gamers, not just gamer 0
+- #13 (medium) — finalize + publish Klaviyo welcome template
+
+---
+
+## Jamie — April 15, 2026 (evening — squad_link QA verification + dev Stripe env isolation fix)
+
+**⚠ Aaron's Claude: read this entry AND `docs/QA-FLAGGED-ISSUES.md` (items 10–13) before touching the register page.** This session landed zero production code changes but does three things you need to know about: (1) verified squad_link end-to-end on dev, (2) fixed a live-mode Stripe config drift on the dev Netlify context so test cards now work, and (3) logged 4 flagged items, three of which live in your lane.
+
+**What you (Aaron) need to do — summary:**
+1. Pull `dev` — 2 commits ahead of prod now (squad_token ops columns + this QA session's config/docs).
+2. Fix items 10, 11, 12 from `docs/QA-FLAGGED-ISSUES.md` in `app/programs/ekuzo-camps/register/page.tsx`. All three are register-page work; one diff can land all three surgically. Item 12 (Birthday validation on added gamers) is the highest-priority — it's a data-quality bug, not just UX polish.
+3. Finalize the Klaviyo welcome email template (item 13) so confirmation emails actually send. All profile properties (`squad_link`, `camp_week`, `camp_slot`, `camp_week_dates`, `registration_summary`, `order_id`, `squad_status`) are populating correctly in Klaviyo — just need your template and a published automation.
+4. When you're done with items 10–13, merge `dev → main` yourself. Jamie explicitly wants you to drive the merge after your fixes land, not before.
+
+**What was verified in this session (all 7 QA scenarios from `docs/squad-link-build-brief.md`):**
+
+| # | Scenario | Status | Test profile |
+|---|---|---|---|
+| 1 | Building creates crew | ✅ | jamiefosu@gmail.com / token `kzPDaElWFY` / Testy McTester |
+| 2 | Friend joins via link | ✅ (hybrid — see item 10) | jamiefosu+151@gmail.com |
+| 3 | Multi-gamer joining | ✅ | jamiefosu+15111@gmail.com (3 gamers) |
+| 4 | Week-change warning | ✅ | no payment — form-only test |
+| 5 | Invalid token | ✅ | `/squad/nonexistent-test-token` → state 3 |
+| 6 | Past-week page | ✅ | synthetic token `pastweek01` / scheduled re-test 2026-05-25 |
+| 7 | Looking purchase | ✅ | jamiefosu+262@gmail.com |
+
+Data pipeline verified correct across all four surfaces (Stripe PaymentIntent metadata, `ekuzo-purchases` tab, `squads` + `squad_members` tabs, Klaviyo profile properties). Zero column-shift on the 28-column `ekuzo-purchases` writes — the header-mapped `doPost` fix is working against real registration data, not just smoke tests. All `squad_token` / `joining_squad_token` values cross-reference cleanly across all sources.
+
+**Infra work done this session (Aaron: do NOT undo any of this):**
+
+- **Apps Script deployed (new version of existing web app — same URL).** `doPost` now maps row objects to sheet columns by header NAME not position (fixes the gender-column-shift bug for ALL tabs going forward). New `doGet` handler for `?action=squad&token=X` returns the crew owner record for `/squad/[token]` and the register page's `?squad=TOKEN` fetch. Canonical ekuzo-purchases header list grew from 26 → 28 (added `squad_token` + `joining_squad_token` columns for ops visibility). `docs/apps-script-backup-pre-squad.gs` committed as a roll-back snapshot of the pre-squad script.
+- **Google Sheet tabs created:** `squads` (7 columns) and `squad_members` (6 columns) — see spec doc for exact headers. The `ekuzo-purchases` tab has 28 columns now, aligned with the canonical list in the spec.
+- **Webhook updated:** `app/api/webhooks/stripe/route.ts` writes `squad_token` + `joining_squad_token` to the main `ekuzo-purchases` row (not just to `squads` / `squad_members`). This is an ops-visibility add — lets ops filter the main tab by token without needing a JOIN across squad tabs.
+- **Netlify env vars reconfigured for Stripe test mode on dev.** Before this session the dev Netlify context was running with `sk_live_*` and `pk_live_*`, so 4242 test cards were declining as "live mode + test card". We now have `sk_test_*` / `pk_test_*` / test `STRIPE_PRICE_CAMPS` / test `STRIPE_WEBHOOK_SECRET` on **Deploy Previews / Branch deploys / Preview Server & Agent Runners / Local development** contexts. **Production stays on live keys and live webhook** — untouched. If you deploy from dev and see live-mode payments again, the Branch deploys override got overwritten somewhere.
+- **`STRIPE_PRICE_*` added to `SECRETS_SCAN_OMIT_KEYS`.** Netlify was failing dev builds because its scanner treats Stripe price IDs as secrets; they're not (they're public identifiers). Existing omit list now includes all 4 price env vars: `STRIPE_PRICE_CAMPS`, `STRIPE_PRICE_EKUZO100`, `STRIPE_PRICE_TEAMS`, `STRIPE_PRICE_TEAMS_INSTALLMENTS`.
+- **Stripe live secret key was ROTATED.** Old `sk_live_..._xoPS` → new value, 7-day graceful expiration set on the old key. New value was pasted into Netlify Production context. If you see any service outside Netlify still using the old live secret (e.g. a local script, a CLI config), update it before 2026-04-22 when the old key expires. Known consumer was Netlify Functions; no other consumers are expected.
+- **Scheduled task set for 2026-05-25** to run the real post-Week-01 `hasWeekPassed()` verification. You don't need to remember it — it'll fire automatically.
+
+**Test data in dev sheets (safe to ignore or clean up — nothing is real):**
+
+- `squads` tab rows to clean if desired: `smoketest1` (Phase 2 smoke test), `pastweek01` (Scenario 6), `XTruMxZhLb` (Scenario 2 hybrid — Fly McFly profile). The `kzPDaElWFY` row (Testy) is also test data and can be deleted; just note that `/squad/kzPDaElWFY` will flip to "no longer available" once it's gone.
+- `squad_members` tab has 5 test rows all pointing at `kzPDaElWFY` (Fly, Able, daniel, rob, John).
+- `ekuzo-purchases` tab has 6 test rows from today 2026-04-15. Identify by `registration_date` today + `parent_email` containing `jamiefosu+*` or plain `jamiefosu@gmail.com`. None are real sales (we are pre-launch, per Jamie).
+
+**Flagged issues — full detail in `docs/QA-FLAGGED-ISSUES.md` items 10–13:**
+
+- **#10 (Medium, your lane):** squad_status selector stays visible + defaults to "Building" when `?squad=` is in URL. Friend-joining flow accidentally creates parallel crews. Fix: hide selector when `joining_squad_token` is set.
+- **#11 (Low, your lane):** added gamers don't inherit the crew's week/slot. Only gamer 1 gets pre-selected. Fix: extend pre-selection to all gamers when `joining_squad_token` is set.
+- **#12 (High, your lane, pre-existing bug):** Birthday field shows `*` required but can submit blank on added gamers. Surfaced during multi-gamer QA. Audit all per-gamer required-field validation, not just birthday. Pre-exists squad_link — just surfaced because we stress-tested multi-gamer paths harder than before.
+- **#13 (Medium, your Klaviyo work):** welcome email not firing because `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` is still draft. Profile properties are landing correctly — publish the template with the right merge tags and it'll light up.
+
+**Merge plan:**
+1. Aaron lands fixes for items 10, 11, 12 on `dev`.
+2. Aaron publishes Klaviyo welcome template (item 13) and tests end-to-end.
+3. Aaron merges `dev → main` per the CLAUDE.md sequence and verifies prod.
+4. Jamie holds off touching the merge — he wants Aaron to drive.
+
+**Context if the fix for #10–11 needs a product decision:** the build brief explicitly called out the Building-while-joining edge case ("a Building registration that's ALSO joining someone else's crew is a weird edge case; default behavior is that generating your own token wins") and the correct fix is to gate the selector, not change the webhook semantics. The data model already supports pure-join (`squad_token` blank + `joining_squad_token` set + `squad_status` blank). This is purely a UI gating change.
+
+---
+
+## Jamie — April 15, 2026 (squad_link — crew invite links for camps)
+
+**What changed:** Built the full squad_link feature from `docs/squad-link-build-brief.md`. A parent registering "Building a squad" for camps now gets a personal crew invite link they can share; friends who click it land on `/squad/[token]`, register via `/programs/ekuzo-camps/register?squad=TOKEN`, see a pre-selected week/slot + red crew banner, and get stamped into the inviter's crew in the `squad_members` sheet tab.
+
+**New files:**
+- `lib/squad.ts` — `fetchSquadOwner(token)` server helper (hits Apps Script `?action=squad&token=X` with 60s revalidate cache), `isValidSquadToken(token)` allow-list validator (`[A-Za-z0-9_-]{4,32}`), `hasWeekPassed(weekDates)` date parser with fail-open semantics. **⚠ `hasWeekPassed` needs a manual test after 2026-05-25** when the first camp week actually ends — no test harness in repo, notes in the file and in `apps-script-squad-endpoints-spec.md`.
+- `app/api/squad/[token]/route.ts` — GET proxy. Validates token shape before any outbound call, fetches from Apps Script, returns 404 for unknown *or* past-week crews (collapses both terminal states into one client code path so the register page hand-off stays in one place).
+- `app/squad/[token]/page.tsx` — server component, three render states (valid upcoming / past week / invalid). Tungsten red CTA, `robots: noindex,nofollow`, uses `next/link` for the CTA. Reads owner record at render time via the shared helper so the SSR'd HTML has the right copy for crawlers + analytics.
+- `docs/apps-script-squad-endpoints-spec.md` — full copy-pasteable Apps Script spec for Jamie to deploy. **Includes the header-mapped `doPost` fix for the `ekuzo-purchases` tab** that resolves the long-standing column-shift bug (see below).
+- `docs/squad-link-build-brief.md` — the source-of-truth build brief from Cowork, committed alongside so Aaron's claude can read it for context.
+
+**Modified:**
+- `package.json` / `package-lock.json` — added `nanoid`.
+- `app/programs/ekuzo-camps/register/page.tsx` (**Aaron's lane — narrow diff, please review**): reads `?squad=TOKEN` on mount, fetches `/api/squad/[token]`, handles 404/past-week by redirecting to `/squad/[token]`. On success pre-selects week+slot for gamer 0, shows a red `bg-red` crew banner above the form, gates week/slot changes on gamer 0 through a `window.confirm` ("Changing this means you won't be at camp together") that acknowledges once per session. On submit, generates a fresh 10-char `nanoid()` `squad_token` when `squadStatus === "building"` and passes `squad_token` + `joining_squad_token` to the API. Also did a review-pass cleanup: removed the unused `gamerSummaries` prop on `CheckoutForm`.
+- `app/api/camps/register/route.ts`: accepts `squad_token` + `joining_squad_token` from the body, validates both through `isValidSquadToken` before stamping Stripe PaymentIntent metadata (strict allow-list, prevents arbitrary client input from flowing downstream). Added local `ClientGamer` type to replace `any` on the `gamers.forEach` callback and narrowed the outer `catch` to use `err instanceof Error`.
+- `app/api/webhooks/stripe/route.ts`: builds `squad_link = https://ekuzo.gg/squad/${meta.squad_token}` (blank if missing) and writes it to Beehiiv custom fields (camps block), Klaviyo profile properties, and the Klaviyo "Placed Order" event properties. New camps-only block after the existing Sheets write: if `meta.squad_token` → POSTs `{ tab: "squads", rows: [...] }` with the earliest-week gamer as owner. If `meta.joining_squad_token` → POSTs `{ tab: "squad_members", rows: [...] }` with one row per gamer. Each has its own try/catch. Also did a cleanup pass: added a local `MetadataGamer` type to replace the `any[]` on the parsed-from-metadata gamers array (catches field-name typos at compile time — exactly the class of bug that caused the gender-shift), and narrowed all seven `catch (err: any)` blocks to `catch (err)` with `err instanceof Error` narrowing.
+
+**Google Sheets column-shift bug (gender column) — diagnosis + fix:**
+
+Jamie spotted on 2026-04-15 that a test submission landed with the `gender` cell empty and every subsequent column shifted one left. This is the same bug flagged in the April 13 WORKLOG entry ("Week 02 appeared under the gender header"). I traced the full pipeline (form state → register API → Stripe metadata → webhook → Sheets POST body) and **confirmed the Next.js side is not the bug** — every field including `gender` is always sent with a `|| ""` fallback, key order is stable, no data is ever dropped. Root cause is Apps Script doing `sheet.appendRow` positionally using `Object.values(row)` or a hardcoded column array; any drift between the JS object key order and the sheet's header row order cascades into a shift starting at the first mismatched position.
+
+**Fix (specced, not yet deployed — requires Jamie to paste into Apps Script):** `docs/apps-script-squad-endpoints-spec.md` now includes a rewritten `doPost` that maps row objects to sheet columns **by header name** for ALL tabs (main + new squad tabs), not just the new squad tabs. The spec also lists the canonical 26-column header row the webhook currently sends so Jamie can align the `ekuzo-purchases` sheet on deploy. Historical rows that were written under the positional append are still corrupt — spec covers three backfill options, recommends leaving them as historical noise unless needed for ops reports.
+
+**Security hardening:**
+- Server-side token validation via `isValidSquadToken` (charset + length allow-list) in both `/api/squad/[token]` and `/api/camps/register` before any outbound call or metadata stamping, so arbitrary client input can't be smuggled into Stripe/Apps Script.
+- `fetchSquadOwner` uses `next: { revalidate: 60 }` instead of `no-store` — crews are immutable after creation so 60s is indistinguishable from fresh, and this caps upstream Apps Script calls at ~1/minute per token regardless of how viral a link goes (Apps Script has hard daily UrlFetch quotas that would otherwise take down the entire webhook path).
+- `/api/squad/[token]` rejects malformed tokens before any outbound call so it can't be used as a free probe against Apps Script.
+- `.trim()` on every string field in `fetchSquadOwner`'s response so a stray whitespace in a Sheets cell can't spuriously fire the "changing your week won't keep you with your crew" confirm dialog.
+
+**Verification (local, against running `next dev` on :3001):**
+- `tsc --noEmit` clean.
+- `eslint` on all six touched files: zero errors, zero warnings. Pre-existing baseline had 10 errors + 1 warning across the modified files; cleanup pass during review reduced it to zero in those files (details in the review conversation).
+- `GET /api/squad/{malformed}` → 404 without Apps Script call.
+- `GET /api/squad/{valid-shape-unknown}` → 404 after Apps Script round trip.
+- `GET /squad/{token}` → 200, "THIS CREW LINK IS NO LONGER AVAILABLE", `<meta robots=noindex,nofollow>`.
+- `GET /programs/ekuzo-camps/register?squad=...` → 200.
+- **NOT verified locally** — the valid-token "join crew" render (requires a real `squads` row in Sheets + `doGet` deployed), full Stripe round-trip with squad_token in metadata, the 7 QA scenarios in the brief. These all depend on the Apps Script side being deployed first.
+
+**What Jamie still needs to do (handoff):**
+1. Paste the updated `doPost` + new `doGet` from `docs/apps-script-squad-endpoints-spec.md` into the Apps Script editor, create the `squads` and `squad_members` tabs with the header rows in the spec, align the `ekuzo-purchases` header row to the canonical 26-column list, and redeploy.
+2. Run the 7 QA scenarios from `docs/squad-link-build-brief.md` against the dev preview once Apps Script is live.
+3. Decide whether to backfill historical column-shifted rows (spec has three options — recommendation is to leave as historical noise).
+4. Put a calendar reminder for 2026-05-25 to manually test `hasWeekPassed` with a real past-week `squads` row.
+
+**Notes for Aaron:** register page diff is scoped to the squad-link hook-in — banner render, `useEffect` for the `?squad=` query param, `selectSlot` confirm dialog, submit-time token passing. Unrelated cleanup while in the file: removed the unused `gamerSummaries` prop on `CheckoutForm`. Nothing else in the file should be touched by this diff.
 
 ---
 

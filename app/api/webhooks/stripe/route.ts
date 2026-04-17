@@ -11,6 +11,35 @@ const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY!;
 const KLAVIYO_PURCHASERS_LIST_ID = "V4Uf7N";
 
 /**
+ * Shape of each gamer after reconstruction from Stripe metadata. This is
+ * distinct from the camps register-form shape (see `ClientGamer` in
+ * /api/camps/register/route.ts): by the time we're reading it here, the
+ * form data has been JSON-stringified through Stripe metadata and parsed
+ * back, so numeric fields may have lost precision and the field names
+ * reflect the post-transform shape (`slot` not `selectedSlot`,
+ * `preferredGames` as a joined string not an array, etc.). All fields
+ * optional because a malformed metadata value would parse to `{}`.
+ */
+type MetadataGamer = {
+  firstName?: string;
+  lastName?: string;
+  gamerTag?: string;
+  weekLabel?: string;
+  weekDates?: string;
+  slot?: string;
+  slotHours?: string;
+  price?: number;
+  birthday?: string;
+  gender?: string;
+  skillLevel?: string;
+  tshirtSize?: string;
+  preferredGames?: string;
+  schedulePreference?: string;
+  timePreference?: string;
+  firstSemester?: string;
+};
+
+/**
  * POST /api/webhooks/stripe
  *
  * Handles Stripe webhook events. On `payment_intent.succeeded`:
@@ -30,8 +59,11 @@ export async function POST(req: NextRequest) {
   if (webhookSecret && webhookSecret !== "whsec_...") {
     try {
       event = stripe.webhooks.constructEvent(body, sig!, webhookSecret);
-    } catch (err: any) {
-      console.error("Webhook signature verification failed:", err.message);
+    } catch (err) {
+      console.error(
+        "Webhook signature verification failed:",
+        err instanceof Error ? err.message : err
+      );
       return NextResponse.json(
         { error: "Invalid webhook signature." },
         { status: 400 }
@@ -76,26 +108,41 @@ export async function POST(req: NextRequest) {
     console.log("   Email:", meta.parent_email);
     console.log("   Gamers:", meta.gamer_count);
 
-    // ── Extract billing location from Stripe ─────────────────────
+    // ── Extract billing location + receipt number from Stripe charge ─
+    // We fetch the charge once and reuse it. receipt_number is Stripe's
+    // customer-facing order ID (format: 1234-5678) — cleaner than the
+    // pi_... identifier for customer-facing emails.
     let location = "";
+    let receiptNumber = "";
     try {
       const charges = await stripe.charges.list({ payment_intent: paymentIntent.id, limit: 1 });
-      const billing = charges.data[0]?.billing_details?.address;
+      const charge = charges.data[0];
+      const billing = charge?.billing_details?.address;
       if (billing) {
         location = [billing.city, billing.state, billing.country]
           .filter(Boolean)
           .join(", ");
       }
+      receiptNumber = charge?.receipt_number || "";
     } catch (err) {
-      console.warn("Could not fetch billing location:", err);
+      console.warn("Could not fetch charge data:", err);
     }
+
+    // Customer-facing order ID used in Klaviyo + Beehiiv templates.
+    // Prefer Stripe's auto-generated receipt_number (clean format:
+    // 1234-5678, piggybacks on an already-unique number — no counter
+    // to maintain). Fall back to last 8 of PI for test-mode charges
+    // where receipt_number may not be populated yet.
+    const orderId = receiptNumber
+      ? `EKZ-${receiptNumber}`
+      : `EKZ-${paymentIntent.id.slice(-8).toUpperCase()}`;
 
     // ── Parse gamer data ─────────────────────────────────────────
     const gamerCount = parseInt(meta.gamer_count || "0", 10);
-    const gamers: any[] = [];
+    const gamers: MetadataGamer[] = [];
     for (let i = 0; i < gamerCount; i++) {
       try {
-        gamers.push(JSON.parse(meta[`gamer_${i}`] || "{}"));
+        gamers.push(JSON.parse(meta[`gamer_${i}`] || "{}") as MetadataGamer);
       } catch {
         gamers.push({});
       }
@@ -117,6 +164,13 @@ export async function POST(req: NextRequest) {
         : squadStatusCode === "looking"
           ? "Looking for a squad"
           : "";
+
+    // Squad link (camps + Building only). Looking purchases don't get a
+    // squad_token and this stays empty for them — Klaviyo/Beehiiv fields
+    // are blank, no `squads` sheet write happens.
+    const squadLink = meta.squad_token
+      ? `https://ekuzo.gg/programs/ekuzo-camps/register?squad=${meta.squad_token}`
+      : "";
 
     // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────
     const allGamerNames: string[] = [];
@@ -180,6 +234,7 @@ export async function POST(req: NextRequest) {
         { name: "gamer_count", value: meta.gamer_count || "1" },
         { name: "registration_summary", value: gamerSummaries.join(" | ").slice(0, 500) },
         { name: "payment_intent_id", value: paymentIntent.id },
+        { name: "order_id", value: orderId },
         { name: "amount_paid", value: `$${(paymentIntent.amount / 100).toFixed(2)}` },
         { name: "timezone", value: meta.timezone || "" },
         { name: "location", value: location },
@@ -189,7 +244,8 @@ export async function POST(req: NextRequest) {
         customFields.push(
           { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
           { name: "camp_slot", value: earliestSlot },
-          { name: "squad_status", value: squadStatusLabel }
+          { name: "squad_status", value: squadStatusLabel },
+          { name: "squad_link", value: squadLink }
         );
       } else if (product === "teams") {
         customFields.push(
@@ -253,13 +309,19 @@ export async function POST(req: NextRequest) {
             } else {
               console.log(`✅ Beehiiv tags applied: ${tags.join(", ")}`);
             }
-          } catch (tagErr: any) {
-            console.error("Beehiiv tags error:", tagErr.message);
+          } catch (tagErr) {
+            console.error(
+              "Beehiiv tags error:",
+              tagErr instanceof Error ? tagErr.message : tagErr
+            );
           }
         }
       }
-    } catch (err: any) {
-      console.error("Beehiiv enrollment error:", err.message);
+    } catch (err) {
+      console.error(
+        "Beehiiv enrollment error:",
+        err instanceof Error ? err.message : err
+      );
     }
 
     // ── Enroll in Klaviyo (profile + list + event) ─────────────────
@@ -301,6 +363,7 @@ export async function POST(req: NextRequest) {
         }).join(" | ").slice(0, 500),
         amount_paid: `$${(paymentIntent.amount / 100).toFixed(2)}`,
         payment_intent_id: paymentIntent.id,
+        order_id: orderId,
         timezone: meta.timezone || "",
         location: location,
       };
@@ -311,6 +374,7 @@ export async function POST(req: NextRequest) {
         klaviyoProperties.camp_slot = earliestSlot;
         klaviyoProperties.camp_week_dates = earliestWeekDates;
         klaviyoProperties.squad_status = squadStatusLabel;
+        klaviyoProperties.squad_link = squadLink;
       } else if (product === "ekuzo100") {
         klaviyoProperties.cohort_label = meta.cohort_label || "";
         klaviyoProperties.cohort_start = meta.cohort_start || "";
@@ -383,6 +447,7 @@ export async function POST(req: NextRequest) {
                 product: klaviyoProperties.program,
                 value: paymentIntent.amount / 100,
                 currency: "USD",
+                order_id: orderId,
                 gamer_name: klaviyoProperties.gamer_name,
                 gamer_count: parseInt(meta.gamer_count || "1", 10),
                 ...(product === "camps" && {
@@ -390,6 +455,7 @@ export async function POST(req: NextRequest) {
                   camp_slot: klaviyoProperties.camp_slot,
                   camp_week_dates: earliestWeekDates,
                   squad_status: squadStatusLabel,
+                  squad_link: squadLink,
                 }),
                 ...(product === "ekuzo100" && {
                   cohort_label: meta.cohort_label || "",
@@ -418,8 +484,11 @@ export async function POST(req: NextRequest) {
           console.log(`✅ Klaviyo: "Placed Order" event tracked ($${(paymentIntent.amount / 100).toFixed(2)})`);
         }
       }
-    } catch (err: any) {
-      console.error("Klaviyo enrollment error:", err.message);
+    } catch (err) {
+      console.error(
+        "Klaviyo enrollment error:",
+        err instanceof Error ? err.message : err
+      );
     }
 
     // ── Write to Google Sheets (one row per gamer) ──────────────────
@@ -461,9 +530,16 @@ export async function POST(req: NextRequest) {
         stripe_pi_id: paymentIntent.id,
         registration_date: registrationDate,
         additional_info: additionalInfo,
-        // Camps-only; "" for other products. Add a `squad_status` column
-        // to the ekuzo-purchases sheet via Apps Script for this to land.
+        // Camps-only fields; "" for ekuzo100/teams. The sheet has
+        // canonical headers for all three — see the 28-column list in
+        // docs/apps-script-squad-endpoints-spec.md. squad_token +
+        // joining_squad_token are stamped onto EVERY gamer row in the
+        // registration (not just the owner row) so a single-tab FILTER
+        // on ekuzo-purchases by token surfaces the whole crew.
         squad_status: product === "camps" ? squadStatusLabel : "",
+        squad_token: product === "camps" ? (meta.squad_token || "") : "",
+        joining_squad_token:
+          product === "camps" ? (meta.joining_squad_token || "") : "",
       }));
 
       if (rows.length > 0) {
@@ -485,8 +561,103 @@ export async function POST(req: NextRequest) {
           console.warn("⚠️  GOOGLE_SHEETS_WEBHOOK_URL not set — skipping Sheets write");
         }
       }
-    } catch (err: any) {
-      console.error("Google Sheets write error:", err.message);
+    } catch (err) {
+      console.error(
+        "Google Sheets write error:",
+        err instanceof Error ? err.message : err
+      );
+    }
+
+    // ── Squad link — additional Sheets writes (camps only) ─────────
+    // These go through the same Apps Script webhook with a `tab` field so
+    // it knows which sheet to append to. See
+    // docs/apps-script-squad-endpoints-spec.md for the Apps Script side.
+    if (product === "camps") {
+      const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+      const createdAt = new Date().toISOString();
+
+      // 1. `squads` — one row per Building registration. Owner is the
+      //    earliest-week gamer (matches the Beehiiv/Klaviyo logic).
+      if (meta.squad_token && sheetsUrl) {
+        try {
+          let ownerGamerName = "";
+          let ownerWeekLabel = "";
+          let ownerSlot = "";
+          let ownerWeekDates = "";
+          let minWeek = Infinity;
+          for (const gd of gamers) {
+            const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
+            if (weekNum < minWeek) {
+              minWeek = weekNum;
+              ownerGamerName = gd.firstName || "";
+              ownerWeekLabel = gd.weekLabel || "";
+              ownerSlot = gd.slot || "";
+              ownerWeekDates = gd.weekDates || "";
+            }
+          }
+
+          const squadRow = {
+            squad_token: meta.squad_token,
+            owner_parent_email: meta.parent_email || "",
+            owner_gamer_name: ownerGamerName,
+            week: ownerWeekLabel,
+            slot: ownerSlot,
+            week_dates: ownerWeekDates,
+            created_at: createdAt,
+          };
+
+          const squadRes = await fetch(sheetsUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tab: "squads", rows: [squadRow] }),
+          });
+          if (!squadRes.ok) {
+            const errText = await squadRes.text();
+            console.error("Sheets squads write failed:", squadRes.status, errText);
+          } else {
+            console.log(`✅ Sheets squads: row written (${meta.squad_token})`);
+          }
+        } catch (err) {
+          console.error(
+            "Sheets squads write error:",
+            err instanceof Error ? err.message : err
+          );
+        }
+      }
+
+      // 2. `squad_members` — one row per gamer when a family registers
+      //    via someone else's crew link.
+      if (meta.joining_squad_token && sheetsUrl) {
+        try {
+          const memberRows = gamers.map((gd) => ({
+            squad_token: meta.joining_squad_token,
+            member_parent_email: meta.parent_email || "",
+            member_gamer_name: gd.firstName || "",
+            member_week: gd.weekLabel || "",
+            member_slot: gd.slot || "",
+            joined_at: createdAt,
+          }));
+
+          if (memberRows.length > 0) {
+            const memberRes = await fetch(sheetsUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ tab: "squad_members", rows: memberRows }),
+            });
+            if (!memberRes.ok) {
+              const errText = await memberRes.text();
+              console.error("Sheets squad_members write failed:", memberRes.status, errText);
+            } else {
+              console.log(`✅ Sheets squad_members: ${memberRows.length} row(s) written (${meta.joining_squad_token})`);
+            }
+          }
+        } catch (err) {
+          console.error(
+            "Sheets squad_members write error:",
+            err instanceof Error ? err.message : err
+          );
+        }
+      }
     }
 
     // ── Teams installment: create Subscription for remaining 3 payments ──
@@ -532,8 +703,11 @@ export async function POST(req: NextRequest) {
             console.log(`   Trial until Oct 1 2026, then 3 × $160/mo, cancel Jan 1 2027`);
           }
         }
-      } catch (err: any) {
-        console.error("Teams installment subscription error:", err.message);
+      } catch (err) {
+        console.error(
+          "Teams installment subscription error:",
+          err instanceof Error ? err.message : err
+        );
       }
     }
   }

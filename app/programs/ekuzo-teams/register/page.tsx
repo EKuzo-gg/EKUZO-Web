@@ -189,7 +189,7 @@ export default function EkuzoTeamsRegisterPage() {
       if (!gamer.timePreference) errs.push(`${label}: please select a preferred time.`);
       if (!gamer.firstSemester) errs.push(`${label}: please indicate if this is their first semester.`);
       if (!gamer.preferredGames.length)
-        errs.push(`${label}: please select at least one preferred game.`);
+        errs.push(`${label}: please select at least one favorite game.`);
     });
 
     return errs;
@@ -707,13 +707,13 @@ export default function EkuzoTeamsRegisterPage() {
                   />
                 </div>
 
-                {/* Preferred Games */}
+                {/* Favorite Games */}
                 <div className="mt-6">
                   <label
                     className="font-body font-bold text-[#374151] block mb-3"
                     style={{ fontSize: "14px", lineHeight: "20px" }}
                   >
-                    Preferred Games * (Select all that apply)
+                    Favorite Games * (Select all that apply)
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-4">
                     {GAMES.map((game) => {
