@@ -1,4 +1,13 @@
-*.riv filter=lfs diff=lfs merge=lfs -text
+# .riv intentionally NOT routed through Git LFS.
+# Netlify's deploy pipeline only hydrates LFS content for known media
+# extensions (mp4/mov/webm). .riv is a Rive-specific binary format
+# Netlify doesn't recognize, so LFS pointers were being served to
+# production verbatim (content-length 132, starting with "version
+# https://git-lfs.github.com/spec/v1"), which broke the Rive runtime
+# with "Bad header / Problem loading file; may be corrupt!"
+# Committing .riv as regular git binaries. All 4 current files are
+# under 7MB each (under the 10MB pre-commit guard). See WORKLOG entry
+# for 2026-04-20.
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
 *.webm filter=lfs diff=lfs merge=lfs -text

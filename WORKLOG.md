@@ -6,6 +6,70 @@
 
 ---
 
+## Aaron — April 20, 2026 (fix prod Rive animations — unbundle .riv from Git LFS)
+
+**Summary:** Homepage and programs-page Rive animations were broken on prod with "Bad header / Problem loading file; may be corrupt!" Root cause: Netlify's deploy pipeline only hydrates Git LFS content for known media extensions (mp4/mov/webm) — `.riv` is unrecognized, so LFS pointer text was being served to the CDN verbatim. All 4 `.riv` files on `ekuzo.gg` were returning 132-byte `version https://git-lfs.github.com/spec/v1\noid sha256:…` instead of the real binary. Fix: remove `*.riv` from LFS tracking and commit the files as raw git binaries.
+
+**Diagnostic trail:**
+- `curl -I https://ekuzo.gg/animations/ecosystem-desktop.riv` → `content-length: 132`, body starts with `version https://git-lfs`.
+- All 4 `.riv` files on prod returned 132-byte pointer text. All MP4s/MOVs returned real binary with correct `ftypisom` magic bytes and `content-type: video/mp4`.
+- Confirmed both `.riv` and `.mp4` were tracked identically in `.gitattributes`, committed together in `dbe5f21 "Add all media via Git LFS"`, and OIDs resolved to real binaries in `.git/lfs/objects/` locally.
+- Ruled out: GitHub LFS bandwidth/quota failure (would affect all extensions), missing `.lfsconfig` (none present, none needed), stale branches (dev and main at same commit). `git config` showed LFS pointing at GitHub (`lfs.https://github.com/EKuzo-gg/EKUZO-Web.git/info/lfs.access=basic`), so this is vanilla GitHub LFS plus Netlify's extension-allowlist behavior.
+
+**Files changed:**
+- `.gitattributes` — removed `*.riv filter=lfs …` line; replaced with a comment explaining why `.riv` is not LFS-tracked so the next person touching this file doesn't re-add it.
+- `public/animations/ecosystem-desktop.riv` (6.6MB), `ecosystem-mobile.riv` (6.1MB), `programs-hero.riv` (2.3MB), `programs-hero-mobile.riv` (2.3MB) — re-committed as raw git binaries. Total 17MB across 4 files, largest 6.6MB is under the 10MB pre-commit guard. `public/animations/` is a CDN asset path, not referenced by server code, so no risk of sweeping into serverless function bundles.
+
+**Verification (pre-push):**
+- `git cat-file -s :public/animations/ecosystem-desktop.riv` → 6612845 bytes (was 132).
+- `git cat-file -p :public/animations/ecosystem-desktop.riv | head -c 4` → `RIVE` (Rive magic header, not LFS pointer text).
+- `git status --short` confirms only `.gitattributes` + 4 `.riv` files staged. All other "modified" LFS files (MP4s, WORKLOG.md from earlier work, klaviyo template) deliberately left unstaged.
+
+**Verification (post-deploy — Aaron to check):**
+- After Netlify dev build finishes, `curl -I https://dev--ekuzo.netlify.app/animations/ecosystem-desktop.riv` should return `content-length: 6612845` and `content-type: application/octet-stream`. First bytes should be `RIVE`, not `version https`.
+- Homepage ecosystem animation should render. Programs page hero Rive should render. No more "Bad header" errors in the console.
+- Then merge `dev → main` to ship to `ekuzo.gg`.
+
+**Separate issue flagged (not fixed in this commit):** Aaron's local Git LFS smudge filter isn't actively running — that's why `git status` shows ~17 LFS binaries (MP4s + MOV) as "modified" even though nothing changed. The working tree has real binaries on disk, HEAD has LFS pointer text, status compares the two and flags everything. Cosmetic for now, but latent footgun: if you `git add` an MP4 in this state, git would stage the 75MB raw blob. The 10MB pre-commit hook wouldn't catch it because the hook skips size checks on files in `.gitattributes` (assumes staged content is a tiny pointer). Fix when convenient: `brew install git-lfs && git lfs install && git lfs checkout` in the repo root.
+
+---
+
+## Aaron — April 17, 2026 (morning — camps welcome email copy iteration)
+
+**Summary:** Iteration pass on `docs/klaviyo-welcome-template.md` — the camps welcome email draft for QA #13. No code changes; docs only. Still pre-publish in Klaviyo.
+
+**Changes to the camps welcome template:**
+
+1. **Subject line (plural-safe).** Was: `You're in! Here's what's next for {{ person.gamer_name|default:"your gamer" }}'s camp week.` → Now: `{{ person.first_name|default:"Hey" }}, you're in for EKUZO Camp.` `gamer_name` is a comma-separated list for multi-gamer families ("Jacob, Mia"), which reads awkwardly in possessive subject lines. `person.first_name` (parent) works cleanly for both single and multi-gamer.
+2. **Subject B (A/B alternate).** Dropped the `|default:"TBD"` fallback on camp_week — if camp_week is empty, something's broken upstream and "TBD" doesn't help. New B: `EKUZO Camp Week {{ person.camp_week|default:"" }} — here's what's next.`
+3. **Preview text.** Was transactional ("Order X confirmed. Here's how to get ready."). New: `Welcome to EKUZO — here's what your gamer needs to show up ready.` First ~8 words are what Gmail shows in the inbox list.
+4. **Removed receipt block from body.** Dropped the "Order ID / Paid" rows. Stripe already emails the parent a separate receipt automatically from the Stripe account — duplicating it made the welcome read as transactional. The `order_id` and `amount_paid` profile properties are still written by the webhook, so ops/support can look them up.
+5. **Kept camp details block.** Week + dates + slot + registration_summary still surfaced so parent sees what they registered for.
+6. **Named League of Legends explicitly.** Replaced generic "your gamer's preferred game is installed and updated" with "League of Legends is installed and updated on the computer your gamer will use during camp." Camps is LoL-only right now per `CLAUDE.md` Products section. Flagged in the doc's notes section so future-Aaron knows to flip when camps expands to other titles.
+7. **Added Discord mention.** "A Discord invite for your gamer's team comes with the prep email 3 days before" — reinforces the team-stays-together UX.
+8. **Added headset/mic bullet.** One-line callout since communication is core.
+9. **Closing line.** Added "The team sticks together after camp ends — your gamer leaves with a reliable, non-toxic crew to keep climbing with." Mirrors the "THE TEAM STAYS TOGETHER" section on the camps landing page.
+10. **Body format label corrected.** Comment said "HTML — drop into Klaviyo's template editor" but content is plain text. Updated to "plain-text — paste into Klaviyo's Text block, not the HTML editor."
+
+**New "Notes on the copy" section** added under the Liquid notes — documents the rationale above so the next person touching this template knows why the receipt block is out, why the subject uses `first_name` not `gamer_name`, and when to flip the LoL hardcode.
+
+**Still NOT done (next up in this session or next):**
+- EKUZO100 + EKUZOTeams Klaviyo templates — still only exist as raw copy in `docs/welcome-emails.md`, not translated to Klaviyo merge-tag format. Aaron wants to review camps first before drafting the other two.
+- Publishing in Klaviyo UI — still draft (`aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`). End-to-end test not yet run.
+
+**Files touched:**
+- `docs/klaviyo-welcome-template.md` — two edits (subject/preview/body block, then Notes on the copy section).
+
+**Verification:**
+- Re-read both edited regions after save; all merge tags cross-reference correctly against `app/api/webhooks/stripe/route.ts` lines 349–385 (checked `gamer_name`, `first_name`, `camp_week`, `camp_week_dates`, `camp_slot`, `registration_summary`, `squad_link`, `order_id`, `amount_paid`). No property names invented that the webhook doesn't write.
+- `{% if person.squad_link %}` block still works as before — webhook sets `squad_link = ""` for joiners and lookers, so the block is skipped cleanly.
+- No code touched; no `tsc`/`eslint` needed.
+
+**Jamie heads-up:**
+- Still no code drift — `squad_status` in Klaviyo is still "Building a squad" / "Looking for a squad" (not "team") per the 4/16 entry. The email template doesn't display `squad_status` directly (only `{% if person.squad_link %}`), so no recipient sees the drift. Separate cleanup when convenient.
+
+---
+
 ## Aaron — April 16, 2026 (night — full camps registration UX pass)
 
 **Summary:** Major UX pass across the camps registration flow, squad join flow, sticky CTA, and success page. Also wired local Stripe testing environment.
