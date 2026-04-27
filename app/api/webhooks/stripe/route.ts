@@ -688,7 +688,11 @@ export async function POST(req: NextRequest) {
         if (meta.parent_last_name)
           userData.ln = [sha256(meta.parent_last_name.toLowerCase().trim())];
 
-        const capiPayload = {
+        const capiTestEventCode = process.env.META_CAPI_TEST_EVENT_CODE;
+        const capiPayload: {
+          data: unknown[];
+          test_event_code?: string;
+        } = {
           data: [
             {
               event_name: "Purchase",
@@ -704,6 +708,9 @@ export async function POST(req: NextRequest) {
             },
           ],
         };
+        if (capiTestEventCode) {
+          capiPayload.test_event_code = capiTestEventCode;
+        }
 
         const capiRes = await fetch(
           `https://graph.facebook.com/v19.0/${capiPixelId}/events?access_token=${capiToken}`,
