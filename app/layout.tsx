@@ -11,7 +11,10 @@ import JsonLd from "@/components/JsonLd";
 import { rootGraph } from "@/lib/schema";
 
 const GA_MEASUREMENT_ID = "G-8LM45PX53W";
-const META_PIXEL_ID = "1284038230557204";
+// Lifted to env so the server-side CAPI handler can read the same ID
+// without it drifting. Fallback keeps prod safe if the env var is missing.
+const META_PIXEL_ID =
+  process.env.NEXT_PUBLIC_META_PIXEL_ID || "1284038230557204";
 
 /*
  * Tungsten Narrow — personal/preview use (Hoefler & Co)

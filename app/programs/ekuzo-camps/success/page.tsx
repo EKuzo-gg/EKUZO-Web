@@ -62,6 +62,7 @@ function CampsSuccessPage() {
               program: "camps",
               value: amount,
               transactionId: paymentIntentId,
+              eventId: paymentIntentId,
             });
           }
         }

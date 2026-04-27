@@ -73,6 +73,7 @@ export function trackPurchase(params: {
   value: number;
   currency?: string;
   transactionId?: string;
+  eventId?: string;
 }) {
   ga4("purchase", {
     transaction_id: params.transactionId,
@@ -80,11 +81,20 @@ export function trackPurchase(params: {
     value: params.value,
     items: [{ item_id: params.program, item_name: params.program }],
   });
-  fbq("Purchase", {
+  const fbqParams = {
     content_name: params.program,
     currency: params.currency ?? "USD",
     value: params.value,
-  });
+  };
+  // eventID lets the server-side CAPI Purchase call dedupe against this
+  // browser fire. We only attach it when caller provides one — Meta's
+  // dedup expects matching IDs, so a UUID generated here would just
+  // create a new record instead of merging with the server event.
+  if (params.eventId) {
+    window.fbq?.("track", "Purchase", fbqParams, { eventID: params.eventId });
+  } else {
+    fbq("Purchase", fbqParams);
+  }
 }
 
 // ---------------------------------------------------------------------------

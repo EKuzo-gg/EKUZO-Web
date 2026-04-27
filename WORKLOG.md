@@ -6,6 +6,30 @@
 
 ---
 
+## Jamie — April 27, 2026 (Meta Conversions API server-side wiring for Friday ads launch)
+
+**Why:** First Meta ads campaign for EKUZO Camps launches Friday. Client-side Pixel alone loses 30–50% of Purchase signal to iOS ATT, Safari ITP, and adblockers, which degrades the algo on the audience we just paid for. CAPI sends the same Purchase event server-side and Meta dedupes the two by `event_id`.
+
+**What changed:**
+- `lib/analytics.ts` — `trackPurchase` accepts `eventId`. When present, fires `fbq("track","Purchase", params, { eventID })` so the Pixel call dedupes against the CAPI fire. No-op for `trackInitiateCheckout` / `trackViewContent` (CAPI dedup not wired for those yet — Purchase only this round).
+- `app/programs/ekuzo-camps/success/page.tsx` + `app/programs/ekuzo100/success/page.tsx` — `trackPurchase` calls now pass `eventId: paymentIntentId`.
+- `app/api/webhooks/stripe/route.ts` — On `payment_intent.succeeded` (after Beehiiv / Klaviyo / Sheets / squad-sheets writes, before Teams installment sub) POST a Purchase event to `https://graph.facebook.com/v19.0/{PIXEL_ID}/events`. `event_id = paymentIntent.id` (matches what the Pixel fires). `user_data` ships SHA-256 hashed em / ph / fn / ln pulled from PI metadata. `custom_data` = currency + value (cents → dollars). Failures `console.error` and continue — Beehiiv / Klaviyo / Sheets are unaffected if CAPI 4xx/5xx or the token is missing.
+- `app/layout.tsx` — `META_PIXEL_ID` lifted from hardcoded const to `process.env.NEXT_PUBLIC_META_PIXEL_ID` with the existing ID as fallback. Single source of truth across client + server.
+- `.env.local.example` — added `NEXT_PUBLIC_META_PIXEL_ID`, `META_PIXEL_ID`, `META_CAPI_ACCESS_TOKEN` with comments. Real token NOT committed.
+
+**Aaron:** zero front-end touch. Don't worry about it. The two success-page edits are one-line additions to existing `trackPurchase` calls — no layout / styling changes.
+
+**Next steps (Jamie):** generate CAPI access token in Business Manager → Events Manager → Pixel → Settings → Generate Access Token. Add `META_CAPI_ACCESS_TOKEN` to `.env.local` and to Netlify (Production + Branch deploys + Deploy Previews contexts). Add `META_PIXEL_ID=1284038230557204` and `NEXT_PUBLIC_META_PIXEL_ID=1284038230557204` to those same Netlify contexts. Run a test purchase on dev, verify in Events Manager → Test Events that both browser + server fires arrive and dedupe on the same `event_id`.
+
+**Acceptance criteria checked:**
+- ✅ Webhook fires Purchase server-side on `payment_intent.succeeded`
+- ✅ Payload structure matches spec (event_name / event_time / event_id / action_source / event_source_url / hashed user_data / custom_data)
+- ✅ Both success pages pass `eventId: paymentIntentId`
+- ✅ Graceful failure: missing token logs warn + skip; API error logs error + continues; Beehiiv / Klaviyo / Sheets unaffected
+- ✅ `tsc --noEmit` clean
+
+---
+
 ## Aaron — April 20, 2026 (fix prod Rive animations — unbundle .riv from Git LFS)
 
 **Summary:** Homepage and programs-page Rive animations were broken on prod with "Bad header / Problem loading file; may be corrupt!" Root cause: Netlify's deploy pipeline only hydrates Git LFS content for known media extensions (mp4/mov/webm) — `.riv` is unrecognized, so LFS pointer text was being served to the CDN verbatim. All 4 `.riv` files on `ekuzo.gg` were returning 132-byte `version https://git-lfs.github.com/spec/v1\noid sha256:…` instead of the real binary. Fix: remove `*.riv` from LFS tracking and commit the files as raw git binaries.

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { createHash } from "crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-02-25.clover",
@@ -658,6 +659,80 @@ export async function POST(req: NextRequest) {
           );
         }
       }
+    }
+
+    // ── Meta Conversions API: server-side Purchase event ───────────
+    // Mirrors the client-side fbq("track","Purchase") on the success
+    // page. Deduplicated by event_id (= Stripe PaymentIntent ID) which
+    // both fires share. Without this, iOS ATT / Safari ITP / adblockers
+    // strip ~30-50% of the client-side signal Meta uses for ad
+    // optimization.
+    const capiToken = process.env.META_CAPI_ACCESS_TOKEN;
+    const capiPixelId = process.env.META_PIXEL_ID;
+    if (capiToken && capiPixelId) {
+      try {
+        const sha256 = (v: string) =>
+          createHash("sha256").update(v).digest("hex");
+        const phoneDigits = (meta.parent_phone || "").replace(/\D/g, "");
+        const programSlug =
+          product === "ekuzo100" ? "ekuzo100"
+          : product === "teams" ? "ekuzo-teams"
+          : "ekuzo-camps";
+
+        const userData: Record<string, string[]> = {};
+        if (meta.parent_email)
+          userData.em = [sha256(meta.parent_email.toLowerCase().trim())];
+        if (phoneDigits) userData.ph = [sha256(phoneDigits)];
+        if (meta.parent_first_name)
+          userData.fn = [sha256(meta.parent_first_name.toLowerCase().trim())];
+        if (meta.parent_last_name)
+          userData.ln = [sha256(meta.parent_last_name.toLowerCase().trim())];
+
+        const capiPayload = {
+          data: [
+            {
+              event_name: "Purchase",
+              event_time: Math.floor(Date.now() / 1000),
+              event_id: paymentIntent.id,
+              action_source: "website",
+              event_source_url: `https://ekuzo.gg/programs/${programSlug}/success`,
+              user_data: userData,
+              custom_data: {
+                currency: "USD",
+                value: paymentIntent.amount / 100,
+              },
+            },
+          ],
+        };
+
+        const capiRes = await fetch(
+          `https://graph.facebook.com/v19.0/${capiPixelId}/events?access_token=${capiToken}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(capiPayload),
+          }
+        );
+
+        if (!capiRes.ok) {
+          const errText = await capiRes.text();
+          console.error("Meta CAPI Purchase failed:", capiRes.status, errText);
+        } else {
+          console.log(
+            `✅ Meta CAPI: Purchase event sent (event_id=${paymentIntent.id}, value=$${(paymentIntent.amount / 100).toFixed(2)})`
+          );
+          console.log("Meta CAPI Purchase event sent for", paymentIntent.id);
+        }
+      } catch (err) {
+        console.error(
+          "Meta CAPI error:",
+          err instanceof Error ? err.message : err
+        );
+      }
+    } else {
+      console.warn(
+        "Meta CAPI token not configured; skipping server-side Purchase event (this is expected in local dev without the token)"
+      );
     }
 
     // ── Teams installment: create Subscription for remaining 3 payments ──

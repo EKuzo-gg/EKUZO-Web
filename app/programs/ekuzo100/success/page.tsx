@@ -24,10 +24,12 @@ function Ekuzo100SuccessPage() {
   useEffect(() => {
     if (succeeded && !tracked.current) {
       tracked.current = true;
+      const paymentIntentId = searchParams.get("payment_intent") ?? undefined;
       trackPurchase({
         program: "ekuzo100",
         value: 100,
-        transactionId: searchParams.get("payment_intent") ?? undefined,
+        transactionId: paymentIntentId,
+        eventId: paymentIntentId,
       });
     }
   }, [succeeded, searchParams]);
