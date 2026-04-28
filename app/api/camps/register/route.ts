@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
       squadStatus,
       squad_token,
       joining_squad_token,
+      attribution,
     } = body;
 
     // ── Validate ────────────────────────────────────────────────────
@@ -81,6 +82,33 @@ export async function POST(req: NextRequest) {
     const squadStatusSafe =
       squadStatus === "building" || squadStatus === "looking" ? squadStatus : "";
 
+    // Client IP + User Agent — captured on this server-side route (which
+    // IS called from the user's browser) and threaded through PI metadata
+    // so the Stripe webhook can attach them to the Meta Conversions API
+    // payload. The webhook itself is a server-to-server call from Stripe;
+    // its request.headers are Stripe's, not the visitor's. Per Meta,
+    // adding ip + ua + zip to user_data lifts match quality ~50%.
+    //
+    // x-forwarded-for is a comma-separated chain (client, proxy1, proxy2…);
+    // the left-most entry is the real client. Netlify forwards client IPs
+    // here. x-real-ip is a Netlify-set fallback for the same value.
+    const xff = req.headers.get("x-forwarded-for") || "";
+    const clientIp =
+      (xff.split(",")[0] || "").trim() ||
+      (req.headers.get("x-real-ip") || "").trim() ||
+      "";
+    const clientUa = (req.headers.get("user-agent") || "").slice(0, 500);
+
+    // Attribution — first-touch UTMs captured client-side and posted
+    // through here. Empty strings are fine; the webhook treats absence as
+    // "organic" when deriving acquisition_source.
+    const attr = attribution || {};
+    const utmSourceMarketing = String(attr.utm_source || "").slice(0, 200);
+    const utmMedium = String(attr.utm_medium || "").slice(0, 200);
+    const utmCampaign = String(attr.utm_campaign || "").slice(0, 200);
+    const utmContent = String(attr.utm_content || "").slice(0, 200);
+    const utmTerm = String(attr.utm_term || "").slice(0, 200);
+
     const metadata: Record<string, string> = {
       product: "camps",
       // Environment isolation: webhook skips events whose environment doesn't
@@ -95,6 +123,17 @@ export async function POST(req: NextRequest) {
       timezone: timezone || "",
       squad_status: squadStatusSafe,
     };
+
+    // Add only non-empty attribution + CAPI fields. Stripe metadata has a
+    // 50-key cap; skipping empties leaves headroom for additional_info
+    // chunks and per-gamer JSON blobs.
+    if (clientIp) metadata.client_ip_address = clientIp;
+    if (clientUa) metadata.client_user_agent = clientUa;
+    if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
+    if (utmMedium) metadata.utm_medium = utmMedium;
+    if (utmCampaign) metadata.utm_campaign = utmCampaign;
+    if (utmContent) metadata.utm_content = utmContent;
+    if (utmTerm) metadata.utm_term = utmTerm;
 
     // Squad link tokens (camps only) — 10-char nanoids, validated against
     // a strict charset/length allow-list before they land in Stripe

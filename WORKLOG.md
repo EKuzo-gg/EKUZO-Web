@@ -6,6 +6,61 @@
 
 ---
 
+## Jamie — April 28, 2026 (UTM attribution + CAPI match-quality additions for Friday ads launch)
+
+**Why:** Meta ads launch today. Two pre-launch additions:
+1. Capture marketing UTMs and derive a single `acquisition_source` per registration so Friday's paid-signups read can roll up by one field instead of reverse-engineering UTMs.
+2. Add IP, User Agent, and ZIP to the Meta CAPI `user_data` payload (~50% match-quality lift per Meta).
+
+**What changed:**
+- **`lib/attribution.ts` (new)** — first-touch UTM capture into `sessionStorage["ekuzo_attribution"]`. `captureAttribution()` is a no-op once a non-empty attribution exists (so a marketing page → register navigation preserves the original `meta`/`paid` even if the second URL has no UTMs). `getAttribution()` returns the stored UTM bag (or empty strings) for the register form submit.
+- **`components/analytics/TrackPageView.tsx`** — calls `captureAttribution()` on mount, so all three program landing pages (`/programs/ekuzo-camps`, `/programs/ekuzo100`, `/programs/ekuzo-teams`) capture automatically.
+- **`app/programs/ekuzo-camps/register/page.tsx`** + **`app/programs/ekuzo100/register/page.tsx`** — both client components now `captureAttribution()` on mount (covers direct-land-on-register-from-an-ad), and `getAttribution()` on submit so the bag rides the registration POST body.
+- **`app/api/camps/register/route.ts`** + **`app/api/ekuzo100/register/route.ts`** — accept `attribution` in the body, pull `x-forwarded-for` (left-most entry) and `user-agent` from request headers, and write all eight fields (`utm_source/medium/campaign/content/term`, `client_ip_address`, `client_user_agent`) to Stripe Payment Intent metadata when non-empty. Empty fields are skipped to leave headroom under Stripe's 50-key metadata cap.
+- **`app/api/webhooks/stripe/route.ts`** — derives `acquisition_source` once at the top of the handler:
+  - `meta_paid` if `utm_source === "meta" && utm_medium === "paid"`
+  - `referral` if `meta.joining_squad_token` is present (preserved from existing squad-link logic)
+  - `organic` otherwise
+  Threads `acquisition_source` + the 5 raw UTMs into all three downstream surfaces:
+  - **Google Sheets** — added 6 columns to every row (Apps Script appends by header name per `docs/apps-script-squad-endpoints-spec.md`, so adding the headers in the sheet is enough; no script change needed)
+  - **Klaviyo profile properties** — same 6 fields on the upserted profile
+  - **Beehiiv custom_fields** — same 6 fields on the subscription create payload
+  Also adds 3 fields to the Meta CAPI `user_data` block:
+  - `zp` — SHA-256 hash of `billing_details.address.postal_code` from the Stripe charge (collected by Stripe Elements at payment time, not pre-payment)
+  - `client_ip_address` — raw, scalar string per Meta CAPI spec (not array). Read from PI metadata.
+  - `client_user_agent` — raw, scalar string. Same path.
+
+**Quirks encountered:**
+1. **ZIP source.** The user spec said "write to PI metadata as `zip_code`", but PI metadata is set pre-payment by `/api/{camps,ekuzo100}/register` — at that point the visitor hasn't typed their card details yet, so ZIP isn't known. ZIP IS known to Stripe at webhook time via `charge.billing_details.address.postal_code` (Stripe Elements always collects it). Reading from billing_details at webhook time is more accurate than asking for a ZIP field on the registration form. No form changes; one-line addition to the existing billing extraction.
+2. **IP/UA capture location.** The Stripe webhook is server-to-server; `request.headers` there are Stripe's, not the user's. So IP/UA are captured in `/api/{camps,ekuzo100}/register` (which IS called from the visitor's browser) and threaded through PI metadata to the webhook. Same pipeline as UTMs. This is documented inline in both register routes for the next reader.
+3. **Beehiiv custom field creation.** Beehiiv silently drops unknown `custom_fields` entries (no error). The 6 attribution custom fields (acquisition_source + 5 UTMs) need to exist on the publication for Beehiiv to actually persist their values. `docs/beehiiv-config.md` should be updated to add these to the field list. Sheets + Klaviyo are the source of truth for the Friday read; Beehiiv attribution is best-effort segmentation. **Action for Jamie before merge:** create the 6 custom fields in Beehiiv UI (Settings → Custom Fields → New Field), all type "Text".
+4. **Sheet column add (manual).** Google Sheets needs 6 new header columns added to the `ekuzo-purchases` tab: `acquisition_source`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`. Apps Script appends by header name (resilient to order), so just append them at the end. **Action for Jamie before merge:** add these 6 columns to the spreadsheet.
+5. **userData type signature.** Webhook's `userData` for CAPI was `Record<string, string[]>` but Meta CAPI spec has `client_ip_address` and `client_user_agent` as scalar strings, not arrays. Widened to `Record<string, string | string[]>` so existing hashed fields (em/ph/fn/ln/zp as `[hash]`) coexist with the two scalars. Spec-compliant.
+
+**Out of scope (intentionally not touched):**
+- The existing squad-link / referral rollup logic — preserved as-is; `acquisition_source = "referral"` reuses the same `joining_squad_token` signal it already uses.
+- `acquisition_source` for the Klaviyo "Placed Order" event payload — the user spec said "Klaviyo profile properties" and the profile is the better targeting surface; the event already has enough product/value context for revenue reporting.
+- No env var changes — no new envs needed.
+
+**Aaron:** zero front-end design touch. The two register pages get one-line additions (`captureAttribution()` on mount, `getAttribution()` in the submit payload). No layout, styling, or copy changes.
+
+**Verification:**
+- `tsc --noEmit` clean.
+- Local browser preview: visiting `/programs/ekuzo-camps?utm_source=meta&utm_medium=paid&utm_campaign=…` writes the UTMs to `sessionStorage["ekuzo_attribution"]`. Subsequent navigation to `/register` with DIFFERENT UTMs does NOT overwrite (first-touch wins). Direct land on `/register?utm_source=meta&utm_medium=paid&...` captures correctly.
+- Local POST to `/api/camps/register` with the attribution bag returned an "Expired API Key" error from Stripe (dev env has stale live key) — but that means the body validation, attribution extraction, and metadata build all ran before the Stripe call; only the Stripe call itself fails locally. Full end-to-end verification needs Netlify dev preview with working test keys.
+
+**Jamie's pre-merge checklist:**
+1. Add 6 columns to the `ekuzo-purchases` Google Sheet tab: `acquisition_source`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` (after the existing columns; order doesn't matter — Apps Script maps by name).
+2. Create 6 custom fields in Beehiiv (all Text): `acquisition_source`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`.
+3. On Netlify dev preview (`dev--ekuzo.netlify.app`), run a test purchase with `?utm_source=meta&utm_medium=paid&utm_campaign=test_…` on `/programs/ekuzo-camps`. Verify in:
+   - Stripe Dashboard (test mode) → Payment → metadata: should show `utm_source/medium/campaign/content/term` + `client_ip_address` + `client_user_agent`.
+   - Google Sheet `ekuzo-purchases`: row should populate the 6 attribution columns with `acquisition_source=meta_paid`.
+   - Klaviyo profile: properties should include the 6 fields.
+   - Meta Events Manager → Test Events: Purchase event should include `client_ip_address`, `client_user_agent`, and `zp` in user_data.
+4. Merge `dev → main` once verified.
+
+---
+
 ## Jamie — April 28, 2026 (Derive Meta CAPI test_event_code from Stripe livemode)
 
 **Why:** Earlier today we removed `META_CAPI_TEST_EVENT_CODE` from Netlify across all contexts as part of pre-merge cleanup (Meta rejects events with stale test codes in prod). Side effect: dev test purchases now fire CAPI to Meta's real event stream, polluting ad pixel data on the eve of the Friday ads launch. The right pattern is to gate the test_event_code on `paymentIntent.livemode` instead of an env var — production payments (livemode: true) never get tagged; non-prod payments (livemode: false) auto-route to Meta's Test Events tab. The env var stays as an optional override for named test codes.

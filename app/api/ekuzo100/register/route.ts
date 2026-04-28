@@ -16,8 +16,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { parent, gamers, cohort, additionalInfo, totalPrice, timezone } =
-      body;
+    const {
+      parent,
+      gamers,
+      cohort,
+      additionalInfo,
+      totalPrice,
+      timezone,
+      attribution,
+    } = body;
 
     // ── Validate ────────────────────────────────────────────────────
     if (!parent?.email || !parent?.firstName || !parent?.lastName) {
@@ -49,6 +56,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Client IP + UA + UTM attribution — see /api/camps/register for the
+    // rationale. Same pipeline (PI metadata → webhook → CAPI / Sheets /
+    // Klaviyo / Beehiiv).
+    const xff = req.headers.get("x-forwarded-for") || "";
+    const clientIp =
+      (xff.split(",")[0] || "").trim() ||
+      (req.headers.get("x-real-ip") || "").trim() ||
+      "";
+    const clientUa = (req.headers.get("user-agent") || "").slice(0, 500);
+
+    const attr = attribution || {};
+    const utmSourceMarketing = String(attr.utm_source || "").slice(0, 200);
+    const utmMedium = String(attr.utm_medium || "").slice(0, 200);
+    const utmCampaign = String(attr.utm_campaign || "").slice(0, 200);
+    const utmContent = String(attr.utm_content || "").slice(0, 200);
+    const utmTerm = String(attr.utm_term || "").slice(0, 200);
+
     // ── Build metadata ──────────────────────────────────────────────
     // Stripe metadata values must be strings ≤500 chars.
     const metadata: Record<string, string> = {
@@ -66,6 +90,14 @@ export async function POST(req: NextRequest) {
       cohort_start: cohort.startDate || "",
       cohort_end: cohort.endDate || "",
     };
+
+    if (clientIp) metadata.client_ip_address = clientIp;
+    if (clientUa) metadata.client_user_agent = clientUa;
+    if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
+    if (utmMedium) metadata.utm_medium = utmMedium;
+    if (utmCampaign) metadata.utm_campaign = utmCampaign;
+    if (utmContent) metadata.utm_content = utmContent;
+    if (utmTerm) metadata.utm_term = utmTerm;
 
     // Per-gamer data
     gamers.forEach((gamer: any, i: number) => {

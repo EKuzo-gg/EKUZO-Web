@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
+import { captureAttribution, getAttribution } from "@/lib/attribution";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -197,6 +198,11 @@ export default function Ekuzo100RegisterPage() {
 
   const cohorts = getAvailableCohorts();
 
+  // ── Capture first-touch UTM params on mount ─────────────────────────
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   // ── Gamer CRUD ──────────────────────────────────────────────────────────
 
   function createEmptyGamer(): GamerInfo {
@@ -288,6 +294,7 @@ export default function Ekuzo100RegisterPage() {
     setIsSubmitting(true);
 
     const cohortData = cohorts.find((c) => c.value === selectedCohort);
+    const attribution = getAttribution();
 
     const payload = {
       parent,
@@ -301,6 +308,7 @@ export default function Ekuzo100RegisterPage() {
       additionalInfo,
       totalPrice: PRICE * gamers.length,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      attribution,
     };
 
     try {
