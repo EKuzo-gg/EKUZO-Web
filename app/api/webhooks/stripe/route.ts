@@ -662,6 +662,12 @@ export async function POST(req: NextRequest) {
     // both fires share. Without this, iOS ATT / Safari ITP / adblockers
     // strip ~30-50% of the client-side signal Meta uses for ad
     // optimization.
+    //
+    // test_event_code is derived from paymentIntent.livemode: production
+    // (livemode: true) never gets tagged; non-prod payments auto-route to
+    // Meta's Test Events tab so dev/preview purchases don't pollute the
+    // real ad event stream. META_CAPI_TEST_EVENT_CODE is an optional
+    // override for using a named test code instead of "TEST_AUTO".
     const capiToken = process.env.META_CAPI_ACCESS_TOKEN;
     const capiPixelId = process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
     if (capiToken && capiPixelId) {
@@ -683,7 +689,6 @@ export async function POST(req: NextRequest) {
         if (meta.parent_last_name)
           userData.ln = [sha256(meta.parent_last_name.toLowerCase().trim())];
 
-        const capiTestEventCode = process.env.META_CAPI_TEST_EVENT_CODE;
         const capiPayload: {
           data: unknown[];
           test_event_code?: string;
@@ -703,8 +708,9 @@ export async function POST(req: NextRequest) {
             },
           ],
         };
-        if (capiTestEventCode) {
-          capiPayload.test_event_code = capiTestEventCode;
+        if (!paymentIntent.livemode) {
+          capiPayload.test_event_code =
+            process.env.META_CAPI_TEST_EVENT_CODE || "TEST_AUTO";
         }
 
         const capiRes = await fetch(
