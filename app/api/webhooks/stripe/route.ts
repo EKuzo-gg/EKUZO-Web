@@ -81,30 +81,25 @@ export async function POST(req: NextRequest) {
     const meta = paymentIntent.metadata;
     const product = meta.product || "camps"; // default to camps for backward compat
 
-    // ── Environment isolation ──────────────────────────────────────
-    // Stripe fires webhooks to ALL registered endpoints. Without this
-    // check, a payment from dev--ekuzo.netlify.app would be processed
-    // by both the dev webhook AND the production webhook, causing
-    // duplicate rows in Google Sheets (Beehiiv/Klaviyo are upserts so
-    // they dedupe, but Sheets appends blindly).
+    // ── Mode isolation ─────────────────────────────────────────────
+    // Webhook skips events whose Stripe mode doesn't match this deploy's
+    // Stripe key mode. Prevents a live PI from being processed by a
+    // deploy configured with test keys (and vice versa).
     //
-    // Each registration API stamps the payment intent with the deploy
-    // context it was created under; we only process events whose
-    // environment matches the current deploy context.
-    //
-    // Backward-compat: older payment intents without the `environment`
-    // metadata key are treated as "production" so historical prod
-    // payments still process on prod.
-    const currentEnv = process.env.CONTEXT || "development";
-    const eventEnv = meta.environment || "production";
-    if (eventEnv !== currentEnv) {
+    // Replaced earlier process.env.CONTEXT check because Netlify's
+    // CONTEXT env var doesn't reliably reach Next.js function runtime,
+    // causing false positive skips. paymentIntent.livemode +
+    // STRIPE_SECRET_KEY prefix are both deterministic.
+    const isLiveStripe = process.env.STRIPE_SECRET_KEY?.startsWith("sk_live_") ?? false;
+    const isLivePI = paymentIntent.livemode;
+    if (isLiveStripe !== isLivePI) {
       console.log(
-        `⏭️  Skipping ${paymentIntent.id}: environment mismatch (event=${eventEnv}, current=${currentEnv})`
+        `⏭️  Skipping ${paymentIntent.id}: Stripe mode mismatch (key live=${isLiveStripe}, PI live=${isLivePI})`
       );
-      return NextResponse.json({ received: true, skipped: "env_mismatch" });
+      return NextResponse.json({ received: true, skipped: "stripe_mode_mismatch" });
     }
 
-    console.log(`✅ Payment succeeded: ${paymentIntent.id} [${product}] [env: ${currentEnv}]`);
+    console.log(`✅ Payment succeeded: ${paymentIntent.id} [${product}] [mode: ${isLiveStripe ? "live" : "test"}]`);
     console.log("   Parent:", meta.parent_first_name, meta.parent_last_name);
     console.log("   Email:", meta.parent_email);
     console.log("   Gamers:", meta.gamer_count);

@@ -30,6 +30,18 @@
 
 ---
 
+## Jamie — April 27, 2026 (Switch webhook env guard from CONTEXT to Stripe livemode)
+
+**Why:** While verifying CAPI on dev preview, the env-mismatch guard was rejecting legitimate dev test payments because process.env.CONTEXT doesn't reliably reach Next.js function runtime on Netlify (sometimes set, sometimes undefined). The guard's intent (prevent cross-mode contamination) is correct; the detection mechanism wasn't.
+
+**What changed:** app/api/webhooks/stripe/route.ts only — replaced the `process.env.CONTEXT` vs `meta.environment` check with `process.env.STRIPE_SECRET_KEY` prefix vs `paymentIntent.livemode` check. Both signals are deterministic and Stripe-controlled. Same safety property (mode isolation), more reliable mechanism.
+
+**Aaron:** zero front-end touch. The metadata.environment field your register handler writes is now informational; webhook ignores it. Can clean that up later.
+
+**Verification:** tsc --noEmit clean. Will re-run dev preview test purchase and confirm CAPI block executes (not skipped at the guard).
+
+---
+
 ## Aaron — April 20, 2026 (fix prod Rive animations — unbundle .riv from Git LFS)
 
 **Summary:** Homepage and programs-page Rive animations were broken on prod with "Bad header / Problem loading file; may be corrupt!" Root cause: Netlify's deploy pipeline only hydrates Git LFS content for known media extensions (mp4/mov/webm) — `.riv` is unrecognized, so LFS pointer text was being served to the CDN verbatim. All 4 `.riv` files on `ekuzo.gg` were returning 132-byte `version https://git-lfs.github.com/spec/v1\noid sha256:…` instead of the real binary. Fix: remove `*.riv` from LFS tracking and commit the files as raw git binaries.
