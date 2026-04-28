@@ -6,6 +6,20 @@
 
 ---
 
+## Jamie — April 28, 2026 (Single-source the Meta pixel ID for client + server)
+
+**Why:** `.env.local.example` documented "Also read by the server-side CAPI handler so both surfaces share one source" — but the code didn't actually share one source. Server read `META_PIXEL_ID`, client read `NEXT_PUBLIC_META_PIXEL_ID`, and the two could drift silently. Cowork also cleaned up Netlify env vars in prep for Friday's ads launch: deleted `META_CAPI_TEST_EVENT_CODE` (must be empty in prod or Meta rejects events), and added `META_PIXEL_ID=1284038230557204` to all 5 contexts (Production, Deploy Previews, Branch deploys, Dev, Local).
+
+**What changed:**
+- `app/api/webhooks/stripe/route.ts` — `capiPixelId` now reads `process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID`. One env var is enough; the override is still there for the (rare) case of firing server CAPI against a different pixel.
+- `.env.local.example` — comment block updated to reflect the fallback so the next person touching this file knows `META_PIXEL_ID` is now optional.
+
+**Aaron:** zero front-end touch. One-line server change + env var docs.
+
+**Verification:** `tsc --noEmit` clean. Security review re-run on this state before merging dev → main.
+
+---
+
 ## Jamie — April 27, 2026 (Meta Conversions API server-side wiring for Friday ads launch)
 
 **Why:** First Meta ads campaign for EKUZO Camps launches Friday. Client-side Pixel alone loses 30–50% of Purchase signal to iOS ATT, Safari ITP, and adblockers, which degrades the algo on the audience we just paid for. CAPI sends the same Purchase event server-side and Meta dedupes the two by `event_id`.

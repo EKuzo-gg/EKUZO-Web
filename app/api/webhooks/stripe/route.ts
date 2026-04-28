@@ -663,7 +663,7 @@ export async function POST(req: NextRequest) {
     // strip ~30-50% of the client-side signal Meta uses for ad
     // optimization.
     const capiToken = process.env.META_CAPI_ACCESS_TOKEN;
-    const capiPixelId = process.env.META_PIXEL_ID;
+    const capiPixelId = process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
     if (capiToken && capiPixelId) {
       try {
         const sha256 = (v: string) =>
