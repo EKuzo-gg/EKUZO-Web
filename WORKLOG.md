@@ -6,6 +6,20 @@
 
 ---
 
+## Jamie — April 28, 2026 (Derive Meta CAPI test_event_code from Stripe livemode)
+
+**Why:** Earlier today we removed `META_CAPI_TEST_EVENT_CODE` from Netlify across all contexts as part of pre-merge cleanup (Meta rejects events with stale test codes in prod). Side effect: dev test purchases now fire CAPI to Meta's real event stream, polluting ad pixel data on the eve of the Friday ads launch. The right pattern is to gate the test_event_code on `paymentIntent.livemode` instead of an env var — production payments (livemode: true) never get tagged; non-prod payments (livemode: false) auto-route to Meta's Test Events tab. The env var stays as an optional override for named test codes.
+
+**What changed:**
+- `app/api/webhooks/stripe/route.ts` — replaced the `if (capiTestEventCode)` block with `if (!paymentIntent.livemode) { capiPayload.test_event_code = process.env.META_CAPI_TEST_EVENT_CODE || "TEST_AUTO"; }`. Negation form (`!livemode`) is defensive against a hypothetical undefined even though Stripe always sets it to a boolean. Comment block at the top of the CAPI section now documents the livemode-derived behavior so the next reader doesn't have to dig.
+- `.env.local.example` — `META_CAPI_TEST_EVENT_CODE` comment now reflects "Optional override for the auto-applied 'TEST_AUTO' test_event_code on non-livemode CAPI fires."
+
+**Aaron:** zero front-end touch. Server-side webhook handler change only.
+
+**Verification:** `tsc --noEmit` clean. Security review re-run on this state before merging dev → main. Post-merge: one test purchase on dev preview should land in Meta Test Events tab with `test_event_code: TEST_AUTO`; Stripe `payment_intent.succeeded` webhook should still 200.
+
+---
+
 ## Jamie — April 28, 2026 (Single-source the Meta pixel ID for client + server)
 
 **Why:** `.env.local.example` documented "Also read by the server-side CAPI handler so both surfaces share one source" — but the code didn't actually share one source. Server read `META_PIXEL_ID`, client read `NEXT_PUBLIC_META_PIXEL_ID`, and the two could drift silently. Cowork also cleaned up Netlify env vars in prep for Friday's ads launch: deleted `META_CAPI_TEST_EVENT_CODE` (must be empty in prod or Meta rejects events), and added `META_PIXEL_ID=1284038230557204` to all 5 contexts (Production, Deploy Previews, Branch deploys, Dev, Local).
