@@ -65,7 +65,7 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 
 ### Stripe (camps)
 - 10 weeks × 2 slots (AM/PM) = 20 combinations
-- **Launch pricing:** $199 early bird for ALL weeks (will manually update in code when ready to raise)
+- **Launch pricing:** $199 for ALL weeks. Original price $299 shown strikethrough with "Limited-Time Pricing" framing on marketing + register pages. Was framed as "Early Bird Pricing" through April 2026; framing retired 2026-04-29 because the price isn't changing — only the urgency framing was wrong. Stripe Price `lookup_key` is still `ekuzocamps-earlybird-199` (backend identifier, not user-facing) — flagged as stale, can be renamed in a future Stripe dashboard pass.
 - Urgency badges are marketing-only (not capacity-driven): "Filling Fast" / "Only a Few Left" set per-slot in the `WEEKS` data array
 - No promo codes for v1
 - Stripe Price IDs: configured in `.env.local` (`STRIPE_PRICE_CAMPS`). Test + prod products created.

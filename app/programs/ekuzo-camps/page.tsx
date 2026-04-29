@@ -339,7 +339,7 @@ export default function EkuzoCampsPage() {
                 { icon: "swords" as IconName, label: "RATIO", value: "1:5", desc: "COACH TO STUDENT" },
                 { icon: "calendar" as IconName, label: "DURATION", value: "M-F", desc: "15 HOURS TOTAL" },
                 { icon: "chat" as IconName, label: "WHERE", value: "ONLINE", desc: "PLAY FROM HOME" },
-                { icon: "loot" as IconName, label: "COST", value: "$199", desc: null, badge: "Early Bird Pricing" },
+                { icon: "loot" as IconName, label: "COST", value: "$199", originalValue: "$299", desc: null, badge: "Limited-Time Pricing" },
               ].map((card, i) => (
                 <div
                   key={card.label}
@@ -357,9 +357,14 @@ export default function EkuzoCampsPage() {
                       {card.label}
                     </div>
                     <div
-                      className="font-display text-black leading-[0.85] font-bold"
+                      className="font-display text-black leading-[0.85] font-bold flex items-baseline gap-3 flex-wrap"
                       style={{ fontSize: "clamp(4rem, 7vw, 6rem)" }}
                     >
+                      {card.originalValue && (
+                        <span className="text-black/30 line-through font-normal" style={{ fontSize: "0.55em" }}>
+                          {card.originalValue}
+                        </span>
+                      )}
                       {card.value}
                     </div>
                     {card.badge ? (
@@ -1056,6 +1061,12 @@ export default function EkuzoCampsPage() {
                   Camp Tuition
                 </p>
                 <p
+                  className="font-display text-white/40 line-through leading-none mb-1"
+                  style={{ fontSize: "clamp(2rem, 5vw, 60px)" }}
+                >
+                  $299
+                </p>
+                <p
                   className="font-display text-white leading-none mb-4"
                   style={{ fontSize: "clamp(4rem, 10vw, 120px)" }}
                 >
@@ -1065,7 +1076,7 @@ export default function EkuzoCampsPage() {
                   Includes 15 hrs of coaching<br />+ Secure Discord access
                 </p>
                 <span className="inline-block border-2 border-white text-white font-body font-bold text-sm px-4 py-2 rounded-full">
-                  Early Bird Pricing
+                  Limited-Time Pricing
                 </span>
               </div>
             </div>
