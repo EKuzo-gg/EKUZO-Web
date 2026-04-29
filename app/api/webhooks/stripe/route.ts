@@ -234,7 +234,14 @@ export async function POST(req: NextRequest) {
         product === "ekuzo100" ? "EKUZO100"
         : product === "teams" ? "EKUZOTeams"
         : "EKUZO Camps";
-      const utmSource =
+      // Internal Beehiiv referrer label (legacy, used pre-UTM-attribution).
+      // NOTE: this used to be named `utmSource` and shadowed the actual UTM
+      // captured up-top at line ~138 — meaning the Beehiiv `utm_source` payload
+      // was being set to "ekuzo-camps-registration" instead of the real UTM
+      // from the ad. Renamed to make the distinction unmistakable. Kept as
+      // `referring_site` on the Beehiiv payload so the legacy "where did this
+      // subscriber come from internally" signal still lands somewhere.
+      const beehiivReferringSite =
         product === "ekuzo100" ? "ekuzo100-registration"
         : product === "teams" ? "ekuzo-teams-registration"
         : "ekuzo-camps-registration";
@@ -308,6 +315,10 @@ export async function POST(req: NextRequest) {
         utm_campaign: utmCampaign,
         utm_content: utmContent,
         utm_term: utmTerm,
+        // Internal "where in our funnel did this subscriber come from" label.
+        // Lands as Beehiiv's referring_site, separate from utm_source so paid
+        // attribution is preserved.
+        referring_site: beehiivReferringSite,
         automation_ids: [automationId],
         custom_fields: customFields,
       };

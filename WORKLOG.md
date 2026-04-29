@@ -6,6 +6,22 @@
 
 ---
 
+## Jamie — April 29, 2026 (Beehiiv utm_source variable shadowing — pre-existing bug)
+
+**Why:** Dev test purchase showed Beehiiv's Acquisition Source view with `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` correct (all from the ad URL) but `utm_source` reading "ekuzo-camps-registration" instead of "meta." Tracked it down: the Beehiiv try/catch block (line ~237) declared a local `const utmSource` set to a hardcoded product-specific string ("ekuzo-camps-registration" for camps, equivalent for ekuzo100/teams). This shadowed the outer-scope `utmSource` (set at line 138 from `meta.utm_source`). The earlier fix-commit's `utm_source: utmSource` in beehiivPayload was reading the shadowed local, not the real UTM. Pre-existing bug from before today's UTM work — surfaced now because before, `utm_source` was the only UTM being sent and "ekuzo-camps-registration" looked plausible as a label, so no one noticed.
+
+**What changed:**
+- `app/api/webhooks/stripe/route.ts` — renamed the local product-specific string from `utmSource` → `beehiivReferringSite` so the variable name actually describes what it is. Added it to `beehiivPayload` as `referring_site` (Beehiiv's native field for "where the subscriber came from internally") so the legacy signal still lands. Top-level `utm_source: utmSource` now correctly reads the outer-scope UTM (the actual ad-source string like "meta"). Inline comment block above the rename documents the shadowing trap so the next reader doesn't recreate it.
+
+**Net effect:**
+- Beehiiv subscriber detail → Acquisition Source: now shows the real `utm_source` (e.g., "meta") in the Source field.
+- `referring_site` field gets the legacy product label ("ekuzo-camps-registration") for internal "which form created this subscriber" segmentation. Visible in Beehiiv as Channel/referrer.
+- Sheets, Klaviyo, Stripe metadata unchanged (they always read the outer-scope `utmSource` correctly).
+
+**Verification:** `tsc --noEmit` clean. Dev test purchase needed to confirm Beehiiv now shows Source = "meta" and referring_site = "ekuzo-camps-registration" on the new subscriber.
+
+---
+
 ## Jamie — April 29, 2026 (Beehiiv UTM routing fix — top-level params, not custom_fields)
 
 **Why:** Yesterday's UTM attribution work routed all 6 attribution fields (acquisition_source + 5 UTMs) through Beehiiv `custom_fields`. During pre-launch field creation today, Beehiiv UI rejected creating `utm_source/medium/campaign/content/term` as custom fields with "Name is a reserved field." Beehiiv natively reserves `utm_*` for its built-in acquisition tracking — they're top-level params on the subscription create endpoint, not custom_fields. Yesterday's webhook sent `utm_source` top-level (correct) but ALSO added it to `custom_fields` along with the other 4 UTMs — those 5 were silently dropped on Beehiiv's side.
