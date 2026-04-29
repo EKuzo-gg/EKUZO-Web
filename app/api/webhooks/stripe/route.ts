@@ -268,11 +268,12 @@ export async function POST(req: NextRequest) {
         { name: "timezone", value: meta.timezone || "" },
         { name: "location", value: location },
         { name: "acquisition_source", value: acquisitionSource },
-        { name: "utm_source", value: utmSource },
-        { name: "utm_medium", value: utmMedium },
-        { name: "utm_campaign", value: utmCampaign },
-        { name: "utm_content", value: utmContent },
-        { name: "utm_term", value: utmTerm },
+        // Beehiiv reserves utm_* as native top-level params (see beehiivPayload
+        // below). Don't add them to custom_fields — Beehiiv rejects creating
+        // custom fields with reserved names ("Name is a reserved field"), so
+        // this list silently drops on the API side. Top-level utm_* params
+        // feed Beehiiv's native acquisition tracking (Subscribers detail →
+        // Acquisition Source), and you can segment on `utm_source` directly.
       ];
 
       if (product === "camps") {
@@ -299,7 +300,14 @@ export async function POST(req: NextRequest) {
         email: meta.parent_email,
         reactivate_existing: true,
         send_welcome_email: true,
+        // All 5 UTMs go top-level so Beehiiv's native acquisition tracker
+        // captures them (Subscribers → detail → Acquisition Source). These
+        // CANNOT be custom_fields — Beehiiv reserves the names.
         utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content: utmContent,
+        utm_term: utmTerm,
         automation_ids: [automationId],
         custom_fields: customFields,
       };

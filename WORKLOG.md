@@ -6,6 +6,28 @@
 
 ---
 
+## Jamie — April 29, 2026 (Beehiiv UTM routing fix — top-level params, not custom_fields)
+
+**Why:** Yesterday's UTM attribution work routed all 6 attribution fields (acquisition_source + 5 UTMs) through Beehiiv `custom_fields`. During pre-launch field creation today, Beehiiv UI rejected creating `utm_source/medium/campaign/content/term` as custom fields with "Name is a reserved field." Beehiiv natively reserves `utm_*` for its built-in acquisition tracking — they're top-level params on the subscription create endpoint, not custom_fields. Yesterday's webhook sent `utm_source` top-level (correct) but ALSO added it to `custom_fields` along with the other 4 UTMs — those 5 were silently dropped on Beehiiv's side.
+
+**What changed:**
+- `app/api/webhooks/stripe/route.ts` — removed `utm_source/medium/campaign/content/term` from the `customFields` array (kept `acquisition_source` since it's not a Beehiiv-reserved name). Added `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` as top-level keys on `beehiivPayload` alongside the existing `utm_source`. Inline comments document why utm_* lives at the top level.
+
+**Net effect:**
+- `acquisition_source` continues to land in Beehiiv `custom_fields` (visible on subscriber detail).
+- All 5 UTMs land in Beehiiv's native acquisition tracking (Subscribers → detail → Acquisition Source). Segmentable by `utm_source`/`utm_medium` etc. via Beehiiv's built-in filters.
+- Sheets + Klaviyo behavior unchanged (both already store all 6 fields).
+
+**Aaron:** zero front-end touch.
+
+**Verification:** `tsc --noEmit` clean. Need a Netlify dev preview test purchase to confirm Beehiiv subscriber shows `utm_*` populated in Acquisition Source view.
+
+**Beehiiv setup actions (revised from yesterday's checklist):**
+1. ~~Create utm_source/medium/campaign/content/term as Text custom fields~~ → SKIP, Beehiiv rejects them by design.
+2. Confirm `acquisition_source` Text custom field exists. (It already did pre-this-fix.)
+
+---
+
 ## Jamie — April 28, 2026 (UTM attribution + CAPI match-quality additions for Friday ads launch)
 
 **Why:** Meta ads launch today. Two pre-launch additions:
