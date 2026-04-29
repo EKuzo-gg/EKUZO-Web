@@ -26,6 +26,7 @@ type Week = {
   label: string;
   dates: string;
   price: number;
+  originalPrice?: number;
   amUrgency?: SlotUrgency;
   pmUrgency?: SlotUrgency;
 };
@@ -55,16 +56,16 @@ type SquadStatus = "building" | "looking" | null;
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const WEEKS: Week[] = [
-  { number: 1,  label: "Week 01", dates: "May 18 - 22",  price: 199, pmUrgency: "filling-fast" },
-  { number: 2,  label: "Week 02", dates: "May 25 - 29",  price: 199 },
-  { number: 3,  label: "Week 03", dates: "June 01 - 05", price: 199 },
-  { number: 4,  label: "Week 04", dates: "June 08 - 12", price: 199 },
-  { number: 5,  label: "Week 05", dates: "June 15 - 19", price: 199, pmUrgency: "limited" },
-  { number: 6,  label: "Week 06", dates: "June 22 - 26", price: 199, amUrgency: "filling-fast" },
-  { number: 7,  label: "Week 07", dates: "Jul 13 - 17",  price: 199 },
-  { number: 8,  label: "Week 08", dates: "Jul 20 - 24",  price: 199 },
-  { number: 9,  label: "Week 09", dates: "Jul 27 - 31",  price: 199, amUrgency: "limited", pmUrgency: "filling-fast" },
-  { number: 10, label: "Week 10", dates: "Aug 03 - 07",  price: 199 },
+  { number: 1,  label: "Week 01", dates: "May 18 - 22",  price: 199, originalPrice: 299, pmUrgency: "filling-fast" },
+  { number: 2,  label: "Week 02", dates: "May 25 - 29",  price: 199, originalPrice: 299 },
+  { number: 3,  label: "Week 03", dates: "June 01 - 05", price: 199, originalPrice: 299 },
+  { number: 4,  label: "Week 04", dates: "June 08 - 12", price: 199, originalPrice: 299 },
+  { number: 5,  label: "Week 05", dates: "June 15 - 19", price: 199, originalPrice: 299, pmUrgency: "limited" },
+  { number: 6,  label: "Week 06", dates: "June 22 - 26", price: 199, originalPrice: 299, amUrgency: "filling-fast" },
+  { number: 7,  label: "Week 07", dates: "Jul 13 - 17",  price: 199, originalPrice: 299 },
+  { number: 8,  label: "Week 08", dates: "Jul 20 - 24",  price: 199, originalPrice: 299 },
+  { number: 9,  label: "Week 09", dates: "Jul 27 - 31",  price: 199, originalPrice: 299, amUrgency: "limited", pmUrgency: "filling-fast" },
+  { number: 10, label: "Week 10", dates: "Aug 03 - 07",  price: 199, originalPrice: 299 },
 ];
 
 const SLOT_HOURS = {
@@ -532,6 +533,7 @@ export default function CampsRegisterPage() {
         slot: g.selectedSlot,
         slotHours: SLOT_HOURS[g.selectedSlot],
         price: week.price,
+        originalPrice: week.originalPrice,
       };
     })
     .filter(Boolean);
@@ -832,7 +834,12 @@ export default function CampsRegisterPage() {
                                   {week.dates}
                                 </span>
                               </div>
-                              <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]">
+                              <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex items-baseline gap-2">
+                                {week.originalPrice && (
+                                  <span className="font-body text-[#9ca3af] text-xs line-through leading-5">
+                                    ${week.originalPrice}
+                                  </span>
+                                )}
                                 <span className="font-body font-bold text-[#0a0a0a] text-sm leading-5">
                                   ${week.price}
                                 </span>
@@ -1127,7 +1134,12 @@ export default function CampsRegisterPage() {
                             {s.slot === "AM" ? "Morning" : "Afternoon"} Session ({s.slotHours})
                           </span>
                         </div>
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap flex items-baseline gap-1.5">
+                          {s.originalPrice && (
+                            <span className="font-normal text-[#9ca3af] line-through">
+                              ${s.originalPrice}
+                            </span>
+                          )}
                           ${s.price}
                         </span>
                       </div>
@@ -1140,7 +1152,7 @@ export default function CampsRegisterPage() {
               {selectedGamerSummaries.length > 0 && (
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
                   <span className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "16px" }}>
-                    Total (Early Bird Pricing)
+                    Total (Limited-Time Pricing)
                   </span>
                   <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
                     ${totalPrice}
