@@ -60,3 +60,11 @@ public/place-these-in-ekuzo-web-public.zip
 CAMPS-CLAUDE.md
 CAMPS-PROJECT-PLAN.md
 extras/
+
+# Personal Claude Code state
+.claude/settings.local.json
+.claude/worktrees/
+
+# Drafts
+tweet-video.*
+01-purchase-confirmation.html

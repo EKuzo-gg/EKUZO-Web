@@ -104,11 +104,15 @@ export async function POST(req: NextRequest) {
     console.log("   Email:", meta.parent_email);
     console.log("   Gamers:", meta.gamer_count);
 
-    // ── Extract billing location + receipt number from Stripe charge ─
+    // ── Extract billing location + ZIP + receipt number from Stripe charge ─
     // We fetch the charge once and reuse it. receipt_number is Stripe's
     // customer-facing order ID (format: 1234-5678) — cleaner than the
-    // pi_... identifier for customer-facing emails.
+    // pi_... identifier for customer-facing emails. postalCode is sourced
+    // from Stripe Elements' billing_details (collected at payment time, so
+    // not available pre-payment in PI metadata) and used for Meta CAPI
+    // `zp` to lift match quality.
     let location = "";
+    let postalCode = "";
     let receiptNumber = "";
     try {
       const charges = await stripe.charges.list({ payment_intent: paymentIntent.id, limit: 1 });
@@ -118,10 +122,33 @@ export async function POST(req: NextRequest) {
         location = [billing.city, billing.state, billing.country]
           .filter(Boolean)
           .join(", ");
+        postalCode = billing.postal_code || "";
       }
       receiptNumber = charge?.receipt_number || "";
     } catch (err) {
       console.warn("Could not fetch charge data:", err);
+    }
+
+    // ── Marketing attribution + acquisition source ─────────────────
+    // UTMs come from PI metadata (set by /api/{camps,ekuzo100}/register
+    // from the first-touch sessionStorage payload). acquisition_source is
+    // derived once here so every downstream surface (Sheets, Klaviyo,
+    // Beehiiv) shares one definition. Friday's paid-signups read can roll
+    // up by this single field instead of reverse-engineering UTMs.
+    const utmSource = meta.utm_source || "";
+    const utmMedium = meta.utm_medium || "";
+    const utmCampaign = meta.utm_campaign || "";
+    const utmContent = meta.utm_content || "";
+    const utmTerm = meta.utm_term || "";
+
+    let acquisitionSource: "meta_paid" | "referral" | "organic";
+    if (utmSource === "meta" && utmMedium === "paid") {
+      acquisitionSource = "meta_paid";
+    } else if (meta.joining_squad_token) {
+      // Squad-link arrivals are referrals (existing logic; preserved).
+      acquisitionSource = "referral";
+    } else {
+      acquisitionSource = "organic";
     }
 
     // Customer-facing order ID used in Klaviyo + Beehiiv templates.
@@ -207,7 +234,14 @@ export async function POST(req: NextRequest) {
         product === "ekuzo100" ? "EKUZO100"
         : product === "teams" ? "EKUZOTeams"
         : "EKUZO Camps";
-      const utmSource =
+      // Internal Beehiiv referrer label (legacy, used pre-UTM-attribution).
+      // NOTE: this used to be named `utmSource` and shadowed the actual UTM
+      // captured up-top at line ~138 — meaning the Beehiiv `utm_source` payload
+      // was being set to "ekuzo-camps-registration" instead of the real UTM
+      // from the ad. Renamed to make the distinction unmistakable. Kept as
+      // `referring_site` on the Beehiiv payload so the legacy "where did this
+      // subscriber come from internally" signal still lands somewhere.
+      const beehiivReferringSite =
         product === "ekuzo100" ? "ekuzo100-registration"
         : product === "teams" ? "ekuzo-teams-registration"
         : "ekuzo-camps-registration";
@@ -221,6 +255,12 @@ export async function POST(req: NextRequest) {
         : ["camp-2026-purchased", "source-camp-registration"];
 
       // Build custom fields — shared base + product-specific
+      // NOTE: the 6 attribution fields below (acquisition_source +
+      // 5 UTMs) need to exist as Beehiiv custom fields on the publication
+      // for Beehiiv to actually persist their values. Beehiiv silently
+      // drops unknown custom_fields entries (no error on the API call).
+      // Sheets + Klaviyo are the source of truth for the Friday paid
+      // signups read; Beehiiv attribution is best-effort for segmentation.
       const customFields: { name: string; value: string }[] = [
         { name: "first_name", value: meta.parent_first_name || "" },
         { name: "last_name", value: meta.parent_last_name || "" },
@@ -234,6 +274,13 @@ export async function POST(req: NextRequest) {
         { name: "amount_paid", value: `$${(paymentIntent.amount / 100).toFixed(2)}` },
         { name: "timezone", value: meta.timezone || "" },
         { name: "location", value: location },
+        { name: "acquisition_source", value: acquisitionSource },
+        // Beehiiv reserves utm_* as native top-level params (see beehiivPayload
+        // below). Don't add them to custom_fields — Beehiiv rejects creating
+        // custom fields with reserved names ("Name is a reserved field"), so
+        // this list silently drops on the API side. Top-level utm_* params
+        // feed Beehiiv's native acquisition tracking (Subscribers detail →
+        // Acquisition Source), and you can segment on `utm_source` directly.
       ];
 
       if (product === "camps") {
@@ -260,7 +307,18 @@ export async function POST(req: NextRequest) {
         email: meta.parent_email,
         reactivate_existing: true,
         send_welcome_email: true,
+        // All 5 UTMs go top-level so Beehiiv's native acquisition tracker
+        // captures them (Subscribers → detail → Acquisition Source). These
+        // CANNOT be custom_fields — Beehiiv reserves the names.
         utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content: utmContent,
+        utm_term: utmTerm,
+        // Internal "where in our funnel did this subscriber come from" label.
+        // Lands as Beehiiv's referring_site, separate from utm_source so paid
+        // attribution is preserved.
+        referring_site: beehiivReferringSite,
         automation_ids: [automationId],
         custom_fields: customFields,
       };
@@ -362,6 +420,12 @@ export async function POST(req: NextRequest) {
         order_id: orderId,
         timezone: meta.timezone || "",
         location: location,
+        acquisition_source: acquisitionSource,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content: utmContent,
+        utm_term: utmTerm,
       };
 
       // Product-specific properties
@@ -536,6 +600,17 @@ export async function POST(req: NextRequest) {
         squad_token: product === "camps" ? (meta.squad_token || "") : "",
         joining_squad_token:
           product === "camps" ? (meta.joining_squad_token || "") : "",
+        // Marketing attribution — derived once at the top of this handler
+        // so every row in a multi-gamer registration carries the same
+        // source. Apps Script appends by header name (see
+        // docs/apps-script-squad-endpoints-spec.md), so adding columns
+        // here just requires adding matching header cells in the sheet.
+        acquisition_source: acquisitionSource,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content: utmContent,
+        utm_term: utmTerm,
       }));
 
       if (rows.length > 0) {
@@ -680,7 +755,17 @@ export async function POST(req: NextRequest) {
           : product === "teams" ? "ekuzo-teams"
           : "ekuzo-camps";
 
-        const userData: Record<string, string[]> = {};
+        // Match-quality additions (Meta projects ~50% lift from
+        // ip + ua + zip combined):
+        // - client_ip_address: raw, Meta hashes server-side. Captured by
+        //   the register route from x-forwarded-for and threaded via
+        //   PI metadata (the webhook itself is server-to-server, so its
+        //   request.headers belong to Stripe, not the user).
+        // - client_user_agent: raw, Meta hashes server-side. Same path.
+        // - zp: ZIP/postal_code, must be SHA-256 lowercased. Sourced from
+        //   Stripe billing_details (collected by Stripe Elements at
+        //   payment time, so not available pre-payment in PI metadata).
+        const userData: Record<string, string | string[]> = {};
         if (meta.parent_email)
           userData.em = [sha256(meta.parent_email.toLowerCase().trim())];
         if (phoneDigits) userData.ph = [sha256(phoneDigits)];
@@ -688,6 +773,13 @@ export async function POST(req: NextRequest) {
           userData.fn = [sha256(meta.parent_first_name.toLowerCase().trim())];
         if (meta.parent_last_name)
           userData.ln = [sha256(meta.parent_last_name.toLowerCase().trim())];
+        if (postalCode)
+          userData.zp = [sha256(postalCode.toLowerCase().trim())];
+        // ip + ua are scalar strings in the Meta CAPI spec, not arrays.
+        if (meta.client_ip_address)
+          userData.client_ip_address = meta.client_ip_address;
+        if (meta.client_user_agent)
+          userData.client_user_agent = meta.client_user_agent;
 
         const capiPayload: {
           data: unknown[];

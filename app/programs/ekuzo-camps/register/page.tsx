@@ -8,6 +8,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
+import { captureAttribution, getAttribution } from "@/lib/attribution";
 import { nanoid } from "nanoid";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
@@ -180,6 +181,14 @@ export default function CampsRegisterPage() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
   const [showPayment, setShowPayment] = useState(false);
+
+  // ── Capture first-touch UTM params on mount ─────────────────────────
+  // Direct land on /register via an ad URL writes the UTMs to
+  // sessionStorage. If the visitor came via a marketing page that already
+  // captured, this is a no-op (first-touch wins). See lib/attribution.ts.
+  useEffect(() => {
+    captureAttribution();
+  }, []);
 
   // ── Load crew-owner record on mount if ?squad=TOKEN is present ─────
   useEffect(() => {
@@ -441,6 +450,8 @@ export default function CampsRegisterPage() {
         : null;
     const squadStatusForSubmit = joiningSquadToken ? null : squadStatus;
 
+    const attribution = getAttribution();
+
     const payload = {
       parent,
       gamers: gamers.map((g) => {
@@ -467,6 +478,7 @@ export default function CampsRegisterPage() {
       joining_squad_token: joiningSquadToken,
       additionalInfo,
       totalPrice,
+      attribution,
     };
 
     try {
