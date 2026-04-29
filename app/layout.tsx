@@ -140,7 +140,14 @@ export default function RootLayout({
           {children}
           <ModalRenderer />
           <StickyCTA />
-          <NewsletterPopup />
+          {/* Newsletter popup is gated by env var so we can disable it
+              site-wide without removing the component (reserved for re-
+              enablement when re-engagement strategy warrants it). Default
+              is disabled — set NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED=true
+              in Netlify env to bring it back. */}
+          {process.env.NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED === "true" && (
+            <NewsletterPopup />
+          )}
         </ModalProvider>
       </body>
     </html>
