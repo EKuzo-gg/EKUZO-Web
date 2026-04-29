@@ -153,7 +153,7 @@ export default function CampsRegisterPage() {
   const [gamers, setGamers] = useState<GamerInfo[]>([emptyGamer()]);
   const [squadStatus, setSquadStatus] = useState<SquadStatus>(null);
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Array<{ key: string; message: string }>>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ── Squad-link state (friend arriving via ?squad=TOKEN) ─────────────
@@ -387,40 +387,40 @@ export default function CampsRegisterPage() {
 
   // ── Validation ──────────────────────────────────────────────────────────
 
-  function validate(): string[] {
-    const errs: string[] = [];
-    // Parent — every field marked * in the UI must be enforced here. The
-    // submit button is type="button" (not a form submit), so the HTML5
-    // `required` attribute does nothing — this function is the only gate.
-    if (!parent.firstName.trim()) errs.push("Parent first name is required.");
-    if (!parent.lastName.trim()) errs.push("Parent last name is required.");
-    if (!parent.email.trim()) errs.push("Parent email is required.");
-    if (!parent.phone.trim()) errs.push("Parent phone number is required.");
+  function validate(): Array<{ key: string; message: string }> {
+    const errs: Array<{ key: string; message: string }> = [];
+    // The submit button is type="button" (not a form submit), so HTML5
+    // `required` does nothing — this function is the only gate. Each error
+    // carries a `key` that matches a `data-error-key` attribute on the field
+    // so handleSubmit can scroll-and-focus the first invalid field. Order
+    // here is the same as the visible page order, top-to-bottom.
 
-    // Gamers — iterate the full array and enforce every starred field per
-    // gamer. Previously only firstName/lastName/week/slot were checked,
-    // which let blank birthdays (and everything else) through on added
-    // gamers — see QA-FLAGGED-ISSUES #12.
+    // Gamer sections (rendered above the parent block on this page).
     gamers.forEach((g, i) => {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
-      if (!g.firstName.trim()) errs.push(`${label} first name is required.`);
-      if (!g.lastName.trim()) errs.push(`${label} last name is required.`);
-      if (g.preferredGames.length === 0)
-        errs.push(`${label}: please select at least one favorite game.`);
-      if (!g.birthday.trim()) errs.push(`${label} birthday is required.`);
-      if (!g.gender.trim()) errs.push(`${label} gender is required.`);
-      if (!g.skillLevel.trim())
-        errs.push(`${label} gaming experience is required.`);
       if (!g.selectedWeek || !g.selectedSlot)
-        errs.push(`${label}: please select a camp week and time slot.`);
+        errs.push({ key: `gamer-${i}.weekSlot`, message: `${label}: please select a camp week and time slot.` });
+      if (!g.firstName.trim()) errs.push({ key: `gamer-${i}.firstName`, message: `${label} first name is required.` });
+      if (!g.lastName.trim()) errs.push({ key: `gamer-${i}.lastName`, message: `${label} last name is required.` });
+      if (g.preferredGames.length === 0)
+        errs.push({ key: `gamer-${i}.preferredGames`, message: `${label}: please select at least one favorite game.` });
+      if (!g.birthday.trim()) errs.push({ key: `gamer-${i}.birthday`, message: `${label} birthday is required.` });
+      if (!g.gender.trim()) errs.push({ key: `gamer-${i}.gender`, message: `${label} gender is required.` });
+      if (!g.skillLevel.trim())
+        errs.push({ key: `gamer-${i}.skillLevel`, message: `${label} gaming experience is required.` });
     });
 
     // Team status — not required when arriving via a crew link. A joining
     // visitor is a pure join (see QA-FLAGGED-ISSUES #10); we hide the
-    // selector in the UI and send squadStatus=null so the webhook's
-    // squadStatusSafe guard writes "" (not a building/looking opt-in).
+    // selector and send squadStatus=null so the webhook writes "".
     if (!joiningSquadToken && !squadStatus)
-      errs.push("Please let us know your team status.");
+      errs.push({ key: "squadStatus", message: "Please let us know your team status." });
+
+    // Parent block (rendered last on the page).
+    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
+    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
+    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
+    if (!parent.phone.trim()) errs.push({ key: "parent.phone", message: "Parent phone number is required." });
 
     return errs;
   }
@@ -431,7 +431,20 @@ export default function CampsRegisterPage() {
     const errs = validate();
     if (errs.length > 0) {
       setErrors(errs);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Scroll to and focus the first invalid field. Falls back to top-scroll
+      // for any error key that doesn't have a matching DOM target. Focus is
+      // applied with preventScroll so the smooth visual scroll lands first
+      // and the screen reader announces the field once it's centered.
+      const firstKey = errs[0].key;
+      requestAnimationFrame(() => {
+        const target = document.querySelector<HTMLElement>(`[data-error-key="${firstKey}"]`);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          target.focus({ preventScroll: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
       return;
     }
     setErrors([]);
@@ -492,7 +505,7 @@ export default function CampsRegisterPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors([data.error || "Something went wrong. Please try again."]);
+        setErrors([{ key: "_api", message: data.error || "Something went wrong. Please try again." }]);
         setIsSubmitting(false);
         return;
       }
@@ -508,7 +521,7 @@ export default function CampsRegisterPage() {
         document.getElementById("payment-section")?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } catch {
-      setErrors(["Something went wrong. Please try again."]);
+      setErrors([{ key: "_api", message: "Something went wrong. Please try again." }]);
       setIsSubmitting(false);
     }
   }
@@ -671,12 +684,18 @@ export default function CampsRegisterPage() {
             </div>
           )}
 
-          {/* Errors */}
+          {/* Errors — summary list at the top for screen readers / a11y.
+              The page also auto-scrolls to and focuses the first invalid
+              field on submit (see handleSubmit). */}
           {errors.length > 0 && (
-            <div className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm">
+            <div
+              role="alert"
+              aria-live="polite"
+              className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm"
+            >
               {errors.map((e, i) => (
                 <p key={i} className="font-body text-red text-sm mb-1 last:mb-0">
-                  {e}
+                  {e.message}
                 </p>
               ))}
             </div>
@@ -794,7 +813,12 @@ export default function CampsRegisterPage() {
                       preferred time slot.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                    <div
+                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"
+                      data-error-key={`gamer-${gi}.weekSlot`}
+                      tabIndex={-1}
+                      style={{ scrollMarginTop: "100px" }}
+                    >
                       {WEEKS.map((week) => {
                         const isSelectedWeek =
                           gamer.selectedWeek === week.number;
@@ -904,6 +928,7 @@ export default function CampsRegisterPage() {
                   <InputField
                     label="First Name *"
                     required
+                    errorKey={`gamer-${gi}.firstName`}
                     value={gamer.firstName}
                     onChange={(v) => updateGamer(gi, { firstName: v })}
                     placeholder="Enter first name"
@@ -911,6 +936,7 @@ export default function CampsRegisterPage() {
                   <InputField
                     label="Last Name *"
                     required
+                    errorKey={`gamer-${gi}.lastName`}
                     value={gamer.lastName}
                     onChange={(v) => updateGamer(gi, { lastName: v })}
                     placeholder="Enter last name"
@@ -927,7 +953,7 @@ export default function CampsRegisterPage() {
                 </div>
 
                 {/* Favorite Games — 4-col checkbox grid */}
-                <div className="mt-6">
+                <div className="mt-6" style={{ scrollMarginTop: "100px" }} data-error-key={`gamer-${gi}.preferredGames`} tabIndex={-1}>
                   <label className="font-body font-bold text-[#374151] block mb-3" style={{ fontSize: "14px", lineHeight: "20px" }}>
                     Favorite Games * (Select all that apply)
                   </label>
@@ -956,11 +982,13 @@ export default function CampsRegisterPage() {
                   <InputField
                     label="Birthday *"
                     type="date"
+                    errorKey={`gamer-${gi}.birthday`}
                     value={gamer.birthday}
                     onChange={(v) => updateGamer(gi, { birthday: v })}
                   />
                   <SelectField
                     label="Gender *"
+                    errorKey={`gamer-${gi}.gender`}
                     value={gamer.gender}
                     onChange={(v) => updateGamer(gi, { gender: v })}
                     options={GENDER_OPTIONS}
@@ -968,6 +996,7 @@ export default function CampsRegisterPage() {
                   />
                   <SelectField
                     label="Gaming Experience *"
+                    errorKey={`gamer-${gi}.skillLevel`}
                     value={gamer.skillLevel}
                     onChange={(v) => updateGamer(gi, { skillLevel: v })}
                     options={SKILL_LEVELS}
@@ -1016,7 +1045,12 @@ export default function CampsRegisterPage() {
                   How should we think about your gamer&apos;s team?
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                  data-error-key="squadStatus"
+                  tabIndex={-1}
+                  style={{ scrollMarginTop: "100px" }}
+                >
                   <SquadCard
                     title="Building a team"
                     subtitle="My gamer is joining with friends"
@@ -1048,6 +1082,7 @@ export default function CampsRegisterPage() {
               <InputField
                 label="Parent First Name *"
                 required
+                errorKey="parent.firstName"
                 value={parent.firstName}
                 onChange={(v) => setParent((p) => ({ ...p, firstName: v }))}
                 placeholder="Enter first name"
@@ -1055,6 +1090,7 @@ export default function CampsRegisterPage() {
               <InputField
                 label="Parent Last Name *"
                 required
+                errorKey="parent.lastName"
                 value={parent.lastName}
                 onChange={(v) => setParent((p) => ({ ...p, lastName: v }))}
                 placeholder="Enter last name"
@@ -1063,6 +1099,7 @@ export default function CampsRegisterPage() {
                 label="Email *"
                 type="email"
                 required
+                errorKey="parent.email"
                 value={parent.email}
                 onChange={(v) => setParent((p) => ({ ...p, email: v }))}
                 placeholder="your.email@example.com"
@@ -1070,6 +1107,7 @@ export default function CampsRegisterPage() {
               <InputField
                 label="Phone Number *"
                 type="tel"
+                errorKey="parent.phone"
                 value={parent.phone}
                 onChange={(v) => setParent((p) => ({ ...p, phone: v }))}
                 placeholder="(555) 123-4567"
@@ -1464,6 +1502,7 @@ function InputField({
   onChange,
   type = "text",
   placeholder,
+  errorKey,
 }: {
   label: string;
   required?: boolean;
@@ -1471,13 +1510,20 @@ function InputField({
   onChange: (v: string) => void;
   type?: string;
   placeholder?: string;
+  errorKey?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-body font-bold text-[#374151]" style={{ fontSize: "14px", lineHeight: "20px" }}>
+    <div className="flex flex-col gap-2" style={errorKey ? { scrollMarginTop: "100px" } : undefined}>
+      <label
+        htmlFor={errorKey}
+        className="font-body font-bold text-[#374151]"
+        style={{ fontSize: "14px", lineHeight: "20px" }}
+      >
         {label}
       </label>
       <input
+        id={errorKey}
+        data-error-key={errorKey}
         type={type}
         required={required}
         value={value}
@@ -1496,19 +1542,27 @@ function SelectField({
   onChange,
   options,
   placeholder,
+  errorKey,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   options: string[];
   placeholder?: string;
+  errorKey?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-body font-bold text-[#374151]" style={{ fontSize: "14px", lineHeight: "20px" }}>
+    <div className="flex flex-col gap-2" style={errorKey ? { scrollMarginTop: "100px" } : undefined}>
+      <label
+        htmlFor={errorKey}
+        className="font-body font-bold text-[#374151]"
+        style={{ fontSize: "14px", lineHeight: "20px" }}
+      >
         {label}
       </label>
       <select
+        id={errorKey}
+        data-error-key={errorKey}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors appearance-none"

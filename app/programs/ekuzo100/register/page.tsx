@@ -188,7 +188,7 @@ export default function Ekuzo100RegisterPage() {
 
   const [selectedCohort, setSelectedCohort] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Array<{ key: string; message: string }>>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Payment state
@@ -254,29 +254,32 @@ export default function Ekuzo100RegisterPage() {
 
   // ── Validation ────────────────────────────────────────────────────────────
 
-  function validate(): string[] {
-    const errs: string[] = [];
+  function validate(): Array<{ key: string; message: string }> {
+    const errs: Array<{ key: string; message: string }> = [];
+    // Order here matches the visible page order so the first reported error
+    // is also the topmost field on the page. handleSubmit reads errs[0].key
+    // and scroll-focuses the matching [data-error-key] element.
 
-    // Parent
-    if (!parent.firstName.trim()) errs.push("Parent first name is required.");
-    if (!parent.lastName.trim()) errs.push("Parent last name is required.");
-    if (!parent.email.trim()) errs.push("Parent email is required.");
-
-    // Cohort
-    if (!selectedCohort) errs.push("Please select a cohort month.");
+    // Cohort selector (rendered above gamer info on this page).
+    if (!selectedCohort) errs.push({ key: "cohort", message: "Please select a cohort month." });
 
     // Gamers
     gamers.forEach((gamer, i) => {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
-      if (!gamer.firstName.trim()) errs.push(`${label}: first name is required.`);
-      if (!gamer.lastName.trim()) errs.push(`${label}: last name is required.`);
-      if (!gamer.birthday) errs.push(`${label}: birthday is required.`);
-      if (!gamer.gender) errs.push(`${label}: please select a gender.`);
+      if (!gamer.firstName.trim()) errs.push({ key: `gamer-${i}.firstName`, message: `${label}: first name is required.` });
+      if (!gamer.lastName.trim()) errs.push({ key: `gamer-${i}.lastName`, message: `${label}: last name is required.` });
+      if (!gamer.birthday) errs.push({ key: `gamer-${i}.birthday`, message: `${label}: birthday is required.` });
+      if (!gamer.gender) errs.push({ key: `gamer-${i}.gender`, message: `${label}: please select a gender.` });
       if (!gamer.preferredGames.length)
-        errs.push(`${label}: please select at least one favorite game.`);
+        errs.push({ key: `gamer-${i}.preferredGames`, message: `${label}: please select at least one favorite game.` });
       if (!gamer.schedulePreference)
-        errs.push(`${label}: please select a schedule preference.`);
+        errs.push({ key: `gamer-${i}.schedulePreference`, message: `${label}: please select a schedule preference.` });
     });
+
+    // Parent (rendered last on this page).
+    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
+    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
+    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
 
     return errs;
   }
@@ -287,7 +290,18 @@ export default function Ekuzo100RegisterPage() {
     const errs = validate();
     if (errs.length > 0) {
       setErrors(errs);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Scroll to and focus the first invalid field; fall back to top scroll
+      // if the error key has no matching DOM target.
+      const firstKey = errs[0].key;
+      requestAnimationFrame(() => {
+        const target = document.querySelector<HTMLElement>(`[data-error-key="${firstKey}"]`);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          target.focus({ preventScroll: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
       return;
     }
     setErrors([]);
@@ -321,7 +335,7 @@ export default function Ekuzo100RegisterPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors([data.error || "Something went wrong. Please try again."]);
+        setErrors([{ key: "_api", message: data.error || "Something went wrong. Please try again." }]);
         setIsSubmitting(false);
         return;
       }
@@ -338,7 +352,7 @@ export default function Ekuzo100RegisterPage() {
           ?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } catch {
-      setErrors(["Something went wrong. Please try again."]);
+      setErrors([{ key: "_api", message: "Something went wrong. Please try again." }]);
       setIsSubmitting(false);
     }
   }
@@ -476,15 +490,21 @@ export default function Ekuzo100RegisterPage() {
       {/* ── Form body ──────────────────────────────────────────────────── */}
       <section className="bg-white">
         <div className="max-w-[1232px] mx-auto px-6 sm:px-10 py-16 md:py-24">
-          {/* Errors */}
+          {/* Errors — summary list at the top for screen readers / a11y.
+              The page also auto-scrolls to and focuses the first invalid
+              field on submit (see handleSubmit). */}
           {errors.length > 0 && (
-            <div className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm">
+            <div
+              role="alert"
+              aria-live="polite"
+              className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm"
+            >
               {errors.map((e, i) => (
                 <p
                   key={i}
                   className="font-body text-red text-sm mb-1 last:mb-0"
                 >
-                  {e}
+                  {e.message}
                 </p>
               ))}
             </div>
@@ -513,7 +533,12 @@ export default function Ekuzo100RegisterPage() {
               closes one week before the cohort starts.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8"
+              data-error-key="cohort"
+              tabIndex={-1}
+              style={{ scrollMarginTop: "100px" }}
+            >
               {cohorts.map((cohort) => {
                 const isSelected = selectedCohort === cohort.value;
                 return (
@@ -616,6 +641,7 @@ export default function Ekuzo100RegisterPage() {
                   <InputField
                     label="First Name *"
                     required
+                    errorKey={`gamer-${idx}.firstName`}
                     value={gamer.firstName}
                     onChange={(v) => updateGamer(idx, { firstName: v })}
                     placeholder="Enter first name"
@@ -623,6 +649,7 @@ export default function Ekuzo100RegisterPage() {
                   <InputField
                     label="Last Name *"
                     required
+                    errorKey={`gamer-${idx}.lastName`}
                     value={gamer.lastName}
                     onChange={(v) => updateGamer(idx, { lastName: v })}
                     placeholder="Enter last name"
@@ -639,7 +666,7 @@ export default function Ekuzo100RegisterPage() {
                 </div>
 
                 {/* Favorite Games */}
-                <div className="mt-6">
+                <div className="mt-6" style={{ scrollMarginTop: "100px" }} data-error-key={`gamer-${idx}.preferredGames`} tabIndex={-1}>
                   <label
                     className="font-body font-bold text-[#374151] block mb-3"
                     style={{ fontSize: "14px", lineHeight: "20px" }}
@@ -674,6 +701,7 @@ export default function Ekuzo100RegisterPage() {
                   <InputField
                     label="Birthday *"
                     type="date"
+                    errorKey={`gamer-${idx}.birthday`}
                     value={gamer.birthday}
                     onChange={(v) => updateGamer(idx, { birthday: v })}
                     hint={
@@ -684,6 +712,7 @@ export default function Ekuzo100RegisterPage() {
                   />
                   <SelectField
                     label="Gender *"
+                    errorKey={`gamer-${idx}.gender`}
                     value={gamer.gender}
                     onChange={(v) => updateGamer(idx, { gender: v })}
                     options={GENDER_OPTIONS}
@@ -716,7 +745,12 @@ export default function Ekuzo100RegisterPage() {
                   <p className="font-body text-[#6b7280] text-sm mb-4">
                     Sessions are twice a week. Which window works best?
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div
+                    className="flex flex-col sm:flex-row gap-4"
+                    data-error-key={`gamer-${idx}.schedulePreference`}
+                    tabIndex={-1}
+                    style={{ scrollMarginTop: "100px" }}
+                  >
                     {SCHEDULE_OPTIONS.map((opt) => {
                       const isSelected = gamer.schedulePreference === opt.value;
                       return (
@@ -766,6 +800,7 @@ export default function Ekuzo100RegisterPage() {
               <InputField
                 label="Parent First Name *"
                 required
+                errorKey="parent.firstName"
                 value={parent.firstName}
                 onChange={(v) => setParent((p) => ({ ...p, firstName: v }))}
                 placeholder="Enter first name"
@@ -773,6 +808,7 @@ export default function Ekuzo100RegisterPage() {
               <InputField
                 label="Parent Last Name *"
                 required
+                errorKey="parent.lastName"
                 value={parent.lastName}
                 onChange={(v) => setParent((p) => ({ ...p, lastName: v }))}
                 placeholder="Enter last name"
@@ -781,6 +817,7 @@ export default function Ekuzo100RegisterPage() {
                 label="Email *"
                 type="email"
                 required
+                errorKey="parent.email"
                 value={parent.email}
                 onChange={(v) => setParent((p) => ({ ...p, email: v }))}
                 placeholder="your.email@example.com"
@@ -1105,6 +1142,7 @@ function InputField({
   type = "text",
   placeholder,
   hint,
+  errorKey,
 }: {
   label: string;
   required?: boolean;
@@ -1113,16 +1151,20 @@ function InputField({
   type?: string;
   placeholder?: string;
   hint?: string | null;
+  errorKey?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2" style={errorKey ? { scrollMarginTop: "100px" } : undefined}>
       <label
+        htmlFor={errorKey}
         className="font-body font-bold text-[#374151]"
         style={{ fontSize: "14px", lineHeight: "20px" }}
       >
         {label}
       </label>
       <input
+        id={errorKey}
+        data-error-key={errorKey}
         type={type}
         required={required}
         value={value}
@@ -1144,22 +1186,27 @@ function SelectField({
   onChange,
   options,
   placeholder,
+  errorKey,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   options: string[];
   placeholder?: string;
+  errorKey?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2" style={errorKey ? { scrollMarginTop: "100px" } : undefined}>
       <label
+        htmlFor={errorKey}
         className="font-body font-bold text-[#374151]"
         style={{ fontSize: "14px", lineHeight: "20px" }}
       >
         {label}
       </label>
       <select
+        id={errorKey}
+        data-error-key={errorKey}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors appearance-none"
