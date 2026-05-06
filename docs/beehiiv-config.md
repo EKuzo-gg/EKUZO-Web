@@ -23,6 +23,7 @@
 | `amount_paid` | Text | Webhook (formatted: "$199.00") | Receipts, support |
 | `timezone` | Text | Webhook (IANA: "America/New_York") | Cohort matching, send-time optimization |
 | `location` | Text | Webhook (from Stripe billing: "Austin, TX, US") | Cohort matching, geo insights |
+| `cta_source` | Text | Webhook (`hero` / `sticky` / `footer` from `?cta=` on register URL, or empty) | Attribution — which CTA on the camps marketing page produced this purchase |
 
 ### Notes
 - Beehiiv reserved fields (`email`, `city`, `region`, `country`, `utm_source`, etc.) are auto-populated and don't need custom fields. See `docs/beehiiv-reserved-fields.pdf` or the Beehiiv support article for the full list.
@@ -52,6 +53,14 @@
 |---|---|---|
 | `no-promo` | Manual | Exclude from sales/advertising emails. For partners, thought leaders, contacts with no kids. |
 | `vip` | Manual | High-touch contacts — school admins, repeat purchasers, ambassadors. |
+
+### Funnel-stage tags (camps abandoned-cart capture)
+| Tag | Applied by | Purpose |
+|---|---|---|
+| `form_started_camps` | `POST /api/camps/lead` (fired on email-field onBlur on the camps register page) | Identifies parents who entered an email but didn't reach payment. Used as the audience for the soft "you started signing up" recovery email. |
+| `cart_abandoned_camps` | `POST /api/camps/abandoned` (fired after `/api/camps/register` succeeds and BEFORE the parent enters card details) | Identifies parents who reached "Continue to payment" and bailed before paying. Stronger intent signal — gamer name + week + slot are also captured as custom fields. |
+
+**⚠️ Critical: these tags do NOT auto-clear when a customer eventually pays.** Beehiiv's public API has no tag-removal endpoint, so paid customers keep these tags alongside `camp-2026-purchased` forever. See "Automations" section below — every cart-abandonment automation MUST exclude `camp-2026-purchased` from its audience.
 
 ### Future purchase tags (created, not yet wired)
 | Tag | Applied by | Purpose |
@@ -97,6 +106,30 @@
 - **Trigger:** Tag `source-newsletter` applied (organic signup, no purchase)
 - **Emails:** TBD (welcome, what EKUZO is, program overview)
 
+### 5. Cart Abandonment Recovery — Camps
+- **Trigger:** Tag `cart_abandoned_camps` applied
+- **🚨 REQUIRED audience exclusion:** **EXCLUDE subscribers tagged `camp-2026-purchased`.** Without this exclusion, paid customers will receive recovery emails because the abandoned tag stays on the profile after purchase (see API Limitations below for why).
+- **Custom fields available for personalization:** `gamer_name`, `camp_week`, `camp_slot`. Use them — "Hey {first_name}, want to lock in {gamer_name}'s spot for Week {camp_week} {camp_slot}?" lands harder than a generic recovery email.
+- **Emails:** TBD (1-hour soft nudge, day-2 reminder, day-7 last-call with social proof or testimonials).
+
+### 6. Form-Started Recovery — Camps (lower priority)
+- **Trigger:** Tag `form_started_camps` applied
+- **🚨 REQUIRED audience exclusion:** EXCLUDE `camp-2026-purchased`, AND EXCLUDE `cart_abandoned_camps` (those parents progressed further; they'll get the cart automation instead).
+- **Emails:** TBD (low-pressure "here's what camp looks like" content sequence — these parents only typed an email, no real intent signal yet).
+
+---
+
+## API Limitations (read before configuring anything tag-based)
+
+Beehiiv's public API only supports **adding** tags, not removing them. Verified against the live API on 2026-05-05 — `DELETE /tags`, `DELETE /tags/:name`, `DELETE /tags?tags=…`, and `PATCH /tags` all return 404. Beehiiv's docs landing page lists exactly one Subscription Tags endpoint, and it's `POST` only. `PUT /subscriptions` silently ignores the `tags` field per the existing CLAUDE.md learning log.
+
+**Practical consequences:**
+- Once a tag is applied via `POST /tags`, the only way to remove it is the dashboard UI or (possibly) a Beehiiv-native automation with a "Remove tag" action. Code can't do it.
+- Funnel-stage tags (`form_started_camps`, `cart_abandoned_camps`) accumulate on a profile and never come off automatically. Paid customers will permanently carry every funnel tag they ever earned.
+- This means **segmentation does the work that tag removal would otherwise do.** Every recovery automation must exclude further-along tags. See the audience exclusion rules on each automation entry above.
+
+**Optional cosmetic cleanup:** if Beehiiv's automation builder supports a Remove-tag step, you can configure "When tag `camp-2026-purchased` added → Remove `form_started_camps` and `cart_abandoned_camps`." This makes profiles visually clean but isn't required for correct automation behavior — the audience exclusions above handle the semantics regardless.
+
 ---
 
 ## Webhook → Beehiiv Payload
@@ -123,7 +156,8 @@ The Stripe webhook (`/api/webhooks/stripe`) sends this to Beehiiv on `payment_in
     { "name": "payment_intent_id", "value": "pi_xxx" },
     { "name": "amount_paid", "value": "$199.00" },
     { "name": "timezone", "value": "America/New_York" },
-    { "name": "location", "value": "Austin, TX, US" }
+    { "name": "location", "value": "Austin, TX, US" },
+    { "name": "cta_source", "value": "hero" }
   ]
 }
 ```
