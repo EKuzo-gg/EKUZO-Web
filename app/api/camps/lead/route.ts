@@ -22,9 +22,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  *
  * Subscriber created with `send_welcome_email: false` and no
  * `automation_ids` — the welcome sequence belongs only to PAID customers,
- * not mid-funnel leads. The webhook upgrade-on-paid step (see
- * /api/webhooks/stripe) drops this tag and adds the purchased tag, then
- * a separate Stripe-success path triggers the welcome automation.
+ * not mid-funnel leads. On purchase the webhook adds camp-2026-purchased
+ * (it does NOT remove form_started_camps — Beehiiv's public API has no
+ * tag-removal endpoint, see the comment block in /api/webhooks/stripe
+ * for the limitation). Cart-abandonment automations should exclude
+ * subscribers with camp-2026-purchased so paid customers don't get
+ * recovery emails.
  */
 export async function POST(req: NextRequest) {
   try {

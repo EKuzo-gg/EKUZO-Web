@@ -376,49 +376,29 @@ export async function POST(req: NextRequest) {
             );
           }
 
-          // ── Remove abandoned-funnel tags (camps only) ───────────────
-          // The /api/camps/lead and /api/camps/abandoned routes apply
-          // form_started_camps and cart_abandoned_camps to mid-funnel
-          // leads. Once a subscriber pays, those tags should come off so
-          // the subscriber's tag set reflects current state ("paid") and
-          // any cart-abandonment automation doesn't fire on a customer
-          // who actually completed. Failure here is non-fatal — the
-          // paid tag is already on, so the upgrade is signaled even if
-          // cleanup misses.
-          if (product === "camps") {
-            try {
-              const removeTagRes = await fetch(
-                `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions/${subscriberId}/tags`,
-                {
-                  method: "DELETE",
-                  headers: {
-                    Authorization: `Bearer ${BEEHIIV_API_KEY}`,
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    tags: ["form_started_camps", "cart_abandoned_camps"],
-                  }),
-                }
-              );
-              if (!removeTagRes.ok) {
-                const removeErr = await removeTagRes.text();
-                console.error(
-                  "Beehiiv abandoned-tag removal failed:",
-                  removeTagRes.status,
-                  removeErr
-                );
-              } else {
-                console.log(
-                  "✅ Beehiiv abandoned-funnel tags removed (form_started_camps, cart_abandoned_camps)"
-                );
-              }
-            } catch (removeErr) {
-              console.error(
-                "Beehiiv abandoned-tag removal error:",
-                removeErr instanceof Error ? removeErr.message : removeErr
-              );
-            }
-          }
+          // ── Tag removal on paid: not possible via Beehiiv public API ─
+          // Earlier versions of this handler tried to DELETE the
+          // form_started_camps and cart_abandoned_camps tags after a
+          // successful purchase so paid customers wouldn't sit in
+          // cart-abandonment automations. Beehiiv's public API has only
+          // POST /v2/publications/:pubId/subscriptions/:subId/tags —
+          // there is NO DELETE, NO PATCH, NO per-tag URL. Verified
+          // against the live API on 2026-05-05: all four shape variants
+          // (DELETE /tags with body, DELETE /tags/:name, DELETE /tags
+          // with query string, PATCH /tags) returned 404. Beehiiv docs
+          // landing page also lists exactly one Subscription Tags
+          // endpoint (POST). PUT /subscriptions silently ignores `tags`
+          // per CLAUDE.md learning log, so that path is also closed.
+          //
+          // Operational fix lives in Beehiiv, not in code:
+          //   1. Build cart-abandonment automations that EXCLUDE
+          //      subscribers with the camp-2026-purchased tag.
+          //      Segmentation handles the "paid wins" semantics; the
+          //      messy tag state on the profile is cosmetic.
+          //   2. Optionally set up a dashboard-only Beehiiv automation:
+          //      "When tag camp-2026-purchased added → Remove tags
+          //      form_started_camps, cart_abandoned_camps" if Beehiiv's
+          //      automation builder supports a Remove-tag action.
         }
       }
     } catch (err) {

@@ -6,6 +6,49 @@
 
 ---
 
+## Jamie — May 5, 2026 (Bug fix: Beehiiv has no tag-removal API, segmentation handles "paid wins")
+
+**Why:** Acceptance test #5 from the data-layer push surfaced a bug. The webhook tag-removal step (DELETE form_started_camps + cart_abandoned_camps on payment_intent.succeeded) wasn't actually removing the tags — paid subscribers ended up with all three tags simultaneously: form_started_camps, cart_abandoned_camps, AND camp-2026-purchased. The DELETE call was hitting Beehiiv but silently failing.
+
+**What I missed in the original implementation:** I assumed Beehiiv's tag endpoint supported DELETE because it accepts POST. Per my pre-mortem in the planning phase I noted "Beehiiv DELETE-tags endpoint shape isn't documented in CLAUDE.md... I'll smoke-test it against a known test subscriber once before wiring it into the webhook." I didn't run that smoke test; the acceptance test caught the bug after deploy.
+
+**Verified against the live Beehiiv API on 2026-05-05** — all four DELETE/PATCH shape variants returned 404:
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags` with body `{tags:[…]}` → 404
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags/:tagName` → 404
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags?tags=…` → 404
+- `PATCH /v2/publications/:pubId/subscriptions/:subId/tags` with `{tags, action:"remove"}` → 404
+
+Beehiiv's docs landing page also explicitly lists exactly ONE Subscription Tags endpoint (POST only). Per CLAUDE.md's existing learning log entry, PUT /subscriptions silently ignores `tags`. **Tag removal via API is impossible.**
+
+**What changed:**
+
+- `app/api/webhooks/stripe/route.ts` — removed the broken DELETE-tags block. Replaced with a documenting comment that captures the API limitation, the verification date, the four shapes that were tested, and the operational fix. Now on `payment_intent.succeeded` the webhook adds `camp-2026-purchased` + `source-camp-registration` and stops there — no DELETE call.
+
+- `app/api/camps/lead/route.ts`, `app/api/camps/abandoned/route.ts` — corrected the docstrings that previously claimed "the webhook removes this tag on payment success." Both now reference the shared comment block in the webhook for the limitation and the segmentation-side fix.
+
+**Operational follow-up (Jamie's side):**
+
+The "paid wins over abandoned" semantics now have to live in Beehiiv segmentation, not API state. Two options:
+
+1. **Required:** When you build the cart-abandonment automation in Beehiiv, configure the audience to EXCLUDE subscribers tagged with `camp-2026-purchased`. Segmentation gates re-engagement so paid customers never receive recovery emails. The messy tag state on profiles (form_started + cart_abandoned + camp-2026-purchased all present) is cosmetic.
+
+2. **Optional cleanup:** If Beehiiv's automation builder supports a "Remove tag" action (worth checking — some workflow tools do, some don't), set up a dashboard-only automation: "When subscriber receives `camp-2026-purchased` → Remove `form_started_camps` and `cart_abandoned_camps`." This makes the tag state cosmetically clean but isn't required for correctness.
+
+The four other acceptance tests passed:
+- CTA tracking → live in GA realtime under `register_click`
+- form_started_camps → fires on email blur ✓
+- cart_abandoned_camps → fires post-register, pre-payment ✓
+- cta_source → lands in Stripe metadata + Beehiiv custom field on paid registrations
+- Clarity install → script tag shipping in dev preview HTML; sessions check back in ~2hr per Clarity's normal ingestion lag
+
+**CLAUDE.md update:** the Beehiiv API quirks list in CLAUDE.md should gain a line noting that tag removal is not possible via API. Adding to that list in a separate commit so this fix stays scoped.
+
+**Verification:** `tsc --noEmit` clean. The fix is webhook-only (server-side), so no browser verification needed; live verification is "complete a Stripe test purchase end-to-end on dev preview, confirm Beehiiv subscriber has camp-2026-purchased added and no Beehiiv API errors in Netlify function logs."
+
+**Aaron:** zero touch.
+
+---
+
 ## Jamie — May 5, 2026 (Camps v1.1 data layer: Clarity + CTA tracking + abandoned-cart capture)
 
 **Why:** Pre-meeting deliverables from the camps v1.1 plan (`/Users/jamiefitch/Projects/knowledge-base/team/camps-v1-team-summary-2026-05.md`). The v1 paid-media run produced $303 in spend, 0 paid signups, and 0 InitiateCheckout events — meaning every parent who reached register bailed before payment. Before redesigning the register page (the v1.1 cart refactor), we need observability on three things: how parents move through the existing form (Clarity sessions), which CTA on the marketing page produced each click (so LP iteration can target the actual workhorse), and the email of every parent who started but didn't finish (so nurture has a recovery channel). All four data-layer changes ship together and stay surgical — no register-form redesign in this pass.

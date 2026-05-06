@@ -14,10 +14,13 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * point we have email + parent names + first gamer's first name + first
  * gamer's selected week/slot — enough to populate a useful Beehiiv profile.
  *
- * If the parent then completes payment, the Stripe webhook removes the
- * `cart_abandoned_camps` tag and adds `camp-2026-purchased`. If they
- * don't, the tag stays and nurture can re-engage them with their selected
- * week/slot in mind.
+ * If the parent then completes payment, the Stripe webhook adds
+ * `camp-2026-purchased` (Beehiiv's public API doesn't expose tag
+ * removal, so cart_abandoned_camps stays on the profile — see the
+ * comment block in /api/webhooks/stripe). Cart-abandonment automations
+ * must exclude subscribers tagged camp-2026-purchased so paid customers
+ * don't get recovery emails. If they don't pay, the tag stays and
+ * nurture can re-engage them with their selected week/slot in mind.
  *
  * Idempotent on email (Beehiiv `reactivate_existing: true`). Wrapped in
  * try/catch end-to-end — never returns a 5xx that could block the
