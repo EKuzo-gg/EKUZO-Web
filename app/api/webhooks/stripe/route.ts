@@ -275,6 +275,12 @@ export async function POST(req: NextRequest) {
         { name: "timezone", value: meta.timezone || "" },
         { name: "location", value: location },
         { name: "acquisition_source", value: acquisitionSource },
+        // Landing-page CTA placement that produced this purchase
+        // ("hero" | "sticky" | "footer" | ""). The matching Beehiiv text
+        // custom field must exist on the publication; if it doesn't,
+        // Beehiiv silently drops this entry per the API quirk noted in
+        // CLAUDE.md.
+        { name: "cta_source", value: meta.cta_source || "" },
         // Beehiiv reserves utm_* as native top-level params (see beehiivPayload
         // below). Don't add them to custom_fields — Beehiiv rejects creating
         // custom fields with reserved names ("Name is a reserved field"), so
@@ -368,6 +374,50 @@ export async function POST(req: NextRequest) {
               "Beehiiv tags error:",
               tagErr instanceof Error ? tagErr.message : tagErr
             );
+          }
+
+          // ── Remove abandoned-funnel tags (camps only) ───────────────
+          // The /api/camps/lead and /api/camps/abandoned routes apply
+          // form_started_camps and cart_abandoned_camps to mid-funnel
+          // leads. Once a subscriber pays, those tags should come off so
+          // the subscriber's tag set reflects current state ("paid") and
+          // any cart-abandonment automation doesn't fire on a customer
+          // who actually completed. Failure here is non-fatal — the
+          // paid tag is already on, so the upgrade is signaled even if
+          // cleanup misses.
+          if (product === "camps") {
+            try {
+              const removeTagRes = await fetch(
+                `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions/${subscriberId}/tags`,
+                {
+                  method: "DELETE",
+                  headers: {
+                    Authorization: `Bearer ${BEEHIIV_API_KEY}`,
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    tags: ["form_started_camps", "cart_abandoned_camps"],
+                  }),
+                }
+              );
+              if (!removeTagRes.ok) {
+                const removeErr = await removeTagRes.text();
+                console.error(
+                  "Beehiiv abandoned-tag removal failed:",
+                  removeTagRes.status,
+                  removeErr
+                );
+              } else {
+                console.log(
+                  "✅ Beehiiv abandoned-funnel tags removed (form_started_camps, cart_abandoned_camps)"
+                );
+              }
+            } catch (removeErr) {
+              console.error(
+                "Beehiiv abandoned-tag removal error:",
+                removeErr instanceof Error ? removeErr.message : removeErr
+              );
+            }
           }
         }
       }

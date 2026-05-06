@@ -11,6 +11,7 @@ import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
 import TrackPageView from "@/components/analytics/TrackPageView";
+import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import JsonLd from "@/components/JsonLd";
 import {
   ekuzoCampsCourseSchema,
@@ -300,13 +301,14 @@ export default function EkuzoCampsPage() {
               The premier online esports summer camp where you don&apos;t just learn to carry — you learn to communicate, collaborate, and compete as a unit.
             </p>
 
-            <a
-              href="/programs/ekuzo-camps/register"
+            <TrackedRegisterLink
+              source="hero"
+              href="/programs/ekuzo-camps/register?cta=hero"
               className="inline-block font-body font-bold text-black bg-white rounded-sm px-12 py-5 hover:brightness-90 active:scale-[0.97] active:brightness-75 transition-all duration-150"
               style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)", letterSpacing: "0.02em", borderRadius: "2px" }}
             >
               Register for Camp
-            </a>
+            </TrackedRegisterLink>
           </div>
         </section>
       </div>
@@ -1047,13 +1049,14 @@ export default function EkuzoCampsPage() {
                     <p className="font-display text-black uppercase leading-none" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>PC / Discord</p>
                   </div>
                 </div>
-                <a
-                  href="/programs/ekuzo-camps/register"
+                <TrackedRegisterLink
+                  source="footer"
+                  href="/programs/ekuzo-camps/register?cta=footer"
                   className="block text-center font-body font-bold text-white bg-red rounded-sm px-12 py-5 hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150"
                   style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)", letterSpacing: "0.02em", borderRadius: "2px" }}
                 >
                   Register for Camp
-                </a>
+                </TrackedRegisterLink>
               </div>
               {/* Price stub — black */}
               <div className="flex-1 bg-black flex flex-col items-center justify-center text-center p-8 md:p-10">
