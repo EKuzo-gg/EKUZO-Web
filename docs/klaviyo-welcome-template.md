@@ -1,14 +1,26 @@
-# Klaviyo — Welcome Automation Template (EKUZO Camps)
+# Klaviyo — Welcome Templates (shared reference)
 
-**Automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`
-**Status:** Draft → needs template finalized and automation published
-**Referenced in:** `docs/QA-FLAGGED-ISSUES.md` #13, `CLAUDE.md` (Beehiiv section)
+**Referenced by:**
+- `docs/klaviyo-welcome-camps-building.md` — camps Building variant (has squad_link)
+- `docs/klaviyo-welcome-camps-looking.md` — camps Looking + Joining variant (no squad_link)
+- (TBD) `docs/klaviyo-welcome-ekuzo100.md` — EKUZO100 welcome
+- (TBD) `docs/klaviyo-welcome-teams.md` — EKUZOTeams welcome
+- `docs/QA-FLAGGED-ISSUES.md` item #13, `CLAUDE.md` (Email marketing section)
 
-This doc translates the camps welcome email from `docs/welcome-emails.md` into
-Klaviyo merge-tag syntax and gives a step-by-step publishing checklist. All
-merge tags below are already being written to the Klaviyo profile on payment
-success — see `app/api/webhooks/stripe/route.ts` lines 349–385. You should
-NOT need any code changes to publish this; the data pipeline is already live.
+**Automation ID (camps, draft):** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`
+**Status:** Draft → templates finalized in variant docs, Klaviyo UI publish pending.
+
+This doc is the shared reference for every welcome email in Klaviyo. The
+per-variant docs hold subject/preview/body copy. This doc holds:
+
+1. The merge-tag table (what the webhook writes, what you can reference)
+2. The routing matrix (which filter combo → which template)
+3. The publishing checklist (same steps for every variant)
+4. The "why" notes (decisions that apply to all variants)
+
+All merge tags below are already being written on payment success — see
+`app/api/webhooks/stripe/route.ts` lines 349–385. **No code changes are
+needed to publish any of these templates.**
 
 ---
 
@@ -21,22 +33,36 @@ The webhook writes to two surfaces Klaviyo can render in a flow email:
 
 | Key | Populated on | Example |
 |---|---|---|
-| `program` | all purchases | `EKUZO Camps` |
+| `program` | all purchases | `EKUZO Camps` / `EKUZO100` / `EKUZOTeams` |
 | `gamer_name` | all purchases | `Jacob` or `Jacob, Mia` (comma-separated) |
 | `gamer_count` | all purchases | `1`, `2`, `3` |
 | `registration_summary` | all purchases | `Jacob Smith — Week 02 AM (May 25 - 29) \| Mia Smith — Week 02 AM (May 25 - 29)` |
 | `amount_paid` | all purchases | `$199.00` |
 | `order_id` | all purchases | `EKC-8A7F2B9C` |
+| `timezone` | all purchases | `America/Chicago` |
+| `location` | all purchases | city/region derived from form |
 | `camp_week` | camps only | `2` (earliest week across gamers) |
 | `camp_slot` | camps only | `AM` or `PM` |
 | `camp_week_dates` | camps only | `May 25 - 29` |
 | `squad_status` | camps only | `Building a squad` / `Looking for a squad` / `""` |
-| `squad_link` | camps only | `https://ekuzo.gg/programs/ekuzo-camps/register?squad=kzPDaElWFY` (building only; empty for joiners + lookers) |
+| `squad_link` | camps only | `https://ekuzo.gg/programs/ekuzo-camps/register?squad=kzPDaElWFY` (Building only; empty for Looking + Joining) |
+| `cohort_label` | ekuzo100 only | `June 2026 Cohort` |
+| `cohort_start` | ekuzo100 only | ISO date |
+| `cohort_end` | ekuzo100 only | ISO date |
+| `team_semester` | teams only | `Fall 2026` |
+| `team_payment_plan` | teams only | `upfront` or `installments` |
 
-**Event extras** (available on the `Placed Order` event only — use these when
-building an event-triggered flow instead of a profile-triggered one):
-`product`, `amount`, `currency`, `order_id`, `gamer_name`, `gamer_count`, and
-for camps: `camp_week`, `camp_slot`, `camp_week_dates`, `squad_link`.
+> **Squad-status strings still say "squad," not "team."** The webhook
+> writes `"Building a squad"` / `"Looking for a squad"` even though the UI
+> now says "team." See 4/16 WORKLOG — separate cleanup item. Klaviyo flow
+> filters must match on the `"squad"` strings until Jamie flips the
+> mapping in `app/api/webhooks/stripe/route.ts`.
+
+**Event extras** (available on the `Placed Order` event only — use these
+when building an event-triggered flow instead of a profile-triggered one):
+`product`, `amount` (value), `currency`, `order_id`, `gamer_name`,
+`gamer_count`, and for camps: `camp_week`, `camp_slot`, `camp_week_dates`,
+`squad_status`, `squad_link`.
 
 Event extras render as `{{ event.extra.<key> }}`.
 
@@ -45,124 +71,86 @@ Event extras render as `{{ event.extra.<key> }}`.
 
 ---
 
-## Camps welcome email — ready to paste
+## Routing matrix — which template fires on what
 
-**Trigger:** Metric = "Placed Order", conditional filter `product == "EKUZO Camps"`
-(the webhook sets `product` on every Placed Order event — see
-`app/api/webhooks/stripe/route.ts` ~line 447).
+| Template | Metric | Filter 1 | Filter 2 |
+|---|---|---|---|
+| Camps Building | `Placed Order` | `product == "EKUZO Camps"` | `squad_status == "Building a squad"` |
+| Camps Looking/Joining | `Placed Order` | `product == "EKUZO Camps"` | `squad_status != "Building a squad"` |
+| EKUZO100 Welcome | `Placed Order` | `product == "EKUZO100"` | — |
+| EKUZOTeams Welcome | `Placed Order` | `product == "EKUZOTeams"` | — |
 
-**From name:** EKUZO
-**From email:** team@ekuzo.gg (or whatever sending identity is verified in Klaviyo)
-**Reply-to:** team@ekuzo.gg
-
-**Subject (A):** You're in! Here's what's next for {{ person.gamer_name|default:"your gamer" }}'s camp week.
-**Subject (B) — if A's length flags a warning:** You're in — EKUZO Camps, Week {{ person.camp_week|default:"TBD" }}
-
-**Preview text:** Order {{ person.order_id }} confirmed. Here's how to get ready.
-
-**Body (HTML — drop into Klaviyo's template editor):**
-
-```
-Hi {{ person.first_name|default:"there" }},
-
-You just did something great for your gamer.
-{{ person.gamer_name|default:"Your gamer" }} is officially registered for
-EKUZO Camp — and we're excited to have them.
-
-Your registration
------------------
-Order ID:    {{ person.order_id }}
-Camp week:   Week {{ person.camp_week }} ({{ person.camp_week_dates }}) {{ person.camp_slot }}
-Paid:        {{ person.amount_paid }}
-
-{{ person.registration_summary }}
-
-{% if person.squad_link %}
-Share your team link
---------------------
-You chose "Building a team." Send this link to friends so they can register
-for the same week/slot and land on your gamer's team:
-
-{{ person.squad_link }}
-{% endif %}
-
-Before camp starts
-------------------
-- You'll get a prep email 3 days before the session with login details,
-  schedule, and what your gamer needs to have ready (game installed, headset,
-  Discord).
-- Make sure {{ person.gamer_name|default:"your gamer" }}'s preferred game is
-  installed and updated.
-
-During camp
------------
-- Sessions run for a full week. Your gamer will be placed on a team with a
-  dedicated coach.
-- Each day: skill drills, team scrimmages, VOD review, live coaching.
-- End-of-week recap with your gamer's highlights.
-
-Questions? Reply to this email or reach out at team@ekuzo.gg — we're real
-people and we respond fast.
-
-Welcome to EKUZO.
-
-— The EKUZO Team
-```
-
-**Notes on the Liquid:**
-
-- `|default:"..."` prevents "Hi ," if Klaviyo hasn't backfilled the first name.
-  Klaviyo's default filter behaves like Shopify's, not Django's — single
-  argument, double-quoted.
-- The `{% if person.squad_link %}` block only renders for Building families.
-  Joiners and Lookers get an empty string for `squad_link` from the webhook
-  (`app/api/webhooks/stripe/route.ts` sets it based on the minted
-  `squadTokenForSubmit`), so the block is skipped cleanly.
-- Want to differentiate joiners? Add a second conditional:
-  `{% if person.squad_status == "" and person.camp_week %}` → "You're joining
-  a team — we'll connect you with the team owner before your week starts."
-  Optional; the current copy reads fine without it.
+The camps Looking/Joining template uses a "not equal" filter so it catches
+both real Lookers (`squad_status == "Looking for a squad"`) and Joiners
+(`squad_status == ""`) without needing a second filter on
+`joining_squad_token` (which isn't on the Klaviyo profile).
 
 ---
 
-## Publishing checklist
+## Publishing checklist (applies to every variant)
 
-1. **Open the automation** in Klaviyo: Flows → "EKUZO Camps Welcome" (or
-   whatever name corresponds to `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`).
-2. **Email step → Template** — paste the body above. Set subject + preview.
-   Send a preview to `aaron@tuftdrift.com` and confirm merge tags resolve
-   (pick a recent test profile like `jamiefosu+15111@gmail.com` — it has
-   `squad_link`, `camp_week`, etc. populated from the 4/15 QA).
-3. **Filter the flow** on `product == "EKUZO Camps"` so EKUZO100 + Teams
-   registrations don't trigger it. (Or build three flows — one per product.
-   If you do, duplicate this doc for ekuzo100 and teams with the right
-   properties.)
-4. **Smart Sending** — leave Klaviyo's default "skip sends within last 16 hours"
-   on. Nobody should receive two welcomes from a rapid double-click.
-5. **Publish** the flow (top-right "Draft" → "Live").
-6. **End-to-end test on dev:**
-   - Run a $199 camps test payment (test Stripe key on dev Netlify context —
-     Jamie set this up 4/15).
+1. **Open the automation** in Klaviyo: Flows → e.g. "EKUZO Camps Welcome
+   — Building". Create one flow per row in the routing matrix above, or
+   use Conditional Split blocks inside a single flow.
+2. **Email step → Template** — paste the body from the variant doc. Set
+   subject + preview.
+3. **Preview render** — send a preview to `aaron@tuftdrift.com`. Use a
+   test profile that has the right properties populated:
+   - Camps Building: `jamiefosu@gmail.com` (4/15 QA, token `kzPDaElWFY`)
+   - Camps Looking: `jamiefosu+262@gmail.com` (4/15 QA)
+   - Camps Joining: `jamiefosu+15111@gmail.com` (4/15 QA, 3-gamer join)
+4. **Confirm merge tags resolve.** Scan for raw `{{ }}` (didn't render) or
+   literal `null`. Every reference in the variant doc should produce a real
+   value.
+5. **Set flow filters** per the routing matrix. Each flow should only fire
+   for the right audience.
+6. **Smart Sending** — leave Klaviyo's default "skip sends within last 16
+   hours" on. Nobody should get two welcomes from a rapid double-click.
+7. **Publish** the flow (top-right "Draft" → "Live").
+8. **End-to-end test on dev.**
+   - Run a test payment at the right price point (camps $199, ekuzo100
+     $100, teams $640).
    - Confirm the welcome email lands in your inbox within ~30s.
-   - Spot-check that `{{ person.squad_link }}`, `{{ person.camp_week }}`,
-     `{{ person.order_id }}`, `{{ person.registration_summary }}` all rendered
-     correctly (no raw `{{ }}` showing, no "null").
-   - Click the squad_link in the email → it should load `/squad/<token>`
-     with the "Join Testy's team" hero.
-7. **Unblock launch** — once end-to-end passes, mark QA-FLAGGED-ISSUES #13
-   resolved.
+   - Open in Gmail and re-scan for raw `{{ }}`.
+   - For camps Building: click the `squad_link` in the email → should open
+     `/programs/ekuzo-camps/register?squad=<token>` with the team banner.
+9. **Unblock launch** — once the camps variants both pass end-to-end,
+   `docs/QA-FLAGGED-ISSUES.md` #13 is resolved.
 
 ---
 
-## Why this doc exists (vs. doing it in Klaviyo)
+## Shared copy decisions (apply to every variant)
 
-The template copy, merge-tag names, and flow publishing are all manual work
-in Klaviyo's UI — no code change needed. This file exists so:
+- **No receipt block in any welcome.** Order ID / amount paid are NOT in
+  the body — Stripe emails the parent a receipt automatically from the
+  Stripe account. Duplicating it makes the welcome feel transactional.
+  The `person.order_id` and `person.amount_paid` properties are still on
+  the profile, so ops/support can look them up.
+- **Parent's first name in the subject, not gamer_name.** `gamer_name`
+  renders as a comma-list for multi-gamer families ("Jacob, Mia") and
+  reads awkwardly in possessive subject lines. `person.first_name` is
+  Klaviyo's standard parent field and stays clean for both cases.
+- **`|default:"..."` on every merge tag.** Prevents "Hi ," if Klaviyo
+  hasn't backfilled a field. Klaviyo's default filter behaves like
+  Shopify's, not Django's — single argument, double-quoted.
+- **League of Legends is hardcoded in camps copy.** Camps is LoL-only
+  right now (per `CLAUDE.md` Products section). When camps expands to
+  other titles, flip to a merge tag or split into per-title variants.
+- **"The team sticks together" closing line (camps only).** Mirrors the
+  "THE TEAM STAYS TOGETHER" section on the camps landing page. Reinforces
+  the core value prop one last time before the sign-off.
+
+---
+
+## Why these docs exist (vs. doing it all in Klaviyo)
+
+The template copy, merge-tag names, and flow publishing are all manual
+work in Klaviyo's UI — no code change needed. These files exist so:
 
 - Aaron doesn't have to reverse-engineer Klaviyo's Liquid dialect from
-  scratch.
+  scratch, or remember which property names the webhook writes.
 - The property names stay in sync with what the webhook actually writes
-  (`app/api/webhooks/stripe/route.ts` is the source of truth; if that file
-  changes the property names, update this doc too).
-- If we ever need to rebuild the flow (Klaviyo account migration, flow
-  accidentally deleted), the template isn't lost — it's in git.
+  (`app/api/webhooks/stripe/route.ts` is the source of truth; if that
+  file changes the property names, update the merge-tag table above too).
+- If we ever need to rebuild a flow (Klaviyo account migration, flow
+  accidentally deleted), the templates aren't lost — they're in git.
