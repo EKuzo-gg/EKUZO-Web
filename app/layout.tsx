@@ -136,19 +136,24 @@ export default function RootLayout({
         </noscript>
 
         {/* Microsoft Clarity — heatmaps + session recordings.
-            Internal-team IP filtering is dashboard-side, not code-side, so
-            the same script ships to every visitor and Clarity drops blocked
-            sessions on ingest. Env-gated so previews without the var set
-            don't load the script at all. */}
-        {process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
-          <Script id="ms-clarity" strategy="afterInteractive">
-            {`(function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");`}
-          </Script>
-        )}
+            Project ID is hardcoded because it's not a secret: Clarity sends
+            it to every visitor's browser as plain text in the script tag
+            below. Previously this was env-gated on
+            NEXT_PUBLIC_CLARITY_PROJECT_ID, but on 2026-05-11 we discovered
+            the env var was set in Netlify with the correct value yet wasn't
+            reaching the build output (file hashes matched the prior build),
+            so the gate kept evaluating to false in production. Hardcoding
+            removes the moving part. Internal-team IP filtering is
+            dashboard-side at clarity.microsoft.com → Settings → IP blocking.
+            Full diagnosis:
+            knowledge-base/logs/sessions/2026-05-11-camps-v1.1-monday-read.md */}
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "wml8wll5ua");`}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col bg-white text-black">
         <ModalProvider>
