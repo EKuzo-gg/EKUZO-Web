@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
+import { trackRegisterClick } from "@/lib/analytics";
 
 /**
  * Fixed-bottom CTA bar — "Enroll my gamer" + "Talk to Humans".
@@ -66,7 +67,8 @@ export default function StickyCTA() {
               Ready to level up this summer?
             </span>
             <a
-              href="/programs/ekuzo-camps/register"
+              href="/programs/ekuzo-camps/register?cta=sticky"
+              onClick={() => trackRegisterClick({ source: "sticky" })}
               className="flex-1 sm:flex-none bg-white text-[#AE2CF2] border-2 border-white font-body font-bold text-sm md:text-lg
                          py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0
                          hover:bg-[#AE2CF2] hover:text-white hover:border-white

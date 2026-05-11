@@ -80,6 +80,7 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
   - Create subscription uses `automation_ids` (plural, array), NOT `automation_id` (singular)
   - PUT update endpoint silently ignores `tags` — do not use for tagging
   - API silently drops unknown fields (no error response)
+  - **Tag REMOVAL is not possible via API.** Beehiiv exposes only POST for subscription tags. Verified 2026-05-05: DELETE /tags, DELETE /tags/:name, DELETE /tags?tags=…, and PATCH /tags all return 404. Docs landing page lists exactly one Subscription Tags endpoint (POST). For "paid wins over abandoned" semantics, exclude further-funnel tags from recovery automation audiences in Beehiiv segmentation. See `docs/beehiiv-config.md` "API Limitations" + "Automations" sections.
 - **Multi-gamer:** `gamer_name` stores comma-separated first names, `camp_week` stores earliest week for automation timing. Per-gamer emails deferred to v2.
 - **Post-registration automation:** welcome sequence scaffolded, camp prep/reminders/follow-up TBD — all managed in Beehiiv's automation builder
 - **Welcome automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` (draft, needs real email content before publishing)

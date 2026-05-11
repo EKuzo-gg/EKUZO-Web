@@ -6,6 +6,103 @@
 
 ---
 
+## Jamie — May 5, 2026 (Bug fix: Beehiiv has no tag-removal API, segmentation handles "paid wins")
+
+**Why:** Acceptance test #5 from the data-layer push surfaced a bug. The webhook tag-removal step (DELETE form_started_camps + cart_abandoned_camps on payment_intent.succeeded) wasn't actually removing the tags — paid subscribers ended up with all three tags simultaneously: form_started_camps, cart_abandoned_camps, AND camp-2026-purchased. The DELETE call was hitting Beehiiv but silently failing.
+
+**What I missed in the original implementation:** I assumed Beehiiv's tag endpoint supported DELETE because it accepts POST. Per my pre-mortem in the planning phase I noted "Beehiiv DELETE-tags endpoint shape isn't documented in CLAUDE.md... I'll smoke-test it against a known test subscriber once before wiring it into the webhook." I didn't run that smoke test; the acceptance test caught the bug after deploy.
+
+**Verified against the live Beehiiv API on 2026-05-05** — all four DELETE/PATCH shape variants returned 404:
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags` with body `{tags:[…]}` → 404
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags/:tagName` → 404
+- `DELETE /v2/publications/:pubId/subscriptions/:subId/tags?tags=…` → 404
+- `PATCH /v2/publications/:pubId/subscriptions/:subId/tags` with `{tags, action:"remove"}` → 404
+
+Beehiiv's docs landing page also explicitly lists exactly ONE Subscription Tags endpoint (POST only). Per CLAUDE.md's existing learning log entry, PUT /subscriptions silently ignores `tags`. **Tag removal via API is impossible.**
+
+**What changed:**
+
+- `app/api/webhooks/stripe/route.ts` — removed the broken DELETE-tags block. Replaced with a documenting comment that captures the API limitation, the verification date, the four shapes that were tested, and the operational fix. Now on `payment_intent.succeeded` the webhook adds `camp-2026-purchased` + `source-camp-registration` and stops there — no DELETE call.
+
+- `app/api/camps/lead/route.ts`, `app/api/camps/abandoned/route.ts` — corrected the docstrings that previously claimed "the webhook removes this tag on payment success." Both now reference the shared comment block in the webhook for the limitation and the segmentation-side fix.
+
+**Operational follow-up (Jamie's side):**
+
+The "paid wins over abandoned" semantics now have to live in Beehiiv segmentation, not API state. Two options:
+
+1. **Required:** When you build the cart-abandonment automation in Beehiiv, configure the audience to EXCLUDE subscribers tagged with `camp-2026-purchased`. Segmentation gates re-engagement so paid customers never receive recovery emails. The messy tag state on profiles (form_started + cart_abandoned + camp-2026-purchased all present) is cosmetic.
+
+2. **Optional cleanup:** If Beehiiv's automation builder supports a "Remove tag" action (worth checking — some workflow tools do, some don't), set up a dashboard-only automation: "When subscriber receives `camp-2026-purchased` → Remove `form_started_camps` and `cart_abandoned_camps`." This makes the tag state cosmetically clean but isn't required for correctness.
+
+The four other acceptance tests passed:
+- CTA tracking → live in GA realtime under `register_click`
+- form_started_camps → fires on email blur ✓
+- cart_abandoned_camps → fires post-register, pre-payment ✓
+- cta_source → lands in Stripe metadata + Beehiiv custom field on paid registrations
+- Clarity install → script tag shipping in dev preview HTML; sessions check back in ~2hr per Clarity's normal ingestion lag
+
+**CLAUDE.md update:** the Beehiiv API quirks list in CLAUDE.md should gain a line noting that tag removal is not possible via API. Adding to that list in a separate commit so this fix stays scoped.
+
+**Verification:** `tsc --noEmit` clean. The fix is webhook-only (server-side), so no browser verification needed; live verification is "complete a Stripe test purchase end-to-end on dev preview, confirm Beehiiv subscriber has camp-2026-purchased added and no Beehiiv API errors in Netlify function logs."
+
+**Aaron:** zero touch.
+
+---
+
+## Jamie — May 5, 2026 (Camps v1.1 data layer: Clarity + CTA tracking + abandoned-cart capture)
+
+**Why:** Pre-meeting deliverables from the camps v1.1 plan (`/Users/jamiefitch/Projects/knowledge-base/team/camps-v1-team-summary-2026-05.md`). The v1 paid-media run produced $303 in spend, 0 paid signups, and 0 InitiateCheckout events — meaning every parent who reached register bailed before payment. Before redesigning the register page (the v1.1 cart refactor), we need observability on three things: how parents move through the existing form (Clarity sessions), which CTA on the marketing page produced each click (so LP iteration can target the actual workhorse), and the email of every parent who started but didn't finish (so nurture has a recovery channel). All four data-layer changes ship together and stay surgical — no register-form redesign in this pass.
+
+**What changed:**
+
+- **Microsoft Clarity install (env-gated)** — `app/layout.tsx`, `.env.local.example`. New `<Script id="ms-clarity">` block sits next to the GA4 + Pixel scripts in `<head>`, gated by `NEXT_PUBLIC_CLARITY_PROJECT_ID` so previews without the var unset don't load the snippet. Project ID `wml8wll5ua` (set in Netlify env contexts post-merge). IP filtering is dashboard-side: clarity.microsoft.com → settings → IP blocking. Jamie's current public IP needs to be added there. Aaron's IP added in a follow-up. The same script ships to every visitor; Clarity drops blocked sessions on ingest.
+
+- **CTA-level tracking on the camps marketing page** — `lib/analytics.ts`, `components/ui/TrackedRegisterLink.tsx` (new), `app/programs/ekuzo-camps/page.tsx`, `components/ui/StickyCTA.tsx`, `app/programs/ekuzo-camps/register/page.tsx`, `app/api/camps/register/route.ts`, `app/api/webhooks/stripe/route.ts`. Three CTAs (hero / sticky-bottom / footer "Secure Your Slot") previously all linked to `/programs/ekuzo-camps/register` with no differentiator. Now each appends `?cta=hero|sticky|footer` to the href and fires a GA `register_click` event with a `source` param via the new `trackRegisterClick()` helper (GA-only — Pixel ViewContent already covers LP intent, second Pixel event would muddy the funnel). The marketing page is a server component, so hero/footer use a thin client wrapper (`TrackedRegisterLink`) that attaches onClick to a normal `<a>`; the sticky bar is already a client component so onClick is inline. Register page reads `?cta=` on mount, allow-lists against the three known sources, and threads it through the register POST → Stripe metadata (`cta_source`) → webhook → Beehiiv `cta_source` custom field. Beehiiv field needs to exist as a Text custom field — pre-creating in Beehiiv before merge.
+
+- **Abandoned-cart email capture (two endpoints + webhook tag-removal)** — `app/api/camps/lead/route.ts` (new), `app/api/camps/abandoned/route.ts` (new), `app/programs/ekuzo-camps/register/page.tsx`, `app/api/webhooks/stripe/route.ts`. Two recovery layers: (1) Email field `onBlur` on the register page POSTs to `/api/camps/lead` once per validated email (gated by a `useRef` so re-blurring doesn't spam Beehiiv); subscribes to Beehiiv with `form_started_camps` tag, no welcome automation, no welcome email. (2) After `/api/camps/register` returns the Stripe Payment Intent and BEFORE the parent enters card details, the page POSTs to `/api/camps/abandoned` with email + parent name + first gamer's first name + first gamer's selected week/slot; subscribes with `cart_abandoned_camps` tag. Both endpoints are idempotent on email (Beehiiv `reactivate_existing: true`), wrap every Beehiiv call in try/catch, and never return a 5xx that could block payment — capture is fire-and-forget. The Stripe webhook now removes both tags via `DELETE /v2/publications/:pubId/subscriptions/:subId/tags` after a successful `payment_intent.succeeded` so paid customers don't sit in the abandoned-cart automation. Tag removal is camps-only (the two new tags are camps-specific). Both new tags need to exist in Beehiiv before merge — pre-creating.
+
+- **Local input UX:** added optional `onBlur` prop to the `InputField` sub-component in `register/page.tsx` so the parent email field can fire the lead-capture POST without breaking any other field's behavior. No visual change.
+
+- **read-insights.mjs dynamic ad discovery** — `/Users/jamiefitch/Projects/ekuzo-camps/marketing/ads/2026-04-meta-camps-v1/read-insights.mjs` (separate repo, separate PR). Replaces hardcoded `CONFIG.adSets = {broad, narrow}` and `CONFIG.ads` with a runtime `discoverEntities()` call that queries `${campaignId}/adsets?fields=id,name&limit=50` and per-set `${adSetId}/ads?fields=id,name&limit=50`, populating CONFIG with name-keyed maps. The script previously missed the `v1_NARROW_Karlin_9x16_ReelsStories` ad set (added 19 minutes after the build script ran) for the entire v1 campaign run — Karlin's ad was the campaign's hero creative and was silently dropped from analysis. New script logs the discovered structure on start so future structural changes surface immediately. Output JSON keys now reflect live ad-set / ad names (e.g., `out.adSets["v1_NARROW_Karlin_9x16_ReelsStories"]`) instead of the static "broad"/"narrow". Limit-50 warnings if a future campaign exceeds that.
+
+**Net effect:**
+
+- Microsoft Clarity records every dev/prod session; Jamie's IP filtered server-side.
+- Every register CTA click on the camps LP fires `register_click` to GA with the source label, and `cta_source` lands in Stripe metadata + Beehiiv `cta_source` custom field on every paid registration.
+- Every parent who blurs a valid email on the register form lands in Beehiiv with `form_started_camps`. Every parent who reaches "Continue to Payment" but doesn't pay lands with `cart_abandoned_camps` plus their gamer/week/slot context. Both tags are removed when payment completes.
+- `read-insights.mjs` now dynamically discovers the campaign structure each run; Karlin's ad is back in analysis output.
+
+**Verification:**
+
+- `tsc --noEmit` clean.
+- `node --check read-insights.mjs` clean.
+- Acceptance tests deferred to post-deploy on `dev--ekuzo.netlify.app` (env vars need to be set in Netlify Dev context first):
+  1. Land on dev preview, confirm a Clarity session appears in the dashboard within ~5 minutes.
+  2. Click each CTA; confirm `?cta=hero|sticky|footer` in the URL and `register_click` in GA realtime with the correct source.
+  3. Type an email on the register page, blur the field, walk away — confirm the email lands in Beehiiv with `form_started_camps`.
+  4. Fill out the form, click "Continue to payment," close the tab — confirm the email lands in Beehiiv with `cart_abandoned_camps` plus gamer/week/slot custom fields.
+  5. Complete a test purchase end-to-end with the same email — confirm `form_started_camps` and `cart_abandoned_camps` are removed and `camp-2026-purchased` is added; confirm Stripe PI metadata has `cta_source`; confirm Beehiiv `cta_source` custom field is populated.
+  6. Run `META_CAPI_ACCESS_TOKEN=… node read-insights.mjs --preset=last_7d` and confirm the discovery log shows all 3 ad sets including Karlin and all 3 ads including the Karlin ad ID; confirm the JSON output file has Karlin data.
+
+**Beehiiv setup actions (must complete before merge to dev → main):**
+
+1. Create `cta_source` Text custom field on the camps publication.
+2. Create `form_started_camps` and `cart_abandoned_camps` tags on the camps publication.
+
+**Aaron:** zero design touch in this pass. The CTA wiring is structural only — the same `<a>` tags now route through a thin client wrapper (`TrackedRegisterLink`) but render byte-for-byte identical HTML/CSS. The sticky bar gained one onClick and a `?cta=sticky` suffix on its href. The register page email field gained an onBlur that fires fire-and-forget; no visual change. If the cart-style v1.1 register refactor lands later this week, the `cta_source` plumbing already follows through automatically — no double-work.
+
+**Jamie pre-merge / post-merge checklist:**
+
+1. Beehiiv: create `cta_source` text custom field + `form_started_camps` + `cart_abandoned_camps` tags.
+2. Push `dev` to remote, wait for `dev--ekuzo.netlify.app` to deploy.
+3. Set `NEXT_PUBLIC_CLARITY_PROJECT_ID=wml8wll5ua` in Netlify Dev + Deploy Previews + Branch deploys + Production env contexts (NEXT_PUBLIC_* baked at build time, redeploy after setting).
+4. Add Jamie's current public IP to clarity.microsoft.com → settings → IP blocking. Aaron's IP added later (not blocking this PR).
+5. Run all 5 web acceptance tests above on dev preview.
+6. Open separate PR in `~/Projects/ekuzo-camps` with the read-insights.mjs change and run the script-side acceptance test.
+7. Once verified on dev, merge dev → main on both repos.
+
+---
+
 ## Jamie — April 29, 2026 (Tactical updates: Limited-Time framing + scroll-to-error UX + popup gate)
 
 **Why:** Three loosely related copy/UX fixes that had been queued up. None individually big, but the bundle clears them in one session and one merge to prod.

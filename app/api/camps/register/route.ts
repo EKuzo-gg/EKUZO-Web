@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
       squad_token,
       joining_squad_token,
       attribution,
+      cta_source,
     } = body;
 
     // ── Validate ────────────────────────────────────────────────────
@@ -134,6 +135,13 @@ export async function POST(req: NextRequest) {
     if (utmCampaign) metadata.utm_campaign = utmCampaign;
     if (utmContent) metadata.utm_content = utmContent;
     if (utmTerm) metadata.utm_term = utmTerm;
+
+    // CTA placement that produced this registration. Allow-listed against
+    // the three landing-page surfaces (hero / sticky / footer); anything
+    // else is dropped so noise in the query string doesn't land in Stripe.
+    if (cta_source === "hero" || cta_source === "sticky" || cta_source === "footer") {
+      metadata.cta_source = cta_source;
+    }
 
     // Squad link tokens (camps only) — 10-char nanoids, validated against
     // a strict charset/length allow-list before they land in Stripe

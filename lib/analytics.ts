@@ -111,3 +111,17 @@ export function trackLead(params?: {
     content_name: params?.source ?? "contact_form",
   });
 }
+
+// ---------------------------------------------------------------------------
+// RegisterClick — landing-page CTA fired before navigation to /register
+// ---------------------------------------------------------------------------
+// GA-only by design. Pixel ViewContent already covers landing-page intent;
+// firing a second Pixel event for the click would muddy the funnel without
+// adding signal. The `source` value is one of "hero" | "sticky" | "footer"
+// so GA reports can break click volume down by CTA placement.
+
+export function trackRegisterClick(params: { source: string }) {
+  ga4("register_click", {
+    source: params.source,
+  });
+}

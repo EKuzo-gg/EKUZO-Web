@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
@@ -183,12 +183,33 @@ export default function CampsRegisterPage() {
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
   const [showPayment, setShowPayment] = useState(false);
 
+  // ── CTA source — landing-page CTA placement that brought the visitor here.
+  // Set by the three CTAs on app/programs/ekuzo-camps/page.tsx and the
+  // sticky bar in components/ui/StickyCTA.tsx, each appending ?cta=hero|
+  // sticky|footer to the register URL. Captured on mount, threaded through
+  // the register POST → Stripe metadata → Beehiiv custom field.
+  const [ctaSource, setCtaSource] = useState<string>("");
+
+  // ── Email-lead capture gate — tracks the last email we POSTed to
+  // /api/camps/lead so onBlur doesn't spam Beehiiv with the same email
+  // on every focus/blur cycle. Comparison is lowercased + trimmed to
+  // match the server-side normalization.
+  const leadFiredForEmailRef = useRef<string>("");
+
   // ── Capture first-touch UTM params on mount ─────────────────────────
   // Direct land on /register via an ad URL writes the UTMs to
   // sessionStorage. If the visitor came via a marketing page that already
   // captured, this is a no-op (first-touch wins). See lib/attribution.ts.
   useEffect(() => {
     captureAttribution();
+    if (typeof window !== "undefined") {
+      const cta = new URLSearchParams(window.location.search).get("cta") || "";
+      // Allow only the three known sources; anything else stays empty so
+      // garbage query params don't pollute Stripe metadata or Beehiiv.
+      if (cta === "hero" || cta === "sticky" || cta === "footer") {
+        setCtaSource(cta);
+      }
+    }
   }, []);
 
   // ── Load crew-owner record on mount if ?squad=TOKEN is present ─────
@@ -385,6 +406,29 @@ export default function CampsRegisterPage() {
     }
   }
 
+  // ── Email lead capture (onBlur) ─────────────────────────────────────────
+  // Fires once per validated email per session. Posts to /api/camps/lead
+  // which subscribes the email to Beehiiv with `form_started_camps`. The
+  // call is fire-and-forget — failures are swallowed because lead capture
+  // is best-effort and must never block the form. The ref gate is keyed on
+  // email so re-blurring the same field doesn't re-fire, but typing a new
+  // email and blurring does.
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function handleEmailBlur() {
+    const email = parent.email.trim().toLowerCase();
+    if (!email || !EMAIL_RE.test(email)) return;
+    if (leadFiredForEmailRef.current === email) return;
+    leadFiredForEmailRef.current = email;
+    fetch("/api/camps/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    }).catch(() => {
+      // Reset on error so a later blur can retry. Logs land server-side.
+      leadFiredForEmailRef.current = "";
+    });
+  }
+
   // ── Validation ──────────────────────────────────────────────────────────
 
   function validate(): Array<{ key: string; message: string }> {
@@ -493,6 +537,7 @@ export default function CampsRegisterPage() {
       additionalInfo,
       totalPrice,
       attribution,
+      cta_source: ctaSource,
     };
 
     try {
@@ -513,6 +558,29 @@ export default function CampsRegisterPage() {
       setClientSecret(data.clientSecret);
       setPaymentIntentId(data.paymentIntentId);
       setShowPayment(true);
+
+      // Abandoned-cart capture — fires AFTER the register API succeeds and
+      // BEFORE the parent enters card details. If they bail at the Stripe
+      // Elements step, the email is still in Beehiiv with cart_abandoned_camps
+      // and the first gamer's week/slot context. Fire-and-forget; failures
+      // never block payment because the webhook does the heavy lifting on
+      // success and this is purely a recovery channel.
+      const firstGamer = gamers[0];
+      const firstGamerWeek = firstGamer?.selectedWeek ?? null;
+      const firstGamerSlot = firstGamer?.selectedSlot ?? null;
+      fetch("/api/camps/abandoned", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: parent.email,
+          parent_first_name: parent.firstName,
+          parent_last_name: parent.lastName,
+          gamer_first_name: firstGamer?.firstName || "",
+          week: firstGamerWeek,
+          slot: firstGamerSlot,
+        }),
+      }).catch(() => {});
+
       trackInitiateCheckout({ program: "camps", value: totalPrice });
       setIsSubmitting(false);
 
@@ -1102,6 +1170,7 @@ export default function CampsRegisterPage() {
                 errorKey="parent.email"
                 value={parent.email}
                 onChange={(v) => setParent((p) => ({ ...p, email: v }))}
+                onBlur={handleEmailBlur}
                 placeholder="your.email@example.com"
               />
               <InputField
@@ -1500,6 +1569,7 @@ function InputField({
   required,
   value,
   onChange,
+  onBlur,
   type = "text",
   placeholder,
   errorKey,
@@ -1508,6 +1578,7 @@ function InputField({
   required?: boolean;
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
   type?: string;
   placeholder?: string;
   errorKey?: string;
@@ -1528,6 +1599,7 @@ function InputField({
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur}
         placeholder={placeholder}
         className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
         style={{ fontSize: "16px", lineHeight: "normal" }}
