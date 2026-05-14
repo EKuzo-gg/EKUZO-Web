@@ -2,21 +2,70 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
+import JsonLd from "@/components/JsonLd";
+import {
+  buildBlogArticleSchema,
+  buildBlogPostBreadcrumbSchema,
+} from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
 
+const SLUG = "conquering-my-mountain-and-giants-how-esports-changed-my-life";
+const TITLE = "Conquering my Mountain and Giants: How Esports Changed My Life";
+const DESCRIPTION =
+  "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO — and a coach who taught me how to reframe everything.";
+const SHARE_IMAGE = "/images/blog-post-2-card.jpg";
+const DATE_PUBLISHED = "2026-01-14";
+const DATE_MODIFIED = "2026-01-14";
+
 export const metadata = {
-  alternates: {
-    canonical: "/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life",
+  alternates: { canonical: `/blog/${SLUG}` },
+  title: `${TITLE} — EKUZO Blog`,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    type: "article",
+    url: `https://ekuzo.gg/blog/${SLUG}`,
+    siteName: "EKUZO",
+    locale: "en_US",
+    images: [
+      {
+        url: SHARE_IMAGE,
+        width: 1232,
+        height: 770,
+        alt: TITLE,
+      },
+    ],
+    publishedTime: DATE_PUBLISHED,
+    modifiedTime: DATE_MODIFIED,
+    authors: ["John Hay"],
+    section: "Testimonials",
   },
-  title: "Conquering my Mountain and Giants: How Esports Changed My Life — EKUZO Blog",
-  description:
-    "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO — and a coach who taught me how to reframe everything.",
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
 };
 
 export default function PostJohnHay() {
+  const articleSchema = buildBlogArticleSchema({
+    slug: SLUG,
+    title: TITLE,
+    description: DESCRIPTION,
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
+    image: SHARE_IMAGE,
+    author: { "@type": "Person", name: "John Hay" },
+  });
+  const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE);
+
   return (
     <>
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <div className="absolute top-0 left-0 right-0 z-20">
         <Nav variant="light" />
       </div>

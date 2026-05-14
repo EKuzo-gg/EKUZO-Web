@@ -22,6 +22,13 @@ EKUZO's pedagogy treats esports the way traditional school sports treat athletic
 - [For Schools](https://ekuzo.gg/schools): How schools partner with EKUZO to run an official esports program, including curriculum integration, coaching, and tournament organization.
 - [Games](https://ekuzo.gg/games): The game titles EKUZO currently supports, with League of Legends as the primary platform.
 
+## Blog and articles
+
+- [Blog index](https://ekuzo.gg/blog): All EKUZO blog posts — guides for parents, family case studies, and student testimonials.
+- [Virtual summer camps for kids who'd rather be gaming (still open for summer 2026)](https://ekuzo.gg/blog/summer-camps-for-kids-who-game-2026): Parent's guide comparing the four categories of summer gaming camps (game-design and coding, creation-focused, university-and-in-person, structured esports), with representative camps, cost ranges, hours per week, and coach type per category. Includes a detailed explanation of why League of Legends suits youth structured programs and how EKUZO Camps are run.
+- [Our Family's Esports Journey with EKUZO and the K1ng](https://ekuzo.gg/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng): Parent testimonial. Lisa Holt's story of how her son Ryan ("K1ngofbattle") regained confidence and developed leadership through EKUZO after being bullied in junior high.
+- [Conquering my Mountain and Giants: How Esports Changed My Life](https://ekuzo.gg/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life): Student testimonial. John Hay's story of working through anxiety, perfectionism, and near-failing grades with the help of an EKUZO coach.
+
 ## Support and reference
 
 - [FAQ](https://ekuzo.gg/faq): Answers to common questions across safety, programs, outcomes, cost, and enrollment.

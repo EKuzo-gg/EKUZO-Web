@@ -6,6 +6,54 @@
 
 ---
 
+## Jamie — May 14, 2026 (New blog post: Summer camps guide + blog-wide metadata/schema parity pass)
+
+**What shipped:** First "Guides" category post at `/blog/summer-camps-for-kids-who-game-2026`. ~1,700-word parent-facing guide comparing the four categories of summer gaming camps, with EKUZO Camps positioned in the structured-esports row. Author byline: Karlin, founder of EKUZO. Includes embedded Karlin YouTube Short and a wireframe placeholder for the Jynxzi tournament clip (Aaron to source).
+
+**New shared components (used by this post, future blog posts can adopt incrementally):**
+
+- `components/blog/BlogContent.tsx` — on-brand styling wrapper for the post body (typography on h2/h3/p/ul/ol/table/a/strong/blockquote). Existing two posts not retrofitted — backward-compatible by design.
+- `components/blog/WireframePlaceholder.tsx` — visually obvious "missing asset" block with dashed red border + label + note. Used for the Jynxzi clip slot.
+
+**Schema layer:**
+
+- `lib/schema.ts` gained `buildBlogArticleSchema()` and `buildBlogPostBreadcrumbSchema()`. Article references the existing `coachKarlinSchema` Person via `@id` for Karlin-authored posts; takes an inline `{ @type: Person, name }` for guest authors (Lisa Holt, John Hay). Closes the `/blog/[slug]` Article schema gap documented in CLAUDE.md — applied to all three blog posts.
+- BreadcrumbList (Home → Blog → post) emitted on every post via the new helper.
+
+**Blog-wide metadata parity pass** (Jamie asked for parity across all three posts):
+
+- Each post now sets its own `openGraph` (type=article, publishedTime, modifiedTime, authors, section, share image) and `twitter` card (summary_large_image, same share image).
+- **Share image strategy:** one canonical share image per post, referenced from three places (`og:image`, `twitter:image`, `Article.image`) so every surface — Facebook, LinkedIn, iMessage, Slack, Discord, WhatsApp, X, email link previews, Google rich snippets, AI summarizers — uses one source of truth. Each post points to its own `blog-post-{N}-card.jpg`. Replace the placeholder file to update every surface.
+
+**Discoverability:**
+
+- `app/sitemap.ts` includes the new post (weekly changeFreq, priority 0.6).
+- `public/llms.txt` gained a "Blog and articles" section listing all three posts with one-line descriptions so AI crawlers consuming llms.txt can navigate to articles.
+
+**Blog index changes:**
+
+- New post added to the `posts` array.
+- Filter sidebar hidden until the blog reaches ~10 posts. Code retained in a comment block so it can be re-enabled with real filter state later. Layout collapses to a single column with a 3-column post grid at desktop.
+
+**Placeholder assets (Aaron + Jamie to replace):**
+
+- `public/images/blog-post-3-card.jpg` — 1232×770 dashed-red-border placeholder, used for blog index card AND all share surfaces (OG, Twitter, Article schema).
+- `public/images/blog-post-3-hero.jpg` — 1232×520 placeholder for the article hero only.
+- Generation script lives at `scripts/gen-blog-post-3-placeholders.js` (Node + sharp) if either needs to be regenerated at the same dimensions.
+- The Jynxzi tournament clip placeholder is rendered in the article body — Aaron to source a 15-30s licensed clip from Jynxzi's May 11 2026 League tournament.
+
+**What didn't ship and why:**
+
+- Blog filter UI is not wired to actually filter — the existing sidebar was visual-only (categories rendered as `<span>` with no onClick). Hidden for now; reintroduce with real state when post count justifies it (~10+).
+- No CMS migration. Posts remain hard-coded React components (matches current convention).
+
+**Files touched:**
+
+- New: `app/blog/summer-camps-for-kids-who-game-2026/page.tsx`, `components/blog/BlogContent.tsx`, `components/blog/WireframePlaceholder.tsx`, `scripts/gen-blog-post-3-placeholders.js`, `public/images/blog-post-3-card.jpg`, `public/images/blog-post-3-hero.jpg`.
+- Edited: `app/blog/page.tsx` (new post entry + filter sidebar hidden), `app/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng/page.tsx` (OG + Twitter + Article + Breadcrumb), `app/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life/page.tsx` (OG + Twitter + Article + Breadcrumb), `app/sitemap.ts`, `public/llms.txt`, `lib/schema.ts`.
+
+---
+
 ## Jamie — May 5, 2026 (Bug fix: Beehiiv has no tag-removal API, segmentation handles "paid wins")
 
 **Why:** Acceptance test #5 from the data-layer push surfaced a bug. The webhook tag-removal step (DELETE form_started_camps + cart_abandoned_camps on payment_intent.succeeded) wasn't actually removing the tags — paid subscribers ended up with all three tags simultaneously: form_started_camps, cart_abandoned_camps, AND camp-2026-purchased. The DELETE call was hitting Beehiiv but silently failing.

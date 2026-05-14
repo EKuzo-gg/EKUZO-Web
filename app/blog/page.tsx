@@ -35,6 +35,18 @@ const posts = [
     image: "/images/blog-post-2-card.jpg",
     featured: false,
   },
+  {
+    slug: "summer-camps-for-kids-who-game-2026",
+    title:
+      "Virtual summer camps for kids who'd rather be gaming (still open for summer 2026)",
+    date: "May 14, 2026",
+    author: "Karlin",
+    category: "Guides",
+    excerpt:
+      "A parent's guide to virtual summer camps for kids who game. Four categories, real cost ranges, and how to tell a coached program from a supervised hangout.",
+    image: "/images/blog-post-3-card.jpg",
+    featured: false,
+  },
 ];
 
 export default function BlogPage() {
@@ -110,24 +122,16 @@ export default function BlogPage() {
             ALL BLOGS
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
-            {/* Filter sidebar */}
-            <div className="bg-black p-8 flex flex-col gap-4">
-              <span className="font-body font-bold text-white text-base">Filter by</span>
-              <div className="flex flex-col gap-2 mt-2">
-                {["All", "Case Studies", "Testimonials"].map((cat) => (
-                  <span
-                    key={cat}
-                    className="font-body text-white/60 text-sm hover:text-white transition-colors cursor-pointer"
-                  >
-                    {cat.toLowerCase()}
-                  </span>
-                ))}
-              </div>
-            </div>
-
+          {/*
+            Filter sidebar hidden until the blog has enough posts for filtering
+            to be useful. Reintroduce once the blog reaches ~10 posts:
+              - re-add the <div className="bg-black p-8 ..."> sidebar
+              - restore lg:grid-cols-[280px_1fr] on the wrapper below
+              - wire actual filter state so clicks change which posts render
+          */}
+          <div className="grid grid-cols-1 gap-10 items-start">
             {/* Posts grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {all.map((post) => (
                 <Link
                   key={post.slug}

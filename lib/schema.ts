@@ -368,6 +368,62 @@ export function buildBreadcrumbSchema(trail: Crumb[]) {
   };
 }
 
+// ─── Blog Article + author Person ──────────────────────────────────────────
+// Karlin already exists as a top-level Person node (coachKarlinSchema) in the
+// root @graph. Blog Article authorship references that same @id rather than
+// duplicating a second Person — Schema.org graphs prefer one canonical entity.
+// `karlinPersonSchema` is exported as a named handle for callers that want to
+// pass the author node explicitly.
+export const karlinPersonSchema = coachKarlinSchema;
+
+type BlogArticleArgs = {
+  slug: string;
+  title: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  image: string;
+  author?: { "@id": string } | { "@type": "Person"; name: string };
+};
+
+export function buildBlogArticleSchema({
+  slug,
+  title,
+  description,
+  datePublished,
+  dateModified,
+  image,
+  author,
+}: BlogArticleArgs) {
+  const url = `${SITE}/blog/${slug}`;
+  const imageUrl = image.startsWith("http") ? image : `${SITE}${image}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: title,
+    description,
+    image: imageUrl,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    author: author ?? { "@id": KARLIN_ID },
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en-US",
+  };
+}
+
+// Convenience wrapper for blog-post breadcrumbs: Home → Blog → [post title].
+// Use this on every blog post page so AI/Google can reconstruct site hierarchy.
+export function buildBlogPostBreadcrumbSchema(slug: string, title: string) {
+  return buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: title, path: `/blog/${slug}` },
+  ]);
+}
+
 // ─── FAQPage builder ───────────────────────────────────────────────────────
 type FAQItem = { question: string; answer: string };
 

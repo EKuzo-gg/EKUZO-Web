@@ -107,6 +107,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/blog/summer-camps-for-kids-who-game-2026`,
+      lastModified: new Date("2026-05-14"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
 
     // Legal
     {
