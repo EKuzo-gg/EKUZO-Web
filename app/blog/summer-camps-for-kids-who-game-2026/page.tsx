@@ -4,7 +4,6 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogContent from "@/components/blog/BlogContent";
-import WireframePlaceholder from "@/components/blog/WireframePlaceholder";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -542,11 +541,27 @@ export default function PostSummerCamps2026() {
                 level when the structure invites it.
               </p>
 
-              <WireframePlaceholder
-                type="video"
-                label="Jynxzi tournament clip"
-                note="Aaron to source a 15-30s clip from Jynxzi's May 11 2026 League tournament. Twitch clip or YouTube short, embed via standard iframe."
-              />
+              {/* Jynxzi May 11 2026 League tournament clip.
+                  Twitch requires the `parent` query param to match the hostname
+                  serving the page — listing prod, dev branch, and localhost.
+                  Wildcards aren't supported, so Netlify deploy previews
+                  (deploy-preview-N--ekuzo.netlify.app) will not render this. */}
+              <div className="my-6">
+                <div
+                  className="relative w-full"
+                  style={{ aspectRatio: "16 / 9" }}
+                >
+                  <iframe
+                    src="https://clips.twitch.tv/embed?clip=JoyousExquisitePterodactylCorgiDerp-36Vj3nmNL73uTTud&parent=ekuzo.gg&parent=dev--ekuzo.netlify.app&parent=localhost"
+                    title="Jynxzi League of Legends tournament clip"
+                    loading="lazy"
+                    allowFullScreen
+                    scrolling="no"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+              </div>
 
               <p>
                 The skills also move sideways. Map awareness, calling out a
