@@ -6,6 +6,40 @@
 
 ---
 
+## Jamie — May 13, 2026 (Camps v1.2 LP ship: hero restructure + copy + FAQ expansion)
+
+**Why:** v1.1 GA4 read showed LP-to-register CTR at 3.24% (not 18% as v1 suggested). Two-funnel-break reframe means the hero matters more than v1 implied. Caroline Dunaway audit also flagged 10 LP-side issues; 6 addressed in this round, 4 deferred to v1.3 when Aaron is back (dual parent/kid CTAs, hero video treatment, Discord parent-education sidebar, kid-first LoL section rewrite). v1.1 ad campaign runs through 5/15 23:59 PT so these changes get tested by Thu and Fri traffic.
+
+**What changed (single deploy, all in `app/programs/ekuzo-camps/page.tsx` unless noted):**
+
+1. **Hero restructure.** EKUZOCAMP wordmark demoted from the giant slot to a small brand identifier (~22-28px). New H1 in the slot: "EVERY GAMER DESERVES / A TEAM" (desktop 2 lines, mobile 3 lines, "TEAM" red and ~1.5x). Added small red all-caps eyebrow tagline `EVERY GAMER DESERVES A TEAM` above the small wordmark. Third rhombus tag swapped from "Skills Camp" → "Pro Coaches". New subtitle: "Real team. Real coach. Real competition. Five days of esports your kid wants to show up for, plus a team that keeps going long after." CTA `Register for Camp` → `Enroll my gamer`. The three rhombus tags also got tightened on mobile (smaller px/gap/text) so they hold one row at 380px per spec.
+
+2. **Team Stays Together** copy collapsed two paragraphs into one and replaced the two list items with `Coach-built squads.` and `A trusted gaming community.` — kills the "campers" abstraction in favor of "your kid's squad."
+
+3. **Coaches** extracted from the combined grey "Coaches + Requirements + What We Play" section into its own grey section between Team Stays Together and 5-Day Progression. Eyebrow → `Our team` (sentence case). New lead paragraph: "Coaches who play, compete, and coach at the top tiers of esports. Three of them, below." All three coach bios rewritten (Karlin / Sebastien / Nuri). Coach roles simplified ("Founder", "Head Coach", "Coach" — was the verbose // dual labels). Grey-on-grey transition between Team Stays and Coaches is accepted as v1.3 polish; do not redesign without Aaron.
+
+4. **Parent Briefing** cards: all four titles to sentence case. Body copy refreshed on all four. Card 3 retitled `Safe Servers` → `Zero toxic lobbies` (Caroline #6 amplification — strongest anti-toxic flag on the page).
+
+5. **League of Legends** block: eyebrow → `What we play`. Lead paragraphs rewritten to lead with "Your kid plays Fortnite. Or Roblox. Or Minecraft. That's exactly who EKUZO is built for…" Third icon item's body changed to "playing to improve, match after match" (removes the reframe). Deleted the "League mirrors traditional sports" paragraph and the "Learn more about games" button. Added a Karlin Oei founder quote between the icon items and the callout. Callout title and body rewritten to use the Fortnite/Roblox/Minecraft question verbatim; CTA `View more FAQ's → /faq` swapped for `See more questions → #faq` (in-page anchor).
+
+6. **FAQ** expanded from 6 to 13 entries (parent-flow order: age → game → experience → safety → other games → matching → Discord → AM/PM → squad fit → discounts → pricing → after-camp → refund). The wrapper `<section>` gained `id="faq"` plus `scrollMarginTop` for the in-page anchor. Schema: imported `buildFAQPageSchema` from `lib/schema.ts` and now emit a third `<JsonLd>` on the page (the schema builder is the existing single source of truth, no drift).
+
+7. **Sticky CTA** (`components/ui/StickyCTA.tsx`): right-side button `Register for Camp` → `Enroll my gamer`. Left-side "Ready to level up this summer?" left as-is per handoff.
+
+**Voice rules applied:** no em dashes; no reframe constructions; banned-words list scrubbed; sentence case in titles/headers; personal address ("you / your kid").
+
+**Verified:** `tsc --noEmit` clean. Dev preview confirmed: hero renders desktop 2-line + mobile 3-line as specified; "Enroll my gamer" CTA above the fold at 380×800; three rhombus tags fit one row at 380px; coaches section sits between Team Stays Together and 5-Day Progression (verified via DOM section ordering); FAQ has 13 entries; `#faq` anchor resolves; FAQPage JSON-LD ships with 13 entries.
+
+**Flag for Jamie — out of scope this round:** the "Secure Your Slot" red CTA banner mid-page still says `Register for Camp`. After the hero CTA flip to `Enroll my gamer`, this is the only `Register for Camp` left on the marketing page. Handoff said "Don't bundle scope creep — the 8 sections are the entire round," so I left it. Worth a 30-second consistency check next time you're in the file.
+
+**Deferred to v1.3 (per handoff):**
+- Register-side changes: email-first capture above week-selection, dropping the marketing copy at the top of `/register`, wiring the existing `/api/camps/lead` endpoint. Not drafted in this cowork session.
+- Aaron-required visual rounds: deep hero treatment, kid-first LoL section rewrite, dual parent/kid CTAs, Discord parent-education sidebar, kid-squad-fit dedicated treatment.
+
+**Aaron:** zero touch — copy, FAQ, and one component extraction. The new grey-on-grey transition between Team Stays Together and Coaches is yours to redesign in your next round; I deliberately did not improvise on section colors.
+
+---
+
 ## Jamie — May 5, 2026 (Bug fix: Beehiiv has no tag-removal API, segmentation handles "paid wins")
 
 **Why:** Acceptance test #5 from the data-layer push surfaced a bug. The webhook tag-removal step (DELETE form_started_camps + cart_abandoned_camps on payment_intent.succeeded) wasn't actually removing the tags — paid subscribers ended up with all three tags simultaneously: form_started_camps, cart_abandoned_camps, AND camp-2026-purchased. The DELETE call was hitting Beehiiv but silently failing.

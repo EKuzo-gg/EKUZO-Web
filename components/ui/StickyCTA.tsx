@@ -75,7 +75,7 @@ export default function StickyCTA() {
                          active:scale-[0.98] active:brightness-90
                          transition-all duration-150"
             >
-              Register for Camp
+              Enroll my gamer
             </a>
           </div>
         ) : (
