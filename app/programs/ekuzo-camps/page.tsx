@@ -326,21 +326,10 @@ export default function EkuzoCampsPage() {
               ))}
             </div>
 
-            {/* Eyebrow tagline */}
+            {/* Brand wordmark — kicker above the H1 */}
             <p
-              className="font-body font-bold text-red uppercase mb-5"
-              style={{
-                fontSize: "clamp(0.75rem, 1.1vw, 0.95rem)",
-                letterSpacing: "0.2em",
-              }}
-            >
-              Every gamer deserves a team
-            </p>
-
-            {/* Small wordmark — demoted from the hero slot */}
-            <p
-              className="font-display uppercase text-white leading-none mb-8"
-              style={{ fontSize: "clamp(22px, 2.3vw, 28px)" }}
+              className="font-display uppercase text-white leading-none mb-6"
+              style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
             >
               EKUZO<span className="text-red">CAMP</span>
             </p>
@@ -793,8 +782,9 @@ export default function EkuzoCampsPage() {
       </div>
 
       {/* ══ 7. REQUIREMENTS + WHAT WE PLAY — grey bg ═════════════════════════ */}
+      {/* Note: no top divider here — the black torn-paper-bottom on the
+          Parent Briefing section above tears directly into this grey section. */}
       <div className="relative overflow-visible">
-        <TornPaperDivider color="grey" variant="top" style={2} />
         <section
           className="bg-[#f0edea] relative overflow-clip"
           style={{
@@ -892,35 +882,39 @@ export default function EkuzoCampsPage() {
                   ))}
                 </div>
 
-                {/* Founder quote */}
-                <blockquote className="mt-4 pl-5 border-l-4 border-red">
+                {/* Founder quote — featured callout */}
+                <blockquote
+                  className="bg-white border border-gray-100 p-8 md:p-10 shadow-sm mt-4"
+                  style={{
+                    clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+                  }}
+                >
+                  <Image
+                    src="/images/testimonial-quote-mark.png"
+                    alt=""
+                    width={56}
+                    height={48}
+                    className="mb-5"
+                    aria-hidden="true"
+                  />
                   <p
-                    className="font-body font-bold text-black leading-snug mb-3"
-                    style={{ fontSize: "clamp(1.125rem, 1.6vw, 1.375rem)" }}
+                    className="font-body font-bold text-black leading-snug mb-6"
+                    style={{ fontSize: "clamp(1.125rem, 1.9vw, 28px)" }}
                   >
                     &ldquo;EKUZO meets students through the games they love, but teaches through the game that allows growth to compound.&rdquo;
                   </p>
-                  <footer className="font-body text-gray-500 text-sm">
-                    Karlin Oei, Founder
+                  <footer>
+                    <span
+                      className="font-body text-black block"
+                      style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
+                    >
+                      Karlin Oei
+                    </span>
+                    <span className="font-body text-black/50 block text-sm">
+                      Founder, EKUZO
+                    </span>
                   </footer>
                 </blockquote>
-
-                {/* FAQ callout card */}
-                <div className="bg-white border border-gray-100 p-8 shadow-sm mt-4" style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}>
-                  <h4 className="font-body font-bold text-black text-xl mb-3">
-                    My kid plays Fortnite, Roblox, or Minecraft. Will this work?
-                  </h4>
-                  <p className="font-body text-gray-500 text-base leading-relaxed mb-4">
-                    Yes. Kids who walk in playing other games walk out better at all of them. The skills we teach in League transfer sideways: communication, decision-making, reading the map, playing your role. Same skills, every game.
-                  </p>
-                  <a
-                    href="#faq"
-                    className="inline-block font-body font-bold text-gray-500 border-2 border-gray-300 px-6 py-2.5 hover:border-gray-400 hover:text-gray-700 active:scale-[0.97] transition-all duration-150"
-                    style={{ borderRadius: "2px", fontSize: "14px" }}
-                  >
-                    See more questions
-                  </a>
-                </div>
               </div>
 
               {/* Video — right */}
