@@ -54,6 +54,40 @@
 
 ---
 
+## Jamie — May 13, 2026 (Camps v1.2 LP ship: hero restructure + copy + FAQ expansion)
+
+**Why:** v1.1 GA4 read showed LP-to-register CTR at 3.24% (not 18% as v1 suggested). Two-funnel-break reframe means the hero matters more than v1 implied. Caroline Dunaway audit also flagged 10 LP-side issues; 6 addressed in this round, 4 deferred to v1.3 when Aaron is back (dual parent/kid CTAs, hero video treatment, Discord parent-education sidebar, kid-first LoL section rewrite). v1.1 ad campaign runs through 5/15 23:59 PT so these changes get tested by Thu and Fri traffic.
+
+**What changed (single deploy, all in `app/programs/ekuzo-camps/page.tsx` unless noted):**
+
+1. **Hero restructure.** EKUZOCAMP wordmark demoted from the giant slot to a brand kicker above the H1 (clamp 32-56px). New H1 in the slot: "EVERY GAMER DESERVES / A TEAM" (desktop 2 lines, mobile 3 lines, "TEAM" red and ~1.5x). Third rhombus tag swapped from "Skills Camp" → "Pro Coaches". New subtitle: "Real team. Real coach. Real competition. Five days of esports your kid wants to show up for, plus a team that keeps going long after." CTA `Register for Camp` → `Enroll my gamer`. The three rhombus tags also got tightened on mobile (smaller px/gap/text) so they hold one row at 380px per spec. (Post-Jamie-QA: handoff originally specified a small red eyebrow tagline `EVERY GAMER DESERVES A TEAM` above the wordmark — Jamie cut it as redundant with the H1 immediately below; wordmark sized up to fill the slot.)
+
+2. **Team Stays Together** copy collapsed two paragraphs into one and replaced the two list items with `Coach-built squads.` and `A trusted gaming community.` — kills the "campers" abstraction in favor of "your kid's squad."
+
+3. **Coaches** extracted from the combined grey "Coaches + Requirements + What We Play" section into its own grey section between Team Stays Together and 5-Day Progression. Eyebrow → `Our team` (sentence case). New lead paragraph: "Coaches who play, compete, and coach at the top tiers of esports. Three of them, below." All three coach bios rewritten (Karlin / Sebastien / Nuri). Coach roles simplified ("Founder", "Head Coach", "Coach" — was the verbose // dual labels). Grey-on-grey transition between Team Stays and Coaches is accepted as v1.3 polish; do not redesign without Aaron.
+
+4. **Parent Briefing** cards: all four titles to sentence case. Body copy refreshed on all four. Card 3 retitled `Safe Servers` → `Zero toxic lobbies` (Caroline #6 amplification — strongest anti-toxic flag on the page).
+
+5. **League of Legends** block: eyebrow → `What we play`. Lead paragraphs rewritten to lead with "Your kid plays Fortnite. Or Roblox. Or Minecraft. That's exactly who EKUZO is built for…" Third icon item's body changed to "playing to improve, match after match" (removes the reframe). Deleted the "League mirrors traditional sports" paragraph and the "Learn more about games" button. Added a Karlin Oei founder quote between the icon items and the callout. Callout title and body rewritten to use the Fortnite/Roblox/Minecraft question verbatim; CTA `View more FAQ's → /faq` swapped for `See more questions → #faq` (in-page anchor).
+
+6. **FAQ** expanded from 6 to 13 entries (parent-flow order: age → game → experience → safety → other games → matching → Discord → AM/PM → squad fit → discounts → pricing → after-camp → refund). The wrapper `<section>` gained `id="faq"` plus `scrollMarginTop` for the in-page anchor. Schema: imported `buildFAQPageSchema` from `lib/schema.ts` and now emit a third `<JsonLd>` on the page (the schema builder is the existing single source of truth, no drift).
+
+7. **Sticky CTA** (`components/ui/StickyCTA.tsx`): right-side button `Register for Camp` → `Enroll my gamer`. Left-side "Ready to level up this summer?" left as-is per handoff.
+
+**Voice rules applied:** no em dashes; no reframe constructions; banned-words list scrubbed; sentence case in titles/headers; personal address ("you / your kid").
+
+**Verified:** `tsc --noEmit` clean. Dev preview confirmed: hero renders desktop 2-line + mobile 3-line as specified; "Enroll my gamer" CTA above the fold at 380×800; three rhombus tags fit one row at 380px; coaches section sits between Team Stays Together and 5-Day Progression (verified via DOM section ordering); FAQ has 13 entries; `#faq` anchor resolves; FAQPage JSON-LD ships with 13 entries.
+
+**Flag for Jamie — out of scope this round:** the "Secure Your Slot" red CTA banner mid-page still says `Register for Camp`. After the hero CTA flip to `Enroll my gamer`, this is the only `Register for Camp` left on the marketing page. Handoff said "Don't bundle scope creep — the 8 sections are the entire round," so I left it. Worth a 30-second consistency check next time you're in the file.
+
+**Deferred to v1.3 (per handoff):**
+- Register-side changes: email-first capture above week-selection, dropping the marketing copy at the top of `/register`, wiring the existing `/api/camps/lead` endpoint. Not drafted in this cowork session.
+- Aaron-required visual rounds: deep hero treatment, kid-first LoL section rewrite, dual parent/kid CTAs, Discord parent-education sidebar, kid-squad-fit dedicated treatment.
+
+**Aaron:** zero touch — copy, FAQ, and one component extraction. The new grey-on-grey transition between Team Stays Together and Coaches is yours to redesign in your next round; I deliberately did not improvise on section colors.
+
+---
+
 ## Jamie — May 5, 2026 (Bug fix: Beehiiv has no tag-removal API, segmentation handles "paid wins")
 
 **Why:** Acceptance test #5 from the data-layer push surfaced a bug. The webhook tag-removal step (DELETE form_started_camps + cart_abandoned_camps on payment_intent.succeeded) wasn't actually removing the tags — paid subscribers ended up with all three tags simultaneously: form_started_camps, cart_abandoned_camps, AND camp-2026-purchased. The DELETE call was hitting Beehiiv but silently failing.
@@ -148,6 +182,38 @@ The four other acceptance tests passed:
 5. Run all 5 web acceptance tests above on dev preview.
 6. Open separate PR in `~/Projects/ekuzo-camps` with the read-insights.mjs change and run the script-side acceptance test.
 7. Once verified on dev, merge dev → main on both repos.
+
+---
+
+## Aaron — May 1, 2026 (New `/creators` page — Creator Partnership landing)
+
+**Why:** Creative brief for the EKUZO creator partnership program needed a home. Built standalone HTML mockup first (`creators-landing.html` at repo root, kept for reference / PDF export), then ported into the codebase using real Tungsten Narrow + Inter fonts, real torn-paper PNGs, and the existing component primitives (Nav, Footer, Button, Eyebrow, TornPaperDivider).
+
+**What's new:**
+- `app/creators/page.tsx` — server component, all marketing sections.
+- `components/sections/CreatorApplicationForm.tsx` — `"use client"` form component (4 numbered sections: About you / Your audience / Your gamer / Fit & intent + consent checkbox).
+- `creators-landing.html` (repo root) — the original standalone mockup. Kept because it's useful as a print-to-PDF artifact for outreach. Not linked from the app; can be deleted later if not needed.
+
+**Page structure (mobile-first, scrolls top-to-bottom):** Hero (red, dark Nav variant) → Why we're doing this (grey + pull quote) → The exchange (white, light card + dark card) → The real ask: fill the squad (red, 5-slot squad illustration with kid #1 filled) → Before/During/After story arc (white, 3 cards) → In bounds / Out of bounds (grey, two columns) → How we'll support you + filming-tip chips (white) → Application form (grey, white form card) → Closing band (black, scroll-back-to-form CTA) → Footer.
+
+**Defaults set conservatively for an outreach page:**
+- `robots: { index: false, follow: true }` — surfaced via direct creator outreach, not search. Flip to `index: true` when ready.
+- **NOT** linked from the main nav (`components/layout/Nav.tsx` untouched). Add the link there when ready to surface publicly.
+- Brand voice straight from the brief — no copy invented beyond minor connective tissue.
+
+**Form submission is deliberately stubbed.** Per CLAUDE.md lane boundaries, `app/api/*` is Jamie's territory. The form currently shows a success toast and logs nothing remote. There's a clear `// TODO(jamie)` comment in `CreatorApplicationForm.tsx` describing the intended pipeline: `POST /api/creators/apply` → tag subscriber `creator-applicant` in Beehiiv + write a row to a `creator_applications` tab in the existing fulfillment Sheet (same Apps Script webhook the Stripe handler uses). Mirror `/api/contact` for shape/error handling.
+
+**Verification:**
+- `node node_modules/.bin/tsc --noEmit` → clean (0 errors) on first pass.
+- File-system routing means `/creators` is live the moment the dev server picks up the new file; no nav/router config touched.
+- Standalone HTML mockup separately verified at 9 sections, 10 required form fields, all tags balanced.
+
+**Known follow-ups (not blocking):**
+1. Wire the form to a real API route (Jamie's lane).
+2. Decide whether to keep `creators-landing.html` at repo root or move it to `docs/`.
+3. If/when this becomes public, add a `Course`/`Offer`-style schema to `lib/schema.ts` (or a `WebPage`/`Action` for the application) and surface in nav.
+4. Open Graph image is the default `og-default.png` — swap for a creator-specific OG when art is ready.
+>>>>>>> Stashed changes
 
 ---
 
