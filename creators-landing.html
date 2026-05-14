@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EKUZO Creator Partnership — Apply</title>
+<meta name="description" content="Your kid gets a free spot in EKUZO. You share the journey honestly with your audience and help fill the cohort around them. Apply to partner.">
+<meta name="robots" content="noindex,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   EKUZO Creator Partnership — Standalone Mockup
+   Brand red: #F92524 · Off-white: #EFEEED · Black: #000
+   Display font (live site): Tungsten Narrow. Stand-in: Bebas Neue.
+   Body font: Inter. Letter-spacing on display = 0.02em (matches site).
+   Mobile-first; scales up at 720px and 1080px.
+   ============================================================= */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #F92524;
+  --red-deep: #C81714;
+  --black: #000;
+  --grey: #EFEEED;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --hairline: rgba(0,0,0,0.12);
+  --hairline-light: rgba(255,255,255,0.18);
+  --display: "Bebas Neue", "Tungsten Narrow", "Impact", "Arial Narrow", sans-serif;
+  --body: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+img, svg { max-width: 100%; display: block; }
+
+/* ─── Display type helper ─────────────────────────────────────── */
+.display {
+  font-family: var(--display);
+  font-weight: 400;          /* Bebas is a single weight; live site uses 900 Tungsten */
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+/* ─── Layout container ────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+@media (min-width: 1080px) { .wrap { padding: 0 48px; } }
+
+/* ─── Eyebrow tag ─────────────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  min-height: 52px;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: scale(0.98); filter: brightness(0.92); }
+.btn-red    { background: var(--red); color: #fff; border-color: var(--red); }
+.btn-white  { background: #fff; color: var(--black); border-color: #fff; }
+.btn-outline-white { background: transparent; color: #fff; border-color: #fff; }
+.btn-outline-black { background: transparent; color: var(--black); border-color: var(--black); }
+
+.btn-arrow {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 4px;
+}
+
+/* ─── Torn paper divider (inline SVG, no assets needed) ───────── */
+.tear { display: block; width: 100%; height: 24px; }
+@media (min-width: 720px) { .tear { height: 32px; } }
+
+/* ─── Sections ────────────────────────────────────────────────── */
+section { position: relative; }
+.sec-pad { padding: 72px 0; }
+@media (min-width: 720px) { .sec-pad { padding: 112px 0; } }
+
+.bg-red   { background: var(--red); color: #fff; }
+.bg-grey  { background: var(--grey); color: var(--ink); }
+.bg-black { background: var(--black); color: #fff; }
+.bg-white { background: #fff; color: var(--ink); }
+
+/* ─── Nav ─────────────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.brand {
+  font-family: var(--display);
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-decoration: none;
+}
+.brand-mark { color: var(--red); }
+.nav .btn { padding: 10px 16px; min-height: 40px; font-size: 12px; }
+
+/* ─── HERO ────────────────────────────────────────────────────── */
+.hero {
+  background: var(--red);
+  color: #fff;
+  padding: 56px 0 72px;
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 720px) { .hero { padding: 96px 0 120px; } }
+
+.hero-eyebrow { color: #fff; opacity: 0.92; }
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.88;
+  font-size: clamp(56px, 14vw, 156px);
+  margin-top: 18px;
+}
+.hero h1 .em { display: block; }
+.hero-sub {
+  margin-top: 22px;
+  font-size: clamp(16px, 4.4vw, 22px);
+  line-height: 1.45;
+  max-width: 36ch;
+  font-weight: 400;
+  opacity: 0.96;
+}
+.hero-ctas {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+@media (min-width: 480px) { .hero-ctas { flex-direction: row; align-items: center; } }
+.hero-meta {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--hairline-light);
+  padding-top: 28px;
+}
+@media (min-width: 560px) { .hero-meta { grid-template-columns: repeat(3, 1fr); } }
+.hero-meta-item .num {
+  font-family: var(--display);
+  font-size: clamp(40px, 11vw, 72px);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  display: block;
+}
+.hero-meta-item .lbl {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ─── Section header pattern ──────────────────────────────────── */
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.sec-head h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-size: clamp(40px, 9vw, 88px);
+  max-width: 16ch;
+}
+.sec-head .lede {
+  font-size: clamp(16px, 4vw, 20px);
+  line-height: 1.55;
+  max-width: 60ch;
+  color: var(--muted);
+}
+.bg-red .sec-head .lede,
+.bg-black .sec-head .lede { color: rgba(255,255,255,0.86); }
+
+/* ─── Pull quote ──────────────────────────────────────────────── */
+.pull {
+  margin-top: 32px;
+  padding: 28px 24px;
+  border-left: 4px solid var(--red);
+  background: #fff;
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(28px, 6.5vw, 48px);
+}
+.bg-grey .pull { background: #fff; }
+
+/* ─── Card grid ───────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px)  { .grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 720px)  { .grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card.dark {
+  background: var(--black);
+  color: #fff;
+  border-color: rgba(255,255,255,0.12);
+}
+.card.red {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+
+.card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(28px, 6vw, 40px);
+}
+.card .stage {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.card.dark .stage, .card.red .stage { color: #fff; opacity: 0.85; }
+.card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.card li { font-size: 15px; line-height: 1.5; padding-left: 16px; position: relative; }
+.card li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.6em;
+  width: 6px; height: 6px;
+  background: var(--red);
+}
+.card.dark li::before, .card.red li::before { background: #fff; }
+
+/* ─── Squad row (5 slots) ─────────────────────────────────────── */
+.squad {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+@media (min-width: 560px) { .squad { gap: 14px; } }
+.slot {
+  aspect-ratio: 1 / 1.15;
+  border: 2px dashed rgba(255,255,255,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  font-family: var(--display);
+  font-size: clamp(20px, 5vw, 36px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.slot.filled {
+  border-style: solid;
+  border-color: #fff;
+  background: #fff;
+  color: var(--red);
+}
+.slot small {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ─── In/Out bounds list ──────────────────────────────────────── */
+.bounds {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .bounds { grid-template-columns: 1fr 1fr; } }
+.bound-col h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.bound-col.in h3  { color: var(--ink); }
+.bound-col.in h3::before { content: "✓ "; color: var(--red); }
+.bound-col.out h3 { color: var(--ink); }
+.bound-col.out h3::before { content: "✕ "; color: var(--red); }
+.bound-list { list-style: none; }
+.bound-list li {
+  padding: 14px 0;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.bound-list li:last-child { border-bottom: 1px solid var(--hairline); }
+
+/* ─── Filming tips chips ──────────────────────────────────────── */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--grey);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--hairline);
+}
+.bg-grey .chip { background: #fff; }
+
+/* ─── Form ────────────────────────────────────────────────────── */
+.form-card {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  padding: 24px;
+}
+@media (min-width: 720px) { .form-card { padding: 40px; } }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.form-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  margin-bottom: 18px;
+}
+@media (min-width: 560px) { .form-row.two { grid-template-columns: 1fr 1fr; } }
+.form-row .form-group { margin-bottom: 0; }
+
+.form-section {
+  border-top: 2px solid var(--black);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+.form-section:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.form-section-label {
+  font-family: var(--display);
+  font-size: clamp(20px, 5vw, 28px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+label .req { color: var(--red); margin-left: 2px; }
+.hint { font-size: 12px; color: var(--muted); font-weight: 400; letter-spacing: 0.02em; text-transform: none; margin-top: 2px; }
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--body);
+  font-size: 16px;
+  background: #fff;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+textarea { min-height: 110px; resize: vertical; }
+select { appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='black' d='M0 0h12L6 8z'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; background-size: 10px; padding-right: 38px; }
+input:focus, select:focus, textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(249,37,36,0.15); }
+
+.checks {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 480px) { .checks { grid-template-columns: 1fr 1fr; } }
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 14px;
+  transition: all 120ms ease;
+}
+.checks label:hover { border-color: var(--ink); }
+.checks input { accent-color: var(--red); width: 16px; height: 16px; }
+.checks input:checked + span { font-weight: 600; }
+.checks label:has(input:checked) { border-color: var(--red); background: rgba(249,37,36,0.04); }
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--hairline);
+  background: var(--grey);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.consent input { margin-top: 3px; accent-color: var(--red); }
+
+.submit-row { margin-top: 24px; }
+
+/* ─── Form success message ────────────────────────────────────── */
+.toast {
+  display: none;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #0f3a1a;
+  color: #fff;
+  border-left: 4px solid #4ade80;
+  font-size: 14px;
+}
+.toast.show { display: block; }
+
+/* ─── Closing band ────────────────────────────────────────────── */
+.closing {
+  background: var(--black);
+  color: #fff;
+  text-align: left;
+  padding: 80px 0;
+}
+@media (min-width: 720px) { .closing { padding: 120px 0; } }
+.closing h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-size: clamp(40px, 10vw, 96px);
+  max-width: 14ch;
+}
+.closing p {
+  margin-top: 18px;
+  font-size: clamp(16px, 4vw, 20px);
+  max-width: 50ch;
+  opacity: 0.86;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────── */
+.foot {
+  background: var(--black);
+  color: rgba(255,255,255,0.6);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 28px 0;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.foot-inner { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+@media (min-width: 560px) { .foot-inner { flex-direction: row; justify-content: space-between; align-items: center; } }
+.foot a { color: rgba(255,255,255,0.85); text-decoration: none; border-bottom: 1px solid transparent; }
+.foot a:hover { border-color: rgba(255,255,255,0.5); }
+
+/* ─── Story arc number badges ─────────────────────────────────── */
+.stage-num {
+  font-family: var(--display);
+  font-size: 64px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--red);
+  display: block;
+}
+
+/* ─── Honest band (the exchange) ──────────────────────────────── */
+.exchange {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .exchange { grid-template-columns: 1fr 1fr; } }
+.exchange .card { padding: 28px; }
+
+/* ─── How we support ──────────────────────────────────────────── */
+.support-list {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .support-list { grid-template-columns: 1fr 1fr; } }
+.support-item {
+  padding: 16px 18px;
+  background: #fff;
+  border-left: 4px solid var(--red);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ─── Misc ────────────────────────────────────────────────────── */
+.kicker {
+  font-family: var(--display);
+  font-size: clamp(20px, 5vw, 28px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.bg-red .kicker, .bg-black .kicker { color: #fff; }
+
+</style>
+</head>
+<body>
+
+<!-- ─── Sticky nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">EKUZO<span class="brand-mark">.</span></a>
+    <a href="#apply" class="btn btn-red">Apply</a>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- ─── HERO ───────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow hero-eyebrow">Creator Partnership · 2026</span>
+    <h1>
+      <span class="em">Your kid plays.</span>
+      <span class="em">We'll build</span>
+      <span class="em">the team</span>
+      <span class="em">around them.</span>
+    </h1>
+    <p class="hero-sub">
+      EKUZO is offering creator families a free spot — and a cohort to fill around your gamer. You share the journey honestly. We make sure the experience is worth telling.
+    </p>
+    <div class="hero-ctas">
+      <a href="#apply" class="btn btn-white">Apply to partner <span class="btn-arrow"></span></a>
+      <a href="#why" class="btn btn-outline-white">Read the brief</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="num">1</span>
+        <span class="lbl">Free spot for your kid</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="num">5+</span>
+        <span class="lbl">Squad cohort to fill</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="num">0</span>
+        <span class="lbl">Scripts, scenes, or sales pitches</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Torn paper: red → grey -->
+<svg class="tear" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,0 L60,9 L120,3 L180,14 L240,6 L300,17 L360,4 L420,12 L480,2 L540,10 L600,6 L660,15 L720,3 L780,12 L840,7 L900,17 L960,4 L1020,13 L1080,3 L1140,12 L1200,6 L1260,16 L1320,4 L1380,13 L1440,6 L1440,28 L0,28 Z" fill="#EFEEED"/>
+</svg>
+
+<!-- ─── WHY ────────────────────────────────────────────────────── -->
+<section class="bg-grey sec-pad" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why we're doing this</span>
+      <h2>Gaming already matters to kids.</h2>
+      <p class="lede">
+        EKUZO exists because we believe gaming can matter in a way parents trust, too. Kids already show up for games with focus, energy, and motivation. We built the system around that — real coaches, real teams, structured practice, competition, learning, and safety. Your role is to help make that real for other families. Not by selling. Not by performing. By showing what happens when your kid experiences gaming with structure around it.
+      </p>
+    </div>
+    <div class="pull">
+      The best content<br>
+      helps another parent think:<br>
+      <span style="color:var(--red);">"That feels like my kid."</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE EXCHANGE ──────────────────────────────────────────── -->
+<section class="bg-white sec-pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The exchange</span>
+      <h2>What you give. What your kid gets.</h2>
+    </div>
+    <div class="exchange">
+      <div class="card">
+        <span class="stage">Your kid receives</span>
+        <h3>A free spot in EKUZO.</h3>
+        <ul>
+          <li>Real coaches who know their name</li>
+          <li>A real team — not random matchmaking</li>
+          <li>Structured practice, competition, and feedback</li>
+          <li>A safer, moderated space to play</li>
+        </ul>
+      </div>
+      <div class="card dark">
+        <span class="stage">In return, we ask</span>
+        <h3>Tell the story honestly.</h3>
+        <ul>
+          <li>Share the journey on your channel, in your voice</li>
+          <li>You own everything you post</li>
+          <li>We may repost public content with credit</li>
+          <li>Paid ads = a separate conversation, a separate yes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE REAL ASK: FILL THE COHORT ─────────────────────────── -->
+<section class="bg-red sec-pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The real ask</span>
+      <h2>Help us fill the squad around your kid.</h2>
+      <p class="lede">
+        EKUZO is team-based. The experience gets stronger when friends, siblings, classmates, or families in your audience join the same cohort. If five kids join, they become a squad. More than that, and they compete together. The most valuable thing you can do isn't a polished post — it's an invitation.
+      </p>
+    </div>
+
+    <div class="squad" aria-label="Squad slot illustration">
+      <div class="slot filled">
+        1
+        <small>Your kid</small>
+      </div>
+      <div class="slot">2<small>Open</small></div>
+      <div class="slot">3<small>Open</small></div>
+      <div class="slot">4<small>Open</small></div>
+      <div class="slot">5<small>Open</small></div>
+    </div>
+
+    <div style="margin-top:36px; max-width:60ch; font-size:clamp(16px,4vw,20px); line-height:1.55; opacity:0.96;">
+      <em style="font-style:normal; font-weight:600;">"Here's what we're trying. Here's why my kid is excited. Here's the cohort we're joining. Who wants to do this with us?"</em>
+    </div>
+  </div>
+</section>
+
+<!-- Torn paper: red → white -->
+<svg class="tear" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true" style="background:var(--red);">
+  <path d="M0,28 L0,8 L60,16 L120,4 L180,18 L240,8 L300,20 L360,6 L420,16 L480,3 L540,14 L600,7 L660,18 L720,5 L780,15 L840,9 L900,20 L960,5 L1020,16 L1080,4 L1140,15 L1200,7 L1260,19 L1320,5 L1380,16 L1440,7 L1440,28 Z" fill="#fff"/>
+</svg>
+
+<!-- ─── STORY ARC ─────────────────────────────────────────────── -->
+<section class="bg-white sec-pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Content direction · The arc</span>
+      <h2>Before, during, after.</h2>
+      <p class="lede">
+        Every strong EKUZO story follows one shape: gaming matters → EKUZO built a system around it → families start seeing something different. The outcomes are observed, not claimed. We don't need you to promise transformation. We want you to notice real moments and help other parents see what structured gaming can look like.
+      </p>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="card">
+        <span class="stage-num">01</span>
+        <span class="stage">Before</span>
+        <h3>Why we're trying this.</h3>
+        <ul>
+          <li>Kid interested in competitive gaming</li>
+          <li>Family tension around screen time</li>
+          <li>Wanting safer online play</li>
+          <li>Trying to find teammates</li>
+          <li>Inviting other families to join the cohort</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="stage-num">02</span>
+        <span class="stage">During</span>
+        <h3>What we're noticing.</h3>
+        <ul>
+          <li>Coach knew their name</li>
+          <li>Real teammates, not strangers</li>
+          <li>Actual practice structure</li>
+          <li>Kid taking it seriously</li>
+          <li>Less random play, more purpose</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="stage-num">03</span>
+        <span class="stage">After</span>
+        <h3>What stuck.</h3>
+        <ul>
+          <li>New friends</li>
+          <li>More confidence</li>
+          <li>Better communication</li>
+          <li>A different relationship with gaming</li>
+          <li>Wanting to keep going</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="margin-top:28px; max-width:60ch; font-size:15px; line-height:1.6; color:var(--muted);">
+      Feature your kid whenever it feels natural. Their excitement, questions, reactions, and pride <em>are</em> the story. Nothing beats a genuine kid moment.
+    </p>
+  </div>
+</section>
+
+<!-- ─── IN BOUNDS / OUT OF BOUNDS ─────────────────────────────── -->
+<section class="bg-grey sec-pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Guardrails</span>
+      <h2>What's in. What's out.</h2>
+    </div>
+
+    <div class="bounds">
+      <div class="bound-col in">
+        <h3>In bounds</h3>
+        <ul class="bound-list">
+          <li>Use your real voice.</li>
+          <li>Share honest hesitation, curiosity, and surprise.</li>
+          <li>Show your kid's genuine excitement.</li>
+          <li>Invite your community to join your kid's cohort.</li>
+          <li>Talk about what you observe.</li>
+          <li>Make it feel like your normal content.</li>
+        </ul>
+      </div>
+      <div class="bound-col out">
+        <h3>Out of bounds</h3>
+        <ul class="bound-list">
+          <li>Don't script your kid.</li>
+          <li>Don't claim outcomes you didn't personally observe.</li>
+          <li>Don't force a scene that didn't happen.</li>
+          <li>Don't make it feel like a polished commercial.</li>
+          <li>Don't share private info about other kids or families without permission.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW WE SUPPORT ────────────────────────────────────────── -->
+<section class="bg-white sec-pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How we'll support you</span>
+      <h2>Prompts, not scripts.</h2>
+      <p class="lede">
+        We'll send simple prompts and short idea videos along the way, especially before the cohort begins. They're there to help, not to box you in. You post in the format and cadence that fits your audience.
+      </p>
+    </div>
+
+    <div class="support-list">
+      <div class="support-item">Idea videos and short prompt drops in the weeks before the cohort kicks off.</div>
+      <div class="support-item">Optional one or two test clips so you feel confident before anything goes live.</div>
+      <div class="support-item">A direct line to our team for questions, talking points, or quick reviews.</div>
+      <div class="support-item">A shareable cohort page so your audience can join your kid's squad in one click.</div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <span class="kicker">Filming tips</span>
+      <div class="chips" style="margin-top:8px;">
+        <span class="chip">Film vertical</span>
+        <span class="chip">Centered faces &amp; action</span>
+        <span class="chip">Lead with the real moment</span>
+        <span class="chip">Let your kid talk</span>
+        <span class="chip">Use captions if your audience expects them</span>
+        <span class="chip">Short is fine</span>
+        <span class="chip">Real over polished</span>
+        <span class="chip">Post like yourself</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Torn paper: white → grey -->
+<svg class="tear" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,0 L60,11 L120,3 L180,15 L240,7 L300,18 L360,4 L420,13 L480,2 L540,11 L600,6 L660,17 L720,4 L780,13 L840,8 L900,18 L960,4 L1020,14 L1080,3 L1140,13 L1200,6 L1260,17 L1320,4 L1380,14 L1440,7 L1440,28 L0,28 Z" fill="#EFEEED"/>
+</svg>
+
+<!-- ─── APPLICATION FORM ──────────────────────────────────────── -->
+<section class="bg-grey sec-pad" id="apply">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Apply to partner</span>
+      <h2>Tell us a little about your family.</h2>
+      <p class="lede">
+        We read every application. We'll get back to you within a week with a yes, a not-yet, or a question. Takes about 4 minutes.
+      </p>
+    </div>
+
+    <form class="form-card" id="creator-apply" novalidate>
+
+      <!-- 1: About you -->
+      <div class="form-section">
+        <div class="form-section-label">1 — About you</div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="firstName">First name <span class="req">*</span></label>
+            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name <span class="req">*</span></label>
+            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="location">City &amp; state</label>
+          <input id="location" name="location" type="text" autocomplete="address-level2" placeholder="e.g. Austin, TX">
+        </div>
+      </div>
+
+      <!-- 2: Your audience -->
+      <div class="form-section">
+        <div class="form-section-label">2 — Your audience</div>
+        <div class="form-group">
+          <label>Primary platforms <span class="req">*</span><span class="hint">Select all that apply</span></label>
+          <div class="checks">
+            <label><input type="checkbox" name="platforms" value="Instagram"><span>Instagram</span></label>
+            <label><input type="checkbox" name="platforms" value="TikTok"><span>TikTok</span></label>
+            <label><input type="checkbox" name="platforms" value="YouTube"><span>YouTube</span></label>
+            <label><input type="checkbox" name="platforms" value="Twitch"><span>Twitch</span></label>
+            <label><input type="checkbox" name="platforms" value="X / Twitter"><span>X / Twitter</span></label>
+            <label><input type="checkbox" name="platforms" value="Newsletter / Substack"><span>Newsletter</span></label>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="handles">Handle(s) or links <span class="req">*</span></label>
+            <input id="handles" name="handles" type="text" placeholder="@yourhandle, youtube.com/..." required>
+          </div>
+          <div class="form-group">
+            <label for="audienceSize">Total audience size <span class="req">*</span></label>
+            <select id="audienceSize" name="audienceSize" required>
+              <option value="">Select a range…</option>
+              <option>Under 5,000</option>
+              <option>5,000 – 25,000</option>
+              <option>25,000 – 100,000</option>
+              <option>100,000 – 500,000</option>
+              <option>500,000 – 1M</option>
+              <option>1M+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="audienceDesc">Who is your audience? <span class="hint">A sentence or two on who watches you and why.</span></label>
+          <textarea id="audienceDesc" name="audienceDesc" placeholder="Mostly parents of 8–14 year olds in the US. They follow me for…"></textarea>
+        </div>
+      </div>
+
+      <!-- 3: Your gamer -->
+      <div class="form-section">
+        <div class="form-section-label">3 — Your gamer</div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="kidName">Kid's first name <span class="req">*</span></label>
+            <input id="kidName" name="kidName" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="kidAge">Age <span class="req">*</span></label>
+            <input id="kidAge" name="kidAge" type="number" min="6" max="18" required>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="games">Favorite game(s) <span class="req">*</span></label>
+            <input id="games" name="games" type="text" placeholder="e.g. Fortnite, Rocket League, Valorant" required>
+          </div>
+          <div class="form-group">
+            <label for="skill">Skill level</label>
+            <select id="skill" name="skill">
+              <option value="">Select…</option>
+              <option>Brand new — just getting into it</option>
+              <option>Casual — plays a few times a week</option>
+              <option>Serious — knows their game well</option>
+              <option>Competitive — already playing ranked or tournaments</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: Fit + intent -->
+      <div class="form-section">
+        <div class="form-section-label">4 — Fit &amp; intent</div>
+        <div class="form-group">
+          <label for="why">Why is this interesting to you and your kid? <span class="req">*</span></label>
+          <textarea id="why" name="why" placeholder="Whatever's true. We're not looking for a perfect answer." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Content formats you'd be comfortable making<span class="hint">Optional — pick whatever fits your normal cadence</span></label>
+          <div class="checks">
+            <label><input type="checkbox" name="formats" value="Reels / TikToks"><span>Reels / TikToks</span></label>
+            <label><input type="checkbox" name="formats" value="YouTube shorts"><span>YouTube shorts</span></label>
+            <label><input type="checkbox" name="formats" value="YouTube long-form"><span>YouTube long-form</span></label>
+            <label><input type="checkbox" name="formats" value="Stories"><span>Stories</span></label>
+            <label><input type="checkbox" name="formats" value="Live streaming"><span>Live streaming</span></label>
+            <label><input type="checkbox" name="formats" value="Newsletter / blog post"><span>Newsletter / blog</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cohort">How many kids do you think you could rally into the cohort?</label>
+          <select id="cohort" name="cohort">
+            <option value="">Just a guess is fine…</option>
+            <option>Just mine for now</option>
+            <option>2 – 4 kids</option>
+            <option>5 – 9 kids (full squad +)</option>
+            <option>10 – 24 kids</option>
+            <option>25+ kids</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Consent -->
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>I understand I own everything I post, EKUZO may repost public content with credit, and any use in paid ads will be a separate conversation and a separate yes.</span>
+      </label>
+
+      <div class="submit-row">
+        <button type="submit" class="btn btn-red" style="width:100%; max-width:320px;">
+          Send my application <span class="btn-arrow"></span>
+        </button>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite">
+        <strong>Got it.</strong> We'll be in touch within a week. Look for an email from <em>partners@ekuzo.gg</em>.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ─── CLOSING ───────────────────────────────────────────────── -->
+<section class="closing">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--red);">The heart of it</span>
+    <h2 style="margin-top:14px;">Gaming matters. You tell the story honestly.</h2>
+    <p>We'll make sure the experience is worth telling.</p>
+    <div style="margin-top:32px;">
+      <a href="#apply" class="btn btn-red">Apply to partner <span class="btn-arrow"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ────────────────────────────────────────────────── -->
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div>© EKUZO 2026 · Creator Partnership</div>
+    <div>
+      Questions? <a href="mailto:partners@ekuzo.gg">partners@ekuzo.gg</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Lightweight mockup-only form handler.
+  // Real submission target (Beehiiv / Sheets / API route) wired during port.
+  document.getElementById('creator-apply').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    toast.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    this.querySelector('button[type="submit"]').textContent = 'Application sent ✓';
+  });
+</script>
+
+</body>
+</html>

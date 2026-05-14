@@ -103,6 +103,38 @@ The four other acceptance tests passed:
 
 ---
 
+## Aaron — May 1, 2026 (New `/creators` page — Creator Partnership landing)
+
+**Why:** Creative brief for the EKUZO creator partnership program needed a home. Built standalone HTML mockup first (`creators-landing.html` at repo root, kept for reference / PDF export), then ported into the codebase using real Tungsten Narrow + Inter fonts, real torn-paper PNGs, and the existing component primitives (Nav, Footer, Button, Eyebrow, TornPaperDivider).
+
+**What's new:**
+- `app/creators/page.tsx` — server component, all marketing sections.
+- `components/sections/CreatorApplicationForm.tsx` — `"use client"` form component (4 numbered sections: About you / Your audience / Your gamer / Fit & intent + consent checkbox).
+- `creators-landing.html` (repo root) — the original standalone mockup. Kept because it's useful as a print-to-PDF artifact for outreach. Not linked from the app; can be deleted later if not needed.
+
+**Page structure (mobile-first, scrolls top-to-bottom):** Hero (red, dark Nav variant) → Why we're doing this (grey + pull quote) → The exchange (white, light card + dark card) → The real ask: fill the squad (red, 5-slot squad illustration with kid #1 filled) → Before/During/After story arc (white, 3 cards) → In bounds / Out of bounds (grey, two columns) → How we'll support you + filming-tip chips (white) → Application form (grey, white form card) → Closing band (black, scroll-back-to-form CTA) → Footer.
+
+**Defaults set conservatively for an outreach page:**
+- `robots: { index: false, follow: true }` — surfaced via direct creator outreach, not search. Flip to `index: true` when ready.
+- **NOT** linked from the main nav (`components/layout/Nav.tsx` untouched). Add the link there when ready to surface publicly.
+- Brand voice straight from the brief — no copy invented beyond minor connective tissue.
+
+**Form submission is deliberately stubbed.** Per CLAUDE.md lane boundaries, `app/api/*` is Jamie's territory. The form currently shows a success toast and logs nothing remote. There's a clear `// TODO(jamie)` comment in `CreatorApplicationForm.tsx` describing the intended pipeline: `POST /api/creators/apply` → tag subscriber `creator-applicant` in Beehiiv + write a row to a `creator_applications` tab in the existing fulfillment Sheet (same Apps Script webhook the Stripe handler uses). Mirror `/api/contact` for shape/error handling.
+
+**Verification:**
+- `node node_modules/.bin/tsc --noEmit` → clean (0 errors) on first pass.
+- File-system routing means `/creators` is live the moment the dev server picks up the new file; no nav/router config touched.
+- Standalone HTML mockup separately verified at 9 sections, 10 required form fields, all tags balanced.
+
+**Known follow-ups (not blocking):**
+1. Wire the form to a real API route (Jamie's lane).
+2. Decide whether to keep `creators-landing.html` at repo root or move it to `docs/`.
+3. If/when this becomes public, add a `Course`/`Offer`-style schema to `lib/schema.ts` (or a `WebPage`/`Action` for the application) and surface in nav.
+4. Open Graph image is the default `og-default.png` — swap for a creator-specific OG when art is ready.
+>>>>>>> Stashed changes
+
+---
+
 ## Jamie — April 29, 2026 (Tactical updates: Limited-Time framing + scroll-to-error UX + popup gate)
 
 **Why:** Three loosely related copy/UX fixes that had been queued up. None individually big, but the bundle clears them in one session and one merge to prod.
