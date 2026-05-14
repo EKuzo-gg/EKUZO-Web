@@ -69,8 +69,8 @@ const WEEKS: Week[] = [
 ];
 
 const SLOT_HOURS = {
-  AM: "9:00 AM — 12:00 PM",
-  PM: "1:00 PM — 4:00 PM",
+  AM: "9:00 AM to 12:00 PM",
+  PM: "1:00 PM to 4:00 PM",
 };
 
 const GAMES = [
@@ -629,94 +629,46 @@ export default function CampsRegisterPage() {
       <TornPaperClipDefs />
 
       {/* ── Hero Section ───────────────────────────────────────────────── */}
+      {/* Utility hero: cold paid traffic arrives here past the LP pitch.
+          Eyebrow + tight H1 only. The marketing block that lived here
+          previously (CAMP REGISTRATION wordmark, hero collage, EKUZO100
+          cross-link paragraph) was eating ~700-900px of mobile fold space
+          and contradicting the LP's "act now" energy. Recordings showed
+          5 of 5 ad-driven prospects scrolling past it without typing into
+          a field, then bailing at the week selector. Hero now keeps brand
+          visual identity (grey band + torn-paper transition) but stays
+          short so the email-first capture and week selector land near
+          first paint on the FB/IG in-app browser viewport. */}
       <section className="relative bg-[#f5f5f7]" style={{ overflow: "clip" }}>
         <div
-          className="max-w-[1280px] mx-auto relative pb-36 lg:pb-72"
-          style={{ paddingTop: "100px", paddingLeft: "24px", paddingRight: "24px" }}
+          className="max-w-[1280px] mx-auto"
+          style={{ paddingTop: "80px", paddingBottom: "64px", paddingLeft: "24px", paddingRight: "24px" }}
         >
-          {/* Left content */}
-          <div className="relative z-10 flex flex-col items-start" style={{ gap: "24px", maxWidth: "544px" }}>
-            {/* Season eyebrow + heading grouped tighter */}
-            <div className="flex flex-col gap-3">
-              <Eyebrow>
-                <span className="inline-flex items-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M5 1.5V4M11 1.5V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M2 6.5H14" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                  Summer 2026 Season
-                </span>
-              </Eyebrow>
+          <div className="flex flex-col gap-3" style={{ maxWidth: "720px" }}>
+            <Eyebrow>
+              <span className="inline-flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M5 1.5V4M11 1.5V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M2 6.5H14" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+                Summer 2026 season
+              </span>
+            </Eyebrow>
 
-              {/* Heading */}
-              <h1
-                className="font-display uppercase"
-                style={{ fontSize: "clamp(4rem, 6.25vw, 120px)", lineHeight: "0.85" }}
-              >
-              <span style={{ color: "#0a0a0a" }}>CAMP </span>
-              <span style={{ color: "#ed2024" }}>REGISTRATION</span>
+            <h1
+              className="font-display uppercase"
+              style={{ fontSize: "clamp(3.5rem, 6.5vw, 6.5rem)", lineHeight: "0.85" }}
+            >
+              <span style={{ color: "#0a0a0a" }}>Enroll your </span>
+              <span style={{ color: "#ed2024" }}>gamer</span>
             </h1>
-            </div>
-
-            {/* Red subtitle */}
-            <p
-              className="font-body font-bold"
-              style={{ color: "#000000", fontSize: "clamp(1rem, 1.4vw, 20px)", lineHeight: "28px" }}
-            >
-              Join us for an incredible week of gaming, learning, and competition.
-            </p>
-
-            {/* Body copy */}
-            <div
-              className="font-body"
-              style={{ color: "#374151", fontSize: "clamp(0.9375rem, 1.25vw, 18px)", lineHeight: "28px" }}
-            >
-              <p>
-                <span style={{ color: "#374151" }}>EKUZO</span>
-                <span className="font-bold" style={{ color: "#000000" }}>CAMP</span>
-                <span style={{ color: "#374151" }}>{" "}is a week long esports camp for beginners to intermediate players. However, it will challenge all skill levels.</span>
-              </p>
-              <p style={{ lineHeight: "32px" }}>&nbsp;</p>
-              <p style={{ color: "#374151" }}>
-                If you&apos;re looking for multiple weeks please enroll in{" "}
-                <a href="/programs/ekuzo100" className="font-bold underline" style={{ color: "#ed2024" }}>
-                  EKUZO100
-                </a>
-                . Our month long program perfect for those looking to level up.
-              </p>
-            </div>
           </div>
         </div>
 
-        {/* Hero collage — desktop: absolute right half; mobile: below content */}
-        {/* Desktop */}
-        <div
-          className="hidden lg:block absolute pointer-events-none"
-          style={{ bottom: "0", left: "46%", width: "1300px", maxWidth: "65%", height: "105%", overflow: "hidden" }}
-        >
-          <Image
-            src="/images/camp-hero-collage.png"
-            alt="EKUZO Camp hero collage with game characters and young gamer"
-            width={1822}
-            height={1112}
-            className="w-full h-full object-contain object-bottom"
-            priority
-          />
-        </div>
-        {/* Mobile */}
-        <div className="lg:hidden relative w-full -mt-24 mb-0 overflow-hidden">
-          <Image
-            src="/images/camp-hero-collage.png"
-            alt="EKUZO Camp hero collage with game characters and young gamer"
-            width={1822}
-            height={1112}
-            className="w-[115%] max-w-none h-auto object-contain -ml-[5%]"
-            priority
-          />
-        </div>
-
-        {/* White torn paper overlay — anchored to bottom of hero, overlapping only the image */}
+        {/* White torn paper overlay — keeps the grey-to-white transition
+            consistent with the LP's torn-paper aesthetic even with the
+            shorter hero. */}
         <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none translate-y-[55%]">
           <Image
             src="/images/torn-paper-white-1.png"
@@ -746,7 +698,7 @@ export default function CampsRegisterPage() {
                 className="font-body mt-2"
                 style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "24px" }}
               >
-                EKUZO Camp — {joiningCrewInfo.week_label} ({joiningCrewInfo.week_dates}) {joiningCrewInfo.slot}.
+                EKUZO Camp, {joiningCrewInfo.week_label} ({joiningCrewInfo.week_dates}) {joiningCrewInfo.slot}.
                 We&apos;ve pre-selected this week for you below.
               </p>
             </div>
@@ -768,6 +720,50 @@ export default function CampsRegisterPage() {
               ))}
             </div>
           )}
+
+          {/* ── Email-first capture ─────────────────────────────────────
+              Highest-leverage move on the page. Sits above the week
+              selector so the bail cohort (5/5 ad-driven prospects on
+              FB/IG in-app browser mobile in the 5/12 recordings; none
+              typed into a field) leaves us with an email and a Beehiiv
+              form_started_camps tag before they hit the week-selection
+              cliff. Shares parent.email state with the parent email
+              field further down the form, so typing in either view
+              updates the other and submitting with the bottom field
+              empty after typing here will still pass validation. Fires
+              the existing handleEmailBlur (POST /api/camps/lead,
+              idempotent on email; see /api/camps/lead/route.ts) on
+              blur so we don't spam Beehiiv on every keystroke. Shares
+              the parent.email data-error-key so validation focus on
+              empty email lands on this field first (DOM order). */}
+          <div className="mb-12" style={{ scrollMarginTop: "100px" }}>
+            <label
+              htmlFor="parent-email-top"
+              className="font-body font-bold text-[#374151] block mb-2"
+              style={{ fontSize: "14px", lineHeight: "20px" }}
+            >
+              Your email *
+            </label>
+            <p
+              className="font-body text-[#4b5563] mb-3"
+              style={{ fontSize: "13px", lineHeight: "20px" }}
+            >
+              Enter your email so we can reach out if you don&apos;t finish today.
+            </p>
+            <input
+              id="parent-email-top"
+              data-error-key="parent.email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              value={parent.email}
+              onChange={(e) => setParent((p) => ({ ...p, email: e.target.value }))}
+              onBlur={handleEmailBlur}
+              placeholder="your.email@example.com"
+              className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af] w-full"
+              style={{ fontSize: "16px", lineHeight: "normal" }}
+            />
+          </div>
 
           {/* ── Per-gamer sections ─────────────────────────────────── */}
           {gamers.map((gamer, gi) => (
@@ -829,7 +825,7 @@ export default function CampsRegisterPage() {
                               lineHeight: "1.1",
                             }}
                           >
-                            {selectedWeek?.label} — {selectedWeek?.dates}
+                            {selectedWeek?.label}: {selectedWeek?.dates}
                           </span>
                           <span
                             className="font-body text-[#0a0a0a]"
@@ -838,7 +834,7 @@ export default function CampsRegisterPage() {
                             {gamer.selectedSlot === "AM"
                               ? "Morning"
                               : "Afternoon"}{" "}
-                            Session (
+                            session (
                             {gamer.selectedSlot
                               ? SLOT_HOURS[gamer.selectedSlot]
                               : ""}
@@ -941,7 +937,7 @@ export default function CampsRegisterPage() {
                             {/* Slot cards */}
                             <div className="flex flex-col gap-4">
                               <SessionCard
-                                sessionLabel="Morning Session"
+                                sessionLabel="Morning session"
                                 slotLabel="AM"
                                 hours={SLOT_HOURS.AM}
                                 urgency={week.amUrgency}
@@ -953,7 +949,7 @@ export default function CampsRegisterPage() {
                                 }
                               />
                               <SessionCard
-                                sessionLabel="Afternoon Session"
+                                sessionLabel="Afternoon session"
                                 slotLabel="PM"
                                 hours={SLOT_HOURS.PM}
                                 urgency={week.pmUrgency}
@@ -994,7 +990,7 @@ export default function CampsRegisterPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
                   <InputField
-                    label="First Name *"
+                    label="First name *"
                     required
                     errorKey={`gamer-${gi}.firstName`}
                     value={gamer.firstName}
@@ -1002,7 +998,7 @@ export default function CampsRegisterPage() {
                     placeholder="Enter first name"
                   />
                   <InputField
-                    label="Last Name *"
+                    label="Last name *"
                     required
                     errorKey={`gamer-${gi}.lastName`}
                     value={gamer.lastName}
@@ -1013,17 +1009,17 @@ export default function CampsRegisterPage() {
 
                 <div className="mt-6">
                   <InputField
-                    label="Gamer Tag / Username"
+                    label="Gamer tag / username"
                     value={gamer.gamerTag}
                     onChange={(v) => updateGamer(gi, { gamerTag: v })}
                     placeholder="Enter gamer tag"
                   />
                 </div>
 
-                {/* Favorite Games — 4-col checkbox grid */}
+                {/* Favorite games — 4-col checkbox grid */}
                 <div className="mt-6" style={{ scrollMarginTop: "100px" }} data-error-key={`gamer-${gi}.preferredGames`} tabIndex={-1}>
                   <label className="font-body font-bold text-[#374151] block mb-3" style={{ fontSize: "14px", lineHeight: "20px" }}>
-                    Favorite Games * (Select all that apply)
+                    Favorite games * (select all that apply)
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
                     {GAMES.map((game) => {
@@ -1063,7 +1059,7 @@ export default function CampsRegisterPage() {
                     placeholder="Select gender"
                   />
                   <SelectField
-                    label="Gaming Experience *"
+                    label="Gaming experience *"
                     errorKey={`gamer-${gi}.skillLevel`}
                     value={gamer.skillLevel}
                     onChange={(v) => updateGamer(gi, { skillLevel: v })}
@@ -1086,7 +1082,7 @@ export default function CampsRegisterPage() {
             onClick={addGamer}
             className="w-full py-4 border-2 border-dashed border-black/20 rounded-sm font-body font-semibold text-black/50 hover:border-red/40 hover:text-red/70 hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 cursor-pointer mb-12"
           >
-            + Add Another Gamer
+            + Add another gamer
           </button>
 
           {/* ── Team Status (vibe check) ───────────────────────────── */}
@@ -1137,18 +1133,22 @@ export default function CampsRegisterPage() {
           )}
 
           {/* ── Parent / Guardian Info ─────────────────────────────── */}
+          {/* Note: the email field below is wired to the same parent.email
+              state as the email-first capture at the top of the form. Both
+              fire handleEmailBlur on blur. If the parent typed at the top,
+              this field renders pre-filled; they can still edit here. */}
           <hr className="border-t border-black/10 my-12" />
           <div className="mb-12">
             <h2
               className="font-display uppercase text-black leading-[0.85] mb-10"
               style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
             >
-              Parent Information
+              Parent information
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
               <InputField
-                label="Parent First Name *"
+                label="Parent first name *"
                 required
                 errorKey="parent.firstName"
                 value={parent.firstName}
@@ -1156,7 +1156,7 @@ export default function CampsRegisterPage() {
                 placeholder="Enter first name"
               />
               <InputField
-                label="Parent Last Name *"
+                label="Parent last name *"
                 required
                 errorKey="parent.lastName"
                 value={parent.lastName}
@@ -1174,7 +1174,7 @@ export default function CampsRegisterPage() {
                 placeholder="your.email@example.com"
               />
               <InputField
-                label="Phone Number *"
+                label="Phone number *"
                 type="tel"
                 errorKey="parent.phone"
                 value={parent.phone}
@@ -1215,7 +1215,7 @@ export default function CampsRegisterPage() {
                 className="font-display uppercase text-[#0a0a0a]"
                 style={{ fontSize: "clamp(2rem, 3vw, 28px)", lineHeight: "1.1" }}
               >
-                Registration Summary
+                Registration summary
               </h3>
             </div>
 
@@ -1235,10 +1235,10 @@ export default function CampsRegisterPage() {
                             {s.gamerName}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
-                            {s.weekLabel} — {s.weekDates}
+                            {s.weekLabel}: {s.weekDates}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
-                            {s.slot === "AM" ? "Morning" : "Afternoon"} Session ({s.slotHours})
+                            {s.slot === "AM" ? "Morning" : "Afternoon"} session ({s.slotHours})
                           </span>
                         </div>
                         <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap flex items-baseline gap-1.5">
@@ -1259,7 +1259,7 @@ export default function CampsRegisterPage() {
               {selectedGamerSummaries.length > 0 && (
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
                   <span className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "16px" }}>
-                    Total (Limited-Time Pricing)
+                    Total (limited-time pricing)
                   </span>
                   <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
                     ${totalPrice}
@@ -1516,8 +1516,8 @@ function SessionCard({
 }) {
   const urgencyStyles: Record<SlotUrgency, { bg: string; text: string; label: string }> = {
     available: { bg: "bg-[#dcfce7]", text: "text-[#15803d]", label: "Available" },
-    "filling-fast": { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Filling Fast" },
-    limited: { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Only a Few Left" },
+    "filling-fast": { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Filling fast" },
+    limited: { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Only a few left" },
   };
 
   const u = urgencyStyles[urgency ?? "available"];
@@ -1557,7 +1557,7 @@ function SessionCard({
         }`}
       >
         <span className="font-body font-bold" style={{ fontSize: "14px", lineHeight: "20px" }}>
-          Book {slotLabel} Slot
+          Book {slotLabel} slot
         </span>
       </button>
     </div>
