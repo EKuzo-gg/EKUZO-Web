@@ -35,13 +35,16 @@ export default function FooterBanner({
           bottom of the paper sits flush with the top of the red section (red
           on red = seamless), while the TORN top edge extends up into whatever
           section is above, creating a jagged red silhouette. Works over any
-          preceding background color (white/black/grey) — no per-page prop. */}
+          preceding background color (white/black/grey) — no per-page prop.
+          The 1px overlap (-100% + 1px) closes a hairline gap that shows up
+          on non-white backgrounds (e.g. blog posts with a grey Keep Reading
+          section above the banner). The overlap is red-on-red so invisible. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
         alt=""
         className="absolute top-0 left-0 w-full z-20 pointer-events-none select-none"
-        style={{ transform: "translateY(-100%)" }}
+        style={{ transform: "translateY(calc(-100% + 1px))" }}
         aria-hidden="true"
       />
 

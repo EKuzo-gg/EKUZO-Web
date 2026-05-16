@@ -47,6 +47,17 @@ const posts = [
     image: "/images/blog-post-3-card.jpg",
     featured: false,
   },
+  {
+    slug: "league-of-legends-youth-development",
+    title: "Why League of Legends is perfect for youth development",
+    date: "May 16, 2026",
+    author: "Karlin",
+    category: "Guides",
+    excerpt:
+      "Why League of Legends works for youth development when the structure is right. The honest answer on toxicity and what coached play actually teaches kids.",
+    image: "/images/blog-post-4-card.jpg",
+    featured: false,
+  },
 ];
 
 export default function BlogPage() {

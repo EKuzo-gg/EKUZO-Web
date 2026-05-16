@@ -6,6 +6,57 @@
 
 ---
 
+## Jamie — May 16, 2026 (New blog post: Why League of Legends is perfect for youth development + FooterBanner grey-line fix)
+
+**What shipped:** Fourth blog post at `/blog/league-of-legends-youth-development`. Karlin-authored parent-facing guide on why League of Legends works for structured youth development — 10 question-form H2s, embedded Karlin Instagram reel under the Jynxzi H2, and a 5-item FAQ. Bidirectional cross-link with the summer-camps post (anchor text on the new post links back to summer-camps' deeper camps explainer; summer-camps' "Why League" section gains an inline link to this new post).
+
+**New shared component:**
+
+- `components/blog/InstagramEmbed.tsx` — responsive 9:16 iframe wrapper for Instagram reels. Props: `url`, optional `caption`, optional `maxWidth` (default 540px). Normalizes the trailing slash on the embed URL so callers don't have to think about it.
+
+**Schema layer (full LLM / AI-citation surface):**
+
+- Reuses `buildBlogArticleSchema` + `buildBlogPostBreadcrumbSchema` from the prior session.
+- Adds `buildFAQPageSchema` to the post — the 5 Q&As from the FAQ section render as standalone `Question` / `Answer` nodes. Lets Google AI Overviews / Perplexity / ChatGPT pull individual Q&A pairs as separate citations.
+- Article author references the existing `coachKarlinSchema` Person via `@id` (no duplication in the graph).
+- `app/sitemap.ts` and `public/llms.txt` both updated with the new post so AI crawlers and search engines pick it up immediately.
+
+**FooterBanner grey-line bug fix (visible bug Jamie flagged in the screenshot):**
+
+- The red torn-paper PNG at the top of `FooterBanner` was positioned via `transform: translateY(-100%)` so its bottom edge sat flush with the top of the red section. On non-white backgrounds above the banner (e.g. the grey `#f0edea` Keep Reading section on blog posts), the PNG's semi-transparent edge pixels blended with the grey above, creating a visible hairline between the torn-paper red and the solid red below.
+- Fix: nudged the PNG down 1px via `translateY(calc(-100% + 1px))`. The 1px overlap is red-on-red (invisible) but closes the gap on grey / black backgrounds. Affects every page using FooterBanner — verified visually on the new post; safe for all other pages because the overlap is invisible on any preceding background.
+
+**Voice and copy guardrails:**
+
+- Body content rendered verbatim from the signed-off draft (`docs/marketing/blog-draft-why-ekuzo-plays-league-of-legends.md`) — no edits. Sentence-case H2s, no em dashes in the body, all banned vocabulary scanned at draft time.
+
+**Placeholder assets (Aaron to replace):**
+
+- `public/images/blog-post-4-card.jpg` — 1232×770 dashed-red-border placeholder for the blog index card and all share surfaces (OG, Twitter, Article schema).
+- `public/images/blog-post-4-hero.jpg` — 1232×520 placeholder for the article hero.
+- Generation script at `scripts/gen-blog-post-4-placeholders.js` (mirrors `gen-blog-post-3-placeholders.js`).
+- Real hero brief lives in the draft frontmatter (`media.hero.spec`). Aaron's three direction options: (1) over-the-shoulder of a young player with coach silhouette + EKUZO red framing, (2) typographic treatment of the H1 over low-contrast keyboard photo, (3) Karlin direct-to-camera still from the "community is opportunity" reel.
+
+**Files touched:**
+
+- (new) `app/blog/league-of-legends-youth-development/page.tsx`
+- (new) `components/blog/InstagramEmbed.tsx`
+- (new) `public/images/blog-post-4-card.jpg`, `blog-post-4-hero.jpg`
+- (new) `scripts/gen-blog-post-4-placeholders.js`
+- `app/blog/page.tsx` — added post to index array
+- `app/blog/summer-camps-for-kids-who-game-2026/page.tsx` — verbatim inline cross-link to new post in the "Why League of Legends" section
+- `app/sitemap.ts` — new post entry (weekly, priority 0.6)
+- `public/llms.txt` — new post entry under "Blog and articles" with one-paragraph description
+- `components/sections/FooterBanner.tsx` — 1px overlap fix on the red torn-paper PNG
+
+**What didn't ship and why:**
+
+- Summer-camps "Keep Reading" target unchanged. Inline link inside the body of summer-camps is sufficient; swapping the Keep Reading target would have been a heavier change for marginal benefit.
+- No `<h2 id="anchor">` deep-linkable headings on the new post. Out of scope and would have required a `BlogContent.tsx` change that affects all posts.
+- No new components beyond `InstagramEmbed`. The FAQ renders as plain `<p><strong>Q?</strong> A.</p>` inside `BlogContent` (the FAQPage schema is the AI-visible layer, the HTML is the parent-visible layer).
+
+---
+
 ## Jamie — May 14, 2026 (New blog post: Summer camps guide + blog-wide metadata/schema parity pass)
 
 **What shipped:** First "Guides" category post at `/blog/summer-camps-for-kids-who-game-2026`. ~1,700-word parent-facing guide comparing the four categories of summer gaming camps, with EKUZO Camps positioned in the structured-esports row. Author byline: Karlin, founder of EKUZO. Includes embedded Karlin YouTube Short and a wireframe placeholder for the Jynxzi tournament clip (Aaron to source).

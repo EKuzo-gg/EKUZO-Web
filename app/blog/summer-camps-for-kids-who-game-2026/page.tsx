@@ -574,6 +574,15 @@ export default function PostSummerCamps2026() {
                 for, because what we teach in League shows up in whatever
                 they&apos;re playing the rest of the week.
               </p>
+              <p>
+                We wrote{" "}
+                <Link href="/blog/league-of-legends-youth-development">
+                  a longer post on why League of Legends works for youth
+                  development
+                </Link>
+                . It goes deeper on the toxicity question and what coached
+                play teaches kids.
+              </p>
 
               <h2>What does a week at EKUZO Camp actually look like?</h2>
               <p>
