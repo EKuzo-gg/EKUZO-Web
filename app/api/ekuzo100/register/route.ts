@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
       totalPrice,
       timezone,
       attribution,
+      fbc,
+      fbp,
     } = body;
 
     // ── Validate ────────────────────────────────────────────────────
@@ -64,7 +66,14 @@ export async function POST(req: NextRequest) {
       (xff.split(",")[0] || "").trim() ||
       (req.headers.get("x-real-ip") || "").trim() ||
       "";
-    const clientUa = (req.headers.get("user-agent") || "").slice(0, 500);
+    const clientUa = (req.headers.get("user-agent") || "").slice(0, 400);
+
+    // Meta Pixel _fbc / _fbp — see /api/camps/register for rationale.
+    // Plaintext, no hash; capped under Stripe's 500-char/value limit.
+    const clientFbc =
+      typeof fbc === "string" ? fbc.slice(0, 500) : "";
+    const clientFbp =
+      typeof fbp === "string" ? fbp.slice(0, 500) : "";
 
     const attr = attribution || {};
     const utmSourceMarketing = String(attr.utm_source || "").slice(0, 200);
@@ -93,6 +102,8 @@ export async function POST(req: NextRequest) {
 
     if (clientIp) metadata.client_ip_address = clientIp;
     if (clientUa) metadata.client_user_agent = clientUa;
+    if (clientFbc) metadata.fbc = clientFbc;
+    if (clientFbp) metadata.fbp = clientFbp;
     if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
     if (utmMedium) metadata.utm_medium = utmMedium;
     if (utmCampaign) metadata.utm_campaign = utmCampaign;

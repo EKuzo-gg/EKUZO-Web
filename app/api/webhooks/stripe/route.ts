@@ -810,6 +810,14 @@ export async function POST(req: NextRequest) {
           userData.client_ip_address = meta.client_ip_address;
         if (meta.client_user_agent)
           userData.client_user_agent = meta.client_user_agent;
+        // fbc / fbp — Meta Pixel cookies captured at register time and
+        // threaded through PI metadata. Plaintext, NOT hashed, scalar
+        // strings (Meta hashes nothing here — these are direct identity
+        // links into the profile graph). Highest-leverage match-quality
+        // signal after em. Omitted when the visitor never loaded the
+        // Pixel (older/test payments simply won't carry these keys).
+        if (meta.fbc) userData.fbc = meta.fbc;
+        if (meta.fbp) userData.fbp = meta.fbp;
 
         const capiPayload: {
           data: unknown[];

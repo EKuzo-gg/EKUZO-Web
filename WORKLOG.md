@@ -6,6 +6,21 @@
 
 ---
 
+## Jamie — May 17, 2026 (Meta CAPI Purchase: add _fbc/_fbp, confirm IP/UA/ZIP)
+
+Enriched the server-side Meta Conversions API Purchase event with the Meta Pixel cookies `_fbc` and `_fbp`. These are the highest-leverage match-quality signals after email and were the only missing identifiers — `client_ip_address`, `client_user_agent`, and `zp` (billing ZIP) were already captured and sent by a prior pass, so this round only closes the fbc/fbp gap and tightens UA truncation.
+
+- New `lib/fbCookies.ts` — `getFbCookie('_fbc' | '_fbp')` reads `document.cookie`, returns `undefined` on SSR/absent.
+- Both register pages (`app/programs/ekuzo-camps/register/page.tsx`, `app/programs/ekuzo100/register/page.tsx`) read `_fbc`/`_fbp` on submit and include them in the `/api/{program}/register` POST body.
+- Both register routes (`app/api/camps/register/route.ts`, `app/api/ekuzo100/register/route.ts`) coerce + cap `fbc`/`fbp` and write them to PI metadata only when non-empty. `client_user_agent` truncation tightened 500 → 400 chars (Stripe cap is 500/value; leaves headroom).
+- Webhook (`app/api/webhooks/stripe/route.ts`) adds `userData.fbc`/`userData.fbp` from PI metadata as plaintext scalars (NOT hashed, per Meta spec), guarded so old/test payments without the keys don't throw.
+- Decision: kept the existing `client_ip_address` / `client_user_agent` PI metadata key names (the spec suggested `client_ip` / `client_ua`). Renaming would break in-flight unpaid PIs and the working webhook reader for zero functional gain — the Meta CAPI field names (`client_ip_address`, `client_user_agent`) are emitted correctly regardless of the internal metadata key.
+- Unchanged: em/ph/fn/ln hashing, event_id dedup (PI id), Klaviyo, Google Sheets, Beehiiv. ZIP confirmed already collected (Stripe Elements collects billing postal_code for card by default; webhook reads `charge.billing_details.address.postal_code` → `zp`).
+
+`tsc --noEmit` clean.
+
+---
+
 ## Jamie — May 17, 2026 (schema: normalize bare dates to full ISO 8601 datetimes)
 
 Google Rich Results flagged `datePublished`/`dateModified` (Article) and `uploadDate` (VideoObject) as "invalid datetime / missing timezone" warnings because they were bare `YYYY-MM-DD`. Added a `toSchemaDateTime()` helper in `lib/schema.ts` that expands date-only strings to `YYYY-MM-DDT12:00:00+00:00` (noon UTC avoids date-shift across timezones; already-full datetimes pass through). Applied in `buildBlogArticleSchema` (datePublished + dateModified), `buildVideoObjectSchema` (uploadDate), and the testimonial VideoObject nodes (same latent warning on the homepage). Single-source fix — every current and future post/video is covered. Warnings were non-blocking ("optional"), but this clears them.

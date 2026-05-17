@@ -13,6 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
 import { captureAttribution, getAttribution } from "@/lib/attribution";
+import { getFbCookie } from "@/lib/fbCookies";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
 
@@ -310,6 +311,11 @@ export default function Ekuzo100RegisterPage() {
     const cohortData = cohorts.find((c) => c.value === selectedCohort);
     const attribution = getAttribution();
 
+    // Meta Pixel _fbc / _fbp — see camps register page for rationale.
+    // Forwarded verbatim (plaintext) through PI metadata → webhook → CAPI.
+    const fbc = getFbCookie("_fbc");
+    const fbp = getFbCookie("_fbp");
+
     const payload = {
       parent,
       gamers,
@@ -323,6 +329,8 @@ export default function Ekuzo100RegisterPage() {
       totalPrice: PRICE * gamers.length,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       attribution,
+      fbc,
+      fbp,
     };
 
     try {

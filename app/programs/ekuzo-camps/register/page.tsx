@@ -9,6 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
 import { captureAttribution, getAttribution } from "@/lib/attribution";
+import { getFbCookie } from "@/lib/fbCookies";
 import { nanoid } from "nanoid";
 
 // ── Stripe setup ────────────────────────────────────────────────────────────
@@ -510,6 +511,13 @@ export default function CampsRegisterPage() {
 
     const attribution = getAttribution();
 
+    // Meta Pixel _fbc / _fbp — set client-side by the Pixel, forwarded
+    // verbatim (plaintext, no hash) through the register POST → Stripe PI
+    // metadata → webhook → CAPI user_data. Highest-leverage match-quality
+    // signal after em; absent if the visitor never loaded the Pixel.
+    const fbc = getFbCookie("_fbc");
+    const fbp = getFbCookie("_fbp");
+
     const payload = {
       parent,
       gamers: gamers.map((g) => {
@@ -538,6 +546,8 @@ export default function CampsRegisterPage() {
       totalPrice,
       attribution,
       cta_source: ctaSource,
+      fbc,
+      fbp,
     };
 
     try {

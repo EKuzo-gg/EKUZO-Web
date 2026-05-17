@@ -51,6 +51,8 @@ export async function POST(req: NextRequest) {
       joining_squad_token,
       attribution,
       cta_source,
+      fbc,
+      fbp,
     } = body;
 
     // ── Validate ────────────────────────────────────────────────────
@@ -98,7 +100,17 @@ export async function POST(req: NextRequest) {
       (xff.split(",")[0] || "").trim() ||
       (req.headers.get("x-real-ip") || "").trim() ||
       "";
-    const clientUa = (req.headers.get("user-agent") || "").slice(0, 500);
+    const clientUa = (req.headers.get("user-agent") || "").slice(0, 400);
+
+    // Meta Pixel _fbc / _fbp — captured client-side by the register page
+    // from document.cookie and posted here. Forwarded verbatim into PI
+    // metadata (plaintext, no hash per Meta spec) so the Stripe webhook
+    // can attach them to the CAPI Purchase user_data. Coerced to string +
+    // capped well under Stripe's 500-char/value limit.
+    const clientFbc =
+      typeof fbc === "string" ? fbc.slice(0, 500) : "";
+    const clientFbp =
+      typeof fbp === "string" ? fbp.slice(0, 500) : "";
 
     // Attribution — first-touch UTMs captured client-side and posted
     // through here. Empty strings are fine; the webhook treats absence as
@@ -130,6 +142,8 @@ export async function POST(req: NextRequest) {
     // chunks and per-gamer JSON blobs.
     if (clientIp) metadata.client_ip_address = clientIp;
     if (clientUa) metadata.client_user_agent = clientUa;
+    if (clientFbc) metadata.fbc = clientFbc;
+    if (clientFbp) metadata.fbp = clientFbp;
     if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
     if (utmMedium) metadata.utm_medium = utmMedium;
     if (utmCampaign) metadata.utm_campaign = utmCampaign;
