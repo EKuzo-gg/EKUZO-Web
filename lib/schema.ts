@@ -442,6 +442,50 @@ export function buildFAQPageSchema(items: FAQItem[]) {
   };
 }
 
+// ─── VideoObject builder (single embedded video, e.g. a blog reel) ─────────
+// For third-party-hosted video (Instagram/YouTube) we emit `embedUrl`, not
+// `contentUrl` — we don't host the MP4 and must not fabricate one. Thumbnail
+// must be a stable first-party URL (Instagram CDN URLs expire and fail
+// validation). Transcript is passed in as an inline string literal (no fs).
+type VideoObjectArgs = {
+  pageSlug: string;
+  name: string;
+  description: string;
+  thumbnailPath: string; // site-relative, e.g. /images/foo.jpg
+  uploadDate: string; // ISO date
+  embedUrl: string;
+  transcript: string;
+};
+
+export function buildVideoObjectSchema({
+  pageSlug,
+  name,
+  description,
+  thumbnailPath,
+  uploadDate,
+  embedUrl,
+  transcript,
+}: VideoObjectArgs) {
+  const pageUrl = `${SITE}/blog/${pageSlug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "@id": `${pageUrl}#reel`,
+    name,
+    description,
+    thumbnailUrl: thumbnailPath.startsWith("http")
+      ? thumbnailPath
+      : `${SITE}${thumbnailPath}`,
+    uploadDate,
+    embedUrl,
+    author: { "@id": KARLIN_ID },
+    publisher: { "@id": ORG_ID },
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    inLanguage: "en-US",
+    transcript,
+  };
+}
+
 // ─── VideoObject schemas for the 9 testimonial videos ──────────────────────
 // Transcripts come from lib/testimonialTranscripts.ts (plain string literals,
 // no fs access — see the top-of-file note).

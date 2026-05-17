@@ -6,6 +6,17 @@
 
 ---
 
+## Jamie — May 17, 2026 (blog-post-4: VideoObject schema for the embedded reel)
+
+Added `VideoObject` JSON-LD for the embedded Karlin "Community is opportunity" Instagram reel. The reel was previously an opaque `<iframe>` with no machine-readable signal — crawlers/AI couldn't tell a video existed or what it covered.
+
+- New `buildVideoObjectSchema()` in `lib/schema.ts` (single embedded video; emits `embedUrl` not `contentUrl` since the MP4 is third-party-hosted — no fabricated contentUrl). Author = Karlin Person `@id`, publisher = Org `@id`, tied to the post via `mainEntityOfPage`.
+- Rendered on the post as a 4th `<JsonLd>` (now Article + BreadcrumbList + FAQPage + VideoObject + inherited root graph).
+- `uploadDate` 2026-05-16 (per Jamie). `transcript` = the spoken lines from `Day 3 Jynxi's Tournament.txt`, inlined as a string literal in the page (no fs access, per the schema.ts rule); the file's internal blog-framing notes are excluded — only spoken content belongs in a transcript. "Jinxie" ASR mis-transcription corrected to "Jynxzi".
+- `thumbnailUrl` = `/images/blog-post-4-reel-thumb.jpg` — Karlin's intentional Instagram cover ("DAY 3"), provided by Jamie, hosted first-party (Instagram CDN URLs expire and fail VideoObject validation). 900×1111, 62KB.
+
+---
+
 ## Jamie — May 17, 2026 (blog-post-4: real 21:9 broadcast hero/card, replacing placeholders)
 
 Swapped the blog-post-4 wireframe placeholders for the real asset: a 21:9 frame (`~/Downloads/blog-header.png`, 3024×1296) from a current-brand EKUZO broadcast, provided by Jamie.

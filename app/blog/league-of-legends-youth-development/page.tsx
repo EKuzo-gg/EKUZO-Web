@@ -9,6 +9,7 @@ import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
   buildFAQPageSchema,
+  buildVideoObjectSchema,
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
@@ -56,6 +57,13 @@ const FAQ_ITEMS = [
   },
 ];
 
+// Spoken transcript of Karlin's "Community is opportunity" reel (the
+// embedded Instagram video). Inlined as a string literal — no fs access
+// (see lib/schema.ts note). Internal blog-framing notes from the source
+// file are intentionally excluded; only spoken content belongs here.
+const REEL_TRANSCRIPT =
+  "Jynxzi just got MrBeast to play in his League of Legends tournament, and somehow that's not even the most impressive part, because he also got 40 of the world's largest creators to also jump in. They had over a million people watch their event from their bedrooms, and even Riot offered in-game support. My personal favorite thing about the event was something called the Challenger Role, where basically the best players had to play non-damage support champions. What that means is the best player cannot be the star of the show. They had to mind control and chess macro the four other players, and it was genuinely some of the most wholesome and educational pieces of content we've ever seen in League of Legends history. And so that's cool, that's great, but what's the takeaway? A lot of people complain about how toxic and unwelcoming the League community can be. While that may be true, this is perhaps the greatest reminder that League, and all communities for that matter, are opportunities, and opportunities are ultimately what you make out of it. If you've ever been curious about playing League or being on a team, now's the time. This is day three. I actually hosted a League of Legends tournament at my own company for 10-year-olds, and we had moms and dads and grandmas and grandpas at home watching. Follow my channel to see what happened.";
+
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
   title: `${TITLE} — EKUZO Blog`,
@@ -99,12 +107,23 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE);
   const faqSchema = buildFAQPageSchema(FAQ_ITEMS);
+  const videoSchema = buildVideoObjectSchema({
+    pageSlug: SLUG,
+    name: "Community is opportunity — Karlin on the Jynxzi tournament",
+    description:
+      "EKUZO founder Karlin Oei reacts to streamer Jynxzi's creator-led League of Legends tournament — the 'Challenger Role' format that forced the strongest players into support roles — and why it shows League communities are opportunities shaped by structure.",
+    thumbnailPath: "/images/blog-post-4-reel-thumb.jpg",
+    uploadDate: "2026-05-16",
+    embedUrl: "https://www.instagram.com/p/DYXJQmeR2cq/embed/",
+    transcript: REEL_TRANSCRIPT,
+  });
 
   return (
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={videoSchema} />
 
       <div className="absolute top-0 left-0 right-0 z-20">
         <Nav variant="light" />
