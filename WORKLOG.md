@@ -6,6 +6,24 @@
 
 ---
 
+## Jamie — May 17, 2026 (first-touch acquisition-origin tagging — Phase 1, measurement only)
+
+AI in-chat clicks (ChatGPT/Perplexity/Claude) strip Referer, so AI-driven traffic shows as "direct". Stood up the measurement pipeline to see the conversion side of the GEO investment. **Phase 1 = measurement only: no Meta audience changes, no CAPI custom events.**
+
+- New `lib/originClassifier.ts` — `classifyOrigin({searchParams, referer, userAgent})` → one of `ai_chatgpt | ai_perplexity | ai_claude | ai_other | organic_google | organic_other | social | paid_meta | paid_other | direct`, or `null` for known bots (caller skips the cookie). Precedence: bot exclusion → UTM → Referer host → `direct`. gemini/bard checked before the generic google.com match so AI Google traffic isn't miscounted as organic.
+- New `middleware.ts` (repo root) — first page view only: if `ekuzo_origin` cookie exists, pass through untouched (first-touch preserved); else classify and set `ekuzo_origin` (1-year maxAge, sameSite lax, secure in prod, path /). Bots get no cookie. Matcher excludes `/api/*`, `_next/*`, favicon, and any dotted path (static assets) — marketing routes only, no double-fire.
+- `app/api/camps/register/route.ts` + `app/api/ekuzo100/register/route.ts` — read `ekuzo_origin` cookie, write `metadata.origin` (defaults to `"unknown"` if somehow absent).
+- `app/api/webhooks/stripe/route.ts` — read `meta.origin` (defaults `"unknown"`), add `acquisition_origin` to the existing Klaviyo profile properties block and `origin` to every Google Sheets row. No restructure of the existing Klaviyo/Sheets calls.
+- `docs/klaviyo-welcome-template.md` — documented the new `acquisition_origin` profile property + allowed value set.
+
+**Sheets side is manual:** the webhook sends `origin` in the row payload; Jamie adds the matching `origin` header cell in the ekuzo-purchases sheet (Apps Script appends by header name).
+
+Untouched: this morning's fbc/fbp/IP/UA/ZIP CAPI enrichment, em/ph/fn/ln hashing, event_id dedup, existing acquisition_source/UTM logic. Note: the scoping doc `docs/llm-traffic-tagging-scoping.md` referenced in the brief does not exist in the repo — built from the inline SCOPE spec.
+
+`tsc --noEmit` clean.
+
+---
+
 ## Jamie — May 17, 2026 (Meta CAPI Purchase: add _fbc/_fbp, confirm IP/UA/ZIP)
 
 Enriched the server-side Meta Conversions API Purchase event with the Meta Pixel cookies `_fbc` and `_fbp`. These are the highest-leverage match-quality signals after email and were the only missing identifiers — `client_ip_address`, `client_user_agent`, and `zp` (billing ZIP) were already captured and sent by a prior pass, so this round only closes the fbc/fbp gap and tightens UA truncation.

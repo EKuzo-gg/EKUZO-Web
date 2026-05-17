@@ -112,6 +112,13 @@ export async function POST(req: NextRequest) {
     const clientFbp =
       typeof fbp === "string" ? fbp.slice(0, 500) : "";
 
+    // First-touch acquisition origin — set by middleware.ts on the
+    // visitor's first page view, persisted in the ekuzo_origin cookie.
+    // Threaded through PI metadata so the webhook can write it to the
+    // Klaviyo profile + Google Sheets. Defaults to "unknown" if the
+    // cookie is somehow absent (shouldn't happen post-middleware).
+    const origin = req.cookies.get("ekuzo_origin")?.value || "unknown";
+
     // Attribution — first-touch UTMs captured client-side and posted
     // through here. Empty strings are fine; the webhook treats absence as
     // "organic" when deriving acquisition_source.
@@ -144,6 +151,7 @@ export async function POST(req: NextRequest) {
     if (clientUa) metadata.client_user_agent = clientUa;
     if (clientFbc) metadata.fbc = clientFbc;
     if (clientFbp) metadata.fbp = clientFbp;
+    metadata.origin = origin;
     if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
     if (utmMedium) metadata.utm_medium = utmMedium;
     if (utmCampaign) metadata.utm_campaign = utmCampaign;

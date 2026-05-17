@@ -41,6 +41,7 @@ The webhook writes to two surfaces Klaviyo can render in a flow email:
 | `order_id` | all purchases | `EKC-8A7F2B9C` |
 | `timezone` | all purchases | `America/Chicago` |
 | `location` | all purchases | city/region derived from form |
+| `acquisition_origin` | all purchases | first-touch origin: one of `ai_chatgpt`, `ai_perplexity`, `ai_claude`, `ai_other`, `organic_google`, `organic_other`, `social`, `paid_meta`, `paid_other`, `direct`, or `unknown` (defensive fallback when the cookie was absent) |
 | `camp_week` | camps only | `2` (earliest week across gamers) |
 | `camp_slot` | camps only | `AM` or `PM` |
 | `camp_week_dates` | camps only | `May 25 - 29` |

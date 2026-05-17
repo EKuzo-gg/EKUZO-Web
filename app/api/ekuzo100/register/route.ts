@@ -75,6 +75,10 @@ export async function POST(req: NextRequest) {
     const clientFbp =
       typeof fbp === "string" ? fbp.slice(0, 500) : "";
 
+    // First-touch acquisition origin — see /api/camps/register for the
+    // rationale. Set by middleware.ts, read here, threaded to webhook.
+    const origin = req.cookies.get("ekuzo_origin")?.value || "unknown";
+
     const attr = attribution || {};
     const utmSourceMarketing = String(attr.utm_source || "").slice(0, 200);
     const utmMedium = String(attr.utm_medium || "").slice(0, 200);
@@ -104,6 +108,7 @@ export async function POST(req: NextRequest) {
     if (clientUa) metadata.client_user_agent = clientUa;
     if (clientFbc) metadata.fbc = clientFbc;
     if (clientFbp) metadata.fbp = clientFbp;
+    metadata.origin = origin;
     if (utmSourceMarketing) metadata.utm_source = utmSourceMarketing;
     if (utmMedium) metadata.utm_medium = utmMedium;
     if (utmCampaign) metadata.utm_campaign = utmCampaign;

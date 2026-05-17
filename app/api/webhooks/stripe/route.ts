@@ -141,6 +141,13 @@ export async function POST(req: NextRequest) {
     const utmContent = meta.utm_content || "";
     const utmTerm = meta.utm_term || "";
 
+    // First-touch acquisition origin — classified by middleware.ts, set
+    // in the ekuzo_origin cookie, threaded here via PI metadata. Phase 1
+    // is measurement only: written to the Klaviyo profile + Sheets row,
+    // no Meta / CAPI side effects. Defaults to "unknown" for old/test
+    // payments created before this shipped (graceful degrade).
+    const origin = meta.origin || "unknown";
+
     let acquisitionSource: "meta_paid" | "referral" | "organic";
     if (utmSource === "meta" && utmMedium === "paid") {
       acquisitionSource = "meta_paid";
@@ -451,6 +458,7 @@ export async function POST(req: NextRequest) {
         timezone: meta.timezone || "",
         location: location,
         acquisition_source: acquisitionSource,
+        acquisition_origin: origin,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
@@ -636,6 +644,11 @@ export async function POST(req: NextRequest) {
         // docs/apps-script-squad-endpoints-spec.md), so adding columns
         // here just requires adding matching header cells in the sheet.
         acquisition_source: acquisitionSource,
+        // First-touch acquisition origin (ai_chatgpt, organic_google,
+        // direct, …). Apps Script appends by header name; adding the
+        // matching `origin` header cell in the sheet is a manual step
+        // Jamie handles — the field is sent regardless.
+        origin: origin,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
