@@ -6,18 +6,19 @@
 
 ---
 
-## Jamie — May 17, 2026 (blog-post-4: real hero/card from VOD frame, replacing placeholders)
+## Jamie — May 17, 2026 (blog-post-4: real 21:9 broadcast hero/card, replacing placeholders)
 
-Swapped the blog-post-4 wireframe placeholders for real assets built from a frame of the EKUZO Florida Invitational broadcast VOD (Ekuso Allstars vs Panther Esports teamfight).
+Swapped the blog-post-4 wireframe placeholders for the real asset: a 21:9 frame (`~/Downloads/blog-header.png`, 3024×1296) from a current-brand EKUZO broadcast, provided by Jamie.
 
-- **Hero** (`blog-post-4-hero.jpg`, 1232×520, ~64KB): clean graded gameplay, no baked text — the page renders the live H1 directly above it, so baked text would duplicate.
-- **Card** (`blog-post-4-card.jpg`, 1232×770, ~93KB): same crop family, tighter, + bottom gradient + red "GUIDES" eyebrow + Tungsten Narrow headline. This is the OG/social/blog-index surface where there's no H1 beside it.
-- Cropped out: old "Ekuso Allstars" wordmark (pre-rebrand), "Panther Esports"/FIU partner branding, the scoreboard/timer, both student webcams (minors — no public-use release), the stats panel, Florida branding, minimap, and the champion portrait columns. Kept the clean center teamfight only.
-- `scripts/gen-blog-post-4-assets.js` generates the hero + a textless card background + an HTML card template. The Tungsten headline is composited via a real browser (librsvg/fontconfig in sharp can't resolve the custom OTF; a browser `@font-face` / canvas `FontFace` renders it pixel-perfect). Documented in the script header.
-- Same filenames as the placeholders, so the post page, blog index card, OG/Twitter share, and `Article.image` schema all pick up the real assets with no code change.
-- `scripts/gen-blog-post-4-placeholders.js` kept (matches the gen-blog-post-3 precedent — documents how the interim placeholders were made).
+Direction (final, after iteration): use the frame **exactly as-is** — no cropping, no color grade, no baked text. Scaling only. (Earlier passes that cropped to the teamfight and/or baked a Tungsten headline were rejected — "lost its soul".)
 
-Note: this is a strong interim built from broadcast footage. If Aaron later produces a polished hero per the `media.hero` brief in the draft frontmatter, it's still a same-filename drop-in swap.
+- **Hero + Card** (`blog-post-4-hero.jpg` / `blog-post-4-card.jpg`, both 1232×528, ~90KB, mozjpeg q78): the same full uncropped frame, scaled. Only the filename differs (card is the text-free share/blog-index surface).
+- `app/blog/league-of-legends-youth-development/page.tsx`: hero changed from a fixed-height `fill`+`object-cover` box to intrinsic `width/height` + `w-full h-auto` so the full 21:9 image scales to the column with zero crop. (A first attempt using `aspect-ratio` + `fill` collapsed to 0 height — the intrinsic-dimensions approach is the correct one.) Alt text updated to describe the broadcast scene; OG image height corrected 770 → 528.
+- `scripts/gen-blog-post-4-assets.js` rewritten: no crop, no grade, no text/HTML/browser pipeline — just `resize(1232,528,{fit:"fill"})` (source is already 21:9 so no distortion) + mozjpeg. Documented in the header.
+- Same filenames as the placeholders, so post page, blog index card, OG/Twitter, and `Article.image` schema all pick up the real asset with no further code change.
+- `scripts/gen-blog-post-4-placeholders.js` kept (matches gen-blog-post-3 precedent — documents how the interim placeholders were made).
+
+Note: blog-index thumbnail + OG consumers apply their own fixed-ratio object-cover at display time — that's consumer behavior; the saved file is the full uncropped frame as directed.
 
 ---
 

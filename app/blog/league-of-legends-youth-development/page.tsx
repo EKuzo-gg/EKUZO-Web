@@ -71,7 +71,7 @@ export const metadata = {
       {
         url: SHARE_IMAGE,
         width: 1232,
-        height: 770,
+        height: 528,
         alt: TITLE,
       },
     ],
@@ -156,17 +156,17 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          {/* Hero placeholder. Aaron will swap blog-post-4-hero.jpg for the
-              real asset per the media.hero spec in the draft frontmatter. */}
-          <div className="relative w-full" style={{ height: "520px" }}>
-            <Image
-              src={HERO_IMAGE}
-              alt="Karlin Oei, founder of EKUZO, on why structured League of Legends coaching works for youth development."
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          {/* Hero is a 21:9 frame from an EKUZO broadcast. Intrinsic
+              dimensions + w-full/h-auto scale it to the column width
+              with zero cropping (no fill/object-cover). */}
+          <Image
+            src={HERO_IMAGE}
+            alt="EKUZO students competing in a League of Legends match during an EKUZO broadcast."
+            width={1232}
+            height={528}
+            className="w-full h-auto"
+            priority
+          />
         </div>
 
         {/* ══ BODY ══════════════════════════════════════════════════════════ */}
