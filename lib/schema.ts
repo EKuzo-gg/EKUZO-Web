@@ -376,6 +376,14 @@ export function buildBreadcrumbSchema(trail: Crumb[]) {
 // pass the author node explicitly.
 export const karlinPersonSchema = coachKarlinSchema;
 
+// Google's Rich Results parser flags bare YYYY-MM-DD dates as "invalid
+// datetime / missing timezone" (warning). Expand date-only strings to a
+// full ISO 8601 datetime at noon UTC (noon avoids date-shift across
+// timezones). Already-full datetimes pass through untouched.
+function toSchemaDateTime(d: string): string {
+  return /^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d}T12:00:00+00:00` : d;
+}
+
 type BlogArticleArgs = {
   slug: string;
   title: string;
@@ -406,8 +414,8 @@ export function buildBlogArticleSchema({
     image: imageUrl,
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    datePublished,
-    dateModified: dateModified ?? datePublished,
+    datePublished: toSchemaDateTime(datePublished),
+    dateModified: toSchemaDateTime(dateModified ?? datePublished),
     author: author ?? { "@id": KARLIN_ID },
     publisher: { "@id": ORG_ID },
     inLanguage: "en-US",
@@ -476,7 +484,7 @@ export function buildVideoObjectSchema({
     thumbnailUrl: thumbnailPath.startsWith("http")
       ? thumbnailPath
       : `${SITE}${thumbnailPath}`,
-    uploadDate,
+    uploadDate: toSchemaDateTime(uploadDate),
     embedUrl,
     author: { "@id": KARLIN_ID },
     publisher: { "@id": ORG_ID },
@@ -523,7 +531,7 @@ const testimonialVideoNodes = testimonials.map((t) => {
     name: `${t.name} — EKUZO Testimonial`,
     description,
     thumbnailUrl,
-    uploadDate: t.uploadDate,
+    uploadDate: toSchemaDateTime(t.uploadDate),
     contentUrl: videoUrl,
     publisher: { "@id": ORG_ID },
     transcript,

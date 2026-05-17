@@ -6,6 +6,12 @@
 
 ---
 
+## Jamie — May 17, 2026 (schema: normalize bare dates to full ISO 8601 datetimes)
+
+Google Rich Results flagged `datePublished`/`dateModified` (Article) and `uploadDate` (VideoObject) as "invalid datetime / missing timezone" warnings because they were bare `YYYY-MM-DD`. Added a `toSchemaDateTime()` helper in `lib/schema.ts` that expands date-only strings to `YYYY-MM-DDT12:00:00+00:00` (noon UTC avoids date-shift across timezones; already-full datetimes pass through). Applied in `buildBlogArticleSchema` (datePublished + dateModified), `buildVideoObjectSchema` (uploadDate), and the testimonial VideoObject nodes (same latent warning on the homepage). Single-source fix — every current and future post/video is covered. Warnings were non-blocking ("optional"), but this clears them.
+
+---
+
 ## Jamie — May 17, 2026 (blog-post-4: VideoObject schema for the embedded reel)
 
 Added `VideoObject` JSON-LD for the embedded Karlin "Community is opportunity" Instagram reel. The reel was previously an opaque `<iframe>` with no machine-readable signal — crawlers/AI couldn't tell a video existed or what it covered.
