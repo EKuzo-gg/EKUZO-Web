@@ -6,6 +6,21 @@
 
 ---
 
+## Jamie — May 17, 2026 (blog-post-4: real hero/card from VOD frame, replacing placeholders)
+
+Swapped the blog-post-4 wireframe placeholders for real assets built from a frame of the EKUZO Florida Invitational broadcast VOD (Ekuso Allstars vs Panther Esports teamfight).
+
+- **Hero** (`blog-post-4-hero.jpg`, 1232×520, ~64KB): clean graded gameplay, no baked text — the page renders the live H1 directly above it, so baked text would duplicate.
+- **Card** (`blog-post-4-card.jpg`, 1232×770, ~93KB): same crop family, tighter, + bottom gradient + red "GUIDES" eyebrow + Tungsten Narrow headline. This is the OG/social/blog-index surface where there's no H1 beside it.
+- Cropped out: old "Ekuso Allstars" wordmark (pre-rebrand), "Panther Esports"/FIU partner branding, the scoreboard/timer, both student webcams (minors — no public-use release), the stats panel, Florida branding, minimap, and the champion portrait columns. Kept the clean center teamfight only.
+- `scripts/gen-blog-post-4-assets.js` generates the hero + a textless card background + an HTML card template. The Tungsten headline is composited via a real browser (librsvg/fontconfig in sharp can't resolve the custom OTF; a browser `@font-face` / canvas `FontFace` renders it pixel-perfect). Documented in the script header.
+- Same filenames as the placeholders, so the post page, blog index card, OG/Twitter share, and `Article.image` schema all pick up the real assets with no code change.
+- `scripts/gen-blog-post-4-placeholders.js` kept (matches the gen-blog-post-3 precedent — documents how the interim placeholders were made).
+
+Note: this is a strong interim built from broadcast footage. If Aaron later produces a polished hero per the `media.hero` brief in the draft frontmatter, it's still a same-filename drop-in swap.
+
+---
+
 ## Jamie — May 16, 2026 (New blog post: Why League of Legends is perfect for youth development + FooterBanner grey-line fix)
 
 **What shipped:** Fourth blog post at `/blog/league-of-legends-youth-development`. Karlin-authored parent-facing guide on why League of Legends works for structured youth development — 10 question-form H2s, embedded Karlin Instagram reel under the Jynxzi H2, and a 5-item FAQ. Bidirectional cross-link with the summer-camps post (anchor text on the new post links back to summer-camps' deeper camps explainer; summer-camps' "Why League" section gains an inline link to this new post).
