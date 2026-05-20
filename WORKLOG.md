@@ -6,6 +6,169 @@
 
 ---
 
+## Aaron — May 20, 2026 (Promote camps V2 → V1; archive old V1; retire /v2 route)
+
+**Why:** V2 (Caroline Dunaway feedback restructure) has converged. Tonight's pass took it the rest of the way: hero bg video boosted, EKUZO Difference + Take Your Team + Team Matching + Discord-for-Families sections hidden until assets/copy land, For Gamers section moved to the purple theme with the tech collage and the "What Do I Need?" block, Camp Overview rebuilt for mobile, scroll-reveal + hover lifts added, sticky CTA reskinned to white+purple. Time to ship as the canonical page so Jamie can review on `dev` and push to `main`.
+
+**What changed:**
+
+- **`app/programs/ekuzo-camps/page.tsx`** — replaced with V2 content. Metadata stripped of the `(v2)` title suffix and the `robots: { index: false, follow: false }` flag; canonical URL stays `/programs/ekuzo-camps`. Course + breadcrumb + FAQ JSON-LD restored (V2 had only breadcrumb). Function renamed `EkuzoCampsV2Page` → `EkuzoCampsPage`. File header comment rewritten to reference the archive instead of explaining "this is a v2 variant."
+- **`docs/archive/ekuzo-camps-v1-pre-052026.tsx.txt`** — old V1 page snapshotted as a `.txt` so it doesn't get traced into the build but is browsable for reference. 1208 lines.
+- **`app/programs/ekuzo-camps/v2/`** — deleted. `/v2` route no longer exists.
+- **`components/ui/StickyCTA.tsx`** — `isCampsV2` removed. The old all-purple bar variant retired; `isCamps` now renders V2's white-bar / purple-text / purple-button styling that Aaron landed on. Both pathnames (`/programs/ekuzo-camps`) get the same treatment since V2 is V1 now.
+- **`CLAUDE.md`** — Page Status reflects new state; `/v2` references retired.
+
+**Verification:**
+- `node node_modules/.bin/tsc --noEmit` clean.
+- Archive file is `.tsx.txt` so `tsc` and Next.js both ignore it.
+- `grep -r "/v2" components/ app/` returns no live references to the old camps v2 route.
+
+**Jamie / review notes:**
+- The Mission section ("Every Gamer Deserves a Team" / `MissionCarousel`), Take Your Team With You, Team Matching, and Discord for Families are all rendered behind `{false && (...)}` wrappers in the new page. Restore each by removing the wrapper; see the section header comment for any divider-chain adjustments needed.
+- Team Matching + Discord for Families copy lives in `docs/v2-content-moved-to-email.md` for Beehiiv use.
+- `dev` is ready to merge to `main` once you've eyeballed the dev preview URL.
+
+---
+
+## Aaron — May 19, 2026 (Camps register v2 — week picker: purple unification, urgency strip, calendar polish)
+
+**Why:** Iterating on the v2 register page's week picker (the design-review A/B toggle that lets us compare a card grid against an iOS-style monthly calendar). The Calendar variant landed on a purple accent — Aaron's preference because red on a "choose your week" affordance reads like a warning/error state. The Cards variant was still red, so the two treatments felt visually inconsistent on the same page. While unifying the color, also stripped urgency theatre that Aaron had been wanting gone, made the price chip carry more weight, evened out the card grid, and tightened the calendar's read.
+
+**What changed (one file, `app/programs/ekuzo-camps/register/v2/page.tsx`):**
+
+- **Cards: red → purple accent.** Four call sites in the cards branch flipped: ring + drop-shadow on the selected card, the mini-calendar Mon–Fri strip background, the selected-state checkmark circle, and the "Select →" affordance. Now matches the Calendar branch's purple. New Tailwind tokens (`bg-purple`, `border-purple`, `text-purple`, `bg-purple-soft`, plus `purple` for ring/shadow) added to `app/globals.css` earlier today — Cards consumes them; the Calendar branch already did.
+- **Cards: urgency badges removed.** The "Filling fast" / "Only a few left" JSX blocks (driven by `WEEKS[*].pmUrgency`) deleted from the cards branch. Aaron felt the badges were too much. `WEEKS.pmUrgency` data + the `SlotUrgency` type are intentionally left in place — only the v2 register's rendering was scoped to be touched, and a sibling page or future variant may still reference them.
+- **Cards: bigger price chip.** Price was `text-sm leading-5` (14px Inter). Bumped to `font-display` with `clamp(24px, 2.4vw, 32px)` and a touch more chip padding (`px-4 py-2` from `px-3 py-1`) so the new size doesn't look cramped.
+- **Cards: odd-last-card full-row span killed.** The `spanFullRow` → `sm:col-span-2` rule made Jul 27-31 and the August card double-wide whenever the visible-weeks count was odd. Aaron didn't like the inconsistency. The rule is gone; on `sm+` every card sits at one column width. Mobile (`grid-cols-1`) is single-column by default, so cards still fill width on phones without any explicit rule.
+- **Calendar: left-aligned.** `mx-auto` removed from the calendar card so it left-aligns with the "Choose your camp week" header above it. Still capped at `max-w-md`.
+- **Calendar summary: full month name + black header.** Summary line under the grid was reading `JUL 27-31` (3-char month). Added a `MONTH_FULL_NAMES` lookup so it spells out `JULY 27-31`. The big display-font line is now `text-black` (was `text-purple`); the supporting line ("Monday through Friday") stays purple at full strength.
+- **Calendar: non-camp dates look disabled.** The "plain current-month day" cells (weekdays without a camp week + all weekends) were rendering weekday numbers in full black (`#0a0a0a`) — they read as active even though the cell wasn't clickable. Now uniformly disabled-looking: `bg-[#fafafa]`, `border-[#f0f0f2]`, text `#d1d5db`, and `aria-disabled="true"`. Weekends and non-camp weekdays now share the same muted treatment so the grid clearly communicates "camp not available here." Leading/trailing days from adjacent months still render blank.
+- **Calendar: no layout shift on first selection.** The summary block under the grid was conditionally rendered (`{selectedWeekObj && ...}`), so the first week pick pushed the page down by ~100px. It's now always rendered, with Tailwind's `invisible` class when no week is chosen — space is reserved on initial load, and picking a week just fills in the content without changing height. `aria-hidden` is toggled so screen readers skip the placeholder. Switching between already-selected weeks was already shift-free; this fixes the empty → first-selection case specifically.
+
+**Verification:**
+
+- `node node_modules/.bin/tsc --noEmit` clean after each batch of edits.
+- Calendar branch left intact apart from the four targeted changes (`mx-auto`, `formatDateRange`, summary colors, non-camp cell styling, summary-block always-render).
+- Cards branch's data path unchanged — same `selectSlot(gi, week.number, "PM")` click handler, same `aria-pressed`, same `data-error-key`. Only visuals + the urgency JSX moved.
+
+**Aaron follow-ups:**
+
+1. Live visual QA on the picker in browser — esp. the calendar's disabled-cell contrast (does `#d1d5db` text on `#fafafa` cell read as "off" without looking buggy?).
+2. Decide whether to strip `WEEKS[*].pmUrgency` from the data array + the `SlotUrgency` type entirely once it's clear nothing else reads them — left in for now per the scoped "v2 only" instruction.
+3. Decide on the picker style at launch (`pickerStyle === "cards"` vs `"calendar"`) — both branches now share the same purple accent so it's a true design pick, not a color-consistency pick.
+4. Month-tab navigation in the calendar can still shift page height (months with 6 rows are taller than 5-row months). Not addressed today — Aaron's instruction was specifically about week-selection shift, which is now fixed.
+
+**No changes to:** v1 register, v1 landing, v2 landing, API routes, webhook code, success page, layout shims, Stripe config, env vars, the SessionCard helper (which is defined in this file but unused — left as-is).
+
+---
+
+## Aaron — May 18, 2026 (Camps register v2 — trust scaffolding around the checkout moment)
+
+**Why:** v1 register is "naked checkout." After the hero (intentionally tight, per the 5/12 bail-cohort fix), the page is utility-styled — clean form fields, big section headings, zero brand moments, zero reassurance scaffolding. Refund policy isn't on this page; Code of Conduct, Discord transparency, and coach credibility are all unmentioned at the moment the user is asked to commit money. The only trust signal is a small grey ToS line under the Continue button, and Stripe's "Secured by..." text only appears AFTER the user clicks Continue. Five out of five ad-driven prospects already bailed before reaching this form per the earlier recording analysis — the ones who get this far don't deserve a sterile checkout. Built a v2 alongside v1 (same A/B pattern as landing v2) so we can test the trust-scaffolded register against the naked one. v2 landing now points at v2 register so the funnel is end-to-end coherent when Jamie wires the split.
+
+**What changed (two new files + one CTA-href update):**
+
+- `app/programs/ekuzo-camps/register/v2/page.tsx` (new, ~2050 lines). Verbatim port of v1 register page with six visual additions stitched in surgically. **Form logic is untouched** — same state shape, same Stripe Elements flow, same return_url, same `/api/camps/{lead, register, abandoned}` endpoints, same `trackInitiateCheckout` / `captureAttribution` / `getFbCookie` calls, same `cta_source` query-param threading into Stripe metadata. Jamie's commerce side requires no changes.
+- `app/programs/ekuzo-camps/register/v2/layout.tsx` (new, 18 lines). Server-component metadata shim — title "Register — EKUZO Camp (v2)", `alternates.canonical: /programs/ekuzo-camps/register` (points to v1 so Google treats v2 as a duplicate), `robots: { index: false, follow: false }`. Mirrors the v1 register layout shim pattern (CLAUDE.md note: client component pages can't export metadata).
+- `app/programs/ekuzo-camps/v2/page.tsx` — three `TrackedRegisterLink` instances (hero + Secure Your Slot footer panel) updated to point at `/programs/ekuzo-camps/register/v2?cta=hero|footer` instead of v1 register. Preserves the `cta` query param so analytics + Stripe metadata still differentiate by source. v1 landing's CTAs still point at v1 register — funnel matches funnel.
+
+**The six v2 changes vs v1 register:**
+
+- **Hero subline added.** v1 hero is intentionally tight after the bail-cohort fix — kept it that way. v2 adds exactly one line under the H1: *"5-day virtual camp · Hand-picked squads · Background-checked coaches · Full refund 14+ days out."* Seeds reassurance without bloating the hero. Torn-paper transition kept.
+- **Trust strip section (NEW).** Four-icon horizontal band between hero and form body: refund window summary / Code of Conduct enforced / Secured by Stripe / 15 hrs coaching + Discord. Lands the strongest objections before the user types anything. Mobile collapses to 2-up grid.
+- **Sticky desktop checkout sidebar (NEW).** Form body wraps in `lg:grid lg:grid-cols-[minmax(0,1fr)_340px]` on lg+. Right column is a `sticky top-24` aside with three stacked cards: real-time gamers/total card (reads `selectedGamerSummaries` + `totalPrice` — same state the inline mobile summary reads), "What you get" 5-item list (15 hrs / hand-picked squad / private Discord / Tournament Friday / post-camp access), and a refund/Stripe reassurance footer with a "See full policy" link to the landing FAQ. Mobile (< lg) collapses to single column and the existing inline Summary block (wrapped in `lg:hidden`) stays visible at its current position so mobile users still see the per-gamer breakdown before Continue.
+- **Coach reminder card (NEW).** Slots between the "Add another gamer" button and the Team Status (vibe check) section. Three overlapping coach avatars (Karlin, Sebastien, Nuri — using existing `/images/coach-*` assets) + one reassurance line: *"Background-checked. Vetted. Trained in EKUZO's youth coaching methodology."* + a small "Meet the team" link that opens the landing page coaches section in a new tab. Surfaces credibility at the moment the user is staring at "Parent information" + "Continue to payment" — the highest-anxiety point in the funnel.
+- **"What happens after you click pay" mini-flow (NEW).** Three-step ordered list between the (mobile) Summary block and the Continue button: (1) *Right away* — confirmation + payment receipt to inbox, (2) *Within 24 hours* — welcome email + private Discord invite for the squad, (3) *Day 1 of camp* — meet coach and the other four players. Visible on all viewport sizes. Demystifies the post-purchase moment so the user isn't clicking into a black box. Wrapped in `!showPayment` so it hides once they're inside Stripe Elements.
+- **Reassurance row at the Continue button (NEW).** Three small icon+label items horizontally below the Continue button: *Full refund 14+ days out · Code of Conduct enforced · Secured by Stripe.* Replaces the v1's single grey ToS-only line. The ToS link is still there, just demoted to a sub-line below the reassurance row.
+
+**Visual rhythm:** Hero stays grey ([#f5f5f7]) → white trust strip → white form with a soft `#fafafa` aside card on lg+. Color palette is calmer than the landing v2 (which has its red For Gamers moment) — this is checkout, not persuasion, so the page reads as orderly and reassuring rather than energetic.
+
+**Verification:**
+
+- `node node_modules/.bin/tsc --noEmit` clean, 0 errors.
+- JSX bracket balance: register v2 page.tsx 579/579 curly, 471/471 paren, 3/3 `<section>`; layout 7/7 curly; landing v2 (after CTA href updates) 428/428 curly, 271/271 paren, 13/13 `<section>`.
+- Form-logic invariants confirmed via grep: same three fetch endpoints (`/api/camps/lead`, `/api/camps/register`, `/api/camps/abandoned`), same Stripe `return_url`, same redirect target (`/programs/ekuzo-camps/success`).
+- All three coach images (`coach-karlin-faith.jpg`, `coach-sebastien-ZzLegendary.png`, `coach-nuri-je.png`) confirmed present on disk.
+- **Live browser QA pending — Aaron to run locally.** Sandbox can't run Next.js dev server (ARM64 SWC binary not installed). Things to eyeball on the local pass:
+  1. Sticky sidebar position on lg+ at multiple scroll depths — `sticky top-24` should clear the fixed nav; tweak if it overlaps.
+  2. Sidebar content shifts as user adds gamers / picks weeks / changes slots (it shares `selectedGamerSummaries` + `totalPrice` state so it should already update in real time, but confirm).
+  3. Sidebar visibility while inside Stripe Elements payment view — should remain visible and continue showing the total, which is the desired reassurance during card entry.
+  4. Coach card overlapping avatars on `xs` widths — verify the `flex -space-x-3` doesn't break when squished.
+  5. Post-pay flow three-card grid at the `sm` breakpoint — `sm:grid-cols-3` should kick in cleanly.
+  6. Trust strip on mobile — 2-up grid (`grid-cols-2 lg:grid-cols-4`) should stay readable on narrow viewports.
+
+**Notes for Jamie:**
+
+1. **Register v2 needs zero API changes.** Same endpoints, same payloads, same Stripe metadata, same webhook contract. If you A/B at the route level (middleware rewrite, cookie flag, or query param) the v2 page works as-is.
+2. **End-to-end v2 funnel is wired.** Landing v2 → register v2 → existing success page. So when you flip the A/B, treat both v2 pages as one variant — split at the landing and the user stays in their bucket through register and post-purchase.
+3. **`cta_source` still threads through.** v2 register reads the same `?cta=` query param. Hero CTA gets `cta=hero`, Secure-Your-Slot CTA gets `cta=footer`. Beehiiv custom field unchanged.
+4. **Sibling discount slot.** The sticky sidebar's "Your registration" card has a clean place to insert a discount line right above the total once the pricing is wired — small UI change on my end when you're ready.
+5. **GA / Clarity tracking.** The v2 page fires the same `register_click` (from the landing CTAs that now point at it) and the same `InitiateCheckout` (from the form submit). Clarity recordings on v2 will show the new layout naturally — no extra instrumentation needed to compare to v1.
+
+**Aaron follow-ups:**
+
+1. Live visual QA at desktop and mobile widths (per Verification above) — sticky sidebar offset is the most likely place I'll have gotten the spacing slightly wrong.
+2. Decide whether the v2 landing/register pair should get its own utm tags during A/B testing, or just rely on the route to differentiate. (Probably the latter — route + cta_source is enough.)
+3. Decide if the "What happens after you click pay" copy needs to match real operational timing — currently says "within 24 hours" for the welcome email + Discord invite. If our actual SLA is faster/slower, the copy should reflect it.
+4. When ready to test in production, ask Jamie to wire the split mechanism — I'd recommend cookie-based 50/50 at the landing, so a returning visitor stays in their bucket. Up to him.
+
+**No changes to:** v1 landing, v1 register, layout shim for v1 register, any API route, any webhook code, success page, any shared component, any Stripe configuration, any environment variable.
+
+---
+
+## Aaron — May 18, 2026 (Camps landing v2 — Caroline Dunaway feedback restructure)
+
+**Why:** Camps marketing page is converting poorly. Viewers read but don't sign up, and four parental concern clusters (safety/trust, screen-time framing, learning outcomes, cost/value) aren't being addressed in proportion to how much they matter. Caroline Dunaway gave us a 10-point feedback memo that diagnosed the gaps sharply — brand-clarity at the hero, no audience differentiation between parents and kids, the LoL section written for parents only, the Fortnite/Smash/Rocket League objection completely unaddressed, coaches buried near the bottom, anti-toxic stance undersold, team-matching as a black box, "what if my kid doesn't click" unaddressed, Discord unexplained, no sibling discount mentioned. Built a v2 of the page rather than editing v1 in place so we can A/B test it once Jamie picks a split mechanism and so v1 traffic is unaffected while the redesign iterates.
+
+**What changed (one new file):**
+
+- `app/programs/ekuzo-camps/v2/page.tsx` (new, ~1525 lines) — non-indexed (`robots: { index: false, follow: false }`), canonical to v1 (`/programs/ekuzo-camps`) so Google treats it as a duplicate not an alternative. Reachable only via direct URL. No nav link wired. v1 page at `app/programs/ekuzo-camps/page.tsx` is **entirely untouched**.
+
+**Section-by-section v2 changes vs v1:**
+
+- **Stats ticker (1)** — ported, no change.
+- **Hero (2)** — Caroline #1: v1's background video competed with the headline. v2 keeps the video but darkens it heavily (opacity 0.35 + saturate 0.6 + brightness 0.7 on the video itself; near-opaque radial-vignette gradient on top). The rhombus tag stack ("100% Virtual / Ages 10–18 / Skills Camp") was visual noise — replaced with a single functional eyebrow line. v1's marketing-y subhead ("premier online esports summer camp where you don't just learn to carry…") replaced with a tight functional line: *"1 week. 5-player squad. Real coaching. Tournament Friday."* Caroline #4: Register stays primary, with secondary text anchors below — *"First time here? — I'm a parent · I'm a gamer"* — that scroll-jump to in-page sections (`#for-parents` → Code of Conduct cluster; `#for-gamers` → unified For Gamers section). Subtle red brush-stroke art behind the headline gives a visual anchor without re-introducing busy-ness. **The tagline "Every Gamer Deserves a Team" is intentionally NOT in the hero** — per Aaron, it goes into the new mission section.
+- **Mission section (3)** — Caroline's tagline lives here, in a section directly under the hero. **Empty shell** — visual slot + copy slot with placeholder copy clearly marked "[ Placeholder — Aaron, drop the origin story here. ]" Layout suggestion is image-left + copy-right; Aaron will fill the real content. Grey bg breaks the rhythm out of the black hero.
+- **Camp Overview (4)** — ported verbatim. 4-card stats grid (1:5 ratio / M–F / Online / $199 with $299 strike).
+- **Take Your Team With You (5)** — ported. Squad-stays-together story with the SQUAD VANGUARD 67 illustration.
+- **Team Matching (6, NEW)** — Caroline #7. v1's "Curated Matchmaking" bullet was a black-box claim; v2 names the mechanism. Three-step horizontal flow with red square step badges, headline *"A coach builds your team. Not an algorithm."* Steps source Aaron's policy answer #2: (01) "You tell us about your gamer" — skill, region, time slot, friends stay together; (02) "A coach hand-builds the squad" — no algorithm; (03) "You meet your team Day 1."
+- **Coaches (7, MOVED UP)** — Caroline #5. v1 buried coaches at section 7, after testimonials. v2 surfaces them immediately after Take Your Team With You, before the curriculum. Strongest credibility signal leads. Black background gives the section the gravitas the credentials deserve (Dignitas/Evil Geniuses coach, Challenger jungler with $80K+ in scholarships, Alienware Ambassador).
+- **5-Day Progression (8)** — ported. White bg, day-by-day curriculum cards.
+- **For Gamers (9, NEW unified)** — Caroline #2 + #3 collapsed into one section. Red background, kid-energy lead: *"Your team. Your tournament. Your week."* + intro that closes with Caroline's line ("the most structured, coached ranked experience you've ever played"). Three hype-beat cards (black on red) — Your squad / Tournament Friday / Climb together. Two-column with LoL gameplay video left, parent-rationale right (the "5 players, defined roles, mirrors traditional sports" copy from v1 lives here, demoted to secondary). Below: full-width white callout card answering *"My kid plays Fortnite, Smash, Rocket League. Will this work?"* with the skills-transfer thesis. Buried at the bottom of that card: "All skill levels welcome — beginners included. No League experience required" — Caroline's note that the "no gatekeeping" language should not lead.
+- **Code of Conduct / Zero Tolerance (10, NEW)** — Caroline #6 + Aaron's policy answer #1 (there's a real CoC kids and parents sign). Black bg, oversized headline *"No toxic lobbies. Ever."* Caroline's school-hallway pull quote ("If it wouldn't fly in a school hallway, it doesn't fly here.") gets its own red sticky-position card on the right column. Adds a 4-item "what's not allowed" list (slurs/harassment, public-matchmaking trolling, sharing personal info, sore-loser behavior) operationalizing the school-hallway test. `id="for-parents"` lives here — it's where the hero parent-anchor scroll-targets.
+- **Discord for Families (11, NEW)** — Caroline #9 + Aaron's policy answers #4/#5. The biggest reframe in the page: **parents own the Discord account** = full transparency, not "request observer access." Three-card grid of "Layer 01 / 02 / 03" moderation: (01) You own the Discord account; (02) Coach moderates the room; (03) Admins watch every camp. Grey bg calms after the high-contrast Code of Conduct moment. Closing line reassures that the three-layer model continues post-camp.
+- **Testimonials (12)** — ported. Rajitha video + Brad & Becky pull quotes.
+- **Secure Your Slot (13)** — ported with three additions next to the CTA. v1 standalone "Requirements" section was dropped; its "basic computer + headphones" content now lives as one of three compact bullet rows directly above the Register button: *What you get* (15 hrs coaching, private Discord squad, post-camp access) / *What you need* (basic laptop or desktop, stable internet, headset) / *Refund window* (full refund 14+ days before). Refund policy is no longer FAQ-only — it sits next to the buy decision. Sibling discount slot is structured so adding a fourth row (e.g. *"Sibling discount"*) is a one-component change once Jamie wires the pricing (see notes below).
+- **FAQ (14, EXPANDED)** — three new entries added (Caroline #3, #8, #9): *"My kid plays Fortnite / Smash / Rocket League — will this work for them?"*, *"We use Discord — what does that mean for my family?"*, *"What if my child doesn't connect with their squad?"* The squad-doesn't-click answer reflects Aaron's policy #3 (coaches catch dynamics early at 1:5, conversation with parent first, worst-case squad swap). Existing six v1 FAQs ported verbatim.
+
+**Visual-rhythm sequence:** purple (ticker) → black (hero) → grey (mission) → white → grey → white → black (coaches) → white → red (For Gamers) → black (Code of Conduct) → grey (Discord) → white (testimonials) → red (Secure Your Slot) → black (FAQ). Two reds and three blacks total; never adjacent.
+
+**Verification:**
+
+- `node node_modules/.bin/tsc --noEmit` → clean, 0 errors.
+- JSX bracket balance check: 428/428 curly, 271/271 paren, 13/13 `<section>` open/close.
+- All referenced assets confirmed present (brush-stroke-8.png, brush-strokes-wide.png, register-promo-hero-2.png, testimonial-quote-mark.png, camp-hero.mp4, league-of-legends-camp.mp4).
+- All `Icon` `name` values validated against `components/ui/Icon.tsx` ICONS list.
+- Hero anchor wiring confirmed: `href="#for-parents"` → Code of Conduct section (`id="for-parents"` on the wrapper div), `href="#for-gamers"` → For Gamers section.
+- **Live browser QA pending — Aaron to run locally** (`npx next dev -p 3001` then visit `/programs/ekuzo-camps/v2` and `/programs/ekuzo-camps`). Sandbox couldn't run Next.js dev server (ARM64 SWC binary not installed in the sandbox environment). Things to eyeball on the local pass: hero anchor scroll-to behavior at desktop and mobile widths, the new red For Gamers section visual rhythm against the Code of Conduct black section that follows, the Discord three-card grid at the `md` → `lg` breakpoint, mission-section dashed-border placeholder visibility (it's intentionally visible so it's obvious what to replace), the heavily-darkened hero video reading cleanly on the FB/IG in-app browser viewport. The mission-section visual slot and copy slot use dashed borders and italic placeholder copy so the "fill me in" intent reads at a glance.
+
+**Notes for Jamie:**
+
+1. **A/B split logic** — out of my lane. v2 is ready to be wired. Options I'm aware of: middleware route rewrite, cookie-based variant, query-param flag (`?v=2`), GrowthBook feature flag. The page is self-contained at `/programs/ekuzo-camps/v2` — pick whichever split mechanism you want without touching the page file. The new middleware you stood up on May 17 for `ekuzo_origin` tagging will fire on the v2 route too (it's a marketing route, not an API/asset path) — that's fine, intended.
+2. **Sibling / friend discount** — a queued workstream. The v2 register CTA section's "What you get / What you need / Refund window" three-row list is structured so adding a fourth row (*"Sibling discount: $X per additional gamer"* or similar) is a one-line change in the `ul` map. Once you wire the pricing in Stripe + the register-form + webhook, ping me and I'll surface the line on v2 (and v1 if it's still live). Caroline also suggested a friend / "invite your squad" discount — same plumbing, different copy.
+3. **Stripe `lookup_key` rename** — `ekuzocamps-earlybird-199` is still stale (already flagged in CLAUDE.md). Not blocking this PR, just noting it again since it's adjacent to the pricing workstream above.
+
+**Known follow-ups (Aaron):**
+
+1. **Fill the mission section.** It's an intentional empty shell — placeholder copy clearly marked. Origin story, why EKUZO exists, in Aaron-voice. Likely also wants a real image in the visual slot.
+2. **Live visual QA on dev preview** (per Verification above). Adjust anything that doesn't read at mobile widths, especially the Code of Conduct two-column layout and the For Gamers Fortnite/Smash callout.
+3. **Decide if v2 needs its own OG image** before A/B test starts. Currently inherits v1's OG (canonical → v1, so Open Graph crawlers pull v1's metadata anyway, which is fine for now).
+4. **Decide on hero CTA wording** if "Register for Camp" needs differentiation from v1 once split logic is wired (e.g., adding "Start now" or similar to either variant to disambiguate during user testing). Not blocking.
+
+**No changes to:** v1 page, v1 register flow, any commerce/webhook code, any API route, any shared component (Nav, Footer, Eyebrow, Button, TornPaperDivider, FAQAccordion, Icon, TestimonialVideo, WhatWePlayVideo, TrackedRegisterLink — all imported as-is). v2 is purely additive.
+
+---
+
 ## Jamie — May 17, 2026 (first-touch acquisition-origin tagging — Phase 1, measurement only)
 
 AI in-chat clicks (ChatGPT/Perplexity/Claude) strip Referer, so AI-driven traffic shows as "direct". Stood up the measurement pipeline to see the conversion side of the GEO investment. **Phase 1 = measurement only: no Meta audience changes, no CAPI custom events.**

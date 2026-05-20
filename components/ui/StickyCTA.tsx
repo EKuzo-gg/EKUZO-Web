@@ -16,12 +16,16 @@ export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
   const [footerVisible, setFooterVisible] = useState(false);
 
-  // Hide on register and success pages — user is already in checkout flow
-  const isCheckoutPage = pathname.endsWith("/register") || pathname.endsWith("/success");
+  // Hide on register and success pages — user is already in checkout flow.
+  // .includes covers any future register/success sub-routes too.
+  const isCheckoutPage = pathname.includes("/register") || pathname.includes("/success");
 
   // Context-specific overrides per page family
   const isSchools = pathname.startsWith("/schools");
   const isParents = pathname.startsWith("/parents");
+  // Camps: white bar, purple text + purple button, direct-link to the
+  // register page (no enroll modal). Promoted from V2 styling on
+  // 2026-05-20 when V2 became the canonical /programs/ekuzo-camps page.
   const isCamps = pathname === "/programs/ekuzo-camps";
   const showEnroll = !isSchools && !isCamps;
   const showContact = !isParents && !isCamps;
@@ -60,18 +64,21 @@ export default function StickyCTA() {
       {/* Top shadow for separation */}
       <div className="absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none" />
 
-      <div className={`flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 ${isCamps ? "bg-[#AE2CF2]" : "bg-white"}`}>
+      <div className="flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white">
         {isCamps ? (
           <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
-            <span className="font-display uppercase text-white leading-[0.95] hidden sm:block whitespace-nowrap" style={{ fontSize: "clamp(1.5rem, 3.75vw, 3.75em)" }}>
+            <span
+              className="font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap"
+              style={{ fontSize: "clamp(1.5rem, 3.75vw, 3.75em)", color: "#AE2CF2" }}
+            >
               Ready to level up this summer?
             </span>
             <a
               href="/programs/ekuzo-camps/register?cta=sticky"
               onClick={() => trackRegisterClick({ source: "sticky" })}
-              className="flex-1 sm:flex-none bg-white text-[#AE2CF2] border-2 border-white font-body font-bold text-sm md:text-lg
+              className="flex-1 sm:flex-none bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg
                          py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0
-                         hover:bg-[#AE2CF2] hover:text-white hover:border-white
+                         hover:brightness-110
                          active:scale-[0.98] active:brightness-90
                          transition-all duration-150"
             >

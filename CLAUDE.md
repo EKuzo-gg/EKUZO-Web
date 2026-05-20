@@ -119,7 +119,7 @@ All programs live under `/programs/`:
 - `/programs/ekuzo100/register` — registration + Stripe payment ($100)
 - `/programs/ekuzo100/success` — payment confirmation
 - `/programs/ekuzo-teams` — marketing page + commerce live ($640/semester with $576 upfront discount or 4× $160 installment plan).
-- `/programs/ekuzo-camps` — marketing page (Aaron's v2 build)
+- `/programs/ekuzo-camps` — marketing page (V2 redesign promoted to canonical 2026-05-20; old V1 archived at `docs/archive/ekuzo-camps-v1-pre-052026.tsx.txt`)
 - `/programs/ekuzo-camps/register` — registration + Stripe payment ($199)
 - `/programs/ekuzo-camps/success` — payment confirmation
 
