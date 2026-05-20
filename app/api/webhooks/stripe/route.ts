@@ -195,11 +195,18 @@ export async function POST(req: NextRequest) {
           ? "Looking for a squad"
           : "";
 
-    // Squad link (camps + Building only). Looking purchases don't get a
-    // squad_token and this stays empty for them — Klaviyo/Beehiiv fields
-    // are blank, no `squads` sheet write happens.
+    // Squad link (camps) — every camps registration mints a squad_token
+    // in the register page (since the 2026-05-20 funnel change), so this
+    // populates for every camps purchase. Joining-only registrations
+    // (?squad=TOKEN) inherit the owner's token via joining_squad_token
+    // and don't get their own squadLink — that's intentional.
+    //
+    // Host comes from NEXT_PUBLIC_SITE_URL so dev preview / branch
+    // previews share their own link host. Trailing slash trimmed so the
+    // path concatenation is consistent.
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
     const squadLink = meta.squad_token
-      ? `https://ekuzo.gg/programs/ekuzo-camps/register?squad=${meta.squad_token}`
+      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${meta.squad_token}`
       : "";
 
     // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────

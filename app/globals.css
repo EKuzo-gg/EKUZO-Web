@@ -4,6 +4,11 @@
   /* ─── Brand colours ─────────────────────────────────────────── */
   --color-red:   #F92524;
   --color-grey:  #EFEEED;
+  /* Purple — non-destructive accent used by date pickers / selectors
+     where red would read as a warning. Soft variant for tinted bg
+     panels (selection summary, hover). */
+  --color-purple:      #A435F0;
+  --color-purple-soft: #F3E8FF;
 
   /* ─── Typography ────────────────────────────────────────────── */
   /* Display font: Tungsten Narrow (Hoefler & Co — personal preview license) */

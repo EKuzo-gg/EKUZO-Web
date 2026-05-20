@@ -20,6 +20,11 @@ type RegistrationDetails = {
   }[];
   totalPaid: string;
   paymentIntentId: string;
+  // Squad-share — every camps registration mints a token. Joiners
+  // (registered via ?squad=TOKEN) don't get their own token, so these
+  // can be empty for that one edge case.
+  squadToken?: string;
+  squadLink?: string;
 };
 
 export default function CampsSuccessPageWrapper() {
@@ -34,7 +39,35 @@ function CampsSuccessPage() {
   const searchParams = useSearchParams();
   const [details, setDetails] = useState<RegistrationDetails | null>(null);
   const [loading, setLoading] = useState(true);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
   const tracked = useRef(false);
+
+  // Copy squad link to clipboard. Uses navigator.clipboard with a fallback
+  // to the legacy execCommand path for in-app browsers (Meta / IG webview)
+  // that still don't expose the async clipboard API reliably.
+  async function copySquadLink(link: string) {
+    if (!link) return;
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(link);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = link;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setCopyState("copied");
+      setTimeout(() => setCopyState("idle"), 2000);
+    } catch {
+      setCopyState("error");
+      setTimeout(() => setCopyState("idle"), 2000);
+    }
+  }
 
   useEffect(() => {
     // Stripe redirects with ?payment_intent=pi_xxx&payment_intent_client_secret=...&redirect_status=succeeded
@@ -182,6 +215,65 @@ function CampsSuccessPage() {
               </p>
             </div>
           )}
+
+          {/* Bring your friends — squad share link.
+              Every camps registration mints a unique squad_token; this
+              section lets the parent forward the auto-pinned join link
+              to their gamer's friends. The same link lands in the
+              welcome email body via Beehiiv's squad_link custom field. */}
+          {details?.squadLink ? (
+            <div
+              className="mt-10 text-left rounded-sm overflow-hidden border border-[#fecaca]"
+              style={{ backgroundColor: "#fff7f7" }}
+            >
+              <div className="px-6 py-5">
+                <h3
+                  className="font-display uppercase text-[#0a0a0a]"
+                  style={{ fontSize: "clamp(1.5rem, 2.4vw, 32px)", lineHeight: "1" }}
+                >
+                  Bring your <span className="text-red">friends</span>
+                </h3>
+                <p
+                  className="font-body text-[#374151] mt-3"
+                  style={{ fontSize: "15px", lineHeight: "24px" }}
+                >
+                  Share this link and your gamer&apos;s friends will be placed
+                  on the same squad — same week, same coach, same Discord.
+                  We hand-build the team around it.
+                </p>
+
+                <div className="mt-5 flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    readOnly
+                    value={details.squadLink}
+                    aria-label="Squad share link"
+                    onFocus={(e) => e.currentTarget.select()}
+                    className="flex-1 min-w-0 font-body text-sm text-[#0a0a0a] bg-white border border-[#e5e7eb] rounded-sm px-3 py-3 focus:outline-none focus:border-red"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => copySquadLink(details.squadLink || "")}
+                    className="shrink-0 inline-flex items-center justify-center px-5 py-3 bg-red text-white font-body font-bold rounded-sm hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 whitespace-nowrap"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {copyState === "copied"
+                      ? "Copied!"
+                      : copyState === "error"
+                      ? "Copy failed"
+                      : "Copy link"}
+                  </button>
+                </div>
+
+                <p
+                  className="font-body text-[#6b7280] mt-3"
+                  style={{ fontSize: "12px", lineHeight: "18px" }}
+                >
+                  Friends who use this link will land on the same week + session you picked.
+                </p>
+              </div>
+            </div>
+          ) : null}
 
           {/* Next steps */}
           <div className="mt-10 text-left">

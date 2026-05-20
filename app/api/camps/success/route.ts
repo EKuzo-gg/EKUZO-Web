@@ -51,12 +51,31 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    // Squad-share link — every camps registration mints a squad_token
+    // (since the 2026-05-20 funnel change). Joiners (registered via
+    // ?squad=TOKEN) inherit the owner's token in `joining_squad_token`
+    // and don't get their own — they don't see a share link on the
+    // success page, since the link is the owner's.
+    //
+    // Host comes from NEXT_PUBLIC_SITE_URL (with ekuzo.gg fallback) so
+    // dev / branch previews share their own link host. Same builder the
+    // Stripe webhook uses for the Beehiiv / Klaviyo squad_link fields,
+    // so the link on the success page matches the link in the welcome
+    // email exactly.
+    const squadToken = meta.squad_token || "";
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
+    const squadLink = squadToken
+      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${squadToken}`
+      : "";
+
     return NextResponse.json({
       parentName: `${meta.parent_first_name || ""} ${meta.parent_last_name || ""}`.trim(),
       parentEmail: meta.parent_email || "",
       gamers,
       totalPaid: `$${(paymentIntent.amount / 100).toFixed(2)}`,
       paymentIntentId: paymentIntent.id,
+      squadToken,
+      squadLink,
     });
   } catch (err: any) {
     console.error("Error fetching payment intent:", err);

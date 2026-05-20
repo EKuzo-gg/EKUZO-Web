@@ -6,7 +6,7 @@
 
 ---
 
-## Custom Fields (13)
+## Custom Fields (16)
 
 | Field name | Type | Source | Used for |
 |---|---|---|---|
@@ -24,6 +24,8 @@
 | `timezone` | Text | Webhook (IANA: "America/New_York") | Cohort matching, send-time optimization |
 | `location` | Text | Webhook (from Stripe billing: "Austin, TX, US") | Cohort matching, geo insights |
 | `cta_source` | Text | Webhook (`hero` / `sticky` / `footer` from `?cta=` on register URL, or empty) | Attribution — which CTA on the camps marketing page produced this purchase |
+| `squad_status` | Text | Webhook (`"Looking for a squad"` for all camps purchases post-2026-05-20; historical Building/Looking values still possible) | Legacy segment helper. Building/Looking fork was retired 2026-05-20; everyone now defaults to "Looking for a squad". Field retained for backward compat with any Klaviyo/Beehiiv segments still referencing it. |
+| `squad_link` | Text | Webhook (full URL: `https://ekuzo.gg/programs/ekuzo-camps/register?squad={token}`) | **Templated into the camps welcome email body** — every parent's unique shareable squad link. Friends who click it land on the register form with the owner's week + PM pre-pinned. Populated on every camps purchase (post-2026-05-20 funnel change). |
 
 ### Notes
 - Beehiiv reserved fields (`email`, `city`, `region`, `country`, `utm_source`, etc.) are auto-populated and don't need custom fields. See `docs/beehiiv-reserved-fields.pdf` or the Beehiiv support article for the full list.
@@ -157,10 +159,18 @@ The Stripe webhook (`/api/webhooks/stripe`) sends this to Beehiiv on `payment_in
     { "name": "amount_paid", "value": "$199.00" },
     { "name": "timezone", "value": "America/New_York" },
     { "name": "location", "value": "Austin, TX, US" },
-    { "name": "cta_source", "value": "hero" }
+    { "name": "cta_source", "value": "hero" },
+    { "name": "squad_status", "value": "Looking for a squad" },
+    { "name": "squad_link", "value": "https://ekuzo.gg/programs/ekuzo-camps/register?squad=aB3xy9Kp_1" }
   ]
 }
 ```
+
+### Squad link
+
+Every camps purchase mints a unique `squad_token` (10-char nanoid) at the moment the parent submits the register form. The Stripe webhook turns that into the full `squad_link` URL using `NEXT_PUBLIC_SITE_URL` as the host. The link is the shareable invite — friends who click it land on the camps register form with the squad owner's week + PM session pre-pinned and a "You've been invited to join {gamer}'s team" banner. The same link is shown to the parent on `/programs/ekuzo-camps/success` (copy-to-clipboard input) and templated into the camps welcome automation body so the parent has it in their inbox as well.
+
+**Templating in the email:** reference the field as `{{squad_link}}` in the Beehiiv automation editor. Render it as a clickable link, not raw text — the URL is long and unwieldy out of context.
 
 ### Multi-gamer note
 When a parent registers multiple gamers, `gamer_name` stores the first gamer's name (for email personalization). The full details for all gamers live in `registration_summary` (e.g. "Alex Smith — Week 01 AM (May 18 - 22) | Jordan Smith — Week 03 PM (June 01 - 05)"). `camp_week` and `camp_slot` store the first gamer's values.
@@ -173,6 +183,7 @@ When a parent registers multiple gamers, `gamer_name` stores the first gamer's n
 - **Status:** Draft (placeholder email content, not published)
 - **Trigger:** Added by API
 - Must be published before going live — email content needs to be written first
+- **Must template `{{squad_link}}` into the body** — that's the shareable squad invite (see "Squad link" section above). Every parent gets a unique one as of the 2026-05-20 funnel change. Render as a clickable anchor, not raw text. Pair with a short "Bring your friends" pitch matching the success-page copy.
 - Email automation strategy and content planning lives in `/ekuzo-camps/` project folder
 
 ---
