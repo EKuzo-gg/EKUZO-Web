@@ -5,7 +5,6 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
-import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/schema";
@@ -150,8 +149,11 @@ export default function MethodologyPage() {
             className="relative mx-auto"
             style={{ aspectRatio: "9/16", maxHeight: "70vh", width: "min(100%, calc(70vh * 9 / 16))" }}
           >
-            <PlayOnceVideo
+            <video
               src="/videos/pedagogy-hero.mp4"
+              controls
+              playsInline
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ borderRadius: "2px" }}
             />
