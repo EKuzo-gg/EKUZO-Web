@@ -1044,13 +1044,13 @@ export default function EkuzoCampsPage() {
 
               <div className="flex flex-col gap-6">
                 <div className="flex items-start">
-                  <Eyebrow variant="light">What We Play</Eyebrow>
+                  <Eyebrow variant="light">The Game</Eyebrow>
                 </div>
                 <h3
                   className="font-body font-black text-white leading-[1.05]"
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
-                  Why League of Legends?
+                  League of Legends plays like a sport.
                 </h3>
                 <p className="font-body text-white/90 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
                   League works like a traditional sport. Five players. Defined roles. A shared objective. A playbook that evolves every match. It&apos;s also free-to-play, runs on most family computers, and stays free of the cosmetics-and-loot-box pressure parents have learned to watch for.
@@ -1068,16 +1068,19 @@ export default function EkuzoCampsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
               <div className="flex flex-col gap-6 order-2 lg:order-1">
                 <div className="flex items-start">
-                  <Eyebrow variant="light">What Do I Need?</Eyebrow>
+                  <Eyebrow variant="light">The Setup</Eyebrow>
                 </div>
                 <h3
                   className="font-body font-black text-white leading-[1.05]"
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
-                  Basic computer and headphones.
+                  If you have a laptop, you have a camp.
                 </h3>
                 <p className="font-body text-white leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
                   Our camp is built online. Campers need access to a laptop or desktop computer (nothing fancy), stable internet connection, and a headset.
+                </p>
+                <p className="font-body text-white leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
+                  League of Legends is free to download and play, and runs on both PC and Mac.
                 </p>
                 <p className="font-body text-white leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
                   Need any help reviewing your setup?{" "}
@@ -1178,6 +1181,13 @@ export default function EkuzoCampsPage() {
                 </p>
                 <p className="font-body text-white/60 leading-relaxed mb-10" style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)" }}>
                   Every camper and every parent signs the Code of Conduct before camp begins. It&apos;s short, plainly written, and we hold the line on it.
+                </p>
+
+                <p
+                  className="font-body font-black text-white mb-6"
+                  style={{ fontSize: "clamp(1.25rem, 1.8vw, 1.5rem)", lineHeight: "1.1" }}
+                >
+                  No trolling. No crash-outs. No exceptions.
                 </p>
 
                 {/* "What's not allowed" — quick scannable list. Caroline
