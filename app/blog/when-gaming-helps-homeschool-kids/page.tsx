@@ -29,8 +29,8 @@ const DATE_MODIFIED = "2026-05-21";
 
 // Spoken transcript of Karlin's reel (the embedded Instagram video). Inlined
 // as a string literal — no fs access from public/ (see lib/schema.ts note and
-// the repo Learning Log). Powers both the VideoObject schema and the on-page
-// accessible transcript.
+// the repo Learning Log). Powers the VideoObject schema only (crawler-facing;
+// deliberately not rendered on the page — keep the focus on the video).
 const REEL_TRANSCRIPT =
   "But if you look here, I'm taking a lot less damage from the tower now, because I have a lot of armor. That doesn't mean the towers are physical and not magic. I always do deal with physical damage. Now, one more thing. Are you ready? Magic resist. These are also tank items, so surely it'll make me, you know, take a bunch of damage, right? For magic! Only magic. No physical damage. Well, aside from the extra HP you got. And this is so, so, so important because so many players, even after a year or two years of playing, they'll be against a team of full, you know, armor, like physical damage characters, and they'll be building magic resist, right? Players that have been playing the game for two years. And so for the kids to learn this at the very beginning, it's so, yeah, it's so good.";
 
@@ -454,14 +454,6 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 url="https://www.instagram.com/p/DYe0pwSC8j-/"
                 caption="Karlin breaks down armor vs. magic resist — a League of Legends concept many players miss for years, and why kids benefit from learning it early."
               />
-              <details className="my-6 rounded-lg border border-black/10 bg-[#f0edea] px-5 py-4">
-                <summary className="cursor-pointer font-body font-bold text-xs uppercase tracking-[0.12em] text-red">
-                  Read the transcript
-                </summary>
-                <div className="font-body text-black/70 text-sm leading-relaxed mt-3">
-                  {REEL_TRANSCRIPT}
-                </div>
-              </details>
 
               <p>
                 That&apos;s{" "}
