@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { trackKlaviyoEvent } from "@/lib/klaviyo";
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
@@ -40,6 +41,17 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // 0. Klaviyo — mirror the lead into Klaviyo so form-started nurture
+    //    can run from Klaviyo too, alongside Beehiiv. Fired first (and
+    //    awaited but soft-failing) so a Beehiiv early-return below can't
+    //    skip it — the two captures are independent. Flow trigger:
+    //    metric "Started Registration", filtered on product = camps.
+    await trackKlaviyoEvent({
+      metricName: "Started Registration",
+      email,
+      properties: { product: "camps" },
+    });
 
     // 1. Subscribe (or reactivate) the lead. Beehiiv's reactivate_existing
     //    flag makes this idempotent on email — repeat submissions of the

@@ -51,18 +51,18 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Squad-share link — every camps registration mints a squad_token
-    // (since the 2026-05-20 funnel change). Joiners (registered via
-    // ?squad=TOKEN) inherit the owner's token in `joining_squad_token`
-    // and don't get their own — they don't see a share link on the
-    // success page, since the link is the owner's.
+    // Squad-share link — "build your squad" is universal: every camps
+    // purchase gets a shareable link. A normal buyer shares the
+    // squad_token they minted at register time; a joiner (registered via
+    // someone else's ?squad=TOKEN, so no squad_token of their own) shares
+    // that same crew link via joining_squad_token, keeping the squad one
+    // group. Either way the success page surfaces a working link.
     //
     // Host comes from NEXT_PUBLIC_SITE_URL (with ekuzo.gg fallback) so
     // dev / branch previews share their own link host. Same builder the
-    // Stripe webhook uses for the Beehiiv / Klaviyo squad_link fields,
-    // so the link on the success page matches the link in the welcome
-    // email exactly.
-    const squadToken = meta.squad_token || "";
+    // Stripe webhook uses for the Klaviyo squad_link field, so the link
+    // on the success page matches the link in the confirmation email.
+    const squadToken = meta.squad_token || meta.joining_squad_token || "";
     const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
     const squadLink = squadToken
       ? `${siteUrl}/programs/ekuzo-camps/register?squad=${squadToken}`

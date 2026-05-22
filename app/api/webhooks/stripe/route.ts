@@ -195,18 +195,24 @@ export async function POST(req: NextRequest) {
           ? "Looking for a squad"
           : "";
 
-    // Squad link (camps) — every camps registration mints a squad_token
-    // in the register page (since the 2026-05-20 funnel change), so this
-    // populates for every camps purchase. Joining-only registrations
-    // (?squad=TOKEN) inherit the owner's token via joining_squad_token
-    // and don't get their own squadLink — that's intentional.
+    // Squad link (camps) — "build your squad" is universal: EVERY camps
+    // purchase surfaces a shareable link, no exceptions.
+    //  • A normal buyer mints their own squad_token at register time and
+    //    shares that.
+    //  • A buyer who arrived via someone else's link is a joiner — they
+    //    carry joining_squad_token and have no squad_token of their own.
+    //    They share that SAME crew link, so the squad stays one group and
+    //    every member can keep recruiting into it.
+    // Either way the buyer leaves with a working link. Without this the
+    // joiner's confirmation email "Bring your crew" block would be blank.
     //
     // Host comes from NEXT_PUBLIC_SITE_URL so dev preview / branch
     // previews share their own link host. Trailing slash trimmed so the
     // path concatenation is consistent.
     const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
-    const squadLink = meta.squad_token
-      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${meta.squad_token}`
+    const shareableSquadToken = meta.squad_token || meta.joining_squad_token || "";
+    const squadLink = shareableSquadToken
+      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${shareableSquadToken}`
       : "";
 
     // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────

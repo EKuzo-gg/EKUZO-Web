@@ -6,6 +6,47 @@
 
 ---
 
+## Jamie — May 22, 2026 (Universal squad link + Klaviyo mid-funnel capture)
+
+**Why:** "Build your squad" is going universal — every camps buyer should
+leave with a shareable squad link (it's surfaced in the new Klaviyo
+purchase-confirmation email, no longer asked for on the form). And
+mid-funnel leads/abandoners should land in Klaviyo too, since Klaviyo now
+owns the purchase-confirmation + squad flow.
+
+**What changed:**
+
+- **`app/api/webhooks/stripe/route.ts` + `app/api/camps/success/route.ts`**
+  — `squad_link` is now built from `squad_token` OR `joining_squad_token`.
+  Previously a buyer who registered via someone else's squad link (a
+  joiner) got no link of their own, so their confirmation email's "Bring
+  your crew" block would render blank. Now a joiner shares the same crew
+  link they joined with — the squad stays one group and every member can
+  keep recruiting. Every camps purchase now has a working link.
+- **`lib/klaviyo.ts`** (new) — `trackKlaviyoEvent()` helper: posts to
+  Klaviyo `/api/events`, which upserts the profile + records the event in
+  one call. Best-effort, never throws.
+- **`app/api/camps/lead/route.ts`** — on email-blur capture, also tracks
+  a Klaviyo `Started Registration` event (`product: camps`) alongside the
+  existing Beehiiv `form_started_camps` tag.
+- **`app/api/camps/abandoned/route.ts`** — on cart abandonment, also
+  tracks a Klaviyo `Started Checkout` event (with gamer/week/slot)
+  alongside the existing Beehiiv `cart_abandoned_camps` tag.
+
+**Verification:** `tsc --noEmit` clean. POSTed test payloads to both
+capture routes against the live Klaviyo account — both profiles created
+(`claude-qa-lead-0522@ekuzo.gg`, `claude-qa-abandon-0522@ekuzo.gg`),
+events accepted (HTTP 200), dev server logged success for each. The two
+QA test profiles are left in Klaviyo for cleanup.
+
+**For Jamie:** the metrics `Started Registration` + `Started Checkout`
+now exist in Klaviyo — build flows on them for form-started /
+abandoned-cart nurture (the abandoned-cart flow needs a filter excluding
+profiles who later `Placed Order`). The Beehiiv tag-based capture is
+untouched — both platforms now have the data.
+
+---
+
 ## Jamie — May 22, 2026 (Camps register: retire May from the week picker)
 
 **Why:** May is effectively over and there's no lead time to stand up a

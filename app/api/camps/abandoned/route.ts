@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { trackKlaviyoEvent } from "@/lib/klaviyo";
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
@@ -53,6 +54,25 @@ export async function POST(req: NextRequest) {
     if (gamerFirstName) customFields.push({ name: "gamer_name", value: gamerFirstName });
     if (week) customFields.push({ name: "camp_week", value: week });
     if (slot) customFields.push({ name: "camp_slot", value: slot });
+
+    // 0. Klaviyo — mirror the abandonment into Klaviyo so cart-recovery
+    //    nurture can run from Klaviyo too, alongside Beehiiv. Fired first
+    //    (awaited but soft-failing) so a Beehiiv early-return below can't
+    //    skip it. "Started Checkout" is Klaviyo's conventional
+    //    abandoned-cart trigger metric; a recovery flow on it should add a
+    //    flow filter excluding profiles who later "Placed Order".
+    await trackKlaviyoEvent({
+      metricName: "Started Checkout",
+      email,
+      firstName: parentFirstName || undefined,
+      lastName: parentLastName || undefined,
+      properties: {
+        product: "camps",
+        ...(gamerFirstName ? { gamer_name: gamerFirstName } : {}),
+        ...(week ? { camp_week: week } : {}),
+        ...(slot ? { camp_slot: slot } : {}),
+      },
+    });
 
     // 1. Subscribe (or reactivate). reactivate_existing makes this safe to
     //    re-fire across submits with the same email.
