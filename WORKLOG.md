@@ -6,6 +6,27 @@
 
 ---
 
+## Jamie — May 22, 2026 (Camps register: retire May from the week picker)
+
+**Why:** May is effectively over and there's no lead time to stand up a
+cohort for the last May week. The picker now opens on June.
+
+**What changed (`app/programs/ekuzo-camps/register/page.tsx`):**
+
+- `WEEKS` — dropped Week 01 (May 18-22) and Week 02 (May 25-29). First
+  bookable week is now Week 03 (June 01-05). Week numbering is NOT
+  reindexed — `week.number` flows into Stripe metadata / Sheets / Klaviyo
+  `camp_week`, so June stays Week 03 to keep historical data consistent.
+- `MonthId` type, `MONTHS` tabs, `MONTH_INDEX`, `getMonthForWeek`,
+  `getSelectedMonth` default, and the `weeksByMonth` bucket all updated to
+  June / July / August. Default tab is June.
+
+**Verification:** `tsc --noEmit` clean; picker renders three tabs
+(June/July/August), opens on June 2026 with the four June camp weeks
+selectable.
+
+---
+
 ## Jamie — May 22, 2026 (Camps LP copy: For Gamers intro + Fortnite/Smash/RL callout + Discord dejargon)
 
 **Why:** Copy pass on the camps landing page while taking over Aaron's work.

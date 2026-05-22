@@ -86,8 +86,11 @@ type SquadStatus = "building" | "looking" | null;
 // the Week type still allows the field for backward compat with v1, but
 // the v2 card UI never reads it.
 const WEEKS: Week[] = [
-  { number: 1,  label: "Week 01", dates: "May 18 - 22",  price: 199, originalPrice: 299 },
-  { number: 2,  label: "Week 02", dates: "May 25 - 29",  price: 199, originalPrice: 299 },
+  // May weeks (Week 01 May 18-22, Week 02 May 25-29) retired 2026-05-22 —
+  // May is effectively over and there's no lead time to stand up a cohort
+  // for the last May week. Week numbering is intentionally NOT reindexed:
+  // week.number flows into Stripe metadata / Sheets / Klaviyo `camp_week`,
+  // so June stays Week 03 to keep historical data consistent.
   { number: 3,  label: "Week 03", dates: "June 01 - 05", price: 199, originalPrice: 299 },
   { number: 4,  label: "Week 04", dates: "June 08 - 12", price: 199, originalPrice: 299 },
   { number: 5,  label: "Week 05", dates: "June 15 - 19", price: 199, originalPrice: 299 },
@@ -105,19 +108,17 @@ const SLOT_HOURS = {
 
 // ── v2: Month-grouped week picker ───────────────────────────────────────────
 // Aaron's call — parents struggle to know their summer availability when
-// confronted with all 10 weeks at once. Group weeks by month tab; each
+// confronted with every week at once. Group weeks by month tab; each
 // gamer's selectedMonth state persists their tab choice.
-type MonthId = "May" | "June" | "July" | "August";
+type MonthId = "June" | "July" | "August";
 
 const MONTHS: { id: MonthId; label: string }[] = [
-  { id: "May", label: "May" },
   { id: "June", label: "June" },
   { id: "July", label: "July" },
   { id: "August", label: "August" },
 ];
 
 function getMonthForWeek(weekNumber: number): MonthId {
-  if (weekNumber <= 2) return "May";
   if (weekNumber <= 6) return "June";
   if (weekNumber <= 9) return "July";
   return "August";
@@ -140,7 +141,6 @@ const WEEKDAY_LABELS = ["M", "T", "W", "Th", "F"];
 // picker). Shows the full month with weekends visible so parents can
 // match camp weeks to their actual summer schedule.
 const MONTH_INDEX: Record<MonthId, number> = {
-  May: 4,
   June: 5,
   July: 6,
   August: 7,
@@ -295,7 +295,7 @@ export default function CampsRegisterPage() {
   // v2: per-gamer selected-month tab state for the week picker. Lets each
   // gamer's section keep its own "I'm browsing June" without bleeding to
   // the next gamer. Falls back to the gamer's selectedWeek's month (if
-  // they've already picked), then to May.
+  // they've already picked), then to June (first available month).
   const [selectedMonths, setSelectedMonths] = useState<
     Record<number, MonthId>
   >({});
@@ -303,7 +303,7 @@ export default function CampsRegisterPage() {
   function getSelectedMonth(gi: number, gamer: GamerInfo): MonthId {
     if (selectedMonths[gi]) return selectedMonths[gi];
     if (gamer.selectedWeek) return getMonthForWeek(gamer.selectedWeek);
-    return "May";
+    return "June";
   }
 
   // Payment state
@@ -1113,7 +1113,6 @@ export default function CampsRegisterPage() {
 
                 const activeMonth = getSelectedMonth(gi, gamer);
                 const weeksByMonth: Record<MonthId, typeof WEEKS> = {
-                  May: [],
                   June: [],
                   July: [],
                   August: [],
