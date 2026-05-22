@@ -296,7 +296,7 @@
                           <td width="50%" valign="top" class="stack-column" style="padding: 0 6px 0 0;">
                             <!--[if mso]><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="background-color: #FFFFFF;"><![endif]-->
                             <div class="cta-btn" style="background-color: #FFFFFF; text-align: center;">
-                              <a href="sms:?&body=I%20just%20signed%20up%20for%20EKUZO%20Camps.%20Join%20my%20squad%3A%20{{ event.extra.squad_link }}" style="display: block; padding: 14px 18px; font-family: 'Inter', Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: 0.5px; line-height: 1; text-transform: uppercase;">
+                              <a href="sms:?&body=I%20just%20signed%20up%20for%20EKUZO%20Camps.%20Join%20my%20squad%3A%20{{ event.extra.squad_link|urlencode }}" style="display: block; padding: 14px 18px; font-family: 'Inter', Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: 0.5px; line-height: 1; text-transform: uppercase;">
                                 Text a Friend
                               </a>
                             </div>
@@ -305,7 +305,7 @@
                           <td width="50%" valign="top" class="stack-column" style="padding: 0 0 0 6px;">
                             <!--[if mso]><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="background-color: #FFFFFF;"><![endif]-->
                             <div class="cta-btn" style="background-color: #FFFFFF; text-align: center;">
-                              <a href="mailto:?subject=Join%20my%20EKUZO%20Camps%20squad&body=I%20just%20signed%20up%20for%20EKUZO%20Camps.%20Join%20my%20squad%3A%20{{ event.extra.squad_link }}" style="display: block; padding: 14px 18px; font-family: 'Inter', Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: 0.5px; line-height: 1; text-transform: uppercase;">
+                              <a href="mailto:?subject=Join%20my%20EKUZO%20Camps%20squad&body=I%20just%20signed%20up%20for%20EKUZO%20Camps.%20Join%20my%20squad%3A%20{{ event.extra.squad_link|urlencode }}" style="display: block; padding: 14px 18px; font-family: 'Inter', Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: 0.5px; line-height: 1; text-transform: uppercase;">
                                 Email a Friend
                               </a>
                             </div>

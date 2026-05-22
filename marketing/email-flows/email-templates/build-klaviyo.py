@@ -92,6 +92,25 @@ def rewrite_klaviyo_tags(html: str) -> str:
     return html
 
 
+# Inside `sms:` and `mailto:` hrefs, the squad-link URL ends up as the value
+# of a `body=` parameter. Klaviyo renders `{{ event.extra.squad_link }}` to
+# a real URL that contains its OWN query string (`...register?squad=TOKEN`).
+# Strict URI parsers (per RFC 6068 mailto / RFC 5724 sms) treat that `?` as
+# starting a new query component and can truncate the body. The visible
+# `<a href="{{ ... }}">` preview block keeps the link plain (we want a
+# clickable, decoded URL there); only the body= context gets `|urlencode`d.
+SMS_MAILTO_URLENCODE_RE = re.compile(
+    r'(href="(?:sms:|mailto:)[^"]*body=[^"]*?)\{\{\s*event\.extra\.squad_link\s*\}\}'
+)
+
+
+def rewrite_sms_mailto_urlencode(html: str) -> str:
+    """URL-encode the squad link wherever it lives inside an sms/mailto body."""
+    return SMS_MAILTO_URLENCODE_RE.sub(
+        r"\1{{ event.extra.squad_link|urlencode }}", html
+    )
+
+
 def strip_preview_blocks(html: str) -> str:
     """Remove every region between PREVIEW-ONLY:START and PREVIEW-ONLY:END.
 
@@ -108,6 +127,7 @@ def strip_preview_blocks(html: str) -> str:
 def build(source_html: str) -> str:
     html = strip_preview_blocks(source_html)
     html = rewrite_klaviyo_tokens(html)
+    html = rewrite_sms_mailto_urlencode(html)
     html = rewrite_klaviyo_tags(html)
     return html
 

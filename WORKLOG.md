@@ -6,6 +6,42 @@
 
 ---
 
+## Jamie — May 22, 2026 (Email share links: URL-encode squad_link inside sms/mailto body params)
+
+**Why:** Email 1's "Bring Your Crew" block has two share CTAs whose
+hrefs embed `{{ event.extra.squad_link }}` inside `sms:?...body=` /
+`mailto:?...body=` query strings. When Klaviyo renders, the squad link
+is a full URL containing its own `?squad=TOKEN` — that second `?` can
+trip strict URI parsers (RFC 6068 mailto / RFC 5724 sms) into truncating
+the body. The visible composer text is the same either way, but
+`|urlencode` makes the encoding strict-correct.
+
+**What changed (touches Aaron's `marketing/email-flows/`):**
+
+- **`email-templates/build-klaviyo.py`** — new `rewrite_sms_mailto_urlencode`
+  pipeline step. Regex finds `{{ event.extra.squad_link }}` only inside
+  `sms:`/`mailto:` hrefs that contain a `body=` param and appends
+  `|urlencode`. The visible-link `<a href="{{ event.extra.squad_link }}">`
+  preview is intentionally untouched (it needs a plain clickable URL).
+  Order: after `rewrite_klaviyo_tokens`, before `rewrite_klaviyo_tags`.
+- **`email-templates/klaviyo-ready/01-purchase-confirmation.klaviyo.html`**
+  — hand-applied the same `|urlencode` change to the two existing hrefs
+  (Text-a-Friend, Email-a-Friend) so the live klaviyo-ready file matches
+  what the pipeline now produces. The build output and the pipeline are
+  consistent.
+
+**Verification:** ran the new `rewrite_sms_mailto_urlencode` function
+against a synthetic sample — sms + mailto body params get `|urlencode`,
+a plain visible-link href stays plain. `python3 -m py_compile` clean.
+
+**For Aaron:** the build step is durable — your next `build-klaviyo.py`
+run will preserve the urlencode on the share-link hrefs without any
+source-file change on your end. If you'd rather express the intent in
+the source instead (e.g. `{{ squad_link|urlencode }}` as a separate
+token), happy to move it that way.
+
+---
+
 ## Jamie — May 22, 2026 (Universal squad link + Klaviyo mid-funnel capture)
 
 **Why:** "Build your squad" is going universal — every camps buyer should
