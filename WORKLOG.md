@@ -6,6 +6,24 @@
 
 ---
 
+## Jamie — May 21, 2026 (Blog cluster follow-ups: reel transcript + global attribution)
+
+**Why:** Two refinements after the homeschool blog cluster landed on `dev`.
+
+**What changed:**
+
+- **`app/blog/when-gaming-helps-homeschool-kids/page.tsx`** — removed the on-page "Read the transcript" disclosure under the Instagram reel. The transcript stays in the `VideoObject` JSON-LD (crawler-facing); on-page it gave readers a path away from the video. Matches the league-of-legends post.
+- **`components/analytics/CaptureAttribution.tsx`** (new) + **`app/layout.tsx`** — first-touch UTM capture (`captureAttribution()`) now runs once from the root layout, so it fires on every page (blog posts, home, all of it), not just the three program pages. UTM-tagged traffic landing on a blog post now stitches its acquisition source onto a later registration.
+- **`components/analytics/TrackPageView.tsx`** — removed the now-redundant `captureAttribution()` call; it still fires the program-specific GA4 / Pixel events.
+
+**Verification:**
+- `node node_modules/.bin/tsc --noEmit` clean.
+- Loaded a blog URL with UTM params → `sessionStorage.ekuzo_attribution` captured them; first-touch-wins held across a second page with different UTMs.
+
+**Heads up for Aaron:** `app/layout.tsx` is a shared file — `<CaptureAttribution>` is now mounted there.
+
+---
+
 ## Jamie — May 21, 2026 (Homeschool gaming blog cluster: pillar + companion)
 
 **Why:** A two-post topic cluster for organic search + LLM citation, built from the locked content drafts in `EKUZO/Marketing/content-drafts`. The pillar makes the argument (the environment around a game decides the outcome, not raw hours); the companion is the 200+ parent Facebook-thread case study. Cross-linked both ways.
