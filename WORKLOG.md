@@ -6,6 +6,44 @@
 
 ---
 
+## Jamie — May 22, 2026 (Discord dejargon pass + Email 4 deferred)
+
+**Why:** Parent-facing Discord references on the LP + email get dejargoned;
+kid-facing hype copy and the explainer FAQ keep the word on purpose.
+Email 4 / `squad_member_count` is explicitly deferred as pre-optimization.
+
+**What changed:**
+
+- **`app/programs/ekuzo-camps/page.tsx`** — Day 5 of the 5-day progression
+  ("DAY FIVE: COMPETE"): "a Discord group" → "a private squad space".
+- **`marketing/email-flows/email-templates/klaviyo-ready/01-purchase-confirmation.klaviyo.html`**
+  — "Safe Servers" card: "moderated, private Discord channels" →
+  "moderated, private team channels". Same caveat as the urlencode fix —
+  Aaron's source needs the same swap to make it durable across rebuilds.
+
+**Intentionally kept "Discord" (per Jamie review):**
+
+- "Climb together" hype card in the For Gamers section — kid-facing copy,
+  the word lands harder for the audience that lives on Discord.
+- FAQ "We use Discord — what does that mean for my family?" — the word
+  IS the question; this entry exists to dejargon the term in context, so
+  dropping it would make the FAQ unfindable for the parent who needs it.
+- FAQ "What happens after camp week ends?" — references the squad's
+  Discord server but follows the explainer FAQ, so context carries it.
+
+**Email 4 / `squad_member_count` — explicitly deferred:**
+
+Item 2 of `marketing/email-flows/JAMIE-HANDOFF.md` (the per-squad member
+counter Aaron wanted for an Email 4 conditional "your squad has X of 5"
+CTA) is not being built. Jamie's call: pre-optimization, not relevant to
+the current shipping scope. If/when Email 4 is on the docket, revisit.
+
+**Verification:** `tsc --noEmit` clean. Cleared `.next` + restarted dev
+server (Turbopack HMR was serving a stale `page.tsx`); after restart the
+rendered Day 5 copy reflects the new wording.
+
+---
+
 ## Jamie — May 22, 2026 (Email share links: URL-encode squad_link inside sms/mailto body params)
 
 **Why:** Email 1's "Bring Your Crew" block has two share CTAs whose

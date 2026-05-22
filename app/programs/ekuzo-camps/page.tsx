@@ -82,7 +82,7 @@ const weekPath = [
     day: "F",
     phase: "DAY FIVE",
     title: "COMPETE",
-    desc: "Friday is Tournament Day. The squad puts it all together in a structured, casted bracket. They leave with a team name, a Discord group, and teammates for life.",
+    desc: "Friday is Tournament Day. The squad puts it all together in a structured, casted bracket. They leave with a team name, a private squad space, and teammates for life.",
   },
 ];
 
