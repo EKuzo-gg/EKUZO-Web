@@ -1195,7 +1195,7 @@ export default function EkuzoCampsPage() {
                   className="font-body font-black text-white mb-6"
                   style={{ fontSize: "clamp(1.25rem, 1.8vw, 1.5rem)", lineHeight: "1.1" }}
                 >
-                  No trolling. No crash-outs. No exceptions.
+                  No trolling. No targeting. Crash-outs get coached.
                 </p>
 
                 {/* "What's not allowed" — quick scannable list. Caroline
@@ -1206,7 +1206,7 @@ export default function EkuzoCampsPage() {
                     "Slurs, harassment, or targeted insults — coach removes the player immediately",
                     "Public-matchmaking trolling or trash talk — we don't play in public lobbies",
                     "Sharing personal information, off-platform DMs, screenshots without consent",
-                    "Sore-loser behavior, blame-casting, or rage-quitting on teammates",
+                    "Blame-casting, rage-quitting, or repeated behavior that hurts the team",
                   ].map((line) => (
                     <li key={line} className="flex items-start gap-3">
                       <span className="mt-2 shrink-0 w-2 h-2 bg-red" aria-hidden="true" />

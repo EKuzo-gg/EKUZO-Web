@@ -31,8 +31,13 @@
   `<br />`-separated), "The game may be different…", and the small
   bordered "All skill levels are welcome…" footer. Card auto-grows to
   fit; no layout/clip changes. Headline untouched.
+- Code of Conduct — callout "No trolling. No crash-outs. No exceptions."
+  → "No trolling. No targeting. Crash-outs get coached." Not-allowed
+  list item "Sore-loser behavior, blame-casting, or rage-quitting on
+  teammates" → "Blame-casting, rage-quitting, or repeated behavior that
+  hurts the team."
 
-**Verification:** `tsc --noEmit` clean; both blocks rendered in-browser,
+**Verification:** `tsc --noEmit` clean; all blocks rendered in-browser,
 the callout card lays out cleanly within the For Gamers section.
 
 ---
