@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Python build script bycode
+__pycache__/
+*.pyc
+
+# Self-contained preview is a build artifact (images inlined as base64 for AirDrop
+# to phone for mobile QA). Big, regenerable, no reason to version it.
+email-templates/*.SELF-CONTAINED.html
+email-templates/klaviyo-ready/*.SELF-CONTAINED*.html
+
+# Pre-solo variant backup archive — kept locally for reference but not worth
+# versioning into the new repo. If you ever want this back, it's in the
+# May 22 commit on the old standalone copy.
+email-templates/klaviyo-ready/_v2-backup-pre-solo/
