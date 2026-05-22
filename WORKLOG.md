@@ -6,6 +6,29 @@
 
 ---
 
+## Jamie — May 22, 2026 (Camps LP copy: For Gamers intro + Fortnite/Smash/RL callout)
+
+**Why:** Copy pass on the camps landing page while taking over Aaron's work.
+
+**What changed (`app/programs/ekuzo-camps/page.tsx`, copy only):**
+
+- For Gamers intro paragraph — "Drills in the morning. Scrims in the
+  afternoon." → "Warmup, get the lesson, drill, and scrim to make it
+  real." Rest of the paragraph unchanged.
+- "My kid plays Fortnite, Smash, Rocket League. Will this work?" callout
+  card — answer body rewritten to the locked copy. Now six paragraphs in
+  the existing `flex flex-col gap-4` column: bold "Yes…" opener, the
+  fundamentals paragraph, the "doesn't need to be a League player" line,
+  the three per-game lines (Fortnite / Rocket League / Smash,
+  `<br />`-separated), "The game may be different…", and the small
+  bordered "All skill levels are welcome…" footer. Card auto-grows to
+  fit; no layout/clip changes. Headline untouched.
+
+**Verification:** `tsc --noEmit` clean; both blocks rendered in-browser,
+the callout card lays out cleanly within the For Gamers section.
+
+---
+
 ## Jamie — May 22, 2026 (QA pass on Aaron's camps V2→V1 work + routing code-review)
 
 **Why:** QA Aaron's four camps commits (`51247cb`, `44afa7d`, `5454bfe`,

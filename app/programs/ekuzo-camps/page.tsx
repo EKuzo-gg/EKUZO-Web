@@ -996,7 +996,7 @@ export default function EkuzoCampsPage() {
                 className="font-body text-white leading-relaxed max-w-3xl"
                 style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)" }}
               >
-                You&apos;re not solo queueing for five days. You&apos;re on a five-player squad with a coach who knows what it takes. Drills in the morning. Scrims in the afternoon. VOD review with your team. By Friday, you&apos;re playing in a casted bracket against the other camp squads. Think of it as the most structured, coached ranked experience you&apos;ve ever played.
+                You&apos;re not solo queueing for five days. You&apos;re on a five-player squad with a coach who knows what it takes. Warmup, get the lesson, drill, and scrim to make it real. VOD review with your team. By Friday, you&apos;re playing in a casted bracket against the other camp squads. Think of it as the most structured, coached ranked experience you&apos;ve ever played.
               </p>
             </ScrollReveal>
 
@@ -1124,16 +1124,24 @@ export default function EkuzoCampsPage() {
                 </h3>
                 <div className="flex flex-col gap-4">
                   <p className="font-body font-bold text-black leading-snug" style={{ fontSize: "clamp(1.25rem, 1.8vw, 1.5rem)" }}>
-                    Yes. And it&apos;ll make them better at the game they actually play.
+                    Yes. Our experience is built around competitive fundamentals that carry across games.
                   </p>
                   <p className="font-body text-black/70 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
-                    Every multiplayer game shares the same competitive fundamentals: communication under pressure, decision-making with incomplete information, role discipline, reading the map, reading your team. League of Legends teaches those fundamentals in their purest form — five players, structured roles, no escape from the team game.
+                    Most multiplayer games ask kids to do the same things: communicate under pressure, make quick decisions, understand their role, read the game, and work with teammates. League of Legends makes those skills easy to coach because the team structure is clear: five players, defined roles, shared objectives, and constant communication.
                   </p>
                   <p className="font-body text-black/70 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
-                    Kids who come through EKUZO camp consistently get sharper at every other game they play. Better game sense in Fortnite. Better team play in Rocket League. Better stage IQ in Smash. The fundamentals carry.
+                    That means your child does not need to be a League player to benefit.
+                  </p>
+                  <p className="font-body text-black/70 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
+                    A Fortnite player can build better game sense.<br />
+                    A Rocket League player can improve team communication.<br />
+                    A Smash player can sharpen decision-making and match awareness.
+                  </p>
+                  <p className="font-body text-black/70 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
+                    The game may be different. The fundamentals carry.
                   </p>
                   <p className="font-body text-black/50 text-sm leading-relaxed pt-2 border-t border-black/10">
-                    All skill levels welcome — beginners included. No League experience required.
+                    All skill levels are welcome — beginners included. No League experience required.
                   </p>
                 </div>
               </div>
