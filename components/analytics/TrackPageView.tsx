@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { trackViewContent, trackInitiateCheckout } from "@/lib/analytics";
-import { captureAttribution } from "@/lib/attribution";
 
 /**
  * Drop into server-rendered pages to fire analytics events on mount.
@@ -11,9 +10,8 @@ import { captureAttribution } from "@/lib/attribution";
  * - program landing pages: <TrackPageView program="camps" />
  * - registration pages:    <TrackPageView program="camps" event="checkout" value={199} />
  *
- * Also captures first-touch UTM params into sessionStorage so the
- * register form submit can attach them to the Stripe Payment Intent
- * metadata. See lib/attribution.ts.
+ * First-touch UTM capture is handled globally by <CaptureAttribution>
+ * in the root layout — it is not done here.
  */
 export default function TrackPageView({
   program,
@@ -25,7 +23,6 @@ export default function TrackPageView({
   value?: number;
 }) {
   useEffect(() => {
-    captureAttribution();
     if (event === "checkout") {
       trackInitiateCheckout({ program, value });
     } else {
