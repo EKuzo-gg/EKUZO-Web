@@ -8,7 +8,6 @@ import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ModalButton from "@/components/ui/ModalButton";
 import Eyebrow from "@/components/ui/Eyebrow";
-import PlayOnceVideo from "@/components/ui/PlayOnceVideo";
 import Image from "next/image";
 import TrackPageView from "@/components/analytics/TrackPageView";
 import JsonLd from "@/components/JsonLd";
@@ -172,11 +171,13 @@ export default function Ekuzo100Page() {
               width: "min(100%, calc(70vh * 9 / 16))",
             }}
           >
-            <PlayOnceVideo
+            <video
               src="/videos/ekuzo100-hero.mp4"
+              controls
+              playsInline
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ borderRadius: "2px" }}
-              delay={3000}
             />
           </div>
         </div>

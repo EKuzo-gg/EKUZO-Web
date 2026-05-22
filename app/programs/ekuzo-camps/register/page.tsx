@@ -1,10 +1,38 @@
 "use client";
 
+// CAMPS REGISTER PAGE — formerly the "v2" variant; promoted to the
+// canonical /programs/ekuzo-camps/register route 2026-05-19 (overwrote
+// prior v1). Metadata (noindex, canonical to itself) lives in the
+// sibling layout.tsx.
+//
+// Form logic, validation, Stripe Elements integration, lead-capture POST,
+// abandoned-cart POST, analytics, attribution capture, fb cookies, and
+// submission URLs match the API contract Jamie set up — no API changes
+// required. The cta_source query param (?cta=hero|sticky|footer) still
+// threads through to Beehiiv via Stripe metadata.
+//
+// Intentional drops from prior v1 (confirmed with Aaron 2026-05-19):
+//   • AM/PM slot choice → PM only (all camps run 1pm-4pm).
+//   • Gamer last name field → removed (state field kept as "" default
+//     so backend payload stays stable; assume gamer shares parent's
+//     surname for fulfillment ops).
+//   • Team Status "Building / Looking" fork → silent default of
+//     "looking"; squad formation now handled by the post-purchase
+//     squad-code link on the success page.
+//   • Coach reminder card → removed (coach credibility lives on LP +
+//     success page).
+//   • Trust strip below hero → removed (same trust info still in the
+//     desktop right-rail summary).
+//   • Cards-style week picker → removed; Calendar picker is the only
+//     view. Shared across all gamers (one week + PM for the whole
+//     registration).
+
 import { useState, useEffect, useRef } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
+import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
@@ -20,7 +48,6 @@ const stripePromise = loadStripe(
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type SlotUrgency = "available" | "filling-fast" | "limited";
 
 type Week = {
   number: number;
@@ -28,8 +55,6 @@ type Week = {
   dates: string;
   price: number;
   originalPrice?: number;
-  amUrgency?: SlotUrgency;
-  pmUrgency?: SlotUrgency;
 };
 
 type GamerInfo = {
@@ -56,16 +81,23 @@ type SquadStatus = "building" | "looking" | null;
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
+// v2: AM slot offering dropped per Aaron — simplifies the decision down
+// to a single time per week. amUrgency entries cleared from the data;
+// the Week type still allows the field for backward compat with v1, but
+// the v2 card UI never reads it.
 const WEEKS: Week[] = [
-  { number: 1,  label: "Week 01", dates: "May 18 - 22",  price: 199, originalPrice: 299, pmUrgency: "filling-fast" },
-  { number: 2,  label: "Week 02", dates: "May 25 - 29",  price: 199, originalPrice: 299 },
+  // May weeks (Week 01 May 18-22, Week 02 May 25-29) retired 2026-05-22 —
+  // May is effectively over and there's no lead time to stand up a cohort
+  // for the last May week. Week numbering is intentionally NOT reindexed:
+  // week.number flows into Stripe metadata / Sheets / Klaviyo `camp_week`,
+  // so June stays Week 03 to keep historical data consistent.
   { number: 3,  label: "Week 03", dates: "June 01 - 05", price: 199, originalPrice: 299 },
   { number: 4,  label: "Week 04", dates: "June 08 - 12", price: 199, originalPrice: 299 },
-  { number: 5,  label: "Week 05", dates: "June 15 - 19", price: 199, originalPrice: 299, pmUrgency: "limited" },
-  { number: 6,  label: "Week 06", dates: "June 22 - 26", price: 199, originalPrice: 299, amUrgency: "filling-fast" },
+  { number: 5,  label: "Week 05", dates: "June 15 - 19", price: 199, originalPrice: 299 },
+  { number: 6,  label: "Week 06", dates: "June 22 - 26", price: 199, originalPrice: 299 },
   { number: 7,  label: "Week 07", dates: "Jul 13 - 17",  price: 199, originalPrice: 299 },
   { number: 8,  label: "Week 08", dates: "Jul 20 - 24",  price: 199, originalPrice: 299 },
-  { number: 9,  label: "Week 09", dates: "Jul 27 - 31",  price: 199, originalPrice: 299, amUrgency: "limited", pmUrgency: "filling-fast" },
+  { number: 9,  label: "Week 09", dates: "Jul 27 - 31",  price: 199, originalPrice: 299 },
   { number: 10, label: "Week 10", dates: "Aug 03 - 07",  price: 199, originalPrice: 299 },
 ];
 
@@ -73,6 +105,85 @@ const SLOT_HOURS = {
   AM: "9:00 AM to 12:00 PM",
   PM: "1:00 PM to 4:00 PM",
 };
+
+// ── v2: Month-grouped week picker ───────────────────────────────────────────
+// Aaron's call — parents struggle to know their summer availability when
+// confronted with every week at once. Group weeks by month tab; each
+// gamer's selectedMonth state persists their tab choice.
+type MonthId = "June" | "July" | "August";
+
+const MONTHS: { id: MonthId; label: string }[] = [
+  { id: "June", label: "June" },
+  { id: "July", label: "July" },
+  { id: "August", label: "August" },
+];
+
+function getMonthForWeek(weekNumber: number): MonthId {
+  if (weekNumber <= 6) return "June";
+  if (weekNumber <= 9) return "July";
+  return "August";
+}
+
+// Extract M-F day numbers from a week.dates string (e.g. "May 18 - 22" or
+// "June 01 - 05"). All camp weeks run Mon-Fri within a single month, so we
+// just walk start+0..+4. Returns five-element array for the mini-calendar
+// strip render.
+function getWeekDays(dates: string): number[] {
+  const match = dates.match(/(\d+)\s*-\s*(\d+)/);
+  if (!match) return [];
+  const start = parseInt(match[1], 10);
+  return [start, start + 1, start + 2, start + 3, start + 4];
+}
+
+const WEEKDAY_LABELS = ["M", "T", "W", "Th", "F"];
+
+// Real-calendar helpers (used by the v2 Calendar treatment of the week
+// picker). Shows the full month with weekends visible so parents can
+// match camp weeks to their actual summer schedule.
+const MONTH_INDEX: Record<MonthId, number> = {
+  June: 5,
+  July: 6,
+  August: 7,
+};
+const CAMP_YEAR = 2026;
+
+type CalendarCell = { date: number; isCurrentMonth: boolean };
+
+// Builds a 7-col × n-row grid (Sun → Sat) covering the full month plus
+// the trailing days from the prev month and leading days from the next,
+// so the first week starts on Sunday and the last week ends on Saturday.
+function getMonthCalendarGrid(monthIndex: number, year: number): CalendarCell[][] {
+  const startDayOfWeek = new Date(year, monthIndex, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+  const prevMonthDays = new Date(year, monthIndex, 0).getDate();
+
+  const cells: CalendarCell[] = [];
+  // Prev-month trailing days (greyed out)
+  for (let i = startDayOfWeek - 1; i >= 0; i--) {
+    cells.push({ date: prevMonthDays - i, isCurrentMonth: false });
+  }
+  // Current month days
+  for (let d = 1; d <= daysInMonth; d++) {
+    cells.push({ date: d, isCurrentMonth: true });
+  }
+  // Next-month leading days to fill the grid (greyed out)
+  let nextDay = 1;
+  while (cells.length % 7 !== 0) {
+    cells.push({ date: nextDay++, isCurrentMonth: false });
+  }
+
+  const rows: CalendarCell[][] = [];
+  for (let i = 0; i < cells.length; i += 7) {
+    rows.push(cells.slice(i, i + 7));
+  }
+  return rows;
+}
+
+// Extract the start-day (Mon) of a camp week from its "Jun 1 - 5" string.
+function getCampWeekStartDay(week: Week): number {
+  const m = week.dates.match(/(\d+)/);
+  return m ? parseInt(m[1], 10) : 0;
+}
 
 const GAMES = [
   "League of Legends",
@@ -152,7 +263,9 @@ export default function CampsRegisterPage() {
     phone: "",
   });
   const [gamers, setGamers] = useState<GamerInfo[]>([emptyGamer()]);
-  const [squadStatus, setSquadStatus] = useState<SquadStatus>(null);
+  // Default "looking" so submit validation passes without the (removed)
+  // Team Status UI. Squad-code joiners override via joiningSquadToken.
+  const [squadStatus, setSquadStatus] = useState<SquadStatus>("looking");
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [errors, setErrors] = useState<Array<{ key: string; message: string }>>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -178,6 +291,20 @@ export default function CampsRegisterPage() {
   const [expandedSlotPickers, setExpandedSlotPickers] = useState<
     Record<number, boolean>
   >({});
+
+  // v2: per-gamer selected-month tab state for the week picker. Lets each
+  // gamer's section keep its own "I'm browsing June" without bleeding to
+  // the next gamer. Falls back to the gamer's selectedWeek's month (if
+  // they've already picked), then to June (first available month).
+  const [selectedMonths, setSelectedMonths] = useState<
+    Record<number, MonthId>
+  >({});
+
+  function getSelectedMonth(gi: number, gamer: GamerInfo): MonthId {
+    if (selectedMonths[gi]) return selectedMonths[gi];
+    if (gamer.selectedWeek) return getMonthForWeek(gamer.selectedWeek);
+    return "June";
+  }
 
   // Payment state
   const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -384,27 +511,24 @@ export default function CampsRegisterPage() {
         setCrewOverrideAcknowledged(true);
       }
     }
-    updateGamer(gamerIndex, { selectedWeek: weekNum, selectedSlot: slot });
+    // Shared calendar — write the same (week, slot) to EVERY gamer in
+    // state. v2 ships with one shared picker for the whole registration
+    // (all gamers attend the same week and PM session), so a click on
+    // the calendar must sync across all gamers, not just one. The
+    // gamerIndex param is preserved on the signature for callsite
+    // compatibility (squad-join warning above still uses it for
+    // messaging) but the write itself is fan-out.
+    setGamers((prev) =>
+      prev.map((g) => ({ ...g, selectedWeek: weekNum, selectedSlot: slot }))
+    );
+    // Suppress unused-var warning for the legacy gamerIndex param.
+    void gamerIndex;
 
-    // Added gamers (index > 0): once they've picked, collapse the grid back
-    // to the summary card. Gamer 0 keeps the full grid visible — it's the
-    // primary decision-making surface and doesn't need to collapse.
-    if (gamerIndex > 0) {
-      setExpandedSlotPickers((prev) => ({ ...prev, [gamerIndex]: false }));
-    }
-
-    // UX guidance: after the parent picks a slot, walk them down to the
-    // next thing to fill in (this gamer's info block). RAF lets the
-    // selection state paint first so the smooth scroll feels connected
-    // to the click rather than racing it. Skips cleanly on SSR / tests
-    // that lack `window` or `document`.
-    if (typeof window !== "undefined") {
-      requestAnimationFrame(() => {
-        document
-          .getElementById(`gamer-${gamerIndex}-info`)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
+    // Auto-scroll to gamer-info on pick — DISABLED 2026-05-19 while Aaron
+    // iterates Calendar layout (every click was dragging the page down,
+    // which broke the iteration loop). To revive: restore the
+    // requestAnimationFrame block that scrollIntoView's gamer-${gi}-info
+    // — git history has the exact snippet.
   }
 
   // ── Email lead capture (onBlur) ─────────────────────────────────────────
@@ -438,21 +562,28 @@ export default function CampsRegisterPage() {
     // `required` does nothing — this function is the only gate. Each error
     // carries a `key` that matches a `data-error-key` attribute on the field
     // so handleSubmit can scroll-and-focus the first invalid field. Order
-    // here is the same as the visible page order, top-to-bottom.
+    // here mirrors the visible page order, top-to-bottom: Parent Info,
+    // then each gamer's name/birthday, then the shared camp-week picker.
 
-    // Gamer sections (rendered above the parent block on this page).
+    // Parent block — rendered first on the page.
+    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
+    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
+    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
+    if (!parent.phone.trim()) errs.push({ key: "parent.phone", message: "Parent phone number is required." });
+
+    // Gamer sections. v2 only requires name + birthday + a chosen week/
+    // slot — the v1 requirements for preferredGames, gender, and
+    // skillLevel were dropped along with their UI fields. State for
+    // those fields still exists in the gamer object (sent as empty
+    // values in the submit payload to preserve the API contract), but
+    // no longer gates submission. Name/birthday render above the week
+    // picker, so they're checked first.
     gamers.forEach((g, i) => {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
-      if (!g.selectedWeek || !g.selectedSlot)
-        errs.push({ key: `gamer-${i}.weekSlot`, message: `${label}: please select a camp week and time slot.` });
       if (!g.firstName.trim()) errs.push({ key: `gamer-${i}.firstName`, message: `${label} first name is required.` });
-      if (!g.lastName.trim()) errs.push({ key: `gamer-${i}.lastName`, message: `${label} last name is required.` });
-      if (g.preferredGames.length === 0)
-        errs.push({ key: `gamer-${i}.preferredGames`, message: `${label}: please select at least one favorite game.` });
       if (!g.birthday.trim()) errs.push({ key: `gamer-${i}.birthday`, message: `${label} birthday is required.` });
-      if (!g.gender.trim()) errs.push({ key: `gamer-${i}.gender`, message: `${label} gender is required.` });
-      if (!g.skillLevel.trim())
-        errs.push({ key: `gamer-${i}.skillLevel`, message: `${label} gaming experience is required.` });
+      if (!g.selectedWeek || !g.selectedSlot)
+        errs.push({ key: `gamer-${i}.weekSlot`, message: `${label}: please select a camp week.` });
     });
 
     // Team status — not required when arriving via a crew link. A joining
@@ -460,12 +591,6 @@ export default function CampsRegisterPage() {
     // selector and send squadStatus=null so the webhook writes "".
     if (!joiningSquadToken && !squadStatus)
       errs.push({ key: "squadStatus", message: "Please let us know your team status." });
-
-    // Parent block (rendered last on the page).
-    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
-    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
-    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
-    if (!parent.phone.trim()) errs.push({ key: "parent.phone", message: "Parent phone number is required." });
 
     return errs;
   }
@@ -495,18 +620,16 @@ export default function CampsRegisterPage() {
     setErrors([]);
     setIsSubmitting(true);
 
-    // Squad tokens — fresh each submit for Building; joining_squad_token
-    // is whatever the ?squad= query param told us on page load. Per
-    // QA-FLAGGED-ISSUES #10 a joining visitor is a pure join: never mint
-    // a new squad_token even if squadStatus somehow leaked into state
-    // (the Team Status selector is hidden in the UI when joiningSquadToken
-    // is set, so this is defense-in-depth).
-    const squadTokenForSubmit =
-      joiningSquadToken
-        ? null
-        : squadStatus === "building"
-        ? nanoid(10)
-        : null;
+    // Squad tokens — every non-joining registration mints a fresh
+    // squad_token (10-char nanoid). The "Building / Looking" fork was
+    // retired in the 2026-05-19 v2 promotion; team formation now happens
+    // post-purchase via the squad-share link surfaced on the success page
+    // + welcome email, so every parent IS effectively a squad owner.
+    //
+    // Joining visitors (arrived via ?squad=TOKEN) are still a pure join —
+    // they inherit the owner's token via joining_squad_token and never
+    // mint a new one (QA-FLAGGED-ISSUES #10).
+    const squadTokenForSubmit = joiningSquadToken ? null : nanoid(10);
     const squadStatusForSubmit = joiningSquadToken ? null : squadStatus;
 
     const attribution = getAttribution();
@@ -649,39 +772,57 @@ export default function CampsRegisterPage() {
           visual identity (grey band + torn-paper transition) but stays
           short so the email-first capture and week selector land near
           first paint on the FB/IG in-app browser viewport. */}
-      <section className="relative bg-[#f5f5f7]" style={{ overflow: "clip" }}>
+      <section
+        className="relative"
+        style={{
+          overflow: "clip",
+          // Diagonal: warm pink glow in the upper-LEFT, deep purple
+          // bloom in the bottom-RIGHT. Punchy intensity.
+          background:
+            "radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255, 190, 245, 0.80), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(80, 15, 150, 0.85), transparent 60%), #A435F0",
+        }}
+      >
         <div
-          className="max-w-[1280px] mx-auto"
-          style={{ paddingTop: "80px", paddingBottom: "64px", paddingLeft: "24px", paddingRight: "24px" }}
+          className="max-w-[1232px] mx-auto px-6 sm:px-10"
+          style={{
+            paddingTop: "48px",
+            // Hero bottom padding capped at 130 desktop / 60 mobile per
+            // Aaron's spec — torn paper image may visually extend above
+            // this padding band, which is the intended look.
+            paddingBottom: "clamp(60px, 9vw, 130px)",
+          }}
         >
           <div className="flex flex-col gap-3" style={{ maxWidth: "720px" }}>
-            <Eyebrow>
-              <span className="inline-flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M5 1.5V4M11 1.5V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M2 6.5H14" stroke="currentColor" strokeWidth="1.5" />
-                </svg>
-                Summer 2026 season
-              </span>
-            </Eyebrow>
+            <Eyebrow variant="light">League of Legends</Eyebrow>
 
             <h1
               className="font-display uppercase"
               style={{ fontSize: "clamp(3.5rem, 6.5vw, 6.5rem)", lineHeight: "0.85" }}
             >
-              <span style={{ color: "#0a0a0a" }}>Enroll your </span>
-              <span style={{ color: "#ed2024" }}>gamer</span>
+              <span style={{ color: "#ffffff" }}>Esports</span>
+              <span style={{ color: "#E0FF4F" }}>Camp</span>
             </h1>
+
+            {/* Hero supporting copy — short pitch that frames the product
+                for a parent landing cold (e.g., via direct register link). */}
+            <p
+              className="font-body text-white leading-relaxed mt-2"
+              style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)", maxWidth: "640px" }}
+            >
+              Sign up today to level up this summer. Premier esports camps where kids learn from pros how to play, compete, and work as a team.
+            </p>
           </div>
         </div>
 
-        {/* White torn paper overlay — keeps the grey-to-white transition
-            consistent with the LP's torn-paper aesthetic even with the
-            shorter hero. */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none translate-y-[55%]">
+        {/* White torn paper overlay — sits flush with the bottom of
+            the hero (no translate), so the entire image lives INSIDE
+            the purple. The tear edge is at the top of the image, the
+            bottom is solid white meeting the form section seamlessly.
+            -bottom-px nudges 1px down to absorb a subpixel seam that
+            otherwise showed as a faint hairline above the form. */}
+        <div className="absolute -bottom-px left-0 right-0 z-20 pointer-events-none">
           <Image
-            src="/images/torn-paper-white-1.png"
+            src="/images/new%20torn%20paper/torn-paper-white-top-2@2x.png"
             alt=""
             width={4320}
             height={600}
@@ -691,9 +832,23 @@ export default function CampsRegisterPage() {
         </div>
       </section>
 
+      {/* Trust strip (15 hours / Code of Conduct / Secure payment /
+          Refund) REMOVED 2026-05-19 to lift the form above the fold.
+          Same trust info still surfaces in the desktop right rail
+          ("What you get" + refund line). Consider a compact mobile-only
+          trust line near the form later if mobile conversion needs it. */}
+
       {/* ── Form body ──────────────────────────────────────────────────── */}
       <section className="bg-white">
-        <div className="max-w-[1232px] mx-auto px-6 sm:px-10 py-16 md:py-24">
+        <div className="max-w-[1232px] mx-auto px-6 sm:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
+          {/* v2: two-column layout on lg+ — main form on the left, sticky
+              checkout summary on the right. Mobile (and tablet < lg)
+              collapses to single column with the existing inline Summary
+              block at the bottom of the form. min-w-0 on the left column
+              prevents long form-content overflow from stretching the
+              grid track. */}
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12 xl:gap-16">
+            <div className="min-w-0">
 
           {/* Team-join banner — shown when arriving via ?squad=TOKEN */}
           {joiningCrewInfo && (
@@ -731,429 +886,27 @@ export default function CampsRegisterPage() {
             </div>
           )}
 
-          {/* ── Email-first capture ─────────────────────────────────────
-              Highest-leverage move on the page. Sits above the week
-              selector so the bail cohort (5/5 ad-driven prospects on
-              FB/IG in-app browser mobile in the 5/12 recordings; none
-              typed into a field) leaves us with an email and a Beehiiv
-              form_started_camps tag before they hit the week-selection
-              cliff. Shares parent.email state with the parent email
-              field further down the form, so typing in either view
-              updates the other and submitting with the bottom field
-              empty after typing here will still pass validation. Fires
-              the existing handleEmailBlur (POST /api/camps/lead,
-              idempotent on email; see /api/camps/lead/route.ts) on
-              blur so we don't spam Beehiiv on every keystroke. Shares
-              the parent.email data-error-key so validation focus on
-              empty email lands on this field first (DOM order). */}
-          <div className="mb-12" style={{ scrollMarginTop: "100px" }}>
-            <label
-              htmlFor="parent-email-top"
-              className="font-body font-bold text-[#374151] block mb-2"
-              style={{ fontSize: "14px", lineHeight: "20px" }}
-            >
-              Your email *
-            </label>
-            <p
-              className="font-body text-[#4b5563] mb-3"
-              style={{ fontSize: "13px", lineHeight: "20px" }}
-            >
-              Enter your email so we can reach out if you don&apos;t finish today.
-            </p>
-            <input
-              id="parent-email-top"
-              data-error-key="parent.email"
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              value={parent.email}
-              onChange={(e) => setParent((p) => ({ ...p, email: e.target.value }))}
-              onBlur={handleEmailBlur}
-              placeholder="your.email@example.com"
-              className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af] w-full"
-              style={{ fontSize: "16px", lineHeight: "normal" }}
-            />
-          </div>
-
-          {/* ── Per-gamer sections ─────────────────────────────────── */}
-          {gamers.map((gamer, gi) => (
-            <div key={gi} className="mb-12 last:mb-0">
-              {/* Gamer header (only when multiple) */}
-              {gamers.length > 1 && (
-                <div className="flex items-center justify-between mb-8">
-                  <h2
-                    className="font-display uppercase text-black"
-                    style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
-                  >
-                    Gamer {gi + 1}
-                  </h2>
-                  <button
-                    type="button"
-                    onClick={() => removeGamer(gi)}
-                    className="font-body text-sm text-red hover:underline hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150 cursor-pointer"
-                  >
-                    Remove
-                  </button>
-                </div>
-              )}
-
-              {/* ── Week Selection ──────────────────────────────────── */}
-              {/* Added gamers (gi > 0) with an inherited selection collapse to
-                  a summary card until the parent clicks "Change". Gamer 0
-                  and any added gamer that hasn't picked yet always see the
-                  full 10-week grid. This avoids repeating 30 slot buttons
-                  on every added gamer. */}
-              {(() => {
-                const hasSelection =
-                  gamer.selectedWeek != null && gamer.selectedSlot != null;
-                const collapsible =
-                  (gi > 0 || !!joiningSquadToken) && hasSelection;
-                const showGrid = !collapsible || expandedSlotPickers[gi];
-
-                if (!showGrid) {
-                  const selectedWeek = WEEKS.find(
-                    (w) => w.number === gamer.selectedWeek
-                  );
-                  return (
-                    <div className="mb-10">
-                      <div className="flex items-center justify-between gap-6 bg-[#f5f5f7] rounded-lg p-6 ring-1 ring-black/10">
-                        <div className="flex flex-col gap-1 min-w-0">
-                          <span
-                            className="font-body font-bold text-red uppercase"
-                            style={{
-                              fontSize: "12px",
-                              letterSpacing: "1.2px",
-                              lineHeight: "16px",
-                            }}
-                          >
-                            Camp week &amp; slot
-                          </span>
-                          <span
-                            className="font-display uppercase text-[#0a0a0a]"
-                            style={{
-                              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                              lineHeight: "1.1",
-                            }}
-                          >
-                            {selectedWeek?.label}: {selectedWeek?.dates}
-                          </span>
-                          <span
-                            className="font-body text-[#0a0a0a]"
-                            style={{ fontSize: "14px", lineHeight: "20px" }}
-                          >
-                            {gamer.selectedSlot === "AM"
-                              ? "Morning"
-                              : "Afternoon"}{" "}
-                            session (
-                            {gamer.selectedSlot
-                              ? SLOT_HOURS[gamer.selectedSlot]
-                              : ""}
-                            )
-                          </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setExpandedSlotPickers((prev) => ({
-                              ...prev,
-                              [gi]: true,
-                            }))
-                          }
-                          className="font-body font-semibold text-sm text-red hover:underline hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150 cursor-pointer shrink-0"
-                        >
-                          Change
-                        </button>
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div className="mb-10">
-                    <h2
-                      className="font-display uppercase text-black leading-[0.85]"
-                      style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-                    >
-                      Choose your camp week
-                    </h2>
-                    <p
-                      className="font-body text-[#4b5563] mt-6"
-                      style={{
-                        fontSize: "clamp(0.875rem, 1.2vw, 16px)",
-                        lineHeight: "28px",
-                      }}
-                    >
-                      Teams will be built on availability per time zone and
-                      preferred time slot.
-                    </p>
-
-                    <div
-                      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"
-                      data-error-key={`gamer-${gi}.weekSlot`}
-                      tabIndex={-1}
-                      style={{ scrollMarginTop: "100px" }}
-                    >
-                      {WEEKS.map((week) => {
-                        const isSelectedWeek =
-                          gamer.selectedWeek === week.number;
-                        return (
-                          <div
-                            key={week.number}
-                            className={`relative bg-[#f5f5f7] p-[33px] flex flex-col gap-6 transition-all ${
-                              isSelectedWeek
-                                ? "ring-2 ring-red shadow-lg shadow-red/10"
-                                : ""
-                            }`}
-                            style={{ clipPath: `url(#${TORN_PAPER_CLIP_ID})` }}
-                          >
-                            {/* Card header */}
-                            <div className="flex items-start justify-between">
-                              <div
-                                className="flex flex-col"
-                                style={{ gap: "4.5px" }}
-                              >
-                                <span
-                                  className="font-body font-bold text-red uppercase"
-                                  style={{
-                                    fontSize: "12px",
-                                    letterSpacing: "1.2px",
-                                    lineHeight: "16px",
-                                  }}
-                                >
-                                  {week.label}
-                                </span>
-                                <span
-                                  className="font-display text-[#0a0a0a] uppercase"
-                                  style={{
-                                    fontSize: "clamp(2rem, 2.5vw, 36px)",
-                                    lineHeight: "1.1",
-                                  }}
-                                >
-                                  {week.dates}
-                                </span>
-                              </div>
-                              <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex items-baseline gap-2">
-                                {week.originalPrice && (
-                                  <span className="font-body text-[#9ca3af] text-xs line-through leading-5">
-                                    ${week.originalPrice}
-                                  </span>
-                                )}
-                                <span className="font-body font-bold text-[#0a0a0a] text-sm leading-5">
-                                  ${week.price}
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Slot cards */}
-                            <div className="flex flex-col gap-4">
-                              <SessionCard
-                                sessionLabel="Morning session"
-                                slotLabel="AM"
-                                hours={SLOT_HOURS.AM}
-                                urgency={week.amUrgency}
-                                isSelected={
-                                  isSelectedWeek && gamer.selectedSlot === "AM"
-                                }
-                                onClick={() =>
-                                  selectSlot(gi, week.number, "AM")
-                                }
-                              />
-                              <SessionCard
-                                sessionLabel="Afternoon session"
-                                slotLabel="PM"
-                                hours={SLOT_HOURS.PM}
-                                urgency={week.pmUrgency}
-                                isSelected={
-                                  isSelectedWeek && gamer.selectedSlot === "PM"
-                                }
-                                onClick={() =>
-                                  selectSlot(gi, week.number, "PM")
-                                }
-                              />
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })()}
-
-              {/* ── Divider ──────────────────────────────────────────── */}
-              <hr className="border-t border-black/10 my-12" />
-
-              {/* ── Gamer Info ──────────────────────────────────────── */}
-              {/* Scroll target when a time slot is picked (see selectSlot).
-                  scrollMarginTop leaves room for the fixed nav so the h3
-                  doesn't end up hidden behind it. */}
-              <div
-                id={`gamer-${gi}-info`}
-                className="mb-8"
-                style={{ scrollMarginTop: "100px" }}
-              >
-                <h3
-                  className="font-display uppercase text-black leading-[0.85] mb-6"
-                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-                >
-                  Tell us about your gamer{gamers.length > 1 ? ` (${gi + 1})` : ""}
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
-                  <InputField
-                    label="First name *"
-                    required
-                    errorKey={`gamer-${gi}.firstName`}
-                    value={gamer.firstName}
-                    onChange={(v) => updateGamer(gi, { firstName: v })}
-                    placeholder="Enter first name"
-                  />
-                  <InputField
-                    label="Last name *"
-                    required
-                    errorKey={`gamer-${gi}.lastName`}
-                    value={gamer.lastName}
-                    onChange={(v) => updateGamer(gi, { lastName: v })}
-                    placeholder="Enter last name"
-                  />
-                </div>
-
-                <div className="mt-6">
-                  <InputField
-                    label="Gamer tag / username"
-                    value={gamer.gamerTag}
-                    onChange={(v) => updateGamer(gi, { gamerTag: v })}
-                    placeholder="Enter gamer tag"
-                  />
-                </div>
-
-                {/* Favorite games — 4-col checkbox grid */}
-                <div className="mt-6" style={{ scrollMarginTop: "100px" }} data-error-key={`gamer-${gi}.preferredGames`} tabIndex={-1}>
-                  <label className="font-body font-bold text-[#374151] block mb-3" style={{ fontSize: "14px", lineHeight: "20px" }}>
-                    Favorite games * (select all that apply)
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4">
-                    {GAMES.map((game) => {
-                      const checked = gamer.preferredGames.includes(game);
-                      return (
-                        <label key={game} className="flex items-center gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={() => toggleGame(gi, game)}
-                            className="w-5 h-5 rounded-sm border border-[#767676] accent-red cursor-pointer"
-                          />
-                          <span className="font-body font-medium text-[#0a0a0a] text-sm leading-5">
-                            {game}
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Birthday / Gender / Gaming Experience — 2-col grid; 3rd item wraps to second row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-6">
-                  <InputField
-                    label="Birthday *"
-                    type="date"
-                    errorKey={`gamer-${gi}.birthday`}
-                    value={gamer.birthday}
-                    onChange={(v) => updateGamer(gi, { birthday: v })}
-                  />
-                  <SelectField
-                    label="Gender *"
-                    errorKey={`gamer-${gi}.gender`}
-                    value={gamer.gender}
-                    onChange={(v) => updateGamer(gi, { gender: v })}
-                    options={GENDER_OPTIONS}
-                    placeholder="Select gender"
-                  />
-                  <SelectField
-                    label="Gaming experience *"
-                    errorKey={`gamer-${gi}.skillLevel`}
-                    value={gamer.skillLevel}
-                    onChange={(v) => updateGamer(gi, { skillLevel: v })}
-                    options={SKILL_LEVELS}
-                    placeholder="Select..."
-                  />
-                </div>
-              </div>
-
-              {/* Divider between gamers */}
-              {gi < gamers.length - 1 && (
-                <hr className="border-t-2 border-black/10 my-10" />
-              )}
-            </div>
-          ))}
-
-          {/* ── Add another gamer ──────────────────────────────────── */}
-          <button
-            type="button"
-            onClick={addGamer}
-            className="w-full py-4 border-2 border-dashed border-black/20 rounded-sm font-body font-semibold text-black/50 hover:border-red/40 hover:text-red/70 hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 cursor-pointer mb-12"
-          >
-            + Add another gamer
-          </button>
-
-          {/* ── Team Status (vibe check) ───────────────────────────── */}
-          {/* Hidden when arriving via a crew link (?squad=TOKEN). Per
-              QA-FLAGGED-ISSUES #10, showing this selector to a joining
-              visitor caused accidental double-registration (joiner AND
-              new crew owner with a fresh squad_token). The top banner
-              already tells them they're joining, so we skip the vibe
-              check entirely and submit as a pure join. */}
-          {!joiningSquadToken && (
-            <>
-              <hr className="border-t border-black/10 my-12" />
-              <div className="mb-12">
-                <h2
-                  className="font-display uppercase text-black leading-[0.85] mb-6"
-                  style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-                >
-                  Team status
-                </h2>
-                <p
-                  className="font-body text-[#4b5563] mb-8"
-                  style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
-                >
-                  How should we think about your gamer&apos;s team?
-                </p>
-
-                <div
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-                  data-error-key="squadStatus"
-                  tabIndex={-1}
-                  style={{ scrollMarginTop: "100px" }}
-                >
-                  <SquadCard
-                    title="Building a team"
-                    subtitle="My gamer is joining with friends"
-                    isSelected={squadStatus === "building"}
-                    onClick={() => setSquadStatus("building")}
-                  />
-                  <SquadCard
-                    title="Looking for a team"
-                    subtitle="Match my gamer with a great team"
-                    isSelected={squadStatus === "looking"}
-                    onClick={() => setSquadStatus("looking")}
-                  />
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* ── Parent / Guardian Info ─────────────────────────────── */}
-          {/* Note: the email field below is wired to the same parent.email
-              state as the email-first capture at the top of the form. Both
-              fire handleEmailBlur on blur. If the parent typed at the top,
-              this field renders pre-filled; they can still edit here. */}
-          <hr className="border-t border-black/10 my-12" />
+          {/* ── Parent contact info (LEADS THE FORM in v2) ──────────────
+              Moved to the top of the form (was previously below Team
+              Status). Captures richer nurture-campaign data for dropoffs
+              than the single-email-first approach v1 used. The email
+              field still fires handleEmailBlur on blur so the existing
+              form_started_camps Beehiiv tag fires the moment a valid
+              email is typed — same behavior the email-first capture
+              had, just sitting alongside name/phone now.
+              Note for Jamie: to nurture dropoffs with the richer
+              parent.firstName / parent.lastName / parent.phone data,
+              /api/camps/lead would need to accept those fields. For
+              now, only email is sent to /api/camps/lead via the email
+              onBlur; the additional fields land in Beehiiv only after
+              cart-abandoned or successful payment. Quick API extension
+              when you're ready. */}
           <div className="mb-12">
             <h2
-              className="font-display uppercase text-black leading-[0.85] mb-10"
-              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+              className="font-display uppercase text-black leading-[0.85] mb-8"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
             >
-              Parent information
+              Parent Info
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
@@ -1194,32 +947,533 @@ export default function CampsRegisterPage() {
             </div>
           </div>
 
-          {/* ── Additional Info ─────────────────────────────────────── */}
-          <div className="mb-12">
-            <h3
-              className="font-body font-bold text-[#0a0a0a] mb-6"
-              style={{ fontSize: "20px", lineHeight: "28px" }}
-            >
-              Additional information
-            </h3>
-            <label
-              className="font-body font-bold text-[#374151] block mb-2"
-              style={{ fontSize: "14px", lineHeight: "20px" }}
-            >
-              Anything special we should know about?
-            </label>
-            <textarea
-              value={additionalInfo}
-              onChange={(e) => setAdditionalInfo(e.target.value)}
-              rows={4}
-              placeholder="Tell us more."
-              className="font-body text-[#0a0a0a] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#0a0a0a] transition-colors resize-y"
-              style={{ fontSize: "16px", lineHeight: "24px" }}
-            />
-          </div>
+          {/* ── Per-gamer sections ─────────────────────────────────── */}
+          {gamers.map((gamer, gi) => (
+            <div key={gi} className="mb-12 last:mb-0">
+              {/* Gamer header (only when multiple) */}
+              {gamers.length > 1 && (
+                <div className="flex items-center justify-between mb-8">
+                  <h2
+                    className="font-display uppercase text-black"
+                    style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+                  >
+                    Gamer {gi + 1}
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => removeGamer(gi)}
+                    className="font-body text-sm text-red hover:underline hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150 cursor-pointer"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
 
-          {/* ── Summary Overview ────────────────────────────────────── */}
-          <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden">
+              {/* ── Gamer Info (v2: name + birthday, MOVED above Week Selection) ─
+                  Order swap from v1: gamer identity (name + birthday)
+                  now collects BEFORE the week/slot commitment, mirroring
+                  the parent-info pattern at the top. Lowers the bar
+                  before the most-abandoned step (week selection).
+
+                  Note for Jamie: gamerTag / preferredGames / gender /
+                  skillLevel state fields are retained in the gamer
+                  state shape and still ship in the /api/camps/register
+                  payload as their empty defaults ("" / [] / "" / "")
+                  so your Stripe metadata schema, webhook, and Google
+                  Sheets columns stay intact. Data just won't be
+                  populated for v2 registrations.
+
+                  Scroll target preserved for the selectSlot
+                  scrollIntoView call. scrollMarginTop leaves room for
+                  the fixed nav. */}
+              <div
+                id={`gamer-${gi}-info`}
+                className="mb-8"
+                style={{ scrollMarginTop: "100px" }}
+              >
+                <h3
+                  className="font-display uppercase text-black leading-[0.85] mb-6"
+                  style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+                >
+                  Gamer {gamers.length > 1 ? `${gi + 1} ` : ""}Info
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                  <InputField
+                    label="First name *"
+                    required
+                    errorKey={`gamer-${gi}.firstName`}
+                    value={gamer.firstName}
+                    onChange={(v) => updateGamer(gi, { firstName: v })}
+                    placeholder="Enter first name"
+                  />
+                  <InputField
+                    label="Birthday *"
+                    type="date"
+                    errorKey={`gamer-${gi}.birthday`}
+                    value={gamer.birthday}
+                    onChange={(v) => updateGamer(gi, { birthday: v })}
+                  />
+                </div>
+              </div>
+
+
+              {/* Divider between gamers */}
+              {gi < gamers.length - 1 && (
+                <hr className="border-t-2 border-black/10 my-10" />
+              )}
+            </div>
+          ))}
+
+          {/* v2: shared "Add another gamer" button + Calendar —
+              lifted out of the per-gamer loop 2026-05-19 so the
+              Calendar is one shared picker for all gamers. Wiring
+              still drives only gamers[0]; multi-gamer sync deferred
+              to the code-cleanup pass. */}
+          <button
+            type="button"
+            onClick={addGamer}
+            className="w-full py-4 border-2 border-dashed border-black/20 rounded-sm font-body font-semibold text-black/50 hover:border-red/40 hover:text-red/70 hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 cursor-pointer mb-12"
+          >
+            + Add another gamer
+          </button>
+
+          {(() => {
+            // Shared calendar wiring stub — locally alias loop-scope
+            // names so the lifted Week Selection JSX (which still
+            // references gi/gamer) compiles unchanged. Wired to
+            // gamers[0] until multi-gamer sync lands.
+            const gi = 0;
+            const gamer = gamers[0];
+            return (
+              <>
+              {/* ── Week Selection ──────────────────────────────────── */}
+              {/* Added gamers (gi > 0) with an inherited selection collapse to
+                  a summary card until the parent clicks "Change". Gamer 0
+                  and any added gamer that hasn't picked yet always see the
+                  full 10-week grid. This avoids repeating 30 slot buttons
+                  on every added gamer. */}
+              {(() => {
+                const hasSelection =
+                  gamer.selectedWeek != null && gamer.selectedSlot != null;
+                const collapsible =
+                  (gi > 0 || !!joiningSquadToken) && hasSelection;
+                const showGrid = !collapsible || expandedSlotPickers[gi];
+
+                if (!showGrid) {
+                  const selectedWeek = WEEKS.find(
+                    (w) => w.number === gamer.selectedWeek
+                  );
+                  return (
+                    <div className="mb-10">
+                      <div className="flex items-center justify-between gap-6 bg-[#f5f5f7] rounded-lg p-6 ring-1 ring-black/10">
+                        <div className="flex flex-col gap-1 min-w-0">
+                          <span
+                            className="font-body font-bold text-red uppercase"
+                            style={{
+                              fontSize: "12px",
+                              letterSpacing: "1.2px",
+                              lineHeight: "16px",
+                            }}
+                          >
+                            Camp week &amp; slot
+                          </span>
+                          <span
+                            className="font-display uppercase text-[#0a0a0a]"
+                            style={{
+                              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                              lineHeight: "1.1",
+                            }}
+                          >
+                            {selectedWeek?.dates}
+                          </span>
+                          <span
+                            className="font-body text-[#0a0a0a]"
+                            style={{ fontSize: "14px", lineHeight: "20px" }}
+                          >
+                            Afternoon session ({SLOT_HOURS.PM})
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setExpandedSlotPickers((prev) => ({
+                              ...prev,
+                              [gi]: true,
+                            }))
+                          }
+                          className="font-body font-semibold text-sm text-red hover:underline hover:brightness-110 active:scale-[0.97] active:brightness-90 transition-all duration-150 cursor-pointer shrink-0"
+                        >
+                          Change
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+
+                const activeMonth = getSelectedMonth(gi, gamer);
+                const weeksByMonth: Record<MonthId, typeof WEEKS> = {
+                  June: [],
+                  July: [],
+                  August: [],
+                };
+                WEEKS.forEach((w) =>
+                  weeksByMonth[getMonthForWeek(w.number)].push(w)
+                );
+                const visibleWeeks = weeksByMonth[activeMonth];
+
+                return (
+                  <div className="mb-10">
+                    <h2
+                      className="font-display uppercase text-black leading-[0.85]"
+                      style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+                    >
+                      Choose your camp week
+                    </h2>
+                    <p
+                      className="font-body text-[#4b5563] mt-6"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.2vw, 16px)",
+                        lineHeight: "28px",
+                      }}
+                    >
+                      All camps run Monday through Friday, 1:00 PM to 4:00 PM (afternoon sessions only). Browse by month and tap the week that works for your family — teams are built on availability per time zone.
+                    </p>
+
+
+                    {/* July 4 break note — appears at the bottom of June
+                        and top of July tabs to explain the 2-week gap
+                        (Jun 22-26 → Jul 13-17). Anchors the gap to a
+                        calendar event parents already know. */}
+                    {activeMonth === "July" && (
+                      <div className="mt-6 flex items-start gap-3 bg-[#fff7ed] border border-[#fed7aa] rounded-sm px-4 py-3">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="text-[#ea580c] shrink-0 mt-0.5" aria-hidden="true">
+                          <path d="M10 2L16.5 5V10C16.5 13.5 13.5 16.5 10 17.5C6.5 16.5 3.5 13.5 3.5 10V5L10 2Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                          <path d="M10 7V10.5M10 13V13.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        </svg>
+                        <p className="font-body text-[#9a3412] text-sm leading-snug">
+                          Camp pauses for July 4 holidays (Jun 29 – Jul 10).
+                          We&apos;re back the week of July 13.
+                        </p>
+                      </div>
+                    )}
+
+                    {/* v2 picker treatment B — MONTHLY CALENDAR (iOS-
+                        inspired, EKUZO-styled). Mockup-locked layout:
+                        month-name tabs across the top, prev/next
+                        chevrons flanking a centered "Month YEAR" label,
+                        full Sun-Sat day-name strip, and a 7-col date
+                        grid where every current-month date sits inside
+                        a light-bordered cell (graph-paper feel).
+                        Leading/trailing days from adjacent months are
+                        blank. Camp weeks (Mon-Fri) become clickable;
+                        only the SELECTED camp week renders with a
+                        purple fill — unselected camp weeks read as
+                        plain weekdays per Aaron's mockup. Purple
+                        (non-destructive) used in place of brand red
+                        because red signals warning/error states. */}
+                    {(() => {
+                      const monthIdx = MONTHS.findIndex(
+                        (m) => m.id === activeMonth
+                      );
+                      const canGoPrev = monthIdx > 0;
+                      const canGoNext = monthIdx < MONTHS.length - 1;
+                      const goToMonth = (delta: number) => {
+                        const nextIdx = monthIdx + delta;
+                        if (nextIdx < 0 || nextIdx >= MONTHS.length) return;
+                        setSelectedMonths((prev) => ({
+                          ...prev,
+                          [gi]: MONTHS[nextIdx].id,
+                        }));
+                      };
+                      const grid = getMonthCalendarGrid(
+                        MONTH_INDEX[activeMonth],
+                        CAMP_YEAR
+                      );
+                      const selectedWeekObj = gamer.selectedWeek
+                        ? WEEKS.find((w) => w.number === gamer.selectedWeek)
+                        : null;
+                      // "Jul 13 - 17" → "JULY 13-17". Data is mixed
+                      // ("May", "June", "Jul"…); expand 3-char months to
+                      // the full name so the summary line reads as a
+                      // proper date (Aaron's call 2026-05-19 — abbreviated
+                      // months felt clipped).
+                      const MONTH_FULL_NAMES: Record<string, string> = {
+                        Jan: "January", Feb: "February", Mar: "March",
+                        Apr: "April", May: "May", Jun: "June", June: "June",
+                        Jul: "July", Aug: "August", Sep: "September",
+                        Oct: "October", Nov: "November", Dec: "December",
+                      };
+                      const formatDateRange = (dates: string): string => {
+                        const m = dates.match(/^(\w+)\s+(\d+)\s*-\s*(\d+)$/);
+                        if (!m) return dates.toUpperCase();
+                        const fullMonth = MONTH_FULL_NAMES[m[1]] ?? m[1];
+                        return `${fullMonth.toUpperCase()} ${m[2]}-${m[3]}`;
+                      };
+                      return (
+                        <div
+                          className="mt-8 max-w-md bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08)] border border-[#f0f0f2] px-5 py-5"
+                          data-error-key={`gamer-${gi}.weekSlot`}
+                          tabIndex={-1}
+                          style={{ scrollMarginTop: "100px" }}
+                        >
+                          {/* Month tabs — direct picker for the 4 camp
+                              months. Selected tab fills purple; others
+                              are outlined white. Complements the < / >
+                              arrows below for users who prefer a direct
+                              jump. */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-4">
+                            {MONTHS.map((m) => {
+                              const isActive = activeMonth === m.id;
+                              return (
+                                <button
+                                  key={m.id}
+                                  type="button"
+                                  onClick={() =>
+                                    setSelectedMonths((prev) => ({
+                                      ...prev,
+                                      [gi]: m.id,
+                                    }))
+                                  }
+                                  aria-pressed={isActive}
+                                  className={`py-2 rounded-md border font-body font-bold transition-colors cursor-pointer active:scale-[0.98] ${
+                                    isActive
+                                      ? "bg-purple border-purple text-white"
+                                      : "bg-white border-[#e5e7eb] text-[#0a0a0a] hover:bg-[#f9fafb]"
+                                  }`}
+                                  style={{ fontSize: "13px" }}
+                                >
+                                  {m.label}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {/* Header: prev arrow · Month Year · next arrow */}
+                          <div className="flex items-center justify-between mb-4">
+                            <button
+                              type="button"
+                              onClick={() => goToMonth(-1)}
+                              disabled={!canGoPrev}
+                              aria-label="Previous month"
+                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#0a0a0a] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                                <path d="M9 2.5L4 7l5 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </button>
+                            <span
+                              className="font-display uppercase text-[#0a0a0a]"
+                              style={{
+                                fontSize: "clamp(32px, 4.5vw, 42px)",
+                                lineHeight: "1",
+                              }}
+                            >
+                              {activeMonth} {CAMP_YEAR}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => goToMonth(1)}
+                              disabled={!canGoNext}
+                              aria-label="Next month"
+                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#0a0a0a] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                                <path d="M5 2.5L10 7l-5 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </button>
+                          </div>
+
+                          {/* Day-of-week strip */}
+                          <div className="grid grid-cols-7 mb-1.5">
+                            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+                              <span
+                                key={d}
+                                className="text-center font-body font-medium text-[#9ca3af] pb-1"
+                                style={{ fontSize: "11px", lineHeight: "1.5" }}
+                              >
+                                {d}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Date grid */}
+                          <div className="grid grid-cols-7 gap-1.5">
+                            {grid.flat().map((cell, idx) => {
+                              const dayOfWeek = idx % 7; // 0=Sun, 1=Mon, ..., 6=Sat
+                              const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
+                              const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+                              // Leading/trailing days from adjacent months
+                              // render as completely blank cells per the
+                              // mockup — keeps the grid clean.
+                              if (!cell.isCurrentMonth) {
+                                return (
+                                  <div key={idx} className="aspect-square" />
+                                );
+                              }
+
+                              // Match cell to a camp week iff Mon-Fri in
+                              // the active month and within the date
+                              // range of one of our 10 camp weeks.
+                              const campWeek = isWeekday
+                                ? WEEKS.find((w) => {
+                                    if (getMonthForWeek(w.number) !== activeMonth) return false;
+                                    const start = getCampWeekStartDay(w);
+                                    return cell.date >= start && cell.date <= start + 4;
+                                  })
+                                : undefined;
+
+                              const isSelected =
+                                !!campWeek && gamer.selectedWeek === campWeek.number;
+
+                              // SELECTED camp week — solid purple fill.
+                              if (isSelected && campWeek) {
+                                return (
+                                  <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={() => selectSlot(gi, campWeek.number, "PM")}
+                                    aria-pressed={true}
+                                    aria-label={`Selected: ${campWeek.label}, ${campWeek.dates}`}
+                                    className="aspect-square flex items-center justify-center rounded-md bg-purple border border-purple text-white transition-all duration-150 cursor-pointer active:scale-[0.97]"
+                                  >
+                                    <span
+                                      className="font-body font-bold"
+                                      style={{ fontSize: "13px" }}
+                                    >
+                                      {cell.date}
+                                    </span>
+                                  </button>
+                                );
+                              }
+
+                              // Unselected camp week — same look as plain
+                              // weekday but clickable + cursor-pointer.
+                              // Match the mockup: no tint, no dot. Hover
+                              // adds a subtle purple-soft fill so desktop
+                              // users get a discoverability cue.
+                              if (campWeek) {
+                                return (
+                                  <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={() => selectSlot(gi, campWeek.number, "PM")}
+                                    aria-pressed={false}
+                                    aria-label={`Select ${campWeek.label}, ${campWeek.dates}`}
+                                    className="aspect-square flex items-center justify-center rounded-md border border-[#e5e7eb] bg-white hover:bg-purple-soft hover:border-purple/40 transition-all duration-150 cursor-pointer active:scale-[0.97]"
+                                  >
+                                    <span
+                                      className="font-body font-bold text-[#0a0a0a]"
+                                      style={{ fontSize: "13px" }}
+                                    >
+                                      {cell.date}
+                                    </span>
+                                  </button>
+                                );
+                              }
+
+                              // Non-camp current-month day — visibly
+                              // disabled: muted fill, lighter border,
+                              // light-gray text. Same treatment for
+                              // weekends + weekdays-without-a-camp so the
+                              // grid clearly communicates "camp not
+                              // available" (Aaron 2026-05-19 — was
+                              // rendering weekday text in full black,
+                              // which read as active even though the
+                              // cell wasn't clickable).
+                              return (
+                                <div
+                                  key={idx}
+                                  aria-disabled="true"
+                                  className="aspect-square flex items-center justify-center rounded-md border border-[#f0f0f2] bg-[#fafafa]"
+                                >
+                                  <span
+                                    className="font-body font-bold text-[#d1d5db]"
+                                    style={{ fontSize: "13px" }}
+                                  >
+                                    {cell.date}
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Selection summary bar — date range in
+                              display font (big, bold, black) with the
+                              day-range as a supporting purple line
+                              below. Light purple background. ALWAYS
+                              rendered (with `invisible` when no week
+                              chosen) so picking a week doesn't push
+                              the page down — Aaron 2026-05-19. */}
+                          <div
+                            className={`mt-5 bg-purple-soft border border-purple/20 rounded-lg px-4 py-3 ${
+                              selectedWeekObj ? "" : "invisible"
+                            }`}
+                            aria-hidden={!selectedWeekObj}
+                          >
+                            <span
+                              className="block font-display uppercase text-black"
+                              style={{
+                                fontSize: "clamp(26px, 3.5vw, 34px)",
+                                lineHeight: "1",
+                              }}
+                            >
+                              {selectedWeekObj
+                                ? formatDateRange(selectedWeekObj.dates)
+                                : "PLACEHOLDER 00-00"}
+                            </span>
+                            <span
+                              className="block font-body font-bold text-purple mt-1.5"
+                              style={{ fontSize: "15px", lineHeight: "1.2" }}
+                            >
+                              Monday through Friday · 1:00 PM – 4:00 PM
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                );
+              })()}
+              </>
+            );
+          })()}
+
+          {/* v2: standalone "Add another gamer" button MOVED into the
+              per-gamer loop (now sits under the last gamer's Gamer Info
+              block so it lives with the gamer-identity content).
+              Coach reminder card MOVED to after Team Status (thematic
+              pairing: who's on your gamer's team + who coaches them). */}
+
+          {/* Team Status (Building / Looking) section REMOVED 2026-05-19.
+              Squad-code flow handles team formation post-registration
+              (success page surfaces a shareable squad link). Everyone
+              defaults to "looking" — see squadStatus useState default. */}
+
+          {/* Coach reminder card ("Your gamer's coaches" + avatars +
+              Meet the team link) REMOVED 2026-05-19 — same coach
+              credibility lives on the LP and the success page. */}
+
+
+          {/* v2: Parent / Guardian Info MOVED to the top of the form
+              (above the per-gamer sections). Additional Info section
+              REMOVED entirely per Aaron's call — was eating real estate
+              without driving conversion, and any special-needs notes
+              parents need to flag can come via the post-registration
+              welcome email reply.
+
+              Note: additionalInfo state is intentionally retained — it
+              still ships in the /api/camps/register payload as "" so
+              the Stripe metadata schema stays unchanged. The setter is
+              unused; safe to leave. */}
+
+          {/* ── Summary Overview (mobile/tablet only on v2) ──────────
+              On lg+ the sticky sidebar takes over — see the <aside> at
+              the bottom of this section. Mobile users still need an
+              inline summary so they see the per-gamer breakdown and the
+              total before the Continue button. */}
+          <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden lg:hidden">
             <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
               <h3
                 className="font-display uppercase text-[#0a0a0a]"
@@ -1245,18 +1499,13 @@ export default function CampsRegisterPage() {
                             {s.gamerName}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
-                            {s.weekLabel}: {s.weekDates}
+                            {s.weekDates}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
-                            {s.slot === "AM" ? "Morning" : "Afternoon"} session ({s.slotHours})
+                            Afternoon session ({s.slotHours})
                           </span>
                         </div>
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap flex items-baseline gap-1.5">
-                          {s.originalPrice && (
-                            <span className="font-normal text-[#9ca3af] line-through">
-                              ${s.originalPrice}
-                            </span>
-                          )}
+                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
                           ${s.price}
                         </span>
                       </div>
@@ -1279,6 +1528,56 @@ export default function CampsRegisterPage() {
             </div>
           </div>
 
+          {/* ── What happens after I pay (NEW v2) ────────────────────
+              Kills the post-purchase black box. Three-step preview
+              between Summary and Continue button: immediate receipt
+              → welcome email + Discord invite within 24h → meet coach
+              + squad Day 1. Visible to all viewport sizes; horizontal
+              flow on sm+, stacked on xs. */}
+          {!showPayment && (
+            <div className="mb-8">
+              <h3 className="font-body font-bold text-[#0a0a0a] mb-4" style={{ fontSize: "16px", lineHeight: "24px" }}>
+                What happens after you click pay
+              </h3>
+              <ol className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {[
+                  {
+                    step: "1",
+                    title: "Right away",
+                    desc: "Confirmation + payment receipt land in your inbox.",
+                  },
+                  {
+                    step: "2",
+                    title: "Within 24 hours",
+                    desc: "Welcome email with camp details and everything you need to get ready to play.",
+                  },
+                  {
+                    step: "3",
+                    title: "Week before camp",
+                    desc: "Meet your coach and introduction to the rest of the team.",
+                  },
+                ].map((s) => (
+                  <li
+                    key={s.step}
+                    className="bg-[#fafafa] border border-[#e5e7eb] rounded-sm px-4 py-4 flex gap-3 items-start"
+                  >
+                    <span className="shrink-0 w-7 h-7 rounded-full bg-red text-white font-body font-bold flex items-center justify-center text-sm" aria-hidden="true">
+                      {s.step}
+                    </span>
+                    <div className="flex flex-col gap-0.5 min-w-0">
+                      <span className="font-body font-bold text-[#0a0a0a] text-sm leading-tight">
+                        {s.title}
+                      </span>
+                      <span className="font-body text-[#6b7280] text-xs leading-snug">
+                        {s.desc}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
           {/* ── CTA Button / Payment Section ─────────────────────── */}
           {!showPayment ? (
             <>
@@ -1292,8 +1591,49 @@ export default function CampsRegisterPage() {
                 {isSubmitting ? "Setting up payment..." : "Continue to payment"}
               </button>
 
-              <p className="font-body text-black/40 text-center mt-4" style={{ fontSize: "clamp(0.75rem, 1.1vw, 0.8125rem)" }}>
-                You&apos;ll enter payment details below. By registering you agree to our{" "}
+              {/* Reassurance row (NEW v2) — three small trust signals
+                  directly under the Continue button. Replaces the lonely
+                  Terms-of-Service-only line. ToS link still present, just
+                  demoted to a sub-line. */}
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                {[
+                  {
+                    label: "Full refund 14+ days out",
+                    icon: (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.4" />
+                        <path d="M7 4.5V7L8.5 8.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "Code of Conduct enforced",
+                    icon: (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M7 1.5L11.5 3.5V7C11.5 9.5 9.5 11.5 7 12C4.5 11.5 2.5 9.5 2.5 7V3.5L7 1.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+                        <path d="M5 7L6.5 8.5L9 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "Secured by Stripe",
+                    icon: (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <rect x="2" y="4.5" width="10" height="7.5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                        <path d="M4 4.5V3.5A2.5 2.5 0 0 1 9.5 3.5V4.5" stroke="currentColor" strokeWidth="1.4" />
+                      </svg>
+                    ),
+                  },
+                ].map((item) => (
+                  <span key={item.label} className="inline-flex items-center gap-1.5 text-[#6b7280]">
+                    {item.icon}
+                    <span className="font-body text-xs leading-tight">{item.label}</span>
+                  </span>
+                ))}
+              </div>
+
+              <p className="font-body text-black/40 text-center mt-3" style={{ fontSize: "clamp(0.7rem, 1vw, 0.75rem)" }}>
+                By registering you agree to our{" "}
                 <a href="/terms-of-service" className="underline hover:text-black/60">
                   Terms of Service
                 </a>
@@ -1349,6 +1689,108 @@ export default function CampsRegisterPage() {
               </button>
             </div>
           ) : null}
+
+            </div>{/* end left column (form) */}
+
+            {/* ── Sticky checkout summary sidebar (NEW v2, lg+ only) ──
+                Persistent right-rail panel showing real-time price,
+                gamer count, and what's-included while the user scrolls
+                the form. Mirror of the inline mobile Summary above —
+                same selectedGamerSummaries + totalPrice state. Hidden
+                below lg breakpoint where the inline mobile summary
+                takes over. Sticky offset accounts for the fixed nav
+                that sits above. */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 flex flex-col gap-4">
+                <div className="border border-[#e5e7eb] rounded-sm overflow-hidden bg-white">
+                  <div className="bg-[#0a0a0a] px-5 py-5">
+                    <h3
+                      className="font-display uppercase text-white"
+                      style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", lineHeight: "1" }}
+                    >
+                      Your registration
+                    </h3>
+                  </div>
+
+                  <div className="px-5 py-5">
+                    {selectedGamerSummaries.length === 0 ? (
+                      <p className="font-body text-[#9ca3af] text-sm leading-relaxed">
+                        Pick a camp week + slot for each gamer to see your total.
+                      </p>
+                    ) : (
+                      <>
+                        <ul className="flex flex-col gap-3 mb-4">
+                          {selectedGamerSummaries.map((s) => {
+                            if (!s) return null;
+                            return (
+                              <li
+                                key={s.index}
+                                className="flex items-start justify-between gap-3 pb-3 border-b border-[#f0f0f0] last:border-0 last:pb-0"
+                              >
+                                <div className="flex flex-col gap-0.5 min-w-0">
+                                  <span className="font-body font-bold text-[#0a0a0a] text-xs leading-tight truncate">
+                                    {s.gamerName}
+                                  </span>
+                                  <span className="font-body text-[#6b7280] text-xs leading-snug">
+                                    {s.weekDates}
+                                  </span>
+                                  <span className="font-body text-[#6b7280] text-xs leading-snug">
+                                    1:00 PM – 4:00 PM
+                                  </span>
+                                </div>
+                                <span className="font-body font-bold text-[#0a0a0a] text-xs whitespace-nowrap">
+                                  ${s.price}
+                                </span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+
+                        <div className="flex items-baseline justify-between pt-3 border-t border-[#e5e7eb]">
+                          <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                            Total
+                          </span>
+                          <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}>
+                            ${totalPrice}
+                          </span>
+                        </div>
+                        <p className="font-body text-[#9ca3af] text-[11px] mt-1 text-right">
+                          Limited-time pricing
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* What's included card */}
+                <div className="border border-[#e5e7eb] rounded-sm bg-[#fafafa] px-5 py-5">
+                  <p className="font-body font-bold text-[#0a0a0a] text-xs uppercase tracking-wider mb-3">
+                    What you get
+                  </p>
+                  <ul className="flex flex-col gap-2">
+                    {[
+                      "15 hours of live coaching",
+                      "Hand-picked 5-player squad",
+                      "Private moderated chat stream",
+                      "Tournament Friday + casted bracket",
+                      "Squad stays open post-camp",
+                    ].map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-red shrink-0 mt-[3px]" aria-hidden="true">
+                          <path d="M2 7L5.5 10L12 3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span className="font-body text-[#374151] text-xs leading-snug">
+                          {line}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+              </div>
+            </aside>
+
+          </div>{/* end 2-col grid */}
         </div>
       </section>
 
@@ -1506,71 +1948,6 @@ function SquadCard({
         {subtitle}
       </span>
     </button>
-  );
-}
-
-function SessionCard({
-  sessionLabel,
-  slotLabel,
-  hours,
-  urgency,
-  isSelected,
-  onClick,
-}: {
-  sessionLabel: string;
-  slotLabel: "AM" | "PM";
-  hours: string;
-  urgency?: SlotUrgency;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  const urgencyStyles: Record<SlotUrgency, { bg: string; text: string; label: string }> = {
-    available: { bg: "bg-[#dcfce7]", text: "text-[#15803d]", label: "Available" },
-    "filling-fast": { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Filling fast" },
-    limited: { bg: "bg-[#ffedd5]", text: "text-[#c2410c]", label: "Only a few left" },
-  };
-
-  const u = urgencyStyles[urgency ?? "available"];
-
-  return (
-    <div
-      className={`bg-white rounded-lg p-4 flex flex-col gap-3 transition-all ${
-        isSelected ? "ring-2 ring-red" : ""
-      }`}
-    >
-      {/* Header row */}
-      <div className="flex items-center justify-between">
-        <span className="font-body font-bold text-[#1f2937]" style={{ fontSize: "16px", lineHeight: "24px" }}>
-          {sessionLabel}
-        </span>
-        <span
-          className={`rounded px-2 py-0.5 font-body font-black uppercase ${u.bg} ${u.text}`}
-          style={{ fontSize: "10px", lineHeight: "15px" }}
-        >
-          {u.label}
-        </span>
-      </div>
-
-      {/* Time */}
-      <span className="font-body font-medium text-[#6b7280]" style={{ fontSize: "14px", lineHeight: "20px" }}>
-        {hours}
-      </span>
-
-      {/* Button */}
-      <button
-        type="button"
-        onClick={onClick}
-        className={`rounded text-center py-2.5 cursor-pointer transition-all duration-150 hover:brightness-110 active:scale-[0.97] active:brightness-90 ${
-          isSelected
-            ? "bg-red text-white"
-            : "bg-[#0a0a0a] text-white hover:bg-[#1a1a1a]"
-        }`}
-      >
-        <span className="font-body font-bold" style={{ fontSize: "14px", lineHeight: "20px" }}>
-          Book {slotLabel} slot
-        </span>
-      </button>
-    </div>
   );
 }
 

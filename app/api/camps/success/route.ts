@@ -51,12 +51,31 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    // Squad-share link — "build your squad" is universal: every camps
+    // purchase gets a shareable link. A normal buyer shares the
+    // squad_token they minted at register time; a joiner (registered via
+    // someone else's ?squad=TOKEN, so no squad_token of their own) shares
+    // that same crew link via joining_squad_token, keeping the squad one
+    // group. Either way the success page surfaces a working link.
+    //
+    // Host comes from NEXT_PUBLIC_SITE_URL (with ekuzo.gg fallback) so
+    // dev / branch previews share their own link host. Same builder the
+    // Stripe webhook uses for the Klaviyo squad_link field, so the link
+    // on the success page matches the link in the confirmation email.
+    const squadToken = meta.squad_token || meta.joining_squad_token || "";
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
+    const squadLink = squadToken
+      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${squadToken}`
+      : "";
+
     return NextResponse.json({
       parentName: `${meta.parent_first_name || ""} ${meta.parent_last_name || ""}`.trim(),
       parentEmail: meta.parent_email || "",
       gamers,
       totalPaid: `$${(paymentIntent.amount / 100).toFixed(2)}`,
       paymentIntentId: paymentIntent.id,
+      squadToken,
+      squadLink,
     });
   } catch (err: any) {
     console.error("Error fetching payment intent:", err);

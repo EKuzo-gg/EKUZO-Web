@@ -40,10 +40,9 @@ export default function WhatWePlayVideo({ src, poster, label = "" }: WhatWePlayV
 
   return (
     <div
-      className="relative overflow-hidden sticky top-8 bg-black"
+      className="relative overflow-hidden lg:sticky lg:top-8 lg:min-h-[600px] bg-black"
       style={{
         aspectRatio: "3/4",
-        minHeight: "600px",
         clipPath:
           "polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)",
       }}
