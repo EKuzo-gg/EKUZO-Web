@@ -1567,7 +1567,7 @@ export default function EkuzoCampsPage() {
                       before the CTA once Jamie wires the pricing change. */}
                   <ul className="flex flex-col gap-2 mb-8">
                     {[
-                      { label: "What you get", value: "15 hrs coaching, private Discord squad, post-camp access" },
+                      { label: "What you get", value: "15 hrs coaching, a private moderated squad chat, post-camp access" },
                       { label: "What you need", value: "Basic laptop or desktop, stable internet, a headset" },
                     ].map((item) => (
                       <li key={item.label} className="flex items-baseline gap-3">

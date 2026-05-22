@@ -6,7 +6,7 @@
 
 ---
 
-## Jamie — May 22, 2026 (Camps LP copy: For Gamers intro + Fortnite/Smash/RL callout)
+## Jamie — May 22, 2026 (Camps LP copy: For Gamers intro + Fortnite/Smash/RL callout + Discord dejargon)
 
 **Why:** Copy pass on the camps landing page while taking over Aaron's work.
 
@@ -15,6 +15,14 @@
 - For Gamers intro paragraph — "Drills in the morning. Scrims in the
   afternoon." → "Warmup, get the lesson, drill, and scrim to make it
   real." Rest of the paragraph unchanged.
+- "Secure Your Slot" — "What you get" line: "private Discord squad" →
+  "a private moderated squad chat" ("Discord" means little to most
+  parents). "What you need" left as the true minimum (laptop, internet,
+  headset) — a mouse is recommended-not-required, kept off the list so
+  it doesn't read as a higher barrier. NOTE: "Discord" still appears in
+  other visible LP copy (Day 5 of the 5-day progression, the For Gamers
+  "Climb together" card, two FAQ entries) — left for a deliberate
+  decision since one FAQ exists specifically to de-jargon the word.
 - "My kid plays Fortnite, Smash, Rocket League. Will this work?" callout
   card — answer body rewritten to the locked copy. Now six paragraphs in
   the existing `flex flex-col gap-4` column: bold "Yes…" opener, the
