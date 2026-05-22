@@ -7,6 +7,7 @@ import { ModalProvider } from "@/context/ModalContext";
 import ModalRenderer from "@/components/ui/ModalRenderer";
 import StickyCTA from "@/components/ui/StickyCTA";
 import NewsletterPopup from "@/components/ui/NewsletterPopup";
+import CaptureAttribution from "@/components/analytics/CaptureAttribution";
 import JsonLd from "@/components/JsonLd";
 import { rootGraph } from "@/lib/schema";
 
@@ -157,6 +158,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-white text-black">
         <ModalProvider>
+          <CaptureAttribution />
           {children}
           <ModalRenderer />
           <StickyCTA />
