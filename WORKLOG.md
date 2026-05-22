@@ -6,6 +6,65 @@
 
 ---
 
+## Jamie — May 22, 2026 (QA pass on Aaron's camps V2→V1 work + routing code-review)
+
+**Why:** QA Aaron's four camps commits (`51247cb`, `44afa7d`, `5454bfe`,
+`653a202`) on `dev` so the camps work can be promoted to `main`, and
+re-verify the registration → payment → fulfillment data routing after the
+recent register / webhook + attribution changes.
+
+**What changed:**
+
+- **`app/programs/ekuzo-camps/register/page.tsx`** — fixed `validate()`
+  error ordering. It pushed gamer errors before parent errors, but the
+  page renders Parent Info first, then Gamer Info, then the week picker.
+  On an invalid submit the scroll-to-first-error jumped past the empty
+  parent fields. Reordered to parent → gamer name/birthday → week picker
+  so the scroll lands on the topmost invalid field. (The function's own
+  comment already said the order should mirror page order — it was just
+  stale from the gamer-first v1 layout.)
+
+**QA — verified, no other bugs found:**
+
+- **Camps landing (`ekuzo-camps/page.tsx`)** — renders clean desktop +
+  mobile. Section chain is contiguous (black→white→black→white→purple→
+  black→white→red→black; no gaps / double-tears). No console errors, no
+  broken assets. StickyCTA (camps white/purple variant) shows/hides
+  correctly. The 3 register CTAs carry the right `?cta=` params
+  (hero/footer/sticky). The 4 `{false &&}` sections (Mission, Take Your
+  Team, Team Matching, Discord for Families) stay hidden — confirmed
+  with Jamie; assets/copy aren't ready and the dividers are already
+  adjusted for the hidden state.
+- **Camps register** — calendar week picker works end to end (month tabs
+  → day select → totalPrice → sidebar summary → Continue button enables).
+  The cards-vs-calendar A/B is already resolved: cards was removed,
+  calendar is the only picker.
+- **Hero videos (`44afa7d`)** — methodology / ekuzo-teams / ekuzo100 all
+  serve the native `<video controls>` and return 200.
+
+**Data routing — code review (no live payment this session):**
+
+- `.env.local` currently holds LIVE Stripe keys, so the local 4242 test
+  card can't be used. Per Jamie, payment tests run on `dev`.
+- Traced camps + ekuzo100: register page → `/api/{camps,ekuzo100}/register`
+  → PI metadata → `/api/webhooks/stripe` → Beehiiv + Klaviyo + Sheets +
+  Meta CAPI. Pipeline is consistent; PI metadata carries registration
+  fields, attribution UTMs, first-touch `origin` (`ekuzo_origin` cookie
+  via `middleware.ts`), `fbc`/`fbp`, and `cta_source` (camps). Aaron's
+  webhook change (squad_link built from `NEXT_PUBLIC_SITE_URL` instead of
+  the hardcoded host) is correct. Squad-token minting (`nanoid(10)`,
+  validated by `isValidSquadToken`) is correct. No regressions.
+
+**Verification:** `tsc --noEmit` clean. validate() reorder verified in
+the browser — an invalid submit now surfaces parent errors first and
+scrolls to `parent.firstName`.
+
+**For Aaron (minor, not fixed — not bugs):** the camps coaches images
+(×3) and `brush-stroke-8.png` use `fill` without a `sizes` prop → Next.js
+perf warnings in the console. Cosmetic; left for a polish pass.
+
+---
+
 ## Jamie — May 21, 2026 (Blog cluster follow-ups: reel transcript + global attribution)
 
 **Why:** Two refinements after the homeschool blog cluster landed on `dev`.

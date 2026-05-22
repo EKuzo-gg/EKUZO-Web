@@ -562,20 +562,28 @@ export default function CampsRegisterPage() {
     // `required` does nothing — this function is the only gate. Each error
     // carries a `key` that matches a `data-error-key` attribute on the field
     // so handleSubmit can scroll-and-focus the first invalid field. Order
-    // here is the same as the visible page order, top-to-bottom.
+    // here mirrors the visible page order, top-to-bottom: Parent Info,
+    // then each gamer's name/birthday, then the shared camp-week picker.
+
+    // Parent block — rendered first on the page.
+    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
+    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
+    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
+    if (!parent.phone.trim()) errs.push({ key: "parent.phone", message: "Parent phone number is required." });
 
     // Gamer sections. v2 only requires name + birthday + a chosen week/
     // slot — the v1 requirements for preferredGames, gender, and
     // skillLevel were dropped along with their UI fields. State for
     // those fields still exists in the gamer object (sent as empty
     // values in the submit payload to preserve the API contract), but
-    // no longer gates submission.
+    // no longer gates submission. Name/birthday render above the week
+    // picker, so they're checked first.
     gamers.forEach((g, i) => {
       const label = gamers.length > 1 ? `Gamer ${i + 1}` : "Gamer";
-      if (!g.selectedWeek || !g.selectedSlot)
-        errs.push({ key: `gamer-${i}.weekSlot`, message: `${label}: please select a camp week.` });
       if (!g.firstName.trim()) errs.push({ key: `gamer-${i}.firstName`, message: `${label} first name is required.` });
       if (!g.birthday.trim()) errs.push({ key: `gamer-${i}.birthday`, message: `${label} birthday is required.` });
+      if (!g.selectedWeek || !g.selectedSlot)
+        errs.push({ key: `gamer-${i}.weekSlot`, message: `${label}: please select a camp week.` });
     });
 
     // Team status — not required when arriving via a crew link. A joining
@@ -583,12 +591,6 @@ export default function CampsRegisterPage() {
     // selector and send squadStatus=null so the webhook writes "".
     if (!joiningSquadToken && !squadStatus)
       errs.push({ key: "squadStatus", message: "Please let us know your team status." });
-
-    // Parent block (rendered last on the page).
-    if (!parent.firstName.trim()) errs.push({ key: "parent.firstName", message: "Parent first name is required." });
-    if (!parent.lastName.trim()) errs.push({ key: "parent.lastName", message: "Parent last name is required." });
-    if (!parent.email.trim()) errs.push({ key: "parent.email", message: "Parent email is required." });
-    if (!parent.phone.trim()) errs.push({ key: "parent.phone", message: "Parent phone number is required." });
 
     return errs;
   }
