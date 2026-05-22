@@ -58,6 +58,28 @@ const posts = [
     image: "/images/blog-post-4-card.jpg",
     featured: false,
   },
+  {
+    slug: "when-gaming-helps-homeschool-kids",
+    title: "When gaming helps homeschool kids and when it hurts",
+    date: "May 21, 2026",
+    author: "Karlin Oei",
+    category: "Guides",
+    excerpt:
+      "Gaming can grow a homeschooled kid or shrink their world. What decides which, why structure beats hours, and how to tilt it your way.",
+    image: "/images/blog-post-5-card.jpg",
+    featured: false,
+  },
+  {
+    slug: "what-homeschool-parents-taught-us-about-gaming",
+    title: "What 200+ homeschool parents taught us about gaming",
+    date: "May 21, 2026",
+    author: "Karlin Oei",
+    category: "Case Studies",
+    excerpt:
+      "We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one structured, social, supervised thing they all want.",
+    image: "/images/blog-post-6-card.jpg",
+    featured: false,
+  },
 ];
 
 export default function BlogPage() {
