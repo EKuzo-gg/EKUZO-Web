@@ -119,6 +119,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/blog/when-gaming-helps-homeschool-kids`,
+      lastModified: new Date("2026-05-21"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/what-homeschool-parents-taught-us-about-gaming`,
+      lastModified: new Date("2026-05-21"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
 
     // Legal
     {

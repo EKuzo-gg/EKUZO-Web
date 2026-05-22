@@ -27,7 +27,7 @@ const DATE_MODIFIED = "2026-05-14";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
-  title: `${TITLE} — EKUZO Blog`,
+  title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,

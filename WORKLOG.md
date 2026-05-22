@@ -6,6 +6,34 @@
 
 ---
 
+## Jamie — May 21, 2026 (Homeschool gaming blog cluster: pillar + companion)
+
+**Why:** A two-post topic cluster for organic search + LLM citation, built from the locked content drafts in `EKUZO/Marketing/content-drafts`. The pillar makes the argument (the environment around a game decides the outcome, not raw hours); the companion is the 200+ parent Facebook-thread case study. Cross-linked both ways.
+
+**What changed:**
+
+- **`app/blog/when-gaming-helps-homeschool-kids/page.tsx`** — new pillar post (blog-post-5). Answer-block lead, question-shaped H2s, mid-piece pull-quote, the 5-question gut-check aside, the Instagram reel embed + on-page transcript, and a sources list. `Article` + `BreadcrumbList` + `VideoObject` JSON-LD.
+- **`app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx`** — new companion post (blog-post-6). 60/30/10 camp table, the four anonymized quote cards. `Article` + `BreadcrumbList` JSON-LD.
+- **`components/blog/GutCheckAside.tsx`** — new. Right-rail aside on desktop, folds inline on mobile; real crawlable text, not an image.
+- **`components/blog/QuoteCards.tsx`** — new. Four anonymized parent-voice cards as real text — never a screenshot of the source thread.
+- **`app/blog/page.tsx`** — both posts added to the index `posts` array.
+- **`app/sitemap.ts`** — both slugs added.
+- **`public/llms.txt`** — both posts added to the Blog and articles section.
+- **`public/images/`** — `blog-post-5-*` and `blog-post-6-*` hero + 1200×630 share-card images, plus `blog-post-5-reel-thumb.jpg` (a frame from the reel) for the `VideoObject` schema.
+- **Title cleanup** — removed the redundant `— EKUZO Blog` from the metadata title of all four blog posts (the root layout template already appends `| EKUZO`). Touched `league-of-legends-youth-development` and `summer-camps-for-kids-who-game-2026` `page.tsx` for this only.
+
+**Verification:**
+- `node node_modules/.bin/tsc --noEmit` clean (before and after merging Aaron's work).
+- Both posts previewed desktop + mobile: gut-check aside floats/folds, quote cards stack, table is responsive, reel embeds, transcript discloses.
+- JSON-LD parses valid; SEO/metadata audit passed (canonical, robots, OG + Twitter cards, image alt text, sitemap, `llms.txt`).
+- Pulled Aaron's camps V2→V1 work before pushing — confirmed zero file overlap.
+
+**Notes:**
+- Heroes are real photos. `WireframePlaceholder` is no longer used by either post (the component is left in the repo).
+- `karlin-reel.mp4/.txt/.srt` working files are left untracked in the repo root — the reel transcript is inlined as a string literal, not read from disk.
+
+---
+
 ## Aaron — May 20, 2026 (Promote camps V2 → V1; archive old V1; retire /v2 route)
 
 **Why:** V2 (Caroline Dunaway feedback restructure) has converged. Tonight's pass took it the rest of the way: hero bg video boosted, EKUZO Difference + Take Your Team + Team Matching + Discord-for-Families sections hidden until assets/copy land, For Gamers section moved to the purple theme with the tech collage and the "What Do I Need?" block, Camp Overview rebuilt for mobile, scroll-reveal + hover lifts added, sticky CTA reskinned to white+purple. Time to ship as the canonical page so Jamie can review on `dev` and push to `main`.

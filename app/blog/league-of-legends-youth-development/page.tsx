@@ -66,7 +66,7 @@ const REEL_TRANSCRIPT =
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
-  title: `${TITLE} — EKUZO Blog`,
+  title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
