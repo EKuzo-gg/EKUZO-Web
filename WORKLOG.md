@@ -30,6 +30,29 @@ the whole folder back to Claude Code for implementation.
 
 ---
 
+## Jamie — May 22, 2026 (Add EKUZO100 redesign — camps pattern reference doc)
+
+**Why:** The EKUZO100 registration redesign starts in Cowork (spec-shaping
+conversation), comes back to Claude Code for implementation. This doc is
+the bridge artifact — Cowork uses it as grounding context so it doesn't
+re-invent patterns that already work; the next Claude Code session reads
+the same doc + the Cowork-output spec and implements against it.
+
+**What changed (one new file):**
+
+- `marketing/ekuzo100-redesign/00-camps-pattern-reference.md` — summarizes
+  what's already global (analytics/attribution/origin), the camps register
+  page anatomy + picker contract, the partial-capture + webhook fan-out
+  + squad-link plumbing, the email-program state, and the open product
+  questions for EKUZO100 that need answers before implementation starts.
+  Closes with a files-to-lift checklist for the next Claude Code session.
+
+**For future sessions:** when the Cowork spec is settled, drop it next to
+this doc (e.g. `01-ekuzo100-spec.md`) and bring both into the next Claude
+Code session. That pair is everything the implementation needs.
+
+---
+
 ## Jamie — May 22, 2026 (Discord dejargon pass + Email 4 deferred)
 
 **Why:** Parent-facing Discord references on the LP + email get dejargoned;
