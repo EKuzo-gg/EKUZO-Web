@@ -6,6 +6,30 @@
 
 ---
 
+## Jamie — May 22, 2026 (EKUZO100 redesign — Cowork-bound pattern reference)
+
+**Why:** EKUZO100 registration redesign is starting next, in Cowork (spec
+needs a conversational shape-up before any code). This doc grounds that
+conversation in what camps already does — what's wired sitewide, what to
+lift, what to copy, and the open product questions that determine the
+spec.
+
+**What changed:**
+
+- **`marketing/ekuzo100-redesign/00-camps-pattern-reference.md`** (new) —
+  reference doc with 9 sections: globals already wired, camps register
+  anatomy, picker contract, partial-capture routes, webhook fan-out,
+  squad concept, email program, open product questions, and files to
+  lift. Includes hard IDs (Klaviyo flow / metric / list, Beehiiv
+  automations, GA4, Clarity) so the Cowork conversation can map back to
+  real infrastructure.
+
+**How to use it:** paste into the Cowork spec-shaping session. Once spec
+lands, append it (or save as `01-ekuzo100-spec.md` sibling) and bring
+the whole folder back to Claude Code for implementation.
+
+---
+
 ## Jamie — May 22, 2026 (Discord dejargon pass + Email 4 deferred)
 
 **Why:** Parent-facing Discord references on the LP + email get dejargoned;
