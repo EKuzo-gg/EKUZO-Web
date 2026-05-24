@@ -30,6 +30,26 @@ the whole folder back to Claude Code for implementation.
 
 ---
 
+## Jamie — May 24, 2026 (Untrack EKUZO100 reference doc — session prep, not project artifact)
+
+**Why:** The `marketing/ekuzo100-redesign/` reference doc is Jamie's
+Cowork-session prep, not something Aaron or anyone else needs to read or
+have in their working tree. Belongs locally, not in version control.
+
+**What changed:**
+
+- `git rm --cached marketing/ekuzo100-redesign/00-camps-pattern-reference.md`
+  — file stays on disk locally; just no longer tracked.
+- Added `marketing/ekuzo100-redesign/` to `.git/info/exclude` (local-only,
+  not `.gitignore`) so future files in this folder also stay out of the
+  repo without polluting Aaron's view.
+
+**Heads-up for Aaron:** on your next pull, the
+`marketing/ekuzo100-redesign/` folder will disappear from your local tree
+— this is intentional, nothing was lost on the project side.
+
+---
+
 ## Jamie — May 22, 2026 (Add EKUZO100 redesign — camps pattern reference doc)
 
 **Why:** The EKUZO100 registration redesign starts in Cowork (spec-shaping
