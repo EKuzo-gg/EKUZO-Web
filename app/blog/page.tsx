@@ -14,6 +14,17 @@ export const metadata = {
 
 const posts = [
   {
+    slug: "what-your-kids-gaming-is-telling-you",
+    title: "What your kid's gaming is telling you",
+    date: "May 24, 2026",
+    author: "Karlin",
+    category: "Perspective",
+    excerpt:
+      "The game is visible. The meaning is hidden. Six signs parents notice first in a gamer kid, and what they often mean.",
+    image: "/images/what-your-kids-gaming-is-telling-you-card.jpg",
+    featured: true,
+  },
+  {
     slug: "our-family-s-esports-journey-with-ekuso-and-the-k1ng",
     title: "Our Family's Esports Journey with EKUZO and the K1ng",
     date: "Jan 14, 2026",
@@ -22,7 +33,7 @@ const posts = [
     excerpt:
       "My son Ryan was always a happy kid in his early years. Then junior high happened — and everything changed. This is how EKUZO gave him back his confidence.",
     image: "/images/blog-post-1-card.jpg",
-    featured: true,
+    featured: false,
   },
   {
     slug: "conquering-my-mountain-and-giants-how-esports-changed-my-life",

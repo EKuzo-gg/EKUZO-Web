@@ -6,6 +6,56 @@
 
 ---
 
+## Jamie — May 24, 2026 (Ship "What your kid's gaming is telling you" Perspective blog post)
+
+**Why:** Foundational evergreen Perspective piece on reading what a kid's
+gaming behavior is doing for them. Funnel: EKUZO100 (one CTA, late, small).
+Built per `docs/marketing/blog-post-build-prompt-gaming-hidden-meaning.md`
+from the signed-off draft at `docs/marketing/blog-draft-gaming-outgrown-the-bedroom.md`
+(body copy not edited — the "here's what you see, here's how to read it"
+reframe is the article's value).
+
+**What changed:**
+
+- New post page at `app/blog/what-your-kids-gaming-is-telling-you/page.tsx`.
+  Mirrors the camps + LoL post structure: Nav (light), header (Perspective
+  eyebrow, search-readable H1, evocative italic subhead), hero, two-column
+  body grid with sticky byline, Keep Reading, FooterBanner, Footer.
+- Title decision (Jamie, in-session): H1 = "What your kid's gaming is
+  telling you" (matches slug + SEO title; reads cleanly cold + in AI
+  surfaces). Subhead = "The game is visible. The meaning is hidden." (the
+  evocative koan keeps the voice). Because the subhead now carries the
+  koan, the body's third paragraph (which had previously echoed the H1)
+  was cut to avoid hearing "the meaning is hidden" twice in 50 words.
+- Hero + card images cropped from `~/Downloads/blog2.png` into
+  `public/images/what-your-kids-gaming-is-telling-you-{hero,card}.jpg`
+  (hero 1232×520 / 76.5 KB, card 1232×770 / 93.8 KB).
+- Five citations wired inline as links (no Sources section — matches camps
+  and LoL): Pew 2024 (opener + sign 4), APA 2025 (sign 1), Columbia/JAMA
+  2025 (sign 3, addictive-use-not-total-time), NASEF/SLJ (synthesis).
+  URLs pulled from `ekuzo-fact-library.md`; numbers re-verified.
+- Karlin DAY 4 reel embedded via `InstagramEmbed` at the
+  $80,000-scholarships beat. Backed by a `VideoObject` schema node with
+  full spoken-audio transcript inlined (no fs access — see `lib/schema.ts`
+  note).
+- Single in-body `/programs/ekuzo100` CTA in the closing section.
+- Schema: `buildBlogArticleSchema` + `buildBlogPostBreadcrumbSchema` +
+  `buildVideoObjectSchema`. Author defaults to the existing Karlin Person
+  node in the root @graph (no duplicate Person).
+- Blog index (`app/blog/page.tsx`): added the post as `featured: true`,
+  flipped the K1ng post to `featured: false`. New category "Perspective"
+  set on the post (filter sidebar is hidden so no filter array change).
+- `public/llms.txt`: added the post entry at the top of the blog list to
+  match the per-post listing pattern used for every other post.
+- OG / Twitter share-card alt set to the hero's descriptive alt (was
+  defaulting to the title — fine for tabs but weak as image alt text).
+- `tsc --noEmit` passes clean.
+
+**Not touched:** draft body copy, any other post page, commerce/API/Stripe
+code, marketing strategy docs.
+
+---
+
 ## Jamie — May 24, 2026 (Fix Search Console Review-snippet structured data issues)
 
 **Why:** Google Search Console flagged two Review-snippet structured data
