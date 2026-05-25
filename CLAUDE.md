@@ -520,6 +520,7 @@ These apply to both Jamie's and Aaron's Claude instances. They reduce the most c
 - State assumptions explicitly. If uncertain, ask before implementing.
 - If multiple approaches exist, present the options — don't pick silently.
 - If something in the request is unclear, stop and ask. Don't guess.
+- **Clarity Gate** — before writing a spec or starting non-trivial build work, rate Goal / Constraints / Success criteria / Context (brownfield) as High/Med/Low. If any load-bearing dimension is Medium or Low, resolve it (usually one targeted question) before building. Full rule: `knowledge-base/methodology/workflows.md` → "Clarity Gate Before a Build or Spec Handoff".
 
 ### Simplicity first
 - Write the minimum code that solves the problem. Nothing speculative.
@@ -568,7 +569,7 @@ These apply to both Jamie's and Aaron's Claude instances. They reduce the most c
 
 ### People
 - **Jamie** — CEO/orchestrator. Handles commerce (Stripe), form routing (Beehiiv/Make), API routes, data flow, copy updates. Uses Claude via Cowork.
-- **Aaron** — Lead designer. Handles front-end: visual QA, CSS, layout, component builds, design fidelity, copy updates. Uses Claude Code ($20 plan).
+- **Aaron** — Lead designer. Handles front-end: visual QA, CSS, layout, component builds, design fidelity, copy updates. Uses Claude Code (Claude Max).
 
 ### Important for Claude instances
 - **Read `WORKLOG.md` at the start of every session.** It tracks what each person changed since their last commit. This is how you stay aware of the other person's work.

@@ -23,6 +23,7 @@ const nextConfig = {
       // EKUZOTeams redirects
       { source: "/ekuzoteams-semester-based", destination: "/programs/ekuzo-teams", permanent: true },
       { source: "/ekuzo-teams", destination: "/programs/ekuzo-teams", permanent: true },
+      { source: "/programs/ekuzoteams", destination: "/programs/ekuzo-teams", permanent: true },
       { source: "/teams", destination: "/programs/ekuzo-teams", permanent: true },
 
       // EKUZOCamps redirects
