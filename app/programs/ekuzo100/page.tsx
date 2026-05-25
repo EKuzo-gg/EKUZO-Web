@@ -6,7 +6,7 @@ import FAQAccordion from "@/components/ui/FAQAccordion";
 import OurApproachSection from "@/components/sections/OurApproachSection";
 import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
-import ModalButton from "@/components/ui/ModalButton";
+import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import TrackPageView from "@/components/analytics/TrackPageView";
@@ -186,9 +186,13 @@ export default function Ekuzo100Page() {
             <p className="font-body text-black/70 text-base mb-10 max-w-md leading-relaxed">
               The low-risk way to start with EKUZO.
             </p>
-            <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
+            <TrackedRegisterLink
+              source="hero"
+              href="/programs/ekuzo100/register?cta=hero"
+              className="inline-flex items-center justify-center rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer bg-red text-white border-2 border-red hover:opacity-90 px-8 py-4"
+            >
               Enroll my gamer
-            </ModalButton>
+            </TrackedRegisterLink>
           </div>
 
           {/* Right — video reel 9:16, 70vh tall */}
@@ -392,9 +396,13 @@ export default function Ekuzo100Page() {
               <p className="font-body text-black/70 text-lg leading-relaxed mb-8">
                 EKUZO100 is an entry point, not a dead end. Students who enjoy their month can move into semester-long <strong className="text-black">EKUZO Teams</strong>, where they stay with consistent teammates, deepen skills, and compete throughout the season. Families decide next steps after experiencing the program firsthand.
               </p>
-              <ModalButton modal="enroll" variant="red-filled" className="text-base px-8 py-4">
+              <TrackedRegisterLink
+                source="footer"
+                href="/programs/ekuzo100/register?cta=footer"
+                className="inline-flex items-center justify-center rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer bg-red text-white border-2 border-red hover:opacity-90 px-8 py-4"
+              >
                 Start with EKUZO100
-              </ModalButton>
+              </TrackedRegisterLink>
             </div>
             <div className="relative aspect-square overflow-hidden bg-grey">
               <Image
