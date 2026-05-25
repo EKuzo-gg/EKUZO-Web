@@ -11,13 +11,13 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import TrackPageView from "@/components/analytics/TrackPageView";
 import JsonLd from "@/components/JsonLd";
-import { ekuzo100CourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
+import { ekuzo100CourseSchema, buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 export const metadata = {
   alternates: { canonical: "/programs/ekuzo100" },
-  title: "EKUZO100 — 4-Week Intro Program",
+  title: "EKUZO100: 4-Week Intro Program",
   description:
-    "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO — real coaching, real teammates, real growth.",
+    "One month. $100. Your first team. EKUZO100 is the low-risk way to start with EKUZO: real coaching, real teammates, real growth.",
 };
 
 const breadcrumbSchema = buildBreadcrumbSchema([
@@ -30,12 +30,12 @@ const howItWorksSteps = [
   {
     number: "1",
     title: "Join",
-    desc: "Choose your schedule: after school or evening (weekdays). You're placed on a team of ~5 players at a similar level.",
+    desc: "Sessions are Tuesdays & Thursdays, 7:00–8:30 PM local. You're placed on a team of ~5 players at a similar level.",
   },
   {
     number: "2",
     title: "Practice",
-    desc: "90-minute sessions, twice a week. Learn with your coach, alongside your team — structured drills, not just playing games.",
+    desc: "90-minute sessions, twice a week. Learn with your coach, alongside your team: structured drills, not just playing games.",
   },
   {
     number: "3",
@@ -45,48 +45,77 @@ const howItWorksSteps = [
   {
     number: "4",
     title: "Progress",
-    desc: "Reflect on growth with your coach at the end of the month. Then decide what comes next — no pressure, no contracts.",
+    desc: "Reflect on growth with your coach at the end of the month. Then decide what comes next: no pressure, no contracts.",
   },
 ];
 
+// Answers pulled from knowledge-base/wiki/domains/ekuzo/ekuzo-faq-canon.md
+// (2026-05-25 sync). Verbatim-ish: internal [[wikilinks]] stripped, copy
+// trimmed only where the canon paragraph addresses multiple programs and
+// this page is e100-specific. Order is conversion-first (1-5) -> LLM
+// long-tail (6-9) per Jamie 2026-05-25.
+//
+// Wired into JSON-LD via buildFAQPageSchema below so each Q/A pair is
+// citable by AI search. If you edit copy here, update the canon doc
+// first so both stay in sync.
 const ekuzo100FAQs = [
+  {
+    question:
+      "How do you keep online spaces safe? What about strangers, toxic chat, older kids, or spending traps?",
+    answer:
+      "EKUZO operates as a \u201cwalled garden\u201d specifically designed to answer the four most common parent safety concerns: strangers, toxic chat, older kids, and in-game spending traps. Every session is coach-led and recorded. Our Discord and online platforms are actively moderated. Teams are verified, meaning your child plays with the same known teammates, not anonymous matchmaking. Opponents are limited to other youth participants in the same ecosystem, so your child is not randomly matched against unknown adults or older teens. Students sign a Code of Conduct, and expectations are clear and consistently enforced. There are no in-session monetization prompts, loot boxes, or pressure to spend. This is a fundamentally different environment than the open lobbies of Fortnite, Roblox, or matchmade League play.",
+  },
+  {
+    question:
+      "My child is a beginner, shy, or not competitive. Is this right for them?",
+    answer:
+      "EKUZO is explicitly built for the shy kid, the beginner, the child who did not fit into traditional youth sports, and the child who is still figuring out whether they even want to be part of a team. Our coaches meet students where they are. Teams are age- and skill-balanced, and most of our strongest testimonials come from parents whose children were not \u201cgamer kids\u201d before starting, they were kids who needed a team and happened to find one through gaming. If your child is new or hesitant, they are exactly who our programs are designed for. EKUZO100 (four weeks, small groups) is the lowest-pressure on-ramp we offer.",
+  },
+  {
+    question: "What equipment does my child need?",
+    answer:
+      "A computer (PC or Mac) that can run League of Legends, a stable internet connection, and a headset with a microphone. The game is free to download and does not require high-end hardware.",
+  },
+  {
+    question: "When are sessions, and what if we miss one?",
+    answer:
+      "EKUZO100 runs Tuesdays and Thursdays, 7:00\u20138:30 PM local time: 8 sessions across the 4-week cohort, 90 minutes each. Sessions are live and coach-led, and there's no async catch-up: what makes EKUZO work is your gamer playing alongside the same teammates each week. We ask families to plan for at least 6 of the 8 sessions so the team isn't short. If you know about a conflict ahead of time, leave a note in the \"Additional information\" field at registration and we'll work with you.",
+  },
+  {
+    question: "How much is EKUZO100, and is there any commitment?",
+    answer:
+      "EKUZO100 is $100 for the full 4-week program, roughly $12.50 per session of small-group, coach-led instruction. There's no contract and no automatic renewal. After 4 weeks your family decides whether to move into EKUZO Teams for a full semester or stop.",
+  },
   {
     question: "Can homeschool families participate?",
     answer:
-      "Absolutely. EKUZO100 is open to all students aged 10\u201318, including homeschool families. Sessions are held online, so your student can join from anywhere with a computer and internet connection.",
-  },
-  {
-    question: "What happens after EKUZO100?",
-    answer:
-      "Students who enjoy the program can move into EKUZOTEAMS \u2014 a semester-long program (15 weeks) with consistent teammates, deeper skill development, and a full competitive season. There\u2019s no automatic renewal \u2014 your family decides.",
-  },
-  {
-    question: "How much does EKUZO100 cost?",
-    answer:
-      "EKUZO100 is $100 for the full four-week program \u2014 that\u2019s roughly $12.50 per session of small-group, coach-led instruction.",
-  },
-  {
-    question: "What about college or careers?",
-    answer:
-      "Esports teaches communication, leadership, strategic thinking, and teamwork \u2014 skills that translate directly to college applications and professional careers. Many universities now offer esports scholarships and programs.",
+      "Yes. EKUZO100 is open to homeschool families. All sessions are held online, so your student can join from anywhere with a computer and internet connection. Homeschool families can also enroll in EKUZO Teams (Home track) or EKUZO Camps when those programs run.",
   },
   {
     question: "How does this help with school?",
     answer:
-      "Our coaching methodology is built on proven learning science. Students develop focus, discipline, time management, and collaboration skills that carry over into academics. Parents consistently report improved engagement and confidence.",
+      "Research on structured school esports programs documents specific outcomes: students averaged 7.3 more school days per year, absence rates 33.5% lower than non-participants, and mean GPA increases of +0.11 during the active season. The mechanism is belonging. Approximately 90% of middle school esports participants are not involved in any other school-sponsored extracurricular, so for many students EKUZO is their first real connection at school, which correlates with the attendance and GPA gains. Students also develop focus, discipline, time management, and collaboration skills that carry directly into academics.",
   },
   {
-    question: "When are practices held?",
+    question: "What happens after EKUZO100?",
     answer:
-      "Sessions run twice per week, 90 minutes each. We offer after-school and evening time slots on weekdays so students can choose what fits their schedule.",
+      "Students who enjoy the program can move into EKUZO Teams: a semester-long program with consistent teammates, deeper skill development, and a full competitive season. There's no automatic renewal. Your family decides.",
+  },
+  {
+    question: "What about college or careers?",
+    answer:
+      "EKUZO builds professional skills (leadership, resilience, communication) and provides exposure to esports, game design, broadcasting, and tech pathways. Collegiate esports scholarships now total over $15 million annually across hundreds of university programs, and over 65% of esports players pick STEM careers. The skills students develop through coached team play, team communication, strategic analysis, resilience through losses, time management, translate directly to college applications and professional careers.",
   },
 ];
+
+const ekuzo100FAQSchema = buildFAQPageSchema(ekuzo100FAQs);
 
 export default function Ekuzo100Page() {
   return (
     <>
       <JsonLd data={ekuzo100CourseSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={ekuzo100FAQSchema} />
       <TrackPageView program="ekuzo100" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section
@@ -230,7 +259,7 @@ export default function Ekuzo100Page() {
               ONE MONTH. FOUR STEPS.
             </h2>
             <p className="font-body text-black/60 text-lg leading-relaxed max-w-2xl">
-              Each EKUZO100 cohort follows the same one-month structure. Practices are 90 minutes, twice a week — designed to teach teamwork, focus, and growth through play.
+              Each EKUZO100 cohort follows the same one-month structure. Practices are 90 minutes, twice a week, designed to teach teamwork, focus, and growth through play.
             </p>
           </div>
 

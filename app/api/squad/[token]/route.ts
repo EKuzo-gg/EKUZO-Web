@@ -28,7 +28,15 @@ export async function GET(
     return NextResponse.json({ error: "not_found" }, { status: 404 });
   }
   const owner = await fetchSquadOwner(token);
-  if (!owner || hasWeekPassed(owner.week_dates)) {
+  if (!owner) {
+    return NextResponse.json({ error: "not_found" }, { status: 404 });
+  }
+  // hasWeekPassed parses camps-shaped "Month DD-DD" date ranges. E100
+  // cohorts use cohort_month / cohort_label and don't carry that string,
+  // so the check is a no-op for them — accept the owner as upcoming.
+  // A future "cohort started already" expiry check can live alongside,
+  // but that's deferred for v1 (no e100 cohort has started yet).
+  if (owner.product !== "ekuzo100" && hasWeekPassed(owner.week_dates)) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });
   }
   return NextResponse.json(owner);

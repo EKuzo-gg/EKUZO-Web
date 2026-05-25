@@ -211,8 +211,14 @@ export async function POST(req: NextRequest) {
     // path concatenation is consistent.
     const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
     const shareableSquadToken = meta.squad_token || meta.joining_squad_token || "";
+    // Product-aware squad link path — a camps squad joins via the camps
+    // register page, an e100 squad joins via the e100 register page.
+    // Teams doesn't ship squad semantics yet; falls through to camps.
+    const squadProgramPath =
+      product === "ekuzo100" ? "/programs/ekuzo100/register"
+      : "/programs/ekuzo-camps/register";
     const squadLink = shareableSquadToken
-      ? `${siteUrl}/programs/ekuzo-camps/register?squad=${shareableSquadToken}`
+      ? `${siteUrl}${squadProgramPath}?squad=${shareableSquadToken}`
       : "";
 
     // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────
@@ -235,9 +241,14 @@ export async function POST(req: NextRequest) {
             earliestSlot = gd.slot || "";
           }
         } else if (product === "ekuzo100") {
-          // EKUZO100: cohort month + schedule preference
+          // EKUZO100: cohort_label is now a complete human-readable
+          // schedule string (e.g. "Tuesdays & Thursdays · June 2 –
+          // June 25") produced by the register-page picker.
+          // schedulePreference retired 2026-05-24 — only one session
+          // time runs today (7-8:30 PM), so the field carried zero
+          // bits of information.
           gamerSummaries.push(
-            `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}  ${gd.schedulePreference || ""}`
+            `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}`
           );
         } else if (product === "teams") {
           // Teams: semester + payment plan
@@ -314,6 +325,17 @@ export async function POST(req: NextRequest) {
           { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
           { name: "camp_slot", value: earliestSlot },
           { name: "squad_status", value: squadStatusLabel },
+          { name: "squad_link", value: squadLink }
+        );
+      } else if (product === "ekuzo100") {
+        // E100 inherits the squad_link rule from camps (every purchase
+        // has a working link). cohort_label is the customer-facing
+        // schedule string; preferred_days is the internal demand
+        // signal from the "Prefer other days?" disclosure (NOT
+        // surfaced in the confirmation email).
+        customFields.push(
+          { name: "cohort_label", value: meta.cohort_label || "" },
+          { name: "preferred_days", value: meta.preferred_days || "" },
           { name: "squad_link", value: squadLink }
         );
       } else if (product === "teams") {
@@ -460,7 +482,9 @@ export async function POST(req: NextRequest) {
           if (product === "camps") {
             return `${gd.firstName} ${gd.lastName} — ${gd.weekLabel} ${gd.slot} (${gd.weekDates})`;
           } else if (product === "ekuzo100") {
-            return `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""} ${gd.schedulePreference || ""}`;
+            // schedulePreference retired 2026-05-24 — cohort_label
+            // now carries the full schedule string.
+            return `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}`;
           } else {
             return `${gd.firstName} ${gd.lastName} — ${meta.semester_label || "Fall 2026"}`;
           }
@@ -490,6 +514,15 @@ export async function POST(req: NextRequest) {
         klaviyoProperties.cohort_label = meta.cohort_label || "";
         klaviyoProperties.cohort_start = meta.cohort_start || "";
         klaviyoProperties.cohort_end = meta.cohort_end || "";
+        // preferred_days: family-level day-availability from the
+        // "Prefer other days?" disclosure. Internal-only — segmenters
+        // can use it to flag M/W demand; the confirmation email does
+        // not reference it (echoing preferences next to the booked
+        // schedule re-opens an expectation mismatch by design).
+        klaviyoProperties.preferred_days = meta.preferred_days || "";
+        // squad_link: every e100 purchase mints a working link, same
+        // rule camps adopted 2026-05-22.
+        klaviyoProperties.squad_link = squadLink;
       } else if (product === "teams") {
         klaviyoProperties.team_semester = meta.semester_label || "Fall 2026";
         klaviyoProperties.team_payment_plan = meta.payment_plan || "upfront";
@@ -570,6 +603,12 @@ export async function POST(req: NextRequest) {
                 }),
                 ...(product === "ekuzo100" && {
                   cohort_label: meta.cohort_label || "",
+                  // squad_link: needed by the "Bring your crew" block
+                  // in the e100 confirmation email. cohort_start/end
+                  // intentionally NOT included — cohort_label is a
+                  // self-contained schedule string and the start/end
+                  // pair would be redundant noise in the email layer.
+                  squad_link: squadLink,
                 }),
                 ...(product === "teams" && {
                   team_semester: meta.semester_label || "Fall 2026",
@@ -624,7 +663,7 @@ export async function POST(req: NextRequest) {
           : (meta.cohort_label || ""),
         slot: product === "camps" ? (gd.slot || "")
           : product === "teams" ? (meta.payment_plan || "")
-          : (gd.schedulePreference || ""),
+          : "", // ekuzo100: single session time (7-8:30 PM), no slot
         week_dates: product === "camps" ? (gd.weekDates || "")
           : product === "teams" ? "Week of Aug 31, 2026"
           : `${meta.cohort_start || ""} – ${meta.cohort_end || ""}`,
@@ -648,9 +687,21 @@ export async function POST(req: NextRequest) {
         // registration (not just the owner row) so a single-tab FILTER
         // on ekuzo-purchases by token surfaces the whole crew.
         squad_status: product === "camps" ? squadStatusLabel : "",
-        squad_token: product === "camps" ? (meta.squad_token || "") : "",
+        // Squad tokens write for both camps and ekuzo100. E100 inherits
+        // the universal-token rule (every purchase has a working link).
+        squad_token:
+          product === "camps" || product === "ekuzo100"
+            ? (meta.squad_token || "")
+            : "",
         joining_squad_token:
-          product === "camps" ? (meta.joining_squad_token || "") : "",
+          product === "camps" || product === "ekuzo100"
+            ? (meta.joining_squad_token || "")
+            : "",
+        // Family-level day-availability signal (e100 only). Apps Script
+        // appends by header name — add a `preferred_days` header cell
+        // in the ekuzo-purchases tab to capture this. Empty for camps
+        // / teams.
+        preferred_days: product === "ekuzo100" ? (meta.preferred_days || "") : "",
         // Marketing attribution — derived once at the top of this handler
         // so every row in a multi-gamer registration carries the same
         // source. Apps Script appends by header name (see
@@ -695,41 +746,63 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Squad link — additional Sheets writes (camps only) ─────────
+    // ── Squad link — additional Sheets writes (camps + ekuzo100) ───
     // These go through the same Apps Script webhook with a `tab` field so
     // it knows which sheet to append to. See
     // docs/apps-script-squad-endpoints-spec.md for the Apps Script side.
-    if (product === "camps") {
+    //
+    // Camps rows carry week/slot/week_dates (single-week unit); e100 rows
+    // carry cohort_month/cohort_label/cohort_start/cohort_end (single-
+    // month unit). The `product` column tells Apps Script which fields
+    // are load-bearing. The squad lookup endpoint (`?action=squad`) reads
+    // `product` and returns the right shape to the joining register page.
+    if (product === "camps" || product === "ekuzo100") {
       const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
       const createdAt = new Date().toISOString();
 
-      // 1. `squads` — one row per Building registration. Owner is the
-      //    earliest-week gamer (matches the Beehiiv/Klaviyo logic).
+      // 1. `squads` — one row per registration that minted a squad_token.
+      //    Camps owner = earliest-week gamer (matches Beehiiv/Klaviyo
+      //    logic). E100 owner = first gamer in the registration (all
+      //    gamers share one cohort, so the "earliest" concept doesn't
+      //    apply — there's exactly one cohort per registration).
       if (meta.squad_token && sheetsUrl) {
         try {
           let ownerGamerName = "";
           let ownerWeekLabel = "";
           let ownerSlot = "";
           let ownerWeekDates = "";
-          let minWeek = Infinity;
-          for (const gd of gamers) {
-            const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
-            if (weekNum < minWeek) {
-              minWeek = weekNum;
-              ownerGamerName = gd.firstName || "";
-              ownerWeekLabel = gd.weekLabel || "";
-              ownerSlot = gd.slot || "";
-              ownerWeekDates = gd.weekDates || "";
+
+          if (product === "camps") {
+            let minWeek = Infinity;
+            for (const gd of gamers) {
+              const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
+              if (weekNum < minWeek) {
+                minWeek = weekNum;
+                ownerGamerName = gd.firstName || "";
+                ownerWeekLabel = gd.weekLabel || "";
+                ownerSlot = gd.slot || "";
+                ownerWeekDates = gd.weekDates || "";
+              }
             }
+          } else {
+            // ekuzo100: all gamers share one cohort, owner = first gamer
+            ownerGamerName = gamers[0]?.firstName || "";
           }
 
           const squadRow = {
             squad_token: meta.squad_token,
+            product,
             owner_parent_email: meta.parent_email || "",
             owner_gamer_name: ownerGamerName,
+            // Camps fields (empty for e100):
             week: ownerWeekLabel,
             slot: ownerSlot,
             week_dates: ownerWeekDates,
+            // E100 fields (empty for camps):
+            cohort_month: product === "ekuzo100" ? (meta.cohort_month || "") : "",
+            cohort_label: product === "ekuzo100" ? (meta.cohort_label || "") : "",
+            cohort_start: product === "ekuzo100" ? (meta.cohort_start || "") : "",
+            cohort_end: product === "ekuzo100" ? (meta.cohort_end || "") : "",
             created_at: createdAt,
           };
 
@@ -742,7 +815,7 @@ export async function POST(req: NextRequest) {
             const errText = await squadRes.text();
             console.error("Sheets squads write failed:", squadRes.status, errText);
           } else {
-            console.log(`✅ Sheets squads: row written (${meta.squad_token})`);
+            console.log(`✅ Sheets squads: ${product} row written (${meta.squad_token})`);
           }
         } catch (err) {
           console.error(
@@ -758,10 +831,18 @@ export async function POST(req: NextRequest) {
         try {
           const memberRows = gamers.map((gd) => ({
             squad_token: meta.joining_squad_token,
+            product,
             member_parent_email: meta.parent_email || "",
             member_gamer_name: gd.firstName || "",
-            member_week: gd.weekLabel || "",
-            member_slot: gd.slot || "",
+            // Camps fields (empty for e100):
+            member_week: product === "camps" ? (gd.weekLabel || "") : "",
+            member_slot: product === "camps" ? (gd.slot || "") : "",
+            // E100 fields (empty for camps): the cohort lives at the
+            // registration level, but we stamp each member row so a
+            // single-tab FILTER by token surfaces the schedule
+            // without joining back to the squads tab.
+            member_cohort_month: product === "ekuzo100" ? (meta.cohort_month || "") : "",
+            member_cohort_label: product === "ekuzo100" ? (meta.cohort_label || "") : "",
             joined_at: createdAt,
           }));
 
@@ -775,7 +856,7 @@ export async function POST(req: NextRequest) {
               const errText = await memberRes.text();
               console.error("Sheets squad_members write failed:", memberRes.status, errText);
             } else {
-              console.log(`✅ Sheets squad_members: ${memberRows.length} row(s) written (${meta.joining_squad_token})`);
+              console.log(`✅ Sheets squad_members: ${memberRows.length} ${product} row(s) written (${meta.joining_squad_token})`);
             }
           }
         } catch (err) {

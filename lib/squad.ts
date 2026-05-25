@@ -12,9 +12,18 @@
 
 export type SquadOwner = {
   owner_gamer_name: string;
+  // `product` was added when EKUZO100 joined camps in the squad system
+  // (2026-05-24). Apps Script returns "camps" or "ekuzo100" so the
+  // joining register page can render the right pre-pin shape. Older
+  // camps-only rows may omit it — treat absent as "camps".
+  product?: "camps" | "ekuzo100";
+  // Camps fields (load-bearing for product="camps"):
   week_label: string;
   slot: string;
   week_dates: string;
+  // E100 fields (load-bearing for product="ekuzo100"):
+  cohort_month?: string;  // e.g. "2026-06"
+  cohort_label?: string;  // e.g. "Tuesdays & Thursdays · Jun 2 – Jun 25, 2026"
 };
 
 /**
@@ -57,11 +66,22 @@ export async function fetchSquadOwner(
     // Trim on the way out: a stray space in a Sheets cell would otherwise
     // break the register page's crew-match comparison and fire the
     // confirm dialog spuriously.
+    const product =
+      data.product === "ekuzo100" || data.product === "camps"
+        ? data.product
+        : undefined;
     return {
       owner_gamer_name: String(data.owner_gamer_name || "").trim(),
+      product,
       week_label: String(data.week_label || "").trim(),
       slot: String(data.slot || "").trim(),
       week_dates: String(data.week_dates || "").trim(),
+      cohort_month: data.cohort_month
+        ? String(data.cohort_month).trim()
+        : undefined,
+      cohort_label: data.cohort_label
+        ? String(data.cohort_label).trim()
+        : undefined,
     };
   } catch {
     return null;

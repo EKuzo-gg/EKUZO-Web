@@ -6,6 +6,86 @@
 
 ---
 
+## Jamie — May 25, 2026 (EKUZO100 redesign — code complete, Apps Script + Klaviyo dashboard handoff pending)
+
+**Why:** Implementation pass against `marketing/ekuzo100-redesign/01-ekuzo100-spec.md`. Converged e100's data contract with camps' "same workflow" shape so Teams can adopt it later as a mechanical merge. Built structurally (parallel files, not a shared abstraction) per the spec's deferral.
+
+**What shipped (code):**
+- **Picker:** calendar grid showing 8 session dates (Tue/Thu × 4 weeks from the first Tue of the chosen month). Three month tabs; afternoon slot retired (only 7-8:30 PM runs today).
+- **"Prefer other days?":** family-level disclosure, collapsed by default, Mon-Fri pills with Tue/Thu pre-checked. `preferredDays` threads to Sheets + Klaviyo profile property; NOT echoed back in the confirmation email by design (would re-open the expectation mismatch).
+- **`schedulePreference` retired:** dropped from form UI + API metadata + webhook reads. When/if a second time slot returns, the right shape should be re-designed then.
+- **Per-gamer trim:** mirrored camps v2 — dropped `gamerTag`, `preferredGames`, `gender`, `skillLevel`, `tshirtSize` UI. State retained as empty defaults so the API contract / Stripe metadata schema / Sheets columns stay stable.
+- **Squad join:** `?squad=TOKEN` pre-pins the owner's cohort + banner + warn-on-change. Joiners inherit the owner's `joining_squad_token` (don't mint new). Universal-link rule lifted from camps (every purchase has a working link).
+- **Partial capture:** new `/api/ekuzo100/{lead,abandoned}` routes, fire-and-forget, mirroring camps' shape with e100 tags / `product: "ekuzo100"` Klaviyo extra.
+- **Webhook §6 gaps fixed:** squad plumbing into Klaviyo/Beehiiv/Sheets for e100; squad-link path now product-aware; `schedulePreference` reads replaced with cohort_label; `preferred_days` threaded to Sheets row. Shared `Placed Order` / `Started Registration` / `Started Checkout` metrics kept — flows split by `product` in Klaviyo, not in code.
+- **Success page:** new `/api/ekuzo100/success` route (mirrors camps) + "Bring your friends" panel on the success page.
+- **Email template:** cloned camps `01-purchase-confirmation.html` (stays at repo root, byte-identical) → new `marketing/email-flows/email-templates/02-ekuzo100-purchase-confirmation.html` with EKUZO100 brand + cohort-shaped tokens; `TOKEN_MAP` extended with `{{ cohort_label }}` → `{{ event.extra.cohort_label }}`; klaviyo-ready output built. Squad share wires through the same `{{ event.extra.squad_link }}` slot camps uses — no camps email change.
+- **Hero + checkout panels on register page:** rebuilt hero in camps shape (short Eyebrow + EKUZO/100 split + 1-line body) with orange + neon yellow color treatment to differentiate from camps' purple; calendar accents match. Added sticky right-rail "Your registration" + "What you get" panels (lg+ only) and a 3-step "What happens after you click pay" preview between summary and CTA. Reassurance row (refund / Code of Conduct / Stripe) lifted from camps. Dropped gamer last-name field to mirror camps v2.
+- **Marketing page text updates** (`/programs/ekuzo100`): removed schedule-choice language (after-school/evening options gone); cohort framing replaces "twice a week" generality; em-dash sweep (9 user-facing dashes → colons/commas/sentences) per Jamie's voice preference.
+- **Marketing page FAQ rebuild — FAQ schema was missing entirely:** swapped 6 hand-paraphrased FAQs for 9 ordered by conversion-first → LLM-long-tail, all answers pulled verbatim-ish from `knowledge-base/wiki/domains/ekuzo/ekuzo-faq-canon.md` (wikilinks stripped, multi-program copy trimmed to e100 scope). Wired `buildFAQPageSchema` + rendered `<JsonLd>` so each Q/A pair is AI-citable. Q4 ("what if we miss one?") deliberately departs from canon: the canon's async-makeup language is outdated, VoDs are internal QA not for kids, true ops policy is "make 6 of 8 + leave a note at registration." Q5/Q8 also stripped re-enroll-in-another-EKUZO100 path — content is verbatim every cohort so the canonical next step is EKUZO Teams.
+
+**Files touched:** `app/programs/ekuzo100/page.tsx` (text + FAQ rebuild + JSON-LD), `app/programs/ekuzo100/register/page.tsx` (rewrite + hero + sticky aside), `app/programs/ekuzo100/success/page.tsx` (rewrite), `app/api/ekuzo100/register/route.ts` (+squad, +preferred_days, −schedulePreference), `app/api/ekuzo100/lead/route.ts` (new), `app/api/ekuzo100/abandoned/route.ts` (new), `app/api/ekuzo100/success/route.ts` (new), `app/api/webhooks/stripe/route.ts` (e100 arm: 4 §6 gaps), `app/api/squad/[token]/route.ts` (e100-aware), `lib/squad.ts` (SquadOwner type extension), `marketing/email-flows/email-templates/02-ekuzo100-purchase-confirmation.html` (new), `marketing/email-flows/email-templates/build-klaviyo.py` (+cohort_label TOKEN_MAP), `marketing/email-flows/email-templates/klaviyo-ready/02-ekuzo100-purchase-confirmation.klaviyo.html` (build output).
+
+**TypeScript:** clean.
+
+**Apps Script changes — DONE (Jamie, 2026-05-25):**
+1. ✅ `ekuzo-purchases` tab — `preferred_days` header added.
+2. ✅ `squads` tab — `product`, `cohort_month`, `cohort_label`, `cohort_start`, `cohort_end` headers added.
+3. ✅ `squad_members` tab — `product`, `member_cohort_month`, `member_cohort_label` headers added.
+4. ✅ `?action=squad&token=X` endpoint updated to return `product` + (for e100 rows) `cohort_month` + `cohort_label`. Camps lookups stay backward-compatible (default to `product: "camps"` for legacy rows that pre-date the new column). Deployed as a new version of the existing web app (URL unchanged, no Netlify env var edit). Smoke-tested with `curl -L "$URL?action=squad&token=nonexistent"` → `{"error":"not_found"}` as expected.
+
+**Klaviyo dashboard handoff:**
+1. Create new flow "EKUZO100 — Purchase Confirmation".
+2. Trigger: `Placed Order` metric.
+3. Trigger filter: `event.extra.product equals "ekuzo100"`.
+4. Attach the template at `marketing/email-flows/email-templates/klaviyo-ready/02-ekuzo100-purchase-confirmation.klaviyo.html`.
+5. Welcome automation ID `aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556` is already wired in the webhook (Beehiiv side); Klaviyo flow is the parallel sender.
+6. Also create matching recovery flows on the shared `Started Registration` and `Started Checkout` metrics filtered to `event.extra.product == "ekuzo100"`.
+
+**Camps email left alone in this commit.** Running `build-klaviyo.py` does regenerate `01-purchase-confirmation.klaviyo.html` as a side effect (the current script keeps both variant blocks visible, the May 22 script stripped them). That regenerated camps file was reverted before commit so this push doesn't carry any camps email change — Aaron owns front-end email work and the live camps Klaviyo template should stay sourced from his last upload.
+
+**Beehiiv custom fields needed (Jamie handoff):** create text custom fields `cohort_label` and `preferred_days` on the publication. The webhook writes these for e100 purchases, but Beehiiv silently drops unknown fields per the CLAUDE.md API quirks, so without them the data never lands. Also: cart-abandonment automation should exclude subscribers tagged `ekuzo100-purchased` (same pattern as the camps `camp-2026-purchased` exclusion, since Beehiiv has no tag-removal API).
+
+**E100 email — one front-end gap for Aaron:** the cloned template inherits camps' variant CSS (`looking-content` shown by default, `building-content` hidden). The squad-share CTA + roster live inside `building-content`, so they're structurally present but hidden by default in the e100 send. Universal-squad rule says every e100 buyer should see the share link — Aaron either flips the visibility rule in the e100 template or pulls those blocks out of the BUILDING wrapper. Not changed here (stayed in scope for "getting it started").
+
+**Testing strategy (live-fire):** Stripe test card 4242 4242 4242 4242 on `/programs/ekuzo100/register`. Verify Sheets `ekuzo-purchases` row written, squad_token/joining_squad_token populated, Klaviyo profile property `preferred_days` set, Beehiiv subscriber tagged `ekuzo100-purchased`. Squad-link join requires the Apps Script changes above before it'll fully exercise.
+
+## Jamie (scheduled task) — May 25, 2026 (squad_link `hasWeekPassed` live-time QA — PASSED, no fix needed)
+
+**Why:** Scheduled follow-up to the April 15 squad_link QA. When squad_link
+shipped, `hasWeekPassed()` (`lib/squad.ts`) could not be validated against a
+genuinely past camp week because every week was still in the future. Week 01
+(May 18–22) has now actually ended, so this is the live-time check the code
+comment asked for ("⚠️ TEST IN LATE MAY 2026").
+
+**Result: PASS. `hasWeekPassed` works correctly against real May 2026 dates.
+No bug, no code change.**
+
+**How verified:** Rather than mutate the production `squads` sheet (no clean
+write path available to the scheduled run — the Google Drive connector edits
+files, not Sheet rows; the only write path to `squads` is the Stripe webhook,
+which requires a real payment), I validated the actual concern deterministically
+by running `hasWeekPassed` against the real system clock (2026-05-25) plus an
+edge-case battery:
+- `hasWeekPassed("May 18 - 22")` → **true** (Week 01 has passed → state 2). This
+  is the target case. Confirmed against both a pinned `now` and the live
+  `new Date()`.
+- `hasWeekPassed("May 25 - 29")` → false (current week, still upcoming).
+- en-dash variant, zero-padded days, abbreviated months, cross-month ranges
+  ("April 27 - May 1"), and unparseable/empty inputs (fail-open → false) all
+  behaved as designed.
+
+**Wiring confirmed:** `app/squad/[token]/page.tsx` renders state 2 directly off
+`if (hasWeekPassed(owner.week_dates))`, and `app/api/squad/[token]/route.ts`
+collapses a passed week into a 404 (register page hands off to the same
+terminal copy). E100 owners correctly skip the check (no `week_dates`).
+
+**Note for whoever wrote the scheduled brief:** the brief's expected strings
+are stale. Live copy is "THIS TEAM'S CAMP WEEK HAS ALREADY HAPPENED" (not
+"CREW'S") and state 1 is "JOIN {NAME}'S TEAM" (not "CREW") — a crew→team copy
+rename happened after the brief was written. The CTA "SEE UPCOMING PROGRAMS"
+→ `/programs` is unchanged. No test row was created, so none needs deleting.
+
 ## Jamie — May 24, 2026 (Ship "What your kid's gaming is telling you" Perspective blog post)
 
 **Why:** Foundational evergreen Perspective piece on reading what a kid's

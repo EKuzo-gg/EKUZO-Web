@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { isValidSquadToken } from "@/lib/squad";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-02-25.clover",
@@ -20,10 +21,14 @@ export async function POST(req: NextRequest) {
       parent,
       gamers,
       cohort,
+      preferredDays,
       additionalInfo,
       totalPrice,
       timezone,
+      squad_token,
+      joining_squad_token,
       attribution,
+      cta_source,
       fbc,
       fbp,
     } = body;
@@ -102,6 +107,16 @@ export async function POST(req: NextRequest) {
       cohort_label: cohort.label || "",
       cohort_start: cohort.startDate || "",
       cohort_end: cohort.endDate || "",
+      // Family-level day-availability signal from the "Prefer other
+      // days?" disclosure. Comma-separated short labels (e.g.
+      // "Tue, Thu, Fri"). Internal-only — threads to Sheets + Klaviyo
+      // profile, NOT surfaced in the confirmation email (echoing
+      // "your preferred days" next to "you're booked Tue/Thu" would
+      // re-open the exact expectation mismatch the picker design
+      // routed around).
+      preferred_days: Array.isArray(preferredDays)
+        ? preferredDays.join(", ").slice(0, 200)
+        : "",
     };
 
     if (clientIp) metadata.client_ip_address = clientIp;
@@ -115,7 +130,30 @@ export async function POST(req: NextRequest) {
     if (utmContent) metadata.utm_content = utmContent;
     if (utmTerm) metadata.utm_term = utmTerm;
 
-    // Per-gamer data
+    // CTA placement that produced this registration. Allow-listed against
+    // the three landing-page surfaces (hero / sticky / footer); anything
+    // else is dropped so noise in the query string doesn't land in Stripe.
+    if (cta_source === "hero" || cta_source === "sticky" || cta_source === "footer") {
+      metadata.cta_source = cta_source;
+    }
+
+    // Squad link tokens — 10-char nanoids, validated against a strict
+    // charset/length allow-list before they land in Stripe metadata so
+    // arbitrary client input can't be smuggled downstream. Solo buyer
+    // mints squad_token; joiner (arrived via ?squad=TOKEN) carries
+    // joining_squad_token and does NOT mint a new one — that's how the
+    // crew stays one coherent group as it grows.
+    if (isValidSquadToken(squad_token)) {
+      metadata.squad_token = squad_token;
+    }
+    if (isValidSquadToken(joining_squad_token)) {
+      metadata.joining_squad_token = joining_squad_token;
+    }
+
+    // Per-gamer data. schedulePreference retired 2026-05-24 — only one
+    // session time runs today (7-8:30 PM), so the field carried zero
+    // bits of information. preferred_days (family-level, above) is the
+    // demand-capture signal instead.
     gamers.forEach((gamer: any, i: number) => {
       metadata[`gamer_${i}`] = JSON.stringify({
         firstName: gamer.firstName,
@@ -126,7 +164,6 @@ export async function POST(req: NextRequest) {
         skillLevel: gamer.skillLevel || "",
         tshirtSize: gamer.tshirtSize || "",
         preferredGames: (gamer.preferredGames || []).join(", "),
-        schedulePreference: gamer.schedulePreference || "",
       }).slice(0, 500);
     });
 

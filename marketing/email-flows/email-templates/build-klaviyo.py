@@ -45,6 +45,14 @@ TOKEN_MAP = {
     "{{ gamer_name }}": "{{ event.extra.gamer_name }}",
     '{{ gamer_name|slice:":1"|upper }}': '{{ event.extra.gamer_name|slice:":1"|upper }}',
     "{{ camp_week_dates }}": "{{ event.extra.camp_week_dates }}",
+    # cohort_label (e100): complete human-readable schedule string built
+    # by the register-page picker (e.g. "Tuesdays & Thursdays · Jun 2 –
+    # Jun 25, 2026"). The Stripe webhook forwards it as event extra
+    # for any Placed Order metric where product==="ekuzo100". This is
+    # the e100 counterpart to camps' camp_week_dates — same role
+    # (schedule string in the confirmation email), different shape
+    # (month-anchored cohort vs single-week unit).
+    "{{ cohort_label }}": "{{ event.extra.cohort_label }}",
     "{{ value }}": "{{ event.extra.value }}",
     "{{ order_id }}": "{{ event.extra.order_id }}",
     "{{ squad_link }}": "{{ event.extra.squad_link }}",
