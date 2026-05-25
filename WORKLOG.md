@@ -6,6 +6,27 @@
 
 ---
 
+## Jamie — May 25, 2026 (Teams convergence — Phase 0 baseline captured, no code change)
+
+**Why:** Opening phase of the Teams convergence build defined in `marketing/teams-redesign/01-teams-convergence-handoff.md`. Per the handoff's per-phase model (each phase ends on a verify gate so the next session can start clean), Phase 0 is pure characterization: capture system baselines + document the camps/e100 webhook payloads as the golden contract that every later phase's refactor must reproduce byte-for-byte.
+
+**What shipped:** new doc `marketing/teams-redesign/02-baseline.md`. Contains:
+- System baseline: `tsc --noEmit` clean, `next build` clean (Next 16.2.1 / Turbopack), `.next/server` = **28 MB** (Netlify <50 MB cap, 22 MB headroom), `.next/static` = 2.0 MB, **0 MP4/MOV/WebM** in the function bundle trace (the CLAUDE.md Learning Log + `outputFileTracingExcludes` are holding).
+- Per-route prerendered payload weights for the 3 register pages (camps 66 KB → teams 57 KB → e100 53 KB) + 3 marketing pages, plus the 10 largest client chunks (5 over 100 KB, max 226 KB — flagged as a Phase 6 candidate).
+- Asset audit of `app/programs/ekuzo-teams/page.tsx` (server component, clean) + `app/programs/ekuzo-teams/register/page.tsx` (1298 lines `"use client"`, loadStripe + Elements at module scope, rich-form fields the Phase 5 redesign will strip).
+- **Golden payloads** characterized from `app/api/webhooks/stripe/route.ts` for camps + e100 across 7 surfaces: Beehiiv subscription POST + tags, Klaviyo profile-import + Purchasers list-add + Placed Order event, Sheets `ekuzo-purchases` row, Sheets `squads` row, Sheets `squad_members` row, Meta CAPI Purchase event. Each surface includes the canonical camps fixture as full JSON + an e100 diff table for the fields that differ.
+- Teams installment Subscription block characterized separately (§2I) — Phase 2 must preserve it exactly.
+- Diffing protocol (§3) for how Phase 1+ should verify against this doc.
+- Phase 1 entry conditions (§4): what the next session can assume + recommended first move (build the registry skeleton with the 4 obviously-shared fields — `programName`, `tags`, `automationId`, `beehiivReferringSite` — migrate one field at a time, run the §3 diff after each batch).
+
+**Two things called out for later:** (1) the `week` column in the `ekuzo-purchases` Sheets tab is overloaded — it carries `cohort_label` for e100 rows. Captured as a known mapping quirk; renaming requires Apps Script coordination, not Phase 1 scope. (2) Five client chunks > 100 KB suggests a bundle-analyzer pass in Phase 6 to confirm Stripe/Rive aren't shipped to routes that don't need them.
+
+**Files touched:** `marketing/teams-redesign/02-baseline.md` (new), `WORKLOG.md` (this entry). No production code changed; Netlify rebuild is a no-op.
+
+**Phase 1 next:** `lib/products/` registry — typed configs for camps/e100/teams, then incrementally migrate the webhook + register routes to read from it. Verify gate: `tsc --noEmit` clean + camps/e100 golden payloads from §2 unchanged.
+
+---
+
 ## Jamie — May 25, 2026 (EKUZO100 redesign — code complete, Apps Script + Klaviyo dashboard handoff pending)
 
 **Why:** Implementation pass against `marketing/ekuzo100-redesign/01-ekuzo100-spec.md`. Converged e100's data contract with camps' "same workflow" shape so Teams can adopt it later as a mechanical merge. Built structurally (parallel files, not a shared abstraction) per the spec's deferral.
