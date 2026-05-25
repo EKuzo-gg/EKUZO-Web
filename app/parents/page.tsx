@@ -14,7 +14,7 @@ import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import ModalButton from "@/components/ui/ModalButton";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { buildBreadcrumbSchema } from "@/lib/schema";
+import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
@@ -46,29 +46,49 @@ export const metadata: Metadata = {
 
 const parentsFAQs = [
   {
+    question: "How do you keep online spaces safe?",
+    answer:
+      "EKUZO operates as a \u201cwalled garden\u201d designed around the four safety concerns parents raise most: strangers, toxic chat, older kids, and in-game spending. Every session is coach-led and recorded, and our Discord and online platforms are actively moderated. Teams are verified, so your child plays with the same known teammates, not anonymous matchmaking, and opponents are limited to other youth in the EKUZO ecosystem, not random adults or older teens. Every student signs a Code of Conduct that\u2019s consistently enforced, and there are no in-session purchase prompts, loot boxes, or pressure to spend.",
+  },
+  {
     question: "Is gaming really educational?",
     answer:
       "Yes \u2014 when it\u2019s structured. EKUZO uses gaming as the medium to develop communication, leadership, resilience, and strategic thinking. These are the same skills coaches in traditional sports spend years trying to teach.",
   },
   {
-    question: "How do you keep online spaces safe?",
+    question: "Isn\u2019t this just more screen time?",
     answer:
-      "All sessions are coach-led and recorded. Our Discord and online platforms are actively moderated. Coaches enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
+      "It\u2019s structured screen time that replaces the unproductive kind, not added on top of it. 86% of parents are already managing screen time and many feel they\u2019re losing the battle; the issue usually isn\u2019t the number of hours, it\u2019s whether those hours produce anything. EKUZO sessions are finite (90 minutes, coach-led, skill-building), and many parents report fewer transition fights at home because their child\u2019s \u201cgaming need\u201d is being met productively.",
   },
   {
-    question: "What if my child has never played competitively?",
+    question: "What if my child has never played competitively, or is shy?",
     answer:
-      "That\u2019s perfectly fine. EKUZO100 is a 4-week competitive bootcamp designed to meet students exactly where they are \u2014 beginner or experienced. Coaches build from there.",
+      "That\u2019s exactly who EKUZO is built for. Our coaches meet students where they are, from total beginners to aspiring competitors, and teams are balanced by age and skill level. Many of our strongest parent testimonials come from families whose kids weren\u2019t \u201cgamer kids\u201d at all \u2014 they were kids who needed a team. EKUZO100, our 4-week program, is the lowest-pressure way to start.",
   },
   {
     question: "What outcomes should I expect?",
     answer:
-      "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and curiosity about STEAM projects and career pathways.",
+      "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and new curiosity about STEAM projects and careers. Research on structured school esports backs this up: participants averaged 7.3 more school days per year, 33.5% lower absence rates, and a +0.11 GPA increase during the active season, and 52.1% reported significant life-skills development.",
+  },
+  {
+    question: "How does this help with school?",
+    answer:
+      "The mechanism is belonging. About 90% of middle-school esports participants aren\u2019t in any other school extracurricular, so for many kids EKUZO is their first real connection at school, which correlates with the attendance and GPA gains above. On top of that, students build focus, discipline, time management, and collaboration that carry directly into academics. Our coaching method is built on established learning science.",
+  },
+  {
+    question: "Do I need to be a gamer to support my child?",
+    answer:
+      "No. The most useful thing a parent brings isn\u2019t controller skill, it\u2019s interest. EKUZO is designed for parents who don\u2019t play: we translate each session into plain terms \u2014 what your child did well, where they struggled, how they communicated \u2014 so you can have the conversation at dinner without learning the game. Curiosity matters far more than skill.",
   },
   {
     question: "What equipment does my child need?",
     answer:
       "A computer (PC or Mac) that can run League of Legends, a stable internet connection, and a headset with a microphone. The game is free to download and doesn\u2019t require high-end hardware.",
+  },
+  {
+    question: "What about college or careers?",
+    answer:
+      "EKUZO builds professional skills \u2014 leadership, resilience, communication \u2014 and exposes students to esports, game design, broadcasting, and tech pathways. Collegiate esports scholarships now total over $15 million annually across hundreds of programs, and a majority of esports players go on to pick STEM careers. We treat these as bonuses, not the pitch: the core value is the transferable skills, whatever path your child takes.",
   },
   {
     question: "How do I enroll?",
@@ -77,10 +97,13 @@ const parentsFAQs = [
   },
 ];
 
+const parentsFAQSchema = buildFAQPageSchema(parentsFAQs);
+
 export default function ParentsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={parentsFAQSchema} />
       {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
       <section
         className="bg-white relative overflow-clip"

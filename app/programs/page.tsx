@@ -12,7 +12,7 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ModalButton from "@/components/ui/ModalButton";
 import JsonLd from "@/components/JsonLd";
-import { buildBreadcrumbSchema } from "@/lib/schema";
+import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
@@ -46,7 +46,17 @@ const programsFAQs = [
   {
     question: "What programs does EKUZO offer?",
     answer:
-      "EKUZO offers three programs: EKUZOTEAMS (semester-based, 15 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
+      "EKUZO offers three programs, all built on the same coaching system: EKUZO Teams (semester-based, about 15\u201316 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZO Camps (1-week intensive sessions during summer and holiday breaks). Each has a different format and commitment level.",
+  },
+  {
+    question: "Which program is right for my child?",
+    answer:
+      "Start with EKUZO100 if you want a low-commitment first taste: four weeks, $100, no contract. Choose EKUZO Teams if your child is ready for a full season with consistent teammates and real competition. Pick EKUZO Camps for an intensive week during summer or a school break. Many families start with EKUZO100 or a camp, then move into a Teams season.",
+  },
+  {
+    question: "How much does each program cost?",
+    answer:
+      "EKUZO100 is $100 for four weeks. EKUZO Camps are $199 per week. EKUZO Teams is $576 paid in full (10% off) or four monthly payments of $160 ($640 total). All programs work out to roughly $20 per session of small-group, coach-led training.",
   },
   {
     question: "What is EKUZO100?",
@@ -56,7 +66,7 @@ const programsFAQs = [
   {
     question: "When are practices held?",
     answer:
-      "EKUZO100: Two evenings per week, after school. EKUZOTEAMS: 2\u20133 sessions per week during or after school. EKUZOCAMPS: Daily sessions during summer or holiday breaks. All sessions are approximately 90 minutes.",
+      "EKUZO100: two evenings per week, after school. EKUZOTEAMS: two 90-minute sessions per week by default (some school-based teams run three 60-minute sessions). EKUZOCAMPS: daily sessions during summer or holiday breaks. Most sessions run about 90 minutes.",
   },
   {
     question: "What age range is EKUZO for?",
@@ -70,10 +80,13 @@ const programsFAQs = [
   },
 ];
 
+const programsFAQSchema = buildFAQPageSchema(programsFAQs);
+
 export default function ProgramsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={programsFAQSchema} />
       {/* ══ 1. HERO — Red bg, full-bleed Rive animation ═════════════════════ */}
       <div className="relative overflow-visible">
         <section

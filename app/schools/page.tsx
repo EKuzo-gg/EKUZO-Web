@@ -12,7 +12,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import CircleIcon from "@/components/ui/CircleIcon";
 import ModalButton from "@/components/ui/ModalButton";
 import JsonLd from "@/components/JsonLd";
-import { buildBreadcrumbSchema } from "@/lib/schema";
+import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 import type { Metadata } from "next";
 
@@ -64,16 +64,29 @@ const schoolsFAQs = [
       "All sessions are coach-led and recorded. All communication channels are actively moderated. Students sign a Code of Conduct and coaches are trained in youth safety.",
   },
   {
+    question: "What outcomes do schools see?",
+    answer:
+      "Schools running structured esports report measurable gains: students average 7.3 more school days per year, 33.5% lower absence rates, and a +0.11 GPA increase during the active season. About 90% of middle-school esports participants aren’t in any other extracurricular, so esports reaches students nothing else does, which is what drives the attendance and engagement gains.",
+  },
+  {
+    question: "How do we bring EKUZO to our school, and what does it cost?",
+    answer:
+      "School engagements are institutional and personalized based on each school’s needs. Every school is different — facilities, schedule, student population, and goals all vary — so we prefer to have a conversation before making commitments. Reach out via the contact form and we’ll work through the right fit, scope, and structure for your school together.",
+  },
+  {
     question: "What games does EKUZO play?",
     answer:
       "Today, EKUZO trains on League of Legends. It provides rich team dynamics, communication requirements, and deep strategy, which is exactly what the EKUZO curriculum is designed around. It\u2019s also free-to-play and doesn\u2019t require bleeding edge machines.",
   },
 ];
 
+const schoolsFAQSchema = buildFAQPageSchema(schoolsFAQs);
+
 export default function SchoolsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={schoolsFAQSchema} />
       {/* ══ 1. HERO — white bg ══════════════════════════════════════════════ */}
       <div className="relative overflow-visible">
         <section

@@ -12,7 +12,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import TrackPageView from "@/components/analytics/TrackPageView";
 import JsonLd from "@/components/JsonLd";
-import { ekuzoTeamsCourseSchema, buildBreadcrumbSchema } from "@/lib/schema";
+import { ekuzoTeamsCourseSchema, buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/schema";
 
 export const metadata = {
   alternates: { canonical: "/programs/ekuzo-teams" },
@@ -70,42 +70,62 @@ const sessionSteps = [
 
 const teamsFAQs = [
   {
-    question: "How long is a semester season?",
+    question:
+      "How do you keep online spaces safe? What about strangers, toxic chat, older kids, or spending traps?",
     answer:
-      "Each EKUZOTEAMS season runs approximately 15 weeks, following the school calendar. Fall and spring seasons are available depending on your school or region.",
+      "EKUZO operates as a \u201cwalled garden\u201d specifically designed to answer the four most common parent safety concerns: strangers, toxic chat, older kids, and in-game spending traps. Every session is coach-led and recorded. Our Discord and online platforms are actively moderated. Teams are verified, meaning your child plays with the same known teammates, not anonymous matchmaking. Opponents are limited to other youth participants in the same ecosystem, so your child is not randomly matched against unknown adults or older teens. Students sign a Code of Conduct, and expectations are clearly and consistently enforced. There are no in-session monetization prompts, loot boxes, or pressure to spend.",
   },
   {
-    question: "How many sessions is it per week?",
+    question:
+      "Is this only for competitive students, or can a beginner join a full season?",
     answer:
-      "Typically two 90-minute sessions. School-based teams practice during or after school hours. Home-based teams practice after school (i.e. 4:00\u20135:30) or in the evening (i.e. 7:00\u20138:30).",
+      "EKUZO Teams is built for any student who games, from casual to competitive; the focus is growth, not rank. Coaches meet students where they are, and teams are balanced by age and skill level, so a full season is plenty of time for a newer player to develop. If your gamer is brand new or hesitant, EKUZO100 (our 4-week program) is the lowest-pressure way to start before committing to a season.",
   },
   {
-    question: "How are teams formed?",
+    question: "Do we have to commit to a full season, or can we try first?",
     answer:
-      "Rosters are 10\u201312 players to support 5v5 match play. We prioritize local cohorts, age, and skill-level matching. A preference for local players means friendships can extend beyond the screen.",
-  },
-  {
-    question: "What\u2019s the difference between School and Home tracks?",
-    answer:
-      "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school (often during or after school hours with a proctor present). The Home track is for families who want to participate independently, with sessions scheduled in evenings.",
+      "You can try first. EKUZO100 is a 4-week program designed as the low-risk on-ramp: the same coaching system in small groups, with no semester commitment. Many families start there, then move into EKUZO Teams for a full season once their gamer is hooked. There\u2019s no automatic renewal between seasons; your family decides each time.",
   },
   {
     question: "How much does EKUZOTEAMS cost?",
     answer:
-      "EKUZOTEAMS can be paid monthly or up front for a 10% discount. Like all EKUZO programs, instruction is standardized around roughly $20 per session of small-group, coach-led training.",
+      "$576 paid in full (a 10% discount), or four monthly payments of $160 ($640 total). Like all EKUZO programs, that works out to roughly $20 per session of small-group, coach-led training. The price covers the full system behind the sessions: elite coach training, moderated team spaces, curriculum design, and competition infrastructure.",
   },
   {
-    question: "What comes after EKUZOTEAMS?",
+    question: "How long is a season, and how many sessions per week?",
     answer:
-      "Students can re-enroll each semester. As relationships and skill deepen, teams often continue together across multiple seasons. Some families also use EKUZOCAMPS during breaks to maintain momentum.",
+      "Each EKUZO Teams season runs about 15 to 16 weeks, following the school calendar (exact length varies by season and region). The default is two 90-minute sessions per week. Home-track teams always run two 90-minute sessions; some school-based teams opt for three 60-minute sessions to fit their schedule. Home teams practice after school (around 4:00\u20135:30) or in the evening (around 7:00\u20138:30).",
+  },
+  {
+    question: "What\u2019s the difference between School and Home tracks?",
+    answer:
+      "Both tracks deliver the same EKUZO coaching system. The School track runs in partnership with a school, often during or after school hours with a proctor present. The Home track is for families who want to participate independently, with sessions scheduled after school or in the evening.",
+  },
+  {
+    question: "How are teams formed?",
+    answer:
+      "Rosters are 10 to 12 players to support 5v5 match play. We balance teams by age and skill level and prioritize local cohorts when possible, so friendships can extend beyond the screen.",
+  },
+  {
+    question: "What equipment does my child need?",
+    answer:
+      "A computer (PC or Mac) that can run League of Legends, a stable internet connection, and a headset with a microphone. The game is free to download and does not require high-end hardware.",
+  },
+  {
+    question: "What comes after a season?",
+    answer:
+      "Students re-enroll each semester, and as relationships and skills deepen, teams often continue together across multiple seasons. There\u2019s no automatic renewal; your family decides each time. Some families also use EKUZO Camps during breaks to keep momentum between seasons.",
   },
 ];
+
+const teamsFAQSchema = buildFAQPageSchema(teamsFAQs);
 
 export default function EkuzoTeamsPage() {
   return (
     <>
       <JsonLd data={ekuzoTeamsCourseSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={teamsFAQSchema} />
       <TrackPageView program="ekuzo-teams" />
       {/* ══ 1. HERO — methodology template ═══════════════════════════════════ */}
       <section

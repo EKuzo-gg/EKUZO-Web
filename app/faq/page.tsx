@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Section 2: Safety & Coaching
+// Section 1: About & Safety
 const safetyFAQs = [
   {
     question: "What is EKUZO?",
@@ -47,12 +47,17 @@ const safetyFAQs = [
   {
     question: "How do you keep online spaces safe?",
     answer:
-      "All sessions are coach-led and recorded. Our Discord and online platforms are actively moderated. Coaches and staff enforce community guidelines, and every student signs our Code of Conduct. Parents can always contact us with concerns.",
+      "EKUZO operates as a \u201cwalled garden\u201d specifically designed to answer the four most common parent safety concerns: strangers, toxic chat, older kids, and in-game spending traps. Every session is coach-led and recorded, and our Discord and online platforms are actively moderated. Teams are verified, so your child plays with the same known teammates, not anonymous matchmaking, and opponents are limited to other youth in the EKUZO ecosystem, not random adults or older teens. Every student signs a Code of Conduct that\u2019s consistently enforced, and there are no in-session monetization prompts, loot boxes, or pressure to spend.",
   },
   {
     question: "Is this safe for beginners?",
     answer:
       "Yes. Coaches meet students where they are \u2014 from casual players to aspiring competitors \u2014 and ensure every team is inclusive and supportive.",
+  },
+  {
+    question: "Isn\u2019t gaming culture toxic? I don\u2019t want my child exposed to that.",
+    answer:
+      "Toxicity in gaming is real, but it isn\u2019t inherent to gaming; it\u2019s a symptom of unstructured, anonymous environments where players never meet again. EKUZO is built against that \u201csolo queue\u201d failure mode: your child plays on a stable team with the same teammates all season, a coach is on voice comms, there\u2019s a written Code of Conduct, and opponents come from the EKUZO ecosystem rather than random adults. In an accountable environment, the behaviors that wreck unstructured play are nearly impossible to sustain.",
   },
   {
     question: "What equipment does my child need?",
@@ -61,12 +66,12 @@ const safetyFAQs = [
   },
 ];
 
-// Section 3: Programs & Scheduling
+// Section 2: Programs & Scheduling
 const programsFAQs = [
   {
     question: "What programs does EKUZO offer?",
     answer:
-      "EKUZO offers three programs: EKUZOTEAMS (semester-based, 15 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
+      "EKUZO offers three programs: EKUZOTEAMS (semester-based, about 15\u201316 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
   },
   {
     question: "What is EKUZO100?",
@@ -76,7 +81,7 @@ const programsFAQs = [
   {
     question: "When are practices held?",
     answer:
-      "EKUZO100: Two evenings per week, after school. EKUZOTEAMS: 2\u20133 sessions per week during or after school. EKUZOCAMPS: Daily sessions during summer or holiday breaks. All sessions are approximately 90 minutes.",
+      "EKUZO100: two evenings per week, after school. EKUZOTEAMS: two 90-minute sessions per week by default (some school-based teams run three 60-minute sessions), during or after school. EKUZOCAMPS: daily sessions during summer or holiday breaks.",
   },
   {
     question: "How are teams formed?",
@@ -88,33 +93,43 @@ const programsFAQs = [
     answer:
       "Both tracks deliver the same EKUZO coaching system. The School track is run in partnership with a school, often during or after school hours with a proctor present. The Home track is for families who want to participate independently, with sessions scheduled in the evenings.",
   },
+  {
+    question: "Can homeschool families participate?",
+    answer:
+      "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
+  },
+  {
+    question: "What age range is EKUZO for?",
+    answer:
+      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
+  },
 ];
 
-// Section 4: Outcomes & Benefits
+// Section 3: Outcomes & Benefits
 const outcomesFAQs = [
   {
     question: "What outcomes should I expect?",
     answer:
-      "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and curiosity about STEAM projects and career pathways.",
+      "Parents most often notice greater confidence and motivation, improved communication and teamwork, reduced social anxiety through belonging, and new curiosity about STEAM projects and careers. Research on structured school esports documents the gains: 7.3 more school days per year, 33.5% lower absence rates, a +0.11 GPA increase during the active season, and 52.1% of participants reporting significant life-skills development.",
   },
   {
     question: "How does this help with school?",
     answer:
-      "Motivated students engage more. Educators consistently report improved attendance and focus when students are involved in structured esports programs. Our coaching methodology is built on proven learning science, developing skills that carry directly into academics.",
+      "The mechanism is belonging. About 90% of middle-school esports participants aren’t in any other school extracurricular, so for many students EKUZO is their first real connection at school, which correlates with measurable attendance and GPA gains. Students also build focus, discipline, time management, and collaboration that carry directly into academics. The coaching method is built on established learning science.",
   },
   {
     question: "What about college or careers?",
     answer:
-      "EKUZO builds both soft skills (leadership, resilience, communication) and exposure to pathways in esports, game design, broadcasting, and tech. Many universities now offer esports scholarships and programs.",
+      "EKUZO builds professional skills (leadership, resilience, communication) and exposes students to esports, game design, broadcasting, and tech pathways. Collegiate esports scholarships now total over $15 million annually across hundreds of university programs, and a majority of esports players go on to pick STEM careers. The skills transfer to college and work regardless of whether a student pursues esports itself.",
   },
 ];
 
-// Section 5: Pricing
+// Section 4: Pricing
 const costFAQs = [
   {
     question: "How is EKUZO priced?",
     answer:
-      "All EKUZO programs are standardized around roughly $20 per session of small-group, coach-led instruction. EKUZO100 is $100 for the full four-week program. EKUZOTEAMS and EKUZOCAMPS pricing varies by format \u2014 visit the program pages or contact us for current details.",
+      "All EKUZO programs are standardized around roughly $20 per session of small-group, coach-led instruction. EKUZO100 is $100 for the full 4-week program. EKUZO Teams is $576 paid in full (a 10% discount) or four monthly payments of $160 ($640 total). EKUZO Camps are $199 per week. See each program page to register.",
   },
   {
     question: "Why does it cost what it does?",
@@ -123,7 +138,7 @@ const costFAQs = [
   },
 ];
 
-// Section 6: Getting Started
+// Section 5: Getting Started
 const enrollmentFAQs = [
   {
     question: "How do I enroll?",
@@ -134,16 +149,6 @@ const enrollmentFAQs = [
     question: "What happens after EKUZO100?",
     answer:
       "Families can re-enroll in another EKUZO100 cohort, transition into EKUZOTEAMS for a full semester of coached competition, or try EKUZOCAMPS during breaks. There\u2019s no automatic renewal \u2014 your family decides what\u2019s next.",
-  },
-  {
-    question: "Can homeschool families participate?",
-    answer:
-      "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
-  },
-  {
-    question: "What age range is EKUZO for?",
-    answer:
-      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
   },
 ];
 
@@ -260,7 +265,7 @@ export default function FAQPage() {
               className="font-display uppercase text-black leading-[0.85]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Safety & Coaching
+              About & Safety
             </h3>
           </div>
           <div className="flex-1">
