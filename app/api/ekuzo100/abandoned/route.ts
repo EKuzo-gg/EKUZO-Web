@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { trackKlaviyoEvent } from "@/lib/klaviyo";
+import { PRODUCTS } from "@/lib/products";
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
 
-const CART_ABANDONED_TAG = "cart_abandoned_ekuzo100";
+// Sourced from lib/products registry (Phase 1).
+const CART_ABANDONED_TAG = PRODUCTS.ekuzo100.beehiiv.tags.cartAbandoned;
+const REFERRING_SITE = PRODUCTS.ekuzo100.beehiiv.referringSites.cartAbandoned;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -81,7 +84,7 @@ export async function POST(req: NextRequest) {
         email,
         reactivate_existing: true,
         send_welcome_email: false,
-        referring_site: "ekuzo100-cart-abandoned",
+        referring_site: REFERRING_SITE,
       };
       if (customFields.length > 0) subPayload.custom_fields = customFields;
 

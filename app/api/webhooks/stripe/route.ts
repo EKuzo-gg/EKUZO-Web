@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createHash } from "crypto";
+import { getProductFromMeta } from "@/lib/products";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-02-25.clover",
@@ -80,6 +81,13 @@ export async function POST(req: NextRequest) {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     const meta = paymentIntent.metadata;
     const product = meta.product || "camps"; // default to camps for backward compat
+    // Phase 1 of the Teams convergence: shared product config (labels,
+    // tags, automation IDs, referring sites). One read here; downstream
+    // surfaces (Beehiiv, Klaviyo) read fields off it instead of running
+    // their own `product === "..."` ternaries. `product` (string) is
+    // retained for the remaining per-product branch logic that hasn't
+    // moved to the registry yet (Phase 2's webhook strategy map).
+    const productConfig = getProductFromMeta(product);
 
     // ── Mode isolation ─────────────────────────────────────────────
     // Webhook skips events whose Stripe mode doesn't match this deploy's
@@ -260,11 +268,11 @@ export async function POST(req: NextRequest) {
 
     // ── Enroll in Beehiiv ──────────────────────────────────────────
     try {
-      // Product-specific Beehiiv fields
-      const programName =
-        product === "ekuzo100" ? "EKUZO100"
-        : product === "teams" ? "EKUZOTeams"
-        : "EKUZO Camps";
+      // Product-specific Beehiiv fields — sourced from lib/products
+      // registry (Phase 1 of the Teams convergence). Values match
+      // pre-Phase-1 ternary output byte-for-byte; see
+      // marketing/teams-redesign/02-baseline.md §2A/§2B.
+      const programName = productConfig.programName;
       // Internal Beehiiv referrer label (legacy, used pre-UTM-attribution).
       // NOTE: this used to be named `utmSource` and shadowed the actual UTM
       // captured up-top at line ~138 — meaning the Beehiiv `utm_source` payload
@@ -272,18 +280,12 @@ export async function POST(req: NextRequest) {
       // from the ad. Renamed to make the distinction unmistakable. Kept as
       // `referring_site` on the Beehiiv payload so the legacy "where did this
       // subscriber come from internally" signal still lands somewhere.
-      const beehiivReferringSite =
-        product === "ekuzo100" ? "ekuzo100-registration"
-        : product === "teams" ? "ekuzo-teams-registration"
-        : "ekuzo-camps-registration";
+      // Sourced from lib/products registry (Phase 1).
+      const beehiivReferringSite = productConfig.beehiiv.referringSites.purchase;
 
-      // Tags per product
-      const tags =
-        product === "ekuzo100"
-          ? ["ekuzo100-purchased", "source-ekuzo100-registration"]
-        : product === "teams"
-          ? ["teams-purchased", "source-teams-registration"]
-        : ["camp-2026-purchased", "source-camp-registration"];
+      // Tags per product — sourced from lib/products registry (Phase 1).
+      // Values match pre-Phase-1 ternary output exactly; see baseline §2A/§2B.
+      const tags = productConfig.beehiiv.tags.purchased;
 
       // Build custom fields — shared base + product-specific
       // NOTE: the 6 attribution fields below (acquisition_source +
@@ -345,11 +347,10 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // Product-specific welcome automation
-      const automationId =
-        product === "teams"   ? "aut_fea2b01b-eccd-40c7-9d53-2b370c039ddb"
-        : product === "ekuzo100" ? "aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556"
-        : "aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc"; // camps (default)
+      // Product-specific welcome automation — sourced from lib/products
+      // registry (Phase 1). Camps / e100 / teams automation IDs are
+      // canonical there; this read replaces a hand-maintained ternary.
+      const automationId = productConfig.welcomeAutomationId;
 
       const beehiivPayload = {
         email: meta.parent_email,
@@ -473,9 +474,7 @@ export async function POST(req: NextRequest) {
 
       // Build custom properties — same data set as Beehiiv
       const klaviyoProperties: Record<string, string> = {
-        program: product === "ekuzo100" ? "EKUZO100"
-          : product === "teams" ? "EKUZOTeams"
-          : "EKUZO Camps",
+        program: productConfig.programName,
         gamer_name: gamers.map((g) => g.firstName).filter(Boolean).join(", "),
         gamer_count: meta.gamer_count || "1",
         registration_summary: gamers.map((gd) => {

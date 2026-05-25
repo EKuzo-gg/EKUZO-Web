@@ -6,6 +6,27 @@
 
 ---
 
+## Jamie — May 25, 2026 (Teams convergence — Phase 1: product registry, behavior-identical for camps + e100)
+
+**Why:** Phase 1 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 1, the product registry. Phase 0 (`02-baseline.md`) captured byte-for-byte camps + e100 webhook payloads; Phase 1 extracts the four obviously-shared per-product fields into typed configs and migrates the webhook + lead/abandoned routes to read from them. Each downstream surface still produces identical output for camps + e100 — Phase 1's whole value is the seam itself, not visible behavior change.
+
+**What shipped:** new `lib/products/` module (5 files) — `types.ts` (`ProductConfig` interface + `BeehiivReferringSites` / `BeehiivTags` sub-shapes), one file per product (`camps.ts`, `ekuzo100.ts`, `teams.ts`), and `index.ts` exposing `PRODUCTS` + `getProductFromMeta(metaValue)` (preserves the pre-registry default-to-camps fallback for any unknown `meta.product` value). Migrated 5 callsites:
+- `app/api/webhooks/stripe/route.ts` — added `productConfig = getProductFromMeta(product)` once near the top of the success handler; replaced 5 ternaries (Beehiiv `programName`, `beehiivReferringSite`, `tags`, `automationId`, plus Klaviyo `program:`) with reads off `productConfig.*`.
+- `app/api/camps/lead/route.ts`, `app/api/camps/abandoned/route.ts`, `app/api/ekuzo100/lead/route.ts`, `app/api/ekuzo100/abandoned/route.ts` — replaced literal `form_started_*` / `cart_abandoned_*` tag constants and `ekuzo-{product}-form-started` / `-cart-abandoned` `referring_site` strings with reads off `PRODUCTS.{camps|ekuzo100}.beehiiv.{tags|referringSites}.{formStarted|cartAbandoned}`. Teams config carries pre-built values for the not-yet-built `form_started_teams` / `cart_abandoned_teams` / `ekuzo-teams-*` referring sites so the Phase 4 routes can wire in by reading from the config without further coordination.
+
+**Verify gate (per handoff §4 Phase 1) — PASSED:**
+- `tsc --noEmit` clean after each migration step + on the final state.
+- Code-level golden-payload diff vs. `02-baseline.md` §2A-§2D: all four shared field values byte-identical for camps + e100 (`EKUZO Camps`/`EKUZO100`, `ekuzo-camps-registration`/`ekuzo100-registration`, `aut_4db31c63-…`/`aut_3dd66d4e-…`, `["camp-2026-purchased","source-camp-registration"]`/`["ekuzo100-purchased","source-ekuzo100-registration"]`). Klaviyo `properties.program` follows the same source. Lead/abandoned tag + referring_site values: identical pre/post; only the source changed.
+- Live Stripe-CLI diff (§3 step 2 of the baseline doc): NOT executed this phase — code-level diff is sufficient for the field-substitution shape of Phase 1, and Phase 2's verify gate already mandates a full live test that will catch any divergence.
+
+**What's intentionally NOT in the registry yet** (waiting on Phase 2's strategy-map work, see `03-phase1-registry.md` §4): per-product Beehiiv `custom_fields` extras, Klaviyo extra properties, Klaviyo `Placed Order` event properties, Sheets row shape, `gamerSummaries` builder (used identically in Beehiiv + Klaviyo, two callers — recommended Phase 2 first move), Meta CAPI `programSlug`, `squadProgramPath`, cohort vocab, pricing, route paths, squad pre-pin shape. The handoff rule "don't add seams not cleanly shared by all three" still binds; Phase 2 should flag any product that resists the shape rather than forcing it.
+
+**Phase 1 deliverables:** `lib/products/{types,camps,ekuzo100,teams,index}.ts` (new) + the 5 callsite migrations + `marketing/teams-redesign/03-phase1-registry.md` (new — Phase 2 entry conditions, what's left, recommended first move).
+
+**Phase 2 next:** webhook strategy map. Recommended first move: extract `gamerSummaries` (Beehiiv + Klaviyo, two callers, one shape per product) into a `productConfig.buildGamerSummary(gamer, meta)` callback. Verify gate: camps + e100 still byte-identical against §2; teams payload gains `squad_link` + a `squads` row; live test for teams upfront + installment confirms the Subscription still creates. Do not merge dev to main — Jamie batches those.
+
+---
+
 ## Jamie — May 25, 2026 (Teams convergence — Phase 0 baseline captured, no code change)
 
 **Why:** Opening phase of the Teams convergence build defined in `marketing/teams-redesign/01-teams-convergence-handoff.md`. Per the handoff's per-phase model (each phase ends on a verify gate so the next session can start clean), Phase 0 is pure characterization: capture system baselines + document the camps/e100 webhook payloads as the golden contract that every later phase's refactor must reproduce byte-for-byte.
