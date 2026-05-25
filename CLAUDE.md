@@ -72,7 +72,7 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 - Webhook secret (`STRIPE_WEBHOOK_SECRET`): set from Stripe CLI (`whsec_...` in `.env.local`). For production: create webhook endpoint in Stripe Dashboard.
 
 ### Beehiiv (email marketing — NOT just newsletter)
-- **Setup complete (3/30):** 13 custom fields, 9 tags, welcome automation scaffolded (draft)
+- **Setup complete:** 18 custom fields (camps + e100), multiple tags (camps + e100 funnel + purchase tags), welcome automations scaffolded per program. Full schema in `docs/beehiiv-config.md`.
 - **Full config reference:** `docs/beehiiv-config.md`
 - **Registration flow (wired + tested 3/30):** subscriber added on successful payment with all 13 custom fields. Tags applied via separate POST endpoint. Automation enrollment via `automation_ids`.
 - **IMPORTANT API quirks (learned the hard way):**
@@ -83,13 +83,15 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
   - **Tag REMOVAL is not possible via API.** Beehiiv exposes only POST for subscription tags. Verified 2026-05-05: DELETE /tags, DELETE /tags/:name, DELETE /tags?tags=…, and PATCH /tags all return 404. Docs landing page lists exactly one Subscription Tags endpoint (POST). For "paid wins over abandoned" semantics, exclude further-funnel tags from recovery automation audiences in Beehiiv segmentation. See `docs/beehiiv-config.md` "API Limitations" + "Automations" sections.
 - **Multi-gamer:** `gamer_name` stores comma-separated first names, `camp_week` stores earliest week for automation timing. Per-gamer emails deferred to v2.
 - **Post-registration automation:** welcome sequence scaffolded, camp prep/reminders/follow-up TBD — all managed in Beehiiv's automation builder
-- **Welcome automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` (draft, needs real email content before publishing)
+- **Welcome automation IDs:**
+  - Camps: `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` (draft, needs real email content before publishing)
+  - EKUZO100: `aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556` (wired in webhook; primary e100 confirmation is sent from Klaviyo, this is the supplementary Beehiiv layer)
 - **Homepage:** first-visit popup (gate with localStorage so it only shows once)
 - **Footer:** inline signup form
 
 ### Google Sheets (fulfillment ops layer — built 3/30)
 - One row per gamer written by Stripe webhook on payment success via **Google Apps Script** web app
-- **20 columns:** registration_id, family_id, parent_first_name, parent_last_name, parent_email, parent_phone, gamer_name, gamer_tag, week, slot, week_dates, birthday, skill_level, tshirt_size, preferred_games, timezone, location, amount_paid, stripe_pi_id, registration_date
+- **29 columns** on `ekuzo-purchases` tab (canonical list in `docs/apps-script-squad-endpoints-spec.md`). Plus dedicated `squads` and `squad_members` tabs for squad-link membership — both product-aware (camps + e100 share the tables with a `product` discriminator column added 2026-05-25).
 - Apps Script URL in `GOOGLE_SHEETS_WEBHOOK_URL` env var (Google service account approach abandoned due to Workspace org policy blocking key creation)
 
 ### Make.com (RETIRED — no longer used)

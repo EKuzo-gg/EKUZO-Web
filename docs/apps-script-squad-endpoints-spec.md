@@ -17,19 +17,29 @@ Header rows must match exactly — the webhook appends rows by position.
 
 ### Tab: `squads`
 
-| squad_token | owner_parent_email | owner_gamer_name | week | slot | week_dates | created_at |
-|---|---|---|---|---|---|---|
+| squad_token | product | owner_parent_email | owner_gamer_name | week | slot | week_dates | cohort_month | cohort_label | cohort_start | cohort_end | created_at |
+|---|---|---|---|---|---|---|---|---|---|---|---|
 
-One row per Building-a-squad registration.
+One row per squad-owning registration. `product` is the discriminator
+column added 2026-05-25 when e100 joined the squad system. Camps rows
+populate `week` / `slot` / `week_dates` and leave the `cohort_*` cells
+empty. E100 rows do the inverse — populate `cohort_month` / `cohort_label`
+/ `cohort_start` / `cohort_end` and leave the camps cells empty. Legacy
+rows (pre-2026-05-25) have a blank `product` cell; the `doGet` endpoint
+treats absent `product` as `"camps"`.
 
 ### Tab: `squad_members`
 
-| squad_token | member_parent_email | member_gamer_name | member_week | member_slot | joined_at |
-|---|---|---|---|---|---|
+| squad_token | product | member_parent_email | member_gamer_name | member_week | member_slot | member_cohort_month | member_cohort_label | joined_at |
+|---|---|---|---|---|---|---|---|---|
 
 One row per gamer when a family registers via someone else's crew link.
 A 3-gamer family joining one crew writes 3 rows with the same
-`squad_token`.
+`squad_token`. Same product-discriminator pattern as `squads`: camps rows
+fill the `member_week` / `member_slot` cells, e100 rows fill the
+`member_cohort_*` cells. The cohort is registration-level for e100, but
+we still stamp each member row so a single-tab FILTER by token surfaces
+the schedule without joining back to `squads`.
 
 ---
 
@@ -131,7 +141,7 @@ function doPost(e) {
 
 ### Canonical header row for the `ekuzo-purchases` tab
 
-The webhook sends **these 28 keys**, in this order, for every row. The
+The webhook sends **these 29 keys** (28 original + `preferred_days` added 2026-05-25), for every row. The
 sheet's header row (row 1) should contain exactly these names — spelling,
 underscores, and casing matter. Order doesn't matter with the
 header-mapped append, but using this order keeps the sheet readable.
@@ -165,6 +175,7 @@ additional_info
 squad_status
 squad_token
 joining_squad_token
+preferred_days
 ```
 
 **`squad_token` / `joining_squad_token` on the main tab** — added so ops
@@ -217,13 +228,21 @@ against the historical rows.
 
 ## 3. `doGet` — `?action=squad&token=X`
 
-New handler for looking up a crew owner. The register page and
+Handler for looking up a crew owner. The register pages and
 `/squad/[token]` page both hit this via Next.js server code.
 
-Returns `{ owner_gamer_name, week_label, slot, week_dates }` JSON on hit,
-or `{ error: "not_found" }` with a 404-ish payload on miss. Apps Script
-can't set HTTP status codes for web apps, so the Next.js side treats any
-response with `error` or a missing `owner_gamer_name` as "not found."
+Extended 2026-05-25 to return e100 shape (`product`, `cohort_month`,
+`cohort_label`) alongside the camps shape. Camps lookups stay
+backward-compatible — legacy rows without a `product` cell default to
+`"camps"`. The Next.js side (`lib/squad.ts`) reads `data.product` to
+decide which shape it got and renders the matching pre-pin banner.
+
+Returns `{ product, owner_gamer_name, week_label, slot, week_dates,
+cohort_month, cohort_label }` JSON on hit (load-bearing fields vary by
+product; the rest are empty strings). Returns `{ error: "not_found" }`
+on miss. Apps Script can't set HTTP status codes for web apps, so the
+Next.js side treats any response with `error` or a missing
+`owner_gamer_name` as "not found."
 
 ```javascript
 function doGet(e) {
@@ -254,20 +273,36 @@ function doGet(e) {
       }
 
       var headers = data[0];
-      var tokenCol = headers.indexOf("squad_token");
-      var nameCol = headers.indexOf("owner_gamer_name");
-      var weekCol = headers.indexOf("week");
-      var slotCol = headers.indexOf("slot");
-      var datesCol = headers.indexOf("week_dates");
+      var tokenCol       = headers.indexOf("squad_token");
+      var nameCol        = headers.indexOf("owner_gamer_name");
+      var productCol     = headers.indexOf("product");
+      // Camps fields:
+      var weekCol        = headers.indexOf("week");
+      var slotCol        = headers.indexOf("slot");
+      var datesCol       = headers.indexOf("week_dates");
+      // E100 fields:
+      var cohortMonthCol = headers.indexOf("cohort_month");
+      var cohortLabelCol = headers.indexOf("cohort_label");
 
       for (var i = 1; i < data.length; i++) {
         if (String(data[i][tokenCol]) === token) {
+          // Defaults to "camps" for legacy rows that pre-date the
+          // product column (so existing camps squads keep working).
+          var product = productCol >= 0
+            ? (String(data[i][productCol] || "").trim() || "camps")
+            : "camps";
+
           return ContentService.createTextOutput(
             JSON.stringify({
+              product: product,
               owner_gamer_name: String(data[i][nameCol] || ""),
-              week_label: String(data[i][weekCol] || ""),
-              slot: String(data[i][slotCol] || ""),
-              week_dates: String(data[i][datesCol] || ""),
+              // Camps fields (empty for e100 rows):
+              week_label: weekCol >= 0 ? String(data[i][weekCol] || "") : "",
+              slot:       slotCol >= 0 ? String(data[i][slotCol] || "") : "",
+              week_dates: datesCol >= 0 ? String(data[i][datesCol] || "") : "",
+              // E100 fields (empty for camps rows):
+              cohort_month: cohortMonthCol >= 0 ? String(data[i][cohortMonthCol] || "") : "",
+              cohort_label: cohortLabelCol >= 0 ? String(data[i][cohortLabelCol] || "") : "",
             })
           ).setMimeType(ContentService.MimeType.JSON);
         }
@@ -305,12 +340,12 @@ We do NOT return `owner_parent_email` or any other PII. Keep it that way.
   week has already happened." Put this on the calendar now; it's the
   only way to validate the date-parse logic in `lib/squad.ts` against
   real time-of-day behavior before relying on it at scale.
-- **Generalizing to ekuzo100 + teams.** The current `squads` table is
-  camps-shaped (week / slot / week_dates). For the other products we'd
-  want a `product` discriminator column and a generic pair of selection
-  fields so one table and one `doGet` endpoint can serve all three
-  programs. See the useSquadJoin scope note in the project's working
-  notes. Defer until camps has shipped and we've seen real usage.
+- **Generalizing to ekuzo100 + teams.** ✅ DONE for ekuzo100 (2026-05-25).
+  `squads` and `squad_members` now carry a `product` discriminator
+  column plus product-specific cohort/week columns; `doGet` returns the
+  matching shape based on the row's `product` value. Teams will follow
+  the same pattern when it ships — add a `teams` value to `product` and
+  whatever the Teams cohort shape is (likely `semester_label`).
 
 ## 5. Deploy checklist
 

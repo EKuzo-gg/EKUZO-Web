@@ -6,7 +6,7 @@
 
 ---
 
-## Custom Fields (16)
+## Custom Fields (18)
 
 | Field name | Type | Source | Used for |
 |---|---|---|---|
@@ -25,7 +25,9 @@
 | `location` | Text | Webhook (from Stripe billing: "Austin, TX, US") | Cohort matching, geo insights |
 | `cta_source` | Text | Webhook (`hero` / `sticky` / `footer` from `?cta=` on register URL, or empty) | Attribution — which CTA on the camps marketing page produced this purchase |
 | `squad_status` | Text | Webhook (`"Looking for a squad"` for all camps purchases post-2026-05-20; historical Building/Looking values still possible) | Legacy segment helper. Building/Looking fork was retired 2026-05-20; everyone now defaults to "Looking for a squad". Field retained for backward compat with any Klaviyo/Beehiiv segments still referencing it. |
-| `squad_link` | Text | Webhook (full URL: `https://ekuzo.gg/programs/ekuzo-camps/register?squad={token}`) | **Templated into the camps welcome email body** — every parent's unique shareable squad link. Friends who click it land on the register form with the owner's week + PM pre-pinned. Populated on every camps purchase (post-2026-05-20 funnel change). |
+| `squad_link` | Text | Webhook (full URL: `https://ekuzo.gg/programs/ekuzo-camps/register?squad={token}` for camps, `…/programs/ekuzo100/register?squad={token}` for e100) | **Templated into the welcome email body** — every parent's unique shareable squad link. Friends who click it land on the register form with the owner's cohort pre-pinned. Populated on every camps + e100 purchase. Path now product-aware (added 2026-05-25). |
+| `cohort_label` | Text | Webhook (e100 only — e.g. `"Tuesdays & Thursdays · Jun 2 – Jun 25, 2026"`) | Customer-facing schedule string for EKUZO100 cohorts. Built by the register-page picker, threaded through PI metadata. Klaviyo `Placed Order` event also carries this for the e100 confirmation email. |
+| `preferred_days` | Text | Webhook (e100 only — e.g. `"Tue, Thu, Fri"`) | Family-level day-availability signal from the "Prefer other days?" disclosure on the e100 register page. Internal-only — used for segmentation / future M/W cohort demand signal. **NOT echoed in the confirmation email by design** (would re-open the expectation mismatch between booked Tue/Thu and stated preferences). |
 
 ### Notes
 - Beehiiv reserved fields (`email`, `city`, `region`, `country`, `utm_source`, etc.) are auto-populated and don't need custom fields. See `docs/beehiiv-reserved-fields.pdf` or the Beehiiv support article for the full list.
@@ -42,6 +44,7 @@
 | Tag | Applied by | Purpose |
 |---|---|---|
 | `camp-2026-purchased` | Stripe webhook | Identifies camp buyers. Used for segmentation (exclude from "buy camp" promos) and automation triggers. |
+| `ekuzo100-purchased` | Stripe webhook (wired 2026-05-25) | Identifies EKUZO100 buyers. Same role as `camp-2026-purchased` — segmentation + audience exclusion on the e100 recovery automations. |
 
 ### Source tags (applied by webhook or form)
 | Tag | Applied by | Purpose |
@@ -56,19 +59,20 @@
 | `no-promo` | Manual | Exclude from sales/advertising emails. For partners, thought leaders, contacts with no kids. |
 | `vip` | Manual | High-touch contacts — school admins, repeat purchasers, ambassadors. |
 
-### Funnel-stage tags (camps abandoned-cart capture)
+### Funnel-stage tags (abandoned-cart capture)
 | Tag | Applied by | Purpose |
 |---|---|---|
 | `form_started_camps` | `POST /api/camps/lead` (fired on email-field onBlur on the camps register page) | Identifies parents who entered an email but didn't reach payment. Used as the audience for the soft "you started signing up" recovery email. |
 | `cart_abandoned_camps` | `POST /api/camps/abandoned` (fired after `/api/camps/register` succeeds and BEFORE the parent enters card details) | Identifies parents who reached "Continue to payment" and bailed before paying. Stronger intent signal — gamer name + week + slot are also captured as custom fields. |
+| `form_started_ekuzo100` | `POST /api/ekuzo100/lead` (fired on email-field onBlur on the e100 register page) | E100 equivalent of `form_started_camps`. Audience for e100 form-started recovery automation. |
+| `cart_abandoned_ekuzo100` | `POST /api/ekuzo100/abandoned` (fired after `/api/ekuzo100/register` succeeds and BEFORE card entry) | E100 equivalent of `cart_abandoned_camps`. Captures cohort_label as custom field for personalization in the e100 recovery automation. |
 
-**⚠️ Critical: these tags do NOT auto-clear when a customer eventually pays.** Beehiiv's public API has no tag-removal endpoint, so paid customers keep these tags alongside `camp-2026-purchased` forever. See "Automations" section below — every cart-abandonment automation MUST exclude `camp-2026-purchased` from its audience.
+**⚠️ Critical: these tags do NOT auto-clear when a customer eventually pays.** Beehiiv's public API has no tag-removal endpoint, so paid customers keep these tags alongside the matching `*-purchased` tag forever. See "Automations" section below — every recovery automation MUST exclude the matching purchase tag from its audience (`camp-2026-purchased` for camps recovery, `ekuzo100-purchased` for e100 recovery).
 
 ### Future purchase tags (created, not yet wired)
 | Tag | Applied by | Purpose |
 |---|---|---|
 | `teams-purchased` | Future webhook | When EKUZO Teams launches |
-| `ekuzo100-purchased` | Future webhook | When EKUZO100 launches |
 
 ### Lifecycle tags (created, not yet wired)
 | Tag | Applied by | Purpose |
@@ -118,6 +122,21 @@
 - **Trigger:** Tag `form_started_camps` applied
 - **🚨 REQUIRED audience exclusion:** EXCLUDE `camp-2026-purchased`, AND EXCLUDE `cart_abandoned_camps` (those parents progressed further; they'll get the cart automation instead).
 - **Emails:** TBD (low-pressure "here's what camp looks like" content sequence — these parents only typed an email, no real intent signal yet).
+
+### 7. Cart Abandonment Recovery — EKUZO100 (not yet built)
+- **Trigger:** Tag `cart_abandoned_ekuzo100` applied
+- **🚨 REQUIRED audience exclusion:** **EXCLUDE subscribers tagged `ekuzo100-purchased`.** Same reason as camps — Beehiiv can't remove tags, so paid customers keep the abandoned tag forever and would otherwise re-enter the audience.
+- **Custom fields available for personalization:** `gamer_name`, `cohort_label`. Use them — "Hey {first_name}, want to lock in {gamer_name}'s spot for the {cohort_label} cohort?" lands harder than a generic message.
+- **Emails:** TBD.
+
+### 8. Form-Started Recovery — EKUZO100 (not yet built, lower priority)
+- **Trigger:** Tag `form_started_ekuzo100` applied
+- **🚨 REQUIRED audience exclusion:** EXCLUDE `ekuzo100-purchased`, AND EXCLUDE `cart_abandoned_ekuzo100` (parents who progressed further get the cart automation instead).
+- **Emails:** TBD.
+
+### 9. EKUZO100 Purchase Confirmation — handled in Klaviyo, NOT Beehiiv
+- E100 buyers get their purchase confirmation via Klaviyo (template at `marketing/email-flows/email-templates/klaviyo-ready/02-ekuzo100-purchase-confirmation.klaviyo.html`), triggered on the shared `Placed Order` metric filtered to `event.extra.product == "ekuzo100"`.
+- Beehiiv side: webhook still tags `ekuzo100-purchased` for segmentation and enrolls the buyer in the e100 welcome automation (see "Beehiiv Automation" section below).
 
 ---
 
@@ -179,12 +198,20 @@ When a parent registers multiple gamers, `gamer_name` stores the first gamer's n
 
 ## Beehiiv Automation
 
-- **Welcome sequence automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`
+### Camps welcome sequence
+- **Automation ID:** `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc`
 - **Status:** Draft (placeholder email content, not published)
-- **Trigger:** Added by API
+- **Trigger:** Added by API (webhook passes via `automation_ids`)
 - Must be published before going live — email content needs to be written first
 - **Must template `{{squad_link}}` into the body** — that's the shareable squad invite (see "Squad link" section above). Every parent gets a unique one as of the 2026-05-20 funnel change. Render as a clickable anchor, not raw text. Pair with a short "Bring your friends" pitch matching the success-page copy.
 - Email automation strategy and content planning lives in `/ekuzo-camps/` project folder
+
+### EKUZO100 welcome sequence
+- **Automation ID:** `aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556`
+- **Status:** Webhook is wired (enrolls every e100 purchaser automatically). Email content state lives in Beehiiv — verify before/after first real e100 sale.
+- **Trigger:** Added by API (webhook passes via `automation_ids`)
+- **Note:** the primary customer-facing confirmation email for EKUZO100 is sent from **Klaviyo**, not Beehiiv (see Automation #9 above). This Beehiiv automation is the supplementary welcome/nurture layer.
+- Available templating variables: `{{squad_link}}`, `{{cohort_label}}`, `{{first_name}}`, `{{gamer_name}}`.
 
 ---
 
