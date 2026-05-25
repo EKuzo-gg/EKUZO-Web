@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import { useModal } from "@/context/ModalContext";
 
 type FooterBannerProps = {
@@ -12,6 +13,16 @@ type FooterBannerProps = {
   ctaLabel?: string;
   /** Override CTA modal (default: "enroll") */
   ctaModal?: "enroll" | "contact";
+  /** Optional direct register URL. When set, the CTA becomes a tracked
+   *  link to this URL (no modal). Use on a specific program page so the
+   *  Enroll CTA goes straight to that program's register flow instead
+   *  of opening the cross-program program-picker modal. Leave undefined
+   *  on cross-program pages (home, parents, schools, /programs) where
+   *  the modal is the right behavior. */
+  ctaHref?: string;
+  /** Source label for `register_click` GA event when ctaHref is set.
+   *  Defaults to "footer" since this banner sits at page bottom. */
+  ctaTrackingSource?: "hero" | "sticky" | "footer";
 };
 
 export default function FooterBanner({
@@ -19,6 +30,8 @@ export default function FooterBanner({
   image,
   ctaLabel = "Enroll my gamer",
   ctaModal = "enroll",
+  ctaHref,
+  ctaTrackingSource = "footer",
 }: FooterBannerProps) {
   const { openModal } = useModal();
   return (
@@ -58,9 +71,19 @@ export default function FooterBanner({
           >
             {heading}
           </h2>
-          <Button variant="white-outlined" onClick={() => openModal(ctaModal)}>
-            {ctaLabel}
-          </Button>
+          {ctaHref ? (
+            <TrackedRegisterLink
+              source={ctaTrackingSource}
+              href={ctaHref}
+              className="inline-flex items-center justify-center px-5 py-4 rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer bg-transparent text-white border-2 border-white hover:bg-white hover:text-black"
+            >
+              {ctaLabel}
+            </TrackedRegisterLink>
+          ) : (
+            <Button variant="white-outlined" onClick={() => openModal(ctaModal)}>
+              {ctaLabel}
+            </Button>
+          )}
         </div>
 
         {/* Image — 95vw on mobile, breaks out of container padding */}

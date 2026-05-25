@@ -443,7 +443,11 @@ export default function Ekuzo100Page() {
         </div>
       </section>
 
-      <FooterBanner heading="Turning pedagogy into progress" />
+      <FooterBanner
+        heading="Turning pedagogy into progress"
+        ctaHref="/programs/ekuzo100/register?cta=footer"
+        ctaTrackingSource="footer"
+      />
       <Footer />
     </>
   );
