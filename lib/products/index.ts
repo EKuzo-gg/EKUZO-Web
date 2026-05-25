@@ -38,4 +38,15 @@ export function getProductFromMeta(
   return campsProduct;
 }
 
-export type { ProductConfig, ProductId, CohortUnit } from "./types";
+export type {
+  BeehiivCustomField,
+  CohortUnit,
+  MetadataGamer,
+  ProductConfig,
+  ProductId,
+  PurchaseRowCohortFields,
+  SquadMemberRowFields,
+  SquadsRowFields,
+  WebhookContext,
+  WebhookMetadata,
+} from "./types";

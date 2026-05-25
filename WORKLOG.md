@@ -6,6 +6,29 @@
 
 ---
 
+## Jamie — May 25, 2026 (Teams convergence — Phase 2: webhook strategy map, behavior-identical for camps + e100; teams gains squad_link)
+
+**Why:** Phase 2 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 2, the webhook strategy map. Phase 1 (`03-phase1-registry.md`) put the four obviously-shared per-product fields on the registry; Phase 2 takes the rest of the webhook's per-product ternaries (9 of them across Beehiiv `custom_fields`, Klaviyo profile + Placed Order, Sheets `ekuzo-purchases` row, Sheets `squads` / `squad_members` rows, Meta CAPI program slug, squad register path) and replaces each with a per-product strategy callback on `ProductConfig`. Camps + e100 webhook output remains byte-identical against `02-baseline.md` §2A–§2H. Teams gains `squad_link` on Beehiiv + Klaviyo and gets its squad-write paths wired (gated on tokens that Phase 3 will start minting).
+
+**What shipped:**
+- `lib/products/types.ts` — extended `ProductConfig` with: `routes` (`registerPath`, `programSlug`), `squad` (`writesSquadRows`), and 7 builder methods (`buildGamerSummary`, `buildBeehiivCustomFields`, `buildKlaviyoProfileProperties`, `buildKlaviyoOrderProperties`, `buildPurchaseRowCohortFields`, `buildSquadsRowFields`, `buildSquadMemberRowFields`). New shared types: `MetadataGamer` (moved out of the webhook), `WebhookContext` (snapshot of derived values passed to every strategy), `WebhookMetadata`, `BeehiivCustomField`, `PurchaseRowCohortFields`, `SquadsRowFields`, `SquadMemberRowFields`.
+- `lib/products/{camps,ekuzo100,teams}.ts` — each product implements its 7 builders + `routes` + `squad`. Strategies were lifted verbatim from the existing webhook code for camps + e100; teams adds `squad_link` to its Beehiiv + Klaviyo extras and flips `writesSquadRows: true`.
+- `lib/products/index.ts` — public re-exports extended for the new types.
+- `app/api/webhooks/stripe/route.ts` — removed the local `MetadataGamer` type (imports from registry); consolidated `earliestWeek` / `earliestSlot` / `earliestWeekDates` derivation into a single gamer pre-pass that builds `ctx: WebhookContext`; replaced 9 per-product ternaries (Beehiiv per-product `customFields.push`, Klaviyo per-product profile properties, Klaviyo per-product Placed Order spread, Sheets row's `week`/`slot`/`week_dates`/`squad_status`/`squad_token`/`joining_squad_token`/`preferred_days`, Sheets squads owner+cohort selection, Sheets squad_members per-gamer fields, Meta CAPI `programSlug`, `squadProgramPath`) with `productConfig.build*()` / `productConfig.routes.*` / `productConfig.squad.*` calls; collapsed the Klaviyo block's separate `earliestWeekDates` re-derivation (it's now in `ctx`).
+- `marketing/teams-redesign/04-phase2-strategies.md` (new) — Phase 3 entry conditions, what's left, what's deferred, the seven new strategies' signatures, and the parity-check table for camps + e100 across baseline §2A–§2H.
+
+**Verify gate (per handoff §4 Phase 2) — PASSED at the code level:**
+- `tsc --noEmit` clean after the types extension and after each callsite migration step; final pass clean.
+- Code-level golden-payload diff vs. `02-baseline.md` §2A–§2H: every camps + e100 surface byte-identical. Two `product === "x"` references remain in the webhook intentionally — line ~219 (`if (product === "camps")` for the camps-only earliest-week pre-pass, no e100/teams analogue) and line ~863 (teams installment Subscription block, handoff §1.3 says preserve exactly). Both flagged in `04-phase2-strategies.md` §2.
+- Teams payload changes: `squad_link` field appears in Beehiiv `custom_fields` + Klaviyo profile + Klaviyo Placed Order (empty value pre-Phase-3, but the wire is in place); `squads` + `squad_members` Sheets writes are wired (guarded by `meta.squad_token` / `meta.joining_squad_token`, so still no-op until Phase 3 mints tokens). Installment Subscription block untouched.
+- Live Stripe-CLI diff (baseline §3 step 2): NOT executed this phase — code-level diff is exhaustive for a pure strategy extraction; Phase 3 (register-API helper that starts minting teams tokens) is the natural moment for the full live test across camps + e100 + teams upfront + teams installment. **Jamie's call:** a quick camps + e100 Stripe-CLI test right now would confirm nothing changed for the two live products.
+
+**What's intentionally NOT in the registry yet** (Phase 3+ targets): shared register-API metadata builder (Seam 3), pricing model, squad pre-pin shape (`SquadOwner` type extension to teams), Beehiiv `squad_link` custom field publication-side for teams (Beehiiv dashboard task), Apps Script accepting `"teams"` as a valid squad-table `product` discriminator (Apps Script web-app redeploy — coordinate with Jamie). See `04-phase2-strategies.md` §4.
+
+**Phase 3 next:** shared register API helper (`lib/registerIntent.ts` or similar). Each `/api/{product}/register` becomes a thin wrapper supplying its product config + product-specific metadata. Mint `squad_token` for teams (currently only camps + e100). Phase 3 verify gate: `tsc --noEmit` clean + a camps + e100 + teams test PI each produces correct metadata (Stripe dashboard); teams PI metadata now carries a `squad_token`; full live test exercising the Phase 2 webhook end-to-end. Do not merge dev to main — Jamie batches those.
+
+---
+
 ## Jamie — May 25, 2026 (Teams convergence — Phase 1: product registry, behavior-identical for camps + e100)
 
 **Why:** Phase 1 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 1, the product registry. Phase 0 (`02-baseline.md`) captured byte-for-byte camps + e100 webhook payloads; Phase 1 extracts the four obviously-shared per-product fields into typed configs and migrates the webhook + lead/abandoned routes to read from them. Each downstream surface still produces identical output for camps + e100 — Phase 1's whole value is the seam itself, not visible behavior change.
