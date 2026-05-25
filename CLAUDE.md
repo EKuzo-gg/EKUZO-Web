@@ -411,6 +411,20 @@ stripe login                             # authenticate via browser
 
 ---
 
+## AI Optimization Checklist
+
+Before shipping any new page or substantive content change, run through
+[`docs/ai-optimization-checklist.md`](docs/ai-optimization-checklist.md).
+It's the operational box-checker grounded in Google's official AI
+optimization guide (last updated 2026-05-15). Covers content (non-commodity
+is the highest-leverage move), technical, schema, accessibility / agent-
+readiness, and what Google explicitly says you don't need to do
+(llms.txt isn't required, no "chunking," no special markup, no inauthentic
+mentions, schema is useful but not the secret sauce).
+
+Durable methodology behind the checklist:
+`knowledge-base/wiki/frameworks/google-ai-optimization-guide.md`.
+
 ## Monthly GEO Audit
 
 Run `/audit` in Claude Code from the repo root to generate the full GEO

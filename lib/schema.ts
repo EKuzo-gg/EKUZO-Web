@@ -186,18 +186,15 @@ const VIRTUAL_LOCATION = {
   url: SITE,
 };
 
-// Build a Review node from an inlined testimonial transcript. `itemReviewed`
-// must be set to the enclosing Course's @id by the caller.
-const buildTestimonialReview = (
-  authorName: string,
-  transcriptKey: keyof typeof testimonialTranscripts,
-  courseId: string,
-) => ({
-  "@type": "Review",
-  author: { "@type": "Person", name: authorName },
-  reviewBody: testimonialTranscripts[transcriptKey],
-  itemReviewed: { "@id": courseId },
-});
+// NOTE: We deliberately do NOT emit `Review` nodes on the Course schemas.
+// Our testimonials are qualitative video quotes — we don't collect 1–5 star
+// ratings, so a valid Review snippet (which Google requires a `reviewRating`
+// for, plus an `aggregateRating` when multiple reviews are present) can't be
+// produced without fabricating ratings. The testimonials are represented
+// honestly as VideoObject nodes instead (see testimonialVideoGraph below).
+// Removed 2026-05-24 to resolve two Search Console Review-snippet issues:
+//   1. "Multiple reviews without aggregateRating object" (critical)
+//   2. "nested object can't contain the 'itemReviewed' field" (non-critical)
 
 const CAMPS_COURSE_ID = `${SITE}/programs/ekuzo-camps#course`;
 const EKUZO100_COURSE_ID = `${SITE}/programs/ekuzo100#course`;
@@ -246,11 +243,6 @@ export const ekuzoCampsCourseSchema = {
     priceValidUntil: "2026-08-06",
     url: `${SITE}/programs/ekuzo-camps/register`,
   },
-  review: [
-    buildTestimonialReview("Becky", "beckyParent", CAMPS_COURSE_ID),
-    buildTestimonialReview("Brad", "bradParentGirlGamer", CAMPS_COURSE_ID),
-    buildTestimonialReview("Rajitha", "rajithaParent", CAMPS_COURSE_ID),
-  ],
 };
 
 export const ekuzo100CourseSchema = {
@@ -284,12 +276,6 @@ export const ekuzo100CourseSchema = {
     priceValidUntil: "2026-06-30",
     url: `${SITE}/programs/ekuzo100/register`,
   },
-  review: [
-    buildTestimonialReview("EKUZO Student 1", "studentILearned", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student 2", "studentManOfMyWord", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student 3", "studentThankYouEkuzo", EKUZO100_COURSE_ID),
-    buildTestimonialReview("EKUZO Student 4", "studentYouShouldJoin", EKUZO100_COURSE_ID),
-  ],
 };
 
 export const ekuzoTeamsCourseSchema = {
@@ -337,18 +323,6 @@ export const ekuzoTeamsCourseSchema = {
       priceValidUntil: "2026-08-31",
       url: `${SITE}/programs/ekuzo-teams/register`,
     },
-  ],
-  review: [
-    buildTestimonialReview(
-      "Laura Hogan, Mirus Academy",
-      "lauraHoganMirusAcademy",
-      TEAMS_COURSE_ID,
-    ),
-    buildTestimonialReview(
-      "Debbie Potter, Monroe",
-      "debbiePotterMonroe",
-      TEAMS_COURSE_ID,
-    ),
   ],
 };
 

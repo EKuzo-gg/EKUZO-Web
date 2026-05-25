@@ -6,6 +6,45 @@
 
 ---
 
+## Jamie — May 24, 2026 (Fix Search Console Review-snippet structured data issues)
+
+**Why:** Google Search Console flagged two Review-snippet structured data
+issues on ekuzo.gg:
+1. **Critical** — "Multiple reviews without aggregateRating object."
+2. **Non-critical** — "A nested object can't contain the 'itemReviewed'
+   field. Remove 'itemReviewed' to avoid directional conflict."
+
+Both came from the `review:` arrays on the three `Course` schemas in
+`lib/schema.ts`. Each Course listed multiple `Review` nodes (camps 3,
+ekuzo100 4, teams 2) with no `aggregateRating`, and every nested review
+back-pointed to its own parent Course via `itemReviewed`.
+
+**Decision:** Removed the `Review` markup rather than fabricate ratings.
+Our testimonials are qualitative video quotes — we don't collect 1–5 star
+ratings, and a valid Google Review snippet requires a numeric
+`reviewRating` per review (plus `aggregateRating` for multiples). Assigning
+everyone 5/5 would be inventing a scale our reviewers never used, which
+Google treats as inauthentic markup and which violates our own
+"don't fabricate structured data" rule. The testimonials are still marked
+up honestly as the 9 `VideoObject` nodes in `testimonialVideoGraph`
+(untouched).
+
+**What changed (`lib/schema.ts` only):**
+
+- Removed the `review:` arrays from `ekuzoCampsCourseSchema`,
+  `ekuzo100CourseSchema`, and `ekuzoTeamsCourseSchema`.
+- Deleted the now-unused `buildTestimonialReview` helper; left a comment
+  block documenting why the Course schemas intentionally carry no reviews.
+- Course `@id` constants and the `testimonialTranscripts` import are
+  retained (still used by `@id`s and `testimonialVideoNodes`).
+- `tsc --noEmit` passes clean (no type or unused-var errors).
+
+**Still to do after this ships to prod:** in Search Console → Review
+snippets report, click **Validate Fix** on both issues so Google re-crawls.
+Nothing clears until the markup is live on `ekuzo.gg` (merge `dev` → `main`).
+
+---
+
 ## Jamie — May 22, 2026 (EKUZO100 redesign — Cowork-bound pattern reference)
 
 **Why:** EKUZO100 registration redesign is starting next, in Cowork (spec
