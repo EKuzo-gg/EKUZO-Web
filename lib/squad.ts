@@ -13,10 +13,15 @@
 export type SquadOwner = {
   owner_gamer_name: string;
   // `product` was added when EKUZO100 joined camps in the squad system
-  // (2026-05-24). Apps Script returns "camps" or "ekuzo100" so the
+  // (2026-05-24). Extended to "teams" in Phase 3 of the teams convergence
+  // (2026-05-25) once the register API helper started minting teams
+  // squad_tokens server-side. Apps Script returns the product so the
   // joining register page can render the right pre-pin shape. Older
-  // camps-only rows may omit it — treat absent as "camps".
-  product?: "camps" | "ekuzo100";
+  // camps-only rows may omit it — treat absent as "camps". Teams pre-pin
+  // is single-value (one semester per year) — no additional cohort
+  // fields, the "you're joining [name]'s team" banner is the whole UX
+  // per handoff §1.2.
+  product?: "camps" | "ekuzo100" | "teams";
   // Camps fields (load-bearing for product="camps"):
   week_label: string;
   slot: string;
@@ -67,7 +72,9 @@ export async function fetchSquadOwner(
     // break the register page's crew-match comparison and fire the
     // confirm dialog spuriously.
     const product =
-      data.product === "ekuzo100" || data.product === "camps"
+      data.product === "ekuzo100" ||
+      data.product === "camps" ||
+      data.product === "teams"
         ? data.product
         : undefined;
     return {
