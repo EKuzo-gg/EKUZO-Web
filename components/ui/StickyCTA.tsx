@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
 import { trackRegisterClick } from "@/lib/analytics";
+import { getProgramRegisterContext } from "@/lib/programRoutes";
 
 /**
  * Fixed-bottom CTA bar — "Enroll my gamer" + "Talk to Humans".
@@ -29,6 +30,15 @@ export default function StickyCTA() {
   const isCamps = pathname === "/programs/ekuzo-camps";
   const showEnroll = !isSchools && !isCamps;
   const showContact = !isParents && !isCamps;
+  // On any non-camps program page (e100, teams), Enroll routes
+  // direct to that program's register instead of the cross-program
+  // picker modal. Camps has its own custom bar above; this covers
+  // the other two. Contact button stays as-is (modal).
+  const programCtx = getProgramRegisterContext(pathname);
+  const directEnrollHref =
+    programCtx && !isCamps
+      ? `${programCtx.registerHref}?cta=sticky`
+      : null;
 
   useEffect(() => {
     const onScroll = () => {
@@ -88,15 +98,28 @@ export default function StickyCTA() {
         ) : (
           <>
             {showEnroll && (
-              <button
-                onClick={() => openModal("enroll")}
-                className={`flex-1 ${showContact ? "max-w-[340px]" : "max-w-[680px]"} bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
-                           py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
-                           hover:brightness-110 active:scale-[0.98] active:brightness-90
-                           transition-all duration-150`}
-              >
-                Enroll my gamer
-              </button>
+              directEnrollHref ? (
+                <a
+                  href={directEnrollHref}
+                  onClick={() => trackRegisterClick({ source: "sticky" })}
+                  className={`flex-1 ${showContact ? "max-w-[340px]" : "max-w-[680px]"} bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
+                             py-3 px-3 md:py-3.5 md:px-5 rounded-sm whitespace-nowrap text-center
+                             hover:brightness-110 active:scale-[0.98] active:brightness-90
+                             transition-all duration-150`}
+                >
+                  Enroll my gamer
+                </a>
+              ) : (
+                <button
+                  onClick={() => openModal("enroll")}
+                  className={`flex-1 ${showContact ? "max-w-[340px]" : "max-w-[680px]"} bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
+                             py-3 px-3 md:py-3.5 md:px-5 rounded-sm cursor-pointer whitespace-nowrap
+                             hover:brightness-110 active:scale-[0.98] active:brightness-90
+                             transition-all duration-150`}
+                >
+                  Enroll my gamer
+                </button>
+              )
             )}
 
             {showContact && (

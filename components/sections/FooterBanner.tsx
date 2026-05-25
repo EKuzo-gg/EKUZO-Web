@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import { useModal } from "@/context/ModalContext";
+import { getProgramRegisterContext } from "@/lib/programRoutes";
 
 type FooterBannerProps = {
   heading: string;
@@ -34,6 +36,16 @@ export default function FooterBanner({
   ctaTrackingSource = "footer",
 }: FooterBannerProps) {
   const { openModal } = useModal();
+  const pathname = usePathname();
+  // Auto-detect: if no explicit ctaHref and we're on a specific
+  // program page, route direct to that program's register. Lets
+  // program marketing pages get the right behavior without each one
+  // having to pass ctaHref manually. Explicit ctaHref (when set) still
+  // wins so a page can override if it ever needs to.
+  const programCtx = getProgramRegisterContext(pathname);
+  const effectiveHref =
+    ctaHref ||
+    (programCtx ? `${programCtx.registerHref}?cta=footer` : null);
   return (
     <section
       className="relative bg-red overflow-visible"
@@ -71,10 +83,10 @@ export default function FooterBanner({
           >
             {heading}
           </h2>
-          {ctaHref ? (
+          {effectiveHref ? (
             <TrackedRegisterLink
               source={ctaTrackingSource}
-              href={ctaHref}
+              href={effectiveHref}
               className="inline-flex items-center justify-center px-5 py-4 rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer bg-transparent text-white border-2 border-white hover:bg-white hover:text-black"
             >
               {ctaLabel}

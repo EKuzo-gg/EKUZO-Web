@@ -133,7 +133,12 @@ export async function POST(req: NextRequest) {
     // CTA placement that produced this registration. Allow-listed against
     // the three landing-page surfaces (hero / sticky / footer); anything
     // else is dropped so noise in the query string doesn't land in Stripe.
-    if (cta_source === "hero" || cta_source === "sticky" || cta_source === "footer") {
+    if (
+      cta_source === "hero" ||
+      cta_source === "sticky" ||
+      cta_source === "footer" ||
+      cta_source === "header"
+    ) {
       metadata.cta_source = cta_source;
     }
 

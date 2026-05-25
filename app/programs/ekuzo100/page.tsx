@@ -443,11 +443,11 @@ export default function Ekuzo100Page() {
         </div>
       </section>
 
-      <FooterBanner
-        heading="Turning pedagogy into progress"
-        ctaHref="/programs/ekuzo100/register?cta=footer"
-        ctaTrackingSource="footer"
-      />
+      {/* FooterBanner auto-detects the program from the route, so the
+          "Enroll my gamer" CTA routes direct to /programs/ekuzo100/register
+          ?cta=footer instead of opening the cross-program picker modal.
+          See lib/programRoutes.ts. */}
+      <FooterBanner heading="Turning pedagogy into progress" />
       <Footer />
     </>
   );

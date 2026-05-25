@@ -19,7 +19,7 @@ export default function TrackedRegisterLink({
   style,
   children,
 }: {
-  source: "hero" | "sticky" | "footer";
+  source: "hero" | "sticky" | "footer" | "header";
   href: string;
   className?: string;
   style?: React.CSSProperties;

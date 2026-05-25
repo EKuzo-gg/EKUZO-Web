@@ -6,7 +6,9 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
+import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import { useModal } from "@/context/ModalContext";
+import { getProgramRegisterContext } from "@/lib/programRoutes";
 
 type NavVariant = "dark" | "light" | "light-red";
 
@@ -36,6 +38,10 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
   const isLightRed = variant === "light-red";
   const { openModal } = useModal();
   const pathname = usePathname();
+  // If we're on a specific program page, the universal Enroll CTA
+  // routes directly to that program's register instead of opening the
+  // cross-program picker modal. Returns null on cross-program pages.
+  const programCtx = getProgramRegisterContext(pathname);
 
   /** Match current route to highlight active nav link */
   const isActive = (href: string) => {
@@ -129,12 +135,26 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
             )
           )}
         </ul>
-        <Button
-          variant={isDark ? "white-filled" : "red-filled"}
-          onClick={() => openModal("enroll")}
-        >
-          Enroll my gamer
-        </Button>
+        {programCtx ? (
+          <TrackedRegisterLink
+            source="header"
+            href={`${programCtx.registerHref}?cta=header`}
+            className={`inline-flex items-center justify-center px-5 py-4 rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer border-2 ${
+              isDark
+                ? "bg-white text-black border-white hover:opacity-90"
+                : "bg-red text-white border-red hover:opacity-90"
+            }`}
+          >
+            Enroll my gamer
+          </TrackedRegisterLink>
+        ) : (
+          <Button
+            variant={isDark ? "white-filled" : "red-filled"}
+            onClick={() => openModal("enroll")}
+          >
+            Enroll my gamer
+          </Button>
+        )}
       </div>
 
       {/* Mobile hamburger — animates to X when open */}
@@ -246,9 +266,19 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
               )}
             </ul>
             <div className="flex flex-col gap-3 pt-4 border-t border-grey">
-              <Button variant="red-filled" onClick={() => { setMobileOpen(false); openModal("enroll"); }}>
-                Enroll my gamer
-              </Button>
+              {programCtx ? (
+                <TrackedRegisterLink
+                  source="header"
+                  href={`${programCtx.registerHref}?cta=header`}
+                  className="inline-flex items-center justify-center px-5 py-4 rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-nowrap cursor-pointer bg-red text-white border-2 border-red hover:opacity-90"
+                >
+                  Enroll my gamer
+                </TrackedRegisterLink>
+              ) : (
+                <Button variant="red-filled" onClick={() => { setMobileOpen(false); openModal("enroll"); }}>
+                  Enroll my gamer
+                </Button>
+              )}
               <Button variant="red-outlined" onClick={() => { setMobileOpen(false); openModal("contact"); }}>
                 Talk to Humans
               </Button>
