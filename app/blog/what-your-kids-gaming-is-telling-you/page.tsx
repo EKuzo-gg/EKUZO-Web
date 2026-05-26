@@ -38,13 +38,13 @@ const FAQ_ITEMS = [
     question:
       "Why does my kid rage or melt down when they lose a video game?",
     answer:
-      "Often the size of the reaction reflects the size of what's riding on it — the game may be where they feel status, competence, or belonging, and a loss threatens that. The useful question isn't why they care so much, it's what they're carrying into the match, and whether they can recover, name what went wrong, and come back calmer. That's the signal worth watching, and it's something a coached, structured setting is built to work on.",
+      "Often the size of the reaction reflects the size of what's riding on it. The game may be where they feel status, competence, or belonging, and a loss threatens that. The useful question isn't why they care so much, it's what they're carrying into the match, and whether they can recover, name what went wrong, and come back calmer. That's the signal worth watching, and it's something a coached, structured setting is built to work on.",
   },
   {
     question:
-      "My kid plays for hours but can't say what they're working on — should I worry?",
+      "My kid plays for hours but can't say what they're working on. Should I worry?",
     answer:
-      "Long hours without a sense of progress usually means the effort is there but no one has shown them how to practice, not that they're lazy. Watch for whether any curiosity to improve shows up when you ask. A kid reaching for improvement with no map looks aimless until someone hands them one — which is what coaching provides.",
+      "Long hours without a sense of progress usually means the effort is there but no one has shown them how to practice, not that they're lazy. Watch for whether any curiosity to improve shows up when you ask. A kid reaching for improvement with no map looks aimless until someone hands them one, which is what coaching provides.",
   },
   {
     question: "Why is logging off such a fight?",
@@ -53,14 +53,14 @@ const FAQ_ITEMS = [
   },
   {
     question:
-      "My kid has online friends but seems disconnected in person — is that real friendship?",
+      "My kid has online friends but seems disconnected in person. Is that real friendship?",
     answer:
-      "The connection is usually real — most teen gamers play with others and many have made a friend through a game. The question is whether any of it survives the game closing: do the friends have names, do the same ones show up again, is your kid building something with anyone. A real social thread you can't see is very different from no social thread at all.",
+      "The connection is usually real. Most teen gamers play with others, and many have made a friend through a game. The question is whether any of it survives the game closing: do the friends have names, do the same ones show up again, is your kid building something with anyone. A real social thread you can't see is very different from no social thread at all.",
   },
   {
     question: "Should I respond with less gaming, or with more structure?",
     answer:
-      "For most kids the answer is rarely 'less gaming' or 'more gaming' — both miss what's going on. What tends to help is a better container around the thing they already care about: a team, a coach, a rhythm to the week, and a culture set by adults. One honest caveat: if gaming comes with real withdrawal from people, sleep or school falling apart, or a low mood that doesn't lift, talk to a pediatrician or counselor first.",
+      "For most kids the answer is rarely 'less gaming' or 'more gaming'. Both miss what's going on. What tends to help is a better container around the thing they already care about: a team, a coach, a rhythm to the week, and a culture set by adults. One honest caveat: if gaming comes with real withdrawal from people, sleep or school falling apart, or a low mood that doesn't lift, talk to a pediatrician or counselor first.",
   },
 ];
 
