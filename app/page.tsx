@@ -69,6 +69,7 @@ export default function HomePage() {
             alt=""
             fill
             priority
+            fetchPriority="high"
             className="object-cover"
             style={{ objectPosition: "center 80%" }}
             sizes="100vw"

@@ -6,6 +6,33 @@
 
 ---
 
+## Jamie — May 26, 2026 (Phase 8 follow-up: home-LCP investigation + two pre-prod fixes on dev)
+
+**Why:** Jamie asked me to investigate the home-page LCP regression from Phase 8 §3.2 before the dev → main merge. The §3.2 hypothesis was that the matchMedia `useEffect` gate delayed the Rive canvas paint and Lighthouse latched LCP to the late canvas paint.
+
+**Investigation finding (full detail in [marketing/teams-redesign/10-home-lcp-investigation.md](marketing/teams-redesign/10-home-lcp-investigation.md)):** 20 Lighthouse runs against `dev--ekuzo.netlify.app/` at commit `b64075c` (10 simulate, 10 devtools, mobile, --form-factor=mobile). The §3.2 hypothesis is wrong on its premise — in 20/20 runs the LCP element is `home-hero-bg.png`, not the Rive canvas. The 3.3 → 4.9s "regression" sits inside a Lantern simulator noise band that spans 3.8 → 45s for the same URL at the same commit. Under devtools (real throttling) LCP is stable at 6.3s median ±0.6s, with the dominant cost being a 4.5s download of the 31 KiB LCP image — bandwidth-starved by 8 oversized testimonial poster JPGs that share the HTTP/2 connection.
+
+**Two pre-prod fixes** (Jamie said "we haven't submitted to prod yet, we can make these changes now"):
+
+1. `app/page.tsx` — added explicit `fetchPriority="high"` to the home hero `<Image>`. Lighthouse `lcp-discovery-insight` flagged this as missing in 20/20 runs. Next.js 16's `priority` prop alone doesn't emit `fetchpriority` for `fill` images; the explicit prop forwards correctly (verified in served HTML: both the preload tag and the rendered `<img>` now carry `fetchPriority="high"`).
+2. `components/sections/TestimonialsCarousel.tsx` — IntersectionObserver-gate the `<video>` elements (`rootMargin: "600px 0px"`). Defers ~1.3 MB of testimonial poster fetches off the initial pageload, so the LCP image isn't bandwidth-starved. Layout preserved (play-overlay still renders); videos mount when the carousel enters the prefetch zone. Safe per Phase 8 §2c learning because the carousel is NOT an LCP candidate — deferring it only delays its own fetches, doesn't shift LCP.
+
+**Verification on local dev (port 3001):**
+- `tsc --noEmit` clean. `next build` clean (53 routes, `.next/server` = 28 MB, 0 mp4/mov/webm in trace).
+- `curl http://localhost:3001/` confirms `fetchPriority="high"` on both the preload `<link>` and the rendered `<img>`.
+- `curl http://localhost:3001/` confirms 0 `<video>` tags in initial SSR HTML.
+- Preview network log shows zero `testimonial-videos/*-poster.jpg` and zero `testimonial-videos/*.mp4` fetches on initial pageload.
+
+**Real-world Lighthouse delta verification** still needs to happen on the redeployed dev preview (`dev--ekuzo.netlify.app`) — that's Jamie's step after this commit lands and Netlify rebuilds. Expected effect under devtools throttling: LCP median moves from 6.3s toward ~2s (TTFB ~1.7s + ~0.2s load + render delay) because (a) `fetchpriority=high` weights the LCP image more heavily on the multiplexed HTTP/2 connection, and (b) the 8 testimonial posters are no longer competing for the same pipe.
+
+**Did NOT do (per §6.3 of the investigation doc):** did not revert Fix 2a (matchMedia variant gate), did not switch to `useLayoutEffect`/module-scope matchMedia, did not User-Agent-sniff. All three were scoped against the wrong-mechanism §3.2 hypothesis.
+
+**Did NOT do (separate concerns):** did not downscale the testimonial poster source JPGs (still 100–252 KB each for a ~150px display — durable byte-weight win, but needs Aaron's review on quality tradeoffs since these go through `<video poster>` not `<Image>` so `next/image` resizing isn't free). Phase 9 candidate, not a pre-prod fix.
+
+**Files touched:** `app/page.tsx`, `components/sections/TestimonialsCarousel.tsx`, `marketing/teams-redesign/10-home-lcp-investigation.md` (new), `WORKLOG.md`.
+
+---
+
 ## Handoff for Aaron — May 26, 2026 (post-prod work: visual QA + Klaviyo flow)
 
 **Read this first when you load up.** Jamie just shipped Phase 8 (perf) + a copy pass on the register pages. The dev → main merge happens after Jamie's Stripe-CLI test in the AM — your two items run AFTER prod is live, not before. No pressure, no merge gating.
