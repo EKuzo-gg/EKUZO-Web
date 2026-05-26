@@ -6,6 +6,56 @@
 
 ---
 
+## Jamie — May 25, 2026 (Teams convergence — Phase 6: perf fixes, data-driven from Phase 0 baseline)
+
+**Why:** Phase 6 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the data-driven performance phase. Phase 5 was source dedup (maintainability); Phase 6 is asset/bundle-weight (load perf). Per handoff §1.4: measure first, then fix in scope. The Phase 0 baseline (`02-baseline.md` §1) named smoke `.png` decorations on the teams marketing page as a candidate; the Phase 6 re-audit found those same PNGs used on **four** marketing pages, not one, and confirmed via diff that Phase 5's source dedup did not change any shipped chunk weight (top 5 client chunks byte-identical Phase 0 → Phase 5 → Phase 6). The PNG → WebP swap is the only measurement-justified target this round; the doc captures it explicitly so any future "why didn't Phase 6 do X" question has an answer.
+
+**What shipped (asset swap — 6 files):**
+- `public/images/smoke-1@2x.webp` (new, 74,538 B) — converted from `smoke-1@2x.png` (156,210 B) via `sharp` at quality 82 / effort 6. **−52%** on disk.
+- `public/images/smoke-2@2x.webp` (new, 140,224 B) — converted from `smoke-2@2x.png` (273,260 B). **−49%** on disk.
+- `public/images/smoke-1@2x.png`, `smoke-2@2x.png` — **deleted** (sources unused after the swap; CLAUDE.md "if certain something is unused, delete completely").
+- `app/programs/ekuzo-teams/page.tsx`, `app/programs/ekuzo100/page.tsx`, `app/methodology/page.tsx`, `app/faq/page.tsx` — each updates two `next/image` `src` attributes from `.png` to `.webp`. 8 swaps total across 4 files.
+
+**What shipped (doc — 1 file):**
+- `marketing/teams-redesign/07-phase6-perf.md` (new, 167 lines) — §1 post-Phase-5 baseline (mirrors `02-baseline.md` §1 shape for side-by-side reading), §2 diff against Phase 0, §3 target list with justifications + targets explicitly NOT taken with reasons, §4 post-fix measurement, §5 Phase 7 entry conditions.
+
+**Decision: only one measurement-justified target.** The handoff §4 Phase 6 named four candidate buckets (oversized client components, heavy client imports, unoptimized hero media, missing `next/image` use, `"use client"` audit). Re-auditing against the Phase 5 baseline:
+- **Top 5 client chunks byte-identical** to Phase 0 (226 / 194 / 159 / 138 / 113 KB). The "oversized client components" bucket has nothing left to chase — Phase 5's extraction didn't change shipped weight (correct: source dedup ≠ load perf), so what was there at Phase 0 is what's there now.
+- **Stripe.js scope already clean** — verified `loadStripe` ships only via `lib/stripeClient.ts` → `components/register/PaymentStep.tsx` → the three canonical register pages. Marketing pages don't import it directly or transitively. No dynamic-import work justified.
+- **`"use client"` audit clean** — every flagged `components/sections/*` and `components/ui/*` client island has genuine state, effects, event handlers, or browser-only APIs. No misclassified server-side candidates.
+- **Smoke `.png` decorations** are the surviving target. Phase 0 named the teams marketing page; the re-audit found the same PNGs on `/programs/ekuzo100`, `/methodology`, `/faq` too — 4× the surface area. 420 KB combined on disk for `aria-hidden` decorative imagery displayed at sub-natural width via `next/image`. Swap to WebP, swap 8 `src` attributes, delete the dead PNG sources.
+
+**Measured impact:**
+- Source assets: **429,470 B → 214,762 B (−214 KB, −50%)** combined.
+- `.next/server`: 28 MB → **28 MB** (unchanged; 22 MB Netlify headroom holds).
+- `.next/static`: 2.0 MB → **2.0 MB** (unchanged; the WebPs are served from `public/`, not bundled into `.next/static`).
+- Top 5 client chunks: **byte-identical** to Phase 0 + Phase 5 (the swap is asset-only, no JS shape change).
+- Per-route HTML: register pages **byte-identical**; teams + e100 marketing **+8 B each** — the exact byte cost of `.png` → `.webp` URL strings (4 srcset variants × 1 char × 2 imgs). Traceable to the swap; not a regression.
+- 0 mp4/mov/webm in `.next/` (`outputFileTracingExcludes` still doing its job).
+- 0 console errors across the four affected pages (verified via dev preview).
+- All 8 smoke imgs `complete: true` via `_next/image` pipeline (304 Not Modified after cache prime; naturalW 938 + 755).
+
+**What's intentionally NOT in Phase 6** (called out in `07-phase6-perf.md` §3 + §4 with reasons):
+- `"use client"` → server-component refactors (audit clean — no targets).
+- Stripe.js dynamic-imports (already correctly scoped).
+- Legacy `app/camps/register/page.tsx` 700+-line pre-canonical duplicate (out of scope; needs Jamie's call before deletion since the `3746c26` "delete 8 dead duplicate page files" pass left it intentionally or by oversight — flag-only).
+- Bundle-analyzer pass on chunks >100 KB (chunks byte-identical to Phase 0 baseline; nothing to chase).
+
+**Verify gate (per handoff §4 Phase 6) — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes built.
+- ✅ `.next/server` = **28 MB** (unchanged vs. Phase 5; under the Netlify 50 MB cap).
+- ✅ 0 mp4/mov/webm in `.next/`.
+- ✅ No regression in any route's HTML or chunk weight (the two +8 B deltas are the swap itself).
+- ✅ Measurable improvement on a Phase-0-named target: smoke PNGs **−214 KB (−50%)** source weight.
+- ✅ All four affected pages render with the WebPs loading cleanly via `next/image` (verified via dev preview MCP: snapshot + network + console-error checks on all four).
+
+**Phase 7 entry conditions:** met for the code-side gates (tsc/build/bundle/render). External handoffs still owed and now appropriately flagged (per memory `feedback_flag_blockers_not_before` — flagging at the seam where they bite): Aaron's visual QA pass (dev preview is ready), Klaviyo "teams" confirmation flow (Jamie's dashboard lane), Apps Script `"teams"` squad discriminator (verify Phase 5's two live teams payments produced `squads` rows), final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app` (Jamie's lane per test-key constraint). Per memory `feedback_dev_to_main_merges`: stop after Phase 6 lands on dev — Jamie batches dev→main merges himself, no auto-promotion.
+
+**Phase 7 next:** full verification gate + dev → main merge by Jamie (not Claude). See `07-phase6-perf.md` §5 for the exact entry-condition checklist.
+
+---
+
 ## Jamie — May 25, 2026 (Teams convergence — Phase 5: shared register UI + teams page rebuild + success squad panel)
 
 **Why:** Phase 5 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 4, the shared register UI. Phases 1-4 extracted backend seams (product registry, webhook strategy map, register-API helper, partial-capture routes); Phase 5 closes the loop by extracting the frontend the three register pages share, rebuilding the 1298-line teams page on it, and adding the universal squad panel to the teams success page. Camps + e100 behavior unchanged at the wire-payload level — the same data still flows through the same backend they always did, just from a thinner client.
