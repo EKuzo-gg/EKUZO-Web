@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createHash } from "crypto";
+import { getProductFromMeta } from "@/lib/products";
+import type { MetadataGamer, WebhookContext } from "@/lib/products/types";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-02-25.clover",
@@ -10,35 +12,6 @@ const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
 const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY!;
 const KLAVIYO_PURCHASERS_LIST_ID = "V4Uf7N";
-
-/**
- * Shape of each gamer after reconstruction from Stripe metadata. This is
- * distinct from the camps register-form shape (see `ClientGamer` in
- * /api/camps/register/route.ts): by the time we're reading it here, the
- * form data has been JSON-stringified through Stripe metadata and parsed
- * back, so numeric fields may have lost precision and the field names
- * reflect the post-transform shape (`slot` not `selectedSlot`,
- * `preferredGames` as a joined string not an array, etc.). All fields
- * optional because a malformed metadata value would parse to `{}`.
- */
-type MetadataGamer = {
-  firstName?: string;
-  lastName?: string;
-  gamerTag?: string;
-  weekLabel?: string;
-  weekDates?: string;
-  slot?: string;
-  slotHours?: string;
-  price?: number;
-  birthday?: string;
-  gender?: string;
-  skillLevel?: string;
-  tshirtSize?: string;
-  preferredGames?: string;
-  schedulePreference?: string;
-  timePreference?: string;
-  firstSemester?: string;
-};
 
 /**
  * POST /api/webhooks/stripe
@@ -80,6 +53,17 @@ export async function POST(req: NextRequest) {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     const meta = paymentIntent.metadata;
     const product = meta.product || "camps"; // default to camps for backward compat
+    // Teams convergence Phase 1 + 2: shared product config and per-
+    // surface strategy map. `productConfig` carries the labels, tags,
+    // automation IDs, referring sites, route paths, squad write
+    // flags, AND the per-product builder callbacks (`buildGamerSummary`,
+    // `buildBeehiivCustomFields`, `buildKlaviyoProfileProperties`,
+    // `buildKlaviyoOrderProperties`, `buildPurchaseRowCohortFields`,
+    // `buildSquadsRowFields`, `buildSquadMemberRowFields`). The
+    // remaining `product === "..."` references in this file are
+    // diagnostic (logs) or write through `product` as a string column
+    // value (Sheets `product` discriminator) — not branch logic.
+    const productConfig = getProductFromMeta(product);
 
     // ── Mode isolation ─────────────────────────────────────────────
     // Webhook skips events whose Stripe mode doesn't match this deploy's
@@ -211,60 +195,65 @@ export async function POST(req: NextRequest) {
     // path concatenation is consistent.
     const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
     const shareableSquadToken = meta.squad_token || meta.joining_squad_token || "";
-    // Product-aware squad link path — a camps squad joins via the camps
-    // register page, an e100 squad joins via the e100 register page.
-    // Teams doesn't ship squad semantics yet; falls through to camps.
-    const squadProgramPath =
-      product === "ekuzo100" ? "/programs/ekuzo100/register"
-      : "/programs/ekuzo-camps/register";
+    // Product-aware squad link path — sourced from the registry
+    // (Phase 2). A camps squad joins via the camps register page, e100
+    // via e100, teams via teams. Pre-Phase-3 teams doesn't mint tokens,
+    // so shareableSquadToken is "" and squadLink resolves to "" — the
+    // path is wired but inert until tokens flow through.
     const squadLink = shareableSquadToken
-      ? `${siteUrl}${squadProgramPath}?squad=${shareableSquadToken}`
+      ? `${siteUrl}${productConfig.routes.registerPath}?squad=${shareableSquadToken}`
       : "";
 
-    // ── Shared gamer summaries (used by Beehiiv + Klaviyo) ───────
+    // ── Pre-pass over gamers ─────────────────────────────────────
+    // Derives the camps-only "earliest" values (week / slot /
+    // week_dates) and the shared `allGamerNames` list in a single
+    // loop. Camps earliest fields feed the WebhookContext consumed by
+    // every per-surface strategy; for e100/teams these stay at the
+    // empty-string default and the per-product strategies ignore them.
     const allGamerNames: string[] = [];
-    const gamerSummaries: string[] = [];
-    let earliestWeek = Infinity;
+    let earliestWeekNum = Infinity;
     let earliestSlot = "";
-
-    for (const gd of gamers) {
-        if (gd.firstName) allGamerNames.push(gd.firstName);
-
-        if (product === "camps") {
-          // Camps: track week/slot for automation timing
-          gamerSummaries.push(
-            `${gd.firstName} ${gd.lastName} — ${gd.weekLabel} ${gd.slot} (${gd.weekDates})`
-          );
-          const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
-          if (weekNum < earliestWeek) {
-            earliestWeek = weekNum;
-            earliestSlot = gd.slot || "";
-          }
-        } else if (product === "ekuzo100") {
-          // EKUZO100: cohort_label is now a complete human-readable
-          // schedule string (e.g. "Tuesdays & Thursdays · June 2 –
-          // June 25") produced by the register-page picker.
-          // schedulePreference retired 2026-05-24 — only one session
-          // time runs today (7-8:30 PM), so the field carried zero
-          // bits of information.
-          gamerSummaries.push(
-            `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}`
-          );
-        } else if (product === "teams") {
-          // Teams: semester + payment plan
-          gamerSummaries.push(
-            `${gd.firstName} ${gd.lastName} — ${meta.semester_label || "Fall 2026"}`
-          );
+    let earliestWeekDates = "";
+    for (const g of gamers) {
+      if (g.firstName) allGamerNames.push(g.firstName);
+      if (product === "camps") {
+        const weekNum = parseInt(g.weekLabel?.replace(/\D/g, "") || "99", 10);
+        if (weekNum < earliestWeekNum) {
+          earliestWeekNum = weekNum;
+          earliestSlot = g.slot || "";
+          earliestWeekDates = g.weekDates || "";
         }
       }
+    }
+    const earliestWeek = earliestWeekNum === Infinity ? "" : String(earliestWeekNum);
+
+    // ── Webhook strategy context (Phase 2) ───────────────────────
+    // One snapshot of derived values, passed to every per-product
+    // strategy builder. Keeps strategies pure (read-only) and
+    // guarantees Beehiiv / Klaviyo / Sheets all see the same values
+    // from the same input event.
+    const ctx: WebhookContext = {
+      squadLink,
+      squadStatusLabel,
+      earliestWeek,
+      earliestSlot,
+      earliestWeekDates,
+    };
+
+    // Gamer summaries — used by both Beehiiv `registration_summary`
+    // custom field AND Klaviyo `registration_summary` profile/order
+    // property. Single source of truth; same string both places.
+    const gamerSummaries = gamers.map((g) =>
+      productConfig.buildGamerSummary(g, meta)
+    );
 
     // ── Enroll in Beehiiv ──────────────────────────────────────────
     try {
-      // Product-specific Beehiiv fields
-      const programName =
-        product === "ekuzo100" ? "EKUZO100"
-        : product === "teams" ? "EKUZOTeams"
-        : "EKUZO Camps";
+      // Product-specific Beehiiv fields — sourced from lib/products
+      // registry (Phase 1 of the Teams convergence). Values match
+      // pre-Phase-1 ternary output byte-for-byte; see
+      // marketing/teams-redesign/02-baseline.md §2A/§2B.
+      const programName = productConfig.programName;
       // Internal Beehiiv referrer label (legacy, used pre-UTM-attribution).
       // NOTE: this used to be named `utmSource` and shadowed the actual UTM
       // captured up-top at line ~138 — meaning the Beehiiv `utm_source` payload
@@ -272,18 +261,12 @@ export async function POST(req: NextRequest) {
       // from the ad. Renamed to make the distinction unmistakable. Kept as
       // `referring_site` on the Beehiiv payload so the legacy "where did this
       // subscriber come from internally" signal still lands somewhere.
-      const beehiivReferringSite =
-        product === "ekuzo100" ? "ekuzo100-registration"
-        : product === "teams" ? "ekuzo-teams-registration"
-        : "ekuzo-camps-registration";
+      // Sourced from lib/products registry (Phase 1).
+      const beehiivReferringSite = productConfig.beehiiv.referringSites.purchase;
 
-      // Tags per product
-      const tags =
-        product === "ekuzo100"
-          ? ["ekuzo100-purchased", "source-ekuzo100-registration"]
-        : product === "teams"
-          ? ["teams-purchased", "source-teams-registration"]
-        : ["camp-2026-purchased", "source-camp-registration"];
+      // Tags per product — sourced from lib/products registry (Phase 1).
+      // Values match pre-Phase-1 ternary output exactly; see baseline §2A/§2B.
+      const tags = productConfig.beehiiv.tags.purchased;
 
       // Build custom fields — shared base + product-specific
       // NOTE: the 6 attribution fields below (acquisition_source +
@@ -320,36 +303,16 @@ export async function POST(req: NextRequest) {
         // Acquisition Source), and you can segment on `utm_source` directly.
       ];
 
-      if (product === "camps") {
-        customFields.push(
-          { name: "camp_week", value: earliestWeek === Infinity ? "" : String(earliestWeek) },
-          { name: "camp_slot", value: earliestSlot },
-          { name: "squad_status", value: squadStatusLabel },
-          { name: "squad_link", value: squadLink }
-        );
-      } else if (product === "ekuzo100") {
-        // E100 inherits the squad_link rule from camps (every purchase
-        // has a working link). cohort_label is the customer-facing
-        // schedule string; preferred_days is the internal demand
-        // signal from the "Prefer other days?" disclosure (NOT
-        // surfaced in the confirmation email).
-        customFields.push(
-          { name: "cohort_label", value: meta.cohort_label || "" },
-          { name: "preferred_days", value: meta.preferred_days || "" },
-          { name: "squad_link", value: squadLink }
-        );
-      } else if (product === "teams") {
-        customFields.push(
-          { name: "team_semester", value: meta.semester_label || "Fall 2026" },
-          { name: "team_payment_plan", value: meta.payment_plan || "upfront" }
-        );
-      }
+      // Per-product extras — sourced from the registry strategy
+      // (Phase 2). Camps / e100 outputs are byte-identical to the
+      // pre-Phase-2 ternary; teams now appends `squad_link` (empty
+      // until Phase 3 mints tokens, but the wire is in place).
+      customFields.push(...productConfig.buildBeehiivCustomFields(meta, ctx));
 
-      // Product-specific welcome automation
-      const automationId =
-        product === "teams"   ? "aut_fea2b01b-eccd-40c7-9d53-2b370c039ddb"
-        : product === "ekuzo100" ? "aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556"
-        : "aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc"; // camps (default)
+      // Product-specific welcome automation — sourced from lib/products
+      // registry (Phase 1). Camps / e100 / teams automation IDs are
+      // canonical there; this read replaces a hand-maintained ternary.
+      const automationId = productConfig.welcomeAutomationId;
 
       const beehiivPayload = {
         email: meta.parent_email,
@@ -458,37 +421,16 @@ export async function POST(req: NextRequest) {
         revision: "2025-07-15",
       };
 
-      // Earliest camp week dates for pre-camp sequencing
-      let earliestWeekDates = "";
-      if (product === "camps") {
-        let minWeek = Infinity;
-        for (const gd of gamers) {
-          const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
-          if (weekNum < minWeek) {
-            minWeek = weekNum;
-            earliestWeekDates = gd.weekDates || "";
-          }
-        }
-      }
-
-      // Build custom properties — same data set as Beehiiv
+      // Build custom properties — same data set as Beehiiv. The
+      // shared base is constructed inline; per-product extras come
+      // from the registry strategy (Phase 2) and are merged in.
+      // `registration_summary` reuses the gamerSummaries array
+      // computed in the pre-pass — same source of truth as Beehiiv.
       const klaviyoProperties: Record<string, string> = {
-        program: product === "ekuzo100" ? "EKUZO100"
-          : product === "teams" ? "EKUZOTeams"
-          : "EKUZO Camps",
-        gamer_name: gamers.map((g) => g.firstName).filter(Boolean).join(", "),
+        program: productConfig.programName,
+        gamer_name: allGamerNames.join(", "),
         gamer_count: meta.gamer_count || "1",
-        registration_summary: gamers.map((gd) => {
-          if (product === "camps") {
-            return `${gd.firstName} ${gd.lastName} — ${gd.weekLabel} ${gd.slot} (${gd.weekDates})`;
-          } else if (product === "ekuzo100") {
-            // schedulePreference retired 2026-05-24 — cohort_label
-            // now carries the full schedule string.
-            return `${gd.firstName} ${gd.lastName} — ${meta.cohort_label || ""}`;
-          } else {
-            return `${gd.firstName} ${gd.lastName} — ${meta.semester_label || "Fall 2026"}`;
-          }
-        }).join(" | ").slice(0, 500),
+        registration_summary: gamerSummaries.join(" | ").slice(0, 500),
         amount_paid: `$${(paymentIntent.amount / 100).toFixed(2)}`,
         payment_intent_id: paymentIntent.id,
         order_id: orderId,
@@ -501,32 +443,8 @@ export async function POST(req: NextRequest) {
         utm_campaign: utmCampaign,
         utm_content: utmContent,
         utm_term: utmTerm,
+        ...productConfig.buildKlaviyoProfileProperties(meta, ctx),
       };
-
-      // Product-specific properties
-      if (product === "camps") {
-        klaviyoProperties.camp_week = earliestWeek === Infinity ? "" : String(earliestWeek);
-        klaviyoProperties.camp_slot = earliestSlot;
-        klaviyoProperties.camp_week_dates = earliestWeekDates;
-        klaviyoProperties.squad_status = squadStatusLabel;
-        klaviyoProperties.squad_link = squadLink;
-      } else if (product === "ekuzo100") {
-        klaviyoProperties.cohort_label = meta.cohort_label || "";
-        klaviyoProperties.cohort_start = meta.cohort_start || "";
-        klaviyoProperties.cohort_end = meta.cohort_end || "";
-        // preferred_days: family-level day-availability from the
-        // "Prefer other days?" disclosure. Internal-only — segmenters
-        // can use it to flag M/W demand; the confirmation email does
-        // not reference it (echoing preferences next to the booked
-        // schedule re-opens an expectation mismatch by design).
-        klaviyoProperties.preferred_days = meta.preferred_days || "";
-        // squad_link: every e100 purchase mints a working link, same
-        // rule camps adopted 2026-05-22.
-        klaviyoProperties.squad_link = squadLink;
-      } else if (product === "teams") {
-        klaviyoProperties.team_semester = meta.semester_label || "Fall 2026";
-        klaviyoProperties.team_payment_plan = meta.payment_plan || "upfront";
-      }
 
       // 1. Create or update profile
       const profilePayload = {
@@ -594,26 +512,10 @@ export async function POST(req: NextRequest) {
                 order_id: orderId,
                 gamer_name: klaviyoProperties.gamer_name,
                 gamer_count: parseInt(meta.gamer_count || "1", 10),
-                ...(product === "camps" && {
-                  camp_week: klaviyoProperties.camp_week,
-                  camp_slot: klaviyoProperties.camp_slot,
-                  camp_week_dates: earliestWeekDates,
-                  squad_status: squadStatusLabel,
-                  squad_link: squadLink,
-                }),
-                ...(product === "ekuzo100" && {
-                  cohort_label: meta.cohort_label || "",
-                  // squad_link: needed by the "Bring your crew" block
-                  // in the e100 confirmation email. cohort_start/end
-                  // intentionally NOT included — cohort_label is a
-                  // self-contained schedule string and the start/end
-                  // pair would be redundant noise in the email layer.
-                  squad_link: squadLink,
-                }),
-                ...(product === "teams" && {
-                  team_semester: meta.semester_label || "Fall 2026",
-                  team_payment_plan: meta.payment_plan || "upfront",
-                }),
+                // Per-product extras — sourced from registry strategy
+                // (Phase 2). Camps / e100 outputs are byte-identical to
+                // the pre-Phase-2 spread; teams now includes squad_link.
+                ...productConfig.buildKlaviyoOrderProperties(meta, ctx),
               },
               value: paymentIntent.amount / 100,
               unique_id: paymentIntent.id,
@@ -658,15 +560,11 @@ export async function POST(req: NextRequest) {
         parent_phone: meta.parent_phone || "",
         gamer_name: `${gd.firstName || ""} ${gd.lastName || ""}`.trim(),
         gamer_tag: gd.gamerTag || "",
-        week: product === "camps" ? (gd.weekLabel || "")
-          : product === "teams" ? (meta.semester_label || "Fall 2026")
-          : (meta.cohort_label || ""),
-        slot: product === "camps" ? (gd.slot || "")
-          : product === "teams" ? (meta.payment_plan || "")
-          : "", // ekuzo100: single session time (7-8:30 PM), no slot
-        week_dates: product === "camps" ? (gd.weekDates || "")
-          : product === "teams" ? "Week of Aug 31, 2026"
-          : `${meta.cohort_start || ""} – ${meta.cohort_end || ""}`,
+        // Per-product cohort fields (week/slot/week_dates) — sourced
+        // from registry strategy (Phase 2). The `week` column is
+        // overloaded: camps stores weekLabel, e100 stores cohort_label,
+        // teams stores semester_label. See baseline §2E.
+        ...productConfig.buildPurchaseRowCohortFields(gd, meta),
         birthday: gd.birthday || "",
         gender: gd.gender || "",
         gaming_experience: gd.skillLevel || "",
@@ -680,28 +578,28 @@ export async function POST(req: NextRequest) {
         stripe_pi_id: paymentIntent.id,
         registration_date: registrationDate,
         additional_info: additionalInfo,
-        // Camps-only fields; "" for ekuzo100/teams. The sheet has
-        // canonical headers for all three — see the 28-column list in
-        // docs/apps-script-squad-endpoints-spec.md. squad_token +
-        // joining_squad_token are stamped onto EVERY gamer row in the
-        // registration (not just the owner row) so a single-tab FILTER
-        // on ekuzo-purchases by token surfaces the whole crew.
-        squad_status: product === "camps" ? squadStatusLabel : "",
-        // Squad tokens write for both camps and ekuzo100. E100 inherits
-        // the universal-token rule (every purchase has a working link).
-        squad_token:
-          product === "camps" || product === "ekuzo100"
-            ? (meta.squad_token || "")
-            : "",
-        joining_squad_token:
-          product === "camps" || product === "ekuzo100"
-            ? (meta.joining_squad_token || "")
-            : "",
-        // Family-level day-availability signal (e100 only). Apps Script
-        // appends by header name — add a `preferred_days` header cell
-        // in the ekuzo-purchases tab to capture this. Empty for camps
-        // / teams.
-        preferred_days: product === "ekuzo100" ? (meta.preferred_days || "") : "",
+        // squad_status is camps-only; ctx.squadStatusLabel is "" for
+        // e100/teams (see WebhookContext jsdoc), so this is product-
+        // agnostic now.
+        squad_status: ctx.squadStatusLabel,
+        // squad_token + joining_squad_token are stamped onto EVERY
+        // gamer row in the registration (not just the owner row) so a
+        // single-tab FILTER on ekuzo-purchases by token surfaces the
+        // whole crew. Gated by registry's squad.writesSquadRows flag —
+        // teams flips true in Phase 2; tokens themselves arrive in
+        // Phase 3 (so today's teams rows still get "" naturally).
+        squad_token: productConfig.squad.writesSquadRows
+          ? (meta.squad_token || "")
+          : "",
+        joining_squad_token: productConfig.squad.writesSquadRows
+          ? (meta.joining_squad_token || "")
+          : "",
+        // Family-level day-availability signal (e100 only). Apps
+        // Script appends by header name — the `preferred_days` header
+        // cell in the ekuzo-purchases tab captures this. The string
+        // lands in meta only for e100; for camps/teams the empty-meta
+        // value yields "" naturally — no per-product gating needed.
+        preferred_days: meta.preferred_days || "",
         // Marketing attribution — derived once at the top of this handler
         // so every row in a multi-gamer registration carries the same
         // source. Apps Script appends by header name (see
@@ -746,63 +644,46 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Squad link — additional Sheets writes (camps + ekuzo100) ───
-    // These go through the same Apps Script webhook with a `tab` field so
-    // it knows which sheet to append to. See
-    // docs/apps-script-squad-endpoints-spec.md for the Apps Script side.
+    // ── Squad link — additional Sheets writes ──────────────────────
+    // Gated by the registry's `squad.writesSquadRows` flag (Phase 2).
+    // Camps + e100 have always written these rows; teams flips true
+    // here so its squad token (Phase 3) and joining token (Phase 5)
+    // land in the same `squads` / `squad_members` tables. The
+    // `meta.squad_token` / `meta.joining_squad_token` guards below
+    // keep teams a no-op until Phase 3 starts minting — no premature
+    // empty rows.
     //
-    // Camps rows carry week/slot/week_dates (single-week unit); e100 rows
-    // carry cohort_month/cohort_label/cohort_start/cohort_end (single-
-    // month unit). The `product` column tells Apps Script which fields
-    // are load-bearing. The squad lookup endpoint (`?action=squad`) reads
-    // `product` and returns the right shape to the joining register page.
-    if (product === "camps" || product === "ekuzo100") {
+    // All cohort + owner field selection delegates to per-product
+    // registry strategies (`buildSquadsRowFields`,
+    // `buildSquadMemberRowFields`). The `product` column tells Apps
+    // Script which fields are load-bearing; the squad lookup endpoint
+    // (`?action=squad`) reads `product` and returns the right shape
+    // to the joining register page.
+    //
+    // See docs/apps-script-squad-endpoints-spec.md for the Apps Script
+    // side. Adding `"teams"` as a valid product discriminator may need
+    // an Apps Script web-app redeploy — coordinated with Jamie per
+    // handoff §6.
+    if (productConfig.squad.writesSquadRows) {
       const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
       const createdAt = new Date().toISOString();
 
       // 1. `squads` — one row per registration that minted a squad_token.
-      //    Camps owner = earliest-week gamer (matches Beehiiv/Klaviyo
-      //    logic). E100 owner = first gamer in the registration (all
-      //    gamers share one cohort, so the "earliest" concept doesn't
-      //    apply — there's exactly one cohort per registration).
       if (meta.squad_token && sheetsUrl) {
         try {
-          let ownerGamerName = "";
-          let ownerWeekLabel = "";
-          let ownerSlot = "";
-          let ownerWeekDates = "";
-
-          if (product === "camps") {
-            let minWeek = Infinity;
-            for (const gd of gamers) {
-              const weekNum = parseInt(gd.weekLabel?.replace(/\D/g, "") || "99", 10);
-              if (weekNum < minWeek) {
-                minWeek = weekNum;
-                ownerGamerName = gd.firstName || "";
-                ownerWeekLabel = gd.weekLabel || "";
-                ownerSlot = gd.slot || "";
-                ownerWeekDates = gd.weekDates || "";
-              }
-            }
-          } else {
-            // ekuzo100: all gamers share one cohort, owner = first gamer
-            ownerGamerName = gamers[0]?.firstName || "";
-          }
-
+          const fields = productConfig.buildSquadsRowFields(gamers, meta);
           const squadRow = {
             squad_token: meta.squad_token,
             product,
             owner_parent_email: meta.parent_email || "",
-            owner_gamer_name: ownerGamerName,
-            // Camps fields (empty for e100):
-            week: ownerWeekLabel,
-            slot: ownerSlot,
-            week_dates: ownerWeekDates,
-            // E100 fields (empty for camps):
-            cohort_month: product === "ekuzo100" ? (meta.cohort_month || "") : "",
-            cohort_label: product === "ekuzo100" ? (meta.cohort_label || "") : "",
-            cohort_start: product === "ekuzo100" ? (meta.cohort_start || "") : "",
-            cohort_end: product === "ekuzo100" ? (meta.cohort_end || "") : "",
+            owner_gamer_name: fields.ownerGamerName,
+            week: fields.week,
+            slot: fields.slot,
+            week_dates: fields.week_dates,
+            cohort_month: fields.cohort_month,
+            cohort_label: fields.cohort_label,
+            cohort_start: fields.cohort_start,
+            cohort_end: fields.cohort_end,
             created_at: createdAt,
           };
 
@@ -829,22 +710,20 @@ export async function POST(req: NextRequest) {
       //    via someone else's crew link.
       if (meta.joining_squad_token && sheetsUrl) {
         try {
-          const memberRows = gamers.map((gd) => ({
-            squad_token: meta.joining_squad_token,
-            product,
-            member_parent_email: meta.parent_email || "",
-            member_gamer_name: gd.firstName || "",
-            // Camps fields (empty for e100):
-            member_week: product === "camps" ? (gd.weekLabel || "") : "",
-            member_slot: product === "camps" ? (gd.slot || "") : "",
-            // E100 fields (empty for camps): the cohort lives at the
-            // registration level, but we stamp each member row so a
-            // single-tab FILTER by token surfaces the schedule
-            // without joining back to the squads tab.
-            member_cohort_month: product === "ekuzo100" ? (meta.cohort_month || "") : "",
-            member_cohort_label: product === "ekuzo100" ? (meta.cohort_label || "") : "",
-            joined_at: createdAt,
-          }));
+          const memberRows = gamers.map((gd) => {
+            const memberFields = productConfig.buildSquadMemberRowFields(gd, meta);
+            return {
+              squad_token: meta.joining_squad_token,
+              product,
+              member_parent_email: meta.parent_email || "",
+              member_gamer_name: gd.firstName || "",
+              member_week: memberFields.member_week,
+              member_slot: memberFields.member_slot,
+              member_cohort_month: memberFields.member_cohort_month,
+              member_cohort_label: memberFields.member_cohort_label,
+              joined_at: createdAt,
+            };
+          });
 
           if (memberRows.length > 0) {
             const memberRes = await fetch(sheetsUrl, {
@@ -887,10 +766,10 @@ export async function POST(req: NextRequest) {
         const sha256 = (v: string) =>
           createHash("sha256").update(v).digest("hex");
         const phoneDigits = (meta.parent_phone || "").replace(/\D/g, "");
-        const programSlug =
-          product === "ekuzo100" ? "ekuzo100"
-          : product === "teams" ? "ekuzo-teams"
-          : "ekuzo-camps";
+        // Program slug for Meta CAPI event_source_url — sourced from
+        // the registry (Phase 2). Same values as the pre-Phase-2
+        // ternary; just a different source.
+        const programSlug = productConfig.routes.programSlug;
 
         // Match-quality additions (Meta projects ~50% lift from
         // ip + ua + zip combined):

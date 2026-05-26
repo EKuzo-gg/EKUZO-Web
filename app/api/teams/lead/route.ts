@@ -6,30 +6,34 @@ const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
 
 // Sourced from lib/products registry (Phase 1).
-const FORM_STARTED_TAG = PRODUCTS.ekuzo100.beehiiv.tags.formStarted;
-const REFERRING_SITE = PRODUCTS.ekuzo100.beehiiv.referringSites.formStarted;
+const FORM_STARTED_TAG = PRODUCTS.teams.beehiiv.tags.formStarted;
+const REFERRING_SITE = PRODUCTS.teams.beehiiv.referringSites.formStarted;
 
 // Loose RFC-5322-ish check. The Beehiiv API does its own validation; this
 // is just a cheap pre-flight so we don't make an API call for "x".
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
- * POST /api/ekuzo100/lead
- * Companion to /api/ekuzo100/register: captures the email AS SOON as a
- * parent finishes typing it on the EKUZO100 register page (onBlur), so
- * parents who start the form but never reach "Continue to Payment" still
- * land in Beehiiv with `form_started_ekuzo100` for nurture.
+ * POST /api/teams/lead
+ * Companion to /api/teams/register: captures the email AS SOON as a parent
+ * finishes typing it on the EKUZOTeams register page (onBlur), so parents
+ * who start the form but never reach "Continue to Payment" still land in
+ * Beehiiv with `form_started_teams` for nurture.
  *
- * Mirrors /api/camps/lead exactly — only the tag, the product extra, and
- * the referring_site differ. Idempotent on email; soft-fails on every
- * Beehiiv error so the form never blocks on lead capture.
+ * Mirrors /api/camps/lead and /api/ekuzo100/lead exactly — only the tag,
+ * the Klaviyo product extra, and the referring_site differ. Idempotent
+ * on email; soft-fails on every Beehiiv error so the form never blocks
+ * on lead capture.
  *
  * No welcome email and no automation enrollment here — those belong only
- * to PAID customers. On purchase the webhook adds `ekuzo100-purchased`
+ * to PAID customers. On purchase the webhook adds `teams-purchased`
  * (Beehiiv has no tag-removal API — see the comment block in
  * /api/webhooks/stripe). Cart-abandonment automations should exclude
- * subscribers tagged `ekuzo100-purchased` so paid customers don't get
+ * subscribers tagged `teams-purchased` so paid customers don't get
  * recovery emails.
+ *
+ * Phase 4 ships the endpoint; the teams register page is wired to call
+ * it in Phase 5 (handoff §4).
  */
 export async function POST(req: NextRequest) {
   try {
@@ -45,13 +49,13 @@ export async function POST(req: NextRequest) {
 
     // 0. Klaviyo — mirror the lead into Klaviyo so form-started nurture
     //    can run from Klaviyo too, alongside Beehiiv. Single shared
-    //    "Started Registration" metric (NOT program-prefixed) — the e100
-    //    flow filters on event.extra.product == "ekuzo100" per the
+    //    "Started Registration" metric (NOT program-prefixed) — the
+    //    teams flow filters on event.extra.product == "teams" per the
     //    "same workflow" contract.
     await trackKlaviyoEvent({
       metricName: "Started Registration",
       email,
-      properties: { product: "ekuzo100" },
+      properties: { product: "teams" },
     });
 
     // 1. Subscribe (or reactivate) the lead.
@@ -75,14 +79,14 @@ export async function POST(req: NextRequest) {
       );
       if (!subRes.ok) {
         const errText = await subRes.text();
-        console.error("Beehiiv ekuzo100 lead subscribe failed:", subRes.status, errText);
+        console.error("Beehiiv teams lead subscribe failed:", subRes.status, errText);
         return NextResponse.json({ ok: true, warning: "subscribe_failed" });
       }
       const subData = await subRes.json();
       subscriberId = subData?.data?.id || "";
     } catch (err) {
       console.error(
-        "Beehiiv ekuzo100 lead subscribe error:",
+        "Beehiiv teams lead subscribe error:",
         err instanceof Error ? err.message : err
       );
       return NextResponse.json({ ok: true, warning: "subscribe_error" });
@@ -105,11 +109,11 @@ export async function POST(req: NextRequest) {
         );
         if (!tagRes.ok) {
           const errText = await tagRes.text();
-          console.error("Beehiiv ekuzo100 lead tag failed:", tagRes.status, errText);
+          console.error("Beehiiv teams lead tag failed:", tagRes.status, errText);
         }
       } catch (err) {
         console.error(
-          "Beehiiv ekuzo100 lead tag error:",
+          "Beehiiv teams lead tag error:",
           err instanceof Error ? err.message : err
         );
       }
@@ -118,7 +122,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error(
-      "Ekuzo100 lead route error:",
+      "Teams lead route error:",
       err instanceof Error ? err.message : err
     );
     // Even on unexpected error, return ok:true so the form never blocks.

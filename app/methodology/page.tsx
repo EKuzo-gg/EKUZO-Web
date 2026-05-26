@@ -96,7 +96,7 @@ export default function MethodologyPage() {
           aria-hidden="true"
         >
           <Image
-            src="/images/smoke-1@2x.png"
+            src="/images/smoke-1@2x.webp"
             alt=""
             width={900}
             height={900}
@@ -110,7 +110,7 @@ export default function MethodologyPage() {
           aria-hidden="true"
         >
           <Image
-            src="/images/smoke-2@2x.png"
+            src="/images/smoke-2@2x.webp"
             alt=""
             width={900}
             height={900}

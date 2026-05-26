@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
+import { configureRiveRuntime } from "@/lib/riveRuntime";
+
+configureRiveRuntime();
 
 // ── DEBUG MODE ──────────────────────────────────────────────────────
 // Set to true to show a floating debug panel with rive value + manual override
@@ -318,18 +321,32 @@ function EcosystemScroll({
 }
 
 export default function EcosystemAnimation() {
+  // Pick exactly one variant at mount based on viewport. CSS hidden does not
+  // unmount the hidden component — useRive still fires and fetches its .riv,
+  // so dual-render was costing every visitor both files (~12 MB combined).
+  // Phase 8a: only one Rive instance per page.
+  const [variant, setVariant] = useState<"desktop" | "mobile" | null>(null);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)");
+    const apply = () => setVariant(mql.matches ? "desktop" : "mobile");
+    apply();
+    mql.addEventListener("change", apply);
+    return () => mql.removeEventListener("change", apply);
+  }, []);
+
   return (
     <div className="w-full h-full flex flex-col">
       {/* Top spacer */}
       <div style={{ flexShrink: 0, height: 40 }} />
       {/* Animation canvas — fills remaining space */}
       <div className="flex-1 min-h-0">
-        <div className="hidden md:block w-full h-full">
+        {variant === "desktop" && (
           <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
-        </div>
-        <div className="md:hidden w-full h-full">
+        )}
+        {variant === "mobile" && (
           <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
-        </div>
+        )}
       </div>
       {/* Bottom spacer — accounts for sticky CTA bar */}
       <div style={{ flexShrink: 0, height: 120 }} />

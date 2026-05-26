@@ -299,12 +299,16 @@ export default function EkuzoCampsPage() {
               while Aaron sources the final hero graphic. Opacity raised
               to ~0.7 and overlay lightened so the gameplay reads as
               real content rather than a black wash, while still keeping
-              enough contrast for the white headline. */}
+              enough contrast for the white headline. Asset re-encoded
+              from 1920x1080@30fps/14.6 MB to 1280x720@24fps/3.7 MB in
+              Phase 8d (visually indistinguishable through the
+              opacity+saturate+brightness filters). */}
           <video
             autoPlay
             loop
             muted
             playsInline
+            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ opacity: 0.7, filter: "saturate(0.8) brightness(0.85)" }}
             aria-hidden="true"

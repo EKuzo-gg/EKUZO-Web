@@ -27,24 +27,22 @@
 //     view. Shared across all gamers (one week + PM for the whole
 //     registration).
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
-import Image from "next/image";
-import Eyebrow from "@/components/ui/Eyebrow";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { trackInitiateCheckout } from "@/lib/analytics";
-import { captureAttribution, getAttribution } from "@/lib/attribution";
+import { getAttribution } from "@/lib/attribution";
 import { getFbCookie } from "@/lib/fbCookies";
 import { nanoid } from "nanoid";
-
-// ── Stripe setup ────────────────────────────────────────────────────────────
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+import { useRegisterForm } from "@/hooks/useRegisterForm";
+import InputField from "@/components/register/InputField";
+import RegisterHero from "@/components/register/RegisterHero";
+import ErrorSummary from "@/components/register/ErrorSummary";
+import ParentInfoSection from "@/components/register/ParentInfoSection";
+import PostPaymentSteps from "@/components/register/PostPaymentSteps";
+import ReassuranceRow from "@/components/register/ReassuranceRow";
+import PaymentStep from "@/components/register/PaymentStep";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -256,19 +254,35 @@ function emptyGamer(): GamerInfo {
 // ── Page Component ──────────────────────────────────────────────────────────
 
 export default function CampsRegisterPage() {
-  const [parent, setParent] = useState<ParentInfo>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-  });
+  // Shared register form state + handlers (parent, errors, isSubmitting,
+  // payment state, ctaSource, handleEmailBlur, scrollToFirstError,
+  // scrollToPaymentSection, setApiError). See hooks/useRegisterForm.ts.
+  const form = useRegisterForm({ productSlug: "camps" });
+  const {
+    parent,
+    setParent,
+    errors,
+    setErrors,
+    isSubmitting,
+    setIsSubmitting,
+    clientSecret,
+    setClientSecret,
+    paymentIntentId,
+    setPaymentIntentId,
+    showPayment,
+    setShowPayment,
+    ctaSource,
+    handleEmailBlur,
+    scrollToFirstError,
+    scrollToPaymentSection,
+    setApiError,
+  } = form;
+
   const [gamers, setGamers] = useState<GamerInfo[]>([emptyGamer()]);
   // Default "looking" so submit validation passes without the (removed)
   // Team Status UI. Squad-code joiners override via joiningSquadToken.
   const [squadStatus, setSquadStatus] = useState<SquadStatus>("looking");
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [errors, setErrors] = useState<Array<{ key: string; message: string }>>([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ── Squad-link state (friend arriving via ?squad=TOKEN) ─────────────
   // If the URL has a ?squad=TOKEN and Apps Script confirms the crew, we
@@ -306,39 +320,8 @@ export default function CampsRegisterPage() {
     return "June";
   }
 
-  // Payment state
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
-  const [showPayment, setShowPayment] = useState(false);
-
-  // ── CTA source — landing-page CTA placement that brought the visitor here.
-  // Set by the three CTAs on app/programs/ekuzo-camps/page.tsx and the
-  // sticky bar in components/ui/StickyCTA.tsx, each appending ?cta=hero|
-  // sticky|footer to the register URL. Captured on mount, threaded through
-  // the register POST → Stripe metadata → Beehiiv custom field.
-  const [ctaSource, setCtaSource] = useState<string>("");
-
-  // ── Email-lead capture gate — tracks the last email we POSTed to
-  // /api/camps/lead so onBlur doesn't spam Beehiiv with the same email
-  // on every focus/blur cycle. Comparison is lowercased + trimmed to
-  // match the server-side normalization.
-  const leadFiredForEmailRef = useRef<string>("");
-
-  // ── Capture first-touch UTM params on mount ─────────────────────────
-  // Direct land on /register via an ad URL writes the UTMs to
-  // sessionStorage. If the visitor came via a marketing page that already
-  // captured, this is a no-op (first-touch wins). See lib/attribution.ts.
-  useEffect(() => {
-    captureAttribution();
-    if (typeof window !== "undefined") {
-      const cta = new URLSearchParams(window.location.search).get("cta") || "";
-      // Allow only the three known sources; anything else stays empty so
-      // garbage query params don't pollute Stripe metadata or Beehiiv.
-      if (cta === "hero" || cta === "sticky" || cta === "footer") {
-        setCtaSource(cta);
-      }
-    }
-  }, []);
+  // Payment state, ctaSource, leadFiredForEmailRef + first-touch
+  // attribution capture: now owned by useRegisterForm (see hook).
 
   // ── Load crew-owner record on mount if ?squad=TOKEN is present ─────
   useEffect(() => {
@@ -531,28 +514,8 @@ export default function CampsRegisterPage() {
     // — git history has the exact snippet.
   }
 
-  // ── Email lead capture (onBlur) ─────────────────────────────────────────
-  // Fires once per validated email per session. Posts to /api/camps/lead
-  // which subscribes the email to Beehiiv with `form_started_camps`. The
-  // call is fire-and-forget — failures are swallowed because lead capture
-  // is best-effort and must never block the form. The ref gate is keyed on
-  // email so re-blurring the same field doesn't re-fire, but typing a new
-  // email and blurring does.
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function handleEmailBlur() {
-    const email = parent.email.trim().toLowerCase();
-    if (!email || !EMAIL_RE.test(email)) return;
-    if (leadFiredForEmailRef.current === email) return;
-    leadFiredForEmailRef.current = email;
-    fetch("/api/camps/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    }).catch(() => {
-      // Reset on error so a later blur can retry. Logs land server-side.
-      leadFiredForEmailRef.current = "";
-    });
-  }
+  // Email-lead capture (onBlur) — now owned by useRegisterForm (hook
+  // exposes the same `handleEmailBlur` we used inline before).
 
   // ── Validation ──────────────────────────────────────────────────────────
 
@@ -601,20 +564,7 @@ export default function CampsRegisterPage() {
     const errs = validate();
     if (errs.length > 0) {
       setErrors(errs);
-      // Scroll to and focus the first invalid field. Falls back to top-scroll
-      // for any error key that doesn't have a matching DOM target. Focus is
-      // applied with preventScroll so the smooth visual scroll lands first
-      // and the screen reader announces the field once it's centered.
-      const firstKey = errs[0].key;
-      requestAnimationFrame(() => {
-        const target = document.querySelector<HTMLElement>(`[data-error-key="${firstKey}"]`);
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "center" });
-          target.focus({ preventScroll: true });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      });
+      scrollToFirstError(errs);
       return;
     }
     setErrors([]);
@@ -683,7 +633,7 @@ export default function CampsRegisterPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors([{ key: "_api", message: data.error || "Something went wrong. Please try again." }]);
+        setApiError(data.error || "Something went wrong. Please try again.");
         setIsSubmitting(false);
         return;
       }
@@ -716,13 +666,9 @@ export default function CampsRegisterPage() {
 
       trackInitiateCheckout({ program: "camps", value: totalPrice });
       setIsSubmitting(false);
-
-      // Scroll to payment section
-      setTimeout(() => {
-        document.getElementById("payment-section")?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      scrollToPaymentSection();
     } catch {
-      setErrors([{ key: "_api", message: "Something went wrong. Please try again." }]);
+      setApiError("Something went wrong. Please try again.");
       setIsSubmitting(false);
     }
   }
@@ -763,74 +709,17 @@ export default function CampsRegisterPage() {
 
       {/* ── Hero Section ───────────────────────────────────────────────── */}
       {/* Utility hero: cold paid traffic arrives here past the LP pitch.
-          Eyebrow + tight H1 only. The marketing block that lived here
-          previously (CAMP REGISTRATION wordmark, hero collage, EKUZO100
-          cross-link paragraph) was eating ~700-900px of mobile fold space
-          and contradicting the LP's "act now" energy. Recordings showed
-          5 of 5 ad-driven prospects scrolling past it without typing into
-          a field, then bailing at the week selector. Hero now keeps brand
-          visual identity (grey band + torn-paper transition) but stays
-          short so the email-first capture and week selector land near
-          first paint on the FB/IG in-app browser viewport. */}
-      <section
-        className="relative"
-        style={{
-          overflow: "clip",
-          // Diagonal: warm pink glow in the upper-LEFT, deep purple
-          // bloom in the bottom-RIGHT. Punchy intensity.
-          background:
-            "radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255, 190, 245, 0.80), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(80, 15, 150, 0.85), transparent 60%), #A435F0",
-        }}
-      >
-        <div
-          className="max-w-[1232px] mx-auto px-6 sm:px-10"
-          style={{
-            paddingTop: "48px",
-            // Hero bottom padding capped at 130 desktop / 60 mobile per
-            // Aaron's spec — torn paper image may visually extend above
-            // this padding band, which is the intended look.
-            paddingBottom: "clamp(60px, 9vw, 130px)",
-          }}
-        >
-          <div className="flex flex-col gap-3" style={{ maxWidth: "720px" }}>
-            <Eyebrow variant="light">League of Legends</Eyebrow>
-
-            <h1
-              className="font-display uppercase"
-              style={{ fontSize: "clamp(3.5rem, 6.5vw, 6.5rem)", lineHeight: "0.85" }}
-            >
-              <span style={{ color: "#ffffff" }}>Esports</span>
-              <span style={{ color: "#E0FF4F" }}>Camp</span>
-            </h1>
-
-            {/* Hero supporting copy — short pitch that frames the product
-                for a parent landing cold (e.g., via direct register link). */}
-            <p
-              className="font-body text-white leading-relaxed mt-2"
-              style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)", maxWidth: "640px" }}
-            >
-              Sign up today to level up this summer. Premier esports camps where kids learn from pros how to play, compete, and work as a team.
-            </p>
-          </div>
-        </div>
-
-        {/* White torn paper overlay — sits flush with the bottom of
-            the hero (no translate), so the entire image lives INSIDE
-            the purple. The tear edge is at the top of the image, the
-            bottom is solid white meeting the form section seamlessly.
-            -bottom-px nudges 1px down to absorb a subpixel seam that
-            otherwise showed as a faint hairline above the form. */}
-        <div className="absolute -bottom-px left-0 right-0 z-20 pointer-events-none">
-          <Image
-            src="/images/new%20torn%20paper/torn-paper-white-top-2@2x.png"
-            alt=""
-            width={4320}
-            height={600}
-            className="w-full h-auto block"
-            aria-hidden="true"
-          />
-        </div>
-      </section>
+          Camps gradient is the punchy diagonal — warm-pink upper-left
+          glow into deep purple bottom-right bloom. The shared
+          RegisterHero owns layout (Eyebrow + H1 + subhead + torn-paper
+          white-top) so e100 + teams can swap in their own gradient. */}
+      <RegisterHero
+        background="radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255, 190, 245, 0.80), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(80, 15, 150, 0.85), transparent 60%), #A435F0"
+        eyebrow="League of Legends"
+        title1="Esports"
+        title2="Camp"
+        subhead="Sign up today to level up this summer. Premier esports camps where kids learn from pros how to play, compete, and work as a team."
+      />
 
       {/* Trust strip (15 hours / Code of Conduct / Secure payment /
           Refund) REMOVED 2026-05-19 to lift the form above the fold.
@@ -870,82 +759,27 @@ export default function CampsRegisterPage() {
           )}
 
           {/* Errors — summary list at the top for screen readers / a11y.
-              The page also auto-scrolls to and focuses the first invalid
-              field on submit (see handleSubmit). */}
-          {errors.length > 0 && (
-            <div
-              role="alert"
-              aria-live="polite"
-              className="mb-8 p-5 bg-red/10 border border-red/30 rounded-sm"
-            >
-              {errors.map((e, i) => (
-                <p key={i} className="font-body text-red text-sm mb-1 last:mb-0">
-                  {e.message}
-                </p>
-              ))}
-            </div>
-          )}
+              The form's handleSubmit also auto-scrolls to and focuses
+              the first invalid field via the shared scrollToFirstError. */}
+          <ErrorSummary errors={errors} />
 
           {/* ── Parent contact info (LEADS THE FORM in v2) ──────────────
-              Moved to the top of the form (was previously below Team
-              Status). Captures richer nurture-campaign data for dropoffs
-              than the single-email-first approach v1 used. The email
-              field still fires handleEmailBlur on blur so the existing
-              form_started_camps Beehiiv tag fires the moment a valid
-              email is typed — same behavior the email-first capture
-              had, just sitting alongside name/phone now.
+              Moved to the top of the form 2026-05-19. The email field
+              fires handleEmailBlur on blur so the existing
+              `form_started_camps` Beehiiv tag fires the moment a valid
+              email is typed.
               Note for Jamie: to nurture dropoffs with the richer
               parent.firstName / parent.lastName / parent.phone data,
               /api/camps/lead would need to accept those fields. For
-              now, only email is sent to /api/camps/lead via the email
+              now only email is sent to /api/camps/lead via the email
               onBlur; the additional fields land in Beehiiv only after
               cart-abandoned or successful payment. Quick API extension
               when you're ready. */}
-          <div className="mb-12">
-            <h2
-              className="font-display uppercase text-black leading-[0.85] mb-8"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
-            >
-              Parent Info
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
-              <InputField
-                label="Parent first name *"
-                required
-                errorKey="parent.firstName"
-                value={parent.firstName}
-                onChange={(v) => setParent((p) => ({ ...p, firstName: v }))}
-                placeholder="Enter first name"
-              />
-              <InputField
-                label="Parent last name *"
-                required
-                errorKey="parent.lastName"
-                value={parent.lastName}
-                onChange={(v) => setParent((p) => ({ ...p, lastName: v }))}
-                placeholder="Enter last name"
-              />
-              <InputField
-                label="Email *"
-                type="email"
-                required
-                errorKey="parent.email"
-                value={parent.email}
-                onChange={(v) => setParent((p) => ({ ...p, email: v }))}
-                onBlur={handleEmailBlur}
-                placeholder="your.email@example.com"
-              />
-              <InputField
-                label="Phone number *"
-                type="tel"
-                errorKey="parent.phone"
-                value={parent.phone}
-                onChange={(v) => setParent((p) => ({ ...p, phone: v }))}
-                placeholder="(555) 123-4567"
-              />
-            </div>
-          </div>
+          <ParentInfoSection
+            parent={parent}
+            setParent={setParent}
+            onEmailBlur={handleEmailBlur}
+          />
 
           {/* ── Per-gamer sections ─────────────────────────────────── */}
           {gamers.map((gamer, gi) => (
@@ -1530,52 +1364,24 @@ export default function CampsRegisterPage() {
 
           {/* ── What happens after I pay (NEW v2) ────────────────────
               Kills the post-purchase black box. Three-step preview
-              between Summary and Continue button: immediate receipt
-              → welcome email + Discord invite within 24h → meet coach
-              + squad Day 1. Visible to all viewport sizes; horizontal
-              flow on sm+, stacked on xs. */}
+              between Summary and Continue button. */}
           {!showPayment && (
-            <div className="mb-8">
-              <h3 className="font-body font-bold text-[#0a0a0a] mb-4" style={{ fontSize: "16px", lineHeight: "24px" }}>
-                What happens after you click pay
-              </h3>
-              <ol className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {[
-                  {
-                    step: "1",
-                    title: "Right away",
-                    desc: "Confirmation + payment receipt land in your inbox.",
-                  },
-                  {
-                    step: "2",
-                    title: "Within 24 hours",
-                    desc: "Welcome email with camp details and everything you need to get ready to play.",
-                  },
-                  {
-                    step: "3",
-                    title: "Week before camp",
-                    desc: "Meet your coach and introduction to the rest of the team.",
-                  },
-                ].map((s) => (
-                  <li
-                    key={s.step}
-                    className="bg-[#fafafa] border border-[#e5e7eb] rounded-sm px-4 py-4 flex gap-3 items-start"
-                  >
-                    <span className="shrink-0 w-7 h-7 rounded-full bg-red text-white font-body font-bold flex items-center justify-center text-sm" aria-hidden="true">
-                      {s.step}
-                    </span>
-                    <div className="flex flex-col gap-0.5 min-w-0">
-                      <span className="font-body font-bold text-[#0a0a0a] text-sm leading-tight">
-                        {s.title}
-                      </span>
-                      <span className="font-body text-[#6b7280] text-xs leading-snug">
-                        {s.desc}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+            <PostPaymentSteps
+              steps={[
+                {
+                  title: "Right away",
+                  desc: "Confirmation + payment receipt land in your inbox.",
+                },
+                {
+                  title: "Within 24 hours",
+                  desc: "Welcome email with camp details and everything you need to get ready to play.",
+                },
+                {
+                  title: "Week before camp",
+                  desc: "Meet your coach and introduction to the rest of the team.",
+                },
+              ]}
+            />
           )}
 
           {/* ── CTA Button / Payment Section ─────────────────────── */}
@@ -1591,103 +1397,23 @@ export default function CampsRegisterPage() {
                 {isSubmitting ? "Setting up payment..." : "Continue to payment"}
               </button>
 
-              {/* Reassurance row (NEW v2) — three small trust signals
-                  directly under the Continue button. Replaces the lonely
-                  Terms-of-Service-only line. ToS link still present, just
-                  demoted to a sub-line. */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-                {[
-                  {
-                    label: "Full refund 14+ days out",
-                    icon: (
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.4" />
-                        <path d="M7 4.5V7L8.5 8.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    label: "Code of Conduct enforced",
-                    icon: (
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M7 1.5L11.5 3.5V7C11.5 9.5 9.5 11.5 7 12C4.5 11.5 2.5 9.5 2.5 7V3.5L7 1.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-                        <path d="M5 7L6.5 8.5L9 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    label: "Secured by Stripe",
-                    icon: (
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <rect x="2" y="4.5" width="10" height="7.5" rx="1" stroke="currentColor" strokeWidth="1.4" />
-                        <path d="M4 4.5V3.5A2.5 2.5 0 0 1 9.5 3.5V4.5" stroke="currentColor" strokeWidth="1.4" />
-                      </svg>
-                    ),
-                  },
-                ].map((item) => (
-                  <span key={item.label} className="inline-flex items-center gap-1.5 text-[#6b7280]">
-                    {item.icon}
-                    <span className="font-body text-xs leading-tight">{item.label}</span>
-                  </span>
-                ))}
-              </div>
-
-              <p className="font-body text-black/40 text-center mt-3" style={{ fontSize: "clamp(0.7rem, 1vw, 0.75rem)" }}>
-                By registering you agree to our{" "}
-                <a href="/terms-of-service" className="underline hover:text-black/60">
-                  Terms of Service
-                </a>
-                .
-              </p>
+              {/* Three trust signals + ToS link. */}
+              <ReassuranceRow />
             </>
           ) : clientSecret ? (
-            <div id="payment-section" className="mt-8">
-              <div className="border border-[#e5e7eb] rounded-sm overflow-hidden">
-                <div className="bg-[#0a0a0a] px-6 py-4">
-                  <h3
-                    className="font-display uppercase text-white"
-                    style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
-                  >
-                    Payment
-                  </h3>
-                </div>
-
-                <div className="px-6 py-6">
-                  <Elements
-                    stripe={stripePromise}
-                    options={{
-                      clientSecret,
-                      appearance: {
-                        theme: "stripe",
-                        variables: {
-                          colorPrimary: "#ed2024",
-                          fontFamily: "Inter, system-ui, sans-serif",
-                          borderRadius: "4px",
-                        },
-                      },
-                    }}
-                  >
-                    <CheckoutForm
-                      totalPrice={totalPrice}
-                      paymentIntentId={paymentIntentId}
-                      parentEmail={parent.email}
-                    />
-                  </Elements>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setShowPayment(false);
-                  setClientSecret(null);
-                  setPaymentIntentId(null);
-                }}
-                className="w-full mt-4 font-body text-sm text-black/50 hover:text-black/70 cursor-pointer transition-colors"
-              >
-                &larr; Go back and edit registration
-              </button>
-            </div>
+            <PaymentStep
+              clientSecret={clientSecret}
+              returnUrl={`${
+                process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001"
+              }/programs/ekuzo-camps/success?payment_intent=${paymentIntentId}`}
+              parentEmail={parent.email}
+              payButtonLabel={`Pay $${totalPrice}`}
+              onGoBack={() => {
+                setShowPayment(false);
+                setClientSecret(null);
+                setPaymentIntentId(null);
+              }}
+            />
           ) : null}
 
             </div>{/* end left column (form) */}
@@ -1799,88 +1525,13 @@ export default function CampsRegisterPage() {
   );
 }
 
-// ── Stripe Checkout Form ────────────────────────────────────────────────────
-
-function CheckoutForm({
-  totalPrice,
-  paymentIntentId,
-  parentEmail,
-}: {
-  totalPrice: number;
-  paymentIntentId: string | null;
-  parentEmail: string;
-}) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentError, setPaymentError] = useState<string | null>(null);
-  const [isReady, setIsReady] = useState(false);
-
-  async function handlePayment(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!stripe || !elements) return;
-
-    setIsProcessing(true);
-    setPaymentError(null);
-
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${siteUrl}/programs/ekuzo-camps/success?payment_intent=${paymentIntentId}`,
-        receipt_email: parentEmail,
-      },
-    });
-
-    // If error, the user stays on this page (redirect only happens on success)
-    if (error) {
-      setPaymentError(
-        error.type === "card_error" || error.type === "validation_error"
-          ? error.message || "Payment failed. Please try again."
-          : "An unexpected error occurred. Please try again."
-      );
-      setIsProcessing(false);
-    }
-  }
-
-  return (
-    <form onSubmit={handlePayment}>
-      <PaymentElement
-        onReady={() => setIsReady(true)}
-        options={{
-          layout: "tabs",
-        }}
-      />
-
-      {paymentError && (
-        <div className="mt-4 p-4 bg-red/10 border border-red/30 rounded-sm">
-          <p className="font-body text-red text-sm">{paymentError}</p>
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={!stripe || !elements || isProcessing || !isReady}
-        className="w-full mt-6 font-body font-bold text-white bg-red rounded cursor-pointer hover:brightness-110 active:scale-[0.99] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
-        style={{ fontSize: "18px", lineHeight: "28px", padding: "20px" }}
-      >
-        {isProcessing ? "Processing payment..." : `Pay $${totalPrice}`}
-      </button>
-
-      <div className="flex items-center justify-center gap-2 mt-4">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-black/30">
-          <path d="M8 1C4.13 1 1 4.13 1 8s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 12.5c-3.03 0-5.5-2.47-5.5-5.5S4.97 2.5 8 2.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5z" fill="currentColor"/>
-          <path d="M7 7h2v5H7V7zm0-3h2v2H7V4z" fill="currentColor"/>
-        </svg>
-        <p className="font-body text-black/40 text-sm">
-          Secured by Stripe. Your payment info never touches our servers.
-        </p>
-      </div>
-    </form>
-  );
-}
+// CheckoutForm + InputField moved to components/register/ as part of the
+// Phase 5 shared-UI extraction (see hooks/useRegisterForm.ts +
+// components/register/{CheckoutForm,InputField,PaymentStep}.tsx).
+// SquadCard + SelectField below are pre-existing dead code (Team Status
+// section was removed 2026-05-19; SelectField was never used in camps)
+// — left in place per the "no pre-existing dead-code cleanup during
+// refactor" rule.
 
 // ── Reusable sub-components ─────────────────────────────────────────────────
 
@@ -1948,50 +1599,6 @@ function SquadCard({
         {subtitle}
       </span>
     </button>
-  );
-}
-
-function InputField({
-  label,
-  required,
-  value,
-  onChange,
-  onBlur,
-  type = "text",
-  placeholder,
-  errorKey,
-}: {
-  label: string;
-  required?: boolean;
-  value: string;
-  onChange: (v: string) => void;
-  onBlur?: () => void;
-  type?: string;
-  placeholder?: string;
-  errorKey?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-2" style={errorKey ? { scrollMarginTop: "100px" } : undefined}>
-      <label
-        htmlFor={errorKey}
-        className="font-body font-bold text-[#374151]"
-        style={{ fontSize: "14px", lineHeight: "20px" }}
-      >
-        {label}
-      </label>
-      <input
-        id={errorKey}
-        data-error-key={errorKey}
-        type={type}
-        required={required}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
-        style={{ fontSize: "16px", lineHeight: "normal" }}
-      />
-    </div>
   );
 }
 

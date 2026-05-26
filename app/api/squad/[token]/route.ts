@@ -32,11 +32,14 @@ export async function GET(
     return NextResponse.json({ error: "not_found" }, { status: 404 });
   }
   // hasWeekPassed parses camps-shaped "Month DD-DD" date ranges. E100
-  // cohorts use cohort_month / cohort_label and don't carry that string,
-  // so the check is a no-op for them — accept the owner as upcoming.
+  // cohorts use cohort_month / cohort_label and don't carry that string;
+  // teams cohorts are a single semester per year with no per-row date.
+  // For both, the check is a no-op — accept the owner as upcoming.
   // A future "cohort started already" expiry check can live alongside,
-  // but that's deferred for v1 (no e100 cohort has started yet).
-  if (owner.product !== "ekuzo100" && hasWeekPassed(owner.week_dates)) {
+  // but that's deferred for v1. Legacy rows with no `product` field are
+  // treated as camps per SquadOwner's documented fallback.
+  const productForGate = owner.product ?? "camps";
+  if (productForGate === "camps" && hasWeekPassed(owner.week_dates)) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });
   }
   return NextResponse.json(owner);

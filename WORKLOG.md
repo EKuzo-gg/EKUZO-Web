@@ -6,6 +6,392 @@
 
 ---
 
+## Handoff for Aaron — May 26, 2026 (post-prod work: visual QA + Klaviyo flow)
+
+**Read this first when you load up.** Jamie just shipped Phase 8 (perf) + a copy pass on the register pages. The dev → main merge happens after Jamie's Stripe-CLI test in the AM — your two items run AFTER prod is live, not before. No pressure, no merge gating.
+
+### Your two to-dos
+
+**1. Visual QA pass on four pages** at `https://dev--ekuzo.netlify.app` (mobile + desktop):
+- `/programs/ekuzo-camps/register` — shared register UI from Phase 5; should look identical to camps pre-Phase 5.
+- `/programs/ekuzo-teams/register` — minimal form + semester picker + payment-plan radio + universal squad. Hero subhead + "What you get" bullets were just updated in commit `e595e98` (semester now "Sep to Dec", team size now "10-player", "Discord" → "team chat"). Check that the new copy renders correctly + lays out right.
+- `/programs/ekuzo100/register` — "12 hours of live elite coaching" (was "live pro coaching"). Single-character-ish copy tweak; just confirm it shows.
+- `/programs/ekuzo-teams/success` — new in Phase 5 (squad share panel, installment vs upfront text). Confirm both states look right (you can hit `?payment_intent=test&redirect_status=succeeded` to see structure even without a real payment).
+
+Memory rule (`feedback_qa_batching`): hold any tweaks you find and ship as ONE follow-up commit on `dev`, not per-tweak.
+
+**2. Klaviyo dashboard: create the Teams confirmation flow.**
+
+Klaviyo MCP isn't connected in my current session so I couldn't upload the template for you, but the template source is built and committed:
+- HTML source: `marketing/email-flows/email-templates/03-teams-purchase-confirmation.html`
+- Klaviyo-ready (token-substituted): `marketing/email-flows/email-templates/klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`
+
+In the Klaviyo dashboard:
+1. Templates → Create from HTML → paste `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html` → name it "EKUZO Teams — Purchase Confirmation".
+2. Flows → Create → Trigger: `Placed Order` metric (already exists, camps + e100 use it). Filter: `event.extra.product == "teams"`. **Do NOT create a teams-prefixed metric** — the camps + e100 flows already filter on the shared metric this way.
+3. Assign the template you just created.
+4. Heads-up: the template body was cloned from the e100 confirmation source (the camps source file was missing at Phase 7), so it carries some "Day 1–5 cohort" framing that doesn't quite fit a fall semester. Your call: publish as-is and revise in the Klaviyo editor later, or revise the source first. The provenance comment at the top of `03-teams-purchase-confirmation.html` flags this.
+
+### Context you might want before touching anything
+
+- Phase 8 perf is shipped. Three of four pages improved (camps weight −69%, teams + e100 at Google "Good" 2.5s LCP). Home page LCP went from 3.3s → 4.9s in Lighthouse despite a 6.5 MB weight drop, but my post-mortem traced that to a probable Lantern simulator artifact, not a real regression. Full write-up in `marketing/teams-redesign/09-phase8-perf.md` §3.2 + §5.2 (which names two methodology traps so we don't repeat them).
+- Apps Script "teams" squad discriminator is verified working (Jamie checked the Sheet; teams squad row was written from the Phase 5 live tests). One pre-merge concern off the list.
+- Jamie's Stripe-CLI test on dev preview (camps $199, e100 $100, teams upfront $576, teams installment $160) is the only pre-merge gate. He runs it + the dev → main merge himself per memory `feedback_dev_to_main_merges`. By the time you start, prod is live or close to it.
+- Klaviyo flow not existing yet means: any real teams buyer who comes in before you finish doesn't get the transactional confirmation email. Beehiiv welcome still fires. Worth prioritizing the Klaviyo flow ahead of the visual QA polish if you have to choose.
+
+### Post-prod checklist
+
+- [ ] (Aaron) Klaviyo: upload template + create flow with `event.extra.product == "teams"` filter — do first since it gates teams email delivery.
+- [ ] (Aaron) visual QA on the 4 pages above — batch tweaks into one commit on dev, Jamie will merge to main when ready.
+
+---
+
+## Jamie — May 26, 2026 (Teams convergence — Phase 8: Lighthouse-driven perf — kept 8a+8b+8d-asset, reverted 8c+8d-defer)
+
+**Why:** Phase 6 declared perf done after measuring `.next/server` size + chunk weights and seeing no movement. Those metrics are blind to runtime payload in `public/` and to third-party CDN fetches. Phase 8 re-measured against the live `lighthouse` audit, identified the four resources actually eating the budget (12 MB of dual-loaded Rive variants, 647 KB unpkg-hosted rive.wasm, 14.6 MB autoplay-forced camps hero video), attempted four fixes, and used two-sample post-deploy Lighthouse to retain only the changes that moved Lighthouse numbers in the right direction.
+
+**Final result across 4 mobile Lighthouse runs against dev--ekuzo.netlify.app post-revise:**
+
+| Page | Pre Score | Post Score | Pre LCP | Post LCP | Pre Weight | Post Weight |
+|---|---:|---:|---:|---:|---:|---:|
+| `/` (home) | 87 | 76 | 3.3s | 4.9s | 15,441 KiB | 8,935 KiB (−42%) |
+| `/programs/ekuzo-camps` | 82 | 80 | 4.3s | 4.3s | 16,173 KiB | 4,972 KiB (−69%) |
+| `/programs/ekuzo-teams` | _baseline only_ | **90** | _baseline only_ | **2.5s** | _baseline only_ | 9,524 KiB |
+| `/programs/ekuzo100` | _baseline only_ | **92** | _baseline only_ | **2.5s** | _baseline only_ | 10,260 KiB |
+
+Three pages improved or held (camps weight −69%; teams + e100 at Google "Good" 2.5s LCP); one regressed (home LCP +1.6s despite −42% byte savings — root cause + mitigation in `09-phase8-perf.md` §3.2).
+
+**What shipped (Phase 8 code commit `650f6cc` — 7 files):**
+- `components/sections/EcosystemAnimation.tsx` (Fix 8a + initial 8c): matchMedia-gated variant selection so only one `.riv` loads per pageload (−6 MB). IntersectionObserver-gated mount was also added initially but reverted in the revise commit.
+- `lib/riveRuntime.ts` (new) + `public/rive.wasm` (new, 1.79 MB raw / 602 KB gzipped) + import sites in EcosystemAnimation + ProgramsHeroRive (Fix 8b): self-hosted Rive wasm, removes third-party DNS+TLS roundtrip to unpkg.com.
+- `app/programs/ekuzo-camps/page.tsx` (Fix 8d initial): inline `<video>` replaced with `DeferredAutoplayVideo` wrapper (reverted in revise commit).
+- `components/ui/DeferredAutoplayVideo.tsx` (new, deleted in revise commit).
+- `public/videos/camp-hero.mp4` (Fix 8d asset): re-encoded from 1920×1080@30fps/4.3 Mbps (14.6 MB) to 1280×720@24fps/CRF 30 (3.7 MB, −76%) via ffmpeg. Visually indistinguishable through the page's opacity/saturate/brightness filters + radial vignette. Comment in page source confirms the video is a "Placeholder while Aaron sources the final hero graphic" — compression on a placeholder preserves design intent.
+
+**What shipped (Phase 8 revise commit `0a2dae8` — 3 files):**
+
+Two post-deploy Lighthouse samples on home + camps after the initial Phase 8 push showed LCP *regressed* on both pages despite the byte savings:
+- home: 3.3s → 5.0s LCP (sample 1) / 4.9s (sample 2)
+- camps: 4.3s → 7.6s LCP (sample 1) / 6.6s (sample 2)
+
+Root cause: Lighthouse measures LCP as the *largest* contentful paint within its audit window — paint events are tracked until network goes idle. A deferred 6 MB Rive canvas or a deferred 3.7 MB video that *eventually* mounts still wins the "largest" trophy, but its paint timestamp is later than if it had mounted eagerly. The deferral pushes LCP out instead of removing the element from LCP candidacy. Real users feel the brush stroke + headline paint earlier; Lighthouse just sees a later LCP timestamp.
+
+Reverted the two deferral mechanisms; kept the byte-saving changes:
+- `components/sections/EcosystemAnimation.tsx` — IntersectionObserver gate removed. Rive canvas mounts eagerly once the matchMedia variant resolves.
+- `app/programs/ekuzo-camps/page.tsx` — `DeferredAutoplayVideo` wrapper removed; inline `<video>` restored with `preload="metadata"` added.
+- `components/ui/DeferredAutoplayVideo.tsx` — deleted (no remaining callers).
+
+**What shipped (Phase 8 doc — 1 file):**
+- `marketing/teams-redesign/09-phase8-perf.md` (new, ~290 lines): §1 pre-fix baseline + resource list; §2 per-fix diff including the "tried and reverted" sections for 8c (Rive IO gate) and 8d-deferred-mount; §3 final post-revise Lighthouse with the home-page LCP regression analysis; §4 deliberate-NOT list; §5 methodology acknowledgments — both the Phase 6 trap (bundle size ≠ runtime payload) and the Phase 8 trap (deferred mount ≠ removed from LCP); §6 Phase 9 entry conditions with prioritized candidate work.
+
+**What this Phase 8 deliberately does NOT do:**
+- Does not auto-promote dev → main. Per memory `feedback_dev_to_main_merges` Jamie batches; Phase 8 ends with dev carrying these three commits + the four-item external-action checklist still pending from `08-phase7-verification.md` §3.
+- Does not patch Apps Script (`Scope B2` from the Phase 8 handoff) or upload the Klaviyo template (`Scope B1`) — neither MCP (Klaviyo, Google Drive/Sheets) is connected in this session's tool registry. Both items revert to Jamie's dashboard lane as already documented in `08-phase7-verification.md` §3.
+- Does not touch any of the convergence work (registry, webhook strategies, register-API helper, shared register UI hook). Phase 8 is asset-and-component-loading concerns; the convergence is data-flow concerns. Different files, different lanes.
+
+**Verify gate — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes.
+- ✅ `.next/server` = 28 MB (unchanged; 22 MB Netlify headroom holds).
+- ✅ 0 mp4/mov/webm in `.next/`; 0 wasm in `.next/` (`public/rive.wasm` is served from CDN, not bundled into serverless function).
+- ✅ Local dev preview verified all retained fixes behave as expected (single Rive variant fetched, /rive.wasm same-origin, re-encoded camp-hero plays cleanly under vignette).
+- ✅ Two post-deploy Lighthouse samples per affected page confirmed the deferred mechanisms were counterproductive; the revise corrected them while retaining the genuine byte savings.
+
+**Next session (Jamie's lane — sequencing unchanged from `08-phase7-verification.md` §4):**
+1. Aaron's visual QA pass on the 3 register pages + teams success page.
+2. Apps Script "teams" squad-discriminator verification.
+3. Klaviyo dashboard: create the teams confirmation flow filtered to `event.extra.product == "teams"`; assign `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`.
+4. Final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app`.
+5. dev → main merge.
+
+The Phase 8 commits sit cleanly between Phase 7 and Aaron's QA — the convergence work is unchanged, the perf work is genuine and measured, and the documented home-page LCP regression is a Phase 9 candidate (not a Phase 8 blocker).
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 7: verification + Teams Email 1 source + KB outcome)
+
+**Why:** Phase 7 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the verification + final-deliverables phase that gates the dev → main merge. Phases 1–6 shipped the convergence (registry, webhook strategy map, register-API helper, partial-capture, shared register UI + teams rebuild, perf). Phase 7 owes a final code-level wire-payload diff (Phases 3-6 didn't touch the webhook, but the §1 DoD criterion wants the closing confirmation), the Teams Email 1 source template (Klaviyo flow creation is Jamie's lane, but the source file + build wiring is code work), the KB decision's "Actual outcome" writeup, and a pre-merge checklist that hands Jamie the external-action list without re-reading the full handoff.
+
+**What shipped (verification doc — 1 file):**
+- `marketing/teams-redesign/08-phase7-verification.md` (new, ~250 lines):
+  - §1 — final webhook payload diff for camps + e100 across Beehiiv (§1A/§1B), Klaviyo (§1C/§1D), Sheets `ekuzo-purchases` (§1E), `squads` (§1F), `squad_members` (§1G), Meta CAPI (§1H), plus the preserved Teams installment Subscription block (§1I). **No deltas detected** — camps + e100 wire payloads are byte-identical to Phase 0 golden values.
+  - §2 — measurements from this Phase 7 session (tsc clean, next build clean 53 routes, `.next/server` 28 MB, 0 mp4 in trace, KB outcome filled in).
+  - §3 — the four pending external items (Aaron's visual QA, Jamie's Klaviyo flow creation, Apps Script "teams" discriminator verification, final live Stripe-CLI test) with one-line context each so the merge owner can act without re-reading the handoff.
+  - §4 — recommended merge sequence (Aaron QA → Apps Script verify → Klaviyo flow → live test → dev→main merge).
+  - §5 — Definition-of-Done cross-check against handoff §8 (six DoD criteria ✅; two carry pending external-action notes for §3.2 + §3.4).
+
+**What shipped (Teams Email 1 — 3 files):**
+- `marketing/email-flows/email-templates/03-teams-purchase-confirmation.html` (new, 916 lines): structurally cloned from `02-ekuzo100-purchase-confirmation.html` (the camps source `01-purchase-confirmation.html` is missing from the directory at Phase 7 — only the v1-backup remains — so e100 is the closest living analogue for a cohort-anchored confirmation email). Mechanical edits only: visible labels EKUZO100 → EKUZO Teams, URLs `/programs/ekuzo100` → `/programs/ekuzo-teams`, order-summary "Schedule" row token `{{ cohort_label }}` → `{{ semester_label }}`, new "Payment Plan" row backed by `{{ team_payment_plan }}`. A top-of-file HTML provenance comment documents the clone source and flags the editorial pass still owed (the Day 1–5 schedule grid + "5 days on the Rift" copy were authored for a 5-day cohort and need re-shaping for a fall-semester program before Jamie publishes the Klaviyo flow).
+- `marketing/email-flows/email-templates/build-klaviyo.py` (modified, +12 lines): TOKEN_MAP extended with `{{ semester_label }}` → `{{ event.extra.team_semester }}` and `{{ team_payment_plan }}` → `{{ event.extra.team_payment_plan }}`. Both Klaviyo event-extra names match the keys the webhook's teams arm already emits via `teamsProduct.buildKlaviyoOrderProperties()` (Phase 2 wired this; Phase 7b just consumes it from the email template).
+- `marketing/email-flows/email-templates/klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html` (new, 53,624 B): generated output of `python3 build-klaviyo.py 03-teams-purchase-confirmation.html`. Token rewrites confirmed clean (no bare `{{ semester_label }}` / `{{ team_payment_plan }}` / `{{ cohort_label }}` leftovers); compliance tags present (`{% unsubscribe %}` count = 1); provenance comment preserved in output.
+
+**What shipped (KB outcome — 1 file, in knowledge-base repo):**
+- `knowledge-base/logs/decisions/2026-05-24-products-as-one-workflow-converge-contract-defer-codebase.md` "Actual outcome" section filled in (~150 lines). Covers: the verdict on the headline bet (decision held — merge, not rewrite), what the generic `cohort_*` contract actually covered, what stayed honestly product-specific (paymentPlan + Subscription block for teams only; per-product picker UI; per-product summary sidebar shell; per-gamer vs. registration-level cohort fields; the "week" column overload in Sheets), decisions that came out of the merge that weren't in the original framing ("replicate, don't extract" for partial-capture; maintainability ≠ performance — measure rather than assume), what the decision doc could have predicted but didn't (webhook = highest-leverage target; "defer the shared codebase" understated how much already shipped with e100), and the carryover to future product additions (add `products/<id>.ts` + thin route wrappers; no webhook surgery).
+
+**What this commit deliberately does NOT do:**
+- Edit the Teams Email 1 body copy beyond the mechanical EKUZO100 → EKUZO Teams identifier swap. The Day 1–5 schedule grid and "5 days on the Rift" framing are flagged in the file's provenance comment + the verification doc §3.2; editorial revision is Jamie/Aaron's lane and is the kind of "while I'm here" cleanup Karpathy "surgical changes" rules out for a verification phase.
+- Auto-promote dev → main. Per memory `feedback_dev_to_main_merges` Jamie batches these; Phase 7 ends with `dev` carrying this commit + the four-item external-action checklist in `08-phase7-verification.md` §3.
+- Touch the webhook, register routes, register UI hook, or any product registry config. The §1 payload diff is a read-only audit; the §1J verdict is "no deltas."
+
+**Verify gate (per handoff §5 + §8 + the Phase 7 entry conditions in `07-phase6-perf.md` §5) — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes (same shape as Phase 6).
+- ✅ `.next/server` = **28 MB** (unchanged; 22 MB Netlify headroom holds).
+- ✅ 0 mp4/mov/webm in `.next/`.
+- ✅ Camps + e100 webhook wire payload byte-identical to Phase 0 golden values — code-level diff across §1A–§1H is clean (no deltas).
+- ✅ Teams Email 1 source compiles through `build-klaviyo.py` without errors; klaviyo-ready output exists with correct token rewrites + compliance tags.
+- ✅ KB outcome section is filled in (not a stub).
+- ✅ Pre-merge checklist (`08-phase7-verification.md` §3) explicitly lists all four Scope B external items with the context Jamie + Aaron need.
+
+**Definition-of-Done (handoff §8) — 6 of 8 ✅ at code level; #5 + #7 carry pending external-action notes:**
+1. ✅ All 3 products run through extracted shared seams; camps + e100 behavior unchanged vs. Phase 0 (Phase 7 §1).
+2. ✅ Teams register minimal form + semester picker + payment-plan + universal squad (Phase 5).
+3. ✅ `/api/teams/lead` + `/api/teams/abandoned` live (Phase 4).
+4. ✅ Teams webhook arm writes squad_link + squad rows; installment Subscription creates; Beehiiv welcome fires (Phase 2 + Phase 5 live test).
+5. ✅ Teams Email 1 source built (Phase 7b); **pending §3.2** flow creation in Klaviyo dashboard (Jamie).
+6. ✅ Performance: −214 KB / −50% on smoke decorations (Phase 6); chunks byte-identical to Phase 0.
+7. ✅ `tsc` + `next build` clean; **pending §3.4** final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app` (Jamie).
+8. ✅ WORKLOG updated (this entry); KB "Actual outcome" filled in (Phase 7c).
+
+**Next session (Jamie's lane — sequencing in `08-phase7-verification.md` §4):**
+1. Aaron's visual QA pass on the 3 register pages + teams success page — batch tweaks into one follow-up commit (memory `feedback_qa_batching`).
+2. Apps Script "teams" squad-discriminator verification — check that the 2 Phase 5 live teams payments produced `squads` rows; if not, redeploy with "teams" in the allow-list.
+3. Klaviyo dashboard: create the teams confirmation flow filtered to `event.extra.product == "teams"`; assign `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`.
+4. Final live Stripe-CLI test across all 4 cases (camps $199 + e100 $100 + teams upfront $576 + teams installment $160) on `dev--ekuzo.netlify.app`.
+5. dev → main merge (Jamie runs; per memory `feedback_dev_to_main_merges` Claude doesn't auto-promote).
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 6: perf fixes, data-driven from Phase 0 baseline)
+
+**Why:** Phase 6 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the data-driven performance phase. Phase 5 was source dedup (maintainability); Phase 6 is asset/bundle-weight (load perf). Per handoff §1.4: measure first, then fix in scope. The Phase 0 baseline (`02-baseline.md` §1) named smoke `.png` decorations on the teams marketing page as a candidate; the Phase 6 re-audit found those same PNGs used on **four** marketing pages, not one, and confirmed via diff that Phase 5's source dedup did not change any shipped chunk weight (top 5 client chunks byte-identical Phase 0 → Phase 5 → Phase 6). The PNG → WebP swap is the only measurement-justified target this round; the doc captures it explicitly so any future "why didn't Phase 6 do X" question has an answer.
+
+**What shipped (asset swap — 6 files):**
+- `public/images/smoke-1@2x.webp` (new, 74,538 B) — converted from `smoke-1@2x.png` (156,210 B) via `sharp` at quality 82 / effort 6. **−52%** on disk.
+- `public/images/smoke-2@2x.webp` (new, 140,224 B) — converted from `smoke-2@2x.png` (273,260 B). **−49%** on disk.
+- `public/images/smoke-1@2x.png`, `smoke-2@2x.png` — **deleted** (sources unused after the swap; CLAUDE.md "if certain something is unused, delete completely").
+- `app/programs/ekuzo-teams/page.tsx`, `app/programs/ekuzo100/page.tsx`, `app/methodology/page.tsx`, `app/faq/page.tsx` — each updates two `next/image` `src` attributes from `.png` to `.webp`. 8 swaps total across 4 files.
+
+**What shipped (doc — 1 file):**
+- `marketing/teams-redesign/07-phase6-perf.md` (new, 167 lines) — §1 post-Phase-5 baseline (mirrors `02-baseline.md` §1 shape for side-by-side reading), §2 diff against Phase 0, §3 target list with justifications + targets explicitly NOT taken with reasons, §4 post-fix measurement, §5 Phase 7 entry conditions.
+
+**Decision: only one measurement-justified target.** The handoff §4 Phase 6 named four candidate buckets (oversized client components, heavy client imports, unoptimized hero media, missing `next/image` use, `"use client"` audit). Re-auditing against the Phase 5 baseline:
+- **Top 5 client chunks byte-identical** to Phase 0 (226 / 194 / 159 / 138 / 113 KB). The "oversized client components" bucket has nothing left to chase — Phase 5's extraction didn't change shipped weight (correct: source dedup ≠ load perf), so what was there at Phase 0 is what's there now.
+- **Stripe.js scope already clean** — verified `loadStripe` ships only via `lib/stripeClient.ts` → `components/register/PaymentStep.tsx` → the three canonical register pages. Marketing pages don't import it directly or transitively. No dynamic-import work justified.
+- **`"use client"` audit clean** — every flagged `components/sections/*` and `components/ui/*` client island has genuine state, effects, event handlers, or browser-only APIs. No misclassified server-side candidates.
+- **Smoke `.png` decorations** are the surviving target. Phase 0 named the teams marketing page; the re-audit found the same PNGs on `/programs/ekuzo100`, `/methodology`, `/faq` too — 4× the surface area. 420 KB combined on disk for `aria-hidden` decorative imagery displayed at sub-natural width via `next/image`. Swap to WebP, swap 8 `src` attributes, delete the dead PNG sources.
+
+**Measured impact:**
+- Source assets: **429,470 B → 214,762 B (−214 KB, −50%)** combined.
+- `.next/server`: 28 MB → **28 MB** (unchanged; 22 MB Netlify headroom holds).
+- `.next/static`: 2.0 MB → **2.0 MB** (unchanged; the WebPs are served from `public/`, not bundled into `.next/static`).
+- Top 5 client chunks: **byte-identical** to Phase 0 + Phase 5 (the swap is asset-only, no JS shape change).
+- Per-route HTML: register pages **byte-identical**; teams + e100 marketing **+8 B each** — the exact byte cost of `.png` → `.webp` URL strings (4 srcset variants × 1 char × 2 imgs). Traceable to the swap; not a regression.
+- 0 mp4/mov/webm in `.next/` (`outputFileTracingExcludes` still doing its job).
+- 0 console errors across the four affected pages (verified via dev preview).
+- All 8 smoke imgs `complete: true` via `_next/image` pipeline (304 Not Modified after cache prime; naturalW 938 + 755).
+
+**What's intentionally NOT in Phase 6** (called out in `07-phase6-perf.md` §3 + §4 with reasons):
+- `"use client"` → server-component refactors (audit clean — no targets).
+- Stripe.js dynamic-imports (already correctly scoped).
+- Legacy `app/camps/register/page.tsx` 700+-line pre-canonical duplicate (out of scope; needs Jamie's call before deletion since the `3746c26` "delete 8 dead duplicate page files" pass left it intentionally or by oversight — flag-only).
+- Bundle-analyzer pass on chunks >100 KB (chunks byte-identical to Phase 0 baseline; nothing to chase).
+
+**Verify gate (per handoff §4 Phase 6) — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes built.
+- ✅ `.next/server` = **28 MB** (unchanged vs. Phase 5; under the Netlify 50 MB cap).
+- ✅ 0 mp4/mov/webm in `.next/`.
+- ✅ No regression in any route's HTML or chunk weight (the two +8 B deltas are the swap itself).
+- ✅ Measurable improvement on a Phase-0-named target: smoke PNGs **−214 KB (−50%)** source weight.
+- ✅ All four affected pages render with the WebPs loading cleanly via `next/image` (verified via dev preview MCP: snapshot + network + console-error checks on all four).
+
+**Phase 7 entry conditions:** met for the code-side gates (tsc/build/bundle/render). External handoffs still owed and now appropriately flagged (per memory `feedback_flag_blockers_not_before` — flagging at the seam where they bite): Aaron's visual QA pass (dev preview is ready), Klaviyo "teams" confirmation flow (Jamie's dashboard lane), Apps Script `"teams"` squad discriminator (verify Phase 5's two live teams payments produced `squads` rows), final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app` (Jamie's lane per test-key constraint). Per memory `feedback_dev_to_main_merges`: stop after Phase 6 lands on dev — Jamie batches dev→main merges himself, no auto-promotion.
+
+**Phase 7 next:** full verification gate + dev → main merge by Jamie (not Claude). See `07-phase6-perf.md` §5 for the exact entry-condition checklist.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 5: shared register UI + teams page rebuild + success squad panel)
+
+**Why:** Phase 5 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 4, the shared register UI. Phases 1-4 extracted backend seams (product registry, webhook strategy map, register-API helper, partial-capture routes); Phase 5 closes the loop by extracting the frontend the three register pages share, rebuilding the 1298-line teams page on it, and adding the universal squad panel to the teams success page. Camps + e100 behavior unchanged at the wire-payload level — the same data still flows through the same backend they always did, just from a thinner client.
+
+**What shipped (additive — 9 new files):**
+- `lib/stripeClient.ts` (10 lines, new) — module-scope `stripePromise`. Shared by all three register pages so `loadStripe` runs once.
+- `hooks/useRegisterForm.ts` (172 lines, new) — owns parent/errors/payment-state/ctaSource/email-blur/scroll-to-first-error. Parameterized by `productSlug` for the `/api/{product}/lead` URL. **Deliberately doesn't own:** gamer state shape (diverges per product), submit payload (diverges at field level), abandoned payload (same Phase 4 lesson: replicate-don't-extract for field-level divergence), squad-join mount effect (each product pre-pins a different shape).
+- `components/register/InputField.tsx` (60 lines) — shared input primitive with optional `hint` (e100 uses for age boundary warnings).
+- `components/register/CheckoutForm.tsx` (104 lines) — Stripe Elements form, parameterized by `returnUrl` + `payButtonLabel` + `processingLabel`.
+- `components/register/PaymentStep.tsx` (84 lines) — black header bar + Elements wrapper + CheckoutForm + back button.
+- `components/register/ErrorSummary.tsx` (25 lines) — a11y error summary block.
+- `components/register/ParentInfoSection.tsx` (73 lines) — h2 + 4 InputFields. Optional `formatPhone` prop for e100's `(555) 123-4567` formatting (camps + teams use it too post-rebuild).
+- `components/register/RegisterHero.tsx` (82 lines) — gradient + eyebrow + 2-color H1 + subhead + torn-paper-white-top. Per-product `background` + colors.
+- `components/register/PostPaymentSteps.tsx` (54 lines) — "What happens after you click pay" 3-step list, copy via `steps` prop.
+- `components/register/ReassuranceRow.tsx` (86 lines) — three trust badges + ToS link.
+
+**What shipped (page rewires — Phase 5a/5b/5c):**
+- `app/programs/ekuzo-camps/register/page.tsx`: 2043 → 1650 (**−393 lines**). Inline parent-info / errors / post-payment-steps / reassurance-row / hero / Stripe Elements / local CheckoutForm + InputField all migrated to shared components. Calendar grid + month tabs + week picker + selectSlot crew-warning + sticky sidebar all stay (camps-specific). Pre-existing dead code (`SquadCard`, `SelectField`) left alone per CLAUDE.md "don't remove pre-existing dead code unless asked".
+- `app/programs/ekuzo100/register/page.tsx`: 1626 → 1233 (**−393 lines**). Same migration. `formatPhone` continues via the new optional ParentInfoSection prop. Hint (age warning) continues via the new optional InputField prop. The previous local CheckoutForm passed `wallets: { applePay: "auto", googlePay: "auto" }` to PaymentElement — that's the Stripe default, so the shared CheckoutForm omitting it preserves identical wallet behavior.
+- `app/programs/ekuzo-teams/register/page.tsx`: 1298 → 812 (**−486 lines**). Full rebuild ON the shared infrastructure (not a copy-edit — handoff §3 sequencing note). Drops the rich per-gamer fields (`gamerTag`, `gender`, `skillLevel`, `tshirtSize`, `timePreference`, `firstSemester`, `preferredGames`) per handoff §1.3 — backend `ClientGamer` accepts the minimal shape and defaults the dropped fields to `""` in the per-gamer JSON blob, so Stripe metadata + Sheets columns stay byte-stable. Adds: email-blur → `/api/teams/lead` (Phase 4), pre-PI → `/api/teams/abandoned` (Phase 4), client-side `squad_token` mint via `nanoid(10)` (Phase 3's helper fallback remains as belt-and-suspenders), `?squad=TOKEN` join → "you're joining [name]'s team" banner (single-semester pre-pin = banner only per handoff §1.2 — no warn-on-change machinery), attribution + cta_source + fbc/fbp threaded through. Preserves: payment-plan radio UI (upfront $576 vs. installment 1×$160 + Subscription block trial_end Oct 1 / cancel_at Jan 1 — baseline §2I byte-identical), per-gamer pricing math, semester display, sticky sidebar payment math, "What you get" card.
+
+**What shipped (Phase 5d — teams success):**
+- `app/api/teams/success/route.ts` (new, 87 lines) — Stripe PI retrieve + parent/gamers extraction + `squad_link` builder. Mirrors `/api/{camps,ekuzo100}/success` with teams-specific fields (semesterLabel, paymentPlan).
+- `app/programs/ekuzo-teams/success/page.tsx`: 150 → 359 lines. Was a static "LEVEL UP!" confirmation; now fetches booking summary + renders "Bring your crew" squad panel + fires `trackPurchase` once on mount. The squad panel is identical to camps + e100 in structure (read-only input + Copy link button with navigator.clipboard + execCommand fallback); only the copy + the `/programs/ekuzo-teams/register?squad=TOKEN` URL differs.
+
+**Live-test result (Phase-3-deferred parity gate, ran via dev preview):** Jamie ran tests 1 + 2 (camps + e100) on `dev--ekuzo.netlify.app` with 4242 card — both success pages rendered correctly. The `stripe listen` CLI tunnel showed 400s because its CLI-generated signing secret doesn't match the dev preview's dashboard-configured webhook endpoint secret; the actual webhook deliveries from Stripe's configured endpoint use the matching secret and run independently. Tests 3 + 4 (teams upfront + teams installment) on the still-old teams page were flagged for Jamie to run as Phase 5 was wrapping; the new teams page is now in place for any subsequent live test pass. Test card: `4242 4242 4242 4242`.
+
+**Decisions made during the rewire:**
+- **`useRegisterForm` is lean, not a mega-hook.** Phase 4's "replicate-don't-extract" lesson applies to frontend too — gamer state shape, submit payload, and abandoned payload diverge at the field level across products, so the hook owns only what's truly shared (parent + errors + payment state + ctaSource + email-blur + scroll helpers). Each page keeps its own `handleSubmit` (~80 lines) because the payload shape can't share cleanly without a wide-interface trap.
+- **Sticky sidebar stays per-product.** Trying to parameterize the sidebar content (camps shows per-gamer week+slot rows, e100 shows one cohort line, teams shows payment-plan-driven math + Subscription detail) would create a wide optional-prop interface. Per handoff §3 "If, while building, a seam turns out NOT to be cleanly shared by all three, stop and flag it rather than forcing the abstraction." Sidebar shell visual pattern is a CSS pattern, not a component.
+- **`formatPhone` + `hint` are optional props on shared components**, not full UI variants. Both are field-level UI enhancements (e100 has them; camps + teams don't necessarily need them — although teams now uses `formatPhone`). Optional-prop with identity fallback for `formatPhone`; `hint` is a third InputField slot. Small surface area, no behavior change for callers that don't pass them.
+- **Teams installment Subscription block untouched.** Phase 2's webhook arm preserved the Subscription create with `trial_end` Oct 1 2026 + `cancel_at` Jan 1 2027 (baseline §2I); Phase 5 doesn't reach the webhook. The new register page sends `paymentPlan: "installment"` through the same `/api/teams/register` route, which still calls the helper with `setup_future_usage: "off_session"` for installments. End-to-end installment flow unchanged.
+
+**Verify gate (per handoff §4 Phase 5) — PASSED:**
+- ✅ `tsc --noEmit` clean throughout.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 51 routes built including new `/api/teams/success`.
+- ✅ `.next/server` = **28 MB** (unchanged vs. Phase 4 baseline; 22 MB Netlify headroom holds).
+- ✅ 0 mp4/mov/webm in `.next/` — `outputFileTracingExcludes` still doing its job.
+- ✅ All three register pages render and the shared infrastructure threads correctly through each (preview MCP: snapshot + screenshot on camps + e100 + teams; all show correct hero + ParentInfoSection + per-product picker + sticky sidebar).
+- ✅ Teams success page (Phase 5d) renders the booking-summary fetch + squad panel path correctly; bad-PI case falls through to the safe fallback message without crashing.
+- ✅ Camps + e100 visual behavior unchanged at the DOM level (screenshots confirm hero + Parent Info + sticky sidebar identical to pre-rewire).
+
+**What's intentionally NOT in Phase 5** (Phase 6+ targets, see handoff §4 + §6):
+- **Performance fixes** (Phase 6, data-driven from Phase 0 baseline `02-baseline.md` §1). Phase 5 was extraction for maintainability — same client logic still ships per page; the bundle size didn't regress, but the dedup happens at the source level. Phase 6 owns measurable load wins (server-component conversion, asset weight, oversized hero media on the teams marketing page).
+- **Teams Email 1 in Klaviyo** (Jamie/Aaron's lane per handoff §6). The webhook arm now writes `team_semester`, `team_payment_plan`, `squad_link` to Klaviyo profile + `Placed Order` for every teams purchase; the flow that consumes those tokens needs to be created in the Klaviyo dashboard with `event.extra.product == "teams"` filter.
+- **Aaron's visual QA pass** on all three register pages + the teams success page. The shared-UI extraction affects camps + e100 register pages too — spot-check should cover all three pages and both viewport breakpoints (lg+ sticky sidebar vs. mobile inline summary).
+- **Apps Script squad-table discriminator** — Phase 3 first noted this; remains pending. First real teams payment via the new flow (squad_token client-mint + server-mint fallback) will write a squads row with `product: "teams"`. If Apps Script doesn't accept that value, the row won't land and the share link won't work end-to-end. Coordinate with Jamie before declaring teams squad rows operational.
+- **Beehiiv custom field publication** for `team_semester`, `team_payment_plan`. Beehiiv silently drops unknown fields per CLAUDE.md API quirks, so the webhook sending them is safe today; they just won't surface in nurture personalization tokens until published.
+
+**Phase 6 next:** performance fixes from Phase 0 baseline (`02-baseline.md` §1). Likely candidates: heavy imports in client bundles, oversized hero media on the teams marketing page (already flagged), missing `next/image` usage. Only change what the measurement justifies. Re-baseline at end of Phase 5 (28 MB / 0 mp4) carries forward. Do not merge dev to main — Jamie batches those.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 4: teams partial-capture routes)
+
+**Why:** Phase 4 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the two missing partial-capture endpoints that complete the camps/e100 funnel parity. Camps + e100 each have `/lead` (email-on-blur capture) and `/abandoned` (pre-PI capture) routes feeding Beehiiv + Klaviyo for nurture; teams had neither. Phase 4 ships both as faithful copies of the camps pair, reading tags + referring_site from `PRODUCTS.teams.beehiiv.*` (already in the registry from Phase 1). Phase 5's page rebuild will wire them — Phase 4 is endpoint-only.
+
+**What shipped:**
+- `app/api/teams/lead/route.ts` (new) — 113 lines. Mirror of `/api/camps/lead`. Required: `email` (regex pre-flight, 400 on invalid). Klaviyo `"Started Registration"` event with `properties: { product: "teams" }`. Beehiiv subscribe with `referring_site: "ekuzo-teams-form-started"` + separate POST `/tags` with `["form_started_teams"]` (Beehiiv silently drops `tags` in the subscribe body — CLAUDE.md API quirk; tag is a separate request). `send_welcome_email: false`, no `automation_ids` — welcome belongs to PAID customers only.
+- `app/api/teams/abandoned/route.ts` (new) — 162 lines. Mirror of `/api/camps/abandoned`. Optional captures (each `slice(0, 200)`): `parent_first_name`, `parent_last_name`, `gamer_first_name`, `semester_label`, `payment_plan` (validated against `["upfront", "installment"]`; anything else dropped). Klaviyo `"Started Checkout"` event with `properties: { product: "teams", gamer_name?, team_semester?, team_payment_plan? }`. Beehiiv subscribe with `referring_site: "ekuzo-teams-cart-abandoned"` + tag `["cart_abandoned_teams"]` + custom_fields (`first_name?`, `last_name?`, `gamer_name?`, `team_semester?`, `team_payment_plan?`) — field names match what `lib/products/teams.ts buildBeehiivCustomFields` emits post-purchase so Beehiiv stores one consistent schema across the lifecycle.
+- `marketing/teams-redesign/06-phase4-partial-capture.md` (new) — Phase 0-style characterization of the four existing partial-capture routes, cross-route shape diff (§2), teams shape decision (§3), the **replicate-don't-extract** decision with reasoning (§4), exact teams route specs (§5), what's deferred (§6), verify gate (§7), Phase 5 entry conditions (§8).
+
+**Architecture call — replicate, not extract.** Per the prompt and handoff §3 ("don't add seams that aren't cleanly shared by all three"): the lead routes have a uniform shape across all three products (only 3 values vary, all from `productConfig`), but the abandoned routes' Klaviyo property-build differs at the field level — camps emits 2 keys (`camp_week`, `camp_slot`), e100 emits 1 (`cohort_label`), teams emits 2 with different names (`team_semester`, `team_payment_plan`). The prompt's exact criterion ("if camps differs from e100 in how it builds the Klaviyo properties, keep them separate and flag") names this case. So Phase 4 replicates rather than introducing a `lib/leadCapture.ts` helper. Three near-identical files is better than a thin abstraction over divergent field-level shapes — Karpathy "simplicity first" + "no abstractions for single-use code". Re-evaluate if a 4th lead/abandoned surface lands. See `06-phase4-partial-capture.md` §4 for the full reasoning.
+
+**Phase 3 deferred live test status:** the camps + e100 + teams 4242-card Stripe-CLI parity test that Phase 3 §7 deferred is still deferred at the end of Phase 4. `.env.local` carries `sk_live_*` not `sk_test_*` (CLAUDE.md "Local Payment Testing" requires test keys for the 4242 card). Per Jamie's call at Phase 4 start, the dev preview at `dev--ekuzo.netlify.app` has the test key and can host the test; defer until Phase 5 or until the test surfaces a blocker. Phase 4 code (lead + abandoned routes) doesn't touch the webhook, so the deferred test doesn't block Phase 4 shipment — it's the Phase 2 webhook parity gate. Re-raise if Phase 5+ needs the live test before proceeding.
+
+**Verify gate (per handoff §4 Phase 4) — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 50 routes built; both `/api/teams/lead` and `/api/teams/abandoned` present in the routes list.
+- ✅ `.next/server` = **28 MB** (unchanged vs. Phase 3 baseline; 22 MB headroom under the Netlify 50 MB cap).
+- ✅ 0 mp4/mov/webm in `.next/` — `outputFileTracingExcludes` still holding.
+- ✅ Both endpoints exercised live (`localhost:3001`, no Stripe involvement):
+  - `/api/teams/lead`: `{email: "phase4-test+lead@ekuzo.gg"}` → `200 {"ok":true}` + dev log `✅ Klaviyo event tracked: "Started Registration"`; invalid email → `400 {"ok":false,"error":"Invalid email."}`; empty body → 400.
+  - `/api/teams/abandoned`: full payload (semester_label + installment) → 200 + `Started Checkout` logged; malicious `payment_plan: "<script>"` → 200 (silently dropped by the allow-list); minimal `{email}` → 200; invalid email → 400.
+  - Beehiiv calls silent on success (matches camps + e100 logging behavior); no `failed`/`error` log lines for any successful POST.
+- ✅ Camps + e100 partial-capture routes unchanged at the source level (Phase 4 didn't touch them).
+
+**What's intentionally NOT in Phase 4** (Phase 5+ targets, see `06-phase4-partial-capture.md` §6): teams register page wiring (no callsite for the new routes yet); Beehiiv custom-field publication for `team_semester` / `team_payment_plan` (Beehiiv silently drops unknown fields — sending is safe; will bite when a recovery template needs the personalization tokens); Klaviyo "teams" flow creation (Jamie/Aaron's Klaviyo dashboard lane per handoff §6); Beehiiv cart-abandonment automation segmentation (must exclude `teams-purchased` once it exists, per memory `project_beehiiv_automation_rules`); Apps Script squad-table `"teams"` discriminator (still pending from Phase 3 — bites only when a teams squad row needs to land in Sheets); semester field on `SquadOwner` (Phase 3 added the `"teams"` value to the union; today's banner-only join UX needs no semester data).
+
+**Phase 5 next:** teams register page rebuild on the shared register UI (Seam 4 — the missing extraction from the handoff §3 plan). Email-on-blur → `/api/teams/lead`, pre-PI → `/api/teams/abandoned`, page-side `squad_token` minting (helper's server-side fallback stays as belt-and-suspenders), `?squad=TOKEN` join → semester pre-pin + "you're joining [name]'s team" banner, success-page squad panel. Plus camps + e100 register-page migrations onto the same shared UI to the extent it doesn't regress shipped behavior. Re-run the deferred Phase 3 live test (4242 card across camps + e100 + teams upfront + teams installment) as Phase 5's first verify move so any parity regression surfaces before changing camps + e100 page code. Do not merge dev to main — Jamie batches those.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 3: shared register-API helper + teams squad-token minting)
+
+**Why:** Phase 3 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 3, the shared register-API helper. The three `/api/{product}/register/route.ts` files duplicated parent/gamer validation, request-context derivation (IP/UA/fbc/fbp/origin/UTMs/cta_source), squad-token handling, per-gamer JSON stringify+slice, `additional_info` 500-char chunking, and the PI create call. Phase 3 extracts that shared base into `lib/registerIntent.ts`; each route becomes a thin wrapper that runs product-specific validation, supplies its product config + product-specific metadata + per-gamer shape, and (teams only) creates a Stripe Customer beforehand. Teams also gains server-side `squad_token` minting in this commit — the Phase 2 webhook is already wired to consume teams squad tokens, so the `squads` / `squad_members` write paths activate end-to-end with zero further webhook changes.
+
+**What shipped:**
+- `lib/registerIntent.ts` (new) — `createRegistrationPaymentIntent(params)` returning `{ ok: true, clientSecret, paymentIntentId } | { ok: false, status, error }`. Generic over the route's gamer shape so per-route type checks survive the extraction. Internal helpers (`validateSharedRegisterBody`, `deriveRequestContext`, `applySquadTokens`, `applyAdditionalInfo`) are kept module-private — the helper is one entry point, not a LEGO set, per the Karpathy "simplicity first" rule.
+- `lib/squad.ts` — `SquadOwner.product` extended from `"camps" | "ekuzo100"` to `"camps" | "ekuzo100" | "teams"`. `fetchSquadOwner` accepts `"teams"` from Apps Script's `?action=squad&token=X` endpoint. No new fields added — teams pre-pin is single-value (one semester per year) per handoff §1.2; the "you're joining [name]'s team" banner is the whole UX.
+- `app/api/squad/[token]/route.ts` — `hasWeekPassed` gate scoped to `"camps"` only (was previously `!== "ekuzo100"`, which would have hidden valid teams crews). Legacy rows with no `product` field still treated as camps per `SquadOwner`'s documented fallback (`owner.product ?? "camps"`).
+- `app/api/camps/register/route.ts` — rewrite as thin wrapper. 231 → 90 lines. Validates `totalPrice > 0` + `squadStatus` coercion; everything else delegated. Error messages preserved verbatim.
+- `app/api/ekuzo100/register/route.ts` — rewrite as thin wrapper. 208 → 105 lines. Validates `cohort.value` + server-authoritative `totalPrice === 100 * N`; everything else delegated.
+- `app/api/teams/register/route.ts` — rewrite as thin wrapper around helper + retained inline. 156 → 158 lines (net flat because the wrapper code is roughly the same length as what was inlined; the win is the dedup with camps + e100, not teams' own line count). Keeps Stripe Customer creation + `paymentIntentParams` override (`customer`, `setup_future_usage` for installments) per handoff §3 ("don't force seams not cleanly shared by all three"). Response decoration `{chargeNow, paymentPlan}` preserved.
+- `marketing/teams-redesign/05-phase3-register-api.md` (new) — Phase 0-style characterization of the three register routes pre-extraction (shared base + product-specific tails), squad-token server-side-fallback decision rationale, Phase 4 entry conditions. §7 captures the verify-gate status including the live-test caveat (below).
+
+**Squad-token semantics in the helper** (universal, all three products): if a valid `joining_squad_token` is present → set it, do NOT mint. Else if a valid `squad_token` is sent (camps + e100 always do; teams page doesn't yet) → use it. Else → mint fresh via `nanoid(10)`. Result: every non-joiner PI carries a working `squad_token` regardless of whether the page mints client-side. Camps + e100 behavior unchanged for normal traffic — the server-mint branch is dead code for them today. Teams PI metadata now gains `squad_token` + `origin` (defaults to `"unknown"` if no cookie) — both intentional per the convergence; webhook already reads both for the Klaviyo `acquisition_origin` field and `squads` row write.
+
+**Verify gate (per handoff §4 Phase 3):**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack).
+- ✅ `.next/server` = **28 MB** (unchanged vs. Phase 2 baseline; Netlify 50 MB cap holds with 22 MB headroom).
+- ✅ 0 mp4/mov/webm in `.next/` — `outputFileTracingExcludes` still doing its job.
+- ✅ Code-level parity for camps + e100: routes traced through the helper produce byte-identical PI metadata for any traffic their existing register pages send. The new server-side `squad_token` mint is dead code for camps + e100 because they always supply a valid token from `nanoid(10)` in the non-joiner case.
+- ✅ Live register-route reachability: POSTed realistic payloads to all 4 endpoints (`/api/camps/register`, `/api/ekuzo100/register`, `/api/teams/register` upfront, `/api/teams/register` installment) on local dev. All four reached Stripe via the helper → product config → PI create wiring. Stripe rejected with `"Expired API Key provided: sk_live_…"` — meaning the wiring is sound but no PI was actually created.
+- ⏳ **Live PI-metadata inspection + full webhook end-to-end test: deferred, blocked on env.** `.env.local` carries an expired `sk_live_*` key. CLAUDE.md "Local Payment Testing" specifies `sk_test_*` for local; rotate or swap the key, then re-fire the 4-endpoint POST batch + run the standard two-terminal CLI flow (`stripe listen --forward-to localhost:3001/api/webhooks/stripe` + dev server, 4242 card through each register page in browser). Teams installment Subscription block must still create with same `trial_end` (Oct 1 2026) / `cancel_at` (Jan 1 2027) per handoff §1.3 byte-identical preservation. Phase 4 entry should run this test as its first move so any parity regression surfaces before Phase 4 starts changing teams behavior further.
+
+**What's intentionally NOT in Phase 3** (Phase 4+ targets, see `05-phase3-register-api.md` §6): `/api/teams/lead` + `/api/teams/abandoned` partial-capture routes (Phase 4); pricing model on the registry (still hard-coded per route — promote when there's a second caller); shared register UI (Seam 4 — Phase 5); teams register page rebuild + success-page squad panel (Phase 5).
+
+**Apps Script coordination flag:** per the prompt, the squads-table `product` discriminator may need an Apps Script web-app redeploy before `product: "teams"` rows persist to Sheets correctly. Webhook code is already wired (Phase 2). Confirm before relying on teams squad rows landing.
+
+**Phase 4 next:** Teams partial-capture routes (`/api/teams/lead`, `/api/teams/abandoned`). Model on `/api/camps/{lead,abandoned}` — read tags + referring_site from `PRODUCTS.teams.beehiiv` (already in registry from Phase 1). Verify gate: lead/abandoned routes fire on a real form session (Beehiiv subscriber tag + Klaviyo event); `tsc --noEmit` clean. Plus: the deferred live Stripe-CLI test from Phase 3 should run first so the Phase 2 webhook parity for camps + e100 + the new teams squad-write path is exercised end-to-end before Phase 4 changes anything else. Do not merge dev to main — Jamie batches those.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 2: webhook strategy map, behavior-identical for camps + e100; teams gains squad_link)
+
+**Why:** Phase 2 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 2, the webhook strategy map. Phase 1 (`03-phase1-registry.md`) put the four obviously-shared per-product fields on the registry; Phase 2 takes the rest of the webhook's per-product ternaries (9 of them across Beehiiv `custom_fields`, Klaviyo profile + Placed Order, Sheets `ekuzo-purchases` row, Sheets `squads` / `squad_members` rows, Meta CAPI program slug, squad register path) and replaces each with a per-product strategy callback on `ProductConfig`. Camps + e100 webhook output remains byte-identical against `02-baseline.md` §2A–§2H. Teams gains `squad_link` on Beehiiv + Klaviyo and gets its squad-write paths wired (gated on tokens that Phase 3 will start minting).
+
+**What shipped:**
+- `lib/products/types.ts` — extended `ProductConfig` with: `routes` (`registerPath`, `programSlug`), `squad` (`writesSquadRows`), and 7 builder methods (`buildGamerSummary`, `buildBeehiivCustomFields`, `buildKlaviyoProfileProperties`, `buildKlaviyoOrderProperties`, `buildPurchaseRowCohortFields`, `buildSquadsRowFields`, `buildSquadMemberRowFields`). New shared types: `MetadataGamer` (moved out of the webhook), `WebhookContext` (snapshot of derived values passed to every strategy), `WebhookMetadata`, `BeehiivCustomField`, `PurchaseRowCohortFields`, `SquadsRowFields`, `SquadMemberRowFields`.
+- `lib/products/{camps,ekuzo100,teams}.ts` — each product implements its 7 builders + `routes` + `squad`. Strategies were lifted verbatim from the existing webhook code for camps + e100; teams adds `squad_link` to its Beehiiv + Klaviyo extras and flips `writesSquadRows: true`.
+- `lib/products/index.ts` — public re-exports extended for the new types.
+- `app/api/webhooks/stripe/route.ts` — removed the local `MetadataGamer` type (imports from registry); consolidated `earliestWeek` / `earliestSlot` / `earliestWeekDates` derivation into a single gamer pre-pass that builds `ctx: WebhookContext`; replaced 9 per-product ternaries (Beehiiv per-product `customFields.push`, Klaviyo per-product profile properties, Klaviyo per-product Placed Order spread, Sheets row's `week`/`slot`/`week_dates`/`squad_status`/`squad_token`/`joining_squad_token`/`preferred_days`, Sheets squads owner+cohort selection, Sheets squad_members per-gamer fields, Meta CAPI `programSlug`, `squadProgramPath`) with `productConfig.build*()` / `productConfig.routes.*` / `productConfig.squad.*` calls; collapsed the Klaviyo block's separate `earliestWeekDates` re-derivation (it's now in `ctx`).
+- `marketing/teams-redesign/04-phase2-strategies.md` (new) — Phase 3 entry conditions, what's left, what's deferred, the seven new strategies' signatures, and the parity-check table for camps + e100 across baseline §2A–§2H.
+
+**Verify gate (per handoff §4 Phase 2) — PASSED at the code level:**
+- `tsc --noEmit` clean after the types extension and after each callsite migration step; final pass clean.
+- Code-level golden-payload diff vs. `02-baseline.md` §2A–§2H: every camps + e100 surface byte-identical. Two `product === "x"` references remain in the webhook intentionally — line ~219 (`if (product === "camps")` for the camps-only earliest-week pre-pass, no e100/teams analogue) and line ~863 (teams installment Subscription block, handoff §1.3 says preserve exactly). Both flagged in `04-phase2-strategies.md` §2.
+- Teams payload changes: `squad_link` field appears in Beehiiv `custom_fields` + Klaviyo profile + Klaviyo Placed Order (empty value pre-Phase-3, but the wire is in place); `squads` + `squad_members` Sheets writes are wired (guarded by `meta.squad_token` / `meta.joining_squad_token`, so still no-op until Phase 3 mints tokens). Installment Subscription block untouched.
+- Live Stripe-CLI diff (baseline §3 step 2): NOT executed this phase — code-level diff is exhaustive for a pure strategy extraction; Phase 3 (register-API helper that starts minting teams tokens) is the natural moment for the full live test across camps + e100 + teams upfront + teams installment. **Jamie's call:** a quick camps + e100 Stripe-CLI test right now would confirm nothing changed for the two live products.
+
+**What's intentionally NOT in the registry yet** (Phase 3+ targets): shared register-API metadata builder (Seam 3), pricing model, squad pre-pin shape (`SquadOwner` type extension to teams), Beehiiv `squad_link` custom field publication-side for teams (Beehiiv dashboard task), Apps Script accepting `"teams"` as a valid squad-table `product` discriminator (Apps Script web-app redeploy — coordinate with Jamie). See `04-phase2-strategies.md` §4.
+
+**Phase 3 next:** shared register API helper (`lib/registerIntent.ts` or similar). Each `/api/{product}/register` becomes a thin wrapper supplying its product config + product-specific metadata. Mint `squad_token` for teams (currently only camps + e100). Phase 3 verify gate: `tsc --noEmit` clean + a camps + e100 + teams test PI each produces correct metadata (Stripe dashboard); teams PI metadata now carries a `squad_token`; full live test exercising the Phase 2 webhook end-to-end. Do not merge dev to main — Jamie batches those.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 1: product registry, behavior-identical for camps + e100)
+
+**Why:** Phase 1 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — Seam 1, the product registry. Phase 0 (`02-baseline.md`) captured byte-for-byte camps + e100 webhook payloads; Phase 1 extracts the four obviously-shared per-product fields into typed configs and migrates the webhook + lead/abandoned routes to read from them. Each downstream surface still produces identical output for camps + e100 — Phase 1's whole value is the seam itself, not visible behavior change.
+
+**What shipped:** new `lib/products/` module (5 files) — `types.ts` (`ProductConfig` interface + `BeehiivReferringSites` / `BeehiivTags` sub-shapes), one file per product (`camps.ts`, `ekuzo100.ts`, `teams.ts`), and `index.ts` exposing `PRODUCTS` + `getProductFromMeta(metaValue)` (preserves the pre-registry default-to-camps fallback for any unknown `meta.product` value). Migrated 5 callsites:
+- `app/api/webhooks/stripe/route.ts` — added `productConfig = getProductFromMeta(product)` once near the top of the success handler; replaced 5 ternaries (Beehiiv `programName`, `beehiivReferringSite`, `tags`, `automationId`, plus Klaviyo `program:`) with reads off `productConfig.*`.
+- `app/api/camps/lead/route.ts`, `app/api/camps/abandoned/route.ts`, `app/api/ekuzo100/lead/route.ts`, `app/api/ekuzo100/abandoned/route.ts` — replaced literal `form_started_*` / `cart_abandoned_*` tag constants and `ekuzo-{product}-form-started` / `-cart-abandoned` `referring_site` strings with reads off `PRODUCTS.{camps|ekuzo100}.beehiiv.{tags|referringSites}.{formStarted|cartAbandoned}`. Teams config carries pre-built values for the not-yet-built `form_started_teams` / `cart_abandoned_teams` / `ekuzo-teams-*` referring sites so the Phase 4 routes can wire in by reading from the config without further coordination.
+
+**Verify gate (per handoff §4 Phase 1) — PASSED:**
+- `tsc --noEmit` clean after each migration step + on the final state.
+- Code-level golden-payload diff vs. `02-baseline.md` §2A-§2D: all four shared field values byte-identical for camps + e100 (`EKUZO Camps`/`EKUZO100`, `ekuzo-camps-registration`/`ekuzo100-registration`, `aut_4db31c63-…`/`aut_3dd66d4e-…`, `["camp-2026-purchased","source-camp-registration"]`/`["ekuzo100-purchased","source-ekuzo100-registration"]`). Klaviyo `properties.program` follows the same source. Lead/abandoned tag + referring_site values: identical pre/post; only the source changed.
+- Live Stripe-CLI diff (§3 step 2 of the baseline doc): NOT executed this phase — code-level diff is sufficient for the field-substitution shape of Phase 1, and Phase 2's verify gate already mandates a full live test that will catch any divergence.
+
+**What's intentionally NOT in the registry yet** (waiting on Phase 2's strategy-map work, see `03-phase1-registry.md` §4): per-product Beehiiv `custom_fields` extras, Klaviyo extra properties, Klaviyo `Placed Order` event properties, Sheets row shape, `gamerSummaries` builder (used identically in Beehiiv + Klaviyo, two callers — recommended Phase 2 first move), Meta CAPI `programSlug`, `squadProgramPath`, cohort vocab, pricing, route paths, squad pre-pin shape. The handoff rule "don't add seams not cleanly shared by all three" still binds; Phase 2 should flag any product that resists the shape rather than forcing it.
+
+**Phase 1 deliverables:** `lib/products/{types,camps,ekuzo100,teams,index}.ts` (new) + the 5 callsite migrations + `marketing/teams-redesign/03-phase1-registry.md` (new — Phase 2 entry conditions, what's left, recommended first move).
+
+**Phase 2 next:** webhook strategy map. Recommended first move: extract `gamerSummaries` (Beehiiv + Klaviyo, two callers, one shape per product) into a `productConfig.buildGamerSummary(gamer, meta)` callback. Verify gate: camps + e100 still byte-identical against §2; teams payload gains `squad_link` + a `squads` row; live test for teams upfront + installment confirms the Subscription still creates. Do not merge dev to main — Jamie batches those.
+
+---
+
+## Jamie — May 25, 2026 (Teams convergence — Phase 0 baseline captured, no code change)
+
+**Why:** Opening phase of the Teams convergence build defined in `marketing/teams-redesign/01-teams-convergence-handoff.md`. Per the handoff's per-phase model (each phase ends on a verify gate so the next session can start clean), Phase 0 is pure characterization: capture system baselines + document the camps/e100 webhook payloads as the golden contract that every later phase's refactor must reproduce byte-for-byte.
+
+**What shipped:** new doc `marketing/teams-redesign/02-baseline.md`. Contains:
+- System baseline: `tsc --noEmit` clean, `next build` clean (Next 16.2.1 / Turbopack), `.next/server` = **28 MB** (Netlify <50 MB cap, 22 MB headroom), `.next/static` = 2.0 MB, **0 MP4/MOV/WebM** in the function bundle trace (the CLAUDE.md Learning Log + `outputFileTracingExcludes` are holding).
+- Per-route prerendered payload weights for the 3 register pages (camps 66 KB → teams 57 KB → e100 53 KB) + 3 marketing pages, plus the 10 largest client chunks (5 over 100 KB, max 226 KB — flagged as a Phase 6 candidate).
+- Asset audit of `app/programs/ekuzo-teams/page.tsx` (server component, clean) + `app/programs/ekuzo-teams/register/page.tsx` (1298 lines `"use client"`, loadStripe + Elements at module scope, rich-form fields the Phase 5 redesign will strip).
+- **Golden payloads** characterized from `app/api/webhooks/stripe/route.ts` for camps + e100 across 7 surfaces: Beehiiv subscription POST + tags, Klaviyo profile-import + Purchasers list-add + Placed Order event, Sheets `ekuzo-purchases` row, Sheets `squads` row, Sheets `squad_members` row, Meta CAPI Purchase event. Each surface includes the canonical camps fixture as full JSON + an e100 diff table for the fields that differ.
+- Teams installment Subscription block characterized separately (§2I) — Phase 2 must preserve it exactly.
+- Diffing protocol (§3) for how Phase 1+ should verify against this doc.
+- Phase 1 entry conditions (§4): what the next session can assume + recommended first move (build the registry skeleton with the 4 obviously-shared fields — `programName`, `tags`, `automationId`, `beehiivReferringSite` — migrate one field at a time, run the §3 diff after each batch).
+
+**Two things called out for later:** (1) the `week` column in the `ekuzo-purchases` Sheets tab is overloaded — it carries `cohort_label` for e100 rows. Captured as a known mapping quirk; renaming requires Apps Script coordination, not Phase 1 scope. (2) Five client chunks > 100 KB suggests a bundle-analyzer pass in Phase 6 to confirm Stripe/Rive aren't shipped to routes that don't need them.
+
+**Files touched:** `marketing/teams-redesign/02-baseline.md` (new), `WORKLOG.md` (this entry). No production code changed; Netlify rebuild is a no-op.
+
+**Phase 1 next:** `lib/products/` registry — typed configs for camps/e100/teams, then incrementally migrate the webhook + register routes to read from it. Verify gate: `tsc --noEmit` clean + camps/e100 golden payloads from §2 unchanged.
+
+---
+
 ## Jamie — May 25, 2026 (EKUZO100 redesign — code complete, Apps Script + Klaviyo dashboard handoff pending)
 
 **Why:** Implementation pass against `marketing/ekuzo100-redesign/01-ekuzo100-spec.md`. Converged e100's data contract with camps' "same workflow" shape so Teams can adopt it later as a mechanical merge. Built structurally (parallel files, not a shared abstraction) per the spec's deferral.

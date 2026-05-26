@@ -187,7 +187,7 @@ export default function FAQPage() {
 
         {/* Smoke graphics */}
         <Image
-          src="/images/smoke-1@2x.png"
+          src="/images/smoke-1@2x.webp"
           alt=""
           width={800}
           height={1000}
@@ -195,7 +195,7 @@ export default function FAQPage() {
           aria-hidden="true"
         />
         <Image
-          src="/images/smoke-2@2x.png"
+          src="/images/smoke-2@2x.webp"
           alt=""
           width={800}
           height={1200}

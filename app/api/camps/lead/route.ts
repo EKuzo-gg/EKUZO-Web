@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { trackKlaviyoEvent } from "@/lib/klaviyo";
+import { PRODUCTS } from "@/lib/products";
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY!;
 const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID!;
 
-const FORM_STARTED_TAG = "form_started_camps";
+// Sourced from lib/products registry (Phase 1) — single source of truth
+// for camps Beehiiv tags + referring sites across lead / abandoned /
+// webhook surfaces.
+const FORM_STARTED_TAG = PRODUCTS.camps.beehiiv.tags.formStarted;
+const REFERRING_SITE = PRODUCTS.camps.beehiiv.referringSites.formStarted;
 
 // Loose RFC-5322-ish check. The Beehiiv API does its own validation; this
 // is just a cheap pre-flight so we don't make an API call for "x".
@@ -70,7 +75,7 @@ export async function POST(req: NextRequest) {
             email,
             reactivate_existing: true,
             send_welcome_email: false,
-            referring_site: "ekuzo-camps-form-started",
+            referring_site: REFERRING_SITE,
           }),
         }
       );
