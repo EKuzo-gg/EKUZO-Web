@@ -8,6 +8,7 @@ import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
+  buildFAQPageSchema,
   buildVideoObjectSchema,
 } from "@/lib/schema";
 import Link from "next/link";
@@ -25,6 +26,43 @@ const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
 const DATE_MODIFIED = "2026-05-24";
+
+// FAQPage schema — the post's statement-shaped H2s ("They get more upset…")
+// don't extract well as standalone Q&A, so we lift the load-bearing parent
+// questions out of the body into explicit Q→A pairs. Answers are plain text
+// (no HTML) so every crawler parses them identically. The five questions are
+// the ones a parent searching for one of these signals is most likely to type
+// — keep them faithful to the post; no new claims.
+const FAQ_ITEMS = [
+  {
+    question:
+      "Why does my kid rage or melt down when they lose a video game?",
+    answer:
+      "Often the size of the reaction reflects the size of what's riding on it — the game may be where they feel status, competence, or belonging, and a loss threatens that. The useful question isn't why they care so much, it's what they're carrying into the match, and whether they can recover, name what went wrong, and come back calmer. That's the signal worth watching, and it's something a coached, structured setting is built to work on.",
+  },
+  {
+    question:
+      "My kid plays for hours but can't say what they're working on — should I worry?",
+    answer:
+      "Long hours without a sense of progress usually means the effort is there but no one has shown them how to practice, not that they're lazy. Watch for whether any curiosity to improve shows up when you ask. A kid reaching for improvement with no map looks aimless until someone hands them one — which is what coaching provides.",
+  },
+  {
+    question: "Why is logging off such a fight?",
+    answer:
+      "Sometimes it's simple impulse and worth taking seriously on its own terms. Other times the game was the one place that felt active and social all day, so leaving lands like being pulled out of the only room where something was happening. Watch the shape of the resistance: a kid who can't stop anything points toward impulse; a kid who's fine putting most things down but goes to war over this one usually points toward meaning.",
+  },
+  {
+    question:
+      "My kid has online friends but seems disconnected in person — is that real friendship?",
+    answer:
+      "The connection is usually real — most teen gamers play with others and many have made a friend through a game. The question is whether any of it survives the game closing: do the friends have names, do the same ones show up again, is your kid building something with anyone. A real social thread you can't see is very different from no social thread at all.",
+  },
+  {
+    question: "Should I respond with less gaming, or with more structure?",
+    answer:
+      "For most kids the answer is rarely 'less gaming' or 'more gaming' — both miss what's going on. What tends to help is a better container around the thing they already care about: a team, a coach, a rhythm to the week, and a culture set by adults. One honest caveat: if gaming comes with real withdrawal from people, sleep or school falling apart, or a low mood that doesn't lift, talk to a pediatrician or counselor first.",
+  },
+];
 
 // Spoken transcript of Karlin's "DAY 4" founder reel. Inlined as a string
 // literal — no fs access (see lib/schema.ts note). Spoken audio only; the
@@ -76,6 +114,7 @@ export default function PostGamingHiddenMeaning() {
     image: SHARE_IMAGE,
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE_DISPLAY);
+  const faqSchema = buildFAQPageSchema(FAQ_ITEMS);
   const videoSchema = buildVideoObjectSchema({
     pageSlug: SLUG,
     name: "DAY 4 — Karlin on why he started EKUZO",
@@ -91,6 +130,7 @@ export default function PostGamingHiddenMeaning() {
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
       <JsonLd data={videoSchema} />
 
       <div className="absolute top-0 left-0 right-0 z-20">
@@ -516,6 +556,13 @@ export default function PostGamingHiddenMeaning() {
                 more confidence, more sign that the interest has somewhere
                 good to go.
               </p>
+              <h2>Common questions parents ask about all this</h2>
+              {FAQ_ITEMS.map((item) => (
+                <p key={item.question}>
+                  <strong>{item.question}</strong> {item.answer}
+                </p>
+              ))}
+
               <p className="text-right">— Karlin, founder of EKUZO</p>
             </BlogContent>
           </div>
