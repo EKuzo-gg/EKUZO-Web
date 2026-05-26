@@ -184,7 +184,7 @@ export default function KarlinOeiAuthorPage() {
                   play actually looks like.
                 </p>
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
-                  Karlin's mission is to help making gaming matters in the
+                  Karlin's mission is to help making gaming matter in the
                   lives of students and the people that support them.
                 </p>
                 <blockquote className="font-body italic text-black text-lg leading-[1.5] border-l-4 border-red pl-5">
