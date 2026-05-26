@@ -53,6 +53,18 @@ TOKEN_MAP = {
     # (schedule string in the confirmation email), different shape
     # (month-anchored cohort vs single-week unit).
     "{{ cohort_label }}": "{{ event.extra.cohort_label }}",
+    # semester_label (teams): single-value cohort string built by the
+    # teams register-page semester picker (e.g. "Fall 2026"). The
+    # teams counterpart to camps' camp_week_dates and e100's
+    # cohort_label — same role (cohort string in the confirmation
+    # email's order summary), different shape (single semester
+    # vs. week/cohort).
+    "{{ semester_label }}": "{{ event.extra.team_semester }}",
+    # team_payment_plan (teams): "upfront" or "installment", set by
+    # the teams register-page payment-plan toggle and forwarded as
+    # the Klaviyo event extra `team_payment_plan` by the Stripe
+    # webhook for Placed Order events where product==="teams".
+    "{{ team_payment_plan }}": "{{ event.extra.team_payment_plan }}",
     "{{ value }}": "{{ event.extra.value }}",
     "{{ order_id }}": "{{ event.extra.order_id }}",
     "{{ squad_link }}": "{{ event.extra.squad_link }}",

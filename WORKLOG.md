@@ -6,6 +6,60 @@
 
 ---
 
+## Jamie — May 25, 2026 (Teams convergence — Phase 7: verification + Teams Email 1 source + KB outcome)
+
+**Why:** Phase 7 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the verification + final-deliverables phase that gates the dev → main merge. Phases 1–6 shipped the convergence (registry, webhook strategy map, register-API helper, partial-capture, shared register UI + teams rebuild, perf). Phase 7 owes a final code-level wire-payload diff (Phases 3-6 didn't touch the webhook, but the §1 DoD criterion wants the closing confirmation), the Teams Email 1 source template (Klaviyo flow creation is Jamie's lane, but the source file + build wiring is code work), the KB decision's "Actual outcome" writeup, and a pre-merge checklist that hands Jamie the external-action list without re-reading the full handoff.
+
+**What shipped (verification doc — 1 file):**
+- `marketing/teams-redesign/08-phase7-verification.md` (new, ~250 lines):
+  - §1 — final webhook payload diff for camps + e100 across Beehiiv (§1A/§1B), Klaviyo (§1C/§1D), Sheets `ekuzo-purchases` (§1E), `squads` (§1F), `squad_members` (§1G), Meta CAPI (§1H), plus the preserved Teams installment Subscription block (§1I). **No deltas detected** — camps + e100 wire payloads are byte-identical to Phase 0 golden values.
+  - §2 — measurements from this Phase 7 session (tsc clean, next build clean 53 routes, `.next/server` 28 MB, 0 mp4 in trace, KB outcome filled in).
+  - §3 — the four pending external items (Aaron's visual QA, Jamie's Klaviyo flow creation, Apps Script "teams" discriminator verification, final live Stripe-CLI test) with one-line context each so the merge owner can act without re-reading the handoff.
+  - §4 — recommended merge sequence (Aaron QA → Apps Script verify → Klaviyo flow → live test → dev→main merge).
+  - §5 — Definition-of-Done cross-check against handoff §8 (six DoD criteria ✅; two carry pending external-action notes for §3.2 + §3.4).
+
+**What shipped (Teams Email 1 — 3 files):**
+- `marketing/email-flows/email-templates/03-teams-purchase-confirmation.html` (new, 916 lines): structurally cloned from `02-ekuzo100-purchase-confirmation.html` (the camps source `01-purchase-confirmation.html` is missing from the directory at Phase 7 — only the v1-backup remains — so e100 is the closest living analogue for a cohort-anchored confirmation email). Mechanical edits only: visible labels EKUZO100 → EKUZO Teams, URLs `/programs/ekuzo100` → `/programs/ekuzo-teams`, order-summary "Schedule" row token `{{ cohort_label }}` → `{{ semester_label }}`, new "Payment Plan" row backed by `{{ team_payment_plan }}`. A top-of-file HTML provenance comment documents the clone source and flags the editorial pass still owed (the Day 1–5 schedule grid + "5 days on the Rift" copy were authored for a 5-day cohort and need re-shaping for a fall-semester program before Jamie publishes the Klaviyo flow).
+- `marketing/email-flows/email-templates/build-klaviyo.py` (modified, +12 lines): TOKEN_MAP extended with `{{ semester_label }}` → `{{ event.extra.team_semester }}` and `{{ team_payment_plan }}` → `{{ event.extra.team_payment_plan }}`. Both Klaviyo event-extra names match the keys the webhook's teams arm already emits via `teamsProduct.buildKlaviyoOrderProperties()` (Phase 2 wired this; Phase 7b just consumes it from the email template).
+- `marketing/email-flows/email-templates/klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html` (new, 53,624 B): generated output of `python3 build-klaviyo.py 03-teams-purchase-confirmation.html`. Token rewrites confirmed clean (no bare `{{ semester_label }}` / `{{ team_payment_plan }}` / `{{ cohort_label }}` leftovers); compliance tags present (`{% unsubscribe %}` count = 1); provenance comment preserved in output.
+
+**What shipped (KB outcome — 1 file, in knowledge-base repo):**
+- `knowledge-base/logs/decisions/2026-05-24-products-as-one-workflow-converge-contract-defer-codebase.md` "Actual outcome" section filled in (~150 lines). Covers: the verdict on the headline bet (decision held — merge, not rewrite), what the generic `cohort_*` contract actually covered, what stayed honestly product-specific (paymentPlan + Subscription block for teams only; per-product picker UI; per-product summary sidebar shell; per-gamer vs. registration-level cohort fields; the "week" column overload in Sheets), decisions that came out of the merge that weren't in the original framing ("replicate, don't extract" for partial-capture; maintainability ≠ performance — measure rather than assume), what the decision doc could have predicted but didn't (webhook = highest-leverage target; "defer the shared codebase" understated how much already shipped with e100), and the carryover to future product additions (add `products/<id>.ts` + thin route wrappers; no webhook surgery).
+
+**What this commit deliberately does NOT do:**
+- Edit the Teams Email 1 body copy beyond the mechanical EKUZO100 → EKUZO Teams identifier swap. The Day 1–5 schedule grid and "5 days on the Rift" framing are flagged in the file's provenance comment + the verification doc §3.2; editorial revision is Jamie/Aaron's lane and is the kind of "while I'm here" cleanup Karpathy "surgical changes" rules out for a verification phase.
+- Auto-promote dev → main. Per memory `feedback_dev_to_main_merges` Jamie batches these; Phase 7 ends with `dev` carrying this commit + the four-item external-action checklist in `08-phase7-verification.md` §3.
+- Touch the webhook, register routes, register UI hook, or any product registry config. The §1 payload diff is a read-only audit; the §1J verdict is "no deltas."
+
+**Verify gate (per handoff §5 + §8 + the Phase 7 entry conditions in `07-phase6-perf.md` §5) — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes (same shape as Phase 6).
+- ✅ `.next/server` = **28 MB** (unchanged; 22 MB Netlify headroom holds).
+- ✅ 0 mp4/mov/webm in `.next/`.
+- ✅ Camps + e100 webhook wire payload byte-identical to Phase 0 golden values — code-level diff across §1A–§1H is clean (no deltas).
+- ✅ Teams Email 1 source compiles through `build-klaviyo.py` without errors; klaviyo-ready output exists with correct token rewrites + compliance tags.
+- ✅ KB outcome section is filled in (not a stub).
+- ✅ Pre-merge checklist (`08-phase7-verification.md` §3) explicitly lists all four Scope B external items with the context Jamie + Aaron need.
+
+**Definition-of-Done (handoff §8) — 6 of 8 ✅ at code level; #5 + #7 carry pending external-action notes:**
+1. ✅ All 3 products run through extracted shared seams; camps + e100 behavior unchanged vs. Phase 0 (Phase 7 §1).
+2. ✅ Teams register minimal form + semester picker + payment-plan + universal squad (Phase 5).
+3. ✅ `/api/teams/lead` + `/api/teams/abandoned` live (Phase 4).
+4. ✅ Teams webhook arm writes squad_link + squad rows; installment Subscription creates; Beehiiv welcome fires (Phase 2 + Phase 5 live test).
+5. ✅ Teams Email 1 source built (Phase 7b); **pending §3.2** flow creation in Klaviyo dashboard (Jamie).
+6. ✅ Performance: −214 KB / −50% on smoke decorations (Phase 6); chunks byte-identical to Phase 0.
+7. ✅ `tsc` + `next build` clean; **pending §3.4** final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app` (Jamie).
+8. ✅ WORKLOG updated (this entry); KB "Actual outcome" filled in (Phase 7c).
+
+**Next session (Jamie's lane — sequencing in `08-phase7-verification.md` §4):**
+1. Aaron's visual QA pass on the 3 register pages + teams success page — batch tweaks into one follow-up commit (memory `feedback_qa_batching`).
+2. Apps Script "teams" squad-discriminator verification — check that the 2 Phase 5 live teams payments produced `squads` rows; if not, redeploy with "teams" in the allow-list.
+3. Klaviyo dashboard: create the teams confirmation flow filtered to `event.extra.product == "teams"`; assign `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`.
+4. Final live Stripe-CLI test across all 4 cases (camps $199 + e100 $100 + teams upfront $576 + teams installment $160) on `dev--ekuzo.netlify.app`.
+5. dev → main merge (Jamie runs; per memory `feedback_dev_to_main_merges` Claude doesn't auto-promote).
+
+---
+
 ## Jamie — May 25, 2026 (Teams convergence — Phase 6: perf fixes, data-driven from Phase 0 baseline)
 
 **Why:** Phase 6 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the data-driven performance phase. Phase 5 was source dedup (maintainability); Phase 6 is asset/bundle-weight (load perf). Per handoff §1.4: measure first, then fix in scope. The Phase 0 baseline (`02-baseline.md` §1) named smoke `.png` decorations on the teams marketing page as a candidate; the Phase 6 re-audit found those same PNGs used on **four** marketing pages, not one, and confirmed via diff that Phase 5's source dedup did not change any shipped chunk weight (top 5 client chunks byte-identical Phase 0 → Phase 5 → Phase 6). The PNG → WebP swap is the only measurement-justified target this round; the doc captures it explicitly so any future "why didn't Phase 6 do X" question has an answer.
