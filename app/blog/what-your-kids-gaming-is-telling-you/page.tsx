@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
@@ -27,42 +28,146 @@ const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
 const DATE_MODIFIED = "2026-05-24";
 
-// FAQPage schema — the post's statement-shaped H2s ("They get more upset…")
-// don't extract well as standalone Q&A, so we lift the load-bearing parent
-// questions out of the body into explicit Q→A pairs. Answers are plain text
-// (no HTML) so every crawler parses them identically. The five questions are
-// the ones a parent searching for one of these signals is most likely to type
-// — keep them faithful to the post; no new claims.
-const FAQ_ITEMS = [
+// FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
+// don't extract well as standalone Q&A, so we surface six parent-shaped
+// questions the article raises and answer each one. Items can mix
+// paragraphs and bullet lists for the visible render; flattenFAQAnswer
+// joins them to a plain string for the FAQPage JSON-LD, which only
+// accepts plain text.
+type FAQAnswerBlock =
+  | { kind: "p"; text: string }
+  | { kind: "list"; items: string[] };
+
+type FAQItem = {
+  question: string;
+  answer: FAQAnswerBlock[];
+};
+
+const FAQ_ITEMS: FAQItem[] = [
   {
-    question:
-      "Why does my kid rage or melt down when they lose a video game?",
-    answer:
-      "Often the size of the reaction reflects the size of what's riding on it. The game may be where they feel status, competence, or belonging, and a loss threatens that. The useful question isn't why they care so much, it's what they're carrying into the match, and whether they can recover, name what went wrong, and come back calmer. That's the signal worth watching, and it's something a coached, structured setting is built to work on.",
+    question: "Is my child's gaming trying to tell me something?",
+    answer: [
+      { kind: "p", text: "Often, yes." },
+      {
+        kind: "p",
+        text: "Gaming can look simple from the outside: they play, they win, they lose, they get loud, they get quiet, they ask for more time. But underneath that behavior, the game may be giving them something important: challenge, progress, identity, friendship, confidence, or a place where they feel capable.",
+      },
+      {
+        kind: "p",
+        text: "Two things matter: how much they're playing, and what role gaming is playing for them.",
+      },
+    ],
   },
   {
-    question:
-      "My kid plays for hours but can't say what they're working on. Should I worry?",
-    answer:
-      "Long hours without a sense of progress usually means the effort is there but no one has shown them how to practice, not that they're lazy. Watch for whether any curiosity to improve shows up when you ask. A kid reaching for improvement with no map looks aimless until someone hands them one, which is what coaching provides.",
+    question: "Does getting upset during a game mean gaming is unhealthy?",
+    answer: [
+      { kind: "p", text: "Not automatically." },
+      {
+        kind: "p",
+        text: "Sometimes frustration means the game matters. Your child cares about improving, contributing, winning, or not letting teammates down. That emotional investment isn't the problem by itself.",
+      },
+      { kind: "p", text: "The important question is what happens next." },
+      {
+        kind: "list",
+        items: [
+          "Do they recover?",
+          "Do they reflect?",
+          "Do they blame everyone else?",
+          "Do they learn how to handle pressure better over time?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Big feelings are part of competition. In the right environment, those moments can become practice for resilience, communication, and self-control.",
+      },
+    ],
   },
   {
-    question: "Why is logging off such a fight?",
-    answer:
-      "Sometimes it's simple impulse and worth taking seriously on its own terms. Other times the game was the one place that felt active and social all day, so leaving lands like being pulled out of the only room where something was happening. Watch the shape of the resistance: a kid who can't stop anything points toward impulse; a kid who's fine putting most things down but goes to war over this one usually points toward meaning.",
+    question: "Why does my child care so much about a game?",
+    answer: [
+      {
+        kind: "p",
+        text: "Because games aren't just entertainment for many kids.",
+      },
+      {
+        kind: "p",
+        text: "They're where kids compete, improve, socialize, express themselves, and feel progress in real time. A game can become a place where your child feels known, skilled, or part of something.",
+      },
+      {
+        kind: "p",
+        text: "Plenty of gaming environments aren't healthy. The motivation underneath them is still real.",
+      },
+      {
+        kind: "p",
+        text: "When that motivation is surrounded by structure, coaching, and community, it can become something parents understand and support instead of something everyone argues about.",
+      },
+    ],
   },
   {
-    question:
-      "My kid has online friends but seems disconnected in person. Is that real friendship?",
-    answer:
-      "The connection is usually real. Most teen gamers play with others, and many have made a friend through a game. The question is whether any of it survives the game closing: do the friends have names, do the same ones show up again, is your kid building something with anyone. A real social thread you can't see is very different from no social thread at all.",
+    question: "What should I look for besides screen time?",
+    answer: [
+      {
+        kind: "p",
+        text: "Screen time matters, but it's not the whole picture.",
+      },
+      { kind: "p", text: "Look at what surrounds the gaming:" },
+      {
+        kind: "list",
+        items: [
+          "Is your child playing alone or with people they know?",
+          "Are there expectations around behavior?",
+          "Is anyone helping them improve?",
+          "Are they learning to communicate, recover, and contribute?",
+          "Does gaming create connection, or does it pull them further away?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "The same number of hours can mean very different things depending on the environment around them.",
+      },
+    ],
   },
   {
-    question: "Should I respond with less gaming, or with more structure?",
-    answer:
-      "For most kids the answer is rarely 'less gaming' or 'more gaming'. Both miss what's going on. What tends to help is a better container around the thing they already care about: a team, a coach, a rhythm to the week, and a culture set by adults. One honest caveat: if gaming comes with real withdrawal from people, sleep or school falling apart, or a low mood that doesn't lift, talk to a pediatrician or counselor first.",
+    question: "When does gaming become a real opportunity?",
+    answer: [
+      {
+        kind: "p",
+        text: "Gaming becomes an opportunity when it has the same things adults already trust in sports: coaches, teams, practice, expectations, feedback, and healthy competition.",
+      },
+      {
+        kind: "p",
+        text: "Without that structure, gaming can drift into isolation, toxicity, or endless play.",
+      },
+      {
+        kind: "p",
+        text: "With structure, it can become social, skill-building, and meaningful. The game stays fun, but the environment around it changes what kids get from the experience.",
+      },
+    ],
+  },
+  {
+    question: "How can parents support gaming without just giving in?",
+    answer: [
+      {
+        kind: "p",
+        text: "Start by getting curious. Ask what your child is working on, who they play with, what they're trying to improve, and what makes the game matter to them. Those questions often reveal more than rules alone.",
+      },
+      {
+        kind: "p",
+        text: "From there, look for structure. Kids do better when gaming has clear boundaries, positive expectations, and adults who understand the space.",
+      },
+      {
+        kind: "p",
+        text: "The goal is to help gaming become something your child can grow through.",
+      },
+    ],
   },
 ];
+
+function flattenFAQAnswer(blocks: FAQAnswerBlock[]): string {
+  return blocks
+    .map((b) => (b.kind === "p" ? b.text : b.items.join(" ")))
+    .join(" ");
+}
 
 // Spoken transcript of Karlin's "DAY 4" founder reel. Inlined as a string
 // literal — no fs access (see lib/schema.ts note). Spoken audio only; the
@@ -114,7 +219,12 @@ export default function PostGamingHiddenMeaning() {
     image: SHARE_IMAGE,
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE_DISPLAY);
-  const faqSchema = buildFAQPageSchema(FAQ_ITEMS);
+  const faqSchema = buildFAQPageSchema(
+    FAQ_ITEMS.map((item) => ({
+      question: item.question,
+      answer: flattenFAQAnswer(item.answer),
+    })),
+  );
   const videoSchema = buildVideoObjectSchema({
     pageSlug: SLUG,
     name: "DAY 4 — Karlin on why he started EKUZO",
@@ -556,11 +666,22 @@ export default function PostGamingHiddenMeaning() {
                 more confidence, more sign that the interest has somewhere
                 good to go.
               </p>
-              <h2>Common questions parents ask about all this</h2>
+              <h2>Questions this article may raise for parents</h2>
               {FAQ_ITEMS.map((item) => (
-                <p key={item.question}>
-                  <strong>{item.question}</strong> {item.answer}
-                </p>
+                <Fragment key={item.question}>
+                  <h3>{item.question}</h3>
+                  {item.answer.map((block, i) =>
+                    block.kind === "p" ? (
+                      <p key={i}>{block.text}</p>
+                    ) : (
+                      <ul key={i}>
+                        {block.items.map((li, j) => (
+                          <li key={j}>{li}</li>
+                        ))}
+                      </ul>
+                    ),
+                  )}
+                </Fragment>
               ))}
 
               <p className="text-right">— Karlin, founder of EKUZO</p>
