@@ -6,9 +6,9 @@
 
 ---
 
-## Handoff for Aaron — May 26, 2026 (visual QA + Klaviyo flow → unblocks dev → main merge)
+## Handoff for Aaron — May 26, 2026 (post-prod work: visual QA + Klaviyo flow)
 
-**Read this first when you load up.** Jamie just shipped Phase 8 (perf) + a copy pass on the register pages. Three things still gate the dev → main merge; two of them are on you, the third is Jamie's Stripe-CLI live test in the AM.
+**Read this first when you load up.** Jamie just shipped Phase 8 (perf) + a copy pass on the register pages. The dev → main merge happens after Jamie's Stripe-CLI test in the AM — your two items run AFTER prod is live, not before. No pressure, no merge gating.
 
 ### Your two to-dos
 
@@ -36,14 +36,13 @@ In the Klaviyo dashboard:
 
 - Phase 8 perf is shipped. Three of four pages improved (camps weight −69%, teams + e100 at Google "Good" 2.5s LCP). Home page LCP went from 3.3s → 4.9s in Lighthouse despite a 6.5 MB weight drop, but my post-mortem traced that to a probable Lantern simulator artifact, not a real regression. Full write-up in `marketing/teams-redesign/09-phase8-perf.md` §3.2 + §5.2 (which names two methodology traps so we don't repeat them).
 - Apps Script "teams" squad discriminator is verified working (Jamie checked the Sheet; teams squad row was written from the Phase 5 live tests). One pre-merge concern off the list.
-- After your QA + Klaviyo work, the only remaining gate is Jamie's live Stripe-CLI test in the AM (camps $199, e100 $100, teams upfront $576, teams installment $160 on `dev--ekuzo.netlify.app`). Then he runs the dev → main merge himself per memory `feedback_dev_to_main_merges`.
+- Jamie's Stripe-CLI test on dev preview (camps $199, e100 $100, teams upfront $576, teams installment $160) is the only pre-merge gate. He runs it + the dev → main merge himself per memory `feedback_dev_to_main_merges`. By the time you start, prod is live or close to it.
+- Klaviyo flow not existing yet means: any real teams buyer who comes in before you finish doesn't get the transactional confirmation email. Beehiiv welcome still fires. Worth prioritizing the Klaviyo flow ahead of the visual QA polish if you have to choose.
 
-### Pre-merge checklist as a single block
+### Post-prod checklist
 
-- [ ] (Aaron) visual QA on the 4 pages above — batch tweaks into one commit.
-- [ ] (Aaron) Klaviyo: upload template + create flow with `product == "teams"` filter.
-- [ ] (Jamie) live Stripe-CLI test on dev preview, all 4 cases.
-- [ ] (Jamie) merge dev → main, watch the Netlify deploy.
+- [ ] (Aaron) Klaviyo: upload template + create flow with `event.extra.product == "teams"` filter — do first since it gates teams email delivery.
+- [ ] (Aaron) visual QA on the 4 pages above — batch tweaks into one commit on dev, Jamie will merge to main when ready.
 
 ---
 
