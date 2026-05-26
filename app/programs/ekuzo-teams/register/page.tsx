@@ -323,7 +323,7 @@ export default function EkuzoTeamsRegisterPage() {
         title1="EKUZO"
         title2="TEAMS"
         title2Color="#ED2024"
-        subhead={`A full semester. A real team. ${SEMESTER.startWeek}.`}
+        subhead="A full semester. A real team. Learn how to play, compete, and improve."
       />
 
       {/* ── Form body ──────────────────────────────────────────────── */}
@@ -708,10 +708,10 @@ export default function EkuzoTeamsRegisterPage() {
                   </p>
                   <ul className="flex flex-col gap-2">
                     {[
-                      "Full Fall 2026 semester — Aug 31 to Dec",
-                      "Hand-picked 5-player team you stay with",
-                      "Weekly coached practice + scrim block",
-                      "Private moderated team Discord",
+                      "Full Fall 2026 semester — Sep to Dec",
+                      "Hand-picked 10-player team you stay with",
+                      "Weekly coached practices + scrim block",
+                      "Private moderated team chat",
                       "End-of-semester tournament + casted bracket",
                     ].map((line) => (
                       <li key={line} className="flex items-start gap-2">

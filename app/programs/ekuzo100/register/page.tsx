@@ -1197,7 +1197,7 @@ export default function Ekuzo100RegisterPage() {
                   </p>
                   <ul className="flex flex-col gap-2">
                     {[
-                      "12 hours of live pro coaching",
+                      "12 hours of live elite coaching",
                       "Hand-picked 5-player team",
                       "Private moderated team chat",
                       "Real match play and tournaments",
