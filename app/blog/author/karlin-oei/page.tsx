@@ -168,25 +168,27 @@ export default function KarlinOeiAuthorPage() {
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   He builds EKUZO from the inside of the problem it solves.
                   Karlin grew up gaming through social anxiety, low self-esteem,
-                  and a complicated home, and school rarely reached him — but
-                  games did. What he didn't have was anyone who knew what to do
-                  with that: no team, no routine, no coach to turn the hours
-                  into growth. He only started to see what gaming had taught
-                  him — ownership, accountability, how to lead — at 18, and
-                  stumbled into competitive League of Legends in college, where
-                  he became a national collegiate captain and earned $80,000+
-                  in esports scholarships. EKUZO is the container he wishes
-                  he'd had.
+                  and a complicated home, and school rarely reached him. Games
+                  did. What he didn't have was anyone who knew what to do with
+                  that: no team, no routine, no coach to turn the hours into
+                  growth. He only started to see what gaming had taught him
+                  (ownership, accountability, how to lead) at 18, and stumbled
+                  into competitive League of Legends in college, where he
+                  became a national collegiate captain and earned $80,000+ in
+                  esports scholarships. EKUZO is the container he wishes he'd
+                  had.
                 </p>
-                <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   He writes here about what a kid's gaming is really telling
                   parents, why structure beats restriction, and what coached
                   play actually looks like.
                 </p>
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
+                  Karlin's mission is to help making gaming matters in the
+                  lives of students and the people that support them.
+                </p>
                 <blockquote className="font-body italic text-black text-lg leading-[1.5] border-l-4 border-red pl-5">
-                  "Our job isn't to add pedagogy to games; it's to help students
-                  see it, use it, and carry that mindset into school, careers,
-                  and life."
+                  "games are the best teacher we already know."
                 </blockquote>
               </div>
             </div>
