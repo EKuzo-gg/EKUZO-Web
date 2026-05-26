@@ -6,6 +6,47 @@
 
 ---
 
+## Handoff for Aaron — May 26, 2026 (visual QA + Klaviyo flow → unblocks dev → main merge)
+
+**Read this first when you load up.** Jamie just shipped Phase 8 (perf) + a copy pass on the register pages. Three things still gate the dev → main merge; two of them are on you, the third is Jamie's Stripe-CLI live test in the AM.
+
+### Your two to-dos
+
+**1. Visual QA pass on four pages** at `https://dev--ekuzo.netlify.app` (mobile + desktop):
+- `/programs/ekuzo-camps/register` — shared register UI from Phase 5; should look identical to camps pre-Phase 5.
+- `/programs/ekuzo-teams/register` — minimal form + semester picker + payment-plan radio + universal squad. Hero subhead + "What you get" bullets were just updated in commit `e595e98` (semester now "Sep to Dec", team size now "10-player", "Discord" → "team chat"). Check that the new copy renders correctly + lays out right.
+- `/programs/ekuzo100/register` — "12 hours of live elite coaching" (was "live pro coaching"). Single-character-ish copy tweak; just confirm it shows.
+- `/programs/ekuzo-teams/success` — new in Phase 5 (squad share panel, installment vs upfront text). Confirm both states look right (you can hit `?payment_intent=test&redirect_status=succeeded` to see structure even without a real payment).
+
+Memory rule (`feedback_qa_batching`): hold any tweaks you find and ship as ONE follow-up commit on `dev`, not per-tweak.
+
+**2. Klaviyo dashboard: create the Teams confirmation flow.**
+
+Klaviyo MCP isn't connected in my current session so I couldn't upload the template for you, but the template source is built and committed:
+- HTML source: `marketing/email-flows/email-templates/03-teams-purchase-confirmation.html`
+- Klaviyo-ready (token-substituted): `marketing/email-flows/email-templates/klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`
+
+In the Klaviyo dashboard:
+1. Templates → Create from HTML → paste `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html` → name it "EKUZO Teams — Purchase Confirmation".
+2. Flows → Create → Trigger: `Placed Order` metric (already exists, camps + e100 use it). Filter: `event.extra.product == "teams"`. **Do NOT create a teams-prefixed metric** — the camps + e100 flows already filter on the shared metric this way.
+3. Assign the template you just created.
+4. Heads-up: the template body was cloned from the e100 confirmation source (the camps source file was missing at Phase 7), so it carries some "Day 1–5 cohort" framing that doesn't quite fit a fall semester. Your call: publish as-is and revise in the Klaviyo editor later, or revise the source first. The provenance comment at the top of `03-teams-purchase-confirmation.html` flags this.
+
+### Context you might want before touching anything
+
+- Phase 8 perf is shipped. Three of four pages improved (camps weight −69%, teams + e100 at Google "Good" 2.5s LCP). Home page LCP went from 3.3s → 4.9s in Lighthouse despite a 6.5 MB weight drop, but my post-mortem traced that to a probable Lantern simulator artifact, not a real regression. Full write-up in `marketing/teams-redesign/09-phase8-perf.md` §3.2 + §5.2 (which names two methodology traps so we don't repeat them).
+- Apps Script "teams" squad discriminator is verified working (Jamie checked the Sheet; teams squad row was written from the Phase 5 live tests). One pre-merge concern off the list.
+- After your QA + Klaviyo work, the only remaining gate is Jamie's live Stripe-CLI test in the AM (camps $199, e100 $100, teams upfront $576, teams installment $160 on `dev--ekuzo.netlify.app`). Then he runs the dev → main merge himself per memory `feedback_dev_to_main_merges`.
+
+### Pre-merge checklist as a single block
+
+- [ ] (Aaron) visual QA on the 4 pages above — batch tweaks into one commit.
+- [ ] (Aaron) Klaviyo: upload template + create flow with `product == "teams"` filter.
+- [ ] (Jamie) live Stripe-CLI test on dev preview, all 4 cases.
+- [ ] (Jamie) merge dev → main, watch the Netlify deploy.
+
+---
+
 ## Jamie — May 26, 2026 (Teams convergence — Phase 8: Lighthouse-driven perf — kept 8a+8b+8d-asset, reverted 8c+8d-defer)
 
 **Why:** Phase 6 declared perf done after measuring `.next/server` size + chunk weights and seeing no movement. Those metrics are blind to runtime payload in `public/` and to third-party CDN fetches. Phase 8 re-measured against the live `lighthouse` audit, identified the four resources actually eating the budget (12 MB of dual-loaded Rive variants, 647 KB unpkg-hosted rive.wasm, 14.6 MB autoplay-forced camps hero video), attempted four fixes, and used two-sample post-deploy Lighthouse to retain only the changes that moved Lighthouse numbers in the right direction.
