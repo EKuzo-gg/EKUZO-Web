@@ -1,10 +1,32 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { trackPurchase } from "@/lib/analytics";
+
+// Rebuilt 2026-05-25 per teams convergence Phase 5d. Adds:
+//   - Booking-summary fetch via /api/teams/success (mirrors camps + e100)
+//   - "Bring your crew" squad-share panel — every teams purchase mints
+//     a working squad_token via the Phase 3 register-helper fallback +
+//     the Phase 5c client-side mint. The Stripe webhook writes the same
+//     squadLink to Beehiiv + Klaviyo + Sheets, so the share link here is
+//     the same one that lands in the welcome email body.
+//   - trackPurchase fire-once via tracked ref (matches camps + e100).
+
+type RegistrationDetails = {
+  parentName: string;
+  parentEmail: string;
+  gamers: { name: string }[];
+  semesterLabel: string;
+  paymentPlan: "upfront" | "installment";
+  totalPaid: string;
+  paymentIntentId: string;
+  squadToken?: string;
+  squadLink?: string;
+};
 
 export default function EkuzoTeamsSuccessPageWrapper() {
   return (
@@ -16,8 +38,74 @@ export default function EkuzoTeamsSuccessPageWrapper() {
 
 function EkuzoTeamsSuccessPage() {
   const searchParams = useSearchParams();
-  const redirectStatus = searchParams.get("redirect_status");
-  const succeeded = redirectStatus === "succeeded";
+  const [details, setDetails] = useState<RegistrationDetails | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
+  const tracked = useRef(false);
+
+  // Copy squad link to clipboard. Same navigator.clipboard + execCommand
+  // fallback as camps + e100 — in-app browsers (Meta / IG webview)
+  // sometimes still need the legacy path.
+  async function copySquadLink(link: string) {
+    if (!link) return;
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(link);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = link;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setCopyState("copied");
+      setTimeout(() => setCopyState("idle"), 2000);
+    } catch {
+      setCopyState("error");
+      setTimeout(() => setCopyState("idle"), 2000);
+    }
+  }
+
+  useEffect(() => {
+    const paymentIntentId = searchParams.get("payment_intent");
+    const redirectStatus = searchParams.get("redirect_status");
+
+    if (!paymentIntentId || redirectStatus !== "succeeded") {
+      setLoading(false);
+      return;
+    }
+
+    fetch(`/api/teams/success?payment_intent=${paymentIntentId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.error("Failed to fetch details:", data.error);
+        } else {
+          setDetails(data);
+          // Fire purchase conversion once per page load.
+          if (!tracked.current) {
+            tracked.current = true;
+            const amount = parseFloat(
+              data.totalPaid?.replace(/[^0-9.]/g, "") || "0"
+            );
+            trackPurchase({
+              program: "ekuzo-teams",
+              value: amount,
+              transactionId: paymentIntentId,
+              eventId: paymentIntentId,
+            });
+          }
+        }
+      })
+      .catch((err) => console.error("Error fetching success details:", err))
+      .finally(() => setLoading(false));
+  }, [searchParams]);
+
+  const planLabel = details?.paymentPlan === "upfront" ? "Paid in full" : "Monthly payments";
 
   return (
     <>
@@ -29,12 +117,12 @@ function EkuzoTeamsSuccessPage() {
           style={{ paddingTop: "160px", paddingBottom: "80px" }}
         >
           {/* Success icon */}
-          <div className="mx-auto mb-8 w-20 h-20 bg-[#dcfce7] rounded-full flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <div className="mx-auto mb-8 w-28 h-28 bg-[#dcfce7] rounded-full flex items-center justify-center">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
               <path
-                d="M12 20L18 26L28 14"
+                d="M28 50L42 64L72 32"
                 stroke="#15803d"
-                strokeWidth="3"
+                strokeWidth="6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -44,7 +132,7 @@ function EkuzoTeamsSuccessPage() {
           {/* Heading */}
           <h1
             className="font-display uppercase text-black"
-            style={{ fontSize: "clamp(3rem, 6vw, 80px)", lineHeight: "0.95" }}
+            style={{ fontSize: "clamp(4.5rem, 10vw, 120px)", lineHeight: "0.9" }}
           >
             LEVEL <span className="text-red">UP!</span>
           </h1>
@@ -53,33 +141,147 @@ function EkuzoTeamsSuccessPage() {
             className="font-body text-[#374151] mt-6"
             style={{ fontSize: "clamp(1rem, 1.4vw, 20px)", lineHeight: "32px" }}
           >
-            {succeeded
-              ? "Your registration is confirmed. Welcome to EKUZOTeams!"
-              : "Your payment was successful! Welcome to EKUZOTeams!"}
+            Your registration is confirmed. Welcome to EKUZOTeams!
           </p>
 
-          {/* Info card */}
-          <div className="mt-10 py-6 px-6 bg-[#f5f5f7] rounded-sm text-left">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="px-3 py-1.5 bg-[#dcfce7] rounded-sm inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#15803d]" />
-                <span className="font-body font-bold text-[#15803d] text-xs uppercase tracking-wide">
-                  Confirmed
-                </span>
+          {/* Booking summary */}
+          {loading ? (
+            <div className="mt-10 py-8">
+              <p className="font-body text-black/40">Loading your booking details...</p>
+            </div>
+          ) : details ? (
+            <div className="mt-10 text-left border border-[#e5e7eb] rounded-sm overflow-hidden">
+              <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
+                <h2
+                  className="font-display uppercase text-[#0a0a0a]"
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
+                >
+                  Booking Summary
+                </h2>
+              </div>
+
+              <div className="px-6 py-5">
+                <div className="flex flex-col gap-1 mb-5">
+                  <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                    {details.parentName}
+                  </span>
+                  <span className="font-body text-[#6b7280] text-sm">
+                    {details.parentEmail}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  {details.gamers.map((g, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0"
+                    >
+                      <div className="flex flex-col gap-1">
+                        <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          {g.name}
+                        </span>
+                        <span className="font-body text-[#6b7280] text-sm">
+                          {details.semesterLabel}
+                        </span>
+                        <span className="font-body text-[#6b7280] text-sm">
+                          {planLabel}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
+                  <span
+                    className="font-body font-bold text-[#0a0a0a]"
+                    style={{ fontSize: "16px" }}
+                  >
+                    {details.paymentPlan === "upfront" ? "Total paid" : "Paid today"}
+                  </span>
+                  <span
+                    className="font-display text-[#0a0a0a]"
+                    style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
+                  >
+                    {details.totalPaid}
+                  </span>
+                </div>
+
+                <div className="mt-4 px-3 py-2 bg-[#dcfce7] rounded-sm inline-flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#15803d]" />
+                  <span className="font-body font-bold text-[#15803d] text-xs uppercase tracking-wide">
+                    {details.paymentPlan === "upfront" ? "Paid" : "First payment confirmed"}
+                  </span>
+                </div>
               </div>
             </div>
-            <h3
-              className="font-display uppercase text-[#0a0a0a] mb-2"
-              style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
+          ) : (
+            <div className="mt-10 py-6 px-6 bg-[#f5f5f7] rounded-sm">
+              <p className="font-body text-[#374151]">
+                Your payment was successful! You&apos;ll receive a confirmation
+                email shortly.
+              </p>
+            </div>
+          )}
+
+          {/* Bring your crew — squad share link.
+              Every teams registration mints a unique squad_token (via the
+              Phase 3 register-helper fallback + Phase 5c client-side
+              mint). The same link lands in the welcome email body via
+              Beehiiv's squad_link custom field. Joiners arrived with an
+              inherited token and share the same link forward. */}
+          {details?.squadLink ? (
+            <div
+              className="mt-10 text-left rounded-sm overflow-hidden border border-[#fecaca]"
+              style={{ backgroundColor: "#fff7f7" }}
             >
-              EKUZOTeams — Fall 2026
-            </h3>
-            <p className="font-body text-[#6b7280] text-sm">
-              Full-semester team program — 2 sessions per week, 90 minutes each.
-              Begins the week of August 31, 2026. Your gamer will be placed on a
-              permanent roster with a dedicated coach.
-            </p>
-          </div>
+              <div className="px-6 py-5">
+                <h3
+                  className="font-display uppercase text-[#0a0a0a]"
+                  style={{ fontSize: "clamp(1.5rem, 2.4vw, 32px)", lineHeight: "1" }}
+                >
+                  Bring your <span className="text-red">crew</span>
+                </h3>
+                <p
+                  className="font-body text-[#374151] mt-3"
+                  style={{ fontSize: "15px", lineHeight: "24px" }}
+                >
+                  Share this link and your gamer&apos;s friends will be placed
+                  on the same team — same semester, same coach, same Discord.
+                  We hand-build the roster around it.
+                </p>
+
+                <div className="mt-5 flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    readOnly
+                    value={details.squadLink}
+                    aria-label="Squad share link"
+                    onFocus={(e) => e.currentTarget.select()}
+                    className="flex-1 min-w-0 font-body text-sm text-[#0a0a0a] bg-white border border-[#e5e7eb] rounded-sm px-3 py-3 focus:outline-none focus:border-red"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => copySquadLink(details.squadLink || "")}
+                    className="shrink-0 inline-flex items-center justify-center px-5 py-3 bg-red text-white font-body font-bold rounded-sm hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 whitespace-nowrap"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {copyState === "copied"
+                      ? "Copied!"
+                      : copyState === "error"
+                      ? "Copy failed"
+                      : "Copy link"}
+                  </button>
+                </div>
+
+                <p
+                  className="font-body text-[#6b7280] mt-3"
+                  style={{ fontSize: "12px", lineHeight: "18px" }}
+                >
+                  Friends who use this link will register for the same {details.semesterLabel} cohort.
+                </p>
+              </div>
+            </div>
+          ) : null}
 
           {/* Next steps */}
           <div className="mt-10 text-left">
@@ -93,24 +295,25 @@ function EkuzoTeamsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">1.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Check your inbox</span> — a
-                  confirmation email with your welcome packet is on its way.
+                  <span className="font-bold text-[#0a0a0a]">Check your inbox</span> —
+                  a confirmation email with your welcome packet is on its way.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">2.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">We&apos;ll build your team</span> — we
-                  match by age, skill, and game preference. Before the semester starts,
-                  you&apos;ll receive your team assignment, coach intro, and full session schedule.
+                  <span className="font-bold text-[#0a0a0a]">We&apos;ll build your team</span>
+                  {" "}— we match by age, skill, and game preference. Before
+                  the semester starts, you&apos;ll receive your roster, coach
+                  intro, and full session schedule.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">3.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
                   <span className="font-bold text-[#0a0a0a]">Get set up</span> — make sure
-                  your gamer has their preferred game installed, a working headset,
-                  and Discord ready to go before Day 1.
+                  your gamer has League of Legends installed, a working
+                  headset, and Discord ready to go before Day 1.
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -118,11 +321,17 @@ function EkuzoTeamsSuccessPage() {
                 <p className="font-body text-[#374151] text-sm leading-6">
                   <span className="font-bold text-[#0a0a0a]">Start training now</span> — the
                   semester doesn&apos;t start until August, but you can jump into{" "}
-                  <Link href="/programs/ekuzo-camps/register" className="text-red underline hover:text-red/70">
+                  <Link
+                    href="/programs/ekuzo-camps/register"
+                    className="text-red underline hover:text-red/70"
+                  >
                     EKUZO Camps
                   </Link>{" "}
                   or{" "}
-                  <Link href="/programs/ekuzo100/register" className="text-red underline hover:text-red/70">
+                  <Link
+                    href="/programs/ekuzo100/register"
+                    className="text-red underline hover:text-red/70"
+                  >
                     EKUZO100
                   </Link>{" "}
                   right now to get a head start.
