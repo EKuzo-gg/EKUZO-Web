@@ -17,7 +17,7 @@ const posts = [
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
     date: "May 24, 2026",
-    author: "Karlin",
+    author: "Karlin Oei",
     category: "Perspective",
     excerpt:
       "The game is visible. The meaning is hidden. Six signs parents notice first in a gamer kid, and what they often mean.",
@@ -51,7 +51,7 @@ const posts = [
     title:
       "Virtual summer camps for kids who'd rather be gaming (still open for summer 2026)",
     date: "May 14, 2026",
-    author: "Karlin",
+    author: "Karlin Oei",
     category: "Guides",
     excerpt:
       "A parent's guide to virtual summer camps for kids who game. Four categories, real cost ranges, and how to tell a coached program from a supervised hangout.",
@@ -62,7 +62,7 @@ const posts = [
     slug: "league-of-legends-youth-development",
     title: "Why League of Legends is perfect for youth development",
     date: "May 16, 2026",
-    author: "Karlin",
+    author: "Karlin Oei",
     category: "Guides",
     excerpt:
       "Why League of Legends works for youth development when the structure is right. The honest answer on toxicity and what coached play actually teaches kids.",

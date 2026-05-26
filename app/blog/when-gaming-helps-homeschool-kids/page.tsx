@@ -174,7 +174,13 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 Published May 21, 2026
               </span>
               <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">Karlin Oei</strong>
+                by{" "}
+                <Link
+                  href="/blog/author/karlin-oei"
+                  className="hover:text-red transition-colors"
+                >
+                  <strong className="text-black">Karlin Oei</strong>
+                </Link>
               </span>
               <span className="font-body text-black/40 text-xs mt-1">
                 Founder of EKUZO

@@ -46,7 +46,7 @@ export const metadata = {
     ],
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
-    authors: ["Karlin"],
+    authors: ["Karlin Oei"],
     section: "Guides",
   },
   twitter: {
@@ -149,7 +149,13 @@ export default function PostSummerCamps2026() {
                 Updated May 14, 2026
               </span>
               <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">Karlin</strong>
+                by{" "}
+                <Link
+                  href="/blog/author/karlin-oei"
+                  className="hover:text-red transition-colors"
+                >
+                  <strong className="text-black">Karlin Oei</strong>
+                </Link>
               </span>
               <span className="font-body text-black/40 text-xs mt-1">
                 Founder of EKUZO

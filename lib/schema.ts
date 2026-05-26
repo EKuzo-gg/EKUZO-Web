@@ -22,20 +22,31 @@ const ORG_ID = `${SITE}/#organization`;
 // each Course.hasCourseInstance.instructor array. They are emitted as
 // top-level nodes in the root @graph so they exist in the entity graph
 // independent of any single page.
-const KARLIN_ID = `${SITE}/#coach-karlin`;
+export const KARLIN_ID = `${SITE}/#coach-karlin`;
 const SEBASTIEN_ID = `${SITE}/#coach-sebastien`;
 const NURI_ID = `${SITE}/#coach-nuri`;
 
 export const coachKarlinSchema = {
   "@type": "Person",
   "@id": KARLIN_ID,
-  name: 'Karlin "Faith" Oei',
+  name: "Karlin Oei",
+  alternateName: "Faith",
   jobTitle: "Founder",
   description:
-    "Peak Challenger jungler in League of Legends — top 0.01% tier. Former national collegiate captain who won $80,000+ in esports scholarships through competitive play. Oversees the full EKUZO student experience.",
-  sameAs: "https://www.linkedin.com/in/karlinoei/",
+    "Founder of EKUZO. Former national collegiate esports captain who earned $80,000+ in scholarships; builds EKUZO as the structured, coached environment he didn't have growing up.",
+  knowsAbout: [
+    "youth esports",
+    "esports coaching",
+    "League of Legends",
+    "youth development",
+    "structured gaming",
+    "screen time",
+    "online safety for kids",
+  ],
+  sameAs: ["https://www.linkedin.com/in/karlinoei/"],
   worksFor: { "@id": ORG_ID },
   image: `${SITE}/images/coach-karlin-faith.jpg`,
+  url: `${SITE}/blog/author/karlin-oei`,
 };
 
 export const coachSebastienSchema = {
@@ -404,6 +415,48 @@ export function buildBlogPostBreadcrumbSchema(slug: string, title: string) {
     { name: "Blog", path: "/blog" },
     { name: title, path: `/blog/${slug}` },
   ]);
+}
+
+// ─── Author ProfilePage builder ────────────────────────────────────────────
+// The Person node already exists in the root @graph (one canonical entity per
+// person). The author page emits a ProfilePage that points to that Person by
+// @id, plus a breadcrumb. Don't inline a second Person node here — it would
+// fork the entity graph.
+type AuthorPageArgs = {
+  slug: string; // e.g. "karlin-oei"
+  name: string; // display name for breadcrumb
+  personId: string; // @id of the canonical Person node
+};
+
+export function buildAuthorPageGraph({
+  slug,
+  name,
+  personId,
+}: AuthorPageArgs) {
+  const url = `${SITE}/blog/author/${slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${url}#profile`,
+        url,
+        name: `${name} — EKUZO`,
+        mainEntity: { "@id": personId },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        inLanguage: "en-US",
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
+          { "@type": "ListItem", position: 3, name: name, item: url },
+        ],
+      },
+    ],
+  };
 }
 
 // ─── FAQPage builder ───────────────────────────────────────────────────────
