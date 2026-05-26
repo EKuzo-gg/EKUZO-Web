@@ -72,7 +72,10 @@ type JoiningCrewInfo = {
 const UPFRONT_PRICE = 576;
 const INSTALLMENT_MONTHLY = 160;
 const INSTALLMENT_TOTAL = 640;
-const MAX_GAMERS = 5;
+// Teams = up to a full 10-player team per registration. Camps + e100
+// cap at 5 (siblings/cousins per household); teams' "register your whole
+// team in one go" use case needs the full roster size.
+const MAX_GAMERS = 10;
 
 const SEMESTER = {
   label: "Fall 2026",
