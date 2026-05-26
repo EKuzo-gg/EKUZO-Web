@@ -242,7 +242,29 @@ finished deploying on 2026-05-26. Mobile Lighthouse 13.3.0.
   (−42%), confirming Fix 2a + 2b are working — only one Rive variant
   fetched, wasm same-origin. But LCP went *up* despite less work.
 
-### 3.2 The home-page LCP regression
+### 3.2 The home-page LCP regression — investigated + fixed in commits `b9dad9a` + `5d1b341`
+
+> **Note (2026-05-26):** the hypothesis below this paragraph was wrong on
+> its premise. A diagnostic-only investigation run after Phase 8 shipped
+> (20 mobile Lighthouse runs: 10 simulate + 10 devtools, captured in
+> [10-home-lcp-investigation.md](10-home-lcp-investigation.md))
+> identified the real LCP element as `home-hero-bg.png` in 20/20 runs,
+> **not** the Rive canvas. The "regression" was almost entirely
+> bandwidth contention: 8 oversized testimonial poster JPGs sharing the
+> mobile HTTP/2 connection with the LCP image. Two follow-up fixes
+> shipped on dev as commits `b9dad9a` (the code) and `5d1b341` (the
+> measurement). Measured outcome on `dev--ekuzo.netlify.app` under
+> devtools throttling, 10 samples each: median score 67 → 73 (+6),
+> median LCP 6.29s → 4.96s (−1.33s), total weight 8.94 MB → 7.80 MB
+> (−1.14 MB), priorityHinted check 0/10 → 10/10. Full data + Phase 9
+> lever list in `10-home-lcp-investigation.md` §3 + §7.
+>
+> The original hypothesis (preserved below) is left in place as a
+> teaching artifact alongside §5.2 — both name the wrong-mechanism
+> reasoning pattern that the investigation exposed. **Do not trust
+> this paragraph for fact**; trust the investigation doc.
+
+**Original (wrong) hypothesis from the initial Phase 8 write-up:**
 
 The home page's LCP regressed by ~1.6s across three independent samples
 (5.0s / 4.9s / 4.9s, vs. 3.3s pre-fix). The byte savings are real —
@@ -280,6 +302,11 @@ matters more than the byte savings:**
 
 Neither was scoped into Phase 8 because the deferred-mount finding
 (§2c, §2d) consumed the budget. Logged here for Phase 9 consideration.
+
+(Both Phase 9 candidates above turned out to be the wrong levers per
+the investigation. The real fix was `fetchPriority="high"` on the LCP
+image and IntersectionObserver-gating the testimonial-carousel videos
+to free bandwidth. See `10-home-lcp-investigation.md` §6.)
 
 ---
 
@@ -368,6 +395,27 @@ elements are:
 Phase 8 retained the "make them smaller" interventions (Fix 2a halves
 the Rive load by picking one variant; Fix 2d re-encoding cuts the camps
 hero by 76%) and reverted the "defer" interventions.
+
+### 5.3 The Phase 8 trap, second pass (wrong-mechanism explanation in §3.2)
+
+The original §3.2 paragraph above declared the home-page LCP regression
+was caused by the matchMedia `useEffect` gate delaying the Rive `.riv`
+fetch. The arithmetic didn't even check out at the time (predicted
+~100ms delta, measured 1,600ms) but the explanation got written up as
+fact anyway. The follow-up investigation
+([10-home-lcp-investigation.md](10-home-lcp-investigation.md)) showed
+the LCP element is `home-hero-bg.png` in 20/20 runs, the Rive canvas
+never enters LCP candidacy on the home page, and the regression is
+bandwidth contention from 8 oversized testimonial poster JPGs sharing
+the mobile HTTP/2 connection. Different element, different mechanism,
+different fix.
+
+**Rule for the next perf phase:** if a measurement moves unexpectedly,
+verify the LCP element identity in `audits.entities` or trace
+`largestContentfulPaint::Candidate` events before writing the
+explanation up. A hypothesis whose predicted magnitude doesn't match
+the measured magnitude (the §3.2 ~100ms vs. 1,600ms gap) should stop
+the write-up, not get smoothed over.
 
 ---
 
