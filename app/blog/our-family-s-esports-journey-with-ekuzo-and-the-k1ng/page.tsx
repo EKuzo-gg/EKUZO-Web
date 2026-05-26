@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-const SLUG = "our-family-s-esports-journey-with-ekuso-and-the-k1ng";
+const SLUG = "our-family-s-esports-journey-with-ekuzo-and-the-k1ng";
 const TITLE = "Our Family's Esports Journey with EKUZO and the K1ng";
 const DESCRIPTION =
   "My son Ryan was always a happy kid in his early years. Then junior high happened — and everything changed. This is how EKUZO gave him back his confidence.";

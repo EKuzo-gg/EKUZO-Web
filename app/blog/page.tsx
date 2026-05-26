@@ -25,7 +25,7 @@ const posts = [
     featured: true,
   },
   {
-    slug: "our-family-s-esports-journey-with-ekuso-and-the-k1ng",
+    slug: "our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
     title: "Our Family's Esports Journey with EKUZO and the K1ng",
     date: "Jan 14, 2026",
     author: "Lisa Holt",

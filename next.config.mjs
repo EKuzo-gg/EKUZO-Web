@@ -26,6 +26,15 @@ const nextConfig = {
       { source: "/programs/ekuzoteams", destination: "/programs/ekuzo-teams", permanent: true },
       { source: "/teams", destination: "/programs/ekuzo-teams", permanent: true },
 
+      // Blog slug correction (ekuso → ekuzo). Preserve link equity from any
+      // external references that picked up the typo before it was fixed.
+      {
+        source: "/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng",
+        destination:
+          "/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
+        permanent: true,
+      },
+
       // EKUZOCamps redirects
       { source: "/ekuzocamps-seasonal", destination: "/programs/ekuzo-camps", permanent: true },
       { source: "/ekuzo-camps", destination: "/programs/ekuzo-camps", permanent: true },

@@ -243,7 +243,7 @@ export default function PostJohnHay() {
               Keep Reading
             </p>
             <Link
-              href="/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng"
+              href="/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng"
               className="group grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8 items-start md:items-center"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">

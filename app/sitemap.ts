@@ -102,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng`,
+      url: `${baseUrl}/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,

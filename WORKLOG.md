@@ -6,6 +6,69 @@
 
 ---
 
+## Jamie — May 26, 2026 (Phase 8 follow-up post-mortem — investigation only, no code changes)
+
+**Why:** Asked for §3-grade rigor on the post-fix state from doc 10 (commits `b9dad9a` + `5d1b341`). Specifically: did the score move less than predicted (73 vs localhost-predicted 90) because Lantern is still noisy, or because there's a real ceiling we hit? And what's the next move?
+
+**Method (same as doc 10 §1):** 10 simulate + 10 devtools mobile Lighthouse runs against `dev--ekuzo.netlify.app/` at commit `5d1b341`, plus network-log inspection of the post-fix devtools run-08 (median representative). Raw JSON in `/tmp/ekuzo-lcp-investigation/postfix-{simulate,devtools}-netlify/` on workstation.
+
+**Full doc:** [marketing/teams-redesign/11-home-lcp-postmortem.md](marketing/teams-redesign/11-home-lcp-postmortem.md).
+
+**Key findings:**
+
+1. **The 1.33 s LCP improvement is entirely `resourceLoadDuration`** (4540 → 3176 ms median). TTFB held flat. LCP breakdown sums match headline in 10/10 runs (mechanism is clean).
+2. **The remaining 3.18 s is bandwidth contention from 263 KiB of removable High-priority bytes** competing with the 31 KiB LCP image on the same HTTP/2 connection: 71 KiB unused-above-fold Tungsten weights (Bold + Medium + Semibold) + 146 KiB gtag.js + 47 KiB Inter (has system fallback). Only the Tungsten Black (25 KiB) + CSS (13 KiB) + root doc (18 KiB) are actually required for the LCP paint.
+3. **Lantern noise band did NOT collapse post-fix.** Pre-fix simulate spread was 41.5 s; post-fix is 38.3 s. 7/10 post-fix runs still land at 40+ s LCP. Lantern doesn't model HTTP/2 stream-priority bandwidth distribution, so changes that target bandwidth contention show up cleanly in devtools but barely in simulate. Devtools is the right tool for this class of regression hunt; reconfirmed doc 10 §9.
+4. **The localhost-predicted 90 score missed because TTFB doesn't transfer.** Localhost devtools TTFB ~10 ms; Netlify edge ~1.7 s. The mechanism predictions held exactly — `resourceLoadDuration` within 5% across environments. Working approximation for this site: `predicted_netlify_LCP ≈ localhost_LCP + 1.7 s`.
+
+**Proposed Phase 9 plan (described, NOT committed — Jamie's call):**
+
+- **§6.1 Trim Tungsten preload from 4 weights to 1 (Black only).** Split `localFont` into `tungstenBlack` (preload: true) + `tungstenOther` (preload: false). Same `--font-tungsten` CSS variable, same `display: swap`. Frees 71 KiB of High-priority bandwidth in the LCP window. Expected: LCP 4.96 s → ~4.4 s, score 73 → ~80. Risk: FOUT on below-fold subheads (minor — `display: swap` is already current behavior, just deferred).
+- **§6.2 Defer gtag.js to `next/script strategy="afterInteractive"`.** Frees 146 KiB of High-priority bandwidth. Expected (compounded with 6.1): LCP ~3.6 s, score ~88. Risk: GA4 page_view events fire later, minor attribution lag for very-quick bouncers. Requires grep audit for sync `gtag()` callers before commit.
+- **§6.3 Downscale testimonial posters.** Already deferred from initial pageload (doc 10 fix); now a pure byte-weight win, no LCP impact. Skip until 6.1 + 6.2 ship and re-measure.
+
+**Stop ceiling for Phase 9** even if both fixes land: ~1.8 s `resourceLoadDuration` is still 12× the theoretical 155 ms floor. Past 88 score requires attacking the JS bundle (Phase 6 territory, which was previously written off but now becomes relevant).
+
+**Reach beyond home page** (not measured this batch): font preload trim benefits every page using Tungsten subheads. gtag deferral benefits every page unconditionally. If 6.1 + 6.2 ship, a 5-page measurement sweep (50 devtools runs) is the right verification before declaring Phase 9 done.
+
+**Files touched:** `marketing/teams-redesign/11-home-lcp-postmortem.md` (new), `WORKLOG.md`. No source code touched.
+
+---
+
+## Jamie — May 26, 2026 (Blog infra: ekuso→ekuzo slug fix + Karlin author page + six-tells FAQ)
+
+**Why:** Three follow-ups from the 2026-05-25 blog coverage audit (`docs/marketing/2026-05-25-blog-coverage-llm-audit-and-next-posts.md` §3 fixes + §6 order). All shipped as three separate commits on dev so any one is independently revertable.
+
+**Workstream 1 — slug typo fix.** The K1ng post directory was misspelled `…with-ekuso…`. Renamed to `…with-ekuzo…` via `git mv` (history preserved), updated the in-file `SLUG` constant, added a 308 redirect in `next.config.mjs` so the old URL preserves link equity, and repointed the 4 internal links (blog index, sitemap, two related-posts cards). Verified: `curl -I` on the old URL returns 308 to the new URL; new URL 200s; grep for `ekuso` outside the redirect rule is empty.
+
+**Workstream 2 — Karlin Oei author page + schema enrichment + byline normalization.**
+- `lib/schema.ts` — enriched the existing `coachKarlinSchema` Person node (kept `KARLIN_ID` stable so existing `@id` references in Article/VideoObject/Course schemas don't break): `name` is now `Karlin Oei` (was `Karlin "Faith" Oei`), gamer handle moved to `alternateName: "Faith"`, conservative description (dropped the unverified "Peak Challenger Jungler" line — see §Inputs in `docs/marketing/karlin-oei-author-bio.md`), added `knowsAbout` (7 topics), added `url` pointing to the new author page. Exported `KARLIN_ID` so pages can reference the canonical Person by `@id` without forking the entity graph. Added `buildAuthorPageGraph(slug, name, personId)` builder that emits a `ProfilePage` + `BreadcrumbList` `@graph`.
+- `app/blog/author/karlin-oei/page.tsx` (new) — server component with headshot, long bio (conservative — verified facts only), list of his 5 posts, breadcrumb, canonical, OG/Twitter cards, and the ProfilePage JSON-LD. Title is bare `Karlin Oei` because root layout applies the `%s | EKUZO` template (OG title keeps the brand suffix because share previews are read out of context).
+- Byline normalization across 5 Karlin posts (`league-of-legends-youth-development`, `summer-camps-for-kids-who-game-2026`, `what-your-kids-gaming-is-telling-you`, `what-homeschool-parents-taught-us-about-gaming`, `when-gaming-helps-homeschool-kids`): `metadata.openGraph.authors` standardized to `["Karlin Oei"]` (three posts were `["Karlin"]`); rendered byline `by <strong>Karlin</strong>` updated to `by <Link href="/blog/author/karlin-oei"><strong>Karlin Oei</strong></Link>`. "Keep Reading" card bylines just got the text rename — wrapping in a second Link would nest links inside the existing card Link. Blog index `posts` array also normalized (3 entries said `"Karlin"`). The camps coach card literal `'KARLIN "FAITH" OEI'` is unchanged — different context, gamer handle on-brand there (decided with Jamie pre-build).
+- Guest bylines (John Hay, Lisa Holt) intentionally left as plain text — they don't have author pages.
+
+**Workstream 3 — six-tells FAQ block + FAQPage schema.** `what-your-kids-gaming-is-telling-you` has statement-shaped H2s ("They get more upset than the moment seems to deserve") that don't extract well as standalone Q&A. Added 5 FAQ items (rewritten from the post's own claims — no new claims) covering: rage/meltdowns, hours-without-progress, log-off fights, online-vs-IRL friendship, more-structure-vs-less-gaming. Wired `buildFAQPageSchema(FAQ_ITEMS)` into the JsonLd graph and rendered a visible FAQ section inside `<BlogContent>` (mirrors the LoL post's pattern — `<h2>` + `<p><strong>Q?</strong> A.</p>` blocks).
+
+**Verification on local dev (port 3001):**
+- `tsc --noEmit` clean. `next build` clean (54 routes including new `/blog/author/karlin-oei` and renamed K1ng route, `.next/server` = 29 MB well under Netlify 50 MB cap, 0 mp4/mov/webm in trace).
+- `curl -I /blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng` → 308 → new slug. New slug → 200.
+- Author page: H1 "Karlin Oei", breadcrumb, headshot, bio, posts list all render. ProfilePage `@graph` validates — `mainEntity` references `#coach-karlin` (the canonical Person), no forked node.
+- Six-tells post: 5 FAQ questions render under `<h2>Common questions parents ask about all this</h2>`. FAQPage schema present in HTML. Article schema author resolves to `#coach-karlin`.
+- Byline link from any Karlin post → author page works; no bare `Karlin` byline strings remain.
+- Browser console: no errors.
+
+**Inputs still needed from Karlin (not blocking these commits — bio uses the conservative path):** college / years he captained, certifications, whether the Peak Challenger Jungler line is OK for the public bio, additional `sameAs` profile URLs. Captured in `docs/marketing/karlin-oei-author-bio.md` → "Facts to verify."
+
+**Files touched:**
+- W1: `app/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng/page.tsx` (rename + SLUG), `app/blog/page.tsx`, `app/sitemap.ts`, `app/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life/page.tsx`, `app/blog/summer-camps-for-kids-who-game-2026/page.tsx`, `next.config.mjs`.
+- W2: `lib/schema.ts`, `app/blog/author/karlin-oei/page.tsx` (new), `app/blog/page.tsx` (author rename), `app/blog/league-of-legends-youth-development/page.tsx`, `app/blog/summer-camps-for-kids-who-game-2026/page.tsx`, `app/blog/what-your-kids-gaming-is-telling-you/page.tsx`, `app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx`, `app/blog/when-gaming-helps-homeschool-kids/page.tsx`.
+- W3: `app/blog/what-your-kids-gaming-is-telling-you/page.tsx`.
+- All: `WORKLOG.md`.
+
+**Did NOT do:** did not promote to main — stopping after dev push per [[feedback_dev_to_main_merges]]. Did not change the camps page coach card literal. Did not add an FAQAccordion (used the plain `<h2>` + `<p><strong>` pattern from the LoL post so both posts stay consistent).
+
+---
+
 ## Jamie — May 26, 2026 (Phase 8 follow-up: home-LCP investigation + two pre-prod fixes on dev)
 
 **Why:** Jamie asked me to investigate the home-page LCP regression from Phase 8 §3.2 before the dev → main merge. The §3.2 hypothesis was that the matchMedia `useEffect` gate delayed the Rive canvas paint and Lighthouse latched LCP to the late canvas paint.
