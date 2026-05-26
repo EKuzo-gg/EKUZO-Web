@@ -321,9 +321,81 @@ session.
 
 ## 9. Files this post-mortem creates / changes
 
-- `marketing/teams-redesign/11-home-lcp-postmortem.md` (this file, new)
-- WORKLOG.md (entry being added separately)
+- `marketing/teams-redesign/11-home-lcp-postmortem.md` (this file)
+- WORKLOG.md (entry added separately)
 
-No source code touched. No git commits initiated by this work.
-Phase 9 implementation (§6.1 + §6.2) is Jamie's call after reading
-this doc.
+Original publication: no source code touched. Phase 9 §6.1 was applied
+in commit `84c90cb` (see §10).
+
+---
+
+## 10. Phase 9 §6.1 — applied and measured (commit `84c90cb`, 2026-05-26)
+
+`app/layout.tsx` localFont declaration split into `tungstenBlack`
+(Black weight, preload: true) and `tungstenOther` (Bold + Semibold +
+Medium, preload: false), both bound to `--font-tungsten`.
+`tungstenBlack.variable` applied AFTER `tungstenOther.variable` in
+the `<html>` className so Black's family name wins the CSS variable
+resolution. Verified in local production build's served HTML:
+Tungsten preload count went from 4 to 1 (only Black), other resources
+unchanged.
+
+**Measured Netlify devtools result** (10 runs, cache-busted URL to
+force fresh edge fetches — Netlify Edge was caching the pre-fix HTML
+with `age: 769s` when I first checked):
+
+| metric                  | pre-fix Netlify (doc 10 §7) | post-§6.1 Netlify | delta    |
+|-------------------------|----------------------------:|------------------:|---------:|
+| Score (median)          | 73                          | **75**            | +2       |
+| LCP (median)            | 4.96 s                      | **4.49 s**        | −470 ms  |
+| LCP min / max           | 3.89 s / 5.10 s             | 3.32 s / 4.89 s   | shifted left |
+| LCP image network end   | 4.95 s                      | 4.47 s            | −480 ms  |
+| TTFB (breakdown)        | 1.74 s                      | 1.74 s            | ±0       |
+| resourceLoadDuration    | 3.18 s                      | 2.70 s            | −480 ms  |
+| Total weight            | 7.80 MB                     | 7.73 MB           | −70 KB   |
+| LCP element identity    | home-hero-bg.png (10/10)    | home-hero-bg.png (10/10) | unchanged |
+
+**Mechanism holds, magnitude is smaller than §6.1's prediction
+(actual −470 ms vs predicted −600 ms; +2 score vs predicted +7).**
+
+Why the smaller score bump than predicted:
+- Linear-bandwidth model said 71 KiB / 200 KB/s ≈ 355 ms reclaim.
+  Actual −480 ms reclaim slightly outperforms that (HTTP/2 priority
+  weighting is non-linear; removing a same-priority sibling stream
+  helps more than just freeing its bytes).
+- Score is a non-linear function of LCP. Going from 4.96 s → 4.49 s
+  crosses the boundary between two scoring tiers but doesn't span a
+  whole tier (Lighthouse "Good" LCP threshold is 2.5 s; "Needs
+  improvement" is 2.5–4.0 s; "Poor" is >4.0 s). Both pre and post
+  numbers sit in "Poor". The +2 score median reflects that.
+
+Implication: to materially move the score, the next fix needs to
+either push LCP under 4.0 s (the Poor/Needs-improvement boundary)
+or all the way under 2.5 s. The §6.2 gtag deferral targets
+146 KiB / 200 KB/s ≈ 730 ms reclaim — combined with §6.1's
+reclaimed 480 ms, total predicted LCP would land at ~3.76 s, into
+the Needs-improvement tier. That's the score-tier crossing that
+would justify the bigger expected score bump (75 → ~85).
+
+**Updated Phase 9 prediction (§6.1 + §6.2 combined):**
+
+| metric                | current Netlify (post-§6.1) | predicted post-§6.2 |
+|-----------------------|----------------------------:|--------------------:|
+| LCP median            | 4.49 s                      | ~3.76 s             |
+| resourceLoadDuration  | 2.70 s                      | ~1.97 s             |
+| Score median          | 75                          | ~85                 |
+
+Prediction methodology: same as §6.1's pre-application prediction —
+linear-bandwidth model from removed High-priority bytes, calibrated
+against actual §6.1 reclaim ratio (0.677 × bytes/200 KiB; the
+multiplier captures HTTP/2's non-linear priority weighting observed
+in §6.1). The §6.2 gtag deferral is described in detail in §6.2 of
+this doc; it's a `next/script strategy="afterInteractive"` change
+gated by a grep audit for sync `gtag()` callers.
+
+**Stop ceiling after §6.1 + §6.2:** ~1.97 s `resourceLoadDuration`
+would still be 12× the 155 ms theoretical floor for a 31 KiB image.
+Remaining contention from JS chunks (290 KiB Low priority) and 4
+above-the-fold images (LCP + bird + 2 torn paper, ~85 KiB High).
+Past 85 score on home requires JS bundle work — out of Phase 9
+scope as currently conceived.
