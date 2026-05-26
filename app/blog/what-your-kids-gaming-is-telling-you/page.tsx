@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
@@ -8,6 +9,7 @@ import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
+  buildFAQPageSchema,
   buildVideoObjectSchema,
 } from "@/lib/schema";
 import Link from "next/link";
@@ -25,6 +27,147 @@ const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
 const DATE_MODIFIED = "2026-05-24";
+
+// FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
+// don't extract well as standalone Q&A, so we surface six parent-shaped
+// questions the article raises and answer each one. Items can mix
+// paragraphs and bullet lists for the visible render; flattenFAQAnswer
+// joins them to a plain string for the FAQPage JSON-LD, which only
+// accepts plain text.
+type FAQAnswerBlock =
+  | { kind: "p"; text: string }
+  | { kind: "list"; items: string[] };
+
+type FAQItem = {
+  question: string;
+  answer: FAQAnswerBlock[];
+};
+
+const FAQ_ITEMS: FAQItem[] = [
+  {
+    question: "Is my child's gaming trying to tell me something?",
+    answer: [
+      { kind: "p", text: "Often, yes." },
+      {
+        kind: "p",
+        text: "Gaming can look simple from the outside: they play, they win, they lose, they get loud, they get quiet, they ask for more time. But underneath that behavior, the game may be giving them something important: challenge, progress, identity, friendship, confidence, or a place where they feel capable.",
+      },
+      {
+        kind: "p",
+        text: "Two things matter: how much they're playing, and what role gaming is playing for them.",
+      },
+    ],
+  },
+  {
+    question: "Does getting upset during a game mean gaming is unhealthy?",
+    answer: [
+      { kind: "p", text: "Not automatically." },
+      {
+        kind: "p",
+        text: "Sometimes frustration means the game matters. Your child cares about improving, contributing, winning, or not letting teammates down. That emotional investment isn't the problem by itself.",
+      },
+      { kind: "p", text: "The important question is what happens next." },
+      {
+        kind: "list",
+        items: [
+          "Do they recover?",
+          "Do they reflect?",
+          "Do they blame everyone else?",
+          "Do they learn how to handle pressure better over time?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "Big feelings are part of competition. In the right environment, those moments can become practice for resilience, communication, and self-control.",
+      },
+    ],
+  },
+  {
+    question: "Why does my child care so much about a game?",
+    answer: [
+      {
+        kind: "p",
+        text: "Because games aren't just entertainment for many kids.",
+      },
+      {
+        kind: "p",
+        text: "They're where kids compete, improve, socialize, express themselves, and feel progress in real time. A game can become a place where your child feels known, skilled, or part of something.",
+      },
+      {
+        kind: "p",
+        text: "Plenty of gaming environments aren't healthy. The motivation underneath them is still real.",
+      },
+      {
+        kind: "p",
+        text: "When that motivation is surrounded by structure, coaching, and community, it can become something parents understand and support instead of something everyone argues about.",
+      },
+    ],
+  },
+  {
+    question: "What should I look for besides screen time?",
+    answer: [
+      {
+        kind: "p",
+        text: "Screen time matters, but it's not the whole picture.",
+      },
+      { kind: "p", text: "Look at what surrounds the gaming:" },
+      {
+        kind: "list",
+        items: [
+          "Is your child playing alone or with people they know?",
+          "Are there expectations around behavior?",
+          "Is anyone helping them improve?",
+          "Are they learning to communicate, recover, and contribute?",
+          "Does gaming create connection, or does it pull them further away?",
+        ],
+      },
+      {
+        kind: "p",
+        text: "The same number of hours can mean very different things depending on the environment around them.",
+      },
+    ],
+  },
+  {
+    question: "When does gaming become a real opportunity?",
+    answer: [
+      {
+        kind: "p",
+        text: "Gaming becomes an opportunity when it has the same things adults already trust in sports: coaches, teams, practice, expectations, feedback, and healthy competition.",
+      },
+      {
+        kind: "p",
+        text: "Without that structure, gaming can drift into isolation, toxicity, or endless play.",
+      },
+      {
+        kind: "p",
+        text: "With structure, it can become social, skill-building, and meaningful. The game stays fun, but the environment around it changes what kids get from the experience.",
+      },
+    ],
+  },
+  {
+    question: "How can parents support gaming without just giving in?",
+    answer: [
+      {
+        kind: "p",
+        text: "Start by getting curious. Ask what your child is working on, who they play with, what they're trying to improve, and what makes the game matter to them. Those questions often reveal more than rules alone.",
+      },
+      {
+        kind: "p",
+        text: "From there, look for structure. Kids do better when gaming has clear boundaries, positive expectations, and adults who understand the space.",
+      },
+      {
+        kind: "p",
+        text: "The goal is to help gaming become something your child can grow through.",
+      },
+    ],
+  },
+];
+
+function flattenFAQAnswer(blocks: FAQAnswerBlock[]): string {
+  return blocks
+    .map((b) => (b.kind === "p" ? b.text : b.items.join(" ")))
+    .join(" ");
+}
 
 // Spoken transcript of Karlin's "DAY 4" founder reel. Inlined as a string
 // literal — no fs access (see lib/schema.ts note). Spoken audio only; the
@@ -54,7 +197,7 @@ export const metadata = {
     ],
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
-    authors: ["Karlin"],
+    authors: ["Karlin Oei"],
     section: "Perspective",
   },
   twitter: {
@@ -76,6 +219,12 @@ export default function PostGamingHiddenMeaning() {
     image: SHARE_IMAGE,
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE_DISPLAY);
+  const faqSchema = buildFAQPageSchema(
+    FAQ_ITEMS.map((item) => ({
+      question: item.question,
+      answer: flattenFAQAnswer(item.answer),
+    })),
+  );
   const videoSchema = buildVideoObjectSchema({
     pageSlug: SLUG,
     name: "DAY 4 — Karlin on why he started EKUZO",
@@ -91,6 +240,7 @@ export default function PostGamingHiddenMeaning() {
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
       <JsonLd data={videoSchema} />
 
       <div className="absolute top-0 left-0 right-0 z-20">
@@ -175,7 +325,13 @@ export default function PostGamingHiddenMeaning() {
                 Published May 24, 2026
               </span>
               <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">Karlin</strong>
+                by{" "}
+                <Link
+                  href="/blog/author/karlin-oei"
+                  className="hover:text-red transition-colors"
+                >
+                  <strong className="text-black">Karlin Oei</strong>
+                </Link>
               </span>
               <span className="font-body text-black/40 text-xs mt-1">
                 Founder of EKUZO
@@ -510,6 +666,24 @@ export default function PostGamingHiddenMeaning() {
                 more confidence, more sign that the interest has somewhere
                 good to go.
               </p>
+              <h2>Questions this article may raise for parents</h2>
+              {FAQ_ITEMS.map((item) => (
+                <Fragment key={item.question}>
+                  <h3>{item.question}</h3>
+                  {item.answer.map((block, i) =>
+                    block.kind === "p" ? (
+                      <p key={i}>{block.text}</p>
+                    ) : (
+                      <ul key={i}>
+                        {block.items.map((li, j) => (
+                          <li key={j}>{li}</li>
+                        ))}
+                      </ul>
+                    ),
+                  )}
+                </Fragment>
+              ))}
+
               <p className="text-right">— Karlin, founder of EKUZO</p>
             </BlogContent>
           </div>
@@ -553,7 +727,7 @@ export default function PostGamingHiddenMeaning() {
                   (still open for summer 2026)
                 </h3>
                 <span className="font-body text-black/40 text-sm">
-                  by Karlin
+                  by Karlin Oei
                 </span>
               </div>
             </Link>

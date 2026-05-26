@@ -46,7 +46,7 @@ export const metadata = {
     ],
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
-    authors: ["Karlin"],
+    authors: ["Karlin Oei"],
     section: "Guides",
   },
   twitter: {
@@ -149,7 +149,13 @@ export default function PostSummerCamps2026() {
                 Updated May 14, 2026
               </span>
               <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">Karlin</strong>
+                by{" "}
+                <Link
+                  href="/blog/author/karlin-oei"
+                  className="hover:text-red transition-colors"
+                >
+                  <strong className="text-black">Karlin Oei</strong>
+                </Link>
               </span>
               <span className="font-body text-black/40 text-xs mt-1">
                 Founder of EKUZO
@@ -695,7 +701,7 @@ export default function PostSummerCamps2026() {
               Keep Reading
             </p>
             <Link
-              href="/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng"
+              href="/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng"
               className="group grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8 items-start md:items-center"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">

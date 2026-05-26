@@ -242,7 +242,29 @@ finished deploying on 2026-05-26. Mobile Lighthouse 13.3.0.
   (−42%), confirming Fix 2a + 2b are working — only one Rive variant
   fetched, wasm same-origin. But LCP went *up* despite less work.
 
-### 3.2 The home-page LCP regression
+### 3.2 The home-page LCP regression — investigated + fixed in commits `b9dad9a` + `5d1b341`
+
+> **Note (2026-05-26):** the hypothesis below this paragraph was wrong on
+> its premise. A diagnostic-only investigation run after Phase 8 shipped
+> (20 mobile Lighthouse runs: 10 simulate + 10 devtools, captured in
+> [10-home-lcp-investigation.md](10-home-lcp-investigation.md))
+> identified the real LCP element as `home-hero-bg.png` in 20/20 runs,
+> **not** the Rive canvas. The "regression" was almost entirely
+> bandwidth contention: 8 oversized testimonial poster JPGs sharing the
+> mobile HTTP/2 connection with the LCP image. Two follow-up fixes
+> shipped on dev as commits `b9dad9a` (the code) and `5d1b341` (the
+> measurement). Measured outcome on `dev--ekuzo.netlify.app` under
+> devtools throttling, 10 samples each: median score 67 → 73 (+6),
+> median LCP 6.29s → 4.96s (−1.33s), total weight 8.94 MB → 7.80 MB
+> (−1.14 MB), priorityHinted check 0/10 → 10/10. Full data + Phase 9
+> lever list in `10-home-lcp-investigation.md` §3 + §7.
+>
+> The original hypothesis (preserved below) is left in place as a
+> teaching artifact alongside §5.2 — both name the wrong-mechanism
+> reasoning pattern that the investigation exposed. **Do not trust
+> this paragraph for fact**; trust the investigation doc.
+
+**Original (wrong) hypothesis from the initial Phase 8 write-up:**
 
 The home page's LCP regressed by ~1.6s across three independent samples
 (5.0s / 4.9s / 4.9s, vs. 3.3s pre-fix). The byte savings are real —
@@ -280,6 +302,11 @@ matters more than the byte savings:**
 
 Neither was scoped into Phase 8 because the deferred-mount finding
 (§2c, §2d) consumed the budget. Logged here for Phase 9 consideration.
+
+(Both Phase 9 candidates above turned out to be the wrong levers per
+the investigation. The real fix was `fetchPriority="high"` on the LCP
+image and IntersectionObserver-gating the testimonial-carousel videos
+to free bandwidth. See `10-home-lcp-investigation.md` §6.)
 
 ---
 
@@ -369,6 +396,27 @@ Phase 8 retained the "make them smaller" interventions (Fix 2a halves
 the Rive load by picking one variant; Fix 2d re-encoding cuts the camps
 hero by 76%) and reverted the "defer" interventions.
 
+### 5.3 The Phase 8 trap, second pass (wrong-mechanism explanation in §3.2)
+
+The original §3.2 paragraph above declared the home-page LCP regression
+was caused by the matchMedia `useEffect` gate delaying the Rive `.riv`
+fetch. The arithmetic didn't even check out at the time (predicted
+~100ms delta, measured 1,600ms) but the explanation got written up as
+fact anyway. The follow-up investigation
+([10-home-lcp-investigation.md](10-home-lcp-investigation.md)) showed
+the LCP element is `home-hero-bg.png` in 20/20 runs, the Rive canvas
+never enters LCP candidacy on the home page, and the regression is
+bandwidth contention from 8 oversized testimonial poster JPGs sharing
+the mobile HTTP/2 connection. Different element, different mechanism,
+different fix.
+
+**Rule for the next perf phase:** if a measurement moves unexpectedly,
+verify the LCP element identity in `audits.entities` or trace
+`largestContentfulPaint::Candidate` events before writing the
+explanation up. A hypothesis whose predicted magnitude doesn't match
+the measured magnitude (the §3.2 ~100ms vs. 1,600ms gap) should stop
+the write-up, not get smoothed over.
+
 ---
 
 ## 6. Phase 9 entry conditions
@@ -385,25 +433,43 @@ Met as of commit `0a2dae8` + this doc:
   regressed in LCP despite −42% byte savings — root cause + mitigation
   options in §3.2.
 
-Phase 9 is not currently scoped. The Phase 8 outcome leaves these as
-candidate Phase 9 work, ordered by expected impact:
+**Phase 9 status as of 2026-05-26 (post-investigation):** the original
+candidate list below is partly superseded. The canonical Phase 9 plan,
+calibrated against actual post-Phase-8 measurements, lives in
+[11-home-lcp-postmortem.md](11-home-lcp-postmortem.md) §6 + §10. Items
+1 and 4 below were retired by that investigation; item 2 is still
+valid and renamed §6.2 in doc 11; item 3 is unchanged. New §6.1
+(Tungsten preload trim) was added by doc 11 — applied in commit
+`84c90cb` (LCP 4.96 → 4.49 s, score 73 → 75 on Netlify devtools).
 
-1. **Home-page Rive useLayoutEffect / module-scope matchMedia** (§3.2 #1)
+Original Phase 8 candidate list (kept for lineage; cross-reference doc 11
+before acting on any of these):
+
+1. ~~**Home-page Rive useLayoutEffect / module-scope matchMedia** (§3.2 #1)
    — should recover the ~1.6s home LCP regression while preserving the
    6 MB byte savings from Fix 2a. Small code change; the constraint is
-   SSR-safety (no `window` during render).
+   SSR-safety (no `window` during render).~~ **RETIRED** by doc 10 §3 —
+   the Rive canvas is not the LCP element in 20/20 measurements. Moving
+   matchMedia to `useLayoutEffect` would change Rive fetch timing but
+   wouldn't affect LCP because LCP is the hero image, not Rive.
 2. **gtag.js (146 KB) + fbevents.js (98 KB) loading strategy** — both
    sync-loaded on every page. Switching to `next/script
    strategy="afterInteractive"` would push these out of the critical
-   path without breaking measurement. Affects all pages.
+   path without breaking measurement. Affects all pages. **Now doc 11
+   §6.2; not yet shipped.** Predicted impact (calibrated): LCP 4.49 →
+   ~3.76 s, score 75 → ~85.
 3. **`ekuzo-teams-hero.mp4` (12.9 MB)** + **`ekuzo100-hero.mp4`
    (16.6 MB)** re-encoding — both are `controls preload="metadata"` so
    they aren't blocking initial load (post-revise transfer is ~320 KB
    / ~1.1 MB), but a re-encode would still ~halve those. Aaron's call
    on quality tradeoffs.
-4. **Testimonial poster image sizing** — currently 252 KB / 208 KB /
+4. ~~**Testimonial poster image sizing** — currently 252 KB / 208 KB /
    192 KB for posters that display at ~150px wide. Likely an `srcset` /
-   `next/image` sizing miss.
+   `next/image` sizing miss.~~ **PARTIALLY ADDRESSED** in commit
+   `b9dad9a` (IntersectionObserver gates the carousel `<video>` mounts so
+   posters no longer enter the initial-pageload network queue). The
+   durable downscale work remains as doc 11 §6.3 — deferred until §6.2
+   ships and re-measures.
 
 Per memory `feedback_flag_blockers_not_before`: flag at the seam where
 they bite, not preemptively. Today's Phase 8 outcome doesn't require

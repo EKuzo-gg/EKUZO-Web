@@ -20,13 +20,41 @@ const META_PIXEL_ID =
 /*
  * Tungsten Narrow — personal/preview use (Hoefler & Co)
  * License before production launch: typography.com/fonts/tungsten/styles
+ *
+ * Split into two declarations to selectively preload only the Black (900)
+ * weight, which is the only Tungsten weight used above the fold on any page.
+ * Bold / Semibold / Medium load on demand when CSS references them.
+ *
+ * Rationale: see marketing/teams-redesign/11-home-lcp-postmortem.md §6.1.
+ * The pre-split single declaration preloaded all 4 weights at High priority,
+ * adding ~71 KiB of bandwidth contention to the LCP image's HTTP/2 window
+ * on every pageload. Codebase-wide survey of non-900 Tungsten usage found
+ * exactly one site (app/programs/ekuzo-camps/page.tsx line 525 uses
+ * font-display + font-bold). Home page has zero non-900 usage.
+ *
+ * Cascade: both classes set --font-tungsten. tungstenBlack.variable is
+ * applied AFTER tungstenOther.variable in the <html> className so Black's
+ * family name wins the variable resolution. The Other @font-face rules
+ * are still emitted (next/font injects them regardless of preload), so
+ * the browser can still load Bold / Semibold / Medium on demand when an
+ * element with that weight renders. The browser's bold-synthesis fallback
+ * may briefly stand in for Bold on first paint of the ekuzo-camps Bold
+ * usage; acceptable per display: swap.
  */
-const tungsten = localFont({
+const tungstenOther = localFont({
   src: [
-    { path: "../public/fonts/TungstenNarrow-Black.otf", weight: "900", style: "normal" },
     { path: "../public/fonts/TungstenNarrow-Bold.otf",  weight: "700", style: "normal" },
     { path: "../public/fonts/TungstenNarrow-Semibold.otf", weight: "600", style: "normal" },
     { path: "../public/fonts/TungstenNarrow-Medium.otf", weight: "500", style: "normal" },
+  ],
+  variable: "--font-tungsten",
+  display: "swap",
+  preload: false,
+});
+
+const tungstenBlack = localFont({
+  src: [
+    { path: "../public/fonts/TungstenNarrow-Black.otf", weight: "900", style: "normal" },
   ],
   variable: "--font-tungsten",
   display: "swap",
@@ -93,7 +121,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${tungsten.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${tungstenOther.variable} ${tungstenBlack.variable} h-full antialiased`}>
       <head>
         <JsonLd data={rootGraph} />
 
