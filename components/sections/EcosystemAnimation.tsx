@@ -326,13 +326,6 @@ export default function EcosystemAnimation() {
   // so dual-render was costing every visitor both files (~12 MB combined).
   // Phase 8a: only one Rive instance per page.
   const [variant, setVariant] = useState<"desktop" | "mobile" | null>(null);
-  // Phase 8c: don't call useRive (which fetches the .riv file) until the
-  // animation is within ~1 viewport of being scrolled into view. The section
-  // is below the fold on every consumer page (home, programs, parents,
-  // schools, ekuzo100, ekuzo-teams), so deferring the 6 MB fetch frees up
-  // LCP bandwidth. Falls back to immediate render if IO is unavailable.
-  const [shouldMount, setShouldMount] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 768px)");
@@ -342,38 +335,16 @@ export default function EcosystemAnimation() {
     return () => mql.removeEventListener("change", apply);
   }, []);
 
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") {
-      setShouldMount(true);
-      return;
-    }
-    const el = sentinelRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setShouldMount(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const showRive = shouldMount && variant !== null;
-
   return (
-    <div ref={sentinelRef} className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col">
       {/* Top spacer */}
       <div style={{ flexShrink: 0, height: 40 }} />
       {/* Animation canvas — fills remaining space */}
       <div className="flex-1 min-h-0">
-        {showRive && variant === "desktop" && (
+        {variant === "desktop" && (
           <EcosystemScroll rivSrc={DESKTOP_RIV} artboard="Main - Desktop" progressMax={PROGRESS_MAX_DESKTOP} />
         )}
-        {showRive && variant === "mobile" && (
+        {variant === "mobile" && (
           <EcosystemScroll rivSrc={MOBILE_RIV} artboard="Main - Mobile" progressMax={PROGRESS_MAX_MOBILE} />
         )}
       </div>
