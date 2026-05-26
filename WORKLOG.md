@@ -6,6 +6,68 @@
 
 ---
 
+## Jamie — May 26, 2026 (Teams convergence — Phase 8: Lighthouse-driven perf — kept 8a+8b+8d-asset, reverted 8c+8d-defer)
+
+**Why:** Phase 6 declared perf done after measuring `.next/server` size + chunk weights and seeing no movement. Those metrics are blind to runtime payload in `public/` and to third-party CDN fetches. Phase 8 re-measured against the live `lighthouse` audit, identified the four resources actually eating the budget (12 MB of dual-loaded Rive variants, 647 KB unpkg-hosted rive.wasm, 14.6 MB autoplay-forced camps hero video), attempted four fixes, and used two-sample post-deploy Lighthouse to retain only the changes that moved Lighthouse numbers in the right direction.
+
+**Final result across 4 mobile Lighthouse runs against dev--ekuzo.netlify.app post-revise:**
+
+| Page | Pre Score | Post Score | Pre LCP | Post LCP | Pre Weight | Post Weight |
+|---|---:|---:|---:|---:|---:|---:|
+| `/` (home) | 87 | 76 | 3.3s | 4.9s | 15,441 KiB | 8,935 KiB (−42%) |
+| `/programs/ekuzo-camps` | 82 | 80 | 4.3s | 4.3s | 16,173 KiB | 4,972 KiB (−69%) |
+| `/programs/ekuzo-teams` | _baseline only_ | **90** | _baseline only_ | **2.5s** | _baseline only_ | 9,524 KiB |
+| `/programs/ekuzo100` | _baseline only_ | **92** | _baseline only_ | **2.5s** | _baseline only_ | 10,260 KiB |
+
+Three pages improved or held (camps weight −69%; teams + e100 at Google "Good" 2.5s LCP); one regressed (home LCP +1.6s despite −42% byte savings — root cause + mitigation in `09-phase8-perf.md` §3.2).
+
+**What shipped (Phase 8 code commit `650f6cc` — 7 files):**
+- `components/sections/EcosystemAnimation.tsx` (Fix 8a + initial 8c): matchMedia-gated variant selection so only one `.riv` loads per pageload (−6 MB). IntersectionObserver-gated mount was also added initially but reverted in the revise commit.
+- `lib/riveRuntime.ts` (new) + `public/rive.wasm` (new, 1.79 MB raw / 602 KB gzipped) + import sites in EcosystemAnimation + ProgramsHeroRive (Fix 8b): self-hosted Rive wasm, removes third-party DNS+TLS roundtrip to unpkg.com.
+- `app/programs/ekuzo-camps/page.tsx` (Fix 8d initial): inline `<video>` replaced with `DeferredAutoplayVideo` wrapper (reverted in revise commit).
+- `components/ui/DeferredAutoplayVideo.tsx` (new, deleted in revise commit).
+- `public/videos/camp-hero.mp4` (Fix 8d asset): re-encoded from 1920×1080@30fps/4.3 Mbps (14.6 MB) to 1280×720@24fps/CRF 30 (3.7 MB, −76%) via ffmpeg. Visually indistinguishable through the page's opacity/saturate/brightness filters + radial vignette. Comment in page source confirms the video is a "Placeholder while Aaron sources the final hero graphic" — compression on a placeholder preserves design intent.
+
+**What shipped (Phase 8 revise commit `0a2dae8` — 3 files):**
+
+Two post-deploy Lighthouse samples on home + camps after the initial Phase 8 push showed LCP *regressed* on both pages despite the byte savings:
+- home: 3.3s → 5.0s LCP (sample 1) / 4.9s (sample 2)
+- camps: 4.3s → 7.6s LCP (sample 1) / 6.6s (sample 2)
+
+Root cause: Lighthouse measures LCP as the *largest* contentful paint within its audit window — paint events are tracked until network goes idle. A deferred 6 MB Rive canvas or a deferred 3.7 MB video that *eventually* mounts still wins the "largest" trophy, but its paint timestamp is later than if it had mounted eagerly. The deferral pushes LCP out instead of removing the element from LCP candidacy. Real users feel the brush stroke + headline paint earlier; Lighthouse just sees a later LCP timestamp.
+
+Reverted the two deferral mechanisms; kept the byte-saving changes:
+- `components/sections/EcosystemAnimation.tsx` — IntersectionObserver gate removed. Rive canvas mounts eagerly once the matchMedia variant resolves.
+- `app/programs/ekuzo-camps/page.tsx` — `DeferredAutoplayVideo` wrapper removed; inline `<video>` restored with `preload="metadata"` added.
+- `components/ui/DeferredAutoplayVideo.tsx` — deleted (no remaining callers).
+
+**What shipped (Phase 8 doc — 1 file):**
+- `marketing/teams-redesign/09-phase8-perf.md` (new, ~290 lines): §1 pre-fix baseline + resource list; §2 per-fix diff including the "tried and reverted" sections for 8c (Rive IO gate) and 8d-deferred-mount; §3 final post-revise Lighthouse with the home-page LCP regression analysis; §4 deliberate-NOT list; §5 methodology acknowledgments — both the Phase 6 trap (bundle size ≠ runtime payload) and the Phase 8 trap (deferred mount ≠ removed from LCP); §6 Phase 9 entry conditions with prioritized candidate work.
+
+**What this Phase 8 deliberately does NOT do:**
+- Does not auto-promote dev → main. Per memory `feedback_dev_to_main_merges` Jamie batches; Phase 8 ends with dev carrying these three commits + the four-item external-action checklist still pending from `08-phase7-verification.md` §3.
+- Does not patch Apps Script (`Scope B2` from the Phase 8 handoff) or upload the Klaviyo template (`Scope B1`) — neither MCP (Klaviyo, Google Drive/Sheets) is connected in this session's tool registry. Both items revert to Jamie's dashboard lane as already documented in `08-phase7-verification.md` §3.
+- Does not touch any of the convergence work (registry, webhook strategies, register-API helper, shared register UI hook). Phase 8 is asset-and-component-loading concerns; the convergence is data-flow concerns. Different files, different lanes.
+
+**Verify gate — PASSED:**
+- ✅ `tsc --noEmit` clean before, during, after.
+- ✅ `next build` clean (Next 16.2.1 / Turbopack); 53 routes.
+- ✅ `.next/server` = 28 MB (unchanged; 22 MB Netlify headroom holds).
+- ✅ 0 mp4/mov/webm in `.next/`; 0 wasm in `.next/` (`public/rive.wasm` is served from CDN, not bundled into serverless function).
+- ✅ Local dev preview verified all retained fixes behave as expected (single Rive variant fetched, /rive.wasm same-origin, re-encoded camp-hero plays cleanly under vignette).
+- ✅ Two post-deploy Lighthouse samples per affected page confirmed the deferred mechanisms were counterproductive; the revise corrected them while retaining the genuine byte savings.
+
+**Next session (Jamie's lane — sequencing unchanged from `08-phase7-verification.md` §4):**
+1. Aaron's visual QA pass on the 3 register pages + teams success page.
+2. Apps Script "teams" squad-discriminator verification.
+3. Klaviyo dashboard: create the teams confirmation flow filtered to `event.extra.product == "teams"`; assign `klaviyo-ready/03-teams-purchase-confirmation.klaviyo.html`.
+4. Final live Stripe-CLI test across all 4 cases on `dev--ekuzo.netlify.app`.
+5. dev → main merge.
+
+The Phase 8 commits sit cleanly between Phase 7 and Aaron's QA — the convergence work is unchanged, the perf work is genuine and measured, and the documented home-page LCP regression is a Phase 9 candidate (not a Phase 8 blocker).
+
+---
+
 ## Jamie — May 25, 2026 (Teams convergence — Phase 7: verification + Teams Email 1 source + KB outcome)
 
 **Why:** Phase 7 of `marketing/teams-redesign/01-teams-convergence-handoff.md` — the verification + final-deliverables phase that gates the dev → main merge. Phases 1–6 shipped the convergence (registry, webhook strategy map, register-API helper, partial-capture, shared register UI + teams rebuild, perf). Phase 7 owes a final code-level wire-payload diff (Phases 3-6 didn't touch the webhook, but the §1 DoD criterion wants the closing confirmation), the Teams Email 1 source template (Klaviyo flow creation is Jamie's lane, but the source file + build wiring is code work), the KB decision's "Actual outcome" writeup, and a pre-merge checklist that hands Jamie the external-action list without re-reading the full handoff.
