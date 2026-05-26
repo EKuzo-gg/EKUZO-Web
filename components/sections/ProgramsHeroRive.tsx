@@ -1,6 +1,9 @@
 "use client";
 
 import { useRive } from "@rive-app/react-canvas";
+import { configureRiveRuntime } from "@/lib/riveRuntime";
+
+configureRiveRuntime();
 
 /**
  * Programs hero Rive animation — autoplay, full-bleed.

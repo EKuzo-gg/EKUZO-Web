@@ -7,6 +7,7 @@ import type { IconName } from "@/components/ui/Icon";
 import Image from "next/image";
 import TestimonialVideo from "@/components/ui/TestimonialVideo";
 import WhatWePlayVideo from "@/components/ui/WhatWePlayVideo";
+import DeferredAutoplayVideo from "@/components/ui/DeferredAutoplayVideo";
 import Eyebrow from "@/components/ui/Eyebrow";
 import MissionCarousel from "@/components/ui/MissionCarousel";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -299,18 +300,15 @@ export default function EkuzoCampsPage() {
               while Aaron sources the final hero graphic. Opacity raised
               to ~0.7 and overlay lightened so the gameplay reads as
               real content rather than a black wash, while still keeping
-              enough contrast for the white headline. */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+              enough contrast for the white headline. Render is deferred to
+              an idle callback so the 14.6 MB autoplay fetch doesn't block
+              LCP — vignette + brush stroke + headline carry the hero
+              composition during the first paint (see Phase 8d). */}
+          <DeferredAutoplayVideo
+            src="/videos/camp-hero.mp4"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ opacity: 0.7, filter: "saturate(0.8) brightness(0.85)" }}
-            aria-hidden="true"
-          >
-            <source src="/videos/camp-hero.mp4" type="video/mp4" />
-          </video>
+          />
 
           {/* Soft vignette — center stays brighter so the video is
               visible behind the headline, edges darken to anchor the
