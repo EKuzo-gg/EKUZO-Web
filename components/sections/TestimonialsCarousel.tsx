@@ -17,7 +17,9 @@ export default function TestimonialsCarousel() {
   const [index, setIndex] = useState(0);
   const [cardsVisible, setCardsVisible] = useState(3);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
 
@@ -30,6 +32,29 @@ export default function TestimonialsCarousel() {
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Defer video poster fetches until carousel is near the viewport. Posters
+  // are 100–252 KB each × 8 cards = ~1.3 MB that otherwise enters the
+  // network queue at initial pageload and bandwidth-starves the LCP image
+  // on mobile (see marketing/teams-redesign/10-home-lcp-investigation.md §6.2).
+  useEffect(() => {
+    if (!sentinelRef.current) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setMounted(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMounted(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+    obs.observe(sentinelRef.current);
+    return () => obs.disconnect();
   }, []);
 
   const maxIndex = testimonials.length - cardsVisible;
@@ -86,7 +111,7 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" ref={sentinelRef}>
       {/* Track — on mobile, center the single card with max-width; swipe enabled */}
       <div
         className={`overflow-hidden ${isMobile ? "flex justify-center" : ""}`}
@@ -109,17 +134,19 @@ export default function TestimonialsCarousel() {
                 className="relative aspect-[9/16] bg-black rounded-sm overflow-hidden cursor-pointer"
                 onClick={() => handleCardClick(i)}
               >
-                <video
-                  ref={(el) => {
-                    videoRefs.current[i] = el;
-                  }}
-                  src={`/testimonial-videos/${t.slug}.mp4`}
-                  poster={`/testimonial-videos/${t.slug}-poster.jpg`}
-                  className="w-full h-full object-cover"
-                  playsInline
-                  preload="none"
-                  onEnded={() => handleVideoEnded(i)}
-                />
+                {mounted && (
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[i] = el;
+                    }}
+                    src={`/testimonial-videos/${t.slug}.mp4`}
+                    poster={`/testimonial-videos/${t.slug}-poster.jpg`}
+                    className="w-full h-full object-cover"
+                    playsInline
+                    preload="none"
+                    onEnded={() => handleVideoEnded(i)}
+                  />
+                )}
 
                 {/* Play / paused overlay */}
                 {playingIndex !== i && (
