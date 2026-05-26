@@ -433,25 +433,43 @@ Met as of commit `0a2dae8` + this doc:
   regressed in LCP despite −42% byte savings — root cause + mitigation
   options in §3.2.
 
-Phase 9 is not currently scoped. The Phase 8 outcome leaves these as
-candidate Phase 9 work, ordered by expected impact:
+**Phase 9 status as of 2026-05-26 (post-investigation):** the original
+candidate list below is partly superseded. The canonical Phase 9 plan,
+calibrated against actual post-Phase-8 measurements, lives in
+[11-home-lcp-postmortem.md](11-home-lcp-postmortem.md) §6 + §10. Items
+1 and 4 below were retired by that investigation; item 2 is still
+valid and renamed §6.2 in doc 11; item 3 is unchanged. New §6.1
+(Tungsten preload trim) was added by doc 11 — applied in commit
+`84c90cb` (LCP 4.96 → 4.49 s, score 73 → 75 on Netlify devtools).
 
-1. **Home-page Rive useLayoutEffect / module-scope matchMedia** (§3.2 #1)
+Original Phase 8 candidate list (kept for lineage; cross-reference doc 11
+before acting on any of these):
+
+1. ~~**Home-page Rive useLayoutEffect / module-scope matchMedia** (§3.2 #1)
    — should recover the ~1.6s home LCP regression while preserving the
    6 MB byte savings from Fix 2a. Small code change; the constraint is
-   SSR-safety (no `window` during render).
+   SSR-safety (no `window` during render).~~ **RETIRED** by doc 10 §3 —
+   the Rive canvas is not the LCP element in 20/20 measurements. Moving
+   matchMedia to `useLayoutEffect` would change Rive fetch timing but
+   wouldn't affect LCP because LCP is the hero image, not Rive.
 2. **gtag.js (146 KB) + fbevents.js (98 KB) loading strategy** — both
    sync-loaded on every page. Switching to `next/script
    strategy="afterInteractive"` would push these out of the critical
-   path without breaking measurement. Affects all pages.
+   path without breaking measurement. Affects all pages. **Now doc 11
+   §6.2; not yet shipped.** Predicted impact (calibrated): LCP 4.49 →
+   ~3.76 s, score 75 → ~85.
 3. **`ekuzo-teams-hero.mp4` (12.9 MB)** + **`ekuzo100-hero.mp4`
    (16.6 MB)** re-encoding — both are `controls preload="metadata"` so
    they aren't blocking initial load (post-revise transfer is ~320 KB
    / ~1.1 MB), but a re-encode would still ~halve those. Aaron's call
    on quality tradeoffs.
-4. **Testimonial poster image sizing** — currently 252 KB / 208 KB /
+4. ~~**Testimonial poster image sizing** — currently 252 KB / 208 KB /
    192 KB for posters that display at ~150px wide. Likely an `srcset` /
-   `next/image` sizing miss.
+   `next/image` sizing miss.~~ **PARTIALLY ADDRESSED** in commit
+   `b9dad9a` (IntersectionObserver gates the carousel `<video>` mounts so
+   posters no longer enter the initial-pageload network queue). The
+   durable downscale work remains as doc 11 §6.3 — deferred until §6.2
+   ships and re-measures.
 
 Per memory `feedback_flag_blockers_not_before`: flag at the seam where
 they bite, not preemptively. Today's Phase 8 outcome doesn't require

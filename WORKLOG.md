@@ -6,6 +6,42 @@
 
 ---
 
+## Jamie — May 26, 2026 (Phase 9 §6.1 shipped: Tungsten preload trim — 4 weights → Black only)
+
+**Why:** Doc 11 post-mortem identified 71 KiB of unused-above-fold Tungsten preloads (Bold + Semibold + Medium) as the largest removable High-priority bandwidth competing with the LCP image on home. Jamie said "we can make these changes now" pre-prod.
+
+**Change** ([commit `84c90cb`](app/layout.tsx)): split the single `tungsten = localFont(...)` declaration in `app/layout.tsx` into `tungstenBlack` (Black weight, default preload) and `tungstenOther` (Bold + Semibold + Medium, `preload: false`). Both bound to `--font-tungsten`. `tungstenBlack.variable` applied AFTER `tungstenOther.variable` in the `<html>` className so Black's family wins the cascade. Other @font-faces are still emitted (Next.js injects them regardless of preload), so the browser loads Bold / Semibold / Medium on demand when CSS references them.
+
+**Codebase-wide safety check:** non-900 Tungsten usage is exactly ONE place — `app/programs/ekuzo-camps/page.tsx` line 525 (`font-display + font-bold`). Home page has zero non-900 Tungsten usage. The one camps page Bold usage may briefly synthesize Bold from Black on first paint before the on-demand Bold .otf loads. Acceptable per `display: swap`.
+
+**Pre-ship local verification:**
+- `tsc --noEmit` clean. `next build` clean (53 routes, 29 MB `.next/server`, no media in trace).
+- Local production server served HTML: Tungsten preload count 4 → **1 (only Black)**. Inter preload, hero `fetchPriority="high"`, zero initial `<video>` tags — all unchanged.
+- 5 local devtools Lighthouse runs against `next start`: median LCP 2.02 s (was 3.05 s pre-fix locally), score 97 (was 90 pre-fix locally), spread 40 ms.
+
+**Post-deploy measurement** (10 devtools Lighthouse runs against `dev--ekuzo.netlify.app/` with cache-busting URLs because Netlify Edge was serving pre-fix HTML with `age: 769s`):
+
+| metric | pre-Tungsten Netlify | post-Tungsten Netlify | delta |
+|---|---:|---:|---:|
+| Score (median) | 73 | **75** | +2 |
+| LCP (median) | 4.96 s | **4.49 s** | −470 ms |
+| LCP image network end | 4.95 s | 4.47 s | −480 ms |
+| `resourceLoadDuration` | 3.18 s | 2.70 s | −480 ms |
+| TTFB | 1.74 s | 1.74 s | ±0 |
+| Total weight | 7.80 MB | 7.73 MB | −70 KB |
+
+**Mechanism held; magnitude smaller than the doc 11 §6.1 prediction (+2 score vs predicted +7, −470 ms vs predicted −600 ms).** Linear-bandwidth model said 71 KiB / 200 KB/s ≈ 355 ms reclaim; actual −480 ms slightly outperforms that. Score bump is small because both pre and post LCP sit in Lighthouse's "Poor" tier (>4.0 s) — within-tier movement, not a tier crossing. Full breakdown + updated combined §6.1+§6.2 prediction in [doc 11 §10](marketing/teams-redesign/11-home-lcp-postmortem.md#10-phase-9-61--applied-and-measured-commit-84c90cb-2026-05-26).
+
+**Phase 9 §6.2 (gtag deferral to `next/script strategy="afterInteractive"`) was NOT shipped this session.** It remains the highest-leverage next fix: 146 KiB of High-priority bandwidth removable, predicted (calibrated) combined §6.1+§6.2 LCP ~3.76 s (crosses Poor → Needs-improvement boundary), score ~85. Requires grep audit for sync `gtag()` callers before commit.
+
+**Cache-bust caveat for the second dev → main merge:** when this lands on main, Netlify Edge will serve the pre-fix HTML for ~13 minutes (observed lag this session) before users get the new build. Lighthouse-from-prod measurements in that window will under-report the win.
+
+**Lineage doc updates** ([09-phase8-perf.md](marketing/teams-redesign/09-phase8-perf.md) §6): annotated the Phase 9 candidate list — item 1 (Rive useLayoutEffect) marked **RETIRED** per doc 10 findings, item 2 (gtag deferral) noted as now doc 11 §6.2, item 4 (poster sizing) marked **PARTIALLY ADDRESSED** by the IO-gate. Pointer added to doc 11 as the canonical Phase 9 plan.
+
+**Files touched:** `app/layout.tsx`, `marketing/teams-redesign/09-phase8-perf.md`, `marketing/teams-redesign/11-home-lcp-postmortem.md`, `WORKLOG.md`. **Commits on dev:** `84c90cb` (fix), `998019b` (doc §10), this session-close doc-and-WORKLOG cleanup.
+
+---
+
 ## Jamie — May 26, 2026 (Phase 8 follow-up post-mortem — investigation only, no code changes)
 
 **Why:** Asked for §3-grade rigor on the post-fix state from doc 10 (commits `b9dad9a` + `5d1b341`). Specifically: did the score move less than predicted (73 vs localhost-predicted 90) because Lantern is still noisy, or because there's a real ceiling we hit? And what's the next move?
