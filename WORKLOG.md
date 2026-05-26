@@ -23,7 +23,21 @@
 - `curl http://localhost:3001/` confirms 0 `<video>` tags in initial SSR HTML.
 - Preview network log shows zero `testimonial-videos/*-poster.jpg` and zero `testimonial-videos/*.mp4` fetches on initial pageload.
 
-**Real-world Lighthouse delta verification** still needs to happen on the redeployed dev preview (`dev--ekuzo.netlify.app`) — that's Jamie's step after this commit lands and Netlify rebuilds. Expected effect under devtools throttling: LCP median moves from 6.3s toward ~2s (TTFB ~1.7s + ~0.2s load + render delay) because (a) `fetchpriority=high` weights the LCP image more heavily on the multiplexed HTTP/2 connection, and (b) the 8 testimonial posters are no longer competing for the same pipe.
+**Real-world Lighthouse delta (10 devtools runs against `dev--ekuzo.netlify.app/` after commit `b9dad9a` deployed at 03:25 local):**
+
+| metric | pre-fix Netlify median | post-fix Netlify median | delta |
+|---|---:|---:|---:|
+| Score | 67 | **73** | +6 |
+| LCP | 6.29 s | **4.96 s** | −1.33 s |
+| LCP image network end | 6.27 s | 4.95 s | −1.32 s |
+| LCP `resourceLoadDuration` | 4.54 s | 3.18 s | −1.36 s |
+| Total weight | 8.94 MB | 7.80 MB | −1.14 MB |
+| Initial `<video>` tags | 8 | **0** | gated |
+| `priorityHinted` check | 0/10 | **10/10** | flipped |
+
+Both fixes worked exactly as designed (IO-gate eliminates testimonial poster fetches from initial pageload; fetchpriority=high reduces image transfer time by 30%). The score moved less than my localhost test predicted (was 90 median there) because Netlify edge TTFB under throttled mobile is ~1.7s (vs ~10ms on localhost) and TTFB propagates 1:1 into LCP. The remaining 3.2 s `resourceLoadDuration` is now the ceiling — full Phase 9 lever list in [10-home-lcp-investigation.md §7](marketing/teams-redesign/10-home-lcp-investigation.md). Top three: defer the 3 unused Tungsten weights from the home-page hero preload (~70 KB High-pri freed), move `gtag.js` to `next/script strategy="afterInteractive"` (146 KB / High pri), downscale testimonial poster JPGs (~1.3 MB durable byte-weight win).
+
+**Carousel fix benefits more than just home page.** `TestimonialsCarousel` is rendered on `/`, `/parents`, `/programs`, `/programs/ekuzo100`, and `/programs/ekuzo-teams`. The IO-gate change applies to all 5. Not measured per-page in this batch — home is the representative sample because its LCP cost was the worst pre-fix.
 
 **Did NOT do (per §6.3 of the investigation doc):** did not revert Fix 2a (matchMedia variant gate), did not switch to `useLayoutEffect`/module-scope matchMedia, did not User-Agent-sniff. All three were scoped against the wrong-mechanism §3.2 hypothesis.
 

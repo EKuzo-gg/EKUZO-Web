@@ -333,10 +333,12 @@ are both well-defined and measurement-justified.
 
 ---
 
-## 6. Proposed fixes (not committed — Jamie to review)
+## 6. Proposed fixes (applied in commit `b9dad9a`, see §7 for measured result)
 
-These are described, not implemented. None of these files were touched
-in this session.
+> **Originally:** described, not implemented — Jamie approved making
+> the changes pre-prod. §6.1 and §6.2 part 1 shipped on `dev` in
+> commit `b9dad9a` (2026-05-26). §6.2 part 2 (poster downscaling) was
+> deliberately deferred — see §7 for why and the Phase 9 lever list.
 
 ### 6.1 Add `fetchPriority="high"` to the hero Image (one-line change)
 
@@ -433,7 +435,79 @@ reading that file.
 
 ---
 
-## 7. Stop conditions hit
+## 7. Post-deploy verification (added 2026-05-26 after commit `b9dad9a` shipped to dev)
+
+Both §6.1 and §6.2 part 1 fixes landed in commit `b9dad9a` on `dev`,
+deployed to `dev--ekuzo.netlify.app` around 03:25 local. 10 devtools-
+throttled mobile Lighthouse runs immediately after, same setup as §3:
+
+| metric                  | §3 pre-fix median | post-fix median | delta   |
+|-------------------------|------------------:|----------------:|--------:|
+| Score                   | 67                | **73**          | +6      |
+| LCP                     | 6.29 s            | **4.96 s**      | −1.33 s |
+| LCP image network end   | 6.27 s            | 4.95 s          | −1.32 s |
+| LCP breakdown TTFB      | 1.71 s            | 1.74 s          | ±0      |
+| LCP breakdown loadDur   | 4.54 s            | **3.18 s**      | −1.36 s |
+| Total weight            | 8.94 MB           | 7.80 MB         | −1.14 MB |
+| LCP element identity    | home-hero-bg.png  | home-hero-bg.png | unchanged |
+| `priorityHinted` checks | 0/10              | **10/10**       | flipped |
+| Initial `<video>` tags  | 8                 | **0**           | gated   |
+
+**Both fixes worked exactly as designed.** The Lighthouse discovery
+checklist now passes all three subchecks. The testimonial posters
+(~1.1 MB of the −1.14 MB weight drop is theirs) are no longer in the
+initial fetch queue. The LCP image's `resourceLoadDuration` dropped
+~30% (4.54 → 3.18 s) — the gap between the in-flight time and the
+~155 ms theoretical floor narrowed substantially, though it didn't
+close.
+
+**Why the score moved less than the localhost prediction suggested:**
+
+The 5-run localhost devtools test before the deploy showed LCP 3.05 s
+and score 90 median. The Netlify post-fix LCP is 4.96 s and score 73.
+Localhost TTFB is ~10 ms; Netlify edge TTFB under throttled mobile
+is ~1.7 s. That 1.7 s gap propagates 1:1 into LCP, and LCP is the
+heaviest-weighted Lighthouse metric. The localhost run was a fair
+test of the *delta* attributable to the code changes, but it
+understated absolute LCP because real users hit Netlify edge, not
+localhost.
+
+The remaining 3.2 s `resourceLoadDuration` is the next ceiling. The
+LCP image is still competing with 4 Tungsten font files (~143 KB at
+High priority) and `gtag.js` (146 KB at High priority) on the same
+HTTP/2 connection. Three Phase-9-shaped levers, in expected impact
+order:
+
+1. **Reduce or defer the font set on the home hero.** The home page
+   only renders Tungsten Narrow Black for the headline above the
+   fold. The other three weights (Bold / Medium / Semibold) are
+   preloaded but used only further down the page. Removing the
+   preload for the three non-LCP-blocking weights would free ~70 KB
+   of High-priority bandwidth at exactly the right moment.
+2. **Move `gtag.js` to `next/script strategy="afterInteractive"`.**
+   146 KB / High priority / sync-loaded. Switching to async script
+   loading drops it out of the LCP-window queue. Affects every page,
+   not just home.
+3. **Downscale the testimonial poster JPGs.** They're no longer
+   competing for the LCP-window pipe (Fix 6.2 part 1 deferred them),
+   but the durable byte-weight win is still worth doing. 8 × ~150 KB
+   posters for a 150 px display is the worst sizing miss in the
+   page; `next/image` with the right `sizes` would cut these by
+   ~10×.
+
+None of those are scoped into this work. They're separate Phase 9
+candidates with separate measurement requirements.
+
+**Reach beyond home page:** `TestimonialsCarousel` is also rendered on
+`/parents`, `/programs`, `/programs/ekuzo100`, and
+`/programs/ekuzo-teams`. The IO-gate change benefits all five pages
+proportionally to how far below the fold the carousel sits on each.
+Not measured per-page in this batch — the home page is the
+representative sample because its LCP cost was the worst pre-fix.
+
+---
+
+## 8. Stop conditions hit
 
 - ✅ 20 Lighthouse runs done (10 simulate + 10 devtools).
 - ✅ Doc complete with conclusion paragraph.
@@ -448,7 +522,7 @@ take it. The 6.2 work needs Aaron's input on the carousel pattern.
 
 ---
 
-## 8. Methodology notes for the next perf phase
+## 9. Methodology notes for the next perf phase
 
 - **Default to `--throttling-method=devtools` for LCP regression
   hunts.** Simulate (Lantern) variance for this page on this commit
