@@ -125,10 +125,35 @@ export default function RootLayout({
       <head>
         <JsonLd data={rootGraph} />
 
-        {/* Google Analytics 4 */}
+        {/*
+         * Google Analytics 4
+         *
+         * gtag.js loads at "lazyOnload" (browser idle time, post-load event)
+         * to keep its ~146 KiB High-priority preload out of the LCP image's
+         * HTTP/2 contention window. With strategy="afterInteractive" (the
+         * prior setting), next/script emitted a <link rel="preload"
+         * as="script" fetchpriority="high"> for gtag.js into the document
+         * head, which competed with the LCP image for bandwidth on the
+         * mobile multiplexed connection (see
+         * marketing/teams-redesign/11-home-lcp-postmortem.md §6.2 + §10).
+         *
+         * The inline init script below stays at afterInteractive — it sets
+         * up the window.dataLayer queue and the gtag() shim function early,
+         * so any code paths that call gtag() before gtag.js finishes loading
+         * (none in this codebase as of the §6.2 grep audit, but defensive)
+         * push to the queue. When gtag.js eventually loads it drains the
+         * queue and processes queued events (`js`, `config`, page_view).
+         *
+         * Tradeoff: GA4 page_view fires later (after window 'load' event +
+         * browser idle, typically 1–3 s later on mobile). Users who bounce
+         * in that window are not tracked. Acceptable for our analytics
+         * needs; meaningful traffic stays an explicit interaction further
+         * in. If this becomes a problem, switch to "afterInteractive" and
+         * accept the LCP cost.
+         */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script id="ga4-init" strategy="afterInteractive">
           {`

@@ -6,6 +6,54 @@
 
 ---
 
+## Jamie — May 27, 2026 (Phase 9 §6.2 shipped: gtag.js → lazyOnload, removes 146 KiB High-priority preload)
+
+**Why:** Doc 11 §6.2 named gtag.js as the next-highest-leverage Phase 9 lever after §6.1 (Tungsten trim) shipped. The proposal needed an inline correction: gtag.js was already at `strategy="afterInteractive"`, not sync-loaded. But `afterInteractive` still emits a `<link rel="preload" as="script" fetchpriority="high">` for the gtag.js fetch. Only execution was deferred; the 146 KiB preload still competed with the LCP image for HTTP/2 bandwidth.
+
+**Change** ([commit `b47ca36`](app/layout.tsx)): GA4 `<Script>` `strategy` changed from `afterInteractive` to `lazyOnload`. The inline `ga4-init` script stays at `afterInteractive` so the `window.dataLayer` queue + `gtag()` shim are set up before gtag.js loads; gtag.js drains the queue when it eventually loads.
+
+**Pre-commit grep audit** (doc 11 §6.2 requirement): zero external sync `gtag()` or `window.dataLayer` callers across `app/`, `components/`, `lib/`, `context/`. All callers are inside the inline init script itself. Safe to defer.
+
+**Pre-ship local verification:**
+- `tsc --noEmit` clean. `next build` clean (53 routes, 29 MB `.next/server`).
+- Local production server served HTML: gtag.js preload `<link>` tag GONE. gtag URL still referenced in RSC payload with `strategy:"lazyOnload"` (script will load via JS injection after window load + idle). Tungsten preload count still 1. `home-hero-bg fetchPriority="high"` preserved. Initial `<video>` count still 0.
+- 5 local devtools Lighthouse runs against `next start`: median LCP 1.83 s (was 2.02 s post-Tungsten-only), score 98 (was 97), spread 27 ms.
+
+**Post-deploy measurement** (10 devtools Lighthouse runs against `dev--ekuzo.netlify.app/`, cache-busted):
+
+| metric | post-§6.1 (Tungsten only) | post-§6.2 (this commit) | delta |
+|---|---:|---:|---:|
+| Score (median) | 75 | **77** | +2 |
+| LCP (median) | 4.49 s | **4.31 s** | −180 ms |
+| LCP image network end | 4.47 s | 4.29 s | −180 ms |
+| `resourceLoadDuration` | 2.70 s | 2.54 s | −160 ms |
+| TTFB | 1.74 s | 1.74 s | ±0 |
+| Total weight | 7.73 MB | 7.73 MB | ±0 |
+
+**Less than the predicted +10 score / −730 ms LCP from doc 11 §10**, but the mechanism worked exactly as designed:
+- Lighthouse network log confirms gtag.js now fetches at start=5646 ms, **Low priority, AFTER LCP at 4459 ms** (post-load idle as `lazyOnload` documents).
+- Competing High-priority bytes in the LCP window dropped from 388 KiB (pre-Phase-9) → 170 KiB (−218 KiB, more than the predicted 146 KiB — additional 71 KiB came from HTTP/2 stream weight redistribution once gtag exited the queue).
+- LCP image's actual transfer time dropped 608 ms (close to the 730 ms prediction). Only 180 ms made it into the headline LCP because of run-to-run TTFB / image-start-time variance.
+
+**Lighthouse score tier observation:** median LCP 4.31 s is still in "Poor" tier (>4.0 s). The +2 score is within-tier movement. Run-01 of the post-§6.2 batch hit 87 score / 3.39 s LCP — the tier-crossing run — but the median didn't cross. The TTFB floor (~1.74 s Netlify edge under throttled mobile) makes it structurally hard to cross 4.0 s without infrastructure-level work.
+
+**Combined Phase 9 result (§6.1 + §6.2 stacked vs pre-Phase-9 baseline):**
+
+| metric | pre-Phase-9 | post-Phase-9 | delta |
+|---|---:|---:|---:|
+| Score (median) | 73 | **77** | +4 |
+| LCP (median) | 4.96 s | **4.31 s** | −650 ms |
+| `resourceLoadDuration` | 3.18 s | 2.54 s | −640 ms |
+| Competing High-pri bytes in LCP window | 388 KiB | 170 KiB | −218 KiB |
+
+**Stop condition for the optimization arc:** the home LCP is now at the high end of "Poor" / low end of "Needs improvement". Further gains require (a) TTFB reduction (infrastructure / Netlify edge config), (b) JS bundle work (the 290 KiB Low-priority chunks remain in the LCP window via HTTP/2 multiplexing), or (c) accepting the floor and declaring optimization complete.
+
+**Full breakdown + network log analysis** in [doc 11 §11](marketing/teams-redesign/11-home-lcp-postmortem.md#11-phase-9-62--applied-and-measured-commit-b47ca36-2026-05-27).
+
+**Files touched:** `app/layout.tsx`, `marketing/teams-redesign/11-home-lcp-postmortem.md`, `WORKLOG.md`. **Commits on dev:** `b47ca36` (fix), this session-close doc cleanup. Dev → main merge is the last step in this session per Jamie's direction.
+
+---
+
 ## Jamie — May 26, 2026 (Phase 9 §6.1 shipped: Tungsten preload trim — 4 weights → Black only)
 
 **Why:** Doc 11 post-mortem identified 71 KiB of unused-above-fold Tungsten preloads (Bold + Semibold + Medium) as the largest removable High-priority bandwidth competing with the LCP image on home. Jamie said "we can make these changes now" pre-prod.

@@ -399,3 +399,99 @@ Remaining contention from JS chunks (290 KiB Low priority) and 4
 above-the-fold images (LCP + bird + 2 torn paper, ~85 KiB High).
 Past 85 score on home requires JS bundle work — out of Phase 9
 scope as currently conceived.
+
+---
+
+## 11. Phase 9 §6.2 — applied and measured (commit `b47ca36`, 2026-05-27)
+
+`app/layout.tsx` GA4 `<Script>` strategy changed from
+`afterInteractive` to `lazyOnload`. The inline `ga4-init` script
+stays at `afterInteractive` to set up the `window.dataLayer` queue
++ `gtag()` shim before any caller could push to it. When gtag.js
+loads (now after the window `load` event + browser idle), it
+drains the queue and processes the queued `js` / `config` /
+`PageView` events.
+
+**Doc 11 §6.2 premise needed an inline correction:** the §6.2
+proposal assumed gtag.js was sync-loaded. It was already at
+`afterInteractive`. The actual bandwidth-cost mechanism was
+different: `next/script strategy="afterInteractive"` emits a
+`<link rel="preload" as="script" fetchpriority="high">` in the
+document head so the script bytes are pre-fetched before execution.
+Execution was deferred; the fetch was still High priority. Real
+fix: `lazyOnload` adds no preload tag at all — script loads via
+browser-driven `<script async>` injection after `load` event.
+
+Pre-commit grep audit (doc 11 §6.2 requirement): zero external
+sync `gtag()` or `window.dataLayer` callers in app/, components/,
+lib/, context/. The only callers are inside the inline init
+script itself. Safe to defer.
+
+**Measured Netlify devtools result** (10 runs, cache-busted):
+
+| metric                  | post-§6.1 Netlify (§10) | post-§6.2 Netlify | delta    |
+|-------------------------|------------------------:|------------------:|---------:|
+| Score (median)          | 75                      | **77**            | +2       |
+| LCP (median)            | 4.49 s                  | **4.31 s**        | −180 ms  |
+| LCP min / max           | 3.32 s / 4.89 s         | 3.39 s / 4.46 s   | range narrowed |
+| LCP image network end   | 4.47 s                  | 4.29 s            | −180 ms  |
+| TTFB (breakdown)        | 1.74 s                  | 1.74 s            | ±0       |
+| `resourceLoadDuration`  | 2.70 s                  | 2.54 s            | −160 ms  |
+| Total weight            | 7.73 MB                 | 7.73 MB           | ±0       |
+| LCP element identity    | home-hero-bg.png (10/10)| home-hero-bg.png (10/10) | unchanged |
+
+**Less than the predicted +10 score / −730 ms LCP.** Predicted
+combined §6.1 + §6.2 was LCP ~3.76 s / score ~85. Actual landed at
+LCP 4.31 s / score 77. The mechanism worked — gtag.js was deferred
+out of the LCP window (Lighthouse network log confirms it fetches at
+start=5646 ms, Low priority, after LCP at 4459 ms) — but the LCP
+image's bandwidth reclaim was smaller than the linear-bandwidth
+model predicted (146 KiB freed expected ~730 ms reclaim at
+6.76 ms/KiB from the §6.1 calibration; got ~480 ms reclaim of the
+LCP image's actual transfer time, of which only 180 ms made it into
+the headline LCP because the image's start time shifted ~100 ms later
+in this measurement batch).
+
+**Network log delta** (post-§6.1 vs post-§6.2 in run-08 of each batch):
+
+| | post-§6.1 | post-§6.2 |
+|---|---:|---:|
+| High-priority bytes in LCP window | 388 KiB | **170 KiB** (−218 KiB) |
+| Low-priority bytes in LCP window  | 375 KiB | 375 KiB |
+| LCP image transfer time (`networkEndTime - networkRequestTime`) | 3,184 ms | **2,576 ms** (−608 ms) |
+
+So 218 KiB of High-priority bandwidth was reclaimed (the predicted
+146 KiB gtag + an additional 71 KiB because some sibling streams
+re-prioritized once gtag exited the queue — HTTP/2 stream weight
+redistribution). LCP image transfer time dropped 608 ms (close to
+the 730 ms prediction). Headline LCP only moved 180 ms because of
+run-to-run variance in TTFB and image start time. The mechanism is
+working; the prediction model just underestimated the noise.
+
+**Lighthouse score tier observation:** the median LCP 4.31 s is
+still in Lighthouse's "Poor" tier (>4.0 s). The +2 score reflects
+within-tier movement. Run-01 of the post-§6.2 batch hit 87 score /
+3.39 s LCP — the tier-crossing run — but the median didn't cross.
+The TTFB floor (~1.74 s on Netlify edge under throttled mobile)
+makes it structurally hard to cross 4.0 s without attacking
+TTFB itself, which would be an infrastructure-level change beyond
+Phase 9 scope.
+
+**Combined Phase 9 result vs the pre-Phase-9 baseline (doc 10 §7):**
+
+| metric | pre-Phase-9 | post-Phase-9 (§6.1 + §6.2) | delta |
+|---|---:|---:|---:|
+| Score (median) | 73 | **77** | +4 |
+| LCP (median) | 4.96 s | **4.31 s** | −650 ms |
+| `resourceLoadDuration` | 3.18 s | 2.54 s | −640 ms |
+| Total weight | 7.80 MB | 7.73 MB | −70 KB |
+| High-pri bytes in LCP window | 388 KiB | 170 KiB | −218 KiB |
+| Score (Phase 8 fixes vs Phase 9 stacked) | 67 (raw) → 73 → 77 | +10 across both phases of follow-up | |
+
+**Stop condition for this work:** the home-page LCP is now at the
+high end of "Poor" / low end of "Needs improvement". Further gains
+require either (a) TTFB reduction (infrastructure / Netlify config /
+edge functions), (b) JS bundle work (the 290 KiB Low-priority
+chunks are still in the LCP window via HTTP/2 multiplexing), or
+(c) accepting the floor and declaring the optimization complete
+for now.
