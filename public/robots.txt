@@ -8,3 +8,6 @@ Sitemap: https://ekuzo.gg/sitemap.xml
 # Block internal/draft routes
 Disallow: /api/
 Disallow: /_next/
+# ...but let crawlers fetch optimized images (Next.js image optimizer).
+# More-specific Allow overrides the /_next/ Disallow for compliant bots.
+Allow: /_next/image

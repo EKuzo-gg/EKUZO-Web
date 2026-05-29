@@ -170,12 +170,12 @@ function buildCohortOption(monthIndex: number, year: number): CohortOption {
   };
 }
 
-// Next N cohorts whose first Tue is still in the future (with a small
-// lead-time buffer so we don't list cohorts starting in 6 days).
-const COHORT_LEAD_DAYS = 7;
+// Next N cohorts whose first Tue is still in the future. Lead-time
+// buffer removed 2026-05-28 per Aaron — we want June to be selectable
+// even though it's <7 days out. A cohort shows as long as its first
+// session date hasn't passed yet.
 function getAvailableCohorts(): CohortOption[] {
   const now = new Date();
-  const buffer = new Date(now.getTime() + COHORT_LEAD_DAYS * 24 * 60 * 60 * 1000);
   const cohorts: CohortOption[] = [];
   for (let offset = 0; offset < 6 && cohorts.length < 3; offset++) {
     const monthDate = new Date(now.getFullYear(), now.getMonth() + offset, 1);
@@ -183,8 +183,8 @@ function getAvailableCohorts(): CohortOption[] {
       monthDate.getMonth(),
       monthDate.getFullYear()
     );
-    // Skip cohorts whose first session is already inside the lead window.
-    if (cohort.sessionDates[0] >= buffer) {
+    // Skip cohorts whose first session has already passed.
+    if (cohort.sessionDates[0] >= now) {
       cohorts.push(cohort);
     }
   }
@@ -730,7 +730,7 @@ export default function Ekuzo100RegisterPage() {
               className="font-display uppercase text-black leading-[0.85]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
             >
-              Choose your cohort
+              Choose your month
             </h2>
             <p
               className="font-body text-[#4b5563] mt-6"
@@ -739,7 +739,7 @@ export default function Ekuzo100RegisterPage() {
                 lineHeight: "28px",
               }}
             >
-              EKUZO100 is 4 weeks of Tuesday &amp; Thursday sessions, {SESSION_TIME} local. Pick a month: your 8 session dates will light up below.
+              Choose your month below. EKUZO100 is Tuesday &amp; Thursday evenings, {SESSION_TIME} local, each week.
             </p>
 
             <div
@@ -786,18 +786,30 @@ export default function Ekuzo100RegisterPage() {
 
               {/* Calendar grid — renders for the selected cohort.
                   Read-only visualization of the 8 session dates;
-                  selection happens at the tab level above. */}
+                  selection happens at the tab level above. Summary
+                  panel renders ABOVE the calendar (2026-05-28) so the
+                  parent gets immediate confirmation of dates + times
+                  after picking a month — calendar below is visualization. */}
               {selectedCohortData && (
                 <>
-                  <div className="flex items-center justify-center mb-4">
+                  {/* Selection summary panel — sits above the calendar.
+                      Big month header is the headline; date range + day/
+                      time sit beneath as supporting copy. */}
+                  <div className="mb-4 text-center">
                     <span
-                      className="font-display uppercase text-[#0a0a0a]"
+                      className="block font-display uppercase text-[#0a0a0a]"
                       style={{
                         fontSize: "clamp(32px, 4.5vw, 42px)",
                         lineHeight: "1",
                       }}
                     >
                       {selectedCohortData.monthLabel}
+                    </span>
+                    <span
+                      className="block font-body font-bold mt-2"
+                      style={{ fontSize: "13px", lineHeight: "1.2", color: "#FF6B1A" }}
+                    >
+                      {selectedCohortData.startDate} – {selectedCohortData.endDate} · Tuesdays &amp; Thursdays · {SESSION_TIME}
                     </span>
                   </div>
 
@@ -877,25 +889,6 @@ export default function Ekuzo100RegisterPage() {
                           </div>
                         );
                       })}
-                  </div>
-
-                  {/* Selection summary bar */}
-                  <div className="mt-5 bg-[#FF6B1A]/5 border border-[#FF6B1A]/20 rounded-lg px-4 py-3">
-                    <span
-                      className="block font-display uppercase text-black"
-                      style={{
-                        fontSize: "clamp(20px, 2.8vw, 26px)",
-                        lineHeight: "1.1",
-                      }}
-                    >
-                      {selectedCohortData.startDate} – {selectedCohortData.endDate}
-                    </span>
-                    <span
-                      className="block font-body font-bold mt-1.5"
-                      style={{ fontSize: "13px", lineHeight: "1.2", color: "#FF6B1A" }}
-                    >
-                      Tuesdays &amp; Thursdays · {SESSION_TIME}
-                    </span>
                   </div>
                 </>
               )}

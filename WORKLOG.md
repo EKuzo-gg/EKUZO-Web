@@ -6,6 +6,39 @@
 
 ---
 
+## Jamie — May 29, 2026 (schema: Article → BlogPosting site-wide + llms.txt refresh)
+
+- **`lib/schema.ts`:** `buildBlogArticleSchema` now emits `@type: "BlogPosting"` (was `Article`). BlogPosting is a strict subtype — same fields, more precise classification for Google + LLMs. Propagates to ALL posts (verified BlogPosting renders on the new post, six-tells, and LoL; no stray `Article` left in any blog HTML).
+- **`public/llms.txt`:** added the new post (rich description, introduces Jamie Fitch as CEO/author in the AI-facing surface) and fixed a pre-existing broken link (`...with-ekuso-and-...` typo → `ekuzo`).
+
+**Go-live readiness:** dev is shippable — `tsc` + `next build` clean (static, no mp4 in trace). Next session = promote dev → main (Jamie's blog work + Aaron's /editors page + ekuzo100 register tweaks). Run `git fetch origin && git log dev..origin/main` first (main can outrun dev), then the standard dev→main merge.
+
+## Jamie — May 29, 2026 (Phase 2 of 2: blog post "When your son's only friends are online")
+
+**What:** Jamie's first post, live at `/blog/when-your-sons-only-friends-are-online`. Mirrors the six-tells post structure (`BlogContent`, byline → author page, FAQ as `<h3>` driven by the same array as the schema).
+
+- **Page** (`app/blog/when-your-sons-only-friends-are-online/page.tsx`): body verbatim from the corrected canonical draft. SEO title "When your son's only friends are online: are online friends real? | EKUZO" (visible H1 stays clean); description + canonical per spec; `robots: index`. Byline "Jamie Fitch" → `/blog/author/jamie-fitch`, sub-label "CEO of EKUZO".
+- **Schema** (4 `<JsonLd>`, mirroring six-tells): `Article` with `author` `@id` = `#person-jamie`; `BreadcrumbList`; `FAQPage` (6 Q&As, same array as the visible `<h3>`s); `VideoObject` for Becky reusing the homepage node's exact `@id` via new `buildTestimonialVideoSchema(slug)` in `lib/schema.ts` (one canonical entity, no fork).
+- **Secondary media:** Becky's parent testimonial (`<video>` + poster, served from CDN — confirmed NOT swept into the function trace) in "Where a coached team fits". Chose Becky over Brad because the post is boy-framed and Brad's is a girl-gamer/safety story (earmarked for a future girls-in-gaming post). Jamie opted for Becky over recording his own clip.
+- **Hero:** `public/images/when-your-sons-only-friends-are-online-hero.jpg` (parent-in-doorway shot, Jamie-provided), also used as the share/card image.
+- **Wiring (full-site propagation):** added to blog index + Jamie's author-page posts grid; swapped the six-tells "Keep Reading" card to point here (stronger topical sibling than the summer-camps link it replaced); all four inline internal links resolve. **`app/sitemap.ts`** (manual list): added the new post + `/blog/author/jamie-fitch`, and closed two pre-existing gaps it had drifted into — `what-your-kids-gaming-is-telling-you` (six-tells) and `/blog/author/karlin-oei` were both missing. Sitemap now 26 URLs. `robots.txt` already `Allow: /` with sitemap referenced — no change needed; post is `index:true`.
+
+**Verified:** `tsc` clean; `next build` clean (post prerenders static, `.next/server` 31M, no mp4 in trace); 0 em-dashes in rendered body (voice guard); fixed a duplicate-React-key bug in the Sources list. Schema graph confirmed in rendered HTML: `Article` author resolves to the Jamie `Person` node (present on-page via rootGraph), `FAQPage` (6), `BreadcrumbList`, `VideoObject` (becky `@id`). Title/description/canonical render to spec.
+
+## Jamie — May 29, 2026 (Phase 1 of 2: Jamie Fitch author page + Person schema)
+
+**What:** Net-new reusable author infrastructure, mirroring the Karlin author-page pattern exactly.
+
+- `lib/schema.ts`: added `personJamieFitch` Person node + `JAMIE_ID` (`/#person-jamie`), `jobTitle: "CEO"`, `worksFor` → Org, `sameAs` (LinkedIn + fitch.vc), headshot, `knowsAbout`. Added to `rootGraph` so the `@id` resolves site-wide (same as the coach nodes). "Parent" kept OUT of schema per Jamie — it lives on-page only.
+- `app/blog/author/jamie-fitch/page.tsx`: author page at `/blog/author/jamie-fitch`. Emits `ProfilePage` + `BreadcrumbList` via `buildAuthorPageGraph`, referencing the Person by `@id`. Byline sub-label "CEO of EKUZO · Parent". Posts grid is conditionally rendered and empty for now — Phase 2 populates it once the post route + card image exist.
+- `public/images/jamie-fitch.jpg`: headshot (500×499, converted from PNG). Alt text "Jamie Fitch, CEO of EKUZO".
+
+**Voice:** author-page bio + meta description written to match Jamie's deliberate no-em-dash voice.
+
+**Verified:** `tsc` clean; `next build` clean (route prerenders static, `.next/server` 29M, no mp4 in trace); local preview confirms schema graph renders (`Person #person-jamie` in root `@graph`, `ProfilePage` references it). Phase 2 (the post "When your son's only friends are online") follows once Jamie provides the hero + card images.
+
+**Follow-up (same day):** Applied Jamie's bio rewrite — author page now carries the authority-forward bio (edtech founder, raised $40M+, scaled and sold an education company), finalized to the v2 wording (added the EKUZO thesis lines "Left alone, gaming can drift… With the right structure…" + a "who he writes for" closing paragraph; "human potential" → "impact" in both the bio and the schema description). Folded that authority into the Person schema `description` + added `education technology` to `knowsAbout` (pure E-E-A-T upside; "parent" still kept out of schema per Jamie). Post-body edits (FAQ "much more likely to build belonging", "is not treatment for…", subtitle → "What parents see, and what kids may actually be doing", plural "parents of gamers", "symptom not the cause", italic *lower standard*, Lisa-named Ryan transition, sharper escalation ladder) were baked into the canonical draft so Phase 2 builds the corrected copy verbatim. Em-dashes in Jamie's suggested rewrites were converted to commas to preserve the post's deliberate no-em-dash voice.
+
 ## Jamie — May 27, 2026 (Phase 9 §6.2 shipped: gtag.js → lazyOnload, removes 146 KiB High-priority preload)
 
 **Why:** Doc 11 §6.2 named gtag.js as the next-highest-leverage Phase 9 lever after §6.1 (Tungsten trim) shipped. The proposal needed an inline correction: gtag.js was already at `strategy="afterInteractive"`, not sync-loaded. But `afterInteractive` still emits a `<link rel="preload" as="script" fetchpriority="high">` for the gtag.js fetch. Only execution was deferred; the 146 KiB preload still competed with the LCP image for HTTP/2 bandwidth.

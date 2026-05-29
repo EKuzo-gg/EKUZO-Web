@@ -707,27 +707,26 @@ export default function PostGamingHiddenMeaning() {
               Keep Reading
             </p>
             <Link
-              href="/blog/summer-camps-for-kids-who-game-2026"
+              href="/blog/when-your-sons-only-friends-are-online"
               className="group grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8 items-start md:items-center"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
-                  src="/images/blog-post-3-card.jpg"
-                  alt="Virtual summer camps for kids who'd rather be gaming"
+                  src="/images/when-your-sons-only-friends-are-online-hero.jpg"
+                  alt="A parent in a doorway watching their son game at his desk"
                   fill
                   className="object-cover opacity-80 transition-opacity group-hover:opacity-100"
                 />
               </div>
               <div>
                 <span className="font-body text-xs font-bold text-red tracking-[0.15em] uppercase block mb-2">
-                  Guides
+                  Perspective
                 </span>
                 <h3 className="font-body font-bold text-black text-xl leading-snug group-hover:text-red transition-colors mb-2">
-                  Virtual summer camps for kids who&apos;d rather be gaming
-                  (still open for summer 2026)
+                  When your son&apos;s only friends are online
                 </h3>
                 <span className="font-body text-black/40 text-sm">
-                  by Karlin Oei
+                  by Jamie Fitch
                 </span>
               </div>
             </Link>

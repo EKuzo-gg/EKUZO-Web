@@ -73,6 +73,37 @@ export const coachNuriSchema = {
   image: `${SITE}/images/coach-nuri-je.png`,
 };
 
+// ─── Author Person schemas (blog bylines) ──────────────────────────────────
+// Jamie Fitch is a blog author, not an Org-structural entity like the coaches,
+// but he follows the same pattern: one canonical Person node in the root @graph
+// referenced by @id from his ProfilePage (author page) and from the `author` of
+// any BlogPosting he writes. Keep "parent" out of jobTitle/description — it
+// lives on-page only (byline sub-label + author bio). jobTitle is "CEO".
+export const JAMIE_ID = `${SITE}/#person-jamie`;
+
+export const personJamieFitch = {
+  "@type": "Person",
+  "@id": JAMIE_ID,
+  name: "Jamie Fitch",
+  jobTitle: "CEO",
+  description:
+    "CEO of EKUZO, a youth esports coaching program. An edtech founder who previously raised over $40M, scaled, and sold an education company, and now builds and invests in companies focused on learning, youth development, and impact.",
+  knowsAbout: [
+    "youth esports",
+    "esports coaching",
+    "youth development",
+    "structured gaming",
+    "online friendship and social connection",
+    "screen time",
+    "parenting gamers",
+    "education technology",
+  ],
+  sameAs: ["https://www.linkedin.com/in/jamiefitch/", "https://fitch.vc"],
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/jamie-fitch.jpg`,
+  url: `${SITE}/blog/author/jamie-fitch`,
+};
+
 // ─── Organization (EducationalOrganization) ────────────────────────────────
 export const organizationSchema = {
   "@type": "EducationalOrganization",
@@ -186,6 +217,7 @@ export const rootGraph = {
     coachKarlinSchema,
     coachSebastienSchema,
     coachNuriSchema,
+    personJamieFitch,
   ],
 };
 
@@ -392,7 +424,11 @@ export function buildBlogArticleSchema({
   const imageUrl = image.startsWith("http") ? image : `${SITE}${image}`;
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    // BlogPosting is a subtype of Article — same fields, but the more precise
+    // type Google + LLMs use to classify authored blog content. Applies to
+    // every post built with this helper. @id fragment kept as #article (stable
+    // identifier; nothing references it, so no need to churn it).
+    "@type": "BlogPosting",
     "@id": `${url}#article`,
     headline: title,
     description,
@@ -530,18 +566,27 @@ type TestimonialMeta = {
   role: string;
   transcriptKey: keyof typeof testimonialTranscripts;
   uploadDate: string;
+  durationSec: number; // measured with ffprobe; emitted as ISO 8601 duration
 };
 
+// Convert whole seconds to an ISO 8601 duration (e.g. 63 -> "PT1M3S").
+function secondsToISO8601(totalSeconds: number): string {
+  const s = Math.round(totalSeconds);
+  const m = Math.floor(s / 60);
+  const rem = s % 60;
+  return `PT${m ? `${m}M` : ""}${rem}S`;
+}
+
 const testimonials: TestimonialMeta[] = [
-  { slug: "becky-parent", name: "Becky", role: "Parent", transcriptKey: "beckyParent", uploadDate: "2026-01-12" },
-  { slug: "brad-parent-girl-gamer", name: "Brad", role: "Parent (girl gamer)", transcriptKey: "bradParentGirlGamer", uploadDate: "2026-01-27" },
-  { slug: "debbie-potter-monroe", name: "Debbie Potter", role: "Director of Admissions, Robert F. Monroe Day School", transcriptKey: "debbiePotterMonroe", uploadDate: "2026-02-03" },
-  { slug: "laura-hogan-mirus-academy", name: "Laura Hogan", role: "Administrator, Mirus Academy", transcriptKey: "lauraHoganMirusAcademy", uploadDate: "2026-02-16" },
-  { slug: "rajitha-parent", name: "Rajitha", role: "Parent", transcriptKey: "rajithaParent", uploadDate: "2026-02-25" },
-  { slug: "student-i-learned", name: "EKUZO Student", role: "Student", transcriptKey: "studentILearned", uploadDate: "2026-03-04" },
-  { slug: "student-man-of-my-word", name: "EKUZO Student", role: "Student", transcriptKey: "studentManOfMyWord", uploadDate: "2026-03-12" },
-  { slug: "student-thank-you-ekuzo", name: "EKUZO Student", role: "Student", transcriptKey: "studentThankYouEkuzo", uploadDate: "2026-03-19" },
-  { slug: "student-you-should-join", name: "EKUZO Student", role: "Student", transcriptKey: "studentYouShouldJoin", uploadDate: "2026-03-27" },
+  { slug: "becky-parent", name: "Becky", role: "Parent", transcriptKey: "beckyParent", uploadDate: "2026-01-12", durationSec: 63 },
+  { slug: "brad-parent-girl-gamer", name: "Brad", role: "Parent (girl gamer)", transcriptKey: "bradParentGirlGamer", uploadDate: "2026-01-27", durationSec: 68 },
+  { slug: "debbie-potter-monroe", name: "Debbie Potter", role: "Director of Admissions, Robert F. Monroe Day School", transcriptKey: "debbiePotterMonroe", uploadDate: "2026-02-03", durationSec: 50 },
+  { slug: "laura-hogan-mirus-academy", name: "Laura Hogan", role: "Administrator, Mirus Academy", transcriptKey: "lauraHoganMirusAcademy", uploadDate: "2026-02-16", durationSec: 76 },
+  { slug: "rajitha-parent", name: "Rajitha", role: "Parent", transcriptKey: "rajithaParent", uploadDate: "2026-02-25", durationSec: 48 },
+  { slug: "student-i-learned", name: "EKUZO Student", role: "Student", transcriptKey: "studentILearned", uploadDate: "2026-03-04", durationSec: 20 },
+  { slug: "student-man-of-my-word", name: "EKUZO Student", role: "Student", transcriptKey: "studentManOfMyWord", uploadDate: "2026-03-12", durationSec: 11 },
+  { slug: "student-thank-you-ekuzo", name: "EKUZO Student", role: "Student", transcriptKey: "studentThankYouEkuzo", uploadDate: "2026-03-19", durationSec: 12 },
+  { slug: "student-you-should-join", name: "EKUZO Student", role: "Student", transcriptKey: "studentYouShouldJoin", uploadDate: "2026-03-27", durationSec: 13 },
 ];
 
 const testimonialVideoNodes = testimonials.map((t) => {
@@ -559,6 +604,7 @@ const testimonialVideoNodes = testimonials.map((t) => {
     description,
     thumbnailUrl,
     uploadDate: toSchemaDateTime(t.uploadDate),
+    duration: secondsToISO8601(t.durationSec),
     contentUrl: videoUrl,
     publisher: { "@id": ORG_ID },
     transcript,
@@ -571,3 +617,14 @@ export const testimonialVideoGraph = {
   "@context": "https://schema.org",
   "@graph": testimonialVideoNodes,
 };
+
+// Single testimonial VideoObject by slug, for embedding one testimonial on a
+// content page (e.g. a blog post). Returns the SAME node (same @id) used in
+// testimonialVideoGraph so the entity stays canonical across pages.
+export function buildTestimonialVideoSchema(slug: string) {
+  const node = testimonialVideoNodes.find(
+    (n) => n["@id"] === `${SITE}/testimonial-videos/${slug}.mp4#video`,
+  );
+  if (!node) throw new Error(`Unknown testimonial slug: ${slug}`);
+  return { "@context": "https://schema.org", ...node };
+}
