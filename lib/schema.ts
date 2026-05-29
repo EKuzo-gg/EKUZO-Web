@@ -424,7 +424,11 @@ export function buildBlogArticleSchema({
   const imageUrl = image.startsWith("http") ? image : `${SITE}${image}`;
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    // BlogPosting is a subtype of Article — same fields, but the more precise
+    // type Google + LLMs use to classify authored blog content. Applies to
+    // every post built with this helper. @id fragment kept as #article (stable
+    // identifier; nothing references it, so no need to churn it).
+    "@type": "BlogPosting",
     "@id": `${url}#article`,
     headline: title,
     description,

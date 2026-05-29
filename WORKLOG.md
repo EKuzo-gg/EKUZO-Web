@@ -6,6 +6,13 @@
 
 ---
 
+## Jamie — May 29, 2026 (schema: Article → BlogPosting site-wide + llms.txt refresh)
+
+- **`lib/schema.ts`:** `buildBlogArticleSchema` now emits `@type: "BlogPosting"` (was `Article`). BlogPosting is a strict subtype — same fields, more precise classification for Google + LLMs. Propagates to ALL posts (verified BlogPosting renders on the new post, six-tells, and LoL; no stray `Article` left in any blog HTML).
+- **`public/llms.txt`:** added the new post (rich description, introduces Jamie Fitch as CEO/author in the AI-facing surface) and fixed a pre-existing broken link (`...with-ekuso-and-...` typo → `ekuzo`).
+
+**Go-live readiness:** dev is shippable — `tsc` + `next build` clean (static, no mp4 in trace). Next session = promote dev → main (Jamie's blog work + Aaron's /editors page + ekuzo100 register tweaks). Run `git fetch origin && git log dev..origin/main` first (main can outrun dev), then the standard dev→main merge.
+
 ## Jamie — May 29, 2026 (Phase 2 of 2: blog post "When your son's only friends are online")
 
 **What:** Jamie's first post, live at `/blog/when-your-sons-only-friends-are-online`. Mirrors the six-tells post structure (`BlogContent`, byline → author page, FAQ as `<h3>` driven by the same array as the schema).
