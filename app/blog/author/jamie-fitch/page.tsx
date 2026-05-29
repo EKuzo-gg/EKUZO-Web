@@ -10,7 +10,7 @@ import Image from "next/image";
 const NAME = "Jamie Fitch";
 const SLUG = "jamie-fitch";
 const DESCRIPTION =
-  "Jamie Fitch is CEO of EKUZO and a parent. He grew up as the kid in the story, and writes about what parents see from the hallway versus what their gamer kid is actually living.";
+  "Jamie Fitch is CEO of EKUZO, a parent and edtech founder. He writes about turning gaming from something parents worry about into something kids can grow through.";
 
 export const metadata = {
   alternates: { canonical: `/blog/author/${SLUG}` },
@@ -126,19 +126,38 @@ export default function JamieFitchAuthorPage() {
                   CEO of EKUZO · Parent
                 </p>
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
-                  Jamie Fitch is CEO of EKUZO and a parent. He grew up as the
-                  kid in the story: short, socially awkward, and most himself in
-                  front of a game. At 16 he built his own PC, the habit that
-                  turned solo gaming into the community and the STEM career that
-                  followed.
+                  Jamie Fitch is the CEO of EKUZO, where he helps turn gaming
+                  from something parents worry about into something kids can
+                  grow through: coaching, structure, teammates, and purpose.
                 </p>
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
-                  He writes here about what parents see from the hallway versus
-                  what their gamer kid is actually living: when online friends
-                  are real, why structure beats restriction, and how a coached
-                  team turns isolation with a crowd in the background into
-                  belonging.
+                  He comes to the work from a few angles at once: as a parent, a
+                  lifelong competitive gamer, and a founder and operator who has
+                  spent his career building education and impact-driven
+                  companies. Jamie previously founded and led an edtech company,
+                  raised more than $40M, scaled it, and sold it. Today he
+                  advises, invests in, and helps operate companies focused on
+                  learning, youth development, technology, and human potential.
                 </p>
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
+                  Gaming is personal for Jamie. He grew up playing competitively
+                  and still sees games as one of the clearest places where kids
+                  reveal how they think, compete, communicate, handle
+                  frustration, and respond to challenges. As a parent, he also
+                  understands the tension: the same screen time that can look
+                  isolating or excessive from the outside can sometimes be the
+                  place where a child is practicing focus, strategy, resilience,
+                  friendship, and identity.
+                </p>
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
+                  His work sits at that intersection. He believes the question
+                  is not simply whether gaming is &ldquo;good&rdquo; or
+                  &ldquo;bad&rdquo; for kids.
+                </p>
+                <blockquote className="font-body italic text-black text-lg leading-[1.5] border-l-4 border-red pl-5">
+                  The better question is: what kind of environment surrounds the
+                  game?
+                </blockquote>
               </div>
             </div>
           </div>

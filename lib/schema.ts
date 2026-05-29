@@ -87,7 +87,7 @@ export const personJamieFitch = {
   name: "Jamie Fitch",
   jobTitle: "CEO",
   description:
-    "CEO of EKUZO, a youth esports coaching program. A lifelong gamer who writes about how structured, coached play turns kids' gaming into real connection, confidence, and growth.",
+    "CEO of EKUZO, a youth esports coaching program. An edtech founder who previously raised over $40M, scaled, and sold an education company, and now builds and invests in companies focused on learning, youth development, and human potential.",
   knowsAbout: [
     "youth esports",
     "esports coaching",
@@ -96,6 +96,7 @@ export const personJamieFitch = {
     "online friendship and social connection",
     "screen time",
     "parenting gamers",
+    "education technology",
   ],
   sameAs: ["https://www.linkedin.com/in/jamiefitch/", "https://fitch.vc"],
   worksFor: { "@id": ORG_ID },

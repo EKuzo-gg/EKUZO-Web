@@ -18,6 +18,8 @@
 
 **Verified:** `tsc` clean; `next build` clean (route prerenders static, `.next/server` 29M, no mp4 in trace); local preview confirms schema graph renders (`Person #person-jamie` in root `@graph`, `ProfilePage` references it). Phase 2 (the post "When your son's only friends are online") follows once Jamie provides the hero + card images.
 
+**Follow-up (same day):** Applied Jamie's bio rewrite — author page now carries the authority-forward bio (edtech founder, raised $40M+, scaled and sold an education company). Folded that authority into the Person schema `description` + added `education technology` to `knowsAbout` (pure E-E-A-T upside; "parent" still kept out of schema per Jamie). Post-body edits (FAQ "much more likely to build belonging", "is not treatment for…", subtitle → "What parents see, and what kids may actually be doing", plural "parents of gamers", "symptom not the cause", italic *lower standard*, Lisa-named Ryan transition, sharper escalation ladder) were baked into the canonical draft so Phase 2 builds the corrected copy verbatim. Em-dashes in Jamie's suggested rewrites were converted to commas to preserve the post's deliberate no-em-dash voice.
+
 ## Jamie — May 27, 2026 (Phase 9 §6.2 shipped: gtag.js → lazyOnload, removes 146 KiB High-priority preload)
 
 **Why:** Doc 11 §6.2 named gtag.js as the next-highest-leverage Phase 9 lever after §6.1 (Tungsten trim) shipped. The proposal needed an inline correction: gtag.js was already at `strategy="afterInteractive"`, not sync-loaded. But `afterInteractive` still emits a `<link rel="preload" as="script" fetchpriority="high">` for the gtag.js fetch. Only execution was deferred; the 146 KiB preload still competed with the LCP image for HTTP/2 bandwidth.
