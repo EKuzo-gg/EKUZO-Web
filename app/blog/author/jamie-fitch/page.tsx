@@ -43,8 +43,8 @@ export const metadata = {
   },
 };
 
-// Posts authored by Jamie. Populated in Phase 2 when the post route + card
-// image exist (the grid is hidden while empty so the page renders cleanly).
+// Posts authored by Jamie. The grid is hidden while empty so the page renders
+// cleanly with just the bio for a brand-new author.
 const POSTS: {
   slug: string;
   title: string;
@@ -52,7 +52,17 @@ const POSTS: {
   excerpt: string;
   image: string;
   category: string;
-}[] = [];
+}[] = [
+  {
+    slug: "when-your-sons-only-friends-are-online",
+    title: "When your son's only friends are online",
+    date: "May 28, 2026",
+    excerpt:
+      "Are online gaming friends real? The question isn't online vs offline. It's whether he's alone in a lobby of strangers or on a team with the same people.",
+    image: "/images/when-your-sons-only-friends-are-online-hero.jpg",
+    category: "Perspective",
+  },
+];
 
 export default function JamieFitchAuthorPage() {
   const profileGraph = buildAuthorPageGraph({

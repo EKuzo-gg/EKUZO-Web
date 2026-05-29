@@ -131,6 +131,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/blog/what-your-kids-gaming-is-telling-you`,
+      lastModified: new Date("2026-05-24"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
+      lastModified: new Date("2026-05-29"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+
+    // Blog author pages
+    {
+      url: `${baseUrl}/blog/author/karlin-oei`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/blog/author/jamie-fitch`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
 
     // Legal
     {

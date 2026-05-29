@@ -603,3 +603,14 @@ export const testimonialVideoGraph = {
   "@context": "https://schema.org",
   "@graph": testimonialVideoNodes,
 };
+
+// Single testimonial VideoObject by slug, for embedding one testimonial on a
+// content page (e.g. a blog post). Returns the SAME node (same @id) used in
+// testimonialVideoGraph so the entity stays canonical across pages.
+export function buildTestimonialVideoSchema(slug: string) {
+  const node = testimonialVideoNodes.find(
+    (n) => n["@id"] === `${SITE}/testimonial-videos/${slug}.mp4#video`,
+  );
+  if (!node) throw new Error(`Unknown testimonial slug: ${slug}`);
+  return { "@context": "https://schema.org", ...node };
+}

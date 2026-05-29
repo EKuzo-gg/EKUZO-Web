@@ -6,6 +6,18 @@
 
 ---
 
+## Jamie — May 29, 2026 (Phase 2 of 2: blog post "When your son's only friends are online")
+
+**What:** Jamie's first post, live at `/blog/when-your-sons-only-friends-are-online`. Mirrors the six-tells post structure (`BlogContent`, byline → author page, FAQ as `<h3>` driven by the same array as the schema).
+
+- **Page** (`app/blog/when-your-sons-only-friends-are-online/page.tsx`): body verbatim from the corrected canonical draft. SEO title "When your son's only friends are online: are online friends real? | EKUZO" (visible H1 stays clean); description + canonical per spec; `robots: index`. Byline "Jamie Fitch" → `/blog/author/jamie-fitch`, sub-label "CEO of EKUZO".
+- **Schema** (4 `<JsonLd>`, mirroring six-tells): `Article` with `author` `@id` = `#person-jamie`; `BreadcrumbList`; `FAQPage` (6 Q&As, same array as the visible `<h3>`s); `VideoObject` for Becky reusing the homepage node's exact `@id` via new `buildTestimonialVideoSchema(slug)` in `lib/schema.ts` (one canonical entity, no fork).
+- **Secondary media:** Becky's parent testimonial (`<video>` + poster, served from CDN — confirmed NOT swept into the function trace) in "Where a coached team fits". Chose Becky over Brad because the post is boy-framed and Brad's is a girl-gamer/safety story (earmarked for a future girls-in-gaming post). Jamie opted for Becky over recording his own clip.
+- **Hero:** `public/images/when-your-sons-only-friends-are-online-hero.jpg` (parent-in-doorway shot, Jamie-provided), also used as the share/card image.
+- **Wiring (full-site propagation):** added to blog index + Jamie's author-page posts grid; swapped the six-tells "Keep Reading" card to point here (stronger topical sibling than the summer-camps link it replaced); all four inline internal links resolve. **`app/sitemap.ts`** (manual list): added the new post + `/blog/author/jamie-fitch`, and closed two pre-existing gaps it had drifted into — `what-your-kids-gaming-is-telling-you` (six-tells) and `/blog/author/karlin-oei` were both missing. Sitemap now 26 URLs. `robots.txt` already `Allow: /` with sitemap referenced — no change needed; post is `index:true`.
+
+**Verified:** `tsc` clean; `next build` clean (post prerenders static, `.next/server` 31M, no mp4 in trace); 0 em-dashes in rendered body (voice guard); fixed a duplicate-React-key bug in the Sources list. Schema graph confirmed in rendered HTML: `Article` author resolves to the Jamie `Person` node (present on-page via rootGraph), `FAQPage` (6), `BreadcrumbList`, `VideoObject` (becky `@id`). Title/description/canonical render to spec.
+
 ## Jamie — May 29, 2026 (Phase 1 of 2: Jamie Fitch author page + Person schema)
 
 **What:** Net-new reusable author infrastructure, mirroring the Karlin author-page pattern exactly.

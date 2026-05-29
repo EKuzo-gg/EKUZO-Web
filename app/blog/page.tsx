@@ -25,6 +25,17 @@ const posts = [
     featured: true,
   },
   {
+    slug: "when-your-sons-only-friends-are-online",
+    title: "When your son's only friends are online",
+    date: "May 28, 2026",
+    author: "Jamie Fitch",
+    category: "Perspective",
+    excerpt:
+      "Are online gaming friends real? The question isn't online vs offline. It's whether he's alone in a lobby of strangers or on a team with the same people.",
+    image: "/images/when-your-sons-only-friends-are-online-hero.jpg",
+    featured: false,
+  },
+  {
     slug: "our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
     title: "Our Family's Esports Journey with EKUZO and the K1ng",
     date: "Jan 14, 2026",
