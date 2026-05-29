@@ -73,6 +73,36 @@ export const coachNuriSchema = {
   image: `${SITE}/images/coach-nuri-je.png`,
 };
 
+// ─── Author Person schemas (blog bylines) ──────────────────────────────────
+// Jamie Fitch is a blog author, not an Org-structural entity like the coaches,
+// but he follows the same pattern: one canonical Person node in the root @graph
+// referenced by @id from his ProfilePage (author page) and from the `author` of
+// any BlogPosting he writes. Keep "parent" out of jobTitle/description — it
+// lives on-page only (byline sub-label + author bio). jobTitle is "CEO".
+export const JAMIE_ID = `${SITE}/#person-jamie`;
+
+export const personJamieFitch = {
+  "@type": "Person",
+  "@id": JAMIE_ID,
+  name: "Jamie Fitch",
+  jobTitle: "CEO",
+  description:
+    "CEO of EKUZO, a youth esports coaching program. A lifelong gamer who writes about how structured, coached play turns kids' gaming into real connection, confidence, and growth.",
+  knowsAbout: [
+    "youth esports",
+    "esports coaching",
+    "youth development",
+    "structured gaming",
+    "online friendship and social connection",
+    "screen time",
+    "parenting gamers",
+  ],
+  sameAs: ["https://www.linkedin.com/in/jamiefitch/", "https://fitch.vc"],
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/jamie-fitch.jpg`,
+  url: `${SITE}/blog/author/jamie-fitch`,
+};
+
 // ─── Organization (EducationalOrganization) ────────────────────────────────
 export const organizationSchema = {
   "@type": "EducationalOrganization",
@@ -186,6 +216,7 @@ export const rootGraph = {
     coachKarlinSchema,
     coachSebastienSchema,
     coachNuriSchema,
+    personJamieFitch,
   ],
 };
 

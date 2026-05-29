@@ -6,6 +6,18 @@
 
 ---
 
+## Jamie — May 29, 2026 (Phase 1 of 2: Jamie Fitch author page + Person schema)
+
+**What:** Net-new reusable author infrastructure, mirroring the Karlin author-page pattern exactly.
+
+- `lib/schema.ts`: added `personJamieFitch` Person node + `JAMIE_ID` (`/#person-jamie`), `jobTitle: "CEO"`, `worksFor` → Org, `sameAs` (LinkedIn + fitch.vc), headshot, `knowsAbout`. Added to `rootGraph` so the `@id` resolves site-wide (same as the coach nodes). "Parent" kept OUT of schema per Jamie — it lives on-page only.
+- `app/blog/author/jamie-fitch/page.tsx`: author page at `/blog/author/jamie-fitch`. Emits `ProfilePage` + `BreadcrumbList` via `buildAuthorPageGraph`, referencing the Person by `@id`. Byline sub-label "CEO of EKUZO · Parent". Posts grid is conditionally rendered and empty for now — Phase 2 populates it once the post route + card image exist.
+- `public/images/jamie-fitch.jpg`: headshot (500×499, converted from PNG). Alt text "Jamie Fitch, CEO of EKUZO".
+
+**Voice:** author-page bio + meta description written to match Jamie's deliberate no-em-dash voice.
+
+**Verified:** `tsc` clean; `next build` clean (route prerenders static, `.next/server` 29M, no mp4 in trace); local preview confirms schema graph renders (`Person #person-jamie` in root `@graph`, `ProfilePage` references it). Phase 2 (the post "When your son's only friends are online") follows once Jamie provides the hero + card images.
+
 ## Jamie — May 27, 2026 (Phase 9 §6.2 shipped: gtag.js → lazyOnload, removes 146 KiB High-priority preload)
 
 **Why:** Doc 11 §6.2 named gtag.js as the next-highest-leverage Phase 9 lever after §6.1 (Tungsten trim) shipped. The proposal needed an inline correction: gtag.js was already at `strategy="afterInteractive"`, not sync-loaded. But `afterInteractive` still emits a `<link rel="preload" as="script" fetchpriority="high">` for the gtag.js fetch. Only execution was deferred; the 146 KiB preload still competed with the LCP image for HTTP/2 bandwidth.
