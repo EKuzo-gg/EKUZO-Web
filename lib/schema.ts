@@ -87,7 +87,7 @@ export const personJamieFitch = {
   name: "Jamie Fitch",
   jobTitle: "CEO",
   description:
-    "CEO of EKUZO, a youth esports coaching program. An edtech founder who previously raised over $40M, scaled, and sold an education company, and now builds and invests in companies focused on learning, youth development, and human potential.",
+    "CEO of EKUZO, a youth esports coaching program. An edtech founder who previously raised over $40M, scaled, and sold an education company, and now builds and invests in companies focused on learning, youth development, and impact.",
   knowsAbout: [
     "youth esports",
     "esports coaching",

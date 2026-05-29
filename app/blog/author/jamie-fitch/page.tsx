@@ -128,7 +128,8 @@ export default function JamieFitchAuthorPage() {
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   Jamie Fitch is the CEO of EKUZO, where he helps turn gaming
                   from something parents worry about into something kids can
-                  grow through: coaching, structure, teammates, and purpose.
+                  grow through, with coaching, structure, teammates, and
+                  purpose.
                 </p>
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   He comes to the work from a few angles at once: as a parent, a
@@ -137,7 +138,7 @@ export default function JamieFitchAuthorPage() {
                   companies. Jamie previously founded and led an edtech company,
                   raised more than $40M, scaled it, and sold it. Today he
                   advises, invests in, and helps operate companies focused on
-                  learning, youth development, technology, and human potential.
+                  learning, youth development, technology, and impact.
                 </p>
                 <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   Gaming is personal for Jamie. He grew up playing competitively
@@ -149,15 +150,21 @@ export default function JamieFitchAuthorPage() {
                   place where a child is practicing focus, strategy, resilience,
                   friendship, and identity.
                 </p>
-                <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-5">
                   His work sits at that intersection. He believes the question
                   is not simply whether gaming is &ldquo;good&rdquo; or
-                  &ldquo;bad&rdquo; for kids.
+                  &ldquo;bad&rdquo; for kids. The better question is: what kind
+                  of environment surrounds the game? Left alone, gaming can
+                  drift toward isolation, toxicity, or avoidance. With the right
+                  structure, it can become a coached, team-based,
+                  developmentally meaningful experience.
                 </p>
-                <blockquote className="font-body italic text-black text-lg leading-[1.5] border-l-4 border-red pl-5">
-                  The better question is: what kind of environment surrounds the
-                  game?
-                </blockquote>
+                <p className="font-body text-black/70 text-lg leading-[1.6] mb-6">
+                  Jamie writes for parents who do not want to dismiss gaming,
+                  but also do not want to leave it alone. His work is about
+                  seeing what kids are already drawn to, then building the
+                  structure around it that helps them grow.
+                </p>
               </div>
             </div>
           </div>
