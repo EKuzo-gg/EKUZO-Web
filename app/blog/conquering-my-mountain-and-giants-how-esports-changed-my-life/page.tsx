@@ -220,6 +220,16 @@ export default function PostJohnHay() {
                 make them but don&apos;t beat yourself up. Instead, focus on fixing those mistakes.
                 Use them as a tool to become better.
               </p>
+              <p className="italic text-black/60">
+                John&apos;s story is one person&apos;s experience, not a guarantee. If it
+                resonates and you want a low-stakes way to put your gamer on a coached team,{" "}
+                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month trial for $100 — or
+                read{" "}
+                <Link href="/blog/when-your-sons-only-friends-are-online">
+                  when your son&apos;s only friends are online
+                </Link>{" "}
+                for the bigger picture.
+              </p>
             </div>
           </div>
         </div>

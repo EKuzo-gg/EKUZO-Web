@@ -32,6 +32,7 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import { trackInitiateCheckout } from "@/lib/analytics";
+import TrackPageView from "@/components/analytics/TrackPageView";
 import { getAttribution } from "@/lib/attribution";
 import { getFbCookie } from "@/lib/fbCookies";
 import { nanoid } from "nanoid";
@@ -702,6 +703,13 @@ export default function CampsRegisterPage() {
 
   return (
     <>
+      {/* Fire ViewContent on register-page load. The ad set optimizes for
+          CONTENT_VIEW, but ViewContent previously only fired on the program
+          landing pages — so the TLDR→/register ad got almost no optimization
+          signal (1 ViewContent on 8k impressions in v2.0). The post-submit
+          InitiateCheckout below stays as the deeper-funnel event. */}
+      <TrackPageView program="camps" />
+
       <Nav variant="light" />
 
       {/* SVG clip path defs for torn-paper cards */}

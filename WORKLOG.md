@@ -6,6 +6,15 @@
 
 ---
 
+## Jamie — May 31, 2026 (Meta Pixel: fire ViewContent + Lead on the camps register funnel)
+
+**Why:** v2.0 weekend-pulse read flagged it — the camps register page was under-instrumented for Meta. The ad set optimizes for `CONTENT_VIEW`, but `ViewContent` only fired on program *landing* pages, so the TLDR→/register ad got almost no optimization signal (1 ViewContent on ~8k impressions). And register-page email capture only POSTed to `/api/camps/lead` (Beehiiv) — it never fired the Meta `Lead` pixel, so the funnel-fix payoff signal the campaign was built to read was invisible on-platform (`Lead` stuck at 0).
+
+- **`app/programs/ekuzo-camps/register/page.tsx`:** render `<TrackPageView program="camps" />` at the top of the page → fires `ViewContent` on load. The existing post-submit `trackInitiateCheckout` (after the register POST succeeds) is unchanged — still the deeper-funnel event.
+- **`hooks/useRegisterForm.ts`:** `handleEmailBlur` now calls `trackLead({ source: \`${productSlug}_register\` })` alongside the existing lead POST, gated by the same per-email ref so it fires once per email. **Note:** this hook is shared, so e100 + teams register pages also start firing `Lead` on email capture — intended (same capture mechanism, universally correct), not just camps.
+
+`tsc --noEmit` clean. No API/contract changes. Watch Meta for `ViewContent` on /register and `Lead > 0` in the back half of the v2.0 window.
+
 ## Jamie — May 29, 2026 (schema: Article → BlogPosting site-wide + llms.txt refresh)
 
 - **`lib/schema.ts`:** `buildBlogArticleSchema` now emits `@type: "BlogPosting"` (was `Article`). BlogPosting is a strict subtype — same fields, more precise classification for Google + LLMs. Propagates to ALL posts (verified BlogPosting renders on the new post, six-tells, and LoL; no stray `Article` left in any blog HTML).
