@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { captureAttribution } from "@/lib/attribution";
+import { trackLead } from "@/lib/analytics";
 
 // Shared register-form orchestration hook. Owns the truly cross-product
 // state and side effects:
@@ -101,6 +102,12 @@ export function useRegisterForm({
     if (!email || !EMAIL_RE.test(email)) return;
     if (leadFiredForEmailRef.current === email) return;
     leadFiredForEmailRef.current = email;
+    // Fire the Meta Pixel (+ GA4) Lead event alongside the server-side
+    // capture. Previously only the Beehiiv POST ran here, so Meta never
+    // saw a Lead for register-page email captures — the funnel-fix signal
+    // the v2.0 campaign was built to read was invisible on-platform.
+    // Gated by the same per-email ref above, so it fires once per email.
+    trackLead({ source: `${productSlug}_register` });
     fetch(`/api/${productSlug}/lead`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
