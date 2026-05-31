@@ -1,0 +1,41 @@
+Karlin "DAY 4" Founder Reel — Transcript
+
+Source: https://www.instagram.com/p/DYcuA4jBDl3/ (karlin_ekuzo / ekuzo.gg, posted ~2026-05-18)
+Pulled: 2026-05-22 via yt-dlp (audio) + faster-whisper base.en (verbatim STT)
+Length: ~55 seconds
+Series: Part of the daily "DAY [N]" founder series Karlin runs on IG. This is DAY 4.
+
+---
+
+TRANSCRIPT (verbatim spoken audio)
+
+I was a top-ranked gamer with childhood trauma, so today is day four of fixing that for the next generation.
+
+Growing up, I struggled immensely with social anxiety, low self-esteem, school, and I had a really poor relationship with my parents. It felt like I was forced to learn about things that I didn't care about when all I really wanted to do was play video games. In fact, my absolute best memory as a kid was playing ranked with my friends, playing in tournaments after school, and calling people trash over the internet.
+
+So in college, I stumbled my way into esports, basically competitive video games, and won over $80,000 in esports scholarships. My relationship with my mom has never been better. I'm finally proud of the person I'm becoming, and I started a company to help kids like me.
+
+12-year-old me didn't know what it meant to be on a team, with structure, routine, and intentionality. And even 18-year-old me only began to sort of understand that gaming can teach some of life's most important lessons, like ownership, accountability, and leadership.
+
+And so, gaming is more than just fun to you. If it's learning, if it's creativity, community, connection, please share your story below. The world needs to hear it.
+
+---
+
+WRITTEN IG CAPTION (differs from the spoken audio — kept for reference)
+
+DAY 4. I founded a gaming startup because esports changed my life. It genuinely taught me everything I know and made me everything that I am. To this day, the people that I cherish the most are the ones I've spent the most time gaming with. We stay connected through and because of games. People find their life-long partners through connection in games. People have built careers off of gaming, and not just the pros or influencers. SHARE UR #GAMING STORY, PLS.
+
+---
+
+VOICE NOTES (for the blog build)
+
+- This is the founder version of the hidden-gamer thesis. "Struggled immensely with social anxiety, low self-esteem... all I really wanted to do was play" is the kid the "is your gamer ready for more" piece is about. Use it as the proof beat, not the open.
+- The E100 bridge is almost verbatim: "12-year-old me didn't know what it meant to be on a team, with structure, routine, and intentionality." That is the EKUZO100 promise stated as a personal lack. The container he never had is the thing E100 sells.
+- The transferable-skills line maps to the article's reframe payload: gaming teaches "ownership, accountability, and leadership." Lands the see-it / flip-it argument from a lived place.
+- Credential to keep accurate: "$80,000 in esports scholarships" matches the coachKarlinSchema bio. Safe to cite.
+- Sign-off is a share-your-story CTA, not an enroll CTA. If we embed this reel, the article's own CTA (E100) does the conversion work; the reel does the emotional work.
+- Tone: confessional, fast, first person, light humor ("calling people trash over the internet"). Same register as the camps reel.
+
+ASSET HANDLING (per CLAUDE.md learning log)
+- For the Next.js page, host the reel as a file or use an official IG embed. Do not screenshot. Same handling flagged for the camps YouTube Short.
+- Series note: it's "DAY 4," so the rest of the daily series is a transcript bank worth pulling in one yt-dlp pass when we build.

@@ -256,6 +256,15 @@ export default function PostK1ng() {
                 That is invaluable, and we will always be so grateful to EKUZO for this journey we
                 chose and continue to be on with our K1NG, Ryan.
               </p>
+              <p className="italic text-black/60">
+                Ryan&apos;s story is one family&apos;s experience, not a guarantee. For the
+                bigger picture behind it, read{" "}
+                <Link href="/blog/when-your-sons-only-friends-are-online">
+                  when your son&apos;s only friends are online
+                </Link>
+                . And if you want a low-stakes way to try a coached team,{" "}
+                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month trial for $100.
+              </p>
             </div>
           </div>
         </div>

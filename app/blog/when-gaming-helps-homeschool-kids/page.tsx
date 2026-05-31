@@ -467,7 +467,10 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 stable rosters, trained coaches, clear goals, moderated spaces,
                 and a conversation after the match. You can build a version of
                 that at your own kitchen table. We&apos;re one place that does
-                it, if you want the help.
+                it, if you want the help. If you&apos;d like to try it without a
+                big commitment,{" "}
+                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month
+                trial that puts your kid on a coached team for $100.
               </p>
 
               <h2>One honest caveat</h2>

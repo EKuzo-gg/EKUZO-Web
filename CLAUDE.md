@@ -173,6 +173,19 @@ All Schema.org structured data lives in **`lib/schema.ts`** — the single sourc
 
 Rationale and scoring methodology: see `GEO-SCHEMA-REPORT.md` in the repo root.
 
+### FAQ copy pulls from the canon
+<!-- Added 2026-05-31 from logs/lessons-pending/2026-05-25-faq-copy-pulls-from-canon.md (KB learning loop 2026-W22) -->
+
+The single source of truth for FAQ questions and answers is `knowledge-base/wiki/domains/ekuzo/ekuzo-faq-canon.md`. Do NOT hand-write or hand-edit FAQ answer copy directly in `page.tsx` files. When adding or changing an FAQ:
+
+1. Update the answer in the canon first.
+2. Pull the answer into the page array (wikilinks stripped, trimmed only where a canon answer covers multiple programs and the page is program-specific).
+3. Leave a short comment at the top of the page's FAQ array noting the canon source and sync date, like the one on `app/programs/ekuzo100/page.tsx`.
+
+If a page answer is better than canon (it happens — see the Camps refund/Discord answers), backport it into canon rather than letting the page be the only home. Canon-first keeps the site, sales, and support consistent and keeps the `FAQPage` JSON-LD citable and accurate — drift doesn't just confuse humans, it feeds inconsistent facts to AI crawlers.
+
+Caveats: page-specific trimming is fine and expected (an e100 page shouldn't carry the full multi-program answer) — the rule is about *source of truth*, not forbidding edits. Truly page-unique, non-reusable copy (a one-off CTA microcopy) doesn't need to live in canon.
+
 ### Canonical URLs (Next.js metadata)
 
 `app/layout.tsx` sets `metadataBase: new URL("https://ekuzo.gg")`. Every page `metadata` export must include `alternates: { canonical: "/route/path" }` (relative to `metadataBase`). Client components (register / success pages) cannot export metadata — add a sibling `layout.tsx` server shim that declares the metadata and returns `children`. Transactional pages go noindex via the same metadata object: register = `robots: { index: false, follow: true }`, success = `robots: { index: false, follow: false }`.
