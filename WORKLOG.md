@@ -6,6 +6,17 @@
 
 ---
 
+## Aaron — June 17, 2026 (EKUZO x Woodward partner landing page)
+
+**What:** New standalone landing page at `/woodward` — the destination for the EKUZO x Woodward employee-benefit one-pager (Woodward families get a free month of EKUZO 101). Deliberately minimal: a name/email/age signup, no commerce. Cloned the visual shell from the ekuzo100 register hero (orange gradient + white torn-paper) but stripped all Stripe/cohort logic.
+
+- **`app/woodward/page.tsx`** (client): co-brand white lockup top-left (nav position) + "Visit site" button → `/`; hero with "Woodward Friends & Families" eyebrow, "Every gamer deserves a team." (`a team.` accented lime `#E0FF4F`), and lede synced to the updated one-pager. Form is one row — Gamer's Name + Email + a compact Age `<select>` (10–18 plus **Adult**, `appearance-none` + custom chevron, no native spinners). Inline success state (no `/success` route). Site Nav + Footer intentionally omitted for a focused page. Jinx hero art (`public/images/jinx@2x.png`) scaled to bleed from the hero across the torn edge into the form (hero+form wrapped in one `relative overflow-clip` container; art is `hidden lg:block`, `z-30`). Submit button is purple (`bg-purple`).
+- **`app/woodward/layout.tsx`:** metadata + canonical `/woodward` (indexable, unlike the noindex register pages).
+- **`app/api/woodward/subscribe/route.ts`:** clone of `/api/newsletter` → Beehiiv with `utm_source: woodward-signup` + `source-woodward` tag. Sends `first_name` (now the **gamer's** name) and `child_age` (can be the string "Adult").
+- **Assets:** `public/images/woodward-x-ekuzo-white-2.svg` + `-black.svg` (co-brand lockups), `public/images/jinx@2x.png` (8MB — under the 10MB hook limit so it commits as a normal object; flag to optimize/resize later).
+
+**For Jamie (API lane — please review):** (1) Beehiiv needs a `child_age` custom field created or the age is silently dropped; (2) `first_name` now carries the gamer's name, and `child_age` may be "Adult" — heads-up for any segmentation that assumes a parent name / numeric age; (3) since this is a free-enrollment + coach-follow-up flow (not a newsletter), consider whether it should notify/route differently than a plain subscribe. `tsc --noEmit` clean.
+
 ## Jamie — May 31, 2026 (Meta Pixel: fire ViewContent + Lead on the camps register funnel)
 
 **Why:** v2.0 weekend-pulse read flagged it — the camps register page was under-instrumented for Meta. The ad set optimizes for `CONTENT_VIEW`, but `ViewContent` only fired on program *landing* pages, so the TLDR→/register ad got almost no optimization signal (1 ViewContent on ~8k impressions). And register-page email capture only POSTed to `/api/camps/lead` (Beehiiv) — it never fired the Meta `Lead` pixel, so the funnel-fix payoff signal the campaign was built to read was invisible on-platform (`Lead` stuck at 0).
