@@ -111,17 +111,75 @@ const SLOT_HOURS = {
 // gamer's selectedMonth state persists their tab choice.
 type MonthId = "June" | "July" | "August";
 
-const MONTHS: { id: MonthId; label: string }[] = [
-  { id: "June", label: "June" },
-  { id: "July", label: "July" },
-  { id: "August", label: "August" },
-];
+// MONTHS is now derived from availableWeeks at runtime — see below.
+// The static constant is replaced by a dynamic list so past months
+// vanish from the tabs automatically without code changes.
 
 function getMonthForWeek(weekNumber: number): MonthId {
   if (weekNumber <= 6) return "June";
   if (weekNumber <= 9) return "July";
   return "August";
 }
+
+// ── Dynamic date filtering ────────────────────────────────────────────────────
+// Parse the start date from a week's dates string (e.g. "June 01 - 05"
+// or "Jul 13 - 17") and return a real Date object in CAMP_YEAR.
+// Used to filter out past weeks on mount so only future weeks appear.
+// CAMP_YEAR is declared here (before the helpers that use it) to avoid
+// temporal dead zone errors — the const below at MONTH_INDEX is kept
+// for the calendar renderer which also needs the year.
+const CAMP_YEAR = 2026;
+
+const MONTH_NAME_TO_INDEX: Record<string, number> = {
+  January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+  July: 6, August: 7, September: 8, October: 9, November: 10, December: 11,
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, Jun: 5, Jul: 6, Aug: 7,
+  Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
+function weekStart(week: Week): Date {
+  // Matches "June 01 - 05" or "Jul 13 - 17" or similar
+  const m = week.dates.match(/^(\w+)\s+(\d+)/);
+  if (!m) return new Date(0);
+  const monthIdx = MONTH_NAME_TO_INDEX[m[1]];
+  if (monthIdx === undefined) return new Date(0);
+  const day = parseInt(m[2], 10);
+  return new Date(CAMP_YEAR, monthIdx, day);
+}
+
+// Computed once at module level (stable for the page session). Today is
+// normalized to midnight so a week starting today is still shown.
+function getAvailableWeeks(): Week[] {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return WEEKS.filter((w) => weekStart(w) >= today);
+}
+
+const availableWeeks = getAvailableWeeks();
+
+// Derive the unique ordered month list from the weeks that are still open.
+// Maps the leading word of week.dates (e.g. "June", "Jul") back to the
+// canonical MonthId used by the tab/calendar system.
+const WORD_TO_MONTH_ID: Record<string, MonthId> = {
+  June: "June", Jul: "July", July: "July", Aug: "August", August: "August",
+};
+
+const availableMonths: { id: MonthId; label: string }[] = (() => {
+  const seen = new Set<MonthId>();
+  const result: { id: MonthId; label: string }[] = [];
+  for (const w of availableWeeks) {
+    const word = w.dates.split(" ")[0];
+    const id = WORD_TO_MONTH_ID[word];
+    if (id && !seen.has(id)) {
+      seen.add(id);
+      result.push({ id, label: id });
+    }
+  }
+  return result;
+})();
+
+// First available month — used as the default tab.
+const firstAvailableMonth: MonthId = availableMonths[0]?.id ?? "June";
 
 // Extract M-F day numbers from a week.dates string (e.g. "May 18 - 22" or
 // "June 01 - 05"). All camp weeks run Mon-Fri within a single month, so we
@@ -144,7 +202,6 @@ const MONTH_INDEX: Record<MonthId, number> = {
   July: 6,
   August: 7,
 };
-const CAMP_YEAR = 2026;
 
 type CalendarCell = { date: number; isCurrentMonth: boolean };
 
@@ -318,7 +375,7 @@ export default function CampsRegisterPage() {
   function getSelectedMonth(gi: number, gamer: GamerInfo): MonthId {
     if (selectedMonths[gi]) return selectedMonths[gi];
     if (gamer.selectedWeek) return getMonthForWeek(gamer.selectedWeek);
-    return "June";
+    return firstAvailableMonth;
   }
 
   // Payment state, ctaSource, leadFiredForEmailRef + first-touch
@@ -353,10 +410,14 @@ export default function CampsRegisterPage() {
           week_dates: data.week_dates,
         });
 
-        // Pre-select the crew's week + slot for the first gamer.
+        // Pre-select the crew's week + slot for the first gamer, but only
+        // if the week is still in the available (future) weeks list. If the
+        // crew's week has already passed, fall back to the normal picker so
+        // the parent can choose a current week without crashing.
         const weekNum = parseInt(String(data.week_label).replace(/\D/g, ""), 10);
         const slot = data.slot === "AM" || data.slot === "PM" ? data.slot : null;
-        if (!Number.isNaN(weekNum) && slot) {
+        const weekIsAvailable = availableWeeks.some((w) => w.number === weekNum);
+        if (!Number.isNaN(weekNum) && slot && weekIsAvailable) {
           setGamers((prev) =>
             prev.map((g, i) =>
               i === 0 ? { ...g, selectedWeek: weekNum, selectedSlot: slot } : g
@@ -433,7 +494,8 @@ export default function CampsRegisterPage() {
         joiningCrewInfo.slot === "AM" || joiningCrewInfo.slot === "PM"
           ? joiningCrewInfo.slot
           : null;
-      if (!Number.isNaN(weekNum) && slot) {
+      const weekIsAvailable = availableWeeks.some((w) => w.number === weekNum);
+      if (!Number.isNaN(weekNum) && slot && weekIsAvailable) {
         next.selectedWeek = weekNum;
         next.selectedSlot = slot;
       }
@@ -595,7 +657,7 @@ export default function CampsRegisterPage() {
     const payload = {
       parent,
       gamers: gamers.map((g) => {
-        const week = WEEKS.find((w) => w.number === g.selectedWeek);
+        const week = availableWeeks.find((w) => w.number === g.selectedWeek);
         return {
           ...g,
           weekLabel: week?.label,
@@ -677,14 +739,14 @@ export default function CampsRegisterPage() {
   // ── Computed ────────────────────────────────────────────────────────────
 
   const totalPrice = gamers.reduce((sum, g) => {
-    const week = WEEKS.find((w) => w.number === g.selectedWeek);
+    const week = availableWeeks.find((w) => w.number === g.selectedWeek);
     return sum + (week?.price ?? 0);
   }, 0);
 
   const selectedGamerSummaries = gamers
     .map((g, i) => {
       if (!g.selectedWeek || !g.selectedSlot) return null;
-      const week = WEEKS.find((w) => w.number === g.selectedWeek);
+      const week = availableWeeks.find((w) => w.number === g.selectedWeek);
       if (!week) return null;
       return {
         index: i,
@@ -903,7 +965,7 @@ export default function CampsRegisterPage() {
                 const showGrid = !collapsible || expandedSlotPickers[gi];
 
                 if (!showGrid) {
-                  const selectedWeek = WEEKS.find(
+                  const selectedWeek = availableWeeks.find(
                     (w) => w.number === gamer.selectedWeek
                   );
                   return (
@@ -954,12 +1016,12 @@ export default function CampsRegisterPage() {
                 }
 
                 const activeMonth = getSelectedMonth(gi, gamer);
-                const weeksByMonth: Record<MonthId, typeof WEEKS> = {
+                const weeksByMonth: Record<MonthId, typeof availableWeeks> = {
                   June: [],
                   July: [],
                   August: [],
                 };
-                WEEKS.forEach((w) =>
+                availableWeeks.forEach((w) =>
                   weeksByMonth[getMonthForWeek(w.number)].push(w)
                 );
                 const visibleWeeks = weeksByMonth[activeMonth];
@@ -1015,17 +1077,17 @@ export default function CampsRegisterPage() {
                         (non-destructive) used in place of brand red
                         because red signals warning/error states. */}
                     {(() => {
-                      const monthIdx = MONTHS.findIndex(
+                      const monthIdx = availableMonths.findIndex(
                         (m) => m.id === activeMonth
                       );
                       const canGoPrev = monthIdx > 0;
-                      const canGoNext = monthIdx < MONTHS.length - 1;
+                      const canGoNext = monthIdx < availableMonths.length - 1;
                       const goToMonth = (delta: number) => {
                         const nextIdx = monthIdx + delta;
-                        if (nextIdx < 0 || nextIdx >= MONTHS.length) return;
+                        if (nextIdx < 0 || nextIdx >= availableMonths.length) return;
                         setSelectedMonths((prev) => ({
                           ...prev,
-                          [gi]: MONTHS[nextIdx].id,
+                          [gi]: availableMonths[nextIdx].id,
                         }));
                       };
                       const grid = getMonthCalendarGrid(
@@ -1033,7 +1095,7 @@ export default function CampsRegisterPage() {
                         CAMP_YEAR
                       );
                       const selectedWeekObj = gamer.selectedWeek
-                        ? WEEKS.find((w) => w.number === gamer.selectedWeek)
+                        ? availableWeeks.find((w) => w.number === gamer.selectedWeek)
                         : null;
                       // "Jul 13 - 17" → "JULY 13-17". Data is mixed
                       // ("May", "June", "Jul"…); expand 3-char months to
@@ -1064,8 +1126,16 @@ export default function CampsRegisterPage() {
                               are outlined white. Complements the < / >
                               arrows below for users who prefer a direct
                               jump. */}
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-4">
-                            {MONTHS.map((m) => {
+                          <div
+                            className={`grid gap-1.5 mb-4 ${
+                              availableMonths.length === 1
+                                ? "grid-cols-1"
+                                : availableMonths.length === 2
+                                  ? "grid-cols-2"
+                                  : "grid-cols-3"
+                            }`}
+                          >
+                            {availableMonths.map((m) => {
                               const isActive = activeMonth === m.id;
                               return (
                                 <button
@@ -1089,6 +1159,11 @@ export default function CampsRegisterPage() {
                                 </button>
                               );
                             })}
+                            {availableMonths.length === 0 && (
+                              <p className="font-body text-sm text-[#6b7280] py-2 text-center">
+                                No camp weeks open right now — check back soon.
+                              </p>
+                            )}
                           </div>
 
                           {/* Header: prev arrow · Month Year · next arrow */}
@@ -1159,7 +1234,7 @@ export default function CampsRegisterPage() {
                               // the active month and within the date
                               // range of one of our 10 camp weeks.
                               const campWeek = isWeekday
-                                ? WEEKS.find((w) => {
+                                ? availableWeeks.find((w) => {
                                     if (getMonthForWeek(w.number) !== activeMonth) return false;
                                     const start = getCampWeekStartDay(w);
                                     return cell.date >= start && cell.date <= start + 4;
