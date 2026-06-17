@@ -208,7 +208,7 @@ export default function WoodwardSignupPage() {
                         <option value="" disabled>
                           Age
                         </option>
-                        {Array.from({ length: 9 }, (_, i) => 10 + i).map((a) => (
+                        {Array.from({ length: 8 }, (_, i) => 10 + i).map((a) => (
                           <option key={a} value={String(a)} className="text-[#0a0a0a]">
                             {a}
                           </option>
