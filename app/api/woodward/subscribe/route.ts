@@ -54,10 +54,12 @@ export async function POST(req: NextRequest) {
     const beehiivData = await beehiivRes.json();
     const subId = beehiivData?.data?.id;
 
-    // Tag the subscriber (non-blocking). Create-subscription doesn't accept
-    // tags — they must be POSTed to the subscription's /tags endpoint.
+    // Tag the subscriber. Create-subscription doesn't accept tags — they must
+    // be POSTed to the subscription's /tags endpoint. Awaited so the call
+    // completes before the serverless function exits; .catch() keeps a tag
+    // failure non-blocking (signup still succeeds).
     if (subId) {
-      fetch(
+      await fetch(
         `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions/${subId}/tags`,
         {
           method: "POST",
