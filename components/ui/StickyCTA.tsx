@@ -18,8 +18,12 @@ export default function StickyCTA() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   // Hide on register and success pages — user is already in checkout flow.
-  // .includes covers any future register/success sub-routes too.
-  const isCheckoutPage = pathname.includes("/register") || pathname.includes("/success");
+  // Also hide on standalone focused pages (no nav/footer) where the bar is out of place.
+  const isCheckoutPage =
+    pathname.includes("/register") ||
+    pathname.includes("/success") ||
+    pathname.startsWith("/swamp") ||
+    pathname.startsWith("/woodward");
 
   // Context-specific overrides per page family
   const isSchools = pathname.startsWith("/schools");
