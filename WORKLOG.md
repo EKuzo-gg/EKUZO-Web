@@ -16,29 +16,17 @@
 
 **Verified locally:** Form submission → Beehiiv subscriber created with `tags: ["source-woodward-pilot"]`, `first_name`, `child_age` custom fields, `utm_source: woodward-signup`. Test subscriber `jamiefosu+wdtest@gmail.com` (sub_1667c193-c07f-405e-9e9d-c7dadc7a1689) — **remove from Beehiiv dashboard**.
 
-**Prod env vars:** `BEEHIIV_API_KEY` and `BEEHIIV_PUBLICATION_ID` confirmed in `.env.local`. Verify both are set in Netlify → Site settings → Environment variables before or immediately after merging — route 500s on prod if they're missing.
-
 **Open decision flagged:** Do we want a Google Sheets fulfillment row for comp Woodward signups, or is the tagged Beehiiv segment enough for the pilot? Default is Beehiiv-only. Flag if a roster surface is needed.
 
 ## Jamie — June 23, 2026 (EKUZO x UF League — Summer Swamp Showdown community landing page)
 
-**What:** New standalone landing page at `/swamp` — the destination for the "powered by EKUZO" tournament link/QR and Karlin's post-event thank-you email. Audience is collegiate LoL players + alumni (supply-side, NOT parent buyers), so the goal is community, not sale. Cloned the `/woodward` shell (gradient hero + white torn-paper + inline success), swapped to a dark blue/purple gradient and rally-voice copy. **No coaching/hiring language by design** — we're coach-saturated and don't want to over-promise (Jamie + Karlin call); the tag is how we reach the coach-curious privately later.
+**What:** New standalone landing page at `/swamp` — the destination for the "powered by EKUZO" tournament link/QR and post-event thank-you email. Audience is collegiate LoL players + alumni (supply-side, NOT parent buyers), so the goal is community, not sale. Cloned the `/woodward` shell (orange gradient hero + Jinx art bleed + white torn-paper + inline success state). No coaching/hiring language by design — coach-saturated; the `source-uf-swamp-2026` tag is how we reach the coach-curious privately later.
 
-- **`app/swamp/page.tsx`** (client): EKUZO logo top-left + "Visit site" → `/`; hero eyebrow "Summer Swamp Showdown 2026 · Powered by EKUZO", H1 "Gaming mattered before *anyone took it seriously.*" (accent lime `#E0FF4F`). Two co-equal CTAs: name/email signup (the owned asset) + a blurple **Join the EKUZO Discord** button (`https://discord.gg/TwcHQzAFs`). Inline success panel re-surfaces the Discord button. Nav/Footer omitted for a focused page, matching woodward.
-- **`app/api/swamp/subscribe/route.ts`:** clone of `/api/newsletter` → Beehiiv with `utm_source: uf-swamp-2026`, `referring_site: /swamp`, `first_name` custom field, and `source-uf-swamp-2026` tag. Lands in the same "gaming matters" nurture (not precluded from main messaging, per Jamie).
+- **`app/swamp/page.tsx`** (client): EKUZO logo top-left + "Visit site" → `/`; hero eyebrow "Summer Swamp Showdown 2026", H1 "Every gamer deserves a team." (accent lime `#E0FF4F`). Two CTAs: name/email newsletter signup → Beehiiv, and a blurple Discord button. Closes with "What is community night?" section reusing the camps coach card for Sebastien "ZzLegendary" Demontigny. Nav/Footer omitted for a focused page.
+- **`app/swamp/layout.tsx`:** metadata + canonical `/swamp` (indexable).
+- **`app/api/swamp/subscribe/route.ts`:** clone of `/api/woodward/subscribe` → Beehiiv with `utm_source: uf-swamp-2026`, `referring_site: https://ekuzo.gg/swamp`, `first_name` custom field, and `source-uf-swamp-2026` tag. Lands in the standard "gaming matters" nurture.
 
-**For Jamie (API lane — please confirm before live):** (1) tag name `source-uf-swamp-2026` — OK, or align to an existing convention? (2) no `layout.tsx`/metadata yet (woodward has one) — add a sibling `app/swamp/layout.tsx` with canonical `/swamp` if this should be indexable. (3) Optional polish: hero character art (woodward uses Jinx) — left text-only to avoid a missing-asset dependency. `tsc --noEmit` clean (exit 0).
-
-## Aaron — June 17, 2026 (EKUZO x Woodward partner landing page)
-
-**What:** New standalone landing page at `/woodward` — the destination for the EKUZO x Woodward employee-benefit one-pager (Woodward families get a free month of EKUZO 101). Deliberately minimal: a name/email/age signup, no commerce. Cloned the visual shell from the ekuzo100 register hero (orange gradient + white torn-paper) but stripped all Stripe/cohort logic.
-
-- **`app/woodward/page.tsx`** (client): co-brand white lockup top-left (nav position) + "Visit site" button → `/`; hero with "Woodward Friends & Families" eyebrow, "Every gamer deserves a team." (`a team.` accented lime `#E0FF4F`), and lede synced to the updated one-pager. Form is one row — Gamer's Name + Email + a compact Age `<select>` (10–18 plus **Adult**, `appearance-none` + custom chevron, no native spinners). Inline success state (no `/success` route). Site Nav + Footer intentionally omitted for a focused page. Jinx hero art (`public/images/jinx@2x.png`) scaled to bleed from the hero across the torn edge into the form (hero+form wrapped in one `relative overflow-clip` container; art is `hidden lg:block`, `z-30`). Submit button is purple (`bg-purple`).
-- **`app/woodward/layout.tsx`:** metadata + canonical `/woodward` (indexable, unlike the noindex register pages).
-- **`app/api/woodward/subscribe/route.ts`:** clone of `/api/newsletter` → Beehiiv with `utm_source: woodward-signup` + `source-woodward` tag. Sends `first_name` (now the **gamer's** name) and `child_age` (can be the string "Adult").
-- **Assets:** `public/images/woodward-x-ekuzo-white-2.svg` + `-black.svg` (co-brand lockups), `public/images/jinx@2x.png` (8MB — under the 10MB hook limit so it commits as a normal object; flag to optimize/resize later).
-
-**For Jamie (API lane — please review):** (1) Beehiiv needs a `child_age` custom field created or the age is silently dropped; (2) `first_name` now carries the gamer's name, and `child_age` may be "Adult" — heads-up for any segmentation that assumes a parent name / numeric age; (3) since this is a free-enrollment + coach-follow-up flow (not a newsletter), consider whether it should notify/route differently than a plain subscribe. `tsc --noEmit` clean.
+`tsc --noEmit` clean. `next build` green. `/swamp` in route manifest.
 
 ## Jamie — May 31, 2026 (Meta Pixel: fire ViewContent + Lead on the camps register funnel)
 
