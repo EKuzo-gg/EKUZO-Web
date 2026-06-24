@@ -246,6 +246,7 @@ export default function SwampSignupPage() {
             width={868}
             height={928}
             priority
+            unoptimized
             className="w-full h-auto block"
           />
         </div>
