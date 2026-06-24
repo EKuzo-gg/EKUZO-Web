@@ -6,6 +6,16 @@
 
 ---
 
+## Jamie — June 23, 2026 (EKUZO x UF League — Summer Swamp Showdown community landing page)
+
+**What:** New standalone landing page at `/swamp` — the destination for the "powered by EKUZO" tournament link/QR and post-event thank-you email. Audience is collegiate LoL players + alumni (supply-side, NOT parent buyers), so the goal is community, not sale. Cloned the `/woodward` shell (orange gradient hero + Jinx art bleed + white torn-paper + inline success state). No coaching/hiring language by design — coach-saturated; the `source-uf-swamp-2026` tag is how we reach the coach-curious privately later.
+
+- **`app/swamp/page.tsx`** (client): EKUZO logo top-left + "Visit site" → `/`; hero eyebrow "Summer Swamp Showdown 2026", H1 "Every gamer deserves a team." (accent lime `#E0FF4F`). Two CTAs: name/email newsletter signup → Beehiiv, and a blurple Discord button. Closes with "What is community night?" section reusing the camps coach card for Sebastien "ZzLegendary" Demontigny. Nav/Footer omitted for a focused page.
+- **`app/swamp/layout.tsx`:** metadata + canonical `/swamp` (indexable).
+- **`app/api/swamp/subscribe/route.ts`:** clone of `/api/woodward/subscribe` → Beehiiv with `utm_source: uf-swamp-2026`, `referring_site: https://ekuzo.gg/swamp`, `first_name` custom field, and `source-uf-swamp-2026` tag. Lands in the standard "gaming matters" nurture.
+
+`tsc --noEmit` clean. `next build` green. `/swamp` in route manifest.
+
 ## Jamie — May 31, 2026 (Meta Pixel: fire ViewContent + Lead on the camps register funnel)
 
 **Why:** v2.0 weekend-pulse read flagged it — the camps register page was under-instrumented for Meta. The ad set optimizes for `CONTENT_VIEW`, but `ViewContent` only fired on program *landing* pages, so the TLDR→/register ad got almost no optimization signal (1 ViewContent on ~8k impressions). And register-page email capture only POSTed to `/api/camps/lead` (Beehiiv) — it never fired the Meta `Lead` pixel, so the funnel-fix payoff signal the campaign was built to read was invisible on-platform (`Lead` stuck at 0).
