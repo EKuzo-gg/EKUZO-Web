@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // EKUZO x Woodward partner-page signup → Beehiiv.
-// Near-verbatim clone of /api/newsletter; differs only in utm_source and
-// the source-woodward tag so partner signups are segmentable in Beehiiv.
-// NOTE for Jamie (API lane): built from the front-end side to ship the
-// /woodward page end-to-end. Review tag name + utm and confirm this is the
-// right publication/segment before going live.
+// Capture-only: no welcome email, no automation. Tags source-woodward-pilot
+// so the cohort is addressable; a coach follows up manually.
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,12 +31,9 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           email,
+          send_welcome_email: false,
           utm_source: "woodward-signup",
           referring_site: "https://ekuzo.gg/woodward",
-          // Beehiiv silently drops custom fields that don't exist on the
-          // publication. NOTE for Jamie: create a "child_age" custom field
-          // in Beehiiv so the age actually persists (first_name already
-          // exists). Until then it's harmlessly ignored.
           custom_fields: [
             ...(firstName ? [{ name: "first_name", value: firstName }] : []),
             ...(age ? [{ name: "child_age", value: String(age) }] : []),
@@ -71,7 +65,7 @@ export async function POST(req: NextRequest) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${BEEHIIV_API_KEY}`,
           },
-          body: JSON.stringify({ tags: ["source-woodward"] }),
+          body: JSON.stringify({ tags: ["source-woodward-pilot"] }),
         }
       ).catch((err) => console.error("[Woodward] Tagging failed:", err));
     }

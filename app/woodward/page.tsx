@@ -8,7 +8,7 @@
 // hero + white torn paper, Footer) mirrors the EKUZO100 register page so
 // it sits inside the same design system.
 //
-// Submit → POST /api/woodward/subscribe (Beehiiv, tagged source-woodward).
+// Submit → POST /api/woodward/subscribe (Beehiiv, tagged source-woodward-pilot).
 // Success is handled inline (form swaps to a thank-you panel) — no
 // separate /success route.
 
@@ -172,7 +172,7 @@ export default function WoodwardSignupPage() {
                     flexible columns; the age select is a narrower third
                     column. appearance-none strips the native select/number
                     spinner controls — a single custom chevron is the only
-                    affordance. Ages 10–18 per EKUZO 101. */}
+                    affordance. Ages 10–17 per EKUZO standard range. */}
                 <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.5fr)] gap-4 items-start">
                   <InputField
                     label="Gamer's Name *"

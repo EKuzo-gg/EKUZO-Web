@@ -6,6 +6,29 @@
 
 ---
 
+## Jamie — June 24, 2026 (EKUZO x Woodward — ship to prod)
+
+**What:** Pre-launch fixes and prod deploy for the `/woodward` partner signup page (Aaron's June 17 build).
+
+- **`app/api/woodward/subscribe/route.ts`:** Tag corrected from `source-woodward` → `source-woodward-pilot` (canonical pilot tracker tag that already exists in Beehiiv). Added `send_welcome_email: false` — no automated email; a coach follows up manually per the one-pager promise. Removed stale NOTE comment (child_age field confirmed created out-of-band). Updated header comment to reflect capture-only intent.
+- **`app/woodward/page.tsx`:** Updated header comment to match corrected tag name (`source-woodward-pilot`). Updated inline comment from "Ages 10–18" → "10–17" to match actual select range.
+- **`app/woodward/layout.tsx`:** Added `robots: { index: false, follow: true }` — private partner page, should not be indexed. Updated description from "10 to 18" → "10 to 17" to align with standard EKUZO age range and actual select options.
+
+**Verified locally:** Form submission → Beehiiv subscriber created with `tags: ["source-woodward-pilot"]`, `first_name`, `child_age` custom fields, `utm_source: woodward-signup`. Test subscriber `jamiefosu+wdtest@gmail.com` (sub_1667c193-c07f-405e-9e9d-c7dadc7a1689) — **remove from Beehiiv dashboard**.
+
+**Prod env vars:** `BEEHIIV_API_KEY` and `BEEHIIV_PUBLICATION_ID` confirmed in `.env.local`. Verify both are set in Netlify → Site settings → Environment variables before or immediately after merging — route 500s on prod if they're missing.
+
+**Open decision flagged:** Do we want a Google Sheets fulfillment row for comp Woodward signups, or is the tagged Beehiiv segment enough for the pilot? Default is Beehiiv-only. Flag if a roster surface is needed.
+
+## Jamie — June 23, 2026 (EKUZO x UF League — Summer Swamp Showdown community landing page)
+
+**What:** New standalone landing page at `/swamp` — the destination for the "powered by EKUZO" tournament link/QR and Karlin's post-event thank-you email. Audience is collegiate LoL players + alumni (supply-side, NOT parent buyers), so the goal is community, not sale. Cloned the `/woodward` shell (gradient hero + white torn-paper + inline success), swapped to a dark blue/purple gradient and rally-voice copy. **No coaching/hiring language by design** — we're coach-saturated and don't want to over-promise (Jamie + Karlin call); the tag is how we reach the coach-curious privately later.
+
+- **`app/swamp/page.tsx`** (client): EKUZO logo top-left + "Visit site" → `/`; hero eyebrow "Summer Swamp Showdown 2026 · Powered by EKUZO", H1 "Gaming mattered before *anyone took it seriously.*" (accent lime `#E0FF4F`). Two co-equal CTAs: name/email signup (the owned asset) + a blurple **Join the EKUZO Discord** button (`https://discord.gg/TwcHQzAFs`). Inline success panel re-surfaces the Discord button. Nav/Footer omitted for a focused page, matching woodward.
+- **`app/api/swamp/subscribe/route.ts`:** clone of `/api/newsletter` → Beehiiv with `utm_source: uf-swamp-2026`, `referring_site: /swamp`, `first_name` custom field, and `source-uf-swamp-2026` tag. Lands in the same "gaming matters" nurture (not precluded from main messaging, per Jamie).
+
+**For Jamie (API lane — please confirm before live):** (1) tag name `source-uf-swamp-2026` — OK, or align to an existing convention? (2) no `layout.tsx`/metadata yet (woodward has one) — add a sibling `app/swamp/layout.tsx` with canonical `/swamp` if this should be indexable. (3) Optional polish: hero character art (woodward uses Jinx) — left text-only to avoid a missing-asset dependency. `tsc --noEmit` clean (exit 0).
+
 ## Aaron — June 17, 2026 (EKUZO x Woodward partner landing page)
 
 **What:** New standalone landing page at `/woodward` — the destination for the EKUZO x Woodward employee-benefit one-pager (Woodward families get a free month of EKUZO 101). Deliberately minimal: a name/email/age signup, no commerce. Cloned the visual shell from the ekuzo100 register hero (orange gradient + white torn-paper) but stripped all Stripe/cohort logic.
