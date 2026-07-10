@@ -1,3 +1,7 @@
+## Brand & page structure
+When building a NEW marketing/site page, read `docs/EKUZO-BRAND.md` and match the patterns it documents.
+The live codebase is the source of truth — that doc describes it, it does not override it. Do NOT
+refactor or "fix" existing working pages (especially torn-paper seams and the color-flipping nav) to match it.
 # EKUZO Web — Project Context
 
 ## What we're building
