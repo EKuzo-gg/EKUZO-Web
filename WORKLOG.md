@@ -6,6 +6,17 @@
 
 ---
 
+## Aaron — July 10, 2026 (Boys & Girls Club partner hero + fixes)
+
+**What:** Built the real BGC hero on the reusable partner system and fixed several issues found in review. All on `/partners/boys-and-girls-club`.
+
+- **`lib/partners.ts`:** Replaced `heroImageLeft`/`heroImageRight` (cutout-character placeholders) with `heroBg`/`heroStainLeft`/`heroStainRight`. Wired the new assets: `bcbg-hero.jpg`, `left-stain.png`, `right-stain.png`. Quote attribution `[Club Director]` → **Josh Davis**.
+- **`components/partners/PartnerLanding.tsx`:** Rebuilt the hero as a full-bleed dark photographic section (photo + left/right paint stains, white cobrand line / eyebrow / headline / subhead) using the `dark` Nav variant. Left→right readability veil under the text. The source photo is dark and cool-lit and 2:1, so the hero was cropping the subjects out — reduced hero height and set `object-[80%_center]` to keep the kids in frame. Moved the hero→intro torn seam from a white bottom-divider (flat edge showed a hard band on the dark hero) to a **grey top-divider on the intro section** so the photo tears cleanly into grey. Enlarged the intro placeholder image (wider column + scale).
+- **`public/icons/handshake.svg`, `swords.svg`:** Tightened viewBox from loose `0 0 40 40` to artwork bounds (`-1 -1 33 30` / `-1 -1 38 33`) so they center inside `CircleIcon` (per the component's viewBox note).
+- **`public/images/`:** Added `bcbg-hero.jpg`, `left-stain.png`, `right-stain.png`.
+
+**Verified** in Chrome against the Figma hero frame. **Note:** hero content is still placeholder copy/quote pending partner sign-off; kept the site's `dark` Nav (white Enroll button) rather than the Figma's red button to avoid touching the shared color-flipping nav.
+
 ## Jamie — June 24, 2026 (EKUZO x Woodward — ship to prod)
 
 **What:** Pre-launch fixes and prod deploy for the `/woodward` partner signup page (Aaron's June 17 build).
