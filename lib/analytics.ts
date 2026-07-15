@@ -31,7 +31,7 @@ function fbq(event: string, params?: Record<string, any>) {
 // ---------------------------------------------------------------------------
 
 export function trackViewContent(params: {
-  program: "camps" | "ekuzo100" | "ekuzo-teams";
+  program: "camps" | "ekuzo100" | "ekuzo101" | "ekuzo-teams";
 }) {
   ga4("view_item", {
     content_type: "program",
@@ -48,7 +48,7 @@ export function trackViewContent(params: {
 // ---------------------------------------------------------------------------
 
 export function trackInitiateCheckout(params: {
-  program: "camps" | "ekuzo100" | "ekuzo-teams";
+  program: "camps" | "ekuzo100" | "ekuzo101" | "ekuzo-teams";
   value?: number;
   currency?: string;
 }) {
@@ -69,7 +69,7 @@ export function trackInitiateCheckout(params: {
 // ---------------------------------------------------------------------------
 
 export function trackPurchase(params: {
-  program: "camps" | "ekuzo100" | "ekuzo-teams";
+  program: "camps" | "ekuzo100" | "ekuzo101" | "ekuzo-teams";
   value: number;
   currency?: string;
   transactionId?: string;
@@ -124,4 +124,13 @@ export function trackRegisterClick(params: { source: string }) {
   ga4("register_click", {
     source: params.source,
   });
+}
+
+// ---------------------------------------------------------------------------
+// Registration — pilot completion (no payment; used on ekuzo101 success page)
+// ---------------------------------------------------------------------------
+
+export function trackRegistration(params: { program: string }) {
+  ga4("sign_up", { method: params.program });
+  fbq("CompleteRegistration", { content_name: params.program, value: 0, currency: "USD" });
 }

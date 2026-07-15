@@ -26,7 +26,7 @@
  * registry is to deduplicate.
  */
 
-export type ProductId = "camps" | "ekuzo100" | "teams";
+export type ProductId = "camps" | "ekuzo100" | "teams" | "ekuzo101";
 
 export type CohortUnit = "week" | "month" | "semester";
 
@@ -193,7 +193,7 @@ export interface ProductConfig {
    * Beehiiv automation ID for the post-purchase welcome sequence.
    * Passed to the subscribe endpoint as `automation_ids: [this]`.
    */
-  welcomeAutomationId: string;
+  welcomeAutomationId?: string;
   beehiiv: {
     referringSites: BeehiivReferringSites;
     tags: BeehiivTags;

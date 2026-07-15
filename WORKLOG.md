@@ -6,6 +6,19 @@
 
 ---
 
+## Jamie — July 15, 2026 (EKUZO 101 Summer Pilot — feature branch)
+
+**What:** Autonomous build of EKUZO 101: Summer Pilot on feat/ekuzo101-pilot (Fable lead).
+
+- **Product layer:** `lib/products/ekuzo101.ts` (new product config, no payment, no Beehiiv automation); `welcomeAutomationId` optionalized in `lib/products/types.ts`; `ekuzo101` registered in `lib/products/index.ts`; Stripe webhook guarded against undefined `automation_ids`.
+- **Week picker:** `lib/ekuzo101-weeks.ts` (ET-aware 6-week rolling window with DST-safe cutoff); `components/ekuzo101/WeekPicker.tsx` (6-tile selector, min-4 guard, red/white visual states); unit tests for ET boundary + Tuesday-only validation.
+- **API routes:** `POST /api/ekuzo101/register` (no Stripe PI; Beehiiv + Klaviyo + Sheets fulfillment, best-effort; server-side week validation + tripwire against `totalPrice`); `POST /api/ekuzo101/lead` (email-blur lead capture, mirrors e100).
+- **Pages:** `/programs/ekuzo101` (landing: hero, how-it-works, coaches, testimonials, FAQ, CTA — all noindex); `/programs/ekuzo101/register` (week picker replaces cohort picker, no payment step); `/programs/ekuzo101/success` (selected schedule display, pay-at-the-end promise — no payment confirmation UI). Server `layout.tsx` shims carry metadata on client pages.
+
+**Branch:** feat/ekuzo101-pilot off dev. Not merged to dev. Not deployed. Nothing set live in Klaviyo/Beehiiv.
+
+**Open:** see docs/ekuzo101-pilot/07-review-guide.md
+
 ## Aaron — July 10, 2026 (Boys & Girls Club partner hero + fixes)
 
 **What:** Built the real BGC hero on the reusable partner system and fixed several issues found in review. All on `/partners/boys-and-girls-club`.

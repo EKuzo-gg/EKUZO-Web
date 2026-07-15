@@ -11,12 +11,14 @@
 
 import { campsProduct } from "./camps";
 import { ekuzo100Product } from "./ekuzo100";
+import { ekuzo101Product } from "./ekuzo101";
 import { teamsProduct } from "./teams";
 import type { ProductConfig, ProductId } from "./types";
 
 export const PRODUCTS: Record<ProductId, ProductConfig> = {
   camps: campsProduct,
   ekuzo100: ekuzo100Product,
+  ekuzo101: ekuzo101Product,
   teams: teamsProduct,
 };
 
@@ -34,6 +36,7 @@ export function getProductFromMeta(
   metaProduct: string | undefined
 ): ProductConfig {
   if (metaProduct === "ekuzo100") return ekuzo100Product;
+  if (metaProduct === "ekuzo101") return ekuzo101Product;
   if (metaProduct === "teams") return teamsProduct;
   return campsProduct;
 }

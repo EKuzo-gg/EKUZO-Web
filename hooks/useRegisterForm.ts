@@ -51,7 +51,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // camps → /api/camps/lead
 // ekuzo100 → /api/ekuzo100/lead
 // teams → /api/teams/lead
-export type ProductLeadSlug = "camps" | "ekuzo100" | "teams";
+export type ProductLeadSlug = "camps" | "ekuzo100" | "ekuzo101" | "teams";
 
 export function useRegisterForm({
   productSlug,

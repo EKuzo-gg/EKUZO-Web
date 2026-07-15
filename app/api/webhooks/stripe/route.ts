@@ -330,7 +330,7 @@ export async function POST(req: NextRequest) {
         // Lands as Beehiiv's referring_site, separate from utm_source so paid
         // attribution is preserved.
         referring_site: beehiivReferringSite,
-        automation_ids: [automationId],
+        automation_ids: automationId ? [automationId] : [],
         custom_fields: customFields,
       };
 

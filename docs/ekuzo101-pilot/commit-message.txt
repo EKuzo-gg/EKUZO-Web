@@ -1,0 +1,21 @@
+feat(ekuzo101): Add EKUZO 101 Summer Pilot — week picker, register route, fulfillment
+
+- lib/products/ekuzo101.ts: new product config (no payment, no Beehiiv automation)
+- lib/products/types.ts: add ekuzo101 to ProductId union; make welcomeAutomationId optional
+- lib/products/index.ts: register ekuzo101 product
+- lib/ekuzo101-weeks.ts: ET-aware week window computation + serialization helpers
+- components/ekuzo101/WeekPicker.tsx: 6-tile week selector with min-4 guard
+- app/api/ekuzo101/register/route.ts: fulfillment route (Beehiiv + Klaviyo + Sheets, no Stripe)
+- app/api/ekuzo101/lead/route.ts: email-blur lead capture
+- app/programs/ekuzo101/page.tsx: landing page (camps arc, noindex)
+- app/programs/ekuzo101/register/page.tsx: register form (no payment step)
+- app/programs/ekuzo101/success/page.tsx: success with selected schedule
+- lib/analytics.ts: add trackRegistration helper; extend program unions
+- hooks/useRegisterForm.ts: add ekuzo101 to ProductLeadSlug
+- app/api/webhooks/stripe/route.ts: guard automation_ids for optional welcomeAutomationId
+
+Docs: docs/ekuzo101-pilot/ (requirements, spec, decisions, evidence, setup checklist, review guide)
+
+Not merged to dev. Not deployed. Nothing live in Klaviyo/Beehiiv.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
