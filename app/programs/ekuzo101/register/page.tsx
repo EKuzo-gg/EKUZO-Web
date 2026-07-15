@@ -16,6 +16,7 @@ import { getAttribution } from "@/lib/attribution";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 import InputField from "@/components/register/InputField";
 import RegisterHero from "@/components/register/RegisterHero";
+import PostPaymentSteps from "@/components/register/PostPaymentSteps";
 import ErrorSummary from "@/components/register/ErrorSummary";
 import ParentInfoSection from "@/components/register/ParentInfoSection";
 
@@ -78,6 +79,30 @@ export default function Ekuzo101RegisterPage() {
   const [selectedWeeks, setSelectedWeeks] = useState<string[]>([]);
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [submitError, setSubmitError] = useState("");
+
+  // ── Squad join (?squad=TOKEN) — availability model ─────────────────────
+  // Unlike camps/e100, a 101 crew link never pre-pins a schedule. Joining
+  // via a friend's link only affiliates the families; each family picks
+  // its own availability, and the overlap decides the window. We resolve
+  // the owner's gamer name for the banner; invalid/unknown tokens fall
+  // back to a plain registration (no error surfaced — hand-sold pilot).
+  const [joiningSquad, setJoiningSquad] = useState<{
+    token: string;
+    ownerGamerName: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const token = new URLSearchParams(window.location.search).get("squad");
+    if (!token) return;
+    fetch(`/api/squad/${encodeURIComponent(token)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((owner) => {
+        if (owner?.owner_gamer_name) {
+          setJoiningSquad({ token, ownerGamerName: owner.owner_gamer_name });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Fire ViewContent on mount
   useEffect(() => {
@@ -173,6 +198,7 @@ export default function Ekuzo101RegisterPage() {
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           ctaSource,
           additionalInfo,
+          joiningSquadToken: joiningSquad?.token || undefined,
           ...attribution,
         }),
       });
@@ -212,21 +238,58 @@ export default function Ekuzo101RegisterPage() {
   // ── Render ──────────────────────────────────────────────────────────────
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <>
       <Nav variant="light" />
 
+      {/* Form must not wrap Nav/Footer: FooterNewsletter renders its own <form>,
+          and nested forms are invalid HTML (caused a hydration error). */}
+      <form onSubmit={handleSubmit} noValidate>
+
+      {/* Orange gradient matches the e100 register hero per Jamie 2026-07-15. */}
       <RegisterHero
-        background="radial-gradient(ellipse 80% 70% at 0% 0%, rgba(200, 30, 30, 0.6), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(100, 0, 0, 0.8), transparent 60%), #0a0a0a"
+        background="radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255, 220, 120, 0.80), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(180, 50, 0, 0.85), transparent 60%), #FF6B1A"
         eyebrow="EKUZO 101 - SUMMER PILOT"
-        title1="PICK YOUR WEEKS."
+        title1={"PICK YOUR WEEKS. "}
         title2="RESERVE YOUR SPOT."
-        subhead="Pick your weeks, give us your gamer's info, and you're done."
+        subhead={
+          <>
+            <span className="block">
+              Not Fortnite. Not Roblox. Not another argument about screen
+              time. 4 weeks of coached, active play: compete, communicate,
+              work as a team.
+            </span>
+            <span className="block mt-3">
+              Sessions Tuesdays &amp; Thursdays, 7:00-8:30 PM local.
+            </span>
+          </>
+        }
       />
 
       <section className="bg-white">
         <div className="max-w-[1232px] mx-auto px-6 sm:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12 xl:gap-16">
             <div className="min-w-0">
+
+              {/* ── Squad join banner (availability model — no pre-pin) ── */}
+              {joiningSquad && (
+                <div className="mb-8 bg-[#FF6B1A]/10 border border-[#FF6B1A]/30 rounded-xl px-5 py-4">
+                  <p
+                    className="font-body font-bold text-[#0a0a0a]"
+                    style={{ fontSize: "15px", lineHeight: "22px" }}
+                  >
+                    You&apos;re joining {joiningSquad.ownerGamerName}&apos;s group!
+                  </p>
+                  <p
+                    className="font-body text-[#374151] mt-1"
+                    style={{ fontSize: "14px", lineHeight: "22px" }}
+                  >
+                    Pick the weeks that work for your family. Schedules
+                    don&apos;t need to match perfectly: the pilot is drop-in
+                    friendly, and we use everyone&apos;s availability to set
+                    up the group.
+                  </p>
+                </div>
+              )}
 
               {/* Errors */}
               <ErrorSummary errors={errors} />
@@ -327,10 +390,10 @@ export default function Ekuzo101RegisterPage() {
                   className="font-body text-[#4b5563] mb-8"
                   style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
                 >
-                  This program runs twice a week (Tue/Thu, 7-8:30 PM ET) for 4 weeks.
-                  Which weeks work for your family?
+                  The pilot is 4 weeks. We&apos;re showing you the next 6.
+                  Sessions are Tue/Thu, 7-8:30 PM local time.
                   <br />
-                  <span className="font-semibold text-[#0a0a0a]">Select at least 4 weeks from the options below.</span>
+                  <span className="font-semibold text-[#0a0a0a]">Select your availability (minimum 4 weeks).</span>
                 </p>
 
                 <WeekPicker
@@ -394,6 +457,26 @@ export default function Ekuzo101RegisterPage() {
                 </p>
               </div>
 
+              {/* ── What happens after you submit ───────────────────── */}
+              <PostPaymentSteps
+                className="mt-8"
+                heading="What happens after you submit"
+                steps={[
+                  {
+                    title: "Right away",
+                    desc: "A confirmation email with your selected weeks lands in your inbox.",
+                  },
+                  {
+                    title: "Recruit your friends",
+                    desc: "You get a link to invite friends so your gamer starts with familiar teammates.",
+                  },
+                  {
+                    title: "We set up your group",
+                    desc: "A real person from EKUZO reaches out directly to set up your gamer's group before Day 1.",
+                  },
+                ]}
+              />
+
             </div>{/* end left column */}
 
             {/* ── Sticky sidebar (lg+ only) ────────────────────────── */}
@@ -421,7 +504,7 @@ export default function Ekuzo101RegisterPage() {
                         : "No weeks selected yet"}
                     </p>
                     <p className="font-body text-[#6b7280] text-sm mt-1">
-                      Tue/Thu, 7:00-8:30 PM ET
+                      Tue/Thu, 7:00-8:30 PM local time
                     </p>
 
                     <div className="mt-4 pt-4 border-t border-[#e5e7eb] flex items-baseline justify-between">
@@ -446,10 +529,11 @@ export default function Ekuzo101RegisterPage() {
                   </p>
                   <ul className="flex flex-col gap-2">
                     {[
+                      // "Same teammates every session" removed 2026-07-15:
+                      // availability model can't guarantee identical groups.
                       "4 weeks of live elite coaching",
-                      "Tue + Thu, 7:00-8:30 PM ET",
+                      "Tue + Thu, 7:00-8:30 PM local time",
                       "Coach-led small group sessions",
-                      "Same teammates every session",
                       "No card required - free pilot",
                     ].map((line) => (
                       <li key={line} className="flex items-start gap-2">
@@ -470,7 +554,9 @@ export default function Ekuzo101RegisterPage() {
         </div>
       </section>
 
+      </form>
+
       <Footer hideTornPaper />
-    </form>
+    </>
   );
 }

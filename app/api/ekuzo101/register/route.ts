@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { nanoid } from "nanoid";
+import { isValidSquadToken } from "@/lib/squad";
 import {
   isWeekEligible,
   buildWeeksLabel,
@@ -133,11 +135,28 @@ export async function POST(req: NextRequest) {
   const registrationTimestamp = Math.floor(Date.now() / 1000);
   const registrationDate = new Date().toISOString();
   const allGamerNames = (gamers as ClientGamer[])
-    .map((g) => `${g.firstName} ${g.lastName}`)
+    .map((g) => `${g.firstName} ${g.lastName}`.trim())
     .join(", ");
 
-  const weeksLabel = buildWeeksLabel(weeks as string[]);
-  const weekDatesSpan = buildWeekDatesSpan(weeks as string[]);
+  // Sort ISO dates chronologically so labels read in calendar order
+  // regardless of the order weeks were clicked in the picker.
+  const sortedWeeks = [...(weeks as string[])].sort();
+  const weeksLabel = buildWeeksLabel(sortedWeeks);
+  const weekDatesSpan = buildWeekDatesSpan(sortedWeeks);
+
+  // ── Squad tokens (availability-affiliation model) ─────────────────────
+  // 101 squads affiliate families WITHOUT locking schedules: each family
+  // registers its own availability, and the overlap tells Karlin which
+  // window to run. Universal-token rule (lifted from camps/e100): every
+  // registration gets a working share link — owners share the token they
+  // minted; joiners share the same crew link they came in on.
+  const joiningSquadToken = isValidSquadToken(body.joiningSquadToken)
+    ? (body.joiningSquadToken as string)
+    : "";
+  const squadToken = joiningSquadToken ? "" : nanoid(10);
+  const shareToken = joiningSquadToken || squadToken;
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ekuzo.gg").replace(/\/$/, "");
+  const squadLink = `${siteUrl}/programs/ekuzo101/register?squad=${shareToken}`;
   const weekDetails = (weeks as string[]).map((iso) => {
     // Thursday is Tuesday + 2 days
     const [y, m, d] = iso.split("-").map(Number);
@@ -156,7 +175,10 @@ export async function POST(req: NextRequest) {
       reactivate_existing: true,
       send_welcome_email: false,
       referring_site: "ekuzo101-pilot-registration",
-      // No automation_ids — Klaviyo owns product email for 101
+      // No automation_ids — Klaviyo owns product email for 101.
+      // No weeks_label — Beehiiv is general nurture only (Jamie 2026-07-15);
+      // schedule data lives in Klaviyo (event properties) + Sheets. Beehiiv
+      // silently drops unknown custom fields, so sending it was a no-op.
       custom_fields: [
         { name: "first_name", value: parentFirstName || "" },
         { name: "last_name", value: parentLastName || "" },
@@ -164,7 +186,6 @@ export async function POST(req: NextRequest) {
         { name: "program", value: "EKUZO101" },
         { name: "gamer_name", value: allGamerNames },
         { name: "gamer_count", value: String((gamers as ClientGamer[]).length) },
-        { name: "weeks_label", value: weeksLabel },
         { name: "timezone", value: timezone || "" },
       ],
     };
@@ -307,6 +328,9 @@ export async function POST(req: NextRequest) {
       weeks_count: (weeks as string[]).length,
       gamer_name: allGamerNames,
       gamer_count: (gamers as ClientGamer[]).length,
+      // Recruit-your-friends link for the confirmation email
+      // ({{ event.squad_link }} in the Klaviyo template).
+      squad_link: squadLink,
     };
 
     const eventPayload = {
@@ -376,8 +400,8 @@ export async function POST(req: NextRequest) {
       registration_date: registrationDate,
       additional_info: `reg_id:${registrationId}`,
       squad_status: "",
-      squad_token: "",
-      joining_squad_token: "",
+      squad_token: squadToken,
+      joining_squad_token: joiningSquadToken,
       preferred_days: "",
       acquisition_source: acquisitionSource || "",
       origin: origin || "",
@@ -408,6 +432,70 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // ── Step 4: Squad rows (mirrors the Stripe webhook's writes) ──────────
+  // Owner registrations write a `squads` row; joiners write one
+  // `squad_members` row per gamer. member_week carries the family's OWN
+  // availability (no schedule inheritance) so the overlap is visible in
+  // the sheet.
+  try {
+    if (squadToken) {
+      const firstGamer = (gamers as ClientGamer[])[0];
+      const squadRow = {
+        squad_token: squadToken,
+        product: "ekuzo101",
+        owner_parent_email: parentEmail,
+        owner_gamer_name: firstGamer?.firstName || "",
+        week: weeksLabel,
+        slot: "",
+        week_dates: weekDatesSpan,
+        cohort_month: "",
+        cohort_label: weeksLabel,
+        cohort_start: "",
+        cohort_end: "",
+        created_at: registrationDate,
+      };
+      const squadRes = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tab: "squads", rows: [squadRow] }),
+      });
+      if (!squadRes.ok) {
+        const errText = await squadRes.text();
+        console.error("Sheets ekuzo101 squads write failed:", squadRes.status, errText);
+      } else {
+        console.log(`Sheets ekuzo101 squads row written (${squadToken})`);
+      }
+    } else if (joiningSquadToken) {
+      const memberRows = (gamers as ClientGamer[]).map((g) => ({
+        squad_token: joiningSquadToken,
+        product: "ekuzo101",
+        member_parent_email: parentEmail,
+        member_gamer_name: g.firstName || "",
+        member_week: weeksLabel,
+        member_slot: "",
+        member_cohort_month: "",
+        member_cohort_label: weeksLabel,
+        joined_at: registrationDate,
+      }));
+      const memberRes = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tab: "squad_members", rows: memberRows }),
+      });
+      if (!memberRes.ok) {
+        const errText = await memberRes.text();
+        console.error("Sheets ekuzo101 squad_members write failed:", memberRes.status, errText);
+      } else {
+        console.log(`Sheets ekuzo101 squad_members: ${memberRows.length} row(s) written (${joiningSquadToken})`);
+      }
+    }
+  } catch (err) {
+    console.error(
+      "Sheets ekuzo101 squad write error:",
+      err instanceof Error ? err.message : err
+    );
+  }
+
   // ── Response ──────────────────────────────────────────────────────────
   return NextResponse.json({
     ok: true,
@@ -419,5 +507,6 @@ export async function POST(req: NextRequest) {
     weeksLabel,
     weekDetails,
     weeksCount: (weeks as string[]).length,
+    squadLink,
   });
 }

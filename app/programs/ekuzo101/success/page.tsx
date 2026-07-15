@@ -18,12 +18,25 @@ type SuccessData = {
   weeksLabel: string;
   weekDetails: { tueFull: string; thuFull: string }[];
   weeksCount: number;
+  squadLink?: string;
 };
 
 export default function Ekuzo101SuccessPage() {
   const [data, setData] = useState<SuccessData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
   const tracked = useRef(false);
+
+  function copySquadLink() {
+    if (!data?.squadLink) return;
+    navigator.clipboard
+      .writeText(data.squadLink)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {});
+  }
 
   useEffect(() => {
     try {
@@ -119,7 +132,7 @@ export default function Ekuzo101SuccessPage() {
                     className="font-body font-bold text-[#0a0a0a] mb-3"
                     style={{ fontSize: "13px", lineHeight: "20px", letterSpacing: "0.05em", textTransform: "uppercase" }}
                   >
-                    Sessions (7:00-8:30 PM ET each night)
+                    Sessions (7:00-8:30 PM local time each night)
                   </p>
                   <ul className="flex flex-col gap-2">
                     {data.weekDetails.map((wd, i) => (
@@ -148,6 +161,44 @@ export default function Ekuzo101SuccessPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Recruit your friends — squad share link. Availability
+                  model: the link affiliates families, it never locks a
+                  schedule. Copy leans into that. */}
+              {data.squadLink && (
+                <div className="mt-10 text-left px-6 py-6 bg-[#FF6B1A]/10 border border-[#FF6B1A]/30 rounded-sm">
+                  <h3
+                    className="font-display uppercase text-[#0a0a0a]"
+                    style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
+                  >
+                    Recruit your friends
+                  </h3>
+                  <p className="font-body text-[#374151] mt-2 text-sm leading-6">
+                    Gaming is better with friends. Share this link and
+                    they&apos;ll be grouped with {data.gamers[0]?.name || "your gamer"}.
+                    Everyone picks their own weeks; schedules don&apos;t need to
+                    match perfectly, and we use the group&apos;s availability to
+                    set up sessions.
+                  </p>
+                  <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={data.squadLink}
+                      onFocus={(e) => e.target.select()}
+                      aria-label="Your group invite link"
+                      className="flex-1 font-body text-sm px-3 py-2.5 bg-white border border-[#e5e7eb] rounded-sm text-[#374151] min-w-0"
+                    />
+                    <button
+                      type="button"
+                      onClick={copySquadLink}
+                      className="shrink-0 px-5 py-2.5 bg-[#FF6B1A] text-white font-body font-bold text-sm rounded-sm hover:brightness-110 active:scale-[0.98] transition-all duration-150"
+                    >
+                      {copied ? "Copied!" : "Copy link"}
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* What happens next */}
               <div className="mt-10 text-left">

@@ -143,3 +143,84 @@ The loop fails when:
 - [ ] Steward and Parent receive screenshots, not just copy deck text
 - [ ] Review guide is Fable-authored, runs last, reflects post-repair state
 - [ ] Cowork handoff prompt is part of Phase 7, not a post-session request
+
+---
+
+# Addendum — Cowork review session (2026-07-15, same day)
+
+Jamie's review session extended this log the same day. The review revealed
+that §4 and §5 above understated the problem: the gap was not missing
+screenshot evidence, it was a wrong interpretation of the visual spec that
+no gate could have caught because no gate existed for it.
+
+## What the review actually found
+
+- **The landing page missed entirely.** Jamie expected an effective clone
+  of the camps v2 page with copy changes. The build delivered a 353-line
+  original design against camps' 1,666 lines. Rebuilt in the review session
+  as a literal camps clone, then refined through a copy pass (kid+parent
+  dual audience; fun first).
+- **The week picker missed the same way.** Brief said "adapt the e100
+  calendar tile visual language"; the build shipped card tiles, not a
+  calendar. Rebuilt three times in session (camps-style calendar → single
+  continuous week-row calendar → availability calendar per Jamie's
+  wireframe: month cards, week-row pills, range/counter banner).
+- **A hydration defect shipped undetected.** The register page's
+  page-level `<form>` wrapped the Footer, nesting the newsletter `<form>`
+  inside it - invalid HTML, hydration failure on every load. Found only
+  because the review session loaded pages in a real browser and read the
+  console. No loop phase ever did either.
+- **Product-model corrections the brief never surfaced:** sessions are
+  7:00-8:30 PM LOCAL time, not ET (copy swept); no "same teammates/same
+  coach" promises (availability model is drop-in friendly); squads were
+  declared out of scope in brief §6 but were actually a launch requirement
+  (anchor family bringing 10-15 kids) - built in session as an
+  availability-affiliation model (link groups families, never locks
+  schedules). A sharper 10-minute decision session on the product model
+  would have surfaced all three.
+
+## Root cause (extends §4/§5)
+
+1. **Gates shaped the output.** Every requirement with a mechanical gate
+   (tsc, grep, curl, build) shipped correct. Every requirement that needed
+   eyes shipped at the minimum defensible interpretation. The loop
+   optimized for exactly what its gates measured.
+2. **"As baseline" / "adapt the visual language" is load-bearing
+   ambiguity.** It reads as a constraint to the brief writer and as a
+   suggestion to the builder.
+3. **No role owns "does it look right."** Ten roles; Sentry verifies text,
+   Steward reviewed copy against brand guidelines, nobody compared the
+   built page to the reference.
+4. **The Clarity Gate ran per-project, not per-surface.** The brief was
+   deep on backend (author's comfort zone) and thin on frontend; the
+   backend depth made the whole brief feel thorough, hiding the asymmetry.
+
+## Rules adopted (supersede/extend the checklist above)
+
+1. **Reference-relationship rule (briefs).** Every visual deliverable names
+   a reference artifact and declares exactly one relationship:
+   `clone` (only listed deltas allowed) | `adapt` (list what may differ) |
+   `new-design` (mockup approved before build). "As baseline" and
+   "inspired by" are banned phrases in briefs.
+2. **Visual parity gate (loop).** Side-by-side screenshots of built page vs
+   reference (1440px + 375px) go in the evidence ledger, and a role
+   (Steward) judges them against the declared relationship. "Screenshots
+   exist" is not the gate; "screenshots match the declared relationship"
+   is.
+3. **Browser-truth gate.** Every page is loaded in a real browser during
+   QA; the console must be free of errors (hydration failures fail the
+   gate). curl + grep is not page verification.
+4. **Clarity Gate per surface.** Rate Goal/Constraints/Success-criteria
+   separately for frontend, backend, copy, and data. The thinnest surface
+   gets the questions - this directly counteracts author-comfort bias
+   (Jamie specs backend deep; Aaron would invert).
+
+## North star (Jamie, verbatim intent)
+
+**Less human checking, more matching human expectations out of the gate.**
+The copy-feedback round in the review session (hero options, FAQ wording,
+step copy) is the intended kind of human pass - taste and voice. The
+structural rebuild was not. Success for the next loop: the human review
+touches only copy and product judgment, never structure. Consequence for
+the loop design: no hard mid-build human checkpoints by default; instead,
+gates strong enough that the ledger review is sufficient.

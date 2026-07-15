@@ -32,8 +32,11 @@ export default function StickyCTA() {
   // register page (no enroll modal). Promoted from V2 styling on
   // 2026-05-20 when V2 became the canonical /programs/ekuzo-camps page.
   const isCamps = pathname === "/programs/ekuzo-camps";
-  const showEnroll = !isSchools && !isCamps;
-  const showContact = !isParents && !isCamps;
+  // 101 pilot: same camps-style bar (display headline + single direct
+  // Enroll link, no modal), routed to the 101 register. Added 2026-07-15.
+  const is101 = pathname === "/programs/ekuzo101";
+  const showEnroll = !isSchools && !isCamps && !is101;
+  const showContact = !isParents && !isCamps && !is101;
   // On any non-camps program page (e100, teams), Enroll routes
   // direct to that program's register instead of the cross-program
   // picker modal. Camps has its own custom bar above; this covers
@@ -79,7 +82,7 @@ export default function StickyCTA() {
       <div className="absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none" />
 
       <div className="flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white">
-        {isCamps ? (
+        {isCamps || is101 ? (
           <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
             <span
               className="font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap"
@@ -88,7 +91,11 @@ export default function StickyCTA() {
               Ready to level up this summer?
             </span>
             <a
-              href="/programs/ekuzo-camps/register?cta=sticky"
+              href={
+                is101
+                  ? "/programs/ekuzo101/register?cta=sticky"
+                  : "/programs/ekuzo-camps/register?cta=sticky"
+              }
               onClick={() => trackRegisterClick({ source: "sticky" })}
               className="flex-1 sm:flex-none bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg
                          py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0

@@ -29,8 +29,9 @@ export default function RegisterHero({
   title1: string;
   title2: string;
   title2Color?: string;
-  // 1-line subhead under the H1.
-  subhead: string;
+  // Subhead under the H1. Usually a 1-line string; accepts a node for
+  // multi-line copy (e.g. ekuzo101's joke line + program line).
+  subhead: React.ReactNode;
 }) {
   return (
     <section className="relative" style={{ overflow: "clip", background }}>

@@ -14,9 +14,12 @@ export type PostPaymentStep = {
 export default function PostPaymentSteps({
   steps,
   className = "mb-8",
+  heading = "What happens after you click pay",
 }: {
   steps: PostPaymentStep[];
   className?: string;
+  // ekuzo101 has no payment step; it passes "What happens after you submit".
+  heading?: string;
 }) {
   return (
     <div className={className}>
@@ -24,7 +27,7 @@ export default function PostPaymentSteps({
         className="font-body font-bold text-[#0a0a0a] mb-4"
         style={{ fontSize: "16px", lineHeight: "24px" }}
       >
-        What happens after you click pay
+        {heading}
       </h3>
       <ol className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {steps.map((s, i) => (

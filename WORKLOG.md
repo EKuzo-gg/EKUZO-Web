@@ -6,6 +6,32 @@
 
 ---
 
+## Jamie — July 15, 2026 (EKUZO 101 launch session: test + Klaviyo + ship) — feat/ekuzo101-pilot
+
+**What:** Launch-day session (Cowork Claude executing): full QA sweep, Klaviyo product email built and set LIVE, owner + joiner e2e tests passed, test records cleaned, branch shipped.
+
+- **QA (desktop + mobile):** all three 101 pages console-error-free; calendar min-4/cross-month/deselect verified; `?squad=BADTOKEN` degrades silently. Mobile pass at 606px (Chrome min window width; sub-768 stacked layouts all correct, no horizontal overflow).
+- **Klaviyo (live):** flow `V8RC9V` "Pilot Confirmation - EKUZO 101" cloned from e100, trigger = Registered Pilot with the stale `product=EKUZO100` filter REMOVED (would have blocked all entries). Email #1 (confirmation w/ squad recruit block) + 1-day delay + Email #2 (toolkit). All copy: 7:00-8:30 PM local time, availability framing ("YOUR AVAILABILITY", "weeks you marked as available"), no fixed-roster promises, no payment refs, no em-dashes. Templates pasted as CODE HTML into the flow messages; redundant library copies `W5js9U`/`XB34yq` can be deleted.
+- **E2E owner (test-2):** Beehiiv sub + 2 tags, Klaviyo profile + Registered Pilot event w/ squad_link, Sheets purchases + squads rows, confirmation email rendered clean. **E2E joiner (test-3):** join banner (no week pre-pin), squad_members row carries the JOINER's own weeks — availability-affiliation model verified end to end. Apps Script accepted `product: "ekuzo101"` (known risk didn't materialize).
+- **Route fixes** (`app/api/ekuzo101/register/route.ts`): trim `allGamerNames` (every email read "TestGamer 's spot"); sort weeks chronologically before building labels (labels previously followed click order). Follow-up: success-page week list still renders client-side in click order.
+- **Flag:** local `.env.local` `NEXT_PUBLIC_SITE_URL` points at localhost:3001 (dev runs on 3000) — squad links mint with the wrong port locally. Prod comes from Netlify env; verify `NEXT_PUBLIC_SITE_URL=https://ekuzo.gg` there.
+- All test records (Beehiiv subs, Klaviyo profiles, Sheets rows incl. pre-session build test rows) deleted per `docs/ekuzo101-pilot/06-cleanup-ledger.md`.
+- **⚠️ Aaron:** this commit includes the review-session changes to `components/ui/StickyCTA.tsx` (is101 branch) and `components/register/RegisterHero.tsx` (subhead → ReactNode) noted in the entry below.
+
+## Jamie — July 15, 2026 (EKUZO 101 review session: rebuilds + squads) — feat/ekuzo101-pilot
+
+**What:** Full review of the autonomous 101 build with Claude (Cowork). The landing page and week picker missed the visual intent and were rebuilt in-session; squads were pulled into scope. Root-cause + adopted rules: `docs/ekuzo101-pilot/retrospective.md` (same-day addendum).
+
+- **Landing page rebuilt** (`app/programs/ekuzo101/page.tsx`): now a structural clone of camps v2 with 101 copy (kid+parent, fun first). Hero "YOUR FIRST ESPORTS TEAM"; overview grid RATIO/WHEN/WHERE/COST; camps coach cards verbatim (incl. Nuri, campers→students); merged learn-to-skate step (mechanics+roles); 7-question FAQ (canon-sourced, comments inline); "Ready to level up this summer?" FooterBanner → 101 register.
+- **WeekPicker rebuilt** (`components/ekuzo101/WeekPicker.tsx`): availability calendar per Jamie's wireframe — month cards (stack on mobile, handle 3-month windows), week-row pills (whole week = selection unit, no checkboxes), range + "N of 4 required" counter banner, greyed current week, Tue/Thu dots, e100 orange #FF6B1A.
+- **Register page** (`app/programs/ekuzo101/register/page.tsx`): e100 orange gradient hero + "Not Fortnite. Not Roblox." parent copy (register-only framing); nested-form hydration fix (Nav/Footer moved outside the page `<form>` — FooterNewsletter has its own form); "What happens after you submit" 3-card strip (`PostPaymentSteps` gained an optional `heading` prop); dropped "Same teammates" from What-you-get.
+- **Squad links for 101** (availability-affiliation model — affiliates families, never locks schedules): route mints token + writes `squads`/`squad_members` rows (joiner rows carry the joiner's OWN weeks); `?squad=` join banner with no week pre-pin; success-page "Recruit your friends" copy-link block; `squad_link` in the Klaviyo event. `lib/squad.ts` + `/api/squad/[token]` accept `ekuzo101`.
+- **Copy sweeps:** all times → "7:00-8:30 PM local time" (never ET, incl. `buildWeeksLabel` — flows to Klaviyo/Sheets); no fixed-roster promises; pricing story "free to try, donation-based if it works, $160/mo ($13.33/hr; Friendship free, always)".
+- **⚠️ Aaron's lane:** `components/ui/StickyCTA.tsx` — added `is101` branch so the 101 landing gets the camps-style bar routed to `/programs/ekuzo101/register?cta=sticky`. Also `components/register/RegisterHero.tsx` `subhead` prop widened to ReactNode (non-breaking). Ping Aaron.
+- **Beehiiv scope decision:** Beehiiv = general nurture newsletter only; Klaviyo owns product email. `weeks_label` removed from the Beehiiv payload; no Beehiiv custom field needed.
+
+**Next:** `docs/ekuzo101-pilot/cowork-session-launch.md` — test → Klaviyo → e2e (owner + joiner) → merge → deploy. Known risk: Apps Script may need `ekuzo101` accepted as a squad product value.
+
 ## Jamie — July 15, 2026 (EKUZO 101 Summer Pilot — feature branch)
 
 **What:** Autonomous build of EKUZO 101: Summer Pilot on feat/ekuzo101-pilot (Fable lead).

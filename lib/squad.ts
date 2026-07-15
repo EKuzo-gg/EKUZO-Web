@@ -21,7 +21,10 @@ export type SquadOwner = {
   // is single-value (one semester per year) — no additional cohort
   // fields, the "you're joining [name]'s team" banner is the whole UX
   // per handoff §1.2.
-  product?: "camps" | "ekuzo100" | "teams";
+  // "ekuzo101" added 2026-07-15: pilot squads affiliate families without
+  // schedule inheritance (availability model) — the joining register page
+  // shows a banner only, never pre-pins weeks.
+  product?: "camps" | "ekuzo100" | "teams" | "ekuzo101";
   // Camps fields (load-bearing for product="camps"):
   week_label: string;
   slot: string;
@@ -74,7 +77,8 @@ export async function fetchSquadOwner(
     const product =
       data.product === "ekuzo100" ||
       data.product === "camps" ||
-      data.product === "teams"
+      data.product === "teams" ||
+      data.product === "ekuzo101"
         ? data.product
         : undefined;
     return {

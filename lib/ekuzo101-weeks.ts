@@ -156,7 +156,7 @@ export function buildWeeksLabel(tuesdayISOs: string[]): string {
   const weekList = tuesdayISOs
     .map((iso) => formatMonthDay(iso))
     .join(", ");
-  return `Tuesdays & Thursdays - Weeks of ${weekList} - 7-8:30 PM ET`;
+  return `Tuesdays & Thursdays - Weeks of ${weekList} - 7-8:30 PM local time`;
 }
 
 /**

@@ -2,7 +2,7 @@
 
 **For:** Jamie Fitch  
 **Author:** Fable  
-**Date:** 2026-07-15  
+**Date:** 2026-07-15 (defect statuses corrected post-repair, same day, Cowork session — this guide was originally written mid-run and briefly showed D-001/D-003 as open; statuses below now match `05-defect-log.md` and were re-verified against the committed code)  
 **Branch:** feat/ekuzo101-pilot
 
 ---
@@ -11,7 +11,7 @@
 
 **What shipped:** A complete, no-payment registration flow for EKUZO 101 Summer Pilot — landing page, week picker, register form, success page, and all three fulfillment legs (Beehiiv, Klaviyo, Google Sheets). The product is wired into the existing product registry. A live integration test ran against `jamiefosu+101test-1@gmail.com`.
 
-**What state it's in:** Feature-complete. `tsc --noEmit` passes. `next build` passes. Three open defects from Sentry QA (see section 2 and defect log). Not merged to dev. Not deployed. Klaviyo flow not activated. No routes indexed.
+**What state it's in:** Feature-complete. `tsc --noEmit` passes. `next build` passes. D-001 (webhook guard spec conflict) and D-003 (em-dash in titles) are RESOLVED and in commit `bbecc49` — verified: title reads "EKUZO 101 Summer Pilot: Try It Free", webhook guard `automation_ids: automationId ? [automationId] : []` is committed, remaining em-dashes are code comments only. Still open: D-002 (Jamie-side Beehiiv dashboard action, not a code bug — the route sends `weeks_label` correctly), D-004/D-005 (documented accepted risks). Not merged to dev. Not deployed. Klaviyo flow not activated. No routes indexed.
 
 **Done:**
 - Landing page, register page, success page (all noindex)
@@ -22,12 +22,12 @@
 - Live integration test with real services
 
 **Not done (deferred to human):**
-- D-001: Stripe webhook guard change is uncommitted (working tree only) — needs a commit
-- D-002: `weeks_label` field missing from Beehiiv subscriber — needs a code fix
-- D-003: Em-dash in page title tag — needs a one-character fix
+- D-002: create the `weeks_label` custom field in the Beehiiv dashboard (Publication Settings > Custom Fields, type: text). The register route already sends it correctly (L167); Beehiiv silently drops fields that don't exist in publication settings. NOT a code fix.
 - Klaviyo flow setup (see `docs/ekuzo101-pilot/ekuzo101-klaviyo-setup.md`)
-- `weeks_label` custom field creation in Beehiiv dashboard (manual step)
 - Test subscriber cleanup (Beehiiv + Klaviyo dashboard)
+- **Commit the post-run hydration fix:** `app/programs/ekuzo101/register/page.tsx` has an uncommitted working-tree change (moves Nav/Footer outside the `<form>` — nested forms with FooterNewsletter's own `<form>` are invalid HTML and caused a hydration error). Real fix, should be committed to this branch.
+
+**Working-tree caveat for merge day:** the repo carries unrelated uncommitted work that is NOT from this build — a CLAUDE.md slim-down refactor (+ a 3-line Build Loop pointer added 2026-07-15) and companion docs edits from an earlier session, plus Git LFS smudge noise on the mp4s (see `docs/dev-runbook.md`). The branch itself committed nothing to CLAUDE.md. Stage deliberately; don't bulk-add.
 
 ---
 
@@ -147,10 +147,11 @@ Watch for Beehiiv/Klaviyo/Sheets log lines after submit. Any fulfillment step fa
 ## 5. Pre-Launch Checklist
 
 - [ ] Review this guide's decisions (section 2) and overrule any you disagree with
-- [ ] Fix D-003: change em-dash to hyphen in `app/programs/ekuzo101/page.tsx` line 16 title tag
-- [ ] Fix D-002: add `weeks_label` to Beehiiv `custom_fields` array in `app/api/ekuzo101/register/route.ts`
-- [ ] Commit D-001 fix: stage and commit the `app/api/webhooks/stripe/route.ts` guard change on this branch
-- [ ] Create `weeks_label` custom field in Beehiiv dashboard (Publication Settings > Custom Fields, type: text)
+- [x] ~~Fix D-003 (em-dash in titles)~~ — resolved in commit `bbecc49` (colon/pipe titles, grep-verified clean)
+- [x] ~~Fix D-002 in code~~ — the code was never wrong; route sends `weeks_label` correctly. Dashboard step below is the actual fix
+- [x] ~~Commit D-001 webhook guard~~ — committed in `bbecc49` (verified in branch history)
+- [ ] Commit the register-page hydration fix currently sitting uncommitted in the working tree (see section 1)
+- [ ] Create `weeks_label` custom field in Beehiiv dashboard (Publication Settings > Custom Fields, type: text) — closes D-002
 - [ ] Follow `docs/ekuzo101-pilot/ekuzo101-klaviyo-setup.md` to clone the e100 flow and activate for "Registered Pilot"
 - [ ] Clean up test subscriber `sub_7bb9cf79-dade-4944-8845-01db585b3da7` from Beehiiv dashboard (tag removal not possible via API)
 - [ ] Clean up test profile `01KXK1J32EQ3FD91MWXHFVCT41` from Klaviyo dashboard if desired

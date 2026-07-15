@@ -13,18 +13,28 @@ The register route fires a "Registered Pilot" Klaviyo event with these propertie
 | Property | Example |
 |----------|---------|
 | `product` | `"EKUZO101"` |
-| `weeks_label` | `"Tuesdays & Thursdays - Weeks of Jul 21, Jul 28 - 7-8:30 PM ET"` |
+| `weeks_label` | `"Tuesdays & Thursdays - Weeks of Jul 21, Jul 28 - 7-8:30 PM local time"` |
 | `weeks_count` | `4` |
 | `gamer_name` | `"Alex Fitch"` |
 | `gamer_count` | `1` |
+| `squad_link` | `"https://ekuzo.gg/programs/ekuzo101/register?squad=aB3xY9_k2m"` (added 2026-07-15) |
 
-Use `{{ event.weeks_label }}`, `{{ event.gamer_name }}`, etc. in templates.
+Use `{{ event.weeks_label }}`, `{{ event.gamer_name }}`, `{{ event.squad_link }}`, etc. in templates.
+
+> **Updated 2026-07-15 after the review session:** all times are LOCAL (never
+> ET); no "same coach, same teammates" promises anywhere (availability model
+> is drop-in friendly); the confirmation email must include the
+> recruit-your-friends squad link.
 
 ---
 
 ## Checklist
 
 ### Step 1 — Create the "Registered Pilot" metric via a test submission
+
+**✅ ALREADY DONE (2026-07-15):** the metric exists from the build session's
+live integration test — metric ID `ULgnq2`. Skip this step; no throwaway
+registration needed. (Original instructions kept below for reference.)
 
 Run the dev server and submit a test registration against `/api/ekuzo101/register`. This creates the "Registered Pilot" metric in Klaviyo so it appears as a flow trigger option. Do this BEFORE step 5 or the trigger metric won't be selectable.
 
@@ -81,8 +91,13 @@ Hey {{event.parent_first_name}},
 
 {{event.weeks_label}}
 
-Sessions run Tuesdays and Thursdays, 7:00-8:30 PM ET. Same coach, same
-teammates, every session.
+Sessions run Tuesdays and Thursdays, 7:00-8:30 PM local time.
+
+Gaming is better with friends. Share this link and they'll be grouped with
+{{event.gamer_name}} - every family picks its own weeks, and we use the
+group's availability to set up sessions:
+
+{{event.squad_link}}
 
 A few things before Day 1:
 
@@ -232,22 +247,17 @@ Once confirmed, set the flow to **Live**.
 
 ---
 
-## Beehiiv Custom Fields (Required Before Launch)
+## Beehiiv Custom Fields
 
-The register route sends these custom fields to Beehiiv. They must exist as custom fields in your Beehiiv publication settings or Beehiiv will silently drop them:
+**Updated 2026-07-15: NO new Beehiiv fields are needed.** Per the platform
+split (Beehiiv = general nurture, Klaviyo = product email — see
+`docs/beehiiv-config.md` § Platform split), `weeks_label` was REMOVED from
+the Beehiiv payload. Schedule data lives in Klaviyo event properties and
+Sheets. Do not create a `weeks_label` field.
 
-| Field name | Type | Notes |
-|------------|------|-------|
-| `weeks_label` | Text | New — must be created. Example: "Tuesdays & Thursdays - Weeks of Jul 21, Jul 28 - 7-8:30 PM ET" |
-| `program` | Text | Should already exist (shared with camps/e100). Verify. |
-| `gamer_name` | Text | Should already exist. Verify. |
-| `gamer_count` | Text | Should already exist. Verify. |
-| `first_name` | Text | Should already exist. Verify. |
-| `last_name` | Text | Should already exist. Verify. |
-| `phone` | Text | Should already exist. Verify. |
-| `timezone` | Text | Should already exist. Verify. |
-
-To create `weeks_label`: Beehiiv Dashboard > Publication Settings > Custom Fields > Add field. Type: Text, Name: `weeks_label`.
+The route still sends these existing fields (all already in publication
+settings): `first_name`, `last_name`, `phone`, `program`, `gamer_name`,
+`gamer_count`, `timezone`.
 
 ---
 
