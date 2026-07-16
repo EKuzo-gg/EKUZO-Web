@@ -114,7 +114,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
             <span className="font-medium text-[#4b5563]">(Next 6 weeks)</span>
           </p>
           <p className="font-body text-[#4b5563]" style={{ fontSize: "13px", lineHeight: "20px" }}>
-            Sessions are Tuesday &amp; Thursday · 7:00-8:30 PM local time
+            Sessions are Tuesday &amp; Thursday · 7:00-8:30 PM in your time zone
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -123,7 +123,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
               {Math.min(count, MINIMUM)} of {MINIMUM}
             </span>
             <span className={met ? "text-[#FF6B1A] font-bold" : "text-[#4b5563]"}>
-              required weeks selected{count > MINIMUM ? ` (+${count - MINIMUM} extra)` : ""}
+              available weeks marked{count > MINIMUM ? ` (+${count - MINIMUM} extra)` : ""}
             </span>
           </p>
           <span
@@ -239,21 +239,21 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
       {/* ── Legend ─────────────────────────────────────────────────── */}
       <p className="font-body text-[#4b5563] flex items-center gap-2" style={{ fontSize: "13px" }}>
         <span className="inline-block rounded-full bg-[#FF6B1A]" style={{ width: "6px", height: "6px" }} />
-        Session days: Tuesday &amp; Thursday · 7:00-8:30 PM local time
+        Session days: Tuesday &amp; Thursday · 7:00-8:30 PM in your time zone
       </p>
 
       {/* ── Min-4 counter ──────────────────────────────────────────── */}
       <p className="font-body text-sm text-gray-600">
         {count === 0 ? (
-          <>Click a week to select it. Sessions are the dotted days (Tue &amp; Thu).</>
+          <>Tap every week that could work. Sessions are the dotted days (Tue &amp; Thu).</>
         ) : count < MINIMUM ? (
           <>
-            Select at least <strong>{MINIMUM - count}</strong> more week
+            Mark at least <strong>{MINIMUM - count}</strong> more week
             {MINIMUM - count !== 1 ? "s" : ""} to continue.
           </>
         ) : (
           <>
-            <strong>{count}</strong> week{count !== 1 ? "s" : ""}{" "}selected. You&apos;re ready to continue.
+            <strong>{count}</strong> week{count !== 1 ? "s" : ""}{" "}marked. You&apos;re ready to continue.
           </>
         )}
       </p>

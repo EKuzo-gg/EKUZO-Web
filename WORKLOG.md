@@ -6,6 +6,26 @@
 
 ---
 
+## Jamie — July 15, 2026 (post-launch: Caroline feedback pass on 101 register + landing)
+
+**What:** Copy + small UX fixes from Caroline's review of the live 101 pages (Cowork Claude executing). All new copy voice-linted: no em dashes, reframes asserted positively per voice-dna.
+
+- **Register hero** (`app/programs/ekuzo101/register/page.tsx`): names the game ("4 weeks of coached League of Legends"); H1 "WHEN CAN YOU PLAY? RESERVE YOUR SPOT." (availability frame replaces the booking frame "PICK YOUR WEEKS"); new "First time hearing about the pilot? Learn more" link to the landing page (new tab so a half-filled form survives; squad-link joiners land here cold and had no path to the pitch).
+- **Week picker reframe** (register page + `components/ekuzo101/WeekPicker.tsx`): the section now reads as an availability poll, not a booking. H2 "Which weeks work for you?"; intro explains why 6 weeks show for a 4-week pilot and what happens after submit ("We'll follow up with your squad's schedule"); counter label "required weeks selected" → "available weeks marked"; helper states say "mark," not "select."
+- **Time zone sweep** (both pages + picker): "local time" → "in your time zone" in all parent-facing copy, plus "After dinner, wherever you live." Matches ops reality: cohorts built hands-on, target 7 PM local, preference local → regional → national. Landing WHEN card now "7:00-8:30 PM YOUR TIME ZONE."
+- **Phone field:** strips a leading +1 so pasted Canadian/US numbers format correctly (both NANP; no country selector needed).
+- **Deferred with intent:** Terms/Privacy US-only language (US-based, no CA revenue; revisit if Canada materializes). Klaviyo templates still say "local time"; same meaning, sync next time someone's in the dashboard.
+- Also committed: `docs/apps-script-registration-notifier.gs` (the Karlin notifier below; its WORKLOG entry was riding uncommitted).
+
+## Jamie — July 15, 2026 (post-launch: registration email notifier for Karlin)
+
+**What:** New standalone Apps Script (`docs/apps-script-registration-notifier.gs`) that emails karlin@ekuzo.gg when new rows land on the first tab of the orchestration sheet (ekuzo-purchases), skipping rows where parent name / gamer name / email contains "test" (case-insensitive). Goal: get Karlin in the habit of checking the sheet as 101 registrations come in.
+
+- Polling model: installable 5-min time trigger + `LAST_NOTIFIED_ROW` in Script Properties. Chosen over onChange (unreliable for rows written by Apps Script itself) and over touching the payment-path doPost. Works for webhook, manual, and API row adds alike.
+- One email per run batching all new non-test rows (siblings from one payment arrive together). LockService guards double-sends. `initNotifier()` baselines the current last row so history never triggers.
+- Install: paste into the sheet's bound script project as a NEW file (does not modify the existing doPost), run `initNotifier` once. `sendTestEmail()` verifies delivery.
+- Repo copy is the source of record, same convention as `apps-script-backup-pre-squad.gs`.
+
 ## Jamie — July 15, 2026 (EKUZO 101 launch session: test + Klaviyo + ship) — feat/ekuzo101-pilot
 
 **What:** Launch-day session (Cowork Claude executing): full QA sweep, Klaviyo product email built and set LIVE, owner + joiner e2e tests passed, test records cleaned, branch shipped.

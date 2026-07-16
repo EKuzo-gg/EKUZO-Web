@@ -344,7 +344,7 @@ export default function Ekuzo101LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 border-3 border-black bg-white text-left">
               {[
                 { icon: "swords" as IconName, label: "RATIO", value: "1:5", desc: "COACH TO STUDENT", badge: null },
-                { icon: "calendar" as IconName, label: "WHEN", value: "TUE/THU", desc: "7:00-8:30 PM LOCAL TIME, 4 WEEKS (VACATION-FLEXIBLE)", badge: null },
+                { icon: "calendar" as IconName, label: "WHEN", value: "TUE/THU", desc: "7:00-8:30 PM YOUR TIME ZONE, 4 WEEKS (VACATION-FLEXIBLE)", badge: null },
                 { icon: "chat" as IconName, label: "WHERE", value: "ONLINE", desc: "PLAY FROM HOME", badge: null },
                 { icon: "loot" as IconName, label: "COST", value: "FREE", desc: null, badge: "No Card Required" },
               ].map((card, i) => (

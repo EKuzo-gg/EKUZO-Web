@@ -49,7 +49,11 @@ function emptyGamer(): GamerInfo {
 }
 
 function formatPhone(value: string): string {
-  const digits = value.replace(/\D/g, "").slice(0, 10);
+  // US + Canada are both NANP (+1). Strip a leading country code so pasted
+  // "+1 (604) 555-1234" style numbers format correctly instead of mangling.
+  let raw = value.replace(/\D/g, "");
+  if (raw.length > 10 && raw.startsWith("1")) raw = raw.slice(1);
+  const digits = raw.slice(0, 10);
   if (digits.length === 0) return "";
   if (digits.length <= 3) return `(${digits}`;
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
@@ -249,17 +253,30 @@ export default function Ekuzo101RegisterPage() {
       <RegisterHero
         background="radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255, 220, 120, 0.80), transparent 60%), radial-gradient(ellipse 80% 70% at 100% 100%, rgba(180, 50, 0, 0.85), transparent 60%), #FF6B1A"
         eyebrow="EKUZO 101 - SUMMER PILOT"
-        title1={"PICK YOUR WEEKS. "}
+        title1={"WHEN CAN YOU PLAY? "}
         title2="RESERVE YOUR SPOT."
         subhead={
           <>
             <span className="block">
               Not Fortnite. Not Roblox. Not another argument about screen
-              time. 4 weeks of coached, active play: compete, communicate,
-              work as a team.
+              time. 4 weeks of coached League of Legends: compete,
+              communicate, work as a team.
             </span>
             <span className="block mt-3">
-              Sessions Tuesdays &amp; Thursdays, 7:00-8:30 PM local.
+              Sessions Tuesdays &amp; Thursdays, 7:00-8:30 PM in your time zone.
+            </span>
+            {/* Gut-check escape hatch: squad-link joiners land here without
+                ever seeing the landing page. New tab preserves form state. */}
+            <span className="block mt-3">
+              First time hearing about the pilot?{" "}
+              <a
+                href="/programs/ekuzo101"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-4 font-semibold hover:opacity-80 transition-opacity"
+              >
+                Learn more
+              </a>
             </span>
           </>
         }
@@ -384,16 +401,24 @@ export default function Ekuzo101RegisterPage() {
                   className="font-display uppercase text-black leading-[0.85] mb-4"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
                 >
-                  Choose Your Weeks
+                  Which weeks work for you?
                 </h2>
                 <p
                   className="font-body text-[#4b5563] mb-8"
                   style={{ fontSize: "clamp(0.875rem, 1.2vw, 16px)", lineHeight: "28px" }}
                 >
-                  The pilot is 4 weeks. We&apos;re showing you the next 6.
-                  Sessions are Tue/Thu, 7-8:30 PM local time.
+                  Mark every week your gamer could play (at least 4). The
+                  pilot is 4 weeks of sessions; we show 6 so a vacation week
+                  doesn&apos;t knock you out.
                   <br />
-                  <span className="font-semibold text-[#0a0a0a]">Select your availability (minimum 4 weeks).</span>
+                  <span className="font-semibold text-[#0a0a0a]">
+                    You&apos;re sharing availability, like a team poll: the
+                    more weeks you mark, the easier your gamer is to place.
+                    We&apos;ll follow up with your squad&apos;s schedule.
+                  </span>
+                  <br />
+                  Sessions are Tuesdays &amp; Thursdays, 7:00-8:30 PM in your
+                  time zone. After dinner, wherever you live.
                 </p>
 
                 <WeekPicker
@@ -500,11 +525,11 @@ export default function Ekuzo101RegisterPage() {
                     </p>
                     <p className="font-body text-[#6b7280] text-sm">
                       {selectedWeeks.length > 0
-                        ? `${selectedWeeks.length} week${selectedWeeks.length !== 1 ? "s" : ""} selected`
-                        : "No weeks selected yet"}
+                        ? `${selectedWeeks.length} week${selectedWeeks.length !== 1 ? "s" : ""} marked`
+                        : "No weeks marked yet"}
                     </p>
                     <p className="font-body text-[#6b7280] text-sm mt-1">
-                      Tue/Thu, 7:00-8:30 PM local time
+                      Tue/Thu, 7:00-8:30 PM in your time zone
                     </p>
 
                     <div className="mt-4 pt-4 border-t border-[#e5e7eb] flex items-baseline justify-between">
@@ -532,7 +557,7 @@ export default function Ekuzo101RegisterPage() {
                       // "Same teammates every session" removed 2026-07-15:
                       // availability model can't guarantee identical groups.
                       "4 weeks of live elite coaching",
-                      "Tue + Thu, 7:00-8:30 PM local time",
+                      "Tue + Thu, 7:00-8:30 PM in your time zone",
                       "Coach-led small group sessions",
                       "No card required - free pilot",
                     ].map((line) => (
