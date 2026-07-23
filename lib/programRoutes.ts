@@ -27,7 +27,7 @@ export type ProgramContext = {
   /** Direct register URL for the active program page (no query params). */
   registerHref: string;
   /** Program identifier — useful for product-aware copy / styling. */
-  program: "camps" | "ekuzo100" | "teams";
+  program: "camps" | "ekuzo100" | "ekuzo101" | "teams";
 };
 
 export function getProgramRegisterContext(
@@ -42,6 +42,9 @@ export function getProgramRegisterContext(
 
   if (pathname.startsWith("/programs/ekuzo-camps")) {
     return { registerHref: "/programs/ekuzo-camps/register", program: "camps" };
+  }
+  if (pathname.startsWith("/programs/ekuzo101")) {
+    return { registerHref: "/programs/ekuzo101/register", program: "ekuzo101" };
   }
   if (pathname.startsWith("/programs/ekuzo100")) {
     return { registerHref: "/programs/ekuzo100/register", program: "ekuzo100" };
