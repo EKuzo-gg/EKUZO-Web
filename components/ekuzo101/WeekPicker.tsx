@@ -239,7 +239,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
       {/* ── Legend ─────────────────────────────────────────────────── */}
       <p className="font-body text-[#4b5563] flex items-center gap-2" style={{ fontSize: "13px" }}>
         <span className="inline-block rounded-full bg-[#FF6B1A]" style={{ width: "6px", height: "6px" }} />
-        Session days: Tuesday &amp; Thursday · 7:00-8:30 PM in your time zone
+        Session days: Tuesday &amp; Thursday
       </p>
 
       {/* ── Min-4 counter ──────────────────────────────────────────── */}

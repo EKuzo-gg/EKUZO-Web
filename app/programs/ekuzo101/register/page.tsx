@@ -4,7 +4,8 @@
 // Clone of e100 register with payment machinery removed — no Stripe,
 // no CheckoutForm, no PaymentStep, no abandoned route, no squad token.
 // Week picker (WeekPicker component) replaces the cohort picker.
-// Copy source: docs/ekuzo101-pilot/copy-deck.md §2 (frozen 2026-07-15).
+// Copy source: docs/ekuzo101-pilot/copy-deck.md §2 (frozen 2026-07-15;
+// session-time mentions trimmed 2026-07-23 per Karlin — see §2 note).
 
 import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -416,9 +417,6 @@ export default function Ekuzo101RegisterPage() {
                     more weeks you mark, the easier your gamer is to place.
                     We&apos;ll follow up with your squad&apos;s schedule.
                   </span>
-                  <br />
-                  Sessions are Tuesdays &amp; Thursdays, 7:00-8:30 PM in your
-                  time zone. After dinner, wherever you live.
                 </p>
 
                 <WeekPicker
@@ -529,7 +527,7 @@ export default function Ekuzo101RegisterPage() {
                         : "No weeks marked yet"}
                     </p>
                     <p className="font-body text-[#6b7280] text-sm mt-1">
-                      Tue/Thu, 7:00-8:30 PM in your time zone
+                      Tuesday &amp; Thursday sessions
                     </p>
 
                     <div className="mt-4 pt-4 border-t border-[#e5e7eb] flex items-baseline justify-between">
@@ -557,7 +555,7 @@ export default function Ekuzo101RegisterPage() {
                       // "Same teammates every session" removed 2026-07-15:
                       // availability model can't guarantee identical groups.
                       "4 weeks of live elite coaching",
-                      "Tue + Thu, 7:00-8:30 PM in your time zone",
+                      "2 sessions a week (Tue + Thu)",
                       "Coach-led small group sessions",
                       "No card required - free pilot",
                     ].map((line) => (

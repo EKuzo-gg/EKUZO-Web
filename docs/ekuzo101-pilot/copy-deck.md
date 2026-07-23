@@ -190,6 +190,16 @@ Claim Your Spot
 
 ## Section 2: Register Page
 
+> **Session-time mentions (updated 2026-07-23, Karlin feedback).** The full
+> session time ("7:00-8:30 PM in your time zone") appears exactly twice on the
+> register page: the hero subhead and the WeekPicker banner strip above the
+> calendar. Every other spot uses days only: the week-picker section intro
+> drops its time sentence entirely, the picker legend reads "Session days:
+> Tuesday & Thursday", the registration sidebar reads "Tuesday & Thursday
+> sessions", and the What-you-get card reads "2 sessions a week (Tue + Thu)".
+> "After dinner, wherever you live" is removed. Parents can translate 7-8:30
+> to after dinner themselves.
+
 ### Page Header
 
 **Headline (max 8 words):**

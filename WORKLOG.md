@@ -6,6 +6,15 @@
 
 ---
 
+## Jamie — July 23, 2026 (101 header CTA routing + register time-mention trim)
+
+**What:** Two isolated prod-bound fixes (Cowork session), committed past the in-flight teams queue (which stays uncommitted, including the July 16 WORKLOG entry below — that hunk is deliberately left out of this commit).
+
+- **`lib/programRoutes.ts`:** added the missing `/programs/ekuzo101` branch to `getProgramRegisterContext` — the Nav "Enroll my gamer" on the 101 landing page fell back to the 3-program enroll modal instead of routing straight to `/programs/ekuzo101/register` the way camps/e100/teams do. Same helper feeds FooterBanner + StickyCTA. Type union extended with `"ekuzo101"`; no consumer reads `.program`, so no switch updates needed.
+- **101 register time trim (Karlin feedback):** session time appeared 6× on the register page; now exactly 2× (hero subhead + WeekPicker banner strip). Section intro drops its time sentence including "After dinner, wherever you live"; picker legend now "Session days: Tuesday & Thursday"; sidebar card "Tuesday & Thursday sessions"; What-you-get item "2 sessions a week (Tue + Thu)". `docs/ekuzo101-pilot/copy-deck.md` §2 amended with a dated note so the deck stays source of truth; copy-source comment at top of register page.tsx updated.
+
+**Next:** push dev, fast-forward main to ship both to prod.
+
 ## Jamie — July 15, 2026 (post-launch: Caroline feedback pass on 101 register + landing)
 
 **What:** Copy + small UX fixes from Caroline's review of the live 101 pages (Cowork Claude executing). All new copy voice-linted: no em dashes, reframes asserted positively per voice-dna.
