@@ -5,6 +5,16 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi post: Muhammad's review edits)
+
+**What:** Applied Muhammad's 5 edits from the review Google Doc to `app/blog/mom-who-banned-fortnite/page.tsx`. Copy only, no structural change; tsc clean. WORKLOG staged surgically past the teams queue as before.
+
+- Cut "On paper we should have argued... By the end I believed it." He commented that he disagrees they should have argued, so the framing of Kassi as a natural opponent goes; the paragraph is now just the coin line. This is the author correcting the room he was actually in.
+- "fine in class" → "great in class" (his own self-description; matches the transcript).
+- DoDEA stat reordered source-first.
+- "hand me a social life" → "give me a social life".
+- Added "a trusted adult holding the keys" to the EKUZO 101 sentence. **Flagged for Jamie:** it repeats the phrase used 2 paragraphs earlier about her sons' request, and it strengthens the single product sentence in a deliberately non-promotional piece. Applied as the author wrote it; revert is one clause.
+
 ## Jamie — July 25, 2026 (Kassi post: bot suppression for a private prod review)
 
 **What:** Hardening pass so the Kassi post can ship to production and be reviewed privately by Kassi and Muhammad without leaking into search or AI crawlers. Same surgical WORKLOG staging as the previous two commits (teams queue stays uncommitted).

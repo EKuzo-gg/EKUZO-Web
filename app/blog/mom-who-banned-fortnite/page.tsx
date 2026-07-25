@@ -229,7 +229,7 @@ export default function PostMomWhoBannedFortnite() {
               </p>
               <p>
                 Me, I’m 21, and gaming is where my social life came from. I was
-                an orchestra kid, fine in class and lost everywhere else, and
+                an orchestra kid, great in class and lost everywhere else, and
                 the friendships I built through games taught me how to reach
                 out to people at all. She matched it with a story of her own,
                 offered early and unprompted, the way you hand someone evidence
@@ -239,9 +239,8 @@ export default function PostMomWhoBannedFortnite() {
               </p>
               {/* VERIFY vs video before dissemination — [02:28] */}
               <p>
-                On paper we should have argued. Instead, two minutes in, I
-                heard myself say we might be like “two sides of the same coin.”
-                By the end I believed it.
+                Two minutes in, I heard myself say we might be like “two sides
+                of the same coin.”
               </p>
 
               <h2>The game that had its purpose</h2>
@@ -256,11 +255,11 @@ export default function PostMomWhoBannedFortnite() {
               {/* FACT: "Military Child School Move Frequency" — fact library,
                   DoDEA Student Transition Program */}
               <p>
-                Military kids move 3 times more often than their civilian
-                peers, and many attend 6 to 9 schools before they graduate,
-                according to the Department of Defense Education Activity’s
-                student transition data. Each move wipes the friend map clean.
-                The communities that survive are the ones that travel.
+                According to the Department of Defense Education Activity’s
+                student transition data, military kids move 3 times more often
+                than their civilian peers, and many attend 6 to 9 schools
+                before they graduate. Each move wipes the friend map clean. The
+                communities that survive are the ones that travel.
               </p>
               {/* VERIFY vs video before dissemination — [06:20] */}
               <p>
@@ -347,7 +346,7 @@ export default function PostMomWhoBannedFortnite() {
                 request was familiar. The kids I coach through{" "}
                 <Link href="/programs/ekuzo101">EKUZO 101</Link> play on a
                 private, moderated server, the same faces every week, a coach
-                in the voice channel.
+                in the voice channel, a trusted adult holding the keys.
               </p>
 
               <h2>Her two questions</h2>
@@ -459,7 +458,7 @@ export default function PostMomWhoBannedFortnite() {
                 I keep coming back to the coin. She reached her conclusions by
                 banning one game, watching her son come back, and then reading
                 everything she could about why. I reached mine by playing, and
-                by watching games hand me a social life I couldn’t build
+                by watching games give me a social life I couldn’t build
                 anywhere else. Opposite ends, same landing spot.
               </p>
               <p>
