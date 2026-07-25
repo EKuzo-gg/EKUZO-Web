@@ -10,6 +10,28 @@ const nextConfig = {
       "public/testimonial-videos/**/*",
     ],
   },
+  async headers() {
+    return [
+      {
+        // UNLISTED DRAFT (2026-07-25): the Kassi military-families post ships
+        // to production for private review by Kassi and Muhammad before it is
+        // disseminated. The page already sets a noindex meta tag; this header
+        // is the belt-and-suspenders layer for fetchers that never parse the
+        // HTML (link unfurlers, archivers, some AI crawlers). The post is also
+        // absent from sitemap.ts, commented out of the /blog listing, and
+        // path-blocked for AI crawlers in public/robots.txt.
+        // DELETE THIS RULE when the post is blessed and goes public.
+        source: "/blog/mom-who-banned-fortnite",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value:
+              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Canonical routes: /programs/ekuzo100, /programs/ekuzo-teams, /programs/ekuzo-camps

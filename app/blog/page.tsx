@@ -24,19 +24,28 @@ const posts = [
     image: "/images/what-your-kids-gaming-is-telling-you-card.jpg",
     featured: true,
   },
-  {
-    // Kassi post — live-but-undisseminated pending her blessing (robots noindex
-    // on the post page until then). Card asset pending — see asset list.
-    slug: "mom-who-banned-fortnite",
-    title: "The mom who banned Fortnite and the coach who grew up gaming",
-    date: "July 25, 2026",
-    author: "Muhammad Hossain",
-    category: "Perspective",
-    excerpt:
-      "She banned Fortnite. He grew up through gaming. A senior Air Force officer and a 21-year-old esports coach talked for 48 minutes and kept agreeing.",
-    image: "/images/mom-who-banned-fortnite-card.jpg",
-    featured: false,
-  },
+  /*
+   * UNLISTED (2026-07-25): the Kassi military-families post is live at
+   * /blog/mom-who-banned-fortnite for private review by Kassi and Muhammad
+   * only. Keeping it out of this array makes it reachable by direct link
+   * alone; the page itself also carries a noindex meta + X-Robots-Tag header
+   * and is absent from sitemap.ts.
+   * TO PUBLISH once she blesses it: uncomment this entry, flip `robots` to
+   * index:true in the post's metadata, add its sitemap.ts entry, delete the
+   * post's AI-crawler block in public/robots.txt, and drop the X-Robots-Tag
+   * rule in next.config.mjs. Card image still needs producing.
+   */
+  // {
+  //   slug: "mom-who-banned-fortnite",
+  //   title: "The mom who banned Fortnite and the coach who grew up gaming",
+  //   date: "July 25, 2026",
+  //   author: "Muhammad Hossain",
+  //   category: "Perspective",
+  //   excerpt:
+  //     "She banned Fortnite. He grew up through gaming. A senior Air Force officer and a 21-year-old esports coach talked for 48 minutes and kept agreeing.",
+  //   image: "/images/mom-who-banned-fortnite-card.jpg",
+  //   featured: false,
+  // },
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",

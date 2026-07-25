@@ -11,3 +11,40 @@ Disallow: /_next/
 # ...but let crawlers fetch optimized images (Next.js image optimizer).
 # More-specific Allow overrides the /_next/ Disallow for compliant bots.
 Allow: /_next/image
+
+# ── Unlisted draft: /blog/mom-who-banned-fortnite (added 2026-07-25) ─────────
+# That post is live on production for private review before dissemination.
+#
+# Deliberately NOT disallowed for User-agent: * — a disallowed URL can still
+# be indexed from an inbound link, because the crawler never fetches the page
+# and so never sees its noindex. Search engines get the noindex meta tag plus
+# the X-Robots-Tag header instead, which is the reliable signal.
+#
+# AI and training crawlers are the opposite case: most honor robots.txt, many
+# ignore noindex, and none of them need to index anything. So they get an
+# explicit path block. This is scoped to the single path on purpose — EKUZO
+# wants AI crawlers on the rest of the site (see GEO-CITABILITY-SCORE.md).
+#
+# DELETE THIS WHOLE SECTION when the post is blessed and goes public.
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: Meta-ExternalFetcher
+User-agent: Amazonbot
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: AI2Bot
+User-agent: omgili
+Disallow: /blog/mom-who-banned-fortnite

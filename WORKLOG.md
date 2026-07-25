@@ -5,6 +5,16 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi post: bot suppression for a private prod review)
+
+**What:** Hardening pass so the Kassi post can ship to production and be reviewed privately by Kassi and Muhammad without leaking into search or AI crawlers. Same surgical WORKLOG staging as the previous two commits (teams queue stays uncommitted).
+
+- **`next.config.mjs`:** new `headers()` block sets `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate` on `/blog/mom-who-banned-fortnite`. Covers fetchers that never parse HTML (link unfurlers, archivers, some AI crawlers) which the page's noindex meta alone misses.
+- **`public/robots.txt`:** path-scoped `Disallow` for ~20 AI/training crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot, Google-Extended, Bytespider, meta-externalagent, etc.). Deliberately NOT disallowed for `User-agent: *` — a robots-disallowed URL can still be indexed from an inbound link because the crawler never fetches the page and never sees the noindex. Search engines get noindex + header instead; that split is documented in the file. Scoped to one path on purpose: the GEO strategy wants AI crawlers everywhere else.
+- **`app/blog/page.tsx`:** listing entry commented out, so the post is reachable by direct link only.
+
+**Four flips to publish once Kassi blesses it** (each marked with a comment at its site): uncomment the listing entry · `robots` → `index: true` in the post metadata · add the `sitemap.ts` entry · delete the robots.txt section and the `next.config.mjs` header rule.
+
 ## Jamie — July 25, 2026 (Kassi military blog: built, battle-tested, committed unpushed)
 
 **What:** Unattended Cowork session built the military-families blog post from Muhammad's Kassi interview (per `knowledge-base/company/marketing/_next-session-kassi-blog-content-machine-prompt.md`). Committed past the in-flight teams queue (July 16 entry + teams hunks stay uncommitted; same surgical WORKLOG staging as July 23).
