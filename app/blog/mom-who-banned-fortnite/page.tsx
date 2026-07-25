@@ -29,9 +29,10 @@ import Image from "next/image";
  *   - "Military Child School Move Frequency" (DoDEA: https://kadenaes.dodea.edu/student-transition)
  *   - "Addictive Use Not Total Time" (https://www.cuimc.columbia.edu/news/addictive-use-social-media-not-total-time-associated-youth-mental-health)
  *   - "Official Military Branch Esports Programs" (https://recruiting.army.mil/army_esports/ · https://news.usni.org/2022/08/26/wanted-gamer-sailors-for-navys-goats-glory-esports-team · https://myairforcelife.com/air-force-gaming/)
- * Per the one-link rule (exactly one link, to EKUZO 101), fact sources are
- * named in prose, not hyperlinked. Add a linked Sources block only if Jamie
- * overrules.
+ * The one-link rule governs PRODUCT links only: exactly one, to EKUZO 101.
+ * Research citations are apparatus, not promotion, so they follow the house
+ * pattern from when-your-sons-only-friends-are-online: claim linked inline,
+ * full list in a Sources block at the end.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -44,6 +45,46 @@ const DESCRIPTION =
 const SHARE_IMAGE = "/images/mom-who-banned-fortnite-hero.jpg"; // asset pending — see wrap report asset list
 const DATE_PUBLISHED = "2026-07-25";
 const DATE_MODIFIED = "2026-07-25";
+
+// Every claim in the post that carries a number or an institutional fact.
+// Each one also resolves to an entry in knowledge-base ekuzo-fact-library.md.
+const SOURCES: { text: string; cite: string; url: string }[] = [
+  {
+    text: "Department of Defense Education Activity, ",
+    cite: "Student Transition Program (on how often military-connected students move and change schools).",
+    url: "https://kadenaes.dodea.edu/student-transition",
+  },
+  {
+    text: "Military Child Education Coalition, ",
+    cite: "Purple Star Schools.",
+    url: "https://militarychild.org/programs-and-initiatives/purple-star-schools/",
+  },
+  {
+    text: "Columbia University Irving Medical Center, ",
+    cite: "Addictive use of social media, not total time, associated with youth mental health (2025).",
+    url: "https://www.cuimc.columbia.edu/news/addictive-use-social-media-not-total-time-associated-youth-mental-health",
+  },
+  {
+    text: "U.S. Army Recruiting Command, ",
+    cite: "Army Esports Team.",
+    url: "https://recruiting.army.mil/army_esports/",
+  },
+  {
+    text: "USNI News, ",
+    cite: "on the Navy’s “Goats & Glory” esports team (August 2022).",
+    url: "https://news.usni.org/2022/08/26/wanted-gamer-sailors-for-navys-goats-glory-esports-team",
+  },
+  {
+    text: "Air Force Services Center, ",
+    cite: "Air Force Gaming.",
+    url: "https://myairforcelife.com/air-force-gaming/",
+  },
+  {
+    text: "Jonathan Haidt, The Anxious Generation (2024), the book Kassi kept quoting.",
+    cite: "",
+    url: "",
+  },
+];
 
 const KEEP_READING = [
   {
@@ -222,10 +263,10 @@ export default function PostMomWhoBannedFortnite() {
                   for military families. She's a mom of two boys, and the
                   parent who banned Fortnite." (drops pilot + Aggie) */}
               <p>
-                Kassi is a pilot by background, already deep into her next act:
-                researching family resilience and prevention work for military
-                families. She’s an Aggie, a mom of two boys, and the parent who
-                banned Fortnite.
+                Kassi is a pilot by background, and she’s already deep into her
+                next act: researching family resilience and prevention work for
+                military families. She’s an Aggie, a mom of two boys, and the
+                parent who banned Fortnite.
               </p>
               <p>
                 Me, I’m 21, and gaming is where my social life came from. I was
@@ -255,11 +296,19 @@ export default function PostMomWhoBannedFortnite() {
               {/* FACT: "Military Child School Move Frequency" — fact library,
                   DoDEA Student Transition Program */}
               <p>
-                According to the Department of Defense Education Activity’s
-                student transition data, military kids move 3 times more often
-                than their civilian peers, and many attend 6 to 9 schools
-                before they graduate. Each move wipes the friend map clean. The
-                communities that survive are the ones that travel.
+                According to the{" "}
+                <a
+                  href="https://kadenaes.dodea.edu/student-transition"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Department of Defense Education Activity’s student transition
+                  data
+                </a>
+                , military kids move 3 times more often than their civilian
+                peers, and many attend 6 to 9 schools before they graduate. Each
+                move wipes the friend map clean, and the communities that
+                survive are the ones that travel.
               </p>
               {/* VERIFY vs video before dissemination — [06:20] */}
               <p>
@@ -296,16 +345,22 @@ export default function PostMomWhoBannedFortnite() {
                   FACT: "Addictive Use Not Total Time" — fact library,
                   Columbia/Weill Cornell 2025 */}
               <p>
-                What makes her house a small study instead of a cautionary tale
-                is what she kept. Red Dead Redemption stayed, because it was
-                the one game her two very different sons would actually play
-                together. Her whole stance fits in a sentence: she sees real
-                value in gaming, as long as it’s controlled. And the research
-                is catching up to her. A 2025 study from researchers at
-                Columbia University and Weill Cornell Medicine found that
-                addictive patterns of use predicted worse mental health in
-                young people, while total screen time didn’t. She ran that
-                experiment in her own house before the paper existed.
+                The interesting part is what she kept. Red Dead Redemption
+                stayed, because it was the one game her two very different sons
+                would actually play together. Her whole stance fits in a
+                sentence: she sees real value in gaming, as long as it’s
+                controlled. And the research is catching up to her. A 2025 study
+                from Columbia University and Weill Cornell Medicine found that{" "}
+                <a
+                  href="https://www.cuimc.columbia.edu/news/addictive-use-social-media-not-total-time-associated-youth-mental-health"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  addictive patterns of use predicted worse mental health in
+                  young people, while total screen time did not
+                </a>
+                . She ran that experiment in her own house before the paper
+                existed.
               </p>
 
               <WireframePlaceholder
@@ -319,12 +374,12 @@ export default function PostMomWhoBannedFortnite() {
               {/* ID variant: "her kids, in elementary school, building a
                   Minecraft world together" */}
               <p>
-                The story I keep retelling is older: her boys in elementary
-                school, building a Minecraft world together, libraries,
-                churches, whole cities. They built a workplace, and inside the
-                workplace they built a break room, and they stocked it with
-                snacks so the workers would have something on their break.
-                Little kids, planning for rest.
+                The story I keep retelling is older. When her boys were in
+                elementary school they built a Minecraft world together, with
+                libraries and churches and whole cities in it. They built a
+                workplace, and inside the workplace they built a break room, and
+                they stocked it with snacks so the workers would have something
+                on their break. Little kids, planning for rest.
               </p>
               <p>
                 Then a stranger got into the server and wrecked all of it in a
@@ -334,19 +389,19 @@ export default function PostMomWhoBannedFortnite() {
               </p>
               {/* ID variant: "they asked a parent to run a private server" */}
               <p>
-                The fix they begged for: they asked their dad to run a private
-                server. Two elementary schoolers, griefed once, asking for a
-                known space with a trusted adult holding the keys. Kids can
-                name what a safe environment is. They usually have to lose one
-                first.
+                The fix they begged for was a private server, and they asked
+                their dad to run it. They had been griefed one time, and what
+                they wanted back was a known space with a trusted adult holding
+                the keys. Kids can name what a safe environment is. They usually
+                have to lose one first.
               </p>
               {/* The one product link on this page. Keep it single. */}
               <p>
                 I sat there nodding harder than I should admit, because the
                 request was familiar. The kids I coach through{" "}
                 <Link href="/programs/ekuzo101">EKUZO 101</Link> play on a
-                private, moderated server, the same faces every week, a coach
-                in the voice channel.
+                private, moderated server with the same faces every week and a
+                coach in the voice channel.
               </p>
 
               <h2>Her two questions</h2>
@@ -357,9 +412,9 @@ export default function PostMomWhoBannedFortnite() {
                 for a program like ours, or even recommend one, she went
                 straight at it: “Do they have training on coaching... or is it
                 just some folks who are good at esports? There’s a big
-                difference.” She wants a trained adult in the room, someone
-                watching the kid’s development, with the gameplay as the
-                smaller part of the job.
+                difference.” She wants a trained adult in the room, someone who
+                is watching how the kid is developing and treating the gameplay
+                as the smaller part of the job.
               </p>
               {/* ID variant: "Her second question was sharper: who pays for
                   this?" */}
@@ -383,8 +438,8 @@ export default function PostMomWhoBannedFortnite() {
               </p>
               {/* VERIFY vs video before dissemination — [18:49] */}
               <p>
-                And one of her doubts I want to leave here exactly as she left
-                it with me, unanswered. She isn’t convinced online play teaches
+                And there’s one doubt of hers I want to leave exactly where she
+                left it, unanswered. She isn’t convinced online play teaches
                 real group skills at all: “at no point would you ever in a
                 group dynamic yell and holler at the top of your lungs at
                 somebody.” Kids need rooms, she thinks, more than they need
@@ -401,7 +456,7 @@ export default function PostMomWhoBannedFortnite() {
                 third spaces, real places where kids gather around something
                 they care about. I wrote the title down while we talked. I’ve
                 started it. A 21-year-old gamer taking a reading list from the
-                officer who banned Fortnite, both of us delighted about it, is
+                officer who banned Fortnite, and both of us pleased about it, is
                 about as good a picture of this project as I can give.
               </p>
 
@@ -422,12 +477,19 @@ export default function PostMomWhoBannedFortnite() {
                   ID variant: delete the task-force sentence entirely. */}
               <p>
                 The military plays, too. The Army fields an official esports
-                team, the Navy stood one up by official message, and Air Force
-                Gaming is the Air Force’s own program for Airmen and Guardians.
-                A research task force she’s loosely connected to at work
-                teaches wargaming alongside PhDs who study games. Inside her
-                world, the idea that games rehearse real judgment is an old
-                assumption with a budget line.
+                team, the Navy stood one up by official message, and{" "}
+                <a
+                  href="https://myairforcelife.com/air-force-gaming/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Air Force Gaming
+                </a>{" "}
+                is the Air Force’s own program for Airmen and Guardians. And a
+                research task force she’s loosely connected to at work teaches
+                wargaming alongside PhDs who study games. Inside her world, the
+                idea that games rehearse real judgment is an old assumption with
+                a budget line.
               </p>
 
               {/* ID variant: "told me her community holds a lot more stories
@@ -457,6 +519,22 @@ export default function PostMomWhoBannedFortnite() {
                 it to me. It travels no further until she has read every word
                 and told us it is right.
               </p>
+
+              <h2>Sources and further reading</h2>
+              <ul>
+                {SOURCES.map((s, i) => (
+                  <li key={i}>
+                    {s.text}
+                    {s.url ? (
+                      <a href={s.url} target="_blank" rel="noopener noreferrer">
+                        {s.cite || s.url}
+                      </a>
+                    ) : (
+                      s.cite
+                    )}
+                  </li>
+                ))}
+              </ul>
             </BlogContent>
           </div>
         </div>

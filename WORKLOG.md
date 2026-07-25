@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi post: research links + human-voice pass)
+
+**What:** Two fixes from Jamie's read of the live page. tsc clean.
+
+- **Research links, per house pattern.** The one-link rule governs PRODUCT links only; research citations are apparatus. Now matching `when-your-sons-only-friends-are-online`: inline links on the claims (DoDEA student transition data, the Columbia/Weill Cornell addictive-use study, Air Force Gaming) plus a `SOURCES` array rendering a "Sources and further reading" block at the end, 7 entries. Army and Navy esports are in the block rather than inline: the Army's only official page is a recruiting domain, and a recruiting-domain link hover on a parent-facing page is the thing the military-spouse persona flagged.
+- **Human-voice pass on the whole piece.** Jamie's diagnosis was right: the draft leaned on comma-chained appositive lists where people use conjunctions ("a private, moderated server, the same faces every week, a coach in the voice channel" → "...with the same faces every week and a coach in the voice channel"). Swept all of them: the Minecraft build list now uses and...and, the griefer sentence became two clauses joined by and, the credentials sentence gained a relative clause, and "What makes her house a small study instead of a cautionary tale" became "The interesting part is what she kept." Remaining comma pairs are parenthetical asides ("she said", "she thinks"), which is how people actually punctuate.
+
 
 ## Jamie — July 25, 2026 (Kassi post: drop the video slot)
 
