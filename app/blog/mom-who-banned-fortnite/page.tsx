@@ -243,21 +243,6 @@ export default function PostMomWhoBannedFortnite() {
                 of the same coin.”
               </p>
 
-              {/*
-                When the clip exists, swap this placeholder for the same
-                <figure>/<video> markup used in
-                app/blog/when-your-sons-only-friends-are-online/page.tsx
-                (controls, preload="none", poster frame, figcaption), and add a
-                VideoObject builder to lib/schema.ts rather than hand-rolling
-                JSON-LD here.
-              */}
-              <WireframePlaceholder
-                type="video"
-                label="Muhammad to camera, 45 to 75 seconds"
-                note="Phone-shot is fine and better than polished: the point is that a real 21-year-old is telling this, which is the one thing a marketing team cannot fake. Three beats, his own words, no script: who he is and what the listening project is; that he posted a research blurb in an Aggie Moms group and the first person to answer was a senior Air Force officer; the one thing she said that he is still thinking about. HARD LIMITS: no footage from the interview recording (Kassi is identified by first name and service only, and she has not consented to being on camera), no program pitch, no price, no mention of her son. Save clip + poster frame to /videos/ per docs/assets.md. LATER: this slot can hold a cut from the Karlin conversation instead, but only if Kassi consents to appearing on camera publicly, which is a separate ask from blessing this post. Doubles as the coach talking-head in the D4 content slate, so the shoot serves two jobs."
-                height={400}
-              />
-
               <h2>The game that had its purpose</h2>
               {/* ID variant: "Her family moved constantly, so her kids'
                   in-person world got reset over and over. One of those resets

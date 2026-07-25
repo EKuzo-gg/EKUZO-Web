@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+
+## Jamie — July 25, 2026 (Kassi post: drop the video slot)
+
+**What:** Removed the video `WireframePlaceholder` added in `4946f17`. Asset set is back to 2: hero + arc graphic. Forward fix, not a history edit, since `4946f17` was already pushed to dev and main. tsc clean.
+
+**Why:** The natural source for a clip was the interview recording, and that is off the table. Kassi is identified by first name and service only, her face and voice would undo that instantly, and she has not consented to being filmed at all (a separate ask from blessing the post). A Muhammad-to-camera clip stays available if the piece ever wants one, and it is already scoped in the D4 slate as a coach talking-head, which is the cheaper home for it. Cut reasoning preserved in `knowledge-base/outputs/2026-07-25-kassi-session-wrap-report.md`.
+
 ## Jamie — July 25, 2026 (Kassi post: add the Muhammad video slot)
 
 **What:** Third asset slot on `app/blog/mom-who-banned-fortnite/page.tsx`, per Jamie's call (hero + video + diagram). tsc clean.
