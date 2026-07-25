@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi post: trim to 2 assets, revert the callback clause)
+
+**What:** Two small copy/structure calls on `app/blog/mom-who-banned-fortnite/page.tsx`; tsc clean.
+
+- Reverted "a trusted adult holding the keys" from the EKUZO 101 sentence (added in Muhammad's pass). It repeated the phrase from 2 paragraphs earlier and strengthened the one product sentence in a deliberately non-promotional piece. Jamie's call: stay lean.
+- **Asset count cut from 6 to 2** (hero + the arc graphic). Audit of the other 8 posts: each commissions exactly 1 image (the hero) plus the shared deco brush and keep-reading thumbnails, so 6 was far over house pattern. Dropped the two quote-card placeholders (page images duplicate on-page text, and `components/blog/QuoteCards.tsx` exists precisely to render quotes as crawlable text; they survive as social assets in the D4 slate) and the chair-flying illustration (decorative). Cut specs and reasons kept in the wrap report.
+
 ## Jamie — July 25, 2026 (Kassi post: Muhammad's review edits)
 
 **What:** Applied Muhammad's 5 edits from the review Google Doc to `app/blog/mom-who-banned-fortnite/page.tsx`. Copy only, no structural change; tsc clean. WORKLOG staged surgically past the teams queue as before.

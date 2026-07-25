@@ -346,7 +346,7 @@ export default function PostMomWhoBannedFortnite() {
                 request was familiar. The kids I coach through{" "}
                 <Link href="/programs/ekuzo101">EKUZO 101</Link> play on a
                 private, moderated server, the same faces every week, a coach
-                in the voice channel, a trusted adult holding the keys.
+                in the voice channel.
               </p>
 
               <h2>Her two questions</h2>
@@ -393,13 +393,6 @@ export default function PostMomWhoBannedFortnite() {
                 including us, is still learning.
               </p>
 
-              <WireframePlaceholder
-                type="image"
-                label="Quote card: “Do they have training on coaching”"
-                note="Square 1080x1080 card of the [40:32] question, attribution 'Kassi, a senior Air Force officer and mom of two'. Framed as the question any parent can ask any program, never as her reviewing EKUZO. EKUZO type system (Tungsten display, brand red on off-white). GATED: video-verify the verbatim AND Kassi's blessing before this asset is produced or shared. Companion card: the [06:20] 'had its purpose' quote for social shares, same gates. Save as /images/mom-who-banned-fortnite-quote-training.png."
-                height={300}
-              />
-
               <p>
                 Somewhere in the middle she assigned me homework. The Anxious
                 Generation, by Jonathan Haidt. She quoted it so often she
@@ -436,13 +429,6 @@ export default function PostMomWhoBannedFortnite() {
                 world, the idea that games rehearse real judgment is an old
                 assumption with a budget line.
               </p>
-
-              <WireframePlaceholder
-                type="image"
-                label="Chair flying illustration (optional)"
-                note="Editorial illustration: an aviator seated in a plain chair, eyes closed, hands on imagined controls, mirrored by a kid at a desk with a headset walking through a play. Generic flight suit, no insignia or patches. ~1600x900. Illustration brief to Aaron; cut first if the page feels heavy. Save as /images/mom-who-banned-fortnite-chair-flying.png."
-                height={300}
-              />
 
               {/* ID variant: "told me her community holds a lot more stories
                   like hers" */}
