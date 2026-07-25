@@ -25,6 +25,19 @@ const posts = [
     featured: true,
   },
   {
+    // Kassi post — live-but-undisseminated pending her blessing (robots noindex
+    // on the post page until then). Card asset pending — see asset list.
+    slug: "mom-who-banned-fortnite",
+    title: "The mom who banned Fortnite and the coach who grew up gaming",
+    date: "July 25, 2026",
+    author: "Muhammad Hossain",
+    category: "Perspective",
+    excerpt:
+      "She banned Fortnite. He grew up through gaming. A senior Air Force officer and a 21-year-old esports coach talked for 48 minutes and kept agreeing.",
+    image: "/images/mom-who-banned-fortnite-card.jpg",
+    featured: false,
+  },
+  {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",
     date: "May 28, 2026",

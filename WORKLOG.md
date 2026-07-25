@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi military blog: built, battle-tested, committed unpushed)
+
+**What:** Unattended Cowork session built the military-families blog post from Muhammad's Kassi interview (per `knowledge-base/company/marketing/_next-session-kassi-blog-content-machine-prompt.md`). Committed past the in-flight teams queue (July 16 entry + teams hunks stay uncommitted; same surgical WORKLOG staging as July 23).
+
+- **`app/blog/mom-who-banned-fortnite/page.tsx` (new):** Muhammad first-person narrator (won a 3-narrator judged panel), ~1,200 words. Battle-tested by a 5-persona adversarial panel (Kassi sim, OPSEC, military spouse, achievement dad, Haidt parent); 10 confirmed fixes applied (son's name replaced in the verbatim, Italy → "overseas", intel-profession detail cut, amplification-offer sentence removed, footer ship-state language corrected). Ship state **live-but-undisseminated**: `robots` noindex + NOT in sitemap.ts until Kassi blesses — flip both then. Exactly one product link (EKUZO 101), no CTA block, FooterBanner intentionally omitted. 4 `WireframePlaceholder`s with production specs inline (hero, arc graphic, quote card, chair-flying illustration). Every identifying sentence carries an "ID variant" comment (5-minute comfort edit); every verbatim carries a VERIFY-vs-video comment.
+- **`app/blog/page.tsx`:** listing entry added after the featured card (card image `/images/mom-who-banned-fortnite-card.jpg` pending asset).
+- Facts resolve to the fact library (2 new entries added there this session: DoDEA school-move frequency; official branch esports programs). `tsc --noEmit` clean.
+- **Share path for the Kassi channel test:** `?utm_source=kassi&utm_medium=community&utm_campaign=military-families`.
+
+**Next:** Jamie reviews post + produces assets → `git push origin dev` → merge to main when ready → Muhammad sends the review email (send-ready draft: knowledge-base `outputs/2026-07-25-muhammad-kassi-blog-email.md`). Full wrap report: knowledge-base `outputs/2026-07-25-kassi-session-wrap-report.md`.
+
 
 ## Jamie — July 23, 2026 (101 header CTA routing + register time-mention trim)
 
