@@ -5,6 +5,14 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 25, 2026 (Kassi post: add the Muhammad video slot)
+
+**What:** Third asset slot on `app/blog/mom-who-banned-fortnite/page.tsx`, per Jamie's call (hero + video + diagram). tsc clean.
+
+- `WireframePlaceholder type="video"` after the opening block, before "The game that had its purpose". Brief in the placeholder note: 45-75s, Muhammad to camera, phone-shot preferred over polished, three unscripted beats. Hard limits stated in the note: no interview footage (Kassi is first-name-and-service only and has not consented to camera), no pitch, no price, no mention of her son.
+- Swap instructions in a code comment: reuse the `<figure>`/`<video>` markup from `when-your-sons-only-friends-are-online`, and add a VideoObject builder to `lib/schema.ts` rather than hand-rolling JSON-LD in the page (per the structured-data rule in CLAUDE.md).
+- Later the slot can hold a Karlin-conversation cut, gated on Kassi consenting to appear on camera, which is a separate ask from blessing the post. The clip also doubles as the coach talking-head in the D4 content slate.
+
 ## Jamie — July 25, 2026 (Kassi post: trim to 2 assets, revert the callback clause)
 
 **What:** Two small copy/structure calls on `app/blog/mom-who-banned-fortnite/page.tsx`; tsc clean.
