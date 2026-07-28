@@ -21,7 +21,45 @@ const nextConfig = {
         // absent from sitemap.ts, commented out of the /blog listing, and
         // path-blocked for AI crawlers in public/robots.txt.
         // DELETE THIS RULE when the post is blessed and goes public.
-        source: "/blog/mom-who-banned-fortnite",
+        // (Slug updated 2026-07-27: was /blog/mom-who-banned-fortnite.)
+        source: "/blog/gaming-military-families",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value:
+              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
+          },
+        ],
+      },
+      {
+        // UNLISTED DRAFT (2026-07-28): the Kassi parent piece (ban arc) ships
+        // to production for private review by Kassi and Muhammad before it is
+        // disseminated. Same layers as its sibling above: noindex meta, this
+        // header, absent from sitemap.ts, commented out of /blog, AI-crawler
+        // path block in public/robots.txt.
+        // DELETE THIS RULE when the bundle is blessed and goes public (both
+        // pieces flip together on Kassi's blessing).
+        source: "/blog/should-you-ban-fortnite",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value:
+              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
+          },
+        ],
+      },
+      {
+        // UNLISTED (2026-07-28): Muhammad's author page. Both Kassi posts now
+        // link to it from their bylines, and both are noindex + follow:true,
+        // so a crawler that fetches either post will follow through to this
+        // page. It carries the same layers as the posts (noindex meta, this
+        // header, absent from sitemap.ts) and its own post grid is commented
+        // out, so it cannot surface either piece.
+        // No public/robots.txt entry on purpose: that section exists to keep
+        // AI crawlers off KASSI'S STORY, and this page contains none of it.
+        // DELETE THIS RULE when the bundle is blessed and goes public (the
+        // author page flips together with both pieces on Kassi's blessing).
+        source: "/blog/author/muhammad-hossain",
         headers: [
           {
             key: "X-Robots-Tag",
@@ -54,6 +92,25 @@ const nextConfig = {
         source: "/blog/our-family-s-esports-journey-with-ekuso-and-the-k1ng",
         destination:
           "/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
+        permanent: true,
+      },
+
+      // Retired Kassi slug (2026-07-28). /blog/mom-who-banned-fortnite was
+      // live on production from 2026-07-25, noindex and undisseminated. On
+      // 2026-07-27 it was rewritten and split in two: the military-families
+      // material became /blog/gaming-military-families (this destination, the
+      // direct descendant in git), and the ban arc became a separate piece at
+      // /blog/should-you-ban-fortnite.
+      // Verified 2026-07-28 that the old slug was never captured: it carried
+      // robots index:false from its first commit, and a site: search returns
+      // nothing. This redirect is therefore insurance, not repair. It exists
+      // because the URL sat on a real ekuzo.gg address for 3 days and appears
+      // with UTM params in internal notes, so a saved or pasted link should
+      // land on the piece rather than a 404.
+      // Keep this rule after the bundle flips public. It costs nothing.
+      {
+        source: "/blog/mom-who-banned-fortnite",
+        destination: "/blog/gaming-military-families",
         permanent: true,
       },
 

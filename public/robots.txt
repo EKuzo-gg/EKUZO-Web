@@ -12,8 +12,9 @@ Disallow: /_next/
 # More-specific Allow overrides the /_next/ Disallow for compliant bots.
 Allow: /_next/image
 
-# ── Unlisted draft: /blog/mom-who-banned-fortnite (added 2026-07-25) ─────────
-# That post is live on production for private review before dissemination.
+# ── Unlisted drafts: /blog/gaming-military-families (added 2026-07-25) and
+# /blog/should-you-ban-fortnite (added 2026-07-28) ───────────────────────────
+# Those posts are live on production for private review before dissemination.
 #
 # Deliberately NOT disallowed for User-agent: * — a disallowed URL can still
 # be indexed from an inbound link, because the crawler never fetches the page
@@ -25,7 +26,8 @@ Allow: /_next/image
 # explicit path block. This is scoped to the single path on purpose — EKUZO
 # wants AI crawlers on the rest of the site (see GEO-CITABILITY-SCORE.md).
 #
-# DELETE THIS WHOLE SECTION when the post is blessed and goes public.
+# DELETE THIS WHOLE SECTION when the bundle is blessed and goes public
+# (both pieces flip together on Kassi's blessing).
 
 User-agent: GPTBot
 User-agent: OAI-SearchBot
@@ -47,4 +49,5 @@ User-agent: cohere-ai
 User-agent: Diffbot
 User-agent: AI2Bot
 User-agent: omgili
-Disallow: /blog/mom-who-banned-fortnite
+Disallow: /blog/gaming-military-families
+Disallow: /blog/should-you-ban-fortnite

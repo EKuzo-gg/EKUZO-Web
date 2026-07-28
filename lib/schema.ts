@@ -104,6 +104,43 @@ export const personJamieFitch = {
   url: `${SITE}/blog/author/jamie-fitch`,
 };
 
+// Muhammad Hossain: EKUZO coach and the author of the Kassi bundle.
+// DELIBERATELY NOT IN `rootGraph` YET (added 2026-07-28). His two posts are
+// live-but-undisseminated pending Kassi's blessing, and rootGraph is emitted
+// on every page of the site, so adding him there would broadcast a new author
+// node site-wide before the bundle flips. Instead his author page passes this
+// node into buildAuthorPageGraph({ person }), so it ships on that one page.
+// AT THE FLIP: add `personMuhammadHossain` to the rootGraph @graph array and
+// drop the `person` argument from app/blog/author/muhammad-hossain/page.tsx,
+// so he matches the Karlin/Jamie pattern. Also swap the inline author objects
+// in both post pages to { "@id": MUHAMMAD_ID }.
+// No `sameAs`: he has no public profile we've confirmed. Don't invent one.
+export const MUHAMMAD_ID = `${SITE}/#person-muhammad`;
+
+export const personMuhammadHossain = {
+  "@type": "Person",
+  "@id": MUHAMMAD_ID,
+  name: "Muhammad Hossain",
+  jobTitle: "Coach",
+  description:
+    "EKUZO coach and a senior English major at Texas A&M University. He coaches kids in League of Legends and interviews parents about gaming for EKUZO's listening project.",
+  knowsAbout: [
+    "esports coaching",
+    "League of Legends",
+    "parenting gamers",
+    "military families and gaming",
+    "screen time",
+  ],
+  // `affiliation`, not `alumniOf` — he is a current student, not a graduate.
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "Texas A&M University",
+  },
+  worksFor: { "@id": ORG_ID },
+  image: `${SITE}/images/muhammad-hossain.jpg`,
+  url: `${SITE}/blog/author/muhammad-hossain`,
+};
+
 // ─── Organization (EducationalOrganization) ────────────────────────────────
 export const organizationSchema = {
   "@type": "EducationalOrganization",
@@ -462,17 +499,25 @@ type AuthorPageArgs = {
   slug: string; // e.g. "karlin-oei"
   name: string; // display name for breadcrumb
   personId: string; // @id of the canonical Person node
+  // Optional: inline the Person node into THIS page's @graph. Only needed for
+  // an author whose node is not yet in the site-wide `rootGraph` (see
+  // personMuhammadHossain). Without it, `mainEntity` would be a dangling @id
+  // reference on the one page that most needs to resolve it. Omit for authors
+  // already in rootGraph (Karlin, Jamie) so the node isn't emitted twice.
+  person?: object;
 };
 
 export function buildAuthorPageGraph({
   slug,
   name,
   personId,
+  person,
 }: AuthorPageArgs) {
   const url = `${SITE}/blog/author/${slug}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      ...(person ? [person] : []),
       {
         "@type": "ProfilePage",
         "@id": `${url}#profile`,

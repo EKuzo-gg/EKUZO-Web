@@ -5,6 +5,21 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 28, 2026 (Kassi bundle: reslug to prod + Muhammad author layer)
+
+**What:** Ships the 7/27 split and the author layer behind it. Both pieces and the new author page are live-dark on the same guard. esbuild clean on every changed file; `next.config.mjs` evaluated (15 redirect rules, 3 header rules).
+
+- **Reslug lands on prod.** `app/blog/mom-who-banned-fortnite/page.tsx` deleted; `/blog/gaming-military-families` (military piece, v6.1) and `/blog/should-you-ban-fortnite` (parent piece, FINAL v2.2) added. Both were built locally on 7/27-7/28 and had never been committed, so until this commit prod still served only the old slug and both new URLs 404'd.
+- **Retired-slug redirect** `/blog/mom-who-banned-fortnite` -> `/blog/gaming-military-families`, permanent. Verified before adding: the old slug carried `robots: index:false` from its first commit (`56fa11b`) and a `site:` search returns nothing, so it was never captured. The 82-minute window between publish (`56fa11b`) and bot-suppression (`7ac2aba`) exposed it to the `/blog` listing but never to an indexer. Insurance for saved or pasted links, not repair.
+- **`/blog/author/muhammad-hossain` (new).** Pattern-matched to the Jamie/Karlin author pages. Headshot `public/images/muhammad-hossain.jpg`, square-cropped from the 518x640 source he sent. Bio is Jamie's copy with a grammar polish only (`lead`->`led`, `Ekuzo`->`EKUZO`, `coach that`->`coach who`, appositive comma). No other bio copy: the page carries Jamie's paragraph and nothing else.
+- **Bylines on both posts now link to the author page.** Matches the `when-your-sons-only-friends-are-online` pattern.
+- **Leak guard on the author page**, mirroring both posts: `robots: index:false`, `X-Robots-Tag` rule in `next.config.mjs`, absent from `sitemap.ts`, and both post cards commented out in its `POSTS` array. No `robots.txt` entry, deliberately: that section exists to keep AI crawlers off Kassi's story, and this page contains none of it. TO PUBLISH checklist lives in the page header; both post headers now point at it so all three flip together.
+- **`lib/schema.ts`:** added `MUHAMMAD_ID` + `personMuhammadHossain`, and an optional `person` arg on `buildAuthorPageGraph` so his Person node ships on his page only. Deliberately **not** in `rootGraph` yet, because `rootGraph` renders on every page of the site and would broadcast a new author node before the bundle flips. Backward compatible: Karlin's and Jamie's pages are untouched and unaffected.
+
+**WARNING - Aaron:** five blog assets still outstanding - heroes x2, cards x2, and the friend-map graphic. Parent-piece art direction is still TBD with Jamie, so the parent hero/card are not briefable yet. Author-page headshot is done and needs no design pass.
+
+**Next:** merge `dev`->`main` to put both pieces and the author page live-dark on prod so the URLs resolve, then the Kassi email goes out from Muhammad (Karlin cc). On her blessing, run both posts' TO PUBLISH checklists plus the author-page one, together.
+
 ## Jamie — July 25, 2026 (Kassi post: research links + human-voice pass)
 
 **What:** Two fixes from Jamie's read of the live page. tsc clean.

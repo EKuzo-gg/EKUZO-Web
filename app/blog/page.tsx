@@ -25,25 +25,44 @@ const posts = [
     featured: true,
   },
   /*
-   * UNLISTED (2026-07-25): the Kassi military-families post is live at
-   * /blog/mom-who-banned-fortnite for private review by Kassi and Muhammad
-   * only. Keeping it out of this array makes it reachable by direct link
-   * alone; the page itself also carries a noindex meta + X-Robots-Tag header
-   * and is absent from sitemap.ts.
+   * UNLISTED (2026-07-25, retitled/reslugged 2026-07-27): the Kassi
+   * military-families post is live at /blog/gaming-military-families for
+   * private review by Kassi and Muhammad only. Keeping it out of this array
+   * makes it reachable by direct link alone; the page itself also carries a
+   * noindex meta + X-Robots-Tag header and is absent from sitemap.ts.
    * TO PUBLISH once she blesses it: uncomment this entry, flip `robots` to
    * index:true in the post's metadata, add its sitemap.ts entry, delete the
    * post's AI-crawler block in public/robots.txt, and drop the X-Robots-Tag
    * rule in next.config.mjs. Card image still needs producing.
    */
   // {
-  //   slug: "mom-who-banned-fortnite",
-  //   title: "The mom who banned Fortnite and the coach who grew up gaming",
+  //   slug: "gaming-military-families",
+  //   title: "Every move wiped their friend map. Gaming was the community that traveled.",
   //   date: "July 25, 2026",
   //   author: "Muhammad Hossain",
   //   category: "Perspective",
   //   excerpt:
-  //     "She banned Fortnite. He grew up through gaming. A senior Air Force officer and a 21-year-old esports coach talked for 48 minutes and kept agreeing.",
-  //   image: "/images/mom-who-banned-fortnite-card.jpg",
+  //     "Military kids move constantly, and every move wipes the friend map. A military mom and a 21-year-old esports coach on the gaming communities that travel.",
+  //   image: "/images/gaming-military-families-card.jpg",
+  //   featured: false,
+  // },
+  /*
+   * UNLISTED (2026-07-28): the Kassi parent piece (ban arc) is live at
+   * /blog/should-you-ban-fortnite for private review by Kassi and Muhammad
+   * only. Same ship state and same publish flip as its sibling above — both
+   * pieces flip together on Kassi's blessing (see the sibling's TO PUBLISH
+   * checklist; run it for each slug). Card image still needs producing
+   * (art direction TBD with Jamie).
+   */
+  // {
+  //   slug: "should-you-ban-fortnite",
+  //   title: "She banned Fortnite and got her kid back. Then came a new problem.",
+  //   date: "July 28, 2026",
+  //   author: "Muhammad Hossain",
+  //   category: "Perspective",
+  //   excerpt:
+  //     "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
+  //   image: "/images/should-you-ban-fortnite-card.jpg",
   //   featured: false,
   // },
   {
