@@ -91,7 +91,9 @@ const coachCards = [
     name: 'KARLIN "FAITH" OEI',
     role: "Founder // Peak Challenger Jungler",
     bio: "Former national collegiate captain who won $80,000+ in esports scholarships through competitive play — Karlin believes that games (if played correctly) are one of the best teachers of discipline, teamwork, and resilience.",
-    image: "/images/coach-karlin-faith.jpg",
+    // 1400px derivative of the 6349x4312 / 10.2 MB original, same framing
+    // (2026-07-28). objectPosition below is unchanged.
+    image: "/images/authors/coach-karlin-faith-1400.jpg",
     objectPosition: "center 20%",
   },
   {

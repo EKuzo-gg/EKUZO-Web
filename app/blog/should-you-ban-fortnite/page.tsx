@@ -228,10 +228,20 @@ export default function PostShouldYouBanFortnite() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
+          {/* PRODUCTION BRIEF (kept out of the rendered note on purpose: the
+              draft is read by the interviewee, and filenames, pixel specs and
+              internal names make an unfinished page look further along than it
+              is). ART DIRECTION TBD WITH JAMIE. Non-military by design, that is
+              the sibling piece's lane. Provisional idea: a living-room scene,
+              two controllers on a couch, one dark TV; or a kitchen-table scene,
+              a parent's-eye view. No faces, no photos of the family, nothing
+              Fortnite-trademarked. 1920x1080, must crop cleanly to 1200x630 for
+              OG. Save as /images/should-you-ban-fortnite-hero.jpg. Companion
+              card /images/should-you-ban-fortnite-card.jpg at 16:10. */}
           <WireframePlaceholder
             type="image"
-            label="Hero: the house after the ban"
-            note="ART DIRECTION TBD WITH JAMIE — placeholder brief, non-military by design (that's the sibling's lane). Provisional idea: a living-room scene, two controllers on a couch, one dark TV; or a kitchen-table scene, a parent's-eye view. No faces, no photos of Kassi or her kids, nothing Fortnite-trademarked. 1920x1080; must crop cleanly to 1200x630 for OG. Save as /images/should-you-ban-fortnite-hero.jpg. Companion card: /images/should-you-ban-fortnite-card.jpg (16:10). Design brief to Aaron AFTER Jamie sets direction."
+            label="An opening image goes here"
+            note="Something that sets the scene inside a house after a decision like this one. No faces, and nothing that identifies anybody. Still deciding what it should be."
             height={520}
           />
         </div>

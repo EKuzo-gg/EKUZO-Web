@@ -244,10 +244,20 @@ export default function PostGamingMilitaryFamilies() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
+          {/* PRODUCTION BRIEF (kept out of the rendered note on purpose: the
+              draft is read by the interviewee, and filenames, pixel specs and
+              internal names make an unfinished page look further along than it
+              is). Photo-illustration, split composition: flight-line / cockpit
+              silhouette at dusk on one side, warm home gaming setup on the
+              other, meeting at a center seam (optional coin motif in the seam).
+              No faces, no rank insignia, no unit or base markings, no photos of
+              the family. 1920x1080, must crop cleanly to 1200x630 for OG. Save
+              as /images/gaming-military-families-hero.jpg. Stock composite or
+              illustration. */}
           <WireframePlaceholder
             type="image"
-            label="Hero: two worlds, one conversation"
-            note="Photo-illustration, split composition: flight-line/cockpit silhouette at dusk on one side, warm home gaming setup on the other, meeting at a center seam (optional coin motif in the seam). No faces, no rank insignia, no unit or base markings, no photos of Kassi or her kids. 1920x1080; must crop cleanly to 1200x630 for OG. Save as /images/gaming-military-families-hero.jpg. Design brief to Aaron; stock composite or illustration."
+            label="An opening image goes here"
+            note="Something at the top that holds both halves of this story at once: the leaving, and the staying in touch. No faces, and nothing that identifies anybody."
             height={520}
           />
         </div>
@@ -387,10 +397,18 @@ export default function PostGamingMilitaryFamilies() {
                 the boys overseas right as COVID hit.
               </p>
 
+              {/* PRODUCTION BRIEF (see the note on the hero placeholder above).
+                  Horizontal 3-beat narrative graphic: (1) the move, friend map
+                  wiped clean, annotated with the 6-9 school changes / 3x
+                  civilian stat, (2) the community that travels, the game world
+                  that comes along in the moving boxes, (3) an adult in the room,
+                  structure chosen. EKUZO type system, brand red accents on
+                  off-white. ~2000x700. Save as
+                  /images/gaming-military-families-friend-map.png. */}
               <WireframePlaceholder
                 type="image"
-                label="The friend map: move, wipe, what travels"
-                note="Horizontal 3-beat narrative graphic: (1) PCS move, friend map wiped clean (annotate with the 6-9 school changes / 3x civilian stat), (2) the community that travels — the game world that comes along in the moving boxes, (3) an adult in the room — structure chosen. EKUZO type system, brand red accents on off-white. ~2000x700. Design brief to Aaron. Save as /images/gaming-military-families-friend-map.png."
+                label="A simple graphic goes here"
+                note="Something that shows the shape of it: you move, the friends you had go away, and the one thing that comes with you. Still working out how it should look."
                 height={300}
               />
 
