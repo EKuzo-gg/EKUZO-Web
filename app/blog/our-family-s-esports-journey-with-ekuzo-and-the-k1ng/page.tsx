@@ -9,6 +9,7 @@ import {
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
+import BlogPostBody from "@/components/blog/BlogPostBody";
 
 const SLUG = "our-family-s-esports-journey-with-ekuzo-and-the-k1ng";
 const TITLE = "Our Family's Esports Journey with EKUZO and the K1ng";
@@ -132,20 +133,7 @@ export default function PostK1ng() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
-            {/* Left: byline */}
-            <div className="lg:sticky lg:top-28 flex flex-col gap-1">
-              <span className="font-body text-black/40 text-sm">Jan 14, 2026</span>
-              <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">Lisa Holt</strong>
-              </span>
-            </div>
-
-            {/* Right: post content */}
-            <div
-              className="font-body text-black/80 leading-relaxed flex flex-col gap-6"
-              style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
-            >
+          <BlogPostBody author="lisa-holt" date={DATE_PUBLISHED}>
               <p>
                 My son Ryan was always a happy kid in his early years. He could easily make friends,
                 he enjoyed going to school, and he was the kid who could make the best out of a bad
@@ -265,8 +253,7 @@ export default function PostK1ng() {
                 . And if you want a low-stakes way to try a coached team,{" "}
                 <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month trial for $100.
               </p>
-            </div>
-          </div>
+          </BlogPostBody>
         </div>
 
       </article>

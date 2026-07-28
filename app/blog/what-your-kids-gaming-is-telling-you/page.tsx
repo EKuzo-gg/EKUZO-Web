@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
-import BlogContent from "@/components/blog/BlogContent";
+import BlogPostBody from "@/components/blog/BlogPostBody";
 import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import {
   buildBlogArticleSchema,
@@ -318,28 +318,7 @@ export default function PostGamingHiddenMeaning() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
-            {/* Left: byline */}
-            <div className="lg:sticky lg:top-28 flex flex-col gap-1">
-              <span className="font-body text-black/40 text-sm">
-                Published May 24, 2026
-              </span>
-              <span className="font-body text-black/60 text-sm">
-                by{" "}
-                <Link
-                  href="/blog/author/karlin-oei"
-                  className="hover:text-red transition-colors"
-                >
-                  <strong className="text-black">Karlin Oei</strong>
-                </Link>
-              </span>
-              <span className="font-body text-black/40 text-xs mt-1">
-                Founder of EKUZO
-              </span>
-            </div>
-
-            {/* Right: post content */}
-            <BlogContent>
+          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
               <p>
                 Some kids are loud about gaming. They narrate every match at
                 dinner, beg for the new skin, wear the merch to school. You
@@ -685,8 +664,7 @@ export default function PostGamingHiddenMeaning() {
               ))}
 
               <p className="text-right">— Karlin, founder of EKUZO</p>
-            </BlogContent>
-          </div>
+          </BlogPostBody>
         </div>
       </article>
 

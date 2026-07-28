@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
-import BlogContent from "@/components/blog/BlogContent";
+import BlogPostBody from "@/components/blog/BlogPostBody";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -254,28 +254,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
-            {/* Left: byline */}
-            <div className="lg:sticky lg:top-28 flex flex-col gap-1">
-              <span className="font-body text-black/40 text-sm">
-                Published May 28, 2026
-              </span>
-              <span className="font-body text-black/60 text-sm">
-                by{" "}
-                <Link
-                  href="/blog/author/jamie-fitch"
-                  className="hover:text-red transition-colors"
-                >
-                  <strong className="text-black">Jamie Fitch</strong>
-                </Link>
-              </span>
-              <span className="font-body text-black/40 text-xs mt-1">
-                CEO of EKUZO
-              </span>
-            </div>
-
-            {/* Right: post content */}
-            <BlogContent>
+          <BlogPostBody author="jamie-fitch" date={DATE_PUBLISHED}>
               <p>
                 <strong>Short answer:</strong> if your son spends his nights on
                 a headset, the question worth asking is not how many hours he
@@ -575,8 +554,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
                   </li>
                 ))}
               </ul>
-            </BlogContent>
-          </div>
+          </BlogPostBody>
         </div>
       </article>
 

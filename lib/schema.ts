@@ -45,7 +45,9 @@ export const coachKarlinSchema = {
   ],
   sameAs: ["https://www.linkedin.com/in/karlinoei/"],
   worksFor: { "@id": ORG_ID },
-  image: `${SITE}/images/coach-karlin-faith.jpg`,
+  // 1400px derivative of the 6349x4312 / 10.2 MB original, same crop intent
+  // (2026-07-28). The original is no longer served anywhere on the blog.
+  image: `${SITE}/images/authors/coach-karlin-faith-1400.jpg`,
   url: `${SITE}/blog/author/karlin-oei`,
 };
 

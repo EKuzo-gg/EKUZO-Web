@@ -2,7 +2,7 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
-import BlogContent from "@/components/blog/BlogContent";
+import BlogPostBody from "@/components/blog/BlogPostBody";
 import WireframePlaceholder from "@/components/blog/WireframePlaceholder";
 import {
   buildBlogArticleSchema,
@@ -244,28 +244,7 @@ export default function PostShouldYouBanFortnite() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
-            {/* Left: byline */}
-            <div className="lg:sticky lg:top-28 flex flex-col gap-1">
-              <span className="font-body text-black/40 text-sm">
-                Published July 28, 2026
-              </span>
-              <span className="font-body text-black/60 text-sm">
-                by{" "}
-                <Link
-                  href="/blog/author/muhammad-hossain"
-                  className="hover:text-red transition-colors"
-                >
-                  <strong className="text-black">Muhammad Hossain</strong>
-                </Link>
-              </span>
-              <span className="font-body text-black/40 text-xs mt-1">
-                EKUZO coach · Texas A&amp;M
-              </span>
-            </div>
-
-            {/* Right: post content */}
-            <BlogContent>
+          <BlogPostBody author="muhammad-hossain" date={DATE_PUBLISHED}>
               <p>
                 Howdy, I’m Muhammad. I’m a rising senior at Texas A&amp;M, and I
                 coach kids in League of Legends for a youth esports startup
@@ -610,8 +589,7 @@ export default function PostShouldYouBanFortnite() {
                   </li>
                 ))}
               </ul>
-            </BlogContent>
-          </div>
+          </BlogPostBody>
         </div>
       </article>
 

@@ -9,6 +9,7 @@ import {
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
+import BlogPostBody from "@/components/blog/BlogPostBody";
 
 const SLUG = "conquering-my-mountain-and-giants-how-esports-changed-my-life";
 const TITLE = "Conquering my Mountain and Giants: How Esports Changed My Life";
@@ -132,20 +133,7 @@ export default function PostJohnHay() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
-            {/* Left: byline */}
-            <div className="lg:sticky lg:top-28 flex flex-col gap-1">
-              <span className="font-body text-black/40 text-sm">Jan 14, 2026</span>
-              <span className="font-body text-black/60 text-sm">
-                by <strong className="text-black">John Hay</strong>
-              </span>
-            </div>
-
-            {/* Right: post content */}
-            <div
-              className="font-body text-black/80 leading-relaxed flex flex-col gap-6"
-              style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
-            >
+          <BlogPostBody author="john-hay" date={DATE_PUBLISHED}>
               <p>
                 Hey everyone! My name is John, and I am an esports coach for EKUZO. For those of
                 you unfamiliar with our program, we are an outsourced esports group that helps
@@ -230,8 +218,7 @@ export default function PostJohnHay() {
                 </Link>{" "}
                 for the bigger picture.
               </p>
-            </div>
-          </div>
+          </BlogPostBody>
         </div>
 
       </article>
