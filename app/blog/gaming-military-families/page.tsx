@@ -3,13 +3,16 @@ import Footer from "@/components/layout/Footer";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
-import WireframePlaceholder from "@/components/blog/WireframePlaceholder";
+import ContinuityOfPlayGraphic from "@/components/blog/ContinuityOfPlayGraphic";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
+  buildFAQPageSchema,
+  MUHAMMAD_ID,
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
+import { Fragment } from "react";
 
 /*
  * ── Kassi post (military-families piece): read before editing ────────────────
@@ -32,28 +35,42 @@ import Image from "next/image";
  * experience with gaming. Kassi is the protagonist; Muhammad is the witness.
  * EKUZO presence capped at the two sentences in "Her bar" plus the coaching
  * reflections Jamie's outline locked. Not a piece about the interview process.
- * ASK-FORGIVENESS DISCIPLINE: Kassi does not know this was written. Every
- * claim about the conversation must match the tape, including order (coin
- * [02:28] precedes the widower story [03:18]; chair flying was mid-call, so
- * no "right away"/"near the end" claims). Her moves claim rides her own
- * "bounce all over the world" words [21:12], nothing stronger.
+ * ASK-FORGIVENESS DISCIPLINE (historical, now resolved): this was written
+ * before Kassi knew of it. Every claim about the conversation matches the
+ * tape, including order (coin [02:28] precedes the widower story [03:18];
+ * chair flying was mid-call, so no "right away"/"near the end" claims). Her
+ * moves claim rides her own "bounce all over the world" words [21:12],
+ * nothing stronger. Do not add claims beyond these.
+ *
+ * PSEUDONYM (Jamie's call, 2026-07-28): the subject is published as CASEY.
+ * Her real first name is Kassi, which is what she is called in the knowledge
+ * base (company/crm/people/kassi-marshall.md), in email, and in every code
+ * comment in this repo. She asked for the change on account of her military
+ * background when she blessed the bundle, and it is the only change she asked
+ * for. Rendered prose, schema, metadata and cross-links say Casey. Comments
+ * and internal docs keep Kassi on purpose: they are the provenance trail on a
+ * real person's approval, and they are not public. The consent boilerplate at
+ * the foot of the piece discloses that the name was changed.
  * CITATION SWAP 2026-07-27: the mobility stat previously cited the Kadena
  * DoDEA school page (kadenaes.dodea.edu). A named-base URL under a footer
  * promising "no base appears" was an OPSEC-optics fail (spouse-read finding).
  * Now cites National Academies 2019 (25380) inline + MCEC in Sources.
  * UPDATE the fact-library entry "Military Child School Move Frequency" to
  * match (knowledge-base company/marketing/ekuzo-fact-library.md).
- * Ship state: LIVE BUT UNDISSEMINATED pending Kassi's blessing (email offers
- * changes). robots is index:false and the post is NOT in sitemap.ts until she
- * blesses it — flip robots to index:true and add the sitemap entry then.
- * ALSO AT THE FLIP (added 2026-07-28, when the author layer shipped): run the
- * TO PUBLISH checklist in app/blog/author/muhammad-hossain/page.tsx. That page
- * is dark for the same reason and flips at the same moment as both posts.
- * Share path for the channel test (hand these to Kassi/Muhammad only):
- *   https://ekuzo.gg/blog/gaming-military-families?utm_source=kassi&utm_medium=community&utm_campaign=military-families
- * Quote discipline: every verbatim is auto-caption text with inferred
- * attribution — VERIFY each against https://youtu.be/MTS3fODxHLk before
- * dissemination (markers inline below).
+ * Ship state: PUBLIC as of 2026-07-31. Kassi blessed both pieces 2026-07-28,
+ * having read them with her husband; Muhammad blessed them; both were on the
+ * call. All six guard layers (robots meta, X-Robots-Tag, robots.txt AI-crawler
+ * block, sitemap absence, /blog listing, author-page grid) were removed in the
+ * same commit that published this.
+ * Share path for the channel test. utm_source was "kassi" until 2026-07-31;
+ * changed because this URL goes to her to share onward, and her real first
+ * name sitting in a public address bar undercuts the pseudonym. No analytics
+ * continuity was lost: the link was never disseminated.
+ *   https://ekuzo.gg/blog/gaming-military-families?utm_source=subject-share&utm_medium=community&utm_campaign=military-families
+ * Quote discipline: every verbatim was auto-caption text with inferred
+ * attribution and was verified against https://youtu.be/MTS3fODxHLk before
+ * dissemination. That pass is CLOSED (markers stripped 2026-07-31). If any
+ * quote is edited from here on, re-verify it against the recording first.
  * Anonymization: identifying sentences carry "ID variant" comments with
  * details-changed replacements, so a comfort-edit takes 5 minutes.
  * No FooterBanner on this page by design (non-promotional piece).
@@ -73,9 +90,15 @@ const SUBHEAD =
   "I grew up through gaming. She's a military mom who banned Fortnite. We spent 48 minutes agreeing with each other.";
 const DESCRIPTION =
   "Military kids move constantly, and every move wipes the friend map. A military mom and a 21-year-old esports coach on the gaming communities that travel.";
-const SHARE_IMAGE = "/images/gaming-military-families-hero.jpg"; // asset pending — see wrap report asset list
+const HERO_IMAGE = "/images/gaming-military-families-hero.jpg";
+const HERO_ALT =
+  "A teenager sits with their back to the camera at a desk in a half-unpacked room, teammates on one monitor and a game on the other, while a moving truck waits outside the open door at dusk.";
+// Share image is its own 1200x630 file, NOT the 1731x909 hero. Every share
+// debugger wants 1200x630, and the declared dimensions below have to match the
+// actual file or the schema carries a lie.
+const SHARE_IMAGE = "/images/gaming-military-families-share.jpg";
 const DATE_PUBLISHED = "2026-07-25";
-const DATE_MODIFIED = "2026-07-27";
+const DATE_MODIFIED = "2026-07-31";
 // Listening-project CTA (final beat of the post). Not a product link.
 const LISTENING_CALENDAR = "https://calendar.app.google/mMJ5KoxcNdH6SR13A";
 
@@ -108,9 +131,51 @@ const SOURCES: { text: string; cite: string; url: string }[] = [
     url: "https://myairforcelife.com/air-force-gaming/",
   },
   {
-    text: "Jonathan Haidt, The Anxious Generation (2024), the book Kassi kept quoting.",
+    // Renders in the Sources list, so it carries the pseudonym like all other
+    // public-facing prose.
+    text: "Jonathan Haidt, The Anxious Generation (2024), the book Casey kept quoting.",
     cite: "",
     url: "",
+  },
+];
+
+// Common questions. Added 2026-07-31, at the flip. Every Perspective post on
+// this blog carries one; these two were the only ones without. Google requires
+// FAQ content to be visible on the page, so this renders as a real section AND
+// feeds buildFAQPageSchema. Do not add schema without the section.
+// SCOPE RULE: every answer is drawn from material already in the piece above.
+// No new claim about her, no new tape, no product link.
+// DIFFERENTIATION: these questions are this piece's lane (moves, the community
+// that travels, chair flying, her two gates). The sibling's FAQ owns the ban
+// arc and the game-by-game verdicts. Contamination-grep before adding to
+// either, same rule as the body prose.
+const FAQ_ITEMS: { question: string; answer: string }[] = [
+  {
+    question: "How do military kids keep friends when the family moves?",
+    answer:
+      "In person, mostly they do not. A 2019 National Academies report puts school changes for military-connected children at 6 to 9 times between kindergarten and graduation, about 3 times more often than their civilian peers, and each move clears the local friend map. The groups that survive a move are the ones that were never tied to the place. For Casey’s boys, dropped overseas right as COVID hit, that was a game.",
+  },
+  {
+    question:
+      "Are online friends enough when a child loses everyone in a move?",
+    answer:
+      "They are not a substitute for a room with people in it, and Casey would say so first. Her sharpest point in 48 minutes was that kids need real in-person spaces too, and a server is not automatically that. What an online group does is survive the move. The same people who were there before the orders dropped are still there the week after, which counts for something when everything else in a kid’s life has just reset.",
+  },
+  {
+    question: "Does the military actually support gaming?",
+    answer:
+      "It funds it. Three service programs came up in our conversation: the Army’s official esports team, the Navy’s, stood up by official message, and Air Force Gaming, which is open to Airmen and Guardians. Casey’s read on why they exist was one line: “because of the strategy involved.” She is also loosely connected to a research task force at her own work that teaches wargaming alongside PhDs who study games. The idea that games rehearse real judgment is old news in her world, old enough that there is a budget for it.",
+  },
+  {
+    question: "Do video games teach anything that carries into real life?",
+    answer:
+      "Casey gave me the best framing I have heard for this, and it came from her flying rather than her parenting. Military aviators practice something called chair flying, mentally walking through every step of a flight before they ever touch the aircraft. A simulator, she says, puts your mind in the environment. Every ranked match I have played was preceded by the same mental walk-through, and I never had a name for it until she handed me one. What decides whether it carries is the game and whether an adult is coaching the reflection afterward.",
+  },
+  {
+    question:
+      "What should I ask before signing my kid up for a gaming program?",
+    answer:
+      "Two, and Casey softened neither. On the coaching: “Do they have training on coaching... or is it just some folks who are good at esports?” She is asking whether an adult is tracking the child rather than only the scoreboard. On the money: who pays for this, and does an academic or ethical body stand behind the program, or is the gaming industry buying a way into younger kids. I have not heard better questions from anyone.",
   },
 ];
 
@@ -123,7 +188,7 @@ const KEEP_READING = [
     title:
       "She banned Fortnite and got her kid back. Then came a new problem.",
     blurb:
-      "The other half of Kassi's story: the full ban arc, Fort-Holes, and the games that earned their place.",
+      "The other half of Casey's story: the full ban arc, Fort-Holes, and the games that earned their place.",
     image: "/images/should-you-ban-fortnite-card.jpg",
     category: "Perspective",
   },
@@ -154,7 +219,7 @@ export const metadata = {
     url: `https://ekuzo.gg/blog/${SLUG}`,
     siteName: "EKUZO",
     locale: "en_US",
-    images: [{ url: SHARE_IMAGE, width: 1920, height: 1080, alt: TITLE_DISPLAY }],
+    images: [{ url: SHARE_IMAGE, width: 1200, height: 630, alt: TITLE_DISPLAY }],
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
     authors: ["Muhammad Hossain"],
@@ -166,9 +231,7 @@ export const metadata = {
     description: DESCRIPTION,
     images: [SHARE_IMAGE],
   },
-  // Undisseminated ship state: keep out of search until Kassi blesses the
-  // piece, then flip index to true and add the sitemap entry.
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function PostGamingMilitaryFamilies() {
@@ -179,14 +242,18 @@ export default function PostGamingMilitaryFamilies() {
     datePublished: DATE_PUBLISHED,
     dateModified: DATE_MODIFIED,
     image: SHARE_IMAGE,
-    author: { "@type": "Person", name: "Muhammad Hossain" },
+    // Resolves to the canonical Person node in rootGraph (added at the flip,
+    // 2026-07-31) rather than minting a second, unlinked Muhammad.
+    author: { "@id": MUHAMMAD_ID },
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE_DISPLAY);
+  const faqSchema = buildFAQPageSchema(FAQ_ITEMS);
 
   return (
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className="absolute top-0 left-0 right-0 z-20">
         <Nav variant="light" />
@@ -236,7 +303,7 @@ export default function PostGamingMilitaryFamilies() {
           </div>
         </div>
 
-        {/* ══ HERO (asset pending) ══════════════════════════════════════════ */}
+        {/* ══ HERO ═════════════════════════════════════════════════════════ */}
         <div
           className="max-w-[1232px] mx-auto mb-20"
           style={{
@@ -244,21 +311,21 @@ export default function PostGamingMilitaryFamilies() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          {/* PRODUCTION BRIEF (kept out of the rendered note on purpose: the
-              draft is read by the interviewee, and filenames, pixel specs and
-              internal names make an unfinished page look further along than it
-              is). Photo-illustration, split composition: flight-line / cockpit
-              silhouette at dusk on one side, warm home gaming setup on the
-              other, meeting at a center seam (optional coin motif in the seam).
-              No faces, no rank insignia, no unit or base markings, no photos of
-              the family. 1920x1080, must crop cleanly to 1200x630 for OG. Save
-              as /images/gaming-military-families-hero.jpg. Stock composite or
-              illustration. */}
-          <WireframePlaceholder
-            type="image"
-            label="An opening image goes here"
-            note="Something at the top that holds both halves of this story at once: the leaving, and the staying in touch. No faces, and nothing that identifies anybody."
-            height={520}
+          {/* Finalised 2026-07-30. Photo-illustration: the teenager from
+              behind in a half-unpacked room, the truck through the open door
+              at dusk, teammates on one monitor and the game on the other.
+              Consent constraints hold: no faces toward camera, no rank
+              insignia, no unit or base markings, no photos of the family.
+              The 16:10 card crop and the 1200x630 share crop come from this
+              same frame; see -card.jpg and -share.jpg. */}
+          <Image
+            src={HERO_IMAGE}
+            alt={HERO_ALT}
+            width={1731}
+            height={909}
+            priority
+            sizes="(max-width: 1232px) 100vw, 1024px"
+            className="w-full h-auto"
           />
         </div>
 
@@ -280,30 +347,31 @@ export default function PostGamingMilitaryFamilies() {
                 kids are living. I’m an English major, so getting to write the
                 stories down is my favorite part.
               </p>
-              {/* ID variant: "The first parent to sign up was a senior
-                  military officer. Kassi is a career officer already deep into
-                  what's next for her: researching resilience in military
-                  families. She's a mom of two boys, and the parent who banned
-                  Fortnite." (drops AF + pilot + Aggie) */}
+              {/* ID variant, if she ever asks for more distance: "The first
+                  parent to sign up was a senior military officer. Casey is a
+                  career officer already deep into what's next for her:
+                  researching resilience in military families. She's a mom of
+                  two boys, and the parent who banned Fortnite." (drops AF +
+                  pilot + Aggie) */}
               {/* No calendar link up here (Jamie asked, lead-writer call): one
                   CTA per piece, at the end, after the story has earned it; an
-                  inline recruit link in Kassi's intro paragraph would make her
+                  inline recruit link in her intro paragraph would make her
                   story read as lead-gen on her cold read. The "(help me!)"
                   energy goes in Muhammad's LinkedIn share copy instead. */}
               <p>
                 The first parent I got to sign up was a senior Air Force
                 officer.
-                Kassi is a pilot by background, already deep into what’s next
+                Casey is a pilot by background, already deep into what’s next
                 for her: researching resilience in military families. She’s an
                 Aggie, a mom of two boys, and the parent who banned Fortnite.
               </p>
-              {/* VERIFY vs video before dissemination — [02:28] (coin quote).
-                  TAPE ORDER PRESERVED (ask-forgiveness discipline): coin line
-                  [02:28] came BEFORE the widower story [03:18]; don't reverse
-                  or imply the widower story prompted the coin.
-                  KASSI-EMAIL FLAG: the widower anecdote is an identifiable
-                  third party's grief story; name it explicitly in her review
-                  email so her sign-off covers it. */}
+              {/* Tape [02:28] (coin quote).
+                  TAPE ORDER PRESERVED: the coin line [02:28] came BEFORE the
+                  widower story [03:18]; don't reverse or imply the widower
+                  story prompted the coin.
+                  The widower anecdote is an identifiable third party's grief
+                  story. It was named explicitly in her review email, and her
+                  2026-07-28 sign-off covers it. */}
               <p>
                 The conversation got real before I’d finished my own
                 introduction. Her research and my project kept overlapping, and
@@ -316,9 +384,8 @@ export default function PostGamingMilitaryFamilies() {
               </p>
 
               <h2>She called it chair flying</h2>
-              {/* VERIFY vs video before dissemination — [17:48]. No
-                  conversation-order claim here on purpose: this happened
-                  mid-call, and she'll read this piece cold. */}
+              {/* Tape [17:48]. No conversation-order claim here on purpose:
+                  this happened mid-call. Don't add one. */}
               <p>
                 Take flight simulators. I brought them up half expecting an
                 actual pilot to laugh at me. Instead the pilot took over from
@@ -333,10 +400,10 @@ export default function PostGamingMilitaryFamilies() {
               {/* FACT: "Official Military Branch Esports Programs" — fact
                   library, official service sources. Army recruiting-domain
                   link lives in Sources ONLY (spouse-group finding, 7/25).
-                  VERIFY vs video before dissemination — [17:29]: her line is
-                  "because the strategy involved"; the inserted "of" is caption
-                  cleanup, confirm on video.
-                  ID variant: delete the task-force sentence entirely. */}
+                  Tape [17:29]: her line is "because the strategy involved";
+                  the inserted "of" is caption cleanup.
+                  ID variant, if she ever asks for more distance: delete the
+                  task-force sentence entirely. */}
               <p>
                 Her whole world runs on the same idea. The Army fields an
                 official esports team, the Navy stood one up by official
@@ -349,7 +416,7 @@ export default function PostGamingMilitaryFamilies() {
                   Air Force Gaming
                 </a>{" "}
                 is the Air Force’s own program for Airmen and Guardians.
-                Kassi’s read on why the branches built those: “because of the
+                Casey’s read on why the branches built those: “because of the
                 strategy involved.” The idea that games rehearse real judgment
                 is old news in her world, old enough that there’s a budget for
                 it. She’s even loosely connected to a research task force at
@@ -385,34 +452,27 @@ export default function PostGamingMilitaryFamilies() {
                 their civilian peers. Each move wipes the friend map clean, and
                 the communities that survive are the ones that travel.
               </p>
-              {/* VERIFY vs video before dissemination — [21:12] ("we're
-                  military and we would bounce all over the world"). Her own
-                  words carry the moves claim; don't overstate beyond them.
-                  ID variant: "Her family, in her words, 'would bounce all
-                  over the world,' and one of those bounces landed right as
-                  COVID hit." (drops overseas) */}
+              {/* Tape [21:12] ("we're military and we would bounce all over
+                  the world"). Her own words carry the moves claim; don't
+                  overstate beyond them.
+                  ID variant, if she ever asks for more distance: "Her family,
+                  in her words, 'would bounce all over the world,' and one of
+                  those bounces landed right as COVID hit." (drops overseas) */}
               <p>
-                Kassi’s boys lived that statistic. Her family, in her words, “would
+                Casey’s boys lived that statistic. Her family, in her words, “would
                 bounce all over the world,” and one of those bounces dropped
                 the boys overseas right as COVID hit.
               </p>
 
-              {/* PRODUCTION BRIEF (see the note on the hero placeholder above).
-                  Horizontal 3-beat narrative graphic: (1) the move, friend map
-                  wiped clean, annotated with the 6-9 school changes / 3x
-                  civilian stat, (2) the community that travels, the game world
-                  that comes along in the moving boxes, (3) an adult in the room,
-                  structure chosen. EKUZO type system, brand red accents on
-                  off-white. ~2000x700. Save as
-                  /images/gaming-military-families-friend-map.png. */}
-              <WireframePlaceholder
-                type="image"
-                label="A simple graphic goes here"
-                note="Something that shows the shape of it: you move, the friends you had go away, and the one thing that comes with you. Still working out how it should look."
-                height={300}
-              />
+              {/* "The continuity of play." Inlined as SVG rather than the PNG
+                  so its 11px tracked labels stay legible on a phone, where
+                  they would otherwise land at roughly 4px. The PNG at
+                  /images/gaming-military-families-friend-map.png stays as the
+                  shareable asset. Do not regenerate the artwork; the source
+                  SVG is knowledge-base/outputs/ekuzo-continuity-of-play.svg. */}
+              <ContinuityOfPlayGraphic />
 
-              {/* VERIFY vs video before dissemination — [06:20] */}
+              {/* Tape [06:20]. */}
               <p>
                 Fortnite was where the people were. An entire ocean from every
                 friend they had, locked down, her boys needed a community that
@@ -421,12 +481,12 @@ export default function PostGamingMilitaryFamilies() {
                 season is one I keep repeating to people: “Fortnite, even
                 though I think it’s the devil, had its purpose.”
               </p>
-              {/* VERIFY vs video before dissemination — [16:20]. Son's name
-                  replaced with "[my son]" to protect his privacy; the bracketed
-                  substitution is deliberate and stays even after blessing
-                  unless Kassi asks for the name back.
-                  ID variant: "One of her sons' behavior started bending around
-                  the game." */}
+              {/* Tape [16:20]. Son's name replaced with "[my son]" to protect
+                  his privacy. The bracketed substitution is deliberate and
+                  stays: she did not ask for the name back when she blessed the
+                  piece.
+                  ID variant, if she ever asks for more distance: "One of her
+                  sons' behavior started bending around the game." */}
               <p>
                 The purpose didn’t last. Her younger son’s behavior started
                 bending around the game, and grounding him from it just made
@@ -455,7 +515,7 @@ export default function PostGamingMilitaryFamilies() {
               </p>
 
               <h2>Her bar for organized gaming</h2>
-              {/* VERIFY vs video before dissemination — [40:32] */}
+              {/* Tape [40:32]. */}
               <p>
                 When I asked what’s important to her in structured gaming, she
                 brought up two things. The first was the adults: “Do they have
@@ -481,8 +541,9 @@ export default function PostGamingMilitaryFamilies() {
               </p>
               {/* Non-endorsement paragraph: keep directly adjacent to the
                   EKUZO/funding paragraph above (OPSEC adjacency rule).
-                  ID variants: "Her kids are older teens, mostly past our age
-                  range" · "She's a serving officer." */}
+                  ID variants, if she ever asks for more distance: "Her kids
+                  are older teens, mostly past our age range" · "She's a
+                  serving officer." */}
               {/* Takeaway reframed per Jamie 2026-07-27 (from his debrief with
                   Muhammad): what Muhammad actually got was her knowledge
                   surprising him + the moving challenge, not "questions to ask
@@ -499,10 +560,10 @@ export default function PostGamingMilitaryFamilies() {
               </p>
 
               <h2>Where we landed</h2>
-              {/* VERIFY vs video before dissemination — [24:38] ("I don't
-                  know that we've done it right or wrong"). Said about their
-                  screen/social-media calls; keep it paraphrased and general,
-                  don't quote it against a different decision. */}
+              {/* Tape [24:38] ("I don't know that we've done it right or
+                  wrong"). Said about their screen/social-media calls; keep it
+                  paraphrased and general, don't quote it against a different
+                  decision. */}
               <p>
                 What stays with me is how often we arrived at the same place
                 from opposite directions. She treats games the way her world
@@ -516,7 +577,7 @@ export default function PostGamingMilitaryFamilies() {
                 me trust her calls more, not less. I learned the same things
                 from the inside, by playing. Two sides of the same coin.
               </p>
-              {/* VERIFY vs video before dissemination — [18:49]. Reframed per
+              {/* Tape [18:49]. Reframed per
                   Jamie 2026-07-27: agreement-in-different-words (discovery
                   structure), not a manufactured disagreement — on the yelling
                   they genuinely agree. The trust beat survives as the one
@@ -550,7 +611,7 @@ export default function PostGamingMilitaryFamilies() {
                 strength early, and walk away with friends and skills that go
                 with them, wherever the next move lands them.
               </p>
-              {/* VERIFY vs video before dissemination — [46:02] ("a little bit
+              {/* Tape [46:02] ("a little bit
                   different"). Her amplify offer stays UNPUBLISHED (7/25 kill);
                   she is quoted only for what's on tape, and the more-stories
                   claim is Muhammad's stated belief. */}
@@ -576,12 +637,31 @@ export default function PostGamingMilitaryFamilies() {
                 </a>
                 . I’d like to listen.
               </p>
+              {/* Consent boilerplate. Shared across the bundle by design: the
+                  only allowed shared narrator prose besides the two spine
+                  quotes. Rewritten 2026-07-31 at the flip. The old version was
+                  written for the review state ("It travels no further until
+                  she has read every word") and was in the wrong tense once she
+                  had. The pseudonym clause is not optional: printing "Casey is
+                  a real parent" under a changed name without saying it was
+                  changed is the kind of thing that only ever costs you later.
+                  Any edit here gets made in BOTH pieces. */}
               <p className="italic text-black/60">
-                Kassi is a real parent. Her surname, unit, and base do not
-                appear here, by design, and her story is told the way she told
-                it to me. It travels no further until she has read every word
-                and told us it is right.
+                Casey is a real parent, though Casey is not her real name. She
+                asked me to change it, because of her work. Her surname, unit,
+                and base do not appear here either, by design, and her story is
+                told the way she told it to me. She read every word of this
+                before it went out, and this is the version she told me was
+                right.
               </p>
+
+              <h2>Common questions</h2>
+              {FAQ_ITEMS.map((item) => (
+                <Fragment key={item.question}>
+                  <h3>{item.question}</h3>
+                  <p>{item.answer}</p>
+                </Fragment>
+              ))}
 
               <h2>Sources and further reading</h2>
               <ul>

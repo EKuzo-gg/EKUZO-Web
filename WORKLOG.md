@@ -5,6 +5,109 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — July 31, 2026 (Kassi bundle published as Casey: rename, flip, art, FAQ + crawl optimization)
+
+**What shipped.** Both Kassi pieces and Muhammad's author page went public in one commit.
+`/blog/should-you-ban-fortnite` takes the featured slot on `/blog`;
+`/blog/gaming-military-families` sits in the grid below it. She blessed both pieces on
+2026-07-28, having read them with her husband, and asked for exactly one change.
+
+**The rename.** She is published as **Casey**. Every rendered surface, schema description,
+metadata field and cross-link excerpt now carries the pseudonym. Code comments, `WORKLOG.md`,
+`next.config.mjs`, `lib/authors.ts` and the retired page under `_to_delete/` keep **Kassi** on
+purpose: they are the provenance trail on a real person's approval and they are not public. Her
+CRM record stays at `company/crm/people/kassi-marshall.md` (`sales-only` under
+`ACCESS_POLICY.md`), correspondence still goes to Kassi, and the name mapping must survive any
+KB-to-git work with that tiering intact.
+
+Two rendered occurrences sat outside the "10 rendered lines" count in the go-live prompt and
+were caught by grep: the military piece's **Sources list** carries her name in the Haidt entry,
+and the channel-test share path had `utm_source=kassi` embedded in a URL meant to be handed to
+her to share onward. Both fixed. The UTM change cost no analytics continuity, because the link
+was never disseminated.
+
+**The consent boilerplate.** Rewritten in both pieces, the session's only new user-facing prose.
+The military version had been promising *"It travels no further until she has read every word
+and told us it is right"*, which was written for the review state and was in the wrong tense
+once she had. Both now record what happened and disclose the pseudonym. Printing "Casey is a
+real parent" under a changed name without saying it was changed is the exposure that clause
+closes.
+
+**The flip.** All six guard layers removed in one move, verified in reverse afterwards:
+`robots: { index: true }` on both posts · `noindex` off Muhammad's `lib/authors.ts` entry · all
+three `X-Robots-Tag` rules deleted (`headers()` now returns 0, evaluated in node) · the whole
+AI-crawler block deleted from `public/robots.txt` · both `/blog` entries and both author-page
+`POSTS` entries uncommented · three `sitemap.ts` entries added (fortnite 0.7 for the featured
+slot, military 0.6, author page 0.5). `redirects()` still returns 15 and the retired
+`/blog/mom-who-banned-fortnite` redirect is intact.
+
+**Schema.** `personMuhammadHossain` added to the `rootGraph` `@graph`, `personNode` dropped from
+his `lib/authors.ts` entry in the same commit so the node emits exactly once, and both posts'
+inline `author: { "@type": "Person", name: "Muhammad Hossain" }` objects swapped to
+`{ "@id": MUHAMMAD_ID }`. That completes the author layer: a named coach with a profile page,
+two bylines, and a resolvable entity rather than an anonymous byline.
+
+**Assets.** The four finished military assets were sitting in `public/images/` but had never
+been wired into the page: both the hero and the friend map were still rendering
+`WireframePlaceholder`. Both now render real images with descriptive alt text. `SHARE_IMAGE` on
+the military piece pointed at the 1731x909 hero while declaring 1920x1080; it now points at the
+true 1200x630 `-share.jpg` and declares those dimensions. Same pattern applied to the Fortnite
+piece.
+
+**The friend map is now inline SVG** (`components/blog/ContinuityOfPlayGraphic.tsx`), replacing
+the PNG on the page. Its 11px tracked labels rendered at roughly 4px on a phone, which is the
+device most readers meet this piece on. Two renders share one component: desktop keeps the
+approved 2000x700 artwork with the two embedded font faces dropped, drawing instead with the
+site's own Tungsten and Inter via `var(--font-display)` / `var(--font-body)`, which is why the
+component is 10KB rather than the 298KB the standalone SVG weighs. Mobile stacks the three
+panels and moves every piece of type out of the SVG and into HTML, so it wraps under a font
+fallback instead of overflowing the viewBox. Side effect worth having: every label, the 6-9
+statistic and the source line are now real crawlable text rather than pixels. The PNG stays in
+`public/images/` as the shareable asset.
+
+**Verification markers.** 22 stale `VERIFY vs video before dissemination` markers stripped (12
+fortnite, 10 military). The pass they described is closed: both subjects blessed the pieces and
+both were on the call. Every comment that records a *decision* was kept and rewritten to read as
+resolved provenance rather than a live instruction: the tape timestamps, the TAPE ORDER
+PRESERVED notes, the `[my son]` rationale, the ASR cleanup calls, the differentiation and
+quote-ownership notes, and the ID variants (now labelled "if she ever asks for more distance").
+
+**Art direction, Fortnite hero.** Jamie's steer was "Fortnite centric," which collides with the
+consent terms banning anything Fortnite-trademarked. Resolved by going at the game through its
+*light* rather than its IP: the TV sits at the edge of frame with its screen never visible, and
+the saturated teal and magenta wash it throws across a dark living room is what reads as the
+game. Parent's point of view from the doorway, which is where she was standing for the decision
+the piece is about. Prompt handed to Jamie to run in his own tools.
+
+**Crawl and retrieval.** Ran `docs/ai-optimization-checklist.md` against both pages properly.
+Passing: indexable, canonical, server-rendered, one H1, schema all from `lib/schema.ts` through
+`<JsonLd>`, complete OG/Twitter with true 1200x630, descriptive alt on every in-body image, all
+six internal routes and all nine image paths resolving, and the external citations re-fetched
+live (the FTC headline and $520M figure and the Columbia finding both match what the pieces
+claim). Inlining the friend map also cleared the checklist's "critical info must not be trapped
+in an image": its labels, the 6-to-9 statistic and its source line are now real text.
+
+Two gaps the go-live prompt had wrong or missed:
+
+*FAQ.* The prompt said "Both posts already carry FAQ schema and a SOURCES block." The SOURCES
+block was there; the FAQ was not, in either post. Surveying the other eight posts showed the
+convention runs by category: all four Perspective posts should have one, and these two were the
+only Perspective posts without. Added following the house pattern (a `FAQ_ITEMS` const,
+`buildFAQPageSchema`, and a visible `<h2>Common questions</h2>` before Sources). Six items on the
+fortnite piece, five on the military piece, every answer drawn from material already in the
+piece, no product link, voice-DNA linted, contamination-checked against each other and against
+every other FAQ on the blog. Five near-verbatim lifts from the pieces' own body prose were caught
+in draft and rewritten.
+
+*llms.txt.* Neither post and none of the three author pages appeared in it. Added both posts in
+the house style, plus a new Authors section for Karlin, Jamie and Muhammad.
+
+**Known gaps.** Card images across the whole blog use `alt={post.title}` while the adjacent
+`<h3>` prints the same string, so screen readers hear it twice. That is a site-wide convention,
+not a bundle issue, and changing it touches other people's lanes. Flagged, not changed. The
+military piece's H2s are also not question-shaped ("Where we landed"), which the checklist asks
+for where the topic allows, but headings are the article and the article is locked.
+
 ## Jamie — July 28, 2026 (author layer: registry, byline component, page template)
 
 **What:** One author registry, one byline component, one author-page template, applied to all 10 posts and all 3 author pages. Targeted `tsc --noEmit` clean across all 41 files in the blast radius; `next.config.mjs` re-evaluated (15 redirects, 3 header rules); byline layout screenshot-verified at 390px and 1440px.

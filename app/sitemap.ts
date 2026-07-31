@@ -157,6 +157,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    // The Kassi bundle, added 2026-07-31 when it went public. The fortnite
+    // piece carries the featured slot on /blog, hence 0.7 against the sibling's
+    // 0.6.
+    {
+      url: `${baseUrl}/blog/should-you-ban-fortnite`,
+      lastModified: new Date("2026-07-31"),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/gaming-military-families`,
+      lastModified: new Date("2026-07-31"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
 
     // Blog author pages
     {
@@ -168,6 +183,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/blog/author/jamie-fitch`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/blog/author/muhammad-hossain`,
+      lastModified: new Date("2026-07-31"),
       changeFrequency: "monthly",
       priority: 0.5,
     },

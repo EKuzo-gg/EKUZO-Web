@@ -22,49 +22,39 @@ const posts = [
     excerpt:
       "The game is visible. The meaning is hidden. Six signs parents notice first in a gamer kid, and what they often mean.",
     image: "/images/what-your-kids-gaming-is-telling-you-card.jpg",
-    featured: true,
+    // Lost the featured slot to should-you-ban-fortnite on 2026-07-31
+    // (Jamie's call). Karlin knows.
+    featured: false,
   },
   /*
-   * UNLISTED (2026-07-25, retitled/reslugged 2026-07-27): the Kassi
-   * military-families post is live at /blog/gaming-military-families for
-   * private review by Kassi and Muhammad only. Keeping it out of this array
-   * makes it reachable by direct link alone; the page itself also carries a
-   * noindex meta + X-Robots-Tag header and is absent from sitemap.ts.
-   * TO PUBLISH once she blesses it: uncomment this entry, flip `robots` to
-   * index:true in the post's metadata, add its sitemap.ts entry, delete the
-   * post's AI-crawler block in public/robots.txt, and drop the X-Robots-Tag
-   * rule in next.config.mjs. Card image still needs producing.
+   * The Kassi bundle, published 2026-07-31 after she blessed both pieces.
+   * Both entries were commented out from 2026-07-25 / 2026-07-28 while the
+   * posts sat live-but-undisseminated for her private review.
+   * `featured: true` lives on the fortnite piece per Jamie, 2026-07-31. Only
+   * one post may carry it — the finder below takes the first match.
    */
-  // {
-  //   slug: "gaming-military-families",
-  //   title: "Every move wiped their friend map. Gaming was the community that traveled.",
-  //   date: "July 25, 2026",
-  //   author: "Muhammad Hossain",
-  //   category: "Perspective",
-  //   excerpt:
-  //     "Military kids move constantly, and every move wipes the friend map. A military mom and a 21-year-old esports coach on the gaming communities that travel.",
-  //   image: "/images/gaming-military-families-card.jpg",
-  //   featured: false,
-  // },
-  /*
-   * UNLISTED (2026-07-28): the Kassi parent piece (ban arc) is live at
-   * /blog/should-you-ban-fortnite for private review by Kassi and Muhammad
-   * only. Same ship state and same publish flip as its sibling above — both
-   * pieces flip together on Kassi's blessing (see the sibling's TO PUBLISH
-   * checklist; run it for each slug). Card image still needs producing
-   * (art direction TBD with Jamie).
-   */
-  // {
-  //   slug: "should-you-ban-fortnite",
-  //   title: "She banned Fortnite and got her kid back. Then came a new problem.",
-  //   date: "July 28, 2026",
-  //   author: "Muhammad Hossain",
-  //   category: "Perspective",
-  //   excerpt:
-  //     "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
-  //   image: "/images/should-you-ban-fortnite-card.jpg",
-  //   featured: false,
-  // },
+  {
+    slug: "should-you-ban-fortnite",
+    title: "She banned Fortnite and got her kid back. Then came a new problem.",
+    date: "July 28, 2026",
+    author: "Muhammad Hossain",
+    category: "Perspective",
+    excerpt:
+      "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
+    image: "/images/should-you-ban-fortnite-card.jpg",
+    featured: true,
+  },
+  {
+    slug: "gaming-military-families",
+    title: "Every move wiped their friend map. Gaming was the community that traveled.",
+    date: "July 25, 2026",
+    author: "Muhammad Hossain",
+    category: "Perspective",
+    excerpt:
+      "Military kids move constantly, and every move wipes the friend map. A military mom and a 21-year-old esports coach on the gaming communities that travel.",
+    image: "/images/gaming-military-families-card.jpg",
+    featured: false,
+  },
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",

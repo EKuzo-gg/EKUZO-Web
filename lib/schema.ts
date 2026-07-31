@@ -107,15 +107,12 @@ export const personJamieFitch = {
 };
 
 // Muhammad Hossain: EKUZO coach and the author of the Kassi bundle.
-// DELIBERATELY NOT IN `rootGraph` YET (added 2026-07-28). His two posts are
-// live-but-undisseminated pending Kassi's blessing, and rootGraph is emitted
-// on every page of the site, so adding him there would broadcast a new author
-// node site-wide before the bundle flips. Instead his author page passes this
-// node into buildAuthorPageGraph({ person }), so it ships on that one page.
-// AT THE FLIP: add `personMuhammadHossain` to the rootGraph @graph array and
-// drop the `person` argument from app/blog/author/muhammad-hossain/page.tsx,
-// so he matches the Karlin/Jamie pattern. Also swap the inline author objects
-// in both post pages to { "@id": MUHAMMAD_ID }.
+// IN `rootGraph` since 2026-07-31, when the bundle went public. He was held
+// out of it from 2026-07-28 while the posts were under embargo, because
+// rootGraph is emitted on every page of the site and would have broadcast a
+// new author node before the pieces flipped; his author page inlined the node
+// instead. That inline copy (`personNode` on his lib/authors.ts entry) was
+// removed in the same commit, so the node emits exactly once.
 // No `sameAs`: he has no public profile we've confirmed. Don't invent one.
 export const MUHAMMAD_ID = `${SITE}/#person-muhammad`;
 
@@ -257,6 +254,7 @@ export const rootGraph = {
     coachSebastienSchema,
     coachNuriSchema,
     personJamieFitch,
+    personMuhammadHossain,
   ],
 };
 

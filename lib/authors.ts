@@ -21,12 +21,7 @@
  *           monogram placeholder.
  */
 
-import {
-  KARLIN_ID,
-  JAMIE_ID,
-  MUHAMMAD_ID,
-  personMuhammadHossain,
-} from "./schema";
+import { KARLIN_ID, JAMIE_ID, MUHAMMAD_ID } from "./schema";
 
 export type AuthorKind = "staff" | "guest";
 
@@ -64,8 +59,8 @@ export type Author = {
    * The full Person node, set ONLY for an author whose node is not yet in the
    * site-wide `rootGraph`. The author-page template inlines it into that one
    * page's @graph so `mainEntity` is not a dangling @id. Authors already in
-   * rootGraph (Karlin, Jamie) leave this undefined so the node is not emitted
-   * twice. See lib/schema.ts.
+   * rootGraph (Karlin, Jamie, and Muhammad since 2026-07-31) leave this
+   * undefined so the node is not emitted twice. See lib/schema.ts.
    */
   personNode?: object;
 
@@ -82,10 +77,10 @@ export type Author = {
   footerBanner?: boolean;
 
   /**
-   * LEAK GUARD — one of six layers keeping the Kassi bundle out of search
-   * until she blesses it. Emits robots: { index: false } in the author page
-   * metadata. Do not clear this without running the TO PUBLISH checklist in
-   * app/blog/author/muhammad-hossain/page.tsx.
+   * Emits robots: { index: false } in the author page metadata. Used as one of
+   * six leak-guard layers for the Kassi bundle's pre-publication embargo
+   * (cleared 2026-07-31). Kept on the type because the next unpublished author
+   * page will want it.
    */
   noindex?: boolean;
 };
@@ -159,11 +154,12 @@ const AUTHORS: Author[] = [
       "A native Texan, Muhammad Hossain is a senior English major at Texas A&M University. His lifelong passion for gaming and learning led him to EKUZO, where he is now a coach who helps others grow to their best selves. He loves to listen, learn, and broaden his perspective.",
     ],
     personId: MUHAMMAD_ID,
-    // Not in rootGraph until the Kassi bundle flips — ships on his page only.
-    personNode: personMuhammadHossain,
+    // `personNode` and `noindex` both dropped 2026-07-31 when the Kassi bundle
+    // went public. His Person node now lives in the site-wide rootGraph in
+    // lib/schema.ts, so inlining it here as well would double-emit it on his
+    // own page.
     hasPage: true,
     footerBanner: false,
-    noindex: true, // LEAK GUARD — see the type definition above.
   },
   // ── Guest authors ─────────────────────────────────────────────────────────
   // Name and date only. No avatar, no link, no author page. See the header.

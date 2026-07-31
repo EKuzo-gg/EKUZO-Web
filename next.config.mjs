@@ -10,65 +10,13 @@ const nextConfig = {
       "public/testimonial-videos/**/*",
     ],
   },
+  // The three X-Robots-Tag rules that lived here (both Kassi posts and
+  // Muhammad's author page) were deleted 2026-07-31 when the bundle went
+  // public on her blessing. headers() now returns zero rules on purpose;
+  // if you are adding the first new one, that is fine, it just means the
+  // embargo layer is gone rather than misplaced.
   async headers() {
-    return [
-      {
-        // UNLISTED DRAFT (2026-07-25): the Kassi military-families post ships
-        // to production for private review by Kassi and Muhammad before it is
-        // disseminated. The page already sets a noindex meta tag; this header
-        // is the belt-and-suspenders layer for fetchers that never parse the
-        // HTML (link unfurlers, archivers, some AI crawlers). The post is also
-        // absent from sitemap.ts, commented out of the /blog listing, and
-        // path-blocked for AI crawlers in public/robots.txt.
-        // DELETE THIS RULE when the post is blessed and goes public.
-        // (Slug updated 2026-07-27: was /blog/mom-who-banned-fortnite.)
-        source: "/blog/gaming-military-families",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value:
-              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
-          },
-        ],
-      },
-      {
-        // UNLISTED DRAFT (2026-07-28): the Kassi parent piece (ban arc) ships
-        // to production for private review by Kassi and Muhammad before it is
-        // disseminated. Same layers as its sibling above: noindex meta, this
-        // header, absent from sitemap.ts, commented out of /blog, AI-crawler
-        // path block in public/robots.txt.
-        // DELETE THIS RULE when the bundle is blessed and goes public (both
-        // pieces flip together on Kassi's blessing).
-        source: "/blog/should-you-ban-fortnite",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value:
-              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
-          },
-        ],
-      },
-      {
-        // UNLISTED (2026-07-28): Muhammad's author page. Both Kassi posts now
-        // link to it from their bylines, and both are noindex + follow:true,
-        // so a crawler that fetches either post will follow through to this
-        // page. It carries the same layers as the posts (noindex meta, this
-        // header, absent from sitemap.ts) and its own post grid is commented
-        // out, so it cannot surface either piece.
-        // No public/robots.txt entry on purpose: that section exists to keep
-        // AI crawlers off KASSI'S STORY, and this page contains none of it.
-        // DELETE THIS RULE when the bundle is blessed and goes public (the
-        // author page flips together with both pieces on Kassi's blessing).
-        source: "/blog/author/muhammad-hossain",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value:
-              "noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate",
-          },
-        ],
-      },
-    ];
+    return [];
   },
   async redirects() {
     return [
