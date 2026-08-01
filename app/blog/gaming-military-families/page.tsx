@@ -49,8 +49,9 @@ import { Fragment } from "react";
  * background when she blessed the bundle, and it is the only change she asked
  * for. Rendered prose, schema, metadata and cross-links say Casey. Comments
  * and internal docs keep Kassi on purpose: they are the provenance trail on a
- * real person's approval, and they are not public. The consent boilerplate at
- * the foot of the piece discloses that the name was changed.
+ * real person's approval, and they are not public. The consent boilerplate
+ * disclosed the name change to the reader from 2026-07-31 until 2026-08-01,
+ * when it was cut for length; the record now lives here and in the CRM only.
  * CITATION SWAP 2026-07-27: the mobility stat previously cited the Kadena
  * DoDEA school page (kadenaes.dodea.edu). A named-base URL under a footer
  * promising "no base appears" was an OPSEC-optics fail (spouse-read finding).
@@ -639,20 +640,18 @@ export default function PostGamingMilitaryFamilies() {
               </p>
               {/* Consent boilerplate. Shared across the bundle by design: the
                   only allowed shared narrator prose besides the two spine
-                  quotes. Rewritten 2026-07-31 at the flip. The old version was
-                  written for the review state ("It travels no further until
-                  she has read every word") and was in the wrong tense once she
-                  had. The pseudonym clause is not optional: printing "Casey is
-                  a real parent" under a changed name without saying it was
-                  changed is the kind of thing that only ever costs you later.
-                  Any edit here gets made in BOTH pieces. */}
+                  quotes. Any edit here gets made in BOTH pieces.
+                  CUT 2026-08-01 (Jamie, reading it live) to match the sibling.
+                  The second sentence is NOT decorative and does not travel to
+                  the sibling: the 2026-07-25 military-spouse cold read and
+                  OPSEC audit treated "no base appears" as a promise the piece
+                  makes, and it drove the citation swap off the named-base
+                  DoDEA URL. Removing the promise while keeping the reasons for
+                  it would be the wrong half to cut. */}
               <p className="italic text-black/60">
-                Casey is a real parent, though Casey is not her real name. She
-                asked me to change it, because of her work. Her surname, unit,
-                and base do not appear here either, by design, and her story is
-                told the way she told it to me. She read every word of this
-                before it went out, and this is the version she told me was
-                right.
+                Casey is a real parent sharing her real story, offered so yours
+                can use it. Her surname, unit, and base do not appear here, by
+                design.
               </p>
 
               <h2>Common questions</h2>

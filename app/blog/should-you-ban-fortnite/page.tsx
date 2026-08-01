@@ -49,8 +49,9 @@ import { Fragment } from "react";
  * background when she blessed the bundle, and it is the only change she asked
  * for. Rendered prose, schema, metadata and cross-links say Casey. Comments
  * and internal docs keep Kassi on purpose: they are the provenance trail on a
- * real person's approval, and they are not public. The consent boilerplate at
- * the foot of the piece discloses that the name was changed.
+ * real person's approval, and they are not public. The consent boilerplate
+ * disclosed the name change to the reader from 2026-07-31 until 2026-08-01,
+ * when it was cut for length; the record now lives here and in the CRM only.
  *
  * Ship state: PUBLIC as of 2026-07-31. Kassi blessed both pieces 2026-07-28,
  * having read them with her husband; Muhammad blessed them; both were on the
@@ -160,34 +161,31 @@ const SOURCES: { text: string; cite: string; url: string }[] = [
 // we would title them.
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
-    question: "Does banning Fortnite actually work?",
+    question: "Should parents ban Fortnite?",
     answer:
-      "In Casey’s house it did, for the thing she banned it for. The behavior settled, and the son she had been missing was recognisable again. What she did not expect was the second thing the ban did. Fortnite had also been one of the few places her two very different sons spent time together, so removing it left that job open. A ban takes away everything a game was doing, including the parts you wanted to keep.",
+      "Sometimes. A ban is a fair call when a child’s behavior keeps deteriorating around one game, which is what Casey watched happen: grounding her son from Fortnite only made getting back on it the point of everything else. What her experience adds is the half most advice skips. Before the game goes, work out what job it was doing. Fortnite was bending one son’s behavior and it was also one of the few places two very different brothers spent time together. A ban ends both jobs at once.",
   },
   {
-    question: "What happens after you ban a game your kid loves?",
+    question: "What happened after Casey banned Fortnite?",
     answer:
-      "Expect a gap where the game was, and pay attention to what falls into it. Casey told me that part of the reason her boys picked up what they picked up next was “a little bit out of boredom once Fortnite was banned from my home.” Boredom arrived first. What came after was better, because she went looking for games that gave something back rather than leaving the gap to fill itself.",
+      "Two things, and she only expected one. The behavior settled and she got her son back. Then the second effect arrived, which no article had warned her about: her boys are quite different people, one a band kid and one not, and the game had been one of the few things they both wanted to do. The ban fixed what she aimed it at and emptied their common ground in the same move.",
   },
   {
-    question: "Is Fortnite bad for kids?",
+    question: "What should parents do after banning a child’s favorite game?",
     answer:
-      "Casey would say yes, and she coined a word for what it did to her teenager. Her more useful finding is the method rather than the verdict: she judged games one at a time by the kid each one handed back to her, and Fortnite is the one that failed that test in her house. The public record is not kind to the company either. Epic Games was ordered in 2022 to pay $520 million, the largest such penalty at the time, covering both children’s privacy and purchase flows built to push players into spending they did not intend. Whether the game fails the same test in your house is something only you can watch for.",
+      "Fill the gap on purpose instead of leaving it to fill itself. Name what the game was actually providing, whether that is company, status, a way to wind down, or time with a sibling, then look for something that provides the same thing. In Casey’s house that meant another game her boys chose together, and later a private server their dad ran after a stranger destroyed the world they had built. A moderated community or a shared family activity does the same work. Her own answer for why her boys play what they play now was partly “a little bit out of boredom once Fortnite was banned from my home,” which is what an unfilled gap sounds like.",
   },
   {
-    question: "My kids fight constantly. Can a game help them get along?",
+    question:
+      "Should parents judge video games individually instead of limiting total screen time?",
     answer:
-      "It happened in Casey’s house, using the last title most parents would reach for. Her two boys do not have much in common, and the thing that finally put them in the same room was a Mature-rated western. She describes those sessions as calmer, and as something they enjoyed doing together. Researchers who study siblings have found the same pattern, that co-playing video games is associated with more sibling affection.",
+      "It is what her house teaches, and it is worth holding as practical guidance rather than a clinical rule. The screen-time argument treats every gaming hour as the same hour. Casey found the opposite: one game rearranged her son’s behavior, another gave two brothers a way to be brothers, another was where they had built worlds together since they were small. She only found out by removing one and watching what went missing. A 2025 Columbia study points the same direction, finding that addictive patterns of use, rather than total screen time, predicted worse mental health in young people. One house and one study still do not settle it for yours.",
   },
   {
-    question: "Is an M-rated game really a better choice than a cartoon one?",
+    question:
+      "Are video game age ratings enough to tell parents whether a game is appropriate?",
     answer:
-      "Sometimes, and Casey’s house is the example. By the sticker on the box she had it backwards: the cartoon game with the dancing bananas is the one that got banned, and the M-rated western is what came in after, on good behavior. By the evidence on her own couch she had it exactly right. A rating describes content. It cannot tell you what a particular game does to your particular kid.",
-  },
-  {
-    question: "How do I judge a game without banning everything?",
-    answer:
-      "Watch the kid the game hands back to you. That is Casey’s whole method and it required no expert, only watching and a willingness to act on what she saw. She kept the games that gave something back, she removed the one that had rearranged her son’s behavior, and when a stranger destroyed her boys' Minecraft world she put a trusted adult inside the game instead of taking it away. Her one line on all of it: “I see a value in it as long as it’s controlled.”",
+      "No, and Casey’s house inverts them. By the sticker on the box she had it backwards: the cartoon game with the dancing bananas is the one that got banned, and the Mature-rated western is what came in after, on good behavior. A rating describes what is in a game. It cannot tell you what that game does to your particular child. Read the rating, then watch what you see before, during and after your kid plays, and let the two together make the call.",
   },
 ];
 
@@ -649,20 +647,17 @@ export default function PostShouldYouBanFortnite() {
               </p>
               {/* Consent boilerplate. Shared across the bundle by design: the
                   only allowed shared narrator prose besides the two spine
-                  quotes. Rewritten 2026-07-31 at the flip. The old version was
-                  written for the review state ("It travels no further until
-                  she has read every word") and was in the wrong tense once she
-                  had. The pseudonym clause is not optional: printing "Casey is
-                  a real parent" under a changed name without saying it was
-                  changed is the kind of thing that only ever costs you later.
-                  Any edit here gets made in BOTH pieces. */}
+                  quotes. Any edit here gets made in BOTH pieces.
+                  CUT TO ONE LINE 2026-08-01 (Jamie, reading it live): the
+                  previous four-sentence version buried the point. It carried a
+                  pseudonym disclosure ("Casey is not her real name, she asked
+                  me to change it") which this version drops. The provenance
+                  that disclosure protected is recorded in the header note
+                  above and in company/crm/people/kassi-marshall.md; it is no
+                  longer stated to the reader. */}
               <p className="italic text-black/60">
-                Casey is a real parent, though Casey is not her real name. She
-                asked me to change it, because of her work, and her family’s
-                identifying details are held back for the same reason. She read
-                every word of this before it went out, and this is the version
-                she told me was right. It’s one family’s evidence, offered so
-                yours can use it.
+                Casey is a real parent sharing her real story, offered so yours
+                can use it.
               </p>
 
               <h2>Common questions</h2>
