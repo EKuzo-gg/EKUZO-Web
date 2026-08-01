@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
-import TwoJobsGraphic from "@/components/blog/TwoJobsGraphic";
+import GutCheckAside from "@/components/blog/GutCheckAside";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -480,15 +480,31 @@ export default function PostShouldYouBanFortnite() {
                 watching what went missing.
               </p>
 
-              {/* Midpoint break (Jamie, 2026-08-01: the piece reads as too
-                  much unbroken text). Placed at this seam on purpose: the
-                  reader has just been told the ban worked AND cost her
-                  something, and this is that sentence as a picture. Do not
-                  move it earlier; before this point the second job has not
-                  been introduced and the graphic gives away the turn. */}
-              <TwoJobsGraphic />
-
               <h2>Why Red Dead Redemption worked</h2>
+              {/* Midpoint break (Jamie, 2026-08-01: the piece reads as too much
+                  unbroken text). A "one game, two jobs" diagram was built for
+                  this seam first and dropped; the checklist earns its space and
+                  the diagram only restated a sentence the reader had just read.
+                  The framing is Jamie's: parents are good at seeing what a game
+                  is taking and bad at seeing what it is giving, so every
+                  question here points at the giving. Question 5 is the hinge
+                  and the piece's whole argument in one line.
+                  Placement is the house pattern: directly after the <h2>, before
+                  the section's first <p>, because .blog-content h2 has no
+                  clear:both and an aside above it leaves the heading wrapping.
+                  This section is about what a game gave back, so it also lands
+                  where the argument is. */}
+              <GutCheckAside
+                title="Before you take it away"
+                subtitle="Five questions about what the game is giving"
+                questions={[
+                  "Who are they playing it with, week to week?",
+                  "Is anyone else in the house in there with them?",
+                  "What are they like twenty minutes after they stop?",
+                  "Have they built anything in there worth keeping?",
+                  "If it vanished tomorrow, what vanishes with it?",
+                ]}
+              />
               {/* Tape [07:27]. */}
               <p>
                 What filled the gap surprised me. Red Dead Redemption, a
