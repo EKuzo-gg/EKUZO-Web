@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
+import TwoJobsGraphic from "@/components/blog/TwoJobsGraphic";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -478,6 +479,14 @@ export default function PostShouldYouBanFortnite() {
                 kids, and the only way she found out was by removing one and
                 watching what went missing.
               </p>
+
+              {/* Midpoint break (Jamie, 2026-08-01: the piece reads as too
+                  much unbroken text). Placed at this seam on purpose: the
+                  reader has just been told the ban worked AND cost her
+                  something, and this is that sentence as a picture. Do not
+                  move it earlier; before this point the second job has not
+                  been introduced and the graphic gives away the turn. */}
+              <TwoJobsGraphic />
 
               <h2>Why Red Dead Redemption worked</h2>
               {/* Tape [07:27]. */}
