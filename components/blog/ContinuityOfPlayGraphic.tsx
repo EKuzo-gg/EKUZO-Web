@@ -42,6 +42,7 @@
  */
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const ALT =
   "Across a military move, a child's in-person friend group dissolves and restarts from one new friend, while the same four online teammates stay in exactly the same place.";
@@ -132,6 +133,7 @@ export default function ContinuityOfPlayGraphic() {
           <button
             type="button"
             onClick={() => setExpanded(true)}
+            aria-label="Expand the continuity of play graphic to full size"
             className="group block w-full cursor-zoom-in text-left"
           >
             <span className="block bg-[#f0edea]">
@@ -282,50 +284,64 @@ export default function ContinuityOfPlayGraphic() {
       </div>
       </figure>
 
-      {/* ── Desktop, expanded. Mounts only while open. ─────────────────── */}
-      {expanded && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="The continuity of play, expanded"
-          onClick={() => setExpanded(false)}
-          className="fixed inset-0 z-[100] flex items-center overflow-x-auto overflow-y-hidden bg-black/90 p-4 lg:p-10"
-        >
+      {/* ── Desktop, expanded. Mounts only while open, and PORTALS to
+           document.body. It has to: this component renders deep inside
+           <article className="relative overflow-hidden"> and a fixed overlay
+           left in place there gets painted over by the article's own stacking
+           context (verified on production 2026-08-01, where a strip of body
+           copy sat on top of the backdrop).
+           The artwork fits the viewport rather than forcing its native 2000px.
+           An earlier version floored the width at 1500px to hold the labels at
+           their designed 11px, but on a 1456px laptop that clipped the third
+           panel off the right edge behind a scrollbar most people would never
+           find. Fitting gives roughly 7.5px on a 13-inch screen and close to
+           10px on a 1920px monitor, against 5.5px in the prose column, with
+           nothing cut off. ────────────────────────────────────────────────── */}
+      {expanded &&
+        createPortal(
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="m-auto w-full min-w-[1500px] max-w-[2000px] bg-[#f0edea]"
-          >
-            <svg
-              viewBox="0 0 2000 700"
-              className="h-auto w-full"
-              role="img"
-              aria-label={ALT}
-            >
-              {GRAPHIC_BODY}
-            </svg>
-          </div>
-          <button
-            type="button"
+            role="dialog"
+            aria-modal="true"
+            aria-label="The continuity of play, expanded"
             onClick={() => setExpanded(false)}
-            aria-label="Close the expanded graphic"
-            className="fixed right-5 top-5 z-[101] flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 font-body text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur transition-colors hover:bg-white/25"
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 p-4 lg:p-10"
           >
-            <svg
-              width="11"
-              height="11"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              aria-hidden="true"
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-[2000px] bg-[#f0edea]"
             >
-              <path d="M5 5l14 14M19 5L5 19" />
-            </svg>
-            Close
-          </button>
-        </div>
-      )}
+              <svg
+                viewBox="0 0 2000 700"
+                className="h-auto w-full"
+                role="img"
+                aria-label={ALT}
+              >
+                {GRAPHIC_BODY}
+              </svg>
+            </div>
+            <button
+              type="button"
+              onClick={() => setExpanded(false)}
+              aria-label="Close the expanded graphic"
+              className="fixed right-5 top-5 flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 font-body text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur transition-colors hover:bg-white/25"
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M5 5l14 14M19 5L5 19" />
+              </svg>
+              Close
+            </button>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
