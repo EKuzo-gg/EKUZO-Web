@@ -5,6 +5,29 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — August 1, 2026 (friend map: explicit expand on desktop)
+
+The inlined "continuity of play" graphic renders into the article's prose column at roughly
+1000px, half the artwork's 2000px design width, so its 11px tracked labels land near 5.5px.
+Readable enough to follow the shape, not enough to actually read. Same problem the mobile
+stacked variant solved, one notch less severe.
+
+`components/blog/ContinuityOfPlayGraphic.tsx` is now a client component with an expand state.
+Clicking the graphic (or the "Expand for full size" control under it) opens it over the page at
+its NATIVE width, floored at 1500px, so labels land between 8px and their designed 11px depending
+on viewport and the overlay scrolls horizontally on a narrow laptop rather than shrinking below
+legibility. Escape, backdrop click and a close button all dismiss it; body scroll is locked while
+open; the overlay carries role="dialog" + aria-modal.
+
+The artwork markup lives in a single `GRAPHIC_BODY` constant rendered by both states, and the
+overlay only mounts while open, so there is never duplicated `<text>` in the DOM for a crawler to
+read twice. Mobile is untouched: the stacked HTML-type version is already legible and gets no
+expand affordance.
+
+First draft overlaid the control as a pill in the bottom-right corner of the artwork, which
+covered the EKUZO.GG mark. It now sits below the graphic, inside the same button, so there is one
+tab stop and nothing obscures the art.
+
 ## Jamie — July 31, 2026 (Kassi bundle published as Casey: rename, flip, art, FAQ + crawl optimization)
 
 **What shipped.** Both Kassi pieces and Muhammad's author page went public in one commit.
