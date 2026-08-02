@@ -164,7 +164,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Should parents ban Fortnite?",
     answer:
-      "Sometimes. A ban is a fair call when a child’s behavior keeps deteriorating around one game, which is what Casey watched happen: grounding her son from Fortnite only made getting back on it the point of everything else. What her experience adds is the half most advice skips. Before the game goes, work out what job it was doing. Fortnite was bending one son’s behavior and it was also one of the few places two very different brothers spent time together. A ban ends both jobs at once.",
+      "A ban is a fair call when a child’s behavior keeps deteriorating around one game, which is what Casey watched happen: grounding her son from Fortnite only made getting back on it the point of everything else. What her experience adds is the half most advice skips. Before the game goes, try to identify what social or emotional role(s) the game was filling.",
   },
   {
     question: "What happened after Casey banned Fortnite?",
@@ -174,7 +174,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What should parents do after banning a child’s favorite game?",
     answer:
-      "Fill the gap on purpose instead of leaving it to fill itself. Name what the game was actually providing, whether that is company, status, a way to wind down, or time with a sibling, then look for something that provides the same thing. In Casey’s house that meant another game her boys chose together, and later a private server their dad ran after a stranger destroyed the world they had built. A moderated community or a shared family activity does the same work. Her own answer for why her boys play what they play now was partly “a little bit out of boredom once Fortnite was banned from my home,” which is what an unfilled gap sounds like.",
+      "Fill the gap on purpose instead of leaving it to fill itself. Name what the game was actually providing, whether that is company, status, a way to wind down, or time with a sibling, then look for something that provides the same thing. In Casey’s house that meant another game her boys chose together. A moderated community or a shared family activity could do the same work.",
   },
   {
     question:
@@ -186,7 +186,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
     question:
       "Are video game age ratings enough to tell parents whether a game is appropriate?",
     answer:
-      "No, and Casey’s house inverts them. By the sticker on the box she had it backwards: the cartoon game with the dancing bananas is the one that got banned, and the Mature-rated western is what came in after, on good behavior. A rating describes what is in a game. It cannot tell you what that game does to your particular child. Read the rating, then watch what you see before, during and after your kid plays, and let the two together make the call.",
+      "Ratings describe the game’s content, not necessarily its behavioral effect on an individual child. Parents should consider both the rating and what they observe before, during, and after play when making decisions. The mature-rated western involved deep exploration in a true-to-life world, while the cartoon game with dancing bananas jumped players into fast-paced, designed chaos.",
   },
 ];
 

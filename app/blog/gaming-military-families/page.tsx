@@ -152,31 +152,29 @@ const SOURCES: { text: string; cite: string; url: string }[] = [
 // either, same rule as the body prose.
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
-    question: "How do military kids keep friends when the family moves?",
+    question: "Can video games help children adjust after moving?",
     answer:
-      "In person, mostly they do not. A 2019 National Academies report puts school changes for military-connected children at 6 to 9 times between kindergarten and graduation, about 3 times more often than their civilian peers, and each move clears the local friend map. The groups that survive a move are the ones that were never tied to the place. For Casey’s boys, dropped overseas right as COVID hit, that was a game.",
+      "Games offer familiar friends, routines, and communities that remain accessible across moves. For Casey, her kids started a new game, Fortnite, and she admitted it served its purpose in giving social connection.",
   },
   {
-    question:
-      "Are online friends enough when a child loses everyone in a move?",
+    question: "Are online friends enough when a child loses everyone in a move?",
     answer:
-      "They are not a substitute for a room with people in it, and Casey would say so first. Her sharpest point in 48 minutes was that kids need real in-person spaces too, and a server is not automatically that. What an online group does is survive the move. The same people who were there before the orders dropped are still there the week after, which counts for something when everything else in a kid’s life has just reset.",
+      "They are not a substitute for a room with people in it. Casey would say so first. Her sharpest point in 48 minutes was that kids need real in-person spaces too, and a server is not automatically that. What an online group does is survive the move. The same people who were there before the orders dropped are still there the week after, which counts for something when everything else in a kid’s life has just reset.",
   },
   {
     question: "Does the military actually support gaming?",
     answer:
-      "It funds it. Three service programs came up in our conversation: the Army’s official esports team, the Navy’s, stood up by official message, and Air Force Gaming, which is open to Airmen and Guardians. Casey’s read on why they exist was one line: “because of the strategy involved.” She is also loosely connected to a research task force at her own work that teaches wargaming alongside PhDs who study games. The idea that games rehearse real judgment is old news in her world, old enough that there is a budget for it.",
+      "It funds it. Three service programs came up in our conversation: the Army’s official esports team, the Navy’s, stood up by official message, and Air Force Gaming, which is open to Airmen and Guardians. Casey’s read on why they exist was one line: “because of the strategy involved.” The idea that games rehearse real judgment is old news in her world, old enough that there is a budget for it.",
   },
   {
     question: "Do video games teach anything that carries into real life?",
     answer:
-      "Casey gave me the best framing I have heard for this, and it came from her flying rather than her parenting. Military aviators practice something called chair flying, mentally walking through every step of a flight before they ever touch the aircraft. A simulator, she says, puts your mind in the environment. Every ranked match I have played was preceded by the same mental walk-through, and I never had a name for it until she handed me one. What decides whether it carries is the game and whether an adult is coaching the reflection afterward.",
+      "Casey gave me the best framing I have heard for this, and it came from her flying rather than her parenting. Military aviators practice something called chair flying, mentally walking through every step of a flight before they ever touch the aircraft. A simulator, she says, puts your mind in the environment. Every ranked match I have played was preceded by the same mental walk-through. Games provide opportunities to practice communication, preparation, decision-making, and emotional regulation. But merely playing them does not automatically teach those skills.",
   },
   {
-    question:
-      "What should I ask before signing my kid up for a gaming program?",
+    question: "What should I ask before signing my kid up for an esports program?",
     answer:
-      "Two, and Casey softened neither. On the coaching: “Do they have training on coaching... or is it just some folks who are good at esports?” She is asking whether an adult is tracking the child rather than only the scoreboard. On the money: who pays for this, and does an academic or ethical body stand behind the program, or is the gaming industry buying a way into younger kids. I have not heard better questions from anyone.",
+      "Two, and Casey softened neither. On the coaching: “Do they have training on coaching... or is it just some folks who are good at esports?” She is asking whether an adult is tracking the child rather than only the scoreboard. On the money: who pays for this, and does an academic or ethical body stand behind the program, or is the gaming industry buying a way into younger kids.",
   },
 ];
 
