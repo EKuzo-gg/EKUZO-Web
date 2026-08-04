@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
+import { trackCtaClick } from "@/lib/analytics";
 
 export default function HomeHowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -57,7 +58,7 @@ export default function HomeHowItWorks() {
       <div className="relative w-full flex flex-col items-center" style={{ zIndex: 2 }}>
         {/* Header block — centered */}
         <div className="flex flex-col items-center text-center gap-4 max-w-[800px]">
-          <Eyebrow>HOW IT WORKS</Eyebrow>
+          <Eyebrow>Find your program</Eyebrow>
           <h2
             className="font-body font-bold text-white leading-[1]"
             style={{ fontSize: "clamp(2rem, 4.4vw, 64px)", letterSpacing: "-1.28px" }}
@@ -135,7 +136,17 @@ export default function HomeHowItWorks() {
           </div>
 
           {/* See programs CTA — red filled */}
-          <Button variant="red-filled" href="/programs">
+          <Button
+            variant="red-filled"
+            href="/programs"
+            onClick={() =>
+              trackCtaClick({
+                cta: "see_programs",
+                section: "how_it_works",
+                destination: "/programs",
+              })
+            }
+          >
             See programs
           </Button>
         </div>

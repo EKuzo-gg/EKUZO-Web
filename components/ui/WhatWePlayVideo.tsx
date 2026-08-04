@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { trackVideoPlay } from "@/lib/analytics";
 
 interface WhatWePlayVideoProps {
   src: string;
@@ -8,6 +9,11 @@ interface WhatWePlayVideoProps {
   poster?: string;
   /** Alt / aria label for accessibility */
   label?: string;
+  /** Opt-in GA `video_play` tracking. Omit and nothing is sent, which keeps
+   *  the ekuzo101 and ekuzo-camps usages unchanged. */
+  trackingId?: string;
+  /** GA `section_id` the player sits in, for cross-referencing section_view. */
+  trackingSection?: string;
 }
 
 /**
@@ -17,9 +23,27 @@ interface WhatWePlayVideoProps {
  * - Starts with sound ON when the user clicks play
  * - Shows native `<video controls>` once playing
  */
-export default function WhatWePlayVideo({ src, poster, label = "" }: WhatWePlayVideoProps) {
+export default function WhatWePlayVideo({
+  src,
+  poster,
+  label = "",
+  trackingId,
+  trackingSection,
+}: WhatWePlayVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  // onPlay re-fires on every resume; we only want the first play per mount.
+  const playFiredRef = useRef(false);
+
+  // Hangs off the DOM play event rather than the overlay button so plays
+  // started from the native controls count too. Deliberately separate from
+  // handlePlay() below, which owns the unmute + blocked-playback fallback.
+  function handlePlayEvent() {
+    setPlaying(true);
+    if (!trackingId || playFiredRef.current) return;
+    playFiredRef.current = true;
+    trackVideoPlay({ video: trackingId, section: trackingSection });
+  }
 
   function handlePlay() {
     const v = videoRef.current;
@@ -56,7 +80,7 @@ export default function WhatWePlayVideo({ src, poster, label = "" }: WhatWePlayV
         preload="metadata"
         aria-label={label}
         className="absolute inset-0 w-full h-full object-cover"
-        onPlay={() => setPlaying(true)}
+        onPlay={handlePlayEvent}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
       />

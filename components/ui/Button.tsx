@@ -35,8 +35,11 @@ export default function Button({
   const classes = `${base} ${variantClasses[variant]} ${className}`;
 
   if (href) {
+    // onClick is forwarded on the link branch too, so a client-side caller
+    // can fire an analytics event before navigation without swapping Button
+    // out for a bare <a>.
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={onClick}>
         {children}
       </Link>
     );

@@ -1,9 +1,13 @@
 # https://ekuzo.gg robots.txt
-User-agent: *
-Allow: /
 
 # Sitemap
 Sitemap: https://ekuzo.gg/sitemap.xml
+
+# ---------------------------------------------------------------------------
+# Default group — every agent that doesn't match a more specific group below.
+# ---------------------------------------------------------------------------
+User-agent: *
+Allow: /
 
 # Block internal/draft routes
 Disallow: /api/
@@ -12,8 +16,77 @@ Disallow: /_next/
 # More-specific Allow overrides the /_next/ Disallow for compliant bots.
 Allow: /_next/image
 
+# ---------------------------------------------------------------------------
+# AI crawlers, assistant fetchers, and AI-usage control tokens — all allowed
+# on purpose. EKUZO's content strategy is GEO-optimized (schema, citability,
+# llms.txt); being crawled, cited and used as training data is the goal, not
+# the risk. See docs/ai-optimization-checklist.md line 77. Do not add Disallow
+# rules here without changing that strategy first.
+#
+# WHY THE DISALLOW RULES ARE REPEATED BELOW: per RFC 9309, a crawler obeys
+# ONLY the single most specific group whose token matches its user-agent.
+# Naming these agents pulls them OUT of the `User-agent: *` group entirely,
+# so /api/ and /_next/ have to be restated or they'd start crawling both.
+#
+# Google-Extended and Applebot-Extended never fetch anything. They are opt-out
+# control tokens that gate whether already-crawled content may be used for AI
+# training and grounding; listing them with Allow: / is an explicit opt-IN.
+#
 # An AI-crawler block covering /blog/gaming-military-families and
-# /blog/should-you-ban-fortnite lived here from 2026-07-25. It was scoped to
-# those two paths for the length of a pre-publication embargo and was deleted
-# 2026-07-31 when the bundle went public. EKUZO wants AI crawlers on the whole
-# site; see GEO-CITABILITY-SCORE.md.
+# /blog/should-you-ban-fortnite lived here from 2026-07-25, scoped to those
+# two paths for a pre-publication embargo, and was deleted 2026-07-31 when
+# the bundle went public.
+# ---------------------------------------------------------------------------
+
+# OpenAI: training crawler / search index / user-initiated fetch
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+
+# Anthropic: training crawler / user-initiated fetch / search index
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+
+# Perplexity: index crawler / user-initiated fetch
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+
+# Google Gemini + AI Overviews training/grounding opt-in (control token,
+# does not crawl — Googlebot does the fetching under the * group)
+User-agent: Google-Extended
+
+# Apple Intelligence / Siri training opt-in (control token, does not crawl)
+User-agent: Applebot-Extended
+
+# Microsoft Bing + Copilot
+User-agent: Bingbot
+
+# Meta AI
+User-agent: meta-externalagent
+
+# Amazon (Alexa / Rufus / Nova)
+User-agent: Amazonbot
+
+# ByteDance (Doubao / TikTok AI)
+User-agent: Bytespider
+
+# Cohere
+User-agent: cohere-ai
+
+# Common Crawl (feeds several LLM training sets)
+User-agent: CCBot
+
+# Diffbot knowledge graph (feeds several assistants)
+User-agent: Diffbot
+
+# Timpi decentralized index
+User-agent: Timpibot
+
+# omgili / Webz.io crawl feed (resold to several LLM trainers)
+User-agent: omgili
+
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Allow: /_next/image

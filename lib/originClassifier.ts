@@ -55,6 +55,44 @@ const SOCIAL_HOSTS = [
   "pinterest.com",
 ];
 
+// AI assistants / answer engines that don't have a dedicated bucket. Matched
+// exact-or-subdomain (NOT substring) and checked BEFORE the organic + social
+// lists, because gemini and bard live under *.google.com, and the "t.co"
+// entry in SOCIAL_HOSTS is a loose substring match that also catches every
+// host ending in "t.com" (copilot.microsoft.com among them).
+const AI_OTHER_HOSTS = [
+  "gemini.google.com",
+  "bard.google.com",
+  "aistudio.google.com",
+  "copilot.microsoft.com",
+  "m365.cloud.microsoft",
+  "you.com",
+  "phind.com",
+  "poe.com",
+  "grok.com",
+  "meta.ai",
+  "mistral.ai",
+];
+
+// utm_source values assistants stamp on out-links that don't map to one of
+// the three named AI buckets. Compared lowercased + trimmed.
+const AI_OTHER_UTM_SOURCES = new Set([
+  "gemini",
+  "gemini.google.com",
+  "bard.google.com",
+  "google-gemini",
+  "copilot",
+  "copilot.microsoft.com",
+  "bingchat",
+  "you.com",
+  "phind.com",
+  "poe.com",
+  "grok",
+  "grok.com",
+  "meta.ai",
+  "mistral.ai",
+]);
+
 function hostnameOf(referer: string | null): string {
   if (!referer) return "";
   try {
@@ -86,11 +124,17 @@ export function classifyOrigin(input: {
     .toLowerCase()
     .trim();
 
-  if (utmSource === "chatgpt.com" || utmSource === "chat.openai.com")
+  if (
+    utmSource === "chatgpt.com" ||
+    utmSource === "chat.openai.com" ||
+    utmSource === "openai.com"
+  )
     return "ai_chatgpt";
   if (utmSource === "perplexity.ai") return "ai_perplexity";
   if (utmSource === "claude.ai" || utmSource === "claude.com")
     return "ai_claude";
+  // Any other assistant that self-identifies in utm_source.
+  if (AI_OTHER_UTM_SOURCES.has(utmSource)) return "ai_other";
   if (META_SOURCE_RE.test(utmSource)) return "paid_meta";
   if (PAID_MEDIUM_RE.test(utmMedium)) return "paid_other";
 
@@ -102,9 +146,10 @@ export function classifyOrigin(input: {
     if (host.includes("perplexity.ai")) return "ai_perplexity";
     if (host.includes("claude.ai") || host.includes("claude.com"))
       return "ai_claude";
-    // gemini/bard live under *.google.com — must be checked before the
-    // organic_google google.com substring match below.
-    if (/(gemini|bard)\.google\.com/.test(host)) return "ai_other";
+    // Other assistant hosts. Must stay above the organic + social lists:
+    // see the AI_OTHER_HOSTS comment for why.
+    if (AI_OTHER_HOSTS.some((h) => host === h || host.endsWith(`.${h}`)))
+      return "ai_other";
     if (host.includes("google.com") || /google\.co\.[a-z]/.test(host))
       return "organic_google";
     if (ORGANIC_OTHER_HOSTS.some((h) => host.includes(h)))
@@ -114,4 +159,15 @@ export function classifyOrigin(input: {
 
   // d) Fallback.
   return "direct";
+}
+
+/**
+ * True when the bucket is one of the AI-sourced ones. Used by the client-side
+ * referral capture in lib/attribution.ts to decide whether to emit the GA4
+ * `ai_referral` event, and safe for any future Phase 2 CAPI gating.
+ */
+export type AiOrigin = Extract<Origin, `ai_${string}`>;
+
+export function isAiOrigin(origin: Origin | null): origin is AiOrigin {
+  return origin !== null && origin.startsWith("ai_");
 }

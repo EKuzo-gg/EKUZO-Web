@@ -80,7 +80,7 @@ const coachCards = [
     name: 'SEBASTIEN "ZZLEGENDARY" DEMONTIGNY',
     role: "Head Coach // Professional Esports Coach",
     bio: "Coached at professional esports teams like Dignitas and Evil Geniuses and has 4+ years experience working in youth esports. He knows what it takes to bring out the best in young players.",
-    image: "/images/coach-sebastien-ZzLegendary.png",
+    image: "/images/coach-sebastien-ZzLegendary.webp",
     objectPosition: "center top",
   },
   // Nuri's card carried verbatim from camps per Jamie 2026-07-15. She is
@@ -89,7 +89,7 @@ const coachCards = [
     name: 'NURI "TEEMO TIME" JE',
     role: "Coach // Diamond Support",
     bio: "Community manager for the University of Texas at Austin and Alienware Ambassador. Nuri brings knowledge from teaching in public schools to understand how children can grow beyond what is taught in schools.",
-    image: "/images/coach-nuri-je.png",
+    image: "/images/coach-nuri-je.webp",
     objectPosition: "center 60%",
   },
 ];
@@ -446,6 +446,7 @@ export default function Ekuzo101LandingPage() {
                         src={coach.image}
                         alt={coach.name}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                         className="object-cover transition-transform duration-300 lg:group-hover:scale-105"
                         style={{ objectPosition: coach.objectPosition }}
                       />

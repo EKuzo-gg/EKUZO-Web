@@ -5,6 +5,94 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — August 4, 2026 (homepage story rebuild: Rive out, six sections in, measurement wired)
+
+The homepage was not saying what EKUZO does, and its largest section was the least
+informative one on the page. Replaced the 360vh Rive ecosystem block with static
+sections lifted from `/programs/ekuzo101`. Kept the hero, "2 ways to play and learn",
+"what parents are saying", and the enroll banner untouched.
+
+**New band order:** red hero -> grey -> white -> purple -> black -> grey -> black -> white -> red.
+No two adjacent bands share a colour; every seam is a torn divider.
+
+**Sections added** (all lifted from ekuzo101, copy cut roughly 40% for homepage):
+- "What progression looks like" (white) - the 4 progression rows, eyebrow "How it works"
+- "For players" (purple) - kid-voice band carrying the crew mechanic, the League clip,
+  the tech collage, and a compressed Fortnite/Roblox/Rocket League bridge
+- Coaches (recoloured from black to grey so it does not collide with the black band above)
+- "No toxic lobbies. Ever." zero-tolerance (black)
+
+**Copy changes:**
+- Grey band H2 is now "Structured gaming with a team, a coach, and a season around it."
+  (was "Growth through play"), which finishes the sentence the hero starts. Sub-paragraph
+  dropped; the H2 absorbed it.
+- "Structured practice" -> "Deliberate practice" (the old label repeated the new H2).
+- "For gamers" -> "For players". Karlin wants distance from "gamer" in parent-facing copy.
+  The hero still uses it; that is a site-wide decision still open.
+- `HomeHowItWorks` eyebrow "HOW IT WORKS" -> "Find your program". There were two
+  "How it works" pills on the page, and that band's job is routing to /programs.
+- Program-agnostic competition language: the purple lead and progression step 04 both
+  said "casted bracket", which is not true of every program. Now "a showcase your team
+  will be proud of" and "real competition against other EKUZO squads".
+
+**Payload:** initial load ~10.25 MB -> ~2.72 MB (-73%). The Rive removal accounts for
+6.6 MB of .riv, 1.8 MB of `rive.wasm`, and ~80 KB gzipped of Rive JS. The League clip mp4
+is `preload="metadata"` click-to-play, so it is not in the initial load.
+
+**The Rive is NOT deleted.** It still renders on /parents, /programs, /programs/ekuzo100,
+/programs/ekuzo-teams, /schools. The goal is to kill it everywhere; that work is logged as
+entry 14 in `docs/QA-FLAGGED-ISSUES.md` with the file/line list and a do-not-delete asset
+list. `lib/riveRuntime.ts` and `public/rive.wasm` outlive it regardless, because
+`ProgramsHeroRive` still uses them.
+
+**Image cleanup (site-wide, not just homepage):**
+- `coach-nuri-je.png` 4.6 MB -> `.webp` 159 KB; `coach-sebastien-ZzLegendary.png` 1.4 MB
+  -> `.webp` 79 KB. Both were photographs stored as PNG. 9 references updated across
+  ekuzo101, ekuzo-camps, swamp, `lib/schema.ts`, and the homepage. Superseded PNGs moved
+  to `_to_delete/images/` (the file bridge cannot delete; remove them manually).
+- Added missing `sizes` to the coach `fill` images on the homepage AND on ekuzo101 and
+  ekuzo-camps, which had the same bug. Roughly 308 KB -> 96 KB on each of those pages.
+- Generated `public/videos/league-of-legends-camp-poster.jpg` (720x1280, 27 KB) with
+  ffmpeg. Used as both the video element's `poster` and the new schema thumbnail. The
+  player previously showed a black box before play.
+
+**SEO parity:** metadata restored verbatim from the old page (plus `siteName` and `locale`,
+which the page-level `openGraph` block had been dropping from the layout). The 9-node
+`testimonialVideoGraph` JSON-LD is re-rendered; the homepage is its only emitter site-wide.
+Coach card headings fixed from h4 to h3 (the h2 -> h4 skip came over from ekuzo101).
+Progression section id is `#progression`, not `#how-it-works`, so the anchor matches the
+band that actually carries that eyebrow.
+
+**Measurement wired (see `docs/homepage-rebuild-baseline-2026-08-04.md`):**
+- `public/robots.txt` now names the AI crawlers explicitly (GPTBot, ClaudeBot,
+  PerplexityBot, Google-Extended, Applebot-Extended, and 11 more) instead of relying on
+  `User-agent: *`. Note the RFC 9309 subtlety: naming an agent pulls it out of the `*`
+  group entirely, which is why `/api/` and `/_next/` are restated in the AI group.
+- New GA4 events: `section_view` (9 homepage bands, 1s dwell in the middle 50% of
+  viewport), `video_play`, `cta_click`, and `ai_referral`.
+- `ai_referral` closes the gap in the LLM-tagging work: `middleware.ts` has written
+  `ekuzo_origin` since 2026-05-17, but only surfaced it at purchase time, so we had a
+  numerator and no denominator. The client now classifies sessions with the SAME
+  `classifyOrigin()` the middleware uses, so a session and a purchase can never be
+  bucketed differently.
+- Fixed a real bug in `lib/originClassifier.ts` while in there: `SOCIAL_HOSTS` contains
+  "t.co" and was matched with `host.includes()`, so every host ending in "t.com" matched.
+  `copilot.microsoft.com` was classifying as `social`. AI hosts now match exact-or-subdomain
+  and are checked first.
+- New `leagueGameplayVideo` VideoObject schema on the homepage.
+
+**Not done, deliberately:** the universal footer (next session). `next build` was not run
+from this session because the file bridge cannot unlink `.next/BUILD_ID`; `tsc --noEmit`
+and `eslint` both pass clean on every touched file. Run the build before deploying.
+
+**Also flagged, not fixed:** the `origin` data collected since May has never been read; the
+`ekuzo-purchases` sheet may be silently dropping the `origin` column (the Apps Script
+appends by header name and the spec's canonical header row omits it); and
+`app/api/ekuzo101/register/route.ts` reads `origin` from the request body instead of the
+cookie while also mismatching camelCase/snake_case on the UTM block, so every pilot
+registration writes a blank attribution row. All three are in the baseline doc.
+
+---
 ## Jamie — August 1, 2026 (friend map: explicit expand on desktop)
 
 The inlined "continuity of play" graphic renders into the article's prose column at roughly
@@ -234,6 +322,18 @@ for where the topic allows, but headings are the article and the article is lock
 - **101 register time trim (Karlin feedback):** session time appeared 6× on the register page; now exactly 2× (hero subhead + WeekPicker banner strip). Section intro drops its time sentence including "After dinner, wherever you live"; picker legend now "Session days: Tuesday & Thursday"; sidebar card "Tuesday & Thursday sessions"; What-you-get item "2 sessions a week (Tue + Thu)". `docs/ekuzo101-pilot/copy-deck.md` §2 amended with a dated note so the deck stays source of truth; copy-source comment at top of register page.tsx updated.
 
 **Next:** push dev, fast-forward main to ship both to prod.
+
+## Jamie — July 16, 2026 (Teams register: availability matrix + standalone quick wins)
+
+**What:** Fall-readiness pass on `/programs/ekuzo-teams/register` (Cowork session). Full audit first (`docs/teams-fall-readiness/00-audit-2026-07-15.md` — graded, 24 defects, feeds the rest of the fall work), then the register-page scope built in-session. Landing page deliberately deferred.
+
+- **`components/register/AvailabilityMatrix.tsx` (new):** per-gamer Mon–Fri tri-state availability (Can't / Works / Prefer, default Works so untouched = "any weekday"), live interpretation line that plays back how we'll read it, time-of-day pills (after school / evening / either — "during school" deliberately excluded; homeschool demand goes through the alt-ed campaign lane). Validation: ≥2 usable days per gamer. Design synthesized from Jamie's Variant explorations (constraint-guarantee copy, interpretation banner, severity-ordered white buttons).
+- **Data flow (zero backend changes):** serialized human-readable (`Prefer: Tue, Thu · OK: Mon, Fri · No: Wed · Evening`) into the dormant per-gamer `timePreference` field → existing gamer blob → webhook's existing mapping → the sheet's existing `time_preference` column (canonical key 16 of 29). No webhook, Apps Script, sheet-header, or Beehiiv changes (per the 2026-07-15 platform split, schedule data goes to Sheets, not Beehiiv). Route hardening only: 100-char cap on `timePreference` (`app/api/teams/register/route.ts`) so the 500-char blob can't truncate mid-JSON.
+- **Register page quick wins (audit A-1/A-2-adjacent/B-1/B-12 etc.):** hero subhead now carries the offer (semester, 2x/week, showcase, Aug 31 start) + "New to EKUZO Teams? Learn more" escape-hatch link (101/Caroline pattern, new tab); `trackViewContent` fires on mount (ViewContent parity with camps' 2026-05-31 fix); semester card explains the schedule model (windows + "your coach confirms"); PostPaymentSteps rewritten to the availability story ("a real person builds your gamer's team from the availability you marked"); em-dash sweep (payment cards, CTA button, sidebar); "EKUZOTeams" → "EKUZO Teams" (join banner); sidebar bullets canon-fixed ("10 to 12 player team", "tournament and showcase" — "casted bracket" wasn't canon).
+- **QA:** console-error-free on fresh load (hydration gate), matrix states + personalization + interpretation line verified in browser at 1440px. **Deferred to human pass:** real-device mobile feel (extension screenshots pin to desktop size), e2e test payment.
+- **⚠️ Aaron:** register page + new `components/register/AvailabilityMatrix.tsx` are your lane — built to the locked interaction design, taste pass is yours. Hero eyebrow/title untouched; subhead is now a ReactNode block. Known open: hero CTA on the Teams LANDING page still lacks `?cta=` + TrackedRegisterLink (audit A-2) — left for the landing-page session.
+
+**Next:** teams landing page session (pricing block, coaches section, canon sync — audit §9); Karlin heads-up that `time_preference` column now populates; consider availability capture in `/api/teams/abandoned` payload (currently not captured for drop-offs).
 
 ## Jamie — July 15, 2026 (post-launch: Caroline feedback pass on 101 register + landing)
 

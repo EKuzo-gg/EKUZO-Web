@@ -26,7 +26,7 @@ const CARD_CLIP =
 const SEBASTIEN = {
   name: 'SEBASTIEN "ZZ" DEMONTIGNY',
   role: "EKUZO Experiential Director",
-  image: "/images/coach-sebastien-ZzLegendary.png",
+  image: "/images/coach-sebastien-ZzLegendary.webp",
   objectPosition: "center top",
   wiki: "https://lol.fandom.com/wiki/Zz_(Sebastien_Demontigny)",
   creds: [

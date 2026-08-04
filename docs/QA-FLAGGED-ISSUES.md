@@ -173,3 +173,48 @@ delivery.
 
 Not a squad_link bug. Logged here so it's not forgotten in the pre-
 launch checklist.
+
+---
+
+## 14. Rive ecosystem animation: retire it site-wide
+**Scope:** Universal
+**Priority:** Medium
+**Logged:** 2026-08-04 (homepage story rebuild session)
+
+The scroll-driven Rive ecosystem animation (`components/sections/EcosystemAnimation.tsx`)
+is being removed from the homepage in this session and replaced with static
+sections. **The goal is to kill it everywhere.** It was not removed from the
+other pages in this session, so it stays live on five routes:
+
+| Route | File | Line |
+|---|---|---|
+| `/parents` | `app/parents/page.tsx` | 278 |
+| `/programs` | `app/programs/page.tsx` | 133 |
+| `/programs/ekuzo100` | `app/programs/ekuzo100/page.tsx` | 235 |
+| `/programs/ekuzo-teams` | `app/programs/ekuzo-teams/page.tsx` | 396 |
+| `/schools` | `app/schools/page.tsx` | 177 |
+
+Why it goes: the section is a 360vh sticky-scroll block that has never been
+reliably calibrated (see WORKLOG entries on the scroll-math rewrites, the
+git-LFS pointer breakage, and the uncalibrated `PROGRESS_MAX`), and it costs
+roughly 8.4 MB of initial payload per page (`ecosystem-desktop.riv` 6.6 MB /
+`ecosystem-mobile.riv` 6.1 MB, plus `public/rive.wasm` 1.8 MB, plus about
+80 KB gzipped of Rive JS). Removing it from the homepage alone cut that
+page's initial payload by roughly 73%.
+
+**Do not delete any asset until all five routes above are converted.**
+Still required while any consumer remains:
+- `components/sections/EcosystemAnimation.tsx`
+- `public/animations/ecosystem-desktop.riv`, `ecosystem-mobile.riv`
+- `lib/riveRuntime.ts` (also used by `components/sections/ProgramsHeroRive.tsx`)
+- `public/rive.wasm` (sole reference is `lib/riveRuntime.ts`)
+
+Note that `lib/riveRuntime.ts` and `public/rive.wasm` survive even after all
+five Ecosystem consumers are gone, because `ProgramsHeroRive` (used by
+`app/programs/page.tsx:104`, asset `public/animations/programs-hero.riv`)
+still needs them. Retiring the WASM runtime entirely is a separate decision
+about the Programs hero.
+
+Each of the five routes needs a replacement section, not just a deletion, or
+the page loses a band and its torn-paper seam rhythm breaks. See
+`app/page.tsx` after this session for the pattern used on the homepage.

@@ -60,7 +60,7 @@ export const coachSebastienSchema = {
     "Professional esports coach who has coached at tier-1 organizations including Dignitas and Evil Geniuses. Elite-level competitive player. 4+ years experience specifically in youth esports coaching. Leads EKUZO's coaching staff and trains every coach on the team.",
   sameAs: "https://lol.fandom.com/wiki/Zz_(Sebastien_Demontigny)",
   worksFor: { "@id": ORG_ID },
-  image: `${SITE}/images/coach-sebastien-ZzLegendary.png`,
+  image: `${SITE}/images/coach-sebastien-ZzLegendary.webp`,
 };
 
 export const coachNuriSchema = {
@@ -72,7 +72,7 @@ export const coachNuriSchema = {
     "Diamond-ranked Support player (top ~1% of League of Legends players). Community manager at the University of Texas at Austin and Alienware Ambassador. Background in public school teaching. One of EKUZO's cadre of collegiate esports athlete coaches.",
   sameAs: "https://www.linkedin.com/in/nuri-je/",
   worksFor: { "@id": ORG_ID },
-  image: `${SITE}/images/coach-nuri-je.png`,
+  image: `${SITE}/images/coach-nuri-je.webp`,
 };
 
 // ─── Author Person schemas (blog bylines) ──────────────────────────────────
@@ -601,6 +601,29 @@ export function buildVideoObjectSchema({
     transcript,
   };
 }
+
+// ─── VideoObject for the League of Legends gameplay clip ───────────────────
+// Rendered on the homepage (app/page.tsx, "For players" band). The same clip
+// also appears on /programs/ekuzo-camps and /programs/ekuzo101; the canonical
+// mainEntityOfPage is the homepage because that is the highest-authority URL
+// carrying it. Gameplay footage with no speech, so there is no transcript
+// property: `description` carries the crawlable text instead.
+export const leagueGameplayVideo = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "@id": `${SITE}/#league-gameplay-video`,
+  name: "League of Legends gameplay at EKUZO",
+  description:
+    "Gameplay from an EKUZO coached session. Students train on League of Legends: five players, defined roles, a shared objective, and a playbook that changes every match. Sessions run in private, EKUZO-moderated servers with a coach on voice, never in public matchmaking.",
+  thumbnailUrl: `${SITE}/videos/league-of-legends-camp-poster.jpg`,
+  uploadDate: toSchemaDateTime("2026-04-14"),
+  duration: "PT22S",
+  contentUrl: `${SITE}/videos/league-of-legends-camp.mp4`,
+  publisher: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE}/` },
+  inLanguage: "en-US",
+  isFamilyFriendly: true,
+};
 
 // ─── VideoObject schemas for the 9 testimonial videos ──────────────────────
 // Transcripts come from lib/testimonialTranscripts.ts (plain string literals,
