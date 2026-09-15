@@ -382,13 +382,13 @@ export default function PostGamingStudy137() {
               self-reported, read the paper. They were right.)
             </p>
             <p>
-              <strong>The vindicated, one in six.</strong> &ldquo;A win for
+              <strong>The vindicated, one in six.</strong>{" "}&ldquo;A win for
               gamers.&rdquo; No one was arguing; they were updating how they
               felt about themselves. That was me at fourteen, with no one to
               say it to.
             </p>
             <p>
-              <strong>The permission seekers, one in ten.</strong> Taking the
+              <strong>The permission seekers, one in ten.</strong>{" "}Taking the
               post straight to whoever had been telling them to stop. My mom
               didn&apos;t have a study. She had a kid on a team, and that
               turned out to be enough.
@@ -445,7 +445,7 @@ export default function PostGamingStudy137() {
             <p>Not my specialty. My read, checked against the paper.</p>
             <ul>
               <li>
-                <strong>True.</strong> 923 adults, average age 55. Gamers at
+                <strong>True.</strong>{" "}923 adults, average age 55. Gamers at
                 three-plus hours a week scored higher on memory, reasoning and
                 processing speed; verbal ability, no difference (
                 <a
@@ -458,14 +458,14 @@ export default function PostGamingStudy137() {
                 ).
               </li>
               <li>
-                <strong>True, and the half no one shared.</strong> Gaming had
+                <strong>True, and the half no one shared.</strong>{" "}Gaming had
                 no association with depression or anxiety. Exercise did, and
                 had none with the cognitive scores. That&apos;s the half I
                 built around: kids in my sessions do pushups and drink water
                 before ranked.
               </li>
               <li>
-                <strong>True, and why I take it seriously.</strong> The senior
+                <strong>True, and why I take it seriously.</strong>{" "}The senior
                 author ran the 2010 Nature study that found brain-training
                 games don&apos;t transfer (
                 <a
@@ -478,7 +478,7 @@ export default function PostGamingStudy137() {
                 ). Hard to convince.
               </li>
               <li>
-                <strong>Dubious.</strong> &ldquo;13.7 years younger.&rdquo;
+                <strong>Dubious.</strong>{" "}&ldquo;13.7 years younger.&rdquo;
                 It&apos;s from a 2024{" "}
                 <a
                   href="https://news.westernu.ca/2024/10/brain-body-study-results/"
@@ -497,14 +497,14 @@ export default function PostGamingStudy137() {
                 check.)
               </li>
               <li>
-                <strong>Needs explanation.</strong> Cross-sectional and
+                <strong>Needs explanation.</strong>{" "}Cross-sectional and
                 self-reported: it can&apos;t say whether gaming builds the
                 skill or skilled people game more. Volunteers, mostly
                 college-educated. Three of five authors work for Creyos, whose
                 tests were used; disclosed, and Canada&apos;s CIHR funded it.
               </li>
               <li>
-                <strong>About kids.</strong> Not in this study. The one big
+                <strong>About kids.</strong>{" "}Not in this study. The one big
                 study of nine- and ten-year-olds (three-plus hours a day) found
                 somewhat better inhibition and working memory alongside higher
                 attention-problem and depression scores; it was retracted and
