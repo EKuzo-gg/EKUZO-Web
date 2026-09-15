@@ -60,7 +60,7 @@ const LOLCAT_REEL_TRANSCRIPT =
   "When was the last time you got an email that made you cry? For me, it was last week. I got an email from one of our parents who has a teenage gamer, previously known as Kick6767, more recently known as Lolcat. And the summary of the email is that he just graduated from elementary school. He's now going to a private school for sixth grade, and as a part of that introduction he had to write an entrance writing assignment. The writing assignment was: what was your greatest achievement ever? To remind you, this is a kid that does a lot of extracurriculars. He fences, he plays lacrosse, he also plays flag football. But what he decided to write as his greatest achievement ever was actually about playing mid lane in League of Legends. Lolcat has been in our system for about a year now, and for him to write about League of Legends being his greatest achievement ever, and him transitioning to mid lane, has got to be one of the most fulfilling and wholesome moments. It's one of those moments where we are really reminded of why we do what we do, and how special what we do is to kids. Ultimately, oftentimes it is the most important thing to them in life. We're just really grateful, and we're glad that we could be a part of their lives to that extent. And it's a great reminder of the responsibility that we hold as coaches, and our role in their lives in supporting their interests and their passion for video games. So if you're a mom or a dad who loves video games, or maybe even if you don't love video games but your kid does, DM us. We're here to help.";
 
 // Public replies, attributed by handle, likes as shown when read on Sep 14
-// and 15, 2026. Never screenshots. Register row 15 (Brockie), 16 (the read),
+// and 15, 2026 (Brockie re-read the evening of Sep 15). Never screenshots. Register row 15 (Brockie), 16 (the read),
 // 17 (the transition-off question).
 const CAMP_CARDS: ReplyCard[] = [
   {
@@ -70,7 +70,7 @@ const CAMP_CARDS: ReplyCard[] = [
     featured: true,
     big: true,
     quote: "The kind of gaming probably matters as much as the hours.",
-    likes: "863 likes at the time",
+    likes: "1.1K likes at the time",
   },
   {
     variant: "green",
@@ -358,7 +358,7 @@ export default function PostGamingStudy137() {
                 &ldquo;The kind of gaming probably matters as much as the
                 hours.&rdquo;
               </p>
-              <p>@CraigBrockie, 863 likes when I read it on September 14</p>
+              <p>@CraigBrockie, 1.1K likes when I read it on September 15</p>
             </blockquote>
             <p>
               That&apos;s my whole worldview, from a stranger. Every parent
