@@ -5,6 +5,43 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude) — September 15, 2026 (new blog post: the "13.7 years younger" gaming study, Karlin byline)
+
+Newsjack answer page for the September 13 to 15 gaming-cognition wave (Luu post, two Elon quotes,
+30M+ views by Sep 15). Branch `blog/gaming-study-13-7`, off `main` because `dev` and `main` were
+level. Not pushed, not merged. Draft of record and register map:
+`EKUZO/Marketing/content-drafts/2026-09-15-blog-draft-gaming-study-everyone-shared.md`.
+
+**Added**
+- `app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx`: same skeleton as the
+  Karlin posts (Nav, header, hero, BlogPostBody author="karlin-oei", Keep Reading, FooterBanner).
+  Schemas: BlogPosting, breadcrumb, FAQPage (5 Qs from one FAQ_ITEMS source), VideoObject for the
+  June Lolcat reel (parent consent on file per Jamie). SEO title carries the query ("Is gaming good
+  for your brain?"); the H1 keeps the newsjack.
+- `components/blog/ReplyQuoteCards.tsx`: prop-driven version of QuoteCards (same palette and
+  layout) so any "we read the thread" post can pass its own cards. QuoteCards.tsx untouched.
+- `public/research/gaming-cognition-reanalysis.py` + `-output.txt`: the corrected reanalysis of
+  the paper's public dataset (CC0), linked from the post. Reproduces the verified numbers; no IQ
+  conversion; every years figure carries its anchor age and model.
+
+**Edited (inbound links, the ai-optimization gate of five)**
+- `app/blog/page.tsx`: new entry at the top of `posts`, `featured: false`. Jamie decides whether
+  it takes the featured slot from the fortnite piece for launch week.
+- One closing paragraph with a link, inserted before `</BlogPostBody>`, in:
+  `what-your-kids-gaming-is-telling-you`, `league-of-legends-youth-development`,
+  `should-you-ban-fortnite`, `what-homeschool-parents-taught-us-about-gaming`. Copy only; no
+  layout changes. Aaron: these are in your lane by path, content-only by intent.
+
+**Checks:** `tsc --noEmit` clean, eslint clean on all touched files. No `next build` run.
+
+**Missing before ship**
+- Hero `/images/gaming-study-13-7-hero.jpg` (renders at 1232x520, object-cover) and card
+  `/images/gaming-study-13-7-card.jpg` (1200x630). Both referenced, neither exists.
+- Publish date is set to 2026-09-16; change if it slips.
+- Karlin's read of the copy (it ships under his name).
+- The tagged link in the X bio and the "how did you hear about us" field on the inquiry form, so
+  the follow lane is measurable (not in this branch).
+
 ## Jamie — August 4, 2026 (homepage story rebuild: Rive out, six sections in, measurement wired)
 
 The homepage was not saying what EKUZO does, and its largest section was the least

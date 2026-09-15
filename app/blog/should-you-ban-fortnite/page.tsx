@@ -708,6 +708,15 @@ export default function PostShouldYouBanFortnite() {
                   </li>
                 ))}
               </ul>
+              <p>
+                Related: when a viral study told parents gaming might be good
+                for the brain, the question parents actually asked in the
+                replies was how to get a kid off the game without the attitude.{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  Karlin&apos;s read of the study and the thousand replies
+                </Link>
+                .
+              </p>
           </BlogPostBody>
         </div>
       </article>

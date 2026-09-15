@@ -403,6 +403,14 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
                 esports scholarships, and now builds the coaching system he
                 wishes he&apos;d had as a kid.
               </p>
+              <p>
+                The sibling to this piece: in September 2026 I read a thousand
+                replies to a viral study about gamers and cognition.{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  Same method, a different crowd, the same three camps
+                </Link>
+                .
+              </p>
           </BlogPostBody>
         </div>
       </article>

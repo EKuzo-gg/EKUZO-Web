@@ -14,6 +14,21 @@ export const metadata = {
 
 const posts = [
   {
+    slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
+    title:
+      "The gaming study everyone shared this week, and what it means for your twelve-year-old",
+    date: "September 16, 2026",
+    author: "Karlin Oei",
+    category: "Perspective",
+    excerpt:
+      "A doctor's one-liner about a gaming study reached 30M+ people. Karlin read a thousand of the replies. The one that mattered wasn't about the study.",
+    // TODO(assets): card image missing; see WORKLOG 2026-09-15.
+    image: "/images/gaming-study-13-7-card.jpg",
+    // Not featured yet. Jamie decides whether it takes the slot from the
+    // fortnite piece for launch week.
+    featured: false,
+  },
+  {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
     date: "May 24, 2026",

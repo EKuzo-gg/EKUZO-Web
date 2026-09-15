@@ -1,0 +1,448 @@
+
+==============================================================================
+0. DATA, VARIABLES AND GROUP DEFINITIONS
+==============================================================================
+File: brainbodystudy-preprocessed-data-final.csv
+Rows: 923 (paper's analytic N = 923)
+Age: mean 55.24, SD 14.38, range 18 to 88
+
+Education, binary post-secondary complete: 769 of 923 (83.3%). Paper's Table 1 reports 83%.
+Gender (reference = male): female 563, male 351, other 9
+
+Pre-existing health condition covariate FOUND in the preprocessed file as 'pre_existing_health_condition'.
+  Positive: 200 of 923.
+  Reconstruction from dx_diabetes, dx_obesity, dx_hypertension, dx_stroke, dx_heart_attack, dx_cardiac_problems, dx_concussion
+  reproduces it exactly: True
+
+Group definitions and counts:
+  authors' deposited gamer_type column (paper definition)
+    Non 316, Infrequent 378, Frequent 229
+  press release: 5+ hrs/week on a single genre (code >= 4)
+    Non 368, Infrequent 373, Frequent 182
+  literal reconstruction: 3+ hrs/week in any genre (code >= 3)
+    Non 368, Infrequent 270, Frequent 285
+
+Caveats on the group variable:
+  1. The authors' deposited gamer_type column cannot be reproduced from the
+     eight genre items in this file. 52 participants report 0 hours across
+     all eight past-year genre items yet are classified as gamers by
+     gamer_type, so that column is derived partly from questionnaire items
+     that were not deposited in the preprocessed file. Both the authors'
+     column and the two reconstructions are therefore reported throughout.
+  2. The paper's Table 2 text gives the frequent-gamer count as 239 (24.8%).
+     24.8% of 923 is 229, which is exactly what the deposited column gives.
+     The percentage and the deposited column agree with each other; the
+     printed count of 239 does not agree with either.
+
+==============================================================================
+A. GROUP DIFFERENCES ON THE FIVE STANDARDIZED COMPOSITES
+==============================================================================
+All composites are scaled to mean 0 and SD 1 within this 923-person
+sample, so every beta below is in within-sample SD units. Reference group is
+Non-gamer. p values are uncorrected; the paper judged significance against
+p < 0.05 Bonferroni-corrected for 14 comparisons, i.e. alpha = 0.00357, which
+is marked in the last column.
+
+------------------------------------------------------------------------------
+Covariate spec PAPER: paper's covariate set: age, gender, binary post-secondary education, binary pre-existing health condition
+  formula RHS: group + age_c + C(gender) + edu_post_secondary + pre_existing_health_condition
+------------------------------------------------------------------------------
+
+  Group definition: authors' deposited gamer_type column (paper definition)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3789      [0.213, 0.544]    8.03e-06       yes
+  STM               Infrequent vs Non       0.2053      [0.067, 0.343]    3.59e-03        no
+  reasoning         Frequent vs Non         0.3667      [0.204, 0.529]    1.07e-05       yes
+  reasoning         Infrequent vs Non       0.1348     [-0.001, 0.270]    5.12e-02        no
+  verbal            Frequent vs Non         0.0591     [-0.119, 0.238]    5.16e-01        no
+  verbal            Infrequent vs Non      -0.0676     [-0.216, 0.081]    3.73e-01        no
+  processing_speed  Frequent vs Non         0.3610      [0.213, 0.509]    2.04e-06       yes
+  processing_speed  Infrequent vs Non       0.1864      [0.063, 0.310]    3.14e-03       yes
+  overall           Frequent vs Non         0.4813      [0.336, 0.626]    1.28e-10       yes
+  overall           Infrequent vs Non       0.1869      [0.066, 0.308]    2.49e-03       yes
+
+  Group definition: press release: 5+ hrs/week on a single genre (code >= 4)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.4296      [0.261, 0.598]    6.58e-07       yes
+  STM               Infrequent vs Non       0.1787      [0.046, 0.312]    8.46e-03        no
+  reasoning         Frequent vs Non         0.3542      [0.188, 0.520]    3.04e-05       yes
+  reasoning         Infrequent vs Non       0.1566      [0.026, 0.288]    1.91e-02        no
+  verbal            Frequent vs Non         0.0246     [-0.158, 0.207]    7.91e-01        no
+  verbal            Infrequent vs Non      -0.0383     [-0.182, 0.106]    6.02e-01        no
+  processing_speed  Frequent vs Non         0.3984      [0.248, 0.549]    2.57e-07       yes
+  processing_speed  Infrequent vs Non       0.2147      [0.096, 0.334]    4.12e-04       yes
+  overall           Frequent vs Non         0.4899      [0.342, 0.638]    1.34e-10       yes
+  overall           Infrequent vs Non       0.1951      [0.078, 0.312]    1.08e-03       yes
+
+  Group definition: literal reconstruction: 3+ hrs/week in any genre (code >= 3)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3285      [0.181, 0.476]    1.32e-05       yes
+  STM               Infrequent vs Non       0.1836      [0.039, 0.328]    1.27e-02        no
+  reasoning         Frequent vs Non         0.3184      [0.174, 0.463]    1.69e-05       yes
+  reasoning         Infrequent vs Non       0.1197     [-0.022, 0.261]    9.78e-02        no
+  verbal            Frequent vs Non         0.0256     [-0.133, 0.184]    7.51e-01        no
+  verbal            Infrequent vs Non      -0.0616     [-0.217, 0.094]    4.37e-01        no
+  processing_speed  Frequent vs Non         0.3377      [0.206, 0.469]    5.51e-07       yes
+  processing_speed  Infrequent vs Non       0.2059      [0.077, 0.335]    1.77e-03       yes
+  overall           Frequent vs Non         0.4067      [0.277, 0.536]    9.84e-10       yes
+  overall           Infrequent vs Non       0.1678      [0.041, 0.295]    9.55e-03        no
+
+------------------------------------------------------------------------------
+Covariate spec NO_HEALTH: age + gender + binary education only (health condition dropped)
+  formula RHS: group + age_c + C(gender) + edu_post_secondary
+------------------------------------------------------------------------------
+
+  Group definition: authors' deposited gamer_type column (paper definition)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3707      [0.206, 0.536]    1.18e-05       yes
+  STM               Infrequent vs Non       0.1991      [0.061, 0.337]    4.64e-03        no
+  reasoning         Frequent vs Non         0.3684      [0.206, 0.530]    9.13e-06       yes
+  reasoning         Infrequent vs Non       0.1361      [0.001, 0.271]    4.83e-02        no
+  verbal            Frequent vs Non         0.0365     [-0.143, 0.215]    6.89e-01        no
+  verbal            Infrequent vs Non      -0.0848     [-0.234, 0.064]    2.65e-01        no
+  processing_speed  Frequent vs Non         0.3629      [0.215, 0.511]    1.67e-06       yes
+  processing_speed  Infrequent vs Non       0.1878      [0.065, 0.311]    2.84e-03       yes
+  overall           Frequent vs Non         0.4677      [0.323, 0.613]    4.01e-10       yes
+  overall           Infrequent vs Non       0.1766      [0.056, 0.298]    4.28e-03        no
+
+  Group definition: press release: 5+ hrs/week on a single genre (code >= 4)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.4184      [0.251, 0.586]    1.15e-06       yes
+  STM               Infrequent vs Non       0.1731      [0.040, 0.306]    1.06e-02        no
+  reasoning         Frequent vs Non         0.3557      [0.191, 0.521]    2.57e-05       yes
+  reasoning         Infrequent vs Non       0.1573      [0.027, 0.288]    1.83e-02        no
+  verbal            Frequent vs Non        -0.0042     [-0.186, 0.178]    9.64e-01        no
+  verbal            Infrequent vs Non      -0.0526     [-0.197, 0.092]    4.75e-01        no
+  processing_speed  Frequent vs Non         0.3997      [0.250, 0.550]    2.04e-07       yes
+  processing_speed  Infrequent vs Non       0.2154      [0.097, 0.334]    3.83e-04       yes
+  overall           Frequent vs Non         0.4717      [0.324, 0.619]    5.71e-10       yes
+  overall           Infrequent vs Non       0.1861      [0.069, 0.303]    1.85e-03       yes
+
+  Group definition: literal reconstruction: 3+ hrs/week in any genre (code >= 3)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3182      [0.172, 0.465]    2.21e-05       yes
+  STM               Infrequent vs Non       0.1796      [0.035, 0.324]    1.48e-02        no
+  reasoning         Frequent vs Non         0.3195      [0.176, 0.463]    1.41e-05       yes
+  reasoning         Infrequent vs Non       0.1201     [-0.021, 0.262]    9.61e-02        no
+  verbal            Frequent vs Non        -0.0018     [-0.161, 0.157]    9.82e-01        no
+  verbal            Infrequent vs Non      -0.0723     [-0.229, 0.084]    3.64e-01        no
+  processing_speed  Frequent vs Non         0.3391      [0.208, 0.470]    4.28e-07       yes
+  processing_speed  Infrequent vs Non       0.2064      [0.078, 0.335]    1.70e-03       yes
+  overall           Frequent vs Non         0.3894      [0.260, 0.518]    4.36e-09       yes
+  overall           Infrequent vs Non       0.1610      [0.034, 0.288]    1.30e-02        no
+
+------------------------------------------------------------------------------
+Covariate spec EDU5_NO_HEALTH: age + gender + 5-level education factor, no health condition (sensitivity check only, not the paper's spec)
+  formula RHS: group + age_c + C(gender) + C(education)
+------------------------------------------------------------------------------
+
+  Group definition: authors' deposited gamer_type column (paper definition)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3615      [0.196, 0.527]    2.06e-05       yes
+  STM               Infrequent vs Non       0.1897      [0.052, 0.328]    7.19e-03        no
+  reasoning         Frequent vs Non         0.3715      [0.209, 0.534]    8.20e-06       yes
+  reasoning         Infrequent vs Non       0.1451      [0.009, 0.281]    3.60e-02        no
+  verbal            Frequent vs Non         0.0352     [-0.144, 0.215]    7.01e-01        no
+  verbal            Infrequent vs Non      -0.0805     [-0.230, 0.069]    2.91e-01        no
+  processing_speed  Frequent vs Non         0.3604      [0.212, 0.509]    2.21e-06       yes
+  processing_speed  Infrequent vs Non       0.1879      [0.064, 0.312]    2.99e-03       yes
+  overall           Frequent vs Non         0.4636      [0.318, 0.609]    6.23e-10       yes
+  overall           Infrequent vs Non       0.1780      [0.057, 0.299]    4.09e-03        no
+
+  Group definition: press release: 5+ hrs/week on a single genre (code >= 4)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.4117      [0.244, 0.580]    1.81e-06       yes
+  STM               Infrequent vs Non       0.1648      [0.032, 0.298]    1.54e-02        no
+  reasoning         Frequent vs Non         0.3532      [0.188, 0.519]    3.09e-05       yes
+  reasoning         Infrequent vs Non       0.1638      [0.033, 0.295]    1.44e-02        no
+  verbal            Frequent vs Non        -0.0110     [-0.194, 0.172]    9.06e-01        no
+  verbal            Infrequent vs Non      -0.0482     [-0.193, 0.097]    5.13e-01        no
+  processing_speed  Frequent vs Non         0.3963      [0.246, 0.547]    2.97e-07       yes
+  processing_speed  Infrequent vs Non       0.2151      [0.096, 0.334]    4.24e-04       yes
+  overall           Frequent vs Non         0.4637      [0.316, 0.612]    1.20e-09       yes
+  overall           Infrequent vs Non       0.1867      [0.069, 0.304]    1.85e-03       yes
+
+  Group definition: literal reconstruction: 3+ hrs/week in any genre (code >= 3)
+  composite         contrast                  beta              95% CI           p  < .00357
+  STM               Frequent vs Non         0.3116      [0.165, 0.459]    3.41e-05       yes
+  STM               Infrequent vs Non       0.1703      [0.025, 0.315]    2.13e-02        no
+  reasoning         Frequent vs Non         0.3183      [0.174, 0.462]    1.61e-05       yes
+  reasoning         Infrequent vs Non       0.1282     [-0.014, 0.270]    7.71e-02        no
+  verbal            Frequent vs Non        -0.0062     [-0.165, 0.153]    9.39e-01        no
+  verbal            Infrequent vs Non      -0.0663     [-0.223, 0.091]    4.07e-01        no
+  processing_speed  Frequent vs Non         0.3362      [0.205, 0.467]    6.07e-07       yes
+  processing_speed  Infrequent vs Non       0.2064      [0.077, 0.336]    1.82e-03       yes
+  overall           Frequent vs Non         0.3832      [0.254, 0.512]    8.21e-09       yes
+  overall           Infrequent vs Non       0.1626      [0.035, 0.290]    1.25e-02        no
+
+Reading of section A. The frequent-versus-non-gamer gap on the overall
+composite sits between about +0.41 and +0.49 SD across these specifications.
+Dropping the health-condition covariate moves it very little. Replacing the
+binary education variable with the 5-level factor moves it a little more. The
+group definition moves it more than the covariates do.
+
+==============================================================================
+B. AGE CURVE ON THE OVERALL COMPOSITE: LINEAR VERSUS QUADRATIC
+==============================================================================
+Any conversion of an SD gap into years of age assumes something about
+the shape of the age curve. The simplest assumption, one constant slope for
+every age, is testable. It is tested here two ways: with no covariates, and
+inside the paper's covariate specification alongside the group term.
+
+(i) No covariates, no group term
+    linear     overall ~ age
+               age slope = -0.03965 SD/year, p = 1.330e-80
+               adj R2 = 0.3240
+    quadratic  overall ~ age + age^2
+               age slope at sample mean = -0.04218 SD/year
+               age^2 term = -0.000321
+               QUADRATIC TERM p = 0.0039
+               adj R2 = 0.3294
+    likelihood-ratio test of the quadratic term: LR(1) = 8.344, p = 0.0039
+
+    Local slope of the fitted curve, in SD per year of age:
+      at age 40: -0.03239
+      at age 55: -0.04203
+      at age 70: -0.05166
+
+(ii) Paper's covariate set, group term present (authors' gamer_type)
+     age slope at sample mean = -0.03609 SD/year
+     age^2 term = -0.000288
+     QUADRATIC TERM p = 0.0087
+
+Conclusion of section B. The quadratic term is significant in both forms. The
+decline in the overall composite accelerates with age: it is roughly
+1.6 times as steep at age 70 as at age 40. A single linear age slope
+is therefore not a defensible basis for a single years-equivalent figure, and
+any such figure has to name the age it is anchored at.
+
+==============================================================================
+C / D. YEARS-EQUIVALENT CONVERSIONS, BY ANCHOR AGE AND DEFINITION
+==============================================================================
+WARNING, and it applies to every number in this section.
+
+  1. The published paper reports NO years-equivalent figure. It reports group
+     differences in SD units. Every figure in this section is our arithmetic
+     on the paper's data, not a finding of the paper.
+  2. A years-equivalent figure is ANCHOR DEPENDENT. Because the age curve is
+     significantly quadratic (section B), the same gap buys many more years of
+     age at 40 than at 70. No figure here should ever be quoted without both
+     its anchor age and its model.
+  3. These are cross-sectional between-person differences in a self-selected,
+     older, unusually educated sample. Converting them into years of ageing is
+     an illustrative rescaling, not a measure of how much anyone's ageing was
+     slowed.
+  4. All conversions divide the group gap by an age slope taken from the SAME
+     regression that produced the gap. Mixing an adjusted gap with an
+     unadjusted marginal age slope gives a different and internally
+     inconsistent answer.
+
+==============================================================================
+Group definition: authors' deposited gamer_type column (paper definition)
+Covariate set:    paper's covariate set: age, gender, binary post-secondary education, binary pre-existing health condition
+==============================================================================
+
+LINEAR AGE MODEL (one constant slope at every age)
+  frequent vs non-gamer gap on overall : 0.4813 SD, 95% CI [0.336, 0.626], p = 1.28e-10
+  age slope, same model                : -0.03375 SD per year
+  years-equivalent                     : 14.26 years
+  95% CI (delta method)                : [9.15, 19.37] years
+  MODEL AND ANCHOR: linear age model, which has NO anchor age. This single
+  figure is what you get only if you assume the decline rate is the same at
+  every age, and section B rejects that assumption at p < 0.01.
+
+QUADRATIC AGE MODEL (decline accelerates with age; age^2 p = 0.0087)
+  frequent vs non-gamer gap on overall : 0.4871 SD
+  age slope at sample mean age 55.2 : -0.03609 SD per year
+  age^2 coefficient                    : -0.000288
+
+  anchor age   local slope    years (exact              95% CI   years (local   implied
+                   SD/year    curve solve)         (bootstrap)  slope approx)       age
+          40      -0.02732           23.80        [11.8, 34.6]          17.83      16.2
+          55      -0.03595           15.46         [9.8, 24.0]          13.55      39.5
+          70      -0.04459           11.83         [7.6, 17.1]          10.92      58.2
+
+  "years (exact curve solve)" solves the fitted age curve for the number of
+  years younger at which normal age-related performance rises by the size of
+  the gaming gap, starting from the named anchor age. "years (local slope
+  approx)" is the first-order shortcut, gap divided by the slope at the anchor.
+  The two differ because the curve is curved, and the gap is large enough to
+  travel a long way along it.
+  EXTRAPOLATION NOTE: at anchor age(s) 40 the implied age falls below
+  18, the youngest person in this sample. The curve is being read
+  outside the data there, which is a further reason the large figures at young
+  anchor ages should not be quoted as findings.
+
+==============================================================================
+Group definition: press release: 5+ hrs/week on a single genre (code >= 4)
+Covariate set:    paper's covariate set: age, gender, binary post-secondary education, binary pre-existing health condition
+==============================================================================
+
+LINEAR AGE MODEL (one constant slope at every age)
+  frequent vs non-gamer gap on overall : 0.4899 SD, 95% CI [0.342, 0.638], p = 1.34e-10
+  age slope, same model                : -0.03451 SD per year
+  years-equivalent                     : 14.20 years
+  95% CI (delta method)                : [9.22, 19.17] years
+  MODEL AND ANCHOR: linear age model, which has NO anchor age. This single
+  figure is what you get only if you assume the decline rate is the same at
+  every age, and section B rejects that assumption at p < 0.01.
+
+QUADRATIC AGE MODEL (decline accelerates with age; age^2 p = 0.0085)
+  frequent vs non-gamer gap on overall : 0.4983 SD
+  age slope at sample mean age 55.2 : -0.03687 SD per year
+  age^2 coefficient                    : -0.000288
+
+  anchor age   local slope    years (exact              95% CI   years (local   implied
+                   SD/year    curve solve)         (bootstrap)  slope approx)       age
+          40      -0.02808           23.35        [12.1, 34.4]          17.75      16.6
+          55      -0.03673           15.44         [9.9, 23.5]          13.57      39.6
+          70      -0.04538           11.88         [7.7, 17.0]          10.98      58.1
+
+  "years (exact curve solve)" solves the fitted age curve for the number of
+  years younger at which normal age-related performance rises by the size of
+  the gaming gap, starting from the named anchor age. "years (local slope
+  approx)" is the first-order shortcut, gap divided by the slope at the anchor.
+  The two differ because the curve is curved, and the gap is large enough to
+  travel a long way along it.
+  EXTRAPOLATION NOTE: at anchor age(s) 40 the implied age falls below
+  18, the youngest person in this sample. The curve is being read
+  outside the data there, which is a further reason the large figures at young
+  anchor ages should not be quoted as findings.
+
+==============================================================================
+Group definition: literal reconstruction: 3+ hrs/week in any genre (code >= 3)
+Covariate set:    paper's covariate set: age, gender, binary post-secondary education, binary pre-existing health condition
+==============================================================================
+
+LINEAR AGE MODEL (one constant slope at every age)
+  frequent vs non-gamer gap on overall : 0.4067 SD, 95% CI [0.277, 0.536], p = 9.84e-10
+  age slope, same model                : -0.03474 SD per year
+  years-equivalent                     : 11.71 years
+  95% CI (delta method)                : [7.43, 15.98] years
+  MODEL AND ANCHOR: linear age model, which has NO anchor age. This single
+  figure is what you get only if you assume the decline rate is the same at
+  every age, and section B rejects that assumption at p < 0.01.
+
+QUADRATIC AGE MODEL (decline accelerates with age; age^2 p = 0.0104)
+  frequent vs non-gamer gap on overall : 0.4108 SD
+  age slope at sample mean age 55.2 : -0.03705 SD per year
+  age^2 coefficient                    : -0.000282
+
+  anchor age   local slope    years (exact              95% CI   years (local   implied
+                   SD/year    curve solve)         (bootstrap)  slope approx)       age
+          40      -0.02847           17.44         [9.6, 28.7]          14.43      22.6
+          55      -0.03692           12.28         [7.8, 18.2]          11.13      42.7
+          70      -0.04537            9.63         [6.2, 14.0]           9.06      60.4
+
+  "years (exact curve solve)" solves the fitted age curve for the number of
+  years younger at which normal age-related performance rises by the size of
+  the gaming gap, starting from the named anchor age. "years (local slope
+  approx)" is the first-order shortcut, gap divided by the slope at the anchor.
+  The two differ because the curve is curved, and the gap is large enough to
+  travel a long way along it.
+
+==============================================================================
+SUMMARY OF SECTION C / D: every years figure with its anchor and model
+==============================================================================
+All rows use the paper's covariate set. Years figures are never
+comparable across rows unless the anchor age and model match.
+
+  group definition          gap SD  model                    anchor   years          95% CI
+  paper (gamer_type)        0.4813  linear (no anchor)         none   14.26     [9.1, 19.4]
+                            0.4871  quadratic, exact solve       40   23.80    [11.8, 34.6]
+                            0.4871  quadratic, exact solve       55   15.46     [9.8, 24.0]
+                            0.4871  quadratic, exact solve       70   11.83     [7.6, 17.1]
+                            0.4871  quadratic, local slope       40   17.83    not computed
+                            0.4871  quadratic, local slope       55   13.55    not computed
+                            0.4871  quadratic, local slope       70   10.92    not computed
+
+  press release (5+ hr)     0.4899  linear (no anchor)         none   14.20     [9.2, 19.2]
+                            0.4983  quadratic, exact solve       40   23.35    [12.1, 34.4]
+                            0.4983  quadratic, exact solve       55   15.44     [9.9, 23.5]
+                            0.4983  quadratic, exact solve       70   11.88     [7.7, 17.0]
+                            0.4983  quadratic, local slope       40   17.75    not computed
+                            0.4983  quadratic, local slope       55   13.57    not computed
+                            0.4983  quadratic, local slope       70   10.98    not computed
+
+  literal 3+ hr rebuild     0.4067  linear (no anchor)         none   11.71     [7.4, 16.0]
+                            0.4108  quadratic, exact solve       40   17.44     [9.6, 28.7]
+                            0.4108  quadratic, exact solve       55   12.28     [7.8, 18.2]
+                            0.4108  quadratic, exact solve       70    9.63     [6.2, 14.0]
+                            0.4108  quadratic, local slope       40   14.43    not computed
+                            0.4108  quadratic, local slope       55   11.13    not computed
+                            0.4108  quadratic, local slope       70    9.06    not computed
+
+What the table shows. Within a single group definition and a single
+covariate set, the years-equivalent figure moves by roughly a factor of two
+across the three anchor ages, and by a further one to two years depending on
+whether the curve is solved exactly or approximated by its local slope. The
+linear-model figure has no anchor age at all, so it cannot correctly be
+described as applying "at the sample's mean age"; the figure that does apply at
+the mean age comes from the quadratic model and is a different number. Any
+sentence that attaches a linear-model estimate to an anchored phrase is
+combining two different models.
+
+The spread across anchor ages is larger than the difference between any two
+covariate specifications in section A, and comparable to the width of the
+confidence interval. The years framing is not a stable quantity.
+
+==============================================================================
+E. THE VERBAL COMPOSITE: NO GAMER ADVANTAGE
+==============================================================================
+The paper reports a significant gaming association on four of five
+composites and explicitly not on verbal. This section checks that under every
+combination of covariate set and group definition used above, because it is
+the caveat most often dropped when this study is summarised as "gamers have
+better cognition".
+
+  covariate spec    group definition        beta              95% CI           p
+  PAPER             group_paper           0.0591     [-0.119, 0.238]       0.516
+  PAPER             group_press           0.0246     [-0.158, 0.207]       0.791
+  PAPER             group_literal3h       0.0256     [-0.133, 0.184]       0.751
+  NO_HEALTH         group_paper           0.0365     [-0.143, 0.215]       0.689
+  NO_HEALTH         group_press          -0.0042     [-0.186, 0.178]       0.964
+  NO_HEALTH         group_literal3h      -0.0018     [-0.161, 0.157]       0.982
+  EDU5_NO_HEALTH    group_paper           0.0352     [-0.144, 0.215]       0.701
+  EDU5_NO_HEALTH    group_press          -0.0110     [-0.194, 0.172]       0.906
+  EDU5_NO_HEALTH    group_literal3h      -0.0062     [-0.165, 0.153]       0.939
+
+Under the paper's covariate set and the authors' own group column, the
+frequent-versus-non-gamer difference on verbal is +0.0591 SD, 95% CI
+[-0.119, 0.238], p = 0.516. The interval includes zero, and it
+includes it under every specification above. "Cognition" in this study means
+short-term memory, reasoning and processing speed. It does not mean language,
+and nothing in this dataset measures school performance.
+
+==============================================================================
+CLOSING NOTES FOR ANYONE CITING THESE NUMBERS
+==============================================================================
+1. The "13.7 years younger" figure is not in PLOS ONE 20(10): e0334924.
+   Searching the published article for "13.7", "years younger" and "5.2"
+   returns nothing. The figure comes from the October 2024 press cycle around
+   an earlier preprint with roughly 1,000 completers, not from the 923-person
+   published analysis. Exact reproduction from this file should not be
+   expected, and a residual difference is not evidence of an error by anyone.
+
+2. The press release and the paper do not use the same group definition. The
+   release's frequent gamer is 5 or more hours a week on a single type of
+   game; the paper's is 3 or more hours a week in one or more genres. The
+   figures above are reported under both, and they differ.
+
+3. There is no IQ conversion in this script. The composites are standardised
+   within a 923-person, 83%-post-secondary, mean-age-55 self-selected sample.
+   A within-sample SD is not an IQ SD, and the paper makes no IQ claim.
+
+4. Never quote a years-equivalent figure without its anchor age and model.
+   Section C shows the same gap is worth roughly twice as many years at age 40
+   as at age 70. A figure derived from a sample whose mean age is 55 carries
+   no implication at all for children.
+
+5. This is cross-sectional. People with better cognition may play more games.
+   The authors state this limitation themselves, along with self-reported
+   gaming hours, two-item mental-health screeners, a sample skewed older,
+   more educated and more active than the population, and too few action-game
+   players to test any genre effect.
+
+==============================================================================
+END OF OUTPUT
+==============================================================================
