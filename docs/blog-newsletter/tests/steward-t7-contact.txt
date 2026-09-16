@@ -1,0 +1,869 @@
+
+===== popupBlogShots =====
+
+--- popup-blog-shot-thumbs-1440
+IMGS NOT ready [
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=828&q=75",
+  "complete": true,
+  "w": 828
+ },
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=640&q=75",
+  "complete": false,
+  "w": 0
+ },
+ {
+  "src": "http://localhost:3001/images/ekuzo-logo.svg",
+  "complete": true,
+  "w": 107
+ }
+]
+saved steward-popup-blog-thumbs-1440-open.png
+STEP OK popup-blog-shot-thumbs-1440
+
+--- popup-blog-shot-thumbs-375
+IMGS NOT ready [
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=828&q=75",
+  "complete": true,
+  "w": 828
+ },
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=384&q=75",
+  "complete": true,
+  "w": 384
+ },
+ {
+  "src": "http://localhost:3001/images/ekuzo-logo.svg",
+  "complete": false,
+  "w": 0
+ }
+]
+saved steward-popup-blog-thumbs-375-open.png
+STEP OK popup-blog-shot-thumbs-375
+
+--- popup-blog-shot-classic-1440
+IMGS NOT ready [
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=828&q=75",
+  "complete": true,
+  "w": 828
+ },
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=640&q=75",
+  "complete": false,
+  "w": 0
+ },
+ {
+  "src": "http://localhost:3001/images/ekuzo-logo.svg",
+  "complete": true,
+  "w": 107
+ }
+]
+saved steward-popup-blog-classic-1440-open.png
+STEP OK popup-blog-shot-classic-1440
+
+--- popup-blog-shot-classic-375
+IMGS NOT ready [
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=828&q=75",
+  "complete": true,
+  "w": 828
+ },
+ {
+  "src": "http://localhost:3001/_next/image?url=%2Fimages%2Fpopup-kid-characters.png&w=384&q=75",
+  "complete": true,
+  "w": 384
+ },
+ {
+  "src": "http://localhost:3001/images/ekuzo-logo.svg",
+  "complete": false,
+  "w": 0
+ }
+]
+saved steward-popup-blog-classic-375-open.png
+STEP OK popup-blog-shot-classic-375
+
+===== contactBefore =====
+
+--- contact-before-1440
+CONTACT before 1440 {
+ "found": true,
+ "containerCls": "p-8 pt-12",
+ "containerW": 640,
+ "containerH": 748,
+ "containerPad": "48px 32px 32px",
+ "containerBg": "rgba(0, 0, 0, 0)",
+ "formGap": "24px",
+ "formDisplay": "flex",
+ "fields": [
+  {
+   "tag": "INPUT",
+   "name": "name",
+   "id": "contact-name",
+   "type": "text",
+   "placeholder": "Your full name",
+   "required": true,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "organization",
+   "id": "contact-org",
+   "type": "text",
+   "placeholder": "School, org, or company (optional)",
+   "required": false,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "email",
+   "id": "contact-email",
+   "type": "email",
+   "placeholder": "your@email.com",
+   "required": true,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "TEXTAREA",
+   "name": "message",
+   "id": "contact-message",
+   "type": "textarea",
+   "placeholder": "Tell us a bit about what you're looking for…",
+   "required": false,
+   "h": 122,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors resize-none"
+  }
+ ],
+ "labels": [
+  {
+   "text": "Name *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Organization",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Text",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Email address *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "What are you hoping to explore",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  }
+ ],
+ "submit": {
+  "text": "Submit",
+  "h": 56,
+  "w": 576,
+  "bg": "rgb(249, 37, 36)",
+  "color": "rgb(255, 255, 255)",
+  "radius": "4px"
+ },
+ "innerText": "Talk to Humans\nName *\nOrganization\n\nPreferred contact method\n\nEmail\nText\nEmail address *\nWhat are you hoping to explore\nSubmit"
+}
+saved contact-before-1440-open.png
+STEP OK contact-before-1440
+
+--- contact-before-375
+CONTACT before 375 {
+ "found": true,
+ "containerCls": "p-8 pt-12",
+ "containerW": 343,
+ "containerH": 744,
+ "containerPad": "48px 32px 32px",
+ "containerBg": "rgba(0, 0, 0, 0)",
+ "formGap": "24px",
+ "formDisplay": "flex",
+ "fields": [
+  {
+   "tag": "INPUT",
+   "name": "name",
+   "id": "contact-name",
+   "type": "text",
+   "placeholder": "Your full name",
+   "required": true,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "organization",
+   "id": "contact-org",
+   "type": "text",
+   "placeholder": "School, org, or company (optional)",
+   "required": false,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "email",
+   "id": "contact-email",
+   "type": "email",
+   "placeholder": "your@email.com",
+   "required": true,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "TEXTAREA",
+   "name": "message",
+   "id": "contact-message",
+   "type": "textarea",
+   "placeholder": "Tell us a bit about what you're looking for…",
+   "required": false,
+   "h": 122,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors resize-none"
+  }
+ ],
+ "labels": [
+  {
+   "text": "Name *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Organization",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Text",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Email address *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "What are you hoping to explore",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  }
+ ],
+ "submit": {
+  "text": "Submit",
+  "h": 56,
+  "w": 279,
+  "bg": "rgb(249, 37, 36)",
+  "color": "rgb(255, 255, 255)",
+  "radius": "4px"
+ },
+ "innerText": "Talk to Humans\nName *\nOrganization\n\nPreferred contact method\n\nEmail\nText\nEmail address *\nWhat are you hoping to explore\nSubmit"
+}
+saved contact-before-375-open.png
+STEP OK contact-before-375
+
+===== contactAfter =====
+
+--- contact-after-1440
+CONTACT after 1440 {
+ "found": true,
+ "containerCls": "p-8 pt-12",
+ "containerW": 640,
+ "containerH": 876,
+ "containerPad": "48px 32px 32px",
+ "containerBg": "rgba(0, 0, 0, 0)",
+ "formGap": "24px",
+ "formDisplay": "flex",
+ "fields": [
+  {
+   "tag": "INPUT",
+   "name": "name",
+   "id": "contact-name",
+   "type": "text",
+   "placeholder": "Your full name",
+   "required": true,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "organization",
+   "id": "contact-org",
+   "type": "text",
+   "placeholder": "School, org, or company (optional)",
+   "required": false,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "email",
+   "id": "contact-email",
+   "type": "email",
+   "placeholder": "your@email.com",
+   "required": true,
+   "h": 50,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "TEXTAREA",
+   "name": "message",
+   "id": "contact-message",
+   "type": "textarea",
+   "placeholder": "Tell us a bit about what you're looking for…",
+   "required": false,
+   "h": 122,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors resize-none"
+  },
+  {
+   "tag": "SELECT",
+   "name": "heardAbout",
+   "id": "contact-heard-about",
+   "type": "select-one",
+   "required": false,
+   "h": 48,
+   "w": 576,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors",
+   "options": [
+    "|Choose one",
+    "x|X (Twitter)",
+    "instagram|Instagram",
+    "tiktok-youtube|TikTok or YouTube",
+    "google|Google search",
+    "ai|ChatGPT or another AI",
+    "friend|A friend or another parent",
+    "school|My kid's school",
+    "other|Other"
+   ]
+  }
+ ],
+ "labels": [
+  {
+   "text": "Name *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Organization",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Text",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Email address *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "What are you hoping to explore",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "How did you hear about us?",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  }
+ ],
+ "submit": {
+  "text": "Submit",
+  "h": 56,
+  "w": 576,
+  "bg": "rgb(249, 37, 36)",
+  "color": "rgb(255, 255, 255)",
+  "radius": "4px"
+ },
+ "innerText": "Talk to Humans\nName *\nOrganization\n\nPreferred contact method\n\nEmail\nText\nEmail address *\nWhat are you hoping to explore\nHow did you hear about us?\nChoose one\nX (Twitter)\nInstagram\nTikTok or YouTube\nGoogle search\nChatGPT or another AI\nA friend or another parent\nMy kid's school\nOther\n\nOptional. It tells us where parents are finding us.\n\nSubmit"
+}
+saved contact-after-1440-open.png
+STEP OK contact-after-1440
+
+--- contact-after-375
+CONTACT after 375 {
+ "found": true,
+ "containerCls": "p-8 pt-12",
+ "containerW": 343,
+ "containerH": 892,
+ "containerPad": "48px 32px 32px",
+ "containerBg": "rgba(0, 0, 0, 0)",
+ "formGap": "24px",
+ "formDisplay": "flex",
+ "fields": [
+  {
+   "tag": "INPUT",
+   "name": "name",
+   "id": "contact-name",
+   "type": "text",
+   "placeholder": "Your full name",
+   "required": true,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "organization",
+   "id": "contact-org",
+   "type": "text",
+   "placeholder": "School, org, or company (optional)",
+   "required": false,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "contactMethod",
+   "id": "",
+   "type": "radio",
+   "placeholder": "",
+   "required": false,
+   "h": 13,
+   "w": 13,
+   "pad": "0px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "0px none rgb(0, 0, 0)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "accent-red"
+  },
+  {
+   "tag": "INPUT",
+   "name": "email",
+   "id": "contact-email",
+   "type": "email",
+   "placeholder": "your@email.com",
+   "required": true,
+   "h": 50,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+  },
+  {
+   "tag": "TEXTAREA",
+   "name": "message",
+   "id": "contact-message",
+   "type": "textarea",
+   "placeholder": "Tell us a bit about what you're looking for…",
+   "required": false,
+   "h": 122,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors resize-none"
+  },
+  {
+   "tag": "SELECT",
+   "name": "heardAbout",
+   "id": "contact-heard-about",
+   "type": "select-one",
+   "required": false,
+   "h": 48,
+   "w": 279,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "border": "1px solid oklab(0 0 0 / 0.2)",
+   "radius": "4px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(0, 0, 0)",
+   "cls": "font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors",
+   "options": [
+    "|Choose one",
+    "x|X (Twitter)",
+    "instagram|Instagram",
+    "tiktok-youtube|TikTok or YouTube",
+    "google|Google search",
+    "ai|ChatGPT or another AI",
+    "friend|A friend or another parent",
+    "school|My kid's school",
+    "other|Other"
+   ]
+  }
+ ],
+ "labels": [
+  {
+   "text": "Name *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Organization",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "Email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Text",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "400",
+   "transform": "none"
+  },
+  {
+   "text": "Email address *",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "What are you hoping to explore",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  },
+  {
+   "text": "How did you hear about us?",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "500",
+   "transform": "none"
+  }
+ ],
+ "submit": {
+  "text": "Submit",
+  "h": 56,
+  "w": 279,
+  "bg": "rgb(249, 37, 36)",
+  "color": "rgb(255, 255, 255)",
+  "radius": "4px"
+ },
+ "innerText": "Talk to Humans\nName *\nOrganization\n\nPreferred contact method\n\nEmail\nText\nEmail address *\nWhat are you hoping to explore\nHow did you hear about us?\nChoose one\nX (Twitter)\nInstagram\nTikTok or YouTube\nGoogle search\nChatGPT or another AI\nA friend or another parent\nMy kid's school\nOther\n\nOptional. It tells us where parents are finding us.\n\nSubmit"
+}
+saved contact-after-375-open.png
+STEP OK contact-after-375
+DONE

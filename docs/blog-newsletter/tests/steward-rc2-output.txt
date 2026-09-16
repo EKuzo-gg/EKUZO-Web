@@ -1,0 +1,112 @@
+
+#### blog-thumbs 375x800
+ close={"t":24,"b":64,"l":311,"r":351,"w":40,"h":40} inScroller=false h3={"t":145,"b":246,"l":32,"r":343,"w":311,"h":101} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":105,"b":129,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=105 bottomGap=105 symmetryDelta=0 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t= 105 b= 129 "EKUZO"
+   OK        H3     t= 145 b= 246 "One email after you read this. Then you "
+   OK        P      t= 254 b= 411 "Leave your address and you're on the lis"
+   OK        P      t= 427 b= 447 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 463 b= 515 "First name (optional)"
+   OK        INPUT  t= 527 b= 579 "Email address"
+   OK        BUTTON t= 591 b= 643 "Send me the one email"
+   OK        P      t= 659 b= 695 "No spam. Unsubscribe any time, or use th"
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":9693}
+
+#### blog-thumbs 375x667
+ close={"t":24,"b":64,"l":311,"r":351,"w":40,"h":40} inScroller=false h3={"t":120,"b":220,"l":32,"r":343,"w":311,"h":101} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":80,"b":104,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=80 bottomGap=-2 symmetryDelta=82 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[{"cls":"h-full overflow-y-auto max-h-[100dvh]","oy":"auto","sh":749,"ch":667,"can":true}] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t=  80 b= 104 "EKUZO"
+   OK        H3     t= 120 b= 220 "One email after you read this. Then you "
+   OK        P      t= 228 b= 386 "Leave your address and you're on the lis"
+   OK        P      t= 402 b= 421 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 437 b= 489 "First name (optional)"
+   OK        INPUT  t= 501 b= 553 "Email address"
+   OK        BUTTON t= 565 b= 617 "Send me the one email"
+   CLIPPED   P      t= 633 b= 669 "No spam. Unsubscribe any time, or use th"
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":9193}
+
+#### blog-thumbs 320x568
+ close={"t":24,"b":64,"l":256,"r":296,"w":40,"h":40} inScroller=false h3={"t":120,"b":220,"l":32,"r":288,"w":256,"h":101} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":80,"b":104,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=80 bottomGap=-146 symmetryDelta=226 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[{"cls":"h-full overflow-y-auto max-h-[100dvh]","oy":"auto","sh":794,"ch":568,"can":true}] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t=  80 b= 104 "EKUZO"
+   OK        H3     t= 120 b= 220 "One email after you read this. Then you "
+   OK        P      t= 228 b= 431 "Leave your address and you're on the lis"
+   OK        P      t= 447 b= 466 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 482 b= 534 "First name (optional)"
+   CLIPPED   INPUT  t= 546 b= 598 "Email address"
+   OFFSCREEN BUTTON t= 610 b= 662 "Send me the one email"
+   OFFSCREEN P      t= 678 b= 714 "No spam. Unsubscribe any time, or use th"
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":10201}
+
+#### blog-thumbs 320x480
+ close={"t":24,"b":64,"l":256,"r":296,"w":40,"h":40} inScroller=false h3={"t":-148,"b":-48,"l":32,"r":288,"w":256,"h":101} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":-188,"b":-164,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=-188 bottomGap=34 symmetryDelta=222 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[{"cls":"h-full overflow-y-auto max-h-[100dvh]","oy":"auto","sh":794,"ch":480,"can":true}] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OFFSCREEN IMG    t=-188 b=-164 "EKUZO"
+   OFFSCREEN H3     t=-148 b= -48 "One email after you read this. Then you "
+   CLIPPED   P      t= -40 b= 163 "Leave your address and you're on the lis"
+   OK        P      t= 179 b= 198 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 214 b= 266 "First name (optional)"
+   OK        INPUT  t= 278 b= 330 "Email address"
+   OK        BUTTON t= 342 b= 394 "Send me the one email"
+   OK        P      t= 410 b= 446 "No spam. Unsubscribe any time, or use th"
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":10201}
+
+#### blog-classic 375x800
+ close={"t":24,"b":64,"l":311,"r":351,"w":40,"h":40} inScroller=false h3={"t":216,"b":283,"l":32,"r":343,"w":311,"h":67} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":176,"b":200,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=176 bottomGap=176 symmetryDelta=0 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t= 176 b= 200 "EKUZO"
+   OK        H3     t= 216 b= 283 "For parents of gamers, once a week."
+   OK        P      t= 291 b= 358 "One email a week on making gaming count."
+   OK        P      t= 374 b= 394 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 410 b= 462 "First name (optional)"
+   OK        INPUT  t= 474 b= 526 "Email address"
+   OK        BUTTON t= 538 b= 590 "Join the weekly"
+   OK        P      t= 606 b= 624 "No spam. Unsubscribe any time."
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":9693}
+
+#### blog-classic 320x568
+ close={"t":24,"b":64,"l":256,"r":296,"w":40,"h":40} inScroller=false h3={"t":120,"b":220,"l":32,"r":288,"w":256,"h":101} COLLIDE=false
+ imgs=[{"src":"/images/ekuzo-logo.svg","alt":"EKUZO","t":80,"b":104,"l":32,"r":152,"w":120,"h":24,"natural":"107x21","complete":true}] ekuzoTokens=1
+ topGap=80 bottomGap=-16 symmetryDelta=96 justify=normal pane="flex-1 relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[{"cls":"h-full overflow-y-auto max-h-[100dvh]","oy":"auto","sh":664,"ch":568,"can":true}] bodyOverflow=hidden
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t=  80 b= 104 "EKUZO"
+   OK        H3     t= 120 b= 220 "For parents of gamers, once a week."
+   OK        P      t= 228 b= 318 "One email a week on making gaming count."
+   OK        P      t= 334 b= 354 "Karlin Oei, founder, EKUZO"
+   OK        INPUT  t= 370 b= 422 "First name (optional)"
+   OK        INPUT  t= 434 b= 486 "Email address"
+   OK        BUTTON t= 498 b= 550 "Join the weekly"
+   CLIPPED   P      t= 566 b= 584 "No spam. Unsubscribe any time."
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":10201}
+
+#### site-ref 375x800
+ close={"t":24,"b":64,"l":311,"r":351,"w":40,"h":40} inScroller=false h3={"t":387,"b":421,"l":32,"r":343,"w":311,"h":34} COLLIDE=false
+ imgs=[{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-charact","alt":"EKUZO gamer with game characters","t":50,"b":253,"l":88,"r":288,"w":200,"h":202,"natural":"384x388","complete":true}] ekuzoTokens=0
+ topGap=50 bottomGap=50 symmetryDelta=0 justify=center pane="flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+ scrollable=[] bodyOverflow=clip visible
+   OK        BUTTON t=  24 b=  64 "Close"
+   OK        IMG    t=  50 b= 253 "EKUZO gamer with game characters"
+   OK        SPAN   t= 309 b= 349 "MATTERS."
+   OK        H3     t= 387 b= 421 "Stay in the loop."
+   OK        P      t= 433 b= 478 "Get stories of transformation, tips, and"
+   OK        INPUT  t= 510 b= 562 "First name"
+   OK        INPUT  t= 578 b= 630 "Email address"
+   OK        BUTTON t= 646 b= 698 "Sign up"
+   OK        P      t= 714 b= 750 "No spam. Unsubscribe anytime. We respect"
+ AFTER-WHEEL {"submitReachable":true,"hitIsSubmit":true,"microVisible":true,"closeStillAt":24,"pageScrollY":500}

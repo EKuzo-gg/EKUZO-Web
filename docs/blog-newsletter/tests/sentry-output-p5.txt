@@ -1,0 +1,4 @@
+PASS - P5: 20 fresh contexts saw both variants (thumbs and classic) (seen: classic,thumbs)
+PASS - P5: within each context, stored variant == popup variant == sticky utm_campaign ([])
+
+=== SUMMARY: 2 passed, 0 failed, 2 total ===

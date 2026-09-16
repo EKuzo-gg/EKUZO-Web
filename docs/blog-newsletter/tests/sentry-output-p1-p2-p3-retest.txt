@@ -1,0 +1,34 @@
+PASS - P1: input[type=email] present in bar (1440)
+PASS - P1: no 'Enroll my gamer' text in bar (ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.
+Join)
+PASS - P1: no 'Talk to Humans' text in bar (ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.
+Join)
+saved screenshot: sentry-p1-sticky-blog-bar-1440
+PASS - P1: input[type=email] present in bar (375)
+PASS - P1: no 'Enroll my gamer' text in bar (375)
+PASS - P1: no 'Talk to Humans' text in bar (375)
+PASS - P1: the bar's line of copy is visible at 375px (not display:none) (isVisible=true display=block)
+saved screenshot: sentry-p1-sticky-blog-bar-375
+PASS - P2: bar has translate-y-full class at top (hidden) (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full)
+PASS - P2: bar has translate-y-0 class mid-page (visible) (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0)
+PASS - P2: bar hidden when footer is in view (translate-y-full) (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full)
+PASS - P3: request body has email ({"email":"reader@example.com","utm_source":"blog","utm_medium":"sticky","utm_campaign":"thumbs"})
+PASS - P3: request body utm_source=blog
+PASS - P3: request body utm_medium=sticky
+PASS - P3: request body utm_campaign is thumbs or classic (thumbs)
+PASS - P3: success state text visible after mocked 200 (case-insensitive; the line renders through a CSS uppercase transform) (GOT IT. LOOK FOR IT TOMORROW.)
+saved screenshot: sentry-p3-sticky-success-1440
+PASS - P3: request body captured on error path too
+PASS - P3: error text inline after mocked 500 (checked at 375px, the width this case mocks) (That didn't go through. Try once more.
+Join)
+PASS - P3: no navigation away on error (http://localhost:3001/blog/gaming-study-13-7-years-younger-what-it-means-for-kids)
+saved screenshot: sentry-p3-sticky-error-375
+PASS - P3: error text inline after mocked 500, at 1440px (line span not hidden here) (THAT DIDN'T GO THROUGH. TRY ONCE MORE.
+TRY IT)
+saved screenshot: sentry-p3-sticky-error-1440
+
+=== SUMMARY: 19 passed, 0 failed, 19 total ===
+
+--- Phase 5 retest supplementary checks (explicit 375px line/success text, exact case) ---
+PASS - P1 retest: bar innerText at 375px before submit is "One email tomorrow, then you decide to stay or go.\nTry it" (exact deck case, line now visible)
+PASS - P3 retest: bar innerText at 375px after mocked 200 is "Got it. Look for it tomorrow." (exact deck case, success line visible)

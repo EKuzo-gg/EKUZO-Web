@@ -1,0 +1,10 @@
+
+===== barCamps =====
+STEP ERROR bar-camps-1440 page.goto: Timeout 120000ms exceeded.
+STEP ERROR bar-camps-375 browser.newContext: Target page, context or browser has been closed
+
+===== barBlog =====
+STEP ERROR bar-blog-thumbs-1440 browser.newContext: Target page, context or browser has been closed
+STEP ERROR bar-blog-thumbs-375 browser.newContext: Target page, context or browser has been closed
+STEP ERROR bar-blog-classic-1440 browser.newContext: Target page, context or browser has been closed
+STEP ERROR bar-blog-classic-375 browser.newContext: Target page, context or browser has been closed

@@ -5,6 +5,43 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop) — September 16, 2026 (blog newsletter capture A/B + inquiry-form attribution)
+
+Ran the Build Loop (knowledge-base/company/agents/agent-loop/build-loop.md) end to end on branch
+`blog/gaming-study-13-7`, second commit. Artifacts in `docs/blog-newsletter/` (brief, requirements,
+contract, copy deck, frozen spec, decision log, evidence ledger, defect log, cleanup ledger, reviews,
+tests with saved output, screenshots, review guide, return handoff).
+
+**What changed**
+- `/blog/<post>` pages: the sticky bottom bar is a newsletter bar (email + one line of copy),
+  and a newsletter popup opens at 50% scroll, once per 30 days, never on entry. Two copy variants,
+  "thumbs" and "classic", assigned 50/50 per browser (`lib/newsletterAb.ts`), carried to Beehiiv as
+  utm_source=blog, utm_medium=popup|sticky, utm_campaign=thumbs|classic, plus tags source-blog and
+  variant-*. GA4 events newsletter_impression and newsletter_signup.
+- `/api/newsletter`: optional utm fields with allowlists; non-blog callers (footer form, homepage
+  popup) send the byte-identical Beehiiv body they sent before (tested).
+- `/api/contact` + ContactModal: optional "How did you hear about us?" select; value goes into
+  Karlin's Resend email and a Beehiiv tag heard-<slug>. No new Beehiiv custom field.
+- `app/layout.tsx`: one added line mounting `<NewsletterPopup mode="blog" />`; the homepage popup
+  stays behind NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED exactly as before.
+
+**Evidence:** 34 unit tests (node, mocked fetch) pass; tsc and eslint clean; Playwright QA on
+every requirement incl. zero-diff of the sticky bar on 8 non-blog routes vs the pre-change build;
+visual parity 13/13; two repair cycles (mobile popup fit, double-ask after sticky signup, tablet
+clipping, scroll lock, focus trap, byline contrast). Live Beehiiv pre-flight confirmed utm fields
+and tags; one disposable test subscriber logged in 06-cleanup-ledger.md.
+
+**Before the X push (not before merge):** create the Beehiiv automation "Blog welcome (thumbs)"
+(tag source-blog, 24h delay, email in docs/blog-newsletter/welcome-email-thumbs.md), send it once
+to the test subscriber, verify the thumbs-down link unsubscribes in one click, then delete the test
+subscriber. Until then the copy's "one email tomorrow" is a promise with no sender. Details in
+`docs/blog-newsletter/07-review-guide.md`.
+
+**Aaron:** components/ui/StickyCTA.tsx, NewsletterPopup.tsx, ContactModal.tsx changed in your lane;
+non-blog rendering is byte-identical (n1-* screenshots and outerHTML diffs in the ledger). One
+pre-existing bug noted, not touched: StickyCTA's `querySelector("footer")` grabs the testimonial
+footer on camps and 101, so the bar hides early there.
+
 ## Jamie (via Claude) — September 15, 2026 (new blog post: the "13.7 years younger" gaming study, Karlin byline)
 
 Newsjack answer page for the September 13 to 15 gaming-cognition wave (Luu post, two Elon quotes,

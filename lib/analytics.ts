@@ -127,6 +127,32 @@ export function trackRegisterClick(params: { source: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// NewsletterImpression / NewsletterSignup - blog newsletter capture A/B
+// ---------------------------------------------------------------------------
+// GA-only by design, same rationale as trackRegisterClick above: Beehiiv's
+// own tag-based reporting (source-blog, variant-thumbs/variant-classic)
+// already covers "did this convert," so a GA4 event covers "where on the
+// funnel did it convert" without adding Pixel targeting value.
+
+export function trackNewsletterImpression(params: {
+  variant: "thumbs" | "classic";
+}) {
+  ga4("newsletter_impression", {
+    variant: params.variant,
+  });
+}
+
+export function trackNewsletterSignup(params: {
+  source: "sticky" | "popup" | "footer";
+  variant?: "thumbs" | "classic";
+}) {
+  ga4("newsletter_signup", {
+    source: params.source,
+    variant: params.variant,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Registration — pilot completion (no payment; used on ekuzo101 success page)
 // ---------------------------------------------------------------------------
 

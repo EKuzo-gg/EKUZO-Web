@@ -223,6 +223,10 @@ export default function RootLayout({
           {process.env.NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED === "true" && (
             <NewsletterPopup />
           )}
+          {/* Blog popup: mounted unconditionally (not gated by the flag
+              above), since it only ever renders on blog post pages
+              (isBlogPostPath), independent of the homepage rollout switch. */}
+          <NewsletterPopup mode="blog" />
         </ModalProvider>
       </body>
     </html>

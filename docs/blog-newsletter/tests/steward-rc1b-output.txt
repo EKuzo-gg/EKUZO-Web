@@ -1,0 +1,12 @@
+GATE BAR camps@1440: {"barH":100,"whitePad":"20px 16px","spans":[{"size":"54px","font":"tungstenBlack","tt":"uppercase"}],"ctaH":60,"ctaOverflow":0,"innerText":"READY TO LEVEL UP THIS SUMMER?\nEnroll my gamer"}
+GATE BAR blog-thumbs@1440: {"barH":100,"whitePad":"20px 16px","spans":[{"size":"54px","font":"tungstenBlack","tt":"uppercase"}],"ctaH":60,"ctaOverflow":0,"innerText":"ONE EMAIL TOMORROW, THEN YOU DECIDE TO STAY OR GO.\nTry it"}
+GATE BAR blog-classic@1440: {"barH":100,"whitePad":"20px 16px","spans":[{"size":"54px","font":"tungstenBlack","tt":"uppercase"}],"ctaH":60,"ctaOverflow":0,"innerText":"ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.\nJoin"}
+GATE BAR camps@375: {"barH":80,"whitePad":"16px 12px","spans":[],"ctaH":48,"ctaOverflow":0,"innerText":"Enroll my gamer"}
+GATE BAR blog-thumbs@375: {"barH":105,"whitePad":"16px 12px","spans":[{"size":"12px","font":"Inter","tt":"none"}],"ctaH":48,"ctaOverflow":0,"innerText":"One email tomorrow, then you decide to stay or go.\nTry it"}
+GATE BAR blog-classic@375: {"barH":105,"whitePad":"16px 12px","spans":[{"size":"12px","font":"Inter","tt":"none"}],"ctaH":48,"ctaOverflow":0,"innerText":"One email a week on kids and gaming, with the sources.\nJoin"}
+POPUP-SHORT 375x560: before={"submitTop":470,"submitBottom":522,"fits":true,"scroll":[{"cls":"flex-1 flex flex-col justify-start lg:justify-cent","oy":"auto","sh":606,"ch":560,"can":true}]} afterWheel={"submitBottom":476,"reachable":true,"hitIsSubmit":true,"microVisible":true}
+POPUP-SHORT 320x480: before={"submitTop":515,"submitBottom":567,"fits":false,"scroll":[{"cls":"flex-1 flex flex-col justify-start lg:justify-cent","oy":"auto","sh":651,"ch":480,"can":true}]} afterWheel={"submitBottom":396,"reachable":true,"hitIsSubmit":true,"microVisible":true}
+BYLINE@1440: cls=font-body text-[13px] text-white/80 leading-[1.5] mb-4 lg:mb-8 color=oklab(0.999994 0.0000455677 0.0000200868 / 0.8) size=13px bg=rgb(26, 26, 46) contrast=11.23:1
+BYLINE@375: cls=font-body text-[13px] text-white/80 leading-[1.5] mb-4 lg:mb-8 color=oklab(0.999994 0.0000455677 0.0000200868 / 0.8) size=13px bg=rgb(123, 58, 175) contrast=5.00:1
+DOUBLE-ASK thumbs: bar="GOT IT. LOOK FOR IT TOMORROW." storage={"sub":"1789518805082","dis":null} popup=null
+DOUBLE-ASK classic: bar="YOU'RE ON THE LIST." storage={"sub":"1789518811999","dis":null} popup=null

@@ -3,8 +3,29 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
-import { trackRegisterClick } from "@/lib/analytics";
+import { trackRegisterClick, trackNewsletterSignup } from "@/lib/analytics";
 import { getProgramRegisterContext } from "@/lib/programRoutes";
+import {
+  getOrAssignVariant,
+  isBlogPostPath,
+  recordSuccess,
+  markShownThisLoad,
+} from "@/lib/newsletterAb";
+
+const BLOG_STICKY_COPY = {
+  thumbs: {
+    line: "One email tomorrow, then you decide to stay or go.",
+    button: "Try it",
+    success: "Got it. Look for it tomorrow.",
+    error: "That didn't go through. Try once more.",
+  },
+  classic: {
+    line: "One email a week on kids and gaming, with the sources.",
+    button: "Join",
+    success: "You're on the list.",
+    error: "That didn't go through. Try once more.",
+  },
+} as const;
 
 /**
  * Fixed-bottom CTA bar — "Enroll my gamer" + "Talk to Humans".
@@ -16,6 +37,50 @@ export default function StickyCTA() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [footerVisible, setFooterVisible] = useState(false);
+
+  // Blog newsletter arm: /blog/* posts (not the index, not /blog/author/*)
+  // get a newsletter bar instead of Enroll/Talk to Humans.
+  const isBlogPost = isBlogPostPath(pathname);
+  const [blogVariant, setBlogVariant] = useState<"thumbs" | "classic">("thumbs");
+  const [blogEmail, setBlogEmail] = useState("");
+  const [blogStatus, setBlogStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useEffect(() => {
+    if (!isBlogPost) return;
+    setBlogVariant(getOrAssignVariant(window.localStorage));
+  }, [isBlogPost]);
+
+  async function handleBlogSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!blogEmail) return;
+
+    setBlogStatus("loading");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: blogEmail,
+          utm_source: "blog",
+          utm_medium: "sticky",
+          utm_campaign: blogVariant,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to subscribe");
+
+      setBlogStatus("success");
+      // D7 fix: a bar signup already put this reader on the list, so the
+      // popup must not ask again later in this page load or on a later
+      // visit within the suppression window.
+      recordSuccess(window.localStorage);
+      markShownThisLoad();
+      trackNewsletterSignup({ source: "sticky", variant: blogVariant });
+    } catch {
+      setBlogStatus("error");
+    }
+  }
 
   // Hide on register and success pages — user is already in checkout flow.
   // Also hide on standalone focused pages (no nav/footer) where the bar is out of place.
@@ -105,6 +170,85 @@ export default function StickyCTA() {
             >
               Enroll my gamer
             </a>
+          </div>
+        ) : isBlogPost ? (
+          <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
+            {blogStatus === "success" ? (
+              <>
+                {/* D8 fix: the compact/display split now happens at lg
+                    (1024), not sm (640), so the 640 to ~1024 tablet range
+                    never lands in the fixed-width single-row layout that
+                    was clipping off the right edge of the bar. */}
+                <span
+                  className="block lg:hidden font-body text-xs leading-snug"
+                  style={{ color: "#AE2CF2" }}
+                >
+                  {BLOG_STICKY_COPY[blogVariant].success}
+                </span>
+                {/* >= lg: unchanged look from before, large display headline */}
+                <span
+                  className="hidden lg:block font-display uppercase leading-[0.95] whitespace-nowrap"
+                  style={{ fontSize: "clamp(1.5rem, 3.75vw, 3.75em)", color: "#AE2CF2" }}
+                >
+                  {BLOG_STICKY_COPY[blogVariant].success}
+                </span>
+              </>
+            ) : (
+              <form
+                onSubmit={handleBlogSubmit}
+                className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-2 lg:gap-4 w-full"
+              >
+                {/* < lg: line/error stacks above the input+button row, compact
+                    type (D1 fix: the display-font span below is hidden at
+                    this width, so the sentence needs its own visible copy).
+                    D8 fix: this compact layout now covers the whole tablet
+                    range (640 to ~1024) that used to clip the button. */}
+                <span
+                  className="block lg:hidden font-body text-xs leading-snug"
+                  style={{ color: blogStatus === "error" ? "#E3342F" : "#AE2CF2" }}
+                >
+                  {blogStatus === "error"
+                    ? BLOG_STICKY_COPY[blogVariant].error
+                    : BLOG_STICKY_COPY[blogVariant].line}
+                </span>
+                {/* >= lg: unchanged look from before, one row, large display font */}
+                <span
+                  className="font-display uppercase leading-[0.95] hidden lg:block whitespace-nowrap"
+                  style={{
+                    fontSize: "clamp(1.5rem, 3.75vw, 3.75em)",
+                    color: blogStatus === "error" ? "#E3342F" : "#AE2CF2",
+                  }}
+                >
+                  {blogStatus === "error"
+                    ? BLOG_STICKY_COPY[blogVariant].error
+                    : BLOG_STICKY_COPY[blogVariant].line}
+                </span>
+                <div className="flex-1 lg:flex-none flex items-center gap-2 min-w-0">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email address"
+                    value={blogEmail}
+                    onChange={(e) => setBlogEmail(e.target.value)}
+                    className="flex-1 lg:flex-none lg:w-[220px] min-w-0 font-body text-sm md:text-lg text-black
+                               border-2 border-[#AE2CF2] rounded-sm py-3 px-3 md:py-3.5 md:px-5
+                               outline-none placeholder:text-black/40"
+                  />
+                  <button
+                    type="submit"
+                    disabled={blogStatus === "loading"}
+                    className="bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg
+                               py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0
+                               hover:brightness-110
+                               active:scale-[0.98] active:brightness-90
+                               transition-all duration-150
+                               disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {BLOG_STICKY_COPY[blogVariant].button}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         ) : (
           <>

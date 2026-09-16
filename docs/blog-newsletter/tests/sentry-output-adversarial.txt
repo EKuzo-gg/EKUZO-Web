@@ -1,0 +1,18 @@
+PASS - Adversarial: invalid email is rejected by native HTML5 validation (type=email), no request sent (checkValidity=false requestSent=false)
+PASS - Adversarial: 300-char email is accepted and sent through unmodified (no client-side length cap observed) (sent length=302)
+PASS - Adversarial: rapid double-submit on the sticky bar results in exactly one POST (button disables while loading) (callCount=1)
+PASS - Adversarial: rapid double-submit on the popup results in exactly one POST (callCount=1)
+PASS - Adversarial: tampered utm_campaign never produces a 400 (email is the only required field per contract) ({"status":500,"body":{"error":"Server configuration error"}})
+  [note] Full drop-not-reject behavior for a tampered utm_campaign is covered by Relay's routes.test.mjs (T1d, mocked fetch) -- see sentry-output-routes-rerun.txt, cases 'T1d: mixed valid/invalid' and 'T1d: all three utm fields invalid'. Not independently re-verifiable end-to-end here because this checkout has no live BEEHIIV_API_KEY.
+PASS - Adversarial: after resizing an open popup to 375px, the close button stays within the viewport (not offscreen) ({"box":{"x":311,"y":24,"width":40,"height":40},"viewport":{"width":375,"height":800}})
+saved screenshot: sentry-adversarial-popup-resized-375
+PASS - Adversarial: close button remains clickable after resize
+PASS - Adversarial: the bar's email input is directly focusable (keyboard path)
+PASS - Adversarial: pressing Enter in the email input submits the form (keyboard-only path) ({"email":"keyboard@example.com","utm_source":"blog","utm_medium":"sticky","utm_campaign":"thumbs"})
+PASS - Adversarial: with localStorage disabled, popup defaults to the "thumbs" variant (One email after you read this. Then you decide.)
+PASS - Adversarial: with localStorage disabled, popup does not re-show again on further scrolling in the same page load (count=0)
+PASS - Adversarial: after dismissing on post A, navigating client-side to post B does not re-show the popup (dismiss window still active) (count=0 targetHref=/blog/what-your-kids-gaming-is-telling-you)
+PASS - Adversarial: never-dismissed reader navigating client-side to a second post DOES see the popup there (count=1 targetHref=/blog/what-your-kids-gaming-is-telling-you)
+PASS - Adversarial: after dismissing on the second post, it does not reappear again in the same page load (count=0)
+
+=== SUMMARY: 14 passed, 0 failed, 14 total ===

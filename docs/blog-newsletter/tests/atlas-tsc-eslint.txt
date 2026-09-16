@@ -1,0 +1,50 @@
+=== tsc --noEmit ===
+exit: 0
+
+=== eslint (touched files) ===
+
+/tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/app/layout.tsx
+  183:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+✖ 1 problem (0 errors, 1 warning)
+
+exit: 0
+
+=== D1 repair re-check (StickyCTA.tsx, 375px line/error/success visibility) ===
+tsc --noEmit: exit 0, no output
+eslint components/ui/StickyCTA.tsx: exit 0, no output
+
+=== Repair cycle 1 re-check (D6, D7, D8, D9, D10) ===
+tsc --noEmit: exit 0, no output
+eslint components/ui/StickyCTA.tsx components/ui/NewsletterPopup.tsx: exit 0, no output
+Playwright verification (docs/blog-newsletter/tests/verify-d6-d10.mjs), output in verify-d6-d10-output.txt: ALL CHECKS PASSED
+
+=== Repair cycle 2 re-check (SC-01: logo, close-button collision, re-centering) ===
+Date: 2026-09-16
+
+--- tsc --noEmit ---
+Clean, no errors.
+
+--- eslint (NewsletterPopup.tsx, StickyCTA.tsx, ContactModal.tsx, lib/newsletterAb.ts, app/layout.tsx) ---
+0 errors, 1 pre-existing warning (app/layout.tsx:183, no-img-element, unrelated to this change).
+
+--- node --experimental-strip-types docs/blog-newsletter/tests/newsletterAb.test.mjs ---
+tests 20, pass 20, fail 0.
+
+--- node docs/blog-newsletter/tests/verify-sc01.mjs ---
+32/32 checks PASSED across 320x568, 375x667, 375x800, 375x812 (thumbs + classic):
+- EKUZO logo visible below lg: PASS all 8 combinations.
+- Close button does not overlap any text: PASS all 8 combinations.
+- Submit reachable after scrolling the pane: PASS all 8 combinations.
+- Microcopy reachable after scrolling the pane: PASS all 8 combinations.
+
+INFO 375x800 thumbs measurement (final py-20 symmetric-padding fix):
+space above content top (logo) = 105.3px
+space below microcopy = 105.3px
+(balanced, 0.0px difference; close button box: x=311 y=24 w=40 h=40, logo box: x=32 y=105.3 w=120 h=23.5)
+
+Screenshots retaken/added:
+popup-blog-thumbs-375-open.png (375x812)
+popup-blog-classic-375-open.png (375x812)
+popup-blog-thumbs-375x667-open.png (375x667)
+popup-blog-classic-320-open.png (320x568, new)

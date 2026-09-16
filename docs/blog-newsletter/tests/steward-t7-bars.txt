@@ -1,0 +1,901 @@
+
+===== barCamps =====
+
+--- bar-camps-1440
+BAR camps 1440 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 1440,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "20px 16px",
+   "h": 100,
+   "w": 1440,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "16px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 60,
+   "w": 1232,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 100,
+ "width": 1440,
+ "top": 800,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "READY TO LEVEL UP THIS SUMMER?\nEnroll my gamer",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "Ready to level up this summer?",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "54px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.08px",
+   "color": "rgb(174, 44, 242)",
+   "display": "block",
+   "visible": true
+  },
+  {
+   "tag": "A",
+   "text": "Enroll my gamer",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "A",
+   "type": null,
+   "text": "Enroll my gamer",
+   "h": 60,
+   "w": 210,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "14px 32px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "transform": "none",
+   "cls": "flex-1 sm:flex-none bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150"
+  }
+ ],
+ "inputs": []
+}
+STEP OK bar-camps-1440
+
+--- bar-camps-375
+BAR camps 375 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 375,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "16px 12px",
+   "h": 80,
+   "w": 375,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 48,
+   "w": 351,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 80,
+ "width": 375,
+ "top": 720,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "Enroll my gamer",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "Ready to level up this summer?",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "24px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.48px",
+   "color": "rgb(174, 44, 242)",
+   "display": "none",
+   "visible": false
+  },
+  {
+   "tag": "A",
+   "text": "Enroll my gamer",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "A",
+   "type": null,
+   "text": "Enroll my gamer",
+   "h": 48,
+   "w": 335,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "12px 20px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "transform": "none",
+   "cls": "flex-1 sm:flex-none bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150"
+  }
+ ],
+ "inputs": []
+}
+STEP OK bar-camps-375
+
+===== barBlog =====
+
+--- bar-blog-thumbs-1440
+BAR blog thumbs 1440 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 1440,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "20px 16px",
+   "h": 100,
+   "w": 1440,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "16px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 60,
+   "w": 1232,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "FORM",
+   "cls": "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 60,
+   "w": 1216,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 sm:flex-none flex items-center gap-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 60,
+   "w": 341,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 100,
+ "width": 1440,
+ "top": 800,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "ONE EMAIL TOMORROW, THEN YOU DECIDE TO STAY OR GO.\nTry it",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "One email tomorrow, then you decide to stay or go.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(174, 44, 242)",
+   "display": "none",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "One email tomorrow, then you decide to stay or go.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "54px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.08px",
+   "color": "rgb(174, 44, 242)",
+   "display": "block",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Try it",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "BUTTON",
+   "type": "submit",
+   "text": "Try it",
+   "h": 60,
+   "w": 113,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "14px 32px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "transform": "none",
+   "cls": "bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+  }
+ ],
+ "inputs": [
+  {
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 60,
+   "w": 220,
+   "pad": "14px 20px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "border": "2px solid rgb(174, 44, 242)",
+   "radius": "4px",
+   "cls": "flex-1 sm:flex-none sm:w-[220px] font-body text-sm md:text-lg text-black border-2 border-[#AE2CF2] rounded-sm py-3 px-3 md:py-3.5 md:px-5 outline-none placeholder:text-black/40"
+  }
+ ]
+}
+STEP OK bar-blog-thumbs-1440
+
+--- bar-blog-thumbs-375
+BAR blog thumbs 375 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 375,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "16px 12px",
+   "h": 105,
+   "w": 375,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 73,
+   "w": 351,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "FORM",
+   "cls": "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 73,
+   "w": 335,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "stretch",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 sm:flex-none flex items-center gap-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 48,
+   "w": 335,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 105,
+ "width": 375,
+ "top": 696,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "One email tomorrow, then you decide to stay or go.\nTry it",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "One email tomorrow, then you decide to stay or go.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(174, 44, 242)",
+   "display": "block",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "One email tomorrow, then you decide to stay or go.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "24px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.48px",
+   "color": "rgb(174, 44, 242)",
+   "display": "none",
+   "visible": false
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Try it",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "BUTTON",
+   "type": "submit",
+   "text": "Try it",
+   "h": 48,
+   "w": 79,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "12px 20px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "transform": "none",
+   "cls": "bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+  }
+ ],
+ "inputs": [
+  {
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 48,
+   "w": 248,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "2px solid rgb(174, 44, 242)",
+   "radius": "4px",
+   "cls": "flex-1 sm:flex-none sm:w-[220px] font-body text-sm md:text-lg text-black border-2 border-[#AE2CF2] rounded-sm py-3 px-3 md:py-3.5 md:px-5 outline-none placeholder:text-black/40"
+  }
+ ]
+}
+STEP OK bar-blog-thumbs-375
+
+--- bar-blog-classic-1440
+BAR blog classic 1440 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 1440,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "20px 16px",
+   "h": 100,
+   "w": 1440,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "16px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 60,
+   "w": 1232,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "FORM",
+   "cls": "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 60,
+   "w": 1216,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 sm:flex-none flex items-center gap-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 60,
+   "w": 334,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 100,
+ "width": 1440,
+ "top": 800,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.\nJoin",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "One email a week on kids and gaming, with the sources.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(174, 44, 242)",
+   "display": "none",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "One email a week on kids and gaming, with the sources.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "54px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.08px",
+   "color": "rgb(174, 44, 242)",
+   "display": "block",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "BUTTON",
+   "type": "submit",
+   "text": "Join",
+   "h": 60,
+   "w": 106,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "14px 32px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "transform": "none",
+   "cls": "bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+  }
+ ],
+ "inputs": [
+  {
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 60,
+   "w": 220,
+   "pad": "14px 20px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "18px",
+   "border": "2px solid rgb(174, 44, 242)",
+   "radius": "4px",
+   "cls": "flex-1 sm:flex-none sm:w-[220px] font-body text-sm md:text-lg text-black border-2 border-[#AE2CF2] rounded-sm py-3 px-3 md:py-3.5 md:px-5 outline-none placeholder:text-black/40"
+  }
+ ]
+}
+STEP OK bar-blog-classic-1440
+
+--- bar-blog-classic-375
+BAR blog classic 375 {
+ "found": true,
+ "rows": [
+  {
+   "tag": "DIV",
+   "cls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 16,
+   "w": 375,
+   "maxW": "none",
+   "display": "block",
+   "gap": "normal",
+   "align": "normal",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white",
+   "bg": "rgb(255, 255, 255)",
+   "pad": "16px 12px",
+   "h": 105,
+   "w": 375,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "center",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px 8px",
+   "h": 73,
+   "w": 351,
+   "maxW": "1232px",
+   "display": "flex",
+   "gap": "24px",
+   "align": "center",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "FORM",
+   "cls": "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 73,
+   "w": 335,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "stretch",
+   "justify": "space-between",
+   "borderTop": "0px rgb(0, 0, 0)"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 sm:flex-none flex items-center gap-2",
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "h": 48,
+   "w": 335,
+   "maxW": "none",
+   "display": "flex",
+   "gap": "8px",
+   "align": "center",
+   "justify": "normal",
+   "borderTop": "0px rgb(0, 0, 0)"
+  }
+ ],
+ "cls": "fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0",
+ "position": "fixed",
+ "bottom": "0px",
+ "left": "0px",
+ "right": "0px",
+ "zIndex": "40",
+ "height": 105,
+ "width": 375,
+ "top": 696,
+ "bg": "rgba(0, 0, 0, 0)",
+ "borderTop": "0px rgb(0, 0, 0)",
+ "transform": "none",
+ "padding": "0px",
+ "innerCls": "absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none",
+ "innerPadding": "0px",
+ "innerMaxWidth": "none",
+ "innerGap": "normal",
+ "innerHeight": 16,
+ "innerFlex": "block/row/normal/normal",
+ "innerText": "One email a week on kids and gaming, with the sources.\nJoin",
+ "texts": [
+  {
+   "tag": "SPAN",
+   "text": "One email a week on kids and gaming, with the sources.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(174, 44, 242)",
+   "display": "block",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "One email a week on kids and gaming, with the sources.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "24px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.48px",
+   "color": "rgb(174, 44, 242)",
+   "display": "none",
+   "visible": false
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(255, 255, 255)",
+   "display": "block",
+   "visible": true
+  }
+ ],
+ "btns": [
+  {
+   "tag": "BUTTON",
+   "type": "submit",
+   "text": "Join",
+   "h": 48,
+   "w": 73,
+   "bg": "rgb(174, 44, 242)",
+   "color": "rgb(255, 255, 255)",
+   "pad": "12px 20px",
+   "radius": "4px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "transform": "none",
+   "cls": "bg-[#AE2CF2] text-white border-2 border-[#AE2CF2] font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm text-center whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+  }
+ ],
+ "inputs": [
+  {
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 48,
+   "w": 254,
+   "pad": "12px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "14px",
+   "border": "2px solid rgb(174, 44, 242)",
+   "radius": "4px",
+   "cls": "flex-1 sm:flex-none sm:w-[220px] font-body text-sm md:text-lg text-black border-2 border-[#AE2CF2] rounded-sm py-3 px-3 md:py-3.5 md:px-5 outline-none placeholder:text-black/40"
+  }
+ ]
+}
+STEP OK bar-blog-classic-375
+DONE

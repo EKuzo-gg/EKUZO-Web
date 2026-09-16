@@ -1,0 +1,7 @@
+PASS - N2 (repair-cycle-2 recheck): / on 3002 (flag forced on) shows a dialog after 2.5s (count=1)
+PASS - N2 (repair-cycle-2 recheck): headline is "Stay in the loop." (Stay in the loop.)
+saved screenshot: sentry-cycle3-popup-site-1440-open
+PASS - N2 (repair-cycle-2 recheck): dismissing sets storage key "ekuzo_newsletter_dismissed" (1)
+PASS - N2 (repair-cycle-2 recheck): / on 3001 (flag off) shows no dialog (count=0)
+
+=== SUMMARY: 4 passed, 0 failed, 4 total ===

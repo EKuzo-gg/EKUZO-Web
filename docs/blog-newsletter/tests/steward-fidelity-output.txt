@@ -1,0 +1,220 @@
+
+== STICKY thumbs @1440 state=idle ==
+visibleText: "One email tomorrow, then you decide to stay or go. | Try it"
+PASS sticky.thumbs@1440.line exact-case rendered
+PASS sticky.thumbs@1440.button
+LINT sticky.thumbs@1440.idle: clean | digits=[] | curly/ellipsis=0 | chars=59
+
+== STICKY thumbs @1440 state=200 ==
+visibleText: "Got it. Look for it tomorrow."
+PASS sticky.thumbs@1440.success
+LINT sticky.thumbs@1440.200: clean | digits=[] | curly/ellipsis=0 | chars=29
+
+== STICKY thumbs @1440 state=500 ==
+visibleText: "That didn't go through. Try once more. | Try it"
+PASS sticky.thumbs@1440.error
+LINT sticky.thumbs@1440.500: clean | digits=[] | curly/ellipsis=0 | chars=47
+
+== POPUP thumbs @1440 state=idle ==
+visibleText: "The EKUZO weekly | MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Send me the one email | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@1440.eyebrow exact-case rendered
+PASS popup.thumbs@1440.headline
+PASS popup.thumbs@1440.body
+PASS popup.thumbs@1440.byline
+PASS popup.thumbs@1440.button
+PASS popup.thumbs@1440.micro
+PASS popup.thumbs@1440.ph.firstName
+PASS popup.thumbs@1440.ph.email
+LINT popup.thumbs@1440.idle: clean | digits=[] | curly/ellipsis=0 | chars=462
+
+== POPUP thumbs @1440 state=hang ==
+visibleText: "The EKUZO weekly | MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | One moment... | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@1440.loading
+LINT popup.thumbs@1440.hang: clean | digits=[] | curly/ellipsis=0 | chars=454
+
+== POPUP thumbs @1440 state=200 ==
+visibleText: "The EKUZO weekly | MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Got it. | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@1440.success
+LINT popup.thumbs@1440.200: clean | digits=[] | curly/ellipsis=0 | chars=448
+
+== POPUP thumbs @1440 state=500 ==
+visibleText: "The EKUZO weekly | MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Send me the one email | That didn't go through. Try once more. | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@1440.error
+LINT popup.thumbs@1440.500: clean | digits=[] | curly/ellipsis=0 | chars=503
+
+== STICKY thumbs @375 state=idle ==
+visibleText: "One email tomorrow, then you decide to stay or go. | Try it"
+PASS sticky.thumbs@375.line exact-case rendered
+PASS sticky.thumbs@375.button
+LINT sticky.thumbs@375.idle: clean | digits=[] | curly/ellipsis=0 | chars=59
+
+== STICKY thumbs @375 state=200 ==
+visibleText: "Got it. Look for it tomorrow."
+PASS sticky.thumbs@375.success
+LINT sticky.thumbs@375.200: clean | digits=[] | curly/ellipsis=0 | chars=29
+
+== STICKY thumbs @375 state=500 ==
+visibleText: "That didn't go through. Try once more. | Try it"
+PASS sticky.thumbs@375.error
+LINT sticky.thumbs@375.500: clean | digits=[] | curly/ellipsis=0 | chars=47
+
+== POPUP thumbs @375 state=idle ==
+visibleText: "MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Send me the one email | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+FAIL popup.thumbs@375.eyebrow exact-case rendered | exact=no ci=no | expected: "The EKUZO weekly"
+PASS popup.thumbs@375.headline
+PASS popup.thumbs@375.body
+PASS popup.thumbs@375.byline
+PASS popup.thumbs@375.button
+PASS popup.thumbs@375.micro
+PASS popup.thumbs@375.ph.firstName
+PASS popup.thumbs@375.ph.email
+LINT popup.thumbs@375.idle: clean | digits=[] | curly/ellipsis=0 | chars=443
+
+== POPUP thumbs @375 state=hang ==
+visibleText: "MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | One moment... | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@375.loading
+LINT popup.thumbs@375.hang: clean | digits=[] | curly/ellipsis=0 | chars=435
+
+== POPUP thumbs @375 state=200 ==
+visibleText: "MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Got it. | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@375.success
+LINT popup.thumbs@375.200: clean | digits=[] | curly/ellipsis=0 | chars=429
+
+== POPUP thumbs @375 state=500 ==
+visibleText: "MATTERS. | One email after you read this. Then you decide. | Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached. | Karlin Oei, founder, EKUZO | Send me the one email | That didn't go through. Try once more. | No spam. Unsubscribe any time, or use the thumbs down tomorrow."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.thumbs@375.error
+LINT popup.thumbs@375.500: clean | digits=[] | curly/ellipsis=0 | chars=484
+
+== STICKY classic @1440 state=idle ==
+visibleText: "One email a week on kids and gaming, with the sources. | Join"
+PASS sticky.classic@1440.line exact-case rendered
+PASS sticky.classic@1440.button
+LINT sticky.classic@1440.idle: clean | digits=[] | curly/ellipsis=0 | chars=61
+
+== STICKY classic @1440 state=200 ==
+visibleText: "You're on the list."
+PASS sticky.classic@1440.success
+LINT sticky.classic@1440.200: clean | digits=[] | curly/ellipsis=0 | chars=19
+
+== STICKY classic @1440 state=500 ==
+visibleText: "That didn't go through. Try once more. | Join"
+PASS sticky.classic@1440.error
+LINT sticky.classic@1440.500: clean | digits=[] | curly/ellipsis=0 | chars=45
+
+== POPUP classic @1440 state=idle ==
+visibleText: "The EKUZO weekly | MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | Join the weekly | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@1440.eyebrow exact-case rendered
+PASS popup.classic@1440.headline
+PASS popup.classic@1440.body
+PASS popup.classic@1440.byline
+PASS popup.classic@1440.button
+PASS popup.classic@1440.micro
+PASS popup.classic@1440.ph.firstName
+PASS popup.classic@1440.ph.email
+LINT popup.classic@1440.idle: clean | digits=[] | curly/ellipsis=0 | chars=272
+
+== POPUP classic @1440 state=hang ==
+visibleText: "The EKUZO weekly | MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | One moment... | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@1440.loading
+LINT popup.classic@1440.hang: clean | digits=[] | curly/ellipsis=0 | chars=270
+
+== POPUP classic @1440 state=200 ==
+visibleText: "The EKUZO weekly | MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | You're in. | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@1440.success
+LINT popup.classic@1440.200: clean | digits=[] | curly/ellipsis=0 | chars=267
+
+== POPUP classic @1440 state=500 ==
+visibleText: "The EKUZO weekly | MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | Join the weekly | That didn't go through. Try once more. | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@1440.error
+LINT popup.classic@1440.500: clean | digits=[] | curly/ellipsis=0 | chars=313
+
+== STICKY classic @375 state=idle ==
+visibleText: "One email a week on kids and gaming, with the sources. | Join"
+PASS sticky.classic@375.line exact-case rendered
+PASS sticky.classic@375.button
+LINT sticky.classic@375.idle: clean | digits=[] | curly/ellipsis=0 | chars=61
+
+== STICKY classic @375 state=200 ==
+visibleText: "You're on the list."
+PASS sticky.classic@375.success
+LINT sticky.classic@375.200: clean | digits=[] | curly/ellipsis=0 | chars=19
+
+== STICKY classic @375 state=500 ==
+visibleText: "That didn't go through. Try once more. | Join"
+PASS sticky.classic@375.error
+LINT sticky.classic@375.500: clean | digits=[] | curly/ellipsis=0 | chars=45
+
+== POPUP classic @375 state=idle ==
+visibleText: "MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | Join the weekly | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+FAIL popup.classic@375.eyebrow exact-case rendered | exact=no ci=no | expected: "The EKUZO weekly"
+PASS popup.classic@375.headline
+PASS popup.classic@375.body
+PASS popup.classic@375.byline
+PASS popup.classic@375.button
+PASS popup.classic@375.micro
+PASS popup.classic@375.ph.firstName
+PASS popup.classic@375.ph.email
+LINT popup.classic@375.idle: clean | digits=[] | curly/ellipsis=0 | chars=253
+
+== POPUP classic @375 state=hang ==
+visibleText: "MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | One moment... | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@375.loading
+LINT popup.classic@375.hang: clean | digits=[] | curly/ellipsis=0 | chars=251
+
+== POPUP classic @375 state=200 ==
+visibleText: "MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | You're in. | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@375.success
+LINT popup.classic@375.200: clean | digits=[] | curly/ellipsis=0 | chars=248
+
+== POPUP classic @375 state=500 ==
+visibleText: "MATTERS. | For parents of gamers, once a week. | One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype. | Karlin Oei, founder, EKUZO | Join the weekly | That didn't go through. Try once more. | No spam. Unsubscribe any time."
+placeholders: ["First name (optional)","Email address"]
+PASS popup.classic@375.error
+LINT popup.classic@375.500: clean | digits=[] | curly/ellipsis=0 | chars=294
+
+== CONTACT @1440 ==
+options: ["Choose one","X (Twitter)","Instagram","TikTok or YouTube","Google search","ChatGPT or another AI","A friend or another parent","My kid's school","Other"]
+PASS contact@1440.label
+PASS contact@1440.default
+PASS contact@1440.helper
+PASS contact@1440.option1
+PASS contact@1440.option2
+PASS contact@1440.option3
+PASS contact@1440.option4
+PASS contact@1440.option5
+PASS contact@1440.option6
+PASS contact@1440.option7
+PASS contact@1440.option8
+LINT contact@1440: clean | digits=[] | curly/ellipsis=0 | chars=339
+
+== CONTACT @375 ==
+options: ["Choose one","X (Twitter)","Instagram","TikTok or YouTube","Google search","ChatGPT or another AI","A friend or another parent","My kid's school","Other"]
+PASS contact@375.label
+PASS contact@375.default
+PASS contact@375.helper
+PASS contact@375.option1
+PASS contact@375.option2
+PASS contact@375.option3
+PASS contact@375.option4
+PASS contact@375.option5
+PASS contact@375.option6
+PASS contact@375.option7
+PASS contact@375.option8
+LINT contact@375: clean | digits=[] | curly/ellipsis=0 | chars=339
+
+TOTAL pass=80 fail=2

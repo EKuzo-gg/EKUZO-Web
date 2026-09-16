@@ -1,0 +1,16 @@
+# 03 Decision log (Fable). Most overrulable first.
+
+| # | Decision | Alternatives | Why | Overrule cost |
+|---|---|---|---|---|
+| D-01 | No feature flag; the blog capture surfaces go live with the merge. | Ship dark behind NEXT_PUBLIC_BLOG_NEWSLETTER_ENABLED until the Beehiiv automation exists. | Jamie: push it all, the site gets almost no traffic, and his sequencing (blog live, Beehiiv set up, then the X push) is the gate. The Steward's C4 concern is met by ordering, not code. | Low: a flag is a 10-line change later. |
+| D-02 | "Free to read." removed from every surface. | Keep it on the sticky bar. | Parent review: it answers a price question nobody asked. Jamie: it was a concept, not canon. | None. |
+| D-03 | Thumbs popup states "you're on the list today" before the reader types. | Keep the softer "send me the one email" framing and let the email correct it. | Both reviewers: the email's version is the honest one, so say it first (a receipt, not a correction). | Low; copy only. |
+| D-04 | Welcome email opener is arm-neutral ("here is the first email"); both arms get the thumbs email. | A separate first email for the classic arm. | One automation to build and maintain; the classic reader gets a nicer deal than promised, which is the safe direction. | Medium later if arms diverge. |
+| D-05 | Storage-unavailable readers default to the thumbs variant and see the popup once per page load. | Classic default; or never show without storage. | Thumbs is the preferred arm; fail-open matches T4; the in-memory guard stops indefinite nagging (Steward). | Low. |
+| D-06 | Blog signups with a missing or invalid campaign get `source-blog` only, no `variant-*` tag. | Default such rows to `variant-classic`. | The client always sends a campaign; a missing one is a bug signal, and a defaulted tag would hide it. | Low. |
+| D-07 | `referring_site` stays hardcoded on /api/newsletter. | Pass the page URL. | utm_medium and utm_campaign already carry the attribution the brief asks for; per-post attribution is a later, separate change. | Low. |
+| D-08 | Add `newsletter_impression` and `newsletter_signup` GA4 events. | Beehiiv tags only. | Tags give signups per arm, not impressions; the A/B needs rates. | None. |
+| D-09 | Popup carries a visible byline "Karlin Oei, founder, EKUZO". | Unattributed first person. | The popup fires on Jamie-bylined posts too; author-integrity rule. | None. |
+| D-10 | Contact "how did you hear" reaches Beehiiv as a tag `heard-<slug>` and Karlin's Resend email as a line; never a custom field. | Custom field. | CLAUDE.md rule; tags are segmentable. | None. |
+| D-11 | Pre-flight test subscriber (sub_17b7fb9c-c1dc-4847-a7e2-e6ca21f47b56, newsletter-test+1789503074@ekuzo.gg) is kept until the automation exists, then used as the automation's first real send target, then deleted. | Delete now. | It is the cheapest way to prove the automation sends. Logged in 06-cleanup-ledger.md. | None. |
+| D-12 | No test runner added to package.json in this run; unit tests execute under node with a 6-line resolution shim and their output goes in the ledger. | Add vitest now. | Adding a dev dependency and lockfile churn to a content branch is scope creep; queued as a human-action item. | Low. |

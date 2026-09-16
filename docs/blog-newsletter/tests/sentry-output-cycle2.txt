@@ -1,0 +1,51 @@
+PASS - P1 @ 768px: input[type=email] present
+PASS - P1 @ 768px: no 'Enroll my gamer' text (One email a week on kids and gaming, with the sources.
+Join)
+PASS - P1 @ 768px: no 'Talk to Humans' text (One email a week on kids and gaming, with the sources.
+Join)
+PASS - P1 @ 768px: copy line visible in innerText (One email a week on kids and gaming, with the sources.
+Join)
+PASS - P1/D8 @ 768px: submit button ("Try it"/"Join") is fully inside the bar, not clipped ({"barBox":{"x":0,"y":775.5,"width":768,"height":124.5},"btnBox":{"x":638.34375,"y":820,"width":105.65625,"height":60}})
+PASS - P1/D8 @ 768px: submit button label is complete (not truncated) (Join)
+saved screenshot: sentry-cycle2-sticky-blog-768-visible
+PASS - P2 @ 768px: bar hidden at top (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full)
+PASS - P2 @ 768px: bar visible mid-page (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0)
+PASS - P3 @ 768px: request body correct
+PASS - P3 @ 768px: success text visible after mocked 200 (YOU'RE ON THE LIST.)
+PASS - P1 @ 820px: input[type=email] present
+PASS - P1 @ 820px: no 'Enroll my gamer' text (One email tomorrow, then you decide to stay or go.
+Try it)
+PASS - P1 @ 820px: no 'Talk to Humans' text (One email tomorrow, then you decide to stay or go.
+Try it)
+PASS - P1 @ 820px: copy line visible in innerText (One email tomorrow, then you decide to stay or go.
+Try it)
+PASS - P1/D8 @ 820px: submit button ("Try it"/"Join") is fully inside the bar, not clipped ({"barBox":{"x":0,"y":775.5,"width":820,"height":124.5},"btnBox":{"x":682.8125,"y":820,"width":113.1875,"height":60}})
+PASS - P1/D8 @ 820px: submit button label is complete (not truncated) (Try it)
+saved screenshot: sentry-cycle2-sticky-blog-820-visible
+PASS - P2 @ 820px: bar hidden at top (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full)
+PASS - P2 @ 820px: bar visible mid-page (fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0)
+PASS - P3 @ 820px: request body correct
+PASS - P3 @ 820px: success text visible after mocked 200 (GOT IT. LOOK FOR IT TOMORROW.)
+PASS - P4/D7: ekuzo_nl_blog_subscribed_at is set after a sticky-bar success (1789518180064)
+PASS - P4/D7: no popup dialog after sticky-bar success + scroll to 60% (count=0)
+PASS - P4/D7: no popup dialog after reload + scroll to 60% (count=0)
+PASS - P9/D9: document.body overflow is hidden while the dialog is open (hidden)
+PASS - P8/D9: dialog has at least 2 focusable elements to test the trap with (4)
+PASS - P8/D9: Shift+Tab from the first focusable element stays inside the dialog (wraps to last)
+PASS - P8/D9: repeated Tab presses never move focus outside the dialog
+PASS - P9/D9: document.body overflow restored after close (before=clip visible after=clip visible)
+PASS - T6 @ gaming-study post: no hydration error (cache-clear/restart regression check) (clean)
+PASS - T6 @ /: no hydration error (cache-clear/restart regression check) (clean)
+PASS - T6 @ /blog: no hydration error (cache-clear/restart regression check) (clean)
+PASS - T6 @ /programs/ekuzo-camps: no hydration error (cache-clear/restart regression check) (clean)
+PASS - T8: dialog root still has z-[9999] class (fixed inset-0 z-[9999] flex overflow-hidden)
+PASS - T8: sticky bar still in the DOM while popup is open
+PASS - T8: elementFromPoint at the bar's center is inside the dialog
+PASS - N1 @ /: bar outerHTML byte-identical before vs after (identical)
+PASS - N1 @ /programs/ekuzo-camps: bar outerHTML byte-identical before vs after (identical)
+PASS - N1 @ /programs/ekuzo-camps/register: bar stays hidden on BEFORE (<div class="fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"><div class="absolute )
+PASS - N1 @ /programs/ekuzo-camps/register: bar stays hidden on AFTER (<div class="fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"><div class="absolute )
+PASS - N1 @ /programs/ekuzo-camps/register: bar outerHTML byte-identical before vs after (identical)
+PASS - N2: / on 3001 (flag off) shows no dialog (count=0)
+
+=== SUMMARY: 41 passed, 0 failed, 41 total ===

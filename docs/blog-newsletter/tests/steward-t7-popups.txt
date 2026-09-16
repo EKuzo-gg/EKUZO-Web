@@ -1,0 +1,1239 @@
+
+===== popupSite =====
+
+--- popup-site-1440
+POPUP site 1440 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "Newsletter signup",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 1440,
+ "h": 900,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "JOIN THE EKUZO COMMUNITY\n\nGAMING\nMATTERS.\nStay in the loop.\n\nGet stories of transformation, tips, and updates on our events.\n\nSign up\n\nNo spam. Unsubscribe anytime. We respect your inbox.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 80,
+   "h": 900,
+   "cls": "absolute top-0 right-[-2px] bottom-0 w-[80px] z-20"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "Join the EKUZO community",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "80px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.6px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "56px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.12px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "H3",
+   "text": "Stay in the loop.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Get stories of transformation, tips, and updates on our events.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Sign up",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe anytime. We respect your inbox.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Sign up",
+   "h": 52,
+   "w": 400,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+saved popup-site-1440-open.png
+STEP OK popup-site-1440
+
+--- popup-site-375
+POPUP site 375 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "Newsletter signup",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 375,
+ "h": 800,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "GAMING\nMATTERS.\nStay in the loop.\n\nGet stories of transformation, tips, and updates on our events.\n\nSign up\n\nNo spam. Unsubscribe anytime. We respect your inbox.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 0,
+   "h": 0,
+   "display": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "Join the EKUZO community",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "48px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.96px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "40px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.8px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "H3",
+   "text": "Stay in the loop.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Get stories of transformation, tips, and updates on our events.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Sign up",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe anytime. We respect your inbox.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Sign up",
+   "h": 52,
+   "w": 311,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+saved popup-site-375-open.png
+STEP OK popup-site-375
+
+===== popupBlog =====
+
+--- popup-blog-thumbs-1440
+POPUP blog thumbs 1440 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "One email after you read this. Then you decide.",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 1440,
+ "h": 900,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "THE EKUZO WEEKLY\n\nGAMING\nMATTERS.\nOne email after you read this. Then you decide.\n\nLeave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.\n\nKarlin Oei, founder, EKUZO\n\nSend me the one email\n\nNo spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 80,
+   "h": 900,
+   "cls": "absolute top-0 right-[-2px] bottom-0 w-[80px] z-20"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "The EKUZO weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "80px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.6px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "56px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.12px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "H3",
+   "text": "One email after you read this. Then you decide.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Send me the one email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name (optional)",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid lab(86.8325 -26.4133 79.9397 / 0.5)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Send me the one email",
+   "h": 52,
+   "w": 400,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+STEP OK popup-blog-thumbs-1440
+
+--- popup-blog-thumbs-375
+POPUP blog thumbs 375 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "One email after you read this. Then you decide.",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 375,
+ "h": 800,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "GAMING\nMATTERS.\nOne email after you read this. Then you decide.\n\nLeave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.\n\nKarlin Oei, founder, EKUZO\n\nSend me the one email\n\nNo spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 0,
+   "h": 0,
+   "display": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "The EKUZO weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "48px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.96px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "40px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.8px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "H3",
+   "text": "One email after you read this. Then you decide.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Send me the one email",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name (optional)",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid lab(86.8325 -26.4133 79.9397 / 0.5)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Send me the one email",
+   "h": 52,
+   "w": 311,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+STEP OK popup-blog-thumbs-375
+
+--- popup-blog-classic-1440
+POPUP blog classic 1440 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "For parents of gamers, once a week.",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 1440,
+ "h": 900,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "THE EKUZO WEEKLY\n\nGAMING\nMATTERS.\nFor parents of gamers, once a week.\n\nOne email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype.\n\nKarlin Oei, founder, EKUZO\n\nJoin the weekly\n\nNo spam. Unsubscribe any time.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 720,
+   "h": 900,
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 80,
+   "h": 900,
+   "cls": "absolute top-0 right-[-2px] bottom-0 w-[80px] z-20"
+  },
+  {
+   "tag": "DIV",
+   "bg": "rgb(26, 26, 46)",
+   "w": 720,
+   "h": 900,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "The EKUZO weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "80px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.6px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "56px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "1.12px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "H3",
+   "text": "For parents of gamers, once a week.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join the weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name (optional)",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid lab(86.8325 -26.4133 79.9397 / 0.5)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 400,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Join the weekly",
+   "h": 52,
+   "w": 400,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+STEP OK popup-blog-classic-1440
+
+--- popup-blog-classic-375
+POPUP blog classic 375 {
+ "found": true,
+ "cls": "fixed inset-0 z-[9999] flex",
+ "role": "dialog",
+ "ariaModal": "true",
+ "ariaLabel": "For parents of gamers, once a week.",
+ "position": "fixed",
+ "zIndex": "9999",
+ "bg": "rgba(0, 0, 0, 0)",
+ "radius": "0px",
+ "padding": "0px",
+ "overflow": "visible",
+ "w": 375,
+ "h": 800,
+ "x": 0,
+ "y": 0,
+ "display": "flex",
+ "gridTemplate": "none",
+ "flexDir": "row",
+ "innerText": "GAMING\nMATTERS.\nFor parents of gamers, once a week.\n\nOne email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype.\n\nKarlin Oei, founder, EKUZO\n\nJoin the weekly\n\nNo spam. Unsubscribe any time.",
+ "kids": [
+  {
+   "tag": "DIV",
+   "cls": "hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden",
+   "bg": "rgb(123, 58, 175)",
+   "w": 0,
+   "h": 0,
+   "display": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "display": "flex"
+  }
+ ],
+ "panes": [
+  {
+   "tag": "DIV",
+   "bg": "rgb(123, 58, 175)",
+   "w": 375,
+   "h": 800,
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1a1a2e]"
+  }
+ ],
+ "texts": [
+  {
+   "tag": "P",
+   "text": "The EKUZO weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "600",
+   "transform": "uppercase",
+   "tracking": "1.95px",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "48px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.96px",
+   "color": "rgb(200, 230, 32)",
+   "visible": false
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "font": "tungstenBlack, \"tungstenBlack Fallback\", \"Tungsten Narrow\", Impact, \"Arial Narrow\", ui-sans-serif, sans-serif",
+   "size": "40px",
+   "weight": "900",
+   "transform": "uppercase",
+   "tracking": "0.8px",
+   "color": "rgb(200, 230, 32)",
+   "visible": true
+  },
+  {
+   "tag": "H3",
+   "text": "For parents of gamers, once a week.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "28px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "-0.56px",
+   "color": "rgb(255, 255, 255)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "13px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.4)",
+   "visible": true
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join the weekly",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "16px",
+   "weight": "700",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "rgb(17, 17, 17)",
+   "visible": true
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time.",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "12px",
+   "weight": "400",
+   "transform": "none",
+   "tracking": "normal",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.3)",
+   "visible": true
+  }
+ ],
+ "inputs": [
+  {
+   "tag": "INPUT",
+   "type": "text",
+   "placeholder": "First name (optional)",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid lab(86.8325 -26.4133 79.9397 / 0.5)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  },
+  {
+   "tag": "INPUT",
+   "type": "email",
+   "placeholder": "Email address",
+   "h": 52,
+   "w": 311,
+   "pad": "0px 16px",
+   "font": "Inter, \"Inter Fallback\", ui-sans-serif, system-ui, sans-serif",
+   "size": "15px",
+   "border": "1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+   "radius": "6px",
+   "cls": "w-full h-[52px] px-4 rounded-md border border-white/20 bg-white/10 text-white text-[15px] font-body placeholder:text-white/40 outline-none transition-colors focus:border-[#C8E620]/50"
+  }
+ ],
+ "btns": [
+  {
+   "type": null,
+   "aria": "Close",
+   "text": "",
+   "h": 40,
+   "w": 40,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "oklab(0.999994 0.0000455678 0.0000200868 / 0.5)",
+   "radius": "3.35544e+07px",
+   "transform": "none",
+   "cls": "absolute top-6 right-6 w-10 h-10 rounded-full border border-white/12 flex items-center justify-center text-white/50 hover:bg-white/8 hover:text-white transition-all cursor-pointer"
+  },
+  {
+   "type": "submit",
+   "aria": null,
+   "text": "Join the weekly",
+   "h": 52,
+   "w": 311,
+   "bg": "rgb(200, 230, 32)",
+   "color": "rgb(17, 17, 17)",
+   "radius": "6px",
+   "transform": "none",
+   "cls": "w-full h-[52px] rounded-md text-[16px] font-bold font-body border-none cursor-pointer transition-all duration-300 bg-[#C8E620] text-[#111] hover:brightness-110 active:scale-[0.98] active:brightness-90"
+  }
+ ],
+ "overlay": {
+  "cls": "min-h-full flex flex-col bg-white text-black",
+  "bg": "rgb(255, 255, 255)",
+  "position": "static",
+  "zIndex": "auto"
+ },
+ "portalParent": "HTML"
+}
+STEP OK popup-blog-classic-375
+DONE

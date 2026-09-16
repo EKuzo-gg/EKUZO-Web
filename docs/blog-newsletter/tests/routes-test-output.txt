@@ -1,0 +1,98 @@
+TAP version 13
+# (node:817) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/app/api/newsletter/route.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: T1a: no utm fields -> Beehiiv body byte-identical to today's documented body
+ok 1 - T1a: no utm fields -> Beehiiv body byte-identical to today's documented body
+  ---
+  duration_ms: 6.820641
+  type: 'test'
+  ...
+# Subtest: N3: FooterNewsletter's exact { email } payload produces an unchanged Beehiiv body
+ok 2 - N3: FooterNewsletter's exact { email } payload produces an unchanged Beehiiv body
+  ---
+  duration_ms: 0.900463
+  type: 'test'
+  ...
+# Subtest: T1b: blog popup, thumbs -> Beehiiv body matches section 2 case (b)
+ok 3 - T1b: blog popup, thumbs -> Beehiiv body matches section 2 case (b)
+  ---
+  duration_ms: 0.909187
+  type: 'test'
+  ...
+# Subtest: T1c: blog sticky bar, classic -> Beehiiv body matches section 2 case (c)
+ok 4 - T1c: blog sticky bar, classic -> Beehiiv body matches section 2 case (c)
+  ---
+  duration_ms: 0.731268
+  type: 'test'
+  ...
+# Subtest: T1d: all three utm fields invalid -> body reduces to exactly case (a)'s shape
+ok 5 - T1d: all three utm fields invalid -> body reduces to exactly case (a)'s shape
+  ---
+  duration_ms: 1.072594
+  type: 'test'
+  ...
+# Subtest: T1d: mixed valid/invalid (valid source+medium, invalid campaign) -> utm_campaign key absent
+ok 6 - T1d: mixed valid/invalid (valid source+medium, invalid campaign) -> utm_campaign key absent
+  ---
+  duration_ms: 0.737114
+  type: 'test'
+  ...
+# Subtest: T2: non-blog signup -> tag body is exactly today's { tags: ["source-newsletter"] }
+ok 7 - T2: non-blog signup -> tag body is exactly today's { tags: ["source-newsletter"] }
+  ---
+  duration_ms: 0.711343
+  type: 'test'
+  ...
+# Subtest: T2: blog signup, valid campaign thumbs -> tag body ["source-blog", "variant-thumbs"]
+ok 8 - T2: blog signup, valid campaign thumbs -> tag body ["source-blog", "variant-thumbs"]
+  ---
+  duration_ms: 0.609563
+  type: 'test'
+  ...
+# Subtest: T2: blog signup, valid campaign classic -> tag body ["source-blog", "variant-classic"]
+ok 9 - T2: blog signup, valid campaign classic -> tag body ["source-blog", "variant-classic"]
+  ---
+  duration_ms: 0.933381
+  type: 'test'
+  ...
+# Subtest: T2 (edge case, contract section 3): blog signup, missing/invalid campaign -> tag body ["source-blog"] only
+ok 10 - T2 (edge case, contract section 3): blog signup, missing/invalid campaign -> tag body ["source-blog"] only
+  ---
+  duration_ms: 0.779623
+  type: 'test'
+  ...
+# Subtest: T3: tag endpoint returns 500 -> route still resolves 200 { success: true }
+ok 11 - T3: tag endpoint returns 500 -> route still resolves 200 { success: true }
+  ---
+  duration_ms: 1.663369
+  type: 'test'
+  ...
+# Subtest: N5: contact without heardAbout -> Resend HTML and Beehiiv payload byte-identical to today
+ok 12 - N5: contact without heardAbout -> Resend HTML and Beehiiv payload byte-identical to today
+  ---
+  duration_ms: 14.302353
+  type: 'test'
+  ...
+# Subtest: P10: contact with heardAbout "x" -> Resend line, heard-x tag, no new custom_fields key
+ok 13 - P10: contact with heardAbout "x" -> Resend line, heard-x tag, no new custom_fields key
+  ---
+  duration_ms: 0.647301
+  type: 'test'
+  ...
+# Subtest: P10 (validation): unrecognized heardAbout value behaves exactly like no heardAbout
+ok 14 - P10 (validation): unrecognized heardAbout value behaves exactly like no heardAbout
+  ---
+  duration_ms: 0.647841
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 380.555737

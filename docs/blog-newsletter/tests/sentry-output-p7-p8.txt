@@ -1,0 +1,24 @@
+PASS - P7: request body has email
+PASS - P7: request body utm_source=blog
+PASS - P7: request body utm_medium=popup
+PASS - P7: request body utm_campaign is thumbs/classic
+saved screenshot: sentry-p7-popup-success-pending
+PASS - P7: dialog closes ~800ms after success (count=0)
+PASS - P7: ekuzo_nl_blog_subscribed_at set after success (1789508150288)
+PASS - P7: error path request body still carries the same contract fields
+PASS - P7: dialog stays open on error (not auto-closed)
+PASS - P7: ekuzo_nl_blog_subscribed_at NOT set on error
+PASS - P7: dismiss via X closes the dialog
+PASS - P7: ekuzo_nl_blog_dismissed_at set after X dismiss (1789508155056)
+PASS - P7: dismiss via Escape closes the dialog
+PASS - P7: ekuzo_nl_blog_dismissed_at set after Escape dismiss (1789508156725)
+PASS - P7: dismiss via outside-form click closes the dialog
+PASS - P7: ekuzo_nl_blog_dismissed_at set after backdrop dismiss (1789508158514)
+PASS - P8: dialog has role=dialog (dialog)
+PASS - P8: dialog has aria-modal=true (true)
+PASS - P8: dialog has a non-empty aria-label (One email after you read this. Then you decide.)
+PASS - P8: document.activeElement is inside the dialog within 200ms of open
+PASS - P8: Escape closes the dialog
+PASS - P8: focus returns to the previously focused element after Escape (before=A|1 after=A|1)
+
+=== SUMMARY: 21 passed, 0 failed, 21 total ===

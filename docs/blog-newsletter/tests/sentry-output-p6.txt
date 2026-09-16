@@ -1,0 +1,142 @@
+PASS - P6 [thumbs] sticky.line present in bar innerText (case-insensitive; "line" renders through a CSS uppercase transform, noted separately) (exact-case match=false | expected: "One email tomorrow, then you decide to stay or go." | got: "ONE EMAIL TOMORROW, THEN YOU DECIDE TO STAY OR GO.
+Try it")
+FAIL - P6 [thumbs] sticky.line rendered in exact deck case (not CSS-transformed) (field "line" only matches after uppercasing both sides -- it is rendered all-caps via a CSS text-transform)
+PASS - P6 [thumbs] sticky.button present in bar innerText (case-insensitive; "line" renders through a CSS uppercase transform, noted separately) (exact-case match=true | expected: "Try it" | got: "ONE EMAIL TOMORROW, THEN YOU DECIDE TO STAY OR GO.
+Try it")
+PASS - P6 [thumbs] sticky bar innerText has zero em-dashes (ONE EMAIL TOMORROW, THEN YOU DECIDE TO STAY OR GO.
+Try it)
+PASS - P6 [thumbs] popup.eyebrow present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=false | expected: "The EKUZO weekly...")
+FAIL - P6 [thumbs] popup.eyebrow rendered in exact deck case (not CSS-transformed) (field "eyebrow" only matches after uppercasing both sides -- it is rendered all-caps via a CSS text-transform, so the literal deck string never appears in innerText)
+PASS - P6 [thumbs] popup.headline present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "One email after you read this. Then you decide....")
+PASS - P6 [thumbs] popup.body present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "Leave your address and you're on the list today. Tomorrow I'...")
+PASS - P6 [thumbs] popup.byline present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "Karlin Oei, founder, EKUZO...")
+PASS - P6 [thumbs] popup.button present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "Send me the one email...")
+PASS - P6 [thumbs] popup.microcopy present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "No spam. Unsubscribe any time, or use the thumbs down tomorr...")
+PASS - P6 [thumbs] firstName placeholder verbatim (First name (optional))
+PASS - P6 [thumbs] email placeholder verbatim (Email address)
+PASS - P6 [thumbs] dialog innerText has zero em-dashes (THE EKUZO WEEKLY
+
+GAMING
+MATTERS.
+One email after you read this. Then you decide.
+
+Leave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.
+
+Karlin Oei, founder, EKUZO
+
+Send me the one email
+
+No spam. Unsubscribe any time, or use the thumbs down tomorrow.)
+PASS - P6 [classic] sticky.line present in bar innerText (case-insensitive; "line" renders through a CSS uppercase transform, noted separately) (exact-case match=false | expected: "One email a week on kids and gaming, with the sources." | got: "ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.
+Join")
+FAIL - P6 [classic] sticky.line rendered in exact deck case (not CSS-transformed) (field "line" only matches after uppercasing both sides -- it is rendered all-caps via a CSS text-transform)
+PASS - P6 [classic] sticky.button present in bar innerText (case-insensitive; "line" renders through a CSS uppercase transform, noted separately) (exact-case match=true | expected: "Join" | got: "ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.
+Join")
+PASS - P6 [classic] sticky bar innerText has zero em-dashes (ONE EMAIL A WEEK ON KIDS AND GAMING, WITH THE SOURCES.
+Join)
+PASS - P6 [classic] popup.eyebrow present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=false | expected: "The EKUZO weekly...")
+FAIL - P6 [classic] popup.eyebrow rendered in exact deck case (not CSS-transformed) (field "eyebrow" only matches after uppercasing both sides -- it is rendered all-caps via a CSS text-transform, so the literal deck string never appears in innerText)
+PASS - P6 [classic] popup.headline present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "For parents of gamers, once a week....")
+PASS - P6 [classic] popup.body present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "One email a week on making gaming count. I coach kids who pl...")
+PASS - P6 [classic] popup.byline present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "Karlin Oei, founder, EKUZO...")
+PASS - P6 [classic] popup.button present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "Join the weekly...")
+PASS - P6 [classic] popup.microcopy present in dialog innerText (case-insensitive check; exact-case noted) (exact-case match=true | expected: "No spam. Unsubscribe any time....")
+PASS - P6 [classic] firstName placeholder verbatim (First name (optional))
+PASS - P6 [classic] email placeholder verbatim (Email address)
+PASS - P6 [classic] dialog innerText has zero em-dashes (THE EKUZO WEEKLY
+
+GAMING
+MATTERS.
+For parents of gamers, once a week.
+
+One email a week on making gaming count. I coach kids who play, so it's what I'm actually seeing. Sources attached, no hype.
+
+Karlin Oei, founder, EKUZO
+
+Join the weekly
+
+No spam. Unsubscribe any time.)
+PASS - P6 contact select contains option "Choose one" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "X (Twitter)" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "Instagram" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "TikTok or YouTube" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "Google search" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "ChatGPT or another AI" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "A friend or another parent" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "My kid's school" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select contains option "Other" (Choose one | X (Twitter) | Instagram | TikTok or YouTube | Google search | ChatGPT or another AI | A friend or another parent | My kid's school | Other)
+PASS - P6 contact select has exactly 9 options (8 + default) (9)
+PASS - P6 contact field label "How did you hear about us?" present (Talk to Humans
+Name *
+Organization
+
+Preferred contact method
+
+Email
+Text
+Email address *
+What are you hoping to explore
+How did you hear about us?
+Choose one
+X (Twitter)
+Instagram
+TikTok or YouTube
+Google search
+ChatGPT or another AI
+A friend or another parent
+My kid's school
+Other
+
+Optional. It tells us where parents are finding us.
+
+Submit)
+PASS - P6 contact helper text "Optional. It tells us where parents are finding us." present (Talk to Humans
+Name *
+Organization
+
+Preferred contact method
+
+Email
+Text
+Email address *
+What are you hoping to explore
+How did you hear about us?
+Choose one
+X (Twitter)
+Instagram
+TikTok or YouTube
+Google search
+ChatGPT or another AI
+A friend or another parent
+My kid's school
+Other
+
+Optional. It tells us where parents are finding us.
+
+Submit)
+PASS - P6 contact modal innerText has zero em-dashes (Talk to Humans
+Name *
+Organization
+
+Preferred contact method
+
+Email
+Text
+Email address *
+What are you hoping to explore
+How did you hear about us?
+Choose one
+X (Twitter)
+Instagram
+TikTok or YouTube
+Google search
+ChatGPT or another AI
+A friend or another parent
+My kid's school
+Other
+
+Optional. It tells us where parents are finding us.
+
+Submit)
+
+=== SUMMARY: 37 passed, 4 failed, 41 total ===
