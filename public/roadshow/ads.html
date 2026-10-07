@@ -121,7 +121,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
       <a class="back" id="back" href="index.html" hidden>&larr; Roadshow hub</a>
       <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
       <h1>Parent ads</h1>
-      <p class="lede">Three hooks, each built on the crossed-off list. The list in the ad is the first screen they see on the site, so the ad, the page and the first email read as one thought.</p>
+      <p class="lede">Three hooks, each built on the crossed-off list. The hook sets up the list, every item is the same kind of thing, and the kept line answers the hook. The list is also the first screen on the site. Alternate versions live in the Figma template.</p>
     </div>
     <button class="replay" type="button" id="replay">Replay the lists</button>
   </header>
@@ -136,24 +136,27 @@ const LOGO = document.querySelector(".mark").outerHTML.replace('class="mark"',''
 // On the team's dev server the microsite sits next to this file; elsewhere use the published preview.
 const SITE = (location.protocol === "file:" || /netlify|ekuzo\.gg|localhost/.test(location.hostname)) ? "site.html" : "https://claude.ai/artifact/6UTbrnHcRphSGY3hizUStz";
 const ADS = [
-  {k:"screens", letter:"A", tone:"t-ink", hook:"How much do they game?",
-   items:["Timers","Passwords","Taking the controller","Bribes"], keep:"Giving it a coach",
-   foot:"<b>Your kid likes to game.</b> Now let's make it count.",
-   primary:"Timers, passwords, taking the controller. What if the thing that worked was a coach? Season one of the EKUZO league starts in 2027.",
+  {k:"screens", letter:"A", tone:"t-ink", hook:"Things you\u2019ve said this week.",
+   items:["\u201cPut the iPad down.\u201d","\u201cLast game.\u201d","\u201cI said off.\u201d","\u201cGo outside.\u201d"], keep:"\u201cHow\u2019d practice go?\u201d",
+   foot:"<b>Trade the fight</b> for a real conversation.",
+   primary:"Every parent has said these. A team, a coach and a weekly practice give you something better to ask. Season one of the EKUZO league starts in 2027.",
    thread:"Stop fighting screen time. Give it a coach.", aud:"Screen-time parents",
-   chain:["Timers, passwords, bribes. Crossed off.","Same list on screen 2: Tried everything?","Put the timer away.","Their spot is saved."]},
-  {k:"sports", letter:"B", tone:"t-bone", hook:"Not a sports kid? Good.",
-   items:["Soccer","Baseball","Dance","Gymnastics"], keep:"Gaming",
-   foot:"<b>Your kid likes to game.</b> Now let's make it count.",
-   primary:"Soccer didn't stick. Neither did dance. Gaming did. Give it a team, a coach and a season.",
+   alts:["A1 \u00b7 You\u2019ve tried everything.","A3 \u00b7 How much do they game?"],
+   chain:["The things they say every night. Crossed off.","Screen 1 repeats the list. Screen 4: Something to talk about.","Trade the fight for a real conversation.","Their spot is saved."]},
+  {k:"sports", letter:"B", tone:"t-bone", hook:"They tried them all.",
+   items:["Soccer","Baseball","Dance","Gymnastics"], keep:"Gaming. That one stuck.",
+   foot:"<b>Not a sports kid? Good.</b> Every kid still needs a team.",
+   primary:"Soccer didn\u2019t stick. Neither did dance. Gaming did. Give it a team, a coach and a season.",
    thread:"Gaming stuck. Give it a team.", aud:"Parents of kids who skipped sports",
-   chain:["Soccer, baseball, dance. Crossed off.","Screen 1: they tap the list themselves.","Every kid needs a team.","Their team is coming."]},
-  {k:"parentfree", letter:"C", tone:"t-teal", hook:"The parent-free league.",
-   items:["Buying cleats","Weekend travel","Folding chairs in the mud","Circling for parking"], keep:"Logged in on time",
-   foot:"<b>A real team and a real coach.</b> No sideline required.",
-   primary:"No cleats, no travel, no folding chairs in the mud. A real team and a real coach, from their room.",
+   alts:["B2 \u00b7 Everything a sports kid gets. (ticks, not strikes)"],
+   chain:["Soccer, baseball, dance. Crossed off.","Screen 1: they tap the same list themselves.","Every kid needs a team.","Their team is coming."]},
+  {k:"parentfree", letter:"C", tone:"t-teal", hook:"Everything you do for practice.",
+   items:["Drive there","Find the cleats","Fold the chairs","Find parking"], keep:"Nothing. They log in.",
+   foot:"<b>The parent-free league.</b> A real team and a real coach.",
+   primary:"No driving, no cleats, no folding chairs in the mud. A real team and a real coach, from their room.",
    thread:"A real team, without the sideline duty.", aud:"Busy sports-parent households",
-   chain:["Sideline chores. Crossed off.","Screen 1: the same list, then They show up on time.","Your weekend, back.","Their spot is saved. No cleats required."]}
+   alts:["C2 \u00b7 Your Saturday, before."],
+   chain:["Every practice chore. Crossed off.","Screen 1 repeats the list, then They show up on time.","Your weekend, back.","Their spot is saved. No cleats required."]}
 ];
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 // keep the last two words of a line together
@@ -177,6 +180,7 @@ document.getElementById("rows").innerHTML = ADS.map(a=>`
         <dt>Lands on</dt><dd><a href="${SITE}#${a.k}" target="_blank" rel="noopener">Microsite #${a.k}</a></dd>
         <dt>Button</dt><dd>Sign up</dd>
         <dt>Sizes</dt><dd>9:16 story, 4:5 feed</dd>
+        <dt>Also in Figma</dt><dd>${a.alts.map(esc).join("<br>")}</dd>
       </dl>
     </div>
     <div class="ads">

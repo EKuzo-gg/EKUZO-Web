@@ -454,17 +454,17 @@ const DEFAULT_SLIDES = [
   {sec:"events", tone:"magenta", kicker:"On the road", head:"You found us.", sub:"We're on the road meeting families, schools, colleges and clubs. Come say hi and play a round."},
 
   // Parent ad flows: screens only these paths use (each flow opens on its ad's own question or list)
-  {id:"a_list", sec:"adflow", type:"list", tone:"ink", kicker:"What we've tried", head:"Tried everything?", sub:"The game was never the problem. Nobody was coaching it.", items:["Timers","Passwords","Taking the controller","Bribes"], keep:"Giving it a coach"},
+  {id:"a_list", sec:"adflow", type:"list", tone:"ink", kicker:"Sound familiar?", head:"Things you've said this week.", sub:"Every parent has said them. None of them end the fight.", items:["\u201cPut the iPad down.\u201d","\u201cLast game.\u201d","\u201cI said off.\u201d","\u201cGo outside.\u201d"], keep:"\u201cHow'd practice go?\u201d"},
   {id:"a_count", sec:"adflow", type:"cta", tone:"red", kicker:"The line we keep coming back to", head:"Your kid likes to game.", sub:"Now let's make it count."},
-  {id:"b_list", sec:"adflow", type:"list", pick:true, tone:"bone", kicker:"The shortlist", head:"What have they tried?", sub:"Tap everything that didn't stick.", items:["Soccer","Baseball","Dance","Gymnastics","Piano"], keep:"Gaming", reply:"Gaming stuck. That's not a problem. It's a starting point."},
+  {id:"b_list", sec:"adflow", type:"list", pick:true, tone:"bone", kicker:"The shortlist", head:"They tried them all.", sub:"Tap everything that didn't stick.", items:["Soccer","Baseball","Dance","Gymnastics","Piano"], keep:"Gaming. That one stuck.", reply:"That's not a problem. It's a starting point."},
   {id:"b_jersey", sec:"adflow", tone:"cream", img:"confidence", pos:"47% 30%", kicker:"Game day", head:"Their name on a jersey.", sub:"Same as any team: colors, a roster and their gamer tag on the back."},
-  {id:"c_list", sec:"adflow", type:"list", tone:"ink", kicker:"Sports parent duty", head:"The parent-free league.", sub:"All the good parts of a team. None of the sideline duty.", items:["Buying cleats","Weekend travel","Folding chairs in the mud","Circling for parking"], keep:"Logged in on time"},
+  {id:"c_list", sec:"adflow", type:"list", tone:"ink", kicker:"The parent-free league", head:"Everything you do for practice.", sub:"All the good parts of a team. None of the sideline duty.", items:["Drive there","Find the cleats","Fold the chairs","Find parking"], keep:"Nothing. They log in."},
   {id:"c_ontime", sec:"adflow", tone:"teal", kicker:"Practice day", head:"They show up on time. Without you.", sub:"Practice is online, from their room. A coach starts it, runs it and wraps it up."},
   {id:"c_cleats", sec:"adflow", tone:"cream", img:"hands-in", pos:"50% 45%", kicker:"What you skip", head:"No cleats. No travel.", sub:"No carrying chairs through a muddy field. Just their headset and their setup."},
   {id:"c_parking", sec:"adflow", tone:"red", kicker:"Game day", head:"Don't worry about parking.", sub:"You can still eat out. You'll just have to leave the house without them."},
 
   // Gates: after a few thoughts, ask for the sign-up. They can keep learning or switch paths.
-  {id:"a_gate", sec:"adflow", type:"gate", tone:"ink", kicker:"Season one \u00b7 2027", head:"Put the timer away.", sub:"Give them a team, a coach and a season instead.", cta:"Save their spot"},
+  {id:"a_gate", sec:"adflow", type:"gate", tone:"ink", kicker:"Season one \u00b7 2027", head:"Trade the fight for a real conversation.", sub:"A team, a coach and a season to talk about.", cta:"Save their spot"},
   {id:"b_gate", sec:"adflow", type:"gate", tone:"blue", kicker:"Season one \u00b7 2027", head:"Every kid needs a team.", sub:"Theirs plays on a screen, not a field.", cta:"Find their team"},
   {id:"c_gate", sec:"adflow", type:"gate", tone:"ink", kicker:"Season one \u00b7 2027", head:"Your weekend, back.", sub:"A real team and a real coach. No sideline required.", cta:"Save their spot"},
 
@@ -513,9 +513,9 @@ const ROLES = [
 ];
 // Parent ad flows. Not on the player picker: each one is reached from its ad (or QR) by link, e.g. #parentfree.
 const FLOWS = [
-  {k:"screens", name:"Parent", as:"parent", label:"Screen time", ad:"How much do they game?",   seq:["why_q","a_list","season_screen","why_practice","a_gate","why_compete","par_replay","par_coached","par_talk","par_seen","a_count","join_form"]},
-  {k:"sports",  name:"Parent", as:"parent", label:"Not a sports kid", ad:"Not a sports kid? Good.",  seq:["b_list","why_notsports","par_squad","season_ladder","b_gate","par_themselves","why_skills","b_jersey","join_kid","join_form"]},
-  {k:"parentfree", name:"Parent", as:"parent", label:"Parent-free league", ad:"The parent-free league.", seq:["c_list","c_ontime","c_cleats","c_parking","c_gate","why_practice","par_seen","par_talk","ev_gg","join_kid","join_form"]},
+  {k:"screens", name:"Parent", as:"parent", label:"Screen time", ad:"Things you've said this week.", seq:["a_list","season_screen","why_practice","par_talk","a_gate","why_compete","par_replay","par_coached","par_seen","a_count","join_form"]},
+  {k:"sports",  name:"Parent", as:"parent", label:"Not a sports kid", ad:"They tried them all.", seq:["b_list","why_notsports","par_squad","season_ladder","b_gate","par_themselves","why_skills","b_jersey","join_kid","join_form"]},
+  {k:"parentfree", name:"Parent", as:"parent", label:"Parent-free league", ad:"Everything you do for practice.", seq:["c_list","c_ontime","c_cleats","c_parking","c_gate","why_practice","par_seen","par_talk","ev_gg","join_kid","join_form"]},
   // College and organization flows, e.g. #club
   {k:"club",     name:"College", as:"college", ad:"What does your club need most?", seq:["d_q","d_host","d_coach","d_hard","d_earn","d_doors","d_games","d_proof","d_end","join_form"]},
   {k:"space",    name:"Organization", as:"org", ad:"Empty room on a Saturday?", seq:["e_list","e_fill","e_coaches","season_ladder","d_hard","org_recess","ev_gg","d_earn","e_end","join_form"]},
@@ -523,7 +523,7 @@ const FLOWS = [
 ];
 const ROLE = Object.fromEntries([...ROLES, ...FLOWS].map(r=>[r.k,r]));
 
-const KEY = "ekuzo-roadshow-story-v19";
+const KEY = "ekuzo-roadshow-story-v20";
 const ROLE_KEY = "ekuzo-roadshow-role";
 const IMG_KEYS = [null, ...Object.keys(IMG)];
 const TONES = ["arcade","ink","red","bone","lime","blue","cream","teal","yellow","slate","green","magenta"];
