@@ -116,20 +116,6 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d4 h3{font-size:6.2cqw}.k-email.d4 .roster{font-size:1.8cqw}.k-email.d4 .sticker{display:none}.k-email.d4 .photo-tag .logo{width:10cqw;padding:1.4cqw 2cqw}.k-email.d4 .photo-tag{top:3cqw;left:3cqw}
 
 /* D5 Ask them: Instrument Serif italic + Inter Tight caps, cream + teal, inset photo */
-.d5{--bg:var(--cream);color:var(--ink)}
-.d5 .in{padding:6cqw;gap:3.4cqw}
-.d5 .top{display:flex;justify-content:space-between;align-items:center}
-.d5 .top small{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
-.d5 .frame{position:relative;flex:1;min-height:0;border-radius:4cqw;overflow:hidden}
-.d5 .frame .ph{position:absolute}
-.d5 h3{margin:0;font:800 9.6cqw/.92 var(--ui);text-transform:uppercase;letter-spacing:-.03em}
-.d5 h3 em{display:block;font:italic 400 14cqw/.9 "Instrument Serif",Georgia,serif;text-transform:none;color:var(--teal);letter-spacing:-.01em}
-.d5 .row{display:flex;justify-content:space-between;align-items:center;gap:3cqw}
-.d5 .sub{margin:0;font:500 3.8cqw/1.3 var(--ui)}
-.d5 .cta{background:var(--teal);color:#fff}
-.k-email.d5 .in{flex-direction:row;padding:4cqw;gap:4cqw}.k-email.d5 .frame{flex:0 0 40%}.k-email.d5 .col{display:flex;flex-direction:column;gap:2cqw;justify-content:center;flex:1}
-.k-email.d5 h3{font-size:5.4cqw}.k-email.d5 h3 em{font-size:8cqw}.k-email.d5 .sub{font-size:2.3cqw}.k-email.d5 .top small{font-size:1.8cqw}.k-email.d5 .logo{width:11cqw}
-.d5:not(.k-email) .col{display:contents}
 
 /* D6 The coach ends it: Syne, magenta + ink + blue, duotone photo */
 .d6{--bg:var(--magenta);color:var(--ink)}
@@ -146,7 +132,6 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-hero.d1 .top,.k-hero.d3 .top,.k-hero.d6 .top,.k-hero.d5 .top,.k-hero.d2 .top{display:none}
 .k-hero.d4 .photo-tag{display:none}
 .k-hero.d1::after{background:linear-gradient(180deg,rgba(17,16,19,.55) 0%,rgba(17,16,19,.1) 25%,rgba(17,16,19,.94) 66%)}
-.k-hero.d5 .in{padding-top:4cqw !important}
 .k-hero.d3 .in,.k-hero.d6 .in{justify-content:flex-end}
 
 
@@ -159,9 +144,6 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d1 .in{justify-content:center;padding-top:9cqw}
 .k-email.d1 h3{font-size:7cqw;max-width:66%}
 .k-email.d1 .sub{max-width:60%}
-.k-email.d5 .top{display:none}
-.k-email.d5 .col::before{content:"";display:block}
-.k-email.d5 .row{flex-direction:column;align-items:flex-start;gap:2cqw}
 .k-email.d6 .in{justify-content:space-between}
 .k-email.d6 h3{max-width:70%}
 .d1 h3 s{white-space:nowrap}
@@ -283,26 +265,6 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d10 .in{padding:5cqw;justify-content:center;gap:2cqw}.k-email.d10 h3{font-size:5.8cqw;max-width:60%}.k-email.d10 .sub{font-size:2.4cqw;max-width:55%}.k-email.d10 .top{display:none}
 
 /* D11 HUD: Chakra Petch, ink + cyan + red, game overlay */
-.d11{--bg:var(--ink);color:#fff}
-.d11 .ph{filter:saturate(.2) contrast(1.15) brightness(.8)}
-.d11::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.55),rgba(17,16,19,.05) 30%,rgba(17,16,19,.92) 72%),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 .4cqw,transparent .4cqw 1.2cqw)}
-.d11 .in{z-index:1;padding:6cqw;justify-content:space-between}
-.d11 .hud{display:flex;justify-content:space-between;align-items:center;font:700 3cqw/1 "Chakra Petch",var(--mono);text-transform:uppercase;letter-spacing:.08em}
-.d11 .hp{display:flex;align-items:center;gap:2cqw}
-.d11 .hp i{display:block;width:22cqw;height:2.4cqw;background:linear-gradient(90deg,var(--cyan) 82%,rgba(255,255,255,.2) 82%);clip-path:polygon(0 0,100% 0,96% 100%,0 100%)}
-.d11 .ret{position:absolute;left:50%;top:38%;width:30cqw;aspect-ratio:1;transform:translate(-50%,-50%);border:.5cqw solid var(--cyan);opacity:.85;
-  clip-path:polygon(0 0,30% 0,30% .6cqw,70% .6cqw,70% 0,100% 0,100% 30%,99% 30%,99% 70%,100% 70%,100% 100%,70% 100%,70% 99%,30% 99%,30% 100%,0 100%,0 70%,1% 70%,1% 30%,0 30%)}
-.d11 .ret::after{content:"PLAYER 01 · NEEDS A COACH";position:absolute;left:0;top:calc(100% + 2cqw);white-space:nowrap;font:700 2.6cqw/1 "Chakra Petch",var(--mono);color:var(--cyan);letter-spacing:.08em}
-.d11 h3{margin:0;font:700 11.4cqw/.92 "Chakra Petch",var(--ui);text-transform:uppercase;letter-spacing:-.01em}
-.d11 h3 em{font-style:normal;color:var(--cyan);display:block}
-.d11 .sub{margin:2.6cqw 0 4cqw;font:500 4cqw/1.3 var(--ui);max-width:86%}
-.d11 .cta{background:var(--red);color:#fff;font-family:"Chakra Petch",var(--ui);border-radius:0;clip-path:polygon(3cqw 0,100% 0,calc(100% - 3cqw) 100%,0 100%);padding-inline:7cqw}
-.k-story.d11 .ret{top:42%}
-.k-hero.d11 .hud{display:none}.k-hero.d11 .ret{top:30%}
-.k-email.d11 .ret{left:76%;top:50%;width:20cqw}.k-email.d11 .ret::after{font-size:1.6cqw}
-.k-email.d11::after{background:linear-gradient(90deg,rgba(17,16,19,.95) 35%,rgba(17,16,19,.2))}
-.k-email.d11 .in{padding:4.5cqw}.k-email.d11 .hud{font-size:1.8cqw;max-width:56%}.k-email.d11 .hp i{width:12cqw;height:1.4cqw}
-.k-email.d11 h3{font-size:6.2cqw}.k-email.d11 .sub{font-size:2.3cqw;margin:1.2cqw 0 2cqw}.k-email.d11 .cta{font-size:2.4cqw;padding:2cqw 4cqw}
 
 /* D12 Can't, practice: Hanken Grotesk, teal + cream, text thread */
 .d12{--bg:var(--teal);color:#fff}
@@ -339,23 +301,10 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .d10 .wall{left:-3cqw;right:auto}
 .d10 .wall span:nth-child(2){margin-left:-46cqw}.d10 .wall span:nth-child(3){margin-left:0}
 .k-hero.d10 .wall{top:20cqw}
-.d11 .ret{clip-path:none;border:0;width:26cqw;left:50%;top:31%;
- --c:var(--cyan);background:
- linear-gradient(var(--c),var(--c)) 0 0/6cqw .6cqw,linear-gradient(var(--c),var(--c)) 0 0/.6cqw 6cqw,
- linear-gradient(var(--c),var(--c)) 100% 0/6cqw .6cqw,linear-gradient(var(--c),var(--c)) 100% 0/.6cqw 6cqw,
- linear-gradient(var(--c),var(--c)) 0 100%/6cqw .6cqw,linear-gradient(var(--c),var(--c)) 0 100%/.6cqw 6cqw,
- linear-gradient(var(--c),var(--c)) 100% 100%/6cqw .6cqw,linear-gradient(var(--c),var(--c)) 100% 100%/.6cqw 6cqw;background-repeat:no-repeat}
-.d11 .ret::after{top:auto;bottom:calc(100% + 1.6cqw)}
-.d11 h3{font-size:9.4cqw}
-.k-story.d11 .ret{top:30%}
-.k-hero.d11 .in{justify-content:flex-end}.k-hero.d11 .ret{top:22%}
-.k-email.d11 .ret{left:62%;top:42%;width:16cqw}.k-email.d11 h3{font-size:5.4cqw;max-width:56%}.k-email.d11 .sub{max-width:52%}.k-email.d11 .logo{width:12cqw}
 .d12 h3{font-size:10.6cqw}
 
 .k-story.d7 .pol{width:28cqw;top:58cqw;left:12cqw}
 .k-hero.d7 .pol{width:46cqw;top:58cqw;left:14cqw}
-.k-hero.d11 .ret::after,.k-email.d11 .ret{display:none}
-.d11 .ret::after{font-size:2.8cqw}
 
 .k-hero.d9 .top{display:none}
 
@@ -395,14 +344,6 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 
 /* ===== Round of edits, Oct 8 pm ===== */
 /* D5 v2: red, handwritten answer */
-.d5{--bg:var(--red);color:#fff}
-.d5 .top small{color:var(--yellow)}
-.d5 .frame{border-radius:2cqw;border:1.6cqw solid #fff;transform:rotate(-1.5deg);box-shadow:0 2cqw 5cqw rgba(0,0,0,.25)}
-.d5 h3{font-size:9.4cqw;line-height:.92}
-.d5 h3 em{font:400 9cqw/1.05 "Permanent Marker",cursive;color:var(--yellow);text-transform:none;transform:rotate(-2deg);transform-origin:0 50%;margin-top:2.4cqw;letter-spacing:0}
-.d5 .sub{color:#fff}
-.d5 .cta{background:var(--yellow);color:var(--ink)}
-.k-email.d5 h3{font-size:4.8cqw}.k-email.d5 h3 em{font-size:4.8cqw;margin-top:1.2cqw}.k-email.d5 .frame{border-width:1cqw}
 /* D6: neon button, couch photo */
 .d6 .cta{background:var(--lime);color:var(--ink)}
 .d6 .ph{object-position:30% 30%}
@@ -414,22 +355,76 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .d8 .h1 img{object-position:35% 30%}
 .k-email.d8 h3{font-size:5cqw}
 /* D11 v2 */
-.d11 .ph{object-position:50% 40%}
-.d11 h3 .stat{font-weight:500;opacity:.75}
-.d11 .ret{left:57%;top:40%;width:20cqw}
-.k-story.d11 .ret{left:57%;top:36%}
-.k-hero.d11 .ret{left:57%;top:30%}
 /* D12 */
 .d12 .thread{font-size:3.8cqw}
 
 .d8 h3{font-size:9cqw}
 .k-story.d8 .row:first-child{padding-top:28cqw}
 .k-email.d8 h3{font-size:4.6cqw}
-.d11 .ret{left:27%;top:30%;width:18cqw}
-.k-story.d11 .ret,.k-hero.d11 .ret{display:none}
 
 .k-story.d8 .row:first-child{padding-bottom:5cqw !important}
 .k-story.d8 .row + .row{padding-top:5cqw !important}
+
+/* ===== Oct 8, round of edits 3 ===== */
+/* D5 v3: the team sport they'll actually show up for. Ink + lime, inset photo */
+.d5{--bg:var(--ink);color:#fff}
+.d5 .in{padding:6cqw;gap:3.6cqw}
+.d5 .top{display:flex;justify-content:space-between;align-items:center}
+.d5 .top small{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+.d5 .frame{position:relative;flex:1;min-height:0;border-radius:3cqw;overflow:hidden}
+.d5 .frame .ph{position:absolute}
+.d5 h3{margin:0;font:800 9.4cqw/.92 var(--ui);text-transform:uppercase;letter-spacing:-.03em;text-wrap:balance}
+.d5 h3 em{font-style:normal;color:var(--lime)}
+.d5 .row{display:flex;justify-content:space-between;align-items:center;gap:3cqw}
+.d5 .sub{margin:0;font:500 3.6cqw/1.3 var(--ui);color:#cfcbd4;max-width:52%}
+.d5 .cta{background:var(--lime);color:var(--ink)}
+.d5:not(.k-email) .col{display:contents}
+.k-hero.d5 .top{display:none}
+.k-email.d5 .in{flex-direction:row;padding:4cqw;gap:4cqw}.k-email.d5 .frame{flex:0 0 40%}.k-email.d5 .top{display:none}
+.k-email.d5 .col{display:flex;flex-direction:column;gap:2cqw;justify-content:center;flex:1}
+.k-email.d5 h3{font-size:5.2cqw}.k-email.d5 .sub{font-size:2.3cqw;max-width:none}.k-email.d5 .row{flex-direction:column;align-items:flex-start;gap:2cqw}
+
+/* D11 v3: their gamer tag on a real jersey. Red + blue jersey + lime */
+.d11{--bg:var(--red);color:#fff}
+.d11 .in{padding:7cqw;justify-content:space-between;gap:3cqw}
+.d11 .top{display:flex;justify-content:space-between;align-items:center}
+.d11 .top small{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.d11 .jersey{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.d11 .jersey svg{height:100%;max-width:70%;transform:rotate(-5deg);filter:drop-shadow(0 2.4cqw 3cqw rgba(0,0,0,.3));overflow:visible}
+.d11 h3{margin:0;font:900 10cqw/.9 "Rubik",var(--ui);text-transform:uppercase;letter-spacing:-.02em}
+.d11 h3 em{font-style:normal;color:var(--lime);display:block}
+.d11 .sub{margin:2.4cqw 0 4cqw;font:500 3.8cqw/1.3 "Rubik",var(--ui);max-width:90%}
+.d11 .cta{background:#fff;color:var(--ink);font-family:"Rubik",var(--ui)}
+.k-hero.d11 .top{display:none}
+.k-email.d11 .in{flex-direction:row;padding:4cqw;align-items:center}.k-email.d11 .top{display:none}
+.k-email.d11 .jersey{flex:0 0 38%;height:100%}.k-email.d11 .jersey svg{max-width:90%}
+.k-email.d11 h3{font-size:5.6cqw}.k-email.d11 .sub{font-size:2.3cqw;margin:1.4cqw 0 2.4cqw}.k-email.d11 .cta{font-size:2.6cqw;padding:2cqw 3.2cqw}
+
+/* D3 v3 */
+.d3 .ph{object-position:50% 40%}
+
+/* D12: all bubbles match, headline in two set lines */
+.d12 .them.big{font-weight:500}
+.d12 h3{font-size:9.4cqw;line-height:.92}
+.d12 h3 span,.d12 h3 em{display:block;white-space:nowrap}
+.k-email.d12 h3{font-size:4.8cqw}
+.k-email.d12 .foot{flex:0 0 46%}
+.k-email.d12 .thread{flex:1}
+
+/* D8 alt lines */
+.alts{display:flex;flex-direction:column;gap:6px}
+.alts b{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.alts button{appearance:none;text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:600 13px/1.3 var(--ui);cursor:pointer}
+.alts button[aria-pressed="true"]{border-color:var(--lime);box-shadow:inset 3px 0 0 var(--lime)}
+.alts button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+
+.d10 .wall span{font-size:22cqw}
+.d10 .wall span:nth-child(2){margin-left:-40cqw}
+.k-email.d10 .wall span{font-size:13cqw}
+
+.d11 h3{font-size:8.4cqw}
+.k-email.d11 h3{font-size:4.8cqw}
+.k-email.d10 .sub{max-width:48%}
 
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
 @media (max-width:860px){ .dir{grid-template-columns:1fr} }
@@ -528,7 +523,7 @@ const D = [
   art:k=>`<img class="ph" src="${IMG["esports-room"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="tag">We’ve all said it</span></div>
    <h3>They game <s>too much.</s><em>With a coach.</em></h3>
-   <p class="sub">Give the hours a coach, a team and a season.</p><span class="cta">Save their spot →</span></div>`},
+   <p class="sub">Give screen time a coach, a team and a&nbsp;season.</p><span class="cta">Save their spot →</span></div>`},
  {id:"d2", name:"Overheard", photo:"couch",
   type:"Archivo Black, heavy caps", palette:["#111013","#FDE74C","#FFFFFF"], from:"C4 Ask Them About Tonight",
   why:"A line every parent has heard from the couch, set huge. The parent reads their own living room before they read our name.",
@@ -538,14 +533,14 @@ const D = [
    <p class="who">Heard in every living room</p>
    <p class="q">“I can’t pause&nbsp;it.”</p>
    <div class="bar"><p>What if the match came with a&nbsp;coach?</p><span class="cta">Learn more →</span></div></div>`},
- {id:"d3", name:"She plays to win", photo:"confidence",
-  type:"Unbounded, wide caps", palette:["#1C3745","#60E1E0","#FFFFFF"], from:"Inventory (02f), aimed at girl gamers",
-  why:"Balances a set that leans boy. Talks to the parent of a girl who games and is serious about it, with a calm, confident colour.",
-  subject:"She plays to win. Give her a team.",
-  art:k=>`<img class="ph" src="${IMG["confidence"]}" alt="">
+ {id:"d3", name:"Play to win", photo:"boys-girls-club",
+  type:"Unbounded, wide caps", palette:["#1C3745","#60E1E0","#FFFFFF"], from:"Inventory (02f) and Lobby (03)",
+  why:"For every kid who already plays to win. A calm, confident colour that reads premium next to loud feeds, and a mixed squad in the photo.",
+  subject:"They play to win. Give them a team.",
+  art:k=>`<img class="ph" src="${IMG["boys-girls-club"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="count">Season one · 2027</span></div>
-   <div><h3>She plays to win.<em>Give her a team.</em></h3>
-   <p class="sub">A coach, a team and a season of her&nbsp;own.</p><span class="cta">Find her team →</span></div></div>`},
+   <div><h3>They play to win.<em>Give them a&nbsp;team.</em></h3>
+   <p class="sub">A coach, a team and a season of their&nbsp;own.</p><span class="cta">Find their team →</span></div></div>`},
  {id:"d4", name:"Team card", photo:"coach-and-mom",
   type:"Bricolage Grotesque, tight caps", palette:["#8E22E0","#E0FF4E","#FFFFFF"], from:"Roster cards (02c) and Lobby (03)",
   why:"Looks like a team photo on the fridge. Answers Jamie's second question, who else is in it, before the parent asks.",
@@ -554,14 +549,14 @@ const D = [
    <div class="in"><div class="photo-tag">${logo()}</div>
    <div class="panel"><span class="sticker">Not every team needs a field.</span><span class="roster">Esports league</span>
    <h3>Every kid needs a team.</h3><span class="cta">Find their team →</span></div></div>`},
- {id:"d5", name:"Going to game anyway", photo:"laughing",
-  type:"Inter Tight caps with Permanent Marker", palette:["#F92524","#FDE74C","#FFFFFF","#111013"], from:"Parent honesty, replaces Ask them about tonight",
-  why:"Says the quiet part a parent already thinks, then answers it in a handwritten note. Honest and a little funny, no promise about tonight.",
-  subject:"They’re going to game anyway.",
-  art:k=>`<div class="in"><div class="top">${logo()}<small>For parents</small></div>
+ {id:"d5", name:"They'll actually show up", photo:"laughing",
+  type:"Inter Tight, extra bold caps", palette:["#111013","#E0FF4E","#FFFFFF"], from:"B, They tried them all",
+  why:"For the parent who has signed them up for soccer, piano and scouts. This is the one they won't quit.",
+  subject:"The team sport they’ll actually show up for.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
    <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
-   <div class="col"><h3>They’re going to game&nbsp;anyway.<em>Might as well have a&nbsp;coach.</em></h3>
-   <div class="row"><p class="sub">A real coach, a real team, a real&nbsp;season.</p><span class="cta">Learn more →</span></div></div></div>`},
+   <div class="col"><h3>The team sport they’ll <em>actually</em> show up&nbsp;for.</h3>
+   <div class="row"><p class="sub">A coach, a team and a season, in the game they already&nbsp;love.</p><span class="cta">Find their team →</span></div></div></div>`},
  {id:"d6", name:"The coach ends it", photo:"couch",
   type:"Syne, extended caps", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"C2 It Ends At 7:30, without the time",
   why:"The loudest of the set. Promises the end of the doorway argument, without promising a time slot.",
@@ -578,15 +573,22 @@ const D = [
    <h3>Screen time,<em>graded.</em></h3>
    <div class="grades"><div>Teamwork<b>A</b></div><div>Talking it through<b class="circ">A</b></div><div>Showing up<b>A+</b></div></div>
    <div class="bot"><p>A coach tracks what they learn every week.</p><span class="cta">See how →</span></div></div>`},
- {id:"d8", round:2, name:"Headset on, jersey on", photo:"couch + laughing",
+ {id:"d8", round:2, name:"Screen time, team time", photo:"couch + laughing",
   type:"Dela Gothic One", palette:["#034FFF","#F92524","#FFFFFF"], from:"Lobby (03) and the before and after idea",
-  why:"Before and after in one frame. Top half is every living room. Bottom half is the same kid with teammates. Karlin liked the red and blue split.",
-  subject:"Headset on. Door shut. Now: jersey on, team up.",
+  why:"Before and after in one frame, keeping the red and blue split Karlin liked. Tap a line below to try it in every size.",
+  subject:"Screen time. Now team time.",
+  alts:[
+   {l1:"Screen time.",l2:"Team time.",a:"Now",b:"Season one",sub:"Same game. Now with a coach and a&nbsp;team."},
+   {l1:"Same screen.",l2:"New team.",a:"Now",b:"Season one",sub:"The game they love, with a coach and a&nbsp;team."},
+   {l1:"Solo.",l2:"Squad.",a:"Now",b:"Season one",sub:"Same game. Now with teammates and a&nbsp;coach."},
+   {l1:"Playing alone.",l2:"Playing for a&nbsp;team.",a:"Now",b:"Season one",sub:"Same game. Now with a coach and a&nbsp;season."},
+   {l1:"Screen time.",l2:"Practice.",a:"Before",b:"After",sub:"Same hours. Now with a coach and a&nbsp;team."}
+  ],
   art:k=>`<div class="half h1"><img src="${IMG["couch"]}" alt=""></div><div class="half h2"><img src="${IMG["laughing"]}" alt=""></div>
    <div class="in"><div class="top">${logo()}</div>
-   <div class="row"><span class="lbl">Tonight</span><h3>Headset&nbsp;on. Door&nbsp;shut.</h3></div>
-   <div class="row"><h3>Jersey&nbsp;on. Team&nbsp;up.</h3><span class="lbl">Season one</span></div>
-   <div class="bottom"><p>Same game. Now with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
+   <div class="row"><span class="lbl" data-alt="a">Now</span><h3 data-alt="l1">Screen time.</h3></div>
+   <div class="row"><h3 data-alt="l2">Team time.</h3><span class="lbl" data-alt="b">Season one</span></div>
+   <div class="bottom"><p data-alt="sub">Same game. Now with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
  {id:"d9", round:2, name:"Admit one player", photo:"team-walk",
   type:"Rubik Mono One", palette:["#49B41A","#F8F4E2","#111013"], from:"C, the parent-free league",
   why:"A ticket for the kid, nothing for the parent to do. The stub does the work of the crossed-off list without a list.",
@@ -596,32 +598,31 @@ const D = [
    <div class="tix"><div class="main"><span class="adm">Admit one player</span><h3>The only practice you <em>don’t</em> drive&nbsp;to.</h3></div>
    <div class="stub"><div><small>Drive</small><b>None</b></div><div><small>Cleats</small><b>None</b></div><div><small>Parking</small><b>None</b></div></div></div>
    <span class="cta">Save their spot →</span></div>`},
- {id:"d10", round:2, name:"Proud", photo:"team-walk",
+ {id:"d10", round:2, name:"Screen time with a purpose", photo:"team-walk",
   type:"Sora, extra bold caps", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Karlin: make you proud doing something they love",
-  why:"Flips the guilt. Instead of less gaming, it promises a version of gaming a parent brags about.",
-  subject:"Be proud of their gaming.",
+  why:"Says GAMING loud and proud, then turns it into something a parent can brag about: real skills, built in the game they love.",
+  subject:"Be proud of their screen time.",
   art:k=>`<img class="ph" src="${IMG["team-walk"]}" alt="">
-   <div class="wall"><span>Proud</span><span>Proud proud</span><span>Proud</span></div>
+   <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
    <div class="in"><div class="top">${logo()}</div>
-   <h3>Be proud of their <em>gaming.</em></h3>
-   <p class="sub">A coach, a team and a season they’ll want to tell you about.</p><span class="cta">Learn more →</span></div>`},
- {id:"d11", round:2, name:"Player stats", photo:"boys-girls-club",
-  type:"Chakra Petch, techno caps", palette:["#111013","#60E1E0","#F92524","#FFFFFF"], from:"Free Practice and Play",
-  why:"Reads like a game's stat screen, in two lines a parent gets instantly. Lots of hours, no coach. The squad photo shows where it goes.",
-  subject:"Hours played: lots. Coaches: zero.",
-  art:k=>`<img class="ph" src="${IMG["boys-girls-club"]}" alt="">
-   <div class="ret"></div>
-   <div class="in"><div class="hud">${logo()}<span class="hp">Skill<i></i></span></div>
-   <div><h3><span class="stat">Hours played:</span> Lots.<em><span class="stat">Coaches:</span> Zero.</em></h3>
-   <p class="sub">Turn those hours into practice, with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
+   <h3>Be proud of their <em>screen&nbsp;time.</em></h3>
+   <p class="sub">Problem solving, teamwork and talking it through. Real skills, in the game they already&nbsp;love.</p><span class="cta">Say yes →</span></div>`},
+ {id:"d11", round:2, name:"Their name on a jersey", photo:"none, illustrated jersey",
+  type:"Rubik black caps, Graduate for the jersey", palette:["#F92524","#034FFF","#E0FF4E","#FFFFFF"], from:"The jersey with gamer tag",
+  why:"A positive, proud one. The jersey back with their gamer tag is the picture a kid wants and a parent wants to photograph.",
+  subject:"Their gamer tag. On a real jersey.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+   <div class="jersey"><svg viewBox="0 0 200 230" aria-hidden="true"><path d="M62 8 Q100 30 138 8 L192 34 L176 98 L152 90 L152 222 L48 222 L48 90 L24 98 L8 34 Z" fill="#034FFF"/><path d="M62 8 Q100 30 138 8" fill="none" stroke="#E0FF4E" stroke-width="7"/><path d="M8 34 L24 98 M192 34 L176 98" stroke="#fff" stroke-width="5" opacity=".8"/><text x="100" y="74" text-anchor="middle" font-family="Graduate,Rubik,sans-serif" font-size="25" fill="#fff" letter-spacing="2">NOVA</text><text x="100" y="178" text-anchor="middle" font-family="Graduate,Rubik,sans-serif" font-size="96" fill="#E0FF4E">07</text></svg></div>
+   <div><h3>Their gamer tag.<em>On a real jersey.</em></h3>
+   <p class="sub">A coach, a team and a jersey with their name on the&nbsp;back.</p><span class="cta">Save their spot →</span></div></div>`},
  {id:"d12", round:2, name:"The best excuse", photo:"coach-and-mom",
   type:"Hanken Grotesk, extra bold caps", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Overheard, from the kid’s side",
   why:"A text thread every parent has had, ending with the one excuse they’d be glad to hear.",
   subject:"“Sorry! Practice is going over.”",
   art:k=>`<img class="ph" src="${IMG["coach-and-mom"]}" alt="">
    <div class="in"><div class="top">${logo()}</div>
-   <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them big">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
-   <div class="foot"><h3>The best excuse <em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`}
+   <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
+   <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`}
 ];
 // shuffle so no ad always goes first
 const order = D.map(d=>d.id).sort(()=>Math.random()-.5);
