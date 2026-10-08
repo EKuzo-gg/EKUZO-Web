@@ -1,7 +1,4 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
-</head><body style="margin:0">
-<title>EKUZO Roadshow Hub</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>EKUZO Roadshow Hub</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@500;700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
@@ -105,6 +102,8 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
           <a href="ads.html#screens">A · Things you've said this week.</a>
           <a href="ads.html#sports">B · They tried them all.</a>
           <a href="ads.html#parentfree">C · Everything you do for practice.</a>
+          <span>Creative exercise</span>
+          <a href="ad-lab.html">Ad lab · six photo directions</a>
           <span>Design files</span>
           <a href="https://www.figma.com/design/C43Uf1tDxD3C6qUFK6BSN0" target="_blank" rel="noopener">Figma ad template &#8599;</a>
         </nav>
@@ -150,5 +149,4 @@ const FRAMES = [
 document.getElementById("miro").innerHTML = FRAMES.map(([t,s,id],i)=>
   `<a href="${BOARD}${id ? "?moveToWidget=" + id : ""}" target="_blank" rel="noopener"><span class="n">${String(i+1).padStart(2,"0")}</span><span><b>${t}</b><small>${s}</small></span><span class="go">Open &#8599;</span></a>`).join("");
 </script>
-
 </body></html>
