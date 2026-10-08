@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>EKUZO Ad Lab</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;800&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&family=Hanken+Grotesk:wght@500;800&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;800&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&family=Hanken+Grotesk:wght@500;800&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Permanent+Marker&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
 <style>
 /* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */
 :root{
@@ -393,6 +393,44 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d4 .ph{width:46%;left:0;right:auto;object-position:100% 30%}
 .k-hero.d4 .panel{padding-top:7cqw}
 
+/* ===== Round of edits, Oct 8 pm ===== */
+/* D5 v2: red, handwritten answer */
+.d5{--bg:var(--red);color:#fff}
+.d5 .top small{color:var(--yellow)}
+.d5 .frame{border-radius:2cqw;border:1.6cqw solid #fff;transform:rotate(-1.5deg);box-shadow:0 2cqw 5cqw rgba(0,0,0,.25)}
+.d5 h3{font-size:9.4cqw;line-height:.92}
+.d5 h3 em{font:400 9cqw/1.05 "Permanent Marker",cursive;color:var(--yellow);text-transform:none;transform:rotate(-2deg);transform-origin:0 50%;margin-top:2.4cqw;letter-spacing:0}
+.d5 .sub{color:#fff}
+.d5 .cta{background:var(--yellow);color:var(--ink)}
+.k-email.d5 h3{font-size:4.8cqw}.k-email.d5 h3 em{font-size:4.8cqw;margin-top:1.2cqw}.k-email.d5 .frame{border-width:1cqw}
+/* D6: neon button, couch photo */
+.d6 .cta{background:var(--lime);color:var(--ink)}
+.d6 .ph{object-position:30% 30%}
+/* D7: bigger polaroid */
+.d7 .pol{width:36cqw;top:12cqw;right:5cqw}
+.d7 h3{max-width:54%}
+/* D8 v2 */
+.d8 h3{font-size:10.4cqw}
+.d8 .h1 img{object-position:35% 30%}
+.k-email.d8 h3{font-size:5cqw}
+/* D11 v2 */
+.d11 .ph{object-position:50% 40%}
+.d11 h3 .stat{font-weight:500;opacity:.75}
+.d11 .ret{left:57%;top:40%;width:20cqw}
+.k-story.d11 .ret{left:57%;top:36%}
+.k-hero.d11 .ret{left:57%;top:30%}
+/* D12 */
+.d12 .thread{font-size:3.8cqw}
+
+.d8 h3{font-size:9cqw}
+.k-story.d8 .row:first-child{padding-top:28cqw}
+.k-email.d8 h3{font-size:4.6cqw}
+.d11 .ret{left:27%;top:30%;width:18cqw}
+.k-story.d11 .ret,.k-hero.d11 .ret{display:none}
+
+.k-story.d8 .row:first-child{padding-bottom:5cqw !important}
+.k-story.d8 .row + .row{padding-top:5cqw !important}
+
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
 @media (max-width:860px){ .dir{grid-template-columns:1fr} }
 @media (max-width:420px){ .b.feed .art,.b.email .art,.inbox{width:100%} .b.feed,.b.email{width:100%} }
@@ -447,39 +485,39 @@ const D = [
    <div class="in"><div class="photo-tag">${logo()}</div>
    <div class="panel"><span class="sticker">Not every team needs a field.</span><span class="roster">Esports league</span>
    <h3>Every kid needs a team.</h3><span class="cta">Find their team →</span></div></div>`},
- {id:"d5", name:"Ask them about tonight", photo:"laughing",
-  type:"Inter Tight caps with Instrument Serif italic", palette:["#F8F4E2","#3791A6","#111013"], from:"C4 Ask Them About Tonight",
-  why:"Warm and editorial, the one that feels like a magazine instead of an ad. Sells the conversation a parent wants back.",
-  subject:"Ask them about tonight’s match.",
-  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+ {id:"d5", name:"Going to game anyway", photo:"laughing",
+  type:"Inter Tight caps with Permanent Marker", palette:["#F92524","#FDE74C","#FFFFFF","#111013"], from:"Parent honesty, replaces Ask them about tonight",
+  why:"Says the quiet part a parent already thinks, then answers it in a handwritten note. Honest and a little funny, no promise about tonight.",
+  subject:"They’re going to game anyway.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>For parents</small></div>
    <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
-   <div class="col"><h3>Ask them about<em>tonight’s match.</em></h3>
-   <div class="row"><p class="sub">And get a real answer.</p><span class="cta">Learn more →</span></div></div></div>`},
- {id:"d6", name:"The coach ends it", photo:"hands-in",
-  type:"Syne, extended caps", palette:["#FF2ECC","#111013","#034FFF","#FFFFFF"], from:"C2 It Ends At 7:30, without the time",
+   <div class="col"><h3>They’re going to game&nbsp;anyway.<em>Might as well have a&nbsp;coach.</em></h3>
+   <div class="row"><p class="sub">A real coach, a real team, a real&nbsp;season.</p><span class="cta">Learn more →</span></div></div></div>`},
+ {id:"d6", name:"The coach ends it", photo:"couch",
+  type:"Syne, extended caps", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"C2 It Ends At 7:30, without the time",
   why:"The loudest of the set. Promises the end of the doorway argument, without promising a time slot.",
   subject:"Practice over. Nobody yelled.",
-  art:k=>`<img class="ph" src="${IMG["hands-in"]}" alt="">
+  art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
    <div><h3>The coach ends it.</h3><p class="sub">Practice has a start and an end. No doorway argument.</p><span class="cta">Save their spot →</span></div></div>`},
- {id:"d7", round:2, name:"Screen time, graded", photo:"boys-girls-club",
+ {id:"d7", round:2, name:"Screen time, graded", photo:"hands-in",
   type:"Anybody, expanded black caps", palette:["#EFEEED","#49B41A","#F92524","#111013"], from:"Structure and progress in Karlin's email",
   why:"Parents know how to read a report card. It turns screen time into something with grades, a teacher and a reason to be proud.",
   subject:"Screen time, graded.",
-  art:k=>`<div class="pol"><img src="${IMG["boys-girls-club"]}" alt=""></div>
+  art:k=>`<div class="pol"><img src="${IMG["hands-in"]}" alt=""></div>
    <div class="in"><div class="top">${logo()}<small>Progress report</small></div>
    <h3>Screen time,<em>graded.</em></h3>
    <div class="grades"><div>Teamwork<b>A</b></div><div>Talking it through<b class="circ">A</b></div><div>Showing up<b>A+</b></div></div>
    <div class="bot"><p>A coach tracks what they learn every week.</p><span class="cta">See how →</span></div></div>`},
- {id:"d8", round:2, name:"Same game, new team", photo:"esports-room + laughing",
+ {id:"d8", round:2, name:"Headset on, jersey on", photo:"couch + laughing",
   type:"Dela Gothic One", palette:["#034FFF","#F92524","#FFFFFF"], from:"Lobby (03) and the before and after idea",
-  why:"Before and after in one frame. Same kid, same game, but the bottom half has teammates. No copy needed to get it.",
-  subject:"Same game. Now with a team.",
-  art:k=>`<div class="half h1"><img src="${IMG["esports-room"]}" alt=""></div><div class="half h2"><img src="${IMG["laughing"]}" alt=""></div>
+  why:"Before and after in one frame. Top half is every living room. Bottom half is the same kid with teammates. Karlin liked the red and blue split.",
+  subject:"Headset on. Door shut. Now: jersey on, team up.",
+  art:k=>`<div class="half h1"><img src="${IMG["couch"]}" alt=""></div><div class="half h2"><img src="${IMG["laughing"]}" alt=""></div>
    <div class="in"><div class="top">${logo()}</div>
-   <div class="row"><span class="lbl">On their own</span><h3>Same game.</h3></div>
-   <div class="row"><h3>New team.</h3><span class="lbl">On a team</span></div>
-   <div class="bottom"><p>With a coach, a jersey and a season.</p><span class="cta">Find their team →</span></div></div>`},
+   <div class="row"><span class="lbl">Tonight</span><h3>Headset&nbsp;on. Door&nbsp;shut.</h3></div>
+   <div class="row"><h3>Jersey&nbsp;on. Team&nbsp;up.</h3><span class="lbl">Season one</span></div>
+   <div class="bottom"><p>Same game. Now with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
  {id:"d9", round:2, name:"Admit one player", photo:"team-walk",
   type:"Rubik Mono One", palette:["#49B41A","#F8F4E2","#111013"], from:"C, the parent-free league",
   why:"A ticket for the kid, nothing for the parent to do. The stub does the work of the crossed-off list without a list.",
@@ -489,32 +527,32 @@ const D = [
    <div class="tix"><div class="main"><span class="adm">Admit one player</span><h3>The only practice you <em>don’t</em> drive&nbsp;to.</h3></div>
    <div class="stub"><div><small>Drive</small><b>None</b></div><div><small>Cleats</small><b>None</b></div><div><small>Parking</small><b>None</b></div></div></div>
    <span class="cta">Save their spot →</span></div>`},
- {id:"d10", round:2, name:"Proud", photo:"confidence",
+ {id:"d10", round:2, name:"Proud", photo:"team-walk",
   type:"Sora, extra bold caps", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Karlin: make you proud doing something they love",
   why:"Flips the guilt. Instead of less gaming, it promises a version of gaming a parent brags about.",
   subject:"Be proud of their gaming.",
-  art:k=>`<img class="ph" src="${IMG["confidence"]}" alt="">
+  art:k=>`<img class="ph" src="${IMG["team-walk"]}" alt="">
    <div class="wall"><span>Proud</span><span>Proud proud</span><span>Proud</span></div>
    <div class="in"><div class="top">${logo()}</div>
    <h3>Be proud of their <em>gaming.</em></h3>
    <p class="sub">A coach, a team and a season they’ll want to tell you about.</p><span class="cta">Learn more →</span></div>`},
- {id:"d11", round:2, name:"Player one", photo:"confidence",
+ {id:"d11", round:2, name:"Player stats", photo:"boys-girls-club",
   type:"Chakra Petch, techno caps", palette:["#111013","#60E1E0","#F92524","#FFFFFF"], from:"Free Practice and Play",
-  why:"Speaks gaming to the parent, kindly. The kid is already good. The only thing missing from the screen is a coach.",
-  subject:"They’re already good at this.",
-  art:k=>`<img class="ph" src="${IMG["confidence"]}" alt="">
+  why:"Reads like a game's stat screen, in two lines a parent gets instantly. Lots of hours, no coach. The squad photo shows where it goes.",
+  subject:"Hours played: lots. Coaches: zero.",
+  art:k=>`<img class="ph" src="${IMG["boys-girls-club"]}" alt="">
    <div class="ret"></div>
    <div class="in"><div class="hud">${logo()}<span class="hp">Skill<i></i></span></div>
-   <div><h3>They’re already good at this.<em>Now add a coach.</em></h3>
-   <p class="sub">Turn the hours into a team, a season and a coach who knows the game.</p><span class="cta">Save their spot →</span></div></div>`},
- {id:"d12", round:2, name:"Can’t. Practice.", photo:"coach-and-mom",
+   <div><h3><span class="stat">Hours played:</span> Lots.<em><span class="stat">Coaches:</span> Zero.</em></h3>
+   <p class="sub">Turn those hours into practice, with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
+ {id:"d12", round:2, name:"The best excuse", photo:"coach-and-mom",
   type:"Hanken Grotesk, extra bold caps", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Overheard, from the kid’s side",
   why:"A text thread every parent has had, ending with the one excuse they’d be glad to hear.",
-  subject:"“Can’t. Practice.”",
+  subject:"“Sorry! Practice is going over.”",
   art:k=>`<img class="ph" src="${IMG["coach-and-mom"]}" alt="">
    <div class="in"><div class="top">${logo()}</div>
-   <div class="thread"><small>Today</small><span class="me">Come say hi to Grandma</span><span class="them">1 sec</span><span class="me">Now please</span><span class="them big">Can’t. Team practice. Coach is&nbsp;here.</span></div>
-   <div class="foot"><h3>The best excuse <em>you’ll ever hear.</em></h3><span class="cta">Save their spot →</span></div></div>`}
+   <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them big">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
+   <div class="foot"><h3>The best excuse <em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`}
 ];
 const nav = `<div class="nav">${logo()}<span class="menu">MENU</span></div>`;
 document.getElementById("jump").innerHTML = D.map((d,i)=>`<a href="#${d.id}">${String(i+1).padStart(2,"0")} ${d.name}</a>`).join("");
