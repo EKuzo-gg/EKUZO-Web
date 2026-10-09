@@ -38,8 +38,9 @@ export const SEASON_ONE_COPY = {
   bannerHead: "Season 01 starts in 2027. Get them on the list.",
   stickyHead: "Season 01 waitlist is open",
   doneKicker: "You’re on the list",
-  doneHead: "Their spot is saved.",
-  doneSub: "Watch your inbox for a note from Karlin, our founder. One quick question while you’re here:",
-  ageQ: "How old is your gamer?",
-  ages: ["7 to 10", "11 to 13", "14 to 17", "More than one"],
+  doneHead: "Awesome.",
+  doneSub: "We can’t wait to make screentime the highlight of your day too. We’ll be in touch. Now go outside. Or pick up that controller. Either way, go have fun.",
+  ageQ: "Optional: how old is your gamer?",
+  // Values match the Klaviyo kid_age field in Jamie's brief
+  ages: ["8 to 10", "11 to 13", "14 to 17", "More than one"],
 } as const;

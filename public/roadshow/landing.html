@@ -525,14 +525,17 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 /* Story with Instagram UI on top (not part of the export) */
 .stwrap{position:relative;width:214px}
 .igs{position:absolute;inset:0;pointer-events:none;color:#fff;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;justify-content:space-between}
-.igs .tp{padding:6px 8px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .tp{height:14%;box-sizing:border-box;padding:6px 8px;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.15))}
 .igs .prog{height:2px;border-radius:2px;background:rgba(255,255,255,.45);margin-bottom:6px;overflow:hidden}
 .igs .prog i{display:block;width:38%;height:100%;background:#fff}
 .igs .who{display:flex;align-items:center;gap:6px}
 .igs .av{width:20px;height:20px;border-radius:50%;background:#111013;display:grid;place-items:center}
 .igs .av svg{width:14px;fill:#fff;display:block}
 .igs .who small{font-weight:400;opacity:.85}
-.igs .bt{padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .bt{height:20%;box-sizing:border-box;padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;background:linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,.15))}
+.stwrap .sz{position:absolute;left:6.02%;right:6.02%;top:21.875%;bottom:34.9%;outline:1.5px dashed #00E5FF;pointer-events:none;display:none;z-index:5}
+.stwrap .sz span{position:absolute;left:0;top:-15px;font:700 9px/1 var(--mono);letter-spacing:.1em;color:#00E5FF;text-transform:uppercase}
+.stwrap.safe .sz{display:block}
 .igs .bt .chev{width:12px;height:12px;border:solid #fff;border-width:2px 2px 0 0;transform:rotate(-45deg);margin-bottom:-2px}
 .igs .bt .pill{background:#fff;color:#050505;border-radius:99px;padding:6px 14px;font-size:10.5px}
 .stwrap.noui .igs{display:none}
@@ -552,6 +555,23 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .lpm .side a{color:var(--ink);background:var(--lime);border-radius:999px;padding:11px 15px;font:800 13px/1 var(--ui);text-decoration:none;align-self:flex-start}
 @media (max-width:700px){.lpm .side{max-width:none;width:100%;align-items:center;text-align:center}}
 
+/* ===== Story safe zone (Jamie's brief, Oct 9): text and logo between y 420 and 1250 of 1920, 65px from the sides.
+   The copy block is laid out on a wider virtual canvas, then scaled to exactly fill that band. Photos stay full-bleed. ===== */
+.k-story .in{inset:auto !important;left:6.02cqw !important;top:38.9cqw !important;width:120cqw !important;height:104.85cqw !important;padding:3cqw !important;transform:scale(.733);transform-origin:0 0;box-sizing:border-box}
+.k-story .in .top{top:3cqw !important;left:3cqw !important;right:3cqw !important}
+
+/* Story safe-zone fixes for designs with structure outside the copy block */
+.k-story.d4 .ph{height:42% !important}
+.k-story.d4 .panel{height:54% !important;padding:6cqw 3cqw 3cqw !important}
+.k-story.d7 .pol{top:46.5cqw !important;right:9cqw !important;left:auto !important;width:23cqw !important;transform:rotate(4deg) !important}
+.k-story.d7 h3{max-width:58%}
+.k-story.d8 .h1{height:43.5% !important}.k-story.d8 .h2{height:56.5% !important}
+.k-story.d8 .row{height:50% !important;padding:3cqw 3cqw !important}
+.k-story.d8 .row:first-child{padding-top:14cqw !important}
+.k-story.d8 .bottom{bottom:3cqw !important;left:3cqw !important;right:3cqw !important}
+.k-story.d11 .jb{top:auto !important;bottom:6% !important;right:-6cqw !important;left:auto !important;width:54cqw !important}
+.k-story.d11 .copy{max-width:66%}
+
 /* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
 .ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
 .ctain{margin-top:2px}
@@ -564,6 +584,11 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .meta small{font:500 11px/1 var(--mono);color:var(--muted)}
 .meta small.over{color:#FF8A7A}
 .meta textarea{min-height:92px;resize:vertical}
+.meta .opt[hidden]{display:none}
+.meta .addopt{appearance:none;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:10px;padding:8px 10px;font:600 12px/1 var(--ui);cursor:pointer;text-align:left}
+.meta .addopt:hover{color:var(--text);border-color:var(--muted)}
+.meta .addopt[hidden]{display:none}
+.meta .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .dl{appearance:none;border:0;border-radius:999px;background:var(--lime);color:var(--ink);font:800 13px/1 var(--ui);padding:12px 16px;cursor:pointer}
 .dl[disabled]{opacity:.6;cursor:progress}
@@ -668,6 +693,9 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .conf h2{margin:0;font:800 calc(min(15.5vw,80px)*var(--ds,1))/.9 var(--disp);overflow-wrap:normal;text-transform:uppercase;letter-spacing:-.03em;color:var(--acc);outline:none}
 .conf p{margin:0;font-size:20px;line-height:1.4;color:#fff;text-wrap:pretty}
 .conf .egg{font-size:16px;color:#BDB8C2}
+.conf .age{margin-top:10px;padding-top:16px;border-top:1px solid #2B2830;display:flex;flex-direction:column;gap:10px}
+.conf .age p{font-size:15px;color:#BDB8C2}
+.conf .age .thanks{color:#fff}
 .conf .back{margin-top:10px;color:#BDB8C2;font:600 15px/1 var(--ui);text-underline-offset:4px;align-self:flex-start}
 .ach{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);display:flex;align-items:center;gap:12px;width:min(340px,calc(100vw - 32px));box-sizing:border-box;padding:10px 14px 10px 10px;border-radius:99px;background:#1B1920;border:1px solid #3a3640;box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,1.3,.4,1)}
 .conf.on .ach{transform:translate(-50%,0)}
@@ -763,6 +791,9 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
     <p>We can’t wait to make screentime the highlight of your day too. We’ll be in&nbsp;touch.</p>
     <p class="egg">Now go outside. Or pick up that controller. Either way, go have&nbsp;fun.</p>
+    <div class="age"><p>Optional: how old is your gamer?</p>
+      <div class="chips" role="group" aria-label="Your gamer's age"><button type="button" aria-pressed="false">8 to 10</button><button type="button" aria-pressed="false">11 to 13</button><button type="button" aria-pressed="false">14 to 17</button><button type="button" aria-pressed="false">More than one</button></div>
+      <p class="thanks" role="status" hidden>Got it. Thanks.</p></div>
     <a class="back" href="https://ekuzo.gg">Back to EKUZO</a>
   </div>
   <div class="ach" aria-hidden="true">
@@ -781,7 +812,7 @@ const D = [
   type:"Space Grotesk, bold caps", palette:["#111013","#F92524","#E0FF4E","#FFFFFF"], from:"Cross-Off (02g) and The Shortlist",
   why:"It says the thing every parent has said out loud, then crosses it out. The fix arrives in the same line, in neon.",
   subject:"They game. Let’s make it count.",
-  bgs:[{k:"mc-blocks",l:"Minecraft blocks"},{k:"g-collage",l:"Neon collage"},{k:"g-clean",l:"Multigame"},{k:"g-crossover",l:"Crossover"},{k:"g-worlds",l:"Worlds collide"},{k:"g-sunset",l:"Sunset arena"},{k:"g-rift",l:"League champions"},{k:"g-rocket",l:"Rocket stadium"},{k:"esports-room",l:"Esports room (photo)"}],
+  bgs:[{k:"mc-blocks",l:"Block world (AI)"},{k:"esports-room",l:"Esports room (photo)"}],
   art:k=>`<img class="ph" data-bg src="${IMG["mc-blocks"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="tag">We’ve all said it</span></div>
    <h3>They game <s>too much.</s><em>With a coach.</em></h3>
@@ -813,7 +844,7 @@ const D = [
    <h3>Every kid needs a team.</h3><span class="cta">Find their team →</span></div></div>`},
  {id:"d5", name:"They'll actually show up", photo:"laughing",
   type:"Inter Tight, extra bold caps", palette:["#111013","#E0FF4E","#FFFFFF"], from:"B, They tried them all",
-  why:"For the parent who has signed them up for soccer, piano and scouts. This is the one they won't quit.",
+  why:"For the parent who has signed them up for soccer, piano and scouts. This one comes with a team that expects them every week.",
   subject:"The team sport they’ll actually show up for.",
   art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
    <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
@@ -862,9 +893,9 @@ const D = [
    <span class="cta">Save their spot →</span></div>`},
  {id:"d10", round:2, name:"Screen time with a purpose", photo:"kid on the couch (Aaron's photos)",
   type:"Sora, extra bold caps", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Karlin: make you proud doing something they love",
-  why:"A real kid on a real couch, in full colour, with the copy on a blue fade. Built from the Figma frame Aaron picked. The game-art backdrops bring back the GAMING word wall.",
+  why:"A real kid on a real couch, in full colour, with the copy on a blue fade. Built from the Figma frame Aaron picked.",
   subject:"Be proud of their screen time.",
-  bgs:[{k:"kid-couch",l:"Kid on the couch (photo)",cls:"kid"},{k:"g-worlds",l:"Worlds collide"},{k:"g-crossover",l:"Crossover"},{k:"g-collage",l:"Neon collage"},{k:"g-sunset",l:"Sunset arena"},{k:"g-clean",l:"Multigame"},{k:"g-rift",l:"League champions"},{k:"team-walk",l:"Team walk (photo)"}],
+  bgs:[{k:"kid-couch",l:"Kid on the couch (photo)",cls:"kid"},{k:"team-walk",l:"Team walk (photo)"}],
   art:k=>`<img class="ph" data-bg src="${IMG["kid-couch"]}" alt="">
    <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
    <div class="in"><div class="top">${logo()}</div>
@@ -902,9 +933,9 @@ const T = {
    <div class="pair"><div class="now"><small>Now</small><q>I’m just&nbsp;playing.</q></div><div class="then"><small>Season one</small><q>I was shot caller tonight. Everyone listened to&nbsp;me.</q></div></div></div>`},
  d3:{acc:"#60E1E0",font:'"Unbounded"',k:"For kids who play to win",h:"Give them a team to win with.",p:"A real coach helps them get better, and a team counts on them every week. Practice, matches and a season of their&nbsp;own."},
  d4:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Esports league",h:"Not every team needs a field.",p:"EKUZO teams practice online with a real coach and compete together all season. Same teammates, same goal, every&nbsp;week."},
- d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and scouts",h:"This is the one they won’t quit.",p:"They already love the game. We add the coach, the teammates and the season, so it feels like a team sport because it&nbsp;is."},
+ d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and scouts",h:"A team that expects them every&nbsp;week.",p:"They already love the game. We add the coach, the teammates and a weekly practice, so it works like a team sport because it&nbsp;is."},
  d6:{acc:"#FF2ECC",font:'"Syne"',k:"Practice over. GG.",h:"The coach calls it, not you.",p:"Practice has a start and an end, and the coach runs both. No doorway argument, no “five more&nbsp;minutes.”"},
- d7:{acc:"#49B41A",font:'"Anybody"',k:"Progress report",h:"Screen time you can grade.",p:"Every week a coach works on teamwork, talking it through and showing up. Real skills, built in the game they already&nbsp;love."},
+ d7:{acc:"#49B41A",font:'"Anybody"',k:"Progress report",h:"Feedback from a coach, every&nbsp;week.",p:"Each practice works on teamwork, talking it through and showing up, and the coach tells you how they’re doing on each. In the game they already&nbsp;love."},
  d8:{acc:"#FFFFFF",font:'"Dela Gothic One"',k:"Same game",h:"Now with a team.",p:"Same game they play every night. Now with teammates who count on them and a coach who helps them get&nbsp;better."},
  d9:{acc:"#49B41A",font:'"Rubik Mono One"',k:"The parent-free league",h:"No drive. No cleats. No parking.",p:"They log in from home and practice with their team and coach. You get the season without the&nbsp;sideline."},
  d10:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time with a purpose",h:"The skills are already there. A coach brings them&nbsp;out.",p:"Every practice works on the things you’d want them to get from any team sport. They just happen to love this&nbsp;one.",
@@ -974,6 +1005,11 @@ function showDone(){
   document.querySelectorAll(".lp header,#sticky").forEach(x=>x.hidden=true);
   c.querySelector("h2").focus({preventScroll:true});
   setTimeout(()=>c.classList.add("on"),700);
+  c.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{
+    c.querySelectorAll(".chips button").forEach(x=>x.setAttribute("aria-pressed", x===b));
+    c.querySelector(".age .thanks").hidden=false;
+    post({step:"age",email:savedEmail,kidAge:b.textContent}).catch(()=>{});
+  }));
 }
 </script>
 </body></html>
