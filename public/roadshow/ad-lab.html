@@ -432,7 +432,7 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-hero.d4 .ph{height:52%}
 .k-hero.d4 .panel{height:48%}
 .k-hero.d4 .cta{margin-top:3cqw}
-.boards{display:grid;grid-template-columns:340px 214px 200px;gap:22px;align-items:start}
+.boards{display:grid;grid-template-columns:340px 340px 214px;gap:22px;align-items:start}
 .b.email{grid-column:1 / -1}
 @media (max-width:1100px){.boards{display:flex}}
 
@@ -766,6 +766,69 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-feed.d2 .ph{width:154.6cqw;height:auto;left:-10.4cqw;top:-4.8cqw;inset:auto;object-fit:fill}
 .k-feed.d2 .ph{position:absolute;left:-10.4cqw;top:-4.8cqw}
 
+/* ---- In the feed: the ad inside a Facebook / Instagram post, built live from the Meta copy ---- */
+.b.inmeta{width:340px;min-width:0}
+.b.inmeta > span,.b.story > span{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ptabs{display:inline-flex;gap:2px;background:#1B1920;border:1px solid var(--line);border-radius:99px;padding:2px}
+.ptabs button{appearance:none;border:0;background:none;color:var(--muted);font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:99px;cursor:pointer}
+.ptabs button[aria-pressed=true]{background:var(--text);color:var(--wall)}
+.post{background:#fff;color:#050505;border-radius:10px;overflow:hidden;font:400 13px/1.34 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.post .art{width:100%}
+.post .ph-h{display:flex;align-items:center;gap:8px;padding:10px 12px}
+.post .av{width:34px;height:34px;border-radius:50%;background:#111013;display:grid;place-items:center;flex:none;color:#fff}
+.post .av svg{width:24px;display:block;fill:currentColor}
+.post .who{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
+.post .who b{font-weight:600;font-size:13.5px}
+.post .who small{color:#65676B;font-size:11.5px}
+.post .dots{color:#65676B;font-weight:700;letter-spacing:1px}
+.post .pt{margin:0;padding:0 12px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.post .pt .more{color:#65676B;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+.post .pt.empty{color:#8a8d91;font-style:italic}
+.fbbar{display:flex;align-items:center;gap:10px;background:#F0F2F5;padding:10px 12px}
+.fbbar .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.fbbar small{color:#65676B;font-size:11px;text-transform:uppercase;letter-spacing:.02em}
+.fbbar b{font-size:14px;font-weight:600;line-height:1.25}
+.fbbar .t span{color:#65676B;font-size:12px}
+.fbbar .t .empty{color:#a0a3a8;font-style:italic;font-weight:400}
+.mbtn{flex:none;background:#E4E6EB;color:#050505;font-weight:600;font-size:13px;border-radius:6px;padding:8px 12px;white-space:nowrap}
+.fbact{display:flex;justify-content:space-around;border-top:1px solid #CED0D4;margin:0 12px;padding:6px 0 8px;color:#65676B;font-weight:600;font-size:12.5px}
+.igbar{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fff;border-bottom:1px solid #efefef;font-weight:600;font-size:13px;color:#0095F6}
+.igbar.tint{background:#0F2A6B;color:#fff}
+.igicons{display:flex;gap:14px;padding:9px 12px 4px}
+.igicons svg{width:22px;height:22px;fill:none;stroke:#050505;stroke-width:1.8}
+.igicons .sp{flex:1}
+.post.ig .pt{padding-top:2px}
+.post.ig .pt b{font-weight:600}
+/* Story with Instagram UI on top (not part of the export) */
+.stwrap{position:relative;width:214px}
+.igs{position:absolute;inset:0;pointer-events:none;color:#fff;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;justify-content:space-between}
+.igs .tp{padding:6px 8px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .prog{height:2px;border-radius:2px;background:rgba(255,255,255,.45);margin-bottom:6px;overflow:hidden}
+.igs .prog i{display:block;width:38%;height:100%;background:#fff}
+.igs .who{display:flex;align-items:center;gap:6px}
+.igs .av{width:20px;height:20px;border-radius:50%;background:#111013;display:grid;place-items:center}
+.igs .av svg{width:14px;fill:#fff;display:block}
+.igs .who small{font-weight:400;opacity:.85}
+.igs .bt{padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .bt .chev{width:12px;height:12px;border:solid #fff;border-width:2px 2px 0 0;transform:rotate(-45deg);margin-bottom:-2px}
+.igs .bt .pill{background:#fff;color:#050505;border-radius:99px;padding:6px 14px;font-size:10.5px}
+.stwrap.noui .igs{display:none}
+.post [hidden]{display:none!important}
+
+/* ---- Landing page preview: the real page in a phone frame ---- */
+.herobtn{appearance:none;border:0;background:none;padding:0;cursor:zoom-in;display:block;border-radius:26px}
+.herobtn:focus-visible{outline:2px solid var(--lime);outline-offset:9px}
+.lpgo{align-self:flex-start;margin-top:6px}
+.lpm{position:fixed;inset:0;z-index:100;background:rgba(8,7,10,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;gap:28px;padding:20px;flex-wrap:wrap}
+.lpm[hidden]{display:none}
+.lpm .phone{--s:1;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(46px*var(--s));background:#000;box-shadow:0 0 0 calc(10px*var(--s)) #000,0 0 0 calc(11px*var(--s)) #3a3640,0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;flex:none}
+.lpm iframe{width:390px;height:844px;border:0;transform:scale(var(--s));transform-origin:0 0;background:#0B0A0D;display:block}
+.lpm .side{display:flex;flex-direction:column;gap:10px;max-width:240px;color:var(--text)}
+.lpm .side b{font:800 22px/1 var(--ui);text-transform:uppercase}
+.lpm .side p{margin:0;color:var(--muted);font-size:13px}
+.lpm .side a{color:var(--ink);background:var(--lime);border-radius:999px;padding:11px 15px;font:800 13px/1 var(--ui);text-decoration:none;align-self:flex-start}
+@media (max-width:700px){.lpm .side{max-width:none;width:100%;align-items:center;text-align:center}}
+
 /* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
 .ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
 .ctain{margin-top:2px}
@@ -798,10 +861,14 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   <header>
     <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
     <h1>Ad lab</h1>
-    <p class="lede">Twelve ways out for the parent campaign, in two rounds. Each is a static ad first: one photo, one big line a parent recognises, one button. Then the same idea as a story, the landing page hero it clicks into, and the email header that follows. Each has its own typeface, all away from our Tungsten and Oswald, and our accent colours put to work beside the black, neon, red and blue.</p>
+    <p class="lede">Twelve ways out for the parent campaign, in two rounds. Each is a static ad first: one photo, one big line a parent recognises, one button. Then the same idea as a story and the landing page hero it clicks into. Each has its own typeface, all away from our Tungsten and Oswald, and our accent colours put to work beside the black, neon, red and blue.</p>
     <nav class="jump" id="jump"></nav>
   </header>
   <main id="dirs" style="display:flex;flex-direction:column;gap:64px"></main>
+  <div class="lpm" id="lpm" role="dialog" aria-modal="true" aria-labelledby="lpm-t" hidden>
+   <div class="phone"><iframe id="lpm-f" title="Landing page preview"></iframe></div>
+   <div class="side"><b id="lpm-t">Landing page</b><p>The real page at phone size, with your tweaks to this ad's words and button. Scroll inside the phone.</p><a id="lpm-a" href="#" target="_blank" rel="noopener">Open in a new tab ↗</a><button type="button" class="ghost" id="lpm-x">Close</button></div>
+  </div>
   <footer>Exploration for the team, Oct 2026. Game backdrops on 01 and 10 are AI collages of real game characters, for the parent vote only: Epic, Roblox, Mojang, Nintendo, Psyonix and Riot art can't run in paid ads without permission. Photos are stand-ins from the roadshow set at 1100px, so they look soft at story size. The real ads need full-size originals or a vertical shoot. Claims to confirm before any of these run: season one in 2027, a coach on every session, the jersey, and (for 07) that coaches track and share progress each week.</footer>
 </div>
 
@@ -966,13 +1033,19 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
   </div>
   <div class="boards">
    <div class="b feed"><span>Static feed ad 4:5</span><div class="art k-feed ${d.id}">${d.art("feed")}</div></div>
-   <div class="b story"><span>Story 9:16</span><div class="art k-story ${d.id}">${d.art("story")}</div></div>
-   <div class="b hero"><span>Landing hero</span><div class="art k-hero ${d.id}">${nav}${d.art("hero")}</div></div>
-   <div class="b email"><span>Email</span>
-    <div class="inbox"><div class="meta"><b>EKUZO</b><small>${d.subject}</small></div>
-     <div class="art k-email ${d.id}">${d.art("email")}</div>
-     <div class="body">You’re on the list for season one. Here’s what the first week looks like.</div></div>
-   </div>
+   <div class="b inmeta"><span>In the feed<span class="ptabs" role="group" aria-label="Platform"><button type="button" data-plat="fb" aria-pressed="true">Facebook</button><button type="button" data-plat="ig" aria-pressed="false">Instagram</button></span></span>
+    <div class="post fb" data-post="${d.id}">
+     <div class="ph-h"><i class="av">${LOGO}</i><div class="who"><b data-acct>EKUZO</b><small data-spon>Sponsored</small></div><span class="dots">···</span></div>
+     <p class="pt" data-pt></p>
+     <div class="art k-feed ${d.id}">${d.art("feed")}</div>
+     <div class="igbar" data-igbar hidden><span data-mbtn2>Learn more</span><span>›</span></div>
+     <div class="igicons" data-igicons hidden><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.7 3.1 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.5 0 5.4 3.7 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.6-6.9A8.5 8.5 0 0 1 20.5 11.5zM20.5 20.5l-2.6-3.3"/></svg><svg viewBox="0 0 24 24"><path d="M21.5 3.5 10 13M21.5 3.5l-7 17-4.5-7.5-7.5-4.5z"/></svg><span class="sp"></span><svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-5-7 5z"/></svg></div>
+     <div class="fbbar" data-fbbar><div class="t"><small data-dom>ekuzo.gg</small><b data-hl></b><span data-ds></span></div><span class="mbtn" data-mbtn>Learn more</span></div>
+     <div class="fbact" data-fbact><span>Like</span><span>Comment</span><span>Share</span></div>
+    </div></div>
+   <div class="b story"><span>Story 9:16<span class="ptabs"><button type="button" data-storyui aria-pressed="true">Instagram UI</button></span></span><div class="stwrap"><div class="art k-story ${d.id}">${d.art("story")}</div>
+    <div class="igs" aria-hidden="true"><div class="tp"><div class="prog"><i></i></div><div class="who"><i class="av">${LOGO}</i><span>ekuzo</span><small>Sponsored</small></div></div><div class="bt"><span class="chev"></span><span class="pill" data-smbtn>Learn more</span></div></div></div></div>
+   <div class="b hero"><span>Landing page</span><button type="button" class="herobtn" data-lp="${d.id}" aria-label="Preview the landing page for this ad"><div class="art k-hero ${d.id}">${nav}${d.art("hero")}</div></button><button type="button" class="ghost lpgo" data-lp="${d.id}">Preview landing page</button></div>
   </div>
  </section>`).join("");
 document.querySelectorAll("[data-ctafor]").forEach(box=>{
@@ -1129,5 +1202,82 @@ async function downloadFinals(d,btn){
   }catch(err){ console.error(err); status.textContent="Export failed. Try again, or tell Claude what happened."; }
   finally{ btn.disabled=false; }
 }
+
+/* ----- In the feed preview ----- */
+const esc=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const cut=(t,n)=>{ if(t.length<=n) return null; const c=t.slice(0,n); const sp=c.lastIndexOf(" "); return (sp>n*.6?c.slice(0,sp):c).replace(/[\s.,;:!?-]+$/,""); };
+function renderPreview(id){
+  const sec=document.getElementById(id); if(!sec) return;
+  const post=sec.querySelector("[data-post]"); if(!post) return;
+  const v=f=>(sec.querySelector(`[data-meta] [data-f="${f}"]`)||{}).value||"";
+  const ig=post.classList.contains("ig"), prim=v("primary").trim(), hl=v("headline").trim(), ds=v("description").trim(), mc=v("metacta");
+  let dom="ekuzo.gg"; try{ if(v("url").trim()) dom=new URL(v("url").trim()).hostname.replace(/^www\./,""); }catch(e){}
+  const pt=post.querySelector("[data-pt]"); const open=pt.dataset.open==="1";
+  if(!prim){ pt.classList.add("empty"); pt.innerHTML=ig?`<b>ekuzo</b> Primary text shows here`:"Primary text shows here. Type it in Meta ad copy."; }
+  else{
+    pt.classList.remove("empty");
+    const short=open?null:cut(prim,ig?90:125);
+    const body=short?esc(short)+`… <button type="button" class="more" data-more>${ig?"more":"See more"}</button>`:esc(prim);
+    pt.innerHTML=(ig?`<b>ekuzo</b> `:"")+body;
+  }
+  post.querySelector("[data-hl]").innerHTML=hl?esc(hl):`<span class="empty">Headline</span>`;
+  const dsel=post.querySelector("[data-ds]"); dsel.textContent=ds; dsel.hidden=!ds;
+  post.querySelector("[data-dom]").textContent=dom.toUpperCase();
+  post.querySelector("[data-mbtn]").textContent=mc; post.querySelector("[data-mbtn2]").textContent=mc;
+  const sb=sec.querySelector("[data-smbtn]"); if(sb) sb.textContent=mc;
+  post.querySelector("[data-acct]").textContent=ig?"ekuzo":"EKUZO";
+  ["igbar","igicons"].forEach(k=>post.querySelector(`[data-${k}]`).hidden=!ig);
+  ["fbbar","fbact"].forEach(k=>post.querySelector(`[data-${k}]`).hidden=ig);
+  // Instagram's feed puts the ad above the caption; Facebook puts primary text first
+  const art=post.querySelector(".art");
+  if(ig){ post.insertBefore(pt, post.querySelector("[data-fbbar]")); }
+  else { post.insertBefore(pt, art); }
+}
+document.querySelectorAll("section.dir").forEach(sec=>{
+  const id=sec.id, post=sec.querySelector("[data-post]"); if(!post) return;
+  sec.querySelectorAll("[data-plat]").forEach(b=>b.addEventListener("click",()=>{
+    sec.querySelectorAll("[data-plat]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+    post.classList.toggle("ig",b.dataset.plat==="ig"); post.classList.toggle("fb",b.dataset.plat!=="ig");
+    post.querySelector("[data-pt]").dataset.open="0"; renderPreview(id);
+  }));
+  post.addEventListener("click",e=>{ if(e.target.closest("[data-more]")){ post.querySelector("[data-pt]").dataset.open="1"; renderPreview(id);} });
+  sec.querySelectorAll("[data-meta] [data-f]").forEach(f=>f.addEventListener("input",()=>renderPreview(id)));
+  const sui=sec.querySelector("[data-storyui]");
+  sui?.addEventListener("click",()=>{ const on=sui.getAttribute("aria-pressed")!=="true"; sui.setAttribute("aria-pressed",on); sec.querySelector(".stwrap").classList.toggle("noui",!on); });
+  renderPreview(id);
+});
+
+/* ----- Landing page preview ----- */
+const lpm=document.getElementById("lpm"), lpf=document.getElementById("lpm-f");
+let lpFrom=null;
+function lpUrl(id){
+  const sec=document.getElementById(id); const u=new URLSearchParams({ad:id});
+  const cta=(sec.querySelector(".b.feed .cta")||{}).textContent||""; const c=cta.replace(/\s*→\s*$/,"").trim();
+  if(c) u.set("herocta",c);
+  return "landing.html?"+u.toString();
+}
+function applyTweaks(id){
+  try{
+    const doc=lpf.contentDocument; const hero=doc&&doc.querySelector(".hero .art"); if(!hero) return;
+    const src=textBlocks(feedArt(id)), dst=textBlocks(hero);
+    src.forEach((el,i)=>{ if(dst[i]&&sig(dst[i])===sig(el)) dst[i].innerHTML=el.innerHTML; });
+    const bg=document.querySelector(`#${id} .b.feed [data-bg]`), hb=hero.querySelector("[data-bg]"); if(bg&&hb) hb.src=bg.src;
+    hero.classList.toggle("kid", feedArt(id).classList.contains("kid"));
+  }catch(e){}
+}
+function fitPhone(){ const s=Math.min(1,(innerHeight-60)/864,(innerWidth-40)/410); lpm.querySelector(".phone").style.setProperty("--s",s.toFixed(3)); }
+function openLp(id,from){
+  lpFrom=from; const url=lpUrl(id); fitPhone();
+  lpf.onload=()=>applyTweaks(id); lpf.src=url;
+  document.getElementById("lpm-a").href=url;
+  document.getElementById("lpm-t").textContent="Landing · "+D.find(x=>x.id===id).name;
+  lpm.hidden=false; document.body.style.overflow="hidden"; document.getElementById("lpm-x").focus();
+}
+function closeLp(){ lpm.hidden=true; lpf.src="about:blank"; document.body.style.overflow=""; lpFrom&&lpFrom.focus(); }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-lp]"); if(b) openLp(b.dataset.lp,b); });
+document.getElementById("lpm-x").addEventListener("click",closeLp);
+lpm.addEventListener("click",e=>{ if(e.target===lpm) closeLp(); });
+addEventListener("keydown",e=>{ if(e.key==="Escape"&&!lpm.hidden) closeLp(); });
+addEventListener("resize",()=>{ if(!lpm.hidden) fitPhone(); });
 </script>
 </body></html>
