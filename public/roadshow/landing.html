@@ -1,4 +1,4 @@
-<title>EKUZO Season One</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Season One</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
@@ -481,6 +481,37 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d10.kid h3{font-size:5.4cqw}
 .k-email.d10.kid .sub{max-width:46%}
 
+/* From Aaron's Figma frames 21:7 (D01) and 22:7 (D02), Oct 9 */
+.d1 .sub{max-width:none}
+.k-email.d1 .sub{max-width:60%}
+.d2 .bar p{font-size:4.44cqw;text-wrap:wrap}
+.k-feed.d2 .bar{gap:0;padding-right:4cqw}
+.k-feed.d2 .ph{width:154.6cqw;height:auto;left:-10.4cqw;top:-4.8cqw;inset:auto;object-fit:fill}
+.k-feed.d2 .ph{position:absolute;left:-10.4cqw;top:-4.8cqw}
+
+/* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
+.ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
+.ctain{margin-top:2px}
+.ctain:focus,.meta input:focus,.meta textarea:focus,.meta select:focus{outline:2px solid var(--lime);outline-offset:1px;border-color:transparent}
+.ctain::placeholder,.meta ::placeholder{color:#6f6a77}
+.meta{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;background:#121015}
+.meta > b{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta label{display:flex;flex-direction:column;gap:5px;font:600 12px/1.2 var(--ui);color:var(--text)}
+.meta label span.row{display:flex;justify-content:space-between;gap:8px}
+.meta small{font:500 11px/1 var(--mono);color:var(--muted)}
+.meta small.over{color:#FF8A7A}
+.meta textarea{min-height:92px;resize:vertical}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dl{appearance:none;border:0;border-radius:999px;background:var(--lime);color:var(--ink);font:800 13px/1 var(--ui);padding:12px 16px;cursor:pointer}
+.dl[disabled]{opacity:.6;cursor:progress}
+.ghost{appearance:none;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:10px 13px;font:600 12px/1 var(--ui);cursor:pointer}
+.dl:focus-visible,.ghost:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.status{font:500 12px/1.35 var(--ui);color:var(--muted);min-height:1em}
+.hint{font:500 12px/1.4 var(--ui);color:var(--muted)}
+.b.feed [data-edit]{cursor:text;border-radius:2px;overflow-wrap:normal!important;word-wrap:normal!important;-webkit-line-break:auto!important;line-break:auto!important;-webkit-user-modify:read-write-plaintext-only}
+.b.feed [data-edit]:hover{outline:1px dashed rgba(224,255,78,.7);outline-offset:2px}
+.b.feed [data-edit]:focus{outline:2px solid var(--lime);outline-offset:2px}
+
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
 @media (max-width:860px){ .dir{grid-template-columns:1fr} }
 @media (max-width:420px){ .b.feed .art,.b.email .art,.inbox{width:100%} .b.feed,.b.email{width:100%} }
@@ -625,16 +656,16 @@ const D = [
   art:k=>`<img class="ph" data-bg src="${IMG["mc-blocks"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="tag">We’ve all said it</span></div>
    <h3>They game <s>too much.</s><em>With a coach.</em></h3>
-   <p class="sub">Give screen time a coach, a team and a&nbsp;season.</p><span class="cta">Save their spot →</span></div>`},
+   <p class="sub">Turn screentime into practice.${k==="email"?" ":"<br>"}Give them a coach, a team,${k==="email"?" ":"<br>"}and a mission to&nbsp;win.</p><span class="cta">Be the hero →</span></div>`},
  {id:"d2", name:"Overheard", photo:"couch",
   type:"Archivo Black, heavy caps", palette:["#111013","#FDE74C","#FFFFFF"], from:"C4 Ask Them About Tonight",
   why:"A line every parent has heard from the couch, set huge. The parent reads their own living room before they read our name.",
-  subject:"“I can’t pause it.” What if it came with a coach?",
+  subject:"“I can’t pause it.” Turn screentime into practice.",
   art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
    <div class="in"><div class="top">${logo()}</div>
    <p class="who">Heard in every living room</p>
    <p class="q">“I can’t pause&nbsp;it.”</p>
-   <div class="bar"><p>What if the match came with a&nbsp;coach?</p><span class="cta">Learn more →</span></div></div>`},
+   <div class="bar"><p>Turn screentime into practice.</p><span class="cta">Play their game →</span></div></div>`},
  {id:"d3", name:"Play to win", photo:"boys-girls-club",
   type:"Unbounded, wide caps", palette:["#1C3745","#60E1E0","#FFFFFF"], from:"Inventory (02f) and Lobby (03)",
   why:"For every kid who already plays to win. A calm, confident colour that reads premium next to loud feeds, and a mixed squad in the photo.",
@@ -799,3 +830,4 @@ function showDone(){
   document.getElementById("join-top").scrollIntoView({behavior:"smooth",block:"start"});
 }
 </script>
+</body></html>

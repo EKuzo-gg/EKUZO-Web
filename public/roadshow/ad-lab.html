@@ -758,6 +758,14 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d10.kid h3{font-size:5.4cqw}
 .k-email.d10.kid .sub{max-width:46%}
 
+/* From Aaron's Figma frames 21:7 (D01) and 22:7 (D02), Oct 9 */
+.d1 .sub{max-width:none}
+.k-email.d1 .sub{max-width:60%}
+.d2 .bar p{font-size:4.44cqw;text-wrap:wrap}
+.k-feed.d2 .bar{gap:0;padding-right:4cqw}
+.k-feed.d2 .ph{width:154.6cqw;height:auto;left:-10.4cqw;top:-4.8cqw;inset:auto;object-fit:fill}
+.k-feed.d2 .ph{position:absolute;left:-10.4cqw;top:-4.8cqw}
+
 /* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
 .ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
 .ctain{margin-top:2px}
@@ -824,16 +832,16 @@ const D = [
   art:k=>`<img class="ph" data-bg src="${IMG["mc-blocks"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="tag">We’ve all said it</span></div>
    <h3>They game <s>too much.</s><em>With a coach.</em></h3>
-   <p class="sub">Give screen time a coach, a team and a&nbsp;season.</p><span class="cta">Save their spot →</span></div>`},
+   <p class="sub">Turn screentime into practice.${k==="email"?" ":"<br>"}Give them a coach, a team,${k==="email"?" ":"<br>"}and a mission to&nbsp;win.</p><span class="cta">Be the hero →</span></div>`},
  {id:"d2", name:"Overheard", photo:"couch",
   type:"Archivo Black, heavy caps", palette:["#111013","#FDE74C","#FFFFFF"], from:"C4 Ask Them About Tonight",
   why:"A line every parent has heard from the couch, set huge. The parent reads their own living room before they read our name.",
-  subject:"“I can’t pause it.” What if it came with a coach?",
+  subject:"“I can’t pause it.” Turn screentime into practice.",
   art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
    <div class="in"><div class="top">${logo()}</div>
    <p class="who">Heard in every living room</p>
    <p class="q">“I can’t pause&nbsp;it.”</p>
-   <div class="bar"><p>What if the match came with a&nbsp;coach?</p><span class="cta">Learn more →</span></div></div>`},
+   <div class="bar"><p>Turn screentime into practice.</p><span class="cta">Play their game →</span></div></div>`},
  {id:"d3", name:"Play to win", photo:"boys-girls-club",
   type:"Unbounded, wide caps", palette:["#1C3745","#60E1E0","#FFFFFF"], from:"Inventory (02f) and Lobby (03)",
   why:"For every kid who already plays to win. A calm, confident colour that reads premium next to loud feeds, and a mixed squad in the photo.",
@@ -1027,8 +1035,9 @@ function stateOf(id){
   const typed=sec.querySelector("[data-ctain]").value.trim();
   const bg=sec.querySelector("[data-bgfor] button[aria-pressed=true]");
   const meta={}; sec.querySelectorAll("[data-meta] [data-f]").forEach(f=>meta[f.dataset.f]=f.value);
-  return {cta:typed?null:(chip&&chip.dataset.cta), typed, bg:bg&&bg.dataset.k, words:textBlocks(feedArt(id)).map(e=>e.innerHTML), meta};
+  return {v:tplSig(id), cta:typed?null:(chip&&chip.dataset.cta), typed, bg:bg&&bg.dataset.k, words:textBlocks(feedArt(id)).map(e=>e.innerHTML), meta};
 }
+const tplSig=id=>{const t=D.find(x=>x.id===id).art("feed");let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h;};
 const save=id=>store.set(id,stateOf(id));
 function counts(id){
   document.querySelectorAll(`#${id} [data-meta] [data-count]`).forEach(c=>{
@@ -1056,6 +1065,7 @@ D.forEach(d=>{
   sec.querySelectorAll("[data-meta] [data-f]").forEach(f=>f.addEventListener("input",()=>{ counts(d.id); save(d.id); }));
   // restore
   const st=store.get(d.id);
+  if(st&&st.v!==tplSig(d.id)){ st.words=[]; st.cta=null; st.typed=""; } // template changed since these tweaks were saved
   if(st){
     if(st.bg){ const b=sec.querySelector(`[data-bgfor] button[data-k="${st.bg}"]`); if(b) b.click(); }
     const blocks=textBlocks(feedArt(d.id)); (st.words||[]).forEach((h,i)=>{ if(blocks[i]) blocks[i].innerHTML=h; }); syncText(d.id);
