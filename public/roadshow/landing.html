@@ -792,8 +792,8 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
     <p>We can’t wait to make screentime the highlight of your day too. We’ll be in&nbsp;touch.</p>
     <p class="egg">Now go outside. Or pick up that controller. Either way, go have&nbsp;fun.</p>
-    <div class="age"><p>Optional: how old is your gamer?</p>
-      <div class="chips" role="group" aria-label="Your gamer's age"><button type="button" aria-pressed="false">8 to 10</button><button type="button" aria-pressed="false">11 to 13</button><button type="button" aria-pressed="false">14 to 17</button><button type="button" aria-pressed="false">More than one</button></div>
+    <div class="age"><p>Optional: what do they play? Tap all that apply.</p>
+      <div class="chips" role="group" aria-label="Games they play"><button type="button" aria-pressed="false">Fortnite</button><button type="button" aria-pressed="false">Roblox</button><button type="button" aria-pressed="false">Minecraft</button><button type="button" aria-pressed="false">Rocket League</button><button type="button" aria-pressed="false">League of Legends</button><button type="button" aria-pressed="false">Valorant</button><button type="button" aria-pressed="false">Something else</button></div>
       <p class="thanks" role="status" hidden>Got it. Thanks.</p></div>
     <a class="back" href="https://ekuzo.gg">Back to EKUZO</a>
   </div>
@@ -1006,10 +1006,12 @@ function showDone(){
   document.querySelectorAll(".lp header,#sticky").forEach(x=>x.hidden=true);
   c.querySelector("h2").focus({preventScroll:true});
   setTimeout(()=>c.classList.add("on"),700);
+  let gt;
   c.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{
-    c.querySelectorAll(".chips button").forEach(x=>x.setAttribute("aria-pressed", x===b));
-    c.querySelector(".age .thanks").hidden=false;
-    post({step:"age",email:savedEmail,kidAge:b.textContent}).catch(()=>{});
+    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed")!=="true");
+    const picked=[...c.querySelectorAll('.chips button[aria-pressed="true"]')].map(x=>x.textContent);
+    c.querySelector(".age .thanks").hidden=!picked.length;
+    clearTimeout(gt); gt=setTimeout(()=>{ if(picked.length) post({step:"games",email:savedEmail,kidGames:picked.join(", ")}).catch(()=>{}); },900);
   }));
 }
 // Design preview: ?preview=done opens straight to the confirmation (nothing is sent)

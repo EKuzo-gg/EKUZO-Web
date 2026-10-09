@@ -76,6 +76,15 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Follow-up: games they play (multi-select, comma-separated)
+    if (body.step === "games") {
+      const kidGames = clean(body.kidGames, 200);
+      if (!kidGames) return NextResponse.json({ ok: false, error: "Pick a game." }, { status: 400 });
+      const r = await event("Season 01 Waitlist Games", email, { kid_games: kidGames }, { kid_games: kidGames });
+      if (!r.ok) console.error("Klaviyo games event failed:", r.status, await r.text());
+      return NextResponse.json({ ok: r.ok });
+    }
+
     // Follow-up: kid's age band
     if (body.step === "age") {
       const kidAge = clean(body.kidAge, 20);

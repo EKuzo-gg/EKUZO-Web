@@ -52,7 +52,8 @@ export default function SeasonOnePopup() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
   const [error, setError] = useState("");
-  const [age, setAge] = useState("");
+  const [games, setGames] = useState<string[]>([]);
+  const gamesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -117,13 +118,19 @@ export default function SeasonOnePopup() {
     }
   }
 
-  function pickAge(a: string) {
-    setAge(a);
-    fetch("/api/season-one", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ step: "age", email: email.trim(), kidAge: a }),
-    }).catch(() => {});
+  function toggleGame(g: string) {
+    const next = games.includes(g) ? games.filter((x) => x !== g) : [...games, g];
+    setGames(next);
+    // Wait for taps to settle, then send the whole selection once
+    if (gamesTimer.current) clearTimeout(gamesTimer.current);
+    gamesTimer.current = setTimeout(() => {
+      if (!next.length) return;
+      fetch("/api/season-one", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ step: "games", email: email.trim(), kidGames: next.join(", ") }),
+      }).catch(() => {});
+    }, 900);
   }
 
   if (!mounted) return null;
@@ -136,23 +143,23 @@ export default function SeasonOnePopup() {
           {C.doneHead}
         </h3>
         <p className="font-body text-[16px] text-white/70 leading-[1.5]">{C.doneSub}</p>
-        <p className="font-body text-[16px] font-bold text-white mt-1">{C.ageQ}</p>
-        <div className="flex flex-wrap gap-2" role="group" aria-label={C.ageQ}>
-          {C.ages.map((a) => (
+        <p className="font-body text-[16px] font-bold text-white mt-1">{C.gamesQ}</p>
+        <div className="flex flex-wrap gap-2" role="group" aria-label={C.gamesQ}>
+          {C.games.map((a) => (
             <button
               key={a}
               type="button"
-              aria-pressed={age === a}
-              onClick={() => pickAge(a)}
+              aria-pressed={games.includes(a)}
+              onClick={() => toggleGame(a)}
               className={`font-body text-[15px] font-semibold px-4 py-3 rounded-sm border-2 cursor-pointer transition-colors ${
-                age === a ? "bg-white text-black border-white" : "bg-transparent text-white border-white/25 hover:border-white"
+                games.includes(a) ? "bg-white text-black border-white" : "bg-transparent text-white border-white/25 hover:border-white"
               }`}
             >
               {a}
             </button>
           ))}
         </div>
-        {age && <p className="font-body text-[14px] text-white/60">Thanks. That helps us build the right teams.</p>}
+        {games.length > 0 && <p className="font-body text-[14px] text-white/60">Got it. Thanks.</p>}
         <button
           type="button"
           onClick={closeModal}

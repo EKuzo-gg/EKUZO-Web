@@ -40,7 +40,6 @@ export const SEASON_ONE_COPY = {
   doneKicker: "You’re on the list",
   doneHead: "Awesome.",
   doneSub: "We can’t wait to make screentime the highlight of your day too. We’ll be in touch. Now go outside. Or pick up that controller. Either way, go have fun.",
-  ageQ: "Optional: how old is your gamer?",
-  // Values match the Klaviyo kid_age field in Jamie's brief
-  ages: ["8 to 10", "11 to 13", "14 to 17", "More than one"],
+  gamesQ: "Optional: what do they play? Tap all that apply.",
+  games: ["Fortnite", "Roblox", "Minecraft", "Rocket League", "League of Legends", "Valorant", "Something else"],
 } as const;
