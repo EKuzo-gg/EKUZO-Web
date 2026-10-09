@@ -566,6 +566,32 @@ body{background:#0B0A0D;color:#F3F1F5;font:400 17px/1.5 var(--ui);overflow-x:cli
 .sticky.on{transform:none}
 .sticky button{max-width:488px;width:100%;font:800 18px/1 var(--ui);padding:18px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer}
 button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
+/* Per-ad module: carries the ad's own idea one step further (01, 02, 10 so far) */
+.mod{padding:0 16px 34px;display:flex;flex-direction:column;gap:10px}
+.mod[hidden]{display:none}
+/* 01 cross-off list */
+.xo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.xo li{background:#1B1920;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.xo s{font:700 15px/1.3 var(--disp);text-transform:uppercase;letter-spacing:.01em;color:#8E8996;text-decoration:none;align-self:flex-start;background:linear-gradient(var(--red),var(--red)) no-repeat 0 55%/100% 3px}
+.xo b{font:700 22px/1.12 var(--disp);text-transform:uppercase;letter-spacing:-.02em;color:var(--acc)}
+.xo span{color:#BDB8C2;font-size:15px}
+/* 02 overheard pairs */
+.oh{display:flex;flex-direction:column;gap:12px}
+.oh .pair{display:flex;flex-direction:column}
+.oh .now{background:#1B1920;border-radius:14px 14px 0 0;padding:14px 16px}
+.oh .now small,.oh .then small{display:block;font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.oh .now small{color:#8E8996}
+.oh .now q{font:400 22px/1.05 "Archivo Black",var(--ui);text-transform:uppercase;color:#fff;quotes:"“" "”"}
+.oh .then{background:var(--acc);color:var(--ink);border-radius:0 0 14px 14px;padding:14px 16px}
+.oh .then small{color:rgba(17,16,19,.6)}
+.oh .then q{font:700 19px/1.2 "Archivo",var(--ui);quotes:"“" "”"}
+/* 10 skills */
+.sk{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.sk li{border-radius:14px;padding:18px 16px;background:linear-gradient(135deg,#0A2F9E,#034FFF);color:#fff;display:flex;flex-direction:column;gap:6px}
+.sk li b{font:800 24px/1 "Sora",var(--ui);text-transform:uppercase;letter-spacing:-.03em}
+.sk li b em{font-style:normal;color:var(--acc)}
+.sk li span{font-size:15px;color:rgba(255,255,255,.86)}
 [hidden]{display:none !important}
 @media (prefers-reduced-motion:reduce){.sticky{transition:none}}
 </style>
@@ -592,6 +618,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
   </section>
 
   <section class="bridge" id="bridge"></section>
+  <section class="mod" id="mod" hidden></section>
 
   <section class="how" aria-labelledby="hw">
     <span class="kick">How a season works</span>
@@ -761,8 +788,16 @@ const D = [
 ];
 // Per ad: accent, display font, and the bridge that continues the ad's line
 const T = {
- d1:{acc:"#E0FF4E",font:'"Space Grotesk"',k:"We’ve all said it",h:"They’re going to play anyway.",p:"EKUZO gives those hours a coach, a team and a season. Screen time turns into practice, and practice turns into something you can actually ask&nbsp;about."},
- d2:{acc:"#FDE74C",font:'"Archivo Black"',k:"Heard in every living room",h:"Now the match comes with a coach.",p:"Weekly practice, a real team and a coach who knows the game. The same hours they already play, with a reason behind&nbsp;them."},
+ d1:{acc:"#E0FF4E",font:'"Space Grotesk"',k:"We’ve all said it",h:"They’re going to play anyway.",p:"So make the hours count. EKUZO puts a real coach and a real team around the game they already love, and you get something to ask about at&nbsp;dinner.",
+  mod:`<span class="kick">Cross it off</span><ul class="xo">
+   <li><s>Alone in their room</s><b>With a team every week</b><span>The same teammates all season, counting on each&nbsp;other.</span></li>
+   <li><s>Just playing</s><b>Practicing with a plan</b><span>A coach sets the goal for each practice and reviews how it&nbsp;went.</span></li>
+   <li><s>“Five more minutes”</s><b>The coach calls time</b><span>Practice has a start and an end, and the coach runs&nbsp;both.</span></li></ul>`},
+ d2:{acc:"#FDE74C",font:'"Archivo Black"',k:"Heard in every living room",h:"They can’t pause it. Their team needs&nbsp;them.",p:"That’s already a team sport. EKUZO adds the coach, the weekly practice and the same teammates all season, so those hours build&nbsp;something.",
+  mod:`<span class="kick">What you’ll hear instead</span><div class="oh">
+   <div class="pair"><div class="now"><small>Now</small><q>I can’t pause&nbsp;it.</q></div><div class="then"><small>Season one</small><q>We ran the play we practiced and it&nbsp;worked.</q></div></div>
+   <div class="pair"><div class="now"><small>Now</small><q>Five more&nbsp;minutes.</q></div><div class="then"><small>Season one</small><q>Practice is done. Coach says we’re ready for the&nbsp;match.</q></div></div>
+   <div class="pair"><div class="now"><small>Now</small><q>I’m just&nbsp;playing.</q></div><div class="then"><small>Season one</small><q>I was shot caller tonight. Everyone listened to&nbsp;me.</q></div></div></div>`},
  d3:{acc:"#60E1E0",font:'"Unbounded"',k:"For kids who play to win",h:"Give them a team to win with.",p:"A real coach helps them get better, and a team counts on them every week. Practice, matches and a season of their&nbsp;own."},
  d4:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Esports league",h:"Not every team needs a field.",p:"EKUZO teams practice online with a real coach and compete together all season. Same teammates, same goal, every&nbsp;week."},
  d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and scouts",h:"This is the one they won’t quit.",p:"They already love the game. We add the coach, the teammates and the season, so it feels like a team sport because it&nbsp;is."},
@@ -770,7 +805,11 @@ const T = {
  d7:{acc:"#49B41A",font:'"Anybody"',k:"Progress report",h:"Screen time you can grade.",p:"Every week a coach works on teamwork, talking it through and showing up. Real skills, built in the game they already&nbsp;love."},
  d8:{acc:"#FFFFFF",font:'"Dela Gothic One"',k:"Same game",h:"Now with a team.",p:"Same game they play every night. Now with teammates who count on them and a coach who helps them get&nbsp;better."},
  d9:{acc:"#49B41A",font:'"Rubik Mono One"',k:"The parent-free league",h:"No drive. No cleats. No parking.",p:"They log in from home and practice with their team and coach. You get the season without the&nbsp;sideline."},
- d10:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time with a purpose",h:"Be proud of their gaming.",p:"Problem solving, teamwork and talking it through. Real skills that show up long after the match&nbsp;ends."},
+ d10:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time with a purpose",h:"The skills are already there. A coach brings them&nbsp;out.",p:"Every practice works on the things you’d want them to get from any team sport. They just happen to love this&nbsp;one.",
+  mod:`<span class="kick">What a coach works on</span><ul class="sk">
+   <li><b>Problem <em>solving</em></b><span>Reviewing a lost match together and finding the call that changed&nbsp;it.</span></li>
+   <li><b><em>Team</em>work</b><span>Five players, one plan and the same teammates all&nbsp;season.</span></li>
+   <li><b>Talking it <em>through</em></b><span>Clear, calm callouts under pressure, practiced every&nbsp;week.</span></li></ul>`},
  d11:{acc:"#49B41A",font:'"Rubik"',k:"Season one",h:"Their name on the back.",p:"A real team, a real coach and a jersey with their gamer tag on it. The kind of thing they’ll want you to take a picture&nbsp;of."},
  d12:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"The best excuse",h:"“Sorry, practice is going over.”",p:"A team that counts on them, a coach who expects them there and a reason to log off on&nbsp;time."}
 };
@@ -782,12 +821,15 @@ lp.style.setProperty("--acc", t.acc);
 lp.style.setProperty("--acc-ink", t.acc==="#49B41A"||t.acc==="#FF2ECC" ? "#111013" : "#111013");
 lp.style.setProperty("--disp", `${t.font},var(--ui)`);
 lp.style.setProperty("--ds", ({d3:.74,d6:.8,d7:.78,d8:.8,d9:.66,d11:.92})[id]||1);
-document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.id}" role="img" aria-label="${d.name}">${d.art("feed")}</div>`;
+const heroCls = d.bgs && d.bgs[0].cls ? " "+d.bgs[0].cls : "";
+document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.id}${heroCls}" role="img" aria-label="${d.name}">${d.art("feed")}</div>`;
 document.getElementById("bridge").innerHTML = `<span class="kick">${t.k}</span><h3>${t.h}</h3><p>${t.p}</p>`;
+if(t.mod){ const m=document.getElementById("mod"); m.innerHTML=t.mod; m.hidden=false; }
 document.title = "EKUZO · " + d.name;
 const CTA = (qs.get("cta")||"Save their spot").slice(0,40);
 document.querySelectorAll('.join button[type=submit], #sticky button').forEach(b=>b.textContent=CTA);
-document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=CTA+" →");
+// The hero keeps the ad's own button so the tap feels continuous; ?herocta= overrides it
+if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice(0,40)+" →");
 
 const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),450); };
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",goForm));
