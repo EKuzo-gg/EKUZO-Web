@@ -821,7 +821,8 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 /* ---- Landing page preview: the real page in a phone frame ---- */
 .herobtn{appearance:none;border:0;background:none;padding:0;cursor:zoom-in;display:block;border-radius:26px}
 .herobtn:focus-visible{outline:2px solid var(--lime);outline-offset:9px}
-.lpgo{align-self:flex-start;margin-top:6px}
+.lpgo{align-self:flex-start}
+.lpbtns{display:flex;flex-direction:column;gap:6px;margin-top:6px;align-items:flex-start}
 .lpm{position:fixed;inset:0;z-index:100;background:rgba(8,7,10,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;gap:28px;padding:20px;flex-wrap:wrap}
 .lpm[hidden]{display:none}
 .lpm .phone{--s:1;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(46px*var(--s));background:#000;box-shadow:0 0 0 calc(10px*var(--s)) #000,0 0 0 calc(11px*var(--s)) #3a3640,0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;flex:none}
@@ -1075,7 +1076,7 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
     </div></div>
    <div class="b story"><span>Story 9:16<span class="ptabs"><button type="button" data-storyui aria-pressed="true">Instagram UI</button><button type="button" data-safe aria-pressed="false">Safe zone</button></span></span><div class="stwrap"><div class="art k-story ${d.id}">${d.art("story")}</div><div class="sz" aria-hidden="true"><span>Text and logo stay inside</span></div>
     <div class="igs" aria-hidden="true"><div class="tp"><div class="prog"><i></i></div><div class="who"><i class="av">${LOGO}</i><span>ekuzo</span><small>Sponsored</small></div></div><div class="bt"><span class="chev"></span><span class="pill" data-smbtn>Learn more</span></div></div></div></div>
-   <div class="b hero"><span>Landing page</span><button type="button" class="herobtn" data-lp="${d.id}" aria-label="Preview the landing page for this ad"><div class="art k-hero ${d.id}">${nav}${d.art("hero")}</div></button><button type="button" class="ghost lpgo" data-lp="${d.id}">Preview landing page</button></div>
+   <div class="b hero"><span>Landing page</span><button type="button" class="herobtn" data-lp="${d.id}" aria-label="Preview the landing page for this ad"><div class="art k-hero ${d.id}">${nav}${d.art("hero")}</div></button><span class="lpbtns"><button type="button" class="ghost lpgo" data-lp="${d.id}">Preview landing page</button><button type="button" class="ghost lpgo" data-lp="${d.id}" data-done>Preview confirmation</button></span></div>
   </div>
  </section>`).join("");
 document.querySelectorAll("[data-ctafor]").forEach(box=>{
@@ -1312,8 +1313,8 @@ document.querySelectorAll("section.dir").forEach(sec=>{
 /* ----- Landing page preview ----- */
 const lpm=document.getElementById("lpm"), lpf=document.getElementById("lpm-f");
 let lpFrom=null;
-function lpUrl(id){
-  const sec=document.getElementById(id); const u=new URLSearchParams({ad:id});
+function lpUrl(id,done){
+  const sec=document.getElementById(id); const u=new URLSearchParams({ad:id}); if(done) u.set("preview","done");
   const cta=(sec.querySelector(".b.feed .cta")||{}).textContent||""; const c=cta.replace(/\s*→\s*$/,"").trim();
   if(c) u.set("herocta",c);
   return "landing.html?"+u.toString();
@@ -1328,15 +1329,15 @@ function applyTweaks(id){
   }catch(e){}
 }
 function fitPhone(){ const s=Math.min(1,(innerHeight-60)/864,(innerWidth-40)/410); lpm.querySelector(".phone").style.setProperty("--s",s.toFixed(3)); }
-function openLp(id,from){
-  lpFrom=from; const url=lpUrl(id); fitPhone();
+function openLp(id,from,done){
+  lpFrom=from; const url=lpUrl(id,done); fitPhone();
   lpf.onload=()=>applyTweaks(id); lpf.src=url;
   document.getElementById("lpm-a").href=url;
   document.getElementById("lpm-t").textContent="Landing · "+D.find(x=>x.id===id).name;
   lpm.hidden=false; document.body.style.overflow="hidden"; document.getElementById("lpm-x").focus();
 }
 function closeLp(){ lpm.hidden=true; lpf.src="about:blank"; document.body.style.overflow=""; lpFrom&&lpFrom.focus(); }
-document.addEventListener("click",e=>{ const b=e.target.closest("[data-lp]"); if(b) openLp(b.dataset.lp,b); });
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-lp]"); if(b) openLp(b.dataset.lp,b,b.hasAttribute("data-done")); });
 document.getElementById("lpm-x").addEventListener("click",closeLp);
 lpm.addEventListener("click",e=>{ if(e.target===lpm) closeLp(); });
 addEventListener("keydown",e=>{ if(e.key==="Escape"&&!lpm.hidden) closeLp(); });
