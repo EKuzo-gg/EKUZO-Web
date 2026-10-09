@@ -412,7 +412,8 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-email.d12 .thread{flex:1}
 
 /* D8 alt lines */
-.alts{display:flex;flex-direction:column;gap:6px}
+.alts{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px}
+.alts b{flex-basis:100%}
 .alts b{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .alts button{appearance:none;text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:600 13px/1.3 var(--ui);cursor:pointer}
 .alts button[aria-pressed="true"]{border-color:var(--lime);box-shadow:inset 3px 0 0 var(--lime)}
@@ -601,6 +602,7 @@ const D = [
    <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
    <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`}
 ];
+const CTAS = ["Save their spot","Join the list","Get early access","Learn more","Find their team","Join the team","See how it works","Sign up free"];
 const nav = `<div class="nav">${logo()}<span class="menu">MENU</span></div>`;
 document.getElementById("jump").innerHTML = D.map((d,i)=>`<a href="#${d.id}">${String(i+1).padStart(2,"0")} ${d.name}</a>`).join("");
 document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="round"><span class="num">Round 1</span><h2>Photo and a big line</h2><p>Full-bleed or framed photos, one line a parent recognises.</p></div>`:"")+(i===6?`<div class="round"><span class="num">Round 2</span><h2>Formats parents already read</h2><p>Each borrows a format a parent knows on sight: a report card, a before and after, a ticket, a text thread, a game screen. The format gets the stop, the line gets the click.</p></div>`:"")+`
@@ -614,6 +616,7 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
     <dt>Colour</dt><dd><span class="sw">${d.palette.map(c=>`<i style="background:${c}" title="${c}"></i>`).join("")}</span></dd>
     <dt>Grew from</dt><dd>${d.from}</dd>
    </dl>
+   <div class="alts" data-ctafor="${d.id}"><b>Button</b>${(()=>{const def=(d.art("feed").match(/class="cta">([^<]*?)\s*→/)||[,""])[1].trim();const list=[def,...CTAS.filter(c=>c!==def)];return list.map((c,j)=>`<button type="button" data-cta="${c}" aria-pressed="${j===0}">${c}${j===0?" (current)":""}</button>`).join("")})()}</div>
    ${d.bgs?`<div class="alts" data-bgfor="${d.id}"><b>Backdrop</b>${d.bgs.map((g,j)=>`<button type="button" data-k="${g.k}" aria-pressed="${j===0}">${g.l}</button>`).join("")}</div>`:""}
    ${d.alts?`<div class="alts" data-for="${d.id}"><b>Try another line</b>${d.alts.map((a,j)=>`<button type="button" data-j="${j}" aria-pressed="${j===0}">${a.l1} / ${a.l2}</button>`).join("")}</div>`:""}
   </div>
@@ -628,6 +631,13 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
    </div>
   </div>
  </section>`).join("");
+document.querySelectorAll("[data-ctafor]").forEach(box=>{
+  box.addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    box.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+    document.querySelectorAll(`#${box.dataset.ctafor} .cta`).forEach(el=>{ el.textContent=b.dataset.cta+" →"; });
+  });
+});
 document.querySelectorAll("[data-bgfor]").forEach(box=>{
   box.addEventListener("click",e=>{
     const b=e.target.closest("button"); if(!b) return;
