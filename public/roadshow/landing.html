@@ -155,7 +155,7 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-hero.d4 .ph{height:52%}
 .k-hero.d4 .panel{height:48%}
 .k-hero.d4 .cta{margin-top:3cqw}
-.boards{display:grid;grid-template-columns:340px 214px 200px;gap:22px;align-items:start}
+.boards{display:grid;grid-template-columns:340px 340px 214px;gap:22px;align-items:start}
 .b.email{grid-column:1 / -1}
 @media (max-width:1100px){.boards{display:flex}}
 
@@ -489,6 +489,69 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .k-feed.d2 .ph{width:154.6cqw;height:auto;left:-10.4cqw;top:-4.8cqw;inset:auto;object-fit:fill}
 .k-feed.d2 .ph{position:absolute;left:-10.4cqw;top:-4.8cqw}
 
+/* ---- In the feed: the ad inside a Facebook / Instagram post, built live from the Meta copy ---- */
+.b.inmeta{width:340px;min-width:0}
+.b.inmeta > span,.b.story > span{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ptabs{display:inline-flex;gap:2px;background:#1B1920;border:1px solid var(--line);border-radius:99px;padding:2px}
+.ptabs button{appearance:none;border:0;background:none;color:var(--muted);font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:99px;cursor:pointer}
+.ptabs button[aria-pressed=true]{background:var(--text);color:var(--wall)}
+.post{background:#fff;color:#050505;border-radius:10px;overflow:hidden;font:400 13px/1.34 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.post .art{width:100%}
+.post .ph-h{display:flex;align-items:center;gap:8px;padding:10px 12px}
+.post .av{width:34px;height:34px;border-radius:50%;background:#111013;display:grid;place-items:center;flex:none;color:#fff}
+.post .av svg{width:24px;display:block;fill:currentColor}
+.post .who{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
+.post .who b{font-weight:600;font-size:13.5px}
+.post .who small{color:#65676B;font-size:11.5px}
+.post .dots{color:#65676B;font-weight:700;letter-spacing:1px}
+.post .pt{margin:0;padding:0 12px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.post .pt .more{color:#65676B;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+.post .pt.empty{color:#8a8d91;font-style:italic}
+.fbbar{display:flex;align-items:center;gap:10px;background:#F0F2F5;padding:10px 12px}
+.fbbar .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.fbbar small{color:#65676B;font-size:11px;text-transform:uppercase;letter-spacing:.02em}
+.fbbar b{font-size:14px;font-weight:600;line-height:1.25}
+.fbbar .t span{color:#65676B;font-size:12px}
+.fbbar .t .empty{color:#a0a3a8;font-style:italic;font-weight:400}
+.mbtn{flex:none;background:#E4E6EB;color:#050505;font-weight:600;font-size:13px;border-radius:6px;padding:8px 12px;white-space:nowrap}
+.fbact{display:flex;justify-content:space-around;border-top:1px solid #CED0D4;margin:0 12px;padding:6px 0 8px;color:#65676B;font-weight:600;font-size:12.5px}
+.igbar{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fff;border-bottom:1px solid #efefef;font-weight:600;font-size:13px;color:#0095F6}
+.igbar.tint{background:#0F2A6B;color:#fff}
+.igicons{display:flex;gap:14px;padding:9px 12px 4px}
+.igicons svg{width:22px;height:22px;fill:none;stroke:#050505;stroke-width:1.8}
+.igicons .sp{flex:1}
+.post.ig .pt{padding-top:2px}
+.post.ig .pt b{font-weight:600}
+/* Story with Instagram UI on top (not part of the export) */
+.stwrap{position:relative;width:214px}
+.igs{position:absolute;inset:0;pointer-events:none;color:#fff;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;justify-content:space-between}
+.igs .tp{padding:6px 8px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .prog{height:2px;border-radius:2px;background:rgba(255,255,255,.45);margin-bottom:6px;overflow:hidden}
+.igs .prog i{display:block;width:38%;height:100%;background:#fff}
+.igs .who{display:flex;align-items:center;gap:6px}
+.igs .av{width:20px;height:20px;border-radius:50%;background:#111013;display:grid;place-items:center}
+.igs .av svg{width:14px;fill:#fff;display:block}
+.igs .who small{font-weight:400;opacity:.85}
+.igs .bt{padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,0))}
+.igs .bt .chev{width:12px;height:12px;border:solid #fff;border-width:2px 2px 0 0;transform:rotate(-45deg);margin-bottom:-2px}
+.igs .bt .pill{background:#fff;color:#050505;border-radius:99px;padding:6px 14px;font-size:10.5px}
+.stwrap.noui .igs{display:none}
+.post [hidden]{display:none!important}
+
+/* ---- Landing page preview: the real page in a phone frame ---- */
+.herobtn{appearance:none;border:0;background:none;padding:0;cursor:zoom-in;display:block;border-radius:26px}
+.herobtn:focus-visible{outline:2px solid var(--lime);outline-offset:9px}
+.lpgo{align-self:flex-start;margin-top:6px}
+.lpm{position:fixed;inset:0;z-index:100;background:rgba(8,7,10,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;gap:28px;padding:20px;flex-wrap:wrap}
+.lpm[hidden]{display:none}
+.lpm .phone{--s:1;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(46px*var(--s));background:#000;box-shadow:0 0 0 calc(10px*var(--s)) #000,0 0 0 calc(11px*var(--s)) #3a3640,0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;flex:none}
+.lpm iframe{width:390px;height:844px;border:0;transform:scale(var(--s));transform-origin:0 0;background:#0B0A0D;display:block}
+.lpm .side{display:flex;flex-direction:column;gap:10px;max-width:240px;color:var(--text)}
+.lpm .side b{font:800 22px/1 var(--ui);text-transform:uppercase}
+.lpm .side p{margin:0;color:var(--muted);font-size:13px}
+.lpm .side a{color:var(--ink);background:var(--lime);border-radius:999px;padding:11px 15px;font:800 13px/1 var(--ui);text-decoration:none;align-self:flex-start}
+@media (max-width:700px){.lpm .side{max-width:none;width:100%;align-items:center;text-align:center}}
+
 /* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
 .ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
 .ctain{margin-top:2px}
@@ -596,8 +659,6 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 @media (prefers-reduced-motion:reduce){.sticky{transition:none}}
 </style>
 
-<form name="waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="email"><input name="ad"><input name="ad_name"><input name="utm_source"><input name="utm_campaign"><input name="utm_content"><input name="where"></form>
-<form name="waitlist-age" data-netlify="true" hidden><input name="email"><input name="age"><input name="ad"></form>
 
 <div class="lp" id="lp">
   <header><svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg><button class="mini-cta" type="button" data-go>Join the list</button></header>
@@ -664,7 +725,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
     <h2>Their spot is <em>saved.</em></h2>
     <p>Check your inbox for a note from Karlin, our founder. One quick question while you’re here:</p>
     <p style="color:#fff;font-weight:600;margin-top:4px">How old is your gamer?</p>
-    <div class="chips" role="group" aria-label="Your kid's age"><button type="button">8 to 10</button><button type="button">11 to 13</button><button type="button">14 to 17</button><button type="button">More than one</button></div>
+    <div class="chips" role="group" aria-label="Your kid's age"><button type="button">7 to 10</button><button type="button">11 to 13</button><button type="button">14 to 17</button><button type="button">More than one</button></div>
     <p class="thanks" hidden>Thanks. That helps us build the right&nbsp;teams.</p>
     <button class="share" type="button">Share with another parent</button>
   </div>
@@ -841,8 +902,14 @@ const upd=()=>sticky.classList.toggle("on", !joined && !topVis && !endVis);
 new IntersectionObserver(e=>{topVis=e[0].isIntersecting;upd();}).observe(document.getElementById("join-top"));
 new IntersectionObserver(e=>{endVis=e[0].isIntersecting;upd();}).observe(document.getElementById("join-end"));
 
-const enc = o => Object.entries(o).map(([k,v])=>encodeURIComponent(k)+"="+encodeURIComponent(v??"")).join("&");
-const post = o => fetch(location.pathname,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:enc(o)});
+// Sign-ups go to the site's /api/season-one route (Klaviyo "Season 01 Waitlist" list).
+// Off ekuzo.gg / Netlify (e.g. a design preview) there is no API, so the form just shows the success state.
+const LIVE = /(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
+const post = async o => {
+  if(!LIVE) return {ok:true};
+  return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});
+};
+const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||""});
 let savedEmail="";
 document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",async e=>{
   e.preventDefault();
@@ -850,8 +917,9 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
   try{
-    const r=await post({"form-name":"waitlist","bot-field":"",email:em,ad:d.id,ad_name:d.name,utm_source:qs.get("utm_source")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",where:f.dataset.where});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search});
     if(!r.ok) throw 0;
+    try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id}); }catch(_){}
     savedEmail=em; joined=true; upd(); showDone();
   }catch(_){ btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));
@@ -862,7 +930,7 @@ function showDone(){
     box.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{
       document.querySelectorAll(".done .chips button").forEach(x=>x.setAttribute("aria-pressed", x.textContent===b.textContent));
       document.querySelectorAll(".done .thanks").forEach(x=>x.hidden=false);
-      post({"form-name":"waitlist-age",email:savedEmail,age:b.textContent,ad:d.id}).catch(()=>{});
+      post({step:"age",email:savedEmail,kidAge:b.textContent}).catch(()=>{});
     }));
     box.querySelector(".share").addEventListener("click",async ev=>{
       const url=location.origin+location.pathname+"?ad="+d.id+"&utm_source=share";

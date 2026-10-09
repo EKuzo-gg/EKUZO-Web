@@ -7,6 +7,8 @@ import { ModalProvider } from "@/context/ModalContext";
 import ModalRenderer from "@/components/ui/ModalRenderer";
 import StickyCTA from "@/components/ui/StickyCTA";
 import NewsletterPopup from "@/components/ui/NewsletterPopup";
+import SeasonOneTrigger from "@/components/ui/SeasonOneTrigger";
+import { SEASON_ONE_MODE } from "@/lib/seasonOne";
 import CaptureAttribution from "@/components/analytics/CaptureAttribution";
 import JsonLd from "@/components/JsonLd";
 import { rootGraph } from "@/lib/schema";
@@ -215,12 +217,14 @@ export default function RootLayout({
           {children}
           <ModalRenderer />
           <StickyCTA />
+          {/* Season 01 waitlist: decides when the full-screen popup opens (lib/seasonOne.ts). */}
+          <SeasonOneTrigger />
           {/* Newsletter popup is gated by env var so we can disable it
               site-wide without removing the component (reserved for re-
               enablement when re-engagement strategy warrants it). Default
               is disabled — set NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED=true
               in Netlify env to bring it back. */}
-          {process.env.NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED === "true" && (
+          {!SEASON_ONE_MODE && process.env.NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED === "true" && (
             <NewsletterPopup />
           )}
         </ModalProvider>
