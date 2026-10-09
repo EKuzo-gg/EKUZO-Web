@@ -777,9 +777,9 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .post .ph-h{display:flex;align-items:center;gap:8px;padding:10px 12px}
 .post .av{width:34px;height:34px;border-radius:50%;background:#111013;display:grid;place-items:center;flex:none;color:#fff}
 .post .av svg{width:24px;display:block;fill:currentColor}
-.post .who{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
-.post .who b{font-weight:600;font-size:13.5px}
-.post .who small{color:#65676B;font-size:11.5px}
+.post .pwho{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
+.post .pwho b{font-weight:600;font-size:13.5px}
+.post .pwho small{color:#65676B;font-size:11.5px}
 .post .dots{color:#65676B;font-weight:700;letter-spacing:1px}
 .post .pt{margin:0;padding:0 12px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
 .post .pt .more{color:#65676B;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
@@ -1035,7 +1035,7 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
    <div class="b feed"><span>Static feed ad 4:5</span><div class="art k-feed ${d.id}">${d.art("feed")}</div></div>
    <div class="b inmeta"><span>In the feed<span class="ptabs" role="group" aria-label="Platform"><button type="button" data-plat="fb" aria-pressed="true">Facebook</button><button type="button" data-plat="ig" aria-pressed="false">Instagram</button></span></span>
     <div class="post fb" data-post="${d.id}">
-     <div class="ph-h"><i class="av">${LOGO}</i><div class="who"><b data-acct>EKUZO</b><small data-spon>Sponsored</small></div><span class="dots">···</span></div>
+     <div class="ph-h"><i class="av">${LOGO}</i><div class="pwho"><b data-acct>EKUZO</b><small data-spon>Sponsored</small></div><span class="dots">···</span></div>
      <p class="pt" data-pt></p>
      <div class="art k-feed ${d.id}">${d.art("feed")}</div>
      <div class="igbar" data-igbar hidden><span data-mbtn2>Learn more</span><span>›</span></div>
@@ -1108,14 +1108,20 @@ function stateOf(id){
   const typed=sec.querySelector("[data-ctain]").value.trim();
   const bg=sec.querySelector("[data-bgfor] button[aria-pressed=true]");
   const meta={}; sec.querySelectorAll("[data-meta] [data-f]").forEach(f=>meta[f.dataset.f]=f.value);
-  return {v:tplSig(id), cta:typed?null:(chip&&chip.dataset.cta), typed, bg:bg&&bg.dataset.k, words:textBlocks(feedArt(id)).map(e=>e.innerHTML), meta};
+  return {v:tplSig(id), mv:META_V, cta:typed?null:(chip&&chip.dataset.cta), typed, bg:bg&&bg.dataset.k, words:textBlocks(feedArt(id)).map(e=>e.innerHTML), meta};
 }
+
+/* ----- Recommended Meta copy (Oct 9). Preloaded into each direction; your own edits still save over it. ----- */
+const META_V="m1";
+const META_DEFAULTS={"d1": {"primary": "They’re going to play anyway. Make those hours count with a real coach and a team that counts on them.\n\nEKUZO Season 01 is youth esports, coached online from home. Join the free waitlist and hear first when sign-ups open.", "headline": "They game. Make it count.", "description": "Free waitlist. No commitment.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d1&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d1"}, "d2": {"primary": "“I can’t pause it.” Of course not. Their team needs them.\n\nEKUZO turns that into practice: a real coach, weekly practice and the same teammates all season. Join the Season 01 waitlist. It’s free.", "headline": "Turn screentime into practice.", "description": "Season 01 waitlist. Free.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d2&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d2"}, "d3": {"primary": "They already play to win. Give them a coach who makes them better and a team that wins together.\n\nJoin the EKUZO Season 01 waitlist. Free, no commitment.", "headline": "They play to win. Give them a team.", "description": "Coached teams. Online.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d3&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d3"}, "d4": {"primary": "Not every team needs a field. EKUZO teams practice online with a real coach and compete together all season.\n\nJoin the Season 01 waitlist and hear first when sign-ups open.", "headline": "Every kid needs a team.", "description": "Free waitlist. No commitment.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d4&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d4"}, "d5": {"primary": "After soccer, piano and scouts, this is the one they won’t want to miss. A real team, a real coach, in the game they love.\n\nJoin the Season 01 waitlist. It’s free.", "headline": "The team sport they’ll show up for.", "description": "Season 01 waitlist. Free.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d5&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d5"}, "d6": {"primary": "Practice has a start and an end, and the coach calls both. No doorway argument. No “five more minutes.”\n\nJoin the EKUZO Season 01 waitlist. Free, no commitment.", "headline": "Practice over. Nobody yelled.", "description": "Coached online, from home.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d6&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d6"}, "d7": {"primary": "Teamwork. Talking it through. Showing up. A coach works on all three every week, in the game they already love.\n\nJoin the Season 01 waitlist. It’s free.", "headline": "Screen time, graded.", "description": "Real coaches. Real teams.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d7&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d7"}, "d8": {"primary": "Same game they play every night. Now with teammates who count on them and a coach who helps them get better.\n\nJoin the EKUZO Season 01 waitlist. Free, no commitment.", "headline": "Screen time. Now team time.", "description": "Free waitlist. No commitment.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d8&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d8"}, "d9": {"primary": "No drive. No cleats. No parking. They log in from home and practice with their team and a real coach.\n\nJoin the EKUZO Season 01 waitlist. It’s free.", "headline": "The practice you don’t drive to.", "description": "Coached online, from home.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d9&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d9"}, "d10": {"primary": "Problem solving, teamwork and staying calm under pressure. They’re already building them in the game they love.\n\nA real EKUZO coach brings those skills out. Join the Season 01 waitlist. Free, no commitment.", "headline": "Be proud of their screen time.", "description": "Real coaches. Real teams.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d10&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d10"}, "d11": {"primary": "A real team, a real coach and their gamer tag on the back of a jersey. The kind of thing they’ll want a picture of.\n\nJoin the EKUZO Season 01 waitlist. It’s free.", "headline": "Their gamer tag. On a real jersey.", "description": "Season 01 waitlist. Free.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d11&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d11"}, "d12": {"primary": "A team that counts on them, a coach who expects them there and a reason to log off on time.\n\nJoin the EKUZO Season 01 waitlist. Free, no commitment.", "headline": "“Sorry! Practice is going over.”", "description": "Free waitlist. No commitment.", "metacta": "Sign up", "url": "https://ekuzo.gg/roadshow/landing.html?ad=d12&utm_source=meta&utm_medium=paid&utm_campaign=season01&utm_content=d12"}};
 const tplSig=id=>{const t=D.find(x=>x.id===id).art("feed");let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h;};
 const save=id=>store.set(id,stateOf(id));
 function counts(id){
   document.querySelectorAll(`#${id} [data-meta] [data-count]`).forEach(c=>{
-    const f=document.querySelector(`#${id} [data-meta] [data-f="${c.dataset.count}"]`), n=f.value.length, lim=META_LIMITS[c.dataset.count];
-    c.textContent=`${n} / ${lim}`; c.classList.toggle("over",n>lim);
+    const f=document.querySelector(`#${id} [data-meta] [data-f="${c.dataset.count}"]`), lim=META_LIMITS[c.dataset.count];
+    // Primary text: only the opening shows before "See more", so count the first paragraph
+    const n=c.dataset.count==="primary" ? f.value.split(/\n/)[0].length : f.value.length;
+    c.textContent=c.dataset.count==="primary" ? `Opening ${n} / ${lim}` : `${n} / ${lim}`; c.classList.toggle("over",n>lim);
   });
 }
 D.forEach(d=>{
@@ -1136,6 +1142,8 @@ D.forEach(d=>{
   sec.querySelector("[data-bgfor]")?.addEventListener("click",()=>setTimeout(()=>save(d.id)));
   sec.querySelector("[data-for]")?.addEventListener("click",()=>setTimeout(()=>{ syncText(d.id); save(d.id); }));
   sec.querySelectorAll("[data-meta] [data-f]").forEach(f=>f.addEventListener("input",()=>{ counts(d.id); save(d.id); }));
+  // recommended Meta copy
+  Object.entries(META_DEFAULTS[d.id]||{}).forEach(([k,v])=>{ const f=sec.querySelector(`[data-meta] [data-f="${k}"]`); if(f) f.value=v; });
   // restore
   const st=store.get(d.id);
   if(st&&st.v!==tplSig(d.id)){ st.words=[]; st.cta=null; st.typed=""; } // template changed since these tweaks were saved
@@ -1144,7 +1152,7 @@ D.forEach(d=>{
     const blocks=textBlocks(feedArt(d.id)); (st.words||[]).forEach((h,i)=>{ if(blocks[i]) blocks[i].innerHTML=h; }); syncText(d.id);
     if(st.typed){ inp.value=st.typed; inp.dispatchEvent(new Event("input")); }
     else if(st.cta){ const b=sec.querySelector(`[data-ctafor] button[data-cta="${CSS.escape(st.cta)}"]`); if(b) b.click(); }
-    Object.entries(st.meta||{}).forEach(([k,v])=>{ const f=sec.querySelector(`[data-meta] [data-f="${k}"]`); if(f) f.value=v; });
+    if(st.mv===META_V) Object.entries(st.meta||{}).forEach(([k,v])=>{ const f=sec.querySelector(`[data-meta] [data-f="${k}"]`); if(f) f.value=v; });
   }
   counts(d.id);
   sec.querySelector("[data-reset]").addEventListener("click",()=>{ store.del(d.id); location.hash=d.id; location.reload(); });

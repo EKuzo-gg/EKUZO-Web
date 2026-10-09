@@ -500,9 +500,9 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 .post .ph-h{display:flex;align-items:center;gap:8px;padding:10px 12px}
 .post .av{width:34px;height:34px;border-radius:50%;background:#111013;display:grid;place-items:center;flex:none;color:#fff}
 .post .av svg{width:24px;display:block;fill:currentColor}
-.post .who{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
-.post .who b{font-weight:600;font-size:13.5px}
-.post .who small{color:#65676B;font-size:11.5px}
+.post .pwho{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
+.post .pwho b{font-weight:600;font-size:13.5px}
+.post .pwho small{color:#65676B;font-size:11.5px}
 .post .dots{color:#65676B;font-weight:700;letter-spacing:1px}
 .post .pt{margin:0;padding:0 12px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
 .post .pt .more{color:#65676B;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
@@ -680,6 +680,21 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 @media (prefers-reduced-motion:reduce){.ach{transition:none}}
 [hidden]{display:none !important}
 @media (prefers-reduced-motion:reduce){.sticky{transition:none}}
+/* ===== Desktop (960px+): ad pinned left, sign-up and the rest scroll on the right ===== */
+@media (min-width:960px){
+  .lp{--w:520px;max-width:1240px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);column-gap:clamp(40px,5vw,88px);align-items:start;padding:104px 40px 0;background:transparent;min-height:0;box-sizing:border-box}
+  .lp > section,.lp > footer{grid-column:2}
+  .lp > #hero{grid-column:1;grid-row:1 / span 8;position:sticky;top:104px;display:flex;justify-content:flex-end}
+  .lp > #hero .art{width:min(100%,calc((100vh - 140px)*.8));border-radius:6px}
+  .lp header,.lp header.solid{left:0;transform:none;width:100%;padding:18px max(40px,calc((100vw - 1240px)/2 + 40px));background:rgba(11,10,13,.94);backdrop-filter:blur(8px)}
+  .lp header .mark,.lp header.solid .mark{width:104px}
+  .lp header .mini-cta{opacity:1;visibility:visible}
+  .join{padding:8px 0 32px}.bridge{padding:32px 0}.mod{padding:0 0 34px}.how,.faq{padding:8px 0 32px}.join.end{padding-bottom:48px}
+  .lp footer{padding:24px 0 48px}
+  .sticky{display:none}
+  .join h2{font-size:calc(40px*var(--ds,1))}
+}
+
 </style>
 
 
