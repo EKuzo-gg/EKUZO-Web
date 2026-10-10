@@ -1001,12 +1001,32 @@ document.querySelectorAll('.join button[type=submit], #sticky button').forEach(b
 // The hero keeps the ad's own button so the tap feels continuous; ?herocta= overrides it
 if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice(0,40)+" →");
 
+// Funnel instrumentation (SC-3): GA4 events and Clarity tags only, all keyed by the ad id. Never sent to Meta, and never the email, the game chips or anything about the child. Every call is guarded so tracking can never break the page or the sign-up.
+const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id},p)); }catch(_){} };
+const clr=(...a)=>{ try{ window.clarity&&clarity(...a); }catch(_){} };
+const hp=f=>!!(f.ekz_hp&&f.ekz_hp.value);
+let progFocus=false;
+clr("set","ad",d.id);
+["utm_content","utm_term","site"].forEach(k=>{ const v=qs.get(k); if(v) clr("set",k,v.slice(0,100)); });
+const faqSeen=new Set();
+document.querySelectorAll(".faq details").forEach(el=>el.addEventListener("toggle",()=>{ try{
+  if(!el.open) return;
+  const q=(el.querySelector("summary")?.textContent||"").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,60);
+  if(!q||faqSeen.has(q)) return; faqSeen.add(q); ga("faq_open",{question:q});
+}catch(_){} }));
+const formSeen=new Set();
+document.querySelectorAll(".join form").forEach(f=>{
+  const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(_){} };
+  const em=f.querySelector("input[type=email]"); if(!em) return;
+  em.addEventListener("focus",()=>{ if(!progFocus) start(); }); em.addEventListener("input",start);
+});
+
 const hdr=document.querySelector(".lp header");
 const onScroll=()=>hdr.classList.toggle("solid", scrollY > 24);
 addEventListener("scroll",onScroll,{passive:true}); onScroll();
-const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),450); };
-document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",goForm));
-document.querySelector(".hero .cta")?.addEventListener("click",goForm);
+const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ progFocus=true; document.getElementById("em-top")?.focus({preventScroll:true}); progFocus=false; },450); };
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
+document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
 
 // Sticky CTA: shows once the top form is off screen, hides when the bottom form is on screen
 const sticky = document.getElementById("sticky"); let topVis=true, endVis=false, joined=false;
@@ -1029,18 +1049,22 @@ const newEventId = () => (window.crypto&&crypto.randomUUID) ? crypto.randomUUID(
 document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",async e=>{
   e.preventDefault();
   const em=f.email.value.trim(), err=f.querySelector(".err"), btn=f.querySelector("button");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ if(!hp(f)) ga("signup_error",{reason:"invalid_email"}); err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
   if(!eventId) eventId=newEventId();
+  let why="network";
   try{
     const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
-    if(!r.ok) throw 0;
+    why="server"; if(!r.ok) throw 0;
+    why="";
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
     if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
       // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
-      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){} }
+      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){}
+      // Clarity: same moment, same gating. A named event and one session tag, nothing else.
+      clr("event","signup"); clr("set","signed_up","yes"); }
     savedEmail=em; joined=true; upd(); showDone();
-  }catch(_){ btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
+  }catch(_){ if(why&&!hp(f)) ga("signup_error",{reason:why}); btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));
 function showDone(){
   const c=document.getElementById("conf");
