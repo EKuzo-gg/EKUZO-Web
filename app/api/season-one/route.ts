@@ -50,6 +50,47 @@ const normalizeAd = (v: unknown) => {
 const FAIL = "We couldn’t save that. Please try again.";
 
 /**
+ * Visitor location from Netlify's `x-nf-geo` request header. Klaviyo event
+ * properties only: never sent to Meta, and no latitude/longitude is kept.
+ * Format is typically base64-encoded JSON ({"city","country":{"code"},
+ * "subdivision":{"code"},"postalCode"|"postal_code",...}); some runtimes send
+ * plain JSON. Parsed defensively: base64 first, then raw, any failure = empty.
+ * The exact format is NOT verified against a live deploy yet (checklist L2).
+ */
+function readGeo(req: NextRequest): Record<string, string> {
+  const h = req.headers.get("x-nf-geo");
+  let g: Record<string, unknown> | null = null;
+  if (h) {
+    for (const decode of [(s: string) => Buffer.from(s, "base64").toString("utf8"), (s: string) => s]) {
+      try {
+        const j = JSON.parse(decode(h));
+        if (j && typeof j === "object" && !Array.isArray(j)) { g = j; break; }
+      } catch {
+        // not this encoding; try the next
+      }
+    }
+  }
+  // Accepts {code: "US"} objects or a bare string for country and subdivision.
+  const code = (v: unknown) => text(v && typeof v === "object" ? (v as Record<string, unknown>).code : v, 8);
+  return {
+    geo_country: code(g?.country),
+    geo_region: code(g?.subdivision),
+    geo_city: text(g?.city, 80),
+    geo_postal: text(g?.postalCode ?? g?.postal_code, 12),
+  };
+}
+
+/** Coarse device class from the user agent. No dependency, deliberately rough. */
+function readDevice(ua: string): Record<string, string> {
+  if (!ua) return { device_os: "", device_type: "" };
+  const os = /iPhone|iPad|iPod/.test(ua) ? "ios" : /Android/.test(ua) ? "android" : /CrOS/.test(ua) ? "chromeos"
+    : /Windows/.test(ua) ? "windows" : /Macintosh|Mac OS X/.test(ua) ? "mac" : /Linux|X11/.test(ua) ? "linux" : "other";
+  // iPadOS 13+ Safari reports a Macintosh UA, so it reads as mac/desktop here.
+  const tablet = /iPad|Tablet/.test(ua) || (os === "android" && !/Mobile/.test(ua));
+  return { device_os: os, device_type: tablet ? "tablet" : /iPhone|iPod|Mobi/.test(ua) ? "mobile" : "desktop" };
+}
+
+/**
  * Server-side Meta Lead for a main sign-up. Parent email only (hashed);
  * nothing about the child is ever sent to Meta. ip, ua, fbp and fbc go
  * plaintext, as Meta expects. Never throws (sendCapiEvent logs failures).
@@ -185,7 +226,12 @@ export async function POST(req: NextRequest) {
       utm_campaign: text(attr.utm_campaign),
       utm_content: text(attr.utm_content, 160),
       utm_term: text(attr.utm_term),
+      utm_id: text(attr.utm_id, 40),
+      site: text(attr.site, 20),
       page: clean(body.page, 300),
+      // Klaviyo-only (see readGeo / readDevice); sendMetaLead never reads these.
+      ...readGeo(req),
+      ...readDevice(clean(req.headers.get("user-agent"), 400)),
     };
 
     const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60));

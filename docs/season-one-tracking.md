@@ -34,7 +34,22 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
   "ekz_hp": "" }
 ```
 
+`attribution` keys read by the route (strings only, anything else is stored as empty): `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id` (max 40), `site` (max 20). The landing page forwards all seven from its query string; ad URLs carry `utm_term={{placement}}`, `utm_id={{ad.id}}` and `site={{site_source_name}}`. The site popup sends only the five `utm_*` keys it captures in `lib/attribution.ts` (a fixed whitelist shared with the camps/EKUZO100 registration flows, left unchanged because ads land on the landing page, not the popup).
+
 `eventId` and `eventSourceUrl` are optional. `ekz_hp` is a honeypot: both forms carry a hidden, off-screen `ekz_hp` input (deliberately not a name like `company` that browser autofill recognizes) that people never see. If it arrives non-empty on the main sign-up, the route logs a warning and returns `{ ok: true }` without calling Klaviyo or sending a Meta Lead. Responses: 400 bad email, 500 Klaviyo key missing, 502 Klaviyo event failed (the page asks the parent to retry), 200 `{ ok: true }` otherwise.
+
+## Klaviyo-only fields (main sign-up)
+
+Added to the "Season 01 Waitlist" **event properties** only (not the profile, not the games/age events, never Meta CAPI):
+
+| Property | Source | Values |
+|---|---|---|
+| `utm_id`, `site` | `attribution` in the request body | as sent |
+| `geo_country`, `geo_region`, `geo_city`, `geo_postal` | Netlify `x-nf-geo` request header | country code, subdivision code (e.g. `TX`), city, postal code; latitude and longitude are never stored |
+| `device_os` | user agent | `ios`, `android`, `mac`, `windows`, `chromeos`, `linux`, `other` |
+| `device_type` | user agent | `mobile`, `tablet`, `desktop` (iPad, and Android without "Mobile", count as tablet) |
+
+A missing or unparseable `x-nf-geo` header, or a missing user agent, gives empty strings and never an error. The header is read as base64-encoded JSON, then as plain JSON; its exact format on the live Netlify runtime is still to be verified (launch checklist L2): after a test sign-up on the deploy, confirm the event in Klaviyo shows `geo_*` values. iPadOS Safari sends a Mac user agent, so those visits read as `mac` / `desktop`. Geolocation is approximate (IP-based). Meta CAPI `user_data` and `custom_data` are unchanged by this.
 
 ## Env vars (Netlify, scoped to Functions/runtime)
 
