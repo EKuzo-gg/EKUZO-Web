@@ -24,6 +24,9 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * A second call with { step: "age", kidAge } after sign-up records the
  * kid's age band as a profile property (no new subscription).
  *
+ * Honeypot: a non-empty `company` on the main sign-up gets a silent 200 with no
+ * Klaviyo write and no Meta Lead.
+ *
  * Fails loudly if Klaviyo is unreachable: the email is the whole point, so the
  * parent is asked to retry rather than shown a false "you're in".
  */
@@ -144,6 +147,13 @@ export async function POST(req: NextRequest) {
       const r = await event("Season 01 Waitlist Age", email, { season1_kid_age: kidAge }, { kid_age: kidAge });
       if (!r.ok) console.error("Klaviyo age event failed:", r.status, await r.text());
       return NextResponse.json({ ok: r.ok });
+    }
+
+    // Honeypot: the hidden `company` field is only ever filled by bots. Look
+    // like a success so they move on, but write nothing and send no Lead.
+    if (clean(body.company)) {
+      console.warn("Season 01 sign-up dropped: honeypot field filled");
+      return NextResponse.json({ ok: true });
     }
 
     const source = SOURCES.has(body.source) ? String(body.source) : "site-popup";

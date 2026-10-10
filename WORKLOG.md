@@ -24,6 +24,8 @@ both the browser and the server with one shared event ID. Klaviyo behavior is un
 - `next.config.mjs`: `/season1` rewrites to the landing page (query string kept). Ad URL:
   `https://ekuzo.gg/season1?ad=d3&utm_source=meta&...`.
 - Docs: `docs/season-one-tracking.md` (what fires where, env vars, test procedure).
+- Honeypot: both sign-up forms (landing page and popup) carry a hidden `company` input; if it
+  comes back filled, `/api/season-one` returns ok without writing to Klaviyo or sending a Lead.
 
 ---
 ## Jamie — August 4, 2026 (homepage story rebuild: Rive out, six sections in, measurement wired)

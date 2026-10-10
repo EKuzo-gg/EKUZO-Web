@@ -650,6 +650,8 @@ body{background:#0B0A0D;color:#F3F1F5;font:400 17px/1.5 var(--ui);overflow-x:cli
 .join p{margin:0;color:#BDB8C2;text-wrap:pretty}
 .join form{display:flex;flex-direction:column;gap:10px;margin-top:4px}
 .join label.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* Honeypot: bots fill it, people never see it. A filled value makes /api/season-one drop the sign-up. */
+.join .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
 .join input[type=email]{font:500 18px/1.2 var(--ui);padding:16px;border-radius:12px;border:2px solid #3a3640;background:#1B1920;color:#fff;width:100%;box-sizing:border-box}
 .join input[type=email]:focus{outline:none;border-color:var(--acc)}
 .join button[type=submit]{font:800 18px/1 var(--ui);padding:18px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer;width:100%}
@@ -761,6 +763,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
       <form data-where="top" novalidate>
         <label class="sr" for="em-top">Your email</label>
         <input id="em-top" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
         <button type="submit">Save their spot</button>
         <p class="err" role="alert" hidden></p>
         <small>For parents. We only email about EKUZO, and you can unsubscribe&nbsp;anytime.</small>
@@ -798,6 +801,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
       <form data-where="bottom" novalidate>
         <label class="sr" for="em-end">Your email</label>
         <input id="em-end" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
         <button type="submit">Save their spot</button>
         <p class="err" role="alert" hidden></p>
         <small>Free. No commitment. Unsubscribe&nbsp;anytime.</small>
@@ -1020,7 +1024,7 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
   if(!eventId) eventId=newEventId();
   try{
-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,company:f.company?f.company.value:""});
     if(!r.ok) throw 0;
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
     if(LIVE && !leadSent){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
