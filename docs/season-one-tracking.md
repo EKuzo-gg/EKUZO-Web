@@ -11,9 +11,11 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
 
 | When | Browser | Server (`/api/season-one`) |
 |---|---|---|
-| Page load | Meta `PageView`; Clarity session | none |
-| Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})`, once per sign-up | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
-| Games chips (confirmation) | none | Klaviyo "Season 01 Waitlist Games" only. No Meta event |
+| Page load | Meta `PageView`; Clarity session; GA4 `page_view` (landing page only: it carries its own `gtag.js` for `G-8LM45PX53W`, the popup uses the one in `app/layout.tsx`) | none |
+| Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})` and GA4 `generate_lead` with `{source:'season_one_<ad>'}`, once per sign-up each, same conditions (LIVE host, honeypot empty) | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
+| Games chips (confirmation) | none (nothing to Meta or GA) | Klaviyo "Season 01 Waitlist Games" only. No Meta event |
+
+GA4: the `source` parameter uses the same naming (`season_one_d3` on the landing page, `season_one_popup` on the popup via `trackLead`). utm_* are picked up by GA4 from the page URL, so paid traffic shows under the Meta source/medium. Only the ad id goes to GA, never the game chips or anything about the child.
 
 `content_name`: `season_one_<ad>` on the landing page (e.g. `season_one_d3`), `season_one_popup` on the popup. Same value in the browser and server events.
 

@@ -22,6 +22,14 @@ t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "wml8wll5ua");
 </script>
+<!-- Google Analytics 4 (same property as app/layout.tsx). page_view fires on load; generate_lead fires from the form script below. utm_* are read from the page URL automatically. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8LM45PX53W');
+</script>
 </head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1028,7 +1036,9 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
     const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     if(!r.ok) throw 0;
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
-    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
+    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
+      // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
+      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){} }
     savedEmail=em; joined=true; upd(); showDone();
   }catch(_){ btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));
