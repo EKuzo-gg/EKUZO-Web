@@ -60,6 +60,7 @@ export default function SeasonOnePopup() {
   // One ID per sign-up attempt, reused on retry, shared by the browser and
   // server (CAPI) Leads so Meta counts the sign-up once.
   const eventIdRef = useRef("");
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -115,6 +116,7 @@ export default function SeasonOnePopup() {
           page: window.location.pathname + window.location.search,
           eventId,
           eventSourceUrl: window.location.href,
+          company: honeypotRef.current?.value || "",
         }),
       });
       if (!res.ok) {
@@ -203,6 +205,20 @@ export default function SeasonOnePopup() {
         >
           {status === "loading" ? "Saving…" : C.cta}
         </button>
+        {/* Honeypot: bots fill it, people never see it. A filled value makes /api/season-one drop the sign-up. */}
+        <input
+          ref={honeypotRef}
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          data-1p-ignore
+          data-lpignore="true"
+          data-form-type="other"
+          defaultValue=""
+          className="absolute -left-[10000px] w-px h-px overflow-hidden opacity-0"
+        />
         {error && <p id="s1-err" role="alert" className="font-body text-[14px] text-[#FF8B8B]">{error}</p>}
         <p id="s1-fine" className="font-body text-[13px] text-white/45 leading-[1.5]">{C.fine}</p>
       </form>
