@@ -2,7 +2,7 @@
 
 Two surfaces post to `POST /api/season-one`:
 
-- **Ad landing page**: `public/roadshow/landing.html`, served at **`/season1?ad=d1..d12&utm_...`** (rewrite in `next.config.mjs`; the query string passes through) and still at `/roadshow/landing.html`. It is a static file outside `app/layout.tsx`, so it carries its own Meta pixel and Clarity tags in `<head>`.
+- **Ad landing page**: `app/season1/landing.html` (the single source of truth), served natively at **`/season1?ad=d1..d12&utm_...`** by the static route handler `app/season1/route.ts` (`force-static`, so it is prerendered at build time). There is no rewrite, no redirect and no second public address: `/roadshow/landing.html` no longer exists. The query string is read client-side by the page's own script, so it reaches the page unchanged. The file lives outside `public/` on purpose (the repo rule is never to read from `public/` in server code). It is a static file outside `app/layout.tsx`, so it carries its own Meta pixel and Clarity tags in `<head>`.
 - **Site popup**: `components/ui/SeasonOnePopup.tsx` (pixel and Clarity come from `app/layout.tsx`).
 
 Meta ads optimize on the `Lead` event, so the browser and server Leads must share one `event_id`.
