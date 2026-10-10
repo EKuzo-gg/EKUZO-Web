@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { classifyOrigin } from "@/lib/originClassifier";
+import { SEASON_ONE_MODE, SEASON_ONE_PARAM } from "@/lib/seasonOne";
 
 /**
  * First-touch acquisition-origin tagging.
@@ -15,6 +16,17 @@ import { classifyOrigin } from "@/lib/originClassifier";
  * Google Sheets. No Meta / CAPI side effects here.
  */
 export function middleware(req: NextRequest) {
+  // Season 01 waitlist mode: the enrollment funnel is paused. Send any
+  // /register page back to its program page with the waitlist popup open.
+  // Success pages are untouched so in-flight payments still confirm.
+  const path = req.nextUrl.pathname;
+  if (SEASON_ONE_MODE && /\/register\/?$/.test(path)) {
+    const url = req.nextUrl.clone();
+    url.pathname = path.replace(/\/register\/?$/, "") || "/";
+    url.searchParams.set(SEASON_ONE_PARAM, "season-one");
+    return NextResponse.redirect(url, 307);
+  }
+
   const res = NextResponse.next();
 
   // First-touch preserved — cookie already set, do nothing.

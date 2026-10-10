@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
 import { trackRegisterClick } from "@/lib/analytics";
 import { getProgramRegisterContext } from "@/lib/programRoutes";
+import { SEASON_ONE_MODE, SEASON_ONE_COPY } from "@/lib/seasonOne";
 
 /**
  * Fixed-bottom CTA bar — "Enroll my gamer" + "Talk to Humans".
@@ -82,7 +83,26 @@ export default function StickyCTA() {
       <div className="absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none" />
 
       <div className="flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white">
-        {isCamps || is101 ? (
+        {SEASON_ONE_MODE ? (
+          // Season 01 waitlist mode: one bar everywhere, opens the waitlist popup.
+          <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
+            <span
+              className="font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black"
+              style={{ fontSize: "clamp(1.5rem, 3.75vw, 3.75em)" }}
+            >
+              {SEASON_ONE_COPY.stickyHead}
+            </span>
+            <button
+              onClick={() => openModal("seasonOne")}
+              className="flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg
+                         py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0
+                         hover:brightness-110 active:scale-[0.98] active:brightness-90
+                         transition-all duration-150"
+            >
+              {SEASON_ONE_COPY.navCta}
+            </button>
+          </div>
+        ) : isCamps || is101 ? (
           <div className="flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2">
             <span
               className="font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap"

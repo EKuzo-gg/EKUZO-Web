@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
+import { SEASON_ONE_MODE, SEASON_ONE_COPY } from "@/lib/seasonOne";
 import { useModal } from "@/context/ModalContext";
 import { getProgramRegisterContext } from "@/lib/programRoutes";
 
@@ -152,7 +153,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
             variant={isDark ? "white-filled" : "red-filled"}
             onClick={() => openModal("enroll")}
           >
-            Enroll my gamer
+            {SEASON_ONE_MODE ? SEASON_ONE_COPY.navCta : "Enroll my gamer"}
           </Button>
         )}
       </div>
@@ -276,7 +277,7 @@ export default function Nav({ variant = "light" }: { variant?: NavVariant }) {
                 </TrackedRegisterLink>
               ) : (
                 <Button variant="red-filled" onClick={() => { setMobileOpen(false); openModal("enroll"); }}>
-                  Enroll my gamer
+                  {SEASON_ONE_MODE ? SEASON_ONE_COPY.navCta : "Enroll my gamer"}
                 </Button>
               )}
               <Button variant="red-outlined" onClick={() => { setMobileOpen(false); openModal("contact"); }}>

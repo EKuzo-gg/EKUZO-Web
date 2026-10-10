@@ -18,6 +18,12 @@ const nextConfig = {
   async headers() {
     return [];
   },
+  // Season 01 parent ads (Oct 2026) point at ekuzo.gg/season1?ad=dN&utm_...
+  // A rewrite, not a redirect: the URL stays /season1 and the query string
+  // passes through to the static landing page, which reads ?ad= itself.
+  async rewrites() {
+    return [{ source: "/season1", destination: "/roadshow/landing.html" }];
+  },
   async redirects() {
     return [
       // Canonical routes: /programs/ekuzo100, /programs/ekuzo-teams, /programs/ekuzo-camps

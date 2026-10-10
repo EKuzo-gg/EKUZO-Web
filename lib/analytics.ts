@@ -103,13 +103,20 @@ export function trackPurchase(params: {
 
 export function trackLead(params?: {
   source?: string;
+  eventId?: string;
 }) {
   ga4("generate_lead", {
     source: params?.source ?? "contact_form",
   });
-  fbq("Lead", {
-    content_name: params?.source ?? "contact_form",
-  });
+  const fbqParams = { content_name: params?.source ?? "contact_form" };
+  // eventID dedupes this browser Lead against a server-side CAPI Lead sent
+  // with the same ID (/api/season-one). Same rule as trackPurchase: only
+  // attach one the server also has.
+  if (params?.eventId) {
+    window.fbq?.("track", "Lead", fbqParams, { eventID: params.eventId });
+  } else {
+    fbq("Lead", fbqParams);
+  }
 }
 
 // ---------------------------------------------------------------------------

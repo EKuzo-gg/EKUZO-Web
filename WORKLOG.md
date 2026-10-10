@@ -5,6 +5,27 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie — October 10, 2026 (Season 01: Meta Lead dedupe, /season1 ad URL)
+
+Meta ads for the Season 01 waitlist optimize on `Lead`, so the sign-up now reports it from
+both the browser and the server with one shared event ID. Klaviyo behavior is unchanged.
+
+- `app/api/season-one/route.ts`: after the "Season 01 Waitlist" Klaviyo event succeeds, sends a
+  Meta Conversions API `Lead` (hashed email, IP, user agent, fbp, fbc rebuilt from `fbclid` if
+  the cookie is missing). Body gains optional `eventId` and `eventSourceUrl`. Not sent on the
+  games/age steps; a Meta failure is logged and never fails the sign-up.
+- `lib/metaCapi.ts` (from `feat/waitlist-tracking`): shared CAPI sender, Graph API v26.0,
+  `META_CAPI_USE_TEST_CODE` routes to Test Events.
+- `public/roadshow/landing.html`: Meta pixel + Clarity in `<head>`; one event ID per sign-up
+  (reused on retry), sent to the API, and the browser Lead carries it as `eventID`, once.
+  Design previews off ekuzo.gg/Netlify fire no Lead.
+- `components/ui/SeasonOnePopup.tsx` + `lib/analytics.ts`: same event ID pattern;
+  `trackLead` takes an optional `eventId` (other callers unchanged).
+- `next.config.mjs`: `/season1` rewrites to the landing page (query string kept). Ad URL:
+  `https://ekuzo.gg/season1?ad=d3&utm_source=meta&...`.
+- Docs: `docs/season-one-tracking.md` (what fires where, env vars, test procedure).
+
+---
 ## Jamie — August 4, 2026 (homepage story rebuild: Rive out, six sections in, measurement wired)
 
 The homepage was not saying what EKUZO does, and its largest section was the least
