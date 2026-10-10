@@ -8,13 +8,15 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * Season 01 waitlist capture — the site popup (components/ui/SeasonOnePopup)
  * and the parent-ad landing pages (public/roadshow/landing.html) both post here.
  *
- * Mirrors /api/campaign/lead:
+ * Steps:
  *  1. POST /api/events — "Season 01 Waitlist". Upserts the profile with where
  *     they signed up and which ad sent them, so Karlin's first email and any
  *     reporting can read it.
  *  2. POST /api/profile-subscription-bulk-create-jobs — marketing consent +
  *     joins the "Season 01 Waitlist" list (XGTv2F, created 2026-10-09).
- *     Joining that list is the trigger for the welcome flow.
+ *     A welcome flow on that list is planned; none exists yet, so joining it
+ *     sends nothing on its own today. A subscribe failure (HTTP error or a
+ *     thrown network error) is logged loudly and the sign-up still succeeds.
  *  3. Meta Conversions API "Lead" (main sign-up only, never the games/age
  *     steps), sent once the Klaviyo event has succeeded. It shares `eventId`
  *     with the browser fbq Lead so Meta dedupes the pair; the server makes one
@@ -38,6 +40,13 @@ const LIST_ID = process.env.KLAVIYO_SEASON1_LIST_ID || "XGTv2F";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const SOURCES = new Set(["site-popup", "ad-landing"]);
 const clean = (v: unknown, max = 120) => String(v ?? "").trim().slice(0, max);
+// Only string values are kept; objects and arrays would stringify to junk.
+const text = (v: unknown, max = 120) => (typeof v === "string" ? clean(v, max) : "");
+// The 12 ads are d1..d12. Accepts any case and a leading zero (d01), returns "d1".."d12" or "".
+const normalizeAd = (v: unknown) => {
+  const m = typeof v === "string" ? /^d(0?[1-9]|1[0-2])$/i.exec(v.trim()) : null;
+  return m ? `d${Number(m[1])}` : "";
+};
 const FAIL = "We couldn’t save that. Please try again.";
 
 /**
@@ -119,7 +128,8 @@ function event(metric: string, email: string, profileProps: Record<string, strin
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json().catch(() => ({}));
+  const raw = await req.json().catch(() => null);
+  const body = raw && typeof raw === "object" ? raw : {}; // null or a non-object falls through to the 400
   const email = clean(body.email, 254).toLowerCase();
 
   if (!EMAIL_RE.test(email)) {
@@ -161,7 +171,7 @@ export async function POST(req: NextRequest) {
     const profileProps: Record<string, string> = {
       season1_waitlist: "yes",
       season1_source: source,
-      season1_ad: clean(body.ad, 40),
+      season1_ad: normalizeAd(body.ad),
       season1_ad_name: clean(body.adName, 80),
       season1_joined_at: new Date().toISOString(),
     };
@@ -170,11 +180,11 @@ export async function POST(req: NextRequest) {
       ad: profileProps.season1_ad,
       ad_name: profileProps.season1_ad_name,
       where: clean(body.where, 20),
-      utm_source: clean(attr.utm_source),
-      utm_medium: clean(attr.utm_medium),
-      utm_campaign: clean(attr.utm_campaign),
-      utm_content: clean(attr.utm_content, 160),
-      utm_term: clean(attr.utm_term),
+      utm_source: text(attr.utm_source),
+      utm_medium: text(attr.utm_medium),
+      utm_campaign: text(attr.utm_campaign),
+      utm_content: text(attr.utm_content, 160),
+      utm_term: text(attr.utm_term),
       page: clean(body.page, 300),
     };
 
@@ -184,21 +194,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: FAIL }, { status: 502 });
     }
 
-    const sub = await klaviyo("profile-subscription-bulk-create-jobs", {
-      data: {
-        type: "profile-subscription-bulk-create-job",
-        attributes: {
-          custom_source: source === "ad-landing" ? "Season 01 ad landing page" : "Season 01 site popup",
-          profiles: {
-            data: [{ type: "profile", attributes: { email, subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } } } }],
+    try {
+      const sub = await klaviyo("profile-subscription-bulk-create-jobs", {
+        data: {
+          type: "profile-subscription-bulk-create-job",
+          attributes: {
+            custom_source: source === "ad-landing" ? "Season 01 ad landing page" : "Season 01 site popup",
+            profiles: {
+              data: [{ type: "profile", attributes: { email, subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } } } }],
+            },
           },
+          relationships: { list: { data: { type: "list", id: LIST_ID } } },
         },
-        relationships: { list: { data: { type: "list", id: LIST_ID } } },
-      },
-    });
-    if (!sub.ok) {
-      // Profile + event exist, so the parent can still be found — log loudly, let them through.
-      console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
+      });
+      if (!sub.ok) {
+        // Profile + event exist, so the parent can still be found: log loudly, let them through.
+        console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
+      }
+    } catch (err) {
+      // A thrown fetch (network error, timeout) is handled like an HTTP error: same log, carry on.
+      console.error("Klaviyo Season 01 list subscribe failed:", err instanceof Error ? err.message : err);
     }
     // Awaited so the serverless function isn't frozen mid-call. Never throws.
     await sendMetaLead(req, body, email, source === "ad-landing" ? `season_one_${profileProps.season1_ad || "landing"}` : "season_one_popup");
