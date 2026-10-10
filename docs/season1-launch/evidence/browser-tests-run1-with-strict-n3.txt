@@ -1,0 +1,274 @@
+curl: (22) The requested URL returned error: 400
+PASS  B01  [T1,T7,S1]  landing load: PageView once, Clarity requested, honeypots hidden
+  ok   fbq init once with pixel 1284038230557204: [["init","1284038230557204"],["track","PageView"]]
+  ok   exactly one PageView
+  ok   no Lead on load
+  ok   fbevents.js requested from connect.facebook.net
+  ok   Clarity tag requested: https://www.clarity.ms/tag/wml8wll5ua
+  ok   two honeypot inputs (top, bottom): [{"name":"ekz_hp","x":-10000,"y":233,"w":9,"h":7,"op":"0","aria":"true","tab":-1,"ac":"off","val":""},{"name":"ekz_hp","x":-10000,"y":1532.3125,"w":9,"h":7,"op":"0","aria":"true","tab":-1,"ac":"off","val":""}]
+  ok   each: name ekz_hp, offscreen (x+w<=0), aria-hidden, tabindex -1, opacity 0, autocomplete off, empty
+  ok   not within viewport horizontally
+  ok   honeypot never receives keyboard focus across 25 Tab presses
+curl: (22) The requested URL returned error: 400
+PASS  B02  [P2,T2,T3,P3,T5]  landing success: one Lead, eventID == POST eventId, content_name season_one_d3, POST body contract, chips
+  ok   exactly one POST /api/season-one (got 1)
+  ok   core fields: {"email":"parent@example.com","source":"ad-landing","ad":"d3","adName":"Play to win","where":"top"}
+  ok   attribution utm_*: {"utm_source":"meta","utm_medium":"","utm_campaign":"","utm_content":"d3-a-playtowin","utm_term":""}
+  ok   page: /season1?ad=d3&utm_source=meta&utm_content=d3-a-playtowin&fbclid=test123
+  ok   eventSourceUrl = location.href incl. fbclid: http://localhost:3100/season1?ad=d3&utm_source=meta&utm_content=d3-a-playtowin&fbclid=test123
+  ok   ekz_hp is empty string
+  ok   eventId present (9b08e01a-a2f4-46b2-a19a-5535bfd49a08)
+  ok   eventId is a UUID (secure context)
+  ok   exactly one browser Lead (got 1)
+  ok   Lead args: ["track","Lead",{"content_name":"season_one_d3"},{"eventID":"9b08e01a-a2f4-46b2-a19a-5535bfd49a08"}]
+  ok   confirmation visible
+  ok   still exactly one PageView after submit
+  ok   one debounced games POST (got 1)
+  ok   games body: {"step":"games","email":"parent@example.com","kidGames":"Fortnite, Roblox"}
+  ok   games body carries no event id / source url
+  ok   no fbq call at all after chip taps (before 3, after 3)
+  ok   no child/game data in any fbq call
+  ok   second submission after success: still exactly one browser Lead (got 1)
+  note second submission still POSTs to the API (posts now 2); server would send a second CAPI Lead with the SAME event_id (same id); form is behind the confirmation overlay
+curl: (22) The requested URL returned error: 400
+PASS  B03  [T2,P2]  landing 502 then retry: no Lead after failure, retry reuses eventId, then exactly one Lead; retry via the other form
+  ok   retry message shown: "That didn’t go through. Check your connection and try again."
+  ok   no confirmation after failure
+  ok   no Lead after the 502
+  ok   button restored (Save their spot)
+  ok   two POSTs (2)
+  ok   retry reuses the same eventId (02b871bb-c637-44e1-8f0f-7f382162cca0 / 02b871bb-c637-44e1-8f0f-7f382162cca0)
+  ok   retry came from bottom form
+  ok   exactly one Lead with the same eventID ([["track","Lead",{"content_name":"season_one_d3"},{"eventID":"02b871bb-c637-44e1-8f0f-7f382162cca0"}]])
+curl: (22) The requested URL returned error: 400
+PASS  B03b  [T2,P2]  landing network failure (request aborted) then retry: same eventId, one Lead
+  ok   no Lead after network failure
+  ok   same eventId on retry
+  ok   exactly one Lead
+curl: (22) The requested URL returned error: 400
+PASS  B04  [P2]  landing invalid email and server 400: inline error, no confirmation, no Lead
+  ok   invalid email: no POST
+  ok   inline error visible: "Check the email address and try again."
+  ok   no confirmation
+  ok   valid email: POST made
+  ok   server 400: no confirmation, no Lead
+curl: (22) The requested URL returned error: 400
+PASS  B05-127.0.0.1  [T8]  host 127.0.0.1 => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+curl: (22) The requested URL returned error: 400
+PASS  B05-preview.example.test  [T8]  host preview.example.test => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+curl: (22) The requested URL returned error: 400
+PASS  B05-evilekuzo.gg  [T8]  host evilekuzo.gg => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+curl: (22) The requested URL returned error: 400
+PASS  B05-ekuzo.gg.evil.test  [T8]  host ekuzo.gg.evil.test => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+curl: (22) The requested URL returned error: 400
+PASS  B05-www.ekuzo.gg  [T8]  host www.ekuzo.gg => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 1791656352529-bduregry16 (fallback format)
+  ok   Lead eventID equals POSTed eventId
+curl: (22) The requested URL returned error: 400
+PASS  B05-foo.netlify.app  [T8]  host foo.netlify.app => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 1791656353794-nngqfdbmh3 (fallback format)
+  ok   Lead eventID equals POSTed eventId
+curl: (22) The requested URL returned error: 400
+PASS  B05-localhost  [T8]  host localhost => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 4438646c-644e-4793-a89d-b17c52b81005 (uuid)
+  ok   Lead eventID equals POSTed eventId
+PASS  B06  [P4,T1,T7,S1]  popup opens from ?join=season-one: PageView once, Clarity, honeypot hidden
+  ok   one init, one PageView: [["init","1284038230557204"],["track","PageView"]]
+  ok   Clarity requested
+  ok   honeypot offscreen/aria-hidden/tabindex -1/opacity 0: {"x":-10000,"w":1,"aria":"true","tab":-1,"op":"0"}
+PASS  B07  [P4,T2,T3,P3,T5]  popup success: one Lead eventID == POST eventId, content_name season_one_popup, chips
+  ok   one POST (1)
+  ok   core: {"email":"parent@example.com","source":"site-popup","ekz_hp":"","ad":""}
+  ok   page /?join=season-one, eventSourceUrl http://localhost:3100/?join=season-one
+  ok   attribution object: {"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":""}
+  ok   eventId uuid
+  ok   Lead: [["track","Lead",{"content_name":"season_one_popup"},{"eventID":"6eff19b4-e342-4a21-b20d-9790a6d998d0"}]]
+  ok   games POST: [{"step":"games","email":"parent@example.com","kidGames":"Minecraft, Valorant"}]
+  ok   no fbq calls after chips
+PASS  B08  [P4,T2]  popup 502 then retry: no Lead after failure, same eventId, one Lead; invalid email
+  ok   invalid email: no POST, error shown ("Check the email address and try again.")
+  ok   no Lead after 502; server error text shown
+  ok   no confirmation
+  ok   retry reuses eventId
+  ok   exactly one Lead, matching eventID
+PASS  B09  [P4]  popup entry points: nav CTA, register link interception, first-visit auto-open, snooze after close
+  ok   snoozed: no auto popup after 3.5 s
+  ok   nav button text 'Join Season 01' present
+  ok   nav CTA opens popup
+  ok   Escape closes
+  note register links on page: 1
+  ok   register link opens popup, URL stays http://localhost:3100/programs/ekuzo-camps
+  ok   no popup at 1.5 s
+  ok   first-visit popup open by 3.3 s
+  ok   close writes dismissed_at (7 day snooze)
+  ok   after close + reload: popup stays closed
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+curl: (22) The requested URL returned error: 400
+PASS  B10  [P1,P7]  ad variants d1..d12 (+ d01, D3, d99, none): 200, URL stays /season1, variant rendered
+  ok   ad=d1: 200 url=/season1?ad=d1 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=d2: 200 url=/season1?ad=d2 title="EKUZO · Overheard" hero="Overheard" bridge="They can’t pause it. Their team needs them." mod=true noindex=noindex
+  ok   ad=d3: 200 url=/season1?ad=d3 title="EKUZO · Play to win" hero="Play to win" bridge="Give them a team to win with." mod=false noindex=noindex
+  ok   ad=d4: 200 url=/season1?ad=d4 title="EKUZO · Team card" hero="Team card" bridge="Not every team needs a field." mod=false noindex=noindex
+  ok   ad=d5: 200 url=/season1?ad=d5 title="EKUZO · They'll actually show up" hero="They'll actually show up" bridge="A team that expects them every week." mod=false noindex=noindex
+  ok   ad=d6: 200 url=/season1?ad=d6 title="EKUZO · The coach ends it" hero="The coach ends it" bridge="The coach calls it, not you." mod=false noindex=noindex
+  ok   ad=d7: 200 url=/season1?ad=d7 title="EKUZO · Screen time, graded" hero="Screen time, graded" bridge="Feedback from a coach, every week." mod=false noindex=noindex
+  ok   ad=d8: 200 url=/season1?ad=d8 title="EKUZO · Screen time, team time" hero="Screen time, team time" bridge="Now with a team." mod=false noindex=noindex
+  ok   ad=d9: 200 url=/season1?ad=d9 title="EKUZO · Admit one player" hero="Admit one player" bridge="No drive. No cleats. No parking." mod=false noindex=noindex
+  ok   ad=d10: 200 url=/season1?ad=d10 title="EKUZO · Screen time with a purpose" hero="Screen time with a purpose" bridge="The skills are already there. A coach brings them out." mod=true noindex=noindex
+  ok   ad=d11: 200 url=/season1?ad=d11 title="EKUZO · Their name on a jersey" hero="Their name on a jersey" bridge="Their name on the back." mod=false noindex=noindex
+  ok   ad=d12: 200 url=/season1?ad=d12 title="EKUZO · The best excuse" hero="The best excuse" bridge="“Sorry, practice is going over.”" mod=false noindex=noindex
+  ok   ad=d01: 200 url=/season1?ad=d01 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=D3: 200 url=/season1?ad=D3 title="EKUZO · Play to win" hero="Play to win" bridge="Give them a team to win with." mod=false noindex=noindex
+  ok   ad=d99: 200 url=/season1?ad=d99 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=(none): 200 url=/season1?utm_source=meta title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   variant d1 renders "We've all said it" (got "We've all said it")
+  ok   variant d3 renders "Play to win" (got "Play to win")
+  ok   variant d10 renders "Screen time with a purpose" (got "Screen time with a purpose")
+  ok   d01 maps to d1
+  ok   D3 (uppercase) maps to d3
+  ok   unknown/missing ad falls back to d1
+  ok   12 distinct hero variants (12)
+  ok   /roadshow/landing.html?ad=d3 -> 200 "EKUZO · Play to win"
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d1-1440  [N3]  console truth /season1?ad=d1 @1440
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d1 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d3-1440  [N3]  console truth /season1?ad=d3 @1440
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d3 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d10-1440  [N3]  console truth /season1?ad=d10 @1440
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d10 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+FAIL  N3-home-1440  [N3]  console truth / @1440
+  FAIL console.error from our code: 3 Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found)
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  FAIL local HTTP >=400 responses: 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-2@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-white-1@2x.png
+  note final URL http://localhost:3100/ (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+FAIL  N3-home_popup-1440  [N3]  console truth /?join=season-one @1440
+  FAIL console.error from our code: 3 Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found)
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  FAIL console warnings from our code: The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-black-bottom-1%402x.png was preloaded using link preload but not used within a few secon || The resource http://localhost:3100/icons/growth-arrows.svg was preloaded using link preload but not used within a few seconds from the window's load event. Plea || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png was preloaded using link preload but not used within a few seconds f || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-white-bottom-2%402x.png was preloaded using link preload but not used within a few secon || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-1%402x.png was preloaded using link preload but not used within a few seconds fr || The resource http://localhost:3100/icons/hard-problem.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/confidence-2.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/easy.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make s || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-red-bottom-1%402x.png was preloaded using link preload but not used within a few seconds || The resource http://localhost:3100/icons/heart.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/icons/leadership.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please  || The resource http://localhost:3100/icons/camada-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/youth.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-bottom-1%402x.png was preloaded using link preload but not used within a few second || The resource http://localhost:3100/icons/enthusiasm.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please  || The resource http://localhost:3100/icons/handwave.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please ma || The resource http://localhost:3100/icons/flash.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but not used within a few second || The resource http://localhost:3100/icons/camada.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-white-bottom-1%402x.png was preloaded using link preload but not used within a few secon || The resource http://localhost:3100/icons/speaking.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please ma || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-white-top-2%402x.png was preloaded using link preload but not used within a few seconds  || The resource http://localhost:3100/icons/skills.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make || The resource http://localhost:3100/icons/run-first.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please m
+  FAIL local HTTP >=400 responses: 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-2@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-white-1@2x.png
+  note final URL http://localhost:3100/?join=season-one (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+PASS  N3-camps-1440  [N3]  console truth /programs/ekuzo-camps @1440
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/programs/ekuzo-camps (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+FAIL  N3-camps_register_redirect-1440  [N3]  console truth /programs/ekuzo-camps/register @1440
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  FAIL console warnings from our code: The resource http://localhost:3100/icons/growth-arrows.svg was preloaded using link preload but not used within a few seconds from the window's load event. Plea || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png was preloaded using link preload but not used within a few seconds f || The resource http://localhost:3100/icons/hard-problem.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-1%402x.png was preloaded using link preload but not used within a few seconds fr || The resource http://localhost:3100/icons/trophy-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/confidence-2.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/swords-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/easy.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make s || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-red-bottom-1%402x.png was preloaded using link preload but not used within a few seconds || The resource http://localhost:3100/icons/heart.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/icons/leadership.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please  || The resource http://localhost:3100/icons/camada-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/clock-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please || The resource http://localhost:3100/icons/youth.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-bottom-1%402x.png was preloaded using link preload but not used within a few second || The resource http://localhost:3100/icons/enthusiasm.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please  || The resource http://localhost:3100/icons/handwave.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please ma || The resource http://localhost:3100/icons/flash.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make  || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but not used within a few second || The resource http://localhost:3100/icons/camada.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-white-bottom-1%402x.png was preloaded using link preload but not used within a few secon || The resource http://localhost:3100/icons/speaking.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please ma || The resource http://localhost:3100/images/new%20torn%20paper/torn-paper-white-top-2%402x.png was preloaded using link preload but not used within a few seconds  || The resource http://localhost:3100/icons/skills.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make || The resource http://localhost:3100/icons/run-first.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please m
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/programs/ekuzo-camps?join=season-one (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d1-375  [N3]  console truth /season1?ad=d1 @375
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d1 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d3-375  [N3]  console truth /season1?ad=d3 @375
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d3 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+curl: (22) The requested URL returned error: 400
+PASS  N3-landing_d10-375  [N3]  console truth /season1?ad=d10 @375
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/season1?ad=d10 (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: fonts.googleapis.com/css2
+FAIL  N3-home-375  [N3]  console truth / @375
+  FAIL console.error from our code: 3 Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found)
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  FAIL local HTTP >=400 responses: 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-white-1@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  note final URL http://localhost:3100/ (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+FAIL  N3-home_popup-375  [N3]  console truth /?join=season-one @375
+  FAIL console.error from our code: 3 Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found) || Failed to load resource: the server responded with a status of 404 (Not Found)
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  FAIL local HTTP >=400 responses: 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-red-top-2@2x.png | 404 http://localhost:3100/images/new%20torn%20paper/torn-paper-white-1@2x.png
+  note final URL http://localhost:3100/?join=season-one (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+PASS  N3-camps-375  [N3]  console truth /programs/ekuzo-camps @375
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  ok   console warnings from our code: 
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/programs/ekuzo-camps (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+FAIL  N3-camps_register_redirect-375  [N3]  console truth /programs/ekuzo-camps/register @375
+  ok   console.error from our code: 0 
+  ok   uncaught page errors: 0 
+  ok   hydration / invalid-DOM messages: 0
+  FAIL console warnings from our code: The resource http://localhost:3100/icons/swords-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/trophy-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Pleas || The resource http://localhost:3100/icons/clock-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please
+  ok   local HTTP >=400 responses: none
+  note final URL http://localhost:3100/programs/ekuzo-camps?join=season-one (status 200); third-party console errors (intercepted/blocked hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+
+SUMMARY: 25/31 passed, 6 failed
+Per test: B01=PASS B02=PASS B03=PASS B03b=PASS B04=PASS B05-127.0.0.1=PASS B05-preview.example.test=PASS B05-evilekuzo.gg=PASS B05-ekuzo.gg.evil.test=PASS B05-www.ekuzo.gg=PASS B05-foo.netlify.app=PASS B05-localhost=PASS B06=PASS B07=PASS B08=PASS B09=PASS B10=PASS N3-landing_d1-1440=PASS N3-landing_d3-1440=PASS N3-landing_d10-1440=PASS N3-home-1440=FAIL N3-home_popup-1440=FAIL N3-camps-1440=PASS N3-camps_register_redirect-1440=FAIL N3-landing_d1-375=PASS N3-landing_d3-375=PASS N3-landing_d10-375=PASS N3-home-375=FAIL N3-home_popup-375=FAIL N3-camps-375=PASS N3-camps_register_redirect-375=FAIL

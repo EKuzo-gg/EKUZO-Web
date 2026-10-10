@@ -1,0 +1,23 @@
+$ git diff --stat 3aefd6c 4457689 -- protected surfaces (N1)
+(empty above = zero diff) exit=0
+
+$ git diff --name-only 3aefd6c 4457689
+WORKLOG.md
+app/api/season-one/route.ts
+app/layout.tsx
+components/layout/Nav.tsx
+components/sections/FooterBanner.tsx
+components/ui/ModalRenderer.tsx
+components/ui/SeasonOnePopup.tsx
+components/ui/SeasonOneTrigger.tsx
+components/ui/StickyCTA.tsx
+context/ModalContext.tsx
+docs/season-one-tracking.md
+lib/analytics.ts
+lib/metaCapi.ts
+lib/programRoutes.ts
+lib/seasonOne.ts
+middleware.ts
+next.config.mjs
+public/images/season-one-kid.jpg
+public/roadshow/landing.html

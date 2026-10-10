@@ -1,0 +1,269 @@
+# Relay self-test, cycle 1 (self-evidence, not final; Sentry retests)
+# Edited file: app/api/season-one/route.ts. Type check: tsc --noEmit on the route file with the repo tsconfig (extends), exit 0.
+# Expected FAILs from cases that encode the OLD behavior changed on purpose:
+#  C09b: asserts a thrown list-subscribe returns 502 + no Lead. Decision 2 / D3 reverses that: now 200 + Lead + same 'Klaviyo Season 01 list subscribe failed' log (the observed note line shows status=200, CAPI calls=1).
+#  C16: only the 'ad40' / 'profile props capped' / 'content_name bounded' assertions fail, because a 540-char 'AAAA...' ad is not in d1..d12 and is now stored empty (D5 / decision 7), so content_name is season_one_landing. adName, where, page, utm, firstName, URL and UA caps all still pass.
+# C03c, C11b (null body -> 400), C17, C21 pass.
+
+# Route harness for app/api/season-one/route.ts @ 4457689 (release/season1)
+# Node v22.22.0; fetch mocked; no network. One process per case.
+
+PASS  C01  [T3,T6]  happy path: Klaviyo event + subscribe + exactly one CAPI Lead
+  ok   status 200 ok:true (got 200 {"ok":true})
+  ok   CAPI fetch completed BEFORE the response was returned (awaited)
+  ok   1 Klaviyo event, 1 subscribe, 1 CAPI (got 1/1/1; total fetches 3)
+  ok   no other outbound fetches
+  ok   order: event -> subscribe -> CAPI
+  ok   Klaviyo auth header uses key
+  ok   metric name 'Season 01 Waitlist'
+  ok   email lowercased+trimmed in Klaviyo
+  ok   event props keys: ad,ad_name,page,source,utm_campaign,utm_content,utm_medium,utm_source,utm_term,where
+  ok   event prop values
+  ok   profile props season1_*: season1_waitlist,season1_source,season1_ad,season1_ad_name,season1_joined_at
+  ok   subscribe to list XGTv2F
+  ok   marketing consent SUBSCRIBED
+  ok   custom_source landing
+  ok   CAPI URL v26.0 / pixel (https://graph.facebook.com/v26.0/1284038230557204/events?access_token=<tok>)
+  ok   one event in payload
+  ok   event_name Lead
+  ok   event_id equals browser eventId
+  ok   action_source website
+  ok   event_source_url passed
+  ok   event_time unix seconds
+  ok   em = [sha256(lower(trim(email)))]
+  ok   ip from x-nf-client-connection-ip (wins over XFF)
+  ok   ua
+  ok   fbp from cookie
+  ok   fbc from cookie (cookie wins over fbclid)
+  ok   custom_data = {content_name: season_one_d3}
+  ok   no test_event_code in live mode
+  ok   CAPI payload has no child-derived keys/values (extra kidGames/kidAge in request were ignored)
+  ok   main-step Klaviyo calls also carry no child data when extras are posted
+  ok   plaintext email absent from CAPI payload
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C02  [T3]  fbc rebuilt from fbclid in eventSourceUrl when no cookie
+  ok   200
+  ok   fbc = fb.1.<ms>.ABC123 (fb.1.1791657175274.ABC123)
+  ok   no fbp when cookie absent
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C02b  [T3]  no fbclid and no cookie -> no fbc; non-URL eventSourceUrl tolerated
+  ok   no fbc
+  ok   non-URL eventSourceUrl: 200 and CAPI still sent
+  ok   no fbc from garbage URL
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C02c  [T3]  ip fallbacks: XFF first value; none -> no ip field
+  ok   XFF first value used
+  ok   no ip when no headers
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C03  [T3]  content_name: site-popup -> season_one_popup
+  ok   season_one_popup
+  ok   custom_source popup
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C03b  [T3]  content_name: landing without ad -> season_one_landing; unknown source coerced to popup
+  ok   season_one_landing
+  ok   unknown source -> popup
+  ok   klaviyo source coerced to site-popup
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C03c  [T3,S2]  content_name with hostile ad value (observation: user-controlled string reaches Meta custom_data)
+  ok   note: content_name sent = "season_one_landing" (JSON-encoded; not a header/URL injection)
+  ok   length bounded to 40 chars of ad
+  ok   not in URL
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C04  [T4,T5]  games step: Klaviyo only, no CAPI, no Meta call at all
+  ok   200 ok
+  ok   exactly one fetch, to Klaviyo events
+  ok   zero graph.facebook.com calls
+  ok   metric 'Season 01 Waitlist Games', kid_games set on event+profile
+  ok   no subscribe on games step
+
+PASS  C05  [T4,T5]  age step: Klaviyo only, no CAPI
+  ok   200 ok
+  ok   one Klaviyo fetch, zero CAPI
+  ok   age event + profile prop
+
+PASS  C05b  [T5]  games/age missing value -> 400 and no fetch; Klaviyo failure surfaces ok:false
+  ok   games empty -> 400, no fetch
+  ok   age empty -> 400, no fetch
+  ok   Klaviyo 500 on games step -> body ok:false (HTTP 200)
+  logs: E: Klaviyo games event failed: 500 boom
+
+PASS  C06  [S3]  CAPI fetch rejects (network error) -> still 200 ok
+  ok   200 ok:true
+  ok   CAPI was attempted once
+  logs: E: Meta CAPI Lead error: ECONNRESET
+
+PASS  C07  [S3]  CAPI returns 500 -> still 200 ok
+  ok   200 ok:true
+  ok   failure logged
+  ok   access token not written to logs
+  logs: E: Meta CAPI Lead failed: 500 err
+
+PASS  C08  [S3]  Klaviyo event 500 -> 502 and ZERO CAPI calls (and no subscribe)
+  ok   502 (got 502)
+  ok   zero CAPI calls
+  ok   no subscribe attempted
+  ok   ok:false
+  logs: E: Klaviyo Season 01 event failed: 500 nope
+
+PASS  C08b  [S3]  Klaviyo event fetch throws (network) -> 502 and zero CAPI
+  ok   502, zero CAPI (got 502)
+  logs: E: Season 01 route error: ETIMEDOUT
+
+PASS  C09  [S3]  subscribe returns 500 -> 200 ok and Lead still sent
+  ok   200 ok:true
+  ok   exactly one CAPI Lead
+  ok   failure logged
+  logs: E: Klaviyo Season 01 list subscribe failed: 500 x | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+FAIL  C09b  [S3]  subscribe fetch THROWS (network) after event succeeded (observation)
+  ok   note: status=200, CAPI calls=1. Event is already in Klaviyo; route returns 502 (retry prompt) and no Lead, unlike HTTP-500 subscribe which returns 200 + Lead
+  FAIL behavior recorded: 502 + no Lead (inconsistent with subscribe-HTTP-failure path)
+  logs: E: Klaviyo Season 01 list subscribe failed: ECONNRESET | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C10  [S1]  honeypot ekz_hp non-empty -> 200 ok, ZERO fetch calls
+  ok   200 ok:true
+  ok   zero fetch calls (got 0)
+  ok   whitespace-only honeypot treated as empty (real sign-up proceeds)
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C10b  [S1,S4]  honeypot is not checked on games/age steps (documented design; recorded)
+  ok   note: Klaviyo calls with filled honeypot on games step: 1
+  ok   recorded: games step writes to Klaviyo even with honeypot filled
+
+PASS  C11  [S2]  bad email -> 400, no fetch
+  ok   email "" -> 400, fetches 0
+  ok   email "nope" -> 400, fetches 0
+  ok   email "a@b" -> 400, fetches 0
+  ok   email "a@b.c" -> 400, fetches 0
+  ok   email "a b@c.com" -> 400, fetches 0
+  ok   email "@x.com" -> 400, fetches 0
+  ok   email "a@@b.com" -> 400, fetches 0
+  ok   email undefined -> 400, fetches 0
+  ok   email 123 -> 400, fetches 0
+  ok   email {} -> 400, fetches 0
+  ok   email "a@b.co\nBcc: evil@x.com" -> 400, fetches 0
+
+PASS  C11b  [S2]  malformed JSON body / non-object JSON bodies
+  ok   raw "{not json" -> 400
+  ok   raw "" -> 400
+  ok   raw "[]" -> 400
+  ok   raw "\"str\"" -> 400
+  ok   raw "42" -> 400
+  ok   note: raw "null" -> 400
+  ok   raw "null" -> 400 (got 400)
+
+PASS  C12  [S3,T6]  missing Klaviyo key -> 500, no fetch, no CAPI
+  ok   500, zero fetches (got 500/0)
+  logs: E: KLAVIYO_PRIVATE_API_KEY not set — Season 01 sign-up lost: parent@example.com
+
+PASS  C13  [T9]  META_CAPI_USE_TEST_CODE=true + code -> payload has test_event_code
+  ok   200
+  ok   test_event_code=TEST12345 at payload top level
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555, test)
+
+PASS  C14  [T9]  USE_TEST_CODE=true WITHOUT code -> no CAPI call (skip, not live); sign-up still 200
+  ok   200, zero CAPI
+  ok   Klaviyo event still written
+  logs: W: META_CAPI_USE_TEST_CODE is "true" but META_CAPI_TEST_EVENT_CODE is empty; skipping Lead event
+
+PASS  C14b  [T9]  flag unset/false with a code present -> live payload (no test_event_code)
+  ok   flag=undefined -> live, no test code
+  ok   flag="false" -> live, no test code
+  ok   flag="TRUE" -> live, no test code
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C15  [T3]  missing eventId -> server generates a UUID; blank/oversized eventId handled
+  ok   uuid v4 (de21eac9-7cb4-43bf-b1de-3519454b3fe0)
+  ok   eventId truncated to 100
+  ok   blank eventId -> uuid
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=de21eac9-7cb4-43bf-b1de-3519454b3fe0) | L: ✅ Meta CAPI: Lead sent (event_id=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx) | L: ✅ Meta CAPI: Lead sent (event_id=fc62d0be-f196-41b5-9d93-287f836b31ed)
+
+FAIL  C16  [S2]  oversized fields truncated (Klaviyo + CAPI)
+  FAIL ad40 adName80 where20 page300
+  ok   utm 120 / content 160
+  ok   firstName 60
+  FAIL profile props capped
+  ok   event_source_url capped at 1000
+  ok   ua capped 400
+  FAIL content_name bounded
+  ok   note: 250-char local part email -> fetches 0 (truncated to 254 chars => no domain => should be rejected)
+  ok   overlong email rejected rather than silently truncated into a different address
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C17  [S2]  attribution non-object / odd shapes
+  ok   attribution=string -> 200 with empty utm_*
+  ok   attribution=null -> 200 with empty utm_*
+  ok   attribution=number -> 200 with empty utm_*
+  ok   attribution=array -> 200 with empty utm_*
+  ok   attribution=bool -> 200 with empty utm_*
+  ok   note: nested values -> utm_source="" utm_medium="" utm_campaign="" utm_content=""
+  ok   200 (no crash)
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555) | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C18  [T3]  CAPI configuration gaps: no token / no pixel id -> skipped, sign-up 200; NEXT_PUBLIC_META_PIXEL_ID fallback
+  ok   no token: 200, no CAPI
+  ok   no pixel id: 200, no CAPI
+  ok   NEXT_PUBLIC_META_PIXEL_ID fallback used
+  logs: W: Meta CAPI token or pixel ID not configured; skipping server-side Lead event | W: Meta CAPI token or pixel ID not configured; skipping server-side Lead event | L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C19  [T6]  custom list id via KLAVIYO_SEASON1_LIST_ID
+  ok   list id override
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C20  [S2]  no child fields in main-step CAPI even when games/age posted with the sign-up AND on separate steps (cross-check of all CAPI payloads)
+  ok   only 1 CAPI call across 3 requests (got 1)
+  ok   no child-derived content in any CAPI payload
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+PASS  C21  [S2]  SQL/JSON-ish and CRLF in names do not break JSON bodies or headers
+  ok   200
+  ok   Klaviyo headers fixed set: accept,authorization,content-type,revision
+  ok   value stays inside JSON string (no injection)
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=11111111-2222-4333-8444-555555555555)
+
+
+SUMMARY: 29 passed, 2 failed, 31 cases
+Per case: C01=PASS C02=PASS C02b=PASS C02c=PASS C03=PASS C03b=PASS C03c=PASS C04=PASS C05=PASS C05b=PASS C06=PASS C07=PASS C08=PASS C08b=PASS C09=PASS C09b=FAIL C10=PASS C10b=PASS C11=PASS C11b=PASS C12=PASS C13=PASS C14=PASS C14b=PASS C15=PASS C16=FAIL C17=PASS C18=PASS C19=PASS C20=PASS C21=PASS
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+Error: Transform failed with 2 errors:
+/tmp/claude-0/-home-claude-ekuzo-web/679cd049-4ddd-51db-8732-3f44202ff11a/scratchpad/adcheck.ts:6:13: ERROR: Top-level await is currently not supported with the "cjs" output format
+/tmp/claude-0/-home-claude-ekuzo-web/679cd049-4ddd-51db-8732-3f44202ff11a/scratchpad/adcheck.ts:9:2: ERROR: Top-level await is currently not supported with the "cjs" output format
+    at failureErrorWithLog (/home/claude/s1-tests/node_modules/esbuild/lib/main.js:1752:15)
+    at /home/claude/s1-tests/node_modules/esbuild/lib/main.js:1019:50
+    at responseCallbacks.<computed> (/home/claude/s1-tests/node_modules/esbuild/lib/main.js:886:9)
+    at handleIncomingPacket (/home/claude/s1-tests/node_modules/esbuild/lib/main.js:941:12)
+    at Socket.readFromStdout (/home/claude/s1-tests/node_modules/esbuild/lib/main.js:864:7)
+    at Socket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23) {
+  name: 'TransformError',
+  code: 'ERR_REQUIRE_ASYNC_MODULE'
+}
+
+Node.js v22.22.0
+
+# Extra spot check (scratch script, not part of Sentry harness): ad allowlist + utm string-only
+"d1" -> ad="d1" profile=d1 content_name=season_one_d1 utm_source="" utm_medium=m
+"D01" -> ad="d1" profile=d1 content_name=season_one_d1 utm_source="" utm_medium=m
+"d12" -> ad="d12" profile=d12 content_name=season_one_d12 utm_source="" utm_medium=m
+"D12" -> ad="d12" profile=d12 content_name=season_one_d12 utm_source="" utm_medium=m
+"d13" -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+"d0" -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+"d012" -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+"x" -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+{"a":1} -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+["d1"] -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m
+"  d3 " -> ad="d3" profile=d3 content_name=season_one_d3 utm_source="" utm_medium=m
+null -> ad="" profile= content_name=season_one_landing utm_source="" utm_medium=m

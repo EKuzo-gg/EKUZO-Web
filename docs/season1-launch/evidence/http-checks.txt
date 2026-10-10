@@ -1,0 +1,80 @@
+# HTTP-level checks against release build (next start -p 3100, commit 4457689)
+
+## P1 /season1?ad=dN status, final URL (curl, no redirect following), then roadshow path
+ad=d1  200 redirect_url=[]
+ad=d2  200 redirect_url=[]
+ad=d3  200 redirect_url=[]
+ad=d4  200 redirect_url=[]
+ad=d5  200 redirect_url=[]
+ad=d6  200 redirect_url=[]
+ad=d7  200 redirect_url=[]
+ad=d8  200 redirect_url=[]
+ad=d9  200 redirect_url=[]
+ad=d10  200 redirect_url=[]
+ad=d11  200 redirect_url=[]
+ad=d12  200 redirect_url=[]
+/roadshow/landing.html  200 type=text/html; charset=UTF-8
+/season1 (no ad)  200
+/season1/ (trailing slash)  308 redirect_url=[http://localhost:3100/season1?ad=d3]
+
+## P7 noindex
+<meta name="robots" content="noindex">
+x-robots-tag header:
+(none; meta tag only)
+robots.txt:
+# https://ekuzo.gg robots.txt
+
+# Sitemap
+Sitemap: https://ekuzo.gg/sitemap.xml
+
+# ---------------------------------------------------------------------------
+# Default group — every agent that doesn't match a more specific group below.
+# ---------------------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# Block internal/draft routes
+Disallow: /api/
+Disallow: /_next/
+# ...but let crawlers fetch optimized images (Next.js image optimizer).
+# More-specific Allow overrides the /_next/ Disallow for compliant bots.
+Allow: /_next/image
+
+# ---------------------------------------------------------------------------
+# AI crawlers, assistant fetchers, and AI-usage control tokens — all allowed
+sitemap mentions season1?
+0
+
+## P5 register redirects (expect 307 -> program page ?join=season-one)
+/programs/ekuzo-camps/register                       307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+/programs/ekuzo-camps/register/                      308 -> [http://localhost:3100/programs/ekuzo-camps/register]
+/programs/ekuzo-teams/register                       307 -> [http://localhost:3100/programs/ekuzo-teams?join=season-one]
+/programs/ekuzo100/register                          307 -> [http://localhost:3100/programs/ekuzo100?join=season-one]
+/programs/ekuzo101/register                          307 -> [http://localhost:3100/programs/ekuzo101?join=season-one]
+/programs/ekuzo-camps/register?x=1&utm_source=meta   307 -> [http://localhost:3100/programs/ekuzo-camps?x=1&utm_source=meta&join=season-one]
+/camps/register                                      308 -> [http://localhost:3100/programs/ekuzo-camps/register]
+/teams/register                                      307 -> [http://localhost:3100/teams?join=season-one]
+-- success pages (expect no redirect):
+/programs/ekuzo-camps/success            200 redirect=[]
+/programs/ekuzo-teams/success            200 redirect=[]
+/programs/ekuzo100/success               200 redirect=[]
+/programs/ekuzo101/success               200 redirect=[]
+-- API register routes excluded by matcher (GET expect 405, not 307):
+/api/camps/register            500 redirect=[]
+/api/season-one                405 redirect=[]
+
+## P6 internal pages must 404 on release
+/review.html                                  404
+/roadshow/ad-lab.html                         404
+/roadshow/vote.html                           404
+/roadshow/ads.html                            404
+/roadshow/index.html                          404
+/roadshow/site.html                           404
+/roadshow/                                    308
+/ads/season1/d1-a-toomuch-feed.jpg            404
+/ads/season1/d3-a-playtowin.jpg               404
+-- files in release public/roadshow and public/ads:
+landing.html
+ls: cannot access '/home/claude/s1-qa/public/ads': No such file or directory
+ls: cannot access '/home/claude/s1-qa/public/review.html': No such file or directory
+/roadshow/ -> 404 http://localhost:3100/roadshow

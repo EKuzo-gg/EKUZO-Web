@@ -1,0 +1,2 @@
+$ npx tsc --noEmit  (cwd /home/claude/s1-qa2)
+exit=0

@@ -1,0 +1,22 @@
+# build at f413246 (isolated copy, dummy Stripe env)
+▲ Next.js 16.2.1 (Turbopack)
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 10.3s
+  Running TypeScript ...
+  Finished TypeScript in 14.9s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/72) ...
+  Generating static pages using 1 worker (18/72) 
+  Generating static pages using 1 worker (36/72) 
+  Generating static pages using 1 worker (54/72) 
+...
+3:⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+32:├ ƒ /api/season-one
+93:ƒ Proxy (Middleware)
+
+mp4 files in .next: 0
+.next/server size: 39M
+secret grep in .next/static (KLAVIYO key name, token, pk_/EAA values):
+0

@@ -1,0 +1,56 @@
+$ STRIPE_SECRET_KEY=sk_test_dummy NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_dummy STRIPE_WEBHOOK_SECRET=whsec_dummy npx next build   (cwd /home/claude/s1-qa = git archive of 4457689; isolated because another agent was building in s1-rel concurrently)
+▲ Next.js 16.2.1 (Turbopack)
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 12.0s
+  Running TypeScript ...
+  Finished TypeScript in 11.9s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/72) ...
+  Generating static pages using 1 worker (18/72) 
+  Generating static pages using 1 worker (36/72) 
+  Generating static pages using 1 worker (54/72) 
+✓ Generating static pages using 1 worker (72/72) in 1317ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/camps/abandoned
+├ ƒ /api/camps/lead
+├ ƒ /api/camps/register
+├ ƒ /api/camps/success
+├ ƒ /api/checkout
+├ ƒ /api/contact
+...
+├ ○ /teams
+├ ○ /terms-of-service
+└ ○ /woodward
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+BUILD_EXIT=0
+
+$ find .next -name "*.mp4"
+(count: 0)
+$ du -sh .next/server
+39M	.next/server
+$ du -sh .next
+43M	.next
+$ du -sh .next/static
+2.3M	.next/static
+$ ls -la .next/server/app/api/season-one
+total 32
+drwxr-xr-x  3 root root 4096 Oct 10 13:14 .
+drwxr-xr-x 14 root root 4096 Oct 10 13:14 ..
+drwxr-xr-x  2 root root 4096 Oct 10 13:14 route
+-rw-rw-r--  1 root root  414 Oct 10 13:14 route.js
+-rw-rw-r--  1 root root   53 Oct 10 13:14 route.js.map
+-rw-rw-r--  1 root root 7483 Oct 10 13:14 route.js.nft.json
+-rw-rw-r--  1 root root  319 Oct 10 13:14 route_client-reference-manifest.js

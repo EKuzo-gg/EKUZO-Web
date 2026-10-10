@@ -1,0 +1,10 @@
+$ find .next -name "*.mp4"
+(count 0)
+$ du -sh .next/server
+39M	.next/server
+2.3M	.next/static
+✓ Compiled successfully in 9.7s
+✓ Generating static pages using 1 worker (72/72) in 1165ms
+BUILD_EXIT=0
+$ grep secrets in client bundle
+no matches

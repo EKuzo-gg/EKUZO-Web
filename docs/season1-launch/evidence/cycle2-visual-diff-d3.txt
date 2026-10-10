@@ -1,0 +1,6 @@
+# Pixel check: d3 on f413246 vs the cycle 1 retest screenshots (4457689 + repairs, fonts fixed), same harness (reduced motion, no caret, fonts loaded, fullPage)
+
+d3 1440 empty: 1440x1879, 0 px differ = 0.0000%
+d3 1440 confirm: 1440x1879, 0 px differ = 0.0000%
+d3 375 empty: 375x2513, 0 px differ = 0.0000%
+d3 375 confirm: 375x2513, 0 px differ = 0.0000%

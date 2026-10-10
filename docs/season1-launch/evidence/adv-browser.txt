@@ -1,0 +1,53 @@
+PASS  BA1  [T2]  fast double-click and Enter spam on a slow API: one POST, one Lead
+  ok   POSTs: 1
+  ok   Leads: 1
+PASS  BA2  [T2]  top and bottom forms submitted in the same tick (different emails)
+  note POSTs 2, emails one@example.com,two@example.com, eventIds 1 distinct
+  ok   browser Leads: 1 (one)
+  ok   two POSTs share one eventId: the server sends two Leads with the same event_id (different em), Meta keeps one. Matches decision 8 (event_id reuse dedupes)
+PASS  BA3  [T2,P2]  REAL network offline then online (real server, no API interception): error, no Lead, same eventId on retry, one Lead
+  ok   offline: no Lead
+  ok   offline: no confirmation
+  ok   offline: button re-enabled
+  ok   online retry: exactly one Lead (1)
+  ok   browser eventID 27c6b33e-2825-4aee-95f9-a7ebbb3b3273 equals the server's CAPI event_id 27c6b33e-2825-4aee-95f9-a7ebbb3b3273 (end-to-end through the real route)
+PASS  BA4  [T2]  history: after success navigate away and Back (and reload): Lead refire?
+  ok   Lead once after success
+  note after Back: confirmation visible=false (true = bfcache/restored state), fbq calls this document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   no additional Lead on Back (a reloaded document starts with only PageView; a restored one keeps its single Lead)
+  note Playwright's Chromium runs with back/forward cache disabled, so a true bfcache restore cannot be exercised here; code review: there is no pageshow handler and leadSent stays true in a restored page, so no refire (deferred to live human pass on iOS Safari/Chrome Android)
+FAIL  BA5  [S2]  ?ad= prototype-property names (__proto__, constructor, toString, hasOwnProperty, valueOf)
+  FAIL ad=__proto__: PAGE SCRIPT CRASHED (hero rendered=false, pageerrors=1: TypeError: Cannot read properties of undefined (reading 'bgs')
+    at http://localhost:310)
+  FAIL ad=constructor: PAGE SCRIPT CRASHED (hero rendered=false, pageerrors=1: TypeError: Cannot read properties of undefined (reading 'bgs')
+    at http://localhost:310)
+  ok   ad=toString: renders d1 fallback
+  ok   ad=hasOwnProperty: renders d1 fallback
+  ok   ad=valueOf: renders d1 fallback
+  FAIL ad=%5F%5Fproto%5F%5F: PAGE SCRIPT CRASHED (hero rendered=false, pageerrors=1: TypeError: Cannot read properties of undefined (reading 'bgs')
+    at http://localhost:310)
+FAIL  BA6  [S1,P1]  crashed landing script (ad=__proto__): native form submit puts the email in the URL and the pixel fires PageView on that URL
+  ok   static form HTML is still present when the script died
+  note URL after native submit: http://localhost:3100/season1?email=leak%40example.com&ekz_hp=
+  note POSTs to API: 0; fbq calls on the new document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]] (the real pixel sends the full document URL, including the email, as its page-location parameter)
+  FAIL email must not appear in the URL
+FAIL  BA7  [S1]  JavaScript disabled: what the page shows and what submit does
+  note no-JS render: hero empty=true, form visible=true
+  note after submit: URL http://localhost:3100/season1?email=nojs%40example.com&ekz_hp=; API requests: 0; confirmation visible: false
+  FAIL email must not end up in the URL on a non-JS submit
+PASS  BA8  [T8,P7]  ?preview=done on a LIVE host (www.ekuzo.gg mapped): POST or Lead?
+  ok   confirmation shown
+  ok   main POSTs 0, Leads 0
+  note chip tap on live host: games POSTs 1, body {"step":"games","email":"","kidGames":"Roblox"}; Leads still 0
+  ok   no Lead from the preview hook
+PASS  BA9  [P4,T2]  popup: reopen and resubmit; ESC during a pending request
+  note two sign-ups in two page loads: POSTs 2, eventIds distinct=2, Leads in this document 1 (CR-6, accepted: new document, new eventId)
+  ok   second sign-up gets a fresh eventId, so it counts as a second Lead (accepted)
+  note ESC at 400 ms of a 2 s request: popup closed=true; POSTs 1; Leads after the response 1; localStorage joined=1 dismissed=true
+  ok   popup closes, request still completes once
+  ok   Lead still fires once for the sign-up that completed after ESC
+  note ESC then the request FAILS (502): popup open=false, Leads 0; the parent is not told the sign-up failed (they dismissed it)
+  ok   no Lead on the failed request
+
+SUMMARY: 6/9 passed, 3 failed (FAIL here = a finding to log)
+Per test: BA1=PASS BA2=PASS BA3=PASS BA4=PASS BA5=FAIL BA6=FAIL BA7=FAIL BA8=PASS BA9=PASS

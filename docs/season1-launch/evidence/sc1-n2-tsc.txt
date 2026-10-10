@@ -1,0 +1,2 @@
+$ npx tsc --noEmit (cwd /home/claude/s1-qa3 = HEAD ca6e745)
+exit=0

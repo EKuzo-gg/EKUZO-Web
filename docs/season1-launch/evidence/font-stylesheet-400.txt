@@ -1,0 +1,30 @@
+d1 1440 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Space Grotesk | blocked: none
+d3 1440 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Unbounded | blocked: none
+d4 1440 webfonts loaded with corrected stylesheet URL: Bricolage Grotesque, Inter Tight, JetBrains Mono | blocked: none
+d10 1440 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Sora | blocked: none
+d1 375 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Space Grotesk | blocked: none
+d3 375 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Unbounded | blocked: none
+d4 375 webfonts loaded with corrected stylesheet URL: Bricolage Grotesque, Inter Tight, JetBrains Mono | blocked: none
+d10 375 webfonts loaded with corrected stylesheet URL: Inter Tight, JetBrains Mono, Sora | blocked: none
+as shipped: loaded webfont faces = 0 | blocked/failed: fonts.googleapis.com/css2
+
+## Why: bisecting the landing page's Google Fonts stylesheet URL (curl through the agent proxy, verified TLS, Chrome UA)
+200 family=Anybody:wdth,wght@50..150,900
+200 family=Archivo:wght@400;600;700
+200 family=Archivo+Black
+400 family=Bricolage+Grotesque:opsz,wght@12..96,500;800
+200 family=Dela+Gothic+One
+200 family=Graduate
+200 family=Hanken+Grotesk:wght@500;800
+200 family=Inter+Tight:wght@500;700;800
+200 family=JetBrains+Mono:wght@500;700
+200 family=Rubik:wght@500;900
+200 family=Rubik+Mono+One
+200 family=Sora:wght@400;800
+200 family=Space+Grotesk:wght@500;700
+200 family=Syne:wght@600;800
+200 family=Unbounded:wght@400;800
+400 ALL 15 families as written in public/roadshow/landing.html line 27 (this is what the browser requests)
+200 ALL 15 with Bricolage axis tuple corrected to 12..96,500;12..96,800
+
+Result: the single combined stylesheet request returns HTTP 400 because of the Bricolage Grotesque axis spec, so NO webfont loads for any ad (0 faces loaded as shipped). Present in Aaron's reference 2f3a83f identically. Screenshots named *-fontfix.png show the intended typography with the corrected URL (harness-side rewrite only; no product code changed).

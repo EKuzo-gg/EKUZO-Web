@@ -1,0 +1,83 @@
+# Atlas self-test, cycle 1 (D1, CR-3, CR-7). Copy: /home/claude/s1-atlas (tar of s1-rel working tree incl. the other agent's route.ts as it stood). Server: next start -p 3300.
+
+## Font URL (curl through proxy)
+full URL: https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap
+full URL HTTP status: 200
+per-family status (all 15 families, each requested alone):
+  200 family=Anybody:wdth,wght@50..150,900
+  200 family=Archivo:wght@400;600;700
+  200 family=Archivo+Black
+  200 family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800
+  200 family=Dela+Gothic+One
+  200 family=Graduate
+  200 family=Hanken+Grotesk:wght@500;800
+  200 family=Inter+Tight:wght@500;700;800
+  200 family=JetBrains+Mono:wght@500;700
+  200 family=Rubik:wght@500;900
+  200 family=Rubik+Mono+One
+  200 family=Sora:wght@400;800
+  200 family=Space+Grotesk:wght@500;700
+  200 family=Syne:wght@600;800
+  200 family=Unbounded:wght@400;800
+Other families with the same defect: none (only Bricolage Grotesque had a bad axis spec; Anybody wdth,wght range and the other weight lists are valid).
+
+## Static checks (in /home/claude/s1-atlas)
+npx tsc --noEmit: tsc exit 0
+npx next build (STRIPE_SECRET_KEY=sk_test_dummy, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_dummy, STRIPE_WEBHOOK_SECRET=whsec_dummy): exit 0
+    Generating static pages using 1 worker (36/72) 
+    Generating static pages using 1 worker (54/72) 
+  ✓ Generating static pages using 1 worker (72/72) in 1466ms
+
+## Playwright (/home/claude/s1-tests/atlas-cycle1.mjs, Chromium, fbq stubbed via lib.mjs; fonts fetched by curl from the page's own stylesheet URL)
+PASS  A1  [D1]  landing font stylesheet loads 200 in the browser; d4 (Bricolage ad) headings render in Bricolage
+  note stylesheet responses seen by browser: 200 https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap
+  ok   exactly one fonts.googleapis.com/css2 response and it is 200
+  ok   request URL carries corrected Bricolage axis spec
+  note loaded faces 5 of 226; families: Bricolage Grotesque, Inter Tight, JetBrains Mono
+  note headings: [{"tag":"H3","text":"Every kid needs a team.","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"},{"tag":"H2","text":"Save their spot for season one","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"},{"tag":"H3","text":"Not every team needs a field.","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"},{"tag":"H3","text":"A real team, online, from home","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"},{"tag":"H3","text":"The short answers.","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"},{"tag":"H2","text":"Get them on the list.","ff":"\"Bricolage Grotesque\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif"}]
+  note body ff: "Inter Tight", "Helvetica Neue", Arial, sans-serif
+  ok   webfont faces loaded (5)
+  ok   Bricolage Grotesque face loaded
+  note Bricolage faces (weight:status): 500:unloaded,500:unloaded,500:unloaded,800:unloaded,800:unloaded,800:loaded
+  ok   document.fonts.check(800 20px Bricolage Grotesque, heading text) is true
+  ok   at least one visible heading computes to Bricolage Grotesque for ad d4: "Bricolage Grotesque" / "Bricolage Grotesque" / "Bricolage Grotesque" / "Bricolage Grotesque" / "Bricolage Grotesque" / "Bricolage Grotesque"
+PASS  A2  [CR-3]  autoConfig false precedes init on landing /season1?ad=d3
+  note stubbed fbq call order: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+  ok   set autoConfig is the first call
+  ok   init is the second call
+  ok   args: autoConfig false, pixel 1284038230557204 (boolean false)
+  ok   init pixel id unchanged
+  ok   exactly one PageView, after init
+  ok   no Lead on load
+PASS  A2  [CR-3]  autoConfig false precedes init on site /
+  note stubbed fbq call order: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+  ok   set autoConfig is the first call
+  ok   init is the second call
+  ok   args: autoConfig false, pixel 1284038230557204 (boolean false)
+  ok   init pixel id unchanged
+  ok   exactly one PageView, after init
+  ok   no Lead on load
+PASS  A3  [CR-7]  landing: honeypot filled -> POST made, no Lead
+  ok   one POST made (1)
+  ok   POST body carries ekz_hp=bot
+  ok   no browser Lead (got 0): [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+PASS  A4  [CR-7]  landing: honeypot empty -> exactly one Lead with eventID == POST eventId
+  ok   one POST
+  ok   one Lead (1)
+  ok   Lead args unchanged: [["track","Lead",{"content_name":"season_one_d3"},{"eventID":"644d7ac8-36f7-4277-bc78-92f433c46559"}]]
+PASS  A5  [CR-7]  popup: honeypot filled -> POST made, no Lead
+  ok   one POST made (1)
+  ok   POST body carries ekz_hp=bot
+  ok   no browser Lead (got 0): [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+PASS  A6  [CR-7]  popup: honeypot empty -> exactly one Lead
+  ok   one POST
+  ok   Lead: [["track","Lead",{"content_name":"season_one_popup"},{"eventID":"53155243-1d62-46e7-8bc5-cd6dbacf6b8f"}]]
+screenshots:
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d1-1440-empty-cycle1.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d3-1440-empty-cycle1.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d10-1440-empty-cycle1.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d1-375-empty-cycle1.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d3-375-empty-cycle1.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d10-375-empty-cycle1.png
+
+SUMMARY: 7 passed, 0 failed, 7 tests

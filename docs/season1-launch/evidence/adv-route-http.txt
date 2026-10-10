@@ -1,0 +1,89 @@
+# Phase 6 adversarial: route against a REAL `next start` (HEAD ca6e745 build) on :3101 with Klaviyo/Meta fetch replaced by a logging mock (NODE_OPTIONS --require fetch-mock.cjs). No external calls.
+
+## A1 20 parallel identical sign-ups (same email, same eventId)
+statuses: {"200":20}; outbound: {"k_event":20,"k_sub":20,"meta":20}; distinct Klaviyo unique_id among 20 events: 20; distinct CAPI event_id: 1; max latency 136 ms
+20 distinct emails: statuses {"200":20}; outbound {"k_event":20,"k_sub":20,"meta":20}
+
+## A2 oversized bodies (valid email plus junk field)
+1 MB body: status 200 in 14 ms; outbound {"k_event":1,"k_sub":1,"meta":1}; {"ok":true}
+10 MB body: status 200 in 105 ms; outbound {"k_event":1,"k_sub":1,"meta":1}; {"ok":true}
+note: Netlify rejects synchronous function payloads over ~6 MB at the edge; local `next start` has no limit. Live check.
+
+## A3 content types / body encodings
+text/plain JSON: 200 {"ok":true}; outbound {"k_event":1,"k_sub":1,"meta":1}
+no content-type JSON: 200 {"ok":true}; outbound {"k_event":1,"k_sub":1,"meta":1}
+form-encoded: 400 {"ok":false,"error":"That email doesn’t look right."}; outbound {}
+multipart: 400 {"ok":false,"error":"That email doesn’t look right."}; outbound {}
+JSON with BOM: 200 {"ok":true}; outbound {"k_event":1,"k_sub":1,"meta":1}
+gzip header, plain body: 200 {"ok":true}; outbound {"k_event":1,"k_sub":1,"meta":1}
+cross-origin simple POST (Origin: https://evil.example, text/plain): 200; outbound {"k_event":1,"k_sub":1,"meta":1}; ACAO header: none (no origin check; any site can submit sign-ups from a visitor's browser, same exposure as scripted POST, CR-4 / decision 1)
+
+## A4 methods
+GET: 405; allow=; outbound {}
+HEAD: 405; allow=; outbound {}
+PUT: 405; allow=; outbound {}
+DELETE: 405; allow=; outbound {}
+PATCH: 405; allow=; outbound {}
+OPTIONS: 204; allow=OPTIONS, POST; outbound {}
+
+## A5 email variants (status; email sent to Klaviyo; em sent to Meta)
+"parent@münchen.de" -> 200; klaviyo email "parent@münchen.de"; em==sha256(lower(trim)): true
+"parent@xn--mnchen-3ya.de" -> 200; klaviyo email "parent@xn--mnchen-3ya.de"; em==sha256(lower(trim)): true
+"a+tag@example.com" -> 200; klaviyo email "a+tag@example.com"; em==sha256(lower(trim)): true
+"  PADDED@Example.COM  " -> 200; klaviyo email "padded@example.com"; em==sha256(lower(trim)): true
+"\"quoted\"@example.com" -> 200; klaviyo email "\"quoted\"@example.com"; em==sha256(lower(trim)): true
+"<a@b.com>" -> 200; klaviyo email "<a@b.com>"; em==sha256(lower(trim)): true
+"a..b@example.com" -> 200; klaviyo email "a..b@example.com"; em==sha256(lower(trim)): true
+"a@b.com." -> 200; klaviyo email "a@b.com."; em==sha256(lower(trim)): true
+"ünï@example.com" -> 200; klaviyo email "ünï@example.com"; em==sha256(lower(trim)): true
+"😀@example.com" -> 200; klaviyo email "😀@example.com"; em==sha256(lower(trim)): true
+"a\tb@example.com" -> 400; klaviyo email none; em==sha256(lower(trim)): n/a
+"a@b.c0m" -> 200; klaviyo email "a@b.c0m"; em==sha256(lower(trim)): true
+"aaaaaaaaaaaaaaaaaaaa...(252)" -> 200; klaviyo email "aaaaaaaaaaaaaaaaaaaa..."; em==sha256(lower(trim)): true
+"a@exa mple.com" -> 400; klaviyo email none; em==sha256(lower(trim)): n/a
+"a@example.com\u0000" -> 200; klaviyo email "a@example.com\u0000"; em==sha256(lower(trim)): true
+
+## A6 spoofed headers (what reaches Meta user_data) and A7 cookies
+ip=garbage: 200; Meta ip="not-an-ip; DROP TABLE"(21); ua len 4; klaviyo geo_city len 0, device other/desktop
+ip=8KB: 200; Meta ip="9999999999999999999999999999999999999999"(100); ua len 4; klaviyo geo_city len 0, device other/desktop
+xff 500 entries: 200; Meta ip="10.0.0.0"(8); ua len 4; klaviyo geo_city len 0, device other/desktop
+xff garbage first: 200; Meta ip="<script>alert(1)</script>"(25); ua len 4; klaviyo geo_city len 0, device other/desktop
+geo 8KB base64 junk: 200; Meta ip="127.0.0.1"(9); ua len 4; klaviyo geo_city len 0, device other/desktop
+geo huge JSON: 200; Meta ip="127.0.0.1"(9); ua len 4; klaviyo geo_city len 80, device other/desktop
+ua 8KB: 200; Meta ip="127.0.0.1"(9); ua len 400; klaviyo geo_city len 0, device other/desktop
+_fbc 600 chars: 200; fbp="fb.1.1.2"(8) fbc len 500
+_fbp malformed %-escape: 200; fbp=""(0) fbc len 8
+_fbp 100 duplicates: 200; fbp="dup99"(5) fbc len 22
+cookie 12KB: 200; fbp="ok"(2) fbc len 22
+_fbp with CRLF-ish: 200; fbp="a\r\nSet-Cookie:x=1"(17) fbc len 22
+
+## A8 eventSourceUrl, A9 eventId
+javascript: URL: 200; event_source_url="javascript:alert(1)//?fbclid=XSS"(32); fbc="fb.1.1791660752255.XSS"; event_id="adv-evt-1"(9)
+data: URL: 200; event_source_url="data:text/html,<script>1</script>?fbclid=D"(42); fbc="fb.1.1791660752413.D"; event_id="adv-evt-1"(9)
+5000-char URL: 200; event_source_url="https://ekuzo.gg/?fbclid=Z&x=qqqqqqqqqqqqqqqqqqqqq"(1000); fbc="fb.1.1791660752572.Z"; event_id="adv-evt-1"(9)
+foreign host with fbclid: 200; event_source_url="https://competitor.example/page?fbclid=FAKECLICK"(48); fbc="fb.1.1791660752729.FAKECLICK"; event_id="adv-evt-1"(9)
+fbclid with quotes/HTML: 200; event_source_url="https://ekuzo.gg/?fbclid=\"><img src=x onerror=1>"(48); fbc="fb.1.1791660752887.\"><img src=x onerror="; event_id="adv-evt-1"(9)
+eventId newline: 200; event_source_url="https://ekuzo.gg/season1?ad=d3&fbclid=ABC"(41); fbc="fb.1.1791660753045.ABC"; event_id="a\nb\r\nc"(6)
+eventId 10KB: 200; event_source_url="https://ekuzo.gg/season1?ad=d3&fbclid=ABC"(41); fbc="fb.1.1791660753203.ABC"; event_id="EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"(100)
+eventId object: 200; event_source_url="https://ekuzo.gg/season1?ad=d3&fbclid=ABC"(41); fbc="fb.1.1791660753363.ABC"; event_id="[object Object]"(15)
+eventId array: 200; event_source_url="https://ekuzo.gg/season1?ad=d3&fbclid=ABC"(41); fbc="fb.1.1791660753521.ABC"; event_id="x"(1)
+
+## A10 unknown step, A11 kidGames, A12 proto keys
+step:'foo' (unknown): 200; outbound {"k_event":1,"k_sub":1,"meta":1}
+step:['games']: 200; outbound {"k_event":1,"k_sub":1,"meta":1}
+step:'GAMES': 200; outbound {"k_event":1,"k_sub":1,"meta":1}
+step:'games', no kidGames: 400; outbound {}
+kidGames email inside: 200; stored kid_games="my.kid@school.org, Roblox"(25)
+kidGames HTML: 200; stored kid_games="<a href='https://evil.example'>click</a><script>alert(1)</script>"(65)
+kidGames array: 200; stored kid_games="a,b"(3)
+kidGames object: 200; stored kid_games="[object Object]"(15)
+kidGames 300 chars: 200; stored kid_games="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"(200)
+__proto__/constructor keys: 200; utm_source stored "real"; follow-up request 200; polluted key leaked into Klaviyo body: false
+
+## A13 upstream that never answers / answers slowly (client timeout 14 s; Netlify sync function default is 10 s, max 26 s)
+Klaviyo event never resolves: client sees ERR client timeout 14000ms (no response) after 14002 ms; outbound before that: {"k_event":1}
+Klaviyo event slow 8 s: client sees 200 after 8012 ms; outbound before that: {"k_event":1,"k_sub":1,"meta":1}
+Klaviyo subscribe never resolves (event already accepted): client sees ERR client timeout 14000ms (no response) after 14000 ms; outbound before that: {"k_event":1,"k_sub":1}
+Meta never resolves (Klaviyo accepted both): client sees ERR client timeout 14000ms (no response) after 14002 ms; outbound before that: {"k_event":1,"k_sub":1,"meta":1}
+Meta slow 8 s: client sees 200 after 8012 ms; outbound before that: {"k_event":1,"k_sub":1,"meta":1}
+

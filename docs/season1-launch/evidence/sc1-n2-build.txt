@@ -1,0 +1,8 @@
+✓ Compiled successfully in 17.2s
+✓ Generating static pages using 1 worker (72/72) in 1426ms
+BUILD_EXIT=0
+$ find .next -name "*.mp4"
+(count 0)
+39M	.next/server
+2.3M	.next/static
+no secrets/API hosts/x-nf-geo in .next/static

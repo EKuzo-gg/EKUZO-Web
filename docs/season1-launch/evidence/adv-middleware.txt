@@ -1,0 +1,44 @@
+# Middleware /register open-redirect and loop probes (curl --path-as-is, no redirect following) against HEAD ca6e745 build :3100
+path | status | Location
+/programs/ekuzo-camps/register                                 307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+//register                                                     308 -> [http://localhost:3100/register]
+/REGISTER                                                      404 -> []
+/Register                                                      404 -> []
+/programs/ekuzo-camps/REGISTER                                 404 -> []
+/%2Fregister                                                   404 -> []
+/%2fregister                                                   404 -> []
+/programs/ekuzo-camps/register%2F                              404 -> []
+/programs/ekuzo-camps//register                                308 -> [http://localhost:3100/programs/ekuzo-camps/register]
+///register                                                    308 -> [http://localhost:3100/register]
+/\register                                                     308 -> [http://localhost:3100/register]
+/%5Cregister                                                   404 -> []
+/programs/ekuzo-camps/register/                                308 -> [http://localhost:3100/programs/ekuzo-camps/register]
+/register                                                      307 -> [http://localhost:3100/?join=season-one]
+/register/                                                     308 -> [http://localhost:3100/register]
+/.//register                                                   308 -> [http://localhost:3100/register]
+/programs/../register                                          307 -> [http://localhost:3100/?join=season-one]
+/%2e%2e/register                                               307 -> [http://localhost:3100/?join=season-one]
+/evil.com/register                                             404 -> []
+//evil.com/register                                            308 -> [http://localhost:3100/evil.com/register]
+/%2F%2Fevil.com/register                                       404 -> []
+/programs/ekuzo-camps/register?x=//evil.com                    307 -> [http://localhost:3100/programs/ekuzo-camps?x=%2F%2Fevil.com&join=season-one]
+/programs/ekuzo-camps/register?x=https://evil.com&join=x       307 -> [http://localhost:3100/programs/ekuzo-camps?x=https%3A%2F%2Fevil.com&join=season-one]
+/programs/ekuzo-camps/register?join=//evil.com                 307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+/register?next=//evil.com                                      307 -> [http://localhost:3100/?next=%2F%2Fevil.com&join=season-one]
+/@evil.com/register                                            404 -> []
+/programs/ekuzo-camps/register%00                              404 -> []
+/programs/ekuzo-camps/register;a=b                             404 -> []
+/programs/ekuzo-camps/register#frag                            307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+/?join=season-one                                              200 -> []
+/?join=//evil.com                                              200 -> []
+/programs/ekuzo-camps?join=season-one                          200 -> []
+
+Absolute-form / Host header tricks:
+Host: evil.com GET /programs/ekuzo-camps/register              307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+X-Forwarded-Host: evil.com                                     307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+X-Forwarded-Proto: http + X-Forwarded-Host                     307 -> [http://localhost:3100/programs/ekuzo-camps?join=season-one]
+
+Loop check: follow redirects from /programs/ekuzo-camps/register (max 10)
+final 200 http://localhost:3100/programs/ekuzo-camps?join=season-one redirects=1
+/?join=season-one: final 200 http://localhost:3100/?join=season-one redirects=0
+/register: final 200 http://localhost:3100/?join=season-one redirects=1

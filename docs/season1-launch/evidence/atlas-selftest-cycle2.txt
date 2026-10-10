@@ -1,0 +1,107 @@
+# Atlas cycle 2 self-test: ADV-2 (D10), ADV-3 (D11) on public/roadshow/landing.html
+# Copy: git archive HEAD ca6e745 into /home/claude/s1-atlas2 + edited landing.html, next build (dummy Stripe env), next start -p 3301. Script: /home/claude/s1-tests/atlas-cycle2.mjs
+
+PASS  S2-top  [ADV-2]  normal sign-up on top form: one POST, one Lead, confirmation shown, no email in URL
+  ok   POSTs: 1
+  ok   body email/where ok (top)
+  ok   ad d3 and eventId present
+  ok   Leads: 1
+  ok   Lead eventID equals POST eventId
+  ok   page URL has no email: http://localhost:3301/season1?ad=d3&utm_source=meta
+PASS  S2-bottom  [ADV-2]  normal sign-up on bottom form: one POST, one Lead, confirmation shown, no email in URL
+  ok   POSTs: 1
+  ok   body email/where ok (bottom)
+  ok   ad d3 and eventId present
+  ok   Leads: 1
+  ok   Lead eventID equals POST eventId
+  ok   page URL has no email: http://localhost:3301/season1?ad=d3&utm_source=meta
+PASS  S2-enter  [ADV-2]  Enter key in the email field (implicit submission) still one POST, one Lead
+  ok   POSTs 1, Leads 1
+PASS  S2-invalid  [ADV-2]  invalid email still shows the inline error, no POST
+  ok   error visible
+  ok   no POST
+PASS  S3  [ADV-3]  ?ad=__proto__
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=constructor
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=toString
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=hasOwnProperty
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=valueOf
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=%5F%5Fproto%5F%5F
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=__PROTO__
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=Constructor
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=d99
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=d3
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3  [ADV-3]  ?ad=D03
+  ok   no page error 
+  ok   hero rendered
+  note h1: 
+PASS  S3-eq  [ADV-3]  __proto__ / constructor / toString render the same body HTML as the default (no ?ad)
+  ok   no param == ?ad=zzz (today's unknown behavior)
+  ok   ?ad=__proto__ == default
+  ok   ?ad=constructor == default
+  ok   ?ad=toString == default
+PASS  S2-nojs  [ADV-2]  JavaScript disabled: native submit does not navigate / put email in URL
+  note JS off, forced throw false; page errors: 0; email field visible: true
+  note main-frame navigations: ["http://localhost:3301/season1?ad=d3"]
+  note final URL: http://localhost:3301/season1?ad=d3
+  ok   URL unchanged after 4 submit paths (click, Enter top, Enter bottom, form.submit())
+  ok   final URL has no email
+  ok   no request anywhere carried the email (URL or otherwise visible in URL list): GET http://localhost:3301/season1?ad=d3 | GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,5
+PASS  S2-throw  [ADV-2]  inline script forced to throw before handlers attach: same
+  note JS on, forced throw true; page errors: 1; email field visible: true
+  note main-frame navigations: ["http://localhost:3301/season1?ad=d3"]
+  note final URL: http://localhost:3301/season1?ad=d3
+  ok   URL unchanged after 4 submit paths (click, Enter top, Enter bottom, form.submit())
+  ok   final URL has no email
+  ok   no request anywhere carried the email (URL or otherwise visible in URL list): GET http://localhost:3301/season1?ad=d3 | GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,5
+PASS  S2-throw-proto  [ADV-2]  crafted ?ad=__proto__ (previous crash path) with the page fully working still posts normally
+  ok   POSTs 1, Leads 1; ad sent = d1
+screenshots:
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d3-1440-empty-cycle2.png
+/home/claude/s1-rel/docs/season1-launch/screenshots/landing-d3-375-empty-cycle2.png
+
+NEGATIVE CONTROL (same JS-off Enter submit, the three new form attributes stripped from the served HTML):
+CONTROL final URL: http://localhost:3301/season1?email=nojs%40example.com&ekz_hp=   (the bug, so the passing S2-nojs/S2-throw cases are meaningful)
+
+PIXEL COMPARE d3 full page, cycle1 vs cycle2:
+landing-d3-1440-empty: cmp byte-identical, 1440x1879, PIL difference bbox None
+landing-d3-375-empty: cmp byte-identical, 375x2513, PIL difference bbox None
+
+DIFF (landing.html only):
+--- a/public/roadshow/landing.html
++++ b/public/roadshow/landing.html
+-      <form data-where="top" novalidate>
++      <form data-where="top" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
+-      <form data-where="bottom" novalidate>
++      <form data-where="bottom" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
+-let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!T[id]) id="d1";
++let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.prototype.hasOwnProperty.call(T,id)) id="d1";

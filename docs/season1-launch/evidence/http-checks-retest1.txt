@@ -1,0 +1,30 @@
+# Cycle 1 retest HTTP checks (working tree build on :3100)
+ad=d1 200
+ad=d2 200
+ad=d3 200
+ad=d4 200
+ad=d5 200
+ad=d6 200
+ad=d7 200
+ad=d8 200
+ad=d9 200
+ad=d10 200
+ad=d11 200
+ad=d12 200
+/roadshow/landing.html 200
+<meta name="robots" content="noindex">
+12:fbq('set','autoConfig',false,'1284038230557204');
+13:fbq('init', '1284038230557204');
+/programs/ekuzo-camps/register           307 -> http://localhost:3100/programs/ekuzo-camps?join=season-one
+/programs/ekuzo-teams/register           307 -> http://localhost:3100/programs/ekuzo-teams?join=season-one
+/programs/ekuzo100/register              307 -> http://localhost:3100/programs/ekuzo100?join=season-one
+/programs/ekuzo101/register              307 -> http://localhost:3100/programs/ekuzo101?join=season-one
+/programs/ekuzo-camps/success            200 redirect=[]
+/programs/ekuzo-teams/success            200 redirect=[]
+/programs/ekuzo100/success               200 redirect=[]
+/review.html                             404
+/roadshow/ad-lab.html                    404
+/roadshow/vote.html                      404
+/ads/season1/d1-a-toomuch-feed.jpg       404
+layout autoConfig in SSR home HTML:
+fbq('set', 'autoConfig', false, '1284038230557204');

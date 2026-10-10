@@ -1,0 +1,2 @@
+# Landing chips through the REAL cycle-2 route (next start :3100 with Klaviyo/Meta fetch mock): the chip labels survive the kidGames sanitizer intact. Popup uses the same label list (lib/seasonOne.ts line 44).
+landing: sign-up events 1; games events 1; stored kid_games = ["Fortnite, League of Legends, Something else"]

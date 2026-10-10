@@ -1,0 +1,114 @@
+# N3 console truth: release 4457689 (:3100) vs base 3aefd6c (:3400), same harness, cold context, 4.2 s dwell + scroll
+# 'ours' = same-origin console errors/warnings and local HTTP >=400 (third-party hosts are stubbed/blocked and counted separately)
+
+## /season1?ad=d1 @1440  (final /season1?ad=d1, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## /season1?ad=d3 @1440  (final /season1?ad=d3, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## /season1?ad=d10 @1440  (final /season1?ad=d10, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## / @1440  (final /, status 200); base compare: /
+  [also on base] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-white-1@2x.png
+  (on base only: 24, e.g. warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but )
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /?join=season-one @1440  (final /?join=season-one, status 200); base compare: /
+  [also on base] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-black-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please ma
+  [also on base] warning: The resource /icons/growth-arrows.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` va
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-top-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make s
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-white-bottom-2%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please ma
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-red-top-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make su
+  [also on base] warning: The resource /icons/hard-problem.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/confidence-2.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/easy.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and i
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-red-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make
+  [also on base] warning: The resource /icons/heart.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /icons/leadership.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value
+  [also on base] warning: The resource /icons/camada-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/youth.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please mak
+  [also on base] warning: The resource /icons/enthusiasm.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value
+  [also on base] warning: The resource /icons/handwave.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value a
+  [also on base] warning: The resource /icons/flash.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please mak
+  [also on base] warning: The resource /icons/camada.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-white-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please ma
+  [also on base] warning: The resource /icons/speaking.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value a
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-white-top-2%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make 
+  [also on base] warning: The resource /icons/skills.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and
+  [also on base] warning: The resource /icons/run-first.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value 
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-white-1@2x.png
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /programs/ekuzo-camps @1440  (final /programs/ekuzo-camps, status 200); base compare: /programs/ekuzo-camps
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  (on base only: 25, e.g. warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but )
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /programs/ekuzo-camps/register @1440  (final /programs/ekuzo-camps?join=season-one, status 200); base compare: /programs/ekuzo-camps/register
+  [also on base] warning: The resource /icons/growth-arrows.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` va
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-top-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make s
+  [also on base] warning: The resource /icons/hard-problem.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-red-top-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make su
+  [also on base] warning: The resource /icons/trophy-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/confidence-2.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/swords-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/easy.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and i
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-red-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make
+  [also on base] warning: The resource /icons/heart.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /icons/leadership.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value
+  [also on base] warning: The resource /icons/camada-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/clock-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` valu
+  [also on base] warning: The resource /icons/youth.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please mak
+  [also on base] warning: The resource /icons/enthusiasm.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value
+  [also on base] warning: The resource /icons/handwave.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value a
+  [also on base] warning: The resource /icons/flash.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and 
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-grey-bottom-2%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please mak
+  [also on base] warning: The resource /icons/camada.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-white-bottom-1%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please ma
+  [also on base] warning: The resource /icons/speaking.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value a
+  [also on base] warning: The resource /images/new%20torn%20paper/torn-paper-white-top-2%402x.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make 
+  [also on base] warning: The resource /icons/skills.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and
+  [also on base] warning: The resource /icons/run-first.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value 
+  (on base only: 9, e.g. error: Failed to load resource: the server responded with a status of 400 (Bad Request))
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /season1?ad=d1 @375  (final /season1?ad=d1, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## /season1?ad=d3 @375  (final /season1?ad=d3, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## /season1?ad=d10 @375  (final /season1?ad=d10, status 200); base compare: n/a (page does not exist on base)
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: fonts.googleapis.com/css2
+## / @375  (final /, status 200); base compare: /
+  [also on base] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-white-1@2x.png
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /?join=season-one @375  (final /?join=season-one, status 200); base compare: /
+  [also on base] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  [also on base] http: 404 /images/new%20torn%20paper/torn-paper-white-1@2x.png
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /programs/ekuzo-camps @375  (final /programs/ekuzo-camps, status 200); base compare: /programs/ekuzo-camps
+  clean: no same-origin console errors/warnings, no local HTTP >=400
+  (on base only: 3, e.g. warning: The resource /icons/trophy-white.svg was preloaded using link preload but not used within a few seconds from th)
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+## /programs/ekuzo-camps/register @375  (final /programs/ekuzo-camps?join=season-one, status 200); base compare: /programs/ekuzo-camps/register
+  [also on base] warning: The resource /icons/swords-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/trophy-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` val
+  [also on base] warning: The resource /icons/clock-white.svg was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` valu
+  (on base only: 7, e.g. error: Failed to load resource: the server responded with a status of 400 (Bad Request))
+  uncaught page errors: 0; third-party console errors (stubbed hosts): 1; blocked hosts: www.googletagmanager.com/gtag/js
+
+SUMMARY: uncaught-page-error pages=0; hydration/invalid-DOM pages=0; console/http findings NEW vs base=0

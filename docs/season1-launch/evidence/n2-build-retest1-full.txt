@@ -1,0 +1,100 @@
+$ (cwd /home/claude/s1-qa2 = git archive of 4457689 + the 4 uncommitted working-tree files; node_modules hard-linked with cp -al) STRIPE_SECRET_KEY=sk_test_dummy NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_dummy STRIPE_WEBHOOK_SECRET=whsec_dummy npx next build
+▲ Next.js 16.2.1 (Turbopack)
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 9.7s
+  Running TypeScript ...
+  Finished TypeScript in 10.8s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/72) ...
+  Generating static pages using 1 worker (18/72) 
+  Generating static pages using 1 worker (36/72) 
+  Generating static pages using 1 worker (54/72) 
+✓ Generating static pages using 1 worker (72/72) in 1165ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/camps/abandoned
+├ ƒ /api/camps/lead
+├ ƒ /api/camps/register
+├ ƒ /api/camps/success
+├ ƒ /api/checkout
+├ ƒ /api/contact
+├ ƒ /api/ekuzo100/abandoned
+├ ƒ /api/ekuzo100/lead
+├ ƒ /api/ekuzo100/register
+├ ƒ /api/ekuzo100/success
+├ ƒ /api/ekuzo101/lead
+├ ƒ /api/ekuzo101/register
+├ ƒ /api/newsletter
+├ ƒ /api/season-one
+├ ƒ /api/squad/[token]
+├ ƒ /api/swamp/subscribe
+├ ƒ /api/teams/abandoned
+├ ƒ /api/teams/lead
+├ ƒ /api/teams/register
+├ ƒ /api/teams/success
+├ ƒ /api/webhooks/stripe
+├ ƒ /api/woodward/subscribe
+├ ○ /apple-icon.png
+├ ○ /blog
+├ ƒ /blog/[slug]
+├ ○ /blog/author/jamie-fitch
+├ ○ /blog/author/karlin-oei
+├ ○ /blog/author/muhammad-hossain
+├ ○ /blog/conquering-my-mountain-and-giants-how-esports-changed-my-life
+├ ○ /blog/gaming-military-families
+├ ○ /blog/league-of-legends-youth-development
+├ ○ /blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng
+├ ○ /blog/should-you-ban-fortnite
+├ ○ /blog/summer-camps-for-kids-who-game-2026
+├ ○ /blog/what-homeschool-parents-taught-us-about-gaming
+├ ○ /blog/what-your-kids-gaming-is-telling-you
+├ ○ /blog/when-gaming-helps-homeschool-kids
+├ ○ /blog/when-your-sons-only-friends-are-online
+├ ○ /camps
+├ ○ /camps/register
+├ ○ /camps/success
+├ ○ /creators
+├ ○ /editors
+├ ○ /faq
+├ ○ /games
+├ ○ /icon.png
+├ ○ /methodology
+├ ○ /parents
+├ ○ /partners
+├ ● /partners/[slug]
+│ └ /partners/boys-and-girls-club
+├ ○ /privacy-policy
+├ ○ /programs
+├ ○ /programs/ekuzo-camps
+├ ○ /programs/ekuzo-camps/register
+├ ○ /programs/ekuzo-camps/success
+├ ○ /programs/ekuzo-teams
+├ ○ /programs/ekuzo-teams/register
+├ ○ /programs/ekuzo-teams/success
+├ ○ /programs/ekuzo100
+├ ○ /programs/ekuzo100/register
+├ ○ /programs/ekuzo100/success
+├ ○ /programs/ekuzo101
+├ ○ /programs/ekuzo101/register
+├ ○ /programs/ekuzo101/success
+├ ○ /schools
+├ ○ /sitemap.xml
+├ ƒ /squad/[token]
+├ ○ /swamp
+├ ○ /teams
+├ ○ /terms-of-service
+└ ○ /woodward
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+BUILD_EXIT=0

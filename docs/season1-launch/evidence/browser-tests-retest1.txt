@@ -1,0 +1,177 @@
+# CYCLE 1 RETEST browser tests (target: /home/claude/s1-qa2 on :3100). Changes vs cycle 1 run: B01/B06 now also assert the autoConfig=false call precedes init (CR-3); NEW B14 (landing honeypot, no browser Lead), B15 (popup honeypot), B16 (font stylesheet URL and faces). Other tests unchanged.
+PASS  B01  [T1,T7,S1]  landing load: PageView once, Clarity requested, honeypots hidden
+  ok   fbq init once with pixel 1284038230557204: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+  ok   CR-3: first three fbq calls are set autoConfig=false, init, PageView in that order: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+  ok   exactly one PageView
+  ok   no Lead on load
+  ok   fbevents.js requested from connect.facebook.net
+  ok   Clarity tag requested: https://www.clarity.ms/tag/wml8wll5ua
+  ok   two honeypot inputs (top, bottom): [{"name":"ekz_hp","x":-10000,"y":233,"w":9,"h":7,"op":"0","aria":"true","tab":-1,"ac":"off","val":""},{"name":"ekz_hp","x":-10000,"y":1554.0625,"w":9,"h":7,"op":"0","aria":"true","tab":-1,"ac":"off","val":""}]
+  ok   each: name ekz_hp, offscreen (x+w<=0), aria-hidden, tabindex -1, opacity 0, autocomplete off, empty
+  ok   not within viewport horizontally
+  ok   honeypot never receives keyboard focus across 25 Tab presses
+PASS  B02  [P2,T2,T3,P3,T5]  landing success: one Lead, eventID == POST eventId, content_name season_one_d3, POST body contract, chips
+  ok   exactly one POST /api/season-one (got 1)
+  ok   core fields: {"email":"parent@example.com","source":"ad-landing","ad":"d3","adName":"Play to win","where":"top"}
+  ok   attribution utm_*: {"utm_source":"meta","utm_medium":"","utm_campaign":"","utm_content":"d3-a-playtowin","utm_term":""}
+  ok   page: /season1?ad=d3&utm_source=meta&utm_content=d3-a-playtowin&fbclid=test123
+  ok   eventSourceUrl = location.href incl. fbclid: http://localhost:3100/season1?ad=d3&utm_source=meta&utm_content=d3-a-playtowin&fbclid=test123
+  ok   ekz_hp is empty string
+  ok   eventId present (37ee33c6-8830-40fd-bcc7-96e616e74fc0)
+  ok   eventId is a UUID (secure context)
+  ok   exactly one browser Lead (got 1)
+  ok   Lead args: ["track","Lead",{"content_name":"season_one_d3"},{"eventID":"37ee33c6-8830-40fd-bcc7-96e616e74fc0"}]
+  ok   confirmation visible
+  ok   still exactly one PageView after submit
+  ok   one debounced games POST (got 1)
+  ok   games body: {"step":"games","email":"parent@example.com","kidGames":"Fortnite, Roblox"}
+  ok   games body carries no event id / source url
+  ok   no fbq call at all after chip taps (before 4, after 4)
+  ok   no child/game data in any fbq call
+  ok   second submission after success: still exactly one browser Lead (got 1)
+  note second submission still POSTs to the API (posts now 2); server would send a second CAPI Lead with the SAME event_id (same id); form is behind the confirmation overlay
+PASS  B03  [T2,P2]  landing 502 then retry: no Lead after failure, retry reuses eventId, then exactly one Lead; retry via the other form
+  ok   retry message shown: "That didn’t go through. Check your connection and try again."
+  ok   no confirmation after failure
+  ok   no Lead after the 502
+  ok   button restored (Save their spot)
+  ok   two POSTs (2)
+  ok   retry reuses the same eventId (460373ee-47ad-480c-8263-c919b1a81695 / 460373ee-47ad-480c-8263-c919b1a81695)
+  ok   retry came from bottom form
+  ok   exactly one Lead with the same eventID ([["track","Lead",{"content_name":"season_one_d3"},{"eventID":"460373ee-47ad-480c-8263-c919b1a81695"}]])
+PASS  B03b  [T2,P2]  landing network failure (request aborted) then retry: same eventId, one Lead
+  ok   no Lead after network failure
+  ok   same eventId on retry
+  ok   exactly one Lead
+PASS  B04  [P2]  landing invalid email and server 400: inline error, no confirmation, no Lead
+  ok   invalid email: no POST
+  ok   inline error visible: "Check the email address and try again."
+  ok   no confirmation
+  ok   valid email: POST made
+  ok   server 400: no confirmation, no Lead
+PASS  B05-127.0.0.1  [T8]  host 127.0.0.1 => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+PASS  B05-preview.example.test  [T8]  host preview.example.test => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+PASS  B05-evilekuzo.gg  [T8]  host evilekuzo.gg => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+PASS  B05-ekuzo.gg.evil.test  [T8]  host ekuzo.gg.evil.test => preview (no POST, no Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 0 (expected 0)
+  ok   Leads: 0 (expected 0)
+PASS  B05-www.ekuzo.gg  [T8]  host www.ekuzo.gg => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 1791657738272-xq9izduejd (fallback format)
+  ok   Lead eventID equals POSTed eventId
+PASS  B05-foo.netlify.app  [T8]  host foo.netlify.app => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 1791657739092-o3ksufoupf (fallback format)
+  ok   Lead eventID equals POSTed eventId
+PASS  B05-localhost  [T8]  host localhost => LIVE (POST + Lead)
+  ok   PageView fires on every host
+  ok   POSTs: 1 (expected 1)
+  ok   Leads: 1 (expected 1)
+  note eventId on non-secure origin: 05e13cf7-301d-4508-9623-123dd8d59f72 (uuid)
+  ok   Lead eventID equals POSTed eventId
+PASS  B06  [P4,T1,T7,S1]  popup opens from ?join=season-one: PageView once, Clarity, honeypot hidden
+  ok   one init, one PageView: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   CR-3 site: set autoConfig=false precedes init: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+  ok   Clarity requested
+  ok   honeypot offscreen/aria-hidden/tabindex -1/opacity 0: {"x":-10000,"w":1,"aria":"true","tab":-1,"op":"0"}
+PASS  B07  [P4,T2,T3,P3,T5]  popup success: one Lead eventID == POST eventId, content_name season_one_popup, chips
+  ok   one POST (1)
+  ok   core: {"email":"parent@example.com","source":"site-popup","ekz_hp":"","ad":""}
+  ok   page /?join=season-one, eventSourceUrl http://localhost:3100/?join=season-one
+  ok   attribution object: {"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":""}
+  ok   eventId uuid
+  ok   Lead: [["track","Lead",{"content_name":"season_one_popup"},{"eventID":"e82af917-9cde-426d-89b5-1e41e3a8feae"}]]
+  ok   games POST: [{"step":"games","email":"parent@example.com","kidGames":"Minecraft, Valorant"}]
+  ok   no fbq calls after chips
+PASS  B08  [P4,T2]  popup 502 then retry: no Lead after failure, same eventId, one Lead; invalid email
+  ok   invalid email: no POST, error shown ("Check the email address and try again.")
+  ok   no Lead after 502; server error text shown
+  ok   no confirmation
+  ok   retry reuses eventId
+  ok   exactly one Lead, matching eventID
+PASS  B09  [P4]  popup entry points: nav CTA, register link interception, first-visit auto-open, snooze after close
+  ok   snoozed: no auto popup after 3.5 s
+  ok   nav button text 'Join Season 01' present
+  ok   nav CTA opens popup
+  ok   Escape closes
+  note register links on page: 1
+  ok   register link opens popup, URL stays http://localhost:3100/programs/ekuzo-camps
+  ok   no popup at 1.5 s
+  ok   first-visit popup open by 3.3 s
+  ok   close writes dismissed_at (7 day snooze)
+  ok   after close + reload: popup stays closed
+PASS  B10  [P1,P7]  ad variants d1..d12 (+ d01, D3, d99, none): 200, URL stays /season1, variant rendered
+  ok   ad=d1: 200 url=/season1?ad=d1 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=d2: 200 url=/season1?ad=d2 title="EKUZO · Overheard" hero="Overheard" bridge="They can’t pause it. Their team needs them." mod=true noindex=noindex
+  ok   ad=d3: 200 url=/season1?ad=d3 title="EKUZO · Play to win" hero="Play to win" bridge="Give them a team to win with." mod=false noindex=noindex
+  ok   ad=d4: 200 url=/season1?ad=d4 title="EKUZO · Team card" hero="Team card" bridge="Not every team needs a field." mod=false noindex=noindex
+  ok   ad=d5: 200 url=/season1?ad=d5 title="EKUZO · They'll actually show up" hero="They'll actually show up" bridge="A team that expects them every week." mod=false noindex=noindex
+  ok   ad=d6: 200 url=/season1?ad=d6 title="EKUZO · The coach ends it" hero="The coach ends it" bridge="The coach calls it, not you." mod=false noindex=noindex
+  ok   ad=d7: 200 url=/season1?ad=d7 title="EKUZO · Screen time, graded" hero="Screen time, graded" bridge="Feedback from a coach, every week." mod=false noindex=noindex
+  ok   ad=d8: 200 url=/season1?ad=d8 title="EKUZO · Screen time, team time" hero="Screen time, team time" bridge="Now with a team." mod=false noindex=noindex
+  ok   ad=d9: 200 url=/season1?ad=d9 title="EKUZO · Admit one player" hero="Admit one player" bridge="No drive. No cleats. No parking." mod=false noindex=noindex
+  ok   ad=d10: 200 url=/season1?ad=d10 title="EKUZO · Screen time with a purpose" hero="Screen time with a purpose" bridge="The skills are already there. A coach brings them out." mod=true noindex=noindex
+  ok   ad=d11: 200 url=/season1?ad=d11 title="EKUZO · Their name on a jersey" hero="Their name on a jersey" bridge="Their name on the back." mod=false noindex=noindex
+  ok   ad=d12: 200 url=/season1?ad=d12 title="EKUZO · The best excuse" hero="The best excuse" bridge="“Sorry, practice is going over.”" mod=false noindex=noindex
+  ok   ad=d01: 200 url=/season1?ad=d01 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=D3: 200 url=/season1?ad=D3 title="EKUZO · Play to win" hero="Play to win" bridge="Give them a team to win with." mod=false noindex=noindex
+  ok   ad=d99: 200 url=/season1?ad=d99 title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   ad=(none): 200 url=/season1?utm_source=meta title="EKUZO · We've all said it" hero="We've all said it" bridge="They’re going to play anyway." mod=true noindex=noindex
+  ok   variant d1 renders "We've all said it" (got "We've all said it")
+  ok   variant d3 renders "Play to win" (got "Play to win")
+  ok   variant d10 renders "Screen time with a purpose" (got "Screen time with a purpose")
+  ok   d01 maps to d1
+  ok   D3 (uppercase) maps to d3
+  ok   unknown/missing ad falls back to d1
+  ok   12 distinct hero variants (12)
+  ok   /roadshow/landing.html?ad=d3 -> 200 "EKUZO · Play to win"
+PASS  B11  [S2]  XSS probes via query string (cta, herocta, ad, utm_*) do not execute or inject markup
+  ok   no alert() fired
+  ok   no injected <img>/<svg onload>
+  ok   cta rendered as text: "\"&gt;&lt;img src=x onerror=alert(1)&gt;&lt;svg onl"
+  ok   unknown ad coerced to d1 before it reaches the API (ad=d1); utm_* passed as data (JSON): {"utm_source":"\"><img src=x onerror=alert(1)><svg onload=alert(2)>","utm_medium...
+  ok   still no alert()
+PASS  B12  [T2,P2]  Lead only after the API answers (slow API: zero Leads while pending); double-submit is blocked (one POST) on landing and popup
+  ok   landing: zero Leads while the API call is pending
+  ok   landing: button disabled while pending ("Saving…")
+  ok   landing: exactly one POST despite Enter + extra clicks (1)
+  ok   landing: one Lead after the API answered
+  ok   popup: zero Leads while pending
+  ok   popup: exactly one POST (1)
+  ok   popup: one Lead
+PASS  B13  [P7,P1]  ?preview=done on landing shows confirmation with no POST and no Lead (design preview hook left in production page; observation)
+  ok   confirmation shown by ?preview=done
+  ok   no POST, no Lead
+  note chip tap on a ?preview=done page POSTs a games step with an empty email: 1 POST(s), body {"step":"games","email":"","kidGames":"Fortnite"}
+  ok   recorded (server returns 400 for an empty/invalid email on that path; verified in harness C11)
+PASS  B14  [S1,CR-7]  landing honeypot filled (top and bottom form): POST still sent (server drops it), NO browser Lead
+  ok   top: POST carries ekz_hp (server drops it, harness C10)
+  ok   top: zero browser Leads when the honeypot is filled
+  ok   bottom: POST carries ekz_hp (server drops it, harness C10)
+  ok   bottom: zero browser Leads when the honeypot is filled
+  ok   control: honeypot empty still fires exactly one Lead
+PASS  B15  [S1,CR-7]  popup honeypot filled: NO browser Lead; control with empty honeypot fires one
+  ok   POST carries ekz_hp
+  ok   zero browser Leads when honeypot filled
+  ok   control: empty honeypot fires exactly one Lead
+PASS  B16  [D1,P1]  landing webfonts: stylesheet URL is valid (Google answers 200) and faces load
+  ok   stylesheet request carries the corrected Bricolage axis spec
+  ok   d3 display face Unbounded loaded (faces loaded: Inter Tight, JetBrains Mono, Unbounded)
+  ok   stylesheet fetch from Google succeeded (no 400 fallthrough in the harness)
+
+SUMMARY: 23/23 passed, 0 failed
+Per test: B01=PASS B02=PASS B03=PASS B03b=PASS B04=PASS B05-127.0.0.1=PASS B05-preview.example.test=PASS B05-evilekuzo.gg=PASS B05-ekuzo.gg.evil.test=PASS B05-www.ekuzo.gg=PASS B05-foo.netlify.app=PASS B05-localhost=PASS B06=PASS B07=PASS B08=PASS B09=PASS B10=PASS B11=PASS B12=PASS B13=PASS B14=PASS B15=PASS B16=PASS

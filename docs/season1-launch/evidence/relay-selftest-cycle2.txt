@@ -1,0 +1,93 @@
+# Relay self-test, repair cycle 2 (ADV-1, ADV-4, ADV-5, ADV-6 / D9, D12)
+# Base HEAD ca6e745 + working-tree edits to app/api/season-one/route.ts and lib/metaCapi.ts
+# Tested in a copy: /home/claude/s1-cycle2-copy (git archive HEAD + the two edited files), tsc --noEmit clean, next build OK (dummy Stripe env)
+# Timeouts chosen: Klaviyo event 3500 ms, subscribe 2500 ms, Meta CAPI 2000 ms; theoretical worst case 8000 ms (limit 10000)
+
+=============== 1. Sentry route harness, unchanged (S1_DIR=/home/claude/s1-cycle2-copy ./run-harness.sh) ===============
+Result: 40 passed, 1 failed, 41 cases. The one failure encodes old behavior by design:
+  C15 'eventId truncated to 100': asserts the old 100-char cap; the new spec caps eventId at 64 (ADV-6), so a 300-char id now yields 64.
+  (Its other two asserts, missing eventId -> UUID v4 and blank eventId -> UUID, pass.)
+  No other case encoded old ADV-4/5/6 behavior: C02b (non-URL eventSourceUrl), C02c (ip fallbacks), C16, C21 all pass unchanged.
+
+FAIL  C15  [T3]  missing eventId -> server generates a UUID; blank/oversized eventId handled
+  ok   uuid v4 (f7f1bb41-8a3c-4a58-97e2-0cd06d8d427b)
+  FAIL eventId truncated to 100
+  ok   blank eventId -> uuid
+  logs: L: ✅ Meta CAPI: Lead sent (event_id=f7f1bb41-8a3c-4a58-97e2-0cd06d8d427b) | L: ✅ Meta CAPI: Lead sent (event_id=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx) | L: ✅ Meta CAPI: Lead sent (event_id=3fe1a608-4b69-4aba-ab80-9b5d14c60e11)
+
+
+Per case:
+Per case: C01=PASS C02=PASS C02b=PASS C02c=PASS C03=PASS C03b=PASS C03c=PASS C04=PASS C05=PASS C05b=PASS C06=PASS C07=PASS C08=PASS C08b=PASS C09=PASS C09b=PASS C10=PASS C10b=PASS C11=PASS C11b=PASS C12=PASS C13=PASS C14=PASS C14b=PASS C15=FAIL C16=PASS C17=PASS C18=PASS C19=PASS C20=PASS C21=PASS C22=PASS C23=PASS C24=PASS C25=PASS C26=PASS C27=PASS C28=PASS C29=PASS C30=PASS C31=PASS
+
+=============== 2. Relay cases (/home/claude/s1-tests/relay-cycle2.ts) ===============
+## R1 stalled fetches (ADV-1). Budget: Netlify sync limit 10000 ms
+R1a Klaviyo event stalled: status 502, 3508 ms, body {"ok":false,"error":"We couldn’t save that. Please try again."}
+  ok   502, no subscribe, no Lead, answered at about 3.5 s
+  ok   logged: E: Season 01 route error: The operation was aborted due to timeout
+R1b subscribe stalled: status 200, 2505 ms, body {"ok":true}
+  ok   200, one Lead still sent, answered at about 2.5 s
+  ok   logged with existing prefix: E: Klaviyo Season 01 list subscribe failed: The operation was aborted due to timeout
+R1c Meta stalled: status 200, 2003 ms, body {"ok":true}
+  ok   200, answered at about 2 s, never throws
+  ok   logged: E: Meta CAPI Lead error: The operation was aborted due to timeout
+R1d subscribe AND Meta stalled (worst reachable path): status 200, 4503 ms
+  ok   200 in about 4.5 s (2.5 + 2), far under 10 s; theoretical max 3.5 + 2.5 + 2 = 8 s
+R1e games step, Klaviyo stalled: status 502, 3503 ms
+  ok   games: 502 at about 3.5 s
+R1e age step, Klaviyo stalled: status 502, 3502 ms
+  ok   age: 502 at about 3.5 s
+
+## R2 unknown step (ADV-4)
+  ok   step "foo" -> 400, 0 outbound calls
+  ok   step "GAMES" -> 400, 0 outbound calls
+  ok   step ["games"] -> 400, 0 outbound calls
+  ok   step "" -> 400, 0 outbound calls
+  ok   step null -> 400, 0 outbound calls
+  ok   step 1 -> 400, 0 outbound calls
+  ok   step "Age" -> 400, 0 outbound calls
+  ok   no step (absent) -> normal sign-up still 200 + Lead
+
+## R3 dirty kidGames (ADV-5)
+  stored: {"kid_games":"a hrefhttpevil.testxascriptalert1script"} / profile {"kid_games":"a hrefhttpevil.testxascriptalert1script"}
+  ok   HTML/URL punctuation stripped
+  ok   normal chip list kept intact: Fortnite, Rocket League, Roblox's Jailbreak-2. Café
+  ok   nothing left -> 400 'Pick a game.', no Klaviyo write
+  ok   cap 200 kept
+  ok   non-string kidGames -> 400, no write
+
+## R4 NUL / control characters in email (ADV-5)
+  ok   "a@example.com\u0000" -> 400, 0 calls
+  ok   "a\u0000b@example.com" -> 400, 0 calls
+  ok   "a@exam\u0007ple.com" -> 400, 0 calls
+  ok   "a@example.com" -> 400, 0 calls
+  ok   "a@example.comx" -> 400, 0 calls
+  ok   IDN and +tag with surrounding spaces still accepted
+
+## R5 eventSourceUrl (ADV-6)
+  ok   "javascript:alert(1)" -> omitted, no fbc
+  ok   "data:text/html,<script>1</script>" -> omitted, no fbc
+  ok   "ftp://ekuzo.gg/x?fbclid=ZZZ" -> omitted, no fbc
+  ok   "not a url" -> omitted, no fbc
+  ok   "javascript://ekuzo.gg/%0aalert(1)?fbclid=ZZZ" -> omitted, no fbc
+  ok   valid https URL kept, fbc rebuilt: fb.1.1791661375008.ABC
+  ok   http URL kept
+  ok   CRLF inside URL normalized away: "https://ekuzo.gg/ab"
+
+## R6 eventId (ADV-6)
+  ok   CRLF/space/colon removed: "abcX-Injected1"
+  ok   illegal chars removed, cap 64: len 64
+  ok   nothing left -> randomUUID: f73b7889-dcb8-4dcb-83f8-c35aa50d1d39
+  ok   non-string -> randomUUID
+  ok   UUID passes untouched
+  ok   landing's non-UUID fallback id passes untouched
+
+## R7 client IP (ADV-6)
+  ok   garbage XFF first entry -> no ip
+  ok   script XFF -> no ip
+  ok   out-of-range IPv4 -> no ip
+  ok   garbage netlify ip header -> no ip (no fall through to XFF, same as before)
+  ok   IPv4 XFF kept
+  ok   IPv6 XFF kept
+  ok   netlify ip kept
+
+RESULT: ALL PASS

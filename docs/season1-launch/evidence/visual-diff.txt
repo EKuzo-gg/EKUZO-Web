@@ -1,0 +1,19 @@
+# Visual diff: release 4457689 (ours, :3100) vs Aaron's reference 2f3a83f (landing static file :3300; popup Next build :3200)
+# pixelmatch threshold 0.1 (anti-aliasing ignored); percent = differing pixels / (max width x max height); size mismatch counts the padded area as different
+# Contexts use prefers-reduced-motion=reduce, caret hidden, webfonts served from a curl cache, third-party scripts stubbed identically on both sides.
+pair | ours WxH | ref WxH | diff pixels | diff %
+landing-d1-1440-empty | 1440x2388 | 1440x2388 | 0 | 0.0000%
+landing-d3-1440-empty | 1440x1857 | 1440x1857 | 0 | 0.0000%
+landing-d10-1440-empty | 1440x2363 | 1440x2363 | 0 | 0.0000%
+landing-d3-1440-confirm | 1440x1857 | 1440x1857 | 0 | 0.0000%
+popup-1440-empty | 1440x900 | 1440x900 | 0 | 0.0000%
+popup-1440-confirm | 1440x900 | 1440x900 | 0 | 0.0000%
+landing-d1-375-empty | 375x3106 | 375x3106 | 0 | 0.0000%
+landing-d3-375-empty | 375x2516 | 375x2516 | 0 | 0.0000%
+landing-d10-375-empty | 375x3110 | 375x3110 | 0 | 0.0000%
+landing-d3-375-confirm | 375x2516 | 375x2516 | 0 | 0.0000%
+popup-375-empty | 375x812 | 375x812 | 0 | 0.0000%
+popup-375-confirm | 375x812 | 375x812 | 0 | 0.0000%
+popup-375-empty-tall | 375x1900 | 375x1900 | 0 | 0.0000%
+popup-375-confirm-tall | 375x1900 | 375x1900 | 0 | 0.0000%
+worst pair: 0.0000%
