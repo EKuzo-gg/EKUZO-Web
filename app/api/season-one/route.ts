@@ -1,4 +1,6 @@
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
 
 /**
  * POST /api/season-one
@@ -13,6 +15,11 @@ import { NextRequest, NextResponse } from "next/server";
  *  2. POST /api/profile-subscription-bulk-create-jobs — marketing consent +
  *     joins the "Season 01 Waitlist" list (XGTv2F, created 2026-10-09).
  *     Joining that list is the trigger for the welcome flow.
+ *  3. Meta Conversions API "Lead" (main sign-up only, never the games/age
+ *     steps), sent once the Klaviyo event has succeeded. It shares `eventId`
+ *     with the browser fbq Lead so Meta dedupes the pair; the server makes one
+ *     up if the page didn't send it. Best-effort: a Meta failure is logged and
+ *     never fails the sign-up. See docs/season-one-tracking.md.
  *
  * A second call with { step: "age", kidAge } after sign-up records the
  * kid's age band as a profile property (no new subscription).
@@ -29,6 +36,51 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const SOURCES = new Set(["site-popup", "ad-landing"]);
 const clean = (v: unknown, max = 120) => String(v ?? "").trim().slice(0, max);
 const FAIL = "We couldn’t save that. Please try again.";
+
+/**
+ * Server-side Meta Lead for a main sign-up. Parent email only (hashed);
+ * nothing about the child is ever sent to Meta. ip, ua, fbp and fbc go
+ * plaintext, as Meta expects. Never throws (sendCapiEvent logs failures).
+ */
+async function sendMetaLead(req: NextRequest, body: Record<string, unknown>, email: string, contentName: string) {
+  try {
+    const eventSourceUrl = clean(body.eventSourceUrl, 1000);
+    const userData: Record<string, string | string[]> = { em: [sha256(email)] };
+    const ip =
+      clean(req.headers.get("x-nf-client-connection-ip"), 100) ||
+      clean((req.headers.get("x-forwarded-for") || "").split(",")[0], 100);
+    if (ip) userData.client_ip_address = ip;
+    const ua = clean(req.headers.get("user-agent"), 400);
+    if (ua) userData.client_user_agent = ua;
+    const fbp = clean(req.cookies.get("_fbp")?.value, 500);
+    if (fbp) userData.fbp = fbp;
+    // The pixel sets _fbc when the visitor lands with ?fbclid=. If the cookie
+    // is missing (blocked, or the pixel hadn't loaded yet), rebuild it from
+    // the landing URL in Meta's fb.1.<ms>.<fbclid> format.
+    let fbc = clean(req.cookies.get("_fbc")?.value, 500);
+    if (!fbc && eventSourceUrl) {
+      try {
+        const fbclid = new URL(eventSourceUrl).searchParams.get("fbclid");
+        if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+      } catch {
+        // not a URL; skip
+      }
+    }
+    if (fbc) userData.fbc = fbc;
+
+    await sendCapiEvent({
+      event_name: "Lead",
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: clean(body.eventId, 100) || randomUUID(),
+      action_source: "website",
+      ...(eventSourceUrl ? { event_source_url: eventSourceUrl } : {}),
+      user_data: userData,
+      custom_data: { content_name: contentName },
+    });
+  } catch (err) {
+    console.error("Meta CAPI Lead error:", err instanceof Error ? err.message : err);
+  }
+}
 
 async function klaviyo(path: string, body: unknown) {
   return fetch(`https://a.klaviyo.com/api/${path}`, {
@@ -138,6 +190,8 @@ export async function POST(req: NextRequest) {
       // Profile + event exist, so the parent can still be found — log loudly, let them through.
       console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
     }
+    // Awaited so the serverless function isn't frozen mid-call. Never throws.
+    await sendMetaLead(req, body, email, source === "ad-landing" ? `season_one_${profileProps.season1_ad || "landing"}` : "season_one_popup");
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Season 01 route error:", err instanceof Error ? err.message : err);

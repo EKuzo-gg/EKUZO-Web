@@ -1,4 +1,27 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Season One</title></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Season One</title>
+<!-- Meta Pixel (same pixel as app/layout.tsx). The Lead fires from the form script below with an eventID shared with the server-side CAPI Lead in /api/season-one. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1284038230557204');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1284038230557204&ev=PageView&noscript=1" alt=""></noscript>
+<!-- Microsoft Clarity (same project as app/layout.tsx) -->
+<script>
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "wml8wll5ua");
+</script>
+</head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
@@ -987,15 +1010,20 @@ const post = async o => {
 };
 const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||""});
 let savedEmail="";
+// One Meta event ID per sign-up, reused on retry and shared with the server (CAPI) Lead so Meta counts it once.
+let eventId="", leadSent=false;
+const newEventId = () => (window.crypto&&crypto.randomUUID) ? crypto.randomUUID() : Date.now()+"-"+Math.random().toString(36).slice(2,12);
 document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",async e=>{
   e.preventDefault();
   const em=f.email.value.trim(), err=f.querySelector(".err"), btn=f.querySelector("button");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
+  if(!eventId) eventId=newEventId();
   try{
-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href});
     if(!r.ok) throw 0;
-    try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id}); }catch(_){}
+    // LIVE only: a design preview saves nothing, so it must not count as a Lead.
+    if(LIVE && !leadSent){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
     savedEmail=em; joined=true; upd(); showDone();
   }catch(_){ btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));

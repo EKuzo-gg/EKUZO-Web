@@ -57,6 +57,9 @@ export default function SeasonOnePopup() {
   const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  // One ID per sign-up attempt, reused on retry, shared by the browser and
+  // server (CAPI) Leads so Meta counts the sign-up once.
+  const eventIdRef = useRef("");
 
   useEffect(() => {
     setMounted(true);
@@ -92,6 +95,13 @@ export default function SeasonOnePopup() {
     if (!EMAIL_RE.test(em)) { setError("Check the email address and try again."); inputRef.current?.focus(); return; }
     setError("");
     setStatus("loading");
+    if (!eventIdRef.current) {
+      eventIdRef.current =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+    }
+    const eventId = eventIdRef.current;
     try {
       const params = new URLSearchParams(window.location.search);
       const res = await fetch("/api/season-one", {
@@ -103,6 +113,8 @@ export default function SeasonOnePopup() {
           ad: params.get("ad") || params.get("utm_content") || "",
           attribution: getAttribution(),
           page: window.location.pathname + window.location.search,
+          eventId,
+          eventSourceUrl: window.location.href,
         }),
       });
       if (!res.ok) {
@@ -110,7 +122,7 @@ export default function SeasonOnePopup() {
         throw new Error(data?.error || "That didn’t go through. Try again?");
       }
       try { localStorage.setItem(S1_JOINED_KEY, "1"); } catch { /* ignore */ }
-      trackLead({ source: "season_one_popup" });
+      trackLead({ source: "season_one_popup", eventId });
       setStatus("done");
     } catch (err) {
       setStatus("idle");
