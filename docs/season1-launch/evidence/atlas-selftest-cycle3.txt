@@ -1,0 +1,82 @@
+# Atlas cycle 3 self-test: D13, /season1 served natively (route handler), no rewrite, no redirect
+# Release: /home/claude/s1-rel a431139 (parent 74f956e). Feat: /home/claude/s1-feat 0559395 (parent 4182c64).
+# Method: git archive HEAD into /home/claude/s1-atlas3 (release) and /home/claude/s1-atlas3f (feat), node_modules hardlinked, dummy Stripe env, next build, next start -p 3500 / 3501. Playwright: /home/claude/s1-tests/atlas-cycle3.mjs, atlas-cycle3-feat.mjs
+
+## 1. tsc --noEmit (release, feat)
+exit 0, exit 0 (logs: s1-tests/tsc-atlas3.log, tsc-atlas3f.log, both empty)
+
+## 2. next build route table (release)
+85:├ ○ /season1
+94:ƒ Proxy (Middleware)
+96:○  (Static)   prerendered as static content
+97:●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+(feat) ├ ○ /season1
+.next/server/app/season1.meta: {"status":200,"headers":{"content-type":"text/html; charset=utf-8","x-next-cache-tags":"_N_T_/layout,_N_T_/season1/layout,_N_T_/season1/route,_N_T_/season1"}}
+sha256 .next/server/app/season1.body = 6808abf6e1eb53524b47dbc93a8286dfac31d3fae0beba7a117c35a44d99f487
+sha256 app/season1/landing.html      = 6808abf6e1eb53524b47dbc93a8286dfac31d3fae0beba7a117c35a44d99f487
+public/roadshow in the release build copy: ls: cannot access '/home/claude/s1-atlas3/public/roadshow': No such file or directory
+
+## 3. curl against next start (release, :3500)
+$ curl -D - "http://localhost:3500/season1?ad=d3&utm_source=meta"
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=paid_meta; Path=/; Expires=Sun, 10 Oct 2027 20:22:08 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-nextjs-cache: HIT
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+
+body sha256 = 6808abf6e1eb53524b47dbc93a8286dfac31d3fae0beba7a117c35a44d99f487 ; landing.html sha256 = same (IDENTICAL, 1303686 bytes both)
+
+$ curl -D - "http://localhost:3500/season1/?ad=d3&utm_source=meta"
+HTTP/1.1 308 Permanent Redirect ; location: /season1?ad=d3&utm_source=meta  (query kept)
+following it: 200 http://localhost:3500/season1?ad=d3&utm_source=meta text/html; charset=utf-8, body sha256 identical
+$ curl "/season1/" (no query) -> 308 to /season1
+
+$ curl /roadshow/landing.html -> 404 ; /roadshow/ -> 308 /roadshow -> 404
+$ POST /season1 -> 405
+
+## 4. middleware / ekuzo_origin
+Matcher ((?!api|_next/static|_next/image|favicon.ico|.*\..*).*) matches /season1 (no dot). Observed on /season1?ad=d3&utm_source=meta with no cookie:
+  set-cookie: ekuzo_origin=paid_meta; Path=/; Max-Age=31536000; Secure; SameSite=lax   (first-touch classified from utm_source=meta)
+  with Cookie: ekuzo_origin=direct already present: no set-cookie (first touch preserved)
+  The cookie is set on a response that also carries cache-control: s-maxage=31536000. Identical to every other prerendered page (/faq shows the same pair), so no new behaviour.
+  The body is unaffected by the middleware (sha256 identical with and without the cookie header).
+
+## 5. Playwright (release, :3500)
+PASS  C3-1  [D13]  /season1?ad=d3&utm_id=123&site=ig renders the d3 hero, URL unchanged, one PageView
+  ok   HTTP 200
+  ok   URL unchanged: http://localhost:3500/season1?ad=d3&utm_id=123&site=ig
+  ok   title "EKUZO · Play to win"
+  ok   hero rendered
+  ok   hero aria-label "Play to win"
+  ok   PageView calls: 1
+  ok   no page errors 
+  note console errors (local): []
+PASS  C3-2  [D13]  mocked successful sign-up POSTs once with utm_id/site and fires exactly one Lead
+  ok   POSTs: 1
+  ok   ad=d3 utm_id=123 site=ig
+  ok   body.page = /season1?ad=d3&utm_id=123&site=ig
+  ok   Leads: 1
+  ok   Lead eventID equals POST eventId
+  ok   PageView still 1: 1
+PASS  C3-3  [D13]  /season1/ (trailing slash) lands on /season1 with the query intact and the same page
+  ok   HTTP 200
+  ok   final URL: http://localhost:3500/season1?ad=d3&utm_id=123&site=ig
+  ok   d3 title
+PASS  C3-4  [D13]  /roadshow/landing.html is 404 in the browser too
+  ok   HTTP 404
+ALL PASS
+
+## 6. Feat sanity (:3501)
+build: /season1 listed as static (o). tsc exit 0.
+GET /season1?ad=d3&utm_source=meta -> 200 text/html; charset=utf-8, cache-control s-maxage=31536000, sha256 identical to app/season1/landing.html
+GET /roadshow/landing.html -> 404 (file moved)
+GET /roadshow/index.html -> 200; links with href="/season1?ad=...": 13 (12 variants + the main tile); links still pointing at landing.html: 0
+ad-lab.html: lpUrl() now builds "/season1?"+params; the 12 META_DEFAULTS url fields now read https://ekuzo.gg/season1?ad=dN&utm_... (were https://ekuzo.gg/roadshow/landing.html?...)
+Playwright (atlas-cycle3-feat.mjs):
+  roadshow/index.html d3 link click -> http://localhost:3501/season1?ad=d3 | EKUZO · Play to win
+  roadshow/ad-lab.html landing preview iframe src -> /season1?ad=d1&herocta=Be+the+hero | iframe title: EKUZO · We've all said it
+
+Servers: both started by PID (629 on :3500, 1168 on :3501) and stopped by PID; both confirmed gone.
+Copies left on disk: /home/claude/s1-atlas3, /home/claude/s1-atlas3f.

@@ -88,3 +88,21 @@ Target: `git archive` of f413246 in `/home/claude/s1-qa4` (dummy Stripe env, `cp
 | d3 pixel check vs cycle 1 retest | 0 px differ (0.0000%) at 1440 and 375, empty and confirmation states | `cycle2-visual-diff-d3.txt`, `screenshots/cycle2/` |
 
 D9, D10, D11, D12 CLOSED. No CRITICAL or MAJOR open. Residuals (MINOR, accepted, listed in `06-adversarial.md` section D): foreign-host `event_source_url` and unchecked fbclid format; zero-width characters in email; retry after an upstream-timeout may duplicate a Klaviyo event; no-JS dead form. Live checks B-1 to B-7 still open for the human pass.
+
+## Cycle 3: D13 independent retest (release a431139, feat 0559395, 2026-10-10)
+
+Fresh `git archive` copies of both branches (`/home/claude/s1-qa5` release, `/home/claude/s1-qa6` feat), dummy Stripe env, `next build` then `next start` with the Klaviyo/Meta fetch mock. Harness change: the old B10 check that `/roadshow/landing.html?ad=d3` returns 200 now expects 404 and also asserts `/season1?ad=d3` (200, URL unchanged, "Play to win"); every other landing URL in the browser and adversarial suites was already `/season1?...`. Original kept as `browser-tests.cycle2.mjs`.
+
+| Check | Result | Evidence |
+|---|---|---|
+| Build route table | `○ /season1` (static); no `/roadshow` or rewrite rule left in next.config.mjs or netlify.toml | `cycle3-d13-http.txt` |
+| Served body vs `app/season1/landing.html` | byte-identical (1,303,686 bytes) for three query strings; equals the git blob | `cycle3-d13-http.txt` |
+| `/roadshow/landing.html`, `/season1/landing.html` | 404 | same |
+| `/season1/` | 308 to `/season1`, query preserved | same |
+| Browser suite | 24/24 | `cycle3-browser-tests.txt` |
+| Adversarial browser suite | 12/12 | `cycle3-adv-browser.txt` |
+| Route harness (unchanged) | 50/50 | `cycle3-route-harness.txt` |
+| N3 console | 0 findings new vs base; `/season1?ad=d1`, `d3`, `d10` clean at 1440 and 375 | `cycle3-n3-console-compare.txt` |
+| Feat: `/roadshow/index.html`, ad-lab | all links go to `/season1?ad=dN` and open the right variant; 12/12 ad-lab iframe previews render hero and form; `preview=done` shows the confirmation | `cycle3-feat-roadshow.txt`, `screenshots/cycle3/` |
+
+D13 CLOSED for the build and local half. Still pending: L1 on the Netlify dev deploy after redeploy (the failure only existed on Netlify's Next runtime). New MINOR D14: feat `public/roadshow/index.html` still shows the old `landing.html?ad=d9&utm_...` link format as text (Meta link guidance now 404s). Also to confirm live: `/season1` now runs through the site middleware and carries `Set-Cookie` plus `s-maxage=31536000`, so check the CDN does not share one visitor's cookie.

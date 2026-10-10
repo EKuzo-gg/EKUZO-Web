@@ -1,0 +1,27 @@
+# D13 retest on feat/season1-launch 0559395 (fresh copy /home/claude/s1-qa6, next start :3201)
+ok   index.html: 13 landing links, all /season1?ad=dN (/season1?ad=d9, /season1?ad=d1, /season1?ad=d2...)
+FAIL index.html: no visible "landing.html" text -> STALE TEXT: ["landing.html?ad=d9&utm_source=meta&utm_campaign=season1&cta=Save%20their%20spot"]
+ok   index link d1 -> /season1?ad=d1 title "EKUZO · We've all said it" hero rendered=true
+ok   index link d3 -> /season1?ad=d3 title "EKUZO · Play to win" hero rendered=true
+ok   index link d9 -> /season1?ad=d9 title "EKUZO · Admit one player" hero rendered=true
+ok   index link d12 -> /season1?ad=d12 title "EKUZO · The best excuse" hero rendered=true
+ok   index.html page errors: 0
+ok   ad-lab: 36 landing-preview buttons
+     d1: src /season1?ad=d1&herocta=Be+the+hero -> iframe {"title":"EKUZO · We've all said it","hero":true,"h":"","form":true}
+     d2: src /season1?ad=d2&herocta=Play+their+game -> iframe {"title":"EKUZO · Overheard","hero":true,"h":"","form":true}
+     d3: src /season1?ad=d3&herocta=Find+their+team -> iframe {"title":"EKUZO · Play to win","hero":true,"h":"","form":true}
+     d4: src /season1?ad=d4&herocta=Find+their+team -> iframe {"title":"EKUZO · Team card","hero":true,"h":"","form":true}
+     d5: src /season1?ad=d5&herocta=Find+their+team -> iframe {"title":"EKUZO · They'll actually show up","hero":true,"h":"","form":true}
+     d6: src /season1?ad=d6&herocta=Save+their+spot -> iframe {"title":"EKUZO · The coach ends it","hero":true,"h":"","form":true}
+     d7: src /season1?ad=d7&herocta=See+how -> iframe {"title":"EKUZO · Screen time, graded","hero":true,"h":"","form":true}
+     d8: src /season1?ad=d8&herocta=Find+their+team -> iframe {"title":"EKUZO · Screen time, team time","hero":true,"h":"","form":true}
+     d9: src /season1?ad=d9&herocta=Save+their+spot -> iframe {"title":"EKUZO · Admit one player","hero":true,"h":"","form":true}
+     d10: src /season1?ad=d10&herocta=My+kid+games -> iframe {"title":"EKUZO · Screen time with a purpose","hero":true,"h":"","form":true}
+     d11: src /season1?ad=d11&herocta=Save+their+spot -> iframe {"title":"EKUZO · Their name on a jersey","hero":true,"h":"","form":true}
+     d12: src /season1?ad=d12&herocta=Join+the+team -> iframe {"title":"EKUZO · The best excuse","hero":true,"h":"","form":true}
+ok   ad-lab: 12/12 iframe previews load /season1 and render hero + form
+ok   ad-lab "done" preview: src /season1?ad=d1&preview=done&herocta=Be+the+hero, confirmation visible in iframe=true
+ok   ad-lab: no 404s for season1/roadshow resources (0)
+ok   ad-lab page errors: 0 
+
+SUMMARY: 1 check(s) FAILED

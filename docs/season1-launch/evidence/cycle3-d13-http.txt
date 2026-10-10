@@ -1,0 +1,49 @@
+# D13 retest: HEAD a431139, fresh copy /home/claude/s1-qa5, next start :3100
+
+## byte identity
+/season1: served 1303686 bytes sha256 6808abf6e1eb5352; file app/season1/landing.html 1303686 bytes sha256 6808abf6e1eb5352; IDENTICAL
+/season1?ad=d3: served 1303686 bytes sha256 6808abf6e1eb5352; file app/season1/landing.html 1303686 bytes sha256 6808abf6e1eb5352; IDENTICAL
+/season1?ad=d10&utm_source=meta&fbclid=zz: served 1303686 bytes sha256 6808abf6e1eb5352; file app/season1/landing.html 1303686 bytes sha256 6808abf6e1eb5352; IDENTICAL
+
+## release-tree file equals git blob
+6808abf6e1eb5352
+
+## headers /season1?ad=d3
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sun, 10 Oct 2027 20:25:56 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-nextjs-cache: HIT
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+Date: Sat, 10 Oct 2026 20:25:56 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+## status table
+/season1?ad=d3                     200 
+/season1                           200 
+/season1/                          308 http://localhost:3100/season1
+/season1/?ad=d3                    308 http://localhost:3100/season1?ad=d3
+/season1?ad=d99                    200 
+/season1?ad=__proto__              200 
+/roadshow/landing.html             404 
+/roadshow/landing.html?ad=d3       404 
+/season1/landing.html              404 
+/roadshow/index.html               404 
+
+## HEAD/POST methods on /season1
+HEAD: 200
+POST: 405
+PUT: 405
+
+## robots meta + title
+<meta name="robots" content="noindex">
+<title>EKUZO Season One</title>
+
+## build route table
+32:├ ƒ /api/season-one
+85:├ ○ /season1
+
+## repo grep for stale references
+(no output above = no rewrite/redirect for season1 or roadshow in netlify.toml / next.config.mjs)
