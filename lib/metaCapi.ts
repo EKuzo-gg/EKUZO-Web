@@ -21,6 +21,9 @@ import { createHash } from "crypto";
 // Graph/Marketing API v26.0 (released 2026-07-29) is current as of 2026-10-09; v19 and v21 are past support.
 export const META_GRAPH_API_VERSION = "v26.0";
 
+/** The caller awaits this send inside a 10 s function, so a stalled Graph API must not hold it. */
+const CAPI_TIMEOUT_MS = 2000;
+
 /** SHA-256 hex, the hash Meta expects for em / ph / fn / ln / zp. */
 export const sha256 = (v: string) =>
   createHash("sha256").update(v).digest("hex");
@@ -72,6 +75,7 @@ export async function sendCapiEvent(event: CapiEvent): Promise<void> {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(CAPI_TIMEOUT_MS),
       }
     );
     if (!res.ok) {

@@ -761,7 +761,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
     <div class="form-wrap">
       <h2 id="jt">Save their spot for season&nbsp;one.</h2>
       <p>Join the list and you’ll hear first when sign-ups open. It’s free and doesn’t commit you to&nbsp;anything.</p>
-      <form data-where="top" novalidate>
+      <form data-where="top" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
         <label class="sr" for="em-top">Your email</label>
         <input id="em-top" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
         <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
@@ -799,7 +799,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
     <div class="form-wrap">
       <h2 id="je">Get them on the&nbsp;list.</h2>
       <p>Spots for season one are limited. The list hears&nbsp;first.</p>
-      <form data-where="bottom" novalidate>
+      <form data-where="bottom" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
         <label class="sr" for="em-end">Your email</label>
         <input id="em-end" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
         <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
@@ -975,7 +975,7 @@ const T = {
  d12:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"The best excuse",h:"“Sorry, practice is going over.”",p:"A team that counts on them, a coach who expects them there and a reason to log off on&nbsp;time."}
 };
 const qs = new URLSearchParams(location.search);
-let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!T[id]) id="d1";
+let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.prototype.hasOwnProperty.call(T,id)) id="d1";
 const d = D.find(x=>x.id===id), t = T[id];
 const lp = document.getElementById("lp");
 const themed=[lp,document.getElementById("conf")];
