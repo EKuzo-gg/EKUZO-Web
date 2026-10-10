@@ -124,7 +124,7 @@ export default function SeasonOnePopup() {
         throw new Error(data?.error || "That didn’t go through. Try again?");
       }
       try { localStorage.setItem(S1_JOINED_KEY, "1"); } catch { /* ignore */ }
-      trackLead({ source: "season_one_popup", eventId });
+      if (!honeypotRef.current?.value) trackLead({ source: "season_one_popup", eventId });
       setStatus("done");
     } catch (err) {
       setStatus("idle");

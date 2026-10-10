@@ -9,6 +9,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+fbq('set','autoConfig',false,'1284038230557204');
 fbq('init', '1284038230557204');
 fbq('track', 'PageView');
 </script>
@@ -24,7 +25,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 </head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap">
 <style>
 /* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */
 :root{
@@ -1027,7 +1028,7 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
     const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     if(!r.ok) throw 0;
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
-    if(LIVE && !leadSent){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
+    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
     savedEmail=em; joined=true; upd(); showDone();
   }catch(_){ btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));
