@@ -763,7 +763,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
       <form data-where="top" novalidate>
         <label class="sr" for="em-top">Your email</label>
         <input id="em-top" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
-        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
+        <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
         <button type="submit">Save their spot</button>
         <p class="err" role="alert" hidden></p>
         <small>For parents. We only email about EKUZO, and you can unsubscribe&nbsp;anytime.</small>
@@ -801,7 +801,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
       <form data-where="bottom" novalidate>
         <label class="sr" for="em-end">Your email</label>
         <input id="em-end" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
-        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
+        <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
         <button type="submit">Save their spot</button>
         <p class="err" role="alert" hidden></p>
         <small>Free. No commitment. Unsubscribe&nbsp;anytime.</small>
@@ -1024,7 +1024,7 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
   if(!eventId) eventId=newEventId();
   try{
-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,company:f.company?f.company.value:""});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     if(!r.ok) throw 0;
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
     if(LIVE && !leadSent){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
