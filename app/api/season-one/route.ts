@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { isIP } from "net";
 import { NextRequest, NextResponse } from "next/server";
 import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
 
@@ -31,13 +32,26 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  *
  * Fails loudly if Klaviyo is unreachable: the email is the whole point, so the
  * parent is asked to retry rather than shown a false "you're in".
+ *
+ * Every outbound call has a timeout so a stalled upstream cannot hold the
+ * function past Netlify's 10 s synchronous limit. Worst case is the three
+ * timeouts added up: 3.5 s + 2.5 s + 2 s = 8 s (the 2 s Meta limit lives in
+ * lib/metaCapi.ts). An event timeout is a failed event (502, no Lead); a
+ * subscribe or Meta timeout is logged and the sign-up still succeeds.
  */
 
 const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
 const KLAVIYO_REVISION = "2025-07-15";
 const LIST_ID = process.env.KLAVIYO_SEASON1_LIST_ID || "XGTv2F";
 
+// Anything but letters, digits, spaces, commas, periods, apostrophes and hyphens.
+const GAMES_STRIP_RE = /[^\p{L}\p{N} ,.'-]/gu;
+const EVENT_TIMEOUT_MS = 3500;
+const SUBSCRIBE_TIMEOUT_MS = 2500;
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// C0 and C1 control characters plus DEL; EMAIL_RE alone admits NUL.
+const CONTROL_RE = /[\u0000-\u001f\u007f-\u009f]/;
 const SOURCES = new Set(["site-popup", "ad-landing"]);
 const clean = (v: unknown, max = 120) => String(v ?? "").trim().slice(0, max);
 // Only string values are kept; objects and arrays would stringify to junk.
@@ -97,12 +111,20 @@ function readDevice(ua: string): Record<string, string> {
  */
 async function sendMetaLead(req: NextRequest, body: Record<string, unknown>, email: string, contentName: string) {
   try {
-    const eventSourceUrl = clean(body.eventSourceUrl, 1000);
+    // Only a real http(s) URL goes to Meta (not javascript: or data:). The
+    // parsed href is sent, since URL parsing drops tabs and newlines.
+    let eventSourceUrl = "";
+    try {
+      const u = new URL(clean(body.eventSourceUrl, 1000));
+      if (u.protocol === "http:" || u.protocol === "https:") eventSourceUrl = u.href;
+    } catch {
+      // not a URL; omit it
+    }
     const userData: Record<string, string | string[]> = { em: [sha256(email)] };
     const ip =
       clean(req.headers.get("x-nf-client-connection-ip"), 100) ||
       clean((req.headers.get("x-forwarded-for") || "").split(",")[0], 100);
-    if (ip) userData.client_ip_address = ip;
+    if (isIP(ip)) userData.client_ip_address = ip;
     const ua = clean(req.headers.get("user-agent"), 400);
     if (ua) userData.client_user_agent = ua;
     const fbp = clean(req.cookies.get("_fbp")?.value, 500);
@@ -112,19 +134,15 @@ async function sendMetaLead(req: NextRequest, body: Record<string, unknown>, ema
     // the landing URL in Meta's fb.1.<ms>.<fbclid> format.
     let fbc = clean(req.cookies.get("_fbc")?.value, 500);
     if (!fbc && eventSourceUrl) {
-      try {
-        const fbclid = new URL(eventSourceUrl).searchParams.get("fbclid");
-        if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
-      } catch {
-        // not a URL; skip
-      }
+      const fbclid = new URL(eventSourceUrl).searchParams.get("fbclid");
+      if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
     }
     if (fbc) userData.fbc = fbc;
 
     await sendCapiEvent({
       event_name: "Lead",
       event_time: Math.floor(Date.now() / 1000),
-      event_id: clean(body.eventId, 100) || randomUUID(),
+      event_id: (typeof body.eventId === "string" ? body.eventId.replace(/[^A-Za-z0-9-]/g, "").slice(0, 64) : "") || randomUUID(),
       action_source: "website",
       ...(eventSourceUrl ? { event_source_url: eventSourceUrl } : {}),
       user_data: userData,
@@ -135,9 +153,10 @@ async function sendMetaLead(req: NextRequest, body: Record<string, unknown>, ema
   }
 }
 
-async function klaviyo(path: string, body: unknown) {
+async function klaviyo(path: string, body: unknown, timeoutMs: number) {
   return fetch(`https://a.klaviyo.com/api/${path}`, {
     method: "POST",
+    signal: AbortSignal.timeout(timeoutMs),
     headers: {
       Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
       "Content-Type": "application/json",
@@ -165,7 +184,7 @@ function event(metric: string, email: string, profileProps: Record<string, strin
         unique_id: `${email}-${metric}-${Date.now()}`,
       },
     },
-  });
+  }, EVENT_TIMEOUT_MS);
 }
 
 export async function POST(req: NextRequest) {
@@ -173,7 +192,7 @@ export async function POST(req: NextRequest) {
   const body = raw && typeof raw === "object" ? raw : {}; // null or a non-object falls through to the 400
   const email = clean(body.email, 254).toLowerCase();
 
-  if (!EMAIL_RE.test(email)) {
+  if (!EMAIL_RE.test(email) || CONTROL_RE.test(email)) {
     return NextResponse.json({ ok: false, error: "That email doesn’t look right." }, { status: 400 });
   }
   if (!KLAVIYO_API_KEY) {
@@ -181,10 +200,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: FAIL }, { status: 500 });
   }
 
+  // A step that is present but not one we know is a client bug: do nothing rather than fall through to a sign-up.
+  if (body.step !== undefined && body.step !== "games" && body.step !== "age") {
+    return NextResponse.json({ ok: false, error: FAIL }, { status: 400 });
+  }
+
   try {
     // Follow-up: games they play (multi-select, comma-separated)
     if (body.step === "games") {
-      const kidGames = clean(body.kidGames, 200);
+      // Plain words only, so a link or markup can't ride into a welcome email.
+      const kidGames = clean(typeof body.kidGames === "string" ? body.kidGames.replace(GAMES_STRIP_RE, "") : "", 200);
       if (!kidGames) return NextResponse.json({ ok: false, error: "Pick a game." }, { status: 400 });
       const r = await event("Season 01 Waitlist Games", email, { kid_games: kidGames }, { kid_games: kidGames });
       if (!r.ok) console.error("Klaviyo games event failed:", r.status, await r.text());
@@ -252,7 +277,7 @@ export async function POST(req: NextRequest) {
           },
           relationships: { list: { data: { type: "list", id: LIST_ID } } },
         },
-      });
+      }, SUBSCRIBE_TIMEOUT_MS);
       if (!sub.ok) {
         // Profile + event exist, so the parent can still be found: log loudly, let them through.
         console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
