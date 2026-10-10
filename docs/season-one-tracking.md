@@ -13,7 +13,12 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
 |---|---|---|
 | Page load | Meta `PageView`; Clarity session; GA4 `page_view` (landing page only: it carries its own `gtag.js` for `G-8LM45PX53W`, the popup uses the one in `app/layout.tsx`) | none |
 | Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})` and GA4 `generate_lead` with `{source:'season_one_<ad>'}`, once per sign-up each, same conditions (LIVE host, honeypot empty) | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
-| Games chips (confirmation) | none (nothing to Meta or GA) | Klaviyo "Season 01 Waitlist Games" only. No Meta event |
+| Page load (Clarity tags) | `clarity("set","ad",<id>)`, plus `utm_content`, `utm_term` and `site` from the URL when present, so sessions can be filtered by ad in Clarity | none |
+| Funnel events (GA4 only, SC-3) | `faq_open {ad, question}` (a FAQ opens; `question` is a slug such as `when_does_it_start`; once per question per page view). `cta_click {ad, location}` (`hero`, `header` or `sticky`). `form_start {ad, where}` (first real focus or typing in the `top` / `bottom` email field, once per form; the programmatic focus after a CTA tap does not count). `signup_error {ad, reason}` (`invalid_email`, `server` for a non-ok API response, `network` for a failed fetch; suppressed when the honeypot is filled) | none |
+| Email submit success (Clarity) | `clarity("event","signup")` and `clarity("set","signed_up","yes")` at the same moment and under the same conditions as the Meta Lead and GA4 `generate_lead` (LIVE host, honeypot empty, once per sign-up) | none |
+| Games chips (confirmation) | none (nothing to Meta, GA or Clarity) | Klaviyo "Season 01 Waitlist Games" only. No Meta event |
+
+The funnel events and Clarity tags are keyed by the ad id only. **None of them go to Meta**, and none carry the email, the game chips or anything about the child (chip taps send nothing to GA or Clarity). All calls are wrapped so a tracking failure can never break the page or the sign-up. In GA4, mark `generate_lead` as a key event; the funnel events are for exploration (register `ad`, `question`, `location`, `where` and `reason` as custom dimensions to report on them).
 
 GA4: the `source` parameter uses the same naming (`season_one_d3` on the landing page, `season_one_popup` on the popup via `trackLead`). utm_* are picked up by GA4 from the page URL, so paid traffic shows under the Meta source/medium. Only the ad id goes to GA, never the game chips or anything about the child.
 

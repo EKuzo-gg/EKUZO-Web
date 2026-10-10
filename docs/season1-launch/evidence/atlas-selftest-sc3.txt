@@ -1,0 +1,104 @@
+Atlas self-test, SC-3 funnel instrumentation (Clarity tags + GA4 funnel events)
+Date: 2026-10-10. Tree under test: git archive of s1-rel HEAD 9773c55 + the SC-3 working-tree landing.html (identical file is applied to s1-feat, md5 below).
+Build: /home/claude/s1-atlas-sc3 (node_modules hardlinked), dummy Stripe env, next build exit 0 (log: /home/claude/s1-tests/build-sc3.log), next start -p 3700 (stopped by PID 505).
+Tests: /home/claude/s1-tests/sc3-tests.mjs (Playwright; gtag.js and fbevents replaced by lib.mjs stubs; clarity.ms script stubbed empty, so the page's own clarity queue window.clarity.q records every clarity(...) call).
+landing.html md5 rel/feat: 7548e51ed45b309382dc09e92fb6bc85 / 7548e51ed45b309382dc09e92fb6bc85
+
+node --check on inline scripts (rel):
+0 495 OK
+1 277 OK
+2 144 OK
+3 1243921 OK
+(feat):
+0 495 OK
+1 277 OK
+2 144 OK
+3 1243921 OK
+
+===== test run =====
+PASS  C1  [S3-1]  load: Clarity tags ad/utm_content/utm_term/site; GA dataLayer still exactly [js, config]; no signup tag
+  ok   clarity calls on load: [["set","ad","d3"],["set","utm_content","vid_a"],["set","utm_term","feed"],["set","site","ig"]]
+  ok   no GA event fires on load besides config
+  ok   no utm params: only the ad tag: [["set","ad","d7"]]
+  ok   unknown ad id falls back to d1: [["set","ad","d1"],["set","utm_content","x"]]
+PASS  C2  [S3-2]  faq_open: one per question, open only, stable slug, params exactly {ad, question}
+  ok   5 FAQ items
+  ok   first open: [["event","faq_open",{"ad":"d3","question":"when_does_it_start"}]]
+  ok   closing fires nothing
+  ok   re-opening the same question fires nothing (once per question)
+  ok   all five slugs: when_does_it_start, do_i_pay_anything_now, what_game_do_they_play, where_does_it_happen, who_are_the_coaches
+  ok   params are exactly ad + question
+  ok   5 GA hits
+  ok   nothing extra sent to Clarity by FAQ opens
+PASS  C3  [S3-2]  cta_click: hero, header mini CTA, sticky (mobile); each click one event; programmatic focus is not form_start
+  ok   hero: [["event","cta_click",{"ad":"d3","location":"hero"}]]
+  ok   the focus goForm gives the email field is not counted as form_start
+  ok   header mini CTA: ["event","cta_click",{"ad":"d3","location":"header"}]
+  ok   still no form_start after the header CTA
+  note sticky visible after scroll: true
+  ok   sticky: [["event","cta_click",{"ad":"d3","location":"sticky"}]]
+  ok   no form_start from the programmatic focus
+PASS  C4  [S3-2]  form_start: first real focus or typing, once per form (top, bottom)
+  ok   top once: [["event","form_start",{"ad":"d3","where":"top"}]]
+  ok   bottom once more: ["top","bottom"]
+  ok   2 GA hits
+  ok   autofill-style input without focus counts once
+PASS  C5  [S3-1,S3-2]  success: exactly one Meta Lead, one generate_lead, one clarity signup event + signed_up tag; repeat submit adds none
+  ok   Meta Lead: 1
+  ok   generate_lead: 1
+  ok   clarity event signup: 1
+  ok   clarity set signed_up=yes: 1
+  ok   clarity calls total 6 (4 load tags + 2): [["event","signup"],["set","signed_up","yes"]]
+  ok   dataLayer commands: js config event:form_start event:generate_lead
+  note GA events: form_start, generate_lead
+  ok   Meta saw only: set:autoConfig init:1284038230557204 track:PageView track:Lead
+  ok   second submit attempt adds nothing
+  ok   one API POST (1)
+  ok   bottom form: 1 Lead, 1 generate_lead, 1 clarity signup
+  ok   slow API + double click: 1 POST, 1 Lead, 1 clarity signup
+PASS  C6  [S3-2]  signup_error: invalid_email / server (500, 502, 400) / network; params exactly {ad, reason}; no Lead, no signup; retry then succeeds once
+  ok   invalid_email: [["event","signup_error",{"ad":"d3","reason":"invalid_email"}]]
+  ok   no Lead, no generate_lead, no clarity signup
+  ok   500: ["event","signup_error",{"ad":"d3","reason":"server"}]
+  ok   500: no Lead / generate_lead / clarity signup
+  ok   500: retry succeeds -> still 1 error, now 1 Lead, 1 generate_lead, 1 clarity signup
+  ok   502: ["event","signup_error",{"ad":"d3","reason":"server"}]
+  ok   502: no Lead / generate_lead / clarity signup
+  ok   502: retry succeeds -> still 1 error, now 1 Lead, 1 generate_lead, 1 clarity signup
+  ok   400: ["event","signup_error",{"ad":"d3","reason":"server"}]
+  ok   400: no Lead / generate_lead / clarity signup
+  ok   400: retry succeeds -> still 1 error, now 1 Lead, 1 generate_lead, 1 clarity signup
+  ok   abort: ["event","signup_error",{"ad":"d3","reason":"network"}]
+  ok   abort: no Lead / generate_lead / clarity signup
+  ok   abort: retry succeeds -> still 1 error, now 1 Lead, 1 generate_lead, 1 clarity signup
+PASS  C7  [S3-1,S3-2]  honeypot filled: success path gives no Lead / generate_lead / clarity signup; no signup_error either
+  ok   top: no Lead, no generate_lead, clarity unchanged (4 load tags)
+  ok   bottom: no Lead, no generate_lead, clarity unchanged (4 load tags)
+  ok   honeypot + invalid email: no signup_error
+PASS  C8  [S3-1,S3-2]  chips and age taps add nothing to GA, Clarity or Meta; no email / game / child data anywhere
+  ok   GA 4, Clarity 6, Meta 4, GA hits 3: all unchanged after chip/age taps
+  ok   games step still POSTed to the API (1)
+  ok   email appears in no dataLayer entry, GA URL, clarity call or fbq call
+  ok   no game or child data in GA or Clarity
+  note GA event parameter names seen: ep.ad, ep.source, ep.where
+PASS  C9  [S3-1,S3-2]  tracking can never break the page: gtag/dataLayer and clarity both throwing; sign-up still completes with one Meta Lead
+  ok   confirmation shown and the Meta Lead still fired once
+  ok   no uncaught page errors ([])
+  ok   clarity entirely absent (blocked): sign-up works, no page errors
+PASS  C10  [S3-1]  hosts: non-live host posts nothing and sends no signup tag; live hosts do; ?preview=done sends nothing; every ad id tags itself
+  ok   preview.example.test: preview: clarity signup 0, Lead 0, generate_lead 0
+  ok   evilekuzo.gg: preview: clarity signup 0, Lead 0, generate_lead 0
+  ok   www.ekuzo.gg: LIVE: clarity signup 1, Lead 1, generate_lead 1
+  ok   foo.netlify.app: LIVE: clarity signup 1, Lead 1, generate_lead 1
+  ok   localhost: LIVE: clarity signup 1, Lead 1, generate_lead 1
+  ok   ?preview=done: no GA event, no clarity signup, no Lead
+  ok   ad tags d1..d12: d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12
+PASS  C11  [S3]  whole run: no page errors in any context
+  ok   page errors across 40 contexts: 0 (C9's deliberate sabotage contexts included)
+  ok   slugs asserted in C2: when_does_it_start, do_i_pay_anything_now, what_game_do_they_play, where_does_it_happen, who_are_the_coaches
+
+SUMMARY: 11/11 passed, 0 failed
+Per test: C1=PASS C2=PASS C3=PASS C4=PASS C5=PASS C6=PASS C7=PASS C8=PASS C9=PASS C10=PASS C11=PASS
+
+Note: first run had 2 failures that were test-script bugs (sticky scroll position; a const used before its definition); fixed in the script, not the page. The final run above is the full run.
+Note: sc2-tests.mjs (G2) asserts the dataLayer holds exactly 3 commands after a sign-up; by design it now also holds form_start, so that single count assertion is superseded by C5 here.
