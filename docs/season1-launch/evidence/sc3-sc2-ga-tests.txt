@@ -1,0 +1,64 @@
+PASS  G1  [T12]  load: gtag.js once, config G-8LM45PX53W exactly once, one page_view, no generate_lead
+  ok   gtag.js requested once: https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W
+  ok   exactly one config G-8LM45PX53W with no extra options: [["config","G-8LM45PX53W"]]
+  ok   dataLayer is exactly [js, config]: ["js","config"]
+  ok   one page_view hit (1)
+  ok   no generate_lead on load
+  ok   only one GA request on load (1)
+  note page_view hit: dl=http://localhost:3100/season1?ad=d3&utm_source=meta&utm_campaign=s1&utm_id=123&site=ig&fbclid=t1 dt=EKUZO Season One
+  ok   page_location is the landing URL as loaded (utm params ride along, GA reads them)
+  ok   no page errors (0)
+  ok   pixel unchanged: set:autoConfig init:1284038230557204 track:PageView
+PASS  G2  [T12]  successful sign-up: exactly one generate_lead {source:'season_one_d3'} (top form), same moment as the pixel Lead
+  ok   one generate_lead with only {source}: [["event","generate_lead",{"source":"season_one_d3"}]]
+  ok   one generate_lead hit, ep.source=season_one_d3
+  ok   pixel Lead still exactly one
+  ok   CHANGED for SC-3 (was 3): dataLayer has exactly 4 commands, js, config, form_start (field focus) and generate_lead: ["js:2026-10-10T21:52:37.464Z","config:G-8LM45PX53W","event:form_start","event:generate_lead"]
+  ok   second submit attempt after success adds no second generate_lead
+PASS  G3  [T12]  bottom form: one generate_lead; double-click and Enter spam on a slow API: still one
+  ok   bottom form: one generate_lead
+  ok   one POST (1)
+  ok   slow API + double click: one generate_lead
+PASS  G4  [T12]  failures: 502 and network failure fire no generate_lead; the retry that succeeds fires exactly one
+  ok   502: no generate_lead, no confirmation
+  ok   502 then retry succeeds: exactly one generate_lead
+  ok   500: no generate_lead, no confirmation
+  ok   500 then retry succeeds: exactly one generate_lead
+  ok   network abort: no generate_lead, no confirmation
+  ok   network abort then retry succeeds: exactly one generate_lead
+  ok   400: no generate_lead, no confirmation
+  ok   400 then retry succeeds: exactly one generate_lead
+  ok   invalid email (no POST): no generate_lead
+PASS  G5  [T12]  honeypot filled (top and bottom): no generate_lead and no pixel Lead; empty honeypot control fires one
+  ok   top: honeypot -> no generate_lead, no Lead
+  ok   bottom: honeypot -> no generate_lead, no Lead
+PASS  G6  [T12]  non-live hosts fire no generate_lead (config still loads); live hosts fire one; ?preview=done fires none
+  ok   preview.example.test: preview -> generate_lead 0 (expected 0), pixel Lead 0
+  note preview.example.test: config still loaded, GA page_view hits 1 (page_view on a design-preview host is existing site behavior, not a Lead)
+  ok   127.0.0.1: preview -> generate_lead 0 (expected 0), pixel Lead 0
+  note 127.0.0.1: config still loaded, GA page_view hits 1 (page_view on a design-preview host is existing site behavior, not a Lead)
+  ok   evilekuzo.gg: preview -> generate_lead 0 (expected 0), pixel Lead 0
+  note evilekuzo.gg: config still loaded, GA page_view hits 1 (page_view on a design-preview host is existing site behavior, not a Lead)
+  ok   ekuzo.gg.evil.test: preview -> generate_lead 0 (expected 0), pixel Lead 0
+  note ekuzo.gg.evil.test: config still loaded, GA page_view hits 1 (page_view on a design-preview host is existing site behavior, not a Lead)
+  ok   www.ekuzo.gg: LIVE -> generate_lead 1 (expected 1), pixel Lead 1
+  ok   foo.netlify.app: LIVE -> generate_lead 1 (expected 1), pixel Lead 1
+  ok   localhost: LIVE -> generate_lead 1 (expected 1), pixel Lead 1
+  ok   ?preview=done on a live host: no GA event, no Lead
+PASS  G7  [T12]  chip taps send nothing to GA (only the ad id ever goes in an event); child data never reaches dataLayer or any GA URL
+  ok   dataLayer unchanged by chip/age taps (4 -> 4)
+  ok   games step was POSTed to the API (1), but not to GA
+  ok   no email, game names or child keys anywhere in dataLayer or GA URLs (990 chars scanned)
+  ok   same check on decoded GA URLs
+  note GA request parameter names seen: dl, dr, dt, en, ep.ad, ep.source, ep.where, tid, v
+  ok   CHANGED for SC-3 (was ep.source only): event parameters are exactly ad, source, where (ep.ad,ep.source,ep.where)
+  ok   CHANGED for SC-3 (was generate_lead only): events in dataLayer are form_start then generate_lead: [["event","form_start",{"ad":"d3","where":"top"}],["event","generate_lead",{"source":"season_one_d3"}]]
+PASS  G8  [T12]  every ad id: generate_lead source is season_one_<ad> (d1..d12)
+  ok   sources: season_one_d1, season_one_d2, season_one_d3, season_one_d4, season_one_d5, season_one_d6, season_one_d7, season_one_d8, season_one_d9, season_one_d10, season_one_d11, season_one_d12
+  ok   unknown ad falls back to d1: {"source":"season_one_d1"}
+PASS  G9  [T12,S1]  script crash / no-JS: GA never sees an email in page_location (native submit stays inert)
+  ok   no email in 2 GA request(s) after a native submit with a dead script
+  ok   no generate_lead without a saved sign-up
+
+SUMMARY: 9/9 passed, 0 failed
+Per test: G1=PASS G2=PASS G3=PASS G4=PASS G5=PASS G6=PASS G7=PASS G8=PASS G9=PASS

@@ -123,3 +123,23 @@ Fresh `git archive` copy (`/home/claude/s1-qa7`), dummy Stripe env, `next start`
 | d3 pixel diff vs cycle 2 | 0 px (0.0000%) at 1440 and 375, empty and confirmation | `sc2-visual-diff-d3.txt`, `screenshots/sc2/` |
 
 No defects. Limits and live checks: the stub cannot show what the real gtag.js adds on its own, so confirm on the dev deploy with GA4 DebugView or Realtime that there is one page_view and one generate_lead per sign-up. In GA4 Admin, review Enhanced measurement "Form interactions": if on, GA adds its own form_start and form_submit events for these forms (no field values are sent, but form_destination would read `javascript:void(0)` and the counts could be mistaken for leads). Also note GA page_view fires on non-live preview hosts too (only the Lead events are gated), the same as the pixel PageView.
+
+## SC-3 retest: funnel instrumentation on the landing page (HEAD 327020e, 2026-10-10)
+
+Fresh `git archive` copy (`/home/claude/s1-qa8`), dummy Stripe env, `next start` with the Klaviyo/Meta fetch mock. gtag.js is the harness stub from SC-2; Clarity is read from `window.clarity.q` (the snippet's own queue, clarity.ms script stubbed). New own tests in `sc3-sentry.mjs` (H1 to H10; Atlas's `sc3-tests.mjs` was not used).
+
+**Harness change (by design, logged):** three SC-2 GA assertions in `sc2-tests.mjs` encoded the old "GA sees only generate_lead" world and were updated (original kept as `sc2-tests.sc2.mjs`): G2 dataLayer now has 4 commands instead of 3 (js, config, `form_start` when the email field is focused, `generate_lead`); G7 event parameters are now exactly `ad`, `source`, `where` (was `source` only) and the dataLayer events are `form_start` then `generate_lead` (was `generate_lead` only). Everything else in G1 to G9 passes unchanged, including "no email, game names or child keys in any GA URL".
+
+| Check | Result | Evidence |
+|---|---|---|
+| T13 own tests H1 to H10 | 10/10 PASS (Clarity tags, faq_open, cta_click, form_start, signup_error, Clarity signup only on real success, Meta unchanged, privacy sweep, tracking-failure resilience, ad param) | `sc3-funnel-tests.txt` |
+| SC-2 GA tests (3 assertions updated) | 9/9 | `sc3-sc2-ga-tests.txt` |
+| Browser suite incl. SC-1 B17 | 24/24 | `sc3-browser-tests.txt` |
+| Adversarial browser suite | 12/12 | `sc3-adv-browser.txt` |
+| Route harness | 50/50 (no route change) | `sc3-route-harness.txt` |
+| Diff and serving | only `app/season1/landing.html` (plus docs and WORKLOG); no `fbq` line touched; `/season1` body byte-identical to the file | `sc3-static.txt` |
+| N2 | tsc PASS; build PASS (`○ /season1`), 0 mp4, `.next/server` 40M, no secrets in `.next/static` | `sc3-n2-*.txt` |
+| N3 console | `/season1?ad=d1`, `d3`, `d10` clean at 1440 and 375; 0 new vs base on a quiet machine (the first run, taken while other suites ran, listed 25 timing-dependent "preloaded but not used" warnings, all on `/programs/ekuzo-camps/register`, a page this change does not touch) | `sc3-n3-console-compare-rerun.txt`, `sc3-n3-console-compare.txt` |
+| d3 pixel diff vs SC-2 | 0 px (0.0000%) at 1440 and 375, empty and confirmation | `sc3-visual-diff-d3.txt`, `screenshots/sc3/` |
+
+No defects. Behavior notes (not defects): `signup_error` fires once per failed attempt (two bad submits give two events), not once per page; `form_start` is once per form; `cta_click` fires on every click; the sticky CTA exists only at mobile widths. Live checks still open for the human pass: GA4 DebugView or Realtime for the new events, and the Clarity dashboard for the four custom tags, the `signup` event and the `signed_up` tag. Also confirm Clarity's masking mode, since parents type their email on this page (pre-existing, not changed here).

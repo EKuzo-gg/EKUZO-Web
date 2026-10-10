@@ -1,0 +1,133 @@
+# SC-3 funnel instrumentation, Sentry own tests H1-H10 (HEAD 327020e, fresh copy /home/claude/s1-qa8). gtag.js = lib.mjs stub; Clarity read from window.clarity.q.
+PASS  H1  [T13]  load: Clarity tags ad, utm_content, utm_term, site once each; no signup event; no GA funnel event yet
+  note clarity queue on load: [["set","ad","d3"],["set","utm_content","d3-a-playtowin"],["set","utm_term","feed"],["set","site","ig"]]
+  ok   exactly four set calls, once each, in that order: [["set","ad","d3"],["set","utm_content","d3-a-playtowin"],["set","utm_term","feed"],["set","site","ig"]]
+  ok   no Clarity event on load
+  ok   no utm_source, utm_campaign, fbclid or signed_up tag
+  ok   dataLayer still exactly [js, config] on load
+  ok   one GA hit on load (page_view) (1)
+  ok   no page errors (0)
+  ok   no utm params: [["set","ad","d3"]]
+  ok   unknown ad: [["set","ad","d1"],["set","utm_term","x"]]
+  ok   prototype ad: [["set","ad","d1"]]
+  ok   empty utm: [["set","ad","d7"]]
+  ok   long values capped at 100: ad:2, utm_content:100, utm_term:100, site:100
+  ok   odd characters stay inert strings, no page error: [["set","utm_term","<script>alert(1)</script>"],["set","site","a b\"c"]]
+PASS  H2  [T13]  faq_open: one event per distinct question, params {ad, question slug}; reopen adds nothing; keyboard works
+  note FAQ questions: ["When does it start?","Do I pay anything now?","What game do they play?","Where does it happen?","Who are the coaches?"]
+  ok   one faq_open per question, slugs ["when_does_it_start","do_i_pay_anything_now","what_game_do_they_play","where_does_it_happen","who_are_the_coaches"]
+  ok   params are exactly {ad:'d3', question:<slug of [a-z0-9_]>}
+  ok   close and reopen every question: still 5 events (once per question)
+  ok   keyboard (Enter on summary) opens and fires once
+  ok   keyboard close and reopen: still one
+  ok   FAQ opens create no Clarity event
+PASS  H3  [T13]  cta_click: header, hero and sticky each fire {ad, location}; the click still scrolls and focuses the form
+  ok   header: [{"ad":"d3","location":"header"}]
+  ok   header CTA still focuses the top email field
+  ok   hero: {"ad":"d3","location":"hero"}
+  ok   mobile: sticky bar shows after scrolling past the top form (natural state)
+  ok   sticky: [{"ad":"d3","location":"sticky"}]
+  ok   sticky CTA still focuses the top email field
+  ok   the CTA's programmatic focus fired no form_start on mobile either
+PASS  H4  [T13]  form_start: fires once per form (top, bottom) on the user's own focus or typing, never on the CTA's programmatic focus
+  ok   CTA moved focus to the top field
+  ok   programmatic focus fired no form_start
+  ok   first keystroke fires one: [{"ad":"d3","where":"top"}]
+  ok   more typing, blur and refocus: still one for the top form
+  ok   bottom form fires its own: ["top","bottom"]
+  ok   typing in the bottom field adds nothing more
+  ok   keyboard or tab style focus() with no CTA: fires
+  ok   a script that sets the value and submits (no focus, no input event) fires no form_start
+PASS  H5  [T13]  signup_error: one event per failed attempt with reason invalid_email | server | network; none for honeypot; none on success
+  ok   invalid email: [{"ad":"d3","reason":"invalid_email"}]
+  ok   a second failed attempt is a second event (per attempt, by design): 2
+  ok   the typed text is not in the dataLayer
+  ok   502: one signup_error reason=server, no generate_lead: [{"ad":"d3","reason":"server"}]
+  ok   502: the successful retry adds a generate_lead and no further signup_error
+  ok   500: one signup_error reason=server, no generate_lead: [{"ad":"d3","reason":"server"}]
+  ok   500: the successful retry adds a generate_lead and no further signup_error
+  ok   400: one signup_error reason=server, no generate_lead: [{"ad":"d3","reason":"server"}]
+  ok   400: the successful retry adds a generate_lead and no further signup_error
+  ok   network abort: one signup_error reason=network, no generate_lead: [{"ad":"d3","reason":"network"}]
+  ok   network abort: the successful retry adds a generate_lead and no further signup_error
+  ok   invalid email + honeypot: no signup_error for a honeypot submit
+  ok   502 + honeypot: no signup_error for a honeypot submit
+  ok   plain success: no signup_error
+PASS  H6  [T13]  Clarity signup event and signed_up tag only on a real success (live host, empty honeypot, ok response), once
+  ok   success: {"ev":1,"tag":1}, event args [["event","signup"]]
+  ok   repeat submits after success: still one signup event
+  ok   bottom form success: one signup event
+  ok   double click on a slow API: one signup event
+  ok   502: no signup event, no signed_up tag
+  ok   502 then retry: exactly one
+  ok   network abort: no signup event, no signed_up tag
+  ok   network abort then retry: exactly one
+  ok   400: no signup event, no signed_up tag
+  ok   400 then retry: exactly one
+  ok   invalid email: nothing
+  ok   honeypot (top): no signup event, no tag
+  ok   honeypot (bottom): no signup event, no tag
+  ok   preview.example.test (non-live): no signup event
+  ok   127.0.0.1 (non-live): no signup event
+  ok   evilekuzo.gg (non-live): no signup event
+  ok   ekuzo.gg.evil.test (non-live): no signup event
+  ok   www.ekuzo.gg (live): one signup event
+  ok   foo.netlify.app (live): one signup event
+  ok   localhost (live): one signup event
+  ok   ?preview=done on a live host: no Clarity event, no GA event
+PASS  H7  [T13]  Meta only sees set autoConfig / init / PageView / Lead; nothing from FAQ, CTA, form focus, errors, chips or age taps
+  ok   after FAQ, CTA, focus, invalid email and a 502: fbq calls unchanged: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   fbq calls exactly set, init, PageView, Lead: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"],["track","Lead"]]
+  ok   no trackCustom, exactly one Lead
+  ok   one request to connect.facebook.net (1)
+  ok   no email or child data in any fbq call or Meta request
+PASS  H8  [T13]  privacy sweep: no email or child data in dataLayer, GA requests, Clarity queue/requests, fbq calls after a full session
+  ok   dataLayer: 669 chars scanned, no email, game name or child key
+  ok   clarityQueue: 149 chars scanned, no email, game name or child key
+  ok   fbq: 197 chars scanned, no email, game name or child key
+  ok   gaHits: 2919 chars scanned, no email, game name or child key
+  ok   gaJs: 56 chars scanned, no email, game name or child key
+  ok   clarityReq: 37 chars scanned, no email, game name or child key
+  ok   fbReq: 46 chars scanned, no email, game name or child key
+  ok   GA event parameter names: ep.ad, ep.location, ep.question, ep.reason, ep.source, ep.where
+  ok   only the documented event parameters exist
+  note GA events in order: faq_open, faq_open, faq_open, faq_open, faq_open, cta_click, form_start, signup_error, signup_error, generate_lead
+  note Clarity queue: [["set","ad","d3"],["set","utm_content","d3-a-playtowin"],["set","utm_term","feed"],["set","site","ig"],["event","signup"],["set","signed_up","yes"]]
+  ok   still exactly one generate_lead after the whole session
+PASS  H9  [T13]  tracking failures never break the page or the sign-up (throwing, undefined, blocked gtag and Clarity)
+  ok   gtag throws: FAQ still opens
+  ok   gtag throws: CTA still scrolls and focuses the form
+  ok   gtag throws: invalid-email message still shows
+  ok   gtag throws: sign-up POSTed once and confirmation shown
+  ok   gtag throws: no uncaught page errors (0)
+  ok   clarity throws: FAQ still opens
+  ok   clarity throws: CTA still scrolls and focuses the form
+  ok   clarity throws: invalid-email message still shows
+  ok   clarity throws: sign-up POSTed once and confirmation shown
+  ok   clarity throws: no uncaught page errors (0)
+  ok   gtag and clarity throw: FAQ still opens
+  ok   gtag and clarity throw: CTA still scrolls and focuses the form
+  ok   gtag and clarity throw: invalid-email message still shows
+  ok   gtag and clarity throw: sign-up POSTed once and confirmation shown
+  ok   gtag and clarity throw: no uncaught page errors (0)
+  ok   gtag and clarity undefined (blockers): FAQ still opens
+  ok   gtag and clarity undefined (blockers): CTA still scrolls and focuses the form
+  ok   gtag and clarity undefined (blockers): invalid-email message still shows
+  ok   gtag and clarity undefined (blockers): sign-up POSTed once and confirmation shown
+  ok   gtag and clarity undefined (blockers): no uncaught page errors (0)
+  ok   fbq throws too: FAQ still opens
+  ok   fbq throws too: CTA still scrolls and focuses the form
+  ok   fbq throws too: invalid-email message still shows
+  ok   fbq throws too: sign-up POSTed once and confirmation shown
+  ok   fbq throws too: no uncaught page errors (0)
+  ok   GA and Clarity hosts blocked at the network: sign-up works, page errors 0
+  ok   dataLayer still queues the events (they go nowhere)
+PASS  H10  [T13]  ad param on every funnel event follows the ad id (d1, d7, d12, unknown -> d1)
+  ok   ad=d1: ad param ["d1"], events ["faq_open","cta_click","form_start","signup_error"]
+  ok   ad=d7: ad param ["d7"], events ["faq_open","cta_click","form_start","signup_error"]
+  ok   ad=d12: ad param ["d12"], events ["faq_open","cta_click","form_start","signup_error"]
+  ok   ad=nonsense: ad param ["d1"], events ["faq_open","cta_click","form_start","signup_error"]
+  ok   ad=D03: ad param ["d3"], events ["faq_open","cta_click","form_start","signup_error"]
+
+SUMMARY: 10/10 passed, 0 failed
+Per test: H1=PASS H2=PASS H3=PASS H4=PASS H5=PASS H6=PASS H7=PASS H8=PASS H9=PASS H10=PASS

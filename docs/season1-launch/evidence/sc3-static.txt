@@ -1,0 +1,33 @@
+# SC-3 static checks, HEAD 327020e (fresh copy /home/claude/s1-qa8)
+
+## build route table
+32:├ ƒ /api/season-one
+85:├ ○ /season1
+
+## served /season1 vs app/season1/landing.html
+1306177 bytes; IDENTICAL
+
+## files changed 327020e vs 9773c55
+ WORKLOG.md                  |  1 +
+ app/season1/landing.html    | 38 +++++++++++++++++++++++++++++++-------
+ docs/season-one-tracking.md |  7 ++++++-
+ 3 files changed, 38 insertions(+), 8 deletions(-)
+
+## every new tracking call in the diff (added lines that mention ga( clr( gtag clarity)
++const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id},p)); }catch(_){} };
++const clr=(...a)=>{ try{ window.clarity&&clarity(...a); }catch(_){} };
++clr("set","ad",d.id);
++["utm_content","utm_term","site"].forEach(k=>{ const v=qs.get(k); if(v) clr("set",k,v.slice(0,100)); });
++  if(!q||faqSeen.has(q)) return; faqSeen.add(q); ga("faq_open",{question:q});
++  const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(_){} };
++document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
++document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
++  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ if(!hp(f)) ga("signup_error",{reason:"invalid_email"}); err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
++      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){}
++      clr("event","signup"); clr("set","signed_up","yes"); }
++  }catch(_){ if(why&&!hp(f)) ga("signup_error",{reason:why}); btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
+
+## fbq / Meta lines touched by the diff (expect none)
+0
+
+## API route and lib unchanged vs 9773c55 (expect empty)

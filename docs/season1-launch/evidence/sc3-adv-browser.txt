@@ -1,0 +1,73 @@
+PASS  BA1  [T2]  fast double-click and Enter spam on a slow API: one POST, one Lead
+  ok   POSTs: 1
+  ok   Leads: 1
+PASS  BA2  [T2]  top and bottom forms submitted in the same tick (different emails)
+  note POSTs 2, emails one@example.com,two@example.com, eventIds 1 distinct
+  ok   browser Leads: 1 (one)
+  ok   two POSTs share one eventId: the server sends two Leads with the same event_id (different em), Meta keeps one. Matches decision 8 (event_id reuse dedupes)
+PASS  BA3  [T2,P2]  REAL network offline then online (real server, no API interception): error, no Lead, same eventId on retry, one Lead
+  ok   offline: no Lead
+  ok   offline: no confirmation
+  ok   offline: button re-enabled
+  ok   online retry: exactly one Lead (1)
+  ok   browser eventID cf3bdbc0-837a-4037-bd34-349869e864c6 equals the server's CAPI event_id cf3bdbc0-837a-4037-bd34-349869e864c6 (end-to-end through the real route)
+PASS  BA4  [T2]  history: after success navigate away and Back (and reload): Lead refire?
+  ok   Lead once after success
+  note after Back: confirmation visible=false (true = bfcache/restored state), fbq calls this document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   no additional Lead on Back (a reloaded document starts with only PageView; a restored one keeps its single Lead)
+  note Playwright's Chromium runs with back/forward cache disabled, so a true bfcache restore cannot be exercised here; code review: there is no pageshow handler and leadSent stays true in a restored page, so no refire (deferred to live human pass on iOS Safari/Chrome Android)
+PASS  BA5  [S2]  ?ad= prototype-property names (__proto__, constructor, toString, hasOwnProperty, valueOf)
+  ok   ad=__proto__: renders d1 fallback
+  ok   ad=constructor: renders d1 fallback
+  ok   ad=toString: renders d1 fallback
+  ok   ad=hasOwnProperty: renders d1 fallback
+  ok   ad=valueOf: renders d1 fallback
+  ok   ad=%5F%5Fproto%5F%5F: renders d1 fallback
+PASS  BA6  [S1,P1]  crashed landing script (ad=__proto__): native form submit puts the email in the URL and the pixel fires PageView on that URL
+  ok   static form HTML is still present when the script died
+  note URL after native submit: http://localhost:3100/season1?ad=__proto__&utm_source=meta
+  note POSTs to API: 1; fbq calls on the new document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"],["track","Lead"]] (the real pixel sends the full document URL, including the email, as its page-location parameter)
+  ok   email must not appear in the URL
+PASS  BA6b  [S1,P1]  retest: script crash variant, URLSearchParams missing (script dies at its first statement): native submit must not put the email in the URL
+  note page errors: 2 (TypeError: URLSearchParams is not a constructor
+    at http://localhost:3100/sea)
+  note form attributes: {"method":"post","action":"javascript:void(0)","onsubmit":"return false"}
+  note URL after submit: http://localhost:3100/season1?ad=d3&utm_source=meta; API POSTs: 0; fbq calls on the document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   email must not appear in the URL
+  ok   no email= query parameter at all
+  ok   the typed email is still in the field (page did not navigate away)
+PASS  BA6b  [S1,P1]  retest: script crash variant, IntersectionObserver missing (script dies mid-way, before the submit handlers are attached): native submit must not put the email in the URL
+  note page errors: 1 (TypeError: IntersectionObserver is not a constructor
+    at http://localhost:310)
+  note form attributes: {"method":"post","action":"javascript:void(0)","onsubmit":"return false"}
+  note URL after submit: http://localhost:3100/season1?ad=d3&utm_source=meta; API POSTs: 0; fbq calls on the document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   email must not appear in the URL
+  ok   no email= query parameter at all
+  ok   the typed email is still in the field (page did not navigate away)
+PASS  BA6b  [S1,P1]  retest: script crash variant, fetch missing (very old webview; handlers attach, the POST throws): native submit must not put the email in the URL
+  note page errors: 0
+  note form attributes: {"method":"post","action":"javascript:void(0)","onsubmit":"return false"}
+  note URL after submit: http://localhost:3100/season1?ad=d3&utm_source=meta; API POSTs: 0; fbq calls on the document: [["set","autoConfig"],["init","1284038230557204"],["track","PageView"]]
+  ok   email must not appear in the URL
+  ok   no email= query parameter at all
+  ok   the typed email is still in the field (page did not navigate away)
+PASS  BA7  [S1]  JavaScript disabled: what the page shows and what submit does
+  note no-JS render: hero empty=true, form visible=true
+  note after submit: URL http://localhost:3100/season1?ad=d3&utm_source=meta&fbclid=t1; API requests: 0; confirmation visible: false
+  ok   email must not end up in the URL on a non-JS submit
+PASS  BA8  [T8,P7]  ?preview=done on a LIVE host (www.ekuzo.gg mapped): POST or Lead?
+  ok   confirmation shown
+  ok   main POSTs 0, Leads 0
+  note chip tap on live host: games POSTs 1, body {"step":"games","email":"","kidGames":"Roblox"}; Leads still 0
+  ok   no Lead from the preview hook
+PASS  BA9  [P4,T2]  popup: reopen and resubmit; ESC during a pending request
+  note two sign-ups in two page loads: POSTs 2, eventIds distinct=2, Leads in this document 1 (CR-6, accepted: new document, new eventId)
+  ok   second sign-up gets a fresh eventId, so it counts as a second Lead (accepted)
+  note ESC at 400 ms of a 2 s request: popup closed=true; POSTs 1; Leads after the response 1; localStorage joined=1 dismissed=true
+  ok   popup closes, request still completes once
+  ok   Lead still fires once for the sign-up that completed after ESC
+  note ESC then the request FAILS (502): popup open=false, Leads 0; the parent is not told the sign-up failed (they dismissed it)
+  ok   no Lead on the failed request
+
+SUMMARY: 12/12 passed, 0 failed (FAIL here = a finding to log)
+Per test: BA1=PASS BA2=PASS BA3=PASS BA4=PASS BA5=PASS BA6=PASS BA6b=PASS BA6b=PASS BA6b=PASS BA7=PASS BA8=PASS BA9=PASS
