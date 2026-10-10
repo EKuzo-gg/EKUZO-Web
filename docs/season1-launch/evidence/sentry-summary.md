@@ -106,3 +106,20 @@ Fresh `git archive` copies of both branches (`/home/claude/s1-qa5` release, `/ho
 | Feat: `/roadshow/index.html`, ad-lab | all links go to `/season1?ad=dN` and open the right variant; 12/12 ad-lab iframe previews render hero and form; `preview=done` shows the confirmation | `cycle3-feat-roadshow.txt`, `screenshots/cycle3/` |
 
 D13 CLOSED for the build and local half. Still pending: L1 on the Netlify dev deploy after redeploy (the failure only existed on Netlify's Next runtime). New MINOR D14: feat `public/roadshow/index.html` still shows the old `landing.html?ad=d9&utm_...` link format as text (Meta link guidance now 404s). Also to confirm live: `/season1` now runs through the site middleware and carries `Set-Cookie` plus `s-maxage=31536000`, so check the CDN does not share one visitor's cookie.
+
+## SC-2 retest: GA4 on the landing page (HEAD 9773c55, 2026-10-10)
+
+Fresh `git archive` copy (`/home/claude/s1-qa7`), dummy Stripe env, `next start` with the Klaviyo/Meta fetch mock. Harness change: `lib.mjs` now serves `googletagmanager.com/gtag/js` from a stub that converts dataLayer commands into collect-style requests (page_location, title, event name, `ep.*` params) and records them, so what GA would receive is visible without contacting the real property (previously that host was simply blocked). New `sc2-tests.mjs` (G1 to G9). Original lib kept as `lib.sc1.mjs`.
+
+| Check | Result | Evidence |
+|---|---|---|
+| T12 own tests G1 to G9 | 9/9 PASS: config once; one generate_lead per sign-up (top, bottom, double-click, retry); none on 502/500/400/abort/invalid/honeypot/non-live hosts/`preview=done`/chips; only `ep.source`; no email or child data in dataLayer or GA URLs; 12 ad ids map correctly | `sc2-ga-tests.txt` |
+| Diff and serving | change is the GA block and one `gtag('event')` line; served body byte-identical to the source file; one gtag.js load (landing is outside `app/layout.tsx`); same id as the site | `sc2-static.txt` |
+| Browser suite incl. SC-1 B17 | 24/24 | `sc2-browser-tests.txt` |
+| Adversarial browser suite | 12/12 | `sc2-adv-browser.txt` |
+| Route harness | 50/50 (no route change) | `sc2-route-harness.txt` |
+| N2 | tsc PASS; build PASS (`○ /season1`), 0 mp4, `.next/server` 40M, no secrets in `.next/static` | `sc2-n2-*.txt` |
+| N3 console | 0 new vs base; `/season1?ad=d1`, `d3`, `d10` clean at 1440 and 375 | `sc2-n3-console-compare.txt` |
+| d3 pixel diff vs cycle 2 | 0 px (0.0000%) at 1440 and 375, empty and confirmation | `sc2-visual-diff-d3.txt`, `screenshots/sc2/` |
+
+No defects. Limits and live checks: the stub cannot show what the real gtag.js adds on its own, so confirm on the dev deploy with GA4 DebugView or Realtime that there is one page_view and one generate_lead per sign-up. In GA4 Admin, review Enhanced measurement "Form interactions": if on, GA adds its own form_start and form_submit events for these forms (no field values are sent, but form_destination would read `javascript:void(0)` and the counts could be mistaken for leads). Also note GA page_view fires on non-live preview hosts too (only the Lead events are gated), the same as the pixel PageView.

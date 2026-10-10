@@ -1,0 +1,6 @@
+# Pixel check: d3 on 9773c55 (SC-2) vs the cycle 2 screenshots (f413246), same harness (reduced motion, no caret, fonts loaded, fullPage)
+
+d3 1440 empty: 1440x1879, 0 px differ = 0.0000%
+d3 1440 confirm: 1440x1879, 0 px differ = 0.0000%
+d3 375 empty: 375x2513, 0 px differ = 0.0000%
+d3 375 confirm: 375x2513, 0 px differ = 0.0000%

@@ -1,0 +1,83 @@
+# Atlas self-test, spec change SC-2: GA4 on the /season1 landing page
+# Commit under test: 9773c55 (release/season1); feat/season1-launch carries the same landing.html: byte-identical
+# Build: git archive HEAD -> /home/claude/s1-atlas-sc2, node_modules hardlinked, dummy Stripe env, next build (exit 0, /season1 prerendered static), next start -p 3600 (PID 7072)
+# Node v22.22.0; Playwright chromium; googletagmanager.com / google-analytics.com and fbevents answered by local stubs, nothing leaves the box
+
+## node --check on each inline <script> of app/season1/landing.html (no src attribute)
+  ok s0.js (495 bytes)
+  ok s1.js (277 bytes)
+  ok s2.js (144 bytes)
+  ok s3.js (1242197 bytes)
+
+## Static check: the landing diff vs the previous commit touches only <head> scripts and the Lead line
+ app/season1/landing.html | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
++<!-- Google Analytics 4 (same property as app/layout.tsx). page_view fires on load; generate_lead fires from the form script below. utm_* are read from the page URL automatically. -->
++<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
++<script>
++window.dataLayer = window.dataLayer || [];
++function gtag(){dataLayer.push(arguments);}
++gtag('js', new Date());
++gtag('config', 'G-8LM45PX53W');
++</script>
+-    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
++    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
++      // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
++      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){} }
+
+## Playwright (/home/claude/s1-tests/atlas-sc2.mjs)
+PASS  S2-1  [SC-2]  /season1?ad=d3&utm_source=meta: gtag.js requested once for G-8LM45PX53W, config happens once, no GA event on load
+  ok   HTTP 200
+  ok   gtag.js requests: ["https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"]
+  ok   config calls: [["config","G-8LM45PX53W"]]
+  ok   js init calls: 1
+  ok   no gtag event() calls on load (page_view comes from gtag.js itself)
+  ok   window.gtag is a function
+  ok   Meta PageView still exactly 1
+  ok   no page errors 
+  note dataLayer on load: [["js","2026-10-10T20:57:58.395Z"],["config","G-8LM45PX53W"]]
+  note console errors (local): []
+PASS  S2-2  [SC-2]  mocked successful sign-up: exactly one generate_lead {source:'season_one_d3'} next to the one Meta Lead; config still once
+  ok   POSTs: 1
+  ok   generate_lead calls: 1
+  ok   payload: ["event","generate_lead",{"source":"season_one_d3"}]
+  ok   Meta Lead calls: 1
+  ok   config calls still 1
+  ok   total GA event() calls: 1
+  ok   no page errors 
+  note Meta Lead: ["track","Lead",{"content_name":"season_one_d3"},{"eventID":"e1b75c61-d1d5-4bba-bb05-7b7f9e3ca807"}]
+PASS  S2-3  [SC-2]  honeypot filled: neither generate_lead nor Meta Lead (the sign-up still shows done, as before)
+  ok   POST carried the honeypot value (server decides): 1
+  ok   generate_lead calls: 0
+  ok   Meta Lead calls: 0
+  ok   GA event() calls: 0
+PASS  S2-4  [SC-2]  failed sign-up (502): neither event; then a successful retry fires exactly one of each
+  ok   POSTs after first try: 1
+  ok   confirmation not shown
+  ok   generate_lead after 502: 0
+  ok   Meta Lead after 502: 0
+  ok   POSTs after retry: 2
+  ok   generate_lead after retry: 1
+  ok   Meta Lead after retry: 1
+  ok   no page errors
+PASS  S2-5  [SC-2]  game chip taps send nothing to GA or Meta, and no chip text reaches the dataLayer or any googletagmanager/google-analytics request
+  ok   games POST to our API (Klaviyo path): 1
+  ok   dataLayer unchanged by chip taps
+  ok   Meta calls unchanged by chip taps
+  ok   no new googletagmanager/google-analytics requests: 0
+  ok   no chip text in dataLayer, fbq calls or GA URLs
+  ok   generate_lead total still 1
+  note games POST body: {"step":"games","email":"parent@example.com","kidGames":"Fortnite, League of Legends, Something else"}
+PASS  S2-6  [SC-2]  no PII in GA: the dataLayer holds no email, no child or game data after a full flow
+  ok   no email / @ in dataLayer
+  ok   no kid/game/age strings in dataLayer
+PASS  S2-7  [SC-2]  design-preview host (not ekuzo.gg / netlify / localhost): no POST, no generate_lead, no Meta Lead; gtag still configured once
+  ok   POSTs: 0
+  ok   generate_lead: 0
+  ok   Meta Lead: 0
+  ok   config calls: 1
+PASS  S2-8  [SC-2]  gtag.js script tag sits in <head> (body size recorded for reference)
+  note {"els":120,"text":1273,"headScripts":6,"headGa":true}
+  ok   gtag.js script tag is in <head>
+
+SUMMARY: 8/8 passed

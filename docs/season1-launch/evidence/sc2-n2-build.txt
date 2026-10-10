@@ -1,0 +1,7 @@
+# build at 9773c55 (isolated copy, dummy Stripe env)
+5:✓ Compiled successfully in 9.7s
+32:├ ƒ /api/season-one
+85:├ ○ /season1
+mp4 files in .next: 0
+.next/server size: 40M
+secrets in .next/static: 0

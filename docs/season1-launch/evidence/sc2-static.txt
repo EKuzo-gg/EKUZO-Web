@@ -1,0 +1,41 @@
+# SC-2 static checks, HEAD 9773c55 (fresh copy /home/claude/s1-qa7)
+
+## build route table
+32:├ ƒ /api/season-one
+85:├ ○ /season1
+
+## served /season1 vs app/season1/landing.html
+1304345 bytes; IDENTICAL
+
+## diff of landing.html vs a431139 (the whole SC-2 change)
++<!-- Google Analytics 4 (same property as app/layout.tsx). page_view fires on load; generate_lead fires from the form script below. utm_* are read from the page URL automatically. -->
++<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
++<script>
++window.dataLayer = window.dataLayer || [];
++function gtag(){dataLayer.push(arguments);}
++gtag('js', new Date());
++gtag('config', 'G-8LM45PX53W');
++</script>
+-    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){} }
++    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
++      // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
++      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){} }
+
+## files changed 9773c55 vs a431139
+ WORKLOG.md                  |  1 +
+ app/season1/landing.html    | 12 +++++++++++-
+ docs/season-one-tracking.md |  8 +++++---
+ 3 files changed, 17 insertions(+), 4 deletions(-)
+
+## GA references in served page
+2
+1
+gtag("event","generate_lead",{source:"season_one_"+d.id})
+      1 gtag('config'
+      1 gtag('js'
+
+## same measurement id as the site layout
+16:const GA_MEASUREMENT_ID = "G-8LM45PX53W";
+
+## landing is outside app/layout.tsx (no second gtag.js from the layout)
+1
