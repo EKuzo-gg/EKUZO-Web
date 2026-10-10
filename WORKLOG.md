@@ -26,6 +26,9 @@ both the browser and the server with one shared event ID. Klaviyo behavior is un
 - Docs: `docs/season-one-tracking.md` (what fires where, env vars, test procedure).
 - Honeypot: both sign-up forms (landing page and popup) carry a hidden `company` input; if it
   comes back filled, `/api/season-one` returns ok without writing to Klaviyo or sending a Lead.
+- Ad images (dev only, not on the production release branch): the 24 Season 01 creatives
+  (12 directions x feed/story, ~5.2 MB, plain git, not LFS) in `public/ads/season1/`, so Meta
+  can fetch them by URL from the dev deploy, e.g. `/ads/season1/d3-a-playtowin-feed.jpg`.
 
 ---
 ## Jamie — August 4, 2026 (homepage story rebuild: Rive out, six sections in, measurement wired)
