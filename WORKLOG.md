@@ -20,6 +20,7 @@ kept outside the repo in `EKUZO/Marketing/ads/2026-10-season-one/build/`). No co
   allowlist d1..d12, stores `utm_id`, `site`, parent geo (`x-nf-geo`) and device on the Klaviyo
   event only.
 - `/season1` now lives natively: `public/roadshow/landing.html` moved to `app/season1/landing.html` and is served by `app/season1/route.ts` (static route handler). The `next.config.mjs` rewrite and the `netlify.toml` 200 redirects are gone; no second public address. (Cycle 3, D13.)
+- `app/season1/landing.html`: GA4 (`G-8LM45PX53W`, same as `app/layout.tsx`) added to the ad landing page: gtag.js in `<head>` for `page_view`, and `generate_lead` `{source:'season_one_<ad>'}` on sign-up next to the browser Meta Lead (same conditions, once). No game chips or child data sent to GA. Nothing visible changed (SC-2).
 
 ---
 ## Jamie — October 10, 2026 (Season 01: Meta Lead dedupe, /season1 ad URL)
