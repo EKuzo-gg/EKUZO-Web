@@ -1013,7 +1013,7 @@ const post = async o => {
   if(!LIVE) return {ok:true};
   return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});
 };
-const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||""});
+const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||"",utm_id:qs.get("utm_id")||"",site:qs.get("site")||""});
 let savedEmail="";
 // One Meta event ID per sign-up, reused on retry and shared with the server (CAPI) Lead so Meta counts it once.
 let eventId="", leadSent=false;
