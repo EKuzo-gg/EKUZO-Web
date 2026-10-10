@@ -5,6 +5,22 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop) — October 10, 2026 (Season 01: review, hardening, utm/geo capture)
+
+Build Loop run on the Season 01 sign-up wiring; artifacts in `docs/season1-launch/` (screenshots
+kept outside the repo in `EKUZO/Marketing/ads/2026-10-season-one/build/`). No copy or design changed.
+
+- `public/roadshow/landing.html`: valid Google Fonts URL (the old one returned 400, so no webfonts
+  loaded); pixel `autoConfig` off; no browser Lead when the honeypot is filled; forms can never
+  submit natively; `?ad=` own-property lookup; forwards `utm_id` and `site`.
+- `app/layout.tsx`: pixel `autoConfig` off (automatic click events could carry the game chips' text).
+- `components/ui/SeasonOnePopup.tsx`: no Lead when the honeypot is filled.
+- `app/api/season-one/route.ts` + `lib/metaCapi.ts`: fetch timeouts (3.5 s / 2.5 s / 2 s), input
+  hygiene (null body, unknown step, kidGames, control chars, eventId, eventSourceUrl, IP), `ad`
+  allowlist d1..d12, stores `utm_id`, `site`, parent geo (`x-nf-geo`) and device on the Klaviyo
+  event only.
+
+---
 ## Jamie — October 10, 2026 (Season 01: Meta Lead dedupe, /season1 ad URL)
 
 Meta ads for the Season 01 waitlist optimize on `Lead`, so the sign-up now reports it from
