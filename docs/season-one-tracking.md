@@ -31,10 +31,10 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
 { "email": "parent@example.com", "source": "ad-landing" | "site-popup",
   "ad": "d3", "adName": "...", "where": "top" | "bottom", "attribution": { "utm_source": "..." },
   "page": "/season1?ad=d3", "firstName": "", "eventId": "uuid", "eventSourceUrl": "https://ekuzo.gg/season1?ad=d3&fbclid=...",
-  "company": "" }
+  "ekz_hp": "" }
 ```
 
-`eventId` and `eventSourceUrl` are optional. `company` is a honeypot: both forms carry a hidden, off-screen `company` input that people never see. If it arrives non-empty on the main sign-up, the route logs a warning and returns `{ ok: true }` without calling Klaviyo or sending a Meta Lead. Responses: 400 bad email, 500 Klaviyo key missing, 502 Klaviyo event failed (the page asks the parent to retry), 200 `{ ok: true }` otherwise.
+`eventId` and `eventSourceUrl` are optional. `ekz_hp` is a honeypot: both forms carry a hidden, off-screen `ekz_hp` input (deliberately not a name like `company` that browser autofill recognizes) that people never see. If it arrives non-empty on the main sign-up, the route logs a warning and returns `{ ok: true }` without calling Klaviyo or sending a Meta Lead. Responses: 400 bad email, 500 Klaviyo key missing, 502 Klaviyo event failed (the page asks the parent to retry), 200 `{ ok: true }` otherwise.
 
 ## Env vars (Netlify, scoped to Functions/runtime)
 

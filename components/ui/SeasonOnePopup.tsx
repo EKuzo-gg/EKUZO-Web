@@ -116,7 +116,7 @@ export default function SeasonOnePopup() {
           page: window.location.pathname + window.location.search,
           eventId,
           eventSourceUrl: window.location.href,
-          company: honeypotRef.current?.value || "",
+          ekz_hp: honeypotRef.current?.value || "",
         }),
       });
       if (!res.ok) {
@@ -209,7 +209,7 @@ export default function SeasonOnePopup() {
         <input
           ref={honeypotRef}
           type="text"
-          name="company"
+          name="ekz_hp"
           tabIndex={-1}
           autoComplete="off"
           aria-hidden="true"

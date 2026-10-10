@@ -24,7 +24,7 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * A second call with { step: "age", kidAge } after sign-up records the
  * kid's age band as a profile property (no new subscription).
  *
- * Honeypot: a non-empty `company` on the main sign-up gets a silent 200 with no
+ * Honeypot: a non-empty `ekz_hp` on the main sign-up gets a silent 200 with no
  * Klaviyo write and no Meta Lead.
  *
  * Fails loudly if Klaviyo is unreachable: the email is the whole point, so the
@@ -149,9 +149,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: r.ok });
     }
 
-    // Honeypot: the hidden `company` field is only ever filled by bots. Look
+    // Honeypot: the hidden `ekz_hp` field is only ever filled by bots. Look
     // like a success so they move on, but write nothing and send no Lead.
-    if (clean(body.company)) {
+    if (clean(body.ekz_hp)) {
       console.warn("Season 01 sign-up dropped: honeypot field filled");
       return NextResponse.json({ ok: true });
     }
