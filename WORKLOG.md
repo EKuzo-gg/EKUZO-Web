@@ -19,6 +19,7 @@ kept outside the repo in `EKUZO/Marketing/ads/2026-10-season-one/build/`). No co
   hygiene (null body, unknown step, kidGames, control chars, eventId, eventSourceUrl, IP), `ad`
   allowlist d1..d12, stores `utm_id`, `site`, parent geo (`x-nf-geo`) and device on the Klaviyo
   event only.
+- `/season1` now lives natively: `public/roadshow/landing.html` moved to `app/season1/landing.html` and is served by `app/season1/route.ts` (static route handler). The `next.config.mjs` rewrite and the `netlify.toml` 200 redirects are gone; no second public address. (Cycle 3, D13.)
 
 ---
 ## Jamie — October 10, 2026 (Season 01: Meta Lead dedupe, /season1 ad URL)

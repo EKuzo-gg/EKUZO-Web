@@ -7,7 +7,7 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * POST /api/season-one
  *
  * Season 01 waitlist capture — the site popup (components/ui/SeasonOnePopup)
- * and the parent-ad landing pages (public/roadshow/landing.html) both post here.
+ * and the parent-ad landing pages (app/season1/landing.html, served at /season1 by app/season1/route.ts) both post here.
  *
  * Steps:
  *  1. POST /api/events — "Season 01 Waitlist". Upserts the profile with where

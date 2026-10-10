@@ -12,18 +12,3 @@
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
-
-# Season 01 parent ads point at /season1?ad=dN&utm_... The Next.js rewrite in
-# next.config.mjs did not take effect on Netlify (404 on the dev deploy, 2026-10-10),
-# so serve the static landing page here. A 200 rewrite keeps the URL and the query string.
-[[redirects]]
-  from   = "/season1"
-  to     = "/roadshow/landing.html"
-  status = 200
-  force  = true
-
-[[redirects]]
-  from   = "/season1/"
-  to     = "/roadshow/landing.html"
-  status = 200
-  force  = true
