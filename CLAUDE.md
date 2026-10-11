@@ -4,50 +4,37 @@ The live codebase is the source of truth — that doc describes it, it does not 
 refactor or "fix" existing working pages (especially torn-paper seams and the color-flipping nav) to match it.
 # EKUZO Web — Project Context
 
+<!-- Trimmed 2026-06-07: runbooks → docs/dev-runbook.md, build lessons → docs/learning-log.md,
+     camps build spec → docs/camps-design-decisions.md, coding rules → wiki/tools/karpathy-coding-principles.md.
+     Keep this file lean (target <200 lines). Detail goes in docs/ with a one-line pointer here. -->
+
 ## What we're building
 Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversion site for EKUZO, a youth esports coaching platform. Goal: match the Framer site visually, fix what was broken (forms, commerce), add what was missing (camps page, newsletter), then launch on Netlify.
 
-**Live Framer reference:** https://ekuzo.gg (use Chrome inspector for layout geometry when building sections)
-**Framer project copy:** https://framer.com/projects/EKUZO-Development-copy--aPeMudXJOotFDscfsQbK-ca3Db
-**Figma file:** https://www.figma.com/design/QNqU4NQ1yygnkpItKD56S6/EKUZO-Web **deprioritize Figma, use as reference only**
-
----
+- **Live Framer reference:** https://ekuzo.gg (use Chrome inspector for layout geometry)
+- **Framer project copy:** https://framer.com/projects/EKUZO-Development-copy--aPeMudXJOotFDscfsQbK-ca3Db
+- **Figma:** https://www.figma.com/design/QNqU4NQ1yygnkpItKD56S6/EKUZO-Web — **reference only, deprioritized**
 
 ## Stack
-- **Framework:** Next.js 15 (App Router, Turbopack)
-- **Styling:** Tailwind CSS
-- **Language:** TypeScript
+- **Framework:** Next.js 15 (App Router, Turbopack) · **Styling:** Tailwind · **Language:** TypeScript
 - **Payments:** Stripe with custom Stripe Elements checkout (NOT hosted checkout)
-- **Email Marketing:** Beehiiv (full email automation platform, not just newsletter — welcome sequences, camp prep, reminders, re-enrollment all handled in Beehiiv after subscriber is added)
-- **Hosting:** Netlify
-- **Node:** ~/.nvm/versions/node/v24.14.0/bin/node
+- **Email:** Beehiiv = general nurture (newsletter, popup/footer capture, tags; legacy camps/e100 welcome automations) · Klaviyo = product email (confirmations, prep flows, event-triggered: "Placed Order" / "Registered Pilot"). Split decided 2026-07-15 — see `docs/beehiiv-config.md` § Platform split. New schedule/detail data → Klaviyo events + Sheets, never new Beehiiv custom fields. **Klaviyo gotchas** (flow-clone trigger filters, template API 404s, side-panel discards, event vars) → [`docs/klaviyo-config.md`](docs/klaviyo-config.md) — read it before touching Klaviyo flows.
+- **Hosting:** Netlify · **Node:** `~/.nvm/versions/node/v24.14.0/bin/node`
 
-### Architecture Decisions (confirmed)
-- **No Make.com in payment flow** — Make.com was needed for Framer (no server-side). Next.js API routes handle Stripe + Beehiiv directly. Make.com may be revisited as operational layer if non-engineers need to modify automations.
-- **No Discord notifications** — removed from the registration/payment flow.
-- **No Airtable for v1** — Stripe dashboard + Beehiiv subscriber list is sufficient at current scale. Airtable becomes valuable when running multiple programs simultaneously or needing a staff-facing dashboard.
-- **No Cloudflare Worker** — set aside. Next.js API routes replace it entirely.
-
----
+**Architecture decisions (confirmed):** Next.js API routes handle Stripe + Beehiiv directly — **no Make.com** in the payment flow (retired entirely as of 4/3; ContactModal posts to `/api/contact`). **No Discord** notifications. **No Airtable** for v1 (Stripe dashboard + Beehiiv list is enough at current scale). **No Cloudflare Worker** (API routes replace it). Rationale, rejected alternatives, "when we'd reconsider," and stack evolution → [`docs/architecture-decisions.md`](docs/architecture-decisions.md).
 
 ## Typography
-- **Display/hero headings:** Tungsten Narrow (Hoefler & Co — personal/preview license, loaded as local font from `public/fonts/TungstenNarrow-*.otf`). Weights: Black (900), Bold (700), Semibold (600), Medium (500).
+- **Display/hero:** Tungsten Narrow (Hoefler & Co, local font in `public/fonts/TungstenNarrow-*.otf`). Weights: Black 900, Bold 700, Semibold 600, Medium 500.
 - **Body/UI:** Inter (Google Fonts)
-- **Font class names in Tailwind:** `font-body` = Inter, `font-display` = Tungsten Narrow
-- **Global letter-spacing:** `.font-display` has `letter-spacing: 0.02em` (2%) set in `globals.css` — applies site-wide to all instances of Tungsten font
-- **Heading sizes:** use `clamp()` via `style` prop, not fixed Tailwind text sizes
-
----
+- **Tailwind classes:** `font-display` = Tungsten, `font-body` = Inter
+- **Global letter-spacing:** `.font-display` has `letter-spacing: 0.02em` in `globals.css` — applies site-wide; don't override per-element unless intentional.
+- **Heading sizes:** use `clamp()` via `style` prop, not fixed Tailwind text sizes.
 
 ## Colors (Tailwind custom)
-- `red` = EKUZO brand red (check tailwind.config)
-- `black` = #000
-- `grey` / `bg-[#f0edea]` = off-white section background
-
----
+`red` = EKUZO brand red (see tailwind.config) · `black` = #000 · `grey` / `bg-[#f0edea]` = off-white section background.
 
 ## Products
-1. **EKUZO TEAMS** — school-based semester team program (complex pricing, discuss before building)
+1. **EKUZO TEAMS** — school-based semester team program (complex pricing)
 2. **EKUZO CAMPS** — seasonal week-based camps, AM/PM slots (primary commerce priority)
 3. **EKUZO100** — 4-week home-based individual program
 
@@ -55,173 +42,79 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 
 ## Commerce Architecture
 
-### Flow (confirmed — no Make.com, no Discord)
-1. User fills registration form on `/camps/register` (week/slot per gamer, parent info, gamer info)
-2. Submit → Next.js API route (`/api/camps/register`) creates Stripe Payment Intent with all registration data as metadata → returns `client_secret`
-3. Frontend renders Stripe Elements for card payment
-4. Stripe webhook (`/api/webhooks/stripe`) fires on `payment_intent.succeeded` → calls Beehiiv API to add subscriber with custom fields (gamer name, week, slot, etc.)
-5. Frontend redirects to `/camps/success` with booking summary
+**Flow (confirmed — no Make.com, no Discord):**
+1. User fills registration form → 2. Next.js API route creates Stripe Payment Intent with registration data as metadata, returns `client_secret` → 3. Frontend renders Stripe Elements → 4. Stripe webhook fires on `payment_intent.succeeded` → **emits the Klaviyo product event ("Placed Order" / "Registered Pilot") — this is what sends the purchase confirmation** → enrolls in Beehiiv (nurture list only, no transactional email) → writes Google Sheets → 5. Frontend redirects to success page.
 
-### API Routes (to build)
-- `POST /api/camps/register` — receives form payload, creates Stripe Payment Intent, returns client_secret
-- `POST /api/webhooks/stripe` — handles `payment_intent.succeeded`, enrolls in Beehiiv
-- Success page reads confirmation from Stripe or URL params
+<!-- Corrected 2026-08-04 (learning loop 2026-W32 audit). The flow above previously listed only
+Beehiiv + Sheets, predating the 2026-07-15 platform split recorded in § Stack. Anyone adding a
+product from the old flow would have shipped a silent, customer-facing confirmation-email failure. -->
 
-### Stripe (camps)
-- 10 weeks × 2 slots (AM/PM) = 20 combinations
-- **Launch pricing:** $199 for ALL weeks. Original price $299 shown strikethrough with "Limited-Time Pricing" framing on marketing + register pages. Was framed as "Early Bird Pricing" through April 2026; framing retired 2026-04-29 because the price isn't changing — only the urgency framing was wrong. Stripe Price `lookup_key` is still `ekuzocamps-earlybird-199` (backend identifier, not user-facing) — flagged as stale, can be renamed in a future Stripe dashboard pass.
-- Urgency badges are marketing-only (not capacity-driven): "Filling Fast" / "Only a Few Left" set per-slot in the `WEEKS` data array
-- No promo codes for v1
-- Stripe Price IDs: configured in `.env.local` (`STRIPE_PRICE_CAMPS`). Test + prod products created.
-- Webhook secret (`STRIPE_WEBHOOK_SECRET`): set from Stripe CLI (`whsec_...` in `.env.local`). For production: create webhook endpoint in Stripe Dashboard.
+**Purchase email fires from Klaviyo, never Beehiiv.** Beehiiv is generic nurture only — newsletter,
+capture, tags. Any transactional or product-triggered email (confirmation, prep flow, schedule
+detail) is a Klaviyo event. When adding a product to the webhook, the Klaviyo event is the first
+thing to wire and the thing to test end to end; Beehiiv enrolment is nurture and can fail without a
+customer noticing, the Klaviyo event cannot.
 
-### Beehiiv (email marketing — NOT just newsletter)
-- **Setup complete:** 18 custom fields (camps + e100), multiple tags (camps + e100 funnel + purchase tags), welcome automations scaffolded per program. Full schema in `docs/beehiiv-config.md`.
-- **Full config reference:** `docs/beehiiv-config.md`
-- **Registration flow (wired + tested 3/30):** subscriber added on successful payment with all 13 custom fields. Tags applied via separate POST endpoint. Automation enrollment via `automation_ids`.
-- **IMPORTANT API quirks (learned the hard way):**
-  - Create subscription does NOT support `tags` — use POST `/v2/publications/:pubId/subscriptions/:subId/tags` with `{ "tags": [...] }`
-  - Create subscription uses `automation_ids` (plural, array), NOT `automation_id` (singular)
-  - PUT update endpoint silently ignores `tags` — do not use for tagging
-  - API silently drops unknown fields (no error response)
-  - **Tag REMOVAL is not possible via API.** Beehiiv exposes only POST for subscription tags. Verified 2026-05-05: DELETE /tags, DELETE /tags/:name, DELETE /tags?tags=…, and PATCH /tags all return 404. Docs landing page lists exactly one Subscription Tags endpoint (POST). For "paid wins over abandoned" semantics, exclude further-funnel tags from recovery automation audiences in Beehiiv segmentation. See `docs/beehiiv-config.md` "API Limitations" + "Automations" sections.
-- **Multi-gamer:** `gamer_name` stores comma-separated first names, `camp_week` stores earliest week for automation timing. Per-gamer emails deferred to v2.
-- **Post-registration automation:** welcome sequence scaffolded, camp prep/reminders/follow-up TBD — all managed in Beehiiv's automation builder
-- **Welcome automation IDs:**
-  - Camps: `aut_4db31c63-807e-40fa-9184-f75ff2fcfdcc` (draft, needs real email content before publishing)
-  - EKUZO100: `aut_3dd66d4e-4dbd-410d-8fd5-e2fdacac8556` (wired in webhook; primary e100 confirmation is sent from Klaviyo, this is the supplementary Beehiiv layer)
-- **Homepage:** first-visit popup (gate with localStorage so it only shows once)
-- **Footer:** inline signup form
+**API routes (built):** `POST /api/camps/register`, `POST /api/ekuzo100/register`, `POST /api/webhooks/stripe` (product-aware: **Klaviyo event** + Beehiiv + Sheets), `POST /api/contact`.
 
-### Google Sheets (fulfillment ops layer — built 3/30)
-- One row per gamer written by Stripe webhook on payment success via **Google Apps Script** web app
-- **29 columns** on `ekuzo-purchases` tab (canonical list in `docs/apps-script-squad-endpoints-spec.md`). Plus dedicated `squads` and `squad_members` tabs for squad-link membership — both product-aware (camps + e100 share the tables with a `product` discriminator column added 2026-05-25).
-- Apps Script URL in `GOOGLE_SHEETS_WEBHOOK_URL` env var (Google service account approach abandoned due to Workspace org policy blocking key creation)
+**Stripe (camps):** 10 weeks × 2 slots (AM/PM). **Launch price $199 for all weeks** ($299 strikethrough, "Limited-Time Pricing"). Price `lookup_key` is still `ekuzocamps-earlybird-199` (backend identifier, stale name, fine to rename later). Urgency badges ("Filling Fast" / "Only a Few Left") are marketing-only, set per-slot in the `WEEKS` array. No promo codes v1. Price IDs in `.env.local` (`STRIPE_PRICE_CAMPS`), test + prod created. Webhook secret (`STRIPE_WEBHOOK_SECRET`) in `.env.local`: local via Stripe CLI, **production via a webhook endpoint created in the Stripe Dashboard** (see [`docs/dev-runbook.md`](docs/dev-runbook.md)).
 
-### Make.com (RETIRED — no longer used)
-- ContactModal now posts to `/api/contact` (replaced Make.com as of 4/3)
-- No integrations use Make.com
+**Beehiiv:** 18 custom fields, funnel + purchase tags, welcome automations per program. **Full schema + the hard-won API quirks live in [`docs/beehiiv-config.md`](docs/beehiiv-config.md) — read it before touching Beehiiv code.** Three gotchas that bite hardest: create-subscription does NOT accept `tags` (use the separate POST tags endpoint); it uses `automation_ids` (plural array); **tag removal is impossible via API** — exclude purchase tags from recovery audiences instead. Signup surfaces: homepage **first-visit popup** (gate with `localStorage` so it shows once) + footer **inline signup form**.
 
----
+**Google Sheets (fulfillment ops):** one row per gamer written by the Stripe webhook via Google Apps Script web app. `ekuzo-purchases` tab (29 cols) + `squads` / `squad_members` tabs (product-aware). Canonical column list in [`docs/apps-script-squad-endpoints-spec.md`](docs/apps-script-squad-endpoints-spec.md). URL in `GOOGLE_SHEETS_WEBHOOK_URL`.
 
 ## Modal System
-Global modal state in `context/ModalContext.tsx`. Use `useModal()` hook.
-- `openModal("contact")` → ContactModal (name, org, email/text, message → `/api/contact`)
-- `openModal("enroll")` → EnrollModal (3 program links: EKUZOTeams, EKUZO100, EKUZOCamps)
-- For server components that need modal buttons: use `components/ui/ModalButton.tsx`
-
-### CTAs
-- **"Start a conversation"** → `openModal("contact")`
-- **"Enroll my gamer"** → `openModal("enroll")`
-- Both wired in Nav, FooterBanner, and individual pages via ModalButton
+Global modal state in `context/ModalContext.tsx`; use `useModal()`. `openModal("contact")` → ContactModal (posts to `/api/contact`). `openModal("enroll")` → EnrollModal (3 program links). Server components needing modal buttons use `components/ui/ModalButton.tsx`.
+- **"Start a conversation"** → `openModal("contact")` · **"Enroll my gamer"** → `openModal("enroll")`. Both wired in Nav, FooterBanner, and pages.
 
 ---
 
 ## Page Status
+All programs live under `/programs/`: `ekuzo100`, `ekuzo-teams`, `ekuzo-camps`, each with `/register` + `/success`. Camps v2 redesign is canonical (since 2026-05-20; v1 archived at `docs/archive/ekuzo-camps-v1-pre-052026.tsx.txt`).
 
-### Canonical Routes (as of 4/3)
-All programs live under `/programs/`:
-- `/programs/ekuzo100` — marketing page
-- `/programs/ekuzo100/register` — registration + Stripe payment ($100)
-- `/programs/ekuzo100/success` — payment confirmation
-- `/programs/ekuzo-teams` — marketing page + commerce live ($640/semester with $576 upfront discount or 4× $160 installment plan).
-- `/programs/ekuzo-camps` — marketing page (V2 redesign promoted to canonical 2026-05-20; old V1 archived at `docs/archive/ekuzo-camps-v1-pre-052026.tsx.txt`)
-- `/programs/ekuzo-camps/register` — registration + Stripe payment ($199)
-- `/programs/ekuzo-camps/success` — payment confirmation
+Core pages live: `/`, `/methodology`, `/programs`, `/parents`, `/schools`, `/games`, `/faq`, `/terms-of-service`, `/privacy-policy`, `/blog` (+ posts). Commerce is complete and camps is end-to-end tested. **Still pending:** `/about` page; EKUZO100 end-to-end test payment (code complete). Live build status → `WORKLOG.md`.
 
-### Complete (launched)
-- [x] `/` — Home page
-- [x] `/methodology` — Full page (hero video, How It Works, quote, 10 pillars, CTA)
-- [x] `/programs` — Programs index
-- [x] `/parents` — Families page
-- [x] `/schools` — Schools page
-- [x] `/games` — Games page
-- [x] `/faq` — FAQ accordion
-- [x] `/terms-of-service` — Static
-- [x] `/privacy-policy` — Static
-
-### Commerce (complete)
-- [x] `/api/camps/register` — Stripe Payment Intent for camps
-- [x] `/api/ekuzo100/register` — Stripe Payment Intent for EKUZO100
-- [x] `/api/webhooks/stripe` — Product-aware post-payment: Beehiiv + Google Sheets (camps + ekuzo100)
-- [x] `/api/contact` — Contact form → Google Sheets + Beehiiv lead capture
-- [x] Camps end-to-end tested (3 test payments, single + multi-gamer)
-- [ ] EKUZO100 end-to-end test (code complete, needs test payment)
-### Remaining
-- [ ] `/about` — About page
-- [ ] `/blog` — Blog index (static, no CMS)
-- [ ] `/blog/[slug]` — Blog post (static)
-
-### Redirect rules (next.config.mjs — 12 rules)
-All legacy URLs redirect to canonical `/programs/` routes. See `next.config.mjs` for full list.
-
----
+**Redirects:** all legacy URLs redirect to canonical `/programs/` routes — see `next.config.mjs` (12 rules).
 
 ## Structured Data (JSON-LD)
-
-All Schema.org structured data lives in **`lib/schema.ts`** — the single source of truth. Do NOT hand-roll JSON-LD inside page files. Import from `lib/schema.ts` and render with `<JsonLd data={...} />` from `components/JsonLd.tsx`.
-
-**What's already there:**
-- `rootGraph` — `EducationalOrganization` + `WebSite` + `SiteNavigationElement`, rendered once in `app/layout.tsx` and inherited by every page.
-- `ekuzoCampsCourseSchema` / `ekuzo100CourseSchema` / `ekuzoTeamsCourseSchema` — `Course` + `Offer` per program page.
-- `buildBreadcrumbSchema(trail)` — call on every inner page with `[{name, path}, ...]`.
-- `buildFAQPageSchema(items)` — reuse the page's existing FAQ array so content doesn't drift.
-- `testimonialVideoGraph` — consolidated `@graph` of 9 `VideoObject` nodes (homepage), transcripts read at module load from `public/testimonial-videos/*.txt`.
+All Schema.org data lives in **`lib/schema.ts`** — the single source of truth. Do NOT hand-roll JSON-LD in page files; import from `lib/schema.ts` and render with `<JsonLd data={...} />`. (Already present: `rootGraph`, per-program `Course`+`Offer` schemas, `buildBreadcrumbSchema`, `buildFAQPageSchema`, `testimonialVideoGraph`.)
 
 **Rules:**
-1. Server-render JSON-LD. Never JS-inject — AI crawlers may skip late-bound structured data.
-2. One `<JsonLd>` per schema is fine, but prefer `@graph` when emitting multiple related entities on the same page (see `testimonialVideoGraph`).
-3. `JsonLd.tsx` escapes `<` to `\u003c` to prevent `</script>` break-outs — don't bypass it with a raw `<script>` tag.
-4. When adding a new page type (e.g. `/about` with a `Person` schema, or `/blog/[slug]` with `Article`), put the builder in `lib/schema.ts`, not in the page file.
-5. After any schema change, verify with: `curl -s http://localhost:3001/<path> | grep -o 'application/ld+json'` and paste the final `@graph` into https://validator.schema.org/.
+1. Server-render JSON-LD. Never JS-inject (AI crawlers may skip late-bound data).
+2. Prefer `@graph` when emitting multiple related entities on one page.
+3. `JsonLd.tsx` escapes `<` — don't bypass it with a raw `<script>`.
+4. New page types (e.g. `/about` `Person`, `/blog/[slug]` `Article`) → put the builder in `lib/schema.ts`, not the page file.
+5. After any schema change, verify: `curl -s http://localhost:3001/<path> | grep -o 'application/ld+json'` then paste the `@graph` into https://validator.schema.org/.
 
-Rationale and scoring methodology: see `GEO-SCHEMA-REPORT.md` in the repo root.
+**FAQ copy pulls from canon:** single source of truth for FAQ Q&A is `knowledge-base/company/knowledge/ekuzo-faq-canon.md`. Do NOT hand-write FAQ answers in `page.tsx`. Update canon first, then pull the answer into the page array (wikilinks stripped), leaving a comment noting canon source + sync date. If a page answer beats canon, backport it into canon. Canon-first keeps site, sales, support, and the `FAQPage` JSON-LD consistent — drift feeds inconsistent facts to AI crawlers.
 
-### FAQ copy pulls from the canon
-<!-- Added 2026-05-31 from logs/lessons-pending/2026-05-25-faq-copy-pulls-from-canon.md (KB learning loop 2026-W22) -->
+**Canonical URLs:** `app/layout.tsx` sets `metadataBase: new URL("https://ekuzo.gg")`. Every page `metadata` must include `alternates: { canonical: "/route/path" }`. Client components (register/success) can't export metadata — add a sibling `layout.tsx` server shim. Transactional pages go noindex: register = `robots: { index: false, follow: true }`, success = `robots: { index: false, follow: false }`.
 
-The single source of truth for FAQ questions and answers is `knowledge-base/wiki/domains/ekuzo/ekuzo-faq-canon.md`. Do NOT hand-write or hand-edit FAQ answer copy directly in `page.tsx` files. When adding or changing an FAQ:
+**Before shipping any new page / substantive content change:** run [`docs/ai-optimization-checklist.md`](docs/ai-optimization-checklist.md) (grounded in Google's AI optimization guide; durable version: `knowledge-base/company/marketing/google-ai-optimization-guide.md`).
 
-1. Update the answer in the canon first.
-2. Pull the answer into the page array (wikilinks stripped, trimmed only where a canon answer covers multiple programs and the page is program-specific).
-3. Leave a short comment at the top of the page's FAQ array noting the canon source and sync date, like the one on `app/programs/ekuzo100/page.tsx`.
-
-If a page answer is better than canon (it happens — see the Camps refund/Discord answers), backport it into canon rather than letting the page be the only home. Canon-first keeps the site, sales, and support consistent and keeps the `FAQPage` JSON-LD citable and accurate — drift doesn't just confuse humans, it feeds inconsistent facts to AI crawlers.
-
-Caveats: page-specific trimming is fine and expected (an e100 page shouldn't carry the full multi-program answer) — the rule is about *source of truth*, not forbidding edits. Truly page-unique, non-reusable copy (a one-off CTA microcopy) doesn't need to live in canon.
-
-### Canonical URLs (Next.js metadata)
-
-`app/layout.tsx` sets `metadataBase: new URL("https://ekuzo.gg")`. Every page `metadata` export must include `alternates: { canonical: "/route/path" }` (relative to `metadataBase`). Client components (register / success pages) cannot export metadata — add a sibling `layout.tsx` server shim that declares the metadata and returns `children`. Transactional pages go noindex via the same metadata object: register = `robots: { index: false, follow: true }`, success = `robots: { index: false, follow: false }`.
+**Monthly GEO audit:** run `/audit` from repo root → `reports/YYYY-MM-DD/`. Default target prod; pass a URL to audit a preview. Cadence: first week of each month.
 
 ---
 
-## Camps Page — Build Direction
+## Build Discipline & Coding Rules
 
-**Source:** Variant.com wireframe (mood board → zombie wireframe). Build the structure from the wireframe but apply EKUZO's full visual style (red/black/white, Bebas Neue headings, torn paper dividers, brush art).
+**Autonomous builds run the Build Loop** (ten roles, seven phases, evidence-gated completion): canonical spec at `knowledge-base/company/agents/agent-loop/build-loop.md`. Briefs reference it rather than re-explaining it. First execution: EKUZO 101 pilot (`docs/ekuzo101-pilot/`).
 
-### Wireframe sections (in order)
-1. **Hero** — "EKUZOCAMP" heading, tagline, stats bar (coaches/virtual/teams counts), hero video (`ekuzo-teams-hero.mp4` or camps-specific), "Register Now" + "Learn More" CTAs
-2. **Value props** — 6 cards: Pro Coaches, Virtual, Teams, Practice, Growth, Balance
-3. **Daily Schedule** — timeline: Check-in & Warm-up → Skill Drills → Tournament Play → VOD Review & Feedback
-4. **Expert Coaches section** — image left, copy right, credentials
-5. **Requirements** — Basic computer + headphones; League of Legends section with checklist
-6. **Testimonials** — video testimonials (use our `/testimonial-videos/` assets)
-7. **Registration form** — choose week (week cards with AM/PM slots + availability + price), parent info, gamer info, payment (Stripe Elements)
-8. **FAQ accordion** — 5 common questions
-9. **Footer CTA** — "Enroll into a transformational program today"
+**One section at a time.** Before coding a section: screenshot-crop it from live Framer → specify geometry explicitly (container, min-height, padding, absolute offsets) → build to spec → verify against the screenshot before moving on. Default breakpoint = 1440px desktop; stack to single column at `md` (768px) unless Framer differs.
 
-### Separate pages referenced from camps
-- `/camps/schedule` — 6-week grid (Week 1-6, AM/PM slots, availability badges, prices)
-- `/camps/checkout` — custom Stripe Elements checkout (credit card form + order summary sidebar + promo code)
-- `/camps/success` — "LEVEL UP!" confirmation (booking summary, gamer name, status=Paid, total, receipt download, next steps: check inbox / join Discord / download game)
+**Coding behavior rules (apply to both Jamie's Cowork Claude and Aaron's Claude Code).** Full rationale: `knowledge-base/company/agents/reference/tools/karpathy-coding-principles.md`. The eight, condensed:
+1. **Think before coding** — state assumptions, surface alternatives, ask when unclear. Don't guess silently.
+2. **Simplicity first** — minimum code that solves the problem; no speculative abstractions.
+3. **Surgical changes** — touch only what the request requires; match existing style; every changed line traces to the request.
+4. **Goal-driven execution** — define verifiable success criteria + a step plan with checks before coding.
+5. **Verify before done** — prove it works (tests, logs, diff vs main). "Would a staff engineer approve this?"
+6. **Autonomous bug fixing** — given a bug report, find the logs/errors/failing tests yourself and fix it.
+7. **Self-improvement loop** — after any correction, note the pattern; propose a CLAUDE.md addition if a rule is missing.
+8. **Demand elegance (balanced)** — for non-trivial changes, ask if there's a cleaner way; skip for simple fixes.
 
-### Parents page (from wireframe — different from Framer /parents)
-- "YOUR GAMER'S GROWTH IS OUR MISSION" hero
-- Safety & Moderation Protocol (3 points with icons)
-- Meet Our Lead Coaches (3 coach cards)
-- Common Parent Questions (FAQ accordion)
-- "Still Have Questions?" CTA (Contact Support + Schedule a Call)
+**Voice stack loads before copy drafting.** <!-- Added 2026-07-19 from knowledge-base 2026-07-15-load-voice-stack-before-parent-facing-copy.md (learning loop 2026-W29). De-duplicated 2026-08-03 (learning loop 2026-W31): the rule had been written four times in four files and recurred after each landing, so the canonical text was consolidated into voice-dna.md and this became a pointer. --> Before drafting or proposing any user-facing copy (page headlines, section intros, helper/error states, email templates, CTAs), **load the voice stack per `knowledge-base/system/methodology/voice-dna.md` § "Load before you write"** — that section is canonical and states the load order, the trigger, and the carve-outs. Short version: `voice-dna.md` + the byline holder's voice evidence + `ekuzo-messaging-voice.md`, loaded *before* the first draft, not as a publish-time lint; founder-voice surfaces add `jamie-writing-voice.md`. Applies to copy proposed in chat, not just copy written to files. Lint check before presenting: zero em dashes, no compressed "It's not X. It's Y." reframes, reframes asserted positively.
+
+**Clarity Gate** — before a spec or non-trivial build, rate Goal / Constraints / Success criteria / Context as High/Med/Low; resolve any load-bearing Med/Low (usually one question) before building. Full rule: `knowledge-base/system/methodology/workflows.md` → "The Clarity Gate" (consolidated 2026-07-03; adds task-tuned question sets for scope cuts, voice-led writing, batch sorting, and pipelines).
 
 ---
 
@@ -230,414 +123,53 @@ Caveats: page-specific trimming is fine and expected (an e100 page shouldn't car
 | Component | Location | Notes |
 |-----------|----------|-------|
 | Nav | `components/layout/Nav.tsx` | variant="light"\|"dark", modal wired |
-| Footer | `components/layout/Footer.tsx` | Nav columns + social + copyright |
-| FooterBanner | `components/FooterBanner.tsx` | Red CTA strip above footer, modal wired |
-| Button | `components/ui/Button.tsx` | red-filled, red-outlined, white-filled, white-outlined |
-| ModalButton | `components/ui/ModalButton.tsx` | Client component for modal CTAs in server pages |
-| TornPaper | `components/ui/TornPaper.tsx` | color: white/black/red, flip prop |
+| Footer | `components/layout/Footer.tsx` | nav columns + social SVGs + copyright |
+| FooterBanner | `components/FooterBanner.tsx` | red CTA strip above footer, modal wired |
+| Button | `components/ui/Button.tsx` | red/white × filled/outlined |
+| ModalButton | `components/ui/ModalButton.tsx` | client component for modal CTAs in server pages |
+| TornPaper | `components/ui/TornPaper.tsx` | color white/black/red, flip prop (see learning-log for the two divider systems) |
 | FAQAccordion | `components/ui/FAQAccordion.tsx` | |
-| Icon | `components/ui/Icon.tsx` | serves from /public/icons/[name].svg |
-| ContactModal | `components/ui/ContactModal.tsx` | Posts to Make.com webhook |
+| Icon | `components/ui/Icon.tsx` | serves from `/public/icons/[name].svg` |
+| ContactModal | `components/ui/ContactModal.tsx` | posts to `/api/contact` |
 | EnrollModal | `components/ui/EnrollModal.tsx` | 3 program links |
-| ModalRenderer | `components/ui/ModalRenderer.tsx` | Mounted in root layout |
+| ModalRenderer | `components/ui/ModalRenderer.tsx` | mounted in root layout |
 | TestimonialsCarousel | `components/TestimonialsCarousel.tsx` | 9 videos, 3 visible |
 | EcosystemAnimation | `components/EcosystemAnimation.tsx` | Rive scroll animation |
 
----
-
-## Asset Locations
-
-### Videos
-- `public/videos/pedagogy-hero.mp4` — Methodology page hero
-- `public/videos/ekuzo100-hero.mp4` — EKUZO100 page hero
-- `public/videos/ekuzo-teams-hero.mp4` — EKUZOTeams page hero
-
-### Testimonial videos (9 files)
-All in `public/testimonial-videos/`:
-- `becky-parent.mp4`, `brad-parent-girl-gamer.mp4`, `debbie-potter-monroe.mp4`
-- `laura-hogan-mirus-academy.mp4`, `rajitha-parent.mp4`
-- `student-i-learned.mp4`, `student-man-of-my-word.mp4`
-- `student-thank-you-ekuzo.mp4`, `student-you-should-join.mp4`
-
-Captions: matching `.txt` files in same folder (for bots/SEO).
-
-### Icons (SVG, `currentColor`)
-All in `public/icons/`:
-**Black set (29):** clock, swords, book, camada, flame, flash, confidence, heart, leadership, skills, chat, handshake, trophy, handwave, speaking, confidence-2, strategy, key, roles, hard-problem, run-first, easy, youth, calendar, enthusiasm, team, visualize, key-2, swords-2
-**White set (4):** swords-white, clock-white, camada-white, trophy-white
-
-### Images
-All in `public/images/` — see full list with `ls public/images/`.
-Key groups: `torn-paper-*`, `brush-stroke-*`, `pedagogy-hero-*`, `schools-*`, `parents-*`, `coaching-*`, `ekuzoteams-*`, `ekuzo100-*`, `community-*`, `home-*`
-
----
-
-## Known Issues / Deferred
-
-1. **Rive animation (EcosystemAnimation)** — currently `SCROLL_PX_FOR_FULL_PROGRESS = 10000`. Programs/parents pages need 14000. Consider adding `scrollPx` prop. May also redesign the EKUZO 5 animation entirely.
-2. **Scroll/parallax sections** — Framer has scroll-linked animations throughout. These will be simplified or replaced with CSS-only equivalents in Next.js.
-3. **Stripe Price IDs** — Not yet wired. Add to `.env.local` once products configured.
-4. **Homepage layout** — built, needs full visual QA against live Framer site.
-5. **Social icons in Footer** — currently text placeholders (IG, FB, YT, DC, X, TK). Need real SVG icons.
-6. **Sticky mobile CTA bar** — "Enroll my gamer | Start a conversation" fixed bottom bar. Custom implementation, had issues in Framer that carried over. Revisit behavior.
-7. **Torn paper universal pass** — needs to be done across all pages. See Learning Log for the pattern.
-
----
-
-## Learning Log
-
-### Torn Paper Dividers — Two Systems
-
-**Assets live in:** `public/images/new torn paper/`
-
-There are two types of torn paper dividers. Know which one you need before building.
-
-#### 1. One-sided dividers (tops & bottoms) — use `<TornPaperDivider>`
-- These are the standard system. Each PNG has texture on ONE edge only (top or bottom).
-- Naming: `torn-paper-{color}-top-{style}@2x.png` / `torn-paper-{color}-bottom-{style}@2x.png`
-- Colors: white, grey, black, red. Styles: 1, 2.
-- Use via `<TornPaperDivider color="grey" variant="top" style={1} />`
-- **Placement rule:** The divider must be OUTSIDE the `overflow-clip` section but INSIDE an `overflow-visible` wrapper div. If you put it inside the clipped section, the overlapping half gets cut off and it won't be visible.
-- Pattern:
-  ```jsx
-  <div className="relative overflow-visible">
-    <TornPaperDivider color="grey" variant="top" style={1} />
-    <section className="bg-[#f0edea] relative overflow-clip">
-      ...
-    </section>
-    <TornPaperDivider color="grey" variant="bottom" style={1} />
-  </div>
-  ```
-
-#### 2. Whole dividers (both edges) — raw background-image div
-- These PNGs have paper texture on BOTH the top and bottom edges. They straddle two sections.
-- Naming: `torn-paper-{color}-{style}@2x.png` (no "top"/"bottom" suffix)
-- **Do NOT use `<TornPaperDivider>` for these.** Use a raw `<div>` with `backgroundImage`.
-- The div is positioned absolutely at the bottom of a wrapper, with `translateY(52%)` so it hangs half into the section below.
-- **Critical:** The div must be a child of the `overflow-visible` wrapper, NOT inside the `overflow-clip` section. Otherwise the bottom half gets clipped and you won't see it overlap.
-- The wrapper needs `zIndex: 1` and the section below needs `zIndex: 0` (or its wrapper does) so the torn paper renders on top.
-- The section below should use negative `marginTop` + extra `paddingTop` so its background extends up behind the torn paper.
-- Pattern (see methodology hero → How It Works for reference):
-  ```jsx
-  {/* Section above */}
-  <div className="relative overflow-visible" style={{ zIndex: 1 }}>
-    <section className="bg-white relative overflow-clip" style={{ paddingBottom: "clamp(160px, 22vw, 300px)" }}>
-      ...
-    </section>
-    {/* Whole torn paper — OUTSIDE section, INSIDE wrapper */}
-    <div
-      className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none select-none"
-      style={{
-        height: "clamp(115px, 19vw, 300px)",
-        transform: "translateY(52%)",
-        backgroundImage: "url(/images/new%20torn%20paper/torn-paper-grey-1@2x.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-      aria-hidden="true"
-    />
-  </div>
-
-  {/* Section below — pulled up behind the torn paper */}
-  <div className="relative overflow-visible" style={{ zIndex: 0 }}>
-    <section className="bg-[#f0edea] relative"
-      style={{ marginTop: "clamp(-60px, -10vw, -150px)", paddingTop: "clamp(140px, 24vw, 294px)" }}>
-      ...
-    </section>
-  </div>
-  ```
-
-**Common mistake:** Putting the torn paper div inside the `overflow-clip` section. It will look like the bottom is being cut off / overrun by the section below. Move it outside the section into the `overflow-visible` wrapper to fix.
-
-### Never `fs.readFileSync` from `public/` in server code
-
-**What broke:** April 14, 2026. `lib/schema.ts` read testimonial `.txt` captions at module load via `fs.readFileSync(path.join(process.cwd(), "public", "testimonial-videos", ...))` to populate `VideoObject` structured data. Local builds passed. Netlify **deploy** (not build) failed at the function-upload step — the zipped `___netlify-server-handler.zip` exceeded Netlify's 50MB limit because Next.js file tracing pulled the entire `public/testimonial-videos/` directory (420MB of MP4s) into the serverless function bundle.
-
-**Why:** Files under `public/` are normally served from the CDN and never bundled into server functions. But `fs.readFileSync` with a path under `public/` causes Next.js static analysis to trace that directory into the function bundle — it has no way to know you only wanted the `.txt` files, so it grabs everything. The MP4 siblings got swept up.
-
-**Rules:**
-1. **Never** `fs.readFileSync` (or any `fs` call) against a path under `public/` from server code. Not in server components, not in route handlers, not at module scope.
-2. If you need file content at runtime and it's small and static, inline it as a string literal in a `.ts` module (see `lib/testimonialTranscripts.ts` for the pattern).
-3. If you need file content at build time only, read it in a Node script and write out a generated `.ts` file that gets imported.
-4. If you genuinely need to read a file at runtime, put it outside `public/` (e.g. `data/`) so file tracing can include just that file.
-5. Belt-and-suspenders: `next.config.mjs` now has `outputFileTracingExcludes` to keep `public/testimonial-videos/**` out of all function bundles. Don't remove it — it only costs a line of config and it's a hard guard.
-6. `next build` succeeding locally does NOT prove the Netlify deploy will succeed. It only proves the Next.js build compiled. The function-size limit is enforced at deploy time. Check `.next/server` size (`du -sh .next/server`) and `find .next -name "*.mp4"` before pushing anything that touches file I/O.
-
-Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, exclude videos from trace").
-
-### Figma Asset Downloads
-- Figma MCP asset URLs are blocked by the VM proxy (exit code 56 from curl). When a Figma asset is needed, ask the user to export it from Figma and drop it into the project. Reference the Figma component name so they know what to export.
-
-### Button States
-- All interactive buttons should have: `hover:brightness-110 active:scale-[0.97~0.99] active:brightness-90 transition-all duration-150`
-- Matches the existing `Button.tsx` variant pattern
-
-### Font Display
-- Tungsten Narrow is loaded as a local font (not Google Fonts). Weights: Black (900), Bold (700), Semibold (600), Medium (500).
-- Global `letter-spacing: 0.02em` on `.font-display` in `globals.css` — do not override per-element unless intentional.
-- Remove per-element `letterSpacing` style props on `font-display` elements so the global value applies consistently.
-
----
-
-## Development
-
-```bash
-# Start dev server
-~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next dev
-
-# TypeScript check
-~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/tsc --noEmit
-
-# Build (note: Turbopack/PostCSS issue in prod build - investigate before deploy)
-~/.nvm/versions/node/v24.14.0/bin/node node_modules/.bin/next build
-```
-
-### Local Payment Testing (Stripe webhooks)
-
-When testing payments locally, Stripe needs a way to reach your machine. The Stripe CLI bridges this. You need **two terminal tabs** running side by side:
-
-**Tab 1 — Stripe webhook forwarding:**
-```bash
-stripe listen --forward-to localhost:3001/api/webhooks/stripe
-```
-This prints a webhook signing secret (`whsec_...`). Copy it into `.env.local` as `STRIPE_WEBHOOK_SECRET` (only needed once — it stays the same until you log out of Stripe CLI).
-
-**Tab 2 — Dev server:**
-```bash
-cd ~/Desktop/EKUZO/Projects/EKUZO-Web && npx next dev -p 3001
-```
-
-**Test card:** `4242 4242 4242 4242`, any future expiry, any CVC, any ZIP.
-
-**What happens on a successful test payment:**
-1. Stripe sends `payment_intent.succeeded` → Stripe CLI forwards it to `localhost:3001/api/webhooks/stripe`
-2. Webhook writes gamer data to Google Sheets (ekuzo-purchases, squads, squad_members tabs)
-3. Webhook writes profile properties to Klaviyo (gamer name, camp week, squad link, etc.)
-4. Browser redirects to `/programs/ekuzo-camps/success?payment_intent=pi_xxx&redirect_status=succeeded`
-
-**First-time setup (one-time):**
-```bash
-brew install stripe/stripe-cli/stripe   # install
-stripe login                             # authenticate via browser
-```
-
-**Troubleshooting:**
-- `Invalid API Key` → check `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` in `.env.local` start with `sk_test_` and `pk_test_`
-- `ERR_CONNECTION_REFUSED` on redirect → check `NEXT_PUBLIC_SITE_URL` in `.env.local` matches your dev server port (should be `http://localhost:3001`)
-- `Webhook signature verification failed` → the `STRIPE_WEBHOOK_SECRET` in `.env.local` doesn't match. Copy the `whsec_` value from the `stripe listen` output and restart the dev server.
-- Webhook fires but nothing lands in Sheets/Klaviyo → check the terminal running `stripe listen` for response status codes. 200 = success, 400/500 = check the dev server terminal for error logs.
-
----
-
-## AI Optimization Checklist
-
-Before shipping any new page or substantive content change, run through
-[`docs/ai-optimization-checklist.md`](docs/ai-optimization-checklist.md).
-It's the operational box-checker grounded in Google's official AI
-optimization guide (last updated 2026-05-15). Covers content (non-commodity
-is the highest-leverage move), technical, schema, accessibility / agent-
-readiness, and what Google explicitly says you don't need to do
-(llms.txt isn't required, no "chunking," no special markup, no inauthentic
-mentions, schema is useful but not the secret sauce).
-
-Durable methodology behind the checklist:
-`knowledge-base/wiki/frameworks/google-ai-optimization-guide.md`.
-
-## Monthly GEO Audit
-
-Run `/audit` in Claude Code from the repo root to generate the full GEO
-audit suite (schema + citability + crawlers + llms.txt across 11 URLs).
-Output goes to `reports/YYYY-MM-DD/` with a SUMMARY.md pulling all scores
-into one table and diffing against the previous month if available.
-
-Default target is prod (`https://ekuzo.gg`). Pass a URL to audit a branch
-preview instead: `/audit https://dev--ekuzo.netlify.app`.
-
-Cadence: monthly (first week of each month works well). The dated folder
-structure gives you a trend line. Regressions get flagged in the summary.
-
----
-
-## Troubleshooting
-
-### "Cannot find module" / "ENOENT build-manifest.json"
-Turbopack's build cache gets corrupted when lots of files change in one session. Fix it with these 3 steps:
-
-```bash
-# Step 1: Stop the dev server
-# Press Ctrl+C in the terminal where it's running
-
-# Step 2: Delete the stale build cache
-rm -rf .next
-
-# Step 3: Restart the dev server (rebuilds everything fresh)
-npx next dev -p 3001
-```
-
-**When does this happen?** Usually after rapid edits to shared components (Nav, Footer, layout files) that are imported on every page. The compiled chunks get out of sync.
-
-**One-liner (stop server first with Ctrl+C, then paste this):**
-```bash
-cd ~/Desktop/EKUZO/Projects/EKUZO-Web && rm -rf .next && npx next dev -p 3001
-```
-
-**How to avoid it:** Restart the dev server every so often during heavy editing sessions. If you see any weird "module not found" errors, it's almost always this.
-
-### Large Binaries — Git LFS + Pre-Commit Hook
-
-**Tracked via LFS:** `*.mp4`, `*.mov`, `*.webm`, `*.riv` (see `.gitattributes`). New files matching these patterns route through Git LFS automatically when staged.
-
-**Pre-commit hook:** `.husky/pre-commit` blocks any commit containing a file larger than 10MB that isn't LFS-tracked. Activated automatically by `npm install` (the `prepare: husky` script). If you see `BLOCKED: {file} is {N}MB` on commit, you have two options:
-
-1. **Route the file through LFS** (preferred for videos, animations, or any large binary asset):
-   ```bash
-   git lfs track "*.{ext}"      # e.g. git lfs track "*.glb"
-   git add .gitattributes
-   git add path/to/file.{ext}
-   git commit
-   ```
-   The hook will skip LFS-tracked files because their staged content is a tiny pointer, not the binary.
-
-2. **Serve the file externally** (preferred for anything the browser loads at runtime — host on a CDN, S3, or the Netlify static asset layer). Delete the local copy before committing.
-
-**What NOT to do:** don't `--no-verify` past the hook. The 10MB cap is there because Netlify's serverless function bundle limit is 50MB and one stray 20MB asset swept in by Next.js file tracing can break a production deploy (see the earlier Learning Log entry about `fs.readFileSync` from `public/`).
-
-**Verifying the setup after a fresh clone:**
-```bash
-git lfs install         # hooks LFS into this clone
-git lfs track           # lists the 4 tracked patterns
-cat package.json | grep prepare   # confirms husky prepare script
-ls .husky/pre-commit    # confirms hook exists and is executable
-```
-
-**Forward-looking only:** this setup does NOT migrate existing files into LFS. Historical MP4s and RIVs that were committed before this setup stay as-is. New files of tracked extensions go through LFS automatically; a migration pass can be done later if the `.git` directory grows unmanageable.
-
----
-
-## Build Discipline (from Cursor feedback)
-
-**One section at a time.** Before coding any section:
-1. Screenshot crop of that section from live Framer site
-2. Specify geometry explicitly: container type, min-height, padding, absolute children with offsets
-3. Build to that spec
-4. Verify against screenshot before moving on
-
-**Breakpoints:** Default = 1440px desktop. Stack to single column at `md` (768px) unless Framer shows different behavior.
-
-**Objective checklist per section:** e.g. "headline font-black uppercase, max-w correct, torn paper 100px strip, no white gap between sections."
-
----
-
-## Coding Behavior Rules (adapted from Karpathy principles)
-
-These apply to both Jamie's and Aaron's Claude instances. They reduce the most common LLM coding mistakes.
-
-### Think before coding
-- State assumptions explicitly. If uncertain, ask before implementing.
-- If multiple approaches exist, present the options — don't pick silently.
-- If something in the request is unclear, stop and ask. Don't guess.
-- **Clarity Gate** — before writing a spec or starting non-trivial build work, rate Goal / Constraints / Success criteria / Context (brownfield) as High/Med/Low. If any load-bearing dimension is Medium or Low, resolve it (usually one targeted question) before building. Full rule: `knowledge-base/methodology/workflows.md` → "Clarity Gate Before a Build or Spec Handoff".
-
-### Simplicity first
-- Write the minimum code that solves the problem. Nothing speculative.
-- No abstractions for single-use code. No "flexibility" that wasn't requested.
-- No error handling for impossible scenarios.
-- If 200 lines could be 50, rewrite it.
-
-### Surgical changes
-- Touch only what the request requires. Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken. Match existing style, even if you'd do it differently.
-- If your changes create unused imports/variables, clean those up. Don't remove pre-existing dead code unless asked.
-- **Every changed line should trace directly to the request.**
-
-### Goal-driven execution
-- Before multi-step work, state a brief plan with verification for each step:
-  ```
-  1. [Step] → verify: [check]
-  2. [Step] → verify: [check]
-  ```
-- Prefer verifiable goals: "write a test that reproduces the bug, then fix it" over "fix the bug."
-- Run the dev server / TypeScript check after changes to confirm nothing broke.
-
-### Verify before done
-- Never mark a task complete without proving it works. Run the dev server, check the page, confirm the output.
-- Diff behavior between `main` and your changes when relevant.
-- Ask yourself: "Would a staff engineer approve this?"
-
-### Autonomous bug fixing
-- When given a bug report: just fix it. Don't ask for hand-holding or extra context you can find yourself.
-- Point at logs, errors, failing tests — then resolve them.
-- Zero context switching required from the user. Go find the problem and fix it.
-
-### Self-improvement loop
-- After ANY correction from Jamie or Aaron, note the pattern so the same mistake doesn't repeat.
-- If a mistake reveals a gap in this CLAUDE.md (missing convention, unclear rule), propose an addition.
-- Review `WORKLOG.md` at session start to learn from recent changes and corrections.
-
-### Demand elegance (for non-trivial changes only)
-- For non-trivial changes: pause and ask "is there a more elegant way?"
-- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution."
-- Skip this for simple, obvious fixes — don't over-engineer. This rule is about quality, not perfectionism.
+**Asset locations:** videos in `public/videos/`, 9 testimonial videos (+ `.txt` captions) in `public/testimonial-videos/`, icons in `public/icons/` (SVG, `currentColor`), images in `public/images/`. Full inventory (icon names, image groups, video map) → [`docs/assets.md`](docs/assets.md); `ls` the dir when in doubt.
 
 ---
 
 ## Team & Collaboration
 
-### People
-- **Jamie** — CEO/orchestrator. Handles commerce (Stripe), form routing (Beehiiv/Make), API routes, data flow, copy updates. Uses Claude via Cowork.
-- **Aaron** — Lead designer. Handles front-end: visual QA, CSS, layout, component builds, design fidelity, copy updates. Uses Claude Code (Claude Max).
+**People:**
+- **Jamie** — CEO/orchestrator. Commerce (Stripe), form routing (Beehiiv), API routes, data flow, copy. Uses Claude via Cowork.
+- **Aaron** — lead designer. Front-end: visual QA, CSS, layout, component builds, design fidelity, copy. Uses Claude Code.
 
-### Important for Claude instances
-- **Read `WORKLOG.md` at the start of every session.** It tracks what each person changed since their last commit. This is how you stay aware of the other person's work.
-- **Update `WORKLOG.md` before every commit.** Add an entry at the top with name, date, and what changed.
-- Aaron and Jamie are both new to terminal (started this week). Give clear, step-by-step instructions. Don't assume they know shortcuts, flags, or conventions. When in doubt, explain what a command does before asking them to run it.
+**File ownership (soft boundaries):** Aaron's lane = `app/*/page.tsx`, `components/`, `globals.css`, `public/images|icons/`. Jamie's lane = `app/api/`, `.env.local`, `context/`, commerce/payment logic. Shared = `CLAUDE.md`, `WORKLOG.md`, page copy, `Button.tsx` / `ModalButton.tsx`. Communicate before touching the other's lane; git only conflicts when both edit the same lines.
 
-### File ownership (soft boundaries)
-Aaron and Jamie communicate before touching each other's areas, but here's the general split:
+- **Read `WORKLOG.md` at the start of every session** (tracks what each person changed) and **update it before every commit.**
+- Branch + git workflow, local payment testing, and build-cache/LFS troubleshooting → [`docs/dev-runbook.md`](docs/dev-runbook.md). Short version: work on `dev`, pull first, ping each other before editing shared files, merge `dev`→`main` to go live.
 
-**Aaron's lane (front-end):**
-- `app/*/page.tsx` — page layouts and sections
-- `components/` — all UI and section components
-- `app/globals.css` — styles
-- `public/images/`, `public/icons/` — assets
+---
 
-**Jamie's lane (orchestration):**
-- `app/api/` — API routes (Stripe, webhooks, etc.)
-- `.env.local` — environment variables
-- `context/` — app state (modals, etc.)
-- Commerce/payment flow logic
+## Reference Docs (extracted from this file — open when relevant)
 
-**Shared (both may edit):**
-- `CLAUDE.md`, `WORKLOG.md` — project context
-- Copy text within any page
-- `components/ui/Button.tsx`, `components/ui/ModalButton.tsx` — shared UI primitives
+- [`docs/dev-runbook.md`](docs/dev-runbook.md) — local Stripe payment testing, "module not found" cache fix, Git LFS pre-commit hook, git branch workflow.
+- [`docs/learning-log.md`](docs/learning-log.md) — torn-paper divider systems (two of them), **never `fs.readFileSync` from `public/`** (broke a Netlify deploy), Figma asset export, button states, font display.
+- [`docs/beehiiv-config.md`](docs/beehiiv-config.md) — full Beehiiv field/tag/automation schema + API limitations.
+- [`docs/architecture-decisions.md`](docs/architecture-decisions.md) — stack decisions, rejected alternatives, reconsider conditions, evolution timeline.
+- [`docs/camps-design-decisions.md`](docs/camps-design-decisions.md) — camps page as-built spec + design decision log.
+- [`docs/assets.md`](docs/assets.md) — full asset inventory (icon names, image groups, video map, fonts).
+- [`docs/tooling.md`](docs/tooling.md) — callable skills, slash commands (`/audit`), agent packs, and run cadence.
+- [`docs/ai-optimization-checklist.md`](docs/ai-optimization-checklist.md), `GEO-CITABILITY-SCORE.md` — SEO/GEO methodology + per-page citability scoring.
 
-### Git workflow (updated April 8, 2026)
-Two branches with Netlify deploys:
-- **`dev`** — day-to-day work branch. Both Aaron and Jamie push here. Netlify auto-deploys to `dev--ekuzo.netlify.app` (preview URL).
-- **`main`** — production branch. Deploys to `ekuzo.gg` (live site). Only updated by merging `dev` into `main`.
+---
 
-**Daily rules:**
-1. `git checkout dev` — always work on dev, never push directly to main
-2. `git pull origin dev` before starting work
-3. Tell each other before working (Slack/text) so you don't edit the same file
-4. Commit and push to `dev` when done
-5. Check the dev preview URL to confirm changes look right
-6. If you get a merge conflict, stop and talk — don't force push
+## Known Issues / Deferred
 
-**To go live (merge dev → main):**
-```bash
-git checkout main
-git pull origin main
-git merge dev
-git push origin main
-git checkout dev
-```
-
-### Preventing overwrites
-Aaron's front-end work will typically be ahead of Jamie's orchestration work. This is fine because they touch different files. The risk is small, but to be safe:
-- Aaron works in `components/` and `app/*/page.tsx`
-- Jamie works in `app/api/` and `context/`
-- If either needs to touch the other's area, communicate first
-- Git will auto-merge changes to different files. Conflicts only happen when both edit the same lines in the same file.
+1. **Rive animation (EcosystemAnimation)** — `SCROLL_PX_FOR_FULL_PROGRESS = 10000`; programs/parents pages need 14000. Consider a `scrollPx` prop. May redesign the EKUZO 5 animation.
+2. **Scroll/parallax sections** — Framer scroll-linked animations are being simplified / replaced with CSS-only equivalents.
+3. **Homepage layout** — needs full visual QA against the live Framer site.
+4. **Sticky mobile CTA bar** — "Enroll my gamer | Start a conversation" fixed bottom bar; had issues in Framer that carried over. Revisit behavior.
+5. **Torn paper universal pass** — apply the divider pattern (see learning-log) across all pages.

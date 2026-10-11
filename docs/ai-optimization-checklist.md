@@ -8,7 +8,7 @@ Use this when:
 - Running the monthly `/audit` workflow
 - Onboarding new content (blog posts, program pages)
 
-**Durable methodology behind this checklist** lives at `knowledge-base/wiki/frameworks/google-ai-optimization-guide.md`. This file is the operational box-checking version.
+**Durable methodology behind this checklist** lives at `knowledge-base/company/marketing/google-ai-optimization-guide.md`. This file is the operational box-checking version.
 
 ---
 
@@ -19,6 +19,18 @@ Google's position: optimizing for AI Overviews / AI Mode is still SEO. There's n
 ---
 
 ## Pre-ship checklist for any new page
+
+### Format decision (before drafting)
+<!-- Added 2026-08-04 from knowledge-base/raw/social/2026-08-04-vengeons-24h-ranking-checklist.md (step 2). Intent is covered by ai-traffic-intent.md; the format decision downstream of intent was not. -->
+
+- [ ] **Read the live SERP for the target query before choosing the page type.** What Google is
+  already ranking tells you what it thinks the query wants. If the top 10 are product or program
+  pages and we plan a blog article, we are entering the wrong race. Common outcomes: a program page,
+  a comparison page, a guide, or a FAQ block on an existing page rather than a new URL.
+- [ ] **Name the target query and the chosen format in the brief.** One line. If neither can be
+  named, the page has no search job and should be evaluated on other grounds.
+- [ ] **Confirm we are not splitting an existing page's topic.** If an existing EKUZO page already
+  targets this query, strengthen it instead of shipping a competitor to ourselves.
 
 ### Content layer (highest leverage per Google)
 
@@ -46,6 +58,20 @@ Google's position: optimizing for AI Overviews / AI Mode is still SEO. There's n
 - [ ] **Mobile-friendly** — responsive layouts, tap targets, readable type.
 - [ ] **Core Web Vitals** — LCP, CLS, INP within green thresholds. Use PageSpeed Insights for a spot check.
 - [ ] **Semantic HTML where natural.** `<article>`, `<section>`, `<nav>`, proper heading hierarchy (one H1 per page, H2/H3 not skipped). Don't obsess about perfect HTML, but don't shred semantics either.
+- [ ] **At least 5 internal links point AT the new page** from existing pages, before it ships.
+  <!-- Added 2026-08-04 from knowledge-base/raw/social/2026-08-04-vengeons-24h-ranking-checklist.md (step 5). Inbound internal links were not previously a gate; only outbound linking was implied. -->
+  Not links *from* the new page, links *to* it. A page nothing points at is a page nothing crawls.
+  Sources to check: related blog posts, the relevant program page, `/faq`, the blog index, and any
+  page whose topic genuinely overlaps. If we cannot find five honest placements, that is a signal
+  the page duplicates something we already have, or targets a topic the site has no surrounding
+  context for.
+- [ ] **Anchors carry the entity and the relationship.** "Read more" and "click here" pass link
+  value and zero association. Name the thing being linked to. Five vague anchors count as five
+  links and do none of the work.
+  <!-- Added 2026-08-04 from knowledge-base/raw/social/2026-08-04-floate-position-9-30-query-gap-method.md (step 5). The Vengeons gate counted links; this is the part that makes them mean something. -->
+- [ ] **Visible last-updated date rendered in the HTML,** not only in schema. Freshness reads as a
+  live retrieval signal. Note: three date formats coexist across blog posts as of the 2026-07-28
+  author-layer audit; standardize on the way through.
 
 ### Structured data (schema)
 
@@ -92,6 +118,40 @@ Stop worrying about / don't spend time on:
 
 ---
 
+## Weekly: Search Console climber triage
+<!-- Added 2026-08-04 from knowledge-base/raw/social/2026-08-04-vengeons-24h-ranking-checklist.md (step 8). Fills a real gap: /audit is a monthly technical sweep, so nothing watched week-over-week impression movement or routed it into a rewrite decision. -->
+
+Ten minutes, Friday, alongside the rest of the weekly block. The monthly `/audit` catches technical
+regressions; this catches opportunity.
+
+- [ ] **Open Search Console, Performance, last 28 days compared to previous 28 days.** Sort by
+  impression change, descending.
+- [ ] **Filter to positions 8-20 and export.** These are pages Google already trusts and is
+  testing. You are not fighting for entry into the result set, only for the answer, which is a much
+  easier fight than a new page faces.
+  <!-- Sharpened 2026-08-04 from knowledge-base/raw/social/2026-08-04-floate-position-9-30-query-gap-method.md. The original rung said "position 5-20, rework them" without defining rework. Consolidated into this one rung rather than added as a parallel one. Source says 9-30 in step 1 and 8-20 in step 3; 8-20 chosen because impression data thins past ~20 and the already-trusted premise weakens. -->
+- [ ] **Run the query gap.** Filter each page by its queries and find terms it collects impressions
+  for where the page never directly answers the question. Search Console is telling you what Google
+  thinks the page is about and exactly where the page fails to deliver it. This is the step that
+  gets skipped and it is where the value is.
+- [ ] **Write self-contained blocks for the gaps.** For each unanswered query: a heading matching the
+  query as literally as it can, a one to two sentence direct answer, then two to three supporting
+  lines. **Claim and evidence sit in the same block.** No intro, no padding. Retrieval splits the
+  page into chunks without regard for paragraph logic, so a claim whose source landed in the next
+  chunk gets extracted without its support. That matters more for EKUZO than for most publishers,
+  because sourced claims are the differentiator.
+- [ ] **One page per week is enough.** Do not batch this into a quarterly project.
+- [ ] **Leave the flat pages alone.** A page with no impression movement after a month has a
+  demand or a targeting problem, and neither is fixed by editing the copy. Those go on the monthly
+  list, not the weekly one.
+- [ ] **Log what changed and the date**, so the next month's `/audit` can attribute movement.
+
+The reasoning: early positive signal predicts headroom more reliably than diagnosing a failure does,
+and it costs less to act on. Revisit this cadence once the blog is past roughly 30 published pages,
+where one page a week stops being meaningful coverage.
+
+---
+
 ## During monthly `/audit`
 
 The `/audit` slash command in Claude Code already runs the schema + citability + crawlers + llms.txt checks across 11 URLs. After running:
@@ -121,7 +181,7 @@ If yes, ship. If no, fix the content. Don't try to compensate for thin content w
 - [Google's guidance on AI-generated content](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content) — relevant for any content Stanley.ai or similar tools produce
 - [Search Essentials](https://developers.google.com/search/docs/essentials) — technical requirements
 - [Agent-friendly website best practices on web.dev](https://web.dev/articles/ai-agent-site-ux) — Google's pointer for browser-agent readiness
-- KB durable methodology: `knowledge-base/wiki/frameworks/google-ai-optimization-guide.md`
+- KB durable methodology: `knowledge-base/company/marketing/google-ai-optimization-guide.md`
 - Related KB frameworks: `geo-invisible-wins-first.md`, `answer-shaped-content-for-ai-citation.md`, `schema-vs-marketing-voice.md`
 - ekuzo-web schema source of truth: `lib/schema.ts`
 - ekuzo-web monthly audit output: `reports/YYYY-MM-DD/SUMMARY.md`

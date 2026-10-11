@@ -5,6 +5,19 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 11, 2026 (project instructions committed: CLAUDE.md and its docs)
+
+The current `CLAUDE.md` and the docs it points to existed only as uncommitted files in Jamie's local
+checkout, so `dev`, `main`, Aaron's Claude Code and fresh clones read the old 600-line CLAUDE.md.
+Committed as-is from Jamie's machine: `CLAUDE.md`, `docs/architecture-decisions.md`, `docs/assets.md`,
+`docs/dev-runbook.md`, `docs/klaviyo-config.md`, `docs/learning-log.md`, `docs/tooling.md`, plus the
+additions to `docs/beehiiv-config.md` (platform split), `docs/ai-optimization-checklist.md` and
+`docs/camps-design-decisions.md` (sections moved out of CLAUDE.md). One new section in
+`docs/dev-runbook.md`: "Releasing when dev carries work main must not get" (cherry-pick releases,
+dev deploy and phone check before main). No code changed. **Aaron:** pull dev; your Claude now reads
+the new CLAUDE.md.
+
+---
 ## Jamie (via Claude, Build Loop), October 11, 2026 (Season 01: popup attribution, trusted form_start)
 
 Launch-day fix under the 7-day rule's broken-tracking exception. Artifacts in
