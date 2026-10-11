@@ -14,7 +14,8 @@ evidence, defect log, evidence ledger, review guide). No copy or design changed.
 - `app/season1/landing.html`: on an ad landing (any utm_* present) stores utm_*, utm_id, site and
   ad in `sessionStorage["ekuzo_attribution"]` (latest ad landing wins) and in a 7-day Season 01
   record `localStorage["ekuzo_s1_attribution"]`. `form_start` fires only on a trusted pointerdown,
-  keydown or paste (autofill was firing it via `input`); `progFocus` removed.
+  keydown or paste (autofill was firing it via `input`); `progFocus` removed. Follow-up the same day:
+  `click` replaces `pointerdown`, because a phone scroll starting on an email field fired it (D-008).
 - `lib/attribution.ts`: new `getSeasonOneAttribution()` / `resolveSeasonOneAttribution()` (URL, then
   session, then 7-day record, then none). `captureAttribution()` / `getAttribution()` untouched, so
   camps/100/101/teams payloads are unchanged.
