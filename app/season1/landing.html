@@ -984,6 +984,13 @@ const T = {
 };
 const qs = new URLSearchParams(location.search);
 let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.prototype.hasOwnProperty.call(T,id)) id="d1";
+// Remember the ad keys for the site popup on other pages (this page is served outside the site layout, so nothing else stores them). The latest ad landing wins. Storage only, never blocks the page.
+{ const K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","site","ad"], a={}, ra=(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d");
+  K.forEach(k=>a[k]=k==="ad" ? (Object.prototype.hasOwnProperty.call(T,ra)?ra:"") : (qs.get(k)||"").slice(0,200));
+  if(K.slice(0,5).some(k=>a[k])){
+    try{ sessionStorage.setItem("ekuzo_attribution",JSON.stringify(a)); }catch(_){}
+    try{ localStorage.setItem("ekuzo_s1_attribution",JSON.stringify(Object.assign({at:Date.now()},a))); }catch(_){}
+  } }
 const d = D.find(x=>x.id===id), t = T[id];
 const lp = document.getElementById("lp");
 const themed=[lp,document.getElementById("conf")];
@@ -1005,7 +1012,6 @@ if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textC
 const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id},p)); }catch(_){} };
 const clr=(...a)=>{ try{ window.clarity&&clarity(...a); }catch(_){} };
 const hp=f=>!!(f.ekz_hp&&f.ekz_hp.value);
-let progFocus=false;
 clr("set","ad",d.id);
 ["utm_content","utm_term","site"].forEach(k=>{ const v=qs.get(k); if(v) clr("set",k,v.slice(0,100)); });
 const faqSeen=new Set();
@@ -1018,13 +1024,14 @@ const formSeen=new Set();
 document.querySelectorAll(".join form").forEach(f=>{
   const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(_){} };
   const em=f.querySelector("input[type=email]"); if(!em) return;
-  em.addEventListener("focus",()=>{ if(!progFocus) start(); }); em.addEventListener("input",start);
+  // Autofill fires "input" (and the page focuses the field itself), so only a real tap, key press or paste counts as starting the form.
+  ["pointerdown","keydown","paste"].forEach(t=>em.addEventListener(t,e=>{ if(e.isTrusted) start(); }));
 });
 
 const hdr=document.querySelector(".lp header");
 const onScroll=()=>hdr.classList.toggle("solid", scrollY > 24);
 addEventListener("scroll",onScroll,{passive:true}); onScroll();
-const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ progFocus=true; document.getElementById("em-top")?.focus({preventScroll:true}); progFocus=false; },450); };
+const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}); },450); };
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
 document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
 

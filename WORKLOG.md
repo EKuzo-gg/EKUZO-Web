@@ -5,6 +5,27 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop), October 11, 2026 (Season 01: popup attribution, trusted form_start)
+
+Launch-day fix under the 7-day rule's broken-tracking exception. Artifacts in
+`docs/s1-popup-attribution/` (requirements, decisions, Auditor review, Sentry QA with before/after
+evidence, defect log, evidence ledger, review guide). No copy or design changed.
+
+- `app/season1/landing.html`: on an ad landing (any utm_* present) stores utm_*, utm_id, site and
+  ad in `sessionStorage["ekuzo_attribution"]` (latest ad landing wins) and in a 7-day Season 01
+  record `localStorage["ekuzo_s1_attribution"]`. `form_start` fires only on a trusted pointerdown,
+  keydown or paste (autofill was firing it via `input`); `progFocus` removed.
+- `lib/attribution.ts`: new `getSeasonOneAttribution()` / `resolveSeasonOneAttribution()` (URL, then
+  session, then 7-day record, then none). `captureAttribution()` / `getAttribution()` untouched, so
+  camps/100/101/teams payloads are unchanged.
+- `components/ui/SeasonOnePopup.tsx`: sends all seven keys, the stored ad, and `attributionFrom`.
+- `app/api/season-one/route.ts`: new Klaviyo event property `attribution_from` (url, session,
+  return-visit, none). Meta pixel and CAPI untouched (verified identical).
+- `lib/__tests__/season-one-attribution.test.ts`: 30 unit tests (run per the file header).
+- Docs: `docs/season-one-tracking.md` (Popup attribution section, form_start definition, contract),
+  `docs/season1-launch/notes-for-aaron.md`.
+
+---
 ## Jamie (via Claude, Build Loop) — October 10, 2026 (Season 01: review, hardening, utm/geo capture)
 
 Build Loop run on the Season 01 sign-up wiring; artifacts in `docs/season1-launch/` (screenshots

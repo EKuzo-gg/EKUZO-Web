@@ -1,0 +1,202 @@
+[
+  {
+    "label": "F8 return-visit (new context from landing storageState)",
+    "storageOnHome": {
+      "session": null,
+      "local": "{\"at\":1791738232048,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+    },
+    "request": {
+      "email": "team+s1test-qa@ekuzo.gg",
+      "source": "site-popup",
+      "ad": "d5",
+      "attribution": {
+        "utm_source": "meta",
+        "utm_medium": "paid_social",
+        "utm_campaign": "season1",
+        "utm_content": "d5-a-showup",
+        "utm_term": "Instagram_Feed",
+        "utm_id": "120251332838180600",
+        "site": "ig"
+      },
+      "attributionFrom": "return-visit",
+      "page": "/",
+      "eventId": "249803d0-3614-4b4c-93bc-7bfb00a75be8",
+      "eventSourceUrl": "http://localhost:3002/",
+      "ekz_hp": ""
+    },
+    "event": {
+      "source": "site-popup",
+      "ad": "d5",
+      "utm_source": "meta",
+      "utm_medium": "paid_social",
+      "utm_campaign": "season1",
+      "utm_content": "d5-a-showup",
+      "utm_term": "Instagram_Feed",
+      "utm_id": "120251332838180600",
+      "site": "ig",
+      "attribution_from": "return-visit"
+    },
+    "console": [],
+    "pageerrors": []
+  },
+  {
+    "label": "F8 expired (at = now-7d-60s)",
+    "storageOnHome": {
+      "session": null,
+      "local": "{\"at\":1791133380100,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+    },
+    "request": {
+      "email": "team+s1test-qa@ekuzo.gg",
+      "source": "site-popup",
+      "ad": "",
+      "attribution": {
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": ""
+      },
+      "attributionFrom": "none",
+      "page": "/",
+      "eventId": "c3105924-d914-4a6d-9ce6-0f26e4a42e3c",
+      "eventSourceUrl": "http://localhost:3002/",
+      "ekz_hp": ""
+    },
+    "event": {
+      "source": "site-popup",
+      "ad": "",
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": "",
+      "attribution_from": "none"
+    },
+    "console": [],
+    "pageerrors": []
+  },
+  {
+    "label": "F8 valid (at = now-7d+60s)",
+    "storageOnHome": {
+      "session": null,
+      "local": "{\"at\":1791133500100,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+    },
+    "request": {
+      "email": "team+s1test-qa@ekuzo.gg",
+      "source": "site-popup",
+      "ad": "d5",
+      "attribution": {
+        "utm_source": "meta",
+        "utm_medium": "paid_social",
+        "utm_campaign": "season1",
+        "utm_content": "d5-a-showup",
+        "utm_term": "Instagram_Feed",
+        "utm_id": "120251332838180600",
+        "site": "ig"
+      },
+      "attributionFrom": "return-visit",
+      "page": "/",
+      "eventId": "8b1174bb-7a20-433f-bab9-a17d32becbfb",
+      "eventSourceUrl": "http://localhost:3002/",
+      "ekz_hp": ""
+    },
+    "event": {
+      "source": "site-popup",
+      "ad": "d5",
+      "utm_source": "meta",
+      "utm_medium": "paid_social",
+      "utm_campaign": "season1",
+      "utm_content": "d5-a-showup",
+      "utm_term": "Instagram_Feed",
+      "utm_id": "120251332838180600",
+      "site": "ig",
+      "attribution_from": "return-visit"
+    },
+    "console": [],
+    "pageerrors": []
+  },
+  {
+    "label": "F8 future (at = now+60s)",
+    "storageOnHome": {
+      "session": null,
+      "local": "{\"at\":1791738300100,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+    },
+    "request": {
+      "email": "team+s1test-qa@ekuzo.gg",
+      "source": "site-popup",
+      "ad": "",
+      "attribution": {
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": ""
+      },
+      "attributionFrom": "none",
+      "page": "/",
+      "eventId": "51e44376-f538-4290-9cf8-fbac647b3260",
+      "eventSourceUrl": "http://localhost:3002/",
+      "ekz_hp": ""
+    },
+    "event": {
+      "source": "site-popup",
+      "ad": "",
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": "",
+      "attribution_from": "none"
+    },
+    "console": [],
+    "pageerrors": []
+  },
+  {
+    "label": "N1 direct visit, fresh context",
+    "storageOnHome": {
+      "session": null,
+      "local": null
+    },
+    "request": {
+      "email": "team+s1test-qa@ekuzo.gg",
+      "source": "site-popup",
+      "ad": "",
+      "attribution": {
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": ""
+      },
+      "attributionFrom": "none",
+      "page": "/",
+      "eventId": "7d0ff6e6-1549-4b5c-b54a-7a5362040aed",
+      "eventSourceUrl": "http://localhost:3002/",
+      "ekz_hp": ""
+    },
+    "event": {
+      "source": "site-popup",
+      "ad": "",
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": "",
+      "attribution_from": "none"
+    },
+    "console": [],
+    "pageerrors": []
+  }
+]

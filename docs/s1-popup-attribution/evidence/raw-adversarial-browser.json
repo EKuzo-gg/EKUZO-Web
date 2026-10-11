@@ -1,0 +1,574 @@
+[
+  {
+    "id": "ADV-1a",
+    "desc": "storage throws: landing page, form and sign-up still work (confirmation shown, Klaviyo event with attribution_from url, GA generate_lead and Clarity signup fire)",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "doneVisible": true,
+      "event": {
+        "source": "ad-landing",
+        "ad": "d5",
+        "utm_source": "meta",
+        "utm_medium": "paid_social",
+        "utm_campaign": "season1",
+        "utm_content": "d5-a-showup",
+        "utm_term": "Instagram_Feed",
+        "utm_id": "120251332838180600",
+        "site": "ig",
+        "attribution_from": "url"
+      },
+      "dl": 1,
+      "clarity": 1,
+      "console": [],
+      "pageerrors": [
+        {
+          "msg": "blocked",
+          "stack": "Uncaught SecurityError: blocked\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:60147)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63838)\n    at xo (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63799)\n    at Do._n.<computed> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64487)\n    at w (:9:16)\n    at Do (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64530)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75097)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75102)",
+          "page": "http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig"
+        },
+        {
+          "msg": "blocked",
+          "stack": "Uncaught SecurityError: blocked\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:60147)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63838)\n    at xo (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63799)\n    at Do._n.<computed> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64487)\n    at w (:9:16)\n    at Do (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64530)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75097)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75102)",
+          "page": "http://localhost:3002/"
+        }
+      ],
+      "ownPageerrors": [],
+      "note": "pageerrors come from third-party clarity.js only (same on baseline)"
+    }
+  },
+  {
+    "id": "ADV-1b",
+    "desc": "storage throws: popup on / still opens and signs up, attribution none (nothing readable)",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [
+        {
+          "msg": "blocked",
+          "stack": "Uncaught SecurityError: blocked\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:60147)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63838)\n    at xo (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63799)\n    at Do._n.<computed> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64487)\n    at w (:9:16)\n    at Do (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64530)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75097)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75102)",
+          "page": "http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig"
+        },
+        {
+          "msg": "blocked",
+          "stack": "Uncaught SecurityError: blocked\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:60147)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63838)\n    at xo (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:63799)\n    at Do._n.<computed> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64487)\n    at w (:9:16)\n    at Do (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:64530)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75097)\n    at <anonymous> (https://scripts.clarity.ms/0.8.75-beta/clarity.js:1:75102)",
+          "page": "http://localhost:3002/"
+        }
+      ],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:malformed {bad",
+    "desc": "both keys hold {bad: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:JSON array",
+    "desc": "both keys hold [1,2]: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:JSON string",
+    "desc": "both keys hold \"x\": popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:JSON null",
+    "desc": "both keys hold null: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:number",
+    "desc": "both keys hold 42: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:object with non-string values",
+    "desc": "both keys hold {\"at\":1791738913556,\"utm_source\":5,\"utm_medium\":{\"a\":1},\"utm: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:at as string",
+    "desc": "return-visit key only holds {\"at\":\"1791738913556\",\"utm_source\":\"meta\",\"ad\":\"d5\"}: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:at null",
+    "desc": "return-visit key only holds {\"at\":null,\"utm_source\":\"meta\",\"ad\":\"d5\"}: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2:at NaN-like (1e999)",
+    "desc": "return-visit key only holds {\"at\":1e999,\"utm_source\":\"meta\",\"ad\":\"d5\"}: popup works, resolves to none",
+    "pass": true,
+    "detail": {
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      },
+      "console": [],
+      "pageerrors": [],
+      "ownPageerrors": []
+    }
+  },
+  {
+    "id": "ADV-2b",
+    "desc": "session record with valid utm_source plus non-string others: strings kept, non-strings become empty, from session",
+    "pass": true,
+    "detail": {
+      "source": "site-popup",
+      "ad": "d5",
+      "utm_source": "meta",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "d5-a-showup",
+      "utm_term": "",
+      "utm_id": "",
+      "site": "",
+      "attribution_from": "session"
+    }
+  },
+  {
+    "id": "ADV-3",
+    "desc": "landing d5 then d7 in the same tab, then /: d7 wins (D1)",
+    "pass": true,
+    "detail": {
+      "storageAfterD7": {
+        "session": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d7-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d7\"}",
+        "local": "{\"at\":1791738972083,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d7-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d7\"}"
+      },
+      "ev": {
+        "source": "site-popup",
+        "ad": "d7",
+        "utm_source": "meta",
+        "utm_medium": "paid_social",
+        "utm_campaign": "season1",
+        "utm_content": "d7-a-showup",
+        "utm_term": "Instagram_Feed",
+        "utm_id": "120251332838180600",
+        "site": "ig",
+        "attribution_from": "session"
+      }
+    }
+  },
+  {
+    "id": "ADV-4",
+    "desc": "organic utm page first, then /season1 d5, then /: d5 wins (D1)",
+    "pass": true,
+    "detail": {
+      "stOrganicSession": "{\"utm_source\":\"newsletter\",\"utm_medium\":\"email\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\"}",
+      "stLandingSession": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}",
+      "ev": {
+        "source": "site-popup",
+        "ad": "d5",
+        "utm_source": "meta",
+        "utm_medium": "paid_social",
+        "utm_campaign": "season1",
+        "utm_content": "d5-a-showup",
+        "utm_term": "Instagram_Feed",
+        "utm_id": "120251332838180600",
+        "site": "ig",
+        "attribution_from": "session"
+      }
+    }
+  },
+  {
+    "id": "ADV-5",
+    "desc": "after landing, popup on /?utm_source=newsletter: URL wins, from url, ad empty, other keys empty",
+    "pass": true,
+    "detail": {
+      "source": "site-popup",
+      "ad": "",
+      "utm_source": "newsletter",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": "",
+      "attribution_from": "url"
+    }
+  },
+  {
+    "id": "ADV-6:/season1?ad=d5",
+    "desc": "landing /season1?ad=d5 writes nothing; popup on / resolves to none",
+    "pass": true,
+    "detail": {
+      "st": {
+        "session": null,
+        "local": null
+      },
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      }
+    }
+  },
+  {
+    "id": "ADV-6:/season1?ad=d5&utm_id=123&site=ig",
+    "desc": "landing /season1?ad=d5&utm_id=123&site=ig writes nothing; popup on / resolves to none",
+    "pass": true,
+    "detail": {
+      "st": {
+        "session": null,
+        "local": null
+      },
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      }
+    }
+  },
+  {
+    "id": "ADV-6:/season1",
+    "desc": "landing /season1 writes nothing; popup on / resolves to none",
+    "pass": true,
+    "detail": {
+      "st": {
+        "session": null,
+        "local": null
+      },
+      "ev": {
+        "source": "site-popup",
+        "ad": "",
+        "utm_source": "",
+        "utm_medium": "",
+        "utm_campaign": "",
+        "utm_content": "",
+        "utm_term": "",
+        "utm_id": "",
+        "site": "",
+        "attribution_from": "none"
+      }
+    }
+  },
+  {
+    "id": "ADV-7",
+    "desc": "?ad=bogus with full utms: stored ad empty, utms stored; d05 -> d5 (full table in detail)",
+    "pass": true,
+    "detail": [
+      {
+        "urlAd": "d5",
+        "storedAd": "d5",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · They'll actually show up"
+      },
+      {
+        "urlAd": "D5",
+        "storedAd": "d5",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · They'll actually show up"
+      },
+      {
+        "urlAd": "d05",
+        "storedAd": "d5",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · They'll actually show up"
+      },
+      {
+        "urlAd": "d12",
+        "storedAd": "d12",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · The best excuse"
+      },
+      {
+        "urlAd": "d13",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d0",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d5x",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "%20d5",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "bogus",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d010",
+        "storedAd": "d10",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · Screen time with a purpose"
+      },
+      {
+        "urlAd": "d012",
+        "storedAd": "d12",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · The best excuse"
+      },
+      {
+        "urlAd": "d1",
+        "storedAd": "d1",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d01",
+        "storedAd": "d1",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      },
+      {
+        "urlAd": "d00",
+        "storedAd": "",
+        "utmStored": "meta",
+        "pageThemeId": "EKUZO · We've all said it"
+      }
+    ]
+  },
+  {
+    "id": "ADV-8",
+    "desc": "1000-char values capped at 200 in both stores (route then applies its own caps)",
+    "pass": true,
+    "detail": {
+      "sessionLens": {
+        "utm_source": 200,
+        "utm_medium": 200,
+        "utm_campaign": 200,
+        "utm_content": 200,
+        "utm_term": 200,
+        "utm_id": 200,
+        "site": 200,
+        "ad": 2
+      },
+      "popupRequestLens": {
+        "utm_source": 200,
+        "utm_medium": 200,
+        "utm_campaign": 200,
+        "utm_content": 200,
+        "utm_term": 200,
+        "utm_id": 200,
+        "site": 200
+      },
+      "klaviyoEventLens": {
+        "utm_source": 120,
+        "utm_medium": 120,
+        "utm_campaign": 120,
+        "utm_content": 160,
+        "utm_term": 120,
+        "utm_id": 40,
+        "site": 20
+      }
+    }
+  },
+  {
+    "id": "T1",
+    "desc": "stored records after landing sign-up + game chip: only ad keys + at; no email, no chip text",
+    "pass": true,
+    "detail": {
+      "keys": "ad,at,site,utm_campaign,utm_content,utm_id,utm_medium,utm_source,utm_term",
+      "dump": {
+        "local": {
+          "ekuzo_s1_attribution": "{\"at\":1791739060179,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+        },
+        "session": {
+          "ekuzo_attribution": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}",
+          "_cltk": "hv4s9h"
+        }
+      }
+    }
+  }
+]

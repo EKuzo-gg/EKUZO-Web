@@ -106,6 +106,152 @@ export function getAttribution(): Attribution {
 }
 
 // ---------------------------------------------------------------------------
+// Season 01 (site popup) attribution
+// ---------------------------------------------------------------------------
+
+/**
+ * Separate from getAttribution() on purpose: camps, 100, 101 and teams post
+ * getAttribution() in their registration payloads, and those must not change.
+ * Only the Season 01 popup (components/ui/SeasonOnePopup) uses this one.
+ *
+ * It adds two things the popup needs. First, the extra ad keys (utm_id, site,
+ * and the normalized ad id d1..d12) that /season1 stores when a parent lands
+ * from an ad (app/season1/landing.html). Second, a 7-day return-visit store
+ * (localStorage, Season 01 only): Jamie, 2026-10-11, a parent who comes back
+ * in a new session within a week keeps the ad credit, matching Meta's 7-day
+ * click window. Resolution order: current URL, then the session record, then
+ * the return-visit record, then nothing.
+ */
+
+export type SeasonOneAttribution = {
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
+  utm_id: string;
+  site: string;
+};
+
+export type SeasonOneAttributionFrom = "url" | "session" | "return-visit" | "none";
+
+export type SeasonOneAttributionResult = {
+  attribution: SeasonOneAttribution;
+  ad: string;
+  from: SeasonOneAttributionFrom;
+};
+
+/** sessionStorage record shared with captureAttribution(); /season1 writes it too. */
+export const SEASON_ONE_SESSION_KEY = STORAGE_KEY;
+/** localStorage return-visit record: the ad keys plus `at` (ms timestamp). */
+export const SEASON_ONE_RETURN_KEY = "ekuzo_s1_attribution";
+export const SEASON_ONE_RETURN_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+
+const S1_KEYS: (keyof SeasonOneAttribution)[] = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "utm_id",
+  "site",
+];
+
+type S1Picked = { attribution: SeasonOneAttribution; ad: string };
+
+function emptySeasonOne(): SeasonOneAttributionResult {
+  return {
+    attribution: {
+      utm_source: "",
+      utm_medium: "",
+      utm_campaign: "",
+      utm_content: "",
+      utm_term: "",
+      utm_id: "",
+      site: "",
+    },
+    ad: "",
+    from: "none",
+  };
+}
+
+// Same rule as the route and the landing page: d1..d12 (any case, d01 ok), else "".
+function normalizeAdId(v: unknown): string {
+  const m = typeof v === "string" ? /^d(0?[1-9]|1[0-2])$/i.exec(v.trim()) : null;
+  return m ? `d${Number(m[1])}` : "";
+}
+
+// Strings only (anything else becomes ""), capped at 200 chars. Null unless it is an ad touch:
+// at least one of the five utm_* values is non-empty (ad, utm_id and site alone never count).
+function pickSeasonOne(get: (key: string) => unknown): S1Picked | null {
+  const str = (v: unknown) => (typeof v === "string" ? v.slice(0, 200) : "");
+  const base = emptySeasonOne().attribution;
+  for (const k of S1_KEYS) base[k] = str(get(k));
+  const touch = S1_KEYS.slice(0, 5).some((k) => base[k]);
+  return touch ? { attribution: base, ad: normalizeAdId(get("ad")) } : null;
+}
+
+function parseRecord(raw: string | null): Record<string, unknown> | null {
+  if (!raw) return null;
+  try {
+    const v: unknown = JSON.parse(raw);
+    return v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Pure resolution step behind getSeasonOneAttribution(); exported for unit
+ * tests. `search` is window.location.search, the two raw values are what the
+ * storages returned (null when absent or unreadable), `now` is Date.now().
+ */
+export function resolveSeasonOneAttribution(
+  search: string,
+  sessionRaw: string | null,
+  localRaw: string | null,
+  now: number,
+): SeasonOneAttributionResult {
+  const params = new URLSearchParams(search);
+  const fromUrl = pickSeasonOne((k) => params.get(k));
+  if (fromUrl) return { ...fromUrl, from: "url" };
+
+  const session = parseRecord(sessionRaw);
+  const fromSession = session && pickSeasonOne((k) => session[k]);
+  if (fromSession) return { ...fromSession, from: "session" };
+
+  const local = parseRecord(localRaw);
+  const at = local?.at;
+  if (local && typeof at === "number" && Number.isFinite(at)) {
+    const age = now - at;
+    if (age >= 0 && age <= SEASON_ONE_RETURN_WINDOW_MS) {
+      const fromLocal = pickSeasonOne((k) => local[k]);
+      if (fromLocal) return { ...fromLocal, from: "return-visit" };
+    }
+  }
+
+  return emptySeasonOne();
+}
+
+/** Browser wrapper: reads the URL and both storages (each read guarded), SSR-safe. */
+export function getSeasonOneAttribution(): SeasonOneAttributionResult {
+  if (typeof window === "undefined") return emptySeasonOne();
+  let sessionRaw: string | null = null;
+  let localRaw: string | null = null;
+  try {
+    sessionRaw = window.sessionStorage.getItem(SEASON_ONE_SESSION_KEY);
+  } catch {
+    // storage blocked: treat as absent
+  }
+  try {
+    localRaw = window.localStorage.getItem(SEASON_ONE_RETURN_KEY);
+  } catch {
+    // storage blocked: treat as absent
+  }
+  return resolveSeasonOneAttribution(window.location.search, sessionRaw, localRaw, Date.now());
+}
+
+// ---------------------------------------------------------------------------
 // AI-assistant referral detection
 // ---------------------------------------------------------------------------
 

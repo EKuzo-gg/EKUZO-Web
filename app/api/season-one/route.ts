@@ -253,11 +253,21 @@ export async function POST(req: NextRequest) {
       utm_term: text(attr.utm_term),
       utm_id: text(attr.utm_id, 40),
       site: text(attr.site, 20),
+      attribution_from: "none",
       page: clean(body.page, 300),
       // Klaviyo-only (see readGeo / readDevice); sendMetaLead never reads these.
       ...readGeo(req),
       ...readDevice(clean(req.headers.get("user-agent"), 400)),
     };
+
+    // Where the attribution came from. A claim of url/session/return-visit only counts if some value arrived with it.
+    const hasAttr = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "site"].some((k) => eventProps[k]);
+    if (hasAttr) {
+      if (source === "ad-landing") eventProps.attribution_from = "url";
+      else if (body.attributionFrom === "url" || body.attributionFrom === "session" || body.attributionFrom === "return-visit") {
+        eventProps.attribution_from = body.attributionFrom;
+      }
+    }
 
     const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60));
     if (!ev.ok) {

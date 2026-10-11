@@ -1,0 +1,1716 @@
+{
+  "3001": {
+    "landing-ad": {
+      "name": "landing-ad",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "ad-landing",
+          "ad": "d5",
+          "adName": "They'll actually show up",
+          "where": "top",
+          "attribution": {
+            "utm_source": "meta",
+            "utm_medium": "paid_social",
+            "utm_campaign": "season1",
+            "utm_content": "d5-a-showup",
+            "utm_term": "Instagram_Feed",
+            "utm_id": "120251332838180600",
+            "site": "ig"
+          },
+          "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "ad-landing",
+                        "season1_ad": "d5",
+                        "season1_ad_name": "They'll actually show up",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "ad-landing",
+                  "ad": "d5",
+                  "ad_name": "They'll actually show up",
+                  "where": "top",
+                  "utm_source": "meta",
+                  "utm_medium": "paid_social",
+                  "utm_campaign": "season1",
+                  "utm_content": "d5-a-showup",
+                  "utm_term": "Instagram_Feed",
+                  "utm_id": "120251332838180600",
+                  "site": "ig",
+                  "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 ad landing page",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+                },
+                "custom_data": {
+                  "content_name": "season_one_d5"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_d5"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "landing-ad-fbclid": {
+      "name": "landing-ad-fbclid",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "ad-landing",
+          "ad": "d5",
+          "adName": "They'll actually show up",
+          "where": "top",
+          "attribution": {
+            "utm_source": "meta",
+            "utm_medium": "paid_social",
+            "utm_campaign": "season1",
+            "utm_content": "d5-a-showup",
+            "utm_term": "Instagram_Feed",
+            "utm_id": "120251332838180600",
+            "site": "ig"
+          },
+          "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "ad-landing",
+                        "season1_ad": "d5",
+                        "season1_ad_name": "They'll actually show up",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "ad-landing",
+                  "ad": "d5",
+                  "ad_name": "They'll actually show up",
+                  "where": "top",
+                  "utm_source": "meta",
+                  "utm_medium": "paid_social",
+                  "utm_campaign": "season1",
+                  "utm_content": "d5-a-showup",
+                  "utm_term": "Instagram_Feed",
+                  "utm_id": "120251332838180600",
+                  "site": "ig",
+                  "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 ad landing page",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36",
+                  "fbc": "fb.1.1791738274035.QA123abc"
+                },
+                "custom_data": {
+                  "content_name": "season_one_d5"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_d5"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "popup-direct": {
+      "name": "popup-direct",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "site-popup",
+          "ad": "",
+          "attribution": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "",
+            "utm_content": "",
+            "utm_term": ""
+          },
+          "page": "/",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "site-popup",
+                        "season1_ad": "",
+                        "season1_ad_name": "",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "site-popup",
+                  "ad": "",
+                  "ad_name": "",
+                  "where": "",
+                  "utm_source": "",
+                  "utm_medium": "",
+                  "utm_campaign": "",
+                  "utm_content": "",
+                  "utm_term": "",
+                  "utm_id": "",
+                  "site": "",
+                  "page": "/",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 site popup",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+                },
+                "custom_data": {
+                  "content_name": "season_one_popup"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_popup"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "popup-direct-fbclid": {
+      "name": "popup-direct-fbclid",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "site-popup",
+          "ad": "",
+          "attribution": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "",
+            "utm_content": "",
+            "utm_term": ""
+          },
+          "page": "/?fbclid=QA123abc",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/?fbclid=QA123abc",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "site-popup",
+                        "season1_ad": "",
+                        "season1_ad_name": "",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "site-popup",
+                  "ad": "",
+                  "ad_name": "",
+                  "where": "",
+                  "utm_source": "",
+                  "utm_medium": "",
+                  "utm_campaign": "",
+                  "utm_content": "",
+                  "utm_term": "",
+                  "utm_id": "",
+                  "site": "",
+                  "page": "/?fbclid=QA123abc",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 site popup",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/?fbclid=QA123abc",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36",
+                  "fbc": "fb.1.1791738289680.QA123abc"
+                },
+                "custom_data": {
+                  "content_name": "season_one_popup"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_popup"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    }
+  },
+  "3002": {
+    "landing-ad": {
+      "name": "landing-ad",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "ad-landing",
+          "ad": "d5",
+          "adName": "They'll actually show up",
+          "where": "top",
+          "attribution": {
+            "utm_source": "meta",
+            "utm_medium": "paid_social",
+            "utm_campaign": "season1",
+            "utm_content": "d5-a-showup",
+            "utm_term": "Instagram_Feed",
+            "utm_id": "120251332838180600",
+            "site": "ig"
+          },
+          "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "ad-landing",
+                        "season1_ad": "d5",
+                        "season1_ad_name": "They'll actually show up",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "ad-landing",
+                  "ad": "d5",
+                  "ad_name": "They'll actually show up",
+                  "where": "top",
+                  "utm_source": "meta",
+                  "utm_medium": "paid_social",
+                  "utm_campaign": "season1",
+                  "utm_content": "d5-a-showup",
+                  "utm_term": "Instagram_Feed",
+                  "utm_id": "120251332838180600",
+                  "site": "ig",
+                  "attribution_from": "url",
+                  "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 ad landing page",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+                },
+                "custom_data": {
+                  "content_name": "season_one_d5"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_d5"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "landing-ad-fbclid": {
+      "name": "landing-ad-fbclid",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "ad-landing",
+          "ad": "d5",
+          "adName": "They'll actually show up",
+          "where": "top",
+          "attribution": {
+            "utm_source": "meta",
+            "utm_medium": "paid_social",
+            "utm_campaign": "season1",
+            "utm_content": "d5-a-showup",
+            "utm_term": "Instagram_Feed",
+            "utm_id": "120251332838180600",
+            "site": "ig"
+          },
+          "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "ad-landing",
+                        "season1_ad": "d5",
+                        "season1_ad_name": "They'll actually show up",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "ad-landing",
+                  "ad": "d5",
+                  "ad_name": "They'll actually show up",
+                  "where": "top",
+                  "utm_source": "meta",
+                  "utm_medium": "paid_social",
+                  "utm_campaign": "season1",
+                  "utm_content": "d5-a-showup",
+                  "utm_term": "Instagram_Feed",
+                  "utm_id": "120251332838180600",
+                  "site": "ig",
+                  "attribution_from": "url",
+                  "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 ad landing page",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig&fbclid=QA123abc",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36",
+                  "fbc": "fb.1.1791738299372.QA123abc"
+                },
+                "custom_data": {
+                  "content_name": "season_one_d5"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_d5"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "popup-direct": {
+      "name": "popup-direct",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "site-popup",
+          "ad": "",
+          "attribution": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "",
+            "utm_content": "",
+            "utm_term": "",
+            "utm_id": "",
+            "site": ""
+          },
+          "attributionFrom": "none",
+          "page": "/",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "site-popup",
+                        "season1_ad": "",
+                        "season1_ad_name": "",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "site-popup",
+                  "ad": "",
+                  "ad_name": "",
+                  "where": "",
+                  "utm_source": "",
+                  "utm_medium": "",
+                  "utm_campaign": "",
+                  "utm_content": "",
+                  "utm_term": "",
+                  "utm_id": "",
+                  "site": "",
+                  "attribution_from": "none",
+                  "page": "/",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 site popup",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+                },
+                "custom_data": {
+                  "content_name": "season_one_popup"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_popup"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    },
+    "popup-direct-fbclid": {
+      "name": "popup-direct-fbclid",
+      "status": 200,
+      "browserRequests": [
+        {
+          "email": "team+s1test-qa@ekuzo.gg",
+          "source": "site-popup",
+          "ad": "",
+          "attribution": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "",
+            "utm_content": "",
+            "utm_term": "",
+            "utm_id": "",
+            "site": ""
+          },
+          "attributionFrom": "none",
+          "page": "/?fbclid=QA123abc",
+          "eventId": "EID",
+          "eventSourceUrl": "http://localhost:PORT/?fbclid=QA123abc",
+          "ekz_hp": ""
+        },
+        {
+          "step": "games",
+          "email": "team+s1test-qa@ekuzo.gg",
+          "kidGames": "Fortnite"
+        }
+      ],
+      "klaviyoSignup": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "season1_waitlist": "yes",
+                        "season1_source": "site-popup",
+                        "season1_ad": "",
+                        "season1_ad_name": "",
+                        "season1_joined_at": "J"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "source": "site-popup",
+                  "ad": "",
+                  "ad_name": "",
+                  "where": "",
+                  "utm_source": "",
+                  "utm_medium": "",
+                  "utm_campaign": "",
+                  "utm_content": "",
+                  "utm_term": "",
+                  "utm_id": "",
+                  "site": "",
+                  "attribution_from": "none",
+                  "page": "/?fbclid=QA123abc",
+                  "geo_country": "",
+                  "geo_region": "",
+                  "geo_city": "",
+                  "geo_postal": "",
+                  "device_os": "linux",
+                  "device_type": "desktop"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        },
+        {
+          "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+          "body": {
+            "data": {
+              "type": "profile-subscription-bulk-create-job",
+              "attributes": {
+                "custom_source": "Season 01 site popup",
+                "profiles": {
+                  "data": [
+                    {
+                      "type": "profile",
+                      "attributes": {
+                        "email": "team+s1test-qa@ekuzo.gg",
+                        "subscriptions": {
+                          "email": {
+                            "marketing": {
+                              "consent": "SUBSCRIBED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "relationships": {
+                "list": {
+                  "data": {
+                    "type": "list",
+                    "id": "XGTv2F"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "capi": [
+        {
+          "url": "https://graph.facebook.com/v26.0/1284038230557204/events",
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 0,
+                "event_id": "EID",
+                "action_source": "website",
+                "event_source_url": "http://localhost:PORT/?fbclid=QA123abc",
+                "user_data": {
+                  "em": [
+                    "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+                  ],
+                  "client_ip_address": "127.0.0.1",
+                  "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36",
+                  "fbc": "fb.1.1791738315322.QA123abc"
+                },
+                "custom_data": {
+                  "content_name": "season_one_popup"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "klaviyoGames": [
+        {
+          "url": "https://a.klaviyo.com/api/events",
+          "body": {
+            "data": {
+              "type": "event",
+              "attributes": {
+                "metric": {
+                  "data": {
+                    "type": "metric",
+                    "attributes": {
+                      "name": "Season 01 Waitlist Games"
+                    }
+                  }
+                },
+                "profile": {
+                  "data": {
+                    "type": "profile",
+                    "attributes": {
+                      "email": "team+s1test-qa@ekuzo.gg",
+                      "properties": {
+                        "kid_games": "Fortnite"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "kid_games": "Fortnite"
+                },
+                "time": "T",
+                "unique_id": "U"
+              }
+            }
+          }
+        }
+      ],
+      "fbq": [
+        [
+          "set",
+          "autoConfig",
+          false,
+          "1284038230557204"
+        ],
+        [
+          "init",
+          "1284038230557204"
+        ],
+        [
+          "track",
+          "PageView"
+        ],
+        [
+          "track",
+          "Lead",
+          {
+            "content_name": "season_one_popup"
+          },
+          {
+            "eventID": "EID"
+          }
+        ]
+      ],
+      "console": [],
+      "pageerrors": []
+    }
+  }
+}

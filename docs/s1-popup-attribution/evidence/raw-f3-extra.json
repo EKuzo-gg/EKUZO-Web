@@ -1,0 +1,19 @@
+{
+  "nonLive": {
+    "storage": {
+      "session": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}",
+      "local": "{\"at\":1791739266509,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+    },
+    "apiPosts": 0,
+    "doneVisible": true,
+    "outbound": 0,
+    "generate_lead": 0
+  },
+  "noAdParam": {
+    "storage": {
+      "session": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}",
+      "local": "{\"at\":1791739270329,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}"
+    },
+    "pageTitle": "EKUZO · We've all said it"
+  }
+}

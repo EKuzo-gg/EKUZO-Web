@@ -14,7 +14,7 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
 | Page load | Meta `PageView`; Clarity session; GA4 `page_view` (landing page only: it carries its own `gtag.js` for `G-8LM45PX53W`, the popup uses the one in `app/layout.tsx`) | none |
 | Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})` and GA4 `generate_lead` with `{source:'season_one_<ad>'}`, once per sign-up each, same conditions (LIVE host, honeypot empty) | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
 | Page load (Clarity tags) | `clarity("set","ad",<id>)`, plus `utm_content`, `utm_term` and `site` from the URL when present, so sessions can be filtered by ad in Clarity | none |
-| Funnel events (GA4 only, SC-3) | `faq_open {ad, question}` (a FAQ opens; `question` is a slug such as `when_does_it_start`; once per question per page view). `cta_click {ad, location}` (`hero`, `header` or `sticky`). `form_start {ad, where}` (first real focus or typing in the `top` / `bottom` email field, once per form; the programmatic focus after a CTA tap does not count). `signup_error {ad, reason}` (`invalid_email`, `server` for a non-ok API response, `network` for a failed fetch; suppressed when the honeypot is filled) | none |
+| Funnel events (GA4 only, SC-3) | `faq_open {ad, question}` (a FAQ opens; `question` is a slug such as `when_does_it_start`; once per question per page view). `cta_click {ad, location}` (`hero`, `header` or `sticky`). `form_start {ad, where}` (once per form, on the first trusted tap, key press or paste in the `top` / `bottom` email field; autofill, a script-set value, an `input` event with no key press and the programmatic focus after a CTA tap do not count. Changed 2026-10-11: the old focus/input trigger fired for in-app-browser autofill, about twice per visitor). `signup_error {ad, reason}` (`invalid_email`, `server` for a non-ok API response, `network` for a failed fetch; suppressed when the honeypot is filled) | none |
 | Email submit success (Clarity) | `clarity("event","signup")` and `clarity("set","signed_up","yes")` at the same moment and under the same conditions as the Meta Lead and GA4 `generate_lead` (LIVE host, honeypot empty, once per sign-up) | none |
 | Games chips (confirmation) | none (nothing to Meta, GA or Clarity) | Klaviyo "Season 01 Waitlist Games" only. No Meta event |
 
@@ -37,11 +37,12 @@ GA4: the `source` parameter uses the same naming (`season_one_d3` on the landing
 ```json
 { "email": "parent@example.com", "source": "ad-landing" | "site-popup",
   "ad": "d3", "adName": "...", "where": "top" | "bottom", "attribution": { "utm_source": "..." },
+  "attributionFrom": "url" | "session" | "return-visit" | "none",
   "page": "/season1?ad=d3", "firstName": "", "eventId": "uuid", "eventSourceUrl": "https://ekuzo.gg/season1?ad=d3&fbclid=...",
   "ekz_hp": "" }
 ```
 
-`attribution` keys read by the route (strings only, anything else is stored as empty): `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id` (max 40), `site` (max 20). The landing page forwards all seven from its query string; ad URLs carry `utm_term={{placement}}`, `utm_id={{ad.id}}` and `site={{site_source_name}}`. The site popup sends only the five `utm_*` keys it captures in `lib/attribution.ts` (a fixed whitelist shared with the camps/EKUZO100 registration flows, left unchanged because ads land on the landing page, not the popup).
+`attribution` keys read by the route (strings only, anything else is stored as empty): `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id` (max 40), `site` (max 20). The landing page forwards all seven from its query string; ad URLs carry `utm_term={{placement}}`, `utm_id={{ad.id}}` and `site={{site_source_name}}`. The site popup sends all seven, resolved by `getSeasonOneAttribution()` in `lib/attribution.ts` (see "Popup attribution" below), plus a top-level `attributionFrom`. `getAttribution()` (five keys, shared with the camps, 100, 101 and teams registration flows) is unchanged.
 
 `eventId` and `eventSourceUrl` are optional. `ekz_hp` is a honeypot: both forms carry a hidden, off-screen `ekz_hp` input (deliberately not a name like `company` that browser autofill recognizes) that people never see. If it arrives non-empty on the main sign-up, the route logs a warning and returns `{ ok: true }` without calling Klaviyo or sending a Meta Lead. Responses: 400 bad email, 500 Klaviyo key missing, 502 Klaviyo event failed (the page asks the parent to retry), 200 `{ ok: true }` otherwise.
 
@@ -52,11 +53,24 @@ Added to the "Season 01 Waitlist" **event properties** only (not the profile, no
 | Property | Source | Values |
 |---|---|---|
 | `utm_id`, `site` | `attribution` in the request body | as sent |
+| `attribution_from` | derived by the route | `url` (ad landing, or the popup on a URL with utm_*), `session` (popup, stored earlier this browser session), `return-visit` (popup, stored by an ad landing in the last 7 days), `none`. A popup claim counts only when some attribution value arrived with it. Read with `source` (the surface): `site-popup` + `session` = a landing-page visitor who signed up elsewhere |
 | `geo_country`, `geo_region`, `geo_city`, `geo_postal` | Netlify `x-nf-geo` request header | country code, subdivision code (e.g. `TX`), city, postal code; latitude and longitude are never stored |
 | `device_os` | user agent | `ios`, `android`, `mac`, `windows`, `chromeos`, `linux`, `other` |
 | `device_type` | user agent | `mobile`, `tablet`, `desktop` (iPad, and Android without "Mobile", count as tablet) |
 
 A missing or unparseable `x-nf-geo` header, or a missing user agent, gives empty strings and never an error. The header is read as base64-encoded JSON, then as plain JSON; its exact format on the live Netlify runtime is still to be verified (launch checklist L2): after a test sign-up on the deploy, confirm the event in Klaviyo shows `geo_*` values. iPadOS Safari sends a Mac user agent, so those visits read as `mac` / `desktop`. Geolocation is approximate (IP-based). Meta CAPI `user_data` and `custom_data` are unchanged by this.
+
+## Popup attribution (added 2026-10-11)
+
+Problem it fixes: a parent who landed on `/season1` from an ad and then signed up through the site popup on another page was recorded with empty UTMs and no ad (first seen on launch day: the Nampa ID sign-up). `/season1` is served outside `app/layout.tsx`, so `CaptureAttribution` never ran there.
+
+- **Ad touch**: at least one of the five `utm_*` values is non-empty. `ad`, `utm_id` or `site` alone never counts (a bare `?ad=d5` link is not paid traffic).
+- **`/season1` writes two records on an ad touch** (`landing.html`, right after the `?ad=` lookup), each in its own try/catch:
+  - `sessionStorage["ekuzo_attribution"]` (the key `captureAttribution()` uses): the five utm keys, `utm_id`, `site`, and `ad` (d1..d12, only when the URL's `ad` is valid; the page's d1 default is never stored). The latest ad landing replaces any earlier record, so an organic UTM earlier in the same tab cannot beat the ad (decision D1 in `docs/s1-popup-attribution/03-decision-log.md`). On Next pages `captureAttribution()` stays first touch and does not overwrite this record.
+  - `localStorage["ekuzo_s1_attribution"]`: the same keys plus `at` (ms). Season 01 only, valid for 7 days from the latest ad landing (Jamie, 2026-10-11: matches Meta's 7-day-click window).
+- **The popup resolves** (`getSeasonOneAttribution()`): the current URL if it is an ad touch (`url`), else the session record (`session`), else a return-visit record no older than 7 days and not in the future (`return-visit`), else empty (`none`). `ad` comes from the same source. Values are strings, capped at 200 characters.
+- **Records hold only** the utm keys, `ad` and a timestamp: no email, no game chips, nothing about the child.
+- **Known limits**: the records live in one browser, so a hop from Instagram's or Facebook's in-app browser to Safari or Chrome starts from nothing, and Safari may clear script-written storage. A visitor who reaches `/` from the EKUZO social profile link or by typing the address carries no attribution, while Meta may still credit the ad.
 
 ## Env vars (Netlify, scoped to Functions/runtime)
 
@@ -77,6 +91,6 @@ With `META_CAPI_USE_TEST_CODE=true` and no test code, the server Lead is skipped
 2. Events Manager > Test Events: open `<preview>/season1?ad=d3&utm_source=meta&utm_medium=paid&utm_campaign=test&utm_content=d3&fbclid=test123` from the Test Events browser tool (so the browser events are tagged as test too), with Meta Pixel Helper on.
 3. Submit a test email. Expect: `PageView` and one `Lead` in Pixel Helper with an event ID; a server `Lead` in Test Events with the same event ID, marked deduplicated, match keys email, IP, user agent, fbp, fbc.
 4. Klaviyo: the profile has `season1_*` properties, the "Season 01 Waitlist" event, and is on the Season 01 Waitlist list. Tap a game chip: "Season 01 Waitlist Games" appears; nothing new in Meta.
-5. Repeat on the site popup (`/?join=season-one`): `content_name` `season_one_popup`.
+5. Repeat on the site popup (`/?join=season-one`): `content_name` `season_one_popup`. Then the attribution path: open `/season1?ad=d3&utm_source=meta&...` and go to `/` in the same tab (type the address on a preview, since the footer link points at ekuzo.gg); the popup sign-up's Klaviyo event shows `source: site-popup`, the utm values, `ad: d3` and `attribution_from: session`.
 6. Clarity: a session for `/season1` shows up (can take about 30 minutes).
 7. Production: confirm `META_CAPI_USE_TEST_CODE` is unset, then make one real sign-up and check it lands in the live Overview as a deduplicated Lead (browser + server).

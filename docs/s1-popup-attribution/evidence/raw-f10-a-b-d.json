@@ -1,0 +1,638 @@
+[
+  {
+    "case": "a-normal",
+    "port": 3002,
+    "run": 1,
+    "callAt": 1791737784801,
+    "beacons": [
+      {
+        "ver": "0.8.72",
+        "t": 1791737780874,
+        "url": "a.clarity.ms/collect",
+        "bytes": 60115,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 124,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3927
+      },
+      {
+        "ver": "0.8.72",
+        "t": 1791737785757,
+        "url": "a.clarity.ms/collect",
+        "bytes": 735,
+        "seq": 2,
+        "startMs": 124,
+        "durMs": 4910,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 956
+      }
+    ],
+    "signupBeaconDelayMs": 956,
+    "nextBeaconAfterCallMs": 956,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737780850,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60115
+        },
+        "tn": 1791737780861,
+        "rel": -3951
+      },
+      {
+        "via": "xhr",
+        "t": 1791737785753,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 735
+        },
+        "tn": 1791737785755,
+        "rel": 952
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3002,
+    "run": 2,
+    "callAt": 1791737799327,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737795399,
+        "url": "n.clarity.ms/collect",
+        "bytes": 60122,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 129,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3928
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737800271,
+        "url": "n.clarity.ms/collect",
+        "bytes": 741,
+        "seq": 2,
+        "startMs": 129,
+        "durMs": 4895,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 944
+      }
+    ],
+    "signupBeaconDelayMs": 944,
+    "nextBeaconAfterCallMs": 944,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737795379,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60122
+        },
+        "tn": 1791737795382,
+        "rel": -3948
+      },
+      {
+        "via": "xhr",
+        "t": 1791737800266,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 741
+        },
+        "tn": 1791737800268,
+        "rel": 939
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3002,
+    "run": 3,
+    "callAt": 1791737813593,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737809698,
+        "url": "e.clarity.ms/collect",
+        "bytes": 60115,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 132,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3895
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737814550,
+        "url": "e.clarity.ms/collect",
+        "bytes": 739,
+        "seq": 2,
+        "startMs": 132,
+        "durMs": 4872,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 957
+      }
+    ],
+    "signupBeaconDelayMs": 957,
+    "nextBeaconAfterCallMs": 957,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737809679,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60115
+        },
+        "tn": 1791737809681,
+        "rel": -3914
+      },
+      {
+        "via": "xhr",
+        "t": 1791737814546,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 739
+        },
+        "tn": 1791737814548,
+        "rel": 953
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3002,
+    "run": 4,
+    "callAt": 1791737827860,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737824033,
+        "url": "f.clarity.ms/collect",
+        "bytes": 60112,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 116,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3827
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737828814,
+        "url": "f.clarity.ms/collect",
+        "bytes": 740,
+        "seq": 2,
+        "startMs": 116,
+        "durMs": 4880,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 954
+      }
+    ],
+    "signupBeaconDelayMs": 954,
+    "nextBeaconAfterCallMs": 954,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737823935,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60112
+        },
+        "tn": 1791737823999,
+        "rel": -3925
+      },
+      {
+        "via": "xhr",
+        "t": 1791737828810,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 740
+        },
+        "tn": 1791737828811,
+        "rel": 950
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3001,
+    "run": 1,
+    "callAt": 1791737842229,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737838307,
+        "url": "y.clarity.ms/collect",
+        "bytes": 60116,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 144,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3922
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737843199,
+        "url": "y.clarity.ms/collect",
+        "bytes": 741,
+        "seq": 2,
+        "startMs": 144,
+        "durMs": 4895,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 970
+      }
+    ],
+    "signupBeaconDelayMs": 970,
+    "nextBeaconAfterCallMs": 970,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737838293,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60116
+        },
+        "tn": 1791737838294,
+        "rel": -3936
+      },
+      {
+        "via": "xhr",
+        "t": 1791737843179,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 741
+        },
+        "tn": 1791737843185,
+        "rel": 950
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3001,
+    "run": 2,
+    "callAt": 1791737856507,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737852584,
+        "url": "p.clarity.ms/collect",
+        "bytes": 60115,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 119,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3923
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737857450,
+        "url": "p.clarity.ms/collect",
+        "bytes": 738,
+        "seq": 2,
+        "startMs": 119,
+        "durMs": 4887,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 943
+      }
+    ],
+    "signupBeaconDelayMs": 943,
+    "nextBeaconAfterCallMs": 943,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737852565,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60115
+        },
+        "tn": 1791737852568,
+        "rel": -3942
+      },
+      {
+        "via": "xhr",
+        "t": 1791737857444,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 738
+        },
+        "tn": 1791737857447,
+        "rel": 937
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3001,
+    "run": 3,
+    "callAt": 1791737870799,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737866858,
+        "url": "s.clarity.ms/collect",
+        "bytes": 60116,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 127,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3941
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737871746,
+        "url": "s.clarity.ms/collect",
+        "bytes": 736,
+        "seq": 2,
+        "startMs": 127,
+        "durMs": 4906,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 947
+      }
+    ],
+    "signupBeaconDelayMs": 947,
+    "nextBeaconAfterCallMs": 947,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737866841,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60116
+        },
+        "tn": 1791737866843,
+        "rel": -3958
+      },
+      {
+        "via": "xhr",
+        "t": 1791737871742,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 736
+        },
+        "tn": 1791737871743,
+        "rel": 943
+      }
+    ]
+  },
+  {
+    "case": "a-normal",
+    "port": 3001,
+    "run": 4,
+    "callAt": 1791737885093,
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737881145,
+        "url": "s.clarity.ms/collect",
+        "bytes": 60114,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 123,
+        "hasSignup": false,
+        "hasSignedUp": false,
+        "relToCallMs": -3948
+      },
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737886048,
+        "url": "s.clarity.ms/collect",
+        "bytes": 739,
+        "seq": 2,
+        "startMs": 123,
+        "durMs": 4925,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 955
+      }
+    ],
+    "signupBeaconDelayMs": 955,
+    "nextBeaconAfterCallMs": 955,
+    "net": [
+      {
+        "via": "xhr",
+        "t": 1791737881125,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60114
+        },
+        "tn": 1791737881127,
+        "rel": -3968
+      },
+      {
+        "via": "xhr",
+        "t": 1791737886044,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 739
+        },
+        "tn": 1791737886045,
+        "rel": 951
+      }
+    ]
+  },
+  {
+    "case": "b-delayed-clarity",
+    "port": 3002,
+    "delayEachMs": 8000,
+    "signupCallMsSinceNavStart": 881,
+    "atCall": {
+      "clarityReady": false,
+      "qlen": 6,
+      "queued": [
+        "set ad d5",
+        "set utm_content d5-a-showup",
+        "set utm_term Instagram_Feed",
+        "set site ig",
+        "event signup",
+        "set signed_up yes"
+      ],
+      "clarityScriptTags": [
+        "https://www.clarity.ms/tag/wml8wll5ua"
+      ]
+    },
+    "clarityScriptRequests": [
+      {
+        "url": "https://www.clarity.ms/tag/wml8wll5ua",
+        "relToCall": -775
+      },
+      {
+        "url": "https://scripts.clarity.ms/0.8.72/clarity.js",
+        "relToCall": 7455
+      }
+    ],
+    "beacons": [
+      {
+        "ver": "0.8.72",
+        "t": 1791737911275,
+        "url": "z.clarity.ms/collect",
+        "bytes": 60173,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 127,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 16064
+      }
+    ],
+    "signupUploaded": true,
+    "signupBeaconRelToCallMs": 16064,
+    "clarityCallsSeen": [
+      "set ad d5",
+      "set utm_content d5-a-showup",
+      "set utm_term Instagram_Feed",
+      "set site ig",
+      "event signup",
+      "set signed_up yes",
+      "metadata function(){a[c](\"set\", \"C_IS\", \"0\");} false",
+      "start [object Object]",
+      "set C_IS 0",
+      "start [object Object]",
+      "set ad d5",
+      "set utm_content d5-a-showup",
+      "set utm_term Instagram_Feed",
+      "set site ig",
+      "event signup",
+      "set signed_up yes",
+      "metadata function(){a[c](\"set\", \"C_IS\", \"0\");} false",
+      "set C_IS 0",
+      "set C_IS 0"
+    ]
+  },
+  {
+    "case": "b-delayed-clarity",
+    "port": 3001,
+    "delayEachMs": 8000,
+    "signupCallMsSinceNavStart": 934,
+    "atCall": {
+      "clarityReady": false,
+      "qlen": 6,
+      "queued": [
+        "set ad d5",
+        "set utm_content d5-a-showup",
+        "set utm_term Instagram_Feed",
+        "set site ig",
+        "event signup",
+        "set signed_up yes"
+      ],
+      "clarityScriptTags": [
+        "https://www.clarity.ms/tag/wml8wll5ua"
+      ]
+    },
+    "clarityScriptRequests": [
+      {
+        "url": "https://www.clarity.ms/tag/wml8wll5ua",
+        "relToCall": -845
+      },
+      {
+        "url": "https://scripts.clarity.ms/0.8.75-beta/clarity.js",
+        "relToCall": 7438
+      }
+    ],
+    "beacons": [
+      {
+        "ver": "0.8.75-beta",
+        "t": 1791737937482,
+        "url": "p.clarity.ms/collect",
+        "bytes": 60175,
+        "seq": 1,
+        "startMs": 0,
+        "durMs": 119,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 16095
+      }
+    ],
+    "signupUploaded": true,
+    "signupBeaconRelToCallMs": 16095,
+    "clarityCallsSeen": [
+      "set ad d5",
+      "set utm_content d5-a-showup",
+      "set utm_term Instagram_Feed",
+      "set site ig",
+      "event signup",
+      "set signed_up yes",
+      "metadata function(){a[c](\"set\", \"C_IS\", \"0\");} false",
+      "start [object Object]",
+      "set C_IS 0",
+      "start [object Object]",
+      "set ad d5",
+      "set utm_content d5-a-showup",
+      "set utm_term Instagram_Feed",
+      "set site ig",
+      "event signup",
+      "set signed_up yes",
+      "metadata function(){a[c](\"set\", \"C_IS\", \"0\");} false",
+      "set C_IS 0",
+      "set C_IS 0"
+    ]
+  },
+  {
+    "case": "d-clarity-blocked",
+    "port": 3002,
+    "signupCalled": true,
+    "state": {
+      "clarityReady": false,
+      "qlen": 6,
+      "queued": [
+        "set ad d5",
+        "set utm_content d5-a-showup",
+        "set utm_term Instagram_Feed",
+        "set site ig",
+        "event signup",
+        "set signed_up yes"
+      ]
+    },
+    "collectBeacons": 0
+  },
+  {
+    "case": "d-clarity-blocked",
+    "port": 3001,
+    "signupCalled": true,
+    "state": {
+      "clarityReady": false,
+      "qlen": 6,
+      "queued": [
+        "set ad d5",
+        "set utm_content d5-a-showup",
+        "set utm_term Instagram_Feed",
+        "set site ig",
+        "event signup",
+        "set signed_up yes"
+      ]
+    },
+    "collectBeacons": 0
+  }
+]

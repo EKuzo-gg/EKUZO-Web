@@ -1,0 +1,176 @@
+[
+  {
+    "id": "RT-1",
+    "desc": "forged attributionFrom=session with empty attribution -> none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-2",
+    "desc": "attributionFrom=evil with utms -> none (utms still stored)",
+    "pass": true,
+    "detail": {
+      "from": "none",
+      "utm_source": "meta"
+    }
+  },
+  {
+    "id": "RT-3:array",
+    "desc": "attribution as array -> 200, empty values, none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-3:string",
+    "desc": "attribution as string -> 200, empty values, none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-3:number",
+    "desc": "attribution as number -> 200, empty values, none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-3:null",
+    "desc": "attribution as null -> 200, empty values, none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-3:array of objects",
+    "desc": "attribution as array of objects -> 200, empty values, none",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-4:url",
+    "desc": "valid label url with utms passes through",
+    "pass": true,
+    "detail": {
+      "from": "url"
+    }
+  },
+  {
+    "id": "RT-4:session",
+    "desc": "valid label session with utms passes through",
+    "pass": true,
+    "detail": {
+      "from": "session"
+    }
+  },
+  {
+    "id": "RT-4:return-visit",
+    "desc": "valid label return-visit with utms passes through",
+    "pass": true,
+    "detail": {
+      "from": "return-visit"
+    }
+  },
+  {
+    "id": "RT-5",
+    "desc": "popup with utms but no attributionFrom -> none",
+    "pass": true,
+    "detail": {
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-5b",
+    "desc": "attributionFrom as array -> none",
+    "pass": true,
+    "detail": {
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-6",
+    "desc": "ad-landing with utms ignores client label -> url",
+    "pass": true,
+    "detail": {
+      "from": "url"
+    }
+  },
+  {
+    "id": "RT-7",
+    "desc": "ad-landing with no utms (client claims session) -> none",
+    "pass": true,
+    "detail": {
+      "from": "none"
+    }
+  },
+  {
+    "id": "RT-8",
+    "desc": "ad-landing with only site -> url (any of the seven)",
+    "pass": true,
+    "detail": {
+      "from": "url"
+    }
+  },
+  {
+    "id": "RT-9",
+    "desc": "unknown source falls back to site-popup and keeps the label",
+    "pass": true,
+    "detail": {
+      "source": "site-popup",
+      "from": "session"
+    }
+  },
+  {
+    "id": "RT-10",
+    "desc": "popup ad=d5-a-showup (old utm_content fallback value) is rejected by the route allowlist -> ad empty, rest intact",
+    "pass": true,
+    "detail": {
+      "ad": "",
+      "from": "session"
+    }
+  },
+  {
+    "id": "RT-11",
+    "desc": "games step ignores attribution/attributionFrom (event props have no attribution_from)",
+    "pass": true,
+    "detail": {
+      "status": 200,
+      "last": "{\"kid_games\":\"Minecraft\"}"
+    }
+  },
+  {
+    "id": "RT-12",
+    "desc": "route ad normalizer table (informational)",
+    "pass": true,
+    "detail": {
+      "\"d5\"": "d5",
+      "\"D5\"": "d5",
+      "\"d05\"": "d5",
+      "\"d12\"": "d12",
+      "\"d13\"": "",
+      "\"d0\"": "",
+      "\"d\"": "",
+      "\"d5x\"": "",
+      "\" d5\"": "d5",
+      "\"\"": "",
+      "\"d010\"": "",
+      "\"d012\"": "",
+      "\"d01\"": "d1"
+    }
+  }
+]

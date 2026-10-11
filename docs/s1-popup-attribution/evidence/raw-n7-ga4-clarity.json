@@ -1,0 +1,956 @@
+{
+ "3001": {
+  "port": 3001,
+  "steps": [
+   {
+    "n": "page load",
+    "ga": 1,
+    "cl": 2,
+    "t": 1791738324179
+   },
+   {
+    "n": "scroll",
+    "ga": 1,
+    "cl": 2,
+    "t": 1791738324988
+   },
+   {
+    "n": "hero CTA",
+    "ga": 1,
+    "cl": 3,
+    "t": 1791738326644
+   },
+   {
+    "n": "header CTA (visible=true)",
+    "ga": 1,
+    "cl": 4,
+    "t": 1791738328196
+   },
+   {
+    "n": "form_start top",
+    "ga": 1,
+    "cl": 4,
+    "t": 1791738329178
+   },
+   {
+    "n": "faq_open x2",
+    "ga": 2,
+    "cl": 4,
+    "t": 1791738330612
+   },
+   {
+    "n": "submit",
+    "ga": 3,
+    "cl": 5,
+    "t": 1791738333254
+   },
+   {
+    "n": "settle 6s",
+    "ga": 3,
+    "cl": 6,
+    "t": 1791738339255
+   },
+   {
+    "n": "flush",
+    "ga": 4,
+    "cl": 7,
+    "t": 1791738341787
+   },
+   {
+    "n": "unload",
+    "ga": 4,
+    "cl": 7,
+    "t": 1791738343320
+   }
+  ],
+  "hdrVisible": true,
+  "dataLayer": [
+   [
+    "js",
+    "DATE"
+   ],
+   [
+    "config",
+    "G-8LM45PX53W"
+   ],
+   [],
+   [],
+   [
+    "event",
+    "cta_click",
+    {
+     "ad": "d5",
+     "location": "hero"
+    }
+   ],
+   [
+    "event",
+    "cta_click",
+    {
+     "ad": "d5",
+     "location": "header"
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d5",
+     "where": "top"
+    }
+   ],
+   [
+    "event",
+    "faq_open",
+    {
+     "ad": "d5",
+     "question": "when_does_it_start"
+    }
+   ],
+   [
+    "event",
+    "faq_open",
+    {
+     "ad": "d5",
+     "question": "do_i_pay_anything_now"
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "source": "season_one_d5"
+    }
+   ]
+  ],
+  "clarityCalls": [
+   [
+    "set",
+    "ad",
+    "d5"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "metadata",
+    "function(){a[c](\"set\", \"C_IS\", \"0\");}",
+    "false",
+    "true"
+   ],
+   [
+    "start",
+    "[object Object]"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "start",
+    "[object Object]"
+   ],
+   [
+    "set",
+    "ad",
+    "d5"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "metadata",
+    "function(){a[c](\"set\", \"C_IS\", \"0\");}",
+    "false",
+    "true"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "ga": [
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "page_view",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za208zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium"
+   },
+   {
+    "method": "POST",
+    "bytes": 300,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [
+     {
+      "en": "cta_click",
+      "params": {
+       "ep.ad": "d5",
+       "ep.location": "hero"
+      }
+     },
+     {
+      "en": "cta_click",
+      "params": {
+       "ep.ad": "d5",
+       "ep.location": "header"
+      }
+     },
+     {
+      "en": "form_start",
+      "params": {
+       "ep.ad": "d5",
+       "ep.where": "top"
+      }
+     },
+     {
+      "en": "faq_open",
+      "params": {
+       "ep.ad": "d5",
+       "ep.question": "when_does_it_start"
+      }
+     },
+     {
+      "en": "faq_open",
+      "params": {
+       "ep.ad": "d5",
+       "ep.question": "do_i_pay_anything_now"
+      }
+     }
+    ],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm"
+   },
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "generate_lead",
+    "queryParams": {
+     "ep.source": "season_one_d5"
+    },
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=3&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%"
+   },
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "user_engagement",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=4&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%"
+   }
+  ],
+  "clarity": [
+   {
+    "method": "GET",
+    "url": "https://c.clarity.ms/c.gif",
+    "bytes": 0,
+    "decode": "none",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": false,
+    "hasAdKey": false,
+    "textHead": "",
+    "textLen": 0,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 60110,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",1,0,119,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,0,0,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instag",
+    "textLen": 119778,
+    "decoded": {
+     "tags": [
+      "ad=d5",
+      "utm_content=d5-a-showup",
+      "utm_term=Instagram_Feed",
+      "site=ig",
+      "C_IS=0,0"
+     ],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 455,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",2,119,4241,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,0,0,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Ins",
+    "textLen": 786,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 616,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",3,4360,2143,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,0,0,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=In",
+    "textLen": 2073,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 1088,
+    "decode": "gunzip",
+    "hasSignup": true,
+    "hasSignedUp": true,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",4,6503,3892,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,0,0,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=In",
+    "textLen": 2324,
+    "decoded": {
+     "tags": [
+      "signed_up=yes"
+     ],
+     "ev": [
+      "signup"
+     ]
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 530,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",5,10395,4170,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,0,0,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=I",
+    "textLen": 821,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 426,
+    "decode": "utf8",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",6,14565,3881,\"wml8wll5ua\",\"14a54gu\",\"1puow03\",1,1,1,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=I",
+    "textLen": 426,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   }
+  ],
+  "rawGa": [
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za208zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=1085",
+    "postBytes": 0
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&_s=2&tfd=10698",
+    "postBytes": 300,
+    "postRaw": "en=cta_click&_ee=1&ep.ad=d5&ep.location=hero&_et=4610\r\nen=cta_click&_ee=1&ep.ad=d5&ep.location=header&_et=1554\r\nen=form_start&_ee=1&ep.ad=d5&ep.where=top&_et=1563\r\nen=faq_open&_ee=1&ep.ad=d5&ep.question=when_does_it_start&_et=1033\r\nen=faq_open&_ee=1&ep.ad=d5&ep.question=do_i_pay_anything_now&_et=529"
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=3&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=generate_lead&_c=1&_ee=1&ep.source=season_one_d5&_et=908&tfd=11305",
+    "postBytes": 0
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a72v9131535694za200zd9131535694xf1&_p=1791738319544&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=465565986.1791738320&frm=0&ngs=1&pscdl=noapi&rcb=15&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=4&tag_exp=115938466~115938468~118897920~118897930~119793972~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738320&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=user_engagement&_et=8536&tfd=19846",
+    "postBytes": 0
+   }
+  ],
+  "rawClarityHeads": [
+   {
+    "url": "https://c.clarity.ms/c.gif",
+    "bytes": 0
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 60110
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 455
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 616
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 1088
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 530
+   },
+   {
+    "url": "https://k.clarity.ms/collect",
+    "bytes": 426
+   }
+  ],
+  "console": [],
+  "pageerrors": []
+ },
+ "3002": {
+  "port": 3002,
+  "steps": [
+   {
+    "n": "page load",
+    "ga": 1,
+    "cl": 2,
+    "t": 1791738348276
+   },
+   {
+    "n": "scroll",
+    "ga": 1,
+    "cl": 2,
+    "t": 1791738349092
+   },
+   {
+    "n": "hero CTA",
+    "ga": 1,
+    "cl": 3,
+    "t": 1791738350724
+   },
+   {
+    "n": "header CTA (visible=true)",
+    "ga": 1,
+    "cl": 4,
+    "t": 1791738352335
+   },
+   {
+    "n": "form_start top",
+    "ga": 1,
+    "cl": 4,
+    "t": 1791738353291
+   },
+   {
+    "n": "faq_open x2",
+    "ga": 2,
+    "cl": 4,
+    "t": 1791738354728
+   },
+   {
+    "n": "submit",
+    "ga": 3,
+    "cl": 5,
+    "t": 1791738357360
+   },
+   {
+    "n": "settle 6s",
+    "ga": 3,
+    "cl": 6,
+    "t": 1791738363361
+   },
+   {
+    "n": "flush",
+    "ga": 4,
+    "cl": 7,
+    "t": 1791738365892
+   },
+   {
+    "n": "unload",
+    "ga": 4,
+    "cl": 7,
+    "t": 1791738367422
+   }
+  ],
+  "hdrVisible": true,
+  "dataLayer": [
+   [
+    "js",
+    "DATE"
+   ],
+   [
+    "config",
+    "G-8LM45PX53W"
+   ],
+   [],
+   [],
+   [
+    "event",
+    "cta_click",
+    {
+     "ad": "d5",
+     "location": "hero"
+    }
+   ],
+   [
+    "event",
+    "cta_click",
+    {
+     "ad": "d5",
+     "location": "header"
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d5",
+     "where": "top"
+    }
+   ],
+   [
+    "event",
+    "faq_open",
+    {
+     "ad": "d5",
+     "question": "when_does_it_start"
+    }
+   ],
+   [
+    "event",
+    "faq_open",
+    {
+     "ad": "d5",
+     "question": "do_i_pay_anything_now"
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "source": "season_one_d5"
+    }
+   ]
+  ],
+  "clarityCalls": [
+   [
+    "set",
+    "ad",
+    "d5"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "metadata",
+    "function(){a[c](\"set\", \"C_IS\", \"0\");}",
+    "false",
+    "true"
+   ],
+   [
+    "start",
+    "[object Object]"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "start",
+    "[object Object]"
+   ],
+   [
+    "set",
+    "ad",
+    "d5"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "metadata",
+    "function(){a[c](\"set\", \"C_IS\", \"0\");}",
+    "false",
+    "true"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "set",
+    "C_IS",
+    "0"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "ga": [
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "page_view",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za208zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_"
+   },
+   {
+    "method": "POST",
+    "bytes": 300,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [
+     {
+      "en": "cta_click",
+      "params": {
+       "ep.ad": "d5",
+       "ep.location": "hero"
+      }
+     },
+     {
+      "en": "cta_click",
+      "params": {
+       "ep.ad": "d5",
+       "ep.location": "header"
+      }
+     },
+     {
+      "en": "form_start",
+      "params": {
+       "ep.ad": "d5",
+       "ep.where": "top"
+      }
+     },
+     {
+      "en": "faq_open",
+      "params": {
+       "ep.ad": "d5",
+       "ep.question": "when_does_it_start"
+      }
+     },
+     {
+      "en": "faq_open",
+      "params": {
+       "ep.ad": "d5",
+       "ep.question": "do_i_pay_anything_now"
+      }
+     }
+    ],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%"
+   },
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "generate_lead",
+    "queryParams": {
+     "ep.source": "season_one_d5"
+    },
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=3&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_me"
+   },
+   {
+    "method": "POST",
+    "bytes": 0,
+    "host": "www.google-analytics.com",
+    "path": "/g/collect",
+    "queryEn": "user_engagement",
+    "queryParams": {},
+    "tid": "G-8LM45PX53W",
+    "dl": "http://localhost/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig",
+    "batched": [],
+    "rawUrl": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=4&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_me"
+   }
+  ],
+  "clarity": [
+   {
+    "method": "GET",
+    "url": "https://c.clarity.ms/c.gif",
+    "bytes": 0,
+    "decode": "none",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": false,
+    "hasAdKey": false,
+    "textHead": "",
+    "textLen": 0,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 60114,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",1,0,118,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,0,0,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagr",
+    "textLen": 119776,
+    "decoded": {
+     "tags": [
+      "ad=d5",
+      "utm_content=d5-a-showup",
+      "utm_term=Instagram_Feed",
+      "site=ig",
+      "C_IS=0,0"
+     ],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 495,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",2,118,4259,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,0,0,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Inst",
+    "textLen": 889,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 608,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",3,4377,2125,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,0,0,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Ins",
+    "textLen": 2009,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 1092,
+    "decode": "gunzip",
+    "hasSignup": true,
+    "hasSignedUp": true,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",4,6502,3941,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,0,0,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Ins",
+    "textLen": 2322,
+    "decoded": {
+     "tags": [
+      "signed_up=yes"
+     ],
+     "ev": [
+      "signup"
+     ]
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 526,
+    "decode": "gunzip",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",5,10443,4155,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,0,0,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=In",
+    "textLen": 820,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   },
+   {
+    "method": "POST",
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 425,
+    "decode": "utf8",
+    "hasSignup": false,
+    "hasSignedUp": false,
+    "hasD5": true,
+    "hasAdKey": true,
+    "textHead": "{\"e\":[\"0.8.72\",6,14598,3863,\"wml8wll5ua\",\"yq77y5\",\"132gam8\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=In",
+    "textLen": 425,
+    "decoded": {
+     "tags": [],
+     "ev": []
+    }
+   }
+  ],
+  "rawGa": [
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za208zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=851",
+    "postBytes": 0
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&_s=2&tfd=10677",
+    "postBytes": 300,
+    "postRaw": "en=cta_click&_ee=1&ep.ad=d5&ep.location=hero&_et=4823\r\nen=cta_click&_ee=1&ep.ad=d5&ep.location=header&_et=1606\r\nen=form_start&_ee=1&ep.ad=d5&ep.where=top&_et=1538\r\nen=faq_open&_ee=1&ep.ad=d5&ep.question=when_does_it_start&_et=1041\r\nen=faq_open&_ee=1&ep.ad=d5&ep.question=do_i_pay_anything_now&_et=524"
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=3&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=generate_lead&_c=1&_ee=1&ep.source=season_one_d5&_et=898&tfd=11315",
+    "postBytes": 0
+   },
+   {
+    "method": "POST",
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6a80h2v9131535694za200zd9131535694xf1&_p=1791738343635&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=826697329.1791738344&frm=0&ngs=1&pscdl=noapi&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=Chromium%3B141.0.7390.37%7CNot%253FA_Brand%3B8.0.0.0&uam=&uamb=0&uap=Linux&uapv=6.18.44&uaw=0&ul=en-us&_s=4&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271~121246026~121246034&sid=1791738344&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fseason1%3Fad%3Dd5%26utm_source%3Dmeta%26utm_medium%3Dpaid_social%26utm_campaign%3Dseason1%26utm_content%3Dd5-a-showup%26utm_term%3DInstagram_Feed%26utm_id%3D120251332838180600%26site%3Dig&dt=EKUZO%20%C2%B7%20They%27ll%20actually%20show%20up&en=user_engagement&_et=8529&tfd=19848",
+    "postBytes": 0
+   }
+  ],
+  "rawClarityHeads": [
+   {
+    "url": "https://c.clarity.ms/c.gif",
+    "bytes": 0
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 60114
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 495
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 608
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 1092
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 526
+   },
+   {
+    "url": "https://j.clarity.ms/collect",
+    "bytes": 425
+   }
+  ],
+  "console": [],
+  "pageerrors": []
+ }
+}

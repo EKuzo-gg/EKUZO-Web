@@ -1,0 +1,19 @@
+{
+  "email": "team+s1test-qa@ekuzo.gg",
+  "source": "site-popup",
+  "ad": "d5",
+  "attribution": {
+    "utm_source": "meta",
+    "utm_medium": "paid_social",
+    "utm_campaign": "season1",
+    "utm_content": "d5-a-showup",
+    "utm_term": "Instagram_Feed",
+    "utm_id": "120251332838180600",
+    "site": "ig"
+  },
+  "attributionFrom": "session",
+  "page": "/",
+  "eventId": "b0d342e5-8e57-42dd-bd59-d56f4fc5ba36",
+  "eventSourceUrl": "http://localhost:3002/",
+  "ekz_hp": ""
+}
