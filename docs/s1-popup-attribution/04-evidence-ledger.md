@@ -39,3 +39,4 @@ Requirement to evidence. Verified-by: S = Sentry (independent), F = Fable, R = R
 | D-005 real autofill and in-app browsers untested | Human check in 07-review-guide.md. |
 | D-006 tab-in without a key press no longer counts | Intended (F9). |
 | D-007 clarity.js SecurityError when storage throws | Third party, identical on baseline. |
+| D-008 scroll fired form_start | Fixed 2026-10-11 (`click` replaces `pointerdown`), retested by Fable: live code A scroll on bottom field [bottom], B scroll on top field [top]; fix A [], B []; C tap+type [top] both; D page only [] both; E synthetic autofill [] both; F trusted fill [] both; G CTA focus [] both; H desktop click [top] both; I paste [bottom] both; J both fields [top, bottom] both. |

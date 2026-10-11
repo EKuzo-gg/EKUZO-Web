@@ -1024,8 +1024,8 @@ const formSeen=new Set();
 document.querySelectorAll(".join form").forEach(f=>{
   const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(_){} };
   const em=f.querySelector("input[type=email]"); if(!em) return;
-  // Autofill fires "input" (and the page focuses the field itself), so only a real tap, key press or paste counts as starting the form.
-  ["pointerdown","keydown","paste"].forEach(t=>em.addEventListener(t,e=>{ if(e.isTrusted) start(); }));
+  // Autofill fires "input" (and the page focuses the field itself), so only a real tap, key press or paste counts as starting the form. "click", not "pointerdown": a phone scroll that starts on the field fires pointerdown too.
+  ["click","keydown","paste"].forEach(t=>em.addEventListener(t,e=>{ if(e.isTrusted) start(); }));
 });
 
 const hdr=document.querySelector(".lp header");
