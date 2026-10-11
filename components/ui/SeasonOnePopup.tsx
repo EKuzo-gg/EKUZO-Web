@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
-import { getAttribution } from "@/lib/attribution";
+import { getSeasonOneAttribution } from "@/lib/attribution";
 import { trackLead } from "@/lib/analytics";
 import { SEASON_ONE_COPY as C } from "@/lib/seasonOne";
 
@@ -105,14 +105,16 @@ export default function SeasonOnePopup() {
     const eventId = eventIdRef.current;
     try {
       const params = new URLSearchParams(window.location.search);
+      const s1 = getSeasonOneAttribution();
       const res = await fetch("/api/season-one", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: em,
           source: "site-popup",
-          ad: params.get("ad") || params.get("utm_content") || "",
-          attribution: getAttribution(),
+          ad: s1.ad || params.get("utm_content") || "",
+          attribution: s1.attribution,
+          attributionFrom: s1.from,
           page: window.location.pathname + window.location.search,
           eventId,
           eventSourceUrl: window.location.href,

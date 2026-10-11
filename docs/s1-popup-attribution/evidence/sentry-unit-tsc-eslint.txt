@@ -1,0 +1,93 @@
+# Sentry: unit tests, tsc, eslint (2026-10-11T17:03:36Z)
+## node --test (season-one-attribution)
+    ok 19 - malformed JSON in either storage is ignored
+      ---
+      duration_ms: 1.791417
+      type: 'test'
+      ...
+    # Subtest: non-object JSON (string, number, array, null) is ignored
+    ok 20 - non-object JSON (string, number, array, null) is ignored
+      ---
+      duration_ms: 0.189328
+      type: 'test'
+      ...
+    # Subtest: non-string stored values become empty strings
+    ok 21 - non-string stored values become empty strings
+      ---
+      duration_ms: 0.261866
+      type: 'test'
+      ...
+    # Subtest: a record holding only non-string values counts as empty
+    ok 22 - a record holding only non-string values counts as empty
+      ---
+      duration_ms: 0.158402
+      type: 'test'
+      ...
+    # Subtest: empty everything resolves to none with all-empty values
+    ok 23 - empty everything resolves to none with all-empty values
+      ---
+      duration_ms: 0.140479
+      type: 'test'
+      ...
+    # Subtest: `ad` always comes from the same source as the attribution values
+    ok 24 - `ad` always comes from the same source as the attribution values
+      ---
+      duration_ms: 0.314947
+      type: 'test'
+      ...
+    # Subtest: a record with only `ad` (or only utm_id / site) does not count
+    ok 25 - a record with only `ad` (or only utm_id / site) does not count
+      ---
+      duration_ms: 0.275783
+      type: 'test'
+      ...
+    # Subtest: a session record without utm but with ad falls through to the return-visit record
+    ok 26 - a session record without utm but with ad falls through to the return-visit record
+      ---
+      duration_ms: 0.158938
+      type: 'test'
+      ...
+    # Subtest: an invalid stored ad is dropped
+    ok 27 - an invalid stored ad is dropped
+      ---
+      duration_ms: 0.104348
+      type: 'test'
+      ...
+    # Subtest: caps every value at 200 chars
+    ok 28 - caps every value at 200 chars
+      ---
+      duration_ms: 0.191821
+      type: 'test'
+      ...
+    # Subtest: result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+    ok 29 - result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+      ---
+      duration_ms: 0.150355
+      type: 'test'
+      ...
+    1..29
+ok 2 - resolveSeasonOneAttribution
+  ---
+  duration_ms: 12.739879
+  type: 'suite'
+  ...
+1..2
+# tests 30
+# suites 2
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 881.344431
+exit=0
+
+## tsc --noEmit
+
+real	0m25.470s
+user	0m23.640s
+sys	0m1.022s
+tsc exit=0
+
+## eslint
+eslint exit=0

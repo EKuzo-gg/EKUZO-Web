@@ -1,0 +1,126 @@
+{
+  "port": 3001,
+  "stAfterLanding": {
+    "session": null,
+    "local": null
+  },
+  "stOnHome": {
+    "session": null,
+    "local": null
+  },
+  "signup": {
+    "status": 200
+  },
+  "popupRequest": {
+    "url": "http://localhost:3001/api/season-one",
+    "body": "{\"email\":\"team+s1test-qa@ekuzo.gg\",\"source\":\"site-popup\",\"ad\":\"\",\"attribution\":{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\"},\"page\":\"/\",\"eventId\":\"5c09ee8e-1924-4ddd-b3ab-22b77b4d50eb\",\"eventSourceUrl\":\"http://localhost:3001/\",\"ekz_hp\":\"\"}"
+  },
+  "klaviyoEvent": {
+    "data": {
+      "type": "event",
+      "attributes": {
+        "metric": {
+          "data": {
+            "type": "metric",
+            "attributes": {
+              "name": "Season 01 Waitlist"
+            }
+          }
+        },
+        "profile": {
+          "data": {
+            "type": "profile",
+            "attributes": {
+              "email": "team+s1test-qa@ekuzo.gg",
+              "properties": {
+                "season1_waitlist": "yes",
+                "season1_source": "site-popup",
+                "season1_ad": "",
+                "season1_ad_name": "",
+                "season1_joined_at": "2026-10-11T17:03:40.584Z"
+              }
+            }
+          }
+        },
+        "properties": {
+          "source": "site-popup",
+          "ad": "",
+          "ad_name": "",
+          "where": "",
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": "",
+          "page": "/",
+          "geo_country": "",
+          "geo_region": "",
+          "geo_city": "",
+          "geo_postal": "",
+          "device_os": "linux",
+          "device_type": "desktop"
+        },
+        "time": "2026-10-11T17:03:40.584Z",
+        "unique_id": "team+s1test-qa@ekuzo.gg-Season 01 Waitlist-1791738220584"
+      }
+    }
+  },
+  "klaviyoSub": {
+    "data": {
+      "type": "profile-subscription-bulk-create-job",
+      "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+          "data": [
+            {
+              "type": "profile",
+              "attributes": {
+                "email": "team+s1test-qa@ekuzo.gg",
+                "subscriptions": {
+                  "email": {
+                    "marketing": {
+                      "consent": "SUBSCRIBED"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "relationships": {
+        "list": {
+          "data": {
+            "type": "list",
+            "id": "XGTv2F"
+          }
+        }
+      }
+    }
+  },
+  "meta": {
+    "data": [
+      {
+        "event_name": "Lead",
+        "event_time": 1791738220,
+        "event_id": "5c09ee8e-1924-4ddd-b3ab-22b77b4d50eb",
+        "action_source": "website",
+        "event_source_url": "http://localhost:3001/",
+        "user_data": {
+          "em": [
+            "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+          ],
+          "client_ip_address": "127.0.0.1",
+          "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+        },
+        "custom_data": {
+          "content_name": "season_one_popup"
+        }
+      }
+    ]
+  },
+  "console": [],
+  "pageerrors": []
+}

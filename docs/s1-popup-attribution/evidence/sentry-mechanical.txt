@@ -1,0 +1,55 @@
+# Sentry mechanical checks (2026-10-11T17:04:19Z)
+## em/en dash scan: added lines of git diff + untracked test file
+grep: character code point value in \x{} or \o{} is too large
+grep: character code point value in \x{} or \o{} is too large
+diff dash hits above (none if empty): 
+grep: character code point value in \x{} or \o{} is too large
+test file dash hits: 
+grep: character code point value in \x{} or \o{} is too large
+grep: character code point value in \x{} or \o{} is too large
+grep: character code point value in \x{} or \o{} is too large
+## whole-file dash counts (informational): lib/attribution.ts , SeasonOnePopup , route 
+## landing.html diff: hunks and changed lines (truncated to 200 chars)
+@@ -986,0 +987,7 @@ let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.proto
++// Remember the ad keys for the site popup on other pages (this page is served outside the site layout, so nothing else stores them). The latest ad landing wins. Storage only, never blocks the page.
++{ const K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","site","ad"], a={}, ra=(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d");
++  K.forEach(k=>a[k]=k==="ad" ? (Object.prototype.hasOwnProperty.call(T,ra)?ra:"") : (qs.get(k)||"").slice(0,200));
++  if(K.slice(0,5).some(k=>a[k])){
++    try{ sessionStorage.setItem("ekuzo_attribution",JSON.stringify(a)); }catch(_){}
++    try{ localStorage.setItem("ekuzo_s1_attribution",JSON.stringify(Object.assign({at:Date.now()},a))); }catch(_){}
++  } }
+@@ -1008 +1014,0 @@ const hp=f=>!!(f.ekz_hp&&f.ekz_hp.value);
+-let progFocus=false;
+@@ -1021 +1027,2 @@ document.querySelectorAll(".join form").forEach(f=>{
+-  em.addEventListener("focus",()=>{ if(!progFocus) start(); }); em.addEventListener("input",start);
++  // Autofill fires "input" (and the page focuses the field itself), so only a real tap, key press or paste counts as starting the form.
++  ["pointerdown","keydown","paste"].forEach(t=>em.addEventListener(t,e=>{ if(e.isTrusted) start(); }));
+@@ -1027 +1034 @@ addEventListener("scroll",onScroll,{passive:true}); onScroll();
+-const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ progFocus=true; document.getElementById("em-top")?.focus({pre
++const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}
+## landing.html numstat
+10	3	app/season1/landing.html
+## other files outside diff: git status
+ M app/api/season-one/route.ts
+ M app/season1/landing.html
+ M components/ui/SeasonOnePopup.tsx
+ M lib/attribution.ts
+?? docs/s1-popup-attribution/
+?? lib/__tests__/season-one-attribution.test.ts
+## N4: getAttribution/captureAttribution bodies unchanged: diff of lines before line 105 in lib/attribution.ts
+@@ -107,0 +108,146 @@ export function getAttribution(): Attribution {
+## T1: no email/games keys in stored records (code)
+991:    try{ sessionStorage.setItem("ekuzo_attribution",JSON.stringify(a)); }catch(_){}
+992:    try{ localStorage.setItem("ekuzo_s1_attribution",JSON.stringify(Object.assign({at:Date.now()},a))); }catch(_){}
+
+## em/en dash scan (python, U+2014 / U+2013)
+added diff lines with U+2014/U+2013: 0
+lib/__tests__/season-one-attribution.test.ts hits: 0
+docs/s1-popup-attribution/03-decision-log.md hits: 0
+docs/s1-popup-attribution/auditor-phase1.md hits: 0
+docs/s1-popup-attribution/01-requirements.md hits: 0
+whole file (informational) lib/attribution.ts 3
+whole file (informational) components/ui/SeasonOnePopup.tsx 2
+whole file (informational) app/api/season-one/route.ts 4
+whole file (informational) app/season1/landing.html 1
+dashes in added lines (text): []

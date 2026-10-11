@@ -63,3 +63,17 @@ round two or the nurture emails.
 
 Full reviews, if you want the line-by-line: `ekuzo-web/docs/season1-launch/review-parent.md` and
 `review-steward.md`.
+
+## 2026-10-11: popup attribution and form_start (nothing visible changed)
+
+Two Season 01 files in shared lanes changed; screenshots before and after match pixel for pixel
+(`docs/s1-popup-attribution/evidence/n6-screenshots.md`).
+
+- `app/season1/landing.html`: one small script block after the `?ad=` lookup stores the ad's
+  UTMs and ad id in the browser (session and a 7-day Season 01 record), so a parent who leaves
+  the landing page and signs up through the site popup keeps the ad credit. Separately,
+  `form_start` now fires only on a real tap, key press or paste in the email field: in-app
+  browser autofill was firing it for most visitors, about twice each. The `progFocus` flag is gone.
+- `components/ui/SeasonOnePopup.tsx`: `submit()` sends the stored attribution (seven UTM keys,
+  ad, and where it came from) instead of the current URL only. No markup or copy changed.
+

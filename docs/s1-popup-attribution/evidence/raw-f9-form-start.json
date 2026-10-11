@@ -1,0 +1,246 @@
+[
+  {
+    "port": 3001,
+    "name": "1 simulated autofill (script value + synthetic input/change)",
+    "dataLayerFormStart": [
+      "top",
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "top",
+      "bottom"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "1 simulated autofill (script value + synthetic input/change)",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "2a trusted input, locator.fill() both fields",
+    "dataLayerFormStart": [
+      "top",
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "top",
+      "bottom"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "2a trusted input, locator.fill() both fields",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "2b trusted input, CDP Input.insertText after programmatic focus",
+    "dataLayerFormStart": [
+      "top",
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "top",
+      "bottom"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "2b trusted input, CDP Input.insertText after programmatic focus",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "3 page load, tap hero CTA (programmatic focus of top field)",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "3 page load, tap hero CTA (programmatic focus of top field)",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "4a real tap on top field (touch context)",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "4a real tap on top field (touch context)",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "4b real mouse click on top field",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "4b real mouse click on top field",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "5 keyboard.type into top field (after programmatic focus)",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "5 keyboard.type into top field (after programmatic focus)",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "6 trusted paste (Ctrl+V) into bottom field after programmatic focus",
+    "dataLayerFormStart": [
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "bottom"
+    ],
+    "extra": {
+      "pastedValue": "x@y.co"
+    },
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "6 trusted paste (Ctrl+V) into bottom field after programmatic focus",
+    "dataLayerFormStart": [
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "bottom"
+    ],
+    "extra": {
+      "pastedValue": "x@y.co"
+    },
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "7 type in both fields (click+type each)",
+    "dataLayerFormStart": [
+      "top",
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "top",
+      "bottom"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "7 type in both fields (click+type each)",
+    "dataLayerFormStart": [
+      "top",
+      "bottom"
+    ],
+    "beaconFormStart": [
+      "top",
+      "bottom"
+    ],
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "8 keyboard Tab focus into top field, no key press inside it",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "extra": {
+      "activeId": "em-top"
+    },
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "8 keyboard Tab focus into top field, no key press inside it",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "extra": {
+      "activeId": "em-top"
+    },
+    "errors": []
+  },
+  {
+    "port": 3001,
+    "name": "9 CDP Autofill.trigger with saved address (real autofill attempt)",
+    "dataLayerFormStart": [
+      "top"
+    ],
+    "beaconFormStart": [
+      "top"
+    ],
+    "extra": {
+      "error": "cdpSession.send: Protocol error (Autofill.trigger): Invalid parameters",
+      "valueAfter": ""
+    },
+    "errors": []
+  },
+  {
+    "port": 3002,
+    "name": "9 CDP Autofill.trigger with saved address (real autofill attempt)",
+    "dataLayerFormStart": [],
+    "beaconFormStart": [],
+    "extra": {
+      "error": "cdpSession.send: Protocol error (Autofill.trigger): Invalid parameters",
+      "valueAfter": ""
+    },
+    "errors": []
+  }
+]

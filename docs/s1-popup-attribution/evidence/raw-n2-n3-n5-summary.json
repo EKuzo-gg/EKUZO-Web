@@ -1,0 +1,148 @@
+{
+  "landing-ad": {
+    "browserRequestDiff": [],
+    "klaviyoSignupDiff": [
+      {
+        "path": "/0/body/data/attributes/properties/attribution_from",
+        "build": "url"
+      }
+    ],
+    "capiDiff": [],
+    "fbqDiff": [],
+    "gamesDiff": [],
+    "consoleBase": 0,
+    "consoleBuild": 0,
+    "counts": {
+      "base": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      },
+      "build": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      }
+    }
+  },
+  "landing-ad-fbclid": {
+    "browserRequestDiff": [],
+    "klaviyoSignupDiff": [
+      {
+        "path": "/0/body/data/attributes/properties/attribution_from",
+        "build": "url"
+      }
+    ],
+    "capiDiff": [],
+    "fbqDiff": [],
+    "gamesDiff": [],
+    "consoleBase": 0,
+    "consoleBuild": 0,
+    "counts": {
+      "base": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      },
+      "build": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      }
+    }
+  },
+  "popup-direct": {
+    "browserRequestDiff": [
+      {
+        "path": "/0/attribution/utm_id",
+        "build": ""
+      },
+      {
+        "path": "/0/attribution/site",
+        "build": ""
+      },
+      {
+        "path": "/0/attributionFrom",
+        "build": "none"
+      }
+    ],
+    "klaviyoSignupDiff": [
+      {
+        "path": "/0/body/data/attributes/properties/attribution_from",
+        "build": "none"
+      }
+    ],
+    "capiDiff": [],
+    "fbqDiff": [],
+    "gamesDiff": [],
+    "consoleBase": 0,
+    "consoleBuild": 0,
+    "counts": {
+      "base": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      },
+      "build": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      }
+    }
+  },
+  "popup-direct-fbclid": {
+    "browserRequestDiff": [
+      {
+        "path": "/0/attribution/utm_id",
+        "build": ""
+      },
+      {
+        "path": "/0/attribution/site",
+        "build": ""
+      },
+      {
+        "path": "/0/attributionFrom",
+        "build": "none"
+      }
+    ],
+    "klaviyoSignupDiff": [
+      {
+        "path": "/0/body/data/attributes/properties/attribution_from",
+        "build": "none"
+      }
+    ],
+    "capiDiff": [],
+    "fbqDiff": [],
+    "gamesDiff": [],
+    "consoleBase": 0,
+    "consoleBuild": 0,
+    "counts": {
+      "base": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      },
+      "build": {
+        "req": 2,
+        "k": 2,
+        "capi": 1,
+        "games": 1,
+        "fbq": 4
+      }
+    }
+  }
+}
