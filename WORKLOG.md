@@ -29,6 +29,8 @@ item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) liste
 - `next.config.mjs` (separate commit, droppable): 301s for the two URLs Search Console reports as
   404, `/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng` to the real K1NG post and
   `/old-home` to `/`.
+- `docs/ai-optimization-checklist.md` § Weekly: pointer to the KB's Search Console playbook as the canonical
+  cadence; the climber triage waits for data (docs only).
 
 **After it deploys:** nothing to resubmit (the sitemap is already submitted in Search Console and
 Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.
