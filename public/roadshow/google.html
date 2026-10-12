@@ -1,0 +1,1323 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
+<title>EKUZO Google Search</title>
+</head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@500;700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: the roadshow hub's project-page look. Thesis, then every ad as it shows on a phone, then the campaigns, then the working detail for one ad group at a time, then setup. Single dark look on purpose to match the hub; the Google results stay white because that is what parents see. */
+:root{
+  --wall:#0B0A0D; --panel:#16141A; --panel2:#1E1B23; --line:#2A272E; --text:#F4F2F6; --muted:#A7A2AE;
+  --red:#F92524; --lime:#E0FF4E; --ink:#111013; --warn:#F1B35A;
+  --g-bg:#FFFFFF; --g-text:#202124; --g-sub:#4D5156; --g-link:#1A0DAB; --g-line:#DADCE0; --g-hi:#FFF3B0;
+  --display:"Big Shoulders Display","Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--wall);color:var(--text);font:400 15px/1.5 var(--body)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:40px 90px;display:flex;flex-direction:column;gap:56px}
+.back{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;align-self:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:999px}
+.back:hover,.back:focus-visible{border-color:var(--lime);outline:none;color:var(--text)}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1{font:900 clamp(56px,9vw,112px)/.85 var(--display);text-transform:uppercase}
+h1 em{font-style:normal;color:var(--lime)}
+h2{font:800 34px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+h3{font:800 20px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+p{margin:0;max-width:66ch;text-wrap:pretty}
+.eyebrow{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:19px;line-height:1.45}
+.muted{color:var(--muted)}
+section{display:flex;flex-direction:column;gap:20px}
+.head{display:flex;flex-direction:column;gap:12px}
+.stats{display:flex;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px 8px}
+.stats div{flex:1 1 130px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.stats b{font:900 40px/1 var(--display);font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--muted)}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+.shot{display:flex;flex-direction:column;gap:10px;min-width:0}
+.shot .cap{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.shot .cap h3{font-size:22px}
+.phone{background:#000;border-radius:30px;padding:9px;box-shadow:0 0 0 1px #34313A}
+.phone .screen{background:var(--g-bg);border-radius:22px;overflow:hidden;padding:12px 12px 16px;display:flex;flex-direction:column;gap:10px}
+.gbar{display:flex;align-items:center;gap:8px;border:1px solid var(--g-line);border-radius:99px;padding:9px 12px;color:var(--g-text);font:400 13px/1.25 Arial,sans-serif;overflow-wrap:anywhere}
+.gbar i{width:12px;height:12px;border:2px solid var(--g-sub);border-radius:50%;flex:none}
+.gtabs{display:flex;gap:14px;font:400 12px/1 Arial,sans-serif;color:var(--g-sub);border-bottom:1px solid var(--g-line);padding:2px 2px 0}
+.gtabs span{padding-bottom:8px}
+.gtabs b{color:var(--g-text);font-weight:400;border-bottom:2px solid var(--g-text);padding-bottom:6px}
+.tolanding{font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--lime)}
+.tolanding:hover,.tolanding:focus-visible{text-decoration:underline;outline:none}
+
+.gad{font-family:Arial,sans-serif;color:var(--g-text);display:flex;flex-direction:column;gap:5px}
+.gad .sp{font:700 12px/1 Arial,sans-serif}
+.gad .site{display:flex;gap:9px;align-items:center}
+.gad .fav{width:26px;height:26px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.gad .fav svg{width:17px;fill:#fff;display:block}
+.gad .site b{font-size:14px;font-weight:400;display:block}
+.gad .site small{display:block;font-size:12px;color:var(--g-sub);overflow-wrap:anywhere}
+.gad .t{color:var(--g-link);font-size:18px;line-height:1.3}
+.gad .d{font-size:13.5px;line-height:1.5;color:var(--g-sub)}
+.gad .sl{display:flex;flex-direction:column;border-top:1px solid var(--g-line);margin-top:4px}
+.gad .sl span{color:var(--g-link);font-size:14px;padding:9px 0;border-bottom:1px solid var(--g-line)}
+.gad .co{font-size:12.5px;color:var(--g-sub)}
+.gad .term{background:var(--g-hi);border-radius:2px;padding:0 2px;color:inherit}
+.desk{background:var(--g-bg);border-radius:12px;padding:18px 20px 22px}
+.desk .sl{flex-direction:row;flex-wrap:wrap;gap:4px 18px;border:0}
+.desk .sl span{border:0;padding:0}
+
+.tree{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.camp{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.camp-h{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
+.code{font:500 12.5px/1.4 var(--mono);overflow-wrap:anywhere}
+.money{font:700 14px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--lime)}
+.ag{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.ag a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 2px;border-bottom:1px solid var(--line);text-decoration:none}
+.ag a:hover,.ag a:focus-visible{background:var(--panel2);outline:none}
+.ag b{font-weight:700}
+.ag small{grid-column:1 / -1;color:var(--muted);font-size:13.5px}
+.pill{display:inline-block;font:700 11px/1 var(--mono);padding:5px 8px;border-radius:99px;background:var(--red);color:#fff;white-space:nowrap;align-self:start}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button,.seg button,.btn{font:600 13px/1 var(--body);padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer}
+.tabs button[aria-pressed="true"],.seg button[aria-pressed="true"]{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.serpcol{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:flex;gap:4px}
+.land{font-size:13px;color:var(--muted)}
+.land b{color:var(--text)}
+.assets{display:flex;flex-direction:column;gap:18px;min-width:0}
+.alist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.alist li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.alist li .txt{min-width:0;overflow-wrap:anywhere}
+.n{font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;min-width:4.2em;text-align:right}
+.n.tight{color:var(--warn)}
+.copy{font:700 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:7px 9px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.copy:hover{color:var(--text);border-color:var(--lime)}
+.pin{font:700 10px/1 var(--mono);color:var(--lime);margin-left:6px;letter-spacing:.06em}
+.term{color:var(--lime)}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{font:500 12px/1.2 var(--mono);background:var(--panel2);border:1px solid var(--line);padding:7px 9px;border-radius:99px}
+
+.tbl{overflow-x:auto;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 10px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.steps{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.steps li::marker{font:700 13px var(--mono);color:var(--lime)}
+pre{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;font:500 12.5px/1.6 var(--mono)}
+.dg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card ul{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.claims li{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+.claims li b{font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--lime);color:var(--ink);font:700 13px/1 var(--body);padding:10px 14px;border-radius:99px}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:900px){.dg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .panel,.grid2,.tree,.dg{grid-template-columns:minmax(0,1fr)}
+  .claims li{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<a class="back" href="index.html">← Roadshow hub</a>
+<header class="head">
+  <span class="eyebrow">Season 01 waitlist · Google Search · evergreen</span>
+  <h1>Google <em>Search</em></h1>
+  <p class="lede">Parents aren't searching for youth esports. They're searching for help with a kid who games too much, doesn't have friends, or doesn't fit the soccer-and-scouts mold. Each campaign meets one of those problems in the words parents actually type.</p>
+  <p class="muted">The answer is the same every time: a coach and a team that has their back, in whatever game they already love. You get to be proud of them. They get a place where they feel seen. Every ad lands on the waitlist page the Meta ads use, opened on the matching message.</p>
+</header>
+
+<div class="stats" id="stats"></div>
+
+<section id="examples">
+  <div class="head"><span class="eyebrow">What parents see</span><h2>Every ad, on a phone</h2>
+  <p class="muted">One example per ad group, at the top of Google on mobile. Google mixes the headlines, so each is one of many combinations. Tap through to the landing page it opens on.</p></div>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<div class="notice">
+  <span class="eyebrow">Before anything goes live</span>
+  <p><b>The landing page can't report a sign-up to Google yet.</b> It only fires the Meta pixel. Without a Google conversion, the campaigns can't learn which searches bring in emails, and cost per email stays high. Jamie's fix is in the tracking section.</p>
+  <p><b>The landing page still says Season 01 is League of Legends</b>, in How a season works and the FAQ. These ads say every game is welcome. Page and ads have to agree before launch.</p>
+  <p><b>The friends and not-a-sports-kid ads borrow page states written for other ads.</b> They work, but each deserves its own opening line, and the friends one needs a short talk-to-a-professional note, per the brand rules.</p>
+  <p><b>The ads promise you'll hear from a real coach.</b> Karlin's first email has to sound like a person a parent would want to hear from, not a newsletter.</p>
+</div>
+
+<section id="structure">
+  <div class="head"><span class="eyebrow">Account structure</span><h2>One campaign per problem</h2>
+  <p class="muted">Each problem gets its own budget, so the cheapest one to win can be fed more and the others don't starve it. Esports searches get a small catch budget only. Search charges only when someone searches, so if nobody does, it costs nothing.</p></div>
+  <div class="tree" id="tree"></div>
+</section>
+
+<section id="ads">
+  <div class="head"><span class="eyebrow">The ads</span><h2>Working detail</h2>
+  <p class="muted">Every ad group runs two ads. They're identical except for one word. <b>A</b> says gamer, <b>B</b> says player. That runs the open gamer vs player test on Google for free, and the labels make it one filter in reporting. Each ad has 15 headlines and 4 descriptions. Shuffle to see other combinations Google can serve.</p></div>
+  <div class="tabs" id="tabs" role="group" aria-label="Ad group"></div>
+  <div class="panel">
+    <div class="serpcol">
+      <div class="ctrl">
+        <div class="seg" id="seg" role="group" aria-label="Variant">
+          <button type="button" data-v="A" aria-pressed="true">A · Gamer</button>
+          <button type="button" data-v="B" aria-pressed="false">B · Player</button>
+        </div>
+        <button type="button" class="btn" id="shuffle">Shuffle</button>
+      </div>
+      <div class="desk"><div class="gad" id="serp" aria-live="polite"></div></div>
+      <p class="land" id="land"></p>
+      <div><span class="eyebrow">Keywords · phrase and exact</span></div>
+      <div class="kw" id="kw"></div>
+    </div>
+    <div class="assets">
+      <div><span class="eyebrow">Headlines · 30 max</span><ul class="alist" id="hl"></ul></div>
+      <div><span class="eyebrow">Descriptions · 90 max</span><ul class="alist" id="dl"></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="assets">
+  <div class="head"><span class="eyebrow">Shared across both campaigns</span><h2>Sitelinks, callouts, snippets</h2>
+  <p class="muted">These sit under the ad and make it bigger on the page. Add them once at the account level in the Google Ads web view.</p></div>
+  <div class="tbl"><table><thead><tr><th>Sitelink</th><th>Line 1</th><th>Line 2</th><th>Goes to</th></tr></thead><tbody id="sl"></tbody></table></div>
+  <div class="grid2">
+    <div><span class="eyebrow">Callouts · 25 max</span><ul class="alist" id="co"></ul></div>
+    <div><span class="eyebrow" id="snh"></span><ul class="alist" id="sn"></ul></div>
+  </div>
+</section>
+
+<section id="settings">
+  <div class="head"><span class="eyebrow">Settings</span><h2>How it spends</h2></div>
+  <div class="tbl"><table><tbody>
+    <tr><th>Networks</th><td>Google Search only. Turn off Search Partners and the Display Network. Both are on by default and both burn budget on low-intent clicks.</td></tr>
+    <tr><th>Location</th><td>United States, set to "Presence: people in or regularly in". The default "presence or interest" pays for searches from outside the US.</td></tr>
+    <tr><th>Budget</th><td><span class="money">$16/day</span>, about $490 a month: $6 screen time, $4 friends, $4 not a sports kid, $2 catch. Same total as the Meta Tier 1 test, so the two read side by side.</td></tr>
+    <tr><th>Bidding</th><td>Weeks 1 to 2: Maximize clicks with a CPC cap ($1.50 on the problem campaigns, $2.50 on the catch). Once the account has 15 sign-ups in 30 days, switch to Maximize conversions. At 30, set a target cost per sign-up.</td></tr>
+    <tr><th>Audiences</th><td>Add Parents of Teens (13 to 17) and Parents of Grade-Schoolers (6 to 12) as <i>observation</i>, not targeting. You see how parents convert without shrinking reach. Google gives no personalized ads to anyone under 18, so we never target kids.</td></tr>
+    <tr><th>Final URL suffix</th><td><span class="code" id="suffix"></span></td></tr>
+    <tr><th>Auto-tagging</th><td>On. It adds a gclid to every click, which the landing page should store with the email.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="negatives">
+  <div class="head"><span class="eyebrow">Negative keywords · both campaigns</span><h2>Searches we never pay for</h2>
+  <p class="muted">Jobs, scholarships, downloads and cheats, gear, screen-time apps and settings, mental health and diagnosis searches, bullying, and anyone looking to learn a specific game. We don't teach the game, so we don't pay for those searches. Check the search terms report every Monday and add to this list. That one habit does more for cost per email than any copy change.</p></div>
+  <div class="kw" id="neg"></div>
+</section>
+
+<section id="read">
+  <div class="head"><span class="eyebrow">Reading it</span><h2>What to watch, weekly</h2></div>
+  <ol class="steps">
+    <li><b>Cost per waitlist email, by ad group,</b> next to Meta's cost per Lead for the same week. The proposed signal target was $25 or less per email.</li>
+    <li><b>Search terms.</b> Anything irrelevant becomes a negative. Any term that converts twice becomes its own exact keyword.</li>
+    <li><b>Kill rule.</b> Pause a keyword once it has spent $50 with no sign-up. After 3 weeks, compare cost per email across the three problems. Move budget toward the cheapest one. That answer, which problem parents most want solved, is worth as much as the emails.</li>
+    <li><b>Gamer vs player.</b> Filter ads by the TERM_GAMER and TERM_PLAYER labels. Treat it as directional until each side has about 20 sign-ups.</li>
+    <li><b>Feed Meta.</b> The headlines Google rates Best are tested parent language. Move them into the Ad Lab primary text.</li>
+  </ol>
+</section>
+
+<section id="tracking">
+  <div class="head"><span class="eyebrow">For Jamie</span><h2>Tracking setup</h2>
+  <p class="muted">The landing page is a static file at <span class="code">public/roadshow/landing.html</span>, so it doesn't get the GA4 tag the Next.js layout loads. Three edits.</p></div>
+  <ol class="steps">
+    <li>In Google Ads, create a conversion action: Website, category Sign-up, name "Season 01 Waitlist", count One, primary. Turn on enhanced conversions for web. Copy the AW ID and label.</li>
+    <li>Add the Google tag to the page head, and fire the conversion right after the existing Meta Lead line in the submit handler.</li>
+    <li>Add gclid to the attribution object so each Klaviyo profile shows which Google click it came from.</li>
+  </ol>
+  <pre id="snippet"></pre>
+  <p class="muted">Then load the Editor import file into Google Ads Editor (Account, Import, From file), review, and post. Everything imports paused. Add sitelinks, callouts and the snippet in the web view, then enable.</p>
+</section>
+
+<section id="demandgen">
+  <div class="head"><span class="eyebrow">Phase 2 · after Meta reads out</span><h2>Demand Gen with the Ad Lab creative</h2>
+  <p class="muted">Demand Gen runs image ads on YouTube, Gmail and Discover, and is Google's closest match to Meta. Hold it until Meta shows which of directions 01, 02 and 10 wins, then run that one at <span class="money" id="dgb"></span>. Targeting: <span id="dga"></span></p>
+  <p class="muted">Two rules carry over from the Ad Lab notes. The AI game-character backdrops can't run in paid ads, so use the photo backdrops. The Ad Lab exports 4:5 already. It needs 1.91:1 and 1:1 crops added.</p></div>
+  <div class="dg" id="dg"></div>
+</section>
+
+<section id="claims">
+  <div class="head"><span class="eyebrow">Karlin to confirm</span><h2>Claims in these ads</h2>
+  <p class="muted">Google holds ads to the same standard as the landing page. Every one of these appears in an ad. Any that aren't true yet come out before launch.</p></div>
+  <ul class="alist claims" id="cl"></ul>
+</section>
+<footer>Internal preview for the EKUZO team. Built from the Ad lab directions. Editor import file: EKUZO-Marketing/campaigns/google-evergreen.</footer>
+</div>
+<div class="toast" id="toast" hidden>Copied</div>
+
+<script id="data" type="application/json">{
+ "campaigns": [
+  {
+   "name": "EKUZO_EG_SCREENTIME",
+   "budget": 6,
+   "cap": "1.50",
+   "problem": "They game too much",
+   "why": "The biggest search. Parents asking how to cut screen time or make it worth something. Our answer is structure and a coach, not a timer app.",
+   "groups": [
+    "REDUCE",
+    "MATTERS",
+    "WORRY"
+   ]
+  },
+  {
+   "name": "EKUZO_EG_FRIENDS",
+   "budget": 4,
+   "cap": "1.50",
+   "problem": "They don't have friends",
+   "why": "Parents worried their kid is alone, or only has friends through a screen. Our answer is a team that has their back, every week.",
+   "groups": [
+    "FRIENDS"
+   ]
+  },
+  {
+   "name": "EKUZO_EG_NOT-SPORTS",
+   "budget": 4,
+   "cap": "1.50",
+   "problem": "They don't fit the usual mold",
+   "why": "Parents of the kid who never clicked with soccer or the usual after-school list. Our answer is a team sport built around what they already love.",
+   "groups": [
+    "SPORTS"
+   ]
+  },
+  {
+   "name": "EKUZO_EG_CATCH",
+   "budget": 2,
+   "cap": "2.50",
+   "problem": "Already looking",
+   "why": "The few parents who do search for youth esports. We don't expect volume here, and Search only charges when someone searches, so a small budget covers it.",
+   "groups": [
+    "LEAGUE"
+   ]
+  }
+ ],
+ "groups": {
+  "REDUCE": {
+   "label": "Reduce screen time",
+   "ad": "d6",
+   "state": "The coach calls it, not you.",
+   "path": [
+    "Screen-Time",
+    "With-A-Coach"
+   ],
+   "pin1": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time"
+   ],
+   "h": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time",
+    "The Coach Calls Time",
+    "The Coach Ends It. Not You.",
+    "No More Five More Minutes"
+   ],
+   "d4": "Practice has a start and an end, and the coach runs both. No doorway argument.",
+   "kw": [
+    "how to reduce screen time for kids",
+    "how to reduce screen time for teens",
+    "how to limit screen time for kids",
+    "how to limit gaming time",
+    "kids screen time limits",
+    "teen screen time limits",
+    "how to get my kid off video games",
+    "screen time rules for teens",
+    "reduce gaming time"
+   ]
+  },
+  "MATTERS": {
+   "label": "Screen time that matters",
+   "ad": "d10",
+   "state": "The skills are already there. A coach brings them out.",
+   "path": [
+    "Screen-Time",
+    "That-Matters"
+   ],
+   "pin1": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of"
+   ],
+   "h": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of",
+    "Be Proud of Their Screen Time",
+    "Make Their Screen Time Count",
+    "Screen Time With a Coach"
+   ],
+   "d4": "Teamwork, problem solving and talking it through. Real skills in the games they love.",
+   "kw": [
+    "healthy screen time for kids",
+    "productive screen time for kids",
+    "good screen time for teens",
+    "positive screen time",
+    "screen time that matters",
+    "is gaming good for kids",
+    "benefits of video games for kids",
+    "is esports good for kids",
+    "benefits of esports for kids"
+   ]
+  },
+  "WORRY": {
+   "label": "Gaming too much",
+   "ad": "d1",
+   "state": "They're going to play anyway.",
+   "path": [
+    "Gaming",
+    "With-A-Coach"
+   ],
+   "pin1": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach"
+   ],
+   "h": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach",
+    "Turn Screen Time Into Practice",
+    "Give Their Gaming a Purpose",
+    "Structure for Their Gaming"
+   ],
+   "d4": "We love the games they love. We add a coach, a team and a set time to play.",
+   "kw": [
+    "kids gaming too much",
+    "my kid plays video games all day",
+    "teen plays video games all day",
+    "son plays video games all day",
+    "is my kid gaming too much",
+    "how to make gaming productive for kids"
+   ]
+  },
+  "FRIENDS": {
+   "label": "Finding friends",
+   "ad": "d4",
+   "state": "Not every team needs a field.",
+   "path": [
+    "Their-Team",
+    "Ages-10-17"
+   ],
+   "pin1": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team"
+   ],
+   "h": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team",
+    "Friends Who Count on Them",
+    "A Team That Has Their Back",
+    "Teammates Every Week"
+   ],
+   "d4": "They already connect through games. We put them on a team, with a coach, every week.",
+   "kw": [
+    "my kid has no friends",
+    "my child has no friends",
+    "teenager has no friends",
+    "my son has no friends",
+    "my daughter has no friends",
+    "how to help my child make friends",
+    "how to help my teen make friends",
+    "my kid only has online friends",
+    "lonely teenager what to do",
+    "shy kid making friends",
+    "where can my teen make friends"
+   ]
+  },
+  "SPORTS": {
+   "label": "Not a sports kid",
+   "ad": "d5",
+   "state": "A team that expects them every week.",
+   "path": [
+    "Their-Team",
+    "Beyond-Sports"
+   ],
+   "pin1": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field"
+   ],
+   "h": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field",
+    "A Team Sport for {T}s",
+    "Where Gamer Kids Fit In",
+    "The Team They'll Show Up For"
+   ],
+   "d4": "For the kid who never clicked with soccer. A team, a coach and friends who get them.",
+   "kw": [
+    "my kid doesn't like sports",
+    "kids who don't like sports",
+    "activities for kids who don't like sports",
+    "my son hates sports",
+    "my child hates team sports",
+    "alternatives to team sports for kids",
+    "non athletic kid activities",
+    "activities for kids who love video games",
+    "extracurricular activities for kids who don't like sports",
+    "my kid doesn't fit in"
+   ]
+  },
+  "LEAGUE": {
+   "label": "Already looking",
+   "ad": "d9",
+   "state": "No drive. No cleats. No parking.",
+   "path": [
+    "Esports-League",
+    "Ages-10-17"
+   ],
+   "pin1": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17"
+   ],
+   "h": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17",
+    "A Team for Every {T}",
+    "Every {T} Deserves a Team",
+    "Their Team. Their Season."
+   ],
+   "d4": "Same teammates every week, a coach who runs practice and a season to compete in together.",
+   "kw": [
+    "youth esports league",
+    "esports league for kids",
+    "kids esports league",
+    "esports team for kids",
+    "esports teams for teens",
+    "esports for kids",
+    "esports club for kids",
+    "after school esports",
+    "gaming coach for kids",
+    "esports coach for kids"
+   ]
+  }
+ },
+ "rsas": [
+  {
+   "group": "REDUCE",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time",
+    "The Coach Calls Time",
+    "The Coach Ends It. Not You.",
+    "No More Five More Minutes",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Practice has a start and an end, and the coach runs both. No doorway argument."
+   ],
+   "pins": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time"
+   ],
+   "path": [
+    "Screen-Time",
+    "With-A-Coach"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d6&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=reduce_a",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "REDUCE",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time",
+    "The Coach Calls Time",
+    "The Coach Ends It. Not You.",
+    "No More Five More Minutes",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Practice has a start and an end, and the coach runs both. No doorway argument."
+   ],
+   "pins": [
+    "Screen Time With Structure",
+    "Screen Time With an End Time"
+   ],
+   "path": [
+    "Screen-Time",
+    "With-A-Coach"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d6&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=reduce_b",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "MATTERS",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of",
+    "Be Proud of Their Screen Time",
+    "Make Their Screen Time Count",
+    "Screen Time With a Coach",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Teamwork, problem solving and talking it through. Real skills in the games they love."
+   ],
+   "pins": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of"
+   ],
+   "path": [
+    "Screen-Time",
+    "That-Matters"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d10&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=matters_a",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "MATTERS",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of",
+    "Be Proud of Their Screen Time",
+    "Make Their Screen Time Count",
+    "Screen Time With a Coach",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Teamwork, problem solving and talking it through. Real skills in the games they love."
+   ],
+   "pins": [
+    "Screen Time That Matters",
+    "Screen Time You're Proud Of"
+   ],
+   "path": [
+    "Screen-Time",
+    "That-Matters"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d10&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=matters_b",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "WORRY",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach",
+    "Turn Screen Time Into Practice",
+    "Give Their Gaming a Purpose",
+    "Structure for Their Gaming",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "We love the games they love. We add a coach, a team and a set time to play."
+   ],
+   "pins": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach"
+   ],
+   "path": [
+    "Gaming",
+    "With-A-Coach"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d1&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=worry_a",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "WORRY",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach",
+    "Turn Screen Time Into Practice",
+    "Give Their Gaming a Purpose",
+    "Structure for Their Gaming",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "We love the games they love. We add a coach, a team and a set time to play."
+   ],
+   "pins": [
+    "They're Going to Play Anyway",
+    "Gaming Too Much? Add a Coach"
+   ],
+   "path": [
+    "Gaming",
+    "With-A-Coach"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d1&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=worry_b",
+   "campaign": "EKUZO_EG_SCREENTIME"
+  },
+  {
+   "group": "FRIENDS",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team",
+    "Friends Who Count on Them",
+    "A Team That Has Their Back",
+    "Teammates Every Week",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "They already connect through games. We put them on a team, with a coach, every week."
+   ],
+   "pins": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team"
+   ],
+   "path": [
+    "Their-Team",
+    "Ages-10-17"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d4&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=friends_a",
+   "campaign": "EKUZO_EG_FRIENDS"
+  },
+  {
+   "group": "FRIENDS",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team",
+    "Friends Who Count on Them",
+    "A Team That Has Their Back",
+    "Teammates Every Week",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "They already connect through games. We put them on a team, with a coach, every week."
+   ],
+   "pins": [
+    "Help Them Find Their People",
+    "Online Friends? Make It a Team"
+   ],
+   "path": [
+    "Their-Team",
+    "Ages-10-17"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d4&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=friends_b",
+   "campaign": "EKUZO_EG_FRIENDS"
+  },
+  {
+   "group": "SPORTS",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field",
+    "A Team Sport for Gamers",
+    "Where Gamer Kids Fit In",
+    "The Team They'll Show Up For",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "For the kid who never clicked with soccer. A team, a coach and friends who get them."
+   ],
+   "pins": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field"
+   ],
+   "path": [
+    "Their-Team",
+    "Beyond-Sports"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d5&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=sports_a",
+   "campaign": "EKUZO_EG_NOT-SPORTS"
+  },
+  {
+   "group": "SPORTS",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field",
+    "A Team Sport for Players",
+    "Where Gamer Kids Fit In",
+    "The Team They'll Show Up For",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "For the kid who never clicked with soccer. A team, a coach and friends who get them."
+   ],
+   "pins": [
+    "Not Every Kid Plays Soccer",
+    "Not Every Team Needs a Field"
+   ],
+   "path": [
+    "Their-Team",
+    "Beyond-Sports"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d5&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=sports_b",
+   "campaign": "EKUZO_EG_NOT-SPORTS"
+  },
+  {
+   "group": "LEAGUE",
+   "variant": "A",
+   "term": "Gamer",
+   "headlines": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17",
+    "A Team for Every Gamer",
+    "Every Gamer Deserves a Team",
+    "Their Team. Their Season.",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your gamer a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Same teammates every week, a coach who runs practice and a season to compete in together."
+   ],
+   "pins": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17"
+   ],
+   "path": [
+    "Esports-League",
+    "Ages-10-17"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d9&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=league_a",
+   "campaign": "EKUZO_EG_CATCH"
+  },
+  {
+   "group": "LEAGUE",
+   "variant": "B",
+   "term": "Player",
+   "headlines": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17",
+    "A Team for Every Player",
+    "Every Player Deserves a Team",
+    "Their Team. Their Season.",
+    "Their Team Has Their Back",
+    "A Coach Runs Every Practice",
+    "Real Practice. Real Matches.",
+    "A Community That Sees Them",
+    "Be Proud of Your Kid",
+    "Join the Free Waitlist",
+    "Season 01 Starts in 2027",
+    "Every Game Welcome",
+    "1 Coach for Every 5 Players",
+    "No Toxic Lobbies"
+   ],
+   "descriptions": [
+    "Give your player a coach and a team that has their back. Weekly practice, real matches.",
+    "We don't teach them the game. We add a coach, a team and structure to their screen time.",
+    "Join the free Season 01 waitlist and hear from a real coach. Ages 10-17. No commitment.",
+    "Same teammates every week, a coach who runs practice and a season to compete in together."
+   ],
+   "pins": [
+    "Youth Esports League",
+    "Esports League for Ages 10-17"
+   ],
+   "path": [
+    "Esports-League",
+    "Ages-10-17"
+   ],
+   "url": "https://ekuzo.gg/roadshow/landing.html?ad=d9&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=league_b",
+   "campaign": "EKUZO_EG_CATCH"
+  }
+ ],
+ "negatives": [
+  "job",
+  "jobs",
+  "salary",
+  "career",
+  "careers",
+  "hiring",
+  "internship",
+  "college",
+  "university",
+  "scholarship",
+  "scholarships",
+  "degree",
+  "playvs",
+  "teacher",
+  "curriculum",
+  "grant",
+  "lesson plan",
+  "betting",
+  "bet",
+  "odds",
+  "gambling",
+  "twitch",
+  "stream",
+  "streamer",
+  "download",
+  "apk",
+  "cheat",
+  "cheats",
+  "hack",
+  "mod",
+  "skins",
+  "vbucks",
+  "v bucks",
+  "robux",
+  "rank boost",
+  "boosting",
+  "elo boost",
+  "smurf",
+  "account for sale",
+  "chair",
+  "desk",
+  "headset",
+  "keyboard",
+  "mouse",
+  "laptop",
+  "console",
+  "controller",
+  "monitor",
+  "gaming pc",
+  "setup",
+  "arena",
+  "lounge",
+  "bar",
+  "worlds",
+  "lcs",
+  "lec",
+  "msi",
+  "patch notes",
+  "tier list",
+  "build",
+  "wiki",
+  "adult",
+  "adults",
+  "nba 2k league",
+  "olympics",
+  "stock",
+  "lessons",
+  "how to get better",
+  "aim trainer",
+  "aim training",
+  "rank up",
+  "pro coaching",
+  "app",
+  "apps",
+  "parental controls",
+  "iphone",
+  "ipad",
+  "android",
+  "settings",
+  "turn off",
+  "bypass",
+  "passcode",
+  "addiction",
+  "addicted",
+  "therapy",
+  "therapist",
+  "treatment",
+  "rehab",
+  "detox",
+  "depression",
+  "depressed",
+  "anxiety",
+  "suicide",
+  "suicidal",
+  "counselor",
+  "counseling",
+  "psychologist",
+  "psychiatrist",
+  "medication",
+  "diagnosis",
+  "autism",
+  "autistic",
+  "adhd",
+  "bullying",
+  "bullied",
+  "toddler",
+  "toddlers",
+  "baby",
+  "preschool",
+  "aap",
+  "statistics",
+  "study",
+  "research",
+  "essay",
+  "article"
+ ],
+ "sitelinks": [
+  [
+   "Join the Waitlist",
+   "Free. No commitment.",
+   "Hear first when sign-ups open",
+   "https://ekuzo.gg/roadshow/landing.html?ad=d4&utm_source=google&utm_medium=cpc&utm_campaign=evergreen&utm_content=sitelink#join-end"
+  ],
+  [
+   "How a Season Works",
+   "Weekly practice with a coach",
+   "Same teammates all season",
+   "https://ekuzo.gg/roadshow/landing.html?ad=d4"
+  ],
+  [
+   "For Parents",
+   "What your kid gets from a team",
+   "Safety, coaching and structure",
+   "https://ekuzo.gg/parents?join=season-one"
+  ],
+  [
+   "Our Coaching Method",
+   "How every practice is run",
+   "Teamwork, comms and strategy",
+   "https://ekuzo.gg/methodology?join=season-one"
+  ],
+  [
+   "Parent FAQ",
+   "The short answers",
+   "Cost, schedule, games, safety",
+   "https://ekuzo.gg/faq?join=season-one"
+  ]
+ ],
+ "callouts": [
+  "Ages 10-17",
+  "Online, From Home",
+  "1 Coach per 5 Players",
+  "No Toxic Lobbies",
+  "Free Waitlist",
+  "Weekly Practice",
+  "Same Team All Season",
+  "No Commitment"
+ ],
+ "snippet": [
+  "Service catalog",
+  [
+   "Weekly Practice",
+   "Team Matches",
+   "Coach Feedback",
+   "Full Season",
+   "Team Jersey"
+  ]
+ ],
+ "demandgen": {
+  "name": "EKUZO_EG_DEMANDGEN_PARENTS",
+  "budget": 8,
+  "audience": "Detailed demographics: Parents of Teens (13-17) and Parents of Grade-Schoolers (6-12). Optimized targeting off for the first read.",
+  "ads": [
+   {
+    "dir": "01 We've all said it",
+    "ad": "d1",
+    "h": [
+     "They game too much. With a coach.",
+     "Turn screen time into practice.",
+     "They're going to play anyway.",
+     "Give them a coach and a team.",
+     "Make their gaming count."
+    ],
+    "d": [
+     "Weekly practice with a real coach and the same teammates all season. Online, from home.",
+     "Join the free Season 01 waitlist for ages 10-17. Hear first when sign-ups open."
+    ]
+   },
+   {
+    "dir": "02 Overheard",
+    "ad": "d2",
+    "h": [
+     "Can't pause it? Their team needs them.",
+     "That's already a team sport.",
+     "Turn screen time into practice.",
+     "Give them a coach and a team.",
+     "A real team for ages 10-17."
+    ],
+    "d": [
+     "EKUZO adds the coach, the weekly practice and the same teammates all season.",
+     "Join the free Season 01 waitlist. No commitment, unsubscribe anytime."
+    ]
+   },
+   {
+    "dir": "10 Screen time with a purpose",
+    "ad": "d10",
+    "h": [
+     "Be proud of their screen time.",
+     "Screen time that matters.",
+     "Screen time you're proud of.",
+     "A coach brings the skills out.",
+     "Their team has their back."
+    ],
+    "d": [
+     "Problem solving, teamwork and talking it through. Real skills doing something they love.",
+     "Join the free Season 01 waitlist. Hear first when sign-ups open."
+    ]
+   }
+  ],
+  "images": [
+   "Landscape 1.91:1, 1200x628",
+   "Square 1:1, 1200x1200",
+   "Portrait 4:5, 960x1200 (Ad Lab feed size)",
+   "Logo 1:1, 1200x1200"
+  ]
+ },
+ "claims": [
+  [
+   "Season 01 starts in 2027",
+   "On the landing page and in 2 headlines"
+  ],
+  [
+   "1 coach for every 5 players",
+   "From PRODUCT.md positioning. Headline and callout"
+  ],
+  [
+   "A coach runs every practice",
+   "Landing page says so. Ad Lab flagged it as unconfirmed"
+  ],
+  [
+   "Weekly practice and matches against other teams",
+   "The user brief says real competition. Who do they play?"
+  ],
+  [
+   "Every game welcome",
+   "The landing page still says Season 01 is League of Legends, in How a season works and the FAQ. Ads and page have to agree"
+  ],
+  [
+   "No toxic lobbies, sessions monitored",
+   "From PRODUCT.md. Callout and headline"
+  ],
+  [
+   "Friends and fitting in",
+   "PRODUCT.md says content about loneliness needs a talk-to-a-professional note. The friends landing state needs one"
+  ],
+  [
+   "Team jersey",
+   "Structured snippet. Ad Lab flagged the jersey as a claim to confirm"
+  ]
+ ],
+ "cap": {
+  "EKUZO_EG_SCREENTIME": "1.50",
+  "EKUZO_EG_FRIENDS": "1.50",
+  "EKUZO_EG_NOT-SPORTS": "1.50",
+  "EKUZO_EG_CATCH": "2.50"
+ },
+ "lp": "https://ekuzo.gg/roadshow/landing.html",
+ "suffix": "utm_term={keyword}&matchtype={matchtype}&network={network}"
+}</script>
+<script>
+const D=JSON.parse(document.getElementById("data").textContent);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const QUERIES={REDUCE:"how to reduce screen time for teens",MATTERS:"healthy screen time for kids",WORRY:"my kid plays video games all day",FRIENDS:"my kid only has online friends",SPORTS:"my kid doesn't like sports",LEAGUE:"youth esports league"};
+const ORDER=D.campaigns.flatMap(c=>c.groups);
+let G=ORDER[0],V="A",seed=0;
+
+const total=D.campaigns.reduce((a,c)=>a+c.budget,0);
+const nKw=ORDER.reduce((a,g)=>a+D.groups[g].kw.length,0);
+$("#stats").innerHTML=[[`$${total}`,"per day, all campaigns"],[ORDER.length,"ad groups"],[D.rsas.length,"search ads"],[nKw*2,"keywords"],[D.negatives.length,"negatives"]]
+ .map(([b,s])=>`<div><b>${b}</b><span>${s}</span></div>`).join("");
+
+const MARK='<svg viewBox="0 0 107 21" fill="currentColor" aria-hidden="true"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>';
+const LANDBASE="landing.html";
+const href=u=>LANDBASE?u.replace(D.lp,LANDBASE):u;
+
+$("#tree").innerHTML=D.campaigns.map(c=>`<div class="camp">
+  <div class="camp-h"><h3>${esc(c.problem)}</h3><span class="money">$${c.budget}/day · cap $${D.cap[c.name]}</span></div>
+  <span class="code muted">${esc(c.name)}</span><p class="muted" style="font-size:14px">${esc(c.why)}</p>
+  <div class="ag">${c.groups.map(g=>{const x=D.groups[g];return `<a href="#ads" data-jump="${g}"><b>${esc(x.label)}</b><span class="pill">?ad=${x.ad}</span><small>“${esc(QUERIES[g])}” opens on ${esc(x.state)}</small></a>`}).join("")}</div></div>`).join("");
+document.addEventListener("click",e=>{const a=e.target.closest("[data-jump]");if(!a)return;G=a.dataset.jump;seed=0;render()});
+
+$("#tabs").innerHTML=ORDER.map(g=>`<button type="button" data-g="${g}" aria-pressed="${g===G}">${esc(D.groups[g].label)}</button>`).join("");
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;G=b.dataset.g;seed=0;render()});
+$("#seg").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;V=b.dataset.v;render()});
+$("#shuffle").addEventListener("click",()=>{seed++;renderSerp()});
+
+function rsaOf(g,v){return D.rsas.find(r=>r.group===g&&r.variant===v)}
+function rsa(){return rsaOf(G,V)}
+function mark(t,r){const T=r.term;return esc(t).replace(new RegExp(`\\b(${T}s?|${T.toLowerCase()}s?)\\b`,"g"),'<span class="term">$1</span>')}
+function rng(n,sd,g){let x=(sd*9301+g.length*49297+n*233)%233280;return x/233280}
+function pick(list,k,fixed,sd,g){const out=fixed?[fixed]:[];const pool=list.filter(h=>h!==fixed);let i=0;while(out.length<k&&pool.length){const j=Math.floor(rng(++i,sd,g)*pool.length);out.push(pool.splice(j,1)[0])}return out}
+function adHTML(r,sd,n){
+  const hs=pick(r.headlines,n,r.pins[sd%r.pins.length],sd,r.group);
+  const ds=pick(r.descriptions,n===2?1:2,null,sd,r.group);
+  return `<span class="sp">Sponsored</span>
+   <div class="site"><span class="fav">${MARK}</span><div><b>EKUZO</b><small>ekuzo.gg › ${esc(r.path[0])} › ${esc(r.path[1])}</small></div></div>
+   <div class="t">${hs.map(h=>mark(h,r)).join(" | ")}</div>
+   <div class="d">${ds.map(d=>mark(d,r)).join(" ")}</div>
+   <div class="sl">${D.sitelinks.slice(0,n===2?3:4).map(s=>`<span>${esc(s[0])}</span>`).join("")}</div>
+   <div class="co">${D.callouts.slice(0,3).map(esc).join(" · ")}</div>`;
+}
+function renderSerp(){ $("#serp").innerHTML=`<div class="gbar"><i></i>${esc(QUERIES[G])}</div>`+adHTML(rsa(),seed,3); }
+$("#gallery").innerHTML=ORDER.map((g,i)=>{const r=rsaOf(g,"A"),x=D.groups[g];return `<div class="shot" id="ex-${g.toLowerCase()}">
+  <div class="cap"><h3>${esc(x.label)}</h3><a class="tolanding" href="${esc(href(r.url))}" target="_blank" rel="noopener">Landing page ↗</a></div>
+  <div class="phone"><div class="screen"><div class="gbar"><i></i>${esc(QUERIES[g])}</div><div class="gtabs"><b>All</b><span>Images</span><span>Videos</span><span>News</span></div><div class="gad">${adHTML(r,i,2)}</div></div></div></div>`}).join("");
+function item(t,max,extra){const n=t.length;return `<li><span class="txt">${extra.mark?mark(t,extra.r):esc(t)}${extra.pin?'<span class="pin">PIN 1</span>':""}</span><span class="n${n>max-3?" tight":""}">${n}/${max}</span><button type="button" class="copy" data-copy="${esc(t)}">Copy</button></li>`}
+function render(){
+  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.g===G));
+  document.querySelectorAll("#seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===V));
+  const r=rsa(),g=D.groups[G];
+  renderSerp();
+  $("#land").innerHTML=`Lands on <b>${esc(g.state)}</b> · <a class="tolanding" href="${esc(href(r.url))}" target="_blank" rel="noopener">Open ↗</a><br><span class="code">${esc(r.url)}</span>`;
+  $("#kw").innerHTML=g.kw.map(k=>`<span>${esc(k)}</span>`).join("");
+  $("#hl").innerHTML=r.headlines.map(h=>item(h,30,{mark:1,r,pin:r.pins.includes(h)})).join("");
+  $("#dl").innerHTML=r.descriptions.map(d=>item(d,90,{mark:1,r})).join("");
+}
+render();
+
+$("#sl").innerHTML=D.sitelinks.map(s=>`<tr><td><b>${esc(s[0])}</b></td><td>${esc(s[1])}</td><td>${esc(s[2])}</td><td class="code" style="font-weight:400;font-size:12px">${esc(s[3].replace("https://",""))}</td></tr>`).join("");
+$("#co").innerHTML=D.callouts.map(c=>item(c,25,{})).join("");
+$("#snh").textContent=`Structured snippet · ${D.snippet[0]}`;
+$("#sn").innerHTML=D.snippet[1].map(c=>item(c,25,{})).join("");
+$("#suffix").textContent=D.suffix;
+$("#neg").innerHTML=D.negatives.map(k=>`<span>${esc(k)}</span>`).join("");
+$("#dgb").textContent=`$${D.demandgen.budget}/day`;
+$("#dga").textContent=D.demandgen.audience;
+$("#dg").innerHTML=D.demandgen.ads.map(a=>`<div class="card"><span class="eyebrow">Direction ${esc(a.dir)}</span>
+  <span class="pill red" style="align-self:flex-start">?ad=${a.ad}</span>
+  <h3>Headlines · 40 max</h3><ul>${a.h.map(h=>`<li>${esc(h)} <span class="n">${h.length}</span></li>`).join("")}</ul>
+  <h3>Descriptions · 90 max</h3><ul>${a.d.map(d=>`<li>${esc(d)} <span class="n">${d.length}</span></li>`).join("")}</ul></div>`).join("");
+$("#cl").innerHTML=D.claims.map(c=>`<li><b>${esc(c[0])}</b><span class="muted">${esc(c[1])}</span></li>`).join("");
+
+$("#snippet").textContent=`<!-- 1. In <head>. Replace AW-XXXXXXXXXX with the account's tag ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"><\/script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "AW-XXXXXXXXXX", { allow_enhanced_conversions: true });
+<\/script>
+
+// 2. In the submit handler, right after the fbq("track","Lead") line
+try {
+  if (window.gtag) {
+    gtag("set", "user_data", { email: em });
+    gtag("event", "conversion", { send_to: "AW-XXXXXXXXXX/LABEL", value: 1, currency: "USD" });
+  }
+} catch (_) {}
+
+// 3. In utm(), add the click ID so Klaviyo shows the source
+gclid: qs.get("gclid") || "",`;
+
+let tt;
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-copy]");if(!b)return;const t=b.dataset.copy;
+  try{await navigator.clipboard.writeText(t);$("#toast").textContent="Copied";}
+  catch(_){const s=window.getSelection(),r=document.createRange();r.selectNodeContents(b.parentElement.querySelector(".txt"));s.removeAllRanges();s.addRange(r);$("#toast").textContent="Selected. Press copy";}
+  $("#toast").hidden=false;clearTimeout(tt);tt=setTimeout(()=>$("#toast").hidden=true,1400)});
+</script>
+
+</body></html>
