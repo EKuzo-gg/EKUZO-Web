@@ -21,6 +21,11 @@ item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) liste
 - `app/sitemap.ts`: removed the three noindex `/register` routes; every `new Date()` replaced with a
   real date (last commit to the route's page file). Rule in the file header: update a page's date in
   the same commit that changes its content. 29 URLs, all 200 and indexable on the live site.
+- QA pass (independent reviewer): ship with notes. Applied: `/blog`'s lastmod now computes as the
+  newest post date (it lists every post); Google-Extended comment names Search Console's "Search
+  generative AI" control and warns that nosnippet also removes ordinary snippets; Applebot-Extended
+  comment no longer says Siri. `tsc --noEmit` clean. Known gap, not fixed here: Karlin's author page
+  does not list the gaming-study post.
 
 **After it deploys:** nothing to resubmit (the sitemap is already submitted in Search Console and
 Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.

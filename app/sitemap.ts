@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // were removed 2026-10-12; noindex pages in a sitemap show up as errors in
   // Search Console.
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     // Core pages
     {
       url: baseUrl,
@@ -96,6 +96,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Blog
     {
+      // /blog lists every post, so it changes when any post does. Its date is
+      // raised below to the newest post date; this is the floor (page.tsx).
       url: `${baseUrl}/blog`,
       lastModified: new Date("2026-10-11"),
       changeFrequency: "weekly",
@@ -205,4 +207,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ];
+
+  const blogIndex = entries.find((e) => e.url === `${baseUrl}/blog`);
+  const postDates = entries
+    .filter(
+      (e) =>
+        e.url.startsWith(`${baseUrl}/blog/`) &&
+        !e.url.startsWith(`${baseUrl}/blog/author/`),
+    )
+    .map((e) => new Date(e.lastModified ?? 0).getTime());
+  if (blogIndex && postDates.length) {
+    const floor = new Date(blogIndex.lastModified ?? 0).getTime();
+    blogIndex.lastModified = new Date(Math.max(floor, ...postDates));
+  }
+
+  return entries;
 }

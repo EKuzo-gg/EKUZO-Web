@@ -32,8 +32,9 @@ Disallow: /api/
 # control tokens that gate whether already-crawled content may be used for AI
 # training and grounding; listing them with Allow: / is an explicit opt-IN.
 # Google-Extended does NOT control AI Overviews or AI Mode in Search: those
-# follow Googlebot, and the opt-out is the AI controls setting in Search
-# Console (currently "Include") or nosnippet.
+# follow Googlebot. The opt-out is the "Search generative AI" control in
+# Search Console settings (set to Include as of 2026-10-12), or nosnippet,
+# which also removes ordinary search snippets.
 #
 # An AI-crawler block covering /blog/gaming-military-families and
 # /blog/should-you-ban-fortnite lived here from 2026-07-25, scoped to those
@@ -59,7 +60,7 @@ User-agent: Perplexity-User
 # does not crawl; not the AI Overviews control, see note above)
 User-agent: Google-Extended
 
-# Apple Intelligence / Siri training opt-in (control token, does not crawl)
+# Apple Intelligence / foundation-model training opt-in (control token, does not crawl)
 User-agent: Applebot-Extended
 
 # Microsoft Bing + Copilot
