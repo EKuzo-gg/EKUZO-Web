@@ -384,7 +384,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
                   the viral &ldquo;13.7 years younger&rdquo; gaming study
                 </Link>{" "}
-                made the rounds (the number isn&apos;t in the paper; Karlin, our
+                made the rounds (the number isn’t in the paper; Karlin, our
                 founder, read about a thousand of the replies). The most-liked
                 reply under the original post was &ldquo;The kind of gaming
                 probably matters as much as the hours.&rdquo;

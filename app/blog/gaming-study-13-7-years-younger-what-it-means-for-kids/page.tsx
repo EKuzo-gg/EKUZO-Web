@@ -304,7 +304,7 @@ export default function PostGamingStudy137() {
               src={HERO_IMAGE}
               alt="A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped note under it reads “not in the paper.” Sticky notes ask which games, how many hours, what age, better than sports. Karlin Oei in a headset."
               fill
-              sizes="(max-width: 1264px) 100vw, 1232px"
+              sizes="(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px"
               className="object-cover"
               priority
             />
@@ -325,7 +325,7 @@ export default function PostGamingStudy137() {
             dateLabel="Updated"
           >
             <p>
-              <strong>Short answer:</strong> one study of 923 adults, average
+              <strong>Short answer:</strong>{" "}one study of 923 adults, average
               age 55, found that people who game three or more hours a week
               scored higher than non-gamers on memory, reasoning and
               processing-speed tests. It can&apos;t say the gaming caused that,

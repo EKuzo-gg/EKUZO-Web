@@ -153,7 +153,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
-      lastModified: new Date("2026-05-29"),
+      lastModified: new Date("2026-10-12"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
