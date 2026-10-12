@@ -26,6 +26,9 @@ item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) liste
   generative AI" control and warns that nosnippet also removes ordinary snippets; Applebot-Extended
   comment no longer says Siri. `tsc --noEmit` clean. Known gap, not fixed here: Karlin's author page
   does not list the gaming-study post.
+- `next.config.mjs` (separate commit, droppable): 301s for the two URLs Search Console reports as
+  404, `/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng` to the real K1NG post and
+  `/old-home` to `/`.
 
 **After it deploys:** nothing to resubmit (the sitemap is already submitted in Search Console and
 Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.

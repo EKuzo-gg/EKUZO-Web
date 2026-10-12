@@ -42,6 +42,16 @@ const nextConfig = {
           "/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
         permanent: true,
       },
+      // Second variant Google reports as a 404 (Search Console, 2026-10-12):
+      // "familys" without the hyphen-s.
+      {
+        source: "/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng",
+        destination:
+          "/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
+        permanent: true,
+      },
+      // Pre-launch homepage path, also a 404 in Search Console 2026-10-12.
+      { source: "/old-home", destination: "/", permanent: true },
 
       // Retired Kassi slug (2026-07-28). /blog/mom-who-banned-fortnite was
       // live on production from 2026-07-25, noindex and undisseminated. On
