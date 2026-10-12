@@ -396,20 +396,21 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
                 piece. I wrote that one{" "}
                 <Link href={`/blog/${PILLAR_SLUG}`}>here</Link>.
               </p>
+              <p>
+                This piece has a sibling. I ran the same read on about a
+                thousand replies to{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>
+                . That number isn&apos;t in the paper. The replies sorted into
+                camps there too.
+              </p>
 
               <p className="italic">
                 Karlin Oei is the founder of <Link href="/">EKUZO</Link>. He
                 grew up playing League of Legends, paid for college through
                 esports scholarships, and now builds the coaching system he
                 wishes he&apos;d had as a kid.
-              </p>
-              <p>
-                The sibling to this piece: in September 2026 I read a thousand
-                replies to a viral study about gamers and cognition.{" "}
-                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
-                  Same method, a different crowd, the same three camps
-                </Link>
-                .
               </p>
           </BlogPostBody>
         </div>

@@ -730,15 +730,15 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 wishes he&apos;d had as a kid.
               </p>
               <p>
-                A September 2026 study got shared thirty million times with a
-                line about gamers testing &ldquo;13.7 years younger.&rdquo; The
-                most-liked reply was &ldquo;the kind of gaming probably matters
-                as much as the hours,&rdquo; which is this whole page in eleven
-                words. I wrote up{" "}
+                When{" "}
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
-                  what the study says and what it means for your kid
-                </Link>
-                .
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>{" "}
+                went around, the most-liked reply under the original post was
+                &ldquo;The kind of gaming probably matters as much as the
+                hours,&rdquo; which is this whole page in eleven words. The 13.7
+                isn&apos;t in the paper. I wrote up what is, and what it means
+                for your kid.
               </p>
           </BlogPostBody>
         </div>

@@ -665,13 +665,13 @@ export default function PostGamingHiddenMeaning() {
 
               <p className="text-right">— Karlin, founder of EKUZO</p>
               <p>
-                If the study that went around in September 2026 (&ldquo;gamers
-                test 13.7 years younger&rdquo;) is why you&apos;re here, I read
-                a thousand of the replies and wrote up{" "}
+                If{" "}
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
-                  what it means for a twelve-year-old
-                </Link>
-                .
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>{" "}
+                is why you&apos;re here, that number isn&apos;t in the paper. I
+                read about a thousand of the replies and wrote up what it means
+                for a twelve-year-old.
               </p>
           </BlogPostBody>
         </div>

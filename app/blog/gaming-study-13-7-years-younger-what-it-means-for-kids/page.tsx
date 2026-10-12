@@ -302,7 +302,7 @@ export default function PostGamingStudy137() {
           <div className="relative w-full" style={{ height: "520px" }}>
             <Image
               src={HERO_IMAGE}
-              alt="A twelve-year-old at a desk mid-match, headset on, a parent reading a phone in the doorway behind him."
+              alt="A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped note under it reads “not in the paper.” Sticky notes ask which games, how many hours, what age, better than sports. Karlin Oei in a headset."
               fill
               sizes="(max-width: 1264px) 100vw, 1232px"
               className="object-cover"
@@ -336,11 +336,20 @@ export default function PostGamingStudy137() {
               who he plays with.
             </p>
             <p>
-              I saw the post the same day you did. A physician with a big
-              following put up a study abstract and one sentence: frequent
-              gamers performed on cognitive tests like non-gamers about 13.7
-              years younger. For three days my feed argued about whether video
-              games make you smart.
+              I saw{" "}
+              <a
+                href="https://x.com/BrandonLuuMD/status/2099226796893798645"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                a recent post on X
+              </a>
+              , probably the same way you did. A physician with a big following
+              put up a study abstract and one sentence: frequent gamers
+              performed on cognitive tests like non-gamers about 13.7 years
+              younger. Counting the posts that quoted it, it passed 30 million
+              views in its first week. For three days my feed argued about
+              whether video games make you smart.
             </p>
             <p>
               My first reaction was &ldquo;duh.&rdquo; My second, after I read
@@ -705,10 +714,11 @@ export default function PostGamingStudy137() {
                 . Reply counts and sentiment are from a read of about 1,000
                 replies across nine threads on September 14 and 15, 2026; a
                 blind second pass agreed with the stance labels 81% of the
-                time. View counts as read September 15, 2026: original post
-                15.6M, the two largest quote-posts 12.6M combined, plus smaller
-                quotes, for more than 30M across the wave. Likes as shown at
-                the time.
+                time. View counts: more than 30M across the original post and
+                its quote-posts by September 15, 2026. Original post 17.2M as
+                read October 11, 2026; the two largest quote-posts 5.8M and
+                7.9M, and about 33M across eight posts, as read October 6,
+                2026. Likes as shown at the time.
               </li>
             </ul>
 
