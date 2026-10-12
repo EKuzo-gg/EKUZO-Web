@@ -24,11 +24,13 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding-block:16px;border-block:1px solid var(--line)}
 .bar label{display:flex;flex-direction:column;gap:6px;font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .bar select{appearance:none;min-width:min(320px,100%);background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A39EAB' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 36px 11px 12px;font:600 14px/1.2 var(--ui)}
+.quick{display:flex;flex-direction:column;gap:6px}
+.quick > span{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .seg{display:inline-flex;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{appearance:none;border:0;background:none;color:var(--muted);font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border-radius:999px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--text);color:var(--wall)}
 select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
 .v{display:flex;flex-direction:column;gap:12px;min-width:0}
 .v-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .v-h span{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -42,6 +44,8 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-
 .desk .v-h{grid-column:1 / -1}
 .desk .phone{grid-column:1;grid-row:2 / -1}
 .desk .v > :not(.phone):not(.v-h){grid-column:2}
+.vt{margin:0;font:800 22px/1 var(--ui);text-transform:uppercase;min-height:2em;text-wrap:balance}
+.desk .vt{min-height:0}
 .note{margin:0;color:var(--muted);font-size:14px;text-wrap:pretty}
 .note b{display:block;font:700 10px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
 .link{display:flex;gap:6px;align-items:stretch;min-width:0}
@@ -53,18 +57,19 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-
 .next h3{margin:0;font:800 26px/.95 var(--ui);text-transform:uppercase}
 .next ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:8px;max-width:72ch}
 .next li b{color:var(--text)}
-@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1300px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.grid{grid-template-columns:1fr}.next{grid-template-columns:1fr}.desk .v{display:flex}}
 </style></head><body>
 <div class="wrap" id="top">
   <nav class="crumbs" aria-label="Lab pages"><a href="ad-lab.html" id="to-adlab">← Ad lab</a></nav>
   <header style="display:flex;flex-direction:column;gap:14px">
     <h1>Hero lab</h1>
-    <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, or the games a parent already hears from the bedroom. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
+    <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, the games a parent already hears from the bedroom, or the line they hear every night. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
   </header>
 
   <div class="bar">
     <label for="ad">Ad they tapped<select id="ad"></select></label>
+    <div class="quick"><span>In market</span><div class="seg" role="group" aria-label="Ads in market" id="quick"></div></div>
     <div class="seg" role="group" aria-label="Screen size"><button type="button" data-view="phone" aria-pressed="true">Phone</button><button type="button" data-view="desk" aria-pressed="false">Desktop</button></div>
   </div>
 
@@ -74,7 +79,7 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-
     <h3 id="nx">How to read it</h3>
     <ul>
       <li><b>One change at a time.</b> Point one ad’s link at one hero and compare its cost per sign-up with the same ad on the current page. Jamie’s brief asks for new tests at the Monday review, logged.</li>
-      <li><b>What we learn beyond sign-ups.</b> Every sign-up carries the hero and the answer (“Way too much”, “Fortnite, Minecraft”) into Klaviyo, so Karlin’s emails can speak to it. Only the hero name goes to GA and Clarity, never the answer.</li>
+      <li><b>What we learn beyond sign-ups.</b> Every sign-up carries the hero and the answer (“Way too much”, “Fortnite, Minecraft”, “Five more minutes.”) into Klaviyo, so Karlin’s emails can speak to it. Only the hero name goes to GA and Clarity, never the answer.</li>
       <li><b>For Jamie:</b> the sign-up now sends <code>hero</code> and <code>heroAnswer</code>. The route should save them to the profile; the games hero also sends <code>kid_games</code> the same way the confirmation does.</li>
     </ul>
   </section>
@@ -85,7 +90,8 @@ const ADS=[["d1","We've all said it"],["d2","Overheard"],["d3","Play to win"],["
 const V=[
  {k:"",tag:"A · Live now",name:"The ad, continued",bet:"The control. The ad they tapped, then the email form.",rec:"Ad id and UTMs."},
  {k:"amount",tag:"B · Pain point",name:"How much do they game?",bet:"A parent who answers “Way too much” has just named the problem we solve. The reply meets them there and the email asks for structure, not a sport.",rec:"Ad id, UTMs, hero, and the answer (A little / A lot / Way too much)."},
- {k:"games",tag:"C · Recognition",name:"What do they play?",bet:"Every parent knows Fortnite, Minecraft and Roblox. Tapping them makes it about their kid, not League, and lands on “We don’t teach the game. We coach the kid.”",rec:"Ad id, UTMs, hero, and the games tapped (also saved as kid_games)."}
+ {k:"games",tag:"C · Recognition",name:"What do they play?",bet:"Every parent knows Fortnite, Minecraft and Roblox. Tapping them makes it about their kid, not League. “I have no idea” gets its own reply: that’s normal, and a coach gives you something to ask about.",rec:"Ad id, UTMs, hero, and the games tapped (also saved as kid_games)."},
+ {k:"screentime",tag:"D · The fight",name:"Which one do you hear the most?",bet:"Goes straight at the screen time argument with lines every parent knows. The reply hands the end time to the coach, so the parent isn’t the timer.",rec:"Ad id, UTMs, hero, and the line they picked."}
 ];
 const onSite=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
 const BASE=onSite?"/season1":"landing.html";
@@ -94,13 +100,19 @@ const sel=document.getElementById("ad");
 sel.innerHTML=ADS.map(([id,n])=>`<option value="${id}">${id.toUpperCase()} · ${n}</option>`).join("");
 let ad="d1"; try{ const h=location.hash.slice(1); if(ADS.some(a=>a[0]===h)) ad=h; }catch(_){}
 sel.value=ad;
+const QUICK=["d1","d2","d5","d10"];
+const qb=document.getElementById("quick");
+const syncQuick=()=>qb.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.ad===ad));
+qb.innerHTML=QUICK.map(id=>`<button type="button" data-ad="${id}" aria-pressed="false">${id.replace("d","D").replace(/^D(\d)$/,"D0$1")}</button>`).join("");
+qb.addEventListener("click",e=>{ const b=e.target.closest("[data-ad]"); if(!b) return; ad=b.dataset.ad; sel.value=ad; try{ history.replaceState(null,"","#"+ad); }catch(_){} render(); syncQuick(); });
+syncQuick();
 const pageUrl=(id,k)=>`${BASE}?ad=${id}${k?`&hero=${k}`:""}`;
 const metaUrl=(id,k)=>`https://ekuzo.gg/season1?ad=${id}${k?`&hero=${k}`:""}&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content={{ad.name}}`;
 function render(){
   document.getElementById("grid").innerHTML=V.map((v,i)=>`
    <article class="v">
     <div class="v-h"><span>${v.tag}</span></div>
-    <h2 style="margin:0;font:800 22px/1 var(--ui);text-transform:uppercase">${v.name}</h2>
+    <h2 class="vt">${v.name}</h2>
     <div class="phone"><iframe id="f${i}" title="${v.name}, landing page preview" loading="lazy" src="${pageUrl(ad,v.k)}"></iframe></div>
     <p class="note"><b>The bet</b>${v.bet}</p>
     <p class="note"><b>Saved with each sign-up</b>${v.rec}</p>
@@ -109,7 +121,7 @@ function render(){
    </article>`).join("");
 }
 render();
-sel.addEventListener("change",()=>{ ad=sel.value; try{ history.replaceState(null,"","#"+ad); }catch(_){} render(); });
+sel.addEventListener("change",()=>{ ad=sel.value; try{ history.replaceState(null,"","#"+ad); }catch(_){} render(); syncQuick(); });
 document.addEventListener("click",async e=>{
   const c=e.target.closest("[data-copy]");
   if(c){ const el=document.getElementById(c.dataset.copy);
