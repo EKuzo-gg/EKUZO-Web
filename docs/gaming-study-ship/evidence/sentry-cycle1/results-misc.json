@@ -1,0 +1,200 @@
+[
+  {
+    "id": "NR-5",
+    "vp": "375",
+    "pass": true,
+    "notes": "opened from /blog/gaming-study-13-7-years-younger-what-it-means-for-kids via menu; label present=false; select options=[[\"\",\"Choose one\"],[\"x\",\"X (Twitter)\"],[\"instagram\",\"Instagram\"],[\"tiktok-youtube\",\"TikTok or YouTube\"],[\"google\",\"Google search\"],[\"ai\",\"ChatGPT or another AI\"],[\"friend\",\"A friend or another parent\"],[\"school\",\"My kid's school\"],[\"other\",\"Other\"]]; chosen=x; intercepted /api/contact body={\"name\":\"QA Sentry Test\",\"organization\":\"QA Test Org\",\"contactMethod\":\"email\",\"email\":\"team+gstest-1012-sentry@ekuzo.gg\",\"message\":\"QA test only. Intercepted in browser, never sent.\",\"pageUrl\":\"http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\",\"heardAbout\":\"x\"}; triggers seen on page=[]; Lead events after contact success (intercepted, existing behavior)=1",
+    "extra": {
+      "b": {
+        "name": "QA Sentry Test",
+        "organization": "QA Test Org",
+        "contactMethod": "email",
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "message": "QA test only. Intercepted in browser, never sent.",
+        "pageUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "heardAbout": "x"
+      },
+      "opts": [
+        [
+          "",
+          "Choose one"
+        ],
+        [
+          "x",
+          "X (Twitter)"
+        ],
+        [
+          "instagram",
+          "Instagram"
+        ],
+        [
+          "tiktok-youtube",
+          "TikTok or YouTube"
+        ],
+        [
+          "google",
+          "Google search"
+        ],
+        [
+          "ai",
+          "ChatGPT or another AI"
+        ],
+        [
+          "friend",
+          "A friend or another parent"
+        ],
+        [
+          "school",
+          "My kid's school"
+        ],
+        [
+          "other",
+          "Other"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "NR-5 desktop trigger probe",
+    "vp": "1440",
+    "pass": true,
+    "notes": "contact triggers on the post at 1440 in Season 01 mode: [] (informational)"
+  },
+  {
+    "id": "NR-5 (alt page /methodology)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "opened from /methodology via button; label present=false; select options=[[\"\",\"Choose one\"],[\"x\",\"X (Twitter)\"],[\"instagram\",\"Instagram\"],[\"tiktok-youtube\",\"TikTok or YouTube\"],[\"google\",\"Google search\"],[\"ai\",\"ChatGPT or another AI\"],[\"friend\",\"A friend or another parent\"],[\"school\",\"My kid's school\"],[\"other\",\"Other\"]]; chosen=x; intercepted /api/contact body={\"name\":\"QA Sentry Test\",\"organization\":\"QA Test Org\",\"contactMethod\":\"email\",\"email\":\"team+gstest-1012-sentry@ekuzo.gg\",\"message\":\"QA test only. Intercepted in browser, never sent.\",\"pageUrl\":\"http://localhost:3311/methodology\",\"heardAbout\":\"x\"}; triggers seen on page=[{\"t\":\"Talk to Humans\",\"vis\":true}]; Lead events after contact success (intercepted, existing behavior)=1",
+    "extra": {
+      "b": {
+        "name": "QA Sentry Test",
+        "organization": "QA Test Org",
+        "contactMethod": "email",
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "message": "QA test only. Intercepted in browser, never sent.",
+        "pageUrl": "http://localhost:3311/methodology",
+        "heardAbout": "x"
+      },
+      "opts": [
+        [
+          "",
+          "Choose one"
+        ],
+        [
+          "x",
+          "X (Twitter)"
+        ],
+        [
+          "instagram",
+          "Instagram"
+        ],
+        [
+          "tiktok-youtube",
+          "TikTok or YouTube"
+        ],
+        [
+          "google",
+          "Google search"
+        ],
+        [
+          "ai",
+          "ChatGPT or another AI"
+        ],
+        [
+          "friend",
+          "A friend or another parent"
+        ],
+        [
+          "school",
+          "My kid's school"
+        ],
+        [
+          "other",
+          "Other"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "TG-4",
+    "vp": "all",
+    "pass": true,
+    "notes": "1440: own console errors=1, pageerrors=0, local http>=400=[\"404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png\"], vendor blocked=2 | 1024: own console errors=1, pageerrors=0, local http>=400=[\"404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png\"], vendor blocked=2 | 768: own console errors=1, pageerrors=0, local http>=400=[\"404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png\"], vendor blocked=2 | 375: own console errors=1, pageerrors=0, local http>=400=[\"404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png\"], vendor blocked=2",
+    "extra": {
+      "tg4": [
+        {
+          "vp": "1440",
+          "own": [
+            {
+              "url": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "loc": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "pageErrors": [],
+          "http": [
+            {
+              "status": 404,
+              "url": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "vendorBlocked": 2
+        },
+        {
+          "vp": "1024",
+          "own": [
+            {
+              "url": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "loc": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "pageErrors": [],
+          "http": [
+            {
+              "status": 404,
+              "url": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "vendorBlocked": 2
+        },
+        {
+          "vp": "768",
+          "own": [
+            {
+              "url": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "loc": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "pageErrors": [],
+          "http": [
+            {
+              "status": 404,
+              "url": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "vendorBlocked": 2
+        },
+        {
+          "vp": "375",
+          "own": [
+            {
+              "url": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "loc": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "pageErrors": [],
+          "http": [
+            {
+              "status": 404,
+              "url": "http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+            }
+          ],
+          "vendorBlocked": 2
+        }
+      ]
+    }
+  }
+]

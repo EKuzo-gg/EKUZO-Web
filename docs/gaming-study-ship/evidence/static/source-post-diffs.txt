@@ -1,0 +1,147 @@
+######## what-your-kids-gaming-is-telling-you
+diff --git a/app/blog/what-your-kids-gaming-is-telling-you/page.tsx b/app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+index 5c2ca1a..9aeec95 100644
+--- a/app/blog/what-your-kids-gaming-is-telling-you/page.tsx
++++ b/app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+@@ -665,13 +665,13 @@ export default function PostGamingHiddenMeaning() {
+ 
+               <p className="text-right">— Karlin, founder of EKUZO</p>
+               <p>
+-                If the study that went around in September 2026 (&ldquo;gamers
+-                test 13.7 years younger&rdquo;) is why you&apos;re here, I read
+-                a thousand of the replies and wrote up{" "}
++                If{" "}
+                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+-                  what it means for a twelve-year-old
+-                </Link>
+-                .
++                  the viral &ldquo;13.7 years younger&rdquo; gaming study
++                </Link>{" "}
++                is why you&apos;re here, that number isn&apos;t in the paper. I
++                read about a thousand of the replies and wrote up what it means
++                for a twelve-year-old.
+               </p>
+           </BlogPostBody>
+         </div>
+######## league-of-legends-youth-development
+diff --git a/app/blog/league-of-legends-youth-development/page.tsx b/app/blog/league-of-legends-youth-development/page.tsx
+index 35b79a5..889a95d 100644
+--- a/app/blog/league-of-legends-youth-development/page.tsx
++++ b/app/blog/league-of-legends-youth-development/page.tsx
+@@ -730,15 +730,15 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
+                 wishes he&apos;d had as a kid.
+               </p>
+               <p>
+-                A September 2026 study got shared thirty million times with a
+-                line about gamers testing &ldquo;13.7 years younger.&rdquo; The
+-                most-liked reply was &ldquo;the kind of gaming probably matters
+-                as much as the hours,&rdquo; which is this whole page in eleven
+-                words. I wrote up{" "}
++                When{" "}
+                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+-                  what the study says and what it means for your kid
+-                </Link>
+-                .
++                  the viral &ldquo;13.7 years younger&rdquo; gaming study
++                </Link>{" "}
++                went around, the most-liked reply under the original post was
++                &ldquo;The kind of gaming probably matters as much as the
++                hours,&rdquo; which is this whole page in eleven words. The 13.7
++                isn&apos;t in the paper. I wrote up what is, and what it means
++                for your kid.
+               </p>
+           </BlogPostBody>
+         </div>
+######## should-you-ban-fortnite
+diff --git a/app/blog/should-you-ban-fortnite/page.tsx b/app/blog/should-you-ban-fortnite/page.tsx
+index cd8c2f1..cd75f99 100644
+--- a/app/blog/should-you-ban-fortnite/page.tsx
++++ b/app/blog/should-you-ban-fortnite/page.tsx
+@@ -709,13 +709,14 @@ export default function PostShouldYouBanFortnite() {
+                 ))}
+               </ul>
+               <p>
+-                Related: when a viral study told parents gaming might be good
+-                for the brain, the question parents actually asked in the
+-                replies was how to get a kid off the game without the attitude.{" "}
++                Related: when{" "}
+                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+-                  Karlin&apos;s read of the study and the thousand replies
+-                </Link>
+-                .
++                  the viral &ldquo;13.7 years younger&rdquo; gaming study
++                </Link>{" "}
++                went around (the number isn&apos;t in the paper, and the study
++                was of adults), parents in the replies asked, unprompted, how to
++                get a kid off the game without the attitude. EKUZO founder
++                Karlin Oei read about a thousand of the replies and wrote it up.
+               </p>
+           </BlogPostBody>
+         </div>
+######## what-homeschool-parents-taught-us-about-gaming
+diff --git a/app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx b/app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+index 0e764a5..ebd6e01 100644
+--- a/app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
++++ b/app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+@@ -396,6 +396,15 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
+                 piece. I wrote that one{" "}
+                 <Link href={`/blog/${PILLAR_SLUG}`}>here</Link>.
+               </p>
++              <p>
++                This piece has a sibling. I ran the same read on about a
++                thousand replies to{" "}
++                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
++                  the viral &ldquo;13.7 years younger&rdquo; gaming study
++                </Link>
++                . That number isn&apos;t in the paper. The replies sorted into
++                camps there too.
++              </p>
+ 
+               <p className="italic">
+                 Karlin Oei is the founder of <Link href="/">EKUZO</Link>. He
+@@ -403,14 +412,6 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
+                 esports scholarships, and now builds the coaching system he
+                 wishes he&apos;d had as a kid.
+               </p>
+-              <p>
+-                The sibling to this piece: in September 2026 I read a thousand
+-                replies to a viral study about gamers and cognition.{" "}
+-                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+-                  Same method, a different crowd, the same three camps
+-                </Link>
+-                .
+-              </p>
+           </BlogPostBody>
+         </div>
+       </article>
+######## when-your-sons-only-friends-are-online
+diff --git a/app/blog/when-your-sons-only-friends-are-online/page.tsx b/app/blog/when-your-sons-only-friends-are-online/page.tsx
+index fca458e..b55e06d 100644
+--- a/app/blog/when-your-sons-only-friends-are-online/page.tsx
++++ b/app/blog/when-your-sons-only-friends-are-online/page.tsx
+@@ -31,7 +31,7 @@ const SHARE_IMAGE = HERO_IMAGE;
+ const HERO_ALT =
+   "A mother stands in a bedroom doorway watching her teenage son play a video game at his desk, headset on, in the warm light of his room.";
+ const DATE_PUBLISHED = "2026-05-28";
+-const DATE_MODIFIED = "2026-05-29";
++const DATE_MODIFIED = "2026-10-12";
+ 
+ // FAQ items. Each answer is front-loaded (first sentence answers the question)
+ // for AI extraction. This same array drives both the visible <h3> Q&A and the
+@@ -379,6 +379,16 @@ export default function PostSonsOnlyFriendsAreOnline() {
+                 reach for instead: passive scrolling or something active? The
+                 answers tell you whether to worry, and what to do about it.
+               </p>
++              <p>
++                The same idea surfaced when{" "}
++                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
++                  the viral &ldquo;13.7 years younger&rdquo; gaming study
++                </Link>{" "}
++                made the rounds (the number isn&apos;t in the paper; Karlin, our
++                founder, read about a thousand of the replies). The most-liked
++                reply under the original post was &ldquo;The kind of gaming
++                probably matters as much as the hours.&rdquo;
++              </p>
+ 
+               <h2>We have high expectations in real life. Why not this?</h2>
+               <p>

@@ -1,0 +1,3 @@
+serious color-contrast: 44 nodes: Elements must meet minimum color contrast ratio thresholds
+moderate landmark-one-main: 1 nodes: Document should have one main landmark
+moderate region: 59 nodes: All page content should be contained by landmarks

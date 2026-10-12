@@ -5,6 +5,58 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop), October 11, 2026 (gaming-study post: ship changes, final images, one ask per post)
+
+Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`
+(Karlin byline). Local branch `build/gaming-study-ship` (worktree), `origin/main` `a449abc` merged in.
+**Not pushed, not merged; waiting on Jamie's go.** Artifacts: `docs/gaming-study-ship/` (start with
+`07-review-guide.md`).
+
+**What changed**
+- The post: C1 to C10 from the 10-06 change list (short answer first, tennis, the JAMA link fixed to
+  article 2797596, FAQ and heading wording), a new opening with a link to the original X post, new hero
+  alt text, re-dated view counts, the "Same game. Two different hours." graphic, hero and share card,
+  three-card Keep Reading, visible "Updated" date. Dates set to 2026-10-12; re-set if it ships another day.
+- `app/blog/page.tsx`: the post takes `featured: true` from `should-you-ban-fortnite`.
+  **Revert the featured flag 7 days after ship (2026-10-19 if it ships 10-12)** and drop the word
+  "recent" from the post's opening at the same time.
+- Five inbound links, one per post, anchor "the viral “13.7 years younger” gaming study". The four
+  September link sentences were replaced (three had factual errors); a new paragraph went into
+  `when-your-sons-only-friends-are-online` (its `DATE_MODIFIED` and sitemap date are now 2026-10-12).
+- `app/layout.tsx`, `components/ui/StickyCTA.tsx`: while `SEASON_ONE_MODE` is on, blog posts carry one
+  ask, the Season 01 waitlist. The blog newsletter popup and bar from September ship dormant behind
+  `!SEASON_ONE_MODE` (tested on a mode-off build). Before Season 01 mode is switched off, build the
+  Beehiiv automation "Blog welcome (thumbs)".
+- `app/sitemap.ts`, `public/llms.txt`: entries for the post.
+
+**Evidence:** tsc and build clean; 78 of 79 existing tests pass (the one failure, `ekuzo101-weeks`
+"PM ET", is identical on main); journeys and must-nots tested in a browser behind a blocking proxy
+(zero requests reached GA4, Clarity or Meta); two disposable Klaviyo sign-ups logged in
+`docs/gaming-study-ship/06-cleanup-ledger.md` (`team+gstest-1012-jr1@ekuzo.gg`, `-jr2`), Meta off.
+
+**Aaron (your lane, not changed here):**
+- `components/blog/ReplyQuoteCards.tsx` meta text (`#9a988f` on white) is 2.89:1, under AA.
+- The post template's top-right brush stroke crosses the headline on phones (all posts on this template).
+- `/blog` featured card image has no `sizes`, so phones fetch a soft 750px file; suggested
+  `sizes="(max-width: 1023px) 768px, 50vw"`.
+- Season 01 popup: no focus trap; treats any HTTP 200 as success; no fetch timeout.
+- Footer newsletter form is cut off at 768 wide; Nav overlaps at 200% text zoom.
+
+**FooterBanner heading "Enroll into a transformational program today"** ("transformational" is on the
+never-say list; hidden while Season 01 mode overrides the banner). Changed on the new post only. Still
+on: `app/page.tsx`, `app/blog/page.tsx`, `app/faq/page.tsx`, `app/games/page.tsx`, `app/parents/page.tsx`,
+`app/programs/page.tsx`, `app/programs/ekuzo-teams/page.tsx`, `components/blog/AuthorPage.tsx`, and the
+posts `conquering-my-mountain-and-giants-how-esports-changed-my-life`,
+`league-of-legends-youth-development`, `our-family-s-esports-journey-with-ekuzo-and-the-k1ng`,
+`summer-camps-for-kids-who-game-2026`, `what-homeschool-parents-taught-us-about-gaming`,
+`what-your-kids-gaming-is-telling-you`, `when-gaming-helps-homeschool-kids`,
+`when-your-sons-only-friends-are-online`. A separate pass.
+
+**Other follow-ups noted, not changed:** em dashes in `what-your-kids-gaming-is-telling-you` (lines 230,
+616, 666); "running all summer" in the League post; `/api/season-one` accepts a malformed email such as
+a script tag and forwards it to Klaviyo; `/api/contact` returns success when the Resend call fails;
+`ai_referral` matches referrers by substring.
+
 ## Jamie (via Claude), October 11, 2026 (project instructions committed: CLAUDE.md and its docs)
 
 The current `CLAUDE.md` and the docs it points to existed only as uncommitted files in Jamie's local

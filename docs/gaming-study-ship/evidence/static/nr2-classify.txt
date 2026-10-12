@@ -1,0 +1,35 @@
+# touching commits per file, origin/main..HEAD (--no-merges)
+WORKLOG.md: 61db653 ce981bd 
+app/api/contact/route.ts: 61db653 
+app/api/newsletter/route.ts: 61db653 
+app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx: 9f4e523 3195327 772f385 26f27cc ce981bd 
+app/blog/league-of-legends-youth-development/page.tsx: 9f4e523 ce981bd 
+app/blog/page.tsx: 3195327 ce981bd 
+app/blog/should-you-ban-fortnite/page.tsx: 9f4e523 ce981bd 
+app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx: 9f4e523 ce981bd 
+app/blog/what-your-kids-gaming-is-telling-you/page.tsx: 9f4e523 ce981bd 
+app/blog/when-your-sons-only-friends-are-online/page.tsx: 9f4e523 
+app/layout.tsx: 3195327 61db653 
+app/sitemap.ts: 3195327 
+components/blog/ReplyQuoteCards.tsx: ce981bd 
+components/ui/ContactModal.tsx: 61db653 
+components/ui/NewsletterPopup.tsx: 61db653 
+components/ui/StickyCTA.tsx: 3195327 61db653 
+lib/analytics.ts: 61db653 
+lib/newsletterAb.ts: 61db653 
+public/images/gaming-study-13-7-card.jpg: 9f4e523 3195327 
+public/images/gaming-study-13-7-hero.jpg: 9f4e523 3195327 
+public/images/gaming-study-same-game-two-hours.png: 9f4e523 3195327 
+public/llms.txt: 3195327 
+public/research/gaming-cognition-reanalysis-output.txt: ce981bd 
+public/research/gaming-cognition-reanalysis.py: ce981bd 
+
+9f4e523 2026-10-11 22:20:30 -0500 content(blog): approved opening, hero alt, view counts and five inbound links for the gaming-study post; images recompressed
+3195327 2026-10-11 21:07:29 -0500 content(blog): gaming-study ship changes C1-C10 (less C2, C7), final images, one ask per post in Season 01 mode
+0da2e89 2026-09-16 01:18:06 +0000 docs(blog-newsletter): review guide and return handoff
+61db653 2026-09-16 01:16:39 +0000 feat(blog): newsletter capture A/B on posts, utm passthrough, inquiry-form attribution
+772f385 2026-09-15 19:05:49 +0000 content(blog): refresh Brockie like count to the Sep 15 evening read
+26f27cc 2026-09-15 18:16:43 +0000 fix(blog): explicit spaces after bold labels in the gaming-study post
+ce981bd 2026-09-15 18:01:22 +0000 content(blog): add the "13.7 years younger" gaming-study post, Karlin byline
+
+8bab088 merge: origin/main (a449abc) into the gaming-study branch

@@ -1,0 +1,64 @@
+API PROBES against :3311 only (fake env; Klaviyo answered 401 not_authenticated, i.e. nothing can be written). Sun Oct 11 23:29:13 CDT 2026
+== season-one: missing email
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: invalid email a@b
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: invalid email no @
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: control char in email
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: 300-char email
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: script-tag email
+{"ok":false,"error":"We couldn’t save that. Please try again."}
+HTTP 502 bytes_down=65
+== season-one: 1 MB body
+{"ok":false,"error":"We couldn’t save that. Please try again."}
+HTTP 502 bytes_down=65
+== season-one: wrong content-type text/plain (valid JSON text)
+{"ok":false,"error":"We couldn’t save that. Please try again."}
+HTTP 502 bytes_down=65
+== season-one: form-encoded
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: malformed JSON
+{"ok":false,"error":"That email doesn’t look right."}
+HTTP 400 bytes_down=55
+== season-one: GET
+
+HTTP 405 bytes_down=0
+== season-one: PUT
+
+HTTP 405 bytes_down=0
+== season-one: honeypot filled
+{"ok":true}
+HTTP 200 bytes_down=11
+== season-one: unknown source
+{"ok":false,"error":"We couldn’t save that. Please try again."}
+HTTP 502 bytes_down=65
+== season-one: step games without prior signup
+{"ok":false}
+HTTP 200 bytes_down=12
+== newsletter: no email
+{"error":"Email is required"}
+HTTP 400 bytes_down=29
+== newsletter: utm outside allowlist
+{"error":"Failed to subscribe. Please try again."}
+HTTP 500 bytes_down=50
+== newsletter: allowed blog values
+{"error":"Failed to subscribe. Please try again."}
+HTTP 500 bytes_down=50
+== newsletter: GET
+
+HTTP 405 bytes_down=0
+== contact: bogus heard
+{"success":true}
+HTTP 200 bytes_down=16
+== contact: missing fields
+{"error":"Name and contact method are required"}
+HTTP 400 bytes_down=48

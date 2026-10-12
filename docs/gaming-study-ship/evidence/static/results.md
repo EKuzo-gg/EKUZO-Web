@@ -1,0 +1,40 @@
+# Sentry (static lane) results, gaming-study ship, HEAD 9f4e523
+
+Run 2026-10-11. Prerendered HTML read from `.next/server/app/blog/` (build stamped 22:20:37, after commit 9f4e523 at 22:20:30; copied to `html/` first, text extracts in `text/`). No servers, browsers or builds run. Paths below are relative to `docs/gaming-study-ship/evidence/static/`.
+
+| Req | Result | Evidence | Note |
+|---|---|---|---|
+| CP-1 | PASS | copy-fidelity.txt, text/ | C1 title MATCH in post and /blog index |
+| CP-2 | FAIL | copy-fidelity.txt, html/ (raw), S-001 | C3 wording MATCH, but the rendered HTML reads `Short answer:one study` (no space). Source line 328 has the space; the built output drops it. Same bug class as commit 26f27cc, whose fix is `{" "}` |
+| CP-3 | PASS | copy-fidelity.txt | C3b trimmed paragraph MATCH |
+| CP-4 | PASS | copy-fidelity.txt | tennis, piano, orchestra |
+| CP-5 | PASS (static) | copy-fidelity.txt, post-source-diff.txt | alt MATCH character for character; placed after the "Everything around it is different." paragraph, before the June email paragraph; wrapper `mx-auto w-full max-w-[560px]`. Rendered width needs the browser lane |
+| CP-6 | PASS href, landing COULD NOT VERIFY | links-table.md, links/ | both hrefs are 2797596. JAMA is behind a Cloudflare 403. Crossref confirms 2797596 = "Association of Video Gaming With Cognitive Performance Among Children" (Chaarani et al., 2022) and that 2836903 is a different paper. One human browser open closes it (S-006) |
+| CP-7 | PASS (text) | copy-fidelity.txt | S4 sources line MATCH; no combined 13.7M figure anywhere (bare-13-7.txt). Jamie approval is a human gate |
+| CP-8 | PASS | copy-fidelity.txt, tg5 check | question in page; FAQPage JSON-LD carries "Is gaming good for kids' brains?"; answer text unchanged |
+| CP-9 | PASS | copy-fidelity.txt | h2 "What the study found, and what it didn't" |
+| CP-10 | PASS (source) | post-source-diff.txt | `FooterBanner heading="Every gamer deserves a team"`. Rendered page shows Season 01 banner |
+| CP-11 | PASS | copy-fidelity.txt, bare-13-7.txt | S1 MATCH; no "in September"; link to the original post; scale carried by "30 million views"; does not repeat the subhead sentence; 13.7 always "13.7 years younger" |
+| CP-12 | FAIL (low, decision) | copy-fidelity.txt, source-post-diffs.txt, S-002 | all five S2 sentences match the approved text except apostrophes: approved uses curly (isn’t, you’re), rendered uses straight (isn't, you're). Words, anchors, links, placement all correct. House convention in these posts is `&apos;` (straight). Either accept or switch to `&rsquo;` |
+| CP-13 | PASS | copy-fidelity.txt | S3 hero alt MATCH |
+| CP-14 | PASS (text) | copy-fidelity.txt | S4 line MATCH. Ship-day re-read is a human gate |
+| CP-15 | PASS | copy-fidelity.txt | closing line unchanged |
+| CP-16 | PASS | voice-lint.py, voice-lint.txt, added-lines.txt | 1599 added lines vs 0da2e89 scanned (em/en dash, arrows, entities, 3A words and phrases, 3C, 3D). 19 hits, every one in files that came in with the origin/main merge (app/api/season-one/route.ts, app/season1/landing.html), none in this run's files (blog posts, index, layout, sitemap, llms.txt). Reframes are Steward's judgement |
+| CP-17 | NOT MY LANE | | Steward |
+| CP-18 | PASS (source and rendered order) | copy-fidelity.txt, post-source-diff.txt | rendered order: homeschool, should-you-ban-fortnite, when-your-sons-only-friends-are-online. Visual layout is browser lane |
+| CP-19 | PASS | copy-fidelity.txt, post-source-diff.txt | TITLE_SEO, SUBHEAD, DESCRIPTION, C8 answer, Brockie line "1.1K likes when I read it on September 15", reanalysis links, the 13.7 checklist item, closing line: all unchanged. Diff of the post vs 0da2e89: every changed string traces to a C item, S1, S3, S4, the dates, DT-2 (`date={DATE_MODIFIED} dateLabel="Updated"`), CP-18 (KEEP_READING block), or image additions (`sizes` props, graphic block). Untraced but harmless: Keep Reading homeschool card now says "Case Studies" (was "Perspective" on the old card), uses blog-post-6-card.jpg (was -hero.jpg), drops the "by Karlin Oei" line; TODO(assets) comment removed |
+| CP-20 | PASS with note | stale-phrasing.txt, S-003 | post source: allowed hits only (line 345 S1 "a recent post on X", line 606 closing "this week"; line 27 is a code comment). Index, llms.txt line, alt texts, meta: zero hits. One pre-existing hit in the Lolcat reel VideoObject transcript JSON-LD: "it was last week", "more recently known as" (verbatim speech, not in this run's diff) |
+| TG-1 (extras) | PASS | tsc.txt, ../next-build.txt | `npx tsc --noEmit` exit 0, no output. next-build.txt: compiled, 74/74 static pages, `○ /blog/gaming-study-13-7-years-younger-what-it-means-for-kids` static. Bundle size and eslint are another lane |
+| TG-2 | PASS with 1 pre-existing FAIL | test-*.txt | season-one-attribution 30/30; newsletterAb 20/20; routes 14/14 (global.fetch stubbed, no network); ekuzo101-weeks 14/15 (S-005, identical on origin/main). Total 78 of 79. package.json has no `test` script |
+| TG-5 | PASS | tg5.txt, tg5-robots-sitemap.txt | canonical `https://ekuzo.gg/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`; robots `index, follow`; one h1; outline h1, h2 x8 (Why "duh" ... Sources, Season 01 banner), h3 under Common questions and under Sources, no skipped level; all 13 img have an alt attribute (6 empty alts are decorative: FB pixel, torn paper, brush, footer art). og:image and twitter:image = card.jpg. app/sitemap.ts line 176 and public/llms.txt line 28 contain the slug. public/robots.txt: `Allow: /`, no `Disallow: /blog`; GPTBot, ClaudeBot, PerplexityBot, Google-Extended in one allow group (Allow: /, Disallow /api/ and /_next/ only). Outline note: Keep Reading card titles are h3 under the "Sources" h2 |
+| TG-6 | PASS with 2 COULD NOT VERIFY | links-table.md, links/ | 5 of 7 distinct citation targets MATCH (X post, PLOS ONE, Nature, Dataverse, Western press release). Two JAMA URLs blocked (403 Cloudflare), secondary Crossref MATCH. All internal links resolve to existing routes (internal-links.txt) |
+| TG-7 | PASS | inbound.txt | exactly five source posts link to the slug, one link each, anchor "the viral “13.7 years younger” gaming study"; plus the /blog index entry, sitemap, llms.txt. Built HTML of each post shows the same single link |
+| NR-2 | PASS | nr2.txt, nr2-classify.txt | the protected-path command prints nothing |
+| NR-3 | PASS | source-post-diffs.txt, blog-diff-vs-origin-main.txt | each of the five posts differs from 0da2e89 only by the link sentence (+ DATE_MODIFIED 2026-10-12 in when-your-sons-only-friends-are-online). Vs origin/main, app/blog lists 7 files: the new post (Sept ce981bd, 26f27cc, 772f385; this run 3195327, 9f4e523), the index page.tsx (ce981bd, 3195327), and the five source posts (Sept ce981bd link paragraphs for four of them, this run 9f4e523 for all five) |
+| NR-4 | PASS | nr4.txt | 3195327 and 9f4e523 touch none of the forbidden paths; 8bab088 (merge) adds no forbidden path beyond what origin/main a449abc contains, and HEAD vs origin/main differs in none of them |
+| FS-1 | PASS | fs1.txt | event name `form_start` appears in code only in app/season1/landing.html (line 1025); other hits are `form_started_*` Beehiiv tags and prose in WORKLOG/docs |
+| AS dims | PASS | images.txt | hero 2400x1260 (242,166 B), card 1200x630 (94,471 B), graphic 1080x1350 (46,091 B); sha256 equal to evidence/image-hashes-optimized.txt |
+| NR-2 file classes | info | nr2-classify.txt | September post (ce981bd/772f385/26f27cc): post page, ReplyQuoteCards, research script and output, link paragraphs in 4 posts. September newsletter A/B (61db653): api/contact, api/newsletter, ContactModal, NewsletterPopup, StickyCTA, lib/analytics, lib/newsletterAb, layout, WORKLOG. This run (3195327, 9f4e523): post edits, blog index, layout (popup gate), sitemap, StickyCTA (gate), llms.txt, 3 images, sons post, link sentences |
+
+## Defects filed (docs/gaming-study-ship/05-defect-log.md)
+S-001 medium, S-002 low, S-003 low, S-004 low, S-005 low (pre-existing), S-006 low, S-007 low.

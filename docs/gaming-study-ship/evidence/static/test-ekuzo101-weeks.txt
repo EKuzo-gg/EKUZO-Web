@@ -1,0 +1,56 @@
+▶ isWeekEligible
+  ✔ Jul 21 is eligible at 6:59 PM ET on Jul 21 (20.622584ms)
+  ✔ Jul 21 is ineligible at 7:00 PM ET on Jul 21 (0.105041ms)
+  ✔ Jul 21 is ineligible at 7:01 PM ET on Jul 21 (0.081667ms)
+  ✔ a future Tuesday is eligible the day before (0.084834ms)
+✔ isWeekEligible (21.195459ms)
+▶ getEligibleWeeks
+  ✔ returns exactly 6 items (0.953792ms)
+  ✔ all returned days are Tuesdays (UTC day-of-week === 2) (0.582667ms)
+  ✔ thursdays are always 2 days after their tuesday (0.579458ms)
+  ✔ skips a week that starts at exactly 7 PM ET (0.548458ms)
+  ✔ DST crossing Nov 1 2026 (EST transition) — should not crash (0.594958ms)
+✔ getEligibleWeeks (3.34375ms)
+▶ buildWeeksLabel
+  ✔ contains no en-dashes or em-dashes (0.187542ms)
+  ✔ includes all week month-day values (0.085708ms)
+  ✖ includes the time string (0.247583ms)
+✖ buildWeeksLabel (0.574083ms)
+▶ buildWeekDatesSpan
+  ✔ contains no en-dashes or em-dashes (0.118625ms)
+  ✔ starts with the first Tuesday and ends with the last Thursday (0.0765ms)
+  ✔ handles a single week (0.080625ms)
+✔ buildWeekDatesSpan (0.302875ms)
+(node:56576) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/lib/__tests__/ekuzo101-weeks.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ tests 15
+ℹ suites 4
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 100.470167
+
+✖ failing tests:
+
+test at lib/__tests__/ekuzo101-weeks.test.ts:152:3
+✖ includes the time string (0.247583ms)
+  AssertionError [ERR_ASSERTION]: Label missing time: Tuesdays & Thursdays - Weeks of Jul 21 - 7-8:30 PM local time
+      at TestContext.<anonymous> (file:///Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/lib/__tests__/ekuzo101-weeks.test.ts:154:12)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+exit=1

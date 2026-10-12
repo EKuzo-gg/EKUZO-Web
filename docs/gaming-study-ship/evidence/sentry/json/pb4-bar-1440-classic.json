@@ -1,0 +1,25 @@
+{
+  "body": {
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "utm_source": "blog",
+    "utm_medium": "sticky",
+    "utm_campaign": "classic"
+  },
+  "st": {
+    "ls": {
+      "ekuzo_nl_variant": "classic"
+    },
+    "ss": {}
+  },
+  "events": [
+    {
+      "name": "newsletter_signup",
+      "params": {
+        "source": "sticky",
+        "variant": "classic"
+      },
+      "t": 1791777093724,
+      "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+    }
+  ]
+}

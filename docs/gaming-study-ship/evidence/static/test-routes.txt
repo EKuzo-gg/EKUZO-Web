@@ -1,0 +1,27 @@
+✔ T1a: no utm fields -> Beehiiv body byte-identical to today's documented body (1.985417ms)
+✔ N3: FooterNewsletter's exact { email } payload produces an unchanged Beehiiv body (0.632083ms)
+✔ T1b: blog popup, thumbs -> Beehiiv body matches section 2 case (b) (0.211625ms)
+✔ T1c: blog sticky bar, classic -> Beehiiv body matches section 2 case (c) (0.184958ms)
+✔ T1d: all three utm fields invalid -> body reduces to exactly case (a)'s shape (0.194458ms)
+✔ T1d: mixed valid/invalid (valid source+medium, invalid campaign) -> utm_campaign key absent (0.1815ms)
+✔ T2: non-blog signup -> tag body is exactly today's { tags: ["source-newsletter"] } (0.133583ms)
+✔ T2: blog signup, valid campaign thumbs -> tag body ["source-blog", "variant-thumbs"] (0.131959ms)
+✔ T2: blog signup, valid campaign classic -> tag body ["source-blog", "variant-classic"] (0.134167ms)
+✔ T2 (edge case, contract section 3): blog signup, missing/invalid campaign -> tag body ["source-blog"] only (0.1545ms)
+✔ T3: tag endpoint returns 500 -> route still resolves 200 { success: true } (0.1025ms)
+✔ N5: contact without heardAbout -> Resend HTML and Beehiiv payload byte-identical to today (7.76325ms)
+✔ P10: contact with heardAbout "x" -> Resend line, heard-x tag, no new custom_fields key (0.188959ms)
+✔ P10 (validation): unrecognized heardAbout value behaves exactly like no heardAbout (0.133833ms)
+(node:56580) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/app/api/newsletter/route.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.888041
+exit=0

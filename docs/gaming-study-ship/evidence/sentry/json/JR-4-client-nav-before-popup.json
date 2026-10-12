@@ -1,0 +1,49 @@
+{
+  "body": {
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "source": "site-popup",
+    "ad": "",
+    "attribution": {
+      "utm_source": "x",
+      "utm_medium": "social",
+      "utm_campaign": "gaming-study",
+      "utm_content": "karlin",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+    },
+    "attributionFrom": "session",
+    "page": "/",
+    "eventId": "efe01bf0-dfe7-42a3-833d-db7f5d74bc1a",
+    "eventSourceUrl": "http://localhost:3311/",
+    "ekz_hp": ""
+  },
+  "ss0": "{\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}",
+  "bodies": [
+    {
+      "t": 1791777262525,
+      "key": "season",
+      "url": "/api/season-one",
+      "status": 200,
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "session",
+        "page": "/",
+        "eventId": "efe01bf0-dfe7-42a3-833d-db7f5d74bc1a",
+        "eventSourceUrl": "http://localhost:3311/",
+        "ekz_hp": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+ "readAt": "2026-10-12T04:03Z",
+ "source": "Klaviyo read tools (get_profiles, get_events, get_profile include lists). Properties only, no key.",
+ "metric": {"id": "XNJKbF", "name": "Season 01 Waitlist"},
+ "JR-1": {"email": "team+gstest-1012-jr1@ekuzo.gg", "profileId": "01M4Q4D6PC0MAY61XCTC726TFR", "eventId": "7ws7CyuYpJc", "eventTime": "2026-10-12T04:02:21Z",
+  "profileProperties": {"season1_waitlist": "yes", "season1_source": "site-popup", "season1_joined_at": "2026-10-12T04:02:21.227Z"},
+  "emailMarketingConsent": "NEVER_SUBSCRIBED", "lists": [],
+  "eventProperties": {"source": "site-popup", "ad": "", "ad_name": "", "where": "", "utm_source": "x", "utm_medium": "social", "utm_campaign": "gaming-study", "utm_content": "karlin", "utm_term": "", "utm_id": "", "site": "", "attribution_from": "url", "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin", "device_os": "mac", "device_type": "desktop", "geo_country": "", "geo_region": "", "geo_city": "", "geo_postal": ""}},
+ "JR-2": {"email": "team+gstest-1012-jr2@ekuzo.gg", "profileId": "01M4Q4DBW0KGV6MB2R5ZM9NM6R", "eventId": "7ws7iJKwHEa", "eventTime": "2026-10-12T04:02:26Z",
+  "profileProperties": {"season1_waitlist": "yes", "season1_source": "site-popup", "season1_joined_at": "2026-10-12T04:02:26.400Z"},
+  "emailMarketingConsent": "NEVER_SUBSCRIBED", "lists": [],
+  "eventProperties": {"source": "site-popup", "ad": "", "ad_name": "", "where": "", "utm_source": "", "utm_medium": "", "utm_campaign": "", "utm_content": "", "utm_term": "", "utm_id": "", "site": "", "attribution_from": "none", "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids", "device_os": "mac", "device_type": "desktop", "geo_country": "", "geo_region": "", "geo_city": "", "geo_postal": ""}}
+}

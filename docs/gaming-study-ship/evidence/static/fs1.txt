@@ -1,0 +1,62 @@
+$ grep -rn form_start (excluding node_modules, .next, .git, docs)
+WORKLOG.md
+app/programs/ekuzo-camps/register/page.tsx
+app/api/camps/lead/route.ts
+app/api/ekuzo100/lead/route.ts
+app/api/webhooks/stripe/route.ts
+app/season1/landing.html
+app/api/teams/lead/route.ts
+components/register/ParentInfoSection.tsx
+lib/products/teams.ts
+lib/products/ekuzo100.ts
+lib/products/camps.ts
+marketing/teams-redesign/01-teams-convergence-handoff.md
+marketing/teams-redesign/03-phase1-registry.md
+marketing/teams-redesign/06-phase4-partial-capture.md
+
+$ grep -rn form_start in app components lib context public
+app/programs/ekuzo-camps/register/page.tsx:839:              `form_started_camps` Beehiiv tag fires the moment a valid
+app/api/camps/lead/route.ts:23: * Beehiiv with a `form_started_camps` tag so nurture can re-engage them.
+app/api/camps/lead/route.ts:32: * (it does NOT remove form_started_camps — Beehiiv's public API has no
+app/api/teams/lead/route.ts:21: * Beehiiv with `form_started_teams` for nurture.
+app/api/webhooks/stripe/route.ts:386:          // form_started_camps and cart_abandoned_camps tags after a
+app/api/webhooks/stripe/route.ts:405:          //      form_started_camps, cart_abandoned_camps" if Beehiiv's
+app/season1/landing.html:1025:  const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(
+app/api/ekuzo100/lead/route.ts:21: * land in Beehiiv with `form_started_ekuzo100` for nurture.
+components/register/ParentInfoSection.tsx:10:// with the product's `form_started_*` tag without blocking the form.
+lib/products/teams.ts:15: * (`ekuzo-teams-*` for Beehiiv referring sites, `form_started_teams` /
+lib/products/teams.ts:41:      formStarted: "form_started_teams",
+lib/products/ekuzo100.ts:24:      formStarted: "form_started_ekuzo100",
+lib/products/camps.ts:24:      formStarted: "form_started_camps",
+
+$ docs hits
+docs/beehiiv-config.md
+docs/dev-runbook.md
+docs/season-one-tracking.md
+docs/s1-popup-attribution/05-defect-log.md
+docs/s1-popup-attribution/04-evidence-ledger.md
+docs/s1-popup-attribution/01-requirements.md
+docs/s1-popup-attribution/07-review-guide.md
+docs/s1-popup-attribution/evidence/n7-ga4-clarity-network.md
+docs/s1-popup-attribution/auditor-phase1.md
+docs/s1-popup-attribution/evidence/f9-form-start.md
+docs/s1-popup-attribution/evidence/sentry-qa.md
+docs/s1-popup-attribution/evidence/raw-n7-ga4-clarity.json
+docs/gaming-study-ship/01-requirements.md
+docs/gaming-study-ship/02b-contract-and-preflight.md
+docs/ekuzo101-pilot/01-requirements.md
+docs/gaming-study-ship/evidence/static/added-lines.txt
+docs/gaming-study-ship/evidence/static/fs1.txt
+docs/gaming-study-ship/reviews/01-auditor-requirements.md
+$ grep -rnE "form_start([^e_]|$)" outside docs (event name exactly, not form_started_*)
+WORKLOG.md:21:## Jamie (via Claude, Build Loop), October 11, 2026 (Season 01: popup attribution, trusted form_start)
+WORKLOG.md:29:  record `localStorage["ekuzo_s1_attribution"]`. `form_start` fires only on a trusted pointerdown,
+WORKLOG.md:39:- Docs: `docs/season-one-tracking.md` (Popup attribution section, form_start definition, contract),
+WORKLOG.md:59:- `app/season1/landing.html` + `docs/season-one-tracking.md`: funnel instrumentation (SC-3): Clarity sessi
+app/season1/landing.html:1025:  const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add
+[files above should be only app/season1/landing.html]
+
+WORKLOG/marketing hits are form_started_* tags:
+WORKLOG.md:21:## Jamie (via Claude, Build Loop), October 11, 2026 (Season 01: popup attribution, trusted form_start)
+WORKLOG.md:29:  record `localStorage["ekuzo_s1_attribution"]`. `form_start` fires only on a trusted pointerdown,
+WORKLOG.md:39:- Docs: `docs/season-one-tracking.md` (Popup attribution section, form_start definition, contract),

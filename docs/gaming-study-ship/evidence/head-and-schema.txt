@@ -1,5 +1,5 @@
-HEAD AND SCHEMA 2026-10-12T02:05:33.069Z
-GET /blog/gaming-study-13-7-years-younger-what-it-means-for-kids -> 200 text/html; charset=utf-8 155352 bytes
+HEAD AND SCHEMA 2026-10-12T04:07:31.289Z
+GET /blog/gaming-study-13-7-years-younger-what-it-means-for-kids -> 200 text/html; charset=utf-8 156429 bytes
 title: Is gaming good for your brain? The “13.7 years younger” study, for parents | EKUZO
 meta description: A physician&#x27;s one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old.
 canonical: https://ekuzo.gg/blog/gaming-study-13-7-years-younger-what-it-means-for-kids
@@ -31,9 +31,9 @@ block 3:
   Question name="How do I get my kid off the game without the attitude?" 
 block 4:
 
-/images/gaming-study-13-7-hero.jpg -> 200 image/jpeg 281053 bytes
-/images/gaming-study-13-7-card.jpg -> 200 image/jpeg 116316 bytes
-/images/gaming-study-same-game-two-hours.png -> 200 image/png 164192 bytes
+/images/gaming-study-13-7-hero.jpg -> 200 image/jpeg 242166 bytes
+/images/gaming-study-13-7-card.jpg -> 200 image/jpeg 94471 bytes
+/images/gaming-study-same-game-two-hours.png -> 200 image/png 46091 bytes
 h1 count: 1
 visible date text near byline:  the one that mattered wasn’t about the study. by Karlin Oei Founder of EKUZO · Updated October 12, 2026 · 8 min read Short answer: one study of
 /sitemap.xml -> 200; contains slug: true

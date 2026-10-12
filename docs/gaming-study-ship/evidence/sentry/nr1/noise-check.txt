@@ -1,0 +1,3 @@
+/programs/ekuzo-camps 1440: A-vs-A(second run) 11.616% ; B-vs-B 0.467% ; A2-vs-B2 0.945%
+/programs/ekuzo-camps 375: A-vs-A(second run) 0.000% ; B-vs-B 3.177% ; A2-vs-B2 0.000%
+/programs/ekuzo101 1440: A-vs-A(second run) 13.109% ; B-vs-B 0.466% ; A2-vs-B2 13.109%

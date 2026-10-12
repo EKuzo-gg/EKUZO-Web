@@ -1,0 +1,50 @@
+[
+  {
+    "id": "zoom/narrow: 320px wide",
+    "sev": "ok",
+    "note": "docScrollWidth 320 vs innerWidth 320; sticky bar box {\"h\":80,\"w\":320,\"vh\":640,\"covers\":12.5}; flagged regions: none; page errors 0; screenshots zoom-0.png, zoom-0-top.png",
+    "extra": {
+      "hero area (h1 section)": [],
+      "hero": [],
+      "graphic": [],
+      "keep reading": [],
+      "sticky bar": []
+    }
+  },
+  {
+    "id": "zoom/narrow: 200% browser zoom (viewport 720 wide)",
+    "sev": "ok",
+    "note": "docScrollWidth 720 vs innerWidth 720; sticky bar box {\"h\":80,\"w\":720,\"vh\":450,\"covers\":17.8}; flagged regions: none; page errors 0; screenshots zoom-1.png, zoom-1-top.png",
+    "extra": {
+      "hero area (h1 section)": [],
+      "hero": [],
+      "graphic": [],
+      "keep reading": [],
+      "sticky bar": []
+    }
+  },
+  {
+    "id": "zoom/narrow: 200% text zoom at 1440 (root font-size 200%)",
+    "sev": "FINDING?",
+    "note": "docScrollWidth 1682 vs innerWidth 1440; sticky bar box {\"h\":196,\"w\":1440,\"vh\":900,\"covers\":21.8}; flagged regions: none; page errors 0; screenshots zoom-2.png, zoom-2-top.png",
+    "extra": {
+      "hero area (h1 section)": [],
+      "hero": [],
+      "graphic": [],
+      "keep reading": [],
+      "sticky bar": []
+    }
+  },
+  {
+    "id": "zoom/narrow: 320px + reduced motion",
+    "sev": "ok",
+    "note": "docScrollWidth 320 vs innerWidth 320; sticky bar box {\"h\":80,\"w\":320,\"vh\":640,\"covers\":12.5}; flagged regions: none; page errors 0; screenshots zoom-3.png, zoom-3-top.png",
+    "extra": {
+      "hero area (h1 section)": [],
+      "hero": [],
+      "graphic": [],
+      "keep reading": [],
+      "sticky bar": []
+    }
+  }
+]

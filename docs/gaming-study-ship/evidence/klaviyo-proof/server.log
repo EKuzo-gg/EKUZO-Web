@@ -1,0 +1,15 @@
+▲ Next.js 16.2.1
+- Local:         http://localhost:3313
+- Network:       http://192.168.1.197:3313
+✓ Ready in 78ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/jamiefitch/Projects/ekuzo-web/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package-lock.json
+
+Klaviyo Season 01 list subscribe failed: 403 {"errors":[{"id":"5ff36bc6-6d95-4038-beed-e0dc349f979d","status":403,"code":"permission_denied","title":"You do not have permission to perform this action.","detail":"Your API key is missing required scopes: subscriptions:write","source":{"pointer":"/data/"}}]}
+Meta CAPI token or pixel ID not configured; skipping server-side Lead event
+Klaviyo Season 01 list subscribe failed: 403 {"errors":[{"id":"9889392e-4d89-4618-8b9e-a34b5218d298","status":403,"code":"permission_denied","title":"You do not have permission to perform this action.","detail":"Your API key is missing required scopes: subscriptions:write","source":{"pointer":"/data/"}}]}
+Meta CAPI token or pixel ID not configured; skipping server-side Lead event

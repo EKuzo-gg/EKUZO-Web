@@ -1,0 +1,17 @@
+time 2026-10-12T04:01:33.127Z
+metric 403 undefined
+list 200 Season 01 Waitlist
+flows err 403 {"errors":[{"id":"6989bbfc-faf5-43fc-aee5-cd4c5f7fe533","status":403,"code":"permission_denied","title":"You do not have permission to perform this action.","detail":"Your API key is missing required scopes: flows:read","source":{"pointer":"/data/"}}]}
+flows total 0
+list flow-triggers 403 {"errors":[{"id":"33b94a50-7b08-46f0-b575-5984df5f1c8b","status":403,"code":"permission_denied","title":"You do not have permission to perform this action.","detail":"Your API key is missing required scopes: flows:read","source":{"pointer":"/data/"}}]}
+metric flow-triggers 403 {"errors":[{"id":"3a1ea010-cf26-455d-8ba1-ae84a23cb08f","status":403,"code":"permission_denied","title":"You do not have permission to perform this action.","detail":"Your API key is missing required scopes: flows:read, metrics:read","source":{"pointer":"/data/"}}]}
+
+--- Second pass, 2026-10-12T04:01Z to 04:02Z, via the connected Klaviyo read-only tools (same account: list XGTv2F "Season 01 Waitlist" and metric XNJKbF exist there) ---
+The local .env.local key lacks flows:read and metrics:read (403 above), so the check could not run with it.
+get_flows_triggered_by_list XGTv2F   -> data: []
+get_flows_triggered_by_metric XNJKbF -> data: []
+get_flows (all): 4 flows, all status live, all trigger_type Metric, none on XNJKbF:
+  TXmY9F Purchase Confirmation - EKUZO Camps; UWMYHm Purchase Confirmation - EKUZO 100;
+  V8RC9V Pilot Confirmation - EKUZO 101; VumwSg Purchase Confirmation - EKUZO Teams
+get_list XGTv2F: flow-triggers [], profile_count 10, single_opt_in
+Result: no flow would email the test addresses. Proceeded.

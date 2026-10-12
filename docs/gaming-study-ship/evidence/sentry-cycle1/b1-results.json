@@ -1,0 +1,97 @@
+[
+  {
+    "id": "rapid open/close/open x8 + double open",
+    "sev": "ok",
+    "note": "max dialogs=1, dialogs after double open=1, body.overflow open=\"hidden\" after close=\"\", dialogs after Esc=0, page errors=0 , Leads={\"ga\":0,\"fb\":0}, POSTs=0"
+  },
+  {
+    "id": "Escape while submitting",
+    "sev": "info",
+    "note": "button during submit=\"Saving…\", dialog after Esc=0, request still completes: Leads after response ga/fb=1/1, localStorage joined=1, dismissed_at=true, page errors=0 , re-open after: 0"
+  },
+  {
+    "id": "email \"empty\"",
+    "sev": "info",
+    "note": "typed 0 chars, field kept 0; HTML5 validity=\"\"; POSTs=0; UI error=\"Check the email address and try again.\"; dialog still open=1; Leads={\"ga\":0,\"fb\":0}; alert dialogs=0"
+  },
+  {
+    "id": "email \"whitespace\"",
+    "sev": "info",
+    "note": "typed 5 chars, field kept 0; HTML5 validity=\"\"; POSTs=0; UI error=\"Check the email address and try again.\"; dialog still open=1; Leads={\"ga\":0,\"fb\":0}; alert dialogs=0"
+  },
+  {
+    "id": "email \"300 chars\"",
+    "sev": "info",
+    "note": "typed 296 chars, field kept 296; HTML5 validity=\"(field gone: success state)\"; POSTs=1 body.email=\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\" len 296; UI error=\"(none)\"; dialog still open=1; Leads={\"ga\":1,\"fb\":1}; alert dialogs=0"
+  },
+  {
+    "id": "email \"unicode local+idn\"",
+    "sev": "info",
+    "note": "typed 18 chars, field kept 18; HTML5 validity=\"(field gone: success state)\"; POSTs=1 body.email=\"tëst用户@exämple.com\" len 18; UI error=\"(none)\"; dialog still open=1; Leads={\"ga\":1,\"fb\":1}; alert dialogs=0"
+  },
+  {
+    "id": "email \"a@b\"",
+    "sev": "info",
+    "note": "typed 3 chars, field kept 3; HTML5 validity=\"\"; POSTs=0; UI error=\"Check the email address and try again.\"; dialog still open=1; Leads={\"ga\":0,\"fb\":0}; alert dialogs=0"
+  },
+  {
+    "id": "email \"\"><script>\"",
+    "sev": "info",
+    "note": "typed 32 chars, field kept 32; HTML5 validity=\"(field gone: success state)\"; POSTs=1 body.email=\"\\\"><script>alert(1)</script>@x.co\" len 32; UI error=\"(none)\"; dialog still open=1; Leads={\"ga\":1,\"fb\":1}; alert dialogs=0"
+  },
+  {
+    "id": "email \"leading/trailing spaces\"",
+    "sev": "info",
+    "note": "typed 36 chars, field kept 32; HTML5 validity=\"(field gone: success state)\"; POSTs=1 body.email=\"team+gstest-1012-sentry@ekuzo.gg\" len 32; UI error=\"(none)\"; dialog still open=1; Leads={\"ga\":1,\"fb\":1}; alert dialogs=0"
+  },
+  {
+    "id": "email \"two @\"",
+    "sev": "info",
+    "note": "typed 7 chars, field kept 7; HTML5 validity=\"A part following '@' should not contain the symbol '@'.\"; POSTs=0; UI error=\"Check the email address and try again.\"; dialog still open=1; Leads={\"ga\":0,\"fb\":0}; alert dialogs=0"
+  },
+  {
+    "id": "Enter + click + dblclick submit",
+    "sev": "ok",
+    "note": "POSTs=1, generate_lead=1, fbq Lead=1"
+  },
+  {
+    "id": "submit, back, forward, reload",
+    "sev": "ok",
+    "note": "Leads after submit={\"ga\":1,\"fb\":1}, after nav={\"ga\":1,\"fb\":1}, POSTs=1, popup open after back/forward/reload=0/0/0"
+  },
+  {
+    "id": "response: 500 {ok:false}",
+    "sev": "ok",
+    "note": "UI error text=\"We couldn’t save that. Please try again.\", success state shown=false, submit button enabled=true, Leads={\"ga\":0,\"fb\":0}, page errors=0, page usable (dialog closable)=true"
+  },
+  {
+    "id": "response: 500 html body",
+    "sev": "ok",
+    "note": "UI error text=\"That didn’t go through. Try again?\", success state shown=false, submit button enabled=true, Leads={\"ga\":0,\"fb\":0}, page errors=0, page usable (dialog closable)=true"
+  },
+  {
+    "id": "response: 200 malformed JSON",
+    "sev": "FINDING",
+    "note": "UI error text=\"(none)\", success state shown=true, submit button enabled=null, Leads={\"ga\":1,\"fb\":1}, page errors=0, page usable (dialog closable)=true"
+  },
+  {
+    "id": "response: 200 {ok:false}",
+    "sev": "FINDING",
+    "note": "UI error text=\"(none)\", success state shown=true, submit button enabled=null, Leads={\"ga\":1,\"fb\":1}, page errors=0, page usable (dialog closable)=true"
+  },
+  {
+    "id": "response: network abort",
+    "sev": "ok",
+    "note": "UI error text=\"Failed to fetch\", success state shown=false, submit button enabled=true, Leads={\"ga\":0,\"fb\":0}, page errors=0, page usable (dialog closable)=true"
+  },
+  {
+    "id": "response: 30 s hang then abort",
+    "sev": "FINDING",
+    "note": "at 8 s: button=\"Saving…\" enabled=false error=\"Failed to fetch\"; at 32 s (after abort): button=\"Save their spot\" enabled=true error=\"Failed to fetch\"; client has no fetch timeout (spinner persists as long as the request does; Esc/X still close); Leads={\"ga\":0,\"fb\":0}; page errors=0"
+  },
+  {
+    "id": "honeypot filled",
+    "sev": "ok",
+    "note": "POST sent with ekz_hp=\"bot\", Leads={\"ga\":0,\"fb\":0}, UI shows success=YOU’RE ON THE LIST AWESOME. We can’t wait to make screenti, joined key=1"
+  }
+]

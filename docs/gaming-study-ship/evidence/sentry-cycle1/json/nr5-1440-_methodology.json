@@ -1,0 +1,55 @@
+{
+  "b": {
+    "name": "QA Sentry Test",
+    "organization": "QA Test Org",
+    "contactMethod": "email",
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "message": "QA test only. Intercepted in browser, never sent.",
+    "pageUrl": "http://localhost:3311/methodology",
+    "heardAbout": "x"
+  },
+  "opts": [
+    [
+      "",
+      "Choose one"
+    ],
+    [
+      "x",
+      "X (Twitter)"
+    ],
+    [
+      "instagram",
+      "Instagram"
+    ],
+    [
+      "tiktok-youtube",
+      "TikTok or YouTube"
+    ],
+    [
+      "google",
+      "Google search"
+    ],
+    [
+      "ai",
+      "ChatGPT or another AI"
+    ],
+    [
+      "friend",
+      "A friend or another parent"
+    ],
+    [
+      "school",
+      "My kid's school"
+    ],
+    [
+      "other",
+      "Other"
+    ]
+  ],
+  "triggers": [
+    {
+      "t": "Talk to Humans",
+      "vis": true
+    }
+  ]
+}

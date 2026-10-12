@@ -1,0 +1,242 @@
+[
+  {
+    "vp": "375",
+    "tag": "post",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 17104
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 375,
+      "clientHeight": 667
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  },
+  {
+    "vp": "375",
+    "tag": "fortnite",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 13812
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 375,
+      "clientHeight": 667
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  },
+  {
+    "vp": "375",
+    "tag": "friends",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 15439
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 375,
+      "clientHeight": 667
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  },
+  {
+    "vp": "768",
+    "tag": "post",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 11755
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 768,
+      "clientHeight": 1024
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formParentChain": [
+      "FORM.flex gap-2 w-full sm:w-auto ox=visible",
+      "DIV.flex flex-col sm:flex-row items-start sm ox=visible",
+      "DIV.flex flex-col md:flex-row items-start md ox=visible",
+      "FOOTER.bg-white relative pt-[130px] pb-0 overfl ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formText": "Join the Newsletter Sign up"
+  },
+  {
+    "vp": "768",
+    "tag": "fortnite",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 8811
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 768,
+      "clientHeight": 1024
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formParentChain": [
+      "FORM.flex gap-2 w-full sm:w-auto ox=visible",
+      "DIV.flex flex-col sm:flex-row items-start sm ox=visible",
+      "DIV.flex flex-col md:flex-row items-start md ox=visible",
+      "FOOTER.bg-white relative pt-[130px] pb-0 overfl ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formText": "Join the Newsletter Sign up"
+  },
+  {
+    "vp": "768",
+    "tag": "friends",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 10333
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 768,
+      "clientHeight": 1024
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formParentChain": [
+      "FORM.flex gap-2 w-full sm:w-auto ox=visible",
+      "DIV.flex flex-col sm:flex-row items-start sm ox=visible",
+      "DIV.flex flex-col md:flex-row items-start md ox=visible",
+      "FOOTER.bg-white relative pt-[130px] pb-0 overfl ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ],
+    "formText": "Join the Newsletter Sign up"
+  },
+  {
+    "vp": "1024",
+    "tag": "post",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 12290
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 1024,
+      "clientHeight": 768
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  },
+  {
+    "vp": "1024",
+    "tag": "fortnite",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 9070
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 1024,
+      "clientHeight": 768
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  },
+  {
+    "vp": "1024",
+    "tag": "friends",
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 10696
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 1024,
+      "clientHeight": 768
+    },
+    "htmlOx": "clip",
+    "bodyOx": "clip",
+    "imgSrc": "311/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+    "imgAnc": [
+      "IMG.absolute left-1/2 z-20 pointer-events-no ox=clip",
+      "DIV.relative overflow-visible ox=visible",
+      "BODY.min-h-full flex flex-col bg-white text-b ox=clip"
+    ]
+  }
+]

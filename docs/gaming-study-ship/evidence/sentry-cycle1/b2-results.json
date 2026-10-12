@@ -1,0 +1,77 @@
+[
+  {
+    "id": "hang timeline",
+    "sev": "info",
+    "note": "2s btn=\"Saving…\" err=\"Failed to fetch\" | 34s btn=\"Save their spot\" err=\"Failed to fetch\" | 38s btn=\"Save their spot\" err=\"Failed to fetch\" | 42s btn=\"Save their spot\" err=\"Failed to fetch\" | 46s btn=\"Save their spot\" err=\"Failed to fetch\" | 54s btn=\"Save their spot\" err=\"Failed to fetch\" | 58s btn=\"Save their spot\" err=\"Failed to fetch\" | 60s btn=\"Save their spot\" err=\"Failed to fetch\" | 62s btn=\"Save their spot\" err=\"Failed to fetch\""
+  },
+  {
+    "id": "storage blocked: Storage.prototype methods throw @1440",
+    "sev": "info",
+    "note": "page renders h1=\"The gaming study everyone shared, and wh...\", uncaught page errors=0  / ai run 0; popup auto-opens=1; sign-up in popup -> POSTs=1 Leads={\"ga\":1,\"fb\":1} done=true; sticky bar present=1; popup on a second page load=1 (no dismiss memory, shows each load); ai_referral events across load+reload (chatgpt referer)=1 (contract: may fire each page view when storage blocked, known)"
+  },
+  {
+    "id": "storage blocked: Storage.prototype methods throw @375",
+    "sev": "info",
+    "note": "page renders h1=\"The gaming study everyone shared, and wh...\", uncaught page errors=0  / ai run 0; popup auto-opens=1; sign-up in popup -> POSTs=1 Leads={\"ga\":1,\"fb\":1} done=true; sticky bar present=1; popup on a second page load=1 (no dismiss memory, shows each load); ai_referral events across load+reload (chatgpt referer)=1 (contract: may fire each page view when storage blocked, known)"
+  },
+  {
+    "id": "storage blocked: window.localStorage/sessionStorage getters throw @1440",
+    "sev": "info",
+    "note": "page renders h1=\"The gaming study everyone shared, and wh...\", uncaught page errors=0  / ai run 0; popup auto-opens=1; sign-up in popup -> POSTs=1 Leads={\"ga\":1,\"fb\":1} done=true; sticky bar present=1; popup on a second page load=1 (no dismiss memory, shows each load); ai_referral events across load+reload (chatgpt referer)=1 (contract: may fire each page view when storage blocked, known)"
+  },
+  {
+    "id": "storage blocked: window.localStorage/sessionStorage getters throw @375",
+    "sev": "info",
+    "note": "page renders h1=\"The gaming study everyone shared, and wh...\", uncaught page errors=0  / ai run 0; popup auto-opens=1; sign-up in popup -> POSTs=1 Leads={\"ga\":1,\"fb\":1} done=true; sticky bar present=1; popup on a second page load=1 (no dismiss memory, shows each load); ai_referral events across load+reload (chatgpt referer)=1 (contract: may fire each page view when storage blocked, known)"
+  },
+  {
+    "id": "URL: 3000-char utm_content",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=0, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 3000; attribution lengths {\"utm_source\":1,\"utm_medium\":6,\"utm_campaign\":1,\"utm_content\":200,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=url; page len 3119; eventSourceUrl len 3140; utm_source sample=\"x\"; max attribution value length=200 (contract cap 200)"
+  },
+  {
+    "id": "URL: utm_source html payload",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=0, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 1; attribution lengths {\"utm_source\":28,\"utm_medium\":6,\"utm_campaign\":1,\"utm_content\":1,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=url; page len 159; eventSourceUrl len 180; utm_source sample=\"<img src=x onerror=alert(1)>\"; max attribution value length=28 (contract cap 200)"
+  },
+  {
+    "id": "URL: duplicate utm_source",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=0, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 1; attribution lengths {\"utm_source\":5,\"utm_medium\":6,\"utm_campaign\":0,\"utm_content\":1,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=url; page len 127; eventSourceUrl len 148; utm_source sample=\"first\"; max attribution value length=6 (contract cap 200)"
+  },
+  {
+    "id": "URL: utm_source javascript payload",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=0, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 0; attribution lengths {\"utm_source\":34,\"utm_medium\":0,\"utm_campaign\":0,\"utm_content\":0,\"utm_term\":19,\"utm_id\":0,\"site\":0}; from=url; page len 155; eventSourceUrl len 176; utm_source sample=\"\\\"'><script>window.__xss=1</script>\"; max attribution value length=34 (contract cap 200)"
+  },
+  {
+    "id": "URL: ?join=season-one",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=0, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 0; attribution lengths {\"utm_source\":0,\"utm_medium\":0,\"utm_campaign\":0,\"utm_content\":0,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=none; page len 76; eventSourceUrl len 97; utm_source sample=\"\"; max attribution value length=0 (contract cap 200)"
+  },
+  {
+    "id": "URL: ?join=anything",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=1, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 0; attribution lengths {\"utm_source\":0,\"utm_medium\":0,\"utm_campaign\":0,\"utm_content\":0,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=none; page len 74; eventSourceUrl len 95; utm_source sample=\"\"; max attribution value length=0 (contract cap 200)"
+  },
+  {
+    "id": "URL: ?join (empty)",
+    "sev": "info",
+    "note": "popup auto-open early(<1s)=1, opened by 8s=true; script execution flag=0, alert dialogs=0, injected <img src=x> in DOM=0, page errors=0; body.ad len 0; attribution lengths {\"utm_source\":0,\"utm_medium\":0,\"utm_campaign\":0,\"utm_content\":0,\"utm_term\":0,\"utm_id\":0,\"site\":0}; from=none; page len 66; eventSourceUrl len 87; utm_source sample=\"\"; max attribution value length=0 (contract cap 200)"
+  },
+  {
+    "id": "?join=x for an already-joined visitor",
+    "sev": "info",
+    "note": "popup opens=1 (documented: ?join always opens)"
+  },
+  {
+    "id": "dormancy with ekuzo_nl_variant=thumbs @1440",
+    "sev": "ok",
+    "note": "newsletter copy/dialog/bar-email at 20/45/50/60/75/100%: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]; newsletter_impression=0; localStorage={\"ekuzo_s1_dismissed_at\":\"1791779255785\",\"ekuzo_nl_variant\":\"thumbs\"}"
+  },
+  {
+    "id": "dormancy with ekuzo_nl_variant=thumbs @375",
+    "sev": "ok",
+    "note": "newsletter copy/dialog/bar-email at 20/45/50/60/75/100%: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]; newsletter_impression=0; localStorage={\"ekuzo_s1_dismissed_at\":\"1791779265417\",\"ekuzo_nl_variant\":\"thumbs\"}"
+  }
+]

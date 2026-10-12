@@ -1,0 +1,37 @@
+MATCH CP-1 C1 title (post)
+MATCH CP-1 C1 title (/blog)
+MATCH CP-2 C3 short answer
+MATCH CP-3 C3b trimmed para
+MATCH CP-4 C4 tennis
+MATCH CP-5 C5 alt
+MATCH CP-8 C8 FAQ q
+MATCH CP-9 C9 heading
+MATCH CP-11 S1
+DIFF  CP-12 S2.1
+   expected: If the viral “13.7 years younger” gaming study is why you’re here, that number isn’t in the paper. I read about a thousand of the replies and wrote up what it means for a twelve-year-old.
+   longest matching prefix len 57; rendered continues: If the viral “13.7 years younger” gaming study is why you're here, that number isn't in the paper. I read about a thousand of the replies and wrote up what it means for a twelve-year-old. [IMG alt: ] Keep Reading [IMG alt: A pa
+DIFF  CP-12 S2.2
+   expected: When the viral “13.7 years younger” gaming study went around, the most-liked reply under the original post was “The kind of gaming probably matters as much as the hours,” which is this whole page in eleven words. The 13.7 isn’t in the paper. I wrote up what is, and what it means for your kid.
+   longest matching prefix len 225; rendered continues: When the viral “13.7 years younger” gaming study went around, the most-liked reply under the original post was “The kind of gaming probably matters as much as the hours,” which is this whole page in eleven words. The 13.7 isn't in the paper. I wrote up what is, and what it means for your kid. [IMG alt: ] Keep Reading [IMG alt: Virt
+DIFF  CP-12 S2.3
+   expected: Related: when the viral “13.7 years younger” gaming study went around (the number isn’t in the paper, and the study was of adults), parents in the replies asked, unprompted, how to get a kid off the game without the attitude. EKUZO founder Karlin Oei read about a thousand of the replies and wrote it up.
+   longest matching prefix len 85; rendered continues: Related: when the viral “13.7 years younger” gaming study went around (the number isn't in the paper, and the study was of adults), parents in the replies asked, unprompted, how to get a kid off the game without the attitude. EKUZO founder Karlin Oei read about a thousand of the replies and wrote it up. [IMG alt: ] Keep Reading [IMG alt: Ever
+DIFF  CP-12 S2.4
+   expected: This piece has a sibling. I ran the same read on about a thousand replies to the viral “13.7 years younger” gaming study. That number isn’t in the paper. The replies sorted into camps there too.
+   longest matching prefix len 137; rendered continues: This piece has a sibling. I ran the same read on about a thousand replies to the viral “13.7 years younger” gaming study. That number isn't in the paper. The replies sorted into camps there too. Karlin Oei is the founder of EKUZO. He 
+MATCH CP-12 S2.5
+MATCH CP-13 S3 hero alt
+MATCH CP-14 S4 sources
+MATCH CP-15 closing
+MATCH CP-19 SUBHEAD
+MATCH CP-19 Brockie
+MATCH CP-19 13.7 checklist
+MATCH CP-19 reanalysis links
+MATCH CP-19 C8 answer
+WS gaming-study-13-7-years-younger-what-it-means-for-kids: doubledSpaces=0 spaceBeforePunct=0
+WS what-your-kids-gaming-is-telling-you: doubledSpaces=0 spaceBeforePunct=0
+WS league-of-legends-youth-development: doubledSpaces=0 spaceBeforePunct=0
+WS should-you-ban-fortnite: doubledSpaces=0 spaceBeforePunct=0
+WS what-homeschool-parents-taught-us-about-gaming: doubledSpaces=0 spaceBeforePunct=0
+WS when-your-sons-only-friends-are-online: doubledSpaces=0 spaceBeforePunct=0
+WS blog: doubledSpaces=0 spaceBeforePunct=0

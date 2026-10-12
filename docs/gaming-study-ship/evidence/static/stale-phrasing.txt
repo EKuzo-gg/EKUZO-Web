@@ -1,0 +1,14 @@
+## post source
+27: * Everyone Shared This Week". Draft and register map:
+59:  "When was the last time you got an email that made you cry? For me, it was last week. I got an email from one of our parents who has a teenage gamer, previously known as Kick6767, more recently known as Lolcat. And the summary of the email is that he just graduated from elementary school. He's now going to a private school for sixth grade, and as a part of that introduction he had to write an entrance writing assignment. The writing assignment was: what was your greatest achievement ever? To remind you, this is a kid that does a lot of extracurriculars. He fences, he plays lacrosse, he also plays flag football. But what he decided to write as his greatest achievement ever was actually about playing mid lane in League of Legends. Lolcat has been in our system for about a year now, and for him to write about League of Legends being his greatest achievement ever, and him transitioning to mid lane, has got to be one of the most fulfilling and wholesome moments. It's one of those moments where we are really reminded of why we do what we do, and how special what we do is to kids. Ultimately, oftentimes it is the most important thing to them in life. We're just really grateful, and we're glad that we could be a part of their lives to that extent. And it's a great reminder of the responsibility that we hold as coaches, and our role in their lives in supporting their interests and their passion for video games. So if you're a mom or a dad who loves video games, or maybe even if you don't love video games but your kid does, DM us. We're here to help.";
+345:                a recent post on X
+606:              table this week.
+## index entry region (app/blog/page.tsx lines 14-30)
+## llms.txt gaming-study line
+## rendered post text
+17:I saw a recent post on X, probably the same way you did. A physician with a big following put up a study abstract and one sentence: frequent gamers performed on cognitive tests like non-gamers about 13.7 years younger. Counting the posts that quoted it, it passed 30 million views in its first week. For three days my feed argued about whether video games make you smart.
+72:So: the study is real, the number isn't the paper's, and a thousand strangers handed a study about hours spent three days talking about which game and who's around him while he plays. That's the conversation worth having at your table this week.
+## rendered head meta (title/description/og/twitter/jsonld) hits
+'ast time you got an email that made you cry? For me, it was last week. I got an email from one of our parents'
+'who has a teenage gamer, previously known as Kick6767, more recently known as Lolcat. And the summary of t'
+scanned 22860

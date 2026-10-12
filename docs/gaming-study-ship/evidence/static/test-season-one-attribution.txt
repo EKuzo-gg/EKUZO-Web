@@ -1,0 +1,47 @@
+▶ constants
+  ✔ exposes the 7-day window and the storage keys (0.191917ms)
+✔ constants (0.460875ms)
+▶ resolveSeasonOneAttribution
+  ✔ URL wins over session and local (0.464666ms)
+  ✔ URL with only utm_source counts, with ad empty (0.053125ms)
+  ✔ URL with only a valid ad is not an ad touch: none, or falls through to session (0.090084ms)
+  ✔ URL with only utm_id and/or site is not an ad touch (0.053708ms)
+  ✔ each of the five utm_* keys alone is an ad touch (0.064ms)
+  ✔ URL with only an invalid ad is not a touch and falls through to session (0.037458ms)
+  ✔ session fallback when the URL has nothing (0.05275ms)
+  ✔ session wins over local (0.053667ms)
+  ✔ a session record written by captureAttribution (5 utm keys, no ad) resolves with empty ad (0.055542ms)
+  ✔ an empty session record falls through to local (0.042375ms)
+  ✔ return-visit within 7 days, ad from the same record (0.033375ms)
+  ✔ return-visit at exactly 7 days is still valid (0.038042ms)
+  ✔ expired one millisecond past 7 days (0.037542ms)
+  ✔ expired after 8 days (0.021042ms)
+  ✔ future `at` is rejected (0.017417ms)
+  ✔ `at` equal to now is valid (age 0) (0.017ms)
+  ✔ non-numeric or missing `at` is rejected (0.037792ms)
+  ✔ local record with a valid `at` but no values is none (0.016959ms)
+  ✔ malformed JSON in either storage is ignored (0.252459ms)
+  ✔ non-object JSON (string, number, array, null) is ignored (0.035958ms)
+  ✔ non-string stored values become empty strings (0.035417ms)
+  ✔ a record holding only non-string values counts as empty (0.021125ms)
+  ✔ empty everything resolves to none with all-empty values (0.026542ms)
+  ✔ `ad` always comes from the same source as the attribution values (0.048625ms)
+  ✔ a record with only `ad` (or only utm_id / site) does not count (0.054208ms)
+  ✔ a session record without utm but with ad falls through to the return-visit record (0.025833ms)
+  ✔ an invalid stored ad is dropped (0.026583ms)
+  ✔ caps every value at 200 chars (0.073292ms)
+  ✔ result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution) (0.174709ms)
+✔ resolveSeasonOneAttribution (2.215375ms)
+(node:56574) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/lib/__tests__/season-one-attribution.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ tests 30
+ℹ suites 2
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.861708
+exit=0

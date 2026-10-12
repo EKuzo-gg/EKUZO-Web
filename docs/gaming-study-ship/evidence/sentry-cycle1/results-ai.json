@@ -1,0 +1,176 @@
+[
+  {
+    "id": "JR-3/MN-6 ai_chatgpt",
+    "vp": "1440",
+    "pass": true,
+    "notes": "referer=https://chatgpt.com/ document.referrer=https://chatgpt.com/; first beacon params=[{\"origin\":\"ai_chatgpt\",\"detected_via\":\"referrer\",\"referrer_host\":\"chatgpt.com\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_chatgpt; sessionStorage key={\"origin\":\"ai_chatgpt\",\"detected_via\":\"referrer\",\"referrer_host\":\"chatgpt.com\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_chatgpt",
+          "detected_via": "referrer",
+          "referrer_host": "chatgpt.com",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-3/MN-6 ai_claude",
+    "vp": "1440",
+    "pass": true,
+    "notes": "referer=https://claude.ai/ document.referrer=https://claude.ai/; first beacon params=[{\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"claude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_claude; sessionStorage key={\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"claude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_claude",
+          "detected_via": "referrer",
+          "referrer_host": "claude.ai",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-3/MN-6 ai_perplexity",
+    "vp": "1440",
+    "pass": true,
+    "notes": "referer=https://www.perplexity.ai/ document.referrer=https://www.perplexity.ai/; first beacon params=[{\"origin\":\"ai_perplexity\",\"detected_via\":\"referrer\",\"referrer_host\":\"www.perplexity.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_perplexity; sessionStorage key={\"origin\":\"ai_perplexity\",\"detected_via\":\"referrer\",\"referrer_host\":\"www.perplexity.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_perplexity",
+          "detected_via": "referrer",
+          "referrer_host": "www.perplexity.ai",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-3/MN-6 ai_chatgpt",
+    "vp": "375",
+    "pass": true,
+    "notes": "referer=https://chatgpt.com/ document.referrer=https://chatgpt.com/; first beacon params=[{\"origin\":\"ai_chatgpt\",\"detected_via\":\"referrer\",\"referrer_host\":\"chatgpt.com\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_chatgpt; sessionStorage key={\"origin\":\"ai_chatgpt\",\"detected_via\":\"referrer\",\"referrer_host\":\"chatgpt.com\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_chatgpt",
+          "detected_via": "referrer",
+          "referrer_host": "chatgpt.com",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-3/MN-6 ai_claude",
+    "vp": "375",
+    "pass": true,
+    "notes": "referer=https://claude.ai/ document.referrer=https://claude.ai/; first beacon params=[{\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"claude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_claude; sessionStorage key={\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"claude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_claude",
+          "detected_via": "referrer",
+          "referrer_host": "claude.ai",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-3/MN-6 ai_perplexity",
+    "vp": "375",
+    "pass": true,
+    "notes": "referer=https://www.perplexity.ai/ document.referrer=https://www.perplexity.ai/; first beacon params=[{\"origin\":\"ai_perplexity\",\"detected_via\":\"referrer\",\"referrer_host\":\"www.perplexity.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]; ekuzo_origin cookie=ai_perplexity; sessionStorage key={\"origin\":\"ai_perplexity\",\"detected_via\":\"referrer\",\"referrer_host\":\"www.perplexity.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}; ai_referral count after reload=1, after client nav to http://localhost:3311/blog=1, after back=1",
+    "extra": {
+      "first": [
+        {
+          "origin": "ai_perplexity",
+          "detected_via": "referrer",
+          "referrer_host": "www.perplexity.ai",
+          "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+        }
+      ]
+    }
+  },
+  {
+    "id": "MN-6 negative referer=https://www.google.com/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=organic_google; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=none",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=direct; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=https://x.com/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=social; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=https://t.co/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=social; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=https://www.facebook.com/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=social; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=https://duckduckgo.com/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=organic_other; session key=absent"
+  },
+  {
+    "id": "MN-6 negative referer=https://www.bing.com/",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0; ekuzo_origin cookie=organic_other; session key=absent"
+  },
+  {
+    "id": "MN-6 utm_source=x (JR-1 URL), no referer",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=0 params=[]",
+    "extra": {
+      "n": 0
+    }
+  },
+  {
+    "id": "MN-6 EXTRA utm_source=chatgpt.com no referer (expected fire via utm)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=1 params=[{\"origin\":\"ai_chatgpt\",\"detected_via\":\"utm\",\"referrer_host\":\"\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}]",
+    "extra": {
+      "n": 1
+    }
+  },
+  {
+    "id": "MN-6 INFO lookalike referer chatgpt.com.example",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=1 params=[{\"origin\":\"ai_chatgpt\",\"detected_via\":\"referrer\",\"referrer_host\":\"chatgpt.com.example\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}] (informational: ai-lookalike hosts DO fire)",
+    "extra": {
+      "n": 1
+    }
+  },
+  {
+    "id": "MN-6 INFO lookalike referer notclaude.ai",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ai_referral count=1 params=[{\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"notclaude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}] (informational: ai-lookalike hosts DO fire)",
+    "extra": {
+      "n": 1
+    }
+  }
+]
