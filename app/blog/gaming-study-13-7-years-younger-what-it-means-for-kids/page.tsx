@@ -42,7 +42,7 @@ const TITLE_SEO =
 const SUBHEAD =
   "A doctor posted one line about a study. More than 30 million people saw it. I read a thousand of the replies, and the one that mattered wasn’t about the study.";
 const DESCRIPTION =
-  "A viral post suggested gaming makes you smarter. EKUZO founder Karlin Oei dove in and shares what's real and what's hype.";
+  "A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, and what it means for a kid.";
 const HERO_IMAGE = "/images/gaming-study-13-7-hero.jpg";
 const SHARE_IMAGE = "/images/gaming-study-13-7-card.jpg";
 const DATE_PUBLISHED = "2026-10-12";
