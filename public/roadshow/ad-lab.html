@@ -280,6 +280,13 @@
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }</style>
 <style>
+.labnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 20px;background:rgba(12,11,14,.92);backdrop-filter:blur(8px);border-bottom:1px solid #2B2830;font:700 12px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}
+.labnav b{color:#F3F1F5;margin-right:10px;letter-spacing:.14em}
+.labnav a{color:#A39EAB;text-decoration:none;padding:9px 12px;border-radius:999px;border:1px solid transparent}
+.labnav a:hover{color:#F3F1F5;border-color:#2B2830}
+.labnav a[aria-current="page"]{color:#0C0B0E;background:#E0FF4E}
+.labnav a:focus-visible{outline:2px solid #E0FF4E;outline-offset:2px}
+
 /* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */
 :root{
   --wall:#0C0B0E; --panel:#17151B; --line:#2B2830; --text:#F3F1F5; --muted:#A39EAB;
@@ -885,6 +892,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 @media (max-width:420px){ .b.feed .art,.b.email .art,.inbox{width:100%} .b.feed,.b.email{width:100%} }
 </style>
 
+<nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html" id="nav-hub">← Hub</a><a href="ad-lab.html" aria-current="page">Ad lab</a><a href="hero-lab.html">Hero lab</a></nav>
 <div class="wrap">
   <header>
     <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
@@ -1408,4 +1416,5 @@ document.querySelectorAll('[data-meta] [data-f="hero"]').forEach(sel=>{
   sel.addEventListener("change",()=>{ url.value=setHeroInUrl(url.value,sel.value); url.dispatchEvent(new Event("input")); sel.dispatchEvent(new Event("input")); });
 });
 </script>
+<script>(()=>{const site=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);const hub=document.getElementById("nav-hub");if(!site&&hub){hub.href="https://dev--ekuzo.netlify.app/roadshow/";hub.target="_blank";hub.rel="noopener";}})();</script>
 </body></html>

@@ -59,9 +59,16 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-
 .next li b{color:var(--text)}
 
 @media (max-width:760px){.grid{grid-template-columns:1fr}.next{grid-template-columns:1fr}.desk .v{display:flex}}
+
+.labnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 20px;background:rgba(12,11,14,.92);backdrop-filter:blur(8px);border-bottom:1px solid #2B2830;font:700 12px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}
+.labnav b{color:#F3F1F5;margin-right:10px;letter-spacing:.14em}
+.labnav a{color:#A39EAB;text-decoration:none;padding:9px 12px;border-radius:999px;border:1px solid transparent}
+.labnav a:hover{color:#F3F1F5;border-color:#2B2830}
+.labnav a[aria-current="page"]{color:#0C0B0E;background:#E0FF4E}
+.labnav a:focus-visible{outline:2px solid #E0FF4E;outline-offset:2px}
 </style></head><body>
+<nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html" id="nav-hub">← Hub</a><a href="ad-lab.html">Ad lab</a><a href="hero-lab.html" aria-current="page">Hero lab</a></nav>
 <div class="wrap" id="top">
-  <nav class="crumbs" aria-label="Lab pages"><a href="ad-lab.html" id="to-adlab">← Ad lab</a></nav>
   <header style="display:flex;flex-direction:column;gap:14px">
     <h1>Hero lab</h1>
     <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, the games a parent already hears from the bedroom, the line they hear every night, or the shortlist of everything else they tried. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
@@ -96,7 +103,6 @@ const V=[
 ];
 const onSite=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
 const BASE=onSite?"/season1":"landing.html";
-if(onSite) document.getElementById("to-adlab").href="/roadshow/ad-lab.html";
 const sel=document.getElementById("ad");
 sel.innerHTML=ADS.map(([id,n])=>`<option value="${id}">${id.toUpperCase()} · ${n}</option>`).join("");
 let ad="d1"; try{ const h=location.hash.slice(1); if(ADS.some(a=>a[0]===h)) ad=h; }catch(_){}
@@ -134,4 +140,5 @@ document.addEventListener("click",async e=>{
   const vw=e.target.closest("[data-view]"); if(vw){ document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",b===vw)); document.querySelector(".wrap").classList.toggle("desk",vw.dataset.view==="desk"); }
 });
 </script>
+<script>(()=>{const site=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);const hub=document.getElementById("nav-hub");if(!site&&hub){hub.href="https://dev--ekuzo.netlify.app/roadshow/";hub.target="_blank";hub.rel="noopener";}})();</script>
 </body></html>

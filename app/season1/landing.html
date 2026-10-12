@@ -765,12 +765,12 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 /* ===== Interactive heroes (?hero=amount | ?hero=games). Off unless the link asks for one, so the live default is untouched. ===== */
 .ihero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 18px 28px;box-sizing:border-box;background:var(--ink)}
 .ihero[hidden]{display:none}
-.ihero .ih-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--ihpos,50% 30%);opacity:.42;filter:saturate(.8)}
-.ihero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.7) 0%,rgba(17,16,19,.45) 18%,rgba(17,16,19,.9) 42%,rgba(17,16,19,.98) 60%,#111013 100%);z-index:0}
+.ihero .ih-bg{position:absolute;inset:0;width:100%;height:62%;object-fit:cover;object-position:var(--ihpos,50% 30%);opacity:.4;filter:saturate(.7);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.ihero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.78) 0%,rgba(17,16,19,.6) 14%,rgba(17,16,19,.94) 32%,#111013 48%,#111013 100%);z-index:0}
 .ihero > *:not(.ih-bg){position:relative;z-index:1}
 .ihero .kick{margin-bottom:10px}
 .ihero h1{margin:0;font:800 calc(54px*var(--ds,1))/.92 var(--disp);text-transform:uppercase;letter-spacing:-.025em;color:#fff;text-wrap:balance}
-.ihero .ih-sub{margin:10px 0 18px;color:#D6D2DA;font-size:17px;line-height:1.4;text-wrap:pretty}
+.ihero .ih-sub{margin:10px 0 18px;color:#ECE9EF;font-size:17px;line-height:1.4;text-wrap:pretty}
 .ih-opts{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.16)}
 .ih-opts.games{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;border-top:0;padding-top:4px}
 .ih-opt{appearance:none;display:flex;align-items:center;gap:14px;min-height:56px;padding:6px 2px;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:none;color:#fff;font:700 21px/1.15 var(--ui);text-align:left;cursor:pointer;transition:color .15s}
@@ -784,7 +784,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .ih-opt[aria-pressed="true"]{color:var(--acc)}
 .ih-opt[aria-pressed="true"]::before{border-color:var(--acc);box-shadow:inset 0 0 0 4px var(--ink),inset 0 0 0 11px var(--acc)}
 .ih-opt:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.ih-skip{appearance:none;background:none;border:0;color:#BDB8C2;font:600 15px/1.3 var(--ui);text-decoration:underline;text-underline-offset:4px;padding:14px 0 0;cursor:pointer;align-self:flex-start;text-align:left}
+.ih-skip{appearance:none;background:none;border:0;color:var(--acc);font:700 16px/1.3 var(--ui);min-height:44px;text-decoration:underline;text-underline-offset:4px;padding:14px 0 0;cursor:pointer;align-self:flex-start;text-align:left}
 .ih-resp{display:none}
 .ih-resp.on{display:block;animation:ihIn .35s ease both}
 @keyframes ihIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -793,13 +793,13 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
  .ih-resp .ih-got{margin:20px 0 0;font:700 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
 .ih-resp .ih-got + h2{margin-top:6px}
 .ih-resp .ih-got[hidden]{display:none}
-.ih-resp .ih-list{margin:4px 0 10px;font:700 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#BDB8C2}
+.ih-resp .ih-list{margin:4px 0 10px;font:700 14px/1.4 var(--ui);color:#E6E2EA}
 .ih-resp .ih-say:empty,.ih-resp h2:empty{display:none}
 .ih-opts.games + .ih-resp .ih-list{margin-top:22px}
 .ih-resp .ih-say{margin:0 0 12px;color:#fff;font-size:17px;line-height:1.45;text-wrap:pretty}
 .ihero .join{padding:0;border:0;scroll-margin-top:80px}
 .ihero .join h2,.ihero .join .form-wrap > p{display:none}
-.ihero .join small{color:#A39EAB}
+.ihero .join small{color:#C2BDC8;font-size:13px}
 .ihero .join button[type=submit]{min-height:58px;border-radius:999px;font-size:18px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .ihero .join button[type=submit]::after{content:" →"}
 @media (prefers-reduced-motion:reduce){.ih-resp.on{animation:none}.ih-opt{transition:none}}
@@ -820,28 +820,35 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .ihero.light .sl-kick::before{content:"";width:28px;height:3px;background:#F92524}
 .ihero.light h1{margin:18px 0 0;font:900 calc(min(23vw,104px))/.84 "Anybody",var(--ui);font-variation-settings:"wdth" 58;letter-spacing:-.01em;color:#111013;text-transform:uppercase}
 .ihero.light h1 i{font-style:normal;color:#F92524}
-.ihero.light .ih-sub{color:#3a3640;font-size:19px;margin:16px 0 14px}
+.ihero.light .ih-sub{color:#2B2830;font-size:19px;margin:16px 0 14px}
 .sl-list{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .ihero .sl-item.ih-opt::before{display:none}
 .ihero .sl-item.ih-opt{display:inline-block;min-height:0;gap:0;border:2px solid transparent;border-bottom:2px solid transparent}
-.ihero .sl-item.ih-opt[aria-pressed="true"]{color:#8A8590}
+.ihero .sl-item.ih-opt[aria-pressed="true"]{color:#6B6670}
 .sl-item{appearance:none;background:none;border:2px solid transparent;border-radius:8px;padding:0 6px;margin-left:-8px;cursor:pointer;position:relative;font:900 44px/1.08 "Anybody",var(--ui);font-variation-settings:"wdth" 62;text-transform:uppercase;color:#111013;text-align:left;transition:color .2s}
 .sl-item::after{content:"";position:absolute;left:0;top:52%;height:.13em;width:0;background:rgba(249,37,36,.62);transition:width .3s cubic-bezier(.6,0,.2,1)}
-.sl-item[aria-pressed="true"]{color:#8A8590}
+.sl-item[aria-pressed="true"]{color:#6B6670}
 .sl-item[aria-pressed="true"]::after{width:100%}
 .sl-item:hover{border-color:rgba(17,16,19,.25)}
 .sl-item:focus-visible{outline:none;border-color:#111013}
-.sl-keep{display:inline-block;margin-top:10px;background:#F92524;color:#fff;font:900 40px/1.1 "Anybody",var(--ui);font-variation-settings:"wdth" 62;text-transform:uppercase;padding:4px 14px;transform-origin:left center;animation:slIn .4s cubic-bezier(.2,1.3,.4,1) both}
+.sl-row{display:flex;flex-direction:column;align-items:flex-start}
+.sl-q{margin:-4px 0 6px;font:600 15px/1.3 var(--ui);color:#C41513;animation:qIn .3s ease both}
+.sl-q[hidden]{display:none}
+@keyframes qIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ihero.light .ih-resp .ih-say{color:#2B2830;font-size:17px}
+.sl-keep{display:block;max-width:100%;margin:6px 0 0 -2px;color:#fff;font:900 min(9vw,40px)/1.18 "Anybody",var(--ui);font-variation-settings:"wdth" 62;text-transform:uppercase;transform-origin:left center;animation:slIn .4s cubic-bezier(.2,1.3,.4,1) both}
+.sl-keep[hidden]{display:none}
+.sl-keep > span{background:#C41513;padding:2px 10px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 @keyframes slIn{from{opacity:0;transform:scaleX(.6)}to{opacity:1;transform:none}}
-.ihero.light .ih-resp h2{color:#111013;font:600 24px/1.3 var(--ui);text-transform:none;letter-spacing:-.01em;margin:16px 0 6px}
-.ihero.light .ih-resp .ih-list{color:#6B6670}
+.ihero.light .ih-resp h2{color:#111013;font:600 22px/1.3 var(--ui);text-transform:none;letter-spacing:-.01em;margin:14px 0 4px}
+.ihero.light .ih-resp .ih-list{color:#3a3640}
 .ihero.light .join input[type=email]{background:#fff;color:#111013;border-color:#CFCAC4}
 .ihero.light .join input[type=email]::placeholder{color:#8A8590}
 .ihero.light .join input[type=email]:focus{border-color:#111013}
-.ihero.light .join button[type=submit]{background:#F92524;color:#fff}
-.ihero.light .join small,.ihero.light .join .err{color:#6B6670}
-.ihero.light .ih-skip{color:#3a3640}
-@media (prefers-reduced-motion:reduce){.sl-keep{animation:none}.sl-item::after{transition:none}}
+.ihero.light .join button[type=submit]{background:#C41513;color:#fff}
+.ihero.light .join small,.ihero.light .join .err{color:#57525C}
+.ihero.light .ih-skip{color:#C41513}
+@media (prefers-reduced-motion:reduce){.sl-q{animation:none}.sl-keep{animation:none}.sl-item::after{transition:none}}
 @media (min-width:960px){.lp > #ihero.light{background:#EFEEED;border-radius:8px;padding:40px 36px}.lp.light-top header:not(.solid) .mark{color:#fff}}
 </style>
 
@@ -1157,18 +1164,19 @@ if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textC
 // into the hero, so the sign-up, tracking and confirmation run exactly as on the default page.
 // Only the hero name goes to GA and Clarity; the answer itself goes to Klaviyo with the sign-up (never to Meta or GA).
 const HERO_DEFS={
- amount:{q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join the list",
+ amount:{kick:"iPads, Switches, PS5s. Oh my.",q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join the list",
   opts:[
    {a:"A little",h:"Then let’s make it count.",say:"Give the time they do play a coach and a team that has their&nbsp;back.",cta:"Count me in"},
    {a:"A lot",h:"Let’s add some structure.",say:"Weekly practice with a real coach, a start and an end, and a team that has their&nbsp;back.",cta:"Count me in"},
    {a:"Way too much",h:"We hear that a lot.",say:"You don’t have to fight it alone. A coach, a schedule and a team that has their back turn those hours into&nbsp;practice.",cta:"Count me in"}]},
- games:{q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the list",
+ games:{kick:"Quick question",q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the list",
   opts:[{a:"Fortnite"},{a:"Minecraft"},{a:"Roblox"},{a:"Overwatch"},{a:"Super Smash Bros."},{a:"Something else"},{a:"I have no idea",none:true}],
   h:"Sounds like a gamer. Let’s give them a&nbsp;team.",say:"We don’t teach the game. We coach the kid: teamwork, talking it through and practice with a start and an&nbsp;end.",cta:"That’s my kid",
   noneH:"That’s normal.",noneSay:"Most parents don’t know what’s on the screen. A coach and a team give you something real to ask them&nbsp;about.",noneCta:"Count me in"},
  shortlist:{q:"They tried them all",custom:true,sub:"Tap everything that didn’t&nbsp;stick.",skip:"Just join the list",
-  opts:["Soccer","Baseball","Dance","Gymnastics","Piano"].map(a=>({a})),keep:"Gaming. That one stuck.",h:"That’s not a problem. It’s a starting&nbsp;point.",cta:"Count me in"},
- screentime:{q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join the list",
+  opts:[{a:"Soccer",q:"Bye, 7am Saturday kickoffs."},{a:"Baseball",q:"Four hours on a metal bleacher. Pass."},{a:"Dance",q:"Retiring from the dance-mom group chat."},{a:"Gymnastics",q:"No more 5am drop-offs."},{a:"Piano",q:"“Did you practice?” Not anymore."}],
+  keep:"Gaming. That one stuck.",h:"No parking. No cleats. No sideline in the&nbsp;rain.",say:"Just their team and a real coach, from&nbsp;home.",cta:"Count me in"},
+ screentime:{kick:"Every house has one",q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join the list",
   opts:[
    {a:"“Five more minutes.”",h:"Let the coach call time.",say:"Practice starts on time and the coach ends it. One less doorway argument for&nbsp;you.",cta:"Count me in"},
    {a:"“I can’t pause it.”",h:"Because their team needs them.",say:"That’s already teamwork. A coach and a weekly schedule turn it into&nbsp;practice.",cta:"Count me in"},
@@ -1186,12 +1194,12 @@ if(HD){
   ih.innerHTML=`<span class="sl-kick">The shortlist</span>
    <h1 id="ih-q">They tried them all<i>.</i></h1>
    <p class="ih-sub">${HD.sub}</p>
-   <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button>`).join("")}</div>
-   <div class="ih-resp" aria-live="polite"><div><span class="sl-keep">${HD.keep}</span><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say"></p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
+   <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<div class="sl-row"><button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button><span class="sl-q" aria-live="polite" hidden>${o.q}</span></div>`).join("")}<span class="sl-keep" hidden><span>${HD.keep}</span></span></div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say">${HD.say}</p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
    <button type="button" class="ih-skip">${HD.skip}</button>`;
   } else
   ih.innerHTML=`${bg?`<img class="ih-bg" src="${bg.src}" alt="">`:""}
-   <span class="kick">${t.k}</span>
+   <span class="kick">${HD.kick}</span>
    <h1 id="ih-q">${HD.q}</h1>
    <p class="ih-sub">${HD.sub}</p>
    <div class="ih-opts ${HERO==="screentime"?"quotes":HERO}" role="group" aria-label="${HD.q}">${HD.opts.map((o,i)=>`<button type="button" class="ih-opt${o.none?" wide":""}" aria-pressed="false" data-i="${i}">${o.a}</button>`).join("")}</div>
@@ -1208,10 +1216,12 @@ if(HD){
   btns.forEach(b=>b.addEventListener("click",()=>{
     const o=HD.opts[+b.dataset.i];
     if(HERO==="shortlist"){
-      b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");
+      const onS=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",onS);
+      const q=b.parentElement.querySelector(".sl-q"); if(q) q.hidden=!onS;
       heroAnswer=btns.filter(x=>x.getAttribute("aria-pressed")==="true").map(x=>x.textContent).join(", ");
       setCta(HD.cta);
-      if(!heroAnswer){ ga("hero_answer",{hero:HERO}); return; }
+      ih.querySelector(".sl-keep").hidden=!heroAnswer;
+      if(!heroAnswer){ return; }
     }else if(HERO!=="games"){
       btns.forEach(x=>x.setAttribute("aria-pressed",x===b));
       heroAnswer=o.a; resp.querySelector("h2").innerHTML=o.h; resp.querySelector(".ih-say").innerHTML=o.say; setCta(o.cta);
@@ -1234,7 +1244,7 @@ if(HD){
     ga("hero_answer",{hero:HERO}); clr("event","hero_answer");
     open();
   }));
-  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Save their spot."; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
+  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Save their spot."; else ih.querySelector(".sl-keep").hidden=false; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
   // ga/clr are defined further down this script; tag the session once the whole script has run
   setTimeout(()=>{ clr("set","hero",HERO); ga("hero_view",{hero:HERO}); },0);
 }
