@@ -9,8 +9,11 @@
 
 Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`
 (Karlin byline). Local branch `build/gaming-study-ship` (worktree), `origin/main` `a449abc` merged in.
-**Not pushed, not merged; waiting on Jamie's go.** Artifacts: `docs/gaming-study-ship/` (start with
-`07-review-guide.md`).
+**Shipped 2026-10-12:** Jamie pushed `preview/gaming-study-dev` to `dev` (`242aae2`), checked the dev
+deploy, then pushed `build/gaming-study-ship` to `main` (`c4bc0db`). Live checks in
+`docs/gaming-study-ship/evidence/live-verification.txt`. Artifacts: `docs/gaming-study-ship/` (start
+with `07-review-guide.md`). After the main push: a shorter SEO title and Jamie's meta description
+(in `c4bc0db`), then one sentence in the opening naming Elon Musk's quote-post, with a link.
 
 **What changed**
 - The post: C1 to C10 from the 10-06 change list (short answer first, tennis, the JAMA link fixed to

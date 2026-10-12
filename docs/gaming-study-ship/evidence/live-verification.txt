@@ -1,0 +1,36 @@
+# Live verification against origin/main c4bc0db, 2026-10-12T16:57:26Z
+post: 200
+<title>Is gaming good for your brain? The “13.7 years younger” study</title>
+<meta name="description" content="A viral post suggested gaming makes you smarter. EKUZO founder Karlin Oei dove in and shares what&#x27;s real and what&#x27;s hype."
+<link rel="canonical" href="https://ekuzo.gg/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+<meta name="robots" content="index, follow"
+<meta property="og:image" content="https://ekuzo.gg/images/gaming-study-13-7-card.jpg"
+<meta name="twitter:image" content="https://ekuzo.gg/images/gaming-study-13-7-card.jpg"
+h1 count: 1
+Short answer:</strong> <!-- -->one study of 923 adults, averag
+Updated
+datePublished: "datePublished":"2026-10-12T12:00:00+00:00" 
+FAQ Qs: 5
+schema types:    1 "@type":"BlogPosting"    1 "@type":"BreadcrumbList"    1 "@type":"FAQPage"    1 "@type":"VideoObject" 
+JAMA 2797596 links: 4 ; 2836903: 0
+newsletter ask strings in HTML (One email tomorrow / One email a week): 0
+Season 01 bar copy present: 2
+alt hero: alt="A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped n
+/images/gaming-study-13-7-card.jpg -> 200 image/jpeg 94471B
+/images/gaming-study-13-7-hero.jpg -> 200 image/jpeg 242166B
+/images/gaming-study-same-game-two-hours.png -> 200 image/png 46091B
+/research/gaming-cognition-reanalysis.py -> 200 text/x-python; charset=UTF-8 28358B
+/sitemap.xml -> 200 application/xml 5514B
+/llms.txt -> 200 text/plain; charset=UTF-8 13910B
+/blog -> 200 text/html; charset=utf-8 152915B
+card sha256: 59b90486e889b2dd (repo 59b90486e889b2dd)
+sitemap has slug: 1
+llms line: - [The gaming study everyone shared, and what it means for your twelve-year-old](https://ekuzo.gg/blog/gaming-study-13-7-years-younger-what-it-means-for-kids): A viral post suggested gaming makes you smarter. EKUZO founder Karlin 
+/blog featured markers: 2; first post link: href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+inbound what-your-kids-gaming-is-telling-you: 1 link(s)
+inbound league-of-legends-youth-development: 1 link(s)
+inbound should-you-ban-fortnite: 1 link(s)
+inbound what-homeschool-parents-taught-us-about-gaming: 1 link(s)
+inbound when-your-sons-only-friends-are-online: 1 link(s)
+regression status: /=200 /programs/ekuzo-camps=200 /programs/ekuzo101=200 /programs/ekuzo-teams=200 /season1=200 /faq=200 /parents=200 
+git diff origin/main vs tested build branch (app lib components public): identical
