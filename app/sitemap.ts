@@ -172,6 +172,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`,
+      lastModified: new Date("2026-10-12"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
 
     // Blog author pages
     {

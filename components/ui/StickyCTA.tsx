@@ -40,8 +40,9 @@ export default function StickyCTA() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   // Blog newsletter arm: /blog/* posts (not the index, not /blog/author/*)
-  // get a newsletter bar instead of Enroll/Talk to Humans.
-  const isBlogPost = isBlogPostPath(pathname);
+  // get a newsletter bar instead of Enroll/Talk to Humans. Off while Season 01
+  // mode is on: the Season 01 bar wins and no A/B variant is assigned.
+  const isBlogPost = !SEASON_ONE_MODE && isBlogPostPath(pathname);
   const [blogVariant, setBlogVariant] = useState<"thumbs" | "classic">("thumbs");
   const [blogEmail, setBlogEmail] = useState("");
   const [blogStatus, setBlogStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
