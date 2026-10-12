@@ -1,0 +1,124 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Hero Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: the Ad lab's dark wall, one row of live phones. The same ad on top of each, a different first screen under it.
+   Single dark look on purpose (matches the Ad lab), so every colour is set explicitly. */
+:root{
+  --wall:#0C0B0E; --panel:#17151B; --line:#2B2830; --text:#F3F1F5; --muted:#A39EAB; --lime:#E0FF4E; --ink:#111013;
+  --ui:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--wall);color:var(--text);font:400 15px/1.5 var(--ui)}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:32px 80px;display:flex;flex-direction:column;gap:28px}
+.crumbs{display:flex;gap:14px;align-items:center;font:700 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.crumbs a{color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 12px}
+.crumbs a:hover,.crumbs a:focus-visible{color:var(--text);border-color:var(--lime);outline:none}
+h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase;letter-spacing:-.02em}
+.lede{margin:0;max-width:66ch;color:var(--muted);text-wrap:pretty}
+.lede b{color:var(--text)}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding-block:16px;border-block:1px solid var(--line)}
+.bar label{display:flex;flex-direction:column;gap:6px;font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bar select{appearance:none;min-width:min(320px,100%);background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A39EAB' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 36px 11px 12px;font:600 14px/1.2 var(--ui)}
+.seg{display:inline-flex;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{appearance:none;border:0;background:none;color:var(--muted);font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--wall)}
+select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start}
+.v{display:flex;flex-direction:column;gap:12px;min-width:0}
+.v-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.v-h span{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.v-h h2{margin:0;font:800 22px/1 var(--ui);text-transform:uppercase;letter-spacing:-.01em}
+.phone{--s:.74;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(46px*var(--s));background:#000;box-shadow:0 0 0 7px #000,0 0 0 8px #3a3640;overflow:hidden;align-self:center;position:relative}
+.phone iframe{width:390px;height:844px;border:0;transform:scale(var(--s));transform-origin:0 0;background:var(--ink);display:block}
+.desk .grid{grid-template-columns:1fr}
+.desk .phone{--s:.62;width:calc(1280px*var(--s));max-width:100%;height:calc(800px*var(--s));border-radius:10px;box-shadow:0 0 0 1px #3a3640;align-self:flex-start}
+.desk .phone iframe{width:1280px;height:800px}
+.desk .v{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto 1fr;column-gap:28px;row-gap:12px;align-items:start}
+.desk .v-h{grid-column:1 / -1}
+.desk .phone{grid-column:1;grid-row:2 / -1}
+.desk .v > :not(.phone):not(.v-h){grid-column:2}
+.note{margin:0;color:var(--muted);font-size:14px;text-wrap:pretty}
+.note b{display:block;font:700 10px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+.link{display:flex;gap:6px;align-items:stretch;min-width:0}
+.link code{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:500 11px/1.4 var(--mono);color:var(--muted)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.ghost{appearance:none;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:9px 13px;font:600 12px/1 var(--ui);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.ghost:hover{color:var(--text);border-color:var(--muted)}
+.next{border-top:1px solid var(--line);padding-top:24px;display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:28px}
+.next h3{margin:0;font:800 26px/.95 var(--ui);text-transform:uppercase}
+.next ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.next li b{color:var(--text)}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.grid{grid-template-columns:1fr}.next{grid-template-columns:1fr}.desk .v{display:flex}}
+</style></head><body>
+<div class="wrap" id="top">
+  <nav class="crumbs" aria-label="Lab pages"><a href="ad-lab.html" id="to-adlab">← Ad lab</a></nav>
+  <header style="display:flex;flex-direction:column;gap:14px">
+    <h1>Hero lab</h1>
+    <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, or the games a parent already hears from the bedroom. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
+  </header>
+
+  <div class="bar">
+    <label for="ad">Ad they tapped<select id="ad"></select></label>
+    <div class="seg" role="group" aria-label="Screen size"><button type="button" data-view="phone" aria-pressed="true">Phone</button><button type="button" data-view="desk" aria-pressed="false">Desktop</button></div>
+  </div>
+
+  <main class="grid" id="grid"></main>
+
+  <section class="next" aria-labelledby="nx">
+    <h3 id="nx">How to read it</h3>
+    <ul>
+      <li><b>One change at a time.</b> Point one ad’s link at one hero and compare its cost per sign-up with the same ad on the current page. Jamie’s brief asks for new tests at the Monday review, logged.</li>
+      <li><b>What we learn beyond sign-ups.</b> Every sign-up carries the hero and the answer (“Way too much”, “Fortnite, Minecraft”) into Klaviyo, so Karlin’s emails can speak to it. Only the hero name goes to GA and Clarity, never the answer.</li>
+      <li><b>For Jamie:</b> the sign-up now sends <code>hero</code> and <code>heroAnswer</code>. The route should save them to the profile; the games hero also sends <code>kid_games</code> the same way the confirmation does.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+const ADS=[["d1","We've all said it"],["d2","Overheard"],["d3","Play to win"],["d4","Team card"],["d5","They'll actually show up"],["d6","The coach ends it"],["d7","Screen time, graded"],["d8","Screen time, team time"],["d9","Admit one player"],["d10","Screen time with a purpose"],["d11","Their name on a jersey"],["d12","The best excuse"],["d13","Screen time you're proud of"],["d14","Screen time. Coached."],["d15","Online friends, real team"],["d16","Their people"],["d17","Not a sports kid"],["d18","Not a sports kid? Perfect."]];
+const V=[
+ {k:"",tag:"A · Live now",name:"The ad, continued",bet:"The control. The ad they tapped, then the email form.",rec:"Ad id and UTMs."},
+ {k:"amount",tag:"B · Pain point",name:"How much do they game?",bet:"A parent who answers “Way too much” has just named the problem we solve. The reply meets them there and the email asks for structure, not a sport.",rec:"Ad id, UTMs, hero, and the answer (A little / A lot / Way too much)."},
+ {k:"games",tag:"C · Recognition",name:"What do they play?",bet:"Every parent knows Fortnite, Minecraft and Roblox. Tapping them makes it about their kid, not League, and lands on “We don’t teach the game. We coach the kid.”",rec:"Ad id, UTMs, hero, and the games tapped (also saved as kid_games)."}
+];
+const onSite=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
+const BASE=onSite?"/season1":"landing.html";
+if(onSite) document.getElementById("to-adlab").href="/roadshow/ad-lab.html";
+const sel=document.getElementById("ad");
+sel.innerHTML=ADS.map(([id,n])=>`<option value="${id}">${id.toUpperCase()} · ${n}</option>`).join("");
+let ad="d1"; try{ const h=location.hash.slice(1); if(ADS.some(a=>a[0]===h)) ad=h; }catch(_){}
+sel.value=ad;
+const pageUrl=(id,k)=>`${BASE}?ad=${id}${k?`&hero=${k}`:""}`;
+const metaUrl=(id,k)=>`https://ekuzo.gg/season1?ad=${id}${k?`&hero=${k}`:""}&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content={{ad.name}}`;
+function render(){
+  document.getElementById("grid").innerHTML=V.map((v,i)=>`
+   <article class="v">
+    <div class="v-h"><span>${v.tag}</span></div>
+    <h2 style="margin:0;font:800 22px/1 var(--ui);text-transform:uppercase">${v.name}</h2>
+    <div class="phone"><iframe id="f${i}" title="${v.name}, landing page preview" loading="lazy" src="${pageUrl(ad,v.k)}"></iframe></div>
+    <p class="note"><b>The bet</b>${v.bet}</p>
+    <p class="note"><b>Saved with each sign-up</b>${v.rec}</p>
+    <div class="link"><code id="u${i}">${metaUrl(ad,v.k)}</code><button type="button" class="ghost" data-copy="u${i}">Copy link</button></div>
+    <div class="btns"><button type="button" class="ghost" data-reset="${i}">Start over</button><button type="button" class="ghost" data-done="${i}">See confirmation</button><a class="ghost" href="${pageUrl(ad,v.k)}" target="_blank" rel="noopener">Open full page ↗</a></div>
+   </article>`).join("");
+}
+render();
+sel.addEventListener("change",()=>{ ad=sel.value; try{ history.replaceState(null,"","#"+ad); }catch(_){} render(); });
+document.addEventListener("click",async e=>{
+  const c=e.target.closest("[data-copy]");
+  if(c){ const el=document.getElementById(c.dataset.copy);
+    try{ await navigator.clipboard.writeText(el.textContent); c.textContent="Copied"; }
+    catch(_){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); c.textContent="Selected, copy it"; }
+    setTimeout(()=>c.textContent="Copy link",1800); }
+  const r=e.target.closest("[data-reset]"); if(r){ const f=document.getElementById("f"+r.dataset.reset); f.src=pageUrl(ad,V[+r.dataset.reset].k); }
+  const d=e.target.closest("[data-done]"); if(d){ const f=document.getElementById("f"+d.dataset.done); f.src=pageUrl(ad,V[+d.dataset.done].k)+"&preview=done"; }
+  const vw=e.target.closest("[data-view]"); if(vw){ document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",b===vw)); document.querySelector(".wrap").classList.toggle("desk",vw.dataset.view==="desk"); }
+});
+</script>
+</body></html>
