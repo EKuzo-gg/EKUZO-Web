@@ -1108,7 +1108,7 @@ document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="rou
     <button type="button" class="addopt" data-add="headline">+ Add headline option</button>
     <label><span class="row">Description<small data-count="description"></small></span><input data-f="description" type="text" placeholder="Optional, shows on some placements"></label>
     <label>Meta button<select data-f="metacta">${["Sign up","Learn more","Subscribe","Get offer","Apply now","Book now","Contact us","Get quote","Send message","Download"].map(c=>`<option>${c}</option>`).join("")}</select></label>
-    <label><span class="row">Landing hero<small>first screen</small></span><select data-f="hero"><option value="">The ad, continued (live now)</option><option value="amount">How much do they game?</option><option value="games">What do they play?</option><option value="screentime">Which one do you hear the most?</option></select></label>
+    <label><span class="row">Landing hero<small>first screen</small></span><select data-f="hero"><option value="">The ad, continued (live now)</option><option value="amount">How much do they game?</option><option value="games">What do they play?</option><option value="screentime">Which one do you hear the most?</option><option value="shortlist">They tried them all.</option></select></label>
     <label>Website URL<input data-f="url" type="url" spellcheck="false"></label>
     <div class="two"><label>AI imagery<select data-f="ai"><option>No</option><option>Yes</option></select></label><label>Real-kid photo release<select data-f="release"><option>No real kids</option><option>Yes, on file</option><option>Needed</option></select></label></div>
     <p class="hint">The feed preview shows whichever option you’re editing.</p>
@@ -1295,7 +1295,7 @@ async function downloadFinals(d,btn){
     const txt=[`EKUZO Season 01 · ${adname}`,`Concept d${num.replace(/^0/,"")} · ${d.name}`,`Exported ${new Date().toLocaleString()}`,"",
       "== FILES (placement asset customization) ==",`${base}-4x5.png   → Feeds (1080 x 1350)`,`${base}-9x16.png  → Stories and Reels (1080 x 1920; text inside y 420 to 1250)`,"",
       "== TEXT OPTIONS ==",...P.flatMap((t,i)=>[`Primary text ${i+1}:`,t,""]),...H.map((t,i)=>`Headline ${i+1}: ${t}`),"",
-      `Description: ${m.description||"(blank)"}`,`Call to action button: ${m.metacta}`,`Landing hero: ${({amount:"How much do they game?",games:"What do they play?",screentime:"Which one do you hear the most?"})[m.hero]||"The ad, continued"}`,`Website URL: ${m.url||"(blank)"}`,"",
+      `Description: ${m.description||"(blank)"}`,`Call to action button: ${m.metacta}`,`Landing hero: ${({amount:"How much do they game?",games:"What do they play?",screentime:"Which one do you hear the most?",shortlist:"They tried them all."})[m.hero]||"The ad, continued"}`,`Website URL: ${m.url||"(blank)"}`,"",
       "== FOR ads.md ==",`Ad name: ${adname}`,`Line on the ad: ${words.join(" / ")}`,`Assets: ${base}-4x5.png, ${base}-9x16.png`,`AI imagery: ${m.ai}`,`Real-kid photo release: ${m.release}`,bg?`Backdrop: ${bg.textContent}`:"",`Button on image: ${cta}`,
       "",P.some(t=>t.split("\n")[0].length>125)?"Note: a primary text opening runs past 125 characters, so Meta will cut it with “See more”.":""].join("\n").replace(/\n{3,}/g,"\n\n");
     const zip=new JSZip();
@@ -1404,7 +1404,7 @@ const setHeroInUrl=(url,hv)=>{ try{ const [base,rest]=url.split("?"); const u=ne
   return base+"?"+u.toString().replace(/%7B%7Bad.name%7D%7D/gi,"{{ad.name}}"); }catch(_){ return url; } };
 document.querySelectorAll('[data-meta] [data-f="hero"]').forEach(sel=>{
   const sec=sel.closest("section.dir"), url=sec.querySelector('[data-meta] [data-f="url"]');
-  const m=(url.value.match(/[?&]hero=(amount|games|screentime)/)||[])[1]; if(m&&!sel.value) sel.value=m;
+  const m=(url.value.match(/[?&]hero=(amount|games|screentime|shortlist)/)||[])[1]; if(m&&!sel.value) sel.value=m;
   sel.addEventListener("change",()=>{ url.value=setHeroInUrl(url.value,sel.value); url.dispatchEvent(new Event("input")); sel.dispatchEvent(new Event("input")); });
 });
 </script>

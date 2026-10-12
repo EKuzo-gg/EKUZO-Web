@@ -30,7 +30,7 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 .seg button{appearance:none;border:0;background:none;color:var(--muted);font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border-radius:999px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--text);color:var(--wall)}
 select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px 24px;align-items:start}
 .v{display:flex;flex-direction:column;gap:12px;min-width:0}
 .v-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .v-h span{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -57,14 +57,14 @@ select:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-
 .next h3{margin:0;font:800 26px/.95 var(--ui);text-transform:uppercase}
 .next ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:8px;max-width:72ch}
 .next li b{color:var(--text)}
-@media (max-width:1300px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 @media (max-width:760px){.grid{grid-template-columns:1fr}.next{grid-template-columns:1fr}.desk .v{display:flex}}
 </style></head><body>
 <div class="wrap" id="top">
   <nav class="crumbs" aria-label="Lab pages"><a href="ad-lab.html" id="to-adlab">← Ad lab</a></nav>
   <header style="display:flex;flex-direction:column;gap:14px">
     <h1>Hero lab</h1>
-    <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, the games a parent already hears from the bedroom, or the line they hear every night. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
+    <p class="lede">Parents on the landing page are opening <b>“What game do they play?”</b> and finding League. These first screens start with <b>their</b> kid instead: how much they game, the games a parent already hears from the bedroom, the line they hear every night, or the shortlist of everything else they tried. Same ad on top, same sign-up, same confirmation. Each hero is switched on by <b>&amp;hero=</b> in the ad’s link, so the default page that’s live now doesn’t change.</p>
   </header>
 
   <div class="bar">
@@ -90,8 +90,9 @@ const ADS=[["d1","We've all said it"],["d2","Overheard"],["d3","Play to win"],["
 const V=[
  {k:"",tag:"A · Live now",name:"The ad, continued",bet:"The control. The ad they tapped, then the email form.",rec:"Ad id and UTMs."},
  {k:"amount",tag:"B · Pain point",name:"How much do they game?",bet:"A parent who answers “Way too much” has just named the problem we solve. The reply meets them there and the email asks for structure, not a sport.",rec:"Ad id, UTMs, hero, and the answer (A little / A lot / Way too much)."},
- {k:"games",tag:"C · Recognition",name:"What do they play?",bet:"Every parent knows Fortnite, Minecraft and Roblox. Tapping them makes it about their kid, not League. “I have no idea” gets its own reply: that’s normal, and a coach gives you something to ask about.",rec:"Ad id, UTMs, hero, and the games tapped (also saved as kid_games)."},
- {k:"screentime",tag:"D · The fight",name:"Which one do you hear the most?",bet:"Goes straight at the screen time argument with lines every parent knows. The reply hands the end time to the coach, so the parent isn’t the timer.",rec:"Ad id, UTMs, hero, and the line they picked."}
+ {k:"games",tag:"C · Recognition",name:"What do they play?",bet:"Every parent knows Fortnite, Minecraft and Roblox. Simple pills, then straight to the email. Tapping them makes it about their kid, not League.",rec:"Ad id, UTMs, hero, and the games tapped (also saved as kid_games)."},
+ {k:"screentime",tag:"D · The fight",name:"Which one do you hear the most?",bet:"Goes straight at the screen time argument with lines every parent knows. The reply hands the end time to the coach, so the parent isn’t the timer.",rec:"Ad id, UTMs, hero, and the line they picked."},
+ {k:"shortlist",tag:"E · The shortlist",name:"They tried them all.",bet:"Big words on a solid background. The parent crosses off what didn’t stick, and gaming is the one that did. Not a problem, a starting point.",rec:"Ad id, UTMs, hero, and what they crossed off."}
 ];
 const onSite=/(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
 const BASE=onSite?"/season1":"landing.html";
