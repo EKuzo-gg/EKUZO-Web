@@ -35,14 +35,14 @@ import Image from "next/image";
 const SLUG = "gaming-study-13-7-years-younger-what-it-means-for-kids";
 const TITLE_DISPLAY =
   "The gaming study everyone shared, and what it means for your twelve-year-old";
-// Layout in app/layout.tsx applies the template "%s | EKUZO" — do not
-// suffix the brand here or the tab title double-stamps.
+// 61 characters so Google shows it whole. Set as an absolute title in
+// `metadata` below, so the layout's "%s | EKUZO" template is skipped here.
 const TITLE_SEO =
-  "Is gaming good for your brain? The “13.7 years younger” study, for parents";
+  "Is gaming good for your brain? The “13.7 years younger” study";
 const SUBHEAD =
   "A doctor posted one line about a study. More than 30 million people saw it. I read a thousand of the replies, and the one that mattered wasn’t about the study.";
 const DESCRIPTION =
-  "A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old.";
+  "A viral post suggested gaming makes you smarter. EKUZO founder Karlin Oei dove in and shares what's real and what's hype.";
 const HERO_IMAGE = "/images/gaming-study-13-7-hero.jpg";
 const SHARE_IMAGE = "/images/gaming-study-13-7-card.jpg";
 const DATE_PUBLISHED = "2026-10-12";
@@ -178,7 +178,7 @@ const FAQ_ITEMS: { question: string; answer: string[] }[] = [
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
-  title: TITLE_SEO,
+  title: { absolute: TITLE_SEO },
   description: DESCRIPTION,
   openGraph: {
     title: TITLE_SEO,
