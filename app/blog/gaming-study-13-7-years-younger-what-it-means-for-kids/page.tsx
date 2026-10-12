@@ -347,9 +347,17 @@ export default function PostGamingStudy137() {
               , probably the same way you did. A physician with a big following
               put up a study abstract and one sentence: frequent gamers
               performed on cognitive tests like non-gamers about 13.7 years
-              younger. Counting the posts that quoted it, it passed 30 million
-              views in its first week. For three days my feed argued about
-              whether video games make you smart.
+              younger. It caught Elon Musk&apos;s eye, and he agreed: he{" "}
+              <a
+                href="https://x.com/elonmusk/status/2099459125579071512"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                quote-posted it
+              </a>{" "}
+              with &ldquo;Gaming ftw.&rdquo; Counting the posts that quoted it,
+              it passed 30 million views in its first week. For three days my
+              feed argued about whether video games make you smart.
             </p>
             <p>
               My first reaction was &ldquo;duh.&rdquo; My second, after I read
