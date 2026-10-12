@@ -1195,7 +1195,7 @@ if(HD){
       if(m){ const n=parseInt(m[1],16), c=[n>>16,(n>>8)&255,n&255].map(v=>Math.round(v*.55)); set("--sl-acc",`rgb(${c.join(",")})`); } }
     set("--sl-muted",dark?"rgba(255,255,255,.72)":"rgba(17,16,19,.68)"); set("--sl-line",dark?"rgba(255,255,255,.28)":"rgba(17,16,19,.25)"); set("--sl-field",dark?"rgba(255,255,255,.08)":"#FFFFFF");
   }
-  ih.innerHTML=`<span class="sl-kick">The shortlist</span>
+  ih.innerHTML=`<span class="sl-kick">Sound familiar?</span>
    <h1 id="ih-q">They tried them all<i>.</i></h1>
    <p class="ih-sub">${HD.sub}</p>
    <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<div class="sl-row"><button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button><span class="sl-q" aria-live="polite" hidden>${o.q}</span></div>`).join("")}</div>
