@@ -1,0 +1,6 @@
+post-1440-full: docHeight=14221 css px, DPR=1, expected 1440x14221, got 1440x14221, MATCH
+post-1024-full: docHeight=12488 css px, DPR=1, expected 1024x12488, got 1024x12488, MATCH
+post-768-full: docHeight=11956 css px, DPR=1, expected 768x11956, got 768x11956, MATCH
+post-375-full: docHeight=17104 css px, DPR=2, expected 750x34208, got 750x34208, MATCH, tiled
+blog-1440-full: docHeight=5303 css px, DPR=1, expected 1440x5303, got 1440x5303, MATCH
+blog-375-full: docHeight=7969 css px, DPR=2, expected 750x15938, got 750x15938, MATCH

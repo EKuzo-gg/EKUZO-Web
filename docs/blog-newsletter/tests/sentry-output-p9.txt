@@ -1,0 +1,11 @@
+PASS - P9: select#contact-heard-about is present
+PASS - P9: default value is empty string
+PASS - P9: default option text is "Choose one" (Choose one)
+saved screenshot: sentry-p9-contact-select-1440
+PASS - P9: form submits successfully without heardAbout selected ({"name":"Jamie Test","organization":"","contactMethod":"email","email":"jamie-test@example.com","message":"","pageUrl":"http://localhost:3001/"})
+PASS - P9: heardAbout key absent from body when not selected ({"name":"Jamie Test","organization":"","contactMethod":"email","email":"jamie-test@example.com","message":"","pageUrl":"http://localhost:3001/"})
+PASS - P9: success screen shown after submit without heardAbout
+PASS - P9: heardAbout="x" included in /api/contact body when chosen ({"name":"Jamie Test","organization":"","contactMethod":"email","email":"jamie-test@example.com","message":"","pageUrl":"http://localhost:3001/","heardAbout":"x"})
+PASS - P9: option values match the contract's 8 slugs plus default, in order (["","x","instagram","tiktok-youtube","google","ai","friend","school","other"])
+
+=== SUMMARY: 8 passed, 0 failed, 8 total ===

@@ -5,6 +5,58 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop), October 11, 2026 (gaming-study post: ship changes, final images, one ask per post)
+
+Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`
+(Karlin byline). Local branch `build/gaming-study-ship` (worktree), `origin/main` `a449abc` merged in.
+**Not pushed, not merged; waiting on Jamie's go.** Artifacts: `docs/gaming-study-ship/` (start with
+`07-review-guide.md`).
+
+**What changed**
+- The post: C1 to C10 from the 10-06 change list (short answer first, tennis, the JAMA link fixed to
+  article 2797596, FAQ and heading wording), a new opening with a link to the original X post, new hero
+  alt text, re-dated view counts, the "Same game. Two different hours." graphic, hero and share card,
+  three-card Keep Reading, visible "Updated" date. Dates set to 2026-10-12; re-set if it ships another day.
+- `app/blog/page.tsx`: the post takes `featured: true` from `should-you-ban-fortnite`.
+  **Revert the featured flag 7 days after ship (2026-10-19 if it ships 10-12)** and drop the word
+  "recent" from the post's opening at the same time.
+- Five inbound links, one per post, anchor "the viral “13.7 years younger” gaming study". The four
+  September link sentences were replaced (three had factual errors); a new paragraph went into
+  `when-your-sons-only-friends-are-online` (its `DATE_MODIFIED` and sitemap date are now 2026-10-12).
+- `app/layout.tsx`, `components/ui/StickyCTA.tsx`: while `SEASON_ONE_MODE` is on, blog posts carry one
+  ask, the Season 01 waitlist. The blog newsletter popup and bar from September ship dormant behind
+  `!SEASON_ONE_MODE` (tested on a mode-off build). Before Season 01 mode is switched off, build the
+  Beehiiv automation "Blog welcome (thumbs)".
+- `app/sitemap.ts`, `public/llms.txt`: entries for the post.
+
+**Evidence:** tsc and build clean; 78 of 79 existing tests pass (the one failure, `ekuzo101-weeks`
+"PM ET", is identical on main); journeys and must-nots tested in a browser behind a blocking proxy
+(zero requests reached GA4, Clarity or Meta); two disposable Klaviyo sign-ups logged in
+`docs/gaming-study-ship/06-cleanup-ledger.md` (`team+gstest-1012-jr1@ekuzo.gg`, `-jr2`), Meta off.
+
+**Aaron (your lane, not changed here):**
+- `components/blog/ReplyQuoteCards.tsx` meta text (`#9a988f` on white) is 2.89:1, under AA.
+- The post template's top-right brush stroke crosses the headline on phones (all posts on this template).
+- `/blog` featured card image has no `sizes`, so phones fetch a soft 750px file; suggested
+  `sizes="(max-width: 1023px) 768px, 50vw"`.
+- Season 01 popup: no focus trap; treats any HTTP 200 as success; no fetch timeout.
+- Footer newsletter form is cut off at 768 wide; Nav overlaps at 200% text zoom.
+
+**FooterBanner heading "Enroll into a transformational program today"** ("transformational" is on the
+never-say list; hidden while Season 01 mode overrides the banner). Changed on the new post only. Still
+on: `app/page.tsx`, `app/blog/page.tsx`, `app/faq/page.tsx`, `app/games/page.tsx`, `app/parents/page.tsx`,
+`app/programs/page.tsx`, `app/programs/ekuzo-teams/page.tsx`, `components/blog/AuthorPage.tsx`, and the
+posts `conquering-my-mountain-and-giants-how-esports-changed-my-life`,
+`league-of-legends-youth-development`, `our-family-s-esports-journey-with-ekuzo-and-the-k1ng`,
+`summer-camps-for-kids-who-game-2026`, `what-homeschool-parents-taught-us-about-gaming`,
+`what-your-kids-gaming-is-telling-you`, `when-gaming-helps-homeschool-kids`,
+`when-your-sons-only-friends-are-online`. A separate pass.
+
+**Other follow-ups noted, not changed:** em dashes in `what-your-kids-gaming-is-telling-you` (lines 230,
+616, 666); "running all summer" in the League post; `/api/season-one` accepts a malformed email such as
+a script tag and forwards it to Klaviyo; `/api/contact` returns success when the Resend call fails;
+`ai_referral` matches referrers by substring.
+
 ## Jamie (via Claude), October 11, 2026 (project instructions committed: CLAUDE.md and its docs)
 
 The current `CLAUDE.md` and the docs it points to existed only as uncommitted files in Jamie's local
@@ -80,6 +132,83 @@ both the browser and the server with one shared event ID. Klaviyo behavior is un
 - Docs: `docs/season-one-tracking.md` (what fires where, env vars, test procedure).
 - Honeypot: both sign-up forms (landing page and popup) carry a hidden `ekz_hp` input (a name autofill won't recognize); if it
   comes back filled, `/api/season-one` returns ok without writing to Klaviyo or sending a Lead.
+
+---
+
+## Jamie (via Claude, Build Loop) — September 16, 2026 (blog newsletter capture A/B + inquiry-form attribution)
+
+Ran the Build Loop (knowledge-base/company/agents/agent-loop/build-loop.md) end to end on branch
+`blog/gaming-study-13-7`, second commit. Artifacts in `docs/blog-newsletter/` (brief, requirements,
+contract, copy deck, frozen spec, decision log, evidence ledger, defect log, cleanup ledger, reviews,
+tests with saved output, screenshots, review guide, return handoff).
+
+**What changed**
+- `/blog/<post>` pages: the sticky bottom bar is a newsletter bar (email + one line of copy),
+  and a newsletter popup opens at 50% scroll, once per 30 days, never on entry. Two copy variants,
+  "thumbs" and "classic", assigned 50/50 per browser (`lib/newsletterAb.ts`), carried to Beehiiv as
+  utm_source=blog, utm_medium=popup|sticky, utm_campaign=thumbs|classic, plus tags source-blog and
+  variant-*. GA4 events newsletter_impression and newsletter_signup.
+- `/api/newsletter`: optional utm fields with allowlists; non-blog callers (footer form, homepage
+  popup) send the byte-identical Beehiiv body they sent before (tested).
+- `/api/contact` + ContactModal: optional "How did you hear about us?" select; value goes into
+  Karlin's Resend email and a Beehiiv tag heard-<slug>. No new Beehiiv custom field.
+- `app/layout.tsx`: one added line mounting `<NewsletterPopup mode="blog" />`; the homepage popup
+  stays behind NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED exactly as before.
+
+**Evidence:** 34 unit tests (node, mocked fetch) pass; tsc and eslint clean; Playwright QA on
+every requirement incl. zero-diff of the sticky bar on 8 non-blog routes vs the pre-change build;
+visual parity 13/13; two repair cycles (mobile popup fit, double-ask after sticky signup, tablet
+clipping, scroll lock, focus trap, byline contrast). Live Beehiiv pre-flight confirmed utm fields
+and tags; one disposable test subscriber logged in 06-cleanup-ledger.md.
+
+**Before the X push (not before merge):** create the Beehiiv automation "Blog welcome (thumbs)"
+(tag source-blog, 24h delay, email in docs/blog-newsletter/welcome-email-thumbs.md), send it once
+to the test subscriber, verify the thumbs-down link unsubscribes in one click, then delete the test
+subscriber. Until then the copy's "one email tomorrow" is a promise with no sender. Details in
+`docs/blog-newsletter/07-review-guide.md`.
+
+**Aaron:** components/ui/StickyCTA.tsx, NewsletterPopup.tsx, ContactModal.tsx changed in your lane;
+non-blog rendering is byte-identical (n1-* screenshots and outerHTML diffs in the ledger). One
+pre-existing bug noted, not touched: StickyCTA's `querySelector("footer")` grabs the testimonial
+footer on camps and 101, so the bar hides early there.
+
+## Jamie (via Claude) — September 15, 2026 (new blog post: the "13.7 years younger" gaming study, Karlin byline)
+
+Newsjack answer page for the September 13 to 15 gaming-cognition wave (Luu post, two Elon quotes,
+30M+ views by Sep 15). Branch `blog/gaming-study-13-7`, off `main` because `dev` and `main` were
+level. Not pushed, not merged. Draft of record and register map:
+`EKUZO/Marketing/content-drafts/2026-09-15-blog-draft-gaming-study-everyone-shared.md`.
+
+**Added**
+- `app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx`: same skeleton as the
+  Karlin posts (Nav, header, hero, BlogPostBody author="karlin-oei", Keep Reading, FooterBanner).
+  Schemas: BlogPosting, breadcrumb, FAQPage (5 Qs from one FAQ_ITEMS source), VideoObject for the
+  June Lolcat reel (parent consent on file per Jamie). SEO title carries the query ("Is gaming good
+  for your brain?"); the H1 keeps the newsjack.
+- `components/blog/ReplyQuoteCards.tsx`: prop-driven version of QuoteCards (same palette and
+  layout) so any "we read the thread" post can pass its own cards. QuoteCards.tsx untouched.
+- `public/research/gaming-cognition-reanalysis.py` + `-output.txt`: the corrected reanalysis of
+  the paper's public dataset (CC0), linked from the post. Reproduces the verified numbers; no IQ
+  conversion; every years figure carries its anchor age and model.
+
+**Edited (inbound links, the ai-optimization gate of five)**
+- `app/blog/page.tsx`: new entry at the top of `posts`, `featured: false`. Jamie decides whether
+  it takes the featured slot from the fortnite piece for launch week.
+- One closing paragraph with a link, inserted before `</BlogPostBody>`, in:
+  `what-your-kids-gaming-is-telling-you`, `league-of-legends-youth-development`,
+  `should-you-ban-fortnite`, `what-homeschool-parents-taught-us-about-gaming`. Copy only; no
+  layout changes. Aaron: these are in your lane by path, content-only by intent.
+
+**Checks:** `tsc --noEmit` clean, eslint clean on all touched files. No `next build` run.
+
+**Missing before ship**
+- Hero `/images/gaming-study-13-7-hero.jpg` (renders at 1232x520, object-cover) and card
+  `/images/gaming-study-13-7-card.jpg` (1200x630). Both referenced, neither exists.
+- Publish date is set to 2026-09-16; change if it slips.
+- Karlin's read of the copy (it ships under his name).
+- The tagged link in the X bio and the "how did you hear about us" field on the inquiry form, so
+  the follow lane is measurable (not in this branch).
+
 - Ad images (dev only, not on the production release branch): the 24 Season 01 creatives
   (12 directions x feed/story, ~5.2 MB, plain git, not LFS) in `public/ads/season1/`, so Meta
   can fetch them by URL from the dev deploy, e.g. `/ads/season1/d3-a-playtowin-feed.jpg`.

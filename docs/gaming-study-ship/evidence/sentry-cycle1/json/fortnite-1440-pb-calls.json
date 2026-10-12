@@ -1,0 +1,48 @@
+{
+  "calls": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T04:14:13.154Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ]
+    ],
+    "clarity": []
+  },
+  "posts": [],
+  "unexpected": [],
+  "mon": {
+    "nlHit": false,
+    "maxDialogs": 1,
+    "adds": [
+      {
+        "t": 1791778455664,
+        "label": "s1-title"
+      },
+      {
+        "t": 1791778462886,
+        "label": "s1-title"
+      }
+    ],
+    "nlHits": []
+  }
+}

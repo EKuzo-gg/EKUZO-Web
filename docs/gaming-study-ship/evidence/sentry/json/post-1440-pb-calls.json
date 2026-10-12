@@ -1,0 +1,118 @@
+{
+  "calls": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T03:53:46.249Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "js",
+        "2026-10-12T03:54:02.084Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "js",
+        "2026-10-12T03:54:08.173Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "event",
+        "section_view",
+        {
+          "section_id": "hero",
+          "section_index": 1
+        }
+      ],
+      [
+        "js",
+        "2026-10-12T03:54:14.341Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ]
+    ],
+    "clarity": []
+  },
+  "posts": [],
+  "unexpected": [],
+  "mon": {
+    "nlHit": false,
+    "maxDialogs": 1,
+    "adds": [
+      {
+        "t": 1791777260077,
+        "label": "s1-title"
+      }
+    ],
+    "nlHits": []
+  }
+}

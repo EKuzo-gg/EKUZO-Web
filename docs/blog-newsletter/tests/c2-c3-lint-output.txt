@@ -1,0 +1,15 @@
+C2/C3 mechanical lint, 2026-09-16T01:15Z
+== 02-copy-deck.md
+em-dashes: 0
+en-dashes: 0
+banned words: 0
+banned phrases: 0
+digits inside shipped strings: 0
+study/percent mentions in shipped strings: 0
+== welcome-email-thumbs.md
+em-dashes: 0
+en-dashes: 0
+banned words: 0
+banned phrases: 0
+digits inside shipped strings: 0
+study/percent mentions in shipped strings: 0

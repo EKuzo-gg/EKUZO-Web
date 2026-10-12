@@ -1,0 +1,55 @@
+{
+  "body": {
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "utm_source": "blog",
+    "utm_medium": "popup",
+    "utm_campaign": "classic"
+  },
+  "st": {
+    "ls": {
+      "ekuzo_nl_variant": "classic"
+    },
+    "ss": {}
+  },
+  "seen": [
+    {
+      "pop": false,
+      "pct": 10
+    },
+    {
+      "pop": false,
+      "pct": 25
+    },
+    {
+      "pop": false,
+      "pct": 35
+    },
+    {
+      "pop": false,
+      "pct": 45
+    },
+    {
+      "pop": true,
+      "pct": 57
+    }
+  ],
+  "events": [
+    {
+      "name": "newsletter_impression",
+      "params": {
+        "variant": "classic"
+      },
+      "t": 1791777148107,
+      "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+    },
+    {
+      "name": "newsletter_signup",
+      "params": {
+        "source": "popup",
+        "variant": "classic"
+      },
+      "t": 1791777149555,
+      "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+    }
+  ]
+}

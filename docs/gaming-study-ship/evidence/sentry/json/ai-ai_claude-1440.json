@@ -1,0 +1,29 @@
+{
+  "first": [
+    {
+      "origin": "ai_claude",
+      "detected_via": "referrer",
+      "referrer_host": "claude.ai",
+      "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+    }
+  ],
+  "docRef": "https://claude.ai/",
+  "ck": "ai_claude",
+  "ss": "{\"origin\":\"ai_claude\",\"detected_via\":\"referrer\",\"referrer_host\":\"claude.ai\",\"landing_path\":\"/blog/gaming-study-13-7-years-younger-what-it-means-for-kids\"}",
+  "afterReload": 1,
+  "afterNav": 1,
+  "afterBack": 1,
+  "allEvents": [
+    {
+      "name": "ai_referral",
+      "params": {
+        "origin": "ai_claude",
+        "detected_via": "referrer",
+        "referrer_host": "claude.ai",
+        "landing_path": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+      },
+      "t": 1791777239212,
+      "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+    }
+  ]
+}

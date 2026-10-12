@@ -1,0 +1,88 @@
+
+#### POPUP blog-thumbs 375x800
+ dialogCls: fixed inset-0 z-[9999] flex overflow-hidden  bodyOverflow: hidden  htmlOverflow: clip visible
+ kids: [{"cls":"hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden","bg":"rgb(123, 58, 175)","w":0,"h":0,"display":"none"},{"cls":"flex-1 flex flex-col justify-start lg:justify-center items-center rela","bg":"rgb(123, 58, 175)","w":375,"h":800,"display":"flex"}]
+ imgs: [{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":0,"h":0},{"src":"/images/ekuzo-logo.svg","display":"none","w":0,"h":0}]  brandMATTERS: [{"size":"16px","display":"none","visible":false,"top":0},{"size":"48px","display":"block","visible":false,"top":0},{"size":"48px","display":"inline","visible":false,"top":0}]
+ scrollable: []
+  OK        BUTTON top=  24 bot=  64 "Close"
+  OK        H3     top=  24 bot= 125 "One email after you read this. Then you deci"
+  OK        P      top= 133 bot= 290 "Leave your address and you're on the list to"
+  OK        P      top= 306 bot= 326 "Karlin Oei, founder, EKUZO"
+  OK        INPUT  top= 342 bot= 394 "First name (optional)"
+  OK        INPUT  top= 406 bot= 458 "Email address"
+  OK        BUTTON top= 470 bot= 522 "Send me the one email"
+  OK        P      top= 538 bot= 574 "No spam. Unsubscribe any time, or use the th"
+ AFTER-WHEEL: {"submitTop":470,"submitBottom":522,"submitFullyVisible":true,"hitIsSubmit":true,"microText":"No spam. Unsubscribe any time,","microBottom":574,"microVisible":true,"pageScrollY":9793}
+
+#### POPUP blog-thumbs 375x667
+ dialogCls: fixed inset-0 z-[9999] flex overflow-hidden  bodyOverflow: hidden  htmlOverflow: clip visible
+ kids: [{"cls":"hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden","bg":"rgb(123, 58, 175)","w":0,"h":0,"display":"none"},{"cls":"flex-1 flex flex-col justify-start lg:justify-center items-center rela","bg":"rgb(123, 58, 175)","w":375,"h":667,"display":"flex"}]
+ imgs: [{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":0,"h":0},{"src":"/images/ekuzo-logo.svg","display":"none","w":0,"h":0}]  brandMATTERS: [{"size":"16px","display":"none","visible":false,"top":0},{"size":"48px","display":"block","visible":false,"top":0},{"size":"48px","display":"inline","visible":false,"top":0}]
+ scrollable: []
+  OK        BUTTON top=  24 bot=  64 "Close"
+  OK        H3     top=  24 bot= 125 "One email after you read this. Then you deci"
+  OK        P      top= 133 bot= 290 "Leave your address and you're on the list to"
+  OK        P      top= 306 bot= 326 "Karlin Oei, founder, EKUZO"
+  OK        INPUT  top= 342 bot= 394 "First name (optional)"
+  OK        INPUT  top= 406 bot= 458 "Email address"
+  OK        BUTTON top= 470 bot= 522 "Send me the one email"
+  OK        P      top= 538 bot= 574 "No spam. Unsubscribe any time, or use the th"
+ AFTER-WHEEL: {"submitTop":470,"submitBottom":522,"submitFullyVisible":true,"hitIsSubmit":true,"microText":"No spam. Unsubscribe any time,","microBottom":574,"microVisible":true,"pageScrollY":9793}
+
+#### POPUP blog-classic 375x800
+ dialogCls: fixed inset-0 z-[9999] flex overflow-hidden  bodyOverflow: hidden  htmlOverflow: clip visible
+ kids: [{"cls":"hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden","bg":"rgb(123, 58, 175)","w":0,"h":0,"display":"none"},{"cls":"flex-1 flex flex-col justify-start lg:justify-center items-center rela","bg":"rgb(123, 58, 175)","w":375,"h":800,"display":"flex"}]
+ imgs: [{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":0,"h":0},{"src":"/images/ekuzo-logo.svg","display":"none","w":0,"h":0}]  brandMATTERS: [{"size":"16px","display":"none","visible":false,"top":0},{"size":"48px","display":"block","visible":false,"top":0},{"size":"48px","display":"inline","visible":false,"top":0}]
+ scrollable: []
+  OK        BUTTON top=  24 bot=  64 "Close"
+  OK        H3     top=  24 bot=  91 "For parents of gamers, once a week."
+  OK        P      top=  99 bot= 167 "One email a week on making gaming count. I c"
+  OK        P      top= 183 bot= 202 "Karlin Oei, founder, EKUZO"
+  OK        INPUT  top= 218 bot= 270 "First name (optional)"
+  OK        INPUT  top= 282 bot= 334 "Email address"
+  OK        BUTTON top= 346 bot= 398 "Join the weekly"
+  OK        P      top= 414 bot= 432 "No spam. Unsubscribe any time."
+ AFTER-WHEEL: {"submitTop":346,"submitBottom":398,"submitFullyVisible":true,"hitIsSubmit":true,"microText":"No spam. Unsubscribe any time.","microBottom":432,"microVisible":true,"pageScrollY":9793}
+
+#### POPUP blog-classic 375x667
+ dialogCls: fixed inset-0 z-[9999] flex overflow-hidden  bodyOverflow: hidden  htmlOverflow: clip visible
+ kids: [{"cls":"hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden","bg":"rgb(123, 58, 175)","w":0,"h":0,"display":"none"},{"cls":"flex-1 flex flex-col justify-start lg:justify-center items-center rela","bg":"rgb(123, 58, 175)","w":375,"h":667,"display":"flex"}]
+ imgs: [{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":0,"h":0},{"src":"/images/ekuzo-logo.svg","display":"none","w":0,"h":0}]  brandMATTERS: [{"size":"16px","display":"none","visible":false,"top":0},{"size":"48px","display":"block","visible":false,"top":0},{"size":"48px","display":"inline","visible":false,"top":0}]
+ scrollable: []
+  OK        BUTTON top=  24 bot=  64 "Close"
+  OK        H3     top=  24 bot=  91 "For parents of gamers, once a week."
+  OK        P      top=  99 bot= 167 "One email a week on making gaming count. I c"
+  OK        P      top= 183 bot= 202 "Karlin Oei, founder, EKUZO"
+  OK        INPUT  top= 218 bot= 270 "First name (optional)"
+  OK        INPUT  top= 282 bot= 334 "Email address"
+  OK        BUTTON top= 346 bot= 398 "Join the weekly"
+  OK        P      top= 414 bot= 432 "No spam. Unsubscribe any time."
+ AFTER-WHEEL: {"submitTop":346,"submitBottom":398,"submitFullyVisible":true,"hitIsSubmit":true,"microText":"No spam. Unsubscribe any time.","microBottom":432,"microVisible":true,"pageScrollY":9793}
+
+#### POPUP site 375x800
+ dialogCls: fixed inset-0 z-[9999] flex  bodyOverflow: clip visible  htmlOverflow: clip visible
+ kids: [{"cls":"hidden lg:flex flex-1 relative flex-col justify-end overflow-hidden","bg":"rgb(123, 58, 175)","w":0,"h":0,"display":"none"},{"cls":"flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF]","bg":"rgb(123, 58, 175)","w":375,"h":800,"display":"flex"}]
+ imgs: [{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":0,"h":0},{"src":"/_next/image?url=%2Fimages%2Fpopup-kid-c","display":"block","w":200,"h":202},{"src":"/images/ekuzo-logo.svg","display":"none","w":0,"h":0}]  brandMATTERS: [{"size":"16px","display":"none","visible":false,"top":0},{"size":"48px","display":"block","visible":false,"top":0},{"size":"48px","display":"inline","visible":false,"top":0},{"size":"16px","display":"block","visible":true,"top":50},{"size":"40px","display":"block","visible":true,"top":277},{"size":"40px","display":"inline","visible":true,"top":309}]
+ scrollable: []
+  OK        BUTTON top=  24 bot=  64 "Close"
+  OK        IMG    top=  50 bot= 253 ""
+  OK        SPAN   top= 309 bot= 349 "MATTERS."
+  OK        H3     top= 387 bot= 421 "Stay in the loop."
+  OK        P      top= 433 bot= 478 "Get stories of transformation, tips, and upd"
+  OK        INPUT  top= 510 bot= 562 "First name"
+  OK        INPUT  top= 578 bot= 630 "Email address"
+  OK        BUTTON top= 646 bot= 698 "Sign up"
+  OK        P      top= 714 bot= 750 "No spam. Unsubscribe anytime. We respect you"
+ AFTER-WHEEL: {"submitTop":646,"submitBottom":698,"submitFullyVisible":true,"hitIsSubmit":true,"microText":"No spam. Unsubscribe anytime. ","microBottom":750,"microVisible":true,"pageScrollY":600}
+
+#### BAR camps@768: {"vw":768,"barH":100,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":290,"w":266,"h":27,"size":"28.8px","font":"tungstenBlack","tt":"uppercase","text":"Ready to level up this summe"}],"input":null,"cta":{"l":534,"r":744,"w":210,"h":60,"text":"Enroll my gamer"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}
+
+#### BAR blog-thumbs@768: {"vw":768,"barH":125,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":744,"w":720,"h":17,"size":"12px","font":"Inter","tt":"none","text":"One email tomorrow, then you"}],"input":{"l":24,"r":623,"w":599,"h":60},"cta":{"l":631,"r":744,"w":113,"h":60,"text":"Try it"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}
+
+#### BAR blog-classic@768: {"vw":768,"barH":125,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":744,"w":720,"h":17,"size":"12px","font":"Inter","tt":"none","text":"One email a week on kids and"}],"input":{"l":24,"r":630,"w":606,"h":60},"cta":{"l":638,"r":744,"w":106,"h":60,"text":"Join"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}
+
+#### BAR camps@820: {"vw":820,"barH":100,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":308,"w":284,"h":29,"size":"30.75px","font":"tungstenBlack","tt":"uppercase","text":"Ready to level up this summe"}],"input":null,"cta":{"l":586,"r":796,"w":210,"h":60,"text":"Enroll my gamer"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}
+
+#### BAR blog-thumbs@820: {"vw":820,"barH":125,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":796,"w":772,"h":17,"size":"12px","font":"Inter","tt":"none","text":"One email tomorrow, then you"}],"input":{"l":24,"r":675,"w":651,"h":60},"cta":{"l":683,"r":796,"w":113,"h":60,"text":"Try it"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}
+
+#### BAR blog-classic@820: {"vw":820,"barH":125,"whitePad":"20px 16px","cls":"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0","spans":[{"l":24,"r":796,"w":772,"h":17,"size":"12px","font":"Inter","tt":"none","text":"One email a week on kids and"}],"input":{"l":24,"r":682,"w":658,"h":60},"cta":{"l":690,"r":796,"w":106,"h":60,"text":"Join"},"ctaOverflowPx":0,"inputOverflowPx":0,"docOverflowX":false,"ctaClickable":true}

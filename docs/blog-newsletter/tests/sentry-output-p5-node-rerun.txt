@@ -1,0 +1,134 @@
+(node:2781) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/lib/newsletterAb.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# Subtest: getOrAssignVariant: 10,000 draws with Math.random land between 48% and 52% thumbs
+ok 1 - getOrAssignVariant: 10,000 draws with Math.random land between 48% and 52% thumbs
+  ---
+  duration_ms: 6.275854
+  type: 'test'
+  ...
+# Subtest: getOrAssignVariant: random() < 0.5 assigns thumbs, persists it
+ok 2 - getOrAssignVariant: random() < 0.5 assigns thumbs, persists it
+  ---
+  duration_ms: 0.239335
+  type: 'test'
+  ...
+# Subtest: getOrAssignVariant: random() >= 0.5 assigns classic, persists it
+ok 3 - getOrAssignVariant: random() >= 0.5 assigns classic, persists it
+  ---
+  duration_ms: 0.171331
+  type: 'test'
+  ...
+# Subtest: getOrAssignVariant: a stored valid value always wins, never reassigned
+ok 4 - getOrAssignVariant: a stored valid value always wins, never reassigned
+  ---
+  duration_ms: 0.12197
+  type: 'test'
+  ...
+# Subtest: getOrAssignVariant: an invalid stored value is treated as unassigned
+ok 5 - getOrAssignVariant: an invalid stored value is treated as unassigned
+  ---
+  duration_ms: 0.137103
+  type: 'test'
+  ...
+# Subtest: getOrAssignVariant: storage throwing returns 'thumbs' and stores nothing
+ok 6 - getOrAssignVariant: storage throwing returns 'thumbs' and stores nothing
+  ---
+  duration_ms: 0.153643
+  type: 'test'
+  ...
+# Subtest: isBlogPostPath: cases from the contract
+ok 7 - isBlogPostPath: cases from the contract
+  ---
+  duration_ms: 0.243298
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: dismissed 29 days ago is still within the window (false)
+ok 8 - shouldShowPopup: dismissed 29 days ago is still within the window (false)
+  ---
+  duration_ms: 0.162178
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: dismissed 31 days ago is outside the window (true)
+ok 9 - shouldShowPopup: dismissed 31 days ago is outside the window (true)
+  ---
+  duration_ms: 0.310624
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: subscribed 364 days ago is still within the window (false)
+ok 10 - shouldShowPopup: subscribed 364 days ago is still within the window (false)
+  ---
+  duration_ms: 0.425193
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: subscribed 366 days ago is outside the window (true)
+ok 11 - shouldShowPopup: subscribed 366 days ago is outside the window (true)
+  ---
+  duration_ms: 0.175007
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: no stored timestamps at all is true
+ok 12 - shouldShowPopup: no stored timestamps at all is true
+  ---
+  duration_ms: 0.107256
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: storage throwing defaults to showing (true)
+ok 13 - shouldShowPopup: storage throwing defaults to showing (true)
+  ---
+  duration_ms: 0.093575
+  type: 'test'
+  ...
+# Subtest: shouldShowPopup: window boundaries are named constants matching 30/365 days
+ok 14 - shouldShowPopup: window boundaries are named constants matching 30/365 days
+  ---
+  duration_ms: 0.066937
+  type: 'test'
+  ...
+# Subtest: recordDismiss writes DISMISSED_AT_KEY with the given now
+ok 15 - recordDismiss writes DISMISSED_AT_KEY with the given now
+  ---
+  duration_ms: 0.13806
+  type: 'test'
+  ...
+# Subtest: recordSuccess writes SUBSCRIBED_AT_KEY with the given now
+ok 16 - recordSuccess writes SUBSCRIBED_AT_KEY with the given now
+  ---
+  duration_ms: 0.423041
+  type: 'test'
+  ...
+# Subtest: recordDismiss: storage throwing is swallowed, never throws
+ok 17 - recordDismiss: storage throwing is swallowed, never throws
+  ---
+  duration_ms: 0.176353
+  type: 'test'
+  ...
+# Subtest: recordSuccess: storage throwing is swallowed, never throws
+ok 18 - recordSuccess: storage throwing is swallowed, never throws
+  ---
+  duration_ms: 0.089908
+  type: 'test'
+  ...
+# Subtest: recordDismiss then shouldShowPopup: dismissal actually suppresses the popup
+ok 19 - recordDismiss then shouldShowPopup: dismissal actually suppresses the popup
+  ---
+  duration_ms: 0.071944
+  type: 'test'
+  ...
+# Subtest: recordSuccess then shouldShowPopup: success actually suppresses the popup
+ok 20 - recordSuccess then shouldShowPopup: success actually suppresses the popup
+  ---
+  duration_ms: 0.103078
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 26.332911

@@ -1,0 +1,27 @@
+PASS: D6 @ 375x812: submit reachable after scrolling the pane
+PASS: D6 @ 375x812: microcopy visible after scrolling the pane
+  (info) fits without scrolling at 375x812: true
+PASS: D6 @ 375x667: submit reachable after scrolling the pane
+PASS: D6 @ 375x667: microcopy visible after scrolling the pane
+  (info) fits without scrolling at 375x667: true
+saved popup-blog-thumbs-375-open
+saved popup-blog-classic-375-open
+saved popup-blog-thumbs-375x667-open
+PASS: D7: no popup dialog after a sticky-bar success + scroll to 60%
+PASS: D7: ekuzo_nl_blog_subscribed_at is written after a sticky-bar success
+PASS: D7: no popup dialog after reload + scroll to 60%
+PASS: D8 @ 640px: full "Try it" label visible and inside the bar
+PASS: D8 @ 768px: full "Try it" label visible and inside the bar
+saved sticky-blog-thumbs-768-visible
+PASS: D8 @ 820px: full "Try it" label visible and inside the bar
+saved sticky-blog-thumbs-820-visible
+PASS: D8 @ 890px: full "Try it" label visible and inside the bar
+PASS: D8 @ 1024px: full "Try it" label visible and inside the bar
+PASS: D9: document.body overflow is hidden while the dialog is open
+PASS: D9: Tab from the last focusable element wraps to the first
+PASS: D9: Shift+Tab from the first focusable element wraps to the last
+PASS: D9: document.body overflow restored after close
+PASS: D10: byline contrast is at least 4.5:1 on the purple pane (below lg)
+PASS: D10: byline contrast is at least 4.5:1 on the navy pane (lg and up)
+
+ALL CHECKS PASSED

@@ -153,7 +153,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
-      lastModified: new Date("2026-05-29"),
+      lastModified: new Date("2026-10-12"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -169,6 +169,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/blog/gaming-military-families`,
       lastModified: new Date("2026-07-31"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`,
+      lastModified: new Date("2026-10-12"),
       changeFrequency: "weekly",
       priority: 0.6,
     },

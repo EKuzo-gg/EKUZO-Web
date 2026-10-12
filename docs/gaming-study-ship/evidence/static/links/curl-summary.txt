@@ -1,0 +1,7 @@
+1 https://x.com/BrandonLuuMD/status/2099226796893798645 => 200 https://x.com/BrandonLuuMD/status/2099226796893798645 bytes=137571
+2 https://doi.org/10.1371/journal.pone.0334924 => 200 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0334924 bytes=348487
+3 https://doi.org/10.1038/nature09042 => 200 https://www.nature.com/articles/nature09042?error=cookies_not_supported&code=633dfcf1-61c8-461a-be13-e52acb09c3a8 bytes=322744
+4 https://doi.org/10.5683/SP3/WUYAGU => 200 https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/WUYAGU bytes=232961
+5 https://doi.org/10.1001/jamanetworkopen.2023.6895 => 403 https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2803642 bytes=5858
+6 https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596 => 403 https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596 bytes=5858
+7 https://news.westernu.ca/2024/10/brain-body-study-results/ => 200 https://news.westernu.ca/2024/10/brain-body-study-results/ bytes=313058

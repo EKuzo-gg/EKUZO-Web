@@ -1,0 +1,52 @@
+saved screenshot: n1-before_-1440
+saved screenshot: n1-after_-1440
+saved screenshot: n1-before_-375
+saved screenshot: n1-after_-375
+PASS - N1: / - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo-camps-1440
+saved screenshot: n1-after_programs_ekuzo-camps-1440
+saved screenshot: n1-before_programs_ekuzo-camps-375
+saved screenshot: n1-after_programs_ekuzo-camps-375
+PASS - N1: /programs/ekuzo-camps - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo101-1440
+saved screenshot: n1-after_programs_ekuzo101-1440
+saved screenshot: n1-before_programs_ekuzo101-375
+saved screenshot: n1-after_programs_ekuzo101-375
+PASS - N1: /programs/ekuzo101 - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo100-1440
+saved screenshot: n1-after_programs_ekuzo100-1440
+saved screenshot: n1-before_programs_ekuzo100-375
+saved screenshot: n1-after_programs_ekuzo100-375
+PASS - N1: /programs/ekuzo100 - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo-teams-1440
+saved screenshot: n1-after_programs_ekuzo-teams-1440
+saved screenshot: n1-before_programs_ekuzo-teams-375
+saved screenshot: n1-after_programs_ekuzo-teams-375
+PASS - N1: /programs/ekuzo-teams - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_schools-1440
+saved screenshot: n1-after_schools-1440
+saved screenshot: n1-before_schools-375
+saved screenshot: n1-after_schools-375
+PASS - N1: /schools - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_parents-1440
+saved screenshot: n1-after_parents-1440
+saved screenshot: n1-before_parents-375
+saved screenshot: n1-after_parents-375
+PASS - N1: /parents - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo-camps_register-1440
+saved screenshot: n1-after_programs_ekuzo-camps_register-1440
+saved screenshot: n1-before_programs_ekuzo-camps_register-375
+saved screenshot: n1-after_programs_ekuzo-camps_register-375
+PASS - N1: /programs/ekuzo-camps/register - bar stays hidden (translate-y-full, or absent) on BEFORE even scrolled past 300px (<div class="fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"><div class="absolute )
+PASS - N1: /programs/ekuzo-camps/register - bar stays hidden (translate-y-full, or absent) on AFTER even scrolled past 300px (<div class="fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"><div class="absolute )
+PASS - N1: /programs/ekuzo-camps/register - bar outerHTML byte-identical before vs after (identical)
+PASS - N2: / on 3002 (flag forced on) shows a dialog after 2.5s (count=1)
+PASS - N2: headline is "Stay in the loop." (Stay in the loop.)
+saved screenshot: n2-popup-site-1440-open
+saved screenshot: popup-site-1440-open
+PASS - N2: dismissing sets storage key "ekuzo_newsletter_dismissed" (1)
+PASS - N2: / on 3001 (flag off) shows no dialog (count=0)
+FAIL - N4: article innerText identical before/after on gaming-study post (DIFFERS (lengths: before=11725 after=11732))
+PASS - N4: article innerText identical before/after on should-you-ban-fortnite post (identical)
+
+=== SUMMARY: 15 passed, 1 failed, 16 total ===

@@ -1,0 +1,13 @@
+Sentry independent verification of D6 and D10 (Phase 5 retest cycle 2), 2026-09-16.
+
+D6 (popup short-viewport scroll, blog mode):
+375x667: submitVisibleInitially=true submitVisibleAfterScroll=true microVisibleAfterScroll=true submitInViewportAfterScroll=true
+375x812: submitVisibleInitially=true submitVisibleAfterScroll=true microVisibleAfterScroll=true submitInViewportAfterScroll=true
+PASS - D6: submit button and "No spam" microcopy are reachable (visible, in-viewport) after scrolling the popup's form pane at both 375x667 and 375x812, against port 3001.
+
+D10 (byline contrast, WCAG relative-luminance formula, computed independently of Atlas's tool):
+purple pane @ white/40 (pre-fix): contrast=2.38:1 (fails AA, worse than Atlas's own "~3.8:1" figure for this pane specifically)
+purple pane @ white/80 (post-fix): contrast=5.00:1 (passes AA, matches Atlas's "~5.0:1")
+navy pane @ white/40 (pre-fix): contrast=3.78:1 (fails AA, matches Atlas's "~3.8:1")
+navy pane @ white/80 (post-fix): contrast=11.23:1 (passes AA, matches Atlas's "~11.2:1")
+PASS - D10: text-white/80 clears the 4.5:1 AA threshold on both pane backgrounds, independently computed via the WCAG 2.x relative-luminance/contrast formula (sRGB -> linear -> relative luminance -> (L1+0.05)/(L2+0.05)), alpha-composited against each pane's background color.

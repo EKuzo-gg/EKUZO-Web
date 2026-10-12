@@ -1,0 +1,31 @@
+canonical: ['https://ekuzo.gg/blog/gaming-study-13-7-years-younger-what-it-means-for-kids']
+robots meta: ['index, follow'] []
+title: ['Is gaming good for your brain? The “13.7 years younger” study, for parents | EKUZO']
+og:image: ['https://ekuzo.gg/images/gaming-study-13-7-card.jpg'] twitter:image: ['https://ekuzo.gg/images/gaming-study-13-7-card.jpg']
+h1 count: 1
+h1: The gaming study everyone shared, and what it means for your twelve-year-old
+  h2: Why “duh”
+  h2: The reply that mattered
+  h2: What a thousand replies said
+  h2: The parents who didn't get an answer
+  h2: What the study found, and what it didn't
+  h2: Where I stop
+  h2: Common questions
+    h3: Which games did the study look at?
+    h3: Is gaming good for kids' brains?
+    h3: How many hours is the right amount?
+    h3: Does the study prove gaming beats exercise?
+    h3: How do I get my kid off the game without the attitude?
+  h2: Sources
+    h3: What 200+ homeschool parents taught us about gaming
+    h3: She banned Fortnite and got her kid back. Then came a new problem.
+    h3: When your son’s only friends are online
+  h2: Season 01 starts in 2027. Get them on the list.
+skipped levels: none
+img total 13 without alt attr 0 [] | empty alt (decorative) 6
+   empty-alt: https://www.facebook.com/tr?id=1284038230557204&amp;ev=PageView&amp;noscript=1
+   empty-alt: <img alt="" loading="lazy" width="400" height="500" decoding="async" data-nimg="1" class="opacity-70
+   empty-alt: /images/new%20torn%20paper/torn-paper-grey-top-1%402x.png
+   empty-alt: /images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+   empty-alt: <img alt="" aria-hidden="true" loading="lazy" width="824" height="921" decoding="async" data-nimg="1
+   empty-alt: /images/ekuzo-huge.svg

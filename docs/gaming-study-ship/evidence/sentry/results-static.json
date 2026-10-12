@@ -1,0 +1,100 @@
+[
+  {
+    "id": "TG-3",
+    "vp": "-",
+    "pass": true,
+    "notes": "blocks=5 parseErrors=0 types=[\"EducationalOrganization\",\"WebSite\",\"SiteNavigationElement\",\"Person\",\"Person\",\"Person\",\"Person\",\"Person\",\"BlogPosting\",\"BreadcrumbList\",\"FAQPage\",\"VideoObject\"] FAQ questions=5: [\"Which games did the study look at?\",\"Is gaming good for kids' brains?\",\"How many hours is the right amount?\",\"Does the study prove gaming beats exercise?\",\"How do I get my kid off the game without the attitude?\"] dates=[\"datePublished=2026-10-12T12:00:00+00:00\",\"dateModified=2026-10-12T12:00:00+00:00\",\"uploadDate=2026-06-11T12:00:00+00:00\"] VideoObjects=1; BlogPosting image=\"https://ekuzo.gg/images/gaming-study-13-7-card.jpg\"; headline=The gaming study everyone shared, and what it means for your twelve-year-old"
+  },
+  {
+    "id": "DT-1 (dates)",
+    "vp": "-",
+    "pass": true,
+    "notes": "JSON-LD [\"datePublished=2026-10-12T12:00:00+00:00\",\"dateModified=2026-10-12T12:00:00+00:00\",\"uploadDate=2026-06-11T12:00:00+00:00\"]"
+  },
+  {
+    "id": "AS-2",
+    "vp": "-",
+    "pass": true,
+    "notes": "og:image=https://ekuzo.gg/images/gaming-study-13-7-card.jpg -> {\"status\":200,\"w\":1200,\"h\":630,\"type\":\"image/jpeg\",\"bytes\":94471}; twitter:image=https://ekuzo.gg/images/gaming-study-13-7-card.jpg -> {\"status\":200,\"w\":1200,\"h\":630,\"type\":\"image/jpeg\",\"bytes\":94471} (served from local origin; absolute URL host is metadataBase)"
+  },
+  {
+    "id": "DT-2",
+    "vp": "-",
+    "pass": true,
+    "notes": "served HTML contains \"Updated\" + \"October 12, 2026\" in visible markup: true; fragment=\"Updated<!-- --> <!-- -->October 12, 2026\""
+  },
+  {
+    "id": "CP-5/CP-18 graphic (1440)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "{\"alt\":\"Same game, two different hours. Who's there: strangers in a public queue, or the same teammates every week. Who's watching: no adult on the call, or a coach on the call. When it ends: when someone says stop, or set before it starts. What it's for: the next win, or one thing to get better at. From the doorway, both look like screen time.\",\"w\":560,\"colW\":761,\"centered\":0,\"prevText\":\"e your kid already plays. Everything around it is different.\",\"nextText\":\"In June a parent emailed me. Her son, wh\",\"src\":\"http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-same-game-two-hours.png&w=3840&q=75\"}",
+    "extra": {
+      "alt": "Same game, two different hours. Who's there: strangers in a public queue, or the same teammates every week. Who's watching: no adult on the call, or a coach on the call. When it ends: when someone says stop, or set before it starts. What it's for: the next win, or one thing to get better at. From the doorway, both look like screen time.",
+      "w": 560,
+      "colW": 761,
+      "centered": 0,
+      "prevText": "e your kid already plays. Everything around it is different.",
+      "nextText": "In June a parent emailed me. Her son, wh",
+      "src": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-same-game-two-hours.png&w=3840&q=75"
+    }
+  },
+  {
+    "id": "CP-18 Keep Reading (1440)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "cards in order: [\"what-homeschool-parents-taught-us-about-gaming\",\"should-you-ban-fortnite\",\"when-your-sons-only-friends-are-online\"]"
+  },
+  {
+    "id": "CP-10/DT-3 footer banner (mode on)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "footer shows \"Season 01 starts in 2027. Get them on the list.\" and not the dormant heading: true"
+  },
+  {
+    "id": "CP-5/CP-18 graphic (375)",
+    "vp": "375",
+    "pass": true,
+    "notes": "{\"alt\":\"Same game, two different hours. Who's there: strangers in a public queue, or the same teammates every week. Who's watching: no adult on the call, or a coach on the call. When it ends: when someone says stop, or set before it starts. What it's for: the next win, or one thing to get better at. From the doorway, both look like screen time.\",\"w\":321,\"colW\":321,\"centered\":0,\"prevText\":\"e your kid already plays. Everything around it is different.\",\"nextText\":\"In June a parent emailed me. Her son, wh\",\"src\":\"http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-same-game-two-hours.png&w=3840&q=75\"}",
+    "extra": {
+      "alt": "Same game, two different hours. Who's there: strangers in a public queue, or the same teammates every week. Who's watching: no adult on the call, or a coach on the call. When it ends: when someone says stop, or set before it starts. What it's for: the next win, or one thing to get better at. From the doorway, both look like screen time.",
+      "w": 321,
+      "colW": 321,
+      "centered": 0,
+      "prevText": "e your kid already plays. Everything around it is different.",
+      "nextText": "In June a parent emailed me. Her son, wh",
+      "src": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-same-game-two-hours.png&w=3840&q=75"
+    }
+  },
+  {
+    "id": "CP-18 Keep Reading (375)",
+    "vp": "375",
+    "pass": true,
+    "notes": "cards in order: [\"what-homeschool-parents-taught-us-about-gaming\",\"should-you-ban-fortnite\",\"when-your-sons-only-friends-are-online\"]"
+  },
+  {
+    "id": "CP-10 source",
+    "vp": "-",
+    "pass": true,
+    "notes": "FooterBanner heading string in page.tsx: true"
+  },
+  {
+    "id": "DT-3 /blog featured",
+    "vp": "1440",
+    "pass": true,
+    "notes": "first card href=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids text=\"Perspective · FeaturedTHE GAMING STUDY EVERYONE SHARED, AND WHAT IT MEANS FOR YOUR TWELVE-YEAR-OLDA doctor's one-liner about a gaming study reached 30M+ people.\"; leaf nodes labelled Featured=1; all post links=12",
+    "extra": {
+      "firstHref": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+      "firstText": "Perspective · FeaturedTHE GAMING STUDY EVERYONE SHARED, AND WHAT IT MEANS FOR YOUR TWELVE-YEAR-OLDA doctor's one-liner about a gaming study reached 30M+ people.",
+      "featuredLabelCount": 1,
+      "labelHrefs": [
+        "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+      ]
+    }
+  },
+  {
+    "id": "DT-3 source featured: true count",
+    "vp": "-",
+    "pass": true,
+    "notes": "\"featured: true\" occurrences in app/blog/page.tsx = 1\n26-    // Takes the featured slot from should-you-ban-fortnite for launch week.\n27:    featured: true,\n"
+  }
+]

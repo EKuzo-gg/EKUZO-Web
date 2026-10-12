@@ -1,0 +1,105 @@
+# Google-Extended and Applebot-Extended never fetch anything. They are opt-out
+# control tokens that gate whether already-crawled content may be used for AI
+# training and grounding; listing them with Allow: / is an explicit opt-IN.
+#
+# An AI-crawler block covering /blog/gaming-military-families and
+# /blog/should-you-ban-fortnite lived here from 2026-07-25, scoped to those
+# two paths for a pre-publication embargo, and was deleted 2026-07-31 when
+# the bundle went public.
+# ---------------------------------------------------------------------------
+
+# OpenAI: training crawler / search index / user-initiated fetch
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+
+# Anthropic: training crawler / user-initiated fetch / search index
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+
+# Perplexity: index crawler / user-initiated fetch
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+
+# Google Gemini + AI Overviews training/grounding opt-in (control token,
+# does not crawl — Googlebot does the fetching under the * group)
+User-agent: Google-Extended
+
+# Apple Intelligence / Siri training opt-in (control token, does not crawl)
+User-agent: Applebot-Extended
+
+# Microsoft Bing + Copilot
+User-agent: Bingbot
+
+# Meta AI
+User-agent: meta-externalagent
+
+# Amazon (Alexa / Rufus / Nova)
+User-agent: Amazonbot
+
+# ByteDance (Doubao / TikTok AI)
+User-agent: Bytespider
+
+# Cohere
+User-agent: cohere-ai
+
+# Common Crawl (feeds several LLM training sets)
+User-agent: CCBot
+
+# Diffbot knowledge graph (feeds several assistants)
+User-agent: Diffbot
+
+# Timpi decentralized index
+User-agent: Timpibot
+
+# omgili / Webz.io crawl feed (resold to several LLM trainers)
+User-agent: omgili
+
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Allow: /_next/image
+----
+13:Disallow: /api/
+14:Disallow: /_next/
+16:# More-specific Allow overrides the /_next/ Disallow for compliant bots.
+23:# the risk. See docs/ai-optimization-checklist.md line 77. Do not add Disallow
+26:# WHY THE DISALLOW RULES ARE REPEATED BELOW: per RFC 9309, a crawler obeys
+90:Disallow: /api/
+91:Disallow: /_next/
+---
+    },
+    {
+      url: `${baseUrl}/blog/gaming-military-families`,
+      lastModified: new Date("2026-07-31"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`,
+      lastModified: new Date("2026-10-12"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+
+    // Blog author pages
+    {
+      url: `${baseUrl}/blog/author/karlin-oei`,
+diff --git a/app/sitemap.ts b/app/sitemap.ts
+index b6020d6..a1eb047 100644
+--- a/app/sitemap.ts
++++ b/app/sitemap.ts
+@@ -172,6 +172,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
+       changeFrequency: "weekly",
+       priority: 0.6,
+     },
++    {
++      url: `${baseUrl}/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`,
++      lastModified: new Date("2026-10-12"),
++      changeFrequency: "weekly",
++      priority: 0.6,
++    },
+ 
+     // Blog author pages
+     {

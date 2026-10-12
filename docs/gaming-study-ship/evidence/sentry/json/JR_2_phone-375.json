@@ -1,0 +1,124 @@
+{
+  "body": {
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "source": "site-popup",
+    "ad": "",
+    "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+    },
+    "attributionFrom": "none",
+    "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+    "eventId": "02e5750e-fd2f-4cbf-899c-9e95018312b8",
+    "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+    "ekz_hp": ""
+  },
+  "leads": {
+    "generate_lead": [
+      {
+        "name": "generate_lead",
+        "params": {
+          "source": "season_one_popup"
+        },
+        "t": 1791777242888,
+        "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+      }
+    ],
+    "fbLead": [
+      {
+        "name": "Lead",
+        "params": {
+          "content_name": "season_one_popup"
+        },
+        "opts": {
+          "eventID": "02e5750e-fd2f-4cbf-899c-9e95018312b8"
+        },
+        "t": 1791777242888
+      }
+    ]
+  },
+  "storage": {
+    "ls": {
+      "ekuzo_s1_joined": "1"
+    },
+    "ss": {}
+  },
+  "bodies": [
+    {
+      "t": 1791777242853,
+      "key": "season",
+      "url": "/api/season-one",
+      "status": 200,
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "02e5750e-fd2f-4cbf-899c-9e95018312b8",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      }
+    }
+  ],
+  "calls": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T03:54:00.193Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "event",
+        "generate_lead",
+        {
+          "source": "season_one_popup"
+        }
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "track",
+        "Lead",
+        {
+          "content_name": "season_one_popup"
+        },
+        {
+          "eventID": "02e5750e-fd2f-4cbf-899c-9e95018312b8"
+        }
+      ]
+    ],
+    "clarity": []
+  }
+}

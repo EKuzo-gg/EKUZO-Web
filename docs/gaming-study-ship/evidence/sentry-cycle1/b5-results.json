@@ -1,0 +1,22 @@
+[
+  {
+    "id": "keyboard popup @1440",
+    "sev": "FINDING",
+    "note": "open: input[type=email]#s1-email \"\" (in dialog) | Tab1: button[type=submit] \"Save their spot\" (in dialog) | Tab2: body \"Programs\n+\nSchools\nFamili\" (PAGE) | Tab3: a[aria-label=EKUZO home] \"\" (PAGE) | Tab4: a \"Programs\n+\" (PAGE) | Tab5: a \"Schools\" (PAGE) | Tab6: a \"Families\" (PAGE) | Tab7: a \"Methodology\" (PAGE) | Tab8: a \"FAQ\" (PAGE) | Shift+Tab: a \"Methodology\" (PAGE) || Tab stays inside dialog (focus trap)=false; Escape closes=true; focus after close: a \"Methodology\" (PAGE); page errors=0"
+  },
+  {
+    "id": "in-body X link @1440",
+    "sev": "ok",
+    "note": "{\"href\":\"https://x.com/BrandonLuuMD/status/2099226796893798645\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"tabindex\":0,\"visible\":true}; reachable by Tab=true; focus style: outline=auto 1px rgb(0, 95, 204); boxShadow=none"
+  },
+  {
+    "id": "keyboard popup @375",
+    "sev": "FINDING",
+    "note": "open: button[aria-label=Close][type=button] \"\" (in dialog) | Tab1: input[type=email]#s1-email \"\" (in dialog) | Tab2: button[type=submit] \"Save their spot\" (in dialog) | Tab3: body \"PERSPECTIVE\nThe gaming st\" (PAGE) | Tab4: a[aria-label=EKUZO home] \"\" (PAGE) | Tab5: button[aria-label=Toggle menu][type=submit] \"\" (PAGE) | Tab6: a \"Karlin Oei\" (PAGE) | Tab7: a \"a recent post on X\" (PAGE) | Tab8: a \"I told the longer version\" (PAGE) | Shift+Tab: a \"a recent post on X\" (PAGE) || Tab stays inside dialog (focus trap)=false; Escape closes=true; focus after close: a \"a recent post on X\" (PAGE); page errors=0"
+  },
+  {
+    "id": "in-body X link @375",
+    "sev": "ok",
+    "note": "{\"href\":\"https://x.com/BrandonLuuMD/status/2099226796893798645\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"tabindex\":0,\"visible\":true}; reachable by Tab=true; focus style: outline=auto 1px rgb(0, 95, 204); boxShadow=none"
+  }
+]

@@ -1,9 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// The eight canonical "How did you hear about us?" slugs and the label each
+// maps to (Story/P9 wording, 02-copy-deck.md). Unknown values are dropped,
+// not rejected: heardAbout is simply treated as absent.
+const HEARD_ABOUT_LABELS: Record<string, string> = {
+  x: "X (Twitter)",
+  instagram: "Instagram",
+  "tiktok-youtube": "TikTok or YouTube",
+  google: "Google search",
+  ai: "ChatGPT or another AI",
+  friend: "A friend or another parent",
+  school: "My kid's school",
+  other: "Other",
+};
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, organization, contactMethod, email, phone, message, pageUrl } = body;
+    const { name, organization, contactMethod, email, phone, message, pageUrl, heardAbout } = body;
+    const heardAboutLabel = HEARD_ABOUT_LABELS[heardAbout];
 
     // Validate required fields
     if (!name || !contactMethod) {
@@ -49,6 +64,9 @@ export async function POST(req: NextRequest) {
 
           // Tag the subscriber
           if (subId) {
+            const tags = heardAboutLabel
+              ? ["source-contact-form", `heard-${heardAbout}`]
+              : ["source-contact-form"];
             await fetch(
               `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions/${subId}/tags`,
               {
@@ -57,7 +75,7 @@ export async function POST(req: NextRequest) {
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${BEEHIIV_API_KEY}`,
                 },
-                body: JSON.stringify({ tags: ["source-contact-form"] }),
+                body: JSON.stringify({ tags }),
               }
             );
           }
@@ -94,6 +112,7 @@ export async function POST(req: NextRequest) {
                 <p><strong>Preferred contact:</strong> ${contactMethod}</p>
                 <p>${contactInfo}</p>
                 ${message ? `<p><strong>Message:</strong><br/>${message}</p>` : ""}
+                ${heardAboutLabel ? `<p><strong>How they heard about us:</strong> ${heardAboutLabel}</p>` : ""}
                 <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;" />
                 <p style="color: #999; font-size: 12px;">
                   From: ${pageUrl || "ekuzo.gg"}<br/>

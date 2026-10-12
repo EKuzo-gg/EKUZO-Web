@@ -1,0 +1,754 @@
+{
+  "version": "4.11.1",
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "nodes": [
+        {
+          "target": [
+            ".items-baseline > span:nth-child(1)"
+          ],
+          "html": "<span>Founder of EKUZO</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            ".items-baseline > span:nth-child(3)"
+          ],
+          "html": "<span>Updated<!-- --> <!-- -->October 12, 2026</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "span:nth-child(5)"
+          ],
+          "html": "<span>8<!-- --> min read</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "p:nth-child(2) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://x.com/BrandonLuuMD/status/2099226796893798645\" target=\"_blank\" rel=\"noopener noreferrer\">a recent post on X</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "p:nth-child(7) > a"
+          ],
+          "html": "<a href=\"/blog/what-your-kids-gaming-is-telling-you\">I told the longer version of this on camera</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "div[aria-label=\"Four camps, in their own words\"] > .gap-\\[14px\\].flex-col.flex > div:nth-child(1) > .items-center.flex.font-body > span:nth-child(1)"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div:nth-child(1) > .items-center.flex.font-body > span:nth-child(2)"
+          ],
+          "html": "<span style=\"margin-left:auto\">1.1K likes at the time</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div[aria-label=\"Four camps, in their own words\"] > .gap-\\[14px\\].flex-col.flex > div:nth-child(2) > .items-center.flex.font-body > span"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div:nth-child(3) > .items-center.flex.font-body > span:nth-child(1)"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div:nth-child(3) > .items-center.flex.font-body > span:nth-child(2)"
+          ],
+          "html": "<span style=\"margin-left:auto\">412 likes at the time</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div:nth-child(4) > .items-center.flex.font-body > span"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div[aria-label=\"Four camps, in their own words\"] > .font-body:nth-child(4)"
+          ],
+          "html": "<div class=\"font-body\" style=\"font-size:12px;color:#9a988f;margin:14px 4px 0;line-height:1.5\">Quotes are public replies on X, attributed by handle, reproduced a",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div[aria-label=\"The parents in the thread\"] > .gap-\\[14px\\].flex-col.flex > div:nth-child(1) > .items-center.flex.font-body > span"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "div[aria-label=\"The parents in the thread\"] > .gap-\\[14px\\].flex-col.flex > div:nth-child(2) > .items-center.flex.font-body > span"
+          ],
+          "html": "<span>Reply on X</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.89 (foreground color: #9a988f, background color: #ffffff, font size: 9.8pt (13px), font weight: normal). Expected contrast rati"
+        },
+        {
+          "target": [
+            "ul:nth-child(28) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://doi.org/10.1371/journal.pone.0334924\" target=\"_blank\" rel=\"noopener noreferrer\">Paleczny et al. 2025</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(28) > li:nth-child(3) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://doi.org/10.1038/nature09042\" target=\"_blank\" rel=\"noopener noreferrer\">Owen et al.</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(28) > li:nth-child(4) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://news.westernu.ca/2024/10/brain-body-study-results/\" target=\"_blank\" rel=\"noopener noreferrer\">press release</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(4) > a:nth-child(3)"
+          ],
+          "html": "<a href=\"/research/gaming-cognition-reanalysis.py\">The script</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(4) > a:nth-child(4)"
+          ],
+          "html": "<a href=\"/research/gaming-cognition-reanalysis-output.txt\">its output</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(6) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(2)"
+          ],
+          "html": "<a href=\"https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596\" target=\"_blank\" rel=\"noopener noreferrer\">Chaarani et al.</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(3)"
+          ],
+          "html": "<a href=\"https://doi.org/10.1001/jamanetworkopen.2023.6895\" target=\"_blank\" rel=\"noopener noreferrer\">notice</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "p:nth-child(32) > a[href$=\"should-you-ban-fortnite\"]"
+          ],
+          "html": "<a href=\"/blog/should-you-ban-fortnite\">one mom's account of banning it and what came next</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "p:nth-child(32) > a:nth-child(2)"
+          ],
+          "html": "<a href=\"/blog/league-of-legends-youth-development\">here's why I coach League</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "p:nth-child(32) > a[href$=\"parents\"]"
+          ],
+          "html": "<a href=\"/parents\">my coaches answer parent questions</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(1)"
+          ],
+          "html": "<a href=\"https://doi.org/10.1371/journal.pone.0334924\" target=\"_blank\" rel=\"noopener noreferrer\">doi 10.1371/journal.pone.0334924</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(2)"
+          ],
+          "html": "<a href=\"https://doi.org/10.5683/SP3/WUYAGU\" target=\"_blank\" rel=\"noopener noreferrer\">doi 10.5683/SP3/WUYAGU</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(1) > a:nth-child(3)"
+          ],
+          "html": "<a href=\"/research/gaming-cognition-reanalysis.py\">script</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(1) > a:nth-child(4)"
+          ],
+          "html": "<a href=\"/research/gaming-cognition-reanalysis-output.txt\">output</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(2) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://news.westernu.ca/2024/10/brain-body-study-results/\" target=\"_blank\" rel=\"noopener noreferrer\">news.westernu.ca</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(3) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://doi.org/10.1038/nature09042\" target=\"_blank\" rel=\"noopener noreferrer\">doi 10.1038/nature09042</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(4) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(1)"
+          ],
+          "html": "<a href=\"https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596\" target=\"_blank\" rel=\"noopener noreferrer\">Replacement article</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(4) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]:nth-child(2)"
+          ],
+          "html": "<a href=\"https://doi.org/10.1001/jamanetworkopen.2023.6895\" target=\"_blank\" rel=\"noopener noreferrer\">notice of retraction and replacement</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "ul:nth-child(49) > li:nth-child(6) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+          ],
+          "html": "<a href=\"https://x.com/BrandonLuuMD/status/2099226796893798645\" target=\"_blank\" rel=\"noopener noreferrer\">x.com</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            ".mb-8"
+          ],
+          "html": "<p class=\"font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-8\">Keep Reading</p>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.38 (foreground color: #f92524, background color: #f0edea, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio"
+        },
+        {
+          "target": [
+            "li:nth-child(1) > .h-full.group.flex-col > .pt-5.gap-2.flex-col > .text-xs.text-red.tracking-\\[0\\.15em\\]"
+          ],
+          "html": "<span class=\"font-body text-xs font-bold text-red tracking-[0.15em] uppercase\">Case Studies</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.38 (foreground color: #f92524, background color: #f0edea, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio "
+        },
+        {
+          "target": [
+            "li:nth-child(1) > .h-full.group.flex-col > .pt-5.gap-2.flex-col > .text-black\\/50.leading-relaxed.text-sm"
+          ],
+          "html": "<p class=\"font-body text-black/50 text-sm leading-relaxed\">We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one stru",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.83 (foreground color: #787775, background color: #f0edea, font size: 10.5pt (14px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            ".h-full.group[href$=\"should-you-ban-fortnite\"] > .pt-5.gap-2.flex-col > .text-xs.text-red.tracking-\\[0\\.15em\\]"
+          ],
+          "html": "<span class=\"font-body text-xs font-bold text-red tracking-[0.15em] uppercase\">Perspective</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.38 (foreground color: #f92524, background color: #f0edea, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio "
+        },
+        {
+          "target": [
+            ".h-full.group[href$=\"should-you-ban-fortnite\"] > .pt-5.gap-2.flex-col > .text-black\\/50.leading-relaxed.text-sm"
+          ],
+          "html": "<p class=\"font-body text-black/50 text-sm leading-relaxed\">The ban worked, and it broke something no article warned her about. A military mom’s game-by-game ver",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.83 (foreground color: #787775, background color: #f0edea, font size: 10.5pt (14px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            "li:nth-child(3) > .h-full.group.flex-col > .pt-5.gap-2.flex-col > .text-xs.text-red.tracking-\\[0\\.15em\\]"
+          ],
+          "html": "<span class=\"font-body text-xs font-bold text-red tracking-[0.15em] uppercase\">Perspective</span>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.38 (foreground color: #f92524, background color: #f0edea, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio "
+        },
+        {
+          "target": [
+            "li:nth-child(3) > .h-full.group.flex-col > .pt-5.gap-2.flex-col > .text-black\\/50.leading-relaxed.text-sm"
+          ],
+          "html": "<p class=\"font-body text-black/50 text-sm leading-relaxed\">Are online gaming friends real? The question isn’t online vs offline. It’s whether he’s alone in a lo",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.83 (foreground color: #787775, background color: #f0edea, font size: 10.5pt (14px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            ".bg-transparent"
+          ],
+          "html": "<button type=\"button\" class=\"inline-flex items-center justify-center px-5 py-4 rounded-sm text-base font-bold font-body transition-all duration-150 whitespace-n",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio"
+        },
+        {
+          "target": [
+            ".border-none"
+          ],
+          "html": "<button type=\"submit\" class=\"h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-none cursor-pointer transition-all hover:brightness-1",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 10.5pt (14px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            ".text-black\\/40.text-sm"
+          ],
+          "html": "<p class=\"font-body text-sm text-black/40\">© All rights reserved.</p>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast rat"
+        },
+        {
+          "target": [
+            ".md\\:text-lg"
+          ],
+          "html": "<button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-po",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio"
+        }
+      ]
+    },
+    {
+      "id": "landmark-one-main",
+      "impact": "moderate",
+      "help": "Document should have one main landmark",
+      "nodes": [
+        {
+          "target": [
+            "html"
+          ],
+          "html": "<html lang=\"en\" class=\"inter_c15e96cb-module__0bjUvq__variable tungstenother_51fde2e9-module___TyYPW__variable tungstenblack_bab7a380-module__tzryua__variable h",
+          "summary": "Fix all of the following:\n  Document does not have a main landmark"
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "impact": "moderate",
+      "help": "All page content should be contained by landmarks",
+      "nodes": [
+        {
+          "target": [
+            ".max-w-\\[1232px\\].mx-auto.relative"
+          ],
+          "html": "<div class=\"max-w-[1232px] mx-auto relative\" style=\"padding-left:clamp(1.5rem, 7.2vw, 104px);padding-right:clamp(1.5rem, 7.2vw, 104px);padding-top:188px;padding",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".mb-20"
+          ],
+          "html": "<div class=\"max-w-[1232px] mx-auto mb-20\" style=\"padding-left:clamp(1.5rem, 7.2vw, 104px);padding-right:clamp(1.5rem, 7.2vw, 104px)\">",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".w-11"
+          ],
+          "html": "<img alt=\"Karlin Oei\" loading=\"lazy\" width=\"64\" height=\"64\" decoding=\"async\" data-nimg=\"1\" class=\"shrink-0 rounded-ful...\" style=\"color:transparent\" sizes=\"64px",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".text-black\\/60.text-sm"
+          ],
+          "html": "<span class=\"font-body text-black/60 text-sm\">by<!-- --> <a rel=\"author\" class=\"hover:text-red transition-colors\" href=\"/blog/author/karlin-oei\"><strong class=\"",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".items-baseline > span:nth-child(1)"
+          ],
+          "html": "<span>Founder of EKUZO</span>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".items-baseline > span:nth-child(3)"
+          ],
+          "html": "<span>Updated<!-- --> <!-- -->October 12, 2026</span>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "span:nth-child(5)"
+          ],
+          "html": "<span>8<!-- --> min read</span>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".blog-content > p:nth-child(1)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".blog-content > p:nth-child(2)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".blog-content > p:nth-child(3)"
+          ],
+          "html": "<p>My first reaction was “duh.” My second, after I read the paper, was that the number everyone was repeating isn't in it. The replies were the interesting part",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(4)"
+          ],
+          "html": "<h2>Why “duh”</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(5)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(6)"
+          ],
+          "html": "<p>The one place I did break out was online. Playing with friends and with randoms, people I'd never have said a word to in a room, because we had the game in c",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(7)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(8)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(9)"
+          ],
+          "html": "<h2>The reply that mattered</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(10)"
+          ],
+          "html": "<p>The most-liked reply under the original post was eleven words, and the doctor who posted the study answered “True.”</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".blog-content > blockquote"
+          ],
+          "html": "<blockquote><p>“The kind of gaming probably matters as much as the hours.”</p><p>@CraigBrockie, 1.1K likes when I read it on September 15</p></blockquote>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(12)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(13)"
+          ],
+          "html": "<h2>What a thousand replies said</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(14)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(15)"
+          ],
+          "html": "<p><strong>The vindicated, one in six.</strong> <!-- -->“A win for gamers.” No one was arguing; they were updating how they felt about themselves. That was me a",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(16)"
+          ],
+          "html": "<p><strong>The permission seekers, one in ten.</strong> <!-- -->Taking the post straight to whoever had been telling them to stop. My mom didn't have a study. S",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(17)"
+          ],
+          "html": "<p><strong>The “which games” crowd, one in twelve.</strong> <!-- -->StarCraft counts, Candy Crush doesn't. The study couldn't test that; too few action-game pla",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "div[aria-label=\"Four camps, in their own words\"]"
+          ],
+          "html": "<div class=\"my-8\" aria-label=\"Four camps, in their own words\">",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(19)"
+          ],
+          "html": "<h2>The parents who didn't get an answer</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(20)"
+          ],
+          "html": "<p>I counted about 120 questions: which games, what age, how many hours, is it better than sports. Not one got an answer. The few dozen parents talking about th",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "div[aria-label=\"The parents in the thread\"]"
+          ],
+          "html": "<div class=\"my-8\" aria-label=\"The parents in the thread\">",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(22)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".my-10"
+          ],
+          "html": "<div class=\"my-10 mx-auto w-full max-w-[560px]\">",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(24)"
+          ],
+          "html": "<p>In June a parent emailed me. Her son, who fences and plays lacrosse and flag football, had to write a sixth-grade entrance essay on his greatest achievement.",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".mt-3"
+          ],
+          "html": "<p class=\"font-body text-black/70 text-sm text-center mt-3\" style=\"max-width:540px\">Karlin on the email that made him cry: a multi-sport kid's greatest achievem",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(26)"
+          ],
+          "html": "<h2>What the study found, and what it didn't</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(27)"
+          ],
+          "html": "<p>Not my specialty. My read, checked against the paper.</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "ul:nth-child(28)"
+          ],
+          "html": "<ul>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(29)"
+          ],
+          "html": "<h2>Where I stop</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(30)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(31)"
+          ],
+          "html": "<p>So: the study is real, the number isn't the paper's, and a thousand strangers handed a study about hours spent three days talking about which game and who's ",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(32)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(33)"
+          ],
+          "html": "<h2>Common questions</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h3:nth-child(34)"
+          ],
+          "html": "<h3>Which games did the study look at?</h3>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(35)"
+          ],
+          "html": "<p>It grouped games by broad type and had too few action-game players to compare genres, so it can't tell you which games.</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(36)"
+          ],
+          "html": "<p>“The kind of gaming probably matters as much as the hours” is a reasonable working assumption, and it's how I choose what to coach. That's my design choice, ",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h3:nth-child(37)"
+          ],
+          "html": "<h3>Is gaming good for kids' brains?</h3>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(38)"
+          ],
+          "html": "<p>This study can't answer that; no one under 18 was in it.</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(39)"
+          ],
+          "html": "<p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h3:nth-child(40)"
+          ],
+          "html": "<h3>How many hours is the right amount?</h3>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(41)"
+          ],
+          "html": "<p>The paper's threshold for “frequent” was three or more hours a week across any game; the press release used five or more on one game. Neither is a recommenda",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(42)"
+          ],
+          "html": "<p>The study compared three groups rather than testing a dose, so it can't tell you what happens above its own threshold. The 2026 review by Nagata and colleagu",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h3:nth-child(43)"
+          ],
+          "html": "<h3>Does the study prove gaming beats exercise?</h3>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(44)"
+          ],
+          "html": "<p>No. Different associations with different outcomes: gaming with the cognitive scores, exercise with the mood screeners, neither with the other. Cross-section",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h3:nth-child(45)"
+          ],
+          "html": "<h3>How do I get my kid off the game without the attitude?</h3>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(46)"
+          ],
+          "html": "<p>Set the end before the start, and make the ending part of the activity instead of an interruption to it. Teams and coaches do this for sports without anyone ",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "p:nth-child(47)"
+          ],
+          "html": "<p>It's the single most useful thing I've borrowed from sports, and the reason my sessions have a schedule a kid can see.</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "h2:nth-child(48)"
+          ],
+          "html": "<h2>Sources</h2>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            "ul:nth-child(49)"
+          ],
+          "html": "<ul>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".text-right"
+          ],
+          "html": "<p class=\"text-right\">Karlin, founder of EKUZO</p>",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".bg-\\[\\#f0edea\\]"
+          ],
+          "html": "<section class=\"bg-[#f0edea] relative overflow-clip\" style=\"padding-top:clamp(80px, 10vw, 144px);padding-bottom:clamp(80px, 10vw, 144px);padding-left:clamp(1.5r",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        },
+        {
+          "target": [
+            ".md\\:items-start > h2"
+          ],
+          "html": "<h2 class=\"font-body font-bold text-white\" style=\"font-size:clamp(2rem, 4.5vw, 56px);line-height:1.1;max-width:14em\">Season 01 starts in 2027. Get them on the l",
+          "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+        }
+      ]
+    }
+  ]
+}

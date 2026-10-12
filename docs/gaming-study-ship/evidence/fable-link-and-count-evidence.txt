@@ -1,0 +1,13 @@
+# D-02 live check, 2026-10-12T04:43:46Z
+https://ekuzo.gg/images/new%20torn%20paper/torn-paper-red-top-2@2x.png -> 200 image/png 29810B
+
+# S-006 JAMA links (Fable, browser pane, 2026-10-12 ~03:10 UTC)
+https://doi.org/10.1001/jamanetworkopen.2023.6895 -> https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2803642 , title: Notice of Retraction and Replacement. Chaarani B, et al. Association of Video Gaming With Cognitive Performance Among Children. JAMA Network Open. 2022;5(10):e2235721.
+That notice page links 'View Article' and 'Article' to https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596
+fullarticle/2797596 itself shows a Cloudflare bot check ('Just a moment...') to the automated browser; not bypassed. Crossref title for 2797596 per evidence/static/links-table.md. Jamie clicks once on ship day.
+
+# CP-7 / CP-14 view-count reads
+Original post 17.2M views, 684 replies, 3.2K reposts, 18K likes, 9.4K bookmarks: Jamie's phone screenshot 2026-10-11 6:42 PM CT (handoff, S4). Not on disk here.
+Quote-posts 5.8M and 7.9M, about 33M across eight posts: logged-out read 2026-10-06 01:41 UTC (claims register, Numbers that expire).
+More than 30M across the wave by the Sep 15 read: claims register and the September build.
+Ship-day re-read of the two quote-posts: pending, Jamie (login needed).

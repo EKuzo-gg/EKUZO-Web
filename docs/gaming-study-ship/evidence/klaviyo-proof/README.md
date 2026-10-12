@@ -1,0 +1,2 @@
+Klaviyo-side proof, 2026-10-12 04:01 to 04:03 UTC. Local `next start -p 3313` with META_CAPI_ACCESS_TOKEN empty, BEEHIIV/RESEND fake, Sheets empty, real Klaviyo key from .env.local (never printed). Browser behind the default-deny proxy on 39013, POST not intercepted.
+Files: flow-check.txt, server.log (Meta skip line twice, subscribe 403 twice), proxy-log.jsonl (all entries are Chrome background hosts, every one denied, nothing forwarded), browser-run.json (POST bodies and responses), readback.json, kvproof.mjs (driver).

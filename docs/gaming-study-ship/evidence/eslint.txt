@@ -1,0 +1,15 @@
+  16:15  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  17:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  18:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/scripts/trace-torn-paper.js
+   19:15  error    A `require()` style import is forbidden               @typescript-eslint/no-require-imports
+   20:14  error    A `require()` style import is forbidden               @typescript-eslint/no-require-imports
+   38:7   warning  'SLOPE_THRESHOLD' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   39:7   warning  'MAX_GAP' is assigned a value but never used          @typescript-eslint/no-unused-vars
+   40:7   warning  'MIN_GAP' is assigned a value but never used          @typescript-eslint/no-unused-vars
+   96:9   warning  'last' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  124:3   error    A `require()` style import is forbidden               @typescript-eslint/no-require-imports
+
+✖ 308 problems (93 errors, 215 warnings)
+

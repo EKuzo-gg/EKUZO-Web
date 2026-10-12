@@ -1,0 +1,29 @@
+$ git diff --stat origin/main HEAD -- app/api/season-one lib/seasonOne.ts lib/metaCapi.ts components/ui/SeasonOnePopup.tsx components/ui/SeasonOneTrigger.tsx app/season1 middleware.ts app/api/webhooks app/api/camps app/api/ekuzo100 app/api/teams
+[exit 0 ; output above empty = PASS]
+
+$ git diff --stat origin/main HEAD -- . ':!docs'
+ WORKLOG.md                                                               |  75 ++++++++++++
+ app/api/contact/route.ts                                                 |  23 +++-
+ app/api/newsletter/route.ts                                              |  44 ++++++-
+ app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx | 785 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ app/blog/league-of-legends-youth-development/page.tsx                    |  11 ++
+ app/blog/page.tsx                                                        |  17 ++-
+ app/blog/should-you-ban-fortnite/page.tsx                                |  10 ++
+ app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx         |   9 ++
+ app/blog/what-your-kids-gaming-is-telling-you/page.tsx                   |   9 ++
+ app/blog/when-your-sons-only-friends-are-online/page.tsx                 |  12 +-
+ app/layout.tsx                                                           |   4 +
+ app/sitemap.ts                                                           |   6 +
+ components/blog/ReplyQuoteCards.tsx                                      | 210 ++++++++++++++++++++++++++++++++
+ components/ui/ContactModal.tsx                                           |  42 ++++++-
+ components/ui/NewsletterPopup.tsx                                        | 468 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------
+ components/ui/StickyCTA.tsx                                              | 147 ++++++++++++++++++++++-
+ lib/analytics.ts                                                         |  26 ++++
+ lib/newsletterAb.ts                                                      | 151 +++++++++++++++++++++++
+ public/images/gaming-study-13-7-card.jpg                                 | Bin 0 -> 94471 bytes
+ public/images/gaming-study-13-7-hero.jpg                                 | Bin 0 -> 242166 bytes
+ public/images/gaming-study-same-game-two-hours.png                       | Bin 0 -> 46091 bytes
+ public/llms.txt                                                          |   1 +
+ public/research/gaming-cognition-reanalysis-output.txt                   | 448 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ public/research/gaming-cognition-reanalysis.py                           | 610 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 24 files changed, 3004 insertions(+), 104 deletions(-)

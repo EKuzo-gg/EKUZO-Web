@@ -1,0 +1,3 @@
+SERVER mode OFF sentinels Sun Oct 11 22:46:16 CDT 2026
+HTTP/1.1 200 OK
+   3 Enroll my gamer

@@ -1,0 +1,31 @@
+CONSOLE ERRORS ON THE POST, per viewport (production build, Season 01 on, guarded browser)
+Note: requests to blocked third-party hosts (gtag, fbevents, clarity) are expected to fail by design and are listed separately, not counted as site errors.
+
+== viewport 1440: own console errors 1, uncaught page errors 0, local HTTP >=400 1, blocked-vendor console errors 3
+  console.error: Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  http 404 http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  external requests intercepted: connect.facebook.net, www.clarity.ms, www.googletagmanager.com, www.instagram.com
+== viewport 1024: own console errors 1, uncaught page errors 0, local HTTP >=400 1, blocked-vendor console errors 3
+  console.error: Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  http 404 http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  external requests intercepted: connect.facebook.net, www.clarity.ms, www.googletagmanager.com, www.instagram.com
+== viewport 768: own console errors 1, uncaught page errors 0, local HTTP >=400 1, blocked-vendor console errors 3
+  console.error: Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  http 404 http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  external requests intercepted: connect.facebook.net, www.clarity.ms, www.googletagmanager.com, www.instagram.com
+== viewport 375: own console errors 1, uncaught page errors 0, local HTTP >=400 1, blocked-vendor console errors 3
+  console.error: Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  http 404 http://localhost:3311/images/new%20torn%20paper/torn-paper-red-top-2@2x.png
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  (vendor, expected) Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector
+  external requests intercepted: connect.facebook.net, www.clarity.ms, www.googletagmanager.com, www.instagram.com

@@ -729,6 +729,17 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 esports scholarships, and now builds the coaching system he
                 wishes he&apos;d had as a kid.
               </p>
+              <p>
+                When{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>{" "}
+                went around, the most-liked reply under the original post was
+                &ldquo;The kind of gaming probably matters as much as the
+                hours,&rdquo; which is this whole page in eleven words. The 13.7
+                isn&apos;t in the paper. I wrote up what is, and what it means
+                for your kid.
+              </p>
           </BlogPostBody>
         </div>
       </article>

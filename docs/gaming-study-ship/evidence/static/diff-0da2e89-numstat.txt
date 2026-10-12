@@ -1,0 +1,13 @@
+306	0	app/api/season-one/route.ts
+115	48	app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+8	8	app/blog/league-of-legends-youth-development/page.tsx
+6	8	app/blog/page.tsx
+7	6	app/blog/should-you-ban-fortnite/page.tsx
+9	8	app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+6	6	app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+11	1	app/blog/when-your-sons-only-friends-are-online/page.tsx
+10	5	app/layout.tsx
+1093	0	app/season1/landing.html
+21	0	app/season1/route.ts
+6	0	app/sitemap.ts
+1	0	public/llms.txt

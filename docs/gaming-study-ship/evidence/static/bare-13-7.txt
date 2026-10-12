@@ -1,0 +1,29 @@
+[RENDERED gaming-study-13-7-years-younge] ...'nd the one that mattered wasn’t about the study. [IMG alt: A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped note under it reads “not in the paper.” Sticky notes as'
+[RENDERED gaming-study-13-7-years-younge] ...'e gaming caused that, and no one under 18 was in it, so it tells you nothing about your twelve-year-old. The “13.7 years younger” line came from a 2024 press release that counted gaming differently. I think the better questi'
+[RENDERED gaming-study-13-7-years-younge] ...' put up a study abstract and one sentence: frequent gamers performed on cognitive tests like non-gamers about 13.7 years younger. Counting the posts that quoted it, it passed 30 million views in its first week. For three day'
+[RENDERED gaming-study-13-7-years-younge] ..."e 2010 Nature study that found brain-training games don't transfer (Owen et al.). Hard to convince. Dubious. “13.7 years younger.” It's from a 2024 press release with a different definition of “frequent”; the paper never con"
+[RENDERED gaming-study-13-7-years-younge] ...'erences “very small” (Chaarani et al.; notice). Anyone quoting the first half without the second is doing the 13.7 thing again. Where I stop Time in a game displaces something, and this study measured neither sleep nor what '
+[RENDERED what-your-kids-gaming-is-telli] ..."goal is to help gaming become something your child can grow through. — Karlin, founder of EKUZO If the viral “13.7 years younger” gaming study is why you're here, that number isn't in the paper. I read about a thousand of th"
+[RENDERED league-of-legends-youth-develo] ..."through esports scholarships, and now builds the coaching system he wishes he'd had as a kid. When the viral “13.7 years younger” gaming study went around, the most-liked reply under the original post was “The kind of gaming"
+[RENDERED league-of-legends-youth-develo] ..."was “The kind of gaming probably matters as much as the hours,” which is this whole page in eleven words. The 13.7 isn't in the paper. I wrote up what is, and what it means for your kid. [IMG alt: ] Keep Reading [IMG alt: Vi"
+[RENDERED should-you-ban-fortnite] ..."ive use of social media, not total time, associated with youth mental health (2025). Related: when the viral “13.7 years younger” gaming study went around (the number isn't in the paper, and the study was of adults), parents"
+[RENDERED what-homeschool-parents-taught] ..." wrote that one here. This piece has a sibling. I ran the same read on about a thousand replies to the viral “13.7 years younger” gaming study. That number isn't in the paper. The replies sorted into camps there too. Karlin "
+[RENDERED when-your-sons-only-friends-ar] ..."ctive? The answers tell you whether to worry, and what to do about it. The same idea surfaced when the viral “13.7 years younger” gaming study made the rounds (the number isn't in the paper; Karlin, our founder, read about a"
+[HEAD] <title>Is gaming good for your brain? The “13.7 years younger” study, for parents | EKUZO</title>
+[HEAD] <meta name="description" content="A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old."/>
+[HEAD] <meta property="og:title" content="Is gaming good for your brain? The “13.7 years younger” study, for parents"/>
+[HEAD] <meta property="og:description" content="A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old."/>
+[HEAD] <meta name="twitter:title" content="Is gaming good for your brain? The “13.7 years younger” study, for parents"/>
+[HEAD] <meta name="twitter:description" content="A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old."/>
+[JSONLD#1] ...'ing study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old.","image":"https://ekuzo.gg/images/gaming-s'
+[llms.txt] ...'ing study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old.\n- [Should you ban Fortnite? What happened '
+grep 13.7M (app public/llms.txt rendered text and html):
+exit=1 (1 = no hits)
+
+source-level comments mentioning combined figure:
+22: * Newsjack answer page for the September 2026 "gamers test 13.7 years
+35:const SLUG = "gaming-study-13-7-years-younger-what-it-means-for-kids";
+46:const HERO_IMAGE = "/images/gaming-study-13-7-hero.jpg";
+47:const SHARE_IMAGE = "/images/gaming-study-13-7-card.jpg";
+349:              performed on cognitive tests like non-gamers about 13.7 years
+588:                the 13.7 thing again.

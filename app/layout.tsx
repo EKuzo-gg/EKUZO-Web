@@ -228,6 +228,10 @@ export default function RootLayout({
           {!SEASON_ONE_MODE && process.env.NEXT_PUBLIC_NEWSLETTER_POPUP_ENABLED === "true" && (
             <NewsletterPopup />
           )}
+          {/* Blog popup: independent of the homepage rollout switch above,
+              since it only ever renders on blog post pages (isBlogPostPath).
+              Off while Season 01 mode is on, so a post carries one ask. */}
+          {!SEASON_ONE_MODE && <NewsletterPopup mode="blog" />}
         </ModalProvider>
       </body>
     </html>

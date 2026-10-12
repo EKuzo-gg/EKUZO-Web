@@ -1,0 +1,12 @@
+SERVER B (origin/main a449abc) sentinels
+HTTP/1.1 307 Temporary Redirect
+location: /programs/ekuzo-camps?join=season-one
+Join Season 01
+3311 images/new%20torn%20paper/torn-paper-red-top-2@2x.png -> 404 text/html; charset=utf-8
+3312 images/new%20torn%20paper/torn-paper-red-top-2@2x.png -> 404 text/html; charset=utf-8
+3311 images/new%20torn%20paper/torn-paper-red-top-2%402x.png -> 200 image/png
+3312 images/new%20torn%20paper/torn-paper-red-top-2%402x.png -> 200 image/png
+3311 _next/image?url=%2Fimages%2Fnew%2520torn%2520paper%2Ftorn-paper-red-top-2%402x.png&w=3840&q=75 -> 400 
+3312 _next/image?url=%2Fimages%2Fnew%2520torn%2520paper%2Ftorn-paper-red-top-2%402x.png&w=3840&q=75 -> 400 
+3311 _next/image?url=%2Fimages%2Fnew%2520torn%2520paper%2Ftorn-paper-red-top-2@2x.png&w=3840&q=75 -> 400 
+3312 _next/image?url=%2Fimages%2Fnew%2520torn%2520paper%2Ftorn-paper-red-top-2@2x.png&w=3840&q=75 -> 400 

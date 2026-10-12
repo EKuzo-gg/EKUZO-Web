@@ -1,0 +1,15 @@
+# TG-1 at HEAD 8cfe704, 2026-10-12T04:43:43Z
+## tsc
+tsc exit 0
+## eslint (files this run changed)
+
+/Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/app/layout.tsx
+  186:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+✖ 1 problem (0 errors, 1 warning)
+
+eslint exit 0
+## bundle
+40700	.next/server
+mp4 files under .next: 0
+       0

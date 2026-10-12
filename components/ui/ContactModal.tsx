@@ -4,6 +4,17 @@ import { useState } from "react";
 import { useModal } from "@/context/ModalContext";
 import { trackLead } from "@/lib/analytics";
 
+const HEARD_ABOUT_OPTIONS = [
+  { value: "x", label: "X (Twitter)" },
+  { value: "instagram", label: "Instagram" },
+  { value: "tiktok-youtube", label: "TikTok or YouTube" },
+  { value: "google", label: "Google search" },
+  { value: "ai", label: "ChatGPT or another AI" },
+  { value: "friend", label: "A friend or another parent" },
+  { value: "school", label: "My kid's school" },
+  { value: "other", label: "Other" },
+] as const;
+
 export default function ContactModal() {
   const { closeModal } = useModal();
   const [contactMethod, setContactMethod] = useState<"email" | "text">("email");
@@ -13,12 +24,13 @@ export default function ContactModal() {
     email: "",
     phone: "",
     message: "",
+    heardAbout: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -39,6 +51,7 @@ export default function ContactModal() {
             : { phone: formData.phone }),
           message: formData.message,
           pageUrl: window.location.href,
+          ...(formData.heardAbout ? { heardAbout: formData.heardAbout } : {}),
         }),
       });
       if (!res.ok) throw new Error("Submission failed");
@@ -211,6 +224,33 @@ export default function ContactModal() {
                   className="font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors resize-none"
                   placeholder="Tell us a bit about what you're looking for…"
                 />
+              </div>
+
+              {/* How did you hear about us */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="contact-heard-about"
+                  className="font-body font-medium text-black text-sm"
+                >
+                  How did you hear about us?
+                </label>
+                <select
+                  id="contact-heard-about"
+                  name="heardAbout"
+                  value={formData.heardAbout}
+                  onChange={handleChange}
+                  className="font-body text-base text-black border border-black/20 rounded-sm p-3 outline-none focus:border-black transition-colors"
+                >
+                  <option value="">Choose one</option>
+                  {HEARD_ABOUT_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <p className="font-body text-sm text-black/60">
+                  Optional. It tells us where parents are finding us.
+                </p>
               </div>
 
               {/* Submit */}

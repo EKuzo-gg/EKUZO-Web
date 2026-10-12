@@ -1,0 +1,487 @@
+{
+  "shortAnswer": {
+    "375": {
+      "start": "Short answer: one study of 923 adults, average age 55, found",
+      "json": "\"Short answer: one study of 923 adults, averag\"",
+      "html": "<strong>Short answer:</strong> <!-- -->one study of 923 adults, average age 55, found that people who game three or more hours a week scored",
+      "inner": "Short answer: one study of 923 adults, a"
+    },
+    "1440": {
+      "start": "Short answer: one study of 923 adults, average age 55, found",
+      "json": "\"Short answer: one study of 923 adults, averag\"",
+      "html": "<strong>Short answer:</strong> <!-- -->one study of 923 adults, average age 55, found that people who game three or more hours a week scored",
+      "inner": "Short answer: one study of 923 adults, a"
+    },
+    "servedHtml": "Short answer:</strong> <!-- -->one study",
+    "servedP": "<p><strong>Short answer:</strong> <!-- -->one study of 923 adults, average age 55, found that people who game three or more hours a week scored higher than non-gamers on memory, reasoning and processing-speed tests. It can&#x27;t say the gaming caused that, and no one under 18 was in it, so it tells"
+  },
+  "hero": [
+    {
+      "label": "375x667 DPR2",
+      "currentSrc": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75",
+      "srcset": "/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75 3840w",
+      "sizes": "(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px",
+      "nw": 992,
+      "nh": 520,
+      "rw": 321,
+      "rh": 520,
+      "fit": "cover",
+      "dpr": 2,
+      "vw": 375,
+      "loading": "auto",
+      "parentH": 520,
+      "drawnW_fromContract": 990.5,
+      "drawnW_fromFile": 992,
+      "ratio": 0.501,
+      "wParam": "2048",
+      "maxCand": 3840,
+      "srcsetWidths": "640 640w, 750 750w, 828 828w, 1080 1080w, 1200 1200w, 1920 1920w, 2048 2048w, 3840 3840w",
+      "pass": false,
+      "shot": "hero-375d2.png"
+    },
+    {
+      "label": "375x667 DPR3",
+      "currentSrc": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75",
+      "srcset": "/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75 3840w",
+      "sizes": "(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px",
+      "nw": 620,
+      "nh": 325,
+      "rw": 321,
+      "rh": 520,
+      "fit": "cover",
+      "dpr": 3,
+      "vw": 375,
+      "loading": "auto",
+      "parentH": 520,
+      "drawnW_fromContract": 990.5,
+      "drawnW_fromFile": 992,
+      "ratio": 0.209,
+      "wParam": "3840",
+      "maxCand": 3840,
+      "srcsetWidths": "640 640w, 750 750w, 828 828w, 1080 1080w, 1200 1200w, 1920 1920w, 2048 2048w, 3840 3840w",
+      "pass": true,
+      "shot": "hero-375d3.png"
+    },
+    {
+      "label": "768x1024 DPR2",
+      "currentSrc": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75",
+      "srcset": "/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75 3840w",
+      "sizes": "(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px",
+      "nw": 992,
+      "nh": 520,
+      "rw": 657.4375,
+      "rh": 520,
+      "fit": "cover",
+      "dpr": 2,
+      "vw": 768,
+      "loading": "auto",
+      "parentH": 520,
+      "drawnW_fromContract": 990.5,
+      "drawnW_fromFile": 992,
+      "ratio": 0.501,
+      "wParam": "2048",
+      "maxCand": 3840,
+      "srcsetWidths": "640 640w, 750 750w, 828 828w, 1080 1080w, 1200 1200w, 1920 1920w, 2048 2048w, 3840 3840w",
+      "pass": false,
+      "shot": "hero-768d2.png"
+    },
+    {
+      "label": "1440x900 DPR1",
+      "currentSrc": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75",
+      "srcset": "/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75 3840w",
+      "sizes": "(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px",
+      "nw": 1232,
+      "nh": 646,
+      "rw": 1024.65625,
+      "rh": 520,
+      "fit": "cover",
+      "dpr": 1,
+      "vw": 1440,
+      "loading": "auto",
+      "parentH": 520,
+      "drawnW_fromContract": 1024.7,
+      "drawnW_fromFile": 1024.7,
+      "ratio": 1.202,
+      "wParam": "1920",
+      "maxCand": 3840,
+      "srcsetWidths": "640 640w, 750 750w, 828 828w, 1080 1080w, 1200 1200w, 1920 1920w, 2048 2048w, 3840 3840w",
+      "pass": true,
+      "shot": "hero-1440d1.png"
+    },
+    {
+      "label": "1440x900 DPR2",
+      "currentSrc": "http://localhost:3311/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75",
+      "srcset": "/_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=3840&q=75 3840w",
+      "sizes": "(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px",
+      "nw": 770,
+      "nh": 404,
+      "rw": 1024.65625,
+      "rh": 520,
+      "fit": "cover",
+      "dpr": 2,
+      "vw": 1440,
+      "loading": "auto",
+      "parentH": 520,
+      "drawnW_fromContract": 1024.7,
+      "drawnW_fromFile": 1024.7,
+      "ratio": 0.376,
+      "wParam": "3840",
+      "maxCand": 3840,
+      "srcsetWidths": "640 640w, 750 750w, 828 828w, 1080 1080w, 1200 1200w, 1920 1920w, 2048 2048w, 3840 3840w",
+      "pass": true,
+      "shot": "hero-1440d2.png"
+    }
+  ],
+  "overflow": [
+    {
+      "vp": "375d2",
+      "tag": "post",
+      "innerWidth": 375,
+      "clientWidth": 375,
+      "docScrollWidth": 375,
+      "bodyScrollWidth": 908,
+      "vv": 375,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 17104,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 908,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        }
+      ],
+      "offenderCount": 1,
+      "offendersUnclipped": 1,
+      "swipe": {
+        "x0": 0,
+        "x1": 0,
+        "y": 600
+      }
+    },
+    {
+      "vp": "375d2",
+      "tag": "fortnite",
+      "innerWidth": 375,
+      "clientWidth": 375,
+      "docScrollWidth": 375,
+      "bodyScrollWidth": 908,
+      "vv": 375,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 13812,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 908,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        }
+      ],
+      "offenderCount": 1,
+      "offendersUnclipped": 1,
+      "swipe": {
+        "x0": 0,
+        "x1": 0,
+        "y": 600
+      }
+    },
+    {
+      "vp": "375d2",
+      "tag": "friends",
+      "innerWidth": 375,
+      "clientWidth": 375,
+      "docScrollWidth": 375,
+      "bodyScrollWidth": 908,
+      "vv": 375,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 15439,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 908,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        },
+        {
+          "tag": "A",
+          "cls": "",
+          "right": 414,
+          "width": 363,
+          "clippedByAncestor": true,
+          "pos": "static"
+        }
+      ],
+      "offenderCount": 2,
+      "offendersUnclipped": 1,
+      "swipe": {
+        "x0": 0,
+        "x1": 0,
+        "y": 600
+      }
+    },
+    {
+      "vp": "768d1",
+      "tag": "post",
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "docScrollWidth": 768,
+      "bodyScrollWidth": 1104,
+      "vv": 768,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 11956,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1104,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        },
+        {
+          "tag": "DIV",
+          "cls": "flex flex-col sm:flex-row items-start sm:items-center gap-3",
+          "right": 882,
+          "width": 498,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "FORM",
+          "cls": "flex gap-2 w-full sm:w-auto",
+          "right": 882,
+          "width": 339,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-no",
+          "right": 882,
+          "width": 91,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "INPUT",
+          "cls": "h-10 px-3 rounded-md border border-black/15 bg-white text-black text-sm font-bod",
+          "right": 783,
+          "width": 240,
+          "clippedByAncestor": false,
+          "pos": "static"
+        }
+      ],
+      "offenderCount": 5,
+      "offendersUnclipped": 5,
+      "swipe": null
+    },
+    {
+      "vp": "768d1",
+      "tag": "fortnite",
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "docScrollWidth": 768,
+      "bodyScrollWidth": 1104,
+      "vv": 768,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 8811,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1104,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        },
+        {
+          "tag": "DIV",
+          "cls": "flex flex-col sm:flex-row items-start sm:items-center gap-3",
+          "right": 882,
+          "width": 498,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "FORM",
+          "cls": "flex gap-2 w-full sm:w-auto",
+          "right": 882,
+          "width": 339,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-no",
+          "right": 882,
+          "width": 91,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "INPUT",
+          "cls": "h-10 px-3 rounded-md border border-black/15 bg-white text-black text-sm font-bod",
+          "right": 783,
+          "width": 240,
+          "clippedByAncestor": false,
+          "pos": "static"
+        }
+      ],
+      "offenderCount": 5,
+      "offendersUnclipped": 5,
+      "swipe": null
+    },
+    {
+      "vp": "768d1",
+      "tag": "friends",
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "docScrollWidth": 768,
+      "bodyScrollWidth": 1104,
+      "vv": 768,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 10533,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1104,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        },
+        {
+          "tag": "DIV",
+          "cls": "flex flex-col sm:flex-row items-start sm:items-center gap-3",
+          "right": 882,
+          "width": 498,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "FORM",
+          "cls": "flex gap-2 w-full sm:w-auto",
+          "right": 882,
+          "width": 339,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "h-10 px-5 rounded-md bg-red text-white text-sm font-semibold font-body border-no",
+          "right": 882,
+          "width": 91,
+          "clippedByAncestor": false,
+          "pos": "static"
+        },
+        {
+          "tag": "INPUT",
+          "cls": "h-10 px-3 rounded-md border border-black/15 bg-white text-black text-sm font-bod",
+          "right": 783,
+          "width": 240,
+          "clippedByAncestor": false,
+          "pos": "static"
+        }
+      ],
+      "offenderCount": 5,
+      "offendersUnclipped": 5,
+      "swipe": null
+    },
+    {
+      "vp": "1024d1",
+      "tag": "post",
+      "innerWidth": 1024,
+      "clientWidth": 1024,
+      "docScrollWidth": 1024,
+      "bodyScrollWidth": 1232,
+      "vv": 1024,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 12488,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1232,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        }
+      ],
+      "offenderCount": 1,
+      "offendersUnclipped": 1,
+      "swipe": null
+    },
+    {
+      "vp": "1024d1",
+      "tag": "fortnite",
+      "innerWidth": 1024,
+      "clientWidth": 1024,
+      "docScrollWidth": 1024,
+      "bodyScrollWidth": 1232,
+      "vv": 1024,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 9070,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1232,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        }
+      ],
+      "offenderCount": 1,
+      "offendersUnclipped": 1,
+      "swipe": null
+    },
+    {
+      "vp": "1024d1",
+      "tag": "friends",
+      "innerWidth": 1024,
+      "clientWidth": 1024,
+      "docScrollWidth": 1024,
+      "bodyScrollWidth": 1232,
+      "vv": 1024,
+      "bodyOverflowX": "clip",
+      "htmlOverflowX": "clip",
+      "docH": 10894,
+      "scrollXAfterScrollTo200": 0,
+      "offenders": [
+        {
+          "tag": "IMG",
+          "cls": "absolute left-1/2 z-20 pointer-events-none select-none",
+          "right": 1232,
+          "width": 1440,
+          "clippedByAncestor": false,
+          "pos": "absolute"
+        }
+      ],
+      "offenderCount": 1,
+      "offendersUnclipped": 1,
+      "swipe": null
+    }
+  ]
+}

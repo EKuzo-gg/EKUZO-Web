@@ -1,0 +1,214 @@
+=== 3195327
+3195327 content(blog): gaming-study ship changes C1-C10 (less C2, C7), final images, one ask per post in Season 01 mode
+
+app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+app/blog/page.tsx
+app/layout.tsx
+app/sitemap.ts
+components/ui/StickyCTA.tsx
+docs/gaming-study-ship/01-requirements.md
+docs/gaming-study-ship/02-frozen-spec.md
+docs/gaming-study-ship/02a-copy-deck.md
+docs/gaming-study-ship/02b-contract-and-preflight.md
+docs/gaming-study-ship/03-atlas-build-notes.md
+docs/gaming-study-ship/03-decision-log.md
+docs/gaming-study-ship/06-cleanup-ledger.md
+docs/gaming-study-ship/evidence/README-harness.md
+docs/gaming-study-ship/evidence/console-post.txt
+docs/gaming-study-ship/evidence/eslint-changed-files.txt
+docs/gaming-study-ship/evidence/eslint.txt
+docs/gaming-study-ship/evidence/guard-selftest.txt
+docs/gaming-study-ship/evidence/head-and-schema.txt
+docs/gaming-study-ship/evidence/next-build.txt
+docs/gaming-study-ship/reviews/01-auditor-requirements.md
+docs/gaming-study-ship/reviews/02-parent-copy-deck.md
+docs/gaming-study-ship/reviews/02-steward-copy-deck.md
+docs/gaming-study-ship/screenshots/blog-1440-full.png
+docs/gaming-study-ship/screenshots/blog-1440-top.png
+docs/gaming-study-ship/screenshots/blog-375-full.png
+docs/gaming-study-ship/screenshots/blog-375-top.png
+docs/gaming-study-ship/screenshots/post-1024-byline.png
+docs/gaming-study-ship/screenshots/post-1024-full.png
+docs/gaming-study-ship/screenshots/post-1024-hero.png
+docs/gaming-study-ship/screenshots/post-1024-top.png
+docs/gaming-study-ship/screenshots/post-1440-byline.png
+docs/gaming-study-ship/screenshots/post-1440-footerbanner.png
+docs/gaming-study-ship/screenshots/post-1440-full.png
+docs/gaming-study-ship/screenshots/post-1440-graphic.png
+docs/gaming-study-ship/screenshots/post-1440-hero.png
+docs/gaming-study-ship/screenshots/post-1440-keepreading.png
+docs/gaming-study-ship/screenshots/post-1440-popup.png
+docs/gaming-study-ship/screenshots/post-1440-stickybar.png
+docs/gaming-study-ship/screenshots/post-1440-top.png
+docs/gaming-study-ship/screenshots/post-375-byline.png
+docs/gaming-study-ship/screenshots/post-375-full.png
+docs/gaming-study-ship/screenshots/post-375-graphic.png
+docs/gaming-study-ship/screenshots/post-375-hero.png
+docs/gaming-study-ship/screenshots/post-375-keepreading.png
+docs/gaming-study-ship/screenshots/post-375-popup.png
+docs/gaming-study-ship/screenshots/post-375-stickybar.png
+docs/gaming-study-ship/screenshots/post-375-top.png
+docs/gaming-study-ship/screenshots/post-768-byline.png
+docs/gaming-study-ship/screenshots/post-768-full.png
+docs/gaming-study-ship/screenshots/post-768-hero.png
+docs/gaming-study-ship/screenshots/post-768-top.png
+public/images/gaming-study-13-7-card.jpg
+public/images/gaming-study-13-7-hero.jpg
+public/images/gaming-study-same-game-two-hours.png
+public/llms.txt
+=== 9f4e523
+9f4e523 content(blog): approved opening, hero alt, view counts and five inbound links for the gaming-study post; images recompressed
+
+app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+app/blog/league-of-legends-youth-development/page.tsx
+app/blog/should-you-ban-fortnite/page.tsx
+app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+app/blog/when-your-sons-only-friends-are-online/page.tsx
+docs/gaming-study-ship/02c-approved-copy.md
+docs/gaming-study-ship/03-atlas-build-notes.md
+docs/gaming-study-ship/evidence/image-hashes-optimized.txt
+public/images/gaming-study-13-7-card.jpg
+public/images/gaming-study-13-7-hero.jpg
+public/images/gaming-study-same-game-two-hours.png
+=== 8bab088 (merge) files vs first parent (the branch side) -- and vs origin/main
+8bab088 merge: origin/main (a449abc) into the gaming-study branch
+
+CLAUDE.md
+WORKLOG.md
+app/api/season-one/route.ts
+app/layout.tsx
+app/season1/landing.html
+app/season1/route.ts
+components/layout/Nav.tsx
+components/sections/FooterBanner.tsx
+components/ui/ModalRenderer.tsx
+components/ui/SeasonOnePopup.tsx
+components/ui/SeasonOneTrigger.tsx
+components/ui/StickyCTA.tsx
+context/ModalContext.tsx
+docs/ai-optimization-checklist.md
+docs/architecture-decisions.md
+docs/assets.md
+docs/beehiiv-config.md
+docs/camps-design-decisions.md
+docs/dev-runbook.md
+docs/klaviyo-config.md
+docs/learning-log.md
+docs/s1-popup-attribution/01-requirements.md
+docs/s1-popup-attribution/03-decision-log.md
+docs/s1-popup-attribution/04-evidence-ledger.md
+docs/s1-popup-attribution/05-defect-log.md
+docs/s1-popup-attribution/06-cleanup-ledger.md
+docs/s1-popup-attribution/07-review-guide.md
+docs/s1-popup-attribution/auditor-phase1.md
+docs/s1-popup-attribution/evidence/adversarial.md
+docs/s1-popup-attribution/evidence/f10-clarity-signup.md
+docs/s1-popup-attribution/evidence/f7-f8-n1.md
+docs/s1-popup-attribution/evidence/f9-form-start.md
+docs/s1-popup-attribution/evidence/n2-n3-n5.md
+docs/s1-popup-attribution/evidence/n6-screenshots.md
+docs/s1-popup-attribution/evidence/n7-ga4-clarity-network.md
+docs/s1-popup-attribution/evidence/n8-console.md
+docs/s1-popup-attribution/evidence/network-guard.md
+docs/s1-popup-attribution/evidence/popup-request-body-F7.json
+docs/s1-popup-attribution/evidence/raw-adversarial-browser.json
+docs/s1-popup-attribution/evidence/raw-adversarial-route.json
+docs/s1-popup-attribution/evidence/raw-f10-a-b-d.json
+docs/s1-popup-attribution/evidence/raw-f10-c-idle.json
+docs/s1-popup-attribution/evidence/raw-f10-superseded-first-pass.json
+docs/s1-popup-attribution/evidence/raw-f3-extra.json
+docs/s1-popup-attribution/evidence/raw-f7-baseline-3001.json
+docs/s1-popup-attribution/evidence/raw-f7-build-3002.json
+docs/s1-popup-attribution/evidence/raw-f8-n1-build-3002.json
+docs/s1-popup-attribution/evidence/raw-f9-form-start.json
+docs/s1-popup-attribution/evidence/raw-n2-n3-n5-summary.json
+docs/s1-popup-attribution/evidence/raw-n2-n3-n5.json
+docs/s1-popup-attribution/evidence/raw-n7-ga4-clarity.json
+docs/s1-popup-attribution/evidence/raw-n8-console.json
+docs/s1-popup-attribution/evidence/relay-selftest.txt
+docs/s1-popup-attribution/evidence/sentry-mechanical.txt
+docs/s1-popup-attribution/evidence/sentry-qa.md
+docs/s1-popup-attribution/evidence/sentry-unit-tsc-eslint.txt
+docs/season-one-tracking.md
+docs/tooling.md
+--- 8bab088 vs second parent (origin/main a449abc) diff names:
+WORKLOG.md
+app/api/contact/route.ts
+app/api/newsletter/route.ts
+app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+app/blog/league-of-legends-youth-development/page.tsx
+app/blog/page.tsx
+app/blog/should-you-ban-fortnite/page.tsx
+app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+app/layout.tsx
+components/blog/ReplyQuoteCards.tsx
+components/ui/ContactModal.tsx
+components/ui/NewsletterPopup.tsx
+components/ui/StickyCTA.tsx
+docs/blog-newsletter/00-brief.md
+docs/blog-newsletter/01-requirements.md
+docs/blog-newsletter/02-contract.md
+docs/blog-newsletter/02-copy-deck.md
+docs/blog-newsletter/02-frozen-spec.md
+docs/blog-newsletter/03-decision-log.md
+docs/blog-newsletter/04-evidence-ledger.md
+docs/blog-newsletter/05-defect-log.md
+docs/blog-newsletter/06-cleanup-ledger.md
+docs/blog-newsletter/07-review-guide.md
+docs/blog-newsletter/08-return-handoff.md
+docs/blog-newsletter/auditor-review-01.md
+docs/blog-newsletter/auditor-traceability.md
+docs/blog-newsletter/parent-review-design.md
+docs/blog-newsletter/parent-review-rendered.md
+docs/blog-newsletter/scout-map.md
+docs/blog-newsletter/screenshots/contact-after-1440-open.png
+docs/blog-newsletter/screenshots/contact-after-375-open.png
+docs/blog-newsletter/screenshots/contact-before-1440-open.png
+docs/blog-newsletter/screenshots/contact-before-375-open.png
+docs/blog-newsletter/screenshots/n1-after_-1440.png
+docs/blog-newsletter/screenshots/n1-after_-375.png
+docs/blog-newsletter/screenshots/n1-after_parents-1440.png
+docs/blog-newsletter/screenshots/n1-after_parents-375.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-camps-1440.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-camps-375.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-camps_register-1440.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-camps_register-375.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-teams-1440.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo-teams-375.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo100-1440.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo100-375.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo101-1440.png
+docs/blog-newsletter/screenshots/n1-after_programs_ekuzo101-375.png
+docs/blog-newsletter/screenshots/n1-after_schools-1440.png
+docs/blog-newsletter/screenshots/n1-after_schools-375.png
+docs/blog-newsletter/screenshots/n1-before_-1440.png
+docs/blog-newsletter/screenshots/n1-before_-375.png
+docs/blog-newsletter/screenshots/n1-before_parents-1440.png
+docs/blog-newsletter/screenshots/n1-before_parents-375.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-camps-1440.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-camps-375.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-camps_register-1440.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-camps_register-375.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-teams-1440.png
+docs/blog-newsletter/screenshots/n1-before_programs_ekuzo-teams-375.png
+
+=== forbidden-path check
+8bab088:
+  none
+3195327:
+  none
+9f4e523:
+  none
+
+forbidden paths in origin/main itself:
+app/api/teams/register/route.ts in a449abc:        1 files; changed in HEAD vs origin/main:        0
+app/api/webhooks/stripe/route.ts in a449abc:        1 files; changed in HEAD vs origin/main:        0
+app/programs/ekuzo-teams/register/page.tsx in a449abc:        1 files; changed in HEAD vs origin/main:        0
+AGENTS.md in a449abc:        0 files; changed in HEAD vs origin/main:        0
+components/register/AvailabilityMatrix.tsx in a449abc:        0 files; changed in HEAD vs origin/main:        0
+docs/registration-flow in a449abc:        0 files; changed in HEAD vs origin/main:        0
+docs/teams-fall-readiness in a449abc:        0 files; changed in HEAD vs origin/main:        0
+docs/marketing in a449abc:       18 files; changed in HEAD vs origin/main:        0
+marketing/teams-redesign in a449abc:       11 files; changed in HEAD vs origin/main:        0

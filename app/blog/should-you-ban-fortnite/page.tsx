@@ -708,6 +708,16 @@ export default function PostShouldYouBanFortnite() {
                   </li>
                 ))}
               </ul>
+              <p>
+                Related: when{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>{" "}
+                went around (the number isn&apos;t in the paper, and the study
+                was of adults), parents in the replies asked, unprompted, how to
+                get a kid off the game without the attitude. EKUZO founder
+                Karlin Oei read about a thousand of the replies and wrote it up.
+              </p>
           </BlogPostBody>
         </div>
       </article>

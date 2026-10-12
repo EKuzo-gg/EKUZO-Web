@@ -1,0 +1,49 @@
+Uncommitted app-source changes in the worktree observed at Sun Oct 11 22:42:11 CDT 2026 (made by another session after the .next build at 22:20; not by Sentry)
+diff --git a/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx b/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+index 48964ca..f1d625d 100644
+--- a/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
++++ b/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+@@ -304,7 +304,7 @@ export default function PostGamingStudy137() {
+               src={HERO_IMAGE}
+               alt="A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped note under it reads “not in the paper.” Sticky notes ask which games, how many hours, what age, better than sports. Karlin Oei in a headset."
+               fill
+-              sizes="(max-width: 1264px) 100vw, 1232px"
++              sizes="(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px"
+               className="object-cover"
+               priority
+             />
+@@ -325,7 +325,7 @@ export default function PostGamingStudy137() {
+             dateLabel="Updated"
+           >
+             <p>
+-              <strong>Short answer:</strong> one study of 923 adults, average
++              <strong>Short answer:</strong>{" "}one study of 923 adults, average
+               age 55, found that people who game three or more hours a week
+               scored higher than non-gamers on memory, reasoning and
+               processing-speed tests. It can&apos;t say the gaming caused that,
+diff --git a/app/blog/when-your-sons-only-friends-are-online/page.tsx b/app/blog/when-your-sons-only-friends-are-online/page.tsx
+index b55e06d..5fa75f8 100644
+--- a/app/blog/when-your-sons-only-friends-are-online/page.tsx
++++ b/app/blog/when-your-sons-only-friends-are-online/page.tsx
+@@ -384,7 +384,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
+                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                   the viral &ldquo;13.7 years younger&rdquo; gaming study
+                 </Link>{" "}
+-                made the rounds (the number isn&apos;t in the paper; Karlin, our
++                made the rounds (the number isn’t in the paper; Karlin, our
+                 founder, read about a thousand of the replies). The most-liked
+                 reply under the original post was &ldquo;The kind of gaming
+                 probably matters as much as the hours.&rdquo;
+diff --git a/app/sitemap.ts b/app/sitemap.ts
+index a1eb047..843b223 100644
+--- a/app/sitemap.ts
++++ b/app/sitemap.ts
+@@ -153,7 +153,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
+     },
+     {
+       url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
+-      lastModified: new Date("2026-05-29"),
++      lastModified: new Date("2026-10-12"),
+       changeFrequency: "weekly",
+       priority: 0.6,
+     },

@@ -1,0 +1,108 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/jamiefitch/Projects/ekuzo-web/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package-lock.json
+
+▲ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 1924ms
+  Running TypeScript ...
+  Finished TypeScript in 2.7s ...
+  Collecting page data using 9 workers ...
+  Generating static pages using 9 workers (0/74) ...
+  Generating static pages using 9 workers (18/74) 
+  Generating static pages using 9 workers (36/74) 
+  Generating static pages using 9 workers (55/74) 
+✓ Generating static pages using 9 workers (74/74) in 261ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/camps/abandoned
+├ ƒ /api/camps/lead
+├ ƒ /api/camps/register
+├ ƒ /api/camps/success
+├ ƒ /api/checkout
+├ ƒ /api/contact
+├ ƒ /api/ekuzo100/abandoned
+├ ƒ /api/ekuzo100/lead
+├ ƒ /api/ekuzo100/register
+├ ƒ /api/ekuzo100/success
+├ ƒ /api/ekuzo101/lead
+├ ƒ /api/ekuzo101/register
+├ ƒ /api/newsletter
+├ ƒ /api/season-one
+├ ƒ /api/squad/[token]
+├ ƒ /api/swamp/subscribe
+├ ƒ /api/teams/abandoned
+├ ƒ /api/teams/lead
+├ ƒ /api/teams/register
+├ ƒ /api/teams/success
+├ ƒ /api/webhooks/stripe
+├ ƒ /api/woodward/subscribe
+├ ○ /apple-icon.png
+├ ○ /blog
+├ ƒ /blog/[slug]
+├ ○ /blog/author/jamie-fitch
+├ ○ /blog/author/karlin-oei
+├ ○ /blog/author/muhammad-hossain
+├ ○ /blog/conquering-my-mountain-and-giants-how-esports-changed-my-life
+├ ○ /blog/gaming-military-families
+├ ○ /blog/gaming-study-13-7-years-younger-what-it-means-for-kids
+├ ○ /blog/league-of-legends-youth-development
+├ ○ /blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng
+├ ○ /blog/should-you-ban-fortnite
+├ ○ /blog/summer-camps-for-kids-who-game-2026
+├ ○ /blog/what-homeschool-parents-taught-us-about-gaming
+├ ○ /blog/what-your-kids-gaming-is-telling-you
+├ ○ /blog/when-gaming-helps-homeschool-kids
+├ ○ /blog/when-your-sons-only-friends-are-online
+├ ○ /camps
+├ ○ /camps/register
+├ ○ /camps/success
+├ ○ /creators
+├ ○ /editors
+├ ○ /faq
+├ ○ /games
+├ ○ /icon.png
+├ ○ /methodology
+├ ○ /parents
+├ ○ /partners
+├ ● /partners/[slug]
+│ └ /partners/boys-and-girls-club
+├ ○ /privacy-policy
+├ ○ /programs
+├ ○ /programs/ekuzo-camps
+├ ○ /programs/ekuzo-camps/register
+├ ○ /programs/ekuzo-camps/success
+├ ○ /programs/ekuzo-teams
+├ ○ /programs/ekuzo-teams/register
+├ ○ /programs/ekuzo-teams/success
+├ ○ /programs/ekuzo100
+├ ○ /programs/ekuzo100/register
+├ ○ /programs/ekuzo100/success
+├ ○ /programs/ekuzo101
+├ ○ /programs/ekuzo101/register
+├ ○ /programs/ekuzo101/success
+├ ○ /schools
+├ ○ /season1
+├ ○ /sitemap.xml
+├ ƒ /squad/[token]
+├ ○ /swamp
+├ ○ /teams
+├ ○ /terms-of-service
+└ ○ /woodward
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

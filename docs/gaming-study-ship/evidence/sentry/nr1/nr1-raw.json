@@ -1,0 +1,486 @@
+{
+  "A|1440|/": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2601,
+    "finalUrl": "http://HOST/"
+  },
+  "A|1440|/blog": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2579,
+    "finalUrl": "http://HOST/blog"
+  },
+  "A|1440|/programs/ekuzo-camps": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2621,
+    "finalUrl": "http://HOST/programs/ekuzo-camps"
+  },
+  "A|1440|/programs/ekuzo101": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2627,
+    "finalUrl": "http://HOST/programs/ekuzo101"
+  },
+  "A|1440|/programs/ekuzo-teams": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2636,
+    "finalUrl": "http://HOST/programs/ekuzo-teams"
+  },
+  "A|1440|/season1": {
+    "sticky": [],
+    "stickyVisible": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": null,
+    "popupOpenedMsRaw": null,
+    "finalUrl": "http://HOST/season1"
+  },
+  "A|1440|/blog/should-you-ban-fortnite": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2672,
+    "finalUrl": "http://HOST/blog/should-you-ban-fortnite"
+  },
+  "A|375|/": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2584,
+    "finalUrl": "http://HOST/"
+  },
+  "A|375|/blog": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2580,
+    "finalUrl": "http://HOST/blog"
+  },
+  "A|375|/programs/ekuzo-camps": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2618,
+    "finalUrl": "http://HOST/programs/ekuzo-camps"
+  },
+  "A|375|/programs/ekuzo101": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2611,
+    "finalUrl": "http://HOST/programs/ekuzo101"
+  },
+  "A|375|/programs/ekuzo-teams": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2627,
+    "finalUrl": "http://HOST/programs/ekuzo-teams"
+  },
+  "A|375|/season1": {
+    "sticky": [],
+    "stickyVisible": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": null,
+    "popupOpenedMsRaw": null,
+    "finalUrl": "http://HOST/season1"
+  },
+  "A|375|/blog/should-you-ban-fortnite": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2576,
+    "finalUrl": "http://HOST/blog/should-you-ban-fortnite"
+  },
+  "B|1440|/": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2609,
+    "finalUrl": "http://HOST/"
+  },
+  "B|1440|/blog": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2590,
+    "finalUrl": "http://HOST/blog"
+  },
+  "B|1440|/programs/ekuzo-camps": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2626,
+    "finalUrl": "http://HOST/programs/ekuzo-camps"
+  },
+  "B|1440|/programs/ekuzo101": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2605,
+    "finalUrl": "http://HOST/programs/ekuzo101"
+  },
+  "B|1440|/programs/ekuzo-teams": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2644,
+    "finalUrl": "http://HOST/programs/ekuzo-teams"
+  },
+  "B|1440|/season1": {
+    "sticky": [],
+    "stickyVisible": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": null,
+    "popupOpenedMsRaw": null,
+    "finalUrl": "http://HOST/season1"
+  },
+  "B|1440|/blog/should-you-ban-fortnite": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2673,
+    "finalUrl": "http://HOST/blog/should-you-ban-fortnite"
+  },
+  "B|375|/": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-black-bottom-1@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-white-1@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2587,
+    "finalUrl": "http://HOST/"
+  },
+  "B|375|/blog": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2576,
+    "finalUrl": "http://HOST/blog"
+  },
+  "B|375|/programs/ekuzo-camps": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2613,
+    "finalUrl": "http://HOST/programs/ekuzo-camps"
+  },
+  "B|375|/programs/ekuzo101": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2608,
+    "finalUrl": "http://HOST/programs/ekuzo101"
+  },
+  "B|375|/programs/ekuzo-teams": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found) @ http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "pageErrors": [],
+    "http": [
+      "404 http://HOST/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+    ],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2638,
+    "finalUrl": "http://HOST/programs/ekuzo-teams"
+  },
+  "B|375|/season1": {
+    "sticky": [],
+    "stickyVisible": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": null,
+    "popupOpenedMsRaw": null,
+    "finalUrl": "http://HOST/season1"
+  },
+  "B|375|/blog/should-you-ban-fortnite": {
+    "sticky": [
+      "<div class=\"fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-0\"><div class=\"absolute inset-x-0 -top-4 h-4 bg-gradient-to-t from-black/8 to-transparent pointer-events-none\"></div><div class=\"flex items-center justify-center gap-2 px-3 py-4 md:gap-4 md:px-4 md:py-5 bg-white\"><div class=\"flex items-center justify-between gap-6 w-full max-w-[1232px] mx-auto px-2\"><span class=\"font-display uppercase leading-[0.95] hidden sm:block whitespace-nowrap text-black\" style=\"font-size:clamp(1.5rem, 3.75vw, 3.75em)\">Season 01 waitlist is open</span><button class=\"flex-1 sm:flex-none bg-red text-white border-2 border-red font-body font-bold text-sm md:text-lg py-3 px-5 md:py-3.5 md:px-8 rounded-sm cursor-pointer whitespace-nowrap shrink-0 hover:brightness-110 active:scale-[0.98] active:brightness-90 transition-all duration-150\">Join Season 01</button></div></div></div>"
+    ],
+    "stickyVisible": [
+      "none"
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "http": [],
+    "status": null,
+    "popupOpenedMs": 2500,
+    "popupOpenedMsRaw": 2581,
+    "finalUrl": "http://HOST/blog/should-you-ban-fortnite"
+  }
+}

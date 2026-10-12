@@ -1,0 +1,816 @@
+[
+  {
+    "id": "JR-1",
+    "vp": "1440",
+    "pass": true,
+    "notes": "UTM arrival: popup at 1.8s=0; source=site-popup from=url page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin ad=karlin eventId=7c41a8bb-be92-4c06-8b99-379c05c71f54 utm={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"7c41a8bb-be92-4c06-8b99-379c05c71f54\"}]]; storage joined=1 ss.attr={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"} nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "karlin",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "eventId": "7c41a8bb-be92-4c06-8b99-379c05c71f54",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778054831,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "7c41a8bb-be92-4c06-8b99-379c05c71f54"
+            },
+            "t": 1791778054831
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {
+          "ekuzo_attribution": "{\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}"
+        }
+      }
+    }
+  },
+  {
+    "id": "JR-2",
+    "vp": "1440",
+    "pass": true,
+    "notes": "no UTMs: popup at 1.8s=0; source=site-popup from=none page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids ad= eventId=4cba85dc-81e9-4785-963e-239864acac5d utm={\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"4cba85dc-81e9-4785-963e-239864acac5d\"}]]; storage joined=1 ss.attr=absent nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "4cba85dc-81e9-4785-963e-239864acac5d",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778059506,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "4cba85dc-81e9-4785-963e-239864acac5d"
+            },
+            "t": 1791778059506
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {}
+      }
+    }
+  },
+  {
+    "id": "JR-7 (JR-1 on phone)",
+    "vp": "375",
+    "pass": true,
+    "notes": "UTM arrival: popup at 1.8s=0; source=site-popup from=url page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin ad=karlin eventId=7090270e-6a24-4e3f-b9da-7a644a409ce3 utm={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"7090270e-6a24-4e3f-b9da-7a644a409ce3\"}]]; storage joined=1 ss.attr={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"} nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "karlin",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "eventId": "7090270e-6a24-4e3f-b9da-7a644a409ce3",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778064166,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "7090270e-6a24-4e3f-b9da-7a644a409ce3"
+            },
+            "t": 1791778064166
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {
+          "ekuzo_attribution": "{\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}"
+        }
+      }
+    }
+  },
+  {
+    "id": "JR-2 phone",
+    "vp": "375",
+    "pass": true,
+    "notes": "no UTMs: popup at 1.8s=0; source=site-popup from=none page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids ad= eventId=ebd7d3a1-7233-4585-bdfc-11142d7f2391 utm={\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"ebd7d3a1-7233-4585-bdfc-11142d7f2391\"}]]; storage joined=1 ss.attr=absent nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "ebd7d3a1-7233-4585-bdfc-11142d7f2391",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778068850,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "ebd7d3a1-7233-4585-bdfc-11142d7f2391"
+            },
+            "t": 1791778068850
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {}
+      }
+    }
+  },
+  {
+    "id": "JR-8 instagram",
+    "vp": "1440",
+    "pass": true,
+    "notes": "utm_source=instagram: popup at 1.8s=0; source=site-popup from=url page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=instagram&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo ad=ekuzo eventId=ab6f5401-7e47-4c5a-98f1-e37336353d46 utm={\"utm_source\":\"instagram\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"ab6f5401-7e47-4c5a-98f1-e37336353d46\"}]]; storage joined=1 ss.attr={\"utm_source\":\"instagram\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"} nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "ekuzo",
+        "attribution": {
+          "utm_source": "instagram",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "ekuzo",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=instagram&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo",
+        "eventId": "ab6f5401-7e47-4c5a-98f1-e37336353d46",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=instagram&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778073522,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=instagram&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "ab6f5401-7e47-4c5a-98f1-e37336353d46"
+            },
+            "t": 1791778073522
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {
+          "ekuzo_attribution": "{\"utm_source\":\"instagram\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"}"
+        }
+      }
+    }
+  },
+  {
+    "id": "JR-8 linkedin",
+    "vp": "1440",
+    "pass": true,
+    "notes": "utm_source=linkedin: popup at 1.8s=0; source=site-popup from=url page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=linkedin&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo ad=ekuzo eventId=b84d550e-1c0e-4880-9903-0cf06cd027cf utm={\"utm_source\":\"linkedin\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"b84d550e-1c0e-4880-9903-0cf06cd027cf\"}]]; storage joined=1 ss.attr={\"utm_source\":\"linkedin\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"} nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "ekuzo",
+        "attribution": {
+          "utm_source": "linkedin",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "ekuzo",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=linkedin&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo",
+        "eventId": "b84d550e-1c0e-4880-9903-0cf06cd027cf",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=linkedin&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778078181,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=linkedin&utm_medium=social&utm_campaign=gaming-study&utm_content=ekuzo"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "b84d550e-1c0e-4880-9903-0cf06cd027cf"
+            },
+            "t": 1791778078181
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {
+          "ekuzo_attribution": "{\"utm_source\":\"linkedin\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"}"
+        }
+      }
+    }
+  },
+  {
+    "id": "JR-8 email",
+    "vp": "1440",
+    "pass": true,
+    "notes": "utm_source=email: popup at 1.8s=0; source=site-popup from=url page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=email&utm_medium=email&utm_campaign=gaming-study&utm_content=ekuzo ad=ekuzo eventId=9755444a-c4e1-4b7c-ba2c-82846d15ac3e utm={\"utm_source\":\"email\",\"utm_medium\":\"email\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}; generate_lead=[{\"source\":\"season_one_popup\"}] fbq Lead=[[{\"content_name\":\"season_one_popup\"},{\"eventID\":\"9755444a-c4e1-4b7c-ba2c-82846d15ac3e\"}]]; storage joined=1 ss.attr={\"utm_source\":\"email\",\"utm_medium\":\"email\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"} nl keys=0; POSTs=1",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "ekuzo",
+        "attribution": {
+          "utm_source": "email",
+          "utm_medium": "email",
+          "utm_campaign": "gaming-study",
+          "utm_content": "ekuzo",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=email&utm_medium=email&utm_campaign=gaming-study&utm_content=ekuzo",
+        "eventId": "9755444a-c4e1-4b7c-ba2c-82846d15ac3e",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=email&utm_medium=email&utm_campaign=gaming-study&utm_content=ekuzo",
+        "ekz_hp": ""
+      },
+      "L": {
+        "generate_lead": [
+          {
+            "name": "generate_lead",
+            "params": {
+              "source": "season_one_popup"
+            },
+            "t": 1791778082846,
+            "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=email&utm_medium=email&utm_campaign=gaming-study&utm_content=ekuzo"
+          }
+        ],
+        "fbLead": [
+          {
+            "name": "Lead",
+            "params": {
+              "content_name": "season_one_popup"
+            },
+            "opts": {
+              "eventID": "9755444a-c4e1-4b7c-ba2c-82846d15ac3e"
+            },
+            "t": 1791778082846
+          }
+        ]
+      },
+      "st": {
+        "ls": {
+          "ekuzo_s1_joined": "1"
+        },
+        "ss": {
+          "ekuzo_attribution": "{\"utm_source\":\"email\",\"utm_medium\":\"email\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"ekuzo\",\"utm_term\":\"\"}"
+        }
+      }
+    }
+  },
+  {
+    "id": "JR-4 client nav to / before popup (auto-open on /)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "session record on post={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}; body from=session page=/ ad= attribution={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "session",
+        "page": "/",
+        "eventId": "ffa5c5c6-8fa7-4a07-a65b-b8e0ae15082f",
+        "eventSourceUrl": "http://localhost:3311/",
+        "ekz_hp": ""
+      }
+    }
+  },
+  {
+    "id": "JR-4 full goto / before popup",
+    "vp": "1440",
+    "pass": true,
+    "notes": "session record on post={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}; body from=session page=/ ad= attribution={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "session",
+        "page": "/",
+        "eventId": "1b1554dc-1eda-4a4b-ab06-35f59dc6ec6b",
+        "eventSourceUrl": "http://localhost:3311/",
+        "ekz_hp": ""
+      }
+    }
+  },
+  {
+    "id": "JR-4 dismiss on post, client nav to /, Nav button",
+    "vp": "1440",
+    "pass": true,
+    "notes": "session record on post={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}; body from=session page=/ ad= attribution={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "session",
+        "page": "/",
+        "eventId": "6659d505-ce53-4150-947e-c7f281325348",
+        "eventSourceUrl": "http://localhost:3311/",
+        "ekz_hp": ""
+      }
+    }
+  },
+  {
+    "id": "JR-4 variant: / has its own utm (current URL wins, informational)",
+    "vp": "1440",
+    "pass": true,
+    "notes": "session record on post={\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}; body from=url page=/?utm_source=other ad= attribution={\"utm_source\":\"other\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "other",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/?utm_source=other",
+        "eventId": "261c9429-f2d7-4540-be9e-941b6c01b116",
+        "eventSourceUrl": "http://localhost:3311/?utm_source=other",
+        "ekz_hp": ""
+      }
+    }
+  },
+  {
+    "id": "JR-9",
+    "vp": "1440",
+    "pass": true,
+    "notes": "copied localStorage keys=[\"ekuzo_s1_dismissed_at\"]; new-session sessionStorage={}; auto-open=0; body from=none page=/blog/gaming-study-13-7-years-younger-what-it-means-for-kids attribution={\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"}",
+    "extra": {
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "b57f906b-a83f-494d-967b-ca7cc76445b1",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      }
+    }
+  },
+  {
+    "id": "MN-5",
+    "vp": "1440",
+    "pass": true,
+    "notes": "Lead counts (ga/fb) per step: page load 1.5s=0/0; popup open (auto, programmatic focus)=0/0; email field focus()=0/0; script-set value + input/change events, no submit=0/0; dismiss via X=0/0; reopen by tap, dismiss via Escape=0/0; after FAILED attempt (502)=0/0; after retry (200)=1/1; request eventIds=[\"f73daf23-a1b2-4d5c-87a3-54c169578b3e\",\"f73daf23-a1b2-4d5c-87a3-54c169578b3e\"]; fb eventID=f73daf23-a1b2-4d5c-87a3-54c169578b3e; error text after 502=\"qa\"; POST statuses=[502,200]",
+    "extra": {
+      "timeline": [
+        {
+          "step": "page load 1.5s",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "popup open (auto, programmatic focus)",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "email field focus()",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "script-set value + input/change events, no submit",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "dismiss via X",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "reopen by tap, dismiss via Escape",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "after FAILED attempt (502)",
+          "ga": 0,
+          "fb": 0,
+          "posts": 1
+        },
+        {
+          "step": "after retry (200)",
+          "ga": 1,
+          "fb": 1,
+          "posts": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "MN-10",
+    "vp": "1440",
+    "pass": true,
+    "notes": "after popup open+programmatic focus (focused element type=email) and script-set value: non-baseline gtag calls=[], non-baseline fbq calls=[], clarity=[]. Full call list saved.",
+    "extra": {
+      "callsAfterOpen": {
+        "gtag": [
+          [
+            "js",
+            "2026-10-12T04:08:37.329Z"
+          ],
+          [
+            "config",
+            "G-8LM45PX53W"
+          ]
+        ],
+        "fbq": [
+          [
+            "set",
+            "autoConfig",
+            false,
+            "1284038230557204"
+          ],
+          [
+            "init",
+            "1284038230557204"
+          ],
+          [
+            "track",
+            "PageView"
+          ]
+        ],
+        "clarity": []
+      },
+      "callsAfterSet": {
+        "gtag": [
+          [
+            "js",
+            "2026-10-12T04:08:37.329Z"
+          ],
+          [
+            "config",
+            "G-8LM45PX53W"
+          ]
+        ],
+        "fbq": [
+          [
+            "set",
+            "autoConfig",
+            false,
+            "1284038230557204"
+          ],
+          [
+            "init",
+            "1284038230557204"
+          ],
+          [
+            "track",
+            "PageView"
+          ]
+        ],
+        "clarity": []
+      }
+    }
+  },
+  {
+    "id": "MN-5",
+    "vp": "375",
+    "pass": true,
+    "notes": "Lead counts (ga/fb) per step: page load 1.5s=0/0; popup open (auto, programmatic focus)=0/0; email field focus()=0/0; script-set value + input/change events, no submit=0/0; touch scroll starting on email field=0/0; touch scroll starting on submit button=0/0; dismiss via X=0/0; reopen by tap, dismiss via Escape=0/0; after FAILED attempt (502)=0/0; after retry (200)=1/1; request eventIds=[\"c9297fa3-379b-4ad3-8d77-54f284ed1348\",\"c9297fa3-379b-4ad3-8d77-54f284ed1348\"]; fb eventID=c9297fa3-379b-4ad3-8d77-54f284ed1348; error text after 502=\"qa\"; POST statuses=[502,200]",
+    "extra": {
+      "timeline": [
+        {
+          "step": "page load 1.5s",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "popup open (auto, programmatic focus)",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "email field focus()",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "script-set value + input/change events, no submit",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "touch scroll starting on email field",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "touch scroll starting on submit button",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "email value after touch scrolls",
+          "val": "team+gstest-1012-sentry@ekuzo.gg"
+        },
+        {
+          "step": "dismiss via X",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "reopen by tap, dismiss via Escape",
+          "ga": 0,
+          "fb": 0,
+          "posts": 0
+        },
+        {
+          "step": "after FAILED attempt (502)",
+          "ga": 0,
+          "fb": 0,
+          "posts": 1
+        },
+        {
+          "step": "after retry (200)",
+          "ga": 1,
+          "fb": 1,
+          "posts": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "MN-10",
+    "vp": "375",
+    "pass": true,
+    "notes": "after popup open+programmatic focus (focused element type=button) and script-set value: non-baseline gtag calls=[], non-baseline fbq calls=[], clarity=[]. Full call list saved.",
+    "extra": {
+      "callsAfterOpen": {
+        "gtag": [
+          [
+            "js",
+            "2026-10-12T04:08:47.591Z"
+          ],
+          [
+            "config",
+            "G-8LM45PX53W"
+          ]
+        ],
+        "fbq": [
+          [
+            "set",
+            "autoConfig",
+            false,
+            "1284038230557204"
+          ],
+          [
+            "init",
+            "1284038230557204"
+          ],
+          [
+            "track",
+            "PageView"
+          ]
+        ],
+        "clarity": []
+      },
+      "callsAfterSet": {
+        "gtag": [
+          [
+            "js",
+            "2026-10-12T04:08:47.591Z"
+          ],
+          [
+            "config",
+            "G-8LM45PX53W"
+          ]
+        ],
+        "fbq": [
+          [
+            "set",
+            "autoConfig",
+            false,
+            "1284038230557204"
+          ],
+          [
+            "init",
+            "1284038230557204"
+          ],
+          [
+            "track",
+            "PageView"
+          ]
+        ],
+        "clarity": []
+      }
+    }
+  },
+  {
+    "id": "MN-5 double-click/Enter spam",
+    "vp": "1440",
+    "pass": true,
+    "notes": "season POSTs=1 generate_lead=1 Lead=1"
+  }
+]

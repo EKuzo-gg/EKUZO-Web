@@ -1,0 +1,12 @@
+PASS - P4: no dialog after 5s at top of a fresh context
+PASS - P4: dialog appears within 1s of reaching 50% scroll (count=1 elapsed=165ms)
+saved screenshot: sentry-p4-popup-at-50pct
+PASS - P4: dialog closes after clicking X
+PASS - P4: reload after dismiss shows no dialog even after scrolling to 50%+
+PASS - P4: dismissed_at set to 31 days ago -> dialog appears again on reload+scroll
+saved screenshot: sentry-p4-popup-after-31-days
+PASS - P4: no dialog on /blog even scrolled to bottom (dialog count=0)
+PASS - P4: no dialog on / even scrolled to bottom (dialog count=0)
+PASS - P4: no dialog on /blog/author/karlin-oei even scrolled to bottom (dialog count=0)
+
+=== SUMMARY: 8 passed, 0 failed, 8 total ===

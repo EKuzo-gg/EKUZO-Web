@@ -1,0 +1,119 @@
+
+===== jamie =====
+
+--- jamie-popup-1440
+JAMIE page head 1440 {
+ "head": "Programs\n+\nSchools\nFamilies\nMethodology\nFAQ\nEnroll my gamer\nSCHOOLS\nEKUZO TEAMS\nSchool-based semester program\nHOME\nEKUZO 100\n4-week individual program\nSUMMER\nEKUZO CAMPS\nSeasonal week-long camps\nALL\nPROGRAMS\nPERSPECTIVE\nWhen your son’s only friends are online\n\nAre online gaming friends real? What parents see, and what kids may actually be doing.\n\nby Jamie Fitch\nCEO of EKUZO · Parent\nPublished May 28, 2026\n9 min read\n\nShort answer: if your son spends his nights on a headset, the question worth asking is not how many hours he plays, or even whether his online friends count. It’s whether he’s playing with the same people over time, talking and on a team, or grinding alone in an anonymous lobby. One of those is connection. The other is isolation with a crowd in the background. The screen looks the same from the hallway. What’s happening inside it is not.\n\nWhat you see, and what he is living\n"
+}
+JAMIE dialog 1440 {
+ "innerText": "THE EKUZO WEEKLY\n\nGAMING\nMATTERS.\nOne email after you read this. Then you decide.\n\nLeave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.\n\nKarlin Oei, founder, EKUZO\n\nSend me the one email\n\nNo spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+ "ariaLabel": "One email after you read this. Then you decide."
+}
+JAMIE author mentions 1440 [
+ {
+  "text": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"EducationalOrganization\",\"@id\":\"https://ekuzo.gg/#organization\",\"na",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"@id\":\"https://ekuzo.gg/blog/when-your-sons-only-friends-are-onli",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "Jamie Fitch",
+  "inView": false,
+  "top": -5647
+ },
+ {
+  "text": "self.__next_f.push([1,\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@graph\\\":[{\\\"@type\\\":\\\"EducationalOrganization\\\",\\\"@id\\\":\\",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"53:D\\\"$57\\\"\\n53:D\\\"$54\\\"\\n53:D\\\"$58\\\"\\n59:D\\\"$5b\\\"\\n59:D\\\"$5a\\\"\\n59:D\\\"$5d\\\"\\n59:[\\\"$\\\",\\\"script\\",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"69:[\\\"$\\\",\\\"script\\\",null,{\\\"type\\\":\\\"application/ld+json\\\",\\\"dangerouslySetInnerHTML\\\":{\\\"__html",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"98:D\\\"$105\\\"\\n98:[\\\"$\\\",\\\"strong\\\",null,{\\\"className\\\":\\\"text-black font-semibold\\\",\\\"children\\\":",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"fc:[[\\\"$\\\",\\\"title\\\",\\\"0\\\",{\\\"children\\\":\\\"When your son’s only friends are online: are online fr",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "Karlin Oei, founder, EKUZO",
+  "inView": true,
+  "top": 468
+ }
+]
+saved steward-jamie-popup-1440-open.png
+STEP OK jamie-popup-1440
+
+--- jamie-popup-375
+JAMIE page head 375 {
+ "head": "PERSPECTIVE\nWhen your son’s only friends are online\n\nAre online gaming friends real? What parents see, and what kids may actually be doing.\n\nby Jamie Fitch\nCEO of EKUZO · Parent\n·\nPublished May 28, 2026\n·\n9 min read\n\nShort answer: if your son spends his nights on a headset, the question worth asking is not how many hours he plays, or even whether his online friends count. It’s whether he’s playing with the same people over time, talking and on a team, or grinding alone in an anonymous lobby. One of those is connection. The other is isolation with a crowd in the background. The screen looks the same from the hallway. What’s happening inside it is not.\n\nWhat you see, and what he is living\n\nI grew up active. I played sports year-round, took piano lessons, and loved art. But what I loved most was gaming, so much that I often chose it over friends, girls, and other activities. That was more t"
+}
+JAMIE dialog 375 {
+ "innerText": "GAMING\nMATTERS.\nOne email after you read this. Then you decide.\n\nLeave your address and you're on the list today. Tomorrow I'll send one message with a thumbs up and a thumbs down, and the thumbs down takes you straight off, no questions. Thumbs up and the weekly keeps coming: what I'm seeing in kids' gaming, sources attached.\n\nKarlin Oei, founder, EKUZO\n\nSend me the one email\n\nNo spam. Unsubscribe any time, or use the thumbs down tomorrow.",
+ "ariaLabel": "One email after you read this. Then you decide."
+}
+JAMIE author mentions 375 [
+ {
+  "text": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"EducationalOrganization\",\"@id\":\"https://ekuzo.gg/#organization\",\"na",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"@id\":\"https://ekuzo.gg/blog/when-your-sons-only-friends-are-onli",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "Jamie Fitch",
+  "inView": false,
+  "top": -7783
+ },
+ {
+  "text": "self.__next_f.push([1,\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@graph\\\":[{\\\"@type\\\":\\\"EducationalOrganization\\\",\\\"@id\\\":\\",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"53:D\\\"$57\\\"\\n53:D\\\"$54\\\"\\n53:D\\\"$58\\\"\\n59:D\\\"$5b\\\"\\n59:D\\\"$5a\\\"\\n59:D\\\"$5d\\\"\\n59:[\\\"$\\\",\\\"script\\",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"69:[\\\"$\\\",\\\"script\\\",null,{\\\"type\\\":\\\"application/ld+json\\\",\\\"dangerouslySetInnerHTML\\\":{\\\"__html",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"98:D\\\"$105\\\"\\n98:[\\\"$\\\",\\\"strong\\\",null,{\\\"className\\\":\\\"text-black font-semibold\\\",\\\"children\\\":",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "self.__next_f.push([1,\"fc:[[\\\"$\\\",\\\"title\\\",\\\"0\\\",{\\\"children\\\":\\\"When your son’s only friends are online: are online fr",
+  "inView": false,
+  "top": 0
+ },
+ {
+  "text": "Karlin Oei, founder, EKUZO",
+  "inView": true,
+  "top": 574
+ }
+]
+saved steward-jamie-popup-375-open.png
+STEP OK jamie-popup-375
+DONE

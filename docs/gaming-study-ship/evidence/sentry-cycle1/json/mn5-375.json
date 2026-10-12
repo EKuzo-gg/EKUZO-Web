@@ -1,0 +1,248 @@
+{
+  "timeline": [
+    {
+      "step": "page load 1.5s",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "popup open (auto, programmatic focus)",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "email field focus()",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "script-set value + input/change events, no submit",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "touch scroll starting on email field",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "touch scroll starting on submit button",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "email value after touch scrolls",
+      "val": "team+gstest-1012-sentry@ekuzo.gg"
+    },
+    {
+      "step": "dismiss via X",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "reopen by tap, dismiss via Escape",
+      "ga": 0,
+      "fb": 0,
+      "posts": 0
+    },
+    {
+      "step": "after FAILED attempt (502)",
+      "ga": 0,
+      "fb": 0,
+      "posts": 1
+    },
+    {
+      "step": "after retry (200)",
+      "ga": 1,
+      "fb": 1,
+      "posts": 2
+    }
+  ],
+  "ids": [
+    "c9297fa3-379b-4ad3-8d77-54f284ed1348",
+    "c9297fa3-379b-4ad3-8d77-54f284ed1348"
+  ],
+  "posts": [
+    {
+      "t": 1791778136017,
+      "key": "season",
+      "url": "/api/season-one",
+      "status": 502,
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "c9297fa3-379b-4ad3-8d77-54f284ed1348",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      }
+    },
+    {
+      "t": 1791778137551,
+      "key": "season",
+      "url": "/api/season-one",
+      "status": 200,
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "",
+        "attribution": {
+          "utm_source": "",
+          "utm_medium": "",
+          "utm_campaign": "",
+          "utm_content": "",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "none",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "eventId": "c9297fa3-379b-4ad3-8d77-54f284ed1348",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+        "ekz_hp": ""
+      }
+    }
+  ],
+  "calls": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T04:08:47.591Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "event",
+        "generate_lead",
+        {
+          "source": "season_one_popup"
+        }
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "track",
+        "Lead",
+        {
+          "content_name": "season_one_popup"
+        },
+        {
+          "eventID": "c9297fa3-379b-4ad3-8d77-54f284ed1348"
+        }
+      ]
+    ],
+    "clarity": []
+  },
+  "callsAfterOpen": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T04:08:47.591Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ]
+    ],
+    "clarity": []
+  },
+  "callsAfterSet": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T04:08:47.591Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ]
+    ],
+    "clarity": []
+  },
+  "baselineAtLoad": {
+    "events": [],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ]
+    ],
+    "clarity": 0
+  }
+}

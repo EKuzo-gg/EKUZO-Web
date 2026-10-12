@@ -1,0 +1,58 @@
+GUARD SELF-TEST 2026-10-12T03:30:01.841Z
+Context A (post, popup not suppressed, route layer + proxy), 8 s wait, page then context closed.
+Layer 2 (context.route) intercepted external requests: 3
+  route GET script https://connect.facebook.net/en_US/fbevents.js
+  route GET script https://www.clarity.ms/tag/wml8wll5ua
+  route GET script https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W
+Hosts attempted (route layer): connect.facebook.net, www.clarity.ms, www.googletagmanager.com
+Context B (positive control, proxy only, route layer OFF): in-page results:
+  https://www.google-analytics.com/g/collect?v=2&tid=G-QA | failed | TypeError: Failed to fetch
+  https://www.clarity.ms/collect | failed | TypeError: Failed to fetch
+  https://www.facebook.com/tr?id=0&ev=QA | failed | TypeError: Failed to fetch
+  https://a.klaviyo.com/api/events | failed | TypeError: Failed to fetch
+  http://example.com/qa | resolved | 0
+Layer 1 (proxy) requests received: 34; hosts: www.gstatic.com:443, accounts.google.com:443, update.googleapis.com:443, www.google.com:443, content-autofill.googleapis.com:443, android.clients.google.com:443, connect.facebook.net:443, www.clarity.ms:443, www.googletagmanager.com:443, www.google-analytics.com:443, www.facebook.com:443, a.klaviyo.com:443, example.com
+Proxy entries NOT denied: 0
+All non-local requests denied: YES
+Proxy exercised by control (nonzero): true
+
+PROXY LOG (JSONL):
+{"t":"2026-10-12T03:29:51.898Z","kind":"marker","name":"launch","ev":"check"}
+{"t":"2026-10-12T03:29:52.543Z","kind":"connect","method":"CONNECT","host":"www.gstatic.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.543Z","kind":"marker","name":"selftest-post","ev":"start"}
+{"t":"2026-10-12T03:29:52.545Z","kind":"connect","method":"CONNECT","host":"accounts.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.552Z","kind":"connect","method":"CONNECT","host":"update.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.721Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.742Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.817Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.859Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.860Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:52.893Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:53.393Z","kind":"connect","method":"CONNECT","host":"accounts.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:53.678Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:54.649Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:54.764Z","kind":"connect","method":"CONNECT","host":"android.clients.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:55.504Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:56.205Z","kind":"connect","method":"CONNECT","host":"accounts.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:29:57.530Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:00.038Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:00.903Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:00.924Z","kind":"marker","name":"selftest-post","ev":"end"}
+{"t":"2026-10-12T03:30:00.926Z","kind":"marker","name":"selftest-control-proxy-only","ev":"start"}
+{"t":"2026-10-12T03:30:00.998Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.046Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.087Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.115Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.116Z","kind":"connect","method":"CONNECT","host":"content-autofill.googleapis.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.155Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.158Z","kind":"connect","method":"CONNECT","host":"connect.facebook.net:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.158Z","kind":"connect","method":"CONNECT","host":"www.clarity.ms:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.166Z","kind":"connect","method":"CONNECT","host":"www.googletagmanager.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.171Z","kind":"connect","method":"CONNECT","host":"www.google-analytics.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.172Z","kind":"connect","method":"CONNECT","host":"www.clarity.ms:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.173Z","kind":"connect","method":"CONNECT","host":"www.facebook.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.174Z","kind":"connect","method":"CONNECT","host":"a.klaviyo.com:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.174Z","kind":"http","method":"GET","host":"example.com","path":"/qa","decision":"denied-answered-204"}
+{"t":"2026-10-12T03:30:01.176Z","kind":"connect","method":"CONNECT","host":"www.clarity.ms:443","path":"","decision":"denied-403"}
+{"t":"2026-10-12T03:30:01.685Z","kind":"marker","name":"selftest-control-proxy-only","ev":"end"}
+{"t":"2026-10-12T03:30:01.686Z","kind":"connect","method":"CONNECT","host":"www.google.com:443","path":"","decision":"denied-403"}

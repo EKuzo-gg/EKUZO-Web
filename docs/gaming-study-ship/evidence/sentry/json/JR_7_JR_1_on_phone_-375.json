@@ -1,0 +1,126 @@
+{
+  "body": {
+    "email": "team+gstest-1012-sentry@ekuzo.gg",
+    "source": "site-popup",
+    "ad": "karlin",
+    "attribution": {
+      "utm_source": "x",
+      "utm_medium": "social",
+      "utm_campaign": "gaming-study",
+      "utm_content": "karlin",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+    },
+    "attributionFrom": "url",
+    "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+    "eventId": "dcacd9e1-3133-4937-9d71-3720f63d889a",
+    "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+    "ekz_hp": ""
+  },
+  "leads": {
+    "generate_lead": [
+      {
+        "name": "generate_lead",
+        "params": {
+          "source": "season_one_popup"
+        },
+        "t": 1791777238236,
+        "url": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin"
+      }
+    ],
+    "fbLead": [
+      {
+        "name": "Lead",
+        "params": {
+          "content_name": "season_one_popup"
+        },
+        "opts": {
+          "eventID": "dcacd9e1-3133-4937-9d71-3720f63d889a"
+        },
+        "t": 1791777238236
+      }
+    ]
+  },
+  "storage": {
+    "ls": {
+      "ekuzo_s1_joined": "1"
+    },
+    "ss": {
+      "ekuzo_attribution": "{\"utm_source\":\"x\",\"utm_medium\":\"social\",\"utm_campaign\":\"gaming-study\",\"utm_content\":\"karlin\",\"utm_term\":\"\"}"
+    }
+  },
+  "bodies": [
+    {
+      "t": 1791777238195,
+      "key": "season",
+      "url": "/api/season-one",
+      "status": 200,
+      "body": {
+        "email": "team+gstest-1012-sentry@ekuzo.gg",
+        "source": "site-popup",
+        "ad": "karlin",
+        "attribution": {
+          "utm_source": "x",
+          "utm_medium": "social",
+          "utm_campaign": "gaming-study",
+          "utm_content": "karlin",
+          "utm_term": "",
+          "utm_id": "",
+          "site": ""
+        },
+        "attributionFrom": "url",
+        "page": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "eventId": "dcacd9e1-3133-4937-9d71-3720f63d889a",
+        "eventSourceUrl": "http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x&utm_medium=social&utm_campaign=gaming-study&utm_content=karlin",
+        "ekz_hp": ""
+      }
+    }
+  ],
+  "calls": {
+    "gtag": [
+      [
+        "js",
+        "2026-10-12T03:53:55.524Z"
+      ],
+      [
+        "config",
+        "G-8LM45PX53W"
+      ],
+      [
+        "event",
+        "generate_lead",
+        {
+          "source": "season_one_popup"
+        }
+      ]
+    ],
+    "fbq": [
+      [
+        "set",
+        "autoConfig",
+        false,
+        "1284038230557204"
+      ],
+      [
+        "init",
+        "1284038230557204"
+      ],
+      [
+        "track",
+        "PageView"
+      ],
+      [
+        "track",
+        "Lead",
+        {
+          "content_name": "season_one_popup"
+        },
+        {
+          "eventID": "dcacd9e1-3133-4937-9d71-3720f63d889a"
+        }
+      ]
+    ],
+    "clarity": []
+  }
+}

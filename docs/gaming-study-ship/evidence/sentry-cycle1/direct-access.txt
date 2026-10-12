@@ -1,0 +1,110 @@
+DIRECT ACCESS, GET/HEAD only, :3311 Sun Oct 11 23:29:37 CDT 2026
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids
+HTTP/1.1 200 OK
+x-nextjs-cache: HIT
+Cache-Control: s-maxage=31536000
+Content-Type: text/html; charset=utf-8
+Content-Length: 156429
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids/
+HTTP/1.1 308 Permanent Redirect
+location: /blog/gaming-study-13-7-years-younger-what-it-means-for-kids
+== /BLOG/GAMING-STUDY-13-7-YEARS-YOUNGER-WHAT-IT-MEANS-FOR-KIDS
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+x-nextjs-cache: HIT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30473
+== /BLOG/gaming-study-13-7-years-younger-what-it-means-for-kids
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+x-nextjs-cache: HIT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30473
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids/extra
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+x-nextjs-cache: HIT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30473
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids/opengraph-image
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+x-nextjs-cache: HIT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30473
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids/twitter-image
+HTTP/1.1 404 Not Found
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+x-nextjs-cache: HIT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30473
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x
+HTTP/1.1 200 OK
+x-nextjs-cache: HIT
+Cache-Control: s-maxage=31536000
+Content-Type: text/html; charset=utf-8
+Content-Length: 156429
+== /blog/gaming-study-13-7-years-younger-what-it-means-for-kids/?utm_source=x
+HTTP/1.1 308 Permanent Redirect
+location: /blog/gaming-study-13-7-years-younger-what-it-means-for-kids?utm_source=x
+== /images/gaming-study-13-7-card.jpg
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: image/jpeg
+Content-Length: 94471
+== /images/gaming-study-13-7-hero.jpg
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: image/jpeg
+Content-Length: 242166
+== /images/gaming-study-same-game-two-hours.png
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: image/png
+Content-Length: 46091
+== /_next/image?url=/images/gaming-study-13-7-hero.jpg&w=1200&q=75
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=14400, must-revalidate
+Content-Type: image/jpeg
+Content-Disposition: attachment; filename="gaming-study-13-7-hero.jpeg"
+X-Nextjs-Cache: MISS
+Content-Length: 67632
+== /_next/image?url=%2Fimages%2Fgaming-study-13-7-hero.jpg&w=1200&q=75
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=14400, must-revalidate
+Content-Type: image/jpeg
+Content-Disposition: attachment; filename="gaming-study-13-7-hero.jpeg"
+X-Nextjs-Cache: HIT
+Content-Length: 67632
+== /research/gaming-cognition-reanalysis.py
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: application/octet-stream
+Content-Length: 28358
+== /research/gaming-cognition-reanalysis-output.txt
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 29973
+== /sitemap.xml
+HTTP/1.1 200 OK
+x-nextjs-cache: HIT
+cache-control: public, max-age=0, must-revalidate
+content-type: application/xml
+== /llms.txt
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 14009
+== /robots.txt
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=0
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 3106
+1
+(^ sitemap slug occurrences)
+1
+(^ llms.txt slug occurrences)
+#!/usr/bin/env python3
+"""
+Reanalysis of the Brain and Body Study public dataset.

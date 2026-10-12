@@ -1,0 +1,6 @@
+AFTER-STICKY-SUCCESS thumbs: bar="GOT IT. LOOK FOR IT TOMORROW." storage={"sub":null,"dis":null} popupAppeared="THE EKUZO WEEKLY\n\nGAMING\nMATTERS.\nOne email after you read this. Then you decide"
+AFTER-STICKY-SUCCESS classic: bar="YOU'RE ON THE LIST." storage={"sub":null,"dis":null} popupAppeared="THE EKUZO WEEKLY\n\nGAMING\nMATTERS.\nFor parents of gamers, once a week.\n\nOne email"
+BAR@640: {"vw":640,"barH":80,"span":{"l":20,"r":407,"w":387,"size":"24px"},"input":{"l":423,"r":643,"w":220},"btn":{"l":651,"r":724,"w":73},"docScrollW":640,"bodyOverflowX":false}
+BAR@768: {"vw":768,"barH":100,"span":{"l":24,"r":488,"w":464,"size":"28.8px"},"input":{"l":512,"r":732,"w":220},"btn":{"l":740,"r":846,"w":106},"docScrollW":768,"bodyOverflowX":false}
+BAR@1024: {"vw":1024,"barH":100,"span":{"l":24,"r":643,"w":619,"size":"38.4px"},"input":{"l":667,"r":887,"w":220},"btn":{"l":895,"r":1001,"w":106},"docScrollW":1024,"bodyOverflowX":false}
+BAR@1280: {"vw":1280,"barH":100,"span":{"l":32,"r":806,"w":774,"size":"48px"},"input":{"l":914,"r":1134,"w":220},"btn":{"l":1142,"r":1248,"w":106},"docScrollW":1280,"bodyOverflowX":false}

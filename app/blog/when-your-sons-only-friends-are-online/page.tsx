@@ -31,7 +31,7 @@ const SHARE_IMAGE = HERO_IMAGE;
 const HERO_ALT =
   "A mother stands in a bedroom doorway watching her teenage son play a video game at his desk, headset on, in the warm light of his room.";
 const DATE_PUBLISHED = "2026-05-28";
-const DATE_MODIFIED = "2026-05-29";
+const DATE_MODIFIED = "2026-10-12";
 
 // FAQ items. Each answer is front-loaded (first sentence answers the question)
 // for AI extraction. This same array drives both the visible <h3> Q&A and the
@@ -378,6 +378,16 @@ export default function PostSonsOnlyFriendsAreOnline() {
                 through every night? And if the game were gone, what would he
                 reach for instead: passive scrolling or something active? The
                 answers tell you whether to worry, and what to do about it.
+              </p>
+              <p>
+                The same idea surfaced when{" "}
+                <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
+                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                </Link>{" "}
+                made the rounds (the number isn’t in the paper; Karlin, our
+                founder, read about a thousand of the replies). The most-liked
+                reply under the original post was &ldquo;The kind of gaming
+                probably matters as much as the hours.&rdquo;
               </p>
 
               <h2>We have high expectations in real life. Why not this?</h2>

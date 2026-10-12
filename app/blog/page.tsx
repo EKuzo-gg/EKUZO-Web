@@ -14,6 +14,19 @@ export const metadata = {
 
 const posts = [
   {
+    slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
+    title:
+      "The gaming study everyone shared, and what it means for your twelve-year-old",
+    date: "October 12, 2026",
+    author: "Karlin Oei",
+    category: "Perspective",
+    excerpt:
+      "A doctor's one-liner about a gaming study reached 30M+ people. Karlin read a thousand of the replies. The one that mattered wasn't about the study.",
+    image: "/images/gaming-study-13-7-card.jpg",
+    // Takes the featured slot from should-you-ban-fortnite for launch week.
+    featured: true,
+  },
+  {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
     date: "May 24, 2026",
@@ -30,7 +43,7 @@ const posts = [
    * The Kassi bundle, published 2026-07-31 after she blessed both pieces.
    * Both entries were commented out from 2026-07-25 / 2026-07-28 while the
    * posts sat live-but-undisseminated for her private review.
-   * `featured: true` lives on the fortnite piece per Jamie, 2026-07-31. Only
+   * `featured: true` sat on the fortnite piece from 2026-07-31 until the gaming-study post took it. Only
    * one post may carry it — the finder below takes the first match.
    */
   {
@@ -42,7 +55,7 @@ const posts = [
     excerpt:
       "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
     image: "/images/should-you-ban-fortnite-card.jpg",
-    featured: true,
+    featured: false,
   },
   {
     slug: "gaming-military-families",

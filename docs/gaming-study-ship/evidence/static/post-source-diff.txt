@@ -1,0 +1,270 @@
+diff --git a/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx b/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+index 2ee3cde..48964ca 100644
+--- a/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
++++ b/app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+@@ -34,7 +34,7 @@ import Image from "next/image";
+ 
+ const SLUG = "gaming-study-13-7-years-younger-what-it-means-for-kids";
+ const TITLE_DISPLAY =
+-  "The gaming study everyone shared this week, and what it means for your twelve-year-old";
++  "The gaming study everyone shared, and what it means for your twelve-year-old";
+ // Layout in app/layout.tsx applies the template "%s | EKUZO" — do not
+ // suffix the brand here or the tab title double-stamps.
+ const TITLE_SEO =
+@@ -43,11 +43,10 @@ const SUBHEAD =
+   "A doctor posted one line about a study. More than 30 million people saw it. I read a thousand of the replies, and the one that mattered wasn’t about the study.";
+ const DESCRIPTION =
+   "A physician's one-liner about a gaming study reached 30M+ people. EKUZO founder Karlin Oei read a thousand replies. What the study found, where “13.7 years younger” came from, and what it means for a twelve-year-old.";
+-// TODO(assets): both images are missing. See WORKLOG for the spec.
+ const HERO_IMAGE = "/images/gaming-study-13-7-hero.jpg";
+ const SHARE_IMAGE = "/images/gaming-study-13-7-card.jpg";
+-const DATE_PUBLISHED = "2026-09-16";
+-const DATE_MODIFIED = "2026-09-16";
++const DATE_PUBLISHED = "2026-10-12";
++const DATE_MODIFIED = "2026-10-12";
+ 
+ const REANALYSIS_SCRIPT = "/research/gaming-cognition-reanalysis.py";
+ const REANALYSIS_OUTPUT = "/research/gaming-cognition-reanalysis-output.txt";
+@@ -111,6 +110,33 @@ const PARENT_CARDS: ReplyCard[] = [
+   },
+ ];
+ 
++const KEEP_READING = [
++  {
++    slug: "what-homeschool-parents-taught-us-about-gaming",
++    title: "What 200+ homeschool parents taught us about gaming",
++    blurb:
++      "We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one structured, social, supervised thing they all want.",
++    image: "/images/blog-post-6-card.jpg",
++    category: "Case Studies",
++  },
++  {
++    slug: "should-you-ban-fortnite",
++    title: "She banned Fortnite and got her kid back. Then came a new problem.",
++    blurb:
++      "The ban worked, and it broke something no article warned her about. A military mom’s game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
++    image: "/images/should-you-ban-fortnite-card.jpg",
++    category: "Perspective",
++  },
++  {
++    slug: "when-your-sons-only-friends-are-online",
++    title: "When your son’s only friends are online",
++    blurb:
++      "Are online gaming friends real? The question isn’t online vs offline. It’s whether he’s alone in a lobby of strangers or on a team with the same people.",
++    image: "/images/when-your-sons-only-friends-are-online-hero.jpg",
++    category: "Perspective",
++  },
++];
++
+ // Visible FAQ + FAQPage JSON-LD from one source. Answers are plain strings
+ // because the schema only accepts plain text.
+ const FAQ_ITEMS: { question: string; answer: string[] }[] = [
+@@ -122,7 +148,7 @@ const FAQ_ITEMS: { question: string; answer: string[] }[] = [
+     ],
+   },
+   {
+-    question: "Is gaming good for a twelve-year-old's brain?",
++    question: "Is gaming good for kids' brains?",
+     answer: [
+       "This study can't answer that; no one under 18 was in it.",
+       "The child studies I know of are cross-sectional and mixed: better scores on some tasks alongside higher attention-problem and depression measures in nine- and ten-year-olds, from a paper that was retracted and replaced in 2023 with the numbers intact and the framing changed. “Associated with,” every time.",
+@@ -276,8 +302,9 @@ export default function PostGamingStudy137() {
+           <div className="relative w-full" style={{ height: "520px" }}>
+             <Image
+               src={HERO_IMAGE}
+-              alt="A twelve-year-old at a desk mid-match, headset on, a parent reading a phone in the doorway behind him."
++              alt="A phone showing the X post that says gamers test “~13.7 years younger.” The number is underlined, and a taped note under it reads “not in the paper.” Sticky notes ask which games, how many hours, what age, better than sports. Karlin Oei in a headset."
+               fill
++              sizes="(max-width: 1264px) 100vw, 1232px"
+               className="object-cover"
+               priority
+             />
+@@ -292,20 +319,42 @@ export default function PostGamingStudy137() {
+             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
+           }}
+         >
+-          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
++          <BlogPostBody
++            author="karlin-oei"
++            date={DATE_MODIFIED}
++            dateLabel="Updated"
++          >
++            <p>
++              <strong>Short answer:</strong> one study of 923 adults, average
++              age 55, found that people who game three or more hours a week
++              scored higher than non-gamers on memory, reasoning and
++              processing-speed tests. It can&apos;t say the gaming caused that,
++              and no one under 18 was in it, so it tells you nothing about your
++              twelve-year-old. The &ldquo;13.7 years younger&rdquo; line came
++              from a 2024 press release that counted gaming differently. I
++              think the better question for a kid is what kind of gaming, and
++              who he plays with.
++            </p>
+             <p>
+-              I saw the post the same day you did. A physician with a big
+-              following put up a study abstract and one sentence: frequent
+-              gamers performed on cognitive tests like non-gamers about 13.7
+-              years younger. For three days my feed argued about whether video
+-              games make you smart.
++              I saw{" "}
++              <a
++                href="https://x.com/BrandonLuuMD/status/2099226796893798645"
++                target="_blank"
++                rel="noopener noreferrer"
++              >
++                a recent post on X
++              </a>
++              , probably the same way you did. A physician with a big following
++              put up a study abstract and one sentence: frequent gamers
++              performed on cognitive tests like non-gamers about 13.7 years
++              younger. Counting the posts that quoted it, it passed 30 million
++              views in its first week. For three days my feed argued about
++              whether video games make you smart.
+             </p>
+             <p>
+               My first reaction was &ldquo;duh.&rdquo; My second, after I read
+               the paper, was that the number everyone was repeating isn&apos;t
+-              in it. The study is real, it&apos;s 923 adults averaging 55, it
+-              can&apos;t say what causes what, and no one under 18 was in it.
+-              The replies were the interesting part.
++              in it. The replies were the interesting part.
+             </p>
+ 
+             <h2>Why &ldquo;duh&rdquo;</h2>
+@@ -314,7 +363,7 @@ export default function PostGamingStudy137() {
+               ordered for me at restaurants. If a stranger talked to me in
+               person, I froze. I was not a good student either. Not because I
+               couldn&apos;t do the work; I didn&apos;t care about it. My mom
+-              tried everything to break me out of it: soccer, piano,
++              tried everything to break me out of it: tennis, piano,
+               orchestra. Nothing took.
+             </p>
+             <p>
+@@ -428,6 +477,16 @@ export default function PostGamingStudy137() {
+               is part of the plan instead of a fight at the door. Same game
+               your kid already plays. Everything around it is different.
+             </p>
++            <div className="my-10 mx-auto w-full max-w-[560px]">
++              <Image
++                src="/images/gaming-study-same-game-two-hours.png"
++                alt="Same game, two different hours. Who's there: strangers in a public queue, or the same teammates every week. Who's watching: no adult on the call, or a coach on the call. When it ends: when someone says stop, or set before it starts. What it's for: the next win, or one thing to get better at. From the doorway, both look like screen time."
++                width={1080}
++                height={1350}
++                sizes="(max-width: 640px) 100vw, 560px"
++                className="w-full h-auto"
++              />
++            </div>
+             <p>
+               In June a parent emailed me. Her son, who fences and plays
+               lacrosse and flag football, had to write a sixth-grade entrance
+@@ -441,7 +500,7 @@ export default function PostGamingStudy137() {
+               caption="Karlin on the email that made him cry: a multi-sport kid's greatest achievement was mid lane."
+             />
+ 
+-            <h2>The study, in a checklist</h2>
++            <h2>What the study found, and what it didn&apos;t</h2>
+             <p>Not my specialty. My read, checked against the paper.</p>
+             <ul>
+               <li>
+@@ -511,7 +570,7 @@ export default function PostGamingStudy137() {
+                 replaced in 2023, numbers intact, differences &ldquo;very
+                 small&rdquo; (
+                 <a
+-                  href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2836903"
++                  href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                 >
+@@ -621,7 +680,7 @@ export default function PostGamingStudy137() {
+                 Chaarani et al. (2022, retracted and replaced 2023), JAMA
+                 Network Open.{" "}
+                 <a
+-                  href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2836903"
++                  href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2797596"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                 >
+@@ -655,10 +714,11 @@ export default function PostGamingStudy137() {
+                 . Reply counts and sentiment are from a read of about 1,000
+                 replies across nine threads on September 14 and 15, 2026; a
+                 blind second pass agreed with the stance labels 81% of the
+-                time. View counts as read September 15, 2026: original post
+-                15.6M, the two largest quote-posts 12.6M combined, plus smaller
+-                quotes, for more than 30M across the wave. Likes as shown at
+-                the time.
++                time. View counts: more than 30M across the original post and
++                its quote-posts by September 15, 2026. Original post 17.2M as
++                read October 11, 2026; the two largest quote-posts 5.8M and
++                7.9M, and about 33M across eight posts, as read October 6,
++                2026. Likes as shown at the time.
+               </li>
+             </ul>
+ 
+@@ -683,35 +743,42 @@ export default function PostGamingStudy137() {
+             <p className="font-body font-bold text-red text-sm tracking-[0.15em] uppercase mb-8">
+               Keep Reading
+             </p>
+-            <Link
+-              href="/blog/what-homeschool-parents-taught-us-about-gaming"
+-              className="group grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8 items-start md:items-center"
+-            >
+-              <div className="relative aspect-[16/10] overflow-hidden bg-black">
+-                <Image
+-                  src="/images/blog-post-6-hero.jpg"
+-                  alt="What 200+ homeschool parents taught us about gaming"
+-                  fill
+-                  className="object-cover opacity-80 transition-opacity group-hover:opacity-100"
+-                />
+-              </div>
+-              <div>
+-                <span className="font-body text-xs font-bold text-red tracking-[0.15em] uppercase block mb-2">
+-                  Perspective
+-                </span>
+-                <h3 className="font-body font-bold text-black text-xl leading-snug group-hover:text-red transition-colors mb-2">
+-                  What 200+ homeschool parents taught us about gaming
+-                </h3>
+-                <span className="font-body text-black/40 text-sm">
+-                  by Karlin Oei
+-                </span>
+-              </div>
+-            </Link>
++            <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none p-0 m-0">
++              {KEEP_READING.map((post) => (
++                <li key={post.slug}>
++                  <Link
++                    href={`/blog/${post.slug}`}
++                    className="group flex flex-col h-full"
++                  >
++                    <div className="relative aspect-[16/10] overflow-hidden bg-black">
++                      <Image
++                        src={post.image}
++                        alt={post.title}
++                        fill
++                        sizes="(max-width: 768px) 100vw, 33vw"
++                        className="object-cover opacity-90 transition-opacity group-hover:opacity-100"
++                      />
++                    </div>
++                    <div className="pt-5 flex flex-col gap-2">
++                      <span className="font-body text-xs font-bold text-red tracking-[0.15em] uppercase">
++                        {post.category}
++                      </span>
++                      <h3 className="font-body font-bold text-black text-lg leading-snug group-hover:text-red transition-colors">
++                        {post.title}
++                      </h3>
++                      <p className="font-body text-black/50 text-sm leading-relaxed">
++                        {post.blurb}
++                      </p>
++                    </div>
++                  </Link>
++                </li>
++              ))}
++            </ul>
+           </div>
+         </section>
+       </div>
+ 
+-      <FooterBanner heading="Enroll into a transformational program today" />
++      <FooterBanner heading="Every gamer deserves a team" />
+       <Footer />
+     </>
+   );

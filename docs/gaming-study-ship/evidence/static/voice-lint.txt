@@ -1,0 +1,33 @@
+app/api/season-one/route.ts:9: SYMBOL '—' :: * Season 01 waitlist capture — the site popup (components/ui/SeasonOnePopup)
+app/api/season-one/route.ts:13: SYMBOL '—' :: *  1. POST /api/events — "Season 01 Waitlist". Upserts the profile with where
+app/api/season-one/route.ts:16: SYMBOL '—' :: *  2. POST /api/profile-subscription-bulk-create-jobs — marketing consent +
+app/api/season-one/route.ts:199: SYMBOL '—' :: console.error("KLAVIYO_PRIVATE_API_KEY not set — Season 01 sign-up lost:", email);
+app/season1/landing.html:690: SYMBOL '–' :: .faq details[open] summary::after{content:"–"}
+app/season1/landing.html:855: SYMBOL '→' :: <p class="sub">Turn screentime into practice.${k==="email"?" ":"<br>"}Give them a coach, a team,${k==="email"?
+app/season1/landing.html:864: SYMBOL '→' :: <div class="bar"><p>Turn screentime into practice.</p><span class="cta">Play their game →</span></div></div>`}
+app/season1/landing.html:872: SYMBOL '→' :: <p class="sub">A coach, a team and a season of their&nbsp;own.</p><span class="cta">Find their team →</span></
+app/season1/landing.html:880: SYMBOL '→' :: <h3>Every kid needs a team.</h3><span class="cta">Find their team →</span></div></div>`},
+app/season1/landing.html:888: SYMBOL '→' :: <div class="row"><p class="sub">A coach, a team and a season, in the game they already&nbsp;love.</p><span cla
+app/season1/landing.html:892: PHRASE nobody :: subject:"Practice over. Nobody yelled.",
+app/season1/landing.html:895: SYMBOL '→' :: <div><h3>The coach ends it.</h3><p class="sub">Practice has a start and an end. No doorway argument.</p><span 
+app/season1/landing.html:904: SYMBOL '→' :: <div class="bot"><p>A coach tracks what they learn every week.</p><span class="cta">See how →</span></div></di
+app/season1/landing.html:920: SYMBOL '→' :: <div class="bottom"><p data-alt="sub">Same game. Now with a coach and a&nbsp;team.</p><span class="cta">Find t
+app/season1/landing.html:929: SYMBOL '→' :: <span class="cta">Save their spot →</span></div>`},
+app/season1/landing.html:939: SYMBOL '→' :: <p class="sub">Problem solving, teamwork and talking it through. Real skills doing something they&nbsp;love.</
+app/season1/landing.html:948: SYMBOL '→' :: <p class="sub">A coach, a team and a jersey with their name on the&nbsp;back.</p><span class="cta">Save their 
+app/season1/landing.html:956: SYMBOL '→' :: <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the te
+app/season1/landing.html:1009: SYMBOL '→' :: if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice
+added lines scanned: 1599; hits: 19
+    306 app/api/season-one/route.ts
+    115 app/blog/gaming-study-13-7-years-younger-what-it-means-for-kids/page.tsx
+      8 app/blog/league-of-legends-youth-development/page.tsx
+      6 app/blog/page.tsx
+      7 app/blog/should-you-ban-fortnite/page.tsx
+      9 app/blog/what-homeschool-parents-taught-us-about-gaming/page.tsx
+      6 app/blog/what-your-kids-gaming-is-telling-you/page.tsx
+     11 app/blog/when-your-sons-only-friends-are-online/page.tsx
+     10 app/layout.tsx
+   1093 app/season1/landing.html
+     21 app/season1/route.ts
+      6 app/sitemap.ts
+      1 public/llms.txt

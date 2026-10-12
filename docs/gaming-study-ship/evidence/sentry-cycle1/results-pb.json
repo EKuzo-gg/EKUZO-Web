@@ -1,0 +1,348 @@
+[
+  {
+    "id": "PB-1/MN-1",
+    "vp": "1440",
+    "pass": true,
+    "notes": "no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1",
+    "extra": {
+      "steps": [
+        {
+          "f": 0.25,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.5,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.75,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 1,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "PB-5/MN-2",
+    "vp": "1440",
+    "pass": true,
+    "notes": "dialogs that opened without a tap in the page view: 1 ([\"s1-title\"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0"
+  },
+  {
+    "id": "PB-2",
+    "vp": "1440",
+    "pass": true,
+    "notes": "bar text=\"SEASON 01 WAITLIST IS OPEN Join Season 01\", inputs in bar=0, S1 before tap=0, after tap=1"
+  },
+  {
+    "id": "PB-3",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=[\"ekuzo_s1_dismissed_at\"]; gtag events seen=[]"
+  },
+  {
+    "id": "MN-8a same-view",
+    "vp": "1440",
+    "pass": true,
+    "notes": "after dismissing the tap-opened dialog and waiting 6s: total dialog adds=2 (1 auto + 1 tap), open now=0"
+  },
+  {
+    "id": "MN-8b new-load",
+    "vp": "1440",
+    "pass": true,
+    "notes": "post reload S1=0; / load S1=0 after dismiss"
+  },
+  {
+    "id": "JR-5",
+    "vp": "1440",
+    "pass": true,
+    "notes": "dismissed (Esc) then reload: auto S1=0; sticky bar tap then opens: 1"
+  },
+  {
+    "id": "PB-1/MN-1",
+    "vp": "375",
+    "pass": true,
+    "notes": "no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1",
+    "extra": {
+      "steps": [
+        {
+          "f": 0.25,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.5,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.75,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 1,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "PB-5/MN-2",
+    "vp": "375",
+    "pass": true,
+    "notes": "dialogs that opened without a tap in the page view: 1 ([\"s1-title\"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0"
+  },
+  {
+    "id": "PB-2",
+    "vp": "375",
+    "pass": true,
+    "notes": "bar text=\"Join Season 01\", inputs in bar=0, S1 before tap=0, after tap=1"
+  },
+  {
+    "id": "PB-3",
+    "vp": "375",
+    "pass": true,
+    "notes": "ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=[\"ekuzo_s1_dismissed_at\"]; gtag events seen=[]"
+  },
+  {
+    "id": "MN-8a same-view",
+    "vp": "375",
+    "pass": true,
+    "notes": "after dismissing the tap-opened dialog and waiting 6s: total dialog adds=2 (1 auto + 1 tap), open now=0"
+  },
+  {
+    "id": "MN-8b new-load",
+    "vp": "375",
+    "pass": true,
+    "notes": "post reload S1=0; / load S1=0 after dismiss"
+  },
+  {
+    "id": "JR-5",
+    "vp": "375",
+    "pass": true,
+    "notes": "dismissed (Esc) then reload: auto S1=0; sticky bar tap then opens: 1"
+  },
+  {
+    "id": "JR-10 PB-1/MN-1",
+    "vp": "1440",
+    "pass": true,
+    "notes": "no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1",
+    "extra": {
+      "steps": [
+        {
+          "f": 0.25,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.5,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.75,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 1,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-10 PB-5/MN-2",
+    "vp": "1440",
+    "pass": true,
+    "notes": "dialogs that opened without a tap in the page view: 1 ([\"s1-title\"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0"
+  },
+  {
+    "id": "JR-10 PB-2",
+    "vp": "1440",
+    "pass": true,
+    "notes": "bar text=\"SEASON 01 WAITLIST IS OPEN Join Season 01\", inputs in bar=0, S1 before tap=0, after tap=1"
+  },
+  {
+    "id": "JR-10 PB-3",
+    "vp": "1440",
+    "pass": true,
+    "notes": "ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=[\"ekuzo_s1_dismissed_at\"]; gtag events seen=[]"
+  },
+  {
+    "id": "JR-10 PB-1/MN-1",
+    "vp": "375",
+    "pass": true,
+    "notes": "no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1",
+    "extra": {
+      "steps": [
+        {
+          "f": 0.25,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.5,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 0.75,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        },
+        {
+          "f": 1,
+          "state": {
+            "hits": [],
+            "dialogs": [],
+            "nlDialogs": [],
+            "fixedEmailInputs": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "JR-10 PB-5/MN-2",
+    "vp": "375",
+    "pass": true,
+    "notes": "dialogs that opened without a tap in the page view: 1 ([\"s1-title\"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0"
+  },
+  {
+    "id": "JR-10 PB-2",
+    "vp": "375",
+    "pass": true,
+    "notes": "bar text=\"Join Season 01\", inputs in bar=0, S1 before tap=0, after tap=1"
+  },
+  {
+    "id": "JR-10 PB-3",
+    "vp": "375",
+    "pass": true,
+    "notes": "ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=[\"ekuzo_s1_dismissed_at\"]; gtag events seen=[]"
+  },
+  {
+    "id": "JR-5 boundary 6d ago",
+    "vp": "1440",
+    "pass": true,
+    "notes": "dismissed_at=6d ago: auto-open=false, expected=false"
+  },
+  {
+    "id": "JR-5 boundary 8d ago",
+    "vp": "1440",
+    "pass": true,
+    "notes": "dismissed_at=8d ago: auto-open=true, expected=true"
+  },
+  {
+    "id": "JR-5 dismiss via x",
+    "vp": "1440",
+    "pass": true,
+    "notes": "closed=true dismissed_at written=true; after reload S1=0; Lead events=0"
+  },
+  {
+    "id": "JR-5 dismiss via backdrop",
+    "vp": "1440",
+    "pass": false,
+    "notes": "closed=false dismissed_at written=false; after reload S1=1; Lead events=0"
+  },
+  {
+    "id": "MN-9",
+    "vp": "375",
+    "pass": true,
+    "notes": "touch swipe starting on bar button: up 300px -> S1=0 (scrollY 808->1233), down 250px -> S1=0; positive control tap -> S1=1"
+  },
+  {
+    "id": "MN-8d touch",
+    "vp": "375",
+    "pass": true,
+    "notes": "three touch scroll gestures on page body with popup dismissed: S1=0"
+  },
+  {
+    "id": "MN-8c after sign-up",
+    "vp": "1440",
+    "pass": true,
+    "notes": "joined=1, POSTs=1, S1 5s after close=0, post reload=0, / load=0; done text=\"YOU’RE ON THE LIST AWESOME. We can’t wait to make screentime the highlight of yo\""
+  },
+  {
+    "id": "MN-8c after sign-up",
+    "vp": "375",
+    "pass": true,
+    "notes": "joined=1, POSTs=1, S1 5s after close=0, post reload=0, / load=0; done text=\"THEY GAME TOO MUCH. WITH A COACH. YOU’RE ON THE LIST AWESOME. We can’t wait to m\""
+  },
+  {
+    "id": "JR-6",
+    "vp": "1440",
+    "pass": true,
+    "notes": "cards linking to post on /blog: 2; landed http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids; h1=\"The gaming study everyone shared, and what it means for your twelve-year-old\"; own console errors: 0"
+  }
+]

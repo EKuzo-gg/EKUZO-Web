@@ -1,0 +1,31 @@
+saved screenshot: n1-before_-1440
+saved screenshot: n1-after_-1440
+saved screenshot: n1-before_-375
+saved screenshot: n1-after_-375
+PASS - N1: / - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo-camps-1440
+saved screenshot: n1-after_programs_ekuzo-camps-1440
+saved screenshot: n1-before_programs_ekuzo-camps-375
+saved screenshot: n1-after_programs_ekuzo-camps-375
+PASS - N1: /programs/ekuzo-camps - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo101-1440
+saved screenshot: n1-after_programs_ekuzo101-1440
+saved screenshot: n1-before_programs_ekuzo101-375
+saved screenshot: n1-after_programs_ekuzo101-375
+PASS - N1: /programs/ekuzo101 - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo100-1440
+saved screenshot: n1-after_programs_ekuzo100-1440
+saved screenshot: n1-before_programs_ekuzo100-375
+saved screenshot: n1-after_programs_ekuzo100-375
+PASS - N1: /programs/ekuzo100 - bar outerHTML byte-identical before vs after (identical)
+saved screenshot: n1-before_programs_ekuzo-teams-1440
+saved screenshot: n1-after_programs_ekuzo-teams-1440
+  [retry] goto http://localhost:3002/programs/ekuzo-teams attempt 1 failed: page.goto: Timeout 45000ms exceeded.
+  [retry] goto http://localhost:3002/programs/ekuzo-teams attempt 2 failed: page.goto: net::ERR_ABORTED; maybe frame was detached?
+page.waitForTimeout: Target page, context or browser has been closed
+    at gotoRetry (/tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/docs/blog-newsletter/tests/sentry-n1-n2-n4.mjs:40:18)
+    at async file:///tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/docs/blog-newsletter/tests/sentry-n1-n2-n4.mjs:100:9
+    at async withBrowser (/tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/docs/blog-newsletter/tests/sentry-common.mjs:21:5)
+    at async main (/tmp/claude-0/-home-claude/1877c9cb-b201-584c-8d75-1301c7d33b6c/scratchpad/preview/docs/blog-newsletter/tests/sentry-n1-n2-n4.mjs:73:3) {
+  log: []
+}

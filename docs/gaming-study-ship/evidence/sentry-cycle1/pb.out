@@ -1,0 +1,31 @@
+PASS PB-1/MN-1 1440 no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1
+PASS PB-5/MN-2 1440 dialogs that opened without a tap in the page view: 1 (["s1-title"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0
+PASS PB-2 1440 bar text="SEASON 01 WAITLIST IS OPEN Join Season 01", inputs in bar=0, S1 before tap=0, after tap=1
+PASS PB-3 1440 ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=["ekuzo_s1_dismissed_at"]; gtag events seen=[]
+PASS MN-8a same-view 1440 after dismissing the tap-opened dialog and waiting 6s: total dialog adds=2 (1 auto + 1 tap), open now=0
+PASS MN-8b new-load 1440 post reload S1=0; / load S1=0 after dismiss
+PASS JR-5 1440 dismissed (Esc) then reload: auto S1=0; sticky bar tap then opens: 1
+PASS PB-1/MN-1 375 no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1
+PASS PB-5/MN-2 375 dialogs that opened without a tap in the page view: 1 (["s1-title"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0
+PASS PB-2 375 bar text="Join Season 01", inputs in bar=0, S1 before tap=0, after tap=1
+PASS PB-3 375 ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=["ekuzo_s1_dismissed_at"]; gtag events seen=[]
+PASS MN-8a same-view 375 after dismissing the tap-opened dialog and waiting 6s: total dialog adds=2 (1 auto + 1 tap), open now=0
+PASS MN-8b new-load 375 post reload S1=0; / load S1=0 after dismiss
+PASS JR-5 375 dismissed (Esc) then reload: auto S1=0; sticky bar tap then opens: 1
+PASS JR-10 PB-1/MN-1 1440 no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1
+PASS JR-10 PB-5/MN-2 1440 dialogs that opened without a tap in the page view: 1 (["s1-title"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0
+PASS JR-10 PB-2 1440 bar text="SEASON 01 WAITLIST IS OPEN Join Season 01", inputs in bar=0, S1 before tap=0, after tap=1
+PASS JR-10 PB-3 1440 ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=["ekuzo_s1_dismissed_at"]; gtag events seen=[]
+PASS JR-10 PB-1/MN-1 375 no newsletter copy ever in DOM (hits=[]), non-S1 dialogs at 25/50/75/100%: 0,0,0,0, fixed non-S1 email inputs: 0,0,0,0, case-insensitive copy match, maxDialogs=1
+PASS JR-10 PB-5/MN-2 375 dialogs that opened without a tap in the page view: 1 (["s1-title"]); S1 open at ~3-9s: 1; S1 at 1.8s: 0
+PASS JR-10 PB-2 375 bar text="Join Season 01", inputs in bar=0, S1 before tap=0, after tap=1
+PASS JR-10 PB-3 375 ekuzo_nl_*/newsletter keys: []; newsletter_impression count=0; localStorage keys=["ekuzo_s1_dismissed_at"]; gtag events seen=[]
+PASS JR-5 boundary 6d ago 1440 dismissed_at=6d ago: auto-open=false, expected=false
+PASS JR-5 boundary 8d ago 1440 dismissed_at=8d ago: auto-open=true, expected=true
+PASS JR-5 dismiss via x 1440 closed=true dismissed_at written=true; after reload S1=0; Lead events=0
+FAIL JR-5 dismiss via backdrop 1440 closed=false dismissed_at written=false; after reload S1=1; Lead events=0
+PASS MN-9 375 touch swipe starting on bar button: up 300px -> S1=0 (scrollY 808->1233), down 250px -> S1=0; positive control tap -> S1=1
+PASS MN-8d touch 375 three touch scroll gestures on page body with popup dismissed: S1=0
+PASS MN-8c after sign-up 1440 joined=1, POSTs=1, S1 5s after close=0, post reload=0, / load=0; done text="YOU’RE ON THE LIST AWESOME. We can’t wait to make screentime the highlight of yo"
+PASS MN-8c after sign-up 375 joined=1, POSTs=1, S1 5s after close=0, post reload=0, / load=0; done text="THEY GAME TOO MUCH. WITH A COACH. YOU’RE ON THE LIST AWESOME. We can’t wait to m"
+PASS JR-6 1440 cards linking to post on /blog: 2; landed http://localhost:3311/blog/gaming-study-13-7-years-younger-what-it-means-for-kids; h1="The gaming study everyone shared, and what it means for your twelve-year-old"; own console errors: 0

@@ -1,0 +1,33 @@
+(node:56578) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/lib/newsletterAb.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/jamiefitch/Projects/ekuzo-web/.claude/worktrees/gaming-study-ship/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ getOrAssignVariant: 10,000 draws with Math.random land between 48% and 52% thumbs (2.06025ms)
+✔ getOrAssignVariant: random() < 0.5 assigns thumbs, persists it (0.066417ms)
+✔ getOrAssignVariant: random() >= 0.5 assigns classic, persists it (0.045583ms)
+✔ getOrAssignVariant: a stored valid value always wins, never reassigned (0.038208ms)
+✔ getOrAssignVariant: an invalid stored value is treated as unassigned (0.038667ms)
+✔ getOrAssignVariant: storage throwing returns 'thumbs' and stores nothing (0.047542ms)
+✔ isBlogPostPath: cases from the contract (0.080333ms)
+✔ shouldShowPopup: dismissed 29 days ago is still within the window (false) (0.050042ms)
+✔ shouldShowPopup: dismissed 31 days ago is outside the window (true) (0.043875ms)
+✔ shouldShowPopup: subscribed 364 days ago is still within the window (false) (0.06075ms)
+✔ shouldShowPopup: subscribed 366 days ago is outside the window (true) (0.040291ms)
+✔ shouldShowPopup: no stored timestamps at all is true (0.0305ms)
+✔ shouldShowPopup: storage throwing defaults to showing (true) (0.038ms)
+✔ shouldShowPopup: window boundaries are named constants matching 30/365 days (0.020084ms)
+✔ recordDismiss writes DISMISSED_AT_KEY with the given now (0.029375ms)
+✔ recordSuccess writes SUBSCRIBED_AT_KEY with the given now (0.031042ms)
+✔ recordDismiss: storage throwing is swallowed, never throws (0.0685ms)
+✔ recordSuccess: storage throwing is swallowed, never throws (0.0375ms)
+✔ recordDismiss then shouldShowPopup: dismissal actually suppresses the popup (0.035583ms)
+✔ recordSuccess then shouldShowPopup: success actually suppresses the popup (0.024875ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 48.464667
+exit=0

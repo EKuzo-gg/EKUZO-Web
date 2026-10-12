@@ -1,0 +1,781 @@
+
+===== popupFit =====
+
+--- popup-fit-thumbs-375x800
+FIT blog thumbs 375x800 {
+ "found": true,
+ "vh": 800,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": -65,
+   "bottom": 137,
+   "h": 202,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 193,
+   "bottom": 233,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "One email after you read this. Then you decide.",
+   "top": 271,
+   "bottom": 372,
+   "h": 101,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Leave your address and you're on the list today.",
+   "top": 384,
+   "bottom": 542,
+   "h": 158,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "top": 574,
+   "bottom": 593,
+   "h": 20,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name (optional)",
+   "top": 625,
+   "bottom": 677,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 693,
+   "bottom": 745,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Send me the one email",
+   "top": 761,
+   "bottom": 813,
+   "h": 52,
+   "fullyVisible": false,
+   "partiallyClipped": true,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time, or use the thumbs",
+   "top": 829,
+   "bottom": 865,
+   "h": 36,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": true,
+   "display": "block"
+  }
+ ],
+ "scroll": [
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1",
+   "overflowY": "visible",
+   "scrollH": 865,
+   "clientH": 800,
+   "canScroll": false
+  },
+  {
+   "tag": "DIV",
+   "cls": "fixed inset-0 z-[9999] flex",
+   "overflowY": "visible",
+   "scrollH": 865,
+   "clientH": 800,
+   "canScroll": false
+  }
+ ]
+}
+STEP OK popup-fit-thumbs-375x800
+
+--- popup-fit-thumbs-375x667
+FIT blog thumbs 375x667 {
+ "found": true,
+ "vh": 667,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": -132,
+   "bottom": 70,
+   "h": 202,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 127,
+   "bottom": 167,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "One email after you read this. Then you decide.",
+   "top": 205,
+   "bottom": 306,
+   "h": 101,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Leave your address and you're on the list today.",
+   "top": 318,
+   "bottom": 475,
+   "h": 158,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "top": 507,
+   "bottom": 527,
+   "h": 20,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name (optional)",
+   "top": 559,
+   "bottom": 611,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 627,
+   "bottom": 679,
+   "h": 52,
+   "fullyVisible": false,
+   "partiallyClipped": true,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Send me the one email",
+   "top": 695,
+   "bottom": 747,
+   "h": 52,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": true,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time, or use the thumbs",
+   "top": 763,
+   "bottom": 799,
+   "h": 36,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": true,
+   "display": "block"
+  }
+ ],
+ "scroll": [
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1",
+   "overflowY": "visible",
+   "scrollH": 799,
+   "clientH": 667,
+   "canScroll": false
+  },
+  {
+   "tag": "DIV",
+   "cls": "fixed inset-0 z-[9999] flex",
+   "overflowY": "visible",
+   "scrollH": 799,
+   "clientH": 667,
+   "canScroll": false
+  }
+ ]
+}
+STEP OK popup-fit-thumbs-375x667
+
+--- popup-fit-classic-375x800
+FIT blog classic 375x800 {
+ "found": true,
+ "vh": 800,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": 6,
+   "bottom": 208,
+   "h": 202,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 264,
+   "bottom": 304,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "For parents of gamers, once a week.",
+   "top": 342,
+   "bottom": 409,
+   "h": 67,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "One email a week on making gaming count. I coach",
+   "top": 421,
+   "bottom": 489,
+   "h": 68,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "top": 521,
+   "bottom": 540,
+   "h": 20,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name (optional)",
+   "top": 572,
+   "bottom": 624,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 640,
+   "bottom": 692,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join the weekly",
+   "top": 708,
+   "bottom": 760,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time.",
+   "top": 776,
+   "bottom": 794,
+   "h": 18,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  }
+ ],
+ "scroll": []
+}
+STEP OK popup-fit-classic-375x800
+
+--- popup-fit-classic-375x667
+FIT blog classic 375x667 {
+ "found": true,
+ "vh": 667,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": -61,
+   "bottom": 141,
+   "h": 202,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 197,
+   "bottom": 237,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "For parents of gamers, once a week.",
+   "top": 276,
+   "bottom": 343,
+   "h": 67,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "One email a week on making gaming count. I coach",
+   "top": 355,
+   "bottom": 422,
+   "h": 68,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Karlin Oei, founder, EKUZO",
+   "top": 454,
+   "bottom": 474,
+   "h": 20,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name (optional)",
+   "top": 506,
+   "bottom": 558,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 574,
+   "bottom": 626,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Join the weekly",
+   "top": 642,
+   "bottom": 694,
+   "h": 52,
+   "fullyVisible": false,
+   "partiallyClipped": true,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe any time.",
+   "top": 710,
+   "bottom": 728,
+   "h": 18,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": true,
+   "display": "block"
+  }
+ ],
+ "scroll": [
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1",
+   "overflowY": "visible",
+   "scrollH": 728,
+   "clientH": 667,
+   "canScroll": false
+  },
+  {
+   "tag": "DIV",
+   "cls": "fixed inset-0 z-[9999] flex",
+   "overflowY": "visible",
+   "scrollH": 728,
+   "clientH": 667,
+   "canScroll": false
+  }
+ ]
+}
+STEP OK popup-fit-classic-375x667
+
+--- popup-fit-site-375x800
+FIT site 375x800 {
+ "found": true,
+ "vh": 800,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": 50,
+   "bottom": 253,
+   "h": 202,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 309,
+   "bottom": 349,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "Stay in the loop.",
+   "top": 387,
+   "bottom": 421,
+   "h": 34,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Get stories of transformation, tips, and updates",
+   "top": 433,
+   "bottom": 478,
+   "h": 45,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name",
+   "top": 510,
+   "bottom": 562,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 578,
+   "bottom": 630,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Sign up",
+   "top": 646,
+   "bottom": 698,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe anytime. We respect your in",
+   "top": 714,
+   "bottom": 750,
+   "h": 36,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  }
+ ],
+ "scroll": []
+}
+STEP OK popup-fit-site-375x800
+
+--- popup-fit-site-375x667
+FIT site 375x667 {
+ "found": true,
+ "vh": 667,
+ "vw": 375,
+ "docScrollLocked": "clip visible",
+ "rows": [
+  {
+   "tag": "BUTTON",
+   "text": "Close",
+   "top": 24,
+   "bottom": 64,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "flex"
+  },
+  {
+   "tag": "IMG",
+   "text": "",
+   "top": -16,
+   "bottom": 186,
+   "h": 202,
+   "fullyVisible": false,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "SPAN",
+   "text": "MATTERS.",
+   "top": 242,
+   "bottom": 282,
+   "h": 40,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "inline"
+  },
+  {
+   "tag": "H3",
+   "text": "Stay in the loop.",
+   "top": 320,
+   "bottom": 354,
+   "h": 34,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "Get stories of transformation, tips, and updates",
+   "top": 366,
+   "bottom": 411,
+   "h": 45,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "First name",
+   "top": 443,
+   "bottom": 495,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "INPUT",
+   "text": "Email address",
+   "top": 511,
+   "bottom": 563,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Sign up",
+   "top": 579,
+   "bottom": 631,
+   "h": 52,
+   "fullyVisible": true,
+   "partiallyClipped": false,
+   "offscreen": false,
+   "display": "block"
+  },
+  {
+   "tag": "P",
+   "text": "No spam. Unsubscribe anytime. We respect your in",
+   "top": 647,
+   "bottom": 683,
+   "h": 36,
+   "fullyVisible": false,
+   "partiallyClipped": true,
+   "offscreen": false,
+   "display": "block"
+  }
+ ],
+ "scroll": [
+  {
+   "tag": "DIV",
+   "cls": "flex-1 flex flex-col justify-center items-center relative bg-[#7B3AAF] lg:bg-[#1",
+   "overflowY": "visible",
+   "scrollH": 683,
+   "clientH": 667,
+   "canScroll": false
+  },
+  {
+   "tag": "DIV",
+   "cls": "fixed inset-0 z-[9999] flex",
+   "overflowY": "visible",
+   "scrollH": 683,
+   "clientH": 667,
+   "canScroll": false
+  }
+ ]
+}
+STEP OK popup-fit-site-375x667
+DONE
