@@ -5,6 +5,27 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 12, 2026 (robots.txt and sitemap fix for Search Console)
+
+Branch `build/robots-sitemap-fix` (worktree `.claude/worktrees/robots-sitemap`), cut from `origin/main`
+`98d045a`, so it fast-forwards `main` and carries none of `dev`'s unreleased work. Source:
+`knowledge-base/explorations/2026-10-09-paid-media-currency/workstreams/R5-seo-geo.md` § 3 and § 5
+item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) listed a site font under
+"Blocked by robots.txt", which confirmed the bug.
+
+**What changed**
+- `public/robots.txt`: removed `Disallow: /_next/` (and the now-pointless `Allow: /_next/image`) from
+  both groups so Googlebot can load CSS, JS and fonts to render pages. `/api/` stays blocked in both
+  groups. Comments fixed: Google-Extended does not control AI Overviews (the Search Console AI
+  controls setting does), and the stale "line 77" pointer now names the checklist item.
+- `app/sitemap.ts`: removed the three noindex `/register` routes; every `new Date()` replaced with a
+  real date (last commit to the route's page file). Rule in the file header: update a page's date in
+  the same commit that changes its content. 29 URLs, all 200 and indexable on the live site.
+
+**After it deploys:** nothing to resubmit (the sitemap is already submitted in Search Console and
+Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.
+
+---
 ## Jamie (via Claude, Build Loop), October 11, 2026 (gaming-study post: ship changes, final images, one ask per post)
 
 Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`

@@ -3,17 +3,27 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://ekuzo.gg";
 
+  // lastModified is a real date, never new Date(): Google only trusts lastmod
+  // when it is consistently accurate, and a build-time timestamp tells it every
+  // page changed on every deploy. Dates set 2026-10-12 from the last commit to
+  // each route's page file (author pages: lib/authors.ts). When you change a
+  // page's content, update its date here in the same commit.
+  //
+  // Only indexable pages belong here. The /register routes are noindex and
+  // were removed 2026-10-12; noindex pages in a sitemap show up as errors in
+  // Search Console.
+
   return [
     // Core pages
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: new Date("2026-08-04"),
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${baseUrl}/programs`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "weekly",
       priority: 0.9,
     },
@@ -21,63 +31,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Programs — camps is the primary offering
     {
       url: `${baseUrl}/programs/ekuzo-camps`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-08-04"),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/programs/ekuzo-camps/register`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/programs/ekuzo-teams`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/programs/ekuzo-teams/register`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/programs/ekuzo100`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/programs/ekuzo100/register`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
 
     // Informational pages
     {
       url: `${baseUrl}/methodology`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/parents`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/schools`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/games`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-04-14"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
@@ -85,19 +77,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Partners
     {
       url: `${baseUrl}/partners`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-10"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/partners/boys-and-girls-club`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-10"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/faq`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-05-25"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
@@ -105,19 +97,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-10-11"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-28"),
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
       url: `${baseUrl}/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-28"),
       changeFrequency: "yearly",
       priority: 0.5,
     },
@@ -182,13 +174,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog author pages
     {
       url: `${baseUrl}/blog/author/karlin-oei`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-31"),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${baseUrl}/blog/author/jamie-fitch`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-07-31"),
       changeFrequency: "monthly",
       priority: 0.5,
     },
@@ -202,13 +194,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Legal
     {
       url: `${baseUrl}/terms-of-service`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-04-14"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-04-14"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
