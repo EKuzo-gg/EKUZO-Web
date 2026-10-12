@@ -1,0 +1,62 @@
+{
+  "season1-d5-1440x900-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d5-1440x900-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d5-375x812-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d5-375x812-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d3-1440x900-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d3-1440x900-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d3-375x812-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "season1-d3-375x812-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "popup-home-1440x900-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "popup-home-1440x900-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "popup-home-375x812-baseline": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  },
+  "popup-home-375x812-build": {
+    "console": [],
+    "consoleWarn": [],
+    "pageerrors": []
+  }
+}

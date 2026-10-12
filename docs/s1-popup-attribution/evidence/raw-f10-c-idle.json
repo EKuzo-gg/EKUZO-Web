@@ -1,0 +1,533 @@
+[
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "page.close",
+    "closeAfterMs": 300,
+    "closeCalledRelToCall": 324,
+    "closeDoneRelToCall": 327,
+    "beaconsAfterCall": [],
+    "signupBeaconSeen": false,
+    "signupBeaconRelToCallMs": null,
+    "signupSentBeforeClose": false,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791737980707,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60111
+        },
+        "tn": 1791737980711,
+        "rel": -3967,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791737985003,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 1212,
+          "signup": true,
+          "text": "{\"e\":[\"0.8.72\",2,123,4302,\"wml8wll5ua\",\"wh49m7\",\"rdme33\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[4029,12,188,1060,347,\"\",\"true\"],[4030,13,188,1060,347,\"\",\"true\"],[4033,42,184,\"email\",\"••••• •••• •••• •••• ••••\",\"36ca4v\"],[4030,14,188,1060,347,\"\",\"true\"],[4030,9,188,1060,347,16383,16383,0,0,0,\"Save their spot\",null,\"17t7w68f9.3cfj4v98a\",1,1,480,54,\"button\",\"\",\"\",0],[4037,39,126],[4091,24,\"signup\"],[4423,26,\"pagehide\",0],[4424,34,\"signed_up\",[\"yes\"]],[123,4,1,1440,1970,1440,900,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[4425,1,4,[\"f.clarity.ms\"]],[4425,0,2,60111,3,3,4,9,5,2,10,2,25,15,28,20],[4425,36,6,[4042,67]]],\"p\":[[4042,6,188,126,187,\"BUTTON\",\"type=submit\",\"disabled=\",277,188,\"*T\",\"Saving…\",244,[10]],[4109,6,30,5,29,\"DIV\",\"class=conf\",\"id=conf\",\"role=dialog\",\"aria-modal=true\",\"aria-labelledby=conf-h\",\"style=--acc: #E0FF4E; --acc-ink: #111013; --disp: \\\"Inter Tight\\\",var(--ui); --ds: 1;\",5,3,4,\"BODY\",\"style=overflow: hidden;\",35,26,34,\"HEADER\",\"hidden=\",28,5,27,[5],\"class=sticky\",\"id=sticky\",[21]]]}"
+        },
+        "tn": 1791737985005,
+        "rel": 329,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "page.close",
+    "closeAfterMs": 1000,
+    "closeCalledRelToCall": 1019,
+    "closeDoneRelToCall": 1021,
+    "beaconsAfterCall": [],
+    "signupBeaconSeen": false,
+    "signupBeaconRelToCallMs": null,
+    "signupSentBeforeClose": false,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791737992288,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60002
+        },
+        "tn": 1791737992294,
+        "rel": -4043,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791737993337,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 402
+        },
+        "tn": 1791737993339,
+        "rel": -2994,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791737997361,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 1423,
+          "signup": true,
+          "text": "{\"e\":[\"0.8.72\",3,1180,4024,\"wml8wll5ua\",\"p06m4u\",\"gf7uki\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[4113,12,188,1060,347,\"\",\"true\"],[4114,13,188,1060,347,\"\",\"true\"],[4116,42,184,\"email\",\"••••• •••• •••• •••• ••••\",\"36ca4v\"],[4114,14,188,1060,347,\"\",\"true\"],[4114,9,188,1060,347,16383,16383,0,0,0,\"Save their spot\",null,\"17t7w68f9.3cfj4v98a\",1,1,480,54,\"button\",\"\",\"\",0],[4120,39,126],[4173,24,\"signup\"],[4073,27,184,\"••••• •••• •••• •••• ••••\",1],[5196,26,\"pagehide\",0],[5204,34,\"signed_up\",[\"yes\"]],[1180,4,1,1440,1970,1440,900,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[5204,0,2,402,3,3,4,8,5,3,10,2,25,15],[5204,36,6,[4125,66,4891,0]]],\"p\":[[4125,6,188,126,187,\"BUTTON\",\"type=submit\",\"disabled=\",277,188,\"*T\",\"Saving…\",244,[10]],[4191,6,30,5,29,\"DIV\",\"class=conf\",\"id=conf\",\"role=dialog\",\"aria-modal=true\",\"aria-labelledby=conf-h\",\"style=--acc: #E0FF4E; --acc-ink: #111013; --disp: \\\"Inter Tight\\\",var(--ui); --ds: 1;\",5,3,4,\"BODY\",\"style=overflow: hidden;\",35,26,34,\"HEADER\",\"hidden=\",28,5,27,[5],\"class=sticky\",\"id=sticky\",[21]],[4891,6,30,5,29,\"DIV\",\"class=conf on\",\"id=conf\",\"role=dialog\",\"aria-modal=true\",\"aria-labelledby=conf-h\",\"style=--acc: #E0FF4E; --acc-ink: #111013; --disp: \\\"Inter Tight\\\",var(--ui); --ds: 1;\"]]}"
+        },
+        "tn": 1791737997364,
+        "rel": 1030,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "page.close",
+    "closeAfterMs": 3000,
+    "closeCalledRelToCall": 3017,
+    "closeDoneRelToCall": 3019,
+    "beaconsAfterCall": [
+      {
+        "ver": "0.8.72",
+        "t": 1791738009776,
+        "url": "e.clarity.ms/collect",
+        "bytes": 734,
+        "seq": 2,
+        "startMs": 132,
+        "durMs": 4873,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 955,
+        "afterCloseCall": false
+      }
+    ],
+    "signupBeaconSeen": true,
+    "signupBeaconRelToCallMs": 955,
+    "signupSentBeforeClose": true,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738004905,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60114
+        },
+        "tn": 1791738004907,
+        "rel": -3916,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791738009771,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 734
+        },
+        "tn": 1791738009774,
+        "rel": 950,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738011848,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 417,
+          "signup": false,
+          "text": "{\"e\":[\"0.8.72\",3,5005,2078,\"wml8wll5ua\",\"1cf55fq\",\"tp8t8f\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[7075,26,\"pagehide\",0],[5005,4,1,1440,1970,1440,900,0,0,1060,347,4762,0,4002,1060,347,4002,1060,347,4002,1060,347,4002,1060,347,4002,null],[7083,0,2,734,4,1,25,4]]}"
+        },
+        "tn": 1791738011852,
+        "rel": 3027,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "ctx.close",
+    "closeAfterMs": 300,
+    "closeCalledRelToCall": 318,
+    "closeDoneRelToCall": 348,
+    "beaconsAfterCall": [],
+    "signupBeaconSeen": false,
+    "signupBeaconRelToCallMs": null,
+    "signupSentBeforeClose": false,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738019299,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60115
+        },
+        "tn": 1791738019302,
+        "rel": -3940,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738023561,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 1213,
+          "signup": true,
+          "text": "{\"e\":[\"0.8.72\",2,120,4269,\"wml8wll5ua\",\"geglal\",\"1aym7yz\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[4013,12,188,1060,347,\"\",\"true\"],[4013,13,188,1060,347,\"\",\"true\"],[4016,42,184,\"email\",\"••••• •••• •••• •••• ••••\",\"36ca4v\"],[4013,14,188,1060,347,\"\",\"true\"],[4013,9,188,1060,347,16383,16383,0,0,0,\"Save their spot\",null,\"17t7w68f9.3cfj4v98a\",1,1,480,54,\"button\",\"\",\"\",0],[4019,39,126],[4065,24,\"signup\"],[4387,26,\"pagehide\",0],[4389,34,\"signed_up\",[\"yes\"]],[119,4,1,1440,1970,1440,900,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[4389,1,4,[\"l.clarity.ms\"]],[4389,0,2,60115,3,3,4,8,5,2,10,2,25,15,28,14],[4389,36,6,[4024,51]]],\"p\":[[4024,6,188,126,187,\"BUTTON\",\"type=submit\",\"disabled=\",277,188,\"*T\",\"Saving…\",244,[10]],[4075,6,30,5,29,\"DIV\",\"class=conf\",\"id=conf\",\"role=dialog\",\"aria-modal=true\",\"aria-labelledby=conf-h\",\"style=--acc: #E0FF4E; --acc-ink: #111013; --disp: \\\"Inter Tight\\\",var(--ui); --ds: 1;\",5,3,4,\"BODY\",\"style=overflow: hidden;\",35,26,34,\"HEADER\",\"hidden=\",28,5,27,[5],\"class=sticky\",\"id=sticky\",[21]]]}"
+        },
+        "tn": 1791738023566,
+        "rel": 322,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "ctx.close",
+    "closeAfterMs": 1000,
+    "closeCalledRelToCall": 1015,
+    "closeDoneRelToCall": 1062,
+    "beaconsAfterCall": [
+      {
+        "ver": "0.8.72",
+        "t": 1791738029829,
+        "url": "n.clarity.ms/collect",
+        "bytes": 739,
+        "seq": 2,
+        "startMs": 126,
+        "durMs": 4907,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 951,
+        "afterCloseCall": false
+      }
+    ],
+    "signupBeaconSeen": true,
+    "signupBeaconRelToCallMs": 951,
+    "signupSentBeforeClose": true,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738024920,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60116
+        },
+        "tn": 1791738024922,
+        "rel": -3958,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791738029821,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 739
+        },
+        "tn": 1791738029823,
+        "rel": 943,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738029907,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 416,
+          "signup": false,
+          "text": "{\"e\":[\"0.8.72\",3,5033,85,\"wml8wll5ua\",\"1b5ylvj\",\"1eodnx0\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[5108,26,\"pagehide\",0],[5033,4,1,1440,1970,1440,900,0,0,1060,347,4797,0,4031,1060,347,4029,1060,347,4030,1060,347,4031,1060,347,4031,null],[5118,0,2,739,4,1,25,4]]}"
+        },
+        "tn": 1791738029909,
+        "rel": 1029,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3002,
+    "mode": "ctx.close",
+    "closeAfterMs": 3000,
+    "closeCalledRelToCall": 3022,
+    "closeDoneRelToCall": 3069,
+    "beaconsAfterCall": [
+      {
+        "ver": "0.8.72",
+        "t": 1791738036240,
+        "url": "f.clarity.ms/collect",
+        "bytes": 738,
+        "seq": 2,
+        "startMs": 125,
+        "durMs": 4884,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 951,
+        "afterCloseCall": false
+      }
+    ],
+    "signupBeaconSeen": true,
+    "signupBeaconRelToCallMs": 951,
+    "signupSentBeforeClose": true,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738031358,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60112
+        },
+        "tn": 1791738031362,
+        "rel": -3931,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791738036236,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 738
+        },
+        "tn": 1791738036237,
+        "rel": 947,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738038320,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 415,
+          "signup": false,
+          "text": "{\"e\":[\"0.8.72\",3,5009,2084,\"wml8wll5ua\",\"ig9uo\",\"v1emj9\",1,1,1,0,\"http://localhost:3002/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[7086,26,\"pagehide\",0],[5009,4,1,1440,1970,1440,900,0,0,1060,347,4771,0,4006,1060,347,4005,1060,347,4005,1060,347,4006,1060,347,4006,null],[7093,0,2,738,4,1,25,4]]}"
+        },
+        "tn": 1791738038324,
+        "rel": 3031,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3001,
+    "mode": "page.close",
+    "closeAfterMs": 300,
+    "closeCalledRelToCall": 324,
+    "closeDoneRelToCall": 326,
+    "beaconsAfterCall": [],
+    "signupBeaconSeen": false,
+    "signupBeaconRelToCallMs": null,
+    "signupSentBeforeClose": false,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738039813,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60112
+        },
+        "tn": 1791738039814,
+        "rel": -3944,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738044085,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 1213,
+          "signup": true,
+          "text": "{\"e\":[\"0.8.72\",2,126,4278,\"wml8wll5ua\",\"ptgny4\",\"1r8w1io\",1,1,1,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[4019,12,188,1060,347,\"\",\"true\"],[4019,13,188,1060,347,\"\",\"true\"],[4022,42,184,\"email\",\"••••• •••• •••• •••• ••••\",\"36ca4v\"],[4019,14,188,1060,347,\"\",\"true\"],[4019,9,188,1060,347,16383,16383,0,0,0,\"Save their spot\",null,\"17t7w68f9.3cfj4v98a\",1,1,480,54,\"button\",\"\",\"\",0],[4024,39,126],[4074,24,\"signup\"],[4403,26,\"pagehide\",0],[4404,34,\"signed_up\",[\"yes\"]],[126,4,1,1440,1970,1440,900,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[4404,1,4,[\"i.clarity.ms\"]],[4404,0,2,60112,3,3,4,7,5,2,10,2,25,15,28,15],[4404,36,6,[4028,55]]],\"p\":[[4028,6,188,126,187,\"BUTTON\",\"type=submit\",\"disabled=\",277,188,\"*T\",\"Saving…\",244,[10]],[4083,6,30,5,29,\"DIV\",\"class=conf\",\"id=conf\",\"role=dialog\",\"aria-modal=true\",\"aria-labelledby=conf-h\",\"style=--acc: #E0FF4E; --acc-ink: #111013; --disp: \\\"Inter Tight\\\",var(--ui); --ds: 1;\",5,3,4,\"BODY\",\"style=overflow: hidden;\",35,26,34,\"HEADER\",\"hidden=\",28,5,27,[5],\"class=sticky\",\"id=sticky\",[21]]]}"
+        },
+        "tn": 1791738044087,
+        "rel": 328,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3001,
+    "mode": "page.close",
+    "closeAfterMs": 1000,
+    "closeCalledRelToCall": 1018,
+    "closeDoneRelToCall": 1020,
+    "beaconsAfterCall": [
+      {
+        "ver": "0.8.72",
+        "t": 1791738056514,
+        "url": "z.clarity.ms/collect",
+        "bytes": 742,
+        "seq": 2,
+        "startMs": 118,
+        "durMs": 4899,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 957,
+        "afterCloseCall": false
+      }
+    ],
+    "signupBeaconSeen": true,
+    "signupBeaconRelToCallMs": 957,
+    "signupSentBeforeClose": true,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738051616,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60114
+        },
+        "tn": 1791738051618,
+        "rel": -3941,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791738056509,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 742
+        },
+        "tn": 1791738056511,
+        "rel": 952,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738056586,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 415,
+          "signup": false,
+          "text": "{\"e\":[\"0.8.72\",3,5017,76,\"wml8wll5ua\",\"160ye9f\",\"sizqfi\",1,1,1,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[5085,26,\"pagehide\",0],[5017,4,1,1440,1970,1440,900,0,0,1060,347,4772,0,4019,1060,347,4013,1060,347,4014,1060,347,4019,1060,347,4019,null],[5093,0,2,742,4,1,25,4]]}"
+        },
+        "tn": 1791738056589,
+        "rel": 1029,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "c-close-after",
+    "port": 3001,
+    "mode": "page.close",
+    "closeAfterMs": 3000,
+    "closeCalledRelToCall": 3007,
+    "closeDoneRelToCall": 3010,
+    "beaconsAfterCall": [
+      {
+        "ver": "0.8.72",
+        "t": 1791738068796,
+        "url": "o.clarity.ms/collect",
+        "bytes": 734,
+        "seq": 2,
+        "startMs": 125,
+        "durMs": 4909,
+        "hasSignup": true,
+        "hasSignedUp": true,
+        "relToCallMs": 936,
+        "afterCloseCall": false
+      }
+    ],
+    "signupBeaconSeen": true,
+    "signupBeaconRelToCallMs": 936,
+    "signupSentBeforeClose": true,
+    "inPageSendAttempts": [
+      {
+        "via": "xhr",
+        "t": 1791738063888,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 60115
+        },
+        "tn": 1791738063890,
+        "rel": -3972,
+        "afterClose": false
+      },
+      {
+        "via": "xhr",
+        "t": 1791738068791,
+        "vs": "visible",
+        "body": {
+          "kind": "View",
+          "len": 734
+        },
+        "tn": 1791738068794,
+        "rel": 931,
+        "afterClose": false
+      },
+      {
+        "via": "sendBeacon",
+        "ret": true,
+        "t": 1791738070877,
+        "vs": "visible",
+        "body": {
+          "kind": "string",
+          "len": 418,
+          "signup": false,
+          "text": "{\"e\":[\"0.8.72\",3,5034,2086,\"wml8wll5ua\",\"1je963b\",\"13wy8fl\",1,1,1,0,\"http://localhost:3001/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=120251332838180600&site=ig\"],\"a\":[[7112,26,\"pagehide\",0],[5034,4,1,1440,1970,1440,900,0,0,1060,347,4815,0,4030,1060,347,4030,1060,347,4030,1060,347,4030,1060,347,4030,null],[7120,0,2,734,4,1,25,4]]}"
+        },
+        "tn": 1791738070882,
+        "rel": 3017,
+        "afterClose": true
+      }
+    ]
+  },
+  {
+    "case": "idle-cadence",
+    "port": 3002,
+    "beacons": [
+      {
+        "relToLoadMs": 1142,
+        "seq": 1,
+        "bytes": 60113,
+        "startMs": 0,
+        "durMs": 124
+      },
+      {
+        "relToLoadMs": 62006,
+        "seq": 2,
+        "bytes": 286,
+        "startMs": 124,
+        "durMs": 60897
+      }
+    ]
+  }
+]

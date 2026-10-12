@@ -1,0 +1,127 @@
+{
+  "port": 3002,
+  "stAfterLanding": {
+    "session": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}",
+    "local": "{\"at\":1791738222274,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+  },
+  "stOnHome": {
+    "session": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}",
+    "local": "{\"at\":1791738222274,\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\",\"ad\":\"d5\"}"
+  },
+  "signup": {
+    "status": 200
+  },
+  "popupRequest": {
+    "url": "http://localhost:3002/api/season-one",
+    "body": "{\"email\":\"team+s1test-qa@ekuzo.gg\",\"source\":\"site-popup\",\"ad\":\"d5\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"120251332838180600\",\"site\":\"ig\"},\"attributionFrom\":\"session\",\"page\":\"/\",\"eventId\":\"b0d342e5-8e57-42dd-bd59-d56f4fc5ba36\",\"eventSourceUrl\":\"http://localhost:3002/\",\"ekz_hp\":\"\"}"
+  },
+  "klaviyoEvent": {
+    "data": {
+      "type": "event",
+      "attributes": {
+        "metric": {
+          "data": {
+            "type": "metric",
+            "attributes": {
+              "name": "Season 01 Waitlist"
+            }
+          }
+        },
+        "profile": {
+          "data": {
+            "type": "profile",
+            "attributes": {
+              "email": "team+s1test-qa@ekuzo.gg",
+              "properties": {
+                "season1_waitlist": "yes",
+                "season1_source": "site-popup",
+                "season1_ad": "d5",
+                "season1_ad_name": "",
+                "season1_joined_at": "2026-10-11T17:03:48.908Z"
+              }
+            }
+          }
+        },
+        "properties": {
+          "source": "site-popup",
+          "ad": "d5",
+          "ad_name": "",
+          "where": "",
+          "utm_source": "meta",
+          "utm_medium": "paid_social",
+          "utm_campaign": "season1",
+          "utm_content": "d5-a-showup",
+          "utm_term": "Instagram_Feed",
+          "utm_id": "120251332838180600",
+          "site": "ig",
+          "attribution_from": "session",
+          "page": "/",
+          "geo_country": "",
+          "geo_region": "",
+          "geo_city": "",
+          "geo_postal": "",
+          "device_os": "linux",
+          "device_type": "desktop"
+        },
+        "time": "2026-10-11T17:03:48.908Z",
+        "unique_id": "team+s1test-qa@ekuzo.gg-Season 01 Waitlist-1791738228908"
+      }
+    }
+  },
+  "klaviyoSub": {
+    "data": {
+      "type": "profile-subscription-bulk-create-job",
+      "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+          "data": [
+            {
+              "type": "profile",
+              "attributes": {
+                "email": "team+s1test-qa@ekuzo.gg",
+                "subscriptions": {
+                  "email": {
+                    "marketing": {
+                      "consent": "SUBSCRIBED"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "relationships": {
+        "list": {
+          "data": {
+            "type": "list",
+            "id": "XGTv2F"
+          }
+        }
+      }
+    }
+  },
+  "meta": {
+    "data": [
+      {
+        "event_name": "Lead",
+        "event_time": 1791738228,
+        "event_id": "b0d342e5-8e57-42dd-bd59-d56f4fc5ba36",
+        "action_source": "website",
+        "event_source_url": "http://localhost:3002/",
+        "user_data": {
+          "em": [
+            "2ef1a4b178c8acb6ad34177a0c7b83c1568b41f78b91fcb96deced014ee737b0"
+          ],
+          "client_ip_address": "127.0.0.1",
+          "client_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36"
+        },
+        "custom_data": {
+          "content_name": "season_one_popup"
+        }
+      }
+    ]
+  },
+  "console": [],
+  "pageerrors": []
+}

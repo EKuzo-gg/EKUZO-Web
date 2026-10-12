@@ -5,6 +5,84 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 11, 2026 (project instructions committed: CLAUDE.md and its docs)
+
+The current `CLAUDE.md` and the docs it points to existed only as uncommitted files in Jamie's local
+checkout, so `dev`, `main`, Aaron's Claude Code and fresh clones read the old 600-line CLAUDE.md.
+Committed as-is from Jamie's machine: `CLAUDE.md`, `docs/architecture-decisions.md`, `docs/assets.md`,
+`docs/dev-runbook.md`, `docs/klaviyo-config.md`, `docs/learning-log.md`, `docs/tooling.md`, plus the
+additions to `docs/beehiiv-config.md` (platform split), `docs/ai-optimization-checklist.md` and
+`docs/camps-design-decisions.md` (sections moved out of CLAUDE.md). One new section in
+`docs/dev-runbook.md`: "Releasing when dev carries work main must not get" (cherry-pick releases,
+dev deploy and phone check before main). No code changed. **Aaron:** pull dev; your Claude now reads
+the new CLAUDE.md.
+
+---
+## Jamie (via Claude, Build Loop), October 11, 2026 (Season 01: popup attribution, trusted form_start)
+
+Launch-day fix under the 7-day rule's broken-tracking exception. Artifacts in
+`docs/s1-popup-attribution/` (requirements, decisions, Auditor review, Sentry QA with before/after
+evidence, defect log, evidence ledger, review guide). No copy or design changed.
+
+- `app/season1/landing.html`: on an ad landing (any utm_* present) stores utm_*, utm_id, site and
+  ad in `sessionStorage["ekuzo_attribution"]` (latest ad landing wins) and in a 7-day Season 01
+  record `localStorage["ekuzo_s1_attribution"]`. `form_start` fires only on a trusted pointerdown,
+  keydown or paste (autofill was firing it via `input`); `progFocus` removed. Follow-up the same day:
+  `click` replaces `pointerdown`, because a phone scroll starting on an email field fired it (D-008).
+- `lib/attribution.ts`: new `getSeasonOneAttribution()` / `resolveSeasonOneAttribution()` (URL, then
+  session, then 7-day record, then none). `captureAttribution()` / `getAttribution()` untouched, so
+  camps/100/101/teams payloads are unchanged.
+- `components/ui/SeasonOnePopup.tsx`: sends all seven keys, the stored ad, and `attributionFrom`.
+- `app/api/season-one/route.ts`: new Klaviyo event property `attribution_from` (url, session,
+  return-visit, none). Meta pixel and CAPI untouched (verified identical).
+- `lib/__tests__/season-one-attribution.test.ts`: 30 unit tests (run per the file header).
+- Docs: `docs/season-one-tracking.md` (Popup attribution section, form_start definition, contract),
+  `docs/season1-launch/notes-for-aaron.md`.
+
+---
+## Jamie (via Claude, Build Loop) — October 10, 2026 (Season 01: review, hardening, utm/geo capture)
+
+Build Loop run on the Season 01 sign-up wiring; artifacts in `docs/season1-launch/` (screenshots
+kept outside the repo in `EKUZO/Marketing/ads/2026-10-season-one/build/`). No copy or design changed.
+
+- `public/roadshow/landing.html`: valid Google Fonts URL (the old one returned 400, so no webfonts
+  loaded); pixel `autoConfig` off; no browser Lead when the honeypot is filled; forms can never
+  submit natively; `?ad=` own-property lookup; forwards `utm_id` and `site`.
+- `app/layout.tsx`: pixel `autoConfig` off (automatic click events could carry the game chips' text).
+- `components/ui/SeasonOnePopup.tsx`: no Lead when the honeypot is filled.
+- `app/api/season-one/route.ts` + `lib/metaCapi.ts`: fetch timeouts (3.5 s / 2.5 s / 2 s), input
+  hygiene (null body, unknown step, kidGames, control chars, eventId, eventSourceUrl, IP), `ad`
+  allowlist d1..d12, stores `utm_id`, `site`, parent geo (`x-nf-geo`) and device on the Klaviyo
+  event only.
+- `/season1` now lives natively: `public/roadshow/landing.html` moved to `app/season1/landing.html` and is served by `app/season1/route.ts` (static route handler). The `next.config.mjs` rewrite and the `netlify.toml` 200 redirects are gone; no second public address. (Cycle 3, D13.)
+- `app/season1/landing.html`: GA4 (`G-8LM45PX53W`, same as `app/layout.tsx`) added to the ad landing page: gtag.js in `<head>` for `page_view`, and `generate_lead` `{source:'season_one_<ad>'}` on sign-up next to the browser Meta Lead (same conditions, once). No game chips or child data sent to GA. Nothing visible changed (SC-2).
+- `app/season1/landing.html` + `docs/season-one-tracking.md`: funnel instrumentation (SC-3): Clarity session tags (`ad`, `utm_content`, `utm_term`, `site`, `signed_up`) and a `signup` event, and GA4 `faq_open`, `cta_click`, `form_start`, `signup_error`, all keyed by the ad id. None go to Meta; nothing about the email, the game chips or the child. Nothing visible changed.
+
+---
+## Jamie — October 10, 2026 (Season 01: Meta Lead dedupe, /season1 ad URL)
+
+Meta ads for the Season 01 waitlist optimize on `Lead`, so the sign-up now reports it from
+both the browser and the server with one shared event ID. Klaviyo behavior is unchanged.
+
+- `app/api/season-one/route.ts`: after the "Season 01 Waitlist" Klaviyo event succeeds, sends a
+  Meta Conversions API `Lead` (hashed email, IP, user agent, fbp, fbc rebuilt from `fbclid` if
+  the cookie is missing). Body gains optional `eventId` and `eventSourceUrl`. Not sent on the
+  games/age steps; a Meta failure is logged and never fails the sign-up.
+- `lib/metaCapi.ts` (from `feat/waitlist-tracking`): shared CAPI sender, Graph API v26.0,
+  `META_CAPI_USE_TEST_CODE` routes to Test Events.
+- `public/roadshow/landing.html`: Meta pixel + Clarity in `<head>`; one event ID per sign-up
+  (reused on retry), sent to the API, and the browser Lead carries it as `eventID`, once.
+  Design previews off ekuzo.gg/Netlify fire no Lead.
+- `components/ui/SeasonOnePopup.tsx` + `lib/analytics.ts`: same event ID pattern;
+  `trackLead` takes an optional `eventId` (other callers unchanged).
+- `next.config.mjs`: `/season1` rewrites to the landing page (query string kept). Ad URL:
+  `https://ekuzo.gg/season1?ad=d3&utm_source=meta&...`.
+- Docs: `docs/season-one-tracking.md` (what fires where, env vars, test procedure).
+- Honeypot: both sign-up forms (landing page and popup) carry a hidden `ekz_hp` input (a name autofill won't recognize); if it
+  comes back filled, `/api/season-one` returns ok without writing to Klaviyo or sending a Lead.
+
+---
+
 ## Jamie (via Claude, Build Loop) — September 16, 2026 (blog newsletter capture A/B + inquiry-form attribution)
 
 Ran the Build Loop (knowledge-base/company/agents/agent-loop/build-loop.md) end to end on branch

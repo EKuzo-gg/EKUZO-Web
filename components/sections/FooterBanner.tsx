@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import TrackedRegisterLink from "@/components/ui/TrackedRegisterLink";
 import { useModal } from "@/context/ModalContext";
 import { getProgramRegisterContext } from "@/lib/programRoutes";
+import { SEASON_ONE_MODE, SEASON_ONE_COPY } from "@/lib/seasonOne";
 
 type FooterBannerProps = {
   heading: string;
@@ -28,14 +29,18 @@ type FooterBannerProps = {
 };
 
 export default function FooterBanner({
-  heading,
+  heading: headingProp,
   image,
-  ctaLabel = "Enroll my gamer",
+  ctaLabel: ctaLabelProp,
   ctaModal = "enroll",
   ctaHref,
   ctaTrackingSource = "footer",
 }: FooterBannerProps) {
   const { openModal } = useModal();
+  // Season 01 mode: enroll-style CTAs become the waitlist; a contact CTA keeps its own label.
+  const ctaLabel =
+    SEASON_ONE_MODE && ctaModal === "enroll" ? SEASON_ONE_COPY.navCta : ctaLabelProp ?? "Enroll my gamer";
+  const heading = SEASON_ONE_MODE && ctaModal === "enroll" ? SEASON_ONE_COPY.bannerHead : headingProp;
   const pathname = usePathname();
   // Auto-detect: if no explicit ctaHref and we're on a specific
   // program page, route direct to that program's register. Lets

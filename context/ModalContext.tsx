@@ -1,8 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { SEASON_ONE_MODE } from "@/lib/seasonOne";
 
-type ModalType = "contact" | "enroll" | null;
+type ModalType = "contact" | "enroll" | "seasonOne" | null;
 
 type ModalContextType = {
   openModal: (type: ModalType) => void;
@@ -23,7 +24,8 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     <ModalContext.Provider
       value={{
         activeModal,
-        openModal: setActiveModal,
+        // Season 01 mode: every "Enroll" opens the waitlist popup instead.
+        openModal: (type) => setActiveModal(SEASON_ONE_MODE && type === "enroll" ? "seasonOne" : type),
         closeModal: () => setActiveModal(null),
       }}
     >

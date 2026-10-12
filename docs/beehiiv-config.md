@@ -6,6 +6,32 @@
 
 ---
 
+## Platform split: Beehiiv = general nurture, Klaviyo = product email
+
+**Decided 2026-07-15 (Jamie), during the EKUZO 101 review session.**
+
+- **Beehiiv** owns the general nurture relationship: the newsletter,
+  top-of-funnel capture (homepage popup, footer signup), and audience
+  segmentation via tags. Think "weekly newsletter and long-term audience,"
+  not transactional.
+- **Klaviyo** owns product email: registration confirmations, prep/toolkit
+  sequences, and event-triggered flows keyed off registrations
+  ("Placed Order" for paid products, "Registered Pilot" for 101).
+
+Practical consequences:
+- New program-specific schedule/detail fields do NOT get added to Beehiiv
+  custom fields. Example: 101's `weeks_label` was removed from the Beehiiv
+  payload (2026-07-15) — schedule data lives in Klaviyo event properties
+  and Sheets. (Beehiiv silently drops unknown custom fields anyway, so
+  sending them was a no-op — see API limitations below.)
+- Existing camps/e100 Beehiiv welcome automations predate this split and
+  keep running as-is. The split governs NEW work: default product email to
+  Klaviyo, default nurture to Beehiiv.
+- 101 enrolls NO Beehiiv automation — tags only
+  (`ekuzo101-pilot-registered`, `source-ekuzo101-pilot`).
+
+---
+
 ## Custom Fields (18)
 
 | Field name | Type | Source | Used for |

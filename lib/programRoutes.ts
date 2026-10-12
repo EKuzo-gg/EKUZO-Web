@@ -1,3 +1,5 @@
+import { SEASON_ONE_MODE } from "@/lib/seasonOne";
+
 /**
  * If the user is currently on a specific program's marketing page,
  * returns the direct register URL + program identifier for that program
@@ -34,6 +36,9 @@ export function getProgramRegisterContext(
   pathname: string | null
 ): ProgramContext | null {
   if (!pathname) return null;
+  // Season 01 waitlist mode: no direct register routing anywhere, so every
+  // universal CTA falls back to openModal("enroll"), which opens the waitlist.
+  if (SEASON_ONE_MODE) return null;
 
   // Inside the checkout flow itself — don't re-enter from a top-of-page CTA.
   if (pathname.includes("/register") || pathname.includes("/success")) {
