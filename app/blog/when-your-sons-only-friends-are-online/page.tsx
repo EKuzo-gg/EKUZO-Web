@@ -5,6 +5,7 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
+import ProgramLine from "@/components/blog/ProgramLine";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -31,7 +32,7 @@ const SHARE_IMAGE = HERO_IMAGE;
 const HERO_ALT =
   "A mother stands in a bedroom doorway watching her teenage son play a video game at his desk, headset on, in the warm light of his room.";
 const DATE_PUBLISHED = "2026-05-28";
-const DATE_MODIFIED = "2026-10-12";
+const DATE_MODIFIED = "2026-10-13";
 
 // FAQ items. Each answer is front-loaded (first sentence answers the question)
 // for AI extraction. This same array drives both the visible <h3> Q&A and the
@@ -125,7 +126,7 @@ const KEEP_READING = [
   },
   {
     slug: "league-of-legends-youth-development",
-    title: "Why League of Legends is perfect for youth development",
+    title: "Is League of Legends OK for kids? Why we coach it",
     blurb: "How a single game becomes a team experience.",
     image: "/images/blog-post-4-card.jpg",
     category: "Guides",
@@ -254,7 +255,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="jamie-fitch" date={DATE_PUBLISHED}>
+          <BlogPostBody author="jamie-fitch" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 <strong>Short answer:</strong> if your son spends his nights on
                 a headset, the question worth asking is not how many hours he
@@ -499,12 +500,7 @@ export default function PostSonsOnlyFriendsAreOnline() {
                 </figcaption>
               </figure>
 
-              <p>
-                If you want a low-stakes way to feel the difference between a
-                crowd and a team, <Link href="/programs/ekuzo100">EKUZO100</Link>{" "}
-                is a one-month trial to see if it might be valuable to your
-                family.
-              </p>
+              <ProgramLine />
 
               <h2>What “real friends” actually means</h2>
               <p>

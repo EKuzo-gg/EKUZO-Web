@@ -192,10 +192,12 @@ const KEEP_READING = [
     category: "Perspective",
   },
   {
-    slug: "when-your-sons-only-friends-are-online",
-    title: "When your son’s only friends are online",
-    blurb: "Are online friends real? The shape of play matters more than the hours.",
-    image: "/images/when-your-sons-only-friends-are-online-hero.jpg",
+    slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
+    title:
+      "The gaming study everyone shared, and what it means for your twelve-year-old",
+    blurb:
+      "A doctor's one-liner about a gaming study reached 30M+ people. Karlin read a thousand of the replies. The one that mattered wasn't about the study.",
+    image: "/images/gaming-study-13-7-card.jpg",
     category: "Perspective",
   },
   {
@@ -336,7 +338,7 @@ export default function PostGamingMilitaryFamilies() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="muhammad-hossain" date={DATE_PUBLISHED}>
+          <BlogPostBody author="muhammad-hossain" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 Howdy. I’m Muhammad. I’m a rising senior at Texas A&amp;M, and I
                 coach kids in League of Legends for a youth esports startup

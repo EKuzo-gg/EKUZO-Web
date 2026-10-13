@@ -233,9 +233,9 @@ export default function QuoteCards() {
           lineHeight: 1.5,
         }}
       >
-        Illustrative, anonymized recreations of real comments from a 2024
-        homeschool parent discussion. Names and avatars are generic; nothing
-        here is a screenshot of the original thread.
+        Real comments from a homeschool parent discussion, anonymized. Names
+        and avatars are generic; nothing here is a screenshot of the original
+        thread.
       </div>
     </div>
   );

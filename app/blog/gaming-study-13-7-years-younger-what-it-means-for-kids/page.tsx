@@ -113,7 +113,7 @@ const PARENT_CARDS: ReplyCard[] = [
 const KEEP_READING = [
   {
     slug: "what-homeschool-parents-taught-us-about-gaming",
-    title: "What 200+ homeschool parents taught us about gaming",
+    title: "Should homeschool kids play video games? 200+ parents weigh in",
     blurb:
       "We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one structured, social, supervised thing they all want.",
     image: "/images/blog-post-6-card.jpg",
@@ -321,8 +321,8 @@ export default function PostGamingStudy137() {
         >
           <BlogPostBody
             author="karlin-oei"
-            date={DATE_MODIFIED}
-            dateLabel="Updated"
+            published={DATE_PUBLISHED}
+            modified={DATE_MODIFIED}
           >
             <p>
               <strong>Short answer:</strong>{" "}one study of 923 adults, average

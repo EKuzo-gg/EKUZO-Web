@@ -12,6 +12,7 @@ export const metadata = {
     "Stories, insights, and updates from the EKUZO team. Read about gamers who found confidence, leadership, and community through esports.",
 };
 
+// Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const posts = [
   {
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
@@ -29,7 +30,7 @@ const posts = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "May 24, 2026",
+    date: "October 13, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -49,7 +50,7 @@ const posts = [
   {
     slug: "should-you-ban-fortnite",
     title: "She banned Fortnite and got her kid back. Then came a new problem.",
-    date: "July 28, 2026",
+    date: "July 31, 2026",
     author: "Muhammad Hossain",
     category: "Perspective",
     excerpt:
@@ -60,7 +61,7 @@ const posts = [
   {
     slug: "gaming-military-families",
     title: "Every move wiped their friend map. Gaming was the community that traveled.",
-    date: "July 25, 2026",
+    date: "July 31, 2026",
     author: "Muhammad Hossain",
     category: "Perspective",
     excerpt:
@@ -71,7 +72,7 @@ const posts = [
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",
-    date: "May 28, 2026",
+    date: "October 13, 2026",
     author: "Jamie Fitch",
     category: "Perspective",
     excerpt:
@@ -82,41 +83,40 @@ const posts = [
   {
     slug: "our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
     title: "Our Family's Esports Journey with EKUZO and the K1ng",
-    date: "Jan 14, 2026",
+    date: "October 13, 2026",
     author: "Lisa Holt",
     category: "Case Studies",
     excerpt:
-      "My son Ryan was always a happy kid in his early years. Then junior high happened — and everything changed. This is how EKUZO gave him back his confidence.",
+      "A mom's account of her son Ryan: bullied on his first day of sixth grade, then the esports team where he found his footing and learned to lead.",
     image: "/images/blog-post-1-card.jpg",
     featured: false,
   },
   {
     slug: "conquering-my-mountain-and-giants-how-esports-changed-my-life",
     title: "Conquering my Mountain and Giants: How Esports Changed My Life",
-    date: "Jan 14, 2026",
+    date: "October 13, 2026",
     author: "John Hay",
     category: "Testimonials",
     excerpt:
-      "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO — and a coach who taught me how to reframe everything.",
+      "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO, and a coach who taught me how to reframe everything.",
     image: "/images/blog-post-2-card.jpg",
     featured: false,
   },
   {
-    slug: "summer-camps-for-kids-who-game-2026",
-    title:
-      "Virtual summer camps for kids who'd rather be gaming (still open for summer 2026)",
-    date: "May 14, 2026",
+    slug: "gaming-programs-for-kids",
+    title: "Gaming programs for kids: a parent's guide, Fall 2026",
+    date: "October 13, 2026",
     author: "Karlin Oei",
-    category: "Guides",
     excerpt:
-      "A parent's guide to virtual summer camps for kids who game. Four categories, real cost ranges, and how to tell a coached program from a supervised hangout.",
+      "What a kid who games can join in fall 2026: build classes, online clubs, school teams, local leagues and coached teams, with prices checked in October.",
     image: "/images/blog-post-3-card.jpg",
+    category: "Guides",
     featured: false,
   },
   {
     slug: "league-of-legends-youth-development",
-    title: "Why League of Legends is perfect for youth development",
-    date: "May 16, 2026",
+    title: "Is League of Legends OK for kids? Why we coach it",
+    date: "October 13, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
@@ -127,7 +127,7 @@ const posts = [
   {
     slug: "when-gaming-helps-homeschool-kids",
     title: "When gaming helps homeschool kids and when it hurts",
-    date: "May 21, 2026",
+    date: "October 13, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
@@ -137,8 +137,8 @@ const posts = [
   },
   {
     slug: "what-homeschool-parents-taught-us-about-gaming",
-    title: "What 200+ homeschool parents taught us about gaming",
-    date: "May 21, 2026",
+    title: "Should homeschool kids play video games? 200+ parents weigh in",
+    date: "October 13, 2026",
     author: "Karlin Oei",
     category: "Case Studies",
     excerpt:

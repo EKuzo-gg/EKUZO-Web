@@ -14,17 +14,17 @@ import Image from "next/image";
 
 const SLUG = "what-homeschool-parents-taught-us-about-gaming";
 const PILLAR_SLUG = "when-gaming-helps-homeschool-kids";
-const TITLE = "What 200+ homeschool parents taught us about gaming";
+const TITLE = "Should homeschool kids play video games? 200+ parents weigh in";
 const DECK =
   "Three camps, the words they use, and the one thing they all actually want.";
 const DESCRIPTION =
-  "We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one structured, social, supervised thing they all want.";
+  "A dad asked a homeschool group how to handle his sons' gaming. 200+ parents answered in three camps. What each said, and the one thing they all want.";
 const HERO_IMAGE = "/images/blog-post-6-hero.jpg";
 // Canonical share image — a 1200×630 crop of the hero. Feeds OG, Twitter,
 // and the Article JSON-LD so every share surface uses one source of truth.
 const SHARE_IMAGE = "/images/blog-post-6-card.jpg";
 const DATE_PUBLISHED = "2026-05-21";
-const DATE_MODIFIED = "2026-05-21";
+const DATE_MODIFIED = "2026-10-13";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
@@ -148,18 +148,18 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
+          <BlogPostBody author="karlin-oei" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               {/* Answer block — first paragraph after H1, no H2 above it.
                   Load-bearing for LLM citation. Do not wrap under a heading. */}
               <p>
-                Recently I read a thread where a dad asked a homeschool
-                parenting group how to handle his sons and their gaming. More
-                than 200 parents answered, and they did not agree. This was one
-                Facebook thread, not a formal study. But it was valuable because
-                parents were speaking plainly, in their own words, about a
-                problem many families are trying to solve.
+                A dad asked a homeschool parenting group how to handle his sons
+                and their gaming. More than 200 parents answered, and they did
+                not agree. Most said cut it off. A smaller group said set
+                limits. A few said aim it. This was one Facebook thread, not a
+                formal study. But it was valuable because parents were speaking
+                plainly, in their own words, about a problem many families are
+                trying to solve.
               </p>
-              <p>Three camps showed up.</p>
 
               <table>
                 <thead>
@@ -373,7 +373,7 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
               <h2>What we took from it</h2>
               <p>
                 We{" "}
-                <Link href="/programs/ekuzo-camps">
+                <Link href="/programs">
                   coach kids through games
                 </Link>{" "}
                 for a living, so I read this less as a debate and more as a
@@ -391,26 +391,21 @@ export default function PostWhatHomeschoolParentsTaughtUs() {
                 of it.
               </p>
               <p>
-                What to actually do about it, how to tell whether a kid&apos;s
-                gaming is helping or hurting and how to tilt it, is its own
-                piece. I wrote that one{" "}
-                <Link href={`/blog/${PILLAR_SLUG}`}>here</Link>.
+                What to do about it is its own piece. It has a five-question
+                check and the moves I&apos;d make at home:{" "}
+                <Link href={`/blog/${PILLAR_SLUG}`}>
+                  when gaming helps homeschool kids and when it hurts
+                </Link>
+                .
               </p>
               <p>
                 This piece has a sibling. I ran the same read on about a
-                thousand replies to{" "}
+                thousand replies to the viral &ldquo;13.7 years younger&rdquo;
+                gaming study and wrote up{" "}
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
-                  the viral &ldquo;13.7 years younger&rdquo; gaming study
+                  how those replies split and what the paper says
                 </Link>
-                . That number isn&apos;t in the paper. The replies sorted into
-                camps there too.
-              </p>
-
-              <p className="italic">
-                Karlin Oei is the founder of <Link href="/">EKUZO</Link>. He
-                grew up playing League of Legends, paid for college through
-                esports scholarships, and now builds the coaching system he
-                wishes he&apos;d had as a kid.
+                . That number isn&apos;t in the paper.
               </p>
           </BlogPostBody>
         </div>

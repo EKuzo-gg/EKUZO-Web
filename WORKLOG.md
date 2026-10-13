@@ -5,6 +5,75 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 13, 2026 (blog refresh pass, Build Loop)
+
+Branch `build/blog-refresh-2026-10` (worktree `.claude/worktrees/blog-refresh-2026-10`), cut from
+`origin/main` `3144459`, fast-forwards `main`. Dev-integration branch `preview/blog-refresh-dev`
+(off `origin/dev`, clean merge). Brief: `knowledge-base/system/loops/handoffs/2026-10-12-blog-refresh-pass.md`.
+Artifacts, approvals and evidence: `docs/blog-refresh-2026-10/` (start with `07-review-guide.md`).
+Jamie approved every post's copy as a markdown file (`copy/01` to `09`).
+
+**What changed**
+- **Bylines:** every post shows "Updated [date]" (the modified date); no publish date on the page.
+  Schema keeps `datePublished` and `dateModified`. Cards on /blog and author pages show the same date.
+- **Shared program line** (`components/blog/ProgramLine.tsx`, one copy constant, links to /programs)
+  replaces the EKUZO100 and camps sentences and prices in six posts.
+- **Homeschool pair made distinct:** the guide loses every thread quote and gains a homeschool-specific
+  section; the review is retitled "Should homeschool kids play video games? 200+ parents weigh in".
+- **League post** retitled "Is League of Legends OK for kids? Why we coach it"; stale camps line and
+  lines shared with /games reworded; the 65% STEM sentence is unlinked (no source page carries it).
+- **Camps post re-slugged and rewritten** as `/blog/gaming-programs-for-kids` ("Gaming programs for
+  kids: a parent's guide, Fall 2026"); permanent redirect from the old URL in `next.config.mjs`.
+  Providers and prices were read on each provider's own page on 2026-10-12; re-check monthly.
+- **Guest posts:** editor's note naming Faith as Karlin (Lisa's post), quote attribution linked to
+  Karlin's author page and one sentence on what EKUZO is (John's post), metadata em dashes removed.
+- **Author pages:** Jamie is "Advisor to EKUZO" everywhere (bio is his own text, byte-checked);
+  Karlin's page is headed Karlin "Faith" Oei with a gamertag sentence and Leaguepedia in `sameAs`,
+  and lists the gaming-study post. Guest authors have one schema Person node each.
+- **Links into the blog:** `FAQAccordion` items can carry a "Related reading" link (in the HTML,
+  not in FAQ schema, answers untouched); used on /parents, /faq, /programs. /parents story card
+  points at the right slug. One sentence added on the homepage League section and one line under
+  the /programs carousel. Keep-reading cards swapped on the military and Fortnite posts.
+- **Sitemap and llms.txt** follow all of the above.
+
+**Known and left alone**
+- /programs, the program sub-pages and the /parents FAQ still describe EKUZO100, camps and prices
+  while every enroll button opens the Season 01 waitlist. Jamie: program work is this week.
+- `ekuzo101-weeks` test fails at `buildWeeksLabel` on `origin/main` too; untouched here.
+- No blog test suite exists.
+
+---
+## Jamie (via Claude), October 12, 2026 (robots.txt and sitemap fix for Search Console)
+
+Branch `build/robots-sitemap-fix` (worktree `.claude/worktrees/robots-sitemap`), cut from `origin/main`
+`98d045a`, so it fast-forwards `main` and carries none of `dev`'s unreleased work. Source:
+`knowledge-base/explorations/2026-10-09-paid-media-currency/workstreams/R5-seo-geo.md` § 3 and § 5
+item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) listed a site font under
+"Blocked by robots.txt", which confirmed the bug.
+
+**What changed**
+- `public/robots.txt`: removed `Disallow: /_next/` (and the now-pointless `Allow: /_next/image`) from
+  both groups so Googlebot can load CSS, JS and fonts to render pages. `/api/` stays blocked in both
+  groups. Comments fixed: Google-Extended does not control AI Overviews (the Search Console AI
+  controls setting does), and the stale "line 77" pointer now names the checklist item.
+- `app/sitemap.ts`: removed the three noindex `/register` routes; every `new Date()` replaced with a
+  real date (last commit to the route's page file). Rule in the file header: update a page's date in
+  the same commit that changes its content. 29 URLs, all 200 and indexable on the live site.
+- QA pass (independent reviewer): ship with notes. Applied: `/blog`'s lastmod now computes as the
+  newest post date (it lists every post); Google-Extended comment names Search Console's "Search
+  generative AI" control and warns that nosnippet also removes ordinary snippets; Applebot-Extended
+  comment no longer says Siri. `tsc --noEmit` clean. Known gap, not fixed here: Karlin's author page
+  does not list the gaming-study post.
+- `next.config.mjs` (separate commit, droppable): 301s for the two URLs Search Console reports as
+  404, `/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng` to the real K1NG post and
+  `/old-home` to `/`.
+- `docs/ai-optimization-checklist.md` § Weekly: pointer to the KB's Search Console playbook as the canonical
+  cadence; the climber triage waits for data (docs only).
+
+**After it deploys:** nothing to resubmit (the sitemap is already submitted in Search Console and
+Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.
+
+---
 ## Jamie (via Claude, Build Loop), October 11, 2026 (gaming-study post: ship changes, final images, one ask per post)
 
 Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`

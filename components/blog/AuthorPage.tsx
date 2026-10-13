@@ -114,7 +114,7 @@ export default function AuthorPage({
                   }`}
                   style={{ fontSize: "clamp(2.75rem, 6vw, 4.5rem)" }}
                 >
-                  {author.name}
+                  {author.pageName ?? author.name}
                 </h1>
                 {/* Matches the byline sub-label on every post they write. */}
                 {author.role && (

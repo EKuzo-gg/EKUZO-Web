@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
 import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import GutCheckAside from "@/components/blog/GutCheckAside";
+import ProgramLine from "@/components/blog/ProgramLine";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -25,7 +26,7 @@ const HERO_IMAGE = "/images/blog-post-5-hero.jpg";
 // and the Article JSON-LD so every share surface uses one source of truth.
 const SHARE_IMAGE = "/images/blog-post-5-card.jpg";
 const DATE_PUBLISHED = "2026-05-21";
-const DATE_MODIFIED = "2026-05-21";
+const DATE_MODIFIED = "2026-10-13";
 
 // Spoken transcript of Karlin's reel (the embedded Instagram video). Inlined
 // as a string literal — no fs access from public/ (see lib/schema.ts note and
@@ -80,7 +81,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
     pageSlug: SLUG,
     name: "Karlin breaks down armor vs. magic resist in League of Legends",
     description:
-      "EKUZO founder Karlin Oei coaches a real League of Legends concept — the difference between armor and magic resist — that players miss for years, and explains why kids benefit from learning it early.",
+      "EKUZO founder Karlin Oei coaches a real League of Legends concept (the difference between armor and magic resist) that players miss for years, and explains why kids benefit from learning it early.",
     thumbnailPath: "/images/blog-post-5-reel-thumb.jpg",
     uploadDate: DATE_PUBLISHED,
     embedUrl: "https://www.instagram.com/p/DYe0pwSC8j-/embed/",
@@ -167,7 +168,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
+          <BlogPostBody author="karlin-oei" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               {/* Answer block — first paragraph after H1, no H2 above it.
                   Load-bearing for LLM citation. Do not wrap under a heading. */}
               <p>
@@ -181,8 +182,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 with an adult nearby tends toward the growth they want. The
                 number of hours matters, but it&apos;s not the first thing
                 I&apos;d look at. I&apos;d look at what surrounds those hours.
-                That&apos;s especially true in a homeschool, where gaming is
-                often a kid&apos;s main social world and you, the parent, own
+                That&apos;s especially true in a homeschool, where you build
                 the whole day. Here&apos;s how I&apos;d weigh the opportunity
                 and the risk, and how to tilt your kid toward the better
                 outcome.
@@ -194,31 +194,34 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 time near the top of the worry list, and plenty of us quietly
                 wonder if we&apos;re getting it right. If that&apos;s you,
                 you&apos;re not failing. You&apos;re carrying a piece most
-                families quietly hand off to a school.
+                families hand off to a school.
               </p>
               <p>
-                For homeschool families the stakes sit a notch higher, because
-                the default structure isn&apos;t there. A kid in school has a
-                built-in peer group, six hours of routine, and a schedule that
-                caps the day before a screen can. A homeschooled kid has none of
-                that automatically. You build the day. So when gaming shows up,
-                it often becomes the biggest block of free time and the main
-                social channel at once.
+                The piece you&apos;re carrying is the day itself. A school caps
+                gaming by default, because six hours of schedule land before a
+                screen can. At home you set the schedule, so gaming can grow
+                into the biggest block of free time unless you decide where it
+                goes.
+              </p>
+              <p>
+                Most homeschool families build their kid&apos;s social life on
+                purpose: co-op, clubs, sports, church, field trips. The harder
+                part is logistics. Friendships form when the same kids show up
+                around the same interest week after week, and that&apos;s tough
+                to arrange when your kid is the only gamer in the co-op.
               </p>
               <p>
                 That&apos;s actually the strongest card homeschooling holds. You
                 have more control over the environment around the game than any
-                school ever will. Most parents just never get told that the
-                environment is the lever.
+                school ever will. The environment is the lever, and
+                it&apos;s yours.
               </p>
               <p>
-                I recently read a long Facebook thread where homeschool parents
-                were working through exactly this. What made it worth reading is
-                that it wasn&apos;t polished. It was 200+ parents saying the
-                quiet parts out loud. I broke down the whole conversation in{" "}
-                <Link href={`/blog/${COMPANION_SLUG}`}>a companion piece</Link>.
-                Here I want to use what they taught me to answer the question
-                they were all circling.
+                I first worked through this by reading a long thread where more
+                than 200 homeschool parents argued about exactly this question.
+                Their words are in{" "}
+                <Link href={`/blog/${COMPANION_SLUG}`}>my read of that thread</Link>.
+                This piece is the answer I&apos;d give them.
               </p>
 
               <h2>Where&apos;s the real opportunity in gaming?</h2>
@@ -236,47 +239,29 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 other people toward a goal bigger than themselves.
               </p>
               <p>
-                The parents who&apos;ve figured this out stopped trying to
-                shrink the passion and started aiming it. In that thread, the
-                families whose kids were thriving had them in coding classes,
-                game-design courses, esports teams, and streaming with a
-                purpose. One mom said her son &ldquo;wouldn&apos;t have gotten
-                past his deep depression and anxiety&rdquo; without it, and that
-                the game and the people in it taught him to communicate. Another
-                said that once gaming became &ldquo;work,&rdquo; meaning it had
-                a goal and a structure, the six-hour days fell off on their own.
+                Some parents stop trying to shrink the interest and give it
+                somewhere to go: a coding class, a team with a season, a project
+                with a deadline.
               </p>
               <p>
-                Homeschool families are well positioned to join that camp,
-                because the day has room for it. A coding block at 10am is a
-                normal Tuesday for you. It isn&apos;t for a school family.
+                Homeschool families are well positioned to do this, because the
+                day has room for it. A coding block at 10am is a normal Tuesday
+                for you. It isn&apos;t for a school family.
               </p>
 
               <h2>What does the risk actually look like?</h2>
               <p>
                 The risk is just as real, and the worried parents aren&apos;t
-                wrong. I&apos;ve read <em>Glow Kids</em> by Nicholas Kardaras
-                and <em>The Anxious Generation</em>{" "}by Jonathan Haidt, and
-                the
-                parents who cite them are pointing at something true.
-                Open-ended, unsupervised gaming can pull a kid inward. In that
-                same thread, parents described kids who only ate while gaming,
-                who wouldn&apos;t shower, whose whole friend group lived inside a
-                game they couldn&apos;t step away from.
+                wrong. The books on their shelves are pointing at something
+                true. Open-ended, unsupervised gaming can pull a kid inward,
+                until the days run together and nothing outside the game gets a
+                turn.
               </p>
               <p>
-                But the line that stuck with me came from a homeschool dad whose
-                two boys game as their main social outlet. When other parents
-                told him to just take it away, he wrote that taking it away
-                &ldquo;without a solid alternative can lead to serious emotional
-                distress, including depression.&rdquo;
-              </p>
-              <p>
-                He&apos;s right, and it&apos;s the part both loud camps miss.
-                For a lot of these kids, the game is where their friends
-                actually are. Pulling it without a replacement does something
-                bigger than cutting screen time. It takes the kid out of their
-                whole peer group.
+                Sometimes taking the game away is the right call. If you do,
+                have a plan for where the friendships that came with it go next.
+                The dad who started that thread made this point better than I
+                can.
               </p>
               <p>
                 When gaming goes sideways, I usually see the same pattern: no
@@ -308,32 +293,33 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
               </p>
               <p>
                 A 2025 study from Columbia and Weill Cornell found that
-                addictive patterns of use predicted worse mental health in kids,
-                while total screen time on its own{" "}
+                addictive patterns of use were associated with worse mental
+                health in kids, while total screen time on its own{" "}
                 <a
                   href="https://www.cuimc.columbia.edu/news/addictive-use-social-media-not-total-time-associated-youth-mental-health"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  did not
+                  was not
                 </a>
-                . When researchers look at what produces real growth in
-                structured gaming programs, the gains trace back to a person
-                more than a feature: a caring adult,{" "}
+                . A UC Irvine working paper on high school esports clubs points
+                the same way. In{" "}
                 <a
                   href="https://connectedlearning.uci.edu/wp-content/uploads/2022/09/Academic-and-Social-Emotional-Learning-in-High-School-Esports.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  the coach
+                  interviews with students and staff at six schools
                 </a>
-                .
+                , learning came up more often when a mentor did: a coach, a
+                teacher, or another student. That&apos;s people describing their
+                own experience, so I read it as a pointer and not as proof.
               </p>
               <p>
                 Six hours moving in five directions is just motion. Structure
                 points that effort at something, and that&apos;s when it starts
-                to add up. The people and the structure are the active
-                ingredients. The game is what gets a kid in the door.
+                to add up. The people and the structure are where I&apos;d put
+                my effort. The game is what gets a kid in the door.
               </p>
 
               <h2>What can you do at home?</h2>
@@ -357,10 +343,8 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 </li>
                 <li>
                   <strong>Give it a goal.</strong>{" "}Practicing toward
-                  something,
-                  a match, a project, a skill, is what turned &ldquo;six hours a
-                  day&rdquo; into &ldquo;an hour with a point&rdquo; for several
-                  parents I read.
+                  something, a match, a project, a skill, gives the hours a
+                  point and a natural place to stop.
                 </li>
                 <li>
                   <strong>Choose the games on purpose.</strong>{" "}Co-op,
@@ -377,6 +361,28 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
               </ul>
               <p>
                 That last one is small, and it&apos;s the one most parents skip.
+              </p>
+
+              <h2 className="clear-both">
+                What&apos;s different about doing this in a homeschool?
+              </h2>
+              <p>Three things, and they all work in your favor.</p>
+              <p>
+                <strong>If school went badly, start low-stakes.</strong>{" "}A lot
+                of families come to homeschooling after a rough stretch in a
+                classroom. I&apos;d start a kid in that spot with a small group
+                and nothing to win yet. Belonging comes first. Competition can
+                wait until they ask for it.
+              </p>
+              <p>
+                <strong>Treat an online team as one more group.</strong>{" "}It
+                sits next to co-op, sports, and church. A kid with several
+                groups has somewhere to stand when one of them has a bad month.
+              </p>
+              <p>
+                <strong>Use the daytime.</strong>{" "}A school family&apos;s
+                gaming happens at 9pm, when everyone is tired. Yours can happen
+                at 1pm, with you in the next room and dinner still hours away.
               </p>
 
               <h2 className="clear-both">
@@ -417,40 +423,29 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
 
               <h2>So what does gaming done well look like?</h2>
               <p>
-                Read those 200+ parents closely and you see what the fight is
-                really about: structure, belonging, and what it takes for a kid
-                to grow up. Almost all of them are describing the same missing
-                thing without naming it. The dad I mentioned wanted a &ldquo;solid
-                alternative&rdquo; and assumed none existed. The cut-it-off camp
-                couldn&apos;t picture an option besides removing the console.
-                The aim-it camp was stitching together coding classes and course
-                listings because nothing coherent existed to point at.
-              </p>
-              <p>
-                What they&apos;re all circling is structured, social, supervised
-                gaming with adults who actually coach. A kid plays the game they
-                already love, on a real team, with a coach who cares whether
-                they&apos;re also reading books and resetting well after a tough
-                loss. That&apos;s the version that grows a kid and calms the risk
-                at the same time.
+                Put those pieces together and you get gaming with a steady
+                group, a goal, and an adult who actually coaches. A kid plays
+                the game they already love, on a real team, with a coach who
+                cares whether they&apos;re also reading books and resetting well
+                after a tough loss. That&apos;s the version that grows a kid and
+                calms the risk at the same time.
               </p>
 
               <InstagramEmbed
                 url="https://www.instagram.com/p/DYe0pwSC8j-/"
-                caption="Karlin breaks down armor vs. magic resist — a League of Legends concept many players miss for years, and why kids benefit from learning it early."
+                caption="Karlin breaks down armor vs. magic resist: a League of Legends concept many players miss for years, and why kids benefit from learning it early."
               />
 
               <p>
                 That&apos;s{" "}
-                <Link href="/methodology">what we built EKUZO to be</Link>:
-                stable rosters, trained coaches, clear goals, moderated spaces,
-                and a conversation after the match. You can build a version of
-                that at your own kitchen table. We&apos;re one place that does
-                it, if you want the help. If you&apos;d like to try it without a
-                big commitment,{" "}
-                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month
-                trial that puts your kid on a coached team for $100.
+                <Link href="/methodology">what we built EKUZO to be</Link>: a
+                team, trained coaches, clear goals, moderated spaces, and a
+                conversation after the match. You can build a version of that at
+                your own kitchen table. We&apos;re one place that does it, if
+                you want the help.
               </p>
+
+              <ProgramLine />
 
               <h2>One honest caveat</h2>
               <p>
@@ -471,15 +466,18 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 the answer is.
               </p>
               <p>
-                A game gave me a team, and the team gave me everything else.
-                Most kids have that in them too. They just need an environment
+                A game gave me a team, and the team gave me everything else. A
+                lot of kids have that in them too. They just need an environment
                 that calls it out.
               </p>
 
               <p className="italic">
-                Want the full conversation those 200+ homeschool parents had,
-                all three camps and the quotes on every side? I broke it down{" "}
-                <Link href={`/blog/${COMPANION_SLUG}`}>here</Link>.
+                Want the parents&apos; own words, all three camps and the one
+                thing they agreed on?{" "}
+                <Link href={`/blog/${COMPANION_SLUG}`}>
+                  Read what those 200+ homeschool parents said
+                </Link>
+                .
               </p>
 
               <h2>Sources and further reading</h2>
@@ -495,8 +493,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                   </a>
                 </li>
                 <li>
-                  The coach as the active ingredient in esports social-emotional
-                  growth:{" "}
+                  Mentors and self-reported growth in high school esports:{" "}
                   <a
                     href="https://connectedlearning.uci.edu/wp-content/uploads/2022/09/Academic-and-Social-Emotional-Learning-in-High-School-Esports.pdf"
                     target="_blank"
@@ -558,13 +555,6 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                   </a>
                 </li>
               </ul>
-
-              <p className="italic">
-                Karlin Oei is the founder of <Link href="/">EKUZO</Link>. He
-                grew up playing League of Legends, paid for college through
-                esports scholarships, and now builds the coaching system he
-                wishes he&apos;d had as a kid.
-              </p>
           </BlogPostBody>
         </div>
       </article>
@@ -592,7 +582,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
               <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
                   src="/images/blog-post-6-card.jpg"
-                  alt="What 200+ homeschool parents taught us about gaming"
+                  alt="Should homeschool kids play video games? 200+ parents weigh in"
                   fill
                   className="object-cover opacity-80 transition-opacity group-hover:opacity-100"
                 />
@@ -602,7 +592,7 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                   Case Studies
                 </span>
                 <h3 className="font-body font-bold text-black text-xl leading-snug group-hover:text-red transition-colors mb-2">
-                  What 200+ homeschool parents taught us about gaming
+                  Should homeschool kids play video games? 200+ parents weigh in
                 </h3>
                 <span className="font-body text-black/40 text-sm">
                   by Karlin Oei

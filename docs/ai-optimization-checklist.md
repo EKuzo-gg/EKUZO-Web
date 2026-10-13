@@ -124,6 +124,11 @@ Stop worrying about / don't spend time on:
 Ten minutes, Friday, alongside the rest of the weekly block. The monthly `/audit` catches technical
 regressions; this catches opportunity.
 
+> **Cadence lives in the KB (2026-10-12).** The canonical Search Console routine is
+> `knowledge-base/company/marketing/search-console-playbook.md` § Reading it: the cadence; property
+> record and saved views in `search-console.md`. At ekuzo.gg's current traffic (first content-gap run
+> returned WATCH LIST), run this triage only once 20 non-brand queries have 100+ impressions each.
+
 - [ ] **Open Search Console, Performance, last 28 days compared to previous 28 days.** Sort by
   impression change, descending.
 - [ ] **Filter to positions 8-20 and export.** These are pages Google already trusts and is

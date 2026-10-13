@@ -5,23 +5,25 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import {
   buildBlogArticleSchema,
+  LISA_HOLT_ID,
   buildBlogPostBreadcrumbSchema,
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
 import BlogPostBody from "@/components/blog/BlogPostBody";
+import ProgramLine from "@/components/blog/ProgramLine";
 
 const SLUG = "our-family-s-esports-journey-with-ekuzo-and-the-k1ng";
 const TITLE = "Our Family's Esports Journey with EKUZO and the K1ng";
 const DESCRIPTION =
-  "My son Ryan was always a happy kid in his early years. Then junior high happened — and everything changed. This is how EKUZO gave him back his confidence.";
+  "A mom's account of her son Ryan: bullied on his first day of sixth grade, then the esports team where he found his footing and learned to lead.";
 const SHARE_IMAGE = "/images/blog-post-1-card.jpg";
 const DATE_PUBLISHED = "2026-01-14";
-const DATE_MODIFIED = "2026-01-14";
+const DATE_MODIFIED = "2026-10-13";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
-  title: `${TITLE} — EKUZO Blog`,
+  title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
@@ -59,7 +61,7 @@ export default function PostK1ng() {
     datePublished: DATE_PUBLISHED,
     dateModified: DATE_MODIFIED,
     image: SHARE_IMAGE,
-    author: { "@type": "Person", name: "Lisa Holt" },
+    author: { "@id": LISA_HOLT_ID },
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE);
 
@@ -117,7 +119,7 @@ export default function PostK1ng() {
           <div className="relative w-full" style={{ height: "520px" }}>
             <Image
               src="/images/blog-post-1-card.jpg"
-              alt="Ryan — K1ngofbattle — at an EKUZO esports event"
+              alt="Ryan, K1ngofbattle, at an EKUZO esports event"
               fill
               className="object-cover"
               priority
@@ -133,7 +135,7 @@ export default function PostK1ng() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="lisa-holt" date={DATE_PUBLISHED}>
+          <BlogPostBody author="lisa-holt" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 My son Ryan was always a happy kid in his early years. He could easily make friends,
                 he enjoyed going to school, and he was the kid who could make the best out of a bad
@@ -178,6 +180,11 @@ export default function PostK1ng() {
                 Faith, would send us emails about his observations regarding how Ryan was progressing
                 that semester. It was quite impressive to read how Ryan was so involved and engaged
                 in every class.
+              </p>
+              <p className="italic text-black/60">
+                Editor&apos;s note: Faith is{" "}
+                <Link href="/blog/author/karlin-oei">Karlin Oei</Link>, EKUZO&apos;s
+                founder. Faith was his gamertag, and it&apos;s the name his players know him by.
               </p>
               <p>
                 League of Legends was new for Ryan, but apparently, he learned how to play it very
@@ -250,9 +257,9 @@ export default function PostK1ng() {
                 <Link href="/blog/when-your-sons-only-friends-are-online">
                   when your son&apos;s only friends are online
                 </Link>
-                . And if you want a low-stakes way to try a coached team,{" "}
-                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month trial for $100.
+                .
               </p>
+              <ProgramLine />
           </BlogPostBody>
         </div>
 

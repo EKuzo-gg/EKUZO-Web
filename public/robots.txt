@@ -9,28 +9,32 @@ Sitemap: https://ekuzo.gg/sitemap.xml
 User-agent: *
 Allow: /
 
-# Block internal/draft routes
+# Block API routes. /_next/ (CSS, JS, fonts, images) stays crawlable on
+# purpose: Googlebot needs those files to render the page. A /_next/ block
+# lived here until 2026-10-12 and Search Console reported a site font as
+# "Blocked by robots.txt".
 Disallow: /api/
-Disallow: /_next/
-# ...but let crawlers fetch optimized images (Next.js image optimizer).
-# More-specific Allow overrides the /_next/ Disallow for compliant bots.
-Allow: /_next/image
 
 # ---------------------------------------------------------------------------
 # AI crawlers, assistant fetchers, and AI-usage control tokens — all allowed
 # on purpose. EKUZO's content strategy is GEO-optimized (schema, citability,
 # llms.txt); being crawled, cited and used as training data is the goal, not
-# the risk. See docs/ai-optimization-checklist.md line 77. Do not add Disallow
+# the risk. See docs/ai-optimization-checklist.md, "AI crawlers not blocked"
+# in the pre-ship checklist. Do not add Disallow
 # rules here without changing that strategy first.
 #
 # WHY THE DISALLOW RULES ARE REPEATED BELOW: per RFC 9309, a crawler obeys
 # ONLY the single most specific group whose token matches its user-agent.
 # Naming these agents pulls them OUT of the `User-agent: *` group entirely,
-# so /api/ and /_next/ have to be restated or they'd start crawling both.
+# so /api/ has to be restated or they'd start crawling it.
 #
 # Google-Extended and Applebot-Extended never fetch anything. They are opt-out
 # control tokens that gate whether already-crawled content may be used for AI
 # training and grounding; listing them with Allow: / is an explicit opt-IN.
+# Google-Extended does NOT control AI Overviews or AI Mode in Search: those
+# follow Googlebot. The opt-out is the "Search generative AI" control in
+# Search Console settings (set to Include as of 2026-10-12), or nosnippet,
+# which also removes ordinary search snippets.
 #
 # An AI-crawler block covering /blog/gaming-military-families and
 # /blog/should-you-ban-fortnite lived here from 2026-07-25, scoped to those
@@ -52,11 +56,11 @@ User-agent: Claude-SearchBot
 User-agent: PerplexityBot
 User-agent: Perplexity-User
 
-# Google Gemini + AI Overviews training/grounding opt-in (control token,
-# does not crawl — Googlebot does the fetching under the * group)
+# Google Gemini apps and Vertex AI training/grounding opt-in (control token,
+# does not crawl; not the AI Overviews control, see note above)
 User-agent: Google-Extended
 
-# Apple Intelligence / Siri training opt-in (control token, does not crawl)
+# Apple Intelligence / foundation-model training opt-in (control token, does not crawl)
 User-agent: Applebot-Extended
 
 # Microsoft Bing + Copilot
@@ -88,5 +92,3 @@ User-agent: omgili
 
 Allow: /
 Disallow: /api/
-Disallow: /_next/
-Allow: /_next/image
