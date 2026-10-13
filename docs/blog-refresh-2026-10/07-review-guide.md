@@ -85,4 +85,25 @@ Both are fast-forwards of their targets as of the evidence below. Your local `ma
 
 ## Git evidence
 
-*[Embedded below after the final commit.]*
+Captured 2026-10-13, before the commit that adds this section (so the tip is one docs commit later).
+
+`build/blog-refresh-2026-10`, `git status --porcelain`:
+```
+(clean)
+```
+`git log --oneline -3`:
+```
+28ee822 docs(blog-refresh): Build Loop artifacts, approved copy files, evidence, screenshots, WORKLOG
+8f46358 content(blog): October refresh pass: Updated bylines, shared program line, homeschool pair made distinct, League and guest-post updates, programs guide at a new slug, author pages, related-reading links
+3144459 docs: point the weekly Search Console triage at the KB playbook cadence
+```
+`git rev-list --left-right --count origin/main...HEAD`: `0	2` (0 behind, fast-forward of `origin/main`)
+
+`preview/blog-refresh-dev` (worktree `.claude/worktrees/blog-refresh-dev`), `git log --oneline -2`:
+```
+53fd0bc Merge branch 'build/blog-refresh-2026-10' into preview/blog-refresh-dev
+28ee822 docs(blog-refresh): Build Loop artifacts, approved copy files, evidence, screenshots, WORKLOG
+```
+`git status --porcelain` there: `?? .husky/_/` (an untracked husky shim folder created by the merge; not part of any commit)
+
+A local branch `backup/blog-refresh-2026-10-full` holds the 33 step-by-step commits the two commits above were tidied from. Same tree. Delete it once this ships.
