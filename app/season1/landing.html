@@ -727,6 +727,16 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px}
 .conf h2{margin:0;font:800 calc(min(15.5vw,80px)*var(--ds,1))/.9 var(--disp);overflow-wrap:normal;text-transform:uppercase;letter-spacing:-.03em;color:var(--acc);outline:none}
 .conf p{margin:0;font-size:20px;line-height:1.4;color:#fff;text-wrap:pretty}
+.conf .inbox-h{font-size:17px;color:#fff;margin-top:6px}
+.mail{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:#1B1920;border:1px solid #3a3640;animation:mailIn .5s .25s ease both}
+.mail-av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font:800 17px/1 var(--ui)}
+.mail-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mail-t b{font:700 15px/1.2 var(--ui);color:#fff}
+.mail-s{font:600 14px/1.3 var(--ui);color:#fff}
+.mail-p{font:400 14px/1.35 var(--ui);color:#C2BDC8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-n{font:500 12px/1.2 var(--ui);color:#C2BDC8}
+@keyframes mailIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mail{animation:none}}
 .conf .egg{font-size:16px;color:#BDB8C2}
 .conf .age{margin-top:10px;padding-top:16px;border-top:1px solid #2B2830;display:flex;flex-direction:column;gap:10px}
 .conf .age p{font-size:15px;color:#BDB8C2}
@@ -913,7 +923,13 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
   <div class="conf-in">
     <span class="kick">You’re on the list</span>
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
-    <p>We can’t wait to make screentime the highlight of your day too. We’ll be in&nbsp;touch.</p>
+    <p>We can’t wait to make screentime the highlight of your day&nbsp;too.</p>
+    <p class="inbox-h">Check your inbox for a note from Karlin, our&nbsp;founder.</p>
+    <div class="mail" aria-label="What the email looks like">
+      <span class="mail-av" aria-hidden="true">K</span>
+      <div class="mail-t"><b>Karlin at EKUZO</b><span class="mail-s">Hi, I’m Karlin</span><span class="mail-p">And the video game scholarship that paid for college.</span></div>
+      <small class="mail-n">Now</small>
+    </div>
     <p class="egg">Now go outside. Or pick up that controller. Either way, go have&nbsp;fun.</p>
     <div class="age"><p>Know a parent who hears “five more minutes” every&nbsp;night?</p>
       <button type="button" class="share-btn" id="share">Send this to them</button>
