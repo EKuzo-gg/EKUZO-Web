@@ -54,11 +54,19 @@ const parentsFAQs = [
     question: "Is gaming really educational?",
     answer:
       "Yes \u2014 when it\u2019s structured. EKUZO uses gaming as the medium to develop communication, leadership, resilience, and strategic thinking. These are the same skills coaches in traditional sports spend years trying to teach.",
+    related: {
+      href: "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+      text: "What a viral gaming study found, and what it didn't",
+    },
   },
   {
     question: "Isn\u2019t this just more screen time?",
     answer:
       "It\u2019s structured screen time that replaces the unproductive kind, not added on top of it. 86% of parents are already managing screen time and many feel they\u2019re losing the battle; the issue usually isn\u2019t the number of hours, it\u2019s whether those hours produce anything. EKUZO sessions are finite (90 minutes, coach-led, skill-building), and many parents report fewer transition fights at home because their child\u2019s \u201cgaming need\u201d is being met productively.",
+    related: {
+      href: "/blog/what-homeschool-parents-taught-us-about-gaming",
+      text: "What 200+ homeschool parents said when one dad asked about his sons' gaming",
+    },
   },
   {
     question: "What if my child has never played competitively, or is shy?",
@@ -79,6 +87,10 @@ const parentsFAQs = [
     question: "Do I need to be a gamer to support my child?",
     answer:
       "No. The most useful thing a parent brings isn\u2019t controller skill, it\u2019s interest. EKUZO is designed for parents who don\u2019t play: we translate each session into plain terms \u2014 what your child did well, where they struggled, how they communicated \u2014 so you can have the conversation at dinner without learning the game. Curiosity matters far more than skill.",
+    related: {
+      href: "/blog/what-your-kids-gaming-is-telling-you",
+      text: "Six things parents notice first in a gamer kid, and what they often mean",
+    },
   },
   {
     question: "What equipment does my child need?",
@@ -371,7 +383,7 @@ export default function ParentsPage() {
 
           {/* Feature blog card — full-width image with overlay */}
           <Link
-            href="/blog/our-familys-esports-journey-with-ekuzo-and-the-k1ng"
+            href="/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng"
             className="block relative overflow-hidden group"
             style={{
               height: "clamp(320px, 35vw, 500px)",
@@ -400,7 +412,7 @@ export default function ParentsPage() {
                 className="font-body text-white/70 leading-[1.417] hidden md:block"
                 style={{ fontSize: "clamp(1rem, 1.5vw, 20px)" }}
               >
-                My son Ryan was always a happy kid in his early years. See how EKUZO changed everything.
+                Ryan&apos;s story, in his mom&apos;s words.
               </p>
             </div>
           </Link>

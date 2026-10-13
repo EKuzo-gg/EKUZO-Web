@@ -14,21 +14,21 @@ import { readingTimeMinutes } from "@/lib/readingTime";
  */
 export default function BlogPostBody({
   author,
-  date,
-  dateLabel,
+  published,
+  modified,
   children,
 }: {
   author: string;
-  date: string;
-  dateLabel?: "Published" | "Updated";
+  published: string;
+  modified?: string;
   children: ReactNode;
 }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-16 items-start">
       <AuthorByline
         author={author}
-        date={date}
-        dateLabel={dateLabel}
+        published={published}
+        modified={modified}
         minutes={readingTimeMinutes(children)}
       />
       <BlogContent>{children}</BlogContent>

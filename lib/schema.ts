@@ -43,7 +43,10 @@ export const coachKarlinSchema = {
     "screen time",
     "online safety for kids",
   ],
-  sameAs: ["https://www.linkedin.com/in/karlinoei/"],
+  sameAs: [
+    "https://www.linkedin.com/in/karlinoei/",
+    "https://lol.fandom.com/wiki/Faith_(Karlin_Oei)",
+  ],
   worksFor: { "@id": ORG_ID },
   // 1400px derivative of the 6349x4312 / 10.2 MB original, same crop intent
   // (2026-07-28). The original is no longer served anywhere on the blog.
@@ -80,16 +83,16 @@ export const coachNuriSchema = {
 // but he follows the same pattern: one canonical Person node in the root @graph
 // referenced by @id from his ProfilePage (author page) and from the `author` of
 // any BlogPosting he writes. Keep "parent" out of jobTitle/description — it
-// lives on-page only (byline sub-label + author bio). jobTitle is "CEO".
+// lives on-page only (byline sub-label + author bio). jobTitle is "Advisor".
 export const JAMIE_ID = `${SITE}/#person-jamie`;
 
 export const personJamieFitch = {
   "@type": "Person",
   "@id": JAMIE_ID,
   name: "Jamie Fitch",
-  jobTitle: "CEO",
+  jobTitle: "Advisor",
   description:
-    "CEO of EKUZO, a youth esports coaching program. An edtech founder who previously raised over $40M, scaled, and sold an education company, and now builds and invests in companies focused on learning, youth development, and impact.",
+    "Jamie Fitch is an advisor to EKUZO, a parent to two young gamers and a lifelong competitive gamer himself. He writes for parents about gaming as an opportunity to lean into with their kids.",
   knowsAbout: [
     "youth esports",
     "esports coaching",
@@ -241,6 +244,32 @@ export const siteNavigationSchema = {
     { "@type": "WebPage", name: "For Schools", url: `${SITE}/schools` },
     { "@type": "WebPage", name: "FAQ", url: `${SITE}/faq` },
   ],
+};
+
+// Guest authors (John Hay, Lisa Holt): one canonical Person node each, name
+// only. No url (they have no author page) and nothing else we haven't
+// confirmed. NOT in `rootGraph`: rootGraph is emitted on every page, and each
+// guest wrote exactly one post. `buildBlogArticleSchema` emits the node in the
+// article's own @graph when `author` is one of these @ids, so the reference
+// never dangles and the node isn't broadcast sitewide.
+export const JOHN_HAY_ID = `${SITE}/#person-john-hay`;
+export const LISA_HOLT_ID = `${SITE}/#person-lisa-holt`;
+
+export const personJohnHay = {
+  "@type": "Person",
+  "@id": JOHN_HAY_ID,
+  name: "John Hay",
+};
+
+export const personLisaHolt = {
+  "@type": "Person",
+  "@id": LISA_HOLT_ID,
+  name: "Lisa Holt",
+};
+
+const GUEST_AUTHOR_NODES: Record<string, object> = {
+  [JOHN_HAY_ID]: personJohnHay,
+  [LISA_HOLT_ID]: personLisaHolt,
 };
 
 // ─── Root @graph used by app/layout.tsx ────────────────────────────────────
@@ -445,7 +474,7 @@ type BlogArticleArgs = {
   datePublished: string;
   dateModified?: string;
   image: string;
-  author?: { "@id": string } | { "@type": "Person"; name: string };
+  author?: { "@id": string };
 };
 
 export function buildBlogArticleSchema({
@@ -459,8 +488,7 @@ export function buildBlogArticleSchema({
 }: BlogArticleArgs) {
   const url = `${SITE}/blog/${slug}`;
   const imageUrl = image.startsWith("http") ? image : `${SITE}${image}`;
-  return {
-    "@context": "https://schema.org",
+  const article = {
     // BlogPosting is a subtype of Article — same fields, but the more precise
     // type Google + LLMs use to classify authored blog content. Applies to
     // every post built with this helper. @id fragment kept as #article (stable
@@ -478,6 +506,10 @@ export function buildBlogArticleSchema({
     publisher: { "@id": ORG_ID },
     inLanguage: "en-US",
   };
+  const guestNode = GUEST_AUTHOR_NODES[author?.["@id"] ?? ""];
+  return guestNode
+    ? { "@context": "https://schema.org", "@graph": [article, guestNode] }
+    : { "@context": "https://schema.org", ...article };
 }
 
 // Convenience wrapper for blog-post breadcrumbs: Home → Blog → [post title].

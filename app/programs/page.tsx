@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FAQAccordion from "@/components/ui/FAQAccordion";
@@ -77,6 +78,10 @@ const programsFAQs = [
     question: "Can homeschool families participate?",
     answer:
       "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
+    related: {
+      href: "/blog/when-gaming-helps-homeschool-kids",
+      text: "How to tell if gaming is growing your homeschooled kid's world or shrinking it",
+    },
   },
 ];
 
@@ -154,6 +159,19 @@ export default function ProgramsPage() {
             Real stories from<br />EKUZO families
           </h4>
           <TestimonialsCarousel />
+          <p
+            className="font-body text-black/70 text-center leading-relaxed mt-12"
+            style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
+          >
+            One mom wrote about{" "}
+            <Link
+              href="/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng"
+              className="text-red underline underline-offset-2 hover:no-underline"
+            >
+              how her son, bullied in sixth grade, became a leader on his esports team
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

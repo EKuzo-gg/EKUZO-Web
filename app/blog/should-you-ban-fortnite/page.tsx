@@ -201,11 +201,12 @@ const KEEP_READING = [
     category: "Perspective",
   },
   {
-    slug: "when-your-sons-only-friends-are-online",
-    title: "When your son’s only friends are online",
-    blurb: "Are online friends real? The shape of play matters more than the hours.",
-    image: "/images/when-your-sons-only-friends-are-online-hero.jpg",
-    category: "Perspective",
+    slug: "what-homeschool-parents-taught-us-about-gaming",
+    title: "Should homeschool kids play video games? 200+ parents weigh in",
+    blurb:
+      "We read a 200+ parent thread on kids and gaming. Three camps, the language they use, and the one structured, social, supervised thing they all want.",
+    image: "/images/blog-post-6-card.jpg",
+    category: "Case Studies",
   },
   {
     slug: "what-your-kids-gaming-is-telling-you",
@@ -341,7 +342,7 @@ export default function PostShouldYouBanFortnite() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="muhammad-hossain" date={DATE_PUBLISHED}>
+          <BlogPostBody author="muhammad-hossain" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 Howdy, I’m Muhammad. I’m a rising senior at Texas A&amp;M, and I
                 coach kids in League of Legends for a youth esports startup

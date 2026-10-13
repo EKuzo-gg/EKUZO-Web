@@ -43,11 +43,12 @@ export const metadata = buildAuthorMetadata(getAuthor(SLUG));
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
+// Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const POSTS: AuthorPost[] = [
   {
     slug: "should-you-ban-fortnite",
     title: "She banned Fortnite and got her kid back. Then came a new problem.",
-    date: "July 28, 2026",
+    date: "July 31, 2026",
     excerpt:
       "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
     image: "/images/should-you-ban-fortnite-card.jpg",
@@ -56,7 +57,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "gaming-military-families",
     title: "Every move wiped their friend map. Gaming was the community that traveled.",
-    date: "July 25, 2026",
+    date: "July 31, 2026",
     excerpt:
       "Military kids move constantly, and every move wipes the friend map. A military mom and a 21-year-old esports coach on the gaming communities that travel.",
     image: "/images/gaming-military-families-card.jpg",

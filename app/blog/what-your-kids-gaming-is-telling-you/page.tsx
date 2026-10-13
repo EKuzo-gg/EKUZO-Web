@@ -14,6 +14,7 @@ import {
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
+import ProgramLine from "@/components/blog/ProgramLine";
 
 const SLUG = "what-your-kids-gaming-is-telling-you";
 const TITLE_DISPLAY = "What your kid's gaming is telling you";
@@ -26,7 +27,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
-const DATE_MODIFIED = "2026-05-24";
+const DATE_MODIFIED = "2026-10-13";
 
 // FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
 // don't extract well as standalone Q&A, so we surface six parent-shaped
@@ -227,7 +228,7 @@ export default function PostGamingHiddenMeaning() {
   );
   const videoSchema = buildVideoObjectSchema({
     pageSlug: SLUG,
-    name: "DAY 4 — Karlin on why he started EKUZO",
+    name: "DAY 4: Karlin on why he started EKUZO",
     description:
       "EKUZO founder Karlin Oei on growing up with social anxiety and low self-esteem, finding competitive esports in college that paid over $80,000 in scholarships, and starting EKUZO to give kids the team and structure he didn't have.",
     thumbnailPath: SHARE_IMAGE,
@@ -318,7 +319,7 @@ export default function PostGamingHiddenMeaning() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
+          <BlogPostBody author="karlin-oei" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 Some kids are loud about gaming. They narrate every match at
                 dinner, beg for the new skin, wear the merch to school. You
@@ -561,8 +562,11 @@ export default function PostGamingHiddenMeaning() {
               <p>
                 That&apos;s why the answer is rarely &ldquo;less gaming&rdquo;
                 or &ldquo;more gaming.&rdquo; Both miss what&apos;s going on.
-                What tends to help is a better container around the thing
-                they already care about: a team, a coach, a rhythm to the
+                What tends to help is{" "}
+                <Link href="/methodology">
+                  a better container around the thing they already care about
+                </Link>
+                : a team, a coach, a rhythm to the
                 week, a shared language for what happened in a match, a
                 culture that sets the tone, and a way to lose, learn, and
                 come back. That may be why school esports programs often
@@ -613,7 +617,7 @@ export default function PostGamingHiddenMeaning() {
 
               <InstagramEmbed
                 url="https://www.instagram.com/p/DYcuA4jBDl3/"
-                caption="DAY 4 of Karlin's founder series — on what gaming gave him, and what was missing."
+                caption="DAY 4 of Karlin's founder series: on what gaming gave him, and what was missing."
               />
 
               <h2>One honest note</h2>
@@ -633,18 +637,15 @@ export default function PostGamingHiddenMeaning() {
                 gets a better container, without betting a season on it.
               </p>
               <p>
-                <Link href="/programs/ekuzo100">EKUZO100</Link> is our
-                shortest version of that environment. One month, a small team
-                of 5 players at their level, a coach, and a real practice
-                rhythm. Not because every kid should become an esports
-                athlete. Because some kids need a place where the thing they
-                already care about can become social, coached, and healthier.
-                Think of it as an experiment. At the end you&apos;re not
-                looking for a pro player. You&apos;re looking for a clearer
-                kid: more language for what they&apos;re working on, a bit
-                more confidence, more sign that the interest has somewhere
-                good to go.
+                Find one place where the game comes with a small team, a
+                coach, and a real practice rhythm, and give it a month. Think
+                of it as an experiment. At the end you&apos;re not looking for
+                a pro player. You&apos;re looking for a clearer kid: more
+                language for what they&apos;re working on, a bit more
+                confidence, more sign that the interest has somewhere good to
+                go.
               </p>
+              <ProgramLine />
               <h2>Questions this article may raise for parents</h2>
               {FAQ_ITEMS.map((item) => (
                 <Fragment key={item.question}>
@@ -663,15 +664,15 @@ export default function PostGamingHiddenMeaning() {
                 </Fragment>
               ))}
 
-              <p className="text-right">— Karlin, founder of EKUZO</p>
+              <p className="text-right">Karlin, founder of EKUZO</p>
               <p>
-                If{" "}
+                If the viral &ldquo;13.7 years younger&rdquo; gaming study is
+                why you&apos;re here, that number isn&apos;t in the paper. I
+                read about a thousand of the replies and wrote up{" "}
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
-                  the viral &ldquo;13.7 years younger&rdquo; gaming study
-                </Link>{" "}
-                is why you&apos;re here, that number isn&apos;t in the paper. I
-                read about a thousand of the replies and wrote up what it means
-                for a twelve-year-old.
+                  what the study found and what it means for a twelve-year-old
+                </Link>
+                .
               </p>
           </BlogPostBody>
         </div>

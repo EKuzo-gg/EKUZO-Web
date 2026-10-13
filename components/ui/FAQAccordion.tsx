@@ -1,10 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type FAQItem = {
   question: string;
   answer: string;
+  /**
+   * Optional "Related reading" line under the answer. Rendered in the page
+   * HTML whether the item is open or closed, and deliberately kept out of
+   * FAQ schema: the answer string stays the canon text.
+   */
+  related?: { href: string; text: string };
 };
 
 type FAQAccordionProps = {
@@ -73,6 +80,23 @@ export default function FAQAccordion({ items, theme = "dark" }: FAQAccordionProp
             >
               {item.answer}
             </p>
+            {item.related && (
+              <p
+                className={`pl-[52px] lg:pl-[66px] mt-3 leading-relaxed max-w-[600px] ${
+                  isDark ? "text-white/70" : "text-black/70"
+                }`}
+                style={{ fontSize: "clamp(1rem, 1.4vw, 20px)" }}
+              >
+                Related reading:{" "}
+                <Link
+                  href={item.related.href}
+                  tabIndex={open === i ? 0 : -1}
+                  className="text-red underline underline-offset-2 hover:no-underline"
+                >
+                  {item.related.text}
+                </Link>
+              </p>
+            )}
           </div>
 
           {/* Separator line */}

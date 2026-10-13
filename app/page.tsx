@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import FooterBanner from "@/components/sections/FooterBanner";
@@ -443,7 +444,11 @@ export default function HomePage() {
                 <p className="font-body text-white/90 leading-relaxed" style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}>
                   Five players, defined roles, a shared objective, and a playbook that changes every match.
                   It&apos;s free to play, runs on most family computers, and has none of the loot-box pressure
-                  parents watch for.
+                  parents watch for. Here&apos;s{" "}
+                  <Link href="/blog/league-of-legends-youth-development" className="underline underline-offset-2 hover:text-red transition-colors">
+                    why we chose League of Legends for kids
+                  </Link>
+                  , and how we deal with the toxicity it&apos;s known for.
                 </p>
               </div>
             </div>

@@ -33,24 +33,36 @@ function formatDate(iso: string): string {
 type Props = {
   /** Slug from lib/authors.ts. */
   author: string;
-  /** ISO YYYY-MM-DD. Same value the post feeds to buildBlogArticleSchema. */
-  date: string;
-  /** "Published" unless the post is maintained as an evergreen update. */
-  dateLabel?: "Published" | "Updated";
+  /** ISO YYYY-MM-DD. Same values the post feeds to buildBlogArticleSchema. */
+  published: string;
+  /** The date shown. Falls back to `published` when missing. */
+  modified?: string;
   /** Whole minutes. Omit to hide. Computed by BlogPostBody, never by hand. */
   minutes?: number;
 };
 
 export default function AuthorByline({
   author: slug,
-  date,
-  dateLabel = "Published",
+  published,
+  modified,
   minutes,
 }: Props) {
   const author = getAuthor(slug);
   const href = authorHref(author);
+  // Every post shows one line, "Updated <date>", using the modified date
+  // (2026-10-12 decision). `published` stays a prop so callers feed the same
+  // values to the schema; it is only the fallback here.
+  const shownDate = modified || published;
   const showReadTime =
     typeof minutes === "number" && minutes <= READ_TIME_CEILING_MINUTES;
+
+  // Only items that exist (guest authors have no role; some posts have no read
+  // time), so the row never has a doubled separator.
+  const metaItems = [
+    author.role,
+    `Updated ${formatDate(shownDate)}`,
+    showReadTime ? `${minutes} min read` : undefined,
+  ].filter((item): item is string => Boolean(item));
 
   const name = <strong className="text-black font-semibold">{author.name}</strong>;
 
@@ -79,24 +91,22 @@ export default function AuthorByline({
           )}
         </span>
 
-        {/* Meta. One middot-separated line on mobile, one item per line on the
-            desktop rail — same DOM, the separators just drop out at lg. */}
-        <span className="font-body text-black/40 text-xs flex flex-wrap items-baseline gap-x-1.5 lg:flex-col lg:items-start lg:gap-x-0 lg:gap-y-1">
-          {author.role && (
-            <>
-              <span>{author.role}</span>
-              <span aria-hidden="true" className="lg:hidden">·</span>
-            </>
-          )}
-          <span>
-            {dateLabel} {formatDate(date)}
+        {/* Meta. On mobile one middot-separated row; on the lg rail one item
+            per line. Every item carries a leading ::before middot, and the
+            wrapper is pulled left by one dot's width inside an overflow-hidden
+            parent, so the dot that lands at the start of a line (the first
+            item, or an item that wrapped) is clipped instead of dangling. */}
+        <span className="font-body text-black/40 text-xs block overflow-hidden lg:overflow-visible">
+          <span className="flex flex-wrap items-baseline -ml-3 lg:ml-0 lg:flex-col lg:items-start lg:gap-y-1">
+            {metaItems.map((item, i) => (
+              <span
+                key={i}
+                className="relative pl-3 before:absolute before:left-[3px] before:content-['·'] lg:pl-0 lg:before:hidden"
+              >
+                {item}
+              </span>
+            ))}
           </span>
-          {showReadTime && (
-            <>
-              <span aria-hidden="true" className="lg:hidden">·</span>
-              <span>{minutes} min read</span>
-            </>
-          )}
         </span>
       </div>
     </div>

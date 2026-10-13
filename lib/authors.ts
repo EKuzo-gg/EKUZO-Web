@@ -28,6 +28,11 @@ export type AuthorKind = "staff" | "guest";
 export type Author = {
   slug: string;
   name: string;
+  /**
+   * Optional display name used ONLY by the author-page H1. Bylines, metadata
+   * titles and schema `name` keep `name`. Added 2026-10 for Karlin "Faith" Oei.
+   */
+  pageName?: string;
   kind: AuthorKind;
 
   /** Byline sub-label + author-page eyebrow. Staff only. */
@@ -89,6 +94,7 @@ const AUTHORS: Author[] = [
   {
     slug: "karlin-oei",
     name: "Karlin Oei",
+    pageName: "Karlin \u201cFaith\u201d Oei",
     kind: "staff",
     role: "Founder of EKUZO",
     avatar: "/images/authors/karlin-oei-avatar.jpg",
@@ -101,10 +107,10 @@ const AUTHORS: Author[] = [
     headshotWidth: 1400,
     headshotHeight: 951,
     description:
-      "Karlin Oei is the founder of EKUZO — a former national collegiate esports captain who earned $80,000+ in scholarships and now builds the structured, coached environment he didn't have growing up.",
+      "Karlin Oei is the founder of EKUZO, a former national collegiate esports captain who earned $80,000+ in scholarships and now builds the structured, coached environment he didn't have growing up.",
     bio: [
       "Karlin Oei is the founder of EKUZO, a youth esports coaching program that turns a kid's existing gaming into a structured, coached, team-based experience.",
-      "He builds EKUZO from the inside of the problem it solves. Karlin grew up gaming through social anxiety, low self-esteem, and a complicated home, and school rarely reached him. Games did. What he didn't have was anyone who knew what to do with that: no team, no routine, no coach to turn the hours into growth. He only started to see what gaming had taught him (ownership, accountability, how to lead) at 18, and stumbled into competitive League of Legends in college, where he became a national collegiate captain and earned $80,000+ in esports scholarships. EKUZO is the container he wishes he'd had.",
+      "He builds EKUZO from the inside of the problem it solves. Karlin grew up gaming through social anxiety, low self-esteem, and a complicated home, and school rarely reached him. Games did. What he didn't have was anyone who knew what to do with that: no team, no routine, no coach to turn the hours into growth. He only started to see what gaming had taught him (ownership, accountability, how to lead) at 18, and stumbled into competitive League of Legends in college, where he became a national collegiate captain and earned $80,000+ in esports scholarships. Faith was his gamertag as a jungler at UT Dallas, and it's the name his players know him by. EKUZO is the container he wishes he'd had.",
       "He writes here about what a kid's gaming is really telling parents, why structure beats restriction, and what coached play actually looks like.",
       "Karlin's mission is to help making gaming matter in the lives of students and the people that support them.",
     ],
@@ -116,20 +122,18 @@ const AUTHORS: Author[] = [
     slug: "jamie-fitch",
     name: "Jamie Fitch",
     kind: "staff",
-    role: "CEO of EKUZO · Parent",
+    role: "Advisor to EKUZO · Parent",
     avatar: "/images/authors/jamie-fitch-avatar.jpg",
     headshot: "/images/jamie-fitch.jpg",
-    headshotAlt: "Jamie Fitch, CEO of EKUZO",
+    headshotAlt: "Jamie Fitch, advisor to EKUZO",
     headshotWidth: 500,
     headshotHeight: 499,
     description:
-      "Jamie Fitch is CEO of EKUZO, a parent and edtech founder. He writes about turning gaming from something parents worry about into something kids can grow through.",
+      "Jamie Fitch is an advisor to EKUZO, a parent to two young gamers and a lifelong competitive gamer himself. He writes for parents about gaming as an opportunity to lean into with their kids.",
     bio: [
-      "Jamie Fitch is the CEO of EKUZO, where he helps turn gaming from something parents worry about into something kids can grow through, with coaching, structure, teammates, and purpose.",
-      "He comes to the work from a few angles at once: as a parent, a lifelong competitive gamer, and a founder and operator who has spent his career building education and impact-driven companies. Jamie previously founded and led an edtech company, raised more than $40M, scaled it, and sold it. Today he advises, invests in, and helps operate companies focused on learning, youth development, technology, and impact.",
-      "Gaming is personal for Jamie. He grew up playing competitively and still sees games as one of the clearest places where kids reveal how they think, compete, communicate, handle frustration, and respond to challenges. As a parent, he also understands the tension: the same screen time that can look isolating or excessive from the outside can sometimes be the place where a child is practicing focus, strategy, resilience, friendship, and identity.",
-      "His work sits at that intersection. He believes the question is not simply whether gaming is “good” or “bad” for kids. The better question is: what kind of environment surrounds the game? Left alone, gaming can drift toward isolation, toxicity, or avoidance. With the right structure, it can become a coached, team-based, developmentally meaningful experience.",
-      "Jamie writes for parents who do not want to dismiss gaming, but also do not want to leave it alone. His work is about seeing what kids are already drawn to, then building the structure around it that helps them grow.",
+      "Jamie Fitch is an advisor to EKUZO, a parent to two young gamers, a lifelong competitive gamer, and an entrepreneur focused on education and impact. He previously founded and led an edtech company, raised more than $40 million, and scaled the business through its acquisition. Today, he advises, invests in, and helps operate companies focused on youth development and the skills young people need to thrive.",
+      "Jamie sees gaming as a window into how kids think, compete, communicate, and navigate challenges. As a parent, he understands both the concerns around screen time and the passion, belonging, and identity kids can find in games.",
+      "He writes for parents to help them see gaming as an opportunity to lean into with their kids.",
     ],
     personId: JAMIE_ID,
     hasPage: true,

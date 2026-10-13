@@ -53,6 +53,14 @@ const nextConfig = {
       // Pre-launch homepage path, also a 404 in Search Console 2026-10-12.
       { source: "/old-home", destination: "/", permanent: true },
 
+      // Re-slugged 2026-10: the summer camps guide became a year-round guide.
+      // Permanent: the old URL does not come back.
+      {
+        source: "/blog/summer-camps-for-kids-who-game-2026",
+        destination: "/blog/gaming-programs-for-kids",
+        permanent: true,
+      },
+
       // Retired Kassi slug (2026-07-28). /blog/mom-who-banned-fortnite was
       // live on production from 2026-07-25, noindex and undisseminated. On
       // 2026-07-27 it was rewritten and split in two: the military-families

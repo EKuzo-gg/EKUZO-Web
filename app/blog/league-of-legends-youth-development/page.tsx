@@ -4,6 +4,7 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
+import ProgramLine from "@/components/blog/ProgramLine";
 import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import {
   buildBlogArticleSchema,
@@ -15,7 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const SLUG = "league-of-legends-youth-development";
-const TITLE = "Why League of Legends is perfect for youth development";
+const TITLE = "Is League of Legends OK for kids? Why we coach it";
 const DESCRIPTION =
   "Why League of Legends works for youth development when the structure is right. The honest answer on toxicity and what coached play actually teaches kids.";
 // Placeholder asset. Aaron will replace with the real hero per the spec in
@@ -23,7 +24,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/blog-post-4-hero.jpg";
 const SHARE_IMAGE = "/images/blog-post-4-card.jpg";
 const DATE_PUBLISHED = "2026-05-16";
-const DATE_MODIFIED = "2026-05-16";
+const DATE_MODIFIED = "2026-10-13";
 
 // FAQPage schema — lets AI surfaces (Google AI Overviews, ChatGPT, Perplexity)
 // pull individual Q&A pairs as standalone citations. Answers are plain text
@@ -109,7 +110,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
   const faqSchema = buildFAQPageSchema(FAQ_ITEMS);
   const videoSchema = buildVideoObjectSchema({
     pageSlug: SLUG,
-    name: "Community is opportunity — Karlin on the Jynxzi tournament",
+    name: "Community is opportunity: Karlin on the Jynxzi tournament",
     description:
       "EKUZO founder Karlin Oei reacts to streamer Jynxzi's creator-led League of Legends tournament — the 'Challenger Role' format that forced the strongest players into support roles — and why it shows League communities are opportunities shaped by structure.",
     thumbnailPath: "/images/blog-post-4-reel-thumb.jpg",
@@ -196,7 +197,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="karlin-oei" date={DATE_PUBLISHED}>
+          <BlogPostBody author="karlin-oei" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               {/* Answer block — first paragraph after H1, no H2 above it.
                   Load-bearing for LLM citation. Do not wrap under a heading. */}
               <p>
@@ -272,8 +273,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 That&apos;s the opportunity. Getting your kid into a
                 structured, coached online environment early, before they
                 have a hundred hours of unmanaged solo queue, is one of the
-                best moves you can make for how they show up online for the
-                rest of their life.
+                better moves you can make for how they show up online.
               </p>
 
               <h2>Basketball meets chess</h2>
@@ -317,9 +317,8 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 out of things to teach.
               </p>
               <p>
-                <strong>Approachable mechanics.</strong> The floor is low.
-                The ceiling is high. A 12-year-old who has never played can
-                find their footing in a few sessions, and a player who&apos;s
+                <strong>Approachable mechanics.</strong>{" "}
+                A 12-year-old who has never played can find their footing in a few sessions, and a player who&apos;s
                 been at it for two years still has room to grow. A beginner
                 and a veteran can be on the same team and both get something
                 out of practice.
@@ -331,8 +330,8 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 assign or rotate a role, and develop a player inside one.
               </p>
               <p>
-                <strong>Cultural durability.</strong> Riot is still patching
-                the game in 2026, still running a six-region pro league, and
+                <strong>Cultural durability.</strong>{" "}
+                Riot is still patching the game in 2026, still running a six-region pro league, and
                 is publicly building toward &ldquo;League Next&rdquo; in
                 2027. League shows no signs of fading.
               </p>
@@ -389,8 +388,8 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
               </p>
               <p>
                 Blame is the easy move. Asking what you&apos;d do differently
-                next time is harder. That&apos;s the part most people miss
-                about League. It&apos;s a live laboratory for the same
+                next time is harder. That&apos;s the part of League I&apos;d want a parent to see.
+                It&apos;s a live laboratory for the same
                 dynamics that show up at work and in relationships: reading a
                 room, calling a play, knowing when to lead and when to
                 follow, recovering from a bad decision, supporting someone
@@ -420,7 +419,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 make on our roster.
               </p>
               <p>
-                The skills work both ways. What a kid learns inside coaches
+                The skills work both ways. What a kid learns inside coached
                 sessions (map awareness, calling a play, recovering from a
                 bad fight, knowing your role on a team) usually shows up in
                 whatever else they play that week. A kid who gets better at
@@ -428,9 +427,9 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
               </p>
               <p>
                 Here&apos;s how I think about it. Most of a kid&apos;s growth
-                in any program comes from a small share of the inputs. We
-                meet students through the games they love, and we teach
-                through the game where the inputs compound: structured
+                in any program comes from a small share of the inputs. Many
+                kids come to us loving a different game. We coach inside the
+                one where the inputs compound: structured
                 roles, teachable team dynamics, depth that sustains a real
                 season. League is the game I&apos;ve spent serious time
                 inside where a coach is never out of things to teach.
@@ -545,7 +544,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                   creator-led League tournament
                 </a>{" "}
                 with MrBeast, Tyler1, Doublelift, xQc, Ludwig, and forty
-                other major creators. Over 920,000 people watched it live.
+                other major creators. It peaked at over 920,000 concurrent viewers.
                 The viewership was real. The format mattered more.
               </p>
               <p>
@@ -570,8 +569,8 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
               <h2>How does EKUZO handle League&apos;s toxicity problem?</h2>
               <p>Solo queue is the problem. So we don&apos;t use it.</p>
               <p>
-                Our players are on stable teams with the same teammates week
-                after week. Coaches are in voice during sessions. We set
+                During a season, our players are on stable teams with the same
+                teammates week after week. Coaches are in voice during sessions. We set
                 communication norms before the match starts and review them
                 after. We use{" "}
                 <a
@@ -620,14 +619,13 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 here. They need a role, teammates, and a coach who pays
                 attention. The rest they&apos;ll build.
               </p>
+              <ProgramLine />
               <p>
-                If you want to see what this looks like in practice,{" "}
-                <Link href="/programs/ekuzo-camps">our camps</Link> are
-                running all summer. We wrote{" "}
-                <Link href="/blog/summer-camps-for-kids-who-game-2026">
-                  a longer guide on that
-                </Link>{" "}
-                too.
+                We also keep{" "}
+                <Link href="/blog/gaming-programs-for-kids">
+                  a guide to other programs for kids who game
+                </Link>
+                .
               </p>
 
               <h2>FAQ</h2>
@@ -704,14 +702,8 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 </a>
                 , the Nobel-winning CEO of Google DeepMind, credits chess
                 and game design as foundational to how he thinks about AI.{" "}
-                <a
-                  href="https://www.nasef.org/research"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  65% of competitive college esports players are STEM majors
-                </a>
-                , with graduation rates above the general student
+                65% of competitive college esports players are STEM majors,
+                with graduation rates above the general student
                 population. The same cognitive substrate that produces a
                 high-level gamer often produces a high-functioning operator.
               </p>
@@ -723,12 +715,6 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 competition gets serious.
               </p>
 
-              <p className="italic">
-                Karlin Oei is the founder of <Link href="/">EKUZO</Link>. He
-                grew up playing League of Legends, paid for college through
-                esports scholarships, and now builds the coaching system he
-                wishes he&apos;d had as a kid.
-              </p>
               <p>
                 When{" "}
                 <Link href="/blog/gaming-study-13-7-years-younger-what-it-means-for-kids">
@@ -761,13 +747,13 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
               Keep Reading
             </p>
             <Link
-              href="/blog/summer-camps-for-kids-who-game-2026"
+              href="/blog/gaming-programs-for-kids"
               className="group grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8 items-start md:items-center"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-black">
                 <Image
                   src="/images/blog-post-3-card.jpg"
-                  alt="Virtual summer camps for kids who'd rather be gaming"
+                  alt="Gaming programs for kids: a parent's guide, Fall 2026"
                   fill
                   className="object-cover opacity-80 transition-opacity group-hover:opacity-100"
                 />
@@ -777,8 +763,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                   Guides
                 </span>
                 <h3 className="font-body font-bold text-black text-xl leading-snug group-hover:text-red transition-colors mb-2">
-                  Virtual summer camps for kids who&apos;d rather be gaming
-                  (still open for summer 2026)
+                  Gaming programs for kids: a parent&apos;s guide, Fall 2026
                 </h3>
                 <span className="font-body text-black/40 text-sm">
                   by Karlin Oei

@@ -5,23 +5,25 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import {
   buildBlogArticleSchema,
+  JOHN_HAY_ID,
   buildBlogPostBreadcrumbSchema,
 } from "@/lib/schema";
 import Link from "next/link";
 import Image from "next/image";
 import BlogPostBody from "@/components/blog/BlogPostBody";
+import ProgramLine from "@/components/blog/ProgramLine";
 
 const SLUG = "conquering-my-mountain-and-giants-how-esports-changed-my-life";
 const TITLE = "Conquering my Mountain and Giants: How Esports Changed My Life";
 const DESCRIPTION =
-  "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO — and a coach who taught me how to reframe everything.";
+  "I struggled with anxiety, perfectionism, and near-failing grades. Then I found EKUZO, and a coach who taught me how to reframe everything.";
 const SHARE_IMAGE = "/images/blog-post-2-card.jpg";
 const DATE_PUBLISHED = "2026-01-14";
-const DATE_MODIFIED = "2026-01-14";
+const DATE_MODIFIED = "2026-10-13";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
-  title: `${TITLE} — EKUZO Blog`,
+  title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
@@ -59,7 +61,7 @@ export default function PostJohnHay() {
     datePublished: DATE_PUBLISHED,
     dateModified: DATE_MODIFIED,
     image: SHARE_IMAGE,
-    author: { "@type": "Person", name: "John Hay" },
+    author: { "@id": JOHN_HAY_ID },
   });
   const breadcrumbSchema = buildBlogPostBreadcrumbSchema(SLUG, TITLE);
 
@@ -117,7 +119,7 @@ export default function PostJohnHay() {
           <div className="relative w-full" style={{ height: "520px" }}>
             <Image
               src="/images/blog-post-2-featured.jpg"
-              alt="John Hay — EKUZO esports coach"
+              alt="John Hay, EKUZO esports coach"
               fill
               className="object-cover"
               priority
@@ -133,11 +135,11 @@ export default function PostJohnHay() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <BlogPostBody author="john-hay" date={DATE_PUBLISHED}>
+          <BlogPostBody author="john-hay" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
                 Hey everyone! My name is John, and I am an esports coach for EKUZO. For those of
-                you unfamiliar with our program, we are an outsourced esports group that helps
-                schools launch and operate their competitive gaming programs. I know that gaming
+                you unfamiliar with the program, EKUZO puts kids on coached esports teams, through
+                their schools and from home. I know that gaming
                 often carries a negative stigma. It can be fairly lazy and unproductive. However, I
                 believe gaming can build character, confidence, and connections. So let me share how
                 esports has changed my life.
@@ -199,7 +201,8 @@ export default function PostJohnHay() {
                   steps to ensure it doesn&apos;t happen next time.&rdquo;
                 </p>
                 <cite className="font-body text-black/50 text-sm not-italic mt-3 block">
-                  — Faith, EKUZO Founder &amp; Head Coach
+                  Faith (<Link href="/blog/author/karlin-oei">Karlin Oei</Link>), EKUZO founder
+                  and head coach
                 </cite>
               </blockquote>
               <p>
@@ -209,15 +212,18 @@ export default function PostJohnHay() {
                 Use them as a tool to become better.
               </p>
               <p className="italic text-black/60">
-                John&apos;s story is one person&apos;s experience, not a guarantee. If it
-                resonates and you want a low-stakes way to put your gamer on a coached team,{" "}
-                <Link href="/programs/ekuzo100">EKUZO100</Link> is a one-month trial for $100 — or
-                read{" "}
+                John&apos;s story is one person&apos;s experience, not a guarantee.
+                Related:{" "}
                 <Link href="/blog/when-your-sons-only-friends-are-online">
                   when your son&apos;s only friends are online
                 </Link>{" "}
-                for the bigger picture.
+                and{" "}
+                <Link href="/blog/what-your-kids-gaming-is-telling-you">
+                  what a big reaction to a loss can mean
+                </Link>
+                .
               </p>
+              <ProgramLine />
           </BlogPostBody>
         </div>
 

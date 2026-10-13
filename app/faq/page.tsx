@@ -58,6 +58,10 @@ const safetyFAQs = [
     question: "Isn\u2019t gaming culture toxic? I don\u2019t want my child exposed to that.",
     answer:
       "Toxicity in gaming is real, but it isn\u2019t inherent to gaming; it\u2019s a symptom of unstructured, anonymous environments where players never meet again. EKUZO is built against that \u201csolo queue\u201d failure mode: your child plays on a stable team with the same teammates all season, a coach is on voice comms, there\u2019s a written Code of Conduct, and opponents come from the EKUZO ecosystem rather than random adults. In an accountable environment, the behaviors that wreck unstructured play are nearly impossible to sustain.",
+    related: {
+      href: "/blog/league-of-legends-youth-development",
+      text: "Is League of Legends really that toxic?",
+    },
   },
   {
     question: "What equipment does my child need?",
@@ -72,6 +76,10 @@ const programsFAQs = [
     question: "What programs does EKUZO offer?",
     answer:
       "EKUZO offers three programs: EKUZOTEAMS (semester-based, about 15\u201316 weeks of coached team play), EKUZO100 (a 4-week competitive bootcamp), and EKUZOCAMPS (1-week intensive sessions during summer and holiday breaks). Each is built on the same coaching system with a different format and commitment level.",
+    related: {
+      href: "/blog/gaming-programs-for-kids",
+      text: "Gaming programs for kids: a parent's guide",
+    },
   },
   {
     question: "What is EKUZO100?",
@@ -97,6 +105,10 @@ const programsFAQs = [
     question: "Can homeschool families participate?",
     answer:
       "Yes. Homeschoolers can enroll in any EKUZO program \u2014 EKUZO100, EKUZOTEAMS (Home track), or EKUZOCAMPS. All sessions are held online.",
+    related: {
+      href: "/blog/when-gaming-helps-homeschool-kids",
+      text: "When gaming helps homeschool kids and when it hurts",
+    },
   },
   {
     question: "What age range is EKUZO for?",
