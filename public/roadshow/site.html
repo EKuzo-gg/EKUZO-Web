@@ -429,7 +429,7 @@ const DEFAULT_SLIDES = [
     ["No","Your students already play. We help you start one."],
     ["Sort of","Most schools are here. We help make it official."]]},
   {sec:"schools", tone:"ink", img:"hands-in", pos:"50% 45%", kicker:"At high schools", head:"Start the club.", sub:"We help launch an esports program, coach it, and give it a season to play in."},
-  {sec:"schools", tone:"yellow", img:"esports-room", pos:"50% 50%", kicker:"At high schools", head:"Host the game day.", sub:"League of Legends nights, run by a coach, for players and fans alike."},
+  {sec:"schools", tone:"yellow", img:"esports-room", pos:"50% 50%", kicker:"At high schools", head:"Host the game day.", sub:"Game nights run by a coach, for players and fans alike."},
 
   // Colleges
   {sec:"colleges", type:"q", tone:"slate", kicker:"Quick question", head:"Do your players coach?", sub:"Tap one.", opts:[
@@ -479,7 +479,7 @@ const DEFAULT_SLIDES = [
   {id:"d_hard", sec:"adflow", type:"list", tone:"ink", kicker:"Leave this to us", head:"We handle the hard stuff.", sub:"You bring the room and the players. We run everything else.", items:["Registration","Payments","Schedules","Parent emails"], keep:"You coach the kids"},
   {id:"d_earn", sec:"adflow", tone:"lime", kicker:"For the club", head:"Your club earns.", sub:"Every season raises money for the club, so the program pays for itself."},
   {id:"d_doors", sec:"adflow", tone:"blue", img:"team-walk", pos:"50% 40%", kicker:"For the community", head:"Get bodies in the door.", sub:"Local kids, their families and your future recruits, all in your space."},
-  {id:"d_games", sec:"adflow", tone:"ink", kicker:"What we play", head:"Built on League of Legends.", sub:"One game, done right. The one your players already know best."},
+  {id:"d_games", sec:"adflow", tone:"ink", kicker:"About the game", head:"The game is the field.", sub:"Kids bring the games they love. The team, the coach and the season are the point."},
   {id:"d_proof", sec:"adflow", tone:"slate", kicker:"Already working", head:"Built with a college program.", sub:"We run this with a university esports club today, in their space, with their players coaching."},
   {id:"d_end", sec:"adflow", type:"cta", tone:"red", kicker:"For your club", head:"Your club, funded.", sub:"Host the league, coach the kids and earn every season."},
 
@@ -497,6 +497,40 @@ const DEFAULT_SLIDES = [
   {id:"f_camp", sec:"adflow", tone:"cream", kicker:"Start with who you know", head:"Your families come first.", sub:"Camp families and club lists hear about it from you, before anyone else."},
   {id:"f_end", sec:"adflow", type:"cta", tone:"blue", kicker:"Grow together", head:"Build it here. Then grow it together.", sub:"Start one league in your town. We help it spread to the next."},
 
+  // Partner pathways (Oct 2026). Game-agnostic: the game is the field, the team and the coach are the point.
+  // Schools and organizations (leadership), e.g. #partner, #school, #org
+  {id:"pt_q", sec:"adflow", type:"q", tone:"yellow", kicker:"Quick question", head:"Where do your gamers go after school?", sub:"The kids who game. Tap one.", opts:[
+    ["Home, alone","Most do. We give them a team to log in to."],
+    ["Our club or lab","Then you have the start. We add coaches and a season."],
+    ["No idea","That's most places. They're out there, playing solo."]]},
+  {id:"pt_goal", sec:"adflow", tone:"ink", img:"esports-room", pos:"50% 50%", kicker:"The goal", head:"100 kids. One local scene.", sub:"Kids 10 to 17 in your community, on teams with coaches every week. Enough for real matches, regular events and a reason to show up."},
+  {id:"pt_game", sec:"adflow", tone:"yellow", kicker:"About the game", head:"The game is the field. The team is the point.", sub:"Kids already love to play. We add what's missing: a coach, a team and a schedule."},
+  {id:"pt_peers", sec:"adflow", tone:"ink", img:"laughing", pos:"30% 40%", kicker:"Near peers", head:"Coached by someone a few years ahead.", sub:"College players coach the kids. Kids see where gaming can lead, from someone who was just like them."},
+  {id:"pt_hard", sec:"adflow", type:"list", tone:"ink", kicker:"Who does what", head:"You open the door. We run the league.", sub:"Coaches, structure and the paperwork are on us.", items:["Coach training","Waivers","Schedules","Parent emails","Payments"], keep:"You bring the community"},
+  {id:"pt_ways", sec:"adflow", type:"q", tone:"lime", kicker:"How we partner", head:"Built around your mission.", sub:"Every partner looks different. Tap one to see how it works.", opts:[
+    ["Fund our club","Each season helps pay for your club's travel and events."],
+    ["Pay our players","Your players coach on paid hours, with our training behind them."],
+    ["Host events","We sponsor game nights and tournaments in your space."],
+    ["Use our space","As more families sign up, we book regular time in your room."]]},
+  {id:"pt_money", sec:"adflow", tone:"cream", kicker:"How it's paid for", head:"Families fund the season.", sub:"Parents sign up for a season, like any youth team. That pays the coaches, the events and your share."},
+  {id:"pt_ask", sec:"adflow", tone:"ink", img:"hands-in", pos:"50% 45%", kicker:"What we need from you", head:"Help us get seen.", sub:"Share it with your families, students and community. More kids is what unlocks the coaches, the events and the funding."},
+  {id:"pt_next", sec:"adflow", type:"steps", tone:"bone", kicker:"Next steps", head:"Here's how we start.", sub:"Four steps from this conversation to the first practice.", steps:[["Step 1","Name a point person"],["Step 2","Share Season 01"],["Step 3","Host a game night"],["January","First practice"]]},
+  {id:"pt_end", sec:"adflow", type:"gate", tone:"yellow", kicker:"Season one · 2027", head:"Build it here. Then grow it together.", sub:"Leave your email and we'll set up a time to talk.", cta:"Let's talk", done:"Thanks. We'll reach out to set up a time."},
+
+  // Coaches (college players and older players who want to coach), e.g. #coach
+  {id:"cp_q", sec:"adflow", type:"q", tone:"blue", kicker:"Quick question", head:"Who taught you to play?", sub:"Tap one.", opts:[
+    ["Nobody. I figured it out.","Most of us did. Be the coach you didn't have."],
+    ["Friends online","Then you know what a good teammate is worth. Teach it."],
+    ["An older player","Then you know what it meant. Now it's your turn."]]},
+  {id:"cp_idea", sec:"adflow", tone:"ink", img:"coach-nuri", pos:"50% 40%", kicker:"The idea", head:"Be the coach you didn't have.", sub:"Coach kids 10 to 17 in your community, once a week, as part of a real season."},
+  {id:"cp_kids", sec:"adflow", tone:"blue", kicker:"What you coach", head:"You're not teaching a game. You're coaching kids.", sub:"Teamwork, talking it out and handling a loss. The stuff you learned the hard way."},
+  {id:"cp_train", sec:"adflow", tone:"ink", kicker:"Before your first practice", head:"We train you first.", sub:"Coaching basics, a plan for every practice and someone to call when you need help."},
+  {id:"cp_week", sec:"adflow", type:"steps", tone:"bone", kicker:"Your week", head:"One practice. One match.", sub:"A few hours a week, on a set schedule.", steps:[["Before","Get the practice plan"],["90 min","Practice with your team"],["Match night","Coach the match"],["After","Review the replay together"]]},
+  {id:"cp_hard", sec:"adflow", type:"list", tone:"ink", kicker:"Leave this to us", head:"We handle the rest.", sub:"You show up for the kids. We run everything around you.", items:["Waivers","Schedules","Parent emails","Payments"], keep:"You coach"},
+  {id:"cp_paid", sec:"adflow", tone:"lime", kicker:"What you get", head:"Get paid to coach.", sub:"Paid hours, real coaching experience and a reference for whatever comes next."},
+  {id:"cp_look", sec:"adflow", tone:"ink", img:"team-walk", pos:"55% 40%", kicker:"Why it matters", head:"Kids look up. You give back.", sub:"For a lot of these kids, you're the first coach who gets it."},
+  {id:"cp_end", sec:"adflow", type:"gate", tone:"blue", kicker:"Season one · 2027", head:"Coach Season 01.", sub:"Practice starts in January. Leave your email and we'll send what's next.", cta:"I want to coach", done:"Thanks. We'll be in touch with next steps."},
+
   // Join
   {id:"join_kid", sec:"join", skip:["player"], tone:"red", kicker:"Bigger than EKUZO", head:"It starts with your kid.", sub:"Every kid is special, and every parent knows it. Esports can be their stage."},
   {id:"join_form", sec:"join", type:"join", tone:"ink", kicker:"Season one \u00b7 2027", head:"Join the game.", sub:"We're starting something new next year. Be first to hear how to play, coach or host."}
@@ -506,10 +540,10 @@ const DEFAULT_SLIDES = [
 const ROLES = [
   {k:"player",  name:"Player",       cls:"Carry",      sec:"players",  path:["players","events","join"]},
   {k:"parent",  name:"Parent",       cls:"Support",    sec:"parents",  path:["parents","why","season","coaches","events","join"]},
-  {k:"coach",   name:"Coach",        cls:"Shotcaller", sec:"coaches",  path:["coaches","colleges","why","season","join"]},
-  {k:"school",  name:"School",       cls:"Home base",  sec:"schools",  path:["schools","why","season","coaches","events","join"]},
+  {k:"coach",   name:"Coach",        cls:"Shotcaller", sec:"coaches",  path:["coaches","colleges","why","season","join"], seq:["cp_q","cp_idea","cp_kids","cp_train","cp_week","cp_hard","cp_paid","co_story","co_major","cp_look","cp_end"]},
+  {k:"school",  name:"School",       cls:"Home base",  sec:"schools",  path:["schools","why","season","coaches","events","join"], seq:["pt_q","pt_goal","pt_game","pt_peers","season_ladder","pt_hard","pt_ways","pt_money","d_proof","pt_ask","pt_next","pt_end"]},
   {k:"college", name:"College",      cls:"Mentor",     sec:"colleges", path:["colleges","coaches","schools","season","join"]},
-  {k:"org",     name:"Organization", cls:"Host",       sec:"partners", path:["partners","why","season","coaches","events","join"]}
+  {k:"org",     name:"Organization", cls:"Host",       sec:"partners", path:["partners","why","season","coaches","events","join"], seq:["pt_q","pt_goal","pt_game","pt_peers","season_ladder","pt_hard","pt_ways","pt_money","d_proof","pt_ask","pt_next","pt_end"]}
 ];
 // Parent ad flows. Not on the player picker: each one is reached from its ad (or QR) by link, e.g. #parentfree.
 const FLOWS = [
@@ -519,11 +553,12 @@ const FLOWS = [
   // College and organization flows, e.g. #club
   {k:"club",     name:"College", as:"college", ad:"What does your club need most?", seq:["d_q","d_host","d_coach","d_hard","d_earn","d_doors","d_games","d_proof","d_end","join_form"]},
   {k:"space",    name:"Organization", as:"org", ad:"Empty room on a Saturday?", seq:["e_list","e_fill","e_coaches","season_ladder","d_hard","org_recess","ev_gg","d_earn","e_end","join_form"]},
+  {k:"partner", name:"Partner", as:"org", label:"Schools and organizations", ad:"Where do your gamers go after school?", seq:["pt_q","pt_goal","pt_game","pt_peers","season_ladder","pt_hard","pt_ways","pt_money","d_proof","pt_ask","pt_next","pt_end"]},
   {k:"hometown", name:"College", as:"college", ad:"Who runs esports near you?", seq:["f_q","f_local","f_look","co_story","co_major","season_ladder","f_camp","d_games","f_end","join_form"]}
 ];
 const ROLE = Object.fromEntries([...ROLES, ...FLOWS].map(r=>[r.k,r]));
 
-const KEY = "ekuzo-roadshow-story-v20";
+const KEY = "ekuzo-roadshow-story-v21";
 const ROLE_KEY = "ekuzo-roadshow-role";
 const IMG_KEYS = [null, ...Object.keys(IMG)];
 const TONES = ["arcade","ink","red","bone","lime","blue","cream","teal","yellow","slate","green","magenta"];
@@ -591,6 +626,8 @@ function body(s, i){
       <li><span class="when">Weekly</span><span class="what">League match</span></li>
       <li><span class="when">Mid-season</span><span class="what">Regionals</span></li>
       <li class="peak"><span class="when">Season end</span><span class="what">Nationals</span></li></ol>`;
+  } else if(s.type === "steps"){
+    extra = `<ol class="ladder">${(s.steps||[]).map(([w,t],n,a)=>`<li${n===a.length-1?' class="peak"':''}><span class="when">${esc(w)}</span><span class="what">${esc(t)}</span></li>`).join("")}</ol>`;
   } else if(s.type === "select"){
     extra = `<div class="select" role="group" aria-label="Choose your player">${ROLES.map((r,n)=>{ const x = blue(n+1, ROLES.length+2);
       return `<button type="button" data-role="${r.k}" aria-pressed="${role===r.k}" style="--rb:${x.bg};--rf:${x.fg}"><span class="meta"><span>P${n+1}</span><span>${r.cls}</span></span><strong${r.name.length > 8 ? ' class="long"' : ""}>${r.name}</strong></button>`; }).join("")}</div>
@@ -638,7 +675,7 @@ function body(s, i){
       <p class="err" aria-live="polite"></p>
       <button class="btn full" type="submit" style="background:var(--red);color:#fff">${esc(s.cta || "Save their spot")} &rarr;</button>
     </form>
-    <div class="done gdone" data-done${joined ? "" : " hidden"}><strong>Spot saved.</strong><p class="sub">${tx("We'll email you when season one opens. Keep going to see how it works.")}</p></div>
+    <div class="done gdone" data-done${joined ? "" : " hidden"}><strong>${s.done ? "Got it." : "Spot saved."}</strong><p class="sub">${tx(s.done || "We'll email you when season one opens. Keep going to see how it works.")}</p></div>
     <div class="gate-more"><button class="btn ghost" type="button" data-next>Keep learning &darr;</button>${pathsHTML()}</div>`;
   } else if(s.type === "join"){
     extra = `<form class="form" id="joinForm" novalidate${joined ? " hidden" : ""}>
@@ -683,6 +720,9 @@ function render(){
   const vis = visible();
   deck.innerHTML = vis.map(i=>{ const s = slides[i]; return `<section class="slide t-${s.tone}${s.type==='select'?' t-cover':''}"${s.tone==='ink' && SEC[s.sec]?.acc ? ` style="--acc:${SEC[s.sec].acc}"` : ''} id="s${i+1}" data-i="${i}" aria-label="${esc(s.head)}">${body(s,i)}</section>`; }).join("");
   document.getElementById("bar").innerHTML = vis.map(()=>"<i></i>").join("");
+  // Partner and coach paths end on their own form, so the floating button names that form and jumps to it.
+  { const last = slides[vis[vis.length-1]], fb = floatCta && floatCta.querySelector("button");
+    if(fb){ const own = last && last.type === "gate" && role && ROLE[role].seq && last.done; fb.textContent = own ? last.cta : "Join the game"; fb.dataset.go = own ? "last" : "join"; } }
   requestAnimationFrame(()=>{ fitAll(); observe(); initGames(); });
   setTimeout(fitAll, 350);
   const f = document.getElementById("joinForm"); if(f) f.addEventListener("submit", onJoin);
@@ -731,7 +771,7 @@ function observe(){
 
 function go(i){ if(i == null || i < 0) return; if(!visible().includes(i)){ setRole(null, false); } const el = document.getElementById("s"+(i+1)); el && el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}); }
 document.addEventListener("click", e=>{
-  const g = e.target.closest("[data-go]"); if(g){ closeMenu(false); go(slides.findIndex(s=>s.type===g.dataset.go)); return; }
+  const g = e.target.closest("[data-go]"); if(g){ closeMenu(false); if(g.dataset.go === "last"){ const v = visible(); go(v[v.length-1]); return; } go(slides.findIndex(s=>s.type===g.dataset.go)); return; }
   const l = e.target.closest("[data-sec]"); if(l){ closeMenu(false); go(slides.findIndex(s=>s.sec===l.dataset.sec)); return; }
   const r = e.target.closest("[data-role]"); if(r){ setRole(r.dataset.role === "all" ? null : r.dataset.role, true); return; }
   const pt = e.target.closest("[data-paths]"); if(pt){ const p = pt.nextElementSibling, open = p.hidden; p.hidden = !open; pt.setAttribute("aria-expanded", open); if(open) p.querySelector("button")?.focus(); const h = pt.closest(".slide")?.querySelector(".head"); h && fit(h); return; }
