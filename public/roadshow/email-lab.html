@@ -136,6 +136,8 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 .row .mine{font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
 .ro{margin:0;padding:9px 0}
 .field textarea.note{border-color:#4A4433;background:#16140F}
+.thumb{display:block;width:100%;max-width:220px;aspect-ratio:3/2;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.check{display:flex;gap:8px;align-items:center;font:500 13px/1.3 var(--ui);color:var(--muted)}
 </style></head><body>
 <nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html">← Hub</a><a href="ad-lab.html">Ad lab</a><a href="hero-lab.html">Hero lab</a><a href="email-lab.html" aria-current="page">Email lab</a></nav>
 <div class="wrap">
@@ -190,10 +192,10 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 const LOGO = "https://cdn.klaviyomail.com/company/UMWwrM/images/05a6d749-c2e7-4a58-a2cf-02ae4f8fb6a1.png";
 const AVATAR = "https://cdn.klaviyomail.com/company/UMWwrM/images/b4abbbe1-4c8d-402a-8e87-ff59921933a3.jpeg";
 const STATUS = {live:"Live", approved:"Approved", review:"In review", draft:"Draft", planned:"Planned"};
-const PHASES = {E0:"Meet us",E2:"How it works",E5:"Why it matters",E7:"Stay close"};
+const PHASES = {E0:"Meet us",E2:"What matters to them",E5:"Live right now",E6:"The people",E8:"Stay close"};
 const KEY = "ekuzo.emaillab.v1.";
 
-let emails={}, cur=null, view="desktop", showDiff=false, confirming=null;
+let PHOTOS={}, emails={}, cur=null, view="desktop", showDiff=false, confirming=null;
 let st=null; /* this reviewer's local state for the current email: {base, draft, verdicts, notes, note, sentAt} */
 
 const $ = s => document.querySelector(s);
@@ -212,17 +214,42 @@ function merge(s, mode){
   if(mode==="preview") return s.replace(/\{first_name\}/g,"Jennifer");
   return s.replace(/ \{first_name\}/g,"{% if first_name %} {{ first_name }}{% endif %}").replace(/\{first_name\}/g,"{{ first_name|default:'there' }}");
 }
+/* Photos: the page shows them from this folder; Klaviyo gets the Klaviyo CDN copy when there is one, otherwise the dev-site copy. */
+const SITE_PHOTOS = "https://dev--ekuzo.netlify.app/roadshow/";
+function photoSrc(key, mode){
+  const p = PHOTOS[key]; if(!p) return "";
+  if(mode==="preview") return p.src;
+  return p.cdn || (SITE_PHOTOS + p.src);
+}
+const photoAlt = key => esc((PHOTOS[key]||{}).alt || "");
 const P = 'font-family:Inter,Arial,Helvetica,sans-serif;font-size:17px;line-height:1.7;';
+const OSW = "font-family:Oswald,Impact,'Arial Black',Arial,sans-serif;";
+const BREAK_OUT = '</td></tr>';
+const BREAK_IN = '<tr><td style="padding:0 40px 8px 40px;" class="mp">';
+function img520(key, mode, mb){
+  return `<img src="${photoSrc(key,mode)}" alt="${photoAlt(key)}" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0;margin:0 0 ${mb}px 0;">`;
+}
 function blockHtml(b, mode){
   const t = merge(tidy(b.text),mode);
   if(b.kind==="strong") return `<p style="margin:0 0 18px 0;${P}color:#050505;font-weight:600;">${t}</p>`;
-  if(b.kind==="pillar") return `<p style="margin:8px 0 6px 0;font-family:Oswald,Impact,'Arial Black',Arial,sans-serif;font-size:24px;line-height:1.1;font-weight:700;color:#050505;text-transform:uppercase;letter-spacing:.5px;">${merge(tidy(b.head),mode)}</p><p style="margin:0 0 20px 0;${P}color:#444444;">${t}</p>`;
+  if(b.kind==="pillar") return `${b.img&&PHOTOS[b.img]?`<div style="height:10px;line-height:10px;font-size:1px;">&nbsp;</div>`+img520(b.img,mode,18):""}<p style="margin:8px 0 6px 0;${OSW}font-size:24px;line-height:1.1;font-weight:700;color:#050505;text-transform:uppercase;letter-spacing:.5px;">${merge(tidy(b.head),mode)}</p><p style="margin:0 0 ${b.img?28:20}px 0;${P}color:#444444;">${t}</p>`;
+  if(b.kind==="photo"){
+    if(!PHOTOS[b.img]) return "";
+    const cap = b.text ? `<p style="margin:${b.wide?"10px 40px 0 40px":"-8px 0 0 0"};font-family:Inter,Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#7C7C7C;" class="${b.wide?"mp":""}">${t}</p>` : "";
+    if(b.wide) return `${BREAK_OUT}<tr><td style="padding:12px 0 32px 0;"><img src="${photoSrc(b.img,mode)}" alt="${photoAlt(b.img)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;">${cap}</td></tr>${BREAK_IN}`;
+    return `<div style="height:6px;line-height:6px;font-size:1px;">&nbsp;</div>${img520(b.img,mode,18)}${cap}<div style="height:${cap?18:6}px;line-height:6px;font-size:1px;">&nbsp;</div>`;
+  }
+  if(b.kind==="time") return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-bottom:1px solid #EAE3D6;"><tr><td width="78" valign="top" style="padding:14px 12px 14px 0;${OSW}font-size:22px;font-weight:700;color:#F92524;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;">${merge(tidy(b.head),mode)}</td><td valign="top" style="padding:14px 0;"><p style="margin:0 0 4px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;color:#050505;line-height:1.4;">${merge(tidy(b.title),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#555555;line-height:1.55;">${t}</p></td></tr></table>`;
+  if(b.kind==="callout") return `<div style="height:14px;line-height:14px;font-size:1px;">&nbsp;</div><!--[if mso]><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#000000;"><tr><td style="padding:28px 24px;"><![endif]--><div style="background-color:#000000;clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);-webkit-clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="padding:28px 24px;"><p style="margin:0 0 10px 0;${OSW}font-size:30px;font-weight:700;color:#D4FF00;text-transform:uppercase;letter-spacing:.5px;line-height:1.05;">${merge(tidy(b.head),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#F0EDEA;line-height:1.6;">${t}</p></td></tr></table></div><!--[if mso]></td></tr></table><![endif]--><div style="height:28px;line-height:28px;font-size:1px;">&nbsp;</div>`;
+  if(b.kind==="link") return `<p style="margin:0 0 26px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;font-weight:700;"><a href="${esc(b.url||"https://ekuzo.gg")}" target="_blank" style="color:#F92524;text-decoration:none;">${merge(tidy(b.head),mode)}&nbsp;&rarr;</a></p>`;
   return `<p style="margin:0 0 18px 0;${P}color:#444444;">${t}</p>`;
 }
 function buildEmail(c, mode){
   const unsub = mode==="preview" ? '<a href="#" style="color:#999999;">Unsubscribe</a>' : "{% unsubscribe 'Unsubscribe' %}";
   const prefs = mode==="preview" ? '<a href="#" style="color:#999999;">Email Preferences</a>' : "{% manage_preferences 'Email Preferences' %}";
-  const blocks = (c.blocks||[]).map(b=>blockHtml(b,mode)).join("\n");
+  const L = c.blocks||[];
+  const blocks = L.map((b,i)=>blockHtml(b,mode)+(b.kind==="time"&&L[i+1]?.kind!=="time"?'<div style="height:24px;line-height:24px;font-size:1px;">&nbsp;</div>':"")).join("\n");
+  const hero = c.hero && PHOTOS[c.hero] ? `<tr><td style="padding:0;"><img src="${photoSrc(c.hero,mode)}" alt="${photoAlt(c.hero)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;"></td></tr>` : "";
   const ps = c.ps ? `<tr><td style="padding:32px 40px 40px 40px;" class="mp"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="height:4px;background-color:#D1C0A6;font-size:1px;line-height:1px;">&nbsp;</td></tr><tr><td style="padding-top:20px;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;color:#050505;line-height:1.6;"><span style="color:#F92524;font-weight:700;">P.S.</span> ${merge(tidy(c.ps),mode)}</td></tr></table></td></tr>` : "";
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="format-detection" content="telephone=no, date=no, address=no, email=no"><title>${esc(c.subject)}</title>
@@ -231,15 +258,16 @@ function buildEmail(c, mode){
 @media only screen and (max-width:600px){.ec{width:100%!important;max-width:100%!important}.mp{padding-left:24px!important;padding-right:24px!important}.mh{font-size:26px!important}}</style></head>
 <body style="margin:0;padding:0;background-color:#FFFFFF;">
 <div style="display:none;max-height:0;overflow:hidden;">${esc(c.preview)}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#FFFFFF;"><tr><td align="center" style="padding:20px 10px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#FFFFFF;"><tr><td align="center" style="padding:20px 0;">
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:600px;background-color:#FFFFFF;" class="ec">
 <tr><td style="padding:28px 40px 16px 40px;" class="mp"><a href="https://ekuzo.gg" target="_blank" style="text-decoration:none;"><img src="${LOGO}" alt="EKUZO" width="120" style="display:block;width:120px;max-width:120px;height:auto;border:0;"></a></td></tr>
 <tr><td style="padding:0;"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="height:2px;background-color:#D1C0A6;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+${hero}
 <tr><td style="padding:40px 40px 8px 40px;" class="mp">
 ${c.eyebrow?`<p style="margin:0 0 24px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:12px;color:#F92524;text-transform:uppercase;letter-spacing:2px;font-weight:700;line-height:1.4;">${esc(c.eyebrow)}</p>`:""}
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom:28px;"><tr>
 <td width="86" valign="middle" style="padding-right:16px;vertical-align:middle;"><img src="${AVATAR}" alt="Karlin Oei, founder of EKUZO" width="70" height="70" style="display:block;width:70px;height:70px;border-radius:50%;border:2px solid #F92524;"></td>
-<td valign="middle" style="vertical-align:middle;"><h1 class="mh" style="margin:0;font-family:Oswald,Impact,'Arial Black',Arial,sans-serif;font-size:30px;color:#050505;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1;">${merge(tidy(c.headline),mode)}</h1>
+<td valign="middle" style="vertical-align:middle;"><h1 class="mh" style="margin:0;${OSW}font-size:30px;color:#050505;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1;">${merge(tidy(c.headline),mode)}</h1>
 <p style="margin:8px 0 0 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:13px;color:#7C7C7C;text-transform:uppercase;letter-spacing:2px;font-weight:500;line-height:1.4;">Founder, EKUZO</p></td></tr></table>
 ${blocks}
 <p style="margin:6px 0 0 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:22px;color:#F92524;font-weight:700;font-style:italic;line-height:1.2;">&ndash; Karlin</p>
@@ -247,7 +275,7 @@ ${blocks}
 ${ps}
 <tr><td style="padding:0 40px;" class="mp"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="height:2px;background-color:#D1C0A6;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
 <tr><td style="padding:32px 40px 40px 40px;" class="mp" align="center">
-<div style="font-family:Oswald,Impact,'Arial Black',Arial,sans-serif;font-size:22px;font-weight:700;color:#F92524;letter-spacing:3px;text-transform:uppercase;line-height:1;padding-bottom:22px;">EKUZO</div>
+<div style="${OSW}font-size:22px;font-weight:700;color:#F92524;letter-spacing:3px;text-transform:uppercase;line-height:1;padding-bottom:22px;">EKUZO</div>
 <p style="margin:0 0 8px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:12px;color:#7C7C7C;line-height:1.5;">You&rsquo;re getting this because you joined the EKUZO Season 01 waitlist.</p>
 <p style="margin:0 0 8px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:11px;color:#999999;line-height:1.5;">EKUZO Inc. &bull; 5617 Dolores Street, Houston, TX 77057</p>
 <p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:11px;color:#999999;line-height:1.5;">${unsub} &bull; ${prefs} &bull; <a href="https://ekuzo.gg/privacy" style="color:#999999;text-decoration:underline;">Privacy Policy</a></p>
@@ -256,13 +284,18 @@ ${ps}
 function buildText(c){
   const plain = s => merge(s,"klaviyo");
   const out = [plain(c.headline), ""];
-  (c.blocks||[]).forEach(b=>{ if(b.kind==="pillar") out.push(String(b.head||"").toUpperCase()); out.push(plain(b.text), ""); });
+  (c.blocks||[]).forEach(b=>{
+    if(b.kind==="photo") return;
+    if(b.kind==="pillar"||b.kind==="callout") out.push(String(b.head||"").toUpperCase());
+    if(b.kind==="time") out.push(`${b.head} · ${b.title}`);
+    if(b.kind==="link"){ out.push(`${b.head}: ${b.url}`,""); return; }
+    out.push(plain(b.text), "");
+  });
   out.push("- Karlin","Founder, EKUZO","");
   if(c.ps) out.push("P.S. "+plain(c.ps),"");
   out.push("---","You're getting this because you joined the EKUZO Season 01 waitlist.","EKUZO Inc. · 5617 Dolores Street, Houston, TX 77057","{% unsubscribe 'Unsubscribe' %}");
   return out.join("\n");
 }
-
 
 
 /* ---------- State ---------- */
@@ -278,13 +311,18 @@ function touched(code){
 }
 function changedFields(){
   const a=emails[cur].copy, b=st.draft, out=[];
-  ["sender","subject","preview","eyebrow","headline","ps"].forEach(f=>{ if((a[f]||"")!==(b[f]||"")) out.push(f); });
+  ["sender","subject","preview","eyebrow","headline","ps","hero"].forEach(f=>{ if((a[f]||"")!==(b[f]||"")) out.push(f); });
   const ab={}; (a.blocks||[]).forEach(x=>ab[x.id]=x);
-  (b.blocks||[]).forEach(x=>{ const o=ab[x.id]; if(!o||o.text!==x.text||(o.head||"")!==(x.head||"")) out.push("block "+x.id); });
+  (b.blocks||[]).forEach(x=>{ const o=ab[x.id]; if(!o||BF.some(k=>(o[k]??"")!==(x[k]??""))) out.push("block "+x.id); });
   const bids=new Set((b.blocks||[]).map(x=>x.id)); (a.blocks||[]).forEach(x=>{ if(!bids.has(x.id)) out.push("removed "+x.id); });
   return out;
 }
 
+const BF=["kind","head","title","text","img","wide","url"];
+const KIND={p:"Paragraph",strong:"Bold line",pillar:"Pillar",photo:"Photo",time:"Timeline row",callout:"Callout",link:"Link"};
+function photoSelect(id, attr, val, allowNone){
+  return `<select id="${id}" ${attr}>${allowNone?`<option value="">No photo</option>`:""}${Object.entries(PHOTOS).map(([k,p])=>`<option value="${esc(k)}" ${val===k?"selected":""}>${esc(p.label||k)}</option>`).join("")}</select>${val&&PHOTOS[val]?`<img class="thumb" src="${esc(PHOTOS[val].src)}" alt="">`:""}`;
+}
 /* ---------- Rendering ---------- */
 function list(){ return Object.values(emails).sort((a,b)=>(a.order??99)-(b.order??99)); }
 function renderSeq(){
@@ -299,7 +337,7 @@ function renderPreview(){
   $("#ibLine").innerHTML = `<b>${esc(c.subject||"No subject yet")}</b> <span>&nbsp;- ${esc(c.preview||"")}</span>`;
   const host=$("#previewHost");
   if(!(c.blocks||[]).length && !c.headline){
-    host.innerHTML = `<div class="empty"><h3>Not written yet</h3><p><b>Its job:</b> ${esc(e.job||"")}</p>${c.ps?`<p><b>P.S. question:</b> ${esc(c.ps)}</p>`:""}<p>Add a headline and a paragraph on the right to start a draft, or leave a note on what this one should say.</p></div>`;
+    host.innerHTML = `<div class="empty"><h3>Not written yet</h3><p><b>Its job:</b> ${esc(e.job||"")}</p>${c.ps?`<p><b>P.S. question:</b> ${esc(c.ps)}</p>`:""}<p>Add a headline and a paragraph on the right to start a draft, or leave a note on what this one should say.</p>${c.hero&&PHOTOS[c.hero]?`<p><b>Photo we have in mind:</b></p><img src="${esc(PHOTOS[c.hero].src)}" alt="" style="max-width:100%;border-radius:10px">`:""}</div>`;
     return;
   }
   let f=host.querySelector("iframe");
@@ -319,7 +357,7 @@ function renderDesk(){
   const reviewer=lsGet(KEY+"reviewer")||"";
   d.innerHTML = `
   <h2>The words</h2>
-  <p class="who">${e.inKlaviyo?"Built in Klaviyo.":"Not in Klaviyo yet."} ${n||nv||nn?`You have <b>${n} edit${n===1?"":"s"}</b>, <b>${nv} call${nv===1?"":"s"}</b> and <b>${nn} note${nn===1?"":"s"}</b> on this email.`:"No edits from you yet."}${st.sentAt?` Last sent ${esc(new Date(st.sentAt).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}.`:""}</p>
+  <p class="who">${e.klaviyoTemplateId?`In Klaviyo as <b>${esc(e.klaviyoTemplateName||e.klaviyoTemplateId)}</b>.`:"Not in Klaviyo yet."} ${n||nv||nn?`You have <b>${n} edit${n===1?"":"s"}</b>, <b>${nv} call${nv===1?"":"s"}</b> and <b>${nn} note${nn===1?"":"s"}</b> on this email.`:"No edits from you yet."}${st.sentAt?` Last sent ${esc(new Date(st.sentAt).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}.`:""}</p>
   ${st.stale?`<p class="notice">Aaron updated this email since you started editing. <button type="button" class="tiny" data-act="fresh">Start from the new version</button> or keep going with yours.</p>`:""}
   <div class="btnrow"><button type="button" class="ghost" data-act="toggleDiff" aria-pressed="${showDiff}">${showDiff?"Hide":"Show"} what changed</button></div>
   <div class="pair">
@@ -329,17 +367,22 @@ function renderDesk(){
   <div class="field"><label for="f-subject">Subject line</label><input id="f-subject" data-f="subject" value="${esc(c.subject)}">${was(c.subject,p.subject)}<button type="button" class="tiny copybtn" data-copy="subject">Copy subject</button></div>
   <div class="field"><label for="f-preview">Preview text</label><textarea id="f-preview" data-f="preview" rows="2">${esc(c.preview)}</textarea>${was(c.preview,p.preview)}<button type="button" class="tiny copybtn" data-copy="preview">Copy preview</button></div>
   <div class="field"><label for="f-eyebrow">Eyebrow</label><input id="f-eyebrow" data-f="eyebrow" value="${esc(c.eyebrow)}">${was(c.eyebrow,p.eyebrow)}</div>
+  <div class="field"><label for="f-hero">Top photo <span style="text-transform:none;letter-spacing:0">(full width, under the logo)</span></label>${photoSelect("f-hero",'data-f="hero"',c.hero||"",true)}${was(PHOTOS[c.hero]?.label||"",PHOTOS[p.hero]?.label||"")}</div>
   <div class="field"><label for="f-headline">Headline <span style="text-transform:none;letter-spacing:0">({first_name} becomes their name)</span></label><input id="f-headline" data-f="headline" value="${esc(c.headline)}">${was(c.headline,p.headline)}</div>
   <div class="blocks">
    ${(c.blocks||[]).map((b,i)=>{ const v=st.verdicts[b.id]||""; const pr=pb[b.id]; const open=st.notes[b.id]!=null;
     return `<div class="block ${v}" id="blk-${esc(b.id)}">
-     <div class="bhead"><span class="label">${b.kind==="pillar"?"Pillar":b.kind==="strong"?"Bold line":"Paragraph"} ${i+1}</span>
+     <div class="bhead"><span class="label">${KIND[b.kind]||"Paragraph"} ${i+1}</span>
       <span class="btools"><button type="button" class="tiny v-keep" data-vote="keep" data-b="${esc(b.id)}" aria-pressed="${v==="keep"}">Keep</button><button type="button" class="tiny v-rework" data-vote="rework" data-b="${esc(b.id)}" aria-pressed="${v==="rework"}">Rework</button><button type="button" class="tiny" data-note="${esc(b.id)}" aria-pressed="${open}">Note</button><button type="button" class="tiny" data-del="${i}" aria-label="Remove block ${i+1}">Remove</button></span></div>
-     ${b.kind==="pillar"?`<div class="field"><label for="h-${esc(b.id)}">Pillar headline</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
-     <div class="field"><label for="t-${esc(b.id)}">Text</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>
+     ${b.kind==="photo"||b.kind==="pillar"?`<div class="field"><label for="i-${esc(b.id)}">Photo</label>${photoSelect("i-"+b.id,`data-bk="img" data-i="${i}"`,b.img||"",b.kind==="pillar")}${was(PHOTOS[b.img]?.label||"",pr?PHOTOS[pr.img]?.label||"":"")}</div>`:""}
+     ${b.kind==="photo"?`<label class="check"><input type="checkbox" data-bk="wide" data-i="${i}" ${b.wide?"checked":""}> Edge to edge</label>`:""}
+     ${["pillar","time","callout"].includes(b.kind)?`<div class="field"><label for="h-${esc(b.id)}">${b.kind==="time"?"Time":"Headline"}</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
+     ${b.kind==="time"?`<div class="field"><label for="ti-${esc(b.id)}">What happens</label><input id="ti-${esc(b.id)}" data-bk="title" data-i="${i}" value="${esc(b.title)}">${was(b.title,pr?.title)}</div>`:""}
+     ${b.kind==="link"?`<div class="field"><label for="h-${esc(b.id)}">Link text</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div><div class="field"><label for="u-${esc(b.id)}">Goes to</label><input id="u-${esc(b.id)}" data-bk="url" data-i="${i}" value="${esc(b.url)}" inputmode="url">${was(b.url,pr?.url)}</div>`:""}
+     ${b.kind==="link"?"":`<div class="field"><label for="t-${esc(b.id)}">${b.kind==="photo"?"Caption (optional)":"Text"}</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>`}
      ${open?`<div class="field"><label for="n-${esc(b.id)}">Your note on this block</label><textarea id="n-${esc(b.id)}" data-bn="${esc(b.id)}" rows="2" class="note" placeholder="What should change, or why it works">${esc(st.notes[b.id])}</textarea></div>`:""}
     </div>`; }).join("")}
-   <div class="adds"><button type="button" class="ghost" data-add="p">Add paragraph</button><button type="button" class="ghost" data-add="pillar">Add pillar</button><button type="button" class="ghost" data-add="strong">Add bold line</button></div>
+   <div class="adds"><button type="button" class="ghost" data-add="p">Add paragraph</button><button type="button" class="ghost" data-add="pillar">Add pillar</button><button type="button" class="ghost" data-add="strong">Add bold line</button><button type="button" class="ghost" data-add="photo">Add photo</button><button type="button" class="ghost" data-add="time">Add timeline row</button><button type="button" class="ghost" data-add="callout">Add callout</button><button type="button" class="ghost" data-add="link">Add link</button></div>
   </div>
   <div class="field"><label for="f-ps">P.S.</label><textarea id="f-ps" data-f="ps" rows="2">${esc(c.ps)}</textarea>${was(c.ps,p.ps)}</div>
   <div class="field"><label for="f-note">Note on the whole email</label><textarea id="f-note" data-gn rows="3" class="note" placeholder="Anything about this email as a whole: tone, order, what's missing">${esc(st.note)}</textarea></div>
@@ -369,9 +412,10 @@ function edited(){ persist(); refreshCounts(); schedulePreview(); }
 
 document.addEventListener("input",ev=>{
   const t=ev.target; if(!st) return;
-  if(t.dataset.f){ st.draft[t.dataset.f]=t.value; edited(); }
+  if(t.dataset.f){ st.draft[t.dataset.f]=t.value; edited(); if(t.tagName==="SELECT") renderDesk(); }
   else if(t.dataset.bt!=null){ st.draft.blocks[+t.dataset.bt].text=t.value; edited(); }
   else if(t.dataset.bh!=null){ st.draft.blocks[+t.dataset.bh].head=t.value; edited(); }
+  else if(t.dataset.bk!=null){ const b=st.draft.blocks[+t.dataset.i]; b[t.dataset.bk]=t.type==="checkbox"?t.checked:t.value; edited(); if(t.tagName==="SELECT"||t.type==="checkbox") renderDesk(); }
   else if(t.dataset.bn!=null){ st.notes[t.dataset.bn]=t.value; persist(); refreshCounts(); }
   else if(t.dataset.gn!=null){ st.note=t.value; persist(); refreshCounts(); }
   else if(t.dataset.who!=null){ lsSet(KEY+"reviewer",t.value); }
@@ -383,7 +427,7 @@ document.addEventListener("click",async ev=>{
   const pk=ev.target.closest("[data-pick]"); if(pk){ pick(pk.dataset.pick); return; }
   if(!st) return;
   const add=ev.target.closest("[data-add]");
-  if(add){ st.draft.blocks=st.draft.blocks||[]; st.draft.blocks.push({id:uid(),kind:add.dataset.add,head:add.dataset.add==="pillar"?"New pillar":"",text:""}); edited(); renderDesk(); document.getElementById("t-"+st.draft.blocks.at(-1).id)?.focus(); return; }
+  if(add){ st.draft.blocks=st.draft.blocks||[]; const k=add.dataset.add; st.draft.blocks.push({id:uid(),kind:k,head:k==="pillar"?"New pillar":k==="time"?"7:00":k==="callout"?"New callout":k==="link"?"Read the full story":"",url:k==="link"?"https://ekuzo.gg/blog":"",title:k==="time"?"What happens":"",img:k==="photo"?Object.keys(PHOTOS)[0]:"",text:""}); edited(); renderDesk(); document.getElementById("t-"+st.draft.blocks.at(-1).id)?.focus(); return; }
   const del=ev.target.closest("[data-del]");
   if(del){ const b=st.draft.blocks.splice(+del.dataset.del,1)[0]; if(b){ delete st.verdicts[b.id]; } edited(); renderDesk(); return; }
   const vt=ev.target.closest("[data-vote]");
@@ -414,12 +458,13 @@ async function copy(text, btn, field){
 function summary(){
   const e=emails[cur], p=e.copy, c=st.draft, L=[];
   const label={sender:"From name",subject:"Subject",preview:"Preview",eyebrow:"Eyebrow",headline:"Headline",ps:"P.S."};
+  label.hero="Top photo";
   Object.keys(label).forEach(f=>{ if((p[f]||"")!==(c[f]||"")) L.push(`${label[f]}\n  was: ${p[f]||"(empty)"}\n  now: ${c[f]||"(empty)"}`); });
   const pb={}; (p.blocks||[]).forEach(b=>pb[b.id]=b);
   (c.blocks||[]).forEach((b,i)=>{
     const o=pb[b.id], bits=[];
-    if(!o) bits.push(`  new: ${b.head?b.head+" | ":""}${b.text}`);
-    else { if((o.head||"")!==(b.head||"")) bits.push(`  head was: ${o.head}\n  head now: ${b.head}`); if(o.text!==b.text) bits.push(`  was: ${o.text}\n  now: ${b.text}`); }
+    if(!o) bits.push(`  new ${KIND[b.kind]||b.kind}: ${[b.img,b.head,b.title,b.text].filter(Boolean).join(" | ")}`);
+    else BF.forEach(k=>{ if((o[k]??"")!==(b[k]??"")) bits.push(`  ${k==="text"?"":k+" "}was: ${o[k]??""}\n  ${k==="text"?"":k+" "}now: ${b[k]??""}`); });
     if(st.verdicts[b.id]) bits.push(`  call: ${st.verdicts[b.id].toUpperCase()}`);
     if(st.notes[b.id]) bits.push(`  note: ${st.notes[b.id]}`);
     if(bits.length) L.push(`Block ${i+1} (${b.id}${b.head?", "+b.head:""})\n`+bits.join("\n"));
@@ -447,7 +492,7 @@ async function send(btn){
 
 /* ---------- Boot ---------- */
 fetch("email-lab.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
-  (d.emails||[]).forEach(e=>emails[e.code]=e);
+  PHOTOS=d.photos||{}; (d.emails||[]).forEach(e=>emails[e.code]=e);
   let want=location.hash.slice(1); if(!emails[want]){ try{ want=localStorage.getItem(KEY+"cur"); }catch(_){ want=null; } }
   pick(emails[want]?want:(list().find(e=>e.status==="draft")||list()[0]).code);
 }).catch(()=>{ $("#seq").innerHTML=`<h2>The sequence</h2><p class="who">The emails couldn't load. Reload the page to try again.</p>`; });

@@ -46,6 +46,13 @@
       "text": "That's the structure of what we're building. A league where kids practice with legit coaches, rep a jersey with their gamer tag, and get better with their team every week."
      },
      {
+      "id": "e0p",
+      "kind": "photo",
+      "img": "team-jerseys",
+      "wide": true,
+      "text": ""
+     },
+     {
       "id": "e0f",
       "kind": "p",
       "head": "",
@@ -93,25 +100,28 @@
       "id": "e1b",
       "kind": "pillar",
       "head": "Build the team",
-      "text": "Your kid joins a small team of kids around their age and level. Same teammates every week, a jersey with their gamer tag on it, and a team that has their back."
+      "text": "Your kid joins a small team of kids around their age and level. Same teammates every week, a jersey with their gamer tag on it, and a team that has their back.",
+      "img": "team-outside"
      },
      {
       "id": "e1c",
       "kind": "pillar",
       "head": "Meet the coach",
-      "text": "Every practice is run by a coach who has played at a high level and chose to coach kids. They know the game. They also know the game is the easy part."
+      "text": "Every practice is run by a coach who has played at a high level and chose to coach kids. They know the game. They also know the game is the easy part.",
+      "img": "coach-zz"
      },
      {
       "id": "e1d",
       "kind": "pillar",
       "head": "Practice",
-      "text": "One night a week, on the calendar. It starts on time, it has a plan, and the coach ends it. Not you."
+      "text": "One night a week, on the calendar, with their team and their coach. It has a plan, and it quickly becomes the night they look forward to.",
+      "img": "night-practice"
      },
      {
       "id": "e1e",
-      "kind": "p",
-      "head": "",
-      "text": "If your kid loves gaming, they're ready. Most kids start with a game they've never played, so everyone learns it together, with a coach, a team and a plan."
+      "kind": "callout",
+      "head": "If they love gaming, they're ready.",
+      "text": "Most kids start with a game they've never played, so everyone learns it together, with a coach, a team and a plan."
      },
      {
       "id": "e1f",
@@ -121,151 +131,379 @@
      }
     ],
     "ps": "What made you sign up? Something your kid said, or something you've been thinking about for a while? Hit reply. I read every one.",
-    "status": "draft"
+    "status": "draft",
+    "hero": "games-crossover"
    },
    "inKlaviyo": false
   },
   {
    "code": "E2",
    "order": 2,
-   "title": "Build the team",
+   "title": "Screen time, reconsidered",
    "day": "Day 5",
-   "status": "planned",
-   "job": "Their team. Same kids every week, a team that has their back.",
+   "status": "draft",
+   "inKlaviyo": false,
+   "job": "Challenge the hours question. Same screen, very different nights. From our blog: what your kid's gaming is telling you.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "",
-    "preview": "",
-    "eyebrow": "",
-    "headline": "",
-    "blocks": [],
-    "ps": "Does your kid play with friends now, or mostly alone?",
-    "status": "planned"
-   },
-   "inKlaviyo": false
+    "status": "draft",
+    "eyebrow": "Season 01 · Screen time",
+    "headline": "Hi {first_name}, let's talk about screen time.",
+    "preview": "Not how many hours. What the game is doing for them.",
+    "subject": "The screen time question I'd ask instead",
+    "ps": "What's one thing your kid says about gaming that you've never quite known how to answer? Hit reply. I read every one.",
+    "hero": "kid-couch",
+    "blocks": [
+     {
+      "id": "e2a",
+      "kind": "p",
+      "text": "Almost every parent I talk to asks some version of the same question: how much is too much?"
+     },
+     {
+      "id": "e2b",
+      "kind": "p",
+      "text": "It's a fair question. But two kids can play the exact same hours and be having completely different nights. One is on a headset with the same four friends, talking, laughing, figuring something out together. The other is alone in a lobby full of strangers, getting louder with every loss."
+     },
+     {
+      "id": "e2c",
+      "kind": "strong",
+      "text": "From the hallway, those look the same. They aren't."
+     },
+     {
+      "id": "e2d",
+      "kind": "p",
+      "text": "So before counting hours, try reading the game. A few clues our team has written about:"
+     },
+     {
+      "id": "e2e",
+      "kind": "pillar",
+      "head": "Big reactions",
+      "text": "When a loss turns into a meltdown, the size of the reaction usually tells you the size of what's riding on it. Somewhere in that game, they've found something they're good at.",
+      "img": ""
+     },
+     {
+      "id": "e2f",
+      "kind": "pillar",
+      "head": "Who they play with",
+      "text": "The same people over time, talking and on a team, is connection. Strangers in a different lobby every night is something else. The screen looks the same either way.",
+      "img": ""
+     },
+     {
+      "id": "e2g",
+      "kind": "pillar",
+      "head": "What they don't say",
+      "text": "About 85% of teens play video games, but only about 4 in 10 call themselves gamers. A lot of kids care more than they'll admit.",
+      "img": ""
+     },
+     {
+      "id": "e2h",
+      "kind": "p",
+      "text": "None of this means hours don't matter. It means the hours are usually downstream of something else, and that's the part worth getting curious about."
+     },
+     {
+      "id": "e2i",
+      "kind": "link",
+      "head": "Read: What your kid's gaming is telling you",
+      "url": "https://ekuzo.gg/blog/what-your-kids-gaming-is-telling-you"
+     }
+    ]
+   }
   },
   {
    "code": "E3",
    "order": 3,
-   "title": "Meet the coach",
-   "day": "Day 9",
-   "status": "planned",
-   "job": "The people who run practice, told through one coach's story.",
+   "title": "Their team",
+   "day": "Day 8",
+   "status": "draft",
+   "inKlaviyo": false,
+   "job": "Online friends, real team. The difference is the same people every week. From our blog: when your son's only friends are online.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "",
-    "preview": "",
-    "eyebrow": "",
-    "headline": "",
-    "blocks": [],
-    "ps": "What would you want to ask a coach?",
-    "status": "planned"
-   },
-   "inKlaviyo": false
+    "status": "draft",
+    "eyebrow": "Season 01 · Their team",
+    "headline": "Hi {first_name}, let's talk about their team.",
+    "preview": "Connection and isolation look the same from the hallway.",
+    "subject": "Why the same four friends matter more than the game",
+    "ps": "Does your kid play with the same friends most nights, or mostly with strangers? Hit reply. I'm curious.",
+    "hero": "teammates",
+    "blocks": [
+     {
+      "id": "e3a",
+      "kind": "p",
+      "text": "Teens spend about 71% less time with friends in person than they did in the early 2000s. It's easy to blame the screen."
+     },
+     {
+      "id": "e3b",
+      "kind": "p",
+      "text": "But when researchers read what kids actually say to each other mid-game, the social stuff (“what's up,” “you good?”) outnumbered the strategy talk more than three to one. For a lot of kids, a headset full of teammates is how friendships get built."
+     },
+     {
+      "id": "e3c",
+      "kind": "strong",
+      "text": "The difference is whether it's the same people every week."
+     },
+     {
+      "id": "e3d",
+      "kind": "pillar",
+      "head": "Same kids, every week",
+      "text": "Your kid joins a small team of kids around their age and level. They learn each other's voices, habits and jokes. By week three, they're not strangers anymore.",
+      "img": "team-outside"
+     },
+     {
+      "id": "e3e",
+      "kind": "pillar",
+      "head": "Their name on a jersey",
+      "text": "It sounds small. Watch your kid's face when theirs shows up with their gamer tag on the back.",
+      "img": ""
+     },
+     {
+      "id": "e3f",
+      "kind": "pillar",
+      "head": "A team that has their back",
+      "text": "Wins are fun. The real moment is a rough night, when a teammate says “we got the next one” and means it.",
+      "img": ""
+     },
+     {
+      "id": "e3g",
+      "kind": "link",
+      "head": "Read: When your son's only friends are online",
+      "url": "https://ekuzo.gg/blog/when-your-sons-only-friends-are-online"
+     }
+    ]
+   }
   },
   {
    "code": "E4",
    "order": 4,
    "title": "Practice night",
-   "day": "Day 13",
+   "day": "Day 12",
    "status": "draft",
-   "job": "One night, start to finish. It starts on time and the coach ends it. Facts to confirm: length, night, team size, online or in person.",
+   "job": "One practice night, start to finish, told for fun: their friends, a plan, real play, the review. Facts to confirm: length, night, team size, online or in person.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "Here's what a practice night looks like",
-    "preview": "It starts on time, it has a plan, and the coach ends it. Not you.",
+    "subject": "What a practice night actually looks like",
+    "preview": "Headsets on, friends in the call, and a plan for the night.",
     "eyebrow": "Season 01 · Practice night",
     "headline": "Hi {first_name}, here's a practice night.",
     "blocks": [
      {
       "id": "e4a",
       "kind": "p",
-      "head": "",
       "text": "Last time I said I'd show you how this works. Here's one practice night, start to finish."
      },
      {
       "id": "e4b",
-      "kind": "pillar",
-      "head": "6:55 · Logging in",
-      "text": "Headset on. Their coach is already there, and so are the other kids on their team. Same kids every week, around the same age."
+      "kind": "time",
+      "head": "6:55",
+      "title": "Logging in",
+      "text": "Headset on. Their teammates are already in the call, talking about whatever happened at school today. Same kids every week, around the same age."
      },
      {
       "id": "e4c",
-      "kind": "pillar",
-      "head": "7:00 · The plan",
-      "text": "The coach opens with one thing the team is working on tonight. Not \"get better.\" Something specific, like calling out what they see before it's too late."
+      "kind": "time",
+      "head": "7:00",
+      "title": "The plan",
+      "text": "The coach opens with one thing the team is working on tonight. Something specific, like calling out what they see before it's too late."
      },
      {
       "id": "e4d",
-      "kind": "pillar",
-      "head": "7:10 · Play",
-      "text": "They play together while the coach listens to every call. This is the part you'll hear through the door."
+      "kind": "time",
+      "head": "7:10",
+      "title": "Play",
+      "text": "They play together while the coach listens in. This is the part you'll hear through the door: callouts, groans, and a lot of laughing."
      },
      {
       "id": "e4e",
-      "kind": "pillar",
-      "head": "8:00 · The review",
-      "text": "They watch back a moment from tonight, a fight they lost or a call that worked, and talk through why. Nobody gets blamed. Everyone leaves with one thing to try next week."
+      "kind": "time",
+      "head": "8:00",
+      "title": "The review",
+      "text": "They watch back a moment from tonight, a fight they lost or a play that worked, and figure out why together. Nobody gets blamed. Everyone leaves with one thing to try next week."
      },
      {
       "id": "e4f",
-      "kind": "pillar",
-      "head": "8:30 · Done",
-      "text": "The coach ends it. Not you."
+      "kind": "time",
+      "head": "8:30",
+      "title": "GG",
+      "text": "Everyone says good game. They log off already talking about next week."
      },
      {
       "id": "e4g",
       "kind": "p",
-      "head": "",
-      "text": "That last part is the one parents tell us they didn't know they needed. The night has a start, a plan and an end, and someone other than you is holding the line."
+      "text": "What I hope you notice first isn't the gaming. It's that your kid has somewhere to be, people counting on them, and something to tell you about at dinner."
      }
     ],
     "ps": "Which night is the hardest one in your house when it comes to gaming? Hit reply and tell me. It'll help us pick Season 01 practice nights.",
-    "status": "draft"
+    "status": "draft",
+    "hero": "practice-room"
    },
    "inKlaviyo": false
   },
   {
    "code": "E5",
    "order": 5,
-   "title": "What they learn",
-   "day": "Day 18",
-   "status": "planned",
-   "job": "Talking, showing up, handling a loss. Shown through one real moment.",
+   "title": "Worlds is in the US",
+   "day": "Campaign · send Oct 21",
+   "status": "draft",
+   "inKlaviyo": false,
+   "job": "Real time. The League of Legends World Championship is in the US this year (Swiss stage in Allen, TX Oct 23-31, final Nov 14 in Brooklyn). Invite parents to watch 20 minutes with their kid. Send as a one-off campaign, not in the flow.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "",
-    "preview": "",
-    "eyebrow": "",
-    "headline": "",
-    "blocks": [],
-    "ps": "What do you hope they get out of this?",
-    "status": "planned"
-   },
-   "inKlaviyo": false
+    "status": "draft",
+    "eyebrow": "Season 01 · Live right now",
+    "headline": "Hi {first_name}, the world championship is here.",
+    "preview": "Free to watch, and a great way to see gaming the way your kid does.",
+    "subject": "The World Series of esports is in Texas this month",
+    "ps": "If you watch, hit reply and tell me what your kid said. I'd love to know what they noticed.",
+    "hero": "college-stage",
+    "blocks": [
+     {
+      "id": "e5a",
+      "kind": "p",
+      "text": "Every fall, the best teams on the planet meet at the League of Legends World Championship. Think of it as the World Series of esports."
+     },
+     {
+      "id": "e5b",
+      "kind": "p",
+      "text": "This year it's in the US. The main stage runs in Allen, Texas, and the final is Saturday, November 14 at Barclays Center in Brooklyn. Big arena, big crowd, the whole thing."
+     },
+     {
+      "id": "e5c",
+      "kind": "strong",
+      "text": "Here's my ask: watch twenty minutes of it with your kid."
+     },
+     {
+      "id": "e5d",
+      "kind": "p",
+      "text": "Not to learn the game. Most kids who join us have never played it. Watch the crowd, the players' faces, and the way five teammates talk each other through the hard moments. Then ask your kid what they'd want to be great at."
+     },
+     {
+      "id": "e5e",
+      "kind": "callout",
+      "head": "How to watch",
+      "text": "Free on YouTube, Twitch and lolesports.com. Swiss stage: Oct 23 to 31. Quarterfinals: Nov 3 to 6. Semifinals: Nov 7 and 8. Final: Saturday, Nov 14 at 2pm Eastern."
+     },
+     {
+      "id": "e5f",
+      "kind": "p",
+      "text": "Three North American teams made it: Team Liquid, LYON and Cloud9. If you need someone to root for, pick one together."
+     }
+    ]
+   }
   },
   {
    "code": "E6",
    "order": 6,
-   "title": "What you'll see at home",
-   "day": "Day 24",
-   "status": "planned",
-   "job": "The changes parents notice first, through one parent's story.",
+   "title": "Meet the coach",
+   "day": "Day 16",
+   "status": "draft",
+   "inKlaviyo": false,
+   "job": "The people who run practice, told through one coach. Coach Muhammad, who spent the summer listening to parents. From our blog: should you ban Fortnite.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "",
-    "preview": "",
-    "eyebrow": "",
-    "headline": "",
-    "blocks": [],
-    "ps": "What would make you proud a year from now?",
-    "status": "planned"
-   },
-   "inKlaviyo": false
+    "status": "draft",
+    "eyebrow": "Season 01 · The coaches",
+    "headline": "Hi {first_name}, meet Coach Muhammad.",
+    "preview": "He spent his summer listening to parents. Here's what he heard.",
+    "subject": "Meet one of the people who'd coach your kid",
+    "ps": "If you could ask a coach one question before your kid's first practice, what would it be? Hit reply.",
+    "hero": "",
+    "blocks": [
+     {
+      "id": "e6a",
+      "kind": "p",
+      "text": "Every EKUZO practice is run by a coach. I want you to meet one of them."
+     },
+     {
+      "id": "e6b",
+      "kind": "photo",
+      "img": "coach-muhammad",
+      "text": "",
+      "wide": false
+     },
+     {
+      "id": "e6c",
+      "kind": "p",
+      "text": "Muhammad is a senior at Texas A&M and coaches League of Legends for us. This summer, part of his job was listening. He sat down with parents and wrote down what actually happens in their houses around gaming."
+     },
+     {
+      "id": "e6d",
+      "kind": "p",
+      "text": "One of them was Casey, a mom of two who banned Fortnite. The ban worked. Then a new problem showed up, because the game had been quietly doing a job in her family."
+     },
+     {
+      "id": "e6e",
+      "kind": "strong",
+      "text": "What she did next is the useful part. She started judging games one at a time, by the kid each one handed back to her."
+     },
+     {
+      "id": "e6f",
+      "kind": "p",
+      "text": "That's the kind of coach I want with your kid. Someone who listens first, to the kids and to you."
+     },
+     {
+      "id": "e6g",
+      "kind": "link",
+      "head": "Read Muhammad's story about Casey",
+      "url": "https://ekuzo.gg/blog/should-you-ban-fortnite"
+     }
+    ]
+   }
   },
   {
    "code": "E7",
    "order": 7,
+   "title": "A family's story",
+   "day": "Day 21",
+   "status": "draft",
+   "inKlaviyo": false,
+   "job": "What parents see at home, through one family. Ryan (K1ng) and his mom, in her words. From our blog. One family's experience, not a promise.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "status": "draft",
+    "eyebrow": "Season 01 · A family's story",
+    "headline": "Hi {first_name}, meet Ryan and his mom.",
+    "preview": "One mom on what changed when her son found his team.",
+    "subject": "“We can hear him when he plays, and it's a wonderful thing”",
+    "ps": "What would make you proud of your kid a year from now? Hit reply. I read every one.",
+    "hero": "ryan-and-mom",
+    "blocks": [
+     {
+      "id": "e7a",
+      "kind": "p",
+      "text": "Ryan was 12 when his school sent home an email about a new esports team. He'd never heard of esports. He'd never played League of Legends. He signed up anyway."
+     },
+     {
+      "id": "e7b",
+      "kind": "p",
+      "text": "He was one of the youngest players on the team. Within his first year, his teammates were choosing him to lead in tournaments. His in-game name is K1ngofbattle. Everyone calls him K1ng."
+     },
+     {
+      "id": "e7c",
+      "kind": "strong",
+      "text": "“We can hear him when he plays, and it's a wonderful thing.”"
+     },
+     {
+      "id": "e7d",
+      "kind": "p",
+      "text": "That's his mom. She says he hypes up his team, praises his teammates, and that it's fun for parents to watch because the kids have so much fun together."
+     },
+     {
+      "id": "e7e",
+      "kind": "p",
+      "text": "Ryan's story is one family's experience, not a promise. But it's the reason I do this: a kid who found his people, and parents who got to be proud of what they heard through the door."
+     },
+     {
+      "id": "e7f",
+      "kind": "link",
+      "head": "Read the story in his mom's words",
+      "url": "https://ekuzo.gg/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng"
+     }
+    ]
+   }
+  },
+  {
+   "code": "E8",
+   "order": 8,
    "title": "Season 01 updates",
    "day": "Monthly",
    "status": "planned",
@@ -278,9 +516,82 @@
     "headline": "",
     "blocks": [],
     "ps": "",
-    "status": "planned"
+    "status": "planned",
+    "hero": "hands-in"
    },
    "inKlaviyo": false
   }
- ]
+ ],
+ "photos": {
+  "team-jerseys": {
+   "src": "email-photos/team-jerseys.jpg",
+   "label": "Team in jerseys, esports room",
+   "alt": "EKUZO players in team jerseys in their esports room"
+  },
+  "team-outside": {
+   "src": "email-photos/team-outside.jpg",
+   "label": "Team walking out together",
+   "alt": "An EKUZO team walking together in matching jerseys"
+  },
+  "teammates": {
+   "src": "email-photos/teammates.jpg",
+   "label": "Teammates hanging out",
+   "alt": "EKUZO teammates laughing together on a bench"
+  },
+  "team-coach-mom": {
+   "src": "email-photos/team-coach-mom.jpg",
+   "label": "Team with coach and a parent",
+   "alt": "An EKUZO team with their coach and a parent"
+  },
+  "hands-in": {
+   "src": "email-photos/hands-in.jpg",
+   "label": "Hands in, classroom team",
+   "alt": "Middle school players putting their hands in before a match"
+  },
+  "confidence": {
+   "src": "email-photos/confidence.jpg",
+   "label": "Player portrait, confidence",
+   "alt": "An EKUZO player in her team jersey"
+  },
+  "coach-zz": {
+   "src": "email-photos/coach-zz.jpg",
+   "label": "Coach ZZ",
+   "alt": "EKUZO coach ZzLegendary"
+  },
+  "practice-room": {
+   "src": "email-photos/practice-room.jpg",
+   "label": "Practice room, lights down",
+   "alt": "Players at their stations in an EKUZO practice room"
+  },
+  "night-practice": {
+   "src": "email-photos/night-practice.jpg",
+   "label": "Headset on, game night",
+   "alt": "A player in a headset at a gaming setup"
+  },
+  "games-crossover": {
+   "src": "email-photos/games-crossover.jpg",
+   "label": "Game characters, crossover art",
+   "alt": "Characters from popular games together in one arena"
+  },
+  "kid-couch": {
+   "src": "email-photos/kid-couch.jpg",
+   "label": "Kid gaming on the couch",
+   "alt": "A kid gaming on the couch with a controller"
+  },
+  "ryan-and-mom": {
+   "src": "email-photos/ryan-and-mom.jpg",
+   "label": "Ryan (K1ng) and his mom",
+   "alt": "EKUZO player Ryan with his mom"
+  },
+  "coach-muhammad": {
+   "src": "email-photos/coach-muhammad.jpg",
+   "label": "Coach Muhammad",
+   "alt": "EKUZO coach Muhammad"
+  },
+  "college-stage": {
+   "src": "email-photos/college-stage.jpg",
+   "label": "College team on stage",
+   "alt": "A college esports team competing on stage"
+  }
+ }
 }
