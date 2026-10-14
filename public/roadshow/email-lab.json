@@ -1,0 +1,286 @@
+{
+ "updated": "2026-10-14",
+ "emails": [
+  {
+   "code": "E0",
+   "order": 0,
+   "title": "Welcome from Karlin",
+   "day": "Day 0, right after sign-up",
+   "status": "live",
+   "job": "Who Karlin is and why he started EKUZO. Bridges back to the ad they saw.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "Their spot for season one is saved. Here's what's next.",
+    "preview": "Structure beats screen time limits. A note from our founder on what that looks like.",
+    "eyebrow": "Season 01 Waitlist",
+    "headline": "Hi {first_name}, I'm Karlin.",
+    "blocks": [
+     {
+      "id": "e0a",
+      "kind": "p",
+      "head": "",
+      "text": "Thanks for joining the Season 01 waitlist. If our ad about screen time hit a little close to home, you're not alone. It's the reason I started EKUZO."
+     },
+     {
+      "id": "e0b",
+      "kind": "p",
+      "head": "",
+      "text": "Like most kids, I cared most about video games and screens. And like most parents, mine thought they were the root of all my problems."
+     },
+     {
+      "id": "e0c",
+      "kind": "strong",
+      "head": "",
+      "text": "For the most part, they were right. Right up until I got a video game scholarship that paid for college."
+     },
+     {
+      "id": "e0d",
+      "kind": "p",
+      "head": "",
+      "text": "Most families are constantly at war with screen time, stuck between taking it away and limiting it. I think there's a third option: give them a team and the tools to get better."
+     },
+     {
+      "id": "e0e",
+      "kind": "p",
+      "head": "",
+      "text": "That's the structure of what we're building. A league where kids practice with legit coaches, rep a jersey with their gamer tag, and get better with their team every week."
+     },
+     {
+      "id": "e0f",
+      "kind": "p",
+      "head": "",
+      "text": "This is less about screen time and more about your kid doing something they love, in a way that makes you proud."
+     },
+     {
+      "id": "e0g",
+      "kind": "p",
+      "head": "",
+      "text": "Over the next few weeks, I'll show you exactly how it works: what practice looks like, what they learn, and what you'll see at home."
+     },
+     {
+      "id": "e0h",
+      "kind": "p",
+      "head": "",
+      "text": "Glad you're here."
+     }
+    ],
+    "ps": "If you made it this far, you're the kind of parent we're building this for. Hit reply and tell me about your kid. I read every one.",
+    "status": "live"
+   },
+   "inKlaviyo": true
+  },
+  {
+   "code": "E1",
+   "order": 1,
+   "title": "What we do",
+   "day": "Day 2",
+   "status": "draft",
+   "job": "The whole idea in one easy read: build the team, meet the coach, practice.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "Here's how it actually works",
+    "preview": "A team, a coach, and a night on the calendar. The short version.",
+    "eyebrow": "Season 01 · How it works",
+    "headline": "Hi {first_name}, here's the short version.",
+    "blocks": [
+     {
+      "id": "e1a",
+      "kind": "p",
+      "head": "",
+      "text": "A couple of days ago I told you why I started EKUZO. Today I want to show you what it actually is. It comes down to three things."
+     },
+     {
+      "id": "e1b",
+      "kind": "pillar",
+      "head": "Build the team",
+      "text": "Your kid joins a small team of kids around their age and level. Same teammates every week, a jersey with their gamer tag on it, and a team that has their back."
+     },
+     {
+      "id": "e1c",
+      "kind": "pillar",
+      "head": "Meet the coach",
+      "text": "Every practice is run by a coach who has played at a high level and chose to coach kids. They know the game. They also know the game is the easy part."
+     },
+     {
+      "id": "e1d",
+      "kind": "pillar",
+      "head": "Practice",
+      "text": "One night a week, on the calendar. It starts on time, it has a plan, and the coach ends it. Not you."
+     },
+     {
+      "id": "e1e",
+      "kind": "p",
+      "head": "",
+      "text": "If your kid loves gaming, they're ready. Most kids start with a game they've never played, so everyone learns it together, with a coach, a team and a plan."
+     },
+     {
+      "id": "e1f",
+      "kind": "p",
+      "head": "",
+      "text": "Over the next few emails I'll take these one at a time, starting with the team: who's on it, how it comes together, and why it matters more than the game."
+     }
+    ],
+    "ps": "What made you sign up? Something your kid said, or something you've been thinking about for a while? Hit reply. I read every one.",
+    "status": "draft"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E2",
+   "order": 2,
+   "title": "Build the team",
+   "day": "Day 5",
+   "status": "planned",
+   "job": "Their team. Same kids every week, a team that has their back.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "",
+    "preview": "",
+    "eyebrow": "",
+    "headline": "",
+    "blocks": [],
+    "ps": "Does your kid play with friends now, or mostly alone?",
+    "status": "planned"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E3",
+   "order": 3,
+   "title": "Meet the coach",
+   "day": "Day 9",
+   "status": "planned",
+   "job": "The people who run practice, told through one coach's story.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "",
+    "preview": "",
+    "eyebrow": "",
+    "headline": "",
+    "blocks": [],
+    "ps": "What would you want to ask a coach?",
+    "status": "planned"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E4",
+   "order": 4,
+   "title": "Practice night",
+   "day": "Day 13",
+   "status": "draft",
+   "job": "One night, start to finish. It starts on time and the coach ends it. Facts to confirm: length, night, team size, online or in person.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "Here's what a practice night looks like",
+    "preview": "It starts on time, it has a plan, and the coach ends it. Not you.",
+    "eyebrow": "Season 01 · Practice night",
+    "headline": "Hi {first_name}, here's a practice night.",
+    "blocks": [
+     {
+      "id": "e4a",
+      "kind": "p",
+      "head": "",
+      "text": "Last time I said I'd show you how this works. Here's one practice night, start to finish."
+     },
+     {
+      "id": "e4b",
+      "kind": "pillar",
+      "head": "6:55 · Logging in",
+      "text": "Headset on. Their coach is already there, and so are the other kids on their team. Same kids every week, around the same age."
+     },
+     {
+      "id": "e4c",
+      "kind": "pillar",
+      "head": "7:00 · The plan",
+      "text": "The coach opens with one thing the team is working on tonight. Not \"get better.\" Something specific, like calling out what they see before it's too late."
+     },
+     {
+      "id": "e4d",
+      "kind": "pillar",
+      "head": "7:10 · Play",
+      "text": "They play together while the coach listens to every call. This is the part you'll hear through the door."
+     },
+     {
+      "id": "e4e",
+      "kind": "pillar",
+      "head": "8:00 · The review",
+      "text": "They watch back a moment from tonight, a fight they lost or a call that worked, and talk through why. Nobody gets blamed. Everyone leaves with one thing to try next week."
+     },
+     {
+      "id": "e4f",
+      "kind": "pillar",
+      "head": "8:30 · Done",
+      "text": "The coach ends it. Not you."
+     },
+     {
+      "id": "e4g",
+      "kind": "p",
+      "head": "",
+      "text": "That last part is the one parents tell us they didn't know they needed. The night has a start, a plan and an end, and someone other than you is holding the line."
+     }
+    ],
+    "ps": "Which night is the hardest one in your house when it comes to gaming? Hit reply and tell me. It'll help us pick Season 01 practice nights.",
+    "status": "draft"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E5",
+   "order": 5,
+   "title": "What they learn",
+   "day": "Day 18",
+   "status": "planned",
+   "job": "Talking, showing up, handling a loss. Shown through one real moment.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "",
+    "preview": "",
+    "eyebrow": "",
+    "headline": "",
+    "blocks": [],
+    "ps": "What do you hope they get out of this?",
+    "status": "planned"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E6",
+   "order": 6,
+   "title": "What you'll see at home",
+   "day": "Day 24",
+   "status": "planned",
+   "job": "The changes parents notice first, through one parent's story.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "",
+    "preview": "",
+    "eyebrow": "",
+    "headline": "",
+    "blocks": [],
+    "ps": "What would make you proud a year from now?",
+    "status": "planned"
+   },
+   "inKlaviyo": false
+  },
+  {
+   "code": "E7",
+   "order": 7,
+   "title": "Season 01 updates",
+   "day": "Monthly",
+   "status": "planned",
+   "job": "News as the season takes shape: dates, teams, a first look.",
+   "copy": {
+    "sender": "Karlin from EKUZO",
+    "subject": "",
+    "preview": "",
+    "eyebrow": "",
+    "headline": "",
+    "blocks": [],
+    "ps": "",
+    "status": "planned"
+   },
+   "inKlaviyo": false
+  }
+ ]
+}
