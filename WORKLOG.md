@@ -5,6 +5,30 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 14, 2026 (Season 01 ad heroes, Build Loop)
+
+Dev branch `preview/s1-heroes` (pushed to `dev` 10:20 CT, on top of Aaron's d061f7c); release branch
+`release/s1-heroes` cut from `origin/main` `1e511cc` with only the files below. Artifacts and evidence:
+`docs/s1-heroes/` (requirements, spec, decision log, QA). Aaron's handoff: `docs/s1-heroes/aaron-handoff.md`.
+
+**What changed**
+- **Each ad opens on Aaron's hero** with no Meta edits: `app/season1/landing.html` picks the hero from `?ad=`
+  (d1 amount, d2 screentime, d3 games, d4 d5 d9 shortlist, d6 amount, d8 games; d7, d11, d12, bare and
+  invalid ads stay page A). d10 splits amount vs games 50/50 per browser, sticky in localStorage
+  (`ekuzo_s1_hero_d10`). An explicit `?hero=` still wins; `?hero=none` forces page A.
+- **Tracking:** sign-ups send `hero`, `heroAnswer`, `heroFrom`; `/api/season-one` saves `season1_hero` and
+  `season1_hero_answer` on the profile and `hero`, `hero_answer`, `hero_from` on the event (ad landing only;
+  nothing to Meta). GA4 events and `generate_lead` carry `hero`; Clarity tag `hero`.
+- **FAQ:** five answers rewritten per Jamie (January start, free interest list, flagship League plus other
+  games, evening at home, coaches). Game answer backported to the KB FAQ canon.
+- **Aaron's dev work ships with it:** his four heroes and confirmation screen (share prompt) go to production
+  for the first time in this release.
+
+**Verified:** tsc and next build clean; independent server harness against origin/dev; dev deploy checked at
+10:25 CT (every ad's page, phone and desktop, console clean, d10 split 11/9 and sticky); live test sign-up
+`team+s1test-1014-hero@ekuzo.gg` read back in Klaviyo (profile 01M4XG9NE93SKD0APY7HYXEM76, event 7wNmLPqfXYx).
+Exclude `team+s1test-1014` from reads.
+
 ## Jamie (via Claude), October 13, 2026 (blog refresh pass, Build Loop)
 
 Branch `build/blog-refresh-2026-10` (worktree `.claude/worktrees/blog-refresh-2026-10`), cut from
