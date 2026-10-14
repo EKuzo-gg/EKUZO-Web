@@ -1,0 +1,46 @@
+Atlas self-test, 2026-10-14T12:42:40Z
+node --check on final <script> of app/season1/landing.html: OK
+Method: Playwright 1.56.1 chromium, next dev :3101, tracking hosts fulfilled empty, POST /api/season-one fulfilled {ok:true} and recorded. Run 2 of 2 (run 1 used abort and only showed ERR_FAILED console noise from the aborted tracker requests; none from the page).
+
+/season1?ad=d1 => HERO h1="How much do they game?" | ls=null | hero_view x1 | clarity set|hero|amount | ad/hero on first ga: hero_view:{"ad":"d1","hero":"amount"} | errors=none
+/season1?ad=d2 => HERO h1="Which one do you hear the most?" | ls=null | hero_view x1 | clarity set|hero|screentime | ad/hero on first ga: hero_view:{"ad":"d2","hero":"screentime"} | errors=none
+/season1?ad=d3 => HERO h1="What do they play?" | ls=null | hero_view x1 | clarity set|hero|games | ad/hero on first ga: hero_view:{"ad":"d3","hero":"games"} | errors=none
+/season1?ad=d4 => HERO h1="They tried them all." | ls=null | hero_view x1 | clarity set|hero|shortlist | ad/hero on first ga: hero_view:{"ad":"d4","hero":"shortlist"} | errors=none
+/season1?ad=d5 => HERO h1="They tried them all." | ls=null | hero_view x1 | clarity set|hero|shortlist | ad/hero on first ga: hero_view:{"ad":"d5","hero":"shortlist"} | errors=none
+/season1?ad=d6 => HERO h1="How much do they game?" | ls=null | hero_view x1 | clarity set|hero|amount | ad/hero on first ga: hero_view:{"ad":"d6","hero":"amount"} | errors=none
+/season1?ad=d7 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d8 => HERO h1="What do they play?" | ls=null | hero_view x1 | clarity set|hero|games | ad/hero on first ga: hero_view:{"ad":"d8","hero":"games"} | errors=none
+/season1?ad=d9 => HERO h1="They tried them all." | ls=null | hero_view x1 | clarity set|hero|shortlist | ad/hero on first ga: hero_view:{"ad":"d9","hero":"shortlist"} | errors=none
+/season1?ad=d10 => HERO h1="How much do they game?" | ls=amount | hero_view x1 | clarity set|hero|amount | ad/hero on first ga: hero_view:{"ad":"d10","hero":"amount"} | errors=none
+/season1?ad=d11 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d12 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d5&hero=games => HERO h1="What do they play?" | ls=null | hero_view x1 | clarity set|hero|games | ad/hero on first ga: hero_view:{"ad":"d5","hero":"games"} | errors=none
+/season1?ad=d1&hero=none => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d1&hero=foo => HERO h1="How much do they game?" | ls=null | hero_view x1 | clarity set|hero|amount | ad/hero on first ga: hero_view:{"ad":"d1","hero":"amount"} | errors=none
+/season1?ad=D05 => HERO h1="They tried them all." | ls=null | hero_view x1 | clarity set|hero|shortlist | ad/hero on first ga: hero_view:{"ad":"d5","hero":"shortlist"} | errors=none
+/season1?ad=d03&hero=SHORTLIST => HERO h1="They tried them all." | ls=null | hero_view x1 | clarity set|hero|shortlist | ad/hero on first ga: hero_view:{"ad":"d3","hero":"shortlist"} | errors=none
+/season1?ad=zzz => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d1&hero=constructor => HERO h1="How much do they game?" | ls=null | hero_view x1 | clarity set|hero|amount | ad/hero on first ga: hero_view:{"ad":"d1","hero":"amount"} | errors=none
+/season1?ad=d11 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+/season1?ad=d7 => page A | ls=null | hero_view x0 | clarity set|hero|none | ad/hero on first ga: none | errors=none
+d10 same ctx visit1 h1="What do they play?" ls=games | visit2 h1="What do they play?" ls=games | errs=0
+d10&hero=none same ctx: page A ls=games
+d1 same ctx after d10: ls=games
+d10 fresh ctx #1: h1="What do they play?" ls=games
+d10 fresh ctx #2: h1="How much do they game?" ls=amount
+d10 with stored "bogus": h1="How much do they game?" ls=amount errs=0
+d10 storage throws: h1="How much do they game?" errs=none
+d10 split over 60 fresh contexts: amount=28 games=32
+SIGNUP /season1?ad=d1 answer=true: posts=[{"email":"team+s1test-atlas@ekuzo.gg","source":"ad-landing","ad":"d1","adName":"We've all said it","where":"top","attribution":{"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":"","utm_id":"","site":""},"page":"/season1?ad=d1","hero":"amount","heroAnswer":"A little","heroFrom":"ad-map","eventId":"03fc4cc6-84fb-4c1e-91e6-0d0b977d496e","eventSourceUrl":"http://localhost:3101/season1?ad=d1","ekz_hp":""}]
+  ga events: hero_view:{"ad":"d1","hero":"amount"} ; hero_answer:{"ad":"d1","hero":"amount"} ; generate_lead:{"source":"season_one_d1","hero":"amount"}
+  share url: http://localhost:3101/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral errs=none
+SIGNUP /season1?ad=d3 answer=true: posts=[{"email":"team+s1test-atlas@ekuzo.gg","source":"ad-landing","ad":"d3","adName":"Play to win","where":"top","attribution":{"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":"","utm_id":"","site":""},"page":"/season1?ad=d3","hero":"games","heroAnswer":"Fortnite","heroFrom":"ad-map","eventId":"c4352c97-ab16-4a70-8b8f-b841d6bb1be8","eventSourceUrl":"http://localhost:3101/season1?ad=d3","ekz_hp":""},{"step":"games","email":"team+s1test-atlas@ekuzo.gg","kidGames":"Fortnite"}]
+  ga events: hero_view:{"ad":"d3","hero":"games"} ; hero_answer:{"ad":"d3","hero":"games"} ; generate_lead:{"source":"season_one_d3","hero":"games"}
+  share url: http://localhost:3101/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral errs=none
+SIGNUP /season1?ad=d7 answer=false: posts=[{"email":"team+s1test-atlas@ekuzo.gg","source":"ad-landing","ad":"d7","adName":"Screen time, graded","where":"top","attribution":{"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":"","utm_id":"","site":""},"page":"/season1?ad=d7","hero":"none","heroAnswer":"","heroFrom":"none","eventId":"2f81256d-f8c6-4f24-a32c-bc47c140f540","eventSourceUrl":"http://localhost:3101/season1?ad=d7","ekz_hp":""}]
+  ga events: generate_lead:{"source":"season_one_d7","hero":"none"}
+  share url: http://localhost:3101/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral errs=none
+SIGNUP /season1?ad=d10&hero=none answer=false: posts=[{"email":"team+s1test-atlas@ekuzo.gg","source":"ad-landing","ad":"d10","adName":"Screen time with a purpose","where":"top","attribution":{"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","utm_term":"","utm_id":"","site":""},"page":"/season1?ad=d10&hero=none","hero":"none","heroAnswer":"","heroFrom":"url","eventId":"e6933269-96b5-4331-b66d-be10f5a38a62","eventSourceUrl":"http://localhost:3101/season1?ad=d10&hero=none","ekz_hp":""}]
+  ga events: generate_lead:{"source":"season_one_d10","hero":"none"}
+  share url: http://localhost:3101/season1?ad=d10&hero=none&utm_source=share&utm_medium=referral errs=none

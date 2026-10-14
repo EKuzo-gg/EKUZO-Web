@@ -24,6 +24,16 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  *     up if the page didn't send it. Best-effort: a Meta failure is logged and
  *     never fails the sign-up. See docs/season-one-tracking.md.
  *
+ * Ad-landing sign-ups also carry which landing hero the parent saw: `hero`
+ *    (amount | games | screentime | shortlist, else "none" for page A),
+ *    `heroAnswer` (plain text, 200 chars max, markup and link characters
+ *    stripped; "skipped" if a hero was shown but unanswered, empty on page A)
+ *    and `heroFrom` (url | ad-map | split | none, else empty). They are saved
+ *    as profile props season1_hero / season1_hero_answer and event props
+ *    hero / hero_answer / hero_from. Site-popup sign-ups never write them, and
+ *    nothing about the hero goes to Meta. season1_hero_answer is visitor text:
+ *    never render it unescaped in a Klaviyo template.
+ *
  * A second call with { step: "age", kidAge } after sign-up records the
  * kid's age band as a profile property (no new subscription).
  *
@@ -46,6 +56,11 @@ const LIST_ID = process.env.KLAVIYO_SEASON1_LIST_ID || "XGTv2F";
 
 // Anything but letters, digits, spaces, commas, periods, apostrophes and hyphens.
 const GAMES_STRIP_RE = /[^\p{L}\p{N} ,.'-]/gu;
+// Season 01 landing heroes (app/season1/landing.html). Anything else from an ad landing is recorded as "none".
+const HEROES = new Set(["amount", "games", "screentime", "shortlist"]);
+const HERO_FROM = new Set(["url", "ad-map", "split", "none"]);
+// Letters, digits, spaces and the punctuation Aaron's answers use; strips markup and link characters.
+const HERO_ANSWER_STRIP_RE = /[^\p{L}\p{N} ,.'’“”"!?&-]/gu;
 const EVENT_TIMEOUT_MS = 3500;
 const SUBSCRIBE_TIMEOUT_MS = 2500;
 
@@ -267,6 +282,19 @@ export async function POST(req: NextRequest) {
       else if (body.attributionFrom === "url" || body.attributionFrom === "session" || body.attributionFrom === "return-visit") {
         eventProps.attribution_from = body.attributionFrom;
       }
+    }
+
+    // Which landing hero the parent saw and what they answered (ad landing only; the popup never writes these).
+    if (source === "ad-landing") {
+      const h = text(body.hero).toLowerCase();
+      const hero = HEROES.has(h) ? h : "none";
+      const answer = clean(typeof body.heroAnswer === "string" ? body.heroAnswer.replace(HERO_ANSWER_STRIP_RE, "") : "", 200);
+      const heroAnswer = hero === "none" ? "" : answer || "skipped";
+      profileProps.season1_hero = hero;
+      profileProps.season1_hero_answer = heroAnswer;
+      eventProps.hero = hero;
+      eventProps.hero_answer = heroAnswer;
+      eventProps.hero_from = typeof body.heroFrom === "string" && HERO_FROM.has(body.heroFrom) ? body.heroFrom : "";
     }
 
     const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60));
