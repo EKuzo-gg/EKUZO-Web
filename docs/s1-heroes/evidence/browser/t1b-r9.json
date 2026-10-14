@@ -1,0 +1,1223 @@
+[
+ {
+  "name": "hero amount (d1)",
+  "extra": "&preview=done",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&preview=done",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": "answer",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": "answer",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": "skip",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test",
+  "act": "skip",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": "answer",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": "answer",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": "skip",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&herocta=Go",
+  "act": "skip",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": "answer",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": "answer",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": "skip",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount (d1)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": "skip",
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Go →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&preview=done",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "See how →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "hidden",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "See how →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "hidden",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&preview=done",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "See how →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "hidden",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "See how →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "hidden",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&cta=Test",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "See how →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "See how →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&cta=Test",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "See how →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "See how →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&herocta=Go",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Go →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Go →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&herocta=Go",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Go →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Go →",
+    "Save their spot",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Go →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Go →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "page A (d7)",
+  "extra": "&cta=Test&herocta=Go",
+  "act": null,
+  "kind": "phone",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Go →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Go →",
+    "Test",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · Screen time, graded",
+   "bodyOverflow": "",
+   "ihero": false,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount via ad-map vs ref explicit",
+  "extra": "&preview=done",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Be the hero →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": false,
+   "confText": "YOU’RE ON THE LIST\nAWESOME.\n\nWe can’t wait to make screentime the highlight of your day too.\n\nCheck your inbox for a note from Karlin, our founder.\n\nK\nKarlin at EKUZO\nYou’re in. Here’s what comes next",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "hidden",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount via ad-map vs ref explicit",
+  "extra": "&cta=Test",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount via ad-map vs ref explicit",
+  "extra": "&cta=Test",
+  "act": "answer",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Test",
+    "Be the hero →",
+    "Test",
+    "Test"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount via ad-map vs ref explicit",
+  "extra": "&herocta=Go",
+  "act": null,
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Save their spot",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ },
+ {
+  "name": "hero amount via ad-map vs ref explicit",
+  "extra": "&herocta=Go",
+  "act": "answer",
+  "kind": "desktop",
+  "pass": true,
+  "build": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  },
+  "ref": {
+   "ctas": [
+    "Count me in",
+    "Go →",
+    "Save their spot",
+    "Save their spot"
+   ],
+   "confHidden": true,
+   "confText": "",
+   "title": "EKUZO · We've all said it",
+   "bodyOverflow": "",
+   "ihero": true,
+   "posts": 0,
+   "pageerrors": 0
+  }
+ }
+]

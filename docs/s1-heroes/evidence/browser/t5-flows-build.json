@@ -1,0 +1,6412 @@
+[
+ {
+  "name": "d1/amount answer top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "20575ab6-77ad-4051-ad73-29fb13c0d934",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "20575ab6-77ad-4051-ad73-29fb13c0d934"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount skip top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "9440ab90-dd9a-4be5-a473-b6905b758672",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_skip",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "9440ab90-dd9a-4be5-a473-b6905b758672"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount change answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "Way too much",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "Way too much",
+    "heroFrom": "ad-map",
+    "eventId": "3476f19d-3d87-44ac-b300-c20ca5f93fc3",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "3476f19d-3d87-44ac-b300-c20ca5f93fc3"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount answer then bottom form",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "b45c5138-016b-4675-903d-0ab95262f876",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "b45c5138-016b-4675-903d-0ab95262f876"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount retry after 500",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "4650e561-cc7e-4f7e-a858-3a59f0a974cd",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "4650e561-cc7e-4f7e-a858-3a59f0a974cd",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "4650e561-cc7e-4f7e-a858-3a59f0a974cd"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount explicit hero url answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "url",
+    "eventId": "a32886a9-2d23-4cbd-bc5f-62c05651f9e1",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "a32886a9-2d23-4cbd-bc5f-62c05651f9e1"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime answer top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Five more minutes.”",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Five more minutes.”",
+    "heroFrom": "ad-map",
+    "eventId": "03d27848-6ba7-4b24-a869-7fca4b3a0f9b",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "03d27848-6ba7-4b24-a869-7fca4b3a0f9b"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime skip top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "7d9f313d-65b6-4bbb-8366-949252d3726a",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_skip",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "7d9f313d-65b6-4bbb-8366-949252d3726a"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime change answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Just one more game.”",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Just one more game.”",
+    "heroFrom": "ad-map",
+    "eventId": "3eb024a6-0feb-4051-bfb9-3fda2fa2281a",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "3eb024a6-0feb-4051-bfb9-3fda2fa2281a"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime answer then bottom form",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Five more minutes.”",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Five more minutes.”",
+    "heroFrom": "ad-map",
+    "eventId": "0321dac2-05a2-40fb-948e-ae7ca87f3c7f",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "0321dac2-05a2-40fb-948e-ae7ca87f3c7f"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime retry after 500",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Five more minutes.”",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Five more minutes.”",
+    "heroFrom": "ad-map",
+    "eventId": "eaf8a587-96f7-49ac-b729-d13801182362",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Five more minutes.”",
+    "heroFrom": "ad-map",
+    "eventId": "eaf8a587-96f7-49ac-b729-d13801182362",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "eaf8a587-96f7-49ac-b729-d13801182362"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime explicit hero url answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d2&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Five more minutes.”",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Five more minutes.”",
+    "heroFrom": "url",
+    "eventId": "35f00e05-1c29-4051-a108-62398282c5ee",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "35f00e05-1c29-4051-a108-62398282c5ee"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games answer top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "7832117e-5403-45fd-8179-606d1c45cb90",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "7832117e-5403-45fd-8179-606d1c45cb90"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games skip top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "d7e1b04a-b9c3-4d49-ae32-db45745bd833",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_skip",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "d7e1b04a-b9c3-4d49-ae32-db45745bd833"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games change answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Minecraft",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Minecraft",
+    "heroFrom": "ad-map",
+    "eventId": "e41b390e-fcac-4a91-ba29-e48ded3641ac",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Minecraft"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "e41b390e-fcac-4a91-ba29-e48ded3641ac"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games answer then bottom form",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "fc5a6916-b99d-4a02-9dc6-d3b618394f39",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "fc5a6916-b99d-4a02-9dc6-d3b618394f39"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games retry after 500",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "6e334d32-65e1-4b27-98c8-c3aafe0c1e60",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "6e334d32-65e1-4b27-98c8-c3aafe0c1e60",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "6e334d32-65e1-4b27-98c8-c3aafe0c1e60"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games explicit hero url answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "url",
+    "eventId": "8e3d2f3f-6f0d-4b97-a5c2-31262a61d7b7",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "8e3d2f3f-6f0d-4b97-a5c2-31262a61d7b7"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist answer top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "7d5ca44c-a347-4b1a-bd50-e7d1e8f0b4b4",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "7d5ca44c-a347-4b1a-bd50-e7d1e8f0b4b4"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist skip top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "a7a31a92-eac3-4d6a-9381-4ba40f2f40b9",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_skip",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "a7a31a92-eac3-4d6a-9381-4ba40f2f40b9"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist change answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Baseball",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Baseball",
+    "heroFrom": "ad-map",
+    "eventId": "8e632aab-b0c5-4604-a639-64a2d7da9e09",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "8e632aab-b0c5-4604-a639-64a2d7da9e09"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist answer then bottom form",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "b32633b6-c0f9-40d6-897e-a24a2171d08c",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "b32633b6-c0f9-40d6-897e-a24a2171d08c"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist retry after 500",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "a3b75d1e-507b-46cb-8780-b3e71837f50c",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "a3b75d1e-507b-46cb-8780-b3e71837f50c",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "a3b75d1e-507b-46cb-8780-b3e71837f50c"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist explicit hero url answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "url",
+    "eventId": "b4dbd453-e584-40d0-82fb-b0a5c3bcfacc",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "b4dbd453-e584-40d0-82fb-b0a5c3bcfacc"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games I have no idea",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "I have no idea",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "I have no idea",
+    "heroFrom": "ad-map",
+    "eventId": "102f7a82-f7dc-48e7-a7ae-492903a7eb00",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "102f7a82-f7dc-48e7-a7ae-492903a7eb00"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist deselect all",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "a292be37-18ba-4afa-acdb-bb026465a5c6",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "a292be37-18ba-4afa-acdb-bb026465a5c6"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games deselect all",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "d31e8de5-ba20-41e1-999c-516c0d322051",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "d31e8de5-ba20-41e1-999c-516c0d322051"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1 bottom form without answering",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "9cf6829b-4903-41a0-ab58-b827f663297c",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "9cf6829b-4903-41a0-ab58-b827f663297c"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 page A top",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "782ee827-d586-4f04-af1c-c1def5237e92",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "782ee827-d586-4f04-af1c-c1def5237e92"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 page A bottom",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "824c8d55-799d-4d17-aad6-4272edc6ff75",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "824c8d55-799d-4d17-aad6-4272edc6ff75"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 page A retry",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "3f4b79fc-9b1b-4016-ab1b-ca6915850eec",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "3f4b79fc-9b1b-4016-ab1b-ca6915850eec",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "3f4b79fc-9b1b-4016-ab1b-ca6915850eec"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 hero=none",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d7&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "url",
+    "eventId": "4372ded7-2f05-4d8c-a76a-d96edb4f2187",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "4372ded7-2f05-4d8c-a76a-d96edb4f2187"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1 hero=none",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d1&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d1&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "url",
+    "eventId": "2d4eed4c-18a2-4004-9956-10aa049faf67",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "2d4eed4c-18a2-4004-9956-10aa049faf67"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 hero=games explicit",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d7&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "url",
+  "link": "http://localhost:3201/season1?ad=d7&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "url",
+    "eventId": "c6e69a88-784b-443c-aacd-7612cdeeeec3",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "c6e69a88-784b-443c-aacd-7612cdeeeec3"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "bare page A",
+  "base": "build",
+  "kind": "desktop",
+  "q": "&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d1&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "a7d60b3f-89a9-4468-8e4f-ffcefcbb8f03",
+    "eventSourceUrl": "http://localhost:3201/season1?&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "a7d60b3f-89a9-4468-8e4f-ffcefcbb8f03"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "ad=zzz page A",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d1&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "5d36dc01-9a21-4cd2-a423-95c74b99343b",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "5d36dc01-9a21-4cd2-a423-95c74b99343b"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d11 page A",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d11&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d11&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d11",
+    "adName": "Their name on a jersey",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d11&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "39e97e2c-e203-41c7-8bb4-d2dd86846022",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d11&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d11"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d11"
+    },
+    {
+     "eventID": "39e97e2c-e203-41c7-8bb4-d2dd86846022"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d12 page A",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d12&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d12&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d12",
+    "adName": "The best excuse",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d12&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "2c6ff2fe-a567-4e6b-9a12-9cfb4dc90205",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d12&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d12"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d12"
+    },
+    {
+     "eventID": "2c6ff2fe-a567-4e6b-9a12-9cfb4dc90205"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "split",
+    "eventId": "fd104f03-928a-44ef-a791-3e60ecbb0a36",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "fd104f03-928a-44ef-a791-3e60ecbb0a36"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 skip",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "",
+    "heroFrom": "split",
+    "eventId": "8a4d33be-e777-4190-a2f4-ee71a7d3ecb4",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_skip",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "8a4d33be-e777-4190-a2f4-ee71a7d3ecb4"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 change",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "Way too much",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "Way too much",
+    "heroFrom": "split",
+    "eventId": "3027e86f-efd0-430b-86cd-135c03e23e53",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "3027e86f-efd0-430b-86cd-135c03e23e53"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 answer bottom",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "split",
+    "eventId": "5397b538-e994-4abc-96e3-d8ed6dd69949",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "5397b538-e994-4abc-96e3-d8ed6dd69949"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 retry",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "split",
+    "eventId": "d0f7e8eb-e214-4437-8373-318b4e52fc64",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "split",
+    "eventId": "d0f7e8eb-e214-4437-8373-318b4e52fc64",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "signup_error",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "d0f7e8eb-e214-4437-8373-318b4e52fc64"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d5/shortlist answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d5&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d5",
+    "adName": "They'll actually show up",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "8e3e7e1f-0c52-4b87-b631-0ca2a04bca6e",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d5"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d5"
+    },
+    {
+     "eventID": "8e3e7e1f-0c52-4b87-b631-0ca2a04bca6e"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d6/amount answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d6&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d6&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d6",
+    "adName": "The coach ends it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d6&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "814d3070-1d69-4d14-a6f9-770533a2d146",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d6&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d6"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d6"
+    },
+    {
+     "eventID": "814d3070-1d69-4d14-a6f9-770533a2d146"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d8/games answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d8&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d8&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d8",
+    "adName": "Screen time, team time",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d8&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "1f117656-efab-40b1-8236-21699869e7eb",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d8&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d8"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d8"
+    },
+    {
+     "eventID": "1f117656-efab-40b1-8236-21699869e7eb"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d9/shortlist answer",
+  "base": "build",
+  "kind": "desktop",
+  "q": "ad=d9&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d9&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d9",
+    "adName": "Admit one player",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d9&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "5970627d-4b48-4c62-ab21-88d4ce4c227d",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d9&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d9"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d9"
+    },
+    {
+     "eventID": "5970627d-4b48-4c62-ab21-88d4ce4c227d"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d1/amount answer top",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "ad-map",
+    "eventId": "feeb1e72-3e7a-4256-a374-04398c3f423d",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "feeb1e72-3e7a-4256-a374-04398c3f423d"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d2/screentime change answer",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "screentime",
+  "hero": "screentime",
+  "ans": "“Just one more game.”",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "screentime",
+    "heroAnswer": "“Just one more game.”",
+    "heroFrom": "ad-map",
+    "eventId": "6e767abd-563a-4dae-a757-17813b600241",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "6e767abd-563a-4dae-a757-17813b600241"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d3/games answer top",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "games",
+  "hero": "games",
+  "ans": "Fortnite, Roblox",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d3",
+    "adName": "Play to win",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "games",
+    "heroAnswer": "Fortnite, Roblox",
+    "heroFrom": "ad-map",
+    "eventId": "32ba867f-27f5-4d6d-8936-850e61f5339f",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   },
+   {
+    "step": "games",
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "kidGames": "Fortnite, Roblox"
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d3"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d3"
+    },
+    {
+     "eventID": "32ba867f-27f5-4d6d-8936-850e61f5339f"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d4/shortlist answer top",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "shortlist",
+  "hero": "shortlist",
+  "ans": "Soccer, Piano",
+  "from": "ad-map",
+  "link": "http://localhost:3201/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d4",
+    "adName": "Team card",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "shortlist",
+    "heroAnswer": "Soccer, Piano",
+    "heroFrom": "ad-map",
+    "eventId": "bffac0f1-6d00-46b0-8632-90c11456a978",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d4"
+   ],
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d4"
+    },
+    {
+     "eventID": "bffac0f1-6d00-46b0-8632-90c11456a978"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d7 page A top",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "A",
+  "hero": "none",
+  "ans": "",
+  "from": "none",
+  "link": "http://localhost:3201/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d7",
+    "adName": "Screen time, graded",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "326f26a6-a1eb-47d4-94d5-8622256990ae",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d7"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d7"
+    },
+    {
+     "eventID": "326f26a6-a1eb-47d4-94d5-8622256990ae"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 answer",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "split",
+    "eventId": "ff1f5557-42d0-4ba8-90f0-6ea7218758a6",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "ff1f5557-42d0-4ba8-90f0-6ea7218758a6"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ },
+ {
+  "name": "d10 answer bottom",
+  "base": "build",
+  "kind": "phone",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "shown": "amount",
+  "hero": "amount",
+  "ans": "A little",
+  "from": "split",
+  "link": "http://localhost:3201/season1?ad=d10&hero=amount&utm_source=share&utm_medium=referral",
+  "posts": [
+   {
+    "email": "team+s1test-sentry@ekuzo.gg",
+    "source": "ad-landing",
+    "ad": "d10",
+    "adName": "Screen time with a purpose",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "season1",
+     "utm_content": "d5-a-showup",
+     "utm_term": "Instagram_Feed",
+     "utm_id": "1",
+     "site": "ig"
+    },
+    "page": "/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "hero": "amount",
+    "heroAnswer": "A little",
+    "heroFrom": "split",
+    "eventId": "674c4e59-c0cb-4ba2-bd27-fc83edf7385e",
+    "eventSourceUrl": "http://localhost:3201/season1?ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+    "ekz_hp": ""
+   }
+  ],
+  "gtagEvents": [
+   "hero_view",
+   "hero_answer",
+   "generate_lead",
+   "share_click"
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "share_click"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "674c4e59-c0cb-4ba2-bd27-fc83edf7385e"
+    }
+   ]
+  ],
+  "fails": [],
+  "pass": true
+ }
+]

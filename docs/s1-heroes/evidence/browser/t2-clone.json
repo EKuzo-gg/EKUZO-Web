@@ -1,0 +1,798 @@
+[
+ {
+  "page": "CONTROL ref-vs-ref amount",
+  "viewport": "desktop",
+  "state": "default",
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3600000
+  },
+  "textEq": true
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "desktop",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3600000
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "desktop",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3955680
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "desktop",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3600000
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "phone",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1161750
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "phone",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1178250
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "amount",
+  "ad": "d1",
+  "viewport": "phone",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1161750
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "desktop",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 2839680
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "desktop",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3078720
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "desktop",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 2839680
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "phone",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 946875
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "phone",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 946875
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "games",
+  "ad": "d3",
+  "viewport": "phone",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 946875
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "desktop",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3960000
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "desktop",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 4315680
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "desktop",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3960000
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "phone",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1217625
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "phone",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1282875
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "screentime",
+  "ad": "d2",
+  "viewport": "phone",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1217625
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "desktop",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3265920
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "desktop",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3745440
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "desktop",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 3265920
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "phone",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 988125
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "phone",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1026000
+  },
+  "buildGtag": "hero_view,hero_answer",
+  "refGtag": "hero_view,hero_answer",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "shortlist",
+  "ad": "d4",
+  "viewport": "phone",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 988125
+  },
+  "buildGtag": "hero_view",
+  "refGtag": "hero_view",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "desktop",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 2687040
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "desktop",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 2687040
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "desktop",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 2687040
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "phone",
+  "state": "default",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 957375
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "phone",
+  "state": "answered",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 957375
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ },
+ {
+  "page": "A",
+  "ad": "d7",
+  "viewport": "phone",
+  "state": "confirmation",
+  "textBodyEqual": true,
+  "textHeroEqual": true,
+  "textConfEqual": true,
+  "ctasEqual": true,
+  "vp": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "sizeMismatch": null,
+   "diff": 0,
+   "total": 957375
+  },
+  "buildGtag": "",
+  "refGtag": "",
+  "posts": [
+   0,
+   0
+  ]
+ }
+]

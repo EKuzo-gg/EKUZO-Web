@@ -1,0 +1,132 @@
+{
+ "guard": "ok",
+ "gtagFnPresent": "function",
+ "clarityStub": "function(){ rec.clarity.push(Array.from(arguments)); }",
+ "fbqStub": "function(){ rec.fbq.push(Array.from(arguments)); }",
+ "recorded": {
+  "gtag": [
+   [
+    "js",
+    "2026-10-14T14:09:00.734Z"
+   ],
+   [
+    "config",
+    "G-8LM45PX53W"
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d1",
+     "hero": "amount"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "amount"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d5-a-showup"
+   ],
+   [
+    "set",
+    "utm_term",
+    "Instagram_Feed"
+   ],
+   [
+    "set",
+    "site",
+    "ig"
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ]
+ },
+ "info": {
+  "ihero": true,
+  "h1": "How much do they game?",
+  "hasClass": true,
+  "ad": [
+   "d1"
+  ],
+  "hero_view": [
+   "amount"
+  ],
+  "clarity_hero": [
+   "amount"
+  ],
+  "title": "EKUZO · We've all said it"
+ },
+ "probe": {
+  "https://www.google-analytics.com/g/collect?x=1": "opaque:0",
+  "https://www.googletagmanager.com/gtag/js?id=G-X": "opaque:0",
+  "https://www.clarity.ms/collect": "opaque:0",
+  "https://www.facebook.com/tr?id=1": "opaque:0",
+  "https://connect.facebook.net/en_US/fbevents.js": "opaque:0",
+  "https://example.com/": "ERR Failed to fetch"
+ },
+ "external": [
+  {
+   "host": "www.googletagmanager.com",
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "method": "GET"
+  },
+  {
+   "host": "www.clarity.ms",
+   "url": "https://www.clarity.ms/tag/wml8wll5ua",
+   "method": "GET"
+  },
+  {
+   "host": "www.google-analytics.com",
+   "url": "https://www.google-analytics.com/g/collect?x=1",
+   "method": "GET"
+  },
+  {
+   "host": "www.googletagmanager.com",
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-X",
+   "method": "GET"
+  },
+  {
+   "host": "www.clarity.ms",
+   "url": "https://www.clarity.ms/collect",
+   "method": "GET"
+  },
+  {
+   "host": "www.facebook.com",
+   "url": "https://www.facebook.com/tr?id=1",
+   "method": "GET"
+  },
+  {
+   "host": "connect.facebook.net",
+   "url": "https://connect.facebook.net/en_US/fbevents.js",
+   "method": "GET"
+  }
+ ],
+ "blocked": [
+  "https://example.com/"
+ ]
+}

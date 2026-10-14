@@ -1,0 +1,902 @@
+[
+ {
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d6&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d8&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d9&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d11&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d12&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=D05&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d01&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d13&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d10&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&preview=done",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&preview=done",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&cta=Test",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&herocta=Go",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "desktop",
+  "q": "ad=d4&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&herocta=Go&cta=Test",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d2&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d4&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d5&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d6&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d8&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d9&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d11&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d12&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=D05&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d01&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d13&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=games&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=screentime&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=foo&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d10&hero=&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&preview=done",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&preview=done",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d3&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&cta=Test",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d7&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&herocta=Go",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ },
+ {
+  "kind": "phone",
+  "q": "ad=d4&hero=shortlist&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&utm_term=Instagram_Feed&utm_id=1&site=ig&fbclid=abc&herocta=Go&cta=Test",
+  "errors": [],
+  "warnings": [],
+  "pageerrors": [],
+  "jsErr": [],
+  "blocked": [],
+  "pass": true
+ }
+]

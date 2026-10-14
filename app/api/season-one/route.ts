@@ -31,7 +31,8 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  *    and `heroFrom` (url | ad-map | split | none, else empty). They are saved
  *    as profile props season1_hero / season1_hero_answer and event props
  *    hero / hero_answer / hero_from. Site-popup sign-ups never write them, and
- *    nothing about the hero goes to Meta. season1_hero_answer is visitor text:
+ *    no hero field or answer is sent to Meta (the hero id can appear in the
+ *    page URL Meta already receives). season1_hero_answer is visitor text:
  *    never render it unescaped in a Klaviyo template.
  *
  * A second call with { step: "age", kidAge } after sign-up records the
@@ -288,7 +289,8 @@ export async function POST(req: NextRequest) {
     if (source === "ad-landing") {
       const h = text(body.hero).toLowerCase();
       const hero = HEROES.has(h) ? h : "none";
-      const answer = clean(typeof body.heroAnswer === "string" ? body.heroAnswer.replace(HERO_ANSWER_STRIP_RE, "") : "", 200);
+      // Trim, cap at 200 UTF-16 units, drop a high surrogate the cap may have split (the strip above leaves no other lone ones), re-trim.
+      const answer = (typeof body.heroAnswer === "string" ? body.heroAnswer.replace(HERO_ANSWER_STRIP_RE, "") : "").trim().slice(0, 200).replace(/[\uD800-\uDBFF]$/, "").trim();
       const heroAnswer = hero === "none" ? "" : answer || "skipped";
       profileProps.season1_hero = hero;
       profileProps.season1_hero_answer = heroAnswer;

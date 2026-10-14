@@ -1,0 +1,678 @@
+[
+ {
+  "name": "d1 amount answer",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "amount"
+   },
+   {
+    "i": 3,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "amount"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d1 amount answer",
+  "retry": true,
+  "postCount": [
+   2,
+   2
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   },
+   {
+    "post": 1,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "signup_error",
+    "key": "hero",
+    "build": "amount"
+   },
+   {
+    "i": 3,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "amount"
+   },
+   {
+    "i": 4,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "amount"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d1 amount skip",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "amount"
+   },
+   {
+    "i": 3,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "amount"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d1 amount answer bottom",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "amount"
+   },
+   {
+    "i": 3,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "amount"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "amount"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d1&hero=amount&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d2 screentime answer",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "screentime"
+   },
+   {
+    "i": 3,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "screentime"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "screentime"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "screentime"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d2 screentime answer",
+  "retry": true,
+  "postCount": [
+   2,
+   2
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   },
+   {
+    "post": 1,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "signup_error",
+    "key": "hero",
+    "build": "screentime"
+   },
+   {
+    "i": 3,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "screentime"
+   },
+   {
+    "i": 4,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "screentime"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "screentime"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "screentime"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d2&hero=screentime&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d3 games answer",
+  "retry": false,
+  "postCount": [
+   2,
+   2
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 3,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "games"
+   },
+   {
+    "i": 4,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "games"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d3 games answer",
+  "retry": true,
+  "postCount": [
+   3,
+   3
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   },
+   {
+    "post": 1,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 3,
+    "ev": "signup_error",
+    "key": "hero",
+    "build": "games"
+   },
+   {
+    "i": 4,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "games"
+   },
+   {
+    "i": 5,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "games"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d3 games none",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 2,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "games"
+   },
+   {
+    "i": 3,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "games"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "games"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d3&hero=games&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d4 shortlist answer",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 3,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "shortlist"
+   },
+   {
+    "i": 4,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "shortlist"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d4 shortlist answer",
+  "retry": true,
+  "postCount": [
+   2,
+   2
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "url"
+   },
+   {
+    "post": 1,
+    "key": "heroFrom",
+    "build": "url"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 3,
+    "ev": "signup_error",
+    "key": "hero",
+    "build": "shortlist"
+   },
+   {
+    "i": 4,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "shortlist"
+   },
+   {
+    "i": 5,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "shortlist"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ]
+  ],
+  "clarityHeroRef": [
+   [
+    "set",
+    "hero",
+    "shortlist"
+   ]
+  ],
+  "shareBuild": "<origin>/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d4&hero=shortlist&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d7 page A",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "hero",
+    "build": "none"
+   },
+   {
+    "post": 0,
+    "key": "heroAnswer",
+    "build": ""
+   },
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "none"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 0,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "none"
+   },
+   {
+    "i": 1,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "none"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "none"
+   ]
+  ],
+  "clarityHeroRef": [],
+  "shareBuild": "<origin>/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d7&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ },
+ {
+  "name": "d7 page A bottom",
+  "retry": false,
+  "postCount": [
+   1,
+   1
+  ],
+  "bodyDiffs": [
+   {
+    "post": 0,
+    "key": "hero",
+    "build": "none"
+   },
+   {
+    "post": 0,
+    "key": "heroAnswer",
+    "build": ""
+   },
+   {
+    "post": 0,
+    "key": "heroFrom",
+    "build": "none"
+   }
+  ],
+  "gtagDiffs": [
+   {
+    "i": 0,
+    "ev": "generate_lead",
+    "key": "hero",
+    "build": "none"
+   },
+   {
+    "i": 1,
+    "ev": "share_click",
+    "key": "hero",
+    "build": "none"
+   }
+  ],
+  "fbqEqual": true,
+  "clarityDiffs": true,
+  "clarityHeroBuild": [
+   [
+    "set",
+    "hero",
+    "none"
+   ]
+  ],
+  "clarityHeroRef": [],
+  "shareBuild": "<origin>/season1?ad=d7&hero=none&utm_source=share&utm_medium=referral",
+  "shareRef": "<origin>/season1?ad=d7&utm_source=share&utm_medium=referral",
+  "confEqual": false
+ }
+]

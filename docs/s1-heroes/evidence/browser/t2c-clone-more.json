@@ -1,0 +1,1082 @@
+[
+ {
+  "label": "d5 shortlist",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3265920
+  },
+  "pass": true
+ },
+ {
+  "label": "d5 shortlist",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3745440
+  },
+  "pass": true
+ },
+ {
+  "label": "d5 shortlist",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 4,
+   "total": 3265920
+  },
+  "pass": false
+ },
+ {
+  "label": "d5 shortlist",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 999000
+  },
+  "pass": true
+ },
+ {
+  "label": "d5 shortlist",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1037250
+  },
+  "pass": true
+ },
+ {
+  "label": "d5 shortlist",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 999000
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2805120
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3153600
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2805120
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 940875
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 940875
+  },
+  "pass": true
+ },
+ {
+  "label": "d6 amount",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 940875
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2859840
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3100320
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2859840
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 942375
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 942375
+  },
+  "pass": true
+ },
+ {
+  "label": "d8 games",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 942375
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2815200
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3237120
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2815200
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 931500
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 931500
+  },
+  "pass": true
+ },
+ {
+  "label": "d9 shortlist",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 931500
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3564000
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3919680
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3564000
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1163625
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1180125
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored amount",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1163625
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3579840
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3818880
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3579840
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1163625
+  },
+  "pass": true
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 4,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1189500
+  },
+  "pass": false
+ },
+ {
+  "label": "d10 stored games",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1163625
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2766240
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2766240
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2766240
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 971625
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 971625
+  },
+  "pass": true
+ },
+ {
+  "label": "d11 page A",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 971625
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2797920
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2797920
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2797920
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 981000
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 981000
+  },
+  "pass": true
+ },
+ {
+  "label": "d12 page A",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 981000
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "bare page A",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "ad=zzz page A",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 3438720
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "d1 hero=none",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1164750
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "desktop",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2836800
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "desktop",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2836800
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "desktop",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 1296000
+  },
+  "full": {
+   "diff": 0,
+   "total": 2836800
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "phone",
+  "state": "default",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1002000
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "phone",
+  "state": "answered",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1002000
+  },
+  "pass": true
+ },
+ {
+  "label": "d13 page A",
+  "kind": "phone",
+  "state": "confirmation",
+  "textEqual": true,
+  "vp": {
+   "diff": 0,
+   "total": 304500
+  },
+  "full": {
+   "diff": 0,
+   "total": 1002000
+  },
+  "pass": true
+ }
+]

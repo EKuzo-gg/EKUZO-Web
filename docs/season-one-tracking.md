@@ -51,7 +51,7 @@ GA4: the `source` parameter uses the same naming (`season_one_d3` on the landing
 
 ## Season 01 hero fields (ad landing only)
 
-Which landing hero the parent saw and what they answered. Written for `source: ad-landing` only; never for the popup, never on the games/age steps, never sent to Meta.
+Which landing hero the parent saw and what they answered. Written for `source: ad-landing` only; never for the popup, never on the games/age steps. No hero field or answer is sent to Meta; the hero id can appear in the page URL Meta already receives (the pixel reports the page URL, and CAPI gets it as `event_source_url`, whenever it carries `?hero=`).
 
 | Where | Property | Values |
 |---|---|---|

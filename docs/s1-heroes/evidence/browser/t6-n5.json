@@ -1,0 +1,453 @@
+[
+ {
+  "name": "N5a idle 3s d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c scroll gesture from option button d1",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "events": [
+    "hero_view"
+   ],
+   "pressed": 0
+  }
+ },
+ {
+  "name": "N5c' real tap on option fires hero_answer once d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ]
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d1",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "after": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer",
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5d skip then the page's own focus d1",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_skip"
+   ],
+   "activeEl": "em-top"
+  }
+ },
+ {
+  "name": "N5a idle 3s d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c scroll gesture from option button d2",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "events": [
+    "hero_view"
+   ],
+   "pressed": 0
+  }
+ },
+ {
+  "name": "N5c' real tap on option fires hero_answer once d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ]
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d2",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "after": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer",
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5d skip then the page's own focus d2",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_skip"
+   ],
+   "activeEl": "em-top"
+  }
+ },
+ {
+  "name": "N5a idle 3s d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c scroll gesture from option button d3",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "events": [
+    "hero_view"
+   ],
+   "pressed": 0
+  }
+ },
+ {
+  "name": "N5c' real tap on option fires hero_answer once d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ]
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d3",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "after": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer",
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5d skip then the page's own focus d3",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_skip"
+   ],
+   "activeEl": "em-top"
+  }
+ },
+ {
+  "name": "N5a idle 3s d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c scroll gesture from option button d4",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "events": [
+    "hero_view"
+   ],
+   "pressed": 0
+  }
+ },
+ {
+  "name": "N5c' real tap on option fires hero_answer once d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ]
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d4",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "after": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer",
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5d skip then the page's own focus d4",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_skip"
+   ],
+   "activeEl": "em-top"
+  }
+ },
+ {
+  "name": "N5a idle 3s d7",
+  "pass": true,
+  "detail": {
+   "events": [],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d7",
+  "pass": true,
+  "detail": {
+   "events": [],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d7",
+  "pass": true,
+  "detail": {
+   "events": [],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d7",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 145,
+   "events": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d7",
+  "pass": true,
+  "detail": {
+   "events": [
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5a idle 3s d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form hidden d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5b autofill form visible d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ],
+   "posts": 0
+  }
+ },
+ {
+  "name": "N5c scroll gesture from option button d10",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "events": [
+    "hero_view"
+   ],
+   "pressed": 0
+  }
+ },
+ {
+  "name": "N5c' real tap on option fires hero_answer once d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer"
+   ]
+  }
+ },
+ {
+  "name": "N5c2 scroll gesture from email field d10",
+  "pass": true,
+  "detail": {
+   "scrolledPx": 185,
+   "after": []
+  }
+ },
+ {
+  "name": "N5c3 real tap on email fires form_start once d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_answer",
+    "form_start"
+   ]
+  }
+ },
+ {
+  "name": "N5d skip then the page's own focus d10",
+  "pass": true,
+  "detail": {
+   "events": [
+    "hero_view",
+    "hero_skip"
+   ],
+   "activeEl": "em-top"
+  }
+ }
+]
