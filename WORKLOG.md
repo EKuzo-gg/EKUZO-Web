@@ -5,6 +5,14 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 14, 2026, 14:05 (Season 01 FAQ game answer)
+
+`app/season1/landing.html`: "What game do they play?" now reads "Your kid might play Roblox, Minecraft or
+Fortnite, and they keep those. With us, they play League of Legends on a team of five. It's free to download,
+and most kids start from scratch. League is our core game, and we're looking at adding others." From a persona
+and contrarian panel run at Aaron's request (EKUZO Marketing `ads/2026-10-season-one/panels/2026-10-14-faq-game-answer/`).
+Also `docs/dev-runbook.md`: verify a handoff bundle on the receiving side.
+
 ## Jamie (via Claude), October 14, 2026 (Season 01 ad heroes, Build Loop)
 
 Dev branch `preview/s1-heroes` (pushed to `dev` 10:20 CT, on top of Aaron's d061f7c); release branch
