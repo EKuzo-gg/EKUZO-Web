@@ -727,10 +727,23 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px}
 .conf h2{margin:0;font:800 calc(min(15.5vw,80px)*var(--ds,1))/.9 var(--disp);overflow-wrap:normal;text-transform:uppercase;letter-spacing:-.03em;color:var(--acc);outline:none}
 .conf p{margin:0;font-size:20px;line-height:1.4;color:#fff;text-wrap:pretty}
+.conf .inbox-h{font-size:17px;color:#fff;margin-top:6px}
+.mail{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:#1B1920;border:1px solid #3a3640;animation:mailIn .5s .25s ease both}
+.mail-av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font:800 17px/1 var(--ui)}
+.mail-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mail-t b{font:700 15px/1.2 var(--ui);color:#fff}
+.mail-s{font:600 14px/1.3 var(--ui);color:#fff}
+.mail-p{font:400 14px/1.35 var(--ui);color:#C2BDC8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-n{font:500 12px/1.2 var(--ui);color:#C2BDC8}
+@keyframes mailIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mail{animation:none}}
 .conf .egg{font-size:16px;color:#BDB8C2}
 .conf .age{margin-top:10px;padding-top:16px;border-top:1px solid #2B2830;display:flex;flex-direction:column;gap:10px}
 .conf .age p{font-size:15px;color:#BDB8C2}
 .conf .age .thanks{color:#fff}
+.conf .share-btn{appearance:none;align-self:flex-start;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid var(--acc);background:none;color:var(--acc);font:800 17px/1 var(--ui);cursor:pointer}
+.conf .share-btn:hover{background:var(--acc);color:var(--acc-ink)}
+.conf .share-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .conf .back{margin-top:10px;color:#BDB8C2;font:600 15px/1 var(--ui);text-underline-offset:4px;align-self:flex-start}
 .ach{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);display:flex;align-items:center;gap:12px;width:min(340px,calc(100vw - 32px));box-sizing:border-box;padding:10px 14px 10px 10px;border-radius:99px;background:#1B1920;border:1px solid #3a3640;box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,1.3,.4,1)}
 .conf.on .ach{transform:translate(-50%,0)}
@@ -758,11 +771,95 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
   .join h2{font-size:calc(40px*var(--ds,1))}
 }
 
+
+/* ===== Interactive heroes (?hero=amount | ?hero=games). Off unless the link asks for one, so the live default is untouched. ===== */
+.ihero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 18px 28px;box-sizing:border-box;background:var(--ink)}
+.ihero[hidden]{display:none}
+.ihero .ih-bg{position:absolute;inset:0;width:100%;height:62%;object-fit:cover;object-position:var(--ihpos,50% 30%);opacity:.4;filter:saturate(.7);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.ihero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.78) 0%,rgba(17,16,19,.6) 14%,rgba(17,16,19,.94) 32%,#111013 48%,#111013 100%);z-index:0}
+.ihero > *:not(.ih-bg){position:relative;z-index:1}
+.ihero .kick{margin-bottom:10px}
+.ihero h1{margin:0;font:800 calc(54px*var(--ds,1))/.92 var(--disp);text-transform:uppercase;letter-spacing:-.025em;color:#fff;text-wrap:balance}
+.ihero .ih-sub{margin:10px 0 18px;color:#ECE9EF;font-size:17px;line-height:1.4;text-wrap:pretty}
+.ih-opts{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.16)}
+.ih-opts.games{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;border-top:0;padding-top:4px}
+.ih-opt{appearance:none;display:flex;align-items:center;gap:14px;min-height:56px;padding:6px 2px;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:none;color:#fff;font:700 21px/1.15 var(--ui);text-align:left;cursor:pointer;transition:color .15s}
+.ih-opts.games .ih-opt{min-height:52px;padding:0 22px;border:1.5px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(17,16,19,.55);font:700 18px/1 var(--ui);gap:0;transition:background .15s,border-color .15s,color .15s}
+.ih-opts.games .ih-opt::before{display:none}
+.ih-opts.games .ih-opt:hover{border-color:#fff}
+.ih-opts.games .ih-opt[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.ih-opts.quotes .ih-opt{font:700 20px/1.2 var(--ui)}
+.ih-opt::before{content:"";width:22px;height:22px;flex:none;border-radius:50%;border:2px solid rgba(255,255,255,.5);box-sizing:border-box;transition:border-color .15s,box-shadow .15s}
+.ih-opt:hover::before{border-color:#fff}
+.ih-opt[aria-pressed="true"]{color:var(--acc)}
+.ih-opt[aria-pressed="true"]::before{border-color:var(--acc);box-shadow:inset 0 0 0 4px var(--ink),inset 0 0 0 11px var(--acc)}
+.ih-opt:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ih-skip{appearance:none;background:none;border:0;color:var(--acc);font:700 16px/1.3 var(--ui);min-height:44px;text-decoration:underline;text-underline-offset:4px;padding:14px 0 0;cursor:pointer;align-self:flex-start;text-align:left}
+.ih-resp{display:none}
+.ih-resp.on{display:block;animation:ihIn .35s ease both}
+@keyframes ihIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ih-skip[hidden]{display:none}
+.ih-resp h2{margin:20px 0 6px;font:800 calc(30px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;color:var(--acc);text-wrap:balance}
+ .ih-resp .ih-got{margin:20px 0 0;font:700 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.ih-resp .ih-got + h2{margin-top:6px}
+.ih-resp .ih-got[hidden]{display:none}
+.ih-resp .ih-list{margin:4px 0 10px;font:700 14px/1.4 var(--ui);color:#E6E2EA}
+.ih-resp .ih-say:empty,.ih-resp h2:empty{display:none}
+.ih-opts.games + .ih-resp .ih-list{margin-top:22px}
+.ih-resp .ih-say{margin:0 0 12px;color:#fff;font-size:17px;line-height:1.45;text-wrap:pretty}
+.ihero .join{padding:0;border:0;scroll-margin-top:80px}
+.ihero .join h2,.ihero .join .form-wrap > p{display:none}
+.ihero .join small{color:#C2BDC8;font-size:13px}
+.ihero .join button[type=submit]{min-height:58px;border-radius:999px;font-size:18px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.ihero .join button[type=submit]::after{content:" →"}
+@media (prefers-reduced-motion:reduce){.ih-resp.on{animation:none}.ih-opt{transition:none}}
+/* Mobile: the interactive hero replaces the ad image at the top */
+.lp.has-ihero > #hero{display:none}
+@media (min-width:960px){
+  .lp.has-ihero > #hero{display:flex}
+  .lp > #ihero{grid-column:2;min-height:0;padding:8px 0 32px;background:transparent;justify-content:flex-start}
+  .lp > #ihero::before,.lp > #ihero .ih-bg{display:none}
+  .ihero h1{font-size:calc(60px*var(--ds,1))}
+}
+
+/* ---- Option 4: The shortlist. Solid colour from the ad, big words, tap to cross off. ---- */
+.ihero.light{background:var(--sl-bg,#111013);color:var(--sl-fg,#fff);justify-content:flex-start;padding-top:88px}
+.ihero.light::before,.ihero.light .ih-bg{display:none}
+.ihero.light .sl-kick{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--sl-fg)}
+.ihero.light .sl-kick::before{content:"";width:28px;height:3px;background:var(--acc)}
+.ihero.light h1{margin:14px 0 0;font:800 calc(min(15vw,76px)*var(--ds,1))/.9 var(--disp);letter-spacing:-.03em;color:var(--sl-fg);text-transform:uppercase;text-wrap:balance}
+.ihero.light h1 i{font-style:normal;color:var(--sl-acc,var(--acc))}
+.ihero.light .ih-sub{color:var(--sl-muted);font-size:17px;margin:12px 0 10px}
+.sl-list{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.sl-row{display:flex;flex-direction:column;align-items:flex-start}
+.ihero .sl-item.ih-opt::before{display:none}
+.ihero .sl-item.ih-opt{display:inline-block;min-height:0;gap:0;border:2px solid transparent;border-bottom:2px solid transparent}
+.sl-item{appearance:none;background:none;border-radius:8px;padding:0 6px;margin-left:-8px;cursor:pointer;position:relative;font:700 calc(36px*var(--ds,1))/1.12 var(--disp);letter-spacing:-.02em;text-transform:uppercase;color:var(--sl-fg);text-align:left;transition:color .2s}
+.sl-item::after{content:"";position:absolute;left:0;top:52%;height:.11em;width:0;background:var(--acc);transition:width .3s cubic-bezier(.6,0,.2,1)}
+.ihero .sl-item.ih-opt[aria-pressed="true"],.sl-item[aria-pressed="true"]{color:var(--sl-muted)}
+.sl-item[aria-pressed="true"]::after{width:100%}
+.sl-item:hover{border-color:var(--sl-line)}
+.sl-item:focus-visible{outline:none;border-color:var(--sl-fg)}
+.sl-q{margin:-2px 0 6px;font:500 15px/1.3 var(--ui);color:var(--sl-acc,var(--acc));animation:qIn .3s ease both}
+.sl-q[hidden]{display:none}
+@keyframes qIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ihero.light .ih-resp h2{color:var(--sl-acc,var(--acc));font:800 calc(30px*var(--ds,1))/1 var(--disp);text-transform:uppercase;letter-spacing:-.02em;margin:18px 0 6px}
+.ihero.light .ih-resp .ih-say{color:var(--sl-fg);font-size:17px}
+.ihero.light .ih-resp .ih-list{color:var(--sl-muted)}
+.ihero.light .join input[type=email]{background:var(--sl-field);color:var(--sl-fg);border-color:var(--sl-line)}
+.ihero.light .join input[type=email]::placeholder{color:var(--sl-muted)}
+.ihero.light .join input[type=email]:focus{border-color:var(--acc)}
+.ihero.light .join small,.ihero.light .join .err{color:var(--sl-muted)}
+.ihero.light .ih-skip{color:var(--sl-acc,var(--acc))}
+.lp.light-top header:not(.solid) .mark{color:var(--sl-fg,#fff)}
+@media (prefers-reduced-motion:reduce){.sl-q{animation:none}.sl-item::after{transition:none}}
+@media (min-width:960px){.lp > #ihero.light{border-radius:8px;padding:40px 36px}}
 </style>
 
 
 <div class="lp" id="lp">
   <header><svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg><button class="mini-cta" type="button" data-go>Join the list</button></header>
+  <section class="ihero" id="ihero" aria-labelledby="ih-q" hidden></section>
   <section class="hero" id="hero"></section>
 
   <section class="join" id="join-top" aria-labelledby="jt">
@@ -796,11 +893,11 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
   <section class="faq" aria-labelledby="fq">
     <span class="kick">Questions parents ask</span>
     <h3 id="fq">The short&nbsp;answers.</h3>
-    <details><summary>When does it start?</summary><p>Season one starts in 2027. Everyone on the list hears first when sign-ups open.</p></details>
-    <details><summary>Do I pay anything now?</summary><p>No. Joining the list is free and doesn’t sign your kid up for anything yet.</p></details>
-    <details><summary>What game do they play?</summary><p>League of Legends, a team game where five players have to communicate and work together to&nbsp;win.</p></details>
-    <details><summary>Where does it happen?</summary><p>Online, from home. No driving, no cleats, no&nbsp;parking.</p></details>
-    <details><summary>Who are the coaches?</summary><p>Experienced players who are trained to coach kids. You’ll meet them before the season&nbsp;starts.</p></details>
+    <details><summary>When does it start?</summary><p>Season 01 starts in January 2027. Everyone on the list hears first when sign-ups open.</p></details>
+    <details><summary>Do I pay anything now?</summary><p>This is a free interest list. It doesn’t sign your kid up for anything&nbsp;yet.</p></details>
+    <details><summary>What game do they play?</summary><p>We play team-based competitive games. Our flagship is League of Legends, a five-player team game, and we add other games based on what our players want. Most kids are new to the game they play with us, and we group them by age, location and experience so the team&nbsp;fits.</p></details>
+    <details><summary>Where does it happen?</summary><p>Online, from home, on a computer with a headset. Practice runs in the evening, in your time zone. No driving, no&nbsp;parking.</p></details>
+    <details><summary>Who are the coaches?</summary><p>Passionate top 1% college esports players, background-checked and trained to coach kids. You’ll meet your coach before the season&nbsp;starts.</p></details>
   </section>
 
   <section class="join end" id="join-end" aria-labelledby="je">
@@ -826,11 +923,17 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
   <div class="conf-in">
     <span class="kick">You’re on the list</span>
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
-    <p>We can’t wait to make screentime the highlight of your day too. We’ll be in&nbsp;touch.</p>
+    <p>We can’t wait to make screentime the highlight of your day&nbsp;too.</p>
+    <p class="inbox-h">Check your inbox for a note from Karlin, our&nbsp;founder.</p>
+    <div class="mail" aria-label="What the email looks like">
+      <span class="mail-av" aria-hidden="true">K</span>
+      <div class="mail-t"><b>Karlin at EKUZO</b><span class="mail-s">You’re in. Here’s what comes next.</span><span class="mail-p">Structure beats screen time limits. A note from Karlin on what that looks like.</span></div>
+      <small class="mail-n">Now</small>
+    </div>
     <p class="egg">Now go outside. Or pick up that controller. Either way, go have&nbsp;fun.</p>
-    <div class="age"><p>Optional: what do they play? Tap all that apply.</p>
-      <div class="chips" role="group" aria-label="Games they play"><button type="button" aria-pressed="false">Fortnite</button><button type="button" aria-pressed="false">Roblox</button><button type="button" aria-pressed="false">Minecraft</button><button type="button" aria-pressed="false">Rocket League</button><button type="button" aria-pressed="false">League of Legends</button><button type="button" aria-pressed="false">Valorant</button><button type="button" aria-pressed="false">Something else</button></div>
-      <p class="thanks" role="status" hidden>Got it. Thanks.</p></div>
+    <div class="age"><p>Know a parent still figuring out screen&nbsp;time?</p>
+      <button type="button" class="share-btn" id="share">Send this to them</button>
+      <p class="thanks" role="status" hidden></p></div>
   </div>
   <div class="ach" aria-hidden="true">
     <span class="tro"><svg viewBox="0 0 24 24"><path d="M7 3h10v3h3v2a5 5 0 0 1-4.6 5A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1A5 5 0 0 1 8.6 13 5 5 0 0 1 4 8V6h3zm0 5V8H6a3 3 0 0 0 1 2.2zm10 0v2.2A3 3 0 0 0 18 8z"/></svg></span>
@@ -953,7 +1056,57 @@ const D = [
   art:k=>`<img class="ph" src="${IMG["coach-and-mom"]}" alt="">
    <div class="in"><div class="top">${logo()}</div>
    <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
-   <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`}
+   <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`},
+ {id:"d13", tpl:"d10", round:3, problem:"They game too much", name:"Screen time you're proud of", photo:"kid on the couch (Aaron's photos)",
+  type:"Sora, extra bold caps (template 10)", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Google: screen time that matters",
+  why:"For the parent typing ‘how do I cut screen time’. We don’t take the game away. We give it a coach, a team that has their back and an end time.",
+  subject:"Screen time you’re proud of.",
+  bgs:[{k:"kid-couch",l:"Kid on the couch (photo)",cls:"kid"},{k:"team-walk",l:"Team walk (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["kid-couch"]}" alt="">
+   <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
+   <div class="in"><div class="top">${logo()}</div>
+   <h3>Screen time<br>you’re <em>proud&nbsp;of.</em></h3>
+   <p class="sub">A coach, a team that has their back, and a reason to log off on&nbsp;time.</p><span class="cta">Save their spot →</span></div>`},
+ {id:"d14", tpl:"d6", round:3, problem:"They game too much", name:"Screen time. Coached.", photo:"couch",
+  type:"Syne, extended caps (template 06)", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"Google: reduce screen time",
+  why:"The structure answer, said loud. Practice starts on time and the coach ends it, so the parent stops being the timer.",
+  subject:"Screen time. Coached.",
+  art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
+   <div><h3 style="font-size:${k==="email"?"5.4cqw":"10cqw"}">Screen time. Coached.</h3><p class="sub">Practice starts on time and the coach ends it. No doorway&nbsp;argument.</p><span class="cta">Save their spot →</span></div></div>`},
+ {id:"d15", tpl:"d12", round:3, problem:"They don’t have friends", name:"Online friends, real team", photo:"team-walk",
+  type:"Hanken Grotesk, extra bold caps (template 12)", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Google: my kid only has online friends",
+  why:"For the parent typing ‘my kid has no friends’. The kid already has people online. This makes them a team with a coach, told in a text a parent would love to get.",
+  subject:"“We have practice tonight. They need me.”",
+  art:k=>`<img class="ph" src="${IMG["team-walk"]}" alt="">
+   <div class="in"><div class="top">${logo()}</div>
+   <div class="thread"><small>Today</small><span class="me">Who are you playing with?</span><span class="them">My team</span><span class="me">Your team??</span><span class="them">We have practice tonight. They need me on&nbsp;comms.</span></div>
+   <div class="foot"><h3><span>Online friends.</span><em>Now a real team.</em></h3><span class="cta">Find their team →</span></div></div>`},
+ {id:"d16", tpl:"d4", round:3, problem:"They don’t have friends", name:"Their people", photo:"hands-in",
+  type:"Bricolage Grotesque, tight caps (template 04)", palette:["#8E22E0","#E0FF4E","#FFFFFF"], from:"Google: help them find their people",
+  why:"The team photo on the fridge, for the kid who doesn’t have one yet. Sells belonging first: somewhere they feel seen.",
+  subject:"Their people. Their team.",
+  art:k=>`<img class="ph" src="${IMG["hands-in"]}" alt="">
+   <div class="in"><div class="photo-tag">${logo()}</div>
+   <div class="panel"><span class="sticker">A team that has their back.</span><span class="roster">Esports team</span>
+   <h3>Their people. Their team.</h3><span class="cta">Find their team →</span></div></div>`},
+ {id:"d17", tpl:"d1", round:3, problem:"They don’t fit the usual mold", name:"Not a sports kid", photo:"team-walk",
+  type:"Space Grotesk, bold caps (template 01)", palette:["#111013","#F92524","#E0FF4E","#FFFFFF"], from:"The Shortlist cross-off, for the kid who quit",
+  why:"The green-lit cross-off idea, pointed at the kid who never clicked with team sports. The list ends on the one team that fits.",
+  subject:"Not every kid plays soccer.",
+  bgs:[{k:"team-walk",l:"Team walk (photo)"},{k:"hands-in",l:"Hands in (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["team-walk"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="tag">Not a sports kid</span></div>
+   <h3><s>Soccer.</s> <s>Scouts.</s><em>Their team.</em></h3>
+   <p class="sub">For the kid who never clicked with team&nbsp;sports. A coach, a team and friends who get&nbsp;them.</p><span class="cta">Find their team →</span></div>`},
+ {id:"d18", tpl:"d5", round:3, problem:"They don’t fit the usual mold", name:"Not a sports kid? Perfect.", photo:"laughing",
+  type:"Inter Tight, extra bold caps (template 05)", palette:["#111013","#E0FF4E","#FFFFFF"], from:"Google: my kid doesn’t like sports",
+  why:"Turns the worry into a yes. The parent who has given up on sign-up sheets hears that their kid is exactly who this is for.",
+  subject:"Not a sports kid? Perfect.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+   <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
+   <div class="col"><h3>Not a sports kid? <em>Perfect.</em></h3>
+   <div class="row"><p class="sub">A coach and a team that has their back, in the games they already&nbsp;love.</p><span class="cta">Find their team →</span></div></div></div>`}
 ];
 // Per ad: accent, display font, and the bridge that continues the ad's line
 const T = {
@@ -980,10 +1133,17 @@ const T = {
    <li><b><em>Team</em>work</b><span>Five players, one plan and the same teammates all&nbsp;season.</span></li>
    <li><b>Talking it <em>through</em></b><span>Clear, calm callouts under pressure, practiced every&nbsp;week.</span></li></ul>`},
  d11:{acc:"#49B41A",font:'"Rubik"',k:"Season one",h:"Their name on the back.",p:"A real team, a real coach and a jersey with their gamer tag on it. The kind of thing they’ll want you to take a picture&nbsp;of."},
- d12:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"The best excuse",h:"“Sorry, practice is going over.”",p:"A team that counts on them, a coach who expects them there and a reason to log off on&nbsp;time."}
+ d12:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"The best excuse",h:"“Sorry, practice is going over.”",p:"A team that counts on them, a coach who expects them there and a reason to log off on&nbsp;time."},
+ d13:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time you’re proud of",h:"Don’t take the game away. Give it a&nbsp;coach.",p:"A real coach and a team that has their back turn the hours they already play into practice, with a start and an end. In the games they already&nbsp;love."},
+ d14:{acc:"#FF2ECC",font:'"Syne"',k:"Screen time. Coached.",h:"The coach calls time, not&nbsp;you.",p:"Practice starts on time, works on teamwork and talking it through, and ends when the coach says so. No doorway&nbsp;argument."},
+ d15:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"Online friends. Now a real team.",h:"They already have people. Give them a&nbsp;team.",p:"A team that practices together every week, with a coach who knows their name. The kind of friends who have their&nbsp;back.",mod:"<p style=\"margin:0;font-size:14px;line-height:1.5;opacity:.75\">If your kid seems lonely or down most days, talk with their doctor or a counselor too. A team can help. It isn’t a&nbsp;replacement.</p>"},
+ d16:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Their people. Their team.",h:"A team that has their&nbsp;back.",p:"EKUZO teams practice online with a real coach and the same teammates all season. Somewhere they feel seen, doing what they&nbsp;love.",mod:"<p style=\"margin:0;font-size:14px;line-height:1.5;opacity:.75\">If your kid seems lonely or down most days, talk with their doctor or a counselor too. A team can help. It isn’t a&nbsp;replacement.</p>"},
+ d17:{acc:"#E0FF4E",font:'"Space Grotesk"',k:"Not a sports kid",h:"Some kids find their team somewhere&nbsp;else.",p:"For the kid who never clicked with soccer or scouts. A coach, a team that has their back and friends who get&nbsp;them.",mod:"<span class=\"kick\">Cross it off</span><ul class=\"xo\"><li><s>Sitting on the bench</s><b>A role on the team</b><span>Every player has a job, and the team needs&nbsp;it.</span></li><li><s>Alone in their room</s><b>With their team every week</b><span>The same teammates all season, with each other’s&nbsp;backs.</span></li><li><s>“Just playing games”</s><b>Practice with a coach</b><span>A real coach runs every practice and keeps it on&nbsp;track.</span></li></ul>"},
+ d18:{acc:"#E0FF4E",font:'"Inter Tight"',k:"Not a sports kid? Perfect.",h:"A team sport built around what they&nbsp;love.",p:"They don’t have to like soccer to love a team. A coach, teammates who have their back and a season, in the games they already&nbsp;play."}
 };
 const qs = new URLSearchParams(location.search);
 let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.prototype.hasOwnProperty.call(T,id)) id="d1";
+const adOk=Object.prototype.hasOwnProperty.call(T,(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d"));
 // Remember the ad keys for the site popup on other pages (this page is served outside the site layout, so nothing else stores them). The latest ad landing wins. Storage only, never blocks the page.
 { const K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","site","ad"], a={}, ra=(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d");
   K.forEach(k=>a[k]=k==="ad" ? (Object.prototype.hasOwnProperty.call(T,ra)?ra:"") : (qs.get(k)||"").slice(0,200));
@@ -997,9 +1157,9 @@ const themed=[lp,document.getElementById("conf")];
 themed.forEach(el=>el.style.setProperty("--acc", t.acc));
 themed.forEach(el=>el.style.setProperty("--acc-ink", t.acc==="#49B41A"||t.acc==="#FF2ECC" ? "#111013" : "#111013"));
 themed.forEach(el=>el.style.setProperty("--disp", `${t.font},var(--ui)`));
-themed.forEach(el=>el.style.setProperty("--ds", ({d3:.74,d6:.8,d7:.78,d8:.8,d9:.66,d11:.92})[id]||1));
+themed.forEach(el=>el.style.setProperty("--ds", ({d3:.74,d6:.8,d7:.78,d8:.8,d9:.66,d11:.92})[d.tpl||id]||1));
 const heroCls = d.bgs && d.bgs[0].cls ? " "+d.bgs[0].cls : "";
-document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.id}${heroCls}" role="img" aria-label="${d.name}">${d.art("feed")}</div>`;
+document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.tpl||d.id}${heroCls}" role="img" aria-label="${d.name}">${d.art("feed")}</div>`;
 document.getElementById("bridge").innerHTML = `<span class="kick">${t.k}</span><h3>${t.h}</h3><p>${t.p}</p>`;
 if(t.mod){ const m=document.getElementById("mod"); m.innerHTML=t.mod; m.hidden=false; }
 document.title = "EKUZO · " + d.name;
@@ -1008,11 +1168,125 @@ document.querySelectorAll('.join button[type=submit], #sticky button').forEach(b
 // The hero keeps the ad's own button so the tap feels continuous; ?herocta= overrides it
 if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice(0,40)+" →");
 
+// ===== Interactive heroes =====
+// ?hero=amount  "How much do they game?"  (A little / A lot / Way too much)
+// ?hero=games   "What do they play?"      (tap all that apply)
+// The answer comes first, then the email form slides in under it. The page's own top form is moved
+// into the hero, so the sign-up, tracking and confirmation run exactly as on the default page.
+// Only the hero name goes to GA and Clarity; the answer itself goes to Klaviyo with the sign-up (never to Meta or GA).
+const HERO_DEFS={
+ amount:{kick:"iPads, Switches, PS5s. Oh my.",q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join the list",
+  opts:[
+   {a:"A little",h:"Then let’s make it count.",say:"Give the time they do play a coach and a team that has their&nbsp;back.",cta:"Count me in"},
+   {a:"A lot",h:"Let’s add some structure.",say:"Weekly practice with a real coach, a start and an end, and a team that has their&nbsp;back.",cta:"Count me in"},
+   {a:"Way too much",h:"We hear that a lot.",say:"You don’t have to fight it alone. A coach, a schedule and a team that has their back turn those hours into&nbsp;practice.",cta:"Count me in"}]},
+ games:{kick:"Quick question",q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the list",
+  opts:[{a:"Fortnite"},{a:"Minecraft"},{a:"Roblox"},{a:"Overwatch"},{a:"Super Smash Bros."},{a:"Something else"},{a:"I have no idea",none:true}],
+  h:"Sounds like a gamer. Let’s give them a&nbsp;team.",say:"We don’t teach the game. We coach the kid: teamwork, talking it through and practice with a start and an&nbsp;end.",cta:"That’s my kid",
+  noneH:"That’s normal.",noneSay:"Most parents don’t know what’s on the screen. A coach and a team give you something real to ask them&nbsp;about.",noneCta:"Count me in"},
+ shortlist:{q:"They tried them all",custom:true,sub:"Tap the ones you won’t&nbsp;miss.",skip:"Just join the list",
+  opts:[{a:"Soccer",q:"Bye, 7am Saturday kickoffs."},{a:"Baseball",q:"Four hours on a metal bleacher. Pass."},{a:"Dance",q:"Retiring from the dance-mom group chat."},{a:"Gymnastics",q:"No more 5am drop-offs."},{a:"Piano",q:"“Did you practice?” Not anymore."}],
+  keep:"",h:"Not every kid is a sports&nbsp;kid.",say:"No parking. No cleats. No sideline in the rain. Just their team and a real coach, from&nbsp;home.",cta:"Count me in"},
+ screentime:{kick:"Every house has one",q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join the list",
+  opts:[
+   {a:"“Five more minutes.”",h:"Let the coach call time.",say:"Practice starts on time and the coach ends it. One less doorway argument for&nbsp;you.",cta:"Count me in"},
+   {a:"“I can’t pause it.”",h:"Because their team needs them.",say:"That’s already teamwork. A coach and a weekly schedule turn it into&nbsp;practice.",cta:"Count me in"},
+   {a:"“Just one more game.”",h:"Make the games count.",say:"Weekly practice with a coach and a team that has their back, with a set end&nbsp;time.",cta:"Count me in"},
+   {a:"“I’m almost done.”",h:"Let’s add an end time that sticks.",say:"Practice has a start and an end, and the coach runs both. You don’t have to be the&nbsp;timer.",cta:"Count me in"}]}
+};
+// Aaron's handoff 2026-10-13 (docs/s1-heroes/aaron-handoff.md): which hero each ad opens with when the link has no ?hero=.
+// Ads not listed open page A. d10 is Aaron's B vs C test: each browser gets one of the two and keeps it.
+const AD_HERO={d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]};
+// HERO: hero id or "" (page A). HERO_FROM: url | ad-map | split | none. adOk keeps the d1 fallback (no or invalid ad) from mapping.
+let HERO="", HERO_FROM="none";
+{ const qh=(qs.get("hero")||"").trim().toLowerCase(), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+  if(own(HERO_DEFS,qh)){ HERO=qh; HERO_FROM="url"; }
+  else if(qh==="none"){ HERO_FROM="url"; }
+  else if(adOk&&own(AD_HERO,id)){ const v=AD_HERO[id];
+    if(typeof v==="string"){ HERO=v; HERO_FROM="ad-map"; }
+    else{ let s=""; try{ s=localStorage.getItem("ekuzo_s1_hero_"+id)||""; }catch(_){}
+      if(v.indexOf(s)<0){ s=v[Math.random()<.5?0:1]; try{ localStorage.setItem("ekuzo_s1_hero_"+id,s); }catch(_){} }
+      HERO=s; HERO_FROM="split"; } } }
+const HD = HERO ? HERO_DEFS[HERO] : undefined;
+let heroAnswer="";
+if(HD){
+  const ih=document.getElementById("ihero"), joinTop=document.getElementById("join-top");
+  lp.classList.add("has-ihero"); ih.hidden=false;
+  const bg=document.querySelector("#hero img.ph, #hero img");
+  const pos=bg?getComputedStyle(bg).objectPosition:"";
+  if(HD.custom){ ih.classList.add("light"); lp.classList.add("light-top");
+  { // Take the ad's own colours: its background, text colour and accent
+    const art=document.querySelector("#hero .art"), cs=art?getComputedStyle(art):null;
+    const bgc=(cs&&cs.backgroundColor&&cs.backgroundColor!=="rgba(0, 0, 0, 0)")?cs.backgroundColor:"#111013";
+    const rgb=(bgc.match(/\d+/g)||[17,16,19]).slice(0,3).map(Number), L=(.2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2])/255, dark=L<.5;
+    const set=(k,v)=>ih.style.setProperty(k,v), lpset=(k,v)=>lp.style.setProperty(k,v);
+    set("--sl-bg",bgc); [set,lpset].forEach(f=>{ f("--sl-fg",dark?"#FFFFFF":"#111013"); });
+    if(!dark){ const a=getComputedStyle(lp).getPropertyValue("--acc").trim(); const m=a.match(/^#?([0-9a-f]{6})$/i);
+      if(m){ const n=parseInt(m[1],16), c=[n>>16,(n>>8)&255,n&255].map(v=>Math.round(v*.55)); set("--sl-acc",`rgb(${c.join(",")})`); } }
+    set("--sl-muted",dark?"rgba(255,255,255,.72)":"rgba(17,16,19,.68)"); set("--sl-line",dark?"rgba(255,255,255,.28)":"rgba(17,16,19,.25)"); set("--sl-field",dark?"rgba(255,255,255,.08)":"#FFFFFF");
+  }
+  ih.innerHTML=`<span class="sl-kick">Sound familiar?</span>
+   <h1 id="ih-q">They tried them all<i>.</i></h1>
+   <p class="ih-sub">${HD.sub}</p>
+   <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<div class="sl-row"><button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button><span class="sl-q" aria-live="polite" hidden>${o.q}</span></div>`).join("")}</div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say">${HD.say}</p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
+   <button type="button" class="ih-skip">${HD.skip}</button>`;
+  } else
+  ih.innerHTML=`${bg?`<img class="ih-bg" src="${bg.src}" alt="">`:""}
+   <span class="kick">${HD.kick}</span>
+   <h1 id="ih-q">${HD.q}</h1>
+   <p class="ih-sub">${HD.sub}</p>
+   <div class="ih-opts ${HERO==="screentime"?"quotes":HERO}" role="group" aria-label="${HD.q}">${HD.opts.map((o,i)=>`<button type="button" class="ih-opt${o.none?" wide":""}" aria-pressed="false" data-i="${i}">${o.a}</button>`).join("")}</div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2></h2><p class="ih-say"></p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
+   <button type="button" class="ih-skip">${HD.skip}</button>`;
+  if(pos) ih.style.setProperty("--ihpos",pos);
+  ih.querySelector(".ih-slot").appendChild(joinTop);
+  const resp=ih.querySelector(".ih-resp"), skip=ih.querySelector(".ih-skip"), btns=[...ih.querySelectorAll(".ih-opt")];
+  const setCta=label=>{ if(!qs.get("cta")) joinTop.querySelector("button[type=submit]").textContent=label; };
+  let opened=false;
+  const open=()=>{ resp.classList.add("on"); skip.hidden=true;
+    if(!opened){ opened=true; setTimeout(()=>{ const f=joinTop.querySelector("form"); const r=f.getBoundingClientRect();
+      if(r.bottom>innerHeight-8) f.scrollIntoView({behavior:"smooth",block:"end"}); },380); } };
+  btns.forEach(b=>b.addEventListener("click",()=>{
+    const o=HD.opts[+b.dataset.i];
+    if(HERO==="shortlist"){
+      const onS=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",onS);
+      const q=b.parentElement.querySelector(".sl-q"); if(q) q.hidden=!onS;
+      heroAnswer=btns.filter(x=>x.getAttribute("aria-pressed")==="true").map(x=>x.textContent).join(", ");
+      setCta(HD.cta);
+      if(!heroAnswer){ return; }
+    }else if(HERO!=="games"){
+      btns.forEach(x=>x.setAttribute("aria-pressed",x===b));
+      heroAnswer=o.a; resp.querySelector("h2").innerHTML=o.h; resp.querySelector(".ih-say").innerHTML=o.say; setCta(o.cta);
+    }else{
+      const on=b.getAttribute("aria-pressed")!=="true";
+      b.setAttribute("aria-pressed",on);
+      // "I have no idea" stands alone: picking it clears the games, picking a game clears it
+      btns.forEach(x=>{ if(x!==b && on && (!!HD.opts[+x.dataset.i].none!==!!o.none)) x.setAttribute("aria-pressed","false"); });
+      const picked=btns.filter(x=>x.getAttribute("aria-pressed")==="true").map(x=>x.textContent);
+      heroAnswer=picked.join(", ");
+      const listLine=resp.querySelector(".ih-list");
+      if(picked.length===1&&HD.opts[+b.dataset.i].none&&on){ heroAnswer="I have no idea";
+        resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML=""; listLine.innerHTML="That’s normal. Join the Season&nbsp;01 list."; setCta(HD.noneCta);
+        ga("hero_answer",{hero:HERO}); clr("event","hero_answer"); open(); return; }
+      const named=picked.filter(x=>x!=="Something else"&&x!=="I have no idea");
+      const lead=!picked.length?"":named.length===0?"Got it.":named.length===1?`${named[0]}. Got it.`:named.length===2?`${named[0]} and ${named[1]}. Got it.`:`${named[0]}, ${named[1]} and ${named.length-2} more. Got it.`;
+      resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML="";
+      listLine.innerHTML="Join the Season&nbsp;01 list."; setCta(HD.cta);
+    }
+    ga("hero_answer",{hero:HERO}); clr("event","hero_answer");
+    open();
+  }));
+  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Save their spot."; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
+  // ga is defined further down this script; send hero_view once the whole script has run (the Clarity hero tag is set below with the ad tag)
+  setTimeout(()=>{ ga("hero_view",{hero:HERO}); },0);
+}
+
 // Funnel instrumentation (SC-3): GA4 events and Clarity tags only, all keyed by the ad id. Never sent to Meta, and never the email, the game chips or anything about the child. Every call is guarded so tracking can never break the page or the sign-up.
-const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id},p)); }catch(_){} };
+const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id,hero:HERO||"none"},p)); }catch(_){} };
 const clr=(...a)=>{ try{ window.clarity&&clarity(...a); }catch(_){} };
 const hp=f=>!!(f.ekz_hp&&f.ekz_hp.value);
-clr("set","ad",d.id);
+clr("set","ad",d.id); clr("set","hero",HERO||"none");
 ["utm_content","utm_term","site"].forEach(k=>{ const v=qs.get(k); if(v) clr("set",k,v.slice(0,100)); });
 const faqSeen=new Set();
 document.querySelectorAll(".faq details").forEach(el=>el.addEventListener("toggle",()=>{ try{
@@ -1031,14 +1305,14 @@ document.querySelectorAll(".join form").forEach(f=>{
 const hdr=document.querySelector(".lp header");
 const onScroll=()=>hdr.classList.toggle("solid", scrollY > 24);
 addEventListener("scroll",onScroll,{passive:true}); onScroll();
-const goForm = ()=>{ const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}); },450); };
+const goForm = ()=>{ if(HD&&!document.querySelector(".ih-resp.on")){ document.querySelector(".ih-skip")?.click(); document.getElementById("ihero").scrollIntoView({behavior:"smooth",block:"start"}); return; } const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}); },450); };
 document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
 document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
 
 // Sticky CTA: shows once the top form is off screen, hides when the bottom form is on screen
 const sticky = document.getElementById("sticky"); let topVis=true, endVis=false, joined=false;
 const upd=()=>sticky.classList.toggle("on", !joined && !topVis && !endVis);
-new IntersectionObserver(e=>{topVis=e[0].isIntersecting;upd();}).observe(document.getElementById("join-top"));
+new IntersectionObserver(e=>{topVis=e[0].isIntersecting;upd();}).observe(document.getElementById(HD?"ihero":"join-top"));
 new IntersectionObserver(e=>{endVis=e[0].isIntersecting;upd();}).observe(document.getElementById("join-end"));
 
 // Sign-ups go to the site's /api/season-one route (Klaviyo "Season 01 Waitlist" list).
@@ -1061,16 +1335,17 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
   if(!eventId) eventId=newEventId();
   let why="network";
   try{
-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     why="server"; if(!r.ok) throw 0;
     why="";
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
     if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
       // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
-      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id}); }catch(_){}
+      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id,hero:HERO||"none"}); }catch(_){}
       // Clarity: same moment, same gating. A named event and one session tag, nothing else.
       clr("event","signup"); clr("set","signed_up","yes"); }
     savedEmail=em; joined=true; upd(); showDone();
+    if(HERO==="games"&&heroAnswer&&heroAnswer!=="I have no idea"){ post({step:"games",email:em,kidGames:heroAnswer}).catch(()=>{}); }
   }catch(_){ if(why&&!hp(f)) ga("signup_error",{reason:why}); btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
 }));
 function showDone(){
@@ -1079,13 +1354,16 @@ function showDone(){
   document.querySelectorAll(".lp header,#sticky").forEach(x=>x.hidden=true);
   c.querySelector("h2").focus({preventScroll:true});
   setTimeout(()=>c.classList.add("on"),700);
-  let gt;
-  c.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{
-    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed")!=="true");
-    const picked=[...c.querySelectorAll('.chips button[aria-pressed="true"]')].map(x=>x.textContent);
-    c.querySelector(".age .thanks").hidden=!picked.length;
-    clearTimeout(gt); gt=setTimeout(()=>{ if(picked.length) post({step:"games",email:savedEmail,kidGames:picked.join(", ")}).catch(()=>{}); },900);
-  }));
+  const sb=document.getElementById("share");
+  if(sb && !sb.dataset.on){ sb.dataset.on="1"; sb.addEventListener("click",async()=>{
+    // Clean link: the same ad and hero, tagged as a share. No email, no answers.
+    const u=new URL(location.origin+location.pathname); u.searchParams.set("ad",d.id); u.searchParams.set("hero",HD?HERO:"none"); u.searchParams.set("utm_source","share"); u.searchParams.set("utm_medium","referral");
+    const url=u.toString(), th=c.querySelector(".age .thanks");
+    ga("share_click",{}); clr("event","share_click");
+    try{ if(navigator.share){ await navigator.share({title:"EKUZO Season 01",text:"Saw this and thought of you. Real coaches and a team for kids who game.",url}); th.textContent="Thanks for passing it on."; th.hidden=false; return; } }catch(e){ if(e&&e.name==="AbortError") return; }
+    try{ await navigator.clipboard.writeText(url); sb.textContent="Link copied"; th.textContent="Paste it in a text to them."; th.hidden=false; }
+    catch(_){ th.textContent=url; th.hidden=false; }
+  }); }
 }
 // Design preview: ?preview=done opens straight to the confirmation (nothing is sent)
 if(qs.get("preview")==="done") showDone();

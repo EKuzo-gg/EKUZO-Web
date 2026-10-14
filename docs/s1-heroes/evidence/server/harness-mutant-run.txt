@@ -1,0 +1,608 @@
+PASS [SANITY] reference route (origin/dev) contains no hero code
+PASS [SANITY] reference route ignores hero fields entirely
+PASS [C2] hero=amount answer="A little" from=url stored verbatim
+PASS [N4] hero=amount: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=amount answer="A little" from=ad-map stored verbatim
+PASS [C2] hero=amount answer="A little" from=split stored verbatim
+PASS [C2] hero=amount answer="A lot" from=url stored verbatim
+PASS [N4] hero=amount: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=amount answer="A lot" from=ad-map stored verbatim
+PASS [C2] hero=amount answer="A lot" from=split stored verbatim
+PASS [C2] hero=amount answer="Way too much" from=url stored verbatim
+PASS [N4] hero=amount: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=amount answer="Way too much" from=ad-map stored verbatim
+PASS [C2] hero=amount answer="Way too much" from=split stored verbatim
+PASS [C2] hero=screentime answer="“Five more minutes.”" from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="“Five more minutes.”" from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="“Five more minutes.”" from=split stored verbatim
+PASS [C2] hero=screentime answer="“I can’t pause it.”" from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="“I can’t pause it.”" from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="“I can’t pause it.”" from=split stored verbatim
+PASS [C2] hero=screentime answer="“Just one more game.”" from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="“Just one more game.”" from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="“Just one more game.”" from=split stored verbatim
+PASS [C2] hero=screentime answer="“I’m almost done.”" from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="“I’m almost done.”" from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="“I’m almost done.”" from=split stored verbatim
+PASS [C2] hero=screentime answer="Five more minutes." from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="Five more minutes." from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="Five more minutes." from=split stored verbatim
+PASS [C2] hero=screentime answer="I can’t pause it." from=url stored verbatim
+PASS [N4] hero=screentime: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=screentime answer="I can’t pause it." from=ad-map stored verbatim
+PASS [C2] hero=screentime answer="I can’t pause it." from=split stored verbatim
+PASS [C2] hero=games answer="Fortnite" from=url stored verbatim
+PASS [N4] hero=games: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=games answer="Fortnite" from=ad-map stored verbatim
+PASS [C2] hero=games answer="Fortnite" from=split stored verbatim
+PASS [C2] hero=games answer="Fortnite, Something else" from=url stored verbatim
+PASS [N4] hero=games: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=games answer="Fortnite, Something else" from=ad-map stored verbatim
+PASS [C2] hero=games answer="Fortnite, Something else" from=split stored verbatim
+PASS [C2] hero=games answer="Fortnite, Minecraft, Roblox, Overwatch, Super Smash Bros., Something else" from=url stored verbatim
+PASS [N4] hero=games: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=games answer="Fortnite, Minecraft, Roblox, Overwatch, Super Smash Bros., Something else" from=ad-map stored verbatim
+PASS [C2] hero=games answer="Fortnite, Minecraft, Roblox, Overwatch, Super Smash Bros., Something else" from=split stored verbatim
+PASS [C2] hero=games answer="I have no idea" from=url stored verbatim
+PASS [N4] hero=games: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=games answer="I have no idea" from=ad-map stored verbatim
+PASS [C2] hero=games answer="I have no idea" from=split stored verbatim
+PASS [C2] hero=shortlist answer="Soccer" from=url stored verbatim
+PASS [N4] hero=shortlist: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=shortlist answer="Soccer" from=ad-map stored verbatim
+PASS [C2] hero=shortlist answer="Soccer" from=split stored verbatim
+PASS [C2] hero=shortlist answer="Soccer, Dance" from=url stored verbatim
+PASS [N4] hero=shortlist: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=shortlist answer="Soccer, Dance" from=ad-map stored verbatim
+PASS [C2] hero=shortlist answer="Soccer, Dance" from=split stored verbatim
+PASS [C2] hero=shortlist answer="Soccer, Baseball, Dance, Gymnastics, Piano" from=url stored verbatim
+PASS [N4] hero=shortlist: exactly 1 event, 1 subscribe, 1 CAPI Lead
+PASS [C2] hero=shortlist answer="Soccer, Baseball, Dance, Gymnastics, Piano" from=ad-map stored verbatim
+PASS [C2] hero=shortlist answer="Soccer, Baseball, Dance, Gymnastics, Piano" from=split stored verbatim
+PASS [C3] hero " Amount " normalizes to its id
+PASS [C3] hero "AMOUNT" normalizes to its id
+PASS [C3] hero "Games\n" normalizes to its id
+PASS [C3] hero "\tshortlist" normalizes to its id
+PASS [C3] hero "ScreenTime" normalizes to its id
+PASS [C4] hero=amount heroAnswer empty string -> skipped
+PASS [C4] hero=amount heroAnswer missing -> skipped
+PASS [C4] hero=amount heroAnswer whitespace -> skipped
+FAIL [C4] hero=amount heroAnswer symbols only -> skipped  :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.017Z","season1_hero":"amount","season1_hero_answer":"<>"}
+PASS [C4] hero=amount heroAnswer null -> skipped
+PASS [C4] hero=amount heroAnswer zero-width only -> skipped
+PASS [C4] hero=games heroAnswer empty string -> skipped
+PASS [C4] hero=games heroAnswer missing -> skipped
+PASS [C4] hero=games heroAnswer whitespace -> skipped
+FAIL [C4] hero=games heroAnswer symbols only -> skipped  :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.022Z","season1_hero":"games","season1_hero_answer":"<>"}
+PASS [C4] hero=games heroAnswer null -> skipped
+PASS [C4] hero=games heroAnswer zero-width only -> skipped
+PASS [C4] hero=screentime heroAnswer empty string -> skipped
+PASS [C4] hero=screentime heroAnswer missing -> skipped
+PASS [C4] hero=screentime heroAnswer whitespace -> skipped
+FAIL [C4] hero=screentime heroAnswer symbols only -> skipped  :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.028Z","season1_hero":"screentime","season1_hero_answer":"<>"}
+PASS [C4] hero=screentime heroAnswer null -> skipped
+PASS [C4] hero=screentime heroAnswer zero-width only -> skipped
+PASS [C4] hero=shortlist heroAnswer empty string -> skipped
+PASS [C4] hero=shortlist heroAnswer missing -> skipped
+PASS [C4] hero=shortlist heroAnswer whitespace -> skipped
+FAIL [C4] hero=shortlist heroAnswer symbols only -> skipped  :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.035Z","season1_hero":"shortlist","season1_hero_answer":"<>"}
+PASS [C4] hero=shortlist heroAnswer null -> skipped
+PASS [C4] hero=shortlist heroAnswer zero-width only -> skipped
+PASS [C1] page A hero none, from none (d7/bare/invalid ad)
+PASS [C1] page A hero none, from url (hero=none)
+PASS [C1] page A hero none with a stray answer
+PASS [C3] ad-landing with no hero keys at all (old cached client) -> hero none, answer empty, from empty
+PASS [C3] hostile hero array -> none, no error
+PASS [C3] hostile hero array two -> none, no error
+PASS [C3] hostile hero object -> none, no error
+PASS [C3] hostile hero object value -> none, no error
+PASS [C3] hostile hero number -> none, no error
+PASS [C3] hostile hero zero -> none, no error
+PASS [C3] hostile hero true -> none, no error
+PASS [C3] hostile hero null -> none, no error
+PASS [C3] hostile hero __proto__ -> none, no error
+PASS [C3] hostile hero constructor -> none, no error
+PASS [C3] hostile hero toString -> none, no error
+PASS [C3] hostile hero hasOwnProperty -> none, no error
+PASS [C3] hostile hero valueOf -> none, no error
+PASS [C3] hostile hero prototype -> none, no error
+PASS [C3] hostile hero none string -> none, no error
+PASS [C3] hostile hero unknown -> none, no error
+PASS [C3] hostile hero empty -> none, no error
+PASS [C3] hostile hero 10k chars -> none, no error
+PASS [C3] hostile hero 10k then amount -> none, no error
+PASS [C3] hostile hero amount then 10k spaces then junk -> none, no error
+PASS [C3] hostile hero img onerror -> none, no error
+PASS [C3] hostile hero javascript url -> none, no error
+PASS [C3] hostile hero amount plus markup -> none, no error
+PASS [C3] hostile hero amount NUL -> none, no error
+PASS [C3] hostile hero amo zero-width ssh -> none, no error
+PASS [C3] hostile hero RTL override -> none, no error
+PASS [C3] hostile hero fullwidth -> none, no error
+PASS [C3] hostile hero turkish dotless -> amount, no error
+PASS [C3] hostile hero games with trailing dot -> none, no error
+PASS [C3] hostile hero Games with unicode space -> games, no error
+PASS [C3] only allowlisted hero values ever reach Klaviyo
+PASS [C3] heroFrom url -> "url"
+PASS [C3] heroFrom ad-map -> "ad-map"
+PASS [C3] heroFrom split -> "split"
+PASS [C3] heroFrom none -> "none"
+PASS [C3] heroFrom URL upper -> ""
+PASS [C3] heroFrom padded -> ""
+PASS [C3] heroFrom array -> ""
+PASS [C3] heroFrom object -> ""
+PASS [C3] heroFrom number -> ""
+PASS [C3] heroFrom null -> ""
+PASS [C3] heroFrom true -> ""
+PASS [C3] heroFrom missing -> ""
+PASS [C3] heroFrom empty -> ""
+PASS [C3] heroFrom unknown -> ""
+PASS [C3] heroFrom __proto__ -> ""
+PASS [C3] heroFrom constructor -> ""
+PASS [C3] heroFrom toString -> ""
+PASS [C3] heroFrom markup -> ""
+PASS [C3] heroFrom 10k -> ""
+PASS [C3] heroFrom url+NUL -> ""
+PASS [C2] heroFrom is event-only (no season1_hero_from on the profile)
+PASS [C2] profile gets exactly season1_hero and season1_hero_answer as new keys
+PASS [C2] event gets exactly hero, hero_answer, hero_from as new keys
+PASS [C2] all hero property values are strings
+PASS [C4] hostile answer array -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   array: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   array: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer object -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   object: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   object: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer number -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   number: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   number: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer true -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   true: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   true: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer null -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   null: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   null: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer __proto__ -> "proto" (oracle match, allowlist only, <=200)
+PASS [C4]   __proto__: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   __proto__: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer constructor -> "constructor" (oracle match, allowlist only, <=200)
+PASS [C4]   constructor: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   constructor: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer 10k chars -> "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...(200)" (oracle match, allowlist only, <=200)
+PASS [C4]   10k chars: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   10k chars: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer 10k words -> "word word word word word word word word ...(200)" (oracle match, allowlist only, <=200)
+PASS [C4]   10k words: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   10k words: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer 201 chars -> "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb...(200)" (oracle match, allowlist only, <=200)
+PASS [C4]   201 chars: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   201 chars: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer 200 chars -> "cccccccccccccccccccccccccccccccccccccccc...(200)" (oracle match, allowlist only, <=200)
+PASS [C4]   200 chars: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   200 chars: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer 199 chars + space + x -> "dddddddddddddddddddddddddddddddddddddddd...(200)" (oracle match, allowlist only, <=200)
+PASS [C4]   199 chars + space + x: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   199 chars + space + x: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+FAIL [C4] hostile answer img onerror -> "<img srcx onerroralert1>" (oracle match, allowlist only, <=200)  :: got="<img srcx onerroralert1>" exp="img srcx onerroralert1"
+FAIL [C4]   img onerror: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   img onerror: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+FAIL [C4] hostile answer svg onload -> "<svgonloadalert1>" (oracle match, allowlist only, <=200)  :: got="<svgonloadalert1>" exp="svgonloadalert1"
+FAIL [C4]   svg onload: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   svg onload: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+FAIL [C4] hostile answer script -> "<script>alertdocument.cookie<script>" (oracle match, allowlist only, <=200)  :: got="<script>alertdocument.cookie<script>" exp="scriptalertdocument.cookiescript"
+FAIL [C4]   script: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   script: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer javascript url -> "javascriptalert1" (oracle match, allowlist only, <=200)
+PASS [C4]   javascript url: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   javascript url: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer data url -> "datatexthtmlbase64,PHNjcmlwdD4" (oracle match, allowlist only, <=200)
+PASS [C4]   data url: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   data url: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer https url -> "httpsevil.example.compath?ab&cdfrag" (oracle match, allowlist only, <=200)
+PASS [C4]   https url: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   https url: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer bare domain -> "evil.com" (oracle match, allowlist only, <=200)
+PASS [C4]   bare domain: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   bare domain: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer mailto -> "mailtoab.co" (oracle match, allowlist only, <=200)
+PASS [C4]   mailto: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   mailto: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer markdown link -> "clickhttpevil.com" (oracle match, allowlist only, <=200)
+PASS [C4]   markdown link: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   markdown link: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer html entity -> "&ltscript&gtalert1&ltscript&gt" (oracle match, allowlist only, <=200)
+PASS [C4]   html entity: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   html entity: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer numeric entity -> "&60script&62" (oracle match, allowlist only, <=200)
+PASS [C4]   numeric entity: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   numeric entity: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer klaviyo template -> "person.email   include 'x'   77" (oracle match, allowlist only, <=200)
+PASS [C4]   klaviyo template: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   klaviyo template: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer django filter -> "'a'upper" (oracle match, allowlist only, <=200)
+PASS [C4]   django filter: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   django filter: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer jinja dollar -> "77 77 77" (oracle match, allowlist only, <=200)
+PASS [C4]   jinja dollar: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   jinja dollar: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer sql -> "' DROP TABLE users--" (oracle match, allowlist only, <=200)
+PASS [C4]   sql: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   sql: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer sql2 -> "\" OR 11 --" (oracle match, allowlist only, <=200)
+PASS [C4]   sql2: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   sql2: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer csv formula -> "HYPERLINK\"httpevil\",\"x\"" (oracle match, allowlist only, <=200)
+PASS [C4]   csv formula: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   csv formula: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer csv formula minus -> "-23cmd' C calc'!A0" (oracle match, allowlist only, <=200)
+PASS [C4]   csv formula minus: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   csv formula minus: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer at formula -> "SUM11" (oracle match, allowlist only, <=200)
+PASS [C4]   at formula: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   at formula: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer plus formula -> "11" (oracle match, allowlist only, <=200)
+PASS [C4]   plus formula: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   plus formula: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer RTL override -> "evil Soccer" (oracle match, allowlist only, <=200)
+PASS [C4]   RTL override: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   RTL override: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer LRM RLM -> "Soccer" (oracle match, allowlist only, <=200)
+PASS [C4]   LRM RLM: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   LRM RLM: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer zero width -> "Soccer" (oracle match, allowlist only, <=200)
+PASS [C4]   zero width: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   zero width: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer BOM -> "Soccer" (oracle match, allowlist only, <=200)
+PASS [C4]   BOM: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   BOM: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer control chars -> "Soccer31m" (oracle match, allowlist only, <=200)
+PASS [C4]   control chars: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   control chars: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer newlines -> "SoccerDancePianox" (oracle match, allowlist only, <=200)
+PASS [C4]   newlines: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   newlines: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer line sep -> "abc" (oracle match, allowlist only, <=200)
+PASS [C4]   line sep: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   line sep: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer emoji -> "Soccer   Dance" (oracle match, allowlist only, <=200)
+PASS [C4]   emoji: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   emoji: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer combining marks -> "Cafe" (oracle match, allowlist only, <=200)
+PASS [C4]   combining marks: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   combining marks: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer astral letters -> "𝐒𝐨𝐜𝐜𝐞𝐫" (oracle match, allowlist only, <=200)
+PASS [C4]   astral letters: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   astral letters: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer CJK -> "サッカーダンス" (oracle match, allowlist only, <=200)
+PASS [C4]   CJK: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   CJK: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer Arabic -> "كرة القدم الرقص" (oracle match, allowlist only, <=200)
+PASS [C4]   Arabic: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   Arabic: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer fullwidth angle -> "scriptalert1script" (oracle match, allowlist only, <=200)
+PASS [C4]   fullwidth angle: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   fullwidth angle: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer null byte -> "Soccer" (oracle match, allowlist only, <=200)
+PASS [C4]   null byte: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   null byte: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer backslash json -> "\",\"hero\"\"games\",\"x\"\"" (oracle match, allowlist only, <=200)
+PASS [C4]   backslash json: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   backslash json: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer json breakout -> "\",\"season1hero\"\"amount" (oracle match, allowlist only, <=200)
+PASS [C4]   json breakout: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   json breakout: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer curly quotes -> "“Five more minutes.”" (oracle match, allowlist only, <=200)
+PASS [C4]   curly quotes: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   curly quotes: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer straight quote -> "He said \"no\"" (oracle match, allowlist only, <=200)
+PASS [C4]   straight quote: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   straight quote: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer apostrophes -> "I can't, can’t, 'quoted'" (oracle match, allowlist only, <=200)
+PASS [C4]   apostrophes: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   apostrophes: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer ampersand -> "Tom & Jerry" (oracle match, allowlist only, <=200)
+PASS [C4]   ampersand: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   ampersand: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer hyphen lead -> "-leading hyphen" (oracle match, allowlist only, <=200)
+PASS [C4]   hyphen lead: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   hyphen lead: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer percent encoded -> "3Cscript3E" (oracle match, allowlist only, <=200)
+PASS [C4]   percent encoded: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   percent encoded: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+FAIL [C4] hostile answer only symbols -> "<>" (oracle match, allowlist only, <=200)  :: got="<>" exp="skipped"
+FAIL [C4]   only symbols: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   only symbols: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer only spaces -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   only spaces: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   only spaces: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+PASS [C4] hostile answer emoji only -> "skipped" (oracle match, allowlist only, <=200)
+PASS [C4]   emoji only: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer
+PASS [N11]   emoji only: stored answer is well-formed UTF-16 (no lone surrogate; JSON.stringify escapes them so the wire text alone cannot show it)
+FAIL [N11] astral-letter answer cut at 200 UTF-16 units leaves a well-formed string  :: len=200, last code unit=0xd835
+PASS [C4] 200 char cap on plain ASCII
+FAIL [C4] cap is applied after trim, so a 200-char cut inside a long whitespace run can leave trailing spaces (interior whitespace is not collapsed)  :: 200
+PASS [N11] perf 5MB allowed chars: handled in <1500 ms, status 200 (took 51 ms)
+PASS [N11] perf 5MB alternating: handled in <1500 ms, status 200 (took 40 ms)
+PASS [N11] perf 5MB spaces then junk: handled in <1500 ms, status 200 (took 45 ms)
+PASS [N11] perf 2MB astral: handled in <1500 ms, status 200 (took 102 ms)
+PASS [N11] prototype pollution body: no 5xx, hero none, Object.prototype untouched
+FAIL [C6] popup + __proto__ hero: no hero keys
+PASS [N11] __proto__ cannot flip source
+PASS [N11] array body: build matches origin/dev (status 400)
+PASS [N11] string body: build matches origin/dev (status 400)
+PASS [N11] null body: build matches origin/dev (status 400)
+PASS [N11] invalid json: build matches origin/dev (status 400)
+PASS [N11] empty body: build matches origin/dev (status 400)
+PASS [N11] number body: build matches origin/dev (status 400)
+FAIL [C6] popup variant "explicit popup": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.480Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "explicit popup": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "explicit popup": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source missing": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.486Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source missing": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source missing": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source unknown": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.489Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source unknown": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source unknown": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source array": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.491Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source array": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source array": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source object": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.494Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source object": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source object": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source number": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.497Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source number": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source number": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source AD-LANDING uppercase": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.500Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source AD-LANDING uppercase": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source AD-LANDING uppercase": CAPI payload content_name season_one_popup, identical to origin/dev
+FAIL [C6] popup variant "source padded": zero hero keys on profile and event  :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.502Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+FAIL [C6] popup variant "source padded": all outbound calls byte-identical to origin/dev
+FAIL [N1] popup variant "source padded": CAPI payload content_name season_one_popup, identical to origin/dev
+PASS [N11] step games (ad-landing) with hero fields: no hero keys, identical to origin/dev
+PASS [N11] step games (ad-landing): one Klaviyo event only, no subscribe, no CAPI
+PASS [N11] step games (site-popup) with hero fields: no hero keys, identical to origin/dev
+PASS [N11] step games (site-popup): one Klaviyo event only, no subscribe, no CAPI
+PASS [N11] step age (ad-landing) with hero fields: no hero keys, identical to origin/dev
+PASS [N11] step age (ad-landing): one Klaviyo event only, no subscribe, no CAPI
+PASS [N11] step age (site-popup) with hero fields: no hero keys, identical to origin/dev
+PASS [N11] step age (site-popup): one Klaviyo event only, no subscribe, no CAPI
+PASS [N4] unknown step -> 400, no calls (same as origin/dev)
+PASS [N4] honeypot "x" with hero fields: 200, zero outbound calls
+PASS [N4] honeypot "http://spam" with hero fields: 200, zero outbound calls
+PASS [N4] honeypot " y " with hero fields: 200, zero outbound calls
+PASS [N4] honeypot "0" with hero fields: 200, zero outbound calls
+PASS [N4] whitespace-only honeypot is treated as empty (same as origin/dev): sign-up proceeds
+PASS [N4] Klaviyo event 500: 502 and ok:false, no subscribe, no CAPI Lead (build)
+PASS [N4] Klaviyo event 500: same status/body as origin/dev
+PASS [N4] Klaviyo event 500: error body does not echo the answer or hero
+PASS [N4] Klaviyo event 401: 502 and ok:false, no subscribe, no CAPI Lead (build)
+PASS [N4] Klaviyo event 401: same status/body as origin/dev
+PASS [N4] Klaviyo event 401: error body does not echo the answer or hero
+PASS [N4] Klaviyo event 429: 502 and ok:false, no subscribe, no CAPI Lead (build)
+PASS [N4] Klaviyo event 429: same status/body as origin/dev
+PASS [N4] Klaviyo event 429: error body does not echo the answer or hero
+PASS [N4] Klaviyo event network throw: 502 and ok:false, no subscribe, no CAPI Lead (build)
+PASS [N4] Klaviyo event network throw: same status/body as origin/dev
+PASS [N4] Klaviyo event network throw: error body does not echo the answer or hero
+PASS [N4] subscribe 500: still 200 and CAPI Lead still sent
+PASS [N4] subscribe network throw: still 200 and CAPI Lead still sent
+PASS [N4] CAPI 500: sign-up still 200
+PASS [N4] CAPI network throw: sign-up still 200
+PASS [N4] env present for harness
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): page A d7 no hero keys
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): page A d7 no hero keys  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: page A d7 no hero keys
+PASS [N1] exact set of outbound URLs identical to origin/dev: page A d7 no hero keys
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: page A d7 no hero keys  :: {"content_name":"season_one_d7","hero":"undefined"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): page A d7 hero none
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): page A d7 hero none  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: page A d7 hero none
+PASS [N1] exact set of outbound URLs identical to origin/dev: page A d7 hero none
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: page A d7 hero none  :: {"content_name":"season_one_d7","hero":"none"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hero amount
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero amount  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hero amount
+PASS [N1] exact set of outbound URLs identical to origin/dev: hero amount
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero amount  :: {"content_name":"season_one_d1","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hero games
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero games  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hero games
+PASS [N1] exact set of outbound URLs identical to origin/dev: hero games
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero games  :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hero screentime
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero screentime  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hero screentime
+PASS [N1] exact set of outbound URLs identical to origin/dev: hero screentime
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero screentime  :: {"content_name":"season_one_d2","hero":"screentime"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hero shortlist
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero shortlist  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hero shortlist
+PASS [N1] exact set of outbound URLs identical to origin/dev: hero shortlist
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero shortlist  :: {"content_name":"season_one_d5","hero":"shortlist"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hero split d10
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero split d10  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hero split d10
+PASS [N1] exact set of outbound URLs identical to origin/dev: hero split d10
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero split d10  :: {"content_name":"season_one_d10","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): hostile hero+answer
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hostile hero+answer  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: hostile hero+answer
+PASS [N1] exact set of outbound URLs identical to origin/dev: hostile hero+answer
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hostile hero+answer  :: {"content_name":"season_one_d4","hero":"x"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): no eventId (server makes one)
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): no eventId (server makes one)  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"ef01d45e-bde5-4fa6-883f-afe6dcc6e3a1","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbc
+PASS [N1] Klaviyo subscribe call identical to origin/dev: no eventId (server makes one)
+PASS [N1] exact set of outbound URLs identical to origin/dev: no eventId (server makes one)
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: no eventId (server makes one)  :: {"content_name":"season_one_d6","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): eventId with junk
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): eventId with junk  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"ev-123","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data":{"em":
+PASS [N1] Klaviyo subscribe call identical to origin/dev: eventId with junk
+PASS [N1] exact set of outbound URLs identical to origin/dev: eventId with junk
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: eventId with junk  :: {"content_name":"season_one_d6","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): explicit hero in eventSourceUrl
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): explicit hero in eventSourceUrl  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&hero=games&fbclid=Q","user_data":{"em":["3
+PASS [N1] Klaviyo subscribe call identical to origin/dev: explicit hero in eventSourceUrl
+PASS [N1] exact set of outbound URLs identical to origin/dev: explicit hero in eventSourceUrl
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: explicit hero in eventSourceUrl  :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): javascript: eventSourceUrl
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): javascript: eventSourceUrl  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","user_data":{"em":["37b19a81965da651c7e878372cb1ca4e4c61146e968a5956b50aadb1f85c1bbe"],"clien
+PASS [N1] Klaviyo subscribe call identical to origin/dev: javascript: eventSourceUrl
+PASS [N1] exact set of outbound URLs identical to origin/dev: javascript: eventSourceUrl
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: javascript: eventSourceUrl  :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): d13 (not an ad id)
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): d13 (not an ad id)  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: d13 (not an ad id)
+PASS [N1] exact set of outbound URLs identical to origin/dev: d13 (not an ad id)
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: d13 (not an ad id)  :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): d010 quirk
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): d010 quirk  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: d010 quirk
+PASS [N1] exact set of outbound URLs identical to origin/dev: d010 quirk
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: d010 quirk  :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+FAIL [N1] CAPI request identical to origin/dev (minus event_time): bad ad
+FAIL [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): bad ad  :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+PASS [N1] Klaviyo subscribe call identical to origin/dev: bad ad
+PASS [N1] exact set of outbound URLs identical to origin/dev: bad ad
+FAIL [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: bad ad  :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+INFO event_source_url passes through to Meta verbatim, incl. ?hero=: https://ekuzo.gg/season1?ad=d3&hero=games&fbclid=Q
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A d7 (no hero fields)
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: page A d7 (no hero fields)
+INFO key diff for page A d7 (no hero fields): event +[hero,hero_answer,hero_from], profile +[season1_hero,season1_hero_answer]
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A d11
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: page A d11
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A bare (no ad)
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: page A bare (no ad)
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A with firstName
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: page A with firstName
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: no attribution
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: no attribution
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: hostile attribution
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: hostile attribution
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: ad-landing d3 with hero fields
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: ad-landing d3 with hero fields
+FAIL [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: ad-landing d10 split
+PASS [N3/N4] only additions are event {hero,hero_answer,hero_from} and profile {season1_hero,season1_hero_answer}: ad-landing d10 split
+FAIL [N3/N4] geo/device parsing unchanged with odd headers
+PASS [N4] email "": same status as origin/dev (400)
+PASS [N4] email "nope": same status as origin/dev (400)
+PASS [N4] email "a@b": same status as origin/dev (400)
+PASS [N4] email "a@b.c": same status as origin/dev (400)
+PASS [N4] email "ａ@b.co": same status as origin/dev (200)
+PASS [N4] email "a\u0000@b.co": same status as origin/dev (400)
+PASS [N4] email "x@y.co\n": same status as origin/dev (200)
+PASS [N4] email "a b@c.de": same status as origin/dev (400)
+PASS [N4] email "A@B.CO": same status as origin/dev (200)
+PASS [N4] email "aaaaaaaaaaaaaaaaaaaa": same status as origin/dev (400)
+INFO env KLAVIYO_PRIVATE_API_KEY was set for this run
+
+=== SUMMARY BY REQUIREMENT TAG ===
+C1: 3 pass, 0 fail
+C2: 52 pass, 0 fail
+C3: 57 pass, 0 fail
+C4: 127 pass, 13 fail
+C6: 0 pass, 17 fail
+N1: 30 pass, 53 fail
+N11: 77 pass, 1 fail
+N3: 8 pass, 9 fail
+N4: 57 pass, 9 fail
+SANITY: 2 pass, 0 fail
+TOTAL: 405 pass, 93 fail
+FAILURES:
+  [C4] hero=amount heroAnswer symbols only -> skipped :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.017Z","season1_hero":"amount","season1_hero_answer":"<>"}
+  [C4] hero=games heroAnswer symbols only -> skipped :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.022Z","season1_hero":"games","season1_hero_answer":"<>"}
+  [C4] hero=screentime heroAnswer symbols only -> skipped :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.028Z","season1_hero":"screentime","season1_hero_answer":"<>"}
+  [C4] hero=shortlist heroAnswer symbols only -> skipped :: {"season1_waitlist":"yes","season1_source":"ad-landing","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.035Z","season1_hero":"shortlist","season1_hero_answer":"<>"}
+  [C4] hostile answer img onerror -> "<img srcx onerroralert1>" (oracle match, allowlist only, <=200) :: got="<img srcx onerroralert1>" exp="img srcx onerroralert1"
+  [C4]   img onerror: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer :: 
+  [C4] hostile answer svg onload -> "<svgonloadalert1>" (oracle match, allowlist only, <=200) :: got="<svgonloadalert1>" exp="svgonloadalert1"
+  [C4]   svg onload: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer :: 
+  [C4] hostile answer script -> "<script>alertdocument.cookie<script>" (oracle match, allowlist only, <=200) :: got="<script>alertdocument.cookie<script>" exp="scriptalertdocument.cookiescript"
+  [C4]   script: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer :: 
+  [C4] hostile answer only symbols -> "<>" (oracle match, allowlist only, <=200) :: got="<>" exp="skipped"
+  [C4]   only symbols: no < > = ( ) / : ; { } [ ] | $ % @ # + \ or control chars in stored answer :: 
+  [N11] astral-letter answer cut at 200 UTF-16 units leaves a well-formed string :: len=200, last code unit=0xd835
+  [C4] cap is applied after trim, so a 200-char cut inside a long whitespace run can leave trailing spaces (interior whitespace is not collapsed) :: 200
+  [C6] popup + __proto__ hero: no hero keys :: 
+  [C6] popup variant "explicit popup": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.480Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "explicit popup": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "explicit popup": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source missing": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.486Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source missing": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source missing": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source unknown": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.489Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source unknown": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source unknown": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source array": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.491Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source array": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source array": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source object": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.494Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source object": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source object": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source number": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.497Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source number": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source number": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source AD-LANDING uppercase": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.500Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source AD-LANDING uppercase": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source AD-LANDING uppercase": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [C6] popup variant "source padded": zero hero keys on profile and event :: {"e":{"source":"site-popup","ad":"d3","ad_name":"Ad 03","where":"top","utm_source":"meta","utm_medium":"paid_social","utm_campaign":"season1","utm_content":"Ad 03","utm_term":"Instagram_Reels","utm_id":"123","site":"ig","attribution_from":"session","page":"/season1?ad=d3&utm_source=meta","geo_country":"US","geo_region":"TX","geo_city":"Austin","geo_postal":"78757","device_os":"ios","device_type":"mobile","hero":"amount","hero_answer":"Way too much","hero_from":"url"},"p":{"season1_waitlist":"yes","season1_source":"site-popup","season1_ad":"d3","season1_ad_name":"Ad 03","season1_joined_at":"2026-10-14T12:49:19.502Z","season1_hero":"amount","season1_hero_answer":"Way too much"}}
+  [C6] popup variant "source padded": all outbound calls byte-identical to origin/dev :: 
+  [N1] popup variant "source padded": CAPI payload content_name season_one_popup, identical to origin/dev :: 
+  [N1] CAPI request identical to origin/dev (minus event_time): page A d7 no hero keys :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): page A d7 no hero keys :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: page A d7 no hero keys :: {"content_name":"season_one_d7","hero":"undefined"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): page A d7 hero none :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): page A d7 hero none :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: page A d7 hero none :: {"content_name":"season_one_d7","hero":"none"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hero amount :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero amount :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero amount :: {"content_name":"season_one_d1","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hero games :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero games :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero games :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hero screentime :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero screentime :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero screentime :: {"content_name":"season_one_d2","hero":"screentime"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hero shortlist :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero shortlist :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero shortlist :: {"content_name":"season_one_d5","hero":"shortlist"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hero split d10 :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hero split d10 :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hero split d10 :: {"content_name":"season_one_d10","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): hostile hero+answer :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): hostile hero+answer :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: hostile hero+answer :: {"content_name":"season_one_d4","hero":"x"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): no eventId (server makes one) :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): no eventId (server makes one) :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"ef01d45e-bde5-4fa6-883f-afe6dcc6e3a1","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbc
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: no eventId (server makes one) :: {"content_name":"season_one_d6","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): eventId with junk :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): eventId with junk :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"ev-123","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data":{"em":
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: eventId with junk :: {"content_name":"season_one_d6","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): explicit hero in eventSourceUrl :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): explicit hero in eventSourceUrl :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&hero=games&fbclid=Q","user_data":{"em":["3
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: explicit hero in eventSourceUrl :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): javascript: eventSourceUrl :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): javascript: eventSourceUrl :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","user_data":{"em":["37b19a81965da651c7e878372cb1ca4e4c61146e968a5956b50aadb1f85c1bbe"],"clien
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: javascript: eventSourceUrl :: {"content_name":"season_one_d3","hero":"games"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): d13 (not an ad id) :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): d13 (not an ad id) :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: d13 (not an ad id) :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): d010 quirk :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): d010 quirk :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: d010 quirk :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N1] CAPI request identical to origin/dev (minus event_time): bad ad :: 
+  [N1] no hero key or answer text anywhere in the CAPI body (excluding event_source_url): bad ad :: {"data":[{"event_name":"Lead","event_time":1791982159,"event_id":"evt-0001-abcd","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&utm_source=meta&fbclid=ABC123","user_data"
+  [N1] CAPI event_name Lead, content_name season_one_<ad>, user_data keys unchanged: bad ad :: {"content_name":"season_one_landing","hero":"amount"}em,client_ip_address,client_user_agent,fbp,fbc
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A d7 (no hero fields) :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A d11 :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A bare (no ad) :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: page A with firstName :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: no attribution :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: hostile attribution :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: ad-landing d3 with hero fields :: 
+  [N3/N4] every pre-existing profile/event/subscribe/CAPI property identical to origin/dev once the 5 new hero keys are removed: ad-landing d10 split :: 
+  [N3/N4] geo/device parsing unchanged with odd headers :: 

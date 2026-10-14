@@ -1,0 +1,342 @@
+TAP version 13
+# Subtest: isWeekEligible
+    # Subtest: Jul 21 is eligible at 6:59 PM ET on Jul 21
+    ok 1 - Jul 21 is eligible at 6:59 PM ET on Jul 21
+      ---
+      duration_ms: 21.090786
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:00 PM ET on Jul 21
+    ok 2 - Jul 21 is ineligible at 7:00 PM ET on Jul 21
+      ---
+      duration_ms: 0.468625
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:01 PM ET on Jul 21
+    ok 3 - Jul 21 is ineligible at 7:01 PM ET on Jul 21
+      ---
+      duration_ms: 0.531371
+      type: 'test'
+      ...
+    # Subtest: a future Tuesday is eligible the day before
+    ok 4 - a future Tuesday is eligible the day before
+      ---
+      duration_ms: 0.353503
+      type: 'test'
+      ...
+    1..4
+ok 1 - isWeekEligible
+  ---
+  duration_ms: 23.437925
+  type: 'suite'
+  ...
+# Subtest: getEligibleWeeks
+    # Subtest: returns exactly 6 items
+    ok 1 - returns exactly 6 items
+      ---
+      duration_ms: 3.074046
+      type: 'test'
+      ...
+    # Subtest: all returned days are Tuesdays (UTC day-of-week === 2)
+    ok 2 - all returned days are Tuesdays (UTC day-of-week === 2)
+      ---
+      duration_ms: 2.698029
+      type: 'test'
+      ...
+    # Subtest: thursdays are always 2 days after their tuesday
+    ok 3 - thursdays are always 2 days after their tuesday
+      ---
+      duration_ms: 2.221115
+      type: 'test'
+      ...
+    # Subtest: skips a week that starts at exactly 7 PM ET
+    ok 4 - skips a week that starts at exactly 7 PM ET
+      ---
+      duration_ms: 3.107277
+      type: 'test'
+      ...
+    # Subtest: DST crossing Nov 1 2026 (EST transition) — should not crash
+    ok 5 - DST crossing Nov 1 2026 (EST transition) — should not crash
+      ---
+      duration_ms: 4.799341
+      type: 'test'
+      ...
+    1..5
+ok 2 - getEligibleWeeks
+  ---
+  duration_ms: 16.508556
+  type: 'suite'
+  ...
+# Subtest: buildWeeksLabel
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 1.385659
+      type: 'test'
+      ...
+    # Subtest: includes all week month-day values
+    ok 2 - includes all week month-day values
+      ---
+      duration_ms: 0.485622
+      type: 'test'
+      ...
+    # Subtest: includes the time string
+    not ok 3 - includes the time string
+      ---
+      duration_ms: 1.504184
+      type: 'test'
+      location: '/tmp/sentry-server/lib/__tests__/ekuzo101-weeks.test.ts:152:3'
+      failureType: 'testCodeFailure'
+      error: 'Label missing time: Tuesdays & Thursdays - Weeks of Jul 21 - 7-8:30 PM local time'
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: true
+      actual: false
+      operator: '=='
+      stack: |-
+        TestContext.<anonymous> (/tmp/sentry-server/lib/__tests__/ekuzo101-weeks.test.ts:154:12)
+        Test.runInAsyncScope (node:async_hooks:214:14)
+        Test.run (node:internal/test_runner/test:1047:25)
+        Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        Test.postRun (node:internal/test_runner/test:1173:19)
+        Test.run (node:internal/test_runner/test:1101:12)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    1..3
+not ok 3 - buildWeeksLabel
+  ---
+  duration_ms: 3.763925
+  type: 'suite'
+  location: '/tmp/sentry-server/lib/__tests__/ekuzo101-weeks.test.ts:139:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: buildWeekDatesSpan
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 0.617632
+      type: 'test'
+      ...
+    # Subtest: starts with the first Tuesday and ends with the last Thursday
+    ok 2 - starts with the first Tuesday and ends with the last Thursday
+      ---
+      duration_ms: 0.494305
+      type: 'test'
+      ...
+    # Subtest: handles a single week
+    ok 3 - handles a single week
+      ---
+      duration_ms: 0.488308
+      type: 'test'
+      ...
+    1..3
+ok 4 - buildWeekDatesSpan
+  ---
+  duration_ms: 1.765018
+  type: 'suite'
+  ...
+# Subtest: constants
+    # Subtest: exposes the 7-day window and the storage keys
+    ok 1 - exposes the 7-day window and the storage keys
+      ---
+      duration_ms: 0.622138
+      type: 'test'
+      ...
+    1..1
+ok 5 - constants
+  ---
+  duration_ms: 1.260439
+  type: 'suite'
+  ...
+# Subtest: resolveSeasonOneAttribution
+    # Subtest: URL wins over session and local
+    ok 1 - URL wins over session and local
+      ---
+      duration_ms: 2.093141
+      type: 'test'
+      ...
+    # Subtest: URL with only utm_source counts, with ad empty
+    ok 2 - URL with only utm_source counts, with ad empty
+      ---
+      duration_ms: 0.208403
+      type: 'test'
+      ...
+    # Subtest: URL with only a valid ad is not an ad touch: none, or falls through to session
+    ok 3 - URL with only a valid ad is not an ad touch: none, or falls through to session
+      ---
+      duration_ms: 0.40348
+      type: 'test'
+      ...
+    # Subtest: URL with only utm_id and/or site is not an ad touch
+    ok 4 - URL with only utm_id and/or site is not an ad touch
+      ---
+      duration_ms: 0.178847
+      type: 'test'
+      ...
+    # Subtest: each of the five utm_* keys alone is an ad touch
+    ok 5 - each of the five utm_* keys alone is an ad touch
+      ---
+      duration_ms: 0.182194
+      type: 'test'
+      ...
+    # Subtest: URL with only an invalid ad is not a touch and falls through to session
+    ok 6 - URL with only an invalid ad is not a touch and falls through to session
+      ---
+      duration_ms: 0.163831
+      type: 'test'
+      ...
+    # Subtest: session fallback when the URL has nothing
+    ok 7 - session fallback when the URL has nothing
+      ---
+      duration_ms: 0.249078
+      type: 'test'
+      ...
+    # Subtest: session wins over local
+    ok 8 - session wins over local
+      ---
+      duration_ms: 0.213613
+      type: 'test'
+      ...
+    # Subtest: a session record written by captureAttribution (5 utm keys, no ad) resolves with empty ad
+    ok 9 - a session record written by captureAttribution (5 utm keys, no ad) resolves with empty ad
+      ---
+      duration_ms: 0.221344
+      type: 'test'
+      ...
+    # Subtest: an empty session record falls through to local
+    ok 10 - an empty session record falls through to local
+      ---
+      duration_ms: 0.141127
+      type: 'test'
+      ...
+    # Subtest: return-visit within 7 days, ad from the same record
+    ok 11 - return-visit within 7 days, ad from the same record
+      ---
+      duration_ms: 0.108018
+      type: 'test'
+      ...
+    # Subtest: return-visit at exactly 7 days is still valid
+    ok 12 - return-visit at exactly 7 days is still valid
+      ---
+      duration_ms: 0.295357
+      type: 'test'
+      ...
+    # Subtest: expired one millisecond past 7 days
+    ok 13 - expired one millisecond past 7 days
+      ---
+      duration_ms: 0.141696
+      type: 'test'
+      ...
+    # Subtest: expired after 8 days
+    ok 14 - expired after 8 days
+      ---
+      duration_ms: 0.078911
+      type: 'test'
+      ...
+    # Subtest: future `at` is rejected
+    ok 15 - future `at` is rejected
+      ---
+      duration_ms: 0.077159
+      type: 'test'
+      ...
+    # Subtest: `at` equal to now is valid (age 0)
+    ok 16 - `at` equal to now is valid (age 0)
+      ---
+      duration_ms: 0.1257
+      type: 'test'
+      ...
+    # Subtest: non-numeric or missing `at` is rejected
+    ok 17 - non-numeric or missing `at` is rejected
+      ---
+      duration_ms: 0.139785
+      type: 'test'
+      ...
+    # Subtest: local record with a valid `at` but no values is none
+    ok 18 - local record with a valid `at` but no values is none
+      ---
+      duration_ms: 0.057744
+      type: 'test'
+      ...
+    # Subtest: malformed JSON in either storage is ignored
+    ok 19 - malformed JSON in either storage is ignored
+      ---
+      duration_ms: 0.130289
+      type: 'test'
+      ...
+    # Subtest: non-object JSON (string, number, array, null) is ignored
+    ok 20 - non-object JSON (string, number, array, null) is ignored
+      ---
+      duration_ms: 0.136029
+      type: 'test'
+      ...
+    # Subtest: non-string stored values become empty strings
+    ok 21 - non-string stored values become empty strings
+      ---
+      duration_ms: 0.156801
+      type: 'test'
+      ...
+    # Subtest: a record holding only non-string values counts as empty
+    ok 22 - a record holding only non-string values counts as empty
+      ---
+      duration_ms: 0.078002
+      type: 'test'
+      ...
+    # Subtest: empty everything resolves to none with all-empty values
+    ok 23 - empty everything resolves to none with all-empty values
+      ---
+      duration_ms: 0.099509
+      type: 'test'
+      ...
+    # Subtest: `ad` always comes from the same source as the attribution values
+    ok 24 - `ad` always comes from the same source as the attribution values
+      ---
+      duration_ms: 0.221753
+      type: 'test'
+      ...
+    # Subtest: a record with only `ad` (or only utm_id / site) does not count
+    ok 25 - a record with only `ad` (or only utm_id / site) does not count
+      ---
+      duration_ms: 0.195222
+      type: 'test'
+      ...
+    # Subtest: a session record without utm but with ad falls through to the return-visit record
+    ok 26 - a session record without utm but with ad falls through to the return-visit record
+      ---
+      duration_ms: 0.197711
+      type: 'test'
+      ...
+    # Subtest: an invalid stored ad is dropped
+    ok 27 - an invalid stored ad is dropped
+      ---
+      duration_ms: 0.194009
+      type: 'test'
+      ...
+    # Subtest: caps every value at 200 chars
+    ok 28 - caps every value at 200 chars
+      ---
+      duration_ms: 0.172629
+      type: 'test'
+      ...
+    # Subtest: result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+    ok 29 - result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+      ---
+      duration_ms: 0.105779
+      type: 'test'
+      ...
+    1..29
+ok 6 - resolveSeasonOneAttribution
+  ---
+  duration_ms: 9.903759
+  type: 'suite'
+  ...
+1..6
+# tests 45
+# suites 6
+# pass 44
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 885.4938

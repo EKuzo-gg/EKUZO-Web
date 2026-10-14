@@ -1,0 +1,65 @@
+++ git worktree add /tmp/rel origin/main -b sentry-release-dryrun
+Preparing worktree (new branch 'sentry-release-dryrun')
+branch 'sentry-release-dryrun' set up to track 'origin/main'.
+HEAD is now at 1e511cc docs(blog-refresh): review guide git evidence and return handoff
+++ cd /tmp/rel
+++ git checkout preview/s1-heroes -- app/season1/landing.html app/api/season-one/route.ts docs/season-one-tracking.md docs/s1-heroes
+++ git -c user.name=sentry -c user.email=sentry@example.com -c core.hooksPath=/dev/null commit -q -m 'dry run release'
+++ git log --oneline -2
+bc6756f dry run release
+1e511cc docs(blog-refresh): review guide git evidence and return handoff
+++ git diff --quiet preview/s1-heroes HEAD -- app lib components
+++ echo 'gate1 (app lib components identical to preview) exit=0'
+gate1 (app lib components identical to preview) exit=0
+++ git diff --name-only origin/main HEAD
+app/api/season-one/route.ts
+app/season1/landing.html
+docs/s1-heroes/01-requirements.md
+docs/s1-heroes/02-frozen-spec.md
+docs/s1-heroes/03-decision-log.md
+docs/s1-heroes/aaron-handoff.md
+docs/s1-heroes/auditor-phase1.md
+docs/s1-heroes/evidence/atlas-selftest.txt
+docs/s1-heroes/evidence/relay-harness.ts
+docs/s1-heroes/evidence/relay-selftest.txt
+docs/season-one-tracking.md
+++ echo ---
+---
+++ git diff --name-only origin/main HEAD
+++ grep -E '^public/(roadshow|review\.html|ads)'
+++ echo 'public leak grep exit=1 (1 = none)'
+public leak grep exit=1 (1 = none)
+++ grep -vE '^(app/season1/landing\.html|app/api/season-one/route\.ts|docs/season-one-tracking\.md|docs/s1-heroes/)'
+++ git diff --name-only origin/main HEAD
+++ echo 'unexpected paths grep exit=1 (1 = none)'
+unexpected paths grep exit=1 (1 = none)
+++ wc -l
+++ git diff --name-only origin/main preview/s1-heroes -- public
+32
+++ grep -E '^public/'
+++ head
+++ git diff --name-only origin/main origin/dev
+public/ads/season1/d1-a-toomuch-feed.jpg
+public/ads/season1/d1-a-toomuch-story.jpg
+public/ads/season1/d10-a-proud-feed.jpg
+public/ads/season1/d10-a-proud-story.jpg
+public/ads/season1/d11-a-jersey-feed.jpg
+public/ads/season1/d11-a-jersey-story.jpg
+public/ads/season1/d12-a-excuse-feed.jpg
+public/ads/season1/d12-a-excuse-story.jpg
+public/ads/season1/d2-a-cantpause-feed.jpg
+public/ads/season1/d2-a-cantpause-story.jpg
+++ echo '--- origin/dev vs origin/main total diff paths'
+--- origin/dev vs origin/main total diff paths
+++ wc -l
+++ git diff --name-only origin/main origin/dev
+127
+++ git diff --quiet origin/main HEAD -- public lib components
+++ echo 'public lib components unchanged vs main exit=0'
+public lib components unchanged vs main exit=0
+++ git merge-base --is-ancestor origin/main origin/dev
+++ echo 'main ancestor of dev exit=0'
+main ancestor of dev exit=0
+++ head
+++ git status --short
+?? .husky/_/

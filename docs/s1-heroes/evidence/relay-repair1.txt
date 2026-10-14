@@ -1,0 +1,162 @@
+Relay repair cycle 1 (D-S1, D-S2), 2026-10-14, branch preview/s1-heroes
+
+== tsc ==
+npx tsc --noEmit --incremental false  -> exit 0, no output
+(toWellFormed not used: a regex is enough because HERO_ANSWER_STRIP_RE, which runs first with the u flag, already removes every lone surrogate in the input; the only one that can appear is a high surrogate left by the 200-unit cap.)
+
+== harness ==
+Run: KLAVIYO_PRIVATE_API_KEY=test META_CAPI_ACCESS_TOKEN=x META_PIXEL_ID=1 npx tsx <h.ts>   (cwd repo, fetch mocked, nothing left the process)
+astral: input units=301, stored units=199, codepoints=100, last unit=0xdc00
+PASS astral-letter answer cut at 200: status 200
+PASS astral: well formed
+PASS astral: at most 200 units
+PASS astral: no U+FFFD
+PASS astral: profile equals event
+PASS astral: JSON.stringify has no lone \ud8xx escape
+PASS astral: expected 'a' + 99 astral letters (199 units)
+PASS 250 plain letters -> exactly 200
+PASS astral only, pairs align at 200: kept 100 letters
+spaces: stored length=199, ends with space=false
+PASS 199 letters + 10 spaces + text: no trailing space
+PASS x + 400 spaces + y: no trailing space, is 'x'
+PASS leading and trailing whitespace trimmed
+PASS unchanged: “Five more minutes.”
+PASS unchanged: “I can’t pause it.”
+PASS unchanged: Five more minutes.
+PASS unchanged: I can’t pause it.
+PASS unchanged: Soccer, Dance
+PASS unchanged: Fortnite, Something else
+PASS unchanged: Way too much
+PASS unchanged: I have no idea
+PASS skip "" -> skipped
+PASS skip "   " -> skipped
+PASS skip undefined -> skipped
+PASS skip "<>" -> skipped
+PASS skip "​" -> skipped
+PASS page A: answer empty
+PASS lone surrogate mid-string stripped
+PASS trailing lone surrogate in input
+
+28 pass, 0 fail
+
+== not in scope, pre-existing (same slice-after-trim pattern, unchanged) ==
+kid_games, adName, page: still use clean()/text() which trims then slices UTF-16 units, so an astral cut or a cut inside spaces can still leave a lone surrogate or trailing spaces there. Left as is per instructions.
+
+== D-S2 ==
+Doc wording only, no behavior change. Route header and docs/season-one-tracking.md (hero fields section) now say: no hero field or answer is sent to Meta; the hero id can appear in the page URL Meta already receives.
+
+== diff ==
+diff --git a/app/api/season-one/route.ts b/app/api/season-one/route.ts
+index 4442b3a..969c16d 100644
+--- a/app/api/season-one/route.ts
++++ b/app/api/season-one/route.ts
+@@ -31,7 +31,8 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
+  *    and `heroFrom` (url | ad-map | split | none, else empty). They are saved
+  *    as profile props season1_hero / season1_hero_answer and event props
+  *    hero / hero_answer / hero_from. Site-popup sign-ups never write them, and
+- *    nothing about the hero goes to Meta. season1_hero_answer is visitor text:
++ *    no hero field or answer is sent to Meta (the hero id can appear in the
++ *    page URL Meta already receives). season1_hero_answer is visitor text:
+  *    never render it unescaped in a Klaviyo template.
+  *
+  * A second call with { step: "age", kidAge } after sign-up records the
+@@ -288,7 +289,8 @@ export async function POST(req: NextRequest) {
+     if (source === "ad-landing") {
+       const h = text(body.hero).toLowerCase();
+       const hero = HEROES.has(h) ? h : "none";
+-      const answer = clean(typeof body.heroAnswer === "string" ? body.heroAnswer.replace(HERO_ANSWER_STRIP_RE, "") : "", 200);
++      // Trim, cap at 200 UTF-16 units, drop a high surrogate the cap may have split (the strip above leaves no other lone ones), re-trim.
++      const answer = (typeof body.heroAnswer === "string" ? body.heroAnswer.replace(HERO_ANSWER_STRIP_RE, "") : "").trim().slice(0, 200).replace(/[\uD800-\uDBFF]$/, "").trim();
+       const heroAnswer = hero === "none" ? "" : answer || "skipped";
+       profileProps.season1_hero = hero;
+       profileProps.season1_hero_answer = heroAnswer;
+diff --git a/docs/season-one-tracking.md b/docs/season-one-tracking.md
+index 013e407..7a28f7e 100644
+--- a/docs/season-one-tracking.md
++++ b/docs/season-one-tracking.md
+@@ -51,7 +51,7 @@ GA4: the `source` parameter uses the same naming (`season_one_d3` on the landing
+ 
+ ## Season 01 hero fields (ad landing only)
+ 
+-Which landing hero the parent saw and what they answered. Written for `source: ad-landing` only; never for the popup, never on the games/age steps, never sent to Meta.
++Which landing hero the parent saw and what they answered. Written for `source: ad-landing` only; never for the popup, never on the games/age steps. No hero field or answer is sent to Meta; the hero id can appear in the page URL Meta already receives (the pixel reports the page URL, and CAPI gets it as `event_source_url`, whenever it carries `?hero=`).
+ 
+ | Where | Property | Values |
+ |---|---|---|
+
+== harness source ==
+import { NextRequest } from "/home/claude/ekuzo-web/node_modules/next/server.js";
+let calls: any[] = [];
+(globalThis as any).fetch = async (input: any, init: any = {}) => {
+  let body: any = null; try { body = JSON.parse(init.body); } catch {}
+  calls.push({ url: String(input), body });
+  return new Response("{}", { status: 200 });
+};
+console.error = console.warn = console.log = () => {};
+const out: string[] = [];
+const say = (s: string) => out.push(s);
+let fails = 0;
+const check = (n: string, ok: boolean, d = "") => { if (!ok) fails++; say(`${ok ? "PASS" : "FAIL"} ${n}${d ? "  :: " + d : ""}`); };
+const wellFormed = (s: string) => (s as any).isWellFormed ? (s as any).isWellFormed() : !/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/.test(s);
+async function post(extra: Record<string, unknown>) {
+  const mod = await import("/home/claude/ekuzo-web/app/api/season-one/route.ts");
+  calls = [];
+  const req = new NextRequest("http://localhost:3000/api/season-one", {
+    method: "POST", headers: { "content-type": "application/json", "user-agent": "x" },
+    body: JSON.stringify({ email: "relay+1@example.com", source: "ad-landing", ad: "d3", eventId: "e1", ...extra }),
+  });
+  const res = await mod.POST(req);
+  const ev = calls.find((c) => /\/api\/events$/.test(c.url));
+  const props = ev.body.data.attributes.properties, prof = ev.body.data.attributes.profile.data.attributes.properties;
+  return { status: res.status, ans: props.hero_answer as string, prof: prof.season1_hero_answer as string };
+}
+const H = { hero: "amount", heroFrom: "url" };
+(async () => {
+  // astral cut
+  const astral = "a" + "𝐀".repeat(150);
+  let r = await post({ ...H, heroAnswer: astral });
+  say(`astral: input units=${astral.length}, stored units=${r.ans.length}, codepoints=${[...r.ans].length}, last unit=0x${r.ans.charCodeAt(r.ans.length - 1).toString(16)}`);
+  check("astral-letter answer cut at 200: status 200", r.status === 200);
+  check("astral: well formed", wellFormed(r.ans));
+  check("astral: at most 200 units", r.ans.length <= 200);
+  check("astral: no U+FFFD", !r.ans.includes("�"));
+  check("astral: profile equals event", r.prof === r.ans);
+  check("astral: JSON.stringify has no lone \\ud8xx escape", !/\\ud[89ab][0-9a-f]{2}(?!\\ud[c-f])/i.test(JSON.stringify(r.ans)));
+  check("astral: expected 'a' + 99 astral letters (199 units)", r.ans === "a" + "𝐀".repeat(99));
+  // exact boundary, no split: 200 units of BMP letters
+  r = await post({ ...H, heroAnswer: "b".repeat(250) });
+  check("250 plain letters -> exactly 200", r.ans === "b".repeat(200));
+  // astral boundary landing exactly on a pair (even offset): 2 astral*100 = 200 units
+  r = await post({ ...H, heroAnswer: "𝐀".repeat(150) });
+  check("astral only, pairs align at 200: kept 100 letters", r.ans === "𝐀".repeat(100) && wellFormed(r.ans));
+  // spaces
+  const sp = "a".repeat(199) + " ".repeat(10) + "text";
+  r = await post({ ...H, heroAnswer: sp });
+  say(`spaces: stored length=${r.ans.length}, ends with space=${/ $/.test(r.ans)}`);
+  check("199 letters + 10 spaces + text: no trailing space", !/\s$/.test(r.ans) && r.ans === "a".repeat(199));
+  r = await post({ ...H, heroAnswer: "x" + " ".repeat(400) + "y" });
+  check("x + 400 spaces + y: no trailing space, is 'x'", r.ans === "x");
+  r = await post({ ...H, heroAnswer: "   padded   " });
+  check("leading and trailing whitespace trimmed", r.ans === "padded");
+  // Aaron's answers
+  for (const a of ["“Five more minutes.”", "“I can’t pause it.”", "Five more minutes.", "I can’t pause it.", "Soccer, Dance", "Fortnite, Something else", "Way too much", "I have no idea"]) {
+    r = await post({ ...H, heroAnswer: a });
+    check(`unchanged: ${a}`, r.ans === a && r.prof === a);
+  }
+  // skip
+  for (const a of ["", "   ", undefined, "<>", "​"]) {
+    r = await post({ ...H, heroAnswer: a as any });
+    check(`skip ${JSON.stringify(a)} -> skipped`, r.ans === "skipped" && r.prof === "skipped");
+  }
+  r = await post({ hero: "none", heroAnswer: "stray" });
+  check("page A: answer empty", r.ans === "");
+  // lone surrogates in the input are stripped by the allowlist
+  r = await post({ ...H, heroAnswer: "ab\ud835cd" });
+  check("lone surrogate mid-string stripped", r.ans === "abcd" && wellFormed(r.ans));
+  r = await post({ ...H, heroAnswer: "ab" + "x".repeat(300) + "\ud835" });
+  check("trailing lone surrogate in input", wellFormed(r.ans) && r.ans.length <= 200);
+  say(`\n${out.filter((l) => l.startsWith("PASS")).length} pass, ${fails} fail`);
+  console.info = console.info;
+  process.stdout.write(out.join("\n") + "\n");
+  process.exit(fails ? 1 : 0);
+})();

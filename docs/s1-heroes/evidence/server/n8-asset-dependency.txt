@@ -1,0 +1,13 @@
+== asset references in landing.html (preview) ==
+== all /path-like literals ==
+== origin/main vs origin/dev differing top-level dirs ==
+      1 WORKLOG.md/
+      1 app/season1
+     93 docs/season1-launch
+     24 public/ads
+      1 public/review.html
+      7 public/roadshow
+== landing.html on origin/main references to ads ==
+0
+0
+0

@@ -1,0 +1,282 @@
+Relay self-test, 2026-10-14
+Harness: /tmp/relay-h/harness.ts (mocked fetch, tsx, env KLAVIYO_PRIVATE_API_KEY=test META_CAPI_ACCESS_TOKEN=meta-test-token META_PIXEL_ID=123)
+
+$ npx tsc --noEmit
+exit 0
+
+$ tsx harness.ts
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+✅ Meta CAPI: Lead sent (event_id=abc-123)
+## hero amount with answer
+input extra: {"hero":"amount","heroAnswer":"Five more minutes.","heroFrom":"ad-map"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"Five more minutes."}
+event hero props:   {"hero":"amount","hero_answer":"Five more minutes.","hero_from":"ad-map"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero games with answer
+input extra: {"hero":"games","heroAnswer":"Five more minutes.","heroFrom":"ad-map"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"games","season1_hero_answer":"Five more minutes."}
+event hero props:   {"hero":"games","hero_answer":"Five more minutes.","hero_from":"ad-map"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero screentime with answer
+input extra: {"hero":"screentime","heroAnswer":"Five more minutes.","heroFrom":"ad-map"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"screentime","season1_hero_answer":"Five more minutes."}
+event hero props:   {"hero":"screentime","hero_answer":"Five more minutes.","hero_from":"ad-map"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero shortlist with answer
+input extra: {"hero":"shortlist","heroAnswer":"Five more minutes.","heroFrom":"ad-map"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"shortlist","season1_hero_answer":"Five more minutes."}
+event hero props:   {"hero":"shortlist","hero_answer":"Five more minutes.","hero_from":"ad-map"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero with empty answer -> skipped
+input extra: {"hero":"amount","heroAnswer":"","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"skipped"}
+event hero props:   {"hero":"amount","hero_answer":"skipped","hero_from":"url"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero with answer missing -> skipped
+input extra: {"hero":"games","heroFrom":"split"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"games","season1_hero_answer":"skipped"}
+event hero props:   {"hero":"games","hero_answer":"skipped","hero_from":"split"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## page A (hero none) with stray answer -> empty
+input extra: {"hero":"none","heroAnswer":"should be dropped","heroFrom":"none"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":"none"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero missing on ad-landing -> none
+input extra: {}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero "AMOUNT " -> amount
+input extra: {"hero":"AMOUNT ","heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"x"}
+event hero props:   {"hero":"amount","hero_answer":"x","hero_from":"url"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero unknown 'foo' -> none
+input extra: {"hero":"foo","heroAnswer":"x"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero 'constructor' -> none
+input extra: {"hero":"constructor","heroAnswer":"x"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero as array -> none
+input extra: {"hero":["amount"],"heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":"url"}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero as object -> none
+input extra: {"hero":{"a":1},"heroAnswer":"x"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## hero as number -> none
+input extra: {"hero":5,"heroAnswer":"x"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"none","season1_hero_answer":""}
+event hero props:   {"hero":"none","hero_answer":"","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer with <script> and a URL
+input extra: {"hero":"amount","heroAnswer":"<script>alert(1)</script> see https://evil.com/a?b=c&d=<e> now"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"scriptalert1script see httpsevil.coma?bc&de now"}
+event hero props:   {"hero":"amount","hero_answer":"scriptalert1script see httpsevil.coma?bc&de now","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer 500 chars -> 200
+input extra: {"hero":"games","heroAnswer":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"games","season1_hero_answer":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+event hero props:   {"hero":"games","hero_answer":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer 300 chars with leading spaces -> trimmed then 200
+input extra: {"hero":"games","heroAnswer":"   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"games","season1_hero_answer":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+event hero props:   {"hero":"games","hero_answer":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer only symbols -> skipped
+input extra: {"hero":"amount","heroAnswer":"<>/\\{}[]@#$%^*()=+;:_~`|"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"skipped"}
+event hero props:   {"hero":"amount","hero_answer":"skipped","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer curly quotes kept
+input extra: {"hero":"amount","heroAnswer":"“Five more minutes.” It’s fine, isn’t it? Yes! A & B - c"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"“Five more minutes.” It’s fine, isn’t it? Yes! A & B - c"}
+event hero props:   {"hero":"amount","hero_answer":"“Five more minutes.” It’s fine, isn’t it? Yes! A & B - c","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer non-string (array) -> skipped
+input extra: {"hero":"amount","heroAnswer":["x"]}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"skipped"}
+event hero props:   {"hero":"amount","hero_answer":"skipped","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer non-string (number) -> skipped
+input extra: {"hero":"amount","heroAnswer":42}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"skipped"}
+event hero props:   {"hero":"amount","hero_answer":"skipped","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroAnswer unicode letters kept
+input extra: {"hero":"amount","heroAnswer":"Más tiempo, por favor"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"Más tiempo, por favor"}
+event hero props:   {"hero":"amount","hero_answer":"Más tiempo, por favor","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroFrom unknown -> empty
+input extra: {"hero":"amount","heroAnswer":"x","heroFrom":"evil"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"x"}
+event hero props:   {"hero":"amount","hero_answer":"x","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroFrom array -> empty
+input extra: {"hero":"amount","heroAnswer":"x","heroFrom":["url"]}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"x"}
+event hero props:   {"hero":"amount","hero_answer":"x","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## heroFrom 'constructor' -> empty
+input extra: {"hero":"amount","heroAnswer":"x","heroFrom":"constructor"}
+status 200 {"ok":true}
+profile hero props: {"season1_hero":"amount","season1_hero_answer":"x"}
+event hero props:   {"hero":"amount","hero_answer":"x","hero_from":""}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## site-popup with hero fields -> no hero keys
+input extra: {"source":"site-popup","hero":"amount","heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {}
+event hero props:   {}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## no source (defaults popup) with hero fields -> no hero keys
+input extra: {"hero":"amount","heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {}
+event hero props:   {}
+calls: events, profile-subscription-bulk-create-jobs, https://graph.facebook.com/v26.0/123/events?access_token=meta-test-token
+RESULT: pass
+
+## step games with hero fields -> unchanged
+input extra: {"step":"games","kidGames":"Fortnite, Minecraft","hero":"amount","heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {}
+event hero props:   {}
+calls: events
+RESULT: pass
+
+## step age with hero fields -> unchanged
+input extra: {"step":"age","kidAge":"10-12","hero":"amount","heroAnswer":"x","heroFrom":"url"}
+status 200 {"ok":true}
+profile hero props: {}
+event hero props:   {}
+calls: events
+RESULT: pass
+
+## honeypot with hero -> no write
+input extra: {"hero":"amount","heroAnswer":"x","ekz_hp":"bot"}
+status 200 {"ok":true}
+profile hero props: undefined
+event hero props:   undefined
+calls: 
+RESULT: pass
+
+## Meta CAPI payload with hero+answer vs without
+with:    {"data":[{"event_name":"Lead","event_time":0,"event_id":"abc-123","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&fbclid=zz","user_data":{"em":["7ee2d1d83a0a0a17e67e5c50eb016817d8eec40a658f2be3245107278f5f9c36"],"fbc":"fb.1.1791981578437.zz"},"custom_data":{"content_name":"season_one_d3"}}]}
+without: {"data":[{"event_name":"Lead","event_time":0,"event_id":"abc-123","action_source":"website","event_source_url":"https://ekuzo.gg/season1?ad=d3&fbclid=zz","user_data":{"em":["7ee2d1d83a0a0a17e67e5c50eb016817d8eec40a658f2be3245107278f5f9c36"],"fbc":"fb.1.1791981578437.zz"},"custom_data":{"content_name":"season_one_d3"}}]}
+RESULT: pass (identical, no hero/answer text)
+
+TOTAL pass 31 fail 0
