@@ -138,12 +138,22 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 .field textarea.note{border-color:#4A4433;background:#16140F}
 .thumb{display:block;width:100%;max-width:220px;aspect-ratio:3/2;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
 .check{display:flex;gap:8px;align-items:center;font:500 13px/1.3 var(--ui);color:var(--muted)}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.edit-toggle{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:9px 14px;font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.edit-toggle::before{content:"";width:22px;height:12px;border-radius:999px;background:var(--line);box-shadow:inset -10px 0 0 2px var(--muted);transition:box-shadow .15s}
+.edit-toggle[aria-pressed="true"]{color:var(--ink);background:var(--lime);border-color:var(--lime)}
+.edit-toggle[aria-pressed="true"]::before{background:var(--ink);box-shadow:inset 10px 0 0 2px var(--lime)}
+.verdict{display:flex;gap:8px;flex-wrap:wrap}
+.vbtn{appearance:none;flex:1;min-width:120px;border:1px solid var(--line);background:var(--wall);color:var(--text);border-radius:12px;padding:14px 12px;font:700 15px/1 var(--ui);cursor:pointer}
+.vbtn:hover{border-color:var(--muted)}
+.vbtn.v-keep[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--ink)}
+.vbtn.v-rework[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--ink)}
 </style></head><body>
 <nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html">← Hub</a><a href="ad-lab.html">Ad lab</a><a href="hero-lab.html">Hero lab</a><a href="email-lab.html" aria-current="page">Email lab</a></nav>
 <div class="wrap">
   <header>
     <h1>Email lab</h1>
-    <p class="lede">The Season 01 emails from Karlin, in the order a parent gets them after signing up. <b>Edit any line on the right</b> and the email in the middle updates in our real template. Mark each block <b>Keep</b> or <b>Rework</b>, add a note, then <b>Send my notes</b> so Aaron gets your version.</p>
+    <p class="lede">The Season 01 emails from Karlin, in the order a parent gets them after signing up. Read each one the way a parent will, then tell Aaron what you think with <b>Send my notes</b>.</p>
   </header>
 
   <div class="app">
@@ -155,7 +165,7 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
     <section class="stage" aria-label="Email preview">
       <div class="stagebar">
         <h2 id="stTitle">Email preview</h2>
-        <div class="seg" role="group" aria-label="Screen size"><button type="button" data-view="desktop" aria-pressed="true">Desktop</button><button type="button" data-view="phone" aria-pressed="false">Phone</button></div>
+        <div class="tools"><div class="seg" role="group" aria-label="Screen size"><button type="button" data-view="desktop" aria-pressed="true">Desktop</button><button type="button" data-view="phone" aria-pressed="false">Phone</button></div><button type="button" id="editToggle" class="edit-toggle" aria-pressed="false">Edit</button></div>
       </div>
       <p class="job" id="stJob">Pick an email on the left to see it the way a parent will.</p>
       <div class="inbox" aria-label="How it shows in the inbox">
@@ -174,10 +184,9 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
   <section class="how" aria-labelledby="howh">
     <h3 id="howh">How this works</h3>
     <ul>
-      <li><b>Your edits stay in your browser until you send them.</b> Close the tab and come back, they're still here. Nobody else sees them until you press Send my notes.</li>
-      <li><b>Send my notes</b> sends Aaron your name, your Keep and Rework calls, every note, and your full version of the email with what changed. He folds it into the page and pushes it live for everyone.</li>
-      <li><b>"Show what changed"</b> puts the current version under each line you edited, so you can see your changes before sending.</li>
-      <li><b>Getting it into Klaviyo:</b> once an email is final, Aaron asks Claude to push it, or uses Copy Klaviyo HTML. An email already running in a flow keeps its own copy, so pick the template again in the flow and paste the subject and preview.</li>
+      <li><b>Your notes stay in your browser until you send them.</b> Close the tab and come back, they're still here. Nobody else sees them until you press Send my notes.</li>
+      <li><b>Want to rewrite a line yourself?</b> Turn on Edit above the preview. Every line, photo and block opens up, and the email updates as you type.</li>
+      <li><b>Send my notes</b> sends Aaron your name, how the email feels to you, your note, and any edits you made. He folds them in and pushes the new version live for everyone.</li>
       <li><b>House rules for every email:</b> from Karlin, in his voice. "Something they already love" means gaming, never the game their kid plays now. No scholarship promises. One question in the P.S. No em dashes.</li>
     </ul>
   </section>
@@ -196,6 +205,7 @@ const PHASES = {E0:"Meet us",E2:"What matters to them",E5:"Live right now",E6:"T
 const KEY = "ekuzo.emaillab.v1.";
 
 let PHOTOS={}, emails={}, cur=null, view="desktop", showDiff=false, confirming=null;
+let editMode = (()=>{ try{ return localStorage.getItem("ekuzo.emaillab.v1.edit")==="1"; }catch(_){ return false; } })();
 let st=null; /* this reviewer's local state for the current email: {base, draft, verdicts, notes, note, sentAt} */
 
 const $ = s => document.querySelector(s);
@@ -307,7 +317,7 @@ function load(code){
 function persist(){ if(!cur||!st) return; const {stale,...keep}=st; lsSet(KEY+cur, keep); }
 function touched(code){
   const s=lsGet(KEY+code); if(!s) return false;
-  return sig(s.draft)!==sig(emails[code]?.copy) || Object.keys(s.verdicts||{}).length || Object.values(s.notes||{}).some(Boolean) || !!s.note;
+  return sig(s.draft)!==sig(emails[code]?.copy) || Object.keys(s.verdicts||{}).length || Object.values(s.notes||{}).some(Boolean) || !!s.note || !!s.overall;
 }
 function changedFields(){
   const a=emails[cur].copy, b=st.draft, out=[];
@@ -348,13 +358,15 @@ function renderPreview(){
 function fit(){ const f=$("#previewHost iframe"); try{ f.style.height=(f.contentDocument.documentElement.scrollHeight+8)+"px"; }catch(_){} }
 function schedulePreview(){ clearTimeout(pvT); pvT=setTimeout(renderPreview,200); }
 
+function counts(){ return {n:changedFields().length, nv:Object.keys(st.verdicts).length+(st.overall?1:0), nn:Object.values(st.notes).filter(Boolean).length+(st.note?1:0)}; }
 function was(now, orig){ if(!showDiff) return ""; if((orig??"")===(now??"")) return ""; return `<p class="was"><b>Current version</b>${orig?esc(orig):"<i>(empty)</i>"}</p>`; }
 function renderDesk(){
   const e=emails[cur]; const d=$("#desk");
   if(!e){ d.innerHTML=`<h2>The words</h2><p class="who">Pick an email to start editing.</p>`; return; }
   const p=e.copy, c=st.draft; const pb={}; (p.blocks||[]).forEach(b=>pb[b.id]=b);
-  const n=changedFields().length, nv=Object.keys(st.verdicts).length, nn=Object.values(st.notes).filter(Boolean).length+(st.note?1:0);
+  const {n,nv,nn}=counts();
   const reviewer=lsGet(KEY+"reviewer")||"";
+  if(!editMode){ d.innerHTML = reviewHtml(e,reviewer,n||nv||nn); return; }
   d.innerHTML = `
   <h2>The words</h2>
   <p class="who">${e.klaviyoTemplateId?`In Klaviyo as <b>${esc(e.klaviyoTemplateName||e.klaviyoTemplateId)}</b>.`:"Not in Klaviyo yet."} ${n||nv||nn?`You have <b>${n} edit${n===1?"":"s"}</b>, <b>${nv} call${nv===1?"":"s"}</b> and <b>${nn} note${nn===1?"":"s"}</b> on this email.`:"No edits from you yet."}${st.sentAt?` Last sent ${esc(new Date(st.sentAt).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}.`:""}</p>
@@ -393,10 +405,21 @@ function renderDesk(){
    <p class="status" id="msg" role="status"></p>
   </div>`;
 }
+function reviewHtml(e, reviewer, any){
+  const o=st.overall||"";
+  return `
+  <h2>Your take</h2>
+  <p class="who">Read it the way a parent would, then tell Aaron what you think.${st.sentAt?` You sent notes ${esc(new Date(st.sentAt).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}.`:""}</p>
+  <div class="field"><label>How does this one feel?</label><div class="verdict"><button type="button" class="vbtn v-keep" data-overall="love" aria-pressed="${o==="love"}">Love it</button><button type="button" class="vbtn v-rework" data-overall="work" aria-pressed="${o==="work"}">Needs work</button></div></div>
+  <div class="field"><label for="f-note">What would you change?</label><textarea id="f-note" data-gn rows="6" class="note" placeholder="A line that doesn't sound like you, something missing, a photo that's off. Anything.">${esc(st.note)}</textarea></div>
+  <div class="field"><label for="f-who">Your name</label><input id="f-who" data-who value="${esc(reviewer)}" placeholder="So Aaron knows who sent it" autocomplete="name"></div>
+  <div class="btnrow"><button type="button" class="btn save" data-act="send" ${any?"":"disabled"}>Send my notes</button></div>
+  <p class="status" id="msg" role="status"></p>`;
+}
 function say(t,cls=""){ const m=$("#msg"); if(m){ m.textContent=t; m.className="status "+cls; } }
 function renderAll(){ renderSeq(); renderDesk(); renderPreview(); }
 function refreshCounts(){ /* update the summary line and send button without re-rendering inputs */
-  const n=changedFields().length, nv=Object.keys(st.verdicts).length, nn=Object.values(st.notes).filter(Boolean).length+(st.note?1:0);
+  const {n,nv,nn}=counts();
   const b=document.querySelector('[data-act="send"]'); if(b) b.disabled=!(n||nv||nn);
   const row=document.querySelector(`[data-pick="${cur}"] .meta`); if(row && !row.querySelector(".mine") && (n||nv||nn)) row.insertAdjacentHTML("beforeend",`<span class="mine">Your edits</span>`);
 }
@@ -425,11 +448,14 @@ document.addEventListener("click",async ev=>{
   const v=ev.target.closest("[data-view]");
   if(v){ view=v.dataset.view; document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",b===v)); const dv=$("#previewHost .device"); if(dv){ dv.classList.toggle("phone",view==="phone"); setTimeout(fit,50);} return; }
   const pk=ev.target.closest("[data-pick]"); if(pk){ pick(pk.dataset.pick); return; }
+  const et=ev.target.closest("#editToggle"); if(et){ editMode=!editMode; try{ localStorage.setItem(KEY+"edit",editMode?"1":"0"); }catch(_){} syncEdit(); renderDesk(); return; }
   if(!st) return;
   const add=ev.target.closest("[data-add]");
   if(add){ st.draft.blocks=st.draft.blocks||[]; const k=add.dataset.add; st.draft.blocks.push({id:uid(),kind:k,head:k==="pillar"?"New pillar":k==="time"?"7:00":k==="callout"?"New callout":k==="link"?"Read the full story":"",url:k==="link"?"https://ekuzo.gg/blog":"",title:k==="time"?"What happens":"",img:k==="photo"?Object.keys(PHOTOS)[0]:"",text:""}); edited(); renderDesk(); document.getElementById("t-"+st.draft.blocks.at(-1).id)?.focus(); return; }
   const del=ev.target.closest("[data-del]");
   if(del){ const b=st.draft.blocks.splice(+del.dataset.del,1)[0]; if(b){ delete st.verdicts[b.id]; } edited(); renderDesk(); return; }
+  const ov=ev.target.closest("[data-overall]");
+  if(ov){ st.overall=st.overall===ov.dataset.overall?"":ov.dataset.overall; persist(); renderDesk(); refreshCounts(); return; }
   const vt=ev.target.closest("[data-vote]");
   if(vt){ const id=vt.dataset.b; st.verdicts[id]=st.verdicts[id]===vt.dataset.vote?undefined:vt.dataset.vote; if(!st.verdicts[id]) delete st.verdicts[id]; persist(); renderDesk(); return; }
   const nt=ev.target.closest("[data-note]");
@@ -470,6 +496,7 @@ function summary(){
     if(bits.length) L.push(`Block ${i+1} (${b.id}${b.head?", "+b.head:""})\n`+bits.join("\n"));
   });
   const ids=new Set((c.blocks||[]).map(b=>b.id)); (p.blocks||[]).forEach(b=>{ if(!ids.has(b.id)) L.push(`Removed block ${b.id}: ${b.text}`); });
+  if(st.overall) L.unshift(`Overall: ${st.overall==="love"?"LOVE IT":"NEEDS WORK"}`);
   if(st.note) L.push(`Note on the whole email:\n  ${st.note}`);
   return `${e.code} · ${e.title}\n\n`+L.join("\n\n");
 }
@@ -490,6 +517,8 @@ async function send(btn){
   }
 }
 
+function syncEdit(){ const b=$("#editToggle"); if(b){ b.setAttribute("aria-pressed",editMode); b.textContent=editMode?"Editing":"Edit"; } document.body.classList.toggle("editing",editMode); }
+syncEdit();
 /* ---------- Boot ---------- */
 fetch("email-lab.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
   PHOTOS=d.photos||{}; (d.emails||[]).forEach(e=>emails[e.code]=e);
