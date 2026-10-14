@@ -1,0 +1,6 @@
+├ ƒ /api/season-one
+├ ○ /season1
+.next/server/app/season1.body
+season1
+season1.body
+season1.meta

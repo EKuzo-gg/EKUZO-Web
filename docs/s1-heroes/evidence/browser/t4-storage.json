@@ -1,0 +1,1705 @@
+{
+ "throwing": [
+  {
+   "name": "Storage.prototype throws",
+   "seenHeroOnD10": {
+    "games": 11,
+    "amount": 7
+   },
+   "errors": [],
+   "signup": {
+    "posts": 2,
+    "heroPosted": "games",
+    "from": "split",
+    "confShown": true
+   },
+   "others": {
+    "ad=d1": "amount",
+    "ad=d7": "none",
+    "ad=d3&hero=none": "none",
+    "ad=d10&hero=games": "games",
+    "bare": "none"
+   }
+  },
+  {
+   "name": "localStorage getter throws",
+   "seenHeroOnD10": {
+    "amount": 6,
+    "games": 12
+   },
+   "errors": [],
+   "signup": {
+    "posts": 1,
+    "heroPosted": "amount",
+    "from": "split",
+    "confShown": true
+   },
+   "others": {
+    "ad=d1": "amount",
+    "ad=d7": "none",
+    "ad=d3&hero=none": "none",
+    "ad=d10&hero=games": "games",
+    "bare": "none"
+   }
+  },
+  {
+   "name": "storage no-op/empty",
+   "seenHeroOnD10": {
+    "games": 6,
+    "amount": 12
+   },
+   "errors": [],
+   "signup": {
+    "posts": 2,
+    "heroPosted": "games",
+    "from": "split",
+    "confShown": true
+   },
+   "others": {
+    "ad=d1": "amount",
+    "ad=d7": "none",
+    "ad=d3&hero=none": "none",
+    "ad=d10&hero=games": "games",
+    "bare": "none"
+   }
+  }
+ ],
+ "stored": [
+  {
+   "stored": "bogus",
+   "keyBefore": "bogus",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "Amount",
+   "keyBefore": "Amount",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "",
+   "keyBefore": "",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "amount ",
+   "keyBefore": "amount ",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "constructor",
+   "keyBefore": "constructor",
+   "hero": "amount",
+   "keyAfter": "amount",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "__proto__",
+   "keyBefore": "__proto__",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "[\"amount\"]",
+   "keyBefore": "[\"amount\"]",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": true,
+   "keptValid": null,
+   "errs": 0
+  },
+  {
+   "stored": "games",
+   "keyBefore": "games",
+   "hero": "games",
+   "keyAfter": "games",
+   "replaced": null,
+   "keptValid": true,
+   "errs": 0
+  },
+  {
+   "stored": "amount",
+   "keyBefore": "amount",
+   "hero": "amount",
+   "keyAfter": "amount",
+   "replaced": null,
+   "keptValid": true,
+   "errs": 0
+  }
+ ],
+ "sticky": [
+  {
+   "run": 0,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 1,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 2,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 3,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 4,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 5,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 6,
+   "base": "amount",
+   "log": [
+    {
+     "label": "first",
+     "key": "amount",
+     "hero": "amount",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=games (explicit other)",
+     "key": "amount",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "amount",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "amount",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "amount",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "amount",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "amount",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  },
+  {
+   "run": 7,
+   "base": "games",
+   "log": [
+    {
+     "label": "first",
+     "key": "games",
+     "hero": "games",
+     "valid": true
+    },
+    {
+     "label": "reload",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "answered",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "skip",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "signup",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "preview=done",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "utm/fbclid change",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=none (page A shown)",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=amount (explicit other)",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=screentime",
+     "key": "games",
+     "hero": "screentime",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero=foo (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "hero= (ignored -> split)",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d1",
+     "key": "games",
+     "hero": "amount",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d5",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d7",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d9",
+     "key": "games",
+     "hero": "shortlist",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d11",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d12",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "other ad d13",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "bare",
+     "key": "games",
+     "hero": "none",
+     "keyUnchanged": true,
+     "heroOk": true
+    },
+    {
+     "label": "return to d10 later",
+     "key": "games",
+     "hero": "games",
+     "keyUnchanged": true,
+     "heroOk": true
+    }
+   ],
+   "errs": 0
+  }
+ ],
+ "noWrite": [
+  {
+   "q": "ad=d1",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d2",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d3",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d4",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d5",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d6",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d7",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d8",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d9",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d11",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d12",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d13",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d18",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=zzz",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=D05",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d10&hero=amount",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d10&hero=games",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d10&hero=none",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d10&hero=shortlist",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d10&hero=SHORTLIST",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "q": "ad=d1&hero=games",
+   "heroKeys": {},
+   "allKeys": [
+    "ekuzo_s1_attribution"
+   ]
+  },
+  {
+   "note": "d10 hero=foo/hero= expected to write (invalid ignored, table applies)"
+  },
+  {
+   "q": "ad=d10&hero=foo",
+   "heroKeys": {
+    "ekuzo_s1_hero_d10": "amount"
+   }
+  },
+  {
+   "q": "ad=d10&hero=",
+   "heroKeys": {
+    "ekuzo_s1_hero_d10": "amount"
+   }
+  }
+ ],
+ "attribution": [
+  {
+   "q": "ad=d1&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup&",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d1\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d1\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d1\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d1\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d10&hero=amount&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d10&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "utm_source=meta&utm_campaign=x",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"\",\"utm_campaign\":\"x\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"\",\"utm_campaign\":\"x\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"\",\"utm_campaign\":\"x\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"\",\"utm_campaign\":\"x\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d7&utm_term=zzz",
+   "build": {
+    "l": "{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"zzz\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d7\"}",
+    "s": "{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"zzz\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d7\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"zzz\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d7\"}",
+    "s": "{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"zzz\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d7\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=D05&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d5\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d5\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d5\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d5\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=zzz&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showup",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d1",
+   "build": {
+    "l": null,
+    "s": null
+   },
+   "ref": {
+    "l": null,
+    "s": null
+   },
+   "identical": true
+  },
+  {
+   "q": "",
+   "build": {
+    "l": null,
+    "s": null
+   },
+   "ref": {
+    "l": null,
+    "s": null
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d3&hero=games&utm_source=meta&utm_medium=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d3\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d3\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d3\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d3\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d10&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d2&hero=none&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d2\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d2\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d2\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d2\"}"
+   },
+   "identical": true
+  },
+  {
+   "q": "ad=d010&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d5-a-showu",
+   "build": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "ref": {
+    "l": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}",
+    "s": "{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"season1\",\"utm_content\":\"d5-a-showup\",\"utm_term\":\"Instagram_Feed\",\"utm_id\":\"1\",\"site\":\"ig\",\"ad\":\"d10\"}"
+   },
+   "identical": true
+  }
+ ]
+}
