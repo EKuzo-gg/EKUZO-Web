@@ -890,9 +890,46 @@ header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
 @media (max-width:860px){ .dir{grid-template-columns:1fr} }
 @media (max-width:420px){ .b.feed .art,.b.email .art,.inbox{width:100%} .b.feed,.b.email{width:100%} }
+/* ===== Edit mode toggle (Oct 15). Review is the default: the concepts, their numbers and Meta ad names, nothing to fiddle with. Edit mode brings back the builder. ===== */
+.labnav .navsp{flex:1}
+section.dir,.round{scroll-margin-top:84px}
+@media (max-width:700px){.labnav{position:static}.labnav .navsp{flex-basis:100%;height:0}.labnav .jumpsel{flex:1;max-width:none}section.dir,.round{scroll-margin-top:12px}}
+.labnav .jumpsel{appearance:none;background:#17151B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23A39EAB' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:#F3F1F5;border:1px solid #2B2830;border-radius:999px;padding:10px 32px 10px 14px;font:700 12px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.04em;max-width:min(340px,60vw);cursor:pointer}
+.labnav .jumpsel:focus-visible{outline:2px solid #E0FF4E;outline-offset:2px}
+.editsw{appearance:none;display:inline-flex;align-items:center;gap:12px;min-height:46px;padding:6px 18px 6px 8px;border-radius:999px;border:2px solid #2B2830;background:#17151B;color:#F3F1F5;font:800 15px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:0;text-transform:none;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.editsw .track{position:relative;width:52px;height:30px;border-radius:999px;background:#2B2830;flex:none;transition:background .15s}
+.editsw .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#A39EAB;transition:transform .18s cubic-bezier(.4,0,.2,1),background .15s}
+.editsw .st{font:700 11px/1 "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#A39EAB}
+.editsw:hover{border-color:#A39EAB}
+.editsw:focus-visible{outline:2px solid #E0FF4E;outline-offset:3px}
+.editsw[aria-checked="true"]{background:#E0FF4E;border-color:#E0FF4E;color:#0C0B0E}
+.editsw[aria-checked="true"] .track{background:#0C0B0E}
+.editsw[aria-checked="true"] .knob{transform:translateX(22px);background:#E0FF4E}
+.editsw[aria-checked="true"] .st{color:#0C0B0E}
+body.editing .labnav{border-bottom-color:#E0FF4E;box-shadow:0 1px 0 #E0FF4E}
+@media (prefers-reduced-motion:reduce){.editsw,.editsw .knob,.editsw .track{transition:none}}
+/* Review card: the number, the Meta ad name and where it lands, set big enough to find at a glance */
+.ref{display:none;flex-direction:column;gap:8px}
+.ref .big{font:800 88px/.8 var(--ui);letter-spacing:-.04em;color:var(--lime)}
+.ref code{align-self:flex-start;font:700 13px/1 var(--mono);color:var(--text);background:#17151B;border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.ref small{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.ref small b{color:var(--text);font-weight:700}
+/* Review mode hides the builder */
+body:not(.editing) .notes > .num,
+body:not(.editing) .notes .spec,
+body:not(.editing) .notes .alts,
+body:not(.editing) .notes .ctain,
+body:not(.editing) .notes .hint,
+body:not(.editing) .notes .meta,
+body:not(.editing) .notes .acts,
+body:not(.editing) .notes .status{display:none}
+body:not(.editing) .ref{display:flex}
+body:not(.editing) .b.feed [data-edit]{cursor:auto;-webkit-user-modify:read-only}
+body:not(.editing) .b.feed [data-edit]:hover{outline:none}
 </style>
 
-<nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html" id="nav-hub">← Hub</a><a href="ad-lab.html" aria-current="page">Ad lab</a><a href="hero-lab.html">Hero lab</a><a href="email-lab.html">Email lab</a></nav>
+
+<nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html" id="nav-hub">← Hub</a><a href="ad-lab.html" aria-current="page">Ad lab</a><a href="hero-lab.html">Hero lab</a><a href="email-lab.html">Email lab</a><span class="navsp"></span><select class="jumpsel" id="jumpsel" aria-label="Jump to a concept"><option value="">Jump to concept…</option></select><button type="button" class="editsw" id="editsw" role="switch" aria-checked="false"><span class="track"><span class="knob"></span></span>Edit mode<span class="st">Off</span></button></nav>
 <div class="wrap">
   <header>
     <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
@@ -1095,6 +1132,7 @@ document.getElementById("jump").innerHTML = D.map((d,i)=>`<a href="#${d.id}">${S
 document.getElementById("dirs").innerHTML = D.map((d,i)=>(i===0?`<div class="round"><span class="num">Round 1</span><h2>Photo and a big line</h2><p>Full-bleed or framed photos, one line a parent recognises.</p></div>`:"")+(i===6?`<div class="round"><span class="num">Round 2</span><h2>Formats parents already read</h2><p>Each borrows a format a parent knows on sight: a report card, a before and after, a ticket, a text thread, a game screen. The format gets the stop, the line gets the click.</p></div>`:"")+(i===12?`<div class="round"><span class="num">Round 3</span><h2>Their real problem</h2><p>Parents don’t search for youth esports. They search for help with a kid who games too much, doesn’t have friends, or isn’t a sports kid. Two ads per problem, each built on a template from rounds 1 and 2, and each matching a Google ad group.</p></div>`:"")+`
  <section class="dir" id="${d.id}">
   <div class="notes">
+   <div class="ref" data-ref="${d.id}"><span class="big">${String(i+1).padStart(2,"0")}</span><code data-ref-name>${d.id}</code><small data-ref-hero></small></div>
    <span class="num">Direction ${String(i+1).padStart(2,"0")}</span>
    <h2>${d.name}</h2>
    <p>${d.why}</p>
@@ -1406,6 +1444,34 @@ document.getElementById("lpm-x").addEventListener("click",closeLp);
 lpm.addEventListener("click",e=>{ if(e.target===lpm) closeLp(); });
 addEventListener("keydown",e=>{ if(e.key==="Escape"&&!lpm.hidden) closeLp(); });
 addEventListener("resize",()=>{ if(!lpm.hidden) fitPhone(); });
+
+/* ----- Edit mode (Oct 15). Off by default; remembered in this browser; ?edit=1 opens straight into it. ----- */
+(()=>{
+  const sw=document.getElementById("editsw"), body=document.body;
+  const HERO_L={amount:"How much do they game?",games:"What do they play?",screentime:"Which one do you hear the most?",shortlist:"They tried them all.",split:"How much do they game? or What do they play? (50/50)"};
+  // Live routing on ekuzo.gg/season1 since 10-14 (ads.md "Landing page per ad"); a hero picked in the builder overrides it
+  const LIVE_HERO={d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:"split"};
+  const fld=(sec,f)=>(sec.querySelector(`[data-meta] [data-f="${f}"]`)||{}).value||"";
+  const refresh=id=>{ const sec=document.getElementById(id); if(!sec) return;
+    const n=fld(sec,"adname").trim()||id, hv=fld(sec,"hero")||LIVE_HERO[id]||"";
+    sec.querySelector("[data-ref-name]").textContent=n;
+    sec.querySelector("[data-ref-hero]").innerHTML=`Lands on <b>${HERO_L[hv]||"the ad, continued"}</b>`;
+    const o=document.querySelector(`#jumpsel option[value="${id}"]`); if(o) o.textContent=`${o.dataset.n} · ${D.find(x=>x.id===id).name} · ${n}`; };
+  const js=document.getElementById("jumpsel");
+  js.insertAdjacentHTML("beforeend",D.map((d,i)=>{const n=String(i+1).padStart(2,"0");return `<option value="${d.id}" data-n="${n}">${n} · ${d.name}</option>`;}).join(""));
+  js.addEventListener("change",()=>{ const id=js.value; if(!id) return; const el=document.getElementById(id); if(el){ el.scrollIntoView({behavior:"smooth",block:"start"}); history.replaceState(null,"","#"+id); } js.value=""; });
+  D.forEach(d=>{ refresh(d.id); const sec=document.getElementById(d.id);
+    sec&&sec.querySelectorAll('[data-meta] [data-f="adname"],[data-meta] [data-f="hero"]').forEach(f=>{ f.addEventListener("input",()=>refresh(d.id)); f.addEventListener("change",()=>refresh(d.id)); }); });
+  const set=on=>{ body.classList.toggle("editing",on); sw.setAttribute("aria-checked",on); sw.querySelector(".st").textContent=on?"On":"Off";
+    document.querySelectorAll(".b.feed [data-edit]").forEach(el=>el.setAttribute("contenteditable",on?"true":"false"));
+    try{ localStorage.setItem("ekuzo-adlab:editing",on?"1":"0"); }catch(_){} };
+  let start=false; try{ start=localStorage.getItem("ekuzo-adlab:editing")==="1"; }catch(_){}
+  const q=new URLSearchParams(location.search).get("edit"); if(q==="1") start=true; if(q==="0") start=false;
+  set(start); setTimeout(()=>D.forEach(d=>refresh(d.id))); // after the hero picker reads the URLs
+  sw.addEventListener("click",()=>{ const top=document.querySelector("section.dir:target")||[...document.querySelectorAll("section.dir")].find(s=>s.getBoundingClientRect().bottom>80);
+    const y=top?top.getBoundingClientRect().top:0; set(sw.getAttribute("aria-checked")!=="true");
+    if(top) scrollBy(0,top.getBoundingClientRect().top-y); }); // keep the concept you're looking at in place
+})();
 
 /* ----- Landing hero picker: keeps the ad's Meta URL and its landing preview on the chosen first screen ----- */
 const setHeroInUrl=(url,hv)=>{ try{ const [base,rest]=url.split("?"); const u=new URLSearchParams(rest||""); if(hv) u.set("hero",hv); else u.delete("hero");

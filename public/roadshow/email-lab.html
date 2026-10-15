@@ -201,7 +201,7 @@ h1{margin:0;font:800 clamp(44px,7vw,92px)/.88 var(--ui);text-transform:uppercase
 const LOGO = "https://cdn.klaviyomail.com/company/UMWwrM/images/05a6d749-c2e7-4a58-a2cf-02ae4f8fb6a1.png";
 const AVATAR = "https://cdn.klaviyomail.com/company/UMWwrM/images/b4abbbe1-4c8d-402a-8e87-ff59921933a3.jpeg";
 const STATUS = {live:"Live", approved:"Approved", review:"In review", draft:"Draft", planned:"Planned"};
-const PHASES = {E0:"Meet us",E2:"What matters to them",E5:"Live right now",E6:"The people",E8:"Stay close"};
+const PHASES = {E0:"Meet us",E3:"What matters to them",E6:"Live right now",E7:"Why it matters",E9:"Stay close"};
 const KEY = "ekuzo.emaillab.v1.";
 
 let PHOTOS={}, emails={}, cur=null, view="desktop", showDiff=false, confirming=null;
@@ -251,6 +251,13 @@ function blockHtml(b, mode){
   }
   if(b.kind==="time") return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-bottom:1px solid #EAE3D6;"><tr><td width="78" valign="top" style="padding:14px 12px 14px 0;${OSW}font-size:22px;font-weight:700;color:#F92524;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;">${merge(tidy(b.head),mode)}</td><td valign="top" style="padding:14px 0;"><p style="margin:0 0 4px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;color:#050505;line-height:1.4;">${merge(tidy(b.title),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#555555;line-height:1.55;">${t}</p></td></tr></table>`;
   if(b.kind==="callout") return `<div style="height:14px;line-height:14px;font-size:1px;">&nbsp;</div><!--[if mso]><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#000000;"><tr><td style="padding:28px 24px;"><![endif]--><div style="background-color:#000000;clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);-webkit-clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="padding:28px 24px;"><p style="margin:0 0 10px 0;${OSW}font-size:30px;font-weight:700;color:#D4FF00;text-transform:uppercase;letter-spacing:.5px;line-height:1.05;">${merge(tidy(b.head),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#F0EDEA;line-height:1.6;">${t}</p></td></tr></table></div><!--[if mso]></td></tr></table><![endif]--><div style="height:28px;line-height:28px;font-size:1px;">&nbsp;</div>`;
+  if(b.kind==="coach"){
+    const ini = String(b.head||"?").split(/\s+/).map(w=>w[0]||"").join("").slice(0,2).toUpperCase();
+    const pic = b.img&&PHOTOS[b.img]
+      ? `<img src="${photoSrc(b.img,mode)}" alt="${esc(b.head||"")}" width="88" height="88" style="display:block;width:88px;height:88px;border-radius:50%;object-fit:cover;border:2px solid #F92524;">`
+      : `<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="88" height="88" align="center" valign="middle" style="width:88px;height:88px;border-radius:50%;background-color:#050505;${OSW}font-size:30px;font-weight:700;color:#D4FF00;">${esc(ini)}</td></tr></table>`;
+    return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top:1px solid #EAE3D6;"><tr><td width="108" valign="top" style="padding:18px 20px 18px 0;">${pic}</td><td valign="top" style="padding:18px 0;"><p style="margin:0 0 2px 0;${OSW}font-size:22px;font-weight:700;color:#050505;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;">${merge(tidy(b.head),mode)}</p><p style="margin:0 0 8px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;color:#F92524;text-transform:uppercase;letter-spacing:1.5px;line-height:1.4;">${merge(tidy(b.title),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#444444;line-height:1.6;">${t}</p></td></tr></table>`;
+  }
   if(b.kind==="link") return `<p style="margin:0 0 26px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;font-weight:700;"><a href="${esc(b.url||"https://ekuzo.gg")}" target="_blank" style="color:#F92524;text-decoration:none;">${merge(tidy(b.head),mode)}&nbsp;&rarr;</a></p>`;
   return `<p style="margin:0 0 18px 0;${P}color:#444444;">${t}</p>`;
 }
@@ -258,7 +265,7 @@ function buildEmail(c, mode){
   const unsub = mode==="preview" ? '<a href="#" style="color:#999999;">Unsubscribe</a>' : "{% unsubscribe 'Unsubscribe' %}";
   const prefs = mode==="preview" ? '<a href="#" style="color:#999999;">Email Preferences</a>' : "{% manage_preferences 'Email Preferences' %}";
   const L = c.blocks||[];
-  const blocks = L.map((b,i)=>blockHtml(b,mode)+(b.kind==="time"&&L[i+1]?.kind!=="time"?'<div style="height:24px;line-height:24px;font-size:1px;">&nbsp;</div>':"")).join("\n");
+  const blocks = L.map((b,i)=>blockHtml(b,mode)+((b.kind==="time"||b.kind==="coach")&&L[i+1]?.kind!==b.kind?'<div style="height:24px;line-height:24px;font-size:1px;">&nbsp;</div>':"")).join("\n");
   const hero = c.hero && PHOTOS[c.hero] ? `<tr><td style="padding:0;"><img src="${photoSrc(c.hero,mode)}" alt="${photoAlt(c.hero)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;"></td></tr>` : "";
   const ps = c.ps ? `<tr><td style="padding:32px 40px 40px 40px;" class="mp"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="height:4px;background-color:#D1C0A6;font-size:1px;line-height:1px;">&nbsp;</td></tr><tr><td style="padding-top:20px;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;color:#050505;line-height:1.6;"><span style="color:#F92524;font-weight:700;">P.S.</span> ${merge(tidy(c.ps),mode)}</td></tr></table></td></tr>` : "";
   return `<!DOCTYPE html>
@@ -297,7 +304,7 @@ function buildText(c){
   (c.blocks||[]).forEach(b=>{
     if(b.kind==="photo") return;
     if(b.kind==="pillar"||b.kind==="callout") out.push(String(b.head||"").toUpperCase());
-    if(b.kind==="time") out.push(`${b.head} · ${b.title}`);
+    if(b.kind==="time"||b.kind==="coach") out.push(`${b.head} · ${b.title}`);
     if(b.kind==="link"){ out.push(`${b.head}: ${b.url}`,""); return; }
     out.push(plain(b.text), "");
   });
@@ -329,7 +336,7 @@ function changedFields(){
 }
 
 const BF=["kind","head","title","text","img","wide","url"];
-const KIND={p:"Paragraph",strong:"Bold line",pillar:"Pillar",photo:"Photo",time:"Timeline row",callout:"Callout",link:"Link"};
+const KIND={p:"Paragraph",strong:"Bold line",pillar:"Pillar",photo:"Photo",time:"Timeline row",callout:"Callout",link:"Link",coach:"Coach card"};
 function photoSelect(id, attr, val, allowNone){
   return `<select id="${id}" ${attr}>${allowNone?`<option value="">No photo</option>`:""}${Object.entries(PHOTOS).map(([k,p])=>`<option value="${esc(k)}" ${val===k?"selected":""}>${esc(p.label||k)}</option>`).join("")}</select>${val&&PHOTOS[val]?`<img class="thumb" src="${esc(PHOTOS[val].src)}" alt="">`:""}`;
 }
@@ -380,21 +387,21 @@ function renderDesk(){
   <div class="field"><label for="f-preview">Preview text</label><textarea id="f-preview" data-f="preview" rows="2">${esc(c.preview)}</textarea>${was(c.preview,p.preview)}<button type="button" class="tiny copybtn" data-copy="preview">Copy preview</button></div>
   <div class="field"><label for="f-eyebrow">Eyebrow</label><input id="f-eyebrow" data-f="eyebrow" value="${esc(c.eyebrow)}">${was(c.eyebrow,p.eyebrow)}</div>
   <div class="field"><label for="f-hero">Top photo <span style="text-transform:none;letter-spacing:0">(full width, under the logo)</span></label>${photoSelect("f-hero",'data-f="hero"',c.hero||"",true)}${was(PHOTOS[c.hero]?.label||"",PHOTOS[p.hero]?.label||"")}</div>
-  <div class="field"><label for="f-headline">Headline <span style="text-transform:none;letter-spacing:0">({first_name} becomes their name)</span></label><input id="f-headline" data-f="headline" value="${esc(c.headline)}">${was(c.headline,p.headline)}</div>
+  <div class="field"><label for="f-headline">Headline <span style="text-transform:none;letter-spacing:0">(no first names yet, we only collect email)</span></label><input id="f-headline" data-f="headline" value="${esc(c.headline)}">${was(c.headline,p.headline)}</div>
   <div class="blocks">
    ${(c.blocks||[]).map((b,i)=>{ const v=st.verdicts[b.id]||""; const pr=pb[b.id]; const open=st.notes[b.id]!=null;
     return `<div class="block ${v}" id="blk-${esc(b.id)}">
      <div class="bhead"><span class="label">${KIND[b.kind]||"Paragraph"} ${i+1}</span>
       <span class="btools"><button type="button" class="tiny v-keep" data-vote="keep" data-b="${esc(b.id)}" aria-pressed="${v==="keep"}">Keep</button><button type="button" class="tiny v-rework" data-vote="rework" data-b="${esc(b.id)}" aria-pressed="${v==="rework"}">Rework</button><button type="button" class="tiny" data-note="${esc(b.id)}" aria-pressed="${open}">Note</button><button type="button" class="tiny" data-del="${i}" aria-label="Remove block ${i+1}">Remove</button></span></div>
-     ${b.kind==="photo"||b.kind==="pillar"?`<div class="field"><label for="i-${esc(b.id)}">Photo</label>${photoSelect("i-"+b.id,`data-bk="img" data-i="${i}"`,b.img||"",b.kind==="pillar")}${was(PHOTOS[b.img]?.label||"",pr?PHOTOS[pr.img]?.label||"":"")}</div>`:""}
+     ${["photo","pillar","coach"].includes(b.kind)?`<div class="field"><label for="i-${esc(b.id)}">Photo</label>${photoSelect("i-"+b.id,`data-bk="img" data-i="${i}"`,b.img||"",b.kind!=="photo")}${was(PHOTOS[b.img]?.label||"",pr?PHOTOS[pr.img]?.label||"":"")}</div>`:""}
      ${b.kind==="photo"?`<label class="check"><input type="checkbox" data-bk="wide" data-i="${i}" ${b.wide?"checked":""}> Edge to edge</label>`:""}
-     ${["pillar","time","callout"].includes(b.kind)?`<div class="field"><label for="h-${esc(b.id)}">${b.kind==="time"?"Time":"Headline"}</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
-     ${b.kind==="time"?`<div class="field"><label for="ti-${esc(b.id)}">What happens</label><input id="ti-${esc(b.id)}" data-bk="title" data-i="${i}" value="${esc(b.title)}">${was(b.title,pr?.title)}</div>`:""}
+     ${["pillar","time","callout","coach"].includes(b.kind)?`<div class="field"><label for="h-${esc(b.id)}">${b.kind==="time"?"Time or step":b.kind==="coach"?"Name":"Headline"}</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
+     ${b.kind==="time"||b.kind==="coach"?`<div class="field"><label for="ti-${esc(b.id)}">${b.kind==="coach"?"School or role":"What happens"}</label><input id="ti-${esc(b.id)}" data-bk="title" data-i="${i}" value="${esc(b.title)}">${was(b.title,pr?.title)}</div>`:""}
      ${b.kind==="link"?`<div class="field"><label for="h-${esc(b.id)}">Link text</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div><div class="field"><label for="u-${esc(b.id)}">Goes to</label><input id="u-${esc(b.id)}" data-bk="url" data-i="${i}" value="${esc(b.url)}" inputmode="url">${was(b.url,pr?.url)}</div>`:""}
-     ${b.kind==="link"?"":`<div class="field"><label for="t-${esc(b.id)}">${b.kind==="photo"?"Caption (optional)":"Text"}</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>`}
+     ${b.kind==="link"?"":`<div class="field"><label for="t-${esc(b.id)}">${b.kind==="photo"?"Caption (optional)":b.kind==="coach"?"Favorite coaching moment":"Text"}</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>`}
      ${open?`<div class="field"><label for="n-${esc(b.id)}">Your note on this block</label><textarea id="n-${esc(b.id)}" data-bn="${esc(b.id)}" rows="2" class="note" placeholder="What should change, or why it works">${esc(st.notes[b.id])}</textarea></div>`:""}
     </div>`; }).join("")}
-   <div class="adds"><button type="button" class="ghost" data-add="p">Add paragraph</button><button type="button" class="ghost" data-add="pillar">Add pillar</button><button type="button" class="ghost" data-add="strong">Add bold line</button><button type="button" class="ghost" data-add="photo">Add photo</button><button type="button" class="ghost" data-add="time">Add timeline row</button><button type="button" class="ghost" data-add="callout">Add callout</button><button type="button" class="ghost" data-add="link">Add link</button></div>
+   <div class="adds"><button type="button" class="ghost" data-add="p">Add paragraph</button><button type="button" class="ghost" data-add="pillar">Add pillar</button><button type="button" class="ghost" data-add="strong">Add bold line</button><button type="button" class="ghost" data-add="photo">Add photo</button><button type="button" class="ghost" data-add="time">Add timeline row</button><button type="button" class="ghost" data-add="callout">Add callout</button><button type="button" class="ghost" data-add="link">Add link</button><button type="button" class="ghost" data-add="coach">Add coach card</button></div>
   </div>
   <div class="field"><label for="f-ps">P.S.</label><textarea id="f-ps" data-f="ps" rows="2">${esc(c.ps)}</textarea>${was(c.ps,p.ps)}</div>
   <div class="field"><label for="f-note">Note on the whole email</label><textarea id="f-note" data-gn rows="3" class="note" placeholder="Anything about this email as a whole: tone, order, what's missing">${esc(st.note)}</textarea></div>
@@ -451,7 +458,7 @@ document.addEventListener("click",async ev=>{
   const et=ev.target.closest("#editToggle"); if(et){ editMode=!editMode; try{ localStorage.setItem(KEY+"edit",editMode?"1":"0"); }catch(_){} syncEdit(); renderDesk(); return; }
   if(!st) return;
   const add=ev.target.closest("[data-add]");
-  if(add){ st.draft.blocks=st.draft.blocks||[]; const k=add.dataset.add; st.draft.blocks.push({id:uid(),kind:k,head:k==="pillar"?"New pillar":k==="time"?"7:00":k==="callout"?"New callout":k==="link"?"Read the full story":"",url:k==="link"?"https://ekuzo.gg/blog":"",title:k==="time"?"What happens":"",img:k==="photo"?Object.keys(PHOTOS)[0]:"",text:""}); edited(); renderDesk(); document.getElementById("t-"+st.draft.blocks.at(-1).id)?.focus(); return; }
+  if(add){ st.draft.blocks=st.draft.blocks||[]; const k=add.dataset.add; st.draft.blocks.push({id:uid(),kind:k,head:k==="pillar"?"New pillar":k==="time"?"7:00":k==="callout"?"New callout":k==="link"?"Read the full story":k==="coach"?"Coach name":"",url:k==="link"?"https://ekuzo.gg/blog":"",title:k==="time"?"What happens":k==="coach"?"School or role":"",img:k==="photo"?Object.keys(PHOTOS)[0]:"",text:""}); edited(); renderDesk(); document.getElementById("t-"+st.draft.blocks.at(-1).id)?.focus(); return; }
   const del=ev.target.closest("[data-del]");
   if(del){ const b=st.draft.blocks.splice(+del.dataset.del,1)[0]; if(b){ delete st.verdicts[b.id]; } edited(); renderDesk(); return; }
   const ov=ev.target.closest("[data-overall]");
