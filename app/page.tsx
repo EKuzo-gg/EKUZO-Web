@@ -603,8 +603,10 @@ export default function HomePage() {
       ═════════════════════════════════════════════════════════════════ */}
       <div className="relative overflow-visible" id="for-parents">
         <TornPaperDivider color="black" variant="top" style={2} />
+        {/* id="zero-tolerance" is the deep link used in the Season 01 emails; "for-parents" above stays for the nav and GA. */}
         <section
-          className="bg-black relative overflow-clip"
+          id="zero-tolerance"
+          className="bg-black relative overflow-clip scroll-mt-6"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(80px, 14vw, 144px)",

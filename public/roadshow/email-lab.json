@@ -79,42 +79,89 @@
   {
    "code": "E1",
    "order": 1,
-   "title": "What is EKUZO?",
+   "title": "What it looks like",
    "day": "Day 2",
    "status": "draft",
-   "job": "The whole idea in one easy read: the details a parent needs (ages, online, twice a week, January start, price) and our three pillars, from Karlin's notes.",
+   "job": "Make it feel real: the people your kid would be with (kids like them, coaches they look up to), how a season works in one light minute, and the questions parents ask first. Jamie is drafting more parent questions to swap in.",
    "copy": {
     "sender": "Karlin from EKUZO",
-    "subject": "The short version: what Season 01 looks like",
-    "preview": "Ages 9 to 18, online from home, twice a week after school. Starts in January.",
-    "eyebrow": "Season 01 · How it works",
-    "headline": "Here's the short version.",
+    "subject": "Here’s what an EKUZO team actually looks like",
+    "preview": "Kids who love games, coaches they look up to, and answers to the questions parents ask first.",
+    "eyebrow": "Season 01 · Youth Esports League",
+    "headline": "Here’s what it actually looks like.",
     "blocks": [
      {
       "id": "e1a",
       "kind": "p",
-      "text": "A couple of days ago I told you why I started EKUZO. Here's the short version of what it is: a youth esports league where kids play on a real team, with a real coach, from home."
+      "text": "A couple of days ago I told you why I started EKUZO. Today I want to show you what it looks like, because it’s easier to picture than to explain."
+     },
+     {
+      "id": "e1m",
+      "kind": "p",
+      "text": "Picture a handful of kids who love games as much as yours does. Twice a week after school, they hop on a call together from home. They laugh, they call out plays, they lose a round and figure out why, and they get better as a team. That’s an EKUZO practice."
+     },
+     {
+      "id": "e1b",
+      "kind": "pillar",
+      "head": "Kids like yours",
+      "text": "Gamers 9 to 18, on a team with kids their own age and level. First names only, the same teammates every week, and families you’ll get to know.",
+      "img": "teammates"
+     },
+     {
+      "id": "e1t",
+      "kind": "photo",
+      "img": "coach-zz",
+      "wide": false,
+      "text": "Coach Sebastien Demontigny, aka Zz",
+      "url": "https://lol.fandom.com/wiki/Zz_(Sebastien_Demontigny)"
+     },
+     {
+      "id": "e1c",
+      "kind": "pillar",
+      "head": "Coaches they’ll look up to",
+      "text": "College varsity players from schools like Texas A&M, UT Austin, Florida and Washington, background-checked and trained to coach kids. Top 10% at the game, top 1% as people. You’ll meet your kid’s coach before the season starts.",
+      "img": ""
+     },
+     {
+      "id": "e1u",
+      "kind": "photo",
+      "img": "team-call",
+      "wide": false,
+      "text": "No toxic lobbies, ever!",
+      "url": "https://ekuzo.gg/?utm_source=klaviyo&utm_medium=email&utm_campaign=season1_nurture&utm_content=e1_zero_tolerance#zero-tolerance"
+     },
+     {
+      "id": "e1d",
+      "kind": "pillar",
+      "head": "A team that’s theirs",
+      "text": "A jersey with their gamer tag, real matches against other teams in the league, and a group they can come back to season after season.",
+      "img": ""
+     },
+     {
+      "id": "e1n",
+      "kind": "strong",
+      "text": "How a season works, in one minute:"
      },
      {
       "id": "e1g",
       "kind": "time",
-      "head": "Ages",
-      "title": "9 to 18",
-      "text": ""
+      "head": "Team",
+      "title": "A small team, with a coach",
+      "text": "Kids their own age and level."
      },
      {
       "id": "e1h",
       "kind": "time",
-      "head": "Where",
-      "title": "Online, from their own setup at home",
-      "text": ""
+      "head": "Practice",
+      "title": "Twice a week, after school",
+      "text": "From home, on a computer with a headset. No driving."
      },
      {
       "id": "e1i",
       "kind": "time",
-      "head": "When",
-      "title": "Twice a week, weekdays after school",
-      "text": ""
+      "head": "Compete",
+      "title": "Matches against other teams",
+      "text": "Their team plays other teams in the league, all online."
      },
      {
       "id": "e1j",
@@ -127,40 +174,48 @@
       "id": "e1k",
       "kind": "time",
       "head": "Cost",
-      "title": "$160 a month",
-      "text": ""
+      "title": "$20 per session",
+      "text": "90 minutes with an elite coach."
      },
      {
-      "id": "e1l",
-      "kind": "p",
-      "text": "Everything we do sits on three things."
+      "id": "e1o",
+      "kind": "photo",
+      "img": "games-jinx",
+      "text": "We love all games but focus on competitive team play",
+      "wide": false,
+      "url": "https://ekuzo.gg/blog/league-of-legends-youth-development?utm_source=klaviyo&utm_medium=email&utm_campaign=season1_nurture&utm_content=e1_games_blog"
      },
      {
-      "id": "e1c",
+      "id": "e1p",
+      "kind": "strong",
+      "text": "Questions parents ask first"
+     },
+     {
+      "id": "e1q",
       "kind": "pillar",
-      "head": "Coaches who are top 10% in the game and top 1% as people",
-      "text": "Our coaches are varsity players from schools like Texas A&M, UT Austin, Florida and Washington. They're great at the game. They're even better with kids.",
-      "img": "coach-zz"
+      "head": "Do they need to know the game?",
+      "text": "No. The game is free to download, most kids start from scratch, and everyone learns it together. They keep playing whatever they play now.",
+      "img": ""
      },
      {
-      "id": "e1b",
+      "id": "e1r",
       "kind": "pillar",
-      "head": "Safe, team-based competition",
-      "text": "Kids play with kids their own age, on a first-name basis, alongside families they know. Same teammates every week, a jersey with their gamer tag, and real matches against other teams.",
-      "img": "team-outside"
+      "head": "What do they need?",
+      "text": "A computer that can run the game and a headset. That’s it.",
+      "img": ""
      },
      {
-      "id": "e1d",
+      "id": "e1s",
       "kind": "pillar",
-      "head": "Community",
-      "text": "Something bigger than one game: a purpose, a group they belong to, and a home they can come back to, with kids who like what they like.",
-      "img": "teammates"
+      "head": "Is it safe?",
+      "text": "Every practice is run by a background-checked coach, on a closed server. Kids play with kids their own age, on a first-name basis.",
+      "img": ""
      },
      {
       "id": "e1e",
       "kind": "callout",
       "head": "If they love gaming, they’re ready.",
-      "text": "Most kids start with a game they’ve never played, so everyone learns it together, with a coach, a team and a plan."
+      "text": "Got a question I didn’t answer? Hit reply. I’ll read and respond."
      },
      {
       "id": "e1f",
@@ -168,11 +223,11 @@
       "text": "Next time, I’ll introduce you to the coaches."
      }
     ],
-    "ps": "What made you sign up? Something your kid said, or something you've been thinking about for a while? Hit reply. I read every one.",
+    "ps": "What made you sign up? Something your kid said, or something you’ve been thinking about for a while?",
     "status": "draft",
-    "hero": "league-champions"
+    "hero": ""
    },
-   "inKlaviyo": false
+   "inKlaviyo": true
   },
   {
    "code": "E2",
@@ -675,7 +730,8 @@
   "teammates": {
    "src": "email-photos/teammates.jpg",
    "label": "Teammates hanging out",
-   "alt": "EKUZO teammates laughing together on a bench"
+   "alt": "EKUZO teammates laughing together on a bench",
+   "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/954e1112-b0e6-45ec-a282-a70e51896611.jpeg"
   },
   "team-coach-mom": {
    "src": "email-photos/team-coach-mom.jpg",
@@ -695,7 +751,8 @@
   "coach-zz": {
    "src": "email-photos/coach-zz.jpg",
    "label": "Coach Sebastien (ZzLegendary)",
-   "alt": "EKUZO coach Sebastien Demontigny"
+   "alt": "EKUZO coach Sebastien Demontigny",
+   "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg"
   },
   "practice-room": {
    "src": "email-photos/practice-room.jpg",
@@ -742,6 +799,16 @@
    "src": "email-photos/league-champions.jpg",
    "label": "League of Legends champions art",
    "alt": "League of Legends characters in battle"
+  },
+  "team-call": {
+   "src": "email-photos/team-call.jpg",
+   "label": "Team on a practice call",
+   "alt": "A full EKUZO team waving on their online practice call"
+  },
+  "games-jinx": {
+   "src": "email-photos/games-jinx.jpg",
+   "label": "Game characters with Jinx",
+   "alt": "Jinx from League of Legends with characters from Fortnite, Minecraft, Rocket League and Nintendo games"
   }
  }
 }
