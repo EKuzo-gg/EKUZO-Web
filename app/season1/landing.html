@@ -854,7 +854,26 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .lp.light-top header:not(.solid) .mark{color:var(--sl-fg,#fff)}
 @media (prefers-reduced-motion:reduce){.sl-q{animation:none}.sl-item::after{transition:none}}
 @media (min-width:960px){.lp > #ihero.light{border-radius:8px;padding:40px 36px}}
+/* ===== Above-the-fold fit (2026-10-15). In-app browsers (Messenger, Facebook, Instagram on Android) apply the phone's text-size setting to the page, so a 54px headline can render at 80px and push the choices off the first screen. fitHero() in the script shrinks only the hero's display type (--ds) until the whole hero (headline, choices, way forward) fits in 80% of the visible screen. Body text keeps the reader's size. ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Phones: the hero takes 80% of the screen (the next section peeks in below) and the headline starts at 80% of its old size */
+@media (max-width:959px){
+  .ihero{min-height:80svh}
+  .ihero h1{font-size:calc(54px*.8*var(--ds,1))}
+  .ihero.light h1{font-size:calc(min(15vw,76px)*.8*var(--ds,1))}
+}
+.ihero.tight{padding-top:72px}
+.ihero.tight .kick,.ihero.tight .sl-kick{margin-bottom:6px}
+.ihero.tight .ih-sub{margin:8px 0 10px}
+.ihero.tight .ih-opt{min-height:48px}
+/* Shortlist: each activity reads as tappable (box that fills on tap), and the way forward is a button */
+.ihero .sl-item.ih-opt{display:inline-flex;align-items:center;gap:.4em}
+.ihero .sl-item.ih-opt::before{display:block;content:"";width:.62em;height:.62em;flex:none;border:3px solid currentColor;border-radius:4px;box-sizing:border-box;opacity:.55}
+.ihero .sl-item.ih-opt[aria-pressed="true"]::before{background:var(--acc);border-color:var(--acc);opacity:1}
+.ihero.light .ih-skip{display:block;width:100%;align-self:stretch;margin-top:16px;padding:0 20px;min-height:54px;border:2px solid var(--sl-acc,var(--acc));border-radius:999px;text-decoration:none;text-align:center;font:800 17px/1 var(--ui);color:var(--sl-acc,var(--acc))}
+.ihero.light .ih-skip[hidden]{display:none}
 </style>
+
 
 
 <div class="lp" id="lp">
@@ -1122,7 +1141,7 @@ const T = {
    <div class="pair"><div class="now"><small>Now</small><q>I’m just&nbsp;playing.</q></div><div class="then"><small>Season one</small><q>I was shot caller tonight. Everyone listened to&nbsp;me.</q></div></div></div>`},
  d3:{acc:"#60E1E0",font:'"Unbounded"',k:"For kids who play to win",h:"Give them a team to win with.",p:"A real coach helps them get better, and a team counts on them every week. Practice, matches and a season of their&nbsp;own."},
  d4:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Esports league",h:"Not every team needs a field.",p:"EKUZO teams practice online with a real coach and compete together all season. Same teammates, same goal, every&nbsp;week."},
- d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and scouts",h:"A team that expects them every&nbsp;week.",p:"They already love the game. We add the coach, the teammates and a weekly practice, so it works like a team sport because it&nbsp;is."},
+ d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and&nbsp;scouts",h:"A team that expects them every&nbsp;week.",p:"They already love the game. We add the coach, the teammates and a weekly practice, so it works like a team sport because it&nbsp;is."},
  d6:{acc:"#FF2ECC",font:'"Syne"',k:"Practice over. GG.",h:"The coach calls it, not you.",p:"Practice has a start and an end, and the coach runs both. No doorway argument, no “five more&nbsp;minutes.”"},
  d7:{acc:"#49B41A",font:'"Anybody"',k:"Progress report",h:"Feedback from a coach, every&nbsp;week.",p:"Each practice works on teamwork, talking it through and showing up, and the coach tells you how they’re doing on each. In the game they already&nbsp;love."},
  d8:{acc:"#FFFFFF",font:'"Dela Gothic One"',k:"Same game",h:"Now with a team.",p:"Same game they play every night. Now with teammates who count on them and a coach who helps them get&nbsp;better."},
@@ -1175,19 +1194,19 @@ if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textC
 // into the hero, so the sign-up, tracking and confirmation run exactly as on the default page.
 // Only the hero name goes to GA and Clarity; the answer itself goes to Klaviyo with the sign-up (never to Meta or GA).
 const HERO_DEFS={
- amount:{kick:"iPads, Switches, PS5s. Oh my.",q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join the list",
+ amount:{kick:"iPads, Switches, PS5s. Oh&nbsp;my.",q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join&nbsp;the&nbsp;list",
   opts:[
    {a:"A little",h:"Then let’s make it count.",say:"Give the time they do play a coach and a team that has their&nbsp;back.",cta:"Count me in"},
    {a:"A lot",h:"Let’s add some structure.",say:"Weekly practice with a real coach, a start and an end, and a team that has their&nbsp;back.",cta:"Count me in"},
    {a:"Way too much",h:"We hear that a lot.",say:"You don’t have to fight it alone. A coach, a schedule and a team that has their back turn those hours into&nbsp;practice.",cta:"Count me in"}]},
- games:{kick:"Quick question",q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the list",
+ games:{kick:"Quick question",q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the&nbsp;list",
   opts:[{a:"Fortnite"},{a:"Minecraft"},{a:"Roblox"},{a:"Overwatch"},{a:"Super Smash Bros."},{a:"Something else"},{a:"I have no idea",none:true}],
   h:"Sounds like a gamer. Let’s give them a&nbsp;team.",say:"We don’t teach the game. We coach the kid: teamwork, talking it through and practice with a start and an&nbsp;end.",cta:"That’s my kid",
   noneH:"That’s normal.",noneSay:"Most parents don’t know what’s on the screen. A coach and a team give you something real to ask them&nbsp;about.",noneCta:"Count me in"},
- shortlist:{q:"They tried them all",custom:true,sub:"Tap the ones you won’t&nbsp;miss.",skip:"Just join the list",
+ shortlist:{q:"They tried them all",custom:true,sub:"Tap the ones you won’t&nbsp;miss.",skip:"Just join the&nbsp;list",
   opts:[{a:"Soccer",q:"Bye, 7am Saturday kickoffs."},{a:"Baseball",q:"Four hours on a metal bleacher. Pass."},{a:"Dance",q:"Retiring from the dance-mom group chat."},{a:"Gymnastics",q:"No more 5am drop-offs."},{a:"Piano",q:"“Did you practice?” Not anymore."}],
   keep:"",h:"Not every kid is a sports&nbsp;kid.",say:"No parking. No cleats. No sideline in the rain. Just their team and a real coach, from&nbsp;home.",cta:"Count me in"},
- screentime:{kick:"Every house has one",q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join the list",
+ screentime:{kick:"Every house has one",q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join&nbsp;the&nbsp;list",
   opts:[
    {a:"“Five more minutes.”",h:"Let the coach call time.",say:"Practice starts on time and the coach ends it. One less doorway argument for&nbsp;you.",cta:"Count me in"},
    {a:"“I can’t pause it.”",h:"Because their team needs them.",say:"That’s already teamwork. A coach and a weekly schedule turn it into&nbsp;practice.",cta:"Count me in"},
@@ -1247,6 +1266,20 @@ if(HD){
   const open=()=>{ resp.classList.add("on"); skip.hidden=true;
     if(!opened){ opened=true; setTimeout(()=>{ const f=joinTop.querySelector("form"); const r=f.getBoundingClientRect();
       if(r.bottom>innerHeight-8) f.scrollIntoView({behavior:"smooth",block:"end"}); },380); } };
+  // Above-the-fold fit: shrink the hero's display type until the whole hero, way forward included, fits in 80% of the screen.
+  // Runs before an answer only; once the form opens the page scrolls to it anyway. Phones only (the desktop hero sits in a column).
+  const fitHero=()=>{ try{
+    if(opened||innerWidth>=960) return;
+    ih.classList.remove("tight"); ih.style.removeProperty("--ds");
+    const base=parseFloat(getComputedStyle(ih).getPropertyValue("--ds"))||1, room=()=>Math.ceil(innerHeight*.8)+1;
+    const end=()=>ih.getBoundingClientRect().height;
+    if(end()<=room()) return;
+    let ds=base;
+    while(end()>room() && ds>base*.5){ ds=+(ds-.04).toFixed(2); ih.style.setProperty("--ds",ds); }
+    if(end()>room()) ih.classList.add("tight");
+  }catch(_){} };
+  fitHero(); document.fonts&&document.fonts.ready.then(fitHero); addEventListener("load",fitHero);
+  let fitT; addEventListener("resize",()=>{ clearTimeout(fitT); fitT=setTimeout(fitHero,150); });
   btns.forEach(b=>b.addEventListener("click",()=>{
     const o=HD.opts[+b.dataset.i];
     if(HERO==="shortlist"){
