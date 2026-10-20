@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15",
+ "updated": "2026-10-20",
  "emails": [
   {
    "code": "E0",
@@ -7,7 +7,7 @@
    "title": "Welcome from Karlin",
    "day": "Day 0, right after sign-up",
    "status": "live",
-   "job": "Who Karlin is and why he started EKUZO. Bridges back to the ad they saw.",
+   "job": "Who Karlin is and why he started EKUZO. Bridges back to the ad they saw, then asks one tap question (what game they play the most) so we can see who's engaged.",
    "copy": {
     "sender": "Karlin from EKUZO",
     "subject": "Their spot for season one is saved. Here's what's next.",
@@ -65,13 +65,21 @@
       "text": "Over the next few weeks, I'll show you exactly how it works: what practice looks like, what they learn, and what you'll see at home."
      },
      {
+      "id": "e0q",
+      "kind": "question",
+      "title": "Quick question",
+      "head": "What game do they play the most?",
+      "text": "One tap. It helps me match them with kids like them.",
+      "answers": "Roblox | https://ekuzo.gg/season1/thanks?play=roblox\nMinecraft | https://ekuzo.gg/season1/thanks?play=minecraft\nFortnite | https://ekuzo.gg/season1/thanks?play=fortnite\nLeague of Legends | https://ekuzo.gg/season1/thanks?play=league\nSomething else | https://ekuzo.gg/season1/thanks?play=other"
+     },
+     {
       "id": "e0h",
       "kind": "p",
       "head": "",
       "text": "Glad you're here."
      }
     ],
-    "ps": "If you made it this far, you're the kind of parent we're building this for. Hit reply and tell me about your kid. I read every one.",
+    "ps": "If you made it this far, you're the kind of parent we're building this for. Hit reply and tell me about your kid. I'll read and respond.",
     "status": "live"
    },
    "inKlaviyo": true
@@ -103,8 +111,8 @@
      {
       "id": "e1b",
       "kind": "pillar",
-      "head": "Kids like yours",
-      "text": "Gamers 9 to 18, on a team with kids their own age and level. First names only, the same teammates every week, and families you’ll get to know.",
+      "head": "Their people",
+      "text": "Gamers 9 to 18, matched with kids their own age and level. Same team every week, inside jokes by week three.",
       "img": "teammates"
      },
      {
@@ -803,12 +811,14 @@
   "team-call": {
    "src": "email-photos/team-call.jpg",
    "label": "Team on a practice call",
-   "alt": "A full EKUZO team waving on their online practice call"
+   "alt": "A full EKUZO team waving on their online practice call",
+   "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg"
   },
   "games-jinx": {
    "src": "email-photos/games-jinx.jpg",
    "label": "Game characters with Jinx",
-   "alt": "Jinx from League of Legends with characters from Fortnite, Minecraft, Rocket League and Nintendo games"
+   "alt": "Jinx from League of Legends with characters from Fortnite, Minecraft, Rocket League and Nintendo games",
+   "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/13bdc5d8-5e7a-4617-939c-adf5c7a25aaf.jpeg"
   }
  }
 }

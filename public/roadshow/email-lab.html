@@ -239,6 +239,9 @@ const BREAK_IN = '<tr><td style="padding:0 40px 8px 40px;" class="mp">';
 function img520(key, mode, mb){
   return `<img src="${photoSrc(key,mode)}" alt="${photoAlt(key)}" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0;margin:0 0 ${mb}px 0;">`;
 }
+function parseAnswers(s){
+  return String(s||"").split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{ const k=l.lastIndexOf("|"); return k<0?{label:l,url:"https://ekuzo.gg"}:{label:l.slice(0,k).trim(),url:l.slice(k+1).trim()}; });
+}
 function blockHtml(b, mode){
   const t = merge(tidy(b.text),mode);
   if(b.kind==="strong") return `<p style="margin:0 0 18px 0;${P}color:#050505;font-weight:600;">${t}</p>`;
@@ -259,6 +262,19 @@ function blockHtml(b, mode){
       : `<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="88" height="88" align="center" valign="middle" style="width:88px;height:88px;border-radius:50%;background-color:#050505;${OSW}font-size:30px;font-weight:700;color:#D4FF00;">${esc(ini)}</td></tr></table>`;
     return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top:1px solid #EAE3D6;"><tr><td width="108" valign="top" style="padding:18px 20px 18px 0;">${pic}</td><td valign="top" style="padding:18px 0;"><p style="margin:0 0 2px 0;${OSW}font-size:22px;font-weight:700;color:#050505;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;">${merge(tidy(b.head),mode)}</p><p style="margin:0 0 8px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;color:#F92524;text-transform:uppercase;letter-spacing:1.5px;line-height:1.4;">${merge(tidy(b.title),mode)}</p><p style="margin:0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#444444;line-height:1.6;">${t}</p></td></tr></table>`;
   }
+  if(b.kind==="question"){
+    /* One-tap question: each answer is its own link, so Klaviyo records the answer as a click. answers = one per line, "Label | url". */
+    const ans = parseAnswers(b.answers);
+    const A = "display:block;padding:14px 8px;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;line-height:1.25;text-align:center;text-decoration:none;letter-spacing:.5px;";
+    const cell = a => `<td width="48%" align="center" valign="middle" bgcolor="#050505" style="background-color:#050505;"><a href="${esc(a.url)}" target="_blank" style="${A}color:#FFFFFF;">${esc(a.label)}</a></td>`;
+    const gap = '<tr><td colspan="3" style="height:10px;font-size:1px;line-height:10px;">&nbsp;</td></tr>';
+    const rows = []; let i = 0;
+    const lastOutline = ans.length % 2 === 1;
+    const pairs = lastOutline ? ans.slice(0,-1) : ans;
+    for(; i < pairs.length; i += 2) rows.push(`<tr>${cell(pairs[i])}<td width="4%" style="font-size:1px;line-height:1px;">&nbsp;</td>${pairs[i+1]?cell(pairs[i+1]):'<td width="48%"></td>'}</tr>`);
+    if(lastOutline){ const a = ans.at(-1); rows.push(`<tr><td colspan="3" style="border:2px solid #050505;background-color:#FFFFFF;"><a href="${esc(a.url)}" target="_blank" style="${A}padding:12px 8px;color:#050505;">${esc(a.label)}</a></td></tr>`); }
+    return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin:6px 0 28px 0;background-color:#F5F1EA;border-left:4px solid #F92524;"><tr><td style="padding:24px 22px 22px 22px;">${b.title?`<p style="margin:0 0 10px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:12px;color:#F92524;text-transform:uppercase;letter-spacing:2px;font-weight:700;line-height:1.4;">${esc(b.title)}</p>`:""}<p style="margin:0 0 6px 0;${OSW}font-size:24px;color:#050505;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;">${merge(tidy(b.head),mode)}</p>${t?`<p style="margin:0 0 18px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:15px;color:#555555;line-height:1.5;">${t}</p>`:""}<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">${rows.join(gap)}</table></td></tr></table>`;
+  }
   if(b.kind==="link") return `<p style="margin:0 0 26px 0;font-family:Inter,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;font-weight:700;"><a href="${esc(b.url||"https://ekuzo.gg")}" target="_blank" style="color:#F92524;text-decoration:none;">${merge(tidy(b.head),mode)}&nbsp;&rarr;</a></p>`;
   return `<p style="margin:0 0 18px 0;${P}color:#444444;">${t}</p>`;
 }
@@ -272,7 +288,8 @@ function buildEmail(c, mode){
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="format-detection" content="telephone=no, date=no, address=no, email=no"><title>${esc(c.subject)}</title>
 <!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet"><!--<![endif]-->
-<style>body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}table,td{mso-table-lspace:0pt;mso-table-rspace:0pt}img{-ms-interpolation-mode:bicubic;border:0;height:auto;line-height:100%;outline:none;text-decoration:none}body{margin:0;padding:0;width:100%!important}
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap');
+body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}table,td{mso-table-lspace:0pt;mso-table-rspace:0pt}img{-ms-interpolation-mode:bicubic;border:0;height:auto;line-height:100%;outline:none;text-decoration:none}body{margin:0;padding:0;width:100%!important}
 @media only screen and (max-width:600px){.ec{width:100%!important;max-width:100%!important}.mp{padding-left:24px!important;padding-right:24px!important}.mh{font-size:26px!important}}</style></head>
 <body style="margin:0;padding:0;background-color:#FFFFFF;">
 <div style="display:none;max-height:0;overflow:hidden;">${esc(c.preview)}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
@@ -307,6 +324,7 @@ function buildText(c){
     if(b.kind==="pillar"||b.kind==="callout") out.push(String(b.head||"").toUpperCase());
     if(b.kind==="time"||b.kind==="coach") out.push(`${b.head} · ${b.title}`);
     if(b.kind==="link"){ out.push(`${b.head}: ${b.url}`,""); return; }
+    if(b.kind==="question"){ if(b.title) out.push(String(b.title).toUpperCase()); out.push(String(b.head||"").toUpperCase()); if(b.text) out.push(plain(b.text)); out.push(""); parseAnswers(b.answers).forEach(a=>out.push(`${a.label}: ${a.url}`)); out.push(""); return; }
     out.push(plain(b.text), "");
   });
   out.push("- Karlin","Founder, EKUZO","");
@@ -336,8 +354,8 @@ function changedFields(){
   return out;
 }
 
-const BF=["kind","head","title","text","img","wide","url"];
-const KIND={p:"Paragraph",strong:"Bold line",pillar:"Pillar",photo:"Photo",time:"Timeline row",callout:"Callout",link:"Link",coach:"Coach card"};
+const BF=["kind","head","title","text","img","wide","url","answers"];
+const KIND={p:"Paragraph",strong:"Bold line",pillar:"Pillar",photo:"Photo",time:"Timeline row",callout:"Callout",link:"Link",coach:"Coach card",question:"Question"};
 function photoSelect(id, attr, val, allowNone){
   return `<select id="${id}" ${attr}>${allowNone?`<option value="">No photo</option>`:""}${Object.entries(PHOTOS).map(([k,p])=>`<option value="${esc(k)}" ${val===k?"selected":""}>${esc(p.label||k)}</option>`).join("")}</select>${val&&PHOTOS[val]?`<img class="thumb" src="${esc(PHOTOS[val].src)}" alt="">`:""}`;
 }
@@ -397,10 +415,12 @@ function renderDesk(){
      ${["photo","pillar","coach"].includes(b.kind)?`<div class="field"><label for="i-${esc(b.id)}">Photo</label>${photoSelect("i-"+b.id,`data-bk="img" data-i="${i}"`,b.img||"",b.kind!=="photo")}${was(PHOTOS[b.img]?.label||"",pr?PHOTOS[pr.img]?.label||"":"")}</div>`:""}
      ${b.kind==="photo"?`<label class="check"><input type="checkbox" data-bk="wide" data-i="${i}" ${b.wide?"checked":""}> Edge to edge</label>`:""}
      ${b.kind==="photo"?`<div class="field"><label for="pu-${esc(b.id)}">Caption links to (optional)</label><input id="pu-${esc(b.id)}" data-bk="url" data-i="${i}" value="${esc(b.url)}" inputmode="url">${was(b.url,pr?.url)}</div>`:""}
-     ${["pillar","time","callout","coach"].includes(b.kind)?`<div class="field"><label for="h-${esc(b.id)}">${b.kind==="time"?"Time or step":b.kind==="coach"?"Name":"Headline"}</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
+     ${b.kind==="question"?`<div class="field"><label for="ti-${esc(b.id)}">Small label above</label><input id="ti-${esc(b.id)}" data-bk="title" data-i="${i}" value="${esc(b.title)}">${was(b.title,pr?.title)}</div>`:""}
+     ${["pillar","time","callout","coach","question"].includes(b.kind)?`<div class="field"><label for="h-${esc(b.id)}">${b.kind==="time"?"Time or step":b.kind==="coach"?"Name":b.kind==="question"?"Question":"Headline"}</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div>`:""}
      ${b.kind==="time"||b.kind==="coach"?`<div class="field"><label for="ti-${esc(b.id)}">${b.kind==="coach"?"School or role":"What happens"}</label><input id="ti-${esc(b.id)}" data-bk="title" data-i="${i}" value="${esc(b.title)}">${was(b.title,pr?.title)}</div>`:""}
      ${b.kind==="link"?`<div class="field"><label for="h-${esc(b.id)}">Link text</label><input id="h-${esc(b.id)}" data-bh="${i}" value="${esc(b.head)}">${was(b.head,pr?.head)}</div><div class="field"><label for="u-${esc(b.id)}">Goes to</label><input id="u-${esc(b.id)}" data-bk="url" data-i="${i}" value="${esc(b.url)}" inputmode="url">${was(b.url,pr?.url)}</div>`:""}
-     ${b.kind==="link"?"":`<div class="field"><label for="t-${esc(b.id)}">${b.kind==="photo"?"Caption (optional)":b.kind==="coach"?"Favorite coaching moment":"Text"}</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>`}
+     ${b.kind==="question"?`<div class="field"><label for="an-${esc(b.id)}">Answers, one per line: Label | link</label><textarea id="an-${esc(b.id)}" data-bk="answers" data-i="${i}" rows="5">${esc(b.answers)}</textarea>${was(b.answers,pr?.answers)}</div>`:""}
+     ${b.kind==="link"?"":`<div class="field"><label for="t-${esc(b.id)}">${b.kind==="photo"?"Caption (optional)":b.kind==="coach"?"Favorite coaching moment":b.kind==="question"?"Line under the question":"Text"}</label><textarea id="t-${esc(b.id)}" data-bt="${i}" rows="3">${esc(b.text)}</textarea>${showDiff?(pr?was(b.text,pr.text):`<p class="was"><b>Current version</b><i>(new block you added)</i></p>`):""}</div>`}
      ${open?`<div class="field"><label for="n-${esc(b.id)}">Your note on this block</label><textarea id="n-${esc(b.id)}" data-bn="${esc(b.id)}" rows="2" class="note" placeholder="What should change, or why it works">${esc(st.notes[b.id])}</textarea></div>`:""}
     </div>`; }).join("")}
    <div class="adds"><button type="button" class="ghost" data-add="p">Add paragraph</button><button type="button" class="ghost" data-add="pillar">Add pillar</button><button type="button" class="ghost" data-add="strong">Add bold line</button><button type="button" class="ghost" data-add="photo">Add photo</button><button type="button" class="ghost" data-add="time">Add timeline row</button><button type="button" class="ghost" data-add="callout">Add callout</button><button type="button" class="ghost" data-add="link">Add link</button><button type="button" class="ghost" data-add="coach">Add coach card</button></div>
