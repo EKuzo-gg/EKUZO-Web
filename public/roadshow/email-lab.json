@@ -48,7 +48,7 @@
      {
       "id": "e0p",
       "kind": "photo",
-      "img": "team-jerseys",
+      "img": "kid-thumbs-up",
       "wide": true,
       "text": ""
      },
@@ -819,6 +819,12 @@
    "label": "Game characters with Jinx",
    "alt": "Jinx from League of Legends with characters from Fortnite, Minecraft, Rocket League and Nintendo games",
    "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/13bdc5d8-5e7a-4617-939c-adf5c7a25aaf.jpeg"
+  },
+  "kid-thumbs-up": {
+   "src": "email-photos/kid-thumbs-up.jpg",
+   "cdn": "https://cdn.klaviyomail.com/company/UMWwrM/images/cf9c595e-d2e3-4086-ac70-990d28537e27.jpeg",
+   "label": "Kid at his desk, thumbs up (homeschool blog)",
+   "alt": "A boy in a gaming headset at his desk at home, one hand on the mouse, giving a thumbs up to the camera."
   }
  }
 }
