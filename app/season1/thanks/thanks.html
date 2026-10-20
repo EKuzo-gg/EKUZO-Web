@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Got it | EKUZO</title>
+<link rel="icon" href="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Oswald:wght@700&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W');</script>
+<style>
+:root{--red:#F92524;--black:#050505;--ink:#444;--muted:#7C7C7C;--tan:#D1C0A6;--lime:#D4FF00;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--white);color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.hero{background:var(--red);color:var(--white);padding:clamp(28px,5vw,48px) 20px clamp(56px,10vw,104px)}
+.wrap{max-width:640px;margin:0 auto}
+.logo{display:inline-block;font:700 22px/1 var(--display);letter-spacing:3px;text-transform:uppercase;text-decoration:none;color:var(--white)}
+.eyebrow{margin:clamp(40px,8vw,72px) 0 14px;font:700 12px/1.4 var(--body);letter-spacing:2px;text-transform:uppercase;opacity:.85}
+h1{margin:0;font:700 clamp(48px,13vw,104px)/.92 var(--display);text-transform:uppercase;letter-spacing:.5px;text-wrap:balance}
+h1 span{display:block;color:var(--black)}
+.note{padding:clamp(36px,6vw,56px) 20px}
+.note p{margin:0 0 18px;font-size:18px;line-height:1.7;color:var(--ink);max-width:62ch}
+.note p.lead{color:var(--black);font-weight:700}
+.sig{display:flex;align-items:center;gap:14px;margin-top:28px}
+.sig img{width:56px;height:56px;border-radius:50%;border:2px solid var(--red);display:block}
+.sig b{display:block;font:italic 700 22px/1.1 var(--body);color:var(--red)}
+.sig small{display:block;margin-top:4px;font:500 12px/1.4 var(--body);letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.next{background:var(--black);color:var(--white);padding:clamp(32px,6vw,48px) 20px}
+.next .k{margin:0 0 10px;font:700 12px/1.4 var(--body);letter-spacing:2px;text-transform:uppercase;color:var(--tan)}
+.next h2{margin:0 0 22px;font:700 clamp(28px,6vw,40px)/1.05 var(--display);text-transform:uppercase;color:var(--lime);text-wrap:balance}
+.links{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:14px 20px;background:var(--lime);color:var(--black);font:700 14px/1 var(--body);letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--white);border:2px solid var(--white);padding:12px 18px}
+.btn:focus-visible{outline:3px solid var(--white);outline-offset:3px}
+footer{padding:24px 20px 40px;font-size:12px;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <a class="logo" href="https://ekuzo.gg/">EKUZO</a>
+    <p class="eyebrow">Season 01 · Youth Esports League</p>
+    <h1 id="headline">Got it. <span id="game">Thanks.</span></h1>
+  </div>
+</header>
+
+<main class="note">
+  <div class="wrap">
+    <p class="lead" id="lead">Thanks, that helps.</p>
+    <p>Season 01 teams play one competitive team game together, and most kids start it from scratch. Knowing what your kid already loves helps us match them with kids like them.</p>
+    <p>Next from me: what an EKUZO team actually looks like. It lands in your inbox in two days.</p>
+    <div class="sig">
+      <img src="/images/authors/karlin-oei-avatar.jpg" alt="Karlin Oei, founder of EKUZO" width="56" height="56">
+      <div><b>– Karlin</b><small>Founder, EKUZO</small></div>
+    </div>
+  </div>
+</main>
+
+<section class="next">
+  <div class="wrap">
+    <p class="k">While you wait</p>
+    <h2>We love all games but focus on competitive team play.</h2>
+    <div class="links">
+      <a class="btn" href="/blog/league-of-legends-youth-development?utm_source=season1_thanks&amp;utm_medium=referral&amp;utm_campaign=season1_nurture">Read why</a>
+      <a class="btn ghost" href="/?utm_source=season1_thanks&amp;utm_medium=referral&amp;utm_campaign=season1_nurture">Visit ekuzo.gg</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">EKUZO Inc. · <a href="/privacy-policy">Privacy Policy</a></div></footer>
+
+<script>
+(function(){
+  var names={roblox:"Roblox",minecraft:"Minecraft",fortnite:"Fortnite",league:"League of Legends",other:"Something else"};
+  var leads={league:"Nice. That’s the game Season 01 is built around, so they’ll walk in with a head start.",other:"Thanks, that helps. Plenty of our players come from games you won’t see in an ad."};
+  var p="";
+  try{p=(new URLSearchParams(location.search).get("play")||"").toLowerCase();}catch(e){}
+  if(names[p]){
+    document.getElementById("game").textContent=names[p]+".";
+    document.title="Got it: "+names[p]+" | EKUZO";
+    if(leads[p])document.getElementById("lead").textContent=leads[p];
+    try{gtag('event','season1_play_answer',{play:p});}catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
