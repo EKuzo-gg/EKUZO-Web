@@ -89,7 +89,7 @@
    "order": 1,
    "title": "What it looks like",
    "day": "Day 2",
-   "status": "draft",
+   "status": "live",
    "job": "Make it feel real: the people your kid would be with (kids like them, coaches they look up to), how a season works in one light minute, and the questions parents ask first. Jamie is drafting more parent questions to swap in.",
    "copy": {
     "sender": "Karlin from EKUZO",
@@ -232,7 +232,7 @@
      }
     ],
     "ps": "What made you sign up? Something your kid said, or something you’ve been thinking about for a while?",
-    "status": "draft",
+    "status": "live",
     "hero": ""
    },
    "inKlaviyo": true
