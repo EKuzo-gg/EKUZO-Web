@@ -38,6 +38,14 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * A second call with { step: "age", kidAge } after sign-up records the
  * kid's age band as a profile property (no new subscription).
  *
+ * { step: "text-karlin", phone } comes from the "Chat with our founder" card
+ * on the ad landing confirmation. The parent asks Karlin to text them, and
+ * Karlin texts back by hand from his own phone. The number is saved as the
+ * profile property season1_text_phone and on a "Season 01 Text Karlin" event
+ * (a Klaviyo flow on that metric alerts Karlin). It is deliberately NOT the
+ * profile's phone_number and grants NO SMS consent: nothing automated ever
+ * texts it, and it is never sent to Meta. US numbers only, stored as E.164.
+ *
  * Honeypot: a non-empty `ekz_hp` on the main sign-up gets a silent 200 with no
  * Klaviyo write and no Meta Lead.
  *
@@ -217,7 +225,7 @@ export async function POST(req: NextRequest) {
   }
 
   // A step that is present but not one we know is a client bug: do nothing rather than fall through to a sign-up.
-  if (body.step !== undefined && body.step !== "games" && body.step !== "age") {
+  if (body.step !== undefined && body.step !== "games" && body.step !== "age" && body.step !== "text-karlin") {
     return NextResponse.json({ ok: false, error: FAIL }, { status: 400 });
   }
 
@@ -239,6 +247,19 @@ export async function POST(req: NextRequest) {
       const r = await event("Season 01 Waitlist Age", email, { season1_kid_age: kidAge }, { kid_age: kidAge });
       if (!r.ok) console.error("Klaviyo age event failed:", r.status, await r.text());
       return NextResponse.json({ ok: r.ok });
+    }
+
+    // Follow-up: the parent wants Karlin to text them (see the header note: no SMS consent, no Meta)
+    if (body.step === "text-karlin") {
+      const phone = text(body.phone, 16);
+      if (!/^\+1[2-9]\d{9}$/.test(phone)) return NextResponse.json({ ok: false, error: "Check the number and try again." }, { status: 400 });
+      const ad = normalizeAd(body.ad);
+      const h = text(body.hero).toLowerCase();
+      const r = await event("Season 01 Text Karlin", email,
+        { season1_text_phone: phone, season1_text_requested_at: new Date().toISOString() },
+        { phone, ad, hero: HEROES.has(h) ? h : "none" });
+      if (!r.ok) console.error("Klaviyo text-karlin event failed:", r.status, await r.text());
+      return NextResponse.json({ ok: r.ok }, { status: r.ok ? 200 : 502 });
     }
 
     // Honeypot: the hidden `ekz_hp` field is only ever filled by bots. Look
