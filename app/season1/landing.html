@@ -658,7 +658,7 @@ body{background:#0B0A0D;color:#F3F1F5;font:400 17px/1.5 var(--ui);overflow-x:cli
 .join h2{margin:0;font:800 calc(34px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
 .join p{margin:0;color:#BDB8C2;text-wrap:pretty}
 .join form{display:flex;flex-direction:column;gap:10px;margin-top:4px}
-.join label.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.join label.sr,.tk label.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 /* Honeypot: bots fill it, people never see it. A filled value makes /api/season-one drop the sign-up. */
 .join .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
 .join input[type=email]{font:500 18px/1.2 var(--ui);padding:16px;border-radius:12px;border:2px solid #3a3640;background:#1B1920;color:#fff;width:100%;box-sizing:border-box}
@@ -723,8 +723,23 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .sk li b em{font-style:normal;color:var(--acc)}
 .sk li span{font-size:15px;color:rgba(255,255,255,.86)}
 /* Confirmation: full screen, one message, a small achievement easter egg */
-.conf{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:24px 20px 120px}
-.conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px}
+.conf{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;align-items:flex-start;justify-content:center;padding:24px 20px 120px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;margin:auto 0}
+/* Text Karlin: the parent leaves a number, Karlin texts them himself. Saved to Klaviyo as a profile property only, never SMS marketing consent, never sent to Meta. */
+.tk{margin-top:6px;padding:18px 16px;border-radius:16px;background:#1B1920;border:1px solid #3a3640;display:flex;flex-direction:column;gap:12px}
+.tk-who{display:flex;align-items:center;gap:12px}
+.tk-av{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--acc);background:var(--acc)}
+.tk h3{margin:0;font:800 22px/1.05 var(--ui);color:#fff;text-transform:uppercase;letter-spacing:-.01em}
+.tk .tk-sub{margin:2px 0 0;font:600 13px/1.3 var(--ui);color:#BDB8C2}
+.tk p.tk-ask{margin:0;font-size:17px;line-height:1.4;color:#fff}
+.tk form{display:flex;flex-direction:column;gap:10px}
+.tk input[type=tel]{font:500 18px/1.2 var(--ui);padding:16px;border-radius:12px;border:2px solid #3a3640;background:var(--ink);color:#fff;width:100%;box-sizing:border-box}
+.tk input[type=tel]:focus{outline:none;border-color:var(--acc)}
+.tk button[type=submit]{font:800 17px/1 var(--ui);padding:17px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer;width:100%}
+.tk button[disabled]{opacity:.6}
+.tk .tk-err{color:#FF8B8B;font-size:14px;margin:0}
+.tk .tk-fine{margin:0;font-size:12px;line-height:1.45;color:#8E8996}
+.tk .tk-done{margin:0;font-size:17px;line-height:1.4;color:var(--acc);font-weight:700}
 .conf h2{margin:0;font:800 calc(min(15.5vw,80px)*var(--ds,1))/.9 var(--disp);overflow-wrap:normal;text-transform:uppercase;letter-spacing:-.03em;color:var(--acc);outline:none}
 .conf p{margin:0;font-size:20px;line-height:1.4;color:#fff;text-wrap:pretty}
 .conf .inbox-h{font-size:17px;color:#fff;margin-top:6px}
@@ -944,12 +959,18 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
     <p>We can’t wait to make screentime the highlight of your day&nbsp;too.</p>
     <p class="inbox-h">Check your inbox for a note from Karlin, our&nbsp;founder.</p>
-    <div class="mail" aria-label="What the email looks like">
-      <span class="mail-av" aria-hidden="true">K</span>
-      <div class="mail-t"><b>Karlin at EKUZO</b><span class="mail-s">You’re in. Here’s what comes next.</span><span class="mail-p">Structure beats screen time limits. A note from Karlin on what that looks like.</span></div>
-      <small class="mail-n">Now</small>
+    <div class="tk" id="tk">
+      <div class="tk-who"><img class="tk-av" src="/images/authors/karlin-oei-avatar.jpg" alt="" width="52" height="52" onerror="this.style.visibility='hidden'"><div><h3>Chat with our founder</h3><p class="tk-sub">Karlin Oei · Founder, EKUZO</p></div></div>
+      <p class="tk-ask">Have questions and want to talk to a human? Leave your number and I’ll text you myself.</p>
+      <form id="tk-form" novalidate>
+        <label class="sr" for="tk-ph">Your mobile number</label>
+        <input id="tk-ph" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555" required>
+        <p class="tk-err" role="alert" hidden></p>
+        <button type="submit">Text me, Karlin</button>
+        <p class="tk-fine">By submitting your number you agree to text a real human, and you are in fact a real human. Karlin texts you himself, from his own phone. No marketing list, no automated texts. Msg and data rates may apply. Reply STOP any time.</p>
+      </form>
+      <p class="tk-done" role="status" hidden>Got it. I’ll text you soon. – Karlin</p>
     </div>
-    <p class="egg">Now go outside. Or pick up that controller. Either way, go have&nbsp;fun.</p>
     <div class="age"><p>Know a parent still figuring out screen&nbsp;time?</p>
       <button type="button" class="share-btn" id="share">Send this to them</button>
       <p class="thanks" role="status" hidden></p></div>
@@ -1387,6 +1408,25 @@ function showDone(){
   document.querySelectorAll(".lp header,#sticky").forEach(x=>x.hidden=true);
   c.querySelector("h2").focus({preventScroll:true});
   setTimeout(()=>c.classList.add("on"),700);
+  const tf=document.getElementById("tk-form");
+  if(tf && !tf.dataset.on){ tf.dataset.on="1"; let tkStarted=false;
+    tf.phone.addEventListener("input",()=>{ if(!tkStarted){ tkStarted=true; ga("text_karlin_start",{}); } });
+    tf.addEventListener("submit",async e=>{
+      e.preventDefault();
+      const err=tf.querySelector(".tk-err"), btn=tf.querySelector("button");
+      // US numbers: 10 digits, or 11 starting with 1. Anything else asks again.
+      let dg=tf.phone.value.replace(/\D/g,""); if(dg.length===11&&dg[0]==="1") dg=dg.slice(1);
+      if(dg.length!==10||/^[01]/.test(dg)){ err.textContent="Check the number and try again. US mobile numbers only for now."; err.hidden=false; tf.phone.focus(); return; }
+      err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
+      try{
+        // The number goes to Klaviyo only. GA and Clarity get the moment, never the number; Meta gets nothing.
+        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none"});
+        if(!r.ok) throw 0;
+        ga("text_karlin_submit",{}); clr("event","text_karlin");
+        tf.hidden=true; document.querySelector("#tk .tk-done").hidden=false;
+      }catch(_){ btn.disabled=false; btn.textContent="Text me, Karlin"; err.textContent="That didn’t go through. Try again, or reply to Karlin’s email."; err.hidden=false; }
+    });
+  }
   const sb=document.getElementById("share");
   if(sb && !sb.dataset.on){ sb.dataset.on="1"; sb.addEventListener("click",async()=>{
     // Clean link: the same ad and hero, tagged as a share. No email, no answers.
