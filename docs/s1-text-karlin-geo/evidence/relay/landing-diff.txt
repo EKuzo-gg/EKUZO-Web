@@ -1,0 +1,12 @@
+diff --git a/app/season1/landing.html b/app/season1/landing.html
+index 2a7d7ee..2816939 100644
+--- a/app/season1/landing.html
++++ b/app/season1/landing.html
+@@ -1374,0 +1375 @@ const LIVE = /(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname
++const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return ""}})();
+@@ -1392 +1393 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
+-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
++    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""})
+@@ -1423 +1424 @@ function showDone(){
+-        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none"});
++        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none",tz:TZ});

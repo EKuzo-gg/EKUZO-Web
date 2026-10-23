@@ -1,0 +1,7 @@
+## dash scan of NEW prose (added lines only for modified files)
+route.ts(added lines): 0 line(s) with dashes of 32 lines scanned
+season-one-tracking.md(added lines): 0 line(s) with dashes of 8 lines scanned
+lib/seasonOneGeo.ts: 0 line(s) with dashes of 121 lines scanned
+season-one-geo.test.ts: 0 line(s) with dashes of 262 lines scanned
+relay/notes.md: 0 line(s) with dashes of 32 lines scanned
+context: pre-existing em dashes in route.ts on origin/main: 4

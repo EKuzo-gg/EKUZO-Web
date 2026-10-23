@@ -1,0 +1,405 @@
+TAP version 13
+# (node:73) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/lib/__tests__/season-one-geo.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: cleanTz
+    # Subtest: accepts valid zones
+    ok 1 - accepts valid zones
+      ---
+      duration_ms: 6.851959
+      type: 'test'
+      ...
+    # Subtest: canonicalizes case
+    ok 2 - canonicalizes case
+      ---
+      duration_ms: 0.109917
+      type: 'test'
+      ...
+    # Subtest: drops every M1 value
+    ok 3 - drops every M1 value
+      ---
+      duration_ms: 0.118166
+      type: 'test'
+      ...
+    # Subtest: accepts a 64-character shape but rejects what Intl rejects
+    ok 4 - accepts a 64-character shape but rejects what Intl rejects
+      ---
+      duration_ms: 0.095166
+      type: 'test'
+      ...
+    # Subtest: never throws on a 1 MB string
+    ok 5 - never throws on a 1 MB string
+      ---
+      duration_ms: 0.033209
+      type: 'test'
+      ...
+    1..5
+ok 1 - cleanTz
+  ---
+  duration_ms: 7.566417
+  type: 'suite'
+  ...
+# Subtest: UTC_ALIASES
+    # Subtest: holds the 14 documented names
+    ok 1 - holds the 14 documented names
+      ---
+      duration_ms: 0.064959
+      type: 'test'
+      ...
+    # Subtest: every alias validates and cleans to an alias (ICU may canonicalize to UTC)
+    ok 2 - every alias validates and cleans to an alias (ICU may canonicalize to UTC)
+      ---
+      duration_ms: 0.35225
+      type: 'test'
+      ...
+    1..2
+ok 2 - UTC_ALIASES
+  ---
+  duration_ms: 0.607708
+  type: 'suite'
+  ...
+# Subtest: parseGeoHeader oracle (old readGeo)
+    # Subtest: matches the old readGeo on the four existing keys: null
+    ok 1 - matches the old readGeo on the four existing keys: null
+      ---
+      duration_ms: 0.382583
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: empty
+    ok 2 - matches the old readGeo on the four existing keys: empty
+      ---
+      duration_ms: 0.06225
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: base64 full
+    ok 3 - matches the old readGeo on the four existing keys: base64 full
+      ---
+      duration_ms: 0.2195
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: raw json full
+    ok 4 - matches the old readGeo on the four existing keys: raw json full
+      ---
+      duration_ms: 0.07325
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: bare string codes
+    ok 5 - matches the old readGeo on the four existing keys: bare string codes
+      ---
+      duration_ms: 0.168
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: postal_code fallback
+    ok 6 - matches the old readGeo on the four existing keys: postal_code fallback
+      ---
+      duration_ms: 0.047041
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: postalCode beats postal_code
+    ok 7 - matches the old readGeo on the four existing keys: postalCode beats postal_code
+      ---
+      duration_ms: 0.031541
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: padded city
+    ok 8 - matches the old readGeo on the four existing keys: padded city
+      ---
+      duration_ms: 0.071417
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long city
+    ok 9 - matches the old readGeo on the four existing keys: long city
+      ---
+      duration_ms: 0.035125
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long region
+    ok 10 - matches the old readGeo on the four existing keys: long region
+      ---
+      duration_ms: 0.028959
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long postal
+    ok 11 - matches the old readGeo on the four existing keys: long postal
+      ---
+      duration_ms: 0.02475
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: numeric fields
+    ok 12 - matches the old readGeo on the four existing keys: numeric fields
+      ---
+      duration_ms: 0.024709
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: null fields
+    ok 13 - matches the old readGeo on the four existing keys: null fields
+      ---
+      duration_ms: 0.313709
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: array
+    ok 14 - matches the old readGeo on the four existing keys: array
+      ---
+      duration_ms: 0.041333
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: raw array
+    ok 15 - matches the old readGeo on the four existing keys: raw array
+      ---
+      duration_ms: 0.034958
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: number
+    ok 16 - matches the old readGeo on the four existing keys: number
+      ---
+      duration_ms: 0.029459
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: string json
+    ok 17 - matches the old readGeo on the four existing keys: string json
+      ---
+      duration_ms: 0.030125
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: null json
+    ok 18 - matches the old readGeo on the four existing keys: null json
+      ---
+      duration_ms: 0.029708
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: garbage
+    ok 19 - matches the old readGeo on the four existing keys: garbage
+      ---
+      duration_ms: 0.03875
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: bad json
+    ok 20 - matches the old readGeo on the four existing keys: bad json
+      ---
+      duration_ms: 0.133042
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: nested array country
+    ok 21 - matches the old readGeo on the four existing keys: nested array country
+      ---
+      duration_ms: 0.031333
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: unicode city
+    ok 22 - matches the old readGeo on the four existing keys: unicode city
+      ---
+      duration_ms: 0.029292
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: timezone only
+    ok 23 - matches the old readGeo on the four existing keys: timezone only
+      ---
+      duration_ms: 0.053917
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: lat long ignored
+    ok 24 - matches the old readGeo on the four existing keys: lat long ignored
+      ---
+      duration_ms: 0.02425
+      type: 'test'
+      ...
+    # Subtest: differs from the old one only by the strip
+    ok 25 - differs from the old one only by the strip
+      ---
+      duration_ms: 0.03925
+      type: 'test'
+      ...
+    1..25
+ok 3 - parseGeoHeader oracle (old readGeo)
+  ---
+  duration_ms: 2.193417
+  type: 'suite'
+  ...
+# Subtest: parseGeoHeader
+    # Subtest: reads base64 JSON including timezone
+    ok 1 - reads base64 JSON including timezone
+      ---
+      duration_ms: 0.092083
+      type: 'test'
+      ...
+    # Subtest: reads raw JSON
+    ok 2 - reads raw JSON
+      ---
+      duration_ms: 0.090084
+      type: 'test'
+      ...
+    # Subtest: garbage, array, missing: all empty
+    ok 3 - garbage, array, missing: all empty
+      ---
+      duration_ms: 0.084792
+      type: 'test'
+      ...
+    # Subtest: timezone invalid gives empty geo_tz and keeps the rest
+    ok 4 - timezone invalid gives empty geo_tz and keeps the rest
+      ---
+      duration_ms: 0.088041
+      type: 'test'
+      ...
+    # Subtest: timezone case is canonicalized
+    ok 5 - timezone case is canonicalized
+      ---
+      duration_ms: 0.046792
+      type: 'test'
+      ...
+    # Subtest: strips quotes, backslashes and control characters from city and region
+    ok 6 - strips quotes, backslashes and control characters from city and region
+      ---
+      duration_ms: 0.029416
+      type: 'test'
+      ...
+    # Subtest: strip happens before trim and cap
+    ok 7 - strip happens before trim and cap
+      ---
+      duration_ms: 0.032666
+      type: 'test'
+      ...
+    # Subtest: keeps apostrophes and unicode in the city
+    ok 8 - keeps apostrophes and unicode in the city
+      ---
+      duration_ms: 0.027792
+      type: 'test'
+      ...
+    # Subtest: does not strip country or postal (unchanged from the old readGeo)
+    ok 9 - does not strip country or postal (unchanged from the old readGeo)
+      ---
+      duration_ms: 0.027834
+      type: 'test'
+      ...
+    # Subtest: never keeps latitude or longitude
+    ok 10 - never keeps latitude or longitude
+      ---
+      duration_ms: 0.031542
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 11 - never throws (fuzz)
+      ---
+      duration_ms: 12.929417
+      type: 'test'
+      ...
+    1..11
+ok 4 - parseGeoHeader
+  ---
+  duration_ms: 13.565
+  type: 'suite'
+  ...
+# Subtest: tzProps
+    # Subtest: browser zone wins when valid
+    ok 1 - browser zone wins when valid
+      ---
+      duration_ms: 0.278042
+      type: 'test'
+      ...
+    # Subtest: browser zone is canonicalized
+    ok 2 - browser zone is canonicalized
+      ---
+      duration_ms: 0.064542
+      type: 'test'
+      ...
+    # Subtest: falls back to geo when the browser tz is missing or invalid
+    ok 3 - falls back to geo when the browser tz is missing or invalid
+      ---
+      duration_ms: 0.26175
+      type: 'test'
+      ...
+    # Subtest: neither gives empty
+    ok 4 - neither gives empty
+      ---
+      duration_ms: 0.639916
+      type: 'test'
+      ...
+    # Subtest: every UTC alias from the browser loses to a valid non-UTC geo zone
+    ok 5 - every UTC alias from the browser loses to a valid non-UTC geo zone
+      ---
+      duration_ms: 0.657375
+      type: 'test'
+      ...
+    # Subtest: a UTC alias is used when geo is empty, invalid, or itself UTC
+    ok 6 - a UTC alias is used when geo is empty, invalid, or itself UTC
+      ---
+      duration_ms: 1.480875
+      type: 'test'
+      ...
+    # Subtest: a non-UTC browser zone beats a UTC geo zone
+    ok 7 - a non-UTC browser zone beats a UTC geo zone
+      ---
+      duration_ms: 0.071375
+      type: 'test'
+      ...
+    # Subtest: end to end with parseGeoHeader (J6: header with only a timezone)
+    ok 8 - end to end with parseGeoHeader (J6: header with only a timezone)
+      ---
+      duration_ms: 0.13175
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 9 - never throws (fuzz)
+      ---
+      duration_ms: 0.25825
+      type: 'test'
+      ...
+    1..9
+ok 5 - tzProps
+  ---
+  duration_ms: 3.991375
+  type: 'suite'
+  ...
+# Subtest: geoProfileProps
+    # Subtest: returns all three when present
+    ok 1 - returns all three when present
+      ---
+      duration_ms: 0.09325
+      type: 'test'
+      ...
+    # Subtest: drops empties (J4: no header, valid browser tz)
+    ok 2 - drops empties (J4: no header, valid browser tz)
+      ---
+      duration_ms: 0.055542
+      type: 'test'
+      ...
+    # Subtest: drops everything when all are empty (no key written, nothing blanked)
+    ok 3 - drops everything when all are empty (no key written, nothing blanked)
+      ---
+      duration_ms: 0.025625
+      type: 'test'
+      ...
+    # Subtest: city and region without tz
+    ok 4 - city and region without tz
+      ---
+      duration_ms: 0.0275
+      type: 'test'
+      ...
+    # Subtest: an invalid tz is dropped
+    ok 5 - an invalid tz is dropped
+      ---
+      duration_ms: 0.041375
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 6 - never throws (fuzz)
+      ---
+      duration_ms: 0.4705
+      type: 'test'
+      ...
+    1..6
+ok 6 - geoProfileProps
+  ---
+  duration_ms: 0.772917
+  type: 'suite'
+  ...
+1..6
+# tests 58
+# suites 6
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 150.108917
+exit 0

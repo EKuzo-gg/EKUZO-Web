@@ -5,6 +5,35 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop), October 23, 2026 (Text Karlin alert: parent location and time zone)
+
+Spec: `EKUZO/Marketing/ads/2026-10-season-one/proposals/2026-10-23-text-karlin-location-spec.md`.
+Branch `build/s1-text-karlin-geo` off `origin/main` 3572edc (route and landing identical on dev).
+Artifacts: `docs/s1-text-karlin-geo/` (start with `07-review-guide.md`). Not pushed.
+
+**What changed**
+- `lib/seasonOneGeo.ts` (new, unit tested in `lib/__tests__/season-one-geo.test.ts`, 58 tests):
+  `parseGeoHeader` (the old readGeo logic plus `geo_tz` from the header's `timezone`; city and
+  region strip quotes, backslashes and control characters), `cleanTz`, `tzProps`, `geoProfileProps`.
+- `app/api/season-one/route.ts`: the "Season 01 Text Karlin" event now carries `geo_country`,
+  `geo_region`, `geo_city`, `geo_postal`, `geo_tz`, `tz`, `tz_source`; the Waitlist event gains
+  `geo_tz`, `tz`, `tz_source`. Both write profile props `season1_city`, `season1_region`,
+  `season1_tz`, only when non-empty. `tz` is the browser zone, unless it is a UTC alias and the
+  header has a real zone, else the header zone. Nothing new goes to Meta.
+- `app/season1/landing.html`: three lines (a `TZ` constant, `tz` on the sign-up and text-card
+  posts). No markup, CSS or copy change; screenshots pixel-identical to main.
+- `docs/season-one-tracking.md`: geo rows and the new fields.
+
+**Evidence:** tsc clean; build clean; tests unchanged vs main (the `ekuzo101-weeks` "time string"
+failure is identical on main); route suites against main and branch with outbound calls stubbed
+(only the added keys differ, Meta bodies carry no geo or tz); browser lane with analytics blocked
+(Lead once, text step fires nothing new). No live Klaviyo, Meta or Discord writes.
+
+**After deploy:** the Discord and email alert lines in Klaviyo flow Vk9VxY get the Location field
+(Jamie's go), then one live test text request.
+
+**Aaron:** `landing.html` changed by three lines in the script only (both post bodies gain `tz`).
+
 ## Jamie (via Claude), October 14, 2026, 14:05 (Season 01 FAQ game answer)
 
 `app/season1/landing.html`: "What game do they play?" now reads "Your kid might play Roblox, Minecraft or

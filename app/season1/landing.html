@@ -1372,6 +1372,7 @@ new IntersectionObserver(e=>{endVis=e[0].isIntersecting;upd();}).observe(documen
 // Sign-ups go to the site's /api/season-one route (Klaviyo "Season 01 Waitlist" list).
 // Off ekuzo.gg / Netlify (e.g. a design preview) there is no API, so the form just shows the success state.
 const LIVE = /(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname);
+const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return ""}})();
 const post = async o => {
   if(!LIVE) return {ok:true};
   return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});
@@ -1389,7 +1390,7 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
   if(!eventId) eventId=newEventId();
   let why="network";
   try{
-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     why="server"; if(!r.ok) throw 0;
     why="";
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
@@ -1420,7 +1421,7 @@ function showDone(){
       err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
       try{
         // The number goes to Klaviyo only. GA and Clarity get the moment, never the number; Meta gets nothing.
-        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none"});
+        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none",tz:TZ});
         if(!r.ok) throw 0;
         ga("text_karlin_submit",{}); clr("event","text_karlin");
         tf.hidden=true; document.querySelector("#tk .tk-done").hidden=false;

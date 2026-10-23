@@ -1,0 +1,38 @@
+▲ Next.js 16.2.1
+- Local:         http://localhost:3102
+- Network:       http://172.16.10.3:3102
+✓ Ready in 375ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/package-lock.json
+
+✅ Meta CAPI: Lead sent (event_id=ev-control)
+✅ Meta CAPI: Lead sent (event_id=ev-n4-main-ad)
+✅ Meta CAPI: Lead sent (event_id=96c99832-3b72-4084-9299-c79e65b6c289)
+Season 01 sign-up dropped: honeypot field filled
+✅ Meta CAPI: Lead sent (event_id=ev-j4-main)
+✅ Meta CAPI: Lead sent (event_id=60d42fdc-ac11-4e09-af89-e10973975617)
+✅ Meta CAPI: Lead sent (event_id=ev-j5)
+✅ Meta CAPI: Lead sent (event_id=ev-j6a)
+✅ Meta CAPI: Lead sent (event_id=177990a8-7743-4530-bdac-499000a9accc)
+✅ Meta CAPI: Lead sent (event_id=ev-j8)
+✅ Meta CAPI: Lead sent (event_id=ev-j8)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-UTC)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-UTC)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-EtcUTC)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-EtcUTC)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-GMT)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-GMT)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-EtcGMT)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-EtcGMT)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-Zulu)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-Zulu)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-EtcGMT0)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-EtcGMT0)
+✅ Meta CAPI: Lead sent (event_id=ev-utcg-Greenwich)
+✅ Meta CAPI: Lead sent (event_id=ev-utcn-Greenwich)
+✅ Meta CAPI: Lead sent (event_id=ev-utc-geo-utc)
+✅ Meta CAPI: Lead sent (event_id=ev-bvg)

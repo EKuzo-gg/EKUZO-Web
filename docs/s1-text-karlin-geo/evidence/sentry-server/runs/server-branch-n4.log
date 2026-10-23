@@ -1,0 +1,30 @@
+▲ Next.js 16.2.1 (Turbopack)
+- Local:         http://localhost:3102
+- Network:       http://172.16.10.3:3102
+✓ Ready in 949ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/package-lock.json
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+○ Compiling / ...
+ OPTIONS / 400 in 2.3s (proxy.ts: 21ms)
+ OPTIONS / 400 in 33ms (proxy.ts: 20ms)
+✅ Meta CAPI: Lead sent (event_id=ev-control)
+ POST /api/season-one 200 in 622ms (next.js: 594ms, application-code: 28ms)
+✅ Meta CAPI: Lead sent (event_id=ev-n4-main-ad)
+ POST /api/season-one 200 in 24ms (next.js: 4ms, application-code: 20ms)
+✅ Meta CAPI: Lead sent (event_id=ea1cccf3-2a44-4a8b-96c9-54385d90270f)
+ POST /api/season-one 200 in 25ms (next.js: 4ms, application-code: 21ms)
+ POST /api/season-one 200 in 13ms (next.js: 4ms, application-code: 8ms)
+ POST /api/season-one 200 in 12ms (next.js: 4ms, application-code: 8ms)
+ POST /api/season-one 200 in 12ms (next.js: 3ms, application-code: 9ms)
+Season 01 sign-up dropped: honeypot field filled
+ POST /api/season-one 200 in 17ms (next.js: 5ms, application-code: 12ms)
+ POST /api/season-one 400 in 8ms (next.js: 2ms, application-code: 6ms)
+ POST /api/season-one 400 in 12ms (next.js: 2ms, application-code: 10ms)
+ POST /api/season-one 400 in 14ms (next.js: 2ms, application-code: 12ms)

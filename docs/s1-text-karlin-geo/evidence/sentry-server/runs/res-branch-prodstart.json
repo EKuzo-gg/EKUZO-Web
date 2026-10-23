@@ -1,0 +1,4598 @@
+{
+ "stubProven": true,
+ "results": [
+  {
+   "label": "control",
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+control@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.028Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.028Z",
+        "unique_id": "sentry+control@example.test-Season 01 Waitlist-1792767065028"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+control@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-control",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "23eafda03d7281a3fcdbb32e1cec7c1f09b54646d5d0b4e5f892f5c6996121e5"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065032.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ],
+   "stubProven": true
+  },
+  {
+   "label": "n4-main-ad",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 456
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-main-ad@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.039Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.040Z",
+        "unique_id": "sentry+n4-main-ad@example.test-Season 01 Waitlist-1792767065040"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+n4-main-ad@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-n4-main-ad",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "e228d595ad7e4e1784c5e46c9b8e626151c19c0d86972217ec8de1912c64fb32"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065041.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-popup",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 108
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-popup@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "site-popup",
+            "season1_ad": "",
+            "season1_ad_name": "",
+            "season1_joined_at": "2026-10-23T14:51:05.045Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "site-popup",
+         "ad": "",
+         "ad_name": "",
+         "where": "footer",
+         "utm_source": "",
+         "utm_medium": "",
+         "utm_campaign": "",
+         "utm_content": "",
+         "utm_term": "",
+         "utm_id": "",
+         "site": "",
+         "attribution_from": "none",
+         "page": "/",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile"
+        },
+        "time": "2026-10-23T14:51:05.045Z",
+        "unique_id": "sentry+n4-popup@example.test-Season 01 Waitlist-1792767065045"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+n4-popup@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "96c99832-3b72-4084-9299-c79e65b6c289",
+        "action_source": "website",
+        "user_data": {
+         "em": [
+          "54cd77cbb9d60c8a2f80225b1cb09a20ed5e687552f1d3157f718782ec50facf"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456"
+        },
+        "custom_data": {
+         "content_name": "season_one_popup"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-games",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 94
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist Games"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-games@example.test",
+           "properties": {
+            "kid_games": "League of Legends, Roblox"
+           }
+          }
+         }
+        },
+        "properties": {
+         "kid_games": "League of Legends, Roblox"
+        },
+        "time": "2026-10-23T14:51:05.052Z",
+        "unique_id": "sentry+n4-games@example.test-Season 01 Waitlist Games-1792767065052"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-age",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 68
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist Age"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-age@example.test",
+           "properties": {
+            "season1_kid_age": "10-11"
+           }
+          }
+         }
+        },
+        "properties": {
+         "kid_age": "10-11"
+        },
+        "time": "2026-10-23T14:51:05.057Z",
+        "unique_id": "sentry+n4-age@example.test-Season 01 Waitlist Age-1792767065057"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-text",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 132
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-text@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.061Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.061Z",
+        "unique_id": "sentry+n4-text@example.test-Season 01 Text Karlin-1792767065061"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-honeypot",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 96
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": []
+  },
+  {
+   "label": "n4-bademail",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 38
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"That email doesn’t look right.\"}",
+   "calls": []
+  },
+  {
+   "label": "n4-unknown-step",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 75
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"We couldn’t save that. Please try again.\"}",
+   "calls": []
+  },
+  {
+   "label": "n4-badphone",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 105
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"Check the number and try again.\"}",
+   "calls": []
+  },
+  {
+   "label": "j4-main-nogeo-tz",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 452
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j4-main@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.076Z",
+            "season1_tz": "America/New_York",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "America/New_York",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.076Z",
+        "unique_id": "sentry+j4-main@example.test-Season 01 Waitlist-1792767065076"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j4-main@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-j4-main",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "44094cdff8ce630f227dcb26452baca7e315aff249f730fabf57419ee47a4963"
+         ],
+         "client_ip_address": "::ffff:127.0.0.1",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbc": "fb.1.1792767065080.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j4-popup-nogeo-notz",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 108
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j4-popup@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "site-popup",
+            "season1_ad": "",
+            "season1_ad_name": "",
+            "season1_joined_at": "2026-10-23T14:51:05.083Z"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "site-popup",
+         "ad": "",
+         "ad_name": "",
+         "where": "footer",
+         "utm_source": "",
+         "utm_medium": "",
+         "utm_campaign": "",
+         "utm_content": "",
+         "utm_term": "",
+         "utm_id": "",
+         "site": "",
+         "attribution_from": "none",
+         "page": "/",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "",
+         "tz_source": "",
+         "device_os": "ios",
+         "device_type": "mobile"
+        },
+        "time": "2026-10-23T14:51:05.083Z",
+        "unique_id": "sentry+j4-popup@example.test-Season 01 Waitlist-1792767065083"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j4-popup@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "60d42fdc-ac11-4e09-af89-e10973975617",
+        "action_source": "website",
+        "user_data": {
+         "em": [
+          "401fe182c39ff62b7f47f5a3f3b45a7ba4bd3faad582286a2556556f33dccf00"
+         ],
+         "client_ip_address": "::ffff:127.0.0.1",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148"
+        },
+        "custom_data": {
+         "content_name": "season_one_popup"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j4-text-nogeo-tz",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 134
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j4-text@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.088Z",
+            "season1_tz": "America/New_York"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "America/New_York",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.088Z",
+        "unique_id": "sentry+j4-text@example.test-Season 01 Text Karlin-1792767065088"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j4-text-nogeo-notz",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 111
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j4-text2@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.092Z"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "",
+         "tz_source": ""
+        },
+        "time": "2026-10-23T14:51:05.092Z",
+        "unique_id": "sentry+j4-text2@example.test-Season 01 Text Karlin-1792767065092"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j5-a-main-geo",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 440
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j5@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.095Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.095Z",
+        "unique_id": "sentry+j5@example.test-Season 01 Waitlist-1792767065095"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j5@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-j5",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "e4250c4335a919a2525f13de6dd2e1add09beb78e1b4d65cae7ac25a56ee51e7"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065096.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j5-b-text-nogeo",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 127
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j5@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.099Z",
+            "season1_tz": "America/Denver"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "America/Denver",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.099Z",
+        "unique_id": "sentry+j5@example.test-Season 01 Text Karlin-1792767065099"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j5-c-text-nogeo-notz",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 105
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j5@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.101Z"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "",
+         "tz_source": ""
+        },
+        "time": "2026-10-23T14:51:05.101Z",
+        "unique_id": "sentry+j5@example.test-Season 01 Text Karlin-1792767065101"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j6-tzonly-main-browser",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 44,
+    "bodyLen": 443
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j6a@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.104Z",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "Pacific/Honolulu",
+         "tz": "America/Chicago",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.104Z",
+        "unique_id": "sentry+j6a@example.test-Season 01 Waitlist-1792767065104"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j6a@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-j6a",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "79fc3f1a0da61ab8e7a8a730815e61c20207c1361ef39c7566d0937701d7304c"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065105.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j6-tzonly-popup",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 44,
+    "bodyLen": 103
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j6b@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "site-popup",
+            "season1_ad": "",
+            "season1_ad_name": "",
+            "season1_joined_at": "2026-10-23T14:51:05.107Z",
+            "season1_tz": "Pacific/Honolulu"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "site-popup",
+         "ad": "",
+         "ad_name": "",
+         "where": "footer",
+         "utm_source": "",
+         "utm_medium": "",
+         "utm_campaign": "",
+         "utm_content": "",
+         "utm_term": "",
+         "utm_id": "",
+         "site": "",
+         "attribution_from": "none",
+         "page": "/",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "Pacific/Honolulu",
+         "tz": "Pacific/Honolulu",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile"
+        },
+        "time": "2026-10-23T14:51:05.107Z",
+        "unique_id": "sentry+j6b@example.test-Season 01 Waitlist-1792767065107"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j6b@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "177990a8-7743-4530-bdac-499000a9accc",
+        "action_source": "website",
+        "user_data": {
+         "em": [
+          "50e8aa7b3dfbb3f832075bf48f2873a170d7c5034096568e7d44e6f1cc33580a"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456"
+        },
+        "custom_data": {
+         "content_name": "season_one_popup"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j6-tzonly-text-notz",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 44,
+    "bodyLen": 106
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j6c@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.110Z",
+            "season1_tz": "Pacific/Honolulu"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "Pacific/Honolulu",
+         "tz": "Pacific/Honolulu",
+         "tz_source": "geo"
+        },
+        "time": "2026-10-23T14:51:05.110Z",
+        "unique_id": "sentry+j6c@example.test-Season 01 Text Karlin-1792767065110"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j7-text-1",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 127
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j7@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.112Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.112Z",
+        "unique_id": "sentry+j7@example.test-Season 01 Text Karlin-1792767065112"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j7-text-2",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 127
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j7@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.115Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.115Z",
+        "unique_id": "sentry+j7@example.test-Season 01 Text Karlin-1792767065115"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "j8-main-1",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 440
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j8@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.117Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.117Z",
+        "unique_id": "sentry+j8@example.test-Season 01 Waitlist-1792767065117"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j8@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-j8",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "4d672b9b496bdde8a0a820191448142e4a68721a6712e5d24b417aeed67fc75a"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065118.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "j8-main-2",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 440
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+j8@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.120Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Denver",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Denver",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.120Z",
+        "unique_id": "sentry+j8@example.test-Season 01 Waitlist-1792767065120"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+j8@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-j8",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "4d672b9b496bdde8a0a820191448142e4a68721a6712e5d24b417aeed67fc75a"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065121.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-UTC",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 441
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-utc@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.124Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.124Z",
+        "unique_id": "sentry+utcg-utc@example.test-Season 01 Waitlist-1792767065124"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-utc@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-UTC",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "612d4e66eed5a487ad9ce273495d7ce789ce76af1b32a3533c1d8c2b152a2585"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065125.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-UTC",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 441
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-utc@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.127Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.127Z",
+        "unique_id": "sentry+utcn-utc@example.test-Season 01 Waitlist-1792767065127"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-utc@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-UTC",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "ced53a24678ef11e5349d58d3e0ae0f7bce8707465ad707e84b4547ae4dbb090"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065128.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-Etc/UTC",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 453
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-etc_utc@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.131Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.131Z",
+        "unique_id": "sentry+utcg-etc_utc@example.test-Season 01 Waitlist-1792767065131"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-etc_utc@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-EtcUTC",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "11e334c307c00a38ebaf2bc443591c72abb7b6a8813ddf9ce7afc79429607eab"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065132.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-Etc/UTC",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 453
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-etc_utc@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.134Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.134Z",
+        "unique_id": "sentry+utcn-etc_utc@example.test-Season 01 Waitlist-1792767065134"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-etc_utc@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-EtcUTC",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "a983a56dfb77880753259f42b54ddca1027eaa77153ed3536a4795438c13485d"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065135.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-GMT",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 441
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-gmt@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.137Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.137Z",
+        "unique_id": "sentry+utcg-gmt@example.test-Season 01 Waitlist-1792767065137"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-gmt@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-GMT",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "4f251a84befdc170851ff80f8634ca9329f68664c42787e085b9e65fbd44b038"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065138.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-GMT",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 441
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-gmt@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.141Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.141Z",
+        "unique_id": "sentry+utcn-gmt@example.test-Season 01 Waitlist-1792767065141"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-gmt@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-GMT",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "7c9ff24841a71f5244ab4bc5619dec8736161891ce2bff388ddac3186c7101b0"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065141.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-Etc/GMT",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 453
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-etc_gmt@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.144Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.144Z",
+        "unique_id": "sentry+utcg-etc_gmt@example.test-Season 01 Waitlist-1792767065144"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-etc_gmt@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-EtcGMT",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "52eed5f501f4fe36995e20d7b3e471995bc6012e3303607ff17cedc0cf9cb365"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065145.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-Etc/GMT",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 453
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-etc_gmt@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.148Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.148Z",
+        "unique_id": "sentry+utcn-etc_gmt@example.test-Season 01 Waitlist-1792767065148"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-etc_gmt@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-EtcGMT",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "3d05b29bb4ecfdebfabdb8246ca1f5b4dd9742e4d97ff3a0066ff4f88be38ef0"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065150.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-Zulu",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 444
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-zulu@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.153Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.153Z",
+        "unique_id": "sentry+utcg-zulu@example.test-Season 01 Waitlist-1792767065153"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-zulu@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-Zulu",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "52fe7dbb2d6371f0666d54202867233061445fe263e6c72775abb60c71e52d74"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065154.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-Zulu",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 444
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-zulu@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.156Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.156Z",
+        "unique_id": "sentry+utcn-zulu@example.test-Season 01 Waitlist-1792767065156"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-zulu@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-Zulu",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "ef003ceb58b0555c7ede6df5bcd9d7ddbd31784f1e59a97002b6d125cf823857"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065157.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-Etc/GMT+0",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 459
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-etc_gmt_0@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.160Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.160Z",
+        "unique_id": "sentry+utcg-etc_gmt_0@example.test-Season 01 Waitlist-1792767065160"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-etc_gmt_0@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-EtcGMT0",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "694e135332ad088482d086de8cc66712ebc62258b194ec04dfddba101bbc7fdf"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065162.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-Etc/GMT+0",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 459
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-etc_gmt_0@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.164Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.164Z",
+        "unique_id": "sentry+utcn-etc_gmt_0@example.test-Season 01 Waitlist-1792767065164"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-etc_gmt_0@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-EtcGMT0",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "c482ec9541aad778618de850a224778c2cf813cb0c81d59fa122dca09761f619"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065165.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-main-Greenwich",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 459
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcg-greenwich@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.168Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.168Z",
+        "unique_id": "sentry+utcg-greenwich@example.test-Season 01 Waitlist-1792767065168"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcg-greenwich@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcg-Greenwich",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "1db078a07723b30033bd112bef16f5b0576a41775696a4899c45dfc74ac9969a"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065169.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeozone-main-Greenwich",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 92,
+    "bodyLen": 459
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utcn-greenwich@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.171Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.171Z",
+        "unique_id": "sentry+utcn-greenwich@example.test-Season 01 Waitlist-1792767065171"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utcn-greenwich@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utcn-Greenwich",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "498eb8e5391d3fc7893af41d8380c5ec7dec1b737c51729e8add2aae54c7df10"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065172.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-text",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 126
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utc-text-geo@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.175Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Chicago"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Chicago",
+         "tz_source": "geo"
+        },
+        "time": "2026-10-23T14:51:05.175Z",
+        "unique_id": "sentry+utc-text-geo@example.test-Season 01 Text Karlin-1792767065175"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-nogeo-text",
+   "req": {
+    "headerKeys": [],
+    "geoHeaderLen": 0,
+    "bodyLen": 128
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utc-text-nogeo@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:51:05.177Z",
+            "season1_tz": "UTC"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "",
+         "geo_postal": "",
+         "geo_tz": "",
+         "tz": "UTC",
+         "tz_source": "browser"
+        },
+        "time": "2026-10-23T14:51:05.177Z",
+        "unique_id": "sentry+utc-text-nogeo@example.test-Season 01 Text Karlin-1792767065177"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "utc-geo-is-utc-main",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 52,
+    "bodyLen": 447
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+utc-geo-utc@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.181Z",
+            "season1_city": "Reykjavik",
+            "season1_tz": "UTC",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "",
+         "geo_region": "",
+         "geo_city": "Reykjavik",
+         "geo_postal": "",
+         "geo_tz": "UTC",
+         "tz": "UTC",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.181Z",
+        "unique_id": "sentry+utc-geo-utc@example.test-Season 01 Waitlist-1792767065181"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+utc-geo-utc@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-utc-geo-utc",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "e6a8b55f7968c8844c405c6f120185019ba475db9763a3228a21b01673eb0d48"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065181.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "browser-valid-vs-geo-diff",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 447
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+bvg@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:51:05.183Z",
+            "season1_city": "Austin",
+            "season1_region": "TX",
+            "season1_tz": "America/Los_Angeles",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "geo_tz": "America/Chicago",
+         "tz": "America/Los_Angeles",
+         "tz_source": "browser",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:51:05.183Z",
+        "unique_id": "sentry+bvg@example.test-Season 01 Waitlist-1792767065183"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+bvg@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792767065,
+        "event_id": "ev-bvg",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "bbd4f396403bea8c7d14e528c5f6aabaf58fbf64816532ecff4273362fc5cce2"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792767065184.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
