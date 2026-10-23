@@ -1,0 +1,7 @@
+## landing.html word-diff (full lines, no truncation)
++const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return ""}})();
+-post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
++post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
+-post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none"});
++post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none",tz:TZ});
+

@@ -1,0 +1,153 @@
+TAP version 13
+# (node:57) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/lib/__tests__/ekuzo101-weeks.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: isWeekEligible
+    # Subtest: Jul 21 is eligible at 6:59 PM ET on Jul 21
+    ok 1 - Jul 21 is eligible at 6:59 PM ET on Jul 21
+      ---
+      duration_ms: 6.35875
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:00 PM ET on Jul 21
+    ok 2 - Jul 21 is ineligible at 7:00 PM ET on Jul 21
+      ---
+      duration_ms: 0.098875
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:01 PM ET on Jul 21
+    ok 3 - Jul 21 is ineligible at 7:01 PM ET on Jul 21
+      ---
+      duration_ms: 0.226
+      type: 'test'
+      ...
+    # Subtest: a future Tuesday is eligible the day before
+    ok 4 - a future Tuesday is eligible the day before
+      ---
+      duration_ms: 0.301166
+      type: 'test'
+      ...
+    1..4
+ok 1 - isWeekEligible
+  ---
+  duration_ms: 7.33025
+  type: 'suite'
+  ...
+# Subtest: getEligibleWeeks
+    # Subtest: returns exactly 6 items
+    ok 1 - returns exactly 6 items
+      ---
+      duration_ms: 1.24775
+      type: 'test'
+      ...
+    # Subtest: all returned days are Tuesdays (UTC day-of-week === 2)
+    ok 2 - all returned days are Tuesdays (UTC day-of-week === 2)
+      ---
+      duration_ms: 0.601167
+      type: 'test'
+      ...
+    # Subtest: thursdays are always 2 days after their tuesday
+    ok 3 - thursdays are always 2 days after their tuesday
+      ---
+      duration_ms: 0.555459
+      type: 'test'
+      ...
+    # Subtest: skips a week that starts at exactly 7 PM ET
+    ok 4 - skips a week that starts at exactly 7 PM ET
+      ---
+      duration_ms: 0.625042
+      type: 'test'
+      ...
+    # Subtest: DST crossing Nov 1 2026 (EST transition) — should not crash
+    ok 5 - DST crossing Nov 1 2026 (EST transition) — should not crash
+      ---
+      duration_ms: 0.579333
+      type: 'test'
+      ...
+    1..5
+ok 2 - getEligibleWeeks
+  ---
+  duration_ms: 3.81025
+  type: 'suite'
+  ...
+# Subtest: buildWeeksLabel
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 0.166167
+      type: 'test'
+      ...
+    # Subtest: includes all week month-day values
+    ok 2 - includes all week month-day values
+      ---
+      duration_ms: 0.068791
+      type: 'test'
+      ...
+    # Subtest: includes the time string
+    not ok 3 - includes the time string
+      ---
+      duration_ms: 0.218334
+      type: 'test'
+      location: '/sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/lib/__tests__/ekuzo101-weeks.test.ts:152:3'
+      failureType: 'testCodeFailure'
+      error: 'Label missing time: Tuesdays & Thursdays - Weeks of Jul 21 - 7-8:30 PM local time'
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: true
+      actual: false
+      operator: '=='
+      stack: |-
+        TestContext.<anonymous> (file:///sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/lib/__tests__/ekuzo101-weeks.test.ts:154:12)
+        Test.runInAsyncScope (node:async_hooks:214:14)
+        Test.run (node:internal/test_runner/test:1047:25)
+        Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        Test.postRun (node:internal/test_runner/test:1173:19)
+        Test.run (node:internal/test_runner/test:1101:12)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    1..3
+not ok 3 - buildWeeksLabel
+  ---
+  duration_ms: 0.506
+  type: 'suite'
+  location: '/sessions/rcw-01fngqtzox41mkxtnds4xleg/mnt/ekuzo-web/.claude/worktrees/s1-text-karlin-geo/lib/__tests__/ekuzo101-weeks.test.ts:139:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: buildWeekDatesSpan
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 0.118375
+      type: 'test'
+      ...
+    # Subtest: starts with the first Tuesday and ends with the last Thursday
+    ok 2 - starts with the first Tuesday and ends with the last Thursday
+      ---
+      duration_ms: 0.072375
+      type: 'test'
+      ...
+    # Subtest: handles a single week
+    ok 3 - handles a single week
+      ---
+      duration_ms: 0.067125
+      type: 'test'
+      ...
+    1..3
+ok 4 - buildWeekDatesSpan
+  ---
+  duration_ms: 0.293416
+  type: 'suite'
+  ...
+1..4
+# tests 15
+# suites 4
+# pass 14
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 105.464834
+exit 1

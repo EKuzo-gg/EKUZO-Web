@@ -1,0 +1,635 @@
+{
+ "stubProven": true,
+ "results": [
+  {
+   "label": "control",
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+control@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:48:10.634Z",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:48:10.634Z",
+        "unique_id": "sentry+control@example.test-Season 01 Waitlist-1792766890635"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+control@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792766890,
+        "event_id": "ev-control",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "23eafda03d7281a3fcdbb32e1cec7c1f09b54646d5d0b4e5f892f5c6996121e5"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792766890638.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ],
+   "stubProven": true
+  },
+  {
+   "label": "n4-main-ad",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 456
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-main-ad@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "ad-landing",
+            "season1_ad": "d10",
+            "season1_ad_name": "Ad Ten",
+            "season1_joined_at": "2026-10-23T14:48:10.675Z",
+            "season1_hero": "amount",
+            "season1_hero_answer": "Yes"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "ad-landing",
+         "ad": "d10",
+         "ad_name": "Ad Ten",
+         "where": "hero",
+         "utm_source": "facebook",
+         "utm_medium": "paid",
+         "utm_campaign": "s1",
+         "utm_content": "d10",
+         "utm_term": "x",
+         "utm_id": "1",
+         "site": "ekuzo",
+         "attribution_from": "url",
+         "page": "/season1?ad=d10",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "device_os": "ios",
+         "device_type": "mobile",
+         "hero": "amount",
+         "hero_answer": "Yes",
+         "hero_from": "url"
+        },
+        "time": "2026-10-23T14:48:10.676Z",
+        "unique_id": "sentry+n4-main-ad@example.test-Season 01 Waitlist-1792766890676"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 ad landing page",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+n4-main-ad@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792766890,
+        "event_id": "ev-n4-main-ad",
+        "action_source": "website",
+        "event_source_url": "https://ekuzo.gg/season1?ad=d10&fbclid=abc",
+        "user_data": {
+         "em": [
+          "e228d595ad7e4e1784c5e46c9b8e626151c19c0d86972217ec8de1912c64fb32"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456",
+         "fbc": "fb.1.1792766890678.abc"
+        },
+        "custom_data": {
+         "content_name": "season_one_d10"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-popup",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 108
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-popup@example.test",
+           "first_name": "Sen",
+           "properties": {
+            "season1_waitlist": "yes",
+            "season1_source": "site-popup",
+            "season1_ad": "",
+            "season1_ad_name": "",
+            "season1_joined_at": "2026-10-23T14:48:10.695Z"
+           }
+          }
+         }
+        },
+        "properties": {
+         "source": "site-popup",
+         "ad": "",
+         "ad_name": "",
+         "where": "footer",
+         "utm_source": "",
+         "utm_medium": "",
+         "utm_campaign": "",
+         "utm_content": "",
+         "utm_term": "",
+         "utm_id": "",
+         "site": "",
+         "attribution_from": "none",
+         "page": "/",
+         "geo_country": "US",
+         "geo_region": "TX",
+         "geo_city": "Austin",
+         "geo_postal": "78757",
+         "device_os": "ios",
+         "device_type": "mobile"
+        },
+        "time": "2026-10-23T14:48:10.695Z",
+        "unique_id": "sentry+n4-popup@example.test-Season 01 Waitlist-1792766890695"
+       }
+      }
+     }
+    },
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/profile-subscription-bulk-create-jobs",
+     "body": {
+      "data": {
+       "type": "profile-subscription-bulk-create-job",
+       "attributes": {
+        "custom_source": "Season 01 site popup",
+        "profiles": {
+         "data": [
+          {
+           "type": "profile",
+           "attributes": {
+            "email": "sentry+n4-popup@example.test",
+            "subscriptions": {
+             "email": {
+              "marketing": {
+               "consent": "SUBSCRIBED"
+              }
+             }
+            }
+           }
+          }
+         ]
+        }
+       },
+       "relationships": {
+        "list": {
+         "data": {
+          "type": "list",
+          "id": "XGTv2F"
+         }
+        }
+       }
+      }
+     }
+    },
+    {
+     "host": "graph.facebook.com",
+     "path": "/v26.0/000000000000000/events",
+     "body": {
+      "data": [
+       {
+        "event_name": "Lead",
+        "event_time": 1792766890,
+        "event_id": "16fb78ff-2b71-488c-a868-b53dcf39f002",
+        "action_source": "website",
+        "user_data": {
+         "em": [
+          "54cd77cbb9d60c8a2f80225b1cb09a20ed5e687552f1d3157f718782ec50facf"
+         ],
+         "client_ip_address": "203.0.113.9",
+         "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+         "fbp": "fb.1.1700000000.123456"
+        },
+        "custom_data": {
+         "content_name": "season_one_popup"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-games",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 94
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist Games"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-games@example.test",
+           "properties": {
+            "kid_games": "League of Legends, Roblox"
+           }
+          }
+         }
+        },
+        "properties": {
+         "kid_games": "League of Legends, Roblox"
+        },
+        "time": "2026-10-23T14:48:10.721Z",
+        "unique_id": "sentry+n4-games@example.test-Season 01 Waitlist Games-1792766890721"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-age",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 68
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Waitlist Age"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-age@example.test",
+           "properties": {
+            "season1_kid_age": "10-11"
+           }
+          }
+         }
+        },
+        "properties": {
+         "kid_age": "10-11"
+        },
+        "time": "2026-10-23T14:48:10.738Z",
+        "unique_id": "sentry+n4-age@example.test-Season 01 Waitlist Age-1792766890738"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-text",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 132
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": [
+    {
+     "host": "a.klaviyo.com",
+     "path": "/api/events",
+     "body": {
+      "data": {
+       "type": "event",
+       "attributes": {
+        "metric": {
+         "data": {
+          "type": "metric",
+          "attributes": {
+           "name": "Season 01 Text Karlin"
+          }
+         }
+        },
+        "profile": {
+         "data": {
+          "type": "profile",
+          "attributes": {
+           "email": "sentry+n4-text@example.test",
+           "properties": {
+            "season1_text_phone": "+15125550123",
+            "season1_text_requested_at": "2026-10-23T14:48:10.761Z"
+           }
+          }
+         }
+        },
+        "properties": {
+         "phone": "+15125550123",
+         "ad": "d10",
+         "hero": "amount"
+        },
+        "time": "2026-10-23T14:48:10.761Z",
+        "unique_id": "sentry+n4-text@example.test-Season 01 Text Karlin-1792766890761"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "label": "n4-honeypot",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 96
+   },
+   "status": 200,
+   "resp": "{\"ok\":true}",
+   "calls": []
+  },
+  {
+   "label": "n4-bademail",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 38
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"That email doesn’t look right.\"}",
+   "calls": []
+  },
+  {
+   "label": "n4-unknown-step",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 75
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"We couldn’t save that. Please try again.\"}",
+   "calls": []
+  },
+  {
+   "label": "n4-badphone",
+   "req": {
+    "headerKeys": [
+     "x-nf-geo",
+     "x-nf-client-connection-ip",
+     "cookie"
+    ],
+    "geoHeaderLen": 204,
+    "bodyLen": 105
+   },
+   "status": 400,
+   "resp": "{\"ok\":false,\"error\":\"Check the number and try again.\"}",
+   "calls": []
+  }
+ ]
+}

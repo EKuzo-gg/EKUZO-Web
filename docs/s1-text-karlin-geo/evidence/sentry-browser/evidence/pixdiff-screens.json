@@ -1,0 +1,44 @@
+[
+ {
+  "vp": "1440",
+  "st": "hero",
+  "size": "1440x900",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ },
+ {
+  "vp": "1440",
+  "st": "signup",
+  "size": "1440x900",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ },
+ {
+  "vp": "1440",
+  "st": "text",
+  "size": "1440x900",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ },
+ {
+  "vp": "375",
+  "st": "hero",
+  "size": "750x1624",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ },
+ {
+  "vp": "375",
+  "st": "signup",
+  "size": "750x1624",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ },
+ {
+  "vp": "375",
+  "st": "text",
+  "size": "750x1624",
+  "pixelmatch_t0": 0,
+  "raw": 0
+ }
+]

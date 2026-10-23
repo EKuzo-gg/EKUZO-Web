@@ -1,0 +1,1130 @@
+[
+ {
+  "id": "j1-chi-desk",
+  "cfg": {
+   "id": "j1-chi-desk",
+   "vp": "desk",
+   "tz": "America/Chicago",
+   "shots": true
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Chicago",
+   "America/Chicago"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Chicago"
+ },
+ {
+  "id": "j1-chi-mob",
+  "cfg": {
+   "id": "j1-chi-mob",
+   "vp": "mob",
+   "ua": "iphone",
+   "tz": "America/Chicago",
+   "shots": true
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Chicago",
+   "America/Chicago"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Chicago"
+ },
+ {
+  "id": "j1-heroclick-amount-desk",
+  "cfg": {
+   "id": "j1-heroclick-amount-desk",
+   "vp": "desk",
+   "tz": "America/Chicago",
+   "heroClick": true,
+   "hero": "amount"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Chicago",
+   "America/Chicago"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 6,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Chicago"
+ },
+ {
+  "id": "j1-heroclick-games-mob",
+  "cfg": {
+   "id": "j1-heroclick-games-mob",
+   "vp": "mob",
+   "ua": "iphone",
+   "tz": "America/Los_Angeles",
+   "heroClick": true,
+   "hero": "games"
+  },
+  "mainPosts": 3,
+  "branchPosts": 3,
+  "mainHasTz": [
+   false,
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Los_Angeles",
+   null,
+   "America/Los_Angeles"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "games",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "games",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 6,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Los_Angeles"
+ },
+ {
+  "id": "j1-ig-mob-la",
+  "cfg": {
+   "id": "j1-ig-mob-la",
+   "vp": "mob",
+   "ua": "ig",
+   "tz": "America/Los_Angeles"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Los_Angeles",
+   "America/Los_Angeles"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Los_Angeles"
+ },
+ {
+  "id": "j1-ig-mob",
+  "cfg": {
+   "id": "j1-ig-mob",
+   "vp": "mob",
+   "ua": "ig",
+   "tz": "America/Chicago"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Chicago",
+   "America/Chicago"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Chicago"
+ },
+ {
+  "id": "j1-la-desk",
+  "cfg": {
+   "id": "j1-la-desk",
+   "vp": "desk",
+   "tz": "America/Los_Angeles"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Los_Angeles",
+   "America/Los_Angeles"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Los_Angeles"
+ },
+ {
+  "id": "j1-la-mob",
+  "cfg": {
+   "id": "j1-la-mob",
+   "vp": "mob",
+   "ua": "iphone",
+   "tz": "America/Los_Angeles"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "America/Los_Angeles",
+   "America/Los_Angeles"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "America/Los_Angeles"
+ },
+ {
+  "id": "j2-intl-throw-desk",
+  "cfg": {
+   "id": "j2-intl-throw-desk",
+   "vp": "desk",
+   "tz": "America/Chicago",
+   "intlThrow": true
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "",
+   ""
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "THROWS"
+ },
+ {
+  "id": "j2-intl-throw-ig",
+  "cfg": {
+   "id": "j2-intl-throw-ig",
+   "vp": "mob",
+   "ua": "ig",
+   "tz": "America/Los_Angeles",
+   "intlThrow": true
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "",
+   ""
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "THROWS"
+ },
+ {
+  "id": "j2-intl-throw-mob",
+  "cfg": {
+   "id": "j2-intl-throw-mob",
+   "vp": "mob",
+   "ua": "iphone",
+   "tz": "America/Chicago",
+   "intlThrow": true
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "",
+   ""
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "THROWS"
+ },
+ {
+  "id": "utc-desk",
+  "cfg": {
+   "id": "utc-desk",
+   "vp": "desk",
+   "tz": "UTC"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "UTC",
+   "UTC"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "UTC"
+ },
+ {
+  "id": "utc-mob",
+  "cfg": {
+   "id": "utc-mob",
+   "vp": "mob",
+   "ua": "iphone",
+   "tz": "UTC"
+  },
+  "mainPosts": 2,
+  "branchPosts": 2,
+  "mainHasTz": [
+   false,
+   false
+  ],
+  "branchTz": [
+   "UTC",
+   "UTC"
+  ],
+  "restIdentical": true,
+  "keysBranchMinusMain": [
+   [
+    "tz"
+   ],
+   [
+    "tz"
+   ]
+  ],
+  "keysMainMinusBranch": [
+   [],
+   []
+  ],
+  "postOrderMain": [
+   "signup",
+   "text-karlin"
+  ],
+  "postOrderBranch": [
+   "signup",
+   "text-karlin"
+  ],
+  "leadMain": [
+   1,
+   1
+  ],
+  "leadBranch": [
+   1,
+   1
+  ],
+  "fbqSame": true,
+  "dataLayerSame": true,
+  "claritySame": true,
+  "dlLen": 7,
+  "clLen": 5,
+  "confMain": {
+   "conf": true,
+   "tkDone": true
+  },
+  "confBranch": {
+   "conf": true,
+   "tkDone": true
+  },
+  "pageErrMain": [],
+  "pageErrBranch": [],
+  "consoleNoiseMain": 4,
+  "consoleNoiseBranch": 4,
+  "consoleRealMain": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleRealBranch": [
+   "error|Failed to load resource: the server responded with a status of 404 (Not Found)|http://localhost:PORT/images/authors/karlin-oei-avatar.jpg"
+  ],
+  "consoleSetEqual": true,
+  "blockedMain": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "blockedBranch": [
+   "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "GET https://connect.facebook.net/en_US/fbevents.js",
+   "GET https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "nonLocalAllowed": [],
+  "tzResolvedLive": "UTC"
+ }
+]

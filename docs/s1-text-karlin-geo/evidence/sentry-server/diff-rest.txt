@@ -1,0 +1,13 @@
+tag=rest requests=210 status/response diffs=0 branch 5xx/err=0
+DISALLOWED DIFFS: 0
+NOTES: 10
+  m2-main-city-quotes geo_city: base "Au\"stin" -> branch "Austin" (strip)
+  m2-popup-city-quotes geo_city: base "Au\"stin" -> branch "Austin" (strip)
+  m2-main-city-backslash geo_city: base "Au\\stin" -> branch "Austin" (strip)
+  m2-popup-city-backslash geo_city: base "Au\\stin" -> branch "Austin" (strip)
+  m2-main-city-newline geo_city: base "Au\nstin\t\u0001xy" -> branch "Austinxy" (strip)
+  m2-popup-city-newline geo_city: base "Au\nstin\t\u0001xy" -> branch "Austinxy" (strip)
+  m2-main-region-brace geo_region: base "US\"}" -> branch "US}" (strip)
+  m2-popup-region-brace geo_region: base "US\"}" -> branch "US}" (strip)
+  m2-main-region-backslash-str geo_region: base "T\\X" -> branch "TX" (strip)
+  m2-popup-region-backslash-str geo_region: base "T\\X" -> branch "TX" (strip)

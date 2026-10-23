@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import { isIP } from "net";
 import { NextRequest, NextResponse } from "next/server";
 import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
+import { geoProfileProps, parseGeoHeader, tzProps } from "@/lib/seasonOneGeo";
 
 /**
  * POST /api/season-one
@@ -46,6 +47,17 @@ import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
  * profile's phone_number and grants NO SMS consent: nothing automated ever
  * texts it, and it is never sent to Meta. US numbers only, stored as E.164.
  *
+ * Where the family is (so Karlin texts at a sensible hour for them): the
+ * Waitlist and Text Karlin events carry geo_country / geo_region / geo_city /
+ * geo_postal and geo_tz from Netlify's x-nf-geo header (see readGeo), plus
+ * `tz` and `tz_source`. `tz` is the browser's time zone (the landing sends
+ * `tz` in the request body, validated server-side) unless that is a UTC alias
+ * and the header has a real zone, else geo_tz, else ""; `tz_source` is
+ * "browser", "geo" or "". Both events also write the profile properties
+ * season1_city, season1_region and season1_tz, each only when non-empty so a
+ * request without geo never blanks an earlier value. All of it is Klaviyo
+ * only: never sent to Meta, and no latitude/longitude is kept.
+ *
  * Honeypot: a non-empty `ekz_hp` on the main sign-up gets a silent 200 with no
  * Klaviyo write and no Meta Lead.
  *
@@ -88,34 +100,18 @@ const normalizeAd = (v: unknown) => {
 const FAIL = "We couldn’t save that. Please try again.";
 
 /**
- * Visitor location from Netlify's `x-nf-geo` request header. Klaviyo event
- * properties only: never sent to Meta, and no latitude/longitude is kept.
- * Format is typically base64-encoded JSON ({"city","country":{"code"},
- * "subdivision":{"code"},"postalCode"|"postal_code",...}); some runtimes send
- * plain JSON. Parsed defensively: base64 first, then raw, any failure = empty.
- * The exact format is NOT verified against a live deploy yet (checklist L2).
+ * Visitor location and time zone from Netlify's `x-nf-geo` request header,
+ * parsed by parseGeoHeader (lib/seasonOneGeo.ts, unit tested). Returns
+ * geo_country, geo_region, geo_city, geo_postal and geo_tz. Written to Klaviyo
+ * event properties (and, via geoProfileProps, to the season1_city,
+ * season1_region and season1_tz profile properties); never sent to Meta, and no
+ * latitude/longitude is kept. Format is typically base64-encoded JSON, some
+ * runtimes send plain JSON; any failure gives empty strings. Whether the live
+ * header carries `timezone` is checked after deploy (tz_source "geo" on a
+ * popup sign-up).
  */
 function readGeo(req: NextRequest): Record<string, string> {
-  const h = req.headers.get("x-nf-geo");
-  let g: Record<string, unknown> | null = null;
-  if (h) {
-    for (const decode of [(s: string) => Buffer.from(s, "base64").toString("utf8"), (s: string) => s]) {
-      try {
-        const j = JSON.parse(decode(h));
-        if (j && typeof j === "object" && !Array.isArray(j)) { g = j; break; }
-      } catch {
-        // not this encoding; try the next
-      }
-    }
-  }
-  // Accepts {code: "US"} objects or a bare string for country and subdivision.
-  const code = (v: unknown) => text(v && typeof v === "object" ? (v as Record<string, unknown>).code : v, 8);
-  return {
-    geo_country: code(g?.country),
-    geo_region: code(g?.subdivision),
-    geo_city: text(g?.city, 80),
-    geo_postal: text(g?.postalCode ?? g?.postal_code, 12),
-  };
+  return parseGeoHeader(req.headers.get("x-nf-geo"));
 }
 
 /** Coarse device class from the user agent. No dependency, deliberately rough. */
@@ -255,9 +251,11 @@ export async function POST(req: NextRequest) {
       if (!/^\+1[2-9]\d{9}$/.test(phone)) return NextResponse.json({ ok: false, error: "Check the number and try again." }, { status: 400 });
       const ad = normalizeAd(body.ad);
       const h = text(body.hero).toLowerCase();
+      const geo = readGeo(req);
+      const t = tzProps(body.tz, geo);
       const r = await event("Season 01 Text Karlin", email,
-        { season1_text_phone: phone, season1_text_requested_at: new Date().toISOString() },
-        { phone, ad, hero: HEROES.has(h) ? h : "none" });
+        { season1_text_phone: phone, season1_text_requested_at: new Date().toISOString(), ...geoProfileProps(geo, t.tz) },
+        { phone, ad, hero: HEROES.has(h) ? h : "none", ...geo, ...t });
       if (!r.ok) console.error("Klaviyo text-karlin event failed:", r.status, await r.text());
       return NextResponse.json({ ok: r.ok }, { status: r.ok ? 200 : 502 });
     }
@@ -271,12 +269,15 @@ export async function POST(req: NextRequest) {
 
     const source = SOURCES.has(body.source) ? String(body.source) : "site-popup";
     const attr = (body.attribution && typeof body.attribution === "object" ? body.attribution : {}) as Record<string, unknown>;
+    const geo = readGeo(req);
+    const t = tzProps(body.tz, geo);
     const profileProps: Record<string, string> = {
       season1_waitlist: "yes",
       season1_source: source,
       season1_ad: normalizeAd(body.ad),
       season1_ad_name: clean(body.adName, 80),
       season1_joined_at: new Date().toISOString(),
+      ...geoProfileProps(geo, t.tz),
     };
     const eventProps: Record<string, string> = {
       source,
@@ -293,7 +294,8 @@ export async function POST(req: NextRequest) {
       attribution_from: "none",
       page: clean(body.page, 300),
       // Klaviyo-only (see readGeo / readDevice); sendMetaLead never reads these.
-      ...readGeo(req),
+      ...geo,
+      ...t,
       ...readDevice(clean(req.headers.get("user-agent"), 400)),
     };
 

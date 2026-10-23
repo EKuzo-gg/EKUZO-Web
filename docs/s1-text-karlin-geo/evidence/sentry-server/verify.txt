@@ -1,0 +1,231 @@
+## N1/M3 Meta checks (branch, all requests incl. control)
+PASS N1 Lead positive control present with em 
+PASS N1/M3 no tz/geo/season1/city key or value in any CAPI body (128 CAPI bodies scanned; offenders )
+PASS N1 CAPI event_name always Lead 
+CAPI key set: custom_data:content_name, top:action_source, top:custom_data, top:event_id, top:event_name, top:event_source_url, top:event_time, top:user_data, user_data:client_ip_address, user_data:client_user_agent, user_data:em, user_data:fbc, user_data:fbp
+PASS N1 text-karlin produced no graph.facebook.com call (62 text events)
+PASS N1 Lead count equals non-honeypot main sign-ups (Lead 128, Waitlist events 128)
+  n4: Lead 3, Waitlist 3
+  rest: Lead 125, Waitlist 125
+PASS N3 honeypot: 200, zero calls (3)
+PASS N4 every Waitlist sign-up made exactly event, subscribe, Lead in order (128)
+
+## R5/R6/R7 consistency over every branch Klaviyo event
+PASS R6 profile props written iff event value non-empty, never empty (190 events; )
+PASS R7 no quote, backslash or control char in geo_city, geo_region, tz or profile city/region (any request) 
+PASS R4 every recorded tz/geo_tz matches the shape regex 
+
+## Journeys (branch event props / profile props)
+  n4-popup: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Chicago" src "geo" | profile {"season1_city":"Austin","season1_region":"TX","season1_tz":"America/Chicago"}
+PASS J3 popup (no tz in body) gets tz from geo, tz_source geo 
+  n4-main-ad: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver" src "browser" | profile {"season1_city":"Austin","season1_region":"TX","season1_tz":"America/Denver"}
+PASS R3/R5 main sign-up browser tz wins over geo 
+  n4-text: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver" src "browser" | profile {"season1_text_phone":"+15125550123","season1_city":"Austin","season1_region":"TX","season1_tz":"America/Denver"}
+PASS R1 text-karlin has geo_country/region/city/postal/geo_tz/tz/tz_source and old keys keys phone,ad,hero,geo_country,geo_region,geo_city,geo_postal,geo_tz,tz,tz_source
+  j4-main-nogeo-tz: status 200 | city "" region "" country "" postal "" geo_tz "" tz "America/New_York" src "browser" | profile {"season1_tz":"America/New_York"}
+PASS J4 no header: geo_* empty; no season1_city/region; season1_tz from valid browser tz; 200 
+  j4-popup-nogeo-notz: status 200 | city "" region "" country "" postal "" geo_tz "" tz "" src "" | profile {}
+PASS J4 no header, no tz: tz empty, no geo profile props 
+  j4-text-nogeo-tz: status 200 | city "" region "" country "" postal "" geo_tz "" tz "America/New_York" src "browser" | profile {"season1_text_phone":"+15125550123","season1_tz":"America/New_York"}
+PASS J4 text, no header, valid browser tz: season1_tz only 
+  j4-text-nogeo-notz: status 200 | city "" region "" country "" postal "" geo_tz "" tz "" src "" | profile {"season1_text_phone":"+15125550123"}
+PASS J4 text, no header, no tz: profile props only the two pre-existing 
+  j5-a-main-geo: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver" src "browser" | profile {"season1_city":"Austin","season1_region":"TX","season1_tz":"America/Denver"}
+  j5-b-text-nogeo: status 200 | city "" region "" country "" postal "" geo_tz "" tz "America/Denver" src "browser" | profile {"season1_text_phone":"+15125550123","season1_tz":"America/Denver"}
+  j5-c-text-nogeo-notz: status 200 | city "" region "" country "" postal "" geo_tz "" tz "" src "" | profile {"season1_text_phone":"+15125550123"}
+PASS J5 text request without header after geo sign-up: profile omits season1_city/region (nothing blanks them) (j5-b keys season1_text_phone,season1_text_requested_at,season1_tz; j5-c keys season1_text_phone,season1_text_requested_at)
+  j6-tzonly-main-browser: status 200 | city "" region "" country "" postal "" geo_tz "Pacific/Honolulu" tz "America/Chicago" src "browser" | profile {"season1_tz":"America/Chicago"}
+PASS J6 tz-only header + browser tz: geo_tz set, other geo empty, browser wins 
+  j6-tzonly-popup: status 200 | city "" region "" country "" postal "" geo_tz "Pacific/Honolulu" tz "Pacific/Honolulu" src "geo" | profile {"season1_tz":"Pacific/Honolulu"}
+PASS J6 tz-only header popup: tz from geo 
+  j6-tzonly-text-notz: status 200 | city "" region "" country "" postal "" geo_tz "Pacific/Honolulu" tz "Pacific/Honolulu" src "geo" | profile {"season1_text_phone":"+15125550123","season1_tz":"Pacific/Honolulu"}
+PASS J6 tz-only header text: tz from geo 
+PASS J7 text-karlin twice: identical events (normalized), both 200 
+PASS J8 main sign-up retried: identical props (normalized) incl. same Lead event_id 
+
+## UTC alias behaviour
+  browser UTC: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias UTC: geo zone wins 
+PASS UTC alias UTC: no geo zone keeps browser UTC 
+  browser Etc/UTC: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias Etc/UTC: geo zone wins 
+PASS UTC alias Etc/UTC: no geo zone keeps browser UTC 
+  browser GMT: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias GMT: geo zone wins 
+PASS UTC alias GMT: no geo zone keeps browser UTC 
+  browser Etc/GMT: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias Etc/GMT: geo zone wins 
+PASS UTC alias Etc/GMT: no geo zone keeps browser UTC 
+  browser Zulu: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias Zulu: geo zone wins 
+PASS UTC alias Zulu: no geo zone keeps browser UTC 
+  browser Etc/GMT+0: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias Etc/GMT+0: geo zone wins 
+PASS UTC alias Etc/GMT+0: no geo zone keeps browser UTC 
+  browser Greenwich: with geo zone Chicago -> tz America/Chicago (geo); without geo zone -> tz UTC (browser)
+PASS UTC alias Greenwich: geo zone wins 
+PASS UTC alias Greenwich: no geo zone keeps browser UTC 
+  utc-geo-text: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Chicago" src "geo" | profile {"season1_text_phone":"+15125550123","season1_city":"Austin","season1_region":"TX","season1_tz":"America/Chicago"}
+PASS UTC text with geo zone: geo wins 
+  utc-nogeo-text: status 200 | city "" region "" country "" postal "" geo_tz "" tz "UTC" src "browser" | profile {"season1_text_phone":"+15125550123","season1_tz":"UTC"}
+PASS UTC text no header: UTC kept, browser 
+  utc-geo-is-utc-main: status 200 | city "Reykjavik" region "" country "" postal "" geo_tz "UTC" tz "UTC" src "browser" | profile {"season1_city":"Reykjavik","season1_tz":"UTC"}
+PASS UTC browser + UTC geo: UTC, browser 
+  browser-valid-vs-geo-diff: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Los_Angeles" src "browser" | profile {"season1_city":"Austin","season1_region":"TX","season1_tz":"America/Los_Angeles"}
+PASS valid non-UTC browser beats geo 
+
+## M1 tz values (rows: main no-geo-zone | text no-geo-zone | main with geo zone Chicago)
+  object: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 object: dropped to "" without geo zone (main and text) 
+PASS M1 object: falls back to geo zone 
+  object-tz: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 object-tz: dropped to "" without geo zone (main and text) 
+PASS M1 object-tz: falls back to geo zone 
+  array: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 array: dropped to "" without geo zone (main and text) 
+PASS M1 array: falls back to geo zone 
+  number: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 number: dropped to "" without geo zone (main and text) 
+PASS M1 number: falls back to geo zone 
+  null: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 null: dropped to "" without geo zone (main and text) 
+PASS M1 null: falls back to geo zone 
+  bool: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 bool: dropped to "" without geo zone (main and text) 
+PASS M1 bool: falls back to geo zone 
+  len65: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 len65: dropped to "" without geo zone (main and text) 
+PASS M1 len65: falls back to geo zone 
+  dotdot: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 dotdot: dropped to "" without geo zone (main and text) 
+PASS M1 dotdot: falls back to geo zone 
+  quote-brace: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 quote-brace: dropped to "" without geo zone (main and text) 
+PASS M1 quote-brace: falls back to geo zone 
+  notazone: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 notazone: dropped to "" without geo zone (main and text) 
+PASS M1 notazone: falls back to geo zone 
+  empty: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 empty: dropped to "" without geo zone (main and text) 
+PASS M1 empty: falls back to geo zone 
+  spaces: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 spaces: dropped to "" without geo zone (main and text) 
+PASS M1 spaces: falls back to geo zone 
+  backslash: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 backslash: dropped to "" without geo zone (main and text) 
+PASS M1 backslash: falls back to geo zone 
+  newline: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 newline: dropped to "" without geo zone (main and text) 
+PASS M1 newline: falls back to geo zone 
+  unicode: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 unicode: dropped to "" without geo zone (main and text) 
+PASS M1 unicode: falls back to geo zone 
+  mb1: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 mb1: dropped to "" without geo zone (main and text) 
+PASS M1 mb1: falls back to geo zone 
+  mb1-slash: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 mb1-slash: dropped to "" without geo zone (main and text) 
+PASS M1 mb1-slash: falls back to geo zone 
+  proto: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 proto: dropped to "" without geo zone (main and text) 
+PASS M1 proto: falls back to geo zone 
+  offset: ""/"" | ""/"" | "America/Chicago"/"geo" | status 200,200,200
+PASS M1 offset: dropped to "" without geo zone (main and text) 
+PASS M1 offset: falls back to geo zone 
+  lower: "America/Chicago"/"browser" | "America/Chicago"/"browser" | "America/Chicago"/"browser" | status 200,200,200
+PASS M1 valid lower: accepted and canonicalized 
+  upper: "America/Chicago"/"browser" | "America/Chicago"/"browser" | "America/Chicago"/"browser" | status 200,200,200
+PASS M1 valid upper: accepted and canonicalized 
+  plus: "Etc/GMT+5"/"browser" | "Etc/GMT+5"/"browser" | "Etc/GMT+5"/"browser" | status 200,200,200
+PASS M1 valid plus: accepted and canonicalized 
+  est5edt: "America/New_York"/"browser" | "America/New_York"/"browser" | "America/New_York"/"browser" | status 200,200,200
+PASS M1 valid est5edt: accepted and canonicalized 
+  len64ok: "America/Catamarca"/"browser" | "America/Catamarca"/"browser" | "America/Catamarca"/"browser" | status 200,200,200
+PASS M1 valid len64ok: accepted and canonicalized 
+  calcutta: "Asia/Calcutta"/"browser" | "Asia/Calcutta"/"browser" | "Asia/Calcutta"/"browser" | status 200,200,200
+PASS M1 valid calcutta: accepted and canonicalized 
+  m1-main-tz-missing-key: status 200 | city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Chicago" src "geo" | profile {"season1_city":"Austin","season1_region":"TX","season1_tz":"America/Chicago"}
+PASS M1 tz key absent: geo fallback 
+
+## M2 malformed x-nf-geo (branch: main | text | popup)
+  not-base64: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 not-base64: all 200 
+  raw-json: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 raw-json: all 200 
+  json-array-b64: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-array-b64: all 200 
+  json-array-raw: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-array-raw: all 200 
+  tz-invalid: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "" tz "America/Denver"/browser
+PASS M2 tz-invalid: all 200 
+  tz-object: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "" tz "America/Denver"/browser
+PASS M2 tz-object: all 200 
+  city-quotes: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 city-quotes: all 200 
+  city-backslash: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 city-backslash: all 200 
+  city-newline: statuses 200,200,200 | main: city "Austinxy" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 city-newline: all 200 
+  city-apostrophe: statuses 200,200,200 | main: city "Coeur d'Alene" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 city-apostrophe: all 200 
+  region-brace: statuses 200,200,200 | main: city "Austin" region "US}" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 region-brace: all 200 
+  region-backslash-str: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 region-backslash-str: all 200 
+  region-long: statuses 200,200,200 | main: city "Austin" region "TEXASTEX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 region-long: all 200 
+  json-null-b64: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-null-b64: all 200 
+  json-string-b64: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-string-b64: all 200 
+  json-number-b64: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-number-b64: all 200 
+  json-true-raw: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 json-true-raw: all 200 
+  empty: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 empty: all 200 
+  only-spaces: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 only-spaces: all 200 
+  huge-8k: statuses 200,200,200 | main: city "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 huge-8k: all 200 
+  city-nonstring: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 city-nonstring: all 200 
+  country-str: statuses 200,200,200 | main: city "Austin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 country-str: all 200 
+  lat-long-only: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 lat-long-only: all 200 
+  emoji-city: statuses 200,200,200 | main: city "Aus😀tin" region "TX" country "US" postal "78757" geo_tz "America/Chicago" tz "America/Denver"/browser
+PASS M2 emoji-city: all 200 
+  b64-garbage-json: statuses 200,200,200 | main: city "" region "" country "" postal "" geo_tz "" tz "America/Denver"/browser
+PASS M2 b64-garbage-json: all 200 
+PASS M2 not-base64: empty geo fields, browser tz kept 
+PASS M2 json-array-b64: empty geo fields, browser tz kept 
+PASS M2 json-array-raw: empty geo fields, browser tz kept 
+PASS M2 json-null-b64: empty geo fields, browser tz kept 
+PASS M2 json-string-b64: empty geo fields, browser tz kept 
+PASS M2 json-number-b64: empty geo fields, browser tz kept 
+PASS M2 json-true-raw: empty geo fields, browser tz kept 
+PASS M2 empty: empty geo fields, browser tz kept 
+PASS M2 only-spaces: empty geo fields, browser tz kept 
+PASS M2 b64-garbage-json: empty geo fields, browser tz kept 
+PASS M2 lat-long-only: empty geo fields, browser tz kept 
+PASS M2 tz-invalid: geo_tz empty, other geo kept 
+PASS M2 tz-invalid popup: tz empty 
+PASS M2 tz-object popup: tz empty 
+PASS M2 city with quotes stripped 
+PASS M2 city with backslash stripped 
+PASS M2 city with newline/tab/C0/DEL/C1 stripped "Austinxy"
+PASS M2 region US"} stripped of the quote "US}"
+PASS M2 region with backslash stripped 
+PASS M2 region capped at 8 
+PASS M2 apostrophe kept (pre-existing Klaviyo escape question) 
+PASS M2 raw JSON header parsed 
+PASS M2 bare-string country/subdivision and postal_code accepted 
+PASS M2 non-string fields give empty 
+PASS M2 5000-char city capped at 80 
+  emoji city value: "Aus😀tin"
+
+## Status / no-5xx
+PASS no 5xx or client error anywhere on branch (220 requests)
+
+TOTAL FAIL: 0

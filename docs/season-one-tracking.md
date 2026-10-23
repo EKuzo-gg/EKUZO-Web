@@ -66,17 +66,21 @@ A same-email re-sign-up overwrites the profile properties (as `season1_ad` alrea
 
 ## Klaviyo-only fields (main sign-up)
 
-Added to the "Season 01 Waitlist" **event properties** only (not the profile, not the games/age events, never Meta CAPI):
+Added to the "Season 01 Waitlist" **event properties** only (not the games/age events, never Meta CAPI; the profile gets only the three location properties described after the table):
 
 | Property | Source | Values |
 |---|---|---|
 | `utm_id`, `site` | `attribution` in the request body | as sent |
 | `attribution_from` | derived by the route | `url` (ad landing, or the popup on a URL with utm_*), `session` (popup, stored earlier this browser session), `return-visit` (popup, stored by an ad landing in the last 7 days), `none`. A popup claim counts only when some attribution value arrived with it. Read with `source` (the surface): `site-popup` + `session` = a landing-page visitor who signed up elsewhere |
-| `geo_country`, `geo_region`, `geo_city`, `geo_postal` | Netlify `x-nf-geo` request header | country code, subdivision code (e.g. `TX`), city, postal code; latitude and longitude are never stored |
+| `geo_country`, `geo_region`, `geo_city`, `geo_postal` | Netlify `x-nf-geo` request header | country code, subdivision code (e.g. `TX`), city, postal code; latitude and longitude are never stored. City and region have quotes, backslashes and control characters stripped (they can end up inside a Discord webhook JSON body) |
+| `geo_tz` | `timezone` in the `x-nf-geo` header | IANA time zone name if it validates, else empty |
+| `tz`, `tz_source` | `tz` in the request body (the landing sends the browser's zone), else `geo_tz` | `tz` is the validated browser zone, except that a UTC alias (`UTC`, `Etc/UTC`, `GMT`, ...) from the browser loses to a valid non-UTC `geo_tz`; else `geo_tz`; else empty. `tz_source` is `browser`, `geo` or empty |
 | `device_os` | user agent | `ios`, `android`, `mac`, `windows`, `chromeos`, `linux`, `other` |
 | `device_type` | user agent | `mobile`, `tablet`, `desktop` (iPad, and Android without "Mobile", count as tablet) |
 
-A missing or unparseable `x-nf-geo` header, or a missing user agent, gives empty strings and never an error. The header is read as base64-encoded JSON, then as plain JSON; its exact format on the live Netlify runtime is still to be verified (launch checklist L2): after a test sign-up on the deploy, confirm the event in Klaviyo shows `geo_*` values. iPadOS Safari sends a Mac user agent, so those visits read as `mac` / `desktop`. Geolocation is approximate (IP-based). Meta CAPI `user_data` and `custom_data` are unchanged by this.
+A missing or unparseable `x-nf-geo` header, or a missing user agent, gives empty strings and never an error. The header is read as base64-encoded JSON, then as plain JSON; whether the live Netlify header carries `timezone` is still to be verified: after a test popup sign-up on the deploy, confirm the event in Klaviyo shows `geo_*` values and `tz_source` `geo`. iPadOS Safari sends a Mac user agent, so those visits read as `mac` / `desktop`. Geolocation is approximate (IP-based). Meta CAPI `user_data` and `custom_data` are unchanged by this.
+
+The same `geo_*`, `tz` and `tz_source` event properties are also written on the "Season 01 Text Karlin" event. Both that event and the Waitlist event also write the profile properties `season1_city`, `season1_region` and `season1_tz`, each only when non-empty, so a request without geo never blanks an earlier value. The helpers live in `lib/seasonOneGeo.ts`.
 
 ## Popup attribution (added 2026-10-11)
 

@@ -1,0 +1,327 @@
+{
+ "version": "branch",
+ "cfg": {
+  "id": "j1-heroclick-games-mob",
+  "vp": "mob",
+  "ua": "iphone",
+  "tz": "America/Los_Angeles",
+  "heroClick": true,
+  "hero": "games"
+ },
+ "steps": [
+  "hero option clicked",
+  "signup done, #conf.on",
+  "text done"
+ ],
+ "heroLive": {
+  "ihero": true,
+  "fbqType": "function",
+  "clarityType": "function",
+  "tzResolved": "America/Los_Angeles"
+ },
+ "afterSignup": {
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "f495435f-470d-4a72-91a8-9ade5cea80ff"
+    }
+   ]
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "config",
+    "G-8LM45PX53W"
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "hero_answer",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "source": "season_one_d10",
+     "hero": "games"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "tzNow": null
+ },
+ "afterText": {
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "f495435f-470d-4a72-91a8-9ade5cea80ff"
+    }
+   ]
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "config",
+    "G-8LM45PX53W"
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "hero_answer",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "source": "season_one_d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "text_karlin_start",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ],
+   [
+    "event",
+    "text_karlin_submit",
+    {
+     "ad": "d10",
+     "hero": "games"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "event",
+    "hero_answer"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "text_karlin"
+   ]
+  ],
+  "tzNow": null
+ },
+ "confVisible": {
+  "conf": true,
+  "tkDone": true
+ },
+ "consoleErr": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+   "loc": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "loc": "http://localhost:4102/images/authors/karlin-oei-avatar.jpg"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+   "loc": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+   "loc": "https://www.clarity.ms/tag/wml8wll5ua"
+  }
+ ],
+ "pageErr": [],
+ "reqFail": [
+  "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage :: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W :: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+  "https://connect.facebook.net/en_US/fbevents.js :: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+  "https://www.clarity.ms/tag/wml8wll5ua :: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+ ],
+ "reqBodies": [
+  {
+   "url": "http://localhost:4102/api/season-one",
+   "body": "{\"email\":\"sentry-test@example.com\",\"source\":\"ad-landing\",\"ad\":\"d10\",\"adName\":\"Screen time with a purpose\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d10\",\"hero\":\"games\",\"heroAnswer\":\"Fortnite\",\"heroFrom\":\"split\",\"eventId\":\"f495435f-470d-4a72-91a8-9ade5cea80ff\",\"eventSourceUrl\":\"http://localhost:4102/season1?ad=d10\",\"tz\":\"America/Los_Angeles\",\"ekz_hp\":\"\"}"
+  },
+  {
+   "url": "http://localhost:4102/api/season-one",
+   "body": "{\"step\":\"games\",\"email\":\"sentry-test@example.com\",\"kidGames\":\"Fortnite\"}"
+  },
+  {
+   "url": "http://localhost:4102/api/season-one",
+   "body": "{\"step\":\"text-karlin\",\"email\":\"sentry-test@example.com\",\"phone\":\"+15125550100\",\"ad\":\"d10\",\"hero\":\"games\",\"tz\":\"America/Los_Angeles\"}"
+  }
+ ],
+ "blocked": [
+  "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "GET https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+  "GET https://connect.facebook.net/en_US/fbevents.js",
+  "GET https://www.clarity.ms/tag/wml8wll5ua"
+ ],
+ "allowed": [
+  "GET http://localhost:4102/season1?ad=d10",
+  "GET http://localhost:4102/images/authors/karlin-oei-avatar.jpg",
+  "POST http://localhost:4102/api/season-one",
+  "POST http://localhost:4102/api/season-one",
+  "POST http://localhost:4102/api/season-one"
+ ],
+ "serverPosts": [
+  {
+   "email": "sentry-test@example.com",
+   "source": "ad-landing",
+   "ad": "d10",
+   "adName": "Screen time with a purpose",
+   "where": "top",
+   "attribution": {
+    "utm_source": "",
+    "utm_medium": "",
+    "utm_campaign": "",
+    "utm_content": "",
+    "utm_term": "",
+    "utm_id": "",
+    "site": ""
+   },
+   "page": "/season1?ad=d10",
+   "hero": "games",
+   "heroAnswer": "Fortnite",
+   "heroFrom": "split",
+   "eventId": "f495435f-470d-4a72-91a8-9ade5cea80ff",
+   "eventSourceUrl": "http://localhost:4102/season1?ad=d10",
+   "tz": "America/Los_Angeles",
+   "ekz_hp": ""
+  },
+  {
+   "step": "games",
+   "email": "sentry-test@example.com",
+   "kidGames": "Fortnite"
+  },
+  {
+   "step": "text-karlin",
+   "email": "sentry-test@example.com",
+   "phone": "+15125550100",
+   "ad": "d10",
+   "hero": "games",
+   "tz": "America/Los_Angeles"
+  }
+ ],
+ "serverUA": [
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1",
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1",
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1"
+ ]
+}

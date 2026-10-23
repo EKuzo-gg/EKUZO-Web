@@ -1,0 +1,51 @@
+## N2 extras
+n4-text calls: a.klaviyo.com/api/events
+profile keys: season1_text_phone,season1_text_requested_at,season1_city,season1_region,season1_tz
+has phone_number attr: false | has subscriptions: false
+phone stored: +15125550123
+n4-games event props {"kid_games":"League of Legends, Roblox"} profile {"kid_games":"League of Legends, Roblox"}
+n4-age event props {"kid_age":"10-11"} profile {"season1_kid_age":"10-11"}
+formatted phone stored: +15125550123
+
+## R8 grep gate
+header comment names geo_tz: 2 line(s)
+header comment names tz: 2 line(s)
+header comment names tz_source: 2 line(s)
+header comment names season1_city: 1 line(s)
+header comment names season1_region: 1 line(s)
+header comment names season1_tz: 1 line(s)
+checklist L2 in route.ts: 0; in lib: 0; in tracking doc: 0
+'event properties only' in route.ts: 0; in doc: 0; lib: 0
+
+## N6 file list
+.sentry-tmp/landing-main.html
+app/api/season-one/route.ts
+app/season1/landing.html
+docs/season-one-tracking.md
+lib/__tests__/season-one-geo.test.ts
+lib/seasonOneGeo.ts
+docs/s1-text-karlin-geo/* count: 104
+--- untracked outside docs/s1-text-karlin-geo (excluding .sentry-tmp):
+lib/__tests__/season-one-geo.test.ts
+lib/seasonOneGeo.ts
+
+## landing.html diff -U0
+diff --git a/app/season1/landing.html b/app/season1/landing.html
+index 2a7d7ee..2816939 100644
+--- a/app/season1/landing.html
++++ b/app/season1/landing.html
+@@ -1374,0 +1375 @@ const LIVE = /(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname
++const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return ""}})();
+@@ -1392 +1393 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
+-    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
++    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""})
+@@ -1423 +1424 @@ function showDone(){
+-        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none"});
++        const r=await post({step:"text-karlin",email:savedEmail,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none",tz:TZ});
+changed lines (+/- excluding headers): 5
+line 986 sha256 branch: f338cd7c05b83b4a8349d45b7f3611fe2fd3d6485065ff5122adb210d38cd09c
+line 986 sha256 origin/main: f338cd7c05b83b4a8349d45b7f3611fe2fd3d6485065ff5122adb210d38cd09c
+hunk headers:
+@@ -1374,0 +1375 @@ const LIVE = /(^|\.)ekuzo\.gg$|netlify\.app$|^localhost$/.test(location.hostname
+@@ -1392 +1393 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
+@@ -1423 +1424 @@ function showDone(){

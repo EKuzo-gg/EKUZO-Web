@@ -1,0 +1,27 @@
+label | baseline status resp | branch status resp | identical
+n2-badphone-short | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-1start | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-letters | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-obj | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-missing | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-nogeo | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-badphone-badtz | 400 {"ok":false,"error":"Check the number and try again."} | 400 {"ok":false,"error":"Check the number and try again."} | true
+n2-phone-formatted | 200 {"ok":true} | 200 {"ok":true} | true
+n2-phone-valid-nonus-tz | 200 {"ok":true} | 200 {"ok":true} | true
+n3-unknown-step-nogeo | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | true
+n3-step-null | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | true
+n3-step-number | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | true
+n3-step-empty | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | 400 {"ok":false,"error":"We couldn’t save that. Please try again."} | true
+n3-honeypot-ad | 200 {"ok":true} | 200 {"ok":true} | true
+n3-honeypot-popup | 200 {"ok":true} | 200 {"ok":true} | true
+n3-games-empty | 400 {"ok":false,"error":"Pick a game."} | 400 {"ok":false,"error":"Pick a game."} | true
+n3-age-empty | 400 {"ok":false,"error":"Pick an age."} | 400 {"ok":false,"error":"Pick an age."} | true
+n3-bademail-empty | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-bademail-nul | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-bademail-missing | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-malformed-json | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-json-array | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-json-null | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-empty-body | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-json-string | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
+n3-malformed-json-nogeo | 400 {"ok":false,"error":"That email doesn’t look right."} | 400 {"ok":false,"error":"That email doesn’t look right."} | true
