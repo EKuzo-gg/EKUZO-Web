@@ -137,6 +137,11 @@ Google re-reads it). Run URL Inspection "Test live URL" on one page and check th
 ---
 ## Jamie (via Claude, Build Loop), October 26, 2026 (Robux post live; blog tracking: no more `source` event parameter, post engagement events)
 
+**Shipped 2026-10-26:** Jamie pushed `preview/robux-and-tracking` to `dev` (`57aa70b`) and
+`release/robux-and-tracking` to `main` (`6fc50aa`). Live checks in
+`docs/robux-post/evidence/live-verification.json`; GA4 admin changes listed in
+`docs/blog-tracking-2026-10/03-decision-log.md`.
+
 Two branches off `origin/main` `9c0125a`, built and tested together; they merge in any order (this
 entry is identical on both, so it merges cleanly). Artifacts: `docs/robux-post/` and
 `docs/blog-tracking-2026-10/` (start with each `03-decision-log.md`).
