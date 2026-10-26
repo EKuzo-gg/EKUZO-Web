@@ -27,7 +27,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
-const DATE_MODIFIED = "2026-10-13";
+const DATE_MODIFIED = "2026-10-26";
 
 // FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
 // don't extract well as standalone Q&A, so we surface six parent-shaped
@@ -580,6 +580,15 @@ export default function PostGamingHiddenMeaning() {
                   participants not in any other extracurricular
                 </a>
                 . It catches the kid who slipped through everything else.
+              </p>
+              <p>
+                The same move works on smaller asks. When his daughter wanted
+                Robux, one dad on our team{" "}
+                <Link href="/blog/should-i-buy-my-kid-robux">
+                  gave it a container: $20, a cap he can see, and a talk about
+                  every purchase
+                </Link>
+                .
               </p>
               <p>
                 One caveat I&apos;d stake a lot on. The container only works

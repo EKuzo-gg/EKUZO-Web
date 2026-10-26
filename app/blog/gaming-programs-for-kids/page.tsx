@@ -24,7 +24,7 @@ const HERO_IMAGE = "/images/blog-post-3-hero.jpg";
 // source of truth. Replace this file to update every surface at once.
 const SHARE_IMAGE = "/images/blog-post-3-card.jpg";
 const DATE_PUBLISHED = "2026-05-14";
-const DATE_MODIFIED = "2026-10-13";
+const DATE_MODIFIED = "2026-10-26";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
@@ -295,6 +295,13 @@ export default function PostGamingProgramsForKids() {
                 Honest weakness: this is mostly playing side by side. Kids come
                 away with a build and some friendly faces, and less often with
                 teammates.
+              </p>
+              <p>
+                If your kid&apos;s Roblox ask is for Robux instead,{" "}
+                <Link href="/blog/should-i-buy-my-kid-robux">
+                  here&apos;s how one dad turned it into a $20 money lesson
+                </Link>
+                .
               </p>
 
               <h3>The school esports team</h3>

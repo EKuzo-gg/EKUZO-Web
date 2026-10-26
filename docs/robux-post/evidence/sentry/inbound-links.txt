@@ -1,0 +1,57 @@
+/blog/gaming-programs-for-kids {
+ "count": 1,
+ "inBody": 1,
+ "items": [
+  {
+   "vis": true,
+   "text": "here's how one dad turned it into a $20 money lesson",
+   "sentence": "If your kid's Roblox ask is for Robux instead, here's how one dad turned it into a $20 money lesson."
+  }
+ ],
+ "updated": "Updated October 26, 2026"
+}
+/blog/should-you-ban-fortnite {
+ "count": 1,
+ "inBody": 1,
+ "items": [
+  {
+   "vis": true,
+   "text": "one dad let his daughter spend $20 of Robux on purpose",
+   "sentence": "If spending is the worry, one dad let his daughter spend $20 of Robux on purpose, as a money lesson with a cap he can see."
+  }
+ ],
+ "updated": "Updated October 26, 2026"
+}
+/blog/what-your-kids-gaming-is-telling-you {
+ "count": 1,
+ "inBody": 1,
+ "items": [
+  {
+   "vis": true,
+   "text": "gave it a container: $20, a cap he can see, and a talk about every purchase",
+   "sentence": "The same move works on smaller asks. When his daughter wanted Robux, one dad on our team gave it a container: $20, a cap he can see, and a talk about every purchase."
+  }
+ ],
+ "updated": "Updated October 26, 2026"
+}
+/blog/when-your-sons-only-friends-are-online {
+ "count": 1,
+ "inBody": 1,
+ "items": [
+  {
+   "vis": true,
+   "text": "a smaller version of that deal with $20 of Robux",
+   "sentence": "My parents stumbled into a version of this. Instead of restricting my gaming, they offered to fund a computer if I built it myself on a budget. It was completely new to me and it was hard, but at 16 I did it, because I loved gaming that much. (A dad on our team is running a smaller version of that deal with $20 of Robux.) The build taught me to make decisions, wire hardware, even how to use a soldering iron. More importantly, it turned my solo habit into something social. PC gaming pulled me into online communities and, eventually, LAN parties in someone’s garage: unlimited Mountain Dew and Doritos, miles of cords we ran by hand, a full night of Counter-Strike. I loved it. I came out of it technically confident and, for the first time, comfortable with people who got my nerdy side and no fear of the cool kids. That leap pointed me toward a STEM career and taught me real lessons in humility and kindness. I don’t know where I’d be without it."
+  }
+ ],
+ "updated": "Updated October 26, 2026"
+}
+faq q count 1
+parents after open [
+ {
+  "vis": true,
+  "text": "How one dad handled the Robux ask",
+  "ctx": "Related reading: How one dad handled the Robux ask"
+ }
+]
+parents link visible BEFORE opening: [ true ]

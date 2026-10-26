@@ -125,7 +125,7 @@ const HERO_ALT =
 // match the actual file or the schema carries a lie.
 const SHARE_IMAGE = "/images/should-you-ban-fortnite-share.jpg";
 const DATE_PUBLISHED = "2026-07-28";
-const DATE_MODIFIED = "2026-07-31";
+const DATE_MODIFIED = "2026-10-26";
 // Listening-project CTA (final beat of the post). Not a product link.
 const LISTENING_CALENDAR = "https://calendar.app.google/mMJ5KoxcNdH6SR13A";
 
@@ -442,6 +442,13 @@ export default function PostShouldYouBanFortnite() {
                 over children’s privacy violations and design tricks that
                 pushed players into unwanted purchases, the largest penalty of
                 its kind at the time.
+              </p>
+              <p>
+                If spending is the worry,{" "}
+                <Link href="/blog/should-i-buy-my-kid-robux">
+                  one dad let his daughter spend $20 of Robux on purpose
+                </Link>
+                , as a money lesson with a cap he can see.
               </p>
 
               <h2>What the ban fixed, and what it broke</h2>
