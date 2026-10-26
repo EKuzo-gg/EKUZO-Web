@@ -12,7 +12,7 @@ Meta ads optimize on the `Lead` event, so the browser and server Leads must shar
 | When | Browser | Server (`/api/season-one`) |
 |---|---|---|
 | Page load | Meta `PageView`; Clarity session; GA4 `page_view` (landing page only: it carries its own `gtag.js` for `G-8LM45PX53W`, the popup uses the one in `app/layout.tsx`) | none |
-| Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})` and GA4 `generate_lead` with `{source:'season_one_<ad>', hero}`, once per sign-up each, same conditions (LIVE host, honeypot empty) | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
+| Email submit | after the API returns ok: `fbq('track','Lead',{content_name},{eventID})` and GA4 `generate_lead` with `{lead_source:'season_one_<ad>', hero}` (`source` until 2026-10-26; GA4 read it as the session's traffic source, see `lib/analytics.ts`), once per sign-up each, same conditions (LIVE host, honeypot empty) | Klaviyo event "Season 01 Waitlist" (`season1_*` profile props), then list subscribe (XGTv2F), then Meta CAPI `Lead` with the same `event_id` |
 | Page load (Clarity tags) | `clarity("set","ad",<id>)` and `clarity("set","hero",<hero id or none>)`, plus `utm_content`, `utm_term` and `site` from the URL when present, so sessions can be filtered by ad in Clarity | none |
 | Funnel events (GA4 only, SC-3) | `faq_open {ad, question}` (a FAQ opens; `question` is a slug such as `when_does_it_start`; once per question per page view). `cta_click {ad, location}` (`hero`, `header` or `sticky`). `form_start {ad, where}` (once per form, on the first trusted tap, key press or paste in the `top` / `bottom` email field; autofill, a script-set value, an `input` event with no key press and the programmatic focus after a CTA tap do not count. Changed 2026-10-11: the old focus/input trigger fired for in-app-browser autofill, about twice per visitor). `signup_error {ad, reason}` (`invalid_email`, `server` for a non-ok API response, `network` for a failed fetch; suppressed when the honeypot is filled) | none |
 | Email submit success (Clarity) | `clarity("event","signup")` and `clarity("set","signed_up","yes")` at the same moment and under the same conditions as the Meta Lead and GA4 `generate_lead` (LIVE host, honeypot empty, once per sign-up) | none |
@@ -116,3 +116,15 @@ With `META_CAPI_USE_TEST_CODE=true` and no test code, the server Lead is skipped
 5. Repeat on the site popup (`/?join=season-one`): `content_name` `season_one_popup`. Then the attribution path: open `/season1?ad=d3&utm_source=meta&...` and go to `/` in the same tab (type the address on a preview, since the footer link points at ekuzo.gg); the popup sign-up's Klaviyo event shows `source: site-popup`, the utm values, `ad: d3` and `attribution_from: session`.
 6. Clarity: a session for `/season1` shows up (can take about 30 minutes), tagged `ad` and `hero`. GA4 DebugView: `hero_view` and `generate_lead` carry `hero`.
 7. Production: confirm `META_CAPI_USE_TEST_CODE` is unset, then make one real sign-up and check it lands in the live Overview as a deduplicated Lead (browser + server).
+
+## Blog posts (added 2026-10-26)
+
+| What | Where | Fires when |
+|---|---|---|
+| GA4 `blog_link_click` `{post_slug, link_path, link_type}` | `app/blog/BlogPostTracking.tsx` | a `click` on a same-site link in a post or its Keep Reading cards; nav, footer and dialogs excluded; link_type is parents, post, author, blog_index, program or other_internal |
+| GA4 `blog_read_75` `{post_slug}` | same | once per post view, when the bottom of the screen passes 75% of the `<article>`; only a scroll fires it, and scrolls in the first 800 ms are ignored |
+| Clarity tags `page_type=blog`, `post_slug` | same | on every post page view |
+| GA4 `generate_lead` `{lead_source}` + Clarity event `generate_lead` and tag `lead_source` | `lib/analytics.ts` `trackLead` | the Season 01 popup (`season_one_popup`) and the contact form; `page_location` is the page the lead came from, so a popup lead on a post is credited to that post |
+
+Posts have no FAQ accordion (their FAQ is open text), so `faq_open` does not apply there.
+GA4 admin steps that go with this (Jamie's go): register `post_slug`, `link_type`, `lead_source` and `cta_source` as event-scoped custom dimensions; mark `generate_lead` as a key event if it is not one already.

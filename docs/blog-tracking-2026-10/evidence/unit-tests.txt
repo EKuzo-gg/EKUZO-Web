@@ -1,0 +1,16 @@
+== lib/__tests__/ekuzo101-weeks.test.ts
+not ok 3 - buildWeeksLabel
+# pass 14
+# fail 1
+== lib/__tests__/season-one-attribution.test.ts
+# pass 30
+# fail 0
+== lib/__tests__/season-one-geo.test.ts
+# pass 58
+# fail 0
+== docs/blog-newsletter/tests/newsletterAb.test.mjs
+# pass 20
+# fail 0
+== docs/blog-newsletter/tests/routes.test.mjs
+# pass 14
+# fail 0

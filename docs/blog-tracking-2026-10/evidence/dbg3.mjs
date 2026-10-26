@@ -1,0 +1,10 @@
+import { open, BASE } from './h.mjs';
+const o = await open(); const p = await o.ctx.newPage();
+await p.goto(BASE + '/programs/ekuzo100', { waitUntil: 'networkidle' }); await p.waitForTimeout(2500);
+await p.evaluate(() => { window.__g = []; const g = window.gtag; window.gtag = function () { window.__g.push(Array.from(arguments)); return g.apply(this, arguments); }; });
+const l = p.locator('a[href*="register?cta=hero"]').first(); await l.scrollIntoViewIfNeeded(); 
+await p.evaluate(() => { const a = document.querySelector('a[href*="register?cta=hero"]'); console.log(Object.keys(a).join(',')); window.__keys = Object.keys(a); window.__props = a[Object.keys(a).find(k => k.startsWith('__reactProps'))]; window.__pk = Object.keys(window.__props || {}); });
+console.log(await p.evaluate(() => [window.__keys, window.__pk]));
+await Promise.all([p.waitForNavigation({ timeout: 8000 }).catch(() => 'nonav'), l.click()]);
+console.log(p.url(), JSON.stringify(await p.evaluate(() => window.__g)));
+await o.b.close();

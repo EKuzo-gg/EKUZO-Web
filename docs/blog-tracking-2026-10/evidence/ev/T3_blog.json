@@ -1,0 +1,14 @@
+{
+ "clarity": [],
+ "events": [
+  {
+   "dl": "http://localhost/blog",
+   "params": {},
+   "en": "page_view"
+  }
+ ],
+ "console": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ],
+ "pageErrors": []
+}

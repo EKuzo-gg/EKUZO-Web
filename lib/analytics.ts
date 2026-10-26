@@ -11,8 +11,17 @@ declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
     fbq?: (...args: any[]) => void;
+    clarity?: (...args: any[]) => void;
   }
 }
+
+// GA4 event parameters must never be named `source`, `medium` or `campaign`.
+// GA4 keeps a session's traffic source under those keys, so an event that
+// carries `source: "header"` showed up in reports as sessions from source
+// "header" (64 blog sessions with source header, sticky, hero or footer,
+// GA4 pull of 2026-10-24). Renamed 2026-10-26: register_click and
+// newsletter_signup send `cta_source`, generate_lead sends `lead_source`.
+// The function arguments keep the name `source`.
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -24,6 +33,15 @@ function ga4(event: string, params?: Record<string, any>) {
 
 function fbq(event: string, params?: Record<string, any>) {
   window.fbq?.("track", event, params);
+}
+
+function clarity(...args: any[]) {
+  try { window.clarity?.(...args); } catch { /* never break the page */ }
+}
+
+/** Clarity custom tag (session filter). Value capped at 100 characters. */
+export function tagClarity(key: string, value: string) {
+  clarity("set", key, value.slice(0, 100));
 }
 
 // ---------------------------------------------------------------------------
@@ -106,8 +124,13 @@ export function trackLead(params?: {
   eventId?: string;
 }) {
   ga4("generate_lead", {
-    source: params?.source ?? "contact_form",
+    lead_source: params?.source ?? "contact_form",
   });
+  // Clarity: a named event and a session tag at the same moment, so a
+  // recording or heatmap can be filtered to sessions that produced a lead
+  // (blog-wide tracking item 1). Nothing about the person goes to Clarity.
+  clarity("event", "generate_lead");
+  clarity("set", "lead_source", params?.source ?? "contact_form");
   const fbqParams = { content_name: params?.source ?? "contact_form" };
   // eventID dedupes this browser Lead against a server-side CAPI Lead sent
   // with the same ID (/api/season-one). Same rule as trackPurchase: only
@@ -129,7 +152,7 @@ export function trackLead(params?: {
 
 export function trackRegisterClick(params: { source: string }) {
   ga4("register_click", {
-    source: params.source,
+    cta_source: params.source,
   });
 }
 
@@ -154,7 +177,7 @@ export function trackNewsletterSignup(params: {
   variant?: "thumbs" | "classic";
 }) {
   ga4("newsletter_signup", {
-    source: params.source,
+    cta_source: params.source,
     variant: params.variant,
   });
 }
@@ -240,4 +263,25 @@ export function trackCtaClick(params: {
     section_id: params.section,
     destination: params.destination,
   });
+}
+
+// ---------------------------------------------------------------------------
+// Blog engagement (app/blog/BlogPostTracking.tsx) - GA-only, like
+// trackRegisterClick. Only the post slug and the link's own path go out.
+// ---------------------------------------------------------------------------
+
+export function trackBlogLinkClick(params: {
+  postSlug: string;
+  linkPath: string;
+  linkType: string;
+}) {
+  ga4("blog_link_click", {
+    post_slug: params.postSlug,
+    link_path: params.linkPath,
+    link_type: params.linkType,
+  });
+}
+
+export function trackBlogRead75(params: { postSlug: string }) {
+  ga4("blog_read_75", { post_slug: params.postSlug });
 }
