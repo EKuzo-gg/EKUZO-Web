@@ -8,6 +8,15 @@ export const metadata = buildAuthorMetadata(getAuthor(SLUG));
 // Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const POSTS: AuthorPost[] = [
   {
+    slug: "should-i-buy-my-kid-robux",
+    title: "She asked for Robux to learn about money. Her dad said yes.",
+    date: "October 26, 2026",
+    excerpt:
+      "For a year the answer was no. At eight, she changed her pitch.",
+    image: "/images/should-i-buy-my-kid-robux-card.jpg",
+    category: "Perspective",
+  },
+  {
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
     title:
       "The gaming study everyone shared, and what it means for your twelve-year-old",
@@ -20,7 +29,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "October 13, 2026",
+    date: "October 26, 2026",
     excerpt:
       "The game is visible. The meaning is hidden. Six signs parents notice first in a gamer kid, and what they often mean.",
     image: "/images/what-your-kids-gaming-is-telling-you-card.jpg",
@@ -56,7 +65,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "gaming-programs-for-kids",
     title: "Gaming programs for kids: a parent's guide, Fall 2026",
-    date: "October 13, 2026",
+    date: "October 26, 2026",
     excerpt:
       "What a kid who games can join in fall 2026: build classes, online clubs, school teams, local leagues and coached teams, with prices checked in October.",
     image: "/images/blog-post-3-card.jpg",

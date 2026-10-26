@@ -49,6 +49,10 @@ const parentsFAQs = [
     question: "How do you keep online spaces safe?",
     answer:
       "EKUZO operates as a \u201cwalled garden\u201d designed around the four safety concerns parents raise most: strangers, toxic chat, older kids, and in-game spending. Every session is coach-led and recorded, and our Discord and online platforms are actively moderated. Teams are verified, so your child plays with the same known teammates, not anonymous matchmaking, and opponents are limited to other youth in the EKUZO ecosystem, not random adults or older teens. Every student signs a Code of Conduct that\u2019s consistently enforced, and there are no in-session purchase prompts, loot boxes, or pressure to spend.",
+    related: {
+      href: "/blog/should-i-buy-my-kid-robux",
+      text: "How one dad handled the Robux ask",
+    },
   },
   {
     question: "Is gaming really educational?",

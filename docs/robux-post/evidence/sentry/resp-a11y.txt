@@ -1,0 +1,160 @@
+{
+ "sw": 375,
+ "cw": 375,
+ "tables": [
+  {
+   "caption": "What $20 buys on the web (Roblox's Robux page, October 2026)",
+   "tableW": 321,
+   "tableRight": 348,
+   "container": "DIV.blog-content font-body text-black/80 leading-relaxed",
+   "containerW": 321,
+   "overflowX": "visible",
+   "scrollW": 424,
+   "clientW": 321,
+   "th": 2,
+   "thead": true,
+   "thScopes": [
+    "col",
+    "col"
+   ],
+   "fitsViewport": true
+  },
+  {
+   "caption": "Where her $20 went",
+   "tableW": 321,
+   "tableRight": 348,
+   "container": "DIV.blog-content font-body text-black/80 leading-relaxed",
+   "containerW": 321,
+   "overflowX": "visible",
+   "scrollW": 424,
+   "clientW": 321,
+   "th": 5,
+   "thead": true,
+   "thScopes": [
+    "col",
+    "col",
+    "row",
+    "row",
+    "row"
+   ],
+   "fitsViewport": true
+  }
+ ],
+ "imgs": [
+  {
+   "src": "/images/ekuzo-logo-black.svg",
+   "alt": "EKUZO",
+   "decorative": false
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fblog-slug-right-deco.png&w=828&q=75",
+   "alt": "",
+   "decorative": true
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fshould-i-buy-my-kid-robux-hero.jpg&w=3840&q=75",
+   "alt": "A dad and his daughter at the kitchen counter, looking at a Dress to Impress runway on her tablet; he points to the five stars other players gave her outfit.",
+   "decorative": false
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fauthors%2Fkarlin-oei-avatar.jpg&w=3840&q=75",
+   "alt": "Karlin Oei",
+   "decorative": false
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Frobux-one-game-two-things.png&w=3840&q=75",
+   "alt": "One game, two things to talk about. She talks about the outfit she's saving for, winning the runway, what's new in the store, and what she'll buy first. Dad talks about what it costs in real dollars, what it actually gets you, what happens when it's gone, and whether it's worth the wait. One conversation they both want.",
+   "decorative": false
+  },
+  {
+   "src": "/images/new%20torn%20paper/torn-paper-grey-top-1%402x.png",
+   "alt": "",
+   "decorative": true
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fshould-you-ban-fortnite-card.jpg&w=3840&q=75",
+   "alt": "She banned Fortnite and got her kid back. Then came a new problem.",
+   "decorative": false
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fwhat-your-kids-gaming-is-telling-you-card.jpg&w=384",
+   "alt": "What your kid’s gaming is telling you",
+   "decorative": false
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fblog-post-3-card.jpg&w=3840&q=75",
+   "alt": "Gaming programs for kids: a parent’s guide, Fall 2026",
+   "decorative": false
+  },
+  {
+   "src": "/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+   "alt": "",
+   "decorative": true
+  },
+  {
+   "src": "/_next/image?url=%2Fimages%2Fenroll-promo-graphic.avif&w=1920&q=75",
+   "alt": "",
+   "decorative": true
+  },
+  {
+   "src": "/images/ekuzo-huge.svg",
+   "alt": "",
+   "decorative": true
+  }
+ ],
+ "seq": [
+  1,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  3,
+  3,
+  3,
+  3,
+  3,
+  2
+ ],
+ "skips": [],
+ "allskips": [],
+ "allh": [
+  1,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  3,
+  3,
+  3,
+  3,
+  3,
+  2,
+  3,
+  3,
+  3,
+  2
+ ],
+ "h1s": 1
+}
+parents link before open: [
+  'A h=24 ov=visible vis=visible op=1 mh=none hidden=false',
+  'P h=33 ov=visible vis=visible op=1 mh=none hidden=false',
+  'DIV h=0 ov=hidden vis=visible op=1 mh=0px hidden=false',
+  'LI h=113 ov=visible vis=visible op=1 mh=none hidden=false',
+  'UL h=1155 ov=visible vis=visible op=1 mh=none hidden=false',
+  'DIV h=1155 ov=visible vis=visible op=1 mh=none hidden=false',
+  'DIV h=1155 ov=visible vis=visible op=1 mh=none hidden=false'
+]
+dash check {"em":0,"en":0,"sp":0,"dd":0} If your kid's Roblox ask is for Robux instead, here's how on
+dash check {"em":0,"en":0,"sp":0,"dd":0} If spending is the worry, one dad let his daughter spend $20
+dash check {"em":0,"en":0,"sp":0,"dd":0} The same move works on smaller asks. When his daughter wante
+dash check {"em":0,"en":0,"sp":0,"dd":0} (A dad on our team is running a smaller version of that deal
+dash check {"em":0,"en":0,"sp":0,"dd":0} Related reading: How one dad handled the Robux ask

@@ -1,0 +1,42 @@
+{
+ "touch_scroll_from_plain_link": {
+  "scrollBefore": 747,
+  "scrollAfter": 1032,
+  "dataLayer": [],
+  "beacons": []
+ },
+ "touch_scroll_from_real_link": {
+  "scrollBefore": 7214,
+  "scrollAfter": 7484,
+  "dataLayer": [],
+  "beacons": []
+ },
+ "touch_tap_plain_link_control": {
+  "scrollBefore": 747,
+  "scrollAfter": 747,
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ]
+ },
+ "touch_tap_real_link": {
+  "scrollBefore": 7214,
+  "scrollAfter": 0,
+  "dataLayer": [],
+  "beacons": []
+ }
+}

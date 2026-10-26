@@ -1,0 +1,45 @@
+{
+ "register": {
+  "url": "http://localhost:3312/programs/ekuzo100",
+  "dl": [
+   [
+    "event",
+    "view_item",
+    {
+     "content_type": "program",
+     "item_id": "ekuzo100"
+    }
+   ]
+  ],
+  "events": [
+   {
+    "en": "page_view"
+   },
+   {
+    "en": "view_item",
+    "ep.content_type": "program",
+    "ep.item_id": "ekuzo100"
+   }
+  ]
+ },
+ "newsletter": {
+  "dl": [
+   [
+    "event",
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "events": [
+   {
+    "en": "page_view"
+   },
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ]
+ }
+}

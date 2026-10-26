@@ -1,0 +1,296 @@
+[
+ [
+  "ctl_plain_parents_article",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/parents",
+     "ep.link_type": "parents"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_post_article",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/blog/should-you-ban-fortnite",
+     "ep.link_type": "post"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_external",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "pos_post_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "pos_parents_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux"
+    },
+    "en": "blog_read_75"
+   }
+  ]
+ ],
+ [
+  "pos_keepreading_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux"
+    },
+    "en": "blog_read_75"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_samepath",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_middle",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/parents",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_right",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_nav",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_footer",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux"
+    },
+    "en": "blog_read_75"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_hash",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_mod_Meta",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/parents",
+     "ep.link_type": "parents"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_mod_Alt",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/parents",
+     "ep.link_type": "parents"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_mod_Control",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/parents",
+     "ep.link_type": "parents"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "neg_footer_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux"
+    },
+    "en": "blog_read_75"
+   }
+  ]
+ ],
+ [
+  "ctl_plain_mod_Shift",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux",
+     "ep.link_path": "/parents",
+     "ep.link_type": "parents"
+    },
+    "en": "blog_link_click"
+   }
+  ]
+ ],
+ [
+  "neg_nav_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ],
+ [
+  "neg_mouse_drag",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   },
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {
+     "ep.post_slug": "should-i-buy-my-kid-robux"
+    },
+    "en": "blog_read_75"
+   }
+  ]
+ ],
+ [
+  "neg_external_REAL",
+  [
+   {
+    "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+    "params": {},
+    "en": "page_view"
+   }
+  ]
+ ]
+]

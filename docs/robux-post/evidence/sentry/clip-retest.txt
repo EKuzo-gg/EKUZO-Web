@@ -1,0 +1,6 @@
+== width 375 
+cells: [[],[]]
+bc clientW 321 article overflow hidden
+== width 768 
+cells: [[],[]]
+bc clientW 657 article overflow hidden

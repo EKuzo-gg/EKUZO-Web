@@ -1,0 +1,47 @@
+{
+ "events": [
+  {
+   "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+   "params": {},
+   "en": "page_view"
+  },
+  {
+   "dl": "http://localhost/blog/should-i-buy-my-kid-robux",
+   "params": {
+    "ep.lead_source": "season_one_popup"
+   },
+   "en": "generate_lead"
+  }
+ ],
+ "clarity": [
+  [
+   "set",
+   "page_type",
+   "blog"
+  ],
+  [
+   "set",
+   "post_slug",
+   "should-i-buy-my-kid-robux"
+  ],
+  [
+   "event",
+   "generate_lead"
+  ],
+  [
+   "set",
+   "lead_source",
+   "season_one_popup"
+  ]
+ ],
+ "fbq": [
+  "[\"set\",\"autoConfig\",false,\"1284038230557204\"]",
+  "[\"init\",\"1284038230557204\"]",
+  "[\"track\",\"PageView\"]",
+  "[\"track\",\"Lead\",{\"content_name\":\"season_one_popup\"},{\"eventID\":\"92d368f5-57f4-40ed-94ff-0cdb661dde1f\"}]"
+ ],
+ "apiBody": [
+  "{\"email\":\"qa-test@example.com\",\"source\":\"site-popup\",\"ad\":\"\",\"attribution\":{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"attributionFrom\":\"none\",\"page\":\"/blog/should-i-buy-my-kid-robux\",\"eventId\":\"92d368f5-57f4-40ed-94ff-0cdb661dde1f\",\"eventSourceUrl\":\"http://localhost:3312/blog/should-i-buy-my-kid-robux\",\"ekz_hp\":\"\"}"
+ ],
+ "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux"
+}

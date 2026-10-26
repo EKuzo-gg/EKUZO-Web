@@ -1,0 +1,14 @@
+pos_parents            dl=["/parents/parents"] beacons=1 /parents/parents/should-i-buy-my-kid-robux 
+pos_touch_tap_parents  dl=["/parents/parents"] beacons=1 /parents/parents/should-i-buy-my-kid-robux 
+pos_post               dl=["/blog/should-you-ban-fortnite/post"] beacons=1 /blog/should-you-ban-fortnite/post/should-i-buy-my-kid-robux 
+neg_ctrl               dl=[] beacons=0  
+pos_keepreading        dl=["/blog/gaming-programs-for-kids/post"] beacons=1 /blog/gaming-programs-for-kids/post/should-i-buy-my-kid-robux 
+neg_middle             dl=[] beacons=0  
+neg_meta               dl=[] beacons=0  
+neg_shift              dl=[] beacons=0  
+neg_alt                dl=[] beacons=0  
+neg_nav                dl=[] beacons=0  
+neg_external           dl=[] beacons=0  
+neg_footer             dl=[] beacons=0  
+neg_dialog             dl=[] beacons=0  dialog has no native links; injected <a href=/parents> in [role=dialog]
+neg_touch_scroll_real  dl=[] beacons=0  

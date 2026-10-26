@@ -1,0 +1,12 @@
+external captured: 3
+  https://connect.facebook.net/en_US/fbevents.js
+  https://www.clarity.ms/tag/wml8wll5ua
+  https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W
+googletagmanager captured: true
+clarity captured: true
+facebook captured: true
+external responses seen by page (fulfilled by guard stub, status):
+  204 https://connect.facebook.net/en_US/fbevents.js
+  204 https://www.clarity.ms/tag/wml8wll5ua
+  204 https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W
+any non-204 external response: false

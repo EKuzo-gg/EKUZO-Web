@@ -135,6 +135,48 @@ item 2. Search Console (Domain property `ekuzo.gg`, data since 2026-04-09) liste
 Google re-reads it). Run URL Inspection "Test live URL" on one page and check the rendered screenshot.
 
 ---
+## Jamie (via Claude, Build Loop), October 26, 2026 (Robux post live; blog tracking: no more `source` event parameter, post engagement events)
+
+Two branches off `origin/main` `9c0125a`, built and tested together; they merge in any order (this
+entry is identical on both, so it merges cleanly). Artifacts: `docs/robux-post/` and
+`docs/blog-tracking-2026-10/` (start with each `03-decision-log.md`).
+
+**`blog/should-i-buy-my-kid-robux`**
+- New post `/blog/should-i-buy-my-kid-robux` (Karlin byline): Jamie's copy of record
+  (`EKUZO/Marketing/content-drafts/2026-10-24-robux-post-copy-of-record.md`), two HTML tables
+  (Robux web prices re-read on roblox.com 2026-10-26), real-photo hero with the game text blurred,
+  share card, the violet and lime graphic, FAQPage + BlogPosting + BreadcrumbList from `lib/schema.ts`.
+- `app/blog/page.tsx`: the post takes `featured: true` from the gaming-study post (the revert due
+  10-19); "recent" dropped from the gaming-study opening.
+- Inbound sentences (Jamie approved): gaming-programs-for-kids, should-you-ban-fortnite,
+  what-your-kids-gaming-is-telling-you, when-your-sons-only-friends-are-online (each now Updated
+  2026-10-26, cards and sitemap too), and a related link on the /parents FAQ "How do you keep online
+  spaces safe?". Karlin's author page lists the post.
+- `app/sitemap.ts`, `public/llms.txt` (entry; the blog index line lost its em dash).
+
+**`build/blog-tracking-2026-10`**
+- `lib/analytics.ts`: GA4 events no longer send a parameter named `source` (GA4 read it as the
+  session's traffic source; that is where the "header / sticky / hero / footer" sessions came from).
+  `register_click` and `newsletter_signup` send `cta_source`; `generate_lead` sends `lead_source`, plus
+  a Clarity `generate_lead` event and `lead_source` tag. Same rename on the /season1 landing page.
+- New `app/blog/BlogPostTracking.tsx` + `app/blog/layout.tsx` (no markup): on post pages only, GA4
+  `blog_link_click` and `blog_read_75`, Clarity tags `page_type=blog` and `post_slug`.
+  `docs/season-one-tracking.md` has the table.
+
+**Evidence:** tsc, next build and eslint clean; unit suites as before (ekuzo101-weeks "PM ET" fails
+identically on main). Browser QA behind a fail-closed guard (dead proxy plus route stubs; real
+gtag.js served locally, beacons recorded, nothing reached GA4, Clarity or Meta). /api/season-one was
+answered locally, so no Klaviyo or Meta writes.
+
+**Needs Jamie in GA4 (admin):** custom dimensions `post_slug`, `link_type`, `link_path`,
+`lead_source`, `cta_source`; internal and developer traffic filters; `dev--ekuzo.netlify.app` as an
+unwanted referral. List in `docs/blog-tracking-2026-10/03-decision-log.md`.
+
+**Aaron (your lane, not changed here):** `components/sections/FooterBanner.tsx` torn-paper image
+404s locally (path with spaces; 200 on production). The ledger table on the Robux post wraps row
+labels on phones; fine as is. Sources lists with long bare URLs need `overflow-wrap:anywhere` (set
+on this post's anchors only; a BlogContent rule would cover every post).
+
 ## Jamie (via Claude, Build Loop), October 11, 2026 (gaming-study post: ship changes, final images, one ask per post)
 
 Full Build Loop on the unshipped post `/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`

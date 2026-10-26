@@ -1,0 +1,55 @@
+{
+ "real_link_mods_none": {
+  "dp": [
+   true
+  ],
+  "ev": [],
+  "beacons": []
+ },
+ "real_link_mods_Shift": {
+  "dp": [
+   false
+  ],
+  "ev": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ]
+ },
+ "real_link_mods_Control": {
+  "dp": [
+   false
+  ],
+  "ev": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ]
+ }
+}

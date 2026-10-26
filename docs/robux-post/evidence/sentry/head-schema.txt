@@ -1,0 +1,52 @@
+title: Should I buy my kid Robux? One dad’s $20 experiment | matches req: true
+desc exact: true len 157
+canonical: https://ekuzo.gg/blog/should-i-buy-my-kid-robux
+og: https://ekuzo.gg/images/should-i-buy-my-kid-robux-card.jpg tw: https://ekuzo.gg/images/should-i-buy-my-kid-robux-card.jpg same: true
+card status 200 image/jpeg 133200
+JSON-LD blocks: 4
+block 0: @type=EducationalOrganization,WebSite,SiteNavigationElement,Person,Person,Person,Person,Person
+block 1: @type=BlogPosting
+block 2: @type=BreadcrumbList
+block 3: @type=FAQPage
+FAQ schema items 5 visible 5
+0 Q eq true A eq true
+1 Q eq true A eq true
+2 Q eq true A eq true
+3 Q eq true A eq true
+4 Q eq true A eq true
+BlogPosting {
+ "headline": "She asked for Robux to learn about money. Her dad said yes.",
+ "author": {
+  "@id": "https://ekuzo.gg/#coach-karlin"
+ },
+ "datePublished": "2026-10-26T12:00:00+00:00",
+ "dateModified": "2026-10-26T12:00:00+00:00",
+ "image": "https://ekuzo.gg/images/should-i-buy-my-kid-robux-card.jpg",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://ekuzo.gg/blog/should-i-buy-my-kid-robux"
+ },
+ "url": "https://ekuzo.gg/blog/should-i-buy-my-kid-robux",
+ "desc": "Robux can be a cheap money lesson if you set the cap in dollars and talk about every purchase. What one 8-year-old did with $20, and the controls to turn on."
+}
+Breadcrumb [{"@type":"ListItem","position":1,"name":"Home","item":"https://ekuzo.gg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://ekuzo.gg/blog"},{"@type":"ListItem","position":3,"name":"She asked for Robux to learn about money. Her dad said yes.","item":"https://ekuzo.gg/blog/should-i-buy-my-kid-robux"}]
+other 0 {"@type":"EducationalOrganization","@id":"https://ekuzo.gg/#organization","name":"EKUZO","alternateName":"EKUZO — Every Gamer Deserves a Team","url":"https://ekuzo.gg","logo":{"@type":"ImageObject","url":"https://ekuzo.gg/images/ekuzo-logo-red.svg"},"image":"https://ekuzo.gg/images/og-default.jpg","
+other 0 {"@type":"WebSite","@id":"https://ekuzo.gg/#website","url":"https://ekuzo.gg","name":"EKUZO","description":"Every Gamer Deserves a Team","publisher":{"@id":"https://ekuzo.gg/#organization"},"inLanguage":"en-US"}
+other 0 {"@type":"SiteNavigationElement","@id":"https://ekuzo.gg/#navigation","name":"Main Navigation","hasPart":[{"@type":"WebPage","name":"EKUZO Camps","url":"https://ekuzo.gg/programs/ekuzo-camps","description":"Intensive 1-week summer esports camps with pro coaching, real teams, and daily tournaments."}
+other 0 {"@type":"Person","@id":"https://ekuzo.gg/#coach-karlin","name":"Karlin Oei","alternateName":"Faith","jobTitle":"Founder","description":"Founder of EKUZO. Former national collegiate esports captain who earned $80,000+ in scholarships; builds EKUZO as the structured, coached environment he didn't hav
+other 0 {"@type":"Person","@id":"https://ekuzo.gg/#coach-sebastien","name":"Sebastien \"ZzLegendary\" DeMontigny","jobTitle":"Head Coach","description":"Professional esports coach who has coached at tier-1 organizations including Dignitas and Evil Geniuses. Elite-level competitive player. 4+ years experienc
+other 0 {"@type":"Person","@id":"https://ekuzo.gg/#coach-nuri","name":"Nuri \"Teemo Time\" Je","jobTitle":"Coach","description":"Diamond-ranked Support player (top ~1% of League of Legends players). Community manager at the University of Texas at Austin and Alienware Ambassador. Background in public school 
+other 0 {"@type":"Person","@id":"https://ekuzo.gg/#person-jamie","name":"Jamie Fitch","jobTitle":"Advisor","description":"Jamie Fitch is an advisor to EKUZO, a parent to two young gamers and a lifelong competitive gamer himself. He writes for parents about gaming as an opportunity to lean into with their ki
+other 0 {"@type":"Person","@id":"https://ekuzo.gg/#person-muhammad","name":"Muhammad Hossain","jobTitle":"Coach","description":"EKUZO coach and a senior English major at Texas A&M University. He coaches kids in League of Legends and interviews parents about gaming for EKUZO's listening project.","knowsAbout
+ids defined: [
+  'https://ekuzo.gg/#organization',
+  'https://ekuzo.gg/#website',
+  'https://ekuzo.gg/#navigation',
+  'https://ekuzo.gg/#coach-karlin',
+  'https://ekuzo.gg/#coach-sebastien',
+  'https://ekuzo.gg/#coach-nuri',
+  'https://ekuzo.gg/#person-jamie',
+  'https://ekuzo.gg/#person-muhammad',
+  'https://ekuzo.gg/blog/should-i-buy-my-kid-robux#article'
+]
+card dims (1200, 630)

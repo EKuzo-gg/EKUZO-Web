@@ -32,7 +32,7 @@ const SHARE_IMAGE = HERO_IMAGE;
 const HERO_ALT =
   "A mother stands in a bedroom doorway watching her teenage son play a video game at his desk, headset on, in the warm light of his room.";
 const DATE_PUBLISHED = "2026-05-28";
-const DATE_MODIFIED = "2026-10-13";
+const DATE_MODIFIED = "2026-10-26";
 
 // FAQ items. Each answer is front-loaded (first sentence answers the question)
 // for AI extraction. This same array drives both the visible <h3> Q&A and the
@@ -433,6 +433,11 @@ export default function PostSonsOnlyFriendsAreOnline() {
                 restricting my gaming, they offered to fund a computer if I
                 built it myself on a budget. It was completely new to me and it
                 was hard, but at 16 I did it, because I loved gaming that much.
+                (A dad on our team is running{" "}
+                <Link href="/blog/should-i-buy-my-kid-robux">
+                  a smaller version of that deal with $20 of Robux
+                </Link>
+                .)
                 The build taught me to make decisions, wire hardware, even how
                 to use a soldering iron. More importantly, it turned my solo
                 habit into something social. PC gaming pulled me into online

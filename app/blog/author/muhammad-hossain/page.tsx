@@ -48,7 +48,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "should-you-ban-fortnite",
     title: "She banned Fortnite and got her kid back. Then came a new problem.",
-    date: "July 31, 2026",
+    date: "October 26, 2026",
     excerpt:
       "The ban worked, and it broke something no article warned her about. A military mom's game-by-game verdicts on Fortnite, Red Dead Redemption, and Minecraft.",
     image: "/images/should-you-ban-fortnite-card.jpg",

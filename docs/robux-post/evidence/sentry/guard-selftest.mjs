@@ -1,0 +1,12 @@
+import { launchGuarded, newCtx, BASE } from '../lib.mjs';
+const b = await launchGuarded(); const ctx = await newCtx(b); const p = await ctx.newPage();
+const real = [];
+p.on('response', r => { if (!r.url().startsWith(BASE)) real.push(r.status()+' '+r.url()); });
+await p.goto(BASE+'/blog/should-i-buy-my-kid-robux',{waitUntil:'load'}); await p.waitForTimeout(4000);
+const ext = ctx.qaRec.external.map(e=>e.url);
+console.log('external captured:', ext.length);
+for (const u of ext) console.log(' ', u.slice(0,140));
+for (const k of ['googletagmanager','clarity','facebook']) console.log(k, 'captured:', ext.some(u=>u.includes(k)));
+console.log('external responses seen by page (fulfilled by guard stub, status):'); real.forEach(x=>console.log(' ',x.slice(0,140)));
+console.log('any non-204 external response:', real.some(x=>!x.startsWith('204')));
+await b.close();

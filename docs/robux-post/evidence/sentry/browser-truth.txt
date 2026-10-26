@@ -1,0 +1,60 @@
+ok    375 /blog/should-i-buy-my-kid-robux consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    375 /blog/gaming-programs-for-kids consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    375 /blog/should-you-ban-fortnite consoleErr=0 pageErr=0 http4xx=0 knownEnv=0 scrollW=375
+ok    375 /blog/what-your-kids-gaming-is-telling-you consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ISSUE 375 /blog/when-your-sons-only-friends-are-online consoleErr=1 pageErr=0 http4xx=1 knownEnv=2 scrollW=375
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    http: 404 http://localhost:3311/testimonial-videos/becky-parent-poster.jpg
+ISSUE 375 /parents consoleErr=8 pageErr=0 http4xx=8 knownEnv=2 scrollW=375
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    http: 404 http://localhost:3311/testimonial-videos/becky-parent-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/brad-parent-girl-gamer-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/debbie-potter-monroe-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/laura-hogan-mirus-academy-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/rajitha-parent-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-i-learned-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-man-of-my-word-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-thank-you-ekuzo-poster.jpg
+ok    375 /blog consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    375 /blog/author/karlin-oei consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    375 /blog/author/jamie-fitch consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    375 /blog/author/muhammad-hossain consoleErr=0 pageErr=0 http4xx=0 knownEnv=0 scrollW=375
+ok    375 /blog/gaming-study-13-7-years-younger-what-it-means-for-kids consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=375
+ok    1440 /blog/should-i-buy-my-kid-robux consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ok    1440 /blog/gaming-programs-for-kids consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ok    1440 /blog/should-you-ban-fortnite consoleErr=0 pageErr=0 http4xx=0 knownEnv=0 scrollW=1440
+ok    1440 /blog/what-your-kids-gaming-is-telling-you consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ISSUE 1440 /blog/when-your-sons-only-friends-are-online consoleErr=1 pageErr=0 http4xx=1 knownEnv=2 scrollW=1440
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    http: 404 http://localhost:3311/testimonial-videos/becky-parent-poster.jpg
+ISSUE 1440 /parents consoleErr=8 pageErr=0 http4xx=8 knownEnv=2 scrollW=1440
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    console: Failed to load resource: the server responded with a status of 404 (Not Found)
+    http: 404 http://localhost:3311/testimonial-videos/becky-parent-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/brad-parent-girl-gamer-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/debbie-potter-monroe-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/laura-hogan-mirus-academy-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/rajitha-parent-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-i-learned-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-man-of-my-word-poster.jpg
+    http: 404 http://localhost:3311/testimonial-videos/student-thank-you-ekuzo-poster.jpg
+ok    1440 /blog consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ok    1440 /blog/author/karlin-oei consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ok    1440 /blog/author/jamie-fitch consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+ok    1440 /blog/author/muhammad-hossain consoleErr=0 pageErr=0 http4xx=0 knownEnv=0 scrollW=1440
+ok    1440 /blog/gaming-study-13-7-years-younger-what-it-means-for-kids consoleErr=0 pageErr=0 http4xx=0 knownEnv=2 scrollW=1440
+external URLs attempted (all stubbed by guard): https://connect.facebook.net/en_US/fbevents.js, https://www.clarity.ms/tag/wml8wll5ua, https://www.googletagmanager.com/gtag/js, https://www.instagram.com/p/DYcuA4jBDl3/embed/, https://www.instagram.com/p/DZd5t6Ppi6x/embed/
+pages with issues 4

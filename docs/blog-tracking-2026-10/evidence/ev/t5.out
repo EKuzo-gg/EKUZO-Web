@@ -1,0 +1,19 @@
+C1 8000 restoredY 8000 DL after reload [] scrollEvents [[212,8000]]
+C2 6500 restoredY 6500 DL after reload [] scrollEvents [[295,6500]]
+C3 9500 restoredY 9500 DL after reload [] scrollEvents [[245,9500]]
+C4 8000 restoredY 8000 DL after reload [] scrollEvents [[235,8000]]
+C5 7000 restoredY 7000 DL after reload [] scrollEvents [[209,7000]]
+D {"dl":[],"sc":[[1639,8000]],"y":8000}
+G {"yAfterNav":0,"articleH":6726.78125,"dl":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}],["blog_read_75",{"post_slug":"gaming-programs-for-kids"}]],"beacons":[{"en":"blog_read_75","ep.post_slug":"should-i-buy-my-kid-robux"},{"en":"blog_read_75","ep.post_slug":"gaming-programs-for-kids"}]}
+A_load_no_scroll {"beacons":[],"dl":[]}
+B_staged {"metrics":{"top":0,"h":9058.25,"vh":900,"thr":5893.6875},"steps":{"below":[],"at_75":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"after_more":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]]},"beacons":[{"en":"blog_read_75","ep.post_slug":"should-i-buy-my-kid-robux"}]}
+C1_reload_at_8000 {"preReloadDL":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"afterReload":{"dl":[],"sc":[[212,8000]],"y":8000},"beaconsAfterReloadOnly":[],"allBeacons":[]}
+C2_reload_at_6500 {"preReloadDL":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"afterReload":{"dl":[],"sc":[[295,6500]],"y":6500},"beaconsAfterReloadOnly":[],"allBeacons":[]}
+C3_reload_at_9500 {"preReloadDL":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"afterReload":{"dl":[],"sc":[[245,9500]],"y":9500},"beaconsAfterReloadOnly":[],"allBeacons":[]}
+C4_reload_at_8000 {"preReloadDL":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"afterReload":{"dl":[],"sc":[[235,8000]],"y":8000},"beaconsAfterReloadOnly":[],"allBeacons":[]}
+C5_reload_at_7000 {"preReloadDL":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}]],"afterReload":{"dl":[],"sc":[[209,7000]],"y":7000},"beaconsAfterReloadOnly":[],"allBeacons":[]}
+D_reload_slow_chunks {"afterReload":{"dl":[],"sc":[[1639,8000]],"y":8000},"beacons":[]}
+E_back {"url":"http://localhost:3312/blog/should-i-buy-my-kid-robux","y":3000,"dl":[]}
+F_blog {"beacons":[],"dl":[]}
+F_author {"beacons":[],"dl":[]}
+G_spa_nav {"yAfterNav":0,"articleH":6726.78125,"dl":[["blog_read_75",{"post_slug":"should-i-buy-my-kid-robux"}],["blog_read_75",{"post_slug":"gaming-programs-for-kids"}]],"beacons":[{"en":"blog_read_75","ep.post_slug":"should-i-buy-my-kid-robux"},{"en":"blog_read_75","ep.post_slug":"gaming-programs-for-kids"}]}

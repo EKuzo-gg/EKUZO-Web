@@ -1,0 +1,178 @@
+{
+ "pos_parents": {
+  "url": "http://localhost:3312/parents",
+  "y0": 5925,
+  "y1": 0,
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "note": ""
+ },
+ "pos_touch_tap_parents": {
+  "url": "http://localhost:3312/parents",
+  "y0": 7214,
+  "y1": 7214,
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "note": ""
+ },
+ "pos_post": {
+  "url": "http://localhost:3312/blog/should-you-ban-fortnite",
+  "y0": 5891,
+  "y1": 5891,
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/blog/should-you-ban-fortnite",
+     "link_type": "post"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/blog/should-you-ban-fortnite",
+    "ep.link_type": "post"
+   }
+  ],
+  "note": ""
+ },
+ "neg_ctrl": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 5925,
+  "y1": 5925,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "pos_keepreading": {
+  "url": "http://localhost:3312/blog/gaming-programs-for-kids",
+  "y0": 9011,
+  "y1": 0,
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/blog/gaming-programs-for-kids",
+     "link_type": "post"
+    }
+   ]
+  ],
+  "beacons": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/blog/gaming-programs-for-kids",
+    "ep.link_type": "post"
+   }
+  ],
+  "note": ""
+ },
+ "neg_middle": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 5925,
+  "y1": 5925,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_meta": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 5925,
+  "y1": 5925,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_shift": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 5925,
+  "y1": 5925,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_alt": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 5925,
+  "y1": 5925,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_nav": {
+  "url": "http://localhost:3312/parents",
+  "y0": 0,
+  "y1": 0,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_external": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 700,
+  "y1": 700,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_footer": {
+  "url": "http://localhost:3312/parents",
+  "y0": 10343,
+  "y1": 0,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ },
+ "neg_dialog": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 0,
+  "y1": 0,
+  "dataLayer": [],
+  "beacons": [],
+  "note": "dialog has no native links; injected <a href=/parents> in [role=dialog]"
+ },
+ "neg_touch_scroll_real": {
+  "url": "http://localhost:3312/blog/should-i-buy-my-kid-robux",
+  "y0": 7214,
+  "y1": 7399,
+  "dataLayer": [],
+  "beacons": [],
+  "note": ""
+ }
+}

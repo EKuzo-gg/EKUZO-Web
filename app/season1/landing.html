@@ -1396,7 +1396,7 @@ document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",a
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
     if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
       // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
-      try{ window.gtag&&gtag("event","generate_lead",{source:"season_one_"+d.id,hero:HERO||"none"}); }catch(_){}
+      try{ window.gtag&&gtag("event","generate_lead",{lead_source:"season_one_"+d.id,hero:HERO||"none"}); }catch(_){}
       // Clarity: same moment, same gating. A named event and one session tag, nothing else.
       clr("event","signup"); clr("set","signed_up","yes"); }
     savedEmail=em; joined=true; upd(); showDone();
