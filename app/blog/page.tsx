@@ -15,6 +15,20 @@ export const metadata = {
 // Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const posts = [
   {
+    slug: "should-i-buy-my-kid-robux",
+    title: "She asked for Robux to learn about money. Her dad said yes.",
+    date: "October 26, 2026",
+    author: "Karlin Oei",
+    category: "Perspective",
+    excerpt:
+      "For a year the answer was no. At eight, she changed her pitch.",
+    image: "/images/should-i-buy-my-kid-robux-card.jpg",
+    // Takes the featured slot from the gaming-study post at ship (handoff
+    // 2026-10-24-ship-robux-and-session-end-posts.md). The session-end post
+    // takes it next.
+    featured: true,
+  },
+  {
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
     title:
       "The gaming study everyone shared, and what it means for your twelve-year-old",
@@ -24,13 +38,13 @@ const posts = [
     excerpt:
       "A doctor's one-liner about a gaming study reached 30M+ people. Karlin read a thousand of the replies. The one that mattered wasn't about the study.",
     image: "/images/gaming-study-13-7-card.jpg",
-    // Takes the featured slot from should-you-ban-fortnite for launch week.
-    featured: true,
+    // Held the featured slot from 2026-10-12 until the Robux post took it.
+    featured: false,
   },
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "October 13, 2026",
+    date: "October 26, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -50,7 +64,7 @@ const posts = [
   {
     slug: "should-you-ban-fortnite",
     title: "She banned Fortnite and got her kid back. Then came a new problem.",
-    date: "July 31, 2026",
+    date: "October 26, 2026",
     author: "Muhammad Hossain",
     category: "Perspective",
     excerpt:
@@ -72,7 +86,7 @@ const posts = [
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",
-    date: "October 13, 2026",
+    date: "October 26, 2026",
     author: "Jamie Fitch",
     category: "Perspective",
     excerpt:
@@ -105,7 +119,7 @@ const posts = [
   {
     slug: "gaming-programs-for-kids",
     title: "Gaming programs for kids: a parent's guide, Fall 2026",
-    date: "October 13, 2026",
+    date: "October 26, 2026",
     author: "Karlin Oei",
     excerpt:
       "What a kid who games can join in fall 2026: build classes, online clubs, school teams, local leagues and coached teams, with prices checked in October.",

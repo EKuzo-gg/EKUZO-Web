@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/parents`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
@@ -123,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/gaming-programs-for-kids`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -141,13 +141,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/what-your-kids-gaming-is-telling-you`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -156,7 +156,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 0.6.
     {
       url: `${baseUrl}/blog/should-you-ban-fortnite`,
-      lastModified: new Date("2026-07-31"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "weekly",
       priority: 0.7,
     },
@@ -172,23 +172,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    // The Robux post, shipped 2026-10-26. Carries the featured slot on /blog.
+    {
+      url: `${baseUrl}/blog/should-i-buy-my-kid-robux`,
+      lastModified: new Date("2026-10-26"),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
 
     // Blog author pages
     {
       url: `${baseUrl}/blog/author/karlin-oei`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${baseUrl}/blog/author/jamie-fitch`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${baseUrl}/blog/author/muhammad-hossain`,
-      lastModified: new Date("2026-07-31"),
+      lastModified: new Date("2026-10-26"),
       changeFrequency: "monthly",
       priority: 0.5,
     },

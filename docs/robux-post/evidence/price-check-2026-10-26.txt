@@ -1,0 +1,15 @@
+Ship-day price check, 2026-10-26 (Claude, Build Loop PM), read in the Claude desktop built-in browser, signed out.
+
+1. https://www.roblox.com/upgrades/robux  (web Robux packages; larger number = web amount, smaller = in-app amount)
+   $4.99  -> 500 Robux (400 in-app)
+   $9.99  -> 1,000 Robux (800 in-app)
+   $19.99 -> 2,000 Robux (1,700 in-app)
+   Matches the post's table and the 10-24 read. "Enjoy up to 25% more Robux" banner present.
+
+2. Dress to Impress game passes (universe 5203828273, place 15101393044), via
+   https://apis.roblox.com/game-passes/v1/universes/5203828273/game-passes?passView=Full&pageSize=100
+   VIP Pass 799 (for sale)  -> matches post
+   x2 Money 399, Custom Makeup 349, Run Faster 149, Increased Item Limit 129, plus outfit sets 279 to 449.
+   VIP Monthly (299 for 30 days) is not a game pass and the in-game store needs a signed-in session;
+   not re-read today. Last read 2026-10-24 (03-robux-price-check.md). Accepted: the FAQ already says
+   "Prices change, so check the in-game store."

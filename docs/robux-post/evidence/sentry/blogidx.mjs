@@ -1,0 +1,14 @@
+import { launchGuarded, newCtx, BASE } from '../lib.mjs';
+const b = await launchGuarded(); const ctx = await newCtx(b); const p = await ctx.newPage();
+const T='/blog/should-i-buy-my-kid-robux';
+await p.goto(BASE+'/blog',{waitUntil:'load'});
+console.log('--- /blog');
+console.log(await p.evaluate(()=>{ const as=[...document.querySelectorAll('main a[href^="/blog/"], a[href^="/blog/"]')].filter(a=>!a.href.includes('/author/')&&!a.href.includes('/category')); const seen=new Set(); const o=[];
+ for(const a of as){ if(seen.has(a.getAttribute('href')))continue; seen.add(a.getAttribute('href')); const r=a.getBoundingClientRect(); o.push(Math.round(r.top+scrollY)+' '+Math.round(r.left)+' '+a.getAttribute('href')+' | '+a.textContent.trim().replace(/\s+/g,' ').slice(0,100)); } return o.slice(0,8).join('\n');}));
+console.log(await p.evaluate(()=>document.body.innerText.match(/featured/gi)?.length+' mentions of "featured"'));
+await p.screenshot({path:'blog-index-1440.png'});
+console.log('gaming-study text:', await p.evaluate(()=>{const t=document.body.innerText;const i=t.toLowerCase().indexOf('study');return t.slice(Math.max(0,i-300),i+400)}));
+await p.goto(BASE+'/blog/author/karlin-oei',{waitUntil:'load'});
+console.log('--- author');
+console.log(await p.evaluate(()=>{const seen=new Set();const o=[];for(const a of document.querySelectorAll('a[href^="/blog/"]')){const h=a.getAttribute('href');if(seen.has(h)||h.includes('/author/'))continue;seen.add(h);o.push(h+' | '+a.textContent.trim().replace(/\s+/g,' ').slice(0,80))}return o.slice(0,6).join('\n')}));
+await b.close();

@@ -342,7 +342,7 @@ export default function PostGamingStudy137() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                a recent post on X
+                a post on X
               </a>
               , probably the same way you did. A physician with a big following
               put up a study abstract and one sentence: frequent gamers
