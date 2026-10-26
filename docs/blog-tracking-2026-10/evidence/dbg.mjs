@@ -1,0 +1,10 @@
+import { open, events, flush, save, BASE, POST, stay } from './h.mjs';
+const o = await open(); const p = await o.ctx.newPage();
+await p.goto(BASE + POST, { waitUntil: 'networkidle' }); await p.waitForTimeout(1000);
+const st = () => p.evaluate(() => { const r = document.querySelector('article').getBoundingClientRect(); return { y: scrollY, top: Math.round(r.top), h: Math.round(r.height), ih: innerHeight, seen: ((innerHeight - r.top) / r.height).toFixed(3), dl: (window.dataLayer||[]).map(a=>Array.from(a)).filter(a=>a[1]==='blog_read_75').length }; });
+console.log('load', JSON.stringify(await st()));
+await p.evaluate(() => scrollTo(0, 1500)); await p.waitForTimeout(300); console.log('1500', JSON.stringify(await st()));
+await p.waitForTimeout(2500); console.log('+2.5s', JSON.stringify(await st()));
+const inp = p.locator('input[type=email]').first(); await inp.fill('a@b.co'); console.log('after fill', JSON.stringify(await st()));
+await inp.locator('xpath=ancestor::form//button').first().click(); await p.waitForTimeout(800); console.log('after click', JSON.stringify(await st()));
+await o.b.close();

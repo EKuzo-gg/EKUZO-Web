@@ -1,0 +1,262 @@
+{
+ "ctl_plain_parents_article": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {} "
+ },
+ "ctl_plain_post_article": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/blog/should-you-ban-fortnite",
+    "ep.link_type": "post"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/blog/should-you-ban-fortnite",
+     "link_type": "post"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/blog/should-you-ban-fortnite\"> into <article> {} "
+ },
+ "ctl_plain_external": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"https://example.org/x\"> into <article> {} "
+ },
+ "pos_post_REAL": {
+  "events": [],
+  "dataLayer": [],
+  "note": "real next/link, {}"
+ },
+ "pos_parents_REAL": {
+  "events": [
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "note": "real next/link, {}"
+ },
+ "pos_keepreading_REAL": {
+  "events": [
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "note": "real next/link, {}"
+ },
+ "ctl_plain_samepath": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"/blog/should-i-buy-my-kid-robux\"> into <article> {} "
+ },
+ "ctl_plain_middle": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"button\":\"middle\"} "
+ },
+ "ctl_plain_right": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"button\":\"right\"} "
+ },
+ "ctl_plain_nav": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"/parents\"> into <nav> {} "
+ },
+ "ctl_plain_footer": {
+  "events": [
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <footer> {} "
+ },
+ "ctl_plain_hash": {
+  "events": [],
+  "dataLayer": [],
+  "note": "injected PLAIN <a href=\"#sec\"> into <article> {} "
+ },
+ "ctl_plain_mod_Meta": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"modifiers\":[\"Meta\"]} "
+ },
+ "ctl_plain_mod_Alt": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"modifiers\":[\"Alt\"]} "
+ },
+ "ctl_plain_mod_Control": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"modifiers\":[\"Control\"]} "
+ },
+ "neg_footer_REAL": {
+  "events": [
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "note": "real next/link, {}"
+ },
+ "ctl_plain_mod_Shift": {
+  "events": [
+   {
+    "en": "blog_link_click",
+    "ep.post_slug": "should-i-buy-my-kid-robux",
+    "ep.link_path": "/parents",
+    "ep.link_type": "parents"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_link_click",
+    {
+     "post_slug": "should-i-buy-my-kid-robux",
+     "link_path": "/parents",
+     "link_type": "parents"
+    }
+   ]
+  ],
+  "note": "injected PLAIN <a href=\"/parents\"> into <article> {\"modifiers\":[\"Shift\"]} "
+ },
+ "neg_nav_REAL": {
+  "events": [],
+  "dataLayer": [],
+  "note": "real next/link, {}"
+ },
+ "neg_mouse_drag": {
+  "events": [
+   {
+    "en": "blog_read_75",
+    "ep.post_slug": "should-i-buy-my-kid-robux"
+   }
+  ],
+  "dataLayer": [
+   [
+    "blog_read_75",
+    {
+     "post_slug": "should-i-buy-my-kid-robux"
+    }
+   ]
+  ],
+  "note": "drag off a real link"
+ },
+ "neg_external_REAL": {
+  "events": [],
+  "dataLayer": [],
+  "note": "real next/link, {}"
+ },
+ "ctl_plain_in_dialog": {
+  "events": [],
+  "note": "native dialog links: []; injected plain <a href=/parents> in [role=dialog]"
+ }
+}
