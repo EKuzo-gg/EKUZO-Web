@@ -70,6 +70,16 @@ Each test payment also reaches the old test webhook on the `dev` deploy (see "Li
   `sentry-a11y`; security `evidence/security-review.md`; Parent `evidence/parent-review.md`.
 - Test data: `06-cleanup-ledger.md` (every Stripe object and test row).
 
+## Known gaps (not blocking test mode)
+
+- Page speed: images are fixed (join 10.8 MB to 531 KB), but mobile LCP on the invite page is still 4.9 to
+  7.4 s in Lighthouse from server start-up and the database lookup, and signup varies 1.9 to 10.4 s. Next
+  step if it matters for ads: cache code lookups for 60 seconds and keep the database warm in launch week
+  (`evidence/sentry-a11y/rerun.md`).
+- Contrast: brand red buttons (3.95:1), the struck-through $160 (2.79:1) and one grey (4.33:1) are below
+  the guideline; Aaron's call.
+- Rate limit 429 could not be rechecked from a stable IP in the cloud sandbox; unit and one deploy run pass.
+
 ## Live-only checks and human actions (in launch order)
 
 Tuesday
