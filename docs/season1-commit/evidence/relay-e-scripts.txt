@@ -1,0 +1,308 @@
+# Relay E: ops scripts evidence (Neon test branch, Stripe test mode). Emails masked by the scripts.
+$ npm run s1:refund -- --order yfmevshbgz --kid Zoe
+s1 ops: mode=dry-run db=test stripe=test
+error: Stripe could not find this order's PaymentIntent (resource_missing). Is the key from the right account and mode?
+
+$ npm run s1:refund -- --order vw5ecedase --kid zoë --jersey-shipped
+s1 ops: mode=dry-run db=test stripe=test
+order vw5ecedase status=paid paid=$100.00 already refunded=$0.00 refundable=$100.00
+guardian t***@ekuzo.gg
+scope: one kid (Zoë, first, unit $100.00)
+refund amount: $100.00   reason=requested_by_customer
+metadata: s1_order=vw5ecedase s1_kid_id=c8d7d5c8-e8bf-4801-a752-1a92456b0fb2
+idempotency key: s1-refund:vw5ecedase:c8d7d5c8-e8bf-4801-a752-1a92456b0fb2
+advice: jersey shipped. Refund rule: $65.00 of $100.00 and the jersey is theirs to keep, or the full $100.00 if they send it back. Use --amount 6500 for the first. (Check sibling prices with Karlin: the rule text names $65 of $100.)
+dry-run: nothing sent to Stripe. Re-run with --apply to create the refund.
+
+$ npm run s1:refund -- --order vw5ecedase --kid Nobody
+s1 ops: mode=dry-run db=test stripe=test
+error: no kid on order vw5ecedase matches that name
+
+$ npm run s1:refund -- --order vw5ecedase --amount 99999
+s1 ops: mode=dry-run db=test stripe=test
+order vw5ecedase status=paid paid=$100.00 already refunded=$0.00 refundable=$100.00
+guardian t***@ekuzo.gg
+scope: whole order (everything still refundable)
+refund amount: $999.99 (override)   reason=requested_by_customer
+metadata: s1_order=vw5ecedase
+idempotency key: s1-refund:vw5ecedase:all
+error: amount $999.99 is more than the $100.00 still refundable on the charge
+
+$ npm run s1:refund -- --order vw5ecedase
+s1 ops: mode=dry-run db=test stripe=test
+order vw5ecedase status=paid paid=$100.00 already refunded=$0.00 refundable=$100.00
+guardian t***@ekuzo.gg
+scope: whole order (everything still refundable)
+refund amount: $100.00   reason=requested_by_customer
+metadata: s1_order=vw5ecedase
+idempotency key: s1-refund:vw5ecedase:all
+advice: no jersey_shipped_at column yet; if the free jersey has shipped, pass --jersey-shipped to see the $65 rule amount.
+dry-run: nothing sent to Stripe. Re-run with --apply to create the refund.
+
+$ npm run s1:refund -- --order mk2e4b7nyb
+s1 ops: mode=dry-run db=test stripe=test
+error: order status is pending; only paid or partially_refunded orders can be refunded
+
+$ npm run s1:refund -- --order vw5ecedase --live
+error: --live was passed but DATABASE_URL is the test database.
+
+
+$ npm run s1:find -- --email team+s1test-nobody@ekuzo.gg
+s1 ops: mode=dry-run db=test stripe=test
+no match
+
+$ npm run s1:find -- --code 7570 1491
+s1 ops: mode=dry-run db=test stripe=test
+error: that is not a valid code
+
+$ npm run s1:attach-code -- --order mk2e4b7nyb --code 13264037
+s1 ops: mode=dry-run db=test stripe=test
+error: order status is pending; codes attach to paid orders only
+
+$ npm run s1:attach-code -- --order vw5ecedase --code 75701491
+s1 ops: mode=dry-run db=test stripe=test
+error: that code belongs to the order's own family
+
+$ npm run s1:attach-code -- --order vw5ecedase --code 95929969 --live
+error: --live was passed but DATABASE_URL is the test database.
+
+$ npm run s1:attach-code -- --order vw5ecedase --code 13264037 --apply
+s1 ops: mode=APPLY db=test stripe=test
+order vw5ecedase (t***@ekuzo.gg) kids=1
+code 13264037 type=family -> inviter family ok
+would: set referral_code, record a pending referral with friend_kids=1, queue klaviyo_friend_joined, log referral.attached_by_hand
+attached. referral=c5f13fc7-0158-4984-8d7b-864be8dd9c98 flags=none
+The inviter's email goes out on the next outbox run (npm run s1:outbox).
+
+$ npm run s1:attach-code -- --order vw5ecedase --code 13264037 --apply
+s1 ops: mode=APPLY db=test stripe=test
+order vw5ecedase already has code 13264037 attached (referral pending, friend_kids=1). Nothing to do.
+
+$ npm run s1:attach-code -- --order vw5ecedase --code 95929969
+s1 ops: mode=dry-run db=test stripe=test
+error: order vw5ecedase already has a referral on code 13264037; not changing it
+
+$ npm run s1:find -- --order vw5ecedase
+s1 ops: mode=dry-run db=test stripe=test
+1 family matched
+family 24k29ckrwv  flags=[]  created=2026-10-27
+  guardians: t***@ekuzo.gg
+  orders (3):
+    vw5ecedase paid $100.00 kids=1 paid=2026-10-27T04:22Z fulfilled=yes jersey=true invited=yes failures=1 flags=[]
+    w4zpg888xw pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+    du6d9vemk9 pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+  kids (3):
+    Zoë age=12 committed order=vw5ecedase
+    Sibcffexexc age=10 pending order=w4zpg888xw
+    Ana age=13 pending order=du6d9vemk9
+  codes (1):
+    75701491 family active show_name=true
+  referrals as inviter (counts only): pending=2 (friend kids 3), void=1 (friend kids 1)
+  referral as joiner: vw5ecedase pending
+  outbox: discord_commit:skipped_no_config=1, klaviyo_committed:sent=1, klaviyo_friend_joined:pending=1, meta_purchase:sent=1
+
+
+$ npm run s1:find -- --code "7570 1491"
+s1 ops: mode=dry-run db=test stripe=test
+1 family matched
+family 24k29ckrwv  flags=[]  created=2026-10-27
+  guardians: t***@ekuzo.gg
+  orders (3):
+    vw5ecedase paid $100.00 kids=1 paid=2026-10-27T04:22Z fulfilled=yes jersey=true invited=yes failures=1 flags=[]
+    w4zpg888xw pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+    du6d9vemk9 pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+  kids (3):
+    Zoë age=12 committed order=vw5ecedase
+    Sibcffexexc age=10 pending order=w4zpg888xw
+    Ana age=13 pending order=du6d9vemk9
+  codes (1):
+    75701491 family active show_name=true
+  referrals as inviter (counts only): pending=2 (friend kids 3), void=1 (friend kids 1)
+  referral as joiner: vw5ecedase pending
+  outbox: discord_commit:skipped_no_config=1, klaviyo_committed:sent=1, klaviyo_friend_joined:pending=1, meta_purchase:sent=1
+
+$ npm run s1:code -- partner --target 75701491 --name "Test Creator" --slug zzrelayetest
+s1 ops: mode=dry-run db=test stripe=test
+partner code "zzrelayetest" -> display name "Test Creator", credits the target family (7570 1491)
+reminder: no surnames and no kid names in partner strings (runbook).
+dry-run: nothing written. Re-run with --apply.
+
+$ npm run s1:code -- partner --target 75701491 --name "Test Creator" --slug zoeteam
+s1 ops: mode=dry-run db=test stripe=test
+error: refused: the slug or name contains a kid first name from the target family (T3)
+
+$ npm run s1:code -- partner --target 75701491 --slug zzrelayetest
+s1 ops: mode=dry-run db=test stripe=test
+error: --name is required (T3: a partner code needs a display name)
+
+$ npm run s1:code -- partner --target 75701491 --name "Test Creator" --slug zzrelayetest --apply
+s1 ops: mode=APPLY db=test stripe=test
+partner code "zzrelayetest" -> display name "Test Creator", credits the target family (7570 1491)
+reminder: no surnames and no kid names in partner strings (runbook).
+created partner code zzrelayetest
+
+$ npm run s1:code -- partner --target 75701491 --name "Test Creator" --slug zzrelayetest --apply
+s1 ops: mode=APPLY db=test stripe=test
+error: code zzrelayetest already exists
+
+$ npm run s1:code -- hide-name --code 75701491
+s1 ops: mode=dry-run db=test stripe=test
+code 75701491 type=family status=active show_name=true
+would set show_name=false (the invite page renders without a name)
+dry-run: nothing written. Re-run with --apply.
+
+$ npm run s1:code -- hide-name --code 75701491 --apply
+s1 ops: mode=APPLY db=test stripe=test
+code 75701491 type=family status=active show_name=true
+would set show_name=false (the invite page renders without a name)
+show_name=false on 75701491
+
+$ npm run s1:code -- hide-name --code 75701491 --apply
+s1 ops: mode=APPLY db=test stripe=test
+code 75701491 type=family status=active show_name=false
+already show_name=false. Nothing to do.
+
+$ npm run s1:code -- show-name --code 75701491 --apply
+s1 ops: mode=APPLY db=test stripe=test
+code 75701491 type=family status=active show_name=false
+would set show_name=true (the first name appears on the invite page)
+show_name=true on 75701491
+
+$ npm run s1:code -- void --code zzrelayetest
+s1 ops: mode=dry-run db=test stripe=test
+code zzrelayetest type=partner status=active
+would set status=void (existing referrals keep their status)
+dry-run: nothing written. Re-run with --apply.
+
+$ npm run s1:code -- void --code zzrelayetest --apply
+s1 ops: mode=APPLY db=test stripe=test
+code zzrelayetest type=partner status=active
+would set status=void (existing referrals keep their status)
+voided zzrelayetest
+
+$ npm run s1:code -- void --code zzrelayetest --apply
+s1 ops: mode=APPLY db=test stripe=test
+code zzrelayetest type=partner status=void
+already void. Nothing to do.
+
+$ npm run s1:code -- rotate --family-code 75701491
+s1 ops: mode=dry-run db=test stripe=test
+family code 7570 1491 would be voided and replaced by a new code.
+the old link stops working; friends who already joined keep their credit.
+dry-run: nothing written. Re-run with --apply.
+
+$ npm run s1:code -- rotate --family-code zzrelayetest
+s1 ops: mode=dry-run db=test stripe=test
+error: rotate works on family codes only
+
+# cleanup: test partner row removed by direct delete (test data)
+deleted test partner rows: zzrelayetest
+$ npm run s1:code -- rotate --family-code 35304106 --apply
+s1 ops: mode=APPLY db=test stripe=test
+family code 3530 4106 will be voided and replaced by a new code.
+the old link stops working; friends who already joined keep their credit.
+rotated. old=35304106 (void) new=13677722 (1367 7722)
+send the family the new link: /crew/13677722
+
+[{"code":"35304106","type":"vanity","status":"void"},{"code":"13677722","type":"family","status":"active"}]
+--- sweep ---
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+counts: no_pi found=0 canceled=0 | pi_unpaid found=0 canceled=0 skipped_state=0 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+$ npm run s1:sweep -- --apply
+s1 ops: mode=APPLY db=test stripe=test
+counts: no_pi found=0 canceled=0 | pi_unpaid found=0 canceled=0 skipped_state=0 skipped_lookup=0
+
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+counts: no_pi found=0 canceled=0 | pi_unpaid found=0 canceled=0 skipped_state=0 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+$ npm run s1:find -- --kid "Kai"
+s1 ops: mode=dry-run db=test stripe=test
+2 families matched
+family dqbbcm8kbf  flags=[]  created=2026-10-27
+  guardians: t***@ekuzo.gg
+  orders (2):
+    zp8kzsun4e refunded $100.00 kids=1 paid=2026-10-27T04:13Z fulfilled=yes jersey=true invited=no failures=0 flags=[]
+    emyyqtyssf pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+  kids (2):
+    Zoë age=11 refunded order=zp8kzsun4e
+    Kai age=9 pending order=emyyqtyssf
+  codes (0):
+  referrals as inviter (counts only): none
+  referral as joiner: none
+  outbox: none
+family jnnvjkuev5  flags=[]  created=2026-10-27
+  guardians: t***@ekuzo.gg
+  orders (2):
+    uzvaw2c57s paid $100.00 kids=1 paid=2026-10-27T04:08Z fulfilled=yes jersey=true invited=no failures=0 flags=[]
+    9jvwtt2j8f pending $80.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+  kids (2):
+    Zoë age=11 committed order=uzvaw2c57s
+    Kai age=9 pending order=9jvwtt2j8f
+  codes (1):
+    33132799 family active show_name=true
+  referrals as inviter (counts only): none
+  referral as joiner: none
+  outbox: discord_commit:stale=1, klaviyo_committed:stale=1, meta_purchase:stale=1
+
+$ npm run s1:find -- --email "team+s1test-x@ekuzo.gg"
+s1 ops: mode=dry-run db=test stripe=test
+no match
+
+# test setup: backdated test orders t0badc93ad2 (no PI, 2 h) and mk2e4b7nyb (PI, 26 h) so the sweep has something to find
+backdated test orders: t0badc93ad2,mk2e4b7nyb
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+would cancel (no PI, over 1 h) order=t0badc93ad2
+skip order=mk2e4b7nyb: PaymentIntent is canceled
+counts: no_pi found=1 canceled=0 | pi_unpaid found=1 canceled=0 skipped_state=1 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+$ npm run s1:sweep -- --apply
+s1 ops: mode=APPLY db=test stripe=test
+canceled (no PI) order=t0badc93ad2
+skip order=mk2e4b7nyb: PaymentIntent is canceled
+counts: no_pi found=1 canceled=1 | pi_unpaid found=1 canceled=0 skipped_state=1 skipped_lookup=0
+
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+skip order=mk2e4b7nyb: PaymentIntent is canceled
+counts: no_pi found=0 canceled=0 | pi_unpaid found=1 canceled=0 skipped_state=1 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+$ npm run s1:find -- --order mk2e4b7nyb
+s1 ops: mode=dry-run db=test stripe=test
+1 family matched
+family c7u3y4qu4u  flags=[]  created=2026-10-27
+  guardians: t***@ekuzo.gg
+  orders (1):
+    mk2e4b7nyb pending $100.00 kids=1 paid=- fulfilled=no jersey=true invited=no failures=0 flags=[]
+  kids (1):
+    Lena age=12 pending order=mk2e4b7nyb
+  codes (0):
+  referrals as inviter (counts only): none
+  referral as joiner: none
+  outbox: none
+
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+would cancel PI + order (over 24 h, PI unpaid) order=mk2e4b7nyb
+counts: no_pi found=0 canceled=0 | pi_unpaid found=1 canceled=0 skipped_state=0 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+$ npm run s1:sweep -- --apply
+s1 ops: mode=APPLY db=test stripe=test
+canceled (PI unpaid) order=mk2e4b7nyb
+counts: no_pi found=0 canceled=0 | pi_unpaid found=1 canceled=1 skipped_state=0 skipped_lookup=0
+
+$ npm run s1:sweep
+s1 ops: mode=dry-run db=test stripe=test
+counts: no_pi found=0 canceled=0 | pi_unpaid found=0 canceled=0 skipped_state=0 skipped_lookup=0
+dry-run: nothing changed. Re-run with --apply.
+
+rolled back as intended: division by zero (all earlier statements parsed and ran)
+# deletion-checklist SQL validated in a forced-rollback transaction (header line above)

@@ -11,6 +11,11 @@
     "test:s1": "node scripts/run-tests.mjs lib/season1/__tests__",
     "s1:migrate": "node --env-file=.env.local scripts/s1-migrate.mjs",
     "s1:outbox": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-outbox.mjs",
+    "s1:refund": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-refund.mjs",
+    "s1:attach-code": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-attach-code.mjs",
+    "s1:code": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-code.mjs",
+    "s1:sweep": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-sweep.mjs",
+    "s1:find": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-find.mjs",
     "prepare": "husky"
   },
   "dependencies": {
