@@ -10,6 +10,7 @@ import {
   insertEvent,
   markEventProcessed,
   setOrderKidsStatus,
+  refundKid,
   setOrderStatus,
   voidOnFullRefund,
 } from "@/lib/season1/db";
@@ -161,6 +162,27 @@ async function handle(event: Stripe.Event, piId: string, full: boolean | undefin
         logStep("webhook.refund_referral", o.publicId, true, v.codeVoided ? "code_void" : null);
       } else {
         await setOrderStatus(o.id, "partially_refunded", ["paid"]);
+        // Ops 4: a partial refund names its kid in the refund metadata (s1-refund script).
+        const chg = event.data.object as Stripe.Charge;
+        const refunds = await getStripe().refunds.list({ charge: chg.id, limit: 20 });
+        let attributed = false;
+        for (const rf of refunds.data) {
+          const kidId = rf.metadata?.s1_kid_id;
+          if (kidId && /^[0-9a-f-]{36}$/i.test(kidId)) {
+            if (await refundKid(o.id, kidId)) logStep("webhook.refund_kid", o.publicId, true);
+            attributed = true;
+          }
+        }
+        if (!attributed) {
+          await addOrderFlags(o.id, ["refund_unattributed"]);
+          await enqueueOutbox(
+            "ops_alert",
+            `ops_alert:refund_unattributed:${chg.id}:${chg.amount_refunded}`,
+            { order_public_id: o.publicId, alert: "refund_unattributed" },
+            o.livemode,
+          );
+          logStep("webhook.refund_unattributed", o.publicId, true);
+        }
       }
       // Slice 3: Klaviyo "Season 01 Refunded" (sender builds the payload from the order).
       const ch = event.data.object as Stripe.Charge;
@@ -179,6 +201,12 @@ async function handle(event: Stripe.Event, piId: string, full: boolean | undefin
       const o = await getOrderForFulfilByPi(piId);
       if (o) {
         await addOrderFlags(o.id, [event.type === "refund.failed" ? "refund_failed" : "dispute"]);
+        await enqueueOutbox(
+          "ops_alert",
+          `ops_alert:${event.type}:${event.id}`,
+          { order_public_id: o.publicId, alert: event.type === "refund.failed" ? "refund_failed" : "dispute" },
+          o.livemode,
+        );
         logStep(`webhook.${event.type}`, o.publicId, true);
       }
       return;

@@ -910,3 +910,28 @@ export async function voidOnFullRefund(
   );
   return { referralVoided: ref.length > 0, codeVoided: code.length > 0 };
 }
+
+/**
+ * Ops 4: a partial refund attributed to one kid (refund metadata s1_kid_id, set by
+ * scripts/s1-refund.mjs). Marks that kid refunded and takes one friend kid off the
+ * order's referral (void at zero). Returns false when the kid is not on the order or
+ * was already refunded, so a replay changes nothing.
+ */
+export async function refundKid(orderId: string, kidId: string): Promise<boolean> {
+  const kid = await q(
+    `update s1_kids set status = 'refunded'
+      where id = $2::uuid and status <> 'refunded'
+        and id in (select kid_id from s1_order_items where order_id = $1)
+      returning id`,
+    [orderId, kidId],
+  );
+  if (kid.length === 0) return false;
+  await q(
+    `update s1_referrals
+        set friend_kids = greatest(friend_kids - 1, 0),
+            status = case when friend_kids - 1 <= 0 then 'void' else status end
+      where referred_order_id = $1 and status <> 'void'`,
+    [orderId],
+  );
+  return true;
+}
