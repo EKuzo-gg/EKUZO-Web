@@ -1,0 +1,82 @@
+{
+ "redirects": [
+  {
+   "path": "/season1/early-access?kid=Charlie",
+   "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join",
+   "chain": [
+    "https://season1-commit--ekuzo.netlify.app/season1/early-access?kid=Charlie",
+    "https://season1-commit--ekuzo.netlify.app/season1/join"
+   ],
+   "referrer": "",
+   "charlieInHtml": 0,
+   "charlieContexts": [],
+   "bodyHasCharlie": false,
+   "histLen": 2
+  },
+  {
+   "path": "/season1/early-access/signup?from=Charlie",
+   "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+   "chain": [
+    "https://season1-commit--ekuzo.netlify.app/season1/early-access/signup?from=Charlie",
+    "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+   ],
+   "referrer": "",
+   "charlieInHtml": 2,
+   "charlieContexts": [
+    "\" aria-describedby=\"e-nm0\" placeholder=\"Charlie\"></div><div><label class=\"l\" for=\"ag0\">",
+    "bedby=\"e-nm'+i+'\" placeholder=\"'+(n==1?'Charlie':'First name')+'\"></div><div><label cla"
+   ],
+   "bodyHasCharlie": false,
+   "histLen": 2
+  },
+  {
+   "path": "/season1/early-access/saved?kid=Charlie",
+   "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+   "chain": [
+    "https://season1-commit--ekuzo.netlify.app/season1/early-access/saved?kid=Charlie",
+    "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+   ],
+   "referrer": "",
+   "charlieInHtml": 0,
+   "charlieContexts": [],
+   "bodyHasCharlie": false,
+   "histLen": 2
+  },
+  {
+   "path": "/season1/crew?from=Charlie",
+   "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join",
+   "chain": [
+    "https://season1-commit--ekuzo.netlify.app/season1/crew?from=Charlie",
+    "https://season1-commit--ekuzo.netlify.app/season1/join"
+   ],
+   "referrer": "",
+   "charlieInHtml": 0,
+   "charlieContexts": [],
+   "bodyHasCharlie": false,
+   "histLen": 2
+  }
+ ],
+ "invite": {
+  "crewUrl": "https://season1-commit--ekuzo.netlify.app/crew/75701491",
+  "crewText": "Test mode. No real charges.\nEKUZO\nJoin the team\n\nAN INVITE FROM ZOË’S FAMILY\n\nZOË WANTS\nYOUR KID ON\nTHE TEAM.\n\nZoë just saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link and both families get a free month.\n\nJoin Zoë’s team · $100\n\nFully refundable until December 31, 2026, and any time we can't place your kid.\n\nFriend code 7570 1491\n\nWHAT IS EKUZO\n\nEVERY GAMER\nDESERVES A TEAM.\n\nThey're already gaming. We give it a point. A real coach, th",
+  "cookies": [
+   {
+    "name": "s1_ref",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax",
+    "path": "/"
+   }
+  ],
+  "banner": [],
+  "removeCandidates": [
+   "invRm|BUTTON|Remove (no friend credit for either fami"
+  ]
+ },
+ "welcome": {},
+ "console": {
+  "join": [],
+  "crew": [],
+  "signup": []
+ }
+}

@@ -1,0 +1,12 @@
+waiting 937 s
+invalid-age 422 {"field":"kids.0.age","error":"age_outside"}
+invalid-consent 422 {"field":"consent","error":"required"}
+invalid-email 422 {"field":"email","error":"invalid"}
+valid-1 200 {"clientSecret":"<present>","orderId":"xe3n836qwn","amountCents":10000,"invite":"none"}
+valid-2 200 {"clientSecret":"<present>","orderId":"xsk5ts2av8","amountCents":10000,"invite":"none"}
+valid-3 200 {"clientSecret":"<present>","orderId":"c3a4j2xc73","amountCents":10000,"invite":"none"}
+valid-4 200 {"clientSecret":"<present>","orderId":"5j844ambaj","amountCents":10000,"invite":"none"}
+valid-5 200 {"clientSecret":"<present>","orderId":"kga4t27x2j","amountCents":10000,"invite":"none"}
+valid-6 200 {"clientSecret":"<present>","orderId":"4w5pt7drba","amountCents":10000,"invite":"none"}
+invalid-after-limit 422 {"field":"consent","error":"required"}
+done

@@ -1,0 +1,134 @@
+{
+ "calls": [
+  {
+   "name": "invalid-age",
+   "at": "2026-10-27T06:10:24.924Z",
+   "status": 422,
+   "resp": {
+    "field": "kids.0.age",
+    "error": "age_outside"
+   }
+  },
+  {
+   "name": "invalid-consent",
+   "at": "2026-10-27T06:10:25.311Z",
+   "status": 422,
+   "resp": {
+    "field": "consent",
+    "error": "required"
+   }
+  },
+  {
+   "name": "invalid-email",
+   "at": "2026-10-27T06:10:25.426Z",
+   "status": 422,
+   "resp": {
+    "field": "email",
+    "error": "invalid"
+   }
+  },
+  {
+   "name": "valid-1",
+   "at": "2026-10-27T06:10:27.158Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "xe3n836qwn",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3aZKORcR8BUEx0Usk0B0v",
+   "canceled": "canceled"
+  },
+  {
+   "name": "valid-2",
+   "at": "2026-10-27T06:10:28.084Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "xsk5ts2av8",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3aaKORcR8BUEx01c0ceY2",
+   "canceled": "canceled"
+  },
+  {
+   "name": "valid-3",
+   "at": "2026-10-27T06:10:29.045Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "c3a4j2xc73",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3abKORcR8BUEx1UduOPGB",
+   "canceled": "canceled"
+  },
+  {
+   "name": "valid-4",
+   "at": "2026-10-27T06:10:30.049Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "5j844ambaj",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3acKORcR8BUEx1O0cs1tT",
+   "canceled": "canceled"
+  },
+  {
+   "name": "valid-5",
+   "at": "2026-10-27T06:10:30.985Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "kga4t27x2j",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3adKORcR8BUEx0FUNoEvY",
+   "canceled": "canceled"
+  },
+  {
+   "name": "valid-6",
+   "at": "2026-10-27T06:10:31.944Z",
+   "status": 200,
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "4w5pt7drba",
+    "amountCents": 10000,
+    "invite": "none"
+   },
+   "pi": "pi_3UV3aeKORcR8BUEx0SCmtv6X",
+   "canceled": "canceled"
+  },
+  {
+   "name": "invalid-after-limit",
+   "at": "2026-10-27T06:10:32.309Z",
+   "status": 422,
+   "resp": {
+    "field": "consent",
+    "error": "required"
+   }
+  }
+ ],
+ "pis": [
+  "pi_3UV3aZKORcR8BUEx0Usk0B0v",
+  "pi_3UV3aaKORcR8BUEx01c0ceY2",
+  "pi_3UV3abKORcR8BUEx1UduOPGB",
+  "pi_3UV3acKORcR8BUEx1O0cs1tT",
+  "pi_3UV3adKORcR8BUEx0FUNoEvY",
+  "pi_3UV3aeKORcR8BUEx0SCmtv6X"
+ ],
+ "canceled": [
+  "pi_3UV3aZKORcR8BUEx0Usk0B0v",
+  "pi_3UV3aaKORcR8BUEx01c0ceY2",
+  "pi_3UV3abKORcR8BUEx1UduOPGB",
+  "pi_3UV3acKORcR8BUEx1O0cs1tT",
+  "pi_3UV3adKORcR8BUEx0FUNoEvY",
+  "pi_3UV3aeKORcR8BUEx0SCmtv6X"
+ ]
+}

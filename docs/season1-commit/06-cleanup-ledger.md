@@ -125,3 +125,13 @@ calls (`-dapos-`, `-dinject-`, `-drl1..5-`, `-dspoof-` emails). Klaviyo test pro
 | payment_intent | pi_3UV2UsKORcR8BUEx1MmnNBUS | canceled | D injected amount fields ignored (order wb2fq6u56m) |
 | payment_intent | pi_3UV2ePKORcR8BUEx0mK7uOa9, pi_3UV2eRKORcR8BUEx0CQS5kz3, pi_3UV2eRKORcR8BUEx0DkXUG2Z, pi_3UV2eSKORcR8BUEx1z3IDbon, pi_3UV2eTKORcR8BUEx0zjox2C2 | canceled | D rate limit calls 1 to 5 (6th returned 429, no PI) |
 | payment_intent | pi_3UV2oBKORcR8BUEx1O5UrgHD | canceled | D spoofed IP header call (order beg2khn3g7) |
+
+## Sentry regression run (Stripe test mode + Neon test, branch deploy at 1dba0f6), 2026-10-27 UTC
+
+No succeeded PIs. 13 PaymentIntents created, all verified canceled via the Stripe API (`evidence/sentry-regression/pi-status.txt`). Neon rows: emails `team+s1test-reg-*@ekuzo.gg` (pending orders, kids Ivy 11, `s1pi:*` rate-limit keys, events). One browser invite-remove call on code 75701491 cleared only the visitor cookie.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UV3KLKORcR8BUEx1TxLXqFs | canceled | Check 1 browser commit, decline 4000 0000 0000 0002 then 3DS fail 4000 0027 6000 3184 on the same PI |
+| payment_intent | pi_3UV3aZKORcR8BUEx0Usk0B0v, pi_3UV3aaKORcR8BUEx01c0ceY2, pi_3UV3abKORcR8BUEx1UduOPGB, pi_3UV3acKORcR8BUEx1O0cs1tT, pi_3UV3adKORcR8BUEx0FUNoEvY, pi_3UV3aeKORcR8BUEx0SCmtv6X | canceled | Check 7 run 1 (6 valid calls, split across two egress IPs) |
+| payment_intent | pi_3UV3kFKORcR8BUEx1axxkOT6, pi_3UV3kGKORcR8BUEx0ioGBJRN, pi_3UV3kHKORcR8BUEx0ndBz9Yx, pi_3UV3kIKORcR8BUEx1UA3lpuE, pi_3UV3kIKORcR8BUEx1mdjS9WB, pi_3UV3kJKORcR8BUEx0sw42xbS | canceled | Check 7 run 2 (6 valid 200s; the 7th call returned 429, no PI) |

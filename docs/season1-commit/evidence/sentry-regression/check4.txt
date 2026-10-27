@@ -1,0 +1,14 @@
+cross-origin JSON:
+403
+cross-origin + sec-fetch-site cross-site:
+403
+Origin null:
+403
+same-origin text/plain:
+{"error":"unsupported_media_type"} 415
+same-origin no content-type:
+415
+GET:
+HTTP/2 405 
+remove cross-site:
+HTTP/2 403 

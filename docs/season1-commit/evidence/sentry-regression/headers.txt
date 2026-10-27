@@ -1,0 +1,31 @@
+== /season1/join
+HTTP/2 200 
+cache-control: private,no-store
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Wed, 27 Oct 2027 05:52:04 GMT; Max-Age=31536000; Secure; SameSite=lax
+x-content-type-options: nosniff
+x-frame-options: DENY
+== /season1/join/signup
+HTTP/2 200 
+cache-control: private,no-store
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Wed, 27 Oct 2027 05:52:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+x-content-type-options: nosniff
+x-frame-options: DENY
+== /season1/join/welcome
+HTTP/2 200 
+cache-control: private,no-store
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Wed, 27 Oct 2027 05:52:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+x-content-type-options: nosniff
+x-frame-options: DENY
+== /season1/terms
+HTTP/2 200 
+cache-control: private,no-store
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Wed, 27 Oct 2027 05:52:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+x-content-type-options: nosniff
+x-frame-options: DENY
+== /crew/75701491
+HTTP/2 200 
+cache-control: private,no-store
+set-cookie: s1_ref=75701491.G8eBIHHQXf0lvTK-jPtXMTg636iuN4iXVvrsKUCooNI; Path=/; Max-Age=1209600; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Wed, 27 Oct 2027 05:52:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+x-content-type-options: nosniff
+x-frame-options: DENY

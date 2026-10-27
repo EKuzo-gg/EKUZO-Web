@@ -1,0 +1,90 @@
+{
+ "commits": [
+  {
+   "status": 200,
+   "method": "POST",
+   "keys": [
+    "clientSecret",
+    "orderId",
+    "amountCents",
+    "invite"
+   ],
+   "hasInviteReason": false,
+   "invite": "none",
+   "xfo": "DENY",
+   "ct": "application/json",
+   "pi": "pi_3UV3KLKORcR8BUEx1TxLXqFs"
+  }
+ ],
+ "steps": {
+  "declineMsg": "Your card has been declined.",
+  "declineFormErr": "Your card has been declined.",
+  "commitsAfterDecline": 1,
+  "piAfterDecline": [
+   "pi_3UV3KLKORcR8BUEx1TxLXqFs"
+  ],
+  "challengeFrame": true,
+  "failClicked": true,
+  "ePay3ds": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
+  "formErr3ds": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
+  "url": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+  "btnDisabled": false
+ },
+ "pis": [
+  "pi_3UV3KLKORcR8BUEx1TxLXqFs"
+ ],
+ "canceled": [
+  {
+   "pi": "pi_3UV3KLKORcR8BUEx1TxLXqFs",
+   "status": "canceled"
+  }
+ ],
+ "email": "team+s1test-reg-zv6st0@ekuzo.gg",
+ "console": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+   "loc": "https://api.stripe.com/v1/payment_intents/pi_3UV3KLKORcR8BUEx1TxLXqFs/confirm",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+   "loc": "https://api.stripe.com/v1/payment_intents/pi_3UV3KLKORcR8BUEx1TxLXqFs/confirm",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+   "loc": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_Z3FWb3BKbndLV2JaQVhGaXV3SHFtN1dHcFFyN0FSeXk0ZUoxU3B4aUlObyMSFwoVYWNjdF8xTGZxMmFLT1JjUjhCVUV4/challenge",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+   "loc": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_Z3FWb3BKbndLV2JaQVhGaXV3SHFtN1dHcFFyN0FSeXk0ZUoxU3B4aUlObyMSFwoVYWNjdF8xTGZxMmFLT1JjUjhCVUV4/challenge",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+   "loc": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_Z3FWb3BKbndLV2JaQVhGaXV3SHFtN1dHcFFyN0FSeXk0ZUoxU3B4aUlObyMSFwoVYWNjdF8xTGZxMmFLT1JjUjhCVUV4/challenge/complete",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+   "loc": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_Z3FWb3BKbndLV2JaQVhGaXV3SHFtN1dHcFFyN0FSeXk0ZUoxU3B4aUlObyMSFwoVYWNjdF8xTGZxMmFLT1JjUjhCVUV4/challenge",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+   "loc": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_Z3FWb3BKbndLV2JaQVhGaXV3SHFtN1dHcFFyN0FSeXk0ZUoxU3B4aUlObyMSFwoVYWNjdF8xTGZxMmFLT1JjUjhCVUV4/challenge/complete",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  }
+ ],
+ "commitReqs": [
+  "POST https://season1-commit--ekuzo.netlify.app/api/season1/commit"
+ ]
+}
