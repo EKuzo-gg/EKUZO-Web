@@ -86,6 +86,9 @@ const nextConfig = {
       { source: "/ekuzo-camps/:path*", destination: "/programs/ekuzo-camps/:path*", permanent: true },
       { source: "/camps", destination: "/programs/ekuzo-camps", permanent: true },
       { source: "/camps/:path*", destination: "/programs/ekuzo-camps/:path*", permanent: true },
+
+      // Season 01 commit: Karlin's short link (temporary, 307).
+      { source: "/karlin", destination: "/season1/join/signup?src=karlin", permanent: false },
     ];
   },
 };

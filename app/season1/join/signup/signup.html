@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Save their spot | EKUZO</title>
+<link rel="icon" href="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap">
+<script type="application/json" id="s1-config">__S1_CONFIG__</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
+<style>
+:root{--red:#F92524;--black:#050505;--ink:#333;--muted:#6f6f6f;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#d9d7d4;color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.app{max-width:480px;margin:0 auto;background:var(--white);min-height:100vh;overflow:hidden}
+.pv{background:#fff6b6;color:#7a5a00;font:600 12px/1.4 var(--body);text-align:center;padding:6px 12px}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.1);background:var(--white)}
+.nav.dark{background:var(--black);border:0}
+.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none}
+.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:40px}
+.nav.dark .back,.nav.dark .wm{color:var(--white)}
+.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none}
+.d{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;line-height:.95;font-weight:700;margin:0;text-wrap:balance}
+.ey{font:700 11px/1.4 var(--body);text-transform:uppercase;letter-spacing:.15em;margin:0}
+.red{color:var(--red)}
+.px{padding-left:20px;padding-right:20px}
+.sec{padding-top:40px}
+.notch{clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+.btn{display:block;width:100%;text-align:center;background:var(--red);color:#fff;font:700 16px var(--body);padding:16px 12px;border-radius:2px;text-decoration:none;border:0;cursor:pointer}
+.btn.black{background:var(--black)}
+.btn.white{background:var(--white);color:var(--black)}
+.btn.ghost{background:transparent;border:2px solid var(--red);color:var(--red);font-size:14px;padding:12px}
+p{margin:0}
+.body{font-size:15px;line-height:1.6;color:var(--ink)}
+.small{font-size:12px;line-height:1.45;color:var(--muted)}
+.offer{background:var(--stone);padding:20px}
+.price{display:flex;align-items:baseline;gap:12px}
+.price b{font:700 52px/1 var(--display)}
+.price s{color:rgba(0,0,0,.4);font-size:20px}
+.price span{font-weight:600;font-size:14px}
+.dots{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;font-weight:500;font-size:14px}
+.dots li{display:flex;gap:8px}
+.dots li:before{content:"";width:8px;height:8px;background:var(--red);margin-top:6px;flex-shrink:0}
+.rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:16px}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid rgba(0,0,0,.15)}
+.rows div:first-child{border-top:0}
+.rows div:last-child{background:var(--stone)}
+.line{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:14px}
+.tl{margin:16px 0 0 4px;border-left:2px solid var(--black)}
+.tl div{position:relative;padding:0 0 16px 16px}
+.tl div:before{content:"";position:absolute;left:-6px;top:5px;width:10px;height:10px;background:var(--black)}
+.tl div.hot:before{background:var(--red)}
+.tl p{font-size:14px;margin-top:4px;line-height:1.45}
+.coaches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.coaches img{width:100%;height:110px;object-fit:cover;display:block;background:var(--stone)}
+.coaches b{display:block;font-size:12px;margin-top:8px;line-height:1.2}
+.coaches small{display:block;font-size:11px;color:var(--muted);line-height:1.3;margin-top:4px}
+.safe{background:var(--black);color:#fff;padding:28px 20px;margin-top:40px}
+.safe ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px;font-size:14px;line-height:1.4;color:rgba(255,255,255,.9)}
+.qa{margin-top:16px;font-size:14px;line-height:1.6}
+.qa b{display:block}
+.hero-img{width:100%;height:230px;object-fit:cover;display:block}
+.cap{font-size:11px;color:var(--muted);padding:8px 20px 0;line-height:1.4}
+label.l{display:block;font-size:12px;font-weight:600;color:rgba(0,0,0,.7);margin-bottom:6px}
+.f{width:100%;border:1.5px solid rgba(0,0,0,.25);border-radius:2px;padding:12px;font:15px var(--body);background:#fff;color:var(--black);appearance:none;-webkit-appearance:none}
+select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear-gradient(135deg,#999 50%,transparent 50%);background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{display:block;border:1.5px solid rgba(0,0,0,.25);padding:12px 16px;margin-top:8px;cursor:pointer;font-size:14px}
+.opt input{accent-color:var(--black);margin:0 8px 0 0}
+.opt.on{border:2px solid var(--black)}
+.opt .r{display:flex;justify-content:space-between;font-weight:700}
+.opt small{display:block;font-size:12px;color:var(--muted);margin-top:4px;padding-left:24px}
+.oops{background:var(--stone);padding:16px;margin-top:20px}
+.share{background:var(--red);color:#fff;padding:24px 20px;margin-top:-16px;position:relative}
+.num{font:700 28px/1 var(--display);color:var(--red);width:36px;flex-shrink:0}
+.step{display:flex;gap:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--black);color:#fff;padding:10px 16px;border-radius:2px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;font-size:12px}
+.chips button{font:12px var(--body);padding:6px 12px;border:1px solid rgba(0,0,0,.3);background:#fff;border-radius:2px;cursor:pointer}
+.chips button.on{background:var(--black);color:#fff;border-color:var(--black)}
+.f.bad{border-color:var(--red)}
+.err{color:#c4161a;font:600 12px/1.4 var(--body);margin-top:6px}
+.err:empty{display:none}
+.warn{background:var(--stone);border-left:4px solid var(--red);padding:10px 12px;margin-top:12px;font-size:13px;line-height:1.45;color:var(--ink)}
+.btn[disabled]{opacity:.6;cursor:default}
+[hidden]{display:none!important}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+#pe{min-height:44px}
+
+</style>
+</head>
+<body>
+<div class="pv" id="testBar" hidden>Test mode. No real charges.</div>
+<div class="app"><div class="nav"><a class="back" href="/season1/join" id="back">&lsaquo; Back</a><a class="wm" href="/">EKUZO</a><span style="min-width:40px"></span></div>
+<form id="f" class="px" style="padding-top:20px;padding-bottom:40px" novalidate autocomplete="on">
+<p class="ey red">Season 01 &middot; <span id="mode">Season 01 is open</span></p>
+<h1 class="d" style="font-size:40px;margin-top:4px">Save their spot</h1>
+<p class="small" style="margin-top:8px">Sign up for EKUZO Season 01. About a minute.</p>
+<div id="kids"></div>
+<button type="button" class="btn ghost" id="addSib" style="margin-top:20px">+ Add a sibling (20% off)</button>
+<p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text Karlin</b></a></p>
+<div id="oops" class="oops" hidden>
+<p style="font-size:15px;font-weight:700">Not quite in range?</p>
+<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 10 to 17. Text Karlin and we'll figure it out.</p>
+<a class="btn black smsLink" style="margin-top:12px" href="#">Text Karlin</a></div>
+<div id="closed" class="oops" hidden>
+<p style="font-size:15px;font-weight:700">Signups are paused. Text Karlin.</p>
+<a class="btn black smsLink" style="margin-top:12px" href="#">Text Karlin</a></div>
+<div id="pay">
+<div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
+<div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20"><p class="err" id="e-pname"></p></div>
+<div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254"><p class="err" id="e-email"></p></div>
+<div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
+<div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20"><p class="err" id="e-mob"></p></div>
+<div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
+<label style="display:flex;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" style="accent-color:#050505;margin-top:2px;flex-shrink:0"><span id="consentText"></span></label>
+<p class="err" id="e-terms"></p>
+<button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
+<div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
+<p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink" href="#">Text Karlin</a></p>
+<p class="small" style="text-align:center;margin-top:16px">Secure payment by Stripe</p></div>
+</form>
+<div id="liveErr" class="hp" aria-live="polite" role="status"></div>
+<script>
+(function(){
+var cfg={};try{cfg=JSON.parse(document.getElementById('s1-config').textContent)}catch(_){}
+var P=cfg.prices||{first:10000,sibling:8000,monthly:16000,siblingMonthly:12800},MAXK=cfg.maxKids||4;
+var sms='sms:'+(cfg.textKarlinSms||'');
+document.querySelectorAll('.smsLink').forEach(function(a){a.href=sms});
+function g(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function money(c){var x=c/100;return '$'+(x%1?x.toFixed(2):x.toFixed(0))}
+function ga(n,p){try{gtag('event',n,p||{})}catch(_){}}
+if(cfg.mode==='test')g('testBar').hidden=false;
+g('consentText').innerHTML='I agree to the <a href="'+esc(cfg.termsUrl||'/season1/terms')+'" target="_blank" rel="noopener"><u>Season 01 terms</u></a>. Today\u0027s payment is my kid\u0027s January. I authorize EKUZO to save this card and charge it for the rest of Season 01: '+money(P.monthly)+' a month per kid ('+money(P.siblingMonthly)+' per sibling) on Feb 15, Mar 15 and Apr 15, less friend credits, or once if I choose to pay up front at lock-in. Fully refundable until '+esc(cfg.lockInDate||'')+', and any time EKUZO can\u0027t place my kid. After lock-in, we\u0027re in for the season.';
+var confirming=false,kids=g('kids'),n=0,busy=false,stripe=null,elements=null,peReady=false,secret=null,secretSig='';
+var attemptId='';
+if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
+try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
+var AGES=[9,10,11,12,13,14,15,16,17,18];
+function kidRow(){n++;var i=n-1,d=document.createElement('div');d.className='kid';
+ var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
+ d.innerHTML='<p class="ey" style="margin-top:24px">'+(n==1?'Your kid':'Sibling')+(n>1?' <span class="red">20% off</span>':'')+'</p><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'">'+opts+'</select></div></div><p class="err e-nm"></p><p class="err e-ag"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Karlin will check in to make sure it\u0027s a fit.</p>';
+ kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);}
+function ageChanged(d){var v=d.querySelector('.ag').value;d.querySelector('.warn').hidden=!(v=='9'||v=='18');if(v=='x')ga('season1_age_outside');upd()}
+kidRow();
+g('addSib').onclick=function(){if(n<MAXK){kidRow();ga('season1_sibling_add');upd();}};
+function rows(){return [].slice.call(document.querySelectorAll('.kid'))}
+var overrideCents=null,lastKids=1;
+function totalCents(){if(overrideCents!==null)return overrideCents;var k=rows().length;return P.first+P.sibling*(k-1)}
+function upd(){
+ var rs=rows(),outside=rs.some(function(r){return r.querySelector('.ag').value=='x'}),closed=!cfg.open;
+ g('oops').hidden=closed||!outside;
+ g('closed').hidden=!closed;
+ g('pay').hidden=closed||outside;
+ kids.hidden=closed;
+ g('addSib').hidden=closed||outside||n>=MAXK;
+ g('moreKids').hidden=closed||outside||n<MAXK;
+ var h='';
+ if(overrideCents!==null&&lastKids!==rs.length)overrideCents=null;
+ lastKids=rs.length;
+ rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+esc(nm)+', Season 01, first month</span><span>'+(i?'<s style="color:rgba(0,0,0,.4)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.4)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});
+ if(cfg.jerseyOpen)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Founding jersey (first 100)</span><span>Free</span></div>';
+ h+='<div class="line" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Due today</span><span>'+money(totalCents())+'</span></div>';
+ g('sum').innerHTML=h;
+ var first=rs[0].querySelector('.nm').value.trim();
+ g('go').textContent='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
+ if(elements){try{elements.update({amount:totalCents()})}catch(_){}}
+}
+function initStripe(){
+ if(!cfg.open)return;
+ if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text Karlin.';return}
+ try{
+  stripe=Stripe(cfg.publishableKey);
+  elements=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',paymentMethodTypes:['card'],
+   fonts:[{cssSrc:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'}],
+   appearance:{theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#ffffff',colorText:'#050505',colorDanger:'#F92524',colorTextSecondary:'#6f6f6f',fontFamily:'Inter, Arial, Helvetica, sans-serif',fontSizeBase:'15px',borderRadius:'2px',spacingUnit:'4px'},
+    rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}}});
+  var pe=elements.create('payment',{wallets:{applePay:'auto',googlePay:'auto'},paymentMethodOrder:['apple_pay','google_pay','card']});
+  pe.mount('#pe');
+  pe.on('ready',function(){peReady=true});
+  pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
+ }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text Karlin.'}
+}
+var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
+function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
+function clearErrs(){document.querySelectorAll('.err').forEach(function(e){e.textContent=''});document.querySelectorAll('.f').forEach(function(f){f.classList.remove('bad');f.removeAttribute('aria-invalid')});g('liveErr').textContent=''}
+function announce(msg){g('formErr').textContent=msg;g('liveErr').textContent=msg}
+function collect(){
+ var bad=[],first=null;
+ function flag(el,input,msg){setErr(el,input,msg);bad.push(msg);if(!first&&input)first=input}
+ var rs=rows(),kidsOut=[];
+ rs.forEach(function(r,i){var nm=r.querySelector('.nm'),ag=r.querySelector('.ag'),v=nm.value.trim().replace(/\s+/g,' ');
+  if(!v||v.length>20||!NAME.test(v))flag(r.querySelector('.e-nm'),nm,i?'Add your sibling\u0027s first name.':'Add your kid\u0027s first name.');
+  if(!ag.value)flag(r.querySelector('.e-ag'),ag,'Pick their age.');
+  kidsOut.push({firstName:v,age:parseInt(ag.value,10)})});
+ var pn=g('pname'),pv=pn.value.trim().replace(/\s+/g,' ');
+ if(!pv||pv.length>20||!NAME.test(pv))flag(g('e-pname'),pn,'Add your first name.');
+ var em=g('email'),ev=em.value.trim();
+ if(!ev||ev.length>254||!EMAIL.test(ev))flag(g('e-email'),em,'Check your email address.');
+ var mb=g('mob'),mv=mb.value.trim();
+ if(mv&&(mv.length>20||!/^[0-9+()\- ]+$/.test(mv)||mv.replace(/\D/g,'').length<7))flag(g('e-mob'),mb,'Check your mobile number or leave it blank.');
+ if(!g('terms').checked)flag(g('e-terms'),null,'Check the terms box to continue.');
+ if(bad.length){announce(bad[0]);if(first)first.focus();else g('terms').focus();return null}
+ return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined};
+}
+function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;if(b){btn.dataset.t=btn.textContent;btn.textContent='Saving'}else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
+function showTotal(c){
+ try{elements.update({amount:c})}catch(_){}
+ var sm=g('sum').querySelector('.line:last-child span:last-child');if(sm)sm.textContent=money(c);
+ g('go').textContent='Save their spot \u00b7 '+money(c);
+ g('go').dataset.t=g('go').textContent;
+ overrideCents=c;
+}
+function serverErr(status,j){
+ var f=(j&&j.field)||'',e=(j&&j.error)||'',m;
+ if(e==='price_changed'&&j&&typeof j.amountCents==='number'){showTotal(j.amountCents);secret=null;announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');return}
+ if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text Karlin.');return}
+ if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text Karlin.');return}
+ var km=/^kids\.(\d+)\.(firstName|age)$/.exec(f);
+ if(km){var r=rows()[+km[1]];if(r){if(km[2]==='age'){m='Season 01 is built for ages 10 to 17. Text Karlin and we\u0027ll figure it out.';setErr(r.querySelector('.e-ag'),r.querySelector('.ag'),m)}else{m='Add your kid\u0027s first name.';setErr(r.querySelector('.e-nm'),r.querySelector('.nm'),m)}announce(m);return}}
+ if(f==='email'){m='Check your email address.';setErr(g('e-email'),g('email'),m);announce(m);return}
+ if(f==='parentFirstName'){m='Add your first name.';setErr(g('e-pname'),g('pname'),m);announce(m);return}
+ if(f==='phone'){m='Check your mobile number or leave it blank.';setErr(g('e-mob'),g('mob'),m);announce(m);return}
+ if(f==='consent'){m='Check the terms box to continue.';setErr(g('e-terms'),null,m);announce(m);return}
+ if(e==='too_many_kids'){announce('Season 01 takes up to four kids per order. Text Karlin to add more.');return}
+ announce('Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');
+}
+g('f').addEventListener('submit',async function(ev){
+ ev.preventDefault();if(busy)return;clearErrs();
+ var body=collect();if(!body)return;
+ if(!stripe||!elements){announce('The payment form did not load. Reload the page or text Karlin.');return}
+ setBusy(true);confirming=false;ga('season1_pay_submit');
+ try{
+  var sub=await elements.submit();
+  if(sub.error){g('e-pay').textContent=sub.error.message||'Check your payment details.';announce(g('e-pay').textContent);setBusy(false);return}
+  var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents()]);
+  if(!secret||sig!==secretSig){
+   secret=null;
+   body.attemptId=attemptId;body.expectedCents=totalCents();
+   var res=await fetch('/api/season1/commit',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
+   var j=null;try{j=await res.json()}catch(_){}
+   if(!res.ok||!j||!j.clientSecret){serverErr(res.status,j);setBusy(false);return}
+   if(typeof j.amountCents==='number'&&j.amountCents!==totalCents()){
+    showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');setBusy(false);return}
+   secret=j.clientSecret;secretSig=sig;
+  }
+  confirming=true;
+  var r=await stripe.confirmPayment({elements:elements,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
+  if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';g('e-pay').textContent=msg;announce(msg);setBusy(false)}
+ }catch(err){announce(confirming?'We could not confirm your payment. Text Karlin before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');setBusy(false)}
+});
+upd();initStripe();ga('season1_signup_view');
+})();
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Atlas self-test (signup, welcome, terms, /karlin) against `next dev -p 3101`, test Stripe + Neon test DB.
+Analytics blocked in Playwright (route abort: google-analytics.com, googletagmanager.com, clarity.ms, facebook).
+tsc --noEmit: 0 errors in app/season1/join/**, app/season1/terms/**, lib/season1/fulfil.stub.ts.
+curl: /season1/join/signup, /season1/join/welcome, /season1/terms all 200, Cache-Control private no-store, X-Robots-Tag noindex.
+Signup config JSON present: pk_test_ key, mode test, open true, prices 10000/8000/16000/12800, lockInDate "December 31, 2026". "sk_" appears nowhere in any page HTML.
+/karlin -> 307 /season1/join/signup?src=karlin.
+Welcome with payment_intent + payment_intent_client_secret -> 303 /season1/join/welcome (fulfilFromReturn is a STUB, no cookie set).
+Welcome states (seeded 2 orders in the Neon test DB, removed afterwards; cookie holds the public id until Relay's view-token lookup lands):
+  paid with code: hero "Great, Zoe and Mateo are in!", link + display code 4827 1937, receipt, ekuzo_s1_joined set (cookie and localStorage), Set-Cookie ekuzo_s1_joined.
+  paid without code: receipt + "Your share link is on its way.", no share block.
+  pending: "We're confirming your payment" + meta refresh 4.
+  unknown/no cookie: "Your spot is saved".
+  DB throw (server restarted with a refused DATABASE_URL): tries 1-5 pending with refresh (s1_wtry cookie), try 6+ "Your payment went through ... Text Karlin".
+Signup client (Playwright, /api/season1/commit mocked since Relay's route is not built):
+  Stripe Payment Element mounts (2 iframes), card 4242 fills, elements.submit passes.
+  Body keys: attemptId, company, consent, email, expectedCents, kids, parentFirstName, phone.
+  409 price_changed -> total updates to $80, "Your total changed to $80. Tap again to pay."; next tap sends expectedCents 8000.
+  422 email -> "Check your email address."; 429 -> "Too many tries..."; 500 -> "Something hiccuped. Your card was not charged..."; 409 closed -> "Signups are paused. Text Karlin."
+  Age 9 and 18 show the C5 warning; "Younger or older" hides payment and shows Text Karlin; client validation errors land in the aria-live region.
+Screenshots: docs/season1-commit/screenshots/. signup-375-payment-element.png is the clean Payment Element render; the fullPage signup shots show the Stripe iframe mid-resize (capture artifact).
+NOT verified: a real confirmPayment (needs Relay's commit API), decline re-confirm with the same clientSecret, 3DS, Apple/Google Pay (headless), the real view-token and fulfilFromReturn paths, welcome after a real payment.
