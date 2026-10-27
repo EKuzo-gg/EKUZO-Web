@@ -1,0 +1,27 @@
+Atlas, terms install (docs/season1-commit/09-terms-install.md), 2026-10-27. No commit, no push.
+
+Changed files
+- lib/season1/offer.ts: termsVersion s1-terms-2026-10-27; added termsUrl /terms-of-service#season-01 and privacyUrl /privacy-policy#season-01
+- app/terms-of-service/page.tsx: Section gains optional id, action, body as ReactNode; new section 23 "Program Terms: Season 01" (intro + 23.1 to 23.7, id season-01); edits to 5.2, 5.4, 20; section 22 gets Contact us ModalButton (modal contact); Last Updated October 27, 2026
+- app/privacy-policy/page.tsx: Section gains optional id and body string[]; new section 16 "Season 01 Sign-up" (three paragraphs, id season-01); header now "Last Updated: October 27, 2026" (was "Effective Date: February 2026")
+- app/season1/join/signup/signup.html: consent line is "I agree to the Terms of Service and Privacy Policy." with both links (new tab); checkbox still unchecked, aria-required, client check and "Check the terms box" error untouched; Apple Pay managementURL = origin + terms URL
+- app/season1/join/signup/route.ts: cfg.termsUrl and privacyUrl from OFFER
+- app/season1/join/join.html, app/crew/[code]/crew.html: /season1/terms links now /terms-of-service#season-01
+- lib/season1/redirect.ts: allows one #fragment (fragment and path each stripped to [A-Za-z0-9_-] / [A-Za-z0-9/_-]); query still dropped, no-referrer kept
+- app/season1/terms/route.ts: now the move page to OFFER.termsUrl (old terms.html left on disk, unreferenced)
+- lib/season1/__tests__/routeHeaders.test.ts: terms.GET now takes a Request; new test for the move page and fragment sanitising
+
+Verification
+- npx tsc --noEmit: exit 0
+- TZ=UTC npm run test:s1: tests 164, pass 164, fail 0
+- next dev -p 3101: /terms-of-service 200, /privacy-policy 200, /season1/terms 200 (move page: meta refresh + location.replace to /terms-of-service#season-01, referrer no-referrer)
+- curl HTML: id="season-01" present on both pages; exact new text, mailto:team@ekuzo.gg?subject=Refund%20inquiry, edits 5.2/5.4/20, Last Updated lines all found
+- Playwright 375: /season1/terms ended at http://localhost:3101/terms-of-service#season-01, section scrolled to 112px (below fixed nav); privacy #season-01 lands at 111.5px; signup consent innerText "I agree to the Terms of Service and Privacy Policy.", checked=false, aria-required=true, no page errors; Contact us button on terms opens the contact modal (1440)
+- Screenshots: docs/season1-commit/screenshots/terms-375-signup-consent.png, terms-375-season01.png, terms-privacy-375-season01.png, terms-1440-season01.png, terms-1440-contact-modal.png
+- Dash scan: no em or en dash in any added line of the diff (git diff -U0 | grep '^+' | grep '[—–]' returns nothing); grep for /season1/terms in app/ and lib/ finds only the retired route's own comment/tests
+
+Notes
+- Section numbers 23 (terms) and 16 (privacy) added to match each page's numbered label style; the approved titles are unchanged.
+- 5.4 now reads "...once a program begins, except as stated in program terms, except where EKUZO determines..." (doubled "except", per the approved insert).
+- app/season1/early-access/*.html (legacy, redirected) still has its own old checkbox, untouched.
+- dev server on 3101 stopped (PIDs 1189, 1200)

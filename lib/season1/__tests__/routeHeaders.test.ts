@@ -51,10 +51,26 @@ describe("Season 01 route headers (no DB)", () => {
     assertSecurityHeaders(join.GET(get("/season1/join")), "join");
     assertSecurityHeaders(await signup.GET(get("/season1/join/signup")), "signup");
     assertSecurityHeaders(await welcome.GET(get("/season1/join/welcome")), "welcome");
-    assertSecurityHeaders(terms.GET(), "terms");
+    assertSecurityHeaders(terms.GET(get("/season1/terms")), "terms");
     const c = await crew.GET(get("/crew/48271937"), { params: Promise.resolve({ code: "48271937" }) });
     assert.equal(c.status, 200);
     assertSecurityHeaders(c, "crew");
+  });
+
+  it("/season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query", async () => {
+    const terms = await import("../../../app/season1/terms/route");
+    const { redirectToBare } = await import("../redirect");
+    const r = terms.GET(get("/season1/terms?kid=Sam"));
+    const html = await r.text();
+    assert.equal(r.status, 200);
+    assert.equal(r.headers.get("referrer-policy"), "no-referrer");
+    assert.match(html, /<meta name="referrer" content="no-referrer">/);
+    assert.match(html, /url=\/terms-of-service#season-01"/);
+    assert.equal(html.includes("Sam"), false);
+    // Only one safe fragment survives; anything else is stripped.
+    const odd = await redirectToBare(get("/x"), '/a/b#frag"><script>#x?y=1').text();
+    assert.match(odd, /url=\/a\/b#fragscriptxy1"/);
+    assert.equal(/[<>"=?]/.test(odd.match(/url=([^"]*)"/)![1]), false);
   });
 
   it("L9: a crew lookup failure logs an error code only, never the message", async () => {

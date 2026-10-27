@@ -77,7 +77,8 @@ export async function GET(request: Request) {
     jerseyCutoff: formatDatePT(OFFER.jerseyCutoffAt),
     jerseyOpen: now.getTime() < Date.parse(OFFER.jerseyCutoffAt),
     textKarlinSms: OFFER.textKarlinSms,
-    termsUrl: "/season1/terms",
+    termsUrl: OFFER.termsUrl,
+    privacyUrl: OFFER.privacyUrl,
     src,
     ...(invite ? { invite } : {}),
   };

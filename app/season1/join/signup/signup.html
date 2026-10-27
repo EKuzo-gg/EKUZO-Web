@@ -152,7 +152,7 @@ function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&am
 function money(c){var x=c/100;return '$'+(x%1?x.toFixed(2):x.toFixed(0))}
 function ga(n,p){try{gtag('event',n,p||{})}catch(_){}}
 if(cfg.mode==='test')g('testBar').hidden=false;
-g('consentText').innerHTML='I agree to the <a href="'+esc(cfg.termsUrl||'/season1/terms')+'" target="_blank" rel="noopener"><u>Season 01 terms</u></a>. Today\u0027s payment is my kid\u0027s January. I authorize EKUZO to save this card and charge it for the rest of Season 01: '+money(P.monthly)+' a month per kid ('+money(P.siblingMonthly)+' per sibling) on Feb 15, Mar 15 and Apr 15, less friend credits, or once if I choose to pay up front at lock-in. Fully refundable until '+esc(cfg.lockInDate||'')+', and any time EKUZO can\u0027t place my kid. After lock-in, we\u0027re in for the season.';
+g('consentText').innerHTML='I agree to the <a href="'+esc(cfg.termsUrl||'/terms-of-service#season-01')+'" target="_blank" rel="noopener"><u>Terms of Service</u></a> and <a href="'+esc(cfg.privacyUrl||'/privacy-policy#season-01')+'" target="_blank" rel="noopener"><u>Privacy Policy</u></a>.';
 var invite=(cfg.invite&&typeof cfg.invite==='object')?{name:(typeof cfg.invite.name==='string'&&cfg.invite.name)?cfg.invite.name:null}:null,inviteRemoved=false;
 var IGNORED_MSG='This invite can\u0027t be used for this email, so no friend credit will be recorded.';
 function renderInvite(){
@@ -182,7 +182,7 @@ function rows(){return [].slice.call(document.querySelectorAll('.kid'))}
 var overrideCents=null,lastKids=1;
 function monthlyCents(){var k=Math.max(rows().length,1);return P.monthly+P.siblingMonthly*(k-1)}
 /* AUD-1: Apple Pay recurring request (merchant token): $160 first kid + $128 each sibling, monthly Feb 15 to Apr 15 2027. */
-function applePayOpts(){return {recurringPaymentRequest:{paymentDescription:'EKUZO Season 01, monthly',managementURL:location.origin+'/season1/terms',regularBilling:{amount:monthlyCents(),label:'Season 01 monthly',recurringPaymentStartDate:new Date('2027-02-15T12:00:00-08:00'),recurringPaymentEndDate:new Date('2027-04-15T12:00:00-08:00'),recurringPaymentIntervalUnit:'month',recurringPaymentIntervalCount:1}}}}
+function applePayOpts(){return {recurringPaymentRequest:{paymentDescription:'EKUZO Season 01, monthly',managementURL:location.origin+(cfg.termsUrl||'/terms-of-service#season-01'),regularBilling:{amount:monthlyCents(),label:'Season 01 monthly',recurringPaymentStartDate:new Date('2027-02-15T12:00:00-08:00'),recurringPaymentEndDate:new Date('2027-04-15T12:00:00-08:00'),recurringPaymentIntervalUnit:'month',recurringPaymentIntervalCount:1}}}}
 function totalCents(){if(overrideCents!==null)return overrideCents;var k=rows().length;return P.first+P.sibling*(k-1)}
 function upd(){
  var rs=rows(),outside=rs.some(function(r){return r.querySelector('.ag').value=='x'}),closed=!cfg.open;

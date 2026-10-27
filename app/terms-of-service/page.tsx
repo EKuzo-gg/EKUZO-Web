@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import ModalButton from "@/components/ui/ModalButton";
 import JsonLd from "@/components/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/schema";
 
@@ -17,7 +19,11 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 type Section = {
   sectionLabel: string;
   subsectionLabel?: string;
-  body: string;
+  body: ReactNode;
+  /** Anchor id for deep links such as /terms-of-service#season-01. */
+  id?: string;
+  /** Rendered under the body (a button, say), outside the paragraph. */
+  action?: ReactNode;
 };
 
 const sections: Section[] = [
@@ -79,7 +85,7 @@ const sections: Section[] = [
   {
     sectionLabel: "",
     subsectionLabel: "5.2 Fees",
-    body: "Program fees, payment schedules, and billing terms are disclosed at enrollment or in applicable agreements.",
+    body: "Program fees, payment schedules, and billing terms are disclosed at enrollment or in applicable agreements. If a scheduled payment fails, we'll contact you to update your card. A spot may be released if payment isn't resolved.",
   },
   {
     sectionLabel: "",
@@ -89,7 +95,7 @@ const sections: Section[] = [
   {
     sectionLabel: "",
     subsectionLabel: "5.4 No-Refund Policy",
-    body: "Because EKUZO programs are time-based, team-based, and staffed in advance, all payments are non-refundable once a program begins, except where EKUZO determines, in its sole discretion, that a refund is appropriate for reasons other than removal for cause.",
+    body: "Because EKUZO programs are time-based, team-based, and staffed in advance, all payments are non-refundable once a program begins, except as stated in program terms or where EKUZO determines, in its sole discretion, that a refund is appropriate for reasons other than removal for cause.",
   },
   // Section 6 — Communication Platforms
   {
@@ -222,7 +228,7 @@ const sections: Section[] = [
   // Section 20 — Changes to These Terms
   {
     sectionLabel: "20. Changes to These Terms",
-    body: "EKUZO may update these Terms from time to time. Continued use of the Service constitutes acceptance of the updated Terms.",
+    body: "EKUZO may update these Terms from time to time. Continued use of the Service constitutes acceptance of the updated Terms. Changes to payment terms for a program you've already joined need your consent.",
   },
   // Section 21 — Severability and Survival
   {
@@ -233,6 +239,60 @@ const sections: Section[] = [
   {
     sectionLabel: "22. Contact Information",
     body: "EKUZO Inc, 5617 Dolores Street, Houston, TX 77057. Email: info@ekuzo.gg",
+    action: (
+      <ModalButton modal="contact" variant="red-outlined">
+        Contact us
+      </ModalButton>
+    ),
+  },
+  // Section 23, Program Terms: Season 01 (install text approved 2026-10-27)
+  {
+    id: "season-01",
+    sectionLabel: "23. Program Terms: Season 01",
+    body: "These program terms are part of our Terms of Service. For Season 01, where they differ from the rest of the Terms, these control.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.1 Your first payment",
+    body: "Your payment today locks in your kid's spot and pays for month one. Siblings are 20% off.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.2 Saved card and the rest of the season",
+    body: "Season 01 is a season: January 11 to May 9, 2027, four months. After lock-in, the rest of the season is charged to the card you saved, monthly or up front, at the price shown when you signed up and the terms you choose at lock-in.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.3 Lock-in",
+    body: "Lock-in is two weeks before the season starts: December 31, 2026. We email you if the date changes.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.4 Refunds",
+    body: (
+      <>
+        Your first payment is fully refundable until lock-in. If we can&apos;t place your kid on a team, you get it all back. After lock-in, the season isn&apos;t refundable, like any team sport. To ask for a refund, email{" "}
+        <a href="mailto:team@ekuzo.gg?subject=Refund%20inquiry" className="underline">
+          team@ekuzo.gg
+        </a>
+        . Refunds go back to the original payment method.
+      </>
+    ),
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.5 Friend credits",
+    body: "Games are better played with friends. When one of yours joins using your code, you both receive a free month. Credits stay pending until lock-in and are void if that friend's family refunds. Siblings and your own code never count. Credits have no cash value, except that if credits cover your whole season, we refund your first month. Credits never exceed the season. We void credits for abuse.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.6 Free jersey",
+    body: "The first 100 families who commit by November 30, 2026 get a free EKUZO jersey. We aim to deliver them by the holidays and ship within the US, but can't guarantee a delivery date.",
+  },
+  {
+    sectionLabel: "",
+    subsectionLabel: "23.7 When this authorization ends",
+    body: "Your card authorization ends when Season 01 ends, or when you cancel before lock-in.",
   },
 ];
 
@@ -261,7 +321,7 @@ export default function TermsOfServicePage() {
               Terms of Service
             </h4>
             <p className="font-body text-black/60 text-sm md:text-base">
-              Last Updated: February 2026
+              Last Updated: October 27, 2026
             </p>
           </div>
 
@@ -280,7 +340,8 @@ export default function TermsOfServicePage() {
             {sections.map((section, i) => (
               <div
                 key={i}
-                className="flex flex-col md:flex-row gap-8 md:gap-[138px] py-10"
+                id={section.id}
+                className={`flex flex-col md:flex-row gap-8 md:gap-[138px] py-10${section.id ? " scroll-mt-28" : ""}`}
               >
                 {/* Left column — labels */}
                 <div className="md:max-w-[392px] md:w-[392px] shrink-0">
@@ -300,6 +361,7 @@ export default function TermsOfServicePage() {
                   <p className="font-body text-black text-sm md:text-base leading-relaxed">
                     {section.body}
                   </p>
+                  {section.action && <div className="mt-6">{section.action}</div>}
                 </div>
               </div>
             ))}

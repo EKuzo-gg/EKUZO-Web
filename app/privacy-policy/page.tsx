@@ -17,7 +17,9 @@ const breadcrumbSchema = buildBreadcrumbSchema([
 type Section = {
   sectionLabel: string;
   subsectionLabel?: string;
-  body: string;
+  body: string | string[];
+  /** Anchor id for deep links such as /privacy-policy#season-01. */
+  id?: string;
 };
 
 const sections: Section[] = [
@@ -112,6 +114,15 @@ const sections: Section[] = [
     sectionLabel: "15. Contact Us",
     body: "EKUZO Inc, 5617 Dolores Street, Houston, TX 77057. Email: INFO@ekuzo.gg. This Privacy Policy is intended to clearly explain how EKUZO operates and how we treat information with care and respect. It is designed to support transparency and trust for families and schools.",
   },
+  {
+    id: "season-01",
+    sectionLabel: "16. Season 01 Sign-up",
+    body: [
+      "At sign-up we collect each child's first name and age. A child's first name appears on the family's invite page, which anyone with the family's link can open. We record which family's link brought a friend; inviting families see how many friends joined, never their names. Your card is saved with our payment processor for the rest of the season, and we use your billing ZIP code to place your kid on a team in the right time zone.",
+      "Phone is optional. EKUZO does not automate texts or share numbers. Team members may reach out if there is an ask or legitimate reason.",
+      "We use advertising and analytics partners, who receive a parent's hashed email and purchase information. We never share a child's information with them.",
+    ],
+  },
 ];
 
 export default function PrivacyPolicyPage() {
@@ -139,7 +150,7 @@ export default function PrivacyPolicyPage() {
               Privacy Policy
             </h4>
             <p className="font-body text-black/60 text-sm md:text-base">
-              Effective Date: February 2026
+              Last Updated: October 27, 2026
             </p>
           </div>
 
@@ -158,7 +169,8 @@ export default function PrivacyPolicyPage() {
             {sections.map((section, i) => (
               <div
                 key={i}
-                className="flex flex-col md:flex-row gap-8 md:gap-[138px] py-10"
+                id={section.id}
+                className={`flex flex-col md:flex-row gap-8 md:gap-[138px] py-10${section.id ? " scroll-mt-28" : ""}`}
               >
                 {/* Left column — labels */}
                 <div className="md:max-w-[392px] md:w-[392px] shrink-0">
@@ -175,9 +187,11 @@ export default function PrivacyPolicyPage() {
                 </div>
                 {/* Right column — body */}
                 <div className="flex-1">
-                  <p className="font-body text-black text-sm md:text-base leading-relaxed">
-                    {section.body}
-                  </p>
+                  {(Array.isArray(section.body) ? section.body : [section.body]).map((para, j) => (
+                    <p key={j} className="font-body text-black text-sm md:text-base leading-relaxed mt-4 first:mt-0">
+                      {para}
+                    </p>
+                  ))}
                 </div>
               </div>
             ))}
