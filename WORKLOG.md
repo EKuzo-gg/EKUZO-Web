@@ -5,6 +5,25 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 season page redesign, branch `season1-commit`)
+
+`/season1/join` rebuilt as a real landing page with the camps page's energy (Aaron's review: desktop
+felt flat, image broken, jersey callout read as a button).
+
+- `join.html`: violet marquee ticker (camps pattern), full-bleed red hero with black brush strokes,
+  the kid + game characters art on the left and Jinx on the right overlapping the torn seam, skewed
+  eyebrow chip, white notched offer card with a tilted lime "Free jersey" sticker. Refund line removed
+  from the card (it's in the terms; the timeline keeps lock-in). Broken Klaviyo-CDN hero photo and
+  its AI caption removed. Bands below: black stats (camps overview cards), white friend ladder as a
+  falling bar chart with avatars, off-white timeline (horizontal on desktop), black coaches + safe by
+  design, white FAQ + red final CTA. Torn-paper seam at every band change. Real logo SVG.
+- Coach copy (Aaron's notes): Sebastien "Top 1% player, the real deal"; Karlin "change what it means
+  to be a gamer"; Nuri "former public school teacher". Full names, camps-style role lines.
+- New assets in `public/images/season1/` (web-sized WebP from existing site art and coach photos).
+- `joinPage.ts`: `LH0` to `LH3` bar heights from offer prices. Tests updated (164 pass), `tsc` clean.
+- Signup, welcome, invite: typed "EKUZO" wordmark replaced with the logo SVG.
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 desktop + signup fixes, branch `season1-commit`)
 
 The four funnel templates were locked to a 480px column on every screen. Now responsive.

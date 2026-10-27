@@ -7,192 +7,246 @@
 <script>try{var u=new URL(location.href),c=0;["kid","from"].forEach(function(k){if(u.searchParams.has(k)){u.searchParams.delete(k);c=1}});if(c)history.replaceState(null,"",u.pathname+u.search)}catch(e){}</script>
 <title>{{TITLE}} | EKUZO</title>
 <link rel="icon" href="/icon.png">
+<link rel="preload" as="font" type="font/otf" href="/fonts/TungstenNarrow-Black.otf" crossorigin>
+<link rel="preload" as="image" href="/images/season1/s1-crew-left.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
 <style>
-:root{--red:#F92524;--black:#050505;--ink:#333;--muted:#6f6f6f;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
-*{box-sizing:border-box}
-html,body{margin:0;background:#d9d7d4;color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.app{max-width:480px;margin:0 auto;background:var(--white);min-height:100vh;overflow:hidden}
-.pv{background:#fff6b6;color:#7a5a00;font:600 12px/1.4 var(--body);text-align:center;padding:6px 12px}
-.nav{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.1);background:var(--white)}
-.nav.dark{background:var(--black);border:0}
-.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:44px;min-height:44px;display:inline-flex;align-items:center}
-.nav.dark .back,.nav.dark .wm{color:var(--white)}
-.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none;border:solid transparent;border-width:7px 0;background-clip:padding-box}
-.d{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;line-height:.95;font-weight:700;margin:0;text-wrap:balance}
-.ey{font:700 11px/1.4 var(--body);text-transform:uppercase;letter-spacing:.15em;margin:0}
-.red{color:var(--red)}
-.px{padding-left:20px;padding-right:20px}
-.sec{padding-top:40px}
-.notch{clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
-.btn{display:block;width:100%;text-align:center;background:var(--red);color:#fff;font:700 16px var(--body);padding:16px 12px;border-radius:2px;text-decoration:none;border:0;cursor:pointer}
-.btn.black{background:var(--black)}
-.btn.white{background:var(--white);color:var(--black)}
-.btn.ghost{background:transparent;border:2px solid var(--red);color:var(--red);font-size:14px;padding:12px}
-p{margin:0}
-.body{font-size:15px;line-height:1.6;color:var(--ink)}
-.small{font-size:12px;line-height:1.45;color:var(--muted)}
-.offer{background:var(--stone);padding:20px}
-.price{display:flex;align-items:baseline;gap:12px}
-.price b{font:700 52px/1 var(--display)}
-.price s{color:rgba(0,0,0,.4);font-size:20px}
-.price span{font-weight:600;font-size:14px}
-.dots{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;font-weight:500;font-size:14px}
-.dots li{display:flex;gap:8px}
-.dots li:before{content:"";width:8px;height:8px;background:var(--red);margin-top:6px;flex-shrink:0}
-.rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:16px}
-.rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid rgba(0,0,0,.15)}
-.rows div:first-child{border-top:0}
-.rows div:last-child{background:var(--stone)}
-.line{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:14px}
-.tl{margin:16px 0 0 4px;border-left:2px solid var(--black)}
-.tl div{position:relative;padding:0 0 16px 16px}
-.tl div:before{content:"";position:absolute;left:-6px;top:5px;width:10px;height:10px;background:var(--black)}
-.tl div.hot:before{background:var(--red)}
-.tl p{font-size:14px;margin-top:4px;line-height:1.45}
-.coaches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.coaches img{width:100%;height:110px;object-fit:cover;display:block;background:var(--stone)}
-.coaches b{display:block;font-size:12px;margin-top:8px;line-height:1.2}
-.coaches small{display:block;font-size:11px;color:var(--muted);line-height:1.3;margin-top:4px}
-.safe{background:var(--black);color:#fff;padding:28px 20px;margin-top:40px}
-.safe ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px;font-size:14px;line-height:1.4;color:rgba(255,255,255,.9)}
-.qa{margin-top:16px;font-size:14px;line-height:1.6}
-.qa b{display:block}
-.hero-img{width:100%;height:230px;object-fit:cover;display:block}
-.cap{font-size:11px;color:var(--muted);padding:8px 20px 0;line-height:1.4}
-label.l{display:block;font-size:12px;font-weight:600;color:rgba(0,0,0,.7);margin-bottom:6px}
-.f{width:100%;border:1.5px solid rgba(0,0,0,.25);border-radius:2px;padding:12px;font:15px var(--body);background:#fff;color:var(--black);appearance:none;-webkit-appearance:none}
-select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear-gradient(135deg,#999 50%,transparent 50%);background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;background-size:5px 5px;background-repeat:no-repeat}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.opt{display:block;border:1.5px solid rgba(0,0,0,.25);padding:12px 16px;margin-top:8px;cursor:pointer;font-size:14px}
-.opt input{accent-color:var(--black);margin:0 8px 0 0}
-.opt.on{border:2px solid var(--black)}
-.opt .r{display:flex;justify-content:space-between;font-weight:700}
-.opt small{display:block;font-size:12px;color:var(--muted);margin-top:4px;padding-left:24px}
-.oops{background:var(--stone);padding:16px;margin-top:20px}
-.share{background:var(--red);color:#fff;padding:24px 20px;margin-top:-16px;position:relative}
-.num{font:700 28px/1 var(--display);color:var(--red);width:36px;flex-shrink:0}
-.step{display:flex;gap:16px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--black);color:#fff;padding:10px 16px;border-radius:2px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
-.toast.on{opacity:1}
-.tk{display:inline-flex;align-items:center;min-height:44px;padding:0 6px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;font-size:12px}
-.chips button{font:12px var(--body);padding:6px 12px;border:1px solid rgba(0,0,0,.3);background:#fff;border-radius:2px;cursor:pointer}
-.chips button.on{background:var(--black);color:#fff;border-color:var(--black)}
-.urg{margin-top:16px;background:var(--black);color:#fff;font-weight:700;font-size:14px;line-height:1.4;padding:10px 12px}
-.faq{margin-top:8px;border-top:1px solid rgba(0,0,0,.15)}
-.faq details{border-bottom:1px solid rgba(0,0,0,.15)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:52px;padding:12px 0;font-weight:700;font-size:15px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"";width:28px;height:28px;flex-shrink:0;border-radius:50%;background:rgba(0,0,0,.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E") center/18px no-repeat;transition:transform .2s cubic-bezier(.16,1,.3,1)}
-.faq details[open] summary:after{transform:rotate(180deg);background-color:var(--red);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath fill='white' d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E")}
-.faq summary:focus-visible{outline:2px solid var(--black);outline-offset:2px}
-.faq details p{font-size:14px;line-height:1.6;padding:0 0 16px;color:var(--ink)}
-@media (prefers-reduced-motion:reduce){.faq summary:after{transition:none}}
-/* S1-RESPONSIVE: shared across the Season 01 funnel templates (join, signup, welcome, crew). */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Black.otf") format("opentype");font-weight:900;font-display:swap}
 @font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
-:root{--display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--page:1200px;--gut:20px}
-.d{letter-spacing:.02em}
-.body{font-size:16px}
-.small{font-size:13px}
-::selection{background:var(--red);color:#fff}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--black);outline-offset:3px}
-.wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
-.h1{font-size:clamp(48px,5.4vw,80px)}
-.h2{font-size:clamp(36px,3.6vw,56px)}
-.h3{font-size:clamp(30px,2.6vw,40px)}
+:root{--red:#F92524;--black:#000;--ink:#222;--off:#EFEEED;--white:#fff;--violet:#AE2CF2;--lime:#E0FF4F;
+ --display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--body:"Inter",Arial,Helvetica,sans-serif;--page:1200px;--gut:20px}
 @media (min-width:768px){:root{--gut:40px}}
-@media (min-width:960px){
- html,body{background:var(--white)}
- .app{max-width:none}
- .nav{height:72px;padding-inline:max(var(--gut),calc((100vw - var(--page))/2 + var(--gut)))}
- .wm{font-size:28px}
- .nav .mini{font-size:14px;padding:10px 18px}
- .btn{font-size:17px;padding:18px 16px}
- .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
- .coaches{gap:24px}
- .coaches img{height:240px}
- .coaches b{font-size:15px}
- .coaches small{font-size:13px}
- .safe ul{grid-template-columns:repeat(3,1fr);gap:24px;font-size:16px}
- .narrow{max-width:760px;margin-inline:auto}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--white);color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
+html,body{overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit;text-underline-offset:3px}
+p{margin:0}
+::selection{background:var(--lime);color:var(--black)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
+.d{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.88;margin:0;text-wrap:balance}
+.pv{background:#fff6b6;color:#7a5a00;font:600 12px/1.4 var(--body);text-align:center;padding:6px 12px}
+
+/* Ticker (the camps page pattern) */
+.tick{background:var(--violet);color:#fff;overflow:hidden;padding:10px 0}
+.tick-row{display:flex;width:max-content;animation:tick 38s linear infinite}
+.tick-row span{font:700 22px/1 var(--display);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;padding:0 22px}
+.tick-row i{font-style:normal;color:var(--lime)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Hero */
+.hero{position:relative;background:var(--red);color:#fff;isolation:isolate;overflow-x:clip}
+.nav{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav .logo{display:inline-flex;align-items:center;min-height:44px}
+.nav .logo img{height:20px;width:auto}
+.nav .mini{background:var(--black);color:#fff;font:700 14px var(--body);padding:12px 16px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.brush{position:absolute;z-index:-1;left:50%;top:44%;width:min(1500px,170vw);transform:translate(-50%,-50%) rotate(-4deg);opacity:.16;filter:brightness(0);pointer-events:none}
+.hero-in{position:relative;z-index:4;text-align:center;padding-block:12px 0}
+.chip{display:inline-block;background:var(--white);color:var(--red);font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;transform:skewX(-12deg)}
+.chip span{display:inline-block;transform:skewX(12deg)}
+.h1{font-size:clamp(52px,8.6vw,124px);margin-top:18px}
+.h1 em{font-style:normal;color:var(--black)}
+.offer{position:relative;background:var(--white);color:var(--black);text-align:left;margin:32px auto 0;max-width:440px;padding:28px 24px 24px;clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
+.offer-wrap{position:relative;max-width:440px;margin-inline:auto}
+.sticker{position:absolute;z-index:5;right:-6px;top:-18px;transform:rotate(5deg);background:var(--lime);color:var(--black);font:900 20px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px 9px;text-align:center}
+.sticker small{display:block;font:700 11px/1.2 var(--body);letter-spacing:0;text-transform:none;margin-top:3px}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price b{font:900 76px/.85 var(--display)}
+.price s{color:rgba(0,0,0,.45);font-size:22px;font-weight:600}
+.price span{font-weight:700;font-size:15px}
+.then{font-size:15px;line-height:1.5;color:rgba(0,0,0,.72);margin-top:10px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;text-align:center;background:var(--red);color:#fff;font:800 17px var(--body);padding:14px 16px;text-decoration:none;border:0;cursor:pointer;transition:background .15s}
+.btn:hover{background:#d91615}
+.btn.black{background:var(--black)}.btn.black:hover{background:#222}
+.btn.ghost{background:transparent;border:2px solid var(--black);color:var(--black)}
+.offer .btn{margin-top:20px}
+.urgent{margin-top:12px;font-size:13px;font-weight:700;text-align:center;color:rgba(0,0,0,.7)}
+.chars{position:relative;z-index:3;display:flex;justify-content:center;margin-top:28px;pointer-events:none}
+.chars .left{height:340px;width:auto;margin-bottom:-48px}
+.chars .right{display:none}
+
+/* Seams: the previous band's torn edge hangs into the next one */
+.seam{display:block;width:100%;height:clamp(36px,5vw,80px);position:relative;z-index:2;margin-bottom:-1px}
+.band{position:relative}
+.black{background:var(--black);color:#fff}
+.offwhite{background:var(--off)}
+.pad{padding-block:56px 72px}
+.h2{font-size:clamp(44px,6vw,88px)}
+.lead{font-size:18px;line-height:1.5;margin-top:16px;max-width:52ch}
+.black .lead{color:rgba(255,255,255,.75)}
+
+/* Stats (the camps overview pattern) */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+.stat{background:var(--white);color:var(--black);padding:20px 18px;clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.stat img{width:30px;height:30px}
+.stat .k{display:block;font:900 20px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--red);margin-top:16px}
+.stat b{display:block;font:900 48px/.9 var(--display);text-transform:uppercase;margin-top:6px}
+.stat small{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.6);margin-top:8px}
+
+/* Friend ladder as a falling bar chart */
+.ladder{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;height:340px}
+.ladder li{display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
+.ladder .faces{display:flex;justify-content:center;flex-wrap:wrap;gap:2px;min-height:30px;margin-bottom:8px}
+.ladder .faces img{width:26px;height:26px;border-radius:50%;border:2px solid var(--white)}
+.ladder .bar{background:var(--black);color:#fff;height:var(--h);min-height:56px;display:flex;align-items:flex-start;justify-content:center;padding-top:10px;font:900 clamp(24px,3vw,40px)/1 var(--display)}
+.ladder li:last-child .bar{background:var(--red)}
+.ladder li:first-child .bar{background:#9a9a9a}
+.ladder .who{display:block;font-size:12px;font-weight:700;margin-top:10px;line-height:1.25}
+.ladder-note{font-size:14px;color:rgba(0,0,0,.65);margin-top:16px}
+
+/* Timeline */
+.tl{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:0;border-left:3px solid var(--black);margin-left:6px}
+.tl li{position:relative;padding:0 0 22px 22px}
+.tl li:before{content:"";position:absolute;left:-10px;top:2px;width:16px;height:16px;background:var(--black)}
+.tl li.hot:before{background:var(--red)}
+.tl b{display:block;font:900 26px/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.tl li.hot b{color:var(--red)}
+.tl span{display:block;font-size:15px;line-height:1.45;margin-top:4px}
+
+/* Coaches */
+.coaches{display:grid;gap:16px;margin-top:32px}
+.coach{background:var(--white);color:var(--black);clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
+.coach img{width:100%;aspect-ratio:16/13;object-fit:cover;background:#222}
+.coach div{padding:16px 18px 22px}
+.coach b{display:block;font:900 28px/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.coach .role{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-top:6px}
+.coach p{font-size:16px;line-height:1.45;margin-top:10px;color:rgba(0,0,0,.8)}
+.safe{display:grid;gap:14px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.2)}
+.safe h3{font-size:clamp(34px,4vw,52px)}
+.safe ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.safe li{display:flex;gap:12px;align-items:center;font-size:16px;line-height:1.4}
+.safe li img{width:28px;height:28px;flex-shrink:0}
+
+/* FAQ */
+.faq{margin-top:24px;border-top:2px solid var(--black)}
+.faq details{border-bottom:1px solid rgba(0,0,0,.2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;padding:14px 0;font-weight:800;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";width:32px;height:32px;flex-shrink:0;border-radius:50%;background:rgba(0,0,0,.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E") center/20px no-repeat;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.faq details[open] summary:after{transform:rotate(180deg);background-color:var(--red);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath fill='white' d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E")}
+.faq details p{font-size:16px;line-height:1.6;padding:0 0 18px;color:var(--ink);max-width:62ch}
+
+/* Final CTA */
+.final{position:relative;background:var(--red);color:#fff;margin-top:56px;padding:36px 24px;overflow:hidden;clip-path:polygon(26px 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%,0 26px)}
+.final .d{font-size:clamp(48px,6vw,84px)}
+.final .btn{margin-top:20px;max-width:360px}
+.final img{display:none}
+.ask{font-size:15px;text-align:center;margin-top:20px;color:rgba(0,0,0,.7)}
+.ask a{font-weight:800;color:var(--black);display:inline-flex;min-height:44px;align-items:center}
+.closed{font-size:16px;font-weight:700}
+.closed+.btn,.closed~.btn{margin-top:12px}
+
+@media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.coaches{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1000px){
+ .nav{height:80px}.nav .logo img{height:24px}
+ .hero{min-height:760px}
+ .hero-in{padding-block:28px 150px;max-width:860px}
+ .chars{position:absolute;inset:0;margin:0;display:block;z-index:3}
+ .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(420px,38vw,580px);width:auto;margin:0}
+ .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:40px;height:clamp(340px,30vw,470px);width:auto}
+ .sticker{right:-34px;top:-22px}
+ .offer-wrap,.offer{max-width:460px}
+ .pad{padding-block:72px 104px}
+ .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:end}
+ .ladder{margin-top:0;height:400px}
+ .tl{grid-template-columns:repeat(6,1fr);border-left:0;border-top:3px solid var(--black);margin:48px 0 0;padding-top:0}
+ .tl li{padding:26px 16px 0 0}
+ .tl li:before{left:0;top:-10px}
+ .safe{grid-template-columns:.8fr 2fr;align-items:center;gap:48px}
+ .safe ul{grid-template-columns:repeat(3,1fr);gap:24px}
+ .faqwrap{max-width:820px;margin-inline:auto}
+ .final{padding:56px 56px;display:grid;grid-template-columns:1.4fr 1fr;align-items:center}
+ .final img{display:block;justify-self:end;width:200px;height:auto}
 }
-.hero-img{height:230px}
-.safe{padding:32px 0;margin-top:48px}
-.safe .wrap{padding-inline:var(--gut)}
-@media (min-width:960px){
- .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);max-width:var(--page);margin-inline:auto;gap:56px;padding:48px var(--gut) 24px;align-items:center}
- .hero-media{position:relative}
- .hero-img{height:auto;aspect-ratio:4/5;max-height:680px}
- .cap{padding:8px 0 0}
- .hero-copy{padding:0!important}
- .offer{padding:28px}
- .price b{font-size:64px}
- .sec{padding-top:88px}
- .friends{position:sticky;top:24px}
- .safe{padding:56px 0;margin-top:88px}
-}
+@media (prefers-reduced-motion:reduce){.tick-row{animation:none}.faq summary:after{transition:none}}
 </style>
 </head>
 <body>
 <!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
-<div class="app"><header class="nav"><a class="back" href="/season1">&lsaquo;</a><a class="wm" href="/">EKUZO</a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Save their spot</a><!--/IF:open--><!--IFNOT:open--><span style="min-width:44px"></span><!--/IFNOT:open--></header>
-<main>
-<section class="hero">
-<div class="hero-media"><img class="hero-img" src="https://cdn.klaviyomail.com/company/UMWwrM/images/c8f7e7b8-1610-4685-9147-6839239495ea.jpeg" alt="">
-<p class="cap">Obviously, this kid is AI. We don't share real kids without their family's consent.</p></div>
-<div class="hero-copy px">
-<p class="ey red">{{EYEBROW}} &middot; Starts mid January</p>
-<h1 class="d h1" style="margin-top:8px">A coach. A team.<br>A season to play for.</h1>
-<div class="offer notch" style="margin-top:24px">
+<div class="tick" aria-hidden="true"><div class="tick-row">
+<span>Season 01</span><span><i>&#10022;</i></span><span>Starts mid January</span><span><i>&#10022;</i></span><span>Online from home</span><span><i>&#10022;</i></span><span>Ages {{AGE_MIN}} to {{AGE_MAX}}</span><span><i>&#10022;</i></span><!--IF:jersey--><span>Free jersey, first 100 families</span><span><i>&#10022;</i></span><!--/IF:jersey--><span>Limited spots</span><span><i>&#10022;</i></span>
+<span>Season 01</span><span><i>&#10022;</i></span><span>Starts mid January</span><span><i>&#10022;</i></span><span>Online from home</span><span><i>&#10022;</i></span><span>Ages {{AGE_MIN}} to {{AGE_MAX}}</span><span><i>&#10022;</i></span><!--IF:jersey--><span>Free jersey, first 100 families</span><span><i>&#10022;</i></span><!--/IF:jersey--><span>Limited spots</span><span><i>&#10022;</i></span>
+</div></div>
+<header class="hero">
+<img class="brush" src="/images/season1/s1-brush.webp" alt="" width="2044" height="600">
+<div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Save their spot</a><!--/IF:open--></nav></div>
+<div class="hero-in wrap">
+<p class="chip"><span>{{EYEBROW}}</span></p>
+<h1 class="d h1">A coach. A team.<br><em>A season to play for.</em></h1>
+<div class="offer-wrap">
+<!--IF:open--><!--IF:jersey--><p class="sticker">Free jersey<small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
+<div class="offer">
 <div class="price"><b>{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
-<p class="small" style="margin-top:8px;color:rgba(0,0,0,.7)">Then {{MONTHLY}} a month, Feb to Apr. About {{PER_PRACTICE}} a practice.</p>
-<!--IF:open--><!--IF:jersey--><p class="urg">Free jersey for the first 100 families. Ends {{JERSEY_SHORT}}.</p><!--/IF:jersey--><!--IFNOT:jersey--><p class="urg">Spots are limited. Teams are small.</p><!--/IFNOT:jersey-->
-<a class="btn" style="margin-top:16px" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a>
-<p class="small" style="margin-top:10px;text-align:center"><a href="/terms-of-service#season-01">Fully refundable until {{LOCK_IN}}</a></p><!--/IF:open-->
-<!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div>
-</section>
-<div class="wrap">
-<section class="sec split">
-<div><h2 class="d h2">Same coach.<br>Same squad. All season.</h2>
-<p class="body" style="margin-top:12px">Two online practices a week from home, for ages {{AGE_MIN}} to {{AGE_MAX}}. A final tournament in May.</p>
-<h3 class="d h3" style="margin-top:40px">What happens when</h3>
-<div class="tl">
-<div><p class="ey">Now</p><p>Save their spot.</p></div>
-<div><p class="ey">Late Nov</p><p>Gamer profile, jersey and gear check.</p></div>
-<div><p class="ey">Late Dec</p><p>Meet the team and coach.</p></div>
-<div class="hot"><p class="ey">{{LOCK_SHORT}}</p><p>Lock-in. Full refund until then.</p></div>
-<div><p class="ey">Mid Jan</p><p>First practice.</p></div>
-<div><p class="ey">May</p><p>Final tournament.</p></div></div></div>
-<div class="friends"><h2 class="d h2">Games are better<br>with friends.</h2>
-<p class="body" style="margin-top:12px">Every friend who joins with your link gets a free month. So does your kid.</p>
-<div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
-<p class="small" style="margin-top:8px">You get your link right after you save a spot.</p></div>
-</section>
-<section class="sec"><h2 class="d h3">Who coaches</h2><div class="coaches">
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien" width="140" height="110" loading="lazy" decoding="async"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
-<div><img src="/images/authors/coach-karlin-faith-1400.jpg" alt="Karlin, founder" width="140" height="110" loading="lazy" decoding="async"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></section>
+<p class="then">Then {{MONTHLY}} a month, Feb to Apr. About {{PER_PRACTICE}} a practice.</p>
+<!--IF:open--><a class="btn" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a>
+<!--IFNOT:jersey--><p class="urgent">Spots are limited. Teams are small.</p><!--/IFNOT:jersey--><!--/IF:open-->
+<!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div></div>
+<div class="chars" aria-hidden="true"><img class="left" src="/images/season1/s1-crew-left.webp" alt="" width="959" height="1100"><img class="right" src="/images/season1/s1-jinx.webp" alt="" width="1002" height="1000" loading="lazy"></div>
+</header>
+<main>
+<section class="band black"><img class="seam" src="/images/torn-paper-red-1.svg" alt="" aria-hidden="true">
+<div class="wrap pad">
+<h2 class="d h2">Same coach.<br>Same squad. All season.</h2>
+<p class="lead">Coached team practice from home, with the same teammates every week.</p>
+<div class="stats">
+<div class="stat"><img src="/icons/calendar.svg" alt=""><span class="k">Practice</span><b>2x a week</b><small>90 minutes each</small></div>
+<div class="stat"><img src="/icons/team.svg" alt=""><span class="k">Where</span><b>Online</b><small>Play from home</small></div>
+<div class="stat"><img src="/icons/youth.svg" alt=""><span class="k">Ages</span><b>{{AGE_MIN}} to {{AGE_MAX}}</b><small>Any skill level</small></div>
+<div class="stat"><img src="/icons/trophy.svg" alt=""><span class="k">Finale</span><b>May</b><small>Season tournament</small></div>
+</div></div></section>
+<section class="band"><img class="seam" src="/images/torn-paper-black-2.svg" alt="" aria-hidden="true">
+<div class="wrap pad two">
+<div><h2 class="d h2">Games are better<br>with friends.</h2>
+<p class="lead">Every friend who joins with your link gets a free month. So does your kid.</p>
+<p class="ladder-note">You get your link right after you save a spot.</p></div>
+<ol class="ladder" aria-label="Your season price by friends who join">
+<li style="--h:{{LH0}}%"><span class="faces"></span><span class="bar">{{LADDER0}}</span><span class="who">On your own</span></li>
+<li style="--h:{{LH1}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""></span><span class="bar">{{LADDER1}}</span><span class="who">1 friend</span></li>
+<li style="--h:{{LH2}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""></span><span class="bar">{{LADDER2}}</span><span class="who">2 friends</span></li>
+<li style="--h:{{LH3}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""></span><span class="bar">{{LADDER3}}</span><span class="who">3 friends</span></li>
+<li style="--h:12%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""><img src="/images/avatars/brickbuddy104.webp" alt=""></span><span class="bar">Free</span><span class="who">4 friends. We refund your {{FIRST}}.</span></li>
+</ol></div></section>
+<section class="band offwhite"><img class="seam" src="/images/torn-paper-white-1.svg" alt="" aria-hidden="true">
+<div class="wrap pad">
+<h2 class="d h2">What happens when</h2>
+<ol class="tl">
+<li><b>Now</b><span>Save their spot.</span></li>
+<li><b>Late Nov</b><span>Gamer profile, jersey and gear check.</span></li>
+<li><b>Late Dec</b><span>Meet the team and coach.</span></li>
+<li class="hot"><b>{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></li>
+<li><b>Mid Jan</b><span>First practice.</span></li>
+<li><b>May</b><span>Final tournament.</span></li>
+</ol></div></section>
+<section class="band black"><img class="seam" src="/images/torn-paper-grey-1.svg" alt="" aria-hidden="true">
+<div class="wrap pad">
+<h2 class="d h2">Who coaches</h2>
+<div class="coaches">
+<article class="coach"><img src="/images/season1/s1-coach-sebastien.webp" alt="Coach Sebastien" width="640" height="520" loading="lazy" decoding="async"><div><b>Sebastien "ZzLegendary" Demontigny</b><span class="role">Head coach // Top 1% player</span><p>The real deal. He's coached pros at Dignitas and Evil Geniuses, and now he coaches your kid.</p></div></article>
+<article class="coach"><img src="/images/season1/s1-coach-karlin.webp" alt="Karlin, founder" width="640" height="520" loading="lazy" decoding="async"><div><b>Karlin "Faith" Oei</b><span class="role">Founder // Challenger jungler</span><p>Started EKUZO to change what it means to be a gamer.</p></div></article>
+<article class="coach"><img src="/images/season1/s1-coach-nuri.webp" alt="Coach Nuri" width="640" height="520" loading="lazy" decoding="async"><div><b>Nuri "Teemo Time" Je</b><span class="role">Coach // Diamond support</span><p>A former public school teacher who knows how kids learn, in game and out.</p></div></article>
 </div>
-<section class="safe"><div class="wrap"><h2 class="d h3">Safe by design</h2><ul><li>Every coach is background-checked.</li><li>Sessions are coach-led and recorded.</li><li>Parents can drop in on any session.</li></ul></div></section>
-<section class="wrap" style="padding-top:40px;padding-bottom:48px"><div class="narrow">
-<h2 class="d h3">Short answers</h2>
+<div class="safe"><h3 class="d">Safe by design</h3><ul>
+<li><img src="/icons/key.svg" alt="" style="filter:invert(1)">Every coach is background-checked.</li>
+<li><img src="/icons/visualize.svg" alt="" style="filter:invert(1)">Sessions are coach-led and recorded.</li>
+<li><img src="/icons/handwave.svg" alt="" style="filter:invert(1)">Parents can drop in on any session.</li>
+</ul></div></div></section>
+<section class="band"><img class="seam" src="/images/torn-paper-black-2.svg" alt="" aria-hidden="true">
+<div class="wrap pad"><div class="faqwrap">
+<h2 class="d h2">Short answers</h2>
 <div class="faq">
 <details><summary>Do we have to go anywhere?</summary><p>No. Every practice and the final tournament happen online, from home.</p></details>
 <details><summary>Who is it for?</summary><p>Kids ages {{AGE_MIN}} to {{AGE_MAX}}. Outside that range? <a href="sms:{{SMS}}">Text Karlin</a>.</p></details>
 <details><summary>What if no team fits?</summary><p>We hand-pick every team by age and skill. If we can't place your kid, you get every dollar back.</p></details>
 <details><summary>What do they need?</summary><p>A computer that runs League of Legends (it's free), a headset with a mic, and solid internet. We help with setup in late November.</p></details>
 </div>
-<!--IF:open--><a class="btn" style="margin-top:28px" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a><!--/IF:open-->
-<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a></p></div></section>
+<!--IF:open--><div class="final"><div><h2 class="d">Their team<br>is forming.</h2><a class="btn black" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a></div><img src="/images/trophy.png" alt="" width="285" height="316" loading="lazy"></div><!--/IF:open-->
+<p class="ask">Questions first? <a href="sms:{{SMS}}">Text Karlin</a></p></div></div></section>
 </main>
-</div>
 <script>try{gtag('event','season1_join_view')}catch(e){}</script>
 </body>
 </html>

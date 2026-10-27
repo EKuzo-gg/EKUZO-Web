@@ -17,6 +17,8 @@ function esc(s: string): string {
 
 const shortPT = (d: Date) => new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(d);
 
+const barPct = (cents: number) => String(Math.round(12 + (88 * Math.max(cents, 0)) / OFFER.seasonCents));
+
 const usd = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents / 100).toFixed(2)}`;
 
 /** Keeps or drops <!--IF:name-->...<!--/IF:name--> and <!--IFNOT:name-->...<!--/IFNOT:name--> blocks. */
@@ -49,6 +51,11 @@ export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" 
     MONTHLY: usd(OFFER.monthlyCents),
     SEASON_FULL: usd(OFFER.seasonCents),
     LADDER0: usd(OFFER.seasonCents),
+    // Bar heights for the friend ladder chart: share of the full season price, 12% floor.
+    LH0: barPct(OFFER.seasonCents),
+    LH1: barPct(OFFER.seasonCents - OFFER.friendCreditCents),
+    LH2: barPct(OFFER.seasonCents - 2 * OFFER.friendCreditCents),
+    LH3: barPct(OFFER.seasonCents - 3 * OFFER.friendCreditCents),
     LADDER1: usd(OFFER.seasonCents - OFFER.friendCreditCents),
     LADDER2: usd(OFFER.seasonCents - 2 * OFFER.friendCreditCents),
     LADDER3: usd(OFFER.seasonCents - 3 * OFFER.friendCreditCents),

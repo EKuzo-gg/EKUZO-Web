@@ -12,13 +12,13 @@ describe("renderJoin", () => {
     const h = renderJoin(tpl, { now: OPEN, mode: "test", src: null });
     assert.ok(h.includes("Season 01 is open"));
     assert.ok(!h.includes("Spots are limited."), "the jersey line is the urgency line before the cutoff");
-    assert.ok(h.includes("Ends Nov 30."));
+    assert.ok(h.includes("until Nov 30"));
     assert.ok(h.includes("About $20 a practice."));
     assert.ok(h.includes("Test mode. No real charges."));
-    assert.ok(h.includes("Free jersey for the first 100 families"));
+    assert.ok(h.includes("Free jersey, first 100 families"));
     assert.ok(h.includes('href="/season1/join/signup"'));
     assert.ok(h.includes("Save their spot &middot; $100"));
-    assert.ok(h.includes(`Fully refundable until December 31, 2026</a>`));
+    assert.ok(!h.includes("Fully refundable"), "refund terms live in the terms, not the offer card");
     assert.ok(!h.includes("{{"));
     assert.ok(!h.includes("$522"));
     assert.ok(!h.includes("Signups are paused"));
@@ -29,8 +29,8 @@ describe("renderJoin", () => {
   it("jersey line: shown before the cutoff, hidden at and after it", () => {
     const before = renderJoin(tpl, { now: new Date("2026-11-30T23:59:58-08:00"), mode: "test", src: null });
     const at = renderJoin(tpl, { now: new Date("2026-11-30T23:59:59-08:00"), mode: "test", src: null });
-    assert.ok(before.includes("Free jersey for the first 100 families"));
-    assert.ok(!at.includes("Free jersey for the first 100 families"));
+    assert.ok(before.includes("Free jersey, first 100 families"));
+    assert.ok(!at.includes("Free jersey, first 100 families"));
     assert.ok(at.includes("Spots are limited."), "after the cutoff the urgency line falls back to spots");
   });
   it("closed: mode off, before open, and at close", () => {
@@ -57,8 +57,10 @@ describe("renderJoin", () => {
   });
   it("ladder and ages come from config", () => {
     const h = renderJoin(tpl, { now: OPEN, mode: "test", src: null });
-    assert.ok(h.includes("Your season: $580") && h.includes("<b>$420</b>") && h.includes("<b>$260</b>") && h.includes("<b>$100</b>"));
-    assert.ok(h.includes("4 friends</span><b>Free. We refund your $100.</b>"));
+    for (const [pct, price] of [["100", "$580"], ["76", "$420"], ["51", "$260"], ["27", "$100"]]) {
+      assert.ok(h.includes(`--h:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
+    }
+    assert.ok(h.includes("4 friends. We refund your $100."));
     assert.ok(h.includes("ages 10 to 17"));
   });
 });
