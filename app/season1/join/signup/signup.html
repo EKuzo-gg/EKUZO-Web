@@ -107,6 +107,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .xnote{background:var(--stone);padding:14px;margin-top:12px;font-size:14px;line-height:1.45}
 .xacts{display:grid;gap:8px;margin-top:12px}
 .xacts .btn{padding:12px}
+.back2{display:flex;align-items:center;justify-content:center;min-height:44px;font-weight:700;font-size:14px;color:var(--black);text-decoration:underline;text-underline-offset:3px}
 /* S1-RESPONSIVE: shared across the Season 01 funnel templates (join, signup, welcome, crew). */
 @font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
 :root{--display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--page:1200px;--gut:20px}
@@ -162,7 +163,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a></div>
 <div id="closed" class="oops" hidden>
 <p style="font-size:15px;font-weight:700">Signups are paused. Text our founder.</p>
-<a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a></div>
+<a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a><a class="back2" href="/season1">Join the waitlist</a></div>
 <div id="pay">
 <div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
 <div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
@@ -213,7 +214,7 @@ try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17,18];
 function kidRow(){n++;var i=seq++,d=document.createElement('div');d.className='kid';
  var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
- d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 10 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button></div></div>';
+ d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 10 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);
  d.querySelectorAll('.krm,.krm2').forEach(function(b){b.addEventListener('click',function(){removeKid(d)})});}
 function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
@@ -237,7 +238,7 @@ function upd(){
  var h='';
  rs.forEach(function(r,i){r.querySelector('.klabel').innerHTML=i?'Sibling <span class="red">'+Math.round((1-P.siblingMonthly/P.monthly)*100)+'% off</span>':'Your kid';
   r.querySelector('.krm').hidden=i===0;r.querySelector('.krm2').hidden=rs.length<2;
-  var nm=r.querySelector('.nm');nm.placeholder=i?'First name':'Charlie'});
+  });
  if(overrideCents!==null&&lastKids!==rs.length)overrideCents=null;
  lastKids=rs.length;
  rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+esc(nm)+', Season 01, first month</span><span>'+(i?'<s style="color:rgba(0,0,0,.4)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.4)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});

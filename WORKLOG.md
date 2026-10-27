@@ -5,6 +5,18 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 season page: calmer pass, signup exits)
+
+- `join.html`: hero is violet (not red); ticker removed; brush texture lighter; eyebrow is the red
+  skewed chip reading "Season 01". Band changes use the live site's whole torn-paper PNGs
+  (`public/images/new torn paper/`, per `docs/learning-log.md`), bands at z 1 so hero characters stay on
+  top. Red CTA box at the end replaced by a plain button. Signup elevated: red nav button, bigger card
+  button, and a sticky "Season 01 / Save their spot" bar once the offer card scrolls off screen.
+  Safe by design icons are 72px circles.
+- `signup.html`: the out-of-range age note adds "Back to Season 01"; the paused state adds "Join the
+  waitlist". No "Charlie" placeholder in the kid name field (labels only).
+
+---
 ## Aaron (via Claude), October 27, 2026 ("Text our founder")
 
 - Every visible "Text Karlin" / "text Karlin" in the Season 01 funnel (season page, signup incl. error
