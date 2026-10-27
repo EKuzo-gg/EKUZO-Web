@@ -1,0 +1,30 @@
+# relay legacy guard diff (app/api/webhooks/stripe/route.ts)
+
+Uses shouldSkipLegacy from lib/season1/legacyGuard.ts (Chronos). Added import line is the only change outside the guard block.
+
+diff --git a/app/api/webhooks/stripe/route.ts b/app/api/webhooks/stripe/route.ts
+index 5bf230d..ac49012 100644
+--- a/app/api/webhooks/stripe/route.ts
++++ b/app/api/webhooks/stripe/route.ts
+@@ -3,6 +3,7 @@ import Stripe from "stripe";
+ import { createHash } from "crypto";
+ import { getProductFromMeta } from "@/lib/products";
+ import type { MetadataGamer, WebhookContext } from "@/lib/products/types";
++import { shouldSkipLegacy } from "@/lib/season1/legacyGuard";
+ 
+ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+   apiVersion: "2026-02-25.clover",
+@@ -52,6 +53,13 @@ export async function POST(req: NextRequest) {
+   if (event.type === "payment_intent.succeeded") {
+     const paymentIntent = event.data.object as Stripe.PaymentIntent;
+     const meta = paymentIntent.metadata;
++
++    // Season 01 PaymentIntents have their own webhook; anything without a
++    // parent_email (e.g. Teams installment invoices) cannot be fulfilled here.
++    if (shouldSkipLegacy(paymentIntent)) {
++      return NextResponse.json({ received: true, skipped: "not_registration" });
++    }
++
+     const product = meta.product || "camps"; // default to camps for backward compat
+     // Teams convergence Phase 1 + 2: shared product config and per-
+     // surface strategy map. `productConfig` carries the labels, tags,

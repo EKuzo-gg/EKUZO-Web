@@ -29,7 +29,10 @@ Beehiiv (email automation) · Google Sheets (fulfillment ops) · Netlify (hostin
   *Reconsider if:* non-engineers need to build/modify automations without touching code — Make.com
   could come back as an operational layer (not in the payment path).
 - **Cloudflare Worker** — set aside; Next.js API routes replace it entirely. No separate edge layer needed.
-- **Discord notifications** — removed from the registration/payment flow. No ops value at current scale.
+
+### Discord notifications: reversed for Season 01 commit alerts — 2026-10-26
+Earlier rejected ("no ops value at current scale", 2026-04-03). Approved by Jamie for Season 01 commit alerts only.
+Private channel, minimal fields: kid first name, age, city, amount. Never email, phone, address or card data.
 
 ### Email platform split: Beehiiv = general nurture, Klaviyo = product email — decided 2026-07-15
 **Chose:** Beehiiv owns the newsletter and long-term audience nurture (popup/footer capture,

@@ -1,0 +1,33 @@
+# relay-migrate evidence (Neon test endpoint ep-lively-boat-b4fak1h6)
+
+## run 1 (applied)
+apply  0001_season1.sql (16 statements)
+done: 1 applied, 0 skipped
+
+## run 2 (no-op)
+skip   0001_season1.sql (already applied)
+done: 0 applied, 1 skipped
+
+## s1_ tables and column counts
+PostgreSQL 18.6
+s1_codes           7
+s1_events          9
+s1_families        9
+s1_guardians       8
+s1_kids            9
+s1_migrations      2
+s1_order_items     6
+s1_orders          22
+s1_outbox          10
+s1_rate_limits     5
+s1_referrals       9
+
+indexes:
+  s1_codes_family_id_idx
+  s1_codes_one_family_code_idx
+  s1_kids_family_id_idx
+  s1_orders_family_id_idx
+  s1_orders_payer_email_livemode_idx
+  s1_outbox_status_idx
+
+migrations recorded: 0001_season1.sql

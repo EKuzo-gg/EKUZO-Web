@@ -1,0 +1,34 @@
+# S1_DB_TESTS=1 node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs --test --test-reporter=spec lib/season1/__tests__/db.integration.test.ts
+▶ season1 db (integration)
+  ✔ public ids use the no-lookalike alphabet (4.237343ms)
+  ✔ upserts family and guardian, reusing the family for the same email (299.672902ms)
+  ✔ inserts kids and a pending order with items (166.42165ms)
+  ✔ pending orders do not count as prior paid kids (32.505852ms)
+  ✔ claims a paid order exactly once (168.502604ms)
+  ✔ tracks fulfilment completion (137.546092ms)
+  ✔ mints one family code, returning the same code on repeat and under concurrency (345.097381ms)
+  ✔ mintFamilyCode retries on a code collision (267.006972ms)
+  ✔ records a stripe event once (59.58433ms)
+  ✔ enqueues an outbox key once (91.804822ms)
+# test rows: email=team+s1test-c7e78117ad@ekuzo.gg pi=pi_test_c7e78117ad event=evt_test_c7e78117ad outbox=test_kind:c7e78117ad rl=test:c7e78117ad
+  ✔ rate limits within a window (113.852546ms)
+✔ season1 db (integration) (1689.569233ms)
+ℹ tests 11
+ℹ suites 1
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1989.828651
+
+# without S1_DB_TESTS (skipped)
+﹣ season1 db (integration) (0.543985ms) # set S1_DB_TESTS=1 to run
+ℹ tests 0
+ℹ suites 1
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 300.15029
