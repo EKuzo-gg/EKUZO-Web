@@ -290,7 +290,7 @@ export default function EditorsPage() {
             {[
               {
                 label: "Color",
-                rule: "EKUZO red, black, off-white (#f0edea), white. No other colors as fills. Source footage colors are fine — overlays and graphics must come from this palette.",
+                rule: "EKUZO red, black, off-white (#EFEEED), white. No other colors as fills. Source footage colors are fine — overlays and graphics must come from this palette.",
               },
               {
                 label: "Type",

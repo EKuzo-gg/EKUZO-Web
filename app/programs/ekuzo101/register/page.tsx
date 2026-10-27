@@ -292,7 +292,7 @@ export default function Ekuzo101RegisterPage() {
               {joiningSquad && (
                 <div className="mb-8 bg-[#FF6B1A]/10 border border-[#FF6B1A]/30 rounded-xl px-5 py-4">
                   <p
-                    className="font-body font-bold text-[#0a0a0a]"
+                    className="font-body font-bold text-[#000000]"
                     style={{ fontSize: "15px", lineHeight: "22px" }}
                   >
                     You&apos;re joining {joiningSquad.ownerGamerName}&apos;s group!
@@ -412,7 +412,7 @@ export default function Ekuzo101RegisterPage() {
                   pilot is 4 weeks of sessions; we show 6 so a vacation week
                   doesn&apos;t knock you out.
                   <br />
-                  <span className="font-semibold text-[#0a0a0a]">
+                  <span className="font-semibold text-[#000000]">
                     You&apos;re sharing availability, like a team poll: the
                     more weeks you mark, the easier your gamer is to place.
                     We&apos;ll follow up with your squad&apos;s schedule.
@@ -428,7 +428,7 @@ export default function Ekuzo101RegisterPage() {
               {/* ── Additional info ──────────────────────────────────── */}
               <div className="mb-12">
                 <h3
-                  className="font-body font-bold text-[#0a0a0a] mb-6"
+                  className="font-body font-bold text-[#000000] mb-6"
                   style={{ fontSize: "20px", lineHeight: "28px" }}
                 >
                   Additional information
@@ -445,7 +445,7 @@ export default function Ekuzo101RegisterPage() {
                   rows={4}
                   maxLength={1500}
                   placeholder="Tell us more."
-                  className="font-body text-[#0a0a0a] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#0a0a0a] transition-colors resize-y"
+                  className="font-body text-[#000000] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#000000] transition-colors resize-y"
                   style={{ fontSize: "16px", lineHeight: "24px" }}
                 />
                 <p className="font-body text-sm text-[#9ca3af] mt-1 text-right">
@@ -466,7 +466,7 @@ export default function Ekuzo101RegisterPage() {
               {/* ── Pilot reassurance row ───────────────────────────── */}
               <div className="mt-6 px-5 py-5 bg-[#f9fafb] border border-[#e5e7eb] rounded-sm">
                 <p
-                  className="font-body font-bold text-[#0a0a0a] mb-2"
+                  className="font-body font-bold text-[#000000] mb-2"
                   style={{ fontSize: "14px", lineHeight: "20px" }}
                 >
                   No card required. This is a free pilot.
@@ -506,7 +506,7 @@ export default function Ekuzo101RegisterPage() {
             <aside className="hidden lg:block">
               <div className="sticky top-24 flex flex-col gap-4">
                 <div className="border border-[#e5e7eb] rounded-sm overflow-hidden bg-white">
-                  <div className="bg-[#0a0a0a] px-5 py-5">
+                  <div className="bg-[#000000] px-5 py-5">
                     <h3
                       className="font-display uppercase text-white"
                       style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", lineHeight: "1" }}
@@ -516,7 +516,7 @@ export default function Ekuzo101RegisterPage() {
                   </div>
                   <div className="px-5 py-5">
                     <p
-                      className="font-body font-bold text-[#0a0a0a] mb-1"
+                      className="font-body font-bold text-[#000000] mb-1"
                       style={{ fontSize: "14px" }}
                     >
                       EKUZO 101 Summer Pilot
@@ -531,9 +531,9 @@ export default function Ekuzo101RegisterPage() {
                     </p>
 
                     <div className="mt-4 pt-4 border-t border-[#e5e7eb] flex items-baseline justify-between">
-                      <span className="font-body font-bold text-[#0a0a0a] text-sm">Total</span>
+                      <span className="font-body font-bold text-[#000000] text-sm">Total</span>
                       <span
-                        className="font-display text-[#0a0a0a]"
+                        className="font-display text-[#000000]"
                         style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}
                       >
                         $0
@@ -547,7 +547,7 @@ export default function Ekuzo101RegisterPage() {
 
                 {/* What you get card */}
                 <div className="border border-[#e5e7eb] rounded-sm bg-[#fafafa] px-5 py-5">
-                  <p className="font-body font-bold text-[#0a0a0a] text-xs uppercase tracking-wider mb-3">
+                  <p className="font-body font-bold text-[#000000] text-xs uppercase tracking-wider mb-3">
                     What you get
                   </p>
                   <ul className="flex flex-col gap-2">

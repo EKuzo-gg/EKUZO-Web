@@ -18,7 +18,7 @@ export default function WireframePlaceholder({
       className="w-full flex flex-col items-center justify-center gap-4 p-8 my-6"
       style={{
         minHeight: `${height}px`,
-        backgroundColor: "#f0edea",
+        backgroundColor: "#EFEEED",
         border: "2px dashed var(--color-red)",
       }}
     >

@@ -165,7 +165,7 @@ export default function SchoolsPage() {
           "/icons/growth-arrows.svg",
         ]}
         body={<><p>Gaming is one of the most powerful motivators young people have — across backgrounds, interests, and ability levels.</p><p>EKUZO turns that motivation into structured growth through coaching, teamwork, and shared expectations. Students don&rsquo;t just play. They practice, communicate, lead, and&nbsp;reflect.</p><p>This isn&rsquo;t about fixing kids. It&rsquo;s about building the structure most of them are&nbsp;missing.</p></>}
-        bg="bg-[#f0edea]"
+        bg="bg-grey"
         tornPaper="none"
       />
 
@@ -182,7 +182,7 @@ export default function SchoolsPage() {
 
       {/* ══ 4. WHY SCHOOLS CHOOSE EKUZO — grey bg with zigzag cards ═════════ */}
       <section
-        className="bg-[#f0edea] relative overflow-clip"
+        className="bg-grey relative overflow-clip"
         style={{
           paddingTop: "clamp(80px, 14vw, 144px)",
           paddingBottom: "clamp(120px, 18vw, 240px)",

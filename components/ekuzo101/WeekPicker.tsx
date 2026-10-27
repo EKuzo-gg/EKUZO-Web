@@ -109,7 +109,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
       {/* ── Range + counter banner ─────────────────────────────────── */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-[#FF6B1A]/10 border border-[#FF6B1A]/25 rounded-xl px-5 py-4">
         <div>
-          <p className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "15px", lineHeight: "22px" }}>
+          <p className="font-body font-bold text-[#000000]" style={{ fontSize: "15px", lineHeight: "22px" }}>
             {rangeLabel}{" "}
             <span className="font-medium text-[#4b5563]">(Next 6 weeks)</span>
           </p>
@@ -119,7 +119,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
         </div>
         <div className="flex items-center gap-3">
           <p className="font-body text-right" style={{ fontSize: "13px", lineHeight: "18px" }}>
-            <span className="block font-bold text-[#0a0a0a]" style={{ fontSize: "18px" }}>
+            <span className="block font-bold text-[#000000]" style={{ fontSize: "18px" }}>
               {Math.min(count, MINIMUM)} of {MINIMUM}
             </span>
             <span className={met ? "text-[#FF6B1A] font-bold" : "text-[#4b5563]"}>
@@ -147,7 +147,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
             className="bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08)] border border-[#f0f0f2] px-4 py-4"
           >
             <p
-              className="font-display uppercase text-[#0a0a0a] text-center mb-3"
+              className="font-display uppercase text-[#000000] text-center mb-3"
               style={{ fontSize: "clamp(24px, 3vw, 30px)", lineHeight: "1" }}
             >
               {block.label}
@@ -159,7 +159,7 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
                 <span
                   key={d}
                   className={`text-center font-body pb-1 ${
-                    d === "Tue" || d === "Thu" ? "font-bold text-[#0a0a0a]" : "font-medium text-[#9ca3af]"
+                    d === "Tue" || d === "Thu" ? "font-bold text-[#000000]" : "font-medium text-[#9ca3af]"
                   }`}
                   style={{ fontSize: "11px", lineHeight: "1.5" }}
                 >
@@ -223,8 +223,8 @@ export default function WeekPicker({ selected, onChange, now }: Props) {
                     aria-label={`${isSelected ? "Selected" : "Select"} ${row.week.label} (${row.week.tueFull} + ${row.week.thuFull})`}
                     className={`grid grid-cols-7 rounded-lg border transition-all duration-150 cursor-pointer active:scale-[0.99] items-center ${
                       isSelected
-                        ? "bg-[#FF6B1A]/15 border-[#FF6B1A]/50 text-[#0a0a0a]"
-                        : "bg-white border-[#e5e7eb] text-[#0a0a0a] hover:bg-[#FF6B1A]/10 hover:border-[#FF6B1A]/30"
+                        ? "bg-[#FF6B1A]/15 border-[#FF6B1A]/50 text-[#000000]"
+                        : "bg-white border-[#e5e7eb] text-[#000000] hover:bg-[#FF6B1A]/10 hover:border-[#FF6B1A]/30"
                     }`}
                   >
                     {dayCells}

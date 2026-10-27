@@ -162,7 +162,7 @@ export default function WoodwardSignupPage() {
                 Add your gamer&apos;s name, your email, and their age, and a coach
                 will follow up with placement and start dates.
                 <br />
-                <span className="font-bold text-[#0a0a0a]">
+                <span className="font-bold text-[#000000]">
                   No payment, no commitment.
                 </span>
               </p>
@@ -202,18 +202,18 @@ export default function WoodwardSignupPage() {
                         id="woodward-age"
                         value={age}
                         onChange={(e) => setAge(e.target.value)}
-                        className="appearance-none font-body w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] pr-10 outline-none focus:border-[#0a0a0a] transition-colors cursor-pointer"
-                        style={{ fontSize: "16px", lineHeight: "normal", color: age ? "#0a0a0a" : "#9ca3af" }}
+                        className="appearance-none font-body w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] pr-10 outline-none focus:border-[#000000] transition-colors cursor-pointer"
+                        style={{ fontSize: "16px", lineHeight: "normal", color: age ? "#000000" : "#9ca3af" }}
                       >
                         <option value="" disabled>
                           Age
                         </option>
                         {Array.from({ length: 8 }, (_, i) => 10 + i).map((a) => (
-                          <option key={a} value={String(a)} className="text-[#0a0a0a]">
+                          <option key={a} value={String(a)} className="text-[#000000]">
                             {a}
                           </option>
                         ))}
-                        <option value="Adult" className="text-[#0a0a0a]">
+                        <option value="Adult" className="text-[#000000]">
                           Adult
                         </option>
                       </select>

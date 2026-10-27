@@ -335,7 +335,7 @@ export default function CampsRegisterPage() {
               className="font-display uppercase"
               style={{ fontSize: "clamp(3rem, 6.25vw, 120px)", lineHeight: "96px" }}
             >
-              <span style={{ color: "#0a0a0a" }}>CAMP </span>
+              <span style={{ color: "#000000" }}>CAMP </span>
               <span style={{ color: "#ed2024" }}>REGISTRATION</span>
             </h1>
 
@@ -470,14 +470,14 @@ export default function CampsRegisterPage() {
                               {week.label}
                             </span>
                             <span
-                              className="font-display text-[#0a0a0a] uppercase"
+                              className="font-display text-[#000000] uppercase"
                               style={{ fontSize: "clamp(1.5rem, 2.5vw, 36px)", lineHeight: "40px" }}
                             >
                               {week.dates}
                             </span>
                           </div>
                           <div className="bg-white rounded px-3 py-1 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]">
-                            <span className="font-body font-bold text-[#0a0a0a] text-sm leading-5">
+                            <span className="font-body font-bold text-[#000000] text-sm leading-5">
                               ${week.price}
                             </span>
                           </div>
@@ -512,7 +512,7 @@ export default function CampsRegisterPage() {
               {/* ── Gamer Info ──────────────────────────────────────── */}
               <div className="mb-8">
                 <h3
-                  className="font-body font-bold text-[#0a0a0a] mb-6"
+                  className="font-body font-bold text-[#000000] mb-6"
                   style={{ fontSize: "20px", lineHeight: "28px" }}
                 >
                   Tell us about your gamer{gamers.length > 1 ? ` (${gi + 1})` : ""}
@@ -560,7 +560,7 @@ export default function CampsRegisterPage() {
                             onChange={() => toggleGame(gi, game)}
                             className="w-5 h-5 rounded-sm border border-[#767676] accent-red cursor-pointer"
                           />
-                          <span className="font-body font-medium text-[#0a0a0a] text-sm leading-5">
+                          <span className="font-body font-medium text-[#000000] text-sm leading-5">
                             {game}
                           </span>
                         </label>
@@ -621,7 +621,7 @@ export default function CampsRegisterPage() {
           {/* ── Parent / Guardian Info ─────────────────────────────── */}
           <div className="mb-12">
             <h3
-              className="font-body font-bold text-[#0a0a0a] mb-6"
+              className="font-body font-bold text-[#000000] mb-6"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
               Parent Information
@@ -663,7 +663,7 @@ export default function CampsRegisterPage() {
           {/* ── Additional Info ─────────────────────────────────────── */}
           <div className="mb-12">
             <h3
-              className="font-body font-bold text-[#0a0a0a] mb-6"
+              className="font-body font-bold text-[#000000] mb-6"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
               Additional information
@@ -679,7 +679,7 @@ export default function CampsRegisterPage() {
               onChange={(e) => setAdditionalInfo(e.target.value)}
               rows={4}
               placeholder="Tell us more."
-              className="font-body text-[#0a0a0a] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#0a0a0a] transition-colors resize-y"
+              className="font-body text-[#000000] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#000000] transition-colors resize-y"
               style={{ fontSize: "16px", lineHeight: "24px" }}
             />
           </div>
@@ -688,7 +688,7 @@ export default function CampsRegisterPage() {
           <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden">
             <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
               <h3
-                className="font-display uppercase text-[#0a0a0a]"
+                className="font-display uppercase text-[#000000]"
                 style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
               >
                 Registration Summary
@@ -707,7 +707,7 @@ export default function CampsRegisterPage() {
                     return (
                       <div key={s.index} className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0">
                         <div className="flex flex-col gap-1">
-                          <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          <span className="font-body font-bold text-[#000000] text-sm">
                             {s.gamerName}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
@@ -717,7 +717,7 @@ export default function CampsRegisterPage() {
                             {s.slot === "AM" ? "Morning" : "Afternoon"} Session ({s.slotHours})
                           </span>
                         </div>
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                        <span className="font-body font-bold text-[#000000] text-sm whitespace-nowrap">
                           ${s.price}
                         </span>
                       </div>
@@ -729,10 +729,10 @@ export default function CampsRegisterPage() {
               {/* Total */}
               {selectedGamerSummaries.length > 0 && (
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
-                  <span className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "16px" }}>
+                  <span className="font-body font-bold text-[#000000]" style={{ fontSize: "16px" }}>
                     Total (Early Bird Pricing)
                   </span>
-                  <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
+                  <span className="font-display text-[#000000]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
                     ${totalPrice}
                   </span>
                 </div>
@@ -764,7 +764,7 @@ export default function CampsRegisterPage() {
           ) : clientSecret ? (
             <div id="payment-section" className="mt-8">
               <div className="border border-[#e5e7eb] rounded-sm overflow-hidden">
-                <div className="bg-[#0a0a0a] px-6 py-4">
+                <div className="bg-[#000000] px-6 py-4">
                   <h3
                     className="font-display uppercase text-white"
                     style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
@@ -960,7 +960,7 @@ function SessionCard({
         className={`rounded text-center py-2.5 cursor-pointer transition-all duration-150 hover:brightness-110 active:scale-[0.97] active:brightness-90 ${
           isSelected
             ? "bg-red text-white"
-            : "bg-[#0a0a0a] text-white hover:bg-[#1a1a1a]"
+            : "bg-[#000000] text-white hover:bg-[#1a1a1a]"
         }`}
       >
         <span className="font-body font-bold" style={{ fontSize: "14px", lineHeight: "20px" }}>
@@ -997,7 +997,7 @@ function InputField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
+        className="font-body text-[#000000] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#000000] transition-colors placeholder:text-[#9ca3af]"
         style={{ fontSize: "16px", lineHeight: "normal" }}
       />
     </div>
@@ -1025,7 +1025,7 @@ function SelectField({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors appearance-none"
+        className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#000000] transition-colors appearance-none"
         style={{ fontSize: "16px", lineHeight: "24px" }}
       >
         {placeholder && (

@@ -36,7 +36,7 @@ export default function PaymentStep({
   return (
     <div id="payment-section" className="mt-8">
       <div className="border border-[#e5e7eb] rounded-sm overflow-hidden">
-        <div className="bg-[#0a0a0a] px-6 py-4">
+        <div className="bg-[#000000] px-6 py-4">
           <h3
             className="font-display uppercase text-white"
             style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}

@@ -983,7 +983,7 @@ export default function CampsRegisterPage() {
                             Camp week &amp; slot
                           </span>
                           <span
-                            className="font-display uppercase text-[#0a0a0a]"
+                            className="font-display uppercase text-[#000000]"
                             style={{
                               fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
                               lineHeight: "1.1",
@@ -992,7 +992,7 @@ export default function CampsRegisterPage() {
                             {selectedWeek?.dates}
                           </span>
                           <span
-                            className="font-body text-[#0a0a0a]"
+                            className="font-body text-[#000000]"
                             style={{ fontSize: "14px", lineHeight: "20px" }}
                           >
                             Afternoon session ({SLOT_HOURS.PM})
@@ -1151,7 +1151,7 @@ export default function CampsRegisterPage() {
                                   className={`py-2 rounded-md border font-body font-bold transition-colors cursor-pointer active:scale-[0.98] ${
                                     isActive
                                       ? "bg-purple border-purple text-white"
-                                      : "bg-white border-[#e5e7eb] text-[#0a0a0a] hover:bg-[#f9fafb]"
+                                      : "bg-white border-[#e5e7eb] text-[#000000] hover:bg-[#f9fafb]"
                                   }`}
                                   style={{ fontSize: "13px" }}
                                 >
@@ -1173,14 +1173,14 @@ export default function CampsRegisterPage() {
                               onClick={() => goToMonth(-1)}
                               disabled={!canGoPrev}
                               aria-label="Previous month"
-                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#0a0a0a] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
+                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#000000] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
                             >
                               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                                 <path d="M9 2.5L4 7l5 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
                             </button>
                             <span
-                              className="font-display uppercase text-[#0a0a0a]"
+                              className="font-display uppercase text-[#000000]"
                               style={{
                                 fontSize: "clamp(32px, 4.5vw, 42px)",
                                 lineHeight: "1",
@@ -1193,7 +1193,7 @@ export default function CampsRegisterPage() {
                               onClick={() => goToMonth(1)}
                               disabled={!canGoNext}
                               aria-label="Next month"
-                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#0a0a0a] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
+                              className="w-8 h-8 flex items-center justify-center rounded-md border border-[#e5e7eb] text-[#000000] disabled:text-[#d1d5db] disabled:border-[#f0f0f2] hover:bg-[#f9fafb] transition-colors cursor-pointer disabled:cursor-not-allowed"
                             >
                               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                                 <path d="M5 2.5L10 7l-5 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -1281,7 +1281,7 @@ export default function CampsRegisterPage() {
                                     className="aspect-square flex items-center justify-center rounded-md border border-[#e5e7eb] bg-white hover:bg-purple-soft hover:border-purple/40 transition-all duration-150 cursor-pointer active:scale-[0.97]"
                                   >
                                     <span
-                                      className="font-body font-bold text-[#0a0a0a]"
+                                      className="font-body font-bold text-[#000000]"
                                       style={{ fontSize: "13px" }}
                                     >
                                       {cell.date}
@@ -1393,7 +1393,7 @@ export default function CampsRegisterPage() {
           <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden lg:hidden">
             <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
               <h3
-                className="font-display uppercase text-[#0a0a0a]"
+                className="font-display uppercase text-[#000000]"
                 style={{ fontSize: "clamp(2rem, 3vw, 28px)", lineHeight: "1.1" }}
               >
                 Registration summary
@@ -1412,7 +1412,7 @@ export default function CampsRegisterPage() {
                     return (
                       <div key={s.index} className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0">
                         <div className="flex flex-col gap-1">
-                          <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          <span className="font-body font-bold text-[#000000] text-sm">
                             {s.gamerName}
                           </span>
                           <span className="font-body text-[#6b7280] text-sm">
@@ -1422,7 +1422,7 @@ export default function CampsRegisterPage() {
                             Afternoon session ({s.slotHours})
                           </span>
                         </div>
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                        <span className="font-body font-bold text-[#000000] text-sm whitespace-nowrap">
                           ${s.price}
                         </span>
                       </div>
@@ -1434,10 +1434,10 @@ export default function CampsRegisterPage() {
               {/* Total */}
               {selectedGamerSummaries.length > 0 && (
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
-                  <span className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "16px" }}>
+                  <span className="font-body font-bold text-[#000000]" style={{ fontSize: "16px" }}>
                     Total (limited-time pricing)
                   </span>
-                  <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
+                  <span className="font-display text-[#000000]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
                     ${totalPrice}
                   </span>
                 </div>
@@ -1512,7 +1512,7 @@ export default function CampsRegisterPage() {
             <aside className="hidden lg:block">
               <div className="sticky top-24 flex flex-col gap-4">
                 <div className="border border-[#e5e7eb] rounded-sm overflow-hidden bg-white">
-                  <div className="bg-[#0a0a0a] px-5 py-5">
+                  <div className="bg-[#000000] px-5 py-5">
                     <h3
                       className="font-display uppercase text-white"
                       style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", lineHeight: "1" }}
@@ -1537,7 +1537,7 @@ export default function CampsRegisterPage() {
                                 className="flex items-start justify-between gap-3 pb-3 border-b border-[#f0f0f0] last:border-0 last:pb-0"
                               >
                                 <div className="flex flex-col gap-0.5 min-w-0">
-                                  <span className="font-body font-bold text-[#0a0a0a] text-xs leading-tight truncate">
+                                  <span className="font-body font-bold text-[#000000] text-xs leading-tight truncate">
                                     {s.gamerName}
                                   </span>
                                   <span className="font-body text-[#6b7280] text-xs leading-snug">
@@ -1547,7 +1547,7 @@ export default function CampsRegisterPage() {
                                     1:00 PM – 4:00 PM
                                   </span>
                                 </div>
-                                <span className="font-body font-bold text-[#0a0a0a] text-xs whitespace-nowrap">
+                                <span className="font-body font-bold text-[#000000] text-xs whitespace-nowrap">
                                   ${s.price}
                                 </span>
                               </li>
@@ -1556,10 +1556,10 @@ export default function CampsRegisterPage() {
                         </ul>
 
                         <div className="flex items-baseline justify-between pt-3 border-t border-[#e5e7eb]">
-                          <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          <span className="font-body font-bold text-[#000000] text-sm">
                             Total
                           </span>
-                          <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}>
+                          <span className="font-display text-[#000000]" style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}>
                             ${totalPrice}
                           </span>
                         </div>
@@ -1573,7 +1573,7 @@ export default function CampsRegisterPage() {
 
                 {/* What's included card */}
                 <div className="border border-[#e5e7eb] rounded-sm bg-[#fafafa] px-5 py-5">
-                  <p className="font-body font-bold text-[#0a0a0a] text-xs uppercase tracking-wider mb-3">
+                  <p className="font-body font-bold text-[#000000] text-xs uppercase tracking-wider mb-3">
                     What you get
                   </p>
                   <ul className="flex flex-col gap-2">
@@ -1670,7 +1670,7 @@ function SquadCard({
       </div>
 
       <span
-        className="font-display uppercase text-[#0a0a0a] leading-[0.95] pr-10"
+        className="font-display uppercase text-[#000000] leading-[0.95] pr-10"
         style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.5rem)" }}
       >
         {title}
@@ -1714,7 +1714,7 @@ function SelectField({
         data-error-key={errorKey}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors appearance-none"
+        className="font-body text-[#1f2937] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#000000] transition-colors appearance-none"
         style={{ fontSize: "16px", lineHeight: "24px" }}
       >
         {placeholder && (

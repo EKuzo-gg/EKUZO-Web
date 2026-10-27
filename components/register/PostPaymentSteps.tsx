@@ -24,7 +24,7 @@ export default function PostPaymentSteps({
   return (
     <div className={className}>
       <h3
-        className="font-body font-bold text-[#0a0a0a] mb-4"
+        className="font-body font-bold text-[#000000] mb-4"
         style={{ fontSize: "16px", lineHeight: "24px" }}
       >
         {heading}
@@ -42,7 +42,7 @@ export default function PostPaymentSteps({
               {i + 1}
             </span>
             <div className="flex flex-col gap-0.5 min-w-0">
-              <span className="font-body font-bold text-[#0a0a0a] text-sm leading-tight">
+              <span className="font-body font-bold text-[#000000] text-sm leading-tight">
                 {s.title}
               </span>
               <span className="font-body text-[#6b7280] text-xs leading-snug">

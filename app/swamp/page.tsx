@@ -164,7 +164,7 @@ export default function SwampSignupPage() {
               {/* 1 — Gaming Matters newsletter */}
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5" noValidate>
-                  <p className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "15px" }}>
+                  <p className="font-body font-bold text-[#000000]" style={{ fontSize: "15px" }}>
                     Join the Gaming Matters newsletter
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
@@ -200,7 +200,7 @@ export default function SwampSignupPage() {
                 </form>
               ) : (
                 <div className="mt-8 rounded border border-[#e5e7eb] bg-[#f9fafb] p-6">
-                  <p className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "18px" }}>
+                  <p className="font-body font-bold text-[#000000]" style={{ fontSize: "18px" }}>
                     You&apos;re on the list{firstName.trim() ? `, ${firstName.trim()}` : ""}.
                   </p>
                   <p className="font-body text-[#4b5563] mt-1" style={{ fontSize: "15px" }}>
@@ -253,7 +253,7 @@ export default function SwampSignupPage() {
       </div>
 
       {/* ── What is community night? — reuses the camps coach card ────── */}
-      <section className="bg-[#f0edea] relative overflow-clip">
+      <section className="bg-grey relative overflow-clip">
         <div
           className="max-w-[1232px] mx-auto px-6 sm:px-10"
           style={{ paddingTop: "clamp(60px, 9vw, 110px)", paddingBottom: "clamp(60px, 9vw, 110px)" }}

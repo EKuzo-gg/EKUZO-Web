@@ -130,7 +130,7 @@ export default function PartnerLanding({ partner }: { partner: Partner }) {
       <div className="relative overflow-visible">
         <TornPaperDivider color="grey" variant="top" style={1} />
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 160px)",
             paddingBottom: "clamp(80px, 14vw, 160px)",
@@ -185,7 +185,7 @@ export default function PartnerLanding({ partner }: { partner: Partner }) {
       <div className="relative overflow-visible">
         <TornPaperDivider color="grey" variant="top" style={1} />
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(120px, 18vw, 240px)",
@@ -289,7 +289,7 @@ export default function PartnerLanding({ partner }: { partner: Partner }) {
             {p.howSteps.map((step, i) => (
               <div
                 key={step.title}
-                className="bg-[#f0edea]"
+                className="bg-grey"
                 style={{ borderRadius: "2px", padding: "clamp(1.5rem, 3vw, 40px)" }}
               >
                 <div className="flex items-center gap-3 mb-4">

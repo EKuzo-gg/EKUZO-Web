@@ -290,7 +290,7 @@ export default function FAQPage() {
       <section className="relative overflow-visible">
         <TornPaperDivider color="grey" variant="top" style={1} />
         <div
-          className="relative bg-[#f0edea] overflow-clip"
+          className="relative bg-grey overflow-clip"
           style={{
             paddingTop: "clamp(80px, 10vw, 144px)",
             paddingBottom: "clamp(80px, 10vw, 144px)",

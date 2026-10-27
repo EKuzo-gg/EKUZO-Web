@@ -178,7 +178,7 @@ export default function MethodologyPage() {
       {/* ══ 2. WHY GAMES WORK — grey bg, zigzag cards ═══════════════════════ */}
       <div className="relative overflow-visible" style={{ zIndex: 0 }}>
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             marginTop: "clamp(-60px, -10vw, -150px)",
             paddingTop: "clamp(140px, 24vw, 294px)",
