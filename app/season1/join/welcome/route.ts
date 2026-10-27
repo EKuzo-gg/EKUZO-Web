@@ -153,8 +153,12 @@ export async function GET(request: Request) {
     LOCK_SHORT: esc(
       new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(lockIn),
     ),
-    MONTHLY: money(OFFER.monthlyCents),
-    SIB_MONTHLY: money(OFFER.siblingMonthlyCents),
+    FIRST: money(OFFER.firstKidCents),
+    // Same friend ladder as the season page (lib/season1/joinPage.ts), from offer.ts.
+    LADDER0: money(OFFER.seasonCents),
+    LADDER1: money(OFFER.seasonCents - OFFER.friendCreditCents),
+    LADDER2: money(OFFER.seasonCents - 2 * OFFER.friendCreditCents),
+    LADDER3: money(OFFER.seasonCents - 3 * OFFER.friendCreditCents),
   };
 
   if (state === "paid" && order) {
@@ -168,6 +172,13 @@ export async function GET(request: Request) {
       .map((k) => `<div class="line"><span>${esc(k.firstName)}, Season 01, first month</span><span>${money(k.unitCents)}</span></div>`)
       .join("");
     vars.TOTAL = money(order.amountCents);
+    // One kid: the per-practice frame. Siblings: the family's monthly total, so a
+    // sibling price never shows on a one-kid order.
+    const kidCount = order.kids.length;
+    vars.THEN_LINE =
+      kidCount === 1
+        ? `Then ${money(OFFER.monthlyCents)} a month from Feb 15. About ${money(Math.round(OFFER.monthlyCents / OFFER.practicesPerMonth))} a practice.`
+        : `Then ${money(OFFER.monthlyCents + OFFER.siblingMonthlyCents * (kidCount - 1))} a month for ${kidCount === 2 ? "both" : `all ${kidCount}`} kids from Feb 15.`;
     vars.ORDER_REF = esc(order.publicId);
     // GA purchase on the paid state (welcome.html): values only, no names.
     vars.GA_VALUE = String(order.amountCents / 100);
@@ -176,8 +187,8 @@ export async function GET(request: Request) {
     // inviteApplied is added to OrderView by the commit work; absent means false.
     const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
     vars.CREDIT_NOTE = applied
-      ? '<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Friend credit recorded. It applies at lock-in.</p>'
-      : `<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Came from a friend's link and no credit shows? <a href="${esc(sms)}"><b>Text Karlin</b></a> the friend code.</p>`;
+      ? '<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Friend credit recorded.</p>'
+      : "";
     if (order.code) {
       vars.LINK = esc(`${origin}/crew/${order.code}`);
       vars.LINK_SHORT = esc(`${origin.replace(/^https?:\/\//, "")}/crew/${order.code}`);

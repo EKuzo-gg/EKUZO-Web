@@ -90,6 +90,16 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .chips{display:flex;flex-wrap:wrap;gap:8px;font-size:12px}
 .chips button{font:12px var(--body);padding:6px 12px;border:1px solid rgba(0,0,0,.3);background:#fff;border-radius:2px;cursor:pointer}
 .chips button.on{background:var(--black);color:#fff;border-color:var(--black)}
+.urg{margin-top:16px;background:var(--black);color:#fff;font-weight:700;font-size:14px;line-height:1.4;padding:10px 12px}
+.faq{margin-top:8px;border-top:1px solid rgba(0,0,0,.15)}
+.faq details{border-bottom:1px solid rgba(0,0,0,.15)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:52px;padding:12px 0;font-weight:700;font-size:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";width:28px;height:28px;flex-shrink:0;border-radius:50%;background:rgba(0,0,0,.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E") center/18px no-repeat;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.faq details[open] summary:after{transform:rotate(180deg);background-color:var(--red);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath fill='white' d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E")}
+.faq summary:focus-visible{outline:2px solid var(--black);outline-offset:2px}
+.faq details p{font-size:14px;line-height:1.6;padding:0 0 16px;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.faq summary:after{transition:none}}
 </style>
 </head>
 <body>
@@ -115,21 +125,10 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 </div>
 <img class="hero-img" style="height:220px" src="https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg" alt="An EKUZO team on a call with their coach">
 <div class="px">
-<div class="sec"><p class="ey red">What is EKUZO</p>
-<h2 class="d" style="font-size:34px;margin-top:8px">Every gamer<br>deserves a team.</h2>
-<p class="body" style="margin-top:12px">They're already gaming. We give it a point. A real coach, the same teammates every week, and a season to play for. Kids practice communication, strategy and leadership, the kind of skills that show up at school and on every team they'll ever join.</p>
-<p class="body" style="margin-top:12px">Screen time becomes practice time. And you get something real to ask about at dinner.</p></div>
-<div class="sec"><p class="ey red">How a season works</p>
-<h2 class="d" style="font-size:34px;margin-top:8px">A real team.<br>From home.</h2>
-<div style="margin-top:20px;display:grid;gap:20px">
-<div class="step"><div class="num">01</div><div><p style="font-size:15px;font-weight:700">Practice with a coach</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">Two evenings a week. A real coach runs every practice: teamwork, communication, strategy.</p></div></div>
-<div class="step"><div class="num">02</div><div><p style="font-size:15px;font-weight:700">Play with their team</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">The same five teammates all season, hand-picked by age and skill. Friends stay together wherever we can.</p></div></div>
-<div class="step"><div class="num">03</div><div><p style="font-size:15px;font-weight:700">Play for something</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">A team jersey they design together, a schedule, and a final tournament in May.</p></div></div></div></div>
-<div style="background:var(--stone);padding:20px;margin-top:36px">
-<p class="ey">The game</p>
-<p style="font-size:16px;font-weight:700;margin-top:8px;line-height:1.35">League of Legends plays like a sport.</p>
-<p class="body" style="font-size:14px;margin-top:8px;line-height:1.5">Five players, set roles, one shared goal. It's free and runs on most family computers. Your kid can keep their Roblox, Minecraft or Fortnite. No League experience needed; most kids start from scratch.</p></div>
-<div class="sec"><p class="ey red"><!--IF:named-->Your price, with {{NAME}}&rsquo;s invite<!--/IF--><!--IFNOT:named-->Your price<!--/IFNOT--></p>
+<div class="sec"><h2 class="d" style="font-size:34px">Every gamer<br>deserves a team.</h2>
+<p class="body" style="margin-top:12px">A real coach, the same teammates every week, and a season to play for. Two online practices a week from home, then a final tournament in May.</p>
+<p class="body" style="margin-top:12px">The game is League of Legends: five players, set roles, free to play. No experience needed.</p></div>
+<div class="sec"><h2 class="d" style="font-size:28px">Your price</h2>
 <div class="offer notch" style="margin-top:12px">
 <div class="price"><b style="font-size:48px">{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
 <div style="margin-top:12px">
@@ -138,26 +137,23 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="line"><span>Mar 15</span><span>{{MONTHLY}}</span></div>
 <div class="line"><span>Apr 15</span><span>{{MONTHLY}}</span></div>
 <div class="line" style="font-weight:700;border-top:1px solid rgba(0,0,0,.15);margin-top:4px;padding-top:8px"><span>Your season</span><span><!--IF:named-->{{SEASON_CREDIT}}<!--/IF--><!--IFNOT:named-->{{SEASON_FULL}}<!--/IFNOT--></span></div></div>
-<ul class="dots" style="font-size:13px"><li><span><a href="/terms-of-service#season-01">Fully refundable until {{REFUND_DATE}}, and any time we can't place your kid</a></span></li><!--IF:jersey--><li>Free jersey for the first 100 families</li><!--/IF:jersey--><li>Siblings {{SIB_PCT}}% off</li></ul>
-<p style="font-size:12px;font-weight:600;margin-top:12px">Spots are limited. Teams are small and hand-picked.</p>
-<a class="btn join" style="margin-top:16px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a></div>
-<!--IF:named--><p class="small" style="margin-top:8px">Then invite your own friends: every friend who joins gets you another free month. Credits apply at lock-in.</p><!--/IF-->
-</div>
-<div class="sec"><p class="ey red">Who coaches</p>
-<h2 class="d" style="font-size:28px;margin-top:8px">Top college players,<br>trained to coach kids.</h2><div class="coaches">
+<!--IF:jersey--><p class="urg">Free jersey for the first 100 families. Ends {{JERSEY_SHORT}}.</p><!--/IF:jersey-->
+<a class="btn join" style="margin-top:16px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a></div></div>
+<div class="sec"><h2 class="d" style="font-size:28px">Who coaches</h2><div class="coaches">
 <div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien" width="140" height="110" loading="lazy" decoding="async"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
 <div><img src="/images/authors/coach-karlin-faith-1400.jpg" alt="Karlin, founder" width="140" height="110" loading="lazy" decoding="async"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
 <div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></div></div>
-<div class="safe"><p class="ey red">Safe by design</p><h2 class="d" style="font-size:28px;margin-top:8px">No toxic lobbies. Ever.</h2><ul><li>Private, coach-moderated games. No random strangers.</li><li>Every coach is background-checked.</li><li>A private team, the same kids every week.</li><li>Sessions are coach-led and recorded.</li><li>Parents can drop in on any session.</li></ul></div>
+<div class="safe"><h2 class="d" style="font-size:28px">No toxic lobbies. Ever.</h2><ul><li>Private, coach-moderated games. No random strangers.</li><li>Every coach is background-checked.</li><li>Parents can drop in on any session.</li></ul></div>
 <div class="px" style="padding-top:32px;padding-bottom:40px">
 <h2 class="d" style="font-size:28px">Short answers</h2>
-<div class="qa"><!--IF:named--><b>Will they be on {{NAME}}&rsquo;s team?</b>We put friends together wherever age and skill allow. Joining through {{NAME}}&rsquo;s link tells us they belong together.<!--/IF--><!--IFNOT:named--><b>Will they be on a friend&rsquo;s team?</b>We put friends together wherever age and skill allow. Joining through a friend&rsquo;s link tells us they belong together.<!--/IFNOT--></div>
-<div class="qa"><b>When does it start?</b>First practice is mid January. The season ends with a tournament in May.</div>
-<div class="qa"><b>Where does it happen?</b>Online, from home, in the evening in your time zone. No driving, no parking.</div>
-<div class="qa"><b>Who is it for?</b>Kids ages {{AGE_MIN}} to {{AGE_MAX}}, any skill level. Outside that range? <a href="sms:{{SMS}}">Text Karlin</a>.</div>
-<div class="qa"><b>What do they need?</b>A computer that runs League (it's free), a headset with a mic, and solid internet. We help with setup in early December.</div>
+<div class="faq">
+<details><summary><!--IF:named-->Will they be on {{NAME}}&rsquo;s team?<!--/IF--><!--IFNOT:named-->Will they be on a friend&rsquo;s team?<!--/IFNOT--></summary><p>We put friends together wherever age and skill allow. Joining through this link tells us they belong together.</p></details>
+<details><summary>Where does it happen?</summary><p>Online, from home, in the evening in your time zone.</p></details>
+<details><summary>Who is it for?</summary><p>Kids ages {{AGE_MIN}} to {{AGE_MAX}}, any skill level. Outside that range? <a href="sms:{{SMS}}">Text Karlin</a>.</p></details>
+<details><summary>What do they need?</summary><p>A computer that runs League (it's free), a headset with a mic, and solid internet. We help with setup in late November.</p></details>
+</div>
 <a class="btn join" style="margin-top:28px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a>
-<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder. A real human answers.</p></div>
+<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder.</p></div>
 </main>
 <script>
 (function(){

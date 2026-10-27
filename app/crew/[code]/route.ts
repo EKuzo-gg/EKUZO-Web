@@ -58,6 +58,7 @@ function renderHtml(
     SEASON_CREDIT: usd(OFFER.seasonCents - OFFER.friendCreditCents),
     REFUND_DATE: formatDatePT(OFFER.lockInAt),
     JERSEY_DATE: formatDatePT(OFFER.jerseyCutoffAt),
+    JERSEY_SHORT: new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(new Date(OFFER.jerseyCutoffAt)),
     AGE_MIN: String(OFFER.ageCopyMin),
     AGE_MAX: String(OFFER.ageCopyMax),
     SIB_PCT: String(sibPct),

@@ -5,6 +5,26 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 front-end cut, branch `season1-commit`)
+
+Jamie's 10-27 test-run notes plus a conversion pass: less text, fewer details in the funnel.
+
+- `join.html`: offer card cut to price, "about $20 a practice", one urgency bar (free jersey, ends
+  Nov 30; falls back to "Spots are limited" after the cutoff), button, refund link. Ladder gets an
+  "On your own: $580" first row. Eyebrow labels removed. Timeline "Early Dec" to "Late Nov". Short
+  answers are `<details>` styled like `FAQAccordion`. Safe list 4 to 3.
+- `welcome.html` + `route.ts`: ladder now uses tokens (`LADDER0` to `LADDER3`, `FIRST`), footnote
+  under the share button removed, code line removed (link stays). Receipt ends at Paid today, one
+  "then" line (one kid: per-practice; siblings: family monthly total, so no sibling price on one-kid
+  orders), order reference kept. "No credit shows?" note removed (credit-applied note stays).
+  Timeline matches the season page, May added.
+- `crew.html` + `route.ts`: same cuts (no 01/02/03 steps, one-line game note, urgency bar, 4 FAQs,
+  "late November").
+- `offer.ts`: `practicesPerMonth: 8` (copy only). `joinPage.ts`: `LADDER0`, `PER_PRACTICE`, `JERSEY_SHORT`.
+- `npm run test:s1` 164 pass (joinPage tests updated for the new copy). `tsc` clean. `next build`
+  not run here (sandbox can't reach Google Fonts); please confirm on the branch deploy.
+
+---
 ## Jamie (via Claude, Build Loop), October 27, 2026 (Next.js security release, branch `release/next-security`)
 
 Dependency-only release ahead of Season 01 (security review finding H1, decision D14). Built on

@@ -15,6 +15,8 @@ function esc(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+const shortPT = (d: Date) => new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(d);
+
 const usd = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents / 100).toFixed(2)}`;
 
 /** Keeps or drops <!--IF:name-->...<!--/IF:name--> and <!--IFNOT:name-->...<!--/IFNOT:name--> blocks. */
@@ -46,11 +48,14 @@ export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" 
     FIRST: usd(OFFER.firstKidCents),
     MONTHLY: usd(OFFER.monthlyCents),
     SEASON_FULL: usd(OFFER.seasonCents),
+    LADDER0: usd(OFFER.seasonCents),
     LADDER1: usd(OFFER.seasonCents - OFFER.friendCreditCents),
     LADDER2: usd(OFFER.seasonCents - 2 * OFFER.friendCreditCents),
     LADDER3: usd(OFFER.seasonCents - 3 * OFFER.friendCreditCents),
+    PER_PRACTICE: usd(Math.round(OFFER.monthlyCents / OFFER.practicesPerMonth)),
+    JERSEY_SHORT: shortPT(new Date(OFFER.jerseyCutoffAt)),
     LOCK_IN: formatDatePT(lockIn),
-    LOCK_SHORT: new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(lockIn),
+    LOCK_SHORT: shortPT(lockIn),
     AGE_MIN: String(OFFER.ageCopyMin),
     AGE_MAX: String(OFFER.ageCopyMax),
     SIB_PCT: String(sibPct),

@@ -100,26 +100,25 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="px">
 <!--share--><div class="share notch">
 <h2 class="d" style="font-size:34px">Share with a friend<br>and save!</h2>
-<p style="font-size:14px;margin-top:12px;line-height:1.45">Every friend who joins with {{KID1}}'s link gets a free month, and so does {{KID1}}.</p>
-<div class="rows"><div><span>1 friend joins</span><b>Your season: $420</b></div><div><span>2 friends</span><b>$260</b></div><div><span>3 friends</span><b>$100</b></div><div><span>4 friends</span><b>Free. We refund your $100.</b></div></div>
-<p style="font-size:13px;margin-top:16px;line-height:1.4">Your link: <b>{{LINK_SHORT}}</b><br>Your code: <b>{{CODE_DISPLAY}}</b></p>
-<p style="font-size:12px;margin-top:8px;line-height:1.45;color:rgba(255,255,255,.9)">Anyone with this link sees {{KID1}}'s first name. Share it with families you know.</p>
-<button class="btn black" style="margin-top:12px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
-<p style="font-size:11px;margin-top:12px;color:rgba(255,255,255,.85);line-height:1.45">Per family. Credits apply at lock-in. We put friends on the same team wherever age and skill allow.</p></div>
+<p style="font-size:14px;margin-top:12px;line-height:1.45">Every friend who joins with {{KID1}}'s link gets a free month. So does {{KID1}}.</p>
+<div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
+<button class="btn black" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
+<p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p>
+<p style="font-size:12px;margin-top:4px;line-height:1.45;text-align:center;color:#fff">Anyone with this link sees {{KID1}}'s first name.</p></div>
 <!--/share-->{{NO_SHARE}}<div class="offer notch" style="margin-top:28px">
 <p class="ey">Your receipt</p>
 <div style="margin-top:12px">{{RECEIPT_LINES}}
 <div class="line" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Paid today</span><span>{{TOTAL}}</span></div></div>
-<p class="small" style="margin-top:12px;color:rgba(0,0,0,.75)">Then {{MONTHLY}} a month per kid ({{SIB_MONTHLY}} per sibling) from Feb 15, less friend credits. You'll confirm how you pay at lock-in.</p>
-<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Fully refundable until {{LOCK_IN}}.</p>
+<p class="small" style="margin-top:12px;color:rgba(0,0,0,.75)">{{THEN_LINE}}</p>
 {{CREDIT_NOTE}}
-<p class="small" style="margin-top:8px">Order reference: <b style="color:var(--black)">{{ORDER_REF}}</b></p></div>
+<p class="small" style="margin-top:8px">Order {{ORDER_REF}}</p></div>
 <div class="sec" style="padding-top:32px"><h2 class="d" style="font-size:22px">What happens next</h2>
 <div style="margin-top:12px;font-size:14px;display:grid;gap:8px;color:rgba(0,0,0,.8)">
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Early Dec</b><span>Gamer profile, jersey, gear check</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Dec</b><span>Scheduling, team, and meet the coach</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0" class="red">{{LOCK_SHORT}}</b><span>Lock-in. Your spot becomes final.</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div></div></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Nov</b><span>Gamer profile, jersey and gear check</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Dec</b><span>Meet the team and coach</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0" class="red">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May</b><span>Final tournament</span></div></div></div>
 <div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
 <label class="l" style="margin-top:12px">Games they play now</label>
 <div class="chips"><button>Fortnite</button><button>Roblox</button><button>Minecraft</button><button>League of Legends</button><button>Rocket League</button><button>Other</button></div>

@@ -16,6 +16,8 @@ export const OFFER = {
   seasonCents: 58000,
   siblingSeasonCents: 46400,
   friendCreditCents: 16000,
+  /** Two 90-minute practices a week, about 8 a month. Copy only: "about $20 a practice". */
+  practicesPerMonth: 8,
   maxKidsPerOrder: 4,
   ageMin: 9,
   ageMax: 18,
