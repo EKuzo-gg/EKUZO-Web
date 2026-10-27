@@ -5,6 +5,23 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 funnel QA + one look across all four screens)
+
+QA run: 14 screen states (season page open / after jersey cutoff / closed; signup open / invite / closed;
+welcome paid / siblings / no code yet / pending / stalled / generic; invite named / unnamed + inactive) at
+360, 390, 768, 1024, 1440 and 2560px, plus axe-core (WCAG 2 A/AA + best practice) at 390 and 1440.
+Result after fixes: 0 sideways scroll, 0 leftover tokens, 0 broken local images, 0 clipped or off-screen
+controls, 0 axe violations.
+
+- Fixed on the season page: struck $160 and the grey "On your own" bar failed contrast; coach role lines
+  now a darker red (#c8141c) that passes; sticky bar is an `<aside>` landmark.
+- `crew/[code]/crew.html` rebuilt on the season page's design (violet hero with characters, black stats,
+  "Games are better with friends", coaches + safe by design, FAQ, sticky bar). Invite copy and GA events
+  kept; route adds `PER_PRACTICE`.
+- `welcome.html`: violet hero with brush, outline chip, black share card with neon green share button,
+  44px back arrow, `<main>` landmark, test bar labelled. Route untouched.
+
+---
 ## Aaron (via Claude), October 27, 2026 (ages 9 to 17 everywhere)
 
 Decision (Aaron): one age range on every page and email, **9 to 17**.

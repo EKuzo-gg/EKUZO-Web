@@ -124,15 +124,31 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
  .wright .offer{margin-top:0!important;padding:28px}
  .wbody>.btn,.wbody>.body{max-width:560px}
 }
+/* S1-FLOW: welcome matches the season page and signup (violet hero, black share card, neon green buttons) */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Black.otf") format("opentype");font-weight:900;font-display:swap}
+:root{--violet:#AE2CF2;--lime:#E0FF4F;--black:#000}
+.whero{background:var(--violet);position:relative;overflow:hidden;isolation:isolate}
+.whero:before{content:"";position:absolute;z-index:-1;inset:0;background:url("/images/season1/s1-brush.webp") center 40%/min(1500px,190vw) auto no-repeat;opacity:.1;filter:brightness(0);pointer-events:none}
+.whero .d{font-weight:900}
+.wback{color:#fff;text-decoration:none;font-size:24px;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-left:-12px}
+.wchip{display:inline-block;color:#fff;box-shadow:inset 0 0 0 2px #fff;font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;transform:skewX(-12deg)}
+.wchip span{display:inline-block;transform:skewX(12deg)}
+.share{background:var(--black)}
+.share .d{color:var(--lime)}
+.btn{background:var(--lime);color:var(--black);box-shadow:inset 0 0 0 2px var(--black)}
+.share .btn{box-shadow:none}
+.btn.black{background:var(--black);color:#fff;box-shadow:none}
+.offer .small{color:rgba(0,0,0,.7)!important}
+.wbody>.small a,.wbody .small a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 </head>
 <body>
-<div class="pv"{{TEST_HIDDEN}}>Test mode. No real charges.</div>
-<div class="app">
+<div class="pv" role="region" aria-label="Test mode"{{TEST_HIDDEN}}>Test mode. No real charges.</div>
+<main class="app">
 <!--paid-->
 <div class="whero"><div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
-<p class="ey red" style="margin-top:32px">Season 01 spot saved</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><a class="wback" href="/season1/join" aria-label="Back to Season 01">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
+<p class="wchip" style="margin-top:32px"><span>Season 01 spot saved</span></p>
 <h1 class="d h1" style="margin-top:8px">{{HERO}}</h1>
 <p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">Your receipt is on its way to your inbox.</p></div></div>
 <div class="px wbody">
@@ -141,7 +157,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <h2 class="d" style="font-size:34px">Share with a friend<br>and save!</h2>
 <p style="font-size:14px;margin-top:12px;line-height:1.45">Every friend who joins with {{KID1}}'s link gets a free month. So does {{KID1}}.</p>
 <div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
-<button class="btn black" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
+<button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
 <p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p>
 <p style="font-size:12px;margin-top:4px;line-height:1.45;text-align:center;color:#fff">Anyone with this link sees {{KID1}}'s first name.</p></div>
 <!--/share-->{{NO_SHARE}}</div><div class="wright">
@@ -156,7 +172,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <div style="margin-top:12px;font-size:14px;display:grid;gap:8px;color:rgba(0,0,0,.8)">
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Nov</b><span>Gamer profile, jersey and gear check</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Dec</b><span>Meet the team and coach</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0" class="red">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May</b><span>Final tournament</span></div></div></div>
 </div></div>
@@ -196,8 +212,8 @@ if(b)b.onclick=function(){
 <!--/paid-->
 <!--pending-->
 <div class="whero"><div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
-<p class="ey red" style="margin-top:32px">Season 01</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><a class="wback" href="/season1/join" aria-label="Back to Season 01">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
+<p class="wchip" style="margin-top:32px"><span>Season 01</span></p>
 <h1 class="d" style="font-size:40px;margin-top:8px">We're confirming your payment</h1>
 <p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">This page refreshes in a few seconds.</p></div></div>
 <div class="px wbody">
@@ -206,8 +222,8 @@ if(b)b.onclick=function(){
 <!--/pending-->
 <!--stalled-->
 <div class="whero"><div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
-<p class="ey red" style="margin-top:32px">Season 01</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><a class="wback" href="/season1/join" aria-label="Back to Season 01">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
+<p class="wchip" style="margin-top:32px"><span>Season 01</span></p>
 <h1 class="d" style="font-size:40px;margin-top:8px">Your payment went through</h1></div></div>
 <div class="px wbody">
 <p class="body" style="margin-top:24px">Your link is on its way. Text our founder.</p>
@@ -215,14 +231,14 @@ if(b)b.onclick=function(){
 <!--/stalled-->
 <!--generic-->
 <div class="whero"><div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
-<p class="ey red" style="margin-top:32px">Season 01</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><a class="wback" href="/season1/join" aria-label="Back to Season 01">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
+<p class="wchip" style="margin-top:32px"><span>Season 01</span></p>
 <h1 class="d" style="font-size:48px;margin-top:8px">Your spot is saved</h1></div></div>
 <div class="px wbody">
 <p class="body" style="margin-top:24px">Questions about your spot, your receipt or your invite link? Text our founder and we'll sort it out.</p>
 <a class="btn black" style="margin-top:16px" href="{{SMS}}">Text our founder</a>
 <p class="small" style="text-align:center;margin:28px 0 40px"><a href="/season1/join">Back to Season 01</a></p></div>
 <!--/generic-->
-</div>
+</main>
 </body>
 </html>

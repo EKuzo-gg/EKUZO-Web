@@ -63,6 +63,7 @@ function renderHtml(
     AGE_MAX: String(OFFER.ageCopyMax),
     SIB_PCT: String(sibPct),
     SMS: OFFER.textKarlinSms,
+    PER_PRACTICE: usd(Math.round(OFFER.monthlyCents / OFFER.practicesPerMonth)),
   };
   return out.replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => (k in vars ? vars[k] : m));
 }
