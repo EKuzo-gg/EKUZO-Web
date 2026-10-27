@@ -35,7 +35,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 
 
 /* Hero */
-.hero{position:relative;background:var(--violet);color:#fff;overflow-x:clip;padding-bottom:40px}
+.hero{position:relative;background:var(--violet);color:#fff;overflow-x:clip}
 .nav{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav .logo{display:inline-flex;align-items:center;min-height:44px}
 .nav .logo img{height:20px;width:auto}
@@ -63,8 +63,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .offer .btn{margin-top:20px;min-height:64px;font-size:19px;box-shadow:inset 0 0 0 2px var(--black)}
 .endcta,.stick .btn{box-shadow:inset 0 0 0 2px var(--black)}
 .urgent{margin-top:12px;font-size:13px;font-weight:700;text-align:center;color:rgba(0,0,0,.7)}
-.chars{position:relative;z-index:3;display:flex;justify-content:center;margin-top:28px;pointer-events:none}
-.chars .left{height:340px;width:auto;margin-bottom:-48px}
+.chars{position:relative;z-index:0;display:flex;justify-content:center;margin-top:24px;pointer-events:none}
+/* Phones: big art, cut at the waist by the black band's torn edge (the band sits above at z 1).
+   Waist is ~52% down the image, so 48% of it hangs behind the band. */
+.chars .left{height:620px;width:auto;max-width:none;margin-bottom:-298px;flex-shrink:0}
 .chars .right{display:none}
 
 /* Paper seams (docs/learning-log.md one-sided "top" dividers): the band's own torn top edge
@@ -153,9 +155,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 @media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.coaches{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1000px){
  .nav{height:80px}.nav .logo img{height:24px}
- .hero{min-height:760px}
+ .hero{min-height:760px;padding-bottom:40px}
  .hero-in{padding-block:28px 150px;max-width:860px}
  .chars{position:absolute;inset:0;margin:0;display:block;z-index:3}
+ .chars .left{max-width:none;flex-shrink:initial}
  .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(420px,38vw,580px);width:auto;margin:0}
  .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:40px;height:clamp(340px,30vw,470px);width:auto}
  .sticker{position:absolute;margin:0;right:-60px;top:-34px;transform:rotate(3deg);flex-wrap:nowrap;white-space:nowrap;max-width:none}

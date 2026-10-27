@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (phone hero art)
+
+- `join.html`: under 1000px the kid + characters art is 620px tall and sits behind the black band
+  (z 0 under z 1), so the torn edge crops it at the waist. Desktop layout unchanged.
+
+---
 ## Aaron (via Claude), October 27, 2026 (hero eyebrow)
 
 - `join.html`: the "Season 01" eyebrow is a white outline on the purple (no red fill).
