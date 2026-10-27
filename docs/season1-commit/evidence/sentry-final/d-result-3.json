@@ -1,0 +1,151 @@
+{
+ "started": "2026-10-27T05:00:36.818Z",
+ "calls": [
+  {
+   "name": "ratelimit-1",
+   "at": "2026-10-27T05:10:21.349Z",
+   "status": 200,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "7kd8r7em63",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-drl1-80docx@ekuzo.gg",
+   "pi": "pi_3UV2ePKORcR8BUEx0mK7uOa9",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "7kd8r7em63",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  },
+  {
+   "name": "ratelimit-2",
+   "at": "2026-10-27T05:10:22.561Z",
+   "status": 200,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "mn6kyj9r4n",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-drl2-jga94m@ekuzo.gg",
+   "pi": "pi_3UV2eRKORcR8BUEx0CQS5kz3",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "mn6kyj9r4n",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  },
+  {
+   "name": "ratelimit-3",
+   "at": "2026-10-27T05:10:23.416Z",
+   "status": 200,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "6zm2x8m7fj",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-drl3-s1f16p@ekuzo.gg",
+   "pi": "pi_3UV2eRKORcR8BUEx0DkXUG2Z",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "6zm2x8m7fj",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  },
+  {
+   "name": "ratelimit-4",
+   "at": "2026-10-27T05:10:24.264Z",
+   "status": 200,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "k5bwrpqggv",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-drl4-kpm120@ekuzo.gg",
+   "pi": "pi_3UV2eSKORcR8BUEx1z3IDbon",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "k5bwrpqggv",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  },
+  {
+   "name": "ratelimit-5",
+   "at": "2026-10-27T05:10:25.233Z",
+   "status": 200,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "aqwffy9pjb",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-drl5-88ter2@ekuzo.gg",
+   "pi": "pi_3UV2eTKORcR8BUEx0zjox2C2",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "aqwffy9pjb",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  },
+  {
+   "name": "ratelimit-6",
+   "at": "2026-10-27T05:10:25.612Z",
+   "status": 429,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "error": "rate_limited"
+   },
+   "email": "team+s1test-final-drl6-73gbbo@ekuzo.gg"
+  }
+ ],
+ "canceled": [
+  "pi_3UV2ePKORcR8BUEx0mK7uOa9",
+  "pi_3UV2eRKORcR8BUEx0CQS5kz3",
+  "pi_3UV2eRKORcR8BUEx0DkXUG2Z",
+  "pi_3UV2eSKORcR8BUEx1z3IDbon",
+  "pi_3UV2eTKORcR8BUEx0zjox2C2"
+ ],
+ "created": [
+  "pi_3UV2ePKORcR8BUEx0mK7uOa9",
+  "pi_3UV2eRKORcR8BUEx0CQS5kz3",
+  "pi_3UV2eRKORcR8BUEx0DkXUG2Z",
+  "pi_3UV2eSKORcR8BUEx1z3IDbon",
+  "pi_3UV2eTKORcR8BUEx0zjox2C2"
+ ],
+ "finished": "2026-10-27T05:10:25.614Z"
+}

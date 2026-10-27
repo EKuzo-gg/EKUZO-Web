@@ -1,0 +1,88 @@
+{
+ "started": "2026-10-27T04:50:29.199Z",
+ "calls": [
+  {
+   "name": "age19",
+   "at": "2026-10-27T05:00:24.041Z",
+   "status": 422,
+   "bodyLen": 219,
+   "ct": "application/json",
+   "resp": {
+    "field": "kids.0.age",
+    "error": "age_outside"
+   },
+   "email": "team+s1test-final-dage19-eonv03@ekuzo.gg",
+   "orders": 0
+  },
+  {
+   "name": "age8",
+   "at": "2026-10-27T05:00:24.339Z",
+   "status": 422,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "field": "kids.0.age",
+    "error": "age_outside"
+   },
+   "email": "team+s1test-final-dage8-vl8qmp@ekuzo.gg",
+   "orders": 0
+  },
+  {
+   "name": "age-outside",
+   "at": "2026-10-27T05:00:28.664Z",
+   "status": 422,
+   "bodyLen": 232,
+   "ct": "application/json",
+   "resp": {
+    "field": "kids.0.age",
+    "error": "age_outside"
+   },
+   "email": "team+s1test-final-dage-outside-aegiwp@ekuzo.gg",
+   "orders": 0
+  },
+  {
+   "name": "expectedCents-1",
+   "at": "2026-10-27T05:00:29.203Z",
+   "status": 409,
+   "bodyLen": 216,
+   "ct": "application/json",
+   "resp": {
+    "error": "price_changed",
+    "amountCents": 10000
+   },
+   "email": "team+s1test-final-dtamper-pwakdg@ekuzo.gg",
+   "orders": 0
+  },
+  {
+   "name": "amount-injected",
+   "at": "2026-10-27T05:00:30.127Z",
+   "status": 200,
+   "bodyLen": 289,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "wb2fq6u56m",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-dinject-7y87ce@ekuzo.gg",
+   "pi": "pi_3UV2UsKORcR8BUEx1MmnNBUS",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "wb2fq6u56m",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  }
+ ],
+ "canceled": [
+  "pi_3UV2UsKORcR8BUEx1MmnNBUS"
+ ],
+ "created": [
+  "pi_3UV2UsKORcR8BUEx1MmnNBUS"
+ ],
+ "finished": "2026-10-27T05:00:30.638Z"
+}

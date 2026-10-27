@@ -1,0 +1,83 @@
+{
+ "started": "2026-10-27T05:10:37.710Z",
+ "calls": [
+  {
+   "name": "xss-parentname",
+   "at": "2026-10-27T05:20:25.559Z",
+   "status": 422,
+   "bodyLen": 236,
+   "ct": "application/json",
+   "resp": {
+    "field": "parentFirstName",
+    "error": "invalid"
+   },
+   "email": "team+s1test-final-dpxss-hm4kr8@ekuzo.gg"
+  },
+  {
+   "name": "consent-false",
+   "at": "2026-10-27T05:20:26.036Z",
+   "status": 422,
+   "bodyLen": 217,
+   "ct": "application/json",
+   "resp": {
+    "field": "consent",
+    "error": "required"
+   },
+   "email": "team+s1test-final-dcf-jgkx52@ekuzo.gg"
+  },
+  {
+   "name": "honeypot",
+   "at": "2026-10-27T05:20:26.237Z",
+   "status": 422,
+   "bodyLen": 220,
+   "ct": "application/json",
+   "resp": {
+    "error": "invalid"
+   },
+   "email": "team+s1test-final-dhp-xsmy76@ekuzo.gg"
+  },
+  {
+   "name": "src-invalid",
+   "at": "2026-10-27T05:20:26.321Z",
+   "status": 422,
+   "bodyLen": 238,
+   "ct": "application/json",
+   "resp": {
+    "field": "src",
+    "error": "invalid"
+   },
+   "email": "team+s1test-final-dsrc-a08em0@ekuzo.gg"
+  },
+  {
+   "name": "spoof-ip-header",
+   "at": "2026-10-27T05:20:27.134Z",
+   "status": 200,
+   "bodyLen": 219,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "beg2khn3g7",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-dspoof-18ehnj@ekuzo.gg",
+   "pi": "pi_3UV2oBKORcR8BUEx1O5UrgHD",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "beg2khn3g7",
+    "product": "season1"
+   },
+   "canceled": "canceled"
+  }
+ ],
+ "canceled": [
+  "pi_3UV2oBKORcR8BUEx1O5UrgHD"
+ ],
+ "created": [
+  "pi_3UV2oBKORcR8BUEx1O5UrgHD"
+ ],
+ "finished": "2026-10-27T05:20:27.658Z"
+}

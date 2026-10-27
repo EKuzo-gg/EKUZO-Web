@@ -1,0 +1,68 @@
+{
+ "res": [
+  {
+   "start": "/season1/early-access?kid=Charlie",
+   "hops": [
+    [
+     301,
+     "/season1/early-access?kid=Charlie",
+     "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join?kid=Charlie"
+    ]
+   ],
+   "finalUrl": "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join",
+   "status": 200,
+   "renderedTextHasCharlie": false,
+   "servedHtmlHasCharlie": false,
+   "servedHtmlCharlieContexts": []
+  },
+  {
+   "start": "/season1/early-access/signup?from=Charlie",
+   "hops": [
+    [
+     301,
+     "/season1/early-access/signup?from=Charlie",
+     "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join/signup?from=Charlie"
+    ]
+   ],
+   "finalUrl": "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join/signup",
+   "status": 200,
+   "renderedTextHasCharlie": false,
+   "servedHtmlHasCharlie": true,
+   "servedHtmlCharlieContexts": [
+    "e=\"off\" placeholder=\"'+(n==1?'Charlie':'First name')+'\"><"
+   ]
+  },
+  {
+   "start": "/season1/early-access/saved?kid=Charlie",
+   "hops": [
+    [
+     301,
+     "/season1/early-access/saved?kid=Charlie",
+     "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join/welcome?kid=Charlie"
+    ]
+   ],
+   "finalUrl": "https://6ae02ba30f4887f3ebcb95e6--ekuzo.netlify.app/season1/join/welcome?kid=Charlie",
+   "status": 200,
+   "renderedTextHasCharlie": false,
+   "servedHtmlHasCharlie": false,
+   "servedHtmlCharlieContexts": []
+  },
+  {
+   "start": "/season1/crew?from=Charlie",
+   "hops": [
+    [
+     301,
+     "/season1/crew?from=Charlie",
+     "/season1/join?from=Charlie"
+    ]
+   ],
+   "finalUrl": "/season1/join",
+   "status": 200,
+   "renderedTextHasCharlie": false,
+   "servedHtmlHasCharlie": false,
+   "servedHtmlCharlieContexts": []
+  }
+ ],
+ "aborted": 4,
+ "console": []
+}

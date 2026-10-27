@@ -1,7 +1,7 @@
 import { redirectToBare } from "@/lib/season1/redirect";
 
 // /season1/early-access/saved moved to /season1/join/welcome.
-// 301 to the bare new path; the query string (kid names) is dropped. The old
+// Browser-side move to the bare new path (lib/season1/redirect.ts); the query string (kid names) is dropped. The old
 // saved.html stays on disk for reference only. force-dynamic so the Location is
 // built from each request's origin.
 export const dynamic = "force-dynamic";

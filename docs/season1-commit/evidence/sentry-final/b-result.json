@@ -1,0 +1,202 @@
+{
+ "email": "team+s1test-final-jtmiwn@ekuzo.gg",
+ "steps": {
+  "join": {
+   "status": 200,
+   "cc": "private,no-store",
+   "robots": "noindex",
+   "url": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=test&utm_campaign=sentry",
+   "copy": {
+    "open": false,
+    "has522": false,
+    "fourFriend": true,
+    "ages": true,
+    "refundLine": true,
+    "jersey": true
+   },
+   "termsLink": [
+    "Fully refundable until December 31, 2026, and any time we ca"
+   ],
+   "utmKept": true,
+   "metaPixel": false,
+   "ctaHref": "/season1/join/signup"
+  },
+  "signupUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+  "totalsText": [
+   "$160 $100",
+   "$100 $80",
+   "$180",
+   "$160 a month per kid ($128 per sibling) on Feb 15, Mar 15 and Apr 15, less friend credits, or once if I choose to pay up front at lock-in. Fully refundable until December 31, 2026, and any time EKUZO can't place my kid. After lock-in, we're in for the season.",
+   "$180"
+  ],
+  "btn": "Save Lena's spot · $180",
+  "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+  "finalUrlHasQuery": false,
+  "welcomeHops": [
+   "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=<pi>&payment_intent_client_secret=<redacted>&redirect_status=succeeded"
+  ],
+  "welcome": {
+   "text": "Test mode. No real charges.\n‹\nEKUZO\n\nSEASON 01 SPOT SAVED\n\nGREAT,\nLENA AND BEN ARE IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE WITH A FRIEND\nAND SAVE!\n\nEvery friend who joins with Lena's link gets a free month, and so does Lena.\n\n1 friend joins\nYour season: $420\n2 friends\n$260\n3 friends\n$100\n4 friends\nFree. We refund your $100.\n\nYour link: season1-commit--ekuzo.netlify.app/crew/80224864\nYour code: 8022 4864\n\nAnyone with this link sees Lena's first name. Share it with families you know.\n\nShare Lena's link\n\nPer family. Credits apply at lock-in. We put friends on the same team wherever age and skill allow.\n\nYOUR RECEIPT\n\nLena, Season 01, first month\n$100\nBen, Season 01, first month\n$80\nPaid today\n$180\n\nThen $160 a month per kid ($128 per sibling) from Feb 15, less friend credits. You'll confirm how you pay at lock-in.\n\nFully refundable until December 31, 2026.\n\nCame from a friend's link and no credit shows? Text Karlin the friend code.\n\nOrder reference: 5xw8wcx4sq\n\nWHAT HAPPENS NEXT\nEarly Dec\nGamer profile, jersey, gear check\nLate Dec\nScheduling, team, and meet the coach\nDec 31\nLock-in. Your spot becomes final.\nMid Jan\nFirst practice\n\nQuestions? Text Karlin",
+   "hasLena": true,
+   "hasBen": true,
+   "codes": [
+    "8022 4864"
+   ],
+   "money": [
+    "$420",
+    "$260",
+    "$100",
+    "$100.",
+    "$100"
+   ]
+  },
+  "ga1": [
+   [
+    "event",
+    "purchase",
+    {
+     "transaction_id": "5xw8wcx4sq",
+     "value": 180,
+     "currency": "USD",
+     "kids_count": 2,
+     "has_code": true,
+     "page_location": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+    }
+   ]
+  ],
+  "lsKey": [
+   "ekuzo_s1_joined",
+   "s1_purchase_5xw8wcx4sq"
+  ],
+  "paidAt": "2026-10-27T04:45:06.642Z",
+  "publicIdFromPage": "5xw8wcx4sq",
+  "reloadUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+  "ga2": [],
+  "reloadHasNames": true,
+  "cookies": [
+   {
+    "name": "s1_order",
+    "path": "/season1",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+   },
+   {
+    "name": "ekuzo_origin",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+   },
+   {
+    "name": "NID",
+    "path": "/",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+   },
+   {
+    "name": "m",
+    "path": "/",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+   },
+   {
+    "name": "__stripe_mid",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Strict"
+   },
+   {
+    "name": "__stripe_sid",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Strict"
+   },
+   {
+    "name": "__cf_bm",
+    "path": "/",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+   },
+   {
+    "name": "ekuzo_s1_joined",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+   }
+  ]
+ },
+ "urlHistory": [
+  "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=test&utm_campaign=sentry",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=<pi>&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+ ],
+ "aborted": [
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+ ],
+ "abortedLeaks": [],
+ "abortedPurchase": [],
+ "facebookRequests": [],
+ "consoleProblems": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=test&utm_campaign=sentry"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+  }
+ ],
+ "consoleWarnings": [
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "[Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: \n\n- apple_pay\n\nPlease follo",
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "Origin trial controlled feature not enabled: 'tools'."
+ ]
+}

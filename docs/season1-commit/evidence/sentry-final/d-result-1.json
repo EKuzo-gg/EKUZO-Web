@@ -1,0 +1,86 @@
+{
+ "started": "2026-10-27T04:48:27.879Z",
+ "calls": [
+  {
+   "name": "xss-kidname",
+   "at": "2026-10-27T04:50:20.577Z",
+   "status": 422,
+   "bodyLen": 242,
+   "ct": "application/json",
+   "resp": {
+    "field": "kids.0.firstName",
+    "error": "invalid"
+   },
+   "email": "team+s1test-final-dxss-4t2hqb@ekuzo.gg",
+   "orders": 0
+  },
+  {
+   "name": "apostrophe-accent",
+   "at": "2026-10-27T04:50:21.643Z",
+   "status": 200,
+   "bodyLen": 225,
+   "ct": "application/json",
+   "resp": {
+    "clientSecret": "<present>",
+    "orderId": "ejjrgpzv3p",
+    "amountCents": 10000,
+    "invite": "none",
+    "inviteReason": "no_invite"
+   },
+   "email": "team+s1test-final-dapos-1rfbyk@ekuzo.gg",
+   "pi": "pi_3UV2L4KORcR8BUEx06kWYNPS",
+   "piAmount": 10000,
+   "piMeta": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "ejjrgpzv3p",
+    "product": "season1"
+   },
+   "canceled": "canceled",
+   "storedKidNames": [
+    "Zoë O'Néil"
+   ]
+  },
+  {
+   "name": "huge-body-200KB",
+   "at": "2026-10-27T04:50:22.355Z",
+   "status": 422,
+   "bodyLen": 205027,
+   "ct": "application/json",
+   "resp": {
+    "error": "invalid"
+   }
+  },
+  {
+   "name": "malformed-json",
+   "at": "2026-10-27T04:50:22.554Z",
+   "status": 422,
+   "bodyLen": 29,
+   "ct": "application/json",
+   "resp": {
+    "field": "body",
+    "error": "invalid"
+   }
+  },
+  {
+   "name": "five-kids",
+   "at": "2026-10-27T04:50:22.645Z",
+   "status": 422,
+   "bodyLen": 334,
+   "ct": "application/json",
+   "resp": {
+    "field": "kids",
+    "error": "too_many_kids"
+   },
+   "email": "team+s1test-final-dfive-imvrvj@ekuzo.gg",
+   "orders": 0
+  }
+ ],
+ "canceled": [
+  "pi_3UV2L4KORcR8BUEx06kWYNPS"
+ ],
+ "created": [
+  "pi_3UV2L4KORcR8BUEx06kWYNPS"
+ ],
+ "finished": "2026-10-27T04:50:22.673Z"
+}

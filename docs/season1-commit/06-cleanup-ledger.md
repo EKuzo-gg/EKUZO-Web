@@ -67,6 +67,7 @@ Klaviyo calls should have failed on the empty email. Six succeeded PIs (run 1 ha
 | pi_3UV1zrKORcR8BUEx1RLqrahQ | 2026-10-26 ~23:28 | $100.00 (refunded re_3UV1zrKORcR8BUEx1aLh0mEe) | Relay C (1) friend order |
 | pi_3UV1u1KORcR8BUEx09uSBhMT | created 23:22:25, succeeded 23:22:33 CT (2026-10-27 04:22 UTC) | $100.00 | Sentry slice 1 branch-deploy browser run (one payment; email team+s1test-sentry-8rjois@ekuzo.gg) |
 | pi_3UV25wKORcR8BUEx1og8AU4g | 2026-10-26 23:34:44 CT (04:34:44 UTC), succeeded within 3 s | $100.00 | Sentry slice 2 browser run J4 (friend joins via /crew/75701491; email team+s1test-sentry2-6k62x4@ekuzo.gg; order 4q9zg77d8j; friend code issued 95929969) |
+| pi_3UV2FwKORcR8BUEx0QgzS9vS | 2026-10-26 23:45:04 CT (04:45:04 UTC), succeeded within 3 s | $180.00 (partially refunded $80.00, re_3UV2FwKORcR8BUEx0TUUqKjS, metadata s1_kid_id) | Sentry final run journey B and C (2 kids Lena and Ben; email team+s1test-final-jtmiwn@ekuzo.gg; order 5xw8wcx4sq; family code 80224864; cus_VW4Ome4vc9CQzT) |
 
 Sentry also left two pending PaymentIntents (pi_3UV1tQKORcR8BUEx11S9qhAS decline test, pi_3UV1x8KORcR8BUEx1QE259xP failed 3DS), both canceled via the API. Neon test rows for team+s1test-sentry-* emails remain (test branch).
 
@@ -107,3 +108,20 @@ events for emails `team+s1test-sentry2-*@ekuzo.gg` (`-zyj2zj` has no order: the 
 | payment_intent | pi_3UV27zKORcR8BUEx0KDrDDyy | canceled | J13 own code (inviter email, sibling Ana 13, $80), pending order du6d9vemk9 on the inviter family |
 
 Remove-flow pending order mk2e4b7nyb (referral_code null) stays pending on the test branch. J9a created no PI and no order.
+
+## Sentry final run (Stripe test mode + Neon test, branch deploy), 2026-10-26 CT
+
+One succeeded PI (pi_3UV2FwKORcR8BUEx0QgzS9vS, listed above under Legacy dev endpoint side effects, so the unguarded dev handler may
+have run it as camps with an empty parent email; nine succeeded PIs in total). Neon rows: emails `team+s1test-final-*@ekuzo.gg`
+(order 5xw8wcx4sq paid then partially_refunded, Ben kid refunded, family code 80224864, outbox rows `klaviyo_committed`,
+`meta_purchase`, `discord_commit`, `klaviyo_refunded`, events, rate-limit keys `s1pi:*`) plus pending/canceled orders from the adversarial
+calls (`-dapos-`, `-dinject-`, `-drl1..5-`, `-dspoof-` emails). Klaviyo test profile exists for team+s1test-final-jtmiwn@ekuzo.gg
+(season1_* properties). Meta test events carry the test code.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| refund | re_3UV2FwKORcR8BUEx0TUUqKjS | succeeded $80.00 | journey C, Ben, via `npm run s1:refund --apply` |
+| payment_intent | pi_3UV2L4KORcR8BUEx06kWYNPS | canceled | D apostrophe and accent kid name (order ejjrgpzv3p) |
+| payment_intent | pi_3UV2UsKORcR8BUEx1MmnNBUS | canceled | D injected amount fields ignored (order wb2fq6u56m) |
+| payment_intent | pi_3UV2ePKORcR8BUEx0mK7uOa9, pi_3UV2eRKORcR8BUEx0CQS5kz3, pi_3UV2eRKORcR8BUEx0DkXUG2Z, pi_3UV2eSKORcR8BUEx1z3IDbon, pi_3UV2eTKORcR8BUEx0zjox2C2 | canceled | D rate limit calls 1 to 5 (6th returned 429, no PI) |
+| payment_intent | pi_3UV2oBKORcR8BUEx1O5UrgHD | canceled | D spoofed IP header call (order beg2khn3g7) |
