@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (signup on purple)
+
+- `signup.html` (block `S1-PURPLE`): violet ground with the season page's brush texture, white logo and
+  back link, form on a white notched card (phones get a 12px purple margin). Primary button neon green
+  with black text like the season page; secondary buttons black. Eyebrow text violet. JS untouched.
+
+---
 ## Aaron (via Claude), October 27, 2026 (phone hero art)
 
 - `join.html`: under 1000px the kid + characters art is 620px tall and sits behind the black band
