@@ -15,7 +15,7 @@ Branch deploy: https://season1-commit--ekuzo.netlify.app
 - Slice 5 ran in full: security review, adversarial pass, accessibility and performance pass, a fresh
   Parent review on the deploy, and a regression run after the fixes. Evidence ledger: 125 rows, 82 pass,
   34 partial (each names its gap), 0 fail.
-- Open: 1 critical (the terms page says Draft until you approve it, by design) and a short list of
+- Open: the terms critical is closed (approved and installed 2026-10-27). A short list of
   decisions and live-only checks below. No open defect touches how money is charged or recorded.
 - Ops tooling exists for Karlin and you: refund by kid, attach a friend code by hand, partner codes,
   void or rotate a family link, find a family, sweep stale orders (`ops-runbook.md`).
@@ -24,7 +24,7 @@ Branch deploy: https://season1-commit--ekuzo.netlify.app
 
 Full table: `03-decision-log.md`. The ones you are most likely to want to change:
 
-1. **Refund and jersey story (PR-2, PR-3).** Pages say "fully refundable until lock-in"; the draft terms
+1. **Refund and jersey story (PR-2, PR-3). SETTLED 2026-10-27, see Tuesday below.** Pages say "fully refundable until lock-in"; the draft terms
    add "$65 back if the jersey has shipped" and the jersey line says "first 100 families" while the terms
    say "commit before Nov 30". Built: the pages as Aaron wrote them, the README rule in the draft terms.
    Recommendation: drop the $65 rule until jerseys actually ship and keep one jersey rule. Team summary item 2.
@@ -83,9 +83,10 @@ Each test payment also reaches the old test webhook on the `dev` deploy (see "Li
 ## Live-only checks and human actions (in launch order)
 
 Tuesday
-- Approve or edit the Season 01 terms and privacy insert (KB outbox W3, also live on `/season1/terms` as
-  Draft); then set the final `termsVersion` in `lib/season1/offer.ts`.
-- Decide the refund-and-jersey story (item 1 above).
+- Done 2026-10-27 (commit 3746904): terms and privacy approved and installed in the site-wide pages
+  (`/terms-of-service#season-01`, `/privacy-policy#season-01`), `termsVersion` `s1-terms-2026-10-27`,
+  `/season1/terms` moves there. Refund-and-jersey story settled (no $65 rule; first 100 by Nov 30).
+  Text: `09-terms-install.md`. Season dates are placeholders until Karlin confirms.
 - Old test webhook `we_1TMYx4…` on `dev--ekuzo.netlify.app/api/webhooks/stripe` runs without the guard
   until this branch merges: 11 succeeded test payments reached it overnight and may have written
   empty-email rows to the dev Sheet and Meta `TEST_AUTO` events. Check the Sheet; consider pausing that
