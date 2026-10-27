@@ -26,10 +26,10 @@ a{color:inherit}
 .pv{background:#fff6b6;color:#7a5a00;font:600 12px/1.4 var(--body);text-align:center;padding:6px 12px}
 .nav{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.1);background:var(--white)}
 .nav.dark{background:var(--black);border:0}
-.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none}
-.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:40px}
+.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:44px;min-height:44px;display:inline-flex;align-items:center}
 .nav.dark .back,.nav.dark .wm{color:var(--white)}
-.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none}
+.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none;border:solid transparent;border-width:7px 0;background-clip:padding-box}
 .d{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;line-height:.95;font-weight:700;margin:0;text-wrap:balance}
 .ey{font:700 11px/1.4 var(--body);text-transform:uppercase;letter-spacing:.15em;margin:0}
 .red{color:var(--red)}
@@ -86,14 +86,16 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .step{display:flex;gap:16px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--black);color:#fff;padding:10px 16px;border-radius:2px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
+.tk{display:inline-flex;align-items:center;min-height:44px;padding:0 6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;font-size:12px}
 .chips button{font:12px var(--body);padding:6px 12px;border:1px solid rgba(0,0,0,.3);background:#fff;border-radius:2px;cursor:pointer}
 .chips button.on{background:var(--black);color:#fff;border-color:var(--black)}
 </style>
 </head>
 <body>
-<!--IF:test--><div class="pv">Test mode. No real charges.</div><!--/IF:test-->
-<div class="app"><div class="nav"><span style="min-width:40px"></span><a class="wm" href="/">EKUZO</a><a class="mini join" href="/season1/join/signup">Join the team</a></div>
+<!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
+<div class="app"><header class="nav"><span style="min-width:44px"></span><a class="wm" href="/">EKUZO</a><a class="mini join" href="/season1/join/signup">Join the team</a></header>
+<main>
 <div style="background:var(--red);color:#fff;padding:28px 20px 32px">
 <!--IF:named-->
 <p class="ey">An invite from {{NAME}}&rsquo;s family</p>
@@ -143,9 +145,9 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 </div>
 <div class="sec"><p class="ey red">Who coaches</p>
 <h2 class="d" style="font-size:28px;margin-top:8px">Top college players,<br>trained to coach kids.</h2><div class="coaches">
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
-<div><img src="/images/coach-karlin-faith.jpg" alt="Karlin, founder"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></div></div>
+<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien" width="140" height="110" loading="lazy" decoding="async"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
+<div><img src="/images/authors/coach-karlin-faith-1400.jpg" alt="Karlin, founder" width="140" height="110" loading="lazy" decoding="async"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
+<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></div></div>
 <div class="safe"><p class="ey red">Safe by design</p><h2 class="d" style="font-size:28px;margin-top:8px">No toxic lobbies. Ever.</h2><ul><li>Private, coach-moderated games. No random strangers.</li><li>Every coach is background-checked.</li><li>A private team, the same kids every week.</li><li>Sessions are coach-led and recorded.</li><li>Parents can drop in on any session.</li></ul></div>
 <div class="px" style="padding-top:32px;padding-bottom:40px">
 <h2 class="d" style="font-size:28px">Short answers</h2>
@@ -155,7 +157,8 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="qa"><b>Who is it for?</b>Kids ages {{AGE_MIN}} to {{AGE_MAX}}, any skill level. Outside that range? <a href="sms:{{SMS}}">Text Karlin</a>.</div>
 <div class="qa"><b>What do they need?</b>A computer that runs League (it's free), a headset with a mic, and solid internet. We help with setup in early December.</div>
 <a class="btn join" style="margin-top:28px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a>
-<p class="small" style="text-align:center;margin-top:12px">Questions first? <a href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder. A real human answers.</p></div>
+<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder. A real human answers.</p></div>
+</main>
 <script>
 (function(){
 function ev(n){try{gtag('event',n);}catch(e){}}

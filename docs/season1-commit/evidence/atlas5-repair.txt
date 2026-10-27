@@ -1,0 +1,69 @@
+Atlas phase 5 repair, a11y/perf defects A11Y-01,02,04,05,06,07 (A11Y-03 deferred)
+Files: app/season1/join/join.html, app/season1/join/signup/signup.html, app/crew/[code]/crew.html. No route.ts, public/, app/api or lib/season1 changes.
+
+== Transfer, join, local, 375px, analytics+Stripe blocked, after full scroll (lazy images loaded) ==
+BEFORE:
+/season1/join TOTAL KB 10641.8
+   10462.8 KB http://localhost:3101/images/coach-karlin-faith.jpg
+   76.8 KB https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg
+   47.9 KB https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2
+   21.7 KB https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2
+/crew/75701491 TOTAL KB 10718.5
+   10462.8 KB http://localhost:3101/images/coach-karlin-faith.jpg
+   86.5 KB https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg
+   76.8 KB https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg
+   47.9 KB https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2
+   21.7 KB https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2
+
+AFTER:
+/season1/join TOTAL KB 334.7
+   155.3 KB http://localhost:3101/images/authors/coach-karlin-faith-1400.jpg
+   76.8 KB https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg
+   47.9 KB https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2
+   21.7 KB https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2
+/crew/75701491 TOTAL KB 411.4
+   155.3 KB http://localhost:3101/images/authors/coach-karlin-faith-1400.jpg
+   86.5 KB https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg
+   76.8 KB https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg
+   47.9 KB https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2
+   21.7 KB https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2
+
+join: 10,641.8 KB -> 334.7 KB (-97%); crew: 10,718.5 KB -> 411.4 KB. Largest asset now coach-karlin-faith-1400.jpg 155 KB (lazy, below fold). Only the 1400 version exists; a ~220 px crop (~15 KB) would need a new public/ file.
+
+== Signup Playwright check (Stripe loaded) ==
+stripe script {"defer":true,"inHead":false,"headStripe":0}
+Payment Element iframe mounted in 886 ms
+window.Stripe function
+e-pay text: ""
+due 1 kid: Due today$100 | button: Save their spot · $100
+due 2 kids: Due today$180 | button: Save Charlie's spot · $180
+aria: nm0 e-nm0 | ag1 e-ag1 | terms e-terms
+terms box 24x24
+formErr: "Add your kid's first name. 3 more to fix below." | liveErr: ""
+invalid: nm0,pname,email,terms | focus: nm0
+commit POSTs: 0 | page errors: none
+join landmarks: {
+  main: 1,
+  header: 1,
+  coachImg: [
+    '6631f635-80a7-47c1-a8f7-4bf85ac0 lazy',
+    'coach-karlin-faith-1400.jpg lazy',
+    '358042d2-6aa8-44e9-81ad-ea9c72c2 lazy'
+  ]
+}
+Stripe blocked fallback: The payment form did not load. Reload the page or text Karlin.
+
+== axe + tap targets after (localhost) ==
+/season1/join@375 color-contrast[serious](7)
+   tap<44: a#. "Text Karlin" 69x17 (inline)
+/season1/join/signup@375 color-contrast[serious](7)
+   tap<44: input#terms. "" 24x24 | a#. "Season 01 terms" 94x15 (inline)
+/crew/75701491@375 color-contrast[serious](13)
+   tap<44: a#. "Fully refundable until D" 330x30 (inline) | a#. "Fully refundable until D" 257x32 (inline) | a#. "Text Karlin" 69x17 (inline)
+/season1/join@1440 color-contrast[serious](7)
+/season1/join/signup@1440 color-contrast[serious](7)
+/crew/75701491@1440 color-contrast[serious](13)
+
+Remaining: color-contrast only (A11Y-03). landmark-one-main and region cleared. Remaining tap<44 are inline text links (exempt) and the 24px terms checkbox (whole label row is the hit area).
+Proposed for Aaron: brand red contrast (white on #F92524 = 3.95:1; also red text, struck $160, muted grey). Not changed.
+tsc --noEmit clean; TZ=UTC npm run test:s1: 136 pass, 0 fail.

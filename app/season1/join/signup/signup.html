@@ -7,11 +7,11 @@
 <meta name="robots" content="noindex">
 <title>Save their spot | EKUZO</title>
 <link rel="icon" href="/icon.png">
+<link rel="preconnect" href="https://js.stripe.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap">
 <script type="application/json" id="s1-config">__S1_CONFIG__</script>
-<script src="https://js.stripe.com/v3/"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
 <style>
@@ -23,10 +23,10 @@ a{color:inherit}
 .pv{background:#fff6b6;color:#7a5a00;font:600 12px/1.4 var(--body);text-align:center;padding:6px 12px}
 .nav{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.1);background:var(--white)}
 .nav.dark{background:var(--black);border:0}
-.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none}
-.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:40px}
+.wm{font:700 22px/1 var(--display);letter-spacing:.06em;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.nav .back{font:600 14px var(--body);color:rgba(0,0,0,.6);text-decoration:none;min-width:44px;min-height:44px;display:inline-flex;align-items:center}
 .nav.dark .back,.nav.dark .wm{color:var(--white)}
-.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none}
+.nav .mini{background:var(--red);color:#fff;font:700 12px var(--body);padding:8px 12px;border-radius:2px;text-decoration:none;border:solid transparent;border-width:7px 0;background-clip:padding-box}
 .d{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;line-height:.95;font-weight:700;margin:0;text-wrap:balance}
 .ey{font:700 11px/1.4 var(--body);text-transform:uppercase;letter-spacing:.15em;margin:0}
 .red{color:var(--red)}
@@ -97,13 +97,17 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .inv{background:var(--stone);border-left:4px solid var(--red);padding:12px 14px;margin-top:20px}
 .inv p{font-size:14px;font-weight:700;line-height:1.35;color:var(--black)}
 .inv button{display:inline-block;margin-top:0;padding:10px 0;min-height:44px;background:none;border:0;font:600 12px/1.4 var(--body);color:rgba(0,0,0,.65);text-decoration:underline;cursor:pointer;text-align:left}
+.tk{display:inline-flex;align-items:center;min-height:44px;padding:0 6px}
+#terms{width:24px;height:24px;margin:-3px 0 0;accent-color:#050505;flex-shrink:0}
+#terms:focus-visible{outline:3px solid #050505;outline-offset:2px}
 .note{background:var(--stone);border-left:4px solid var(--red);padding:10px 12px;margin-top:16px;font-size:13px;line-height:1.45;color:var(--ink)}
 
 </style>
 </head>
 <body>
-<div class="pv" id="testBar" hidden>Test mode. No real charges.</div>
-<div class="app"><div class="nav"><a class="back" href="/season1/join" id="back">&lsaquo; Back</a><a class="wm" href="/">EKUZO</a><span style="min-width:40px"></span></div>
+<div class="pv" id="testBar" role="region" aria-label="Test mode" hidden>Test mode. No real charges.</div>
+<div class="app"><header class="nav"><a class="back" href="/season1/join" id="back">&lsaquo; Back</a><a class="wm" href="/">EKUZO</a><span style="min-width:44px"></span></header>
+<main>
 <form id="f" class="px" style="padding-top:20px;padding-bottom:40px" novalidate autocomplete="on">
 <p class="ey red">Season 01 &middot; <span id="mode">Season 01 is open</span></p>
 <h1 class="d" style="font-size:40px;margin-top:4px">Save their spot</h1>
@@ -121,20 +125,22 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <a class="btn black smsLink" style="margin-top:12px" href="#">Text Karlin</a></div>
 <div id="pay">
 <div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
-<div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20"><p class="err" id="e-pname"></p></div>
-<div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254"><p class="err" id="e-email"></p></div>
+<div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
+<div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-required="true" aria-describedby="e-email"><p class="err" id="e-email"></p></div>
 <div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
-<div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20"><p class="err" id="e-mob"></p></div>
+<div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20" aria-describedby="e-mob"><p class="err" id="e-mob"></p></div>
 <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
-<label style="display:flex;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" style="accent-color:#050505;margin-top:2px;flex-shrink:0"><span id="consentText"></span></label>
+<label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
 <p class="err" id="e-terms"></p>
-<p id="inviteNote" class="note" role="status" hidden></p>
+<p id="inviteNote" class="note" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
-<p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink" href="#">Text Karlin</a></p>
+<p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink tk" href="#">Text Karlin</a></p>
 <p class="small" style="text-align:center;margin-top:16px">Secure payment by Stripe</p></div>
 </form>
 <div id="liveErr" class="hp" aria-live="polite" role="status"></div>
+</main>
+<script id="stripe-js" src="https://js.stripe.com/v3/" defer></script>
 <script>
 (function(){
 var cfg={};try{cfg=JSON.parse(document.getElementById('s1-config').textContent)}catch(_){}
@@ -167,7 +173,7 @@ try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17,18];
 function kidRow(){n++;var i=n-1,d=document.createElement('div');d.className='kid';
  var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
- d.innerHTML='<p class="ey" style="margin-top:24px">'+(n==1?'Your kid':'Sibling')+(n>1?' <span class="red">20% off</span>':'')+'</p><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'">'+opts+'</select></div></div><p class="err e-nm"></p><p class="err e-ag"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Karlin will check in to make sure it\u0027s a fit.</p>';
+ d.innerHTML='<p class="ey" style="margin-top:24px">'+(n==1?'Your kid':'Sibling')+(n>1?' <span class="red">20% off</span>':'')+'</p><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Karlin will check in to make sure it\u0027s a fit.</p>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);}
 function ageChanged(d){var v=d.querySelector('.ag').value;d.querySelector('.warn').hidden=!(v=='9'||v=='18');if(v=='x')ga('season1_age_outside');upd()}
 kidRow();
@@ -212,8 +218,8 @@ function initStripe(){
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
-function clearErrs(){document.querySelectorAll('.err').forEach(function(e){e.textContent=''});document.querySelectorAll('.f').forEach(function(f){f.classList.remove('bad');f.removeAttribute('aria-invalid')});g('liveErr').textContent=''}
-function announce(msg){g('formErr').textContent=msg;g('liveErr').textContent=msg}
+function clearErrs(){document.querySelectorAll('.err').forEach(function(e){e.textContent=''});document.querySelectorAll('.f').forEach(function(f){f.classList.remove('bad');f.removeAttribute('aria-invalid')});g('terms').removeAttribute('aria-invalid');g('liveErr').textContent=''}
+function announce(msg){g('formErr').textContent=msg}
 function collect(){
  var bad=[],first=null;
  function flag(el,input,msg){setErr(el,input,msg);bad.push(msg);if(!first&&input)first=input}
@@ -228,8 +234,8 @@ function collect(){
  if(!ev||ev.length>254||!EMAIL.test(ev))flag(g('e-email'),em,'Check your email address.');
  var mb=g('mob'),mv=mb.value.trim();
  if(mv&&(mv.length>20||!/^[0-9+()\- ]+$/.test(mv)||mv.replace(/\D/g,'').length<7))flag(g('e-mob'),mb,'Check your mobile number or leave it blank.');
- if(!g('terms').checked)flag(g('e-terms'),null,'Check the terms box to continue.');
- if(bad.length){announce(bad[0]);if(first)first.focus();else g('terms').focus();return null}
+ if(!g('terms').checked)flag(g('e-terms'),g('terms'),'Check the terms box to continue.');
+ if(bad.length){announce(bad[0]+(bad.length>1?' '+(bad.length-1)+' more to fix below.':''));if(first)first.focus();else g('terms').focus();return null}
  return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
 }
 function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;if(b){btn.dataset.t=btn.textContent;btn.textContent='Saving'}else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
@@ -245,19 +251,16 @@ function serverErr(status,j){
  if(e==='price_changed'&&j&&typeof j.amountCents==='number'){showTotal(j.amountCents);secret=null;announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');return}
  if(e==='duplicate_kid'||e==='text_karlin'){
   var fe=g('formErr');fe.textContent='';
-  var live;
   if(e==='duplicate_kid'){
    var kn=(j&&typeof j.kidFirstName==='string'&&j.kidFirstName)?j.kidFirstName:'Your kid';
    fe.appendChild(document.createTextNode(kn+' already has a spot. Questions? '));
-   live=kn+' already has a spot. Questions? Text Karlin.';
   }else{
    fe.appendChild(document.createTextNode('Please '));
-   live='Please text Karlin to finish signing up.';
   }
   var a=document.createElement('a');a.href=sms;a.textContent='Text Karlin';
   if(e==='text_karlin'){a.textContent='text Karlin';fe.appendChild(a);fe.appendChild(document.createTextNode(' to finish signing up.'))}
   else{fe.appendChild(a);fe.appendChild(document.createTextNode('.'))}
-  g('liveErr').textContent=live;return}
+  return}
  if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text Karlin.');return}
  if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text Karlin.');return}
  var km=/^kids\.(\d+)\.(firstName|age)$/.exec(f);
@@ -265,7 +268,7 @@ function serverErr(status,j){
  if(f==='email'){m='Check your email address.';setErr(g('e-email'),g('email'),m);announce(m);return}
  if(f==='parentFirstName'){m='Add your first name.';setErr(g('e-pname'),g('pname'),m);announce(m);return}
  if(f==='phone'){m='Check your mobile number or leave it blank.';setErr(g('e-mob'),g('mob'),m);announce(m);return}
- if(f==='consent'){m='Check the terms box to continue.';setErr(g('e-terms'),null,m);announce(m);return}
+ if(f==='consent'){m='Check the terms box to continue.';setErr(g('e-terms'),g('terms'),m);announce(m);return}
  if(e==='too_many_kids'){announce('Season 01 takes up to four kids per order. Text Karlin to add more.');return}
  announce('Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');
 }
@@ -297,7 +300,9 @@ g('f').addEventListener('submit',async function(ev){
   if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';g('e-pay').textContent=msg;announce(msg);setBusy(false)}
  }catch(err){announce(confirming?'We could not confirm your payment. Text Karlin before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');setBusy(false)}
 });
-renderInvite();upd();initStripe();ga('season1_signup_view');
+renderInvite();upd();ga('season1_signup_view');
+// Stripe.js is deferred (end of body): init when it has loaded, or show the fallback if it failed.
+if(window.Stripe)initStripe();else{var sj=g('stripe-js');sj.addEventListener('load',initStripe);sj.addEventListener('error',initStripe)}
 })();
 </script>
 </div>
