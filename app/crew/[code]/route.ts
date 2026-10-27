@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { display } from "@/lib/season1/codes";
 import { OFFER, formatDatePT } from "@/lib/season1/offer";
+import { currentMode } from "@/lib/season1/mode";
 import { resolveCode } from "@/lib/season1/referral";
 import { refSecret, signRef, refSetCookieHeader } from "@/lib/season1/refcookie";
 
@@ -25,8 +26,20 @@ function esc(s: string): string {
 
 const usd = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents / 100).toFixed(2)}`;
 
-function renderHtml(tpl: string, named: boolean, name: string | null, code: string | null): string {
+function renderHtml(
+  tpl: string,
+  named: boolean,
+  name: string | null,
+  code: string | null,
+  flags: { jersey: boolean; test: boolean; inactive: boolean },
+): string {
   let out = tpl;
+  // C8: the jersey line shows only before the cutoff. C15: the test bar shows only in test mode.
+  out = out.replace(/<!--IF:jersey-->([\s\S]*?)<!--\/IF:jersey-->/g, (_m, inner) => (flags.jersey ? inner : ""));
+  // D4: "Invite link not active?" shows only when the code is unknown or void (resolveCode returned null),
+  // never for a valid code rendered nameless (crawler, rate limit, show_name false, partner without a display name).
+  out = out.replace(/<!--IF:inactive-->([\s\S]*?)<!--\/IF:inactive-->/g, (_m, inner) => (flags.inactive ? inner : ""));
+  out = out.replace(/<!--IF:test-->([\s\S]*?)<!--\/IF:test-->/g, (_m, inner) => (flags.test ? inner : ""));
   out = out.replace(/<!--IF:named-->([\s\S]*?)<!--\/IF-->/g, (_m, inner) => (named ? inner : ""));
   out = out.replace(/<!--IFNOT:named-->([\s\S]*?)<!--\/IFNOT-->/g, (_m, inner) => (named ? "" : inner));
   const codeLine = code
@@ -58,8 +71,10 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
   const livemode = (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_");
 
   let resolved: Awaited<ReturnType<typeof resolveCode>> = null;
+  let inactive = false;
   try {
     resolved = await resolveCode(rawCode, { ip, userAgent, livemode });
+    inactive = resolved === null;
   } catch (err) {
     // DB trouble: nameless page, no cookie. Log the message only (no code, no name).
     console.error("crew: resolveCode failed:", err instanceof Error ? err.message : "unknown");
@@ -68,7 +83,11 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
 
   const tpl = fs.readFileSync(TEMPLATE_PATH, "utf8");
   const named = !!(resolved && resolved.named && resolved.displayName);
-  const html = renderHtml(tpl, named, named ? resolved!.displayName : null, resolved ? resolved.code : null);
+  const html = renderHtml(tpl, named, named ? resolved!.displayName : null, resolved ? resolved.code : null, {
+    jersey: Date.now() < Date.parse(OFFER.jerseyCutoffAt),
+    test: currentMode(req.headers.get("host")) === "test",
+    inactive,
+  });
 
   const headers = new Headers({
     "content-type": "text/html; charset=utf-8",

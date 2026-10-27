@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { OFFER, isOpen, formatDatePT, lockInDate } from "@/lib/season1/offer";
-import { resolveMode } from "@/lib/season1/mode";
+import { currentMode } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
 import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { resolveCode } from "@/lib/season1/referral";
@@ -56,12 +56,7 @@ async function loadInvite(request: Request): Promise<{ name: string | null } | n
 export async function GET(request: Request) {
   const now = new Date();
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
-  const mode = resolveMode({
-    envMode: process.env.S1_COMMIT_MODE,
-    stripeKey: process.env.STRIPE_SECRET_KEY,
-    databaseUrl: process.env.DATABASE_URL,
-    host,
-  });
+  const mode = currentMode(request.headers.get("host"));
   const srcParam = new URL(request.url).searchParams.get("src");
   const src = srcParam && (SRC_VALUES as readonly string[]).includes(srcParam) ? srcParam : null;
 

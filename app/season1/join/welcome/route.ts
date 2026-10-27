@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { OFFER, formatDatePT, lockInDate } from "@/lib/season1/offer";
-import { resolveMode } from "@/lib/season1/mode";
+import { currentMode } from "@/lib/season1/mode";
 import { display } from "@/lib/season1/codes";
 import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
@@ -119,12 +119,7 @@ export async function GET(request: Request) {
 
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "ekuzo.gg";
   const proto = request.headers.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const mode = resolveMode({
-    envMode: process.env.S1_COMMIT_MODE,
-    stripeKey: process.env.STRIPE_SECRET_KEY,
-    databaseUrl: process.env.DATABASE_URL,
-    host,
-  });
+  const mode = currentMode(request.headers.get("host"));
   const sms = `sms:${OFFER.textKarlinSms}`;
 
   const raw = fs.readFileSync(

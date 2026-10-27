@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<script>try{history.replaceState(null,"",location.pathname)}catch(e){}</script>
 <title>Join the team | EKUZO</title>
 <meta name="description" content="A friend invited you to EKUZO Season 01, a coached online esports team for kids.">
 <meta property="og:title" content="Join the team | EKUZO">
@@ -91,6 +92,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 </style>
 </head>
 <body>
+<!--IF:test--><div class="pv">Test mode. No real charges.</div><!--/IF:test-->
 <div class="app"><div class="nav"><span style="min-width:40px"></span><a class="wm" href="/">EKUZO</a><a class="mini join" href="/season1/join/signup">Join the team</a></div>
 <div style="background:var(--red);color:#fff;padding:28px 20px 32px">
 <!--IF:named-->
@@ -105,9 +107,9 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <p style="font-size:15px;line-height:1.5;margin-top:16px">A friend saved a spot in EKUZO Season 01, a coached online esports team for kids ages {{AGE_MIN}} to {{AGE_MAX}}. Join through this link to get your kid on the team.</p>
 <a class="btn black join" style="margin-top:20px" href="/season1/join/signup">Join the team &middot; {{FIRST}}</a>
 <!--/IFNOT-->
-<p style="font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)">Fully refundable until {{REFUND_DATE}}.</p>
+<p style="font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)"><a href="/season1/terms">Fully refundable until {{REFUND_DATE}}, and any time we can't place your kid</a>.</p>
 {{CODE_LINE}}
-<!--IFNOT:named--><p style="font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)">Invite link not active? You can still join. <a href="sms:{{SMS}}">Text Karlin</a> about credits.</p><!--/IFNOT-->
+<!--IF:inactive--><p style="font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)">Invite link not active? You can still join. <a href="sms:{{SMS}}">Text Karlin</a> about credits.</p><!--/IF:inactive-->
 </div>
 <img class="hero-img" style="height:220px" src="https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg" alt="An EKUZO team on a call with their coach">
 <div class="px">
@@ -120,7 +122,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div style="margin-top:20px;display:grid;gap:20px">
 <div class="step"><div class="num">01</div><div><p style="font-size:15px;font-weight:700">Practice with a coach</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">Two evenings a week. A real coach runs every practice: teamwork, communication, strategy.</p></div></div>
 <div class="step"><div class="num">02</div><div><p style="font-size:15px;font-weight:700">Play with their team</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">The same five teammates all season, hand-picked by age and skill. Friends stay together wherever we can.</p></div></div>
-<div class="step"><div class="num">03</div><div><p style="font-size:15px;font-weight:700">Play for something</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">A jersey with their gamer tag, a schedule, and a final tournament in May.</p></div></div></div></div>
+<div class="step"><div class="num">03</div><div><p style="font-size:15px;font-weight:700">Play for something</p><p class="body" style="font-size:14px;margin-top:4px;line-height:1.45">A team jersey they design together, a schedule, and a final tournament in May.</p></div></div></div></div>
 <div style="background:var(--stone);padding:20px;margin-top:36px">
 <p class="ey">The game</p>
 <p style="font-size:16px;font-weight:700;margin-top:8px;line-height:1.35">League of Legends plays like a sport.</p>
@@ -134,10 +136,10 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="line"><span>Mar 15</span><span>{{MONTHLY}}</span></div>
 <div class="line"><span>Apr 15</span><span>{{MONTHLY}}</span></div>
 <div class="line" style="font-weight:700;border-top:1px solid rgba(0,0,0,.15);margin-top:4px;padding-top:8px"><span>Your season</span><span><!--IF:named-->{{SEASON_CREDIT}}<!--/IF--><!--IFNOT:named-->{{SEASON_FULL}}<!--/IFNOT--></span></div></div>
-<ul class="dots" style="font-size:13px"><li>Fully refundable until {{REFUND_DATE}}</li><li>Free jersey for the first 100 families</li><li>Siblings {{SIB_PCT}}% off</li></ul>
-<p style="font-size:12px;font-weight:600;margin-top:12px">Early-access spots are limited. Teams are small and hand-picked.</p>
+<ul class="dots" style="font-size:13px"><li><span><a href="/season1/terms">Fully refundable until {{REFUND_DATE}}, and any time we can't place your kid</a></span></li><!--IF:jersey--><li>Free jersey for the first 100 families</li><!--/IF:jersey--><li>Siblings {{SIB_PCT}}% off</li></ul>
+<p style="font-size:12px;font-weight:600;margin-top:12px">Spots are limited. Teams are small and hand-picked.</p>
 <a class="btn join" style="margin-top:16px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a></div>
-<!--IF:named--><p class="small" style="margin-top:8px">Then invite your own friends: every friend who joins gets you another free month.</p><!--/IF-->
+<!--IF:named--><p class="small" style="margin-top:8px">Then invite your own friends: every friend who joins gets you another free month. Credits apply at lock-in.</p><!--/IF-->
 </div>
 <div class="sec"><p class="ey red">Who coaches</p>
 <h2 class="d" style="font-size:28px;margin-top:8px">Top college players,<br>trained to coach kids.</h2><div class="coaches">

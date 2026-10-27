@@ -1,18 +1,11 @@
-import fs from "fs";
-import path from "path";
+import { redirectToBare } from "@/lib/season1/redirect";
 
-// Season 01 waitlist early-access page, /season1/early-access.
-// Static HTML served by a route handler, OUTSIDE app/layout.tsx, so no Meta
-// Pixel fires (same pattern as /season1 and /season1/thanks). GA only.
-// Prototype: payments are not connected; the page says so in a banner.
-export const dynamic = "force-static";
+// /season1/early-access moved to /season1/join.
+// 301 to the bare new path; the query string (kid names) is dropped. The old
+// early-access.html stays on disk for reference only. force-dynamic so the Location is
+// built from each request's origin.
+export const dynamic = "force-dynamic";
 
-export function GET() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "app", "season1", "early-access", "early-access.html"),
-    "utf8",
-  );
-  return new Response(html, {
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
+export function GET(request: Request) {
+  return redirectToBare(request, "/season1/join");
 }

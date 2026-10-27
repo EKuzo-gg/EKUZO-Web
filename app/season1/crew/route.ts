@@ -1,18 +1,11 @@
-import fs from "fs";
-import path from "path";
+import { redirectToBare } from "@/lib/season1/redirect";
 
-// Season 01 friend landing page, /season1/crew?from=Name, the link a family shares after signing up.
-// Static HTML served by a route handler, OUTSIDE app/layout.tsx, so no Meta
-// Pixel fires (same pattern as /season1 and /season1/thanks). GA only.
-// Prototype: payments are not connected; the page says so in a banner.
-export const dynamic = "force-static";
+// /season1/crew moved to /season1/join (the invite page is /crew/<code>).
+// 301 to the bare new path; the query string (kid names) is dropped. The old
+// crew.html stays on disk for reference only. force-dynamic so the Location is
+// built from each request's origin.
+export const dynamic = "force-dynamic";
 
-export function GET() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "app", "season1", "crew", "crew.html"),
-    "utf8",
-  );
-  return new Response(html, {
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
+export function GET(request: Request) {
+  return redirectToBare(request, "/season1/join");
 }

@@ -1,0 +1,23 @@
+Atlas slice 4 self-test (2026-10-26, local dev server port 3101, copy of the repo at /home/claude/atlas4-build)
+
+tsc --noEmit: clean (exit 0)
+next build (copy, own .next): passes; routes /season1/join, /season1/early-access*, /season1/crew are dynamic (force-dynamic)
+node scripts/run-tests.mjs lib/season1/__tests__: # tests 136 # pass 136 # fail 0  (includes new joinPage.test.ts, 7 tests: open, live, jersey boundary at 23:59:59 PT, closed by mode and window, open boundary, src carry, ladder)
+
+Redirects (curl -D, query sent, 301 and bare Location):
+GET /season1/early-access?kid=Charlie          -> 301 Location: http://localhost:3101/season1/join
+GET /season1/early-access                      -> 301 Location: http://localhost:3101/season1/join
+GET /season1/early-access/signup?from=Charlie  -> 301 Location: http://localhost:3101/season1/join/signup
+GET /season1/early-access/saved?kid=Charlie    -> 301 Location: http://localhost:3101/season1/join/welcome
+GET /season1/crew?from=Charlie                 -> 301 Location: http://localhost:3101/season1/join
+(all: cache-control no-store, x-robots-tag noindex)
+
+NETLIFY: Netlify re-appended the query to a 303 Location in Sentry D1 (decision D11). This could not be tested locally.
+On the deploy, run: curl -sI "https://<deploy>/season1/early-access?kid=Charlie" | grep -i location
+If the Location carries ?kid=, the client-side backstop still applies: join, signup and /crew/<code> each run
+history.replaceState(null,"",location.pathname) as the first script in <head>, and GA page_location is origin + pathname.
+Verified in Chromium: /season1/join?kid=Charlie, /season1/join/signup?src=karlin&from=Charlie and /crew/75701491?from=Charlie
+all end with a bare pathname (copy-fidelity.md, P1 rows).
+
+Closed state (S1_COMMIT_MODE=off, dev server): /season1/join shows "Signups are paused. Text Karlin." + Text Karlin + "Join the waitlist" (/season1), no link to /season1/join/signup, title "Season 01 | EKUZO". Screenshot: screenshots/join-375-closed.png
+Crew D4 line: only for unknown code (copy-fidelity.md, last section).
