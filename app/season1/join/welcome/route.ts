@@ -5,6 +5,7 @@ import { resolveMode } from "@/lib/season1/mode";
 import { display } from "@/lib/season1/codes";
 import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
+import { drainOutbox } from "@/lib/season1/outbox";
 
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
@@ -92,6 +93,7 @@ export async function GET(request: Request) {
       try {
         const r = await fulfilFromReturn(pi, secret);
         if (r.viewToken) returnToken = r.viewToken;
+        if (r.status === "paid") await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
       } catch {
         // The webhook or the next reload will finish the job.
       }
@@ -106,7 +108,10 @@ export async function GET(request: Request) {
   if (order && order.status !== "paid" && order.paymentIntentId) {
     try {
       const r = await fulfil(order.paymentIntentId, "welcome");
-      if (r.status === "paid") order = (await loadOrder(request, returnToken)).order ?? order;
+      if (r.status === "paid") {
+        order = (await loadOrder(request, returnToken)).order ?? order;
+        await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
+      }
     } catch {
       // keep the pending view
     }
@@ -167,6 +172,10 @@ export async function GET(request: Request) {
       .join("");
     vars.TOTAL = money(order.amountCents);
     vars.ORDER_REF = esc(order.publicId);
+    // GA purchase on the paid state (welcome.html): values only, no names.
+    vars.GA_VALUE = String(order.amountCents / 100);
+    vars.GA_KIDS = String(order.kids.length);
+    vars.GA_HAS_CODE = order.code ? "1" : "0";
     // inviteApplied is added to OrderView by the commit work; absent means false.
     const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
     vars.CREDIT_NOTE = applied

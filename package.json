@@ -10,6 +10,7 @@
     "test": "node scripts/run-tests.mjs",
     "test:s1": "node scripts/run-tests.mjs lib/season1/__tests__",
     "s1:migrate": "node --env-file=.env.local scripts/s1-migrate.mjs",
+    "s1:outbox": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-outbox.mjs",
     "prepare": "husky"
   },
   "dependencies": {

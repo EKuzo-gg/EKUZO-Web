@@ -1,0 +1,29 @@
+Relay D (slice 3, side effects): live check against Neon TEST data only
+Date: 2026-10-27 04:30 UTC. Payer email on the order: team+s1test-***@ekuzo.gg (livemode=false).
+
+1. npm run s1:outbox -- --mark-stale-test --limit=1 --order=nonexistent0
+   marked stale (livemode=false, pending, older than 10 min): 17
+   (11 test rows newer than 10 min stayed pending; nothing else was drained)
+
+2. Order vw5ecedase (paid, fulfilled, 1 kid, no new Stripe objects created). Its three rows were
+   still pending and recent, so no re-enqueue was needed.
+   npm run s1:outbox -- --order=vw5ecedase
+   considered=3 timedOut=false counts={"skipped_no_config":1,"sent":2}
+     id=72 kind=klaviyo_committed key=klaviyo_committed:vw5ecedase -> sent (http_202)
+     id=73 kind=meta_purchase     key=meta_purchase:vw5ecedase     -> sent (http_200 events_received=1 test_code)
+     id=74 kind=discord_commit    key=discord_commit:vw5ecedase    -> skipped_no_config
+   (S1_DISCORD_WEBHOOK_URL_TEST unset, as expected)
+
+3. Re-run for the same order: considered=0 (idempotent; rows are not resent).
+
+4. Klaviyo visibility (Klaviyo MCP get_events, metric "Season 01 Committed" id RK6AMi):
+   event 7yD3PX2EPej, datetime 2026-10-27T04:22:33Z, $event_id=vw5ecedase (unique_id), $value=100.
+   Properties seen: order_id, kids_count, kid_name, kid_age, sibling_names, amount_paid, currency,
+   share_code, share_url (test origin fallback), invited, jersey_eligible, lock_in_date,
+   refund_until, src, offer_version. No invited_by_kid.
+
+5. Not exercised live: klaviyo_friend_joined, discord_flag, ops_alert, klaviyo_refunded
+   (no row for them existed on a team+s1test order; payload builders and formatters are unit tested).
+   Meta test events appear in Events Manager > Test Events under code TEST_S1 (env code used if set).
+
+Checks: npx tsc --noEmit clean; TZ=UTC npm run test:s1 -> 129 tests, 129 pass (new: outbox.test.ts, 28 cases).

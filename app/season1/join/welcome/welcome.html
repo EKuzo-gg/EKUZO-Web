@@ -127,9 +127,20 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="chips"><button>Mon</button><button>Tue</button><button>Wed</button><button>Thu</button><button>Fri</button></div></div>
 <p class="small" style="text-align:center;margin:28px 0 40px">Questions? <a href="{{SMS}}"><b>Text Karlin</b></a></p></div>
 <div class="toast" id="toast"></div>
+<div id="s1p" hidden data-id="{{ORDER_REF}}" data-value="{{GA_VALUE}}" data-kids="{{GA_KIDS}}" data-code="{{GA_HAS_CODE}}"></div>
 <script>
 (function(){
 try{localStorage.setItem('ekuzo_s1_joined','1')}catch(_){}
+// GA purchase: once per order per browser.
+var p=document.getElementById('s1p');
+if(p){var id=p.getAttribute('data-id'),k='s1_purchase_'+id,seen=false;
+ try{seen=!!localStorage.getItem(k)}catch(_){}
+ if(!seen){
+  try{gtag('event','purchase',{transaction_id:id,value:Number(p.getAttribute('data-value')),currency:'USD',kids_count:Number(p.getAttribute('data-kids')),has_code:p.getAttribute('data-code')==='1',page_location:location.origin+location.pathname});
+   try{localStorage.setItem(k,'1')}catch(_){}
+  }catch(_){}
+ }
+}
 function toast(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},2200)}
 var b=document.getElementById('share');
 if(b)b.onclick=function(){

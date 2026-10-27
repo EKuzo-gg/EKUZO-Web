@@ -3,6 +3,7 @@ import { getStripe, keyIsLive } from "@/lib/season1/stripe";
 import { fulfil, OrphanPaidPiError } from "@/lib/season1/fulfil";
 import {
   addOrderFlags,
+  enqueueOutbox,
   getEventProcessed,
   getOrderForFulfilByPi,
   incrementFailure,
@@ -13,6 +14,7 @@ import {
   voidOnFullRefund,
 } from "@/lib/season1/db";
 import { errCode, isFullRefund, logStep } from "@/lib/season1/rules";
+import { drainOutbox } from "@/lib/season1/outbox";
 
 /**
  * POST /api/season1/stripe-webhook (frozen spec "Webhook" + RT1, RT4, RT10,
@@ -160,6 +162,15 @@ async function handle(event: Stripe.Event, piId: string, full: boolean | undefin
       } else {
         await setOrderStatus(o.id, "partially_refunded", ["paid"]);
       }
+      // Slice 3: Klaviyo "Season 01 Refunded" (sender builds the payload from the order).
+      const ch = event.data.object as Stripe.Charge;
+      const refundId = ch.refunds?.data?.[0]?.id ?? event.id;
+      await enqueueOutbox(
+        "klaviyo_refunded",
+        `klaviyo_refunded:${refundId}`,
+        { order_public_id: o.publicId, refund_id: refundId, amount_refunded_cents: ch.amount_refunded ?? 0, full: !!full },
+        o.livemode,
+      );
       logStep("webhook.refund", o.publicId, true, full ? "full" : "partial");
       return;
     }
@@ -214,6 +225,8 @@ export async function POST(req: Request): Promise<Response> {
 
     await handle(event, ours.piId, ours.full);
     await markEventProcessed(event.id);
+    // Slice 3: send queued side effects inline within a budget; never fails the response.
+    await drainOutbox({ limit: 20, budgetMs: 3500 }).catch(() => null);
     return reply({ received: true });
   } catch (e) {
     // processed_at stays null, so Stripe's retry runs the handler again (RT1, ops 3).
