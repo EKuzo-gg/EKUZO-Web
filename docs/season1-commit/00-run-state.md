@@ -44,3 +44,9 @@ Atlas 3101, Chronos 3102, Relay 3103, Sentry 3104 and up. Start, test, stop by P
 - Times above before 22:06 were estimated; real clock: spec frozen 22:11.
 - KB outbox: build-loop.md challenger move (Jamie yes 22:05), W3 terms draft.
 - Push via /home/claude/s1-push.sh (secret scan fails closed).
+| Red team trust | redteam-trust.md | that file | none | done, resolved in 02b |
+| Red team ops | redteam-ops.md | that file | none | done, slice 1 items sent to Relay B and Atlas; rest in 02b |
+| Chronos 2 | 0004 migration (not applied), refcookie.ts, referral.ts, referralFlags.ts, tests | those files | none | running (22:22) |
+| Atlas 2 | /crew/[code] page, invite remove API | app/crew/**, app/api/season1/invite/** | 3105 /home/claude/pids/atlas2.pid | running (22:23) |
+
+- 22:20 slice 2 contract frozen (02b). Lead to add /season1/crew* 301 to next.config.mjs after Atlas 1 returns, apply 0004 after Relay B's 0003.
