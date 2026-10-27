@@ -5,6 +5,11 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (hero eyebrow)
+
+- `join.html`: the "Season 01" eyebrow is a white outline on the purple (no red fill).
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 season page: buttons, coaches, safe panel)
 
 - Buttons are neon green (`--lime`) with black text, not red (nav, card, sticky bar, end CTA; a 2px
