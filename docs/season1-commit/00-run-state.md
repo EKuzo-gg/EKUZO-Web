@@ -18,18 +18,18 @@ Re-read this file after any compaction or check-in. Lead updates it at every spa
 
 ## Current
 - Slice: 1
-- Phase: discover (Scout + requirements)
-- Next step: requirements for slice 1, then money red team + challenger in parallel
+- Phase: implement (spec frozen 22:11 with red-team resolutions)
+- Next step: when Relay B and Atlas return, integrate, push, prove on the branch deploy (Playwright card run at 375 px), then slice 1 gate note to Jamie
 
 ## Agent ledger
 | Role | Task | Files owned | Ports/PIDs | Status |
 |---|---|---|---|---|
 | Side (W3) | terms addendum + privacy insert | kb-outbox/season1-commit/W3-*.md | none | done 22:01 |
 | Scout | codebase map | scout-map.md (saved by lead) | none | done 22:10 |
-| Relay A | migrations, migrate script, db.ts, ratelimit, legacy guard, ADR Discord note, db integration test | db/migrations, scripts/s1-migrate.mjs, lib/season1/{db,ratelimit}.ts, legacy route guard lines, docs/architecture-decisions.md, 06-cleanup-ledger.md | none | running (22:13) |
-| Red team money | redteam-money.md | that file | none | running (22:05) |
-| Challenger s1 | challenger-slice1.md | that file | none | running (22:05) |
-| Chronos | offer, pricing, codes, validate, mode, legacyGuard, tests, runner | lib/season1/{offer,pricing,codes,validate,mode,legacyGuard}.ts, lib/season1/__tests__, scripts/test-resolve.mjs, scripts/run-tests.mjs, package.json scripts | none | running (22:07) |
+| Relay A | migrations, migrate script, db.ts, ratelimit, legacy guard, ADR Discord note, db integration test | db/migrations, scripts/s1-migrate.mjs, lib/season1/{db,ratelimit}.ts, legacy route guard lines, docs/architecture-decisions.md, 06-cleanup-ledger.md | none | done, committed 50ce88c |
+| Red team money | redteam-money.md | that file | none | done (20 findings, all resolved in spec) |
+| Challenger s1 | challenger-slice1.md | that file | none | done; challenger now moved to planning time (D7) |
+| Chronos | offer, pricing, codes, validate, mode, legacyGuard, tests, runner | (committed 28a4222) | none | done 62/62 |
 
 ## Ports
 Atlas 3101, Chronos 3102, Relay 3103, Sentry 3104 and up. Start, test, stop by PID in one call.
@@ -37,3 +37,10 @@ Atlas 3101, Chronos 3102, Relay 3103, Sentry 3104 and up. Start, test, stop by P
 ## Notes
 - Phase 0 all green 21:53. GitHub app installed org-wide (Jamie gave full access).
 - Neon test DATABASE_URL was echoed once into the session log (unquoted &). Recommend production branch role password reset at launch.
+
+| Atlas | signup, welcome, terms pages, /karlin | app/season1/join/**, app/season1/terms/**, next.config.mjs redirect, screenshots/ | 3101 /home/claude/pids/atlas.pid | running |
+| Relay B | commit API, fulfil, webhook, 0003 migration, mode/legacyGuard updates, integration tests | app/api/season1/**, lib/season1/{fulfil,stripe}.ts, db.ts extensions, db/migrations/0003 | 3103 /home/claude/pids/relay.pid | running |
+
+- Times above before 22:06 were estimated; real clock: spec frozen 22:11.
+- KB outbox: build-loop.md challenger move (Jamie yes 22:05), W3 terms draft.
+- Push via /home/claude/s1-push.sh (secret scan fails closed).

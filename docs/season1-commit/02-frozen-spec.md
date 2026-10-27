@@ -158,3 +158,31 @@ welcome concurrently: one claim, one outbox set), webhook signature and duplicat
 test PaymentIntents confirmed server side with `pm_card_visa`, `pm_card_chargeDeclined`, 3DS card,
 and off-session charges with 4000002500003155 and 4000002760003184 on the saved method; Playwright
 card run on the branch deploy at 375 px.
+
+## Red team resolutions (money and fraud, 22:10 CT). These override the sections above.
+
+Status after this section: FROZEN for slice 1. Source: `redteam-money.md` (20 findings). Challenger
+items adopted: D1, D3, D4, D5 in `03-decision-log.md`.
+
+| RT# | Resolution |
+|---|---|
+| 1 | `s1_events` gets `processed_at timestamptz`. The webhook inserts the event row if absent; a duplicate is "done" only when `processed_at` is set; otherwise process again. `processed_at` is set after fulfil (or the handler) succeeds. Test: fulfil fails once, replay, one paid order. |
+| 2 | Already adopted (D4): claim, idempotent steps, `fulfilled_at`; a paid order with null `fulfilled_at` reruns the steps. |
+| 3 | Client sends `attemptId` (UUID in sessionStorage, new per page load) and `expectedCents`. `s1_orders.attempt_id` (unique with payer_email). Same email+attempt with a pending order and an unchanged kid set and amount: return the existing `clientSecret` (no new PI). Changed: cancel the old PI (ignore errors), mark that order `canceled`, create a new order and PI. Idempotency key `s1-pi:<order public_id>` stays. After a decline the client re-confirms the same `clientSecret` without a new POST. |
+| 4 | IP only from `x-nf-client-connection-ip` (IPv6 bucketed to /64; missing header = bucket `noip`). Limits: 5 PIs per IP per 10 min, 20 per email per day, 60 PIs per hour globally. `payment_intent.payment_failed` increments `s1_orders.failure_count`; at 3 the PI is canceled and the order flagged `card_testing_suspect`. Radar card-testing rules go on Jamie's launch list. |
+| 5 | `expectedCents` mismatch with the server quote: 409 `{error:"price_changed", amountCents}` before any PI; client `elements.update({amount})` and asks for a second tap. |
+| 6 | One Season 01 Stripe Customer per `s1_families` row: create with idempotency key `s1-cust:<family id>`, metadata `product=season1`, store `stripe_customer_id`, reuse only that. No Stripe search, no reuse of legacy Customers. Lock-in will charge each order's `payment_method_id`. |
+| 7 | Existing guardian rows are never overwritten by `/commit`: submitted parent name and phone go on the order (`payer_first_name`, `payer_phone`). Card-fingerprint flags arrive with slice 2's fraud flags. |
+| 8 | `jersey_eligible` computed in fulfil: `pi_created_at < jerseyCutoffAt AND paid_at - pi_created_at <= 24h`. Flag `late_confirm` when `paid_at >= closeAt`. Stale pending PI cancellation: slice 5. |
+| 9 | Server `payment_method_types: ["card","link"]` (wallets ride on card); client `paymentMethodTypes: ["card","link"]`. Fulfil treats `processing` as pending. |
+| 10 | Mode gates PaymentIntent creation and the signup page only. Webhook and welcome fulfil always run; they skip (200, nothing written) when `event.livemode`/`pi.livemode` disagrees with the key prefix. |
+| 11 | `s1_orders.view_token_hash` (sha256 of 32 random bytes, base64url). Cookie `s1_order` carries the raw token; the welcome page looks orders up by its hash. The public id is a reference only. |
+| 12 | Welcome with `payment_intent` and `payment_intent_client_secret`: retrieve the PI; if the secret matches, run fulfil, set a fresh view token cookie for that order, then 303. Cookie path only without query. |
+| 13 | `charge.refunded` in slice 1: full refund sets the order `refunded` (kids `refunded`); partial sets `partially_refunded`. Fulfil retrieves the PI with `expand: ["latest_charge"]`; if anything is refunded, claim as `refunded` with no code and no outbox. `priorPaidKids` counts kids on `paid` or `partially_refunded` orders whose kid status is not `refunded`. |
+| 14 | Legacy guard also skips when `meta.product` is set and not one of `camps`, `ekuzo100`, `ekuzo101`, `teams`. Missing product with `parent_email` keeps today's camps behaviour. |
+| 15 | Fulfil flags `duplicate_kid` when the same folded first name is on another paid, unrefunded order of the family within 30 days. Commit-time P6 lands in slice 2. |
+| 16 | Fulfil requires `pi.amount === order.amount_cents`, `currency === "usd"`, `metadata.order_id === order.public_id`, `pi.livemode === order.livemode`; mismatch: record, flag `pi_mismatch`, claim nothing. |
+| 17 | Live mode requires `sk_live_` and `pk_live_`, a DB URL without the test endpoint, `S1_STRIPE_WEBHOOK_SECRET` set, `CONTEXT === "production"`, and the raw `host` header ekuzo.gg or www.ekuzo.gg. Any miss: off. |
+| 18 | Charge, refund and dispute events: retrieve the PI and record only when `metadata.product === "season1"`; else 200 with nothing written. |
+| 19 | Express Checkout deferred (D1). Slice 4 spec covers the `confirm` sequence and `recurringPaymentRequest` from the server quote. Fulfil records `payment_method.type`, wallet type and fingerprint in the order `pm_details` jsonb. |
+| 20 | `consent_ip` only from `x-nf-client-connection-ip`; raw `x-forwarded-for` stored in `consent_xff`. |
