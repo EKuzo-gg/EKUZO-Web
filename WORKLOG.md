@@ -5,6 +5,16 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Safe by design layout, paper on wide screens)
+
+- Paper edges: height now `max(36px, 3.3vw)` to follow the PNGs' ~29:1 shape. The old 76px cap let
+  ultra-wide windows (2500px+) crop the torn peaks flat.
+- Safe by design: one notched panel, heading left, three rows right with 64px lime icon circles.
+  Icons are re-cropped copies in `public/images/season1/s1-icon-*.svg` (viewBox fitted to the artwork,
+  so they sit centred). Copy unchanged.
+- Hero: more space between the headline and the jersey sticker (84px on desktop, 40px on phones).
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 season page polish)
 
 - Paper seams switched to the one-sided `torn-paper-*-top-1@2x.png` edges; sized so `cover` crops only
