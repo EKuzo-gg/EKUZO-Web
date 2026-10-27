@@ -1,0 +1,56 @@
+{
+ "email": "team+s1test-sentry2-rmygdn95@ekuzo.gg",
+ "steps": {
+  "commitResponse": {
+   "status": 200,
+   "invite": "none",
+   "inviteReason": "removed",
+   "amountCents": 10000
+  },
+  "commitReqBody": {
+   "email": "team+s1test-sentry2-rmygdn95@ekuzo.gg",
+   "parentFirstName": "Removeparent",
+   "phone": "",
+   "kids": [
+    {
+     "firstName": "Lena",
+     "age": 12
+    }
+   ],
+   "consent": true,
+   "company": "",
+   "inviteRemoved": true,
+   "attemptId": "d043689e-026a-4213-b20d-53a82f81ed1a",
+   "expectedCents": 10000
+  },
+  "crewCookie": true,
+  "beforeRemove": {
+   "banner": true,
+   "credit": true
+  },
+  "removeCall": {
+   "status": 200,
+   "setCookie": "s1_ref=<val>; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax"
+  },
+  "afterRemove": {
+   "banner": false,
+   "credit": false,
+   "cookieStillThere": false
+  },
+  "afterSubmit": {
+   "url": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+   "goText": "Save Lena's spot · $100",
+   "formErr": "Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.",
+   "note": ""
+  }
+ },
+ "canceled": {
+  "pi": "pi_3UV27cKORcR8BUEx10vKg0bv",
+  "status": "canceled"
+ },
+ "confirmCalls": 0,
+ "consoleErrs": [],
+ "aborted": [
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+ ]
+}

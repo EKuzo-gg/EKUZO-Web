@@ -66,10 +66,11 @@ Klaviyo calls should have failed on the empty email. Six succeeded PIs (run 1 ha
 | pi_3UV1l6KORcR8BUEx163Ne8sJ | 2026-10-26 23:13:12 | $1.60 | 2 |
 | pi_3UV1zrKORcR8BUEx1RLqrahQ | 2026-10-26 ~23:28 | $100.00 (refunded re_3UV1zrKORcR8BUEx1aLh0mEe) | Relay C (1) friend order |
 | pi_3UV1u1KORcR8BUEx09uSBhMT | created 23:22:25, succeeded 23:22:33 CT (2026-10-27 04:22 UTC) | $100.00 | Sentry slice 1 branch-deploy browser run (one payment; email team+s1test-sentry-8rjois@ekuzo.gg) |
+| pi_3UV25wKORcR8BUEx1og8AU4g | 2026-10-26 23:34:44 CT (04:34:44 UTC), succeeded within 3 s | $100.00 | Sentry slice 2 browser run J4 (friend joins via /crew/75701491; email team+s1test-sentry2-6k62x4@ekuzo.gg; order 4q9zg77d8j; friend code issued 95929969) |
 
 Sentry also left two pending PaymentIntents (pi_3UV1tQKORcR8BUEx11S9qhAS decline test, pi_3UV1x8KORcR8BUEx1QE259xP failed 3DS), both canceled via the API. Neon test rows for team+s1test-sentry-* emails remain (test branch).
 
-(Relay C used one succeeded PI; seven totals.)
+(Relay C used one succeeded PI; Sentry slice 2 one more: eight totals.)
 
 Each also reached the S1 test endpoint we_1UUzlTKORcR8BUExui4NsZnU on the branch deploy, which writes to the
 same Neon test branch (idempotent; harmless).
@@ -90,3 +91,19 @@ synthetic order). Locally constructed event: `evt_local_cffe9e5c_refund`.
 | payment_intent | pi_3UV1zwKORcR8BUEx1EwOeZFK, pi_3UV1zxKORcR8BUEx0wKnmjIX | canceled | (3) tampered/unsigned cookie |
 | payment_intent | pi_3UV1zyKORcR8BUEx1B9iS1El | canceled | (4) own code |
 | payment_intent | pi_3UV1zzKORcR8BUEx09loSQG5 | canceled | (5) already paid |
+
+## Sentry slice 2 (Stripe test mode + Neon test), 2026-10-26 CT
+
+One succeeded PI (listed in the Legacy dev endpoint side effects table above, so the unguarded dev handler may have
+treated it as camps with an empty parent email, same caveat as the others). Neon rows: families, kids, orders, items,
+code 95929969, referral 679f36fb-32ec-4770-9d08-8c2ba9c1471b (pending, friend_kids 1, reasons shared_card and same_zip),
+outbox rows (`klaviyo_committed`, `meta_purchase`, `discord_commit`, `klaviyo_friend_joined`, two `discord_flag`) and
+events for emails `team+s1test-sentry2-*@ekuzo.gg` (`-zyj2zj` has no order: the first J4 click was a no-op, no PI).
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UV25wKORcR8BUEx1og8AU4g | succeeded ($100, not refunded) | J4 friend join (cus_VW4EtzgytK6bhG, pm_1UV25wKORcR8BUExFAD8qjiz) |
+| payment_intent | pi_3UV27cKORcR8BUEx10vKg0bv | canceled | Remove flow (inviteRemoved), commit response intercepted, client secret withheld from the page, no confirm call |
+| payment_intent | pi_3UV27zKORcR8BUEx0KDrDDyy | canceled | J13 own code (inviter email, sibling Ana 13, $80), pending order du6d9vemk9 on the inviter family |
+
+Remove-flow pending order mk2e4b7nyb (referral_code null) stays pending on the test branch. J9a created no PI and no order.

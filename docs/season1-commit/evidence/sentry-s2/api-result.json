@@ -1,0 +1,68 @@
+{
+ "inviterEmailMasked": "t***@ekuzo.gg",
+ "j13": {
+  "status": 200,
+  "orderId": "du6d9vemk9",
+  "amountCents": 8000,
+  "invite": "ignored",
+  "inviteReason": "own_family",
+  "hasClientSecret": true,
+  "canceled": {
+   "pi": "pi_3UV27zKORcR8BUEx0KDrDDyy",
+   "status": "canceled"
+  },
+  "neon": [
+   {
+    "public_id": "du6d9vemk9",
+    "status": "pending",
+    "amount_cents": 8000,
+    "referral_code": null
+   }
+  ],
+  "ignoredEvent": [
+   {
+    "type": "invite.ignored",
+    "data": {
+     "reason": "own_family"
+    }
+   }
+  ]
+ },
+ "j9a": {
+  "status": 409,
+  "body": {
+   "error": "duplicate_kid",
+   "kidFirstName": "Mateo"
+  },
+  "ordersBefore": 1,
+  "ordersAfter": 1,
+  "custPIs": [
+   [
+    "pi_3UV25wKORcR8BUEx1og8AU4g",
+    "succeeded"
+   ]
+  ]
+ },
+ "rm": [
+  {
+   "public_id": "mk2e4b7nyb",
+   "status": "pending",
+   "referral_code": null
+  }
+ ],
+ "rmReferrals": [
+  {
+   "n": 0
+  }
+ ],
+ "flagsOutbox": [
+  {
+   "dedupe_key": "discord_flag:679f36fb-32ec-4770-9d08-8c2ba9c1471b:shared_card",
+   "status": "pending"
+  },
+  {
+   "dedupe_key": "discord_flag:679f36fb-32ec-4770-9d08-8c2ba9c1471b:same_zip",
+   "status": "pending"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "named": {
+  "status": 200,
+  "cc": "private,no-store",
+  "rp": "origin",
+  "robots": "noindex",
+  "setCookie": "ekuzo_origin=<val>; Path=/; Expires=Wed, 27 Oct 2027 04:31:56 GMT; Max-Age=31536000; Secure; SameSite=lax",
+  "hasZoe": true,
+  "hasFriendCode": true,
+  "hasCodeDigits": true,
+  "hasNameless": false,
+  "inactive": false,
+  "title": "Join the team | EKUZO",
+  "og": [
+   "<meta property=\"og:title\" content=\"Join the team | EKUZO\">",
+   "<meta property=\"og:description\" content=\"A friend invited you to EKUZO Season 01, a coached online esports team for kids.\">",
+   "<meta property=\"og:type\" content=\"website\">",
+   "<meta property=\"og:site_name\" content=\"EKUZO\">"
+  ],
+  "gtagConfig": 1,
+  "fbq": false,
+  "zoeSnippet": "e:15px;line-height:1.5;margin-top:16px\">Zoë just saved a spot in EKUZO Season 01, a"
+ },
+ "inv": {
+  "status": 200,
+  "cc": "private,no-store",
+  "rp": "origin",
+  "robots": "noindex",
+  "setCookie": "ekuzo_origin=<val>; Path=/; Expires=Wed, 27 Oct 2027 04:31:56 GMT; Max-Age=31536000; Secure; SameSite=lax",
+  "hasZoe": false,
+  "hasFriendCode": false,
+  "hasCodeDigits": false,
+  "hasNameless": false,
+  "inactive": true,
+  "title": "Join the team | EKUZO",
+  "og": [
+   "<meta property=\"og:title\" content=\"Join the team | EKUZO\">",
+   "<meta property=\"og:description\" content=\"A friend invited you to EKUZO Season 01, a coached online esports team for kids.\">",
+   "<meta property=\"og:type\" content=\"website\">",
+   "<meta property=\"og:site_name\" content=\"EKUZO\">"
+  ],
+  "gtagConfig": 1,
+  "fbq": false
+ },
+ "bot": {
+  "status": 200,
+  "cc": "private,no-store",
+  "rp": "origin",
+  "robots": "noindex",
+  "setCookie": "s1_ref=<val>; Path=/; Max-Age=1209600; HttpOnly; Secure; SameSite=Lax",
+  "hasZoe": false,
+  "hasFriendCode": true,
+  "hasCodeDigits": true,
+  "hasNameless": false,
+  "inactive": true,
+  "title": "Join the team | EKUZO",
+  "og": [
+   "<meta property=\"og:title\" content=\"Join the team | EKUZO\">",
+   "<meta property=\"og:description\" content=\"A friend invited you to EKUZO Season 01, a coached online esports team for kids.\">",
+   "<meta property=\"og:type\" content=\"website\">",
+   "<meta property=\"og:site_name\" content=\"EKUZO\">"
+  ],
+  "gtagConfig": 1,
+  "fbq": false
+ },
+ "signupGtagConfig": 1,
+ "signupNoCookie": {
+  "hasInvitedBy": true,
+  "invHidden": true
+ },
+ "signupRp": "origin",
+ "legacy": {
+  "/season1/crew?from=Charlie": [
+   200,
+   null
+  ],
+  "/season1/crew": [
+   200,
+   null
+  ]
+ }
+}

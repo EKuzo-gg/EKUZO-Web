@@ -1,0 +1,93 @@
+{
+ "email": "team+s1test-sentry2-6k62x4@ekuzo.gg",
+ "steps": {
+  "crew": {
+   "status": 200,
+   "cc": "private,no-store",
+   "rp": "origin",
+   "robots": "noindex",
+   "s1_ref": {
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax",
+    "path": "/",
+    "signedShape": true,
+    "days": 14
+   },
+   "docCookieHasRef": false,
+   "hasZoe": true,
+   "friendCodeLine": "Friend code 7570 1491",
+   "htmlZoeEscapedOrPlain": true
+  },
+  "signupUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+  "banner": {
+   "visible": true,
+   "text": "Invited by Zoë's family",
+   "removeLabel": "Remove (no friend credit for either family)"
+  },
+  "totals": {
+   "has100": true,
+   "creditLine": "Feb 15: $0 with Zoë's family credit, applied at lock-in.",
+   "btn": "Save their spot · $100"
+  },
+  "btnBeforePay": "Save Mateo's spot · $100"
+ },
+ "error": "TimeoutError: page.textContent: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#go')\u001b[22m\n",
+ "urlHistory": [
+  "https://season1-commit--ekuzo.netlify.app/crew/75701491",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV25wKORcR8BUEx1og8AU4g&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+ ],
+ "aborted": [
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+ ],
+ "abortedLeaks": [],
+ "consoleProblems": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/crew/75701491"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome"
+  }
+ ],
+ "consoleWarnings": [
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "[Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: \n\n- apple_pay\n\nPlease follo",
+  "Origin trial controlled feature not enabled: 'tools'.",
+  "Origin trial controlled feature not enabled: 'tools'."
+ ]
+}
