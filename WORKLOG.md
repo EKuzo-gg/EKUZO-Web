@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 season page polish)
+
+- Paper seams switched to the one-sided `torn-paper-*-top-1@2x.png` edges; sized so `cover` crops only
+  the sides (the whole strips were cropped top and bottom). Off-white matches the paper (#F0EDEA).
+- Free jersey sticker bigger, one line on desktop, sits above the card on phones so it never covers the
+  price. `text-wrap: pretty` on all text (no one-word last lines); lead copy widened.
+- Sections pad equally top and bottom; the friends section centres vertically.
+- One coloured phrase per headline (lime on black, violet or red on light).
+- Offer card: "Then $160 a month, Feb to Apr" removed; now "Then about $20 a practice."
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 season page: calmer pass, signup exits)
 
 - `join.html`: hero is violet (not red); ticker removed; brush texture lighter; eyebrow is the red

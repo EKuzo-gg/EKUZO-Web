@@ -13,9 +13,9 @@ describe("renderJoin", () => {
     assert.ok(h.includes("Season 01 is open"));
     assert.ok(!h.includes("Spots are limited."), "the jersey line is the urgency line before the cutoff");
     assert.ok(h.includes("until Nov 30"));
-    assert.ok(h.includes("About $20 a practice."));
+    assert.ok(h.includes("Then about $20 a practice."));
     assert.ok(h.includes("Test mode. No real charges."));
-    assert.ok(h.includes("Free jersey<small>First 100 families"));
+    assert.ok(h.includes("<b>Free jersey</b> <small>First 100 families"));
     assert.ok(h.includes('href="/season1/join/signup"'));
     assert.ok(h.includes("Save their spot &middot; $100"));
     assert.ok(!h.includes("Fully refundable"), "refund terms live in the terms, not the offer card");
@@ -29,8 +29,8 @@ describe("renderJoin", () => {
   it("jersey line: shown before the cutoff, hidden at and after it", () => {
     const before = renderJoin(tpl, { now: new Date("2026-11-30T23:59:58-08:00"), mode: "test", src: null });
     const at = renderJoin(tpl, { now: new Date("2026-11-30T23:59:59-08:00"), mode: "test", src: null });
-    assert.ok(before.includes("Free jersey<small>First 100 families"));
-    assert.ok(!at.includes("Free jersey<small>First 100 families"));
+    assert.ok(before.includes("<b>Free jersey</b> <small>First 100 families"));
+    assert.ok(!at.includes("<b>Free jersey</b> <small>First 100 families"));
     assert.ok(at.includes("Spots are limited."), "after the cutoff the urgency line falls back to spots");
   });
   it("closed: mode off, before open, and at close", () => {

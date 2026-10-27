@@ -17,7 +17,7 @@
 <style>
 @font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Black.otf") format("opentype");font-weight:900;font-display:swap}
 @font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
-:root{--red:#F92524;--black:#000;--ink:#222;--off:#EFEEED;--white:#fff;--violet:#AE2CF2;--lime:#E0FF4F;
+:root{--red:#F92524;--black:#000;--ink:#222;--off:#F0EDEA;--white:#fff;--violet:#AE2CF2;--lime:#E0FF4F;
  --display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--body:"Inter",Arial,Helvetica,sans-serif;--page:1200px;--gut:20px}
 @media (min-width:768px){:root{--gut:40px}}
 *{box-sizing:border-box}
@@ -25,7 +25,8 @@ html,body{margin:0;background:var(--white);color:var(--black);font-family:var(--
 html,body{overflow-x:clip}
 img{max-width:100%;display:block}
 a{color:inherit;text-underline-offset:3px}
-p{margin:0}
+p{margin:0;text-wrap:pretty}
+li,span,summary,small{text-wrap:pretty}
 ::selection{background:var(--lime);color:var(--black)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
 .wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
@@ -47,8 +48,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .h1 em{font-style:normal;color:var(--black)}
 .offer{position:relative;background:var(--white);color:var(--black);text-align:left;margin:32px auto 0;max-width:440px;padding:28px 24px 24px;clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
 .offer-wrap{position:relative;max-width:440px;margin-inline:auto}
-.sticker{position:absolute;z-index:5;right:-6px;top:-18px;transform:rotate(5deg);background:var(--lime);color:var(--black);font:900 20px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px 9px;text-align:center}
-.sticker small{display:block;font:700 11px/1.2 var(--body);letter-spacing:0;text-transform:none;margin-top:3px}
+.sticker{position:relative;z-index:5;margin:0 auto -12px;width:max-content;max-width:100%;transform:rotate(-2deg);background:var(--lime);color:var(--black);padding:12px 18px;text-align:center;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:10px;row-gap:2px}
+.sticker b{font:900 30px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.sticker small{font:700 15px/1.25 var(--body)}
 .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .price b{font:900 76px/.85 var(--display)}
 .price s{color:rgba(0,0,0,.45);font-size:22px;font-weight:600}
@@ -64,15 +66,17 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .chars .left{height:340px;width:auto;margin-bottom:-48px}
 .chars .right{display:none}
 
-/* Paper seams (docs/learning-log.md "whole dividers"): a torn strip in the band's own colour
-   hangs half over the band above. Bands stack at z 1, so the hero characters (z 3) stay on top. */
+/* Paper seams (docs/learning-log.md one-sided "top" dividers): the band's own torn top edge
+   sits on top of the band above. cover + a wide box crops only the sides, never the torn edge. Bands stack at z 1, so the hero characters (z 3) stay on top. */
 .band{position:relative;z-index:1}
-.paper{position:absolute;left:0;right:0;top:0;height:clamp(70px,10vw,150px);transform:translateY(-50%);background:var(--paper) center/cover no-repeat;pointer-events:none}
+.paper{position:absolute;left:0;right:0;bottom:calc(100% - 3px);height:clamp(36px,4.6vw,76px);background:var(--paper) center bottom/cover no-repeat;pointer-events:none}
 .black{background:var(--black);color:#fff}
 .offwhite{background:var(--off)}
-.pad{padding-block:56px 72px}
+.pad{padding-block:64px}
 .h2{font-size:clamp(44px,6vw,88px)}
-.lead{font-size:18px;line-height:1.5;margin-top:16px;max-width:52ch}
+.d em{font-style:normal}
+.c-lime{color:var(--lime)}.c-violet{color:var(--violet)}.c-red{color:var(--red)}
+.lead{font-size:18px;line-height:1.5;margin-top:16px;max-width:68ch}
 .black .lead{color:rgba(255,255,255,.75)}
 
 /* Stats (the camps overview pattern) */
@@ -150,10 +154,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .chars{position:absolute;inset:0;margin:0;display:block;z-index:3}
  .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(420px,38vw,580px);width:auto;margin:0}
  .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:40px;height:clamp(340px,30vw,470px);width:auto}
- .sticker{right:-34px;top:-22px}
+ .sticker{position:absolute;margin:0;right:-60px;top:-34px;transform:rotate(3deg);flex-wrap:nowrap;white-space:nowrap;max-width:none}
+ .offer{padding-top:44px}
  .offer-wrap,.offer{max-width:460px}
- .pad{padding-block:104px 104px}
- .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:end}
+ .pad{padding-block:112px}
+ .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center}
  .ladder{margin-top:0;height:400px}
  .tl{grid-template-columns:repeat(6,1fr);border-left:0;border-top:3px solid var(--black);margin:48px 0 0;padding-top:0}
  .tl li{padding:26px 16px 0 0}
@@ -176,19 +181,19 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <p class="chip"><span>Season 01</span></p>
 <h1 class="d h1">A coach. A team.<br><em>A season to play for.</em></h1>
 <div class="offer-wrap">
-<!--IF:open--><!--IF:jersey--><p class="sticker">Free jersey<small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
+<!--IF:open--><!--IF:jersey--><p class="sticker"><b>Free jersey</b> <small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
 <div class="offer">
 <div class="price"><b>{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
-<p class="then">Then {{MONTHLY}} a month, Feb to Apr. About {{PER_PRACTICE}} a practice.</p>
+<p class="then">Then about {{PER_PRACTICE}} a practice.</p>
 <!--IF:open--><a class="btn" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a>
 <!--IFNOT:jersey--><p class="urgent">Spots are limited. Teams are small.</p><!--/IFNOT:jersey--><!--/IF:open-->
 <!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div></div>
 <div class="chars" aria-hidden="true"><img class="left" src="/images/season1/s1-crew-left.webp" alt="" width="959" height="1100"><img class="right" src="/images/season1/s1-jinx.webp" alt="" width="1002" height="1000" loading="lazy"></div>
 </header>
 <main>
-<section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-1@2x.png')" aria-hidden="true"></div>
+<section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad">
-<h2 class="d h2">Same coach.<br>Same squad. All season.</h2>
+<h2 class="d h2">Same coach.<br>Same squad. <em class="c-lime">All season.</em></h2>
 <p class="lead">Coached team practice from home, with the same teammates every week.</p>
 <div class="stats">
 <div class="stat"><img src="/icons/calendar.svg" alt=""><span class="k">Practice</span><b>2x a week</b><small>90 minutes each</small></div>
@@ -196,9 +201,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="stat"><img src="/icons/youth.svg" alt=""><span class="k">Ages</span><b>{{AGE_MIN}} to {{AGE_MAX}}</b><small>Any skill level</small></div>
 <div class="stat"><img src="/icons/trophy.svg" alt=""><span class="k">Finale</span><b>May</b><small>Season tournament</small></div>
 </div></div></section>
-<section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-1@2x.png')" aria-hidden="true"></div>
+<section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad two">
-<div><h2 class="d h2">Games are better<br>with friends.</h2>
+<div><h2 class="d h2">Games are better<br><em class="c-violet">with friends.</em></h2>
 <p class="lead">Every friend who joins with your link gets a free month. So does your kid.</p>
 <p class="ladder-note">You get your link right after you save a spot.</p></div>
 <ol class="ladder" aria-label="Your season price by friends who join">
@@ -208,9 +213,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <li style="--h:{{LH3}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""></span><span class="bar">{{LADDER3}}</span><span class="who">3 friends</span></li>
 <li style="--h:12%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""><img src="/images/avatars/brickbuddy104.webp" alt=""></span><span class="bar">Free</span><span class="who">4 friends. We refund your {{FIRST}}.</span></li>
 </ol></div></section>
-<section class="band offwhite"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-grey-1@2x.png')" aria-hidden="true"></div>
+<section class="band offwhite"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad">
-<h2 class="d h2">What happens when</h2>
+<h2 class="d h2">What happens <em class="c-red">when</em></h2>
 <ol class="tl">
 <li><b>Now</b><span>Save their spot.</span></li>
 <li><b>Late Nov</b><span>Gamer profile, jersey and gear check.</span></li>
@@ -219,22 +224,22 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <li><b>Mid Jan</b><span>First practice.</span></li>
 <li><b>May</b><span>Final tournament.</span></li>
 </ol></div></section>
-<section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-1@2x.png')" aria-hidden="true"></div>
+<section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad">
-<h2 class="d h2">Who coaches</h2>
+<h2 class="d h2">Who <em class="c-lime">coaches</em></h2>
 <div class="coaches">
 <article class="coach"><img src="/images/season1/s1-coach-sebastien.webp" alt="Coach Sebastien" width="640" height="520" loading="lazy" decoding="async"><div><b>Sebastien "ZzLegendary" Demontigny</b><span class="role">Head coach // Top 1% player</span><p>The real deal. He's coached pros at Dignitas and Evil Geniuses, and now he coaches your kid.</p></div></article>
 <article class="coach"><img src="/images/season1/s1-coach-karlin.webp" alt="Karlin, founder" width="640" height="520" loading="lazy" decoding="async"><div><b>Karlin "Faith" Oei</b><span class="role">Founder // Challenger jungler</span><p>Started EKUZO to change what it means to be a gamer.</p></div></article>
 <article class="coach"><img src="/images/season1/s1-coach-nuri.webp" alt="Coach Nuri" width="640" height="520" loading="lazy" decoding="async"><div><b>Nuri "Teemo Time" Je</b><span class="role">Coach // Diamond support</span><p>A former public school teacher who knows how kids learn, in game and out.</p></div></article>
 </div>
-<div class="safe"><h3 class="d">Safe by design</h3><ul>
+<div class="safe"><h3 class="d">Safe by <em class="c-lime">design</em></h3><ul>
 <li><span class="ci"><img src="/icons/key.svg" alt=""></span>Every coach is background-checked.</li>
 <li><span class="ci"><img src="/icons/visualize.svg" alt=""></span>Sessions are coach-led and recorded.</li>
 <li><span class="ci"><img src="/icons/handwave.svg" alt=""></span>Parents can drop in on any session.</li>
 </ul></div></div></section>
-<section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-1@2x.png')" aria-hidden="true"></div>
+<section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad"><div class="faqwrap">
-<h2 class="d h2">Short answers</h2>
+<h2 class="d h2">Short <em class="c-violet">answers</em></h2>
 <div class="faq">
 <details><summary>What game do they play?</summary><p>Your kid might play Roblox, Minecraft or Fortnite, and they keep those. With us, they play League of Legends on a team of five. It’s free to download, and most kids start from scratch. League is our core game, and we’re looking at adding&nbsp;others.</p></details>
 <details><summary>Do we have to go anywhere?</summary><p>No. Every practice and the final tournament happen online, from home.</p></details>
