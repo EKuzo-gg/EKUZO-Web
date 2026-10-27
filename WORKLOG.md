@@ -18,7 +18,9 @@ Branch `brand-sync-2026-10-27` off `origin/dev` 57aa70b. Visual change is color 
 - `.agents/skills/impeccable`: the old unbuilt template copy replaced with the Impeccable 4.8.0 release.
 - New `PRODUCT.md` and `DESIGN.md` at the root (Impeccable context files).
 
-**Not changed (flagged):** soft radii and `shadow-*` uses; `app/season1/landing.html` (Season 01 sub-brand, its violet `#8E22E0` vs `#AE2CF2` still open).
+- `app/season1/landing.html`: violet `#8E22E0` → `#AE2CF2` (3 uses; color only). **Jamie:** you edited this file on 10-23; script untouched.
+
+**Kept as is (Aaron's call):** soft radii and `shadow-*` uses on existing pages.
 
 ## Jamie (via Claude, Build Loop), October 23, 2026 (Text Karlin alert: parent location and time zone)
 

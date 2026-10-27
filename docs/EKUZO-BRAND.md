@@ -182,7 +182,7 @@ Two faces. **Tungsten is reserved for the loudest moments — most headings are 
 
 - `.font-display` defaults to **Black (900)** with global `letter-spacing: 0.02em` (set in `globals.css` — don't override per element unless intentional).
 - **Casing:** display headlines UPPERCASE; section headings sentence case; eyebrows UPPERCASE wide-tracked; product names as one token — `EKUZO` + suffix in a contrast color: `EKUZO<span className="text-red">TEAMS</span>`, `EKUZO100`, `EKUZOCAMPS`.
-- Tungsten Narrow is **preview-licensed** (Hoefler & Co). Secure a production license before public launch. Fallback when Tungsten can't load (shared files, email, mockups): **Oswald Bold, all caps. Never Anton** (rejected 2026-07-30).
+- Tungsten Narrow (Hoefler & Co) is licensed to Aaron. Fallback when Tungsten can't load (shared files, email, mockups): **Oswald Bold, all caps. Never Anton** (rejected 2026-07-30).
 
 ---
 
@@ -251,7 +251,7 @@ Speaks to a 14-year-old and their parent at once. Fun for players, grounded and 
 
 ## 8b. Season 01 sub-brand
 
-`/season1` (`app/season1/landing.html`) is a deliberate sub-brand, decided 2026-10-27: a near-black wall (`#0C0B0E`), one expanded-palette accent per ad (lime `#E0FF4E` leads), Inter Tight display, JetBrains Mono labels, no torn paper. The ad and its landing match. EKUZO red stays the EKUZO mark. Voice rules are unchanged. Open item: the landing's violet `#8E22E0` differs from the expanded violet `#AE2CF2`.
+`/season1` (`app/season1/landing.html`) is a deliberate sub-brand, decided 2026-10-27: a near-black wall (`#0C0B0E`), one expanded-palette accent per ad (lime `#E0FF4E` leads), Inter Tight display, JetBrains Mono labels, no torn paper. The ad and its landing match. EKUZO red stays the EKUZO mark. Voice rules are unchanged. Its violet is the expanded violet `#AE2CF2` (the old `#8E22E0` was removed 2026-10-27).
 
 ## 9. New-page structural checklist
 
@@ -275,7 +275,7 @@ When building a **new** page, before you call it done (this is for new work — 
 - **Black:** canonical is pure **`#000000`** (Tailwind `black`). The near-black `#0A0A0A` used on the register and success pages was migrated to `#000000` on 2026-10-27.
 - Only **red / grey / purple** are tokenized in `globals.css`; black and white are used as literals.
 - **Icons:** the `-white` icon files are drawn in `currentColor`, so loaded via `<img>` they render black. On red or dark circles, invert with `filter: brightness(0) invert(1)`.
-- **Still open:** soft radii (`rounded-full` on pills, `rounded-lg/md/xl`) and a few `shadow-*` uses conflict with §7. Flag only; don't refactor existing pages.
+- **Accepted as is (2026-10-27):** the soft radii (`rounded-full` pills, `rounded-lg/md/xl`) and the few `shadow-*` uses on existing pages stay. New work still follows §7.
 
 ---
 
@@ -292,5 +292,5 @@ This is a living reference — keep it current as the system matures. When somet
 ### Changelog
 
 - **2026-07-09** — Initial version: page skeleton, section shell, color bands, torn-paper seam sequence, type, components, voice, misuse, drift notes. Added expanded palette (working draft — cream/sand/slate + 9 accents) with paste-in `globals-colors-snippet.css`.
-- **2026-10-27** — Brand sync (Aaron): black is pure `#000000` (register/success `#0A0A0A` migrated); `#F0EDEA` migrated to `bg-grey`; Anton removed as a fallback (Oswald only); contrast rules for opacity text and white on red; eyebrow noted as the Impeccable exception; "gamer" decision; Season 01 sub-brand (§8b); `-white` icon note; link to the EKUZO Design System artifact.
+- **2026-10-27** — Brand sync (Aaron): black is pure `#000000` (register/success `#0A0A0A` migrated); `#F0EDEA` migrated to `bg-grey`; Anton removed as a fallback (Oswald only); contrast rules for opacity text and white on red; eyebrow noted as the Impeccable exception; "gamer" decision; Season 01 sub-brand (§8b) with violet `#AE2CF2`; `-white` icon note; link to the EKUZO Design System artifact.
 - _add new entries above this line._

@@ -29,7 +29,6 @@ Parents usually meet EKUZO on a phone, from an ad, a referral or search, often s
 - Commerce is live for Camps, Teams and EKUZO 100; Season 01 is a waitlist and ad funnel.
 - FAQ answers come from `knowledge-base/company/knowledge/ekuzo-faq-canon.md`, never hand-written in pages.
 - Existing pages, especially torn-paper seams and the color-flipping nav, are not refactored to match docs.
-- Tungsten Narrow is a preview license: a production license is needed before wide public launch.
 
 ## Brand Commitments
 
