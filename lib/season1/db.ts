@@ -1,7 +1,8 @@
 import { randomUUID } from "node:crypto";
 import { neon } from "@neondatabase/serverless";
 import { customAlphabet } from "nanoid";
-import { S1_TEST_DB_MARKER } from "./mode";
+import { S1_TEST_DB_MARKER, deployContext } from "./mode";
+import { hashViewToken, newViewToken } from "./rules";
 
 /**
  * Season 01 database layer. Neon HTTP driver, parameterized queries only.
@@ -15,19 +16,28 @@ type Row = Record<string, any>;
 
 let _sql: Sql | null = null;
 
+/** Per-query HTTP timeout (ops 12). A getter, so every fetch gets a fresh signal. */
+export const QUERY_TIMEOUT_MS = 8000;
+const fetchOptions = {
+  get signal() {
+    return AbortSignal.timeout(QUERY_TIMEOUT_MS);
+  },
+};
+
 /**
- * Memoized Neon client. Unless S1_COMMIT_MODE is "live", DATABASE_URL must
- * point at the Neon test endpoint; anything else throws (fail closed).
+ * Memoized Neon client. The guard keys on deploy context, not commit mode
+ * (ops 1): a DATABASE_URL other than the Neon test endpoint is allowed only
+ * when the deploy context is "production"; anything else throws (fail
+ * closed). Commit mode gates PaymentIntent creation only.
  */
 export function getSql(): Sql {
   if (_sql) return _sql;
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("DATABASE_URL is not set");
-  const live = (process.env.S1_COMMIT_MODE ?? "").trim().toLowerCase() === "live";
-  if (!live && !url.includes(S1_TEST_DB_MARKER)) {
+  if (!url.includes(S1_TEST_DB_MARKER) && deployContext() !== "production") {
     throw new Error("Refusing: DATABASE_URL is not the Season 01 test database");
   }
-  _sql = neon(url);
+  _sql = neon(url, { fetchOptions });
   return _sql;
 }
 
@@ -65,13 +75,13 @@ export async function upsertFamilyGuardian(input: {
 }): Promise<FamilyGuardian> {
   const email = input.email.trim().toLowerCase();
   const find = async (): Promise<FamilyGuardian | null> => {
+    // RT7: an existing guardian is never overwritten here; submitted name and
+    // phone go on the order (payer_first_name, payer_phone).
     const rows = await q(
-      `update s1_guardians g
-          set first_name = coalesce($3, g.first_name), phone = coalesce($4, g.phone)
-         from s1_families f
-        where g.email = $1 and g.livemode = $2 and f.id = g.family_id
-        returning g.id as guardian_id, f.id as family_id, f.public_id as family_public_id`,
-      [email, input.livemode, input.firstName ?? null, input.phone ?? null],
+      `select g.id as guardian_id, f.id as family_id, f.public_id as family_public_id
+         from s1_guardians g join s1_families f on f.id = g.family_id
+        where g.email = $1 and g.livemode = $2`,
+      [email, input.livemode],
     );
     return rows[0]
       ? { familyId: rows[0].family_id, familyPublicId: rows[0].family_public_id, guardianId: rows[0].guardian_id }
@@ -165,6 +175,13 @@ export interface PendingOrderInput {
   src?: string | null;
   livemode: boolean;
   items: { kidId: string; role: "first" | "sibling"; unitCents: number }[];
+  /** RT3 client attempt id. */
+  attemptId?: string | null;
+  /** RT7 submitted payer details. */
+  payerFirstName?: string | null;
+  payerPhone?: string | null;
+  /** RT20 raw client-supplied x-forwarded-for. */
+  consentXff?: string | null;
 }
 
 export async function insertPendingOrder(
@@ -179,12 +196,14 @@ export async function insertPendingOrder(
         sql.query(
           `insert into s1_orders (id, public_id, family_id, payer_email, offer_id, offer_version, status,
                                   amount_cents, consent_version, consent_at, consent_ip, consent_ua,
-                                  referral_code, src, livemode)
-           values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14)`,
+                                  referral_code, src, livemode, attempt_id, payer_first_name, payer_phone,
+                                  consent_xff)
+           values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)`,
           [
             orderId, publicId, o.familyId, o.payerEmail.trim().toLowerCase(), o.offerId, o.offerVersion,
             o.amountCents, o.consentVersion, o.consentAt.toISOString(), o.consentIp ?? null,
             o.consentUa ?? null, o.referralCode ?? null, o.src ?? null, o.livemode,
+            o.attemptId ?? null, o.payerFirstName ?? null, o.payerPhone ?? null, o.consentXff ?? null,
           ],
         ),
         ...o.items.map((it) =>
@@ -196,7 +215,8 @@ export async function insertPendingOrder(
       ]);
       return { orderId, publicId };
     } catch (err) {
-      if (attempt === 2) throw err;
+      // A unique(payer_email, attempt_id, livemode) conflict will not clear on retry.
+      if (attempt === 2 || /s1_orders_attempt_key/.test(String((err as Error)?.message ?? ""))) throw err;
     }
   }
   throw new Error("insertPendingOrder: unreachable");
@@ -237,29 +257,30 @@ export interface OrderView {
   livemode: boolean;
   guardianFirstName: string | null;
   kids: OrderKid[];
-  /** The family's active code (type 'family'), if one has been minted. */
+  /** The family's code (type 'family'), active first, whatever its status (ops 5). */
   code: string | null;
+  flags: string[];
 }
 
-export async function getOrderByPublicId(publicId: string): Promise<OrderView | null> {
-  const rows = await q(
-    `select o.id, o.public_id, o.family_id, f.public_id as family_public_id, o.payer_email, o.status,
-            o.amount_cents, o.payment_intent_id, o.paid_at, o.fulfilled_at, o.jersey_eligible, o.livemode,
-            (select g.first_name from s1_guardians g where g.family_id = o.family_id order by g.created_at limit 1)
-              as guardian_first_name,
-            coalesce((
-              select json_agg(json_build_object('id', k.id, 'firstName', k.first_name, 'age', k.age,
-                                                'status', k.status, 'role', oi.role, 'unitCents', oi.unit_cents)
-                              order by oi.created_at, k.created_at)
-                from s1_order_items oi join s1_kids k on k.id = oi.kid_id
-               where oi.order_id = o.id), '[]'::json) as kids,
-            (select c.code from s1_codes c
-              where c.family_id = o.family_id and c.type = 'family' and c.status = 'active' limit 1) as code
-       from s1_orders o join s1_families f on f.id = o.family_id
-      where o.public_id = $1`,
-    [publicId],
-  );
-  const r = rows[0];
+const ORDER_VIEW_SELECT = `
+  select o.id, o.public_id, o.family_id, f.public_id as family_public_id, o.payer_email, o.status,
+         o.amount_cents, o.payment_intent_id, o.paid_at, o.fulfilled_at, o.jersey_eligible, o.livemode,
+         o.flags,
+         coalesce(o.payer_first_name,
+           (select g.first_name from s1_guardians g where g.family_id = o.family_id order by g.created_at limit 1))
+           as guardian_first_name,
+         coalesce((
+           select json_agg(json_build_object('id', k.id, 'firstName', k.first_name, 'age', k.age,
+                                             'status', k.status, 'role', oi.role, 'unitCents', oi.unit_cents)
+                           order by oi.created_at, k.created_at)
+             from s1_order_items oi join s1_kids k on k.id = oi.kid_id
+            where oi.order_id = o.id), '[]'::json) as kids,
+         (select c.code from s1_codes c
+           where c.family_id = o.family_id and c.type = 'family'
+           order by (c.status = 'active') desc limit 1) as code
+    from s1_orders o join s1_families f on f.id = o.family_id`;
+
+function toOrderView(r: Row | undefined): OrderView | null {
   if (!r) return null;
   return {
     id: r.id,
@@ -277,7 +298,30 @@ export async function getOrderByPublicId(publicId: string): Promise<OrderView | 
     guardianFirstName: r.guardian_first_name,
     kids: r.kids as OrderKid[],
     code: r.code ?? null,
+    flags: (r.flags as string[] | null) ?? [],
   };
+}
+
+/** Reference lookup only: the public id never grants a viewer access (RT11). */
+export async function getOrderByPublicId(publicId: string): Promise<OrderView | null> {
+  return toOrderView((await q(`${ORDER_VIEW_SELECT} where o.public_id = $1`, [publicId]))[0]);
+}
+
+/** The welcome page's lookup: by the sha256 of the s1_order cookie token. */
+export async function getOrderByViewToken(token: string): Promise<OrderView | null> {
+  if (typeof token !== "string" || token.length < 20 || token.length > 128) return null;
+  return toOrderView((await q(`${ORDER_VIEW_SELECT} where o.view_token_hash = $1`, [hashViewToken(token)]))[0]);
+}
+
+/** New random view token for the order; stores only its hash. Replaces any earlier token. */
+export async function issueViewToken(orderId: string): Promise<string> {
+  const token = newViewToken();
+  const rows = await q(`update s1_orders set view_token_hash = $2 where id = $1 returning id`, [
+    orderId,
+    hashViewToken(token),
+  ]);
+  if (!rows[0]) throw new Error("issueViewToken: order not found");
+  return token;
 }
 
 export interface ClaimedOrder {
@@ -375,13 +419,15 @@ export async function insertEvent(e: {
   subject?: string | null;
   stripeEventId?: string | null;
   data?: unknown;
-  livemode?: boolean;
+  livemode: boolean;
 }): Promise<boolean> {
+  if (typeof e.livemode !== "boolean") throw new Error("insertEvent: livemode is required");
+  // Untargeted: also absorbs the one-fulfil-event-per-(type, subject) index.
   const rows = await q(
     `insert into s1_events (source, type, subject, stripe_event_id, data, livemode)
      values ($1, $2, $3, $4, $5::jsonb, $6)
-     on conflict (stripe_event_id) do nothing returning id`,
-    [e.source, e.type, e.subject ?? null, e.stripeEventId ?? null, json(e.data), e.livemode ?? false],
+     on conflict do nothing returning id`,
+    [e.source, e.type, e.subject ?? null, e.stripeEventId ?? null, json(e.data), e.livemode],
   );
   return rows.length > 0;
 }
@@ -391,12 +437,284 @@ export async function enqueueOutbox(
   kind: string,
   dedupeKey: string,
   payload: unknown,
-  livemode = false,
+  livemode: boolean,
 ): Promise<boolean> {
+  if (typeof livemode !== "boolean") throw new Error("enqueueOutbox: livemode is required");
   const rows = await q(
     `insert into s1_outbox (kind, dedupe_key, payload, livemode) values ($1, $2, $3::jsonb, $4)
      on conflict (dedupe_key) do nothing returning id`,
     [kind, dedupeKey, json(payload), livemode],
   );
   return rows.length > 0;
+}
+
+// ── Commit (RT3, RT6) ─────────────────────────────────────────────────
+
+export interface AttemptOrder {
+  orderId: string;
+  publicId: string;
+  familyId: string;
+  status: string;
+  amountCents: number;
+  paymentIntentId: string | null;
+  kids: { firstName: string; age: number | null }[];
+}
+
+/** The order for (email, attempt, mode) that is not canceled, if any. */
+export async function findPendingOrderByAttempt(
+  email: string,
+  attemptId: string,
+  livemode: boolean,
+): Promise<AttemptOrder | null> {
+  const rows = await q(
+    `select o.id, o.public_id, o.family_id, o.status, o.amount_cents, o.payment_intent_id,
+            coalesce((select json_agg(json_build_object('firstName', k.first_name, 'age', k.age))
+                        from s1_order_items oi join s1_kids k on k.id = oi.kid_id
+                       where oi.order_id = o.id), '[]'::json) as kids
+       from s1_orders o
+      where o.payer_email = $1 and o.attempt_id = $2 and o.livemode = $3`,
+    [email.trim().toLowerCase(), attemptId, livemode],
+  );
+  const r = rows[0];
+  if (!r) return null;
+  return {
+    orderId: r.id,
+    publicId: r.public_id,
+    familyId: r.family_id,
+    status: r.status,
+    amountCents: r.amount_cents,
+    paymentIntentId: r.payment_intent_id,
+    kids: r.kids,
+  };
+}
+
+/**
+ * Marks a pending order canceled, frees its attempt id (suffix '#c<public id>')
+ * and sets its pending kids canceled. True if this call canceled it.
+ */
+export async function cancelOrder(orderId: string): Promise<boolean> {
+  const sql = getSql();
+  const [rows] = await sql.transaction([
+    sql.query(
+      `update s1_orders set status = 'canceled', attempt_id = attempt_id || '#c' || public_id
+        where id = $1 and status = 'pending' returning id`,
+      [orderId],
+    ),
+    sql.query(
+      `update s1_kids set status = 'canceled'
+        where status = 'pending' and id in (select kid_id from s1_order_items where order_id = $1)
+          and exists (select 1 from s1_orders where id = $1 and status = 'canceled')`,
+      [orderId],
+    ),
+  ]);
+  return (rows as Row[]).length > 0;
+}
+
+/** Stored Season 01 Customer id for the family, or null. */
+export async function getFamilyCustomerId(familyId: string): Promise<string | null> {
+  const rows = await q(`select stripe_customer_id from s1_families where id = $1`, [familyId]);
+  return (rows[0]?.stripe_customer_id as string | null) ?? null;
+}
+
+/** Stores the customer id unless one is already set; returns the stored id. */
+export async function setFamilyCustomerId(familyId: string, customerId: string): Promise<string> {
+  const rows = await q(
+    `update s1_families set stripe_customer_id = coalesce(stripe_customer_id, $2) where id = $1
+     returning stripe_customer_id`,
+    [familyId, customerId],
+  );
+  return (rows[0]?.stripe_customer_id as string) ?? customerId;
+}
+
+// ── Fulfil ────────────────────────────────────────────────────────────
+
+export interface FulfilOrder {
+  id: string;
+  publicId: string;
+  familyId: string;
+  status: string;
+  amountCents: number;
+  paymentIntentId: string | null;
+  livemode: boolean;
+  piCreatedAt: Date | null;
+  paidAt: Date | null;
+  fulfilledAt: Date | null;
+}
+
+function toFulfilOrder(r: Row | undefined): FulfilOrder | null {
+  if (!r) return null;
+  const d = (v: unknown) => (v == null ? null : new Date(v as string));
+  return {
+    id: r.id,
+    publicId: r.public_id,
+    familyId: r.family_id,
+    status: r.status,
+    amountCents: r.amount_cents,
+    paymentIntentId: r.payment_intent_id,
+    livemode: r.livemode,
+    piCreatedAt: d(r.pi_created_at),
+    paidAt: d(r.paid_at),
+    fulfilledAt: d(r.fulfilled_at),
+  };
+}
+
+const FULFIL_COLS = `id, public_id, family_id, status, amount_cents, payment_intent_id, livemode,
+                     pi_created_at, paid_at, fulfilled_at`;
+
+export async function getOrderForFulfilByPi(piId: string): Promise<FulfilOrder | null> {
+  return toFulfilOrder((await q(`select ${FULFIL_COLS} from s1_orders where payment_intent_id = $1`, [piId]))[0]);
+}
+
+export async function getOrderForFulfilByPublicId(publicId: string): Promise<FulfilOrder | null> {
+  return toFulfilOrder((await q(`select ${FULFIL_COLS} from s1_orders where public_id = $1`, [publicId]))[0]);
+}
+
+/** Ops 3: set payment_intent_id on an order that has none. Returns the order when it now carries piId. */
+export async function backfillPaymentIntent(
+  orderId: string,
+  piId: string,
+  piCreatedAt: Date,
+): Promise<FulfilOrder | null> {
+  await q(
+    `update s1_orders set payment_intent_id = $2, pi_created_at = coalesce(pi_created_at, $3)
+      where id = $1 and payment_intent_id is null`,
+    [orderId, piId, piCreatedAt.toISOString()],
+  );
+  const o = toFulfilOrder((await q(`select ${FULFIL_COLS} from s1_orders where id = $1`, [orderId]))[0]);
+  return o && o.paymentIntentId === piId ? o : null;
+}
+
+/**
+ * The single claim (RT2, RT13). From 'pending' (or 'canceled': the money moved
+ * anyway) to `status` ('paid' or 'refunded'). Returns true for the one caller
+ * that won.
+ */
+export async function claimOrder(
+  orderId: string,
+  piId: string,
+  pmId: string | null,
+  status: "paid" | "refunded",
+): Promise<boolean> {
+  const rows = await q(
+    `update s1_orders
+        set status = $4, paid_at = coalesce(paid_at, now()), payment_method_id = $3,
+            flags = case when status = 'canceled' then array_append(flags, 'paid_after_cancel') else flags end
+      where id = $1 and payment_intent_id = $2 and status in ('pending','canceled')
+      returning id`,
+    [orderId, piId, pmId, status],
+  );
+  return rows.length > 0;
+}
+
+/** Adds flags (deduplicated) to an order. */
+export async function addOrderFlags(orderId: string, flags: string[]): Promise<void> {
+  if (flags.length === 0) return;
+  await q(
+    `update s1_orders set flags = array(select distinct unnest(flags || $2::text[])) where id = $1`,
+    [orderId, flags],
+  );
+}
+
+/** Sets status, optionally only from the given statuses. True if a row changed. */
+export async function setOrderStatus(orderId: string, status: string, fromStatuses?: string[]): Promise<boolean> {
+  const rows = fromStatuses
+    ? await q(`update s1_orders set status = $2 where id = $1 and status = any($3::text[]) returning id`, [
+        orderId,
+        status,
+        fromStatuses,
+      ])
+    : await q(`update s1_orders set status = $2 where id = $1 returning id`, [orderId, status]);
+  return rows.length > 0;
+}
+
+/** Sets the kids on an order to `status`, only from the given statuses. */
+export async function setOrderKidsStatus(orderId: string, status: string, fromStatuses: string[]): Promise<void> {
+  await q(
+    `update s1_kids set status = $2
+      where id in (select kid_id from s1_order_items where order_id = $1) and status = any($3::text[])`,
+    [orderId, status, fromStatuses],
+  );
+}
+
+/** Ops 5: a family whose code was voided gets it back on a new paid order. */
+export async function reactivateFamilyCode(familyId: string): Promise<void> {
+  await q(`update s1_codes set status = 'active' where family_id = $1 and type = 'family' and status = 'void'`, [
+    familyId,
+  ]);
+}
+
+/** Billing ZIP from the payment method; keeps an existing value when zip is empty. */
+export async function setFamilyBillingZip(familyId: string, zip: string | null): Promise<void> {
+  if (!zip) return;
+  await q(`update s1_families set billing_zip = $2 where id = $1`, [familyId, zip.slice(0, 20)]);
+}
+
+/** RT8 and RT19 fields written by fulfil. */
+export async function setOrderFulfilFields(
+  orderId: string,
+  f: { jerseyEligible: boolean; pmDetails: unknown },
+): Promise<void> {
+  await q(`update s1_orders set jersey_eligible = $2, pm_details = $3::jsonb where id = $1`, [
+    orderId,
+    f.jerseyEligible,
+    json(f.pmDetails),
+  ]);
+}
+
+/**
+ * RT15: a kid on this order shares a folded first name with a kid on another
+ * paid, unrefunded order of the same family paid within 30 days.
+ */
+export async function hasDuplicateKid(orderId: string): Promise<boolean> {
+  const rows = await q(
+    `select 1
+       from s1_orders o
+       join s1_order_items oi on oi.order_id = o.id
+       join s1_kids k on k.id = oi.kid_id
+       join s1_orders o2 on o2.family_id = o.family_id and o2.id <> o.id
+       join s1_order_items oi2 on oi2.order_id = o2.id
+       join s1_kids k2 on k2.id = oi2.kid_id
+      where o.id = $1
+        and o2.status in ('paid','partially_refunded')
+        and o2.paid_at > now() - interval '30 days'
+        and k2.status <> 'refunded'
+        and k2.first_name_key = k.first_name_key
+      limit 1`,
+    [orderId],
+  );
+  return rows.length > 0;
+}
+
+// ── Webhook ───────────────────────────────────────────────────────────
+
+/** True once the event's handler finished (RT1). */
+export async function getEventProcessed(stripeEventId: string): Promise<boolean> {
+  const rows = await q(`select processed_at from s1_events where stripe_event_id = $1`, [stripeEventId]);
+  return rows[0]?.processed_at != null;
+}
+
+export async function markEventProcessed(stripeEventId: string): Promise<void> {
+  await q(`update s1_events set processed_at = coalesce(processed_at, now()) where stripe_event_id = $1`, [
+    stripeEventId,
+  ]);
+}
+
+/**
+ * RT4: failure_count = the number of recorded payment_failed webhook events for
+ * this PI (idempotent under replays). Returns the order and the new count.
+ */
+export async function incrementFailure(
+  piId: string,
+): Promise<{ orderId: string; publicId: string; status: string; failureCount: number } | null> {
+  const rows = await q(
+    `update s1_orders o
+        set failure_count = (select count(*)::int from s1_events e
+                              where e.type = 'payment_intent.payment_failed' and e.subject = $1
+                                and e.source = 'webhook')
+      where o.payment_intent_id = $1
+      returning o.id, o.public_id, o.status, o.failure_count`,
+    [piId],
+  );
+  const r = rows[0];
+  return r ? { orderId: r.id, publicId: r.public_id, status: r.status, failureCount: r.failure_count } : null;
 }

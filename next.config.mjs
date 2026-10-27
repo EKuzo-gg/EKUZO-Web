@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Season 01: inline Netlify's build-time deploy context so the function runtime can
+  // tell production from previews (lib/season1/mode.ts).
+  env: {
+    S1_DEPLOY_CONTEXT: process.env.CONTEXT || "",
+  },
   // Belt-and-suspenders: keep files under public/testimonial-videos/ out of
   // the serverless function bundle. public/ is already served from the CDN;
   // this only matters if something in server code accidentally references

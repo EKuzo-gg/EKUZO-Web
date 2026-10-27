@@ -20,4 +20,18 @@ describe("shouldSkipLegacy", () => {
     assert.equal(shouldSkipLegacy({ metadata: { product: "ekuzo100", parent_email: "p@x.com" } }), false);
     assert.equal(shouldSkipLegacy({ metadata: { parent_email: "p@x.com" } }), false);
   });
+  it("RT14: skips a set but unknown product even with a parent_email", () => {
+    for (const product of ["season2", "Camps", "camp", "s1", "ekuzo1000", "unknown"]) {
+      assert.equal(shouldSkipLegacy({ metadata: { product, parent_email: "p@x.com" } }), true, product);
+    }
+  });
+  it("RT14: known products with a parent_email are processed", () => {
+    for (const product of ["camps", "ekuzo100", "ekuzo101", "teams"]) {
+      assert.equal(shouldSkipLegacy({ metadata: { product, parent_email: "p@x.com" } }), false, product);
+    }
+  });
+  it("RT14: missing or empty product with a parent_email keeps camps behaviour", () => {
+    assert.equal(shouldSkipLegacy({ metadata: { parent_email: "p@x.com" } }), false);
+    assert.equal(shouldSkipLegacy({ metadata: { product: "", parent_email: "p@x.com" } }), false);
+  });
 });

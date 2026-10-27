@@ -1,0 +1,107 @@
+# Relay B evidence, 2026-10-26 CT. Ids and pass/fail only; no secrets, no family data.
+# Commands:
+#   TZ=UTC npm run test:s1
+#   S1_DB_TESTS=1 TZ=UTC node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs --test --test-reporter=spec lib/season1/__tests__/money.integration.test.ts
+#   (same for db.integration.test.ts and referral.integration.test.ts)
+# Migration: npm run s1:migrate -> apply 0003_season1_redteam.sql (15 statements)
+
+## Unit suite (TZ=UTC npm run test:s1)
+1..35
+# tests 109
+# suites 35
+# pass 109
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3672.682755
+
+## Money integration, run 2 (final; real Stripe test mode + Neon test). 's1 step=' log lines omitted.
+▶ season1 money path (integration, Stripe test mode)
+  ✔ (a)+(b) commit -> PI (off_session, card, season1 metadata); reuse; visa; welcome, return and webhook race -> one claim; webhook replay is a no-op (5314.955313ms)
+  ✔ (c) orphan: stored PI id nulled and ref unknown -> webhook 500, processed_at null, ops_alert; replay after ref restored -> backfill, paid; D4 rerun (15592.18504ms)
+  ✔ (d) decline -> pending, failure_count 1 (replay-safe); same attempt reuses the PI; 3 declines -> canceled + card_testing_suspect (10358.93189ms)
+  ✔ (e) 3DS card -> requires_action, order pending, return proves ownership (1811.830639ms)
+  ✔ (f) off-session: saved visa charges $1.60; 3155 and 3184 cards off-session -> authentication_required (3011.577328ms)
+  ✔ (g) pricing without confirming: two kids 18000; price_changed before any PI; returning family 8000 on the same Customer; changed kids cancel the old PI (2864.49423ms)
+  ✔ (h) refunds on (a): partial -> partially_refunded; second partial sums to full -> refunded; refund before fulfil claims as refunded with no code or outbox (7195.5383ms)
+# tag 4face0fb
+# ledger payment_intent pi_3UV1kaKORcR8BUEx0EUoMUdg (a) order zp8kzsun4e SUCCEEDED
+# ledger customer cus_VW3sdAfnCZuGog (a) family customer
+# ledger payment_intent pi_3UV1kvKORcR8BUEx1N74am12 (d) order 3kwvus5twf (declines, canceled)
+# ledger payment_intent pi_3UV1l5KORcR8BUEx0UVAYpGE (e) order zuwrdh38y2 (3DS, canceled after)
+# ledger payment_intent pi_3UV1l6KORcR8BUEx163Ne8sJ (f) off-session $1.60 on (a) saved visa SUCCEEDED
+# ledger payment_method pm_1UV1l7KORcR8BUExWxrRxNwa (f) pm_card_authenticationRequiredOnSetup attached to cus_VW3sdAfnCZuGog
+# ledger payment_intent pi_3UV1l7KORcR8BUEx0d2GmalF (f) pm_card_authenticationRequiredOnSetup off-session failed as expected
+# ledger payment_method pm_1UV1l8KORcR8BUExnjFRTFcp (f) pm_card_authenticationRequired attached to cus_VW3sdAfnCZuGog
+# ledger payment_intent pi_3UV1l9KORcR8BUEx0R4wFeFs (f) pm_card_authenticationRequired off-session failed as expected
+# ledger payment_intent pi_3UV1lAKORcR8BUEx0WsUCscw (g) superseded order vff74gf7mw (canceled by commit)
+# ledger payment_intent pi_3UV1lAKORcR8BUEx0IlzbqXG (g) two kids order gh4683dsm4 (canceled unconfirmed)
+# ledger payment_intent pi_3UV1lBKORcR8BUEx0LJ61syV (g) returning family order emyyqtyssf (canceled unconfirmed)
+# ledger refund re_3UV1kaKORcR8BUEx05KloPsh (h) partial 4000 of (a)
+# ledger refund re_3UV1kaKORcR8BUEx003YWHcB (h) partial 6000 of (a), sums to full
+# ledger payment_intent pi_3UV1lKKORcR8BUEx0YDinqT0 (i) rate-limit run x9rnrrrz5c (canceled unconfirmed)
+# ledger payment_intent pi_3UV1lLKORcR8BUEx1tj2blgz (i) rate-limit run nsb3mgbg8c (canceled unconfirmed)
+# ledger payment_intent pi_3UV1lLKORcR8BUEx0sRwBrLj (i) rate-limit run cxjgsk6d8x (canceled unconfirmed)
+# ledger payment_intent pi_3UV1lMKORcR8BUEx0Pxcut0Q (i) rate-limit run 5s7f9n5edw (canceled unconfirmed)
+# ledger payment_intent pi_3UV1lNKORcR8BUEx19x0dqlb (i) rate-limit run 5sw482gzus (canceled unconfirmed)
+# evidence (a) PI pi_3UV1kaKORcR8BUEx0EUoMUdg order zp8kzsun4e; succeeded event evt_3UV1kaKORcR8BUEx0XZVRAew real=true
+# evidence (a) paid, one code, outbox 3, event processed, replay duplicate; (b) race claim events=1; repeat fulfil 36 ms
+# evidence (c) synthetic signed event evt_local_4face0fb_21c047ca for pi_3UV1kaKORcR8BUEx0EUoMUdg
+# evidence (c) orphan -> 500 + ops_alert + processed_at null; replay -> backfilled + paid; D4 rerun restored outbox; void code reactivated
+# evidence (d) failure_count 1 after replay; 3 -> PI canceled + flag (order 3kwvus5twf)
+# evidence (e) requires_action -> pending (order zuwrdh38y2)
+# evidence (f) off-session visa pi_3UV1l6KORcR8BUEx163Ne8sJ succeeded
+# evidence (f) pm_card_authenticationRequiredOnSetup off-session -> authentication_required (expected)
+# evidence (f) pm_card_authenticationRequired off-session -> authentication_required (expected)
+# evidence (g) 409 price_changed (no order); 18000 two kids; old PI canceled; returning 8000 on cus_VW3sdAfnCZuGog; all unconfirmed PIs canceled
+# evidence (h) 4000 -> partially_refunded; +6000 -> refunded (kids refunded, prior paid 0); refund-before-fulfil -> refunded, no code, no outbox
+# evidence (i) guards pass; per-IP statuses 200,200,200,200,200,429
+  ✔ (i) guards: bad signature 400, other mode skipped, non-season1 skipped and nothing written, missing secret 500; commit off/honeypot/age; per-IP limit (3923.274638ms)
+✔ season1 money path (integration, Stripe test mode) (52234.873176ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 52845.473698
+
+## Money integration, run 1 (superseded): (b) (c) (d) (e) (i) passed; (a) failed on a test assertion (the second commit issues a fresh view token, so the first token no longer resolves: correct behaviour, test fixed); (f) (g) (h) failed only because they depended on (a).
+
+## Existing integration suites after the db.ts changes
+  ✔ public ids use the no-lookalike alphabet (2.857237ms)
+  ✔ upserts family and guardian, reusing the family for the same email (258.689047ms)
+  ✔ inserts kids and a pending order with items (155.519429ms)
+  ✔ pending orders do not count as prior paid kids (30.107858ms)
+  ✔ claims a paid order exactly once (144.075772ms)
+  ✔ tracks fulfilment completion (113.769154ms)
+  ✔ mints one family code, returning the same code on repeat and under concurrency (266.99939ms)
+  ✔ mintFamilyCode retries on a code collision (263.786915ms)
+  ✔ records a stripe event once (60.712147ms)
+  ✔ enqueues an outbox key once (87.249726ms)
+  ✔ rate limits within a window (82.847148ms)
+✔ season1 db (integration) (1473.561297ms)
+  ✔ resolves a family code to the committed kid's first name (95.315741ms)
+  ✔ accepts a spaced display form (37.388631ms)
+  ✔ show_name false returns the code nameless (31.036281ms)
+  ✔ void, unknown and unpaid-family codes return null (102.119895ms)
+  ✔ crawler UA gets the code but no name (29.49151ms)
+  ✔ partner code shows its display name (39.532589ms)
+  ✔ the 31st named render from one IP is nameless but keeps the code (3122.127689ms)
+  ✔ inviteDecision: ok, unknown, own_family, already_paid (329.489998ms)
+✔ referral (integration) (5299.001546ms)
+ℹ tests 19
+ℹ pass 19
+ℹ fail 0
+
+## next dev -p 3103 smoke (no Stripe objects created)
+POST /api/season1/stripe-webhook bad signature -> 400 {"error":"bad_signature"}
+POST /api/season1/commit two kids expectedCents 10000 -> 409 {"error":"price_changed","amountCents":18000}
+POST /api/season1/commit honeypot -> 422 {"error":"invalid"}
+Log lines seen: s1 step=webhook.signature order=- ok=false err=bad_signature | s1 step=commit.price_changed order=- ok=true | s1 step=commit.honeypot order=- ok=false err=honeypot
+
+## PII check on step logs: 122 step lines in run 2; lines containing '@': 0
+
+## tsc: npx tsc --noEmit -p . -> clean

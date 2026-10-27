@@ -133,14 +133,14 @@ describe("season1 db (integration)", { skip: enabled ? false : "set S1_DB_TESTS=
   });
 
   it("records a stripe event once", async () => {
-    const e = { source: "test", type: "payment_intent.succeeded", subject: piId, stripeEventId: eventId, data: { n: 1 } };
+    const e = { source: "test", type: "payment_intent.succeeded", subject: piId, stripeEventId: eventId, data: { n: 1 }, livemode: false };
     assert.equal(await insertEvent(e), true);
     assert.equal(await insertEvent(e), false);
   });
 
   it("enqueues an outbox key once", async () => {
-    assert.equal(await enqueueOutbox("test_kind", outboxKey, { a: 1 }), true);
-    assert.equal(await enqueueOutbox("test_kind", outboxKey, { a: 2 }), false);
+    assert.equal(await enqueueOutbox("test_kind", outboxKey, { a: 1 }, false), true);
+    assert.equal(await enqueueOutbox("test_kind", outboxKey, { a: 2 }, false), false);
     const rows = (await getSql().query(`select count(*)::int as n from s1_outbox where dedupe_key = $1`, [
       outboxKey,
     ])) as { n: number }[];
