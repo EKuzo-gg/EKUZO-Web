@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 season page: buttons, coaches, safe panel)
+
+- Buttons are neon green (`--lime`) with black text, not red (nav, card, sticky bar, end CTA; a 2px
+  black inset edge on white surfaces). The jersey sticker moved to black with lime text so it never
+  reads as a button.
+- Coach cards sized like the camps page: 3-up in 1040px, 240px photos, double notch, camps type sizes,
+  hover lift.
+- Safe by design: compact panel, small headline over one row of three icon + text items.
+- Sticky bar headline: "Sign up for Season 01" / "$100 first month" (shown on phones too).
+
+---
 ## Aaron (via Claude), October 27, 2026 (Safe by design layout, paper on wide screens)
 
 - Paper edges: height now `max(36px, 3.3vw)` to follow the PNGs' ~29:1 shape. The old 76px cap let
