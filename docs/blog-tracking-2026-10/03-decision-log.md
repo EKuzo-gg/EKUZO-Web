@@ -43,3 +43,18 @@ Branch `build/blog-tracking-2026-10`, 2026-10-26. Handoff items 1 to 3 of
 - Accepted risk (Sentry D4): in Season 01 mode, `register_click` never fires (the popup takes
   /register clicks first), and `newsletter_signup` has no live trigger. Both resume when the mode
   is switched off.
+
+## Done in GA4 and the Google tag, 2026-10-26 (Jamie's go in the session)
+
+- Custom dimensions (event scope): Post slug `post_slug`, Link type `link_type`, Link path `link_path`,
+  Lead source `lead_source`, CTA source `cta_source`. No older `source` dimension existed.
+- `generate_lead` was already a key event.
+- Google tag (ekuso.gg - GA4, G-8LM45PX53W), Define internal traffic: rule "Jamie home office",
+  traffic_type `internal`, 136.62.180.253/32 and 2605:a601:9c4c:3a00::/64 (read from Jamie's Mac on
+  2026-10-26; a home IP can change, so re-check it if internal sessions reappear). Add Karlin's and
+  Aaron's IPs the same way.
+- Data filters: Internal Traffic switched from Testing to Active; Developer Traffic created and Active.
+  Activation is not retroactive.
+- List unwanted referrals: added "Referral domain contains ekuzo.netlify.app" (dev and deploy
+  previews). The existing condition reads `ekuso.gg`, and the stream and tag are named "ekuso.gg - GA4"
+  with stream URL https://ekuso.gg: a typo for ekuzo.gg, left unchanged for Jamie to decide.
