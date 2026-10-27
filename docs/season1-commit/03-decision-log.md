@@ -12,3 +12,4 @@
 | D8 | 22:15 | Codes are 8 digits (7 random plus Damm), shown `4827 1937`; first digit 1 to 9 | Brief override of the PM scope's 9 digits | Brief | n/a |
 | D9 | 22:15 | Unset `S1_COMMIT_MODE` resolves to test when the key is `sk_test_` and the DB is the test endpoint, else off | No Netlify env change needed for the branch; fails closed elsewhere | Lead | Low |
 | D10 | 22:15 | Legacy guard skips `product=season1` and PaymentIntents without `parent_email` (also changes Teams installment invoices, which today run as camps with no email) | Brief and architect; the Teams change is a fix | Jamie (approved in scope) | Medium |
+| D11 | 23:28 | Welcome renders the Stripe return directly and strips the query with `history.replaceState` (spec said a server 303) | Sentry D1: Netlify re-appended the query to the 303 Location, a redirect loop; GA reads origin + pathname only; Referrer-Policy strict-origin keeps the client secret out of Referer headers | Lead | Low |
