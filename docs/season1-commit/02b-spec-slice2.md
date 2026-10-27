@@ -72,3 +72,33 @@ the PM scope. Path `/crew/<code>` (brief override of `/j/`).
   friend -> referral void; 31st lookup -> nameless page.
 - Playwright on the branch deploy at 375 px: open `/crew/<code>`, tap join, banner shows, pay with
   4242, welcome shows a different code.
+
+## Red team resolutions (trust 2 and ops 3, 22:20 CT). These override the sections above. FROZEN.
+
+Ops items that change slice 1 code were sent to Relay B and Atlas (DB guard by deploy context,
+required livemode, orphan PI fallback, full-refund definition, void code reactivation, query timeout,
+300/h ceiling, PII-free step logs, welcome DB-error state, error copy).
+
+| # | Resolution |
+|---|---|
+| T1 | Referrals never drive placement. Ops rule: a same-team request is confirmed by Karlin with both parents; never for `burst` codes. Banner copy built as "Invited by {Kid}'s family" (a proposed delta for Aaron; his call). Decision for the team summary. |
+| T2 | Welcome share block adds: "Anyone with this link sees {Kid}'s first name. Share it with families you know." `s1_codes.show_name boolean default true`; false renders nameless. Ops snippet `rotate` (void and mint) in the runbook. |
+| T3 | Vanity codes are for partners and creators only (`type='partner'` with `display_name`, shown instead of a kid name; null renders nameless). Never a family kid's name; runbook forbids surnames and kid names in vanity strings. |
+| T4 | `s1_ref` is signed: value `<code>.<hmac>` with HMAC-SHA256 over the code using `S1_REF_SECRET` (falls back to `S1_STRIPE_WEBHOOK_SECRET` when unset; never logged). Signup and commit ignore unsigned or bad values. R5 limit lives inside `resolveCode` for named renders: per IP (/64 for IPv6) 30 per 10 min plus a global 300 named renders per hour, then nameless. |
+| T5 | `/season1/crew*` 301 to `/crew/` with the query dropped ships in slice 2. The clone drops the `from` script and the "Charlie" fallback. `Referrer-Policy: origin` on `/crew/*` and signup. Static `<title>`. Exactly one `gtag('config')` call carrying the `page_location` override. Test: captured collect hits contain no code or name. |
+| T6 | Static `og:` tags with no name. Known unfurl crawlers (facebookexternalhit, Facebot, WhatsApp, Discordbot, Slackbot, Twitterbot, TelegramBot, LinkedInBot, Applebot, iMessage link preview UA) get the nameless variant and are not counted. |
+| T7 | Commit response adds `invite: "applied" | "ignored"` with `inviteReason`. Ignored: the client drops the banner and the credit line and shows "This invite can't be used for this email, so no friend credit will be recorded." before confirming. Totals line: "Feb 15: $0 with {Kid}'s family credit, applied at lock-in." Welcome says whether a friend credit was recorded. |
+| T8 | When rate-limited or a crawler, a Damm-valid code still sets the signed cookie; only the name is withheld. |
+| T9 | Remove posts to `POST /api/season1/invite/remove`, which clears `s1_ref` server side (cookie becomes HttpOnly); the commit body may carry `inviteRemoved: true`, which wins. Remove label: "Remove (no friend credit for either family)". Test: no referral after Remove. |
+| T10 | Invite page shows "Friend code 4827 1937". Welcome adds "Came from a friend's link and no credit shows? Text Karlin the friend code." R6 (Karlin attaches a code by script, logged) moves to slice 5 as `scripts/s1-attach-code.mjs`. |
+| T11 | Every commit call counts against the IP and email limits, 409s included. After 3 `duplicate_kid` hits on one email in a day: generic "Text Karlin" and flag. Kids on unpaid orders never resolve as inviter names. Residual sibling-price signal accepted (logged). |
+| T12 | Joiner Klaviyo payload uses `invited: true` (no `invited_by_kid`). Deletion checklist goes in the ops runbook. |
+| T13 | Inviter name resolves to the first kid whose status is `committed`; none: nameless. |
+| T14 | Nameless variant drops credit promises and adds "Invite link not active? You can still join. Text Karlin about credits." |
+| T15 | `s1_ref` Path=/, HttpOnly, 14 days (Path=/ is needed so `/crew` and `/season1` both see it). |
+| O4 | Partial refunds by kid via `scripts/s1-refund.mjs --order <ref> --kid <name>` (refund metadata `s1_kid_id`); handler marks that kid refunded and decrements `friend_kids`; a refund without metadata is flagged `refund_unattributed`. Slice 5. |
+| O5, O6, O10, O12 | Launch checklist (webhook endpoint and scoping, Stripe email notifications, launch order, Neon warm and statement timeout). Reconciliation job: later. |
+| O11 | Slice 3 sender: per-kind max age (Meta 6 days, Klaviyo 48 h, Discord digest); test rows only to allowlisted test addresses; existing test rows marked stale before the first send. |
+| O13 | `docs/season1-commit/ops-runbook.md` with reviewed snippets (find family, vanity, void, rotate, refund script, deletion checklist). Slice 5. |
+| O14 | Tests use run-scoped emails; ceiling per livemode. |
+| O15 | Stale pending sweep (no PI after 1 h): slice 5. `refund.failed` restores status and alerts. |
