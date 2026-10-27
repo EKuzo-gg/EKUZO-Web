@@ -1,0 +1,674 @@
+
+> ekuzo-web@0.1.0 test:s1
+> node scripts/run-tests.mjs lib/season1/__tests__
+
+TAP version 13
+# Subtest: Damm check digit
+    # Subtest: known vector: 572 has check digit 4
+    ok 1 - known vector: 572 has check digit 4
+      ---
+      duration_ms: 1.239368
+      type: 'test'
+      ...
+    # Subtest: known vector: 4827193 has check digit 0
+    ok 2 - known vector: 4827193 has check digit 0
+      ---
+      duration_ms: 0.308776
+      type: 'test'
+      ...
+    1..2
+ok 1 - Damm check digit
+  ---
+  duration_ms: 2.807539
+  type: 'suite'
+  ...
+# Subtest: mintNumeric
+    # Subtest: makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+    ok 1 - makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+      ---
+      duration_ms: 10.055568
+      type: 'test'
+      ...
+    # Subtest: accepts an injected rand and is deterministic
+    ok 2 - accepts an injected rand and is deterministic
+      ---
+      duration_ms: 0.388577
+      type: 'test'
+      ...
+    # Subtest: every single-digit substitution of a minted code fails
+    ok 3 - every single-digit substitution of a minted code fails
+      ---
+      duration_ms: 7.581636
+      type: 'test'
+      ...
+    # Subtest: every adjacent transposition of differing digits fails
+    ok 4 - every adjacent transposition of differing digits fails
+      ---
+      duration_ms: 4.42239
+      type: 'test'
+      ...
+    1..4
+ok 2 - mintNumeric
+  ---
+  duration_ms: 22.927779
+  type: 'suite'
+  ...
+# Subtest: isValidNumeric
+    # Subtest: rejects wrong length, leading zero, and non-digits
+    ok 1 - rejects wrong length, leading zero, and non-digits
+      ---
+      duration_ms: 0.595792
+      type: 'test'
+      ...
+    1..1
+ok 3 - isValidNumeric
+  ---
+  duration_ms: 0.971366
+  type: 'suite'
+  ...
+# Subtest: display
+    # Subtest: formats numeric codes as 4+4
+    ok 1 - formats numeric codes as 4+4
+      ---
+      duration_ms: 0.506755
+      type: 'test'
+      ...
+    # Subtest: leaves vanity codes as is
+    ok 2 - leaves vanity codes as is
+      ---
+      duration_ms: 0.396614
+      type: 'test'
+      ...
+    1..2
+ok 4 - display
+  ---
+  duration_ms: 1.374489
+  type: 'suite'
+  ...
+# Subtest: normalize
+    # Subtest: strips spaces and hyphens from numeric codes
+    ok 1 - strips spaces and hyphens from numeric codes
+      ---
+      duration_ms: 0.586276
+      type: 'test'
+      ...
+    # Subtest: rejects numeric codes with a bad check digit
+    ok 2 - rejects numeric codes with a bad check digit
+      ---
+      duration_ms: 0.247631
+      type: 'test'
+      ...
+    # Subtest: lowercases valid vanity codes
+    ok 3 - lowercases valid vanity codes
+      ---
+      duration_ms: 0.305736
+      type: 'test'
+      ...
+    # Subtest: rejects invalid vanity codes
+    ok 4 - rejects invalid vanity codes
+      ---
+      duration_ms: 0.275088
+      type: 'test'
+      ...
+    # Subtest: accepts vanity at the 3 and 20 char limits
+    ok 5 - accepts vanity at the 3 and 20 char limits
+      ---
+      duration_ms: 0.249568
+      type: 'test'
+      ...
+    1..5
+ok 5 - normalize
+  ---
+  duration_ms: 2.019137
+  type: 'suite'
+  ...
+# Subtest: season1 db (integration)
+ok 6 - season1 db (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.594523
+  type: 'suite'
+  ...
+# Subtest: shouldSkipLegacy
+    # Subtest: skips season1 PaymentIntents
+    ok 1 - skips season1 PaymentIntents
+      ---
+      duration_ms: 0.948597
+      type: 'test'
+      ...
+    # Subtest: skips when parent_email is missing or empty
+    ok 2 - skips when parent_email is missing or empty
+      ---
+      duration_ms: 0.183412
+      type: 'test'
+      ...
+    # Subtest: processes camps and ekuzo100 with a parent_email
+    ok 3 - processes camps and ekuzo100 with a parent_email
+      ---
+      duration_ms: 0.222716
+      type: 'test'
+      ...
+    1..3
+ok 7 - shouldSkipLegacy
+  ---
+  duration_ms: 2.631997
+  type: 'suite'
+  ...
+# Subtest: resolveMode
+    # Subtest: unset + sk_test -> test
+    ok 1 - unset + sk_test -> test
+      ---
+      duration_ms: 1.402503
+      type: 'test'
+      ...
+    # Subtest: unset + non-test key or no key -> off
+    ok 2 - unset + non-test key or no key -> off
+      ---
+      duration_ms: 0.191752
+      type: 'test'
+      ...
+    # Subtest: unset + sk_test but non-test DB -> off
+    ok 3 - unset + sk_test but non-test DB -> off
+      ---
+      duration_ms: 0.188301
+      type: 'test'
+      ...
+    # Subtest: test with non-test DB host or missing DB -> off
+    ok 4 - test with non-test DB host or missing DB -> off
+      ---
+      duration_ms: 0.234034
+      type: 'test'
+      ...
+    # Subtest: test with a live key -> off
+    ok 5 - test with a live key -> off
+      ---
+      duration_ms: 0.145925
+      type: 'test'
+      ...
+    # Subtest: test with good key and DB -> test (any host)
+    ok 6 - test with good key and DB -> test (any host)
+      ---
+      duration_ms: 0.14624
+      type: 'test'
+      ...
+    # Subtest: live only on ekuzo.gg / www.ekuzo.gg with sk_live
+    ok 7 - live only on ekuzo.gg / www.ekuzo.gg with sk_live
+      ---
+      duration_ms: 1.712845
+      type: 'test'
+      ...
+    # Subtest: live on a preview or other host -> off
+    ok 8 - live on a preview or other host -> off
+      ---
+      duration_ms: 0.252582
+      type: 'test'
+      ...
+    # Subtest: live with a test key -> off
+    ok 9 - live with a test key -> off
+      ---
+      duration_ms: 0.310858
+      type: 'test'
+      ...
+    # Subtest: explicit off and unknown values -> off
+    ok 10 - explicit off and unknown values -> off
+      ---
+      duration_ms: 0.341553
+      type: 'test'
+      ...
+    1..10
+ok 8 - resolveMode
+  ---
+  duration_ms: 6.549543
+  type: 'suite'
+  ...
+# Subtest: OFFER config
+    # Subtest: has the frozen values
+    ok 1 - has the frozen values
+      ---
+      duration_ms: 0.760131
+      type: 'test'
+      ...
+    # Subtest: every window is an ISO instant with an explicit offset
+    ok 2 - every window is an ISO instant with an explicit offset
+      ---
+      duration_ms: 0.512444
+      type: 'test'
+      ...
+    1..2
+ok 9 - OFFER config
+  ---
+  duration_ms: 2.462696
+  type: 'suite'
+  ...
+# Subtest: isOpen (openAt <= now < closeAt)
+    # Subtest: openAt boundary
+    ok 1 - openAt boundary
+      ---
+      duration_ms: 0.313839
+      type: 'test'
+      ...
+    # Subtest: closeAt boundary
+    ok 2 - closeAt boundary
+      ---
+      duration_ms: 0.150561
+      type: 'test'
+      ...
+    # Subtest: mid window is open
+    ok 3 - mid window is open
+      ---
+      duration_ms: 1.272305
+      type: 'test'
+      ...
+    1..3
+ok 10 - isOpen (openAt <= now < closeAt)
+  ---
+  duration_ms: 1.983299
+  type: 'suite'
+  ...
+# Subtest: isJerseyEligible (created strictly before jerseyCutoffAt)
+    # Subtest: one ms before / at / after
+    ok 1 - one ms before / at / after
+      ---
+      duration_ms: 0.464845
+      type: 'test'
+      ...
+    # Subtest: accepts ISO strings, epoch ms and Stripe epoch seconds
+    ok 2 - accepts ISO strings, epoch ms and Stripe epoch seconds
+      ---
+      duration_ms: 0.626359
+      type: 'test'
+      ...
+    # Subtest: is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+    ok 3 - is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+      ---
+      duration_ms: 0.25544
+      type: 'test'
+      ...
+    # Subtest: garbage is not eligible
+    ok 4 - garbage is not eligible
+      ---
+      duration_ms: 0.213018
+      type: 'test'
+      ...
+    1..4
+ok 11 - isJerseyEligible (created strictly before jerseyCutoffAt)
+  ---
+  duration_ms: 2.026961
+  type: 'suite'
+  ...
+# Subtest: lockInDate / formatDatePT
+    # Subtest: lockInDate is the lockInAt instant
+    ok 1 - lockInDate is the lockInAt instant
+      ---
+      duration_ms: 0.211525
+      type: 'test'
+      ...
+    # Subtest: formats in Pacific time regardless of process TZ
+    ok 2 - formats in Pacific time regardless of process TZ
+      ---
+      duration_ms: 18.326736
+      type: 'test'
+      ...
+    1..2
+ok 12 - lockInDate / formatDatePT
+  ---
+  duration_ms: 18.739618
+  type: 'suite'
+  ...
+# Subtest: quote
+    # Subtest: first-time family totals for 1..4 kids
+    ok 1 - first-time family totals for 1..4 kids
+      ---
+      duration_ms: 1.418915
+      type: 'test'
+      ...
+    # Subtest: lines: first kid $100, siblings $80, zero-based kidIndex
+    ok 2 - lines: first kid $100, siblings $80, zero-based kidIndex
+      ---
+      duration_ms: 0.902191
+      type: 'test'
+      ...
+    # Subtest: priorPaidKids > 0 makes every kid a $80 sibling
+    ok 3 - priorPaidKids > 0 makes every kid a $80 sibling
+      ---
+      duration_ms: 0.554078
+      type: 'test'
+      ...
+    # Subtest: totals equal the sum of the lines
+    ok 4 - totals equal the sum of the lines
+      ---
+      duration_ms: 0.174983
+      type: 'test'
+      ...
+    # Subtest: ignores any client-supplied amount
+    ok 5 - ignores any client-supplied amount
+      ---
+      duration_ms: 0.142062
+      type: 'test'
+      ...
+    # Subtest: throws on 0 kids, more than 4 kids, and bad priorPaidKids
+    ok 6 - throws on 0 kids, more than 4 kids, and bad priorPaidKids
+      ---
+      duration_ms: 2.227253
+      type: 'test'
+      ...
+    1..6
+ok 13 - quote
+  ---
+  duration_ms: 6.759307
+  type: 'suite'
+  ...
+# Subtest: referral (integration)
+ok 14 - referral (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.548101
+  type: 'suite'
+  ...
+# Subtest: refcookie
+    # Subtest: round-trips a numeric and a partner code
+    ok 1 - round-trips a numeric and a partner code
+      ---
+      duration_ms: 2.04171
+      type: 'test'
+      ...
+    # Subtest: rejects a tampered code, a tampered signature and a wrong secret
+    ok 2 - rejects a tampered code, a tampered signature and a wrong secret
+      ---
+      duration_ms: 0.373847
+      type: 'test'
+      ...
+    # Subtest: rejects unsigned, empty and malformed values
+    ok 3 - rejects unsigned, empty and malformed values
+      ---
+      duration_ms: 0.407707
+      type: 'test'
+      ...
+    # Subtest: cookie attributes are constant
+    ok 4 - cookie attributes are constant
+      ---
+      duration_ms: 0.945118
+      type: 'test'
+      ...
+    # Subtest: refSecret prefers S1_REF_SECRET, falls back, and throws when neither is set
+    ok 5 - refSecret prefers S1_REF_SECRET, falls back, and throws when neither is set
+      ---
+      duration_ms: 0.460184
+      type: 'test'
+      ...
+    1..5
+ok 15 - refcookie
+  ---
+  duration_ms: 5.589204
+  type: 'suite'
+  ...
+# Subtest: ipBucket
+    # Subtest: leaves IPv4 unchanged
+    ok 1 - leaves IPv4 unchanged
+      ---
+      duration_ms: 0.447636
+      type: 'test'
+      ...
+    # Subtest: reduces IPv6 to the /64
+    ok 2 - reduces IPv6 to the /64
+      ---
+      duration_ms: 0.84378
+      type: 'test'
+      ...
+    # Subtest: same /64 collides, different /64 does not
+    ok 3 - same /64 collides, different /64 does not
+      ---
+      duration_ms: 0.986579
+      type: 'test'
+      ...
+    # Subtest: handles compression at the front and IPv4-mapped addresses
+    ok 4 - handles compression at the front and IPv4-mapped addresses
+      ---
+      duration_ms: 0.375648
+      type: 'test'
+      ...
+    # Subtest: missing or garbage input is noip
+    ok 5 - missing or garbage input is noip
+      ---
+      duration_ms: 0.647845
+      type: 'test'
+      ...
+    1..5
+ok 16 - ipBucket
+  ---
+  duration_ms: 3.8442
+  type: 'suite'
+  ...
+# Subtest: computeFlags
+    # Subtest: no flags for an ordinary join
+    ok 1 - no flags for an ordinary join
+      ---
+      duration_ms: 0.355345
+      type: 'test'
+      ...
+    # Subtest: shared_card when the fingerprint is on the inviter's orders; not when null
+    ok 2 - shared_card when the fingerprint is on the inviter's orders; not when null
+      ---
+      duration_ms: 0.134972
+      type: 'test'
+      ...
+    # Subtest: same_zip compares the first five digits and ignores blanks
+    ok 3 - same_zip compares the first five digits and ignores blanks
+      ---
+      duration_ms: 0.116799
+      type: 'test'
+      ...
+    # Subtest: burst at 5 or more, not at 4
+    ok 4 - burst at 5 or more, not at 4
+      ---
+      duration_ms: 0.275214
+      type: 'test'
+      ...
+    # Subtest: free_reached only when crossing from below 4 to 4 or more
+    ok 5 - free_reached only when crossing from below 4 to 4 or more
+      ---
+      duration_ms: 0.216077
+      type: 'test'
+      ...
+    # Subtest: node only when crossing from below 10 to 10 or more
+    ok 6 - node only when crossing from below 10 to 10 or more
+      ---
+      duration_ms: 0.145384
+      type: 'test'
+      ...
+    # Subtest: stable order with several flags
+    ok 7 - stable order with several flags
+      ---
+      duration_ms: 0.117811
+      type: 'test'
+      ...
+    1..7
+ok 17 - computeFlags
+  ---
+  duration_ms: 1.613607
+  type: 'suite'
+  ...
+# Subtest: isCrawlerUa
+    # Subtest: detects known unfurl crawlers
+    ok 1 - detects known unfurl crawlers
+      ---
+      duration_ms: 2.578978
+      type: 'test'
+      ...
+    # Subtest: does not flag normal browsers or missing UA
+    ok 2 - does not flag normal browsers or missing UA
+      ---
+      duration_ms: 0.321334
+      type: 'test'
+      ...
+    1..2
+ok 18 - isCrawlerUa
+  ---
+  duration_ms: 3.021947
+  type: 'suite'
+  ...
+# Subtest: validateCommit: happy path
+    # Subtest: normalizes email and returns clean values
+    ok 1 - normalizes email and returns clean values
+      ---
+      duration_ms: 6.401108
+      type: 'test'
+      ...
+    # Subtest: accepts up to 4 kids, rejects 0 and 5
+    ok 2 - accepts up to 4 kids, rejects 0 and 5
+      ---
+      duration_ms: 0.609434
+      type: 'test'
+      ...
+    # Subtest: company absent is fine
+    ok 3 - company absent is fine
+      ---
+      duration_ms: 0.177416
+      type: 'test'
+      ...
+    1..3
+ok 19 - validateCommit: happy path
+  ---
+  duration_ms: 8.398098
+  type: 'suite'
+  ...
+# Subtest: names
+    # Subtest: accents, apostrophes, hyphens, spaces pass
+    ok 1 - accents, apostrophes, hyphens, spaces pass
+      ---
+      duration_ms: 1.392179
+      type: 'test'
+      ...
+    # Subtest: digits, markup, symbols, empty, and 21 chars fail
+    ok 2 - digits, markup, symbols, empty, and 21 chars fail
+      ---
+      duration_ms: 0.301967
+      type: 'test'
+      ...
+    # Subtest: 20 chars passes and names are trimmed
+    ok 3 - 20 chars passes and names are trimmed
+      ---
+      duration_ms: 0.246106
+      type: 'test'
+      ...
+    1..3
+ok 20 - names
+  ---
+  duration_ms: 2.399729
+  type: 'suite'
+  ...
+# Subtest: email
+    # Subtest: rejects malformed and over-long
+    ok 1 - rejects malformed and over-long
+      ---
+      duration_ms: 0.326308
+      type: 'test'
+      ...
+    1..1
+ok 21 - email
+  ---
+  duration_ms: 0.527705
+  type: 'suite'
+  ...
+# Subtest: phone
+    # Subtest: optional; digits and +()- space only, max 20
+    ok 1 - optional; digits and +()- space only, max 20
+      ---
+      duration_ms: 0.343
+      type: 'test'
+      ...
+    1..1
+ok 22 - phone
+  ---
+  duration_ms: 0.45935
+  type: 'suite'
+  ...
+# Subtest: ages
+    # Subtest: 8, 19, 'outside' fail with age_outside
+    ok 1 - 8, 19, 'outside' fail with age_outside
+      ---
+      duration_ms: 0.278653
+      type: 'test'
+      ...
+    # Subtest: garbage ages fail as invalid
+    ok 2 - garbage ages fail as invalid
+      ---
+      duration_ms: 0.503042
+      type: 'test'
+      ...
+    # Subtest: 9 and 18 pass with ageEdge true; 10..17 are not edges
+    ok 3 - 9 and 18 pass with ageEdge true; 10..17 are not edges
+      ---
+      duration_ms: 0.349974
+      type: 'test'
+      ...
+    # Subtest: numeric strings are accepted
+    ok 4 - numeric strings are accepted
+      ---
+      duration_ms: 0.212738
+      type: 'test'
+      ...
+    # Subtest: reports the index of the offending second kid
+    ok 5 - reports the index of the offending second kid
+      ---
+      duration_ms: 0.125495
+      type: 'test'
+      ...
+    1..5
+ok 23 - ages
+  ---
+  duration_ms: 1.686612
+  type: 'suite'
+  ...
+# Subtest: consent, honeypot, src
+    # Subtest: consent must be exactly true
+    ok 1 - consent must be exactly true
+      ---
+      duration_ms: 0.185135
+      type: 'test'
+      ...
+    # Subtest: filled honeypot fails
+    ok 2 - filled honeypot fails
+      ---
+      duration_ms: 0.097373
+      type: 'test'
+      ...
+    # Subtest: src from the fixed set, else rejected
+    ok 3 - src from the fixed set, else rejected
+      ---
+      duration_ms: 0.234333
+      type: 'test'
+      ...
+    # Subtest: non-object bodies fail
+    ok 4 - non-object bodies fail
+      ---
+      duration_ms: 0.176896
+      type: 'test'
+      ...
+    1..4
+ok 24 - consent, honeypot, src
+  ---
+  duration_ms: 0.850048
+  type: 'suite'
+  ...
+# Subtest: foldName
+    # Subtest: lowercases and strips diacritics
+    ok 1 - lowercases and strips diacritics
+      ---
+      duration_ms: 1.665888
+      type: 'test'
+      ...
+    1..1
+ok 25 - foldName
+  ---
+  duration_ms: 1.751316
+  type: 'suite'
+  ...
+1..25
+# tests 81
+# suites 25
+# pass 81
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2469.012856
+--- tsc
