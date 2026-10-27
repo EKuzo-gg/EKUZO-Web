@@ -5,6 +5,25 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop), October 27, 2026 (Next.js security release, branch `release/next-security`)
+
+Dependency-only release ahead of Season 01 (security review finding H1, decision D14). Built on
+`origin/main`, carried into `dev` through `preview/next-security`. No app code changed.
+
+- `package.json` / `package-lock.json`: `next` 16.2.1 to 16.4.3, `eslint-config-next` 16.2.1 to
+  16.4.3, the optional `@next/swc-linux-arm64-gnu` pin to 16.4.3, `nanoid` ^5.1.9 to ^5.1.16, then
+  `npm audit fix` (no `--force`): postcss 8.5.23, sharp 0.35.5, source-map-js 1.2.2.
+- `npm audit --omit=dev`: 6 (1 critical, 4 high, 1 moderate) before, 0 after. Full `npm audit`: 0.
+- `tsc --noEmit` clean before and after. `next build` passes. The middleware-to-proxy deprecation
+  warning was already printed on 16.2.1; `middleware.ts` still runs (route list shows Proxy).
+- `npm run lint` was already failing on main (150 errors, 321 warnings). The new config adds 20
+  errors and 6 warnings from stricter React hooks rules (`react-hooks/refs`,
+  `set-state-in-effect`, `immutability`) and `no-location-assign-relative-destination` on existing
+  code. Not fixed here (Aaron's lane, separate pass); file list in the KB debrief.
+- Regression and commerce results: see the next entry or the KB debrief
+  (`knowledge-base/explorations/2026-10-27-nextjs-security-release/`).
+
+---
 ## Jamie (via Claude, Build Loop), October 23, 2026 (Text Karlin alert: parent location and time zone)
 
 Spec: `EKUZO/Marketing/ads/2026-10-season-one/proposals/2026-10-23-text-karlin-location-spec.md`.
@@ -136,6 +155,11 @@ Google re-reads it). Run URL Inspection "Test live URL" on one page and check th
 
 ---
 ## Jamie (via Claude, Build Loop), October 26, 2026 (Robux post live; blog tracking: no more `source` event parameter, post engagement events)
+
+**Shipped 2026-10-26:** Jamie pushed `preview/robux-and-tracking` to `dev` (`57aa70b`) and
+`release/robux-and-tracking` to `main` (`6fc50aa`). Live checks in
+`docs/robux-post/evidence/live-verification.json`; GA4 admin changes listed in
+`docs/blog-tracking-2026-10/03-decision-log.md`.
 
 Two branches off `origin/main` `9c0125a`, built and tested together; they merge in any order (this
 entry is identical on both, so it merges cleanly). Artifacts: `docs/robux-post/` and
