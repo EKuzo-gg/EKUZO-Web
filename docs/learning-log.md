@@ -126,3 +126,19 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
 - Default pattern: time-based trigger (5 min) + last-processed-row pointer in Script Properties + LockService around the run. Detects rows added by webhook, manual edit, or API identically. Polling cost is negligible at our volume.
 - Keep add-on features (notifications, syncs) in their own script file, never inside the payment-path `doPost`. If sub-minute latency ever genuinely matters, emit from the writer itself as a deliberate trade, isolated in try/catch so it can never fail the row write.
 - Reference implementation: `docs/apps-script-registration-notifier.gs` (Karlin registration notifier, 2026-07-15).
+
+---
+
+## Netlify re-appends the query to a function's redirect Location
+<!-- Added 2026-10-27, Season 01 commit overnight build (docs/season1-commit/03-decision-log.md D11, D17) -->
+
+- A route handler that returns 301, 303 or any 3xx with a `Location` that has no query gets the incoming
+  query string appended by Netlify on the way out. Locally (`next dev`) it doesn't happen, so it only shows
+  on a deploy.
+- Two real failures from it: the Stripe `return_url` page that 303'd to itself to strip
+  `payment_intent` looped 20 times (ERR_TOO_MANY_REDIRECTS), and 301s meant to drop `?kid=Charlie` from old
+  preview links kept the kid's name.
+- Pattern that works: render the page directly and strip the query in the browser with
+  `history.replaceState` before analytics load (welcome page), or answer 200 with a tiny page that navigates
+  with `location.replace` plus `<meta name="referrer" content="no-referrer">` (`lib/season1/redirect.ts`).
+- Test any redirect on the branch deploy with `curl -sI` before calling it done.
