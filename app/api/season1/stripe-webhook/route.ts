@@ -10,6 +10,7 @@ import {
   markEventProcessed,
   setOrderKidsStatus,
   setOrderStatus,
+  voidOnFullRefund,
 } from "@/lib/season1/db";
 import { errCode, isFullRefund, logStep } from "@/lib/season1/rules";
 
@@ -143,6 +144,19 @@ async function handle(event: Stripe.Event, piId: string, full: boolean | undefin
       if (full) {
         await setOrderStatus(o.id, "refunded", ["paid", "partially_refunded", "refunded"]);
         await setOrderKidsStatus(o.id, "refunded", ["pending", "committed", "canceled"]);
+        // Slice 2: the order's referral voids; the family's last paid order voids its code
+        // (existing referrals on that code keep their status).
+        const v = await voidOnFullRefund(o.id, o.familyId);
+        if (v.referralVoided || v.codeVoided) {
+          await insertEvent({
+            source: "webhook",
+            type: "refund.referral_effects",
+            subject: o.publicId,
+            data: { referral_voided: v.referralVoided, code_voided: v.codeVoided },
+            livemode: o.livemode,
+          });
+        }
+        logStep("webhook.refund_referral", o.publicId, true, v.codeVoided ? "code_void" : null);
       } else {
         await setOrderStatus(o.id, "partially_refunded", ["paid"]);
       }

@@ -260,6 +260,8 @@ export interface OrderView {
   /** The family's code (type 'family'), active first, whatever its status (ops 5). */
   code: string | null;
   flags: string[];
+  /** Slice 2 (T7): the order carries a referral_code and a referral row exists for it. */
+  inviteApplied: boolean;
 }
 
 const ORDER_VIEW_SELECT = `
@@ -277,7 +279,9 @@ const ORDER_VIEW_SELECT = `
             where oi.order_id = o.id), '[]'::json) as kids,
          (select c.code from s1_codes c
            where c.family_id = o.family_id and c.type = 'family'
-           order by (c.status = 'active') desc limit 1) as code
+           order by (c.status = 'active') desc limit 1) as code,
+         (o.referral_code is not null
+           and exists (select 1 from s1_referrals r where r.referred_order_id = o.id)) as invite_applied
     from s1_orders o join s1_families f on f.id = o.family_id`;
 
 function toOrderView(r: Row | undefined): OrderView | null {
@@ -299,6 +303,7 @@ function toOrderView(r: Row | undefined): OrderView | null {
     kids: r.kids as OrderKid[],
     code: r.code ?? null,
     flags: (r.flags as string[] | null) ?? [],
+    inviteApplied: r.invite_applied === true,
   };
 }
 
@@ -458,6 +463,7 @@ export interface AttemptOrder {
   amountCents: number;
   paymentIntentId: string | null;
   kids: { firstName: string; age: number | null }[];
+  referralCode: string | null;
 }
 
 /** The order for (email, attempt, mode) that is not canceled, if any. */
@@ -467,7 +473,7 @@ export async function findPendingOrderByAttempt(
   livemode: boolean,
 ): Promise<AttemptOrder | null> {
   const rows = await q(
-    `select o.id, o.public_id, o.family_id, o.status, o.amount_cents, o.payment_intent_id,
+    `select o.id, o.public_id, o.family_id, o.status, o.amount_cents, o.payment_intent_id, o.referral_code,
             coalesce((select json_agg(json_build_object('firstName', k.first_name, 'age', k.age))
                         from s1_order_items oi join s1_kids k on k.id = oi.kid_id
                        where oi.order_id = o.id), '[]'::json) as kids
@@ -485,6 +491,7 @@ export async function findPendingOrderByAttempt(
     amountCents: r.amount_cents,
     paymentIntentId: r.payment_intent_id,
     kids: r.kids,
+    referralCode: r.referral_code ?? null,
   };
 }
 
@@ -539,6 +546,8 @@ export interface FulfilOrder {
   piCreatedAt: Date | null;
   paidAt: Date | null;
   fulfilledAt: Date | null;
+  /** Slice 2: the invite code accepted at commit, or null. */
+  referralCode: string | null;
 }
 
 function toFulfilOrder(r: Row | undefined): FulfilOrder | null {
@@ -555,11 +564,12 @@ function toFulfilOrder(r: Row | undefined): FulfilOrder | null {
     piCreatedAt: d(r.pi_created_at),
     paidAt: d(r.paid_at),
     fulfilledAt: d(r.fulfilled_at),
+    referralCode: r.referral_code ?? null,
   };
 }
 
 const FULFIL_COLS = `id, public_id, family_id, status, amount_cents, payment_intent_id, livemode,
-                     pi_created_at, paid_at, fulfilled_at`;
+                     pi_created_at, paid_at, fulfilled_at, referral_code`;
 
 export async function getOrderForFulfilByPi(piId: string): Promise<FulfilOrder | null> {
   return toFulfilOrder((await q(`select ${FULFIL_COLS} from s1_orders where payment_intent_id = $1`, [piId]))[0]);
@@ -717,4 +727,186 @@ export async function incrementFailure(
   );
   const r = rows[0];
   return r ? { orderId: r.id, publicId: r.public_id, status: r.status, failureCount: r.failure_count } : null;
+}
+
+// ── Slice 2: invites at commit ────────────────────────────────────────
+
+/**
+ * P6: folded first names of kids on this email's paid or partially_refunded
+ * orders (same livemode) whose own status is not 'refunded'.
+ */
+export async function paidKidKeys(email: string, livemode: boolean): Promise<string[]> {
+  const rows = await q(
+    `select distinct k.first_name_key
+       from s1_orders o
+       join s1_order_items oi on oi.order_id = o.id
+       join s1_kids k on k.id = oi.kid_id
+      where o.payer_email = $1 and o.livemode = $2
+        and o.status in ('paid','partially_refunded')
+        and k.status <> 'refunded'`,
+    [email.trim().toLowerCase(), livemode],
+  );
+  return rows.map((r) => r.first_name_key as string).filter(Boolean);
+}
+
+/** Sets referral_code on a still-pending order (attempt reuse). True if a row changed. */
+export async function setPendingOrderReferralCode(orderId: string, code: string | null): Promise<boolean> {
+  const rows = await q(
+    `update s1_orders set referral_code = $2
+      where id = $1 and status = 'pending' and referral_code is distinct from $2 returning id`,
+    [orderId, code],
+  );
+  return rows.length > 0;
+}
+
+/** Adds flags (deduplicated) to the family of the guardian with this email. */
+export async function addFamilyFlagsByEmail(email: string, livemode: boolean, flags: string[]): Promise<void> {
+  if (flags.length === 0) return;
+  await q(
+    `update s1_families set flags = array(select distinct unnest(flags || $3::text[]))
+      where id = (select family_id from s1_guardians where email = $1 and livemode = $2)`,
+    [email.trim().toLowerCase(), livemode, flags],
+  );
+}
+
+// ── Slice 2: referrals at fulfil ──────────────────────────────────────
+
+export interface ReferralRow {
+  id: string;
+  code: string;
+  inviterFamilyId: string;
+  referredOrderId: string;
+  friendKids: number;
+  status: string;
+  reasons: string[];
+  livemode: boolean;
+  createdAt: Date;
+}
+
+function toReferral(r: Row | undefined): ReferralRow | null {
+  if (!r) return null;
+  return {
+    id: r.id,
+    code: r.code,
+    inviterFamilyId: r.inviter_family_id,
+    referredOrderId: r.referred_order_id,
+    friendKids: r.friend_kids,
+    status: r.status,
+    reasons: (r.reasons as string[] | null) ?? [],
+    livemode: r.livemode,
+    createdAt: new Date(r.created_at),
+  };
+}
+
+const REFERRAL_COLS = `id, code, inviter_family_id, referred_order_id, friend_kids, status, reasons, livemode, created_at`;
+
+export async function getReferralByOrder(orderId: string): Promise<ReferralRow | null> {
+  return toReferral((await q(`select ${REFERRAL_COLS} from s1_referrals where referred_order_id = $1`, [orderId]))[0]);
+}
+
+/** The code row behind an accepted invite: owning family, type and status. */
+export async function getCodeRow(
+  code: string,
+  livemode: boolean,
+): Promise<{ familyId: string; type: string; status: string } | null> {
+  const r = (await q(`select family_id, type, status from s1_codes where code = $1 and livemode = $2`, [code, livemode]))[0];
+  return r ? { familyId: r.family_id, type: r.type, status: r.status } : null;
+}
+
+export async function orderKidCount(orderId: string): Promise<number> {
+  const rows = await q(`select count(*)::int as n from s1_order_items where order_id = $1`, [orderId]);
+  return rows[0]?.n ?? 0;
+}
+
+/**
+ * Inserts the order's referral (status 'pending') ON CONFLICT DO NOTHING on
+ * referred_order_id, then returns the row (this call's or an earlier one's).
+ */
+export async function insertReferral(r: {
+  code: string;
+  inviterFamilyId: string;
+  referredOrderId: string;
+  friendKids: number;
+  livemode: boolean;
+}): Promise<{ row: ReferralRow; inserted: boolean }> {
+  const ins = await q(
+    `insert into s1_referrals (code, inviter_family_id, referred_order_id, friend_kids, status, livemode)
+     values ($1, $2, $3, $4, 'pending', $5)
+     on conflict (referred_order_id) do nothing returning id`,
+    [r.code, r.inviterFamilyId, r.referredOrderId, r.friendKids, r.livemode],
+  );
+  const row = await getReferralByOrder(r.referredOrderId);
+  if (!row) throw new Error("insertReferral: row missing after insert");
+  return { row, inserted: ins.length > 0 };
+}
+
+/**
+ * Inputs for computeFlags, measured as of this referral's created_at so a rerun
+ * of fulfil computes the same answer: joins on the code in the 24 h up to and
+ * including this one; the inviter family's live (pending or matured) friend kids
+ * up to and including this one; fingerprints on the inviter family's paid orders;
+ * the inviter family's billing ZIP.
+ */
+export async function referralFlagContext(ref: ReferralRow): Promise<{
+  codeJoinsLast24h: number;
+  inviterLiveFriendKidsAfter: number;
+  inviterFingerprints: string[];
+  inviterZip: string | null;
+}> {
+  const rows = await q(
+    `with me as (select created_at as t from s1_referrals where id = $3)
+     select
+       (select count(*)::int from s1_referrals r, me
+         where r.code = $1 and r.livemode = $4
+           and r.created_at <= me.t and r.created_at > me.t - interval '24 hours') as joins_24h,
+       (select coalesce(sum(r.friend_kids), 0)::int from s1_referrals r, me
+         where r.inviter_family_id = $2 and r.livemode = $4
+           and r.status in ('pending','matured') and r.created_at <= me.t) as live_kids,
+       (select coalesce(array_agg(distinct o.pm_details->>'fingerprint'), '{}')
+          from s1_orders o
+         where o.family_id = $2 and o.status in ('paid','partially_refunded')
+           and o.pm_details->>'fingerprint' is not null) as fingerprints,
+       (select f.billing_zip from s1_families f where f.id = $2) as zip`,
+    [ref.code, ref.inviterFamilyId, ref.id, ref.livemode],
+  );
+  const r = rows[0] ?? {};
+  return {
+    codeJoinsLast24h: r.joins_24h ?? 0,
+    inviterLiveFriendKidsAfter: r.live_kids ?? 0,
+    inviterFingerprints: ((r.fingerprints as string[] | null) ?? []).filter(Boolean),
+    inviterZip: r.zip ?? null,
+  };
+}
+
+/** Adds reasons (deduplicated) to a referral. */
+export async function addReferralReasons(referralId: string, reasons: string[]): Promise<void> {
+  if (reasons.length === 0) return;
+  await q(
+    `update s1_referrals set reasons = array(select distinct unnest(reasons || $2::text[])) where id = $1`,
+    [referralId, reasons],
+  );
+}
+
+/**
+ * Full refund side effects (slice 2): the order's referral becomes 'void'; when
+ * the family has no other paid or partially_refunded order, its family code
+ * becomes 'void' (existing referrals on it keep their status). Idempotent.
+ */
+export async function voidOnFullRefund(
+  orderId: string,
+  familyId: string,
+): Promise<{ referralVoided: boolean; codeVoided: boolean }> {
+  const ref = await q(
+    `update s1_referrals set status = 'void' where referred_order_id = $1 and status <> 'void' returning id`,
+    [orderId],
+  );
+  const code = await q(
+    `update s1_codes set status = 'void'
+      where family_id = $1 and type = 'family' and status = 'active'
+        and not exists (select 1 from s1_orders o
+                         where o.family_id = $1 and o.id <> $2 and o.status in ('paid','partially_refunded'))
+      returning code`,
+    [familyId, orderId],
+  );
+  return { referralVoided: ref.length > 0, codeVoided: code.length > 0 };
 }

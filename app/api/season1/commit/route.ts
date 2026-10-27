@@ -6,17 +6,24 @@ import { validateCommit } from "@/lib/season1/validate";
 import { hit } from "@/lib/season1/ratelimit";
 import { getStripe, assertKeyMatchesMode } from "@/lib/season1/stripe";
 import { ipBucket } from "@/lib/season1/referralFlags";
+import { inviteDecision, resolveCode, type InviteReason } from "@/lib/season1/referral";
+import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { parseGeoHeader } from "@/lib/seasonOneGeo";
 import {
+  addFamilyFlagsByEmail,
   cancelOrder,
   findPendingOrderByAttempt,
+  foldName,
   getFamilyCustomerId,
+  insertEvent,
   insertKids,
   insertPendingOrder,
   issueViewToken,
+  paidKidKeys,
   priorPaidKidCount,
   setFamilyCustomerId,
   setOrderPaymentIntent,
+  setPendingOrderReferralCode,
   upsertFamilyGuardian,
   type AttemptOrder,
 } from "@/lib/season1/db";
@@ -35,6 +42,8 @@ export const LIMITS = {
   ipPer10Min: 5,
   emailPerDay: 20,
   globalPerHour: 300,
+  /** T11: duplicate_kid answers per email per day before the generic Text Karlin. */
+  duplicateKidPerDay: 3,
 } as const;
 
 const REUSABLE_PI = new Set(["requires_payment_method", "requires_confirmation", "requires_action"]);
@@ -47,8 +56,79 @@ function json(body: unknown, status = 200, headers?: HeadersInit): Response {
   return new Response(JSON.stringify(body), { status, headers: h });
 }
 
-function ok(clientSecret: string, publicId: string, amountCents: number, token: string): Response {
-  return json({ clientSecret, orderId: publicId, amountCents }, 200, { "set-cookie": viewTokenCookie(token) });
+/** T7: what happened to the s1_ref invite on this commit. */
+export interface InviteOutcome {
+  invite: "applied" | "ignored" | "none";
+  inviteReason: InviteReason | "removed" | "no_invite";
+  /** The accepted code to store on the order (applied only). */
+  code: string | null;
+}
+
+function ok(clientSecret: string, publicId: string, amountCents: number, token: string, inv: InviteOutcome): Response {
+  return json(
+    { clientSecret, orderId: publicId, amountCents, invite: inv.invite, inviteReason: inv.inviteReason },
+    200,
+    { "set-cookie": viewTokenCookie(token) },
+  );
+}
+
+function cookieValue(req: Request, name: string): string | null {
+  const raw = req.headers.get("cookie");
+  if (!raw) return null;
+  for (const part of raw.split(";")) {
+    const i = part.indexOf("=");
+    if (i > 0 && part.slice(0, i).trim() === name) return part.slice(i + 1).trim();
+  }
+  return null;
+}
+
+/**
+ * Slice 2 commit invite: the signed s1_ref cookie (never the body) carries the
+ * code; body inviteRemoved: true wins (T9). Re-resolved here without counting
+ * against the named-render limit, then checked against the committing email.
+ */
+async function decideInvite(
+  req: Request,
+  body: Record<string, unknown>,
+  email: string,
+  livemode: boolean,
+): Promise<InviteOutcome> {
+  if (body.inviteRemoved === true) return { invite: "none", inviteReason: "removed", code: null };
+  const raw = cookieValue(req, REF_COOKIE_NAME);
+  if (!raw) return { invite: "none", inviteReason: "no_invite", code: null };
+  let secret: string;
+  try {
+    secret = refSecret();
+  } catch {
+    logStep("commit.invite", null, false, "no_ref_secret");
+    return { invite: "none", inviteReason: "no_invite", code: null };
+  }
+  // Unsigned or tampered values are ignored as if absent (T4).
+  const code = verifyRef(raw, secret);
+  if (!code) return { invite: "none", inviteReason: "no_invite", code: null };
+  const r = await resolveCode(code, {
+    ip: req.headers.get("x-nf-client-connection-ip"),
+    userAgent: req.headers.get("user-agent"),
+    livemode,
+    countForLimit: false,
+  });
+  if (!r) return { invite: "ignored", inviteReason: "unknown", code: null };
+  const d = await inviteDecision({ code: r.code, committingEmail: email, livemode });
+  return d.applied
+    ? { invite: "applied", inviteReason: "ok", code: r.code }
+    : { invite: "ignored", inviteReason: d.reason, code: null };
+}
+
+/** Records an ignored invite (no PII: order public id, reason). */
+async function recordIgnored(inv: InviteOutcome, orderPublicId: string, livemode: boolean): Promise<void> {
+  if (inv.invite !== "ignored") return;
+  await insertEvent({
+    source: "commit",
+    type: "invite.ignored",
+    subject: orderPublicId,
+    data: { reason: inv.inviteReason },
+    livemode,
+  });
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -79,6 +159,18 @@ export async function POST(req: Request): Promise<Response> {
   const now = new Date();
   if (!isOpen(now)) return json({ error: "closed" }, 409);
   const livemode = mode === "live";
+  const ip = req.headers.get("x-nf-client-connection-ip");
+
+  // T11: every commit call counts against the per-IP limit. Fails closed.
+  try {
+    if (!(await hit(`s1pi:ip:${ipBucket(ip)}`, LIMITS.ipPer10Min, 600, livemode))) {
+      logStep("commit.ratelimit", null, false, "rate_limited_ip");
+      return json({ error: "rate_limited" }, 429);
+    }
+  } catch (e) {
+    logStep("commit.ratelimit", null, false, errCode(e));
+    return json({ error: "try_again" }, 503);
+  }
 
   let body: Record<string, unknown>;
   try {
@@ -107,10 +199,43 @@ export async function POST(req: Request): Promise<Response> {
   const attemptId = cleanAttemptId(body.attemptId);
   if (!attemptId) return json({ field: "attemptId", error: "invalid" }, 422);
 
-  const ip = req.headers.get("x-nf-client-connection-ip");
   let ref: string | null = null;
 
+  // T11: every validated call counts against the per-email limit, 409s included.
   try {
+    if (!(await hit(`s1pi:email:${keyHash(input.email)}`, LIMITS.emailPerDay, 86_400, livemode))) {
+      logStep("commit.ratelimit", null, false, "rate_limited_email");
+      return json({ error: "rate_limited" }, 429);
+    }
+  } catch (e) {
+    logStep("commit.ratelimit", null, false, errCode(e));
+    return json({ error: "try_again" }, 503);
+  }
+
+  try {
+    // P6 duplicate guard before any PI (T11: after 3 hits a day, generic Text Karlin and a flag).
+    const paidKeys = new Set(await paidKidKeys(input.email, livemode));
+    const dup = input.kids.find((k) => paidKeys.has(foldName(k.firstName)));
+    if (dup) {
+      const under = await hit(`s1dup:email:${keyHash(input.email)}`, LIMITS.duplicateKidPerDay, 86_400, livemode);
+      if (under) {
+        logStep("commit.duplicate_kid", null, false, "duplicate_kid");
+        return json({ error: "duplicate_kid", kidFirstName: dup.firstName }, 409);
+      }
+      await insertEvent({
+        source: "commit",
+        type: "flag.duplicate_kid_repeat",
+        subject: keyHash(input.email),
+        data: { flag: "duplicate_kid_repeat" },
+        livemode,
+      });
+      await addFamilyFlagsByEmail(input.email, livemode, ["duplicate_kid_repeat"]);
+      logStep("commit.duplicate_kid", null, false, "text_karlin");
+      return json({ error: "text_karlin" }, 409);
+    }
+
+    const inv = await decideInvite(req, body, input.email, livemode);
+
     // Server-side price (RT13 counting) and RT5.
     const prior = await priorPaidKidCount(input.email, livemode);
     const q = quote({ kids: input.kids, priorPaidKids: prior });
@@ -130,9 +255,12 @@ export async function POST(req: Request): Promise<Response> {
       if (same && existing.paymentIntentId) {
         const pi = await stripe.paymentIntents.retrieve(existing.paymentIntentId);
         if (REUSABLE_PI.has(pi.status) && pi.client_secret) {
+          // Slice 2: the invite is re-evaluated on every call; the amount never depends on it.
+          if (existing.referralCode !== inv.code) await setPendingOrderReferralCode(existing.orderId, inv.code);
+          await recordIgnored(inv, existing.publicId, livemode);
           const token = await issueViewToken(existing.orderId);
           logStep("commit.reuse", ref, true);
-          return ok(pi.client_secret, existing.publicId, existing.amountCents, token);
+          return ok(pi.client_secret, existing.publicId, existing.amountCents, token, inv);
         }
         if (pi.status === "processing" || pi.status === "succeeded") {
           // Already paying: never mint a second charge for the same attempt.
@@ -159,15 +287,11 @@ export async function POST(req: Request): Promise<Response> {
       ({ key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode));
     }
 
-    // RT4: limits count new PaymentIntents only. A limiter failure fails closed.
+    // RT4 / ops 7: the global ceiling counts new PaymentIntents only (IP and
+    // email are counted per call above, T11). A limiter failure fails closed.
     let allowed: boolean;
     try {
-      const checks = await Promise.all([
-        hit(`s1pi:ip:${ipBucket(ip)}`, LIMITS.ipPer10Min, 600, livemode),
-        hit(`s1pi:email:${keyHash(input.email)}`, LIMITS.emailPerDay, 86_400, livemode),
-        hit(`s1pi:global:${livemode ? "live" : "test"}`, LIMITS.globalPerHour, 3600, livemode),
-      ]);
-      allowed = checks.every(Boolean);
+      allowed = await hit(`s1pi:global:${livemode ? "live" : "test"}`, LIMITS.globalPerHour, 3600, livemode);
     } catch (e) {
       logStep("commit.ratelimit", null, false, errCode(e));
       return json({ error: "try_again" }, 503);
@@ -208,6 +332,7 @@ export async function POST(req: Request): Promise<Response> {
         consentUa: (req.headers.get("user-agent") ?? "").slice(0, 512) || null,
         consentXff: (req.headers.get("x-forwarded-for") ?? "").slice(0, 256) || null,
         src: input.src,
+        referralCode: inv.code,
         livemode,
         attemptId: attemptKey,
         payerFirstName: input.parentFirstName,
@@ -224,6 +349,7 @@ export async function POST(req: Request): Promise<Response> {
     }
     ref = order.publicId;
     logStep("commit.order", ref, true);
+    await recordIgnored(inv, order.publicId, livemode);
 
     // RT6: one Season 01 Customer per family, never a search or a legacy Customer.
     let customerId = await getFamilyCustomerId(fam.familyId);
@@ -261,7 +387,7 @@ export async function POST(req: Request): Promise<Response> {
 
     const token = await issueViewToken(order.orderId);
     if (!pi.client_secret) throw new Error("no_client_secret");
-    return ok(pi.client_secret, order.publicId, q.totalCents, token);
+    return ok(pi.client_secret, order.publicId, q.totalCents, token, inv);
   } catch (e) {
     logStep("commit.error", ref, false, errCode(e));
     return json({ error: "server" }, 500);

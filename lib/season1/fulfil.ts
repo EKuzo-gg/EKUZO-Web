@@ -2,22 +2,29 @@ import type Stripe from "stripe";
 import { mintNumeric } from "./codes";
 import {
   addOrderFlags,
+  addReferralReasons,
   backfillPaymentIntent,
   claimOrder,
   enqueueOutbox,
+  getCodeRow,
   getOrderForFulfilByPi,
   getOrderForFulfilByPublicId,
+  getReferralByOrder,
   hasDuplicateKid,
   insertEvent,
+  insertReferral,
   issueViewToken,
   markFulfilled,
   mintFamilyCode,
+  orderKidCount,
   reactivateFamilyCode,
+  referralFlagContext,
   setFamilyBillingZip,
   setOrderFulfilFields,
   setOrderKidsStatus,
   type FulfilOrder,
 } from "./db";
+import { computeFlags } from "./referralFlags";
 import { errCode, jerseyEligible, lateConfirm, logStep, safeEqual } from "./rules";
 import { getStripe, keyIsLive } from "./stripe";
 
@@ -102,6 +109,93 @@ function piRefunded(pi: Stripe.PaymentIntent): boolean {
   return (ch.amount_refunded ?? 0) > 0 || ch.refunded === true;
 }
 
+export interface ReferralOutcome {
+  referralId: string | null;
+  /** "recorded" (row exists for this order), or why none was written. */
+  result: "recorded" | "no_code" | "code_inactive" | "own_family" | "no_kids";
+  flags: string[];
+}
+
+/**
+ * Slice 2 referral step for a paid order with referral_code. Idempotent and
+ * safe to rerun: the referral is ON CONFLICT DO NOTHING on referred_order_id,
+ * flag inputs are measured as of the referral's created_at, reasons are
+ * deduplicated, events are unique per (type, subject) and outbox rows per
+ * dedupe key. A code voided after commit stops crediting new joins (02b).
+ */
+export async function recordReferral(
+  order: Pick<FulfilOrder, "id" | "publicId" | "familyId" | "livemode" | "referralCode">,
+  joiner: { fingerprint: string | null; zip: string | null },
+): Promise<ReferralOutcome> {
+  if (!order.referralCode) return { referralId: null, result: "no_code", flags: [] };
+  let row = await getReferralByOrder(order.id);
+  if (!row) {
+    const code = await getCodeRow(order.referralCode, order.livemode);
+    const skip = (result: ReferralOutcome["result"]) => ({ referralId: null, result, flags: [] as string[] });
+    let why: ReferralOutcome["result"] | null = null;
+    if (!code || code.status !== "active") why = "code_inactive";
+    else if (code.familyId === order.familyId) why = "own_family";
+    const kids = why ? 0 : await orderKidCount(order.id);
+    if (!why && kids < 1) why = "no_kids";
+    if (why || !code) {
+      await insertEvent({
+        source: "fulfil",
+        type: "referral.skipped",
+        subject: order.publicId,
+        data: { reason: why },
+        livemode: order.livemode,
+      });
+      return skip(why ?? "code_inactive");
+    }
+    ({ row } = await insertReferral({
+      code: order.referralCode,
+      inviterFamilyId: code.familyId,
+      referredOrderId: order.id,
+      friendKids: kids,
+      livemode: order.livemode,
+    }));
+  }
+
+  const ctx = await referralFlagContext(row);
+  const flags = computeFlags({
+    joinerFingerprint: joiner.fingerprint,
+    inviterFingerprints: ctx.inviterFingerprints,
+    joinerZip: joiner.zip,
+    inviterZip: ctx.inviterZip,
+    codeJoinsLast24h: ctx.codeJoinsLast24h,
+    inviterLiveFriendKidsAfter: ctx.inviterLiveFriendKidsAfter,
+    joinerFriendKids: row.friendKids,
+  });
+  await addReferralReasons(row.id, flags);
+  await insertEvent({
+    source: "fulfil",
+    type: "referral.created",
+    subject: row.id,
+    data: { order_ref: order.publicId, friend_kids: row.friendKids, flags },
+    livemode: order.livemode,
+  });
+  const base = {
+    referral_id: row.id,
+    inviter_family_id: row.inviterFamilyId,
+    order_public_id: order.publicId,
+    friend_kids: row.friendKids,
+    invited: true,
+    livemode: order.livemode,
+  };
+  await enqueueOutbox("klaviyo_friend_joined", `klaviyo_friend_joined:${row.id}`, base, order.livemode);
+  for (const flag of flags) {
+    await insertEvent({
+      source: "fulfil",
+      type: "referral.flag",
+      subject: `${row.id}:${flag}`,
+      data: { flag, order_ref: order.publicId },
+      livemode: order.livemode,
+    });
+    await enqueueOutbox("discord_flag", `discord_flag:${row.id}:${flag}`, { ...base, flag }, order.livemode);
+  }
+  return { referralId: row.id, result: "recorded", flags };
+}
+
 /** The idempotent post-claim steps for a paid order, then fulfilled_at (D4). */
 async function runPaidSteps(order: FulfilOrder, pi: Stripe.PaymentIntent, source: string): Promise<void> {
   const ref = order.publicId;
@@ -135,6 +229,12 @@ async function runPaidSteps(order: FulfilOrder, pi: Stripe.PaymentIntent, source
     if (await hasDuplicateKid(order.id)) flags.push("duplicate_kid");
     await addOrderFlags(order.id, flags);
   });
+  await step("referral", () =>
+    recordReferral(order, {
+      fingerprint: pm?.card?.fingerprint ?? null,
+      zip: pm?.billing_details?.address?.postal_code ?? null,
+    }),
+  );
   await step("event", () =>
     insertEvent({
       source: "fulfil",

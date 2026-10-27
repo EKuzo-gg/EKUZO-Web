@@ -64,9 +64,29 @@ Klaviyo calls should have failed on the empty email. Six succeeded PIs (run 1 ha
 | pi_3UV1h9KORcR8BUEx1MQ6WWn7 | 2026-10-26 23:09:07 | $100.00 | 1 |
 | pi_3UV1kaKORcR8BUEx0EUoMUdg | 2026-10-26 23:12:40 | $100.00 (refunded) | 2 |
 | pi_3UV1l6KORcR8BUEx163Ne8sJ | 2026-10-26 23:13:12 | $1.60 | 2 |
+| pi_3UV1zrKORcR8BUEx1RLqrahQ | 2026-10-26 ~23:28 | $100.00 (refunded re_3UV1zrKORcR8BUEx1aLh0mEe) | Relay C (1) friend order |
 | pi_3UV1u1KORcR8BUEx09uSBhMT | created 23:22:25, succeeded 23:22:33 CT (2026-10-27 04:22 UTC) | $100.00 | Sentry slice 1 branch-deploy browser run (one payment; email team+s1test-sentry-8rjois@ekuzo.gg) |
 
 Sentry also left two pending PaymentIntents (pi_3UV1tQKORcR8BUEx11S9qhAS decline test, pi_3UV1x8KORcR8BUEx1QE259xP failed 3DS), both canceled via the API. Neon test rows for team+s1test-sentry-* emails remain (test branch).
 
+(Relay C used one succeeded PI; seven totals.)
+
 Each also reached the S1 test endpoint we_1UUzlTKORcR8BUExui4NsZnU on the branch deploy, which writes to the
 same Neon test branch (idempotent; harmless).
+
+## Relay C slice 2 wiring tests (Stripe test mode + Neon test), 2026-10-26 CT
+
+Run tag `cffe9e5c`. Neon rows: emails `team+s1test-cffe9e5c*@ekuzo.gg` with families, kids, orders, items,
+codes, a synthetic 2-kid paid order (public id `t8ab58cac29`, no PI), referrals, events (`invite.ignored`,
+`referral.*`, `flag.duplicate_kid_repeat`, `refund.referral_effects`), outbox rows (`klaviyo_friend_joined:*`,
+`discord_flag:*`, plus the friend order's slice 1 rows) and rate-limit keys `s1pi:*`, `s1dup:*`. Inviter reused:
+existing test family `31fa55c9-8519-4b42-89b7-f8510295216f`; it now has two referrals (one void, one pending from the
+synthetic order). Locally constructed event: `evt_local_cffe9e5c_refund`.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UV1zrKORcR8BUEx1RLqrahQ | succeeded, fully refunded (re_3UV1zrKORcR8BUEx1aLh0mEe) | (1) friend pays 1 kid; (8) refund |
+| payment_intent | pi_3UV1zuKORcR8BUEx0RfY5f2v, pi_3UV1zvKORcR8BUEx0gwHNBNA | canceled | (2) inviteRemoved |
+| payment_intent | pi_3UV1zwKORcR8BUEx1EwOeZFK, pi_3UV1zxKORcR8BUEx0wKnmjIX | canceled | (3) tampered/unsigned cookie |
+| payment_intent | pi_3UV1zyKORcR8BUEx1B9iS1El | canceled | (4) own code |
+| payment_intent | pi_3UV1zzKORcR8BUEx09loSQG5 | canceled | (5) already paid |

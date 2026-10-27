@@ -1,0 +1,50 @@
+# Relay C (slice 2 wiring) evidence, 2026-10-26 CT. Ids and pass/fail only; no secrets, no family data.
+# Commands:
+#   npx tsc --noEmit -p .   -> clean
+#   TZ=UTC npm run test:s1
+#   S1_DB_TESTS=1 TZ=UTC node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs --test --test-reporter=spec lib/season1/__tests__/invite.integration.test.ts
+# Succeeded PaymentIntents this run: 1 (pi_3UV1zrKORcR8BUEx1RLqrahQ, since fully refunded). All other PIs canceled unconfirmed.
+
+## Unit suite (TZ=UTC npm run test:s1)
+# tests 109
+# suites 36
+# pass 109
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+
+## Invite wiring integration (Neon test + Stripe test). 's1 step=' log lines omitted.
+▶ season1 invite wiring (integration, Stripe test mode)
+  ✔ (1) friend with a signed cookie pays 1 kid -> invite applied, referral pending friend_kids 1, friend_joined outbox, flags, inviteApplied (3227.249329ms)
+  ✔ (2) inviteRemoved wins over the cookie; a reused attempt re-evaluates the invite and updates referral_code (2414.734689ms)
+  ✔ (3) tampered or unsigned cookie -> invite none (2211.938508ms)
+  ✔ (4) own code (inviter's email) -> ignored own_family, no referral code, event recorded (888.525912ms)
+  ✔ (5) already-paid email (the friend, after paying) -> ignored already_paid (930.521195ms)
+  ✔ (6) duplicate kid -> 409 duplicate_kid with no order or PI; the 4th hit in a day -> text_karlin and a flag (604.782555ms)
+  ✔ (7) 2-kid friend at the fulfil level (synthetic claimed order): friend_kids 2, shared_card and same_zip flags, idempotent (940.312914ms)
+  ✔ (8) full refund of the friend order -> referral void and (its only paid order) the friend's code void; inviter code untouched (1590.694119ms)
+# tag cffe9e5c
+# ledger payment_intent pi_3UV1zrKORcR8BUEx1RLqrahQ (1) friend order ckxthtyp62 SUCCEEDED
+# ledger payment_intent pi_3UV1zuKORcR8BUEx0RfY5f2v (2) order dzmjdpw9rh (canceled unconfirmed)
+# ledger payment_intent pi_3UV1zvKORcR8BUEx0gwHNBNA (2) order 9x3z7q8k7w (canceled unconfirmed)
+# ledger payment_intent pi_3UV1zwKORcR8BUEx1EwOeZFK (3) order behc9fvnu4 (canceled unconfirmed)
+# ledger payment_intent pi_3UV1zxKORcR8BUEx0wKnmjIX (3) order 2v2ewqd8f6 (canceled unconfirmed)
+# ledger payment_intent pi_3UV1zyKORcR8BUEx1B9iS1El (4) order w4zpg888xw (canceled unconfirmed)
+# ledger payment_intent pi_3UV1zzKORcR8BUEx09loSQG5 (5) order ngexk7c9ej (canceled unconfirmed)
+# ledger refund re_3UV1zrKORcR8BUEx1aLh0mEe (8) full refund of pi_3UV1zrKORcR8BUEx1RLqrahQ
+# evidence inviter family 31fa55c9-8519-4b42-89b7-f8510295216f (reused; fingerprints 1, zip set)
+# evidence (1) PI pi_3UV1zrKORcR8BUEx1RLqrahQ order ckxthtyp62: referral 61614b10-f7b3-41be-bb2e-33094dc4b40c pending friend_kids 1, reasons [shared_card], outbox 2 rows, inviteApplied true
+# evidence (2) inviteRemoved -> invite none, referral_code null (reused attempt updated from code to null); PIs canceled
+# evidence (6) duplicate kid statuses duplicate_kid,duplicate_kid,duplicate_kid,text_karlin; no order; family flag duplicate_kid_repeat
+# evidence (7) synthetic 2-kid order t8ab58cac29: friend_kids 2, reasons [same_zip,shared_card], outbox 3; rerun idempotent; own_family skipped
+# evidence (8) refund re_3UV1zrKORcR8BUEx1aLh0mEe: order refunded, referral void, friend code void, inviter code active
+✔ season1 invite wiring (integration, Stripe test mode) (13326.698983ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14084.919192
