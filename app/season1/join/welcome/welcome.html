@@ -86,18 +86,57 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .chips button.on{background:var(--black);color:#fff;border-color:var(--black)}
 [hidden]{display:none!important}
 
+/* S1-RESPONSIVE: shared across the Season 01 funnel templates (join, signup, welcome, crew). */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+:root{--display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--page:1200px;--gut:20px}
+.d{letter-spacing:.02em}
+.body{font-size:16px}
+.small{font-size:13px}
+::selection{background:var(--red);color:#fff}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+.wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
+.h1{font-size:clamp(48px,6vw,88px)}
+.h2{font-size:clamp(36px,3.6vw,56px)}
+.h3{font-size:clamp(30px,2.6vw,40px)}
+@media (min-width:768px){:root{--gut:40px}}
+@media (min-width:960px){
+ html,body{background:var(--white)}
+ .app{max-width:none}
+ .nav{height:72px;padding-inline:max(var(--gut),calc((100vw - var(--page))/2 + var(--gut)))}
+ .wm{font-size:28px}
+ .nav .mini{font-size:14px;padding:10px 18px}
+ .btn{font-size:17px;padding:18px 16px}
+ .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+ .coaches{gap:24px}
+ .coaches img{height:240px}
+ .coaches b{font-size:15px}
+ .coaches small{font-size:13px}
+ .safe ul{grid-template-columns:repeat(3,1fr);gap:24px;font-size:16px}
+ .narrow{max-width:760px;margin-inline:auto}
+}
+.whero{background:var(--black);color:#fff;padding:20px 0 36px}
+.whero .wrap{padding-inline:var(--gut)}
+@media (min-width:960px){
+ .whero{padding:28px 0 72px}
+ .wbody{max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)!important}
+ .wgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:start}
+ .share{padding:40px;margin-top:-40px}
+ .wright .offer{margin-top:0!important;padding:28px}
+ .wbody>.btn,.wbody>.body{max-width:560px}
+}
 </style>
 </head>
 <body>
 <div class="pv"{{TEST_HIDDEN}}>Test mode. No real charges.</div>
 <div class="app">
 <!--paid-->
-<div style="background:var(--black);color:#fff;padding:20px 20px 36px">
+<div class="whero"><div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><span class="wm" style="color:#fff">EKUZO</span><span style="width:16px"></span></div>
 <p class="ey red" style="margin-top:32px">Season 01 spot saved</p>
-<h1 class="d" style="font-size:48px;margin-top:8px">{{HERO}}</h1>
-<p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">Your receipt is on its way to your inbox.</p></div>
-<div class="px">
+<h1 class="d h1" style="margin-top:8px">{{HERO}}</h1>
+<p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">Your receipt is on its way to your inbox.</p></div></div>
+<div class="px wbody">
+<div class="wgrid"><div class="wleft">
 <!--share--><div class="share notch">
 <h2 class="d" style="font-size:34px">Share with a friend<br>and save!</h2>
 <p style="font-size:14px;margin-top:12px;line-height:1.45">Every friend who joins with {{KID1}}'s link gets a free month. So does {{KID1}}.</p>
@@ -105,7 +144,8 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <button class="btn black" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
 <p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p>
 <p style="font-size:12px;margin-top:4px;line-height:1.45;text-align:center;color:#fff">Anyone with this link sees {{KID1}}'s first name.</p></div>
-<!--/share-->{{NO_SHARE}}<div class="offer notch" style="margin-top:28px">
+<!--/share-->{{NO_SHARE}}</div><div class="wright">
+<div class="offer notch" style="margin-top:28px">
 <p class="ey">Your receipt</p>
 <div style="margin-top:12px">{{RECEIPT_LINES}}
 <div class="line" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Paid today</span><span>{{TOTAL}}</span></div></div>
@@ -119,6 +159,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0" class="red">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May</b><span>Final tournament</span></div></div></div>
+</div></div>
 <div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
 <label class="l" style="margin-top:12px">Games they play now</label>
 <div class="chips"><button>Fortnite</button><button>Roblox</button><button>Minecraft</button><button>League of Legends</button><button>Rocket League</button><button>Other</button></div>
@@ -154,30 +195,30 @@ if(b)b.onclick=function(){
 </script>
 <!--/paid-->
 <!--pending-->
-<div style="background:var(--black);color:#fff;padding:20px 20px 36px">
+<div class="whero"><div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><span class="wm" style="color:#fff">EKUZO</span><span style="width:16px"></span></div>
 <p class="ey red" style="margin-top:32px">Season 01</p>
 <h1 class="d" style="font-size:40px;margin-top:8px">We're confirming your payment</h1>
-<p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">This page refreshes in a few seconds.</p></div>
-<div class="px">
+<p style="font-size:14px;color:rgba(255,255,255,.75);margin-top:12px">This page refreshes in a few seconds.</p></div></div>
+<div class="px wbody">
 <a class="btn" style="margin-top:24px" href="/season1/join/welcome">Check now</a>
 <p class="small" style="text-align:center;margin:28px 0 40px">Questions? <a href="{{SMS}}"><b>Text Karlin</b></a></p></div>
 <!--/pending-->
 <!--stalled-->
-<div style="background:var(--black);color:#fff;padding:20px 20px 36px">
+<div class="whero"><div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><span class="wm" style="color:#fff">EKUZO</span><span style="width:16px"></span></div>
 <p class="ey red" style="margin-top:32px">Season 01</p>
-<h1 class="d" style="font-size:40px;margin-top:8px">Your payment went through</h1></div>
-<div class="px">
+<h1 class="d" style="font-size:40px;margin-top:8px">Your payment went through</h1></div></div>
+<div class="px wbody">
 <p class="body" style="margin-top:24px">Your link is on its way. Text Karlin.</p>
 <a class="btn black" style="margin-top:16px" href="{{SMS}}">Text Karlin</a></div>
 <!--/stalled-->
 <!--generic-->
-<div style="background:var(--black);color:#fff;padding:20px 20px 36px">
+<div class="whero"><div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:center"><a href="/season1/join" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:14px">&lsaquo;</a><span class="wm" style="color:#fff">EKUZO</span><span style="width:16px"></span></div>
 <p class="ey red" style="margin-top:32px">Season 01</p>
-<h1 class="d" style="font-size:48px;margin-top:8px">Your spot is saved</h1></div>
-<div class="px">
+<h1 class="d" style="font-size:48px;margin-top:8px">Your spot is saved</h1></div></div>
+<div class="px wbody">
 <p class="body" style="margin-top:24px">Questions about your spot, your receipt or your invite link? Text Karlin and we'll sort it out.</p>
 <a class="btn black" style="margin-top:16px" href="{{SMS}}">Text Karlin</a>
 <p class="small" style="text-align:center;margin:28px 0 40px"><a href="/season1/join">Back to Season 01</a></p></div>

@@ -5,6 +5,26 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Season 01 desktop + signup fixes, branch `season1-commit`)
+
+The four funnel templates were locked to a 480px column on every screen. Now responsive.
+
+- `join.html`, `crew.html`, `welcome.html`, `signup.html`: shared responsive block (marked
+  `S1-RESPONSIVE` in each `<style>`): 1200px page width, gutters 20/40px, full-width nav and bands at
+  960px and up. Season page: two-column hero (photo, headline + offer card), season + timeline next to
+  a sticky friend ladder, 3-up coaches, safety band in a row, FAQ at 760px. Invite: red hero with copy
+  and photo side by side, price card next to the pitch. Welcome: share card next to receipt +
+  timeline. Signup: centered 600px checkout card on stone. Phones are unchanged in structure.
+- Type: headings in Tungsten Narrow (`/fonts/TungstenNarrow-Bold.otf`), Oswald stays as fallback;
+  fluid heading sizes; body 16px, small 13px; focus rings and text selection themed.
+- Signup: sibling rows get Remove (rows relabel, totals re-price, Add comes back). Picking
+  "Younger or older" now shows a note on that kid with Text Karlin and "Remove this kid and keep going"
+  instead of hiding checkout with no way out. Row ids use a sequence so remove + add can't collide.
+  New GA event `season1_sibling_remove`. Fixed the doubled "Season 01 · Season 01 is open" label.
+  Removed 4px red left borders on the note boxes.
+- `npm run test:s1` 164 pass, `tsc` clean. Checked at 390, 768 and 1440 with no horizontal scroll.
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 front-end cut, branch `season1-commit`)
 
 Jamie's 10-27 test-run notes plus a conversion pass: less text, fewer details in the funnel.

@@ -100,22 +100,68 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .faq summary:focus-visible{outline:2px solid var(--black);outline-offset:2px}
 .faq details p{font-size:14px;line-height:1.6;padding:0 0 16px;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.faq summary:after{transition:none}}
+/* S1-RESPONSIVE: shared across the Season 01 funnel templates (join, signup, welcome, crew). */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+:root{--display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--page:1200px;--gut:20px}
+.d{letter-spacing:.02em}
+.body{font-size:16px}
+.small{font-size:13px}
+::selection{background:var(--red);color:#fff}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+.wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
+.h1{font-size:clamp(48px,6vw,88px)}
+.h2{font-size:clamp(36px,3.6vw,56px)}
+.h3{font-size:clamp(30px,2.6vw,40px)}
+@media (min-width:768px){:root{--gut:40px}}
+@media (min-width:960px){
+ html,body{background:var(--white)}
+ .app{max-width:none}
+ .nav{height:72px;padding-inline:max(var(--gut),calc((100vw - var(--page))/2 + var(--gut)))}
+ .wm{font-size:28px}
+ .nav .mini{font-size:14px;padding:10px 18px}
+ .btn{font-size:17px;padding:18px 16px}
+ .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+ .coaches{gap:24px}
+ .coaches img{height:240px}
+ .coaches b{font-size:15px}
+ .coaches small{font-size:13px}
+ .safe ul{grid-template-columns:repeat(3,1fr);gap:24px;font-size:16px}
+ .narrow{max-width:760px;margin-inline:auto}
+}
+.hero{background:var(--red);color:#fff}
+.hero-copy{padding:28px var(--gut) 32px}
+.hero-img{height:220px}
+.safe{padding:32px 0;margin-top:48px}
+.safe .wrap{padding-inline:var(--gut)}
+@media (min-width:960px){
+ .hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:var(--page);margin-inline:auto;gap:56px;padding:56px var(--gut);align-items:center}
+ .hero-copy{padding:0}
+ .hero-copy p{font-size:17px}
+ .hero-copy .btn{max-width:420px}
+ .hero-copy .btn~p{text-align:left!important;max-width:420px}
+ .hero-img{height:auto;aspect-ratio:4/3}
+ .sec{padding-top:88px}
+ .pricecol{position:sticky;top:24px}
+ .offer{padding:28px}
+ .safe{padding:56px 0;margin-top:88px}
+}
 </style>
 </head>
 <body>
 <!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
 <div class="app"><header class="nav"><span style="min-width:44px"></span><a class="wm" href="/">EKUZO</a><a class="mini join" href="/season1/join/signup">Join the team</a></header>
 <main>
-<div style="background:var(--red);color:#fff;padding:28px 20px 32px">
+<section class="hero"><div class="hero-in">
+<div class="hero-copy">
 <!--IF:named-->
 <p class="ey">An invite from {{NAME}}&rsquo;s family</p>
-<h1 class="d" style="font-size:46px;margin-top:8px">{{NAME}} wants<br>your kid on<br>the team.</h1>
+<h1 class="d h1" style="margin-top:8px">{{NAME}} wants<br>your kid on<br>the team.</h1>
 <p style="font-size:15px;line-height:1.5;margin-top:16px">{{NAME}} just saved a spot in EKUZO Season 01, a coached online esports team for kids ages {{AGE_MIN}} to {{AGE_MAX}}. Join through this link and both families get a free month.</p>
 <a class="btn black join" style="margin-top:20px" href="/season1/join/signup">Join {{NAME}}&rsquo;s team &middot; {{FIRST}}</a>
 <!--/IF-->
 <!--IFNOT:named-->
 <p class="ey">An invite to EKUZO Season 01</p>
-<h1 class="d" style="font-size:46px;margin-top:8px">Join a<br>friend&rsquo;s<br>team.</h1>
+<h1 class="d h1" style="margin-top:8px">Join a<br>friend&rsquo;s<br>team.</h1>
 <p style="font-size:15px;line-height:1.5;margin-top:16px">A friend saved a spot in EKUZO Season 01, a coached online esports team for kids ages {{AGE_MIN}} to {{AGE_MAX}}. Join through this link to get your kid on the team.</p>
 <a class="btn black join" style="margin-top:20px" href="/season1/join/signup">Join the team &middot; {{FIRST}}</a>
 <!--/IFNOT-->
@@ -123,12 +169,13 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 {{CODE_LINE}}
 <!--IF:inactive--><p style="font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)">Invite link not active? You can still join. <a href="sms:{{SMS}}">Text Karlin</a> about credits.</p><!--/IF:inactive-->
 </div>
-<img class="hero-img" style="height:220px" src="https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg" alt="An EKUZO team on a call with their coach">
-<div class="px">
-<div class="sec"><h2 class="d" style="font-size:34px">Every gamer<br>deserves a team.</h2>
+<div class="hero-media"><img class="hero-img" style="height:220px" src="https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg" alt="An EKUZO team on a call with their coach"></div></div></section>
+<div class="wrap">
+<section class="sec split">
+<div><h2 class="d h2">Every gamer<br>deserves a team.</h2>
 <p class="body" style="margin-top:12px">A real coach, the same teammates every week, and a season to play for. Two online practices a week from home, then a final tournament in May.</p>
 <p class="body" style="margin-top:12px">The game is League of Legends: five players, set roles, free to play. No experience needed.</p></div>
-<div class="sec"><h2 class="d" style="font-size:28px">Your price</h2>
+<div class="pricecol"><h2 class="d h3">Your price</h2>
 <div class="offer notch" style="margin-top:12px">
 <div class="price"><b style="font-size:48px">{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
 <div style="margin-top:12px">
@@ -139,13 +186,15 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="line" style="font-weight:700;border-top:1px solid rgba(0,0,0,.15);margin-top:4px;padding-top:8px"><span>Your season</span><span><!--IF:named-->{{SEASON_CREDIT}}<!--/IF--><!--IFNOT:named-->{{SEASON_FULL}}<!--/IFNOT--></span></div></div>
 <!--IF:jersey--><p class="urg">Free jersey for the first 100 families. Ends {{JERSEY_SHORT}}.</p><!--/IF:jersey-->
 <a class="btn join" style="margin-top:16px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a></div></div>
-<div class="sec"><h2 class="d" style="font-size:28px">Who coaches</h2><div class="coaches">
+</section>
+<section class="sec"><h2 class="d h3">Who coaches</h2><div class="coaches">
 <div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien" width="140" height="110" loading="lazy" decoding="async"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
 <div><img src="/images/authors/coach-karlin-faith-1400.jpg" alt="Karlin, founder" width="140" height="110" loading="lazy" decoding="async"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></div></div>
-<div class="safe"><h2 class="d" style="font-size:28px">No toxic lobbies. Ever.</h2><ul><li>Private, coach-moderated games. No random strangers.</li><li>Every coach is background-checked.</li><li>Parents can drop in on any session.</li></ul></div>
-<div class="px" style="padding-top:32px;padding-bottom:40px">
-<h2 class="d" style="font-size:28px">Short answers</h2>
+<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></section>
+</div>
+<section class="safe"><div class="wrap"><h2 class="d h3">No toxic lobbies. Ever.</h2><ul><li>Private, coach-moderated games. No random strangers.</li><li>Every coach is background-checked.</li><li>Parents can drop in on any session.</li></ul></div></section>
+<section class="wrap" style="padding-top:40px;padding-bottom:48px"><div class="narrow">
+<h2 class="d h3">Short answers</h2>
 <div class="faq">
 <details><summary><!--IF:named-->Will they be on {{NAME}}&rsquo;s team?<!--/IF--><!--IFNOT:named-->Will they be on a friend&rsquo;s team?<!--/IFNOT--></summary><p>We put friends together wherever age and skill allow. Joining through this link tells us they belong together.</p></details>
 <details><summary>Where does it happen?</summary><p>Online, from home, in the evening in your time zone.</p></details>
@@ -153,7 +202,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <details><summary>What do they need?</summary><p>A computer that runs League (it's free), a headset with a mic, and solid internet. We help with setup in late November.</p></details>
 </div>
 <a class="btn join" style="margin-top:28px" href="/season1/join/signup"><!--IF:named-->Join {{NAME}}&rsquo;s team<!--/IF--><!--IFNOT:named-->Join the team<!--/IFNOT--> &middot; {{FIRST}}</a>
-<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder.</p></div>
+<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a>, our founder.</p></div></section>
 </main>
 <script>
 (function(){

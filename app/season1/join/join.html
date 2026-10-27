@@ -95,31 +95,74 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .faq summary:focus-visible{outline:2px solid var(--black);outline-offset:2px}
 .faq details p{font-size:14px;line-height:1.6;padding:0 0 16px;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.faq summary:after{transition:none}}
+/* S1-RESPONSIVE: shared across the Season 01 funnel templates (join, signup, welcome, crew). */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+:root{--display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--page:1200px;--gut:20px}
+.d{letter-spacing:.02em}
+.body{font-size:16px}
+.small{font-size:13px}
+::selection{background:var(--red);color:#fff}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+.wrap{width:100%;max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)}
+.h1{font-size:clamp(48px,5.4vw,80px)}
+.h2{font-size:clamp(36px,3.6vw,56px)}
+.h3{font-size:clamp(30px,2.6vw,40px)}
+@media (min-width:768px){:root{--gut:40px}}
+@media (min-width:960px){
+ html,body{background:var(--white)}
+ .app{max-width:none}
+ .nav{height:72px;padding-inline:max(var(--gut),calc((100vw - var(--page))/2 + var(--gut)))}
+ .wm{font-size:28px}
+ .nav .mini{font-size:14px;padding:10px 18px}
+ .btn{font-size:17px;padding:18px 16px}
+ .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+ .coaches{gap:24px}
+ .coaches img{height:240px}
+ .coaches b{font-size:15px}
+ .coaches small{font-size:13px}
+ .safe ul{grid-template-columns:repeat(3,1fr);gap:24px;font-size:16px}
+ .narrow{max-width:760px;margin-inline:auto}
+}
+.hero-img{height:230px}
+.safe{padding:32px 0;margin-top:48px}
+.safe .wrap{padding-inline:var(--gut)}
+@media (min-width:960px){
+ .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);max-width:var(--page);margin-inline:auto;gap:56px;padding:48px var(--gut) 24px;align-items:center}
+ .hero-media{position:relative}
+ .hero-img{height:auto;aspect-ratio:4/5;max-height:680px}
+ .cap{padding:8px 0 0}
+ .hero-copy{padding:0!important}
+ .offer{padding:28px}
+ .price b{font-size:64px}
+ .sec{padding-top:88px}
+ .friends{position:sticky;top:24px}
+ .safe{padding:56px 0;margin-top:88px}
+}
 </style>
 </head>
 <body>
 <!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
 <div class="app"><header class="nav"><a class="back" href="/season1">&lsaquo;</a><a class="wm" href="/">EKUZO</a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Save their spot</a><!--/IF:open--><!--IFNOT:open--><span style="min-width:44px"></span><!--/IFNOT:open--></header>
 <main>
-<img class="hero-img" style="height:210px" src="https://cdn.klaviyomail.com/company/UMWwrM/images/c8f7e7b8-1610-4685-9147-6839239495ea.jpeg" alt="">
-<p class="cap">Obviously, this kid is AI. We don't share real kids without their family's consent.</p>
-<div class="px" style="padding-top:24px">
+<section class="hero">
+<div class="hero-media"><img class="hero-img" src="https://cdn.klaviyomail.com/company/UMWwrM/images/c8f7e7b8-1610-4685-9147-6839239495ea.jpeg" alt="">
+<p class="cap">Obviously, this kid is AI. We don't share real kids without their family's consent.</p></div>
+<div class="hero-copy px">
 <p class="ey red">{{EYEBROW}} &middot; Starts mid January</p>
-<h1 class="d" style="font-size:46px;margin-top:8px">A coach. A team.<br>A season to play for.</h1>
+<h1 class="d h1" style="margin-top:8px">A coach. A team.<br>A season to play for.</h1>
 <div class="offer notch" style="margin-top:24px">
 <div class="price"><b>{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
 <p class="small" style="margin-top:8px;color:rgba(0,0,0,.7)">Then {{MONTHLY}} a month, Feb to Apr. About {{PER_PRACTICE}} a practice.</p>
 <!--IF:open--><!--IF:jersey--><p class="urg">Free jersey for the first 100 families. Ends {{JERSEY_SHORT}}.</p><!--/IF:jersey--><!--IFNOT:jersey--><p class="urg">Spots are limited. Teams are small.</p><!--/IFNOT:jersey-->
 <a class="btn" style="margin-top:16px" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a>
 <p class="small" style="margin-top:10px;text-align:center"><a href="/terms-of-service#season-01">Fully refundable until {{LOCK_IN}}</a></p><!--/IF:open-->
-<!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div>
-<div class="sec"><h2 class="d" style="font-size:34px">Same coach.<br>Same squad. All season.</h2>
-<p class="body" style="margin-top:12px">Two online practices a week from home, for ages {{AGE_MIN}} to {{AGE_MAX}}. A final tournament in May.</p></div>
-<div class="sec"><h2 class="d" style="font-size:34px">Games are better<br>with friends.</h2>
-<p class="body" style="margin-top:12px">Every friend who joins with your link gets a free month. So does your kid.</p>
-<div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
-<p class="small" style="margin-top:8px">You get your link right after you save a spot.</p></div>
-<div class="sec"><h2 class="d" style="font-size:28px">What happens when</h2>
+<!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div>
+</section>
+<div class="wrap">
+<section class="sec split">
+<div><h2 class="d h2">Same coach.<br>Same squad. All season.</h2>
+<p class="body" style="margin-top:12px">Two online practices a week from home, for ages {{AGE_MIN}} to {{AGE_MAX}}. A final tournament in May.</p>
+<h3 class="d h3" style="margin-top:40px">What happens when</h3>
 <div class="tl">
 <div><p class="ey">Now</p><p>Save their spot.</p></div>
 <div><p class="ey">Late Nov</p><p>Gamer profile, jersey and gear check.</p></div>
@@ -127,13 +170,19 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="hot"><p class="ey">{{LOCK_SHORT}}</p><p>Lock-in. Full refund until then.</p></div>
 <div><p class="ey">Mid Jan</p><p>First practice.</p></div>
 <div><p class="ey">May</p><p>Final tournament.</p></div></div></div>
-<div class="sec" style="padding-top:24px"><h2 class="d" style="font-size:28px">Who coaches</h2><div class="coaches">
+<div class="friends"><h2 class="d h2">Games are better<br>with friends.</h2>
+<p class="body" style="margin-top:12px">Every friend who joins with your link gets a free month. So does your kid.</p>
+<div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
+<p class="small" style="margin-top:8px">You get your link right after you save a spot.</p></div>
+</section>
+<section class="sec"><h2 class="d h3">Who coaches</h2><div class="coaches">
 <div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/6631f635-80a7-47c1-a8f7-4bf85ac033ef.jpeg" alt="Coach Sebastien" width="140" height="110" loading="lazy" decoding="async"><b>Sebastien "ZzLegendary"</b><small>Head coach. Coached at Dignitas and Evil Geniuses.</small></div>
 <div><img src="/images/authors/coach-karlin-faith-1400.jpg" alt="Karlin, founder" width="140" height="110" loading="lazy" decoding="async"><b>Karlin "Faith"</b><small>Founder. Former national collegiate captain.</small></div>
-<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></div></div>
-<div class="safe"><h2 class="d" style="font-size:28px">Safe by design</h2><ul><li>Every coach is background-checked.</li><li>Sessions are coach-led and recorded.</li><li>Parents can drop in on any session.</li></ul></div>
-<div class="px" style="padding-top:32px;padding-bottom:40px">
-<h2 class="d" style="font-size:28px">Short answers</h2>
+<div><img src="https://cdn.klaviyomail.com/company/UMWwrM/images/358042d2-6aa8-44e9-81ad-ea9c72c21f3c.jpeg" alt="Coach Nuri" width="140" height="110" loading="lazy" decoding="async"><b>Nuri "Teemo Time"</b><small>Coach. Taught in public schools.</small></div></div></section>
+</div>
+<section class="safe"><div class="wrap"><h2 class="d h3">Safe by design</h2><ul><li>Every coach is background-checked.</li><li>Sessions are coach-led and recorded.</li><li>Parents can drop in on any session.</li></ul></div></section>
+<section class="wrap" style="padding-top:40px;padding-bottom:48px"><div class="narrow">
+<h2 class="d h3">Short answers</h2>
 <div class="faq">
 <details><summary>Do we have to go anywhere?</summary><p>No. Every practice and the final tournament happen online, from home.</p></details>
 <details><summary>Who is it for?</summary><p>Kids ages {{AGE_MIN}} to {{AGE_MAX}}. Outside that range? <a href="sms:{{SMS}}">Text Karlin</a>.</p></details>
@@ -141,7 +190,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <details><summary>What do they need?</summary><p>A computer that runs League of Legends (it's free), a headset with a mic, and solid internet. We help with setup in late November.</p></details>
 </div>
 <!--IF:open--><a class="btn" style="margin-top:28px" href="{{SIGNUP}}">Save their spot &middot; {{FIRST}}</a><!--/IF:open-->
-<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a></p></div>
+<p class="small" style="text-align:center;margin-top:12px">Questions first? <a class="tk" href="sms:{{SMS}}"><b>Text Karlin</b></a></p></div></section>
 </main>
 </div>
 <script>try{gtag('event','season1_join_view')}catch(e){}</script>
