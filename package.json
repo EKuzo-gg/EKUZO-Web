@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node scripts/run-tests.mjs",
+    "test:s1": "node scripts/run-tests.mjs lib/season1/__tests__",
+    "s1:migrate": "node --env-file=.env.local scripts/s1-migrate.mjs",
     "prepare": "husky"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "@rive-app/react-canvas": "^4.27.3",
     "@stripe/react-stripe-js": "^6.0.0",
     "@stripe/stripe-js": "^9.0.0",

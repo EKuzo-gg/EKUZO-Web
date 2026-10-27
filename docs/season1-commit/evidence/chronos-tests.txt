@@ -1,0 +1,65 @@
+===== TZ=UTC npm run test:s1
+> ekuzo-web@0.1.0 test:s1
+> node scripts/run-tests.mjs lib/season1/__tests__
+# tests 62
+# suites 19
+# pass 62
+# fail 0
+# skipped 0
+===== TZ=America/Los_Angeles npm run test:s1
+> ekuzo-web@0.1.0 test:s1
+> node scripts/run-tests.mjs lib/season1/__tests__
+# tests 62
+# suites 19
+# pass 62
+# fail 0
+# skipped 0
+===== npm test (TZ=UTC)
+> ekuzo-web@0.1.0 test
+> node scripts/run-tests.mjs
+ok 1 - isWeekEligible
+ok 2 - getEligibleWeeks
+ok 3 - buildWeeksLabel
+ok 4 - buildWeekDatesSpan
+ok 5 - constants
+ok 6 - resolveSeasonOneAttribution
+ok 7 - cleanTz
+ok 8 - UTC_ALIASES
+ok 9 - parseGeoHeader oracle (old readGeo)
+ok 10 - parseGeoHeader
+ok 11 - tzProps
+ok 12 - geoProfileProps
+ok 13 - Damm check digit
+ok 14 - mintNumeric
+ok 15 - isValidNumeric
+ok 16 - display
+ok 17 - normalize
+ok 18 - shouldSkipLegacy
+ok 19 - resolveMode
+ok 20 - OFFER config
+ok 21 - isOpen (openAt <= now < closeAt)
+ok 22 - isJerseyEligible (created strictly before jerseyCutoffAt)
+ok 23 - lockInDate / formatDatePT
+ok 24 - quote
+ok 25 - validateCommit: happy path
+ok 26 - names
+ok 27 - email
+ok 28 - phone
+ok 29 - ages
+ok 30 - consent, honeypot, src
+ok 31 - foldName
+# tests 165
+# suites 31
+# pass 164
+# fail 0
+# skipped 1
+===== npm test (TZ=America/Los_Angeles)
+> ekuzo-web@0.1.0 test
+> node scripts/run-tests.mjs
+# tests 165
+# suites 31
+# pass 164
+# fail 0
+# skipped 1
+===== tsc errors in my files
+(total tsc lines: 0)
