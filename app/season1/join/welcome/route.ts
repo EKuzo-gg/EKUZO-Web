@@ -169,6 +169,11 @@ export async function GET(request: Request) {
       .join("");
     vars.TOTAL = money(order.amountCents);
     vars.ORDER_REF = esc(order.publicId);
+    // inviteApplied is added to OrderView by the commit work; absent means false.
+    const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
+    vars.CREDIT_NOTE = applied
+      ? '<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Friend credit recorded. It applies at lock-in.</p>'
+      : `<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Came from a friend's link and no credit shows? <a href="${esc(sms)}"><b>Text Karlin</b></a> the friend code.</p>`;
     if (order.code) {
       vars.LINK = esc(`${proto}://${host}/crew/${order.code}`);
       vars.LINK_SHORT = esc(`${host}/crew/${order.code}`);

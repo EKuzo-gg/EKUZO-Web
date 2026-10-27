@@ -93,6 +93,10 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 [hidden]{display:none!important}
 .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 #pe{min-height:44px}
+.inv{background:var(--stone);border-left:4px solid var(--red);padding:12px 14px;margin-top:20px}
+.inv p{font-size:14px;font-weight:700;line-height:1.35;color:var(--black)}
+.inv button{display:inline-block;margin-top:0;padding:10px 0;min-height:44px;background:none;border:0;font:600 12px/1.4 var(--body);color:rgba(0,0,0,.65);text-decoration:underline;cursor:pointer;text-align:left}
+.note{background:var(--stone);border-left:4px solid var(--red);padding:10px 12px;margin-top:16px;font-size:13px;line-height:1.45;color:var(--ink)}
 
 </style>
 </head>
@@ -103,6 +107,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <p class="ey red">Season 01 &middot; <span id="mode">Season 01 is open</span></p>
 <h1 class="d" style="font-size:40px;margin-top:4px">Save their spot</h1>
 <p class="small" style="margin-top:8px">Sign up for EKUZO Season 01. About a minute.</p>
+<div id="inv" class="inv" hidden><p id="invTxt"></p><button type="button" id="invRm">Remove (no friend credit for either family)</button></div>
 <div id="kids"></div>
 <button type="button" class="btn ghost" id="addSib" style="margin-top:20px">+ Add a sibling (20% off)</button>
 <p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text Karlin</b></a></p>
@@ -122,6 +127,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
 <label style="display:flex;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" style="accent-color:#050505;margin-top:2px;flex-shrink:0"><span id="consentText"></span></label>
 <p class="err" id="e-terms"></p>
+<p id="inviteNote" class="note" role="status" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
 <p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink" href="#">Text Karlin</a></p>
@@ -140,6 +146,19 @@ function money(c){var x=c/100;return '$'+(x%1?x.toFixed(2):x.toFixed(0))}
 function ga(n,p){try{gtag('event',n,p||{})}catch(_){}}
 if(cfg.mode==='test')g('testBar').hidden=false;
 g('consentText').innerHTML='I agree to the <a href="'+esc(cfg.termsUrl||'/season1/terms')+'" target="_blank" rel="noopener"><u>Season 01 terms</u></a>. Today\u0027s payment is my kid\u0027s January. I authorize EKUZO to save this card and charge it for the rest of Season 01: '+money(P.monthly)+' a month per kid ('+money(P.siblingMonthly)+' per sibling) on Feb 15, Mar 15 and Apr 15, less friend credits, or once if I choose to pay up front at lock-in. Fully refundable until '+esc(cfg.lockInDate||'')+', and any time EKUZO can\u0027t place my kid. After lock-in, we\u0027re in for the season.';
+var invite=(cfg.invite&&typeof cfg.invite==='object')?{name:(typeof cfg.invite.name==='string'&&cfg.invite.name)?cfg.invite.name:null}:null,inviteRemoved=false;
+var IGNORED_MSG='This invite can\u0027t be used for this email, so no friend credit will be recorded.';
+function renderInvite(){
+ var b=g('inv');
+ if(!invite){b.hidden=true;return}
+ g('invTxt').textContent=invite.name?('Invited by '+invite.name+'\u0027s family'):'Invited by a friend\u0027s family';
+ b.hidden=false;
+}
+g('invRm').addEventListener('click',function(){
+ var btn=g('invRm');btn.disabled=true;ga('season1_invite_remove');
+ try{fetch('/api/season1/invite/remove',{method:'POST',credentials:'same-origin'}).catch(function(){})}catch(_){}
+ inviteRemoved=true;invite=null;renderInvite();upd();
+});
 var confirming=false,kids=g('kids'),n=0,busy=false,stripe=null,elements=null,peReady=false,secret=null,secretSig='';
 var attemptId='';
 if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
@@ -168,7 +187,8 @@ function upd(){
  lastKids=rs.length;
  rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+esc(nm)+', Season 01, first month</span><span>'+(i?'<s style="color:rgba(0,0,0,.4)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.4)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});
  if(cfg.jerseyOpen)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Founding jersey (first 100)</span><span>Free</span></div>';
- h+='<div class="line" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Due today</span><span>'+money(totalCents())+'</span></div>';
+ h+='<div class="line due" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Due today</span><span>'+money(totalCents())+'</span></div>';
+ if(invite)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Feb 15: $0 with '+(invite.name?esc(invite.name)+'\u0027s family':'a friend\u0027s family')+' credit, applied at lock-in.</span></div>';
  g('sum').innerHTML=h;
  var first=rs[0].querySelector('.nm').value.trim();
  g('go').textContent='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
@@ -209,12 +229,12 @@ function collect(){
  if(mv&&(mv.length>20||!/^[0-9+()\- ]+$/.test(mv)||mv.replace(/\D/g,'').length<7))flag(g('e-mob'),mb,'Check your mobile number or leave it blank.');
  if(!g('terms').checked)flag(g('e-terms'),null,'Check the terms box to continue.');
  if(bad.length){announce(bad[0]);if(first)first.focus();else g('terms').focus();return null}
- return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined};
+ return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
 }
 function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;if(b){btn.dataset.t=btn.textContent;btn.textContent='Saving'}else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
 function showTotal(c){
  try{elements.update({amount:c})}catch(_){}
- var sm=g('sum').querySelector('.line:last-child span:last-child');if(sm)sm.textContent=money(c);
+ var sm=g('sum').querySelector('.line.due span:last-child');if(sm)sm.textContent=money(c);
  g('go').textContent='Save their spot \u00b7 '+money(c);
  g('go').dataset.t=g('go').textContent;
  overrideCents=c;
@@ -222,6 +242,21 @@ function showTotal(c){
 function serverErr(status,j){
  var f=(j&&j.field)||'',e=(j&&j.error)||'',m;
  if(e==='price_changed'&&j&&typeof j.amountCents==='number'){showTotal(j.amountCents);secret=null;announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');return}
+ if(e==='duplicate_kid'||e==='text_karlin'){
+  var fe=g('formErr');fe.textContent='';
+  var live;
+  if(e==='duplicate_kid'){
+   var kn=(j&&typeof j.kidFirstName==='string'&&j.kidFirstName)?j.kidFirstName:'Your kid';
+   fe.appendChild(document.createTextNode(kn+' already has a spot. Questions? '));
+   live=kn+' already has a spot. Questions? Text Karlin.';
+  }else{
+   fe.appendChild(document.createTextNode('Please '));
+   live='Please text Karlin to finish signing up.';
+  }
+  var a=document.createElement('a');a.href=sms;a.textContent='Text Karlin';
+  if(e==='text_karlin'){a.textContent='text Karlin';fe.appendChild(a);fe.appendChild(document.createTextNode(' to finish signing up.'))}
+  else{fe.appendChild(a);fe.appendChild(document.createTextNode('.'))}
+  g('liveErr').textContent=live;return}
  if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text Karlin.');return}
  if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text Karlin.');return}
  var km=/^kids\.(\d+)\.(firstName|age)$/.exec(f);
@@ -241,9 +276,9 @@ g('f').addEventListener('submit',async function(ev){
  try{
   var sub=await elements.submit();
   if(sub.error){g('e-pay').textContent=sub.error.message||'Check your payment details.';announce(g('e-pay').textContent);setBusy(false);return}
-  var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents()]);
+  var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents(),inviteRemoved]);
   if(!secret||sig!==secretSig){
-   secret=null;
+   secret=null;g('inviteNote').hidden=true;
    body.attemptId=attemptId;body.expectedCents=totalCents();
    var res=await fetch('/api/season1/commit',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
    var j=null;try{j=await res.json()}catch(_){}
@@ -251,13 +286,17 @@ g('f').addEventListener('submit',async function(ev){
    if(typeof j.amountCents==='number'&&j.amountCents!==totalCents()){
     showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');setBusy(false);return}
    secret=j.clientSecret;secretSig=sig;
+   if(j.invite==='ignored'){
+    invite=null;renderInvite();upd();
+    g('inviteNote').textContent=IGNORED_MSG;g('inviteNote').hidden=false;g('liveErr').textContent=IGNORED_MSG;
+    setBusy(false);return}
   }
   confirming=true;
   var r=await stripe.confirmPayment({elements:elements,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
   if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';g('e-pay').textContent=msg;announce(msg);setBusy(false)}
  }catch(err){announce(confirming?'We could not confirm your payment. Text Karlin before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');setBusy(false)}
 });
-upd();initStripe();ga('season1_signup_view');
+renderInvite();upd();initStripe();ga('season1_signup_view');
 })();
 </script>
 </div>

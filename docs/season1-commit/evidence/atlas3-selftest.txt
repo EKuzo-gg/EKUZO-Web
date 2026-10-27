@@ -1,0 +1,24 @@
+Atlas slice 2 UI self-test (signup invite banner, welcome notes). Test DB, port 3101, 375px, analytics hosts blocked.
+Cookie values signed with S1_REF_SECRET; none printed.
+
+curl signup with signed s1_ref: config has invite {name} only; code string absent from page; name JSON-escaped (\u003c, \u0026); bad signature: no invite key; no cookie: no invite key; referrer-policy origin; cache-control private, no-store.
+
+banner text: Invited by Leo's family
+remove label: Remove (no friend credit for either family)
+totals credit line: Feb 15: $0 with Leo's family credit, applied at lock-in.
+due today: Feb 15: $0 with Leo's family credit, applied at lock-in.
+after Remove: banner hidden=True, credit line present=False, remove POSTs=[('POST', 'http://localhost:3101/api/season1/invite/remove')]
+nameless banner: Invited by a friend's family
+nameless credit: Feb 15: $0 with a friend's family credit, applied at lock-in.
+xss banner text: Invited by <img src=x onerror=alert(1)> O'Neil "q" &'s family
+xss img elements in page: 0, dialogs: []
+xss credit line: Feb 15: $0 with <img src=x onerror=alert(1)> O'Neil "q" &'s family credit, applied at lock-in.
+bad cookie: banner hidden=True
+ignored: note="This invite can't be used for this email, so no friend credit will be recorded." hidden=False; banner hidden=True; credit line=False; confirmPayment calls after tap1=0; button disabled=False
+ignored: confirmPayment calls after tap2=1; commit calls=1
+commit body inviteRemoved=True, has code/ref key=False
+duplicate_kid: text='<b>Mia</b> already has a spot. Questions? Text Karlin.', bold elements=0, link href=sms:+18324438679
+text_karlin: text='Please text Karlin to finish signing up.' link href=sms:+18324438679
+welcome (reissued view token on a paid test order): share block shows the T2 line; inviteApplied absent so the T10 line renders with sms link. The applied variant ('Friend credit recorded. It applies at lock-in.') is code-read only: OrderView has no inviteApplied yet.
+tsc --noEmit: clean.
+Temp partner code zzxsstest (XSS name) created and deleted; one paid test order's view token reissued.
