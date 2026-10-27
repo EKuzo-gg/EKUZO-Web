@@ -25,7 +25,8 @@ Re-read this file after any compaction or check-in. Lead updates it at every spa
 | Role | Task | Files owned | Ports/PIDs | Status |
 |---|---|---|---|---|
 | Side (W3) | terms addendum + privacy insert | kb-outbox/season1-commit/W3-*.md | none | done 22:01 |
-| Scout | codebase map | returns in reply | none | running (started 21:58) |
+| Scout | codebase map | scout-map.md (saved by lead) | none | done 22:10 |
+| Relay A | migrations, migrate script, db.ts, ratelimit, legacy guard, ADR Discord note, db integration test | db/migrations, scripts/s1-migrate.mjs, lib/season1/{db,ratelimit}.ts, legacy route guard lines, docs/architecture-decisions.md, 06-cleanup-ledger.md | none | running (22:13) |
 | Red team money | redteam-money.md | that file | none | running (22:05) |
 | Challenger s1 | challenger-slice1.md | that file | none | running (22:05) |
 | Chronos | offer, pricing, codes, validate, mode, legacyGuard, tests, runner | lib/season1/{offer,pricing,codes,validate,mode,legacyGuard}.ts, lib/season1/__tests__, scripts/test-resolve.mjs, scripts/run-tests.mjs, package.json scripts | none | running (22:07) |
