@@ -17,6 +17,7 @@ felt flat, image broken, jersey callout read as a button).
   its AI caption removed. Bands below: black stats (camps overview cards), white friend ladder as a
   falling bar chart with avatars, off-white timeline (horizontal on desktop), black coaches + safe by
   design, white FAQ + red final CTA. Torn-paper seam at every band change. Real logo SVG.
+- FAQ: "What game do they play?" added first, same answer as the `/season1` landing.
 - Coach copy (Aaron's notes): Sebastien "Top 1% player, the real deal"; Karlin "change what it means
   to be a gamer"; Nuri "former public school teacher". Full names, camps-style role lines.
 - New assets in `public/images/season1/` (web-sized WebP from existing site art and coach photos).
