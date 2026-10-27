@@ -1,0 +1,420 @@
+[
+ {
+  "i": 1,
+  "d": {
+   "tag": "A",
+   "id": "back",
+   "name": null,
+   "title": null,
+   "text": "‹ Back",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.6)",
+   "rect": [
+    16,
+    48,
+    43,
+    17
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 2,
+  "d": {
+   "tag": "A",
+   "id": "",
+   "name": null,
+   "title": null,
+   "text": "EKUZO",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    157,
+    45,
+    65,
+    22
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 3,
+  "d": {
+   "tag": "INPUT",
+   "id": "nm0",
+   "name": null,
+   "title": null,
+   "text": "",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.25)",
+   "rect": [
+    20,
+    260,
+    162,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 4,
+  "d": {
+   "tag": "SELECT",
+   "id": "ag0",
+   "name": null,
+   "title": null,
+   "text": "Pick age\n9\n10\n11\n12\n13\n14\n15\n1",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.25)",
+   "rect": [
+    194,
+    260,
+    162,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 5,
+  "d": {
+   "tag": "BUTTON",
+   "id": "addSib",
+   "name": null,
+   "title": null,
+   "text": "+ Add a sibling (20% off)",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgb(249, 37, 36)",
+   "rect": [
+    20,
+    325,
+    335,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 6,
+  "d": {
+   "tag": "INPUT",
+   "id": "pname",
+   "name": "given-name",
+   "title": null,
+   "text": "",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.25)",
+   "rect": [
+    20,
+    577,
+    335,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 7,
+  "d": {
+   "tag": "INPUT",
+   "id": "email",
+   "name": null,
+   "title": null,
+   "text": "",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.25)",
+   "rect": [
+    20,
+    655,
+    335,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 8,
+  "d": {
+   "tag": "IFRAME",
+   "id": "",
+   "name": "__privateStripeFrame2584",
+   "title": "Secure payment input frame",
+   "text": "",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    16,
+    708,
+    343,
+    369
+   ],
+   "focusVisible": false
+  },
+  "inner": {
+   "tag": "INPUT",
+   "id": "payment-numberInput",
+   "name": "number",
+   "aria": "Card number",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)"
+  }
+ },
+ {
+  "i": 9,
+  "d": {
+   "tag": "IFRAME",
+   "id": "",
+   "name": "__privateStripeFrame2584",
+   "title": "Secure payment input frame",
+   "text": "",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    16,
+    674,
+    343,
+    369
+   ],
+   "focusVisible": false
+  },
+  "inner": {
+   "tag": "INPUT",
+   "id": "payment-expiryInput",
+   "name": "expiry",
+   "aria": "Expiration date",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)"
+  }
+ },
+ {
+  "i": 10,
+  "d": {
+   "tag": "IFRAME",
+   "id": "",
+   "name": "__privateStripeFrame2584",
+   "title": "Secure payment input frame",
+   "text": "",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    16,
+    674,
+    343,
+    369
+   ],
+   "focusVisible": false
+  },
+  "inner": {
+   "tag": "INPUT",
+   "id": "payment-cvcInput",
+   "name": "cvc",
+   "aria": "Security code",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)"
+  }
+ },
+ {
+  "i": 11,
+  "d": {
+   "tag": "IFRAME",
+   "id": "",
+   "name": "__privateStripeFrame2584",
+   "title": "Secure payment input frame",
+   "text": "",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    16,
+    217,
+    343,
+    369
+   ],
+   "focusVisible": false
+  },
+  "inner": {
+   "tag": "SELECT",
+   "id": "payment-countryInput",
+   "name": "country",
+   "aria": "Country",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)"
+  }
+ },
+ {
+  "i": 12,
+  "d": {
+   "tag": "IFRAME",
+   "id": "",
+   "name": "__privateStripeFrame2584",
+   "title": "Secure payment input frame",
+   "text": "",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    16,
+    217,
+    343,
+    369
+   ],
+   "focusVisible": false
+  },
+  "inner": {
+   "tag": "INPUT",
+   "id": "payment-postalCodeInput",
+   "name": "postalCode",
+   "aria": "ZIP code",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)"
+  }
+ },
+ {
+  "i": 13,
+  "d": {
+   "tag": "INPUT",
+   "id": "mob",
+   "name": "s1-mobile",
+   "title": null,
+   "text": "",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.25)",
+   "rect": [
+    20,
+    615,
+    335,
+    45
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 14,
+  "d": {
+   "tag": "INPUT",
+   "id": "terms",
+   "name": null,
+   "title": null,
+   "text": "on",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgb(0, 0, 0)",
+   "rect": [
+    24,
+    678,
+    13,
+    134
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 15,
+  "d": {
+   "tag": "A",
+   "id": "",
+   "name": null,
+   "title": null,
+   "text": "Season 01 terms",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgba(0, 0, 0, 0.75)",
+   "rect": [
+    125,
+    677,
+    94,
+    15
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 16,
+  "d": {
+   "tag": "BUTTON",
+   "id": "go",
+   "name": null,
+   "title": null,
+   "text": "Save their spot · $100",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgb(255, 255, 255)",
+   "rect": [
+    20,
+    653,
+    335,
+    52
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 17,
+  "d": {
+   "tag": "A",
+   "id": "",
+   "name": null,
+   "title": null,
+   "text": "Text Karlin",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    191,
+    722,
+    61,
+    15
+   ],
+   "focusVisible": true
+  },
+  "inner": null
+ },
+ {
+  "i": 18,
+  "d": {
+   "tag": "BODY",
+   "id": "",
+   "name": null,
+   "title": null,
+   "text": "Test mode. No real charges.\n‹ ",
+   "outline": "none 3px rgb(5, 5, 5)",
+   "shadow": "none",
+   "border": "rgb(5, 5, 5)",
+   "rect": [
+    0,
+    -673,
+    375,
+    1485
+   ],
+   "focusVisible": false
+  },
+  "inner": null
+ }
+]

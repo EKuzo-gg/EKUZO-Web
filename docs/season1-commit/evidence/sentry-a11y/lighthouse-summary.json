@@ -1,0 +1,128 @@
+[
+ {
+  "f": "crew_75701491-1.json",
+  "perf": 61,
+  "a11y": 90,
+  "LCP": 5.28,
+  "CLS": 0.024,
+  "FCP": 1.87,
+  "TBT": 743,
+  "totalKB": 10919,
+  "exStripeKB": 10919,
+  "exStripeGAKB": 10732,
+  "stripeKB": 0,
+  "gaKB": 188,
+  "reqs": 21,
+  "stripeReqs": 0,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ },
+ {
+  "f": "crew_75701491-2.json",
+  "perf": 65,
+  "a11y": 90,
+  "LCP": 4.44,
+  "CLS": 0.024,
+  "FCP": 1.94,
+  "TBT": 758,
+  "totalKB": 10919,
+  "exStripeKB": 10919,
+  "exStripeGAKB": 10732,
+  "stripeKB": 0,
+  "gaKB": 188,
+  "reqs": 21,
+  "stripeReqs": 0,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ },
+ {
+  "f": "season1_join-1.json",
+  "perf": 42,
+  "a11y": 90,
+  "LCP": 57.57,
+  "CLS": 0,
+  "FCP": 2.73,
+  "TBT": 1516,
+  "totalKB": 10845,
+  "exStripeKB": 10845,
+  "exStripeGAKB": 10657,
+  "stripeKB": 0,
+  "gaKB": 188,
+  "reqs": 21,
+  "stripeReqs": 0,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ },
+ {
+  "f": "season1_join-2.json",
+  "perf": 44,
+  "a11y": 90,
+  "LCP": 58.89,
+  "CLS": 0,
+  "FCP": 2.89,
+  "TBT": 1163,
+  "totalKB": 10844,
+  "exStripeKB": 10844,
+  "exStripeGAKB": 10657,
+  "stripeKB": 0,
+  "gaKB": 188,
+  "reqs": 21,
+  "stripeReqs": 0,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ },
+ {
+  "f": "season1_join_signup-1.json",
+  "perf": 30,
+  "a11y": 95,
+  "LCP": 10.43,
+  "CLS": 0.025,
+  "FCP": 5.91,
+  "TBT": 2691,
+  "totalKB": 3023,
+  "exStripeKB": 1291,
+  "exStripeGAKB": 1104,
+  "stripeKB": 1732,
+  "gaKB": 188,
+  "reqs": 120,
+  "stripeReqs": 61,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ },
+ {
+  "f": "season1_join_signup-2.json",
+  "perf": 30,
+  "a11y": 95,
+  "LCP": 10.36,
+  "CLS": 0.022,
+  "FCP": 5.67,
+  "TBT": 3225,
+  "totalKB": 3002,
+  "exStripeKB": 1291,
+  "exStripeGAKB": 1103,
+  "stripeKB": 1711,
+  "gaKB": 188,
+  "reqs": 118,
+  "stripeReqs": 60,
+  "lcpEl": "",
+  "a11yFails": [
+   "color-contrast",
+   "landmark-one-main"
+  ]
+ }
+]

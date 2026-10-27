@@ -1,0 +1,1769 @@
+{
+ "/season1/join@375": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini\" href=\"/season1/join/signup\">Save their spot</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Season 01 is open · Starts mid January</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn\" style=\"margin-top:20px\" href=\"/season1/join/signup\">Save their spot · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is Season 01</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Bring their crew</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Save their spot · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app"
+      ],
+      "html": "<div class=\"app\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 22,
+  "tap": [
+   {
+    "tag": "a",
+    "cls": "back",
+    "text": "‹",
+    "w": 40,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "wm",
+    "text": "EKUZO",
+    "w": 65,
+    "h": 22,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "mini",
+    "text": "Save their spot",
+    "w": 111,
+    "h": 31,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 69,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 62,
+    "h": 15,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/season1/join/signup@375": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".red"
+      ],
+      "html": "<p class=\"ey red\">Season 01 · <span id=\"mode\">Season 01 is open</span></p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#mode"
+      ],
+      "html": "<span id=\"mode\">Season 01 is open</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#addSib"
+      ],
+      "html": "<button type=\"button\" class=\"btn ghost\" id=\"addSib\" style=\"margin-top:20px\">+ Add a sibling (20% off)</button>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s style=\"color:rgba(0,0,0,.4)\">$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(2) > span:nth-child(1)"
+      ],
+      "html": "<span>Founding jersey (first 100)</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #6f6f6f, background color: #efeeed, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(2) > span:nth-child(2)"
+      ],
+      "html": "<span>Free</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #6f6f6f, background color: #efeeed, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#go"
+      ],
+      "html": "<button class=\"btn\" style=\"margin-top:16px\" id=\"go\" type=\"submit\">Save their spot · $100</button>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       "#testBar"
+      ],
+      "html": "<div class=\"pv\" id=\"testBar\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><a class=\"back\" href=\"/season1/join\" id=\"back\">‹ Back</a><a class=\"wm\" href=\"/\">EKUZO</a><span style=\"min-width:40px\"></span></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".red"
+      ],
+      "html": "<p class=\"ey red\">Season 01 · <span id=\"mode\">Season 01 is open</span></p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "h1"
+      ],
+      "html": "<h1 class=\"d\" style=\"font-size:40px;margin-top:4px\">Save their spot</h1>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(3)"
+      ],
+      "html": "<p class=\"small\" style=\"margin-top:8px\">Sign up for EKUZO Season 01. About a minute.</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".kid > .ey"
+      ],
+      "html": "<p class=\"ey\" style=\"margin-top:24px\">Your kid</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".grid2"
+      ],
+      "html": "<div class=\"grid2\" style=\"margin-top:12px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#sum"
+      ],
+      "html": "<div class=\"offer notch\" style=\"margin-top:28px;font-size:14px\" id=\"sum\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"pname\"]"
+      ],
+      "html": "<label class=\"l\" for=\"pname\">Your first name</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#pname"
+      ],
+      "html": "<input class=\"f\" id=\"pname\" name=\"given-name\" autocomplete=\"given-name\" maxlength=\"20\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"email\"]"
+      ],
+      "html": "<label class=\"l\" for=\"email\">Email for your receipt</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#email"
+      ],
+      "html": "<input class=\"f\" id=\"email\" type=\"email\" inputmode=\"email\" autocomplete=\"email\" maxlength=\"254\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       ".p-CardNumberInput > .p-Input"
+      ],
+      "html": "<div class=\"p-Input\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       "ul"
+      ],
+      "html": "<ul aria-label=\"Supported cards include Visa, Mastercard, American Express, and Discover.\" class=\"u-visually-hidden\"><li>Visa</li><li>Mastercard</li><li>American Express</li><li>Discover</li></ul>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       "div[data-field=\"expiry\"] > div:nth-child(2)"
+      ],
+      "html": "<div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       ".p-CardCvcInput > .p-Input"
+      ],
+      "html": "<div class=\"p-Input\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       "#payment-countryInput"
+      ],
+      "html": "<select name=\"country\" id=\"payment-countryInput\" autocomplete=\"billing country\" inputmode=\"text\" autocorrect=\"off\" spellcheck=\"false\" aria-invalid=\"false\" aria-describedby=\"Field-countryError\" aria-re",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       "div[data-field=\"postalCode\"] > div:nth-child(2)"
+      ],
+      "html": "<div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame5534\"]",
+       "form > div > .u-mt-grid.p-Grid"
+      ],
+      "html": "<div class=\"p-Grid u-mt-grid\"><div class=\"p-GridCell p-GridCell--12\"><p class=\"u-lh u-fs-sm u-color-textSecondary u-mt-2 p-TermsText TermsText Text--terms\">By providing your card information, you allo",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"mob\"]"
+      ],
+      "html": "<label class=\"l\" for=\"mob\">Mobile (optional)</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#mob"
+      ],
+      "html": "<input class=\"f\" id=\"mob\" name=\"s1-mobile\" type=\"tel\" placeholder=\"For team updates by text\" autocomplete=\"off\" maxlength=\"20\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#pay > label"
+      ],
+      "html": "<label style=\"display:flex;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(12)"
+      ],
+      "html": "<p class=\"small\" style=\"text-align:center;margin-top:16px;font-weight:600;color:var(--black)\">Questions? <a class=\"smsLink\" href=\"sms:+18324438679\">Text Karlin</a></p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(13)"
+      ],
+      "html": "<p class=\"small\" style=\"text-align:center;margin-top:16px\">Secure payment by Stripe</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [
+   {
+    "id": "aria-valid-attr-value",
+    "impact": "critical",
+    "n": 3,
+    "targets": [
+     "iframe[name=\"__privateStripeFrame5534\"] #payment-expiryInput",
+     "iframe[name=\"__privateStripeFrame5534\"] #payment-countryInput",
+     "iframe[name=\"__privateStripeFrame5534\"] #payment-postalCodeInput"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "n": 1,
+    "targets": [
+     "#ag0"
+    ]
+   }
+  ],
+  "passes": 42,
+  "tap": [
+   {
+    "tag": "a",
+    "id": "back",
+    "cls": "back",
+    "text": "‹ Back",
+    "w": 43,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "wm",
+    "text": "EKUZO",
+    "w": 65,
+    "h": 22,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "input",
+    "id": "terms",
+    "text": "on",
+    "w": 13,
+    "h": 134,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Season 01 terms",
+    "w": 94,
+    "h": 15,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "cls": "smsLink",
+    "text": "Text Karlin",
+    "w": 61,
+    "h": 15,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/crew/75701491@375": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2) > .ey"
+      ],
+      "html": "<p class=\"ey\">An invite from Zoë’s family</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "div:nth-child(2) > p:nth-child(3)"
+      ],
+      "html": "<p style=\"font-size:15px;line-height:1.5;margin-top:16px\">Zoë just saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link and both families get a",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(5) > a[href$=\"terms\"]"
+      ],
+      "html": "<a href=\"/season1/terms\">Fully refundable until December 31, 2026, and any time we can't place your kid</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6)"
+      ],
+      "html": "<p style=\"font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)\">Friend code 7570 1491</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(1) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is EKUZO</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(2) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">How a season works</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Your price, with Zoë’s invite</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(1) > .red"
+      ],
+      "html": "<b class=\"red\">Free (from Zoë)</b>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.4 (foreground color: #f92524, background color: #efeeed, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:16px\" href=\"/season1/join/signup\">Join Zoë’s team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Who coaches</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Join Zoë’s team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><span style=\"min-width:40px\"></span><a class=\"wm\" href=\"/\">EKUZO</a><a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2)"
+      ],
+      "html": "<div style=\"background:var(--red);color:#fff;padding:28px 20px 32px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".hero-img"
+      ],
+      "html": "<img class=\"hero-img\" style=\"height:220px\" src=\"https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg\" alt=\"An EKUZO team on a call with their coach\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(4)"
+      ],
+      "html": "<div class=\"px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".safe"
+      ],
+      "html": "<div class=\"safe\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(6)"
+      ],
+      "html": "<div class=\"px\" style=\"padding-top:32px;padding-bottom:40px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 21,
+  "tap": [
+   {
+    "tag": "a",
+    "cls": "wm",
+    "text": "EKUZO",
+    "w": 65,
+    "h": 22,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "mini join",
+    "text": "Join the team",
+    "w": 101,
+    "h": 31,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Fully refundable until December 31, 2026",
+    "w": 330,
+    "h": 30,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Fully refundable until December 31, 2026",
+    "w": 257,
+    "h": 32,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 69,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 62,
+    "h": 15,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/crew/12345678@375": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2) > .ey"
+      ],
+      "html": "<p class=\"ey\">An invite to EKUZO Season 01</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "div:nth-child(2) > p:nth-child(3)"
+      ],
+      "html": "<p style=\"font-size:15px;line-height:1.5;margin-top:16px\">A friend saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link to get your kid on the ",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(5) > a[href$=\"terms\"]"
+      ],
+      "html": "<a href=\"/season1/terms\">Fully refundable until December 31, 2026, and any time we can't place your kid</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6)"
+      ],
+      "html": "<p style=\"font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)\">Invite link not active? You can still join. <a href=\"sms:+18324438679\">Text Karlin</a> about credits.</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6) > a[href=\"sms:+18324438679\"]"
+      ],
+      "html": "<a href=\"sms:+18324438679\">Text Karlin</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(1) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is EKUZO</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(2) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">How a season works</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Your price</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:16px\" href=\"/season1/join/signup\">Join the team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Who coaches</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Join the team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><span style=\"min-width:40px\"></span><a class=\"wm\" href=\"/\">EKUZO</a><a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2)"
+      ],
+      "html": "<div style=\"background:var(--red);color:#fff;padding:28px 20px 32px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".hero-img"
+      ],
+      "html": "<img class=\"hero-img\" style=\"height:220px\" src=\"https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg\" alt=\"An EKUZO team on a call with their coach\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(4)"
+      ],
+      "html": "<div class=\"px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".safe"
+      ],
+      "html": "<div class=\"safe\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(6)"
+      ],
+      "html": "<div class=\"px\" style=\"padding-top:32px;padding-bottom:40px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 21,
+  "tap": [
+   {
+    "tag": "a",
+    "cls": "wm",
+    "text": "EKUZO",
+    "w": 65,
+    "h": 22,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "mini join",
+    "text": "Join the team",
+    "w": 101,
+    "h": 31,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Fully refundable until December 31, 2026",
+    "w": 330,
+    "h": 30,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 61,
+    "h": 15,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Fully refundable until December 31, 2026",
+    "w": 257,
+    "h": 32,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 69,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 62,
+    "h": 15,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/season1/join/welcome@375": {
+  "violations": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app"
+      ],
+      "html": "<div class=\"app\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 15,
+  "tap": [
+   {
+    "tag": "a",
+    "text": "‹",
+    "w": 5,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "Back to Season 01",
+    "w": 104,
+    "h": 15,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/season1/terms@375": {
+  "violations": [
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       "div"
+      ],
+      "html": "<div class=\"nav\"><a class=\"back\" href=\"/season1/join/signup\">‹ Back</a><a class=\"wm\" href=\"/\">EKUZO</a><span style=\"min-width:40px\"></span></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 20,
+  "tap": [
+   {
+    "tag": "a",
+    "cls": "back",
+    "text": "‹ Back",
+    "w": 43,
+    "h": 17,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "cls": "wm",
+    "text": "EKUZO",
+    "w": 65,
+    "h": 22,
+    "inlineTextLink": false
+   },
+   {
+    "tag": "a",
+    "text": "EKUZO Terms of Service",
+    "w": 286,
+    "h": 43,
+    "inlineTextLink": true
+   },
+   {
+    "tag": "a",
+    "text": "Text Karlin",
+    "w": 80,
+    "h": 19,
+    "inlineTextLink": true
+   }
+  ]
+ },
+ "/season1/join@1440": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini\" href=\"/season1/join/signup\">Save their spot</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Season 01 is open · Starts mid January</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn\" style=\"margin-top:20px\" href=\"/season1/join/signup\">Save their spot · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is Season 01</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Bring their crew</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Save their spot · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app"
+      ],
+      "html": "<div class=\"app\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 22
+ },
+ "/season1/join/signup@1440": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".red"
+      ],
+      "html": "<p class=\"ey red\">Season 01 · <span id=\"mode\">Season 01 is open</span></p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#mode"
+      ],
+      "html": "<span id=\"mode\">Season 01 is open</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#addSib"
+      ],
+      "html": "<button type=\"button\" class=\"btn ghost\" id=\"addSib\" style=\"margin-top:20px\">+ Add a sibling (20% off)</button>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s style=\"color:rgba(0,0,0,.4)\">$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(2) > span:nth-child(1)"
+      ],
+      "html": "<span>Founding jersey (first 100)</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #6f6f6f, background color: #efeeed, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(2) > span:nth-child(2)"
+      ],
+      "html": "<span>Free</span>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #6f6f6f, background color: #efeeed, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "#go"
+      ],
+      "html": "<button class=\"btn\" style=\"margin-top:16px\" id=\"go\" type=\"submit\">Save their spot · $100</button>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       "#testBar"
+      ],
+      "html": "<div class=\"pv\" id=\"testBar\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><a class=\"back\" href=\"/season1/join\" id=\"back\">‹ Back</a><a class=\"wm\" href=\"/\">EKUZO</a><span style=\"min-width:40px\"></span></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".red"
+      ],
+      "html": "<p class=\"ey red\">Season 01 · <span id=\"mode\">Season 01 is open</span></p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "h1"
+      ],
+      "html": "<h1 class=\"d\" style=\"font-size:40px;margin-top:4px\">Save their spot</h1>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(3)"
+      ],
+      "html": "<p class=\"small\" style=\"margin-top:8px\">Sign up for EKUZO Season 01. About a minute.</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".kid > .ey"
+      ],
+      "html": "<p class=\"ey\" style=\"margin-top:24px\">Your kid</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".grid2"
+      ],
+      "html": "<div class=\"grid2\" style=\"margin-top:12px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#sum"
+      ],
+      "html": "<div class=\"offer notch\" style=\"margin-top:28px;font-size:14px\" id=\"sum\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"pname\"]"
+      ],
+      "html": "<label class=\"l\" for=\"pname\">Your first name</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#pname"
+      ],
+      "html": "<input class=\"f\" id=\"pname\" name=\"given-name\" autocomplete=\"given-name\" maxlength=\"20\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"email\"]"
+      ],
+      "html": "<label class=\"l\" for=\"email\">Email for your receipt</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#email"
+      ],
+      "html": "<input class=\"f\" id=\"email\" type=\"email\" inputmode=\"email\" autocomplete=\"email\" maxlength=\"254\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       ".p-CardNumberInput > .p-Input"
+      ],
+      "html": "<div class=\"p-Input\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       "ul"
+      ],
+      "html": "<ul aria-label=\"Supported cards include Visa, Mastercard, American Express, and Discover.\" class=\"u-visually-hidden\"><li>Visa</li><li>Mastercard</li><li>American Express</li><li>Discover</li></ul>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       "div[data-field=\"expiry\"] > div:nth-child(2)"
+      ],
+      "html": "<div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       ".p-CardCvcInput > .p-Input"
+      ],
+      "html": "<div class=\"p-Input\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       "#payment-countryInput"
+      ],
+      "html": "<select name=\"country\" id=\"payment-countryInput\" autocomplete=\"billing country\" inputmode=\"text\" autocorrect=\"off\" spellcheck=\"false\" aria-invalid=\"false\" aria-describedby=\"Field-countryError\" aria-re",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       "div[data-field=\"postalCode\"] > div:nth-child(2)"
+      ],
+      "html": "<div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "iframe[name=\"__privateStripeFrame2854\"]",
+       "form > div > .u-mt-grid.p-Grid"
+      ],
+      "html": "<div class=\"p-Grid u-mt-grid\"><div class=\"p-GridCell p-GridCell--12\"><p class=\"u-lh u-fs-sm u-color-textSecondary u-mt-2 p-TermsText TermsText Text--terms\">By providing your card information, you allo",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "label[for=\"mob\"]"
+      ],
+      "html": "<label class=\"l\" for=\"mob\">Mobile (optional)</label>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#mob"
+      ],
+      "html": "<input class=\"f\" id=\"mob\" name=\"s1-mobile\" type=\"tel\" placeholder=\"For team updates by text\" autocomplete=\"off\" maxlength=\"20\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       "#pay > label"
+      ],
+      "html": "<label style=\"display:flex;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(12)"
+      ],
+      "html": "<p class=\"small\" style=\"text-align:center;margin-top:16px;font-weight:600;color:var(--black)\">Questions? <a class=\"smsLink\" href=\"sms:+18324438679\">Text Karlin</a></p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".small:nth-child(13)"
+      ],
+      "html": "<p class=\"small\" style=\"text-align:center;margin-top:16px\">Secure payment by Stripe</p>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [
+   {
+    "id": "aria-valid-attr-value",
+    "impact": "critical",
+    "n": 3,
+    "targets": [
+     "iframe[name=\"__privateStripeFrame2854\"] #payment-expiryInput",
+     "iframe[name=\"__privateStripeFrame2854\"] #payment-countryInput",
+     "iframe[name=\"__privateStripeFrame2854\"] #payment-postalCodeInput"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "n": 1,
+    "targets": [
+     "#ag0"
+    ]
+   }
+  ],
+  "passes": 42
+ },
+ "/crew/75701491@1440": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2) > .ey"
+      ],
+      "html": "<p class=\"ey\">An invite from Zoë’s family</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "div:nth-child(2) > p:nth-child(3)"
+      ],
+      "html": "<p style=\"font-size:15px;line-height:1.5;margin-top:16px\">Zoë just saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link and both families get a",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(5) > a[href$=\"terms\"]"
+      ],
+      "html": "<a href=\"/season1/terms\">Fully refundable until December 31, 2026, and any time we can't place your kid</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6)"
+      ],
+      "html": "<p style=\"font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)\">Friend code 7570 1491</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(1) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is EKUZO</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(2) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">How a season works</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Your price, with Zoë’s invite</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".line:nth-child(1) > .red"
+      ],
+      "html": "<b class=\"red\">Free (from Zoë)</b>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.4 (foreground color: #f92524, background color: #efeeed, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:16px\" href=\"/season1/join/signup\">Join Zoë’s team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Who coaches</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Join Zoë’s team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><span style=\"min-width:40px\"></span><a class=\"wm\" href=\"/\">EKUZO</a><a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2)"
+      ],
+      "html": "<div style=\"background:var(--red);color:#fff;padding:28px 20px 32px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".hero-img"
+      ],
+      "html": "<img class=\"hero-img\" style=\"height:220px\" src=\"https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg\" alt=\"An EKUZO team on a call with their coach\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(4)"
+      ],
+      "html": "<div class=\"px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".safe"
+      ],
+      "html": "<div class=\"safe\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(6)"
+      ],
+      "html": "<div class=\"px\" style=\"padding-top:32px;padding-bottom:40px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 21
+ },
+ "/crew/12345678@1440": {
+  "violations": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": [
+       ".mini"
+      ],
+      "html": "<a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2) > .ey"
+      ],
+      "html": "<p class=\"ey\">An invite to EKUZO Season 01</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "div:nth-child(2) > p:nth-child(3)"
+      ],
+      "html": "<p style=\"font-size:15px;line-height:1.5;margin-top:16px\">A friend saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link to get your kid on the ",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(5) > a[href$=\"terms\"]"
+      ],
+      "html": "<a href=\"/season1/terms\">Fully refundable until December 31, 2026, and any time we can't place your kid</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6)"
+      ],
+      "html": "<p style=\"font-size:12px;text-align:center;margin-top:8px;color:rgba(255,255,255,.85)\">Invite link not active? You can still join. <a href=\"sms:+18324438679\">Text Karlin</a> about credits.</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "p:nth-child(6) > a[href=\"sms:+18324438679\"]"
+      ],
+      "html": "<a href=\"sms:+18324438679\">Text Karlin</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #fedede, background color: #f92524, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(1) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">What is EKUZO</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(2) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">How a season works</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(4) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Your price</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       "s"
+      ],
+      "html": "<s>$160</s>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #8f8f8e, background color: #efeeed, font size: 15.0pt (20px), font weight: normal). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".offer > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:16px\" href=\"/season1/join/signup\">Join the team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".sec:nth-child(5) > .red.ey"
+      ],
+      "html": "<p class=\"ey red\">Who coaches</p>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #f92524, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": [
+       ".px:nth-child(6) > .btn.join[href$=\"signup\"]"
+      ],
+      "html": "<a class=\"btn join\" style=\"margin-top:28px\" href=\"/season1/join/signup\">Join the team · $100</a>",
+      "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.94 (foreground color: #ffffff, background color: #f92524, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".nav"
+      ],
+      "html": "<div class=\"nav\"><span style=\"min-width:40px\"></span><a class=\"wm\" href=\"/\">EKUZO</a><a class=\"mini join\" href=\"/season1/join/signup\">Join the team</a></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app > div:nth-child(2)"
+      ],
+      "html": "<div style=\"background:var(--red);color:#fff;padding:28px 20px 32px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".hero-img"
+      ],
+      "html": "<img class=\"hero-img\" style=\"height:220px\" src=\"https://cdn.klaviyomail.com/company/UMWwrM/images/fce5efe5-0494-4520-8d8a-e150e3602187.jpeg\" alt=\"An EKUZO team on a call with their coach\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(4)"
+      ],
+      "html": "<div class=\"px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".safe"
+      ],
+      "html": "<div class=\"safe\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".px:nth-child(6)"
+      ],
+      "html": "<div class=\"px\" style=\"padding-top:32px;padding-bottom:40px\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 21
+ },
+ "/season1/join/welcome@1440": {
+  "violations": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "nodes": [
+     {
+      "target": [
+       "html"
+      ],
+      "html": "<html lang=\"en\">",
+      "summary": "Fix all of the following:\n  Document does not have a main landmark"
+     }
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       ".pv"
+      ],
+      "html": "<div class=\"pv\">Test mode. No real charges.</div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     },
+     {
+      "target": [
+       ".app"
+      ],
+      "html": "<div class=\"app\">",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 15
+ },
+ "/season1/terms@1440": {
+  "violations": [
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": [
+     {
+      "target": [
+       "div"
+      ],
+      "html": "<div class=\"nav\"><a class=\"back\" href=\"/season1/join/signup\">‹ Back</a><a class=\"wm\" href=\"/\">EKUZO</a><span style=\"min-width:40px\"></span></div>",
+      "summary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+     }
+    ]
+   }
+  ],
+  "incomplete": [],
+  "passes": 20
+ }
+}
