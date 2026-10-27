@@ -113,3 +113,17 @@ A11Y proofs ran on localhost (Atlas), not on the deploy; the regression lane did
 | R-ledger | 06-cleanup-ledger.md | Test rows and canceled PIs remain on the Neon test branch | Test branch; cleanup query in the ledger |
 | AUD-I | Auditor | Neon test connection string was echoed once into the session log (run-state note) | Test branch; runbook step 10 resets the production role password after the first live check |
 | AUD-J | Auditor | Card-only client payment types instead of card plus link (run-state 22:30) | Link bank tab removed on purpose; add to the decision log with AUD-D |
+
+## Post-audit updates (lead, 2026-10-27 01:50 CT)
+
+| ID | Update | Evidence |
+|---|---|---|
+| AUD-A | fixed: commit writes `age_edge` on the order (9 or 18) | relay-g-gaps.txt; sentry-smoke/results.md (order flags ["age_edge"] on the deploy) |
+| AUD-2 | fixed and tested: `charge.dispute.created` flags the order and the family, queues an ops alert; replay is a no-op (signed local event) | relay-g-gaps.txt |
+| AUD-B | fixed and tested: the welcome page sets `ekuzo_s1_joined`; the site popup stays closed | relay-g-gaps.txt |
+| RT15, RT16 | tested at the fulfil level with injected PaymentIntents | lib/season1/__tests__/gaps.integration.test.ts, relay-g-gaps.txt |
+| AUD-1 | partial: Apple Pay recurring request passed through the Payment Element (no Stripe.js option warning on the deploy); the separate one-tap button stays deferred (D18) | sentry-smoke/results.md |
+| AUD-D, AUD-J, RG-R2 | decision log corrected (D3) and extended (D16, D17, D18) | 03-decision-log.md |
+
+Open critical: 1 (PR-1, terms Draft, by design). Open major: 10 (SEC-H1, SEC-M3, PR-2, PR-3, AUD-1 for Jamie;
+PR-4 exit links (popup part fixed), PR-5, PR-6, PR-7, A11Y-03 for Aaron).

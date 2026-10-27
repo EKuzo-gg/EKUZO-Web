@@ -135,3 +135,11 @@ No succeeded PIs. 13 PaymentIntents created, all verified canceled via the Strip
 | payment_intent | pi_3UV3KLKORcR8BUEx1TxLXqFs | canceled | Check 1 browser commit, decline 4000 0000 0000 0002 then 3DS fail 4000 0027 6000 3184 on the same PI |
 | payment_intent | pi_3UV3aZKORcR8BUEx0Usk0B0v, pi_3UV3aaKORcR8BUEx01c0ceY2, pi_3UV3abKORcR8BUEx1UduOPGB, pi_3UV3acKORcR8BUEx1O0cs1tT, pi_3UV3adKORcR8BUEx0FUNoEvY, pi_3UV3aeKORcR8BUEx0SCmtv6X | canceled | Check 7 run 1 (6 valid calls, split across two egress IPs) |
 | payment_intent | pi_3UV3kFKORcR8BUEx1axxkOT6, pi_3UV3kGKORcR8BUEx0ioGBJRN, pi_3UV3kHKORcR8BUEx0ndBz9Yx, pi_3UV3kIKORcR8BUEx1UA3lpuE, pi_3UV3kIKORcR8BUEx1mdjS9WB, pi_3UV3kJKORcR8BUEx0sw42xbS | canceled | Check 7 run 2 (6 valid 200s; the 7th call returned 429, no PI) |
+
+## Sentry smoke run (Stripe test mode + Neon test, branch deploy at ddf7387), 2026-10-27
+
+No succeeded PIs. One PaymentIntent created, verified canceled via the Stripe API. Neon row: email `team+s1test-smoke-49hw09@ekuzo.gg`, pending order 5mqu6g9d3n (flags age_edge), kids Ada 9 and Max 12, `s1pi:*` rate-limit key, events.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UV4BDKORcR8BUEx1BhgxsTi | canceled | Smoke check 2, decline 4000 0000 0000 0002, age 9 kid, age_edge flag verified |

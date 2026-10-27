@@ -1,0 +1,238 @@
+{
+ "started": "2026-10-27T06:47:54.434Z",
+ "t1": {
+  "joinStatus": 200,
+  "signupUrl": "/season1/join/signup",
+  "peIframeCount": 1,
+  "paymentFrame": true,
+  "totalBefore": "Due today $100",
+  "totalAfter": "Due today $180",
+  "kidRows": 2,
+  "console": [
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "[Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: \n\n- apple_pay\n\nPlease follow https://stripe.com/docs/payments/payment-methods/pmd-registration to register and verify the domain.",
+    "loc": "https://js.stripe.com/v3/fingerprinted/js/controller-with-preconnect-24068a064b18f4e497b636d4582cae2c.js",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   }
+  ],
+  "consoleAborted": 2
+ },
+ "t2": {
+  "email": "team+s1test-smoke-49hw09@ekuzo.gg",
+  "warnVisibleAge9": true,
+  "warnText": "Season 01 is built for ages 10 to 17. Karlin will check in to make sure it's a fit.",
+  "dueBefore": "Due today $180",
+  "commit": {
+   "status": 200,
+   "hasSecret": true,
+   "pi": "pi_3UV4BDKORcR8BUEx1BhgxsTi",
+   "keys": [
+    "clientSecret",
+    "orderId",
+    "amountCents",
+    "invite"
+   ]
+  },
+  "declineMsg": "Your card has been declined.",
+  "formErr": "Your card has been declined.",
+  "finalUrl": "/season1/join/signup",
+  "console": [
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "[Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: \n\n- apple_pay\n\nPlease follow https://stripe.com/docs/payments/payment-methods/pmd-registration to register and verify the domain.",
+    "loc": "https://js.stripe.com/v3/fingerprinted/js/controller-with-preconnect-24068a064b18f4e497b636d4582cae2c.js",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+    "loc": "https://api.stripe.com/v1/payment_intents/pi_3UV4BDKORcR8BUEx1BhgxsTi/confirm",
+    "page": "/season1/join/signup"
+   }
+  ],
+  "piBefore": {
+   "id": "pi_3UV4BDKORcR8BUEx1BhgxsTi",
+   "status": "requires_payment_method",
+   "amount": 18000,
+   "lastErr": "card_declined"
+  },
+  "piCancel": {
+   "id": "pi_3UV4BDKORcR8BUEx1BhgxsTi",
+   "status": "canceled"
+  },
+  "orders": [
+   {
+    "public_id": "5mqu6g9d3n",
+    "status": "pending",
+    "flags": [
+     "age_edge"
+    ],
+    "amount_cents": 18000
+   }
+  ]
+ },
+ "t3": {
+  "crew": {
+   "status": 200,
+   "final": "/crew/75701491"
+  },
+  "crewBody": "Test mode. No real charges.\nEKUZO\nJoin the team\n\nAN INVITE FROM ZOË’S FAMILY\n\nZOË WANTS\nYOUR KID ON\nTHE TEAM.\n\nZoë just saved a spot in EKUZO Season 01, a coached online esports team for kids ages 10 to 17. Join through this link and both families get a free month.\n\nJoin Zoë’s team · $100\n\nFully refundable until December 31, 2026, and any time we can't place your kid.\n\nFriend code 7570 1491\n\nWHAT IS EKUZO\n\nEVERY GAMER\nDESERVES A TEAM.\n\nThey're already gaming. We give it a point. A real coach, the same teammates every week, and a season to play for. Kids practice communication, strategy and lea",
+  "early": {
+   "status": 200,
+   "final": "/season1/join"
+  },
+  "earlyKidField": null,
+  "earlyBody": "Test mode. No real charges.\n‹\nEKUZO\nSave their spot\n\nObviously, this kid is AI. We don't share real kids without their family's consent.\n\nSEASON 01 IS OPEN · STARTS MID JANUARY\n\nA COACH. A TEAM.\nA SEASON TO PLAY FOR.\n$100\n$160\nfirst month\n\nThen $160 on Feb 15, Mar 15 and Apr 15. The whole season is ",
+  "karlin": {
+   "status": 200,
+   "final": "/season1/join/signup?src=karlin"
+  },
+  "terms": {
+   "status": 200,
+   "final": "/season1/terms"
+  },
+  "termsTitle": "Season 01 terms | EKUZO",
+  "console": [
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/crew/75701491"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup?src=karlin"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup?src=karlin"
+   },
+   {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED",
+    "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "page": "/season1/join/signup?src=karlin"
+   },
+   {
+    "type": "warning",
+    "text": "Origin trial controlled feature not enabled: 'tools'.",
+    "loc": "https://js.stripe.com/v3/",
+    "page": "/season1/join/signup?src=karlin"
+   }
+  ],
+  "termsCurl": 200
+ }
+}
