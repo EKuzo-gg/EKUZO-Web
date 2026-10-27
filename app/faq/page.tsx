@@ -37,7 +37,7 @@ const safetyFAQs = [
   {
     question: "What is EKUZO?",
     answer:
-      "EKUZO is a youth esports coaching platform for students aged 10\u201318. We use competitive gaming as the medium to develop leadership, communication, resilience, and teamwork through structured coaching, real competition, and intentional practice.",
+      "EKUZO is a youth esports coaching platform for students aged 9\u201317. We use competitive gaming as the medium to develop leadership, communication, resilience, and teamwork through structured coaching, real competition, and intentional practice.",
   },
   {
     question: "Who are the coaches?",
@@ -113,7 +113,7 @@ const programsFAQs = [
   {
     question: "What age range is EKUZO for?",
     answer:
-      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
+      "EKUZO programs are designed for students aged 9\u201317. We group players by age and skill level to ensure the best experience for everyone.",
   },
 ];
 

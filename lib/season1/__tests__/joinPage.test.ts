@@ -61,6 +61,6 @@ describe("renderJoin", () => {
       assert.ok(h.includes(`--h:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
     }
     assert.ok(h.includes("4 friends. We refund your $100."));
-    assert.ok(h.includes("ages 10 to 17"));
+    assert.ok(h.includes("ages 9 to 17"));
   });
 });

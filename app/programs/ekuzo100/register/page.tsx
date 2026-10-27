@@ -282,8 +282,8 @@ function getAgeAtStart(birthday: string, sessionStart?: Date): number | null {
 function getAgeNotice(birthday: string, sessionStart?: Date): string | null {
   const age = getAgeAtStart(birthday, sessionStart);
   if (age === null) return null;
-  if (age < 10 || age > 18) {
-    return 'The recommended age for EKUZO100 is 10–18. If your gamer is outside that range, please mention it in the "Additional Information" section below so we can plan accordingly.';
+  if (age < 9 || age > 17) {
+    return 'The recommended age for EKUZO100 is 9–17. If your gamer is outside that range, please mention it in the "Additional Information" section below so we can plan accordingly.';
   }
   return null;
 }

@@ -72,7 +72,7 @@ const programsFAQs = [
   {
     question: "What age range is EKUZO for?",
     answer:
-      "EKUZO programs are designed for students aged 10\u201318. We group players by age and skill level to ensure the best experience for everyone.",
+      "EKUZO programs are designed for students aged 9\u201317. We group players by age and skill level to ensure the best experience for everyone.",
   },
   {
     question: "Can homeschool families participate?",

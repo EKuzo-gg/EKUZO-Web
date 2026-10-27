@@ -12,7 +12,7 @@ import Link from "next/link";
  * lines on the K1NG post.
  */
 export const PROGRAM_LINE = {
-  text: "EKUZO runs coached esports teams for kids ages 10 to 17.",
+  text: "EKUZO runs coached esports teams for kids ages 9 to 17.",
   linkText: "See the current programs",
   href: "/programs",
 } as const;

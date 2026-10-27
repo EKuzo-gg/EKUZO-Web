@@ -119,7 +119,7 @@ const faqItems = [
   {
     // From ekuzo-faq-canon.md "What age range is EKUZO for?" Verbatim. Sync date: 2026-07-15.
     question: "What age range is this for?",
-    answer: "Students aged 10-18. We group players by age and skill level.",
+    answer: "Students aged 9-17. We group players by age and skill level.",
   },
   {
     // From ekuzo-faq-canon.md "What games does EKUZO play?" and "My kid plays Fortnite..." answers. Sync date: 2026-07-15.

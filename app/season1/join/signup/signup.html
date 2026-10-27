@@ -171,7 +171,7 @@ main{padding:4px 12px 48px}
 <p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text our founder</b></a></p>
 <div id="oops" class="oops" hidden>
 <p style="font-size:15px;font-weight:700">Not quite in range?</p>
-<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 10 to 17. Text our founder and we'll figure it out.</p>
+<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 9 to 17. Text our founder and we'll figure it out.</p>
 <a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a></div>
 <div id="closed" class="oops" hidden>
 <p style="font-size:15px;font-weight:700">Signups are paused. Text our founder.</p>
@@ -226,11 +226,11 @@ try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17,18];
 function kidRow(){n++;var i=seq++,d=document.createElement('div');d.className='kid';
  var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
- d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 10 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
+ d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (9 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 9 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 9 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);
  d.querySelectorAll('.krm,.krm2').forEach(function(b){b.addEventListener('click',function(){removeKid(d)})});}
 function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
-function ageChanged(d){var v=d.querySelector('.ag').value;d.querySelector('.warn').hidden=!(v=='9'||v=='18');d.querySelector('.xnote').hidden=v!='x';if(v=='x')ga('season1_age_outside');upd()}
+function ageChanged(d){var v=d.querySelector('.ag').value;d.querySelector('.warn').hidden=v!='18';d.querySelector('.xnote').hidden=v!='x';if(v=='x')ga('season1_age_outside');upd()}
 kidRow();
 g('addSib').onclick=function(){if(n<MAXK){kidRow();ga('season1_sibling_add');upd();}};
 function rows(){return [].slice.call(document.querySelectorAll('.kid'))}
@@ -326,7 +326,7 @@ function serverErr(status,j){
  if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text our founder.');return}
  if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text our founder.');return}
  var km=/^kids\.(\d+)\.(firstName|age)$/.exec(f);
- if(km){var r=rows()[+km[1]];if(r){if(km[2]==='age'){m='Season 01 is built for ages 10 to 17. Text our founder and we\u0027ll figure it out.';setErr(r.querySelector('.e-ag'),r.querySelector('.ag'),m)}else{m='Add your kid\u0027s first name.';setErr(r.querySelector('.e-nm'),r.querySelector('.nm'),m)}announce(m);return}}
+ if(km){var r=rows()[+km[1]];if(r){if(km[2]==='age'){m='Season 01 is built for ages 9 to 17. Text our founder and we\u0027ll figure it out.';setErr(r.querySelector('.e-ag'),r.querySelector('.ag'),m)}else{m='Add your kid\u0027s first name.';setErr(r.querySelector('.e-nm'),r.querySelector('.nm'),m)}announce(m);return}}
  if(f==='email'){m='Check your email address.';setErr(g('e-email'),g('email'),m);announce(m);return}
  if(f==='parentFirstName'){m='Add your first name.';setErr(g('e-pname'),g('pname'),m);announce(m);return}
  if(f==='phone'){m='Check your mobile number or leave it blank.';setErr(g('e-mob'),g('mob'),m);announce(m);return}

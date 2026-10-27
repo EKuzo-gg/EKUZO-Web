@@ -125,7 +125,7 @@ export default function SwampSignupPage() {
                 EKUZO is every gamer&apos;s dream starting point: team, competition,
                 and growth. Born out of our own collegiate LoL experience, we&apos;re
                 creating the structure to show what competitive gaming can be for kids
-                ages 10-17.
+                ages 9-17.
               </p>
             </div>
           </div>

@@ -174,7 +174,7 @@ const campsFAQs = [
   {
     question: "What age range is EKUZOCAMPS for?",
     answer:
-      "EKUZOCAMPS are designed for players aged 10–18. We group players by age and skill level to ensure the best experience for everyone.",
+      "EKUZOCAMPS are designed for players aged 9–17. We group players by age and skill level to ensure the best experience for everyone.",
   },
   {
     question: "What games does EKUZOCAMPS play?",

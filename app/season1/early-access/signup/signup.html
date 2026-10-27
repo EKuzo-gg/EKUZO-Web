@@ -96,7 +96,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 <button type="button" class="btn ghost" id="addSib" style="margin-top:20px">+ Add a sibling (20% off)</button>
 <div id="oops" class="oops" hidden>
 <p style="font-size:15px;font-weight:700">Not quite in range?</p>
-<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 10&ndash;18. Text Karlin and we'll figure it out.</p>
+<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 9&ndash;17. Text Karlin and we'll figure it out.</p>
 <a class="btn black" style="margin-top:12px" href="sms:+18324438679">Text Karlin</a></div>
 <div id="pay">
 <div style="margin-top:28px"><p class="ey">How do you want to pay?</p>
@@ -121,7 +121,7 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 var q=new URLSearchParams(location.search);var from=(q.get('from')||'').replace(/[^A-Za-z \-']/g,'').slice(0,20);
 if(from){document.getElementById('mode').textContent='Joining '+from+"'s team";document.getElementById('back').href='/season1/crew?from='+encodeURIComponent(from);}
 var kids=document.getElementById('kids'),n=0;
-function kidRow(){n++;var d=document.createElement('div');d.className='kid';d.innerHTML='<p class="ey" style="margin-top:24px">'+(n==1?'Your kid':'Sibling')+(n>1?' <span class="red">20% off</span>':'')+'</p><div class="grid2" style="margin-top:12px"><div><label class="l">First name</label><input class="f nm" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l">Age (10&ndash;18)</label><select class="f ag"><option value="" selected disabled>Pick age</option><option value="10">10</option><option value="11">11</option><option value="12" selected>12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="x">Younger or older</option></select></div></div>';kids.appendChild(d);d.querySelector('.ag').addEventListener('change',upd);d.querySelector('.nm').addEventListener('input',upd);}
+function kidRow(){n++;var d=document.createElement('div');d.className='kid';d.innerHTML='<p class="ey" style="margin-top:24px">'+(n==1?'Your kid':'Sibling')+(n>1?' <span class="red">20% off</span>':'')+'</p><div class="grid2" style="margin-top:12px"><div><label class="l">First name</label><input class="f nm" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l">Age (9&ndash;17)</label><select class="f ag"><option value="" selected disabled>Pick age</option><option value="10">10</option><option value="11">11</option><option value="12" selected>12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="x">Younger or older</option></select></div></div>';kids.appendChild(d);d.querySelector('.ag').addEventListener('change',upd);d.querySelector('.nm').addEventListener('input',upd);}
 kidRow();
 document.querySelectorAll('.ag')[0].value='';
 document.getElementById('addSib').onclick=function(){if(n<4){kidRow();upd();}};

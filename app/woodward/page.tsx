@@ -172,7 +172,7 @@ export default function WoodwardSignupPage() {
                     flexible columns; the age select is a narrower third
                     column. appearance-none strips the native select/number
                     spinner controls — a single custom chevron is the only
-                    affordance. Ages 10–17 per EKUZO standard range. */}
+                    affordance. Ages 9–17 per EKUZO standard range. */}
                 <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.5fr)] gap-4 items-start">
                   <InputField
                     label="Gamer's Name *"

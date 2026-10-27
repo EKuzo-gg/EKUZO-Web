@@ -5,6 +5,19 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (ages 9 to 17 everywhere)
+
+Decision (Aaron): one age range on every page and email, **9 to 17**.
+- Season 01: `offer.ts` `ageCopyMin` 10 to 9 (season page, invite and closed copy read "9 to 17"). Signup labels
+  and messages "9 to 17"; the "Our founder will check in" note now only shows for 18 (9 is in range).
+- Site copy: FAQ (2 answers), /programs, camps FAQ, EKUZO101 FAQ, EKUZO100 register age check (now 9 to 17),
+  Woodward, Swamp, blog ProgramLine, old Season 01 early-access/crew templates, roadshow ad drafts.
+- Not changed (Jamie's lane, flag): server validation still accepts 9 to 18 (`OFFER.ageMin/ageMax`), and
+  `ageEdge` still flags 9 and 18 as `age_edge` for Karlin. With 9 now official, 9 probably shouldn't flag.
+- FAQ canon (`knowledge-base/.../ekuzo-faq-canon.md`, not in this repo) needs the same 9 to 17 backport.
+- EKUZO Design System artifact (README, Voice, Season 01) updated to 9 to 17.
+
+---
 ## Aaron (via Claude), October 27, 2026 (signup on purple)
 
 - `signup.html` (block `S1-PURPLE`): violet ground with the season page's brush texture, white logo and

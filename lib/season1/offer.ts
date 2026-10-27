@@ -21,7 +21,7 @@ export const OFFER = {
   maxKidsPerOrder: 4,
   ageMin: 9,
   ageMax: 18,
-  ageCopyMin: 10,
+  ageCopyMin: 9,
   ageCopyMax: 17,
   openAt: "2026-10-26T00:00:00-05:00",
   jerseyCutoffAt: "2026-11-30T23:59:59-08:00",
