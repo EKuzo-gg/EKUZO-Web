@@ -1,0 +1,12 @@
+Atlas slice 2 self-test (2026-10-26 ~22:40 CT)
+Files: app/crew/[code]/route.ts, app/crew/[code]/crew.html, app/api/season1/invite/remove/route.ts
+Setup: another next dev (3101) holds the repo dev lock, so port 3105 ran from a scratchpad copy of the repo (webpack dev). Repo untouched except my 3 files, screenshots and this log.
+- tsc --noEmit: no errors in my files.
+- /crew/12345678 (unknown) and /crew/abc: 200, nameless, no s1_ref Set-Cookie. Headers: cache-control private, no-store; x-robots-tag noindex; referrer-policy origin.
+- grep "Charlie" and "from=": 0 in all pages. Exactly one gtag('config') with page_location origin+'/crew/'.
+- POST /api/season1/invite/remove: 200 {"ok":true}, Set-Cookie s1_ref=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax.
+- dataLayer (named page, join tapped): config {page_location:'/crew/'}, season1_invite_view, season1_invite_join_tap, no params.
+- Build: next build (turbopack and webpack) lists /crew/[code] dynamic; route.js.nft.json contains app/crew/[code]/crew.html (bracket path traced).
+- Real-DB named test BLOCKED: test Neon DB lacks s1_codes.show_name/display_name (migration 0004 not applied). resolveCode throws; route logs the message and renders nameless with no cookie. Paid test codes exist: 85326574, 74427895. Permission to apply the two ALTERs was denied, so not applied.
+- Named path tested with a harness stub in the scratchpad copy only (85326574 -> name `Ava <b>"x"</b> & O'Neil`; 74427895 -> named false): name HTML-escaped, "Friend code 8532 6574" shown, signed Set-Cookie s1_ref=<code>.<hmac>; Path=/; Max-Age=1209600; HttpOnly; Secure; SameSite=Lax set for both.
+- Screenshots: docs/season1-commit/screenshots/crew-{375,1440}-{named,nameless}.png (named = stub name).
