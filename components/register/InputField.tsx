@@ -49,7 +49,7 @@ export default function InputField({
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
         placeholder={placeholder}
-        className="font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
+        className="font-body text-[#000000] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#000000] transition-colors placeholder:text-[#9ca3af]"
         style={{ fontSize: "16px", lineHeight: "normal" }}
       />
       {hint && (

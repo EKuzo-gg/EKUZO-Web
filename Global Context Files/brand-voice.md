@@ -1,6 +1,8 @@
 # brand-voice.md
 Purpose: Defines how Jamie communicates and how outputs should sound
 
+> **Scope note (2026-10-27):** this is Jamie's personal writing voice, not EKUZO's brand voice. EKUZO brand voice lives in `docs/EKUZO-BRAND.md` §8 and the Voice section of the EKUZO Design System artifact.
+
 ## Tone
 
 - Default: peer, operator

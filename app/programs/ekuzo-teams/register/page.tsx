@@ -437,7 +437,7 @@ export default function EkuzoTeamsRegisterPage() {
                   Semester
                 </span>
                 <span
-                  className="font-display uppercase text-[#0a0a0a] block mt-1"
+                  className="font-display uppercase text-[#000000] block mt-1"
                   style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: "1.1" }}
                 >
                   {SEMESTER.label}
@@ -477,7 +477,7 @@ export default function EkuzoTeamsRegisterPage() {
                     aria-pressed={paymentPlan === "installment"}
                     className={`relative text-left p-8 flex flex-col gap-3 rounded-lg transition-all cursor-pointer hover:brightness-[1.02] active:scale-[0.99] active:brightness-90 ${
                       paymentPlan === "installment"
-                        ? "bg-[#0a0a0a] ring-2 ring-red shadow-lg shadow-red/10"
+                        ? "bg-[#000000] ring-2 ring-red shadow-lg shadow-red/10"
                         : "bg-[#f5f5f7]"
                     }`}
                   >
@@ -489,7 +489,7 @@ export default function EkuzoTeamsRegisterPage() {
                     </span>
                     <span
                       className={`font-display uppercase ${
-                        paymentPlan === "installment" ? "text-white" : "text-[#0a0a0a]"
+                        paymentPlan === "installment" ? "text-white" : "text-[#000000]"
                       }`}
                       style={{ fontSize: "clamp(1.5rem, 2.5vw, 36px)", lineHeight: "40px" }}
                     >
@@ -520,7 +520,7 @@ export default function EkuzoTeamsRegisterPage() {
                     aria-pressed={paymentPlan === "upfront"}
                     className={`relative text-left p-8 flex flex-col gap-3 rounded-lg transition-all cursor-pointer hover:brightness-[1.02] active:scale-[0.99] active:brightness-90 ${
                       paymentPlan === "upfront"
-                        ? "bg-[#0a0a0a] ring-2 ring-red shadow-lg shadow-red/10"
+                        ? "bg-[#000000] ring-2 ring-red shadow-lg shadow-red/10"
                         : "bg-[#f5f5f7]"
                     }`}
                   >
@@ -540,7 +540,7 @@ export default function EkuzoTeamsRegisterPage() {
                     </span>
                     <span
                       className={`font-display uppercase ${
-                        paymentPlan === "upfront" ? "text-white" : "text-[#0a0a0a]"
+                        paymentPlan === "upfront" ? "text-white" : "text-[#000000]"
                       }`}
                       style={{ fontSize: "clamp(1.5rem, 2.5vw, 36px)", lineHeight: "40px" }}
                     >
@@ -586,7 +586,7 @@ export default function EkuzoTeamsRegisterPage() {
                   rows={3}
                   maxLength={1500}
                   placeholder="Allergies, accommodations, gaming experience, anything."
-                  className="w-full font-body text-[#0a0a0a] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#9ca3af]"
+                  className="w-full font-body text-[#000000] bg-[#f9fafb] border border-[#e5e7eb] rounded p-[17px] outline-none focus:border-[#000000] transition-colors placeholder:text-[#9ca3af]"
                   style={{ fontSize: "16px", lineHeight: "24px" }}
                 />
               </div>
@@ -595,7 +595,7 @@ export default function EkuzoTeamsRegisterPage() {
               <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden lg:hidden">
                 <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
                   <h3
-                    className="font-display uppercase text-[#0a0a0a]"
+                    className="font-display uppercase text-[#000000]"
                     style={{ fontSize: "clamp(2rem, 3vw, 28px)", lineHeight: "1.1" }}
                   >
                     Registration summary
@@ -681,7 +681,7 @@ export default function EkuzoTeamsRegisterPage() {
             <aside className="hidden lg:block">
               <div className="sticky top-24 flex flex-col gap-4">
                 <div className="border border-[#e5e7eb] rounded-sm overflow-hidden bg-white">
-                  <div className="bg-[#0a0a0a] px-5 py-5">
+                  <div className="bg-[#000000] px-5 py-5">
                     <h3
                       className="font-display uppercase text-white"
                       style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", lineHeight: "1" }}
@@ -703,7 +703,7 @@ export default function EkuzoTeamsRegisterPage() {
 
                 {/* What you get card */}
                 <div className="border border-[#e5e7eb] rounded-sm bg-[#fafafa] px-5 py-5">
-                  <p className="font-body font-bold text-[#0a0a0a] text-xs uppercase tracking-wider mb-3">
+                  <p className="font-body font-bold text-[#000000] text-xs uppercase tracking-wider mb-3">
                     What you get
                   </p>
                   <ul className="flex flex-col gap-2">
@@ -779,7 +779,7 @@ function TeamsPriceSummary({
   return (
     <>
       <div className="flex flex-col gap-1 mb-4">
-        <span className={`font-body font-bold text-[#0a0a0a] ${labelSize}`}>
+        <span className={`font-body font-bold text-[#000000] ${labelSize}`}>
           {gamerCount} gamer{gamerCount > 1 ? "s" : ""} · {paymentPlan === "upfront" ? "Paid in full" : "Monthly payments"}
         </span>
         <span className={`font-body text-[#6b7280] ${subSize}`}>
@@ -788,10 +788,10 @@ function TeamsPriceSummary({
       </div>
 
       <div className="flex items-baseline justify-between pt-3 border-t border-[#e5e7eb]">
-        <span className={`font-body font-bold text-[#0a0a0a] ${labelSize}`}>
+        <span className={`font-body font-bold text-[#000000] ${labelSize}`}>
           {paymentPlan === "upfront" ? "Total" : "Due today"}
         </span>
-        <span className="font-display text-[#0a0a0a]" style={valueSize}>
+        <span className="font-display text-[#000000]" style={valueSize}>
           ${chargeNow}
         </span>
       </div>

@@ -104,7 +104,7 @@ function CampsSuccessPage() {
             <div className="mt-10 text-left border border-[#e5e7eb] rounded-sm overflow-hidden">
               <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
                 <h2
-                  className="font-display uppercase text-[#0a0a0a]"
+                  className="font-display uppercase text-[#000000]"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
                 >
                   Booking Summary
@@ -113,7 +113,7 @@ function CampsSuccessPage() {
 
               <div className="px-6 py-5">
                 <div className="flex flex-col gap-1 mb-5">
-                  <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                  <span className="font-body font-bold text-[#000000] text-sm">
                     {details.parentName}
                   </span>
                   <span className="font-body text-[#6b7280] text-sm">
@@ -128,7 +128,7 @@ function CampsSuccessPage() {
                       className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0"
                     >
                       <div className="flex flex-col gap-1">
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                        <span className="font-body font-bold text-[#000000] text-sm">
                           {g.name}
                         </span>
                         <span className="font-body text-[#6b7280] text-sm">
@@ -138,7 +138,7 @@ function CampsSuccessPage() {
                           {g.slot === "AM" ? "Morning" : "Afternoon"} Session
                         </span>
                       </div>
-                      <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                      <span className="font-body font-bold text-[#000000] text-sm whitespace-nowrap">
                         ${g.price}
                       </span>
                     </div>
@@ -146,10 +146,10 @@ function CampsSuccessPage() {
                 </div>
 
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
-                  <span className="font-body font-bold text-[#0a0a0a]" style={{ fontSize: "16px" }}>
+                  <span className="font-body font-bold text-[#000000]" style={{ fontSize: "16px" }}>
                     Total Paid
                   </span>
-                  <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
+                  <span className="font-display text-[#000000]" style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}>
                     {details.totalPaid}
                   </span>
                 </div>
@@ -173,7 +173,7 @@ function CampsSuccessPage() {
           {/* Next steps */}
           <div className="mt-10 text-left">
             <h3
-              className="font-body font-bold text-[#0a0a0a] mb-4"
+              className="font-body font-bold text-[#000000] mb-4"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
               What happens next
@@ -182,19 +182,19 @@ function CampsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">1.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Check your inbox</span> — a confirmation email is on its way with all the details.
+                  <span className="font-bold text-[#000000]">Check your inbox</span> — a confirmation email is on its way with all the details.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">2.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Download the game</span> — make sure your gamer has the game installed and ready before camp starts.
+                  <span className="font-bold text-[#000000]">Download the game</span> — make sure your gamer has the game installed and ready before camp starts.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">3.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Watch for prep emails</span> — we&apos;ll send everything you need to get ready the week before camp.
+                  <span className="font-bold text-[#000000]">Watch for prep emails</span> — we&apos;ll send everything you need to get ready the week before camp.
                 </p>
               </div>
             </div>

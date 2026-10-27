@@ -167,14 +167,14 @@ export default function ParentsPage() {
             "/icons/growth-arrows.svg",
           ]}
           body="It&rsquo;s natural for parents to feel tension around screen time, especially when it feels unstructured or hard to trust. EKUZO leans into what students already love and builds a complete, coach-led system around it. Think sports, designed specifically for&nbsp;gamers."
-          bg="bg-[#f0edea]"
+          bg="bg-grey"
           tornPaper="none"
         />
       </div>
 
       {/* ══ 3. WHY PARENTS CHOOSE EKUZO — grey bg with zigzag cards ═════════ */}
       <section
-        className="bg-[#f0edea] relative overflow-clip"
+        className="bg-grey relative overflow-clip"
         style={{
           paddingTop: "clamp(80px, 14vw, 144px)",
           paddingBottom: "clamp(120px, 18vw, 240px)",

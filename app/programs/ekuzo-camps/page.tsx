@@ -411,7 +411,7 @@ export default function EkuzoCampsPage() {
       <div className="relative overflow-visible">
         <TornPaperDivider color="grey" variant="top" style={1} />
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(80px, 14vw, 144px)",
@@ -698,7 +698,7 @@ export default function EkuzoCampsPage() {
       <div className="relative overflow-visible">
         <TornPaperDivider color="grey" variant="top" style={2} />
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(80px, 14vw, 144px)",
@@ -1273,7 +1273,7 @@ export default function EkuzoCampsPage() {
       {false && (
       <div className="relative overflow-visible">
         <section
-          className="bg-[#f0edea] relative overflow-clip"
+          className="bg-grey relative overflow-clip"
           style={{
             paddingTop: "clamp(80px, 14vw, 144px)",
             paddingBottom: "clamp(80px, 14vw, 144px)",

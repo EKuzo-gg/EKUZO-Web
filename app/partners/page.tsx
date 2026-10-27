@@ -87,7 +87,7 @@ export default function PartnersPage() {
 
       {/* ══ PARTNER CARDS — grey bg ═══════════════════════════════════════ */}
       <section
-        className="bg-[#f0edea] relative"
+        className="bg-grey relative"
         style={{
           paddingTop: "clamp(80px, 14vw, 144px)",
           paddingBottom: "clamp(80px, 14vw, 160px)",

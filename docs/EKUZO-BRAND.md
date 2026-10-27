@@ -6,7 +6,9 @@
 >
 > **Status: living document — partial and in-progress, not definitive.** It captures some of the system, not all of it, and is **meant to be updated as EKUZO evolves** — add sections, correct values, promote drafts to live as the site changes. It grows alongside the codebase; it never freezes. When in doubt, look at how the site already does it.
 >
-> **Last updated:** 2026-07-09 · see the changelog at the end (§11).
+> **Last updated:** 2026-10-27 · see the changelog at the end (§11).
+>
+> **Off-site design system:** the EKUZO Design System artifact (https://claude.ai/artifact/QMKPYkNS5EN23sVBYhfP1T) mirrors this doc for mockups, emails, social and decks, with live components, assets, the Voice section and the Season 01 sub-brand. Keep the two in step: change the code first, then this doc, then the design system.
 
 Source of truth for raw values is `app/globals.css` (the `@theme inline` block) and the components in `components/`. This file explains **how those pieces are composed into a page** — the part that isn't obvious from the tokens alone.
 
@@ -101,11 +103,13 @@ Every section uses the same horizontal gutter, vertical rhythm, and inner contai
 | Band | Class | Use for |
 |---|---|---|
 | Red | `bg-red` | Hero, the footer-banner CTA, high-energy moments. White type + white-outlined buttons. |
-| Black | `bg-black` | One punchy dark section per page (e.g. "LEARN + PLAY", "how it works"), the footer. White type. |
+| Black | `bg-black` (`#000000`, pure black) | One punchy dark section per page (e.g. "LEARN + PLAY", "how it works"), the footer. White type. |
 | White | `bg-white` | Default content surface. Black type. |
 | Off-white | `bg-grey` (`#EFEEED`) | The quiet alternating band between white sections. Black type. |
 
-Text is **opacity on the base color**, never new greys: black at 100/70/60/40% on light (`text-black`, `text-black/70`, `/60`, `/40`); white at 70/60/20/15% on dark (`text-white/70`, etc.).
+Text is **opacity on the base color**, never new greys: black at 100/70/60% on light (`text-black`, `text-black/70`, `/60`); white at 70/60% on dark (`text-white/70`, `/60`). `text-black/40`, `text-white/20` and `/15` fail WCAG AA as text (2.7:1 and below): use them only for dividers, hairlines and disabled outlines.
+
+**Contrast on red:** white on `#F92524` is 3.95:1, so white text on red must be large (24px+, or 18.7px+ bold). `text-white/70` on red is 2.5:1: use solid white on red bands.
 
 **Purple** (`#A435F0` / soft `#F3E8FF`) is a **utility accent only** — date pickers, selectors, selection summaries where red would read as an error. Never a hero/CTA/brand color.
 
@@ -178,7 +182,7 @@ Two faces. **Tungsten is reserved for the loudest moments — most headings are 
 
 - `.font-display` defaults to **Black (900)** with global `letter-spacing: 0.02em` (set in `globals.css` — don't override per element unless intentional).
 - **Casing:** display headlines UPPERCASE; section headings sentence case; eyebrows UPPERCASE wide-tracked; product names as one token — `EKUZO` + suffix in a contrast color: `EKUZO<span className="text-red">TEAMS</span>`, `EKUZO100`, `EKUZOCAMPS`.
-- Tungsten Narrow is **preview-licensed** (Hoefler & Co). Secure a production license before public launch. Fallbacks: Impact / Arial Narrow → (web) Oswald / Anton.
+- Tungsten Narrow is **preview-licensed** (Hoefler & Co). Secure a production license before public launch. Fallback when Tungsten can't load (shared files, email, mockups): **Oswald Bold, all caps. Never Anton** (rejected 2026-07-30).
 
 ---
 
@@ -186,7 +190,7 @@ Two faces. **Tungsten is reserved for the loudest moments — most headings are 
 
 Import from the existing codebase — don't re-implement these.
 
-**Eyebrow** — `@/components/ui/Eyebrow`. Skewed red chip, label counter-skewed level. `variant="light"` = white bg / red text for use on red/dark bands.
+**Eyebrow** — `@/components/ui/Eyebrow`. Skewed red chip, label counter-skewed level. `variant="light"` = white bg / red text for use on red/dark bands. It's a deliberate brand signature: design tools that ban eyebrow labels (Impeccable) treat this component as the EKUZO exception. Once per section, directly above the H2.
 ```tsx
 <Eyebrow>2 ways to play</Eyebrow>
 ```
@@ -237,11 +241,17 @@ Speaks to a 14-year-old and their parent at once. Fun for players, grounded and 
 - Plain, direct, scannable. Avoid em dashes and generic filler. Light gamer slang ("bet", "GG", "lobby") as seasoning only.
 - Family-safe everywhere. **No emoji** in product/marketing UI.
 - CTAs from the parent's POV: **"Enroll my gamer"**, **"Start a conversation"**.
+- **"Gamer"** stays in live copy ("Every gamer deserves a team", "Enroll my gamer"). Avoiding it is a judgment call for cold parent-facing ads, not a rule (decided 2026-10-27).
+- No scholarship, GPA or go-pro claims. Ages 10-18 for Season 01.
 
 **Do:** "EKUZO coaches your gamer through real practice, VOD review, and team competition."
 **Don't:** "We turn your kid into a pro athlete with scholarship potential."
 
 ---
+
+## 8b. Season 01 sub-brand
+
+`/season1` (`app/season1/landing.html`) is a deliberate sub-brand, decided 2026-10-27: a near-black wall (`#0C0B0E`), one expanded-palette accent per ad (lime `#E0FF4E` leads), Inter Tight display, JetBrains Mono labels, no torn paper. The ad and its landing match. EKUZO red stays the EKUZO mark. Voice rules are unchanged. Open item: the landing's violet `#8E22E0` differs from the expanded violet `#AE2CF2`.
 
 ## 9. New-page structural checklist
 
@@ -261,8 +271,11 @@ When building a **new** page, before you call it done (this is for new work — 
 ## 10. Known drift (design-system tokens vs shipped code)
 
 - **H4 line-height:** shipped code uses **1.125**; an older token file said 1.0. Prefer the shipped **1.125**.
-- **Off-white:** canonical is **`#EFEEED`** (`--color-grey`). A warmer `#F0EDEA` appears as a one-off inline value on a few sections — not a token; don't reach for it in new work.
+- **Off-white:** canonical is **`#EFEEED`** (`--color-grey`, `bg-grey`). The warmer `#F0EDEA` (53 inline uses) was migrated to `bg-grey` / `#EFEEED` on 2026-10-27.
+- **Black:** canonical is pure **`#000000`** (Tailwind `black`). The near-black `#0A0A0A` used on the register and success pages was migrated to `#000000` on 2026-10-27.
 - Only **red / grey / purple** are tokenized in `globals.css`; black and white are used as literals.
+- **Icons:** the `-white` icon files are drawn in `currentColor`, so loaded via `<img>` they render black. On red or dark circles, invert with `filter: brightness(0) invert(1)`.
+- **Still open:** soft radii (`rounded-full` on pills, `rounded-lg/md/xl`) and a few `shadow-*` uses conflict with §7. Flag only; don't refactor existing pages.
 
 ---
 
@@ -279,4 +292,5 @@ This is a living reference — keep it current as the system matures. When somet
 ### Changelog
 
 - **2026-07-09** — Initial version: page skeleton, section shell, color bands, torn-paper seam sequence, type, components, voice, misuse, drift notes. Added expanded palette (working draft — cream/sand/slate + 9 accents) with paste-in `globals-colors-snippet.css`.
+- **2026-10-27** — Brand sync (Aaron): black is pure `#000000` (register/success `#0A0A0A` migrated); `#F0EDEA` migrated to `bg-grey`; Anton removed as a fallback (Oswald only); contrast rules for opacity text and white on red; eyebrow noted as the Impeccable exception; "gamer" decision; Season 01 sub-brand (§8b); `-white` icon note; link to the EKUZO Design System artifact.
 - _add new entries above this line._

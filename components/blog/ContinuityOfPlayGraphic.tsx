@@ -51,7 +51,7 @@ const GRAPHIC_BODY = (
   <>
     <title>The continuity of play</title>
     <desc>{ALT}</desc>
-    <rect width="2000" height="700" fill="#f0edea"/>
+    <rect width="2000" height="700" fill="#EFEEED"/>
     <text x="88" y="94" fontFamily="var(--font-display)" fontWeight="700" fontSize="66" letterSpacing=".02em" fill="#000000">THE <tspan fill="#F92524">CONTINUITY</tspan> OF PLAY</text>
     <text x="1912" y="68" textAnchor="end" fontFamily="var(--font-body)" fontWeight="600" fontSize="12" letterSpacing=".15em" fill="#6d655e">ON AVERAGE, MILITARY KIDS CHANGE SCHOOLS</text>
     <text x="1912" y="106" textAnchor="end" fontFamily="var(--font-body)" fontWeight="600" fontSize="12" letterSpacing=".15em" fill="#6d655e"><tspan fontFamily="var(--font-display)" fontWeight="900" fontSize="42" letterSpacing=".02em" fill="#F92524">6&#8211;9</tspan> TIMES BEFORE GRADUATION, ABOUT <tspan fontFamily="var(--font-display)" fontWeight="900" fontSize="42" letterSpacing=".02em" fill="#000000">3</tspan><tspan fontFamily="var(--font-body)" fontWeight="700" fontSize="27" letterSpacing="0" fill="#000000">&#215;</tspan> THE CIVILIAN RATE</text>
@@ -59,23 +59,23 @@ const GRAPHIC_BODY = (
     <line x1="696" y1="176" x2="696" y2="596" stroke="#d5cdc4"/>
     <line x1="1304" y1="176" x2="1304" y2="596" stroke="#d5cdc4"/>
     <g stroke="#A435F0" strokeWidth="2" strokeLinecap="round"><line x1="392" y1="330" x2="292" y2="374"/><line x1="392" y1="330" x2="336" y2="410"/><line x1="392" y1="330" x2="392" y2="426"/><line x1="392" y1="330" x2="448" y2="410"/><line x1="392" y1="330" x2="492" y2="374"/></g>
-    <circle cx="292" cy="374" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
-    <circle cx="336" cy="410" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
-    <circle cx="392" cy="426" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
-    <circle cx="448" cy="410" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
-    <circle cx="492" cy="374" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="292" cy="374" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="336" cy="410" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="392" cy="426" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="448" cy="410" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="492" cy="374" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
     <line x1="1000" y1="330" x2="962" y2="347" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55"/><line x1="962" y1="347" x2="932" y2="360" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3"/><line x1="932" y1="360" x2="906" y2="371" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12"/>
     <line x1="1000" y1="330" x2="979" y2="360" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55"/><line x1="979" y1="360" x2="962" y2="384" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3"/><line x1="962" y1="384" x2="947" y2="405" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12"/>
     <line x1="1000" y1="330" x2="1000" y2="366" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55"/><line x1="1000" y1="366" x2="1000" y2="395" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3"/><line x1="1000" y1="395" x2="1000" y2="420" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12"/>
     <line x1="1000" y1="330" x2="1021" y2="360" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55"/><line x1="1021" y1="360" x2="1038" y2="384" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3"/><line x1="1038" y1="384" x2="1053" y2="405" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12"/>
     <line x1="1000" y1="330" x2="1038" y2="347" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55"/><line x1="1038" y1="347" x2="1068" y2="360" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3"/><line x1="1068" y1="360" x2="1094" y2="371" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12"/>
-    <circle cx="900" cy="374" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
-    <circle cx="944" cy="410" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
-    <circle cx="1000" cy="426" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
-    <circle cx="1056" cy="410" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
-    <circle cx="1100" cy="374" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
+    <circle cx="900" cy="374" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
+    <circle cx="944" cy="410" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
+    <circle cx="1000" cy="426" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
+    <circle cx="1056" cy="410" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
+    <circle cx="1100" cy="374" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4"/>
     <line x1="1608" y1="330" x2="1608" y2="426" stroke="#A435F0" strokeWidth="2" strokeDasharray="5 7" strokeLinecap="round"/>
-    <circle cx="1608" cy="426" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" opacity="1"/>
+    <circle cx="1608" cy="426" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" opacity="1"/>
     <line x1="88" y1="330" x2="1912" y2="330" stroke="#000000" strokeWidth="1.5"/>
     <text x="88" y="316" textAnchor="start" fontFamily="var(--font-body)" fontWeight="600" fontSize="11" letterSpacing=".15em" fill="#F92524">ONLINE</text>
     <text x="88" y="356" textAnchor="start" fontFamily="var(--font-body)" fontWeight="600" fontSize="11" letterSpacing=".15em" fill="#A435F0">IN PERSON</text>
@@ -136,7 +136,7 @@ export default function ContinuityOfPlayGraphic() {
             aria-label="Expand the continuity of play graphic to full size"
             className="group block w-full cursor-zoom-in text-left"
           >
-            <span className="block bg-[#f0edea]">
+            <span className="block bg-grey">
               <svg
                 viewBox="0 0 2000 700"
                 className="h-auto w-full"
@@ -186,11 +186,11 @@ export default function ContinuityOfPlayGraphic() {
           <p className="font-body text-[11px] font-semibold uppercase tracking-[0.12em] text-red text-center">THE ONLINE TEAM</p>
           <svg viewBox="0 0 240 212" className="w-full h-auto my-2" aria-hidden="true" focusable="false">
           <g stroke="#A435F0" strokeWidth="2" strokeLinecap="round"><line x1="120" y1="100" x2="20" y2="144" /><line x1="120" y1="100" x2="64" y2="180" /><line x1="120" y1="100" x2="120" y2="196" /><line x1="120" y1="100" x2="176" y2="180" /><line x1="120" y1="100" x2="220" y2="144" /></g>
-          <circle cx="20" cy="144" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
-          <circle cx="64" cy="180" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
-          <circle cx="120" cy="196" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
-          <circle cx="176" cy="180" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
-          <circle cx="220" cy="144" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="20" cy="144" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="64" cy="180" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="120" cy="196" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="176" cy="180" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="220" cy="144" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
           <line x1="0" y1="100" x2="240" y2="100" stroke="#000000" strokeWidth="1.5" />
           <g stroke="#F92524" strokeWidth="2.5" strokeLinecap="round"><line x1="120" y1="100" x2="20" y2="54" /><line x1="120" y1="100" x2="84" y2="16" /><line x1="120" y1="100" x2="156" y2="16" /><line x1="120" y1="100" x2="220" y2="54" /></g>
           <circle cx="20" cy="54" r="10.5" fill="#F92524" />
@@ -227,11 +227,11 @@ export default function ContinuityOfPlayGraphic() {
           <line x1="120" y1="100" x2="158" y2="117" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.55" />
           <line x1="158" y1="117" x2="190" y2="131" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.3" />
           <line x1="190" y1="131" x2="220" y2="144" stroke="#A435F0" strokeWidth="2" strokeLinecap="round" opacity="0.12" />
-          <circle cx="20" cy="144" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
-          <circle cx="64" cy="180" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
-          <circle cx="120" cy="196" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
-          <circle cx="176" cy="180" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
-          <circle cx="220" cy="144" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
+          <circle cx="20" cy="144" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
+          <circle cx="64" cy="180" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
+          <circle cx="120" cy="196" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
+          <circle cx="176" cy="180" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
+          <circle cx="220" cy="144" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" strokeDasharray="4 6" opacity="0.4" />
           <line x1="0" y1="100" x2="240" y2="100" stroke="#000000" strokeWidth="1.5" />
           <g stroke="#F92524" strokeWidth="2.5" strokeLinecap="round"><line x1="120" y1="100" x2="20" y2="54" /><line x1="120" y1="100" x2="84" y2="16" /><line x1="120" y1="100" x2="156" y2="16" /><line x1="120" y1="100" x2="220" y2="54" /></g>
           <circle cx="20" cy="54" r="10.5" fill="#F92524" />
@@ -254,7 +254,7 @@ export default function ContinuityOfPlayGraphic() {
           <p className="font-body text-[11px] font-semibold uppercase tracking-[0.12em] text-red text-center">STILL UNCHANGED</p>
           <svg viewBox="0 0 240 212" className="w-full h-auto my-2" aria-hidden="true" focusable="false">
           <line x1="120" y1="100" x2="120" y2="196" stroke="#A435F0" strokeWidth="2" strokeDasharray="5 7" strokeLinecap="round" />
-          <circle cx="120" cy="196" r="9" fill="#f0edea" stroke="#A435F0" strokeWidth="2" />
+          <circle cx="120" cy="196" r="9" fill="#EFEEED" stroke="#A435F0" strokeWidth="2" />
           <line x1="0" y1="100" x2="240" y2="100" stroke="#000000" strokeWidth="1.5" />
           <g stroke="#F92524" strokeWidth="2.5" strokeLinecap="round"><line x1="120" y1="100" x2="20" y2="54" /><line x1="120" y1="100" x2="84" y2="16" /><line x1="120" y1="100" x2="156" y2="16" /><line x1="120" y1="100" x2="220" y2="54" /></g>
           <circle cx="20" cy="54" r="10.5" fill="#F92524" />
@@ -308,7 +308,7 @@ export default function ContinuityOfPlayGraphic() {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[2000px] bg-[#f0edea]"
+              className="w-full max-w-[2000px] bg-grey"
             >
               <svg
                 viewBox="0 0 2000 700"

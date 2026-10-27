@@ -31,7 +31,7 @@ Moving ekuzo.gg off Framer into a native Next.js codebase. Marketing + conversio
 - **Heading sizes:** use `clamp()` via `style` prop, not fixed Tailwind text sizes.
 
 ## Colors (Tailwind custom)
-`red` = EKUZO brand red (see tailwind.config) · `black` = #000 · `grey` / `bg-[#f0edea]` = off-white section background.
+`red` = EKUZO brand red `#F92524` · `black` = pure `#000000` (no `#0a0a0a`) · `grey` = `#EFEEED` off-white section background (`bg-grey`; the old `#f0edea` was retired 2026-10-27).
 
 ## Products
 1. **EKUZO TEAMS** — school-based semester team program (complex pricing)

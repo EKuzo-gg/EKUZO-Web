@@ -105,7 +105,7 @@ export default function Ekuzo101SuccessPage() {
               <div className="mt-10 text-left border border-[#e5e7eb] rounded-sm overflow-hidden">
                 <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
                   <h2
-                    className="font-display uppercase text-[#0a0a0a]"
+                    className="font-display uppercase text-[#000000]"
                     style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
                   >
                     Your Selected Weeks
@@ -114,7 +114,7 @@ export default function Ekuzo101SuccessPage() {
                 <div className="px-6 py-5">
                   {/* Parent info */}
                   <div className="flex flex-col gap-1 mb-5 pb-4 border-b border-[#e5e7eb]">
-                    <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                    <span className="font-body font-bold text-[#000000] text-sm">
                       {data.parentName}
                     </span>
                     <span className="font-body text-[#6b7280] text-sm">
@@ -129,7 +129,7 @@ export default function Ekuzo101SuccessPage() {
 
                   {/* Week rows */}
                   <p
-                    className="font-body font-bold text-[#0a0a0a] mb-3"
+                    className="font-body font-bold text-[#000000] mb-3"
                     style={{ fontSize: "13px", lineHeight: "20px", letterSpacing: "0.05em", textTransform: "uppercase" }}
                   >
                     Sessions (7:00-8:30 PM local time each night)
@@ -149,7 +149,7 @@ export default function Ekuzo101SuccessPage() {
 
                   {/* Total */}
                   <div className="mt-5 pt-4 border-t border-[#e5e7eb] flex items-baseline justify-between">
-                    <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                    <span className="font-body font-bold text-[#000000] text-sm">
                       {data.weeksCount} week{data.weeksCount !== 1 ? "s" : ""} selected
                     </span>
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#dcfce7] rounded-sm">
@@ -168,7 +168,7 @@ export default function Ekuzo101SuccessPage() {
               {data.squadLink && (
                 <div className="mt-10 text-left px-6 py-6 bg-[#FF6B1A]/10 border border-[#FF6B1A]/30 rounded-sm">
                   <h3
-                    className="font-display uppercase text-[#0a0a0a]"
+                    className="font-display uppercase text-[#000000]"
                     style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
                   >
                     Recruit your friends
@@ -203,7 +203,7 @@ export default function Ekuzo101SuccessPage() {
               {/* What happens next */}
               <div className="mt-10 text-left">
                 <h3
-                  className="font-body font-bold text-[#0a0a0a] mb-4"
+                  className="font-body font-bold text-[#000000] mb-4"
                   style={{ fontSize: "20px", lineHeight: "28px" }}
                 >
                   What happens next
@@ -212,7 +212,7 @@ export default function Ekuzo101SuccessPage() {
                   <div className="flex items-start gap-3">
                     <span className="font-body font-bold text-red text-sm mt-0.5">1.</span>
                     <p className="font-body text-[#374151] text-sm leading-6">
-                      <span className="font-bold text-[#0a0a0a]">Check your email.</span>{" "}
+                      <span className="font-bold text-[#000000]">Check your email.</span>{" "}
                       A confirmation is on its way with your selected weeks and everything
                       you need to get ready. If you don&apos;t see it in a few minutes, check
                       your spam folder.
@@ -221,7 +221,7 @@ export default function Ekuzo101SuccessPage() {
                   <div className="flex items-start gap-3">
                     <span className="font-body font-bold text-red text-sm mt-0.5">2.</span>
                     <p className="font-body text-[#374151] text-sm leading-6">
-                      <span className="font-bold text-[#0a0a0a]">Your coach will reach out before Day 1.</span>{" "}
+                      <span className="font-bold text-[#000000]">Your coach will reach out before Day 1.</span>{" "}
                       Expect a brief note from your gamer&apos;s coach introducing themselves
                       and answering any last questions before the first session.
                     </p>
@@ -229,7 +229,7 @@ export default function Ekuzo101SuccessPage() {
                   <div className="flex items-start gap-3">
                     <span className="font-body font-bold text-red text-sm mt-0.5">3.</span>
                     <p className="font-body text-[#374151] text-sm leading-6">
-                      <span className="font-bold text-[#0a0a0a]">Download (or update) League of Legends.</span>{" "}
+                      <span className="font-bold text-[#000000]">Download (or update) League of Legends.</span>{" "}
                       Free at leagueoflegends.com. Make sure your gamer&apos;s account is active
                       and the game is updated before the first Tuesday. A headset with a mic
                       is all the other gear you need.
@@ -258,7 +258,7 @@ export default function Ekuzo101SuccessPage() {
                   not billing systems.
                 </p>
                 <p
-                  className="font-body font-bold text-[#0a0a0a] mt-3"
+                  className="font-body font-bold text-[#000000] mt-3"
                   style={{ fontSize: "15px", lineHeight: "1.75" }}
                 >
                   Try it. See for yourself. Then decide.

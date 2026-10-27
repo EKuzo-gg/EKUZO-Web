@@ -5,6 +5,21 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (Brand sync: pure black, off-white, brand docs, Impeccable)
+
+Branch `brand-sync-2026-10-27` off `origin/dev` 57aa70b. Visual change is color only; no layout, copy or logic changes.
+
+**What changed**
+- **Black is pure `#000000`.** `#0a0a0a` replaced in 16 files (register and success pages for Camps, EKUZO 100, Teams, EKUZO 101; `components/register/*`, `components/ekuzo101/WeekPicker.tsx`, `/woodward`, `/swamp`).
+- **Off-white is `#EFEEED`.** `bg-[#f0edea]` (28) became `bg-grey`; other `#f0edea` literals (25) became `#EFEEED`. Mostly blog posts, `/methodology`, `/parents`, `/schools`, `/partners`, `/faq`, camps page, editors.
+- `docs/EKUZO-BRAND.md`: Anton removed as a fallback (Oswald only), black and off-white drift resolved, contrast rules for opacity text and white on red, `-white` icon note, eyebrow noted as the Impeccable exception, "gamer" decision, Season 01 sub-brand (§8b), link to the EKUZO Design System artifact, changelog.
+- `CLAUDE.md` Colors line updated (black `#000000`, grey `#EFEEED`, `#f0edea` retired). **Jamie:** shared file, one line.
+- `Global Context Files/brand-voice.md`: scope note that it's Jamie's personal voice, not EKUZO brand voice. **Jamie:** your file, note only, not renamed (other files link to it).
+- `.agents/skills/impeccable`: the old unbuilt template copy replaced with the Impeccable 4.8.0 release.
+- New `PRODUCT.md` and `DESIGN.md` at the root (Impeccable context files).
+
+**Not changed (flagged):** soft radii and `shadow-*` uses; `app/season1/landing.html` (Season 01 sub-brand, its violet `#8E22E0` vs `#AE2CF2` still open).
+
 ## Jamie (via Claude, Build Loop), October 23, 2026 (Text Karlin alert: parent location and time zone)
 
 Spec: `EKUZO/Marketing/ads/2026-10-season-one/proposals/2026-10-23-text-karlin-location-spec.md`.

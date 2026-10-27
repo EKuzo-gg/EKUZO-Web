@@ -769,7 +769,7 @@ export default function Ekuzo100RegisterPage() {
                       className={`py-2 rounded-md border font-body font-bold transition-colors cursor-pointer active:scale-[0.98] ${
                         isActive
                           ? "bg-[#FF6B1A] border-[#FF6B1A] text-white"
-                          : "bg-white border-[#e5e7eb] text-[#0a0a0a] hover:bg-[#f9fafb]"
+                          : "bg-white border-[#e5e7eb] text-[#000000] hover:bg-[#f9fafb]"
                       }`}
                       style={{ fontSize: "13px" }}
                     >
@@ -797,7 +797,7 @@ export default function Ekuzo100RegisterPage() {
                       time sit beneath as supporting copy. */}
                   <div className="mb-4 text-center">
                     <span
-                      className="block font-display uppercase text-[#0a0a0a]"
+                      className="block font-display uppercase text-[#000000]"
                       style={{
                         fontSize: "clamp(32px, 4.5vw, 42px)",
                         lineHeight: "1",
@@ -911,7 +911,7 @@ export default function Ekuzo100RegisterPage() {
                 <div className="border border-[#e5e7eb] rounded-lg px-4 py-4 bg-[#fafafa]">
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <span
-                      className="font-body font-bold text-[#0a0a0a]"
+                      className="font-body font-bold text-[#000000]"
                       style={{ fontSize: "14px", lineHeight: "20px" }}
                     >
                       Which days work for your family?
@@ -919,7 +919,7 @@ export default function Ekuzo100RegisterPage() {
                     <button
                       type="button"
                       onClick={() => setPreferredDaysExpanded(false)}
-                      className="font-body text-xs text-[#6b7280] hover:text-[#0a0a0a] cursor-pointer"
+                      className="font-body text-xs text-[#6b7280] hover:text-[#000000] cursor-pointer"
                       aria-label="Collapse preferred days"
                     >
                       Hide
@@ -937,7 +937,7 @@ export default function Ekuzo100RegisterPage() {
                           className={`px-4 py-2 rounded-full border font-body font-bold text-sm transition-colors cursor-pointer active:scale-[0.97] ${
                             checked
                               ? "bg-[#FF6B1A] border-[#FF6B1A] text-white"
-                              : "bg-white border-[#e5e7eb] text-[#0a0a0a] hover:border-[#FF6B1A]/40"
+                              : "bg-white border-[#e5e7eb] text-[#000000] hover:border-[#FF6B1A]/40"
                           }`}
                         >
                           {p.label}
@@ -961,7 +961,7 @@ export default function Ekuzo100RegisterPage() {
           {/* ── Additional info ──────────────────────────────────── */}
           <div className="mb-12">
             <h3
-              className="font-body font-bold text-[#0a0a0a] mb-6"
+              className="font-body font-bold text-[#000000] mb-6"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
               Additional information
@@ -978,7 +978,7 @@ export default function Ekuzo100RegisterPage() {
               rows={4}
               maxLength={1500}
               placeholder="Tell us more."
-              className="font-body text-[#0a0a0a] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#0a0a0a] transition-colors resize-y"
+              className="font-body text-[#000000] w-full bg-[#f9fafb] border border-[#e5e7eb] rounded p-4 outline-none focus:border-[#000000] transition-colors resize-y"
               style={{ fontSize: "16px", lineHeight: "24px" }}
             />
             <p className="font-body text-sm text-[#9ca3af] mt-1 text-right">
@@ -994,7 +994,7 @@ export default function Ekuzo100RegisterPage() {
           <div className="mb-8 border border-[#e5e7eb] rounded-sm overflow-hidden lg:hidden">
             <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
               <h3
-                className="font-display uppercase text-[#0a0a0a]"
+                className="font-display uppercase text-[#000000]"
                 style={{
                   fontSize: "clamp(1.25rem, 2vw, 28px)",
                   lineHeight: "32px",
@@ -1013,7 +1013,7 @@ export default function Ekuzo100RegisterPage() {
                 <div className="flex flex-col gap-4">
                   <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#e5e7eb]">
                     <div className="flex flex-col gap-1">
-                      <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                      <span className="font-body font-bold text-[#000000] text-sm">
                         {selectedCohortData.monthLabel} Cohort
                       </span>
                       <span className="font-body text-[#6b7280] text-sm">
@@ -1028,14 +1028,14 @@ export default function Ekuzo100RegisterPage() {
                   {gamers.map((g, i) => (
                     <div key={i} className="flex items-start justify-between gap-4">
                       <div className="flex flex-col gap-1">
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                        <span className="font-body font-bold text-[#000000] text-sm">
                           {gamerLabel(i)}
                         </span>
                         <span className="font-body text-[#6b7280] text-sm">
                           EKUZO100 · {selectedCohortData.monthLabel}
                         </span>
                       </div>
-                      <span className="font-body font-bold text-[#0a0a0a] text-sm whitespace-nowrap">
+                      <span className="font-body font-bold text-[#000000] text-sm whitespace-nowrap">
                         ${PRICE}
                       </span>
                     </div>
@@ -1043,13 +1043,13 @@ export default function Ekuzo100RegisterPage() {
 
                   <div className="flex items-center justify-between mt-1 pt-4 border-t border-[#e5e7eb]">
                     <span
-                      className="font-body font-bold text-[#0a0a0a]"
+                      className="font-body font-bold text-[#000000]"
                       style={{ fontSize: "16px" }}
                     >
                       Total
                     </span>
                     <span
-                      className="font-display text-[#0a0a0a]"
+                      className="font-display text-[#000000]"
                       style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
                     >
                       ${totalPrice}
@@ -1130,7 +1130,7 @@ export default function Ekuzo100RegisterPage() {
             <aside className="hidden lg:block">
               <div className="sticky top-24 flex flex-col gap-4">
                 <div className="border border-[#e5e7eb] rounded-sm overflow-hidden bg-white">
-                  <div className="bg-[#0a0a0a] px-5 py-5">
+                  <div className="bg-[#000000] px-5 py-5">
                     <h3
                       className="font-display uppercase text-white"
                       style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", lineHeight: "1" }}
@@ -1153,7 +1153,7 @@ export default function Ekuzo100RegisterPage() {
                               className="flex items-start justify-between gap-3 pb-3 border-b border-[#f0f0f0] last:border-0 last:pb-0"
                             >
                               <div className="flex flex-col gap-0.5 min-w-0">
-                                <span className="font-body font-bold text-[#0a0a0a] text-xs leading-tight truncate">
+                                <span className="font-body font-bold text-[#000000] text-xs leading-tight truncate">
                                   {gamerLabel(i)}
                                 </span>
                                 <span className="font-body text-[#6b7280] text-xs leading-snug">
@@ -1163,7 +1163,7 @@ export default function Ekuzo100RegisterPage() {
                                   Tue &amp; Thu · {SESSION_TIME}
                                 </span>
                               </div>
-                              <span className="font-body font-bold text-[#0a0a0a] text-xs whitespace-nowrap">
+                              <span className="font-body font-bold text-[#000000] text-xs whitespace-nowrap">
                                 ${PRICE}
                               </span>
                             </li>
@@ -1171,10 +1171,10 @@ export default function Ekuzo100RegisterPage() {
                         </ul>
 
                         <div className="flex items-baseline justify-between pt-3 border-t border-[#e5e7eb]">
-                          <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                          <span className="font-body font-bold text-[#000000] text-sm">
                             Total
                           </span>
-                          <span className="font-display text-[#0a0a0a]" style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}>
+                          <span className="font-display text-[#000000]" style={{ fontSize: "clamp(1.5rem, 1.8vw, 1.875rem)", lineHeight: 1 }}>
                             ${totalPrice}
                           </span>
                         </div>
@@ -1185,7 +1185,7 @@ export default function Ekuzo100RegisterPage() {
 
                 {/* What's included card */}
                 <div className="border border-[#e5e7eb] rounded-sm bg-[#fafafa] px-5 py-5">
-                  <p className="font-body font-bold text-[#0a0a0a] text-xs uppercase tracking-wider mb-3">
+                  <p className="font-body font-bold text-[#000000] text-xs uppercase tracking-wider mb-3">
                     What you get
                   </p>
                   <ul className="flex flex-col gap-2">

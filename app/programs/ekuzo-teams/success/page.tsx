@@ -153,7 +153,7 @@ function EkuzoTeamsSuccessPage() {
             <div className="mt-10 text-left border border-[#e5e7eb] rounded-sm overflow-hidden">
               <div className="bg-[#f5f5f7] px-6 py-4 border-b border-[#e5e7eb]">
                 <h2
-                  className="font-display uppercase text-[#0a0a0a]"
+                  className="font-display uppercase text-[#000000]"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 28px)", lineHeight: "32px" }}
                 >
                   Booking Summary
@@ -162,7 +162,7 @@ function EkuzoTeamsSuccessPage() {
 
               <div className="px-6 py-5">
                 <div className="flex flex-col gap-1 mb-5">
-                  <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                  <span className="font-body font-bold text-[#000000] text-sm">
                     {details.parentName}
                   </span>
                   <span className="font-body text-[#6b7280] text-sm">
@@ -177,7 +177,7 @@ function EkuzoTeamsSuccessPage() {
                       className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0"
                     >
                       <div className="flex flex-col gap-1">
-                        <span className="font-body font-bold text-[#0a0a0a] text-sm">
+                        <span className="font-body font-bold text-[#000000] text-sm">
                           {g.name}
                         </span>
                         <span className="font-body text-[#6b7280] text-sm">
@@ -193,13 +193,13 @@ function EkuzoTeamsSuccessPage() {
 
                 <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#e5e7eb]">
                   <span
-                    className="font-body font-bold text-[#0a0a0a]"
+                    className="font-body font-bold text-[#000000]"
                     style={{ fontSize: "16px" }}
                   >
                     {details.paymentPlan === "upfront" ? "Total paid" : "Paid today"}
                   </span>
                   <span
-                    className="font-display text-[#0a0a0a]"
+                    className="font-display text-[#000000]"
                     style={{ fontSize: "clamp(1.25rem, 2vw, 28px)" }}
                   >
                     {details.totalPaid}
@@ -236,7 +236,7 @@ function EkuzoTeamsSuccessPage() {
             >
               <div className="px-6 py-5">
                 <h3
-                  className="font-display uppercase text-[#0a0a0a]"
+                  className="font-display uppercase text-[#000000]"
                   style={{ fontSize: "clamp(1.5rem, 2.4vw, 32px)", lineHeight: "1" }}
                 >
                   Bring your <span className="text-red">crew</span>
@@ -257,7 +257,7 @@ function EkuzoTeamsSuccessPage() {
                     value={details.squadLink}
                     aria-label="Squad share link"
                     onFocus={(e) => e.currentTarget.select()}
-                    className="flex-1 min-w-0 font-body text-sm text-[#0a0a0a] bg-white border border-[#e5e7eb] rounded-sm px-3 py-3 focus:outline-none focus:border-red"
+                    className="flex-1 min-w-0 font-body text-sm text-[#000000] bg-white border border-[#e5e7eb] rounded-sm px-3 py-3 focus:outline-none focus:border-red"
                   />
                   <button
                     type="button"
@@ -286,7 +286,7 @@ function EkuzoTeamsSuccessPage() {
           {/* Next steps */}
           <div className="mt-10 text-left">
             <h3
-              className="font-body font-bold text-[#0a0a0a] mb-4"
+              className="font-body font-bold text-[#000000] mb-4"
               style={{ fontSize: "20px", lineHeight: "28px" }}
             >
               What happens next
@@ -295,14 +295,14 @@ function EkuzoTeamsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">1.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Check your inbox</span> —
+                  <span className="font-bold text-[#000000]">Check your inbox</span> —
                   a confirmation email with your welcome packet is on its way.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">2.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">We&apos;ll build your team</span>
+                  <span className="font-bold text-[#000000]">We&apos;ll build your team</span>
                   {" "}— we match by age, skill, and game preference. Before
                   the semester starts, you&apos;ll receive your roster, coach
                   intro, and full session schedule.
@@ -311,7 +311,7 @@ function EkuzoTeamsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">3.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Get set up</span> — make sure
+                  <span className="font-bold text-[#000000]">Get set up</span> — make sure
                   your gamer has League of Legends installed, a working
                   headset, and Discord ready to go before Day 1.
                 </p>
@@ -319,7 +319,7 @@ function EkuzoTeamsSuccessPage() {
               <div className="flex items-start gap-3">
                 <span className="font-body font-bold text-red text-sm mt-0.5">4.</span>
                 <p className="font-body text-[#374151] text-sm leading-6">
-                  <span className="font-bold text-[#0a0a0a]">Start training now</span> — the
+                  <span className="font-bold text-[#000000]">Start training now</span> — the
                   semester doesn&apos;t start until August, but you can jump into{" "}
                   <Link
                     href="/programs/ekuzo-camps/register"
