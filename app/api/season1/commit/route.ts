@@ -12,6 +12,7 @@ import { parseGeoHeader } from "@/lib/seasonOneGeo";
 import {
   addFamilyFlagsByEmail,
   cancelOrder,
+  enqueueOutbox,
   findPendingOrderByAttempt,
   foldName,
   getFamilyCustomerId,
@@ -27,7 +28,8 @@ import {
   upsertFamilyGuardian,
   type AttemptOrder,
 } from "@/lib/season1/db";
-import { cleanAttemptId, errCode, kidsSignature, keyHash, logStep, viewTokenCookie } from "@/lib/season1/rules";
+import { cleanAttemptId, errCode, globalCeilingAlertKey, kidsSignature, keyHash, logStep, viewTokenCookie } from "@/lib/season1/rules";
+import { SECURITY_HEADERS, isCrossSite, isJsonContentType } from "@/lib/season1/httpGuard";
 
 /**
  * POST /api/season1/commit (frozen spec "Commit API" + RT3 to RT7, RT9, RT10,
@@ -41,7 +43,8 @@ export const runtime = "nodejs";
 export const LIMITS = {
   ipPer10Min: 5,
   emailPerDay: 20,
-  globalPerHour: 300,
+  /** Security review M1: raised from 300; a trip queues one ops_alert per hour. */
+  globalPerHour: 1000,
   /** T11: duplicate_kid answers per email per day before the generic Text Karlin. */
   duplicateKidPerDay: 3,
 } as const;
@@ -53,10 +56,15 @@ function json(body: unknown, status = 200, headers?: HeadersInit): Response {
   const h = new Headers(headers);
   h.set("content-type", "application/json");
   h.set("cache-control", "no-store");
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) h.set(k, v);
   return new Response(JSON.stringify(body), { status, headers: h });
 }
 
-/** T7: what happened to the s1_ref invite on this commit. */
+/**
+ * T7: what happened to the s1_ref invite on this commit. Only `invite` goes to
+ * the client (security review M2: the reason told any caller whether an email
+ * had paid or belonged to the code's family); the reason stays in s1_events.
+ */
 export interface InviteOutcome {
   invite: "applied" | "ignored" | "none";
   inviteReason: InviteReason | "removed" | "no_invite";
@@ -66,7 +74,7 @@ export interface InviteOutcome {
 
 function ok(clientSecret: string, publicId: string, amountCents: number, token: string, inv: InviteOutcome): Response {
   return json(
-    { clientSecret, orderId: publicId, amountCents, invite: inv.invite, inviteReason: inv.inviteReason },
+    { clientSecret, orderId: publicId, amountCents, invite: inv.invite },
     200,
     { "set-cookie": viewTokenCookie(token) },
   );
@@ -153,6 +161,14 @@ async function resolveAttempt(
 }
 
 export async function POST(req: Request): Promise<Response> {
+  // L1: no cross-site posts; the body must be declared JSON (a cross-site
+  // text/plain form post would otherwise skip the CORS preflight).
+  if (isCrossSite(req)) {
+    logStep("commit.origin", null, false, "cross_site");
+    return json({ error: "forbidden" }, 403);
+  }
+  if (!isJsonContentType(req)) return json({ error: "unsupported_media_type" }, 415);
+
   // Mode gates PI creation (RT10, RT17): raw host header only.
   const mode = currentMode(req.headers.get("host"));
   if (mode === "off") return json({ error: "closed" }, 409);
@@ -160,17 +176,6 @@ export async function POST(req: Request): Promise<Response> {
   if (!isOpen(now)) return json({ error: "closed" }, 409);
   const livemode = mode === "live";
   const ip = req.headers.get("x-nf-client-connection-ip");
-
-  // T11: every commit call counts against the per-IP limit. Fails closed.
-  try {
-    if (!(await hit(`s1pi:ip:${ipBucket(ip)}`, LIMITS.ipPer10Min, 600, livemode))) {
-      logStep("commit.ratelimit", null, false, "rate_limited_ip");
-      return json({ error: "rate_limited" }, 429);
-    }
-  } catch (e) {
-    logStep("commit.ratelimit", null, false, errCode(e));
-    return json({ error: "try_again" }, 503);
-  }
 
   let body: Record<string, unknown>;
   try {
@@ -201,8 +206,14 @@ export async function POST(req: Request): Promise<Response> {
 
   let ref: string | null = null;
 
-  // T11: every validated call counts against the per-email limit, 409s included.
+  // T11 as amended (Sentry final D5): every call that passes validation counts
+  // against the per-IP limit (IPv6 bucketed at /48, security review M1) and the
+  // per-email limit, 409s included; 422s count against neither. Fails closed.
   try {
+    if (!(await hit(`s1pi:ip:${ipBucket(ip, 48)}`, LIMITS.ipPer10Min, 600, livemode))) {
+      logStep("commit.ratelimit", null, false, "rate_limited_ip");
+      return json({ error: "rate_limited" }, 429);
+    }
     if (!(await hit(`s1pi:email:${keyHash(input.email)}`, LIMITS.emailPerDay, 86_400, livemode))) {
       logStep("commit.ratelimit", null, false, "rate_limited_email");
       return json({ error: "rate_limited" }, 429);
@@ -298,6 +309,14 @@ export async function POST(req: Request): Promise<Response> {
     }
     if (!allowed) {
       logStep("commit.ratelimit", null, false, "rate_limited");
+      // M1: someone should see a tripped ceiling. One row per clock hour (the
+      // dedupe key absorbs repeats); a failed enqueue never changes the 429.
+      try {
+        const key = globalCeilingAlertKey(now);
+        await enqueueOutbox("ops_alert", key, { kind: "global_ceiling", hour: key.split(":").pop(), livemode }, livemode);
+      } catch (e) {
+        logStep("commit.ceiling_alert", null, false, errCode(e));
+      }
       return json({ error: "rate_limited" }, 429);
     }
 

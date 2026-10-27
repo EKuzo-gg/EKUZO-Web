@@ -242,7 +242,9 @@ npm run s1:sweep             # shows what it would do
 npm run s1:sweep -- --apply
 ```
 
-Run it once a day during the launch week, or whenever the numbers look off.
+Run it once a day during the launch week, or whenever the numbers look off. It also blanks kid first
+names and phone numbers for families that never paid (every order canceled or failed, the newest over
+7 days old); the dry-run prints how many it would touch.
 
 ## Reading the logs
 
@@ -271,6 +273,7 @@ events), `fulfil.orphan` (a payment with no order; there is also an alert), `web
 | `late_confirm` | Paid after the window closed | Karlin decides |
 | `paid_after_cancel` | Paid after the sweep or a retry had canceled the order | Fine; the family is committed |
 | `duplicate_kid` | The same first name was committed twice in a family | Ask the parent |
+| `global_ceiling` (ops alert) | More than 1000 checkouts started in one hour; new ones get "try again later" until the hour ends | Look for a bot run in Stripe and the logs; one alert per hour at most |
 | `shared_card`, `same_zip`, `burst` | Friend-credit checks. They flag, never block | Look before the credit is used |
 
 ## Hand-run SQL
@@ -286,6 +289,7 @@ Do these in this order (redteam-ops rows 5, 6, 7, 10, 11, 12). Tick as you go.
 - [ ] 1. Note the Neon point-in-time-restore point (write the time down).
 - [ ] 2. Run the migrations against production: `node --env-file=.env.local scripts/s1-migrate.mjs --live`, and check `s1_migrations` lists 0001 to 0004.
 - [ ] 3. Scope production `DATABASE_URL`, the live Stripe keys, the live webhook secret and `S1_COMMIT_MODE` to the **Production** context only. Previews and branch deploys keep the test values.
+- [ ] 3a. Set `S1_REF_SECRET` (Production only) to a new random value (for example `openssl rand -base64 32`). With a live Stripe key it is required: invite cookies and the rate-limit email hashes refuse the webhook-secret fallback, so without it invites are ignored, `/crew/<code>` sets no cookie and checkout answers "try again" (security review L4, L10).
 - [ ] 4. Deploy with `S1_COMMIT_MODE` unset (it resolves to off).
 - [ ] 5. In the Stripe Dashboard, create the live webhook endpoint for `/api/season1/stripe-webhook` with the Season 01 events from the spec (payment succeeded, payment failed, charge refunded, refund failed, dispute created, dispute closed). Put its signing secret in `S1_STRIPE_WEBHOOK_SECRET` (Production only). Confirm the legacy endpoint is unchanged.
 - [ ] 6. Turn on Stripe email notifications for successful payments and refunds, for Jamie and Karlin.

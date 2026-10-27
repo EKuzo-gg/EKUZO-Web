@@ -9,12 +9,31 @@ import {
   hashViewToken,
   safeEqual,
   keyHash,
+  globalCeilingAlertKey,
   cleanAttemptId,
   viewTokenCookie,
   stepLine,
   errCode,
 } from "../rules";
 import { assertKeyMatchesMode, keyIsLive } from "../stripe";
+import { createHash, createHmac } from "node:crypto";
+
+function withEnv<T>(vars: Record<string, string | undefined>, fn: () => T): T {
+  const saved: Record<string, string | undefined> = {};
+  for (const k of Object.keys(vars)) {
+    saved[k] = process.env[k];
+    if (vars[k] === undefined) delete process.env[k];
+    else process.env[k] = vars[k];
+  }
+  try {
+    return fn();
+  } finally {
+    for (const k of Object.keys(saved)) {
+      if (saved[k] === undefined) delete process.env[k];
+      else process.env[k] = saved[k];
+    }
+  }
+}
 
 describe("jerseyEligible (RT8)", () => {
   const H = 3600 * 1000;
@@ -102,8 +121,35 @@ describe("safeEqual", () => {
 
 describe("keyHash and cleanAttemptId", () => {
   it("keyHash is case-insensitive and does not contain the input", () => {
-    assert.equal(keyHash("A@B.co"), keyHash("a@b.co "));
-    assert.ok(!keyHash("a@b.co").includes("@"));
+    withEnv({ S1_REF_SECRET: "k1", STRIPE_SECRET_KEY: "sk_test_x" }, () => {
+      assert.equal(keyHash("A@B.co"), keyHash("a@b.co "));
+      assert.ok(!keyHash("a@b.co").includes("@"));
+    });
+  });
+  it("L10: keyHash is an HMAC keyed by refSecret, not a bare sha256", () => {
+    const bare = createHash("sha256").update("a@b.co", "utf8").digest("base64url").slice(0, 22);
+    const h1 = withEnv({ S1_REF_SECRET: "k1", STRIPE_SECRET_KEY: "sk_test_x" }, () => keyHash("a@b.co"));
+    const h2 = withEnv({ S1_REF_SECRET: "k2", STRIPE_SECRET_KEY: "sk_test_x" }, () => keyHash("a@b.co"));
+    assert.equal(h1.length, 22);
+    assert.notEqual(h1, bare);
+    assert.notEqual(h1, h2);
+    assert.equal(h1, createHmac("sha256", "k1").update("a@b.co", "utf8").digest("base64url").slice(0, 22));
+  });
+  it("L10: keyHash throws with a live key and no S1_REF_SECRET (no webhook-secret fallback)", () => {
+    withEnv({ S1_REF_SECRET: undefined, S1_STRIPE_WEBHOOK_SECRET: "whsec_x", STRIPE_SECRET_KEY: "sk_live_x" }, () => {
+      assert.throws(() => keyHash("a@b.co"));
+    });
+  });
+  it("M1: the global ceiling alert key is one per UTC clock hour", () => {
+    assert.equal(globalCeilingAlertKey(new Date("2026-11-02T14:05:00Z")), "ops_alert:global_ceiling:2026-11-02T14");
+    assert.equal(
+      globalCeilingAlertKey(new Date("2026-11-02T14:59:59Z")),
+      globalCeilingAlertKey(new Date("2026-11-02T14:00:00Z")),
+    );
+    assert.notEqual(
+      globalCeilingAlertKey(new Date("2026-11-02T15:00:00Z")),
+      globalCeilingAlertKey(new Date("2026-11-02T14:59:59Z")),
+    );
   });
   it("attempt ids", () => {
     assert.equal(cleanAttemptId("6f1c2d3e-aaaa-4bbb-8ccc-123456789abc"), "6f1c2d3e-aaaa-4bbb-8ccc-123456789abc");

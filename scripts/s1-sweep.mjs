@@ -8,9 +8,15 @@
  *    state (succeeded, processing, requires_action, requires_confirmation) is
  *    left alone and reported; a PI Stripe cannot find is reported, not canceled
  *    (a wrong-account key would otherwise look like missing PIs).
+ * 3. Retention (security review L8): for families that never paid (no order
+ *    pending, paid, partially_refunded or refunded; every order canceled or
+ *    failed) whose newest order is over 7 days old, blank the kids' first names
+ *    (the column is NOT NULL, so '') and null the guardian phone and the
+ *    orders' payer_phone. Ages, emails and the order rows stay for the audit
+ *    trail. Runs after 1 and 2 in the same run.
  * Dry-run by default. Only orders of the run's livemode are touched.
  */
-import { cancelOrder, insertEvent } from "../lib/season1/db.ts";
+import { cancelOrder, getSql, insertEvent } from "../lib/season1/db.ts";
 import { getStripe } from "../lib/season1/stripe.ts";
 import { errCode } from "../lib/season1/rules.ts";
 import { initEnv, line, parseArgs, q } from "./s1-ops-lib.mjs";
@@ -19,6 +25,7 @@ const { flags } = parseArgs(process.argv.slice(2));
 const env = initEnv(flags);
 
 const counts = { noPiFound: 0, noPiCanceled: 0, piFound: 0, piCanceled: 0, piSkippedState: 0, piSkippedMissing: 0 };
+const RETAIN_DAYS = 7;
 
 // 1. No PI after an hour.
 const noPi = await q(
@@ -94,6 +101,42 @@ if (withPi.length > 0) {
     }
   }
 }
+
+// 3. Retention for never-paid families (L8). Eligible families, as a reusable clause.
+const NEVER_PAID = `
+  select f.id from s1_families f
+   where f.livemode = $1
+     and exists (select 1 from s1_orders o where o.family_id = f.id)
+     and not exists (select 1 from s1_orders o where o.family_id = f.id
+                      and o.status in ('pending','paid','partially_refunded','refunded'))
+     and not exists (select 1 from s1_orders o where o.family_id = f.id
+                      and o.created_at >= now() - make_interval(days => ${RETAIN_DAYS}))`;
+const ret = (
+  await q(
+    `select
+       (select count(*)::int from (${NEVER_PAID}) x) as families,
+       (select count(*)::int from s1_kids k where k.family_id in (${NEVER_PAID}) and k.first_name <> '') as kids,
+       (select count(*)::int from s1_guardians g where g.family_id in (${NEVER_PAID}) and g.phone is not null) as guardian_phones,
+       (select count(*)::int from s1_orders o where o.family_id in (${NEVER_PAID}) and o.payer_phone is not null) as order_phones`,
+    [env.livemode],
+  )
+)[0];
+const retained = { kids: 0, guardianPhones: 0, orderPhones: 0 };
+if (env.apply && ret.families > 0) {
+  const [k, g, o] = await getSql().transaction([
+    getSql().query(`update s1_kids set first_name = '', first_name_key = '' where family_id in (${NEVER_PAID}) and first_name <> '' returning id`, [env.livemode]),
+    getSql().query(`update s1_guardians set phone = null where family_id in (${NEVER_PAID}) and phone is not null returning id`, [env.livemode]),
+    getSql().query(`update s1_orders set payer_phone = null where family_id in (${NEVER_PAID}) and payer_phone is not null returning id`, [env.livemode]),
+  ]);
+  retained.kids = k.length;
+  retained.guardianPhones = g.length;
+  retained.orderPhones = o.length;
+  await insertEvent({ source: "ops", type: "sweep.retention", subject: null, data: { families: ret.families, ...retained }, livemode: env.livemode });
+}
+line(
+  `retention (never paid, over ${RETAIN_DAYS} d): families=${ret.families} kid_names=${ret.kids} guardian_phones=${ret.guardian_phones} order_phones=${ret.order_phones}` +
+    (env.apply ? ` | blanked kid_names=${retained.kids} guardian_phones=${retained.guardianPhones} order_phones=${retained.orderPhones}` : ""),
+);
 
 line(
   `counts: no_pi found=${counts.noPiFound} canceled=${counts.noPiCanceled} | pi_unpaid found=${counts.piFound} canceled=${counts.piCanceled} skipped_state=${counts.piSkippedState} skipped_lookup=${counts.piSkippedMissing}`,

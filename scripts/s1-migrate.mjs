@@ -21,14 +21,17 @@ if (!url) {
   process.exit(1);
 }
 const live = process.argv.includes("--live");
-let host = "";
+let hostLabel = "";
 try {
-  host = new URL(url).host;
+  hostLabel = new URL(url).hostname.toLowerCase().split(".")[0];
 } catch {
   console.error("DATABASE_URL is not a valid URL");
   process.exit(1);
 }
-if (!live && !host.includes(TEST_ENDPOINT)) {
+// Same rule as isTestDbUrl in lib/season1/mode.ts (plain node here, no TS import):
+// the endpoint id must be the host's first label (or its prefix, e.g. "-pooler").
+const hostIsTest = hostLabel === TEST_ENDPOINT || hostLabel.startsWith(`${TEST_ENDPOINT}-`);
+if (!live && !hostIsTest) {
   console.error("Refusing: DATABASE_URL is not the Neon test endpoint (pass --live to override).");
   process.exit(1);
 }

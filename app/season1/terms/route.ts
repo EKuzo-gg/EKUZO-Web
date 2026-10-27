@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { OFFER, formatDatePT, lockInDate } from "@/lib/season1/offer";
+import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
 
 // Season 01 program terms, /season1/terms. DRAFT addendum (KB outbox W3, part 1).
 // Served OUTSIDE app/layout.tsx. Dates come from the offer config.
@@ -20,6 +21,7 @@ export function GET() {
       "content-type": "text/html; charset=utf-8",
       "cache-control": "private, no-store",
       "x-robots-tag": "noindex",
+      ...SECURITY_HEADERS,
     },
   });
 }

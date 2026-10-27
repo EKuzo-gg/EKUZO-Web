@@ -500,6 +500,23 @@ describe("season1 money path (integration, Stripe test mode)", { skip: enabled ?
     } finally {
       delete process.env.S1_COMMIT_MODE;
     }
+    // L1 at the route: cross-site and non-JSON posts never reach validation or the DB.
+    const xs = await commitPOST(
+      new Request("http://localhost:3103/api/season1/commit", {
+        method: "POST",
+        headers: { host: "localhost:3103", "content-type": "application/json", origin: "https://evil.example" },
+        body: JSON.stringify(body(email("i"), [{ firstName: "Ned", age: 10 }], 10000)),
+      }),
+    );
+    assert.equal(xs.status, 403);
+    const tp = await commitPOST(
+      new Request("http://localhost:3103/api/season1/commit", {
+        method: "POST",
+        headers: { host: "localhost:3103", "content-type": "text/plain", "sec-fetch-site": "same-origin" },
+        body: JSON.stringify(body(email("i"), [{ firstName: "Ned", age: 10 }], 10000)),
+      }),
+    );
+    assert.equal(tp.status, 415);
     const hp = await commit({ ...body(email("i"), [{ firstName: "Ned", age: 10 }], 10000), company: "Acme" });
     assert.deepEqual([hp.status, hp.body], [422, { error: "invalid" }]);
     const age = await commit(body(email("i"), [{ firstName: "Ned", age: 8 }], 10000));
@@ -517,6 +534,20 @@ describe("season1 money path (integration, Stripe test mode)", { skip: enabled ?
       }
     }
     assert.deepEqual(statuses, [200, 200, 200, 200, 200, 429]);
+    // D5: 422s from one IP do not count; the next valid call from a fresh IP is unaffected by them.
+    const ip422 = `198.18.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}`;
+    for (let n = 0; n < 7; n++) {
+      const r = await commit(body(email(`v${n}`), [{ firstName: "Rae", age: 8 }], 10000), { ip: ip422 });
+      assert.equal(r.status, 422);
+    }
+    const rl = await sqlq(`select count from s1_rate_limits where key = $1`, [`s1pi:ip:${ip422}`]);
+    assert.equal(rl.length, 0, "D5: no per-IP row for 422s");
+    const afterBad = await commit(body(email("v-ok"), [{ firstName: "Rae", age: 10 }], 10000), { ip: ip422 });
+    assert.equal(afterBad.status, 200);
+    assert.equal("inviteReason" in afterBad.body, false, "M2");
+    assert.equal(afterBad.body.invite, "none");
+    toCancel.push(piOf(afterBad.body.clientSecret));
+    note("payment_intent", piOf(afterBad.body.clientSecret), `(i) D5 run ${afterBad.body.orderId} (canceled unconfirmed)`);
     ev(`(i) guards pass; per-IP statuses ${statuses.join(",")}`);
   });
 });

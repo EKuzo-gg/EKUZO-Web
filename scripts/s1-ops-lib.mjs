@@ -12,7 +12,7 @@
  *    live, and live needs --live
  */
 import { getSql } from "../lib/season1/db.ts";
-import { S1_TEST_DB_MARKER } from "../lib/season1/mode.ts";
+import { isTestDbUrl } from "../lib/season1/mode.ts";
 
 /** "--k v", "--k=v" and bare "--flag". Anything else is positional. */
 export function parseArgs(argv, booleanFlags = []) {
@@ -86,7 +86,7 @@ export function initEnv(flags, { needStripe = false } = {}) {
 
   const url = process.env.DATABASE_URL;
   if (!url) fail("DATABASE_URL is not set (run through the npm script so --env-file loads .env.local)");
-  const dbIsTest = url.includes(S1_TEST_DB_MARKER);
+  const dbIsTest = isTestDbUrl(url);
   const key = process.env.STRIPE_SECRET_KEY ?? "";
   const keyMode = key.startsWith("sk_live_") ? "live" : key.startsWith("sk_test_") ? "test" : key ? "unknown" : "none";
 

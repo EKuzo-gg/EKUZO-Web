@@ -46,10 +46,11 @@ export function computeFlags(i: FlagInput): string[] {
 
 /**
  * Rate-limit bucket for an IP. IPv4 unchanged, IPv6 reduced to its /64
- * ("2001:db8:1:2::/64"), IPv4-mapped IPv6 reduced to the IPv4 address, missing
- * or unparseable input is "noip".
+ * ("2001:db8:1:2::/64") or, with v6Prefix 48, its /48 ("2001:db8:1::/48";
+ * the commit limiter, security review M1), IPv4-mapped IPv6 reduced to the
+ * IPv4 address, missing or unparseable input is "noip".
  */
-export function ipBucket(ip: string | null | undefined): string {
+export function ipBucket(ip: string | null | undefined, v6Prefix: 48 | 64 = 64): string {
   if (!ip) return "noip";
   let s = ip.trim().toLowerCase();
   if (!s) return "noip";
@@ -77,8 +78,9 @@ export function ipBucket(ip: string | null | undefined): string {
     groups = head;
   }
   if (groups.length !== 8 || groups.some((g) => !/^[0-9a-f]{1,4}$/.test(g))) return "noip";
-  const first4 = groups.slice(0, 4).map((g) => parseInt(g, 16).toString(16));
-  return `${first4.join(":")}::/64`;
+  const n = v6Prefix === 48 ? 3 : 4;
+  const head4 = groups.slice(0, n).map((g) => parseInt(g, 16).toString(16));
+  return `${head4.join(":")}::/${v6Prefix}`;
 }
 
 // T6: known link-unfurl crawlers get the nameless variant and are not counted.

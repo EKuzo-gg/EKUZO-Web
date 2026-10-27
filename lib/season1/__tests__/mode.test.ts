@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { resolveMode, deployContext } from "../mode";
+import { resolveMode, deployContext, isTestDbUrl } from "../mode";
 
 const TEST_DB = "postgres://ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/db";
 const PROD_DB = "postgres://ep-other-prod-123456.us-east-2.aws.neon.tech/db";
@@ -84,5 +84,46 @@ describe("resolveMode", () => {
   it("explicit off and unknown values -> off", () => {
     assert.equal(resolveMode({ envMode: "off", stripeKey: "sk_test_abc", databaseUrl: TEST_DB }), "off");
     assert.equal(resolveMode({ envMode: "maybe", stripeKey: "sk_test_abc", databaseUrl: TEST_DB }), "off");
+  });
+});
+
+describe("isTestDbUrl (security review L5: parsed hostname, not a substring)", () => {
+  it("the test endpoint host (direct or pooler) is test", () => {
+    assert.equal(isTestDbUrl(TEST_DB), true);
+    assert.equal(isTestDbUrl("postgresql://u:p@ep-lively-boat-b4fak1h6-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"), true);
+    assert.equal(isTestDbUrl("postgresql://u:p@EP-LIVELY-BOAT-B4FAK1H6.us-east-2.aws.neon.tech/neondb"), true);
+  });
+  it("a prod URL with the marker in the password, user, path or query is NOT test", () => {
+    for (const url of [
+      "postgresql://u:ep-lively-boat-b4fak1h6@ep-other-prod-123456.us-east-2.aws.neon.tech/neondb",
+      "postgresql://ep-lively-boat-b4fak1h6:p@ep-other-prod-123456.us-east-2.aws.neon.tech/neondb",
+      "postgresql://u:p@ep-other-prod-123456.us-east-2.aws.neon.tech/ep-lively-boat-b4fak1h6",
+      "postgresql://u:p@ep-other-prod-123456.us-east-2.aws.neon.tech/neondb?options=ep-lively-boat-b4fak1h6",
+      "postgresql://u:p@ep-other-prod-123456.us-east-2.aws.neon.tech/neondb#ep-lively-boat-b4fak1h6",
+      "postgresql://u:p@x.ep-lively-boat-b4fak1h6.example.com/neondb",
+      "postgresql://u:p@ep-lively-boat-b4fak1h6x.us-east-2.aws.neon.tech/neondb",
+    ]) {
+      assert.equal(isTestDbUrl(url), false, url);
+    }
+  });
+  it("missing or unparseable is NOT test", () => {
+    for (const v of [null, undefined, "", "not a url", "ep-lively-boat-b4fak1h6"]) assert.equal(isTestDbUrl(v), false, String(v));
+  });
+  it("resolveMode: test refuses a prod URL carrying the marker in the password; live accepts it as non-test", () => {
+    const sneaky = "postgresql://u:ep-lively-boat-b4fak1h6@ep-other-prod-123456.us-east-2.aws.neon.tech/neondb";
+    assert.equal(resolveMode({ envMode: "test", stripeKey: "sk_test_abc", databaseUrl: sneaky }), "off");
+    assert.equal(resolveMode({ stripeKey: "sk_test_abc", databaseUrl: sneaky }), "off");
+    assert.equal(
+      resolveMode({
+        envMode: "live",
+        stripeKey: "sk_live_abc",
+        publishableKey: "pk_live_abc",
+        databaseUrl: sneaky,
+        webhookSecret: "whsec_x",
+        context: "production",
+        host: "ekuzo.gg",
+      }),
+      "live",
+    );
   });
 });

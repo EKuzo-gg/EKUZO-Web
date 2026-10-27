@@ -27,7 +27,8 @@ export function formatCommit(o: OrderCtx): string {
   const kids = o.kids.map((k) => `${free(k.firstName)}${k.age != null ? ` (${k.age})` : ""}`).join(", ");
   const place = [free(o.geoCity, 40), free(o.geoRegion, 8)].filter(Boolean).join(", ");
   const parts = [
-    `${tag(o.livemode)}Season 01 commit: ${free(o.parentFirstName) || "A parent"}`,
+    // Security review L6: no parent name (the 2026-10-26 decision lists kid first name, age, city, amount).
+    `${tag(o.livemode)}Season 01 commit`,
     `kids ${kids || "none"}`,
     `$${dollars(o.amountCents)}`,
   ];

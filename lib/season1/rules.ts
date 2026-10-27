@@ -1,5 +1,6 @@
-import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { OFFER } from "./offer";
+import { refSecret } from "./refcookie";
 
 /**
  * Pure money-path rules shared by the commit API, fulfil and the webhook.
@@ -58,9 +59,20 @@ export function safeEqual(a: string, b: string): boolean {
   return timingSafeEqual(x, y);
 }
 
-/** Short stable hash for rate-limit keys, so raw emails never land in s1_rate_limits. */
+/**
+ * Short stable keyed hash for rate-limit keys and event subjects, so raw emails
+ * never land in s1_rate_limits or s1_events. HMAC-SHA256 with refSecret()
+ * (security review L10: a bare sha256 of a known email is reversible by
+ * dictionary). Throws when no secret is usable (live without S1_REF_SECRET);
+ * the commit route then fails closed. Older bare-hash rows age out.
+ */
 export function keyHash(v: string): string {
-  return createHash("sha256").update(v.trim().toLowerCase(), "utf8").digest("base64url").slice(0, 22);
+  return createHmac("sha256", refSecret()).update(v.trim().toLowerCase(), "utf8").digest("base64url").slice(0, 22);
+}
+
+/** M1: one ops alert per clock hour (UTC) when the global PaymentIntent ceiling trips. */
+export function globalCeilingAlertKey(now: Date): string {
+  return `ops_alert:global_ceiling:${now.toISOString().slice(0, 13)}`;
 }
 
 /** Client attempt id: UUID-ish, 8 to 64 chars of [A-Za-z0-9-]. */

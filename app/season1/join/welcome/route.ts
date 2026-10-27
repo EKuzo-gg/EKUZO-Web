@@ -6,6 +6,7 @@ import { display } from "@/lib/season1/codes";
 import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
 import { drainOutbox } from "@/lib/season1/outbox";
+import { SECURITY_HEADERS, shareOrigin } from "@/lib/season1/httpGuard";
 
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
@@ -19,6 +20,7 @@ const HEADERS = {
   "x-robots-tag": "noindex",
   // The Stripe return URL carries the client secret; never send it as a Referer.
   "referrer-policy": "strict-origin",
+  ...SECURITY_HEADERS,
 };
 
 function esc(s: unknown): string {
@@ -117,8 +119,8 @@ export async function GET(request: Request) {
     }
   }
 
-  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "ekuzo.gg";
-  const proto = request.headers.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  // L3: share links from the raw host header only (never x-forwarded-*), https except localhost.
+  const origin = shareOrigin(request.headers.get("host"));
   const mode = currentMode(request.headers.get("host"));
   const sms = `sms:${OFFER.textKarlinSms}`;
 
@@ -177,8 +179,8 @@ export async function GET(request: Request) {
       ? '<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Friend credit recorded. It applies at lock-in.</p>'
       : `<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Came from a friend's link and no credit shows? <a href="${esc(sms)}"><b>Text Karlin</b></a> the friend code.</p>`;
     if (order.code) {
-      vars.LINK = esc(`${proto}://${host}/crew/${order.code}`);
-      vars.LINK_SHORT = esc(`${host}/crew/${order.code}`);
+      vars.LINK = esc(`${origin}/crew/${order.code}`);
+      vars.LINK_SHORT = esc(`${origin.replace(/^https?:\/\//, "")}/crew/${order.code}`);
       vars.CODE_DISPLAY = esc(display(order.code));
       vars.NO_SHARE = "";
     } else {
@@ -206,9 +208,9 @@ export async function GET(request: Request) {
     );
   }
   if (dbError) {
-    headers.append("set-cookie", `s1_wtry=${tries}; Path=/season1; Max-Age=120; SameSite=Lax`);
+    headers.append("set-cookie", `s1_wtry=${tries}; Path=/season1; Max-Age=120; Secure; HttpOnly; SameSite=Lax`);
   } else if (cookieValue(request, "s1_wtry")) {
-    headers.append("set-cookie", "s1_wtry=; Path=/season1; Max-Age=0; SameSite=Lax");
+    headers.append("set-cookie", "s1_wtry=; Path=/season1; Max-Age=0; Secure; HttpOnly; SameSite=Lax");
   }
   if (state === "paid") {
     // Spec: readable by page JS, one year, whole site (the first-visit popup reads the flag).

@@ -3,6 +3,7 @@ import path from "path";
 import { renderJoin } from "@/lib/season1/joinPage";
 import { currentMode } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
+import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
 
 // Season 01 front door, /season1/join. Cloned from
 // /season1/early-access/early-access.html with the deltas in
@@ -27,6 +28,7 @@ export function GET(request: Request) {
       "cache-control": "private, no-store",
       "x-robots-tag": "noindex",
       "referrer-policy": "origin",
+      ...SECURITY_HEADERS,
     },
   });
 }

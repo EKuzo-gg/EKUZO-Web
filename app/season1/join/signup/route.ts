@@ -5,6 +5,7 @@ import { currentMode } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
 import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { resolveCode } from "@/lib/season1/referral";
+import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
 
 // Season 01 commit sign-up, /season1/join/signup. Adapted from
 // /season1/early-access/signup. HTML lives beside this file (literal path,
@@ -55,7 +56,6 @@ async function loadInvite(request: Request): Promise<{ name: string | null } | n
 
 export async function GET(request: Request) {
   const now = new Date();
-  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
   const mode = currentMode(request.headers.get("host"));
   const srcParam = new URL(request.url).searchParams.get("src");
   const src = srcParam && (SRC_VALUES as readonly string[]).includes(srcParam) ? srcParam : null;
@@ -93,6 +93,7 @@ export async function GET(request: Request) {
       "cache-control": "private, no-store",
       "x-robots-tag": "noindex",
       "referrer-policy": "origin",
+      ...SECURITY_HEADERS,
     },
   });
 }

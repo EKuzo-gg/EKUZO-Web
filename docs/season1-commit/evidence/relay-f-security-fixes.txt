@@ -1,0 +1,151 @@
+# Relay F: security review repairs (phase 5). Branch season1-commit, not committed.
+# Source: docs/season1-commit/evidence/security-review.md. Plus the lead's Sentry final D5.
+# Format: finding -> change -> test. No secrets printed; DB = Neon test branch, Stripe = test mode.
+
+M1  Global PI ceiling cheap to exhaust; no alert; IPv6 /64 commit bucket.
+    -> app/api/season1/commit/route.ts: LIMITS.globalPerHour 300 -> 1000 per hour per mode.
+       When it trips: enqueueOutbox("ops_alert", "ops_alert:global_ceiling:<YYYY-MM-DDTHH UTC>",
+       {kind:"global_ceiling", hour, livemode}); the dedupe key gives one row per hour; an enqueue
+       failure is logged (errCode) and still returns 429. Limiter errors still fail closed (503).
+       Per-IP commit key now ipBucket(ip, 48) (s1pi:ip:<a:b:c>::/48); lib/season1/referralFlags.ts
+       ipBucket gained an optional v6Prefix 48|64 (default 64, so /crew name renders keep /64).
+       rules.ts: globalCeilingAlertKey(now). ops-runbook: global_ceiling row in the flags table.
+    -> tests: referral.test.ts "M1: the commit limiter buckets IPv6 at /48 ..."; rules.test.ts
+       "M1: the global ceiling alert key is one per UTC clock hour"; commitGuards.test.ts
+       "M1: a tripped global ceiling (1000/h) returns 429 and enqueues one ops_alert per hour; per-IP
+       key uses /48" (fake Neon HTTP: asserts key s1pi:ip:2001:db8:abcd::/48, two trips -> same
+       dedupe key, kind global_ceiling, livemode false, no family/kid/order writes) and
+       "an ops_alert enqueue failure still returns 429 (never 500)".
+
+M2  Commit response leaked inviteReason (already_paid / own_family).
+    -> commit route ok() returns {clientSecret, orderId, amountCents, invite} only. The reason stays
+       in the invite.ignored s1_events row (recordIgnored unchanged).
+       signup.html checked: reads only j.invite === 'ignored' (line 293); no change needed.
+    -> tests: invite.integration (2)(3)(4) assert invite value and "inviteReason" absent; (4) checks
+       the event row reason own_family; (5) now also checks the event row reason already_paid (not run
+       this pass: needs (1)'s paid order). money (i) asserts no inviteReason on a 200.
+       Not done (review's extra suggestion): counting duplicate_kid per IP. Price signal: accepted.
+
+L1  Commit accepted cross-site text/plain posts.
+    -> lib/season1/httpGuard.ts isCrossSite: Sec-Fetch-Site present and not same-origin/same-site/none
+       -> 403; else Origin present with host != raw host header -> 403 ("null" origin -> 403).
+       isJsonContentType: commit returns 415 unless content-type is application/json (params ok).
+       Both run first, before mode, body read or any DB call.
+       signup.html checked: fetch already sends headers {'content-type':'application/json'},
+       credentials same-origin (line 287); no change needed.
+    -> tests: httpGuard.test.ts (isCrossSite, isJsonContentType); commitGuards.test.ts "L1: cross-site
+       requests are 403 before anything else" (0 DB calls), "L1: a non-JSON content type is 415",
+       "same-origin browser posts pass the guard"; money.integration (i) 403 and 415 at the route.
+       Smoke (next start :3103): text/plain 415; origin evil 403; sec-fetch-site cross-site 403.
+
+L2  invite/remove had no origin check.
+    -> app/api/season1/invite/remove/route.ts: same isCrossSite guard; 403 with no Set-Cookie.
+       signup.html's remove fetch is same-origin (credentials same-origin), unaffected.
+    -> tests: routeHeaders.test.ts "L2: invite/remove clears the cookie same-origin and refuses
+       cross-site". Smoke: cross-site 403 no cookie; same-origin 200 clears s1_ref.
+
+L3  Welcome share link built from x-forwarded-host/-proto.
+    -> welcome/route.ts uses shareOrigin(request.headers.get("host")): https://<raw host>,
+       http only for localhost/127.0.0.1. LINK and LINK_SHORT both from it.
+    -> tests: httpGuard.test.ts "shareOrigin (L3)". grep: no x-forwarded-host/-proto left in
+       app/season1, app/crew, app/api/season1, lib/season1 (x-forwarded-for stays as consent_xff, RT20).
+
+L4  s1_ref HMAC key fell back to the webhook secret.
+    -> lib/season1/refcookie.ts refSecret(): S1_REF_SECRET first; the S1_STRIPE_WEBHOOK_SECRET fallback
+       only when STRIPE_SECRET_KEY is not sk_live_; live without S1_REF_SECRET throws. Callers already
+       catch: crew renders without a cookie, signup shows no banner, commit ignores the invite.
+       Launch item added: ops-runbook "Launch order" 3a, set S1_REF_SECRET (Production only).
+    -> tests: referral.test.ts "refSecret prefers S1_REF_SECRET, falls back (test key only), and
+       throws when neither is set" (live key + webhook secret only -> throws).
+
+L5  "Is this the test DB" was a substring match on the whole URL.
+    -> lib/season1/mode.ts isTestDbUrl(url): parsed hostname, first label equals the endpoint id or
+       starts with "<id>-" (pooler). Used in resolveMode (test and live), lib/season1/db.ts getSql guard,
+       scripts/s1-ops-lib.mjs initEnv. scripts/s1-migrate.mjs (plain node, no TS import) applies the
+       same first-label rule (was host.includes).
+    -> tests: mode.test.ts "isTestDbUrl (security review L5 ...)": marker in password, user, path,
+       query, fragment, a subdomain, or as a longer label -> NOT test; resolveMode test/unset -> off and
+       live -> live for such a URL. Manual: both scripts refuse
+       postgresql://u:<marker>@ep-other-prod-.../neondb?options=<marker> (exit 1, before connecting).
+       The local .env.local test URL still passes (isTestDbUrl true; all suites ran).
+
+L6  Discord commit message carried the parent first name.
+    -> lib/season1/senders/discord.ts formatCommit: "Season 01 commit | kids ..." with no parent name.
+       Inviter kid name kept (flag for Jamie per review: confirm or amend the decision record).
+    -> tests: outbox.test.ts Discord: asserts "Pat" absent and the new prefix.
+
+L7  No anti-framing / nosniff headers.
+    -> httpGuard.SECURITY_HEADERS {x-frame-options: DENY, x-content-type-options: nosniff} on join,
+       signup, welcome (HEADERS const), terms, crew, the commit API json() helper (every status), and
+       invite/remove.
+    -> tests: routeHeaders.test.ts "L7: join, signup, welcome, terms and crew ..."; commitGuards.test.ts
+       "L7: every commit response carries ...". Smoke: all five pages 200 with both headers; commit 422
+       carries both.
+
+L8  No retention for never-paid kids/guardians.
+    -> scripts/s1-sweep.mjs step 3: families of the run's livemode with at least one order, none
+       pending/paid/partially_refunded/refunded, and no order newer than 7 days: kids first_name and
+       first_name_key set to '' (column is NOT NULL), guardian phone null, orders payer_phone null.
+       One transaction under --apply plus a sweep.retention event (counts only). Dry-run prints counts.
+       Emails, ages and order rows stay (audit trail). Runbook sweep section updated.
+    -> evidence (test DB, synthetic families seeded 8 days old, then deleted):
+       dry-run: retention (never paid, over 7 d): families=1 kid_names=1 guardian_phones=1 order_phones=2
+       --apply: ... | blanked kid_names=1 guardian_phones=1 order_phones=2
+       rerun:   families=1 kid_names=0 guardian_phones=0 order_phones=0 (idempotent)
+       never-paid family: kid first_name '' age 11 kept; guardian phone null, email kept; both orders'
+       payer_phone null. Paid family (canceled + paid orders): untouched.
+       Synthetic rows deleted afterwards (4 items, 4 orders, 2 kids, 2 guardians, 2 families); final
+       dry-run families=0. Note: the review suggested 30 days; the brief said 7, implemented 7.
+
+L9  /crew logged err.message.
+    -> app/crew/[code]/route.ts: logStep("crew.resolve", null, false, errCode(err)).
+    -> tests: routeHeaders.test.ts "L9: a crew lookup failure logs an error code only" (stubbed fetch
+       error message containing a postgres URL never appears; line matches the stepLine format).
+
+L10 keyHash was bare sha256 of the email.
+    -> lib/season1/rules.ts keyHash: HMAC-SHA256 keyed by refSecret(), base64url, 22 chars. Live without
+       S1_REF_SECRET throws -> commit's limiter try/catch fails closed (503). Old bare-hash rows in
+       s1_rate_limits age out (1-day cleanup); old flag.duplicate_kid_repeat subjects stay as written.
+    -> tests: rules.test.ts "L10: keyHash is an HMAC keyed by refSecret, not a bare sha256",
+       "L10: keyHash throws with a live key and no S1_REF_SECRET".
+
+L12 s1_wtry flags; unused host line.
+    -> welcome/route.ts: both s1_wtry Set-Cookie lines add Secure; HttpOnly. signup/route.ts: removed
+       the unused x-forwarded-host `host` line.
+    -> tests: routeHeaders.test.ts "L12: the welcome retry cookie is Secure and HttpOnly".
+
+D5 (lead, Sentry final) 422s counted against the commit limits.
+    -> commit route: per-IP hit moved after validation, next to the per-email hit (both after the body,
+       honeypot, validateCommit, expectedCents and attemptId checks). Everything that passes validation
+       still counts, 409s included (duplicate_kid, price_changed, text_karlin). Fail-closed kept.
+    -> tests: commitGuards.test.ts "D5: requests rejected by validation (422) never touch the limiters"
+       (9 kinds of 422, 0 DB calls) and "D5: a request that passes validation reaches the per-IP
+       limiter, which fails closed" (503). money.integration (i): 7 x 422 from one IP leave no
+       s1pi:ip row; the next valid call from that IP is 200. Existing (i) per-IP run still
+       200,200,200,200,200,429.
+
+Left alone, for the launch list:
+H1  Bump next to >= 16.4.3 and nanoid to >= 5.1.16 in the separate dependency PR before S1_COMMIT_MODE=live (D14).
+M3  Legacy /api/webhooks/stripe must return 500 when STRIPE_WEBHOOK_SECRET is unset or a placeholder (pre-existing fail-open).
+L11 Accepted: unknown-code lookups are unthrottled and valid/invalid codes are distinguishable; revisit with a per-IP limit on every lookup if DB load shows up.
+
+Runs
+- npx tsc --noEmit: clean (exit 0).
+- TZ=UTC npm run test:s1: tests 163, pass 163, fail 0 (integration suites skip without S1_DB_TESTS).
+  New files: lib/season1/__tests__/httpGuard.test.ts, commitGuards.test.ts, routeHeaders.test.ts.
+- S1_DB_TESTS=1 integration, NO succeeded PaymentIntents (no confirm calls):
+  money.integration --test-name-pattern '^\(i\) guards': 1/1 pass (webhook signature 400, mode skip,
+    non-season1 skip, missing secret 500, off/honeypot/age, L1 403/415, per-IP 429, D5).
+  invite.integration --test-name-pattern '^\((2|3|4|7)\) ': 4/4 pass (tag cba42a8f).
+  Skipped on purpose: money (a)(b)(c)(d)(e)(f)(h) and invite (1)(5)(6)(8): they confirm payments or
+    depend on (1)/(a)'s succeeded PI. money (g) skipped: it reuses (a)'s family.
+  db.integration + referral.integration: 19/19 pass.
+  PaymentIntents created (all test mode, all verified canceled afterwards via Stripe: {"canceled":11}):
+    pi_3UV3BrKORcR8BUEx1DyrvjuJ pi_3UV3BsKORcR8BUEx12R6LZ3Y pi_3UV3BtKORcR8BUEx14eA2zdw
+    pi_3UV3BuKORcR8BUEx0SiWeTyf pi_3UV3BuKORcR8BUEx0WXA1430 pi_3UV3BvKORcR8BUEx0trBdOrA   (money i)
+    pi_3UV3BzKORcR8BUEx1rYJZgB6 pi_3UV3C0KORcR8BUEx1TaNFJJN pi_3UV3C1KORcR8BUEx0NI1nlmS
+    pi_3UV3C2KORcR8BUEx0bpEoIFU pi_3UV3C3KORcR8BUEx1FQpOV9h                               (invite 2,3,4)
+  Test rows: team+s1test-<tag>…@ekuzo.gg families/orders as in earlier runs (cleanup ledger pattern).
+- npx next build (copy at /home/claude/relayf-build, node_modules hardlinked; Turbopack rejects a
+  symlinked node_modules): compiled successfully, exit 0; all Season 01 routes listed.
+- Smoke on :3103 (next start from the build copy, stopped afterwards; no server left running).

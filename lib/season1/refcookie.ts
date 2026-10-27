@@ -19,9 +19,18 @@ export const REF_COOKIE = {
   maxAge: REF_COOKIE_MAX_AGE_SECONDS,
 } as const;
 
-/** S1_REF_SECRET, falling back to S1_STRIPE_WEBHOOK_SECRET. Throws if neither is set. */
+/**
+ * S1_REF_SECRET. The S1_STRIPE_WEBHOOK_SECRET fallback is allowed only while the
+ * Stripe key is not live (security review L4: one secret for two jobs, and a
+ * webhook rotation would void every invite cookie). Throws when nothing usable
+ * is set; callers render nameless, ignore the cookie or fail closed.
+ */
 export function refSecret(): string {
-  const s = process.env.S1_REF_SECRET || process.env.S1_STRIPE_WEBHOOK_SECRET;
+  if (process.env.S1_REF_SECRET) return process.env.S1_REF_SECRET;
+  if ((process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_")) {
+    throw new Error("S1_REF_SECRET is required with a live Stripe key");
+  }
+  const s = process.env.S1_STRIPE_WEBHOOK_SECRET;
   if (!s) throw new Error("S1_REF_SECRET (or S1_STRIPE_WEBHOOK_SECRET) is not set");
   return s;
 }

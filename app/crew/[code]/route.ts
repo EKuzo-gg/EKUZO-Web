@@ -5,6 +5,8 @@ import { OFFER, formatDatePT } from "@/lib/season1/offer";
 import { currentMode } from "@/lib/season1/mode";
 import { resolveCode } from "@/lib/season1/referral";
 import { refSecret, signRef, refSetCookieHeader } from "@/lib/season1/refcookie";
+import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
+import { errCode, logStep } from "@/lib/season1/rules";
 
 // Season 01 friend page, /crew/<code>. The link a family shares after committing.
 // Static-shaped HTML served by a route handler OUTSIDE app/layout.tsx (no Meta
@@ -76,8 +78,8 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
     resolved = await resolveCode(rawCode, { ip, userAgent, livemode });
     inactive = resolved === null;
   } catch (err) {
-    // DB trouble: nameless page, no cookie. Log the message only (no code, no name).
-    console.error("crew: resolveCode failed:", err instanceof Error ? err.message : "unknown");
+    // DB trouble: nameless page, no cookie. Log a short error code only (ops 8, security review L9).
+    logStep("crew.resolve", null, false, errCode(err));
     resolved = null;
   }
 
@@ -94,6 +96,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
     "cache-control": "private, no-store",
     "x-robots-tag": "noindex",
     "referrer-policy": "origin",
+    ...SECURITY_HEADERS,
   });
   if (resolved) {
     try {

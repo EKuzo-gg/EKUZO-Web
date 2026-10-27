@@ -110,7 +110,8 @@ describe("season1 invite wiring (integration, Stripe test mode)", { skip: enable
   it("(1) friend with a signed cookie pays 1 kid -> invite applied, referral pending friend_kids 1, friend_joined outbox, flags, inviteApplied", async () => {
     const c = await commit(body(friendEmail, [{ firstName: "Mira", age: 11 }], 10000), refCookie);
     assert.equal(c.status, 200, JSON.stringify(c.body));
-    assert.deepEqual([c.body.invite, c.body.inviteReason], ["applied", "ok"]);
+    assert.equal(c.body.invite, "applied");
+    assert.equal("inviteReason" in c.body, false, "M2: no reason in the response");
     const piId = piOf(c.body.clientSecret);
     const order = (await sqlq(`select * from s1_orders where public_id = $1`, [c.body.orderId]))[0];
     assert.equal(order.referral_code, inviter.code);
@@ -179,7 +180,8 @@ describe("season1 invite wiring (integration, Stripe test mode)", { skip: enable
     const removed = await commit({ ...b, inviteRemoved: true }, refCookie);
     assert.equal(removed.status, 200);
     assert.equal(removed.body.clientSecret, first.body.clientSecret, "same attempt reuses the PI");
-    assert.deepEqual([removed.body.invite, removed.body.inviteReason], ["none", "removed"]);
+    assert.equal(removed.body.invite, "none");
+    assert.equal("inviteReason" in removed.body, false, "M2: no reason in the response");
     assert.equal((await sqlq(`select referral_code from s1_orders where public_id = $1`, [first.body.orderId]))[0].referral_code, null);
 
     // Fresh attempt, removed from the start: order created with a null code.
@@ -198,7 +200,8 @@ describe("season1 invite wiring (integration, Stripe test mode)", { skip: enable
     const bad = `s1_ref=${inviter.code}.AAAA`;
     const c = await commit(body(email("t"), [{ firstName: "Tess", age: 10 }], 10000), bad);
     assert.equal(c.status, 200);
-    assert.deepEqual([c.body.invite, c.body.inviteReason], ["none", "no_invite"]);
+    assert.equal(c.body.invite, "none");
+    assert.equal("inviteReason" in c.body, false, "M2: no reason in the response");
     const piId = piOf(c.body.clientSecret);
     note("payment_intent", piId, `(3) order ${c.body.orderId} (canceled unconfirmed)`);
     await stripe.paymentIntents.cancel(piId);
@@ -211,7 +214,9 @@ describe("season1 invite wiring (integration, Stripe test mode)", { skip: enable
   it("(4) own code (inviter's email) -> ignored own_family, no referral code, event recorded", async () => {
     const c = await commit(body(inviter.email, [{ firstName: `Sib${tag.replace(/\d/g, "x")}`, age: 10 }], 8000), refCookie);
     assert.equal(c.status, 200, JSON.stringify(c.body));
-    assert.deepEqual([c.body.invite, c.body.inviteReason], ["ignored", "own_family"]);
+    // M2: the client sees only "ignored"; the reason lives in the invite.ignored event row (checked below).
+    assert.equal(c.body.invite, "ignored");
+    assert.equal("inviteReason" in c.body, false, "M2: no reason in the response");
     assert.equal(c.body.amountCents, 8000, "sibling price across orders");
     const piId = piOf(c.body.clientSecret);
     note("payment_intent", piId, `(4) order ${c.body.orderId} (canceled unconfirmed)`);
@@ -225,7 +230,10 @@ describe("season1 invite wiring (integration, Stripe test mode)", { skip: enable
     assert.ok(friend, "needs (1)");
     const c = await commit(body(friendEmail, [{ firstName: "Nico", age: 13 }], 8000), refCookie);
     assert.equal(c.status, 200, JSON.stringify(c.body));
-    assert.deepEqual([c.body.invite, c.body.inviteReason], ["ignored", "already_paid"]);
+    assert.equal(c.body.invite, "ignored");
+    assert.equal("inviteReason" in c.body, false, "M2: no reason in the response");
+    const evr = await sqlq(`select data from s1_events where source = 'commit' and type = 'invite.ignored' and subject = $1`, [c.body.orderId]);
+    assert.equal(evr[0]?.data?.reason, "already_paid");
     const piId = piOf(c.body.clientSecret);
     note("payment_intent", piId, `(5) order ${c.body.orderId} (canceled unconfirmed)`);
     await stripe.paymentIntents.cancel(piId);

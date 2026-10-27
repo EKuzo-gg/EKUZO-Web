@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { neon } from "@neondatabase/serverless";
 import { customAlphabet } from "nanoid";
-import { S1_TEST_DB_MARKER, deployContext } from "./mode";
+import { deployContext, isTestDbUrl } from "./mode";
 import { hashViewToken, newViewToken } from "./rules";
 
 /**
@@ -34,7 +34,7 @@ export function getSql(): Sql {
   if (_sql) return _sql;
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("DATABASE_URL is not set");
-  if (!url.includes(S1_TEST_DB_MARKER) && deployContext() !== "production") {
+  if (!isTestDbUrl(url) && deployContext() !== "production") {
     throw new Error("Refusing: DATABASE_URL is not the Season 01 test database");
   }
   _sql = neon(url, { fetchOptions });

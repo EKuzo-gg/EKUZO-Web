@@ -3,6 +3,23 @@ export type S1Mode = "off" | "test" | "live";
 export const S1_TEST_DB_MARKER = "ep-lively-boat-b4fak1h6";
 const LIVE_HOSTS = ["ekuzo.gg", "www.ekuzo.gg"];
 
+/**
+ * L5: true only when the URL's hostname is the Neon test endpoint (its first
+ * label is the endpoint id, or the id plus a suffix such as "-pooler"). The
+ * marker anywhere else (password, path, query) does not count.
+ */
+export function isTestDbUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  let hostname: string;
+  try {
+    hostname = new URL(url).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+  const label = hostname.split(".")[0];
+  return label === S1_TEST_DB_MARKER || label.startsWith(`${S1_TEST_DB_MARKER}-`);
+}
+
 function cleanHost(host: string | null | undefined): string {
   return (host ?? "").trim().toLowerCase().replace(/:\d+$/, "");
 }
@@ -27,7 +44,7 @@ export function deployContext(env?: Record<string, string | undefined>): string 
  *    DATABASE_URL without the test endpoint, S1_STRIPE_WEBHOOK_SECRET set,
  *    deploy context "production", and the raw host header ekuzo.gg or
  *    www.ekuzo.gg. Any miss: "off".
- *  - "test": key must start sk_test_ AND databaseUrl must contain the Neon
+ *  - "test": key must start sk_test_ AND databaseUrl's host must be the Neon
  *    test branch endpoint, else "off" (also when test is the unset default).
  *  - anything else: "off".
  */
@@ -51,14 +68,14 @@ export function resolveMode(input: {
       key.startsWith("sk_live_") &&
       (input.publishableKey ?? "").startsWith("pk_live_") &&
       db !== "" &&
-      !db.includes(S1_TEST_DB_MARKER) &&
+      !isTestDbUrl(db) &&
       (input.webhookSecret ?? "").trim() !== "" &&
       (input.context ?? "").trim() === "production" &&
       LIVE_HOSTS.includes(cleanHost(input.host));
     return ok ? "live" : "off";
   }
   if (requested === "test") {
-    return key.startsWith("sk_test_") && (input.databaseUrl ?? "").includes(S1_TEST_DB_MARKER)
+    return key.startsWith("sk_test_") && isTestDbUrl(input.databaseUrl)
       ? "test"
       : "off";
   }

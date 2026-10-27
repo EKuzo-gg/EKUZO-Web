@@ -32,19 +32,26 @@ describe("refcookie", () => {
     assert.match(h, /^s1_ref=x\.y; Path=\/; Max-Age=1209600; HttpOnly; Secure; SameSite=Lax$/);
     assert.match(refClearCookieHeader(), /Max-Age=0/);
   });
-  it("refSecret prefers S1_REF_SECRET, falls back, and throws when neither is set", () => {
-    const saved = { a: process.env.S1_REF_SECRET, b: process.env.S1_STRIPE_WEBHOOK_SECRET };
+  it("refSecret prefers S1_REF_SECRET, falls back (test key only), and throws when neither is set", () => {
+    const saved = { a: process.env.S1_REF_SECRET, b: process.env.S1_STRIPE_WEBHOOK_SECRET, k: process.env.STRIPE_SECRET_KEY };
     try {
+      process.env.STRIPE_SECRET_KEY = "sk_test_x";
       delete process.env.S1_REF_SECRET;
       delete process.env.S1_STRIPE_WEBHOOK_SECRET;
       assert.throws(() => refSecret());
       process.env.S1_STRIPE_WEBHOOK_SECRET = "fallback-secret-value";
       assert.equal(refSecret(), "fallback-secret-value");
+      // L4: a live Stripe key refuses the webhook-secret fallback.
+      process.env.STRIPE_SECRET_KEY = "sk_live_x";
+      assert.throws(() => refSecret(), /S1_REF_SECRET is required/);
       process.env.S1_REF_SECRET = "primary";
+      assert.equal(refSecret(), "primary");
+      process.env.STRIPE_SECRET_KEY = "sk_test_x";
       assert.equal(refSecret(), "primary");
     } finally {
       if (saved.a === undefined) delete process.env.S1_REF_SECRET; else process.env.S1_REF_SECRET = saved.a;
       if (saved.b === undefined) delete process.env.S1_STRIPE_WEBHOOK_SECRET; else process.env.S1_STRIPE_WEBHOOK_SECRET = saved.b;
+      if (saved.k === undefined) delete process.env.STRIPE_SECRET_KEY; else process.env.STRIPE_SECRET_KEY = saved.k;
     }
   });
 });
@@ -67,6 +74,15 @@ describe("ipBucket", () => {
     assert.equal(ipBucket("::1"), "0:0:0:0::/64");
     assert.equal(ipBucket("::ffff:203.0.113.9"), "203.0.113.9");
     assert.equal(ipBucket("fe80::1%eth0"), "fe80:0:0:0::/64");
+  });
+  it("M1: the commit limiter buckets IPv6 at /48; IPv4 and /64 callers are unchanged", () => {
+    assert.equal(ipBucket("2001:db8:1:2:aaaa::1", 48), "2001:db8:1::/48");
+    assert.equal(ipBucket("2001:db8:1:ffff::9", 48), ipBucket("2001:db8:1:2::1", 48));
+    assert.notEqual(ipBucket("2001:db8:1::1", 48), ipBucket("2001:db8:2::1", 48));
+    assert.equal(ipBucket("203.0.113.9", 48), "203.0.113.9");
+    assert.equal(ipBucket("::ffff:203.0.113.9", 48), "203.0.113.9");
+    assert.equal(ipBucket("garbage", 48), "noip");
+    assert.equal(ipBucket("2001:db8:1:2::1"), "2001:db8:1:2::/64");
   });
   it("missing or garbage input is noip", () => {
     for (const v of [undefined, null, "", "   ", "not-an-ip", "1:2:3", "1::2::3", "300.1.1.1x"]) {

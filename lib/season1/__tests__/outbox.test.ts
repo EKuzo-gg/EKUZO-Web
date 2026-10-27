@@ -233,9 +233,11 @@ describe("Discord messages", () => {
     assert.equal(/\d{7,}/.test(s.replace(/\b(48271937|48271938)\b/g, "").replace(/pi_\w+/g, "")), false, s);
     assert.equal(/ekuzo\.gg|gmail|555/i.test(s), false, s);
   };
-  it("commit message has names, ages, geo, amount, src, inviter, and no email, phone or @", () => {
+  it("commit message has kid names, ages, geo, amount, src, inviter, and no parent name, email, phone or @", () => {
     const m = formatCommit(order());
-    assert.match(m, /Pat/);
+    // Security review L6: the parent first name is not posted.
+    assert.equal(/Pat/.test(m), false, m);
+    assert.match(m, /^\[TEST\] Season 01 commit \| kids /);
     assert.match(m, /Ava \(11\), Ben \(9\)/);
     assert.match(m, /Austin, TX/);
     assert.match(m, /\$180/);
