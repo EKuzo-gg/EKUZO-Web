@@ -5,7 +5,7 @@ Re-read this file after any compaction or check-in. Lead updates it at every spa
 ## Clock (CT)
 - Started: 2026-10-26 21:56 (Jamie said go, then good night)
 - Slice targets: 1 by 01:00, 2 by 03:30, 3 by 05:00, 4 by 06:00, build stop 07:15, summary by 07:45
-- Next send_later check-in: 23:26 (trig_01DuRFHX75KEAEp14FqdQ8zm), then every 90 min
+- Next send_later check-in: 00:58 (trig_012Ux57UNf18ZWFLgMcfkKRw); 23:26 fired, on track (slice 1 built, E2E running)
 
 ## Where things live
 - Repo clone: /home/claude/ekuzo-web, branch season1-commit (pushed at 57aa70b)
