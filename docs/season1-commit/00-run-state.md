@@ -50,3 +50,4 @@ Atlas 3101, Chronos 3102, Relay 3103, Sentry 3104 and up. Start, test, stop by P
 | Atlas 2 | /crew/[code] page, invite remove API | app/crew/**, app/api/season1/invite/** | 3105 /home/claude/pids/atlas2.pid | running (22:23) |
 
 - 22:20 slice 2 contract frozen (02b). Lead to add /season1/crew* 301 to next.config.mjs after Atlas 1 returns, apply 0004 after Relay B's 0003.
+- 22:30: Atlas (f217a34) and Atlas 2 (2e16e14) committed. Chronos 2 committed (801763f). 0004 applied to Neon test by lead. /crew/<code> verified: friend code, signed HttpOnly cookie, private no-store, Referrer-Policy origin. Client paymentMethodTypes set to card only (Link bank tab). Waiting on Relay B (commit API, fulfil, webhook, 0003). Then: swap the fulfil stub, slice 2 wiring (commit reads s1_ref, fulfil writes referrals), branch deploy E2E.
