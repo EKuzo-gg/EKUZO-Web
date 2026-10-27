@@ -104,4 +104,21 @@ on `season1_status`, delta sheet review, brand red), Karlin (Google Voice number
 
 ## Git state at writing time
 
-GIT_EVIDENCE_PLACEHOLDER
+Captured 2026-10-27 01:51 CT, after the last push (origin/season1-commit = `54197db`).
+
+`git status --porcelain` (empty means clean):
+
+```
+(empty)
+```
+
+`git log --oneline -3`:
+
+```
+54197db docs(season1): smoke evidence, post-audit defect updates
+149a096 docs: WORKLOG entry for the Season 01 commit build
+2e7c779 docs(season1): review guide and return handoff (git evidence added at close); learning log: Netlify query on redirects
+```
+
+The commit that adds this block sits on top of these three, so `git log --oneline -4` shows it first.
+Not merged into `dev` or `main`.
