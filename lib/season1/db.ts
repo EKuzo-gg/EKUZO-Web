@@ -182,6 +182,8 @@ export interface PendingOrderInput {
   payerPhone?: string | null;
   /** RT20 raw client-supplied x-forwarded-for. */
   consentXff?: string | null;
+  /** Flags known at commit (AUD-A: age_edge). */
+  flags?: string[];
 }
 
 export async function insertPendingOrder(
@@ -197,13 +199,14 @@ export async function insertPendingOrder(
           `insert into s1_orders (id, public_id, family_id, payer_email, offer_id, offer_version, status,
                                   amount_cents, consent_version, consent_at, consent_ip, consent_ua,
                                   referral_code, src, livemode, attempt_id, payer_first_name, payer_phone,
-                                  consent_xff)
-           values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)`,
+                                  consent_xff, flags)
+           values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::text[])`,
           [
             orderId, publicId, o.familyId, o.payerEmail.trim().toLowerCase(), o.offerId, o.offerVersion,
             o.amountCents, o.consentVersion, o.consentAt.toISOString(), o.consentIp ?? null,
             o.consentUa ?? null, o.referralCode ?? null, o.src ?? null, o.livemode,
             o.attemptId ?? null, o.payerFirstName ?? null, o.payerPhone ?? null, o.consentXff ?? null,
+            o.flags ?? [],
           ],
         ),
         ...o.items.map((it) =>
@@ -757,6 +760,15 @@ export async function setPendingOrderReferralCode(orderId: string, code: string 
     [orderId, code],
   );
   return rows.length > 0;
+}
+
+/** Adds flags (deduplicated) to a family by id (AUD-2: dispute). */
+export async function addFamilyFlags(familyId: string, flags: string[]): Promise<void> {
+  if (flags.length === 0) return;
+  await q(`update s1_families set flags = array(select distinct unnest(flags || $2::text[])) where id = $1`, [
+    familyId,
+    flags,
+  ]);
 }
 
 /** Adds flags (deduplicated) to the family of the guardian with this email. */

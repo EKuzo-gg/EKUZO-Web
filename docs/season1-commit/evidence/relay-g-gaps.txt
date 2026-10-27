@@ -1,0 +1,33 @@
+Relay G (phase 5 gap closure). 2026-10-27T06:45:18Z. Neon test + Stripe test mode. No payment confirmed; commit PIs canceled.
+
+Code: validate.ts commitFlags(); commit route -> insertPendingOrder flags (AUD-A). webhook dispute -> addFamilyFlags (AUD-2). fulfil.ts fulfilWithPi exported (RT15/16 tests inject PI). signup.html applePay.recurringPaymentRequest (AUD-1 partial).
+Test: lib/season1/__tests__/gaps.integration.test.ts (S1_DB_TESTS=1; S1_BASE_URL=http://localhost:3103 sends the dispute over HTTP).
+
+--- gaps.integration.test.ts (in-process handler) ---
+    ok 1 - AUD-A: a kid aged 9 or 18 flags the pending order age_edge at commit; mid ages do not; fulfil keeps the flag
+    ok 2 - RT15: fulfil flags duplicate_kid for a same-name kid paid within 30 days; not for a different name or an older order
+    ok 3 - RT16: amount, currency, metadata.order_id or livemode disagreement claims nothing and flags pi_mismatch
+# \# evidence AUD-2 order 4q9zg77d8j pi pi_3UV25wKORcR8BUEx1og8AU4g charge ch_3UV25wKORcR8BUEx13y0uwtp event evt_test_dispute_64e6e9fed872 via handler
+    ok 4 - AUD-2 / M7: charge.dispute.created flags the order and the family and queues one ops_alert; replay is a no-op
+# tests 4
+# pass 4
+# fail 0
+
+--- AUD-2 over HTTP against next dev -p 3103 (S1_BASE_URL) ---
+# evidence AUD-2 order 4q9zg77d8j pi pi_3UV25wKORcR8BUEx1og8AU4g charge ch_3UV25wKORcR8BUEx13y0uwtp event evt_test_dispute_925f437a961a via http://localhost:3103
+ ok 1 - AUD-2 / M7 ... order flagged, family flagged, 1 ops_alert outbox row (payload alert=dispute), replay -> {duplicate:true}, no second row. Test removed its flags/outbox/event afterward.
+ server log: webhook.charge.dispute.created ok=true; POST 200 then POST 200 (duplicate)
+
+--- AUD-1 (Playwright, localhost:3103 signup) ---
+Payment Element mounted (iframe present), no page errors. applePayOpts() calls: create amount 16000 (1 kid); after Add sibling amount 28800 (16000 + 12800).
+recurringPaymentRequest: paymentDescription "EKUZO Season 01, monthly", managementURL origin+/season1/terms, regularBilling label "Season 01 monthly", start 2027-02-15T12:00-08:00, end 2027-04-15T12:00-08:00, month x1.
+Docs: Stripe docs confirm the Payment Element 'applePay' create option (merchant tokens). Exact recurringPaymentRequest field names follow the Stripe.js reference; not reachable via WebFetch here. Apple Pay needs HTTPS + registered domain: real-device check still Jamie's. Express Checkout button still deferred.
+
+--- AUD-B (Playwright) ---
+s1_order cookie (view token from issueViewToken on a paid test order, path /season1) -> /season1/join/welcome 200, "SEASON 01 SPOT SAVED"; localStorage ekuzo_s1_joined = "1".
+Then GET / (analytics hosts blocked): after 4.5 s popup #s1-title count 0, not visible.
+Control (fresh context, no flag): popup #s1-title count 2 (opens).
+
+--- checks ---
+tsc --noEmit: clean. TZ=UTC npm run test:s1: tests 163, pass 163, fail 0, skipped 0.
+Server on 3103 stopped; pid file removed.

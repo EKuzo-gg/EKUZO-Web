@@ -26,6 +26,11 @@ export function ageEdge(age: number): boolean {
   return age === OFFER.ageMin || age === OFFER.ageMax;
 }
 
+/** AUD-A (P4): flags known at commit. Any kid at the youngest or oldest accepted age flags the order. */
+export function commitFlags(kids: { ageEdge: boolean }[]): string[] {
+  return kids.some((k) => k.ageEdge) ? ["age_edge"] : [];
+}
+
 const fail = (field: string, error: string): ValidateResult => ({ ok: false, field, error });
 
 function cleanName(v: unknown): string | null {

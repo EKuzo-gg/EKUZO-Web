@@ -166,7 +166,7 @@ g('invRm').addEventListener('click',function(){
  try{fetch('/api/season1/invite/remove',{method:'POST',credentials:'same-origin'}).catch(function(){})}catch(_){}
  inviteRemoved=true;invite=null;renderInvite();upd();
 });
-var confirming=false,kids=g('kids'),n=0,busy=false,stripe=null,elements=null,peReady=false,secret=null,secretSig='';
+var confirming=false,kids=g('kids'),n=0,busy=false,stripe=null,elements=null,pe=null,peReady=false,secret=null,secretSig='';
 var attemptId='';
 if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
 try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
@@ -180,6 +180,9 @@ kidRow();
 g('addSib').onclick=function(){if(n<MAXK){kidRow();ga('season1_sibling_add');upd();}};
 function rows(){return [].slice.call(document.querySelectorAll('.kid'))}
 var overrideCents=null,lastKids=1;
+function monthlyCents(){var k=Math.max(rows().length,1);return P.monthly+P.siblingMonthly*(k-1)}
+/* AUD-1: Apple Pay recurring request (merchant token): $160 first kid + $128 each sibling, monthly Feb 15 to Apr 15 2027. */
+function applePayOpts(){return {recurringPaymentRequest:{paymentDescription:'EKUZO Season 01, monthly',managementURL:location.origin+'/season1/terms',regularBilling:{amount:monthlyCents(),label:'Season 01 monthly',recurringPaymentStartDate:new Date('2027-02-15T12:00:00-08:00'),recurringPaymentEndDate:new Date('2027-04-15T12:00:00-08:00'),recurringPaymentIntervalUnit:'month',recurringPaymentIntervalCount:1}}}}
 function totalCents(){if(overrideCents!==null)return overrideCents;var k=rows().length;return P.first+P.sibling*(k-1)}
 function upd(){
  var rs=rows(),outside=rs.some(function(r){return r.querySelector('.ag').value=='x'}),closed=!cfg.open;
@@ -200,6 +203,7 @@ function upd(){
  var first=rs[0].querySelector('.nm').value.trim();
  g('go').textContent='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
  if(elements){try{elements.update({amount:totalCents()})}catch(_){}}
+ if(pe){try{pe.update({applePay:applePayOpts()})}catch(_){}}
 }
 function initStripe(){
  if(!cfg.open)return;
@@ -210,7 +214,7 @@ function initStripe(){
    fonts:[{cssSrc:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'}],
    appearance:{theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#ffffff',colorText:'#050505',colorDanger:'#F92524',colorTextSecondary:'#6f6f6f',fontFamily:'Inter, Arial, Helvetica, sans-serif',fontSizeBase:'15px',borderRadius:'2px',spacingUnit:'4px'},
     rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}}});
-  var pe=elements.create('payment',{wallets:{applePay:'auto',googlePay:'auto'},paymentMethodOrder:['apple_pay','google_pay','card']});
+  pe=elements.create('payment',{wallets:{applePay:'auto',googlePay:'auto'},paymentMethodOrder:['apple_pay','google_pay','card'],applePay:applePayOpts()});
   pe.mount('#pe');
   pe.on('ready',function(){peReady=true});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});

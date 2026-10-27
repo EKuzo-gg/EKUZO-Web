@@ -267,7 +267,8 @@ async function runRefundedSteps(order: FulfilOrder, pi: Stripe.PaymentIntent, so
   logStep("fulfil.refunded_steps", order.publicId, true);
 }
 
-async function fulfilWithPi(pi: Stripe.PaymentIntent, source: "webhook" | "welcome"): Promise<FulfilResult> {
+/** Post-retrieve logic of fulfil (RT15, RT16); exported so tests can inject a PI object. */
+export async function fulfilWithPi(pi: Stripe.PaymentIntent, source: "webhook" | "welcome"): Promise<FulfilResult> {
   if (pi.metadata?.product !== "season1") return result(null, "not_season1");
   // RT10: a PI from the other Stripe mode is never written.
   if (pi.livemode !== keyIsLive()) return result(null, "mode_mismatch");

@@ -2,6 +2,7 @@ import type Stripe from "stripe";
 import { getStripe, keyIsLive } from "@/lib/season1/stripe";
 import { fulfil, OrphanPaidPiError } from "@/lib/season1/fulfil";
 import {
+  addFamilyFlags,
   addOrderFlags,
   enqueueOutbox,
   getEventProcessed,
@@ -201,6 +202,8 @@ async function handle(event: Stripe.Event, piId: string, full: boolean | undefin
       const o = await getOrderForFulfilByPi(piId);
       if (o) {
         await addOrderFlags(o.id, [event.type === "refund.failed" ? "refund_failed" : "dispute"]);
+        // AUD-2 / M7: a dispute flags the family too.
+        if (event.type === "charge.dispute.created") await addFamilyFlags(o.familyId, ["dispute"]);
         await enqueueOutbox(
           "ops_alert",
           `ops_alert:${event.type}:${event.id}`,

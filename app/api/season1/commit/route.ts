@@ -2,7 +2,7 @@ import type Stripe from "stripe";
 import { OFFER, isOpen, isJerseyEligible } from "@/lib/season1/offer";
 import { currentMode } from "@/lib/season1/mode";
 import { quote } from "@/lib/season1/pricing";
-import { validateCommit } from "@/lib/season1/validate";
+import { validateCommit, commitFlags } from "@/lib/season1/validate";
 import { hit } from "@/lib/season1/ratelimit";
 import { getStripe, assertKeyMatchesMode } from "@/lib/season1/stripe";
 import { ipBucket } from "@/lib/season1/referralFlags";
@@ -353,6 +353,7 @@ export async function POST(req: Request): Promise<Response> {
         src: input.src,
         referralCode: inv.code,
         livemode,
+        flags: commitFlags(input.kids),
         attemptId: attemptKey,
         payerFirstName: input.parentFirstName,
         payerPhone: input.phone,
