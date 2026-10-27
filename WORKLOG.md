@@ -5,6 +5,31 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude, Build Loop overnight), October 26 to 27, 2026 (Season 01 commit and invite)
+
+Branch `season1-commit` off `origin/dev` 57aa70b, pushed, never merged. Branch deploy:
+https://season1-commit--ekuzo.netlify.app (Stripe test mode, Neon test branch). Artifacts:
+`docs/season1-commit/` (start with `00-team-summary.md`, then `07-review-guide.md`).
+
+**What changed**
+- New pages: `/season1/join`, `/season1/join/signup` (Stripe Payment Element, deferred PaymentIntent,
+  saved card), `/season1/join/welcome`, `/season1/terms` (Draft), `/crew/<code>`, `/karlin`. Old
+  `/season1/early-access*` and `/season1/crew` move to the new paths with the query dropped.
+- New API: `/api/season1/commit`, `/api/season1/stripe-webhook` (own secret `S1_STRIPE_WEBHOOK_SECRET`),
+  `/api/season1/invite/remove`.
+- `lib/season1/*`: offer config, pricing, codes, validation, mode switch, Neon db layer, fulfil, referral,
+  outbox senders (Klaviyo, Meta CAPI, Discord), rules. `db/migrations/0001` to `0004` (applied to Neon test only).
+- Legacy `app/api/webhooks/stripe/route.ts`: a guard skips Season 01 PaymentIntents, unknown products and
+  PaymentIntents without `parent_email` (Teams installment invoices stop running as camps).
+- `scripts/s1-*.mjs` ops tools and `npm test` / `npm run test:s1` (node --test with a resolver hook; the
+  known `ekuzo101-weeks` failure is skipped with a reason).
+- `docs/architecture-decisions.md` and `CLAUDE.md`: Discord reversed for Season 01 commit alerts only.
+- `next.config.mjs`: `/karlin` redirect, `S1_DEPLOY_CONTEXT` inlined from `CONTEXT`.
+
+**Evidence:** `docs/season1-commit/04-evidence-ledger.md` (125 rows, 0 fail), deploy runs under
+`docs/season1-commit/evidence/`. Aaron: his pages beside ours are in the delta sheet (shared drive).
+
+---
 ## Jamie (via Claude, Build Loop), October 23, 2026 (Text Karlin alert: parent location and time zone)
 
 Spec: `EKUZO/Marketing/ads/2026-10-season-one/proposals/2026-10-23-text-karlin-location-spec.md`.
