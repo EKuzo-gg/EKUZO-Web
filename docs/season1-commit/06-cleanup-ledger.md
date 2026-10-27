@@ -64,6 +64,9 @@ Klaviyo calls should have failed on the empty email. Six succeeded PIs (run 1 ha
 | pi_3UV1h9KORcR8BUEx1MQ6WWn7 | 2026-10-26 23:09:07 | $100.00 | 1 |
 | pi_3UV1kaKORcR8BUEx0EUoMUdg | 2026-10-26 23:12:40 | $100.00 (refunded) | 2 |
 | pi_3UV1l6KORcR8BUEx163Ne8sJ | 2026-10-26 23:13:12 | $1.60 | 2 |
+| pi_3UV1u1KORcR8BUEx09uSBhMT | created 23:22:25, succeeded 23:22:33 CT (2026-10-27 04:22 UTC) | $100.00 | Sentry slice 1 branch-deploy browser run (one payment; email team+s1test-sentry-8rjois@ekuzo.gg) |
+
+Sentry also left two pending PaymentIntents (pi_3UV1tQKORcR8BUEx11S9qhAS decline test, pi_3UV1x8KORcR8BUEx1QE259xP failed 3DS), both canceled via the API. Neon test rows for team+s1test-sentry-* emails remain (test branch).
 
 Each also reached the S1 test endpoint we_1UUzlTKORcR8BUExui4NsZnU on the branch deploy, which writes to the
 same Neon test branch (idempotent; harmless).

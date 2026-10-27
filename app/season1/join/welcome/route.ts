@@ -9,13 +9,15 @@ import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
 // s1_order cookie), never from the URL. Stripe's redirect parameters are
-// removed by a 303. Served OUTSIDE app/layout.tsx, so no Meta pixel fires.
+// removed in the browser (see GET). Served OUTSIDE app/layout.tsx, so no Meta pixel fires.
 export const dynamic = "force-dynamic";
 
 const WELCOME_PATH = "/season1/join/welcome";
 const HEADERS = {
   "cache-control": "private, no-store",
   "x-robots-tag": "noindex",
+  // The Stripe return URL carries the client secret; never send it as a Referer.
+  "referrer-policy": "strict-origin",
 };
 
 function esc(s: unknown): string {
@@ -46,8 +48,8 @@ function cookieValue(request: Request, name: string): string | null {
 }
 
 /** order null = confirmed missing (no cookie, bad token, unknown order); error = the lookup threw. */
-async function loadOrder(request: Request): Promise<{ order: OrderView | null; error: boolean }> {
-  const token = cookieValue(request, "s1_order");
+async function loadOrder(request: Request, tokenOverride?: string | null): Promise<{ order: OrderView | null; error: boolean }> {
+  const token = tokenOverride ?? cookieValue(request, "s1_order");
   if (!token || !/^[A-Za-z0-9_-]{10,128}$/.test(token)) return { order: null, error: false };
   try {
     return { order: await orderByToken(token), error: false };
@@ -79,28 +81,24 @@ export async function GET(request: Request) {
 
   // Stripe return: fulfilFromReturn verifies the client secret against the
   // PaymentIntent, fulfils, and hands back a fresh view token for this order.
-  // Then the query is stripped with a 303.
+  // Netlify re-appends the query to a 303 Location (Sentry D1, a redirect loop), so
+  // the Stripe return is rendered directly and the query is removed in the browser
+  // with history.replaceState before GA loads (GA reads only origin + pathname).
   const pi = url.searchParams.get("payment_intent");
+  let returnToken: string | null = null;
   if (pi) {
     const secret = url.searchParams.get("payment_intent_client_secret");
-    const headers = new Headers({ ...HEADERS, location: WELCOME_PATH });
     if (secret) {
       try {
         const r = await fulfilFromReturn(pi, secret);
-        if (r.viewToken) {
-          headers.append(
-            "set-cookie",
-            `s1_order=${r.viewToken}; Path=/season1; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`,
-          );
-        }
+        if (r.viewToken) returnToken = r.viewToken;
       } catch {
         // The webhook or the next reload will finish the job.
       }
     }
-    return new Response(null, { status: 303, headers });
   }
 
-  const loaded = await loadOrder(request);
+  const loaded = await loadOrder(request, returnToken);
   let order = loaded.order;
   const dbError = loaded.error;
   // A pending order with a PaymentIntent may have succeeded already; let fulfil
@@ -108,7 +106,7 @@ export async function GET(request: Request) {
   if (order && order.status !== "paid" && order.paymentIntentId) {
     try {
       const r = await fulfil(order.paymentIntentId, "welcome");
-      if (r.status === "paid") order = (await loadOrder(request)).order ?? order;
+      if (r.status === "paid") order = (await loadOrder(request, returnToken)).order ?? order;
     } catch {
       // keep the pending view
     }
@@ -189,7 +187,20 @@ export async function GET(request: Request) {
   html = html.replace(/<!--\/?share-->/g, "");
   html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (_m, key: string) => vars[key] ?? "");
 
+  if (pi) {
+    html = html.replace(
+      "<head>",
+      `<head>\n<script>try{history.replaceState(null,"",${JSON.stringify(WELCOME_PATH)})}catch(e){}</script>`,
+    );
+  }
+
   const headers = new Headers({ "content-type": "text/html; charset=utf-8", ...HEADERS });
+  if (returnToken) {
+    headers.append(
+      "set-cookie",
+      `s1_order=${returnToken}; Path=/season1; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`,
+    );
+  }
   if (dbError) {
     headers.append("set-cookie", `s1_wtry=${tries}; Path=/season1; Max-Age=120; SameSite=Lax`);
   } else if (cookieValue(request, "s1_wtry")) {

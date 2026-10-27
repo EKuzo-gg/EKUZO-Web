@@ -1,0 +1,61 @@
+{
+ "J7": {
+  "outside": {
+   "payHidden": true,
+   "peVisible": false,
+   "oopsVisible": true,
+   "oopsText": "Not quite in range? Season 01 is for ages 10 to 17. Text Karlin and we'll figure it out. Text Karlin",
+   "textKarlinVisible": true,
+   "smsHref": "sms:+18324438679",
+   "goVisible": false
+  },
+  "age9": {
+   "payHidden": false,
+   "warnVisible": true,
+   "warnText": "Season 01 is built for ages 10 to 17. Karlin will check in to make sure it's a fit.",
+   "oopsVisible": false
+  },
+  "age18": {
+   "warnVisible": true
+  },
+  "urls": [
+   "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+  ],
+  "aborted": [
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  ],
+  "consoleErrors": []
+ },
+ "J6a": {
+  "before": {
+   "due": "Due today$100",
+   "btn": "Save their spot · $100"
+  },
+  "after": {
+   "due": "Due today$180",
+   "btn": "Save Zoë's spot · $180",
+   "lines": "Zoë, Season 01, first month | $160 $100 | Milo, Season 01, first month | $100 $80 | Founding jersey (first 100) | Free | Due today | $180"
+  },
+  "stripeAmountRequests": [
+   "18000"
+  ],
+  "stripeReqSample": [
+   "https://api.stripe.com/v1/elements/sessions?deferred_intent[mode]=payment&deferred_intent["
+  ],
+  "peIframeStill": 1,
+  "aborted": [
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  ],
+  "consoleErrors": []
+ },
+ "signupHtml": {
+  "hasSk": false,
+  "hasSkPrefix": false,
+  "hasPk": true,
+  "hasPkLive": false,
+  "noindex": true,
+  "hasFbq": false,
+  "len": 22632,
+  "hasGtag": true
+ }
+}

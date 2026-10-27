@@ -1,0 +1,26 @@
+{
+ "email": "team+s1test-sentry-3ds432ao@ekuzo.gg",
+ "challengeFrameSeen": true,
+ "challengeUrl": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_R3QwcEMxeFZiQzNlWiE0aG0w",
+ "iframeEls": 0,
+ "failFrame": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_R3Qw",
+ "failClicked": true,
+ "ePay": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
+ "formErr": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
+ "url": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+ "btn": "Save Ines's spot · $100",
+ "btnDisabled": false,
+ "aborted": [
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+ ],
+ "urls": [
+  "https://season1-commit--ekuzo.netlify.app/season1/join/signup"
+ ],
+ "consoleErrors": [
+  "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been",
+  "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been",
+  "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been",
+  "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been",
+  "Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been"
+ ]
+}

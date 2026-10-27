@@ -1,0 +1,109 @@
+{
+ "email": "team+s1test-sentry-8rjois@ekuzo.gg",
+ "steps": {
+  "karlinFinalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin",
+  "karlinRedirectHops": "redirected",
+  "dbgAfterClick": "Saving",
+  "declineMsg": "Your card has been declined.",
+  "declineFormErr": "Your card has been declined.",
+  "btnDisabledAfterDecline": false,
+  "btnTextAfterDecline": "Save Zoë's spot · $100",
+  "commitPostsAfterDecline": 1
+ },
+ "error": "Error: page.waitForURL: net::ERR_TOO_MANY_REDIRECTS\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+ "urlHistory": [
+  "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin",
+  "chrome-error://chromewebdata/"
+ ],
+ "allNavRequests": [
+  "https://season1-commit--ekuzo.netlify.app/karlin",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin",
+  "https://api.stripe.com/v1/elements/sessions?deferred_intent[mode]=payment&deferred_intent[amount]=10000&deferred_intent[currency]=usd&deferred_intent[payment_method_types][0]=card&deferred_intent[setup_future_usage]=off_session&currency=usd&key=pk_test_51Lfq2aKORcR8BUExpFOAR5apkmcNUEyvxunKTky6rEmJ4LtlpoYZCAvkSVOO4MxA9rde7dga5NVMIJ9Q69rR9XQ000sTPnzAxP&elements_init_source=stripe.elements&referrer_host=season1-commit--ekuzo.netlify.app&stripe_js_id=52a0e971-8243-4a0e-853c-44152c5fff4e&locale=en-US&browser_timezone=America%2FChicago&type=deferred_intent",
+  "https://season1-commit--ekuzo.netlify.app/api/season1/commit",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded",
+  "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UV1u1KORcR8BUEx09uSBhMT&payment_intent_client_secret=<redacted>&redirect_status=succeeded"
+ ],
+ "aborted": [
+  "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+ ],
+ "consoleProblems": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "warning",
+   "text": "Origin trial controlled feature not enabled: 'tools'.",
+   "loc": "https://js.stripe.com/v3/",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "warning",
+   "text": "Origin trial controlled feature not enabled: 'tools'.",
+   "loc": "https://js.stripe.com/v3/",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "warning",
+   "text": "[Stripe.js] You have not registered or verified the domain, so the following payment methods are not enabled in the Payment Element: \n\n- apple_pay\n\nPlease follow https://stripe.com/docs/payments/payment-methods/pmd-registration to register and verify the domain.",
+   "loc": "https://js.stripe.com/v3/fingerprinted/js/controller-with-preconnect-e-4048a91a0fdb728886fd69bf3692979f.js",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "warning",
+   "text": "Origin trial controlled feature not enabled: 'tools'.",
+   "loc": "https://js.stripe.com/v3/",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED",
+   "loc": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "warning",
+   "text": "Origin trial controlled feature not enabled: 'tools'.",
+   "loc": "https://js.stripe.com/v3/",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  },
+  {
+   "type": "error",
+   "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+   "loc": "https://api.stripe.com/v1/payment_intents/pi_3UV1u1KORcR8BUEx09uSBhMT/confirm",
+   "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin"
+  }
+ ]
+}
