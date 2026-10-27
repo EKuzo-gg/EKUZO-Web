@@ -39,8 +39,8 @@ export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" 
   const lockIn = lockInDate();
   const sibPct = Math.round((1 - OFFER.siblingMonthlyCents / OFFER.monthlyCents) * 100);
   const closedBlock =
-    `<p style="margin-top:16px;font-size:15px;font-weight:700">Signups are paused. Text Karlin.</p>` +
-    `<a class="btn black" style="margin-top:12px" href="sms:${esc(sms)}">Text Karlin</a>` +
+    `<p style="margin-top:16px;font-size:15px;font-weight:700">Signups are paused. Text our founder.</p>` +
+    `<a class="btn black" style="margin-top:12px" href="sms:${esc(sms)}">Text our founder</a>` +
     `<a class="btn ghost" style="margin-top:12px" href="/season1">Join the waitlist</a>`;
 
   const vars: Record<string, string> = {

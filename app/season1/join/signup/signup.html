@@ -155,14 +155,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <div id="inv" class="inv" hidden><p id="invTxt"></p><button type="button" id="invRm">Remove (no friend credit for either family)</button></div>
 <div id="kids"></div>
 <button type="button" class="btn ghost" id="addSib" style="margin-top:20px">+ Add a sibling (20% off)</button>
-<p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text Karlin</b></a></p>
+<p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text our founder</b></a></p>
 <div id="oops" class="oops" hidden>
 <p style="font-size:15px;font-weight:700">Not quite in range?</p>
-<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 10 to 17. Text Karlin and we'll figure it out.</p>
-<a class="btn black smsLink" style="margin-top:12px" href="#">Text Karlin</a></div>
+<p class="small" style="margin-top:4px;color:rgba(0,0,0,.7)">Season 01 is for ages 10 to 17. Text our founder and we'll figure it out.</p>
+<a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a></div>
 <div id="closed" class="oops" hidden>
-<p style="font-size:15px;font-weight:700">Signups are paused. Text Karlin.</p>
-<a class="btn black smsLink" style="margin-top:12px" href="#">Text Karlin</a></div>
+<p style="font-size:15px;font-weight:700">Signups are paused. Text our founder.</p>
+<a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a></div>
 <div id="pay">
 <div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
 <div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
@@ -175,7 +175,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <p id="inviteNote" class="note" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
-<p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink tk" href="#">Text Karlin</a></p>
+<p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink tk" href="#">Text our founder</a></p>
 <p class="small" style="text-align:center;margin-top:16px">Secure payment by Stripe</p></div>
 </form>
 <div id="liveErr" class="hp" aria-live="polite" role="status"></div>
@@ -213,7 +213,7 @@ try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17,18];
 function kidRow(){n++;var i=seq++,d=document.createElement('div');d.className='kid';
  var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
- d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Karlin will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 10 to 17.</b> Pick another age, or text Karlin and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text Karlin</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button></div></div>';
+ d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'" placeholder="'+(n==1?'Charlie':'First name')+'"></div><div><label class="l" for="ag'+i+'">Age (10 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 10 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 10 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button></div></div>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);
  d.querySelectorAll('.krm,.krm2').forEach(function(b){b.addEventListener('click',function(){removeKid(d)})});}
 function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
@@ -252,7 +252,7 @@ function upd(){
 }
 function initStripe(){
  if(!cfg.open)return;
- if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text Karlin.';return}
+ if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
  try{
   stripe=Stripe(cfg.publishableKey);
   elements=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',paymentMethodTypes:['card'],
@@ -263,7 +263,7 @@ function initStripe(){
   pe.mount('#pe');
   pe.on('ready',function(){peReady=true});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
- }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text Karlin.'}
+ }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.'}
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
@@ -306,25 +306,25 @@ function serverErr(status,j){
   }else{
    fe.appendChild(document.createTextNode('Please '));
   }
-  var a=document.createElement('a');a.href=sms;a.textContent='Text Karlin';
-  if(e==='text_karlin'){a.textContent='text Karlin';fe.appendChild(a);fe.appendChild(document.createTextNode(' to finish signing up.'))}
+  var a=document.createElement('a');a.href=sms;a.textContent='Text our founder';
+  if(e==='text_karlin'){a.textContent='text our founder';fe.appendChild(a);fe.appendChild(document.createTextNode(' to finish signing up.'))}
   else{fe.appendChild(a);fe.appendChild(document.createTextNode('.'))}
   return}
- if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text Karlin.');return}
- if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text Karlin.');return}
+ if(status===409||e==='closed'){g('closed').hidden=false;g('pay').hidden=true;announce('Signups are paused. Text our founder.');return}
+ if(status===429||e==='rate_limited'){announce('Too many tries. Wait a few minutes or text our founder.');return}
  var km=/^kids\.(\d+)\.(firstName|age)$/.exec(f);
- if(km){var r=rows()[+km[1]];if(r){if(km[2]==='age'){m='Season 01 is built for ages 10 to 17. Text Karlin and we\u0027ll figure it out.';setErr(r.querySelector('.e-ag'),r.querySelector('.ag'),m)}else{m='Add your kid\u0027s first name.';setErr(r.querySelector('.e-nm'),r.querySelector('.nm'),m)}announce(m);return}}
+ if(km){var r=rows()[+km[1]];if(r){if(km[2]==='age'){m='Season 01 is built for ages 10 to 17. Text our founder and we\u0027ll figure it out.';setErr(r.querySelector('.e-ag'),r.querySelector('.ag'),m)}else{m='Add your kid\u0027s first name.';setErr(r.querySelector('.e-nm'),r.querySelector('.nm'),m)}announce(m);return}}
  if(f==='email'){m='Check your email address.';setErr(g('e-email'),g('email'),m);announce(m);return}
  if(f==='parentFirstName'){m='Add your first name.';setErr(g('e-pname'),g('pname'),m);announce(m);return}
  if(f==='phone'){m='Check your mobile number or leave it blank.';setErr(g('e-mob'),g('mob'),m);announce(m);return}
  if(f==='consent'){m='Check the terms box to continue.';setErr(g('e-terms'),g('terms'),m);announce(m);return}
- if(e==='too_many_kids'){announce('Season 01 takes up to four kids per order. Text Karlin to add more.');return}
- announce('Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');
+ if(e==='too_many_kids'){announce('Season 01 takes up to four kids per order. Text our founder to add more.');return}
+ announce('Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');
 }
 g('f').addEventListener('submit',async function(ev){
  ev.preventDefault();if(busy)return;clearErrs();
  var body=collect();if(!body)return;
- if(!stripe||!elements){announce('The payment form did not load. Reload the page or text Karlin.');return}
+ if(!stripe||!elements){announce('The payment form did not load. Reload the page or text our founder.');return}
  setBusy(true);confirming=false;ga('season1_pay_submit');
  try{
   var sub=await elements.submit();
@@ -347,7 +347,7 @@ g('f').addEventListener('submit',async function(ev){
   confirming=true;
   var r=await stripe.confirmPayment({elements:elements,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
   if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';g('e-pay').textContent=msg;announce(msg);setBusy(false)}
- }catch(err){announce(confirming?'We could not confirm your payment. Text Karlin before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text Karlin.');setBusy(false)}
+ }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');setBusy(false)}
 });
 renderInvite();upd();ga('season1_signup_view');
 // Stripe.js is deferred (end of body): init when it has loaded, or show the fallback if it failed.

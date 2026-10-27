@@ -5,6 +5,14 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 ("Text our founder")
+
+- Every visible "Text Karlin" / "text Karlin" in the Season 01 funnel (season page, signup incl. error
+  messages, welcome, invite, the closed-state block in `joinPage.ts`) now says "Text our founder".
+  "Karlin will check in" is now "Our founder will check in". Coach names and the `text_karlin` API
+  error code are unchanged.
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 season page redesign, branch `season1-commit`)
 
 `/season1/join` rebuilt as a real landing page with the camps page's energy (Aaron's review: desktop

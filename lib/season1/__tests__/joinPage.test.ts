@@ -40,7 +40,7 @@ describe("renderJoin", () => {
       [new Date("2026-12-31T23:59:59-08:00"), "test"],
     ] as const) {
       const h = renderJoin(tpl, { now, mode, src: "karlin" });
-      assert.ok(h.includes("Signups are paused. Text Karlin."));
+      assert.ok(h.includes("Signups are paused. Text our founder."));
       assert.ok(h.includes('href="/season1">Join the waitlist'));
       assert.ok(!h.includes("/season1/join/signup"));
       assert.ok(!h.includes("Season 01 is open"));
