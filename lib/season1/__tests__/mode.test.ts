@@ -2,8 +2,8 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { resolveMode } from "../mode";
 
-const TEST_DB = "postgres://u:p@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/db";
-const PROD_DB = "postgres://u:p@ep-other-prod-123456.us-east-2.aws.neon.tech/db";
+const TEST_DB = "postgres://ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/db";
+const PROD_DB = "postgres://ep-other-prod-123456.us-east-2.aws.neon.tech/db";
 
 describe("resolveMode", () => {
   it("unset + sk_test -> test", () => {
