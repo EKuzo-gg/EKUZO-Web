@@ -13,7 +13,7 @@
 
 ## Aaron (via Claude), October 28, 2026 (signup cleanup)
 
-- **Signup:** "About a minute." removed. Less space above Your kid. The summary now reads "First month" with the struck $160 kept beside $100. With siblings, each line is "{name}, first month" with that kid's price. The jersey and Due today lines are unchanged.
+- **Signup:** headline is now "Season 01 sign up", so it's clear what's being bought. "About a minute." removed. Less space above Your kid. The summary now reads "First month" with the struck $160 kept beside $100. With siblings, each line is "{name}, first month" with that kid's price. The jersey and Due today lines are unchanged.
 - 169 tests pass, tsc clean, QA unchanged.
 
 ## Aaron (via Claude), October 28, 2026 (confirmation page + receipt copy)
