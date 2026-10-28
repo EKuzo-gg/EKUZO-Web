@@ -5,7 +5,7 @@ import { currentMode } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
 import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { resolveCode } from "@/lib/season1/referral";
-import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
+import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 
 // Season 01 commit sign-up, /season1/join/signup. Adapted from
 // /season1/early-access/signup. HTML lives beside this file (literal path,
@@ -94,7 +94,7 @@ export async function GET(request: Request) {
       "cache-control": "private, no-store",
       "x-robots-tag": "noindex",
       "referrer-policy": "origin",
-      ...SECURITY_HEADERS,
+      ...pageSecurityHeaders(mode),
     },
   });
 }

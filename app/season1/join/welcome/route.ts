@@ -6,7 +6,7 @@ import { display } from "@/lib/season1/codes";
 import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
 import { drainOutbox } from "@/lib/season1/outbox";
-import { SECURITY_HEADERS, shareOrigin } from "@/lib/season1/httpGuard";
+import { SECURITY_HEADERS, pageSecurityHeaders, shareOrigin } from "@/lib/season1/httpGuard";
 
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
@@ -211,7 +211,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const headers = new Headers({ "content-type": "text/html; charset=utf-8", ...HEADERS });
+  const headers = new Headers({ "content-type": "text/html; charset=utf-8", ...HEADERS, ...pageSecurityHeaders(mode) });
   if (returnToken) {
     headers.append(
       "set-cookie",

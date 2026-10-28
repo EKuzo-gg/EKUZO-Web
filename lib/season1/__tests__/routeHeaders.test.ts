@@ -15,8 +15,8 @@ const logged: string[] = [];
 const get = (path: string, headers: Record<string, string> = {}) =>
   new Request(`http://localhost:3103${path}`, { headers: { host: "localhost:3103", ...headers } });
 
-function assertSecurityHeaders(r: Response, what: string) {
-  assert.equal(r.headers.get("x-frame-options"), "DENY", what);
+function assertSecurityHeaders(r: Response, what: string, frame = "DENY") {
+  assert.equal(r.headers.get("x-frame-options"), frame, what);
   assert.equal(r.headers.get("x-content-type-options"), "nosniff", what);
 }
 
@@ -42,19 +42,21 @@ describe("Season 01 route headers (no DB)", () => {
     }
   });
 
-  it("L7: join, signup, welcome, terms and crew send X-Frame-Options DENY and nosniff", async () => {
+  // These run in test mode: the four funnel pages send SAMEORIGIN there (dev phone
+  // preview, see pageSecurityHeaders); live keeps DENY (devView.test.ts). Terms stays DENY.
+  it("L7: join, signup, welcome and crew send SAMEORIGIN in test mode, terms DENY, all nosniff", async () => {
     const join = await import("../../../app/season1/join/route");
     const signup = await import("../../../app/season1/join/signup/route");
     const welcome = await import("../../../app/season1/join/welcome/route");
     const terms = await import("../../../app/season1/terms/route");
     const crew = await import("../../../app/crew/[code]/route");
-    assertSecurityHeaders(join.GET(get("/season1/join")), "join");
-    assertSecurityHeaders(await signup.GET(get("/season1/join/signup")), "signup");
-    assertSecurityHeaders(await welcome.GET(get("/season1/join/welcome")), "welcome");
+    assertSecurityHeaders(join.GET(get("/season1/join")), "join", "SAMEORIGIN");
+    assertSecurityHeaders(await signup.GET(get("/season1/join/signup")), "signup", "SAMEORIGIN");
+    assertSecurityHeaders(await welcome.GET(get("/season1/join/welcome")), "welcome", "SAMEORIGIN");
     assertSecurityHeaders(terms.GET(get("/season1/terms")), "terms");
     const c = await crew.GET(get("/crew/48271937"), { params: Promise.resolve({ code: "48271937" }) });
     assert.equal(c.status, 200);
-    assertSecurityHeaders(c, "crew");
+    assertSecurityHeaders(c, "crew", "SAMEORIGIN");
   });
 
   it("/season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query", async () => {

@@ -5,7 +5,7 @@ import { OFFER, formatDatePT } from "@/lib/season1/offer";
 import { currentMode } from "@/lib/season1/mode";
 import { resolveCode } from "@/lib/season1/referral";
 import { refSecret, signRef, refSetCookieHeader } from "@/lib/season1/refcookie";
-import { SECURITY_HEADERS } from "@/lib/season1/httpGuard";
+import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 import { errCode, logStep } from "@/lib/season1/rules";
 
 // Season 01 friend page, /crew/<code>. The link a family shares after committing.
@@ -85,11 +85,12 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
     resolved = null;
   }
 
+  const mode = currentMode(req.headers.get("host"));
   const tpl = fs.readFileSync(TEMPLATE_PATH, "utf8");
   const named = !!(resolved && resolved.named && resolved.displayName);
   const html = renderHtml(tpl, named, named ? resolved!.displayName : null, resolved ? resolved.code : null, {
     jersey: Date.now() < Date.parse(OFFER.jerseyCutoffAt),
-    test: currentMode(req.headers.get("host")) === "test",
+    test: mode === "test",
     inactive,
   });
 
@@ -98,7 +99,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
     "cache-control": "private, no-store",
     "x-robots-tag": "noindex",
     "referrer-policy": "origin",
-    ...SECURITY_HEADERS,
+    ...pageSecurityHeaders(mode),
   });
   if (resolved) {
     try {

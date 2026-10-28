@@ -9,6 +9,16 @@ export const SECURITY_HEADERS = {
   "x-content-type-options": "nosniff",
 } as const;
 
+/**
+ * L7 for the four funnel pages (join, signup, welcome, crew). Live and off keep DENY.
+ * Test mode only relaxes to SAMEORIGIN so the dev phone preview (/season1/dev-view)
+ * can frame our own pages; other sites still cannot. Approved by Aaron 2026-10-28,
+ * flagged for Jamie in WORKLOG. The commit API always keeps SECURITY_HEADERS.
+ */
+export function pageSecurityHeaders(mode: string): Record<string, string> {
+  return mode === "test" ? { ...SECURITY_HEADERS, "x-frame-options": "SAMEORIGIN" } : { ...SECURITY_HEADERS };
+}
+
 function cleanHost(host: string | null | undefined): string {
   return (host ?? "").trim().toLowerCase();
 }

@@ -9,7 +9,8 @@
 
 - **Dev previews:** the yellow test-mode bar on join, signup, welcome and crew now has a Phone / Desktop switch (`public/js/s1-devview.js`). Phone opens `/season1/dev-view?u=<page>`, which shows the page in a 390px frame. You can click through the whole flow inside it, including a test payment. Desktop returns to whatever page the frame is on.
 - `/season1/dev-view` returns 404 unless Season 01 is in test mode, so it never exists on the live site. It only frames same-site paths (`lib/season1/devView.ts`, with tests).
-- 167 tests pass, tsc clean.
+- **@Jamie, security header change (your L7), approved by Aaron:** in **test mode only**, join, signup, welcome and crew now send `X-Frame-Options: SAMEORIGIN` instead of `DENY`, so the phone preview can frame our own pages. Other sites still can't frame them. Live and off still send DENY. The commit API, invite/remove and terms are unchanged. This is `pageSecurityHeaders(mode)` in `lib/season1/httpGuard.ts`; `SECURITY_HEADERS` itself is untouched. routeHeaders.test now expects SAMEORIGIN in test mode, and devView.test checks that live keeps DENY. Revert by switching those four routes back to `...SECURITY_HEADERS`.
+- 169 tests pass, tsc clean.
 
 ## Aaron (via Claude), October 28, 2026 (season page polish)
 
