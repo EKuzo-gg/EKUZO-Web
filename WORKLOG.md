@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (full QA + go-live handoff)
+
+- **QA:** 169 tests pass, tsc clean. 14 states at 6 widths show no layout issues. 0 axe violations at 390 and 1440. On the live dev deploy, routes return 200 with the right framing headers, Stripe Elements loads, and there are no console errors. eslint reports 9 `no-explicit-any` errors, all in 4 older test files.
+- **Polish from the critique:** the crew friends block is now one column (the right column used to hold a stray paragraph). The signup `<title>` is "Season 01 sign up". Signup and welcome now use `text-wrap: pretty` on body text.
+- **Go-live blocker found:** Klaviyo has no flow on the "Season 01 Committed" metric, so paying families would get no receipt. Template VkbuB3 is ready to attach.
+- **Handoff for Jamie:** https://claude.ai/artifact/NZbbZQ3LPBerRqqxoqHQUs (blockers, four decisions, go-live steps, QA results).
+
 ## Aaron (via Claude), October 28, 2026 (friend invite headline, signup headline color)
 
 - **Friend invite (/crew/<code>):** the headline is now "Join Maya's team." ("Join a friend's team." when there's no name). Intro: "Welcome to EKUZO Season 01. A competitive esports league for kids ages 9 to 17. Sign up below to join the team."
