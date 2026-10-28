@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (friend invite headline, signup headline color)
+
+- **Friend invite (/crew/<code>):** the headline is now "Join Maya's team." ("Join a friend's team." when there's no name). Intro: "Welcome to EKUZO Season 01. A competitive esports league for kids ages 9 to 17. Sign up below to join the team."
+- **Signup:** "Season 01" in the headline is violet.
+- 169 tests pass, QA unchanged.
+
 ## Aaron (via Claude), October 28, 2026 (confirmation page layout)
 
 - **Confirmation page:** on desktop the share card and receipt sit side by side with the same top and height. What happens next runs full width below them (a 5-step row on desktop, a list on phones). The discount table moved to the bottom on a purple band titled "How this discount works", matching the receipt email, on all sizes.
