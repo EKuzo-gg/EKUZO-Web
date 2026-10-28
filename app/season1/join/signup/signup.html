@@ -15,7 +15,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
 <style>
-:root{--red:#F92524;--black:#050505;--ink:#333;--muted:#6f6f6f;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
+:root{--red:#F92524;--black:#050505;--ink:#333;--muted:#595959;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
 *{box-sizing:border-box}
 html,body{margin:0;background:#d9d7d4;color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
@@ -251,7 +251,7 @@ function upd(){
   });
  if(overrideCents!==null&&lastKids!==rs.length)overrideCents=null;
  lastKids=rs.length;
- rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+esc(nm)+', Season 01, first month</span><span>'+(i?'<s style="color:rgba(0,0,0,.4)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.4)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});
+ rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+esc(nm)+', Season 01, first month</span><span>'+(i?'<s style="color:rgba(0,0,0,.62)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.62)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});
  if(cfg.jerseyOpen)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Founding jersey (first 100)</span><span>Free</span></div>';
  h+='<div class="line due" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Due today</span><span>'+money(totalCents())+'</span></div>';
  if(invite)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Feb 15: $0 with '+(invite.name?esc(invite.name)+'\u0027s family':'a friend\u0027s family')+' credit, applied at lock-in.</span></div>';

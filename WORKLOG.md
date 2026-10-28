@@ -12,7 +12,7 @@
 - Free jersey sticker tilts clockwise on phones too (3deg; 4deg on desktop).
 - Friend ladder: last label is "4 friends"; refund note moved under the chart. Invite page friends
   section cut to one line per column.
-- QA re-run: 0 layout issues, 0 axe violations.
+- QA re-run: 0 layout issues, 0 axe violations (with the brush gone, axe could measure the purple hero and signup summary: welcome hero lines now full white, signup strikethrough and muted text darkened).
 
 ---
 ## Aaron (via Claude), October 27, 2026 (no brush texture)
