@@ -12,6 +12,7 @@
 - **Stat cards:** now notched top-left and bottom-right like the coach cards. Hover lifts the card and tilts its icon, the same motion as camps.
 - **Coach cards:** hover zooms the photo inside its frame, like camps. Nuri's photo is re-cropped so her face sits at the same height as the others.
 - "2x a week" stays together on phones (no lone "WEEK"). Reduced motion turns all of this off.
+- **Confirmation page (/season1/join/welcome):** the black card is only the share now: "Share and save!", one line, the button and the link. The price table moved below it under "What {kid}'s season costs". The receipt email draft (Klaviyo VkbuB3) got the same change.
 - 164 tests pass, tsc clean, QA unchanged.
 
 ## Aaron (via Claude), October 28, 2026 (receipt email fonts, Miro refresh)

@@ -46,7 +46,8 @@ p{margin:0}
 .dots{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;font-weight:500;font-size:14px}
 .dots li{display:flex;gap:8px}
 .dots li:before{content:"";width:8px;height:8px;background:var(--red);margin-top:6px;flex-shrink:0}
-.rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:16px}
+.save{margin-top:28px}
+.rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:10px}
 .rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid rgba(0,0,0,.15)}
 .rows div:first-child{border-top:0}
 .rows div:last-child{background:var(--stone)}
@@ -150,13 +151,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <div class="px wbody">
 <div class="wgrid"><div class="wleft">
 <!--share--><div class="share notch">
-<h2 class="d" style="font-size:34px">Share with a friend<br>and save!</h2>
+<h2 class="d" style="font-size:44px">Share and save!</h2>
 <p style="font-size:14px;margin-top:12px;line-height:1.45">Every friend who joins with {{KID1}}'s link gets a free month. So does {{KID1}}.</p>
-<div class="rows"><div><span>On your own</span><b>Your season: {{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
 <button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
 <p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p>
 <p style="font-size:12px;margin-top:4px;line-height:1.45;text-align:center;color:#fff">Anyone with this link sees {{KID1}}'s first name.</p></div>
-<!--/share-->{{NO_SHARE}}</div><div class="wright">
+<div class="save"><p class="ey">What {{KID1}}'s season costs</p>
+<div class="rows"><div><span>On your own</span><b>{{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div></div>
+<!--/share-->
+{{NO_SHARE}}</div><div class="wright">
 <div class="offer notch" style="margin-top:28px">
 <p class="ey">Your receipt</p>
 <div style="margin-top:12px">{{RECEIPT_LINES}}
