@@ -5,6 +5,11 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (signup cleanup)
+
+- **Signup:** "About a minute." removed. Less space above Your kid. The summary now reads "First month $100" with no strikethrough. With siblings, each line is "{name}, first month" with that kid's price. The jersey and Due today lines are unchanged.
+- 169 tests pass, tsc clean, QA unchanged.
+
 ## Aaron (via Claude), October 28, 2026 (confirmation page + receipt copy)
 
 - **Confirmation page:** "Great, Alex's in!" is now one line on phones (no forced break; the h1 scales to 40px at narrow widths). Long names and siblings still wrap. Share copy is now "Each friend who joins with your link gets a free month, and so do you." The "Anyone with this link sees..." line is removed.
