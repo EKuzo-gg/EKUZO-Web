@@ -166,8 +166,8 @@ export async function GET(request: Request) {
     vars.KID1 = esc(names[0]);
     vars.HERO =
       names.length === 1
-        ? `Great,<br>${esc(names[0])}'s in!`
-        : `Great,<br>${esc(joinNames(names))} are in!`;
+        ? `Great, ${esc(names[0])}'s in!`
+        : `Great, ${esc(joinNames(names))} are in!`;
     vars.RECEIPT_LINES = order.kids
       .map((k) => `<div class="line"><span>${esc(k.firstName)}, Season 01, first month</span><span>${money(k.unitCents)}</span></div>`)
       .join("");
