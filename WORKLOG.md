@@ -5,6 +5,15 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (season page polish)
+
+- **Tungsten spacing:** the big stat values, prices and chart prices had no letter-spacing. They now use the brand 0.02em, with 0.03em on the largest numbers (stats, $100 price, chart). Applies to join, crew, signup and welcome. Every Tungsten line on those pages now has spacing set.
+- **Friends chart:** the Arena character avatars are replaced with a simple player-with-headset icon (`s1-player-you.svg` in violet for your kid, `s1-player-friend.svg` in lime for each friend).
+- **Stat cards:** now notched top-left and bottom-right like the coach cards. Hover lifts the card and tilts its icon, the same motion as camps.
+- **Coach cards:** hover zooms the photo inside its frame, like camps. Nuri's photo is re-cropped so her face sits at the same height as the others.
+- "2x a week" stays together on phones (no lone "WEEK"). Reduced motion turns all of this off.
+- 164 tests pass, tsc clean, QA unchanged.
+
 ## Aaron (via Claude), October 28, 2026 (receipt email fonts, Miro refresh)
 
 - **Receipt email draft (Klaviyo VkbuB3, unattached):** headlines confirmed on Oswald Bold, the brand's Tungsten fallback for email. Added a `<link>` load alongside `@import` so more mail apps pick it up. Gmail strips web fonts, so there it falls to Impact. Hero bumped to 52px (44px on phones). "Share with a friend and save" no longer leaves "save" alone on a line. Live flow emails untouched.
