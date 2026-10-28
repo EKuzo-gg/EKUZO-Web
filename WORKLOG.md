@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (receipt email fonts, Miro refresh)
+
+- **Receipt email draft (Klaviyo VkbuB3, unattached):** headlines confirmed on Oswald Bold, the brand's Tungsten fallback for email. Added a `<link>` load alongside `@import` so more mail apps pick it up. Gmail strips web fonts, so there it falls to Impact. Hero bumped to 52px (44px on phones). "Share with a friend and save" no longer leaves "save" alone on a line. Live flow emails untouched.
+- **Miro (Season 01 Sign-up Funnel board):** the "current screens (Oct 28)" frame now holds fresh screenshots of all six states. Old screenshots removed, and a START HERE banner added above it. No other frames changed.
+- Temporary `public/review/s1-funnel/` images used for the Miro import were added and removed again on this branch.
+
 ## Aaron (via Claude), October 27, 2026 (eyebrows out, sticker tilt, impeccable critique fixes)
 
 - Removed the outlined eyebrow labels (season page, invite, welcome) and the signup "Season 01 is open"
