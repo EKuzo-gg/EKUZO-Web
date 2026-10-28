@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (phone / desktop preview switch)
+
+- **Dev previews:** the yellow test-mode bar on join, signup, welcome and crew now has a Phone / Desktop switch (`public/js/s1-devview.js`). Phone opens `/season1/dev-view?u=<page>`, which shows the page in a 390px frame. You can click through the whole flow inside it, including a test payment. Desktop returns to whatever page the frame is on.
+- `/season1/dev-view` returns 404 unless Season 01 is in test mode, so it never exists on the live site. It only frames same-site paths (`lib/season1/devView.ts`, with tests).
+- 167 tests pass, tsc clean.
+
 ## Aaron (via Claude), October 28, 2026 (season page polish)
 
 - **Tungsten spacing:** the big stat values, prices and chart prices had no letter-spacing. They now use the brand 0.02em, with 0.03em on the largest numbers (stats, $100 price, chart). Applies to join, crew, signup and welcome. Every Tungsten line on those pages now has spacing set.

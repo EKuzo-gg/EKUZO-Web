@@ -260,5 +260,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <!--IF:open--><aside class="stick" id="stick" aria-label="Sign up"><div class="wrap"><p>Sign up for Season 01<small>{{FIRST}} first month</small></p><a class="btn" href="{{SIGNUP}}">Save their spot</a></div></aside>
 <script>(function(){var b=document.getElementById('stick'),o=document.querySelector('.offer');if(!b||!o||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){b.classList.toggle('on',!e[0].isIntersecting&&e[0].boundingClientRect.top<0)}).observe(o)})()</script><!--/IF:open-->
 <script>try{gtag('event','season1_join_view')}catch(e){}</script>
+<script src="/js/s1-devview.js" defer></script>
 </body>
 </html>

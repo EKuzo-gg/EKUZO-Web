@@ -202,7 +202,7 @@ function g(id){return document.getElementById(id)}
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function money(c){var x=c/100;return '$'+(x%1?x.toFixed(2):x.toFixed(0))}
 function ga(n,p){try{gtag('event',n,p||{})}catch(_){}}
-if(cfg.mode==='test')g('testBar').hidden=false;
+if(cfg.mode==='test'){g('testBar').hidden=false;window.s1DevView&&s1DevView();}
 g('consentText').innerHTML='I agree to the <a href="'+esc(cfg.termsUrl||'/terms-of-service#season-01')+'" target="_blank" rel="noopener"><u>Terms of Service</u></a> and <a href="'+esc(cfg.privacyUrl||'/privacy-policy#season-01')+'" target="_blank" rel="noopener"><u>Privacy Policy</u></a>.';
 var invite=(cfg.invite&&typeof cfg.invite==='object')?{name:(typeof cfg.invite.name==='string'&&cfg.invite.name)?cfg.invite.name:null}:null,inviteRemoved=false;
 var IGNORED_MSG='This invite can\u0027t be used for this email, so no friend credit will be recorded.';
@@ -366,5 +366,6 @@ if(window.Stripe)initStripe();else{var sj=g('stripe-js');sj.addEventListener('lo
 })();
 </script>
 </div>
+<script src="/js/s1-devview.js" defer></script>
 </body>
 </html>
