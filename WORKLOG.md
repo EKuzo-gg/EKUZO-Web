@@ -5,6 +5,16 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (eyebrows out, sticker tilt, impeccable critique fixes)
+
+- Removed the outlined eyebrow labels (season page, invite, welcome) and the signup "Season 01 is open"
+  label: labels above headlines are an Impeccable ban; EKUZO's only exception is the red skewed chip.
+- Free jersey sticker tilts clockwise on phones too (3deg; 4deg on desktop).
+- Friend ladder: last label is "4 friends"; refund note moved under the chart. Invite page friends
+  section cut to one line per column.
+- QA re-run: 0 layout issues, 0 axe violations.
+
+---
 ## Aaron (via Claude), October 27, 2026 (no brush texture)
 
 - Removed the black brush texture from the purple grounds (season page, invite, signup, welcome) and

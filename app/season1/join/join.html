@@ -41,13 +41,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .nav .logo img{height:20px;width:auto}
 .nav .mini{background:var(--lime);color:var(--black);font:700 14px var(--body);padding:12px 16px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 .hero-in{position:relative;z-index:4;text-align:center;padding-block:12px 0}
-.chip{display:inline-block;background:transparent;color:var(--white);box-shadow:inset 0 0 0 2px var(--white);font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;transform:skewX(-12deg)}
-.chip span{display:inline-block;transform:skewX(12deg)}
-.h1{font-size:clamp(52px,8.6vw,124px);margin-top:18px}
+.h1{font-size:clamp(52px,8.6vw,124px);margin-top:8px}
 .h1 em{font-style:normal;color:var(--black)}
 .offer{position:relative;background:var(--white);color:var(--black);text-align:left;margin:0 auto;max-width:440px;padding:36px 24px 24px;clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
 .offer-wrap{position:relative;max-width:440px;margin:40px auto 0}
-.sticker{position:relative;z-index:5;margin:0 auto -12px;width:max-content;max-width:100%;transform:rotate(-2deg);background:var(--black);color:#fff;padding:12px 18px;text-align:center;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:10px;row-gap:2px}
+.sticker{position:relative;z-index:5;margin:0 auto -12px;width:max-content;max-width:100%;transform:rotate(3deg);background:var(--black);color:#fff;padding:12px 18px;text-align:center;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:10px;row-gap:2px}
 .sticker b{color:var(--lime);font:900 30px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
 .sticker small{font:700 15px/1.25 var(--body)}
 .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -160,7 +158,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .chars .left{max-width:none;flex-shrink:initial}
  .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(420px,38vw,580px);width:auto;margin:0}
  .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:40px;height:clamp(340px,30vw,470px);width:auto}
- .sticker{position:absolute;margin:0;right:-60px;top:-34px;transform:rotate(3deg);flex-wrap:nowrap;white-space:nowrap;max-width:none}
+ .sticker{position:absolute;margin:0;right:-60px;top:-34px;transform:rotate(4deg);flex-wrap:nowrap;white-space:nowrap;max-width:none}
  .offer{padding-top:44px}
  .offer-wrap,.offer{max-width:460px}
  .offer-wrap{margin-top:84px}
@@ -182,7 +180,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <header class="hero">
 <div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Save their spot</a><!--/IF:open--></nav></div>
 <div class="hero-in wrap">
-<p class="chip"><span>Season 01</span></p>
 <h1 class="d h1">A coach. A team.<br><em>A season to play for.</em></h1>
 <div class="offer-wrap">
 <!--IF:open--><!--IF:jersey--><p class="sticker"><b>Free jersey</b> <small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
@@ -209,13 +206,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="wrap pad two">
 <div><h2 class="d h2">Games are better<br><em class="c-violet">with friends.</em></h2>
 <p class="lead">Every friend who joins with your link gets a free month. So does your kid.</p>
-<p class="ladder-note">You get your link right after you save a spot.</p></div>
+<p class="ladder-note">Four friends and we refund your {{FIRST}}. You get your link right after you save a spot.</p></div>
 <ol class="ladder" aria-label="Your season price by friends who join">
 <li style="--h:{{LH0}}%"><span class="faces"></span><span class="bar">{{LADDER0}}</span><span class="who">On your own</span></li>
 <li style="--h:{{LH1}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""></span><span class="bar">{{LADDER1}}</span><span class="who">1 friend</span></li>
 <li style="--h:{{LH2}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""></span><span class="bar">{{LADDER2}}</span><span class="who">2 friends</span></li>
 <li style="--h:{{LH3}}%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""></span><span class="bar">{{LADDER3}}</span><span class="who">3 friends</span></li>
-<li style="--h:12%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""><img src="/images/avatars/brickbuddy104.webp" alt=""></span><span class="bar">Free</span><span class="who">4 friends. We refund your {{FIRST}}.</span></li>
+<li style="--h:12%"><span class="faces"><img src="/images/avatars/sparkpopstar.webp" alt=""><img src="/images/avatars/zapspray1.webp" alt=""><img src="/images/avatars/glitchrunner33.webp" alt=""><img src="/images/avatars/brickbuddy104.webp" alt=""></span><span class="bar">Free</span><span class="who">4 friends</span></li>
 </ol></div></section>
 <section class="band offwhite"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad">

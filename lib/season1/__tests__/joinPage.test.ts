@@ -60,7 +60,7 @@ describe("renderJoin", () => {
     for (const [pct, price] of [["100", "$580"], ["76", "$420"], ["51", "$260"], ["27", "$100"]]) {
       assert.ok(h.includes(`--h:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
     }
-    assert.ok(h.includes("4 friends. We refund your $100."));
+    assert.ok(h.includes("Four friends and we refund your $100."));
     assert.ok(h.includes("ages 9 to 17"));
   });
 });
