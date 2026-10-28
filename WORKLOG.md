@@ -5,6 +5,13 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 27, 2026 (no brush texture)
+
+- Removed the black brush texture from the purple grounds (season page, invite, signup, welcome) and
+  deleted `public/images/season1/s1-brush.webp`: the low-res source read as a rendering mistake.
+  Email header art regenerated without it (`public/images/season1/email/header-crew@2x.jpg`).
+
+---
 ## Aaron (via Claude), October 27, 2026 (Season 01 funnel QA + one look across all four screens)
 
 QA run: 14 screen states (season page open / after jersey cutoff / closed; signup open / invite / closed;
