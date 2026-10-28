@@ -58,7 +58,7 @@ describe("renderJoin", () => {
   it("ladder and ages come from config", () => {
     const h = renderJoin(tpl, { now: OPEN, mode: "test", src: null });
     for (const [pct, price] of [["100", "$580"], ["76", "$420"], ["51", "$260"], ["27", "$100"]]) {
-      assert.ok(h.includes(`--h:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
+      assert.ok(h.includes(`--w:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
     }
     assert.ok(h.includes("Four friends and we refund your $100."));
     assert.ok(h.includes("ages 9 to 17"));

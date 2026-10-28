@@ -5,6 +5,14 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (season page: jersey, chart, safe, sticky)
+
+- **Free jersey on phones:** a flat black strip that caps the offer card, carrying its notch. No more tilted sticker overlapping the card. Desktop keeps the tilted sticker. Same change on crew.
+- **Friends chart:** now horizontal bars on one shared left edge: label, then a bar sized to the season price. The player icons are gone. "Free" is a short red bar with the word beside it. Bars grow in when scrolled into view; reduced motion skips that. The test now checks `--w:` widths.
+- **Safe by design:** no background panel, and the headline is a full section h2 like the others (join and crew).
+- **Sticky bar (join):** "Lock in for $100" with a "Save their spot" button. Crew keeps "Join Maya's team".
+- 169 tests pass, tsc clean, QA unchanged (0 axe violations).
+
 ## Aaron (via Claude), October 28, 2026 (phone / desktop preview switch)
 
 - **Dev previews:** the yellow test-mode bar on join, signup, welcome and crew now has a Phone / Desktop switch (`public/js/s1-devview.js`). Phone opens `/season1/dev-view?u=<page>`, which shows the page in a 390px frame. You can click through the whole flow inside it, including a test payment. Desktop returns to whatever page the frame is on.
