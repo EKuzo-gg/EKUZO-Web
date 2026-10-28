@@ -197,11 +197,12 @@ export async function GET(request: Request) {
     } else {
       // Paid, but fulfil has not minted the family code yet: receipt without the share block.
       html = html.replace(/<!--share-->[\s\S]*?<!--\/share-->/, "");
+      html = html.replace(/<!--save-->[\s\S]*?<!--\/save-->/, "");
       vars.NO_SHARE = '<p class="body" style="margin-top:24px;text-align:center">Your share link is on its way.</p>';
     }
   }
 
-  html = html.replace(/<!--\/?share-->/g, "");
+  html = html.replace(/<!--\/?(?:share|save)-->/g, "");
   html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (_m, key: string) => vars[key] ?? "");
 
   if (pi) {

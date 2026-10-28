@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), October 28, 2026 (confirmation page layout)
+
+- **Confirmation page:** on desktop the share card and receipt sit side by side with the same top and height. What happens next runs full width below them (a 5-step row on desktop, a list on phones). The discount table moved to the bottom on a purple band titled "How this discount works", matching the receipt email, on all sizes.
+- The band has its own `<!--save-->` markers. `welcome/route.ts` removes it along with the share card when the order has no family code yet.
+- 169 tests pass, tsc clean, QA unchanged.
+
 ## Aaron (via Claude), October 28, 2026 (signup cleanup)
 
 - **Signup:** "About a minute." removed. Less space above Your kid. The summary now reads "First month $100" with no strikethrough. With siblings, each line is "{name}, first month" with that kid's price. The jersey and Due today lines are unchanged.

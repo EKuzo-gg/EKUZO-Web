@@ -46,7 +46,10 @@ p{margin:0}
 .dots{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;font-weight:500;font-size:14px}
 .dots li{display:flex;gap:8px}
 .dots li:before{content:"";width:8px;height:8px;background:var(--red);margin-top:6px;flex-shrink:0}
-.save{margin-top:28px}
+.saveband{background:var(--violet);color:#fff;margin-top:48px;padding:44px var(--gut) 48px}
+.sbin{max-width:560px;margin-inline:auto}
+.saveband .d{font-size:36px;color:#fff}
+.saveband .rows{margin-top:16px;border-color:var(--black)}
 .rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:10px}
 .rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid rgba(0,0,0,.15)}
 .rows div:first-child{border-top:0}
@@ -120,9 +123,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 @media (min-width:960px){
  .whero{padding:28px 0 72px}
  .wbody{max-width:var(--page);margin-inline:auto;padding-inline:var(--gut)!important}
- .wgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:start}
+ .wgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:stretch}
+ .wleft,.wright{display:flex;flex-direction:column}
+ .wleft .share,.wright .offer{flex:1}
+ .next{padding-top:56px!important}
+ .next .tlg{grid-template-columns:repeat(5,1fr);gap:24px!important;border-top:3px solid var(--black);padding-top:16px}
+ .next .tlg>div{flex-direction:column;gap:4px!important}
+ .saveband{margin-top:72px;padding-block:64px 72px}
+ .saveband .d{font-size:48px}
  .share{padding:40px;margin-top:-40px}
- .wright .offer{margin-top:0!important;padding:28px}
+ .wright .offer{margin-top:-40px!important;padding:40px;position:relative}
  .wbody>.btn,.wbody>.body{max-width:560px}
 }
 /* S1-FLOW: welcome matches the season page and signup (violet hero, black share card, neon green buttons) */
@@ -152,11 +162,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <div class="wgrid"><div class="wleft">
 <!--share--><div class="share notch">
 <h2 class="d" style="font-size:44px">Share and save!</h2>
-<p style="font-size:14px;margin-top:12px;line-height:1.45">Each friend who joins with your link gets a free month, and so do you.</p>
+<p style="font-size:14px;margin-top:12px;line-height:1.45;text-wrap:balance">Each friend who joins with your link gets a free month, and so do&nbsp;you.</p>
 <button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
 <p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p></div>
-<div class="save"><p class="ey">What {{KID1}}'s season costs</p>
-<div class="rows"><div><span>On your own</span><b>{{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div></div>
 <!--/share-->
 {{NO_SHARE}}</div><div class="wright">
 <div class="offer notch" style="margin-top:28px">
@@ -166,19 +174,24 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <p class="small" style="margin-top:12px;color:rgba(0,0,0,.75)">{{THEN_LINE}}</p>
 {{CREDIT_NOTE}}
 <p class="small" style="margin-top:8px">Order {{ORDER_REF}}</p></div>
-<div class="sec" style="padding-top:32px"><h2 class="d" style="font-size:22px">What happens next</h2>
-<div style="margin-top:12px;font-size:14px;display:grid;gap:8px;color:rgba(0,0,0,.8)">
+</div></div>
+<div class="sec next" style="padding-top:40px"><h2 class="d" style="font-size:22px">What happens next</h2>
+<div class="tlg" style="margin-top:12px;font-size:14px;display:grid;gap:8px;color:rgba(0,0,0,.8)">
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Nov</b><span>Gamer profile, jersey and gear check</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Dec</b><span>Meet the team and coach</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May</b><span>Final tournament</span></div></div></div>
-</div></div>
 <div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
 <label class="l" style="margin-top:12px">Games they play now</label>
 <div class="chips"><button>Fortnite</button><button>Roblox</button><button>Minecraft</button><button>League of Legends</button><button>Rocket League</button><button>Other</button></div>
 <label class="l" style="margin-top:16px">Nights that never work</label>
 <div class="chips"><button>Mon</button><button>Tue</button><button>Wed</button><button>Thu</button><button>Fri</button></div></div>
+</div>
+<!--save--><section class="saveband"><div class="sbin"><h2 class="d">How this discount works</h2>
+<div class="rows"><div><span>On your own</span><b>{{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
+</div></section><!--/save-->
+<div class="px wbody">
 <p class="small" style="text-align:center;margin:28px 0 40px">Questions? <a href="{{SMS}}"><b>Text our founder</b></a></p></div>
 <div class="toast" id="toast"></div>
 <div id="s1p" hidden data-id="{{ORDER_REF}}" data-value="{{GA_VALUE}}" data-kids="{{GA_KIDS}}" data-code="{{GA_HAS_CODE}}"></div>
