@@ -79,6 +79,8 @@ export async function GET(request: Request) {
     textKarlinSms: OFFER.textKarlinSms,
     termsUrl: OFFER.termsUrl,
     privacyUrl: OFFER.privacyUrl,
+    seasonLabel: OFFER.seasonLabel,
+    firstMonthLabel: OFFER.firstMonthLabel,
     src,
     ...(invite ? { invite } : {}),
   };

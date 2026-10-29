@@ -30,6 +30,7 @@ import {
 } from "@/lib/season1/db";
 import { cleanAttemptId, errCode, globalCeilingAlertKey, kidsSignature, keyHash, logStep, viewTokenCookie } from "@/lib/season1/rules";
 import { SECURITY_HEADERS, isCrossSite, isJsonContentType } from "@/lib/season1/httpGuard";
+import { ServerTiming, runTimed, timed } from "@/lib/season1/serverTiming";
 
 /**
  * POST /api/season1/commit (frozen spec "Commit API" + RT3 to RT7, RT9, RT10,
@@ -160,7 +161,23 @@ async function resolveAttempt(
   throw new Error("attempt_chain_too_long");
 }
 
+/** Module scope survives between requests on a warm function instance. */
+let servedOnThisInstance = false;
+
+/**
+ * Canary 10-29: a parent waited about 5 s on "Saving". Every response carries
+ * Server-Timing (db, the first db round trip, stripe, total; counts only, no
+ * PII) so the wait can be split between a Neon wake, Stripe and a cold start.
+ */
 export async function POST(req: Request): Promise<Response> {
+  const st = new ServerTiming(!servedOnThisInstance);
+  servedOnThisInstance = true;
+  const res = await runTimed(st, () => handle(req));
+  res.headers.set("server-timing", st.header());
+  return res;
+}
+
+async function handle(req: Request): Promise<Response> {
   // L1: no cross-site posts; the body must be declared JSON (a cross-site
   // text/plain form post would otherwise skip the CORS preflight).
   if (isCrossSite(req)) {
@@ -264,7 +281,8 @@ export async function POST(req: Request): Promise<Response> {
       ref = existing.publicId;
       const same = existing.amountCents === q.totalCents && kidsSignature(existing.kids) === sig;
       if (same && existing.paymentIntentId) {
-        const pi = await stripe.paymentIntents.retrieve(existing.paymentIntentId);
+        const piId = existing.paymentIntentId;
+        const pi = await timed("stripe", () => stripe.paymentIntents.retrieve(piId));
         if (REUSABLE_PI.has(pi.status) && pi.client_secret) {
           // Slice 2: the invite is re-evaluated on every call; the amount never depends on it.
           if (existing.referralCode !== inv.code) await setPendingOrderReferralCode(existing.orderId, inv.code);
@@ -286,9 +304,10 @@ export async function POST(req: Request): Promise<Response> {
         continue;
       }
       // Changed (or its PI is gone): cancel the old PI (errors ignored) and the order.
-      if (existing.paymentIntentId) {
+      const oldPiId = existing.paymentIntentId;
+      if (oldPiId) {
         try {
-          await stripe.paymentIntents.cancel(existing.paymentIntentId);
+          await timed("stripe", () => stripe.paymentIntents.cancel(oldPiId));
         } catch (e) {
           logStep("commit.cancel_old_pi", ref, false, errCode(e));
         }
@@ -374,9 +393,11 @@ export async function POST(req: Request): Promise<Response> {
     // RT6: one Season 01 Customer per family, never a search or a legacy Customer.
     let customerId = await getFamilyCustomerId(fam.familyId);
     if (!customerId) {
-      const c = await stripe.customers.create(
-        { email: input.email, metadata: { product: "season1", family_public_id: fam.familyPublicId } },
-        { idempotencyKey: `s1-cust:${fam.familyId}` },
+      const c = await timed("stripe", () =>
+        stripe.customers.create(
+          { email: input.email, metadata: { product: "season1", family_public_id: fam.familyPublicId } },
+          { idempotencyKey: `s1-cust:${fam.familyId}` },
+        ),
       );
       customerId = await setFamilyCustomerId(fam.familyId, c.id);
     }
@@ -399,7 +420,7 @@ export async function POST(req: Request): Promise<Response> {
         livemode: livemode ? "true" : "false",
       },
     };
-    const pi = await stripe.paymentIntents.create(params, { idempotencyKey: `s1-pi:${order.publicId}` });
+    const pi = await timed("stripe", () => stripe.paymentIntents.create(params, { idempotencyKey: `s1-pi:${order.publicId}` }));
     const piCreatedAt = new Date(pi.created * 1000);
     // jersey_eligible here is provisional; fulfil recomputes it (RT8).
     await setOrderPaymentIntent(order.orderId, pi.id, piCreatedAt, isJerseyEligible(pi.created));

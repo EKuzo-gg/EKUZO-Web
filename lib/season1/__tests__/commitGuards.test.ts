@@ -172,6 +172,27 @@ describe("commit route guards (no DB)", { skip: isOpen(new Date()) ? false : "co
     assert.equal(sent.some((x) => /insert into s1_(families|guardians|kids|orders)/.test(x.query)), false);
   });
 
+  it("canary 10-29: every response carries Server-Timing with db round trips counted and no PII", async () => {
+    responder = (query, params) => {
+      if (query.includes("insert into s1_rate_limits")) {
+        return { fields: ["count"], rows: [[String(params[0]).startsWith("s1pi:global:") ? 1001 : 1]] };
+      }
+      if (query.includes("insert into s1_outbox")) return { fields: ["id"], rows: [] };
+      if (query.includes("count(distinct oi.kid_id)")) return { fields: ["n"], rows: [[0]] };
+      return { fields: ["x"], rows: [] };
+    };
+    const r = await call({ ...valid(), email: "timing.parent@example.com", parentFirstName: "Timing" });
+    assert.equal(r.status, 429);
+    const h = r.headers.get("server-timing") ?? "";
+    assert.match(h, /^db;dur=\d+\.\d;desc="(\d+) queries", dbfirst;dur=\d+\.\d, stripe;dur=0\.0;desc="0 calls", app;dur=\d+\.\d/);
+    assert.equal(Number(/desc="(\d+) queries"/.exec(h)?.[1]), sent.length, "one db entry per Neon round trip");
+    assert.ok(sent.length >= 3);
+    assert.doesNotMatch(h, /timing\.parent|example\.com|Timing|Ava|198\.51/);
+    const bad = await call("nope");
+    assert.equal(bad.status, 422);
+    assert.match(bad.headers.get("server-timing") ?? "", /db;dur=0\.0;desc="0 queries"/);
+  });
+
   it("M1: an ops_alert enqueue failure still returns 429 (never 500)", async () => {
     responder = (query, params) => {
       if (query.includes("insert into s1_rate_limits")) {

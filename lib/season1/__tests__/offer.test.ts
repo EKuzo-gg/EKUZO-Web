@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { OFFER, isOpen, isJerseyEligible, lockInDate, formatDatePT } from "../offer";
+import { OFFER, isOpen, isJerseyEligible, lockInDate, formatDatePT, seasonLine } from "../offer";
 
 const ms = (iso: string) => Date.parse(iso);
 
@@ -71,5 +71,15 @@ describe("lockInDate / formatDatePT", () => {
     assert.equal(formatDatePT("2026-11-30T23:59:59-08:00"), "November 30, 2026");
     // 05:00 UTC Jan 1 is still Dec 31 in Pacific
     assert.equal(formatDatePT("2027-01-01T05:00:00Z"), "December 31, 2026");
+  });
+});
+
+describe("seasonLine (canary 10-29)", () => {
+  it("states the season dates and what today's payment covers", () => {
+    assert.equal(seasonLine(OFFER.firstKidCents), "Season 01 runs mid January to May 6, 2027. Your $100 covers January.");
+    assert.equal(seasonLine(18000), "Season 01 runs mid January to May 6, 2027. Your $180 covers January.");
+  });
+  it("has no em or en dashes", () => {
+    assert.doesNotMatch(seasonLine(10000), /[\u2013\u2014]/);
   });
 });

@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
-import { neon } from "@neondatabase/serverless";
+import { neon, neonConfig } from "@neondatabase/serverless";
 import { customAlphabet } from "nanoid";
 import { deployContext, isTestDbUrl } from "./mode";
 import { hashViewToken, newViewToken } from "./rules";
+import { timed } from "./serverTiming";
 
 /**
  * Season 01 database layer. Neon HTTP driver, parameterized queries only.
@@ -37,6 +38,10 @@ export function getSql(): Sql {
   if (!isTestDbUrl(url) && deployContext() !== "production") {
     throw new Error("Refusing: DATABASE_URL is not the Season 01 test database");
   }
+  // Server-Timing (serverTiming.ts): every Neon HTTP round trip counts as "db"
+  // inside a timed request; a pass-through everywhere else. globalThis.fetch is
+  // read per call so test stubs still apply.
+  neonConfig.fetchFunction = (input: RequestInfo | URL, init?: RequestInit) => timed("db", () => globalThis.fetch(input, init));
   _sql = neon(url, { fetchOptions });
   return _sql;
 }

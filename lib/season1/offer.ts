@@ -31,6 +31,10 @@ export const OFFER = {
   termsVersion: "s1-terms-2026-10-29",
   termsUrl: "/terms-of-service#season-01",
   privacyUrl: "/privacy-policy#season-01",
+  /** Season dates for copy (decision 2, 10-29): first practice the week of Jan 18, last practice May 6. */
+  seasonLabel: "mid January to May 6, 2027",
+  /** The month the commitment payment covers. */
+  firstMonthLabel: "January",
 } as const;
 
 /** Accepts a Date, ISO string, or epoch number (seconds if < 1e12, else ms). */
@@ -70,4 +74,15 @@ export function formatDatePT(iso: string | Date): string {
     month: "long",
     day: "numeric",
   }).format(d);
+}
+
+/**
+ * Canary 10-29 ("nowhere on that flow does it say it's for the whole
+ * season"): one factual line near the price, e.g. "Season 01 runs mid January
+ * to May 6, 2027. Your $100 covers January." `paidCents` is what this order
+ * pays today (the first kid's price on the join page).
+ */
+export function seasonLine(paidCents: number): string {
+  const usd = `$${paidCents % 100 === 0 ? paidCents / 100 : (paidCents / 100).toFixed(2)}`;
+  return `Season 01 runs ${OFFER.seasonLabel}. Your ${usd} covers ${OFFER.firstMonthLabel}.`;
 }

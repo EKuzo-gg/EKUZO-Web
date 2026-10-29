@@ -201,6 +201,8 @@ p,li,.small{text-wrap:pretty}
 <script>
 (function(){
 try{localStorage.setItem('ekuzo_s1_joined','1')}catch(_){}
+// Paid: the sign-up form draft (signup.html, canary 10-29) is no longer needed.
+try{sessionStorage.removeItem('s1_signup_form')}catch(_){}
 // GA purchase: once per order per browser.
 var p=document.getElementById('s1p');
 if(p){var id=p.getAttribute('data-id'),k='s1_purchase_'+id,seen=false;

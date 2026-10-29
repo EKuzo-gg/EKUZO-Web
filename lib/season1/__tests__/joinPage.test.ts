@@ -13,7 +13,7 @@ describe("renderJoin", () => {
     assert.ok(h.includes("Season 01 is open"));
     assert.ok(!h.includes("Spots are limited."), "the jersey line is the urgency line before the cutoff");
     assert.ok(h.includes("until Nov 30"));
-    assert.ok(h.includes("Then about $20 a practice."));
+    assert.ok(h.includes("Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice."));
     assert.ok(h.includes("Test mode. No real charges."));
     assert.ok(h.includes("<b>Free jersey</b> <small>First 100 families"));
     assert.ok(h.includes('href="/season1/join/signup"'));

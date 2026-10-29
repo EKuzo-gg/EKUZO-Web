@@ -94,6 +94,15 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 [hidden]{display:none!important}
 .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 #pe{min-height:44px}
+/* Canary 10-29: wallet buttons (Express Checkout Element) above the card form; collapsed until a wallet is available */
+.xpw{height:0;overflow:hidden}
+.xpw.on{height:auto;overflow:visible;margin-top:20px}
+.orpay{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted)}
+.orpay:before,.orpay:after{content:"";flex:1;height:1px;background:rgba(0,0,0,.15)}
+.spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s1spin .7s linear infinite}
+@keyframes s1spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+.btn.busy[disabled]{opacity:1;cursor:progress}
 .inv{background:var(--stone);padding:12px 14px;margin-top:20px}
 .inv p{font-size:14px;font-weight:700;line-height:1.35;color:var(--black)}
 .inv button{display:inline-block;margin-top:0;padding:10px 0;min-height:44px;background:none;border:0;font:600 12px/1.4 var(--body);color:rgba(0,0,0,.65);text-decoration:underline;cursor:pointer;text-align:left}
@@ -180,11 +189,12 @@ p,li,.small{text-wrap:pretty}
 <div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
 <div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
 <div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-required="true" aria-describedby="e-email"><p class="err" id="e-email"></p></div>
-<div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
 <div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20" aria-describedby="e-mob"><p class="err" id="e-mob"></p></div>
 <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
-<label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
+<label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" autocomplete="off" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
 <p class="err" id="e-terms"></p>
+<div class="xpw" id="xpWrap"><div id="xp"></div><p class="err" id="e-xp" role="alert"></p><p class="orpay">Or pay with card</p></div>
+<div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
 <p id="inviteNote" class="note" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
@@ -219,7 +229,7 @@ g('invRm').addEventListener('click',function(){
  try{fetch('/api/season1/invite/remove',{method:'POST',credentials:'same-origin'}).catch(function(){})}catch(_){}
  inviteRemoved=true;invite=null;renderInvite();upd();
 });
-var confirming=false,kids=g('kids'),n=0,seq=0,busy=false,stripe=null,elements=null,pe=null,peReady=false,secret=null,secretSig='';
+var confirming=false,kids=g('kids'),n=0,seq=0,busy=false,stripe=null,elements=null,pe=null,peReady=false,secret=null,secretSig='',xp=null;
 var attemptId='';
 if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
 try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
@@ -229,10 +239,10 @@ function kidRow(){n++;var i=seq++,d=document.createElement('div');d.className='k
  d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (9 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 9 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 9 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);
  d.querySelectorAll('.krm,.krm2').forEach(function(b){b.addEventListener('click',function(){removeKid(d)})});}
-function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
+function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();saveForm();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
 function ageChanged(d){var v=d.querySelector('.ag').value;d.querySelector('.warn').hidden=v!='18';d.querySelector('.xnote').hidden=v!='x';if(v=='x')ga('season1_age_outside');upd()}
 kidRow();
-g('addSib').onclick=function(){if(n<MAXK){kidRow();ga('season1_sibling_add');upd();}};
+g('addSib').onclick=function(){if(n<MAXK){kidRow();ga('season1_sibling_add');upd();saveForm();}};
 function rows(){return [].slice.call(document.querySelectorAll('.kid'))}
 var overrideCents=null,lastKids=1;
 function monthlyCents(){var k=Math.max(rows().length,1);return P.monthly+P.siblingMonthly*(k-1)}
@@ -256,13 +266,35 @@ function upd(){
  rs.forEach(function(r,i){var nm=r.querySelector('.nm').value.trim()||(i?'Sibling':'Your kid');h+='<div class="line"><span>'+(rs.length>1?esc(nm)+', first month':'First month')+'</span><span>'+(i?'<s style="color:rgba(0,0,0,.62)">'+money(P.first)+'</s> '+money(P.sibling):'<s style="color:rgba(0,0,0,.62)">'+money(P.monthly)+'</s> '+money(P.first))+'</span></div>'});
  if(cfg.jerseyOpen)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Founding jersey (first 100)</span><span>Free</span></div>';
  h+='<div class="line due" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Due today</span><span>'+money(totalCents())+'</span></div>';
+ h+='<div class="line sline" style="color:var(--muted);font-size:13px"><span>'+esc(seasonLine(totalCents()))+'</span></div>';
  if(invite)h+='<div class="line" style="color:var(--muted);font-size:13px"><span>Feb 15: $0 with '+(invite.name?esc(invite.name)+'\u0027s family':'a friend\u0027s family')+' credit, applied at lock-in.</span></div>';
  g('sum').innerHTML=h;
  var first=rs[0].querySelector('.nm').value.trim();
- g('go').textContent='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
+ var label='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
+ if(busy)g('go').dataset.t=label;else g('go').textContent=label;
  if(elements){try{elements.update({amount:totalCents()})}catch(_){}}
- if(pe){try{pe.update({applePay:applePayOpts()})}catch(_){}}
 }
+/* Canary 10-29: one factual season line under Due today (dates from offer.ts via config). */
+function seasonLine(c){return 'Season 01 runs '+(cfg.seasonLabel||'mid January to May 6, 2027')+'. Your '+money(c)+' covers '+(cfg.firstMonthLabel||'January')+'.'}
+/* Canary 10-29: keep the form through a back and forward. sessionStorage (this tab only); never the card, never the terms box. */
+var FKEY='s1_signup_form';
+function saveForm(){try{sessionStorage.setItem(FKEY,JSON.stringify({kids:rows().map(function(r){return {n:r.querySelector('.nm').value,a:r.querySelector('.ag').value}}),pname:g('pname').value,email:g('email').value,mob:g('mob').value}))}catch(_){}}
+function restoreForm(){
+ var d=null;try{d=JSON.parse(sessionStorage.getItem(FKEY)||'null')}catch(_){}
+ if(!d||typeof d!=='object')return;
+ var ks=Array.isArray(d.kids)?d.kids.slice(0,MAXK):[];
+ if(ks.length){
+  while(rows().length<ks.length)kidRow();
+  while(rows().length>ks.length){rows()[rows().length-1].remove();n=rows().length}
+  rows().forEach(function(r,i){var k=ks[i]||{},a=String(k.a||''),ag=r.querySelector('.ag');
+   r.querySelector('.nm').value=String(k.n||'').slice(0,20);
+   ag.value=(a==='x'||AGES.indexOf(+a)>=0)?a:'';
+   r.querySelector('.warn').hidden=ag.value!='18';r.querySelector('.xnote').hidden=ag.value!='x'});
+ }
+ [['pname',20],['email',254],['mob',20]].forEach(function(f){if(typeof d[f[0]]==='string')g(f[0]).value=d[f[0]].slice(0,f[1])});
+ upd();
+}
+g('f').addEventListener('input',saveForm);g('f').addEventListener('change',saveForm);
 function initStripe(){
  if(!cfg.open)return;
  if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
@@ -272,11 +304,37 @@ function initStripe(){
    fonts:[{cssSrc:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'}],
    appearance:{theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#ffffff',colorText:'#050505',colorDanger:'#F92524',colorTextSecondary:'#6f6f6f',fontFamily:'Inter, Arial, Helvetica, sans-serif',fontSizeBase:'15px',borderRadius:'2px',spacingUnit:'4px'},
     rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}}});
-  pe=elements.create('payment',{wallets:{applePay:'auto',googlePay:'auto'},paymentMethodOrder:['apple_pay','google_pay','card'],applePay:applePayOpts()});
+  // Canary 10-29: the card form is card only. Wallets live in the Express Checkout Element above it;
+  // wallets.link 'never' keeps Link from autofilling the card form (Stripe.js create_payment_element).
+  pe=elements.create('payment',{wallets:{applePay:'never',googlePay:'never',link:'never'}});
   pe.mount('#pe');
   pe.on('ready',function(){peReady=true});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
- }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.'}
+ }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
+ initExpress();
+}
+/* Express Checkout Element: Apple Pay or Google Pay first on a phone. 'always' on the matching phone
+   (Stripe's 'auto' can hide a wallet it judges less useful); 'auto' elsewhere. Link, PayPal, Amazon Pay
+   and Klarna off. No wallet on this device (in-app browsers, most desktops): the block stays collapsed
+   and the card form is all the parent sees. Same commit flow and Apple Pay recurring request as the card. */
+var UA=navigator.userAgent||'',ON_IOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),ON_ANDROID=/Android/.test(UA);
+function initExpress(){
+ try{
+  xp=elements.create('expressCheckout',{
+   paymentMethods:{applePay:ON_IOS?'always':'auto',googlePay:ON_ANDROID?'always':'auto',link:'never',paypal:'never',amazonPay:'never',klarna:'never'},
+   buttonType:{applePay:'plain',googlePay:'plain'},buttonHeight:48,billingAddressRequired:false});
+  xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods,on=false;if(pm)Object.keys(pm).forEach(function(k){if(pm[k]&&pm[k].available)on=true});g('xpWrap').classList.toggle('on',on)});
+  xp.on('loaderror',function(){g('xpWrap').classList.remove('on')});
+  xp.on('click',function(ev){
+   if(busy)return;
+   clearErrs();
+   // The form is validated first; with errors the wallet sheet never opens (resolve is not called).
+   if(!collect()){g('e-xp').textContent=g('formErr').textContent;return}
+   ev.resolve({applePay:applePayOpts()});
+  });
+  xp.on('confirm',function(ev){var body=collect();if(!body){try{ev.paymentFailed({reason:'fail'})}catch(_){}return}pay(body,ev)});
+  xp.mount('#xp');
+ }catch(_){g('xpWrap').classList.remove('on')}
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
@@ -300,10 +358,14 @@ function collect(){
  if(bad.length){announce(bad[0]+(bad.length>1?' '+(bad.length-1)+' more to fix below.':''));if(first)first.focus();else g('terms').focus();return null}
  return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
 }
-function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;if(b){btn.dataset.t=btn.textContent;btn.textContent='Saving'}else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
+/* Canary 10-29: immediate feedback. Disabled, spinner and "Saving their spot..." until the redirect or an error. */
+function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;btn.classList.toggle('busy',b);btn.setAttribute('aria-busy',b?'true':'false');
+ if(b){if(!btn.querySelector('.spin'))btn.dataset.t=btn.textContent;btn.innerHTML='<span class="spin" aria-hidden="true"></span>Saving their spot...'}
+ else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
 function showTotal(c){
  try{elements.update({amount:c})}catch(_){}
  var sm=g('sum').querySelector('.line.due span:last-child');if(sm)sm.textContent=money(c);
+ var sl=g('sum').querySelector('.sline span');if(sl)sl.textContent=seasonLine(c);
  g('go').textContent='Save their spot \u00b7 '+money(c);
  g('go').dataset.t=g('go').textContent;
  overrideCents=c;
@@ -334,35 +396,43 @@ function serverErr(status,j){
  if(e==='too_many_kids'){announce('Season 01 takes up to four kids per order. Text our founder to add more.');return}
  announce('Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');
 }
-g('f').addEventListener('submit',async function(ev){
+g('f').addEventListener('submit',function(ev){
  ev.preventDefault();if(busy)return;clearErrs();
  var body=collect();if(!body)return;
  if(!stripe||!elements){announce('The payment form did not load. Reload the page or text our founder.');return}
- setBusy(true);confirming=false;ga('season1_pay_submit');
+ pay(body,null);
+});
+/* One path for the card button and the wallet sheet (xev = the Express Checkout confirm event). */
+async function pay(body,xev){
+ var errEl=g(xev?'e-xp':'e-pay');
+ function fail(){if(xev){try{xev.paymentFailed({reason:'fail'})}catch(_){}if(!errEl.textContent)errEl.textContent=g('formErr').textContent}setBusy(false)}
+ setBusy(true);confirming=false;ga('season1_pay_submit',{method:xev?String(xev.expressPaymentType||'wallet'):'card'});
  try{
   var sub=await elements.submit();
-  if(sub.error){g('e-pay').textContent=sub.error.message||'Check your payment details.';announce(g('e-pay').textContent);setBusy(false);return}
+  if(sub.error){errEl.textContent=sub.error.message||'Check your payment details.';announce(errEl.textContent);fail();return}
   var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents(),inviteRemoved]);
   if(!secret||sig!==secretSig){
    secret=null;g('inviteNote').hidden=true;
    body.attemptId=attemptId;body.expectedCents=totalCents();
    var res=await fetch('/api/season1/commit',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
    var j=null;try{j=await res.json()}catch(_){}
-   if(!res.ok||!j||!j.clientSecret){serverErr(res.status,j);setBusy(false);return}
+   if(!res.ok||!j||!j.clientSecret){serverErr(res.status,j);fail();return}
    if(typeof j.amountCents==='number'&&j.amountCents!==totalCents()){
-    showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');setBusy(false);return}
+    showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');fail();return}
    secret=j.clientSecret;secretSig=sig;
    if(j.invite==='ignored'){
     invite=null;renderInvite();upd();
     g('inviteNote').textContent=IGNORED_MSG;g('inviteNote').hidden=false;g('liveErr').textContent=IGNORED_MSG;
-    setBusy(false);return}
+    fail();return}
   }
   confirming=true;
   var r=await stripe.confirmPayment({elements:elements,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
-  if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';g('e-pay').textContent=msg;announce(msg);setBusy(false)}
- }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');setBusy(false)}
-});
-renderInvite();upd();ga('season1_signup_view');
+  if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
+ }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
+}
+// A back or forward from the bfcache: drop the busy state and the cached client secret, refill the form.
+window.addEventListener('pageshow',function(e){if(e.persisted){secret=null;secretSig='';confirming=false;if(busy)setBusy(false);restoreForm()}});
+restoreForm();renderInvite();upd();ga('season1_signup_view');
 // Stripe.js is deferred (end of body): init when it has loaded, or show the fallback if it failed.
 if(window.Stripe)initStripe();else{var sj=g('stripe-js');sj.addEventListener('load',initStripe);sj.addEventListener('error',initStripe)}
 })();

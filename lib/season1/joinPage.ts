@@ -1,4 +1,4 @@
-import { OFFER, isOpen, formatDatePT, lockInDate } from "./offer";
+import { OFFER, isOpen, formatDatePT, lockInDate, seasonLine } from "./offer";
 
 /**
  * Pure renderer for /season1/join (app/season1/join/route.ts). Prices and
@@ -60,6 +60,7 @@ export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" 
     LADDER2: usd(OFFER.seasonCents - 2 * OFFER.friendCreditCents),
     LADDER3: usd(OFFER.seasonCents - 3 * OFFER.friendCreditCents),
     PER_PRACTICE: usd(Math.round(OFFER.monthlyCents / OFFER.practicesPerMonth)),
+    SEASON_LINE: seasonLine(OFFER.firstKidCents),
     JERSEY_SHORT: shortPT(new Date(OFFER.jerseyCutoffAt)),
     LOCK_IN: formatDatePT(lockIn),
     LOCK_SHORT: shortPT(lockIn),
