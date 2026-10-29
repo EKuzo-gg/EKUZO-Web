@@ -329,7 +329,8 @@ function initStripe(){
    (card + link) so Link never reaches the card form. PayPal, Amazon Pay and Klarna off. Same commit flow and
    Apple Pay recurring request as the card. */
 var xpAvail=null,xpLabel='checking',xpFailed=false;
-function xpH(){return Math.round(g('xp').getBoundingClientRect().height)}
+/* Height Stripe gave its frame (8 px until the buttons draw); #xp itself holds 48 px while open. */
+function xpH(){var f=g('xp').querySelector('iframe');return f?Math.round(f.getBoundingClientRect().height):0}
 function xpDiag(){
  if(cfg.mode!=='test')return;
  var d=g('xpDiag');if(!d){d=document.createElement('span');d.id='xpDiag';g('testBar').appendChild(d)}
