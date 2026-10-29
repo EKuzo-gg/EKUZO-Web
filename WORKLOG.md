@@ -5,6 +5,37 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: Season 01 final build fixes
+
+Branch `season1-commit`. Spec: `docs/season1-commit/final/02-decisions.md` (Jamie's 10-29 answers) and `01-gap-list.md`.
+
+- **Ages (decision 4):** `offer.ts` `ageMax` 18 to 17, so 18 takes the existing out-of-range path ("Season 01 is for ages 9 to 17", Text our founder / Remove / Back) on the page and `age_outside` at the API. `ageEdge` flags 9 only. The sign-up picker offers 9 to 17. The crew invite page has no picker (it links to sign-up).
+- **Terms (decisions 2, 3):** 23.2 now "the week of January 18 to May 6, 2027, about four months"; 23.3 "Lock-in is December 31, 2026, at least two weeks before the season starts." Last Updated October 29, 2026. `termsVersion` `s1-terms-2026-10-29`. Lock-in instant unchanged (Dec 31, 2026 11:59 pm Pacific).
+- **Timelines (decision 2):** served pages say the season tournament is in April (mid April on timelines) and the last practice is May 6.
+- **Friend welcome copy (decision 12) and PR-8:** new `lib/season1/welcomeCopy.ts`. A friend-code order reads "February is free with your friend's credit. Then $160 on Mar 15 and Apr 15." Multi-kid friend orders say the credit makes the first kid's February free, with the family's February total and monthly ($128 per sibling). On multi-kid orders the "How this discount works" ladder is labelled "For your first kid." instead of recomputed.
+- **Discord commit ping (decision 9):** the message carries only the test tag, amount, kid count, source category (ad, organic, referral, karlin, email; referral when a friend code was used) and order ref. No kid names, ages, city or region, inviter name or code, jersey cutoff or refund status. The referral flag message drops the inviter kid name. With the webhook env var unset the sender returns `skipped_no_config` without throwing (tested).
+- **Docs:** `docs/season1-commit/ops-runbook.md` quotes the approved refund rule (terms 23.4) in place of the $65 jersey rule, drops the jersey-shipped example, adds a Rollback section, and launch step 4 now says to release from `release/season1-golive` and never merge dev into main. `docs/dev-runbook.md`: main never merges directly into dev after a release that removes dev-only files; use a dev-integration branch.
+- **Tests:** `/season1/dev-view` returns 404 when the mode is off or live (devView.test). The 9 `no-explicit-any` errors in the codes, outbox, pricing and validate tests are fixed with real types.
+- **Verified:** `npm run test:s1` 178 of 178 pass (was 169; DB integration suites need `S1_DB_TESTS=1` and were not run against Neon here). `tsc --noEmit` clean. eslint clean on every touched file. `npm run build` succeeds (with placeholder Stripe values inline for the build command only). Zero em or en dashes in the diff.
+
+**Deltas for Aaron (template text changes, all factual):**
+1. `app/season1/join/signup/signup.html`: the age picker lists 9 to 17 (18 removed; an 18-year-old picks "Younger or older"). The `.warn` line that showed for 18 in `ageChanged` can no longer show; left in place for you to keep or remove.
+2. `app/season1/join/join.html` stat card: "Finale / May / Season tournament" is now "Finale / April / Season tournament".
+3. `app/season1/join/join.html` timeline: "May / Final tournament." is now "Mid Apr / Season tournament.", followed by a new line "May 6 / Last practice." in the same markup.
+4. `app/season1/join/welcome/welcome.html` timeline: "May / Final tournament" is now "Mid Apr / Season tournament", followed by a new line "May 6 / Last practice".
+5. `app/season1/join/welcome/welcome.html` save band: new `{{LADDER_NOTE}}` slot right after the "How this discount works" h2. On orders with more than one kid it renders `<p style="font-size:14px;margin-top:8px">For your first kid.</p>`; empty for one kid.
+6. `app/crew/[code]/crew.html` stat card: "Finale / May / Season tournament" is now "Finale / April / Season tournament".
+7. Welcome receipt line (server text from `welcomeCopy.ts`, not the template): friend-code orders get the February free wording above.
+8. `app/terms-of-service/page.tsx`: 23.2, 23.3 and Last Updated as above.
+
+**Left alone, for follow-up:**
+- Unserved stale templates still carry old dates or copy: `app/season1/crew/crew.html` (route redirects to /season1/join; still says "a final tournament in May" and "The season ends with a tournament in May"), `app/season1/early-access/*.html`, `app/season1/terms/terms.html`.
+- The join and crew FAQ answer "Every practice and the final tournament happen online" has no date and was not changed.
+- Sign-up summary line "Feb 15: $0 with ...'s family credit" is exact for one kid; on a multi-kid friend order the credit covers $160 of the family's February. Aaron's markup, not changed.
+- `scripts/s1-refund.mjs` still prints the $65 jersey advice line; the runbook now says to ignore it.
+- FAQ canon backport of 9 to 17 (decision 4) lives in the knowledge base, outside this repo.
+
+---
 ## Aaron (via Claude), October 28, 2026 (full QA + go-live handoff)
 
 - **QA:** 169 tests pass, tsc clean. 14 states at 6 widths show no layout issues. 0 axe violations at 390 and 1440. On the live dev deploy, routes return 200 with the right framing headers, Stripe Elements loads, and there are no console errors. eslint reports 9 `no-explicit-any` errors, all in 4 older test files.

@@ -59,12 +59,14 @@ Order statuses: `pending` (started, not paid), `paid`, `failed`, `partially_refu
 
 ## Refunds
 
-The refund rule, as written in the Season 01 terms (section 4):
+The refund rule, as written in the Terms of Service, section 23.4 (`/terms-of-service#season-01`):
 
-> Your $100 is fully refundable until lock-in, two weeks before your session starts. If your free
-> jersey has already shipped, we refund $65 and the jersey is yours to keep, or send it back for the
-> full $100. If we can't place your kid on a team, you get the full $100 back and keep the jersey.
-> Once the season starts, it isn't refundable, like any team sport.
+> Your first payment is fully refundable until lock-in. If we can't place your kid on a team, you get
+> it all back. After lock-in, the season isn't refundable, like any team sport. To ask for a refund,
+> email team@ekuzo.gg. Refunds go back to the original payment method.
+
+The approved terms have no jersey deduction: before lock-in a refund is the full amount paid for that
+kid, whether or not the jersey has shipped.
 
 Do refunds with the script so the system knows who left.
 
@@ -73,16 +75,14 @@ Do refunds with the script so the system knows who left.
 npm run s1:refund -- --order kdh7b8ucgk
 # One kid on a multi-kid order (amount defaults to that kid's price):
 npm run s1:refund -- --order kdh7b8ucgk --kid Zoe
-# Jersey already shipped, keeping the jersey: the script prints the $65 amount as advice
-npm run s1:refund -- --order kdh7b8ucgk --kid Zoe --jersey-shipped
-npm run s1:refund -- --order kdh7b8ucgk --kid Zoe --amount 6500 --apply
+npm run s1:refund -- --order kdh7b8ucgk --kid Zoe --apply
 ```
 
 Read the dry run, then add `--apply`. Notes:
 
-- The `--jersey-shipped` amount is advice only. There is no "jersey shipped" date in the database
-  yet; you tell the script. The rule text names $65 of $100. Sibling prices are lower, so confirm
-  the amount with Karlin before you apply.
+- The script still prints a "$65 rule" jersey advice line (and has a `--jersey-shipped` flag). That
+  rule was dropped from the approved terms. Ignore the line and do not pass `--amount 6500`; refund
+  the full amount.
 - Two kids with the same first name on one order: the script stops and asks for `--kid-id` (the id
   is shown by `s1:find`).
 - Running the same command twice within a day does not refund twice; Stripe returns the first
@@ -290,7 +290,7 @@ Do these in this order (redteam-ops rows 5, 6, 7, 10, 11, 12). Tick as you go.
 - [ ] 2. Run the migrations against production: `node --env-file=.env.local scripts/s1-migrate.mjs --live`, and check `s1_migrations` lists 0001 to 0004.
 - [ ] 3. Scope production `DATABASE_URL`, the live Stripe keys, the live webhook secret and `S1_COMMIT_MODE` to the **Production** context only. Previews and branch deploys keep the test values.
 - [ ] 3a. Set `S1_REF_SECRET` (Production only) to a new random value (for example `openssl rand -base64 32`). With a live Stripe key it is required: invite cookies and the rate-limit email hashes refuse the webhook-secret fallback, so without it invites are ignored, `/crew/<code>` sets no cookie and checkout answers "try again" (security review L4, L10).
-- [ ] 4. Deploy with `S1_COMMIT_MODE` unset (it resolves to off).
+- [ ] 4. Deploy with `S1_COMMIT_MODE` unset (it resolves to off). Release from branch release/season1-golive (season1-commit plus origin/main, minus public/roadshow, public/ads/season1, public/review.html); never merge dev into main.
 - [ ] 5. In the Stripe Dashboard, create the live webhook endpoint for `/api/season1/stripe-webhook` with the Season 01 events from the spec (payment succeeded, payment failed, charge refunded, refund failed, dispute created, dispute closed). Put its signing secret in `S1_STRIPE_WEBHOOK_SECRET` (Production only). Confirm the legacy endpoint is unchanged.
 - [ ] 6. Turn on Stripe email notifications for successful payments and refunds, for Jamie and Karlin.
 - [ ] 7. Turn on Radar card-testing rules.
@@ -301,3 +301,14 @@ Do these in this order (redteam-ops rows 5, 6, 7, 10, 11, 12). Tick as you go.
 - [ ] 12. **Canary:** Jamie pays $100 live, then refunds it with `npm run s1:refund -- --live --order <id> --apply`. Check `s1_events` has both a payment and a refund event with source `webhook`, and that the welcome page, the Klaviyo email and the Discord post all appeared.
 - [ ] 13. Send the lead blast in 2 or 3 batches about 30 minutes apart, not all at once.
 - [ ] 14. Run `npm run s1:find` and `npm run s1:sweep` the next morning.
+
+## Rollback
+
+If Season 01 has to come down on production:
+
+1. In Netlify, unset `S1_COMMIT_MODE` in the **Production** context and redeploy.
+2. With the mode unset the pages fall back to off: sign-up is paused and no new payment can start.
+   The Season 01 webhook, the welcome page and fulfil keep running, so payments already made still
+   finish and their emails still go.
+3. The legacy webhook guard stays in place, so the old camps and EKUZO100 webhook keeps ignoring
+   Season 01 payments.

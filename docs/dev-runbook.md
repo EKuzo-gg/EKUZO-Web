@@ -191,6 +191,8 @@ release commits. Neither branch is an ancestor of the other, so `git merge dev` 
    `git diff --quiet HEAD <dev commit> -- app lib components && echo identical`.
 5. Push it: `git push origin <release-branch>:main` (a fast-forward of main).
 
+After a release that removes dev-only files on main, main never merges directly into dev (that would delete them from dev); bring main's commits into dev through a dev-integration branch cut from `origin/dev` (for example `preview/<change>-dev`), check it, then fast-forward dev.
+
 **Pushes go through Jamie's terminal.** Neither Claude's cloud workspace nor the shell on Jamie's
 computer has GitHub write access to EKuzo-gg, so Claude prepares the commits and hands over the
 push commands. Installing the Claude GitHub App on the org
