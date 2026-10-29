@@ -2,7 +2,7 @@
 title: "Season 01 final build: handoff (10-29 afternoon)"
 created: 2026-10-29
 author: Jamie's Claude (lead)
-status: Season 01 LIVE on ekuzo.gg since 10:01 CT; a fix batch is on season1-commit waiting for release
+status: Season 01 LIVE on ekuzo.gg since 10:01 CT; fix batch released 16:33 CT (main fa9c510)
 ---
 
 # Handoff, 10-29
@@ -11,7 +11,8 @@ Read this first in a new session, then `03-golive-log.md` (every external change
 
 ## Where things stand
 
-- **Live:** ekuzo.gg runs main `cb10e1c` with `S1_COMMIT_MODE=live` (Production only). Sign-ups open with live Stripe since 10:01 CT. Canary paid 11:27 (order 6be522c6d3) and refunded 12:24; every system recorded both.
+- **Released 16:33 CT:** main `fa9c510`, dev `3b43ae4` (Jamie's go 16:32). Carries every fix listed below plus the card form behind "Or pay with card" (Link only: open). Neon on "Free + limit increase" ($10 a month, 250 compute hours), production compute fixed at 0.25 CU, scale-to-zero on. Smoke passed 16:40; Jamie's real-phone look on ekuzo.gg pending.
+- **Before that:** ekuzo.gg ran main `cb10e1c` with `S1_COMMIT_MODE=live` (Production only). Sign-ups open with live Stripe since 10:01 CT. Canary paid 11:27 (order 6be522c6d3) and refunded 12:24; every system recorded both.
 - **Rollback:** delete `S1_COMMIT_MODE` in Netlify (Production) and redeploy; pages show "Signups are paused" in about 75 s.
 - **Waiting for release on season1-commit:** canary feedback fixes (form saved on back, busy button, season line, card form without Link), wallet row (Apple Pay, Google Pay, then Link) with the draw bug fixed, pre-warm `/api/season1/warm`, commit DB round trips 14 to 6, skeleton removed. Independent check passed (Sentry, 56b3aa0): no critical or major. F11 and F12 minors being fixed now.
 - **Before release:** Jamie's phone shows Google Pay on the test site (screenshot the yellow test bar "Wallets:" line); F11/F12 fixed and retested; rebuild `release/season1-golive` from season1-commit plus a merge of origin/main (it already carries the dev-only file removals); verify code-identical and fast-forward; Jamie's exact go in chat ("go: release ..."); push main; dev needs `preview/season1-dev`-style merge (dev is 3bbf217, not an ancestor of season1-commit) then fast-forward dev; smoke production; Jamie's real-phone check on ekuzo.gg.
@@ -29,7 +30,7 @@ Re-run `git log --oneline -1` on each before acting.
 
 ## Open decisions for Jamie
 
-1. Neon Launch plan with scale-to-zero off, about $19 to $20 a month (07-speed-report.md). Reason: the free plan's 100 CU-hour cap suspends the database until next month when hit; pre-warm spends hours faster.
+1. ~~Neon plan~~ Settled 16:32: Jamie bought "Free + limit increase" ($10 a month).
 2. Netlify Functions region us-east-1 vs Neon us-east-2 (about 60 to 100 ms per commit); needs Netlify Pro. Recommendation: not now.
 
 ## Fast follow (not today)
