@@ -126,3 +126,19 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
 - Default pattern: time-based trigger (5 min) + last-processed-row pointer in Script Properties + LockService around the run. Detects rows added by webhook, manual edit, or API identically. Polling cost is negligible at our volume.
 - Keep add-on features (notifications, syncs) in their own script file, never inside the payment-path `doPost`. If sub-minute latency ever genuinely matters, emit from the writer itself as a deliberate trade, isolated in try/catch so it can never fail the row write.
 - Reference implementation: `docs/apps-script-registration-notifier.gs` (Karlin registration notifier, 2026-07-15).
+
+<!-- Added 2026-10-12, approved by Jamie in knowledge-base session 2026-10-12-gaming-study-post-build-loop ("i agree with your lessons"). -->
+## Space after an inline tag at a line break
+
+JSX drops the whitespace between `</strong>` (or `</a>`, `</Link>`) and text when the source line
+wraps there. Write `</strong>{" "}text`. Check the built HTML, not the source:
+`grep -o 'label:</strong>.\{0,12\}' .next/server/app/<route>.html`. Bit the gaming-study post twice
+(September, then the "Short answer:" label in October).
+
+## `sizes` for a cover image in a fixed-height frame
+
+A `fill` + `object-cover` image in a frame of fixed height H is drawn at least
+H x (image width / image height) wide, whatever the viewport. Set `sizes` from that drawn width for
+narrow viewports (for the 520px blog hero and a 2400x1260 image: `(max-width: 1040px) 992px, ...`),
+or phones fetch a file several times too small and the image is soft. The `/blog` featured card
+still has this problem (no `sizes`; suggested `(max-width: 1023px) 768px, 50vw`).

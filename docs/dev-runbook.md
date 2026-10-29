@@ -49,6 +49,15 @@ cd ~/Desktop/EKUZO/Projects/EKUZO-Web && npx next dev -p 3001
 
 **Test card:** `4242 4242 4242 4242`, any future expiry, any CVC, any ZIP.
 
+<!-- Added 2026-10-29, approved live by Jamie ("yes") in knowledge-base session 2026-10-27-nextjs-security-release. -->
+**Every test endpoint gets the event.** Stripe test mode delivers every `payment_intent.succeeded` to
+every test endpoint, so any test payment is also processed by the dev deploy with the real Klaviyo,
+Beehiiv and Sheets. To prove webhook code that is not on dev yet: confirm the test PaymentIntent with
+the test key, replay the real event to a local `next start` signed with a local secret
+(`stripe.webhooks.generateTestHeaderString`) with outbound calls stubbed, and compare the stubbed
+Klaviyo payload with the event dev wrote. Worked example (scripts and comparison):
+`knowledge-base/explorations/2026-10-27-nextjs-security-release/evidence/commerce/`.
+
 **What happens on a successful test payment:**
 1. Stripe sends `payment_intent.succeeded` → Stripe CLI forwards it to `localhost:3001/api/webhooks/stripe`
 2. Webhook writes gamer data to Google Sheets (ekuzo-purchases, squads, squad_members tabs)
@@ -190,6 +199,20 @@ release commits. Neither branch is an ancestor of the other, so `git merge dev` 
 4. Confirm the app code matches the tested dev commit:
    `git diff --quiet HEAD <dev commit> -- app lib components && echo identical`.
 5. Push it: `git push origin <release-branch>:main` (a fast-forward of main).
+
+<!-- Added 2026-10-12, approved by Jamie in knowledge-base session 2026-10-12-gaming-study-post-build-loop ("i agree with your lessons"). -->
+**A feature branch built on main.** It is not a fast-forward of `dev`. Prepare two local branches
+(a worktree keeps a dirty checkout untouched): the release branch (main plus the work), and a
+dev-integration branch (`git worktree add -b preview/<name> <dir> origin/dev`, then merge the release
+branch and resolve the same conflicts).
+<!-- Amended 2026-10-29, approved live by Jamie ("yes") in knowledge-base session 2026-10-27-nextjs-security-release. -->
+Confirm the merge added no app code: the release-to-preview app diff equals the existing main-to-dev
+app diff
+(`[ "$(git diff <release> preview/<name> -- app lib components | git hash-object --stdin)" = "$(git diff origin/main origin/dev -- app lib components | git hash-object --stdin)" ]`).
+A plain `git diff --quiet` between the two fails whenever dev carries its own app files. Also confirm
+each branch is a fast-forward of its target
+(`git merge-base --is-ancestor origin/dev preview/<name>`). Then the pushes are
+`git push origin preview/<name>:dev` and, after the deploy check, `git push origin <release>:main`.
 
 **Pushes go through Jamie's terminal.** Neither Claude's cloud workspace nor the shell on Jamie's
 computer has GitHub write access to EKuzo-gg, so Claude prepares the commits and hands over the
