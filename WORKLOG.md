@@ -5,6 +5,22 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: F1 welcome states
+
+Branch `season1-commit`. Defect F1 in `docs/season1-commit/final/05-defects.md`: a refunded order looped on "We're confirming your payment" with a 4 second refresh forever (each refresh ran fulfil).
+
+- `app/season1/join/welcome/route.ts`: `paid` and `partially_refunded` render the paid page (amounts unchanged; the hero and share button name only kids not marked refunded). `refunded` renders a static refunded state; `canceled` and `failed` (or a pending order whose PaymentIntent Stripe reports canceled) render a static "didn't go through" state. No refresh, no share link, no GA purchase on those. fulfil (the Stripe check) now runs only for `pending` orders.
+- Pending refresh is capped: the `s1_wpend` cookie (Path /season1, 5 minutes) counts pending renders; after 30 (about 2 minutes at 4 s) the page shows a static "slow" state. A fresh Stripe return restarts the count; any settled state clears the cookie. The DB error path (`s1_wtry`) is unchanged.
+- New `lib/season1/__tests__/welcomeStates.test.ts` (7 tests, Neon stubbed through fetch): paid, partially_refunded, refunded, canceled, failed, pending plus the cap, counter reset. Terminal states assert no refresh meta, no share or purchase script, and one DB query only (so no fulfil, no Stripe).
+- **Verified:** `npm run test:s1` 185 of 185 pass (was 178). `tsc --noEmit` clean. eslint clean on touched files. `npm run build` succeeds (placeholder Stripe values inline for the build command only).
+- **Not changed, for follow-up:** on a partially refunded order the line under the receipt (`thenLine`) still prices the monthly for every kid on the order, including the refunded one.
+
+**Deltas for Aaron (new copy in `app/season1/join/welcome/welcome.html`, all in your existing hero and button markup; yours to reword):**
+1. New `<!--refunded-->` block: h1 "This order was refunded." body "Questions? Text our founder." black button "Text our founder" (sms link).
+2. New `<!--failed-->` block: h1 "This payment didn't go through." body "You haven't been charged. Try again or text our founder." buttons "Try again" (to `/season1/join/signup`) and black "Text our founder".
+3. New `<!--slow-->` block (pending after about 2 minutes): same h1 as pending "We're confirming your payment", sub line "Still confirming. Refresh in a minute or text our founder.", "Check now" button and the "Questions? Text our founder" line.
+
+---
 ## Jamie's Claude, 2026-10-29: Season 01 final build fixes
 
 Branch `season1-commit`. Spec: `docs/season1-commit/final/02-decisions.md` (Jamie's 10-29 answers) and `01-gap-list.md`.

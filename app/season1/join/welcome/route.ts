@@ -63,17 +63,26 @@ async function loadOrder(request: Request, tokenOverride?: string | null): Promi
 }
 
 const MAX_TRIES = 5;
+// F1: a pending order auto-refreshes every 4 s for about 2 minutes (30 renders,
+// counted in the s1_wpend cookie), then shows the static "slow" state.
+const REFRESH_SECONDS = 4;
+const MAX_PENDING_REFRESHES = 30;
+
+// F1: partially_refunded still has a paid kid, so it gets the paid page.
+// refunded, canceled and failed are terminal: static page, no refresh, no Stripe call.
+const PAID_STATUSES = new Set(["paid", "partially_refunded"]);
+const FAILED_STATUSES = new Set(["canceled", "failed"]);
 
 function joinNames(names: string[]): string {
   if (names.length <= 1) return names[0] ?? "";
   return names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
 }
 
-type State = "paid" | "pending" | "stalled" | "generic";
+type State = "paid" | "pending" | "slow" | "refunded" | "failed" | "stalled" | "generic";
 
 function pick(html: string, state: State): string {
   let out = html;
-  for (const s of ["paid", "pending", "stalled", "generic"] as const) {
+  for (const s of ["paid", "pending", "slow", "refunded", "failed", "stalled", "generic"] as const) {
     const re = new RegExp(`<!--${s}-->([\\s\\S]*?)<!--/${s}-->`);
     out = out.replace(re, (_m, inner: string) => (s === state ? inner : ""));
   }
@@ -107,13 +116,16 @@ export async function GET(request: Request) {
   let order = loaded.order;
   const dbError = loaded.error;
   // A pending order with a PaymentIntent may have succeeded already; let fulfil
-  // check Stripe so the page does not wait on the webhook alone.
-  if (order && order.status !== "paid" && order.paymentIntentId) {
+  // check Stripe so the page does not wait on the webhook alone. Only pending
+  // orders are checked (F1): settled orders render from the DB alone.
+  let piCanceled = false;
+  if (order && order.status === "pending" && order.paymentIntentId) {
     try {
       const r = await fulfil(order.paymentIntentId, "welcome");
-      if (r.status === "paid") {
+      if (r.status === "canceled") piCanceled = true;
+      else if (r.status === "paid" || r.status === "partially_refunded" || r.status === "refunded") {
         order = (await loadOrder(request, returnToken)).order ?? order;
-        await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
+        if (r.status !== "refunded") await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
       }
     } catch {
       // keep the pending view
@@ -134,16 +146,23 @@ export async function GET(request: Request) {
   // short-lived cookie), then tell the parent the payment went through.
   const tries = dbError ? (parseInt(cookieValue(request, "s1_wtry") ?? "0", 10) || 0) + 1 : 0;
 
+  // Pending renders for an order (not a DB error), counted so the refresh stops.
+  // A fresh Stripe return starts the count over.
+  const pendingRenders = pi ? 1 : (parseInt(cookieValue(request, "s1_wpend") ?? "0", 10) || 0) + 1;
+
   let state: State;
   if (dbError) state = tries <= MAX_TRIES ? "pending" : "stalled";
   else if (!order) state = "generic";
-  else if (order.status === "paid" && order.kids.length > 0) state = "paid";
-  else state = "pending";
+  else if (PAID_STATUSES.has(order.status) && order.kids.length > 0) state = "paid";
+  else if (order.status === "refunded") state = "refunded";
+  else if (FAILED_STATUSES.has(order.status) || piCanceled) state = "failed";
+  else state = pendingRenders <= MAX_PENDING_REFRESHES ? "pending" : "slow";
+  const countingPending = !dbError && (state === "pending" || state === "slow");
 
   let html = pick(raw, state);
   html = html.replace(
     "<!--META_REFRESH-->",
-    state === "pending" ? '<meta http-equiv="refresh" content="4">' : "",
+    state === "pending" ? `<meta http-equiv="refresh" content="${REFRESH_SECONDS}">` : "",
   );
 
   const lockIn = lockInDate();
@@ -163,7 +182,10 @@ export async function GET(request: Request) {
   };
 
   if (state === "paid" && order) {
-    const names = order.kids.map((k) => k.firstName);
+    // Hero and share name the kids still in (a partially refunded order keeps
+    // its receipt lines and amounts as paid).
+    const inKids = order.kids.filter((k) => k.status !== "refunded");
+    const names = (inKids.length > 0 ? inKids : order.kids).map((k) => k.firstName);
     vars.KID1 = esc(names[0]);
     vars.HERO =
       names.length === 1
@@ -221,6 +243,11 @@ export async function GET(request: Request) {
     headers.append("set-cookie", `s1_wtry=${tries}; Path=/season1; Max-Age=120; Secure; HttpOnly; SameSite=Lax`);
   } else if (cookieValue(request, "s1_wtry")) {
     headers.append("set-cookie", "s1_wtry=; Path=/season1; Max-Age=0; Secure; HttpOnly; SameSite=Lax");
+  }
+  if (countingPending) {
+    headers.append("set-cookie", `s1_wpend=${pendingRenders}; Path=/season1; Max-Age=300; Secure; HttpOnly; SameSite=Lax`);
+  } else if (!dbError && cookieValue(request, "s1_wpend")) {
+    headers.append("set-cookie", "s1_wpend=; Path=/season1; Max-Age=0; Secure; HttpOnly; SameSite=Lax");
   }
   if (state === "paid") {
     // Spec: readable by page JS, one year, whole site (the first-visit popup reads the flag).
