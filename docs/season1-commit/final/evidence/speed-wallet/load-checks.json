@@ -1,0 +1,76 @@
+{
+ "signup_390": {
+  "console_errors": [],
+  "load_s": 2.95,
+  "warm_count_on_load": 1,
+  "nav_timing": {
+   "dcl_ms": 1797,
+   "load_ms": 2945,
+   "warm": [
+    {
+     "start_ms": 1303,
+     "end_ms": 1835,
+     "status": 204
+    }
+   ]
+  },
+  "diag_before_scroll": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+  "xpWrap_class_before_scroll": "xpw on",
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+  "xpWrap_class": "xpw on",
+  "xp_h": 56,
+  "hscroll": false,
+  "refire_after_4min": 1
+ },
+ "signup_1440": {
+  "console_errors": [],
+  "load_s": 2.39,
+  "warm_count_on_load": 1,
+  "nav_timing": {
+   "dcl_ms": 929,
+   "load_ms": 2384,
+   "warm": [
+    {
+     "start_ms": 797,
+     "end_ms": 1127,
+     "status": 204
+    }
+   ]
+  },
+  "diag_before_scroll": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+  "xpWrap_class_before_scroll": "xpw on",
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+  "xpWrap_class": "xpw on",
+  "xp_h": 56,
+  "hscroll": false,
+  "refire_after_4min": 1
+ },
+ "signup_android_pixel7": {
+  "console_errors": [],
+  "load_s": 1.75,
+  "warm_count_on_load": 1,
+  "nav_timing": {
+   "dcl_ms": 958,
+   "load_ms": 1736,
+   "warm": [
+    {
+     "start_ms": 337,
+     "end_ms": 1195,
+     "status": 204
+    }
+   ]
+  },
+  "diag_before_scroll": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+  "xpWrap_class_before_scroll": "xpw on",
+  "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+  "xpWrap_class": "xpw on",
+  "xp_h": 56,
+  "hscroll": false,
+  "refire_after_4min": 1
+ },
+ "join_then_signup": {
+  "warm_on_join": 1,
+  "warm_on_signup_after_join": 0,
+  "console_errors": []
+ }
+}

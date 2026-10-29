@@ -1,0 +1,24 @@
+{
+ "tag": "prewarm1",
+ "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+ "tap_to_welcome_url_s": 4.41,
+ "tap_to_welcome_h1_s": 4.43,
+ "welcome_h1": "GREAT, JUNO'S IN!",
+ "api": [
+  {
+   "url": "warm",
+   "status": 204,
+   "server_timing": "db;dur=824.9;desc=\"ok\", app;dur=838.0, cold;desc=\"first request on this function instance\"",
+   "region": "us-east-1",
+   "t": 7.263
+  },
+  {
+   "url": "commit",
+   "status": 200,
+   "server_timing": "db;dur=353.5;desc=\"6 queries\", dbfirst;dur=107.5, stripe;dur=387.4;desc=\"2 calls\", app;dur=779.5",
+   "region": null,
+   "t": 19.246
+  }
+ ],
+ "console_errors": []
+}

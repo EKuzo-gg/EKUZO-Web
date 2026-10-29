@@ -208,3 +208,16 @@ and `s1pi:*` rate-limit keys. Klaviyo test profiles will exist for the c1 and c4
 | payment_intent | pi_3UVwmSKORcR8BUEx0aBoxEhC | declined (4000 0000 0000 0002), then canceled by Sentry | Canary check: busy state restore on error, order paepgbzfh2 |
 
 Both succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).
+
+## Wallet order and speed 2026-10-29 (Jamie's Claude, Stripe test mode + Neon test, branch deploy f829fc8 then 6304eb8 to 5dfccb7)
+
+About 17:41 to 18:10 UTC. Five direct `POST /api/season1/commit` calls (curl, to read Server-Timing) and one Playwright card payment (4242, analytics answered 204 locally). Neon rows: emails `team+s1test-speed1029-{before1,before2,after-warm1,after-cold1,after-warm2,prewarm1}@ekuzo.gg` (parent Mara; kids Wren, Ivy, Wren, Wren, Ivy, Juno), each a new family with one kid, orders 7qx5c8kbbq, 4gh45jab47, 4gg3sagr76, 5wvpcpb2s2, jetaa5k6pa (pending) and fetrs6hph3 (paid), plus `s1pi:*` rate-limit keys. The paid order went through the normal webhook path (Klaviyo test profile and event for the prewarm1 email, outbox rows, a family code, and the usual copy on the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF). Pending PIs were left unconfirmed, not canceled.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVxKtKORcR8BUEx0UmRCeMC | requires_payment_method $100 (types card) | before1, cold timing, order 7qx5c8kbbq (cus_VX1NASfG5d8eyJ) |
+| payment_intent | pi_3UVxKuKORcR8BUEx1fOEYLTD | requires_payment_method $100 (types card) | before2, warm timing, order 4gh45jab47 (cus_VX1N1lYNVEnkxs) |
+| payment_intent | pi_3UVxWZKORcR8BUEx18tvvPi6 | requires_payment_method $100 (types card, link) | after-warm1, order 4gg3sagr76 (cus_VX1ZZyV6YbGLSU) |
+| payment_intent | pi_3UVxdCKORcR8BUEx0KwCTJNq | requires_payment_method $100 (types card, link) | after-cold1, order 5wvpcpb2s2 (cus_VX1gk7MOqzFOXB) |
+| payment_intent | pi_3UVxdDKORcR8BUEx0OURiM82 | requires_payment_method $100 (types card, link) | after-warm2, order jetaa5k6pa (cus_VX1gLj04A9NkdS) |
+| payment_intent | pi_3UVxjZKORcR8BUEx1cXTsseP | succeeded $100, card 4242 through the card form, not refunded | prewarm1 end to end, order fetrs6hph3 (cus_VX1nV7t8c9IHEv) |

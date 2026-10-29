@@ -1,0 +1,23 @@
+Direct POST /api/season1/commit (curl, same-origin headers, one kid, $100, branch deploy, Stripe test mode).
+"total" is what the client saw (curl time_total); Server-Timing as returned. No PII in the header.
+
+BEFORE (deploy of f829fc8 code), 2026-10-29 17:41:52 UTC
+  before1  cold function + cold Neon   total 2.123 s
+    db;dur=1027.2;desc="14 queries", dbfirst;dur=693.7, stripe;dur=388.7;desc="2 calls", app;dur=1484.2, cold
+  before2  warm                        total 0.769 s
+    db;dur=210.1;desc="14 queries", dbfirst;dur=14.0, stripe;dur=342.9;desc="2 calls", app;dur=562.7
+
+AFTER (6304eb8 to 5dfccb7)
+  after-warm1  17:54:02 warm                       total 0.825 s
+    db;dur=236.2;desc="6 queries", dbfirst;dur=73.7, stripe;dur=412.5;desc="2 calls", app;dur=662.3
+  after-cold1  18:00:52 after 6 min idle, no pre-warm (direct call): cold function + cold Neon   total 2.785 s
+    db;dur=1055.2;desc="6 queries", dbfirst;dur=834.4, stripe;dur=450.4;desc="2 calls", app;dur=1561.0, cold
+  after-warm2  18:00:54 warm                       total 0.689 s
+    db;dur=115.0;desc="6 queries", dbfirst;dur=24.6, stripe;dur=349.7;desc="2 calls", app;dur=472.3
+
+AFTER, real flow with pre-warm (e2e-prewarm1.json), 18:07:09 after 6 min idle, Playwright 390 px, card 4242:
+  GET /api/season1/warm on page load: db;dur=824.9;desc="ok", app;dur=838.0, cold   (the wake and the cold start, while the form is filled)
+  POST /api/season1/commit at the tap:  db;dur=353.5;desc="6 queries", dbfirst;dur=107.5, stripe;dur=387.4;desc="2 calls", app;dur=779.5   (no cold flag, no wake)
+  tap to welcome page: 4.41 s ("GREAT, JUNO'S IN!")
+
+Function region (warm route, test mode only header x-s1-region from AWS_REGION): us-east-1. Neon: us-east-2.
