@@ -245,7 +245,7 @@ const sections: Section[] = [
       </ModalButton>
     ),
   },
-  // Section 23, Program Terms: Season 01 (install text approved 2026-10-27)
+  // Section 23, Program Terms: Season 01 (install text approved 2026-10-27; dates in 23.2 and 23.3 updated 2026-10-29)
   {
     id: "season-01",
     sectionLabel: "23. Program Terms: Season 01",
@@ -259,12 +259,12 @@ const sections: Section[] = [
   {
     sectionLabel: "",
     subsectionLabel: "23.2 Saved card and the rest of the season",
-    body: "Season 01 is a season: January 11 to May 9, 2027, four months. After lock-in, the rest of the season is charged to the card you saved, monthly or up front, at the price shown when you signed up and the terms you choose at lock-in.",
+    body: "Season 01 is a season: the week of January 18 to May 6, 2027, about four months. After lock-in, the rest of the season is charged to the card you saved, monthly or up front, at the price shown when you signed up and the terms you choose at lock-in.",
   },
   {
     sectionLabel: "",
     subsectionLabel: "23.3 Lock-in",
-    body: "Lock-in is two weeks before the season starts: December 31, 2026. We email you if the date changes.",
+    body: "Lock-in is December 31, 2026, at least two weeks before the season starts. We email you if the date changes.",
   },
   {
     sectionLabel: "",
@@ -321,7 +321,7 @@ export default function TermsOfServicePage() {
               Terms of Service
             </h4>
             <p className="font-body text-black/60 text-sm md:text-base">
-              Last Updated: October 27, 2026
+              Last Updated: October 29, 2026
             </p>
           </div>
 

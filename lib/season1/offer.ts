@@ -28,7 +28,7 @@ export const OFFER = {
   lockInAt: "2026-12-31T23:59:59-08:00",
   closeAt: "2026-12-31T23:59:59-08:00",
   textKarlinSms: "+18324438679",
-  termsVersion: "s1-terms-2026-10-27",
+  termsVersion: "s1-terms-2026-10-29",
   termsUrl: "/terms-of-service#season-01",
   privacyUrl: "/privacy-policy#season-01",
 } as const;
