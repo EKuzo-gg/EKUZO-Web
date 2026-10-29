@@ -49,6 +49,18 @@ Build (one Build Loop round, small):
 5. Ad URLs for the 11-02 batch: /season1/join?src=ad&utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}.
 6. Verify in Meta Events Manager (Test Events) and GA4 DebugView on the branch deploy; F2 (test deploy fires live GA4 and Ads tags) fixed in the same round.
 
+## Speed slice: tap to "You're in" (Jamie 17:24, "probably worth it"; same session as the analytics build)
+
+Jamie: "It felt like a bug when I hit submit and had to wait; I considered hitting back and trying again."
+
+Read 10-29 17:30 from the code:
+- **The welcome page waits on sends before it renders.** `app/season1/join/welcome/route.ts` lines 108 and 128 await `drainOutbox({ budgetMs: 3000 })` (Klaviyo receipt event, Meta Purchase, Discord) before the page renders. The Stripe webhook already drains the same outbox (`stripe-webhook/route.ts` 260), so the page can render first and leave the sends to the webhook or to post-response work. Payment truth is unchanged: `fulfilFromReturn` and `fulfil` still check the PaymentIntent with Stripe before "You're in" shows.
+- **Declines never reach the welcome page.** Declines and bank (3DS) challenges resolve inside `stripe.confirmPayment` on the sign-up page, so there is nothing to walk back. Do not show "You're in" before Stripe's answer: the receipt, the friend link, Meta Purchase and Klaviyo "committed" all key off real money.
+- **Back and retap (defect, call it F15, major for trust).** The same attempt never charges twice: the commit reuses the PaymentIntent, and if it is processing or succeeded it returns `try_again` 503. But `serverErr` shows the generic "Something hiccuped. Your card was not charged." In this case the card may have been charged. Fix: on `try_again`, say the payment is going through and send the parent to the welcome page for that order, which shows paid, pending or failed. A new tab or changed details is a new attempt, and a small double-charge window remains; check it in the red team.
+- **The wait looks like a bug.** After about 2 s on the busy button, change the label to a progress line (copy for Jamie or Aaron; load the voice stack).
+
+Measure tap to welcome before and after, on the branch deploy and in GA4 for real parents (the analytics build adds the timing event). Baseline 4.4 s (07-speed-report.md).
+
 ## Fast follow (not today)
 
 - Klaviyo: list orchestration across tracks; day-2 crew email after payment; "Season 01 is open" send to the ~244 and the offer email inside the nurture; segment "season1_status is set"; Friend Joined and Refunded flows; SBCrTc plain-text part still says 9 to 18 (needs flows:write or the UI).
