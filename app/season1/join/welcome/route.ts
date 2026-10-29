@@ -204,8 +204,11 @@ export async function GET(request: Request) {
     const kidCount = activeKids.length;
     // inviteApplied is added to OrderView by the commit work; absent means false.
     const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
+    // F11: a returning family's order prices every kid as a sibling (pricing.ts, the family
+    // already had a paid kid); the line then says the sibling monthly this order adds.
+    const addedToFamily = order.kids.every((k) => k.role === "sibling");
     // lib/season1/welcomeCopy.ts: per-practice or family monthly; friend orders get February free.
-    vars.THEN_LINE = thenLine(kidCount, applied);
+    vars.THEN_LINE = thenLine(kidCount, applied, addedToFamily);
     vars.LADDER_NOTE = ladderNote(kidCount);
     vars.ORDER_REF = esc(order.publicId);
     // GA purchase on the paid state (welcome.html): values only, no names.

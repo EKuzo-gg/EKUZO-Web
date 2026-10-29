@@ -14,8 +14,20 @@ const usd = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents / 10
  * then monthly on Mar 15 and Apr 15. Siblings get the plain family line plus
  * "less your friend's credit" (Jamie 10-29: one free month only, no edge-case
  * explaining on screen).
+ *
+ * F11 (10-29): a returning family adding kids (every kid on the order priced as
+ * a sibling, because the family already had a paid kid) gets the sibling
+ * monthly for this order's kids, said as an addition: "Then $128 more a month
+ * from Feb 15, at the sibling rate." The order view does not carry the family's
+ * other kids, so the line prices only what this order added.
  */
-export function thenLine(kidCount: number, inviteApplied: boolean): string {
+export function thenLine(kidCount: number, inviteApplied: boolean, addedToFamily = false): string {
+  if (addedToFamily) {
+    const added = OFFER.siblingMonthlyCents * kidCount;
+    const who = kidCount === 1 ? "" : kidCount === 2 ? " for both kids" : ` for all ${kidCount} kids`;
+    const line = `Then ${usd(added)} more a month${who} from Feb 15, at the sibling rate`;
+    return inviteApplied ? `${line}, less your friend's credit.` : `${line}.`;
+  }
   const familyMonthly = OFFER.monthlyCents + OFFER.siblingMonthlyCents * (kidCount - 1);
   const kids = kidCount === 2 ? "both" : `all ${kidCount}`;
   if (kidCount === 1) {

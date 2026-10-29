@@ -5,6 +5,24 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: F11 and F12
+
+Branch `season1-commit`. Defects F11 and F12 in `docs/season1-commit/final/05-defects.md`.
+
+1. **F12, the card form jumped down when the wallet row opened** (`app/season1/join/signup/signup.html`): the wallet block now holds its room from first paint: 20 px margin, a 56 px box (Stripe's frame height at `buttonHeight: 48`) and the "Or pay with card" divider, so nothing is added when Stripe reports a wallet. Until a button draws, the box shows a quiet placeholder bar (`var(--stone)`, 48 px, 2 px radius); it goes once Stripe's frame grows to 40 px or more (`.drawn`, set from the existing ResizeObserver, which now watches a frame that can grow inside the held box). When Stripe reports no wallet (or `loaderror`, or Stripe.js fails to load, or the card form fails) the block collapses (`.none`), which moves the card form up only. The block is never clipped, so Stripe can still draw the buttons once the row is scrolled on screen. `.xpbox` is `display:flow-root`: Stripe's drawn frame carries a negative margin that otherwise collapsed through the box and pulled the divider and card form up 4 px. Test bar only: the wallet readout line holds two lines (`min-height:2.8em`) so its text changing from "rendered=no" to the full readout no longer moves the page at 390.
+2. **F11, the welcome line for a returning family adding a kid** (`lib/season1/welcomeCopy.ts`, `app/season1/join/welcome/route.ts`): when every kid on the order was priced as a sibling (the family already had a paid kid, `pricing.ts`), the line under the receipt now prices what this order adds at the sibling monthly: "Then $128 more a month from Feb 15, at the sibling rate." (two kids: "Then $256 more a month for both kids from Feb 15, at the sibling rate."; with a friend's credit the line ends ", less your friend's credit."). The order view does not carry the family's other kids, so the line says the added amount rather than the family total ($288); getting the total would need a family-wide kid query in `ORDER_VIEW_SELECT`, not added. Orders with a first kid are unchanged.
+
+- Tests: `welcomeCopy.test.ts` (4 new: one, two and three added siblings, friend tail, default unchanged); `welcomeStates.test.ts` (2 new: the $80 returning order renders the $128 line and no "$160 a month"; two added siblings; a first plus sibling order keeps "$288 a month for both kids"); new `signupWallet.test.ts` (2: room and divider in the template from first paint, never clipped to 0 px).
+- **Verified:** `npm run test:s1` 203 of 203 pass (was 195). `tsc --noEmit` clean. eslint clean on touched files. `npm run build` succeeds (placeholder Stripe values inline for the build command only). F12 in Playwright Chromium against the branch deploy: see the numbers below.
+
+**Deltas for Aaron (your lane, yours to restyle):**
+1. `signup.html` wallet block markup: `#xp` now sits inside a new `<div class="xpbox">`.
+2. CSS: `.xpw{margin-top:20px}` always (was only with `.on`); `.xpbox{position:relative;display:flow-root;min-height:56px}`; `.xpbox:before` is the placeholder bar (stone, 48 px, 2 px radius) hidden by `.xpw.drawn`; `#xp{position:relative}`. Removed `.xpw.on{margin-top:20px}`, `.xpw.on #xp{min-height:48px}`, `.xpw .orpay{display:none}`, `.xpw.on .orpay{display:flex}`: the divider now shows whenever the block is not collapsed. `.on` is still set when a wallet is available, with no styles on it.
+3. Test bar: `#xpDiag` gains `min-height:2.8em`.
+4. Below 390 px wide (320 tested) with three wallets, Stripe wraps to a second row ("See more"), 95 px, so the card form still moves down 39 px when the row draws on those widths. ECE `layout` (`maxColumns`, `maxRows`, `overflow`) is the lever if you want one row there.
+5. Welcome page line under the receipt for a returning family adding kids (server text, above).
+
+---
 ## Jamie's Claude, 2026-10-29: wallet order and speed
 
 Branch `season1-commit` (6304eb8, 0a2e1ae, 9c36ce6, 6f26eb8, 5dfccb7). Jamie 12:24 CT on wallets ("always want to see google or apple if i can ... link is fine if those aren't there, just secondary") and speed ("if we lose even 1 sale because it took too long..."), plus his 12:25 real-phone finding (Android Chrome, Google Pay set up as default: no wallet block at all on the branch).

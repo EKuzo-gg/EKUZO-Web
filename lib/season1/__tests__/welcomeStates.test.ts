@@ -31,8 +31,8 @@ function raw(v: unknown): string | null {
   return String(v);
 }
 
-function kid(firstName: string, status: string, unitCents: number) {
-  return { id: `k-${firstName}`, firstName, age: 11, status, role: "kid", unitCents };
+function kid(firstName: string, status: string, unitCents: number, role = "kid") {
+  return { id: `k-${firstName}`, firstName, age: 11, status, role, unitCents };
 }
 
 function order(status: string, over: Record<string, unknown> = {}): Record<string, unknown> {
@@ -128,6 +128,25 @@ describe("F1 welcome states", () => {
     assert.match(html, /Great, Sam and Theo are in!/);
     assert.match(html, /Then \$288 a month for both kids from Feb 15\./);
     assert.match(html, /For your first kid\./);
+  });
+
+  it("F11: a returning family adding a sibling ($80 today) sees the $128 sibling monthly, not $160", async () => {
+    const { html } = await render(order("paid", { amount_cents: 8000, kids: [kid("Theo", "paid", 8000, "sibling")] }));
+    assert.match(html, /Theo, Season 01, first month<\/span><span>\$80</);
+    assert.match(html, /Then \$128 more a month from Feb 15, at the sibling rate\./);
+    assert.doesNotMatch(html, /\$160 a month/);
+  });
+
+  it("F11: a returning family adding two siblings; a new family's first-plus-sibling order is unchanged", async () => {
+    const two = await render(
+      order("paid", { amount_cents: 16000, kids: [kid("Theo", "paid", 8000, "sibling"), kid("Ava", "paid", 8000, "sibling")] }),
+    );
+    assert.match(two.html, /Then \$256 more a month for both kids from Feb 15, at the sibling rate\./);
+    const fresh = await render(
+      order("paid", { amount_cents: 18000, kids: [kid("Sam", "paid", 10000, "first"), kid("Theo", "paid", 8000, "sibling")] }),
+    );
+    assert.match(fresh.html, /Then \$288 a month for both kids from Feb 15\./);
+    assert.doesNotMatch(fresh.html, /sibling rate/);
   });
 
   it("invited two-kid order: family line less the friend's credit", async () => {

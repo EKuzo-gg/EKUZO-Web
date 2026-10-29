@@ -96,16 +96,19 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 #pe{min-height:44px}
 /* Wallet buttons (Express Checkout Element) above the card form. 10-29 (2): the block stays in the layout
    (Stripe draws the buttons only once their frame is scrolled on screen; the old 0-height clip kept them from
-   ever drawing). It opens, with room held for one row of buttons, as soon as a wallet is available, and closes
-   when none is. It never closes on a slow draw: a phone on a weak signal can take seconds to draw Google Pay,
-   and hiding a wallet costs more than a rare empty row (a wallet script blocked by an extension). */
+   ever drawing). F12 (10-29): the room for one row of buttons (Stripe's 56 px frame at buttonHeight 48) and the
+   "Or pay with card" divider are held from first paint, with a quiet placeholder bar until a button draws, so
+   the card form never moves down. When Stripe reports no wallet the block collapses (content moves up only).
+   It never closes on a slow draw: a phone on a weak signal can take seconds to draw Google Pay, and hiding a
+   wallet costs more than a rare placeholder row (a wallet script blocked by an extension). */
+.xpw{margin-top:20px}
 .xpw.none{display:none}
-.xpw.on{margin-top:20px}
-.xpw.on #xp{min-height:48px}
-.xpw .orpay{display:none}
-.xpw.on .orpay{display:flex}
+.xpbox{position:relative;display:flow-root;min-height:56px}
+.xpbox:before{content:"";position:absolute;left:0;right:0;top:0;height:48px;background:var(--stone);border-radius:2px}
+.xpw.drawn .xpbox:before{display:none}
+#xp{position:relative}
 .orpay{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted)}
-#xpDiag{display:block;font-weight:500;margin-top:2px}
+#xpDiag{display:block;font-weight:500;margin-top:2px;min-height:2.8em}
 .orpay:before,.orpay:after{content:"";flex:1;height:1px;background:rgba(0,0,0,.15)}
 .spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s1spin .7s linear infinite}
 @keyframes s1spin{to{transform:rotate(360deg)}}
@@ -201,7 +204,7 @@ p,li,.small{text-wrap:pretty}
 <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
 <label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" autocomplete="off" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
 <p class="err" id="e-terms"></p>
-<div class="xpw" id="xpWrap"><div id="xp"></div><p class="err" id="e-xp" role="alert"></p><p class="orpay">Or pay with card</p></div>
+<div class="xpw" id="xpWrap"><div class="xpbox"><div id="xp"></div></div><p class="err" id="e-xp" role="alert"></p><p class="orpay">Or pay with card</p></div>
 <div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
 <p id="inviteNote" class="note" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
@@ -308,7 +311,7 @@ var APPEAR={theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#f
     rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}};
 function initStripe(){
  if(!cfg.open)return;
- if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
+ if(!window.Stripe||!cfg.publishableKey){xpOff();g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
  try{
   stripe=Stripe(cfg.publishableKey);
   // Card form group: card only. loader 'never' (10-29): Stripe's loading skeleton drew two empty tab boxes
@@ -322,7 +325,7 @@ function initStripe(){
   pe.on('ready',function(){peReady=true});
   pe.on('focus',function(){warm()});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
- }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
+ }catch(err){xpOff();g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
  initExpress();
 }
 /* Express Checkout Element (Jamie 10-29): Apple Pay and Google Pay whenever the browser supports them, on any
@@ -330,7 +333,7 @@ function initStripe(){
    (card + link) so Link never reaches the card form. PayPal, Amazon Pay and Klarna off. Same commit flow and
    Apple Pay recurring request as the card. */
 var xpAvail=null,xpLabel='checking';
-/* Height Stripe gave its frame (8 px until the buttons draw), for the test-mode line; #xp holds 48 px while open. */
+/* Height Stripe gave its frame (8 px until the buttons draw), for the test-mode line and the placeholder; .xpbox holds 56 px from first paint. */
 function xpH(){var f=g('xp').querySelector('iframe');return f?Math.round(f.getBoundingClientRect().height):0}
 function xpDiag(){
  if(cfg.mode!=='test')return;
@@ -342,8 +345,11 @@ function xpShow(){
  var w=g('xpWrap'),any=!!xpAvail&&(xpAvail.applePay||xpAvail.googlePay||xpAvail.link);
  w.classList.toggle('none',xpAvail!==null&&!any);
  w.classList.toggle('on',any);
+ w.classList.toggle('drawn',xpH()>=40);
  xpDiag();
 }
+/* F12: no Stripe, no wallet block (collapses the room held from first paint). */
+function xpOff(){g('xpWrap').classList.add('none')}
 function initExpress(){
  try{
   xel=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',allowedPaymentMethodTypes:['card','link'],appearance:APPEAR});
@@ -351,9 +357,9 @@ function initExpress(){
    paymentMethods:{applePay:'always',googlePay:'always',link:'auto',paypal:'never',amazonPay:'never',klarna:'never'},
    paymentMethodOrder:['apple_pay','google_pay','link'],
    buttonType:{applePay:'plain',googlePay:'plain'},buttonHeight:48,billingAddressRequired:false});
-  // The block stays in the layout so the buttons can draw (Stripe's documented pattern shows the container on
-  // this event). Until a button has drawn (40 px) it has no margin and no divider, so a wallet script blocked by
-  // the network or an extension leaves at most Stripe's few-pixel empty frame, never a gap with a divider.
+  // The block is in the layout from first paint so the buttons can draw (Stripe draws them once the frame is
+  // on screen). This event only collapses it when no wallet is available; the placeholder bar goes once a button
+  // has drawn (the ResizeObserver below sees Stripe's frame grow to 56 px).
   xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods,o={applePay:false,googlePay:false,link:false};
    if(pm)Object.keys(o).forEach(function(k){o[k]=!!(pm[k]&&pm[k].available)});
    xpAvail=o;xpShow()});
@@ -370,7 +376,7 @@ function initExpress(){
   xp.on('confirm',function(ev){var body=collect();if(!body){try{ev.paymentFailed({reason:'fail'})}catch(_){}return}pay(body,ev)});
   xp.mount('#xp');
   xpDiag();
- }catch(_){g('xpWrap').classList.add('none');xpLabel='init failed';xpDiag()}
+ }catch(_){xpOff();xpLabel='init failed';xpDiag()}
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}

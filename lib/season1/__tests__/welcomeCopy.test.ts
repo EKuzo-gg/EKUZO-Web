@@ -22,6 +22,22 @@ describe("welcome THEN_LINE", () => {
     assert.equal(thenLine(4, true), "Then $544 a month for all 4 kids from Feb 15, less your friend's credit.");
     assert.ok(!thenLine(2, true).includes("February is free"));
   });
+  it("F11: a returning family adding one kid gets the sibling monthly this order adds", () => {
+    const s = thenLine(1, false, true);
+    assert.equal(s, "Then $128 more a month from Feb 15, at the sibling rate.");
+    assert.ok(!s.includes("$160"));
+  });
+  it("F11: a returning family adding two or three kids", () => {
+    assert.equal(thenLine(2, false, true), "Then $256 more a month for both kids from Feb 15, at the sibling rate.");
+    assert.equal(thenLine(3, false, true), "Then $384 more a month for all 3 kids from Feb 15, at the sibling rate.");
+  });
+  it("F11: a returning family's order through a friend's code keeps the credit tail", () => {
+    assert.equal(thenLine(1, true, true), "Then $128 more a month from Feb 15, at the sibling rate, less your friend's credit.");
+  });
+  it("F11: the default (an order with a first kid) is unchanged", () => {
+    assert.equal(thenLine(1, false, false), thenLine(1, false));
+    assert.equal(thenLine(2, true, false), thenLine(2, true));
+  });
 });
 
 describe("welcome discount ladder (PR-8)", () => {
