@@ -14,7 +14,7 @@
    "overflowX": 0,
    "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes"
   },
-  "known_after_s": 1.18,
+  "known_after_s": 1.31,
   "after_report": {
    "secShut": true,
    "inert": true,
@@ -39,7 +39,7 @@
    "overflowX": 0,
    "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes"
   },
-  "card_visible_after_click_s": 0.11,
+  "card_visible_after_click_s": 0.1,
   "focus_in_card_number": true,
   "expanded": {
    "secShut": false,

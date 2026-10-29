@@ -1,0 +1,225 @@
+{
+ "none_390": {
+  "width": 390,
+  "mode": "Stripe reports no wallet",
+  "at_load": {
+   "secShut": false,
+   "inert": false,
+   "secH": 112,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 2,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "known_after_s": 0.0,
+  "after_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "settled": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ },
+ "none_1440": {
+  "width": 1440,
+  "mode": "Stripe reports no wallet",
+  "at_load": {
+   "secShut": false,
+   "inert": false,
+   "secH": 116,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 2,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "known_after_s": 0.0,
+  "after_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "settled": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ },
+ "unknown_390": {
+  "width": 390,
+  "mode": "Stripe never reports",
+  "at_load": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw",
+   "peFrameH": 2,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes"
+  },
+  "known_after_s": null,
+  "after_report": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw",
+   "peFrameH": 369,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=no (8px) PaymentRequest=yes"
+  },
+  "settled": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw drawn",
+   "peFrameH": 369,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=yes (56px) PaymentRequest=yes"
+  },
+  "card_visible_after_click_s": 0.1,
+  "focus_in_card_number": true,
+  "expanded": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw drawn",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=yes (56px) PaymentRequest=yes"
+  },
+  "session_flag": "1",
+  "after_second_click_open": true,
+  "keyboard_reached_toggle": true,
+  "keyboard_tab_sequence_from_terms": [
+   "A Terms of Service",
+   "A Privacy Policy",
+   "IFRAME in #xp",
+   "IFRAME in #xp",
+   "IFRAME in #xp",
+   "cardTog"
+  ],
+  "keyboard_expand_focus_card": true,
+  "reload_open_from_session": true,
+  "console_errors": []
+ },
+ "late_none_390": {
+  "width": 390,
+  "mode": "open while unknown, type, then no wallet at 5 s",
+  "at_load": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw",
+   "peFrameH": 2,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes"
+  },
+  "card_frame_tops": [
+   889,
+   1015
+  ],
+  "moved_down": false,
+  "after": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "card_value_kept": "4242",
+  "console_errors": []
+ },
+ "late_none_1440": {
+  "width": 1440,
+  "mode": "open while unknown, type, then no wallet at 5 s",
+  "at_load": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw",
+   "peFrameH": 2,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes"
+  },
+  "card_frame_tops": [
+   956,
+   1082
+  ],
+  "moved_down": false,
+  "after": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw none",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes"
+  },
+  "card_value_kept": "4242",
+  "console_errors": []
+ }
+}

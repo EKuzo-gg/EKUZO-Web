@@ -1,0 +1,176 @@
+{
+ "link_only_390": {
+  "width": 390,
+  "mode": "Link only",
+  "after_link_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_link_report_divider": {
+   "plainDividerShown": true,
+   "plainText": "Or pay with card",
+   "toggleHidden": true
+  },
+  "card_number_box_h": 43,
+  "final": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on drawn",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=yes (56px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ },
+ "link_only_1440": {
+  "width": 1440,
+  "mode": "Link only",
+  "after_link_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_link_report_divider": {
+   "plainDividerShown": true,
+   "plainText": "Or pay with card",
+   "toggleHidden": true
+  },
+  "card_number_box_h": 43,
+  "final": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on drawn",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=yes (56px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ },
+ "link_then_gpay_390": {
+  "width": 390,
+  "mode": "Link only, then Google Pay at 3 s",
+  "after_link_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_link_report_divider": {
+   "plainDividerShown": true,
+   "plainText": "Or pay with card",
+   "toggleHidden": true
+  },
+  "after_gpay_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_gpay_report_divider": {
+   "plainDividerShown": false,
+   "plainText": "Or pay with card",
+   "toggleHidden": false
+  },
+  "card_number_box_h": 43,
+  "final": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ },
+ "link_then_gpay_1440": {
+  "width": 1440,
+  "mode": "Link only, then Google Pay at 3 s",
+  "after_link_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": false,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_link_report_divider": {
+   "plainDividerShown": true,
+   "plainText": "Or pay with card",
+   "toggleHidden": true
+  },
+  "after_gpay_report": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "after_gpay_report_divider": {
+   "plainDividerShown": false,
+   "plainText": "Or pay with card",
+   "toggleHidden": false
+  },
+  "card_number_box_h": 43,
+  "final": {
+   "secShut": false,
+   "inert": false,
+   "secH": 344,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on",
+   "peFrameH": 276,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "console_errors": []
+ }
+}
