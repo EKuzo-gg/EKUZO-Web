@@ -182,20 +182,26 @@ export async function GET(request: Request) {
   };
 
   if (state === "paid" && order) {
-    // Hero and share name the kids still in (a partially refunded order keeps
-    // its receipt lines and amounts as paid).
+    // Hero, share, THEN_LINE and LADDER_NOTE count the kids still in (F10). The
+    // receipt keeps every line; a refunded kid's line is marked and struck, and
+    // "Paid today" stays the amount paid.
     const inKids = order.kids.filter((k) => k.status !== "refunded");
-    const names = (inKids.length > 0 ? inKids : order.kids).map((k) => k.firstName);
+    const activeKids = inKids.length > 0 ? inKids : order.kids;
+    const names = activeKids.map((k) => k.firstName);
     vars.KID1 = esc(names[0]);
     vars.HERO =
       names.length === 1
         ? `Great, ${esc(names[0])}'s in!`
         : `Great, ${esc(joinNames(names))} are in!`;
     vars.RECEIPT_LINES = order.kids
-      .map((k) => `<div class="line"><span>${esc(k.firstName)}, Season 01, first month</span><span>${money(k.unitCents)}</span></div>`)
+      .map((k) =>
+        k.status === "refunded"
+          ? `<div class="line"><span>${esc(k.firstName)}, refunded</span><span><s>${money(k.unitCents)}</s></span></div>`
+          : `<div class="line"><span>${esc(k.firstName)}, Season 01, first month</span><span>${money(k.unitCents)}</span></div>`,
+      )
       .join("");
     vars.TOTAL = money(order.amountCents);
-    const kidCount = order.kids.length;
+    const kidCount = activeKids.length;
     // inviteApplied is added to OrderView by the commit work; absent means false.
     const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
     // lib/season1/welcomeCopy.ts: per-practice or family monthly; friend orders get February free.

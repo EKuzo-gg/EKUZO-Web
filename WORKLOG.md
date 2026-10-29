@@ -5,6 +5,19 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: F10 and friend sibling line
+
+Branch `season1-commit`. Defect F10 in `docs/season1-commit/final/05-defects.md` (approved by Jamie) and Jamie's 10-29 call on friend orders with siblings (one free month only, no edge cases explained on screen).
+
+- `app/season1/join/welcome/route.ts` (F10): on a `partially_refunded` order, THEN_LINE and LADDER_NOTE count only kids not marked refunded (`s1_kids.status = 'refunded'`, set by the webhook from the `s1-refund` metadata), like the hero and share block already did. In the receipt a refunded kid's line reads "Theo, refunded" with the amount struck (`<s>`). "Paid today" stays the amount paid. No "Refunded $X" line: the order view carries no refunded total (it lives only in Stripe and the Klaviyo outbox payload), so none was added.
+- `lib/season1/welcomeCopy.ts`: invited multi-kid THEN_LINE is now the plain family line plus a tail, e.g. "Then $288 a month for both kids from Feb 15, less your friend's credit." The invited one-kid line is unchanged.
+- Tests: `welcomeCopy.test.ts` friend sibling case rewritten; `welcomeStates.test.ts` adds F10 (two kids, one refunded), paid two kids, invited two kids, and updates the partial refund receipt assertion.
+- **Verified:** `npm run test:s1` 188 of 188 pass (was 185). `tsc --noEmit` clean. eslint clean on touched files. `npm run build` succeeds (placeholder Stripe values inline for the build command only).
+- **Not changed, for follow-up:** the Klaviyo template VkbuB3 still carries the old multi-kid friend wording ("February is free for your first kid with your friend's credit", see `03-golive-log.md` 08:10); align it with the site line when Klaviyo is next touched.
+
+**Deltas for Aaron:** in the receipt on `/season1/join/welcome`, a refunded kid's line now reads "{Name}, refunded" with the amount struck through (plain `<s>` inside the existing `.line` markup; yours to restyle). On a friend order with siblings the line under the receipt now reads "Then $288 a month for both kids from Feb 15, less your friend's credit." (was the two-sentence "February is free for your first kid..." version).
+
+---
 ## Jamie's Claude, 2026-10-29: F1 welcome states
 
 Branch `season1-commit`. Defect F1 in `docs/season1-commit/final/05-defects.md`: a refunded order looped on "We're confirming your payment" with a 4 second refresh forever (each refresh ran fulfil).

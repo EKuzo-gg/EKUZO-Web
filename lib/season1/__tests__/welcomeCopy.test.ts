@@ -17,15 +17,10 @@ describe("welcome THEN_LINE", () => {
     assert.equal(s, "February is free with your friend's credit. Then $160 on Mar 15 and Apr 15.");
     assert.ok(!s.includes("Feb 15"));
   });
-  it("siblings through a friend's code: the credit covers $160 of the family's February", () => {
-    assert.equal(
-      thenLine(2, true),
-      "February is free for your first kid with your friend's credit, so February is $128 in total. Then $288 a month for both kids on Mar 15 and Apr 15.",
-    );
-    assert.equal(
-      thenLine(4, true),
-      "February is free for your first kid with your friend's credit, so February is $384 in total. Then $544 a month for all 4 kids on Mar 15 and Apr 15.",
-    );
+  it("siblings through a friend's code: the plain family line, less the friend's credit", () => {
+    assert.equal(thenLine(2, true), "Then $288 a month for both kids from Feb 15, less your friend's credit.");
+    assert.equal(thenLine(4, true), "Then $544 a month for all 4 kids from Feb 15, less your friend's credit.");
+    assert.ok(!thenLine(2, true).includes("February is free"));
   });
 });
 

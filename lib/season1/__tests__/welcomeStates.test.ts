@@ -100,12 +100,43 @@ describe("F1 welcome states", () => {
     );
     assert.match(html, /Great, Sam's in!/);
     assert.match(html, /Share Sam's link/);
-    assert.match(html, /Ben, Season 01, first month<\/span><span>\$64</);
+    assert.match(html, /Ben, refunded<\/span><span><s>\$64<\/s></);
     assert.match(html, /Paid today<\/span><span>\$144</);
     assert.match(html, /\/crew\/48271937/);
     assert.doesNotMatch(html, REFRESH);
     assert.doesNotMatch(html, /confirming your payment/);
     assert.equal(queries.length, 1);
+  });
+
+  it("F10: partially_refunded two-kid order prices and labels only the kid still in", async () => {
+    const { html } = await render(
+      order("partially_refunded", { amount_cents: 18000, kids: [kid("Sam", "paid", 10000), kid("Theo", "refunded", 8000)] }),
+    );
+    assert.match(html, /Sam, Season 01, first month<\/span><span>\$100</);
+    assert.match(html, /Theo, refunded<\/span><span><s>\$80<\/s></);
+    assert.doesNotMatch(html, /Theo, Season 01/);
+    assert.match(html, /Paid today<\/span><span>\$180</);
+    assert.match(html, /Then \$160 a month from Feb 15\. About \$20 a practice\./);
+    assert.doesNotMatch(html, /both kids/);
+    assert.doesNotMatch(html, /For your first kid\./);
+  });
+
+  it("paid two-kid order keeps the family line and the ladder label", async () => {
+    const { html } = await render(
+      order("paid", { amount_cents: 18000, kids: [kid("Sam", "paid", 10000), kid("Theo", "paid", 8000)] }),
+    );
+    assert.match(html, /Great, Sam and Theo are in!/);
+    assert.match(html, /Then \$288 a month for both kids from Feb 15\./);
+    assert.match(html, /For your first kid\./);
+  });
+
+  it("invited two-kid order: family line less the friend's credit", async () => {
+    const { html } = await render(
+      order("paid", { amount_cents: 18000, invite_applied: true, kids: [kid("Sam", "paid", 10000), kid("Theo", "paid", 8000)] }),
+    );
+    assert.match(html, /Then \$288 a month for both kids from Feb 15, less your friend's credit\./);
+    assert.doesNotMatch(html, /February is free/);
+    assert.match(html, /Friend credit recorded\./);
   });
 
   it("refunded renders a static refunded page: no refresh, no share, no paid script, no Stripe check", async () => {
