@@ -35,3 +35,11 @@ Standing rule from the prompt and brief: production steps on Jamie's go, each re
 - "Season 01 is open" email to the waitlist, and the offer email inside the nurture
 - Discord commit channel and webhook ($ notification: amount, kid count, source)
 - Friend Joined and Refunded flows
+
+## Decisions after go-live, 10-29
+
+| Time | Topic | Jamie | What we do |
+|---|---|---|---|
+| 12:24 | Wallets | "i don't mind using link i just always want to see google or apple if i can ... link is fine if those aren't there, just secondary" | Express Checkout shows Apple Pay and Google Pay first wherever the browser supports them, Link after; card form without Link |
+| 12:24 | Speed | "timing always matters ... if we lose even 1 sale because it took too long ... not having a quicker service screws us" | Pre-warm on page load, fewer DB round trips, region check; speed report with a Neon plan recommendation |
+| 12:25 | Season line copy | "I approve the copy" | "Season 01 runs mid January to May 6, 2027. Your $100 covers January." stays on sign-up and the join offer card; Jamie shows Aaron |
