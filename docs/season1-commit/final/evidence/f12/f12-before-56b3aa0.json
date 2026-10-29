@@ -1,0 +1,280 @@
+{
+ "390": {
+  "card_form_drawn_t": 2764,
+  "card_number_top_when_drawn": 898.0,
+  "card_number_tops_since_drawn": [
+   898.0,
+   1005.8
+  ],
+  "card_number_tops_since_drawn_excl_testbar": [
+   827.4,
+   918.4
+  ],
+  "testbar_heights_since_drawn": [
+   70.6,
+   87.4
+  ],
+  "fcp_ms": 884,
+  "load_ms": 2454,
+  "pe_top_first_paint": 849.6,
+  "first_sample_t": 897,
+  "pe_top_at_6s": 984,
+  "last_sample_t": 8447,
+  "card_number_top_first_paint": 871.4,
+  "card_number_top_at_6s": 1005.8,
+  "card_number_offset_in_frame": 21.796875,
+  "pe_frame_first_seen": {
+   "t": 1174,
+   "top": 828.2
+  },
+  "distinct_pe_tops": [
+   828.2,
+   847.2,
+   849.6,
+   870.2,
+   876.2,
+   984
+  ],
+  "pe_top_changes": [
+   {
+    "t": 847,
+    "pe": 849.6,
+    "xpWrapH": 0,
+    "xpFrameH": null,
+    "cls": "xpw"
+   },
+   {
+    "t": 1174,
+    "pe": 828.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 1216,
+    "pe": 847.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 1373,
+    "pe": 870.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 2764,
+    "pe": 876.2,
+    "xpWrapH": 8,
+    "xpFrameH": 8,
+    "cls": "xpw"
+   },
+   {
+    "t": 3797,
+    "pe": 984,
+    "xpWrapH": 79,
+    "xpFrameH": 8,
+    "cls": "xpw on"
+   }
+  ],
+  "wallet_block_changes": [
+   {
+    "t": 697,
+    "pe": null,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": null,
+    "xpFrameH": null,
+    "cls": null,
+    "testBarH": 0
+   },
+   {
+    "t": 847,
+    "pe": 849.6,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": 0,
+    "xpFrameH": null,
+    "cls": "xpw",
+    "testBarH": 28.8
+   },
+   {
+    "t": 1174,
+    "pe": 828.2,
+    "peFrame": 828.2,
+    "peFrameH": 2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 47.6
+   },
+   {
+    "t": 2764,
+    "pe": 876.2,
+    "peFrame": 876.2,
+    "peFrameH": 368.8,
+    "xpWrapH": 8,
+    "xpFrameH": 8,
+    "cls": "xpw",
+    "testBarH": 70.6
+   },
+   {
+    "t": 3797,
+    "pe": 984,
+    "peFrame": 984,
+    "peFrameH": 368.8,
+    "xpWrapH": 79,
+    "xpFrameH": 8,
+    "cls": "xpw on",
+    "testBarH": 87.4
+   }
+  ],
+  "console_errors": [],
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+ },
+ "1440": {
+  "card_form_drawn_t": 2313,
+  "card_number_top_when_drawn": 965.0,
+  "card_number_tops_since_drawn": [
+   965.0,
+   1056.0
+  ],
+  "card_number_tops_since_drawn_excl_testbar": [
+   894.4,
+   985.4
+  ],
+  "testbar_heights_since_drawn": [
+   70.6
+  ],
+  "fcp_ms": 480,
+  "load_ms": 1819,
+  "pe_top_first_paint": 932.7,
+  "first_sample_t": 493,
+  "pe_top_at_6s": 1034.2,
+  "last_sample_t": 7812,
+  "card_number_top_first_paint": 954.5,
+  "card_number_top_at_6s": 1056.0,
+  "card_number_offset_in_frame": 21.796875,
+  "pe_frame_first_seen": {
+   "t": 689,
+   "top": 896.2
+  },
+  "distinct_pe_tops": [
+   896.2,
+   919.2,
+   932.7,
+   937.2,
+   943.2,
+   1034.2
+  ],
+  "pe_top_changes": [
+   {
+    "t": 444,
+    "pe": 932.7,
+    "xpWrapH": 0,
+    "xpFrameH": null,
+    "cls": "xpw"
+   },
+   {
+    "t": 689,
+    "pe": 896.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 847,
+    "pe": 919.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 861,
+    "pe": 937.2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 2112,
+    "pe": 943.2,
+    "xpWrapH": 8,
+    "xpFrameH": 8,
+    "cls": "xpw"
+   },
+   {
+    "t": 3564,
+    "pe": 1034.2,
+    "xpWrapH": 79,
+    "xpFrameH": 8,
+    "cls": "xpw on"
+   }
+  ],
+  "wallet_block_changes": [
+   {
+    "t": 312,
+    "pe": null,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": null,
+    "xpFrameH": null,
+    "cls": null,
+    "testBarH": 0
+   },
+   {
+    "t": 444,
+    "pe": 932.7,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": 0,
+    "xpFrameH": null,
+    "cls": "xpw",
+    "testBarH": 28.8
+   },
+   {
+    "t": 689,
+    "pe": 896.2,
+    "peFrame": 896.2,
+    "peFrameH": 2,
+    "xpWrapH": 2,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 47.6
+   },
+   {
+    "t": 2112,
+    "pe": 943.2,
+    "peFrame": 943.2,
+    "peFrameH": 2,
+    "xpWrapH": 8,
+    "xpFrameH": 8,
+    "cls": "xpw",
+    "testBarH": 70.6
+   },
+   {
+    "t": 3564,
+    "pe": 1034.2,
+    "peFrame": 1034.2,
+    "peFrameH": 275.6,
+    "xpWrapH": 79,
+    "xpFrameH": 8,
+    "cls": "xpw on",
+    "testBarH": 70.6
+   }
+  ],
+  "console_errors": [
+   "Access to fetch at 'https://r.stripe.com/b' from origin 'https://js.stripe.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+   "Failed to load resource: net::ERR_FAILED",
+   "Access to fetch at 'https://r.stripe.com/b' from origin 'https://js.stripe.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+   "Failed to load resource: net::ERR_FAILED",
+   "Access to fetch at 'https://r.stripe.com/b' from origin 'https://js.stripe.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+   "Failed to load resource: net::ERR_FAILED",
+   "Access to fetch at 'https://r.stripe.com/b' from origin 'https://js.stripe.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+   "Failed to load resource: net::ERR_FAILED"
+  ],
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+ }
+}

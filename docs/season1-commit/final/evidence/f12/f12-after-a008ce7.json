@@ -1,0 +1,270 @@
+{
+ "390": {
+  "card_form_drawn_t": 2221,
+  "card_number_top_when_drawn": 1017.8,
+  "card_number_tops_since_drawn": [
+   1017.8
+  ],
+  "card_number_tops_since_drawn_excl_testbar": [
+   930.4
+  ],
+  "testbar_heights_since_drawn": [
+   87.4
+  ],
+  "fcp_ms": 612,
+  "load_ms": 1937,
+  "pe_top_first_paint": 955.6,
+  "first_sample_t": 619,
+  "pe_top_at_6s": 996,
+  "last_sample_t": 7919,
+  "card_number_top_first_paint": 977.4,
+  "card_number_top_at_6s": 1017.8,
+  "card_number_offset_in_frame": 21.796875,
+  "pe_frame_first_seen": {
+   "t": 844,
+   "top": 987.2
+  },
+  "distinct_pe_tops": [
+   955.6,
+   973,
+   987.2,
+   996,
+   1007.2
+  ],
+  "pe_top_changes": [
+   {
+    "t": 566,
+    "pe": 955.6,
+    "xpWrapH": 86,
+    "xpFrameH": null,
+    "cls": "xpw"
+   },
+   {
+    "t": 844,
+    "pe": 987.2,
+    "xpWrapH": 86,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 942,
+    "pe": 1007.2,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 970,
+    "pe": 973,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 1020,
+    "pe": 996,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   }
+  ],
+  "wallet_block_changes": [
+   {
+    "t": 419,
+    "pe": null,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": null,
+    "xpFrameH": null,
+    "cls": null,
+    "testBarH": 0
+   },
+   {
+    "t": 566,
+    "pe": 955.6,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": 86,
+    "xpFrameH": null,
+    "cls": "xpw",
+    "testBarH": 28.8
+   },
+   {
+    "t": 844,
+    "pe": 987.2,
+    "peFrame": 987.2,
+    "peFrameH": 2,
+    "xpWrapH": 86,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 64.4
+   },
+   {
+    "t": 942,
+    "pe": 1007.2,
+    "peFrame": 1007.2,
+    "peFrameH": 2,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 64.4
+   },
+   {
+    "t": 2319,
+    "pe": 996,
+    "peFrame": 996,
+    "peFrameH": 368.8,
+    "xpWrapH": 87,
+    "xpFrameH": 8,
+    "cls": "xpw",
+    "testBarH": 87.4
+   },
+   {
+    "t": 3409,
+    "pe": 996,
+    "peFrame": 996,
+    "peFrameH": 368.8,
+    "xpWrapH": 87,
+    "xpFrameH": 8,
+    "cls": "xpw on",
+    "testBarH": 87.4
+   }
+  ],
+  "console_errors": [],
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+ },
+ "1440": {
+  "card_form_drawn_t": 2645,
+  "card_number_top_when_drawn": 1084.8,
+  "card_number_tops_since_drawn": [
+   1084.8
+  ],
+  "card_number_tops_since_drawn_excl_testbar": [
+   997.4
+  ],
+  "testbar_heights_since_drawn": [
+   87.4
+  ],
+  "fcp_ms": 624,
+  "load_ms": 2230,
+  "pe_top_first_paint": 1038.7,
+  "first_sample_t": 631,
+  "pe_top_at_6s": 1063,
+  "last_sample_t": 8245,
+  "card_number_top_first_paint": 1060.5,
+  "card_number_top_at_6s": 1084.8,
+  "card_number_offset_in_frame": 21.796875,
+  "pe_frame_first_seen": {
+   "t": 855,
+   "top": 1070.3
+  },
+  "distinct_pe_tops": [
+   1021,
+   1038.7,
+   1040,
+   1063,
+   1070.3
+  ],
+  "pe_top_changes": [
+   {
+    "t": 590,
+    "pe": 1038.7,
+    "xpWrapH": 86,
+    "xpFrameH": null,
+    "cls": "xpw"
+   },
+   {
+    "t": 855,
+    "pe": 1070.3,
+    "xpWrapH": 86,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 881,
+    "pe": 1021,
+    "xpWrapH": 86,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 965,
+    "pe": 1040,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   },
+   {
+    "t": 1205,
+    "pe": 1063,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw"
+   }
+  ],
+  "wallet_block_changes": [
+   {
+    "t": 445,
+    "pe": null,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": null,
+    "xpFrameH": null,
+    "cls": null,
+    "testBarH": 0
+   },
+   {
+    "t": 590,
+    "pe": 1038.7,
+    "peFrame": null,
+    "peFrameH": null,
+    "xpWrapH": 86,
+    "xpFrameH": null,
+    "cls": "xpw",
+    "testBarH": 28.8
+   },
+   {
+    "t": 855,
+    "pe": 1070.3,
+    "peFrame": 1070.3,
+    "peFrameH": 2,
+    "xpWrapH": 86,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 64.4
+   },
+   {
+    "t": 965,
+    "pe": 1040,
+    "peFrame": 1040,
+    "peFrameH": 2,
+    "xpWrapH": 87,
+    "xpFrameH": 2,
+    "cls": "xpw",
+    "testBarH": 64.4
+   },
+   {
+    "t": 2495,
+    "pe": 1063,
+    "peFrame": 1063,
+    "peFrameH": 2,
+    "xpWrapH": 87,
+    "xpFrameH": 8,
+    "cls": "xpw",
+    "testBarH": 87.4
+   },
+   {
+    "t": 3845,
+    "pe": 1063,
+    "peFrame": 1063,
+    "peFrameH": 275.6,
+    "xpWrapH": 87,
+    "xpFrameH": 8,
+    "cls": "xpw on",
+    "testBarH": 87.4
+   }
+  ],
+  "console_errors": [],
+  "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+ }
+}

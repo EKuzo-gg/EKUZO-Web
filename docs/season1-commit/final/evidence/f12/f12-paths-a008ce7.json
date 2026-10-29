@@ -1,0 +1,38 @@
+{
+ "scroll_draw_390": {
+  "pe_frame_top_before_scroll": 996,
+  "pe_frame_top_after_draw": 996,
+  "class_before": "xpw on",
+  "class_after": "xpw on drawn",
+  "xp_frame_h": 56,
+  "xpbox_h": 56
+ },
+ "no_wallet_390": {
+  "class": "xpw on drawn none",
+  "pe_frame_top": 889,
+  "moved_by": -107
+ },
+ "stripe_blocked_390": {
+  "class": "xpw none",
+  "display": "none",
+  "e_pay": "The payment form did not load. Reload the page or text our founder."
+ },
+ "scroll_draw_1440": {
+  "pe_frame_top_before_scroll": 1063,
+  "pe_frame_top_after_draw": 1063,
+  "class_before": "xpw on",
+  "class_after": "xpw on drawn",
+  "xp_frame_h": 56,
+  "xpbox_h": 56
+ },
+ "no_wallet_1440": {
+  "class": "xpw on drawn none",
+  "pe_frame_top": 956,
+  "moved_by": -107
+ },
+ "stripe_blocked_1440": {
+  "class": "xpw none",
+  "display": "none",
+  "e_pay": "The payment form did not load. Reload the page or text our founder."
+ }
+}
