@@ -31,3 +31,47 @@ describe("L7 page framing", () => {
     assert.equal(SECURITY_HEADERS["x-frame-options"], "DENY");
   });
 });
+
+describe("/season1/dev-view route", () => {
+  const KEYS = ["S1_COMMIT_MODE", "STRIPE_SECRET_KEY", "DATABASE_URL"] as const;
+  const get = () => new Request("http://localhost:3103/season1/dev-view?u=/season1/join", { headers: { host: "localhost:3103" } });
+  async function withEnv(env: Partial<Record<(typeof KEYS)[number], string>>, fn: () => Promise<void>) {
+    const saved = Object.fromEntries(KEYS.map((k) => [k, process.env[k]]));
+    try {
+      for (const k of KEYS) {
+        if (env[k] === undefined) delete process.env[k];
+        else process.env[k] = env[k];
+      }
+      await fn();
+    } finally {
+      for (const k of KEYS) {
+        if (saved[k] === undefined) delete process.env[k];
+        else process.env[k] = saved[k];
+      }
+    }
+  }
+  const testDb = "postgresql://u:p@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+
+  it("returns 404 when the mode is off or live", async () => {
+    const { GET } = await import("../../../app/season1/dev-view/route");
+    // Off: explicit, and by default with no Stripe key.
+    await withEnv({ S1_COMMIT_MODE: "off", STRIPE_SECRET_KEY: "sk_test_unit", DATABASE_URL: testDb }, async () => {
+      assert.equal(GET(get()).status, 404);
+    });
+    await withEnv({}, async () => {
+      assert.equal(GET(get()).status, 404);
+    });
+    // Live requested: never the phone preview (and live fails closed to off on this host).
+    await withEnv({ S1_COMMIT_MODE: "live", STRIPE_SECRET_KEY: "sk_live_unit", DATABASE_URL: "postgresql://u:p@ep-prod.us-east-2.aws.neon.tech/neondb" }, async () => {
+      assert.equal(GET(get()).status, 404);
+    });
+  });
+  it("serves the preview in test mode (control)", async () => {
+    const { GET } = await import("../../../app/season1/dev-view/route");
+    await withEnv({ S1_COMMIT_MODE: "test", STRIPE_SECRET_KEY: "sk_test_unit", DATABASE_URL: testDb }, async () => {
+      const r = GET(get());
+      assert.equal(r.status, 200);
+      assert.match(await r.text(), /Phone preview/);
+    });
+  });
+});
