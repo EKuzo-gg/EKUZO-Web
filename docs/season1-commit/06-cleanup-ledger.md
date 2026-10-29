@@ -183,3 +183,14 @@ code 36777976, events, outbox rows (`klaviyo_committed`, `meta_purchase`, `disco
 | refund | re_3UVtVjKORcR8BUEx1q4F6cwK | succeeded $80.00, metadata s1_kid_id (Theo) | F1 retest partial refund via `s1-refund --kid Theo --apply` |
 
 This succeeded PI also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).
+
+## Canary fix verification 2026-10-29 (Jamie's Claude, Stripe test mode + Neon test, branch deploy at c4e1afc and f829fc8)
+
+Run tag `cf10291156`, about 16:55 to 17:05 UTC. Playwright Chromium with an analytics guard (GA, Google Ads, Clarity and Meta requests answered 204 locally; only `googletagmanager.com/gtag/js` was requested). Server side, the paid order went through the normal webhook path, so expect the same side effects as earlier test orders: a Klaviyo "Season 01 Committed" event and test profile for the email below, outbox rows, a family code, and (as with the earlier runs) a copy of the succeeded PI event on the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF.
+
+Neon rows: email `team+s1test-canary-cf10291156@ekuzo.gg` (parent Mara, kids Juno 12 and Pax 9), order 54pymwd4hx paid; email `team+s1test-canary-cf10291156-warm@ekuzo.gg` (parent Mara, kid Wren 10), order frw9qxnrjk left pending (two direct commit calls to measure warm Server-Timing; the second reused the first's PaymentIntent). Emails `...-canary-cf1029r2@` and `...-canary-busy@` made no server rows (no card, and a commit request held and aborted in the browser).
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVwczKORcR8BUEx1chXqjzd | succeeded $180, card 4242 (`wallet: null`), not refunded | Canary fix end to end, two kids, order 54pymwd4hx (cus_VX0ek8LERsEczw) |
+| payment_intent | pi_3UVweIKORcR8BUEx0Ws3vVgc | requires_payment_method $100, never confirmed | Warm Server-Timing measurement, order frw9qxnrjk (pending) |

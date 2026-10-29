@@ -1,0 +1,64 @@
+{
+ "load_390": {
+  "console_errors": [],
+  "xp_on": false,
+  "xp_height": 0,
+  "pe_visible": true,
+  "season_line": "Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "link_in_pe": 0,
+  "hscroll": false
+ },
+ "load_1440": {
+  "console_errors": [],
+  "xp_on": false,
+  "xp_height": 0,
+  "pe_visible": true,
+  "season_line": "Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "link_in_pe": 0,
+  "hscroll": false
+ },
+ "join_then": "Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice.",
+ "join_console_errors": [],
+ "after_back": {
+  "kids": [
+   [
+    "Juno",
+    "12"
+   ],
+   [
+    "Pax",
+    "9"
+   ]
+  ],
+  "pname": "Mara",
+  "email": "team+s1test-canary-cf1029r2@ekuzo.gg",
+  "mob": "512 555 0100",
+  "terms": false,
+  "due": "$180",
+  "sline": "Season 01 runs mid January to May 6, 2027. Your $180 covers January.",
+  "btn": "Save Juno's spot \u00b7 $180",
+  "stored": "{\"kids\":[{\"n\":\"Juno\",\"a\":\"12\"},{\"n\":\"Pax\",\"a\":\"9\"}],\"pname\":\"Mara\",\"email\":\"team+s1test-canary-cf1029r2@ekuzo.gg\",\"mob\":\"512 555 0100\"}"
+ },
+ "fresh_load_restore": [
+  "Juno",
+  "Pax",
+  "team+s1test-canary-cf1029r2@ekuzo.gg"
+ ],
+ "busy_on_click": {
+  "t": "Saving their spot...",
+  "d": true,
+  "spin": true,
+  "busy": "true",
+  "ms_after_click": 12
+ },
+ "after_error": {
+  "t": "Save Juno's spot \u00b7 $180",
+  "err": "Your card number is incomplete."
+ },
+ "commit": {},
+ "flow_console_errors": [],
+ "blocked_analytics": [
+  "https://www.googletagmanager.com/gtag/js"
+ ],
+ "_meta": "branch deploy serving f829fc8, run tag cf1029r2, no payment (submit without card to show busy then restore)"
+}

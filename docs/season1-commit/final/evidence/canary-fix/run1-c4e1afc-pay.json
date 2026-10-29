@@ -1,0 +1,67 @@
+{
+ "load_390": {
+  "console_errors": [],
+  "xp_on": false,
+  "xp_height": 0,
+  "pe_visible": true,
+  "season_line": "Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "link_in_pe": 0,
+  "hscroll": false
+ },
+ "load_1440": {
+  "console_errors": [],
+  "xp_on": false,
+  "xp_height": 0,
+  "pe_visible": true,
+  "season_line": "Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "link_in_pe": 0,
+  "hscroll": false
+ },
+ "join_then": "Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice.",
+ "join_console_errors": [],
+ "after_back": {
+  "kids": [
+   [
+    "Juno",
+    "12"
+   ],
+   [
+    "Pax",
+    "9"
+   ]
+  ],
+  "pname": "Mara",
+  "email": "team+s1test-canary-cf10291156@ekuzo.gg",
+  "mob": "512 555 0100",
+  "terms": false,
+  "due": "$180",
+  "sline": "Season 01 runs mid January to May 6, 2027. Your $180 covers January.",
+  "btn": "Save Juno's spot \u00b7 $180",
+  "stored": "{\"kids\":[{\"n\":\"Juno\",\"a\":\"12\"},{\"n\":\"Pax\",\"a\":\"9\"}],\"pname\":\"Mara\",\"email\":\"team+s1test-canary-cf10291156@ekuzo.gg\",\"mob\":\"512 555 0100\"}"
+ },
+ "fresh_load_restore": [
+  "Juno",
+  "Pax",
+  "team+s1test-canary-cf10291156@ekuzo.gg"
+ ],
+ "busy_on_click": {
+  "t": "Saving their spot...",
+  "d": true,
+  "spin": true,
+  "busy": "true",
+  "ms_after_click": 2
+ },
+ "redirect_s": 5.9,
+ "welcome_h1": "Great, Juno and Pax are in!",
+ "welcome_url": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+ "draft_after_paid": null,
+ "commit": {
+  "status": 200,
+  "server_timing": "db;dur=1728.1;desc=\"14 queries\", dbfirst;dur=1384.4, stripe;dur=421.9;desc=\"2 calls\", app;dur=2178.7, cold;desc=\"first request on this function instance\""
+ },
+ "flow_console_errors": [],
+ "blocked_analytics": [
+  "https://www.googletagmanager.com/gtag/js"
+ ],
+ "_meta": "branch deploy serving c4e1afc, run tag cf10291156, test card 4242, analytics fulfilled 204 by the guard"
+}
