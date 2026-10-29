@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { quote } from "../pricing";
+import { quote, type QuoteKid } from "../pricing";
 
 const kid = (n: number) => ({ firstName: `Kid${String.fromCharCode(65 + n)}`, age: 12 });
 const kids = (n: number) => Array.from({ length: n }, (_, i) => kid(i));
@@ -38,7 +38,7 @@ describe("quote", () => {
   });
 
   it("ignores any client-supplied amount", () => {
-    const input = { kids: kids(1), priorPaidKids: 0, amount: 1, totalCents: 1 } as any;
+    const input: Parameters<typeof quote>[0] = Object.assign({ kids: kids(1), priorPaidKids: 0 }, { amount: 1, totalCents: 1 });
     assert.equal(quote(input).totalCents, 10000);
   });
 
@@ -47,6 +47,6 @@ describe("quote", () => {
     assert.throws(() => quote({ kids: kids(5), priorPaidKids: 0 }));
     assert.throws(() => quote({ kids: kids(1), priorPaidKids: -1 }));
     assert.throws(() => quote({ kids: kids(1), priorPaidKids: 1.5 }));
-    assert.throws(() => quote({ kids: undefined as any, priorPaidKids: 0 }));
+    assert.throws(() => quote({ kids: undefined as unknown as QuoteKid[], priorPaidKids: 0 }));
   });
 });

@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { validateCommit, foldName, ageEdge } from "../validate";
+import { validateCommit, foldName, ageEdge, type CommitInput } from "../validate";
 
 const base = () => ({
   email: "Parent@Example.com ",
@@ -11,10 +11,10 @@ const base = () => ({
   company: "",
 });
 
-function ok(body: unknown) {
+function ok(body: unknown): CommitInput {
   const r = validateCommit(body);
   assert.ok(r.ok, JSON.stringify(r));
-  return (r as any).value;
+  return r.value;
 }
 function bad(body: unknown, field?: string, error?: string) {
   const r = validateCommit(body);
@@ -42,7 +42,7 @@ describe("validateCommit: happy path", () => {
     bad({ ...base(), kids: undefined }, "kids");
   });
   it("company absent is fine", () => {
-    const b: any = base();
+    const b: Partial<ReturnType<typeof base>> = base();
     delete b.company;
     ok(b);
   });

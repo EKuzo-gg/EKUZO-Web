@@ -80,7 +80,7 @@ describe("isValidNumeric", () => {
     assert.ok(!isValidNumeric("0123456789"));
     assert.ok(!isValidNumeric("abcdefgh"));
     assert.ok(!isValidNumeric(""));
-    assert.ok(!isValidNumeric(undefined as any));
+    assert.ok(!isValidNumeric(undefined as unknown as string));
   });
 });
 
@@ -112,7 +112,7 @@ describe("normalize", () => {
       assert.equal(normalize(bad), null, JSON.stringify(bad));
     }
     assert.equal(normalize(null), null);
-    assert.equal(normalize(12345678 as any), null);
+    assert.equal(normalize(12345678), null);
   });
   it("accepts vanity at the 3 and 20 char limits", () => {
     assert.equal(normalize("abc"), "abc");

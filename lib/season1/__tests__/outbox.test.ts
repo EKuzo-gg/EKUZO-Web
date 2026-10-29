@@ -155,7 +155,7 @@ describe("Klaviyo payloads", () => {
     assert.equal("season1_text_phone" in noPhone.profileProps, false);
   });
   it("request body shape", () => {
-    const b = toRequestBody(buildCommittedEvent(order())) as any;
+    const b = toRequestBody(buildCommittedEvent(order()));
     assert.equal(b.data.type, "event");
     assert.equal(b.data.attributes.unique_id, "abcd234567");
     assert.equal(b.data.attributes.metric.data.attributes.name, "Season 01 Committed");
@@ -213,10 +213,10 @@ describe("Meta Purchase", () => {
       delete process.env.META_CAPI_TEST_EVENT_CODE;
       assert.equal(testEventCode(), "TEST_S1");
       const ev = buildPurchaseEvent(order());
-      assert.equal((buildRequestBody(ev, false, "tok") as any).test_event_code, "TEST_S1");
+      assert.equal(buildRequestBody(ev, false, "tok").test_event_code, "TEST_S1");
       assert.equal("test_event_code" in buildRequestBody(ev, true, "tok"), false);
       process.env.META_CAPI_TEST_EVENT_CODE = "TEST999";
-      assert.equal((buildRequestBody(ev, false, "tok") as any).test_event_code, "TEST999");
+      assert.equal(buildRequestBody(ev, false, "tok").test_event_code, "TEST999");
     } finally {
       if (saved === undefined) delete process.env.META_CAPI_TEST_EVENT_CODE;
       else process.env.META_CAPI_TEST_EVENT_CODE = saved;
