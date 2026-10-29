@@ -5,7 +5,7 @@ import sys, json, re, time
 from playwright.sync_api import sync_playwright
 
 BASE, OUT = sys.argv[1], sys.argv[2]
-LOCAL = open(sys.argv[3]).read() if len(sys.argv) > 3 else None
+LOCAL = open(sys.argv[3]).read() if len(sys.argv) > 3 and sys.argv[3] else None
 BLOCK = ["googletagmanager.com", "google-analytics.com", "analytics.google.com", "/g/collect", "googleadservices.com",
          "doubleclick.net", "clarity.ms", "facebook.com", "facebook.net", "googlesyndication.com"]
 STATE = """()=>{var s=document.getElementById('cardSec'),t=document.getElementById('cardTog'),w=document.getElementById('xpWrap');
@@ -92,15 +92,19 @@ def run(mode, w, h, pay=False, ua=None, init=None, shots=True):
         pg.evaluate("sessionStorage.removeItem('s1_card_open')")
         pg.reload(wait_until="load")
         wait_known(pg)
+        pg.evaluate("document.getElementById('xpWrap').scrollIntoView({block:'center'})")
+        pg.wait_for_timeout(2000)
         pg.focus("#terms")
-        pg.keyboard.press("Tab")
-        tag = pg.evaluate("document.activeElement.id||document.activeElement.tagName")
-        hops = 0
-        while tag != "cardTog" and hops < 6:
-            pg.keyboard.press("Tab"); hops += 1
-            tag = pg.evaluate("document.activeElement.id||document.activeElement.tagName")
+        seq = []
+        tag = ""
+        while tag != "cardTog" and len(seq) < 14:
+            pg.keyboard.press("Tab")
+            tag = pg.evaluate("(function(a){return a.id||(a.tagName+(a.closest('#xp')?' in #xp':a.closest('#pe')?' in #pe':'')+(a.textContent?' '+a.textContent.trim().slice(0,20):''))})(document.activeElement)")
+            seq.append(tag)
         out["keyboard_reached_toggle"] = tag == "cardTog"
-        out["keyboard_tabs_from_terms"] = hops + 1
+        out["keyboard_tab_sequence_from_terms"] = seq
+        if tag != "cardTog":
+            raise SystemExit("keyboard did not reach the toggle: %r" % seq)
         pg.keyboard.press("Enter")
         inp.wait_for(state="visible", timeout=15000)
         pg.wait_for_timeout(600)
@@ -131,12 +135,14 @@ def run(mode, w, h, pay=False, ua=None, init=None, shots=True):
             fr.locator('input[name="postalCode"]').fill("78757")
         except Exception:
             pass
+        pis = []
+        pg.on("request", lambda r: pis.extend(re.findall(r"payment_intent=(pi_[A-Za-z0-9]+)", r.url)))
         pg.click("#go")
         pg.wait_for_url("**/season1/join/welcome**", timeout=45000)
         pg.wait_for_timeout(1500)
         out["welcome_url"] = re.sub(r"(payment_intent_client_secret=)[^&]+", r"\1<redacted>", pg.url)
         m = re.search(r"payment_intent=(pi_[A-Za-z0-9]+)", pg.url)
-        out["pi"] = m and m.group(1)
+        out["pi"] = (m and m.group(1)) or (pis[0] if pis else None)
         out["welcome_title"] = pg.title()
     out["console_errors"] = errs
     ctx.close()
@@ -204,6 +210,8 @@ with sync_playwright() as p:
         res["unknown_390"] = run("Stripe never reports", 390, 844, init=fake_none(-1), shots=False)
         res["late_none_390"] = late_none(390, 844)
         res["late_none_1440"] = late_none(1440, 900)
+    if which == "kb390":
+        res["wallet_390"] = run("wallet", 390, 844, shots=False)
     if which in ("all", "pay"):
         res["pay_1440"] = run("wallet + 4242", 1440, 900, pay=True, shots=False)
     B.close()

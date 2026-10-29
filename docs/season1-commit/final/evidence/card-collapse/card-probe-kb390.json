@@ -1,0 +1,71 @@
+{
+ "wallet_390": {
+  "width": 390,
+  "mode": "wallet",
+  "at_load": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw",
+   "peFrameH": 2,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes"
+  },
+  "known_after_s": 1.18,
+  "after_report": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw on",
+   "peFrameH": 369,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes"
+  },
+  "settled": {
+   "secShut": true,
+   "inert": true,
+   "secH": 0,
+   "togVisible": true,
+   "ariaExpanded": "false",
+   "wrapCls": "xpw on drawn",
+   "peFrameH": 369,
+   "goVisible": false,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes"
+  },
+  "card_visible_after_click_s": 0.11,
+  "focus_in_card_number": true,
+  "expanded": {
+   "secShut": false,
+   "inert": false,
+   "secH": 433,
+   "togVisible": true,
+   "ariaExpanded": "true",
+   "wrapCls": "xpw on drawn",
+   "peFrameH": 369,
+   "goVisible": true,
+   "overflowX": 0,
+   "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes"
+  },
+  "session_flag": "1",
+  "after_second_click_open": true,
+  "keyboard_reached_toggle": true,
+  "keyboard_tab_sequence_from_terms": [
+   "A Terms of Service",
+   "A Privacy Policy",
+   "IFRAME in #xp",
+   "IFRAME in #xp",
+   "IFRAME in #xp",
+   "cardTog"
+  ],
+  "keyboard_expand_focus_card": true,
+  "reload_open_from_session": true,
+  "console_errors": []
+ }
+}

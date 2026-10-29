@@ -249,3 +249,11 @@ code 24151208), with events, outbox rows and rate-limit keys.
 | payment_intent | pi_3UVyMwKORcR8BUEx0X6Vr8v2 | succeeded $100 (not refunded) | F11 and F12 retest: one-kid cold regression (cus_VX2RV9sa2hfaoE) |
 
 Both succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).
+
+Card form behind "Or pay with card" (2026-10-29 about 19:20 UTC, branch deploy with 7eb9921, card path after opening the collapsed card form). Neon rows: family `team+s1test-cc-1793301817@ekuzo.gg` (parent Sentry, kid Probe 12, one paid order), with events, outbox rows and rate-limit keys.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | not captured (the welcome page strips the redirect query before the probe read it; find it by the receipt email above) | succeeded $100 (not refunded) | Card collapse: one 4242 payment after expanding, new family, new Customer |
+
+It also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above). The probe now records the PaymentIntent id from the redirect request for later runs.
