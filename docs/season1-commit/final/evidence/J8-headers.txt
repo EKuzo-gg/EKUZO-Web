@@ -1,0 +1,16 @@
+GET-HEAD /season1/join | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /season1/join/signup | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /season1/join/welcome | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /crew/33847723 | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /crew/19341455 | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /crew/00000000 | HTTP/2 200  | xfo=SAMEORIGIN | loc=
+GET-HEAD /season1/terms | HTTP/2 200  | xfo=DENY | loc=
+GET-HEAD /terms-of-service | HTTP/2 200  | xfo= | loc=
+GET-HEAD /season1/dev-view | HTTP/2 200  | xfo= | loc=
+GET-HEAD /karlin | HTTP/2 307  | xfo= | loc=/season1/join/signup?src=karlin
+GET-HEAD /season1 | HTTP/2 200  | xfo= | loc=
+OPTIONS /api/season1/commit | HTTP/2 204  | xfo= | allow=OPTIONS, POST
+GET /api/season1/commit | HTTP/2 405  | xfo= | allow=
+POST {} /api/season1/commit | HTTP/2 422  | xfo=DENY
+GET (not HEAD) /season1/dev-view?u=/season1/join: 200
+GET /karlin: 307 -> https://season1-commit--ekuzo.netlify.app/season1/join/signup?src=karlin

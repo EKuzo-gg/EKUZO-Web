@@ -1,0 +1,10 @@
+s1 ops: mode=APPLY db=test stripe=test
+order jevscw9fec status=paid paid=$100.00 already refunded=$0.00 refundable=$100.00
+guardian t***@ekuzo.gg
+scope: whole order (everything still refundable)
+refund amount: $100.00   reason=requested_by_customer
+metadata: s1_order=jevscw9fec
+idempotency key: s1-refund:jevscw9fec:all
+advice: no jersey_shipped_at column yet; if the free jersey has shipped, pass --jersey-shipped to see the $65 rule amount.
+refund created: id=re_3UVtDaKORcR8BUEx0J1ntIYU status=succeeded amount=$100.00
+The webhook records it (charge.refunded). Check with s1:find --order jevscw9fec

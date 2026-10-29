@@ -1,0 +1,119 @@
+[
+  {
+    "kind": "klaviyo_committed",
+    "dedupe_key": "klaviyo_committed:jevscw9fec",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:18:12.244Z",
+    "updated_at": "2026-10-29T13:18:12.736Z"
+  },
+  {
+    "kind": "meta_purchase",
+    "dedupe_key": "meta_purchase:jevscw9fec",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:18:12.267Z",
+    "updated_at": "2026-10-29T13:18:12.651Z"
+  },
+  {
+    "kind": "discord_commit",
+    "dedupe_key": "discord_commit:jevscw9fec",
+    "status": "skipped_no_config",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:18:12.283Z",
+    "updated_at": "2026-10-29T13:18:12.532Z"
+  },
+  {
+    "kind": "klaviyo_friend_joined",
+    "dedupe_key": "klaviyo_friend_joined:9a5c7ebb-89ee-4287-8b0f-3474a5b07aa2",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.375Z",
+    "updated_at": "2026-10-29T13:19:34.036Z"
+  },
+  {
+    "kind": "discord_flag",
+    "dedupe_key": "discord_flag:9a5c7ebb-89ee-4287-8b0f-3474a5b07aa2:shared_card",
+    "status": "skipped_no_config",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.406Z",
+    "updated_at": "2026-10-29T13:19:33.696Z"
+  },
+  {
+    "kind": "discord_flag",
+    "dedupe_key": "discord_flag:9a5c7ebb-89ee-4287-8b0f-3474a5b07aa2:same_zip",
+    "status": "skipped_no_config",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.437Z",
+    "updated_at": "2026-10-29T13:19:33.792Z"
+  },
+  {
+    "kind": "klaviyo_committed",
+    "dedupe_key": "klaviyo_committed:ncbznh28n2",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.468Z",
+    "updated_at": "2026-10-29T13:19:33.920Z"
+  },
+  {
+    "kind": "meta_purchase",
+    "dedupe_key": "meta_purchase:ncbznh28n2",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.485Z",
+    "updated_at": "2026-10-29T13:19:33.835Z"
+  },
+  {
+    "kind": "discord_commit",
+    "dedupe_key": "discord_commit:ncbznh28n2",
+    "status": "skipped_no_config",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:19:33.501Z",
+    "updated_at": "2026-10-29T13:19:33.721Z"
+  },
+  {
+    "kind": "klaviyo_committed",
+    "dedupe_key": "klaviyo_committed:xuj5r2j5kk",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:20:31.952Z",
+    "updated_at": "2026-10-29T13:20:32.530Z"
+  },
+  {
+    "kind": "meta_purchase",
+    "dedupe_key": "meta_purchase:xuj5r2j5kk",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:20:31.970Z",
+    "updated_at": "2026-10-29T13:20:32.239Z"
+  },
+  {
+    "kind": "discord_commit",
+    "dedupe_key": "discord_commit:xuj5r2j5kk",
+    "status": "skipped_no_config",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:20:31.985Z",
+    "updated_at": "2026-10-29T13:20:32.139Z"
+  },
+  {
+    "kind": "klaviyo_refunded",
+    "dedupe_key": "klaviyo_refunded:re_3UVtDaKORcR8BUEx0J1ntIYU",
+    "status": "sent",
+    "attempts": 1,
+    "last_error": null,
+    "created_at": "2026-10-29T13:21:56.013Z",
+    "updated_at": "2026-10-29T13:21:56.232Z"
+  }
+]

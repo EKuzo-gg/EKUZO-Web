@@ -1,0 +1,4 @@
+[TEST] Season 01 commit | $180 | 2 kids | source organic | ref jevscw9fec
+[TEST] Season 01 commit | $100 | 1 kid | source referral | ref jevscw9fec
+[TEST] Season 01 commit | $180 | 2 kids | source ad | ref jevscw9fec
+{"outcome":"skipped_no_config"}

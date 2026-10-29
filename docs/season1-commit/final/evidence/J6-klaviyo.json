@@ -1,0 +1,15 @@
+{
+  "source": "Klaviyo MCP read tools (get_events, get_profiles), read only, 2026-10-29, last read 13:28 UTC",
+  "metric": "RK6AMi Season 01 Committed",
+  "ingestion_note": "Outbox rows were sent (HTTP 202) at 13:18 to 13:21 UTC; profiles were created in Klaviyo at 13:26 to 13:27 UTC and the events became readable then (lag about 8 minutes; an 13:22 read returned nothing). The Refunded event for jevscw9fec (X2yJQ8, event 7yYtNn5ike5, 13:21:56 on the J1 profile) became readable on a later read. The integration suites also sent Committed, Friend Joined and Refunded events to their own team+s1test profiles.",
+  "events": [
+    {"event": "7yYtaJ76J6T", "profile": "team+s1test-ft1029-j1-5bc894@ekuzo.gg", "kid_name": "Juno", "share_url": "https://season1-commit--ekuzo.netlify.app/crew/19341455", "kids_count": 1, "amount_paid": 100, "order_id": "jevscw9fec", "invited": false},
+    {"event": "7yYtvDK64hP", "profile": "team+s1test-ft1029-j2-5bc894@ekuzo.gg", "kid_name": "Pax", "share_url": "https://season1-commit--ekuzo.netlify.app/crew/18424530", "kids_count": 1, "amount_paid": 100, "order_id": "ncbznh28n2", "invited": true},
+    {"event": "7yYtskwR3WX", "profile": "team+s1test-ft1029-j3-5bc894@ekuzo.gg", "kid_name": "Wren", "sibling_names": "Odin", "share_url": "https://season1-commit--ekuzo.netlify.app/crew/33847723", "kids_count": 2, "amount_paid": 180, "order_id": "xuj5r2j5kk", "invited": false}
+  ],
+  "also_seen": [
+    {"event": "7yYttrsJYJ5", "metric": "VvUSwS Season 01 Friend Joined", "profile": "j1", "friend_kids": 1, "credits_to_free": 3},
+    {"event": "7yYttrW4SxX", "metric": "VvUSwS Season 01 Friend Joined", "profile": "j3", "friend_kids": 2, "note": "caused by invite.integration.test.ts reusing the newest paid test family (J3) as inviter, not by a browser journey"}
+  ],
+  "changes_made_in_klaviyo": "none"
+}

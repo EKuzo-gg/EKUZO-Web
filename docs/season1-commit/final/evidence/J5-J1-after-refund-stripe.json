@@ -1,0 +1,19 @@
+{
+  "label": "J5-J1-after-refund",
+  "id": "pi_3UVtDaKORcR8BUEx0umHVNCH",
+  "status": "succeeded",
+  "amount": 10000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "jevscw9fec",
+    "product": "season1"
+  },
+  "customer": "cus_VWx7GmhQPjCFwY",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVtDaKORcR8BUEx0I4usrNB",
+  "amount_refunded": 10000,
+  "refunded": true,
+  "card_last4": "4242"
+}

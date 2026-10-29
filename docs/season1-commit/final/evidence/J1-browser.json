@@ -1,0 +1,1218 @@
+{
+  "label": "J1",
+  "email": "team+s1test-ft1029-j1-5bc894@ekuzo.gg",
+  "start": "/season1/join",
+  "steps": [
+    {
+      "step": "open /season1/join",
+      "status": 200
+    },
+    {
+      "step": "cta",
+      "text": "Save their spot"
+    },
+    {
+      "step": "signup url",
+      "url": "/season1/join/signup"
+    },
+    {
+      "step": "redirect",
+      "url": "/season1/join/welcome"
+    }
+  ],
+  "guard": [
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:04.283Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "stats.g.doubleclick.net",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:04.285Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "ad.doubleclick.net",
+      "path": "/ccm/s/collect",
+      "at": "2026-10-29T13:18:04.286Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.287Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:04.309Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.310Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.312Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.312Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "ad.doubleclick.net",
+      "path": "/ccm/s/collect",
+      "at": "2026-10-29T13:18:04.313Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.313Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.314Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.314Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.976Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.977Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.977Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.978Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:04.978Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.981Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.981Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.986Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:04.988Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:04.993Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.993Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:04.994Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.994Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:04.995Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:06.773Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:06.774Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:06.788Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:06.802Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/form-data/18509911105",
+      "at": "2026-10-29T13:18:07.895Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:07.899Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:07.899Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:07.899Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/pagead/form-data/18509911105",
+      "at": "2026-10-29T13:18:07.904Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/form-data/18509911105",
+      "at": "2026-10-29T13:18:07.905Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:07.906Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:07.906Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:07.923Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:07.924Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:07.924Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:07.924Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:07.924Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:09.976Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:09.980Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:13.138Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:13.139Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:13.139Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:13.143Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:13.145Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "ga-collect",
+      "host": "analytics.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:13.146Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:13.148Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:13.152Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:13.154Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/rmkt/collect/18509911105/",
+      "at": "2026-10-29T13:18:13.155Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:13.156Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "googleads.g.doubleclick.net",
+      "path": "/pagead/viewthroughconversion/18509911105/",
+      "at": "2026-10-29T13:18:13.156Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:13.156Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/g/collect",
+      "at": "2026-10-29T13:18:13.156Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:13.156Z"
+    },
+    {
+      "ctx": "J1",
+      "rule": "google-ads",
+      "host": "www.google.com",
+      "path": "/ccm/collect",
+      "at": "2026-10-29T13:18:13.157Z"
+    }
+  ],
+  "console": [
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279883746"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&ngs=1&ibt=1&tid=G-8LM45PX53W&cid=1719007188.1793279884&gtm=45je6ar1v913153"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884254&cv=11&fst=1793279884254&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884272&cv=11&fst=1793279884272&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=13&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20is%20open%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://ad.doubleclick.net/ccm/s/collect?auid=1541593246.1793279884&gtm=45je6ar1v9131535694za208zd9131535694xecxf1&fmt=8"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884254&cv=11&fst=17932798842"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884272&cv=11&fst=17932798842"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=13&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20is%20open%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884254&cv=11&fst=1793279884254&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884272&cv=11&fst=1793279884272&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=13&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20is%20open%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://ad.doubleclick.net/ccm/s/collect?auid=1541593246.1793279884&gtm=45je6ar1v9131535694za208zd9131535694xecxf1&fmt=3"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=13&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20is%20open%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884254&cv=11&fst=17932798842"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884272&cv=11&fst=17932798842"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279883746&_gaz="
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884956&cv=11&fst=1793279884956&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279884964&cv=11&fst=1793279884964&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=1&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884956&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279884964&cv=11&fst=17932798849"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279884875&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279886755&cv=11&fst=1793279886755&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279886755&cv=11&fst=17932798867"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279887854&cv=11&fst=17932798878"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/form-data/18509911105?gtm=45je6ar1v9131535694za200zd9131535694xecxf1&gcd=13l3l3l3l1l1&dma=0&t"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279887854&cv=11&fst=1793279887854&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/pagead/form-data/18509911105?gtm=45je6ar1v9131535694za200zd9131535694xecxf1&gcd=13l3l3l3l1l1&dma="
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/form-data/18509911105?gtm=45je6ar1v9131535694za200zd9131535694xecxf1&gcd=13l3l3l3l1l1&dma=0&t"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279887877&cv=11&fst=1793279887877&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279887877&cv=11&fst=17932798878"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279887854&cv=11&fst=1793279887854&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=14&frm=0&apvc=0&auid=1541593246.1793279884&dt=Season%2001%20sign%20up%20%7C%20EKU"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279887854&cv=11&fst=17932798878"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279887877&cv=11&fst=1793279887877&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279887877&cv=11&fst=17932798878"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za200zd9131535694xf1&_p=1793279884875"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za200zd9131535694xf1&_p=1793279884875&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279893103&cv=11&fst=17932798931"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279893103&cv=11&fst=1793279893103&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279893116&cv=11&fst=17932798931"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279893116&cv=11&fst=1793279893116&fmt=8&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279893022"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za200zd9131535694xf1&_p=1793279893022"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=1&auid=1541593246.1793279884&dt=You%27re%20in%20%7C%20EKUZO&tid=AW-"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=0&auid=1541593246.1793279884&dt=You%27re%20in%20%7C%20EKUZO&tid=AW-"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279893103&cv=11&fst=1793279893103&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/rmkt/collect/18509911105/?random=1793279893116&cv=11&fst=1793279893116&fmt=3&bg=ffffff&guid=ON&as"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279893103&cv=11&fst=17932798931"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105/?random=1793279893116&cv=11&fst=17932798931"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za208zd9131535694xf1&_p=1793279893022&gcd=1"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=1&auid=1541593246.1793279884&dt=You%27re%20in%20%7C%20EKUZO&tid=AW-"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=0&auid=1541593246.1793279884&dt=You%27re%20in%20%7C%20EKUZO&tid=AW-"
+    },
+    {
+      "page": "J1",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "url": "https://www.google.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6ar1v9131535694za200zd9131535694xf1&_p=1793279893022&gcd=1"
+    }
+  ],
+  "inviteBanner": null,
+  "summary": "First month\n$160 $100\nFounding jersey (first 100)\nFree\nDue today\n$100",
+  "button": "Save Juno's spot · $100",
+  "pi": null,
+  "welcomeText": "Test mode. No real charges.\nPhone\nDesktop\n‹\nGREAT, JUNO'S IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE AND SAVE!\n\nEach friend who joins with your link gets a free month, and so do you.\n\nShare Juno's link\n\nseason1-commit--ekuzo.netlify.app/crew/19341455\n\nYOUR RECEIPT\n\nJuno, Season 01, first month\n$100\nPaid today\n$100\n\nThen $160 a month from Feb 15. About $20 a practice.\n\nOrder jevscw9fec\n\nWHAT HAPPENS NEXT\nLate Nov\nGamer profile, jersey and gear check\nLate Dec\nMeet the team and coach\nDec 31\nLock-in. Full refund until then.\nMid Jan\nFirst practice\nMid Apr\nSeason tournament\nMay 6\nLast practice\nHOW THIS DISCOUNT WORKS\nOn your own\n$580\n1 friend joins\n$420\n2 friends\n$260\n3 friends\n$100\n4 friends\nFree. We refund your $100.\n\nQuestions? \nText our founder",
+  "welcomeHtmlShare": [
+    "https://season1-commit--ekuzo.netlify.app/crew/19341455"
+  ],
+  "code": "19341455"
+}

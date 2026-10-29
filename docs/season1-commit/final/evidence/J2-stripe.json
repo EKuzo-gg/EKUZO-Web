@@ -1,0 +1,19 @@
+{
+  "label": "J2",
+  "id": "pi_3UVtEtKORcR8BUEx0Mk5hwFA",
+  "status": "succeeded",
+  "amount": 10000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "ncbznh28n2",
+    "product": "season1"
+  },
+  "customer": "cus_VWx9MBCtJA3Km2",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVtEtKORcR8BUEx0GVutR6X",
+  "amount_refunded": 0,
+  "refunded": false,
+  "card_last4": "4242"
+}

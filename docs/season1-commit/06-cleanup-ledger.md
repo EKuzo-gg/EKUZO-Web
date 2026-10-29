@@ -143,3 +143,32 @@ No succeeded PIs. One PaymentIntent created, verified canceled via the Stripe AP
 | Object | Id | Final state | Purpose |
 |---|---|---|---|
 | payment_intent | pi_3UV4BDKORcR8BUEx1BhgxsTi | canceled | Smoke check 2, decline 4000 0000 0000 0002, age 9 kid, age_edge flag verified |
+
+## Final test 2026-10-29 (Sentry, Stripe test mode + Neon test, branch deploy at e1bbe5e)
+
+Run tag `5bc894`, 13:16 to 13:30 UTC. Analytics guard: every Playwright context aborted and logged requests to GA4 collect, Clarity collect,
+facebook.com/tr, connect.facebook.net and Google Ads collectors (fail closed, details in `final/04-final-test-ledger.md`). Before the guard
+covered Google Ads, 3 smoke page views of /season1/join let Google Ads pings and two www.google.com/g/collect hits reach production GA4
+(G-8LM45PX53W) and Ads (18509911105); page views only, no purchase events. Server side: `meta_purchase` (CAPI, forced test code) and Klaviyo
+events were sent for the three paid orders below.
+
+Neon rows: emails `team+s1test-ft1029-j1-5bc894@ekuzo.gg`, `...-j2-5bc894@`, `...-j3-5bc894@` with families, kids (Juno 12, Pax 9, Wren 10,
+Odin 14), orders, items, codes 19341455 (void after refund), 18424530, 33847723, referral 9a5c7ebb-89ee-4287-8b0f-3474a5b07aa2 (pending), events,
+outbox rows and `s1pi:*` rate-limit keys. `...-j4-5bc894@` made only 422 calls (no rows). Klaviyo test profiles now exist for the
+j1, j2 and j3 emails (Committed, Friend Joined, Refunded events). The `S1_DB_TESTS=1` run added its own tags (`ab98a70f80` db suite,
+`ab25be2c` referral suite, `121b0fe8*` emails) and reused the J3 family as inviter: referrals 10112eca-17b4-4b81-9876-db61f5426d0b (void) and
+f64ca14f-5e02-4aea-a7bb-53f6e1ddf2ac (pending) on code 33847723.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVtDaKORcR8BUEx0umHVNCH | succeeded $100, fully refunded (re_3UVtDaKORcR8BUEx0J1ntIYU) | J1 cold buyer, order jevscw9fec (cus_VWx7GmhQPjCFwY); J5 refund via s1-refund --apply |
+| payment_intent | pi_3UVtEtKORcR8BUEx0Mk5hwFA | succeeded $100 (not refunded) | J2 friend via /crew/19341455, order ncbznh28n2, age 9 |
+| payment_intent | pi_3UVtFpKORcR8BUEx10ZewxtA | succeeded $180 (not refunded) | J3 siblings, order xuj5r2j5kk (cus_VWxALKt1iSE97r) |
+| payment_intent | pi_3UVtKaKORcR8BUEx0ctCskKc | succeeded $100, fully refunded (re_3UVtKaKORcR8BUEx0kqnyqAV 6000 + re_3UVtKaKORcR8BUEx0VTHagN6 4000) | J10 money.integration suite, order kfpkhmefsy |
+| payment_intent | pi_3UVtKRKORcR8BUEx15oYB3kZ | succeeded $100, fully refunded (re_3UVtKRKORcR8BUEx1n4S05T9) | J10 invite.integration suite, order unytmkjkxn |
+| payment_intent | pi_3UVtL2KORcR8BUEx15jvaSXo | succeeded $1.60 (metadata product season1_offsession_test) | J10 money.integration off-session charge |
+| payment_intent | pi_3UVtL6KORcR8BUEx0fMaYAkz, pi_3UVtL4KORcR8BUEx1h5QljOz | canceled by Sentry (were left requires_payment_method) | J10 money.integration off-session failures |
+| payment_intent | 21 more (all `season1`, all canceled by the suites): pi_3UVtLGKORcR8BUEx0Kb1EZNL, pi_3UVtLFKORcR8BUEx05OK4qIR, pi_3UVtLFKORcR8BUEx1EUWqlAn, pi_3UVtLEKORcR8BUEx1cJTbnEW, pi_3UVtLEKORcR8BUEx0QkoSXtR, pi_3UVtLDKORcR8BUEx0HL5ybLt, pi_3UVtL7KORcR8BUEx17pMEEFn, pi_3UVtL7KORcR8BUEx0cU1zvgm, pi_3UVtL6KORcR8BUEx0lGvPnEz, pi_3UVtL1KORcR8BUEx0pWIfQnK, pi_3UVtKrKORcR8BUEx0lewFk0d, pi_3UVtKWKORcR8BUEx1vF9l5I4, pi_3UVtKVKORcR8BUEx05LJ2fqO, pi_3UVtKVKORcR8BUEx1vx6xKle, pi_3UVtKUKORcR8BUEx16HiCoTK, pi_3UVtKTKORcR8BUEx0zbUnJeY, pi_3UVtKTKORcR8BUEx0mQ6SCCm, pi_3UVtKNKORcR8BUEx0TgenS0L, pi_3UVtKMKORcR8BUEx0pK8Dp3U, pi_3UVtKMKORcR8BUEx0F3ZVmgF, pi_3UVtKLKORcR8BUEx1G3o19IZ | canceled | J10 integration suites (declines, 3DS, pricing, rate limit, invite cases); full list in `final/evidence/J10-integration-stripe-objects.json` |
+
+Legacy dev endpoint side effects: the six succeeded PIs above (pi_3UVtDa, pi_3UVtEt, pi_3UVtFp, pi_3UVtKa, pi_3UVtKR, pi_3UVtL2) also reached
+we_1TMYx4KORcR8BUExWqrM0dBF on dev--ekuzo (origin/dev 1ab7255 still has no legacy guard), with the same empty-email camps caveat as above.

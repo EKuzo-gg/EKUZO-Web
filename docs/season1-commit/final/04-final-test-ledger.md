@@ -1,0 +1,56 @@
+---
+title: "Season 01 final test ledger (Sentry, Build Loop phase 4)"
+created: 2026-10-29
+author: Sentry (independent QA, finds only, fixes nothing)
+target: https://season1-commit--ekuzo.netlify.app (Stripe TEST, Neon test branch ep-lively-boat-b4fak1h6)
+code: origin/season1-commit e1bbe5e
+run: 2026-10-29, 13:16 to 13:30 UTC (08:16 to 08:30 CT)
+---
+
+# Final test ledger
+
+Run tag `5bc894`. Disposable identities only: `team+s1test-ft1029-j1-5bc894@ekuzo.gg` (parent Tess, kid Juno 12), `...-j2-5bc894@` (Rhea, Pax 9), `...-j3-5bc894@` (Lark, Wren 10 and Odin 14), `...-j4-5bc894@` (API only, no order). Card 4242 4242 4242 4242, 12/34, CVC 123, ZIP 12345. Evidence paths are relative to `docs/season1-commit/final/evidence/`. No secret values are stored there (client secrets redacted, keys never printed; scanned).
+
+## Analytics guard (set up before any functional test)
+
+Every Playwright context ran one `context.route('**/*')` handler that aborts and records any request to:
+`*.google-analytics.com`, `analytics.google.com`, `googletagmanager.com/*collect*`, `stats.g.doubleclick.net` (GA4);
+`*.clarity.ms/*collect*`; `facebook.com/tr*`; `connect.facebook.net`; and, added after the first smoke load,
+Google Ads (`*.doubleclick.net`, `googleadservices.com`, `www.google.*` paths with collect, pagead, rmkt, ccm, ads).
+The handler aborts if it throws (fail closed). A second listener on `requestfinished` records any request to a blocked host that still completed as `LEAK`.
+
+| Item | Result |
+|---|---|
+| Guard tuning (3 smoke loads of `/season1/join`, no form use, before any journey) | Load 1 had only the first four rules: GA4 collect blocked, but Google Ads remarketing and conversion pings (`googleads.g.doubleclick.net/pagead/viewthroughconversion/18509911105`, `www.google.com/rmkt/collect`, `www.google.com/ccm/collect`, `ad.doubleclick.net/ccm/s/collect`) and one `www.google.com/g/collect` went out. Load 2 still let one `www.google.com/g/collect` through. Load 3 onward: every collect blocked; only the `gtag/js` library itself loads. Page views only, no purchase or form events. Logged as defect F2 context |
+| J1 to J4, J9 contexts | 66 + 55 + 72 + 45 + 148 requests blocked; 0 LEAK entries; no Clarity or Meta pixel requests seen on these pages |
+| Server-side side effects (not browser) | `meta_purchase` outbox rows sent for the 3 paid orders (Meta CAPI with the forced test event code, per slice 3); Klaviyo events as in J6 |
+
+## Journeys
+
+| Journey | Expected | Actual | Evidence | Result |
+|---|---|---|---|---|
+| J1 cold buyer, one kid (Juno 12) | Join, Save their spot, signup, pay $100. Welcome: kid name, `/crew/<numeric>`, receipt $100, "Then $160 a month from Feb 15...", timeline with Mid Apr and May 6. DB paid, 10000, `s1-terms-2026-10-29`, livemode false, webhook payment event. Stripe PI succeeded, metadata product season1 | Join CTA "Save their spot" to `/season1/join/signup`; summary "First month $160 $100, Due today $100"; button "Save Juno's spot · $100". Welcome "GREAT, JUNO'S IN!", share `/crew/19341455`, receipt Juno $100, Paid today $100, "Then $160 a month from Feb 15. About $20 a practice.", timeline Late Nov, Late Dec, Dec 31, Mid Jan, Mid Apr Season tournament, May 6 Last practice. Order `jevscw9fec`: status paid, amount 10000, consent `s1-terms-2026-10-29`, livemode false, jersey_eligible true, code 19341455 active. Events: `fulfil:order.paid` (via welcome) then `webhook:payment_intent.succeeded`. PI `pi_3UVtDaKORcR8BUEx0umHVNCH` succeeded, $100, livemode false, metadata product season1, order_id jevscw9fec, off_session saved | J1-browser.json, J1-db.json, J1-stripe.json, screens/J1-welcome-flow.png | PASS |
+| J2 friend via share link, Instagram in-app UA, 390px (Pax 9) | `/crew/<J1 code>` shows "Join <name>'s team"; sign up one kid; pay. Welcome: "February is free with your friend's credit. Then $160 on Mar 15 and Apr 15." DB referral pending, inviter = J1 family | Crew page "JOIN JUNO'S TEAM.", "Your second month is free, from Juno.", "Friend code 1934 1455". Signup banner "Invited by Juno's family", summary adds "Feb 15: $0 with Juno's family credit, applied at lock-in." Welcome "GREAT, PAX'S IN!", exact line "February is free with your friend's credit. Then $160 on Mar 15 and Apr 15.", "Friend credit recorded.", own code 18424530. Order `ncbznh28n2` paid 10000, consent s1-terms-2026-10-29, referral_code 19341455, flags `[age_edge]`. Referral `9a5c7ebb...` status pending, friend_kids 1, inviter_family_id fe951769... = J1 family, reasons same_zip and shared_card (same test card and ZIP, expected). PI `pi_3UVtEtKORcR8BUEx0Mk5hwFA` succeeded, product season1 | J2-browser.json, J2-db.json, J2-stripe.json, screens/J2-welcome-flow.png | PASS |
+| J3 siblings, cold (Wren 10, Odin 14) | Pay $180. Welcome "Then $288 a month for both kids from Feb 15." and "For your first kid." under How this discount works | Summary "Wren, first month $160 $100; Odin, first month $100 $80; Due today $180". Welcome "GREAT, WREN AND ODIN ARE IN!", receipt $100 + $80, Paid today $180, "Then $288 a month for both kids from Feb 15.", "For your first kid." directly under the band heading. Order `xuj5r2j5kk` paid 18000, items first 10000 and sibling 8000, code 33847723. PI `pi_3UVtFpKORcR8BUEx10ZewxtA` succeeded, product season1 | J3-browser.json, J3-db.json, J3-stripe.json, screens/welcome-390.png, welcome-1440.png | PASS |
+| J4 age edges | Picker 9 to 17 only; out-of-range option shows note with Text our founder, Remove this kid, Back; API age 18 returns age_outside (no pay); age 9 accepted with flag age_edge | Picker: Pick age, 9 to 17, "Younger or older"; label "Age (9 to 17)". Choosing "Younger or older" on the only kid: note "Season 01 is for ages 9 to 17...", Text our founder and Back to Season 01 visible, Remove hidden, payment block and Add sibling hidden. On a sibling row: all three visible; Remove took the row away and restored the pay block. API: age 18, "outside" and 8 each return 422 `{"field":"kids.0.age","error":"age_outside"}` with X-Frame-Options DENY, no order or PI. Age 9 paid in J2 (order ncbznh28n2 flags `age_edge`, kid age 9 committed) | J4-age.json, screens/J4-age-outside-one-kid-390.png, J4-age-outside-sibling-390.png, J2-db.json | PASS (note F5: Remove is hidden when the out-of-range kid is the only kid, by design) |
+| J5 refund J1 | Refund via `s1-refund.mjs --order jevscw9fec --apply` (test). Order refunded; s1_events refund event source webhook | The bare command in the brief fails (`ERR_MODULE_NOT_FOUND .../lib/season1/mode`, F3); ran with the npm script's flags and the test env file. Dry run then apply: refund `re_3UVtDaKORcR8BUEx0J1ntIYU` succeeded $100, idempotency key `s1-refund:jevscw9fec:all`. Webhook wrote `webhook:charge.refunded` (amount_refunded 10000) and `webhook:refund.referral_effects` (code_voided true, referral_voided false). Order status refunded, Juno refunded, code 19341455 void, outbox `klaviyo_refunded` sent. Stripe charge refunded true. J2 referral stays pending (F7 question) | J5-refund-cli.txt, J5-J1-after-refund-db.json, J5-J1-after-refund-stripe.json | PASS |
+| J6 Klaviyo "Season 01 Committed" (RK6AMi) | Events for J1 to J3 with kid_name, share_url, kids_count, amount_paid, order_id, invited | All three present after about 8 minutes of Klaviyo ingestion lag (outbox sent at 13:18 to 13:20; first read at 13:22 returned nothing). J1 Juno, crew/19341455, 1, 100, jevscw9fec, false. J2 Pax, crew/18424530, 1, 100, ncbznh28n2, true. J3 Wren (sibling_names Odin), crew/33847723, 2, 180, xuj5r2j5kk, false. Friend Joined event also on J1's profile. Nothing changed in Klaviyo. The J5 Refunded event (X2yJQ8) also arrived on J1's profile | J6-klaviyo.json, J6-J7-outbox.json | PASS |
+| J7 Discord unset | Payment succeeds end to end; sender skipped, no parent-facing error. Format per decision 9 | All three payments reached the paid welcome page; every `discord_commit` and `discord_flag` outbox row is `skipped_no_config` with no error; no console error on our pages. Unit suite "Discord messages" 6 of 6 pass. Sample: `[TEST] Season 01 commit \| $180 \| 2 kids \| source organic \| ref ...`; with a friend code `source referral`; `src=ad_meta` maps to `source ad`. No names, ages, city or code | J6-J7-outbox.json, J7-discord-format.txt, J10-tests-integration.txt (ok 30) | PASS |
+| J8 headers and routes | SAMEORIGIN on join, signup, welcome, crew; DENY on the commit API; /karlin 307 to signup?src=karlin | join, signup, welcome, crew (active, voided and unknown code) 200 SAMEORIGIN. `/season1/terms` 200 DENY. `/terms-of-service` 200 with no X-Frame-Options. Commit API: POST responses DENY (422 checked); OPTIONS 204 and GET 405 carry no X-Frame-Options (framework responses, JSON route). `/season1/dev-view` 200 in test mode, no X-Frame-Options. `/karlin` 307 to `/season1/join/signup?src=karlin`. Voided code 19341455 and unknown 00000000 show the generic "Join a friend's team." and set no s1_ref cookie | J8-headers.txt | PASS (F6 minor: XFO missing on terms-of-service and non-POST API responses) |
+| J9 browser truth, 390 and 1440 | join, signup, welcome (after payment), crew: no console errors from our pages; screenshots | 10 loads (5 pages x 2 widths, incl. welcome after refund): status 200, horizontal overflow 0 px, 0 console errors. Only third-party noise: Stripe.js "Origin trial controlled feature not enabled" warnings and one Stripe hCaptcha warning, plus the guard's own ERR_BLOCKED_BY_CLIENT lines. Refunded order's welcome shows "We're confirming your payment" (F1) | J9-browser.json, screens/{join,signup,crew,welcome,welcome-after-refund}-{390,1440}.png | PASS for the four pages; F1 found on the refunded state |
+| J10 regression | `npm run test:s1`; `S1_DB_TESTS=1` integration suites with the test env; `tsc --noEmit` | Unit: 178 of 178 pass (55 suites). Integration (`S1_DB_TESTS=1 node --env-file=<test env> scripts/run-tests.mjs lib/season1/__tests__`): 217 of 217 pass, 0 fail, 0 skipped, 64 s (adds db, gaps, invite, money, referral suites). `tsc --noEmit` exit 0. The integration run created Stripe test objects (logged in the cleanup ledger) and left two PIs in requires_payment_method (F4) | J10-tests-unit-tail.txt, J10-tests-integration.txt, J10-tsc.txt, J10-integration-stripe-objects.json | PASS |
+
+## Test orders
+
+| Journey | Order | PaymentIntent | Final state |
+|---|---|---|---|
+| J1 | jevscw9fec | pi_3UVtDaKORcR8BUEx0umHVNCH | refunded (re_3UVtDaKORcR8BUEx0J1ntIYU, $100) |
+| J2 | ncbznh28n2 | pi_3UVtEtKORcR8BUEx0Mk5hwFA | paid $100, referral pending on code 19341455 |
+| J3 | xuj5r2j5kk | pi_3UVtFpKORcR8BUEx10ZewxtA | paid $180 |
+
+## Not tested here
+
+- Live mode, production env vars and the live Stripe webhook (out of scope for a test-mode deploy).
+- Klaviyo receipt email (flow not live yet, per brief).
+- Apple Pay and Google Pay wallets (headless Chromium shows card only).
+- Netlify function logs (no Netlify access from this session).

@@ -1,0 +1,1968 @@
+TAP version 13
+# Subtest: Damm check digit
+    # Subtest: known vector: 572 has check digit 4
+    ok 1 - known vector: 572 has check digit 4
+      ---
+      duration_ms: 0.805565
+      type: 'test'
+      ...
+    # Subtest: known vector: 4827193 has check digit 0
+    ok 2 - known vector: 4827193 has check digit 0
+      ---
+      duration_ms: 0.174421
+      type: 'test'
+      ...
+    1..2
+ok 1 - Damm check digit
+  ---
+  duration_ms: 1.634543
+  type: 'suite'
+  ...
+# Subtest: mintNumeric
+    # Subtest: makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+    ok 1 - makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+      ---
+      duration_ms: 5.299146
+      type: 'test'
+      ...
+    # Subtest: accepts an injected rand and is deterministic
+    ok 2 - accepts an injected rand and is deterministic
+      ---
+      duration_ms: 0.216219
+      type: 'test'
+      ...
+    # Subtest: every single-digit substitution of a minted code fails
+    ok 3 - every single-digit substitution of a minted code fails
+      ---
+      duration_ms: 4.532912
+      type: 'test'
+      ...
+    # Subtest: every adjacent transposition of differing digits fails
+    ok 4 - every adjacent transposition of differing digits fails
+      ---
+      duration_ms: 1.310865
+      type: 'test'
+      ...
+    1..4
+ok 2 - mintNumeric
+  ---
+  duration_ms: 11.557686
+  type: 'suite'
+  ...
+# Subtest: isValidNumeric
+    # Subtest: rejects wrong length, leading zero, and non-digits
+    ok 1 - rejects wrong length, leading zero, and non-digits
+      ---
+      duration_ms: 0.181223
+      type: 'test'
+      ...
+    1..1
+ok 3 - isValidNumeric
+  ---
+  duration_ms: 0.301694
+  type: 'suite'
+  ...
+# Subtest: display
+    # Subtest: formats numeric codes as 4+4
+    ok 1 - formats numeric codes as 4+4
+      ---
+      duration_ms: 0.149303
+      type: 'test'
+      ...
+    # Subtest: leaves vanity codes as is
+    ok 2 - leaves vanity codes as is
+      ---
+      duration_ms: 0.095285
+      type: 'test'
+      ...
+    1..2
+ok 4 - display
+  ---
+  duration_ms: 0.377137
+  type: 'suite'
+  ...
+# Subtest: normalize
+    # Subtest: strips spaces and hyphens from numeric codes
+    ok 1 - strips spaces and hyphens from numeric codes
+      ---
+      duration_ms: 0.178406
+      type: 'test'
+      ...
+    # Subtest: rejects numeric codes with a bad check digit
+    ok 2 - rejects numeric codes with a bad check digit
+      ---
+      duration_ms: 0.056365
+      type: 'test'
+      ...
+    # Subtest: lowercases valid vanity codes
+    ok 3 - lowercases valid vanity codes
+      ---
+      duration_ms: 0.174552
+      type: 'test'
+      ...
+    # Subtest: rejects invalid vanity codes
+    ok 4 - rejects invalid vanity codes
+      ---
+      duration_ms: 0.10412
+      type: 'test'
+      ...
+    # Subtest: accepts vanity at the 3 and 20 char limits
+    ok 5 - accepts vanity at the 3 and 20 char limits
+      ---
+      duration_ms: 0.051899
+      type: 'test'
+      ...
+    1..5
+ok 5 - normalize
+  ---
+  duration_ms: 0.671501
+  type: 'suite'
+  ...
+# s1 step=commit.honeypot order=- ok=false err=honeypot
+# s1 step=commit.ratelimit order=- ok=false err=NeonDbError
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.ratelimit order=- ok=false err=NeonDbError
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ceiling_alert order=- ok=false err=NeonDbError
+# Subtest: commit route guards (no DB)
+    # Subtest: D5: requests rejected by validation (422) never touch the limiters
+    ok 1 - D5: requests rejected by validation (422) never touch the limiters
+      ---
+      duration_ms: 9.252031
+      type: 'test'
+      ...
+    # Subtest: D5: a request that passes validation reaches the per-IP limiter, which fails closed
+    ok 2 - D5: a request that passes validation reaches the per-IP limiter, which fails closed
+      ---
+      duration_ms: 2.262259
+      type: 'test'
+      ...
+    # Subtest: L1: cross-site requests are 403 before anything else
+    ok 3 - L1: cross-site requests are 403 before anything else
+      ---
+      duration_ms: 1.157678
+      type: 'test'
+      ...
+    # Subtest: L1: a non-JSON content type is 415 (a text/plain form post cannot reach the route)
+    ok 4 - L1: a non-JSON content type is 415 (a text/plain form post cannot reach the route)
+      ---
+      duration_ms: 0.57778
+      type: 'test'
+      ...
+    # Subtest: same-origin browser posts pass the guard
+    ok 5 - same-origin browser posts pass the guard
+      ---
+      duration_ms: 0.462032
+      type: 'test'
+      ...
+    # Subtest: L7: every commit response carries X-Frame-Options DENY and nosniff
+    ok 6 - L7: every commit response carries X-Frame-Options DENY and nosniff
+      ---
+      duration_ms: 0.977421
+      type: 'test'
+      ...
+    # Subtest: M1: a tripped global ceiling (1000/h) returns 429 and enqueues one ops_alert per hour; per-IP key uses /48
+    ok 7 - M1: a tripped global ceiling (1000/h) returns 429 and enqueues one ops_alert per hour; per-IP key uses /48
+      ---
+      duration_ms: 7.223529
+      type: 'test'
+      ...
+    # Subtest: M1: an ops_alert enqueue failure still returns 429 (never 500)
+    ok 8 - M1: an ops_alert enqueue failure still returns 429 (never 500)
+      ---
+      duration_ms: 1.506538
+      type: 'test'
+      ...
+    1..8
+ok 6 - commit route guards (no DB)
+  ---
+  duration_ms: 226.085721
+  type: 'suite'
+  ...
+# Subtest: season1 db (integration)
+    # Subtest: public ids use the no-lookalike alphabet
+    ok 1 - public ids use the no-lookalike alphabet
+      ---
+      duration_ms: 1.27347
+      type: 'test'
+      ...
+    # Subtest: upserts family and guardian, reusing the family for the same email
+    ok 2 - upserts family and guardian, reusing the family for the same email
+      ---
+      duration_ms: 142.598101
+      type: 'test'
+      ...
+    # Subtest: inserts kids and a pending order with items
+    ok 3 - inserts kids and a pending order with items
+      ---
+      duration_ms: 48.857269
+      type: 'test'
+      ...
+    # Subtest: pending orders do not count as prior paid kids
+    ok 4 - pending orders do not count as prior paid kids
+      ---
+      duration_ms: 7.655729
+      type: 'test'
+      ...
+    # Subtest: claims a paid order exactly once
+    ok 5 - claims a paid order exactly once
+      ---
+      duration_ms: 33.904265
+      type: 'test'
+      ...
+    # Subtest: tracks fulfilment completion
+    ok 6 - tracks fulfilment completion
+      ---
+      duration_ms: 25.500349
+      type: 'test'
+      ...
+    # Subtest: mints one family code, returning the same code on repeat and under concurrency
+    ok 7 - mints one family code, returning the same code on repeat and under concurrency
+      ---
+      duration_ms: 101.422299
+      type: 'test'
+      ...
+    # Subtest: mintFamilyCode retries on a code collision
+    ok 8 - mintFamilyCode retries on a code collision
+      ---
+      duration_ms: 57.623201
+      type: 'test'
+      ...
+    # Subtest: records a stripe event once
+    ok 9 - records a stripe event once
+      ---
+      duration_ms: 16.238365
+      type: 'test'
+      ...
+    # Subtest: enqueues an outbox key once
+    ok 10 - enqueues an outbox key once
+      ---
+      duration_ms: 22.687846
+      type: 'test'
+      ...
+# \# test rows: email=team+s1test-ab98a70f80@ekuzo.gg pi=pi_test_ab98a70f80 event=evt_test_ab98a70f80 outbox=test_kind:ab98a70f80 rl=test:ab98a70f80
+    # Subtest: rate limits within a window
+    ok 11 - rate limits within a window
+      ---
+      duration_ms: 22.07451
+      type: 'test'
+      ...
+    1..11
+ok 7 - season1 db (integration)
+  ---
+  duration_ms: 481.519693
+  type: 'suite'
+  ...
+# Subtest: dev phone preview
+    # Subtest: keeps same-site paths
+    ok 1 - keeps same-site paths
+      ---
+      duration_ms: 0.410979
+      type: 'test'
+      ...
+    # Subtest: rejects other sites, loops and empty values
+    ok 2 - rejects other sites, loops and empty values
+      ---
+      duration_ms: 0.100539
+      type: 'test'
+      ...
+    # Subtest: is loaded by every Season 01 funnel page
+    ok 3 - is loaded by every Season 01 funnel page
+      ---
+      duration_ms: 1.266047
+      type: 'test'
+      ...
+    1..3
+ok 8 - dev phone preview
+  ---
+  duration_ms: 2.511312
+  type: 'suite'
+  ...
+# Subtest: L7 page framing
+    # Subtest: test mode allows same-origin framing for the phone preview
+    ok 1 - test mode allows same-origin framing for the phone preview
+      ---
+      duration_ms: 0.100575
+      type: 'test'
+      ...
+    # Subtest: live and off keep DENY, and the shared constant is untouched
+    ok 2 - live and off keep DENY, and the shared constant is untouched
+      ---
+      duration_ms: 0.123898
+      type: 'test'
+      ...
+    1..2
+ok 9 - L7 page framing
+  ---
+  duration_ms: 0.327125
+  type: 'suite'
+  ...
+# Subtest: /season1/dev-view route
+    # Subtest: returns 404 when the mode is off or live
+    ok 1 - returns 404 when the mode is off or live
+      ---
+      duration_ms: 28.598106
+      type: 'test'
+      ...
+    # Subtest: serves the preview in test mode (control)
+    ok 2 - serves the preview in test mode (control)
+      ---
+      duration_ms: 2.346247
+      type: 'test'
+      ...
+    1..2
+ok 10 - /season1/dev-view route
+  ---
+  duration_ms: 31.205305
+  type: 'suite'
+  ...
+# s1 step=commit.order order=atwfbxu8xs ok=true
+# s1 step=commit.customer order=atwfbxu8xs ok=true
+# s1 step=commit.pi order=atwfbxu8xs ok=true
+# s1 step=commit.order order=732deknty6 ok=true
+# s1 step=commit.customer order=732deknty6 ok=true
+# s1 step=commit.pi order=732deknty6 ok=true
+# s1 step=commit.price_changed order=- ok=true
+# s1 step=commit.order order=y3tz5k4wnk ok=true
+# s1 step=commit.customer order=y3tz5k4wnk ok=true
+# s1 step=commit.pi order=y3tz5k4wnk ok=true
+# s1 step=commit.order order=45x9h6ybnt ok=true
+# s1 step=commit.customer order=45x9h6ybnt ok=true
+# s1 step=commit.pi order=45x9h6ybnt ok=true
+# s1 step=fulfil.claim order=8en83f52wn ok=true
+# s1 step=fulfil.code order=8en83f52wn ok=true
+# s1 step=fulfil.kids order=8en83f52wn ok=true
+# s1 step=fulfil.zip order=8en83f52wn ok=true
+# s1 step=fulfil.fields order=8en83f52wn ok=true
+# s1 step=fulfil.flags order=8en83f52wn ok=true
+# s1 step=fulfil.referral order=8en83f52wn ok=true
+# s1 step=fulfil.event order=8en83f52wn ok=true
+# s1 step=fulfil.outbox order=8en83f52wn ok=true
+# s1 step=fulfil.done order=8en83f52wn ok=true
+# Subtest: season1 gap closure (integration)
+    # Subtest: AUD-A: a kid aged 9 flags the pending order age_edge at commit; 12 and 17 do not; fulfil keeps the flag
+    ok 1 - AUD-A: a kid aged 9 flags the pending order age_edge at commit; 12 and 17 do not; fulfil keeps the flag
+      ---
+      duration_ms: 2356.451999
+      type: 'test'
+      ...
+# s1 step=fulfil.claim order=pp3kc3rr8k ok=true
+# s1 step=fulfil.code order=pp3kc3rr8k ok=true
+# s1 step=fulfil.kids order=pp3kc3rr8k ok=true
+# s1 step=fulfil.zip order=pp3kc3rr8k ok=true
+# s1 step=fulfil.fields order=pp3kc3rr8k ok=true
+# s1 step=fulfil.flags order=pp3kc3rr8k ok=true
+# s1 step=fulfil.referral order=pp3kc3rr8k ok=true
+# s1 step=fulfil.event order=pp3kc3rr8k ok=true
+# s1 step=fulfil.outbox order=pp3kc3rr8k ok=true
+# s1 step=fulfil.done order=pp3kc3rr8k ok=true
+# s1 step=fulfil.claim order=f5zrbhk27c ok=true
+# s1 step=fulfil.code order=f5zrbhk27c ok=true
+# s1 step=fulfil.kids order=f5zrbhk27c ok=true
+# s1 step=fulfil.zip order=f5zrbhk27c ok=true
+# s1 step=fulfil.fields order=f5zrbhk27c ok=true
+# s1 step=fulfil.flags order=f5zrbhk27c ok=true
+# s1 step=fulfil.referral order=f5zrbhk27c ok=true
+# s1 step=fulfil.event order=f5zrbhk27c ok=true
+# s1 step=fulfil.outbox order=f5zrbhk27c ok=true
+# s1 step=fulfil.done order=f5zrbhk27c ok=true
+# s1 step=fulfil.claim order=j5wpny5w3q ok=true
+# s1 step=fulfil.code order=j5wpny5w3q ok=true
+# s1 step=fulfil.kids order=j5wpny5w3q ok=true
+# s1 step=fulfil.zip order=j5wpny5w3q ok=true
+# s1 step=fulfil.fields order=j5wpny5w3q ok=true
+# s1 step=fulfil.flags order=j5wpny5w3q ok=true
+# s1 step=fulfil.referral order=j5wpny5w3q ok=true
+# s1 step=fulfil.event order=j5wpny5w3q ok=true
+# s1 step=fulfil.outbox order=j5wpny5w3q ok=true
+# s1 step=fulfil.done order=j5wpny5w3q ok=true
+# s1 step=fulfil.claim order=yqq4ak7jen ok=true
+# s1 step=fulfil.code order=yqq4ak7jen ok=true
+# s1 step=fulfil.kids order=yqq4ak7jen ok=true
+# s1 step=fulfil.zip order=yqq4ak7jen ok=true
+# s1 step=fulfil.fields order=yqq4ak7jen ok=true
+# s1 step=fulfil.flags order=yqq4ak7jen ok=true
+# s1 step=fulfil.referral order=yqq4ak7jen ok=true
+# s1 step=fulfil.event order=yqq4ak7jen ok=true
+# s1 step=fulfil.outbox order=yqq4ak7jen ok=true
+# s1 step=fulfil.done order=yqq4ak7jen ok=true
+# s1 step=fulfil.claim order=35s6ngzq4z ok=true
+# s1 step=fulfil.code order=35s6ngzq4z ok=true
+# s1 step=fulfil.kids order=35s6ngzq4z ok=true
+# s1 step=fulfil.zip order=35s6ngzq4z ok=true
+# s1 step=fulfil.fields order=35s6ngzq4z ok=true
+# s1 step=fulfil.flags order=35s6ngzq4z ok=true
+# s1 step=fulfil.referral order=35s6ngzq4z ok=true
+# s1 step=fulfil.event order=35s6ngzq4z ok=true
+# s1 step=fulfil.outbox order=35s6ngzq4z ok=true
+# s1 step=fulfil.done order=35s6ngzq4z ok=true
+    # Subtest: RT15: fulfil flags duplicate_kid for a same-name kid paid within 30 days; not for a different name or an older order
+    ok 2 - RT15: fulfil flags duplicate_kid for a same-name kid paid within 30 days; not for a different name or an older order
+      ---
+      duration_ms: 659.996547
+      type: 'test'
+      ...
+# s1 step=fulfil.check order=u3ak465kt6 ok=false err=pi_mismatch
+# s1 step=fulfil.check order=am5vz47h5y ok=false err=pi_mismatch
+# s1 step=fulfil.check order=fyyhfcjpnh ok=false err=pi_mismatch
+# s1 step=fulfil.check order=a3f5m4ambx ok=false err=pi_mismatch
+# s1 step=fulfil.claim order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.code order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.kids order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.zip order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.fields order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.flags order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.referral order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.event order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.outbox order=qe3z8qdtu2 ok=true
+# s1 step=fulfil.done order=qe3z8qdtu2 ok=true
+    # Subtest: RT16: amount, currency, metadata.order_id or livemode disagreement claims nothing and flags pi_mismatch
+    ok 3 - RT16: amount, currency, metadata.order_id or livemode disagreement claims nothing and flags pi_mismatch
+      ---
+      duration_ms: 469.83384
+      type: 'test'
+      ...
+# s1 step=webhook.charge.dispute.created order=xuj5r2j5kk ok=true
+# \# evidence AUD-2 order xuj5r2j5kk pi pi_3UVtFpKORcR8BUEx10ZewxtA charge ch_3UVtFpKORcR8BUEx1IKAl6I0 event evt_test_dispute_77f1e982c884 via handler
+    # Subtest: AUD-2 / M7: charge.dispute.created flags the order and the family and queues one ops_alert; replay is a no-op
+    ok 4 - AUD-2 / M7: charge.dispute.created flags the order and the family and queues one ops_alert; replay is a no-op
+      ---
+      duration_ms: 446.815991
+      type: 'test'
+      ...
+    1..4
+ok 11 - season1 gap closure (integration)
+  ---
+  duration_ms: 4613.742305
+  type: 'suite'
+  ...
+# Subtest: isCrossSite (security review L1, L2)
+    # Subtest: Sec-Fetch-Site wins when present
+    ok 1 - Sec-Fetch-Site wins when present
+      ---
+      duration_ms: 21.191179
+      type: 'test'
+      ...
+    # Subtest: without Sec-Fetch-Site, Origin must name the raw host (port included)
+    ok 2 - without Sec-Fetch-Site, Origin must name the raw host (port included)
+      ---
+      duration_ms: 0.942381
+      type: 'test'
+      ...
+    # Subtest: no Sec-Fetch-Site and no Origin passes (server-to-server, tests)
+    ok 3 - no Sec-Fetch-Site and no Origin passes (server-to-server, tests)
+      ---
+      duration_ms: 0.182793
+      type: 'test'
+      ...
+    1..3
+ok 12 - isCrossSite (security review L1, L2)
+  ---
+  duration_ms: 23.076558
+  type: 'suite'
+  ...
+# Subtest: isJsonContentType (L1)
+    # Subtest: accepts application/json with or without parameters
+    ok 1 - accepts application/json with or without parameters
+      ---
+      duration_ms: 0.322828
+      type: 'test'
+      ...
+    # Subtest: rejects form and text types and a missing header
+    ok 2 - rejects form and text types and a missing header
+      ---
+      duration_ms: 0.343576
+      type: 'test'
+      ...
+    1..2
+ok 13 - isJsonContentType (L1)
+  ---
+  duration_ms: 0.820378
+  type: 'suite'
+  ...
+# Subtest: shareOrigin (L3)
+    # Subtest: https from the raw host, http only for localhost
+    ok 1 - https from the raw host, http only for localhost
+      ---
+      duration_ms: 0.196006
+      type: 'test'
+      ...
+    1..1
+ok 14 - shareOrigin (L3)
+  ---
+  duration_ms: 0.518998
+  type: 'suite'
+  ...
+# Subtest: SECURITY_HEADERS (L7)
+    # Subtest: DENY framing and nosniff
+    ok 1 - DENY framing and nosniff
+      ---
+      duration_ms: 0.666414
+      type: 'test'
+      ...
+    1..1
+ok 15 - SECURITY_HEADERS (L7)
+  ---
+  duration_ms: 0.852545
+  type: 'suite'
+  ...
+# s1 step=commit.order order=unytmkjkxn ok=true
+# s1 step=commit.customer order=unytmkjkxn ok=true
+# s1 step=commit.pi order=unytmkjkxn ok=true
+# s1 step=fulfil.claim order=unytmkjkxn ok=true
+# s1 step=fulfil.code order=unytmkjkxn ok=true
+# s1 step=fulfil.kids order=unytmkjkxn ok=true
+# s1 step=fulfil.zip order=unytmkjkxn ok=true
+# s1 step=fulfil.fields order=unytmkjkxn ok=true
+# s1 step=fulfil.flags order=unytmkjkxn ok=true
+# s1 step=fulfil.referral order=unytmkjkxn ok=true
+# s1 step=fulfil.event order=unytmkjkxn ok=true
+# s1 step=fulfil.outbox order=unytmkjkxn ok=true
+# s1 step=fulfil.done order=unytmkjkxn ok=true
+# Subtest: season1 invite wiring (integration, Stripe test mode)
+    # Subtest: (1) friend with a signed cookie pays 1 kid -> invite applied, referral pending friend_kids 1, friend_joined outbox, flags, inviteApplied
+    ok 1 - (1) friend with a signed cookie pays 1 kid -> invite applied, referral pending friend_kids 1, friend_joined outbox, flags, inviteApplied
+      ---
+      duration_ms: 2075.785677
+      type: 'test'
+      ...
+# s1 step=commit.order order=f4dgvsxcps ok=true
+# s1 step=commit.customer order=f4dgvsxcps ok=true
+# s1 step=commit.pi order=f4dgvsxcps ok=true
+# s1 step=commit.reuse order=f4dgvsxcps ok=true
+# s1 step=commit.order order=8a7pnb9adc ok=true
+# s1 step=commit.customer order=8a7pnb9adc ok=true
+# s1 step=commit.pi order=8a7pnb9adc ok=true
+    # Subtest: (2) inviteRemoved wins over the cookie; a reused attempt re-evaluates the invite and updates referral_code
+    ok 2 - (2) inviteRemoved wins over the cookie; a reused attempt re-evaluates the invite and updates referral_code
+      ---
+      duration_ms: 1362.444705
+      type: 'test'
+      ...
+# s1 step=commit.order order=d2u73rxyhf ok=true
+# s1 step=commit.customer order=d2u73rxyhf ok=true
+# s1 step=commit.pi order=d2u73rxyhf ok=true
+# s1 step=commit.order order=u7sm2bj3zz ok=true
+# s1 step=commit.customer order=u7sm2bj3zz ok=true
+# s1 step=commit.pi order=u7sm2bj3zz ok=true
+    # Subtest: (3) tampered or unsigned cookie -> invite none
+    ok 3 - (3) tampered or unsigned cookie -> invite none
+      ---
+      duration_ms: 1612.666098
+      type: 'test'
+      ...
+# s1 step=commit.order order=xks79z9snd ok=true
+# s1 step=commit.customer order=xks79z9snd ok=true
+# s1 step=commit.pi order=xks79z9snd ok=true
+    # Subtest: (4) own code (inviter's email) -> ignored own_family, no referral code, event recorded
+    ok 4 - (4) own code (inviter's email) -> ignored own_family, no referral code, event recorded
+      ---
+      duration_ms: 490.199877
+      type: 'test'
+      ...
+# s1 step=commit.order order=er2r7bz39b ok=true
+# s1 step=commit.customer order=er2r7bz39b ok=true
+# s1 step=commit.pi order=er2r7bz39b ok=true
+    # Subtest: (5) already-paid email (the friend, after paying) -> ignored already_paid
+    ok 5 - (5) already-paid email (the friend, after paying) -> ignored already_paid
+      ---
+      duration_ms: 506.320127
+      type: 'test'
+      ...
+# s1 step=commit.duplicate_kid order=- ok=false err=duplicate_kid
+# s1 step=commit.duplicate_kid order=- ok=false err=duplicate_kid
+# s1 step=commit.duplicate_kid order=- ok=false err=duplicate_kid
+# s1 step=commit.duplicate_kid order=- ok=false err=text_karlin
+    # Subtest: (6) duplicate kid -> 409 duplicate_kid with no order or PI; the 4th hit in a day -> text_karlin and a flag
+    ok 6 - (6) duplicate kid -> 409 duplicate_kid with no order or PI; the 4th hit in a day -> text_karlin and a flag
+      ---
+      duration_ms: 130.17605
+      type: 'test'
+      ...
+    # Subtest: (7) 2-kid friend at the fulfil level (synthetic claimed order): friend_kids 2, shared_card and same_zip flags, idempotent
+    ok 7 - (7) 2-kid friend at the fulfil level (synthetic claimed order): friend_kids 2, shared_card and same_zip flags, idempotent
+      ---
+      duration_ms: 179.971001
+      type: 'test'
+      ...
+# s1 step=webhook.refund_referral order=unytmkjkxn ok=true
+# s1 step=webhook.refund order=unytmkjkxn ok=true err=full
+    # Subtest: (8) full refund of the friend order -> referral void and (its only paid order) the friend's code void; inviter code untouched
+    ok 8 - (8) full refund of the friend order -> referral void and (its only paid order) the friend's code void; inviter code untouched
+      ---
+      duration_ms: 2329.982138
+      type: 'test'
+      ...
+# \# tag 121b0fe8
+# \# ledger payment_intent pi_3UVtKRKORcR8BUEx15oYB3kZ (1) friend order unytmkjkxn SUCCEEDED
+# \# ledger payment_intent pi_3UVtKTKORcR8BUEx0mQ6SCCm (2) order f4dgvsxcps (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtKTKORcR8BUEx0zbUnJeY (2) order 8a7pnb9adc (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtKUKORcR8BUEx16HiCoTK (3) order d2u73rxyhf (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtKVKORcR8BUEx1vx6xKle (3) order u7sm2bj3zz (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtKVKORcR8BUEx05LJ2fqO (4) order xks79z9snd (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtKWKORcR8BUEx1vF9l5I4 (5) order er2r7bz39b (canceled unconfirmed)
+# \# ledger refund re_3UVtKRKORcR8BUEx1n4S05T9 (8) full refund of pi_3UVtKRKORcR8BUEx15oYB3kZ
+# \# evidence inviter family 0b417664-fab8-4d04-8dba-fbfcbcb22bcc (reused; fingerprints 1, zip set)
+# \# evidence (1) PI pi_3UVtKRKORcR8BUEx15oYB3kZ order unytmkjkxn: referral 10112eca-17b4-4b81-9876-db61f5426d0b pending friend_kids 1, reasons [shared_card], outbox 2 rows, inviteApplied true
+# \# evidence (2) inviteRemoved -> invite none, referral_code null (reused attempt updated from code to null); PIs canceled
+# \# evidence (6) duplicate kid statuses duplicate_kid,duplicate_kid,duplicate_kid,text_karlin; no order; family flag duplicate_kid_repeat
+# \# evidence (7) synthetic 2-kid order t0b92bfb1f9: friend_kids 2, reasons [same_zip,shared_card], outbox 3; rerun idempotent; own_family skipped
+# \# evidence (8) refund re_3UVtKRKORcR8BUEx1n4S05T9: order refunded, referral void, friend code void, inviter code active
+    1..8
+ok 16 - season1 invite wiring (integration, Stripe test mode)
+  ---
+  duration_ms: 8960.919242
+  type: 'suite'
+  ...
+# Subtest: renderJoin
+    # Subtest: open in test mode: CTAs, test bar, jersey line, config prices
+    ok 1 - open in test mode: CTAs, test bar, jersey line, config prices
+      ---
+      duration_ms: 11.453802
+      type: 'test'
+      ...
+    # Subtest: live mode has no test bar
+    ok 2 - live mode has no test bar
+      ---
+      duration_ms: 0.538485
+      type: 'test'
+      ...
+    # Subtest: jersey line: shown before the cutoff, hidden at and after it
+    ok 3 - jersey line: shown before the cutoff, hidden at and after it
+      ---
+      duration_ms: 1.555244
+      type: 'test'
+      ...
+    # Subtest: closed: mode off, before open, and at close
+    ok 4 - closed: mode off, before open, and at close
+      ---
+      duration_ms: 0.97108
+      type: 'test'
+      ...
+    # Subtest: opens exactly at openAt
+    ok 5 - opens exactly at openAt
+      ---
+      duration_ms: 0.526214
+      type: 'test'
+      ...
+    # Subtest: src is carried to the CTAs only when passed (the route whitelists it)
+    ok 6 - src is carried to the CTAs only when passed (the route whitelists it)
+      ---
+      duration_ms: 0.571379
+      type: 'test'
+      ...
+    # Subtest: ladder and ages come from config
+    ok 7 - ladder and ages come from config
+      ---
+      duration_ms: 0.795782
+      type: 'test'
+      ...
+    1..7
+ok 17 - renderJoin
+  ---
+  duration_ms: 17.225142
+  type: 'suite'
+  ...
+# Subtest: shouldSkipLegacy
+    # Subtest: skips season1 PaymentIntents
+    ok 1 - skips season1 PaymentIntents
+      ---
+      duration_ms: 0.535578
+      type: 'test'
+      ...
+    # Subtest: skips when parent_email is missing or empty
+    ok 2 - skips when parent_email is missing or empty
+      ---
+      duration_ms: 0.117564
+      type: 'test'
+      ...
+    # Subtest: processes camps and ekuzo100 with a parent_email
+    ok 3 - processes camps and ekuzo100 with a parent_email
+      ---
+      duration_ms: 0.119031
+      type: 'test'
+      ...
+    # Subtest: RT14: skips a set but unknown product even with a parent_email
+    ok 4 - RT14: skips a set but unknown product even with a parent_email
+      ---
+      duration_ms: 0.078314
+      type: 'test'
+      ...
+    # Subtest: RT14: known products with a parent_email are processed
+    ok 5 - RT14: known products with a parent_email are processed
+      ---
+      duration_ms: 0.062507
+      type: 'test'
+      ...
+    # Subtest: RT14: missing or empty product with a parent_email keeps camps behaviour
+    ok 6 - RT14: missing or empty product with a parent_email keeps camps behaviour
+      ---
+      duration_ms: 0.091527
+      type: 'test'
+      ...
+    1..6
+ok 18 - shouldSkipLegacy
+  ---
+  duration_ms: 1.695119
+  type: 'suite'
+  ...
+# Subtest: resolveMode
+    # Subtest: unset + sk_test -> test
+    ok 1 - unset + sk_test -> test
+      ---
+      duration_ms: 1.483657
+      type: 'test'
+      ...
+    # Subtest: unset + non-test key or no key -> off
+    ok 2 - unset + non-test key or no key -> off
+      ---
+      duration_ms: 0.112749
+      type: 'test'
+      ...
+    # Subtest: unset + sk_test but non-test DB -> off
+    ok 3 - unset + sk_test but non-test DB -> off
+      ---
+      duration_ms: 0.07728
+      type: 'test'
+      ...
+    # Subtest: test with non-test DB host or missing DB -> off
+    ok 4 - test with non-test DB host or missing DB -> off
+      ---
+      duration_ms: 0.126311
+      type: 'test'
+      ...
+    # Subtest: test with a live key -> off
+    ok 5 - test with a live key -> off
+      ---
+      duration_ms: 0.053435
+      type: 'test'
+      ...
+    # Subtest: test with good key and DB -> test (any host)
+    ok 6 - test with good key and DB -> test (any host)
+      ---
+      duration_ms: 0.058663
+      type: 'test'
+      ...
+    # Subtest: RT17: live only with every live condition met
+    ok 7 - RT17: live only with every live condition met
+      ---
+      duration_ms: 0.200063
+      type: 'test'
+      ...
+    # Subtest: RT17: live on a preview or other host -> off
+    ok 8 - RT17: live on a preview or other host -> off
+      ---
+      duration_ms: 0.137614
+      type: 'test'
+      ...
+    # Subtest: RT17: live with a test secret key -> off
+    ok 9 - RT17: live with a test secret key -> off
+      ---
+      duration_ms: 0.135219
+      type: 'test'
+      ...
+    # Subtest: RT17: live without a pk_live_ publishable key -> off
+    ok 10 - RT17: live without a pk_live_ publishable key -> off
+      ---
+      duration_ms: 0.20907
+      type: 'test'
+      ...
+    # Subtest: RT17: live pointed at the test DB, or no DB -> off
+    ok 11 - RT17: live pointed at the test DB, or no DB -> off
+      ---
+      duration_ms: 0.173877
+      type: 'test'
+      ...
+    # Subtest: RT17: live without the S1 webhook secret -> off
+    ok 12 - RT17: live without the S1 webhook secret -> off
+      ---
+      duration_ms: 0.072446
+      type: 'test'
+      ...
+    # Subtest: RT17: live outside the production deploy context -> off
+    ok 13 - RT17: live outside the production deploy context -> off
+      ---
+      duration_ms: 0.07286
+      type: 'test'
+      ...
+    # Subtest: live with only the old inputs (key + host) -> off
+    ok 14 - live with only the old inputs (key + host) -> off
+      ---
+      duration_ms: 0.049633
+      type: 'test'
+      ...
+    # Subtest: deployContext prefers S1_DEPLOY_CONTEXT, then CONTEXT
+    ok 15 - deployContext prefers S1_DEPLOY_CONTEXT, then CONTEXT
+      ---
+      duration_ms: 0.057974
+      type: 'test'
+      ...
+    # Subtest: explicit off and unknown values -> off
+    ok 16 - explicit off and unknown values -> off
+      ---
+      duration_ms: 0.040815
+      type: 'test'
+      ...
+    1..16
+ok 19 - resolveMode
+  ---
+  duration_ms: 3.863068
+  type: 'suite'
+  ...
+# Subtest: isTestDbUrl (security review L5: parsed hostname, not a substring)
+    # Subtest: the test endpoint host (direct or pooler) is test
+    ok 1 - the test endpoint host (direct or pooler) is test
+      ---
+      duration_ms: 0.072174
+      type: 'test'
+      ...
+    # Subtest: a prod URL with the marker in the password, user, path or query is NOT test
+    ok 2 - a prod URL with the marker in the password, user, path or query is NOT test
+      ---
+      duration_ms: 0.062228
+      type: 'test'
+      ...
+    # Subtest: missing or unparseable is NOT test
+    ok 3 - missing or unparseable is NOT test
+      ---
+      duration_ms: 0.07598
+      type: 'test'
+      ...
+    # Subtest: resolveMode: test refuses a prod URL carrying the marker in the password; live accepts it as non-test
+    ok 4 - resolveMode: test refuses a prod URL carrying the marker in the password; live accepts it as non-test
+      ---
+      duration_ms: 0.059142
+      type: 'test'
+      ...
+    1..4
+ok 20 - isTestDbUrl (security review L5: parsed hostname, not a substring)
+  ---
+  duration_ms: 0.34197
+  type: 'suite'
+  ...
+# s1 step=commit.order order=kfpkhmefsy ok=true
+# s1 step=commit.customer order=kfpkhmefsy ok=true
+# s1 step=commit.pi order=kfpkhmefsy ok=true
+# s1 step=commit.reuse order=kfpkhmefsy ok=true
+# Subtest: season1 money path (integration, Stripe test mode)
+    # Subtest: (a)+(b) commit -> PI (off_session, card, season1 metadata); reuse; visa; welcome, return and webhook race -> one claim; webhook replay is a no-op
+    ok 1 - (a)+(b) commit -> PI (off_session, card, season1 metadata); reuse; visa; welcome, return and webhook race -> one claim; webhook replay is a no-op
+      ---
+      duration_ms: 3432.928437
+      type: 'test'
+      ...
+# s1 step=fulfil.orphan order=kfpkhmefsy ok=false err=orphan_paid_pi
+# s1 step=webhook.error order=- ok=false err=orphan_paid_pi
+# s1 step=fulfil.backfill_pi order=kfpkhmefsy ok=true
+# s1 step=fulfil.claim order=kfpkhmefsy ok=true
+# s1 step=fulfil.code order=kfpkhmefsy ok=true
+# s1 step=fulfil.kids order=kfpkhmefsy ok=true
+# s1 step=fulfil.zip order=kfpkhmefsy ok=true
+# s1 step=fulfil.fields order=kfpkhmefsy ok=true
+# s1 step=fulfil.flags order=kfpkhmefsy ok=true
+# s1 step=fulfil.referral order=kfpkhmefsy ok=true
+# s1 step=fulfil.event order=kfpkhmefsy ok=true
+# s1 step=fulfil.outbox order=kfpkhmefsy ok=true
+# s1 step=fulfil.done order=kfpkhmefsy ok=true
+# s1 step=webhook.fulfil order=kfpkhmefsy ok=true
+# s1 step=fulfil.code order=kfpkhmefsy ok=true
+# s1 step=fulfil.kids order=kfpkhmefsy ok=true
+# s1 step=fulfil.zip order=kfpkhmefsy ok=true
+# s1 step=fulfil.fields order=kfpkhmefsy ok=true
+# s1 step=fulfil.flags order=kfpkhmefsy ok=true
+# s1 step=fulfil.referral order=kfpkhmefsy ok=true
+# s1 step=fulfil.event order=kfpkhmefsy ok=true
+# s1 step=fulfil.outbox order=kfpkhmefsy ok=true
+# s1 step=fulfil.done order=kfpkhmefsy ok=true
+# s1 step=fulfil.claim order=kfpkhmefsy ok=true
+# s1 step=fulfil.code order=kfpkhmefsy ok=true
+# s1 step=fulfil.kids order=kfpkhmefsy ok=true
+# s1 step=fulfil.zip order=kfpkhmefsy ok=true
+# s1 step=fulfil.fields order=kfpkhmefsy ok=true
+# s1 step=fulfil.flags order=kfpkhmefsy ok=true
+# s1 step=fulfil.referral order=kfpkhmefsy ok=true
+# s1 step=fulfil.event order=kfpkhmefsy ok=true
+# s1 step=fulfil.outbox order=kfpkhmefsy ok=true
+# s1 step=fulfil.done order=kfpkhmefsy ok=true
+    # Subtest: (c) orphan: stored PI id nulled and ref unknown -> webhook 500, processed_at null, ops_alert; replay after ref restored -> backfill, paid; D4 rerun
+    ok 2 - (c) orphan: stored PI id nulled and ref unknown -> webhook 500, processed_at null, ops_alert; replay after ref restored -> backfill, paid; D4 rerun
+      ---
+      duration_ms: 13771.400985
+      type: 'test'
+      ...
+# s1 step=commit.order order=58pxuw65ez ok=true
+# s1 step=commit.customer order=58pxuw65ez ok=true
+# s1 step=commit.pi order=58pxuw65ez ok=true
+# s1 step=commit.reuse order=58pxuw65ez ok=true
+    # Subtest: (d) decline -> pending, failure_count 1 (replay-safe); same attempt reuses the PI; 3 declines -> canceled + card_testing_suspect
+    ok 3 - (d) decline -> pending, failure_count 1 (replay-safe); same attempt reuses the PI; 3 declines -> canceled + card_testing_suspect
+      ---
+      duration_ms: 9392.4426
+      type: 'test'
+      ...
+# s1 step=commit.order order=fwqg83k62d ok=true
+# s1 step=commit.customer order=fwqg83k62d ok=true
+# s1 step=commit.pi order=fwqg83k62d ok=true
+    # Subtest: (e) 3DS card -> requires_action, order pending, return proves ownership
+    ok 4 - (e) 3DS card -> requires_action, order pending, return proves ownership
+      ---
+      duration_ms: 1510.867966
+      type: 'test'
+      ...
+    # Subtest: (f) off-session: saved visa charges $1.60; 3155 and 3184 cards off-session -> authentication_required
+    ok 5 - (f) off-session: saved visa charges $1.60; 3155 and 3184 cards off-session -> authentication_required
+      ---
+      duration_ms: 4039.075905
+      type: 'test'
+      ...
+# s1 step=commit.price_changed order=- ok=true
+# s1 step=commit.order order=4vx84hw7f6 ok=true
+# s1 step=commit.customer order=4vx84hw7f6 ok=true
+# s1 step=commit.pi order=4vx84hw7f6 ok=true
+# s1 step=commit.cancel_old_order order=4vx84hw7f6 ok=true
+# s1 step=commit.order order=g6wquh7mx7 ok=true
+# s1 step=commit.customer order=g6wquh7mx7 ok=true
+# s1 step=commit.pi order=g6wquh7mx7 ok=true
+# s1 step=commit.price_changed order=- ok=true
+# s1 step=commit.order order=a28xhnaqsu ok=true
+# s1 step=commit.customer order=a28xhnaqsu ok=true
+# s1 step=commit.pi order=a28xhnaqsu ok=true
+    # Subtest: (g) pricing without confirming: two kids 18000; price_changed before any PI; returning family 8000 on the same Customer; changed kids cancel the old PI
+    ok 6 - (g) pricing without confirming: two kids 18000; price_changed before any PI; returning family 8000 on the same Customer; changed kids cancel the old PI
+      ---
+      duration_ms: 1803.873772
+      type: 'test'
+      ...
+# s1 step=webhook.refund_unattributed order=kfpkhmefsy ok=true
+# s1 step=webhook.refund order=kfpkhmefsy ok=true err=partial
+# s1 step=fulfil.claim order=kfpkhmefsy ok=true
+# s1 step=fulfil.refunded_steps order=kfpkhmefsy ok=true
+# s1 step=webhook.signature order=- ok=false err=bad_signature
+    # Subtest: (h) refunds on (a): partial -> partially_refunded; second partial sums to full -> refunded; refund before fulfil claims as refunded with no code or outbox
+    ok 7 - (h) refunds on (a): partial -> partially_refunded; second partial sums to full -> refunded; refund before fulfil claims as refunded with no code or outbox
+      ---
+      duration_ms: 5354.974738
+      type: 'test'
+      ...
+# s1 step=webhook.config order=- ok=false err=no_secret
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.honeypot order=- ok=false err=honeypot
+# s1 step=commit.order order=txvffu5vca ok=true
+# s1 step=commit.customer order=txvffu5vca ok=true
+# s1 step=commit.pi order=txvffu5vca ok=true
+# s1 step=commit.order order=gdn9hhhh6t ok=true
+# s1 step=commit.customer order=gdn9hhhh6t ok=true
+# s1 step=commit.pi order=gdn9hhhh6t ok=true
+# s1 step=commit.order order=6qsqfmyb3h ok=true
+# s1 step=commit.customer order=6qsqfmyb3h ok=true
+# s1 step=commit.pi order=6qsqfmyb3h ok=true
+# s1 step=commit.order order=q9u4jybmuc ok=true
+# s1 step=commit.customer order=q9u4jybmuc ok=true
+# s1 step=commit.pi order=q9u4jybmuc ok=true
+# s1 step=commit.order order=m58sk7xev9 ok=true
+# s1 step=commit.customer order=m58sk7xev9 ok=true
+# s1 step=commit.pi order=m58sk7xev9 ok=true
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited_ip
+# s1 step=commit.order order=pn7shfsbrp ok=true
+# s1 step=commit.customer order=pn7shfsbrp ok=true
+# s1 step=commit.pi order=pn7shfsbrp ok=true
+# \# tag 397ad6c6
+# \# ledger payment_intent pi_3UVtKaKORcR8BUEx0ctCskKc (a) order kfpkhmefsy SUCCEEDED
+# \# ledger customer cus_VWxFjd48xyoWGm (a) family customer
+# \# ledger payment_intent pi_3UVtKrKORcR8BUEx0lewFk0d (d) order 58pxuw65ez (declines, canceled)
+# \# ledger payment_intent pi_3UVtL1KORcR8BUEx0pWIfQnK (e) order fwqg83k62d (3DS, canceled after)
+# \# ledger payment_intent pi_3UVtL2KORcR8BUEx15jvaSXo (f) off-session $1.60 on (a) saved visa SUCCEEDED
+# \# ledger payment_method pm_1UVtL3KORcR8BUExtEk5wkay (f) pm_card_authenticationRequiredOnSetup attached to cus_VWxFjd48xyoWGm
+# \# ledger payment_intent pi_3UVtL4KORcR8BUEx1h5QljOz (f) pm_card_authenticationRequiredOnSetup off-session failed as expected
+# \# ledger payment_method pm_1UVtL5KORcR8BUExdIKn4yNg (f) pm_card_authenticationRequired attached to cus_VWxFjd48xyoWGm
+# \# ledger payment_intent pi_3UVtL6KORcR8BUEx0fMaYAkz (f) pm_card_authenticationRequired off-session failed as expected
+# \# ledger payment_intent pi_3UVtL6KORcR8BUEx0lGvPnEz (g) superseded order 4vx84hw7f6 (canceled by commit)
+# \# ledger payment_intent pi_3UVtL7KORcR8BUEx0cU1zvgm (g) two kids order g6wquh7mx7 (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtL7KORcR8BUEx17pMEEFn (g) returning family order a28xhnaqsu (canceled unconfirmed)
+# \# ledger refund re_3UVtKaKORcR8BUEx0VTHagN6 (h) partial 4000 of (a)
+# \# ledger refund re_3UVtKaKORcR8BUEx0kqnyqAV (h) partial 6000 of (a), sums to full
+# \# ledger payment_intent pi_3UVtLDKORcR8BUEx0HL5ybLt (i) rate-limit run txvffu5vca (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtLEKORcR8BUEx0QkoSXtR (i) rate-limit run gdn9hhhh6t (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtLEKORcR8BUEx1cJTbnEW (i) rate-limit run 6qsqfmyb3h (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtLFKORcR8BUEx1EUWqlAn (i) rate-limit run q9u4jybmuc (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtLFKORcR8BUEx05OK4qIR (i) rate-limit run m58sk7xev9 (canceled unconfirmed)
+# \# ledger payment_intent pi_3UVtLGKORcR8BUEx0Kb1EZNL (i) D5 run pn7shfsbrp (canceled unconfirmed)
+# \# evidence (a) PI pi_3UVtKaKORcR8BUEx0ctCskKc order kfpkhmefsy; succeeded event evt_3UVtKaKORcR8BUEx0rB3IXdQ real=true
+# \# evidence (a) paid, one code, outbox 3, event processed, replay duplicate; (b) race claim events=1; repeat fulfil 7 ms
+# \# evidence (c) synthetic signed event evt_local_397ad6c6_b9a56a34 for pi_3UVtKaKORcR8BUEx0ctCskKc
+# \# evidence (c) orphan -> 500 + ops_alert + processed_at null; replay -> backfilled + paid; D4 rerun restored outbox; void code reactivated
+# \# evidence (d) failure_count 1 after replay; 3 -> PI canceled + flag (order 58pxuw65ez)
+# \# evidence (e) requires_action -> pending (order fwqg83k62d)
+# \# evidence (f) off-session visa pi_3UVtL2KORcR8BUEx15jvaSXo succeeded
+# \# evidence (f) pm_card_authenticationRequiredOnSetup off-session -> authentication_required (expected)
+# \# evidence (f) pm_card_authenticationRequired off-session -> authentication_required (expected)
+# \# evidence (g) 409 price_changed (no order); 18000 two kids; old PI canceled; returning 8000 on cus_VWxFjd48xyoWGm; all unconfirmed PIs canceled
+# \# evidence (h) 4000 -> partially_refunded; +6000 -> refunded (kids refunded, prior paid 0); refund-before-fulfil -> refunded, no code, no outbox
+# \# evidence (i) guards pass; per-IP statuses 200,200,200,200,200,429
+    # Subtest: (i) guards: bad signature 400, other mode skipped, non-season1 skipped and nothing written, missing secret 500; commit off/honeypot/age; per-IP limit
+    ok 8 - (i) guards: bad signature 400, other mode skipped, non-season1 skipped and nothing written, missing secret 500; commit off/honeypot/age; per-IP limit
+      ---
+      duration_ms: 2628.004178
+      type: 'test'
+      ...
+    1..8
+ok 21 - season1 money path (integration, Stripe test mode)
+  ---
+  duration_ms: 44241.436802
+  type: 'suite'
+  ...
+# Subtest: OFFER config
+    # Subtest: has the frozen values
+    ok 1 - has the frozen values
+      ---
+      duration_ms: 0.395042
+      type: 'test'
+      ...
+    # Subtest: every window is an ISO instant with an explicit offset
+    ok 2 - every window is an ISO instant with an explicit offset
+      ---
+      duration_ms: 0.600296
+      type: 'test'
+      ...
+    1..2
+ok 22 - OFFER config
+  ---
+  duration_ms: 1.618002
+  type: 'suite'
+  ...
+# Subtest: isOpen (openAt <= now < closeAt)
+    # Subtest: openAt boundary
+    ok 1 - openAt boundary
+      ---
+      duration_ms: 0.167487
+      type: 'test'
+      ...
+    # Subtest: closeAt boundary
+    ok 2 - closeAt boundary
+      ---
+      duration_ms: 0.070666
+      type: 'test'
+      ...
+    # Subtest: mid window is open
+    ok 3 - mid window is open
+      ---
+      duration_ms: 0.939088
+      type: 'test'
+      ...
+    1..3
+ok 23 - isOpen (openAt <= now < closeAt)
+  ---
+  duration_ms: 1.319958
+  type: 'suite'
+  ...
+# Subtest: isJerseyEligible (created strictly before jerseyCutoffAt)
+    # Subtest: one ms before / at / after
+    ok 1 - one ms before / at / after
+      ---
+      duration_ms: 0.20564
+      type: 'test'
+      ...
+    # Subtest: accepts ISO strings, epoch ms and Stripe epoch seconds
+    ok 2 - accepts ISO strings, epoch ms and Stripe epoch seconds
+      ---
+      duration_ms: 0.414115
+      type: 'test'
+      ...
+    # Subtest: is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+    ok 3 - is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+      ---
+      duration_ms: 0.102584
+      type: 'test'
+      ...
+    # Subtest: garbage is not eligible
+    ok 4 - garbage is not eligible
+      ---
+      duration_ms: 0.083062
+      type: 'test'
+      ...
+    1..4
+ok 24 - isJerseyEligible (created strictly before jerseyCutoffAt)
+  ---
+  duration_ms: 1.076208
+  type: 'suite'
+  ...
+# Subtest: lockInDate / formatDatePT
+    # Subtest: lockInDate is the lockInAt instant
+    ok 1 - lockInDate is the lockInAt instant
+      ---
+      duration_ms: 0.117636
+      type: 'test'
+      ...
+    # Subtest: formats in Pacific time regardless of process TZ
+    ok 2 - formats in Pacific time regardless of process TZ
+      ---
+      duration_ms: 9.535962
+      type: 'test'
+      ...
+    1..2
+ok 25 - lockInDate / formatDatePT
+  ---
+  duration_ms: 9.72875
+  type: 'suite'
+  ...
+# Subtest: max age (O11)
+    # Subtest: per kind
+    ok 1 - per kind
+      ---
+      duration_ms: 0.560554
+      type: 'test'
+      ...
+    # Subtest: stale just past the limit, fresh just inside
+    ok 2 - stale just past the limit, fresh just inside
+      ---
+      duration_ms: 0.860218
+      type: 'test'
+      ...
+    1..2
+ok 26 - max age (O11)
+  ---
+  duration_ms: 1.990314
+  type: 'suite'
+  ...
+# Subtest: test isolation regex
+    # Subtest: allows team+s1test and aaron+ at ekuzo.gg only
+    ok 1 - allows team+s1test and aaron+ at ekuzo.gg only
+      ---
+      duration_ms: 0.33863
+      type: 'test'
+      ...
+    # Subtest: a test-mode event to a real address is skipped before any network call
+    ok 2 - a test-mode event to a real address is skipped before any network call
+      ---
+      duration_ms: 0.713877
+      type: 'test'
+      ...
+    1..2
+ok 27 - test isolation regex
+  ---
+  duration_ms: 1.170494
+  type: 'suite'
+  ...
+# Subtest: Klaviyo payloads
+    # Subtest: Committed property set is exactly the contract, with no invited_by_kid (T12)
+    ok 1 - Committed property set is exactly the contract, with no invited_by_kid (T12)
+      ---
+      duration_ms: 0.255616
+      type: 'test'
+      ...
+    # Subtest: share_url is the live domain in live mode and the recorded origin in test
+    ok 2 - share_url is the live domain in live mode and the recorded origin in test
+      ---
+      duration_ms: 0.380935
+      type: 'test'
+      ...
+    # Subtest: profile properties and phone without SMS marketing consent
+    ok 3 - profile properties and phone without SMS marketing consent
+      ---
+      duration_ms: 0.376865
+      type: 'test'
+      ...
+    # Subtest: request body shape
+    ok 4 - request body shape
+      ---
+      duration_ms: 0.164938
+      type: 'test'
+      ...
+    # Subtest: Friend Joined carries no kid names of the friend or of the joiner
+    ok 5 - Friend Joined carries no kid names of the friend or of the joiner
+      ---
+      duration_ms: 0.295823
+      type: 'test'
+      ...
+    # Subtest: Friend Joined caps credits at the ladder
+    ok 6 - Friend Joined caps credits at the ladder
+      ---
+      duration_ms: 0.209896
+      type: 'test'
+      ...
+    # Subtest: Refunded
+    ok 7 - Refunded
+      ---
+      duration_ms: 0.15302
+      type: 'test'
+      ...
+    1..7
+ok 28 - Klaviyo payloads
+  ---
+  duration_ms: 2.102458
+  type: 'suite'
+  ...
+# Subtest: Meta Purchase
+    # Subtest: user_data holds only hashed email, external_id, ip and ua
+    ok 1 - user_data holds only hashed email, external_id, ip and ua
+      ---
+      duration_ms: 0.794019
+      type: 'test'
+      ...
+    # Subtest: drops a bad IP, keeps fbp and fbc when stored
+    ok 2 - drops a bad IP, keeps fbp and fbc when stored
+      ---
+      duration_ms: 2.526075
+      type: 'test'
+      ...
+    # Subtest: test code is forced when livemode is false, absent when true; default TEST_S1
+    ok 3 - test code is forced when livemode is false, absent when true; default TEST_S1
+      ---
+      duration_ms: 0.229822
+      type: 'test'
+      ...
+    # Subtest: event_source_url is the signup page
+    ok 4 - event_source_url is the signup page
+      ---
+      duration_ms: 0.160258
+      type: 'test'
+      ...
+    1..4
+ok 29 - Meta Purchase
+  ---
+  duration_ms: 3.845326
+  type: 'suite'
+  ...
+# Subtest: Discord messages
+    # Subtest: commit message is test tag, amount, kid count, source and ref only (decision 9)
+    ok 1 - commit message is test tag, amount, kid count, source and ref only (decision 9)
+      ---
+      duration_ms: 0.418253
+      type: 'test'
+      ...
+    # Subtest: source category: referral when a friend code was used, else src mapped
+    ok 2 - source category: referral when a friend code was used, else src mapped
+      ---
+      duration_ms: 0.077053
+      type: 'test'
+      ...
+    # Subtest: strips mentions and phone-like text from user-supplied fields
+    ok 3 - strips mentions and phone-like text from user-supplied fields
+      ---
+      duration_ms: 0.138945
+      type: 'test'
+      ...
+    # Subtest: live messages carry no TEST tag
+    ok 4 - live messages carry no TEST tag
+      ---
+      duration_ms: 0.059402
+      type: 'test'
+      ...
+    # Subtest: flag and ops alert messages
+    ok 5 - flag and ops alert messages
+      ---
+      duration_ms: 0.227155
+      type: 'test'
+      ...
+    # Subtest: webhook env: test vs live, unset means skipped_no_config
+    ok 6 - webhook env: test vs live, unset means skipped_no_config
+      ---
+      duration_ms: 0.184083
+      type: 'test'
+      ...
+    1..6
+ok 30 - Discord messages
+  ---
+  duration_ms: 1.27076
+  type: 'suite'
+  ...
+# Subtest: quote
+    # Subtest: first-time family totals for 1..4 kids
+    ok 1 - first-time family totals for 1..4 kids
+      ---
+      duration_ms: 0.729351
+      type: 'test'
+      ...
+    # Subtest: lines: first kid $100, siblings $80, zero-based kidIndex
+    ok 2 - lines: first kid $100, siblings $80, zero-based kidIndex
+      ---
+      duration_ms: 0.544745
+      type: 'test'
+      ...
+    # Subtest: priorPaidKids > 0 makes every kid a $80 sibling
+    ok 3 - priorPaidKids > 0 makes every kid a $80 sibling
+      ---
+      duration_ms: 0.316991
+      type: 'test'
+      ...
+    # Subtest: totals equal the sum of the lines
+    ok 4 - totals equal the sum of the lines
+      ---
+      duration_ms: 0.089437
+      type: 'test'
+      ...
+    # Subtest: ignores any client-supplied amount
+    ok 5 - ignores any client-supplied amount
+      ---
+      duration_ms: 0.073124
+      type: 'test'
+      ...
+    # Subtest: throws on 0 kids, more than 4 kids, and bad priorPaidKids
+    ok 6 - throws on 0 kids, more than 4 kids, and bad priorPaidKids
+      ---
+      duration_ms: 1.086752
+      type: 'test'
+      ...
+    1..6
+ok 31 - quote
+  ---
+  duration_ms: 3.940464
+  type: 'suite'
+  ...
+# Subtest: referral (integration)
+    # Subtest: resolves a family code to the committed kid's first name
+    ok 1 - resolves a family code to the committed kid's first name
+      ---
+      duration_ms: 25.112575
+      type: 'test'
+      ...
+    # Subtest: accepts a spaced display form
+    ok 2 - accepts a spaced display form
+      ---
+      duration_ms: 7.575995
+      type: 'test'
+      ...
+    # Subtest: show_name false returns the code nameless
+    ok 3 - show_name false returns the code nameless
+      ---
+      duration_ms: 6.644515
+      type: 'test'
+      ...
+    # Subtest: void, unknown and unpaid-family codes return null
+    ok 4 - void, unknown and unpaid-family codes return null
+      ---
+      duration_ms: 21.36203
+      type: 'test'
+      ...
+    # Subtest: crawler UA gets the code but no name
+    ok 5 - crawler UA gets the code but no name
+      ---
+      duration_ms: 7.100035
+      type: 'test'
+      ...
+    # Subtest: partner code shows its display name
+    ok 6 - partner code shows its display name
+      ---
+      duration_ms: 6.98775
+      type: 'test'
+      ...
+    # Subtest: the 31st named render from one IP is nameless but keeps the code
+    ok 7 - the 31st named render from one IP is nameless but keeps the code
+      ---
+      duration_ms: 664.707323
+      type: 'test'
+      ...
+# \# test rows tag=ab25be2c families=6
+    # Subtest: inviteDecision: ok, unknown, own_family, already_paid
+    ok 8 - inviteDecision: ok, unknown, own_family, already_paid
+      ---
+      duration_ms: 61.958056
+      type: 'test'
+      ...
+    1..8
+ok 32 - referral (integration)
+  ---
+  duration_ms: 1275.199488
+  type: 'suite'
+  ...
+# Subtest: refcookie
+    # Subtest: round-trips a numeric and a partner code
+    ok 1 - round-trips a numeric and a partner code
+      ---
+      duration_ms: 1.052627
+      type: 'test'
+      ...
+    # Subtest: rejects a tampered code, a tampered signature and a wrong secret
+    ok 2 - rejects a tampered code, a tampered signature and a wrong secret
+      ---
+      duration_ms: 0.232934
+      type: 'test'
+      ...
+    # Subtest: rejects unsigned, empty and malformed values
+    ok 3 - rejects unsigned, empty and malformed values
+      ---
+      duration_ms: 0.199056
+      type: 'test'
+      ...
+    # Subtest: cookie attributes are constant
+    ok 4 - cookie attributes are constant
+      ---
+      duration_ms: 0.50241
+      type: 'test'
+      ...
+    # Subtest: refSecret prefers S1_REF_SECRET, falls back (test key only), and throws when neither is set
+    ok 5 - refSecret prefers S1_REF_SECRET, falls back (test key only), and throws when neither is set
+      ---
+      duration_ms: 0.335209
+      type: 'test'
+      ...
+    1..5
+ok 33 - refcookie
+  ---
+  duration_ms: 2.953103
+  type: 'suite'
+  ...
+# Subtest: ipBucket
+    # Subtest: leaves IPv4 unchanged
+    ok 1 - leaves IPv4 unchanged
+      ---
+      duration_ms: 0.32689
+      type: 'test'
+      ...
+    # Subtest: reduces IPv6 to the /64
+    ok 2 - reduces IPv6 to the /64
+      ---
+      duration_ms: 0.58519
+      type: 'test'
+      ...
+    # Subtest: same /64 collides, different /64 does not
+    ok 3 - same /64 collides, different /64 does not
+      ---
+      duration_ms: 0.301419
+      type: 'test'
+      ...
+    # Subtest: handles compression at the front and IPv4-mapped addresses
+    ok 4 - handles compression at the front and IPv4-mapped addresses
+      ---
+      duration_ms: 0.132477
+      type: 'test'
+      ...
+    # Subtest: M1: the commit limiter buckets IPv6 at /48; IPv4 and /64 callers are unchanged
+    ok 5 - M1: the commit limiter buckets IPv6 at /48; IPv4 and /64 callers are unchanged
+      ---
+      duration_ms: 0.262668
+      type: 'test'
+      ...
+    # Subtest: missing or garbage input is noip
+    ok 6 - missing or garbage input is noip
+      ---
+      duration_ms: 0.090073
+      type: 'test'
+      ...
+    1..6
+ok 34 - ipBucket
+  ---
+  duration_ms: 1.968214
+  type: 'suite'
+  ...
+# Subtest: computeFlags
+    # Subtest: no flags for an ordinary join
+    ok 1 - no flags for an ordinary join
+      ---
+      duration_ms: 0.179947
+      type: 'test'
+      ...
+    # Subtest: shared_card when the fingerprint is on the inviter's orders; not when null
+    ok 2 - shared_card when the fingerprint is on the inviter's orders; not when null
+      ---
+      duration_ms: 0.062493
+      type: 'test'
+      ...
+    # Subtest: same_zip compares the first five digits and ignores blanks
+    ok 3 - same_zip compares the first five digits and ignores blanks
+      ---
+      duration_ms: 0.051575
+      type: 'test'
+      ...
+    # Subtest: burst at 5 or more, not at 4
+    ok 4 - burst at 5 or more, not at 4
+      ---
+      duration_ms: 0.109193
+      type: 'test'
+      ...
+    # Subtest: free_reached only when crossing from below 4 to 4 or more
+    ok 5 - free_reached only when crossing from below 4 to 4 or more
+      ---
+      duration_ms: 0.108739
+      type: 'test'
+      ...
+    # Subtest: node only when crossing from below 10 to 10 or more
+    ok 6 - node only when crossing from below 10 to 10 or more
+      ---
+      duration_ms: 0.057851
+      type: 'test'
+      ...
+    # Subtest: stable order with several flags
+    ok 7 - stable order with several flags
+      ---
+      duration_ms: 0.864174
+      type: 'test'
+      ...
+    1..7
+ok 35 - computeFlags
+  ---
+  duration_ms: 1.571734
+  type: 'suite'
+  ...
+# Subtest: isCrawlerUa
+    # Subtest: detects known unfurl crawlers
+    ok 1 - detects known unfurl crawlers
+      ---
+      duration_ms: 0.359284
+      type: 'test'
+      ...
+    # Subtest: does not flag normal browsers or missing UA
+    ok 2 - does not flag normal browsers or missing UA
+      ---
+      duration_ms: 0.186867
+      type: 'test'
+      ...
+    1..2
+ok 36 - isCrawlerUa
+  ---
+  duration_ms: 0.61465
+  type: 'suite'
+  ...
+# Subtest: Season 01 route headers (no DB)
+    # Subtest: L7: join, signup, welcome and crew send SAMEORIGIN in test mode, terms DENY, all nosniff
+    ok 1 - L7: join, signup, welcome and crew send SAMEORIGIN in test mode, terms DENY, all nosniff
+      ---
+      duration_ms: 243.52888
+      type: 'test'
+      ...
+    # Subtest: /season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query
+    ok 2 - /season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query
+      ---
+      duration_ms: 3.611868
+      type: 'test'
+      ...
+    # Subtest: L9: a crew lookup failure logs an error code only, never the message
+    ok 3 - L9: a crew lookup failure logs an error code only, never the message
+      ---
+      duration_ms: 2.968007
+      type: 'test'
+      ...
+    # Subtest: L2: invite/remove clears the cookie same-origin and refuses cross-site
+    ok 4 - L2: invite/remove clears the cookie same-origin and refuses cross-site
+      ---
+      duration_ms: 2.871034
+      type: 'test'
+      ...
+    # Subtest: L12: the welcome retry cookie is Secure and HttpOnly
+    ok 5 - L12: the welcome retry cookie is Secure and HttpOnly
+      ---
+      duration_ms: 1.688448
+      type: 'test'
+      ...
+    1..5
+ok 37 - Season 01 route headers (no DB)
+  ---
+  duration_ms: 256.019972
+  type: 'suite'
+  ...
+# Subtest: jerseyEligible (RT8)
+    # Subtest: created before the cutoff and paid within 24 h
+    ok 1 - created before the cutoff and paid within 24 h
+      ---
+      duration_ms: 0.505761
+      type: 'test'
+      ...
+    # Subtest: cutoff boundary is exclusive
+    ok 2 - cutoff boundary is exclusive
+      ---
+      duration_ms: 0.096973
+      type: 'test'
+      ...
+    # Subtest: Nov 30 create, Dec 20 pay: no jersey
+    ok 3 - Nov 30 create, Dec 20 pay: no jersey
+      ---
+      duration_ms: 0.064217
+      type: 'test'
+      ...
+    # Subtest: accepts Stripe epoch seconds
+    ok 4 - accepts Stripe epoch seconds
+      ---
+      duration_ms: 0.072024
+      type: 'test'
+      ...
+    # Subtest: bad input is false
+    ok 5 - bad input is false
+      ---
+      duration_ms: 0.055087
+      type: 'test'
+      ...
+    1..5
+ok 38 - jerseyEligible (RT8)
+  ---
+  duration_ms: 1.392267
+  type: 'suite'
+  ...
+# Subtest: lateConfirm (RT8)
+    # Subtest: at or after closeAt
+    ok 1 - at or after closeAt
+      ---
+      duration_ms: 0.127309
+      type: 'test'
+      ...
+    1..1
+ok 39 - lateConfirm (RT8)
+  ---
+  duration_ms: 0.187776
+  type: 'suite'
+  ...
+# Subtest: isFullRefund (ops 4)
+    # Subtest: full only when amount_refunded reaches amount
+    ok 1 - full only when amount_refunded reaches amount
+      ---
+      duration_ms: 0.286649
+      type: 'test'
+      ...
+    # Subtest: split refunds that sum to the total read as full
+    ok 2 - split refunds that sum to the total read as full
+      ---
+      duration_ms: 0.072347
+      type: 'test'
+      ...
+    1..2
+ok 40 - isFullRefund (ops 4)
+  ---
+  duration_ms: 0.541124
+  type: 'suite'
+  ...
+# Subtest: kidsSignature (RT3)
+    # Subtest: is order independent
+    ok 1 - is order independent
+      ---
+      duration_ms: 0.199636
+      type: 'test'
+      ...
+    # Subtest: changes with a name, an age or a kid count
+    ok 2 - changes with a name, an age or a kid count
+      ---
+      duration_ms: 0.204621
+      type: 'test'
+      ...
+    1..2
+ok 41 - kidsSignature (RT3)
+  ---
+  duration_ms: 0.482139
+  type: 'suite'
+  ...
+# Subtest: view tokens (RT11)
+    # Subtest: 32 random bytes, base64url, hashed with sha256
+    ok 1 - 32 random bytes, base64url, hashed with sha256
+      ---
+      duration_ms: 0.617862
+      type: 'test'
+      ...
+    # Subtest: cookie attributes
+    ok 2 - cookie attributes
+      ---
+      duration_ms: 0.124633
+      type: 'test'
+      ...
+    1..2
+ok 42 - view tokens (RT11)
+  ---
+  duration_ms: 0.811422
+  type: 'suite'
+  ...
+# Subtest: safeEqual
+    # Subtest: compares exactly
+    ok 1 - compares exactly
+      ---
+      duration_ms: 0.108947
+      type: 'test'
+      ...
+    1..1
+ok 43 - safeEqual
+  ---
+  duration_ms: 0.152107
+  type: 'suite'
+  ...
+# Subtest: keyHash and cleanAttemptId
+    # Subtest: keyHash is case-insensitive and does not contain the input
+    ok 1 - keyHash is case-insensitive and does not contain the input
+      ---
+      duration_ms: 0.341497
+      type: 'test'
+      ...
+    # Subtest: L10: keyHash is an HMAC keyed by refSecret, not a bare sha256
+    ok 2 - L10: keyHash is an HMAC keyed by refSecret, not a bare sha256
+      ---
+      duration_ms: 0.186148
+      type: 'test'
+      ...
+    # Subtest: L10: keyHash throws with a live key and no S1_REF_SECRET (no webhook-secret fallback)
+    ok 3 - L10: keyHash throws with a live key and no S1_REF_SECRET (no webhook-secret fallback)
+      ---
+      duration_ms: 0.177975
+      type: 'test'
+      ...
+    # Subtest: M1: the global ceiling alert key is one per UTC clock hour
+    ok 4 - M1: the global ceiling alert key is one per UTC clock hour
+      ---
+      duration_ms: 0.309044
+      type: 'test'
+      ...
+    # Subtest: attempt ids
+    ok 5 - attempt ids
+      ---
+      duration_ms: 0.146682
+      type: 'test'
+      ...
+    1..5
+ok 44 - keyHash and cleanAttemptId
+  ---
+  duration_ms: 1.268498
+  type: 'suite'
+  ...
+# Subtest: stepLine (ops 8)
+    # Subtest: formats and strips anything that could carry PII
+    ok 1 - formats and strips anything that could carry PII
+      ---
+      duration_ms: 0.184775
+      type: 'test'
+      ...
+    # Subtest: errCode prefers code, then type, then name
+    ok 2 - errCode prefers code, then type, then name
+      ---
+      duration_ms: 0.091592
+      type: 'test'
+      ...
+    1..2
+ok 45 - stepLine (ops 8)
+  ---
+  duration_ms: 0.334027
+  type: 'suite'
+  ...
+# Subtest: assertKeyMatchesMode
+    # Subtest: live needs sk_live_, test needs sk_test_, off never passes
+    ok 1 - live needs sk_live_, test needs sk_test_, off never passes
+      ---
+      duration_ms: 0.17968
+      type: 'test'
+      ...
+    # Subtest: keyIsLive
+    ok 2 - keyIsLive
+      ---
+      duration_ms: 0.056071
+      type: 'test'
+      ...
+    1..2
+ok 46 - assertKeyMatchesMode
+  ---
+  duration_ms: 0.286336
+  type: 'suite'
+  ...
+# Subtest: validateCommit: happy path
+    # Subtest: normalizes email and returns clean values
+    ok 1 - normalizes email and returns clean values
+      ---
+      duration_ms: 3.041204
+      type: 'test'
+      ...
+    # Subtest: accepts up to 4 kids, rejects 0 and 5
+    ok 2 - accepts up to 4 kids, rejects 0 and 5
+      ---
+      duration_ms: 0.302679
+      type: 'test'
+      ...
+    # Subtest: company absent is fine
+    ok 3 - company absent is fine
+      ---
+      duration_ms: 0.081163
+      type: 'test'
+      ...
+    1..3
+ok 47 - validateCommit: happy path
+  ---
+  duration_ms: 4.000234
+  type: 'suite'
+  ...
+# Subtest: names
+    # Subtest: accents, apostrophes, hyphens, spaces pass
+    ok 1 - accents, apostrophes, hyphens, spaces pass
+      ---
+      duration_ms: 0.676411
+      type: 'test'
+      ...
+    # Subtest: digits, markup, symbols, empty, and 21 chars fail
+    ok 2 - digits, markup, symbols, empty, and 21 chars fail
+      ---
+      duration_ms: 0.144052
+      type: 'test'
+      ...
+    # Subtest: 20 chars passes and names are trimmed
+    ok 3 - 20 chars passes and names are trimmed
+      ---
+      duration_ms: 0.073752
+      type: 'test'
+      ...
+    1..3
+ok 48 - names
+  ---
+  duration_ms: 1.048503
+  type: 'suite'
+  ...
+# Subtest: email
+    # Subtest: rejects malformed and over-long
+    ok 1 - rejects malformed and over-long
+      ---
+      duration_ms: 0.282086
+      type: 'test'
+      ...
+    1..1
+ok 49 - email
+  ---
+  duration_ms: 0.395365
+  type: 'suite'
+  ...
+# Subtest: phone
+    # Subtest: optional; digits and +()- space only, max 20
+    ok 1 - optional; digits and +()- space only, max 20
+      ---
+      duration_ms: 0.19819
+      type: 'test'
+      ...
+    1..1
+ok 50 - phone
+  ---
+  duration_ms: 0.254521
+  type: 'suite'
+  ...
+# Subtest: ages
+    # Subtest: 8, 18, 19, 'outside' fail with age_outside
+    ok 1 - 8, 18, 19, 'outside' fail with age_outside
+      ---
+      duration_ms: 0.162791
+      type: 'test'
+      ...
+    # Subtest: garbage ages fail as invalid
+    ok 2 - garbage ages fail as invalid
+      ---
+      duration_ms: 0.250495
+      type: 'test'
+      ...
+    # Subtest: 9 passes with ageEdge true; 10..17 pass and are not edges
+    ok 3 - 9 passes with ageEdge true; 10..17 pass and are not edges
+      ---
+      duration_ms: 0.130449
+      type: 'test'
+      ...
+    # Subtest: numeric strings are accepted
+    ok 4 - numeric strings are accepted
+      ---
+      duration_ms: 0.077459
+      type: 'test'
+      ...
+    # Subtest: reports the index of the offending second kid
+    ok 5 - reports the index of the offending second kid
+      ---
+      duration_ms: 0.045135
+      type: 'test'
+      ...
+    1..5
+ok 51 - ages
+  ---
+  duration_ms: 0.7605
+  type: 'suite'
+  ...
+# Subtest: consent, honeypot, src
+    # Subtest: consent must be exactly true
+    ok 1 - consent must be exactly true
+      ---
+      duration_ms: 0.083183
+      type: 'test'
+      ...
+    # Subtest: filled honeypot fails
+    ok 2 - filled honeypot fails
+      ---
+      duration_ms: 0.036109
+      type: 'test'
+      ...
+    # Subtest: src from the fixed set, else rejected
+    ok 3 - src from the fixed set, else rejected
+      ---
+      duration_ms: 0.097525
+      type: 'test'
+      ...
+    # Subtest: non-object bodies fail
+    ok 4 - non-object bodies fail
+      ---
+      duration_ms: 0.188628
+      type: 'test'
+      ...
+    1..4
+ok 52 - consent, honeypot, src
+  ---
+  duration_ms: 0.473188
+  type: 'suite'
+  ...
+# Subtest: foldName
+    # Subtest: lowercases and strips diacritics
+    ok 1 - lowercases and strips diacritics
+      ---
+      duration_ms: 0.121974
+      type: 'test'
+      ...
+    1..1
+ok 53 - foldName
+  ---
+  duration_ms: 0.190473
+  type: 'suite'
+  ...
+# Subtest: welcome THEN_LINE
+    # Subtest: one kid, no friend code: $160 a month from Feb 15, about $20 a practice
+    ok 1 - one kid, no friend code: $160 a month from Feb 15, about $20 a practice
+      ---
+      duration_ms: 0.514458
+      type: 'test'
+      ...
+    # Subtest: siblings, no friend code: the family's monthly total
+    ok 2 - siblings, no friend code: the family's monthly total
+      ---
+      duration_ms: 0.088467
+      type: 'test'
+      ...
+    # Subtest: one kid through a friend's code: February free, then $160 on Mar 15 and Apr 15
+    ok 3 - one kid through a friend's code: February free, then $160 on Mar 15 and Apr 15
+      ---
+      duration_ms: 0.160149
+      type: 'test'
+      ...
+    # Subtest: siblings through a friend's code: the credit covers $160 of the family's February
+    ok 4 - siblings through a friend's code: the credit covers $160 of the family's February
+      ---
+      duration_ms: 0.069376
+      type: 'test'
+      ...
+    1..4
+ok 54 - welcome THEN_LINE
+  ---
+  duration_ms: 1.459674
+  type: 'suite'
+  ...
+# Subtest: welcome discount ladder (PR-8)
+    # Subtest: one kid: no label; more than one kid: labelled for the first kid
+    ok 1 - one kid: no label; more than one kid: labelled for the first kid
+      ---
+      duration_ms: 1.164885
+      type: 'test'
+      ...
+    # Subtest: the template carries the label slot inside the save band
+    ok 2 - the template carries the label slot inside the save band
+      ---
+      duration_ms: 0.228335
+      type: 'test'
+      ...
+    1..2
+ok 55 - welcome discount ladder (PR-8)
+  ---
+  duration_ms: 1.504059
+  type: 'suite'
+  ...
+1..55
+# tests 217
+# suites 55
+# pass 217
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 63975.943408

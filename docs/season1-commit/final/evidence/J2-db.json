@@ -1,0 +1,98 @@
+{
+  "label": "J2",
+  "order": {
+    "public_id": "ncbznh28n2",
+    "status": "paid",
+    "amount_cents": 10000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [
+      "age_edge"
+    ],
+    "src": null,
+    "referral_code": "19341455",
+    "payment_intent_id": "pi_3UVtEtKORcR8BUEx0Mk5hwFA",
+    "paid_at": "2026-10-29T13:19:33.103Z",
+    "family_id": "df6bf979-4796-4208-bc21-4e1c8e0d078b",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Pax",
+      "age": 9,
+      "status": "committed",
+      "role": "first",
+      "unit_cents": 10000
+    }
+  ],
+  "codes": [
+    {
+      "code": "18424530",
+      "type": "family",
+      "status": "active"
+    }
+  ],
+  "referrals": [
+    {
+      "id": "9a5c7ebb-89ee-4287-8b0f-3474a5b07aa2",
+      "code": "19341455",
+      "inviter_family_id": "fe951769-4c88-4948-bd16-e77a532209a6",
+      "friend_kids": 1,
+      "status": "pending",
+      "reasons": [
+        "same_zip",
+        "shared_card"
+      ],
+      "livemode": false
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-29T13:19:33.453Z",
+      "source": "fulfil",
+      "type": "order.paid",
+      "subject": "ncbznh28n2",
+      "data": {
+        "via": "welcome",
+        "amount_cents": 10000,
+        "payment_intent": "pi_3UVtEtKORcR8BUEx0Mk5hwFA"
+      }
+    },
+    {
+      "at": "2026-10-29T13:19:33.499Z",
+      "source": "webhook",
+      "type": "payment_intent.succeeded",
+      "subject": "pi_3UVtEtKORcR8BUEx0Mk5hwFA",
+      "data": {
+        "amount": 10000,
+        "status": "succeeded",
+        "order_ref": "ncbznh28n2",
+        "decline_code": null
+      }
+    }
+  ],
+  "outbox": [
+    {
+      "kind": "klaviyo_committed",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T13:19:33.920Z"
+    },
+    {
+      "kind": "meta_purchase",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T13:19:33.835Z"
+    },
+    {
+      "kind": "discord_commit",
+      "status": "skipped_no_config",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T13:19:33.721Z"
+    }
+  ]
+}

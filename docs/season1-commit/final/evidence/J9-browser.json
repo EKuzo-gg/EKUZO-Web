@@ -1,0 +1,136 @@
+{
+  "results": [
+    {
+      "page": "join",
+      "width": 390,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop Save their spot A COACH. A TEAM. A SEASON TO PLAY FOR. FREE JERSEY First 100 families, until Nov 30 $100 $160 first mo"
+    },
+    {
+      "page": "signup",
+      "width": 390,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ Back SEASON 01 SIGN UP YOUR KID First name Age (9 to 17) Pick age 9 10 11 12 13 14 15 16 17 Younger or older + Add a"
+    },
+    {
+      "page": "crew",
+      "width": 390,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop Join the team JOIN WREN’S TEAM. Welcome to EKUZO Season 01. A competitive esports league for kids ages 9 to 17. Sign u"
+    },
+    {
+      "page": "welcome",
+      "width": 390,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ GREAT, WREN AND ODIN ARE IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with yo"
+    },
+    {
+      "page": "welcome-after-refund",
+      "width": 390,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ WE'RE CONFIRMING YOUR PAYMENT This page refreshes in a few seconds. Check now Questions? Text our founder"
+    },
+    {
+      "page": "join",
+      "width": 1440,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop Save their spot A COACH. A TEAM. A SEASON TO PLAY FOR. FREE JERSEY First 100 families, until Nov 30 $100 $160 first mo"
+    },
+    {
+      "page": "signup",
+      "width": 1440,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ Back SEASON 01 SIGN UP YOUR KID First name Age (9 to 17) Pick age 9 10 11 12 13 14 15 16 17 Younger or older + Add a"
+    },
+    {
+      "page": "crew",
+      "width": 1440,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop Join the team JOIN WREN’S TEAM. Welcome to EKUZO Season 01. A competitive esports league for kids ages 9 to 17. Sign u"
+    },
+    {
+      "page": "welcome",
+      "width": 1440,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ GREAT, WREN AND ODIN ARE IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with yo"
+    },
+    {
+      "page": "welcome-after-refund",
+      "width": 1440,
+      "status": 200,
+      "horizontalOverflowPx": 0,
+      "consoleErrors": 0,
+      "heroSnippet": "Test mode. No real charges. Phone Desktop ‹ WE'RE CONFIRMING YOUR PAYMENT This page refreshes in a few seconds. Check now Questions? Text our founder"
+    }
+  ],
+  "consoleNonBlocked": [
+    {
+      "page": "signup-390",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-390",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-390",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-390",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-1440",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-1440",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-1440",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "page": "signup-1440",
+      "type": "warning",
+      "text": "Origin trial controlled feature not enabled: 'tools'.",
+      "url": "https://js.stripe.com/v3/"
+    }
+  ],
+  "guardBlockedCount": 148,
+  "leaks": []
+}
