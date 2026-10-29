@@ -221,3 +221,20 @@ About 17:41 to 18:10 UTC. Five direct `POST /api/season1/commit` calls (curl, to
 | payment_intent | pi_3UVxdCKORcR8BUEx0KwCTJNq | requires_payment_method $100 (types card, link) | after-cold1, order 5wvpcpb2s2 (cus_VX1gk7MOqzFOXB) |
 | payment_intent | pi_3UVxdDKORcR8BUEx0OURiM82 | requires_payment_method $100 (types card, link) | after-warm2, order jetaa5k6pa (cus_VX1gLj04A9NkdS) |
 | payment_intent | pi_3UVxjZKORcR8BUEx1cXTsseP | succeeded $100, card 4242 through the card form, not refunded | prewarm1 end to end, order fetrs6hph3 (cus_VX1nV7t8c9IHEv) |
+
+Wallet and speed check (same section, 2026-10-29 18:12 to 18:30 UTC, branch deploy with 6304eb8 to 400ec88). Neon rows: emails
+`team+s1test-ws-m1-5bc894@ekuzo.gg` (Ada, Lio 12, order u8cqshb5d5 paid, code 85413488), `...-ws-m2-5bc894@` (Bea, Cy 10 and Dot 14,
+order 8t52updb4w paid, code 47447157), `...-ws-m3-5bc894@` (Cal, Eli 11, order f4uns34myu paid via 85413488, referral pending, code 96275456),
+`...-ws-d1-5bc894@` (Dee, Fay 13, order mpwufcn9mh pending after the decline, kid pending), and the returning family
+`team+s1test-ft1029-c1-5bc894@ekuzo.gg` (new kid Remy 10, order brra8a3xkp paid, order payer_first_name Quincy), with events, outbox rows and
+`s1pi:*` and `s1dup:*` rate-limit keys. Klaviyo test profiles will exist for the m1, m2, m3 emails.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVxpnKORcR8BUEx1iRsygKm | succeeded $100 (not refunded) | Wallet and speed: one-kid cold buyer (cus_VX1ttgJbppVUR8) |
+| payment_intent | pi_3UVxqCKORcR8BUEx17Dk2noX | succeeded $180 (not refunded) | Wallet and speed: siblings (cus_VX1t0LCNdNhNpw) |
+| payment_intent | pi_3UVxqiKORcR8BUEx09V3SkcN | succeeded $100 (not refunded) | Wallet and speed: friend link (cus_VX1ucttBfiAMQC) |
+| payment_intent | pi_3UVy16KORcR8BUEx0tMI3nvR | succeeded $80 (not refunded) | Wallet and speed: returning family, sibling price (reused cus_VX0n1Px1sn11iU) |
+| payment_intent | pi_3UVy1LKORcR8BUEx0WWJC43t | declined (generic_decline), then canceled by Sentry | Wallet and speed: decline, order mpwufcn9mh |
+
+The four succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).

@@ -1,0 +1,39 @@
+
+HTTP/2 204 
+cache-control: no-store
+cache-status: "Netlify Durable"; fwd=bypass
+cache-status: "Netlify Edge"; fwd=miss; fwd-status=204
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+server-timing: db;dur=91.0;desc="ok", app;dur=94.1, cold;desc="first request on this function instance"
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-s1-region: us-east-1
+
+---
+
+HTTP/2 204 
+cache-control: no-store
+cache-status: "Netlify Durable"; fwd=bypass
+cache-status: "Netlify Edge"; fwd=miss; fwd-status=204
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+server-timing: db;dur=0.0;desc="skip", app;dur=0.0
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-s1-region: us-east-1
+
+---
+
+HTTP/2 204 
+cache-control: no-store
+cache-status: "Netlify Durable"; fwd=bypass
+cache-status: "Netlify Edge"; fwd=miss; fwd-status=204
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+server-timing: db;dur=0.0;desc="skip", app;dur=0.1
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-s1-region: us-east-1
+
+---

@@ -1,0 +1,71 @@
+{
+  "label": "D1",
+  "email": "team+s1test-ws-d1-5bc894@ekuzo.gg",
+  "commits": [
+    {
+      "at": 11222,
+      "status": 200,
+      "serverTiming": "db;dur=222.8;desc=\"6 queries\", dbfirst;dur=67.9, stripe;dur=373.5;desc=\"2 calls\", app;dur=604.6",
+      "body": {
+        "clientSecret": "REDACTED",
+        "orderId": "mpwufcn9mh",
+        "amountCents": 10000,
+        "invite": "none"
+      }
+    }
+  ],
+  "warm": [
+    {
+      "at": 402,
+      "page": "/season1/join",
+      "method": "GET"
+    }
+  ],
+  "guardBlocked": 36,
+  "leaks": 0,
+  "console": [
+    {
+      "page": "D1",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+      "url": "https://api.stripe.com/v1/payment_intents/pi_3UVy1LKORcR8BUEx0WWJC43t/confirm"
+    }
+  ],
+  "startHeading": "A COACH. A TEAM.\nA SEASON TO PLAY FOR.",
+  "warmBeforeTyping": 1,
+  "warmAfterTyping": 1,
+  "wallet": {
+    "cls": "xpw on",
+    "wrapH": 79,
+    "xpH": 48,
+    "orpay": "flex",
+    "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+    "overflowX": 0
+  },
+  "clsSignup": [
+    {
+      "v": 0.0215,
+      "t": 1289,
+      "src": [
+        "app"
+      ]
+    },
+    {
+      "v": 0.0257,
+      "t": 1294,
+      "src": [
+        "app"
+      ]
+    }
+  ],
+  "cardFrame": {
+    "loaderNever": null,
+    "hasLink": false,
+    "text": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Di"
+  },
+  "xpFrameText": "Pay with",
+  "summary": "First month | $160 $100 | Founding jersey (first 100) | Free | Due today | $100 | Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "button": "Save Fay's spot · $100",
+  "declineMsg": "Your card has been declined.",
+  "buttonAfterDecline": "Save Fay's spot · $100"
+}

@@ -1,0 +1,83 @@
+{
+  "label": "ws-M1",
+  "order": {
+    "public_id": "u8cqshb5d5",
+    "status": "paid",
+    "amount_cents": 10000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [],
+    "src": null,
+    "referral_code": null,
+    "payment_intent_id": "pi_3UVxpnKORcR8BUEx1iRsygKm",
+    "paid_at": "2026-10-29T18:13:57.393Z",
+    "family_id": "305f7846-cbfc-41b6-a875-03318dc2b9c1",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Lio",
+      "age": 12,
+      "status": "committed",
+      "role": "first",
+      "unit_cents": 10000
+    }
+  ],
+  "codes": [
+    {
+      "code": "85413488",
+      "type": "family",
+      "status": "active"
+    }
+  ],
+  "referrals": [],
+  "events": [
+    {
+      "at": "2026-10-29T18:13:57.551Z",
+      "source": "fulfil",
+      "type": "order.paid",
+      "subject": "u8cqshb5d5",
+      "data": {
+        "via": "welcome",
+        "amount_cents": 10000,
+        "payment_intent": "pi_3UVxpnKORcR8BUEx1iRsygKm"
+      }
+    },
+    {
+      "at": "2026-10-29T18:13:58.151Z",
+      "source": "webhook",
+      "type": "payment_intent.succeeded",
+      "subject": "pi_3UVxpnKORcR8BUEx1iRsygKm",
+      "data": {
+        "amount": 10000,
+        "status": "succeeded",
+        "order_ref": "u8cqshb5d5",
+        "decline_code": null
+      }
+    }
+  ],
+  "outbox": [
+    {
+      "kind": "klaviyo_committed",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:13:57.835Z"
+    },
+    {
+      "kind": "meta_purchase",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:13:57.848Z"
+    },
+    {
+      "kind": "discord_commit",
+      "status": "skipped_no_config",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:13:57.752Z"
+    }
+  ]
+}

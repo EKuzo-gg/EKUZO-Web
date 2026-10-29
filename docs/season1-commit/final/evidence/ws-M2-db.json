@@ -1,0 +1,90 @@
+{
+  "label": "ws-M2",
+  "order": {
+    "public_id": "8t52updb4w",
+    "status": "paid",
+    "amount_cents": 18000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [],
+    "src": null,
+    "referral_code": null,
+    "payment_intent_id": "pi_3UVxqCKORcR8BUEx17Dk2noX",
+    "paid_at": "2026-10-29T18:14:21.871Z",
+    "family_id": "0c307384-3400-4ac2-8624-2a4411de443d",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Cy",
+      "age": 10,
+      "status": "committed",
+      "role": "first",
+      "unit_cents": 10000
+    },
+    {
+      "first_name": "Dot",
+      "age": 14,
+      "status": "committed",
+      "role": "sibling",
+      "unit_cents": 8000
+    }
+  ],
+  "codes": [
+    {
+      "code": "47447157",
+      "type": "family",
+      "status": "active"
+    }
+  ],
+  "referrals": [],
+  "events": [
+    {
+      "at": "2026-10-29T18:14:22.028Z",
+      "source": "fulfil",
+      "type": "order.paid",
+      "subject": "8t52updb4w",
+      "data": {
+        "via": "welcome",
+        "amount_cents": 18000,
+        "payment_intent": "pi_3UVxqCKORcR8BUEx17Dk2noX"
+      }
+    },
+    {
+      "at": "2026-10-29T18:14:22.292Z",
+      "source": "webhook",
+      "type": "payment_intent.succeeded",
+      "subject": "pi_3UVxqCKORcR8BUEx17Dk2noX",
+      "data": {
+        "amount": 18000,
+        "status": "succeeded",
+        "order_ref": "8t52updb4w",
+        "decline_code": null
+      }
+    }
+  ],
+  "outbox": [
+    {
+      "kind": "klaviyo_committed",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:14:22.320Z"
+    },
+    {
+      "kind": "meta_purchase",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:14:22.378Z"
+    },
+    {
+      "kind": "discord_commit",
+      "status": "skipped_no_config",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:14:22.253Z"
+    }
+  ]
+}

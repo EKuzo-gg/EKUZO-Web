@@ -1,0 +1,260 @@
+{
+  "layout": [
+    {
+      "width": 1440,
+      "changes": [
+        {
+          "t": 203,
+          "peTop": 933,
+          "peH": 44,
+          "wrapH": 0,
+          "cls": "xpw"
+        },
+        {
+          "t": 371,
+          "peTop": 883,
+          "peH": 44,
+          "wrapH": 0,
+          "cls": "xpw"
+        },
+        {
+          "t": 848,
+          "peTop": 937,
+          "peH": 44,
+          "wrapH": 2,
+          "cls": "xpw"
+        },
+        {
+          "t": 2201,
+          "peTop": 943,
+          "peH": 44,
+          "wrapH": 8,
+          "cls": "xpw"
+        },
+        {
+          "t": 2461,
+          "peTop": 943,
+          "peH": 276,
+          "wrapH": 8,
+          "cls": "xpw"
+        },
+        {
+          "t": 3826,
+          "peTop": 1038,
+          "peH": 276,
+          "wrapH": 83,
+          "cls": "xpw on"
+        }
+      ],
+      "cls": [
+        {
+          "v": 0.0161,
+          "t": 1527
+        },
+        {
+          "v": 0.0025,
+          "t": 1764
+        },
+        {
+          "v": 0.0126,
+          "t": 1888
+        },
+        {
+          "v": 0.0151,
+          "t": 1903
+        },
+        {
+          "v": 0.0003,
+          "t": 3377
+        },
+        {
+          "v": 0.0069,
+          "t": 3622
+        },
+        {
+          "v": 0.0052,
+          "t": 4413
+        },
+        {
+          "v": 0.0006,
+          "t": 4840
+        }
+      ],
+      "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+      "console": []
+    },
+    {
+      "width": 390,
+      "changes": [
+        {
+          "t": 154,
+          "peTop": 850,
+          "peH": 44,
+          "wrapH": 0,
+          "cls": "xpw"
+        },
+        {
+          "t": 423,
+          "peTop": 862,
+          "peH": 44,
+          "wrapH": 2,
+          "cls": "xpw"
+        },
+        {
+          "t": 650,
+          "peTop": 870,
+          "peH": 44,
+          "wrapH": 2,
+          "cls": "xpw"
+        },
+        {
+          "t": 2135,
+          "peTop": 870,
+          "peH": 369,
+          "wrapH": 2,
+          "cls": "xpw"
+        },
+        {
+          "t": 2178,
+          "peTop": 876,
+          "peH": 369,
+          "wrapH": 8,
+          "cls": "xpw"
+        },
+        {
+          "t": 3834,
+          "peTop": 984,
+          "peH": 369,
+          "wrapH": 79,
+          "cls": "xpw on"
+        },
+        {
+          "t": 4157,
+          "peTop": 983,
+          "peH": 369,
+          "wrapH": 78,
+          "cls": "xpw on"
+        },
+        {
+          "t": 4198,
+          "peTop": 985,
+          "peH": 369,
+          "wrapH": 80,
+          "cls": "xpw on"
+        },
+        {
+          "t": 4240,
+          "peTop": 987,
+          "peH": 369,
+          "wrapH": 82,
+          "cls": "xpw on"
+        },
+        {
+          "t": 4286,
+          "peTop": 988,
+          "peH": 369,
+          "wrapH": 83,
+          "cls": "xpw on"
+        }
+      ],
+      "cls": [
+        {
+          "v": 0.0381,
+          "t": 2418
+        },
+        {
+          "v": 0.0013,
+          "t": 2499
+        },
+        {
+          "v": 0.0418,
+          "t": 4120
+        }
+      ],
+      "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+      "console": []
+    }
+  ],
+  "warmDelay": [
+    {
+      "heldMs": 0,
+      "gotoLoadMs": 1879,
+      "firstInputDoneMs": 1938,
+      "nav": {
+        "dcl": 922,
+        "load": 1868
+      },
+      "fcp": 424,
+      "warmRequests": 1
+    },
+    {
+      "heldMs": 6000,
+      "gotoLoadMs": 3927,
+      "firstInputDoneMs": 3986,
+      "nav": {
+        "dcl": 1054,
+        "load": 3915
+      },
+      "fcp": 536,
+      "warmRequests": 1
+    }
+  ],
+  "pages": [
+    {
+      "path": "/season1/join",
+      "w": 390,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    },
+    {
+      "path": "/season1/join/signup",
+      "w": 390,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    },
+    {
+      "path": "/crew/85413488",
+      "w": 390,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    },
+    {
+      "path": "/season1/join",
+      "w": 1440,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    },
+    {
+      "path": "/season1/join/signup",
+      "w": 1440,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    },
+    {
+      "path": "/crew/85413488",
+      "w": 1440,
+      "status": 200,
+      "overflowX": 0,
+      "warmRequests": 1,
+      "errors": [],
+      "warnings": 0
+    }
+  ],
+  "guardBlocked": 178,
+  "leaks": 0
+}

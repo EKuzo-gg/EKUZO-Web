@@ -1,0 +1,50 @@
+{
+  "label": "M3",
+  "email": "team+s1test-ws-m3-5bc894@ekuzo.gg",
+  "commits": [
+    {
+      "at": 11111,
+      "status": 200,
+      "serverTiming": "db;dur=236.8;desc=\"10 queries\", dbfirst;dur=49.1, stripe;dur=305.4;desc=\"2 calls\", app;dur=550.9",
+      "body": {
+        "clientSecret": "REDACTED",
+        "orderId": "f4uns34myu",
+        "amountCents": 10000,
+        "invite": "applied"
+      }
+    }
+  ],
+  "warm": [
+    {
+      "at": 1091,
+      "page": "/crew/85413488",
+      "method": "GET"
+    }
+  ],
+  "guardBlocked": 72,
+  "leaks": 0,
+  "console": [],
+  "startHeading": "JOIN LIO’S TEAM.",
+  "warmBeforeTyping": 1,
+  "warmAfterTyping": 1,
+  "wallet": {
+    "cls": "xpw none",
+    "wrapH": 0,
+    "xpH": 0,
+    "orpay": "none",
+    "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+    "overflowX": 0
+  },
+  "clsSignup": [],
+  "cardFrame": {
+    "loaderNever": null,
+    "hasLink": false,
+    "text": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Di"
+  },
+  "xpFrameText": "",
+  "summary": "First month | $160 $100 | Founding jersey (first 100) | Free | Due today | $100 | Season 01 runs mid January to May 6, 2027. Your $100 covers January. | Feb 15: $0 with Lio's family credit, applied at lock-in.",
+  "button": "Save Eli's spot · $100",
+  "welcomeText": "Test mode. No real charges. Phone Desktop ‹ GREAT, ELI'S IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Eli's link season1-commit--ekuzo.netlify.app/crew/96275456 YOUR RECEIPT Eli, Season 01, first month $100 Paid today $100 February is free with your friend's credit. Then $160 on Mar 15 and Apr 15. Friend credit recorded. Order f4uns34myu WHAT HAPPENS NEXT Late Nov Gamer profile, jersey and gear check Late Dec Meet the team and coach Dec 31 Lock-in. Full refund until then. Mid Jan First practice Mid Apr Season tournament May 6 Last practice HOW THIS DISCOUNT WORKS On your own $580 1 friend joins $420",
+  "code": "96275456",
+  "order": "f4uns34myu"
+}

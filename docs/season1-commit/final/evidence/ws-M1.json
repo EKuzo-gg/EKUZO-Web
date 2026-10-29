@@ -1,0 +1,84 @@
+{
+  "label": "M1",
+  "email": "team+s1test-ws-m1-5bc894@ekuzo.gg",
+  "commits": [
+    {
+      "at": 11696,
+      "status": 200,
+      "serverTiming": "db;dur=253.2;desc=\"6 queries\", dbfirst;dur=125.3, stripe;dur=352.2;desc=\"2 calls\", app;dur=623.0",
+      "body": {
+        "clientSecret": "REDACTED",
+        "orderId": "u8cqshb5d5",
+        "amountCents": 10000,
+        "invite": "none"
+      }
+    }
+  ],
+  "warm": [
+    {
+      "at": 1188,
+      "page": "/season1/join",
+      "method": "GET"
+    }
+  ],
+  "guardBlocked": 66,
+  "leaks": 0,
+  "console": [],
+  "startHeading": "A COACH. A TEAM.\nA SEASON TO PLAY FOR.",
+  "warmBeforeTyping": 1,
+  "warmAfterTyping": 1,
+  "wallet": {
+    "cls": "xpw on",
+    "wrapH": 83,
+    "xpH": 56,
+    "orpay": "flex",
+    "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+    "overflowX": 0
+  },
+  "clsSignup": [
+    {
+      "v": 0.0161,
+      "t": 465,
+      "src": [
+        "pay",
+        "kids",
+        "#text"
+      ]
+    },
+    {
+      "v": 0.0126,
+      "t": 610,
+      "src": [
+        "app",
+        "DIV"
+      ]
+    },
+    {
+      "v": 0.0026,
+      "t": 716,
+      "src": [
+        "pay",
+        "addSib",
+        "#text"
+      ]
+    },
+    {
+      "v": 0.0151,
+      "t": 898,
+      "src": [
+        "app"
+      ]
+    }
+  ],
+  "cardFrame": {
+    "loaderNever": null,
+    "hasLink": false,
+    "text": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Di"
+  },
+  "xpFrameText": "Pay with",
+  "summary": "First month | $160 $100 | Founding jersey (first 100) | Free | Due today | $100 | Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "button": "Save Lio's spot · $100",
+  "welcomeText": "Test mode. No real charges. Phone Desktop ‹ GREAT, LIO'S IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Lio's link season1-commit--ekuzo.netlify.app/crew/85413488 YOUR RECEIPT Lio, Season 01, first month $100 Paid today $100 Then $160 a month from Feb 15. About $20 a practice. Order u8cqshb5d5 WHAT HAPPENS NEXT Late Nov Gamer profile, jersey and gear check Late Dec Meet the team and coach Dec 31 Lock-in. Full refund until then. Mid Jan First practice Mid Apr Season tournament May 6 Last practice HOW THIS DISCOUNT WORKS On your own $580 1 friend joins $420 2 friends $260 3 friends $100 4 friends Free. ",
+  "code": "85413488",
+  "order": "u8cqshb5d5"
+}

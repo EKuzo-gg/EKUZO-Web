@@ -1,0 +1,55 @@
+{
+  "since": "2026-10-29T18:13:00Z",
+  "familiesWithoutGuardian": [],
+  "familiesWithoutOrder": [],
+  "kidsWithoutItem": [],
+  "ordersWithoutItems": [],
+  "ordersWithoutPi": [],
+  "ordersSince": [
+    {
+      "public_id": "u8cqshb5d5",
+      "status": "paid",
+      "amount_cents": 10000,
+      "payer_email": "team+s1test-ws-m1-5bc894@ekuzo.gg",
+      "payer_first_name": "Ada",
+      "payment_intent_id": "pi_3UVxpnKORcR8BUEx1iRsygKm",
+      "created_at": "2026-10-29T18:13:55.434Z"
+    },
+    {
+      "public_id": "8t52updb4w",
+      "status": "paid",
+      "amount_cents": 18000,
+      "payer_email": "team+s1test-ws-m2-5bc894@ekuzo.gg",
+      "payer_first_name": "Bea",
+      "payment_intent_id": "pi_3UVxqCKORcR8BUEx17Dk2noX",
+      "created_at": "2026-10-29T18:14:19.834Z"
+    },
+    {
+      "public_id": "f4uns34myu",
+      "status": "paid",
+      "amount_cents": 10000,
+      "payer_email": "team+s1test-ws-m3-5bc894@ekuzo.gg",
+      "payer_first_name": "Cal",
+      "payment_intent_id": "pi_3UVxqiKORcR8BUEx09V3SkcN",
+      "created_at": "2026-10-29T18:14:52.174Z"
+    },
+    {
+      "public_id": "brra8a3xkp",
+      "status": "paid",
+      "amount_cents": 8000,
+      "payer_email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "payer_first_name": "Quincy",
+      "payment_intent_id": "pi_3UVy16KORcR8BUEx0tMI3nvR",
+      "created_at": "2026-10-29T18:25:36.455Z"
+    },
+    {
+      "public_id": "mpwufcn9mh",
+      "status": "pending",
+      "amount_cents": 10000,
+      "payer_email": "team+s1test-ws-d1-5bc894@ekuzo.gg",
+      "payer_first_name": "Dee",
+      "payment_intent_id": "pi_3UVy1LKORcR8BUEx0WWJC43t",
+      "created_at": "2026-10-29T18:25:51.073Z"
+    }
+  ]
+}

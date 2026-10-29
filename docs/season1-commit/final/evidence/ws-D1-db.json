@@ -1,0 +1,44 @@
+{
+  "label": "ws-D1",
+  "order": {
+    "public_id": "mpwufcn9mh",
+    "status": "pending",
+    "amount_cents": 10000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [],
+    "src": null,
+    "referral_code": null,
+    "payment_intent_id": "pi_3UVy1LKORcR8BUEx0WWJC43t",
+    "paid_at": null,
+    "family_id": "dffbd080-2540-437a-860f-b07028e96afb",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Fay",
+      "age": 13,
+      "status": "pending",
+      "role": "first",
+      "unit_cents": 10000
+    }
+  ],
+  "codes": [],
+  "referrals": [],
+  "events": [
+    {
+      "at": "2026-10-29T18:25:53.280Z",
+      "source": "webhook",
+      "type": "payment_intent.payment_failed",
+      "subject": "pi_3UVy1LKORcR8BUEx0WWJC43t",
+      "data": {
+        "amount": 10000,
+        "status": "requires_payment_method",
+        "order_ref": "mpwufcn9mh",
+        "decline_code": "generic_decline"
+      }
+    }
+  ],
+  "outbox": []
+}

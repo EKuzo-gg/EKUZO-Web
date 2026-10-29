@@ -1,0 +1,50 @@
+{
+  "label": "M2",
+  "email": "team+s1test-ws-m2-5bc894@ekuzo.gg",
+  "commits": [
+    {
+      "at": 11035,
+      "status": 200,
+      "serverTiming": "db;dur=169.6;desc=\"6 queries\", dbfirst;dur=48.0, stripe;dur=344.7;desc=\"2 calls\", app;dur=537.9",
+      "body": {
+        "clientSecret": "REDACTED",
+        "orderId": "8t52updb4w",
+        "amountCents": 18000,
+        "invite": "none"
+      }
+    }
+  ],
+  "warm": [
+    {
+      "at": 1154,
+      "page": "/season1/join",
+      "method": "GET"
+    }
+  ],
+  "guardBlocked": 72,
+  "leaks": 0,
+  "console": [],
+  "startHeading": "A COACH. A TEAM.\nA SEASON TO PLAY FOR.",
+  "warmBeforeTyping": 1,
+  "warmAfterTyping": 1,
+  "wallet": {
+    "cls": "xpw on",
+    "wrapH": 83,
+    "xpH": 56,
+    "orpay": "flex",
+    "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+    "overflowX": 0
+  },
+  "clsSignup": [],
+  "cardFrame": {
+    "loaderNever": null,
+    "hasLink": false,
+    "text": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Di"
+  },
+  "xpFrameText": "Pay with",
+  "summary": "Cy, first month | $160 $100 | Dot, first month | $100 $80 | Founding jersey (first 100) | Free | Due today | $180 | Season 01 runs mid January to May 6, 2027. Your $180 covers January.",
+  "button": "Save Cy's spot · $180",
+  "welcomeText": "Test mode. No real charges. Phone Desktop ‹ GREAT, CY AND DOT ARE IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Cy's link season1-commit--ekuzo.netlify.app/crew/47447157 YOUR RECEIPT Cy, Season 01, first month $100 Dot, Season 01, first month $80 Paid today $180 Then $288 a month for both kids from Feb 15. Order 8t52updb4w WHAT HAPPENS NEXT Late Nov Gamer profile, jersey and gear check Late Dec Meet the team and coach Dec 31 Lock-in. Full refund until then. Mid Jan First practice Mid Apr Season tournament May 6 Last practice HOW THIS DISCOUNT WORKS For your first kid. On your own $580 1 friend joins ",
+  "code": "47447157",
+  "order": "8t52updb4w"
+}

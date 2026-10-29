@@ -1,0 +1,68 @@
+[
+  {
+    "path": "/season1/join",
+    "ev": [
+      {
+        "k": "req",
+        "url": "/api/season1/warm",
+        "cookieHdr": false
+      },
+      {
+        "k": "res",
+        "status": 204,
+        "cc": "no-store",
+        "setCookie": null,
+        "st": "db;dur=45.7;desc=\"ok\", app;dur=45.8"
+      },
+      {
+        "k": "failed",
+        "err": "net::ERR_ABORTED"
+      }
+    ],
+    "sessionWarmAt": "1793298486516"
+  },
+  {
+    "path": "/season1/join/signup",
+    "ev": [
+      {
+        "k": "req",
+        "url": "/api/season1/warm",
+        "cookieHdr": false
+      },
+      {
+        "k": "res",
+        "status": 204,
+        "cc": "no-store",
+        "setCookie": null,
+        "st": "db;dur=0.0;desc=\"skip\", app;dur=0.0"
+      },
+      {
+        "k": "failed",
+        "err": "net::ERR_ABORTED"
+      }
+    ],
+    "sessionWarmAt": "1793298492305"
+  },
+  {
+    "path": "/crew/85413488",
+    "ev": [
+      {
+        "k": "req",
+        "url": "/api/season1/warm",
+        "cookieHdr": false
+      },
+      {
+        "k": "res",
+        "status": 204,
+        "cc": "no-store",
+        "setCookie": null,
+        "st": "db;dur=0.0;desc=\"skip\", app;dur=0.0"
+      },
+      {
+        "k": "failed",
+        "err": "net::ERR_ABORTED"
+      }
+    ],
+    "sessionWarmAt": "1793298499177"
+  }
+]

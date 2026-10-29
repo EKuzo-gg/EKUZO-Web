@@ -1,0 +1,83 @@
+{
+  "label": "ws-M4",
+  "order": {
+    "public_id": "brra8a3xkp",
+    "status": "paid",
+    "amount_cents": 8000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [],
+    "src": null,
+    "referral_code": null,
+    "payment_intent_id": "pi_3UVy16KORcR8BUEx0tMI3nvR",
+    "paid_at": "2026-10-29T18:25:38.495Z",
+    "family_id": "061c7dc8-4c17-4ec8-8dd7-69f2d85d4e16",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Remy",
+      "age": 10,
+      "status": "committed",
+      "role": "sibling",
+      "unit_cents": 8000
+    }
+  ],
+  "codes": [
+    {
+      "code": "68556428",
+      "type": "family",
+      "status": "active"
+    }
+  ],
+  "referrals": [],
+  "events": [
+    {
+      "at": "2026-10-29T18:25:38.641Z",
+      "source": "fulfil",
+      "type": "order.paid",
+      "subject": "brra8a3xkp",
+      "data": {
+        "via": "welcome",
+        "amount_cents": 8000,
+        "payment_intent": "pi_3UVy16KORcR8BUEx0tMI3nvR"
+      }
+    },
+    {
+      "at": "2026-10-29T18:25:38.767Z",
+      "source": "webhook",
+      "type": "payment_intent.succeeded",
+      "subject": "pi_3UVy16KORcR8BUEx0tMI3nvR",
+      "data": {
+        "amount": 8000,
+        "status": "succeeded",
+        "order_ref": "brra8a3xkp",
+        "decline_code": null
+      }
+    }
+  ],
+  "outbox": [
+    {
+      "kind": "klaviyo_committed",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:25:38.965Z"
+    },
+    {
+      "kind": "meta_purchase",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:25:38.989Z"
+    },
+    {
+      "kind": "discord_commit",
+      "status": "skipped_no_config",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T18:25:38.905Z"
+    }
+  ]
+}

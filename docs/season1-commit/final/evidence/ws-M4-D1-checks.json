@@ -1,0 +1,71 @@
+{
+  "m4": [
+    {
+      "public_id": "kzxj7k6dus",
+      "status": "paid",
+      "amount_cents": 10000,
+      "payer_first_name": "Quinn",
+      "family_id": "061c7dc8-4c17-4ec8-8dd7-69f2d85d4e16",
+      "payment_intent_id": "pi_3UVwmIKORcR8BUEx0B2s5F3m",
+      "stripe_customer_id": "cus_VX0n1Px1sn11iU",
+      "guardian_first": "Quinn",
+      "guardians_for_email": "1",
+      "fams": "1"
+    },
+    {
+      "public_id": "brra8a3xkp",
+      "status": "paid",
+      "amount_cents": 8000,
+      "payer_first_name": "Quincy",
+      "family_id": "061c7dc8-4c17-4ec8-8dd7-69f2d85d4e16",
+      "payment_intent_id": "pi_3UVy16KORcR8BUEx0tMI3nvR",
+      "stripe_customer_id": "cus_VX0n1Px1sn11iU",
+      "guardian_first": "Quinn",
+      "guardians_for_email": "1",
+      "fams": "1"
+    }
+  ],
+  "items": [
+    {
+      "public_id": "brra8a3xkp",
+      "first_name": "Remy",
+      "role": "sibling",
+      "unit_cents": 8000,
+      "status": "committed"
+    },
+    {
+      "public_id": "mpwufcn9mh",
+      "first_name": "Fay",
+      "role": "first",
+      "unit_cents": 10000,
+      "status": "pending"
+    }
+  ],
+  "d1": [
+    {
+      "public_id": "mpwufcn9mh",
+      "status": "pending",
+      "payment_intent_id": "pi_3UVy1LKORcR8BUEx0WWJC43t",
+      "failure_count": 1,
+      "fam": "dffbd080-2540-437a-860f-b07028e96afb",
+      "kids": "1",
+      "guardians": "1"
+    }
+  ],
+  "stripeM4": {
+    "id": "pi_3UVy16KORcR8BUEx0tMI3nvR",
+    "status": "succeeded",
+    "amount": 8000,
+    "customer": "cus_VX0n1Px1sn11iU",
+    "types": [
+      "card",
+      "link"
+    ],
+    "product": "season1"
+  },
+  "stripeD1": {
+    "id": "pi_3UVy1LKORcR8BUEx0WWJC43t",
+    "status": "requires_payment_method",
+    "last_error": "generic_decline"
+  }
+}
