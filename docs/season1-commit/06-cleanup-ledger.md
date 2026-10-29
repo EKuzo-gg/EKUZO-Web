@@ -172,3 +172,14 @@ f64ca14f-5e02-4aea-a7bb-53f6e1ddf2ac (pending) on code 33847723.
 
 Legacy dev endpoint side effects: the six succeeded PIs above (pi_3UVtDa, pi_3UVtEt, pi_3UVtFp, pi_3UVtKa, pi_3UVtKR, pi_3UVtL2) also reached
 we_1TMYx4KORcR8BUExWqrM0dBF on dev--ekuzo (origin/dev 1ab7255 still has no legacy guard), with the same empty-email camps caveat as above.
+
+F1 retest (same section, 2026-10-29 13:36 to 13:45 UTC, branch deploy serving 6efd3c7). Neon rows: email `team+s1test-ft1029-r2-5bc894@ekuzo.gg`
+(parent Mara, kids Ivy 11 committed and Theo 13 refunded), order q5rdu354p2 partially_refunded, family 206c4565-b080-4324-b592-3af62e0f45d4,
+code 36777976, events, outbox rows (`klaviyo_committed`, `meta_purchase`, `discord_commit`, `klaviyo_refunded`). The J1 recheck made no new objects.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVtVjKORcR8BUEx1Q8mxsH4 | succeeded $180, partially refunded $80 | F1 retest two-kid order q5rdu354p2 (cus_VWxQ9OKoDWZVHv) |
+| refund | re_3UVtVjKORcR8BUEx1q4F6cwK | succeeded $80.00, metadata s1_kid_id (Theo) | F1 retest partial refund via `s1-refund --kid Theo --apply` |
+
+This succeeded PI also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).

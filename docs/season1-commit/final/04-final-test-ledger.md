@@ -47,9 +47,20 @@ The handler aborts if it throws (fail closed). A second listener on `requestfini
 | J1 | jevscw9fec | pi_3UVtDaKORcR8BUEx0umHVNCH | refunded (re_3UVtDaKORcR8BUEx0J1ntIYU, $100) |
 | J2 | ncbznh28n2 | pi_3UVtEtKORcR8BUEx0Mk5hwFA | paid $100, referral pending on code 19341455 |
 | J3 | xuj5r2j5kk | pi_3UVtFpKORcR8BUEx10ZewxtA | paid $180 |
+| R2 (F1 retest) | q5rdu354p2 | pi_3UVtVjKORcR8BUEx1Q8mxsH4 | partially_refunded: paid $180, Theo refunded $80 (re_3UVtVjKORcR8BUEx1q4F6cwK) |
+
+## F1 retest (6efd3c7), 2026-10-29 13:36 to 13:45 UTC
+
+Polled the branch deploy with J1's view cookie every 15 s; the refunded copy first served at 13:36:40 UTC. Same analytics guard as above (0 LEAK entries). Each page was held for 9 s, longer than the old 4 s refresh, at 390 and 1440.
+
+| Check | Expected | Actual | Evidence | Result |
+|---|---|---|---|---|
+| R1 J1 refunded order (jevscw9fec) welcome | Static refunded page, no meta refresh, no share link, no GA purchase, console clean | "THIS ORDER WAS REFUNDED." with Questions and Text our founder. No `meta[http-equiv=refresh]`, no reload in 9 s, no share block or crew link, no gtag events in dataLayer and no `en=purchase` collect attempt, 0 console errors from our pages | R-retest-browser.json, screens/R1-J1-refunded-390.png, -1440.png | PASS |
+| R2 new two-kid order, then partial refund of the sibling | Paid view, no loop | Paid $180 (Ivy 11, Theo 13), order q5rdu354p2, code 36777976. `s1-refund --order q5rdu354p2 --kid Theo --apply` (test env, resolver flags) refunded $80 with metadata s1_kid_id; webhook `charge.refunded` recorded; order partially_refunded, Theo refunded, Ivy committed, code active; Stripe charge amount_refunded 8000. Welcome: "GREAT, IVY'S IN!", share block for Ivy's link, receipt, no meta refresh, no reload in 9 s, 0 console errors. The GA purchase did not refire (same browser storage, once per order as designed). New copy issue F10: the receipt still lists "Theo, Season 01, first month $80" with no refunded marker and the line reads "Then $288 a month for both kids from Feb 15." although only Ivy remains ($160) | R2-browser.json, R2-partial-refund-cli.txt, R2-after-partial-db.json, R2-after-partial-stripe.json, R-retest-browser.json, screens/R2-partial-390.png, -1440.png, R2-welcome-flow.png | PASS for F1 (no loop); F10 opened |
 
 ## Not tested here
 
+- F1 fix states not exercised in a browser: canceled or failed order page, and the 2 minute pending cap (covered by route unit tests in 6efd3c7, not rerun here).
 - Live mode, production env vars and the live Stripe webhook (out of scope for a test-mode deploy).
 - Klaviyo receipt email (flow not live yet, per brief).
 - Apple Pay and Google Pay wallets (headless Chromium shows card only).

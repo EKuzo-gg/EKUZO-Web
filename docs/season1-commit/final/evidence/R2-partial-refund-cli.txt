@@ -1,0 +1,10 @@
+s1 ops: mode=APPLY db=test stripe=test
+order q5rdu354p2 status=paid paid=$180.00 already refunded=$0.00 refundable=$180.00
+guardian t***@ekuzo.gg
+scope: one kid (Theo, sibling, unit $80.00)
+refund amount: $80.00   reason=requested_by_customer
+metadata: s1_order=q5rdu354p2 s1_kid_id=47f9dcaa-fef0-4858-8bb0-5d544d54daca
+idempotency key: s1-refund:q5rdu354p2:47f9dcaa-fef0-4858-8bb0-5d544d54daca
+advice: no jersey_shipped_at column yet; if the free jersey has shipped, pass --jersey-shipped to see the $65 rule amount.
+refund created: id=re_3UVtVjKORcR8BUEx1q4F6cwK status=succeeded amount=$80.00
+The webhook records it (charge.refunded). Check with s1:find --order q5rdu354p2

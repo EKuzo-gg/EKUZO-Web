@@ -1,0 +1,19 @@
+{
+  "label": "R2-after-partial",
+  "id": "pi_3UVtVjKORcR8BUEx1Q8mxsH4",
+  "status": "succeeded",
+  "amount": 18000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "q5rdu354p2",
+    "product": "season1"
+  },
+  "customer": "cus_VWxQ9OKoDWZVHv",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVtVjKORcR8BUEx1Ebo3dDs",
+  "amount_refunded": 8000,
+  "refunded": false,
+  "card_last4": "4242"
+}
