@@ -1,0 +1,19 @@
+{
+  "label": "cc-pay",
+  "id": "pi_3UVz74KORcR8BUEx0PbdmTMJ",
+  "status": "succeeded",
+  "amount": 10000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "n25q3ax2w9",
+    "product": "season1"
+  },
+  "customer": "cus_VX3D6LC4fm46A4",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVz74KORcR8BUEx0bKOKqV3",
+  "amount_refunded": 0,
+  "refunded": false,
+  "card_last4": "4242"
+}

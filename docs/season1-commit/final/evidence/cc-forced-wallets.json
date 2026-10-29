@@ -1,0 +1,256 @@
+{
+  "runs": {
+    "linkonly390": {
+      "state": {
+        "fired": [
+          {
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": false,
+        "togExpanded": "true",
+        "plainOrVisible": true,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "linkonly1440": {
+      "state": {
+        "fired": [
+          {
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "togVisible": false,
+        "togExpanded": "true",
+        "plainOrVisible": true,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ]
+    },
+    "none390": {
+      "state": {
+        "fired": [
+          null
+        ],
+        "xpw": "xpw none",
+        "wrapVisible": false,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": false,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "none1440": {
+      "state": {
+        "fired": [
+          null
+        ],
+        "xpw": "xpw none",
+        "wrapVisible": false,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "togVisible": false,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "gpay390": {
+      "state": {
+        "fired": [
+          {
+            "googlePay": {
+              "available": true
+            },
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "togVisible": true,
+        "togExpanded": "false",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "linkThenGpay390": {
+      "afterLink": {
+        "fired": [
+          {
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": false,
+        "togExpanded": "true",
+        "plainOrVisible": true,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=no link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "state": {
+        "fired": [
+          {
+            "link": {
+              "available": true
+            }
+          },
+          {
+            "googlePay": {
+              "available": true
+            },
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": true,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "neverReports390": {
+      "state": {
+        "fired": [],
+        "xpw": "xpw",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "togVisible": true,
+        "togExpanded": "false",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: checking rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "afterToggle": {
+        "fired": [],
+        "xpw": "xpw drawn",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": true,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: checking rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    },
+    "openWhileUnknownThenGpay390": {
+      "beforeOpen": {
+        "fired": [],
+        "xpw": "xpw",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "togVisible": true,
+        "togExpanded": "false",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: checking rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "openedUnknown": {
+        "fired": [],
+        "xpw": "xpw",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": true,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: checking rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "state": {
+        "fired": [
+          {
+            "googlePay": {
+              "available": true
+            },
+            "link": {
+              "available": true
+            }
+          }
+        ],
+        "xpw": "xpw drawn on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "togVisible": true,
+        "togExpanded": "true",
+        "plainOrVisible": false,
+        "plainOrIsButton": false,
+        "diag": "Wallets: applePay=no googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0
+      },
+      "console": []
+    }
+  },
+  "leaks": 0
+}

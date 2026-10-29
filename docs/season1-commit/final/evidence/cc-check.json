@@ -1,0 +1,532 @@
+{
+  "runs": {
+    "ag1440": {
+      "beforeReport": {
+        "xpw": "xpw",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1074,
+        "ePay": "",
+        "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "afterReport": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1074,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "enterIncomplete": {
+        "formErr": "Add your kid's first name. 4 more to fix below.",
+        "commits": 0
+      },
+      "enterValidCollapsed": {
+        "commits": 0,
+        "url": "/season1/join/signup",
+        "formErr": "",
+        "busy": null
+      },
+      "programmatic": {
+        "click": "ok",
+        "requestSubmit": "ok",
+        "commits": 0,
+        "goText": ""
+      },
+      "tabOrderCollapsed": [
+        "A",
+        "A",
+        "IFRAME",
+        "IFRAME",
+        "IFRAME",
+        "cardTog",
+        "A",
+        "BODY",
+        "BUTTON",
+        "BUTTON",
+        "back",
+        "A"
+      ],
+      "stillCollapsed": {
+        "xpw": "xpw on drawn",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1074,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "afterOpen": {
+        "xpw": "xpw on drawn",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "secVisibility": "visible",
+        "togVisible": true,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1082,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": "1"
+      },
+      "focusAfterOpen": {
+        "tag": "IFRAME",
+        "inPe": true
+      },
+      "afterResizeAndSecondClick": {
+        "xpw": "xpw on drawn",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "secVisibility": "visible",
+        "togVisible": true,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1082,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": "1"
+      },
+      "afterReturn": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "secVisibility": "visible",
+        "togVisible": true,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1082,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": "1"
+      },
+      "restored": {
+        "kid": "Rio",
+        "age": "12",
+        "pname": "Sam",
+        "email": "team+s1test-cc-a-5bc894@ekuzo.gg",
+        "terms": false
+      },
+      "afterReturnReport": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 344,
+        "secVisibility": "visible",
+        "togVisible": true,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1082,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": "1"
+      },
+      "busySync": {
+        "text": "Saving their spot...",
+        "disabled": true,
+        "busy": "true",
+        "spinner": true
+      },
+      "welcome": "Test mode. No real charges. Phone Desktop ‹ GREAT, RIO'S IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Rio's link season1-commit--ekuzo.netlify.app/crew/18032602 YOUR RECEIPT Rio, Season 01, first month $100 Paid today $100 Then $160 a month from Feb 15. About $20 a ",
+      "net": {
+        "commit": [
+          "POST"
+        ],
+        "warm": [
+          "/season1/join/signup"
+        ],
+        "commitRes": [
+          {
+            "status": 200,
+            "serverTiming": "db;dur=182.4;desc=\"6 queries\", dbfirst;dur=64.2, stripe;dur=399.3;desc=\"2 calls\", app;dur=608.0"
+          }
+        ]
+      },
+      "console": [
+        {
+          "page": "ag1440",
+          "type": "error",
+          "text": "Access to XMLHttpRequest at 'https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002' from origin 'https://newassets.hcaptcha.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+          "url": "https://newassets.hcaptcha.com/captcha/v1/317eeece91ff03e49adf705983728d95f03c053e/static/hcaptcha.html#frame=challenge&"
+        },
+        {
+          "page": "ag1440",
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002"
+        }
+      ]
+    },
+    "ag390": {
+      "beforeReport": {
+        "xpw": "xpw",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 326,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 901,
+        "secTop": 1007,
+        "ePay": "",
+        "diag": "Wallets: checking rendered=no (2px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "afterReport": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 326,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 901,
+        "secTop": 1007,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "afterTap": {
+        "xpw": "xpw on drawn",
+        "wrapVisible": true,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "secVisibility": "visible",
+        "togVisible": true,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 326,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 901,
+        "secTop": 1015,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": "1"
+      },
+      "net": {
+        "commit": [],
+        "warm": [
+          "/season1/join/signup"
+        ]
+      },
+      "console": []
+    },
+    "link390": {
+      "state": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 326,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 901,
+        "secTop": 1007,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "console": [],
+      "invalid": true
+    },
+    "link1440": {
+      "state": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1074,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "console": [],
+      "invalid": true
+    },
+    "none390ig": {
+      "state": {
+        "xpw": "xpw none",
+        "wrapVisible": false,
+        "secShut": false,
+        "secInert": false,
+        "secH": 433,
+        "secVisibility": "visible",
+        "togVisible": false,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 0,
+        "togW": 0,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 0,
+        "secTop": 889,
+        "ePay": "",
+        "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "console": []
+    },
+    "none1440forced": {
+      "state": {
+        "xpw": "xpw on",
+        "wrapVisible": true,
+        "secShut": true,
+        "secInert": true,
+        "secH": 0,
+        "secVisibility": "hidden",
+        "togVisible": true,
+        "togExpanded": "false",
+        "togControls": "cardSec",
+        "togH": 44,
+        "togW": 504,
+        "plainOrVisible": false,
+        "chevVisible": true,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 968,
+        "secTop": 1074,
+        "ePay": "",
+        "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=no (8px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "console": [],
+      "invalid": true
+    },
+    "stripefail390": {
+      "state": {
+        "xpw": "xpw none",
+        "wrapVisible": false,
+        "secShut": false,
+        "secInert": false,
+        "secH": 152,
+        "secVisibility": "visible",
+        "togVisible": false,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 0,
+        "togW": 0,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 857,
+        "xpTop": 0,
+        "secTop": 893,
+        "ePay": "The payment form did not load. Reload the page or text our founder.",
+        "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "consoleAll": [
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    "stripefail1440": {
+      "state": {
+        "xpw": "xpw none",
+        "wrapVisible": false,
+        "secShut": false,
+        "secInert": false,
+        "secH": 139,
+        "secVisibility": "visible",
+        "togVisible": false,
+        "togExpanded": "true",
+        "togControls": "cardSec",
+        "togH": 0,
+        "togW": 0,
+        "plainOrVisible": false,
+        "chevVisible": false,
+        "goVisible": true,
+        "termsTop": 924,
+        "xpTop": 0,
+        "secTop": 960,
+        "ePay": "The payment form did not load. Reload the page or text our founder.",
+        "diag": "Wallets: applePay=no googlePay=no link=no rendered=no (0px) PaymentRequest=yes",
+        "overflowX": 0,
+        "cardOpenKey": null
+      },
+      "consoleAll": [
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    }
+  },
+  "console": [],
+  "pages": [
+    {
+      "path": "/season1/join",
+      "w": 390,
+      "warmCalls": 0,
+      "overflowX": 0,
+      "errors": []
+    },
+    {
+      "path": "/season1/join/signup",
+      "w": 390,
+      "warmCalls": 1,
+      "overflowX": 0,
+      "errors": []
+    },
+    {
+      "path": "/crew/85413488",
+      "w": 390,
+      "warmCalls": 1,
+      "overflowX": 0,
+      "errors": []
+    },
+    {
+      "path": "/season1/join",
+      "w": 1440,
+      "warmCalls": 0,
+      "overflowX": 0,
+      "errors": []
+    },
+    {
+      "path": "/season1/join/signup",
+      "w": 1440,
+      "warmCalls": 1,
+      "overflowX": 0,
+      "errors": []
+    },
+    {
+      "path": "/crew/85413488",
+      "w": 1440,
+      "warmCalls": 1,
+      "overflowX": 0,
+      "errors": []
+    }
+  ],
+  "leaks": 0,
+  "guardBlocked": 366,
+  "note": "runs.link390, link1440 and none1440forced here are INVALID: the first Stripe wrapper did not take effect (the readout shows the real report). Superseded by cc-forced-wallets.json. Order for the ag1440 payment: n25q3ax2w9 (regex missed it in the truncated welcome text)."
+}

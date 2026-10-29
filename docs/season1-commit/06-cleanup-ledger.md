@@ -257,3 +257,14 @@ Card form behind "Or pay with card" (2026-10-29 about 19:20 UTC, branch deploy w
 | payment_intent | not captured (the welcome page strips the redirect query before the probe read it; find it by the receipt email above) | succeeded $100 (not refunded) | Card collapse: one 4242 payment after expanding, new family, new Customer |
 
 It also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above). The probe now records the PaymentIntent id from the redirect request for later runs.
+
+Card collapse check (same section, 2026-10-29 19:33 to 19:45 UTC, branch deploy at 590ee64). One payment, made before a container restart
+and not repeated after it (checked in Stripe test mode by email and time). Neon rows: `team+s1test-cc-a-5bc894@ekuzo.gg` (Sam, kid Rio 12,
+order n25q3ax2w9 paid, code 18032602) with events, outbox rows and rate-limit keys. (The other Season 01 test payment at 19:23 UTC,
+pi_3UVyvIKORcR8BUEx0r5En1ol for `team+s1test-cc-1793301817@ekuzo.gg`, is the builder's, not Sentry's.)
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVz74KORcR8BUEx0PbdmTMJ | succeeded $100 (not refunded) | Card collapse check: expanded card form pays with 4242 (cus_VX3D6LC4fm46A4) |
+
+This succeeded PI also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).
