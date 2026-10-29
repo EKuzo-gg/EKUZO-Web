@@ -7,6 +7,7 @@ import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
 import { drainOutbox } from "@/lib/season1/outbox";
 import { SECURITY_HEADERS, pageSecurityHeaders, shareOrigin } from "@/lib/season1/httpGuard";
+import { ladderNote, thenLine } from "@/lib/season1/welcomeCopy";
 
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
@@ -172,20 +173,17 @@ export async function GET(request: Request) {
       .map((k) => `<div class="line"><span>${esc(k.firstName)}, Season 01, first month</span><span>${money(k.unitCents)}</span></div>`)
       .join("");
     vars.TOTAL = money(order.amountCents);
-    // One kid: the per-practice frame. Siblings: the family's monthly total, so a
-    // sibling price never shows on a one-kid order.
     const kidCount = order.kids.length;
-    vars.THEN_LINE =
-      kidCount === 1
-        ? `Then ${money(OFFER.monthlyCents)} a month from Feb 15. About ${money(Math.round(OFFER.monthlyCents / OFFER.practicesPerMonth))} a practice.`
-        : `Then ${money(OFFER.monthlyCents + OFFER.siblingMonthlyCents * (kidCount - 1))} a month for ${kidCount === 2 ? "both" : `all ${kidCount}`} kids from Feb 15.`;
+    // inviteApplied is added to OrderView by the commit work; absent means false.
+    const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
+    // lib/season1/welcomeCopy.ts: per-practice or family monthly; friend orders get February free.
+    vars.THEN_LINE = thenLine(kidCount, applied);
+    vars.LADDER_NOTE = ladderNote(kidCount);
     vars.ORDER_REF = esc(order.publicId);
     // GA purchase on the paid state (welcome.html): values only, no names.
     vars.GA_VALUE = String(order.amountCents / 100);
     vars.GA_KIDS = String(order.kids.length);
     vars.GA_HAS_CODE = order.code ? "1" : "0";
-    // inviteApplied is added to OrderView by the commit work; absent means false.
-    const applied = (order as OrderView & { inviteApplied?: boolean }).inviteApplied === true;
     vars.CREDIT_NOTE = applied
       ? '<p class="small" style="margin-top:8px;color:rgba(0,0,0,.75)">Friend credit recorded.</p>'
       : "";
