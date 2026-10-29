@@ -107,7 +107,15 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .xpbox:before{content:"";position:absolute;left:0;right:0;top:0;height:48px;background:var(--stone);border-radius:2px}
 .xpw.drawn .xpbox:before{display:none}
 #xp{position:relative}
-.orpay{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted)}
+/* Card form behind "Or pay with card" (Jamie 10-29): with a wallet available (or before Stripe reports), the card
+   form and its button start collapsed; the divider is a button that opens them (one way: it stays open for the tab
+   session). No wallet: the block collapses and the card form shows open. The Payment Element mounts while collapsed. */
+.orpay{display:flex;align-items:center;gap:12px;width:100%;margin-top:6px;min-height:44px;padding:0;border:0;background:none;font:600 12px/1.4 var(--body);color:var(--muted);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.orpay[aria-expanded="true"]{cursor:default}
+.orl{display:inline-flex;align-items:center;gap:8px}
+.chev{width:7px;height:7px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:translateY(-2px) rotate(45deg)}
+.orpay[aria-expanded="true"] .chev{display:none}
+.cardsec.shut{height:0;overflow:hidden;visibility:hidden}
 #xpDiag{display:block;font-weight:500;margin-top:2px;min-height:2.8em}
 .orpay:before,.orpay:after{content:"";flex:1;height:1px;background:rgba(0,0,0,.15)}
 .spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s1spin .7s linear infinite}
@@ -204,10 +212,12 @@ p,li,.small{text-wrap:pretty}
 <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
 <label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" autocomplete="off" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
 <p class="err" id="e-terms"></p>
-<div class="xpw" id="xpWrap"><div class="xpbox"><div id="xp"></div></div><p class="err" id="e-xp" role="alert"></p><p class="orpay">Or pay with card</p></div>
+<div class="xpw" id="xpWrap"><div class="xpbox"><div id="xp"></div></div><p class="err" id="e-xp" role="alert"></p><button type="button" class="orpay" id="cardTog" aria-expanded="false" aria-controls="cardSec"><span class="orl">Or pay with card<span class="chev" aria-hidden="true"></span></span></button></div>
+<div id="cardSec" class="cardsec shut" inert>
 <div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
-<p id="inviteNote" class="note" hidden></p>
 <button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
+</div>
+<p id="inviteNote" class="note" hidden></p>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
 <p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink tk" href="#">Text our founder</a></p>
 <p class="small" style="text-align:center;margin-top:16px">Secure payment by Stripe</p></div>
@@ -322,7 +332,7 @@ function initStripe(){
   // wallets.link 'never' keeps Link from autofilling the card form (Stripe.js create_payment_element).
   pe=elements.create('payment',{wallets:{applePay:'never',googlePay:'never',link:'never'}});
   pe.mount('#pe');
-  pe.on('ready',function(){peReady=true});
+  pe.on('ready',function(){peReady=true;if(cardWantFocus)focusCard()});
   pe.on('focus',function(){warm()});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
  }catch(err){xpOff();g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
@@ -333,6 +343,24 @@ function initStripe(){
    (card + link) so Link never reaches the card form. PayPal, Amazon Pay and Klarna off. Same commit flow and
    Apple Pay recurring request as the card. */
 var xpAvail=null,xpLabel='checking';
+/* Card section state (pure, unit tested): open once the parent opened it, or once Stripe reports no wallet
+   (or fails); the "Or pay with card" button shows unless no wallet. avail null = Stripe has not reported yet. */
+function cardState(avail,opened){var none=avail!==null&&!(avail.applePay||avail.googlePay||avail.link);return {open:!!opened||none,toggle:!none}}
+var CKEY='s1_card_open',cardOpen=false,cardWantFocus=false;
+try{cardOpen=sessionStorage.getItem(CKEY)==='1'}catch(_){}
+function setCard(){
+ var s=cardState(xpAvail,cardOpen),sec=g('cardSec');
+ sec.classList.toggle('shut',!s.open);
+ if(s.open)sec.removeAttribute('inert');else sec.setAttribute('inert','');
+ g('cardTog').setAttribute('aria-expanded',s.open?'true':'false');
+}
+/* Focus the card number field once the section is visible (next frame) and the card form is ready. */
+function focusCard(){cardWantFocus=false;if(!pe||!peReady){cardWantFocus=true;return}requestAnimationFrame(function(){try{pe.focus()}catch(_){}})}
+g('cardTog').addEventListener('click',function(){
+ if(!cardOpen){cardOpen=true;try{sessionStorage.setItem(CKEY,'1')}catch(_){}setCard()}
+ focusCard();
+});
+setCard();
 /* Height Stripe gave its frame (8 px until the buttons draw), for the test-mode line and the placeholder; .xpbox holds 56 px from first paint. */
 function xpH(){var f=g('xp').querySelector('iframe');return f?Math.round(f.getBoundingClientRect().height):0}
 function xpDiag(){
@@ -346,10 +374,11 @@ function xpShow(){
  w.classList.toggle('none',xpAvail!==null&&!any);
  w.classList.toggle('on',any);
  w.classList.toggle('drawn',xpH()>=40);
+ setCard();
  xpDiag();
 }
-/* F12: no Stripe, no wallet block (collapses the room held from first paint). */
-function xpOff(){g('xpWrap').classList.add('none')}
+/* F12: no Stripe, no wallet block (collapses the room held from first paint); the card section opens so its error shows. */
+function xpOff(){xpAvail={applePay:false,googlePay:false,link:false};xpShow()}
 function initExpress(){
  try{
   xel=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',allowedPaymentMethodTypes:['card','link'],appearance:APPEAR});
@@ -442,6 +471,8 @@ function serverErr(status,j){
 g('f').addEventListener('submit',function(ev){
  ev.preventDefault();if(busy)return;clearErrs();
  var body=collect();if(!body)return;
+ // Enter in a field while the card section is collapsed: validate only, never pay from a hidden card form.
+ if(!cardState(xpAvail,cardOpen).open)return;
  if(!stripe||!elements){announce('The payment form did not load. Reload the page or text our founder.');return}
  pay(body,null);
 });
@@ -474,7 +505,7 @@ async function pay(body,xev){
  }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
 }
 /* Speed pass 10-29: wake the commit API and its database while the parent fills the form (no data, no cookies,
-   no analytics). Once on load (skipped if the join page did it under 4 min ago in this tab), and again when the
+   no analytics). Once on load (skipped if the crew page did it under 4 min ago in this tab), and again when the
    parent reaches the payment step after more than 4 min (Neon sleeps after about 5 min idle). */
 function warm(){
  var k='s1_warm_at',now=Date.now(),last=0;

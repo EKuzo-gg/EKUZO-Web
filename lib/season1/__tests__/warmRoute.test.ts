@@ -1,5 +1,7 @@
 import { describe, it, before, after } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 
 /**
  * GET /api/season1/warm (speed pass 10-29). globalThis.fetch is stubbed, so
@@ -66,5 +68,20 @@ describe("warm route", () => {
     } finally {
       delete process.env.S1_COMMIT_MODE;
     }
+  });
+});
+
+/**
+ * Cost decision 10-29: the join page (ad landing page, most visitors leave)
+ * does not pre-warm; the sign-up and crew pages do.
+ */
+describe("warm call sites", () => {
+  const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), "app", ...p), "utf8");
+  it("join page makes no warm call", () => {
+    assert.doesNotMatch(read("season1", "join", "join.html"), /\/api\/season1\/warm/);
+  });
+  it("sign-up and crew pages still warm on load", () => {
+    assert.match(read("season1", "join", "signup", "signup.html"), /fetch\('\/api\/season1\/warm'/);
+    assert.match(read("crew", "[code]", "crew.html"), /fetch\('\/api\/season1\/warm'/);
   });
 });

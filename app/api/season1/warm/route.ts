@@ -6,8 +6,9 @@ import { errCode, logStep } from "@/lib/season1/rules";
 import { takeColdFlag } from "@/lib/season1/serverTiming";
 
 /**
- * GET /api/season1/warm (speed pass 10-29). The join, crew and sign-up pages
- * call this once on load, without waiting for it, so the function instance and
+ * GET /api/season1/warm (speed pass 10-29). The crew and sign-up pages (not the
+ * join page, the ad landing page where most visitors leave: cost, 10-29) call
+ * this once on load, without waiting for it, so the function instance and
  * the Neon compute (scale-to-zero after about 5 min idle) are awake before the
  * parent taps pay. Reads nothing, writes nothing, takes no input, sets no
  * cookie. `select 1` runs at most once per WARM_EVERY_MS per function instance;

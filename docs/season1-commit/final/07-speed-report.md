@@ -25,6 +25,8 @@ The functions run in **us-east-1** (Virginia); the database is in **us-east-2** 
 
 ## Neon plan: is turning off scale-to-zero still worth it?
 
+**Update 2026-10-29 (cost): decision pending Jamie; recommendation changed to Neon Launch with scale-to-zero kept ON and the autoscaling ceiling at 0.25 to 0.5 CU (usage-based cost, removes the free-plan cap cliff), relying on the sign-up page pre-warm for cold starts. The join page no longer pre-warms; the sign-up and crew pages do, plus the re-warm at the payment step and on a wallet tap. The analysis below is the earlier recommendation, kept for the record.**
+
 Current pricing ([neon.com/pricing](https://neon.com/pricing), [Neon plans](https://neon.com/docs/introduction/plans), read 2026-10-29):
 
 - **Free:** $0, 100 CU-hours per project per month, scale-to-zero after 5 min and it cannot be turned off. When a project runs out of CU-hours, "your compute is suspended until the next billing period or until you upgrade."

@@ -5,6 +5,22 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: card form behind Or pay with card
+
+Branch `season1-commit`. Jamie 14:05 CT on his Android Chrome: "I would expect the pay with card to be hidden but available to expand via or pay with card." Plus a cost decision on the pre-warm.
+
+1. **Card form collapsed behind "Or pay with card"** (`app/season1/join/signup/signup.html`): the divider is now a button (`#cardTog`, lines either side, label and a small chevron, 44 px tap height, `aria-expanded`, `aria-controls="cardSec"`). The card form, its error line and the "Save their spot" button sit in `#cardSec`, collapsed (`.shut`: height 0, overflow hidden, visibility hidden, plus `inert` so nothing inside takes focus). States, from one pure function `cardState(avail, opened)` in the template: before Stripe reports (about 1.5 to 4 s) and with any wallet (Apple Pay, Google Pay or Link) the section is collapsed and the button shows and works (tapping opens it at once); Stripe reports no wallet (or `loaderror`, or Stripe.js fails) the wallet block collapses as before, taking the button with it, and the card form shows open. Opening is one way: it stays open for the tab session (sessionStorage `s1_card_open`, so a reload keeps it open), and a later "no wallet" report never closes it, so typed card details are never hidden. After a tap or Enter on the button, focus moves to the card number field (`pe.focus()` on the next frame, or on `ready` if the card form is not ready yet). The Payment Element still mounts at load inside the collapsed section, so it is ready when opened (opened to card number visible about 0.1 s). Stripe's card consent line ("By providing your card information...") is part of the Payment Element, so it moves inside the collapsed section; the terms checkbox and its text stay above both pay paths. Enter in a field while the card section is collapsed validates the form and never pays from the hidden card form. `#inviteNote` moved from between the card form and the button to just after the card section, so it shows on the wallet path too. Wallet taps, the busy state, form persistence, Server-Timing and the sign-up pre-warm are unchanged.
+2. **Pre-warm off the join page** (cost, Jamie is capital constrained): `app/season1/join/join.html` no longer calls `/api/season1/warm` (the ad landing page, where most visitors leave). The sign-up and crew pages still warm on load, and sign-up still re-warms at the payment step and on a wallet tap. `docs/season1-commit/final/07-speed-report.md` Neon section: decision pending Jamie; recommendation now Neon Launch with scale-to-zero kept ON and the autoscaling ceiling at 0.25 to 0.5 CU, relying on the sign-up pre-warm for cold starts.
+
+- Tests: new `signupCardCollapse.test.ts` (6: the state function run from the template for unknown, each wallet, none, opened; button aria wiring; card form and pay button inside the collapsed section; terms above both paths; no pay from a collapsed form). `warmRoute.test.ts` (2 new: join page makes no warm call; sign-up and crew do).
+- **Verified (pre-push, deploy with this template injected):** see the deploy check below.
+
+**Deltas for Aaron (your lane, yours to restyle):**
+1. `signup.html`: the "Or pay with card" `<p class="orpay">` is now `<button type="button" class="orpay" id="cardTog">` with `<span class="orl">` and `<span class="chev">`; `.orpay` margin-top 16 px to 6 px with `min-height:44px` (the row is taller for the tap target; it is held from first paint, so nothing moves). New CSS: `.orl`, `.chev` (7 px chevron, hidden once open), `.orpay[aria-expanded="true"]{cursor:default}`, `.cardsec.shut{height:0;overflow:hidden;visibility:hidden}`.
+2. New wrapper `<div id="cardSec" class="cardsec shut" inert>` around the card form block and the `#go` button; `#inviteNote` now sits after it.
+3. Join page: the pre-warm script line at the end of `join.html` is gone.
+
+---
 ## Jamie's Claude, 2026-10-29: F11 and F12
 
 Branch `season1-commit`. Defects F11 and F12 in `docs/season1-commit/final/05-defects.md`.
