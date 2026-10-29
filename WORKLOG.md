@@ -5,6 +5,20 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-29: Season 01 live, session close
+
+Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only) since 10:01 CT. The fix batch was released at 16:33 CT: main `fa9c510`, dev `3b43ae4`, both code-identical to `season1-commit` 0592639. The smoke test passed at 16:40, and Jamie checked his phone at 16:46. The full record is in `docs/season1-commit/final/`: start with `08-handoff.md`, then `03-golive-log.md`.
+
+- **Rollback:** delete `S1_COMMIT_MODE` in Netlify Production and redeploy.
+- **Neon:** "Free + limit increase" ($10 a month, 250 compute hours). Production compute is fixed at 0.25 CU, scale-to-zero on.
+- **Next build:** the analytics gap in `08-handoff.md`. Pixel, Clarity, fbp/fbc and UTM capture, and GA4 UTMs on the four Season 01 pages, before the 11-02 ad batch.
+- **For Aaron:**
+  - Deltas are listed in the 10-29 entries below.
+  - The season line copy is approved by Jamie.
+  - Two doors on /season1 and "Ready now?" are his to ship.
+- **Merge rule:** never merge dev into main. Release = season1-commit plus a merge of origin/main; dev goes through `preview/season1-dev`.
+
+---
 ## Jamie's Claude, 2026-10-29: card form behind Or pay with card
 
 Branch `season1-commit`. Jamie 14:05 CT on his Android Chrome: "I would expect the pay with card to be hidden but available to expand via or pay with card." Plus a cost decision on the pre-warm.
