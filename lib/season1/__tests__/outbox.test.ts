@@ -16,7 +16,7 @@ import {
   toRequestBody,
 } from "../senders/klaviyo";
 import { buildPurchaseEvent, buildRequestBody, testEventCode } from "../senders/meta";
-import { formatCommit, formatFlag, formatOpsAlert, sendDiscord, webhookUrl } from "../senders/discord";
+import { formatCommit, formatFlag, formatOpsAlert, sendDiscord, sourceCategory, webhookUrl } from "../senders/discord";
 
 const sha = (v: string) => createHash("sha256").update(v).digest("hex");
 
@@ -233,18 +233,26 @@ describe("Discord messages", () => {
     assert.equal(/\d{7,}/.test(s.replace(/\b(48271937|48271938)\b/g, "").replace(/pi_\w+/g, "")), false, s);
     assert.equal(/ekuzo\.gg|gmail|555/i.test(s), false, s);
   };
-  it("commit message has kid names, ages, geo, amount, src, inviter, and no parent name, email, phone or @", () => {
+  it("commit message is test tag, amount, kid count, source and ref only (decision 9)", () => {
     const m = formatCommit(order());
-    // Security review L6: the parent first name is not posted.
-    assert.equal(/Pat/.test(m), false, m);
-    assert.match(m, /^\[TEST\] Season 01 commit \| kids /);
-    assert.match(m, /Ava \(11\), Ben \(9\)/);
-    assert.match(m, /Austin, TX/);
-    assert.match(m, /\$180/);
-    assert.match(m, /src ad_d3/);
-    assert.match(m, /Zed's code 48271937/);
-    assert.match(m, /^\[TEST\]/);
+    assert.equal(m, "[TEST] Season 01 commit | $180 | 2 kids | source referral | ref abcd234567");
+    // No parent or kid names, ages, city, region, inviter, code, jersey or refund status.
+    for (const leak of ["Pat", "Ava", "Ben", "Zed", "(11)", "(9)", "Austin", "TX", "48271937", "48271938", "jersey", "refund"])
+      assert.equal(m.includes(leak), false, leak);
     noPii(m);
+    const one = formatCommit(order({ invited: false, src: "karlin", kids: [{ firstName: "Ava", age: 11, role: "first" }], amountCents: 10000, jerseyEligible: false, status: "refunded" }));
+    assert.equal(one, "[TEST] Season 01 commit | $100 | 1 kid | source karlin | ref abcd234567");
+  });
+  it("source category: referral when a friend code was used, else src mapped", () => {
+    assert.equal(sourceCategory({ invited: true, src: "ad" }), "referral");
+    assert.equal(sourceCategory({ invited: false, src: "friend" }), "referral");
+    assert.equal(sourceCategory({ invited: false, src: "ad" }), "ad");
+    assert.equal(sourceCategory({ invited: false, src: "ad_d3" }), "ad");
+    assert.equal(sourceCategory({ invited: false, src: "karlin" }), "karlin");
+    assert.equal(sourceCategory({ invited: false, src: "email" }), "email");
+    assert.equal(sourceCategory({ invited: false, src: "direct" }), "organic");
+    assert.equal(sourceCategory({ invited: false, src: null }), "organic");
+    assert.equal(sourceCategory({ invited: false, src: "address" }), "organic");
   });
   it("strips mentions and phone-like text from user-supplied fields", () => {
     const m = formatCommit(order({ parentFirstName: "@everyone Pat", src: "5125550142 <@123> `x`", geoCity: "Aus@tin" }));
@@ -257,7 +265,7 @@ describe("Discord messages", () => {
   it("flag and ops alert messages", () => {
     const m = formatFlag(friend(), "same_card", false);
     assert.match(m, /same_card/);
-    assert.match(m, /inviter kid Zed/);
+    assert.equal(m.includes("Zed"), false, m);
     noPii(m);
     const a = formatOpsAlert("orphan_paid_pi", "pi_3Abc123def456", true);
     assert.equal(a, "Season 01 ops alert: orphan_paid_pi | pi_3Abc123def456");

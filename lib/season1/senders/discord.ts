@@ -2,13 +2,14 @@ import { SenderError, dollars, type FriendCtx, type OrderCtx, type SendOutcome }
 
 /**
  * Season 01 Discord sender for the ops channel: commits, referral flags and
- * ops alerts. The message never carries an email, phone, address or card
- * data. Free text is stripped of mentions, markup and long digit runs.
+ * ops alerts. The message never carries an email, phone, address, card data,
+ * kid names, ages or location (decision 9, 2026-10-29: a money notification).
+ * Free text is stripped of mentions, markup and long digit runs.
  */
 
 export const DISCORD_TIMEOUT_MS = 2000;
 
-/** Names, city, src: no mentions, markup, control characters or phone-like digit runs. */
+/** Free text (order refs, referral ids): no mentions, markup, control characters or phone-like digit runs. */
 export function free(s: unknown, max = 40): string {
   return String(s ?? "")
     .replace(/[@<>`*~|\\\u0000-\u001f\u007f-\u009f]/g, "")
@@ -23,31 +24,35 @@ export const ident = (s: unknown, max = 60): string => String(s ?? "").toLowerCa
 
 const tag = (livemode: boolean) => (livemode ? "" : "[TEST] ");
 
+export type SourceCategory = "ad" | "organic" | "referral" | "karlin" | "email";
+
+/** Source category for the commit ping: referral when a friend code was used, else the src value mapped. */
+export function sourceCategory(o: Pick<OrderCtx, "src" | "invited">): SourceCategory {
+  if (o.invited) return "referral";
+  const s = String(o.src ?? "").toLowerCase();
+  if (s === "friend") return "referral";
+  if (s === "karlin") return "karlin";
+  if (s === "email") return "email";
+  if (s === "ad" || s.startsWith("ad_")) return "ad";
+  return "organic";
+}
+
+/** Decision 9 (2026-10-29): test tag, amount, number of kids, source category and order ref only. */
 export function formatCommit(o: OrderCtx): string {
-  const kids = o.kids.map((k) => `${free(k.firstName)}${k.age != null ? ` (${k.age})` : ""}`).join(", ");
-  const place = [free(o.geoCity, 40), free(o.geoRegion, 8)].filter(Boolean).join(", ");
+  const n = o.kids.length;
   const parts = [
-    // Security review L6: no parent name (the 2026-10-26 decision lists kid first name, age, city, amount).
     `${tag(o.livemode)}Season 01 commit`,
-    `kids ${kids || "none"}`,
     `$${dollars(o.amountCents)}`,
+    `${n} ${n === 1 ? "kid" : "kids"}`,
+    `source ${sourceCategory(o)}`,
+    `ref ${free(o.orderPublicId, 20)}`,
   ];
-  if (place) parts.push(place);
-  if (o.src) parts.push(`src ${free(o.src, 40)}`);
-  if (o.invited) {
-    const by = o.inviterKidName ? `${free(o.inviterKidName)}'s code ` : "code ";
-    parts.push(`invited via ${by}${ident(o.referralCode ?? "", 20)}`);
-  }
-  if (o.jerseyEligible === false) parts.push("past jersey cutoff");
-  if (o.status === "refunded" || o.status === "partially_refunded") parts.push(o.status);
-  parts.push(`ref ${free(o.orderPublicId, 20)}`);
   return parts.join(" | ").slice(0, 1800);
 }
 
 export function formatFlag(f: FriendCtx, flag: string, livemode: boolean): string {
   const parts = [
     `${tag(livemode)}Season 01 referral flag: ${ident(flag, 40)}`,
-    `inviter kid ${free(f.inviterKidName) || "unknown"}`,
     `code ${ident(f.code, 20)}`,
     `friend kids ${f.friendKids}`,
     `live friend kids ${f.friendsTotal}`,
