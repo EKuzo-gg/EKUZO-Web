@@ -357,6 +357,7 @@ function initExpress(){
   try{new ResizeObserver(xpShow).observe(g('xp'))}catch(_){}
   xp.on('click',function(ev){
    if(busy)return;
+   warm();// the wallet sheet takes a few seconds; a stale database wakes meanwhile
    clearErrs();
    // The form is validated first; with errors the wallet sheet never opens (resolve is not called).
    if(!collect()){g('e-xp').textContent=g('formErr').textContent;return}
