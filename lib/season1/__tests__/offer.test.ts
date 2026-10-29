@@ -11,7 +11,7 @@ describe("OFFER config", () => {
     assert.equal(OFFER.siblingCents, 8000);
     assert.equal(OFFER.maxKidsPerOrder, 4);
     assert.equal(OFFER.ageMin, 9);
-    assert.equal(OFFER.ageMax, 18);
+    assert.equal(OFFER.ageMax, 17);
   });
   it("every window is an ISO instant with an explicit offset", () => {
     for (const k of ["openAt", "jerseyCutoffAt", "lockInAt", "closeAt"] as const) {

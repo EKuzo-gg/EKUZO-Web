@@ -20,7 +20,7 @@ export const OFFER = {
   practicesPerMonth: 8,
   maxKidsPerOrder: 4,
   ageMin: 9,
-  ageMax: 18,
+  ageMax: 17,
   ageCopyMin: 9,
   ageCopyMax: 17,
   openAt: "2026-10-26T00:00:00-05:00",

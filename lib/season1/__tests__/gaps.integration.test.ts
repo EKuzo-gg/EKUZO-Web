@@ -123,10 +123,10 @@ describe("season1 gap closure (integration)", { skip: enabled ? false : "set S1_
     }
   });
 
-  it("AUD-A: a kid aged 9 or 18 flags the pending order age_edge at commit; mid ages do not; fulfil keeps the flag", async () => {
+  it("AUD-A: a kid aged 9 flags the pending order age_edge at commit; 12 and 17 do not; fulfil keeps the flag", async () => {
     const cases: [string, { firstName: string; age: number }[], number, boolean][] = [
       ["x9", [{ firstName: "Nine", age: 9 }], 10000, true],
-      ["x18", [{ firstName: "Eighteen", age: 18 }], 10000, true],
+      ["x17", [{ firstName: "Seventeen", age: 17 }], 10000, false],
       ["x2", [{ firstName: "Mid", age: 12 }, { firstName: "Edge", age: 9 }], 20000, true],
       ["x12", [{ firstName: "Twelve", age: 12 }], 10000, false],
     ];

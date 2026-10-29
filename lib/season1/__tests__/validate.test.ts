@@ -90,8 +90,8 @@ describe("phone", () => {
 });
 
 describe("ages", () => {
-  it("8, 19, 'outside' fail with age_outside", () => {
-    for (const age of [8, 19, 0, -1, 100, "outside"]) {
+  it("8, 18, 19, 'outside' fail with age_outside", () => {
+    for (const age of [8, 18, 19, 0, -1, 100, "outside"]) {
       bad({ ...base(), kids: [{ firstName: "Ana", age }] }, "kids.0.age", "age_outside");
     }
   });
@@ -100,17 +100,16 @@ describe("ages", () => {
       bad({ ...base(), kids: [{ firstName: "Ana", age }] }, "kids.0.age", "invalid");
     }
   });
-  it("9 and 18 pass with ageEdge true; 10..17 are not edges", () => {
-    for (const age of [9, 18]) {
-      const v = ok({ ...base(), kids: [{ firstName: "Ana", age }] });
-      assert.equal(v.kids[0].age, age);
-      assert.equal(v.kids[0].ageEdge, true);
-    }
+  it("9 passes with ageEdge true; 10..17 pass and are not edges", () => {
+    const v = ok({ ...base(), kids: [{ firstName: "Ana", age: 9 }] });
+    assert.equal(v.kids[0].age, 9);
+    assert.equal(v.kids[0].ageEdge, true);
     for (let age = 10; age <= 17; age++) {
       assert.equal(ok({ ...base(), kids: [{ firstName: "Ana", age }] }).kids[0].ageEdge, false);
     }
     assert.equal(ageEdge(9), true);
-    assert.equal(ageEdge(18), true);
+    assert.equal(ageEdge(17), false);
+    assert.equal(ageEdge(18), false);
     assert.equal(ageEdge(8), false);
     assert.equal(ageEdge(19), false);
     assert.equal(ageEdge(12), false);

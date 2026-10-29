@@ -21,12 +21,12 @@ export function foldName(name: string): string {
   return name.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
 }
 
-/** True at the youngest and oldest accepted ages (9 and 18). */
+/** True at the youngest accepted age (9). The oldest (17) is not an edge. */
 export function ageEdge(age: number): boolean {
-  return age === OFFER.ageMin || age === OFFER.ageMax;
+  return age === OFFER.ageMin;
 }
 
-/** AUD-A (P4): flags known at commit. Any kid at the youngest or oldest accepted age flags the order. */
+/** AUD-A (P4): flags known at commit. Any kid at the youngest accepted age flags the order. */
 export function commitFlags(kids: { ageEdge: boolean }[]): string[] {
   return kids.some((k) => k.ageEdge) ? ["age_edge"] : [];
 }
