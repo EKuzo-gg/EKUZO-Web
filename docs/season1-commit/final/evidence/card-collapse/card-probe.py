@@ -149,19 +149,61 @@ def run(mode, w, h, pay=False, ua=None, init=None, shots=True):
     return out
 
 
-# Simulate "Stripe reports no wallet" through the page's own branch: wrap Stripe.js so the Express Checkout
-# Element's availablepaymentmethodschange handler receives paymentMethods undefined (Stripe's shape for none)
-# after DELAY ms; DELAY < 0 never reports (availability unknown for good).
-def fake_none(delay):
-    return r"""(function(){var D=%d,real;
+# Simulate Stripe's availability reports through the page's own branches: wrap Stripe.js so the Express Checkout
+# Element's availablepaymentmethodschange handler receives scripted reports. SEQ is a list of [delay ms, paymentMethods]
+# (null = none, Stripe's shape for no wallet). fake_none(delay < 0) never reports (availability unknown for good).
+# Stripe's real frame still draws its own buttons; only the event the page acts on is scripted.
+def fake_reports(seq):
+    return r"""(function(){var SEQ=%s,real;
 function wrap(o,over){return new Proxy(o,{get:function(t,k){if(k in over)return over[k];var v=t[k];return typeof v==='function'?v.bind(t):v}})}
 Object.defineProperty(window,'Stripe',{configurable:true,get:function(){return real},set:function(S){
  real=function(){var s=S.apply(this,arguments);
   return wrap(s,{elements:function(o){var e=s.elements(o);
    return wrap(e,{create:function(t,op){var el=e.create(t,op);if(t!=='expressCheckout')return el;var px;
-    px=wrap(el,{on:function(n,cb){if(n==='availablepaymentmethodschange'){if(D>=0)setTimeout(function(){cb({elementType:'expressCheckout',paymentMethods:undefined})},D);return px}el.on(n,cb);return px}});
+    px=wrap(el,{on:function(n,cb){if(n==='availablepaymentmethodschange'){SEQ.forEach(function(r){setTimeout(function(){cb({elementType:'expressCheckout',paymentMethods:r[1]===null?undefined:r[1]})},r[0])});return px}el.on(n,cb);return px}});
     return px}})}})};
- Object.assign(real,S)}})})();""" % delay
+ Object.assign(real,S)}})})();""" % json.dumps(seq)
+
+
+def fake_none(delay):
+    return fake_reports([] if delay < 0 else [[delay, None]])
+
+
+LINK = {"link": {"available": True}}
+LINK_GPAY = {"link": {"available": True}, "googlePay": {"available": True}}
+
+
+def link_only(w, h, later_gpay=False):
+    """Stripe reports Link only (in-app browsers): card form open, no toggle, divider as plain text.
+    later_gpay: Google Pay reported 3 s after Link only; the card form must stay open."""
+    seq = [[0, LINK]] + ([[3000, LINK_GPAY]] if later_gpay else [])
+    out = {"width": w, "mode": "Link only" + (", then Google Pay at 3 s" if later_gpay else "")}
+    ctx = ctx_for(B, w, h, init=fake_reports(seq))
+    pg = ctx.new_page()
+    errs = []
+    pg.on("console", lambda m: errs.append(m.text[:200]) if m.type == "error" else None)
+    pg.on("pageerror", lambda e: errs.append("pageerror " + str(e)[:200]))
+    pg.goto(BASE + "/season1/join/signup", wait_until="load")
+    pg.wait_for_timeout(1500)
+    X = "()=>{var o=document.getElementById('cardOr'),t=document.getElementById('cardTog');return {plainDividerShown:!o.hidden&&o.offsetHeight>0,plainText:o.textContent,toggleHidden:t.hidden&&!t.offsetHeight}}"
+    out["after_link_report"] = pg.evaluate(STATE)
+    out["after_link_report_divider"] = pg.evaluate(X)
+    if later_gpay:
+        pg.wait_for_timeout(3000)
+        out["after_gpay_report"] = pg.evaluate(STATE)
+        out["after_gpay_report_divider"] = pg.evaluate(X)
+    else:
+        pg.evaluate("document.getElementById('xpWrap').scrollIntoView({block:'center'})")
+        pg.wait_for_timeout(2500)
+        pg.screenshot(path=f"{OUT}/linkonly-{w}.png")
+    fr = pg.frame_locator("#pe iframe").first
+    inp = fr.locator('input[name="number"]')
+    inp.wait_for(state="visible", timeout=15000)
+    out["card_number_box_h"] = inp.evaluate("e=>Math.round(e.getBoundingClientRect().height)")
+    out["final"] = pg.evaluate(STATE)
+    out["console_errors"] = errs
+    ctx.close()
+    return out
 
 
 def late_none(w, h):
@@ -210,6 +252,11 @@ with sync_playwright() as p:
         res["unknown_390"] = run("Stripe never reports", 390, 844, init=fake_none(-1), shots=False)
         res["late_none_390"] = late_none(390, 844)
         res["late_none_1440"] = late_none(1440, 900)
+    if which in ("all", "link"):
+        res["link_only_390"] = link_only(390, 844)
+        res["link_only_1440"] = link_only(1440, 900)
+        res["link_then_gpay_390"] = link_only(390, 844, later_gpay=True)
+        res["link_then_gpay_1440"] = link_only(1440, 900, later_gpay=True)
     if which == "kb390":
         res["wallet_390"] = run("wallet", 390, 844, shots=False)
     if which in ("all", "pay"):
