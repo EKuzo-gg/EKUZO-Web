@@ -3,7 +3,7 @@ import { OFFER, isOpen, isJerseyEligible } from "@/lib/season1/offer";
 import { currentMode } from "@/lib/season1/mode";
 import { quote } from "@/lib/season1/pricing";
 import { validateCommit, commitFlags } from "@/lib/season1/validate";
-import { hit } from "@/lib/season1/ratelimit";
+import { hit, hitPair } from "@/lib/season1/ratelimit";
 import { getStripe, assertKeyMatchesMode } from "@/lib/season1/stripe";
 import { ipBucket } from "@/lib/season1/referralFlags";
 import { inviteDecision, resolveCode, type InviteReason } from "@/lib/season1/referral";
@@ -12,25 +12,21 @@ import { parseGeoHeader } from "@/lib/seasonOneGeo";
 import {
   addFamilyFlagsByEmail,
   cancelOrder,
+  commitPrecheck,
   enqueueOutbox,
   findPendingOrderByAttempt,
   foldName,
-  getFamilyCustomerId,
+  insertCommitRecords,
   insertEvent,
-  insertKids,
-  insertPendingOrder,
   issueViewToken,
-  paidKidKeys,
-  priorPaidKidCount,
   setFamilyCustomerId,
-  setOrderPaymentIntent,
+  setOrderPaymentIntentAndToken,
   setPendingOrderReferralCode,
-  upsertFamilyGuardian,
   type AttemptOrder,
 } from "@/lib/season1/db";
 import { cleanAttemptId, errCode, globalCeilingAlertKey, kidsSignature, keyHash, logStep, viewTokenCookie } from "@/lib/season1/rules";
 import { SECURITY_HEADERS, isCrossSite, isJsonContentType } from "@/lib/season1/httpGuard";
-import { ServerTiming, runTimed, timed } from "@/lib/season1/serverTiming";
+import { ServerTiming, runTimed, takeColdFlag, timed } from "@/lib/season1/serverTiming";
 
 /**
  * POST /api/season1/commit (frozen spec "Commit API" + RT3 to RT7, RT9, RT10,
@@ -151,18 +147,17 @@ async function resolveAttempt(
   email: string,
   attemptId: string,
   livemode: boolean,
+  /** The first key's lookup when already read (commitPrecheck); undefined reads it. */
+  first?: AttemptOrder | null,
 ): Promise<{ key: string; existing: AttemptOrder | null }> {
   let key = attemptId;
   for (let i = 0; i < 4; i++) {
-    const existing = await findPendingOrderByAttempt(email, key, livemode);
+    const existing = i === 0 && first !== undefined ? first : await findPendingOrderByAttempt(email, key, livemode);
     if (!existing || existing.status === "pending") return { key, existing };
     key = `${attemptId}~${existing.publicId}`;
   }
   throw new Error("attempt_chain_too_long");
 }
-
-/** Module scope survives between requests on a warm function instance. */
-let servedOnThisInstance = false;
 
 /**
  * Canary 10-29: a parent waited about 5 s on "Saving". Every response carries
@@ -170,8 +165,7 @@ let servedOnThisInstance = false;
  * PII) so the wait can be split between a Neon wake, Stripe and a cold start.
  */
 export async function POST(req: Request): Promise<Response> {
-  const st = new ServerTiming(!servedOnThisInstance);
-  servedOnThisInstance = true;
+  const st = new ServerTiming(takeColdFlag());
   const res = await runTimed(st, () => handle(req));
   res.headers.set("server-timing", st.header());
   return res;
@@ -226,12 +220,18 @@ async function handle(req: Request): Promise<Response> {
   // T11 as amended (Sentry final D5): every call that passes validation counts
   // against the per-IP limit (IPv6 bucketed at /48, security review M1) and the
   // per-email limit, 409s included; 422s count against neither. Fails closed.
+  // Speed pass 10-29: both in one round trip; the email counts only when the IP passed, as before.
   try {
-    if (!(await hit(`s1pi:ip:${ipBucket(ip, 48)}`, LIMITS.ipPer10Min, 600, livemode))) {
+    const [ipOk, emailOk] = await hitPair(
+      { key: `s1pi:ip:${ipBucket(ip, 48)}`, limit: LIMITS.ipPer10Min, windowSeconds: 600 },
+      { key: `s1pi:email:${keyHash(input.email)}`, limit: LIMITS.emailPerDay, windowSeconds: 86_400 },
+      livemode,
+    );
+    if (!ipOk) {
       logStep("commit.ratelimit", null, false, "rate_limited_ip");
       return json({ error: "rate_limited" }, 429);
     }
-    if (!(await hit(`s1pi:email:${keyHash(input.email)}`, LIMITS.emailPerDay, 86_400, livemode))) {
+    if (emailOk !== true) {
       logStep("commit.ratelimit", null, false, "rate_limited_email");
       return json({ error: "rate_limited" }, 429);
     }
@@ -241,8 +241,10 @@ async function handle(req: Request): Promise<Response> {
   }
 
   try {
+    // Speed pass 10-29: paid kids, prior count, the attempt's order and the family in one read.
+    const pre = await commitPrecheck(input.email, attemptId, livemode);
     // P6 duplicate guard before any PI (T11: after 3 hits a day, generic Text Karlin and a flag).
-    const paidKeys = new Set(await paidKidKeys(input.email, livemode));
+    const paidKeys = new Set(pre.paidKeys);
     const dup = input.kids.find((k) => paidKeys.has(foldName(k.firstName)));
     if (dup) {
       const under = await hit(`s1dup:email:${keyHash(input.email)}`, LIMITS.duplicateKidPerDay, 86_400, livemode);
@@ -265,7 +267,7 @@ async function handle(req: Request): Promise<Response> {
     const inv = await decideInvite(req, body, input.email, livemode);
 
     // Server-side price (RT13 counting) and RT5.
-    const prior = await priorPaidKidCount(input.email, livemode);
+    const prior = pre.prior;
     const q = quote({ kids: input.kids, priorPaidKids: prior });
     if (q.totalCents !== expected) {
       logStep("commit.price_changed", null, true);
@@ -276,7 +278,7 @@ async function handle(req: Request): Promise<Response> {
     const sig = kidsSignature(input.kids);
 
     // RT3: reuse the attempt's PI when nothing changed.
-    let { key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode);
+    let { key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode, pre.attempt);
     for (let wait = 0; existing && existing.status === "pending"; wait++) {
       ref = existing.publicId;
       const same = existing.amountCents === q.totalCents && kidsSignature(existing.kids) === sig;
@@ -340,44 +342,43 @@ async function handle(req: Request): Promise<Response> {
     }
 
     // Family (guardian insert-only, RT7), kids, pending order with consent (RT20).
-    const fam = await upsertFamilyGuardian({
-      email: input.email,
-      firstName: input.parentFirstName,
-      phone: input.phone,
-      livemode,
-      attribution: input.src ? { src: input.src } : null,
-      geo: (() => {
-        const g = parseGeoHeader(req.headers.get("x-nf-geo"));
-        return Object.keys(g).length ? g : null;
-      })(),
-    });
-    const kidIds = await insertKids(
-      fam.familyId,
-      input.kids.map((k) => ({ firstName: k.firstName, age: k.age })),
-      now,
-    );
+    // Speed pass 10-29: one transaction (one round trip); the family comes from the precheck.
+    let fam: Awaited<ReturnType<typeof insertCommitRecords>>["fam"];
     let order: { orderId: string; publicId: string };
     try {
-      order = await insertPendingOrder({
-        familyId: fam.familyId,
-        payerEmail: input.email,
-        offerId: OFFER.id,
-        offerVersion: OFFER.version,
-        amountCents: q.totalCents,
-        consentVersion: OFFER.termsVersion,
-        consentAt: now,
-        consentIp: ip ? ip.slice(0, 64) : null,
-        consentUa: (req.headers.get("user-agent") ?? "").slice(0, 512) || null,
-        consentXff: (req.headers.get("x-forwarded-for") ?? "").slice(0, 256) || null,
-        src: input.src,
-        referralCode: inv.code,
+      const rec = await insertCommitRecords({
+        family: pre.family,
+        email: input.email,
+        firstName: input.parentFirstName,
+        phone: input.phone,
         livemode,
-        flags: commitFlags(input.kids),
-        attemptId: attemptKey,
-        payerFirstName: input.parentFirstName,
-        payerPhone: input.phone,
-        items: q.lines.map((l) => ({ kidId: kidIds[l.kidIndex], role: l.role, unitCents: l.unitCents })),
+        attribution: input.src ? { src: input.src } : null,
+        geo: (() => {
+          const g = parseGeoHeader(req.headers.get("x-nf-geo"));
+          return Object.keys(g).length ? g : null;
+        })(),
+        kids: input.kids.map((k) => ({ firstName: k.firstName, age: k.age })),
+        now,
+        order: {
+          offerId: OFFER.id,
+          offerVersion: OFFER.version,
+          amountCents: q.totalCents,
+          consentVersion: OFFER.termsVersion,
+          consentAt: now,
+          consentIp: ip ? ip.slice(0, 64) : null,
+          consentUa: (req.headers.get("user-agent") ?? "").slice(0, 512) || null,
+          consentXff: (req.headers.get("x-forwarded-for") ?? "").slice(0, 256) || null,
+          src: input.src,
+          referralCode: inv.code,
+          flags: commitFlags(input.kids),
+          attemptId: attemptKey,
+          payerFirstName: input.parentFirstName,
+          payerPhone: input.phone,
+        },
+        lines: q.lines.map((l) => ({ kidIndex: l.kidIndex, role: l.role, unitCents: l.unitCents })),
       });
+      fam = rec.fam;
+      order = rec.order;
     } catch (e) {
       if (/s1_orders_attempt_key/.test(String((e as Error)?.message ?? ""))) {
         // Lost a double-tap race: the other request owns this attempt.
@@ -391,7 +392,7 @@ async function handle(req: Request): Promise<Response> {
     await recordIgnored(inv, order.publicId, livemode);
 
     // RT6: one Season 01 Customer per family, never a search or a legacy Customer.
-    let customerId = await getFamilyCustomerId(fam.familyId);
+    let customerId = fam.customerId;
     if (!customerId) {
       const c = await timed("stripe", () =>
         stripe.customers.create(
@@ -408,8 +409,10 @@ async function handle(req: Request): Promise<Response> {
       amount: q.totalCents,
       currency: "usd",
       customer: customerId,
-      // RT9 as amended by the lead: card only (Apple Pay and Google Pay ride on card).
-      payment_method_types: ["card"],
+      // RT9 as amended by the lead: card (Apple Pay and Google Pay ride on card), plus Link,
+      // which only the wallet row offers (Jamie 10-29: Link as a secondary wallet button; the
+      // card form keeps Link off).
+      payment_method_types: ["card", "link"],
       setup_future_usage: "off_session",
       receipt_email: input.email,
       description: "EKUZO Season 01 commitment",
@@ -423,10 +426,10 @@ async function handle(req: Request): Promise<Response> {
     const pi = await timed("stripe", () => stripe.paymentIntents.create(params, { idempotencyKey: `s1-pi:${order.publicId}` }));
     const piCreatedAt = new Date(pi.created * 1000);
     // jersey_eligible here is provisional; fulfil recomputes it (RT8).
-    await setOrderPaymentIntent(order.orderId, pi.id, piCreatedAt, isJerseyEligible(pi.created));
+    // Speed pass 10-29: payment intent and view token in one statement.
+    const token = await setOrderPaymentIntentAndToken(order.orderId, pi.id, piCreatedAt, isJerseyEligible(pi.created));
     logStep("commit.pi", ref, true);
 
-    const token = await issueViewToken(order.orderId);
     if (!pi.client_secret) throw new Error("no_client_secret");
     return ok(pi.client_secret, order.publicId, q.totalCents, token, inv);
   } catch (e) {

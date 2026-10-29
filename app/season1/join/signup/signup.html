@@ -94,10 +94,15 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 [hidden]{display:none!important}
 .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 #pe{min-height:44px}
-/* Canary 10-29: wallet buttons (Express Checkout Element) above the card form; collapsed until a wallet is available */
-.xpw{height:0;overflow:hidden}
-.xpw.on{height:auto;overflow:visible;margin-top:20px}
+/* Wallet buttons (Express Checkout Element) above the card form. 10-29 (2): the block stays in the layout
+   (Stripe draws the buttons only once their frame is on screen; a 0-height clip kept them from ever drawing).
+   It closes when no wallet is available; the divider shows once a button has drawn. */
+.xpw.none{display:none}
+.xpw.on{margin-top:20px}
+.xpw .orpay{display:none}
+.xpw.on .orpay{display:flex}
 .orpay{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted)}
+#xpDiag{display:block;font-weight:500;margin-top:2px}
 .orpay:before,.orpay:after{content:"";flex:1;height:1px;background:rgba(0,0,0,.15)}
 .spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s1spin .7s linear infinite}
 @keyframes s1spin{to{transform:rotate(360deg)}}
@@ -229,7 +234,7 @@ g('invRm').addEventListener('click',function(){
  try{fetch('/api/season1/invite/remove',{method:'POST',credentials:'same-origin'}).catch(function(){})}catch(_){}
  inviteRemoved=true;invite=null;renderInvite();upd();
 });
-var confirming=false,kids=g('kids'),n=0,seq=0,busy=false,stripe=null,elements=null,pe=null,peReady=false,secret=null,secretSig='',xp=null;
+var confirming=false,kids=g('kids'),n=0,seq=0,busy=false,stripe=null,elements=null,xel=null,pe=null,peReady=false,secret=null,secretSig='',xp=null;
 var attemptId='';
 if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
 try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
@@ -273,6 +278,7 @@ function upd(){
  var label='Save '+(first?first+'\u0027s':'their')+' spot \u00b7 '+money(totalCents());
  if(busy)g('go').dataset.t=label;else g('go').textContent=label;
  if(elements){try{elements.update({amount:totalCents()})}catch(_){}}
+ if(xel){try{xel.update({amount:totalCents()})}catch(_){}}
 }
 /* Canary 10-29: one factual season line under Due today (dates from offer.ts via config). */
 function seasonLine(c){return 'Season 01 runs '+(cfg.seasonLabel||'mid January to May 6, 2027')+'. Your '+money(c)+' covers '+(cfg.firstMonthLabel||'January')+'.'}
@@ -295,40 +301,59 @@ function restoreForm(){
  upd();
 }
 g('f').addEventListener('input',saveForm);g('f').addEventListener('change',saveForm);
+var APPEAR={theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#ffffff',colorText:'#050505',colorDanger:'#F92524',colorTextSecondary:'#6f6f6f',fontFamily:'Inter, Arial, Helvetica, sans-serif',fontSizeBase:'15px',borderRadius:'2px',spacingUnit:'4px'},
+    rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}};
 function initStripe(){
  if(!cfg.open)return;
  if(!window.Stripe||!cfg.publishableKey){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
  try{
   stripe=Stripe(cfg.publishableKey);
-  elements=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',paymentMethodTypes:['card'],
-   fonts:[{cssSrc:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'}],
-   appearance:{theme:'stripe',variables:{colorPrimary:'#050505',colorBackground:'#ffffff',colorText:'#050505',colorDanger:'#F92524',colorTextSecondary:'#6f6f6f',fontFamily:'Inter, Arial, Helvetica, sans-serif',fontSizeBase:'15px',borderRadius:'2px',spacingUnit:'4px'},
-    rules:{'.Input':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none',padding:'12px'},'.Input:focus':{border:'1.5px solid #050505',boxShadow:'none',outline:'none'},'.Label':{fontWeight:'600',fontSize:'12px',color:'rgba(0,0,0,.7)'},'.Tab':{border:'1.5px solid rgba(0,0,0,.25)',boxShadow:'none'},'.Tab--selected':{border:'2px solid #050505',boxShadow:'none',color:'#050505'},'.Block':{boxShadow:'none',border:'1.5px solid rgba(0,0,0,.25)'}}}});
+  // Card form group: card only. loader 'never' (10-29): Stripe's loading skeleton drew two empty tab boxes
+  // above "Card number" (a tabs placeholder for methods this form never shows); now the card form starts clean.
+  elements=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',allowedPaymentMethodTypes:['card'],loader:'never',
+   fonts:[{cssSrc:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'}],appearance:APPEAR});
   // Canary 10-29: the card form is card only. Wallets live in the Express Checkout Element above it;
   // wallets.link 'never' keeps Link from autofilling the card form (Stripe.js create_payment_element).
   pe=elements.create('payment',{wallets:{applePay:'never',googlePay:'never',link:'never'}});
   pe.mount('#pe');
   pe.on('ready',function(){peReady=true});
+  pe.on('focus',function(){warm()});
   pe.on('change',function(ev){if(ev&&ev.complete)g('e-pay').textContent=''});
  }catch(err){g('e-pay').textContent='The payment form did not load. Reload the page or text our founder.';return}
  initExpress();
 }
-/* Express Checkout Element: Apple Pay or Google Pay first on a phone. 'always' on the matching phone
-   (Stripe's 'auto' can hide a wallet it judges less useful); 'auto' elsewhere. Link, PayPal, Amazon Pay
-   and Klarna off. No wallet on this device (in-app browsers, most desktops): the block stays collapsed
-   and the card form is all the parent sees. Same commit flow and Apple Pay recurring request as the card. */
-var UA=navigator.userAgent||'',ON_IOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),ON_ANDROID=/Android/.test(UA);
-var xpAvail=false;
-function xpShow(){var h=g('xp').getBoundingClientRect().height;g('xpWrap').classList.toggle('on',xpAvail&&(h>=40||!window.ResizeObserver))}
+/* Express Checkout Element (Jamie 10-29): Apple Pay and Google Pay whenever the browser supports them, on any
+   device ('always', desktop Chrome and Safari included), then Link as a secondary button. Its own Elements group
+   (card + link) so Link never reaches the card form. PayPal, Amazon Pay and Klarna off. Same commit flow and
+   Apple Pay recurring request as the card. */
+var xpAvail=null,xpLabel='checking';
+function xpH(){return Math.round(g('xp').getBoundingClientRect().height)}
+function xpDiag(){
+ if(cfg.mode!=='test')return;
+ var d=g('xpDiag');if(!d){d=document.createElement('span');d.id='xpDiag';g('testBar').appendChild(d)}
+ var h=xpH(),pm=xpAvail;
+ d.textContent='Wallets: '+(pm===null?xpLabel:('applePay='+(pm.applePay?'yes':'no')+' googlePay='+(pm.googlePay?'yes':'no')+' link='+(pm.link?'yes':'no')))+' rendered='+(h>=40?'yes':'no')+' ('+h+'px) PaymentRequest='+(window.PaymentRequest?'yes':'no');
+}
+function xpShow(){
+ var w=g('xpWrap'),any=!!xpAvail&&(xpAvail.applePay||xpAvail.googlePay||xpAvail.link),drawn=xpH()>=40;
+ w.classList.toggle('none',xpAvail!==null&&!any);
+ w.classList.toggle('on',any&&drawn);
+ xpDiag();
+}
 function initExpress(){
  try{
-  xp=elements.create('expressCheckout',{
-   paymentMethods:{applePay:ON_IOS?'always':'auto',googlePay:ON_ANDROID?'always':'auto',link:'never',paypal:'never',amazonPay:'never',klarna:'never'},
+  xel=stripe.elements({mode:'payment',amount:totalCents(),currency:'usd',setupFutureUsage:'off_session',allowedPaymentMethodTypes:['card','link'],appearance:APPEAR});
+  xp=xel.create('expressCheckout',{
+   paymentMethods:{applePay:'always',googlePay:'always',link:'auto',paypal:'never',amazonPay:'never',klarna:'never'},
+   paymentMethodOrder:['apple_pay','google_pay','link'],
    buttonType:{applePay:'plain',googlePay:'plain'},buttonHeight:48,billingAddressRequired:false});
-  // Open the block only when a wallet is available AND its button has drawn (a wallet script blocked
-  // by the network or an extension would otherwise leave an empty gap above the divider).
-  xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods;xpAvail=false;if(pm)Object.keys(pm).forEach(function(k){if(pm[k]&&pm[k].available)xpAvail=true});xpShow()});
-  xp.on('loaderror',function(){xpAvail=false;xpShow()});
+  // The block stays in the layout so the buttons can draw (Stripe's documented pattern shows the container on
+  // this event). Until a button has drawn (40 px) it has no margin and no divider, so a wallet script blocked by
+  // the network or an extension leaves at most Stripe's few-pixel empty frame, never a gap with a divider.
+  xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods,o={applePay:false,googlePay:false,link:false};
+   if(pm)Object.keys(o).forEach(function(k){o[k]=!!(pm[k]&&pm[k].available)});
+   xpAvail=o;xpShow()});
+  xp.on('loaderror',function(e){xpLabel='loaderror '+String(e&&e.error&&(e.error.type||e.error.message)||'');xpAvail={applePay:false,googlePay:false,link:false};xpShow();if(g('xpDiag'))g('xpDiag').textContent='Wallets: '+xpLabel});
   try{new ResizeObserver(xpShow).observe(g('xp'))}catch(_){}
   xp.on('click',function(ev){
    if(busy)return;
@@ -339,7 +364,8 @@ function initExpress(){
   });
   xp.on('confirm',function(ev){var body=collect();if(!body){try{ev.paymentFailed({reason:'fail'})}catch(_){}return}pay(body,ev)});
   xp.mount('#xp');
- }catch(_){g('xpWrap').classList.remove('on')}
+  xpDiag();
+ }catch(_){g('xpWrap').classList.add('none');xpLabel='init failed';xpDiag()}
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
@@ -369,6 +395,7 @@ function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;btn.classList.toggle('
  else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
 function showTotal(c){
  try{elements.update({amount:c})}catch(_){}
+ try{if(xel)xel.update({amount:c})}catch(_){}
  var sm=g('sum').querySelector('.line.due span:last-child');if(sm)sm.textContent=money(c);
  var sl=g('sum').querySelector('.sline span');if(sl)sl.textContent=seasonLine(c);
  g('go').textContent='Save their spot \u00b7 '+money(c);
@@ -409,11 +436,11 @@ g('f').addEventListener('submit',function(ev){
 });
 /* One path for the card button and the wallet sheet (xev = the Express Checkout confirm event). */
 async function pay(body,xev){
- var errEl=g(xev?'e-xp':'e-pay');
+ var errEl=g(xev?'e-xp':'e-pay'),els=xev?xel:elements;
  function fail(){if(xev){try{xev.paymentFailed({reason:'fail'})}catch(_){}if(!errEl.textContent)errEl.textContent=g('formErr').textContent}setBusy(false)}
  setBusy(true);confirming=false;ga('season1_pay_submit',{method:xev?String(xev.expressPaymentType||'wallet'):'card'});
  try{
-  var sub=await elements.submit();
+  var sub=await els.submit();
   if(sub.error){errEl.textContent=sub.error.message||'Check your payment details.';announce(errEl.textContent);fail();return}
   var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents(),inviteRemoved]);
   if(!secret||sig!==secretSig){
@@ -431,13 +458,24 @@ async function pay(body,xev){
     fail();return}
   }
   confirming=true;
-  var r=await stripe.confirmPayment({elements:elements,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
+  var r=await stripe.confirmPayment({elements:els,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
   if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
  }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
 }
+/* Speed pass 10-29: wake the commit API and its database while the parent fills the form (no data, no cookies,
+   no analytics). Once on load (skipped if the join page did it under 4 min ago in this tab), and again when the
+   parent reaches the payment step after more than 4 min (Neon sleeps after about 5 min idle). */
+function warm(){
+ var k='s1_warm_at',now=Date.now(),last=0;
+ try{last=+sessionStorage.getItem(k)||0}catch(_){}
+ if(now-last<240000)return;
+ try{sessionStorage.setItem(k,String(now))}catch(_){}
+ try{fetch('/api/season1/warm',{cache:'no-store',credentials:'omit',priority:'low'}).catch(function(){})}catch(_){}
+}
+g('pay').addEventListener('focusin',function(){warm()});
 // A back or forward from the bfcache: drop the busy state and the cached client secret, refill the form.
 window.addEventListener('pageshow',function(e){if(e.persisted){secret=null;secretSig='';confirming=false;if(busy)setBusy(false);restoreForm()}});
-restoreForm();renderInvite();upd();ga('season1_signup_view');
+restoreForm();renderInvite();upd();ga('season1_signup_view');warm();
 // Stripe.js is deferred (end of body): init when it has loaded, or show the fallback if it failed.
 if(window.Stripe)initStripe();else{var sj=g('stripe-js');sj.addEventListener('load',initStripe);sj.addEventListener('error',initStripe)}
 })();

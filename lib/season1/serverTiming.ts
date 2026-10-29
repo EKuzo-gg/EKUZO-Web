@@ -43,6 +43,18 @@ export class ServerTiming {
 
 const store = new AsyncLocalStorage<ServerTiming>();
 
+/**
+ * True for the first Season 01 API request this process (function instance)
+ * serves, whichever route it hits (warm or commit): a process-wide flag on
+ * globalThis, so a warm call marks the instance as no longer cold for commit.
+ */
+export function takeColdFlag(): boolean {
+  const g = globalThis as { __s1InstanceServed?: boolean };
+  const cold = !g.__s1InstanceServed;
+  g.__s1InstanceServed = true;
+  return cold;
+}
+
 export function runTimed<T>(st: ServerTiming, fn: () => T): T {
   return store.run(st, fn);
 }

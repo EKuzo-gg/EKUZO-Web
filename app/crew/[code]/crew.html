@@ -261,6 +261,7 @@ ev('season1_invite_view');
 document.querySelectorAll('a.join').forEach(function(a){a.addEventListener('click',function(){ev('season1_invite_join_tap');});});
 })();
 </script>
+<script>/* Speed pass 10-29: wake the sign-up API and its database while the parent reads (no data, no cookies, no analytics; at most once per 4 min per tab). */(function(){try{var k='s1_warm_at',n=Date.now();if(n-(+sessionStorage.getItem(k)||0)<240000)return;sessionStorage.setItem(k,String(n))}catch(_){}try{fetch('/api/season1/warm',{cache:'no-store',credentials:'omit',priority:'low'}).catch(function(){})}catch(_){}})()</script>
 <script src="/js/s1-devview.js" defer></script>
 </body>
 </html>

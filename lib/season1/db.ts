@@ -525,6 +525,209 @@ export async function cancelOrder(orderId: string): Promise<boolean> {
   return (rows as Row[]).length > 0;
 }
 
+// ── Commit speed pass (10-29): fewer round trips, same rows ───────────
+
+export interface KnownFamily extends FamilyGuardian {
+  customerId: string | null;
+}
+
+export interface CommitPrecheck {
+  /** = paidKidKeys(email, livemode). */
+  paidKeys: string[];
+  /** = priorPaidKidCount(email, livemode). */
+  prior: number;
+  /** = findPendingOrderByAttempt(email, attemptId, livemode). */
+  attempt: AttemptOrder | null;
+  /** The guardian's family for this email and mode (with its Customer id), or null. */
+  family: KnownFamily | null;
+}
+
+/**
+ * The commit route's read-only lookups in one round trip: paidKidKeys,
+ * priorPaidKidCount, findPendingOrderByAttempt (first key) and the family
+ * lookup of upsertFamilyGuardian, with the same filters as those functions.
+ */
+export async function commitPrecheck(email: string, attemptId: string, livemode: boolean): Promise<CommitPrecheck> {
+  const e = email.trim().toLowerCase();
+  const rows = await q(
+    `with paid as (
+       select k.id as kid_id, k.first_name_key
+         from s1_orders o
+         join s1_order_items oi on oi.order_id = o.id
+         join s1_kids k on k.id = oi.kid_id
+        where o.payer_email = $1 and o.livemode = $2
+          and o.status in ('paid','partially_refunded')
+          and k.status <> 'refunded')
+     select
+       (select coalesce(array_agg(distinct first_name_key), '{}') from paid) as paid_keys,
+       (select count(distinct kid_id)::int from paid) as prior,
+       (select json_build_object(
+                 'id', o.id, 'public_id', o.public_id, 'family_id', o.family_id, 'status', o.status,
+                 'amount_cents', o.amount_cents, 'payment_intent_id', o.payment_intent_id,
+                 'referral_code', o.referral_code,
+                 'kids', coalesce((select json_agg(json_build_object('firstName', k.first_name, 'age', k.age))
+                                     from s1_order_items oi join s1_kids k on k.id = oi.kid_id
+                                    where oi.order_id = o.id), '[]'::json))
+          from s1_orders o
+         where o.payer_email = $1 and o.attempt_id = $3 and o.livemode = $2) as attempt,
+       (select json_build_object('guardian_id', g.id, 'family_id', f.id, 'family_public_id', f.public_id,
+                                 'customer_id', f.stripe_customer_id)
+          from s1_guardians g join s1_families f on f.id = g.family_id
+         where g.email = $1 and g.livemode = $2) as family`,
+    [e, livemode, attemptId],
+  );
+  const r = rows[0] ?? {};
+  const a = r.attempt as Row | null | undefined;
+  const f = r.family as Row | null | undefined;
+  return {
+    paidKeys: ((r.paid_keys as string[] | null) ?? []).filter(Boolean),
+    prior: (r.prior as number | null) ?? 0,
+    attempt: a
+      ? {
+          orderId: a.id,
+          publicId: a.public_id,
+          familyId: a.family_id,
+          status: a.status,
+          amountCents: a.amount_cents,
+          paymentIntentId: a.payment_intent_id ?? null,
+          kids: a.kids ?? [],
+          referralCode: a.referral_code ?? null,
+        }
+      : null,
+    family: f
+      ? { familyId: f.family_id, familyPublicId: f.family_public_id, guardianId: f.guardian_id, customerId: f.customer_id ?? null }
+      : null,
+  };
+}
+
+async function findFamily(email: string, livemode: boolean): Promise<KnownFamily | null> {
+  const rows = await q(
+    `select g.id as guardian_id, f.id as family_id, f.public_id as family_public_id, f.stripe_customer_id
+       from s1_guardians g join s1_families f on f.id = g.family_id
+      where g.email = $1 and g.livemode = $2`,
+    [email.trim().toLowerCase(), livemode],
+  );
+  const r = rows[0];
+  return r
+    ? { familyId: r.family_id, familyPublicId: r.family_public_id, guardianId: r.guardian_id, customerId: r.stripe_customer_id ?? null }
+    : null;
+}
+
+/**
+ * upsertFamilyGuardian + insertKids + insertPendingOrder as ONE transaction
+ * (one round trip), with the same statements: a new family and guardian only
+ * when `family` is null (RT7: an existing guardian is never overwritten), the
+ * kids, then the pending order and its items. All or nothing. On a conflict
+ * (another request created the family, or a public id collided) it re-reads
+ * the family and retries with fresh ids, up to 3 tries; the attempt-key
+ * conflict (a double tap) is thrown at once, as before.
+ */
+export async function insertCommitRecords(input: {
+  family: KnownFamily | null;
+  email: string;
+  firstName?: string | null;
+  phone?: string | null;
+  livemode: boolean;
+  attribution?: unknown;
+  geo?: unknown;
+  kids: { firstName: string; age: number }[];
+  now: Date;
+  order: Omit<PendingOrderInput, "familyId" | "items" | "livemode" | "payerEmail">;
+  lines: { kidIndex: number; role: "first" | "sibling"; unitCents: number }[];
+}): Promise<{ fam: KnownFamily; kidIds: string[]; order: { orderId: string; publicId: string } }> {
+  const sql = getSql();
+  const email = input.email.trim().toLowerCase();
+  let fam = input.family;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) fam = await findFamily(email, input.livemode);
+    const isNew = !fam;
+    const famRow: KnownFamily = fam ?? {
+      familyId: randomUUID(),
+      familyPublicId: newPublicId(),
+      guardianId: randomUUID(),
+      customerId: null,
+    };
+    const kidIds = input.kids.map(() => randomUUID());
+    const orderId = randomUUID();
+    const publicId = newPublicId();
+    const o = input.order;
+    const stmts = [];
+    if (isNew) {
+      stmts.push(
+        sql.query(
+          `insert into s1_families (id, public_id, geo, attribution, livemode)
+           values ($1, $2, $3::jsonb, $4::jsonb, $5)`,
+          [famRow.familyId, famRow.familyPublicId, json(input.geo), json(input.attribution), input.livemode],
+        ),
+        sql.query(
+          `insert into s1_guardians (id, family_id, email, first_name, phone, livemode)
+           values ($1, $2, $3, $4, $5, $6)`,
+          [famRow.guardianId, famRow.familyId, email, input.firstName ?? null, input.phone ?? null, input.livemode],
+        ),
+      );
+    }
+    input.kids.forEach((k, i) =>
+      stmts.push(
+        sql.query(
+          `insert into s1_kids (id, family_id, first_name, first_name_key, age, age_given_at, livemode)
+           select $1::uuid, f.id, $3::text, $4::text, $5::int, $6::timestamptz, f.livemode from s1_families f where f.id = $2`,
+          [kidIds[i], famRow.familyId, k.firstName, foldName(k.firstName), k.age, input.now.toISOString()],
+        ),
+      ),
+    );
+    stmts.push(
+      sql.query(
+        `insert into s1_orders (id, public_id, family_id, payer_email, offer_id, offer_version, status,
+                                amount_cents, consent_version, consent_at, consent_ip, consent_ua,
+                                referral_code, src, livemode, attempt_id, payer_first_name, payer_phone,
+                                consent_xff, flags)
+         values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::text[])`,
+        [
+          orderId, publicId, famRow.familyId, email, o.offerId, o.offerVersion,
+          o.amountCents, o.consentVersion, o.consentAt.toISOString(), o.consentIp ?? null,
+          o.consentUa ?? null, o.referralCode ?? null, o.src ?? null, input.livemode,
+          o.attemptId ?? null, o.payerFirstName ?? null, o.payerPhone ?? null, o.consentXff ?? null,
+          o.flags ?? [],
+        ],
+      ),
+      ...input.lines.map((l) =>
+        sql.query(
+          `insert into s1_order_items (order_id, kid_id, role, unit_cents, livemode) values ($1,$2,$3,$4,$5)`,
+          [orderId, kidIds[l.kidIndex], l.role, l.unitCents, input.livemode],
+        ),
+      ),
+    );
+    try {
+      await sql.transaction(stmts);
+      return { fam: famRow, kidIds, order: { orderId, publicId } };
+    } catch (err) {
+      // A unique(payer_email, attempt_id, livemode) conflict will not clear on retry.
+      if (attempt === 2 || /s1_orders_attempt_key/.test(String((err as Error)?.message ?? ""))) throw err;
+    }
+  }
+  throw new Error("insertCommitRecords: unreachable");
+}
+
+/**
+ * setOrderPaymentIntent + issueViewToken in one statement. Returns the new
+ * view token (only its hash is stored).
+ */
+export async function setOrderPaymentIntentAndToken(
+  orderId: string,
+  piId: string,
+  piCreatedAt: Date,
+  jerseyEligible: boolean,
+): Promise<string> {
+  const token = newViewToken();
+  const rows = await q(
+    `update s1_orders set payment_intent_id = $2, pi_created_at = $3, jersey_eligible = $4, view_token_hash = $5
+      where id = $1 returning id`,
+    [orderId, piId, piCreatedAt.toISOString(), jerseyEligible, hashViewToken(token)],
+  );
+  if (!rows[0]) throw new Error("issueViewToken: order not found");
+  return token;
+}
+
 /** Stored Season 01 Customer id for the family, or null. */
 export async function getFamilyCustomerId(familyId: string): Promise<string | null> {
   const rows = await q(`select stripe_customer_id from s1_families where id = $1`, [familyId]);

@@ -145,7 +145,7 @@ describe("season1 money path (integration, Stripe test mode)", { skip: enabled ?
 
     const pi = await stripe.paymentIntents.retrieve(piId);
     assert.equal(pi.setup_future_usage, "off_session");
-    assert.deepEqual(pi.payment_method_types, ["card"]);
+    assert.deepEqual(pi.payment_method_types, ["card", "link"]);
     assert.equal(pi.amount, 10000);
     assert.equal(pi.currency, "usd");
     assert.equal(pi.description, "EKUZO Season 01 commitment");
