@@ -95,10 +95,12 @@ select.f{background-image:linear-gradient(45deg,transparent 50%,#999 50%),linear
 .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 #pe{min-height:44px}
 /* Wallet buttons (Express Checkout Element) above the card form. 10-29 (2): the block stays in the layout
-   (Stripe draws the buttons only once their frame is on screen; a 0-height clip kept them from ever drawing).
-   It closes when no wallet is available; the divider shows once a button has drawn. */
+   (Stripe draws the buttons only once their frame is scrolled on screen; the old 0-height clip kept them from
+   ever drawing). It opens, with room held for one row of buttons, as soon as a wallet is available; it closes
+   when none is, or when no button has drawn 3 s after the block came on screen (a blocked wallet script). */
 .xpw.none{display:none}
 .xpw.on{margin-top:20px}
+.xpw.on #xp{min-height:48px}
 .xpw .orpay{display:none}
 .xpw.on .orpay{display:flex}
 .orpay{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted)}
@@ -326,19 +328,28 @@ function initStripe(){
    device ('always', desktop Chrome and Safari included), then Link as a secondary button. Its own Elements group
    (card + link) so Link never reaches the card form. PayPal, Amazon Pay and Klarna off. Same commit flow and
    Apple Pay recurring request as the card. */
-var xpAvail=null,xpLabel='checking';
+var xpAvail=null,xpLabel='checking',xpFailed=false;
 function xpH(){return Math.round(g('xp').getBoundingClientRect().height)}
 function xpDiag(){
  if(cfg.mode!=='test')return;
  var d=g('xpDiag');if(!d){d=document.createElement('span');d.id='xpDiag';g('testBar').appendChild(d)}
  var h=xpH(),pm=xpAvail;
- d.textContent='Wallets: '+(pm===null?xpLabel:('applePay='+(pm.applePay?'yes':'no')+' googlePay='+(pm.googlePay?'yes':'no')+' link='+(pm.link?'yes':'no')))+' rendered='+(h>=40?'yes':'no')+' ('+h+'px) PaymentRequest='+(window.PaymentRequest?'yes':'no');
+ d.textContent='Wallets: '+(pm===null?xpLabel:('applePay='+(pm.applePay?'yes':'no')+' googlePay='+(pm.googlePay?'yes':'no')+' link='+(pm.link?'yes':'no')))+' rendered='+(h>=40?'yes':'no')+' ('+h+'px) PaymentRequest='+(window.PaymentRequest?'yes':'no')+(xpFailed?' closed=not-drawn':'');
 }
 function xpShow(){
- var w=g('xpWrap'),any=!!xpAvail&&(xpAvail.applePay||xpAvail.googlePay||xpAvail.link),drawn=xpH()>=40;
+ var w=g('xpWrap'),any=!!xpAvail&&(xpAvail.applePay||xpAvail.googlePay||xpAvail.link)&&!xpFailed;
  w.classList.toggle('none',xpAvail!==null&&!any);
- w.classList.toggle('on',any&&drawn);
+ w.classList.toggle('on',any);
  xpDiag();
+}
+/* Stripe draws the buttons when the frame is on screen. Once it has been on screen for 3 s with nothing drawn,
+   the block closes so a blocked wallet script never leaves an empty gap. */
+function xpWatch(){
+ if(!window.IntersectionObserver)return;
+ var t=null,io=new IntersectionObserver(function(es){
+  if(es[0]&&es[0].isIntersecting&&!t)t=setTimeout(function(){if(xpH()<40&&xpAvail){xpFailed=true;xpLabel='not drawn';xpShow()}io.disconnect()},3000);
+ });
+ io.observe(g('xp'));
 }
 function initExpress(){
  try{
@@ -365,6 +376,7 @@ function initExpress(){
   });
   xp.on('confirm',function(ev){var body=collect();if(!body){try{ev.paymentFailed({reason:'fail'})}catch(_){}return}pay(body,ev)});
   xp.mount('#xp');
+  xpWatch();
   xpDiag();
  }catch(_){g('xpWrap').classList.add('none');xpLabel='init failed';xpDiag()}
 }
