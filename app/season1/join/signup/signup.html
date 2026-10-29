@@ -318,13 +318,18 @@ function initStripe(){
    and Klarna off. No wallet on this device (in-app browsers, most desktops): the block stays collapsed
    and the card form is all the parent sees. Same commit flow and Apple Pay recurring request as the card. */
 var UA=navigator.userAgent||'',ON_IOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),ON_ANDROID=/Android/.test(UA);
+var xpAvail=false;
+function xpShow(){var h=g('xp').getBoundingClientRect().height;g('xpWrap').classList.toggle('on',xpAvail&&(h>=40||!window.ResizeObserver))}
 function initExpress(){
  try{
   xp=elements.create('expressCheckout',{
    paymentMethods:{applePay:ON_IOS?'always':'auto',googlePay:ON_ANDROID?'always':'auto',link:'never',paypal:'never',amazonPay:'never',klarna:'never'},
    buttonType:{applePay:'plain',googlePay:'plain'},buttonHeight:48,billingAddressRequired:false});
-  xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods,on=false;if(pm)Object.keys(pm).forEach(function(k){if(pm[k]&&pm[k].available)on=true});g('xpWrap').classList.toggle('on',on)});
-  xp.on('loaderror',function(){g('xpWrap').classList.remove('on')});
+  // Open the block only when a wallet is available AND its button has drawn (a wallet script blocked
+  // by the network or an extension would otherwise leave an empty gap above the divider).
+  xp.on('availablepaymentmethodschange',function(e){var pm=e&&e.paymentMethods;xpAvail=false;if(pm)Object.keys(pm).forEach(function(k){if(pm[k]&&pm[k].available)xpAvail=true});xpShow()});
+  xp.on('loaderror',function(){xpAvail=false;xpShow()});
+  try{new ResizeObserver(xpShow).observe(g('xp'))}catch(_){}
   xp.on('click',function(ev){
    if(busy)return;
    clearErrs();
