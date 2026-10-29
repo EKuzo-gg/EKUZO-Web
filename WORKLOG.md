@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie (via Claude), October 29, 2026 (runbook and learning-log docs; no code)
+
+- `docs/dev-runbook.md` and `docs/learning-log.md`: the 2026-10-12 additions (dev-integration branch
+  for a feature built on main; JSX space after an inline tag; `sizes` for a fixed-height cover image)
+  were committed on Jamie's local `main` (45bac22) and never pushed, so they are re-applied here.
+- `docs/dev-runbook.md`: the app-code check for a feature built on main now compares the release-to-
+  preview app diff with the existing main-to-dev diff; "Every test endpoint gets the event" added to
+  Local Payment Testing (signed local replay to prove webhook code before it reaches dev). Both
+  approved by Jamie 2026-10-29 (knowledge-base session 2026-10-27-nextjs-security-release).
+
+---
 ## Jamie (via Claude, Build Loop), October 27, 2026 (Next.js security release, branch `release/next-security`)
 
 Dependency-only release ahead of Season 01 (security review finding H1, decision D14). Built on
