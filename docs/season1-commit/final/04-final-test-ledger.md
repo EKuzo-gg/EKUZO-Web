@@ -58,8 +58,19 @@ Polled the branch deploy with J1's view cookie every 15 s; the refunded copy fir
 | R1 J1 refunded order (jevscw9fec) welcome | Static refunded page, no meta refresh, no share link, no GA purchase, console clean | "THIS ORDER WAS REFUNDED." with Questions and Text our founder. No `meta[http-equiv=refresh]`, no reload in 9 s, no share block or crew link, no gtag events in dataLayer and no `en=purchase` collect attempt, 0 console errors from our pages | R-retest-browser.json, screens/R1-J1-refunded-390.png, -1440.png | PASS |
 | R2 new two-kid order, then partial refund of the sibling | Paid view, no loop | Paid $180 (Ivy 11, Theo 13), order q5rdu354p2, code 36777976. `s1-refund --order q5rdu354p2 --kid Theo --apply` (test env, resolver flags) refunded $80 with metadata s1_kid_id; webhook `charge.refunded` recorded; order partially_refunded, Theo refunded, Ivy committed, code active; Stripe charge amount_refunded 8000. Welcome: "GREAT, IVY'S IN!", share block for Ivy's link, receipt, no meta refresh, no reload in 9 s, 0 console errors. The GA purchase did not refire (same browser storage, once per order as designed). New copy issue F10: the receipt still lists "Theo, Season 01, first month $80" with no refunded marker and the line reads "Then $288 a month for both kids from Feb 15." although only Ivy remains ($160) | R2-browser.json, R2-partial-refund-cli.txt, R2-after-partial-db.json, R2-after-partial-stripe.json, R-retest-browser.json, screens/R2-partial-390.png, -1440.png, R2-welcome-flow.png | PASS for F1 (no loop); F10 opened |
 
+## F10 retest (a8a1448), 2026-10-29 13:54 to 13:56 UTC
+
+No new payments. Polled with the q5rdu354p2 view cookie; "Theo, refunded" first served at 13:54:25 UTC. Same analytics guard (0 LEAK entries); each page held 9 s.
+
+| Check | Expected | Actual | Evidence | Result |
+|---|---|---|---|---|
+| R2 partial refund (q5rdu354p2) welcome, 390 and 1440 | "Theo, refunded" with struck $80; "Then $160 a month from Feb 15. About $20 a practice."; no "For your first kid."; console clean; no loop | Receipt lines "Ivy, Season 01, first month $100", "Theo, refunded $80" (the $80 is the only struck element), "Paid today $180"; then-line "Then $160 a month from Feb 15. About $20 a practice."; band shows no "For your first kid."; no meta refresh, no reload in 9 s, 0 console errors | F10-retest-browser.json, screens/F10-R2-partial-390.png, -1440.png | PASS |
+| Regression: J1 refunded (jevscw9fec), 390 | Still static refunded page | "THIS ORDER WAS REFUNDED.", no refresh, no reload, clean console | F10-retest-browser.json, screens/F10-J1-refunded-390.png | PASS |
+| Regression: J2 friend one kid (ncbznh28n2), 390 | "February is free with your friend's credit. Then $160 on Mar 15 and Apr 15." | Exact line present, "Friend credit recorded.", no refresh, clean console | F10-retest-browser.json, screens/F10-J2-friend-390.png | PASS |
+
 ## Not tested here
 
+- The new invited multi-kid line in a8a1448 ("Then $Y a month for both kids from Feb 15, less your friend's credit."): no invited two-kid order exists in this run and no new payment was asked for.
 - F1 fix states not exercised in a browser: canceled or failed order page, and the 2 minute pending cap (covered by route unit tests in 6efd3c7, not rerun here).
 - Live mode, production env vars and the live Stripe webhook (out of scope for a test-mode deploy).
 - Klaviyo receipt email (flow not live yet, per brief).
