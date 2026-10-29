@@ -101,6 +101,18 @@ Independent check of the WORKLOG entry "wallet order and speed" and `final/07-sp
 
 Not covered here (needs a real device): Google Pay and Apple Pay sheets, the Link button flow end to end, the wallet row on a slow real phone.
 
+## F11 and F12 retest (a008ce7), 2026-10-29 18:46 to 18:50 UTC
+
+Deploy confirmed serving the fix (`class="xpbox"` in the served sign-up page at 18:46:49 UTC). Same analytics guard, 0 LEAK entries. Two payments.
+
+| Check | Expected | Actual | Evidence | Result |
+|---|---|---|---|---|
+| F12 card number field position, 390 and 1440 | Does not move down when the wallet row opens, first paint to 6 s after load | Own probe every 50 ms: the card number input's page top reads 1017.8 px at 390 from the moment the card form drew (2.5 s) through Stripe's wallet report (`xpw on` at 4.3 s) to 6 s after load (2.5 s), and 1084.8 px at 1440 from 2.3 s through `on` at 3.6 s to 6 s after load. Range zero at both widths. The wallet block holds 86 to 87 px from first paint (placeholder before any card field exists) | f12-retest-probe.json | PASS |
+| F12 row scrolled into view | Buttons draw, nothing moves | Within about 90 ms of scrolling the row on screen the block gets `drawn`, Stripe's frame is 56 px, and Apple Pay, Google Pay and Link draw side by side above "Or pay with card"; the card number top stays 1017.8 / 1084.8. (This also answers F13 for this sandbox on a008ce7: the buttons now paint once on screen) | f12-retest-probe.json (`afterScrollTimeline`), screens/f12-retest-row-scrolled-390.png, -1440.png | PASS |
+| F11 returning family sibling (canary family, new kid Tam 13, 4242, 390) | "Then $128 more a month from Feb 15, at the sibling rate." | First tap 409 price_changed $80, second tap paid. Welcome: "Tam, Season 01, first month $80 / Paid today $80 / Then $128 more a month from Feb 15, at the sibling rate." Order sgyrgs2nvk paid 8000, item sibling 8000, same family 061c7dc8... and Customer cus_VX0n1Px1sn11iU, PI pi_3UVyMhKORcR8BUEx1l1iaiIM succeeded | ws-R11.json, f11-retest-checks.json, screens/ws-R11-welcome-390.png | PASS |
+| Regression: one-kid cold buyer (Ivo 12, 1440) | Line unchanged | "Then $160 a month from Feb 15. About $20 a practice." Order ux6hqtxuvj paid 10000, first 10000, PI pi_3UVyMwKORcR8BUEx0X6Vr8v2 succeeded | ws-R1cold.json, f11-retest-checks.json | PASS |
+| Regression: console and overflow, 390 and 1440 | Clean | Sign-up at 390 and 1440 (probe) and join, sign-up and welcome in both flows: 0 console errors from our pages, 0 px overflow. Only the browser's own "Failed to load resource 409" on the returning family's expected price_changed tap | f12-retest-probe.json, ws-R11.json, ws-R1cold.json | PASS |
+
 ## Not tested here
 
 - The new invited multi-kid line in a8a1448 ("Then $Y a month for both kids from Feb 15, less your friend's credit."): no invited two-kid order exists in this run and no new payment was asked for.

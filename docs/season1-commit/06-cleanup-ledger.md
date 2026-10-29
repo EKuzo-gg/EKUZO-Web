@@ -238,3 +238,14 @@ order 8t52updb4w paid, code 47447157), `...-ws-m3-5bc894@` (Cal, Eli 11, order f
 | payment_intent | pi_3UVy1LKORcR8BUEx0WWJC43t | declined (generic_decline), then canceled by Sentry | Wallet and speed: decline, order mpwufcn9mh |
 
 The four succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).
+
+F11 and F12 retest (same section, 2026-10-29 18:46 to 18:50 UTC, branch deploy with a008ce7). Neon rows: new kid Tam 13 on the canary family
+(`team+s1test-ft1029-c1-5bc894@ekuzo.gg`, order sgyrgs2nvk paid) and `team+s1test-ws-r1-5bc894@ekuzo.gg` (Gus, Ivo 12, order ux6hqtxuvj paid,
+code 24151208), with events, outbox rows and rate-limit keys.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVyMhKORcR8BUEx1l1iaiIM | succeeded $80 (not refunded) | F11 retest: returning family sibling (reused cus_VX0n1Px1sn11iU) |
+| payment_intent | pi_3UVyMwKORcR8BUEx0X6Vr8v2 | succeeded $100 (not refunded) | F11 and F12 retest: one-kid cold regression (cus_VX2RV9sa2hfaoE) |
+
+Both succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).

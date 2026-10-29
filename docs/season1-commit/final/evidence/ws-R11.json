@@ -1,0 +1,68 @@
+{
+  "label": "R11",
+  "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+  "commits": [
+    {
+      "at": 10857,
+      "status": 409,
+      "serverTiming": "db;dur=101.9;desc=\"2 queries\", dbfirst;dur=51.6, stripe;dur=0.0;desc=\"0 calls\", app;dur=118.3",
+      "body": {
+        "error": "price_changed",
+        "amountCents": 8000
+      }
+    },
+    {
+      "at": 11766,
+      "status": 200,
+      "serverTiming": "db;dur=87.4;desc=\"5 queries\", dbfirst;dur=18.7, stripe;dur=187.6;desc=\"1 calls\", app;dur=282.3",
+      "body": {
+        "clientSecret": "REDACTED",
+        "orderId": "sgyrgs2nvk",
+        "amountCents": 8000,
+        "invite": "none"
+      }
+    }
+  ],
+  "warm": [
+    {
+      "at": 1087,
+      "page": "/season1/join",
+      "method": "GET"
+    }
+  ],
+  "guardBlocked": 79,
+  "leaks": 0,
+  "console": [
+    {
+      "page": "R11",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "url": "https://season1-commit--ekuzo.netlify.app/api/season1/commit"
+    }
+  ],
+  "startHeading": "A COACH. A TEAM.\nA SEASON TO PLAY FOR.",
+  "warmBeforeTyping": 1,
+  "warmAfterTyping": 1,
+  "wallet": {
+    "cls": "xpw on drawn",
+    "wrapH": 87,
+    "xpH": 56,
+    "orpay": "flex",
+    "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+    "overflowX": 0
+  },
+  "clsSignup": [],
+  "cardFrame": {
+    "loaderNever": null,
+    "hasLink": false,
+    "text": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Di"
+  },
+  "xpFrameText": "Pay with",
+  "summary": "First month | $160 $100 | Founding jersey (first 100) | Free | Due today | $100 | Season 01 runs mid January to May 6, 2027. Your $100 covers January.",
+  "button": "Save Tam's spot · $100",
+  "priceChangedMsg": "Your total changed to $80. Tap again to pay.",
+  "buttonAfterChange": "Save their spot · $80",
+  "welcomeText": "Test mode. No real charges. Phone Desktop ‹ GREAT, TAM'S IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Tam's link season1-commit--ekuzo.netlify.app/crew/68556428 YOUR RECEIPT Tam, Season 01, first month $80 Paid today $80 Then $128 more a month from Feb 15, at the sibling rate. Order sgyrgs2nvk WHAT HAPPENS NEXT Late Nov Gamer profile, jersey and gear check Late Dec Meet the team and coach Dec 31 Lock-in. Full refund until then. Mid Jan First practice Mid Apr Season tournament May 6 Last practice HOW THIS DISCOUNT WORKS On your own $580 1 friend joins $420 2 friends $260 3 friends $100 4 friends Free",
+  "code": "68556428",
+  "order": "sgyrgs2nvk"
+}

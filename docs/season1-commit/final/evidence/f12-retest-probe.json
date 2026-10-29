@@ -1,0 +1,125 @@
+{
+  "runs": [
+    {
+      "width": 390,
+      "loadAtMs": 2481,
+      "timeline": [
+        {
+          "t": 686,
+          "cardNumberTop": null,
+          "xpw": "xpw",
+          "wrapH": 86
+        },
+        {
+          "t": 998,
+          "cardNumberTop": null,
+          "xpw": "xpw",
+          "wrapH": 87
+        },
+        {
+          "t": 2521,
+          "cardNumberTop": 1017.8,
+          "xpw": "xpw",
+          "wrapH": 87
+        },
+        {
+          "t": 4327,
+          "cardNumberTop": 1017.8,
+          "xpw": "xpw on",
+          "wrapH": 87
+        }
+      ],
+      "cardNumberTopRange": [
+        1017.8,
+        1017.8
+      ],
+      "firstCardTop": 1017.8,
+      "lastCardTop": 1017.8,
+      "beforeScroll": {
+        "t": 4327,
+        "cardNumberTop": 1017.8,
+        "xpw": "xpw on",
+        "wrapH": 87
+      },
+      "afterScrollTimeline": [
+        {
+          "t": 4,
+          "cardNumberTop": 1017.8,
+          "xpw": "xpw on",
+          "wrapH": 87
+        },
+        {
+          "t": 90,
+          "cardNumberTop": 1017.8,
+          "xpw": "xpw on drawn",
+          "wrapH": 87
+        }
+      ],
+      "xpFrameH": 56,
+      "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+      "overflowX": 0,
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "loadAtMs": 2126,
+      "timeline": [
+        {
+          "t": 541,
+          "cardNumberTop": null,
+          "xpw": "xpw",
+          "wrapH": 86
+        },
+        {
+          "t": 1130,
+          "cardNumberTop": null,
+          "xpw": "xpw",
+          "wrapH": 87
+        },
+        {
+          "t": 2268,
+          "cardNumberTop": 1084.8,
+          "xpw": "xpw",
+          "wrapH": 87
+        },
+        {
+          "t": 3620,
+          "cardNumberTop": 1084.8,
+          "xpw": "xpw on",
+          "wrapH": 87
+        }
+      ],
+      "cardNumberTopRange": [
+        1084.8,
+        1084.8
+      ],
+      "firstCardTop": 1084.8,
+      "lastCardTop": 1084.8,
+      "beforeScroll": {
+        "t": 3620,
+        "cardNumberTop": 1084.8,
+        "xpw": "xpw on",
+        "wrapH": 87
+      },
+      "afterScrollTimeline": [
+        {
+          "t": 32,
+          "cardNumberTop": 1084.8,
+          "xpw": "xpw on",
+          "wrapH": 87
+        },
+        {
+          "t": 86,
+          "cardNumberTop": 1084.8,
+          "xpw": "xpw on drawn",
+          "wrapH": 87
+        }
+      ],
+      "xpFrameH": 56,
+      "diag": "Wallets: applePay=yes googlePay=yes link=yes rendered=yes (56px) PaymentRequest=yes",
+      "overflowX": 0,
+      "consoleErrors": []
+    }
+  ],
+  "leaks": 0
+}

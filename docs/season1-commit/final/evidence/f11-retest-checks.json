@@ -1,0 +1,48 @@
+[
+  {
+    "public_id": "sgyrgs2nvk",
+    "status": "paid",
+    "amount_cents": 8000,
+    "payment_intent_id": "pi_3UVyMhKORcR8BUEx1l1iaiIM",
+    "family_id": "061c7dc8-4c17-4ec8-8dd7-69f2d85d4e16",
+    "stripe_customer_id": "cus_VX0n1Px1sn11iU",
+    "items": [
+      {
+        "k": "Tam",
+        "role": "sibling",
+        "unit": 8000,
+        "st": "committed"
+      }
+    ],
+    "pi": {
+      "status": "succeeded",
+      "amount": 8000,
+      "customer": "cus_VX0n1Px1sn11iU",
+      "product": "season1",
+      "livemode": false
+    }
+  },
+  {
+    "public_id": "ux6hqtxuvj",
+    "status": "paid",
+    "amount_cents": 10000,
+    "payment_intent_id": "pi_3UVyMwKORcR8BUEx0X6Vr8v2",
+    "family_id": "0e69ddcb-2abe-4c5c-8da7-327b32a5f2e9",
+    "stripe_customer_id": "cus_VX2RV9sa2hfaoE",
+    "items": [
+      {
+        "k": "Ivo",
+        "role": "first",
+        "unit": 10000,
+        "st": "committed"
+      }
+    ],
+    "pi": {
+      "status": "succeeded",
+      "amount": 10000,
+      "customer": "cus_VX2RV9sa2hfaoE",
+      "product": "season1",
+      "livemode": false
+    }
+  }
+]
