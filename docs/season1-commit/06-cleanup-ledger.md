@@ -194,3 +194,17 @@ Neon rows: email `team+s1test-canary-cf10291156@ekuzo.gg` (parent Mara, kids Jun
 |---|---|---|---|
 | payment_intent | pi_3UVwczKORcR8BUEx1chXqjzd | succeeded $180, card 4242 (`wallet: null`), not refunded | Canary fix end to end, two kids, order 54pymwd4hx (cus_VX0ek8LERsEczw) |
 | payment_intent | pi_3UVweIKORcR8BUEx0Ws3vVgc | requires_payment_method $100, never confirmed | Warm Server-Timing measurement, order frw9qxnrjk (pending) |
+
+Canary fixes check (same section, 2026-10-29 about 17:03 to 17:10 UTC, branch deploy with c4e1afc, f829fc8, ab5275e). Neon rows: emails
+`team+s1test-ft1029-c1-5bc894@ekuzo.gg` (Quinn, kid Nova 12; order kzxj7k6dus paid; the removed sibling Remy was never committed),
+`...-c2-5bc894@` (Ines, kid Sol 11; order paepgbzfh2 pending after the decline), `...-c4-5bc894@` (Vera, kid Kit 11; order jnspauyn8a paid,
+referral pending on code 18424530), `...-c3-5bc894@` (one 422 call, no rows), with families, codes 68556428 and 38311629, events, outbox rows
+and `s1pi:*` rate-limit keys. Klaviyo test profiles will exist for the c1 and c4 emails.
+
+| Object | Id | Final state | Purpose |
+|---|---|---|---|
+| payment_intent | pi_3UVwmIKORcR8BUEx0B2s5F3m | succeeded $100 (not refunded) | Canary check: persistence, one-kid end to end, draft cleared (cus_VX0n1Px1sn11iU) |
+| payment_intent | pi_3UVwnPKORcR8BUEx1eE30LmT | succeeded $100 (not refunded) | Canary check: friend link via /crew/18424530 (cus_VX0pNZvxqpFDxY) |
+| payment_intent | pi_3UVwmSKORcR8BUEx0aBoxEhC | declined (4000 0000 0000 0002), then canceled by Sentry | Canary check: busy state restore on error, order paepgbzfh2 |
+
+Both succeeded PIs also reached the unguarded legacy dev endpoint we_1TMYx4KORcR8BUExWqrM0dBF (same caveat as above).

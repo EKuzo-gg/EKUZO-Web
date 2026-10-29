@@ -1,0 +1,12 @@
+/bin/bash: line 1: uuidgen: command not found
+HTTP/1.1 200 Connection Established
+HTTP/2 422 
+server-timing: db;dur=0.0;desc="0 queries", dbfirst;dur=0.0, stripe;dur=0.0;desc="0 calls", app;dur=1.0
+x-frame-options: DENY
+{"field":"kids.0.age","error":"age_outside"}
+HTTP/1.1 200 Connection Established
+HTTP/2 422 
+server-timing: db;dur=0.0;desc="0 queries", dbfirst;dur=0.0, stripe;dur=0.0;desc="0 calls", app;dur=0.7
+x-frame-options: DENY
+{"field":"email","error":"invalid"}
+var AGES=[9,10,11,12,13,14,15,16,17]

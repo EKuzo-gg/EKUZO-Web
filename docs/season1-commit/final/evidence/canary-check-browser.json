@@ -1,0 +1,220 @@
+{
+  "console": [
+    {
+      "page": "B",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 402 (Payment Required)",
+      "url": "https://api.stripe.com/v1/payment_intents/pi_3UVwmSKORcR8BUEx0aBoxEhC/confirm"
+    }
+  ],
+  "timing": [
+    {
+      "label": "A",
+      "status": 200,
+      "serverTiming": "db;dur=1009.7;desc=\"14 queries\", dbfirst;dur=656.2, stripe;dur=387.9;desc=\"2 calls\", app;dur=1425.2, cold;desc=\"first request on this function instance\"",
+      "xfo": "DENY"
+    },
+    {
+      "label": "B",
+      "status": 200,
+      "serverTiming": "db;dur=300.3;desc=\"14 queries\", dbfirst;dur=45.7, stripe;dur=378.3;desc=\"2 calls\", app;dur=708.4, cold;desc=\"first request on this function instance\"",
+      "xfo": "DENY"
+    }
+  ],
+  "steps": {
+    "joinOfferThen": "Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice.",
+    "filled": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": true
+    },
+    "summaryTwoKids": "Nova, first month\n$160 $100\nRemy, first month\n$100 $80\nFounding jersey (first 100)\nFree\nDue today\n$180\nSeason 01 runs mid January to May 6, 2027. Your $180 covers January.",
+    "peFrameText": "Card number Visa Mastercard American Express Discover Supported cards include Visa, Mastercard, American Express, and Discover. ​ Expiration date ​ Security code 3-digit code on back of card ​ Country Select Afghanistan Åland Islands Albania Algeria Andorra Angola Anguilla Antarctica Antigua & Barbuda Argentina Armenia Aruba Ascension Island Australia Austria Azerbaijan Bahamas Bahrain Bangladesh ",
+    "peHasLink": false,
+    "frames": [
+      "https://js.stripe.com/v3/controller-with-preconnect-f70421c16e93250bfc4cd314cc0ccf95.html",
+      "https://js.stripe.com/v3/elements-inner-loader-ui-280e7e9f8576e8efb0a97b8da9716574.html",
+      "https://js.stripe.com/v3/elements-inner-accessory-target-9f5295f59c1a51099a7a581ec0080c66.html",
+      "https://js.stripe.com/v3/elements-inner-accessory-target-9f5295f59c1a51099a7a581ec0080c66.html",
+      "https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html",
+      "https://js.stripe.com/v3/hcaptcha-invisible-958211fd0bbfc01588e6b70f4697cd72.html",
+      "https://b.stripecdn.com/stripethirdparty-srv/assets/v36.1/GooglePay.html",
+      "https://b.stripecdn.com/stripethirdparty-srv/assets/v36.1/HCaptchaInvisible.html",
+      "https://m.stripe.network/inner.html",
+      "https://newassets.hcaptcha.com/captcha/v1/3b71cbe0d677f40e17dc54f11aed7a067d3e1066/static/hcaptcha.html"
+    ],
+    "layout1440": {
+      "wrapHeight": 0,
+      "orpayVisible": false,
+      "gapTermsToCard": 8,
+      "overflowX": 0
+    },
+    "afterBackLinkThenCta": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": false
+    },
+    "afterBrowserBackForward": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": false
+    },
+    "afterBackLinkThenBrowserBack": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": false
+    },
+    "afterReload": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": false
+    },
+    "afterFreshGoto": {
+      "kids": [
+        {
+          "n": "Nova",
+          "a": "12"
+        },
+        {
+          "n": "Remy",
+          "a": "10"
+        }
+      ],
+      "pname": "Quinn",
+      "email": "team+s1test-ft1029-c1-5bc894@ekuzo.gg",
+      "mob": "555 0100",
+      "terms": false
+    },
+    "summaryOneKid": "First month\n$160 $100\nFounding jersey (first 100)\nFree\nDue today\n$100\nSeason 01 runs mid January to May 6, 2027. Your $100 covers January.",
+    "clickToWelcomeMs": 4944,
+    "welcomeText": "Test mode. No real charges. Phone Desktop ‹ GREAT, NOVA'S IN! Your receipt is on its way to your inbox. SHARE AND SAVE! Each friend who joins with your link gets a free month, and so do you. Share Nova's link season1-commit--ekuzo.netlify.app/crew/68556428 YOUR RECEIPT Nova, Season 01, first month $100 Paid today $100 Then $160 a month from Feb 15. About $20 a practice. Order kzxj7k6dus WHAT HAPPENS NEXT Late Nov Gamer profile, jersey and gear check Late Dec Meet the team and coach Dec 31 Lock-in. Full refund until then. Mid Jan First practice Mid Apr Season tournament May 6 Last practice HOW ",
+    "draftAfterWelcome": null,
+    "signupAfterPayment": {
+      "kids": [
+        {
+          "n": "",
+          "a": ""
+        }
+      ],
+      "pname": "",
+      "email": "",
+      "mob": "",
+      "terms": false
+    },
+    "layout390": {
+      "wrapHeight": 0,
+      "orpayVisible": false,
+      "gapTermsToCard": 8,
+      "overflowX": 0
+    },
+    "summary390": "First month\n$160 $100\nFounding jersey (first 100)\nFree\nDue today\n$100\nSeason 01 runs mid January to May 6, 2027. Your $100 covers January.",
+    "busy": {
+      "before": "Save Sol's spot · $100",
+      "sync": {
+        "text": "Saving their spot...",
+        "disabled": true,
+        "busy": "true",
+        "spinner": true,
+        "ms": 36.3
+      },
+      "after": {
+        "text": "Save Sol's spot · $100",
+        "disabled": false,
+        "err": "Your card has been declined.",
+        "busy": "false"
+      }
+    },
+    "pages": [
+      {
+        "path": "/season1/join",
+        "w": 390,
+        "errors": 0,
+        "overflowX": 0,
+        "offerThen": "Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice."
+      },
+      {
+        "path": "/season1/join/signup",
+        "w": 390,
+        "errors": 0,
+        "wrapHeight": 0,
+        "orpayVisible": false,
+        "gapTermsToCard": 8,
+        "overflowX": 0
+      },
+      {
+        "path": "/season1/join",
+        "w": 1440,
+        "errors": 0,
+        "overflowX": 0,
+        "offerThen": "Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice."
+      },
+      {
+        "path": "/season1/join/signup",
+        "w": 1440,
+        "errors": 0,
+        "wrapHeight": 0,
+        "orpayVisible": false,
+        "gapTermsToCard": 8,
+        "overflowX": 0
+      }
+    ]
+  },
+  "leaks": 0,
+  "guardBlocked": 328,
+  "consoleNote": "Stripe.js \"Origin trial controlled feature not enabled\" warnings removed from this list (third-party noise)"
+}

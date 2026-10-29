@@ -1,0 +1,19 @@
+{
+  "label": "canary-C1",
+  "id": "pi_3UVwmIKORcR8BUEx0B2s5F3m",
+  "status": "succeeded",
+  "amount": 10000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "kzxj7k6dus",
+    "product": "season1"
+  },
+  "customer": "cus_VX0n1Px1sn11iU",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVwmIKORcR8BUEx0PK0pPEf",
+  "amount_refunded": 0,
+  "refunded": false,
+  "card_last4": "4242"
+}

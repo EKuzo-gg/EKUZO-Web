@@ -1,0 +1,19 @@
+{
+  "label": "canary-C4friend",
+  "id": "pi_3UVwnPKORcR8BUEx1eE30LmT",
+  "status": "succeeded",
+  "amount": 10000,
+  "livemode": false,
+  "metadata": {
+    "livemode": "false",
+    "offer_version": "s1-commit-v1",
+    "order_id": "jnspauyn8a",
+    "product": "season1"
+  },
+  "customer": "cus_VX0pNZvxqpFDxY",
+  "setup_future_usage": "off_session",
+  "charge": "ch_3UVwnPKORcR8BUEx1QpPZjGx",
+  "amount_refunded": 0,
+  "refunded": false,
+  "card_last4": "4242"
+}

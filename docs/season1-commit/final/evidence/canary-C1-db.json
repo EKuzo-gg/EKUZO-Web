@@ -1,0 +1,83 @@
+{
+  "label": "canary-C1",
+  "order": {
+    "public_id": "kzxj7k6dus",
+    "status": "paid",
+    "amount_cents": 10000,
+    "consent_version": "s1-terms-2026-10-29",
+    "livemode": false,
+    "flags": [],
+    "src": null,
+    "referral_code": null,
+    "payment_intent_id": "pi_3UVwmIKORcR8BUEx0B2s5F3m",
+    "paid_at": "2026-10-29T17:06:16.569Z",
+    "family_id": "061c7dc8-4c17-4ec8-8dd7-69f2d85d4e16",
+    "offer_version": "s1-commit-v1",
+    "jersey_eligible": true
+  },
+  "items": [
+    {
+      "first_name": "Nova",
+      "age": 12,
+      "status": "committed",
+      "role": "first",
+      "unit_cents": 10000
+    }
+  ],
+  "codes": [
+    {
+      "code": "68556428",
+      "type": "family",
+      "status": "active"
+    }
+  ],
+  "referrals": [],
+  "events": [
+    {
+      "at": "2026-10-29T17:06:16.737Z",
+      "source": "fulfil",
+      "type": "order.paid",
+      "subject": "kzxj7k6dus",
+      "data": {
+        "via": "welcome",
+        "amount_cents": 10000,
+        "payment_intent": "pi_3UVwmIKORcR8BUEx0B2s5F3m"
+      }
+    },
+    {
+      "at": "2026-10-29T17:06:17.006Z",
+      "source": "webhook",
+      "type": "payment_intent.succeeded",
+      "subject": "pi_3UVwmIKORcR8BUEx0B2s5F3m",
+      "data": {
+        "amount": 10000,
+        "status": "succeeded",
+        "order_ref": "kzxj7k6dus",
+        "decline_code": null
+      }
+    }
+  ],
+  "outbox": [
+    {
+      "kind": "klaviyo_committed",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T17:06:17.107Z"
+    },
+    {
+      "kind": "meta_purchase",
+      "status": "sent",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T17:06:17.110Z"
+    },
+    {
+      "kind": "discord_commit",
+      "status": "skipped_no_config",
+      "attempts": 1,
+      "last_error": null,
+      "updated_at": "2026-10-29T17:06:16.968Z"
+    }
+  ]
+}
