@@ -33,6 +33,22 @@ Re-run `git log --oneline -1` on each before acting.
 1. ~~Neon plan~~ Settled 16:32: Jamie bought "Free + limit increase" ($10 a month).
 2. Netlify Functions region us-east-1 vs Neon us-east-2 (about 60 to 100 ms per commit); needs Netlify Pro. Recommendation: not now.
 
+## Analytics gap (read 10-29 16:50, first build of the next session, before the 11-02 ad batch points at /season1/join)
+
+The Season 01 pages (join, sign-up, crew, welcome) are standalone HTML, so the site layout's Meta Pixel and Clarity never load on them. What exists:
+- GA4 G-8LM45PX53W on all four: season1_join_view, season1_signup_view, sibling and invite events, season1_pay_submit, and purchase (transaction_id = order id) on the welcome page. But `page_location` is set to origin + pathname, so utm_* and gclid are stripped and GA4 cannot split by campaign.
+- Meta Conversions API Purchase from the server (live; canary sent): hashed email, hashed family id, IP, user agent, event_id = order id. No fbp or fbc, because nothing captures them; no browser Pixel to pair with.
+- Order attribution: only `src` from `?src=` (karlin, email, friend, ad, direct), sent to Klaviyo. No UTM campaign or ad id; the first-touch `ekuzo_origin` cookie is set by middleware but not written to the order (outboxLoad reads attribution.origin, commit never writes it).
+- Clarity: not on join, sign-up, crew or welcome.
+
+Build (one Build Loop round, small):
+1. Meta Pixel on the four pages: PageView; ViewContent on join; InitiateCheckout on sign-up at pay submit; Purchase on welcome with eventID = order id so Meta de-duplicates against the server event.
+2. Capture `_fbp`, `_fbc` (or build fbc from fbclid), utm_source/medium/campaign/content/term and `ekuzo_origin` at commit into `s1_families.attribution`; pass fbp/fbc to CAPI; utm_campaign and utm_content to the Klaviyo event.
+3. GA4 page_location: keep utm_*, gclid, fbclid; drop every other query parameter (no kid data in URLs).
+4. Clarity (wml8wll5ua) on join and sign-up with form fields masked; check the welcome page shows no kid names to Clarity or mask it.
+5. Ad URLs for the 11-02 batch: /season1/join?src=ad&utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}.
+6. Verify in Meta Events Manager (Test Events) and GA4 DebugView on the branch deploy; F2 (test deploy fires live GA4 and Ads tags) fixed in the same round.
+
 ## Fast follow (not today)
 
 - Klaviyo: list orchestration across tracks; day-2 crew email after payment; "Season 01 is open" send to the ~244 and the offer email inside the nurture; segment "season1_status is set"; Friend Joined and Refunded flows; SBCrTc plain-text part still says 9 to 18 (needs flows:write or the UI).
