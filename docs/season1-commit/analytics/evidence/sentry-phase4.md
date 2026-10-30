@@ -112,3 +112,47 @@ Other:
 - Stripe: one succeeded PI per paid order, and none extra (`sentry4/stripe-reads.log`).
 - Klaviyo: Committed test events on the `team+s1test` profiles.
 - Commit calls: 11 over three rate windows (4, 5, 2), no 429.
+
+## Re-run at 76bf25e
+
+Targeted re-run for the lead, under the same rules: test mode, read-only DB, evidence only. Code under test is 76bf25e. The branch head is 0b59110, which differs from 76bf25e only in `05-handoff.md`.
+
+**Deploy check:** the crew route HTML had no `googletagmanager` and no QA gate from 16:26:30 UTC; all runs started after that. Sign-up serves `CHECKING_MSG` and `WELCOME_HOLD_MS=3000`, and join queues `gtag('set', …)` before `config`.
+
+**Files:** logs in `sentry4/rerun-76bf25e/rerun-76bf25e.json` (redacted), Stripe reads in `sentry4/rerun-76bf25e/stripe-reads.log`, screenshots in `sentry4/rerun-76bf25e/shots/`, scripts in `sentry4/scripts/r2-*`.
+
+| # | Check | Observed | Result |
+|---|---|---|---|
+| 1 | Crew `/crew/44245013?utm_source=sms`, with and without the flag, at 390 and 1440 | 0 vendor requests in all 4 runs. `typeof gtag`, `fbq` and `clarity` are all `undefined`. 0 page errors, 0 console errors. The join tap (`a.join`) lands on `/season1/join/signup`. With the flag, sign-up still loads its tags (12 vendor requests) | PASS |
+| 2 | Google Ads hits on join, sign-up and welcome, plus a grep of every vendor request | There were 51 Ads hits (`ccm/collect` and `/measurement/conversion`). Their `dl`/`url` values are only the bare paths `/season1/join`, `/season1/join/signup` and `/season1/join/welcome`, and `dr` is the origin. The join used for this test was opened with `kid=Calvorne&email=a@b.c&fbclid=abc`. **Must-not grep over 224 vendor requests:** kid names, parent name, test emails, `a@b.c`, `kid=`, `email=`, `payment_intent`, `_secret_`, `pi_3`, `/crew/<code>`, family codes, `s1_order`, `s1_ref`. **0 hits** | PASS |
+| 3a | R14, real 409 `in_progress` in the browser (390) | **Setup:** tap 1 commits; Stripe.js confirm is blocked on the client; the page reloads (same `s1_attempt`); the PI is confirmed through the Stripe test API, standing in for another tab; then the parent taps. **Server:** 409 `{"error":"in_progress"}` with an `s1_order` cookie. **Note:** after 0.7 s, "Your payment is on its way. Taking you to your confirmation." shows in `#payNote` (`rgb(51,51,51)` on `rgb(239,238,237)`). `#formErr` is empty, and `#liveErr` (`role=status`, `aria-live=polite`) holds the same text. The button stays `disabled`, `aria-busy=true`, "Saving their spot...". **Then:** 4.0 s from note to the welcome load event (3 s hold plus page load), "Great, Fennimore's in!". **Stripe:** 1 PI, succeeded | PASS |
+| 3b | R14, back and retap in the browser (1440) | **Flow:** pay; the welcome navigation is interrupted; Back (`back_forward`); Stripe re-mounts the card, so it is refilled and terms re-ticked; retap 4.6 s after the confirm. **Server:** by then the webhook had marked the order paid, so it answered 409 `duplicate_kid`. **Client:** the confirmed flag was set, so it showed "Checking on your payment. Taking you to your confirmation." in the grey note box (polite, button busy), then the paid welcome, "Great, Calvorne's in!". **Stripe:** 1 PI, succeeded | PASS (see note A) |
+| 3c | R14, forced ambiguous case | **Flow:** pay; the welcome navigation is interrupted; Back; the retap's commit fetch is aborted by route interception. **Note:** after 0.23 s, "Checking on your payment. Taking you to your confirmation." in the grey note box, polite region, button busy. **Then:** 4.0 s to the paid welcome, "Great, Dremmick's in!". **Stripe:** 1 PI, succeeded | PASS |
+| 3d | Decline 4000000000000002, then retap | **Tap 1:** "Your card has been declined." **Retap:** "Your card was declined." Both times the note is hidden, the button is released and the page stays on sign-up. **Stripe:** `requires_payment_method` | PASS |
+| 4 | Age select mask | `select.ag` has `data-clarity-mask="true"` in all 4 sign-up loads | PASS |
+| 5 | sessionStorage after a paid welcome | 3a, 3b and 3c each leave only `_cltk`, `s1_warm_at` and `s1_card_open`. There is no `s1_attempt`, `s1_confirmed_*` or `s1_ic_*` | PASS |
+| 6 | R2 regression with no flag, at 390 and 1440 | Join (with utms), sign-up, welcome (paid, through the order cookie), thanks and `/season1` each made 0 vendor requests, with 0 page errors | PASS |
+| 7 | `npm run test:s1` at 0b59110 (= 76bf25e code) | `1..83`, tests 342, pass 342, fail 0 | PASS |
+
+On sign-up, the only console errors are the browser's own resource lines for the expected answers. 3a and 3b log a 409, and 3c logs `ERR_FAILED` from the aborted fetch. There are no page errors.
+
+**Note A, informational, no defect.** In a real browser, Back and retap takes about 4 to 5 s, because Stripe re-mounts the card and the terms box is not restored. The webhook marks the order paid within about 0.5 to 2 s. So a parent who goes back and retaps will usually see "Checking on your payment" (server `duplicate_kid`) rather than "on its way" (server `in_progress`). Both land on the paid welcome, and both strings are honest for the answer the server gave.
+
+**Defects:** none at 76bf25e.
+
+**Still open:**
+- The Pixel network rows remain blocked by the Pixel's traffic permissions.
+- Crew has no GA4 while `CREW_GA4=false`. Turning it back on needs the Ads destination unlinked first.
+
+**Test data:** paid orders and the declined order, each with exactly one PI as listed in `rerun-76bf25e/stripe-reads.log`:
+
+| Order | Email | Status |
+|---|---|---|
+| auazvq9qxz | `-inprog-4bddae` | paid |
+| mgqsxndabs | `-inprog-415a80` | paid; that run stopped because terms were not re-ticked |
+| 5yghccvfyy | `-inprog-87217d` | paid |
+| g6y3k49pc5 | `-ambig-fdc423` | paid |
+| zmvxwsef82 | `-inprog409-eca35c` | paid |
+| pynpyyyc5c | `-decline-b6a42f` | declined, pending |
+
+The emails are `team+s1test-sentry4r2-…@ekuzo.gg`. There were 7 commit calls and no 429.
