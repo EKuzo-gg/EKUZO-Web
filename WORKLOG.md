@@ -261,6 +261,7 @@ Branch `season1-commit`. Spec: `docs/season1-commit/final/02-decisions.md` (Jami
 
 - **New Klaviyo draft template `VYzgSh`, "Season 01 · Sign-ups open (waitlist)":** a one-time campaign for the Season 01 Waitlist list. It's the season page in email form: "Sign-ups are open." hero, free-jersey strip, $100 first month with the struck $160, crew art tearing into a black band with the four stats, the friends line, and Karlin's sign-off. Both buttons link to `/season1/join?src=email`, so orders are attributed to email. Not sent, and no campaign created yet.
 - New email asset: `public/images/season1/email/header-crew-black@2x.jpg` (crew art with a black tear, uploaded to Klaviyo).
+- **Rev 2 (same day):** the headline is now "Early access" on one line at every width down to 320px, with Aaron's intro copy. The free-jersey and price card is centered. The kid collage is replaced by the Season 01 champion splash, cut out to a transparent PNG (`hero-splash@2x.png`) with a black torn edge into the stats band (`tear-black-top@2x.png`). Section headlines are shortened to fit one line ("Same squad. All season.", "Better with friends."). Day/night: `color-scheme: light only` keeps Apple Mail on the light design, and Outlook.com overrides pin the brand colors. Template renamed "Season 01 · Early access (waitlist)".
 
 ## Aaron (via Claude), October 28, 2026 (full QA + go-live handoff)
 
