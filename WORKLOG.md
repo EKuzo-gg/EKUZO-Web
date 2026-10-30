@@ -7,7 +7,7 @@
 ---
 ## Jamie's Claude, 2026-10-30: Season 01 analytics build, discovery
 
-Started the analytics and attribution build (session prompt `knowledge-base/explorations/2026-10-26-season1-commit-invite/18-session-prompt-analytics.md`). Scout's read-only map is in `docs/season1-commit/analytics/00-scout-map.md`. No code changed yet; plan and questions are with Jamie.
+Started the analytics and attribution build (session prompt `knowledge-base/explorations/2026-10-26-season1-commit-invite/18-session-prompt-analytics.md`). Scout's read-only map is in `docs/season1-commit/analytics/00-scout-map.md`. Jamie answered at 09:38 (decisions D1 to D7 in `docs/season1-commit/analytics/01-requirements.md`, the phase 1 draft spec now with the red team). No code changed yet.
 
 ## Jamie's Claude, 2026-10-29: Season 01 live, session close
 
