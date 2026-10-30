@@ -5,6 +5,15 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: double-charge hotfix
+
+Branch `season1-commit`. Server-only hotfix for money red-team findings 1 and 3 (`docs/season1-commit/analytics/02-redteam-money.md`). No client, copy, pricing, invite, credit, webhook, fulfil or HTML change.
+
+- **Commit attempt loop** (`app/api/season1/commit/route.ts`): the attempt's PaymentIntent is now read before the same/changed split. If it is `processing`, `succeeded` or `requires_capture`, the route returns 503 `try_again` whatever changed, and the PI and the order are left alone. Before, changed details canceled a paid order and charged again. The order is canceled only after Stripe's cancel succeeds, or when the PI is already canceled or missing. A failed cancel or retrieve returns 503 `try_again` with the order still pending.
+- **Email-wide guard:** before a new order and PI, the route checks this email's other pending orders from the last 24 h that have a PI (newest 4, read in the same `commitPrecheck` query, so no extra DB round trip; Stripe reads are parallel and timed). If any is in flight, it returns 503 `try_again` with no cookie and no order data. This stops a reload or second tab from paying twice while fulfil catches up.
+- **Tests:** new `lib/season1/__tests__/commitDoubleCharge.test.ts` (11). `npm run test:s1` 225 of 225 (was 214). `tsc --noEmit` and eslint clean. The new SQL was run on a local Postgres 16 with all repo migrations. The integration suites were not run (no Neon or Stripe test key here).
+- **Still open:** the client still says "Your card was not charged" on this 503 (fixed by the F15 `in_progress` work). A `requires_action` PI in another tab does not block. A tab holding a cached client secret can still confirm. Details: `docs/season1-commit/analytics/evidence/hotfix-double-charge.md`.
+
 ## Jamie's Claude, 2026-10-30: Season 01 analytics build, discovery
 
 Started the analytics and attribution build (session prompt `knowledge-base/explorations/2026-10-26-season1-commit-invite/18-session-prompt-analytics.md`). Scout's read-only map is in `docs/season1-commit/analytics/00-scout-map.md`. Jamie answered at 09:38 (decisions D1 to D7 in `docs/season1-commit/analytics/01-requirements.md`, the phase 1 draft spec now with the red team). No code changed yet.

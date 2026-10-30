@@ -19,6 +19,7 @@ import {
   insertCommitRecords,
   insertEvent,
   issueViewToken,
+  PENDING_PI_LOOKBACK,
   setFamilyCustomerId,
   setOrderPaymentIntentAndToken,
   setPendingOrderReferralCode,
@@ -47,7 +48,29 @@ export const LIMITS = {
 } as const;
 
 const REUSABLE_PI = new Set(["requires_payment_method", "requires_confirmation", "requires_action"]);
+/** Hotfix 10-30: a PI in one of these states is charging or has charged; it is never canceled or replaced. */
+const IN_FLIGHT_PI = new Set(["processing", "succeeded", "requires_capture"]);
 const MAX_BODY = 16_000;
+
+/**
+ * Hotfix 10-30: the first in-flight status among these PaymentIntents, or null.
+ * Bounded by the caller (PENDING_PI_LOOKBACK), read in parallel, each timed as
+ * stripe. A PI Stripe does not have counts as not in flight; any other error throws.
+ */
+async function firstInFlight(stripe: Stripe, piIds: string[]): Promise<string | null> {
+  const statuses = await Promise.all(
+    piIds.map((id) =>
+      timed("stripe", () => stripe.paymentIntents.retrieve(id)).then(
+        (pi) => pi.status as string,
+        (e) => {
+          if (errCode(e) === "resource_missing") return "missing";
+          throw e;
+        },
+      ),
+    ),
+  );
+  return statuses.find((s) => IN_FLIGHT_PI.has(s)) ?? null;
+}
 
 function json(body: unknown, status = 200, headers?: HeadersInit): Response {
   const h = new Headers(headers);
@@ -278,26 +301,39 @@ async function handle(req: Request): Promise<Response> {
     const sig = kidsSignature(input.kids);
 
     // RT3: reuse the attempt's PI when nothing changed.
+    // Hotfix 10-30 (red team money 1): the attempt's PI is read before the same/changed
+    // split. A PI that is paying or paid is never canceled and never replaced, whatever
+    // changed; the order is canceled only once Stripe says its PI cannot charge.
+    const handled = new Set<string>();
     let { key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode, pre.attempt);
     for (let wait = 0; existing && existing.status === "pending"; wait++) {
       ref = existing.publicId;
       const same = existing.amountCents === q.totalCents && kidsSignature(existing.kids) === sig;
-      if (same && existing.paymentIntentId) {
+      let pi: Stripe.PaymentIntent | null = null;
+      if (existing.paymentIntentId) {
         const piId = existing.paymentIntentId;
-        const pi = await timed("stripe", () => stripe.paymentIntents.retrieve(piId));
-        if (REUSABLE_PI.has(pi.status) && pi.client_secret) {
-          // Slice 2: the invite is re-evaluated on every call; the amount never depends on it.
-          if (existing.referralCode !== inv.code) await setPendingOrderReferralCode(existing.orderId, inv.code);
-          await recordIgnored(inv, existing.publicId, livemode);
-          const token = await issueViewToken(existing.orderId);
-          logStep("commit.reuse", ref, true);
-          return ok(pi.client_secret, existing.publicId, existing.amountCents, token, inv);
+        try {
+          pi = await timed("stripe", () => stripe.paymentIntents.retrieve(piId));
+        } catch (e) {
+          // A PI Stripe does not have cannot charge; any other error: we cannot tell, so stop.
+          if (errCode(e) !== "resource_missing") {
+            logStep("commit.attempt_pi", ref, false, errCode(e));
+            return json({ error: "try_again" }, 503);
+          }
         }
-        if (pi.status === "processing" || pi.status === "succeeded") {
-          // Already paying: never mint a second charge for the same attempt.
-          logStep("commit.reuse", ref, false, `pi_${pi.status}`);
+        if (pi && IN_FLIGHT_PI.has(pi.status)) {
+          // Already paying or paid: never mint a second charge for the same attempt.
+          logStep("commit.attempt_in_flight", ref, false, `pi_${pi.status}`);
           return json({ error: "try_again" }, 503);
         }
+      }
+      if (same && pi && REUSABLE_PI.has(pi.status) && pi.client_secret) {
+        // Slice 2: the invite is re-evaluated on every call; the amount never depends on it.
+        if (existing.referralCode !== inv.code) await setPendingOrderReferralCode(existing.orderId, inv.code);
+        await recordIgnored(inv, existing.publicId, livemode);
+        const token = await issueViewToken(existing.orderId);
+        logStep("commit.reuse", ref, true);
+        return ok(pi.client_secret, existing.publicId, existing.amountCents, token, inv);
       }
       if (same && !existing.paymentIntentId && wait < 6) {
         // A concurrent request (double tap) is still creating the PI.
@@ -305,18 +341,44 @@ async function handle(req: Request): Promise<Response> {
         ({ key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode));
         continue;
       }
-      // Changed (or its PI is gone): cancel the old PI (errors ignored) and the order.
-      const oldPiId = existing.paymentIntentId;
-      if (oldPiId) {
+      // Changed (or its PI is gone): cancel the old PI; the order follows only when that succeeded.
+      if (pi && pi.status !== "canceled") {
+        const oldPiId = pi.id;
+        let canceled = false;
         try {
-          await timed("stripe", () => stripe.paymentIntents.cancel(oldPiId));
+          const c = await timed("stripe", () => stripe.paymentIntents.cancel(oldPiId));
+          canceled = c.status === "canceled";
         } catch (e) {
           logStep("commit.cancel_old_pi", ref, false, errCode(e));
+          return json({ error: "try_again" }, 503);
+        }
+        if (!canceled) {
+          logStep("commit.cancel_old_pi", ref, false, "not_canceled");
+          return json({ error: "try_again" }, 503);
         }
       }
       await cancelOrder(existing.orderId);
+      handled.add(existing.orderId);
       logStep("commit.cancel_old_order", ref, true);
       ({ key: attemptKey, existing } = await resolveAttempt(input.email, attemptId, livemode));
+    }
+
+    // Hotfix 10-30 (red team money 3): a reload or a second tab is a new attempt. If any
+    // other recent pending order for this email is paying or paid, stop before a new
+    // order and PI. No view cookie and no order data on this answer.
+    const others = pre.pendingPis.filter((o) => !handled.has(o.orderId)).slice(0, PENDING_PI_LOOKBACK);
+    if (others.length) {
+      let busyStatus: string | null;
+      try {
+        busyStatus = await firstInFlight(stripe, others.map((o) => o.paymentIntentId));
+      } catch (e) {
+        logStep("commit.email_pi", ref, false, errCode(e));
+        return json({ error: "try_again" }, 503);
+      }
+      if (busyStatus) {
+        logStep("commit.email_in_flight", null, false, `pi_${busyStatus}`);
+        return json({ error: "try_again" }, 503);
+      }
     }
 
     // RT4 / ops 7: the global ceiling counts new PaymentIntents only (IP and

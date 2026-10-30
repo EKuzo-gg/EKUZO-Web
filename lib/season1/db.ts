@@ -540,7 +540,16 @@ export interface CommitPrecheck {
   attempt: AttemptOrder | null;
   /** The guardian's family for this email and mode (with its Customer id), or null. */
   family: KnownFamily | null;
+  /**
+   * Hotfix 10-30 (double charge): this email's pending orders in this mode that
+   * have a PaymentIntent, created in the last 24 h, newest first, at most
+   * PENDING_PI_LOOKBACK. Any attempt (the commit skips the ones it handled).
+   */
+  pendingPis: { orderId: string; publicId: string; paymentIntentId: string }[];
 }
+
+/** Hotfix 10-30: how many of an email's newest pending orders the commit checks with Stripe. */
+export const PENDING_PI_LOOKBACK = 4;
 
 /**
  * The commit route's read-only lookups in one round trip: paidKidKeys,
@@ -573,12 +582,21 @@ export async function commitPrecheck(email: string, attemptId: string, livemode:
        (select json_build_object('guardian_id', g.id, 'family_id', f.id, 'family_public_id', f.public_id,
                                  'customer_id', f.stripe_customer_id)
           from s1_guardians g join s1_families f on f.id = g.family_id
-         where g.email = $1 and g.livemode = $2) as family`,
+         where g.email = $1 and g.livemode = $2) as family,
+       (select coalesce(json_agg(json_build_object('id', p.id, 'public_id', p.public_id,
+                                                   'payment_intent_id', p.payment_intent_id)), '[]'::json)
+          from (select o.id, o.public_id, o.payment_intent_id
+                  from s1_orders o
+                 where o.payer_email = $1 and o.livemode = $2 and o.status = 'pending'
+                   and o.payment_intent_id is not null and o.created_at > now() - interval '24 hours'
+                 order by o.created_at desc
+                 limit ${PENDING_PI_LOOKBACK}) p) as pending_pis`,
     [e, livemode, attemptId],
   );
   const r = rows[0] ?? {};
   const a = r.attempt as Row | null | undefined;
   const f = r.family as Row | null | undefined;
+  const pp = (r.pending_pis as Row[] | null | undefined) ?? [];
   return {
     paidKeys: ((r.paid_keys as string[] | null) ?? []).filter(Boolean),
     prior: (r.prior as number | null) ?? 0,
@@ -597,6 +615,9 @@ export async function commitPrecheck(email: string, attemptId: string, livemode:
     family: f
       ? { familyId: f.family_id, familyPublicId: f.family_public_id, guardianId: f.guardian_id, customerId: f.customer_id ?? null }
       : null,
+    pendingPis: pp
+      .filter((p) => p && typeof p.payment_intent_id === "string")
+      .map((p) => ({ orderId: p.id, publicId: p.public_id, paymentIntentId: p.payment_intent_id })),
   };
 }
 
