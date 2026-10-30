@@ -561,7 +561,7 @@ const TEMPLATES = [
 ];
 
 const ONEPAGERS = [
-  { p: 1, n: "Microschool partnership", hl: "Your kids already game. Give them a team.", for: "Founders and heads of school", clears: ["Two founders asking for a partnership package", "A camp founder's microschool intros"] },
+  { p: 1, href: "one-pagers/microschool.html", n: "Microschool partnership", hl: "Your kids already game. Give them a team.", for: "Founders and heads of school", clears: ["Two founders asking for a partnership package", "A camp founder's microschool intros"] },
   { p: 2, n: "Center partnership", hl: "A new way in for kids who'd never sign up for more school.", for: "Coding centers, gaming centers, franchisees", clears: ["A coding center ready for concepts", "Franchise centers' four questions", "Franchisee meeting prep"] },
   { p: 3, n: "College club partnership", hl: "Make the next class as passionate as yours.", for: "Club officers (external + internal)", clears: ["Three university clubs", "A smaller college club's report-back"] },
   { p: 4, n: "Franchisor proposal", hl: "One league across your Texas centers.", for: "A coding-center franchisor", clears: ["Their ask for a loose proposal with light numbers"] },
@@ -936,7 +936,7 @@ function viewOnepagers() {
     </ol>
   </div></section>
   <section class="band"><div class="wrap">
-    <div class="op-grid">${ONEPAGERS.map(o => `<div class="op">${mini(o)}<div class="meta"><span class="prio">#${o.p}</span> <span class="h3">${esc(o.n)}</span><div class="for">${esc(o.for)}</div><ul class="clears">${o.clears.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div></div>`).join("")}</div>
+    <div class="op-grid">${ONEPAGERS.map(o => `<div class="op">${o.href ? `<a href="${o.href}" aria-label="Open the ${esc(o.n)} one-pager" style="display:block;text-decoration:none">${mini(o)}</a>` : mini(o)}<div class="meta"><span class="prio">#${o.p}</span> <span class="h3">${esc(o.n)}</span><div class="for">${esc(o.for)}</div><ul class="clears">${o.clears.map(c => `<li>${esc(c)}</li>`).join("")}</ul>${o.href ? `<a class="btn red" style="margin-top:14px;padding:9px 14px;font-size:14px" href="${o.href}">Open the Austin example ${AR}</a>` : ""}</div></div>`).join("")}</div>
   </div></section>`;
 }
 
