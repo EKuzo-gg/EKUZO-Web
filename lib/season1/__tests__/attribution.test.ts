@@ -213,8 +213,10 @@ describe("order attribution", () => {
     assert.equal(validFbp("fb.1.1792999999999.1234567890"), "fb.1.1792999999999.1234567890");
     assert.equal(validFbp("fb.1.1792999999.1234567890"), null, "seconds");
     assert.equal(validFbc("fb.1.1792999999999." + "a".repeat(255)), "fb.1.1792999999999." + "a".repeat(255));
-    assert.equal(validFbc("fb.1.1792999999999." + "a".repeat(256)), null);
-    assert.equal(validFbc("fb.1.1792999999999.a.b"), null);
+    assert.equal(validFbc("fb.1.1792999999999." + "a".repeat(600)), "fb.1.1792999999999." + "a".repeat(600));
+    assert.equal(validFbc("fb.1.1792999999999." + "a".repeat(601)), null);
+    assert.equal(validFbc("fb.1.1792999999999.IwAR_abc.AbCd"), "fb.1.1792999999999.IwAR_abc.AbCd", "extra dotted segment kept verbatim");
+    assert.equal(validFbc("fb.1.1792999999999.a b"), null);
     assert.equal(cleanFirstTouch("direct"), "direct");
     assert.equal(cleanFirstTouch("origin"), null);
   });

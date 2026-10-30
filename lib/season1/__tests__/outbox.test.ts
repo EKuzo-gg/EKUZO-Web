@@ -236,7 +236,7 @@ describe("Meta Purchase", () => {
     for (const [fbp, fbc] of [
       ["fb.1.1.2", "fb.1.1.abc"],
       ["fb.1.1792999999.1234567890", "fb.1.1792999999999.a b"],
-      ["x".repeat(40), "fb.1.1792999999999." + "a".repeat(256)],
+      ["x".repeat(40), "fb.1.1792999999999." + "a".repeat(601)],
     ]) {
       const e = buildPurchaseEvent(order({ fbp, fbc }));
       assert.equal("fbp" in e.user_data, false, fbp);

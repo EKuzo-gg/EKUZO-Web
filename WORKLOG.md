@@ -7,6 +7,8 @@
 ---
 ## Jamie's Claude, 2026-10-30: analytics build, server side
 
+Lead follow-up: `FBC_RE` loosened to keep a Pixel `_fbc` verbatim (extra dotted segments, up to 600 characters after the timestamp), per Meta's guidance to send the cookie as is.
+
 Branch `season1-commit`, built on the double-charge hotfix. Server only (Relay); no HTML template, `signup.html` or client change. Spec: `docs/season1-commit/analytics/01-requirements.md` as amended by `02-resolution.md`. Evidence: `docs/season1-commit/analytics/evidence/relay-server.md`.
 
 - **Migration 0005** (`db/migrations/0005_season1_order_attribution.sql`): `s1_orders.attribution jsonb`. Applied to the TEST database only and read back. **Production must get it (with read-back) before this code deploys.**

@@ -45,7 +45,8 @@ export interface OrderAttribution {
 
 /** Money red team 8: validated before write and before send; anything else is dropped. */
 export const FBP_RE = /^fb\.\d\.\d{13}\.\d{1,20}$/;
-export const FBC_RE = /^fb\.\d\.\d{13}\.[A-Za-z0-9_-]{1,255}$/;
+// Meta asks for _fbc exactly as the cookie holds it; newer cookies can carry an extra dotted segment.
+export const FBC_RE = /^fb\.\d\.\d{13}\.[A-Za-z0-9_.-]{1,600}$/;
 
 export function validFbp(v: unknown): string | null {
   return typeof v === "string" && FBP_RE.test(v) ? v : null;
