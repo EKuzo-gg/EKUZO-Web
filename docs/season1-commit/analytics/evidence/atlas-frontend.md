@@ -130,7 +130,30 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
   - a span around the kid name in the `duplicate_kid` message.
 - Typed inputs are masked by Clarity already.
 
-## Copy (D5, word for word from 03-copy-deck.md)
+## Round 2: Parent and Steward review (04-parent-steward.md findings 1, 2, 4, 5; lead 10-30)
+
+- **Finding 1, calm status instead of an error.** The in-progress lines are no longer in the red `#formErr` alert.
+  - They render in a new `<p id="payNote" class="note" hidden>`: the page's existing stone note box, ink text `rgb(51,51,51)` on `rgb(239,238,237)`.
+  - The box sits outside the card section, so it shows on the wallet path too.
+  - They are announced once through the polite `#liveErr` status region, via `showNote(msg, link)`.
+  - The busy line's timer is stopped first, so the two never fight.
+  - On a redirect the button stays busy and disabled (checked in the browser: `disabled`, `aria-busy=true`).
+  - `in_progress_other` uses the same box with its text link, and the button is released there as before.
+  - `clearErrs()` hides the box on the next tap.
+- **Finding 2, copy.** One constant each:
+  - `IN_PROGRESS_MSG` "Your payment is on its way. Taking you to your confirmation." This is shown only on a real 409 `in_progress`.
+  - `CHECKING_MSG` "Checking on your payment. Taking you to your confirmation." This is the ambiguous case: the confirmed flag is set, then a non-409 failure or a network error. `commitNext` now returns `check` for it.
+  - `IN_PROGRESS_OTHER_MSG` is unchanged.
+- **Finding 5, hold.** `WELCOME_HOLD_MS=3000` before `location.replace`. The browser measured about 3.0 s from note to navigation.
+- **Finding 4, age mask.** The kid age `<select class="f ag">` carries `data-clarity-mask="true"`.
+  - No other sign-up element echoes a kid's age; the summary and the button show names only.
+  - Welcome prints no age.
+- **Screenshots recaptured** with real Stripe.js (test key, through the agent proxy), so the payment area is in frame: the Link row, "Or pay with card", and the filled card field.
+  - The commit was mocked: 409 `in_progress` after 3.5 s.
+  - While busy, the card field still looks editable (Stripe draws it in its own frame) and the Link button stays visible and tappable-looking. The page ignores a wallet tap while busy (`xp.on('click')` returns), so a second payment cannot start from it, but the area does not look frozen. Whether to dim it is a design call for Aaron.
+  - Console: only the mocked 409.
+
+## Copy (round 1; strings 2 and 3 superseded in round 2 above, string 1 unchanged)
 
 1. Busy label after 2 s: `Still saving. Please stay here.`
 2. `in_progress`: `Your payment is already going through. Taking you to your confirmation to check on it.` Then about 1.5 s, then the welcome page.
@@ -140,7 +163,7 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
 
 | Run | Result |
 |---|---|
-| `npm run test:s1` | **334 / 334 pass** (was 274). New: `tags.test.ts` 40, `signupCommit.test.ts` 17, `welcomeStates.test.ts` +3 |
+| `npm run test:s1` | **337 / 337 pass** (was 274). New: `tags.test.ts` 40, `signupCommit.test.ts` 20, `welcomeStates.test.ts` +3 |
 | `S1_DB_TESTS=1 node --env-file=.env.test.local scripts/run-tests.mjs lib/season1/__tests__` (J10) | **373 / 373 pass**, 81 suites, 0 fail, 0 skipped, 91 s (was 317). This run predates the lead fix; the fix adds 4 pure client tests and touches no server code. |
 | `npm test` (all lib) | 431 pass, 1 skipped (pre-existing), 0 fail |
 | `npx tsc --noEmit` | exit 0 |
@@ -215,14 +238,14 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
   - the 409 from the mocked commit;
   - 404s for the torn-paper images (`public/images/new torn paper/*@2x.png`) on join and crew. Local `next start` does not serve those paths. ekuzo.gg and the branch deploy both answer 200 for them, and the problem is unchanged by this build.
 
-**Screenshots:**
-- `evidence/atlas/signup-busy-390.png`, `signup-busy-1440.png`: the busy line;
-- `evidence/atlas/signup-in-progress-390.png`, `signup-in-progress-1440.png`: string 2 under the busy button.
+**Screenshots** (recaptured in round 2, with the payment area in frame):
+- `evidence/atlas/signup-busy-390.png`, `signup-busy-1440.png`: the busy line above the filled card field and Link row;
+- `evidence/atlas/signup-in-progress-390.png`, `signup-in-progress-1440.png`: the "on its way" note in the stone box under the busy button.
 
 ## Not proven here, and open
 
 1. **Branch-deploy network proof is Sentry's** (C18: R2 to R5, R7, R12, R18). That means real `/g/collect` (`_dbg=1`), `facebook.com/tr` (`ev=Purchase&eid=<order>`, `S1QA_*`, and no `SubscribedButtonClick` / `cd[buttonText]` / `ud[`), and `clarity.ms/collect` on `season1-commit--ekuzo.netlify.app` with and without `?s1qa=1`. It also includes the 3DS referrer check and a paid welcome in a real browser. Here the vendor scripts were intercepted and the paid-state Purchase was proven in a vm.
-2. **Styling of the in-progress line (for Aaron).** It renders in `#formErr`, which is red error text with `role=alert`. A neutral style may read better for "your payment is going through". This is a design call.
+2. **Resolved in round 2: styling of the in-progress line.** It is now the stone note box. Previous text: It renders in `#formErr`, which is red error text with `role=alert`. A neutral style may read better for "your payment is going through". This is a design call.
 3. **Resolved (lead 10-30).** The confirmed flag is now cleared when Stripe answers a confirm with an error (see section 6).
    - The welcome failed state's "Try again" still keeps the same attempt, because only the paid state clears it. The lead accepted this.
 4. **Thanks GA4 `page_location`** now follows S2, so it drops `play`. The `season1_play_answer` event still carries `play`. Before, GA saw the full URL.

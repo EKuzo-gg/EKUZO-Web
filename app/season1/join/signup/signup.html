@@ -218,6 +218,7 @@ p,li,.small{text-wrap:pretty}
 <button class="btn" style="margin-top:16px" id="go" type="submit" data-clarity-mask="true">Save their spot &middot; $100</button>
 </div>
 <p id="inviteNote" class="note" hidden></p>
+<p id="payNote" class="note" hidden></p>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
 <p class="small" style="text-align:center;margin-top:16px;font-weight:600;color:var(--black)">Questions? <a class="smsLink tk" href="#">Text our founder</a></p>
 <p class="small" style="text-align:center;margin-top:16px">Secure payment by Stripe</p></div>
@@ -259,7 +260,7 @@ try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17];
 function kidRow(){n++;var i=seq++,d=document.createElement('div');d.className='kid';
  var opts='<option value="" selected disabled>Pick age</option>';AGES.forEach(function(a){opts+='<option value="'+a+'">'+a+'</option>'});opts+='<option value="x">Younger or older</option>';
- d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (9 to 17)</label><select class="f ag" id="ag'+i+'" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 9 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 9 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
+ d.innerHTML='<div class="khead"><p class="ey klabel"></p><button type="button" class="krm">Remove</button></div><div class="grid2" style="margin-top:12px"><div><label class="l" for="nm'+i+'">First name</label><input class="f nm" id="nm'+i+'" maxlength="20" autocomplete="off" aria-required="true" aria-describedby="e-nm'+i+'"></div><div><label class="l" for="ag'+i+'">Age (9 to 17)</label><select class="f ag" id="ag'+i+'" data-clarity-mask="true" aria-required="true" aria-describedby="e-ag'+i+'">'+opts+'</select></div></div><p class="err e-nm" id="e-nm'+i+'"></p><p class="err e-ag" id="e-ag'+i+'"></p><p class="warn" hidden>Season 01 is built for ages 9 to 17. Our founder will check in to make sure it\u0027s a fit.</p><div class="xnote" hidden><p><b>Season 01 is for ages 9 to 17.</b> Pick another age, or text our founder and we\u0027ll figure it out.</p><div class="xacts"><a class="btn black smsLink" href="'+esc(sms)+'">Text our founder</a>'+'<button type="button" class="btn ghost krm2">Remove this kid and keep going</button><a class="back2" href="/season1/join">Back to Season 01</a></div></div>';
  kids.appendChild(d);d.querySelector('.ag').addEventListener('change',function(){ageChanged(d)});d.querySelector('.nm').addEventListener('input',upd);
  d.querySelectorAll('.krm,.krm2').forEach(function(b){b.addEventListener('click',function(){removeKid(d)})});}
 function removeKid(d){if(rows().length<2)return;d.remove();n=rows().length;ga('season1_sibling_remove');upd();saveForm();var last=rows()[rows().length-1];if(last)last.querySelector('.nm').focus()}
@@ -415,7 +416,7 @@ function initExpress(){
 }
 var NAME=/^\p{L}[\p{L}\p{M} '\u2019-]*$/u,EMAIL=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 function setErr(el,input,msg){el.textContent=msg;if(input)input.classList.toggle('bad',!!msg);if(input&&msg)input.setAttribute('aria-invalid','true');else if(input)input.removeAttribute('aria-invalid')}
-function clearErrs(){document.querySelectorAll('.err').forEach(function(e){e.textContent=''});document.querySelectorAll('.f').forEach(function(f){f.classList.remove('bad');f.removeAttribute('aria-invalid')});g('terms').removeAttribute('aria-invalid');g('liveErr').textContent=''}
+function clearErrs(){g('payNote').hidden=true;g('payNote').textContent='';document.querySelectorAll('.err').forEach(function(e){e.textContent=''});document.querySelectorAll('.f').forEach(function(f){f.classList.remove('bad');f.removeAttribute('aria-invalid')});g('terms').removeAttribute('aria-invalid');g('liveErr').textContent=''}
 function announce(msg){g('formErr').textContent=msg}
 function collect(){
  var bad=[],first=null;
@@ -457,14 +458,20 @@ function showTotal(c){
    attempt's payment may be going through (409 in_progress, or any failure after this attempt reached
    confirmPayment), so show the in-progress line and go to the confirmation. retry: the double-tap race
    (503 attempt_busy), once, same attempt. error: serverErr below. */
-function commitNext(st,e,cf,rt){if(e==='in_progress')return 'welcome';if(e==='in_progress_other')return 'error';if(cf)return 'welcome';if(st===503&&e==='attempt_busy'&&!rt)return 'retry';return 'error'}
-var IN_PROGRESS_MSG='Your payment is already going through. Taking you to your confirmation to check on it.';
+function commitNext(st,e,cf,rt){if(e==='in_progress')return 'welcome';if(e==='in_progress_other')return 'error';if(cf)return 'check';if(st===503&&e==='attempt_busy'&&!rt)return 'retry';return 'error'}
+/* Parent/Steward review 10-30 (findings 1, 2, 6): the in-progress lines are a calm status (stone note box, polite
+   status region), never the red alert. A real 409 in_progress says the payment is on its way; the ambiguous case
+   (this attempt reached confirm, then a non-409 failure or a network error) only says we are checking. */
+var IN_PROGRESS_MSG='Your payment is on its way. Taking you to your confirmation.';
+var CHECKING_MSG='Checking on your payment. Taking you to your confirmation.';
+var IN_PROGRESS_OTHER_MSG='A payment for this email is already going through. Your receipt will arrive in your inbox when it\u0027s done. Questions? ';
+var WELCOME_HOLD_MS=3000;
+/* Shows a neutral status in the stone note box and announces it once in the polite status region. Optional link. */
+function showNote(msg,link){clearBusyLine();var n=g('payNote');n.textContent=msg;if(link){var a=document.createElement('a');a.href=link;a.textContent='Text our founder';n.appendChild(a);n.appendChild(document.createTextNode('.'))}n.hidden=false;g('formErr').textContent='';g('liveErr').textContent=n.textContent}
 function serverErr(status,j){
  var f=(j&&j.field)||'',e=(j&&j.error)||'',m;
  if(e==='in_progress_other'){
-  var fo=g('formErr');fo.textContent='';
-  fo.appendChild(document.createTextNode('A payment for this email is already going through. Your receipt will arrive in your inbox when it\u0027s done. Questions? '));
-  var ao=document.createElement('a');ao.href=sms;ao.textContent='Text our founder';fo.appendChild(ao);fo.appendChild(document.createTextNode('.'));
+  showNote(IN_PROGRESS_OTHER_MSG,sms);
   return}
  if(e==='price_changed'&&j&&typeof j.amountCents==='number'){showTotal(j.amountCents);secret=null;announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');return}
  if(e==='duplicate_kid'||e==='text_karlin'){
@@ -520,7 +527,8 @@ async function pay(body,xev){
  function pf(){if(xev&&!pfDone){pfDone=true;try{xev.paymentFailed({reason:'fail'})}catch(_){}}}
  function fail(){pf();if(xev&&!errEl.textContent)errEl.innerHTML=g('formErr').innerHTML;setBusy(false)}
  // F15 (C2, D5 string 2): the payment may be going through. Keep the button busy, show the line, then the confirmation.
- function toWelcome(){pf();announce(IN_PROGRESS_MSG);if(xev)errEl.textContent=IN_PROGRESS_MSG;setTimeout(function(){location.replace('/season1/join/welcome')},1500)}
+ // F15: the button stays busy and disabled; the note holds about 3 s, then the confirmation page.
+ function toWelcome(msg){pf();showNote(msg);setTimeout(function(){location.replace('/season1/join/welcome')},WELCOME_HOLD_MS)}
  setBusy(true);confirming=false;ga('season1_pay_submit',{method:xev?String(xev.expressPaymentType||'wallet'):'card'});
  initiateCheckout();
  // S8: tap time for welcome's season1_tap_to_welcome.
@@ -539,7 +547,8 @@ async function pay(body,xev){
     if(res.ok&&j&&j.clientSecret)break;
     var nx=commitNext(res.status,(j&&j.error)||'',wasConfirmed(),retried);
     if(nx==='retry'){retried=true;await new Promise(function(r){setTimeout(r,1500)});continue}
-    if(nx==='welcome'){toWelcome();return}
+    if(nx==='welcome'){toWelcome(IN_PROGRESS_MSG);return}
+    if(nx==='check'){toWelcome(CHECKING_MSG);return}
     pf();serverErr(res.status,j);fail();return
    }
    if(typeof j.amountCents==='number'&&j.amountCents!==totalCents()){
@@ -557,7 +566,7 @@ async function pay(body,xev){
   if(!keepConfirmed(r)){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}
   if(r&&r.error){pf();var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
  }catch(err){
-  if(wasConfirmed()){toWelcome();return}
+  if(wasConfirmed()){toWelcome(CHECKING_MSG);return}
   pf();announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
 }
 /* Speed pass 10-29: wake the commit API and its database while the parent fills the form (no data, no cookies,

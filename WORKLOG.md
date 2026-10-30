@@ -21,10 +21,17 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - Lead fix: a confirm that Stripe answers with an error (a decline) clears the confirmed flag, so a later 429 or price change on that attempt shows its normal message. A confirm that throws keeps the flag and goes to welcome.
 - **Welcome:** Pixel Purchase (eventID = order id, once per order) and the `season1_tap_to_welcome` timing.
 - **Tests:**
-  - `npm run test:s1`: 334 of 334 (was 274).
+  - `npm run test:s1`: 334 of 334 (was 274); 337 after round 2.
   - Integration (J10 method): 373 of 373 (was 317).
   - tsc 0, `next build` OK.
   - Browser run at 390 and 1440 on the built app.
+
+- **Round 2** (Parent/Steward review, findings 1, 2, 4 and 5):
+  - The in-progress lines now show in a calm stone note box (`#payNote`), announced in the polite status region, instead of the red alert.
+  - New copy, one constant each: "Your payment is on its way. Taking you to your confirmation." on a real 409 `in_progress`; "Checking on your payment. Taking you to your confirmation." when the outcome is unclear.
+  - The hold before the confirmation page is now 3 s.
+  - The kid age select is masked in Clarity.
+  - `npm run test:s1`: 337 of 337.
 
 **For Aaron, every template and copy line touched:**
 
@@ -32,7 +39,8 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - `join.html`: kid/from strip changed to `{{URL_ALLOW}}`; gtag block changed to `{{TAGS}}`.
   - `signup.html`:
     - `{{URL_ALLOW}}` and `{{TAGS}}`, same as join.
-    - `data-clarity-mask="true"` on `#invTxt`, `#sum` and `#go`, plus a masked span around the kid name in the duplicate_kid message.
+    - `data-clarity-mask="true"` on `#invTxt`, `#sum`, `#go` and the kid age select (`.ag`), plus a masked span around the kid name in the duplicate_kid message.
+    - New `<p id="payNote" class="note" hidden>` under the invite note, for the in-progress lines (round 2).
     - Client script: attempt reuse, setBusy/busy line, `commitNext`, `keepConfirmed`, `serverErr` (new in_progress_other branch), `pay()`, `initiateCheckout()`, pageshow.
   - `welcome.html`:
     - gtag block changed to `{{URL_ALLOW}}` and `{{TAGS}}`.
@@ -43,10 +51,10 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - `landing.html`: the Pixel, noscript, Clarity and GA4 head blocks changed to one comment plus `{{TAGS}}`; the `LIVE` regex drops `netlify\.app$`; one comment reworded.
 - **New copy** (D5, recommended strings, sign-up only):
   - Busy label after 2 s: "Still saving. Please stay here."
-  - "Your payment is already going through. Taking you to your confirmation to check on it."
+  - Superseded in round 2: "Your payment is on its way. Taking you to your confirmation." (real 409) and "Checking on your payment. Taking you to your confirmation." (unclear outcome).
   - "A payment for this email is already going through. Your receipt will arrive in your inbox when it's done. Questions? Text our founder."
   - No other visible copy changed.
-- **Your call:** the in-progress line uses the red `#formErr` error style. A neutral style may read better.
+- **Your call:** the in-progress lines now use the stone `.note` box. While busy, the card field and Link row still look live; tell us if you want them dimmed.
 
 ## Jamie's Claude, 2026-10-30: analytics build, server side
 

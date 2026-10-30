@@ -31,10 +31,11 @@ describe("sign-up commit answers (F15, C2)", () => {
     assert.match(payFn, /if\(nx==='retry'\)\{retried=true;await new Promise\(function\(r\)\{setTimeout\(r,1500\)\}\);continue\}/);
     assert.doesNotMatch(payFn.slice(payFn.indexOf("for(;;){"), payFn.indexOf("if(nx==='retry')")), /attemptId=/, "the body keeps its attemptId");
   });
-  it("after confirmPayment was reached on this attempt, any failure goes to the confirmation (never 'not charged')", () => {
+  it("after confirmPayment was reached on this attempt, any other failure checks on it at the confirmation (never 'not charged')", () => {
     for (const [st, e] of [[500, "server"], [503, "try_again"], [429, "rate_limited"], [409, "closed"], [409, "price_changed"], [503, "attempt_busy"], [0, ""]] as const)
-      assert.equal(commitNext(st, e, true, false), "welcome", `${st} ${e}`);
-    assert.match(payFn, /\}catch\(err\)\{\n  if\(wasConfirmed\(\)\)\{toWelcome\(\);return\}/, "network errors too");
+      assert.equal(commitNext(st, e, true, false), "check", `${st} ${e}`);
+    assert.match(payFn, /if\(nx==='welcome'\)\{toWelcome\(IN_PROGRESS_MSG\);return\}\n    if\(nx==='check'\)\{toWelcome\(CHECKING_MSG\);return\}/);
+    assert.match(payFn, /\}catch\(err\)\{\n  if\(wasConfirmed\(\)\)\{toWelcome\(CHECKING_MSG\);return\}/, "network errors too");
   });
   it("without the flag, nothing can have been confirmed: the existing messages stay", () => {
     for (const [st, e] of [[500, "server"], [503, "try_again"], [429, "rate_limited"], [409, "closed"], [409, "duplicate_kid"], [422, ""]] as const)
@@ -53,11 +54,28 @@ describe("sign-up commit answers (F15, C2)", () => {
     const paid = w.slice(w.indexOf("<!--paid-->"), w.indexOf("<!--/paid-->"));
     assert.match(paid, /sessionStorage\.removeItem\('s1_attempt'\)/);
   });
-  it("D5 copy, verbatim: in_progress (then the confirmation after about 1.5 s) and in_progress_other with the text link", () => {
-    assert.ok(html.includes("var IN_PROGRESS_MSG='Your payment is already going through. Taking you to your confirmation to check on it.';"));
-    assert.match(payFn, /function toWelcome\(\)\{pf\(\);announce\(IN_PROGRESS_MSG\);if\(xev\)errEl\.textContent=IN_PROGRESS_MSG;setTimeout\(function\(\)\{location\.replace\('\/season1\/join\/welcome'\)\},1500\)\}/);
-    assert.ok(html.includes("'A payment for this email is already going through. Your receipt will arrive in your inbox when it\\u0027s done. Questions? '"));
-    assert.match(html, /ao\.href=sms;ao\.textContent='Text our founder';fo\.appendChild\(ao\);fo\.appendChild\(document\.createTextNode\('\.'\)\);/);
+  it("copy, one constant each (Parent/Steward 10-30): on its way for a real 409, checking for the ambiguous case", () => {
+    assert.ok(html.includes("var IN_PROGRESS_MSG='Your payment is on its way. Taking you to your confirmation.';"));
+    assert.ok(html.includes("var CHECKING_MSG='Checking on your payment. Taking you to your confirmation.';"));
+    assert.ok(html.includes("var IN_PROGRESS_OTHER_MSG='A payment for this email is already going through. Your receipt will arrive in your inbox when it\\u0027s done. Questions? ';"));
+    for (const old of ["already going through. Taking you", "to check on it"]) assert.ok(!html.includes(old), old);
+    assert.equal((html.match(/Taking you to your confirmation/g) ?? []).length, 2, "each string lives only in its constant");
+    assert.match(html, /if\(e==='in_progress_other'\)\{\n  showNote\(IN_PROGRESS_OTHER_MSG,sms\);\n  return\}/);
+  });
+  it("in-progress lines are a calm status: stone note box, polite status region, never the red alert; 3 s hold, button stays busy", () => {
+    assert.match(html, /<p id="payNote" class="note" hidden><\/p>/);
+    assert.match(html, /\.note\{background:var\(--stone\)/);
+    const note = /function showNote\(msg,link\)\{[^\n]*\}/.exec(html)?.[0] ?? "";
+    assert.match(note, /var n=g\('payNote'\);n\.textContent=msg;/);
+    assert.match(note, /g\('liveErr'\)\.textContent=n\.textContent/);
+    assert.doesNotMatch(note, /announce\(|formErr'\)\.textContent=msg/);
+    assert.match(html, /<div id="liveErr" class="hp" aria-live="polite" role="status"><\/div>/);
+    assert.ok(html.includes("var WELCOME_HOLD_MS=3000;"));
+    assert.match(payFn, /function toWelcome\(msg\)\{pf\(\);showNote\(msg\);setTimeout\(function\(\)\{location\.replace\('\/season1\/join\/welcome'\)\},WELCOME_HOLD_MS\)\}/);
+    assert.doesNotMatch(payFn.slice(payFn.indexOf("function toWelcome"), payFn.indexOf("setBusy(true);confirming=false")), /setBusy\(false\)|fail\(\)/);
+  });
+  it("Clarity masks the kid age select (finding 4)", () => {
+    assert.match(html, /<select class="f ag" id="ag'\+i\+'" data-clarity-mask="true"/);
   });
   it("wallet: paymentFailed runs before any message (once)", () => {
     assert.match(payFn, /function pf\(\)\{if\(xev&&!pfDone\)\{pfDone=true;try\{xev\.paymentFailed\(\{reason:'fail'\}\)\}catch\(_\)\{\}\}\}/);
@@ -110,6 +128,9 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
   const helpers = [
     pick(/function commitNext\(st,e,cf,rt\)\{[^\n]*\}/),
     pick(/var IN_PROGRESS_MSG='[^']*';/),
+    pick(/var CHECKING_MSG='[^']*';/),
+    pick(/var WELCOME_HOLD_MS=\d+;/),
+    pick(/function showNote\(msg,link\)\{[^\n]*\}/),
     pick(/function confirmedKey\(\)\{[^\n]*\}/),
     pick(/function wasConfirmed\(\)\{[^\n]*\}/),
     pick(/function keepConfirmed\(r\)\{[^\n]*\}/),
@@ -119,24 +140,26 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
   type Res = { ok: boolean; status: number; json: () => Promise<unknown> };
   function harness() {
     const factory = new Function(`
-      var calls={announce:[],replace:[],serverErr:[]},store=new Map();
+      var calls={announce:[],replace:[],serverErr:[],holds:[]},store=new Map();
       var sessionStorage={getItem:function(k){return store.has(k)?store.get(k):null},setItem:function(k,v){store.set(k,String(v))},removeItem:function(k){store.delete(k)}};
       var attemptId='att-12345678',secret=null,secretSig='',confirming=false,inviteRemoved=false,invite=null,IGNORED_MSG='ignored';
       var elements={submit:function(){return Promise.resolve({})}},xel=null,stripe=null,fetchImpl=null,dom={};
-      function g(id){return dom[id]||(dom[id]={textContent:'',innerHTML:'',hidden:false})}
+      function g(id){return dom[id]||(dom[id]={textContent:'',innerHTML:'',hidden:false,appendChild:function(){}})}
+      function clearBusyLine(){} var document={createElement:function(){return {}},createTextNode:function(t){return t}};
       function setBusy(){} function ga(){} function initiateCheckout(){} function showTotal(){} function renderInvite(){} function upd(){}
       function announce(m){calls.announce.push(m)} function totalCents(){return 10000} function money(c){return '$'+c/100}
       function serverErr(st,j){calls.serverErr.push([st,(j&&j.error)||''])}
       var location={origin:'https://ekuzo.gg',replace:function(u){calls.replace.push(u)}},window={location:location};
       var performance={timeOrigin:1,now:function(){return 1}};
-      function setTimeout(fn){fn();return 0}
+      function setTimeout(fn,ms){calls.holds.push(ms);fn();return 0}
       function fetch(u,o){return fetchImpl(u,o)}
       ${helpers}
       ${payFn}
-      return {pay:pay,calls:calls,store:store,set:function(s,f){stripe=s;fetchImpl=f}};`);
+      return {pay:pay,calls:calls,store:store,dom:dom,set:function(s,f){stripe=s;fetchImpl=f}};`);
     return factory() as {
       pay: (body: Record<string, unknown>, xev: null) => Promise<void>;
-      calls: { announce: string[]; replace: string[]; serverErr: [number, string][] };
+      calls: { announce: string[]; replace: string[]; serverErr: [number, string][]; holds: number[] };
+      dom: Record<string, { textContent: string; hidden: boolean }>;
       store: Map<string, string>;
       set: (stripe: unknown, fetch: (u: string) => Promise<Res>) => void;
     };
@@ -163,7 +186,8 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
     await h.pay(body("Mia"), null); // changed details: a new commit on the same attempt, answered 429
     assert.deepEqual(h.calls.serverErr, [[429, "rate_limited"]]);
     assert.deepEqual(h.calls.replace, []);
-    assert.ok(!h.calls.announce.some((m) => /already going through/.test(m)));
+    assert.ok(!h.calls.announce.some((m) => /Taking you/.test(m)));
+    assert.equal(h.dom.payNote, undefined, "no in-progress note");
   });
 
   it("decline, then a network error on the re-commit: the existing 'not charged' line, no navigation", async () => {
@@ -185,11 +209,25 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
     await h.pay(body("Maya"), null);
     assert.equal(h.store.get(FLAG), "1");
     assert.deepEqual(h.calls.replace, ["/season1/join/welcome"]);
-    assert.equal(h.calls.announce[h.calls.announce.length - 1], "Your payment is already going through. Taking you to your confirmation to check on it.");
+    assert.equal(h.dom.payNote.textContent, "Checking on your payment. Taking you to your confirmation.");
+    assert.equal(h.dom.payNote.hidden, false);
+    assert.equal(h.dom.liveErr.textContent, "Checking on your payment. Taking you to your confirmation.");
+    assert.ok(h.calls.holds.includes(3000), "about 3 s before the confirmation");
     // A later failure on that attempt also goes to the confirmation, never "not charged".
     h.set({ confirmPayment: async () => ({}) }, async () => reply(429, { error: "rate_limited" }));
     await h.pay(body("Mia"), null);
     assert.deepEqual(h.calls.replace, ["/season1/join/welcome", "/season1/join/welcome"]);
     assert.deepEqual(h.calls.serverErr, []);
+  });
+
+  it("a real 409 in_progress: the 'on its way' note, then the confirmation after 3 s", async () => {
+    const h = harness();
+    h.set({ confirmPayment: async () => ({}) }, async () => reply(409, { error: "in_progress" }));
+    await h.pay(body("Maya"), null);
+    assert.equal(h.dom.payNote.textContent, "Your payment is on its way. Taking you to your confirmation.");
+    assert.equal(h.dom.liveErr.textContent, "Your payment is on its way. Taking you to your confirmation.");
+    assert.equal(h.dom.formErr?.textContent ?? "", "", "nothing in the red alert region");
+    assert.deepEqual(h.calls.replace, ["/season1/join/welcome"]);
+    assert.ok(h.calls.holds.includes(3000));
   });
 });
