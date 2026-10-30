@@ -69,3 +69,11 @@ D1 to D7 in `01-requirements.md`. Kid data rule updated in `knowledge-base/compa
   - `ekuzo_lc` Set-Cookie on a utm URL: HttpOnly, Secure, SameSite Lax, 30 days.
   - Privacy policy shows the new section 8 and 16 lines and "October 30, 2026".
   - dev--ekuzo.netlify.app: 0 vendor requests on /, /season1, /season1/join (first probe during the dev deploy switch-over saw the old build).
+
+## After release, 10-30
+
+- 12:48 and 12:50 CT: Netlify function log (Jamie) shows `s1-drain: status 200` every 2 minutes. Scheduled drain proven on production.
+- Jamie accepted Meta's Custom Audience terms; created website audience "Season 01 purchasers (180 days)" (id 120251650741580600, Purchase on pixel 1284038230557204, 180 days, prefill on). Not attached to any ad set: the exclusion goes on with the 11-02 batch.
+- Lessons approved live (Jamie, "agree with the rules"): money lens reads the shipped path, private URLs load no vendor tags (both `knowledge-base/company/agents/agent-loop/build-loop.md`), release scripts stop on conflicts (`docs/dev-runbook.md`).
+- Discord commit alerts: code shipped in 6c4f4ff (`lib/season1/senders/discord.ts`); off until `S1_DISCORD_WEBHOOK_URL` is set in Netlify Production and a deploy runs.
+- No real order yet; Jamie: no email until Monday, Karlin may use his link before then.

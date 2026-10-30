@@ -5,6 +5,10 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: after release
+
+Released 12:42 CT (main 6c4f4ff, dev ed9d163); smoke passed; scheduled drain proven (`s1-drain: status 200` every 2 minutes). Meta audience "Season 01 purchasers (180 days)" created, not attached yet. Dev runbook: release scripts stop on the first conflict. Discord commit alerts ship in the code and wait on `S1_DISCORD_WEBHOOK_URL`.
+
 ## Jamie's Claude, 2026-10-30: privacy policy, production migration, double-charge check
 
 - Privacy policy (Jamie approved 12:17): section 8 names Google Analytics, Meta Pixel and Microsoft Clarity; section 16 partners line now lists hashed email, IP, device and browsing information on Season 01 pages and purchase information with kid count, and promises never a child's name or age. Last Updated October 30, 2026. Aaron: copy change on `/privacy-policy`, no layout change.

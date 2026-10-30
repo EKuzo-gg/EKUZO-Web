@@ -193,6 +193,9 @@ release commits. Neither branch is an ancestor of the other, so `git merge dev` 
 
 After a release that removes dev-only files on main, main never merges directly into dev (that would delete them from dev); bring main's commits into dev through a dev-integration branch cut from `origin/dev` (for example `preview/<change>-dev`), check it, then fast-forward dev.
 
+Release and integration branch scripts run with `set -e` and stop on the first merge conflict. Resolve conflicts by hand (WORKLOG conflicts keep both sides), then re-verify code-identical and fast-forward before any push. Re-run `git log --oneline -1` on main and dev right before asking for the go phrase: dev can move during the day.
+<!-- Added 2026-10-30, approved live by Jamie ("agree with the rules") in session 2026-10-30-season1-analytics-build: a chained command kept going after a WORKLOG conflict and force-pushed a staging branch to the wrong commit (no harm: staging only). -->
+
 **Pushes go through Jamie's terminal.** Neither Claude's cloud workspace nor the shell on Jamie's
 computer has GitHub write access to EKuzo-gg, so Claude prepares the commits and hands over the
 push commands. Installing the Claude GitHub App on the org
