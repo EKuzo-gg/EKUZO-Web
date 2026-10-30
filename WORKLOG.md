@@ -5,6 +5,16 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron's Claude, 2026-10-30: the other seven partner one-pagers (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only (never ships to main).
+
+1. **Seven one-pagers** in `public/roadshow/one-pagers/`: `center`, `college-club`, `franchisor`, `collegiate-pilot`, `school-club-kit`, `parent-explainer`, `skeptical-staff`. Same Letter layout as `microschool.html`, each with a lane visual (a month with a center partner, the player loop, how a franchise pilot grows, a pilot in a college market, the club kit, a 90-minute practice, gaming alone vs on a team). Public-safe: quotes credited by role, no partner names, no phone numbers. Drafts for the team: pricing, block length and per-player write-ups stay pending decisions.
+2. **Outreach Lab** (`public/roadshow/outreach-lab.html`): every one-pager card links to its page; card #2 shows its real headline; buttons align across a row.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter, each page at 1440 and 390: no horizontal overflow, nothing past the page edge, no missing assets; each prints to one Letter page.
+
+---
 ## Aaron's Claude, 2026-10-30: Outreach Lab and the Austin microschool one-pager (roadshow, dev only)
 
 Branch `dev`. Everything is under `public/roadshow/`, which never ships to main (dev-runbook, releasing when dev carries work main must not get). No app, lib, components or API files touched.

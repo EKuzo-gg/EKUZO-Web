@@ -299,6 +299,10 @@ select { width: 100%; font: 16px var(--body); padding: 11px 12px; border: 2px so
 .op .clears { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; font-size: 14px; }
 .op .clears li { padding-left: 18px; position: relative; }
 .op .clears li::before { content: ""; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; border: 2px solid var(--red); }
+.op { display: flex; flex-direction: column; }
+.op .meta { flex: 1; display: flex; flex-direction: column; }
+.op .clears { margin-bottom: 16px; }
+.op .meta .btn { margin-top: auto !important; align-self: flex-start; }
 .prio { font-family: var(--display); font-weight: 900; font-size: 20px; color: var(--red); }
 
 /* Decisions */
@@ -562,13 +566,13 @@ const TEMPLATES = [
 
 const ONEPAGERS = [
   { p: 1, href: "one-pagers/microschool.html", n: "Microschool partnership", hl: "Your kids already game. Give them a team.", for: "Founders and heads of school", clears: ["Two founders asking for a partnership package", "A camp founder's microschool intros"] },
-  { p: 2, n: "Center partnership", hl: "A new way in for kids who'd never sign up for more school.", for: "Coding centers, gaming centers, franchisees", clears: ["A coding center ready for concepts", "Franchise centers' four questions", "Franchisee meeting prep"] },
-  { p: 3, n: "College club partnership", hl: "Make the next class as passionate as yours.", for: "Club officers (external + internal)", clears: ["Three university clubs", "A smaller college club's report-back"] },
-  { p: 4, n: "Franchisor proposal", hl: "One league across your Texas centers.", for: "A coding-center franchisor", clears: ["Their ask for a loose proposal with light numbers"] },
-  { p: 5, n: "Collegiate pilot", hl: "Bring a youth team to your market.", for: "Program directors outside Austin", clears: ["Two programs' pilot asks", "A national leader's follow-up"] },
-  { p: 6, n: "School club growth kit", hl: "Coaching is the hard part. We'll bring it.", for: "HS and MS advisers", clears: ["A district contact", "Texas teachers lane"] },
-  { p: 7, n: "Parent explainer", hl: "What a week on an EKUZO team looks like.", for: "Partners' families", clears: ["Every pilot from stage 8 on"] },
-  { p: 8, n: "Skeptical-staff story", hl: "Why a coach and a team change how kids play.", for: "Teachers wary of screens", clears: ["A founder's ask for her staff"] }
+  { p: 2, href: "one-pagers/center.html", n: "Center partnership", hl: "Gaming brings them in. Your center keeps them.", for: "Coding centers, gaming centers, franchisees", clears: ["A coding center ready for concepts", "Franchise centers' four questions", "Franchisee meeting prep"] },
+  { p: 3, href: "one-pagers/college-club.html", n: "College club partnership", hl: "Make the next class as passionate as yours.", for: "Club officers (external + internal)", clears: ["Three university clubs", "A smaller college club's report-back"] },
+  { p: 4, href: "one-pagers/franchisor.html", n: "Franchisor proposal", hl: "One league across your Texas centers.", for: "A coding-center franchisor", clears: ["Their ask for a loose proposal with light numbers"] },
+  { p: 5, href: "one-pagers/collegiate-pilot.html", n: "Collegiate pilot", hl: "Bring a youth team to your market.", for: "Program directors outside Austin", clears: ["Two programs' pilot asks", "A national leader's follow-up"] },
+  { p: 6, href: "one-pagers/school-club-kit.html", n: "School club growth kit", hl: "Coaching is the hard part. We'll bring it.", for: "HS and MS advisers", clears: ["A district contact", "Texas teachers lane"] },
+  { p: 7, href: "one-pagers/parent-explainer.html", n: "Parent explainer", hl: "What a week on an EKUZO team looks like.", for: "Partners' families", clears: ["Every pilot from stage 8 on"] },
+  { p: 8, href: "one-pagers/skeptical-staff.html", n: "Skeptical-staff story", hl: "Why a coach and a team change how kids play.", for: "Teachers wary of screens", clears: ["A founder's ask for her staff"] }
 ];
 
 const DECISIONS = [
@@ -936,7 +940,7 @@ function viewOnepagers() {
     </ol>
   </div></section>
   <section class="band"><div class="wrap">
-    <div class="op-grid">${ONEPAGERS.map(o => `<div class="op">${o.href ? `<a href="${o.href}" aria-label="Open the ${esc(o.n)} one-pager" style="display:block;text-decoration:none">${mini(o)}</a>` : mini(o)}<div class="meta"><span class="prio">#${o.p}</span> <span class="h3">${esc(o.n)}</span><div class="for">${esc(o.for)}</div><ul class="clears">${o.clears.map(c => `<li>${esc(c)}</li>`).join("")}</ul>${o.href ? `<a class="btn red" style="margin-top:14px;padding:9px 14px;font-size:14px" href="${o.href}">Open the Austin example ${AR}</a>` : ""}</div></div>`).join("")}</div>
+    <div class="op-grid">${ONEPAGERS.map(o => `<div class="op">${o.href ? `<a href="${o.href}" aria-label="Open the ${esc(o.n)} one-pager" style="display:block;text-decoration:none">${mini(o)}</a>` : mini(o)}<div class="meta"><div><span class="prio">#${o.p}</span> <span class="h3">${esc(o.n)}</span></div><div class="for">${esc(o.for)}</div><ul class="clears">${o.clears.map(c => `<li>${esc(c)}</li>`).join("")}</ul>${o.href ? `<a class="btn red" style="margin-top:14px;padding:9px 14px;font-size:14px" href="${o.href}">Open the example ${AR}</a>` : ""}</div></div>`).join("")}</div>
   </div></section>`;
 }
 
