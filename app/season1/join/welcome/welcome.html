@@ -221,7 +221,8 @@ if(p){var id=p.getAttribute('data-id'),k='s1_purchase_'+id,seen=false,val=Number
   if(ms>0&&ms<3600000){try{gtag('event','season1_tap_to_welcome',{ms:ms})}catch(_){}}}
 }
 // F15 (C2): this tab's sign-up attempt is done; the next sign-up starts a new one.
-try{sessionStorage.removeItem('s1_attempt');for(var si=sessionStorage.length-1;si>=0;si--){var sk=sessionStorage.key(si);if(sk&&(sk.indexOf('s1_confirmed_')===0||sk.indexOf('s1_ic_')===0))sessionStorage.removeItem(sk)}}catch(_){}
+// Keys are collected first, then removed: removing while walking key(i) can skip one (Sentry phase 4).
+try{var sks=[];for(var si=0;si<sessionStorage.length;si++){var sk=sessionStorage.key(si);if(sk&&(sk==='s1_attempt'||sk.indexOf('s1_confirmed_')===0||sk.indexOf('s1_ic_')===0))sks.push(sk)}sks.forEach(function(k){sessionStorage.removeItem(k)})}catch(_){}
 function toast(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},2200)}
 var b=document.getElementById('share');
 if(b)b.onclick=function(){

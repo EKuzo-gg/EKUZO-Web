@@ -33,6 +33,12 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - The kid age select is masked in Clarity.
   - `npm run test:s1`: 337 of 337.
 
+- **Round 3** (Sentry phase 4):
+  - `gtag('set', {page_location, page_referrer})` now runs before config on every page, and crew events go to GA4 only (`send_to`).
+  - Measured with the real gtag.js: the Google tag's linked Ads destination (AW-18509911105) ignores `page_location` and reads the real URL, so crew's Ads `page_view` still carries `/crew/<code>`. **Open:** recommend Jamie unlinks the Ads destination from the Google tag; the fallback is no GA4 on crew (details in the evidence file).
+  - Welcome now clears `s1_confirmed_*` reliably by collecting keys first, then removing them.
+  - `npm run test:s1`: 341 of 341.
+
 **For Aaron, every template and copy line touched:**
 
 - **Templates:**

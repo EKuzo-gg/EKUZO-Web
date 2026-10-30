@@ -46,7 +46,7 @@ const plain = <T>(v: T): T => JSON.parse(JSON.stringify(v));
 const q2 = (v: unknown): unknown[][] => plain(((v as unknown[]) ?? []).map((a) => Array.from(a as ArrayLike<unknown>)));
 
 /** Runs rendered head tags in a bare sandbox and returns what they queued. */
-function runTags(html: string, url: string, opts: { cookie?: string; storage?: Map<string, string> } = {}) {
+function runTags(html: string, url: string, opts: { cookie?: string; storage?: Map<string, string>; referrer?: string } = {}) {
   const u = new URL(url);
   const store = opts.storage ?? new Map<string, string>();
   const appended: string[] = [];
@@ -57,6 +57,7 @@ function runTags(html: string, url: string, opts: { cookie?: string; storage?: M
   const anchor = { parentNode: { insertBefore: (e: { src?: string }) => appended.push(String(e.src)) } };
   const doc = {
     cookie: opts.cookie ?? "",
+    referrer: opts.referrer ?? "",
     head: { appendChild: (e: { src?: string }) => appended.push(String(e.src)) },
     documentElement: {},
     createElement: el,
@@ -213,7 +214,8 @@ describe("tags renderer: non-live hosts (QA gate)", () => {
     const r = runTags(html, "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_campaign=x");
     assert.equal(r.doc.cookie, "s1_qa=1; Path=/; SameSite=Lax; Secure");
     assert.deepEqual(r.dl[1], ["consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" }]);
-    assert.deepEqual(r.dl[2], [
+    assert.deepEqual(r.dl[2], ["set", { page_location: "https://season1-commit--ekuzo.netlify.app/season1/join?utm_campaign=x" }]);
+    assert.deepEqual(r.dl[3], [
       "config",
       GA4_ID,
       { page_location: "https://season1-commit--ekuzo.netlify.app/season1/join?utm_campaign=x", allow_google_signals: false, allow_ad_personalization_signals: false, debug_mode: true },
@@ -444,5 +446,76 @@ describe("site layout (S12, F2)", () => {
     }
     const cfg = fs.readFileSync(path.join(process.cwd(), "next.config.mjs"), "utf8");
     assert.match(cfg, /S1_DEPLOY_CONTEXT: process\.env\.CONTEXT \|\| ""/);
+  });
+});
+
+describe("Google tag set before config (Sentry phase 4, round 3)", () => {
+  const configIdx = (dl: unknown[][]) => dl.findIndex((a) => a[0] === "config");
+  const setIdx = (dl: unknown[][]) => dl.findIndex((a) => a[0] === "set");
+  const URLS: Record<string, string> = {
+    join: "https://ekuzo.gg/season1/join?utm_source=m&kid=x",
+    signup: "https://ekuzo.gg/season1/join/signup?src=ad",
+    welcome: "https://ekuzo.gg/season1/join/welcome",
+    crew: "https://ekuzo.gg/crew/44245013?utm_source=sms",
+  };
+
+  it("every page, live and QA: gtag('set', {page_location}) is queued before config, with the cleaned location", () => {
+    for (const page of PAGES) {
+      for (const [html, url] of [
+        [renderTags({ host: "ekuzo.gg", mode: "live", page }), URLS[page]],
+        [renderTags({ host: "localhost:3105", mode: "test", page }), URLS[page].replace("https://ekuzo.gg", "http://localhost:3105") + (URLS[page].includes("?") ? "&" : "?") + "s1qa=1"],
+      ] as const) {
+        const r = runTags(html, url);
+        const si = setIdx(r.dl), ci = configIdx(r.dl);
+        assert.ok(si > 0 && ci > si, `${page}: set before config`);
+        const set = r.dl[si][1] as Record<string, string>;
+        const cfg = r.dl[ci][2] as Record<string, string>;
+        assert.equal(set.page_location, cfg.page_location, page);
+        assert.doesNotMatch(set.page_location, /kid=|s1qa|src=/, page);
+      }
+    }
+    for (const page of ["thanks", "landing"] as const) {
+      for (const url of [`https://ekuzo.gg/season1${page === "thanks" ? "/thanks?play=league" : "?ad=d1"}`, `https://x.netlify.app/season1?s1qa=1`]) {
+        const r = runTags(renderStaticTags(page), url);
+        assert.ok(setIdx(r.dl) > 0 && configIdx(r.dl) > setIdx(r.dl), `${page} ${url}`);
+      }
+    }
+  });
+
+  it("crew: the set value carries /crew/ plus kept params, never the family code (live and QA)", () => {
+    for (const [html, url] of [
+      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew" }), "https://ekuzo.gg/crew/44245013?utm_source=sms"],
+      [renderTags({ host: "season1-commit--ekuzo.netlify.app", mode: "test", page: "crew" }), "https://season1-commit--ekuzo.netlify.app/crew/44245013?utm_source=sms&s1qa=1"],
+    ] as const) {
+      const r = runTags(html, url, { referrer: "https://ekuzo.gg/season1/join/welcome?x=1" });
+      const set = r.dl.find((a) => a[0] === "set")![1] as Record<string, string>;
+      assert.equal(set.page_location, `${new URL(url).origin}/crew/?utm_source=sms`);
+      assert.equal(set.page_referrer, "https://ekuzo.gg");
+      assert.ok(!JSON.stringify(r.dl).includes("44245013"));
+    }
+  });
+
+  it("referrer: welcome sets its own origin; other pages reduce an outside referrer to its origin", () => {
+    const w = runTags(renderTags({ host: "ekuzo.gg", mode: "live", page: "welcome" }), URLS.welcome, { referrer: "https://hooks.stripe.com/3d_secure_2/x?client_secret=pi_1_secret_y" });
+    assert.deepEqual(w.dl.find((a) => a[0] === "set"), ["set", { page_location: "https://ekuzo.gg/season1/join/welcome", page_referrer: "https://ekuzo.gg" }]);
+    const j = runTags(renderTags({ host: "ekuzo.gg", mode: "live", page: "join" }), URLS.join, { referrer: "https://l.instagram.com/?u=https%3A%2F%2Fekuzo.gg&e=AT0abc" });
+    assert.deepEqual(j.dl.find((a) => a[0] === "set"), ["set", { page_location: "https://ekuzo.gg/season1/join?utm_source=m", page_referrer: "https://l.instagram.com" }]);
+    const none = runTags(renderTags({ host: "ekuzo.gg", mode: "live", page: "signup" }), URLS.signup);
+    assert.deepEqual(none.dl.find((a) => a[0] === "set"), ["set", { page_location: "https://ekuzo.gg/season1/join/signup" }]);
+  });
+
+  it("crew: every event is sent to GA4 only (send_to), live and QA; other pages keep the default routing", () => {
+    for (const [html, url] of [
+      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew" }), "https://ekuzo.gg/crew/44245013"],
+      [renderTags({ host: "localhost:3105", mode: "test", page: "crew" }), "http://localhost:3105/crew/44245013?s1qa=1"],
+    ] as const) {
+      const r = runTags(html, url);
+      (r.win.gtag as (...a: unknown[]) => void)("event", "season1_invite_view");
+      const ev = q2(r.win.dataLayer).filter((a) => a[0] === "event");
+      assert.equal((ev[0][2] as Record<string, string>).send_to, GA4_ID);
+    }
+    const j = runTags(renderTags({ host: "ekuzo.gg", mode: "live", page: "join" }), "https://ekuzo.gg/season1/join");
+    (j.win.gtag as (...a: unknown[]) => void)("event", "season1_join_view");
+    assert.deepEqual(q2(j.win.dataLayer).filter((a) => a[0] === "event"), [["event", "season1_join_view"]]);
   });
 });

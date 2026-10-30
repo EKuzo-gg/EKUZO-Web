@@ -153,6 +153,55 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
   - While busy, the card field still looks editable (Stripe draws it in its own frame) and the Link button stays visible and tappable-looking. The page ignores a wallet tap while busy (`xp.on('click')` returns), so a second payment cannot start from it, but the area does not look frozen. Whether to dim it is a design call for Aaron.
   - Console: only the mocked 409.
 
+## Round 3: Sentry phase 4 (sentry-phase4.md findings 1 and 3; lead 10-30)
+
+### Finding 1: the family code reaches the linked Google Ads destination
+
+**What was built:**
+- `tags.ts` queues `gtag('set', {page_location: <clean>, page_referrer: <clean>})` before `gtag('config')` on every page, in live, QA and both static branches.
+  - Clean location: crew gets `/crew/` plus the kept params; other pages get path plus kept params; the landing gets the page's own path and query, without the hash.
+  - Referrer: welcome uses its own origin. Every other page reduces `document.referrer` to its origin, or omits it when it is empty.
+  - The per-config `page_location` stays too.
+- Crew additionally routes every event to GA4 only: the gtag wrapper adds `send_to: 'G-8LM45PX53W'`. Ads receives none of crew's events.
+- Tests:
+  - `set` precedes `config` on every page and rendering;
+  - crew's `set` value is `/crew/?utm_source=sms` and the code appears nowhere in the queue;
+  - the referrer rules;
+  - crew `send_to`.
+
+**Measured with the real gtag.js:**
+- Setup: the built app on localhost in QA mode, gtag.js loaded through the agent proxy, and every Google collect hit intercepted and answered 204, so nothing left the machine. Log: `evidence/atlas/gtag-ads-destination-run.json`.
+- I also tried four variants on a stripped test page:
+
+  | Variant | Ads `dl` |
+  |---|---|
+  | `set` (object form) | real URL, with the code |
+  | `set` (string form) | real URL, with the code |
+  | an explicit `config('AW-18509911105', {page_location})` | real URL, with the code |
+  | `replaceState` to `/crew/` before config | `/crew/` (clean) |
+  | `send_to` on every event | removes the event hits; the destination's own `page_view` still fires |
+- Answer to the lead's question: **yes**. The linked Ads destination (`pagead2.googlesyndication.com/ccm/collect?tid=AW-18509911105`) builds `dl` from `document.location` (path, query dropped), not from `page_location`, whether set by `set` or by config.
+- After this build, crew sends one Ads hit per load: `en=page_view dl=…/crew/44245013`. **The must-not still fails for that hit.** Before, it was every event.
+- On join the Ads `dl` is the bare path, because the allow list already cleaned the address bar. Welcome is cleaned by its own `replaceState`, so only crew leaks.
+
+**Ways to close it (a decision for the lead and Jamie):**
+
+| Option | Effect | Cost |
+|---|---|---|
+| (a) **Jamie unlinks the Google Ads destination** from the Google tag `G-8LM45PX53W` (Google tag settings, destinations) | Fixes every page, and also stops the `purchase` conversion feed to Ads that Sentry flagged against D7 | No code; Jamie's go |
+| (b) Strip the code from crew's address bar before the tags | Fixes the hit | `/crew` without a code is a 404 today, so a reload or a copied address breaks unless we add a codeless crew route that renders from the signed `s1_ref` cookie |
+| (c) No GA4 on crew | Fixes the hit | Loses `season1_invite_view` and `season1_invite_join_tap` |
+
+My recommendation is (a) before release, with (c) as a one-line fallback (`gaLocation: "crew"` page spec in `tags.ts`).
+
+### Finding 3: welcome left a confirmed flag behind
+
+The welcome paid state now collects `s1_attempt`, `s1_confirmed_*` and `s1_ic_*` keys first, then removes them. The test store rotates `key(i)` order on every removal; under it the old backwards loop leaves a confirmed flag (the test fails), and the new code clears them all.
+
+### Totals after round 3
+
+`npm run test:s1` 341 / 341 and `tsc --noEmit` 0. `next build` with the test env passes.
+
 ## Copy (round 1; strings 2 and 3 superseded in round 2 above, string 1 unchanged)
 
 1. Busy label after 2 s: `Still saving. Please stay here.`
@@ -163,7 +212,7 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
 
 | Run | Result |
 |---|---|
-| `npm run test:s1` | **337 / 337 pass** (was 274). New: `tags.test.ts` 40, `signupCommit.test.ts` 20, `welcomeStates.test.ts` +3 |
+| `npm run test:s1` | **341 / 341 pass** after round 3 (was 274). New: `tags.test.ts` 44, `signupCommit.test.ts` 20, `welcomeStates.test.ts` +3 |
 | `S1_DB_TESTS=1 node --env-file=.env.test.local scripts/run-tests.mjs lib/season1/__tests__` (J10) | **373 / 373 pass**, 81 suites, 0 fail, 0 skipped, 91 s (was 317). This run predates the lead fix; the fix adds 4 pure client tests and touches no server code. |
 | `npm test` (all lib) | 431 pass, 1 skipped (pre-existing), 0 fail |
 | `npx tsc --noEmit` | exit 0 |

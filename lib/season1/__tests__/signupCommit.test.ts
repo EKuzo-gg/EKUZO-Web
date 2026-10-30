@@ -52,7 +52,7 @@ describe("sign-up commit answers (F15, C2)", () => {
     assert.match(html, /try\{var sa=sessionStorage\.getItem\('s1_attempt'\)\|\|'';if\(\/\^\[A-Za-z0-9-\]\{8,64\}\$\/\.test\(sa\)\)attemptId=sa\}catch\(_\)\{\}\nif\(!attemptId\)\{/);
     const w = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "welcome", "welcome.html"), "utf8");
     const paid = w.slice(w.indexOf("<!--paid-->"), w.indexOf("<!--/paid-->"));
-    assert.match(paid, /sessionStorage\.removeItem\('s1_attempt'\)/);
+    assert.match(paid, /sk==='s1_attempt'\|\|sk\.indexOf\('s1_confirmed_'\)===0\|\|sk\.indexOf\('s1_ic_'\)===0\)\)sks\.push\(sk\)\}sks\.forEach\(function\(k\)\{sessionStorage\.removeItem\(k\)\}\)/);
   });
   it("copy, one constant each (Parent/Steward 10-30): on its way for a real 409, checking for the ambiguous case", () => {
     assert.ok(html.includes("var IN_PROGRESS_MSG='Your payment is on its way. Taking you to your confirmation.';"));

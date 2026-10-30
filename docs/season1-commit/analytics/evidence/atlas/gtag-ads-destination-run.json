@@ -1,0 +1,79 @@
+{
+ "crew": {
+  "scripts": [
+   "https://www.googletagmanager.com/gtag/js?G-8LM45PX53W"
+  ],
+  "hits": [
+   {
+    "host": "www.google-analytics.com/g/collect",
+    "tid": "G-8LM45PX53W",
+    "en": "page_view",
+    "dl": "http://localhost:3109/crew/?utm_source=sms",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   },
+   {
+    "host": "pagead2.googlesyndication.com/ccm/collect",
+    "tid": "AW-18509911105",
+    "en": "page_view",
+    "dl": "http://localhost:3109/crew/44245013",
+    "dr": null,
+    "hasCode": true,
+    "hasKid": false
+   },
+   {
+    "host": "www.google-analytics.com/g/collect",
+    "tid": "G-8LM45PX53W",
+    "en": null,
+    "dl": "http://localhost:3109/crew/?utm_source=sms",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   }
+  ]
+ },
+ "join": {
+  "scripts": [
+   "https://www.googletagmanager.com/gtag/js?G-8LM45PX53W"
+  ],
+  "hits": [
+   {
+    "host": "www.google-analytics.com/g/collect",
+    "tid": "G-8LM45PX53W",
+    "en": "page_view",
+    "dl": "http://localhost:3109/season1/join?utm_campaign=t",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   },
+   {
+    "host": "pagead2.googlesyndication.com/ccm/collect",
+    "tid": "AW-18509911105",
+    "en": "page_view",
+    "dl": "http://localhost:3109/season1/join",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   },
+   {
+    "host": "pagead2.googlesyndication.com/ccm/collect",
+    "tid": "AW-18509911105",
+    "en": "season1_join_view",
+    "dl": "http://localhost:3109/season1/join",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   },
+   {
+    "host": "www.google-analytics.com/g/collect",
+    "tid": "G-8LM45PX53W",
+    "en": "season1_join_view",
+    "dl": "http://localhost:3109/season1/join?utm_campaign=t",
+    "dr": null,
+    "hasCode": false,
+    "hasKid": false
+   }
+  ]
+ }
+}

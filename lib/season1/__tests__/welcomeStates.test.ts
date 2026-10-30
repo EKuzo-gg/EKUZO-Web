@@ -258,13 +258,23 @@ describe("F1 welcome states", () => {
         getElementById: (id: string) =>
           id === "s1p" ? { getAttribute: (a: string) => ({ "data-id": "ord1unit", "data-value": "80", "data-kids": "1", "data-code": "1" })[a] ?? null } : null,
       };
-      const store = (m: Map<string, string>) => ({
-        getItem: (k: string) => m.get(k) ?? null,
-        setItem: (k: string, v: string) => void m.set(k, v),
-        removeItem: (k: string) => void m.delete(k),
-        key: (i: number) => [...m.keys()][i] ?? null,
-        get length() { return m.size; },
-      });
+      // key(i) order shifts after every removal (Chromium did this in Sentry phase 4): here it rotates one place
+      // right per removeItem, which makes a loop that removes while walking key(i) skip a confirmed flag.
+      const store = (m: Map<string, string>) => {
+        let removed = 0;
+        const order = () => {
+          const k = [...m.keys()];
+          const r = k.length ? removed % k.length : 0;
+          return k.slice(k.length - r).concat(k.slice(0, k.length - r));
+        };
+        return {
+          getItem: (k: string) => m.get(k) ?? null,
+          setItem: (k: string, v: string) => void m.set(k, v),
+          removeItem: (k: string) => { m.delete(k); removed++; },
+          key: (i: number) => order()[i] ?? null,
+          get length() { return m.size; },
+        };
+      };
       const win: Record<string, unknown> = {
         document: doc,
         location: { href: "https://ekuzo.gg/season1/join/welcome", search: "", origin: "https://ekuzo.gg", pathname: "/season1/join/welcome", hostname: "ekuzo.gg", protocol: "https:" },
@@ -282,12 +292,12 @@ describe("F1 welcome states", () => {
       const q = (v: unknown) => JSON.parse(JSON.stringify(((v as unknown[]) ?? []).map((a) => Array.from(a as ArrayLike<unknown>))));
       return { fb: q((win.fbq as { queue: unknown[] }).queue) as unknown[][], dl: q(win.dataLayer) as unknown[][], doc };
     }
-    const session = new Map([["s1_tap", "1000000"], ["s1_attempt", "a-b-c-d-e-f"], ["s1_confirmed_a-b-c-d-e-f", "1"], ["s1_ic_a-b-c-d-e-f", "1"], ["other", "keep"]]);
+    const session = new Map([["s1_tap", "1000000"], ["s1_attempt", "a-b-c-d-e-f"], ["s1_confirmed_a-b-c-d-e-f", "1"], ["s1_ic_a-b-c-d-e-f", "1"], ["other", "keep"], ["s1_confirmed_old-attempt", "1"], ["s1_ic_old-attempt", "1"], ["zz", "keep"]]);
     const first = run(session);
     assert.deepEqual(first.fb.filter((a) => a[1] === "Purchase"), [["track", "Purchase", { value: 80, currency: "USD", content_name: "Season 01", num_items: 1 }, { eventID: "ord1unit" }]]);
     assert.deepEqual(first.dl.filter((a) => a[0] === "event").map((a) => [a[1], a[2]]).filter((a) => a[0] !== "purchase"), [["season1_tap_to_welcome", { ms: 4400 }]]);
     assert.equal(first.dl.filter((a) => a[1] === "purchase").length, 1);
-    assert.deepEqual([...session.keys()], ["other"], "s1_tap, the attempt and its flags are cleared");
+    assert.deepEqual([...session.keys()], ["other", "zz"], "s1_tap, the attempt and every flag are cleared");
     assert.match(String(first.doc.cookie), /s1_px_ord1unit=1; Path=\/season1/);
     // Reload of the paid page: no second Purchase, no second GA purchase, no timing.
     const again = run(new Map());

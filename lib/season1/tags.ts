@@ -99,9 +99,12 @@ function coreJs(page: TagPage, qa: boolean, fallback: Record<string, string>, or
 
   // GA4
   out.push("w.dataLayer=w.dataLayer||[];var push=function(){w.dataLayer.push(arguments)};");
-  if (qa) {
-    // Every event carries debug_mode (the GA4 Developer traffic filter drops them).
-    out.push("w.gtag=function(a,b,c){if(a==='event'){var x={},k;if(c)for(k in c)x[k]=c[k];x.debug_mode=true;return push(a,b,x)}return push.apply(null,arguments)};");
+  // QA: every event carries debug_mode (the GA4 Developer traffic filter drops them). Crew: every event goes to
+  // GA4 only (send_to), so the Google tag's linked Ads destination does not mirror crew events, whose hits read
+  // the real URL with the family code (Sentry phase 4; measured: send_to stops the event hits).
+  const extra = [qa ? "x.debug_mode=true;" : "", p.gaLocation === "crew" ? `x.send_to=${js(GA4_ID)};` : ""].join("");
+  if (extra) {
+    out.push(`w.gtag=function(a,b,c){if(a==='event'){var x={},k;if(c)for(k in c)x[k]=c[k];${extra}return push(a,b,x)}return push.apply(null,arguments)};`);
   } else {
     out.push("w.gtag=push;");
   }
@@ -110,9 +113,20 @@ function coreJs(page: TagPage, qa: boolean, fallback: Record<string, string>, or
   out.push(
     `var q;try{q=new URLSearchParams(location.search)}catch(e){q={get:function(){return null}}}var K=${js(LC_KEYS)},o=[],i,v;for(i=0;i<K.length;i++){v=q.get(K[i]);if(v!==null)o.push(encodeURIComponent(K[i])+'='+encodeURIComponent(v))}var qs=o.length?'?'+o.join('&'):'';`,
   );
+  // Sentry phase 4 (round 3): the Google tag's linked Ads destination (AW-18509911105) reads the page URL itself,
+  // not GA4's per-config page_location, so crew sent /crew/<family code> to Google Ads. gtag('set') before config
+  // applies the cleaned location and referrer to every destination of the tag. Per-config values stay as well.
+  if (p.gaLocation === "kept") out.push("var L=location.origin+location.pathname+qs;");
+  if (p.gaLocation === "crew") out.push("var L=location.origin+'/crew/'+qs;");
+  if (p.gaLocation === "plain") out.push("var L=location.origin+location.pathname+location.search;");
+  out.push(
+    p.referrerOrigin
+      ? "var rf=location.origin;"
+      : "var rf='';try{rf=d.referrer?new URL(d.referrer).origin:''}catch(e){}",
+  );
+  out.push("var S={page_location:L};if(rf)S.page_referrer=rf;gtag('set',S);");
   out.push("var c={};");
-  if (p.gaLocation === "kept") out.push("c.page_location=location.origin+location.pathname+qs;");
-  if (p.gaLocation === "crew") out.push("c.page_location=location.origin+'/crew/'+qs;");
+  if (p.gaLocation !== "plain") out.push("c.page_location=L;");
   if (p.signalsOff || qa) out.push("c.allow_google_signals=false;c.allow_ad_personalization_signals=false;");
   if (qa) out.push("c.debug_mode=true;");
   if (p.referrerOrigin) out.push("c.page_referrer=location.origin;");
