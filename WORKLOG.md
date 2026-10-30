@@ -18,9 +18,10 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
 - **Landing** `LIVE` no longer matches netlify.app, so test deploys send no Lead or waitlist POST.
 - **`app/layout.tsx`:** site-wide tags load only in the production build context.
 - **Sign-up, F15:** one attempt per tab. `in_progress` shows the D5 line, then goes to welcome. `in_progress_other` shows the D5 line with the text link. `attempt_busy` retries once. "Not charged" is shown only when nothing could have been confirmed. Also new: the 2 s busy line and InitiateCheckout (eventID = sha256 of the attempt).
+  - Lead fix: a confirm that Stripe answers with an error (a decline) clears the confirmed flag, so a later 429 or price change on that attempt shows its normal message. A confirm that throws keeps the flag and goes to welcome.
 - **Welcome:** Pixel Purchase (eventID = order id, once per order) and the `season1_tap_to_welcome` timing.
 - **Tests:**
-  - `npm run test:s1`: 330 of 330 (was 274).
+  - `npm run test:s1`: 334 of 334 (was 274).
   - Integration (J10 method): 373 of 373 (was 317).
   - tsc 0, `next build` OK.
   - Browser run at 390 and 1440 on the built app.
@@ -32,7 +33,7 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - `signup.html`:
     - `{{URL_ALLOW}}` and `{{TAGS}}`, same as join.
     - `data-clarity-mask="true"` on `#invTxt`, `#sum` and `#go`, plus a masked span around the kid name in the duplicate_kid message.
-    - Client script: attempt reuse, setBusy/busy line, `commitNext`, `serverErr` (new in_progress_other branch), `pay()`, `initiateCheckout()`, pageshow.
+    - Client script: attempt reuse, setBusy/busy line, `commitNext`, `keepConfirmed`, `serverErr` (new in_progress_other branch), `pay()`, `initiateCheckout()`, pageshow.
   - `welcome.html`:
     - gtag block changed to `{{URL_ALLOW}}` and `{{TAGS}}`.
     - Masks on the hero h1, the share button, the LINK_SHORT line, a new wrapper div around `{{RECEIPT_LINES}}`, and the hidden "Help us build" line.

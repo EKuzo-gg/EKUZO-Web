@@ -95,3 +95,101 @@ describe("sign-up InitiateCheckout and tap time (S3, C6, S8)", () => {
     assert.match(payFn, /sessionStorage\.setItem\('s1_tap',String\(performance\.timeOrigin\?performance\.timeOrigin\+performance\.now\(\):Date\.now\(\)\)\)/);
   });
 });
+
+/**
+ * Lead 10-30 (open item 3): a confirm that resolves with an error (Stripe answered, nothing charged) clears
+ * s1_confirmed_<attempt>; a confirm that throws keeps it. The real pay() and its helpers are pulled out of the
+ * template and run against stubs (DOM, Stripe, fetch, sessionStorage, location).
+ */
+describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
+  const pick = (re: RegExp) => {
+    const m = re.exec(html);
+    assert.ok(m, String(re));
+    return m[0];
+  };
+  const helpers = [
+    pick(/function commitNext\(st,e,cf,rt\)\{[^\n]*\}/),
+    pick(/var IN_PROGRESS_MSG='[^']*';/),
+    pick(/function confirmedKey\(\)\{[^\n]*\}/),
+    pick(/function wasConfirmed\(\)\{[^\n]*\}/),
+    pick(/function keepConfirmed\(r\)\{[^\n]*\}/),
+  ].join("\n");
+  const keepConfirmed = new Function(`${helpers}; return keepConfirmed;`)() as (r: unknown) => boolean;
+
+  type Res = { ok: boolean; status: number; json: () => Promise<unknown> };
+  function harness() {
+    const factory = new Function(`
+      var calls={announce:[],replace:[],serverErr:[]},store=new Map();
+      var sessionStorage={getItem:function(k){return store.has(k)?store.get(k):null},setItem:function(k,v){store.set(k,String(v))},removeItem:function(k){store.delete(k)}};
+      var attemptId='att-12345678',secret=null,secretSig='',confirming=false,inviteRemoved=false,invite=null,IGNORED_MSG='ignored';
+      var elements={submit:function(){return Promise.resolve({})}},xel=null,stripe=null,fetchImpl=null,dom={};
+      function g(id){return dom[id]||(dom[id]={textContent:'',innerHTML:'',hidden:false})}
+      function setBusy(){} function ga(){} function initiateCheckout(){} function showTotal(){} function renderInvite(){} function upd(){}
+      function announce(m){calls.announce.push(m)} function totalCents(){return 10000} function money(c){return '$'+c/100}
+      function serverErr(st,j){calls.serverErr.push([st,(j&&j.error)||''])}
+      var location={origin:'https://ekuzo.gg',replace:function(u){calls.replace.push(u)}},window={location:location};
+      var performance={timeOrigin:1,now:function(){return 1}};
+      function setTimeout(fn){fn();return 0}
+      function fetch(u,o){return fetchImpl(u,o)}
+      ${helpers}
+      ${payFn}
+      return {pay:pay,calls:calls,store:store,set:function(s,f){stripe=s;fetchImpl=f}};`);
+    return factory() as {
+      pay: (body: Record<string, unknown>, xev: null) => Promise<void>;
+      calls: { announce: string[]; replace: string[]; serverErr: [number, string][] };
+      store: Map<string, string>;
+      set: (stripe: unknown, fetch: (u: string) => Promise<Res>) => void;
+    };
+  }
+  const reply = (status: number, j: unknown): Res => ({ ok: status >= 200 && status < 300, status, json: async () => j });
+  const body = (kid: string) => ({ email: "p@example.com", parentFirstName: "Pat", phone: "", kids: [{ firstName: kid, age: 11 }] });
+  const FLAG = "s1_confirmed_att-12345678";
+
+  it("rule: an error answer clears the flag; success or redirect (no error) and unexpected_state keep it", () => {
+    assert.equal(keepConfirmed({ error: { type: "card_error", code: "card_declined" } }), false);
+    assert.equal(keepConfirmed({ error: { type: "card_error", code: "payment_intent_authentication_failure" } }), false);
+    assert.equal(keepConfirmed({ error: { type: "invalid_request_error", code: "payment_intent_unexpected_state" } }), true);
+    assert.equal(keepConfirmed({}), true);
+    assert.equal(keepConfirmed(undefined), true);
+  });
+
+  it("decline, then a 429 on the same attempt: the normal message, no navigation", async () => {
+    const h = harness();
+    const answers = [reply(200, { clientSecret: "pi_1_secret_x", amountCents: 10000 }), reply(429, { error: "rate_limited" })];
+    h.set({ confirmPayment: async () => ({ error: { type: "card_error", code: "card_declined", message: "Your card was declined." } }) }, async () => answers.shift()!);
+    await h.pay(body("Maya"), null);
+    assert.ok(h.calls.announce.includes("Your card was declined."));
+    assert.equal(h.store.has(FLAG), false, "flag cleared by Stripe's answer");
+    await h.pay(body("Mia"), null); // changed details: a new commit on the same attempt, answered 429
+    assert.deepEqual(h.calls.serverErr, [[429, "rate_limited"]]);
+    assert.deepEqual(h.calls.replace, []);
+    assert.ok(!h.calls.announce.some((m) => /already going through/.test(m)));
+  });
+
+  it("decline, then a network error on the re-commit: the existing 'not charged' line, no navigation", async () => {
+    const h = harness();
+    let n = 0;
+    h.set({ confirmPayment: async () => ({ error: { type: "card_error", code: "card_declined", message: "Declined." } }) }, async () => {
+      if (n++ === 0) return reply(200, { clientSecret: "pi_1_secret_x", amountCents: 10000 });
+      throw new TypeError("Failed to fetch");
+    });
+    await h.pay(body("Maya"), null);
+    await h.pay(body("Mia"), null);
+    assert.deepEqual(h.calls.replace, []);
+    assert.match(h.calls.announce[h.calls.announce.length - 1], /Your card was not charged/);
+  });
+
+  it("network error after confirm (confirm throws): the flag stays and the parent goes to the confirmation", async () => {
+    const h = harness();
+    h.set({ confirmPayment: async () => { throw new TypeError("Failed to fetch"); } }, async () => reply(200, { clientSecret: "pi_1_secret_x", amountCents: 10000 }));
+    await h.pay(body("Maya"), null);
+    assert.equal(h.store.get(FLAG), "1");
+    assert.deepEqual(h.calls.replace, ["/season1/join/welcome"]);
+    assert.equal(h.calls.announce[h.calls.announce.length - 1], "Your payment is already going through. Taking you to your confirmation to check on it.");
+    // A later failure on that attempt also goes to the confirmation, never "not charged".
+    h.set({ confirmPayment: async () => ({}) }, async () => reply(429, { error: "rate_limited" }));
+    await h.pay(body("Mia"), null);
+    assert.deepEqual(h.calls.replace, ["/season1/join/welcome", "/season1/join/welcome"]);
+    assert.deepEqual(h.calls.serverErr, []);
+  });
+});

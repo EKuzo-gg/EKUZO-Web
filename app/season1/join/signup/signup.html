@@ -509,6 +509,11 @@ function initiateCheckout(){
 }
 function confirmedKey(){return 's1_confirmed_'+attemptId}
 function wasConfirmed(){try{return sessionStorage.getItem(confirmedKey())==='1'}catch(_){return false}}
+/* F15 (lead 10-30): confirmPayment resolved with an error, so Stripe answered and nothing was charged (a decline,
+   a failed 3D Secure check): the flag goes, and a later 429 or price change on this attempt shows its own message.
+   It stays when confirm throws, never resolves or redirects (ambiguous), and on payment_intent_unexpected_state
+   (the PaymentIntent may already have succeeded, e.g. in another tab). Pure, unit tested. */
+function keepConfirmed(r){return !(r&&r.error)||r.error.code==='payment_intent_unexpected_state'}
 async function pay(body,xev){
  var errEl=g(xev?'e-xp':'e-pay'),els=xev?xel:elements,pfDone=false;
  // Wallet: close the sheet first, then show any message (C2).
@@ -549,6 +554,7 @@ async function pay(body,xev){
   try{sessionStorage.setItem(confirmedKey(),'1')}catch(_){}
   confirming=true;
   var r=await stripe.confirmPayment({elements:els,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
+  if(!keepConfirmed(r)){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}
   if(r&&r.error){pf();var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
  }catch(err){
   if(wasConfirmed()){toWelcome();return}

@@ -92,6 +92,8 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
 
 - **One attempt per tab.** The attempt is reused from `sessionStorage.s1_attempt` (same `[A-Za-z0-9-]{8,64}` rule as the server), so a reload or an in-app-browser back lands on the same attempt. The welcome paid state clears it.
 - **`s1_confirmed_<attemptId>`** is set just before `confirmPayment`, with nothing awaited in between.
+  - **Lead fix, 10-30 (was open item 3).** When `confirmPayment` (card or wallet, same code path) resolves with `r.error`, Stripe answered and nothing was charged, so the flag is cleared (`keepConfirmed(r)`, pure and unit tested). A later 429, `price_changed` or network error on that attempt then shows its normal message.
+  - The flag stays when confirm throws, never resolves or redirects. It also stays on `payment_intent_unexpected_state`, because the PaymentIntent may already have succeeded (for example in another tab), so "not charged" would not be safe there.
 - **Commit answers:** a pure function `commitNext(status, error, confirmed, retried)` is unit tested:
 
 | Answer | Result |
@@ -138,14 +140,16 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
 
 | Run | Result |
 |---|---|
-| `npm run test:s1` | **330 / 330 pass** (was 274). New: `tags.test.ts` 40, `signupCommit.test.ts` 13, `welcomeStates.test.ts` +3 |
-| `S1_DB_TESTS=1 node --env-file=.env.test.local scripts/run-tests.mjs lib/season1/__tests__` (J10) | **373 / 373 pass**, 81 suites, 0 fail, 0 skipped, 91 s (was 317) |
+| `npm run test:s1` | **334 / 334 pass** (was 274). New: `tags.test.ts` 40, `signupCommit.test.ts` 17, `welcomeStates.test.ts` +3 |
+| `S1_DB_TESTS=1 node --env-file=.env.test.local scripts/run-tests.mjs lib/season1/__tests__` (J10) | **373 / 373 pass**, 81 suites, 0 fail, 0 skipped, 91 s (was 317). This run predates the lead fix; the fix adds 4 pure client tests and touches no server code. |
 | `npm test` (all lib) | 431 pass, 1 skipped (pre-existing), 0 fail |
 | `npx tsc --noEmit` | exit 0 |
 | `npx eslint` on changed files | 0 errors (1 pre-existing `<img>` warning in layout) |
 | `next build` with the test env | exit 0 |
 
-**The tests bite:** with the new test files and the old code (stash), two suites fail.
+**The tests bite:**
+- With the new test files and the old code (stash), two suites fail.
+- With the lead fix's clearing line removed, "decline then 429" and "decline then network error" both fail.
 
 **What the new tests cover:**
 - **Renderer and route output per host:**
@@ -161,7 +165,15 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
   - S1QA_ mapping in QA;
   - PageView once per order on welcome;
   - the welcome paid script: one Purchase with the order id and the server's value, one tap timing, the attempt keys cleared, and nothing on reload;
-  - the layout gate source.
+  - the layout gate source;
+  - the real `pay()` from the template, run against stub DOM, Stripe, fetch, sessionStorage and location. Four cases are covered:
+
+    | Case | Result |
+    |---|---|
+    | Decline, then 429 on the same attempt | The normal 429 message, no navigation |
+    | Decline, then a network error | "Not charged", no navigation |
+    | Confirm throws | The flag stays and the parent goes to welcome |
+    | A later 429 after that | Also goes to welcome |
 
 ## Browser run (Playwright chromium, built app, 390 and 1440)
 
@@ -211,9 +223,8 @@ On a local build (context empty), `/` and `/parents` serve no vendor tag. `/seas
 
 1. **Branch-deploy network proof is Sentry's** (C18: R2 to R5, R7, R12, R18). That means real `/g/collect` (`_dbg=1`), `facebook.com/tr` (`ev=Purchase&eid=<order>`, `S1QA_*`, and no `SubscribedButtonClick` / `cd[buttonText]` / `ud[`), and `clarity.ms/collect` on `season1-commit--ekuzo.netlify.app` with and without `?s1qa=1`. It also includes the 3DS referrer check and a paid welcome in a real browser. Here the vendor scripts were intercepted and the paid-state Purchase was proven in a vm.
 2. **Styling of the in-progress line (for Aaron).** It renders in `#formErr`, which is red error text with `role=alert`. A neutral style may read better for "your payment is going through". This is a design call.
-3. **The confirmed-flag rule follows the spec literally.** After a declined confirm on an attempt, any later non-OK answer on that attempt goes to welcome. Examples are a 429 after many retries, or `price_changed`. Welcome then shows "We're confirming your payment" for a PaymentIntent in `requires_payment_method` until the slow state.
-   - A possible refinement for Fable or Jamie: clear the flag on a Stripe `card_error` decline, since nothing was charged on that confirm.
-   - Separately, the welcome failed state's "Try again" keeps the same attempt; only the paid state clears it, per spec.
+3. **Resolved (lead 10-30).** The confirmed flag is now cleared when Stripe answers a confirm with an error (see section 6).
+   - The welcome failed state's "Try again" still keeps the same attempt, because only the paid state clears it. The lead accepted this.
 4. **Thanks GA4 `page_location`** now follows S2, so it drops `play`. The `season1_play_answer` event still carries `play`. Before, GA saw the full URL.
 5. **Landing:** the `<noscript>` Pixel image is gone, and the landing has no address-bar allow list, because its own script reads `ad=` and `site=`.
 6. **Crew's address bar** now keeps the kept params; before, the whole query was stripped. GA4 needs them for `page_location`. There is no Pixel or Clarity on crew.
