@@ -28,7 +28,7 @@ a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid
 .dark :focus-visible { outline-color: var(--white); }
 button { font: inherit; cursor: pointer; }
 h1, h2, h3, p { margin: 0; }
-h2, h3 { text-wrap: balance; }
+h1, h2, h3, .h3, .nm, .ct, .s-t, .quote, .subhead { text-wrap: balance; }
 p { text-wrap: pretty; }
 .display { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: .9; }
 
@@ -154,7 +154,7 @@ main { margin-left: var(--side); min-height: 100vh; }
 .chev button[aria-pressed="true"] .flag { color: inherit; }
 .jdetail { margin-top: 28px; background: var(--grey); clip-path: var(--notch); padding: 32px 36px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
 .jdetail .bign { font-family: var(--display); font-weight: 900; font-size: 140px; line-height: .8; }
-.jdetail .bigt { font: 700 22px/1.15 var(--body); margin-top: 10px; letter-spacing: -.4px; }
+.jdetail .bigt { font: 700 22px/1.15 var(--body); margin-top: 10px; letter-spacing: -.4px; text-wrap: balance; }
 .jfields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 28px; align-content: start; }
 .jfields .lab { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 8px; }
 .jfields .val { font-size: 16px; }
@@ -176,6 +176,14 @@ details.full[open] summary { background: var(--black); color: #fff; }
   .jnav { grid-column: 1; }
 }
 
+@media (max-width: 1279px) {
+  .phases { display: none; }
+  .chev { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .chev button, .chev button:first-child { clip-path: none; padding: 12px; }
+  .mood-wrap { display: none; }
+  .jdetail { grid-template-columns: 1fr; gap: 20px; }
+  .jnav { grid-column: 1; }
+}
 /* Lane page */
 .lane-hero { display: block; }
 .lane-hero .num { font-family: var(--display); font-weight: 900; font-size: clamp(120px, 15vw, 200px); line-height: .75; opacity: .9; }
@@ -265,8 +273,8 @@ select { width: 100%; font: 16px var(--body); padding: 11px 12px; border: 2px so
 
 /* One-pagers */
 .skel { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
-.page { aspect-ratio: 8.5 / 11; background: var(--white); clip-path: var(--notch); padding: 24px 22px; display: flex; flex-direction: column; gap: 12px; }
-.page .hl { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: .92; font-size: 30px; }
+.page { aspect-ratio: 8.5 / 11; background: var(--white); clip-path: var(--notch); padding: 52px 26px 26px; display: flex; flex-direction: column; gap: 12px; }
+.page .hl { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: 1; font-size: 30px; text-wrap: balance; }
 .page .ln { height: 6px; background: var(--ink-15); }
 .page .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .page .col { padding: 8px; display: grid; gap: 5px; align-content: start; }
@@ -283,7 +291,7 @@ select { width: 100%; font: 16px var(--body); padding: 11px 12px; border: 2px so
 .anat b { display: block; font-size: 17px; }
 .anat span { font-size: 15px; color: var(--ink-70); }
 .op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 36px 28px; }
-.op .page { padding: 18px 16px; gap: 9px; background: var(--grey); }
+.op .page { padding: 30px 18px 18px; gap: 9px; background: var(--grey); clip-path: var(--notch-sm); }
 .op .page .hl { font-size: 23px; }
 .op .page .ln { height: 5px; }
 .op .meta { margin-top: 14px; }
@@ -737,7 +745,7 @@ function viewJourney() {
     <div style="margin-top:36px">
       <div class="phases"><div class="reach">Reach</div><div class="rapport">Rapport</div><div class="partner">Partner</div></div>
       <div class="chev" role="group" aria-label="Journey stages">${chev}</div>
-      <div style="margin-top:10px"><div class="lab" style="font:700 12px/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.6);margin-bottom:4px">How warm they are</div>${moodSVG()}</div>
+      <div class="mood-wrap" style="margin-top:10px"><div class="lab" style="font:700 12px/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.6);margin-bottom:4px">How warm they are</div>${moodSVG()}</div>
       <div class="jdetail" id="jdetail" aria-live="polite"></div>
     </div>
     <details class="full"><summary>Show every stage as a table</summary>
