@@ -5,6 +5,10 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: Season 01 analytics build, discovery
+
+Started the analytics and attribution build (session prompt `knowledge-base/explorations/2026-10-26-season1-commit-invite/18-session-prompt-analytics.md`). Scout's read-only map is in `docs/season1-commit/analytics/00-scout-map.md`. No code changed yet; plan and questions are with Jamie.
+
 ## Jamie's Claude, 2026-10-29: Season 01 live, session close
 
 Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only) since 10:01 CT. The fix batch was released at 16:33 CT: main `fa9c510`, dev `3b43ae4`, both code-identical to `season1-commit` 0592639. The smoke test passed at 16:40, and Jamie checked his phone at 16:46. The full record is in `docs/season1-commit/final/`: start with `08-handoff.md`, then `03-golive-log.md`.
