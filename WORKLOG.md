@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron's Claude, 2026-10-30: Outreach Lab and the Austin microschool one-pager (roadshow, dev only)
+
+Branch `dev`. Everything is under `public/roadshow/`, which never ships to main (dev-runbook, releasing when dev carries work main must not get). No app, lib, components or API files touched.
+
+1. **Outreach Lab** (`public/roadshow/outreach-lab.html`, 481e4ba): hub for EKUZO's eight partner lanes: lane board, player pathway, journey map, a page per lane, message templates, one-pager specs, open decisions. Public-safe version with no partner names or contact details; the full version stays private. Linked from the Roadshow Hub (new tile under In review).
+2. **QA fixes** (ed3913a): notch clipping on one-pager thumbnail headlines; journey chevrons overflowing at 1024 px; widows on short headings.
+3. **Austin microschool one-pager** (`public/roadshow/one-pagers/microschool.html` + `karlin.jpg`, a2798b1): Letter page that prints to one page; Outreach Lab's one-pager #1 links to it. Draft: pricing, block length and the per-player write-up are pending team decisions.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, nothing past the page edge, no missing assets; the one-pager prints to one Letter page.
+
+---
 ## Jamie's Claude, 2026-10-29: card form behind Or pay with card
 
 Branch `season1-commit`. Jamie 14:05 CT on his Android Chrome: "I would expect the pay with card to be hidden but available to expand via or pay with card." Plus a cost decision on the pre-warm.
