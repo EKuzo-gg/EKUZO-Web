@@ -5,6 +5,7 @@ import path from "node:path";
 import vm from "node:vm";
 import {
   CLARITY_PAGES,
+  CREW_GA4,
   GA4_ID,
   PIXEL_ID,
   URL_ALLOW_KEYS,
@@ -28,6 +29,8 @@ const QA_BLOCK = /<script>\/\* s1 QA gate[\s\S]*?<\/script>/g;
 const LIVE_HOSTS = ["ekuzo.gg", "www.ekuzo.gg", "EKUZO.GG:443"];
 const OTHER_HOSTS = ["season1-commit--ekuzo.netlify.app", "ekuzo.netlify.app", "localhost:3105", "ekuzo.gg.evil.example", "", null, undefined];
 const PAGES: DynamicPage[] = ["join", "signup", "welcome", "crew"];
+/** Crew renders no vendor tags this release (CREW_GA4 false); the tagged route pages are the other three. */
+const TAGGED: DynamicPage[] = ["join", "signup", "welcome"];
 
 function scripts(html: string): string[] {
   const out: string[] = [];
@@ -90,7 +93,7 @@ describe("tags renderer: live hosts", () => {
     for (const h of OTHER_HOSTS) for (const m of ["live", "off", "test"] as const) assert.equal(tagsAreLive(h, m), false, `${h} ${m}`);
   });
 
-  for (const page of PAGES) {
+  for (const page of TAGGED) {
     it(`${page}: live render has GA4, never debug_mode or the QA script, and parses`, () => {
       const html = renderTags({ host: "ekuzo.gg", mode: "live", page, orderRef: "abc234defg" });
       assert.ok(html.includes(GA4_ID));
@@ -143,8 +146,14 @@ describe("tags renderer: live hosts", () => {
     assert.equal(okClarityValue("d2-a-cantpause"), true);
   });
 
-  it("crew: GA4 only, /crew/ path plus kept params, signals off", () => {
-    const html = renderTags({ host: "ekuzo.gg", mode: "live", page: "crew" });
+  it("crew this release (CREW_GA4 false): no vendor tag at all, live or QA, on any host", () => {
+    assert.equal(CREW_GA4, false);
+    for (const host of ["ekuzo.gg", "www.ekuzo.gg", "season1-commit--ekuzo.netlify.app", "localhost:3105", null])
+      for (const mode of ["live", "off", "test"] as const) assert.equal(renderTags({ host, mode, page: "crew" }), "", `${host} ${mode}`);
+  });
+
+  it("crew re-enable path (crewGa4 true): GA4 only, /crew/ path plus kept params, signals off", () => {
+    const html = renderTags({ host: "ekuzo.gg", mode: "live", page: "crew", crewGa4: true });
     const r = runTags(html, "https://ekuzo.gg/crew/48271937?utm_source=sms");
     assert.deepEqual(r.dl.find((a) => a[0] === "config"), [
       "config",
@@ -184,7 +193,7 @@ describe("tags renderer: live hosts", () => {
 describe("tags renderer: non-live hosts (QA gate)", () => {
   for (const host of OTHER_HOSTS) {
     it(`host ${JSON.stringify(host)}: one gated script, no vendor URL before the gate`, () => {
-      for (const page of PAGES) {
+      for (const page of TAGGED) {
         const html = renderTags({ host, mode: "test", page });
         assert.match(html, /^<script>\/\* s1 QA gate/);
         assert.equal(scripts(html).length, 1);
@@ -391,13 +400,14 @@ describe("route GET output per host (R1, R2, ops 4)", () => {
     };
   }
 
-  it("ekuzo.gg: GA4 on all four; Pixel init on join, sign-up, welcome; no placeholder left; no debug_mode", async () => {
+  it("ekuzo.gg: GA4, Pixel init and Clarity on join, sign-up, welcome; no placeholder left; no debug_mode", async () => {
     const p = await pages("ekuzo.gg");
-    for (const [name, html] of Object.entries(p)) {
+    for (const name of TAGGED) {
+      const html = p[name];
       assert.ok(html.includes("G-8LM45PX53W"), name);
       assert.doesNotMatch(html, /\{\{(TAGS|URL_ALLOW)\}\}|debug_mode|s1 QA gate/, name);
-      assert.equal(html.includes(`fbq('init',"${PIXEL_ID}")`), name !== "crew", name);
-      assert.equal(html.includes("clarity.ms"), name !== "crew", name);
+      assert.ok(html.includes(`fbq('init',"${PIXEL_ID}")`), name);
+      assert.ok(html.includes("clarity.ms"), name);
       parses(html);
       // No history call after the first tag script (C10, privacy 11).
       const firstTag = html.indexOf("<script async src=\"https://www.googletagmanager.com");
@@ -407,10 +417,42 @@ describe("route GET output per host (R1, R2, ops 4)", () => {
     }
   });
 
+  it("crew on ekuzo.gg and on the branch host: no vendor URL, no GA4 id, no QA gate; the invite events are inert", async () => {
+    for (const host of ["ekuzo.gg", "season1-commit--ekuzo.netlify.app"]) {
+      const html = (await pages(host)).crew;
+      assert.doesNotMatch(html, VENDOR, host);
+      assert.doesNotMatch(html, /G-8LM45PX53W|s1 QA gate|fbq\(|clarity\(/, host);
+      assert.doesNotMatch(html, /\{\{(TAGS|URL_ALLOW)\}\}/, host);
+      assert.match(html, /history\.replaceState/, "the address bar allow list still runs");
+      // Every inline script runs without gtag defined: the invite events are swallowed, nothing throws.
+      const u = new URL(`https://${host}/crew/48271937?utm_source=sms`);
+      const links: { cb?: () => void }[] = [{}, {}];
+      const thrown: unknown[] = [];
+      const ctx = vm.createContext({
+        URL, URLSearchParams, Date,
+        location: { href: u.href, pathname: u.pathname, search: u.search, origin: u.origin },
+        history: { state: null, replaceState() {} },
+        sessionStorage: { getItem: () => null, setItem() {} },
+        fetch: () => Promise.resolve(),
+        document: {
+          getElementById: () => null,
+          querySelector: () => null,
+          querySelectorAll: (sel: string) => (sel === "a.join" ? links.map((l) => ({ addEventListener: (_e: string, cb: () => void) => { l.cb = cb; } })) : []),
+        },
+        console: { error: (...a: unknown[]) => thrown.push(a) },
+      });
+      for (const code of scripts(html)) assert.doesNotThrow(() => vm.runInContext(code, ctx), host);
+      for (const l of links) assert.doesNotThrow(() => l.cb && l.cb(), "join tap");
+      assert.ok(links.every((l) => typeof l.cb === "function"), "the join-tap listeners are still attached");
+      assert.equal(vm.runInContext("typeof gtag", ctx), "undefined");
+      assert.deepEqual(thrown, []);
+    }
+  });
+
   it("branch deploy host: no vendor URL outside the QA gate", async () => {
     const p = await pages("season1-commit--ekuzo.netlify.app");
     for (const [name, html] of Object.entries(p)) {
-      assert.match(html, /s1 QA gate/, name);
+      if (name !== "crew") assert.match(html, /s1 QA gate/, name);
       assert.doesNotMatch(html.replace(QA_BLOCK, ""), VENDOR, name);
       assert.doesNotMatch(html, /\{\{(TAGS|URL_ALLOW)\}\}/, name);
     }
@@ -462,8 +504,8 @@ describe("Google tag set before config (Sentry phase 4, round 3)", () => {
   it("every page, live and QA: gtag('set', {page_location}) is queued before config, with the cleaned location", () => {
     for (const page of PAGES) {
       for (const [html, url] of [
-        [renderTags({ host: "ekuzo.gg", mode: "live", page }), URLS[page]],
-        [renderTags({ host: "localhost:3105", mode: "test", page }), URLS[page].replace("https://ekuzo.gg", "http://localhost:3105") + (URLS[page].includes("?") ? "&" : "?") + "s1qa=1"],
+        [renderTags({ host: "ekuzo.gg", mode: "live", page, crewGa4: true }), URLS[page]],
+        [renderTags({ host: "localhost:3105", mode: "test", page, crewGa4: true }), URLS[page].replace("https://ekuzo.gg", "http://localhost:3105") + (URLS[page].includes("?") ? "&" : "?") + "s1qa=1"],
       ] as const) {
         const r = runTags(html, url);
         const si = setIdx(r.dl), ci = configIdx(r.dl);
@@ -482,10 +524,10 @@ describe("Google tag set before config (Sentry phase 4, round 3)", () => {
     }
   });
 
-  it("crew: the set value carries /crew/ plus kept params, never the family code (live and QA)", () => {
+  it("crew re-enable path: the set value carries /crew/ plus kept params, never the family code (live and QA)", () => {
     for (const [html, url] of [
-      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew" }), "https://ekuzo.gg/crew/44245013?utm_source=sms"],
-      [renderTags({ host: "season1-commit--ekuzo.netlify.app", mode: "test", page: "crew" }), "https://season1-commit--ekuzo.netlify.app/crew/44245013?utm_source=sms&s1qa=1"],
+      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew", crewGa4: true }), "https://ekuzo.gg/crew/44245013?utm_source=sms"],
+      [renderTags({ host: "season1-commit--ekuzo.netlify.app", mode: "test", page: "crew", crewGa4: true }), "https://season1-commit--ekuzo.netlify.app/crew/44245013?utm_source=sms&s1qa=1"],
     ] as const) {
       const r = runTags(html, url, { referrer: "https://ekuzo.gg/season1/join/welcome?x=1" });
       const set = r.dl.find((a) => a[0] === "set")![1] as Record<string, string>;
@@ -504,10 +546,10 @@ describe("Google tag set before config (Sentry phase 4, round 3)", () => {
     assert.deepEqual(none.dl.find((a) => a[0] === "set"), ["set", { page_location: "https://ekuzo.gg/season1/join/signup" }]);
   });
 
-  it("crew: every event is sent to GA4 only (send_to), live and QA; other pages keep the default routing", () => {
+  it("crew re-enable path: every event is sent to GA4 only (send_to), live and QA; other pages keep the default routing", () => {
     for (const [html, url] of [
-      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew" }), "https://ekuzo.gg/crew/44245013"],
-      [renderTags({ host: "localhost:3105", mode: "test", page: "crew" }), "http://localhost:3105/crew/44245013?s1qa=1"],
+      [renderTags({ host: "ekuzo.gg", mode: "live", page: "crew", crewGa4: true }), "https://ekuzo.gg/crew/44245013"],
+      [renderTags({ host: "localhost:3105", mode: "test", page: "crew", crewGa4: true }), "http://localhost:3105/crew/44245013?s1qa=1"],
     ] as const) {
       const r = runTags(html, url);
       (r.win.gtag as (...a: unknown[]) => void)("event", "season1_invite_view");

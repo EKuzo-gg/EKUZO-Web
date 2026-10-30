@@ -39,6 +39,12 @@ Branch `season1-commit` (Atlas). This is the client half of the analytics slice.
   - Welcome now clears `s1_confirmed_*` reliably by collecting keys first, then removing them.
   - `npm run test:s1`: 341 of 341.
 
+- **Round 4** (lead decision): crew (`/crew/<code>`) renders no vendor tags this release: no GA4, Pixel or Clarity, live or QA.
+  - The switch is `CREW_GA4` in `lib/season1/tags.ts`. Turn it back on once Jamie unlinks the Google Ads destination from the Google tag.
+  - The `gtag('set')` improvements stay on every other page.
+  - `npm run test:s1`: 342 of 342.
+  - **Aaron:** crew loses `season1_invite_view` and `season1_invite_join_tap` in GA4 until the Ads link is removed. Invite conversions are still recorded in the database (the s1_ref cookie, and the order's referral and invite fields).
+
 **For Aaron, every template and copy line touched:**
 
 - **Templates:**

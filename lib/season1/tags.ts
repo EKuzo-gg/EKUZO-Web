@@ -45,6 +45,16 @@ export const CLARITY_PAGES: Record<TagPage, boolean> = {
   crew: false,
 };
 
+/**
+ * Crew (`/crew/<family code>`) renders NO vendor tags this release: no GA4, no Pixel, no Clarity, live or QA.
+ * Why: the Google tag G-8LM45PX53W has a linked Google Ads destination (AW-18509911105) whose ccm/collect hits
+ * read document.location, ignoring page_location (set or config) and send_to on its own page_view. Measured on
+ * 10-30 (evidence/atlas-frontend.md, round 3): crew sent dl=/crew/<code> to Google Ads, which breaks the
+ * must-not. Turn GA4 back on (GA4 only, /crew/ location, signals off, events send_to GA4) by setting this to
+ * true once Jamie has unlinked the Ads destination from the Google tag and a branch run shows no ccm/collect.
+ */
+export const CREW_GA4 = false;
+
 /** P4 (Jamie, open): in QA mode, Purchase and InitiateCheckout become S1QA_ custom events. */
 export const QA_RENAME_CONVERSIONS = true;
 
@@ -201,10 +211,14 @@ export interface TagOptions {
   orderRef?: string | null;
   /** The request's Cookie header (Clarity fallback tags). */
   cookie?: string | null;
+  /** Crew GA4 switch; defaults to CREW_GA4 (tests pass true to check the re-enable path). */
+  crewGa4?: boolean;
 }
 
 /** Head tags for a route-rendered page. */
 export function renderTags(o: TagOptions): string {
+  // Crew: nothing at all, not even the QA gate, until CREW_GA4 is turned back on (see the constant).
+  if (o.page === "crew" && !(o.crewGa4 ?? CREW_GA4)) return "";
   const ref = o.orderRef && /^[A-Za-z0-9_-]{1,64}$/.test(o.orderRef) ? o.orderRef : "";
   const fb = CLARITY_PAGES[o.page] && PAGES[o.page].clarityTags ? clarityFallback(o.cookie) : {};
   if (tagsAreLive(o.host, o.mode)) {

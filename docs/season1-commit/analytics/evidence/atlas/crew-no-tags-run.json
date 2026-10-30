@@ -1,0 +1,64 @@
+[
+ {
+  "width": 390,
+  "url": "http://ekuzo.gg:3110/crew/48271937?utm_source=sms&s1qa=1",
+  "href": "http://ekuzo.gg:3110/crew/48271937?utm_source=sms&s1qa=1",
+  "vendor": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "undefined"
+ },
+ {
+  "width": 390,
+  "url": "http://localhost:3110/crew/48271937?s1qa=1",
+  "href": "http://localhost:3110/crew/48271937?s1qa=1",
+  "vendor": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "undefined"
+ },
+ {
+  "width": 390,
+  "url": "http://ekuzo.gg:3110/season1/join",
+  "href": "http://ekuzo.gg:3110/season1/join",
+  "vendor": [
+   "https://www.googletagmanager.com/gtag/js",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "function"
+ },
+ {
+  "width": 1440,
+  "url": "http://ekuzo.gg:3110/crew/48271937?utm_source=sms&s1qa=1",
+  "href": "http://ekuzo.gg:3110/crew/48271937?utm_source=sms&s1qa=1",
+  "vendor": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "undefined"
+ },
+ {
+  "width": 1440,
+  "url": "http://localhost:3110/crew/48271937?s1qa=1",
+  "href": "http://localhost:3110/crew/48271937?s1qa=1",
+  "vendor": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "undefined"
+ },
+ {
+  "width": 1440,
+  "url": "http://ekuzo.gg:3110/season1/join",
+  "href": "http://ekuzo.gg:3110/season1/join",
+  "vendor": [
+   "https://www.googletagmanager.com/gtag/js",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "gtag": "function"
+ }
+]

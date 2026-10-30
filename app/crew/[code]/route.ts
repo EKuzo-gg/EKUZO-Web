@@ -10,9 +10,9 @@ import { errCode, logStep } from "@/lib/season1/rules";
 import { fillTags, tagsForRequest } from "@/lib/season1/tags";
 
 // Season 01 friend page, /crew/<code>. The link a family shares after committing.
-// Static-shaped HTML served by a route handler OUTSIDE app/layout.tsx (no Meta
-// pixel, no Clarity: the family code is in the path; GA4 only, signals off, via
-// lib/season1/tags.ts). Server-rendered per request: names are HTML-escaped, the
+// Static-shaped HTML served by a route handler OUTSIDE app/layout.tsx. No vendor
+// tags this release (the family code is in the path and the Google tag's linked
+// Ads destination reads the real URL): see CREW_GA4 in lib/season1/tags.ts. Server-rendered per request: names are HTML-escaped, the
 // response is never cached, and the signed s1_ref cookie is set when the code
 // resolves (spec 02b, T4 to T10, T14).
 export const dynamic = "force-dynamic";

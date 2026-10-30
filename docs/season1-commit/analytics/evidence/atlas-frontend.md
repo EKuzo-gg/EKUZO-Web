@@ -202,6 +202,30 @@ The welcome paid state now collects `s1_attempt`, `s1_confirmed_*` and `s1_ic_*`
 
 `npm run test:s1` 341 / 341 and `tsc --noEmit` 0. `next build` with the test env passes.
 
+## Round 4: crew renders no vendor tags (lead decision, option c)
+
+**What changed:**
+- `tags.ts` has `export const CREW_GA4 = false`, with the reason in a comment beside it: the linked Ads destination reads `document.location`, so crew sent `dl=/crew/<code>` to Google Ads.
+- While it is false, `renderTags` returns nothing for crew: no GA4, no Pixel, no Clarity, and no QA gate, on any host or mode. The address-bar allow list still runs.
+- Setting it to `true` restores the round 3 crew rendering: GA4 only, `/crew/` plus kept params, signals off, events `send_to` GA4. Do that only after Jamie unlinks the Ads destination from the Google tag and a branch run shows no `ccm/collect`.
+- The `gtag('set')` improvements stay on every other page.
+
+**Effect on crew's events:**
+- Crew's inline `season1_invite_view` and `season1_invite_join_tap` calls are inert. They sit in `try{gtag(...)}catch`, and `gtag` is undefined.
+- The join-tap listeners are still attached and the links work.
+- Invite conversions are still recorded in the database: the `s1_ref` cookie, and the order's referral and invite fields.
+
+**Tests** (`npm run test:s1` 342 / 342, `tsc --noEmit` 0):
+- `renderTags` for crew is `""` on live, off and test modes, for every host.
+- The crew route `GET` on ekuzo.gg and on the branch host contains no vendor URL, no `G-8LM45PX53W`, no QA gate and no leftover placeholder.
+- Crew's inline scripts run in a vm with no `gtag`: nothing throws, nothing goes to `console.error`, and the join-tap handler runs.
+- The round 3 crew GA4 tests now exercise the re-enable path (`crewGa4: true`).
+
+**Browser** (rebuilt app, 390 and 1440):
+- Crew on ekuzo.gg (with `?s1qa=1` too) and on localhost: 0 vendor requests, `typeof gtag` is `undefined`, console clean apart from the known local torn-paper 404s, no page errors. The join tap works.
+- Join on ekuzo.gg still loads gtag, fbevents and Clarity.
+- Log: `evidence/atlas/crew-no-tags-run.json`.
+
 ## Copy (round 1; strings 2 and 3 superseded in round 2 above, string 1 unchanged)
 
 1. Busy label after 2 s: `Still saving. Please stay here.`
@@ -212,7 +236,7 @@ The welcome paid state now collects `s1_attempt`, `s1_confirmed_*` and `s1_ic_*`
 
 | Run | Result |
 |---|---|
-| `npm run test:s1` | **341 / 341 pass** after round 3 (was 274). New: `tags.test.ts` 44, `signupCommit.test.ts` 20, `welcomeStates.test.ts` +3 |
+| `npm run test:s1` | **342 / 342 pass** after round 4 (was 274). New: `tags.test.ts` 45, `signupCommit.test.ts` 20, `welcomeStates.test.ts` +3 |
 | `S1_DB_TESTS=1 node --env-file=.env.test.local scripts/run-tests.mjs lib/season1/__tests__` (J10) | **373 / 373 pass**, 81 suites, 0 fail, 0 skipped, 91 s (was 317). This run predates the lead fix; the fix adds 4 pure client tests and touches no server code. |
 | `npm test` (all lib) | 431 pass, 1 skipped (pre-existing), 0 fail |
 | `npx tsc --noEmit` | exit 0 |
