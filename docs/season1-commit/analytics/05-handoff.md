@@ -14,7 +14,9 @@ Read this first in a new session, then `02-resolution.md` (what changed from the
 - **Live:** ekuzo.gg runs main fa9c510 (10-29). It carries the double-charge bug (money red team 1 and 3) and sends the crew page's family code to Google Ads through the GA4 property's linked Ads destination.
 - **Hotfix ready:** `release/season1-hotfix` 082d722 (09f6f03 + merge of origin/main, code-identical to 09f6f03, fast-forward of main) and `preview/season1-dev-hotfix` 8ad0cbe (fast-forward of dev). Sentry PASS on the branch deploy (`evidence/sentry-hotfix.md`). Go phrase: `go: release 082d722 to main and 8ad0cbe to dev`.
 - **Analytics build:** on `season1-commit` through 76bf25e (Relay 5cc20fb server; lead 66e310d fbc; Atlas 3403662, 906a9ca, dbf5188, c3974dd, 76bf25e front end). Unit 342/342, integration 373/373 at 3403662 (client-only changes since). Sentry phase 4 PASS except the crew Google Ads leak, fixed in 76bf25e (no tags on crew); targeted re-run in progress.
-- **Test DB:** migration 0005 applied. **Production DB:** not yet.
+- **Test DB:** migration 0005 applied. **Production DB:** 0005 applied 10-30 12:3x CT in the Neon SQL editor (production branch br-wild-sky), one transaction; read-back `attribution` jsonb, `s1_migrations` 0001 to 0005. Jamie's go 12:17 ("you have permission to do all that you've proposed").
+- **Double-charge check (10-30 12:3x, production, read-only):** 1 live paid order since launch (the 10-29 canary, refunded), 0 `duplicate_kid` flags, 0 emails with 2+ paid orders, 0 canceled-but-paid. No parent was double charged.
+- **Privacy policy P2:** sections 8 and 16 updated on season1-commit (Last Updated October 30, 2026).
 
 ## Jamie's answers so far (09:38)
 

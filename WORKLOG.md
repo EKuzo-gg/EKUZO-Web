@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: privacy policy, production migration, double-charge check
+
+- Privacy policy (Jamie approved 12:17): section 8 names Google Analytics, Meta Pixel and Microsoft Clarity; section 16 partners line now lists hashed email, IP, device and browsing information on Season 01 pages and purchase information with kid count, and promises never a child's name or age. Last Updated October 30, 2026. Aaron: copy change on `/privacy-policy`, no layout change.
+- Neon production: migration 0005 (`s1_orders.attribution jsonb`) applied and read back. Live code ignores the column.
+- Production read-only check: no parent double charged (1 live paid order, the refunded canary).
+
 ## Jamie's Claude, 2026-10-30: analytics build, front end
 
 Branch `season1-commit` (Atlas). This is the client half of the analytics slice. Relay's server half (`ekuzo_lc`, order attribution, drain, the F15 codes) was already here, and the two should release together. Spec: `docs/season1-commit/analytics/01-requirements.md` as amended by `02-resolution.md`. Evidence: `docs/season1-commit/analytics/evidence/atlas-frontend.md` (screenshots and the browser log in `evidence/atlas/`).

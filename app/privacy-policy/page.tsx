@@ -84,7 +84,7 @@ const sections: Section[] = [
   },
   {
     sectionLabel: "8. Cookies & Analytics",
-    body: "EKUZO uses basic cookies and analytics to understand how our website is used and to improve it. Cookies help us: Understand which pages are helpful; Improve site performance; Avoid technical issues. You can control cookies through your browser settings. Disabling cookies may affect site functionality but will not affect program participation.",
+    body: "EKUZO uses basic cookies and analytics to understand how our website is used and to improve it. Cookies help us: Understand which pages are helpful; Improve site performance; Avoid technical issues. We use Google Analytics, Meta Pixel and Microsoft Clarity (which records how visitors use our pages, with typed entries masked). You can control cookies through your browser settings. Disabling cookies may affect site functionality but will not affect program participation.",
   },
   {
     sectionLabel: "9. Data Retention",
@@ -120,7 +120,7 @@ const sections: Section[] = [
     body: [
       "At sign-up we collect each child's first name and age. A child's first name appears on the family's invite page, which anyone with the family's link can open. We record which family's link brought a friend; inviting families see how many friends joined, never their names. Your card is saved with our payment processor for the rest of the season, and we use your billing ZIP code to place your kid on a team in the right time zone.",
       "Phone is optional. EKUZO does not automate texts or share numbers. Team members may reach out if there is an ask or legitimate reason.",
-      "We use advertising and analytics partners, who receive a parent's hashed email and purchase information. We never share a child's information with them.",
+      "Advertising and analytics partners receive a parent's hashed email, IP address, device and browsing information on our Season 01 pages, and purchase information, including how many kids are on the order. We never share a child's name or age with them.",
     ],
   },
 ];
@@ -150,7 +150,7 @@ export default function PrivacyPolicyPage() {
               Privacy Policy
             </h4>
             <p className="font-body text-black/60 text-sm md:text-base">
-              Last Updated: October 27, 2026
+              Last Updated: October 30, 2026
             </p>
           </div>
 
