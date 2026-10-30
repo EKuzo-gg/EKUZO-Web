@@ -23,10 +23,11 @@ D1 to D7 in `01-requirements.md`. Kid data rule updated in `knowledge-base/compa
 ## Waiting on Jamie
 
 1. Hotfix go (above).
-2. Copy OK (busy line, two in-progress lines, other-tab line; `03-copy-deck.md` as amended in WORKLOG round 2).
+2. ~~Copy OK~~ Approved by Jamie 12:12 ("copy ok"): the four lines as built in signup.html.
 3. P1 Clarity kid-name masking (built masked), P3 drain every 2 minutes (built), P4 QA custom event names (built).
 4. P2 privacy policy lines (not yet in `app/privacy-policy/page.tsx`): section 8 "We use Google Analytics, Meta Pixel and Microsoft Clarity (which records how visitors use our pages, with typed entries masked)." Section 16 partners line: "Advertising and analytics partners receive a parent's hashed email, IP address, device and browsing information on our Season 01 pages, and purchase information, including how many kids are on the order. We never share a child's name or age with them."
 5. Read-only check of live Stripe and production orders for past double charges (not yet approved).
+7. Jamie 12:12: exclude purchasers from the Lead ad sets is his call and he agrees; Meta write needs the exact go (custom audience from Purchase, added as an exclusion on the active Lead ad sets; may reset learning).
 6. Optional: unlink Google Ads (AW-18509911105) from the GA4 tag; this stops the Ads purchase conversion feed and lets `CREW_GA4` go back on.
 
 ## Analytics release steps (after the targeted Sentry re-run passes and Jamie approves 2 to 4)
