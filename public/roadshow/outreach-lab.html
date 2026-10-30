@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Outreach Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: "Tungsten Narrow"; src: url("/fonts/TungstenNarrow-Black.otf") format("opentype"); font-weight: 900; font-display: swap; }
+:root {
+  --red: #f92524; --black: #000; --white: #fff; --grey: #efeeed;
+  --ink: rgba(0,0,0,1); --ink-70: rgba(0,0,0,.7); --ink-60: rgba(0,0,0,.6); --ink-15: rgba(0,0,0,.15); --ink-08: rgba(0,0,0,.08);
+  --on-dark-70: rgba(255,255,255,.7); --on-dark-60: rgba(255,255,255,.6); --on-dark-20: rgba(255,255,255,.2);
+  --display: "Tungsten Narrow", "Oswald", sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+  --notch: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
+  --notch-sm: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  --side: 264px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font: 16px/1.5 var(--body); color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--red); color: var(--white); }
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+.dark :focus-visible { outline-color: var(--white); }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3, .h3, .nm, .ct, .s-t, .quote, .subhead { text-wrap: balance; }
+p { text-wrap: pretty; }
+.display { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: .9; }
+
+/* Shell */
+.side { position: fixed; inset: 0 auto 0 0; width: var(--side); background: var(--black); color: var(--white); display: flex; flex-direction: column; padding: 28px 0 24px; overflow-y: auto; z-index: 10; }
+.brand { padding: 0 24px 24px; border-bottom: 1px solid var(--on-dark-20); }
+.brand .who { font: 700 12px/1 var(--body); letter-spacing: .15em; text-transform: uppercase; color: var(--on-dark-60); }
+.brand .name { font-size: 40px; margin-top: 10px; white-space: nowrap; }
+.brand .name span { color: var(--red); }
+.nav { list-style: none; margin: 0; padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
+.nav .group { font: 700 11px/1 var(--body); letter-spacing: .15em; text-transform: uppercase; color: var(--on-dark-60); padding: 18px 12px 8px; }
+.nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; text-decoration: none; color: var(--on-dark-70); font-size: 15px; border-radius: 2px; transition: background .15s ease-out, color .15s ease-out; }
+.nav a:hover { color: var(--white); background: rgba(255,255,255,.08); }
+.nav a[aria-current="page"] { color: var(--black); background: var(--white); font-weight: 700; }
+.nav .n { font: 700 12px/1 var(--body); width: 22px; height: 22px; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 50%; flex: none; }
+.nav a[aria-current="page"] .n { background: var(--red); border-color: var(--red); color: var(--white); }
+.side .foot { margin-top: auto; padding: 16px 24px 0; font-size: 12px; color: var(--on-dark-60); }
+main { margin-left: var(--side); min-height: 100vh; }
+.view { display: none; }
+.view.on { display: block; animation: rise .35s cubic-bezier(.16,1,.3,1); }
+@keyframes rise { from { opacity: .4; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .view.on { animation: none; } html { scroll-behavior: auto; } }
+
+/* Bands */
+.band { padding: 56px clamp(24px, 5vw, 72px); }
+.band.red { background: var(--red); color: var(--white); }
+.band.black { background: var(--black); color: var(--white); }
+.band.grey { background: var(--grey); }
+.wrap { max-width: 1180px; margin: 0 auto; }
+.subhead { font: 300 clamp(20px, 2.2vw, 28px)/1.3 var(--body); letter-spacing: -.3px; margin-top: 14px; max-width: 52ch; text-wrap: balance; }
+.band.red .subhead, .band.black .subhead { color: var(--white); }
+.h1 { font-size: clamp(52px, 9vw, 120px); margin-top: 18px; overflow-wrap: anywhere; }
+.lede { font-size: 19px; max-width: 62ch; margin-top: 18px; color: inherit; opacity: .85; }
+.h2 { font: 700 clamp(28px, 3.2vw, 40px)/1.05 var(--body); letter-spacing: -1.28px; }
+.h3 { font: 700 20px/1.2 var(--body); letter-spacing: -.4px; }
+.sub { color: var(--ink-70); margin-top: 8px; max-width: 68ch; }
+.dark .sub, .band.black .sub { color: var(--on-dark-70); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+
+/* Phase key */
+.key { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink-70); }
+.key i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.p-reach { background: #8f8e8d; }
+.p-rapport { background: var(--black); }
+.p-partner { background: var(--red); }
+
+/* Lane board */
+.board { border-top: 2px solid var(--black); }
+.row { display: grid; grid-template-columns: minmax(210px, 1.2fr) 2.1fr minmax(170px, .9fr) 28px; gap: 24px; align-items: center; padding: 18px 8px; border-bottom: 1px solid var(--ink-15); text-decoration: none; transition: background .15s ease-out; }
+.row:hover { background: var(--grey); }
+.row .ln { display: flex; gap: 14px; align-items: center; }
+.row .num { font-family: var(--display); font-weight: 900; font-size: 40px; line-height: 1; width: 34px; color: var(--red); }
+.row .nm { font-weight: 700; font-size: 17px; line-height: 1.2; }
+.row .tg { font-size: 13px; color: var(--ink-60); margin-top: 2px; }
+.row .status { font-size: 14px; color: var(--ink-70); }
+.row .status b { color: var(--ink); }
+.row .go { display: grid; place-items: center; }
+.row .go svg { width: 20px; height: 20px; transition: transform .15s ease-out; }
+.row:hover .go svg { transform: translateX(3px); }
+.track { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; align-items: center; }
+.track .d { height: 10px; border-radius: 1px; background: var(--grey); box-shadow: inset 0 0 0 1px var(--ink-08); position: relative; }
+.track .d.r { background: #8f8e8d; box-shadow: none; }
+.track .d.ra { background: var(--black); box-shadow: none; }
+.track .d.pa { background: var(--red); box-shadow: none; }
+.track .d.owed { background: repeating-linear-gradient(135deg, var(--red) 0 3px, transparent 3px 6px); outline: 1.5px solid var(--red); outline-offset: -1.5px; }
+.track-labels { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; font-size: 11px; color: var(--ink-60); margin-bottom: 6px; }
+.board-head { display: grid; grid-template-columns: minmax(210px, 1.2fr) 2.1fr minmax(170px, .9fr) 28px; gap: 24px; padding: 0 8px 10px; align-items: end; font: 700 12px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); }
+
+/* (stuck callout removed) */
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--black); padding: 11px 20px; font-weight: 700; font-size: 15px; text-decoration: none; background: var(--black); color: var(--white); border-radius: 2px; transition: opacity .15s ease-out, transform .1s; }
+.btn:hover { opacity: .9; }
+.btn:active { transform: scale(.98); }
+.btn.red { background: var(--red); border-color: var(--red); }
+.btn.ghost { background: transparent; color: var(--black); }
+.btn.ghost:hover { background: var(--black); color: var(--white); opacity: 1; }
+.dark .btn.ghost { color: var(--white); border-color: var(--white); }
+.dark .btn.ghost:hover { background: var(--white); color: var(--black); }
+
+/* Pathway */
+.loop { width: 100%; height: auto; display: block; }
+.kit { border-top: 2px solid var(--black); }
+.kit-row { display: grid; grid-template-columns: 240px 1fr 260px; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--ink-15); align-items: baseline; }
+.kit-row .h3 { font-size: 17px; }
+.kit-row p { font-size: 15px; color: var(--ink-70); }
+.kit-row .lanes { font-size: 14px; color: var(--ink-60); }
+
+/* Journey map */
+.jmap-wrap { overflow-x: auto; padding-bottom: 8px; scrollbar-color: var(--black) var(--grey); }
+.jmap { display: grid; grid-template-columns: 132px repeat(10, minmax(150px, 1fr)); min-width: 1640px; }
+.jmap .phase { padding: 10px 12px; font: 700 12px/1 var(--body); letter-spacing: .15em; text-transform: uppercase; color: var(--white); }
+.jmap .phase.reach { background: #6d6c6b; }
+.jmap .phase.rapport { background: var(--black); }
+.jmap .phase.partner { background: var(--red); }
+.jmap .stage { padding: 14px 12px 12px; border-bottom: 2px solid var(--black); }
+.jmap .stage .s-n { font-family: var(--display); font-weight: 900; font-size: 34px; line-height: 1; }
+.jmap .stage .s-t { font-weight: 700; font-size: 15px; line-height: 1.2; margin-top: 4px; }
+.jmap .rl { padding: 14px 12px; font: 700 12px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); border-bottom: 1px solid var(--ink-15); background: var(--white); position: sticky; left: 0; z-index: 1; }
+.jmap .c { padding: 12px; font-size: 13.5px; line-height: 1.4; border-bottom: 1px solid var(--ink-15); border-left: 1px solid var(--ink-08); }
+.jmap .c.stuckcol { background: rgba(249,37,36,.07); }
+.jmap .tpl { display: inline-block; font-weight: 700; font-size: 12px; padding: 3px 8px; border: 1.5px solid var(--black); text-decoration: none; border-radius: 2px; }
+.jmap .tpl:hover { background: var(--black); color: var(--white); }
+.jmap .emotion { display: flex; align-items: center; justify-content: center; }
+.mood { width: 100%; height: 56px; display: block; }
+.stuck-tag { display: inline-block; margin-top: 6px; font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+
+
+/* Journey chevrons */
+.phases { display: grid; grid-template-columns: 4fr 3fr 3fr; gap: 4px; margin-bottom: 6px; }
+.phases div { font: 700 12px/1 var(--body); letter-spacing: .15em; text-transform: uppercase; padding: 8px 0; border-top: 4px solid; }
+.phases .reach { border-color: #8f8e8d; color: rgba(0,0,0,.6); }
+.phases .rapport { border-color: #000; }
+.phases .partner { border-color: var(--red); color: var(--red); }
+.chev { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.chev button { border: 0; text-align: left; min-height: 96px; padding: 12px 18px 12px 20px; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%); background: var(--grey); color: var(--black); transition: background .15s ease-out, color .15s ease-out; display: flex; flex-direction: column; gap: 4px; }
+.chev button:first-child { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); padding-left: 14px; }
+.chev button .cn { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1; }
+.chev button .ct { font-size: 13px; font-weight: 700; line-height: 1.2; }
+.chev button:hover { background: #dedcda; }
+.chev button.reach[aria-pressed="true"] { background: #8f8e8d; color: #fff; }
+.chev button.rapport[aria-pressed="true"] { background: #000; color: #fff; }
+.chev button.partner[aria-pressed="true"] { background: var(--red); color: #fff; }
+.chev button .flag { font: 700 10px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-top: auto; }
+.chev button[aria-pressed="true"] .flag { color: inherit; }
+.jdetail { margin-top: 28px; background: var(--grey); clip-path: var(--notch); padding: 32px 36px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
+.jdetail .bign { font-family: var(--display); font-weight: 900; font-size: 140px; line-height: .8; }
+.jdetail .bigt { font: 700 22px/1.15 var(--body); margin-top: 10px; letter-spacing: -.4px; text-wrap: balance; }
+.jfields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 28px; align-content: start; }
+.jfields .lab { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 8px; }
+.jfields .val { font-size: 16px; }
+.jfields .val .tpl { display: inline-block; font-weight: 700; font-size: 13px; padding: 5px 10px; border: 2px solid var(--black); text-decoration: none; border-radius: 2px; background: #fff; }
+.jfields .val .tpl:hover { background: var(--black); color: #fff; }
+.jnav { display: flex; gap: 10px; margin-top: 24px; grid-column: 2; }
+details.full { margin-top: 40px; }
+details.full summary { cursor: pointer; font-weight: 700; display: inline-flex; gap: 8px; align-items: center; padding: 10px 16px; border: 2px solid var(--black); border-radius: 2px; list-style: none; }
+details.full summary::-webkit-details-marker { display: none; }
+details.full[open] summary { background: var(--black); color: #fff; }
+@media (max-width: 960px) {
+  .phases { display: none; }
+  .chev { grid-template-columns: repeat(5, 1fr); }
+  .chev button, .chev button:first-child { clip-path: none; padding: 10px; min-height: 84px; }
+  .chev button .ct { font-size: 12px; }
+  .jdetail { grid-template-columns: 1fr; padding: 24px; gap: 16px; }
+  .jdetail .bign { font-size: 90px; }
+  .jfields { grid-template-columns: 1fr 1fr; }
+  .jnav { grid-column: 1; }
+}
+
+@media (max-width: 1279px) {
+  .phases { display: none; }
+  .chev { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .chev button, .chev button:first-child { clip-path: none; padding: 12px; }
+  .mood-wrap { display: none; }
+  .jdetail { grid-template-columns: 1fr; gap: 20px; }
+  .jnav { grid-column: 1; }
+}
+/* Hometown Heroes */
+.hloop { width: 100%; height: auto; display: block; }
+.why3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--black); }
+.why3 > div { padding: 20px 24px 22px 0; }
+.why3 > div + div { padding-left: 24px; border-left: 1px solid var(--ink-15); }
+.why3 p { font-size: 15px; color: var(--ink-70); margin-top: 6px; }
+.jrow { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 4px; }
+.jcell { background: var(--grey); padding: 14px 14px 16px; min-height: 150px; }
+.jcell.dark { background: var(--black); color: var(--white); }
+.jcell.hot { background: var(--red); color: var(--white); }
+.jcell .jn { font-family: var(--display); font-weight: 900; font-size: 28px; line-height: 1; }
+.jcell .jt { font-weight: 700; font-size: 15px; line-height: 1.2; margin-top: 6px; text-wrap: balance; }
+.jcell p { font-size: 13.5px; line-height: 1.4; margin-top: 6px; opacity: .85; text-wrap: pretty; }
+.jlabel { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); margin: 28px 0 10px; }
+.chan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+.chan .who { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+.chan .who.k { color: var(--red); }
+.chan .h3 { margin-top: 8px; }
+.chan p { font-size: 15px; color: var(--ink-70); margin-top: 6px; }
+.mocks { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: start; }
+.mocks > div { min-width: 0; }
+.lbwrap { overflow-x: auto; }
+.phone { width: 300px; border: 10px solid var(--black); border-radius: 30px; background: var(--white); overflow: hidden; }
+.phone .ph-top { background: var(--red); color: var(--white); padding: 18px 18px 16px; }
+.phone .ph-photo { height: 150px; background: #2a2a2a; display: grid; place-items: center; color: rgba(255,255,255,.7); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+.phone .ph-body { padding: 16px 18px 20px; font-size: 14px; }
+.phone .ph-name { font-family: var(--display); font-weight: 900; font-size: 34px; line-height: .95; text-transform: uppercase; letter-spacing: .02em; }
+.phone .ph-cta { display: block; text-align: center; background: var(--red); color: var(--white); font-weight: 700; padding: 13px; margin-top: 14px; border-radius: 2px; text-decoration: none; }
+.prog { height: 10px; background: var(--grey); margin-top: 6px; }
+.prog i { display: block; height: 100%; background: var(--black); }
+.sample { display: inline-block; font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; border: 1.5px solid currentColor; padding: 4px 6px; }
+.cards2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tcard2 { aspect-ratio: 3.5 / 2; padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; clip-path: var(--notch-sm); }
+.tcard2.f { background: var(--red); color: var(--white); }
+.tcard2.b { background: var(--black); color: var(--white); flex-direction: row; align-items: center; gap: 16px; justify-content: flex-start; }
+.tcard2 .big2 { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: .95; text-transform: uppercase; letter-spacing: .02em; }
+.qr { width: 84px; height: 84px; flex: none; background: var(--white); padding: 8px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.qr i { background: var(--black); }
+.qr i.o { background: transparent; }
+.lb { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 12px; }
+.lb th { text-align: left; font: 700 12px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); padding: 0 12px 8px 0; border-bottom: 2px solid var(--black); }
+.lb td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--ink-15); vertical-align: middle; }
+.lb td.n { font-family: var(--display); font-weight: 900; font-size: 22px; color: var(--red); width: 34px; }
+.lb .bar { height: 10px; background: var(--grey); width: 140px; }
+.lb .bar i { display: block; height: 100%; background: var(--black); }
+.prizes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.prizes > div { background: var(--white); padding: 16px 16px 18px; }
+.prizes > div.hot { background: var(--red); color: var(--white); }
+.prizes .h3 { font-size: 16px; }
+.prizes p { font-size: 14px; margin-top: 6px; opacity: .8; }
+.hpilot { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--white); }
+.hpilot > div { padding: 18px 20px 20px 0; }
+.hpilot > div + div { padding-left: 20px; border-left: 1px solid var(--on-dark-20); }
+.decide { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+.decide li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; font-size: 15px; color: var(--on-dark-70); }
+.hpilot .pn { font-family: var(--display); font-weight: 900; font-size: 48px; line-height: 1; color: var(--red); }
+.hpilot p { font-size: 15px; color: var(--on-dark-70); margin-top: 6px; }
+@media (max-width: 1279px) { .jrow { grid-template-columns: repeat(3, minmax(0, 1fr)); } .prizes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .cards2 { grid-template-columns: 1fr; max-width: 360px; } .lb .bar { width: 70px; } }
+@media (max-width: 960px) {
+  .why3, .chan, .hpilot { grid-template-columns: 1fr; }
+  .why3 > div + div, .hpilot > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--ink-15); }
+  .hpilot > div + div { border-top-color: var(--on-dark-20); }
+  .jrow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcell { min-height: 0; }
+  .mocks { grid-template-columns: 1fr; }
+  .cards2 { grid-template-columns: 1fr; }
+  .prizes { grid-template-columns: 1fr 1fr; }
+  .lb .bar { width: 60px; }
+}
+
+/* Lane page */
+.lane-hero { display: block; }
+.lane-hero .num { font-family: var(--display); font-weight: 900; font-size: clamp(120px, 15vw, 200px); line-height: .75; opacity: .9; }
+.quote { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.6px; line-height: 1.2; max-width: 34ch; margin-top: 22px; }
+.quote small { display: block; font-size: 14px; font-weight: 400; letter-spacing: 0; margin-top: 10px; opacity: .8; }
+.roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--black); }
+.role { padding: 20px 24px 22px 0; }
+.role + .role { padding-left: 24px; border-left: 1px solid var(--ink-15); }
+.role .lab { display: flex; align-items: center; gap: 10px; font: 700 12px/1 var(--body); letter-spacing: .15em; text-transform: uppercase; color: var(--ink-60); }
+.role .lab svg { width: 26px; height: 26px; }
+.role .h3 { margin-top: 12px; font-size: 18px; }
+.role p { font-size: 14px; color: var(--ink-70); margin-top: 6px; }
+.trade { display: grid; grid-template-columns: 1fr 72px 1fr; align-items: stretch; }
+.trade .side-b { padding: 28px; clip-path: var(--notch); }
+.trade .give { background: var(--black); color: var(--white); }
+.trade .ask { background: var(--white); }
+.trade .arrows { display: grid; place-items: center; }
+.trade ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.trade li { padding-left: 22px; position: relative; font-size: 16px; }
+.trade li::before { content: ""; position: absolute; left: 0; top: .55em; width: 10px; height: 10px; background: var(--red); }
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+.step { position: relative; padding: 0 18px 0 0; }
+.step .dot { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 900; font-size: 24px; color: var(--white); position: relative; z-index: 1; }
+.step::before { content: ""; position: absolute; left: 44px; right: 0; top: 21px; height: 2px; background: var(--black); }
+.step:last-child::before { display: none; }
+.step .k { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); margin-top: 16px; }
+.step .h3 { font-size: 16px; margin-top: 6px; }
+.step p { font-size: 14px; color: var(--ink-70); margin-top: 6px; }
+.step .tpl { display: inline-block; margin-top: 10px; font: 700 12px/1 var(--body); padding: 6px 10px; border: 1.5px solid var(--black); text-decoration: none; border-radius: 2px; }
+.step .tpl:hover { background: var(--black); color: var(--white); }
+.pilots { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; }
+.pilot { border-top: 4px solid var(--red); padding-top: 16px; }
+.pilot .pic { height: 92px; margin-bottom: 14px; }
+.pilot .pic svg { height: 100%; width: auto; }
+.pilot p { font-size: 15px; color: var(--ink-70); margin-top: 6px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.watch { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 12px; }
+.watch li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: 15px; }
+.watch li svg { width: 22px; height: 22px; margin-top: 1px; }
+.deliv { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+.deliv li { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 12px 14px; background: var(--white); font-size: 15px; }
+.chip { font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 5px 8px; border-radius: 2px; white-space: nowrap; }
+.chip.owed { background: var(--red); color: var(--white); }
+.chip.exists { background: var(--black); color: var(--white); }
+.chip.build { border: 1.5px solid var(--black); }
+.contacts { width: 100%; border-collapse: collapse; font-size: 15px; }
+.contacts th { text-align: left; font: 700 12px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-60); padding: 0 12px 10px 0; border-bottom: 1px solid var(--on-dark-20); }
+.contacts td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--on-dark-20); vertical-align: top; color: var(--on-dark-70); }
+.contacts td:first-child { color: var(--white); font-weight: 700; }
+.meter { display: inline-flex; gap: 3px; vertical-align: middle; }
+.meter i { width: 8px; height: 14px; background: var(--on-dark-20); }
+.meter i.on { background: var(--red); }
+.empty { color: var(--on-dark-70); font-size: 16px; max-width: 60ch; }
+.lane-nav { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Templates */
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tabs button { border: 2px solid var(--black); background: transparent; padding: 8px 14px; font-weight: 700; font-size: 14px; border-radius: 2px; transition: background .15s, color .15s; }
+.tabs button[aria-pressed="true"] { background: var(--black); color: var(--white); }
+.tabs button:hover { background: var(--black); color: var(--white); }
+.composer { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
+.controls { display: grid; gap: 18px; }
+.controls label { display: block; font: 700 12px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 8px; }
+select { width: 100%; font: 16px var(--body); padding: 11px 12px; border: 2px solid var(--black); border-radius: 2px; background: var(--white); appearance: none; background-image: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.note { font-size: 14px; color: var(--ink-70); background: var(--grey); padding: 14px 16px; }
+.mail { background: var(--white); border: 2px solid var(--black); border-radius: 2px; }
+.mail .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--black); color: var(--white); font-size: 13px; }
+.mail .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--on-dark-20); }
+.mail .bar .t { margin-left: 8px; font-weight: 700; }
+.mail .bar button { margin-left: auto; background: var(--red); color: var(--white); border: 0; padding: 7px 14px; font-weight: 700; font-size: 13px; border-radius: 2px; }
+.mail .bar button:hover { opacity: .9; }
+.mail .fld { display: grid; grid-template-columns: 72px 1fr; padding: 10px 18px; border-bottom: 1px solid var(--ink-15); font-size: 15px; }
+.mail .fld span:first-child { color: var(--ink-60); }
+.mail .body { padding: 20px 18px 24px; font-size: 16px; line-height: 1.6; white-space: pre-wrap; max-width: 70ch; }
+.slot { background: rgba(249,37,36,.12); border-bottom: 2px solid var(--red); padding: 0 3px; }
+.fill { background: rgba(0,0,0,.06); border-bottom: 2px solid var(--black); padding: 0 3px; }
+.legend { display: flex; gap: 18px; font-size: 13px; color: var(--ink-70); flex-wrap: wrap; margin-top: 12px; }
+.tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; }
+.tcard .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.tcard .meta .code { font-family: var(--display); font-weight: 900; font-size: 34px; color: var(--red); line-height: 1; }
+.tcard .meta .when { font-size: 13px; color: var(--ink-60); }
+.tcard .mail .body { font-size: 15px; padding: 16px 18px 18px; }
+.sms { max-width: 360px; }
+.sms .bubble { background: var(--black); color: var(--white); padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; margin-left: auto; width: fit-content; max-width: 100%; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); background: var(--black); color: var(--white); padding: 12px 18px; font-weight: 700; font-size: 14px; opacity: 0; transition: opacity .2s, transform .2s cubic-bezier(.16,1,.3,1); pointer-events: none; z-index: 30; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* One-pagers */
+.skel { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+.page { aspect-ratio: 8.5 / 11; background: var(--white); clip-path: var(--notch); padding: 52px 26px 26px; display: flex; flex-direction: column; gap: 12px; }
+.page .hl { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: 1; font-size: 30px; text-wrap: balance; }
+.page .ln { height: 6px; background: var(--ink-15); }
+.page .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.page .col { padding: 8px; display: grid; gap: 5px; align-content: start; }
+.page .col.k { background: var(--black); }
+.page .col.k .ln { background: var(--on-dark-20); }
+.page .col.p { background: var(--grey); }
+.page .first { border: 2px solid var(--red); padding: 8px; display: grid; gap: 5px; }
+.page .first .ln { background: rgba(249,37,36,.35); }
+.page .foot { margin-top: auto; display: flex; gap: 8px; align-items: center; }
+.page .foot .av { width: 22px; height: 22px; border-radius: 50%; background: var(--black); flex: none; }
+.anat { list-style: none; counter-reset: a; padding: 0; margin: 0; display: grid; gap: 16px; }
+.anat li { counter-increment: a; display: grid; grid-template-columns: 44px 1fr; gap: 12px; }
+.anat li::before { content: counter(a); font-family: var(--display); font-weight: 900; font-size: 36px; line-height: 1; color: var(--red); }
+.anat b { display: block; font-size: 17px; }
+.anat span { font-size: 15px; color: var(--ink-70); }
+.op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 36px 28px; }
+.op .page { padding: 30px 18px 18px; gap: 9px; background: var(--grey); clip-path: var(--notch-sm); }
+.op .page .hl { font-size: 23px; }
+.op .page .ln { height: 5px; }
+.op .meta { margin-top: 14px; }
+.op .meta .for { font-size: 13px; color: var(--ink-60); margin-top: 4px; }
+.op .clears { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; font-size: 14px; }
+.op .clears li { padding-left: 18px; position: relative; }
+.op .clears li::before { content: ""; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; border: 2px solid var(--red); }
+.op { display: flex; flex-direction: column; }
+.op .meta { flex: 1; display: flex; flex-direction: column; }
+.op .clears { margin-bottom: 16px; }
+.op .meta .btn { margin-top: auto !important; align-self: flex-start; }
+.prio { font-family: var(--display); font-weight: 900; font-size: 20px; color: var(--red); }
+
+/* Decisions */
+.dec { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--white); }
+.dec li { display: grid; grid-template-columns: 34px 1fr auto; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--on-dark-20); align-items: start; }
+.dec input { width: 22px; height: 22px; accent-color: var(--red); margin-top: 3px; }
+.dec .q { font-weight: 700; font-size: 17px; }
+.dec .w { font-size: 14px; color: var(--on-dark-70); margin-top: 4px; }
+.dec .own { font: 700 12px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; border: 1.5px solid var(--on-dark-60); padding: 6px 8px; white-space: nowrap; }
+.dec li.first .q::after { content: "Blocks the one-pagers"; margin-left: 10px; font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; background: var(--red); padding: 4px 6px; vertical-align: 3px; }
+
+/* Mobile */
+.topbar { display: none; }
+@media (max-width: 960px) {
+  .side { display: none; }
+  main { margin-left: 0; }
+  .topbar { display: block; position: sticky; top: 0; z-index: 20; background: var(--black); color: var(--white); }
+  .topbar .tb { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; }
+  .topbar .name { font-size: 28px; white-space: nowrap; flex: none; }
+  .topbar .name span { color: var(--red); }
+  .topbar select { width: auto; flex: 0 1 160px; min-width: 0; background-color: var(--black); color: var(--white); border-color: var(--white); background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%); padding-right: 32px; font-size: 15px; }
+  .row, .board-head { grid-template-columns: 1fr; gap: 10px; }
+  .board-head { display: none; }
+  .row .go { display: none; }
+  .roles { grid-template-columns: 1fr; }
+  .role + .role { padding-left: 0; border-left: 0; border-top: 1px solid var(--ink-15); }
+  .trade { grid-template-columns: 1fr; }
+  .trade .arrows { padding: 8px 0; transform: rotate(90deg); }
+  .flow { grid-template-columns: 1fr; gap: 22px; }
+  .step::before { left: 21px; top: 44px; bottom: -22px; right: auto; width: 2px; height: auto; }
+  .step { padding: 0 0 0 60px; min-height: 44px; }
+  .step .dot { position: absolute; left: 0; top: 0; }
+  .step .k { margin-top: 4px; }
+  .two, .composer, .skel { grid-template-columns: 1fr; gap: 32px; }
+  .kit-row { grid-template-columns: 1fr; gap: 4px; }
+  .skel .page { max-width: 300px; }
+  .lane-hero { grid-template-columns: 1fr; }
+  .lane-hero .num { display: none; }
+  .tgrid { grid-template-columns: 1fr; }
+  .dec li { grid-template-columns: 30px 1fr; }
+  .dec .own { grid-column: 2; justify-self: start; }
+}
+</style>
+</head>
+<body>
+<header class="topbar dark" aria-label="Outreach Lab">
+  <div class="tb">
+    <div class="display name">Outreach <span>Lab</span></div>
+    <label class="sr" for="mnav" style="position:absolute;left:-9999px">Go to</label>
+    <select id="mnav"></select>
+  </div>
+</header>
+<nav class="side dark" aria-label="Outreach Lab">
+  <div class="brand">
+    <div class="display name">Outreach<br><span>Lab</span></div>
+  </div>
+  <ul class="nav" id="nav"></ul>
+  <div class="foot">Draft v0.1 · built Oct 30 from the Outreach folder and Austin's first three weeks.</div>
+</nav>
+<main id="main"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- Data ---------- */
+const STAGES = [
+  { n: 0, t: "Find and qualify", ph: "reach", goal: "Doesn't know us yet", touch: "Research, tier S to F, check every list so nobody gets two first emails", tpl: null, asset: "Hook bank", exit: "Verified row on a list", time: "Batch from the coverage plan" },
+  { n: 1, t: "First touch", ph: "reach", goal: "Decide if we're worth a reply", touch: "Email, form, DM or LinkedIn built only to get a reply", tpl: "T1", asset: "None. Never attach", exit: "A human reply", time: "About 20 a day" },
+  { n: 2, t: "Nudge", ph: "reach", goal: "Remember us", touch: "Short follow-up, then stop", tpl: "T2", asset: "None", exit: "Reply, or park", time: "Day 3 and day 7" },
+  { n: 3, t: "Book", ph: "reach", goal: "Easy scheduling", touch: "Two times or a link, plus a text number", tpl: "T3", asset: "None", exit: "On the calendar", time: "Same day" },
+  { n: 4, t: "First meeting", ph: "rapport", goal: "Size us up", touch: "Listen first. Intro under 2 minutes. Save 10 to 15 minutes for \"who else?\"", tpl: null, asset: "Brief, one phone screen", exit: "Capture card in Meetings within a day", time: "30 to 60 min" },
+  { n: 5, t: "Thank-you + small yes", ph: "rapport", goal: "See we follow through", touch: "2 or 3 lines: thanks, intro Karlin, one dated small step", tpl: "T4", asset: "None", exit: "A dated next step", time: "Within 1 day" },
+  { n: 6, t: "Karlin meeting", ph: "rapport", goal: "Believe it", touch: "Karlin's story. No ask until he's won them over", tpl: "T5", asset: "Proof sheet", exit: "They ask \"what would this look like?\"", time: "1 to 2 weeks later" },
+  { n: 7, t: "Proposal", ph: "partner", goal: "Something to show their team", touch: "Lane one-pager and pilot shape, then a working session", tpl: "T6", asset: "Lane one-pager, parent explainer", exit: "Pilot date and headcount", time: "Within 1 week of the ask" },
+  { n: 8, t: "Pilot", ph: "partner", goal: "Look good to their families", touch: "Kickoff, weekly note, midpoint check", tpl: "T7", asset: "Event-in-a-box, social pack", exit: "Kids and parents show up", time: "6 or 12 weeks" },
+  { n: 9, t: "Recap + expand", ph: "partner", goal: "Decide to keep going", touch: "Results recap, renewal, \"who else should do this?\"", tpl: "T8", asset: "Recap one-pager", exit: "Renewal, second site, intros", time: "Within 1 week of the end" }
+];
+const MOOD = [2, 1, 0, 2, 3, 3, 4, 3, 4, 4]; // their warmth, 0 to 4, for the curve
+
+const LANES = [
+  { id: "college", num: 1, name: "College", tag: "Programs, arenas, clubs, faculty",
+    quote: "We're passionate. We want the next classes to be as passionate.", who_said: "Club officer, a university League club",
+    why: "Colleges answer fastest: 10 of 18 Austin college emails got a reply. They're the top of the loop: coaches, rooms, and the name parents trust.",
+    stage: 5, owed: true, status: "Met 11 college groups. One-pagers owed.",
+    roles: { champion: ["Arena manager, club officers", "Every campus with an arena has one ally like this."], decider: ["Director of esports or student life", "Faculty decide for their own class."], gate: ["Facilities and legal", "Public colleges may not host a for-profit youth program."] },
+    give: ["Paid coaching work for their players", "Role models and audience growth for clubs", "Families on campus", "A youth pipeline into their program"],
+    ask: ["Coaches from their players", "A room on an off night", "Reach-back to members' old high schools", "Intros to whoever approves things"],
+    hook: { s: "From one arena person to another", t: "Peer to peer. Clubs get a direct note (officers are adults). Faculty: their own work." },
+    firstYes: "An intro to the clubs, a club meeting, or a class talk",
+    karlin: "Karlin meets club leads at the arena",
+    proposal: "Club partner one-pager, or a collegiate pilot",
+    pilots: [
+      { n: "Coach pipeline", d: "Members apply to coach. EKUZO trains and pays them. The club gets a role-model story.", pic: "coach" },
+      { n: "Reach-back", d: "Members take a one-pager back to their own high schools. One club offered 30+ members.", pic: "reach" },
+      { n: "Hosted night", d: "A showcase or game night at the arena that puts families on campus.", pic: "night" },
+      { n: "Pilot in a new market", d: "College programs outside Austin want EKUZO teams near them, with some of their local kids.", pic: "map" }
+    ],
+    watch: ["Never look like competition for the club. Directors protect it: one D1 program has 42 varsity players and 600 in the club.", "Smash is the hardest fit: an old game with no EKUZO community yet.", "Rivals needs a feasibility check: hardware, console kids, live coaching."],
+    deliver: [["Club partner one-pager (external + internal)", "owed"], ["Reach-back kit", "build"], ["Collegiate pilot one-pager", "owed"], ["Rivals feasibility one-pager", "owed"], ["Coach recruiting post", "build"]],
+    austin: [] },
+
+  { id: "schools", num: 2, name: "School esports", tag: "Advisers, districts, regional centers",
+    quote: "The entirety of the scholastic ecosystem is built on passion, and that will not last.", who_said: "A national scholastic esports leader",
+    why: "The middle of the loop. Clubs hinge on one teacher and a few students. Almost nobody asks for coaching, which is the hardest part to find.",
+    stage: 4, owed: false, status: "1 district met. Texas teachers queued.",
+    roles: { champion: ["Club adviser or CTE teacher", "Usually one willing teacher."], decider: ["Principal or district coordinator", "Regional service centers convene coaches."], gate: ["District screen and vendor rules", "Check the school's stance on \"gaming\" first."] },
+    give: ["Club growth kit: flyer, tabling plan, season calendar", "Coaching support from college players", "A guide to getting gear funded", "Kids who arrive already playing on a team"],
+    ask: ["10 minutes", "A visit to a practice or a tournament", "A lab after hours", "A co-hosted game day"],
+    hook: { s: "Austin dad learning about school esports", t: "Learn-first about a club they already have. Ask for 10 minutes; a few lines back gets replies but not meetings." },
+    firstYes: "10 minutes, then a visit to a practice or tournament",
+    karlin: "Karlin meets the adviser and their club",
+    proposal: "School one-pager plus the club growth kit",
+    pilots: [
+      { n: "Club growth kit", d: "Delivered free: flyer, tabling plan, season calendar, restart checklist.", pic: "kit" },
+      { n: "Coach drop-in", d: "A college coach runs a strategy session or scrim review for their team.", pic: "coach" },
+      { n: "Feeder league", d: "Their incoming middle schoolers join EKUZO teams before high school.", pic: "reach" },
+      { n: "Game day", d: "A co-hosted day in their gym or lab.", pic: "night" }
+    ],
+    watch: ["Never contact a K-12 student. Adults only.", "Never imply class credit or credentials. The school leads any credit conversation.", "Clubs fold when founders graduate. Pitch keeping the club alive, not just winning."],
+    deliver: [["School one-pager", "build"], ["Club growth kit", "build"], ["DonorsChoose grant guide", "exists"], ["Parent explainer", "build"]],
+    austin: [] },
+
+  { id: "microschools", num: 3, name: "New-model schools", tag: "Microschools, hybrid, homeschool co-ops",
+    quote: "They're not really part of a team and they don't have a way to do that.", who_said: "A microschool founder",
+    why: "They're buyers, not just rooms. Three founders in two days named growth as their magic wand.",
+    stage: 6, owed: true, status: "2 want a pilot. Package owed.",
+    roles: { champion: ["Founder or head of school", "Runs afternoons and electives too."], decider: ["The same founder", "Fast decisions, small budgets."], gate: ["Skeptical staff, screen-light families", "Lead with the team and the coach."] },
+    give: ["A team, which a school of 20 can't field alone", "An elective that fits their cycle", "Something to show parents", "A growth story for enrollment"],
+    ask: ["A pilot afternoon or elective", "A family night", "An intro to other founders"],
+    hook: { s: "Austin founder learning from microschool founders", t: "\"The kids already game, but a small school has no way to give them a team.\"" },
+    firstYes: "Coffee, then a Karlin session with their students",
+    karlin: "Karlin runs a session with their students",
+    proposal: "Microschool partnership package",
+    pilots: [
+      { n: "6-week elective", d: "One EKUZO team inside their cycle (some run six-week cycles). Weekly online play.", pic: "cal" },
+      { n: "Mixed-school team", d: "Kids from two or three small schools form one team, so everyone gets a roster.", pic: "reach" },
+      { n: "Family showcase", d: "One in-person night at the end where parents watch the team play.", pic: "night" }
+    ],
+    watch: ["Schools compete for the same families. Don't name one to another without an OK.", "Some are phone-free. Leave \"game\" out of the subject.", "The school leads any credit conversation."],
+    deliver: [["Microschool partnership package", "owed"], ["Skeptical-staff story", "owed"], ["Parent explainer", "build"], ["Pilot calendar", "build"]],
+    austin: [] },
+
+  { id: "rooms", num: 4, name: "Labs and rooms", tag: "Coding centers, gaming centers, franchisors",
+    quote: "A quick win for kids to come in the door.", who_said: "Esports lead at a coding-center franchisor",
+    why: "A node is a place that can host and help fill it. Here distribution is the trade, said plainly after rapport.",
+    stage: 6, owed: true, status: "A coding center wants a pilot. Franchisor proposal owed.",
+    roles: { champion: ["Owner or center director", "Some ran their own esports before."], decider: ["Owner; for franchises, corporate", "Corporate approves, each franchisee adopts."], gate: ["An owner protecting their model", "Say what we want and don't want in the first minute."] },
+    give: ["Kids who'd never sign up for more school", "Families in the door every month", "A revenue share", "A difference from tutoring franchises"],
+    ask: ["A room on a dark night", "Help with distribution to their families", "A monthly meetup slot"],
+    hook: { s: "[Center] + weekend afternoons?", t: "Ask the space question plainly. Franchisors get founder-to-founder to the CEO, with center inboxes in parallel." },
+    firstYes: "Coffee at the center; answer frequency, hours, headcount, equipment",
+    karlin: "Karlin meets the owner at the center",
+    proposal: "Center one-pager, or a franchisor proposal",
+    pilots: [
+      { n: "Monthly meetup", d: "Teams play online weekly. Once a month, 4 or 5 teams meet at the center for a tournament night.", pic: "night" },
+      { n: "Metro league", d: "Teams across a city become their own league, with the center as home base.", pic: "map" },
+      { n: "Franchisee first", d: "One franchisee pilots, then corporate expands it across the network.", pic: "reach" }
+    ],
+    watch: ["Any royalty split we've heard was illustrative. Confirm before using it.", "Franchise centers run in person by default. Online needs a sound proposal.", "Numbers matter more than price: 10 to 12 kids per group, about 1 coach to 10."],
+    deliver: [["Center one-pager with the four answers", "owed"], ["Franchisor proposal", "owed"], ["Monthly meetup run sheet", "build"], ["\"Why gaming\" talking points", "exists"]],
+    austin: [] },
+
+  { id: "camps", num: 5, name: "Seasonal programs", tag: "Tech camps and Woodward-like orgs",
+    quote: "Camps lose kids between summers. We've been the connecting thread.", who_said: "Jamie, EKUZO",
+    why: "The off-season is the gap. Woodward is the model for its scale and ambition; small outdoor camps don't share the economics.",
+    stage: 4, owed: false, status: "1 camp met. Woodward meeting set.",
+    roles: { champion: ["Camp director or program lead", "Often a solo founder-operator."], decider: ["Owner", ""], gate: ["Brand protection", "Their name goes on it."] },
+    give: ["A reason for campers to stay connected all year", "A co-branded off-season team", "Intros from our school conversations"],
+    ask: ["Their family list, shared by them", "A reunion night at their site"],
+    hook: { s: "What happens between summers?", t: "Ask about the off-season, not about their list." },
+    firstYes: "A call; an off-season team for returning campers",
+    karlin: "Karlin meets the director",
+    proposal: "Off-season team one-pager",
+    pilots: [
+      { n: "Off-season team", d: "A co-branded EKUZO team for their returning campers, ages 10 to 13.", pic: "cal" },
+      { n: "Reunion night", d: "One night at their site or a partner room that brings campers back together.", pic: "night" }
+    ],
+    watch: ["Tech camps fit (coding, game design, Minecraft). Outdoor camps rarely do.", "Our give back is intros, with each side's OK."],
+    deliver: [["Off-season team one-pager", "build"], ["Camper-parent email they can send", "build"], ["Woodward partnership package", "build"]],
+    austin: [] },
+
+  { id: "creators", num: 6, name: "Creators", tag: "Streamers, casters, local organizers",
+    quote: "A guest session with a team now and then, ideas, and a real stake as it grows.", who_said: "What a creator partner does",
+    why: "Around the loop: reach into families and a credible face for kids. Mid-size creators (about 150K) over the biggest names.",
+    stage: 1, owed: false, status: "4 sent. 59 queued for Karlin.",
+    roles: { champion: ["The creator", "League creators hear League; others hear \"competitive team games\"."], decider: ["Manager or agency", "They read first."], gate: ["The manager's inbox", "Under 18: adult contact plus written guardian consent."] },
+    give: ["A real stake (about 10% across creators)", "Referral fees", "A story worth telling"],
+    ask: ["A guest session with a team", "A shout-out to local families", "Ideas"],
+    hook: { s: "[Creator] + a youth league", t: "A dated, checkable win, then what a partner does in one line." },
+    firstYes: "A call with the manager",
+    karlin: "Karlin's credential leads",
+    proposal: "Creator one-pager for managers",
+    pilots: [
+      { n: "Guest session", d: "One session with a team, filmed with consent, and a post to their audience.", pic: "coach" },
+      { n: "Stake", d: "The equity and referral conversation, once the guest session lands.", pic: "kit" }
+    ],
+    watch: ["Business routes only. Never personal DMs.", "Name League only for League creators."],
+    deliver: [["Creator one-pager", "build"], ["Guest-session run sheet", "build"], ["Consent and content release", "build"]],
+    austin: [] },
+
+  { id: "industry", num: 7, name: "Industry", tag: "Riot first",
+    quote: "Our audience is aging up.", who_said: "Riot, on League's new players",
+    why: "Learning, not selling. Riot has no junior high or high school League program, and League Next arrives in 2027.",
+    stage: 0, owed: false, status: "21 Rioters queued.",
+    roles: { champion: ["Community, scholastic, social impact staff", "Formers give the candid read."], decider: ["Executives", "Only by referral."], gate: ["Turnover and layoffs", "Expect people to move."] },
+    give: ["A structured youth pipeline", "What we see in kids 13 and up"],
+    ask: ["How they think about younger players", "Who else to talk to"],
+    hook: { s: "(Riot shape in Karlin's file)", t: "Their own words on new players. Never \"League is dying\" or \"toxic\"." },
+    firstYes: "A call, then \"who else should I talk to?\"",
+    karlin: "Karlin is the sender throughout",
+    proposal: "A youth pipeline brief, once we have data",
+    pilots: [{ n: "Later", d: "A program partnership, a guest at an event, or a story. Nothing to pitch yet.", pic: "kit" }],
+    watch: ["Lead with 13 and up. League is rated T.", "No partnership, sponsor or audience ask in a first message."],
+    deliver: [["Youth pipeline brief", "build"]],
+    austin: [] },
+
+  { id: "parents", num: 8, name: "Parent channels", tag: "PTAs, homeschool networks, family media",
+    quote: "Even a friend with a list would feel dirty sharing it for a referral fee.", who_said: "An education investor",
+    why: "The most protective lane, and not started in Austin. These networks are tired of third parties selling to them.",
+    stage: 0, owed: false, status: "Not started.",
+    roles: { champion: ["PTA comms chair, network director", ""], decider: ["PTA president, editor", ""], gate: ["Their vendor rules", "Never ask for the list."] },
+    give: ["Straight answers about kids and gaming", "A parent session that doesn't pitch"],
+    ask: ["A conversation", "Later, a newsletter line or listing they choose to run"],
+    hook: { s: "Learning what parents ask about gaming", t: "\"What are parents asking you about gaming?\"" },
+    firstYes: "A conversation",
+    karlin: "Karlin and a coach answer parents' questions",
+    proposal: "Parent night deck",
+    pilots: [{ n: "Parent night", d: "\"What's my kid doing in that game?\" with a coach and Karlin, co-hosted.", pic: "night" }],
+    watch: ["Learn first. Parent conversations come only after a first meeting.", "Never a referral fee for a list."],
+    deliver: [["Parent night deck", "build"], ["Parent explainer", "build"], ["Newsletter paragraph", "build"]],
+    austin: [] }
+];
+
+const HOOKS = {
+  arena: { lane: "College arena", s: "From one arena person to another", l2: "The person who runs UT Austin's arena has become one of our closest partners, and I'm learning how other campuses think about younger players.", ask: "Do local families or younger players ever come through your arena?" },
+  club: { lane: "College club", s: "[Club] + coaching kids?", l2: "We hire college players to coach kids 10 to 17 in team games, like a youth sport, and I'd love to hear how your club thinks about the next generation.", ask: "Coffee at the arena?" },
+  faculty: { lane: "Faculty", s: "[Their topic], quick question", l2: "I'm learning from people who study kids and games before we grow.", ask: "Virtual coffee?" },
+  school: { lane: "School esports", s: "Austin dad learning about school esports", l2: "I'm learning how school clubs run, what keeps them going, and where coaching fits.", ask: "10 minutes in the next couple of weeks?" },
+  micro: { lane: "Microschool", s: "Austin founder learning from microschool founders", l2: "One thing keeps coming up with founders: the kids already game, but a small school has no way to give them a team.", ask: "Coffee in the next couple of weeks?" },
+  center: { lane: "Center or room", s: "[Center] + weekend afternoons?", l2: "Is your space ever open for outside programs on weekend afternoons? We might be looking for a home for kids' teams on a regular schedule.", ask: "" },
+  franchise: { lane: "Franchisor", s: "Founder to founder: [Brand] and esports", l2: "What did [their program] teach you, and could your rooms host teams like ours?", ask: "A call with you, or whoever runs new programs?" },
+  camp: { lane: "Camp", s: "What happens between summers?", l2: "Camps tell us kids drift between seasons, and I'm curious how you keep campers connected.", ask: "Up for a call?" },
+  creator: { lane: "Creator (to manager)", s: "[Creator] + a youth league", l2: "Congrats on [dated win]. A partner does a guest session with a team now and then, ideas, and a real stake as it grows.", ask: "Up for a quick call in the next couple of weeks?" },
+  parent: { lane: "Parent channel", s: "Learning what parents ask about gaming", l2: "I'm trying to understand what parents are actually asking about gaming before we say anything to them.", ask: "What are you hearing?" }
+};
+const SENDERS = {
+  jamie: { greet: n => `${n},`, line1: "I'm Jamie, an Austin dad and founder working with EKUZO, where college esports players coach kids 10 to 17 in team games, like a youth sport.", txt: "If easier, txt works: [number].", sign: "Best,\nJamie" },
+  karlin: { greet: n => `Hey ${n}!`, line1: "I'm Karlin, a retired esports player turned founder and I started EKUZO to give every kid the experience I wished I had - mentors, structure, stakes, and community.", txt: "", sign: "Best,\n\nKarlin" }
+};
+
+const TEMPLATES = [
+  { code: "T2", name: "Nudges", stage: "Stage 2 · day 3 and day 7, then stop", subj: "Re: [original subject]", body: "Day 3:\n[Name], bumping this in case it got buried. [The ask, in one line.] If easier, txt works: [number].\n\nDay 7:\n[Name], last note from me on this. If someone else is the right person for [topic], I'd be grateful for the name." },
+  { code: "T3", name: "Book the meeting", stage: "Stage 3 · same day as their reply", subj: "Re: [original subject]", body: "Great, thanks [Name]. Would [day time] or [day time] work? Happy to come to you at [place], or Zoom if easier." },
+  { code: "T4", name: "Thank-you + small yes", stage: "Stage 5 · within a day, 2 or 3 lines, no compliment", subj: "Thanks, and meet Karlin", body: "[Name], thanks for the time [day].\n\nPlease meet Karlin, our founder (cc'd). [One line on why they should talk, from what they said.]\n\nNext step: [one small dated step from the ladder]. Does [date] work?" },
+  { code: "T5", name: "Karlin meeting invite", stage: "Stage 6 · from Karlin", subj: "Hey from Karlin", body: "Hey [Name]!\n\nJamie told me about [the one thing they said that stuck]. [One line from Karlin's own story that connects.]\n\nWould love to [see your space / meet your students / hear how you run it]. [Two times.]\n\nBest,\nKarlin" },
+  { code: "T6", name: "Proposal cover note", stage: "Stage 7 · sent with the lane one-pager", subj: "What [a pilot] could look like with [Org]", body: "[Name],\n\nAs promised, here's a one-pager on what [a pilot] could look like with [Org]: [one line, e.g. one EKUZO team for your 6th to 8th graders, 6 weeks, a family showcase at the end].\n\nIt's a starting point. What would you change? Could we take 30 minutes [date] to shape it with [whoever else has to say yes]?" },
+  { code: "T7", name: "Pilot kickoff + weekly note", stage: "Stage 8 · kickoff, then every Friday", subj: "We're set for [date]", body: "Kickoff:\n[Name], we're set for [date]. Your coach is [Coach], [one line on them]. Here's the parent explainer to send your families, and a post if you'd like to share it. Anything you need from us before then?\n\nWeekly, 3 lines:\nThis week: [what the team did]. A moment: [one thing a kid or parent said, with OK]. Next week: [what's coming]." },
+  { code: "T8", name: "Recap + expand", stage: "Stage 9 · within a week of the end", subj: "[Pilot] recap, and what's next", body: "[Name], thanks for hosting [the pilot]. The recap is attached: [3 numbers we can source: kids, sessions, parents at the showcase] and what we'd do differently.\n\nTwo questions: would you like to run it again in [season]? And who else should be doing this?" },
+  { code: "R", name: "Routing note", stage: "Any stage · senior person who isn't the target", subj: "Quick pointer?", body: "[Name], who's the best person to talk with about [topic] at [Org]? Grateful for a pointer." },
+  { code: "RB", name: "Reach-back note", stage: "For college club members to send their old HS adviser", subj: "[Club] at [College] + your club", body: "Hi [Adviser], I'm [name], class of [year], now in [club] at [college]. I'm helping EKUZO, where college players coach kids in team games. Would your club want [a coach session / our growth kit]? Happy to connect you." }
+];
+
+const ONEPAGERS = [
+  { p: 1, href: "one-pagers/microschool.html", n: "Microschool partnership", hl: "Your kids already game. Give them a team.", for: "Founders and heads of school", clears: ["Two founders asking for a partnership package", "A camp founder's microschool intros"] },
+  { p: 2, href: "one-pagers/center.html", n: "Center partnership", hl: "Gaming brings them in. Your center keeps them.", for: "Coding centers, gaming centers, franchisees", clears: ["A coding center ready for concepts", "Franchise centers' four questions", "Franchisee meeting prep"] },
+  { p: 3, href: "one-pagers/college-club.html", n: "College club partnership", hl: "Make the next class as passionate as yours.", for: "Club officers (external + internal)", clears: ["Three university clubs", "A smaller college club's report-back"] },
+  { p: 4, href: "one-pagers/franchisor.html", n: "Franchisor proposal", hl: "One league across your Texas centers.", for: "A coding-center franchisor", clears: ["Their ask for a loose proposal with light numbers"] },
+  { p: 5, href: "one-pagers/collegiate-pilot.html", n: "Collegiate pilot", hl: "Bring a youth team to your market.", for: "Program directors outside Austin", clears: ["Two programs' pilot asks", "A national leader's follow-up"] },
+  { p: 6, href: "one-pagers/school-club-kit.html", n: "School club growth kit", hl: "Coaching is the hard part. We'll bring it.", for: "HS and MS advisers", clears: ["A district contact", "Texas teachers lane"] },
+  { p: 7, href: "one-pagers/parent-explainer.html", n: "Parent explainer", hl: "What a week on an EKUZO team looks like.", for: "Partners' families", clears: ["Every pilot from stage 8 on"] },
+  { p: 8, href: "one-pagers/skeptical-staff.html", n: "Skeptical-staff story", hl: "Why a coach and a team change how kids play.", for: "Teachers wary of screens", clears: ["A founder's ask for her staff"] }
+];
+
+const DECISIONS = [
+  ["Pilot shape", "Online weekly with a monthly in-person meetup at the partner, as the default for every lane? Or by lane?", "Jamie, Karlin"],
+  ["Pilot length", "Six weeks to fit microschool cycles, or 12?", "Jamie"],
+  ["What the partner gets", "Revenue share, flat fee, or free for the first pilot? One-pagers stay silent on money until set.", "Jamie"],
+  ["College clubs: first ask", "Coaches, ads, reach-back or a monthly event? The 10-26 next steps are still blank.", "Team"],
+  ["Rivals and Smash", "In or out for youth teams? Decides two of the three club one-pagers.", "Karlin"],
+  ["Scoring stages 7 to 9", "Points for a proposal sent, a pilot started, a renewal?", "Jamie"],
+  ["Names", "OK to ask the two microschool founders if we can mention them to other founders?", "Jamie"],
+  ["Columbus", "Start from this lab when the city opens. Ohio State is already on the College arenas list.", "Aaron"]
+];
+
+/* ---------- Helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const phaseOf = n => STAGES[n].ph;
+function track(stage, owed) {
+  let h = '<div class="track" aria-label="Furthest stage: ' + stage + (owed ? ", next stage owed by us" : "") + '">';
+  for (let i = 0; i < 10; i++) {
+    let c = "d";
+    if (i <= stage) c += phaseOf(i) === "reach" ? " r" : phaseOf(i) === "rapport" ? " ra" : " pa";
+    if (owed && i === stage + 1) c += " owed";
+    h += '<span class="' + c + '" title="' + i + ' ' + esc(STAGES[i].t) + '"></span>';
+  }
+  return h + "</div>";
+}
+function slots(text) {
+  return esc(text).replace(/\[([^\]]+)\]/g, '<span class="slot">[$1]</span>');
+}
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800); }
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); toast("Copied"); }
+  catch (e) { toast("Copy blocked here. Select the text instead."); }
+}
+
+/* Arrows (same stroke set as icons) */
+const AR = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
+const AL = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg>';
+/* Icons (one stroke set) */
+const IC = {
+  champion: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
+  decider: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3.5" y="3.5" width="17" height="17" rx="1"/></svg>',
+  gate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9.5" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="#f92524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5L2.5 20h19z"/><path d="M12 10v4.5M12 17.2v.1"/></svg>',
+  arrows: '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="square"><path d="M8 17h30m-7-7l7 7-7 7"/><path d="M40 31H10m7-7l-7 7 7 7"/></svg>'
+};
+/* Little pilot pictograms */
+function pic(kind) {
+  const R = "#f92524", K = "#000", G = "#d9d8d6";
+  const p = {
+    coach: `<svg viewBox="0 0 160 92"><circle cx="30" cy="30" r="14" fill="${R}"/><rect x="14" y="48" width="32" height="34" fill="${R}"/>${[0,1,2,3,4].map(i => `<circle cx="${74+i*18}" cy="44" r="7" fill="${K}"/><rect x="${67+i*18}" y="55" width="14" height="22" fill="${K}"/>`).join("")}<path d="M50 40h12" stroke="${K}" stroke-width="2"/></svg>`,
+    reach: `<svg viewBox="0 0 160 92"><rect x="8" y="30" width="44" height="34" fill="${R}"/><path d="M8 30l22-16 22 16" fill="${R}"/>${[0,1,2].map(i => `<rect x="${104}" y="${8+i*28}" width="44" height="22" fill="none" stroke="${K}" stroke-width="2"/><path d="M56 47 Q80 ${20+i*28} 100 ${19+i*28}" fill="none" stroke="${K}" stroke-width="2" stroke-dasharray="4 4"/>`).join("")}</svg>`,
+    night: `<svg viewBox="0 0 160 92"><rect x="40" y="10" width="80" height="48" fill="${K}"/><rect x="48" y="18" width="64" height="32" fill="${R}"/><rect x="76" y="58" width="8" height="10" fill="${K}"/>${[0,1,2,3,4,5,6].map(i => `<circle cx="${20+i*20}" cy="80" r="7" fill="${i%3===0?R:K}"/>`).join("")}</svg>`,
+    map: `<svg viewBox="0 0 160 92"><path d="M10 82 L40 10 L80 28 L120 8 L150 70 L90 86 Z" fill="${G}"/><circle cx="52" cy="40" r="9" fill="${K}"/><circle cx="108" cy="58" r="12" fill="${R}"/><path d="M60 44 Q84 30 98 54" fill="none" stroke="${K}" stroke-width="2" stroke-dasharray="4 4"/></svg>`,
+    kit: `<svg viewBox="0 0 160 92"><rect x="20" y="10" width="54" height="72" fill="${G}"/><rect x="28" y="20" width="34" height="8" fill="${K}"/><rect x="28" y="34" width="38" height="4" fill="${K}" opacity=".3"/><rect x="28" y="42" width="30" height="4" fill="${K}" opacity=".3"/><rect x="86" y="18" width="54" height="64" fill="${R}"/><rect x="94" y="28" width="30" height="8" fill="#fff"/><rect x="94" y="42" width="38" height="4" fill="#fff" opacity=".6"/></svg>`,
+    cal: `<svg viewBox="0 0 160 92"><rect x="10" y="10" width="140" height="72" fill="none" stroke="${K}" stroke-width="2"/><rect x="10" y="10" width="140" height="14" fill="${K}"/>${[0,1,2,3,4,5].map(i => `<rect x="${18+i*22}" y="34" width="16" height="16" fill="${R}"/>`).join("")}${[0,1,2,3,4,5].map(i => `<rect x="${18+i*22}" y="56" width="16" height="16" fill="${i===5?R:"none"}" stroke="${K}" stroke-width="1.5"/>`).join("")}</svg>`
+  };
+  return p[kind] || p.kit;
+}
+
+/* ---------- Views ---------- */
+const VIEWS = [
+  { id: "home", label: "Lane board", group: "Start" },
+  { id: "pathway", label: "Player pathway", group: "Start" },
+  { id: "journey", label: "Journey map", group: "Start" },
+  { id: "heroes", label: "Hometown Heroes", group: "Programs" },
+  ...LANES.map(l => ({ id: "lane-" + l.id, label: l.name, group: "Lanes", num: l.num })),
+  { id: "templates", label: "Message templates", group: "Toolkit" },
+  { id: "onepagers", label: "One-pagers", group: "Toolkit" },
+  { id: "decisions", label: "Open decisions", group: "Toolkit" }
+];
+
+function viewHome() {
+  const rows = LANES.map(l => `
+    <a class="row" href="#lane-${l.id}">
+      <div class="ln"><div class="num">${l.num}</div><div><div class="nm">${esc(l.name)}</div><div class="tg">${esc(l.tag)}</div></div></div>
+      ${track(l.stage, l.owed)}
+      <div class="status">${l.owed ? "<b>Waiting on us.</b> " : ""}${esc(l.status)}</div>
+      <div class="go" aria-hidden="true">${AR}</div>
+    </a>`).join("");
+  return `
+  <section class="band red dark"><div class="wrap">
+    <h1 class="display h1">Outreach Lab</h1>
+    <p class="subhead">Eight partner lanes, one player pathway, one journey from first email to pilot. Pick a lane to see who we talk to, what we trade, and the message for each step.</p>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="sec-head">
+      <div><h2 class="h2">Where every lane stands in Austin</h2><p class="sub">Each bar is the 10-stage journey. Filled is how far the warmest conversation has got. Striped red means the next step is ours to send.</p></div>
+      <div class="key"><span><i class="p-reach"></i>Reach</span><span><i class="p-rapport"></i>Rapport</span><span><i class="p-partner"></i>Partner</span></div>
+    </div>
+    <div class="board-head"><span>Lane</span><div class="track-labels">${STAGES.map(s => `<span>${s.n}</span>`).join("")}</div><span>Status (10-29)</span><span></span></div>
+    <div class="board">${rows}</div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2" style="max-width:24ch">12 of 20 Austin conversations are waiting on us.</h2>
+    <p class="subhead">They met us and they're keen. The next move is a one-pager or a pilot shape, counted from Jamie's 10-29 table.</p>
+    <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap"><a class="btn red" href="#onepagers">See the one-pagers</a><a class="btn ghost" href="#decisions">What blocks them</a></div>
+  </div></section>`;
+}
+
+function loopSVG() {
+  const box = (x, y, n, t, a, b, main) => `
+    <g>
+      <rect x="${x}" y="${y}" width="340" height="104" fill="${main ? "#f92524" : "#fff"}" stroke="#000" stroke-width="${main ? 0 : 2}"/>
+      <text x="${x + 20}" y="${y + 46}" font-family="Tungsten Narrow, Oswald, sans-serif" font-weight="900" font-size="38" fill="${main ? "#fff" : "#f92524"}">${n}</text>
+      <text x="${x + 58}" y="${y + 40}" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="${main ? "#fff" : "#000"}">${t}</text>
+      <text x="${x + 58}" y="${y + 66}" font-family="Inter, sans-serif" font-size="13.5" fill="${main ? "rgba(255,255,255,.85)" : "rgba(0,0,0,.7)"}">${a}</text>
+      <text x="${x + 58}" y="${y + 85}" font-family="Inter, sans-serif" font-size="13.5" fill="${main ? "rgba(255,255,255,.85)" : "rgba(0,0,0,.7)"}">${b}</text>
+    </g>`;
+  return `<svg class="loop" viewBox="0 0 880 420" role="img" aria-label="The player loop: kid on an EKUZO team, school club, college, paid coach">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#000"/></marker></defs>
+    <g fill="none" stroke="#000" stroke-width="2.5">
+      <path d="M360 72H510" marker-end="url(#ah)"/>
+      <path d="M690 124V286" marker-end="url(#ah)"/>
+      <path d="M520 338H370" marker-end="url(#ah)"/>
+      <path d="M190 286V124" marker-end="url(#ah)"/>
+    </g>
+    <text x="440" y="60" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="rgba(0,0,0,.6)">GROWS UP</text>
+    <text x="704" y="210" font-family="Inter" font-size="13" font-weight="700" fill="rgba(0,0,0,.6)">GRADUATES</text>
+    <text x="440" y="326" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="rgba(0,0,0,.6)">GETS HIRED</text>
+    <text x="176" y="210" text-anchor="end" font-family="Inter" font-size="13" font-weight="700" fill="rgba(0,0,0,.6)">COACHES</text>
+    ${box(20, 20, "1", "Joins an EKUZO team, 10 to 13", "Fed by microschools, rooms,", "camps, parent channels", true)}
+    ${box(520, 20, "2", "Plays for a school club", "Fed by advisers and districts.", "We help clubs grow and last.")}
+    ${box(520, 286, "3", "Joins a college club or program", "Fed by arenas, clubs, faculty.", "Coaches, rooms, a trusted name.")}
+    ${box(20, 286, "4", "Comes back as a paid coach", "College players coach the", "next kids, about 1 to 10.")}
+    <rect x="330" y="174" width="220" height="70" fill="#000"/>
+    <text x="440" y="203" text-anchor="middle" font-family="Inter" font-weight="700" font-size="15" fill="#fff">Around the loop</text>
+    <text x="440" y="226" text-anchor="middle" font-family="Inter" font-size="13" fill="rgba(255,255,255,.7)">creators, organizers, industry</text>
+  </svg>`;
+}
+
+function viewPathway() {
+  const kit = [
+    ["Partner one-pager", "What we do together, what each side brings, the first step.", "All lanes", "p"],
+    ["Parent explainer", "One page for their families: coached team gaming, college coaches, a week on a team.", "Schools, microschools, rooms, camps", "p"],
+    ["Club growth kit", "Recruiting flyer, tabling ideas, restart checklist, season calendar.", "School esports, college clubs", "k"],
+    ["Reach-back kit", "A one-pager and school list members take back to their old high schools.", "College clubs", "k"],
+    ["Event-in-a-box", "Game night run sheet, signage, sign-up QR, follow-up email.", "Rooms, camps, colleges, schools", "e"],
+    ["Social + newsletter pack", "3 posts, 1 newsletter paragraph, 1 image set, co-branded.", "All, after a yes", "s"],
+    ["Proof sheet", "Karlin's story, coach bios, what parents said (with OK), numbers we can source.", "All, from the Karlin meeting on", "p"]
+  ].map(([t, d, l]) => `<div class="kit-row"><h3 class="h3">${t}</h3><p>${d}</p><div class="lanes">${l}</div></div>`).join("");
+  return `
+  <section class="band"><div class="wrap">
+    <h2 class="h2">Every partner owns one stage of the same player loop.</h2>
+    <p class="subhead">Our pitch to every partner is the same: we help you fill and keep your stage, and you help the loop reach more kids.</p>
+    <div style="margin-top:36px">${loopSVG()}</div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <div class="sec-head"><div><h2 class="h2">The partner kit: what we bring</h2><p class="sub">Our side of the trade. Built once by the creative team, then versioned per lane.</p></div></div>
+    <div class="kit">${kit}</div>
+  </div></section>`;
+}
+
+function moodSVG() {
+  const pts = MOOD.map((m, i) => [i * 100 + 50, 50 - m * 10]);
+  const d = pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(" ");
+  return `<svg class="mood" viewBox="0 0 1000 56" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke"/>${pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${STAGES[i].ph === "partner" ? "#f92524" : "#000"}" vector-effect="non-scaling-stroke"/>`).join("")}</svg>`;
+}
+
+function viewJourney() {
+  const stuck = n => (n >= 5 && n <= 7);
+  const phaseRow = `<div class="rl" style="background:transparent;border:0"></div>
+    <div class="phase reach" style="grid-column: span 4">Reach</div>
+    <div class="phase rapport" style="grid-column: span 3">Rapport</div>
+    <div class="phase partner" style="grid-column: span 3">Partner</div>`;
+  const head = `<div class="rl" style="border-bottom:2px solid #000">Stage</div>` + STAGES.map(s => `<div class="stage${stuck(s.n) ? " stuckcol" : ""}"><div class="s-n" style="color:${s.ph === "partner" ? "#f92524" : "#000"}">${s.n}</div><div class="s-t">${esc(s.t)}</div></div>`).join("");
+  const r = (label, key, fmt) => `<div class="rl">${label}</div>` + STAGES.map(s => `<div class="c${stuck(s.n) ? " stuckcol" : ""}">${fmt ? fmt(s) : esc(s[key])}</div>`).join("");
+  const tplLink = s => s.tpl ? `<a class="tpl" href="#templates" data-tpl="${s.tpl}">${s.tpl}</a>` : '<span style="color:rgba(0,0,0,.5)">Call card</span>';
+  const chev = STAGES.map(s => `<button type="button" class="${s.ph}" data-stage="${s.n}" aria-pressed="false"><span class="cn">${s.n}</span><span class="ct">${esc(s.t)}</span>${stuck(s.n) ? '<span class="flag">Stuck here</span>' : ""}</button>`).join("");
+  return `
+  <section class="band"><div class="wrap">
+    <h2 class="h2">Ten stages, the same for every lane.</h2>
+    <p class="subhead">Tap a stage to see what happens there. What changes by lane is the hook, the asset and the size of the first yes; each lane page shows its own five key moments.</p>
+    <div style="margin-top:36px">
+      <div class="phases"><div class="reach">Reach</div><div class="rapport">Rapport</div><div class="partner">Partner</div></div>
+      <div class="chev" role="group" aria-label="Journey stages">${chev}</div>
+      <div class="mood-wrap" style="margin-top:10px"><div class="lab" style="font:700 12px/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.6);margin-bottom:4px">How warm they are</div>${moodSVG()}</div>
+      <div class="jdetail" id="jdetail" aria-live="polite"></div>
+    </div>
+    <details class="full"><summary>Show every stage as a table</summary>
+      <div class="jmap-wrap" style="margin-top:20px"><div class="jmap">
+        ${phaseRow}${head}
+        ${r("Their goal", "goal")}
+        ${r("Our touchpoint", "touch")}
+        ${r("Template", null, tplLink)}
+        ${r("Asset", "asset")}
+        ${r("Done when", "exit")}
+        ${r("Timing", "time")}
+      </div></div>
+    </details>
+    <p class="sub" style="margin-top:24px;font-size:14px">Scoring stays the charter's: first touch 1, reply 2, meeting 5, dated next step 8. Stages 7 to 9 aren't scored yet. The warmth line is a sketch of how a typical thread feels, not measured.</p>
+  </div></section>`;
+}
+function showStage(n) {
+  const s = STAGES[n];
+  document.querySelectorAll(".chev button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.stage === n ? "true" : "false"));
+  const col = s.ph === "partner" ? "#f92524" : s.ph === "rapport" ? "#000" : "#8f8e8d";
+  const f = (l, v) => `<div><div class="lab">${l}</div><div class="val">${v}</div></div>`;
+  setTimeout(() => noWidows($("#jdetail")), 0);
+  $("#jdetail").innerHTML = `
+    <div><div class="bign" style="color:${col}">${s.n}</div><div class="bigt">${esc(s.t)}</div></div>
+    <div>
+      <div class="jfields">
+        ${f("Their goal", esc(s.goal))}
+        ${f("Our touchpoint", esc(s.touch))}
+        ${f("Template", s.tpl ? `<a class="tpl" href="#templates" data-tpl="${s.tpl}">Open ${s.tpl}</a>` : "Call card (meeting brief)")}
+        ${f("Asset", esc(s.asset))}
+        ${f("Done when", esc(s.exit))}
+        ${f("Timing", esc(s.time))}
+      </div>
+      <div class="jnav">
+        ${n > 0 ? `<button type="button" class="btn ghost" data-go="${n - 1}">${AL} ${esc(STAGES[n - 1].t)}</button>` : ""}
+        ${n < 9 ? `<button type="button" class="btn" data-go="${n + 1}">${esc(STAGES[n + 1].t)} ${AR}</button>` : ""}
+      </div>
+    </div>`;
+  document.querySelectorAll("#jdetail [data-go]").forEach(b => b.onclick = () => showStage(+b.dataset.go));
+}
+
+function viewLane(l) {
+  const i = LANES.indexOf(l), prev = LANES[i - 1], next = LANES[i + 1];
+  const role = (k, label, v) => `<div class="role"><div class="lab">${IC[k]}${label}</div><h3 class="h3">${esc(v[0])}</h3>${v[1] ? `<p>${esc(v[1])}</p>` : ""}</div>`;
+  const steps = [
+    ["1", "First touch", "Hook", l.hook.s, l.hook.t, "T1"],
+    ["5", "First yes", "Small yes", l.firstYes, "Proposed in the thank-you, not asked for in the room.", "T4"],
+    ["6", "Karlin", "Believe it", l.karlin, "No ask until Karlin has won them over.", "T5"],
+    ["7", "Proposal", "Show their team", l.proposal, "One-pager plus a pilot shape, then a working session.", "T6"],
+    ["9", "Expand", "Keep going", "Recap, renewal, \"who else?\"", "Every pilot ends with a name.", "T8"]
+  ].map(([n, k, kk, h, p, t]) => `<div class="step"><div class="dot" style="background:${+n >= 7 ? "#f92524" : "#000"}">${n}</div><div class="k">${k}</div><h3 class="h3">${esc(h)}</h3><p>${esc(p)}</p><a class="tpl" href="#templates" data-tpl="${t}" data-lane="${l.id}">Template ${t}</a></div>`).join("");
+  const contacts = l.austin.length ? `<table class="contacts"><thead><tr><th>Who</th><th>Org</th><th>Interest</th><th>Next</th></tr></thead><tbody>${l.austin.map(a => `<tr><td>${esc(a[0])}</td><td>${esc(a[1])}</td><td>${a[2] == null ? "<span style='color:rgba(255,255,255,.6)'>new</span>" : `<span class="meter" aria-label="${a[2]} of 5">${[1,2,3,4,5].map(x => `<i class="${x <= a[2] ? "on" : ""}"></i>`).join("")}</span>`}</td><td>${esc(a[3])}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No conversations yet. ${esc(l.status)}</p>`;
+  return `
+  <section class="band red dark"><div class="wrap lane-hero">
+    <div>
+      <h1 class="display h1">${esc(l.name)}</h1>
+      <p class="subhead">Lane ${l.num} · ${esc(l.tag)}</p>
+      <p class="quote">&ldquo;${esc(l.quote)}&rdquo;<small>${esc(l.who_said)}</small></p>
+    </div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <p style="font-size:19px;max-width:64ch">${esc(l.why)}</p>
+    <div style="margin-top:20px;max-width:620px">${track(l.stage, l.owed)}<div class="track-labels" style="margin-top:6px">${STAGES.map(s => `<span>${s.n}</span>`).join("")}</div></div>
+    <h2 class="h2" style="margin-top:48px;margin-bottom:20px">Who's in the room</h2>
+    <div class="roles">${role("champion", "Champion", l.roles.champion)}${role("decider", "Decider", l.roles.decider)}${role("gate", "Gatekeeper", l.roles.gate)}</div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:24px">The trade</h2>
+    <div class="trade">
+      <div class="side-b give dark"><h3 class="h3">We give</h3><ul>${l.give.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
+      <div class="arrows" aria-hidden="true">${IC.arrows}</div>
+      <div class="side-b ask"><h3 class="h3">We ask</h3><ul>${l.ask.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
+    </div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><h2 class="h2">This lane's journey</h2><p class="sub">The five moments that matter here. Numbers are the shared journey's stages.</p></div><a class="btn ghost" href="#journey">Full journey map</a></div>
+    <div class="flow">${steps}</div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:28px">Pilot shapes</h2>
+    <div class="pilots">${l.pilots.map(p => `<div class="pilot"><div class="pic" aria-hidden="true">${pic(p.pic)}</div><h3 class="h3">${esc(p.n)}</h3><p>${esc(p.d)}</p></div>`).join("")}</div>
+  </div></section>
+  ${l.id === "college" ? `<section class="band black dark"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap"><div><h2 class="h2">Turn club members into Hometown Heroes</h2><p class="subhead">Recruiters and coaches for a team from their own hometown.</p></div><a class="btn red" href="#heroes">See the program ${AR}</a></div></section>` : ""}
+  <section class="band"><div class="wrap two">
+    <div><h2 class="h2">Watch for</h2><ul class="watch">${l.watch.map(w => `<li>${IC.warn}<span>${esc(w)}</span></li>`).join("")}</ul></div>
+    <div><h2 class="h2">Deliverables</h2><ul class="deliv" style="background:var(--grey);padding:10px">${l.deliver.map(d => `<li><span>${esc(d[0])}</span><span class="chip ${d[1]}">${d[1] === "owed" ? "Owed now" : d[1] === "exists" ? "Exists" : "To build"}</span></li>`).join("")}</ul></div>
+  </div></section>
+  <section class="band" style="padding-top:0"><div class="wrap">
+    <div class="lane-nav" style="border-top:2px solid #000;padding-top:28px">
+      ${prev ? `<a class="btn ghost" href="#lane-${prev.id}">${AL} ${esc(prev.name)}</a>` : `<a class="btn ghost" href="#journey">${AL} Journey map</a>`}
+      ${next ? `<a class="btn ghost" href="#lane-${next.id}">${esc(next.name)} ${AR}</a>` : `<a class="btn ghost" href="#templates">Templates ${AR}</a>`}
+    </div>
+  </div></section>`;
+}
+
+function buildT1(sender, hook) {
+  const S = SENDERS[sender], H = HOOKS[hook];
+  const parts = [
+    S.greet("[Name]"),
+    S.line1,
+    H.l2,
+    "Btw, [one specific, recent, checkable thing about them], [one short line tying it to EKUZO, or one easy question].",
+    H.ask,
+    S.txt,
+    S.sign
+  ].filter(Boolean);
+  return { subject: H.s, body: parts.join("\n\n") };
+}
+function renderT1() {
+  const sender = $("#t1-sender").value, hook = $("#t1-lane").value;
+  const m = buildT1(sender, hook), S = SENDERS[sender], H = HOOKS[hook];
+  const b = [
+    `<span class="fill">${slots(S.greet("[Name]"))}</span>`,
+    `<span class="fill">${slots(S.line1)}</span>`,
+    `<span class="fill">${slots(H.l2)}</span>`,
+    slots("Btw, [one specific, recent, checkable thing about them], [one short line tying it to EKUZO, or one easy question]."),
+    H.ask ? `<span class="fill">${slots(H.ask)}</span>` : "",
+    S.txt ? esc(S.txt) : "",
+    esc(S.sign)
+  ].filter(Boolean).join("\n\n");
+  $("#t1-subj").innerHTML = slots(m.subject);
+  $("#t1-body").innerHTML = b;
+  $("#t1-copy").onclick = () => copy("Subject: " + m.subject + "\n\n" + m.body);
+}
+
+function viewTemplates() {
+  const laneOpts = Object.entries(HOOKS).map(([k, v]) => `<option value="${k}">${esc(v.lane)}</option>`).join("");
+  const cards = TEMPLATES.map(t => `
+    <div class="tcard" id="tpl-${t.code}">
+      <div class="meta"><div><span class="code">${t.code}</span> <span class="h3" style="margin-left:6px">${esc(t.name)}</span></div></div>
+      <div class="when" style="font-size:13px;color:rgba(0,0,0,.6);margin:-4px 0 10px">${esc(t.stage)}</div>
+      <div class="mail">
+        <div class="bar"><i></i><i></i><i></i><span class="t">${t.code}</span><button type="button" data-copy="${t.code}">Copy</button></div>
+        <div class="fld"><span>Subject</span><span>${slots(t.subj)}</span></div>
+        <div class="body">${slots(t.body)}</div>
+      </div>
+    </div>`).join("");
+  return `
+  <section class="band"><div class="wrap">
+    <h2 class="h2">A message for every touchpoint.</h2>
+    <p class="subhead">Shapes, not scripts. Red slots get filled per person. The sender's voice file always wins, and nothing from the can't-say list goes in: no dates, prices, credit claims, or anything about a specific child.</p>
+  </div></section>
+  <section class="band grey" id="tpl-T1"><div class="wrap">
+    <div class="sec-head"><div><h2 class="h2"><span style="font-family:var(--display);font-weight:900;color:var(--red);font-size:44px;letter-spacing:.02em">T1</span>&nbsp; First touch builder</h2><p class="sub">Pick the sender and the lane. Built only to get a reply: no attachments, no list ask.</p></div></div>
+    <div class="composer">
+      <div class="controls">
+        <div><label for="t1-sender">Sender</label><select id="t1-sender"><option value="jamie">Jamie (Austin)</option><option value="karlin">Karlin (Seattle, Houston)</option></select></div>
+        <div><label for="t1-lane">Lane</label><select id="t1-lane">${laneOpts}</select></div>
+        <p class="note">Karlin's line 1 is word for word from his file. Jamie picks his line 1 for the reader (gamer, dad, founder, adviser). Riot uses its own shape in Karlin's file.</p>
+      </div>
+      <div>
+        <div class="mail">
+          <div class="bar"><i></i><i></i><i></i><span class="t">New message</span><button type="button" id="t1-copy">Copy</button></div>
+          <div class="fld"><span>To</span><span class="slot" style="width:fit-content">[verified address]</span></div>
+          <div class="fld"><span>Subject</span><span id="t1-subj"></span></div>
+          <div class="body" id="t1-body"></div>
+        </div>
+        <div class="legend"><span><span class="fill">Filled</span> from the sender and lane</span><span><span class="slot">[Slot]</span> you write per person</span></div>
+      </div>
+    </div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:28px">Every other step</h2>
+    <div class="tgrid">${cards}</div>
+    <h2 class="h2" style="margin:56px 0 18px">By text</h2>
+    <div class="sms"><div class="bubble">Hi [Name], it's [Sender] from EKUZO. [The same ask, in one line]?</div><p class="sub" style="font-size:14px">Same ask, one line, sender's name first, no links on a first text.</p></div>
+  </div></section>`;
+}
+
+function viewOnepagers() {
+  const mini = o => `<div class="page" aria-hidden="true"><div class="hl">${esc(o.hl)}</div><div class="ln"></div><div class="ln" style="width:80%"></div><div class="cols"><div class="col k"><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div></div><div class="col p"><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div></div></div><div class="first"><div class="ln"></div><div class="ln" style="width:70%"></div></div><div class="foot"><span class="av"></span><div class="ln" style="flex:1"></div></div></div>`;
+  return `
+  <section class="band"><div class="wrap">
+    <h2 class="h2">Eight one-pagers, one family.</h2>
+    <p class="subhead">Same five-part skeleton every time, with the lane's headline and photo swapped. Build them in priority order: the first five move 12 of 20 Austin threads.</p>
+  </div></section>
+  <section class="band grey"><div class="wrap skel">
+    <div class="page" style="background:#fff" aria-label="One-pager skeleton">
+      <div class="hl">Their problem, in their words.</div><div class="ln"></div><div class="ln" style="width:85%"></div><div class="ln" style="width:70%"></div>
+      <div class="cols"><div class="col k"><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="ln"></div></div><div class="col p"><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="ln"></div></div></div>
+      <div class="first"><div class="ln"></div><div class="ln" style="width:70%"></div></div>
+      <div class="foot"><span class="av"></span><div class="ln" style="flex:1"></div></div>
+    </div>
+    <ol class="anat">
+      <li><div><b>Headline</b><span>Their problem in their words. Tungsten, all caps.</span></div></li>
+      <li><div><b>What we do together</b><span>Three lines, no more.</span></div></li>
+      <li><div><b>What each side brings</b><span>Two columns: EKUZO in black, the partner in grey.</span></div></li>
+      <li><div><b>A first step</b><span>The pilot shape, sized small, outlined in red. No dates or prices.</span></div></li>
+      <li><div><b>Who we are</b><span>Karlin's story in two lines, the approved coach line, a contact. No kids' faces.</span></div></li>
+    </ol>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="op-grid">${ONEPAGERS.map(o => `<div class="op">${o.href ? `<a href="${o.href}" aria-label="Open the ${esc(o.n)} one-pager" style="display:block;text-decoration:none">${mini(o)}</a>` : mini(o)}<div class="meta"><div><span class="prio">#${o.p}</span> <span class="h3">${esc(o.n)}</span></div><div class="for">${esc(o.for)}</div><ul class="clears">${o.clears.map(c => `<li>${esc(c)}</li>`).join("")}</ul>${o.href ? `<a class="btn red" style="margin-top:14px;padding:9px 14px;font-size:14px" href="${o.href}">Open the example ${AR}</a>` : ""}</div></div>`).join("")}</div>
+  </div></section>`;
+}
+
+function viewDecisions() {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem("olab-dec") || "{}"); } catch (e) {}
+  return `
+  <section class="band black dark"><div class="wrap">
+    <h2 class="h2">The pilot shape decides the most.</h2>
+    <p class="subhead">Every one-pager's first step depends on it. Ticks are saved in your browser only.</p>
+    <ul class="dec" style="margin-top:32px">${DECISIONS.map((d, i) => `<li class="${i === 0 ? "first" : ""}"><input type="checkbox" id="dec${i}" data-i="${i}" ${saved[i] ? "checked" : ""}><label for="dec${i}"><div class="q">${esc(d[0])}</div><div class="w">${esc(d[1])}</div></label><span class="own">${esc(d[2])}</span></li>`).join("")}</ul>
+  </div></section>`;
+}
+
+
+const HERO_STEPS = [
+  ["Signs up", "Meets Karlin at a club night. Joins as a coach and a recruiter.", ""],
+  ["Gets a page", "Photo, a 60-second story video, a code. ekuzo.gg/h/their-name", ""],
+  ["Goes home", "Back to their old school with the adviser's OK: club visit, game night, pathways talk.", "dark"],
+  ["Fills a team", "Families sign up with their code. The leaderboard shows the race.", "dark"],
+  ["Coaches it", "Coaches the team they built. Their teams play in the Hometown Cup.", "hot"],
+  ["Gets amplified", "We tell their story in ads and posts in their hometown. New heroes see it.", "hot"]
+];
+const FAMILY_STEPS = [
+  ["Meets the hero", "At a club visit or game night, with a teacher there. Or sees the hero's parent share."],
+  ["Takes home a card", "“Play on [Hero]'s team.” The QR on the back is for a parent."],
+  ["Parent opens the page", "The hero's story, the team, the spots left. One button: join the team."],
+  ["Signs up with the code", "The family is credited to the hero. Karlin's welcome call follows."],
+  ["Plays on the team", "Twice a week online, coached by the hero. Notes home after sessions."],
+  ["Proud parent moment", "Showcase night and a share card: “My kid made the team.”"]
+];
+const CHANNELS = [
+  ["Kids", "k", "The old school as the node", "The hero visits the club they came from, or the one their school never had: a club meeting, a game night, a “beat the college player” table. The adviser hosts."],
+  ["Kids", "k", "Game night in the hometown", "An open night at the school or a local room, run by the hero and a teammate. Kids play; parents come to pick up and meet the coach."],
+  ["Parents", "", "The hero's own parents", "Proud parents number one. They share their kid's page with their hometown: church, neighbors, the old coach, the teachers."],
+  ["Parents", "", "Families who join", "Proud parents number two. A team reveal, a jersey photo and the showcase night, each with a card made to share."],
+  ["Parents", "", "Hometown ads", "We run the hero's story as a parent ad in a tight radius around their hometown, using the ad system we already have."],
+  ["Both", "k", "Hometown press", "“Local grad comes home to coach.” The school newsletter, the alumni page, the local paper."]
+];
+const PRIZES = [
+  ["Coach your team", "Paid coaching work, with the kids you recruited.", true],
+  ["A bonus per family", "For every family that joins on your code. Amount to set.", false],
+  ["The Hometown Cup", "Your team plays the other heroes' teams. Final night at a college arena.", false],
+  ["Your story, told", "Featured in our ads and content, with your OK.", false],
+  ["Top recruiter", "A prize for the hero who fills a team first. To set.", false]
+];
+
+function heroLoop() {
+  const W = 260, H = 96;
+  const box = (x, y, n, t, a, b, fill, fg) => `<g><rect x="${x}" y="${y}" width="${W}" height="${H}" fill="${fill}" stroke="#000" stroke-width="${fill === '#fff' ? 2 : 0}"/>
+    <text x="${x + 18}" y="${y + 40}" font-family="Tungsten Narrow, Oswald, sans-serif" font-weight="900" font-size="32" fill="${fg === '#fff' ? '#fff' : '#f92524'}">${n}</text>
+    <text x="${x + 50}" y="${y + 36}" font-family="Inter, sans-serif" font-weight="700" font-size="16" fill="${fg}">${t}</text>
+    <text x="${x + 50}" y="${y + 60}" font-family="Inter, sans-serif" font-size="13" fill="${fg}" opacity=".8">${a}</text>
+    <text x="${x + 50}" y="${y + 78}" font-family="Inter, sans-serif" font-size="13" fill="${fg}" opacity=".8">${b}</text></g>`;
+  return `<svg class="hloop" viewBox="0 0 900 330" role="img" aria-label="The Hometown Heroes loop: sign up, page and code, go home, fill a team, coach it, story amplified">
+  <defs><marker id="ha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#000"/></marker></defs>
+  <g fill="none" stroke="#000" stroke-width="2.5">
+    <path d="M280 68H310" marker-end="url(#ha)"/><path d="M590 68H620" marker-end="url(#ha)"/>
+    <path d="M770 116V214" marker-end="url(#ha)"/>
+    <path d="M620 262H590" marker-end="url(#ha)"/><path d="M310 262H280" marker-end="url(#ha)"/>
+    <path d="M150 214V116" marker-end="url(#ha)"/>
+  </g>
+  ${box(20, 20, "1", "Hero signs up", "Coach and recruiter,", "met through their club", "#fff", "#000")}
+  ${box(320, 20, "2", "Page and code", "Their story, their team,", "a link that tracks", "#fff", "#000")}
+  ${box(630, 20, "3", "Goes home", "Old school as the node,", "the adviser as host", "#000", "#fff")}
+  ${box(630, 214, "4", "Fills a team", "Families join on", "the hero's code", "#000", "#fff")}
+  ${box(320, 214, "5", "Coaches and competes", "Their team, in the", "Hometown Cup", "#f92524", "#fff")}
+  ${box(20, 214, "6", "Story amplified", "Their hometown sees it,", "new heroes sign up", "#f92524", "#fff")}
+  <text x="138" y="170" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="rgba(0,0,0,.6)">NEXT HERO</text>
+  </svg>`;
+}
+function qrGrid() {
+  const on = [1,1,1,0,1,1,1, 1,0,1,0,0,0,1, 1,1,1,0,1,1,1, 0,0,0,1,0,1,0, 1,0,1,1,0,0,1, 0,1,0,0,1,1,0, 1,1,1,0,1,0,1];
+  return `<div class="qr" aria-hidden="true">${on.map(v => `<i class="${v ? '' : 'o'}"></i>`).join("")}</div>`;
+}
+function viewHeroes() {
+  const jrow = (steps, kind) => `<div class="jrow" style="--n:${steps.length}">${steps.map((s, i) => `<div class="jcell ${kind === 'hero' ? s[2] : (i >= 4 ? 'hot' : i >= 2 ? 'dark' : '')}"><div class="jn">${i + 1}</div><div class="jt">${esc(s[0])}</div><p>${esc(s[1])}</p></div>`).join("")}</div>`;
+  const lbRows = [["A", "Round Rock", 9], ["B", "Pflugerville", 7], ["C", "Cedar Park", 5], ["D", "Kyle", 3]];
+  return `
+  <section class="band red dark"><div class="wrap">
+    <h1 class="display h1">Hometown Heroes</h1>
+    <p class="subhead">College players recruit and coach a team from their own hometown. We give them a page, a code and something to compete for, and we amplify their story.</p>
+    <p class="quote">&ldquo;You've seen kids like me. Help me find those kids, and give them a program they can relate to.&rdquo;<small>Karlin's pitch to college players</small></p>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:20px">Why college players are the way in</h2>
+    <div class="why3">
+      <div><h3 class="h3">They'll talk to anyone</h3><p>College kids see the world as a hopeful place. They love telling their story, and our job is to amplify it.</p></div>
+      <div><h3 class="h3">Hometown gets you inside</h3><p>A grad coming back opens doors a stranger can't: their old school, their old adviser, their parents' whole network.</p></div>
+      <div><h3 class="h3">The coach schools never had</h3><p>Plenty of schools have esports. Almost none have a coach. The hero is the coach their club was missing.</p></div>
+    </div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">The loop</h2>
+    <p class="subhead">Every hero who fills a team becomes the story that recruits the next hero.</p>
+    <div style="margin-top:28px">${heroLoop()}</div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2">Two journeys, one team</h2>
+    <p class="subhead">What the hero does, and what a family goes through, side by side.</p>
+    <div class="jlabel">The hero</div>${jrow(HERO_STEPS, 'hero')}
+    <div class="jlabel">The family</div>${jrow(FAMILY_STEPS, 'family')}
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">How it reaches kids and proud parents</h2>
+    <p class="subhead">Kids meet the hero in person, with a teacher there. Everything they take home goes to a parent.</p>
+    <div class="chan" style="margin-top:32px">${CHANNELS.map(c => `<div><div class="who ${c[1]}">${c[0]}</div><h3 class="h3">${esc(c[2])}</h3><p>${esc(c[3])}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2">The hero's kit</h2>
+    <p class="subhead">A page with their code, a card kids take home, and a race to fill the team. Wireframes with sample data.</p>
+    <div class="mocks" style="margin-top:32px">
+      <div>
+        <div class="phone" aria-label="Wireframe of a hero's page">
+          <div class="ph-top"><div style="font-size:12px;font-weight:700;letter-spacing:.1em">EKUZO</div><div class="ph-name" style="margin-top:10px">Play on Maya's team</div></div>
+          <div class="ph-photo">Hero photo or video</div>
+          <div class="ph-body">
+            <p style="margin:0">I'm Maya, [High School] class of 2023, now playing League at [College]. I'm coaching a team of kids from [Hometown] this season.</p>
+            <p style="margin:12px 0 0;font-weight:700">7 of 10 spots filled</p>
+            <div class="prog"><i style="width:70%"></i></div>
+            <a class="ph-cta" href="#heroes">Join Maya's team</a>
+            <p style="margin:10px 0 0;font-size:12px;color:var(--ink-60)">For parents. Kids 9 to 17. Code MAYA-RR</p>
+          </div>
+        </div>
+        <p style="margin-top:12px"><span class="sample">Sample</span></p>
+      </div>
+      <div>
+        <h3 class="h3">The card kids take home</h3>
+        <p class="sub" style="font-size:15px">Handed out at the club visit or game night. The front is for the kid, the back is for the parent.</p>
+        <div class="cards2" style="margin-top:14px">
+          <div class="tcard2 f"><div style="font-size:12px;font-weight:700;letter-spacing:.1em">EKUZO</div><div class="big2">Play on Maya's team</div><div style="font-size:13px">College coach. Your team. Twice a week.</div></div>
+          <div class="tcard2 b">${qrGrid()}<div><div style="font-weight:700;font-size:15px">For your parent</div><div style="font-size:13px;color:var(--on-dark-70);margin-top:4px">Scan to meet Maya and save a spot. Code MAYA-RR</div></div></div>
+        </div>
+        <h3 class="h3" style="margin-top:36px">The race: Hometown Cup standings</h3>
+        <div class="lbwrap"><table class="lb"><thead><tr><th></th><th>Hero</th><th>Hometown</th><th>Families</th><th></th></tr></thead><tbody>
+          ${lbRows.map((r, i) => `<tr><td class="n">${i + 1}</td><td>Hero ${r[0]}</td><td>${r[1]}</td><td>${r[2]} of 10</td><td><div class="bar"><i style="width:${r[2] * 10}%"></i></div></td></tr>`).join("")}
+        </tbody></table></div>
+        <p style="margin-top:12px"><span class="sample">Sample</span> <span style="font-size:13px;color:var(--ink-60);margin-left:8px">Heroes and towns only, never kids' names.</span></p>
+      </div>
+    </div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">What heroes compete for</h2>
+    <p class="subhead">Something to fight for, on top of the story they get to tell.</p>
+    <div class="prizes" style="margin-top:28px">${PRIZES.map(p => `<div class="${p[2] ? 'hot' : ''}"><h3 class="h3">${esc(p[0])}</h3><p>${esc(p[1])}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap two">
+    <div><h2 class="h2">Guardrails</h2><ul class="watch">
+      <li>${IC.warn}<span>Heroes are adults, trained and held to the same standard as every EKUZO coach.</span></li>
+      <li>${IC.warn}<span>School visits only with the adviser's or principal's OK, with a teacher in the room.</span></li>
+      <li>${IC.warn}<span>No DMs with kids. Every sign-up is a parent's, and contact runs through EKUZO with a parent.</span></li>
+      <li>${IC.warn}<span>Kids' photos and names on share cards only when their parent makes and shares them.</span></li>
+      <li>${IC.warn}<span>Check referral pay against school rules, college eligibility rules, and tax reporting.</span></li>
+    </ul></div>
+    <div><h2 class="h2">Built on what we have</h2><ul class="deliv" style="background:var(--grey);padding:10px">
+      <li><span>Season 01 crew codes ("Join [Name]'s team")</span><span class="chip exists">Exists</span></li>
+      <li><span>Parent ads system, retargeted by hometown</span><span class="chip exists">Exists</span></li>
+      <li><span>College club reach-back kit</span><span class="chip build">To build</span></li>
+      <li><span>Hero page template and take-home card</span><span class="chip build">To build</span></li>
+      <li><span>Hometown Cup leaderboard</span><span class="chip build">To build</span></li>
+    </ul></div>
+  </div></section>
+  <section class="band black dark"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:24px">A pilot this spring</h2>
+    <div class="hpilot">
+      <div><div class="pn">5</div><h3 class="h3">Heroes</h3><p>From the university clubs we've met, the members who already offered to reach back.</p></div>
+      <div><div class="pn">5</div><h3 class="h3">Hometowns</h3><p>Each hero's own high school as the node, with its adviser as host.</p></div>
+      <div><div class="pn">1</div><h3 class="h3">Hometown Cup</h3><p>Their teams play each other, with a final night at a college arena.</p></div>
+      <div><div class="pn">3</div><h3 class="h3">Numbers to watch</h3><p>Families per hero, sign-ups by channel (each code tells us), and cost per family against paid ads.</p></div>
+    </div>
+    <h3 class="h3" style="margin-top:40px">Open decisions</h3>
+    <ul class="decide">
+      <li><span style="color:var(--red);font-weight:700">Karlin</span><span>Name it: Hometown Heroes, or something kids would say.</span></li>
+      <li><span style="color:var(--red);font-weight:700">Jamie</span><span>The bonus per family, and whether the hero coaches every team they fill.</span></li>
+      <li><span style="color:var(--red);font-weight:700">Jamie</span><span>Hero pages as a variant of the crew-code page on the site (Jamie's lane).</span></li>
+      <li><span style="color:var(--red);font-weight:700">Aaron</span><span>The hero kit: page template, card, share cards, a hometown ad.</span></li>
+    </ul>
+  </div></section>`;
+}
+
+
+function noWidows(root) {
+  root.querySelectorAll("p, li:not(:has(> .chip)), .deliv li > span:first-child, .jt, .h3, td, .quote").forEach(el => {
+    if ((el.textContent.trim().match(/\s+/g) || []).length < 2) return;
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let last = null, n;
+    while ((n = w.nextNode())) if (n.data.trim()) last = n;
+    if (!last) return;
+    const i = last.data.replace(/\s+$/, "").lastIndexOf(" ");
+    if (i > 0 && last.data.length - i < 16) last.data = last.data.slice(0, i) + "\u00a0" + last.data.slice(i + 1);
+  });
+}
+
+/* ---------- Router ---------- */
+function render(id) {
+  const v = VIEWS.find(x => x.id === id) ? id : "home";
+  const lane = LANES.find(l => "lane-" + l.id === v);
+  const html = v === "home" ? viewHome() : v === "pathway" ? viewPathway() : v === "journey" ? viewJourney() : v === "templates" ? viewTemplates() : v === "onepagers" ? viewOnepagers() : v === "decisions" ? viewDecisions() : v === "heroes" ? viewHeroes() : viewLane(lane);
+  $("#main").innerHTML = `<div class="view on">${html}</div>`;
+  noWidows($("#main"));
+  document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.dataset.v === v ? "page" : "false"));
+  $("#mnav").value = v;
+  document.title = (VIEWS.find(x => x.id === v).label) + " · Outreach Lab";
+  if (v === "templates") {
+    renderT1();
+    $("#t1-sender").onchange = renderT1; $("#t1-lane").onchange = renderT1;
+    document.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { const t = TEMPLATES.find(x => x.code === b.dataset.copy); copy("Subject: " + t.subj + "\n\n" + t.body); });
+    if (pendingTpl) { const el = document.getElementById("tpl-" + pendingTpl); if (pendingLane) { const map = { college: "arena", schools: "school", microschools: "micro", rooms: "center", camps: "camp", creators: "creator", parents: "parent" }; if (map[pendingLane]) { $("#t1-lane").value = map[pendingLane]; renderT1(); } } if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60); pendingTpl = null; pendingLane = null; return; }
+  }
+  if (v === "journey") {
+    document.querySelectorAll(".chev button").forEach(b => b.onclick = () => showStage(+b.dataset.stage));
+    showStage(5);
+  }
+  if (v === "decisions") {
+    document.querySelectorAll(".dec input").forEach(c => c.onchange = () => { try { const s = JSON.parse(localStorage.getItem("olab-dec") || "{}"); s[c.dataset.i] = c.checked; localStorage.setItem("olab-dec", JSON.stringify(s)); } catch (e) {} });
+  }
+  window.scrollTo(0, 0);
+}
+let pendingTpl = null, pendingLane = null;
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-tpl]");
+  if (a) { pendingTpl = a.dataset.tpl; pendingLane = a.dataset.lane || null; if (location.hash === "#templates") { e.preventDefault(); render("templates"); } }
+});
+
+/* Nav */
+(function buildNav() {
+  let h = "", g = "", o = "";
+  VIEWS.forEach(v => {
+    if (v.group !== g) { g = v.group; h += `<li class="group">${g}</li>`; o += (o ? "</optgroup>" : "") + `<optgroup label="${g}">`; }
+    h += `<li><a href="#${v.id}" data-v="${v.id}">${v.num ? `<span class="n">${v.num}</span>` : ""}${esc(v.label)}</a></li>`;
+    o += `<option value="${v.id}">${v.num ? v.num + ". " : ""}${esc(v.label)}</option>`;
+  });
+  $("#nav").innerHTML = h;
+  $("#mnav").innerHTML = o + "</optgroup>";
+  $("#mnav").onchange = e => { location.hash = e.target.value; };
+})();
+window.addEventListener("hashchange", () => render(location.hash.slice(1)));
+render(location.hash.slice(1));
+</script>
+</body>
+</html>

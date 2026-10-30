@@ -30,6 +30,36 @@ Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only)
   - The season line copy is approved by Jamie.
   - Two doors on /season1 and "Ready now?" are his to ship.
 - **Merge rule:** never merge dev into main. Release = season1-commit plus a merge of origin/main; dev goes through `preview/season1-dev`.
+## Aaron's Claude, 2026-10-30: Hometown Heroes in Outreach Lab (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/outreach-lab.html` only.
+
+1. **Hometown Heroes** (`#heroes`, new Programs group in the nav): Karlin's idea for college players as recruiters and coaches for a team from their own hometown. The loop, the hero and family journeys, how it reaches kids and parents (kids only in person with a teacher there; everything they take home goes to a parent), wireframes of a hero page, a take-home card and a leaderboard (sample data), what heroes compete for, guardrails, a spring pilot and open decisions. The College lane links to it.
+2. **Widows:** a small `noWidows()` pass after each render keeps the last two words of running text together.
+
+- **For Jamie (your lane, nothing changed):** the hero page is proposed as a variant of the Season 01 crew-code page (`/crew/<code>`, "Join [Name]'s team"), so each family is credited to its hero through the existing referral cookie.
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, no page errors.
+
+---
+## Aaron's Claude, 2026-10-30: the other seven partner one-pagers (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only (never ships to main).
+
+1. **Seven one-pagers** in `public/roadshow/one-pagers/`: `center`, `college-club`, `franchisor`, `collegiate-pilot`, `school-club-kit`, `parent-explainer`, `skeptical-staff`. Same Letter layout as `microschool.html`, each with a lane visual (a month with a center partner, the player loop, how a franchise pilot grows, a pilot in a college market, the club kit, a 90-minute practice, gaming alone vs on a team). Public-safe: quotes credited by role, no partner names, no phone numbers. Drafts for the team: pricing, block length and per-player write-ups stay pending decisions.
+2. **Outreach Lab** (`public/roadshow/outreach-lab.html`): every one-pager card links to its page; card #2 shows its real headline; buttons align across a row.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter, each page at 1440 and 390: no horizontal overflow, nothing past the page edge, no missing assets; each prints to one Letter page.
+
+---
+## Aaron's Claude, 2026-10-30: Outreach Lab and the Austin microschool one-pager (roadshow, dev only)
+
+Branch `dev`. Everything is under `public/roadshow/`, which never ships to main (dev-runbook, releasing when dev carries work main must not get). No app, lib, components or API files touched.
+
+1. **Outreach Lab** (`public/roadshow/outreach-lab.html`, 481e4ba): hub for EKUZO's eight partner lanes: lane board, player pathway, journey map, a page per lane, message templates, one-pager specs, open decisions. Public-safe version with no partner names or contact details; the full version stays private. Linked from the Roadshow Hub (new tile under In review).
+2. **QA fixes** (ed3913a): notch clipping on one-pager thumbnail headlines; journey chevrons overflowing at 1024 px; widows on short headings.
+3. **Austin microschool one-pager** (`public/roadshow/one-pagers/microschool.html` + `karlin.jpg`, a2798b1): Letter page that prints to one page; Outreach Lab's one-pager #1 links to it. Draft: pricing, block length and the per-player write-up are pending team decisions.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, nothing past the page edge, no missing assets; the one-pager prints to one Letter page.
 
 ---
 ## Jamie's Claude, 2026-10-29: card form behind Or pay with card
@@ -433,8 +463,21 @@ Dependency-only release ahead of Season 01 (security review finding H1, decision
   errors and 6 warnings from stricter React hooks rules (`react-hooks/refs`,
   `set-state-in-effect`, `immutability`) and `no-location-assign-relative-destination` on existing
   code. Not fixed here (Aaron's lane, separate pass); file list in the KB debrief.
-- Regression and commerce results: see the next entry or the KB debrief
-  (`knowledge-base/explorations/2026-10-27-nextjs-security-release/`).
+- Regression (local `next start` of this branch vs ekuzo.gg on 16.2.1, analytics hosts blocked): 14
+  core pages at 1440 and 375 match (status, title, text, screenshots), 18 config redirects 308 with
+  the same Location, `/register` 307 to `?join=season-one`, `ekuzo_origin` cookie unchanged, JSON-LD
+  identical, popup, footer signup and contact modal submit (outbound calls intercepted), Rive renders,
+  `/_next/image` serves webp through sharp 0.35.5, `/season1` HTML byte-identical.
+- Commerce, Stripe test mode: one camps ($199) and one EKUZO100 ($100) registration, `pm_card_visa`.
+  The webhook on 16.4.3 builds the same "Placed Order" properties the dev deploy sent to Klaviyo.
+  Test identities `team+nextsec-1027-camps@ekuzo.gg` and `-e100@`; ledger and branch deploy checks
+  in `knowledge-base/explorations/2026-10-27-nextjs-security-release/`.
+- Netlify: `release/next-security` and `preview/next-security` added to Branch deploys (2026-10-27,
+  Jamie's go). Remove them after the release ships.
+- Pre-existing, not changed here: webhook skips signature checks when `STRIPE_WEBHOOK_SECRET` is
+  unset; `/api/*/register` is not gated by Season 01 mode; empty `next.config.ts` beside the real
+  `next.config.mjs`; `public/` files with a literal `@` in the name 404 under `next start` (Netlify's
+  CDN serves them).
 
 ---
 ## Jamie (via Claude, Build Loop overnight), October 26 to 27, 2026 (Season 01 commit and invite)
