@@ -7,10 +7,12 @@ import { resolveCode } from "@/lib/season1/referral";
 import { refSecret, signRef, refSetCookieHeader } from "@/lib/season1/refcookie";
 import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 import { errCode, logStep } from "@/lib/season1/rules";
+import { fillTags, tagsForRequest } from "@/lib/season1/tags";
 
 // Season 01 friend page, /crew/<code>. The link a family shares after committing.
 // Static-shaped HTML served by a route handler OUTSIDE app/layout.tsx (no Meta
-// pixel; GA4 only). Server-rendered per request: names are HTML-escaped, the
+// pixel, no Clarity: the family code is in the path; GA4 only, signals off, via
+// lib/season1/tags.ts). Server-rendered per request: names are HTML-escaped, the
 // response is never cached, and the signed s1_ref cookie is set when the code
 // resolves (spec 02b, T4 to T10, T14).
 export const dynamic = "force-dynamic";
@@ -88,11 +90,16 @@ export async function GET(req: Request, ctx: { params: Promise<{ code: string }>
   const mode = currentMode(req.headers.get("host"));
   const tpl = fs.readFileSync(TEMPLATE_PATH, "utf8");
   const named = !!(resolved && resolved.named && resolved.displayName);
-  const html = renderHtml(tpl, named, named ? resolved!.displayName : null, resolved ? resolved.code : null, {
-    jersey: Date.now() < Date.parse(OFFER.jerseyCutoffAt),
-    test: mode === "test",
-    inactive,
-  });
+  const t = tagsForRequest(req, "crew", mode);
+  const html = fillTags(
+    renderHtml(tpl, named, named ? resolved!.displayName : null, resolved ? resolved.code : null, {
+      jersey: Date.now() < Date.parse(OFFER.jerseyCutoffAt),
+      test: mode === "test",
+      inactive,
+    }),
+    t.allow,
+    t.tags,
+  );
 
   const headers = new Headers({
     "content-type": "text/html; charset=utf-8",

@@ -24,6 +24,11 @@ function cleanHost(host: string | null | undefined): string {
   return (host ?? "").trim().toLowerCase().replace(/:\d+$/, "");
 }
 
+/** True when the raw Host header is ekuzo.gg or www.ekuzo.gg (port ignored). Missing host: false. */
+export function isLiveHost(host: string | null | undefined): boolean {
+  return LIVE_HOSTS.includes(cleanHost(host));
+}
+
 /**
  * Netlify deploy context. Reads S1_DEPLOY_CONTEXT first (the lead can inline
  * it at build time from CONTEXT via next.config `env`, since CONTEXT does not

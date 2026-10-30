@@ -5,6 +5,48 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: analytics build, front end
+
+Branch `season1-commit` (Atlas). This is the client half of the analytics slice. Relay's server half (`ekuzo_lc`, order attribution, drain, the F15 codes) was already here, and the two should release together. Spec: `docs/season1-commit/analytics/01-requirements.md` as amended by `02-resolution.md`. Evidence: `docs/season1-commit/analytics/evidence/atlas-frontend.md` (screenshots and the browser log in `evidence/atlas/`).
+
+- **One tag renderer, `lib/season1/tags.ts`.**
+  - Live GA4, Pixel and Clarity load only on raw host ekuzo.gg or www, and only when the mode is not test. Every other host gets a QA gate that loads nothing until `?s1qa=1`. In QA mode GA4 runs debug with ad consent denied and signals off, and the Pixel's Purchase and InitiateCheckout become S1QA_ custom events.
+  - GA4 `page_location` keeps only the 8 kept params.
+  - The Pixel is on join, sign-up and welcome, with autoConfig off before init.
+  - Clarity is on join, sign-up, welcome, thanks and the landing. It is not on crew, and the redirect and early-access pages stay tag-free.
+- **Address bar allow list** on every Season 01 page: the 8 kept params plus `src` and `s1qa` stay, and everything else is dropped. Thanks also keeps `play`.
+- **Landing** `LIVE` no longer matches netlify.app, so test deploys send no Lead or waitlist POST.
+- **`app/layout.tsx`:** site-wide tags load only in the production build context.
+- **Sign-up, F15:** one attempt per tab. `in_progress` shows the D5 line, then goes to welcome. `in_progress_other` shows the D5 line with the text link. `attempt_busy` retries once. "Not charged" is shown only when nothing could have been confirmed. Also new: the 2 s busy line and InitiateCheckout (eventID = sha256 of the attempt).
+- **Welcome:** Pixel Purchase (eventID = order id, once per order) and the `season1_tap_to_welcome` timing.
+- **Tests:**
+  - `npm run test:s1`: 330 of 330 (was 274).
+  - Integration (J10 method): 373 of 373 (was 317).
+  - tsc 0, `next build` OK.
+  - Browser run at 390 and 1440 on the built app.
+
+**For Aaron, every template and copy line touched:**
+
+- **Templates:**
+  - `join.html`: kid/from strip changed to `{{URL_ALLOW}}`; gtag block changed to `{{TAGS}}`.
+  - `signup.html`:
+    - `{{URL_ALLOW}}` and `{{TAGS}}`, same as join.
+    - `data-clarity-mask="true"` on `#invTxt`, `#sum` and `#go`, plus a masked span around the kid name in the duplicate_kid message.
+    - Client script: attempt reuse, setBusy/busy line, `commitNext`, `serverErr` (new in_progress_other branch), `pay()`, `initiateCheckout()`, pageshow.
+  - `welcome.html`:
+    - gtag block changed to `{{URL_ALLOW}}` and `{{TAGS}}`.
+    - Masks on the hero h1, the share button, the LINK_SHORT line, a new wrapper div around `{{RECEIPT_LINES}}`, and the hidden "Help us build" line.
+    - The paid script gains Pixel Purchase, tap timing and attempt cleanup.
+  - `crew.html`: query strip changed to `{{URL_ALLOW}}`; gtag block changed to `{{TAGS}}`.
+  - `thanks.html`: `{{URL_ALLOW}}` added before the title; gtag block changed to `{{TAGS}}`.
+  - `landing.html`: the Pixel, noscript, Clarity and GA4 head blocks changed to one comment plus `{{TAGS}}`; the `LIVE` regex drops `netlify\.app$`; one comment reworded.
+- **New copy** (D5, recommended strings, sign-up only):
+  - Busy label after 2 s: "Still saving. Please stay here."
+  - "Your payment is already going through. Taking you to your confirmation to check on it."
+  - "A payment for this email is already going through. Your receipt will arrive in your inbox when it's done. Questions? Text our founder."
+  - No other visible copy changed.
+- **Your call:** the in-progress line uses the red `#formErr` error style. A neutral style may read better.
+
 ## Jamie's Claude, 2026-10-30: analytics build, server side
 
 Lead follow-up: `FBC_RE` loosened to keep a Pixel `_fbc` verbatim (extra dotted segments, up to 600 characters after the timestamp), per Meta's guidance to send the cookie as is.

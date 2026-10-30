@@ -31,7 +31,10 @@ function blocks(tpl: string, flags: Record<string, boolean>): string {
   return out;
 }
 
-export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" | "live"; src: string | null }): string {
+export function renderJoin(
+  tpl: string,
+  opts: { now: Date; mode: "off" | "test" | "live"; src: string | null; tags?: { allow: string; tags: string } },
+): string {
   const { now, mode, src } = opts;
   const open = mode !== "off" && isOpen(now);
   const jersey = now.getTime() < Date.parse(OFFER.jerseyCutoffAt);
@@ -69,10 +72,15 @@ export function renderJoin(tpl: string, opts: { now: Date; mode: "off" | "test" 
     SIB_PCT: String(sibPct),
     SMS: sms,
     CLOSED_BLOCK: closedBlock,
+    // Head blocks from lib/season1/tags.ts (the route renders them from the request host).
+    URL_ALLOW: opts.tags?.allow ?? "",
+    TAGS: opts.tags?.tags ?? "",
   };
+  const RAW = new Set(["CLOSED_BLOCK", "URL_ALLOW", "TAGS"]);
 
   let out = blocks(tpl, { open, jersey, test: mode === "test" });
-  // CLOSED_BLOCK is built here from constants; every other value is a constant or a whitelisted src.
-  out = out.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k: string) => (k in vars ? (k === "CLOSED_BLOCK" ? vars[k] : esc(vars[k])) : m));
+  // CLOSED_BLOCK is built here from constants and the tag blocks by tags.ts; every other value is a
+  // constant or a whitelisted src.
+  out = out.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k: string) => (k in vars ? (RAW.has(k) ? vars[k] : esc(vars[k])) : m));
   return out;
 }

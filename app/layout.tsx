@@ -18,6 +18,10 @@ const GA_MEASUREMENT_ID = "G-8LM45PX53W";
 // without it drifting. Fallback keeps prod safe if the env var is missing.
 const META_PIXEL_ID =
   process.env.NEXT_PUBLIC_META_PIXEL_ID || "1284038230557204";
+// Analytics S12 (F2): GA4, the Pixel and Clarity load only on the production
+// deploy. S1_DEPLOY_CONTEXT is Netlify's CONTEXT, inlined at build time by
+// next.config.mjs, so branch deploys, deploy previews and local builds load none.
+const ANALYTICS_ON = process.env.S1_DEPLOY_CONTEXT === "production";
 
 /*
  * Tungsten Narrow — personal/preview use (Hoefler & Co)
@@ -127,6 +131,8 @@ export default function RootLayout({
       <head>
         <JsonLd data={rootGraph} />
 
+        {ANALYTICS_ON && (
+          <>
         {/*
          * Google Analytics 4
          *
@@ -211,6 +217,8 @@ export default function RootLayout({
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "wml8wll5ua");`}
         </Script>
+          </>
+        )}
       </head>
       <body className="min-h-full flex flex-col bg-white text-black">
         <ModalProvider>

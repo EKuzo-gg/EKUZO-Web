@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script>try{var u=new URL(location.href),c=0;["kid","from"].forEach(function(k){if(u.searchParams.has(k)){u.searchParams.delete(k);c=1}});if(c)history.replaceState(null,"",u.pathname+u.search)}catch(e){}</script>
+{{URL_ALLOW}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
@@ -12,8 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap">
 <script type="application/json" id="s1-config">__S1_CONFIG__</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
+{{TAGS}}
 <style>
 :root{--red:#F92524;--black:#050505;--ink:#333;--muted:#595959;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
 *{box-sizing:border-box}
@@ -194,7 +193,7 @@ p,li,.small{text-wrap:pretty}
 <main>
 <form id="f" class="px" style="padding-top:20px;padding-bottom:40px" novalidate autocomplete="on">
 <h1 class="d h2" style="margin-top:4px"><span style="color:var(--violet)">Season 01</span> sign up</h1>
-<div id="inv" class="inv" hidden><p id="invTxt"></p><button type="button" id="invRm">Remove (no friend credit for either family)</button></div>
+<div id="inv" class="inv" hidden><p id="invTxt" data-clarity-mask="true"></p><button type="button" id="invRm">Remove (no friend credit for either family)</button></div>
 <div id="kids"></div>
 <button type="button" class="btn ghost" id="addSib" style="margin-top:20px">+ Add a sibling (20% off)</button>
 <p class="small" id="moreKids" style="margin-top:16px;text-align:center" hidden>More than four kids? <a href="#" class="smsLink"><b>Text our founder</b></a></p>
@@ -206,7 +205,7 @@ p,li,.small{text-wrap:pretty}
 <p style="font-size:15px;font-weight:700">Signups are paused. Text our founder.</p>
 <a class="btn black smsLink" style="margin-top:12px" href="#">Text our founder</a><a class="back2" href="/season1">Join the waitlist</a></div>
 <div id="pay">
-<div class="offer notch" style="margin-top:28px;font-size:14px" id="sum"></div>
+<div class="offer notch" style="margin-top:28px;font-size:14px" id="sum" data-clarity-mask="true"></div>
 <div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
 <div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-required="true" aria-describedby="e-email"><p class="err" id="e-email"></p></div>
 <div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20" aria-describedby="e-mob"><p class="err" id="e-mob"></p></div>
@@ -216,7 +215,7 @@ p,li,.small{text-wrap:pretty}
 <div class="xpw" id="xpWrap"><div class="xpbox"><div id="xp"></div></div><p class="err" id="e-xp" role="alert"></p><button type="button" class="orpay" id="cardTog" aria-expanded="false" aria-controls="cardSec"><span class="orl">Or pay with card<span class="chev" aria-hidden="true"></span></span></button><p class="orpay orp" id="cardOr" hidden>Or pay with card</p></div>
 <div id="cardSec" class="cardsec shut" inert>
 <div style="margin-top:12px"><div id="pe"></div><p class="err" id="e-pay"></p></div>
-<button class="btn" style="margin-top:16px" id="go" type="submit">Save their spot &middot; $100</button>
+<button class="btn" style="margin-top:16px" id="go" type="submit" data-clarity-mask="true">Save their spot &middot; $100</button>
 </div>
 <p id="inviteNote" class="note" hidden></p>
 <div id="formErr" class="err" role="alert" aria-live="assertive" style="margin-top:12px;text-align:center"></div>
@@ -253,6 +252,8 @@ g('invRm').addEventListener('click',function(){
 });
 var confirming=false,kids=g('kids'),n=0,seq=0,busy=false,stripe=null,elements=null,xel=null,pe=null,peReady=false,secret=null,secretSig='',xp=null;
 var attemptId='';
+// F15 (C2): one attempt per tab, so a reload or an in-app back lands on the same order; welcome's paid state clears it.
+try{var sa=sessionStorage.getItem('s1_attempt')||'';if(/^[A-Za-z0-9-]{8,64}$/.test(sa))attemptId=sa}catch(_){}
 if(!attemptId){try{attemptId=crypto.randomUUID()}catch(_){attemptId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}}
 try{sessionStorage.setItem('s1_attempt',attemptId)}catch(_){}
 var AGES=[9,10,11,12,13,14,15,16,17];
@@ -434,9 +435,14 @@ function collect(){
  if(bad.length){announce(bad[0]+(bad.length>1?' '+(bad.length-1)+' more to fix below.':''));if(first)first.focus();else g('terms').focus();return null}
  return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
 }
-/* Canary 10-29: immediate feedback. Disabled, spinner and "Saving their spot..." until the redirect or an error. */
-function setBusy(b){busy=b;var btn=g('go');btn.disabled=b;btn.classList.toggle('busy',b);btn.setAttribute('aria-busy',b?'true':'false');
- if(b){if(!btn.querySelector('.spin'))btn.dataset.t=btn.textContent;btn.innerHTML='<span class="spin" aria-hidden="true"></span>Saving their spot...'}
+/* Canary 10-29: immediate feedback. Disabled, spinner and "Saving their spot..." until the redirect or an error.
+   S11: after 2 s the label becomes the progress line, announced once (status region). The timer is cleared
+   whenever busy ends (setBusy(false), fail(), pageshow), so the line never outlives an error. */
+var BUSY_LINE='Still saving. Please stay here.',busyT=0;
+function clearBusyLine(){if(busyT){clearTimeout(busyT);busyT=0}if(g('liveErr').textContent===BUSY_LINE)g('liveErr').textContent=''}
+function setBusy(b){busy=b;clearBusyLine();var btn=g('go');btn.disabled=b;btn.classList.toggle('busy',b);btn.setAttribute('aria-busy',b?'true':'false');
+ if(b){if(!btn.querySelector('.spin'))btn.dataset.t=btn.textContent;btn.innerHTML='<span class="spin" aria-hidden="true"></span>Saving their spot...';
+  busyT=setTimeout(function(){busyT=0;if(!busy)return;btn.innerHTML='<span class="spin" aria-hidden="true"></span>'+BUSY_LINE;g('liveErr').textContent=BUSY_LINE},2000)}
  else if(btn.dataset.t){btn.textContent=btn.dataset.t}}
 function showTotal(c){
  try{elements.update({amount:c})}catch(_){}
@@ -447,14 +453,26 @@ function showTotal(c){
  g('go').dataset.t=g('go').textContent;
  overrideCents=c;
 }
+/* F15 (C2): what to do with a commit answer that has no client secret (pure, unit tested). welcome: the
+   attempt's payment may be going through (409 in_progress, or any failure after this attempt reached
+   confirmPayment), so show the in-progress line and go to the confirmation. retry: the double-tap race
+   (503 attempt_busy), once, same attempt. error: serverErr below. */
+function commitNext(st,e,cf,rt){if(e==='in_progress')return 'welcome';if(e==='in_progress_other')return 'error';if(cf)return 'welcome';if(st===503&&e==='attempt_busy'&&!rt)return 'retry';return 'error'}
+var IN_PROGRESS_MSG='Your payment is already going through. Taking you to your confirmation to check on it.';
 function serverErr(status,j){
  var f=(j&&j.field)||'',e=(j&&j.error)||'',m;
+ if(e==='in_progress_other'){
+  var fo=g('formErr');fo.textContent='';
+  fo.appendChild(document.createTextNode('A payment for this email is already going through. Your receipt will arrive in your inbox when it\u0027s done. Questions? '));
+  var ao=document.createElement('a');ao.href=sms;ao.textContent='Text our founder';fo.appendChild(ao);fo.appendChild(document.createTextNode('.'));
+  return}
  if(e==='price_changed'&&j&&typeof j.amountCents==='number'){showTotal(j.amountCents);secret=null;announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');return}
  if(e==='duplicate_kid'||e==='text_karlin'){
   var fe=g('formErr');fe.textContent='';
   if(e==='duplicate_kid'){
    var kn=(j&&typeof j.kidFirstName==='string'&&j.kidFirstName)?j.kidFirstName:'Your kid';
-   fe.appendChild(document.createTextNode(kn+' already has a spot. Questions? '));
+   var ks=document.createElement('span');ks.setAttribute('data-clarity-mask','true');ks.textContent=kn;fe.appendChild(ks);
+   fe.appendChild(document.createTextNode(' already has a spot. Questions? '));
   }else{
    fe.appendChild(document.createTextNode('Please '));
   }
@@ -482,32 +500,59 @@ g('f').addEventListener('submit',function(ev){
  pay(body,null);
 });
 /* One path for the card button and the wallet sheet (xev = the Express Checkout confirm event). */
+/* S3 (C6): Pixel InitiateCheckout at the pay tap, once per attempt, eventID = sha256 hex of the attempt id. */
+function initiateCheckout(){
+ if(!window.s1px)return;
+ var k='s1_ic_'+attemptId;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(_){}
+ var p={value:totalCents()/100,currency:'USD',content_name:'Season 01',num_items:rows().length};
+ try{crypto.subtle.digest('SHA-256',new TextEncoder().encode(attemptId)).then(function(b){s1px('InitiateCheckout',p,Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join(''))},function(){s1px('InitiateCheckout',p)})}catch(_){s1px('InitiateCheckout',p)}
+}
+function confirmedKey(){return 's1_confirmed_'+attemptId}
+function wasConfirmed(){try{return sessionStorage.getItem(confirmedKey())==='1'}catch(_){return false}}
 async function pay(body,xev){
- var errEl=g(xev?'e-xp':'e-pay'),els=xev?xel:elements;
- function fail(){if(xev){try{xev.paymentFailed({reason:'fail'})}catch(_){}if(!errEl.textContent)errEl.textContent=g('formErr').textContent}setBusy(false)}
+ var errEl=g(xev?'e-xp':'e-pay'),els=xev?xel:elements,pfDone=false;
+ // Wallet: close the sheet first, then show any message (C2).
+ function pf(){if(xev&&!pfDone){pfDone=true;try{xev.paymentFailed({reason:'fail'})}catch(_){}}}
+ function fail(){pf();if(xev&&!errEl.textContent)errEl.innerHTML=g('formErr').innerHTML;setBusy(false)}
+ // F15 (C2, D5 string 2): the payment may be going through. Keep the button busy, show the line, then the confirmation.
+ function toWelcome(){pf();announce(IN_PROGRESS_MSG);if(xev)errEl.textContent=IN_PROGRESS_MSG;setTimeout(function(){location.replace('/season1/join/welcome')},1500)}
  setBusy(true);confirming=false;ga('season1_pay_submit',{method:xev?String(xev.expressPaymentType||'wallet'):'card'});
+ initiateCheckout();
+ // S8: tap time for welcome's season1_tap_to_welcome.
+ try{sessionStorage.setItem('s1_tap',String(performance.timeOrigin?performance.timeOrigin+performance.now():Date.now()))}catch(_){}
  try{
   var sub=await els.submit();
-  if(sub.error){errEl.textContent=sub.error.message||'Check your payment details.';announce(errEl.textContent);fail();return}
+  if(sub.error){pf();errEl.textContent=sub.error.message||'Check your payment details.';announce(errEl.textContent);fail();return}
   var sig=JSON.stringify([body.email,body.parentFirstName,body.phone,body.kids,totalCents(),inviteRemoved]);
   if(!secret||sig!==secretSig){
    secret=null;g('inviteNote').hidden=true;
    body.attemptId=attemptId;body.expectedCents=totalCents();
-   var res=await fetch('/api/season1/commit',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
-   var j=null;try{j=await res.json()}catch(_){}
-   if(!res.ok||!j||!j.clientSecret){serverErr(res.status,j);fail();return}
+   var res,j,retried=false;
+   for(;;){
+    res=await fetch('/api/season1/commit',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(body)});
+    j=null;try{j=await res.json()}catch(_){}
+    if(res.ok&&j&&j.clientSecret)break;
+    var nx=commitNext(res.status,(j&&j.error)||'',wasConfirmed(),retried);
+    if(nx==='retry'){retried=true;await new Promise(function(r){setTimeout(r,1500)});continue}
+    if(nx==='welcome'){toWelcome();return}
+    pf();serverErr(res.status,j);fail();return
+   }
    if(typeof j.amountCents==='number'&&j.amountCents!==totalCents()){
-    showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');fail();return}
+    pf();showTotal(j.amountCents);announce('Your total changed to '+money(j.amountCents)+'. Tap again to pay.');fail();return}
    secret=j.clientSecret;secretSig=sig;
    if(j.invite==='ignored'){
-    invite=null;renderInvite();upd();
+    pf();invite=null;renderInvite();upd();
     g('inviteNote').textContent=IGNORED_MSG;g('inviteNote').hidden=false;g('liveErr').textContent=IGNORED_MSG;
     fail();return}
   }
+  // F15 (C2): from here a charge is possible, so later failures on this attempt never say "not charged".
+  try{sessionStorage.setItem(confirmedKey(),'1')}catch(_){}
   confirming=true;
   var r=await stripe.confirmPayment({elements:els,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
-  if(r&&r.error){var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
- }catch(err){announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
+  if(r&&r.error){pf();var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
+ }catch(err){
+  if(wasConfirmed()){toWelcome();return}
+  pf();announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
 }
 /* Speed pass 10-29: wake the commit API and its database while the parent fills the form (no data, no cookies,
    no analytics). Once on load (skipped if the crew page did it under 4 min ago in this tab), and again when the
@@ -521,7 +566,7 @@ function warm(){
 }
 g('pay').addEventListener('focusin',function(){warm()});
 // A back or forward from the bfcache: drop the busy state and the cached client secret, refill the form.
-window.addEventListener('pageshow',function(e){if(e.persisted){secret=null;secretSig='';confirming=false;if(busy)setBusy(false);restoreForm()}});
+window.addEventListener('pageshow',function(e){if(e.persisted){clearBusyLine();secret=null;secretSig='';confirming=false;if(busy)setBusy(false);restoreForm()}});
 restoreForm();renderInvite();upd();ga('season1_signup_view');warm();
 // Stripe.js is deferred (end of body): init when it has loaded, or show the fallback if it failed.
 if(window.Stripe)initStripe();else{var sj=g('stripe-js');sj.addEventListener('load',initStripe);sj.addEventListener('error',initStripe)}

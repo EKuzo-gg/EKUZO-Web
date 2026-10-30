@@ -6,11 +6,12 @@ import { SRC_VALUES } from "@/lib/season1/validate";
 import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { resolveCode } from "@/lib/season1/referral";
 import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
+import { fillTags, tagsForRequest } from "@/lib/season1/tags";
 
 // Season 01 commit sign-up, /season1/join/signup. Adapted from
 // /season1/early-access/signup. HTML lives beside this file (literal path,
 // never public/). A JSON config block is injected per request. Served OUTSIDE
-// app/layout.tsx, so no Meta pixel fires. GA only.
+// app/layout.tsx: its head tags (GA4, Pixel, Clarity) come from lib/season1/tags.ts.
 export const dynamic = "force-dynamic";
 
 /** JSON safe inside <script type="application/json">. */
@@ -89,7 +90,8 @@ export async function GET(request: Request) {
     path.join(process.cwd(), "app", "season1", "join", "signup", "signup.html"),
     "utf8",
   );
-  const html = raw.split("__S1_CONFIG__").join(safeJson(config));
+  const t = tagsForRequest(request, "signup", mode);
+  const html = fillTags(raw.split("__S1_CONFIG__").join(safeJson(config)), t.allow, t.tags);
   return new Response(html, {
     headers: {
       "content-type": "text/html; charset=utf-8",

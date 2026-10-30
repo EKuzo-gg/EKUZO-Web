@@ -4,6 +4,7 @@ import { renderJoin } from "@/lib/season1/joinPage";
 import { currentMode } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
 import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
+import { tagsForRequest } from "@/lib/season1/tags";
 
 // Season 01 front door, /season1/join. Cloned from
 // /season1/early-access/early-access.html with the deltas in
@@ -11,7 +12,7 @@ import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 // state). Prices and dates come from lib/season1/offer.ts; the closed state
 // from mode and the commit window; the jersey line from the jersey cutoff.
 // HTML lives beside this file (literal path, never public/). Served OUTSIDE
-// app/layout.tsx, so no Meta pixel fires. GA only.
+// app/layout.tsx: its head tags (GA4, Pixel, Clarity) come from lib/season1/tags.ts.
 export const dynamic = "force-dynamic";
 
 const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "join.html");
@@ -21,7 +22,7 @@ export function GET(request: Request) {
   const srcParam = new URL(request.url).searchParams.get("src");
   const src = srcParam && (SRC_VALUES as readonly string[]).includes(srcParam) ? srcParam : null;
   const tpl = fs.readFileSync(TEMPLATE_PATH, "utf8");
-  const html = renderJoin(tpl, { now: new Date(), mode, src });
+  const html = renderJoin(tpl, { now: new Date(), mode, src, tags: tagsForRequest(request, "join", mode) });
   return new Response(html, {
     headers: {
       "content-type": "text/html; charset=utf-8",

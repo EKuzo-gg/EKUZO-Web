@@ -1,0 +1,1389 @@
+{
+ "note": "Playwright chromium against next start (built with the test env). ekuzo.gg:3108 = S1_COMMIT_MODE=off (live host, live tags); season1-commit.ekuzo-branch.test:3107 and localhost:3107 = test mode. Vendor scripts intercepted and fulfilled empty, so each URL listed was requested by the page; queues are read from window.dataLayer, fbq.queue and clarity.q. The 404 console errors on join and crew are the torn-paper images under public/images/new torn paper, which local next start does not serve (Netlify serves 200). The 409 errors are the mocked commit answer.",
+ "runs": [
+  {
+   "label": "live join",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ]
+   ]
+  },
+  {
+   "label": "live signup",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/season1/join/signup?src=email",
+   "finalHref": "http://ekuzo.gg:3108/season1/join/signup?src=email",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join/signup"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "signup"
+    ],
+    [
+     "set",
+     "src",
+     "email"
+    ]
+   ]
+  },
+  {
+   "label": "live welcome",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/season1/join/welcome",
+   "finalHref": "http://ekuzo.gg:3108/season1/join/welcome",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join/welcome",
+      "page_referrer": "http://ekuzo.gg:3108"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "welcome"
+    ]
+   ]
+  },
+  {
+   "label": "live crew",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/crew/48271937?utm_source=sms",
+   "finalHref": "http://ekuzo.gg:3108/crew/48271937?utm_source=sms",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/crew/?utm_source=sms",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ]
+   ]
+  },
+  {
+   "label": "live thanks",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://ekuzo.gg:3108/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/thanks?utm_source=klaviyo"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "thanks"
+    ]
+   ]
+  },
+  {
+   "label": "live landing",
+   "width": 390,
+   "url": "http://ekuzo.gg:3108/season1",
+   "finalHref": "http://ekuzo.gg:3108/season1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {}
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "ad",
+     "d1"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ]
+   ]
+  },
+  {
+   "label": "branch join",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch signup",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch welcome",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch crew",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?utm_source=sms",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?utm_source=sms",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch thanks",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch landing",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost join",
+   "width": 390,
+   "url": "http://localhost:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://localhost:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost signup",
+   "width": 390,
+   "url": "http://localhost:3107/season1/join/signup?src=email",
+   "finalHref": "http://localhost:3107/season1/join/signup?src=email",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost welcome",
+   "width": 390,
+   "url": "http://localhost:3107/season1/join/welcome",
+   "finalHref": "http://localhost:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost crew",
+   "width": 390,
+   "url": "http://localhost:3107/crew/48271937?utm_source=sms",
+   "finalHref": "http://localhost:3107/crew/48271937?utm_source=sms",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost thanks",
+   "width": 390,
+   "url": "http://localhost:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://localhost:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost landing",
+   "width": 390,
+   "url": "http://localhost:3107/season1",
+   "finalHref": "http://localhost:3107/season1",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch join ?s1qa=1",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join?s1qa=1&utm_campaign=qa",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join?s1qa=1&utm_campaign=qa",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_campaign=qa",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "qa"
+    ]
+   ]
+  },
+  {
+   "label": "branch crew ?s1qa=1",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?s1qa=1",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?s1qa=1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/crew/",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ]
+  },
+  {
+   "label": "branch thanks ?s1qa=1",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?s1qa=1&play=league",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?s1qa=1&play=league",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "thanks"
+    ]
+   ]
+  },
+  {
+   "label": "pay flow in_progress season1-commit.ekuzo-branch.test:3107",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&_kx=abc",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 409 (Conflict)"
+   ],
+   "pageErrors": [],
+   "afterAllow": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "early": "Saving their spot...",
+   "busy": {
+    "label": "Still saving. Please stay here.",
+    "ariaBusy": "true",
+    "disabled": true,
+    "live": "Still saving. Please stay here."
+   },
+   "msg": "Your payment is already going through. Taking you to your confirmation to check on it.",
+   "commitCalls": 1,
+   "tapStored": true,
+   "redirectAfterMessageMs": 1500,
+   "dataLayerTail": []
+  },
+  {
+   "label": "pay flow qa season1-commit.ekuzo-branch.test:3107",
+   "width": 390,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&s1qa=1&_kx=abc",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 409 (Conflict)"
+   ],
+   "pageErrors": [],
+   "afterAllow": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&s1qa=1",
+   "early": "Saving their spot...",
+   "busy": {
+    "label": "Still saving. Please stay here.",
+    "ariaBusy": "true",
+    "disabled": true,
+    "live": "Still saving. Please stay here."
+   },
+   "msg": "Your payment is already going through. Taking you to your confirmation to check on it.",
+   "commitCalls": 1,
+   "tapStored": true,
+   "redirectAfterMessageMs": 1522,
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "trackCustom",
+     "S1QA_InitiateCheckout",
+     {
+      "value": 100,
+      "currency": "USD",
+      "content_name": "Season 01",
+      "num_items": 1
+     },
+     {}
+    ]
+   ],
+   "dataLayerTail": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_signup_view",
+     {
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_pay_submit",
+     {
+      "method": "card",
+      "debug_mode": true
+     }
+    ]
+   ]
+  },
+  {
+   "label": "decline at 1.7 s season1-commit.ekuzo-branch.test:3107",
+   "width": 390,
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "go": "Save Maya's spot · $100",
+   "live": "",
+   "formErr": "stub decline",
+   "confirmed": 1
+  },
+  {
+   "label": "live join",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ]
+   ]
+  },
+  {
+   "label": "live signup",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/season1/join/signup?src=email",
+   "finalHref": "http://ekuzo.gg:3108/season1/join/signup?src=email",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join/signup"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "signup"
+    ],
+    [
+     "set",
+     "src",
+     "email"
+    ]
+   ]
+  },
+  {
+   "label": "live welcome",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/season1/join/welcome",
+   "finalHref": "http://ekuzo.gg:3108/season1/join/welcome",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/join/welcome",
+      "page_referrer": "http://ekuzo.gg:3108"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "welcome"
+    ]
+   ]
+  },
+  {
+   "label": "live crew",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/crew/48271937?utm_source=sms",
+   "finalHref": "http://ekuzo.gg:3108/crew/48271937?utm_source=sms",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/crew/?utm_source=sms",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ]
+   ]
+  },
+  {
+   "label": "live thanks",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://ekuzo.gg:3108/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://ekuzo.gg:3108/season1/thanks?utm_source=klaviyo"
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "thanks"
+    ]
+   ]
+  },
+  {
+   "label": "live landing",
+   "width": 1440,
+   "url": "http://ekuzo.gg:3108/season1",
+   "finalHref": "http://ekuzo.gg:3108/season1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "gaConfig": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {}
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "ad",
+     "d1"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ]
+   ]
+  },
+  {
+   "label": "branch join",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch signup",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch welcome",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch crew",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?utm_source=sms",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?utm_source=sms",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch thanks",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch landing",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost join",
+   "width": 1440,
+   "url": "http://localhost:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1&kid=Maya&_kx=zz",
+   "finalHref": "http://localhost:3107/season1/join?utm_source=meta&utm_campaign=s1&fbclid=AbC1",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost signup",
+   "width": 1440,
+   "url": "http://localhost:3107/season1/join/signup?src=email",
+   "finalHref": "http://localhost:3107/season1/join/signup?src=email",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost welcome",
+   "width": 1440,
+   "url": "http://localhost:3107/season1/join/welcome",
+   "finalHref": "http://localhost:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost crew",
+   "width": 1440,
+   "url": "http://localhost:3107/crew/48271937?utm_source=sms",
+   "finalHref": "http://localhost:3107/crew/48271937?utm_source=sms",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost thanks",
+   "width": 1440,
+   "url": "http://localhost:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "finalHref": "http://localhost:3107/season1/thanks?play=league&utm_source=klaviyo",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "localhost landing",
+   "width": 1440,
+   "url": "http://localhost:3107/season1",
+   "finalHref": "http://localhost:3107/season1",
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [],
+   "gaConfig": []
+  },
+  {
+   "label": "branch join ?s1qa=1",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join?s1qa=1&utm_campaign=qa",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join?s1qa=1&utm_campaign=qa",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/join?utm_campaign=qa",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "qa"
+    ]
+   ]
+  },
+  {
+   "label": "branch crew ?s1qa=1",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?s1qa=1",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/crew/48271937?s1qa=1",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/crew/",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ]
+  },
+  {
+   "label": "branch thanks ?s1qa=1",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?s1qa=1&play=league",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks?s1qa=1&play=league",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "cookies": [
+    "s1_qa=1"
+   ],
+   "gaConfig": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/thanks",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarityQueue": [
+    [
+     "set",
+     "page",
+     "thanks"
+    ]
+   ]
+  },
+  {
+   "label": "pay flow in_progress season1-commit.ekuzo-branch.test:3107",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&_kx=abc",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 409 (Conflict)"
+   ],
+   "pageErrors": [],
+   "afterAllow": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email",
+   "early": "Saving their spot...",
+   "busy": {
+    "label": "Still saving. Please stay here.",
+    "ariaBusy": "true",
+    "disabled": true,
+    "live": "Still saving. Please stay here."
+   },
+   "msg": "Your payment is already going through. Taking you to your confirmation to check on it.",
+   "commitCalls": 1,
+   "tapStored": true,
+   "redirectAfterMessageMs": 1473,
+   "dataLayerTail": []
+  },
+  {
+   "label": "pay flow qa season1-commit.ekuzo-branch.test:3107",
+   "width": 1440,
+   "url": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&s1qa=1&_kx=abc",
+   "finalHref": "http://season1-commit.ekuzo-branch.test:3107/season1/join/welcome",
+   "vendorRequests": [
+    "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.clarity.ms/tag/wml8wll5ua"
+   ],
+   "consoleErrors": [
+    "error: Failed to load resource: the server responded with a status of 409 (Conflict)"
+   ],
+   "pageErrors": [],
+   "afterAllow": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup?src=email&s1qa=1",
+   "early": "Saving their spot...",
+   "busy": {
+    "label": "Still saving. Please stay here.",
+    "ariaBusy": "true",
+    "disabled": true,
+    "live": "Still saving. Please stay here."
+   },
+   "msg": "Your payment is already going through. Taking you to your confirmation to check on it.",
+   "commitCalls": 1,
+   "tapStored": true,
+   "redirectAfterMessageMs": 1443,
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "trackCustom",
+     "S1QA_InitiateCheckout",
+     {
+      "value": 100,
+      "currency": "USD",
+      "content_name": "Season 01",
+      "num_items": 1
+     },
+     {}
+    ]
+   ],
+   "dataLayerTail": [
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://season1-commit.ekuzo-branch.test:3107/season1/join/signup",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_signup_view",
+     {
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_pay_submit",
+     {
+      "method": "card",
+      "debug_mode": true
+     }
+    ]
+   ]
+  },
+  {
+   "label": "decline at 1.7 s season1-commit.ekuzo-branch.test:3107",
+   "width": 1440,
+   "vendorRequests": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "go": "Save Maya's spot · $100",
+   "live": "",
+   "formErr": "stub decline",
+   "confirmed": 1
+  }
+ ]
+}

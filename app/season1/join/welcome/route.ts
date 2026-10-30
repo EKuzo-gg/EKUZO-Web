@@ -8,11 +8,13 @@ import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
 import { scheduleOrderDrain } from "@/lib/season1/orderDrain";
 import { SECURITY_HEADERS, pageSecurityHeaders, shareOrigin } from "@/lib/season1/httpGuard";
 import { ladderNote, thenLine } from "@/lib/season1/welcomeCopy";
+import { tagsForRequest } from "@/lib/season1/tags";
 
 // Season 01 confirmation, /season1/join/welcome. Adapted from
 // /season1/early-access/saved. Names come from the server (order found by the
 // s1_order cookie), never from the URL. Stripe's redirect parameters are
-// removed in the browser (see GET). Served OUTSIDE app/layout.tsx, so no Meta pixel fires.
+// removed in the browser (see GET). Served OUTSIDE app/layout.tsx: its head tags
+// (GA4, Pixel, Clarity) come from lib/season1/tags.ts through the TAGS and URL_ALLOW vars.
 export const dynamic = "force-dynamic";
 
 const WELCOME_PATH = "/season1/join/welcome";
@@ -96,7 +98,7 @@ export async function GET(request: Request) {
   // PaymentIntent, fulfils, and hands back a fresh view token for this order.
   // Netlify re-appends the query to a 303 Location (Sentry D1, a redirect loop), so
   // the Stripe return is rendered directly and the query is removed in the browser
-  // with history.replaceState before GA loads (GA reads only origin + pathname).
+  // with history.replaceState before any tag loads (it runs first in the head).
   const pi = url.searchParams.get("payment_intent");
   let returnToken: string | null = null;
   // Analytics S9 (D3): no send is awaited before render. A paid order's own
@@ -172,7 +174,11 @@ export async function GET(request: Request) {
   );
 
   const lockIn = lockInDate();
+  // Head tags ride in vars, so the placeholder pass below fills them and can never erase them (ops 4).
+  const tags = tagsForRequest(request, "welcome", mode, order?.publicId ?? null);
   const vars: Record<string, string> = {
+    URL_ALLOW: tags.allow,
+    TAGS: tags.tags,
     SMS: esc(sms),
     TEST_HIDDEN: mode === "test" ? "" : " hidden",
     LOCK_IN: esc(formatDatePT(lockIn)),

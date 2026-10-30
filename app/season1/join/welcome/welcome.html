@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8LM45PX53W',{page_location:location.origin+location.pathname});</script>
+{{URL_ALLOW}}
+{{TAGS}}
 <style>
 :root{--red:#F92524;--black:#050505;--ink:#333;--muted:#6f6f6f;--stone:#EFEEED;--white:#fff;--display:"Oswald",Impact,"Arial Black",Arial,sans-serif;--body:"Inter",Arial,Helvetica,sans-serif}
 *{box-sizing:border-box}
@@ -158,20 +158,20 @@ p,li,.small{text-wrap:pretty}
 <!--paid-->
 <div class="whero"><div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:center"><a class="wback" href="/season1/join" aria-label="Back to Season 01">&lsaquo;</a><a class="wm" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21" style="height:20px;width:auto"></a><span style="width:16px"></span></div>
-<h1 class="d h1" style="margin-top:32px">{{HERO}}</h1>
+<h1 class="d h1" style="margin-top:32px" data-clarity-mask="true">{{HERO}}</h1>
 <p style="font-size:15px;color:#fff;margin-top:12px">Your receipt is on its way to your inbox.</p></div></div>
 <div class="px wbody">
 <div class="wgrid"><div class="wleft">
 <!--share--><div class="share notch">
 <h2 class="d" style="font-size:44px">Share and save!</h2>
 <p style="font-size:14px;margin-top:12px;line-height:1.45;text-wrap:balance">Each friend who joins with your link gets a free month, and so do&nbsp;you.</p>
-<button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}">Share {{KID1}}'s link</button>
-<p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center"><b>{{LINK_SHORT}}</b></p></div>
+<button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}" data-clarity-mask="true">Share {{KID1}}'s link</button>
+<p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center" data-clarity-mask="true"><b>{{LINK_SHORT}}</b></p></div>
 <!--/share-->
 {{NO_SHARE}}</div><div class="wright">
 <div class="offer notch" style="margin-top:28px">
 <p class="ey">Your receipt</p>
-<div style="margin-top:12px">{{RECEIPT_LINES}}
+<div style="margin-top:12px"><div data-clarity-mask="true">{{RECEIPT_LINES}}</div>
 <div class="line" style="font-weight:700;font-size:16px;border-top:1px solid rgba(0,0,0,.15);margin-top:8px;padding-top:12px"><span>Paid today</span><span>{{TOTAL}}</span></div></div>
 <p class="small" style="margin-top:12px;color:rgba(0,0,0,.75)">{{THEN_LINE}}</p>
 {{CREDIT_NOTE}}
@@ -185,7 +185,7 @@ p,li,.small{text-wrap:pretty}
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Apr</b><span>Season tournament</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May 6</b><span>Last practice</span></div></div></div>
-<div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
+<div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700" data-clarity-mask="true">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
 <label class="l" style="margin-top:12px">Games they play now</label>
 <div class="chips"><button>Fortnite</button><button>Roblox</button><button>Minecraft</button><button>League of Legends</button><button>Rocket League</button><button>Other</button></div>
 <label class="l" style="margin-top:16px">Nights that never work</label>
@@ -205,14 +205,23 @@ try{localStorage.setItem('ekuzo_s1_joined','1')}catch(_){}
 try{sessionStorage.removeItem('s1_signup_form')}catch(_){}
 // GA purchase: once per order per browser.
 var p=document.getElementById('s1p');
-if(p){var id=p.getAttribute('data-id'),k='s1_purchase_'+id,seen=false;
+if(p){var id=p.getAttribute('data-id'),k='s1_purchase_'+id,seen=false,val=Number(p.getAttribute('data-value')),nk=Number(p.getAttribute('data-kids'));
  try{seen=!!localStorage.getItem(k)}catch(_){}
  if(!seen){
-  try{gtag('event','purchase',{transaction_id:id,value:Number(p.getAttribute('data-value')),currency:'USD',kids_count:Number(p.getAttribute('data-kids')),has_code:p.getAttribute('data-code')==='1',page_location:location.origin+location.pathname});
+  try{gtag('event','purchase',{transaction_id:id,value:val,currency:'USD',kids_count:nk,has_code:p.getAttribute('data-code')==='1',page_location:location.origin+location.pathname});
    try{localStorage.setItem(k,'1')}catch(_){}
   }catch(_){}
  }
+ // Meta Pixel Purchase (S3, C5): eventID = order id (pairs with the CAPI Purchase), value only from the
+ // server's data-value, once per order (localStorage plus an s1_px_<ref> cookie). Live tags or QA only.
+ if(window.s1px&&window.s1once&&id&&s1once('s1_px_'+id))s1px('Purchase',{value:val,currency:'USD',content_name:'Season 01',num_items:nk},id);
+ // S8: tap to welcome, from the sign-up's pay tap (s1_tap), once per order: the key goes with the first send.
+ var tap=null;try{tap=sessionStorage.getItem('s1_tap');sessionStorage.removeItem('s1_tap')}catch(_){}
+ if(tap){var now=performance.timeOrigin?performance.timeOrigin+performance.now():Date.now(),ms=Math.round(now-Number(tap));
+  if(ms>0&&ms<3600000){try{gtag('event','season1_tap_to_welcome',{ms:ms})}catch(_){}}}
 }
+// F15 (C2): this tab's sign-up attempt is done; the next sign-up starts a new one.
+try{sessionStorage.removeItem('s1_attempt');for(var si=sessionStorage.length-1;si>=0;si--){var sk=sessionStorage.key(si);if(sk&&(sk.indexOf('s1_confirmed_')===0||sk.indexOf('s1_ic_')===0))sessionStorage.removeItem(sk)}}catch(_){}
 function toast(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},2200)}
 var b=document.getElementById('share');
 if(b)b.onclick=function(){

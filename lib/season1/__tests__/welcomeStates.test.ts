@@ -1,5 +1,6 @@
 import { describe, it, before, after, beforeEach } from "node:test";
 import assert from "node:assert/strict";
+import vm from "node:vm";
 
 /**
  * F1 (docs/season1-commit/final/05-defects.md): /season1/join/welcome picks a
@@ -45,13 +46,13 @@ function order(status: string, over: Record<string, unknown> = {}): Record<strin
   };
 }
 
-const get = (cookie = `s1_order=${TOKEN}`) =>
-  new Request("http://localhost:3103/season1/join/welcome", { headers: { host: "localhost:3103", cookie } });
+const get = (cookie = `s1_order=${TOKEN}`, host = "localhost:3103") =>
+  new Request(`http://${host}/season1/join/welcome`, { headers: { host, cookie } });
 
-async function render(o: Record<string, unknown>, cookie?: string) {
+async function render(o: Record<string, unknown>, cookie?: string, host?: string) {
   row = o;
   const welcome = await import("../../../app/season1/join/welcome/route");
-  const r = await welcome.GET(get(cookie));
+  const r = await welcome.GET(get(cookie, host));
   return { r, html: await r.text(), cookies: r.headers.getSetCookie().join("\n") };
 }
 
@@ -207,5 +208,90 @@ describe("F1 welcome states", () => {
   it("a settled order clears a leftover pending counter", async () => {
     const { cookies } = await render(order("paid"), `s1_order=${TOKEN}; s1_wpend=12`);
     assert.match(cookies, /s1_wpend=; Path=\/season1; Max-Age=0/);
+  });
+
+  // Analytics C16 (ops 4): the tags are proven on the route output, so the welcome
+  // placeholder pass cannot erase them unseen. Mode "off" on ekuzo.gg still measures.
+  async function onHost(o: Record<string, unknown>, host: string) {
+    const m = process.env.S1_COMMIT_MODE;
+    process.env.S1_COMMIT_MODE = "off";
+    try {
+      return await render(o, undefined, host);
+    } finally {
+      if (m === undefined) delete process.env.S1_COMMIT_MODE;
+      else process.env.S1_COMMIT_MODE = m;
+    }
+  }
+
+  it("analytics: paid on ekuzo.gg renders GA4, the Pixel, Clarity, the Purchase script and the kid-name masks", async () => {
+    const { html } = await onHost(order("paid"), "ekuzo.gg");
+    assert.ok(html.includes("G-8LM45PX53W"));
+    assert.ok(html.includes(`fbq('init',"1284038230557204")`));
+    assert.ok(html.includes("clarity.ms/tag/"));
+    assert.ok(html.includes(`var R="ord1unit";`), "PageView once per order");
+    assert.match(html, /s1once\('s1_px_'\+id\)\)s1px\('Purchase',\{value:val,currency:'USD',content_name:'Season 01',num_items:nk\},id\)/);
+    assert.match(html, /season1_tap_to_welcome/);
+    assert.match(html, /data-value="80"/);
+    assert.match(html, /<h1 [^>]*data-clarity-mask="true">Great, Sam's in!<\/h1>/);
+    assert.match(html, /<div data-clarity-mask="true"><div class="line"><span>Sam, Season 01/);
+    assert.doesNotMatch(html, /\{\{[A-Z0-9_]+\}\}|debug_mode/);
+  });
+
+  it("analytics: paid on the branch deploy renders only the QA gate", async () => {
+    const { html } = await onHost(order("paid"), "season1-commit--ekuzo.netlify.app");
+    assert.match(html, /s1 QA gate/);
+    const outside = html.replace(/<script>\/\* s1 QA gate[\s\S]*?<\/script>/, "");
+    assert.doesNotMatch(outside, /googletagmanager|fbevents|clarity\.ms|facebook\.com/);
+  });
+
+  it("analytics: the paid script fires one Pixel Purchase (order id, server value) and one tap timing", async () => {
+    const { html } = await onHost(order("paid"), "ekuzo.gg");
+    const code = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+    const local = new Map<string, string>();
+    function run(session: Map<string, string>) {
+      const doc = {
+        cookie: "",
+        head: { appendChild() {} },
+        documentElement: {},
+        createElement: () => ({}),
+        getElementsByTagName: () => [{ parentNode: { insertBefore() {} } }],
+        getElementById: (id: string) =>
+          id === "s1p" ? { getAttribute: (a: string) => ({ "data-id": "ord1unit", "data-value": "80", "data-kids": "1", "data-code": "1" })[a] ?? null } : null,
+      };
+      const store = (m: Map<string, string>) => ({
+        getItem: (k: string) => m.get(k) ?? null,
+        setItem: (k: string, v: string) => void m.set(k, v),
+        removeItem: (k: string) => void m.delete(k),
+        key: (i: number) => [...m.keys()][i] ?? null,
+        get length() { return m.size; },
+      });
+      const win: Record<string, unknown> = {
+        document: doc,
+        location: { href: "https://ekuzo.gg/season1/join/welcome", search: "", origin: "https://ekuzo.gg", pathname: "/season1/join/welcome", hostname: "ekuzo.gg", protocol: "https:" },
+        localStorage: store(local),
+        sessionStorage: store(session),
+        performance: { timeOrigin: 1_000_000, now: () => 4_400 },
+        history: { state: null, replaceState() {} },
+        URL, URLSearchParams, Date, Number, Math, String,
+        setTimeout: () => 0,
+        navigator: {},
+      };
+      win.window = win;
+      const ctx = vm.createContext(win);
+      for (const c of code) vm.runInContext(c, ctx);
+      const q = (v: unknown) => JSON.parse(JSON.stringify(((v as unknown[]) ?? []).map((a) => Array.from(a as ArrayLike<unknown>))));
+      return { fb: q((win.fbq as { queue: unknown[] }).queue) as unknown[][], dl: q(win.dataLayer) as unknown[][], doc };
+    }
+    const session = new Map([["s1_tap", "1000000"], ["s1_attempt", "a-b-c-d-e-f"], ["s1_confirmed_a-b-c-d-e-f", "1"], ["s1_ic_a-b-c-d-e-f", "1"], ["other", "keep"]]);
+    const first = run(session);
+    assert.deepEqual(first.fb.filter((a) => a[1] === "Purchase"), [["track", "Purchase", { value: 80, currency: "USD", content_name: "Season 01", num_items: 1 }, { eventID: "ord1unit" }]]);
+    assert.deepEqual(first.dl.filter((a) => a[0] === "event").map((a) => [a[1], a[2]]).filter((a) => a[0] !== "purchase"), [["season1_tap_to_welcome", { ms: 4400 }]]);
+    assert.equal(first.dl.filter((a) => a[1] === "purchase").length, 1);
+    assert.deepEqual([...session.keys()], ["other"], "s1_tap, the attempt and its flags are cleared");
+    assert.match(String(first.doc.cookie), /s1_px_ord1unit=1; Path=\/season1/);
+    // Reload of the paid page: no second Purchase, no second GA purchase, no timing.
+    const again = run(new Map());
+    assert.equal(again.fb.filter((a) => a[1] === "Purchase").length, 0);
+    assert.equal(again.dl.filter((a) => a[0] === "event").length, 0);
   });
 });
