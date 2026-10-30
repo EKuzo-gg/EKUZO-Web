@@ -57,3 +57,15 @@ D1 to D7 in `01-requirements.md`. Kid data rule updated in `knowledge-base/compa
 - InitiateCheckout keeps the first tap's value after `price_changed`.
 - 3DS second tab (requires_action) still not blocked by the hotfix.
 - Klaviyo fast follow and the rest from `final/08-handoff.md`.
+
+## Release, 10-30
+
+- 12:42 CT, Jamie's go 12:42 ("go: release 6c4f4ff to main and ed9d163 to dev"): pushed main fa9c510..6c4f4ff and dev 842dcd3..ed9d163, both fast-forward. 6c4f4ff is code-identical to season1-commit 7f6d2bf (Sentry re-run PASS at 76bf25e; only the privacy policy text changed since). Carries the double-charge hotfix and the analytics build.
+- 12:43:53 CT production deploy live (about 80 s).
+- Smoke 12:44 to 12:50 CT, all PASS:
+  - 200 on /, /season1, /season1/join, /season1/join/signup, /terms-of-service, /privacy-policy, /faq, /programs, /parents, /blog, /programs/ekuzo-camps, /season1/thanks; /karlin 307 to signup?src=karlin; /roadshow, /review.html, /season1/dev-view 404.
+  - Commit API 422 on empty body (open); Season 01 and legacy webhooks 400 unsigned; warm 204; drain 401 without the secret (S1_DRAIN_SECRET is set in Production).
+  - Live tags (browser, vendor requests captured and aborted): GA4 + Pixel + Clarity on /season1, join, sign-up, /; GA4 + Clarity on thanks; nothing on crew. dataLayer on /season1, thanks, join: no debug_mode, no denied consent.
+  - `ekuzo_lc` Set-Cookie on a utm URL: HttpOnly, Secure, SameSite Lax, 30 days.
+  - Privacy policy shows the new section 8 and 16 lines and "October 30, 2026".
+  - dev--ekuzo.netlify.app: 0 vendor requests on /, /season1, /season1/join (first probe during the dev deploy switch-over saw the old build).
