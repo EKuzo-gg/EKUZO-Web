@@ -1,7 +1,6 @@
 # Season 01 analytics: Parent and Steward review
 
-Roles: Parent (fresh eyes, screenshots only) then Steward (brand and claims). Review only; no code
-touched. Drafted 2026-10-30.
+Parent (screenshots only) then Steward (brand and claims). Review only, no code touched. 2026-10-30.
 
 ## Part 1. Parent: what I see on my phone
 
