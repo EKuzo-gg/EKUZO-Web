@@ -5,7 +5,7 @@ import { currentMode } from "@/lib/season1/mode";
 import { display } from "@/lib/season1/codes";
 import type { OrderView } from "@/lib/season1/db";
 import { fulfil, fulfilFromReturn, orderByToken } from "./fulfil-import";
-import { drainOutbox } from "@/lib/season1/outbox";
+import { scheduleOrderDrain } from "@/lib/season1/orderDrain";
 import { SECURITY_HEADERS, pageSecurityHeaders, shareOrigin } from "@/lib/season1/httpGuard";
 import { ladderNote, thenLine } from "@/lib/season1/welcomeCopy";
 
@@ -99,13 +99,17 @@ export async function GET(request: Request) {
   // with history.replaceState before GA loads (GA reads only origin + pathname).
   const pi = url.searchParams.get("payment_intent");
   let returnToken: string | null = null;
+  // Analytics S9 (D3): no send is awaited before render. A paid order's own
+  // outbox rows are drained after the response (Next after()); the webhook and
+  // the scheduled drain are the senders of record. Payment truth is unchanged.
+  let drainRef: string | null = null;
   if (pi) {
     const secret = url.searchParams.get("payment_intent_client_secret");
     if (secret) {
       try {
         const r = await fulfilFromReturn(pi, secret);
         if (r.viewToken) returnToken = r.viewToken;
-        if (r.status === "paid") await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
+        if (r.status === "paid") drainRef = r.orderPublicId ?? null;
       } catch {
         // The webhook or the next reload will finish the job.
       }
@@ -125,12 +129,14 @@ export async function GET(request: Request) {
       if (r.status === "canceled") piCanceled = true;
       else if (r.status === "paid" || r.status === "partially_refunded" || r.status === "refunded") {
         order = (await loadOrder(request, returnToken)).order ?? order;
-        if (r.status !== "refunded") await drainOutbox({ limit: 20, budgetMs: 3000 }).catch(() => null);
+        if (r.status !== "refunded") drainRef = r.orderPublicId ?? order?.publicId ?? null;
       }
     } catch {
       // keep the pending view
     }
   }
+
+  if (drainRef) scheduleOrderDrain(drainRef);
 
   // L3: share links from the raw host header only (never x-forwarded-*), https except localhost.
   const origin = shareOrigin(request.headers.get("host"));

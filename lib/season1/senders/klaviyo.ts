@@ -55,6 +55,13 @@ export const COMMITTED_PROPERTY_KEYS = [
   "refund_until",
   "src",
   "offer_version",
+  // Analytics S7 (D4): event properties only, never profile properties, so the
+  // waitlist lead's season1_ad_name and utm profile properties are not overwritten.
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "first_touch",
 ] as const;
 
 const iso = (v: string | null | undefined) => (v ? new Date(v).toISOString() : new Date().toISOString());
@@ -80,6 +87,11 @@ export function buildCommittedEvent(o: OrderCtx): KlaviyoEventInput {
     refund_until: lockIn,
     src: o.src ?? "",
     offer_version: o.offerVersion,
+    utm_source: o.utmSource ?? "",
+    utm_medium: o.utmMedium ?? "",
+    utm_campaign: o.utmCampaign ?? "",
+    utm_content: o.utmContent ?? "",
+    first_touch: o.firstTouch ?? "",
   };
   const profileProps: Record<string, unknown> = {
     season1_status: "committed",

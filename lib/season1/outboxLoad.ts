@@ -1,4 +1,5 @@
 import { getSql } from "./db";
+import { cleanFirstTouch, validFbc, validFbp } from "./attribution";
 import type { FriendCtx, KidCtx, OrderCtx } from "./senders/context";
 
 /**
@@ -20,7 +21,7 @@ const str = (v: unknown): string | null => (typeof v === "string" && v.trim() ? 
 const ORDER_SQL = `
   select o.public_id, o.livemode, o.status, o.payer_email, o.payer_first_name, o.payer_phone,
          o.consent_at, o.consent_ip, o.consent_ua, o.amount_cents, o.paid_at, o.src, o.offer_version,
-         o.jersey_eligible, o.referral_code, o.family_id,
+         o.jersey_eligible, o.referral_code, o.family_id, o.attribution as order_attribution,
          f.public_id as family_public_id, f.geo, f.attribution,
          (select g.first_name from s1_guardians g where g.family_id = o.family_id order by g.created_at limit 1)
            as guardian_first_name,
@@ -42,6 +43,12 @@ export async function loadOrderCtx(publicId: string): Promise<OrderCtx | null> {
   if (!r) return null;
   const geo = (r.geo && typeof r.geo === "object" ? r.geo : {}) as Record<string, unknown>;
   const attr = (r.attribution && typeof r.attribution === "object" ? r.attribution : {}) as Record<string, unknown>;
+  // Analytics S6, S7: the order's own attribution first (every order since 0005), then the family's.
+  const oa = (r.order_attribution && typeof r.order_attribution === "object" && !Array.isArray(r.order_attribution)
+    ? r.order_attribution
+    : {}) as Record<string, unknown>;
+  const lc = (oa.lc && typeof oa.lc === "object" && !Array.isArray(oa.lc) ? oa.lc : {}) as Record<string, unknown>;
+  const utm = (k: string): string | null => (typeof lc[k] === "string" && lc[k] ? (lc[k] as string).slice(0, 160) : null);
   return {
     orderPublicId: r.public_id,
     livemode: r.livemode === true,
@@ -64,8 +71,14 @@ export async function loadOrderCtx(publicId: string): Promise<OrderCtx | null> {
     kids: ((r.kids as KidCtx[] | null) ?? []).map((k) => ({ firstName: k.firstName, age: k.age ?? null, role: k.role })),
     geoCity: str(geo.geo_city),
     geoRegion: str(geo.geo_region),
-    fbp: str(attr.fbp),
-    fbc: str(attr.fbc),
+    fbp: validFbp(oa.fbp) ?? validFbp(attr.fbp),
+    fbc: validFbc(oa.fbc) ?? validFbc(attr.fbc),
+    utmSource: utm("utm_source"),
+    utmMedium: utm("utm_medium"),
+    utmCampaign: utm("utm_campaign"),
+    utmContent: utm("utm_content"),
+    firstTouch: typeof oa.first_touch === "string" ? cleanFirstTouch(oa.first_touch) : null,
+    // The test request origin (family attribution). Never the order's first touch.
     origin: str(attr.origin),
     inviterKidName: str(r.inviter_kid),
   };

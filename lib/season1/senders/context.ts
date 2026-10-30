@@ -33,8 +33,15 @@ export interface OrderCtx {
   kids: KidCtx[];
   geoCity: string | null;
   geoRegion: string | null;
+  /** Validated (attribution.ts FBP_RE / FBC_RE): the order's, else the family's. */
   fbp: string | null;
   fbc: string | null;
+  /** Analytics S7: the order's last click (ekuzo_lc) and first touch (ekuzo_origin bucket). */
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmContent: string | null;
+  firstTouch: string | null;
   /** Request origin recorded for test orders, when known. */
   origin: string | null;
   /** First name of the inviter's first kid, when the order was referred. */
@@ -93,4 +100,7 @@ export class SenderError extends Error {
   }
 }
 
-export type SendOutcome = { outcome: "sent" | "skipped_test" | "skipped_no_config"; detail?: string };
+export type SendOutcome = {
+  outcome: "sent" | "skipped_test" | "skipped_no_config" | "skipped_refunded";
+  detail?: string;
+};

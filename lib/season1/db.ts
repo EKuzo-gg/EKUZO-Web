@@ -189,6 +189,8 @@ export interface PendingOrderInput {
   consentXff?: string | null;
   /** Flags known at commit (AUD-A: age_edge). */
   flags?: string[];
+  /** Analytics S6: order attribution {src, lc, first_touch, fbp, fbc} (lib/season1/attribution.ts). */
+  attribution?: unknown;
 }
 
 export async function insertPendingOrder(
@@ -701,14 +703,14 @@ export async function insertCommitRecords(input: {
         `insert into s1_orders (id, public_id, family_id, payer_email, offer_id, offer_version, status,
                                 amount_cents, consent_version, consent_at, consent_ip, consent_ua,
                                 referral_code, src, livemode, attempt_id, payer_first_name, payer_phone,
-                                consent_xff, flags)
-         values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::text[])`,
+                                consent_xff, flags, attribution)
+         values ($1,$2,$3,$4,$5,$6,'pending',$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::text[],$20::jsonb)`,
         [
           orderId, publicId, famRow.familyId, email, o.offerId, o.offerVersion,
           o.amountCents, o.consentVersion, o.consentAt.toISOString(), o.consentIp ?? null,
           o.consentUa ?? null, o.referralCode ?? null, o.src ?? null, input.livemode,
           o.attemptId ?? null, o.payerFirstName ?? null, o.payerPhone ?? null, o.consentXff ?? null,
-          o.flags ?? [],
+          o.flags ?? [], json(o.attribution),
         ],
       ),
       ...input.lines.map((l) =>

@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { classifyOrigin } from "@/lib/originClassifier";
+import { classifyOrigin, isBotUserAgent } from "@/lib/originClassifier";
+import { LC_COOKIE, LC_MAX_AGE_SECONDS, buildLastClick } from "@/lib/season1/attribution";
 import { SEASON_ONE_MODE, SEASON_ONE_PARAM } from "@/lib/seasonOne";
 
 /**
@@ -28,6 +29,24 @@ export function middleware(req: NextRequest) {
   }
 
   const res = NextResponse.next();
+
+  // Season 01 last click (analytics S5, C3, C17): any request carrying a kept
+  // parameter (utm_*, gclid, fbclid) overwrites ekuzo_lc. Runs BEFORE the
+  // first-touch early return, so a parent who already has ekuzo_origin (the
+  // waitlist landing) still records the email or ad click. Bots skipped.
+  // HttpOnly: only the commit route reads it.
+  if (!isBotUserAgent(req.headers.get("user-agent"))) {
+    const lc = buildLastClick(req.nextUrl.searchParams, path);
+    if (lc) {
+      res.cookies.set(LC_COOKIE, lc.value, {
+        maxAge: LC_MAX_AGE_SECONDS,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        path: "/",
+      });
+    }
+  }
 
   // First-touch preserved — cookie already set, do nothing.
   if (req.cookies.get("ekuzo_origin")) return res;

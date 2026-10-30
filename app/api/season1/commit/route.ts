@@ -9,6 +9,7 @@ import { ipBucket } from "@/lib/season1/referralFlags";
 import { inviteDecision, resolveCode, type InviteReason } from "@/lib/season1/referral";
 import { REF_COOKIE_NAME, refSecret, verifyRef } from "@/lib/season1/refcookie";
 import { parseGeoHeader } from "@/lib/seasonOneGeo";
+import { orderAttribution, type OrderAttribution } from "@/lib/season1/attribution";
 import {
   addFamilyFlagsByEmail,
   cancelOrder,
@@ -98,6 +99,20 @@ function ok(clientSecret: string, publicId: string, amountCents: number, token: 
     200,
     { "set-cookie": viewTokenCookie(token) },
   );
+}
+
+/**
+ * Analytics S6 and C3: the order's attribution from cookies (ekuzo_lc,
+ * ekuzo_origin, _fbp, _fbc). Synchronous and never throws: any failure stores
+ * {src} alone, so attribution can never fail or delay a commit. Built only at
+ * the insert, after quote() and decideInvite, and never read by either.
+ */
+function attributionFor(req: Request, src: string | null): OrderAttribution {
+  try {
+    return orderAttribution(req.headers.get("cookie"), src);
+  } catch {
+    return { src };
+  }
 }
 
 function cookieValue(req: Request, name: string): string | null {
@@ -323,8 +338,18 @@ async function handle(req: Request): Promise<Response> {
         }
         if (pi && IN_FLIGHT_PI.has(pi.status)) {
           // Already paying or paid: never mint a second charge for the same attempt.
+          // F15 (C2, money 5): 409 in_progress with a fresh view cookie for this order,
+          // on the same inputs as the reuse path (email, attemptId, kids), so the
+          // client can go to welcome, which renders paid, pending or failed.
           logStep("commit.attempt_in_flight", ref, false, `pi_${pi.status}`);
-          return json({ error: "try_again" }, 503);
+          let token: string | null = null;
+          try {
+            token = await issueViewToken(existing.orderId);
+          } catch (e) {
+            // The answer still says in progress; the s1_order cookie from the first 200 stays valid.
+            logStep("commit.attempt_in_flight_token", ref, false, errCode(e));
+          }
+          return json({ error: "in_progress" }, 409, token ? { "set-cookie": viewTokenCookie(token) } : undefined);
         }
       }
       if (same && pi && REUSABLE_PI.has(pi.status) && pi.client_secret) {
@@ -376,8 +401,10 @@ async function handle(req: Request): Promise<Response> {
         return json({ error: "try_again" }, 503);
       }
       if (busyStatus) {
+        // F15 (C2, money 5): another order for this email is paying or paid. No cookie
+        // and no order data: an email and a kid's name must never open someone's order.
         logStep("commit.email_in_flight", null, false, `pi_${busyStatus}`);
-        return json({ error: "try_again" }, 503);
+        return json({ error: "in_progress_other" }, 409);
       }
     }
 
@@ -414,6 +441,7 @@ async function handle(req: Request): Promise<Response> {
         firstName: input.parentFirstName,
         phone: input.phone,
         livemode,
+        // Family attribution unchanged (insert-only, its `origin` key is the test request origin).
         attribution: input.src ? { src: input.src } : null,
         geo: (() => {
           const g = parseGeoHeader(req.headers.get("x-nf-geo"));
@@ -436,6 +464,7 @@ async function handle(req: Request): Promise<Response> {
           attemptId: attemptKey,
           payerFirstName: input.parentFirstName,
           payerPhone: input.phone,
+          attribution: attributionFor(req, input.src ?? null),
         },
         lines: q.lines.map((l) => ({ kidIndex: l.kidIndex, role: l.role, unitCents: l.unitCents })),
       });
@@ -443,9 +472,10 @@ async function handle(req: Request): Promise<Response> {
       order = rec.order;
     } catch (e) {
       if (/s1_orders_attempt_key/.test(String((e as Error)?.message ?? ""))) {
-        // Lost a double-tap race: the other request owns this attempt.
+        // Lost a double-tap race: the other request owns this attempt. F15 (C2, money 6):
+        // its own code, so the client retries once with the same attempt (the reuse path).
         logStep("commit.order", null, false, "attempt_race");
-        return json({ error: "try_again" }, 503);
+        return json({ error: "attempt_busy" }, 503);
       }
       throw e;
     }

@@ -4,6 +4,8 @@
  *
  *  - "@/foo" maps to <repo root>/foo (tsconfig paths alias)
  *  - extensionless or ".js" relative/alias imports resolve to ".ts" / "/index.ts"
+ *  - "next/server" maps to "next/server.js" (Next ships it as a CJS file with no
+ *    exports map, so plain node ESM needs the extension; middleware and route tests)
  *
  * Node 22 strips TypeScript types natively; this only fixes specifiers.
  */
@@ -28,6 +30,7 @@ function tryFile(base) {
 
 export async function resolve(specifier, context, nextResolve) {
   let target = null;
+  if (specifier === "next/server") return nextResolve("next/server.js", context);
   if (specifier.startsWith("@/")) {
     target = tryFile(resolvePath(ROOT, specifier.slice(2)));
   } else if (/^\.\.?\//.test(specifier) && context.parentURL?.startsWith("file:")) {

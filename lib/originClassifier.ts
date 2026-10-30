@@ -23,10 +23,34 @@ export type Origin =
   | "paid_other"
   | "direct";
 
+/**
+ * Every bucket classifyOrigin can return (Season 01 order attribution validates
+ * `ekuzo_origin` against it). A Record keyed by Origin, so tsc fails if a bucket
+ * is added to the type and not here.
+ */
+const ORIGIN_SET: Record<Origin, true> = {
+  ai_chatgpt: true,
+  ai_perplexity: true,
+  ai_claude: true,
+  ai_other: true,
+  organic_google: true,
+  organic_other: true,
+  social: true,
+  paid_meta: true,
+  paid_other: true,
+  direct: true,
+};
+export const ORIGIN_VALUES: readonly Origin[] = Object.keys(ORIGIN_SET) as Origin[];
+
 // Known crawlers/bots — when the UA matches, classifyOrigin returns null
 // and the caller skips setting the cookie.
 const BOT_RE =
   /gptbot|chatgpt-user|claudebot|perplexitybot|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|oai-searchbot/i;
+
+/** True for a known crawler user agent (same list classifyOrigin excludes). */
+export function isBotUserAgent(userAgent: string | null | undefined): boolean {
+  return BOT_RE.test(userAgent || "");
+}
 
 // utm_source values that mean paid Meta (also covers utm_medium=cpc with
 // one of these sources — that case is subsumed by the source match).

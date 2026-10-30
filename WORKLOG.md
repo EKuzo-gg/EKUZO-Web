@@ -5,6 +5,18 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: analytics build, server side
+
+Branch `season1-commit`, built on the double-charge hotfix. Server only (Relay); no HTML template, `signup.html` or client change. Spec: `docs/season1-commit/analytics/01-requirements.md` as amended by `02-resolution.md`. Evidence: `docs/season1-commit/analytics/evidence/relay-server.md`.
+
+- **Migration 0005** (`db/migrations/0005_season1_order_attribution.sql`): `s1_orders.attribution jsonb`. Applied to the TEST database only and read back. **Production must get it (with read-back) before this code deploys.**
+- **Last click** (`middleware.ts`, `lib/season1/attribution.ts`): HttpOnly `ekuzo_lc` on any request with utm_*, gclid or fbclid. It is written before the first-touch early return and skips bots. Values are capped and sanitized: utm at most 160, click ids whole up to 512 or dropped, `/crew/<code>` stored as `/crew/`, at most 2 KB.
+- **Order attribution** (commit route): `{src, lc, first_touch, fbp, fbc}` on every new order, new or returning family. It is built in its own try/catch and never feeds price or invite. The family attribution is unchanged.
+- **Senders:** Meta Purchase uses the order's fbp/fbc, then the family's (validated). The Klaviyo Committed event gains utm_source, utm_medium, utm_campaign, utm_content and first_touch (event only, never profile). An unsent Committed or Purchase on a refunded order becomes `skipped_refunded`.
+- **Drain:** new `POST /api/season1/drain` (secret header `x-s1-drain-secret` = `S1_DRAIN_SECRET`; 503 if unset, 401 if wrong) and a Netlify scheduled function `netlify/functions/s1-drain.mts` every 2 minutes. **Jamie: paste `S1_DRAIN_SECRET` in Netlify Production before release.** The welcome page no longer awaits any drain: it schedules an order-scoped drain with Next `after()`.
+- **F15 server codes:** attempt in flight is 409 `in_progress` plus a view cookie; another order in flight is 409 `in_progress_other` (no cookie); the double-tap race is 503 `attempt_busy`. The client handling is Atlas's and should ship with this.
+- **Tests:** `npm run test:s1` 274 of 274 (was 225). Integration with the test DB is 317 of 317. `tsc --noEmit` and eslint are clean, and `next build` passes with the test env.
+
 ## Jamie's Claude, 2026-10-30: double-charge hotfix
 
 Branch `season1-commit`. Server-only hotfix for money red-team findings 1 and 3 (`docs/season1-commit/analytics/02-redteam-money.md`). No client, copy, pricing, invite, credit, webhook, fulfil or HTML change.

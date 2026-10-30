@@ -47,6 +47,11 @@ const order = (over: Partial<OrderCtx> = {}): OrderCtx => ({
   geoRegion: "TX",
   fbp: null,
   fbc: null,
+  utmSource: null,
+  utmMedium: null,
+  utmCampaign: null,
+  utmContent: null,
+  firstTouch: null,
   origin: null,
   inviterKidName: "Zed",
   ...over,
@@ -129,6 +134,22 @@ describe("Klaviyo payloads", () => {
     assert.equal(e.uniqueId, "abcd234567");
     assert.equal(e.metric, "Season 01 Committed");
   });
+  it("S7: Committed event carries utm_source, utm_medium, utm_campaign, utm_content and first_touch; the profile never does", () => {
+    const e = buildCommittedEvent(
+      order({ utmSource: "klaviyo", utmMedium: "email", utmCampaign: "s01_open", utmContent: "hero", firstTouch: "paid_meta" }),
+    );
+    assert.equal(e.props.utm_source, "klaviyo");
+    assert.equal(e.props.utm_medium, "email");
+    assert.equal(e.props.utm_campaign, "s01_open");
+    assert.equal(e.props.utm_content, "hero");
+    assert.equal(e.props.first_touch, "paid_meta");
+    const profile = JSON.stringify(e.profileProps);
+    for (const k of ["utm_", "first_touch", "season1_ad_name", "klaviyo", "s01_open", "paid_meta"]) {
+      assert.equal(profile.includes(k), false, `profile must not carry ${k}`);
+    }
+    const none = buildCommittedEvent(order());
+    for (const k of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "first_touch"]) assert.equal(none.props[k as keyof typeof none.props], "", k);
+  });
   it("share_url is the live domain in live mode and the recorded origin in test", () => {
     assert.equal(buildCommittedEvent(order({ livemode: true })).props.share_url, "https://ekuzo.gg/crew/48271938");
     assert.equal(
@@ -203,9 +224,24 @@ describe("Meta Purchase", () => {
     assert.equal(e.action_source, "website");
     assert.deepEqual(e.custom_data, { value: 180, currency: "USD", content_name: "Season 01", num_items: 2 });
   });
-  it("drops a bad IP, keeps fbp and fbc when stored", () => {
-    const e = buildPurchaseEvent(order({ consentIp: "not-an-ip", fbp: "fb.1.1.2", fbc: "fb.1.1.abc" }));
+  it("drops a bad IP, keeps fbp and fbc when stored and valid", () => {
+    const fbp = "fb.1.1792999999999.1234567890";
+    const fbc = "fb.1.1792999999999.IwAR_abc-1";
+    const e = buildPurchaseEvent(order({ consentIp: "not-an-ip", fbp, fbc }));
     assert.deepEqual(Object.keys(e.user_data).sort(), ["client_user_agent", "em", "external_id", "fbc", "fbp"]);
+    assert.equal(e.user_data.fbp, fbp);
+    assert.equal(e.user_data.fbc, fbc);
+  });
+  it("money 8: a malformed fbp or fbc is omitted, never sent", () => {
+    for (const [fbp, fbc] of [
+      ["fb.1.1.2", "fb.1.1.abc"],
+      ["fb.1.1792999999.1234567890", "fb.1.1792999999999.a b"],
+      ["x".repeat(40), "fb.1.1792999999999." + "a".repeat(256)],
+    ]) {
+      const e = buildPurchaseEvent(order({ fbp, fbc }));
+      assert.equal("fbp" in e.user_data, false, fbp);
+      assert.equal("fbc" in e.user_data, false, fbc);
+    }
   });
   it("test code is forced when livemode is false, absent when true; default TEST_S1", () => {
     const saved = process.env.META_CAPI_TEST_EVENT_CODE;

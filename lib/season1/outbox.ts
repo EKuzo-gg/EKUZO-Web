@@ -18,7 +18,7 @@ import {
  * a failure becomes status 'failed' with a PII-free last_error.
  *
  * Statuses: pending, sending, sent, failed, stale, skipped_test,
- * skipped_no_config, skipped_unknown_kind.
+ * skipped_no_config, skipped_unknown_kind, skipped_refunded.
  */
 
 const HOUR = 3600_000;
@@ -92,6 +92,11 @@ async function dispatch(row: OutboxRow): Promise<SendOutcome> {
       if (!ctx) throw new SenderError("order_not_found");
       if (ctx.livemode !== row.livemode) throw new SenderError("livemode_mismatch");
       if (!["paid", "partially_refunded", "refunded"].includes(ctx.status)) throw new SenderError("order_not_paid");
+      // C4 (money 9): an unsent receipt or Purchase on a fully refunded order is not sent.
+      // partially_refunded still sends; Discord still posts the commit.
+      if (ctx.status === "refunded" && (base === "klaviyo_committed" || base === "meta_purchase")) {
+        return { outcome: "skipped_refunded" };
+      }
       if (base === "klaviyo_committed") return sendKlaviyoEvent(buildCommittedEvent(ctx), row.livemode);
       if (base === "meta_purchase") return sendMetaPurchase(buildPurchaseEvent(ctx), row.livemode);
       return sendDiscord(formatCommit(ctx), row.livemode);

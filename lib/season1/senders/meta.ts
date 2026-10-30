@@ -1,5 +1,6 @@
 import { isIP } from "node:net";
 import { META_GRAPH_API_VERSION, sha256 } from "../../metaCapi";
+import { validFbc, validFbp } from "../attribution";
 import { LIVE_ORIGIN, SenderError, dollars, resolveOrigin, type OrderCtx, type SendOutcome } from "./context";
 
 /**
@@ -8,7 +9,9 @@ import { LIVE_ORIGIN, SenderError, dollars, resolveOrigin, type OrderCtx, type S
  * test event code is forced whenever the order is test mode, and so the
  * access token travels in the body, never in a URL that could be logged.
  * user_data carries only the hashed email, the hashed family id, and the
- * client IP and user agent recorded at consent (plus fbp/fbc if stored).
+ * client IP and user agent recorded at consent (plus fbp/fbc when stored and
+ * valid: money red team 8, a malformed value is omitted so it cannot burn the
+ * row's five attempts).
  * Never kid data, never a phone.
  */
 
@@ -36,8 +39,10 @@ export function buildPurchaseEvent(o: OrderCtx): MetaPurchase {
   };
   if (o.consentIp && isIP(o.consentIp)) userData.client_ip_address = o.consentIp;
   if (o.consentUa) userData.client_user_agent = o.consentUa.slice(0, 400);
-  if (o.fbp) userData.fbp = o.fbp;
-  if (o.fbc) userData.fbc = o.fbc;
+  const fbp = validFbp(o.fbp);
+  const fbc = validFbc(o.fbc);
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
   const paid = o.paidAt ? new Date(o.paidAt).getTime() : Date.now();
   return {
     event_name: "Purchase",
