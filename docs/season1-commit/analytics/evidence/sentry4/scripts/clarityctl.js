@@ -1,0 +1,10 @@
+const L=require('./lib');const zlib=require('zlib');
+(async()=>{const b=await L.launch();const ctx=await b.newContext({viewport:{width:1440,height:900}});await ctx.addCookies(require('./orderCookie.json'));const page=await ctx.newPage();
+ const txts=[];page.on('request',r=>{if(/clarity\.ms\/collect/.test(r.url())){const buf=r.postDataBuffer();if(buf)try{txts.push({p:page.url(),t:zlib.gunzipSync(buf).toString('utf8')})}catch(e){}}});
+ await page.goto(L.BASE+'/season1/join/welcome?s1qa=1',{waitUntil:'domcontentloaded'});await L.sleep(9000);
+ await page.mouse.wheel(0,1500);await L.sleep(4000);
+ const all=txts.map(x=>x.t).join('\n');
+ for(const n of ['Lock-in','receipt','RECEIPT','Text our founder','Paid today','Zorbixa','ZORBIXA','44245013','q2gyykcrem','Season 01, first month'])console.log(n.padEnd(24),all.includes(n));
+ console.log('payloads',txts.length,'bytes',all.length);
+ const i=all.indexOf('first month');console.log(JSON.stringify(all.slice(Math.max(0,i-200),i+40)));
+ await b.close()})();

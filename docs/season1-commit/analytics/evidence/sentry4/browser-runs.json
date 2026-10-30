@@ -1,0 +1,3102 @@
+{
+ "A_noflag": [
+  {
+   "viewport": 1440,
+   "pages": [
+    {
+     "page": "/season1/join?utm_source=meta&utm_campaign=t",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/join/signup",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/join/welcome",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/thanks?play=yes",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  },
+  {
+   "viewport": 390,
+   "pages": [
+    {
+     "page": "/season1/join?utm_source=meta&utm_campaign=t",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/join/signup",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/join/welcome",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1/thanks?play=yes",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/season1",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "/",
+     "vendorRequests": [],
+     "parsed": [],
+     "commits": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  }
+ ],
+ "B_qa_paid_1440": {
+  "email": "team+s1test-sentry4-b-a306b9@ekuzo.gg",
+  "kid": "Zorbixa",
+  "res": {
+   "joinAddressBar": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_source=meta&utm_campaign=t&fbclid=abc",
+   "joinMasks": [],
+   "signupAddressBar": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+   "signupMasks": [
+    "P#invTxt",
+    "DIV#sum",
+    "BUTTON#go"
+   ],
+   "cookiesBeforePay": [
+    {
+     "name": "ekuzo_lc",
+     "httpOnly": true,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "value": "{\"path\":\"/season1/join\",\"ts\":1793375523975,\"utm_source\":\"meta\",\"utm_campaign\":\"t\",\"fbclid\":\"abc\"}"
+    },
+    {
+     "name": "ekuzo_origin",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "value": "paid_meta"
+    },
+    {
+     "name": "s1_qa",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "value": "1"
+    }
+   ],
+   "tTap": 1793375543162,
+   "tWelcomeNav": 1793375547152,
+   "welcomeAddressBar": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+   "welcome": {
+    "title": "You're in | EKUZO",
+    "referrer": "https://season1-commit--ekuzo.netlify.app/",
+    "text": "Test mode. No real charges.\nPhone\nDesktop\n‹\nGREAT, ZORBIXA'S IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE AND SAVE!\n\nEach friend who joins with your link gets a free month, and so do you.\n\nShare Zorbixa's link\n\nseason1-commit--ekuzo.netlify.app/crew/44245013\n\nYOUR RECEIPT\n\nZorbixa, Season 01, first month\n$100\nPaid today\n$100\n\nThen $160 a month from Feb 15. About $20 a practice.\n\nOrder q2gyykcrem\n\nWHAT HAPPENS NEXT\nLate Nov\nGamer profile, jersey and gear check\nLate Dec\nMeet the team and coach\nDec 31\nLock-in. Full refund until then.\nMid Jan\nFirst practice\nMid Apr\nSeason tournament\nMay 6\nLast practice\nHOW THIS DISCOUNT WORKS\nOn your own\n$580\n1 friend joins\n$420\n2 friends\n$260\n3 friends\n$100\n4 friends\nFree. We refund your $100.\n\nQuestions? \nText our founder",
+    "nav": {
+     "startTime": 0,
+     "responseStart": 1026,
+     "responseEnd": 1047.9000000003725,
+     "domContentLoaded": 1570.6000000005588,
+     "load": 1574.4000000003725,
+     "serverTiming": []
+    },
+    "masks": [
+     "H1.d h1 :: Great, Zorbixa's in!",
+     "BUTTON#share.btn :: Share Zorbixa's link",
+     "P. :: season1-commit--ekuzo.netlify.app/crew/4",
+     "DIV. :: Zorbixa, Season 01, first month$100",
+     "P. :: Help us build Zorbixa's team (optional)"
+    ],
+    "links": [
+     "https://season1-commit--ekuzo.netlify.app/crew/44245013"
+    ],
+    "ss": [
+     "_cltk",
+     "s1_warm_at",
+     "s1_card_open"
+    ],
+    "ls": [
+     "ekuzo_s1_joined",
+     "s1_purchase_q2gyykcrem",
+     "s1_px_q2gyykcrem",
+     "s1_pxpv_q2gyykcrem"
+    ]
+   },
+   "welcomeReloadNav": {
+    "responseEnd": 245,
+    "serverTiming": []
+   },
+   "cookiesAfter": [
+    {
+     "name": "s1_order",
+     "httpOnly": true,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/season1",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1795967546.597169,
+     "value": "<redacted>"
+    },
+    {
+     "name": "s1_pxpv_q2gyykcrem",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/season1",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1824911546.707394,
+     "value": "1"
+    },
+    {
+     "name": "s1_px_q2gyykcrem",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/season1",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1824911546.721097,
+     "value": "1"
+    },
+    {
+     "name": "ekuzo_lc",
+     "httpOnly": true,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1795967524.174086,
+     "value": "{\"path\":\"/season1/join\",\"ts\":1793375523975,\"utm_source\":\"meta\",\"utm_campaign\":\"t\",\"fbclid\":\"abc\"}"
+    },
+    {
+     "name": "ekuzo_origin",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1824911524.174351,
+     "value": "paid_meta"
+    },
+    {
+     "name": "s1_qa",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": -1,
+     "value": "1"
+    },
+    {
+     "name": "ekuzo_s1_joined",
+     "httpOnly": false,
+     "secure": true,
+     "sameSite": "Lax",
+     "path": "/",
+     "domain": "season1-commit--ekuzo.netlify.app",
+     "expires": 1824911557.504107,
+     "value": "1"
+    }
+   ],
+   "crewCode": "44245013",
+   "crewAddressBar": "https://season1-commit--ekuzo.netlify.app/crew/44245013?utm_source=sms",
+   "crewMasks": 0,
+   "qaCookie": [
+    {
+     "name": "s1_qa",
+     "expires": -1,
+     "secure": true
+    }
+   ]
+  },
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_source=meta&utm_campaign=t&fbclid=abc&kid=Sam&email=a@b.c",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_source=meta&utm_campaign=t&fbclid=abc",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375524529&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=12&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123620776~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=12&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=831779700.1793375525&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123620776~123691370&tft=1793375525143&tfd=1631&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=12&frm=0&apvc=0&tid=AW-18509911105&en=season1_join_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=831779700.1793375525&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123620776~123691370&tft=1793375525145&tfd=1633&tids=AW-18509911105&fmt=8",
+     "GET https://c.clarity.ms/c.gif",
+     "POST https://r.clarity.ms/collect",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=1DFB8325CFD74C50AEA570288E630BA5&RedC=c.clarity.ms&MXFR=396F955D0D926B0E22C18D5F099265A9",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=1DFB8325CFD74C50AEA570288E630BA5&MUID=27F8CF07863A6D4119E3D70587176C44",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375524529&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=12&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123620776~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=meta&utm_campaign=t&fbclid=abc",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_join_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=meta&utm_campaign=t&fbclid=abc",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375533628&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.a",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1567072417.1793375534&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793375533741&tfd=571&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1567072417.1793375534&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793375533742&tfd=572&tids=AW-185099111",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375533628&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.a",
+     "POST https://r.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1567072417.1793375534&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793375543215&tfd=10045&t"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793375544568,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "q2gyykcrem",
+       "amountCents": 10000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UWI6OKORcR8BUEx1QaISdCn&payment_intent_client_secret=pi_3UWI6OKORcR8BUEx1QaISdCn_secret_<redacted>&redirect_status=succeeded",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://pagead2.googlesyndication.com/measurement/conversion?random=1793375546837&cv=11&tid=G-8LM45PX53W&fst=1793375546837&fmt=8&en=purchase&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&u_w=1440&u_h=900&url=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&ref=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app&gacid=1649995845.1793375525&ibt=1&_dbg=1&oid=q2gyykcrem&value=100&currency_code=US",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375546701&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commit--ekuzo",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375546701&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&_prs=ok&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commi",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1012756172.1793375547&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&tft=1793375546860&tfd=1291&tids=AW-1850991",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=purchase&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1012756172.1793375547&navt=n&npa=1&epn.kids_count=1&ep.has_code=1&ep.debug_mode=1&ep.transaction_id=q2gyykcrem&epn.value=100&ep.currency=USD&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=season1_tap_to_welcome&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1012756172.1793375547&navt=n&npa=1&epn.ms=3506&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&tft=1793375546862",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375546701&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=3&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412527~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commit--ekuzo"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/measurement/conversion"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ga4",
+      "en": "purchase",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "transaction_id": "q2gyykcrem"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_tap_to_welcome",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "ms": "3506"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "welcome-reload",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=16&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=111654078.1793375558&navt=r&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&tft=1793375557592&tfd=333&tids=AW-18509911105&fmt=8",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375557539&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=16&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.a"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/crew/44245013?utm_source=sms",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375566401&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.a",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fcrew%2F44245013&scrsrc=www.googletagmanager.com&rnd=1340796540.1793375566&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&tft=1793375566449&tfd=386&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=season1_invite_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fcrew%2F44245013&scrsrc=www.googletagmanager.com&rnd=1340796540.1793375566&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&tft=1793375566450&tfd=387&tids=AW-18509911105&fmt=8",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375566401&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.a"
+    ],
+    "parsed": [
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/crew/?utm_source=sms",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_invite_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/crew/?utm_source=sms",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/thanks?play=yes",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=8&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fthanks&scrsrc=www.googletagmanager.com&rnd=235188340.1793375576&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938469~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793375575632&tfd=412&tids=AW-18509911105&fmt=8",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375575557&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=8&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938469~118897920~118897930~120213116~120385423~120420414~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.ap"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/thanks",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=17&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1&scrsrc=www.googletagmanager.com&rnd=1791174968.1793375583&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120412527~120420414~120469145~120469153~121246026~121246034~123691370~123814184&tft=1793375582927&tfd=362&tids=AW-18509911105&fmt=8",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375582875&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1649995845.1793375525&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=17&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120412527~120420414~120469145~120469153~121246026~121246034~123691370~123814184&sid=1793375525&sct=1&seg=1&d"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   }
+  ]
+ },
+ "D_qa_returning_throttle_390": {
+  "email": "team+s1test-sentry4-b-a306b9@ekuzo.gg",
+  "kid": "Velmora",
+  "res": {
+   "lcBefore": "{\"path\":\"/season1/join\",\"ts\":1793375895688,\"utm_source\":\"klaviyo\",\"utm_medium\":\"email\",\"utm_campaign\":\"t2\",\"utm_content\":\"c2\"}",
+   "attemptId": "4db59ecc-e908-41dd-aa74-afca24150041",
+   "at800": {
+    "go": "Saving their spot...",
+    "busy": "true",
+    "live": ""
+   },
+   "at2300": {
+    "go": "Still saving. Please stay here.",
+    "busy": "true",
+    "disabled": true,
+    "live": "Still saving. Please stay here."
+   },
+   "attemptIdAtTap": "4db59ecc-e908-41dd-aa74-afca24150041",
+   "afterFirst": {
+    "go": "Save their spot · $80",
+    "busy": "false",
+    "live": "",
+    "formErr": "Your total changed to $80. Tap again to pay."
+   },
+   "commit1": [
+    {
+     "t": 1793375915749,
+     "status": 409,
+     "body": {
+      "error": "price_changed",
+      "amountCents": 8000
+     },
+     "setCookie": false
+    }
+   ],
+   "retap2300": {
+    "go": "Still saving. Please stay here.",
+    "busy": "true",
+    "live": "Still saving. Please stay here."
+   },
+   "attemptIdAtTap2": "4db59ecc-e908-41dd-aa74-afca24150041",
+   "fbcallsSignup": [
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375912635,
+     "args": [
+      "trackCustom",
+      "S1QA_InitiateCheckout",
+      {
+       "value": 100,
+       "currency": "USD",
+       "content_name": "Season 01",
+       "num_items": 1
+      },
+      {
+       "eventID": "248be11b7485acace0188a80ef60fa1cbc8a0a0333f3abbe5ae0ad4c51fa18b3"
+      }
+     ]
+    }
+   ],
+   "tNav": 10445,
+   "welcome": {
+    "text": "Test mode. No real charges.\nPhone\nDesktop\n‹\nGREAT, VELMORA'S IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE AND SAVE!\n\nEach friend who joins with your link gets a free month, and so do you.\n\nShare Velmora's link\n\nseason1-commit--ekuzo.netlify.app/crew/44245013\n\nYOUR RECEIPT\n\nVelmora, Season 01, first month\n$80\nPaid today\n$80\n\nThen $128 more a month from Feb 15, at the sibling rate.\n\nOrder j",
+    "referrer": "https://season1-commit--ekuzo.netlify.app/",
+    "order": "j86e3eb7cq",
+    "fbcalls": [
+     {
+      "path": "/season1/join",
+      "t": 1793375896356,
+      "args": [
+       "set",
+       "autoConfig",
+       false,
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join",
+      "t": 1793375896356,
+      "args": [
+       "init",
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join",
+      "t": 1793375896356,
+      "args": [
+       "track",
+       "PageView"
+      ]
+     },
+     {
+      "path": "/season1/join",
+      "t": 1793375896356,
+      "args": [
+       "track",
+       "ViewContent",
+       {
+        "content_name": "Season 01"
+       }
+      ]
+     },
+     {
+      "path": "/season1/join/signup",
+      "t": 1793375903106,
+      "args": [
+       "set",
+       "autoConfig",
+       false,
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join/signup",
+      "t": 1793375903106,
+      "args": [
+       "init",
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join/signup",
+      "t": 1793375903106,
+      "args": [
+       "track",
+       "PageView"
+      ]
+     },
+     {
+      "path": "/season1/join/signup",
+      "t": 1793375912635,
+      "args": [
+       "trackCustom",
+       "S1QA_InitiateCheckout",
+       {
+        "value": 100,
+        "currency": "USD",
+        "content_name": "Season 01",
+        "num_items": 1
+       },
+       {
+        "eventID": "248be11b7485acace0188a80ef60fa1cbc8a0a0333f3abbe5ae0ad4c51fa18b3"
+       }
+      ]
+     },
+     {
+      "path": "/season1/join/welcome",
+      "t": 1793375922342,
+      "args": [
+       "set",
+       "autoConfig",
+       false,
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join/welcome",
+      "t": 1793375922342,
+      "args": [
+       "init",
+       "1284038230557204"
+      ]
+     },
+     {
+      "path": "/season1/join/welcome",
+      "t": 1793375922343,
+      "args": [
+       "track",
+       "PageView"
+      ]
+     },
+     {
+      "path": "/season1/join/welcome",
+      "t": 1793375922346,
+      "args": [
+       "trackCustom",
+       "S1QA_Purchase",
+       {
+        "value": 80,
+        "currency": "USD",
+        "content_name": "Season 01",
+        "num_items": 1
+       },
+       {
+        "eventID": "j86e3eb7cq"
+       }
+      ]
+     }
+    ],
+    "ss": [
+     "_cltk",
+     "__fbcalls",
+     "s1_warm_at",
+     "s1_confirmed_4db59ecc-e908-41dd-aa74-afca24150041",
+     "s1_card_open"
+    ]
+   },
+   "fbcallsAfterReload": [
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "path": "/season1/join",
+     "t": 1793375896356,
+     "args": [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375903106,
+     "args": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "path": "/season1/join/signup",
+     "t": 1793375912635,
+     "args": [
+      "trackCustom",
+      "S1QA_InitiateCheckout",
+      {
+       "value": 100,
+       "currency": "USD",
+       "content_name": "Season 01",
+       "num_items": 1
+      },
+      {
+       "eventID": "248be11b7485acace0188a80ef60fa1cbc8a0a0333f3abbe5ae0ad4c51fa18b3"
+      }
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375922342,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375922342,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375922343,
+     "args": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375922346,
+     "args": [
+      "trackCustom",
+      "S1QA_Purchase",
+      {
+       "value": 80,
+       "currency": "USD",
+       "content_name": "Season 01",
+       "num_items": 1
+      },
+      {
+       "eventID": "j86e3eb7cq"
+      }
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375933705,
+     "args": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "path": "/season1/join/welcome",
+     "t": 1793375933706,
+     "args": [
+      "init",
+      "1284038230557204"
+     ]
+    }
+   ]
+  },
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_source=klaviyo&utm_medium=email&utm_campaign=t2&utm_content=c2",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375896355&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=18&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616985~115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=18&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1665212378.1793375897&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616985~115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&tft=1793375897002&tfd=1954&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=18&frm=0&apvc=0&tid=AW-18509911105&en=season1_join_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1665212378.1793375897&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616985~115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&tft=1793375897004&tfd=1956&tids=AW-18509911105&fmt=8",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "GET https://c.clarity.ms/c.gif",
+     "POST https://r.clarity.ms/collect",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=C384C448486D4DF2BFB1B9E6AED74EAF&RedC=c.clarity.ms&MXFR=063AA1A8BE8862EA1059B9AABA886C2A",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=C384C448486D4DF2BFB1B9E6AED74EAF&MUID=0E2DBADEAF37682111D2A2DCAE1A6988",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375896355&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=18&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115616985~115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo."
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=klaviyo&utm_medium=email&utm_campaign=t2&utm_content=c2",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_join_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=klaviyo&utm_medium=email&utm_campaign=t2&utm_content=c2",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za208zd9131535694xf1&_p=1793375903106&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=5&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&dl=https%3A%2F%2Fseason1-commi",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=800164758.1793375903&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&tft=1793375903199&tfd=465&tids=AW-1",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=800164758.1793375903&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&tft=1793375903200&tfd=466",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375903106&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=5&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&dl=https%3A%2F%2Fseason1-commi",
+     "POST https://r.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=800164758.1793375903&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&tft=1793375",
+     "POST https://r.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=800164758.1793375903&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6at0h2v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&tft=1793375",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6at0h2v9131535694za200zd9131535694xf1&_p=1793375903106&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=5&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636746~123691370~123814945&dl=https%3A%2F%2Fseason1-commit--ek",
+     "POST https://r.clarity.ms/collect"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_pay_submit",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_pay_submit",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "dr": "https://season1-commit--ekuzo.netlify.app/",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793375915749,
+      "status": 409,
+      "body": {
+       "error": "price_changed",
+       "amountCents": 8000
+      },
+      "setCookie": false
+     },
+     {
+      "t": 1793375919874,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "j86e3eb7cq",
+       "amountCents": 8000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [
+     "https://season1-commit--ekuzo.netlify.app/api/season1/commit | Failed to load resource: the server responded with a status of 409 (Conflict)"
+    ],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UWICRKORcR8BUEx1JYyaI2F&payment_intent_client_secret=pi_3UWICRKORcR8BUEx1JYyaI2F_secret_<redacted>&redirect_status=succeeded",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://pagead2.googlesyndication.com/measurement/conversion?random=1793375922716&cv=11&tid=G-8LM45PX53W&fst=1793375922716&fmt=8&en=purchase&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&u_w=390&u_h=844&url=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&ref=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app&gacid=1686427467.1793375897&ibt=1&_dbg=1&oid=j86e3eb7cq&value=80&currency_code=USD&hn",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793375922342&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commit--ekuzo.net",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793375922342&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&_prs=ok&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commit--e",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1762366400.1793375923&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&tft=1793375922743&tfd=1928&tids=AW-1850991110",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=0&tid=AW-18509911105&en=purchase&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1762366400.1793375923&navt=n&npa=1&epn.kids_count=1&ep.has_code=1&ep.debug_mode=1&ep.transaction_id=j86e3eb7cq&epn.value=80&ep.currency=USD&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~1204691",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=0&tid=AW-18509911105&en=season1_tap_to_welcome&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1762366400.1793375923&navt=n&npa=1&epn.ms=5722&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&tft=1793375922745&tf",
+     "POST https://r.clarity.ms/collect",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793375922342&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=3&tag_exp=115938466~115938468~118897920~118897930~120213116~120385423~120412526~120469145~120469153~121246026~121246034~123691370~123814185&dl=https%3A%2F%2Fseason1-commit--ekuzo.net"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/measurement/conversion"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ga4",
+      "en": "purchase",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "transaction_id": "j86e3eb7cq"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_tap_to_welcome",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "ms": "5722"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "welcome-reload",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://www.googletagmanager.com/a?id=G-8LM45PX53W&v=3&t=t&pid=1048999309&gtm=45je6as1v9131535694za200zd9131535694xf1&cv=7&rv=6as1&tc=24&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&es=1&e=gtm.init&eid=2&u=AAAAAAAAAAAAAACA&h=Ag&tr=1ogtautoevents.1ogtgasend.1ogtreferralexclusion.1ogtsessiontimeout.1ogt1pdatav2.1ogtipmark.1ogtipmark.1ogtipmark.1ccdgafirst.1setproductsettings.1ccdgaregscope.1ccdadsfirst.1ccdconversionmarking.1ccdemform.1ccdautoredact.1ccdadd1pdata.1ccdgaadslink.1ccdadd1pdata.1cc",
+     "GET https://www.googletagmanager.com/a?id=G-8LM45PX53W&v=3&t=t&pid=1048999309&gtm=45je6as1v9131535694za200zd9131535694xf1&cv=7&rv=6as1&tc=24&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&es=1&e=gtm.js&eid=3&u=AAAAAIAAAAAAAACAAAAAAAAY&ut=AAAI&h=Ag&tr=1rep.1gct&ti=2rep.2gct&z=0",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=11&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=764579807.1793375934&navt=r&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&tft=1793375934086&tfd=974&tids=AW-1",
+     "GET https://www.googletagmanager.com/a?id=G-8LM45PX53W&v=3&t=t&pid=1048999309&gtm=45je6as1v9131535694za200zd9131535694xf1&cv=7&rv=6as1&tc=24&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&es=1&e=gtag.config&eid=7&u=AAAAAIAAAAAAACCAAAAAAAAY&ut=AAAI&h=Ag&epr=1G.2G.1AW.1AW.2AW.1G&tr=1destga.1destaw&ti=2destga.2destaw&z=0",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "GET https://www.googletagmanager.com/a?id=G-8LM45PX53W&v=3&t=t&pid=1048999309&gtm=45je6as1v9131535694za200zd9131535694xf1&cv=7&rv=6as1&tc=24&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&es=1&e=gtm.dom&eid=8&u=AAAAAIAAAAAAACCAAAAAAAAY&ut=AAAI&h=Ag&z=0",
+     "GET https://www.googletagmanager.com/a?id=G-8LM45PX53W&v=3&t=t&pid=1048999309&gtm=45je6as1v9131535694za200zd9131535694xf1&cv=7&rv=6as1&tc=24&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&e=gtm.init&eid=2&u=AAAAAIAAAAAAACCAAAAAAAAY&ut=AAAI&h=Ag&tr=5ogtautoevents.5ogtgasend.5ogtreferralexclusion.5ogtsessiontimeout.5ogt1pdatav2.5ogtipmark.5ogtipmark.5ogtipmark.5ccdgafirst.5setproductsettings.5ccdgaregscope.5ccdadsfirst.5ccdconversionmarking.5ccdemform.5ccdautoredact.5ccdadd1pdata.5ccdgaadslink.5ccdad",
+     "POST https://r.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793375933705&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1686427467.1793375897&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=11&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123636747~123691370&dl=https%3A%2F%2Fseason1-commit"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   }
+  ]
+ },
+ "E_f15_back_retap_1440": {
+  "email": "team+s1test-sentry4-f15-ae9766@ekuzo.gg",
+  "kid": "Thessaly",
+  "res": {
+   "email": "team+s1test-sentry4-f15-ae9766@ekuzo.gg",
+   "attempt1": "88e59aed-c69c-49e9-9f2a-9c1e2c75cff3",
+   "abortedAt": 1793376037652,
+   "abortAfterMs": 1949,
+   "urlAfterAbort": "chrome-error://chromewebdata/",
+   "urlAfterBack": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+   "ssAfterBack": [
+    "s1_signup_form",
+    "s1_card_open",
+    "s1_ic_88e59aed-c69c-49e9-9f2a-9c1e2c75cff3",
+    "s1_warm_at",
+    "s1_attempt",
+    "s1_confirmed_88e59aed-c69c-49e9-9f2a-9c1e2c75cff3",
+    "s1_tap",
+    "_cltk"
+   ],
+   "attempt2": "88e59aed-c69c-49e9-9f2a-9c1e2c75cff3",
+   "formRestored": {
+    "kid": "Thessaly",
+    "email": "team+s1test-sentry4-f15-ae9766@ekuzo.gg"
+   },
+   "note": {
+    "formErr": "Your payment is already going through. Taking you to your confirmation to check on it.",
+    "live": "",
+    "alert": "",
+    "go": "Saving their spot...",
+    "url": "/season1/join/signup"
+   },
+   "noteAtMs": 851,
+   "welcomeAfterMs": 3584,
+   "welcome": {
+    "text": "Test mode. No real charges.\nPhone\nDesktop\n‹\nGREAT, THESSALY'S IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE AND SAVE!\n\nEach friend who joins with your link gets a free month, and so do you.\n\nShare Thessaly's link\n\nseason1-commit--ekuzo.netlify.app/crew/52657982\n\nYOUR RECEIPT\n\nThessaly, Seaso",
+    "order": "x4avge5c33"
+   }
+  },
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376024539&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123691370~123785234&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1914117592.1793376025&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123691370~123785234&tft=1793376025189&tfd=1545&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=season1_join_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1914117592.1793376025&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123691370~123785234&tft=1793376025192&tfd=1547&tids=AW-18509911105&fmt=8",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "GET https://c.clarity.ms/c.gif",
+     "POST https://f.clarity.ms/collect",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=EF038182AF0644EDA3A69F9372DE5CFB&RedC=c.clarity.ms&MXFR=35C1EC56CBAC616B2BD3F454CFAC6FBC",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=EF038182AF0644EDA3A69F9372DE5CFB&MUID=06CC1EE4E9536EBF352406E6E8526FCA"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376028440&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=19&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120412528~120420414~120469145~120469153~121246026~121246034~123691370~123814946&dl=https%3A%2F%2Fseason1-commi",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=19&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=765022999.1793376029&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120412528~120420414~120469145~120469153~121246026~121246034~123691370~123814946&tft=1793376028543&tfd=565&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=19&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=765022999.1793376029&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120412528~120420414~120469145~120469153~121246026~121246034~123691370~123814946&tft=1793376028547&tfd=568&tids=AW-18509911105&fmt=8",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://f.clarity.ms/collect",
+     "POST https://f.clarity.ms/collect",
+     "POST https://f.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376028440&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=19&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120412528~120420414~120469145~120469153~121246026~121246034~123691370~123814946&dl=https%3A%2F%2Fseason1-commi",
+     "POST https://f.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=19&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=765022999.1793376029&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120412528~120420414~120469145~120469153~121246026~121246034~123691370~123814946&tft=1793376035753&tfd=7774&tids=AW-18509911105&fmt=8"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793376036603,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "x4avge5c33",
+       "amountCents": 10000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "back",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376039246&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=5&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1863328582.1793376040&navt=h&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793376039993&tfd=1200&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1863328582.1793376040&navt=h&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793376039996&tfd=1202&tids=AW-18509911105&fmt=8",
+     "POST https://f.clarity.ms/collect",
+     "POST https://f.clarity.ms/collect",
+     "POST https://f.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376039246&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=5&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=5&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1863328582.1793376040&navt=h&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370&tft=1793376046144&tfd=7350&tids=AW-18509911105&fmt=8"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793376046773,
+      "status": 409,
+      "body": {
+       "error": "duplicate_kid",
+       "kidFirstName": "Thessaly"
+      },
+      "setCookie": false
+     }
+    ],
+    "consoleErrors": [
+     "https://season1-commit--ekuzo.netlify.app/api/season1/commit | Failed to load resource: the server responded with a status of 409 (Conflict)"
+    ],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://pagead2.googlesyndication.com/measurement/conversion?random=1793376049298&cv=11&tid=G-8LM45PX53W&fst=1793376049298&fmt=8&en=purchase&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946&u_w=1440&u_h=900&url=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&ref=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app&gacid=1622877923.1793376025&ibt=1&_dbg=1&oid=x4avge5c33&value=10",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376049092&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946&dl=https%3A%2F%2Fsea",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376049092&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&_prs=ok&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946&dl=https%3A%",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1032994930.1793376049&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946&tft=1793376049313&tfd=10",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=purchase&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1032994930.1793376049&navt=n&npa=1&epn.kids_count=1&ep.has_code=1&ep.debug_mode=1&ep.transaction_id=x4avge5c33&epn.value=100&ep.currency=USD&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~12046",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_tap_to_welcome&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=1032994930.1793376049&navt=n&npa=1&epn.ms=2957&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://f.clarity.ms/collect",
+     "POST https://f.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376049092&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=1622877923.1793376025&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=3&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120420415~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814946&dl=https%3A%2F%2Fsea"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/measurement/conversion"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ga4",
+      "en": "purchase",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "transaction_id": "x4avge5c33"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_tap_to_welcome",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "ms": "2957"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   }
+  ]
+ },
+ "E0_aborted_first_try": {
+  "email": "team+s1test-sentry4-f15-959c10@ekuzo.gg",
+  "kid": "Thessaly",
+  "res": {},
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793375996725&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=744170543.1793375997&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=0&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412528~120469145~120469153~121246026~121246034~123620776~123691370~123814185&dl=https%3A%2F%2Fseason1-commit-",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=0&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1915528469.1793375997&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412528~120469145~120469153~121246026~121246034~123620776~123691370~123814185&tft=1793375997356&tfd=1581&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=0&frm=0&apvc=0&tid=AW-18509911105&en=season1_join_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1915528469.1793375997&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120412528~120469145~120469153~121246026~121246034~123620776~123691370~123814185&tft=1793375997358&tfd=1583&tids=AW-18509911105&fmt=8",
+     "POST https://e.clarity.ms/collect",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://c.clarity.ms/c.gif",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=CFC9B80C57D54551A1B8B180CD7C33AB&RedC=c.clarity.ms&MXFR=0AD14ABECFF4627409CD52BCCBF46CB3",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=CFC9B80C57D54551A1B8B180CD7C33AB&MUID=069A79CB157863FF30A061C914D562F3",
+     "POST https://e.clarity.ms/collect"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376000673&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=744170543.1793375997&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=11&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370~123814944&dl=https%3A%2F%2Fseason1-commit--ekuzo.ne",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=11&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1593827903.1793376001&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370~123814944&tft=1793376000784&tfd=489&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=11&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1593827903.1793376001&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370~123814944&tft=1793376000785&tfd=490&tids=AW-18509911105&fmt=8",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://e.clarity.ms/collect",
+     "POST https://e.clarity.ms/collect",
+     "POST https://e.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376000673&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=744170543.1793375997&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=11&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370~123814944&dl=https%3A%2F%2Fseason1-commit--ekuzo.ne",
+     "POST https://e.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=11&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=1593827903.1793376001&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370~123814944&tft=1793376008216&tfd=7921&tids=AW-18509911105&fmt=8"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793376009256,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "p8nd37r645",
+       "amountCents": 10000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [],
+    "pageErrors": []
+   }
+  ]
+ },
+ "F_decline": {
+  "email": "team+s1test-sentry4-dec-1a53c4@ekuzo.gg",
+  "res": {
+   "email": "team+s1test-sentry4-dec-1a53c4@ekuzo.gg",
+   "tap1": [
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 322
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 576
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 830
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 1084
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 1338
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 1591
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Saving their spot...",
+     "busy": "true",
+     "formErr": "",
+     "ePay": "",
+     "live": "",
+     "ms": 1844
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Save Orrinel's spot · $100",
+     "busy": "false",
+     "formErr": "Your card has been declined.",
+     "ePay": "Your card has been declined.",
+     "live": "",
+     "ms": 2098
+    }
+   ],
+   "sawBusyLine1": false,
+   "tap2": [
+    {
+     "url": "/season1/join/signup",
+     "go": "Save Orrinel's spot · $100",
+     "busy": "false",
+     "formErr": "Your card was declined.",
+     "ePay": "Your card was declined.",
+     "live": "",
+     "ms": 314
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Save Orrinel's spot · $100",
+     "busy": "false",
+     "formErr": "Your card was declined.",
+     "ePay": "Your card was declined.",
+     "live": "",
+     "ms": 568
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Save Orrinel's spot · $100",
+     "busy": "false",
+     "formErr": "Your card was declined.",
+     "ePay": "Your card was declined.",
+     "live": "",
+     "ms": 822
+    },
+    {
+     "url": "/season1/join/signup",
+     "go": "Save Orrinel's spot · $100",
+     "busy": "false",
+     "formErr": "Your card was declined.",
+     "ePay": "Your card was declined.",
+     "live": "",
+     "ms": 1076
+    }
+   ],
+   "sawBusyLine2": false,
+   "finalUrl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?s1qa=1",
+   "ss": [
+    "s1_signup_form",
+    "s1_card_open",
+    "s1_ic_b4b5ba61-8dc8-4aeb-9f3b-214ae1e9cdf4",
+    "s1_attempt",
+    "s1_warm_at",
+    "s1_tap",
+    "_cltk"
+   ]
+  },
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup?s1qa=1",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1h1v9131535694za208zd9131535694xf1&_p=1793376096403&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=2019409283.1793376097&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&dl=https%3A%2F%2Fseason1-comm",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=704635035.1793376097&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1h1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&tft=1793376097028&tfd=1202&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=704635035.1793376097&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1h1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&tft=1793376097030&tfd=1204&tids=AW-18509911105&fmt=8",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://g.clarity.ms/collect",
+     "GET https://c.clarity.ms/c.gif",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=6525803FAE7A47418BACAD2BB3A8E3BE&RedC=c.clarity.ms&MXFR=08F71C4738356AA51FA804453C356425",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=6525803FAE7A47418BACAD2BB3A8E3BE&MUID=1E1A684194DD66E70473704395496735",
+     "POST https://g.clarity.ms/collect",
+     "POST https://g.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1h1v9131535694za200zd9131535694xf1&_p=1793376096403&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=2019409283.1793376097&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=13&sr=390x844&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&dl=https%3A%2F%2Fseason1-comm",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=704635035.1793376097&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1h1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&tft=1793376103886&tfd=8061&tids=AW-18509911105&fmt=8",
+     "POST https://g.clarity.ms/collect",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=13&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=704635035.1793376097&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1h1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420415~120469145~120469153~121246026~121246034~123636747~123691370&tft=1793376107581&tfd=11755&tids=AW-18509911105&fmt=8"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793376104800,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "ba2d8kvjey",
+       "amountCents": 10000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [
+     "https://api.stripe.com/v1/payment_intents/pi_3UWIFQKORcR8BUEx107qsVNQ/confirm | Failed to load resource: the server responded with a status of 402 (Payment Required)"
+    ],
+    "pageErrors": []
+   }
+  ]
+ },
+ "F_threeds": {
+  "email": "team+s1test-sentry4-3ds-68bd4a@ekuzo.gg",
+  "res": {
+   "email": "team+s1test-sentry4-3ds-68bd4a@ekuzo.gg",
+   "challengeFrame": "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNu",
+   "clicked": true,
+   "welcome": {
+    "addr": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "referrer": "https://season1-commit--ekuzo.netlify.app/",
+    "text": "Test mode. No real charges.\nPhone\nDesktop\n‹\nGREAT, BRIVANE'S IN!\n\nYour receipt is on its way to your inbox.\n\nSHARE AND S",
+    "order": "8ayj9sfz8a"
+   }
+  },
+  "pages": [
+   {
+    "page": "(pre)",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1&utm_source=meta&utm_campaign=3ds",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376109090&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACAC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=17&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616986~115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370~123814184&dl=https%3A%2F%2Fseason1-commit",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=17&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1647364601.1793376110&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370~123814184&tft=1793376109657&tfd=938&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=17&frm=0&apvc=0&tid=AW-18509911105&en=season1_join_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin&scrsrc=www.googletagmanager.com&rnd=1647364601.1793376110&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938466~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153~121246026~121246034~123691370~123814184&tft=1793376109659&tfd=940&tids=AW-18509911105&fmt=8",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "POST https://i.clarity.ms/collect",
+     "GET https://c.clarity.ms/c.gif",
+     "GET https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=700DFD3B813F485A96B38745D8693926&RedC=c.clarity.ms&MXFR=0C79429752366A1105235A95563664E1",
+     "GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=700DFD3B813F485A96B38745D8693926&MUID=36F4D51B059A6157364BCD1904116080",
+     "POST https://i.clarity.ms/collect"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join?utm_source=meta&utm_campaign=3ds",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/c.gif"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376112887&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&dl=https%3A%2F%2Fseason1-commit",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=2061815192.1793376113&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&tft=1793376113003&tfd=511&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=season1_signup_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=2061815192.1793376113&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&tft=1793376113004&tfd=512&tids=AW-18509911105&fmt=8",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.72/clarity.js",
+     "POST https://i.clarity.ms/collect",
+     "POST https://i.clarity.ms/collect",
+     "POST https://i.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376112887&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&dl=https%3A%2F%2Fseason1-commit",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=10&frm=0&apvc=0&tid=AW-18509911105&en=season1_pay_submit&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fsignup&scrsrc=www.googletagmanager.com&rnd=2061815192.1793376113&navt=n&npa=1&ep.method=card&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&tft=1793376120049&tfd=7557&tids=AW-18509911105&fmt=8",
+     "POST https://i.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376112887&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=10&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=3&tag_exp=115938465~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034~123620776~123691370~123814185~123814944&dl=https%3A%2F%2Fseason1-commit",
+     "POST https://i.clarity.ms/collect"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.72/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_signup_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_pay_submit",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     }
+    ],
+    "commits": [
+     {
+      "t": 1793376120861,
+      "status": 200,
+      "body": {
+       "clientSecret": "<present>",
+       "orderId": "8ayj9sfz8a",
+       "amountCents": 10000,
+       "invite": "none"
+      },
+      "setCookie": true
+     }
+    ],
+    "consoleErrors": [
+     "https://newassets.hcaptcha.com/captcha/v1/317eeece91ff03e49adf705983728d95f03c053e/static/ | Access to XMLHttpRequest at 'https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002' from origin 'https://newassets.hcaptcha.com' has been blo",
+     "https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002 | Failed to load resource: net::ERR_FAILED",
+     "https://newassets.hcaptcha.com/captcha/v1/317eeece91ff03e49adf705983728d95f03c053e/static/ | Access to XMLHttpRequest at 'https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002' from origin 'https://newassets.hcaptcha.com' has been blo",
+     "https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002 | Failed to load resource: net::ERR_FAILED",
+     "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNuT2NUekVPTU | Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+     "https://newassets.hcaptcha.com/captcha/v1/317eeece91ff03e49adf705983728d95f03c053e/static/ | Access to XMLHttpRequest at 'https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002' from origin 'https://newassets.hcaptcha.com' has been blo",
+     "https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002 | Failed to load resource: net::ERR_FAILED",
+     "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNuT2NUekVPTU | Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+     "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNuT2NUekVPTU | Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+     "https://newassets.hcaptcha.com/captcha/v1/317eeece91ff03e49adf705983728d95f03c053e/static/ | Access to XMLHttpRequest at 'https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002' from origin 'https://newassets.hcaptcha.com' has been blo",
+     "https://api.hcaptcha.com/getcaptcha/20000000-ffff-ffff-ffff-000000000002 | Failed to load resource: net::ERR_FAILED",
+     "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNuT2NUekVPTU | Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked.",
+     "https://testmode-acs.stripe.com/3d_secure_2_test/acct_1Lfq2aKORcR8BUEx/tds2_YlNuT2NUekVPTU | Loading the image 'data:image/png;base64,iVBORw0KGgo=' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked."
+    ],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome?payment_intent=pi_3UWIFgKORcR8BUEx1yKJU3In&payment_intent_client_secret=pi_3UWIFgKORcR8BUEx1yKJU3In_secret_<redacted>&redirect_status=succeeded",
+    "vendorRequests": [],
+    "parsed": [],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   },
+   {
+    "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+    "vendorRequests": [
+     "GET https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+     "GET https://connect.facebook.net/en_US/fbevents.js",
+     "GET https://www.clarity.ms/tag/wml8wll5ua",
+     "POST https://pagead2.googlesyndication.com/measurement/conversion?random=1793376127252&cv=11&tid=G-8LM45PX53W&fst=1793376127252&fmt=8&en=purchase&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&u_w=1440&u_h=900&url=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&ref=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app&gacid=574945722.1793376110&ibt=1&_dbg=1&oid=8ayj9sfz8a&value=100&currency_code=USD&hn=www.goog",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za208zd9131535694xf1&_p=1793376127157&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376127157&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&_prs=ok&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=2&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netli",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=1&tid=AW-18509911105&en=page_view&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=62006949.1793376127&navt=n&npa=1&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za208zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&tft=1793376127277&tfd=675&tids=AW-18509911105&fmt=8",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=0&tid=AW-18509911105&en=purchase&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=62006949.1793376127&navt=n&npa=1&epn.kids_count=1&ep.has_code=1&ep.debug_mode=1&ep.transaction_id=8ayj9sfz8a&epn.value=100&ep.currency=USD&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~12046915",
+     "POST https://pagead2.googlesyndication.com/ccm/collect?rcb=1&frm=0&apvc=0&tid=AW-18509911105&en=season1_tap_to_welcome&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2Fseason1%2Fjoin%2Fwelcome&dr=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2F&scrsrc=www.googletagmanager.com&rnd=62006949.1793376127&navt=n&npa=1&epn.ms=7132&ep.debug_mode=1&_tu=AAg&gtm=45je6as1v9131535694za200zd9131535694xecxf1&gcs=G10-&gcd=13p3l3p3p7l1&dma_cps=-&dma=0&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&tft=1793376127280&tfd=677&tids=A",
+     "GET https://connect.facebook.net/signals/config/1284038230557204?v=2.9.429&r=stable&domain=season1-commit--ekuzo.netlify.app&hme=e7a5ac71fbf0293a48c0a6b6de35ad61286effa29f2279ff1fce9a756cccd512&ex_m=118%2C241%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C9",
+     "GET https://scripts.clarity.ms/0.8.73-beta/clarity.js",
+     "POST https://i.clarity.ms/collect",
+     "POST https://i.clarity.ms/collect",
+     "POST https://www.google-analytics.com/g/collect?v=2&tid=G-8LM45PX53W&gtm=45je6as1v9131535694za200zd9131535694xf1&_p=1793376127157&gcs=G10-&gcd=13p3l3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=EAAAACQC&cid=574945722.1793376110&frm=0&ibt=1&ir=1&ngs=1&pscdl=denied&rcb=1&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=3&tag_exp=115616986~115938465~115938468~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034~123691370&dl=https%3A%2F%2Fseason1-commit--ekuzo.netlify.app%2"
+    ],
+    "parsed": [
+     {
+      "k": "clarity",
+      "en": "/tag/wml8wll5ua"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/measurement/conversion"
+     },
+     {
+      "k": "ga4",
+      "en": "page_view",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-"
+     },
+     {
+      "k": "ga4",
+      "en": "purchase",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "transaction_id": "8ayj9sfz8a"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "ads",
+      "en": "pagead2.googlesyndication.com/ccm/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/0.8.73-beta/clarity.js"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "clarity",
+      "en": "/collect"
+     },
+     {
+      "k": "ga4",
+      "en": "season1_tap_to_welcome",
+      "dl": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+      "dr": "https://season1-commit--ekuzo.netlify.app",
+      "debug_mode": "true",
+      "gcs": "G10-",
+      "ms": "7132"
+     }
+    ],
+    "commits": [],
+    "consoleErrors": [],
+    "pageErrors": []
+   }
+  ]
+ },
+ "C_sweep": [
+  {
+   "qa": false,
+   "viewport": 390,
+   "welcomeHero": "GREAT, ZORBIXA'S IN!",
+   "clarityPayloads": [],
+   "pages": [
+    {
+     "page": "(pre)",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/crew/44245013",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/thanks?play=yes",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  },
+  {
+   "qa": false,
+   "viewport": 1440,
+   "welcomeHero": "GREAT, ZORBIXA'S IN!",
+   "clarityPayloads": [],
+   "pages": [
+    {
+     "page": "(pre)",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/crew/44245013",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/thanks?play=yes",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  },
+  {
+   "qa": true,
+   "viewport": 390,
+   "welcomeHero": "GREAT, ZORBIXA'S IN!",
+   "clarityPayloads": [
+    {
+     "page": "/season1/join?s1qa=1",
+     "len": 26381,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join",
+     "len": 26415,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 28483,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 4810,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 13562,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/welcome",
+     "len": 16736,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/welcome",
+     "len": 1289,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/thanks?play=yes",
+     "len": 6327,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1",
+     "len": 274462,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1",
+     "len": 576,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    }
+   ],
+   "pages": [
+    {
+     "page": "(pre)",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1",
+     "vendorCount": 12,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "scripts.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "c.clarity.ms",
+      "a.clarity.ms",
+      "c.bing.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join",
+     "vendorCount": 10,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "a.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+     "vendorCount": 12,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "a.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/crew/44245013",
+     "vendorCount": 5,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+     "vendorCount": 12,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "www.google-analytics.com",
+      "scripts.clarity.ms",
+      "a.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/thanks?play=yes",
+     "vendorCount": 6,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "a.clarity.ms",
+      "www.google-analytics.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1",
+     "vendorCount": 9,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "a.clarity.ms",
+      "www.google-analytics.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  },
+  {
+   "qa": true,
+   "viewport": 1440,
+   "welcomeHero": "GREAT, ZORBIXA'S IN!",
+   "clarityPayloads": [
+    {
+     "page": "/season1/join?s1qa=1",
+     "len": 26087,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join?s1qa=1",
+     "len": 635,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join",
+     "len": 25477,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join",
+     "len": 1288,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 28915,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 4175,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/signup",
+     "len": 13540,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/welcome",
+     "len": 16746,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/join/welcome",
+     "len": 1292,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1/thanks?play=yes",
+     "len": 6063,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    },
+    {
+     "page": "/season1",
+     "len": 274751,
+     "hasKidName": false,
+     "hasFamilyCode": false,
+     "hasParentName": false
+    }
+   ],
+   "pages": [
+    {
+     "page": "(pre)",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join?s1qa=1",
+     "vendorCount": 13,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "scripts.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "b.clarity.ms",
+      "c.clarity.ms",
+      "c.bing.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join",
+     "vendorCount": 11,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "b.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/signup",
+     "vendorCount": 12,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "b.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/crew/44245013",
+     "vendorCount": 5,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "www.google-analytics.com",
+      "pagead2.googlesyndication.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/join/welcome",
+     "vendorCount": 12,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "www.google-analytics.com",
+      "scripts.clarity.ms",
+      "b.clarity.ms"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1/thanks?play=yes",
+     "vendorCount": 6,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "b.clarity.ms",
+      "www.google-analytics.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/season1",
+     "vendorCount": 8,
+     "vendorHosts": [
+      "www.googletagmanager.com",
+      "connect.facebook.net",
+      "www.clarity.ms",
+      "pagead2.googlesyndication.com",
+      "scripts.clarity.ms",
+      "b.clarity.ms",
+      "www.google-analytics.com"
+     ],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    },
+    {
+     "page": "https://season1-commit--ekuzo.netlify.app/",
+     "vendorCount": 0,
+     "vendorHosts": [],
+     "consoleErrors": [],
+     "pageErrors": []
+    }
+   ]
+  }
+ ]
+}

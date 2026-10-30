@@ -1,0 +1,3 @@
+// Records the page's own fbq() calls (args) into sessionStorage.__fbcalls; does not change behavior.
+module.exports=()=>{let v;function rec(a){try{const k='__fbcalls';const arr=JSON.parse(sessionStorage.getItem(k)||'[]');arr.push({path:location.pathname,t:Date.now(),args:JSON.parse(JSON.stringify(Array.from(a)))});sessionStorage.setItem(k,JSON.stringify(arr))}catch(e){}}
+ Object.defineProperty(window,'fbq',{configurable:true,get(){return v},set(fn){v=(typeof fn==='function'&&!fn.__s4)?new Proxy(fn,{apply(t,th,args){rec(args);return Reflect.apply(t,th,args)},get(t,p){return p==='__s4'?true:Reflect.get(t,p)}}):fn}})};
