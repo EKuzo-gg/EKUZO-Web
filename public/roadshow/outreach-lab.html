@@ -184,6 +184,76 @@ details.full[open] summary { background: var(--black); color: #fff; }
   .jdetail { grid-template-columns: 1fr; gap: 20px; }
   .jnav { grid-column: 1; }
 }
+/* Hometown Heroes */
+.hloop { width: 100%; height: auto; display: block; }
+.why3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--black); }
+.why3 > div { padding: 20px 24px 22px 0; }
+.why3 > div + div { padding-left: 24px; border-left: 1px solid var(--ink-15); }
+.why3 p { font-size: 15px; color: var(--ink-70); margin-top: 6px; }
+.jrow { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 4px; }
+.jcell { background: var(--grey); padding: 14px 14px 16px; min-height: 150px; }
+.jcell.dark { background: var(--black); color: var(--white); }
+.jcell.hot { background: var(--red); color: var(--white); }
+.jcell .jn { font-family: var(--display); font-weight: 900; font-size: 28px; line-height: 1; }
+.jcell .jt { font-weight: 700; font-size: 15px; line-height: 1.2; margin-top: 6px; text-wrap: balance; }
+.jcell p { font-size: 13.5px; line-height: 1.4; margin-top: 6px; opacity: .85; text-wrap: pretty; }
+.jlabel { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); margin: 28px 0 10px; }
+.chan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+.chan .who { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+.chan .who.k { color: var(--red); }
+.chan .h3 { margin-top: 8px; }
+.chan p { font-size: 15px; color: var(--ink-70); margin-top: 6px; }
+.mocks { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: start; }
+.mocks > div { min-width: 0; }
+.lbwrap { overflow-x: auto; }
+.phone { width: 300px; border: 10px solid var(--black); border-radius: 30px; background: var(--white); overflow: hidden; }
+.phone .ph-top { background: var(--red); color: var(--white); padding: 18px 18px 16px; }
+.phone .ph-photo { height: 150px; background: #2a2a2a; display: grid; place-items: center; color: rgba(255,255,255,.7); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+.phone .ph-body { padding: 16px 18px 20px; font-size: 14px; }
+.phone .ph-name { font-family: var(--display); font-weight: 900; font-size: 34px; line-height: .95; text-transform: uppercase; letter-spacing: .02em; }
+.phone .ph-cta { display: block; text-align: center; background: var(--red); color: var(--white); font-weight: 700; padding: 13px; margin-top: 14px; border-radius: 2px; text-decoration: none; }
+.prog { height: 10px; background: var(--grey); margin-top: 6px; }
+.prog i { display: block; height: 100%; background: var(--black); }
+.sample { display: inline-block; font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; border: 1.5px solid currentColor; padding: 4px 6px; }
+.cards2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tcard2 { aspect-ratio: 3.5 / 2; padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; clip-path: var(--notch-sm); }
+.tcard2.f { background: var(--red); color: var(--white); }
+.tcard2.b { background: var(--black); color: var(--white); flex-direction: row; align-items: center; gap: 16px; justify-content: flex-start; }
+.tcard2 .big2 { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: .95; text-transform: uppercase; letter-spacing: .02em; }
+.qr { width: 84px; height: 84px; flex: none; background: var(--white); padding: 8px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.qr i { background: var(--black); }
+.qr i.o { background: transparent; }
+.lb { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 12px; }
+.lb th { text-align: left; font: 700 12px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); padding: 0 12px 8px 0; border-bottom: 2px solid var(--black); }
+.lb td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--ink-15); vertical-align: middle; }
+.lb td.n { font-family: var(--display); font-weight: 900; font-size: 22px; color: var(--red); width: 34px; }
+.lb .bar { height: 10px; background: var(--grey); width: 140px; }
+.lb .bar i { display: block; height: 100%; background: var(--black); }
+.prizes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.prizes > div { background: var(--white); padding: 16px 16px 18px; }
+.prizes > div.hot { background: var(--red); color: var(--white); }
+.prizes .h3 { font-size: 16px; }
+.prizes p { font-size: 14px; margin-top: 6px; opacity: .8; }
+.hpilot { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--white); }
+.hpilot > div { padding: 18px 20px 20px 0; }
+.hpilot > div + div { padding-left: 20px; border-left: 1px solid var(--on-dark-20); }
+.decide { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+.decide li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; font-size: 15px; color: var(--on-dark-70); }
+.hpilot .pn { font-family: var(--display); font-weight: 900; font-size: 48px; line-height: 1; color: var(--red); }
+.hpilot p { font-size: 15px; color: var(--on-dark-70); margin-top: 6px; }
+@media (max-width: 1279px) { .jrow { grid-template-columns: repeat(3, minmax(0, 1fr)); } .prizes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .cards2 { grid-template-columns: 1fr; max-width: 360px; } .lb .bar { width: 70px; } }
+@media (max-width: 960px) {
+  .why3, .chan, .hpilot { grid-template-columns: 1fr; }
+  .why3 > div + div, .hpilot > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--ink-15); }
+  .hpilot > div + div { border-top-color: var(--on-dark-20); }
+  .jrow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcell { min-height: 0; }
+  .mocks { grid-template-columns: 1fr; }
+  .cards2 { grid-template-columns: 1fr; }
+  .prizes { grid-template-columns: 1fr 1fr; }
+  .lb .bar { width: 60px; }
+}
+
 /* Lane page */
 .lane-hero { display: block; }
 .lane-hero .num { font-family: var(--display); font-weight: 900; font-size: clamp(120px, 15vw, 200px); line-height: .75; opacity: .9; }
@@ -639,6 +709,7 @@ const VIEWS = [
   { id: "home", label: "Lane board", group: "Start" },
   { id: "pathway", label: "Player pathway", group: "Start" },
   { id: "journey", label: "Journey map", group: "Start" },
+  { id: "heroes", label: "Hometown Heroes", group: "Programs" },
   ...LANES.map(l => ({ id: "lane-" + l.id, label: l.name, group: "Lanes", num: l.num })),
   { id: "templates", label: "Message templates", group: "Toolkit" },
   { id: "onepagers", label: "One-pagers", group: "Toolkit" },
@@ -771,6 +842,7 @@ function showStage(n) {
   document.querySelectorAll(".chev button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.stage === n ? "true" : "false"));
   const col = s.ph === "partner" ? "#f92524" : s.ph === "rapport" ? "#000" : "#8f8e8d";
   const f = (l, v) => `<div><div class="lab">${l}</div><div class="val">${v}</div></div>`;
+  setTimeout(() => noWidows($("#jdetail")), 0);
   $("#jdetail").innerHTML = `
     <div><div class="bign" style="color:${col}">${s.n}</div><div class="bigt">${esc(s.t)}</div></div>
     <div>
@@ -831,6 +903,7 @@ function viewLane(l) {
     <h2 class="h2" style="margin-bottom:28px">Pilot shapes</h2>
     <div class="pilots">${l.pilots.map(p => `<div class="pilot"><div class="pic" aria-hidden="true">${pic(p.pic)}</div><h3 class="h3">${esc(p.n)}</h3><p>${esc(p.d)}</p></div>`).join("")}</div>
   </div></section>
+  ${l.id === "college" ? `<section class="band black dark"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap"><div><h2 class="h2">Turn club members into Hometown Heroes</h2><p class="subhead">Recruiters and coaches for a team from their own hometown.</p></div><a class="btn red" href="#heroes">See the program ${AR}</a></div></section>` : ""}
   <section class="band"><div class="wrap two">
     <div><h2 class="h2">Watch for</h2><ul class="watch">${l.watch.map(w => `<li>${IC.warn}<span>${esc(w)}</span></li>`).join("")}</ul></div>
     <div><h2 class="h2">Deliverables</h2><ul class="deliv" style="background:var(--grey);padding:10px">${l.deliver.map(d => `<li><span>${esc(d[0])}</span><span class="chip ${d[1]}">${d[1] === "owed" ? "Owed now" : d[1] === "exists" ? "Exists" : "To build"}</span></li>`).join("")}</ul></div>
@@ -955,12 +1028,191 @@ function viewDecisions() {
   </div></section>`;
 }
 
+
+const HERO_STEPS = [
+  ["Signs up", "Meets Karlin at a club night. Joins as a coach and a recruiter.", ""],
+  ["Gets a page", "Photo, a 60-second story video, a code. ekuzo.gg/h/their-name", ""],
+  ["Goes home", "Back to their old school with the adviser's OK: club visit, game night, pathways talk.", "dark"],
+  ["Fills a team", "Families sign up with their code. The leaderboard shows the race.", "dark"],
+  ["Coaches it", "Coaches the team they built. Their teams play in the Hometown Cup.", "hot"],
+  ["Gets amplified", "We tell their story in ads and posts in their hometown. New heroes see it.", "hot"]
+];
+const FAMILY_STEPS = [
+  ["Meets the hero", "At a club visit or game night, with a teacher there. Or sees the hero's parent share."],
+  ["Takes home a card", "“Play on [Hero]'s team.” The QR on the back is for a parent."],
+  ["Parent opens the page", "The hero's story, the team, the spots left. One button: join the team."],
+  ["Signs up with the code", "The family is credited to the hero. Karlin's welcome call follows."],
+  ["Plays on the team", "Twice a week online, coached by the hero. Notes home after sessions."],
+  ["Proud parent moment", "Showcase night and a share card: “My kid made the team.”"]
+];
+const CHANNELS = [
+  ["Kids", "k", "The old school as the node", "The hero visits the club they came from, or the one their school never had: a club meeting, a game night, a “beat the college player” table. The adviser hosts."],
+  ["Kids", "k", "Game night in the hometown", "An open night at the school or a local room, run by the hero and a teammate. Kids play; parents come to pick up and meet the coach."],
+  ["Parents", "", "The hero's own parents", "Proud parents number one. They share their kid's page with their hometown: church, neighbors, the old coach, the teachers."],
+  ["Parents", "", "Families who join", "Proud parents number two. A team reveal, a jersey photo and the showcase night, each with a card made to share."],
+  ["Parents", "", "Hometown ads", "We run the hero's story as a parent ad in a tight radius around their hometown, using the ad system we already have."],
+  ["Both", "k", "Hometown press", "“Local grad comes home to coach.” The school newsletter, the alumni page, the local paper."]
+];
+const PRIZES = [
+  ["Coach your team", "Paid coaching work, with the kids you recruited.", true],
+  ["A bonus per family", "For every family that joins on your code. Amount to set.", false],
+  ["The Hometown Cup", "Your team plays the other heroes' teams. Final night at a college arena.", false],
+  ["Your story, told", "Featured in our ads and content, with your OK.", false],
+  ["Top recruiter", "A prize for the hero who fills a team first. To set.", false]
+];
+
+function heroLoop() {
+  const W = 260, H = 96;
+  const box = (x, y, n, t, a, b, fill, fg) => `<g><rect x="${x}" y="${y}" width="${W}" height="${H}" fill="${fill}" stroke="#000" stroke-width="${fill === '#fff' ? 2 : 0}"/>
+    <text x="${x + 18}" y="${y + 40}" font-family="Tungsten Narrow, Oswald, sans-serif" font-weight="900" font-size="32" fill="${fg === '#fff' ? '#fff' : '#f92524'}">${n}</text>
+    <text x="${x + 50}" y="${y + 36}" font-family="Inter, sans-serif" font-weight="700" font-size="16" fill="${fg}">${t}</text>
+    <text x="${x + 50}" y="${y + 60}" font-family="Inter, sans-serif" font-size="13" fill="${fg}" opacity=".8">${a}</text>
+    <text x="${x + 50}" y="${y + 78}" font-family="Inter, sans-serif" font-size="13" fill="${fg}" opacity=".8">${b}</text></g>`;
+  return `<svg class="hloop" viewBox="0 0 900 330" role="img" aria-label="The Hometown Heroes loop: sign up, page and code, go home, fill a team, coach it, story amplified">
+  <defs><marker id="ha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#000"/></marker></defs>
+  <g fill="none" stroke="#000" stroke-width="2.5">
+    <path d="M280 68H310" marker-end="url(#ha)"/><path d="M590 68H620" marker-end="url(#ha)"/>
+    <path d="M770 116V214" marker-end="url(#ha)"/>
+    <path d="M620 262H590" marker-end="url(#ha)"/><path d="M310 262H280" marker-end="url(#ha)"/>
+    <path d="M150 214V116" marker-end="url(#ha)"/>
+  </g>
+  ${box(20, 20, "1", "Hero signs up", "Coach and recruiter,", "met through their club", "#fff", "#000")}
+  ${box(320, 20, "2", "Page and code", "Their story, their team,", "a link that tracks", "#fff", "#000")}
+  ${box(630, 20, "3", "Goes home", "Old school as the node,", "the adviser as host", "#000", "#fff")}
+  ${box(630, 214, "4", "Fills a team", "Families join on", "the hero's code", "#000", "#fff")}
+  ${box(320, 214, "5", "Coaches and competes", "Their team, in the", "Hometown Cup", "#f92524", "#fff")}
+  ${box(20, 214, "6", "Story amplified", "Their hometown sees it,", "new heroes sign up", "#f92524", "#fff")}
+  <text x="138" y="170" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="rgba(0,0,0,.6)">NEXT HERO</text>
+  </svg>`;
+}
+function qrGrid() {
+  const on = [1,1,1,0,1,1,1, 1,0,1,0,0,0,1, 1,1,1,0,1,1,1, 0,0,0,1,0,1,0, 1,0,1,1,0,0,1, 0,1,0,0,1,1,0, 1,1,1,0,1,0,1];
+  return `<div class="qr" aria-hidden="true">${on.map(v => `<i class="${v ? '' : 'o'}"></i>`).join("")}</div>`;
+}
+function viewHeroes() {
+  const jrow = (steps, kind) => `<div class="jrow" style="--n:${steps.length}">${steps.map((s, i) => `<div class="jcell ${kind === 'hero' ? s[2] : (i >= 4 ? 'hot' : i >= 2 ? 'dark' : '')}"><div class="jn">${i + 1}</div><div class="jt">${esc(s[0])}</div><p>${esc(s[1])}</p></div>`).join("")}</div>`;
+  const lbRows = [["A", "Round Rock", 9], ["B", "Pflugerville", 7], ["C", "Cedar Park", 5], ["D", "Kyle", 3]];
+  return `
+  <section class="band red dark"><div class="wrap">
+    <h1 class="display h1">Hometown Heroes</h1>
+    <p class="subhead">College players recruit and coach a team from their own hometown. We give them a page, a code and something to compete for, and we amplify their story.</p>
+    <p class="quote">&ldquo;You've seen kids like me. Help me find those kids, and give them a program they can relate to.&rdquo;<small>Karlin's pitch to college players</small></p>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:20px">Why college players are the way in</h2>
+    <div class="why3">
+      <div><h3 class="h3">They'll talk to anyone</h3><p>College kids see the world as a hopeful place. They love telling their story, and our job is to amplify it.</p></div>
+      <div><h3 class="h3">Hometown gets you inside</h3><p>A grad coming back opens doors a stranger can't: their old school, their old adviser, their parents' whole network.</p></div>
+      <div><h3 class="h3">The coach schools never had</h3><p>Plenty of schools have esports. Almost none have a coach. The hero is the coach their club was missing.</p></div>
+    </div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">The loop</h2>
+    <p class="subhead">Every hero who fills a team becomes the story that recruits the next hero.</p>
+    <div style="margin-top:28px">${heroLoop()}</div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2">Two journeys, one team</h2>
+    <p class="subhead">What the hero does, and what a family goes through, side by side.</p>
+    <div class="jlabel">The hero</div>${jrow(HERO_STEPS, 'hero')}
+    <div class="jlabel">The family</div>${jrow(FAMILY_STEPS, 'family')}
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">How it reaches kids and proud parents</h2>
+    <p class="subhead">Kids meet the hero in person, with a teacher there. Everything they take home goes to a parent.</p>
+    <div class="chan" style="margin-top:32px">${CHANNELS.map(c => `<div><div class="who ${c[1]}">${c[0]}</div><h3 class="h3">${esc(c[2])}</h3><p>${esc(c[3])}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <h2 class="h2">The hero's kit</h2>
+    <p class="subhead">A page with their code, a card kids take home, and a race to fill the team. Wireframes with sample data.</p>
+    <div class="mocks" style="margin-top:32px">
+      <div>
+        <div class="phone" aria-label="Wireframe of a hero's page">
+          <div class="ph-top"><div style="font-size:12px;font-weight:700;letter-spacing:.1em">EKUZO</div><div class="ph-name" style="margin-top:10px">Play on Maya's team</div></div>
+          <div class="ph-photo">Hero photo or video</div>
+          <div class="ph-body">
+            <p style="margin:0">I'm Maya, [High School] class of 2023, now playing League at [College]. I'm coaching a team of kids from [Hometown] this season.</p>
+            <p style="margin:12px 0 0;font-weight:700">7 of 10 spots filled</p>
+            <div class="prog"><i style="width:70%"></i></div>
+            <a class="ph-cta" href="#heroes">Join Maya's team</a>
+            <p style="margin:10px 0 0;font-size:12px;color:var(--ink-60)">For parents. Kids 9 to 17. Code MAYA-RR</p>
+          </div>
+        </div>
+        <p style="margin-top:12px"><span class="sample">Sample</span></p>
+      </div>
+      <div>
+        <h3 class="h3">The card kids take home</h3>
+        <p class="sub" style="font-size:15px">Handed out at the club visit or game night. The front is for the kid, the back is for the parent.</p>
+        <div class="cards2" style="margin-top:14px">
+          <div class="tcard2 f"><div style="font-size:12px;font-weight:700;letter-spacing:.1em">EKUZO</div><div class="big2">Play on Maya's team</div><div style="font-size:13px">College coach. Your team. Twice a week.</div></div>
+          <div class="tcard2 b">${qrGrid()}<div><div style="font-weight:700;font-size:15px">For your parent</div><div style="font-size:13px;color:var(--on-dark-70);margin-top:4px">Scan to meet Maya and save a spot. Code MAYA-RR</div></div></div>
+        </div>
+        <h3 class="h3" style="margin-top:36px">The race: Hometown Cup standings</h3>
+        <div class="lbwrap"><table class="lb"><thead><tr><th></th><th>Hero</th><th>Hometown</th><th>Families</th><th></th></tr></thead><tbody>
+          ${lbRows.map((r, i) => `<tr><td class="n">${i + 1}</td><td>Hero ${r[0]}</td><td>${r[1]}</td><td>${r[2]} of 10</td><td><div class="bar"><i style="width:${r[2] * 10}%"></i></div></td></tr>`).join("")}
+        </tbody></table></div>
+        <p style="margin-top:12px"><span class="sample">Sample</span> <span style="font-size:13px;color:var(--ink-60);margin-left:8px">Heroes and towns only, never kids' names.</span></p>
+      </div>
+    </div>
+  </div></section>
+  <section class="band grey"><div class="wrap">
+    <h2 class="h2">What heroes compete for</h2>
+    <p class="subhead">Something to fight for, on top of the story they get to tell.</p>
+    <div class="prizes" style="margin-top:28px">${PRIZES.map(p => `<div class="${p[2] ? 'hot' : ''}"><h3 class="h3">${esc(p[0])}</h3><p>${esc(p[1])}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="band"><div class="wrap two">
+    <div><h2 class="h2">Guardrails</h2><ul class="watch">
+      <li>${IC.warn}<span>Heroes are adults, trained and held to the same standard as every EKUZO coach.</span></li>
+      <li>${IC.warn}<span>School visits only with the adviser's or principal's OK, with a teacher in the room.</span></li>
+      <li>${IC.warn}<span>No DMs with kids. Every sign-up is a parent's, and contact runs through EKUZO with a parent.</span></li>
+      <li>${IC.warn}<span>Kids' photos and names on share cards only when their parent makes and shares them.</span></li>
+      <li>${IC.warn}<span>Check referral pay against school rules, college eligibility rules, and tax reporting.</span></li>
+    </ul></div>
+    <div><h2 class="h2">Built on what we have</h2><ul class="deliv" style="background:var(--grey);padding:10px">
+      <li><span>Season 01 crew codes ("Join [Name]'s team")</span><span class="chip exists">Exists</span></li>
+      <li><span>Parent ads system, retargeted by hometown</span><span class="chip exists">Exists</span></li>
+      <li><span>College club reach-back kit</span><span class="chip build">To build</span></li>
+      <li><span>Hero page template and take-home card</span><span class="chip build">To build</span></li>
+      <li><span>Hometown Cup leaderboard</span><span class="chip build">To build</span></li>
+    </ul></div>
+  </div></section>
+  <section class="band black dark"><div class="wrap">
+    <h2 class="h2" style="margin-bottom:24px">A pilot this spring</h2>
+    <div class="hpilot">
+      <div><div class="pn">5</div><h3 class="h3">Heroes</h3><p>From the university clubs we've met, the members who already offered to reach back.</p></div>
+      <div><div class="pn">5</div><h3 class="h3">Hometowns</h3><p>Each hero's own high school as the node, with its adviser as host.</p></div>
+      <div><div class="pn">1</div><h3 class="h3">Hometown Cup</h3><p>Their teams play each other, with a final night at a college arena.</p></div>
+      <div><div class="pn">3</div><h3 class="h3">Numbers to watch</h3><p>Families per hero, sign-ups by channel (each code tells us), and cost per family against paid ads.</p></div>
+    </div>
+    <h3 class="h3" style="margin-top:40px">Open decisions</h3>
+    <ul class="decide">
+      <li><span style="color:var(--red);font-weight:700">Karlin</span><span>Name it: Hometown Heroes, or something kids would say.</span></li>
+      <li><span style="color:var(--red);font-weight:700">Jamie</span><span>The bonus per family, and whether the hero coaches every team they fill.</span></li>
+      <li><span style="color:var(--red);font-weight:700">Jamie</span><span>Hero pages as a variant of the crew-code page on the site (Jamie's lane).</span></li>
+      <li><span style="color:var(--red);font-weight:700">Aaron</span><span>The hero kit: page template, card, share cards, a hometown ad.</span></li>
+    </ul>
+  </div></section>`;
+}
+
+
+function noWidows(root) {
+  root.querySelectorAll("p, li:not(:has(> .chip)), .deliv li > span:first-child, .jt, .h3, td, .quote").forEach(el => {
+    if ((el.textContent.trim().match(/\s+/g) || []).length < 2) return;
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let last = null, n;
+    while ((n = w.nextNode())) if (n.data.trim()) last = n;
+    if (!last) return;
+    const i = last.data.replace(/\s+$/, "").lastIndexOf(" ");
+    if (i > 0 && last.data.length - i < 16) last.data = last.data.slice(0, i) + "\u00a0" + last.data.slice(i + 1);
+  });
+}
+
 /* ---------- Router ---------- */
 function render(id) {
   const v = VIEWS.find(x => x.id === id) ? id : "home";
   const lane = LANES.find(l => "lane-" + l.id === v);
-  const html = v === "home" ? viewHome() : v === "pathway" ? viewPathway() : v === "journey" ? viewJourney() : v === "templates" ? viewTemplates() : v === "onepagers" ? viewOnepagers() : v === "decisions" ? viewDecisions() : viewLane(lane);
+  const html = v === "home" ? viewHome() : v === "pathway" ? viewPathway() : v === "journey" ? viewJourney() : v === "templates" ? viewTemplates() : v === "onepagers" ? viewOnepagers() : v === "decisions" ? viewDecisions() : v === "heroes" ? viewHeroes() : viewLane(lane);
   $("#main").innerHTML = `<div class="view on">${html}</div>`;
+  noWidows($("#main"));
   document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.dataset.v === v ? "page" : "false"));
   $("#mnav").value = v;
   document.title = (VIEWS.find(x => x.id === v).label) + " · Outreach Lab";

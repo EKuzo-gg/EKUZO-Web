@@ -5,6 +5,17 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron's Claude, 2026-10-30: Hometown Heroes in Outreach Lab (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/outreach-lab.html` only.
+
+1. **Hometown Heroes** (`#heroes`, new Programs group in the nav): Karlin's idea for college players as recruiters and coaches for a team from their own hometown. The loop, the hero and family journeys, how it reaches kids and parents (kids only in person with a teacher there; everything they take home goes to a parent), wireframes of a hero page, a take-home card and a leaderboard (sample data), what heroes compete for, guardrails, a spring pilot and open decisions. The College lane links to it.
+2. **Widows:** a small `noWidows()` pass after each render keeps the last two words of running text together.
+
+- **For Jamie (your lane, nothing changed):** the hero page is proposed as a variant of the Season 01 crew-code page (`/crew/<code>`, "Join [Name]'s team"), so each family is credited to its hero through the existing referral cookie.
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, no page errors.
+
+---
 ## Aaron's Claude, 2026-10-30: the other seven partner one-pagers (roadshow, dev only)
 
 Branch `dev`, `public/roadshow/` only (never ships to main).
