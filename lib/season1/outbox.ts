@@ -1,7 +1,7 @@
 import { getSql } from "./db";
 import { loadFriendCtx, loadOrderCtx } from "./outboxLoad";
 import { SenderError, type SendOutcome } from "./senders/context";
-import { formatCommit, formatFlag, formatOpsAlert, sendDiscord } from "./senders/discord";
+import { adNameFor, formatCommit, formatFlag, formatOpsAlert, sendDiscord } from "./senders/discord";
 import { buildPurchaseEvent, sendMetaPurchase } from "./senders/meta";
 import {
   buildCommittedEvent,
@@ -99,7 +99,7 @@ async function dispatch(row: OutboxRow): Promise<SendOutcome> {
       }
       if (base === "klaviyo_committed") return sendKlaviyoEvent(buildCommittedEvent(ctx), row.livemode);
       if (base === "meta_purchase") return sendMetaPurchase(buildPurchaseEvent(ctx), row.livemode);
-      return sendDiscord(formatCommit(ctx), row.livemode);
+      return sendDiscord(formatCommit(ctx, await adNameFor(ctx)), row.livemode);
     }
     case "klaviyo_friend_joined":
     case "discord_flag": {

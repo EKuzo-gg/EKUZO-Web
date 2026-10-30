@@ -71,6 +71,7 @@ export async function loadOrderCtx(publicId: string): Promise<OrderCtx | null> {
     kids: ((r.kids as KidCtx[] | null) ?? []).map((k) => ({ firstName: k.firstName, age: k.age ?? null, role: k.role })),
     geoCity: str(geo.geo_city),
     geoRegion: str(geo.geo_region),
+    geoTz: str(geo.geo_tz),
     fbp: validFbp(oa.fbp) ?? validFbp(attr.fbp),
     fbc: validFbc(oa.fbc) ?? validFbc(attr.fbc),
     utmSource: utm("utm_source"),

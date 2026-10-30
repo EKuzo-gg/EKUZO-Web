@@ -128,6 +128,16 @@ describe("outbox: attribution read, skipped_refunded, order-scoped drain (no DB)
     assert.equal(ctx.firstTouch, null);
   });
 
+  it("loadOrderCtx: geo city, region and time zone come from the family geo (Discord commit line)", async () => {
+    const { loadOrderCtx } = await import("../outboxLoad");
+    responder = () => asResult({ ...orderRow("paid", null, null), geo: { geo_city: "Oshkosh", geo_region: "WI", geo_tz: "America/Chicago" } });
+    const ctx = (await loadOrderCtx("ordref2345"))!;
+    assert.deepEqual([ctx.geoCity, ctx.geoRegion, ctx.geoTz], ["Oshkosh", "WI", "America/Chicago"]);
+    responder = () => asResult({ ...orderRow("paid", null, null), geo: { geo_city: "", geo_tz: "" } });
+    const none = (await loadOrderCtx("ordref2345"))!;
+    assert.deepEqual([none.geoCity, none.geoRegion, none.geoTz], [null, null, null]);
+  });
+
   it("loadOrderCtx: invalid values are dropped (an invalid order value falls through to a valid family one)", async () => {
     const { loadOrderCtx } = await import("../outboxLoad");
     responder = () =>

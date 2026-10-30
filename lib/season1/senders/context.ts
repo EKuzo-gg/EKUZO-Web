@@ -33,6 +33,8 @@ export interface OrderCtx {
   kids: KidCtx[];
   geoCity: string | null;
   geoRegion: string | null;
+  /** Validated IANA zone from the family geo (geo_tz), when known. */
+  geoTz: string | null;
   /** Validated (attribution.ts FBP_RE / FBC_RE): the order's, else the family's. */
   fbp: string | null;
   fbc: string | null;

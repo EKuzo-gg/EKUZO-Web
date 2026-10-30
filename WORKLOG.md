@@ -5,6 +5,15 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-10-30: Discord commit format
+
+Branch `season1-commit` (Relay). Jamie (13:17 CT) changed the #season01-commits message to `Season 01 commit | <n> kid|kids | Email: <payer email> | Location: <City>, <REGION> (time zone: <IANA tz>) | Source: <source>`. This replaces decision 9 of 10-29 (no email or location in Discord); noted in the header of `lib/season1/senders/discord.ts` and in `docs/season1-commit/final/02-decisions.md`. Kid names, ages, phone and amount stay out; `[TEST] ` prefix kept; referral flag and ops alert formats unchanged. Evidence: `docs/season1-commit/analytics/evidence/discord-format.md`.
+
+- `formatCommit(order, adName?)`: email through a markup stripper (keeps `@`, cap 120), location from the family geo (new `OrderCtx.geoTz` from `geo_tz`) with graceful degrading, Source by the seven-step order (referral, karlin, paid click `ad <utm_content>`, Klaviyo `season1_ad_name`, email, first-touch bucket, organic).
+- Klaviyo read for the ad name (`lookupAdName`, discord commit rows only): 1.5 s timeout, skipped when the source is already settled, any failure falls through, never fails the send, logs nothing. Test-mode orders look up only the allowlisted test addresses.
+- Tests: Discord cases rewritten and extended, lookup stubbed (found, not found, timeout, error); a `loadOrderCtx` geo test. Ships with the Discord webhook still unset until `S1_DISCORD_WEBHOOK_URL` is added.
+
+---
 ## Jamie's Claude, 2026-10-30: after release
 
 Released 12:42 CT (main 6c4f4ff, dev ed9d163); smoke passed; scheduled drain proven (`s1-drain: status 200` every 2 minutes). Meta audience "Season 01 purchasers (180 days)" created, not attached yet. Dev runbook: release scripts stop on the first conflict. Discord commit alerts ship in the code and wait on `S1_DISCORD_WEBHOOK_URL`.
