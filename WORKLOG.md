@@ -237,6 +237,11 @@ Branch `season1-commit`. Spec: `docs/season1-commit/final/02-decisions.md` (Jami
 - FAQ canon backport of 9 to 17 (decision 4) lives in the knowledge base, outside this repo.
 
 ---
+## Aaron (via Claude), October 30, 2026 (sign-ups open email)
+
+- **New Klaviyo draft template `VYzgSh`, "Season 01 · Sign-ups open (waitlist)":** a one-time campaign for the Season 01 Waitlist list. It's the season page in email form: "Sign-ups are open." hero, free-jersey strip, $100 first month with the struck $160, crew art tearing into a black band with the four stats, the friends line, and Karlin's sign-off. Both buttons link to `/season1/join?src=email`, so orders are attributed to email. Not sent, and no campaign created yet.
+- New email asset: `public/images/season1/email/header-crew-black@2x.jpg` (crew art with a black tear, uploaded to Klaviyo).
+
 ## Aaron (via Claude), October 28, 2026 (full QA + go-live handoff)
 
 - **QA:** 169 tests pass, tsc clean. 14 states at 6 widths show no layout issues. 0 axe violations at 390 and 1440. On the live dev deploy, routes return 200 with the right framing headers, Stripe Elements loads, and there are no console errors. eslint reports 9 `no-explicit-any` errors, all in 4 older test files.
