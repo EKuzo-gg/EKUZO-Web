@@ -433,8 +433,21 @@ Dependency-only release ahead of Season 01 (security review finding H1, decision
   errors and 6 warnings from stricter React hooks rules (`react-hooks/refs`,
   `set-state-in-effect`, `immutability`) and `no-location-assign-relative-destination` on existing
   code. Not fixed here (Aaron's lane, separate pass); file list in the KB debrief.
-- Regression and commerce results: see the next entry or the KB debrief
-  (`knowledge-base/explorations/2026-10-27-nextjs-security-release/`).
+- Regression (local `next start` of this branch vs ekuzo.gg on 16.2.1, analytics hosts blocked): 14
+  core pages at 1440 and 375 match (status, title, text, screenshots), 18 config redirects 308 with
+  the same Location, `/register` 307 to `?join=season-one`, `ekuzo_origin` cookie unchanged, JSON-LD
+  identical, popup, footer signup and contact modal submit (outbound calls intercepted), Rive renders,
+  `/_next/image` serves webp through sharp 0.35.5, `/season1` HTML byte-identical.
+- Commerce, Stripe test mode: one camps ($199) and one EKUZO100 ($100) registration, `pm_card_visa`.
+  The webhook on 16.4.3 builds the same "Placed Order" properties the dev deploy sent to Klaviyo.
+  Test identities `team+nextsec-1027-camps@ekuzo.gg` and `-e100@`; ledger and branch deploy checks
+  in `knowledge-base/explorations/2026-10-27-nextjs-security-release/`.
+- Netlify: `release/next-security` and `preview/next-security` added to Branch deploys (2026-10-27,
+  Jamie's go). Remove them after the release ships.
+- Pre-existing, not changed here: webhook skips signature checks when `STRIPE_WEBHOOK_SECRET` is
+  unset; `/api/*/register` is not gated by Season 01 mode; empty `next.config.ts` beside the real
+  `next.config.mjs`; `public/` files with a literal `@` in the name 404 under `next start` (Netlify's
+  CDN serves them).
 
 ---
 ## Jamie (via Claude, Build Loop overnight), October 26 to 27, 2026 (Season 01 commit and invite)
