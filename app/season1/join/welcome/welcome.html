@@ -50,6 +50,20 @@ p{margin:0}
 .sbin{max-width:560px;margin-inline:auto}
 .saveband .d{font-size:36px;color:#fff}
 .saveband .rows{margin-top:16px;border-color:var(--black)}
+/* 1 friend = 1 free month (matches /season1/join/b) */
+.eqcard{background:#fff;color:var(--black);margin-top:16px;padding:20px 18px}
+.eq{display:flex;align-items:center;align-items:last baseline;gap:10px;margin:0}
+.eq .av{width:clamp(44px,12vw,64px);height:auto;flex-shrink:0;align-self:center}
+.saveband .eq .d{color:var(--black)}
+.eqk{font-size:clamp(26px,7.5vw,44px);white-space:nowrap}
+.mo{display:inline-flex;flex-direction:column;align-items:flex-start;background:var(--violet);color:#fff;padding:6px 10px 8px}
+.mo s{font-size:12px;font-weight:700;color:rgba(255,255,255,.75)}
+.saveband .eq .mo b{font-size:clamp(26px,7.5vw,44px);white-space:nowrap;color:#fff}
+.four{display:flex;align-items:center;gap:12px;margin:16px 0 0;padding-top:14px;border-top:2px solid var(--black);font-size:14px;line-height:1.4}
+.four b{font-weight:800}
+.avs{display:flex;flex-shrink:0}
+.avs img{width:40px;height:40px;border-radius:50%}
+.avs img+img{margin-left:-8px}
 .rows{border:1.5px solid var(--black);background:#fff;color:var(--black);font-size:14px;margin-top:10px}
 .rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid rgba(0,0,0,.15)}
 .rows div:first-child{border-top:0}
@@ -164,7 +178,7 @@ p,li,.small{text-wrap:pretty}
 <div class="wgrid"><div class="wleft">
 <!--share--><div class="share notch">
 <h2 class="d" style="font-size:44px">Share and save!</h2>
-<p style="font-size:14px;margin-top:12px;line-height:1.45;text-wrap:balance">Each friend who joins with your link gets a free month, and so do&nbsp;you.</p>
+<p style="font-size:14px;margin-top:12px;line-height:1.45;text-wrap:balance">Every kid that joins with your link gets a free month, and so do you. More friends, more&nbsp;savings.</p>
 <button class="btn" style="margin-top:16px;padding:18px" id="share" data-link="{{LINK}}" data-kid="{{KID1}}" data-clarity-mask="true">Share {{KID1}}'s link</button>
 <p style="font-size:13px;margin-top:12px;line-height:1.4;text-align:center" data-clarity-mask="true"><b>{{LINK_SHORT}}</b></p></div>
 <!--/share-->
@@ -182,9 +196,8 @@ p,li,.small{text-wrap:pretty}
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Nov</b><span>Gamer profile, jersey and gear check</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Late Dec</b><span>Meet the team and coach</span></div>
 <div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>First practice</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Apr</b><span>Season tournament</span></div>
-<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May 6</b><span>Last practice</span></div></div></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">Mid Jan</b><span>Season begins!</span></div>
+<div style="display:flex;gap:12px"><b style="width:84px;flex-shrink:0">May</b><span>Final tournament</span></div></div></div>
 <div style="background:var(--stone);padding:16px;margin-top:28px" hidden><p style="font-size:14px;font-weight:700" data-clarity-mask="true">Help us build {{KID1}}'s team <span style="font-weight:400;color:var(--muted)">(optional)</span></p>
 <label class="l" style="margin-top:12px">Games they play now</label>
 <div class="chips"><button>Fortnite</button><button>Roblox</button><button>Minecraft</button><button>League of Legends</button><button>Rocket League</button><button>Other</button></div>
@@ -192,7 +205,8 @@ p,li,.small{text-wrap:pretty}
 <div class="chips"><button>Mon</button><button>Tue</button><button>Wed</button><button>Thu</button><button>Fri</button></div></div>
 </div>
 <!--save--><section class="saveband"><div class="sbin"><h2 class="d">How this discount works</h2>{{LADDER_NOTE}}
-<div class="rows"><div><span>On your own</span><b>{{LADDER0}}</b></div><div><span>1 friend joins</span><b>{{LADDER1}}</b></div><div><span>2 friends</span><b>{{LADDER2}}</b></div><div><span>3 friends</span><b>{{LADDER3}}</b></div><div><span>4 friends</span><b>Free. We refund your {{FIRST}}.</b></div></div>
+<div class="eqcard"><p class="eq"><img class="av" src="/images/season1/gamers/blue-gamer.svg" alt="" width="64" height="64"><span class="d eqk">1 friend =</span><span class="mo"><s>{{MONTHLY}}</s><b class="d">1 free month</b></span></p>
+<p class="four"><span class="avs" aria-hidden="true"><img src="/images/season1/gamers/pink-gamer.svg" alt="" width="40" height="40"><img src="/images/season1/gamers/green-gamer.svg" alt="" width="40" height="40"><img src="/images/season1/gamers/purple-gamer.svg" alt="" width="40" height="40"><img src="/images/season1/gamers/yellow-gamer.svg" alt="" width="40" height="40"></span><span><b>Four friends, free season.</b> We send your {{FIRST}} back too.</span></p></div>
 </div></section><!--/save-->
 <div class="px wbody">
 <p class="small" style="text-align:center;margin:28px 0 40px">Questions? <a href="{{SMS}}"><b>Text our founder</b></a></p></div>

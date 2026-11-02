@@ -186,6 +186,8 @@ export async function GET(request: Request) {
       new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric" }).format(lockIn),
     ),
     FIRST: money(OFFER.firstKidCents),
+    // Friend credit value for the "1 friend = 1 free month" card (strikethrough price).
+    MONTHLY: money(OFFER.monthlyCents),
     // Same friend ladder as the season page (lib/season1/joinPage.ts), from offer.ts.
     LADDER0: money(OFFER.seasonCents),
     LADDER1: money(OFFER.seasonCents - OFFER.friendCreditCents),
