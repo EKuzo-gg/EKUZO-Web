@@ -5,6 +5,28 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron (via Claude), 2026-11-02: join page B, sign-up and confirmation copy, early-access email A/B
+
+Branch `season1-commit`. Karlin asked for price transparency and signed off on testing two early-access email layouts. Full handoff and Jamie's QA list: `docs/season1-commit/10-join-b-and-email-ab-handoff.md`.
+
+- **New `/season1/join/b`** (`app/season1/join/b/`, same renderer as `/season1/join`; A unchanged).
+  - Hero line: $60 off, free custom jersey, then $160/month or about $20 a practice; the jersey clause is gated on the cutoff.
+  - "1 friend = 1 free month" friends card with Aaron's gamer icons (`public/images/season1/gamers/`).
+  - Timeline ends Mid Jan "Season begins!" and May "Final tournament"; finale tile says May.
+  - FAQ: "How does paying work?" (open, with a $100/$160/$160/$160 = $580 tile row) and "Do you offer discounts?".
+  - New mobile hero art (`s1-crew-mobile.webp`), violet "Join the team!" sticky bar, buttons without the middot.
+  - Tighter spacing that clears the torn edges at all widths.
+  - GA4 view event tagged `variant: 'b'`.
+- **Shared sign-up and confirmation (affect A too).**
+  - Pay button "Save their spot for $100".
+  - Summary adds "Then $X a month from Feb 15, less any friend credits."
+  - Jersey line reads "Custom jersey (first 100 families)".
+  - Confirmation share copy, timeline and the "How this discount works" card match B.
+  - Signup, welcome and join tests: 70 pass.
+- **Klaviyo, both drafts, not sent:** `VYzgSh` (current layout) got the new friends section and the "Save their spot for $100" button. New `RN8KSq` follows Figma frame 871:175 ("602" layout, mixed-games hero art). Ask: A/B the campaign on template, metric click rate plus Placed Order per variation.
+- **Figma (EKUZO Marketing, frame 871:175):** friends section and offer-card line updated to match.
+
+---
 ## Jamie's Claude, 2026-10-30: Discord commit format
 
 Branch `season1-commit` (Relay). Jamie (13:17 CT) changed the #season01-commits message to `Season 01 commit | <n> kid|kids | Email: <payer email> | Location: <City>, <REGION> (time zone: <IANA tz>) | Source: <source>`. This replaces decision 9 of 10-29 (no email or location in Discord); noted in the header of `lib/season1/senders/discord.ts` and in `docs/season1-commit/final/02-decisions.md`. Kid names, ages, phone and amount stay out; `[TEST] ` prefix kept; referral flag and ops alert formats unchanged. Evidence: `docs/season1-commit/analytics/evidence/discord-format.md`.
