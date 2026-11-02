@@ -8,7 +8,8 @@
 <title>{{TITLE}} | EKUZO</title>
 <link rel="icon" href="/icon.png">
 <link rel="preload" as="font" type="font/otf" href="/fonts/TungstenNarrow-Black.otf" crossorigin>
-<link rel="preload" as="image" href="/images/season1/s1-crew-left.webp">
+<link rel="preload" as="image" href="/images/season1/s1-crew-left.webp" media="(min-width:1000px)">
+<link rel="preload" as="image" href="/images/season1/s1-crew-mobile.webp" media="(max-width:999px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap">
@@ -89,7 +90,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .chars{position:relative;z-index:0;display:flex;justify-content:center;margin-top:24px;pointer-events:none}
 /* Phones: big art, cut at the waist by the black band's torn edge (the band sits above at z 1).
    Waist is ~52% down the image, so 48% of it hangs behind the band. */
-.chars .left{height:620px;width:auto;max-width:none;margin-bottom:-298px;flex-shrink:0}
+.chars .left{width:min(118vw,760px);height:auto;max-width:none;margin-bottom:max(-15vw,-96px);flex-shrink:0}
 .chars .right{display:none}
 
 /* Paper seams (docs/learning-log.md one-sided "top" dividers): the band's own torn top edge
@@ -170,7 +171,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .stick .btn{width:auto;min-height:52px;padding-inline:24px;white-space:nowrap;background:var(--violet);color:#fff;box-shadow:none}
 .stick .btn:hover{background:#9a1fdc}
 .stick .btn:focus-visible{outline-color:var(--black)}
-@media (max-width:480px){.stick p{font-size:30px;white-space:nowrap}.stick .btn{padding-inline:16px}}
+@media (max-width:480px){.stick p{font-size:28px;line-height:.95}.stick .btn{padding-inline:16px}}
 @media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.coaches{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1000px){
  .nav{height:80px}.nav .logo img{height:24px}
@@ -214,7 +215,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <!--IF:open--><a class="btn" href="{{SIGNUP}}">Save their spot for {{FIRST}}</a>
 <!--/IF:open-->
 <!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div></div>
-<div class="chars" aria-hidden="true"><img class="left" src="/images/season1/s1-crew-left.webp" alt="" width="959" height="1100"><img class="right" src="/images/season1/s1-jinx.webp" alt="" width="1002" height="1000" loading="lazy"></div>
+<div class="chars" aria-hidden="true"><picture><source media="(min-width:1000px)" srcset="/images/season1/s1-crew-left.webp" width="959" height="1100"><img class="left" src="/images/season1/s1-crew-mobile.webp" alt="" width="1523" height="976"></picture><img class="right" src="/images/season1/s1-jinx.webp" alt="" width="1002" height="1000" loading="lazy"></div>
 </header>
 <main>
 <section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-top-1@2x.png')" aria-hidden="true"></div>
@@ -285,7 +286,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <!--IF:open--><a class="btn endcta" href="{{SIGNUP}}">Save their spot for {{FIRST}}</a><!--/IF:open-->
 <p class="ask" style="padding-bottom:56px">Questions first? <a href="sms:{{SMS}}">Text our founder</a></p></div></div></section>
 </main>
-<!--IF:open--><aside class="stick" id="stick" aria-label="Sign up"><div class="wrap"><p>Lock in for {{FIRST}}</p><a class="btn" href="{{SIGNUP}}">Save their spot</a></div></aside>
+<!--IF:open--><aside class="stick" id="stick" aria-label="Sign up"><div class="wrap"><p>Join Season 01 for {{FIRST}}</p><a class="btn" href="{{SIGNUP}}">Save their spot</a></div></aside>
 <script>(function(){var b=document.getElementById('stick'),o=document.querySelector('.offer');if(!b||!o||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){b.classList.toggle('on',!e[0].isIntersecting&&e[0].boundingClientRect.top<0)}).observe(o)})()</script><!--/IF:open-->
 <script>try{gtag('event','season1_join_view',{variant:'b'})}catch(e){}</script>
 <script src="/js/s1-devview.js" defer></script>
