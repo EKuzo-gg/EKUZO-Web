@@ -51,7 +51,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .sticker small{font:700 15px/1.25 var(--body)}
 .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .price b{font:900 76px/.85 var(--display);letter-spacing:.03em}
-.price span{font-weight:700;font-size:17px}
+.price s{color:rgba(0,0,0,.6);font-size:22px;font-weight:600}
+.price span{font-weight:700;font-size:15px}
 .then{font-size:15px;line-height:1.5;color:rgba(0,0,0,.72);margin-top:10px}
 /* Variant B: the season's payments, month by month */
 .sched{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
@@ -208,10 +209,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="offer-wrap">
 <!--IF:open--><!--IF:jersey--><p class="sticker"><b>Free jersey</b> <small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
 <div class="offer">
-<div class="price"><b>{{MONTHLY}}</b><span>a month</span></div>
-<p class="then">Your first month is only {{FIRST}}.</p>
+<div class="price"><b>{{FIRST}}</b><s>{{MONTHLY}}</s><span>first month</span></div>
+<p class="then">{{SEASON_LINE}} Then about {{PER_PRACTICE}} a practice.</p>
 <!--IF:open--><a class="btn" href="{{SIGNUP}}">Save their spot for {{FIRST}}</a>
-<!--/IF:open-->
+<!--IFNOT:jersey--><p class="urgent">Spots are limited. Teams are small.</p><!--/IFNOT:jersey--><!--/IF:open-->
 <!--IFNOT:open-->{{CLOSED_BLOCK}}<!--/IFNOT:open--></div></div></div>
 <div class="chars" aria-hidden="true"><picture><source media="(min-width:1000px)" srcset="/images/season1/s1-crew-left.webp" width="959" height="1100"><img class="left" src="/images/season1/s1-crew-mobile.webp" alt="" width="1523" height="976"></picture><img class="right" src="/images/season1/s1-jinx.webp" alt="" width="1002" height="1000" loading="lazy"></div>
 </header>
