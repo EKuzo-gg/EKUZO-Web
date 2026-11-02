@@ -67,6 +67,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* Variant B: friend credit as one equation, 1 friend = 1 free month */
 .eqwrap{margin-top:36px}
+.pad.fr{padding-bottom:calc(64px + max(36px,3.3vw))}
 .eq{display:flex;align-items:center;gap:10px}
 .eq .av{width:clamp(48px,13vw,84px);height:auto;flex-shrink:0}
 .eqk,.eqo{font-size:clamp(28px,8vw,64px);white-space:nowrap}
@@ -161,15 +162,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .closed+.btn,.closed~.btn{margin-top:12px}
 
 /* Sticky signup bar: shows once the hero offer card is off screen */
-.stick{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--lime);border-top:2px solid var(--black);transform:translateY(110%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--lime);box-shadow:0 -4px 18px rgba(0,0,0,.08);transform:translateY(110%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
 .stick.on{transform:none}
 .stick .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
-.stick p{font:900 26px/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.stick p{font:900 40px/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
 .stick p small{display:block;font:600 13px/1.3 var(--body);text-transform:none;letter-spacing:0;color:rgba(0,0,0,.72);margin-top:2px}
 .stick .btn{width:auto;min-height:52px;padding-inline:24px;white-space:nowrap;background:var(--violet);color:#fff;box-shadow:none}
 .stick .btn:hover{background:#9a1fdc}
 .stick .btn:focus-visible{outline-color:var(--black)}
-@media (max-width:480px){.stick p{font-size:24px}.stick .btn{padding-inline:16px}}
+@media (max-width:480px){.stick p{font-size:30px;white-space:nowrap}.stick .btn{padding-inline:16px}}
 @media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.coaches{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1000px){
  .nav{height:80px}.nav .logo img{height:24px}
@@ -187,6 +188,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .pad{padding-block:112px}
  .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center}
  .eqwrap{margin-top:0}
+ .pad.fr{padding-bottom:calc(112px + max(36px,3.3vw))}
  .costs .sched{gap:6px}.costs .sched li{padding:16px 10px 14px}.costs .sched b{font-size:40px;margin-top:6px}.costs .tot b{font-size:40px}
  .eq{gap:14px}.eqk,.eqo,.mo b{font-size:clamp(40px,4.3vw,64px)}.mo{padding:10px 16px 12px}
  .tl{grid-template-columns:repeat(6,1fr);border-left:0;border-top:3px solid var(--black);margin:48px 0 0;padding-top:0}
@@ -226,7 +228,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="stat"><img src="/icons/trophy.svg" alt=""><span class="k">Finale</span><b>May</b><small>Season tournament</small></div>
 </div></div></section>
 <section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
-<div class="wrap pad two">
+<div class="wrap pad two fr">
 <div><h2 class="d h2">Games are better<br><em class="c-violet">with friends.</em></h2>
 <p class="lead">Every kid that joins with your link gets a free month, and so do you. More friends, more savings.<br><b class="c-violet" style="font-weight:800">Join and start your team.</b></p>
 </div>
