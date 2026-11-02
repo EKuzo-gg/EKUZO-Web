@@ -54,7 +54,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .then{font-size:15px;line-height:1.5;color:rgba(0,0,0,.72);margin-top:10px}
 /* Variant B: the season's payments, month by month */
 .sched{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
-.sched li{background:var(--white);padding:10px 8px 9px;text-align:center}
+.sched li{background:var(--off);padding:10px 8px 9px;text-align:center}
 .sched li.now{background:var(--lime)}
 .sched span{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.6)}
 .sched li.now span,.sched li.now small{color:var(--black)}
@@ -63,6 +63,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:2px solid var(--black);margin-top:12px;padding-top:10px}
 .tot span{font-size:14px;font-weight:700}
 .tot b{font:900 34px/1 var(--display);letter-spacing:.03em}
+.faq .costs{max-width:62ch;padding:0 0 16px}.faq details .costs .tot{padding:10px 0 0;max-width:none;color:var(--black)}.faq .costs .sched{margin-top:4px}.faq .costs+p{padding-top:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* Variant B: friend credit as one equation, 1 friend = 1 free month */
 .eqwrap{margin-top:36px}
@@ -184,7 +185,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .pad{padding-block:112px}
  .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center}
  .eqwrap{margin-top:0}
- .costs .sched{margin-top:0;gap:6px}.costs .sched li{padding:18px 10px 16px}.costs .sched b{font-size:48px;margin-top:6px}.costs .tot{margin-top:16px;padding-top:14px}.costs .tot span{font-size:16px}.costs .tot b{font-size:48px}
+ .costs .sched{gap:6px}.costs .sched li{padding:16px 10px 14px}.costs .sched b{font-size:40px;margin-top:6px}.costs .tot b{font-size:40px}
  .eq{gap:14px}.eqk,.eqo,.mo b{font-size:clamp(40px,4.3vw,64px)}.mo{padding:10px 16px 12px}
  .tl{grid-template-columns:repeat(6,1fr);border-left:0;border-top:3px solid var(--black);margin:48px 0 0;padding-top:0}
  .tl li{padding:26px 16px 0 0}
@@ -222,23 +223,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="stat"><img src="/icons/youth.svg" alt=""><span class="k">Ages</span><b>{{AGE_MIN}} to {{AGE_MAX}}</b><small>Any skill level</small></div>
 <div class="stat"><img src="/icons/trophy.svg" alt=""><span class="k">Finale</span><b>April</b><small>Season tournament</small></div>
 </div></div></section>
-<section class="band offwhite"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png')" aria-hidden="true"></div>
-<div class="wrap pad two">
-<div><h2 class="d h2">What it <em class="c-red">costs</em></h2>
-<p class="lead">{{MONTHLY}} a month, about {{PER_PRACTICE}} a practice. Your first month is only {{FIRST}}.</p>
-<p class="ladder-note">Full refund until {{LOCK_SHORT}}. Siblings are {{SIB_PCT}}% off.</p></div>
-<div class="costs">
-<ol class="sched" aria-label="Season 01 payments, per kid">
-<li class="now"><span>Jan</span><b>{{FIRST}}</b><small>Today</small></li>
-<li><span>Feb</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
-<li><span>Mar</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
-<li><span>Apr</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
-</ol>
-<p class="tot"><span>Full season, Jan to May 6</span><b>{{SEASON_FULL}}</b></p>
-</div></div></section>
 <section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad two">
-<div><h2 class="d h2">More friends.<br><em class="c-violet">Bigger savings.</em></h2>
+<div><h2 class="d h2">Games are better<br><em class="c-violet">with friends.</em></h2>
 <p class="lead">Every kid who joins with your link gets a free month. So does yours.</p>
 </div>
 <div class="eqwrap">
@@ -253,9 +240,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <li><b>Late Nov</b><span>Gamer profile, jersey and gear check.</span></li>
 <li><b>Late Dec</b><span>Meet the team and coach.</span></li>
 <li class="hot"><b>{{LOCK_SHORT}}</b><span>Lock-in. Full refund until then.</span></li>
-<li><b>Mid Jan</b><span>First practice.</span></li>
-<li><b>Mid Apr</b><span>Season tournament.</span></li>
-<li><b>May 6</b><span>Last practice.</span></li>
+<li><b>Mid Jan</b><span>Season begins!</span></li>
+<li><b>May</b><span>Final tournament.</span></li>
 </ol></div></section>
 <section class="band black"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-black-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad">
@@ -276,7 +262,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="wrap pad"><div class="faqwrap">
 <h2 class="d h2">Short <em class="c-violet">answers</em></h2>
 <div class="faq">
-<details><summary>How does paying work?</summary><p>You pay {{FIRST}} today, which covers January. Then {{MONTHLY}} a month on Feb 15, Mar 15 and Apr 15, less any friend credits. That's {{SEASON_FULL}} for the whole season, about {{PER_PRACTICE}} a practice. Siblings are {{SIB_PCT}}% off. Full refund until {{LOCK_SHORT}}.</p></details>
+<details class="pay" open><summary>How does paying work?</summary><div class="costs">
+<ol class="sched" aria-label="Season 01 payments, per kid">
+<li class="now"><span>Jan</span><b>{{FIRST}}</b><small>Today</small></li>
+<li><span>Feb</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
+<li><span>Mar</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
+<li><span>Apr</span><b>{{MONTHLY}}</b><small>The 15th</small></li>
+</ol>
+<p class="tot"><span>Full season, Jan to May 6</span><b>{{SEASON_FULL}}</b></p>
+</div><p>You pay {{FIRST}} today, which covers January. Then {{MONTHLY}} a month on Feb 15, Mar 15 and Apr 15, less any friend credits. That's {{SEASON_FULL}} for the whole season, about {{PER_PRACTICE}} a practice. Siblings are {{SIB_PCT}}% off. Full refund until {{LOCK_SHORT}}.</p></details>
 <details><summary>What game do they play?</summary><p>Your kid might play Roblox, Minecraft or Fortnite, and they keep those. With us, they play League of Legends on a team of five. It’s free to download, and most kids start from scratch. League is our core game, and we’re looking at adding&nbsp;others.</p></details>
 <details><summary>Do we have to go anywhere?</summary><p>No. Every practice and the final tournament happen online, from home.</p></details>
 <details><summary>Who is it for?</summary><p>Kids ages {{AGE_MIN}} to {{AGE_MAX}}. Outside that range? <a href="sms:{{SMS}}">Text our founder</a>.</p></details>
