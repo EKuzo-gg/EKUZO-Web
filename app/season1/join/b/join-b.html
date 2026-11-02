@@ -68,7 +68,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* Variant B: friend credit as one equation, 1 friend = 1 free month */
 .eqwrap{margin-top:36px}
-.pad.fr{padding-bottom:calc(64px + max(36px,3.3vw))}
+.pad.fr{padding-bottom:calc(48px + max(36px,3.3vw))}
 .eq{display:flex;align-items:center;gap:10px}
 .eq .av{width:clamp(48px,13vw,84px);height:auto;flex-shrink:0}
 .eqk,.eqo{font-size:clamp(28px,8vw,64px);white-space:nowrap}
@@ -100,7 +100,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .paper{position:absolute;left:0;right:0;bottom:calc(100% - 3px);height:max(36px,3.3vw);background:var(--paper) center bottom/cover no-repeat;pointer-events:none}
 .black{background:var(--black);color:#fff}
 .offwhite{background:var(--off)}
-.pad{padding-block:64px}
+.pad{padding-block:48px}
 .h2{font-size:clamp(44px,6vw,88px)}
 .d em{font-style:normal}
 .c-lime{color:var(--lime)}.c-violet{color:var(--violet)}.c-red{color:var(--red)}
@@ -139,7 +139,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .coach b{display:block;font:900 clamp(24px,2.2vw,30px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
 .coach .role{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#c8141c;margin-top:8px}
 .coach p{font-size:14px;line-height:1.55;margin-top:12px;color:rgba(0,0,0,.72)}
-.safe{max-width:1040px;margin-top:88px}
+.safe{max-width:1040px;margin-top:64px}
 .safe ul{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}
 .safe li{display:flex;gap:14px;align-items:center}
 .safe li span:last-child{font-size:16px;font-weight:700;line-height:1.35;color:#fff}
@@ -156,7 +156,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .faq details p{font-size:16px;line-height:1.6;padding:0 0 18px;color:var(--ink);max-width:62ch}
 
 /* End CTA */
-.endcta{margin-top:40px;min-height:64px;font-size:19px}
+.endcta{margin-top:32px;min-height:64px;font-size:19px}
 .ask{font-size:15px;text-align:center;margin-top:20px;color:rgba(0,0,0,.7)}
 .ask a{font-weight:800;color:var(--black);display:inline-flex;min-height:44px;align-items:center}
 .closed{font-size:16px;font-weight:700}
@@ -186,10 +186,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .offer{padding-top:44px}
  .offer-wrap,.offer{max-width:460px}
  .offer-wrap{margin-top:84px}
- .pad{padding-block:112px}
+ .pad{padding-block:80px}
  .two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center}
  .eqwrap{margin-top:0}
- .pad.fr{padding-bottom:calc(112px + max(36px,3.3vw))}
+ .pad.fr{padding-bottom:calc(80px + max(36px,3.3vw))}
  .costs .sched{gap:6px}.costs .sched li{padding:16px 10px 14px}.costs .sched b{font-size:40px;margin-top:6px}.costs .tot b{font-size:40px}
  .eq{gap:14px}.eqk,.eqo,.mo b{font-size:clamp(40px,4.3vw,64px)}.mo{padding:10px 16px 12px}
  .tl{grid-template-columns:repeat(6,1fr);border-left:0;border-top:3px solid var(--black);margin:48px 0 0;padding-top:0}
@@ -204,7 +204,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <body>
 <!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
 <header class="hero">
-<div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Save their spot</a><!--/IF:open--></nav></div>
+<div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Sign up</a><!--/IF:open--></nav></div>
 <div class="hero-in wrap">
 <h1 class="d h1">A coach. A team.<br><em>A season to play for.</em></h1>
 <div class="offer-wrap">
@@ -283,7 +283,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <details><summary>What if no team fits?</summary><p>We hand-pick every team by age and skill. If we can't place your kid, you get every dollar back.</p></details>
 <details><summary>What do they need?</summary><p>A computer that runs League of Legends (it's free), a headset with a mic, and solid internet. Our coach will help your player make sure they have everything set up before the first practice.</p></details>
 </div>
-<!--IF:open--><a class="btn endcta" href="{{SIGNUP}}">Save their spot for {{FIRST}}</a><!--/IF:open-->
+<!--IF:open--><a class="btn endcta" href="{{SIGNUP}}">Join Season 01</a><!--/IF:open-->
 <p class="ask" style="padding-bottom:56px">Questions first? <a href="sms:{{SMS}}">Text our founder</a></p></div></div></section>
 </main>
 <!--IF:open--><aside class="stick" id="stick" aria-label="Sign up"><div class="wrap"><p>Join Season 01 for {{FIRST}}</p><a class="btn" href="{{SIGNUP}}">Save their spot</a></div></aside>
