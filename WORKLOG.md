@@ -5,6 +5,14 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-03: season1-commit brought current, tournament date fixed
+
+- Merged `origin/main` into `season1-commit` (6 commits behind, including the 10-29 release cleanup). Clean merge; `public/roadshow`, `public/review.html` and `public/ads` stay out.
+- Tournament month: the schedule is Sat Apr 17, 2027 (overflow Apr 18), not May. `/season1/join/b` finale tile now reads April and its timeline reads Mid Apr; the shared confirmation timeline reads Mid Apr. `/season1/join` (A) already said April.
+- Klaviyo drafts `VYzgSh` and `RN8KSq`: finale tile set to April; every link now points to `/season1/join/b` with `utm_source=klaviyo&utm_medium=email&utm_campaign=season1-early-access` and `utm_content=email-a` / `email-b`, so orders record which email they came from. B must be on `main` before the campaign sends.
+- Tests: all non-DB season1 suites pass; DB and integration suites need a database, as before.
+
+---
 ## Aaron (via Claude), 2026-11-02: join page B, sign-up and confirmation copy, early-access email A/B
 
 Branch `season1-commit`. Karlin asked for price transparency and signed off on testing two early-access email layouts. Full handoff and Jamie's QA list: `docs/season1-commit/10-join-b-and-email-ab-handoff.md`.
