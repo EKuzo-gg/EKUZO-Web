@@ -90,6 +90,38 @@ export function shareUrl(livemode: boolean, code: string | null, recordedOrigin:
 
 export const dollars = (cents: number): number => Math.round(cents) / 100;
 
+/** The `src` values the Committed event carries. */
+export type EventSrc = "friend" | "karlin" | "ad" | "email" | "direct";
+
+const PAID_MEDIUMS_SRC = new Set(["paid", "cpc", "ppc", "paid_social"]);
+const PAID_SOURCES_SRC = new Set(["meta", "facebook", "fb", "ig", "instagram"]);
+const lowSrc = (s: unknown) => String(s ?? "").trim().toLowerCase();
+
+/**
+ * The order's source for the Committed event (11-03: every event so far had a
+ * blank `src`, because most orders arrive without `?src=`). Same first-match
+ * order as the Discord Source line (senders/discord.ts formatSource), minus
+ * the Klaviyo ad-name lookup, except that an email click comes before a paid
+ * click: friend, karlin, email, a paid last click, a src of ad, a paid first
+ * touch, then direct.
+ */
+export function eventSrc(
+  o: Pick<OrderCtx, "src" | "invited" | "utmSource" | "utmMedium" | "utmContent" | "firstTouch">,
+): EventSrc {
+  const src = lowSrc(o.src);
+  if (o.invited || src === "friend") return "friend";
+  if (src === "karlin") return "karlin";
+  // An email click wins over a paid one, so a stale Meta utm_source can never
+  // turn an offer-email order (src=email, utm_medium=email) into "ad".
+  if (lowSrc(o.utmMedium) === "email" || src === "email") return "email";
+  const paidClick =
+    PAID_MEDIUMS_SRC.has(lowSrc(o.utmMedium)) || (PAID_SOURCES_SRC.has(lowSrc(o.utmSource)) && lowSrc(o.utmContent) !== "");
+  if (paidClick) return "ad";
+  if (src === "ad" || src.startsWith("ad_")) return "ad";
+  if (lowSrc(o.firstTouch).startsWith("paid_")) return "ad";
+  return "direct";
+}
+
 /** The ladder: this many friends makes the season free. */
 export const FRIENDS_TO_FREE = 4;
 

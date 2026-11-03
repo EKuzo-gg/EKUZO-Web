@@ -5,6 +5,15 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-03 (late afternoon): Klaviyo "Season 01 Committed" list sync, real `src` on the Committed event
+
+- **Committed list (`WsfsxW`):** after the "Season 01 Committed" event sends, the outbox upserts the payer's profile (`POST /api/profile-import`) and adds it to `WsfsxW`. A full refund (after the "Season 01 Refunded" event) removes it; a partial refund (one sibling) leaves the family on the list. Live orders only; team and test addresses never join (`@ekuzo.gg`, or starting `team+s1test`, `team+gstest`, `testy`). The Season 01 Waitlist list (`XGTv2F`) is never touched. A Klaviyo failure never fails the row, the receipt or the payment: it logs `klaviyo_list_add`/`klaviyo_list_remove` and posts a Discord ops alert with the order ref so the family is fixed by hand. Code: `senders/klaviyo.ts` (`setCommittedListMember`, `profileIdFor`, `isTeamTestEmail`), `outbox.ts` (`syncCommittedList`), `senders/discord.ts` (`formatListAlert`).
+- **`src` on the Committed event:** was blank on all 35 events because most orders arrive without `?src=`. Now `eventSrc()` (`senders/context.ts`) fills it with friend, karlin, ad, email or direct, in the Discord Source line's first-match order (minus the waitlist ad-name lookup). `utm_content` was already carried; the 11-04 offer email orders will read `src=email`, `utm_content=email-a|email-b`.
+- **Klaviyo, not code:** campaigns should exclude `WsfsxW` from now on. The 11-04 early-access A/B was already scheduled, so its audience is locked; Bobby (the one real payer) is off the waitlist, so it doesn't need it.
+- Review (fresh-eyes agent) fixes: the list add re-reads the order and skips a refunded one (add/remove race); the add and the removal run even when the event call fails (the row still retries); removal also fires when partial refunds add up to a refunded order; an email click wins over a stale paid click in `eventSrc`. Deferred: separate outbox rows for the list sync, so a slow Klaviyo can't push the Committed row past the 4 s drain budget (today it's recovered by stuck recovery, with the event deduped by unique_id).
+- Tests: new `lib/season1/__tests__/committedList.test.ts` (17 cases: src mapping, test filter, add/remove requests, error codes, alert without PII). Season 01 suite 379 of 379, typecheck and lint clean.
+
+---
 ## Aaron's Claude, 2026-11-03: /season1/join/jersey, the jersey ad landing page
 
 Branch `season1-commit`. New join variant for the Southie jersey ads (ad lab d19 to d21). Jamie does final QA before main.

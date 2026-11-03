@@ -176,6 +176,12 @@ export function formatOpsAlert(kind: string, paymentIntent: string | null, livem
   return `${tag(livemode)}Season 01 ops alert: ${ident(kind, 60) || "unknown"}${pi}`;
 }
 
+/** A Committed-list change that failed: the order ref so the family can be added or removed by hand. */
+export function formatListAlert(member: boolean, orderPublicId: string, err: string, livemode: boolean): string {
+  const action = member ? "add to" : "remove from";
+  return `${tag(livemode)}Season 01 ops alert: klaviyo_list_${member ? "add" : "remove"}_failed | order ${free(orderPublicId, 40)} | ${ident(err, 60)} | ${action} Season 01 Committed (WsfsxW) by hand`;
+}
+
 /** TEST webhook for test-mode rows, the live one for live rows. Unset means skipped. */
 export function webhookUrl(livemode: boolean): string | null {
   const v = livemode ? process.env.S1_DISCORD_WEBHOOK_URL : process.env.S1_DISCORD_WEBHOOK_URL_TEST;

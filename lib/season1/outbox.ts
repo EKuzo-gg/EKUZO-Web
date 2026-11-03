@@ -1,14 +1,16 @@
 import { getSql } from "./db";
 import { loadFriendCtx, loadOrderCtx } from "./outboxLoad";
 import { SenderError, type SendOutcome } from "./senders/context";
-import { adNameFor, formatCommit, formatFlag, formatOpsAlert, sendDiscord } from "./senders/discord";
+import { adNameFor, formatCommit, formatFlag, formatListAlert, formatOpsAlert, sendDiscord } from "./senders/discord";
 import { buildPurchaseEvent, sendMetaPurchase } from "./senders/meta";
 import {
   buildCommittedEvent,
   buildFriendJoinedEvent,
   buildRefundedEvent,
   sendKlaviyoEvent,
+  setCommittedListMember,
 } from "./senders/klaviyo";
+import { logStep } from "./rules";
 
 /**
  * Season 01 outbox sender (slice 3 contract). Rows are written by fulfil and
@@ -80,6 +82,32 @@ function referralIdOf(row: OutboxRow): string | null {
   return asId(row.payload?.referral_id) ?? asId(row.dedupe_key.split(":")[1]);
 }
 
+/**
+ * Committed-list membership (11-03): a side step after the Committed or full
+ * Refunded event. It never fails the row or the payment: a failure is logged
+ * and posted to the ops channel so the family is fixed by hand.
+ */
+export async function syncCommittedList(
+  ctx: { email: string; orderPublicId: string },
+  member: boolean,
+  livemode: boolean,
+): Promise<string> {
+  try {
+    const r = await setCommittedListMember(ctx.email, member, livemode);
+    logStep(member ? "klaviyo_list_add" : "klaviyo_list_remove", ctx.orderPublicId, true, r.outcome);
+    return r.outcome;
+  } catch (e) {
+    const code = errorCode(e);
+    logStep(member ? "klaviyo_list_add" : "klaviyo_list_remove", ctx.orderPublicId, false, code);
+    try {
+      await sendDiscord(formatListAlert(member, ctx.orderPublicId, code, livemode), livemode);
+    } catch {
+      // The alert is best effort; the log line above is the record.
+    }
+    return "failed";
+  }
+}
+
 /** Resolve one claimed row to a sender outcome. Throws SenderError or plain Error on failure. */
 async function dispatch(row: OutboxRow): Promise<SendOutcome> {
   const base = row.kind.split(":")[0];
@@ -97,7 +125,22 @@ async function dispatch(row: OutboxRow): Promise<SendOutcome> {
       if (ctx.status === "refunded" && (base === "klaviyo_committed" || base === "meta_purchase")) {
         return { outcome: "skipped_refunded" };
       }
-      if (base === "klaviyo_committed") return sendKlaviyoEvent(buildCommittedEvent(ctx), row.livemode);
+      if (base === "klaviyo_committed") {
+        let sent: SendOutcome | null = null;
+        let failure: unknown = null;
+        try {
+          sent = await sendKlaviyoEvent(buildCommittedEvent(ctx), row.livemode);
+        } catch (e) {
+          failure = e;
+        }
+        // The list add runs whatever the event did (a paying family is excluded from
+        // offers even if its receipt is still retrying), and re-reads the order first
+        // so a refund that landed meanwhile is never undone by a late add.
+        const fresh = await loadOrderCtx(ctx.orderPublicId).catch(() => null);
+        if (fresh && fresh.status !== "refunded") await syncCommittedList(ctx, true, row.livemode);
+        if (failure) throw failure;
+        return sent as SendOutcome;
+      }
       if (base === "meta_purchase") return sendMetaPurchase(buildPurchaseEvent(ctx), row.livemode);
       return sendDiscord(formatCommit(ctx, await adNameFor(ctx)), row.livemode);
     }
@@ -121,10 +164,21 @@ async function dispatch(row: OutboxRow): Promise<SendOutcome> {
       if (!ctx) throw new SenderError("order_not_found");
       if (ctx.livemode !== row.livemode) throw new SenderError("livemode_mismatch");
       const full = row.payload?.full === true;
-      return sendKlaviyoEvent(
-        buildRefundedEvent({ refundId, orderPublicId: ref, amountRefundedCents: cents, full, order: ctx }),
-        row.livemode,
-      );
+      let sent: SendOutcome | null = null;
+      let failure: unknown = null;
+      try {
+        sent = await sendKlaviyoEvent(
+          buildRefundedEvent({ refundId, orderPublicId: ref, amountRefundedCents: cents, full, order: ctx }),
+          row.livemode,
+        );
+      } catch (e) {
+        failure = e;
+      }
+      // A partial refund (one sibling) leaves the family committed; a full refund, or
+      // partial refunds that add up to the whole order, takes them off.
+      if (full || ctx.status === "refunded") await syncCommittedList(ctx, false, row.livemode);
+      if (failure) throw failure;
+      return sent as SendOutcome;
     }
     case "ops_alert": {
       const kind = asId(row.payload?.kind) ?? "ops_alert";

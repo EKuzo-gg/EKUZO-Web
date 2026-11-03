@@ -3,6 +3,7 @@ import {
   FRIENDS_TO_FREE,
   SenderError,
   dollars,
+  eventSrc,
   shareUrl,
   type FriendCtx,
   type OrderCtx,
@@ -85,7 +86,7 @@ export function buildCommittedEvent(o: OrderCtx): KlaviyoEventInput {
     jersey_eligible: o.jerseyEligible === true,
     lock_in_date: lockIn,
     refund_until: lockIn,
-    src: o.src ?? "",
+    src: eventSrc(o),
     offer_version: o.offerVersion,
     utm_source: o.utmSource ?? "",
     utm_medium: o.utmMedium ?? "",
@@ -196,6 +197,75 @@ export function toRequestBody(e: KlaviyoEventInput) {
       },
     },
   };
+}
+
+/** "Season 01 Committed" list: paying families, excluded from offer campaigns (11-03). */
+export const S1_COMMITTED_LIST_ID = "WsfsxW";
+
+/**
+ * Team and test addresses never join the Committed list: anything at
+ * ekuzo.gg, or starting team+s1test, team+gstest or testy (34 of the first
+ * 35 Committed events were team tests).
+ */
+export function isTeamTestEmail(email: string): boolean {
+  const e = String(email ?? "").trim().toLowerCase();
+  return e.endsWith("@ekuzo.gg") || /^(team\+s1test|team\+gstest|testy)/.test(e);
+}
+
+const PROFILE_ID_RE = /^[A-Za-z0-9]{1,64}$/;
+
+async function klaviyoCall(path: string, method: string, key: string, body: unknown): Promise<Response> {
+  try {
+    return await fetch(`https://a.klaviyo.com${path}`, {
+      method,
+      signal: AbortSignal.timeout(KLAVIYO_TIMEOUT_MS),
+      headers: {
+        Authorization: `Klaviyo-API-Key ${key}`,
+        "Content-Type": "application/json",
+        accept: "application/json",
+        revision: KLAVIYO_REVISION,
+      },
+      body: JSON.stringify(body),
+    });
+  } catch (err) {
+    throw new SenderError((err as Error)?.name === "TimeoutError" ? "klaviyo_timeout" : "klaviyo_network");
+  }
+}
+
+/** Upserts the profile by email and returns its id (the events endpoint returns no body). */
+export async function profileIdFor(email: string, key: string): Promise<string> {
+  const res = await klaviyoCall("/api/profile-import", "POST", key, {
+    data: { type: "profile", attributes: { email } },
+  });
+  const text = await res.text().catch(() => "");
+  if (!res.ok) throw new SenderError(`klaviyo_profile_http_${res.status}`);
+  let id: unknown = null;
+  try {
+    id = (JSON.parse(text) as { data?: { id?: unknown } })?.data?.id;
+  } catch {
+    id = null;
+  }
+  if (typeof id !== "string" || !PROFILE_ID_RE.test(id)) throw new SenderError("klaviyo_profile_no_id");
+  return id;
+}
+
+/**
+ * Adds the payer to (member true) or removes them from (false) the Committed
+ * list. Live orders only, never team or test addresses. Never touches the
+ * Season 01 Waitlist list: campaigns exclude Committed instead, and the
+ * waitlist record keeps the ad source the ads reads use.
+ */
+export async function setCommittedListMember(email: string, member: boolean, livemode: boolean): Promise<SendOutcome> {
+  if (!livemode || isTeamTestEmail(email)) return { outcome: "skipped_test" };
+  const key = process.env.KLAVIYO_PRIVATE_API_KEY;
+  if (!key) return { outcome: "skipped_no_config" };
+  const id = await profileIdFor(email, key);
+  const res = await klaviyoCall(`/api/lists/${S1_COMMITTED_LIST_ID}/relationships/profiles`, member ? "POST" : "DELETE", key, {
+    data: [{ type: "profile", id }],
+  });
+  await res.text().catch(() => "");
+  if (!res.ok) throw new SenderError(`klaviyo_list_http_${res.status}`);
+  return { outcome: "sent", detail: member ? "list_add" : "list_remove" };
 }
 
 /** Sends one event. Throws SenderError with a PII-free code on failure. */
