@@ -5,6 +5,21 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron's Claude, 2026-11-03: ad lab round 4, the jersey ad again
+
+`public/roadshow/ad-lab.html` on dev. Ad 11 (the jersey ad) is one of the better performers in Meta, so Round 4 adds three variations of it, built on the d11 template:
+
+- **d19, Southie jersey back:** team walk photo, the new Southie jersey back, same hook.
+- **d20, front and back:** no photo, both sides of the jersey, "Free for the first 100 families."
+- **d21, their team:** jersey front, "Their team. Their name. On a real jersey."
+- All three: pink headline accent (#EA1CA7), blue button (#034FFF) with white text, and the small top line reads "Youth gaming league · 2027" in white.
+- Meta copy preloaded (adnames d19-a-southie-back, d20-a-southie-pair, d21-a-southie-team). Links keep `ad=d11` so the landing hero still matches the jersey ad.
+- New embedded images: `southie-front`, `southie-back` (jersey renders) and `team-walk-hd` (the full-size team walk photo). The old `team-walk` image used by d9, d15 and d17 is unchanged.
+- Small hook: art classes now also take an optional `cls` from the entry (`${d.tpl||d.id}${d.cls?" "+d.cls:""}`). New CSS is scoped to `.s1j`; d11 renders pixel-identical to before.
+- Finals at 1080 in `public/ads/season1/` (d19 to d21, feed and story).
+- To confirm before running: photo release for the team walk photo, and whether "free for the first 100 families" fits where the ad points (the jersey offer ends Nov 30).
+
+---
 ## Jamie's Claude, 2026-10-30: Discord commit format
 
 Branch `season1-commit` (Relay). Jamie (13:17 CT) changed the #season01-commits message to `Season 01 commit | <n> kid|kids | Email: <payer email> | Location: <City>, <REGION> (time zone: <IANA tz>) | Source: <source>`. This replaces decision 9 of 10-29 (no email or location in Discord); noted in the header of `lib/season1/senders/discord.ts` and in `docs/season1-commit/final/02-decisions.md`. Kid names, ages, phone and amount stay out; `[TEST] ` prefix kept; referral flag and ops alert formats unchanged. Evidence: `docs/season1-commit/analytics/evidence/discord-format.md`.
