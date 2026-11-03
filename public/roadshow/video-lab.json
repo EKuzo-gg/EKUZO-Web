@@ -1,0 +1,103 @@
+{
+  "updated": "2026-11-03",
+  "paths": [
+    {
+      "id": "d16",
+      "label": "Season 01 · Their people",
+      "href": "/season1?ad=d16",
+      "note": "The landing version about finding their people. Best match for a squad video."
+    },
+    {
+      "id": "d15",
+      "label": "Season 01 · Online friends, real team",
+      "href": "/season1?ad=d15",
+      "note": "Same people every week, a real team instead of randoms."
+    },
+    {
+      "id": "d8",
+      "label": "Season 01 · Screen time, team time",
+      "href": "/season1?ad=d8",
+      "note": "For the parent who is worried about hours on screen."
+    },
+    {
+      "id": "d18",
+      "label": "Season 01 · Not a sports kid? Perfect.",
+      "href": "/season1?ad=d18",
+      "note": "For the kid who never clicked with team sports."
+    },
+    {
+      "id": "d1",
+      "label": "Season 01 · Default landing",
+      "href": "/season1",
+      "note": "The page with no ad version set."
+    }
+  ],
+  "videos": [
+    {
+      "id": "v1",
+      "title": "Squad up",
+      "by": "Hype cut by Jamie · 37 seconds · clean audio (v2)",
+      "status": "review",
+      "statusLabel": "In review",
+      "length": "0:37",
+      "poster": "video-posters/v1.jpg",
+      "drive": "https://drive.google.com/file/d/1IV8D9wjRJUVnAepw9bOvqrJMgLdyxZAh/view",
+      "note": "Kids and coaches on voice comms mid-match, then the win, then the end card: EKUZO, Your squad's on. It's vertical, so Reels and Stories run it as is. The feed cuts crop the top and bottom of the striped background.",
+      "source": {
+        "ratio": "9:16",
+        "size": "1080 × 1920",
+        "length": "0:37",
+        "audio": "Clean audio mix (v2), 48 kHz stereo",
+        "captions": "Burned in, word by word"
+      },
+      "files": {
+        "9x16": "video/v1/9x16.m4v",
+        "4x5": "video/v1/4x5.m4v",
+        "1x1": "video/v1/1x1.m4v"
+      },
+      "defaultPath": "d16",
+      "usedIn": {
+        "E0": "proposed: the welcome bridges back to the ad they saw, so it opens with a still from this video",
+        "E1": "proposed: a thumbnail of the video under \"how a season works\", linking to it"
+      },
+      "variants": [
+        {
+          "key": "a",
+          "label": "A · Your squad's on",
+          "hook": "",
+          "primary": "Your kid already plays. Season 01 gives them a squad: same teammates every week, a coach, a season to play for.",
+          "headline": "Your squad's on",
+          "cta": "Learn more",
+          "why": "Echoes the video's own end card, so the ad, the headline and the video all land on one line."
+        },
+        {
+          "key": "b",
+          "label": "B · Gaming either way",
+          "hook": "",
+          "primary": "They're gaming either way. What if it counted? Season 01 is a coached esports league for ages 9 to 17.",
+          "headline": "What if it counted?",
+          "cta": "Learn more",
+          "why": "Our lead parent line from the ad tests. The video brings the hype, the words bring the reassurance."
+        },
+        {
+          "key": "c",
+          "label": "C · Not just randoms",
+          "hook": "",
+          "primary": "Online friends are great. Teammates are better. Same squad every week, a coach, a season to play for.",
+          "headline": "Same squad, every week",
+          "cta": "Get updates",
+          "why": "For the parent who worries their kid only plays with strangers. Pairs with the Online friends landing."
+        }
+      ],
+      "flags": [
+        "In Reels the burned-in captions sit about 64 to 73% of the way down, partly under Instagram's account name and caption. Moving them up about a tenth of the frame clears it.",
+        "The last shot says \"Online or in the room\" over kids in a classroom. Season 01 is remote, so for Season 01 ads either end on the online shot or confirm in-person is part of the offer.",
+        "The 1:1 crop trims the top of the coach's camera circle around 0:09. 4:5 keeps everything."
+      ],
+      "crops": {
+        "4x5": "centered",
+        "1x1": "set a little low to keep the last caption"
+      }
+    }
+  ]
+}

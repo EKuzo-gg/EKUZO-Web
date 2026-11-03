@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>EKUZO Video Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=JetBrains+Mono:wght@500;700&family=Schibsted+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Video lab, dev-site version. Same dark wall as the Ad, Hero and Email labs.
+   Three panes: the videos, the video inside a real placement, and the desk where the ad copy, the landing path and the emails it leads into get set. */
+:root{
+  --wall:#0C0B0E; --panel:#17151B; --panel2:#1F1C24; --line:#2B2830; --text:#F3F1F5; --muted:#A39EAB; --dim:#6F6977;
+  --lime:#E0FF4E; --violet:#AE2CF2; --blue:#034FFF; --red:#F92524; --green:#7BD88F; --amber:#F5B14C; --sky:#5B8CFF;
+  --ui:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --display:"Big Shoulders Display","Arial Narrow",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--wall);color:var(--text);font:400 16px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+::selection{background:var(--lime);color:var(--wall)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+a{color:inherit;text-underline-offset:3px}
+
+/* Shared lab nav (same as the other labs) */
+.labnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 20px;background:rgba(12,11,14,.94);border-bottom:1px solid var(--line);font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.labnav b{color:var(--text);margin-right:10px;letter-spacing:.14em}
+.labnav a{color:var(--muted);text-decoration:none;padding:9px 12px;border-radius:999px;border:1px solid transparent}
+.labnav a:hover{color:var(--text);border-color:var(--line)}
+.labnav a[aria-current="page"]{color:var(--wall);background:var(--lime)}
+
+.wrap{max-width:1480px;margin:0 auto;padding:36px 20px 96px;display:flex;flex-direction:column;gap:32px}
+header{display:flex;flex-direction:column;gap:10px}
+h1{margin:0;font:900 clamp(52px,8vw,104px)/.86 var(--display);text-transform:uppercase;letter-spacing:.005em}
+.sub{margin:0;max-width:62ch;font:300 clamp(18px,1.6vw,21px)/1.45 var(--ui);color:var(--muted);text-wrap:pretty}
+.sub b{font-weight:600;color:var(--text)}
+
+.app{display:grid;grid-template-columns:240px minmax(0,1fr) minmax(0,420px);gap:28px;align-items:start}
+@media (max-width:1180px){.app{grid-template-columns:minmax(0,1fr) minmax(0,400px)}.list{grid-column:1 / -1;position:static!important;flex-direction:row!important;overflow-x:auto}.list .vrow{min-width:240px}}
+@media (max-width:820px){.app{grid-template-columns:minmax(0,1fr)}}
+
+h2.pane{margin:0 0 10px;font:600 15px/1.2 var(--ui);color:var(--muted)}
+
+/* Video list */
+.list{display:flex;flex-direction:column;gap:6px;position:sticky;top:76px}
+.vrow{appearance:none;width:100%;text-align:left;display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 12px;align-items:center;background:none;border:1px solid transparent;border-radius:14px;padding:8px;cursor:pointer;color:var(--text)}
+.vrow:hover{border-color:var(--line)}
+.vrow[aria-current="true"]{background:var(--panel);border-color:var(--line)}
+.vrow .thumb{grid-row:1 / 3;width:56px;aspect-ratio:9/16;border-radius:8px;background:var(--panel2) center/cover no-repeat;border:1px solid var(--line)}
+.vrow .t{font:600 15px/1.25 var(--ui)}
+.vrow .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:400 13px/1.2 var(--ui);color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--ui);padding:5px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st-live{color:var(--green)} .st-approved{color:var(--sky)} .st-review{color:var(--amber)} .st-draft{color:var(--lime)} .st-planned{color:var(--dim)} .st-waiting{color:var(--dim)}
+
+/* Stage */
+.stage{display:flex;flex-direction:column;gap:16px;min-width:0}
+.stagebar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:space-between}
+.stagebar h2{margin:0;font:900 clamp(30px,3.4vw,48px)/.92 var(--display);text-transform:uppercase;text-wrap:balance}
+.by{margin:4px 0 0;font:300 16px/1.4 var(--ui);color:var(--muted)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{appearance:none;border:0;background:none;color:var(--muted);font:600 13px/1 var(--ui);padding:10px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+.seg button:hover{color:var(--text)}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--wall)}
+.toolrow{display:flex;flex-wrap:wrap;gap:16px;align-items:center;color:var(--muted);font:400 14px/1.3 var(--ui)}
+.toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;min-height:40px}
+.toggle input{accent-color:var(--lime);width:18px;height:18px}
+.focus{display:inline-flex;align-items:center;gap:10px}
+.focus input{accent-color:var(--lime);width:160px}
+.focus[hidden]{display:none}
+
+.viewer{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:1320px){.viewer{grid-template-columns:minmax(0,1fr)}}
+
+/* Phone */
+.phone{width:100%;max-width:360px;background:#000;border-radius:38px;padding:10px;border:1px solid var(--line);box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.screen{position:relative;border-radius:30px;overflow:hidden;background:#000;aspect-ratio:9/19.5;display:flex;flex-direction:column}
+.screen.feed{background:#fff;color:#0f1419}
+.media{position:relative;overflow:hidden;background:#111}
+.media video,.media img{display:block;width:100%;height:100%;object-fit:cover}
+.media .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font:400 14px/1.45 var(--ui);background:repeating-linear-gradient(135deg,#141217 0 14px,#18161c 14px 28px)}
+.media .none b{display:block;color:var(--text);font-weight:600;margin-bottom:4px}
+.playbtn{position:absolute;inset:auto auto 14px 14px;z-index:5;appearance:none;border:0;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;width:40px;height:40px;display:grid;place-items:center;cursor:pointer}
+.playbtn svg{width:18px;height:18px}
+.safe{position:absolute;inset:0;pointer-events:none;z-index:3;display:none}
+.showsafe .safe{display:block}
+.safe i{position:absolute;left:0;right:0;background:rgba(249,37,36,.28);border:1px dashed rgba(255,255,255,.6)}
+.safe i.top{top:0;height:14%;border-top:0}
+.safe i.bot{bottom:0;height:35%;border-bottom:0}
+.safe i.side{top:14%;bottom:35%;width:6%;right:0;left:auto;border-right:0}
+.safe span{position:absolute;left:8px;font:600 11px/1.2 var(--ui);color:#fff;text-shadow:0 1px 2px #000}
+
+/* Reels chrome */
+.reel{position:absolute;inset:0}
+.reel .media{position:absolute;inset:0}
+.reel .rail{position:absolute;right:10px;bottom:120px;z-index:4;display:flex;flex-direction:column;gap:18px;align-items:center;color:#fff}
+.reel .rail svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.reel .cap{position:absolute;left:12px;right:56px;bottom:62px;z-index:4;color:#fff;font:400 13px/1.35 Arial,Helvetica,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.reel .acct{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px}
+.reel .acct small{font-weight:400;opacity:.85}
+.av{width:28px;height:28px;border-radius:50%;background:#F92524 url("/images/bird-logo.png") center/64% no-repeat;border:1.5px solid #fff;flex:none}
+.reel .txt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.reel .ctabar{position:absolute;left:10px;right:10px;bottom:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:8px;background:rgba(255,255,255,.96);color:#111;border-radius:8px;padding:10px 12px;font:700 13px/1.2 Arial,Helvetica,sans-serif}
+.reel .ctabar svg{width:14px;height:14px;stroke:#111;fill:none;stroke-width:2.2}
+.hookover{position:absolute;left:8%;right:8%;top:16%;z-index:4;text-align:center;color:#fff;font:900 30px/.95 var(--display);text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.55);text-wrap:balance;opacity:0;transition:opacity .25s var(--ease)}
+.hookover.on{opacity:1}
+
+/* Feed chrome */
+.feedtop{display:flex;align-items:center;gap:8px;padding:12px 12px 8px;font:700 13px/1.2 Arial,Helvetica,sans-serif}
+.feedtop .av{border-color:#ddd;width:30px;height:30px}
+.feedtop small{display:block;font-weight:400;color:#65676b}
+.feedtxt{padding:0 12px 8px;font:400 13px/1.35 Arial,Helvetica,sans-serif;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.feedcta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:#f0f2f5;font:400 12px/1.25 Arial,Helvetica,sans-serif;color:#65676b}
+.feedcta b{display:block;color:#0f1419;font-size:14px}
+.feedcta .btn{flex:none;background:#e4e6eb;color:#0f1419;font-weight:700;font-size:13px;padding:8px 12px;border-radius:6px}
+.feedrest{flex:1;background:#fff;padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+.feedrest i{display:block;height:10px;border-radius:5px;background:#eceef1}
+
+/* Cut info beside the phone */
+.cutinfo{display:flex;flex-direction:column;gap:14px;max-width:46ch}
+.cutinfo h3{margin:0;font:600 18px/1.25 var(--ui)}
+.cutinfo p{margin:0;color:var(--muted);text-wrap:pretty}
+.facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font:400 14px/1.35 var(--ui)}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.ok{color:var(--green)} .warn{color:var(--amber)}
+.flags{border:1px solid rgba(245,177,76,.4);border-radius:14px;padding:14px 16px;background:rgba(245,177,76,.06)}
+.flags h4{margin:0 0 8px;font:600 15px/1.3 var(--ui);color:var(--amber)}
+.flags ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;color:var(--text);font:400 14px/1.45 var(--ui)}
+.dl{display:flex;flex-wrap:wrap;gap:8px}
+.btn{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 14px/1 var(--ui);text-decoration:none;cursor:pointer;transition:border-color .15s var(--ease),background .15s var(--ease)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--lime);border-color:var(--lime);color:var(--wall)}
+.btn.primary:hover{background:#ecff8a}
+.btn[aria-disabled="true"],.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Desk */
+.desk{display:flex;flex-direction:column;gap:22px;min-width:0}
+.block{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.block h3{margin:0;font:600 17px/1.25 var(--ui)}
+.block .hint{margin:-8px 0 0;color:var(--muted);font:400 14px/1.45 var(--ui)}
+.variants{display:flex;gap:6px;flex-wrap:wrap}
+.variants button{appearance:none;border:1px solid var(--line);background:var(--wall);color:var(--muted);border-radius:999px;padding:10px 14px;font:600 14px/1 var(--ui);cursor:pointer;min-height:42px}
+.variants button:hover{color:var(--text)}
+.variants button[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--wall)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.field .lab{font:500 13px/1.2 var(--ui);color:var(--muted)}
+.field textarea,.field input,.field select{width:100%;background:var(--wall);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font:400 15px/1.45 var(--ui);resize:vertical}
+.field textarea:focus,.field input:focus,.field select:focus{border-color:var(--lime);outline:none}
+.count{font:400 12px/1 var(--ui);color:var(--dim);align-self:flex-end;font-variant-numeric:tabular-nums}
+.count.over{color:var(--amber)}
+.why{margin:0;padding:12px 14px;border-radius:12px;background:var(--panel2);color:var(--muted);font:400 14px/1.5 var(--ui)}
+.why b{color:var(--text);font-weight:600}
+.utm{display:flex;gap:8px;align-items:stretch}
+.utm code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--wall);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 12px/1.4 var(--mono);color:var(--muted)}
+
+/* Thread */
+.thread{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.thread li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:0 12px;position:relative;padding-bottom:14px}
+.thread li::before{content:"";position:absolute;left:10px;top:20px;bottom:0;width:2px;background:var(--line)}
+.thread li:last-child{padding-bottom:0}
+.thread li:last-child::before{display:none}
+.thread .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);background:var(--wall);margin-top:1px;z-index:1}
+.thread li.ad .dot{background:var(--lime);border-color:var(--lime)}
+.thread li.page .dot{background:var(--sky);border-color:var(--sky)}
+.thread li.uses .dot{border-color:var(--lime)}
+.thread .t{font:600 15px/1.3 var(--ui);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.thread .t a{text-decoration:none}
+.thread .t a:hover{text-decoration:underline}
+.thread .d{font:400 14px/1.45 var(--ui);color:var(--muted)}
+.thread .d b{color:var(--lime);font-weight:600}
+
+/* Notes */
+.feel{display:flex;flex-wrap:wrap;gap:6px}
+.feel button{appearance:none;border:1px solid var(--line);background:var(--wall);color:var(--muted);border-radius:999px;padding:10px 14px;font:600 14px/1 var(--ui);cursor:pointer;min-height:42px}
+.feel button[aria-pressed="true"]{border-color:var(--lime);color:var(--lime)}
+.status{min-height:1.4em;margin:0;font:400 14px/1.4 var(--ui);color:var(--muted)}
+.status.good{color:var(--green)} .status.bad{color:var(--amber)}
+
+/* How it works */
+.how{border-top:1px solid var(--line);padding-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px}
+@media (max-width:820px){.how{grid-template-columns:minmax(0,1fr)}}
+.how h2{margin:0;font:900 34px/.95 var(--display);text-transform:uppercase;grid-column:1 / -1}
+.how p{margin:0;color:var(--muted);max-width:62ch;text-wrap:pretty}
+.how p b{color:var(--text);font-weight:600}
+
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<nav class="labnav" aria-label="Roadshow"><b>EKUZO Roadshow</b><a href="index.html">← Hub</a><a href="ad-lab.html">Ad lab</a><a href="hero-lab.html">Hero lab</a><a href="email-lab.html">Email lab</a><a href="video-lab.html" aria-current="page">Video lab</a></nav>
+
+<div class="wrap">
+  <header>
+    <h1>Video lab</h1>
+    <p class="sub">Every video we want to run, seen the way a parent scrolls past it. Pick the cut for each placement, set the words around it, and follow where the click goes: the landing page, then Karlin's emails. When it feels right, press <b>Send my notes</b>.</p>
+  </header>
+
+  <div class="app">
+    <aside aria-labelledby="listh">
+      <h2 class="pane" id="listh">Videos</h2>
+      <div class="list" id="list"><p class="by">Loading…</p></div>
+    </aside>
+
+    <section class="stage" aria-labelledby="vTitle">
+      <div class="stagebar">
+        <div>
+          <h2 id="vTitle">Video</h2>
+          <p class="by" id="vBy"></p>
+        </div>
+        <div class="seg" role="group" aria-label="Placement" id="placeSeg">
+          <button type="button" data-p="reels" aria-pressed="true">Reels and Stories</button>
+          <button type="button" data-p="feed45" aria-pressed="false">Feed 4:5</button>
+          <button type="button" data-p="feed11" aria-pressed="false">Feed 1:1</button>
+        </div>
+      </div>
+      <div class="toolrow">
+        <label class="toggle"><input type="checkbox" id="safeT"> Show where Instagram covers the video</label>
+        <label class="toggle"><input type="checkbox" id="hookT" checked> Show the opening line</label>
+        <label class="focus" id="focusW" hidden>Crop position <input type="range" id="focusR" min="0" max="100" value="50" aria-describedby="focusV"> <span id="focusV">Center</span></label>
+      </div>
+
+      <div class="viewer">
+        <div class="phone"><div class="screen" id="screen"></div></div>
+        <div class="cutinfo" id="cutinfo"></div>
+      </div>
+    </section>
+
+    <section class="desk" aria-label="Ad words, landing path and emails">
+      <div class="block" id="copyBlock">
+        <h3>The words around it</h3>
+        <p class="hint">Pick a version, or rewrite it. The phone updates as you type.</p>
+        <div class="variants" role="group" aria-label="Copy version" id="varSeg"></div>
+        <div class="field"><label for="fHook">Extra line over the first 3 seconds (optional)</label><input id="fHook" maxlength="60"><span class="count" id="cHook"></span></div>
+        <div class="field"><label for="fPrimary">Primary text</label><textarea id="fPrimary" rows="3"></textarea><span class="count" id="cPrimary"></span></div>
+        <div class="field"><label for="fHead">Headline</label><input id="fHead"><span class="count" id="cHead"></span></div>
+        <div class="field"><label for="fCta">Button</label><select id="fCta"><option>Learn more</option><option>Sign up</option><option>Subscribe</option><option>Get updates</option></select></div>
+        <p class="why" id="why"></p>
+      </div>
+
+      <div class="block">
+        <h3>Where the click goes</h3>
+        <div class="field"><label for="fPath">Landing path</label><select id="fPath"></select></div>
+        <div class="utm"><code id="utm"></code><button type="button" class="btn" id="copyUtm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg>Copy</button></div>
+        <a class="btn" id="openPath" href="/season1" target="_blank" rel="noopener">Open the landing page<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+
+      <div class="block">
+        <h3>Then what they get</h3>
+        <p class="hint">What a parent sees after they join the waitlist from this ad. Emails marked as using the video link back to it.</p>
+        <ol class="thread" id="thread"></ol>
+      </div>
+
+      <div class="block" id="notesBlock">
+        <h3>Your notes</h3>
+        <div class="field"><label for="nName">Your name</label><input id="nName" autocomplete="name"></div>
+        <div class="field"><span class="lab" id="feelL">Is this one ready to run?</span><div class="feel" role="group" aria-labelledby="feelL" id="feel"><button type="button" data-v="Run it" aria-pressed="false">Run it</button><button type="button" data-v="Close" aria-pressed="false">Close, small fixes</button><button type="button" data-v="Not yet" aria-pressed="false">Not yet</button></div></div>
+        <div class="field"><label for="nNote">Notes</label><textarea id="nNote" rows="4" placeholder="What would you change? Which version and placement do you like best?"></textarea></div>
+        <button type="button" class="btn primary" id="send">Send my notes</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="how" aria-labelledby="howh">
+    <h2 id="howh">How this works</h2>
+    <p><b>One video, three placements.</b> Reels and Stories show the full vertical video. The 4:5 and 1:1 feed cuts crop it. Use the crop position to keep faces in frame, and the cut gets exported that way.</p>
+    <p><b>The red bands are approximate.</b> Instagram puts the account name, caption and button over the bottom third and its controls along the top and right. Keep text and faces out of those areas.</p>
+    <p><b>The click lands on an existing Season 01 page.</b> The link carries <code>utm_content</code> with the video and version, so Jamie can see which cut brought each parent in.</p>
+    <p><b>Notes stay in your browser until you send them.</b> Send my notes sends Aaron your name, your call, your note, and the version, placement, crop and copy you had set. Nothing goes live from this page.</p>
+  </section>
+</div>
+
+<form name="video-lab-notes" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="reviewer"><input name="video"><input name="verdict"><textarea name="note"></textarea><textarea name="setup_json"></textarea>
+</form>
+
+<script>
+(()=>{
+"use strict";
+const KEY="ekuzo.videolab.v1.";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(KEY+k);return v==null?d:JSON.parse(v)}catch(_){return d}},set(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v))}catch(_){}}};
+
+const ICON={
+  play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>',
+  pause:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor" stroke="none"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.1A8 8 0 1 1 20 12z"/></svg>',
+  send:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>'
+};
+const PLACE={
+  reels:{name:"Reels and Stories",ratio:"9:16",size:"1080 × 1920",file:"9x16"},
+  feed45:{name:"Feed 4:5",ratio:"4:5",size:"1080 × 1350",file:"4x5"},
+  feed11:{name:"Feed 1:1",ratio:"1:1",size:"1080 × 1080",file:"1x1"}
+};
+
+let DATA=null, EMAILS=[], cur=null, place=store.get("place","reels"), vi=0, feel="";
+
+function vstate(){return store.get("v:"+cur.id,{variant:0,focus:50,edits:{},path:cur.defaultPath})}
+function saveV(s){store.set("v:"+cur.id,s)}
+function copyNow(){const s=vstate(),base=cur.variants[s.variant]||cur.variants[0],e=s.edits[s.variant]||{};return Object.assign({},base,e)}
+
+async function boot(){
+  try{
+    const [v,e]=await Promise.all([fetch("video-lab.json",{cache:"no-cache"}).then(r=>r.json()),fetch("email-lab.json",{cache:"no-cache"}).then(r=>r.json()).catch(()=>({emails:[]}))]);
+    DATA=v; EMAILS=(e.emails||[]).slice().sort((a,b)=>a.order-b.order);
+  }catch(err){$("#list").innerHTML='<p class="by">The video list did not load. Refresh to try again.</p>';return}
+  $("#nName").value=store.get("name","");
+  $("#nNote").value=store.get("note","");
+  const want=(location.hash||"").slice(1)||store.get("cur",DATA.videos[0].id);
+  pick(DATA.videos.find(x=>x.id===want)||DATA.videos[0]);
+}
+
+function renderList(){
+  $("#list").innerHTML=DATA.videos.map(v=>`<button type="button" class="vrow" data-id="${esc(v.id)}" aria-current="${v.id===cur.id}">
+    <span class="thumb" style="${v.poster?`background-image:url('${esc(v.poster)}')`:""}"></span>
+    <span class="t">${esc(v.title)}</span>
+    <span class="meta"><span class="chip st-${esc(v.status)}">${esc(v.statusLabel||v.status)}</span>${v.length?esc(v.length):""}</span></button>`).join("");
+  $("#list").querySelectorAll(".vrow").forEach(b=>b.addEventListener("click",()=>pick(DATA.videos.find(x=>x.id===b.dataset.id))));
+}
+
+function pick(v){
+  cur=v; store.set("cur",v.id); history.replaceState(null,"","#"+v.id);
+  renderList();
+  $("#vTitle").textContent=v.title;
+  $("#vBy").textContent=v.by||"";
+  $("#varSeg").innerHTML=v.variants.map((x,i)=>`<button type="button" data-i="${i}" aria-pressed="false">${esc(x.label)}</button>`).join("");
+  $("#varSeg").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{const s=vstate();s.variant=+b.dataset.i;saveV(s);fillCopy();draw()}));
+  $("#fPath").innerHTML=DATA.paths.map(p=>`<option value="${esc(p.id)}">${esc(p.label)}</option>`).join("");
+  fillCopy(); setPlace(place);
+}
+
+function fillCopy(){
+  const s=vstate(),c=copyNow();
+  $("#varSeg").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.i===s.variant)));
+  $("#fHook").value=c.hook||""; $("#fPrimary").value=c.primary||""; $("#fHead").value=c.headline||""; $("#fCta").value=c.cta||"Learn more";
+  $("#why").innerHTML=c.why?`<b>Why this version:</b> ${esc(c.why)}`:"";
+  $("#fPath").value=s.path||cur.defaultPath;
+  $("#focusR").value=s.focus; focusLabel();
+  counts(); link(); thread();
+}
+function counts(){
+  const lim=[["fHook","cHook",40],["fPrimary","cPrimary",125],["fHead","cHead",40]];
+  lim.forEach(([f,c,n])=>{const l=$("#"+f).value.length,el=$("#"+c);el.textContent=`${l} / ${n}${l>n?" · past this, Instagram shows …more":""}`;el.classList.toggle("over",l>n)});
+}
+["fHook","fPrimary","fHead","fCta"].forEach(id=>$("#"+id).addEventListener("input",()=>{
+  const s=vstate(),e=s.edits[s.variant]||{};
+  e.hook=$("#fHook").value;e.primary=$("#fPrimary").value;e.headline=$("#fHead").value;e.cta=$("#fCta").value;
+  s.edits[s.variant]=e;saveV(s);counts();draw(true);
+}));
+$("#fPath").addEventListener("change",()=>{const s=vstate();s.path=$("#fPath").value;saveV(s);link();thread()});
+
+function pathUrl(){
+  const s=vstate(),p=DATA.paths.find(x=>x.id===(s.path||cur.defaultPath))||DATA.paths[0];
+  const u=new URL(p.href,location.origin);
+  u.searchParams.set("utm_source","meta");u.searchParams.set("utm_medium","paid_social");u.searchParams.set("utm_campaign","season01_waitlist");
+  u.searchParams.set("utm_content",`${cur.id}_${(cur.variants[s.variant]||{}).key||"a"}_${PLACE[place].file}`);
+  return {u,p};
+}
+function link(){const {u}=pathUrl();$("#utm").textContent=u.pathname+u.search;$("#openPath").href=u.pathname+u.search}
+$("#copyUtm").addEventListener("click",async()=>{const {u}=pathUrl();try{await navigator.clipboard.writeText(u.href);$("#copyUtm").lastChild.textContent="Copied"}catch(_){$("#copyUtm").lastChild.textContent="Select and copy"}setTimeout(()=>{$("#copyUtm").lastChild.textContent="Copy"},1600)});
+
+function thread(){
+  const {p}=pathUrl(),c=copyNow();
+  const uses=cur.usedIn||{};
+  const rows=[`<li class="ad"><span class="dot"></span><div><div class="t">The ad</div><div class="d">${esc(cur.title)}, ${esc(PLACE[place].name)}. Button: ${esc(c.cta||"Learn more")}.</div></div></li>`,
+    `<li class="page"><span class="dot"></span><div><div class="t"><a href="${esc(p.href)}" target="_blank" rel="noopener">${esc(p.label)}</a></div><div class="d">${esc(p.note||"")}</div></div></li>`];
+  EMAILS.filter(e=>(e.status!=="planned"||uses[e.code])&&!/^Campaign/i.test(e.day||"")).forEach(e=>{
+    const u=uses[e.code];
+    rows.push(`<li class="${u?"uses":""}"><span class="dot"></span><div><div class="t"><a href="email-lab.html#${esc(e.code)}">${esc(e.code)} · ${esc(e.title)}</a><span class="chip st-${esc(e.status)}">${esc(e.status)}</span></div><div class="d">${esc(e.day)}${u?`. <b>Uses the video:</b> ${esc(u)}`:""}</div></div></li>`);
+  });
+  $("#thread").innerHTML=rows.join("");
+}
+
+/* Placement */
+$("#placeSeg").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>setPlace(b.dataset.p)));
+function setPlace(p){place=PLACE[p]?p:"reels";store.set("place",place);
+  $("#placeSeg").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.p===place)));
+  $("#focusW").hidden=place==="reels"||!!(cur.files||{})[PLACE[place].file]; $("#safeT").closest("label").hidden=place!=="reels";
+  draw(); link(); thread();
+}
+$("#safeT").addEventListener("change",()=>$("#screen").classList.toggle("showsafe",$("#safeT").checked));
+$("#hookT").addEventListener("change",()=>draw(true));
+$("#focusR").addEventListener("input",()=>{const s=vstate();s.focus=+$("#focusR").value;saveV(s);focusLabel();const m=$("#screen video,#screen img.still");if(m)m.style.objectPosition=`50% ${s.focus}%`});
+function focusLabel(){const f=+$("#focusR").value;$("#focusV").textContent=f<35?"Higher":f>65?"Lower":"Center"}
+
+function mediaHTML(){
+  const s=vstate(),f=cur.files||{},src=place==="reels"?f["9x16"]:(f[PLACE[place].file]||f["9x16"]);
+  const pos=place==="reels"?"50% 50%":`50% ${s.focus}%`;
+  if(!src) return `<div class="none"><div><b>Video not loaded yet</b>${esc(cur.missing||"Waiting on the file.")}</div></div>`;
+  return `<video playsinline muted loop preload="metadata" type="video/mp4" ${cur.poster?`poster="${esc(cur.poster)}"`:""} style="object-position:${pos}" src="${esc(src)}">${f.vtt?`<track kind="captions" srclang="en" label="English" src="${esc(f.vtt)}" default>`:""}</video>
+    <button type="button" class="playbtn" aria-label="Play">${ICON.play}</button>`;
+}
+function draw(textOnly){
+  const c=copyNow(),sc=$("#screen");
+  if(textOnly&&sc.dataset.place===place&&sc.dataset.vid===cur.id){
+    sc.querySelectorAll("[data-k]").forEach(el=>{el.textContent=c[el.dataset.k]||""});
+    const h=sc.querySelector(".hookover");if(h){h.textContent=c.hook||"";h.classList.toggle("on",$("#hookT").checked&&!!c.hook)}
+    return;
+  }
+  sc.dataset.place=place;sc.dataset.vid=cur.id;
+  const hook=`<div class="hookover${$("#hookT").checked&&c.hook?" on":""}">${esc(c.hook||"")}</div>`;
+  if(place==="reels"){
+    sc.className="screen"+($("#safeT").checked?" showsafe":"");
+    sc.innerHTML=`<div class="reel"><div class="media">${mediaHTML()}${hook}</div>
+      <div class="safe" aria-hidden="true"><i class="top"><span style="top:6px">Top 14%</span></i><i class="side"></i><i class="bot"><span style="top:6px">Bottom 35%</span></i></div>
+      <div class="rail" aria-hidden="true">${ICON.heart}${ICON.chat}${ICON.send}</div>
+      <div class="cap"><div class="acct"><span class="av"></span>ekuzo.gg <small>· Sponsored</small></div><div class="txt" data-k="primary">${esc(c.primary)}</div></div>
+      <div class="ctabar"><span data-k="cta">${esc(c.cta||"Learn more")}</span>${ICON.chev}</div></div>`;
+  }else{
+    sc.className="screen feed";
+    sc.innerHTML=`<div class="feedtop"><span class="av"></span><div>ekuzo.gg<small>Sponsored</small></div></div>
+      <div class="feedtxt" data-k="primary">${esc(c.primary)}</div>
+      <div class="media" style="aspect-ratio:${place==="feed45"?"4/5":"1/1"}">${mediaHTML()}${hook}</div>
+      <div class="feedcta"><div><span>ekuzo.gg</span><b data-k="headline">${esc(c.headline)}</b></div><span class="btn" data-k="cta">${esc(c.cta||"Learn more")}</span></div>
+      <div class="feedrest" aria-hidden="true"><i style="width:40%"></i><i style="width:85%"></i><i style="width:70%"></i></div>`;
+  }
+  const vid=sc.querySelector("video"),pb=sc.querySelector(".playbtn");
+  if(vid&&pb){
+    pb.addEventListener("click",()=>{vid.paused?vid.play():vid.pause()});
+    vid.addEventListener("play",()=>{pb.innerHTML=ICON.pause;pb.setAttribute("aria-label","Pause")});
+    vid.addEventListener("pause",()=>{pb.innerHTML=ICON.play;pb.setAttribute("aria-label","Play")});
+    vid.addEventListener("timeupdate",()=>{const h=sc.querySelector(".hookover");if(h&&$("#hookT").checked&&c.hook)h.classList.toggle("on",vid.currentTime<3.2)});
+  }
+  info();
+}
+function info(){
+  const P=PLACE[place],f=cur.files||{},have=!!f[P.file],src=cur.source||{};
+  const fit=place==="reels"?(src.ratio==="9:16"?'<span class="ok">Native, no crop</span>':'<span class="warn">Needs a vertical master</span>')
+    :(have?`<span class="ok">Cut exported${cur.crops&&cur.crops[P.file]?", "+esc(cur.crops[P.file]):""}</span>`:'<span class="warn">Preview crop only, cut not exported yet</span>');
+  $("#cutinfo").innerHTML=`<h3>${esc(P.name)}</h3>
+    <p>${esc(cur.note||"")}</p>
+    <dl class="facts"><dt>Shape</dt><dd>${P.ratio} · ${P.size}</dd><dt>Source</dt><dd>${esc(src.ratio||"?")} · ${esc(src.size||"?")}${src.length?" · "+esc(src.length):""}</dd><dt>This cut</dt><dd>${fit}</dd><dt>Captions</dt><dd>${src.captions?`<span class="ok">${esc(src.captions)}</span>`:(f.vtt?'<span class="ok">Caption file</span>':'<span class="warn">Not yet</span>')}</dd><dt>Sound</dt><dd>${esc(src.audio||"?")}</dd></dl>
+    ${(cur.flags||[]).length?`<div class="flags"><h4>To fix before it runs</h4><ul>${cur.flags.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+    <div class="dl">${Object.keys(PLACE).map(k=>{const u=f[PLACE[k].file];return u?`<a class="btn" href="${esc(u)}" download>${PLACE[k].ratio} file</a>`:`<span class="btn" aria-disabled="true">${PLACE[k].ratio} file</span>`}).join("")}${cur.drive?`<a class="btn" href="${esc(cur.drive)}" target="_blank" rel="noopener">Original in Drive</a>`:""}</div>`;
+}
+
+/* Notes */
+$("#feel").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{feel=b.dataset.v;$("#feel").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)))}));
+$("#nName").addEventListener("input",()=>store.set("name",$("#nName").value));
+$("#nNote").addEventListener("input",()=>store.set("note",$("#nNote").value));
+$("#send").addEventListener("click",async()=>{
+  const st=$("#status"),name=$("#nName").value.trim();
+  if(!name){st.className="status bad";st.textContent="Add your name so Aaron knows who it's from.";$("#nName").focus();return}
+  if(!feel&&!$("#nNote").value.trim()){st.className="status bad";st.textContent="Pick a call or write a note first.";return}
+  const s=vstate(),setup={video:cur.id,placement:place,version:(cur.variants[s.variant]||{}).label,crop:s.focus,copy:copyNow(),link:pathUrl().u.href};
+  const body=new URLSearchParams({"form-name":"video-lab-notes",reviewer:name,video:cur.title,verdict:feel,note:$("#nNote").value,setup_json:JSON.stringify(setup,null,1)});
+  $("#send").disabled=true;st.className="status";st.textContent="Sending…";
+  try{const r=await fetch("/roadshow/video-lab.html",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body});if(!r.ok)throw 0;
+    st.className="status good";st.textContent="Sent. Thanks, Aaron has it.";store.set("note","");$("#nNote").value="";
+  }catch(_){st.className="status bad";st.textContent="That didn't send. Your note is still here, try again in a minute."}
+  $("#send").disabled=false;
+});
+
+boot();
+})();
+</script>
+</body>
+</html>
