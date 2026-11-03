@@ -12,3 +12,11 @@
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+
+# Video Lab preview cuts are committed as .m4v (outside the mp4 LFS rule,
+# each under the 10MB guard). Serve them as mp4 so every browser plays them.
+[[headers]]
+  for = "/roadshow/video/*"
+  [headers.values]
+    Content-Type = "video/mp4"
+    X-Robots-Tag = "noindex"
