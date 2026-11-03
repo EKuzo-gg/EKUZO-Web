@@ -5,6 +5,12 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-03 (afternoon): release to main, /karlin lands on join B
+
+- Released `season1-commit` at `bd96389` to `main` (fast-forward, also saved as `release/season1-1103`): Aaron's 11-03 visual updates plus the 11-03 fixes below. No money-path code in the release.
+- `/karlin` (next.config.mjs, temporary 307) now goes to `/season1/join/b?src=karlin` instead of straight to signup, so Karlin's parents see the pricing page first. `src=karlin` carries from join B to signup, so attribution is unchanged.
+
+---
 ## Aaron (via Claude), 2026-11-03: "No toxic lobbies" replaces "Safe by design", rounded buttons
 
 Branch `season1-commit`.
