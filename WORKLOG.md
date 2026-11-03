@@ -5,6 +5,19 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Aaron's Claude, 2026-11-03: /season1/join/jersey, the jersey ad landing page
+
+Branch `season1-commit`. New join variant for the Southie jersey ads (ad lab d19 to d21). Jamie does final QA before main.
+
+- **What:** the jersey ad's hero on top of join B. Below the hero, everything is join B as is (same renderer, template vars, offer, friends, timeline, coaches, FAQ, sticky bar).
+- **Files:** `app/season1/join/jersey/route.ts` (copy of the B route pointing at the new template) and `app/season1/join/jersey/join-jersey.html`. New images in `public/images/season1/jersey/` (Southie front and back cutouts, team walk photo at 900 and 1600). `lib/season1/` untouched.
+- **Hero by ad:** reads `?ad=` in the browser. `d19` (default): team walk photo and jersey back, "Their gamer tag. On a real jersey." `d20`: front and back, no photo. `d21`: jersey front, "Their team. Their name. On a real jersey."
+- **Look:** black hero, pink accent line, blue buttons with white text (matches the ads), blue "Free jersey" tag, black sticky bar. The jersey clause and tag still sit in `IF:jersey`, so they drop after the Nov 30 cutoff.
+- **GA4:** `season1_join_view` carries `{variant:'jersey', ad}`.
+- **Checked:** rendered through `renderJoin` at 390 and 1440 for all three ads, no page errors. Repo tests not run in this session (no node_modules here); the route is a copy of B's with a new template path.
+- **After this ships:** point the d19 to d21 Meta links at `/season1/join/jersey?ad=d19` (and d20, d21) in the ad lab. They still use the waitlist landing `?ad=d11` until then.
+
+---
 ## Jamie's Claude, 2026-11-03 (afternoon): release to main, /karlin lands on join B
 
 - Released `season1-commit` at `bd96389` to `main` (fast-forward, also saved as `release/season1-1103`): Aaron's 11-03 visual updates plus the 11-03 fixes below. No money-path code in the release.
