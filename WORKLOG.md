@@ -5,6 +5,11 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
+
+- `app/season1/landing.html`: dropped the `mod` note ("If your kid seems lonely or down most days, talk with their doctor or a counselor too...") from the d15 and d16 entries in `T`. Jamie's call: not needed, and it risks Meta reading the page as health-related.
+- The `#mod` block stays hidden when `t.mod` is absent, so nothing else changes on those pages.
+
 ## Jamie's Claude, 2026-11-03 (evening): waitlist landing heroes for jersey ads d19, d20, d21
 
 - `/season1?ad=d19`, `?ad=d20`, `?ad=d21` now open with Aaron's round 4 ad-lab heroes (ad 11 with the Southie jersey: back with the team walk photo, front and back, front with the team walk photo) instead of falling back to d1. Everything below the hero is d11's page as is (same bridge copy, green form, Lead event), since d11 is the converter (57 Leads at $6.50 over the last 7 days) and the new ads run in the same Lead-optimized structure as d1 to d18.
