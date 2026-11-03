@@ -239,8 +239,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .btn,.offer .btn,.stick .btn,.nav .mini{background:var(--blue);color:#fff;box-shadow:none}
 .btn:hover,.stick .btn:hover{background:#0a3fd1}
 .offer .btn{box-shadow:none}
-.stick{background:var(--black)}
+.stick{background:var(--violet)}
 .stick p small{color:rgba(255,255,255,.72)}
+.stick .btn{background:#fff;color:var(--blue)}
+.stick .btn:hover{background:#eef2ff}
+/* Phones: the photo runs up behind the logo and Sign up (d20 has no photo, so its nav stays in flow) */
+@media (max-width:999px){
+ .jh:not([data-ad=d20]) > .wrap:not(.jh-in){position:absolute;left:0;right:0;z-index:6}
+ .jh-photo:after{background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.1) 18%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 55%,var(--black) 100%)}
+ .jh-photo img{aspect-ratio:1/1;object-position:50% 40%}
+}
 @media (min-width:1000px){
  .jh{min-height:0;padding-bottom:0}
  .jh-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:56px;align-items:center;padding-block:16px 140px}
@@ -257,6 +265,19 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .jh[data-ad=d20] .jh-art{height:min(430px,32vw);margin:0}
  .jh[data-ad=d20] .jh-front{left:0}.jh[data-ad=d20] .jh-back{right:0;left:auto;top:28px}
 }
+
+/* Headline: white line, then pink line, never more */
+.jh .h1 span,.jh .h1 em{white-space:nowrap}
+.jh[data-ad=d21] .h1{font-size:clamp(40px,11.6vw,124px)}
+@media (min-width:1000px){
+ .jh[data-ad=d21] .h1{font-size:clamp(56px,4.7vw,80px)}
+ /* Desktop: both sides of the jersey over the bottom of the photo */
+ .jh:not([data-ad=d20]) .jh-j{display:block;bottom:-190px;width:min(210px,15vw)}
+ .jh:not([data-ad=d20]) .jh-front{left:-56px;right:auto;transform:rotate(-7deg)}
+ .jh:not([data-ad=d20]) .jh-back{left:auto;right:-40px;bottom:-205px;transform:rotate(6deg)}
+ .jh:not([data-ad=d20]) .jh-in{padding-bottom:230px;align-items:start}
+ .jh:not([data-ad=d20]) .jh-copy{padding-top:24px}
+}
 </style>
 </head>
 <body>
@@ -271,7 +292,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <img class="jh-j jh-back" src="/images/season1/jersey/southie-back.webp" alt="A custom EKUZO jersey with the player's role and gamer tag on the back" width="846" height="1100">
 </div>
 <div class="jh-copy">
-<h1 class="d h1"><span class="t-tag">Their gamer tag.</span><span class="t-team">Their team.<br>Their name.</span> <em>On a real jersey.</em></h1>
+<h1 class="d h1"><span class="t-tag">Their gamer tag.</span><span class="t-team">Their team. Their name.</span> <em>On a real jersey.</em></h1>
 <p class="jh-sub">A coach, a team and a custom jersey with their gamer tag on the&nbsp;back.</p>
 <div class="offer-wrap">
 <!--IF:open--><!--IF:jersey--><p class="sticker"><b>Free jersey</b> <small>First 100 families, until {{JERSEY_SHORT}}</small></p><!--/IF:jersey--><!--/IF:open-->
