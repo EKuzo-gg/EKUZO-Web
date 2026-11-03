@@ -8,6 +8,7 @@
 ## Jamie's Claude, 2026-11-03 (afternoon): release to main, /karlin lands on join B
 
 - Released `season1-commit` at `bd96389` to `main` (fast-forward, also saved as `release/season1-1103`): Aaron's 11-03 visual updates plus the 11-03 fixes below. No money-path code in the release.
+- Join A and B: new FAQ "Is it safe?" after "Do we have to go anywhere?": "Every coach is background-checked, every practice is recorded, and you can drop in on any practice." Restores the three safety facts that left with "Safe by design"; canon added the same day in `ekuzo-faq-canon.md`.
 - `/karlin` (next.config.mjs, temporary 307) now goes to `/season1/join/b?src=karlin` instead of straight to signup, so Karlin's parents see the pricing page first. `src=karlin` carries from join B to signup, so attribution is unchanged.
 
 ---
