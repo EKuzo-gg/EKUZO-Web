@@ -10,6 +10,7 @@
 - Merged `origin/main` into `season1-commit` (6 commits behind, including the 10-29 release cleanup). Clean merge; `public/roadshow`, `public/review.html` and `public/ads` stay out.
 - Tournament month: the schedule is Sat Apr 17, 2027 (overflow Apr 18), not May. `/season1/join/b` finale tile now reads April and its timeline reads Mid Apr; the shared confirmation timeline reads Mid Apr. `/season1/join` (A) already said April.
 - Klaviyo drafts `VYzgSh` and `RN8KSq`: finale tile set to April; every link now points to `/season1/join/b` with `utm_source=klaviyo&utm_medium=email&utm_campaign=season1-early-access` and `utm_content=email-a` / `email-b`, so orders record which email they came from. B must be on `main` before the campaign sends.
+- Karlin's text line is now his Google Voice number, +1 832-271-0150 (was +1 832-443-8679): `OFFER.textKarlinSms` (join A and B, signup, confirmation, crew invite) plus the hard-coded links on the early-access, saved and season1 crew pages, and the two tests that pin it. Klaviyo emails carry no phone number, so nothing changed there.
 - Tests: all non-DB season1 suites pass; DB and integration suites need a database, as before.
 
 ---

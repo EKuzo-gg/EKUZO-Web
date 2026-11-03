@@ -45,7 +45,7 @@ describe("renderJoin", () => {
       assert.ok(!h.includes("/season1/join/signup"));
       assert.ok(!h.includes("Season 01 is open"));
       assert.ok(!h.includes("Spots are limited."));
-      assert.ok(h.includes('href="sms:+18324438679"'));
+      assert.ok(h.includes('href="sms:+18322710150"'));
     }
   });
   it("opens exactly at openAt", () => {

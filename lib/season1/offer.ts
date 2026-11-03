@@ -27,7 +27,7 @@ export const OFFER = {
   jerseyCutoffAt: "2026-11-30T23:59:59-08:00",
   lockInAt: "2026-12-31T23:59:59-08:00",
   closeAt: "2026-12-31T23:59:59-08:00",
-  textKarlinSms: "+18324438679",
+  textKarlinSms: "+18322710150",
   termsVersion: "s1-terms-2026-10-29",
   termsUrl: "/terms-of-service#season-01",
   privacyUrl: "/privacy-policy#season-01",

@@ -6,7 +6,7 @@ const ms = (iso: string) => Date.parse(iso);
 
 describe("OFFER config", () => {
   it("has the frozen values", () => {
-    assert.equal(OFFER.textKarlinSms, "+18324438679");
+    assert.equal(OFFER.textKarlinSms, "+18322710150");
     assert.equal(OFFER.firstKidCents, 10000);
     assert.equal(OFFER.siblingCents, 8000);
     assert.equal(OFFER.maxKidsPerOrder, 4);
