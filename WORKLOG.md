@@ -5,6 +5,15 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-03 (evening): waitlist landing heroes for jersey ads d19, d20, d21
+
+- `/season1?ad=d19`, `?ad=d20`, `?ad=d21` now open with Aaron's round 4 ad-lab heroes (ad 11 with the Southie jersey: back with the team walk photo, front and back, front with the team walk photo) instead of falling back to d1. Everything below the hero is d11's page as is (same bridge copy, green form, Lead event), since d11 is the converter (57 Leads at $6.50 over the last 7 days) and the new ads run in the same Lead-optimized structure as d1 to d18.
+- Ported from `public/roadshow/ad-lab.html` on dev: the `.s1j` round 4 CSS, the three `D` entries, `cls` support on the hero (the ad lab renders it the same way). Photos load from `/images/season1/jersey/` (Aaron's jersey page files) rather than inlined base64.
+- Checked: rendered d11 and d19 to d21 at 390 and 1440 in headless Chromium, no page errors, all hero images load, three forms present, ad id carried to attribution as for d11.
+- Not the jersey join page: `/season1/join/jersey` is a checkout page with no Lead event, so Lead-optimized ad sets can't learn from it.
+
+
+---
 ## Jamie's Claude, 2026-11-03 (late afternoon): Klaviyo "Season 01 Committed" list sync, real `src` on the Committed event
 
 - **Committed list (`WsfsxW`):** after the "Season 01 Committed" event sends, the outbox upserts the payer's profile (`POST /api/profile-import`) and adds it to `WsfsxW`. A full refund (after the "Season 01 Refunded" event) removes it; a partial refund (one sibling) leaves the family on the list. Live orders only; team and test addresses never join (`@ekuzo.gg`, or starting `team+s1test`, `team+gstest`, `testy`). The Season 01 Waitlist list (`XGTv2F`) is never touched. A Klaviyo failure never fails the row, the receipt or the payment: it logs `klaviyo_list_add`/`klaviyo_list_remove` and posts a Discord ops alert with the order ref so the family is fixed by hand. Code: `senders/klaviyo.ts` (`setCommittedListMember`, `profileIdFor`, `isTeamTestEmail`), `outbox.ts` (`syncCommittedList`), `senders/discord.ts` (`formatListAlert`).
