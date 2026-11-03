@@ -9,6 +9,7 @@
 
 Branch `season1-commit`.
 - `/season1/join` (A) and `/season1/join/b`: the "Safe by design" block under the coaches is replaced by Aaron's "No toxic lobbies. Ever." section. It has the moderated-servers lead, the "No trolling. No targeting. Crash-outs get coached." rule line and four lime-square bullets. Next to it, the hallway line sits on a violet cut-corner card in white and black. The layout is two columns from 1000px up and stacked below that. Colors are Season 01 (lime and violet on black) in place of the red in the source comp. The source comp's "Zero tolerance" eyebrow chip is left off, to match the other Season 01 section heads. The three safety facts it replaced (background-checked coaches, recorded sessions, parents can drop in) are no longer on either join page.
+- Follow-up: the hallway card was scaling with viewport width and grew too tall on desktop. Its type is now capped (`clamp(52px,4.6vw,68px)`), and from 1000px up it uses fixed line breaks matching the comp: "If it wouldn't / fly in a school / hallway, / it doesn't fly / here." Phones still wrap naturally.
 - Buttons: `.btn` gets `border-radius:4px` to match the main site's `Button.tsx` (`rounded-sm`, 4px in Tailwind v4). That covers join A, join B and thanks, and signup and confirmation move from 2px to 4px.
 
 ---

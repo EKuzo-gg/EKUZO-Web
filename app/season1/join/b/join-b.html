@@ -147,6 +147,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .safe li:before{content:"";position:absolute;left:0;top:.45em;width:10px;height:10px;background:var(--lime)}
 .quote{margin:48px 0 0;background:var(--violet);color:#fff;padding:40px 28px 48px;font-size:clamp(52px,6.4vw,96px);clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
 .quote span{display:block;color:var(--black)}
+.quote .qb{display:none}
 
 /* FAQ */
 .faq{margin-top:24px;border-top:2px solid var(--black)}
@@ -197,7 +198,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .tl li{padding:26px 16px 0 0}
  .tl li:before{left:0;top:-10px}
  .safe{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:72px;align-items:start}
- .quote{margin:0;padding:56px 44px 64px}
+ .quote{margin:0;padding:48px 40px 56px;font-size:clamp(52px,4.6vw,68px)}
+ .quote .qb{display:inline}
  .faqwrap{max-width:820px;margin-inline:auto}
 }
 @media (prefers-reduced-motion:reduce){.stat,.stat img,.coach,.coach img{transition:none}.stat:hover,.coach:hover,.stat:hover img,.coach:hover img{transform:none}.stick{transition:none}.faq summary:after{transition:none}}
@@ -269,7 +271,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <li>Sharing personal information, off-platform DMs, screenshots without consent</li>
 <li>Blame-casting, rage-quitting, or repeated behavior that hurts the team</li>
 </ul></div>
-<p class="d quote">If it wouldn&rsquo;t fly in a school hallway, <span>it doesn&rsquo;t fly here.</span></p>
+<p class="d quote">If it wouldn&rsquo;t<br class="qb"> fly in a school<br class="qb"> hallway, <span>it doesn&rsquo;t fly<br class="qb"> here.</span></p>
 </div></div></section>
 <section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
 <div class="wrap pad"><div class="faqwrap">
