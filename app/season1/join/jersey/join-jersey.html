@@ -292,6 +292,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .jh[data-ad=d20] .jh-art{height:auto}
  .jh[data-ad=d20] .jh-pair{position:relative;left:0;top:0;width:100%}
 }
+
+/* Desktop photo crop from Aaron's Figma (Nov 4): zoom ~1.22x, anchored to the bottom, fewer trees.
+   Figma image crop x 20.7% to 81.9%, y 18.3% to 100% of the 16:9 photo, in a 4:3 frame. */
+@media (min-width:1000px){
+ .jh-photo{aspect-ratio:4/3;overflow:hidden}
+ .jh-photo img{position:absolute;max-width:none;width:163.3%;height:auto;aspect-ratio:auto;object-fit:fill;left:-33.8%;top:-22.46%}
+}
 </style>
 </head>
 <body>
