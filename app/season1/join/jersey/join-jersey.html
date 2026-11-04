@@ -278,6 +278,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .jh:not([data-ad=d20]) .jh-in{padding-bottom:230px;align-items:start}
  .jh:not([data-ad=d20]) .jh-copy{padding-top:24px}
 }
+
+/* Desktop (Aaron's Figma, Nov 4): one front-and-back jersey image over the photo's lower-left corner */
+.jh-pair{display:none}
+@media (min-width:1000px){
+ .jh .jh-art .jh-j{display:none!important}
+ .jh-pair{display:block;position:absolute;z-index:2;left:-4.5%;top:44%;width:103%;max-width:none;height:auto;filter:drop-shadow(0 18px 36px rgba(0,0,0,.55))}
+ .jh:not([data-ad=d20]) .jh-in{padding-bottom:210px}
+ .jh[data-ad=d20] .jh-art{height:auto}
+ .jh[data-ad=d20] .jh-pair{position:relative;left:0;top:0;width:100%}
+}
 </style>
 </head>
 <body>
@@ -290,6 +300,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <div class="jh-photo" aria-hidden="true"><picture><source media="(min-width:1000px)" srcset="/images/season1/jersey/team-walk-1600.webp" width="1600" height="900"><img src="/images/season1/jersey/team-walk-900.webp" alt="" width="900" height="506" fetchpriority="high"></picture></div>
 <img class="jh-j jh-front" src="/images/season1/jersey/southie-front.webp" alt="" width="799" height="1100">
 <img class="jh-j jh-back" src="/images/season1/jersey/southie-back.webp" alt="A custom EKUZO jersey with the player's role and gamer tag on the back" width="846" height="1100">
+<img class="jh-pair" src="/images/season1/jersey/southie-pair.webp" alt="The Southie jersey, front and back, with the player's role and gamer tag on the back" width="1193" height="1200">
 </div>
 <div class="jh-copy">
 <h1 class="d h1"><span class="t-tag">Their gamer tag.</span><span class="t-team">Their team. Their name.</span> <em>On a real jersey.</em></h1>
