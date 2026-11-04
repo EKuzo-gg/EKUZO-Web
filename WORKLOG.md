@@ -14,6 +14,7 @@
 - `public/llms.txt`: entry added above the Robux entry.
 - No inbound links or edits in other posts yet (they wait on Jamie's approval).
 - For Aaron: New `components/blog/PullQuote.tsx` (additive; Aaron, restyle freely). Div/span markup only so the `.blog-content` prose CSS doesn't cascade into it.
+- Cards: `/blog` and Karlin's author page use `-card-clean.jpg` (no baked text; the text card was clipped in the featured slot). OG and Twitter keep `-card.jpg` with "I CAN'T PAUSE IT." for link previews.
 
 ---
 ## Aaron's Claude, 2026-11-03: ad lab round 4, the jersey ad again

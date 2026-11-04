@@ -39,7 +39,7 @@ const HERO_IMAGE =
 const SHARE_IMAGE =
   "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg";
 const HERO_ALT =
-  "A boy of about 12 on a gray couch at night, headphones on and a controller in his hands, watching a game on a screen out of frame.";
+  "A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room.";
 // Re-set both to the ship date if it ships another day.
 const DATE_PUBLISHED = "2026-11-04";
 const DATE_MODIFIED = "2026-11-04";

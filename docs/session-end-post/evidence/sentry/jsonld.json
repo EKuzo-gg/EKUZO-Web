@@ -1,0 +1,311 @@
+[
+ {
+  "@context": "https://schema.org",
+  "@graph": [
+   {
+    "@type": "EducationalOrganization",
+    "@id": "https://ekuzo.gg/#organization",
+    "name": "EKUZO",
+    "alternateName": "EKUZO \u2014 Every Gamer Deserves a Team",
+    "url": "https://ekuzo.gg",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://ekuzo.gg/images/ekuzo-logo-red.svg"
+    },
+    "image": "https://ekuzo.gg/images/og-default.jpg",
+    "description": "EKUZO builds transformational esports programs for kids through structured practice, skilled coaching, and real competition.",
+    "foundingDate": "2021",
+    "email": "team@ekuzo.gg",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "5617 Dolores Street",
+     "addressLocality": "Houston",
+     "addressRegion": "TX",
+     "postalCode": "77057",
+     "addressCountry": "US"
+    },
+    "areaServed": [
+     "United States",
+     "North America"
+    ],
+    "contactPoint": [
+     {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "team@ekuzo.gg",
+      "availableLanguage": "en"
+     },
+     {
+      "@type": "ContactPoint",
+      "contactType": "legal",
+      "email": "info@ekuzo.gg",
+      "availableLanguage": "en"
+     }
+    ],
+    "founder": {
+     "@id": "https://ekuzo.gg/#coach-karlin"
+    },
+    "knowsAbout": [
+     "Esports coaching",
+     "Youth gaming education",
+     "Competitive video games",
+     "Game-based learning",
+     "Social-emotional learning",
+     "League of Legends coaching",
+     "Fortnite coaching",
+     "Valorant coaching"
+    ],
+    "sameAs": [
+     "https://www.instagram.com/ekuzo.gg",
+     "https://www.facebook.com/ekuzo.gg",
+     "https://www.youtube.com/@ekuzogg",
+     "https://www.linkedin.com/company/ekuzogg/",
+     "https://www.tiktok.com/@ekuzo.gg",
+     "https://x.com/ekuzogg"
+    ]
+   },
+   {
+    "@type": "WebSite",
+    "@id": "https://ekuzo.gg/#website",
+    "url": "https://ekuzo.gg",
+    "name": "EKUZO",
+    "description": "Every Gamer Deserves a Team",
+    "publisher": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "inLanguage": "en-US"
+   },
+   {
+    "@type": "SiteNavigationElement",
+    "@id": "https://ekuzo.gg/#navigation",
+    "name": "Main Navigation",
+    "hasPart": [
+     {
+      "@type": "WebPage",
+      "name": "EKUZO Camps",
+      "url": "https://ekuzo.gg/programs/ekuzo-camps",
+      "description": "Intensive 1-week summer esports camps with pro coaching, real teams, and daily tournaments."
+     },
+     {
+      "@type": "WebPage",
+      "name": "EKUZO Teams",
+      "url": "https://ekuzo.gg/programs/ekuzo-teams",
+      "description": "Semester-based esports program structured like sports with consistent teammates and coaches."
+     },
+     {
+      "@type": "WebPage",
+      "name": "EKUZO100",
+      "url": "https://ekuzo.gg/programs/ekuzo100",
+      "description": "4-week intro program. One month, $100, your first team."
+     },
+     {
+      "@type": "WebPage",
+      "name": "For Families",
+      "url": "https://ekuzo.gg/parents"
+     },
+     {
+      "@type": "WebPage",
+      "name": "For Schools",
+      "url": "https://ekuzo.gg/schools"
+     },
+     {
+      "@type": "WebPage",
+      "name": "FAQ",
+      "url": "https://ekuzo.gg/faq"
+     }
+    ]
+   },
+   {
+    "@type": "Person",
+    "@id": "https://ekuzo.gg/#coach-karlin",
+    "name": "Karlin Oei",
+    "alternateName": "Faith",
+    "jobTitle": "Founder",
+    "description": "Founder of EKUZO. Former national collegiate esports captain who earned $80,000+ in scholarships; builds EKUZO as the structured, coached environment he didn't have growing up.",
+    "knowsAbout": [
+     "youth esports",
+     "esports coaching",
+     "League of Legends",
+     "youth development",
+     "structured gaming",
+     "screen time",
+     "online safety for kids"
+    ],
+    "sameAs": [
+     "https://www.linkedin.com/in/karlinoei/",
+     "https://lol.fandom.com/wiki/Faith_(Karlin_Oei)"
+    ],
+    "worksFor": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "image": "https://ekuzo.gg/images/authors/coach-karlin-faith-1400.jpg",
+    "url": "https://ekuzo.gg/blog/author/karlin-oei"
+   },
+   {
+    "@type": "Person",
+    "@id": "https://ekuzo.gg/#coach-sebastien",
+    "name": "Sebastien \"ZzLegendary\" DeMontigny",
+    "jobTitle": "Head Coach",
+    "description": "Professional esports coach who has coached at tier-1 organizations including Dignitas and Evil Geniuses. Elite-level competitive player. 4+ years experience specifically in youth esports coaching. Leads EKUZO's coaching staff and trains every coach on the team.",
+    "sameAs": "https://lol.fandom.com/wiki/Zz_(Sebastien_Demontigny)",
+    "worksFor": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "image": "https://ekuzo.gg/images/coach-sebastien-ZzLegendary.webp"
+   },
+   {
+    "@type": "Person",
+    "@id": "https://ekuzo.gg/#coach-nuri",
+    "name": "Nuri \"Teemo Time\" Je",
+    "jobTitle": "Coach",
+    "description": "Diamond-ranked Support player (top ~1% of League of Legends players). Community manager at the University of Texas at Austin and Alienware Ambassador. Background in public school teaching. One of EKUZO's cadre of collegiate esports athlete coaches.",
+    "sameAs": "https://www.linkedin.com/in/nuri-je/",
+    "worksFor": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "image": "https://ekuzo.gg/images/coach-nuri-je.webp"
+   },
+   {
+    "@type": "Person",
+    "@id": "https://ekuzo.gg/#person-jamie",
+    "name": "Jamie Fitch",
+    "jobTitle": "Advisor",
+    "description": "Jamie Fitch is an advisor to EKUZO, a parent to two young gamers and a lifelong competitive gamer himself. He writes for parents about gaming as an opportunity to lean into with their kids.",
+    "knowsAbout": [
+     "youth esports",
+     "esports coaching",
+     "youth development",
+     "structured gaming",
+     "online friendship and social connection",
+     "screen time",
+     "parenting gamers",
+     "education technology"
+    ],
+    "sameAs": [
+     "https://www.linkedin.com/in/jamiefitch/",
+     "https://fitch.vc"
+    ],
+    "worksFor": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "image": "https://ekuzo.gg/images/jamie-fitch.jpg",
+    "url": "https://ekuzo.gg/blog/author/jamie-fitch"
+   },
+   {
+    "@type": "Person",
+    "@id": "https://ekuzo.gg/#person-muhammad",
+    "name": "Muhammad Hossain",
+    "jobTitle": "Coach",
+    "description": "EKUZO coach and a senior English major at Texas A&M University. He coaches kids in League of Legends and interviews parents about gaming for EKUZO's listening project.",
+    "knowsAbout": [
+     "esports coaching",
+     "League of Legends",
+     "parenting gamers",
+     "military families and gaming",
+     "screen time"
+    ],
+    "affiliation": {
+     "@type": "CollegeOrUniversity",
+     "name": "Texas A&M University"
+    },
+    "worksFor": {
+     "@id": "https://ekuzo.gg/#organization"
+    },
+    "image": "https://ekuzo.gg/images/muhammad-hossain.jpg",
+    "url": "https://ekuzo.gg/blog/author/muhammad-hossain"
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight#article",
+  "headline": "How do I get my kid off the game without a fight?",
+  "description": "Count matches, not minutes. How to end a game session without a fight: what to ask before your kid starts, what to say at the end, and what to do if it blows up.",
+  "image": "https://ekuzo.gg/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg",
+  "url": "https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight",
+  "mainEntityOfPage": {
+   "@type": "WebPage",
+   "@id": "https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight"
+  },
+  "datePublished": "2026-11-04T12:00:00+00:00",
+  "dateModified": "2026-11-04T12:00:00+00:00",
+  "author": {
+   "@id": "https://ekuzo.gg/#coach-karlin"
+  },
+  "publisher": {
+   "@id": "https://ekuzo.gg/#organization"
+  },
+  "inLanguage": "en-US"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://ekuzo.gg/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Blog",
+    "item": "https://ekuzo.gg/blog"
+   },
+   {
+    "@type": "ListItem",
+    "position": 3,
+    "name": "How do I get my kid off the game without a fight?",
+    "item": "https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight"
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "Should I give a five-minute warning before my kid gets off the game?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "For team games, usually not. Ten minutes into a 45-minute League match, \"five minutes left\" means nothing, because the match can't end in five. Ask how long the match has left, or agree before they start that this is the last one. For games without matches, like Minecraft, a warning to get to a save point works."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "What if my kid says they can't pause the game?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "They're probably right. An online team match keeps going without them, the same as a soccer or basketball game. If your kid were on the court, you wouldn't pull them off mid-game. You'd wait for the whistle. Agree to stop at the end of the match, and agree before they start that no new match begins after the number you set."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "How many matches should I let my kid play?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Start with the time you have, then turn it into matches. An hour is one or two League games, two Marvel Rivals matches, or plenty of Smash. Talk it through before they start, so the number is set before the first match."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Is it OK to take away video games as a punishment?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "That's your call. If you do, the AAP suggests enforcing limits \"supportively rather than punitively.\" Before it gets there, lean in. Most of these fights come from the distance between what you expected and what they expected."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "How do I get my kid off Minecraft or Roblox?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Agree on a stopping point the game understands before they start: a save point, the next nightfall in Minecraft, or the end of a round in a Roblox game. Ask \"does this save?\" so stopping doesn't cost their progress. Try to understand what they're building before you judge the screen time, and the stop gets easier to agree on."
+    }
+   }
+  ]
+ }
+]

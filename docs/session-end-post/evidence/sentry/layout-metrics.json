@@ -1,0 +1,71 @@
+{
+ "popup-open-s-375": 3.14,
+ "post-375-hscroll": [
+  375,
+  375
+ ],
+ "post-375-table": {
+  "w": 321,
+  "left": 27,
+  "right": 348,
+  "parentOverflowX": "visible",
+  "parentScrollW": 321,
+  "parentClientW": 321
+ },
+ "post-375-pq": {
+  "w": 321,
+  "l": 27,
+  "r": 348
+ },
+ "post-375-wide": [],
+ "blog-375-hscroll": [
+  375,
+  375
+ ],
+ "popup-open-s-768": 3.16,
+ "post-768-hscroll": [
+  768,
+  768
+ ],
+ "post-768-table": {
+  "w": 657.4375,
+  "left": 55.28125,
+  "right": 712.71875,
+  "parentOverflowX": "visible",
+  "parentScrollW": 657,
+  "parentClientW": 657
+ },
+ "post-768-pq": {
+  "w": 657.4375,
+  "l": 55.28125,
+  "r": 712.71875
+ },
+ "post-768-wide": [],
+ "blog-768-hscroll": [
+  768,
+  768
+ ],
+ "popup-open-s-1440": 2.83,
+ "post-1440-hscroll": [
+  1440,
+  1440
+ ],
+ "post-1440-table": {
+  "w": 760.65625,
+  "left": 471.671875,
+  "right": 1232.328125,
+  "parentOverflowX": "visible",
+  "parentScrollW": 761,
+  "parentClientW": 761
+ },
+ "post-1440-pq": {
+  "w": 760.65625,
+  "l": 471.671875,
+  "r": 1232.328125
+ },
+ "post-1440-wide": [],
+ "blog-1440-hscroll": [
+  1440,
+  1440
+ ]
+}

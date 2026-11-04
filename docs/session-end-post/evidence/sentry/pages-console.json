@@ -1,0 +1,284 @@
+{
+ "post": [
+  [
+   "http404",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+   ""
+  ],
+  [
+   "console.error",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+  ]
+ ],
+ "blog": [
+  [
+   "http404",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+   ""
+  ],
+  [
+   "console.error",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+  ]
+ ],
+ "blog_info": {
+  "imgs": [
+   {
+    "src": "http://localhost:3101/images/ekuzo-logo.svg",
+    "alt": "EKUZO",
+    "w": 107,
+    "h": 21,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fhow-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg&w=1920&q=75",
+    "alt": "How do I get my kid off the game without a fight?",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fhow-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg&w=1920&q=75",
+    "alt": "How do I get my kid off the game without a fight?",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fshould-i-buy-my-kid-robux-card.jpg&w=1920&q=75",
+    "alt": "She asked for Robux to learn about money. Her dad said yes.",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fgaming-study-13-7-card.jpg&w=1920&q=75",
+    "alt": "The gaming study everyone shared, and what it means for your twelve-year-old",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fwhat-your-kids-gaming-is-telling-you-card.jpg&w=1920&q=75",
+    "alt": "What your kid's gaming is telling you",
+    "w": 924,
+    "h": 577,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fshould-you-ban-fortnite-card.jpg&w=1920&q=75",
+    "alt": "She banned Fortnite and got her kid back. Then came a new problem.",
+    "w": 1080,
+    "h": 675,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fgaming-military-families-card.jpg&w=1920&q=75",
+    "alt": "Every move wiped their friend map. Gaming was the community that traveled.",
+    "w": 1080,
+    "h": 675,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fwhen-your-sons-only-friends-are-online-hero.jpg&w=1920&q=75",
+    "alt": "When your son's only friends are online",
+    "w": 1384,
+    "h": 639,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-1-card.jpg&w=1920&q=75",
+    "alt": "Our Family's Esports Journey with EKUZO and the K1ng",
+    "w": 675,
+    "h": 360,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-2-card.jpg&w=1920&q=75",
+    "alt": "Conquering my Mountain and Giants: How Esports Changed My Life",
+    "w": 583,
+    "h": 843,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-3-card.jpg&w=1920&q=75",
+    "alt": "Gaming programs for kids: a parent's guide, Fall 2026",
+    "w": 924,
+    "h": 577,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-4-card.jpg&w=1920&q=75",
+    "alt": "Is League of Legends OK for kids? Why we coach it",
+    "w": 924,
+    "h": 396,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-5-card.jpg&w=1920&q=75",
+    "alt": "When gaming helps homeschool kids and when it hurts",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fblog-post-6-card.jpg&w=1920&q=75",
+    "alt": "Should homeschool kids play video games? 200+ parents weigh in",
+    "w": 900,
+    "h": 472,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+    "alt": "",
+    "w": 0,
+    "h": 0,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fenroll-promo-graphic.avif&w=828&q=75",
+    "alt": "",
+    "w": 828,
+    "h": 926,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/images/ekuzo-huge.svg",
+    "alt": "",
+    "w": 1442,
+    "h": 627,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/_next/image?url=%2Fimages%2Fseason-one-kid.jpg&w=750&q=75",
+    "alt": "A kid on the couch with a controller, focused on the game",
+    "w": 720,
+    "h": 900,
+    "complete": true
+   },
+   {
+    "src": "http://localhost:3101/images/ekuzo-logo.svg",
+    "alt": "EKUZO",
+    "w": 107,
+    "h": 21,
+    "complete": true
+   }
+  ],
+  "links": [
+   {
+    "href": "/blog/how-to-get-your-kid-off-video-games-without-a-fight",
+    "text": "PARENTING \u00b7 FEATURED | HOW DO I GET MY KID OFF THE GAME WITHOUT A FIGHT? |  | End at a natural stopping po"
+   },
+   {
+    "href": "/blog/how-to-get-your-kid-off-video-games-without-a-fight",
+    "text": "PARENTING | How do I get my kid off the game without a fight? |  | End at a natural stopping point, and ag"
+   },
+   {
+    "href": "/blog/should-i-buy-my-kid-robux",
+    "text": "PERSPECTIVE | She asked for Robux to learn about money. Her dad said yes. |  | For a year the answer was n"
+   },
+   {
+    "href": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+    "text": "PERSPECTIVE | The gaming study everyone shared, and what it means for your twelve-year-old |  | A doctor's"
+   },
+   {
+    "href": "/blog/what-your-kids-gaming-is-telling-you",
+    "text": "PERSPECTIVE | What your kid's gaming is telling you |  | The game is visible. The meaning is hidden. Six s"
+   },
+   {
+    "href": "/blog/should-you-ban-fortnite",
+    "text": "PERSPECTIVE | She banned Fortnite and got her kid back. Then came a new problem. |  | The ban worked, and "
+   },
+   {
+    "href": "/blog/gaming-military-families",
+    "text": "PERSPECTIVE | Every move wiped their friend map. Gaming was the community that traveled. |  | Military kid"
+   },
+   {
+    "href": "/blog/when-your-sons-only-friends-are-online",
+    "text": "PERSPECTIVE | When your son's only friends are online |  | Are online gaming friends real? The question is"
+   },
+   {
+    "href": "/blog/our-family-s-esports-journey-with-ekuzo-and-the-k1ng",
+    "text": "CASE STUDIES | Our Family's Esports Journey with EKUZO and the K1ng |  | A mom's account of her son Ryan: "
+   },
+   {
+    "href": "/blog/conquering-my-mountain-and-giants-how-esports-changed-my-life",
+    "text": "TESTIMONIALS | Conquering my Mountain and Giants: How Esports Changed My Life |  | I struggled with anxiet"
+   },
+   {
+    "href": "/blog/gaming-programs-for-kids",
+    "text": "GUIDES | Gaming programs for kids: a parent's guide, Fall 2026 |  | What a kid who games can join in fall "
+   },
+   {
+    "href": "/blog/league-of-legends-youth-development",
+    "text": "GUIDES | Is League of Legends OK for kids? Why we coach it |  | Why League of Legends works for youth deve"
+   },
+   {
+    "href": "/blog/when-gaming-helps-homeschool-kids",
+    "text": "GUIDES | When gaming helps homeschool kids and when it hurts |  | Gaming can grow a homeschooled kid or sh"
+   },
+   {
+    "href": "/blog/what-homeschool-parents-taught-us-about-gaming",
+    "text": "CASE STUDIES | Should homeschool kids play video games? 200+ parents weigh in |  | We read a 200+ parent t"
+   }
+  ],
+  "h2": [
+   "HOW DO I GET MY KID OFF THE GAME WITHOUT A FIGHT?",
+   "ALL BLOGS",
+   "Season 01 starts in 2027. Get them on the list.",
+   "They gametoo much.With a coach.",
+   "THEY GAME\nTOO MUCH.\nWITH A COACH."
+  ],
+  "overflow": false
+ },
+ "karlin": [
+  [
+   "http404",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png",
+   ""
+  ],
+  [
+   "console.error",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "http://localhost:3101/images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+  ]
+ ],
+ "karlin_info": {
+  "links": [
+   {
+    "href": "/blog/how-to-get-your-kid-off-video-games-without-a-fight",
+    "text": "PARENTING \u00b7 NOVEMBER 4, 2026 |  | HOW DO I GET MY KID OFF THE GAME WITHOUT A FIGHT? |  | End at a natural st"
+   },
+   {
+    "href": "/blog/should-i-buy-my-kid-robux",
+    "text": "PERSPECTIVE \u00b7 OCTOBER 26, 2026 |  | SHE ASKED FOR ROBUX TO LEARN ABOUT MONEY. HER DAD SAID YES. |  | For a y"
+   },
+   {
+    "href": "/blog/gaming-study-13-7-years-younger-what-it-means-for-kids",
+    "text": "PERSPECTIVE \u00b7 OCTOBER 12, 2026 |  | THE GAMING STUDY EVERYONE SHARED, AND WHAT IT MEANS FOR YOUR TWELVE-"
+   },
+   {
+    "href": "/blog/what-your-kids-gaming-is-telling-you",
+    "text": "PERSPECTIVE \u00b7 OCTOBER 26, 2026 |  | WHAT YOUR KID'S GAMING IS TELLING YOU |  | The game is visible. The mean"
+   },
+   {
+    "href": "/blog/what-homeschool-parents-taught-us-about-gaming",
+    "text": "CASE STUDIES \u00b7 OCTOBER 13, 2026 |  | SHOULD HOMESCHOOL KIDS PLAY VIDEO GAMES? 200+ PARENTS WEIGH IN |  | We "
+   },
+   {
+    "href": "/blog/when-gaming-helps-homeschool-kids",
+    "text": "GUIDES \u00b7 OCTOBER 13, 2026 |  | WHEN GAMING HELPS HOMESCHOOL KIDS AND WHEN IT HURTS |  | Gaming can grow a ho"
+   },
+   {
+    "href": "/blog/league-of-legends-youth-development",
+    "text": "GUIDES \u00b7 OCTOBER 13, 2026 |  | IS LEAGUE OF LEGENDS OK FOR KIDS? WHY WE COACH IT |  | Why League of Legends "
+   },
+   {
+    "href": "/blog/gaming-programs-for-kids",
+    "text": "GUIDES \u00b7 OCTOBER 26, 2026 |  | GAMING PROGRAMS FOR KIDS: A PARENT'S GUIDE, FALL 2026 |  | What a kid who gam"
+   }
+  ]
+ }
+}
