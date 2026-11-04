@@ -269,3 +269,15 @@ Three sentences, no em or en dashes.
 
 Run on this file 2026-11-04 (command and output pasted below the line). An em dash, an en dash, or a hyphen with a space on each side all fail. The grep excludes nothing: any hit would be listed.
 
+```
+$ LC_ALL=C.UTF-8 grep -nP "\x{2014}|\x{2013}| - | -- " 02-copy-deck.md
+256:> - [How do I get my kid off the game without a fight?](
+(1 hit in the deck body, before this section was appended; a re-run also matches the command text quoted in this block, which is expected)
+
+$ LC_ALL=C.UTF-8 grep -nP "\x{2014}|\x{2013}" 02-copy-deck.md; echo $?
+1  (no em or en dashes)
+```
+
+Result: zero em dashes, zero en dashes. The single " - " hit is line 256, the markdown list marker that opens the llms.txt entry (`> - [How do I ...`), which is the format every entry in `public/llms.txt` uses. It is a bullet, not a clause dash. Hyphens elsewhere are compounds or ranges (90-minute, M-rated, five-question).
+
+Banned-vocabulary grep (anti-ai-writing 3A, 3C, 3D, plus "addict") over proposed copy: one hit, line 22, which is the note quoting the existing llms.txt "addiction" wording so it can be removed. No proposed copy uses it.
