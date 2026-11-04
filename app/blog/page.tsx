@@ -22,7 +22,7 @@ const posts = [
     category: "Parenting",
     excerpt:
       "End at a natural stopping point, and agree on where that is before the game starts.",
-    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg",
+    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg",
     // Takes the featured slot from the Robux post at ship (2026-11-04). Only
     // one post may carry it: the finder below takes the first match.
     featured: true,

@@ -13,7 +13,7 @@ const POSTS: AuthorPost[] = [
     date: "November 4, 2026",
     excerpt:
       "End at a natural stopping point, and agree on where that is before the game starts.",
-    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg",
+    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg",
     category: "Parenting",
   },
   {
