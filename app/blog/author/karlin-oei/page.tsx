@@ -8,6 +8,15 @@ export const metadata = buildAuthorMetadata(getAuthor(SLUG));
 // Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const POSTS: AuthorPost[] = [
   {
+    slug: "how-to-get-your-kid-off-video-games-without-a-fight",
+    title: "How do I get my kid off the game without a fight?",
+    date: "November 4, 2026",
+    excerpt:
+      "End at a natural stopping point, and agree on where that is before the game starts.",
+    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg",
+    category: "Parenting",
+  },
+  {
     slug: "should-i-buy-my-kid-robux",
     title: "She asked for Robux to learn about money. Her dad said yes.",
     date: "October 26, 2026",

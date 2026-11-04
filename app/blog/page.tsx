@@ -15,6 +15,19 @@ export const metadata = {
 // Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const posts = [
   {
+    slug: "how-to-get-your-kid-off-video-games-without-a-fight",
+    title: "How do I get my kid off the game without a fight?",
+    date: "November 4, 2026",
+    author: "Karlin Oei",
+    category: "Parenting",
+    excerpt:
+      "End at a natural stopping point, and agree on where that is before the game starts.",
+    image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg",
+    // Takes the featured slot from the Robux post at ship (2026-11-04). Only
+    // one post may carry it: the finder below takes the first match.
+    featured: true,
+  },
+  {
     slug: "should-i-buy-my-kid-robux",
     title: "She asked for Robux to learn about money. Her dad said yes.",
     date: "October 26, 2026",
@@ -23,10 +36,9 @@ const posts = [
     excerpt:
       "For a year the answer was no. At eight, she changed her pitch.",
     image: "/images/should-i-buy-my-kid-robux-card.jpg",
-    // Takes the featured slot from the gaming-study post at ship (handoff
-    // 2026-10-24-ship-robux-and-session-end-posts.md). The session-end post
-    // takes it next.
-    featured: true,
+    // Held the featured slot from 2026-10-26 until the session-end post took
+    // it (2026-11-04).
+    featured: false,
   },
   {
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
