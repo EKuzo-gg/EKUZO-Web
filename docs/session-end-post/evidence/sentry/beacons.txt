@@ -1,0 +1,12 @@
+FAIL-CLOSED ANALYTICS GUARD (recorded before any functional test)
+Layer 1: Playwright context.route() on every context, before first navigation, matching
+  google-analytics.com | googletagmanager.com | clarity.ms | facebook.com/tr | connect.facebook.net | doubleclick.net | analytics.google.com
+  -> fulfilled 204, URL appended to this file.
+Layer 2: Chromium launched with --host-resolver-rules MAPping those hosts to ~NOTFOUND, so a beacon sent
+  during page teardown cannot resolve either.
+Contexts run: render, pages-post, pages-blog, pages-karlin, links, meas-desktop, meas-mobile, shots-375/768/1440, wide (x2).
+Intercepted URLs: NONE (0).
+Why zero: app/layout.tsx loads GA4, Meta Pixel and Clarity only when S1_DEPLOY_CONTEXT === "production" (ANALYTICS_ON),
+  which is unset in this sandbox build. curl of the served post HTML contains 0 occurrences of the GA ID.
+  No real analytics scripts ran, so nothing could be sent. window.gtag / window.clarity were stubbed via addInitScript (t_meas).
+Note: the server on port 3100 was a stale next-server (pid 5439, started 17:13, not ours); our run used port 3101 instead.

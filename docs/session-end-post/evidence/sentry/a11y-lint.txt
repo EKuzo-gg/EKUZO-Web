@@ -1,0 +1,11 @@
+hero alt: A boy of about 12 on a gray couch at night, headphones on and a controller in his hands, watching a game on a screen out of frame.
+matches HERO_ALT const (deck C4 alt check separately): True
+deck alt section: ### C4. Alt text, NEW  **Hero** (clean version, `get-kid-off-hero-clean.jpg`): > A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room.  **Hero** (text version, `get-kid-off-hero-text.jpg`, if Jamie picks it; the words on the image belong in the alt): > A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame. Text on the image reads "Heard in every living room" and "I can't pause it."  **Share graphic "Count matches, not minutes"**: > Graphic titled "Count matches, not minutes," listing where to stop: Fortnite, when the match ends; League of Le
+imgs without alt attr: 0
+empty-alt imgs: 5
+heading seq: h1 h2 h2 h2 h2 h2 h2 h2 h3 h3 h3 h3 h3 h2 h3 h3 h3 h2
+em/en dashes in rendered body text (innerText main): 0; in full DOM text sans script/style: 0
+spaced hyphen ' - ' in main text: 0
+&mdash;/&ndash; entities in source: 0
+app/blog/how-to-get-your-kid-off-video-games-without-a-fight/page.tsx: dash lines 0 []
+components/blog/PullQuote.tsx: dash lines 0 []
