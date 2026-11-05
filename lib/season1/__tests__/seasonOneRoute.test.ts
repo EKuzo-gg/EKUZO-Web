@@ -17,6 +17,8 @@ let graph: { body: any }[] = [];
 let seenKeys = new Set<string>();
 let dbMode: "ok" | "throw" | "hang" = "ok";
 let eventStatus = 200;
+let releaseFails = false;
+let subscribeGate: Promise<void> | null = null; // SA-2: holds the subscribe response
 
 // The Neon driver sends a JS array parameter as a Postgres array literal: {"a","b"}.
 const pgArray = (v: unknown) => String(v).replace(/^\{|\}$/g, "").split(",").map((x) => x.replace(/^"|"$/g, "")).filter(Boolean);
@@ -34,6 +36,11 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
       await new Promise((r) => setTimeout(r, 1500));
       return json({ message: "late" }, 500);
     }
+    if (queries.some((q) => /^delete from s1_rate_limits/.test(q.query))) {
+      if (releaseFails) return json({ message: "db down" }, 500);
+      for (const k of pgArray(queries[0].params[0])) seenKeys.delete(k);
+      return json({ command: "DELETE", rowCount: 1, fields: [], rows: [] });
+    }
     const results = queries.map((q) => {
       if (!/from s1_rate_limits/.test(q.query)) return rowsFor([]);
       const wanted = pgArray(q.params[0]);
@@ -46,6 +53,7 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
   if (u.includes("a.klaviyo.com")) {
     klaviyo.push({ path: u.split("/api/")[1], body });
     const isEvent = u.endsWith("/events");
+    if (!isEvent && subscribeGate) await subscribeGate;
     return new Response(isEvent ? "" : "{}", { status: isEvent ? eventStatus : 202 });
   }
   if (u.includes("graph.facebook.com")) {
@@ -107,6 +115,8 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     seenKeys = new Set();
     dbMode = "ok";
     eventStatus = 200;
+    releaseFails = false;
+    subscribeGate = null;
   });
 
   it("new: full path, one Waitlist event, one subscribe, one Lead, body {ok:true} only (R3.1, R3.2, R3.11)", async () => {
@@ -325,5 +335,83 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     klaviyo = [];
     await post({ email: "k@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
     assert.equal(events()[0].properties.ad, "d19");
+  });
+
+  it("SA-1: a failed first sign-up releases its claim, so a new eventId is 'new' again (R3.1, M4)", async () => {
+    eventStatus = 500;
+    assert.equal((await post(signup({ eventId: "evt-f502-b001" }))).status, 502);
+    const del = neonCalls.flat().find((q) => /^delete from s1_rate_limits/.test(q.query));
+    assert.ok(del, "release ran");
+    assert.match(del.query, /window_start > now\(\) - interval '24 hours'/);
+    assert.deepEqual(pgArray(del.params[0]), [emailKey(), evKey("evt-f502-b001")]);
+    assert.equal(seenKeys.size, 0);
+    eventStatus = 200;
+    klaviyo = [];
+    graph = [];
+    const r = await post(signup({ eventId: "evt-f502-b002" }));
+    assert.deepEqual(r.body, { ok: true }, "not a repeat");
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist");
+    assert.equal(graph.length, 1);
+  });
+
+  it("SA-1: a thrown event (timeout) also releases the claim and returns 502", async () => {
+    const real = fakeFetch;
+    globalThis.fetch = (async (url: unknown, init?: RequestInit) => {
+      if (String(url).endsWith("/events")) throw new Error("timeout");
+      return real(url, init);
+    }) as typeof fetch;
+    try {
+      assert.equal((await post(signup())).status, 502);
+    } finally {
+      globalThis.fetch = fakeFetch as typeof fetch;
+    }
+    assert.equal(seenKeys.size, 0);
+  });
+
+  it("SA-1: a release query failure still returns the 502 and logs no email", async () => {
+    eventStatus = 500;
+    releaseFails = true;
+    const warns: string[] = [];
+    console.warn = (...a: unknown[]) => void warns.push(a.map(String).join(" "));
+    try {
+      const r = await post(signup());
+      assert.equal(r.status, 502);
+      assert.equal(r.body.ok, false);
+    } finally {
+      console.warn = () => {};
+    }
+    const line = warns.find((x) => x.startsWith("Season 01 dedupe release failed:"));
+    assert.ok(line);
+    assert.ok(!line.includes("example.com"));
+  });
+
+  it("SA-1: a failed retry releases nothing (it inserted nothing)", async () => {
+    await post(signup());
+    neonCalls.length = 0;
+    eventStatus = 500;
+    assert.equal((await post(signup())).status, 502);
+    assert.ok(!neonCalls.flat().some((q) => /^delete from/.test(q.query)));
+    assert.ok(seenKeys.has(emailKey()), "the first attempt's claim stands");
+  });
+
+  it("SA-2: subscribe and the Meta Lead are both started before either resolves (R3.5)", async () => {
+    let open!: () => void;
+    subscribeGate = new Promise<void>((r) => (open = r));
+    const pending = post(signup());
+    const deadline = Date.now() + 1000;
+    while (Date.now() < deadline && !(subscribes().length === 1 && graph.length === 1)) await new Promise((r) => setTimeout(r, 5));
+    assert.equal(subscribes().length, 1, "subscribe started");
+    assert.equal(graph.length, 1, "CAPI started while the subscribe is still held");
+    open();
+    assert.deepEqual((await pending).body, { ok: true });
+  });
+
+  it("SA-3: the Repeat event sends no first_name; the Waitlist event still does", async () => {
+    await post(signup({ firstName: "Pat" }));
+    assert.equal(events()[0].profile.data.attributes.first_name, "Pat");
+    klaviyo = [];
+    await post(signup({ eventId: "evt-eeee-5555", firstName: "Pat" }));
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist Repeat");
+    assert.ok(!("first_name" in events()[0].profile.data.attributes));
   });
 });

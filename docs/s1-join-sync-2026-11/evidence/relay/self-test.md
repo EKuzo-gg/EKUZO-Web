@@ -42,3 +42,11 @@ Self-testing is necessary, not final. Sentry verifies independently.
 - The Neon driver sends the `text[]` parameter as a Postgres array literal (`{"a","b"}`); the test parses that. Not run against real Postgres.
 - An early version of the test crashed the node test runner in the full `npm test` (stdout interleaving); the suite now silences console output while it runs.
 - Left as is: the existing `console.error("KLAVIYO_PRIVATE_API_KEY not set ... lost:", email)` logs an email. It is the only record of a lost sign-up when the key is missing; say if you want it changed.
+
+## Repair 1 (SA-1 to SA-3)
+
+- SA-1: `classifySignup` now returns `{kind, claimed}` (the keys this request inserted). When a new or retry sign-up's `Season 01 Waitlist` event fails (non-ok or thrown), `releaseClaim(claimed)` runs one parameterized `delete from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'` before the 502. A release error is warned without the email and never changes the 502. A retry inserted nothing, so it releases nothing. The advisory lock is only held inside the claim transaction, so a concurrent request can slip in between the claim and the release; the effect is limited to one extra "repeat" in that window and matches the fail-open stance.
+- SA-2: test holds the subscribe response and asserts the CAPI call has started while subscribe is still pending.
+- SA-3: the Repeat event passes no `firstName`; the Waitlist event still does.
+- Tests added: "SA-1: a failed first sign-up releases its claim...", "SA-1: a thrown event...", "SA-1: a release query failure still returns the 502...", "SA-1: a failed retry releases nothing", "SA-2: subscribe and the Meta Lead are both started...", "SA-3: the Repeat event sends no first_name...".
+- `npm test`: 514 pass, 0 fail (`npm-test-repair1.txt`). Not run against real Postgres.

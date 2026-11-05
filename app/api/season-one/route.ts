@@ -129,10 +129,11 @@ type Signup = "new" | "retry" | "repeat";
  * 24 h sign-up classification (see the header). One transaction: an advisory
  * lock on the email key serializes two requests for one email, then one
  * statement reads which keys were seen inside the last 24 h and claims the
- * rest. Fails open to "new" (and never logs the email).
+ * rest. Fails open to "new" (and never logs the email). `claimed` is the keys
+ * this call inserted, so a failed sign-up can release them (releaseClaim).
  */
-async function classifySignup(email: string, eventId: string): Promise<Signup> {
-  if (!process.env.DATABASE_URL) return "new";
+async function classifySignup(email: string, eventId: string): Promise<{ kind: Signup; claimed: string[] }> {
+  if (!process.env.DATABASE_URL) return { kind: "new", claimed: [] };
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     const emailKey = `s1wl:em:${keyHash(email)}`;
@@ -156,13 +157,27 @@ async function classifySignup(email: string, eventId: string): Promise<Signup> {
     });
     const results = (await Promise.race([run, timeout])) as { key: string }[][];
     const seen = new Set((results[1] ?? []).map((r) => r.key));
-    if (!seen.has(emailKey)) return "new";
-    return keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat";
+    const claimed = keys.filter((k) => !seen.has(k));
+    if (!seen.has(emailKey)) return { kind: "new", claimed };
+    return { kind: keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat", claimed };
   } catch (err) {
     console.warn("Season 01 dedupe check skipped:", err instanceof Error ? err.message : err);
-    return "new";
+    return { kind: "new", claimed: [] };
   } finally {
     clearTimeout(timer);
+  }
+}
+
+/** A failed sign-up must not leave its claim behind, or the next attempt would read as a repeat. Never throws, never logs the email. */
+async function releaseClaim(keys: string[]) {
+  if (!keys.length) return;
+  try {
+    await getSql().query(
+      "delete from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'",
+      [keys],
+    );
+  } catch (err) {
+    console.warn("Season 01 dedupe release failed:", err instanceof Error ? err.message : err);
   }
 }
 
@@ -415,12 +430,12 @@ export async function POST(req: NextRequest) {
     }
 
     const eventId = cleanEventId(body.eventId);
-    const signup = await classifySignup(email, eventId);
+    const { kind: signup, claimed } = await classifySignup(email, eventId);
 
     if (signup === "repeat") {
       // Same attribution on a separate metric; no profile props (season1_* stay as first written), no Lead.
       try {
-        const rep = await event("Season 01 Waitlist Repeat", email, {}, eventProps, clean(body.firstName, 60), eventId);
+        const rep = await event("Season 01 Waitlist Repeat", email, {}, eventProps, "", eventId); // no firstName: a repeat must not change first_name
         if (!rep.ok) console.error("Klaviyo Season 01 repeat event failed:", rep.status, await rep.text());
       } catch (err) {
         console.error("Klaviyo Season 01 repeat event failed:", err instanceof Error ? err.message : err);
@@ -429,9 +444,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, repeat: true });
     }
 
-    const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60), eventId);
+    let ev: Response;
+    try {
+      ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60), eventId);
+    } catch (err) {
+      await releaseClaim(claimed);
+      throw err; // the outer catch logs and returns the 502
+    }
     if (!ev.ok) {
       console.error("Klaviyo Season 01 event failed:", ev.status, await ev.text());
+      await releaseClaim(claimed);
       return NextResponse.json({ ok: false, error: FAIL }, { status: 502 });
     }
 
