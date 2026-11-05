@@ -30,7 +30,7 @@ const posts = [
   {
     slug: "should-i-buy-my-kid-robux",
     title: "She asked for Robux to learn about money. Her dad said yes.",
-    date: "October 26, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -44,7 +44,7 @@ const posts = [
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
     title:
       "The gaming study everyone shared, and what it means for your twelve-year-old",
-    date: "October 12, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -56,7 +56,7 @@ const posts = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "October 26, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -153,7 +153,7 @@ const posts = [
   {
     slug: "when-gaming-helps-homeschool-kids",
     title: "When gaming helps homeschool kids and when it hurts",
-    date: "October 13, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
