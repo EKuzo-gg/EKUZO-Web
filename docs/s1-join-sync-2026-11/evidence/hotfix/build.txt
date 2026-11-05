@@ -1,0 +1,40 @@
+├ ○ /programs/ekuzo-camps
+├ ○ /programs/ekuzo-camps/register
+├ ○ /programs/ekuzo-camps/success
+├ ○ /programs/ekuzo-teams
+├ ○ /programs/ekuzo-teams/register
+├ ○ /programs/ekuzo-teams/success
+├ ○ /programs/ekuzo100
+├ ○ /programs/ekuzo100/register
+├ ○ /programs/ekuzo100/success
+├ ○ /programs/ekuzo101
+├ ○ /programs/ekuzo101/register
+├ ○ /programs/ekuzo101/success
+├ ○ /schools
+├ ○ /season1
+├ ƒ /season1/crew
+├ ƒ /season1/dev-view
+├ ƒ /season1/early-access
+├ ƒ /season1/early-access/saved
+├ ƒ /season1/early-access/signup
+├ ƒ /season1/join
+├ ƒ /season1/join/b
+├ ƒ /season1/join/jersey
+├ ƒ /season1/join/signup
+├ ƒ /season1/join/welcome
+├ ƒ /season1/terms
+├ ○ /season1/thanks
+├ ○ /sitemap.xml
+├ ƒ /squad/[token]
+├ ○ /swamp
+├ ○ /teams
+├ ○ /terms-of-service
+└ ○ /woodward
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

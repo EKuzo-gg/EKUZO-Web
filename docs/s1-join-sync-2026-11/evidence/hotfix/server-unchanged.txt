@@ -1,0 +1,9 @@
+byte-identical vs 147897a: app/api/season1/commit/route.ts lib/season1/validate.ts lib/season1/validate.test.ts
+0
+51e67822ca66b1dfc8bdaa3b8e5f218566b70ec6
+51e67822ca66b1dfc8bdaa3b8e5f218566b70ec6
+adcdb455a248cd184457dedf0bf2700b40e3c212
+adcdb455a248cd184457dedf0bf2700b40e3c212
+test file identical
+60:  if (b.company !== undefined && b.company !== null && b.company !== "") {
+61:    return fail("company", "invalid");

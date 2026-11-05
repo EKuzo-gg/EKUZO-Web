@@ -1,0 +1,39 @@
+diff --git a/app/api/season-one/route.ts b/app/api/season-one/route.ts
+index 7d77def..24780d2 100644
+--- a/app/api/season-one/route.ts
++++ b/app/api/season-one/route.ts
+@@ -92,9 +92,10 @@ const SOURCES = new Set(["site-popup", "ad-landing"]);
+ const clean = (v: unknown, max = 120) => String(v ?? "").trim().slice(0, max);
+ // Only string values are kept; objects and arrays would stringify to junk.
+ const text = (v: unknown, max = 120) => (typeof v === "string" ? clean(v, max) : "");
+-// The 12 ads are d1..d12. Accepts any case and a leading zero (d01), returns "d1".."d12" or "".
++// Ad codes are d1..d99 (d1..d12 at launch; the November batch runs d16 to d21). Accepts any case and a
++// leading zero (d01), returns "d1".."d99" or "". It was capped at d12, which blanked the ad on d13+ sign-ups.
+ const normalizeAd = (v: unknown) => {
+-  const m = typeof v === "string" ? /^d(0?[1-9]|1[0-2])$/i.exec(v.trim()) : null;
++  const m = typeof v === "string" ? /^d(0?[1-9]|[1-9]\d)$/i.exec(v.trim()) : null;
+   return m ? `d${Number(m[1])}` : "";
+ };
+ const FAIL = "We couldn’t save that. Please try again.";
+diff --git a/app/season1/join/signup/signup.html b/app/season1/join/signup/signup.html
+index 7d10a21..3af83ae 100644
+--- a/app/season1/join/signup/signup.html
++++ b/app/season1/join/signup/signup.html
+@@ -209,7 +209,7 @@ p,li,.small{text-wrap:pretty}
+ <div style="margin-top:24px"><label class="l" for="pname">Your first name</label><input class="f" id="pname" name="given-name" autocomplete="given-name" maxlength="20" aria-required="true" aria-describedby="e-pname"><p class="err" id="e-pname"></p></div>
+ <div style="margin-top:12px"><label class="l" for="email">Email for your receipt</label><input class="f" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-required="true" aria-describedby="e-email"><p class="err" id="e-email"></p></div>
+ <div style="margin-top:12px"><label class="l" for="mob">Mobile (optional)</label><input class="f" id="mob" name="s1-mobile" type="tel" placeholder="For team updates by text" autocomplete="off" maxlength="20" aria-describedby="e-mob"><p class="err" id="e-mob"></p></div>
+-<div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" id="company" tabindex="-1" autocomplete="off"></label></div>
++<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="ekz_hp" id="ekz_hp" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-form-type="other"></label></div>
+ <label style="display:flex;align-items:flex-start;gap:8px;margin-top:20px;font-size:12px;line-height:1.45;color:rgba(0,0,0,.75)"><input type="checkbox" id="terms" autocomplete="off" aria-required="true" aria-describedby="e-terms"><span id="consentText"></span></label>
+ <p class="err" id="e-terms"></p>
+ <div class="xpw" id="xpWrap"><div class="xpbox"><div id="xp"></div></div><p class="err" id="e-xp" role="alert"></p><button type="button" class="orpay" id="cardTog" aria-expanded="false" aria-controls="cardSec"><span class="orl">Or pay with card<span class="chev" aria-hidden="true"></span></span></button><p class="orpay orp" id="cardOr" hidden>Or pay with card</p></div>
+@@ -435,7 +435,7 @@ function collect(){
+  if(mv&&(mv.length>20||!/^[0-9+()\- ]+$/.test(mv)||mv.replace(/\D/g,'').length<7))flag(g('e-mob'),mb,'Check your mobile number or leave it blank.');
+  if(!g('terms').checked)flag(g('e-terms'),g('terms'),'Check the terms box to continue.');
+  if(bad.length){announce(bad[0]+(bad.length>1?' '+(bad.length-1)+' more to fix below.':''));if(first)first.focus();else g('terms').focus();return null}
+- return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('company').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
++ return {email:ev,parentFirstName:pv,phone:mv,kids:kidsOut,consent:true,company:g('ekz_hp').value,src:cfg.src||undefined,inviteRemoved:inviteRemoved?true:undefined};
+ }
+ /* Canary 10-29: immediate feedback. Disabled, spinner and "Saving their spot..." until the redirect or an error.
+    S11: after 2 s the label becomes the progress line, announced once (status region). The timer is cleared

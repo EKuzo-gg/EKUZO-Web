@@ -1,0 +1,18 @@
+regex: /^d(0?[1-9]|[1-9]\d)$/i
+input	expected	actual	result
+"d1"	"d1"	"d1"	PASS
+"d01"	"d1"	"d1"	PASS
+"D19"	"d19"	"d19"	PASS
+"d21"	"d21"	"d21"	PASS
+"d99"	"d99"	"d99"	PASS
+"d12"	"d12"	"d12"	PASS
+"d13"	"d13"	"d13"	PASS
+"d0"	""	""	PASS
+"d100"	""	""	PASS
+"d1x"	""	""	PASS
+""	""	""	PASS
+" d5 "	"d5"	"d5"	PASS
+19	""	""	PASS
+null	""	""	PASS
+failures: 0
+

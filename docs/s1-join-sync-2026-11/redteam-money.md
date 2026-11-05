@@ -1,0 +1,49 @@
+# Red team: money and fraud lens (2026-11-05)
+
+Scope: `01-requirements.md` read against the shipped paths: `app/api/season-one/route.ts`, `app/season1/landing.html` (1395-1460), `components/ui/SeasonOnePopup.tsx`, `SeasonOneTrigger.tsx`, `app/season1/join/route.ts`, `join/b/route.ts`, `lib/season1/joinPage.ts`, `join/signup/signup.html`, `app/api/season1/commit/route.ts`, `lib/season1/validate.ts`. No code edited.
+
+Counts: 1 critical, 5 major, 5 minor. Two LIVE-DEFECTs on shipped code (items 1 and 9), one minor (item 11).
+
+## Critical
+
+1. **LIVE-DEFECT. Real paying parents can be rejected by the honeypot.** (W2, R2.3). `app/season1/join/signup/signup.html:212` has `<label>Company<input name="company" id="company">`. Chrome, 1Password and Safari autofill key on a field labelled "Company". `signup.html:438` sends `company:g('company').value`, and `app/api/season1/commit/route.ts:240` returns a generic `422 {error:"invalid"}` with no `field`, so the parent sees an unexplained failure and no charge is made. Repro: browser profile with an organization saved, open `/season1/join/signup`, autofill, fill the rest, tap pay: 422, no PaymentIntent. F1 confirms the fix is not on any branch, so this is live today and silent (the only trace is a `commit.honeypot` log line). Spec change: ship R2.3 as the first commit of the build; add a log or metric count for `commit.honeypot` so a rise shows up; add to Done: one real-browser autofill pass with a saved Company value.
+
+## Major
+
+2. **R2.3 / R2.4, rename can take down checkout.** The spec says the input is "named `ekz_hp`" and that signup changes are "limited to those two lines". `collect()` reads the field by id (`g('company')`, line 438; `g` is `getElementById`, line 235). If the id is renamed with the name, `g('company')` is null and `collect()` throws, so no family can pay. If only `name` changes, the id still reads `company` and autofill heuristics may still match. Spec change: state exactly which attributes change (`name`, `id`, label text, and line 438 if the id moves), drop "two lines", and add a test that loads the real signup HTML in a DOM, runs `collect()` with the honeypot empty and filled, and asserts `company: ""` and `company: "x"`.
+
+3. **R3.1 repeat path loses families who partially signed up.** The route writes the event first (line 325), then the list subscribe (332), then CAPI (353). Subscribe failures and Netlify timeouts leave an event written with `season1_joined_at` set but no list membership. A retry then sees `season1_joined_at` inside 24 h, returns `repeat:true`, and writes nothing: the family never joins the Waitlist list, and no Lead is ever counted. Spec change: on `repeat`, still run the (idempotent) list subscribe; skip only the event and the Lead. Alternatively stamp `season1_joined_at` only after the subscribe attempt returns.
+
+4. **M1 / R3.4 contradiction on a lost response.** M1 requires "exactly one Lead" when a response is lost. R3.4 makes the retry return `repeat:true` and suppresses the browser Pixel Lead. That is one Lead only if the first CAPI call succeeded. If the first attempt died at the 10 s limit before CAPI (or Meta timed out at 2 s), the count is zero and Meta never sees the conversion. Spec change: store `season1_last_event_id` on the profile. When the incoming `eventId` equals it, answer `{ok:true, retry:true}` and let the browser fire the Pixel Lead with the same `eventId` (Meta dedupes it against CAPI if CAPI landed, counts it alone if not); do not send a second CAPI Lead. Use `repeat:true` only for a different `eventId`.
+
+5. **R3.1 read-after-write race, two tabs or two devices.** Klaviyo applies profile properties asynchronously, so a second submit seconds later (phone plus laptop, the in-app browser then Safari, double Enter across tabs) reads no `season1_joined_at` and writes a second event, a second subscribe and a second Lead with a different `eventId` (the id is per page). R3.3 only collapses same-`eventId` retries. Spec change: do not rely on a Klaviyo read as the gate. Take an atomic claim keyed on `keyHash(email)` with a TTL in the existing Neon rate-limit store (`lib/season1/ratelimit` `hit`, already used by commit), and keep the Klaviyo read as a second check. Add a test: two concurrent POSTs with different `eventId`, one email, assert one Waitlist event and one CAPI call.
+
+6. **R3.1 lookup string.** The spec does not say how the email goes into the Klaviyo filter. `EMAIL_RE` (route.ts:88) admits `+`, `"`, `,`, `(` and `)`. Unencoded, `+` arrives as a space, so `team+s1test-*` and every Gmail plus-address misses the lookup and the dedupe silently never fires (fail open hides it). A quote or comma in the local part can also bend the filter expression. Spec change: `encodeURIComponent` the whole `filter` value, escape `"` and `\` inside the quoted email (or reject emails containing them for the lookup), and add test rows for `a+b@x.com`, `o'brien@x.com` and an email containing `"),`.
+
+## Ad spend and attribution
+
+7. **LIVE-DEFECT-adjacent. R3 widens, never gates, a Lead fire hose (see 9).** Covered in 9.
+
+8. **R3.1 drops a different ad's attribution (major for the budget read).** A parent who joined through the organic popup, then taps a d19 ad inside 24 h, gets `repeat:true`: no event, no `ad`, no Lead. Meta never credits d19 and the profile keeps the first source. Daily ads readouts will under-report exactly the ads that reach warm families. Spec change: on `repeat` with a different `ad` or `source`, write a lightweight `Season 01 Waitlist Repeat` event carrying `ad`, UTMs and hero (no Lead, no subscribe), or record in the spec that this loss is accepted and add the count to the readout.
+
+9. **LIVE-DEFECT. `/api/season-one` has no rate limit or bot control, and every valid email fires a Meta Lead.** `route.ts:265` honeypot only stops naive bots; `route.ts:332-353` then creates a consent-subscribed profile and a CAPI Lead per request. Repro: `for i in 1..500; curl -X POST /api/season-one -d '{"email":"x$i@mailinator.com","source":"ad-landing","ad":"d19"}'`: 500 profiles, 500 subscriptions, 500 Leads attributed to `season_one_d19`, and Meta's optimizer trains on them. R3.1 makes it slightly worse: each request adds a Klaviyo GET, whose low steady rate limit means the lookup starts failing open (R3.2) exactly during an attack. Spec change: add R3.10, a per-IP limit (reuse `hit`, for example 10 per 10 min, bucketed like commit) before any Klaviyo call, with a silent-200 over the limit; send the CAPI Lead only when `eventSourceUrl` host is `ekuzo.gg` (the field is client-supplied today, route.ts:138).
+
+10. **R3.2 time budget has no margin.** 1.2 + 3.5 + 2.5 + 2 = 9.2 s of a 10 s limit, before cold start and JSON parse. An overrun means the event is written, the client sees a 502 or timeout, the retry hits `repeat` (items 3 and 4). The route header comment still says 8 s. Spec change: use a deadline budget: skip the lookup if the request is already slow, cap the lookup at 800 ms, and skip the CAPI call when more than 7 s have elapsed (browser Lead then carries via item 4). Update the header comment.
+
+## Minor
+
+11. **LIVE-DEFECT (minor). `eventId` is not tied to the email.** `landing.html:1417` (`if(!eventId) eventId=newEventId()`) and `:1424` (`leadSent` never re-armed) and `SeasonOnePopup.tsx:99` reuse one id per page load. Repro: submit `me@gmial.com`, server writes the event and CAPI but the response fails (timeout); fix the typo to `me@gmail.com` and resubmit: same `event_id`, Meta drops the second Lead and the Pixel guard blocks the browser one. R3.5 covers it; keep the test: change the email after a failure, assert a new id and a re-armed guard.
+
+12. **R3.1 response is an enumeration oracle.** `{repeat:true}` tells anyone whether an email joined a youth gaming waitlist in the last 24 h. Low severity (no names, no kid data). Spec change: acceptable if the rate limit in 9 lands; note the decision.
+
+13. **R3.1 24 h window vs Lead inflation (M4).** A returning parent after 25 h counts as a new Lead, and Meta optimizes on Lead volume. For a waitlist with a long consideration period, 24 h overcounts reminders and email-driven returns. Spec change: send CAPI and Pixel Leads at most once per email per 30 days (the Klaviyo event can still be written after 24 h for Karlin's reads), or log the repeat rate before choosing 24 h.
+
+14. **R2.1 accepts d1 to d99 but about 21 ads exist.** The popup also feeds `utm_content` in as `ad` (`SeasonOnePopup.tsx:115`), so any UTM like `D50` becomes `season1_ad` and `content_name season_one_d50`. Spec change: allowlist the live ad ids from one constant instead of a numeric range, or at least cap at the highest live id.
+
+15. **W1 cutover, verify the money copy B asserts.** `join.html:221` says "Four friends and we refund your $100"; `join-b.html:242` says "Four friends, free season. We send your $100 back too." 4 friends is $640 of credit against a $580 season (`offer.ts` `friendCreditCents` 16000, `seasonCents` 58000). The ledger R1.6 diff proves the clone, not that the credit engine caps at the season price and refunds the deposit. Spec change: add a check that `quote()` and the referral credit code produce "free season plus $100 back" at 4 friends, and that the "First 100 families" jersey line has an enforced cap or is dropped from B before all email and `/karlin` traffic (J4, J5) lands on it.
+
+## Gaps in the spec
+
+- Order of checks in `/api/season-one` is unstated: the honeypot must run before the lookup (M7), and `games`, `age` and `text-karlin` must return before it (R3.9 says unaffected; add a test that none of them calls the lookup).
+- No test that a Klaviyo 429 or 5xx on the lookup still writes the event, subscribes and sends exactly one Lead (R3.2 states it, no row in Must-not).
+- H2 checks one email twice; add a second device or tab run for item 5 and a `+` address for item 6.

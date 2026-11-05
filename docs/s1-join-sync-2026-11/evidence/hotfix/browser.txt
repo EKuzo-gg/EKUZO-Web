@@ -1,0 +1,14 @@
+375 DOM {"companyByName":0,"companyById":0,"exists":true,"ac":"off","p1":true,"lp":"true","ft":"other","tab":"-1","ariaHidden":"true","rect":[0,0,0,0],"pos":"absolute","left":"-9999px","overflow":"hidden","collectGlobal":"undefined"}
+375 console errors: []
+harness: HTML patched in flight only for open:true, mode:test, exposing collect/pay, and stubbing the Stripe elements.submit() call (var sub={}) (rest as shipped; server runs mode off, no DB); __collect type=function; pay hidden=false
+open-state hp geometry: {"hpRect":[-9999,879.96875,1,1],"inputRect":[-9999,940.96875,185,21],"offscreen":true,"visibility":"visible","display":"block"}
+empty hp: submit did not reach commit []
+stripe loaded: false formErr: The payment form did not load. Reload the page or text our founder.
+window.__collect() direct, hp empty: {"email":"team+s1test-1105-hp@ekuzo.gg","parentFirstName":"Qa","phone":"","kids":[{"firstName":"Kid","age":11}],"consent":true,"company":""}
+window.__collect() direct, hp x: {"email":"team+s1test-1105-hp@ekuzo.gg","parentFirstName":"Qa","phone":"","kids":[{"firstName":"Kid","age":11}],"consent":true,"company":"x"}
+hp x submit: submit did not reach commit
+pay(window.__collect()) hp empty -> commit bodies: [{"email":"team+s1test-1105-hp@ekuzo.gg","parentFirstName":"Qa","phone":"","kids":[{"firstName":"Kid","age":11}],"consent":true,"company":"","attemptId":"33fe927c-5438-4010-a9d7-077b3ddee85d","expectedCents":10000}] err 
+pay(window.__collect()) hp x -> commit bodies: [{"email":"team+s1test-1105-hp@ekuzo.gg","parentFirstName":"Qa","phone":"","kids":[{"firstName":"Kid","age":11}],"consent":true,"company":"x","attemptId":"33fe927c-5438-4010-a9d7-077b3ddee85d","expectedCents":10000}]
+1440 DOM {"companyByName":0,"companyById":0,"exists":true,"ac":"off","p1":true,"lp":"true","ft":"other","tab":"-1","ariaHidden":"true","rect":[0,0,0,0],"pos":"absolute","left":"-9999px","overflow":"hidden","collectGlobal":"undefined"}
+1440 console errors: []
+analytics requests blocked: 0
