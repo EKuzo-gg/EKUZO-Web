@@ -27,7 +27,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
-const DATE_MODIFIED = "2026-10-26";
+const DATE_MODIFIED = "2026-11-05";
 
 // FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
 // don't extract well as standalone Q&A, so we surface six parent-shaped
@@ -469,7 +469,11 @@ export default function PostGamingHiddenMeaning() {
                 most things down but goes to war over this one? The first
                 points toward impulse. The second usually points toward
                 meaning. Telling them apart matters more than winning the
-                argument over the clock.
+                argument over the clock. For the nightly part, here&apos;s{" "}
+                <Link href="/blog/how-to-get-your-kid-off-video-games-without-a-fight">
+                  how to get your kid off the game without a fight
+                </Link>
+                .
               </p>
 
               <h2>They&apos;re social in the game and disconnected outside it</h2>

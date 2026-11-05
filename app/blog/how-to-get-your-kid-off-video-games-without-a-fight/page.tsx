@@ -31,9 +31,8 @@ const TITLE_DISPLAY = "How do I get my kid off the game without a fight?";
 const TITLE_SEO = "How to get your kid off video games without a fight";
 const SUBHEAD =
   "Count matches, not minutes. What to ask before they start, what to say at the end, and what to do when it goes sideways anyway.";
-// META: pending Jamie approval
 const DESCRIPTION =
-  "Count matches, not minutes. How to end a game session without a fight: what to ask before your kid starts, what to say at the end, and what to do if it blows up.";
+  "Count matches, not minutes. Agree on a stopping point before the game starts, watch the finish with them, and keep your words short when it's time to get off.";
 const HERO_IMAGE =
   "/images/how-to-get-your-kid-off-video-games-without-a-fight-hero.jpg";
 const SHARE_IMAGE =
@@ -420,6 +419,16 @@ export default function PostGetKidOffVideoGames() {
               game punishes leaving. That makes it a good lesson in planning
               ahead.
             </p>
+            <div className="my-10 mx-auto w-full max-w-[560px]">
+              <Image
+                src="/images/count-matches-not-minutes.png"
+                alt="Graphic titled &quot;Count matches, not minutes,&quot; listing where to stop: Fortnite, when the match ends; League of Legends, when the match ends, with no new queue; Marvel Rivals, when the match ends; Super Smash Bros., after any match; Minecraft, at an agreed save point; Roblox, ask &quot;does this save?&quot; and pick the stop together."
+                width={1080}
+                height={1350}
+                sizes="(max-width: 640px) 100vw, 560px"
+                className="w-full h-auto"
+              />
+            </div>
             <PullQuote>
               Dinner&apos;s in 35 minutes. A League game takes 45. Starting one
               is starting the fight.
@@ -515,8 +524,9 @@ export default function PostGetKidOffVideoGames() {
             </p>
             <p>
               The end of every EKUZO session is on the schedule before anyone
-              logs in, and the coach calls it. What happens after is still your
-              family&apos;s plan.
+              logs in (in <Link href="/season1/join">Season 01</Link>, two
+              90-minute practices a week), and the coach calls it. What happens
+              after is still your family&apos;s plan.
             </p>
             <p>
               If the fight at your house is about one game in particular,{" "}

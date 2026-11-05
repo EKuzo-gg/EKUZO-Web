@@ -19,7 +19,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "should-i-buy-my-kid-robux",
     title: "She asked for Robux to learn about money. Her dad said yes.",
-    date: "October 26, 2026",
+    date: "November 5, 2026",
     excerpt:
       "For a year the answer was no. At eight, she changed her pitch.",
     image: "/images/should-i-buy-my-kid-robux-card.jpg",
@@ -29,7 +29,7 @@ const POSTS: AuthorPost[] = [
     slug: "gaming-study-13-7-years-younger-what-it-means-for-kids",
     title:
       "The gaming study everyone shared, and what it means for your twelve-year-old",
-    date: "October 12, 2026",
+    date: "November 5, 2026",
     excerpt:
       "A doctor's one-liner about a gaming study reached 30M+ people. Karlin read a thousand of the replies. The one that mattered wasn't about the study.",
     image: "/images/gaming-study-13-7-card.jpg",
@@ -38,7 +38,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "October 26, 2026",
+    date: "November 5, 2026",
     excerpt:
       "The game is visible. The meaning is hidden. Six signs parents notice first in a gamer kid, and what they often mean.",
     image: "/images/what-your-kids-gaming-is-telling-you-card.jpg",
@@ -56,7 +56,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "when-gaming-helps-homeschool-kids",
     title: "When gaming helps homeschool kids and when it hurts",
-    date: "October 13, 2026",
+    date: "November 5, 2026",
     excerpt:
       "Gaming can grow a homeschooled kid or shrink their world. What decides which, why structure beats hours, and how to tilt it your way.",
     image: "/images/blog-post-5-card.jpg",

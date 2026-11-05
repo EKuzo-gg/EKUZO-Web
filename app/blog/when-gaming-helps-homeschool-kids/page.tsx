@@ -26,7 +26,7 @@ const HERO_IMAGE = "/images/blog-post-5-hero.jpg";
 // and the Article JSON-LD so every share surface uses one source of truth.
 const SHARE_IMAGE = "/images/blog-post-5-card.jpg";
 const DATE_PUBLISHED = "2026-05-21";
-const DATE_MODIFIED = "2026-10-13";
+const DATE_MODIFIED = "2026-11-05";
 
 // Spoken transcript of Karlin's reel (the embedded Instagram video). Inlined
 // as a string literal — no fs access from public/ (see lib/schema.ts note and
@@ -344,7 +344,9 @@ export default function PostWhenGamingHelpsHomeschoolKids() {
                 <li>
                   <strong>Give it a goal.</strong>{" "}Practicing toward
                   something, a match, a project, a skill, gives the hours a
-                  point and a natural place to stop.
+                  point and{" "}
+                  <Link href="/blog/how-to-get-your-kid-off-video-games-without-a-fight">a natural place to stop</Link>
+                  .
                 </li>
                 <li>
                   <strong>Choose the games on purpose.</strong>{" "}Co-op,

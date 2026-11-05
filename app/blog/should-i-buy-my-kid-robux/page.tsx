@@ -48,7 +48,7 @@ const HERO_ALT =
   "A dad and his daughter at the kitchen counter, looking at a Dress to Impress runway on her tablet; he points to the five stars other players gave her outfit.";
 // Re-set both to the ship date if it ships another day.
 const DATE_PUBLISHED = "2026-10-26";
-const DATE_MODIFIED = "2026-10-26";
+const DATE_MODIFIED = "2026-11-05";
 
 const ROBLOX_PARENTAL_CONTROLS =
   "https://en.help.roblox.com/hc/en-us/articles/30428310121620-Parental-Controls-Overview";
@@ -567,6 +567,10 @@ export default function PostShouldIBuyMyKidRobux() {
               Weighing a ban instead?{" "}
               <Link href="/blog/should-you-ban-fortnite">
                 Here&apos;s how one family handled Fortnite
+              </Link>
+              . If the fight is about getting off the game, here&apos;s{" "}
+              <Link href="/blog/how-to-get-your-kid-off-video-games-without-a-fight">
+                how to get your kid off the game without a fight
               </Link>
               . For the bigger picture, read{" "}
               <Link href="/blog/what-your-kids-gaming-is-telling-you">
