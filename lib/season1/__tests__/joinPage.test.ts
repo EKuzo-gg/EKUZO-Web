@@ -87,11 +87,17 @@ describe("renderJoin SEO block (R2-D5, R2-D6, R2-D8)", () => {
     assert.equal(course.courseMode, "online");
     assert.equal(course.offers.price, 580);
     assert.equal(course.offers.priceCurrency, "USD");
-    assert.equal(course.offers.description, "$100 today covers January, then $160 a month February to April, per kid. Siblings are 20% off.");
+    assert.equal(course.offers.description, "$100 covers January, then $160 a month February to April, per kid. Siblings are 20% off.");
     assert.equal(course.offers.availability, "https://schema.org/InStock");
     assert.equal(course.offers.validThrough, "2026-12-31T23:59:59-08:00");
     assert.ok(ld["@graph"].some((n: { "@type": string }) => n["@type"] === "BreadcrumbList"));
     assert.ok(!JSON.stringify(ld).includes("FAQPage"));
+    assert.ok(!JSON.stringify(ld).includes(".."), "no double period");
+    assert.ok(!course.offers.description.includes("today"));
+    const meta = decodeURIComponent(seo.match(/name="description" content="([^"]*)"/)![1].replace(/&#39;/g, "'"));
+    assert.ok(meta.length < 155, `meta length ${meta.length}`);
+    assert.equal(meta, "EKUZO Season 01: a coach-led youth gaming team for ages 9 to 17, online twice a week, mid January to May. $100 covers January, then $160 a month.");
+    assert.ok(!meta.includes(".."));
   });
   it("stays indexed when closed: Offer SoldOut, same canonical", () => {
     for (const [now, mode] of [[CLOSED, "live"], [OPEN, "off"]] as const) {

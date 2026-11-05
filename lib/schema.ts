@@ -753,16 +753,20 @@ const dollars = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents 
 /** The Offer description, from offer.ts: "$100 today covers January, then $160 a month February to April". */
 export function joinOfferDescription(): string {
   const sibPct = Math.round((1 - OFFER.siblingMonthlyCents / OFFER.monthlyCents) * 100);
-  return `${dollars(OFFER.firstKidCents)} today covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month February to April, per kid. Siblings are ${sibPct}% off.`;
+  return `${dollars(OFFER.firstKidCents)} covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month February to April, per kid. Siblings are ${sibPct}% off.`;
 }
 
-/** The meta description for the indexable join page, from offer.ts. */
+const joinIntro = () =>
+  `EKUZO Season 01: a coach-led youth gaming team for ages ${OFFER.ageCopyMin} to ${OFFER.ageCopyMax}, online twice a week, ${OFFER.seasonLabel.replace(/ \d+, \d{4}$/, "")}.`;
+
+/** The meta description for the indexable join page, from offer.ts (under 155 characters). */
 export function joinMetaDescription(): string {
-  return (
-    `Season 01 is EKUZO's coach-led youth gaming league for ages ${OFFER.ageCopyMin} to ${OFFER.ageCopyMax}. ` +
-    `Two 90-minute online practices a week with the same coach and team, ${OFFER.seasonLabel}. ` +
-    `${joinOfferDescription()}.`
-  );
+  return `${joinIntro()} ${dollars(OFFER.firstKidCents)} covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month.`;
+}
+
+/** The Course description: intro plus the full Offer description (which ends with its own period). */
+export function joinCourseDescription(): string {
+  return `${joinIntro()} ${joinOfferDescription()}`;
 }
 
 export function buildJoinSchemaGraph(open: boolean) {
@@ -775,7 +779,7 @@ export function buildJoinSchemaGraph(open: boolean) {
         "@type": "Course",
         "@id": `${JOIN_CANONICAL}#course`,
         name: "EKUZO Season 01",
-        description: joinMetaDescription(),
+        description: joinCourseDescription(),
         url: JOIN_CANONICAL,
         // Inline because this route-handler page does not carry the site graph; the same @id merges with it.
         provider: { "@type": "Organization", "@id": ORG_ID, name: "EKUZO", url: SITE },
