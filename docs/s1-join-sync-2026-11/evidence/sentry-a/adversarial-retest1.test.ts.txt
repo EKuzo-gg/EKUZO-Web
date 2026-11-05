@@ -1,0 +1,200 @@
+import { describe, it, before, after, beforeEach } from "node:test";
+import assert from "node:assert/strict";
+
+/**
+ * POST /api/season-one, W3 server side (R3.1 to R3.5, R3.11, R2.1, R2.2, M1, M3, M4, M6, M7).
+ * fetch is mocked: Neon HTTP (neon.tech, a small in-memory s1_rate_limits that honors the
+ * claim statement's contract), Klaviyo and the Meta Graph API. No real network or database.
+ */
+const saved: Record<string, string | undefined> = {};
+const realFetch = globalThis.fetch;
+const realConsole = { log: console.log, warn: console.warn, error: console.error };
+
+type Sent = { query: string; params: unknown[] };
+const neonCalls: Sent[][] = []; // one entry per transaction
+let klaviyo: { path: string; body: any }[] = [];
+let graph: { body: any }[] = [];
+let seenKeys = new Set<string>();
+let dbMode: "ok" | "throw" | "hang" | "slow900" = "ok";
+let eventThrows = false;
+let eventStatus = 200;
+
+// The Neon driver sends a JS array parameter as a Postgres array literal: {"a","b"}.
+const pgArray = (v: unknown) => String(v).replace(/^\{|\}$/g, "").split(",").map((x) => x.replace(/^"|"$/g, "")).filter(Boolean);
+const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
+const rowsFor = (keys: string[]) => ({ command: "SELECT", rowCount: keys.length, fields: [{ name: "key", dataTypeID: 25 }], rows: keys.map((k) => [k]) });
+
+async function fakeFetch(url: unknown, init?: RequestInit) {
+  const u = String(url);
+  const body = JSON.parse(String(init?.body ?? "{}"));
+  if (u.includes("neon.tech")) {
+    const queries: Sent[] = body.queries ?? [{ query: body.query, params: body.params }];
+    neonCalls.push(queries);
+    if (dbMode === "throw") return json({ message: "db down" }, 500);
+    if (dbMode === "slow900") { await new Promise((r) => setTimeout(r, 900)); }
+    if (dbMode === "hang") {
+      await new Promise((r) => setTimeout(r, 1500));
+      return json({ message: "late" }, 500);
+    }
+    const results = queries.map((q) => {
+      if (/^delete from s1_rate_limits/.test(q.query)) { for (const k of pgArray(q.params[0])) seenKeys.delete(k); return rowsFor([]); }
+      if (!/from s1_rate_limits/.test(q.query)) return rowsFor([]);
+      const wanted = pgArray(q.params[0]);
+      const seen = wanted.filter((k) => seenKeys.has(k));
+      for (const k of wanted) seenKeys.add(k);
+      return rowsFor(seen);
+    });
+    return json({ results });
+  }
+  if (u.includes("a.klaviyo.com")) {
+    klaviyo.push({ path: u.split("/api/")[1], body });
+    if (eventThrows && u.endsWith("/events")) throw new Error("net down");
+    const isEvent = u.endsWith("/events");
+    return new Response(isEvent ? "" : "{}", { status: isEvent ? eventStatus : 202 });
+  }
+  if (u.includes("graph.facebook.com")) {
+    graph.push({ body });
+    return json({ events_received: 1 });
+  }
+  throw new Error("unit: unexpected network call " + u);
+}
+
+const events = () => klaviyo.filter((c) => c.path === "events").map((c) => c.body.data.attributes);
+const subscribes = () => klaviyo.filter((c) => c.path.startsWith("profile-subscription"));
+const claimSql = () => neonCalls.flat().find((q) => /from s1_rate_limits/.test(q.query));
+
+let keyHash: (v: string) => string;
+const post = async (payload: Record<string, unknown>, headers: Record<string, string> = {}) => {
+  const { POST } = await import("../../../app/api/season-one/route");
+  const { NextRequest } = await import("next/server");
+  const r = await POST(
+    new NextRequest("http://localhost:3103/api/season-one", {
+      method: "POST",
+      headers: { "content-type": "application/json", ...headers },
+      body: JSON.stringify(payload),
+    }),
+  );
+  return { status: r.status, body: (await r.json()) as Record<string, unknown> };
+};
+const signup = (extra: Record<string, unknown> = {}) => ({ email: "Parent.One+kid@example.com", source: "ad-landing", ad: "d19", eventId: "evt-aaaa-1111", ...extra });
+const emailKey = (e = "parent.one+kid@example.com") => `s1wl:em:${keyHash(e)}`;
+const evKey = (id: string, e = "parent.one+kid@example.com") => `s1wl:ev:${keyHash(`${e}|${id}`)}`;
+
+
+describe("adversarial (Sentry A)", () => {
+  before(async () => {
+    for (const k of ["DATABASE_URL", "KLAVIYO_PRIVATE_API_KEY", "S1_REF_SECRET", "STRIPE_SECRET_KEY", "META_CAPI_ACCESS_TOKEN", "META_PIXEL_ID"]) saved[k] = process.env[k];
+    process.env.DATABASE_URL = "postgresql://" + "unit" + ":" + "unit" + "@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+    process.env.KLAVIYO_PRIVATE_API_KEY = "unit-klaviyo-key";
+    process.env.S1_REF_SECRET = "unit-ref-secret-0123456789";
+    process.env.STRIPE_SECRET_KEY = "unit-not-a-live-key";
+    process.env.META_CAPI_ACCESS_TOKEN = "unit-meta-token";
+    process.env.META_PIXEL_ID = "1234567890";
+    globalThis.fetch = fakeFetch as typeof fetch;
+    console.log = console.warn = console.error = () => {};
+    keyHash = (await import("../../season1/rules")).keyHash;
+  });
+  after(() => { globalThis.fetch = realFetch; Object.assign(console, realConsole); });
+  beforeEach(() => { neonCalls.length = 0; klaviyo = []; graph = []; seenKeys = new Set(); dbMode = "ok"; eventStatus = 200; eventThrows = false; });
+
+  it("A1 malformed eventId values never throw; sanitized or dropped", async () => {
+    for (const v of [{ a: 1 }, ["x"], 12345, true, null, "a b c", "💥💥", "x".repeat(10000), "../../etc/passwd", "__proto__"]) {
+      klaviyo = []; graph = []; seenKeys = new Set(); neonCalls.length = 0;
+      const r = await post(signup({ eventId: v, email: "mal@example.com" }));
+      assert.equal(r.status, 200, JSON.stringify(v).slice(0, 30));
+      const ev = events()[0];
+      const idPart = ev.unique_id.replace("mal@example.com-Season 01 Waitlist-", "");
+      assert.match(idPart, /^[A-Za-z0-9-]*$/, "unique_id suffix sanitized");
+      assert.ok(idPart.length <= 64 || /^\d{10,}$/.test(idPart), "capped at 64 or timestamp form: " + idPart.length);
+      const keys = pgArray(claimSql()!.params[0]);
+      assert.ok(keys.length <= 2);
+    }
+  });
+  it("A2 eventId of only symbols: only the email key is claimed; second request is repeat", async () => {
+    await post(signup({ eventId: "!!!???" }));
+    assert.equal(pgArray(claimSql()!.params[0]).length, 1);
+    const r = await post(signup({ eventId: "@@@" }));
+    assert.deepEqual(r.body, { ok: true, repeat: true });
+  });
+  it("A3 very long email: 254 ok (+ address), 255+ rejected without a DB call", async () => {
+    const local = "a".repeat(64) + "+" + "b".repeat(10);
+    const dom = ("d".repeat(60) + ".").repeat(2) + "com";
+    const ok = local + "@" + dom; // <=254
+    assert.ok(ok.length <= 254, String(ok.length));
+    assert.equal((await post(signup({ email: ok }))).status, 200);
+    neonCalls.length = 0;
+    const longE = "x".repeat(400) + "@example.com";
+    const r = await post(signup({ email: longE }));
+    assert.equal(r.status, 400);
+    assert.equal(neonCalls.length, 0);
+    const edge = "y".repeat(300) + "@a.bc"; // truncation to 254 chops the domain
+    assert.equal((await post(signup({ email: edge }))).status, 400);
+  });
+  it("A4 plus address and base address are different people for the check; case and spaces are not", async () => {
+    await post(signup({ email: "pl+us@example.com" }));
+    const r1 = await post(signup({ email: "pl@example.com", eventId: "evt-zzzz-0001" }));
+    assert.deepEqual(r1.body, { ok: true }, "a different mailbox is new");
+    const r2 = await post(signup({ email: "  PL+US@Example.com ", eventId: "evt-zzzz-0002" }));
+    assert.deepEqual(r2.body, { ok: true, repeat: true });
+  });
+  it("A6 transaction resolving after 900 ms: classified new, Waitlist event, no Repeat, even though the email is already claimed", async () => {
+    await post(signup({ email: "slow@example.com" }));
+    klaviyo = []; graph = [];
+    dbMode = "slow900";
+    const t0 = Date.now();
+    const r = await post(signup({ email: "slow@example.com", eventId: "evt-slow-0002" }));
+    const ms = Date.now() - t0;
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(events().length, 1);
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist");
+    assert.ok(!events().some((e) => /Repeat/.test(e.metric.data.attributes.name)));
+    assert.equal(graph.length, 1, "fail-open new sends the Lead");
+    assert.ok(ms >= 780 && ms < 1400, "returned at the cap: " + ms);
+  });
+  it("A7 Klaviyo event 502 on the repeat path: still {ok:true,repeat:true}, subscribe still runs, no Lead", async () => {
+    await post(signup({ email: "r502@example.com" }));
+    klaviyo = []; graph = []; eventStatus = 502;
+    const r = await post(signup({ email: "r502@example.com", eventId: "evt-r502-0002" }));
+    assert.deepEqual(r, { status: 200, body: { ok: true, repeat: true } });
+    assert.equal(subscribes().length, 1);
+    assert.equal(graph.length, 0);
+  });
+  it("A8 Klaviyo event throws (network) on the repeat path: same", async () => {
+    await post(signup({ email: "rthrow@example.com" }));
+    klaviyo = []; graph = []; eventThrows = true;
+    const r = await post(signup({ email: "rthrow@example.com", eventId: "evt-rthr-0002" }));
+    assert.deepEqual(r, { status: 200, body: { ok: true, repeat: true } });
+    assert.equal(subscribes().length, 1);
+    assert.equal(graph.length, 0);
+  });
+  it("A9 honeypot plus a seen email: silent 200 {ok:true}, no DB call, no Klaviyo, no Lead (not repeat:true)", async () => {
+    await post(signup({ email: "hp@example.com" }));
+    neonCalls.length = 0; klaviyo = []; graph = [];
+    const r = await post(signup({ email: "hp@example.com", eventId: "evt-hp00-0002", ekz_hp: "x" }));
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(neonCalls.length, 0); assert.equal(klaviyo.length, 0); assert.equal(graph.length, 0);
+  });
+  it("A10 legacy `company` key does not trip the honeypot (hotfix contract: key is ekz_hp server-side)", async () => {
+    const r = await post(signup({ email: "co@example.com", company: "Acme" }));
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(events().length, 1);
+  });
+  it("A11 new-path failure of the SUBSCRIBE or event after claim: claim persists; a retry within 24 h with new eventId becomes repeat (documents the 502 path)", async () => {
+    eventStatus = 500;
+    const r1 = await post(signup({ email: "f502@example.com" }));
+    assert.equal(r1.status, 502);
+    eventStatus = 200; klaviyo = []; graph = [];
+    const r2 = await post(signup({ email: "f502@example.com" }));   // same eventId = retry
+    assert.deepEqual(r2.body, { ok: true }, "same eventId retry gets full path");
+    assert.equal(graph.length, 1);
+    eventStatus = 500;
+    const r3 = await post(signup({ email: "f502b@example.com", eventId: "evt-f502-b001" }));
+    assert.equal(r3.status, 502);
+    eventStatus = 200; klaviyo = []; graph = [];
+    const r4 = await post(signup({ email: "f502b@example.com", eventId: "evt-f502-b002" })); // page minted a new id (e.g. reload)
+    assert.deepEqual(r4.body, { ok: true }, "SA-1 retest: new eventId after a 502 is new");
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist");
+    assert.equal(graph.length, 1);
+    assert.equal(events()[0].profile.data.attributes.properties.season1_ad, "d19");
+  });
+});

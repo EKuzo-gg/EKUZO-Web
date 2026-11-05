@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: adversarial A5 (fresh process, getSql not memoized)
+    # Subtest: A5 DATABASE_URL set but getSql throws (non-test host, no production context): new, warned, no email in log
+    ok 1 - A5 DATABASE_URL set but getSql throws (non-test host, no production context): new, warned, no email in log
+      ---
+      duration_ms: 210.171338
+      type: 'test'
+      ...
+    1..1
+ok 1 - adversarial A5 (fresh process, getSql not memoized)
+  ---
+  duration_ms: 232.90761
+  type: 'suite'
+  ...
+# Subtest: adversarial (Sentry A)
+    # Subtest: A1 malformed eventId values never throw; sanitized or dropped
+    ok 1 - A1 malformed eventId values never throw; sanitized or dropped
+      ---
+      duration_ms: 223.955185
+      type: 'test'
+      ...
+    # Subtest: A2 eventId of only symbols: only the email key is claimed; second request is repeat
+    ok 2 - A2 eventId of only symbols: only the email key is claimed; second request is repeat
+      ---
+      duration_ms: 3.945962
+      type: 'test'
+      ...
+    # Subtest: A3 very long email: 254 ok (+ address), 255+ rejected without a DB call
+    ok 3 - A3 very long email: 254 ok (+ address), 255+ rejected without a DB call
+      ---
+      duration_ms: 3.701395
+      type: 'test'
+      ...
+    # Subtest: A4 plus address and base address are different people for the check; case and spaces are not
+    ok 4 - A4 plus address and base address are different people for the check; case and spaces are not
+      ---
+      duration_ms: 4.423957
+      type: 'test'
+      ...
+    # Subtest: A6 transaction resolving after 900 ms: classified new, Waitlist event, no Repeat, even though the email is already claimed
+    ok 5 - A6 transaction resolving after 900 ms: classified new, Waitlist event, no Repeat, even though the email is already claimed
+      ---
+      duration_ms: 813.80432
+      type: 'test'
+      ...
+    # Subtest: A7 Klaviyo event 502 on the repeat path: still {ok:true,repeat:true}, subscribe still runs, no Lead
+    ok 6 - A7 Klaviyo event 502 on the repeat path: still {ok:true,repeat:true}, subscribe still runs, no Lead
+      ---
+      duration_ms: 4.558935
+      type: 'test'
+      ...
+    # Subtest: A8 Klaviyo event throws (network) on the repeat path: same
+    ok 7 - A8 Klaviyo event throws (network) on the repeat path: same
+      ---
+      duration_ms: 4.100022
+      type: 'test'
+      ...
+    # Subtest: A9 honeypot plus a seen email: silent 200 {ok:true}, no DB call, no Klaviyo, no Lead (not repeat:true)
+    ok 8 - A9 honeypot plus a seen email: silent 200 {ok:true}, no DB call, no Klaviyo, no Lead (not repeat:true)
+      ---
+      duration_ms: 3.683073
+      type: 'test'
+      ...
+    # Subtest: A10 legacy `company` key does not trip the honeypot (hotfix contract: key is ekz_hp server-side)
+    ok 9 - A10 legacy `company` key does not trip the honeypot (hotfix contract: key is ekz_hp server-side)
+      ---
+      duration_ms: 2.18086
+      type: 'test'
+      ...
+    # Subtest: A11 new-path failure of the SUBSCRIBE or event after claim: claim persists; a retry within 24 h with new eventId becomes repeat (documents the 502 path)
+    ok 10 - A11 new-path failure of the SUBSCRIBE or event after claim: claim persists; a retry within 24 h with new eventId becomes repeat (documents the 502 path)
+      ---
+      duration_ms: 8.333572
+      type: 'test'
+      ...
+    1..10
+ok 2 - adversarial (Sentry A)
+  ---
+  duration_ms: 1083.926713
+  type: 'suite'
+  ...
+1..2
+# tests 11
+# suites 2
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1665.977076

@@ -4,11 +4,12 @@ Branch `build/s1-join-sync-funnel-fixes` at 585617b. Evidence: `evidence/sentry-
 
 | ID | Severity | Type | Requirement | Owner | Status |
 |---|---|---|---|---|---|
-| SA-1 | medium | code-bug | R3.1, R3.2, M4 | Relay | open |
-| SA-2 | low | code-bug (test gap) | R3.5, R3.11 | Relay | open |
-| SA-3 | low | accepted-risk | R3.2 | Atlas or Relay | open, for Fable to accept |
+| SA-1 | medium | code-bug | R3.1, R3.2, M4 | Relay | closed (retest cycle 1, 16b2a33) |
+| SA-2 | low | code-bug (test gap) | R3.5, R3.11 | Relay | closed (retest cycle 1) |
+| SA-3 | low | accepted-risk | R3.2 | Atlas or Relay | closed (retest cycle 1, first_name no longer sent on repeat) |
 | SA-4 | low | infra-gap | D16, R3.1 | Relay | open |
 | SA-5 | info | infra-gap | tsc evidence | Atlas | open |
+| SA-6 | low | code-bug | R3.5 budget | Relay | open (new, retest cycle 1) |
 
 ## SA-1 (medium, code-bug): a failed first sign-up still claims the email, so the next attempt with a new eventId is a "repeat" and no Waitlist event, profile props or Lead ever land
 
@@ -39,3 +40,11 @@ Housekeeping, not a defect: dedupe rows older than 24 h are deleted only by the 
 ## SA-5 (info, infra-gap): stale `.next/types` in the worktree makes `tsc --noEmit` exit 2
 
 `npx tsc --noEmit -p .` in `/home/claude/wt-build` reports 3 errors, all in the git-ignored, stale `.next/types/app/api/season1/{commit,stripe-webhook,warm}/route.ts` (protected files, zero diff). A clean copy of the worktree (no `.next`) and a clean `git archive c1f01e6` both give 0 errors. Not caused by the build; delete `.next` before running tsc in this worktree.
+
+## SA-6 (low, code-bug, new in retest cycle 1): `releaseClaim` has no timeout of its own
+
+On the 502 path the release delete is bounded only by the Neon driver's 8 s timeout, so 0.8 + 3.5 + 8 s can pass the 10 s function limit on a failure with a slow database. Failure path only. Suggested: wrap in the same kind of 800 ms race as the classification. A claim committed after the 800 ms cap is not in `claimed` and stays (rare).
+
+## Retest cycle 1
+
+SA-1, SA-2, SA-3 closed: see `evidence/sentry-a/retest-1.md`.

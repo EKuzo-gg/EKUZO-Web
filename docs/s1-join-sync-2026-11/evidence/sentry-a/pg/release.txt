@@ -1,0 +1,8 @@
+## SA-1 release on real Postgres 16 (release SQL verbatim from route.ts releaseClaim)
+1 claim attempt A {em,evA} seen=[]  (new)
+2 simulated event failure; release {em,evA}: 
+   rows left: 0
+3 reclaim attempt B {em,evB} seen=[]  (expect empty = new)
+4 attempt C {em,evC} seen=[em ] (expect em = repeat, B's claim intact)
+5 rows now: em,evB,evC
+6 release leaves rows outside the 24 h window: old rows=1
