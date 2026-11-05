@@ -4,6 +4,22 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-05 (afternoon): Season 01 round 2 (Build Loop, docs/s1-round2-2026-11/)
+
+- `/api/season-one`: per-IP limit inside the claim transaction, counting only new sign-ups (Netlify client IP only,
+  IPv6 by /64, no IP no limit): above 10 an hour the sign-up saves but sends no Lead (`quiet:true`), above 30 a 429
+  with "We couldn't save your sign-up just now. Text our founder at (832) 271-0150 and we'll add you by hand.";
+  above 150 new sign-ups an hour site-wide every sign-up goes quiet. Steps (`games`, `age`, `text-karlin`) need a
+  matching sign-up claim from the last 24 h (eventId, or email for old pages); a repeat claims its own `s1wl:rp:`
+  key; Text Karlin capped at 3 per email per day. Meta IP from the Netlify header only; no raw email or Klaviyo
+  bodies in logs; cross-site POSTs get 403.
+- Landing: ad images moved from inline base64 to `public/images/season1/landing/` (page 1.35 MB to 127 KB); phones
+  reserve the interactive-hero box (`pre-ih`), CLS 0.16 to 0.39 down to 0.054 or less (d9 paused, accepted at 0.17).
+  Landing and popup honor `quiet` and show the 429 text.
+- `/season1/join` is indexable on ekuzo.gg in live mode (canonical, description, Course and Offer JSON-LD at $580
+  per kid from offer.ts, SoldOut when closed); /join/b, /jersey, /season1, signup stay noindex; sitemap entry.
+- Checks: `npm test` 575 tests, 574 pass, 0 fail; Sentry A and B, Steward. Season 01 FAQ canon written in the KB.
+
 ## Jamie's Claude, 2026-11-05 (10:45): IndexNow
 
 - `public/b170122d53c1cec5ebbc3a713e1b4854.txt` is the IndexNow key file (public by design) and `scripts/indexnow.mjs` sends changed URLs to api.indexnow.org, which shares them with Bing and the other IndexNow engines. `npm run indexnow -- <urls>` sends the URLs given; with no args it sends every sitemap URL whose lastmod is today (US Central). `--dry` prints without sending. The script refuses URLs off ekuzo.gg and stops if the key file is not live yet, so run it after the deploy.
