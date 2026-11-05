@@ -1,0 +1,10 @@
+.next/types/app/api/season1/commit/route.ts(14,13): error TS2344: Type 'OmitWithTag<typeof import("/home/claude/wt-build/app/api/season1/commit/route"), "POST" | "revalidate" | "DELETE" | "instant" | "GET" | "config" | "prefetch" | "generateStaticParams" | "ensureStatic" | ... 10 more ... | "PATCH", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'LIMITS' is incompatible with index signature.
+    Type '{ readonly ipPer10Min: 5; readonly emailPerDay: 20; readonly globalPerHour: 1000; readonly duplicateKidPerDay: 3; }' is not assignable to type 'never'.
+.next/types/app/api/season1/stripe-webhook/route.ts(14,13): error TS2344: Type 'OmitWithTag<typeof import("/home/claude/wt-build/app/api/season1/stripe-webhook/route"), "POST" | "revalidate" | "DELETE" | "instant" | "GET" | "config" | "prefetch" | "generateStaticParams" | ... 11 more ... | "PATCH", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'CARD_TESTING_FAILURES' is incompatible with index signature.
+    Type '3' is not assignable to type 'never'.
+.next/types/app/api/season1/warm/route.ts(14,13): error TS2344: Type 'OmitWithTag<typeof import("/home/claude/wt-build/app/api/season1/warm/route"), "POST" | "revalidate" | "DELETE" | "instant" | "GET" | "config" | "prefetch" | "generateStaticParams" | "ensureStatic" | ... 10 more ... | "PATCH", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'WARM_EVERY_MS' is incompatible with index signature.
+    Type '20000' is not assignable to type 'never'.
+exit 1

@@ -1,0 +1,6 @@
+test ekuzo.gg | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0
+test www.ekuzo.gg | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0
+test localhost | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0
+off ekuzo.gg | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0
+off www.ekuzo.gg | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0
+off localhost | HTTP/1.1 200 OK | xrt=x-robots-tag: noindex | meta=<meta name="robots" content="noindex"> | canon=0 | ld=0

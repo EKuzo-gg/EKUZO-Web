@@ -1,0 +1,14 @@
+live-deploy-preview-9--ekuzo.netlify.app-join | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-deploy-preview-9--ekuzo.netlify.app-join_b | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-deploy-preview-9--ekuzo.netlify.app-join_jersey | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-ekuzo-s1-join_signup | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-ekuzo-s1-root | HTTP/1.1 308 Permanent Redirect | xrt=[] | meta=[] | canon=[] | ldjson=0
+live-ekuzo.gg-join | HTTP/1.1 200 OK | xrt=[] | meta=[] | canon=[<link rel="canonical" href="https://ekuzo.gg/season1/join">] | ldjson=1
+live-ekuzo.gg-join_b | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-ekuzo.gg-join_jersey | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-localhost_3187-join | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-localhost_3187-join_b | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-localhost_3187-join_jersey | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-www.ekuzo.gg-join | HTTP/1.1 200 OK | xrt=[] | meta=[] | canon=[<link rel="canonical" href="https://ekuzo.gg/season1/join">] | ldjson=1
+live-www.ekuzo.gg-join_b | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0
+live-www.ekuzo.gg-join_jersey | HTTP/1.1 200 OK | xrt=[x-robots-tag: noindex ] | meta=[<meta name="robots" content="noindex">] | canon=[] | ldjson=0

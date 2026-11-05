@@ -1,0 +1,13 @@
+#!/bin/bash
+# usage: run.sh email_key ev_key ip_key  -> prints rows
+SP=/tmp/claude-0/-home-claude/28eb54ed-d9c5-5c5a-914f-2ef1a6aaced7/scratchpad
+EM=$1; EV=$2; IP=$3
+KEYS="{$EM"; [ -n "$EV" ] && KEYS="$KEYS,$EV"; KEYS="$KEYS}"
+CNT="{s1ip:global"; [ -n "$IP" ] && CNT="{$IP,s1ip:global"; CNT="$CNT}"
+psql -h $SP/pg -p 54399 -U postgres -d s1 -q -t -A -F' ' <<SQL
+begin;
+select pg_advisory_xact_lock(hashtext('$EM'));
+\i $SP/pg/claim.sql
+execute claim('$KEYS', false, '$EM', '$CNT');
+commit;
+SQL

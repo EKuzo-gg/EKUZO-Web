@@ -1,0 +1,28 @@
+import { it } from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+const R = "/home/claude/wt-build";
+it("hostile strings stay escaped in the rendered join page (mutating OFFER in memory only)", async () => {
+  const { OFFER } = await import(R + "/lib/season1/offer.ts");
+  const { renderJoin } = await import(R + "/lib/season1/joinPage.ts");
+  const { escapeJsonLd } = await import(R + "/lib/schema.ts");
+  const e = escapeJsonLd({ a: "</script><script>alert(1)</script>  <!--" });
+  assert.ok(!e.includes("<") && !e.includes(" ") && !e.includes(" ")); assert.deepEqual(JSON.parse(e), { a: "</script><script>alert(1)</script>  <!--" });
+  (OFFER as any).seasonLabel = "x</script><script>window.PWN=1</script>  -->";
+  const tpl = fs.readFileSync(R + "/app/season1/join/b/join-b.html", "utf8");
+  const html: string = renderJoin(tpl, { now: new Date("2026-11-10T12:00:00Z"), mode: "live", src: null, tags: { head: "", body: "" } as any, seo: { indexable: true } });
+  const blk = html.match(/<!--SEO:start-->([\s\S]*?)<!--SEO:end-->/)![1];
+  const ld = blk.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)![1];
+  assert.ok(!ld.includes("<") && !ld.includes(" ") && !ld.includes(" "), "JSON-LD escaped");
+  assert.ok(!/<script>window\.PWN/.test(blk), "no live script injection in SEO block");
+  const meta = blk.match(/<meta name="description" content="([^"]*)">/)![1];
+  assert.ok(!meta.includes("<") && !meta.includes('"'), "meta description attribute-escaped: " + meta.slice(0, 120));
+  console.log("OK: SEO block hostile-safe; meta:", meta.slice(0, 160));
+  // closed state
+  (OFFER as any).seasonLabel = "mid January to May 6, 2027";
+  const closed: string = renderJoin(tpl, { now: new Date("2027-01-05T12:00:00Z"), mode: "live", src: null, tags: { head: "", body: "" } as any, seo: { indexable: true } });
+  const ld2 = JSON.parse(closed.match(/application\/ld\+json">([\s\S]*?)<\/script>/)![1]);
+  console.log("closed availability:", ld2["@graph"][0].offers.availability, "robots meta present:", /name="robots"/.test(closed));
+  const off: string = renderJoin(tpl, { now: new Date("2026-11-10T12:00:00Z"), mode: "off", src: null, tags: { head: "", body: "" } as any, seo: { indexable: true } });
+  console.log("mode off + seo indexable:true => robots meta:", (off.match(/<meta name="robots"[^>]*>/) || ["none"])[0], "(route gates it; renderJoin trusts the flag)");
+});

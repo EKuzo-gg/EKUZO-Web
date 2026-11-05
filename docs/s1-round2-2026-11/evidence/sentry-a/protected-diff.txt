@@ -1,0 +1,20 @@
+## protected-path diff a919b25..HEAD(7326033)
+(empty above = zero diff)
+## same range to 54e9a5d
+(empty = zero)
+## all non-doc, non-image files changed
+app/api/season-one/route.ts
+app/season1/join/b/join-b.html
+app/season1/join/b/route.ts
+app/season1/join/jersey/join-jersey.html
+app/season1/join/jersey/route.ts
+app/season1/join/route.ts
+app/season1/landing.html
+app/sitemap.ts
+components/ui/SeasonOnePopup.tsx
+lib/schema.ts
+lib/season1/__tests__/joinPage.test.ts
+lib/season1/__tests__/joinRoutesMatch.test.ts
+lib/season1/__tests__/seasonOneRoute.test.ts
+lib/season1/__tests__/sitemap.test.ts
+lib/season1/joinPage.ts

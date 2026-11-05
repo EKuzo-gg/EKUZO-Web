@@ -1,0 +1,16 @@
+prepare claim(text[],boolean,text,text[]) as
+with seen as (
+           select key from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'),
+         claimed as (
+           insert into s1_rate_limits (key, window_start, count, livemode)
+           select k, now(), 1, $2::boolean from unnest($1::text[]) k
+            where k not in (select key from seen) and not exists (select 1 from seen where key = $3::text)
+           on conflict do nothing returning key),
+         counted as (
+           insert into s1_rate_limits (key, window_start, count, livemode)
+           select k, to_timestamp(floor(extract(epoch from now()) / 3600) * 3600), 1, $2::boolean from unnest($4::text[]) k
+            where exists (select 1 from claimed where key = $3::text)
+           on conflict (key, window_start) do update set count = s1_rate_limits.count + 1
+           returning key, count)
+         select 'seen' as kind, key, 0 as n from seen
+         union all select 'ip', key, count from counted;

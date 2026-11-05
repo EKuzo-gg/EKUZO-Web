@@ -1,0 +1,47 @@
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Course",
+   "@id": "https://ekuzo.gg/season1/join#course",
+   "name": "EKUZO Season 01",
+   "description": "Season 01 is EKUZO's coach-led youth gaming league for ages 9 to 17. Two 90-minute online practices a week with the same coach and team, mid January to May 6, 2027. $100 today covers January, then $160 a month February to April, per kid. Siblings are 20% off..",
+   "url": "https://ekuzo.gg/season1/join",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://ekuzo.gg/#organization",
+    "name": "EKUZO",
+    "url": "https://ekuzo.gg"
+   },
+   "courseMode": "online",
+   "inLanguage": "en",
+   "offers": {
+    "@type": "Offer",
+    "price": 580,
+    "priceCurrency": "USD",
+    "description": "$100 today covers January, then $160 a month February to April, per kid. Siblings are 20% off.",
+    "url": "https://ekuzo.gg/season1/join",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2026-10-26T00:00:00-05:00",
+    "validThrough": "2026-12-31T23:59:59-08:00"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://ekuzo.gg"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Season 01",
+     "item": "https://ekuzo.gg/season1/join"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+TAP version 13
+# OK: SEO block hostile-safe; meta: Season 01 is EKUZO&\#39;s coach-led youth gaming league for ages 9 to 17. Two 90-minute online practices a week with the same coach and team, x&lt;/script&gt;&lt
+# closed availability: https://schema.org/SoldOut robots meta present: false
+# mode off + seo indexable:true => robots meta: none (route gates it; renderJoin trusts the flag)
+# Subtest: hostile strings stay escaped in the rendered join page (mutating OFFER in memory only)
+ok 1 - hostile strings stay escaped in the rendered join page (mutating OFFER in memory only)
+  ---
+  duration_ms: 67.404666
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 207.809749

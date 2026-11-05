@@ -1,0 +1,14 @@
+ekuzo.gg join vs join/b equal outside SEO: True 28069 28069
+www.ekuzo.gg join vs join/b equal outside SEO: True 28069 28069
+SEO blocks in head: 1 inside head: True
+header diff keys: set()
+schema errors: []
+price 580 == seasonCents/100 580.0 and 100+3*160: 580.0
+validFrom==openAt True validThrough==closeAt True
+desc $100 today, $160 monthly, sib 20%
+desc: Season 01 is EKUZO's coach-led youth gaming league for ages 9 to 17. Two 90-minute online practices a week with the same coach and team, mid January to May 6, 2027. $100 today covers January, then $160 a month February to April, per kid. Siblings are 20% off..
+double period in meta description: True
+meta desc length: 260
+visible dates in page? 'May 6' : True ; '$580' in page: True ; '$100' in page: True ; '$160': True ; '20%': True
+title: Season 01 is open | EKUZO
+header diff keys (fixed parse): {'x-robots-tag': (None, 'noindex')}

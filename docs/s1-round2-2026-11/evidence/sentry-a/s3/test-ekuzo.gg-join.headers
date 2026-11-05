@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Fri, 05 Nov 2027 17:44:29 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: private, no-store
+content-type: text/html; charset=utf-8
+referrer-policy: origin
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-robots-tag: noindex
+Date: Thu, 05 Nov 2026 17:44:29 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+

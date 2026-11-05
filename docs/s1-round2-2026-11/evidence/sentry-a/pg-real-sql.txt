@@ -1,0 +1,26 @@
+## real Postgres 16, claim statement extracted verbatim from route.ts (psql prepare/execute inside begin + advisory lock)
+## A. 31 sequential distinct emails, one IP: ip count at 10,11,30,31 and global
+10: ip s1ip:X 10
+11: ip s1ip:X 11
+30: ip s1ip:X 30
+31: ip s1ip:X 31
+## B. 10 retries of e5 and 10 repeats (new ev ids) do not move the counter
+s1ip:X|31
+s1ip:global|31
+## C. 40 concurrent distinct emails same IP Y (serialization of the counter): expect final count 40, 40 distinct counts
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 
+s1ip:Y|40
+## D. hour window: age IP X row to previous hour; next new signup starts at 1, old row unchanged
+ip s1ip:X 1
+s1ip:X|31|2026-11-05 10:00:00-06
+s1ip:X|1|2026-11-05 11:00:00-06
+## E. no IP: only global counted
+ip s1ip:global 73
+## F. concurrency same email, different ev, same IP: one new, one repeat; counter +1 only
+      2 
+      1 ip s1ip:Z 1
+      1 ip s1ip:global 74
+      1 seen same 0
+s1ip:Z|1
+## G. global hour counter value
+s1ip:global|74
