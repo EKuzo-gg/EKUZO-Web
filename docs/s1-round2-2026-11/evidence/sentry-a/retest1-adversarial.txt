@@ -1,0 +1,230 @@
+TAP version 13
+# Subtest: sentry-a adversarial S2
+    # Subtest: A1 spoofed x-forwarded-for, no nf header: 40 sign-ups never quiet, no per-IP key, no IP to Meta
+    ok 1 - A1 spoofed x-forwarded-for, no nf header: 40 sign-ups never quiet, no per-IP key, no IP to Meta
+      ---
+      duration_ms: 80.366289
+      type: 'test'
+      ...
+    # Subtest: A2 nf header with spoofed xff: Meta gets the nf IP, key from nf only
+    ok 2 - A2 nf header with spoofed xff: Meta gets the nf IP, key from nf only
+      ---
+      duration_ms: 1.49461
+      type: 'test'
+      ...
+    # Subtest: A3 junk nf values (not an IP, empty, list) are skipped, never one bucket
+    ok 3 - A3 junk nf values (not an IP, empty, list) are skipped, never one bucket
+      ---
+      duration_ms: 9.896952
+      type: 'test'
+      ...
+    # Subtest: A4 IPv6 in one /64 share a bucket (compressed, expanded, upper case); another /64 does not
+    ok 4 - A4 IPv6 in one /64 share a bucket (compressed, expanded, upper case); another /64 does not
+      ---
+      duration_ms: 6.046878
+      type: 'test'
+      ...
+    # Subtest: A4b 11th from an IPv6 /64 using 11 different host bits is quiet
+    ok 5 - A4b 11th from an IPv6 /64 using 11 different host bits is quiet
+      ---
+      duration_ms: 8.292718
+      type: 'test'
+      ...
+    # Subtest: A5 ::ffff:1.2.3.4 == 1.2.3.4 == ::ffff:102:304
+    ok 6 - A5 ::ffff:1.2.3.4 == 1.2.3.4 == ::ffff:102:304
+      ---
+      duration_ms: 4.653353
+      type: 'test'
+      ...
+    # Subtest: A5b the Meta IP for a mapped address is still a valid IP (isIP) as given
+    ok 7 - A5b the Meta IP for a mapped address is still a valid IP (isIP) as given
+      ---
+      duration_ms: 4.848511
+      type: 'test'
+      ...
+    # Subtest: B 11th new is quiet (events, subscribe, no Lead), 31st is 429 with nothing written; response keys
+    ok 8 - B 11th new is quiet (events, subscribe, no Lead), 31st is 429 with nothing written; response keys
+      ---
+      duration_ms: 30.082238
+      type: 'test'
+      ...
+    # Subtest: B2 retries and repeats do not count: 50 retries + 50 repeats of one family stay at count 1
+    ok 9 - B2 retries and repeats do not count: 50 retries + 50 repeats of one family stay at count 1
+      ---
+      duration_ms: 59.179222
+      type: 'test'
+      ...
+    # Subtest: B3 a retry is never quiet even when its IP is over the quiet line (lost response still gets a Lead)
+    ok 10 - B3 a retry is never quiet even when its IP is over the quiet line (lost response still gets a Lead)
+      ---
+      duration_ms: 7.835479
+      type: 'test'
+      ...
+    # Subtest: B4 a 429'd family's email claim is released so a hand-added or later attempt reads new
+    ok 11 - B4 a 429'd family's email claim is released so a hand-added or later attempt reads new
+      ---
+      duration_ms: 21.008568
+      type: 'test'
+      ...
+    # Subtest: C global: 151st new sign-up (all different IPs) is quiet, 150th is not
+    ok 12 - C global: 151st new sign-up (all different IPs) is quiet, 150th is not
+      ---
+      duration_ms: 113.442128
+      type: 'test'
+      ...
+    # Subtest: C2 global also counts no-IP sign-ups
+    ok 13 - C2 global also counts no-IP sign-ups
+      ---
+      duration_ms: 114.472385
+      type: 'test'
+      ...
+    # Subtest: D1 DB slow (claim 900 ms) is new, no limit, even over the line
+    ok 14 - D1 DB slow (claim 900 ms) is new, no limit, even over the line
+      ---
+      duration_ms: 828.353774
+      type: 'test'
+      ...
+# E4 RESULT: text-karlin after a repeat sign-up wrote events = 1 {"status":200,"body":{"ok":true}}
+    # Subtest: D2 DB hang is new, no limit; DB throw too
+    ok 15 - D2 DB hang is new, no limit; DB throw too
+      ---
+      duration_ms: 800.864184
+      type: 'test'
+      ...
+    # Subtest: E1 step with wrong eventId dropped silently, nothing written, step_dropped warn without PII
+    ok 16 - E1 step with wrong eventId dropped silently, nothing written, step_dropped warn without PII
+      ---
+      duration_ms: 3.111866
+      type: 'test'
+      ...
+    # Subtest: E2 step with right eventId accepted; no eventId + recent email claim accepted; stranger email dropped
+    ok 17 - E2 step with right eventId accepted; no eventId + recent email claim accepted; stranger email dropped
+      ---
+      duration_ms: 2.246858
+      type: 'test'
+      ...
+    # Subtest: E3 step 24h+ later is dropped (claim older than 24 h)
+    ok 18 - E3 step 24h+ later is dropped (claim older than 24 h)
+      ---
+      duration_ms: 1.01338
+      type: 'test'
+      ...
+    # Subtest: E4 repeat sign-up then step with the repeat's NEW eventId (the landing's card flow)
+    ok 19 - E4 repeat sign-up then step with the repeat's NEW eventId (the landing's card flow)
+      ---
+      duration_ms: 3.301151
+      type: 'test'
+      ...
+    # Subtest: E5 text-karlin: 3 per email accepted, the 4th dropped silently with cap warn
+    ok 20 - E5 text-karlin: 3 per email accepted, the 4th dropped silently with cap warn
+      ---
+      duration_ms: 3.338156
+      type: 'test'
+      ...
+    # Subtest: E6 steps fail open on DB slow / hang
+    ok 21 - E6 steps fail open on DB slow / hang
+      ---
+      duration_ms: 1601.05294
+      type: 'test'
+      ...
+    # Subtest: F origin guard: cross-site 403; same-site, same-origin, none, no Origin accepted; null origin 403
+    ok 22 - F origin guard: cross-site 403; same-site, same-origin, none, no Origin accepted; null origin 403
+      ---
+      duration_ms: 7.216861
+      type: 'test'
+      ...
+# G log lines: 42 
+# ✅ Meta CAPI: Lead sent (event_id=evt-498-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-499-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-500-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-501-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-502-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-503-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-504-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-505-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-506-aaaa)
+# ✅ Meta CAPI: Lead sent (event_id=evt-507-aaaa)
+# Season 01 sign-up quiet: reason=ip_quiet
+# ✅ Meta CAPI: Lead sent (event_id=evt-497-aaaa)
+# Season 01 sign-up rate limited: reason=ip_limit
+# Season 01 step_dropped step=text-karlin reason=no_signup
+# Season 01 step_dropped step=text-karlin reason=cap
+# Season 01 dedupe check skipped: no answer in 800 ms
+# ✅ Meta CAPI: Lead sent (event_id=evt-531-aaaa)
+# Klaviyo age event failed: 500
+    # Subtest: G sentinel email and IP never appear in any console call (all branches)
+    ok 23 - G sentinel email and IP never appear in any console call (all branches)
+      ---
+      duration_ms: 837.629856
+      type: 'test'
+      ...
+# H success worst (claim 790ms, event 3.4s, subscribe+meta hang): 6692 ms {"status":200,"body":{"ok":true}}
+# H db hang + event hang: 4302 ms {"status":502,"body":{"ok":false,"error":"We couldn’t save that. Please try again."}}
+# note step worst case computed: 0.8 + 0.8 + 3.5 = 5.1 s
+    # Subtest: H time: failed event path and success path worst cases
+    ok 24 - H time: failed event path and success path worst cases
+      ---
+      duration_ms: 10994.368507
+      type: 'test'
+      ...
+# H2 step worst: 5080 ms {"status":502,"body":{"ok":false,"error":"We couldn’t save that. Please try again."}}
+    # Subtest: H2 step worst: lock 790ms + cap 790ms + event hang
+    ok 25 - H2 step worst: lock 790ms + cap 790ms + event hang
+      ---
+      duration_ms: 5081.444629
+      type: 'test'
+      ...
+    # Subtest: R1 retest: stranger with a random eventId and no sign-up is dropped (all three steps, with and without eventId)
+    ok 26 - R1 retest: stranger with a random eventId and no sign-up is dropped (all three steps, with and without eventId)
+      ---
+      duration_ms: 2.791458
+      type: 'test'
+      ...
+    # Subtest: R2 retest: repeat then step with the repeat's eventId is accepted; repeat claims no IP count; retry of the repeat is still a repeat
+    not ok 27 - R2 retest: repeat then step with the repeat's eventId is accepted; repeat claims no IP count; retry of the repeat is still a repeat
+      ---
+      duration_ms: 3.588304
+      type: 'test'
+      location: '/tmp/claude-0/-home-claude/28eb54ed-d9c5-5c5a-914f-2ef1a6aaced7/scratchpad/sa/adv2.test.mts:277:3'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        + actual - expected
+        
+        + undefined
+        - true
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: true
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///tmp/claude-0/-home-claude/28eb54ed-d9c5-5c5a-914f-2ef1a6aaced7/scratchpad/sa/adv2.test.mts:285:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: I order of checks: honeypot sign-up neither counted nor claimed
+    ok 28 - I order of checks: honeypot sign-up neither counted nor claimed
+      ---
+      duration_ms: 0.397357
+      type: 'test'
+      ...
+    1..28
+not ok 1 - sentry-a adversarial S2
+  ---
+  duration_ms: 20948.714338
+  type: 'suite'
+  location: '/tmp/claude-0/-home-claude/28eb54ed-d9c5-5c5a-914f-2ef1a6aaced7/scratchpad/sa/adv2.test.mts:88:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 28
+# suites 1
+# pass 27
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 21149.691855

@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK | x-robots-tag in headers: False
+meta description: EKUZO Season 01: a coach-led youth gaming team for ages 9 to 17, online twice a week, mid January to May. $100 covers January, then $160 a month.
+length: 145
+double period: False
+Course description: EKUZO Season 01: a coach-led youth gaming team for ages 9 to 17, online twice a week, mid January to May. $100 covers January, then $160 a month February to April, per kid. Siblings are 20% off.
+Offer description: $100 covers January, then $160 a month February to April, per kid. Siblings are 20% off.
+double period anywhere in ld: False | 'today' in Offer: False
+price 580 USD https://schema.org/InStock 2026-10-26T00:00:00-05:00 2026-12-31T23:59:59-08:00
+canonical: <link rel="canonical" href="https://ekuzo.gg/season1/join"> | robots meta: False
+join vs join/b equal outside SEO: True

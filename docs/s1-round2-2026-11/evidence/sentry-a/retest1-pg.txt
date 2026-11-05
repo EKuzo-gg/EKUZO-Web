@@ -1,0 +1,26 @@
+## retest at 701351a: claim statement extracted verbatim, real Postgres 16
+-- new (em1,ev1,ipA)
+ip s1ip:A 1
+ip s1ip:global 1
+-- repeat with new ev2 (expect seen em1; ev2 claimed; ip count not moved)
+seen em1 0
+-- retry of that repeat (ev2): expect seen em1 ev2
+seen em1 0
+seen ev2 0
+em1|1
+ev1|1
+ev2|1
+s1ip:A|1
+s1ip:global|1
+-- stranger: ev9 for an email with no sign-up has no row
+0
+-- 31 new + 20 repeats from IP X: ip count must be 31
+s1ip:X|31
+-- concurrent same email, 2 ev ids, IP Z
+      1 ip s1ip:Z 1
+      1 ip s1ip:global 33
+      1 seen same 0
+evS1|1
+evS2|1
+s1ip:Z|1
+same|1
