@@ -3,27 +3,46 @@ import { isIP } from "net";
 import { NextRequest, NextResponse } from "next/server";
 import { sendCapiEvent, sha256 } from "@/lib/metaCapi";
 import { geoProfileProps, parseGeoHeader, tzProps } from "@/lib/seasonOneGeo";
+import { getSql } from "@/lib/season1/db";
+import { keyHash } from "@/lib/season1/rules";
+import { keyIsLive } from "@/lib/season1/stripe";
 
 /**
  * POST /api/season-one
  *
- * Season 01 waitlist capture — the site popup (components/ui/SeasonOnePopup)
+ * Season 01 waitlist capture: the site popup (components/ui/SeasonOnePopup)
  * and the parent-ad landing pages (app/season1/landing.html, served at /season1 by app/season1/route.ts) both post here.
  *
- * Steps:
- *  1. POST /api/events — "Season 01 Waitlist". Upserts the profile with where
+ * Order for a main sign-up: email check, API key check, step check, the
+ * `games` / `age` / `text-karlin` steps (they return before anything below),
+ * honeypot, then the 24 h classification (classifySignup), then the steps:
+ *  0. classifySignup: one Postgres transaction on s1_rate_limits (an advisory
+ *     lock on the email key, then one claim statement). Three classes:
+ *       new    email not seen in 24 h: the full path below.
+ *       retry  email and this attempt's `eventId` seen (a lost response): the
+ *              full path again, so a lost response still ends in one Lead
+ *              (Meta dedupes on event_id, Klaviyo on unique_id).
+ *       repeat email seen, this `eventId` not (a second attempt): a
+ *              "Season 01 Waitlist Repeat" event with the same event props and
+ *              no profile props, the idempotent subscribe, no Meta Lead;
+ *              responds {ok:true, repeat:true}.
+ *     Fails open: no DATABASE_URL, any error, or no answer in 800 ms is "new".
+ *     The log line never carries the email.
+ *  1. POST /api/events, "Season 01 Waitlist". Upserts the profile with where
  *     they signed up and which ad sent them, so Karlin's first email and any
- *     reporting can read it.
- *  2. POST /api/profile-subscription-bulk-create-jobs — marketing consent +
+ *     reporting can read it. unique_id is email-metric-eventId when the page
+ *     sent an eventId, else email-metric-timestamp.
+ *  2. POST /api/profile-subscription-bulk-create-jobs, marketing consent +
  *     joins the "Season 01 Waitlist" list (XGTv2F, created 2026-10-09).
  *     A welcome flow on that list is planned; none exists yet, so joining it
  *     sends nothing on its own today. A subscribe failure (HTTP error or a
  *     thrown network error) is logged loudly and the sign-up still succeeds.
  *  3. Meta Conversions API "Lead" (main sign-up only, never the games/age
- *     steps), sent once the Klaviyo event has succeeded. It shares `eventId`
- *     with the browser fbq Lead so Meta dedupes the pair; the server makes one
- *     up if the page didn't send it. Best-effort: a Meta failure is logged and
- *     never fails the sign-up. See docs/season-one-tracking.md.
+ *     steps), sent once the Klaviyo event has succeeded, concurrently with
+ *     step 2. It shares `eventId` with the browser fbq Lead so Meta dedupes
+ *     the pair; the server makes one up if the page didn't send it.
+ *     Best-effort: a Meta failure is logged and never fails the sign-up. See
+ *     docs/season-one-tracking.md.
  *
  * Ad-landing sign-ups also carry which landing hero the parent saw: `hero`
  *    (amount | games | screentime | shortlist, else "none" for page A),
@@ -65,10 +84,11 @@ import { geoProfileProps, parseGeoHeader, tzProps } from "@/lib/seasonOneGeo";
  * parent is asked to retry rather than shown a false "you're in".
  *
  * Every outbound call has a timeout so a stalled upstream cannot hold the
- * function past Netlify's 10 s synchronous limit. Worst case is the three
- * timeouts added up: 3.5 s + 2.5 s + 2 s = 8 s (the 2 s Meta limit lives in
- * lib/metaCapi.ts). An event timeout is a failed event (502, no Lead); a
- * subscribe or Meta timeout is logged and the sign-up still succeeds.
+ * function past Netlify's 10 s synchronous limit. Worst case is the check,
+ * then the event, then the slower of the two concurrent calls:
+ * 0.8 s + 3.5 s + 2.5 s = 6.8 s (Meta's 2 s limit lives in lib/metaCapi.ts).
+ * An event timeout is a failed event (502, no Lead); a subscribe or Meta
+ * timeout is logged and the sign-up still succeeds.
  */
 
 const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
@@ -84,6 +104,7 @@ const HERO_FROM = new Set(["url", "ad-map", "split", "none"]);
 const HERO_ANSWER_STRIP_RE = /[^\p{L}\p{N} ,.'’“”"!?&-]/gu;
 const EVENT_TIMEOUT_MS = 3500;
 const SUBSCRIBE_TIMEOUT_MS = 2500;
+const DEDUPE_TIMEOUT_MS = 800;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // C0 and C1 control characters plus DEL; EMAIL_RE alone admits NUL.
@@ -99,6 +120,51 @@ const normalizeAd = (v: unknown) => {
   return m ? `d${Number(m[1])}` : "";
 };
 const FAIL = "We couldn’t save that. Please try again.";
+// Same sanitizer for the CAPI event_id and the Klaviyo unique_id; "" when the page sent none.
+const cleanEventId = (v: unknown) => (typeof v === "string" ? v.replace(/[^A-Za-z0-9-]/g, "").slice(0, 64) : "");
+
+type Signup = "new" | "retry" | "repeat";
+
+/**
+ * 24 h sign-up classification (see the header). One transaction: an advisory
+ * lock on the email key serializes two requests for one email, then one
+ * statement reads which keys were seen inside the last 24 h and claims the
+ * rest. Fails open to "new" (and never logs the email).
+ */
+async function classifySignup(email: string, eventId: string): Promise<Signup> {
+  if (!process.env.DATABASE_URL) return "new";
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const emailKey = `s1wl:em:${keyHash(email)}`;
+    const keys = eventId ? [emailKey, `s1wl:ev:${keyHash(`${email}|${eventId}`)}`] : [emailKey];
+    const sql = getSql();
+    const run = sql.transaction([
+      sql.query("select pg_advisory_xact_lock(hashtext($1))", [emailKey]),
+      sql.query(
+        `with seen as (
+           select key from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'),
+         claimed as (
+           insert into s1_rate_limits (key, window_start, count, livemode)
+           select k, now(), 1, $2::boolean from unnest($1::text[]) k where k not in (select key from seen)
+           on conflict do nothing returning key)
+         select key from seen`,
+        [keys, keyIsLive()],
+      ),
+    ]);
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`no answer in ${DEDUPE_TIMEOUT_MS} ms`)), DEDUPE_TIMEOUT_MS);
+    });
+    const results = (await Promise.race([run, timeout])) as { key: string }[][];
+    const seen = new Set((results[1] ?? []).map((r) => r.key));
+    if (!seen.has(emailKey)) return "new";
+    return keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat";
+  } catch (err) {
+    console.warn("Season 01 dedupe check skipped:", err instanceof Error ? err.message : err);
+    return "new";
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 /**
  * Visitor location and time zone from Netlify's `x-nf-geo` request header,
@@ -163,7 +229,7 @@ async function sendMetaLead(req: NextRequest, body: Record<string, unknown>, ema
     await sendCapiEvent({
       event_name: "Lead",
       event_time: Math.floor(Date.now() / 1000),
-      event_id: (typeof body.eventId === "string" ? body.eventId.replace(/[^A-Za-z0-9-]/g, "").slice(0, 64) : "") || randomUUID(),
+      event_id: cleanEventId(body.eventId) || randomUUID(),
       action_source: "website",
       ...(eventSourceUrl ? { event_source_url: eventSourceUrl } : {}),
       user_data: userData,
@@ -188,7 +254,7 @@ async function klaviyo(path: string, body: unknown, timeoutMs: number) {
   });
 }
 
-function event(metric: string, email: string, profileProps: Record<string, string>, eventProps: Record<string, string>, firstName = "") {
+function event(metric: string, email: string, profileProps: Record<string, string>, eventProps: Record<string, string>, firstName = "", eventId = "") {
   return klaviyo("events", {
     data: {
       type: "event",
@@ -202,10 +268,35 @@ function event(metric: string, email: string, profileProps: Record<string, strin
         },
         properties: eventProps,
         time: new Date().toISOString(),
-        unique_id: `${email}-${metric}-${Date.now()}`,
+        unique_id: `${email}-${metric}-${eventId || Date.now()}`,
       },
     },
   }, EVENT_TIMEOUT_MS);
+}
+
+/** Idempotent list subscribe. Never throws: a failure is logged and the sign-up carries on. */
+async function subscribe(email: string, source: string) {
+  try {
+    const sub = await klaviyo("profile-subscription-bulk-create-jobs", {
+      data: {
+        type: "profile-subscription-bulk-create-job",
+        attributes: {
+          custom_source: source === "ad-landing" ? "Season 01 ad landing page" : "Season 01 site popup",
+          profiles: {
+            data: [{ type: "profile", attributes: { email, subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } } } }],
+          },
+        },
+        relationships: { list: { data: { type: "list", id: LIST_ID } } },
+      },
+    }, SUBSCRIBE_TIMEOUT_MS);
+    if (!sub.ok) {
+      // Profile + event exist, so the parent can still be found: log loudly, let them through.
+      console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
+    }
+  } catch (err) {
+    // A thrown fetch (network error, timeout) is handled like an HTTP error: same log, carry on.
+    console.error("Klaviyo Season 01 list subscribe failed:", err instanceof Error ? err.message : err);
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -323,35 +414,32 @@ export async function POST(req: NextRequest) {
       eventProps.hero_from = typeof body.heroFrom === "string" && HERO_FROM.has(body.heroFrom) ? body.heroFrom : "";
     }
 
-    const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60));
+    const eventId = cleanEventId(body.eventId);
+    const signup = await classifySignup(email, eventId);
+
+    if (signup === "repeat") {
+      // Same attribution on a separate metric; no profile props (season1_* stay as first written), no Lead.
+      try {
+        const rep = await event("Season 01 Waitlist Repeat", email, {}, eventProps, clean(body.firstName, 60), eventId);
+        if (!rep.ok) console.error("Klaviyo Season 01 repeat event failed:", rep.status, await rep.text());
+      } catch (err) {
+        console.error("Klaviyo Season 01 repeat event failed:", err instanceof Error ? err.message : err);
+      }
+      await subscribe(email, source);
+      return NextResponse.json({ ok: true, repeat: true });
+    }
+
+    const ev = await event("Season 01 Waitlist", email, profileProps, eventProps, clean(body.firstName, 60), eventId);
     if (!ev.ok) {
       console.error("Klaviyo Season 01 event failed:", ev.status, await ev.text());
       return NextResponse.json({ ok: false, error: FAIL }, { status: 502 });
     }
 
-    try {
-      const sub = await klaviyo("profile-subscription-bulk-create-jobs", {
-        data: {
-          type: "profile-subscription-bulk-create-job",
-          attributes: {
-            custom_source: source === "ad-landing" ? "Season 01 ad landing page" : "Season 01 site popup",
-            profiles: {
-              data: [{ type: "profile", attributes: { email, subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } } } }],
-            },
-          },
-          relationships: { list: { data: { type: "list", id: LIST_ID } } },
-        },
-      }, SUBSCRIBE_TIMEOUT_MS);
-      if (!sub.ok) {
-        // Profile + event exist, so the parent can still be found: log loudly, let them through.
-        console.error("Klaviyo Season 01 list subscribe failed:", sub.status, await sub.text());
-      }
-    } catch (err) {
-      // A thrown fetch (network error, timeout) is handled like an HTTP error: same log, carry on.
-      console.error("Klaviyo Season 01 list subscribe failed:", err instanceof Error ? err.message : err);
-    }
-    // Awaited so the serverless function isn't frozen mid-call. Never throws.
-    await sendMetaLead(req, body, email, source === "ad-landing" ? `season_one_${profileProps.season1_ad || "landing"}` : "season_one_popup");
+    // Both helpers never throw; awaited so the serverless function isn't frozen mid-call.
+    await Promise.all([
+      subscribe(email, source),
+      sendMetaLead(req, body, email, source === "ad-landing" ? `season_one_${profileProps.season1_ad || "landing"}` : "season_one_popup"),
+    ]);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Season 01 route error:", err instanceof Error ? err.message : err);
