@@ -4,7 +4,6 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
 import GutCheckAside from "@/components/blog/GutCheckAside";
-import FactsBox from "@/components/blog/FactsBox";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -173,6 +172,18 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
     question: "Is Fortnite OK for kids?",
     answer:
       "The ESRB rates Fortnite Battle Royale T for Teen, for animated blood, lyrics, suggestive themes and violence, and it lists in-game purchases and players who interact. The rating describes the game, not what it does to your kid. Casey’s son changed around Fortnite, and the same game was one of the few places her two boys spent time together. Watch what your kid is like before, during and after they play, and decide from that.",
+  },
+  // Added 2026-11-05 (moved from the removed facts box; pending Jamie's look on dev)
+  {
+    question: "What parental controls does Fortnite have?",
+    answer:
+      "Sign in to your kid’s Epic account in the Epic Account Portal, or open the settings in Fortnite. You can choose who they voice and text chat with, filter mature language, and require your PIN for friend requests and Epic payments. Consoles and phones have their own parental controls too.",
+  },
+  // Added 2026-11-05 (moved from the removed facts box; pending Jamie's look on dev)
+  {
+    question: "How long is a Fortnite match?",
+    answer:
+      "About 20 minutes, less if they’re knocked out early. Agree on the number of matches before they start, and stop when the match ends.",
   },
   {
     question: "What happened after Casey banned Fortnite?",
@@ -398,8 +409,7 @@ export default function PostShouldYouBanFortnite() {
                   Placement is the house pattern: directly after the <h2>, before
                   the section's first <p>, because .blog-content h2 has no
                   clear:both and an aside above it leaves the heading wrapping.
-                  Keep the aside the first thing after this H2, and keep the
-                  FactsBox (further down) out of its float range. */}
+                  Keep the aside the first thing after this H2. */}
               <GutCheckAside
                 title="Try this tonight"
                 subtitle="Five questions to ask before you take a game away"
@@ -495,61 +505,6 @@ export default function PostShouldYouBanFortnite() {
                 pushed players into unwanted purchases, the largest penalty of
                 its kind at the time.
               </p>
-              {/* A4 (2026-11-05). Facts read in a browser 2026-11-05; see
-                  docs/session-end-post/evidence/browser-fact-checks-2026-11-05.md.
-                  ESRB listing 41678 is the current Battle Royale entry. */}
-              <FactsBox
-                title="Fortnite at a glance"
-                items={[
-                  {
-                    label: "Rating",
-                    content: (
-                      <>
-                        The ESRB{" "}
-                        <a
-                          href="https://www.esrb.org/ratings/41678/fortnite-battle-royale/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          rates Fortnite Battle Royale T for Teen
-                        </a>
-                        , for animated blood, lyrics, suggestive themes and
-                        violence. It lists in-game purchases and players who
-                        interact.
-                      </>
-                    ),
-                  },
-                  {
-                    label: "Parental controls",
-                    content: (
-                      <>
-                        Sign in to your kid’s Epic account in the{" "}
-                        <a
-                          href="https://safety.epicgames.com/parental-controls"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Epic Account Portal
-                        </a>
-                        , or open the settings in Fortnite, to choose who they
-                        can voice and text chat with, filter mature language,
-                        and require your PIN for friend requests and Epic
-                        payments.
-                      </>
-                    ),
-                  },
-                  {
-                    label: "The FTC case",
-                    content:
-                      "In December 2022 the FTC announced $520 million in settlements with Epic Games: a $275 million penalty for breaking the children’s privacy law (COPPA), and $245 million in refunds for design that led players into unwanted purchases.",
-                  },
-                  {
-                    label: "Match length",
-                    content:
-                      "A Battle Royale match runs about 20 minutes, less if they’re knocked out early.",
-                  },
-                ]}
-              />
               <p>
                 If spending is the worry,{" "}
                 <Link href="/blog/should-i-buy-my-kid-robux">
