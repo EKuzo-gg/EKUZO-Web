@@ -4,6 +4,14 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-05 (morning): review round 1
+
+- New post hero swapped for the text version (no logo); alt text includes the on-image text. Page-local fix: below xl (1280px) the hero renders at its natural 1232/520 ratio so the right-third text is not cropped; 520px from xl up (at 768 the 520px crop cut the text).
+- New post: the match table now sits inside a closed native `<details>` ("See the match lengths as a table") directly under the graphic; still server-rendered. The `PullQuote` component is deleted; the quote is a plain `<blockquote><p>` like the other quotes in blog content. "Try this tonight" `GutCheckAside` (the five checklist lead-ins) added right after the gaming-limit H2.
+- `FactsBox` component deleted; both facts boxes removed (Fortnite at a glance, League for parents). Their useful facts moved into FAQ items (visible FAQ and FAQPage schema): Fortnite parental controls and match length; League parental controls (account consent plus chat) and match length, mirroring Fortnite. Plain text, no links. All other approved changes kept.
+- League has no existing sentence about match length or stopping, so the link from League to the new post was not re-added (the only link lived in the removed box).
+- For Aaron: `components/blog/FactsBox.tsx` and `PullQuote.tsx` no longer exist; earlier notes about restyling them are moot.
+
 ## Jamie's Claude, 2026-11-05: session-end post, approved copy and inbound links
 
 - New post: meta description now Jamie's approved option A ("Count matches, not minutes. Agree on a stopping point..."); `pending` comment removed. Coach section links "Season 01" to `/season1/join` (C3 option 2). Share graphic `public/images/count-matches-not-minutes.png` (1080x1350, rendered as the Robux in-body image) sits after the match table; 1200x630 variant saved beside it; source `count-matches-not-minutes.html` and `render.js` in `docs/session-end-post/assets/`.

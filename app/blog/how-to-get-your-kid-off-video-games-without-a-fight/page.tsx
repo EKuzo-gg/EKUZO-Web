@@ -5,7 +5,7 @@ import FooterBanner from "@/components/sections/FooterBanner";
 import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
-import PullQuote from "@/components/blog/PullQuote";
+import GutCheckAside from "@/components/blog/GutCheckAside";
 import {
   buildBlogArticleSchema,
   buildBlogPostBreadcrumbSchema,
@@ -38,7 +38,7 @@ const HERO_IMAGE =
 const SHARE_IMAGE =
   "/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg";
 const HERO_ALT =
-  "A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room.";
+  "A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room. Text on the image reads \"Heard in every living room\" and \"I can't pause it.\"";
 // Re-set both to the ship date if it ships another day.
 const DATE_PUBLISHED = "2026-11-04";
 const DATE_MODIFIED = "2026-11-04";
@@ -259,7 +259,10 @@ export default function PostGetKidOffVideoGames() {
             paddingRight: "clamp(1.5rem, 7.2vw, 104px)",
           }}
         >
-          <div className="relative w-full" style={{ height: "520px" }}>
+          {/* Page-local: the hero has text baked into the right third, so below xl (1280px) it
+              shows at its natural 1232/520 ratio (no side crop). From xl up it is the
+              template's fixed 520px. */}
+          <div className="relative w-full aspect-[1232/520] xl:aspect-auto xl:h-[520px]">
             <Image
               src={HERO_IMAGE}
               alt={HERO_ALT}
@@ -361,64 +364,6 @@ export default function PostGetKidOffVideoGames() {
               games?
             </h2>
             <p>Rough lengths, from playing all of these:</p>
-            <table>
-              <caption className={captionClass}>
-                How long a match lasts, and where to stop
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Game</th>
-                  <th scope="col">One match</th>
-                  <th scope="col">Where to stop</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Fortnite (Battle Royale)</th>
-                  <td>
-                    About 20 minutes, less if they&apos;re knocked out early
-                  </td>
-                  <td>When the match ends</td>
-                </tr>
-                <tr>
-                  <th scope="row">League of Legends</th>
-                  <td>About 45 minutes, including champion select</td>
-                  <td>
-                    When the match ends. No new queue after the agreed number
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Marvel Rivals</th>
-                  <td>About 30 minutes</td>
-                  <td>When the match ends</td>
-                </tr>
-                <tr>
-                  <th scope="row">Super Smash Bros.</th>
-                  <td>About 5 minutes</td>
-                  <td>After any match</td>
-                </tr>
-                <tr>
-                  <th scope="row">Minecraft</th>
-                  <td>No match end</td>
-                  <td>
-                    Agree on a save point, like the next nightfall or the end of
-                    a build
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Roblox</th>
-                  <td>Depends on the game</td>
-                  <td>
-                    Ask &ldquo;does this save?&rdquo; and pick the stop together
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p>
-              Once a team match starts, they&apos;re in until it ends, and the
-              game punishes leaving. That makes it a good lesson in planning
-              ahead.
-            </p>
             <div className="my-10 mx-auto w-full max-w-[560px]">
               <Image
                 src="/images/count-matches-not-minutes.png"
@@ -429,12 +374,89 @@ export default function PostGetKidOffVideoGames() {
                 className="w-full h-auto"
               />
             </div>
-            <PullQuote>
-              Dinner&apos;s in 35 minutes. A League game takes 45. Starting one
-              is starting the fight.
-            </PullQuote>
+            <details>
+              <summary className="font-body font-bold cursor-pointer my-3">
+                See the match lengths as a table
+              </summary>
+              <table>
+                <caption className={captionClass}>
+                  How long a match lasts, and where to stop
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Game</th>
+                    <th scope="col">One match</th>
+                    <th scope="col">Where to stop</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Fortnite (Battle Royale)</th>
+                    <td>
+                      About 20 minutes, less if they&apos;re knocked out early
+                    </td>
+                    <td>When the match ends</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">League of Legends</th>
+                    <td>About 45 minutes, including champion select</td>
+                    <td>
+                      When the match ends. No new queue after the agreed number
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Marvel Rivals</th>
+                    <td>About 30 minutes</td>
+                    <td>When the match ends</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Super Smash Bros.</th>
+                    <td>About 5 minutes</td>
+                    <td>After any match</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Minecraft</th>
+                    <td>No match end</td>
+                    <td>
+                      Agree on a save point, like the next nightfall or the end of
+                      a build
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Roblox</th>
+                    <td>Depends on the game</td>
+                    <td>
+                      Ask &ldquo;does this save?&rdquo; and pick the stop together
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <p>
+              Once a team match starts, they&apos;re in until it ends, and the
+              game punishes leaving. That makes it a good lesson in planning
+              ahead.
+            </p>
+            <blockquote>
+              <p>
+                Dinner&apos;s in 35 minutes. A League game takes 45. Starting
+                one is starting the fight.
+              </p>
+            </blockquote>
 
             <h2>How do I set a gaming limit my kid will actually follow?</h2>
+            {/* Placement rule: directly after the H2 (no clear on .blog-content h2). */}
+            <GutCheckAside
+              title="Try this tonight"
+              subtitle="Five steps before the next game"
+              questions={[
+                "Ask about the session the way you'd ask about a practice.",
+                "Count matches, not minutes.",
+                "Set the number together, at a calm time.",
+                "Say the plan before they play.",
+                "Let the game signal the end.",
+              ]}
+            />
             <p>
               This checklist won&apos;t fit every house, and a fight
               that&apos;s bigger than a routine needs the right help. For most
