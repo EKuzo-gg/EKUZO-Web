@@ -17,7 +17,7 @@ const posts = [
   {
     slug: "how-to-get-your-kid-off-video-games-without-a-fight",
     title: "How do I get my kid off the game without a fight?",
-    date: "November 4, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:

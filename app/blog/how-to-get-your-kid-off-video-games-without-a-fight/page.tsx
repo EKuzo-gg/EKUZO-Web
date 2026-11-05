@@ -40,8 +40,8 @@ const SHARE_IMAGE =
 const HERO_ALT =
   "A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room. Text on the image reads \"Heard in every living room\" and \"I can't pause it.\"";
 // Re-set both to the ship date if it ships another day.
-const DATE_PUBLISHED = "2026-11-04";
-const DATE_MODIFIED = "2026-11-04";
+const DATE_PUBLISHED = "2026-11-05";
+const DATE_MODIFIED = "2026-11-05";
 
 const X_POST_URL = "https://x.com/CoachDanGo/status/2099566382681866270";
 
