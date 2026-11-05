@@ -20,6 +20,10 @@ let eventStatus = 200;
 let releaseFails = false;
 let releaseHangs = false;
 let subscribeGate: Promise<void> | null = null; // SA-2: holds the subscribe response
+let ipCounts = new Map<string, number>(); // the hourly s1ip: counters the claim statement bumps
+let tkCounts = new Map<string, number>(); // hit() counters (text-karlin cap)
+let eventBody = ""; // body of a failed Klaviyo event (a real one can echo the email)
+let subscribeStatus = 202;
 
 // The Neon driver sends a JS array parameter as a Postgres array literal: {"a","b"}.
 const pgArray = (v: unknown) => String(v).replace(/^\{|\}$/g, "").split(",").map((x) => x.replace(/^"|"$/g, "")).filter(Boolean);
@@ -47,19 +51,41 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
       return json({ command: "DELETE", rowCount: 1, fields: [], rows: [] });
     }
     const results = queries.map((q) => {
-      if (!/from s1_rate_limits/.test(q.query)) return rowsFor([]);
+      if (/^\s*insert into s1_rate_limits/.test(q.query)) {
+        // hit(): [key, window, livemode] -> count after increment
+        const n = (tkCounts.get(String(q.params[0])) ?? 0) + 1;
+        tkCounts.set(String(q.params[0]), n);
+        return { command: "INSERT", rowCount: 1, fields: [{ name: "count", dataTypeID: 23 }], rows: [[n]] };
+      }
+      if (/^select 1 from s1_rate_limits/.test(q.query)) {
+        const hitRow = seenKeys.has(String(q.params[0]));
+        return { command: "SELECT", rowCount: hitRow ? 1 : 0, fields: [{ name: "?column?", dataTypeID: 23 }], rows: hitRow ? [[1]] : [] };
+      }
+      if (!/with seen as/.test(q.query)) return rowsFor([]);
+      // The claim statement's contract: read seen keys; claim nothing when the email key was seen;
+      // otherwise claim the rest and bump the hour's counters for params[3].
       const wanted = pgArray(q.params[0]);
+      const emailKey = String(q.params[2]);
       const seen = wanted.filter((k) => seenKeys.has(k));
-      for (const k of wanted) seenKeys.add(k);
-      return rowsFor(seen);
+      const rows: unknown[][] = seen.map((k) => ["seen", k, 0]);
+      if (!seen.includes(emailKey)) {
+        for (const k of wanted) seenKeys.add(k);
+        for (const k of pgArray(q.params[3])) {
+          const n = (ipCounts.get(k) ?? 0) + 1;
+          ipCounts.set(k, n);
+          rows.push(["ip", k, n]);
+        }
+      }
+      return { command: "SELECT", rowCount: rows.length, fields: [{ name: "kind", dataTypeID: 25 }, { name: "key", dataTypeID: 25 }, { name: "n", dataTypeID: 23 }], rows };
     });
+    if (queries.length === 1 && !body.queries) return json(results[0]);
     return json({ results });
   }
   if (u.includes("a.klaviyo.com")) {
     klaviyo.push({ path: u.split("/api/")[1], body });
     const isEvent = u.endsWith("/events");
     if (!isEvent && subscribeGate) await subscribeGate;
-    return new Response(isEvent ? "" : "{}", { status: isEvent ? eventStatus : 202 });
+    return new Response(isEvent ? (eventStatus >= 400 ? eventBody : "") : "{}", { status: isEvent ? eventStatus : subscribeStatus });
   }
   if (u.includes("graph.facebook.com")) {
     graph.push({ body });
@@ -123,6 +149,10 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     releaseFails = false;
     releaseHangs = false;
     subscribeGate = null;
+    ipCounts = new Map();
+    tkCounts = new Map();
+    eventBody = "";
+    subscribeStatus = 202;
   });
 
   it("new: full path, one Waitlist event, one subscribe, one Lead, body {ok:true} only (R3.1, R3.2, R3.11)", async () => {
@@ -278,13 +308,15 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     assert.equal(neonCalls.length, 0);
   });
 
-  it("honeypot and the games, age and text-karlin steps never call the check (R3.3, M7)", async () => {
+  it("honeypot never calls the database; steps with a matching sign-up write their events and send no Lead (R3.3, M7)", async () => {
     const hp = await post(signup({ ekz_hp: "bot" }));
     assert.deepEqual(hp, { status: 200, body: { ok: true } });
-    await post({ email: "p@example.com", step: "games", kidGames: "Minecraft" });
-    await post({ email: "p@example.com", step: "age", kidAge: "10-12" });
-    await post({ email: "p@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
-    assert.equal(neonCalls.length, 0, "no database call");
+    assert.equal(neonCalls.length, 0, "honeypot: no database call");
+    seenKeys.add(emailKey("p@example.com"));
+    seenKeys.add(evKey("evt-step-0001", "p@example.com"));
+    await post({ email: "p@example.com", step: "games", kidGames: "Minecraft", eventId: "evt-step-0001" });
+    await post({ email: "p@example.com", step: "age", kidAge: "10-12", eventId: "evt-step-0001" });
+    await post({ email: "p@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19", eventId: "evt-step-0001" });
     assert.equal(graph.length, 0, "no Lead from any of them");
     assert.deepEqual(events().map((e) => e.metric.data.attributes.name), ["Season 01 Waitlist Games", "Season 01 Waitlist Age", "Season 01 Text Karlin"]);
   });
@@ -339,6 +371,7 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     assert.equal(events()[0].profile.data.attributes.properties.season1_ad, "d19");
     assert.equal(graph[0].body.data[0].custom_data.content_name, "season_one_d19");
     klaviyo = [];
+    seenKeys.add(emailKey("k@example.com")); // an old page sends no eventId: the email key is enough
     await post({ email: "k@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
     assert.equal(events()[0].properties.ad, "d19");
   });
@@ -439,5 +472,323 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     const line = warns.find((x) => x.startsWith("Season 01 dedupe release failed: no answer in 800 ms"));
     assert.ok(line);
     assert.ok(!line.includes("example.com"));
+  });
+});
+
+describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () => {
+  const OFFER_SMS = "(832) 271-0150"; // OFFER.textKarlinSms (+18322710150) formatted for a parent
+  const HOUR_SQL = /to_timestamp\(floor\(extract\(epoch from now\(\)\) \/ 3600\) \* 3600\)/;
+  const ipH = (ip: string, extra: Record<string, string> = {}) => ({ "x-nf-client-connection-ip": ip, ...extra });
+  const ipKey = (material: string) => `s1ip:${keyHash(material)}`;
+  const countedKeys = () => pgArray(claimSql()!.params[3]);
+  const em = (i: number) => `family${i}@example.com`;
+  let logs: string[] = [];
+  const capture = () => {
+    logs = [];
+    const f = (...a: unknown[]) => void logs.push(a.map(String).join(" "));
+    console.log = console.warn = console.error = f;
+  };
+
+  before(() => {
+    for (const k of ["DATABASE_URL", "KLAVIYO_PRIVATE_API_KEY", "S1_REF_SECRET", "STRIPE_SECRET_KEY", "META_CAPI_ACCESS_TOKEN", "META_PIXEL_ID"]) saved[k] = saved[k] ?? process.env[k];
+    process.env.DATABASE_URL = "postgresql://" + "unit" + ":" + "unit" + "@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+    process.env.S1_REF_SECRET = "unit-ref-secret-0123456789";
+    process.env.META_CAPI_ACCESS_TOKEN = "unit-meta-token";
+    process.env.META_PIXEL_ID = "1234567890";
+    globalThis.fetch = fakeFetch as typeof fetch;
+  });
+  after(() => {
+    globalThis.fetch = realFetch;
+    Object.assign(console, realConsole);
+  });
+  beforeEach(() => {
+    neonCalls.length = 0;
+    klaviyo = [];
+    graph = [];
+    seenKeys = new Set();
+    dbMode = "ok";
+    eventStatus = 200;
+    releaseFails = false;
+    releaseHangs = false;
+    subscribeGate = null;
+    ipCounts = new Map();
+    tkCounts = new Map();
+    eventBody = "";
+    subscribeStatus = 202;
+    capture();
+  });
+
+  it("items 1, 3: the limiter rides the claim's one transaction, counts a floored hour window, key is a hash of the nf IP only", async () => {
+    await post(signup(), ipH("203.0.113.9", { "x-forwarded-for": "198.51.100.7" }));
+    assert.equal(neonCalls.length, 1, "one round trip");
+    assert.equal(neonCalls[0].length, 2, "lock + one claim statement");
+    const q = claimSql()!.query;
+    assert.match(q, HOUR_SQL, "window_start floored to the hour (the hit() convention; the 2x edge is accepted)");
+    assert.match(q, /on conflict \(key, window_start\) do update set count = s1_rate_limits\.count \+ 1/);
+    assert.match(q, /where exists \(select 1 from claimed where key = \$3::text\)/, "counts only when this call claimed the email key (new)");
+    assert.deepEqual(countedKeys(), [ipKey("203.0.113.9"), "s1ip:global"]);
+    assert.ok(!JSON.stringify(neonCalls).includes("203.0.113.9"), "no raw IP in the database");
+    assert.ok(!JSON.stringify(neonCalls).includes("198.51.100.7"));
+  });
+
+  it("item 1: no nf header means no per-IP key, even with x-forwarded-for; an invalid nf value is skipped too", async () => {
+    await post(signup(), { "x-forwarded-for": "198.51.100.7" });
+    assert.deepEqual(countedKeys(), ["s1ip:global"]);
+    neonCalls.length = 0;
+    await post(signup({ email: "b@example.com" }), ipH("not-an-ip"));
+    assert.deepEqual(countedKeys(), ["s1ip:global"]);
+    for (let i = 0; i < 40; i++) assert.equal((await post(signup({ email: em(i) }))).status, 200, "never 429 without an IP");
+  });
+
+  it("item 1: IPv6 keys on the /64; ::ffff: mapped v4 keys as v4", async () => {
+    const keyFor = async (ip: string) => {
+      neonCalls.length = 0;
+      await post(signup({ email: `v${Math.random()}@example.com` }), ipH(ip));
+      return countedKeys()[0];
+    };
+    const a = await keyFor("2001:db8:1:2:aaaa:bbbb:cccc:dddd");
+    assert.equal(a, ipKey("v6:2001:0db8:0001:0002"));
+    assert.equal(await keyFor("2001:0db8:0001:0002::1"), a, "same /64, other host bits and spelling");
+    assert.notEqual(await keyFor("2001:db8:1:3::1"), a, "another /64");
+    assert.equal(await keyFor("2001:db8::1"), ipKey("v6:2001:0db8:0000:0000"), "compressed form expands");
+    assert.equal(await keyFor("::ffff:203.0.113.9"), ipKey("203.0.113.9"), "mapped v4");
+    assert.equal(await keyFor("::ffff:cb00:7109"), ipKey("203.0.113.9"), "hex-spelled mapped v4");
+  });
+
+  it("item 4: 10 new sign-ups an hour from one IP are normal; the 11th to 30th are quiet (event, subscribe, no Lead, {ok:true,quiet:true})", async () => {
+    for (let i = 1; i <= 10; i++) assert.deepEqual((await post(signup({ email: em(i), eventId: `evt-q-${1000 + i}` }), ipH("203.0.113.9"))).body, { ok: true });
+    assert.equal(graph.length, 10);
+    klaviyo = [];
+    graph = [];
+    for (let i = 11; i <= 30; i++) {
+      const r = await post(signup({ email: em(i), eventId: `evt-q-${1000 + i}` }), ipH("203.0.113.9"));
+      assert.deepEqual(r, { status: 200, body: { ok: true, quiet: true } });
+    }
+    assert.equal(graph.length, 0, "no CAPI Lead while quiet");
+    assert.equal(events().length, 20);
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist");
+    assert.equal(subscribes().length, 20);
+    assert.ok(logs.some((l) => l === "Season 01 sign-up quiet: reason=ip_quiet"));
+  });
+
+  it("item 4: the 31st is a 429 with the founder-text copy, nothing sent, the claim released, a warn with no IP or email", async () => {
+    for (let i = 1; i <= 30; i++) await post(signup({ email: em(i), eventId: `evt-r-${1000 + i}` }), ipH("203.0.113.9"));
+    klaviyo = [];
+    graph = [];
+    const r = await post(signup({ email: em(31), eventId: "evt-r-1031" }), ipH("203.0.113.9"));
+    assert.equal(r.status, 429);
+    assert.deepEqual(Object.keys(r.body).sort(), ["error", "ok"]);
+    assert.deepEqual(r.body, { ok: false, error: `We couldn't save this one from here. Text our founder at ${OFFER_SMS} and we'll add you by hand.` });
+    assert.equal(klaviyo.length, 0, "nothing written to Klaviyo");
+    assert.equal(graph.length, 0);
+    assert.ok(!seenKeys.has(emailKey(em(31))), "claim released, so a hand-added or later attempt reads as new");
+    const line = logs.find((l) => l.startsWith("Season 01 sign-up rate limited"));
+    assert.equal(line, "Season 01 sign-up rate limited: reason=ip_limit");
+  });
+
+  it("item 4: repeats, retries and failed sign-ups do not count toward the IP hour", async () => {
+    await post(signup(), ipH("203.0.113.9"));
+    assert.equal(ipCounts.get(ipKey("203.0.113.9")), 1);
+    await post(signup(), ipH("203.0.113.9")); // retry
+    await post(signup({ eventId: "evt-rep-0002" }), ipH("203.0.113.9")); // repeat
+    assert.equal(ipCounts.get(ipKey("203.0.113.9")), 1, "retry and repeat add nothing");
+    eventStatus = 500;
+    assert.equal((await post(signup({ email: "fail@example.com" }), ipH("203.0.113.9"))).status, 502);
+    // The failed one did count in the database (it was classified new), then released its email claim: documented, not a family's budget burn beyond one slot.
+    assert.equal(ipCounts.get(ipKey("203.0.113.9")), 2);
+  });
+
+  it("item 4: past 150 new sign-ups an hour across all IPs every further one is quiet, with or without an IP", async () => {
+    ipCounts.set("s1ip:global", 150);
+    const a = await post(signup({ email: "g1@example.com" }), ipH("198.51.100.1"));
+    assert.deepEqual(a.body, { ok: true, quiet: true });
+    const b = await post(signup({ email: "g2@example.com" }));
+    assert.deepEqual(b.body, { ok: true, quiet: true });
+    assert.equal(graph.length, 0);
+    assert.ok(logs.some((l) => l === "Season 01 sign-up quiet: reason=global_quiet"));
+  });
+
+  it("items 1 to 4 fail open: a database error or a slow one is a normal sign-up (no quiet, no 429)", async () => {
+    ipCounts.set("s1ip:global", 999);
+    dbMode = "throw";
+    assert.deepEqual((await post(signup(), ipH("203.0.113.9"))).body, { ok: true });
+    dbMode = "hang";
+    const t0 = Date.now();
+    assert.deepEqual((await post(signup({ email: "slow@example.com" }), ipH("203.0.113.9"))).body, { ok: true });
+    assert.ok(Date.now() - t0 < 1400, "answered at the 800 ms cap");
+    assert.equal(graph.length, 2);
+  });
+
+  it("item 2: the Meta Lead takes the IP from x-nf-client-connection-ip only", async () => {
+    await post(signup(), ipH("203.0.113.9", { "x-forwarded-for": "198.51.100.7" }));
+    assert.equal(graph[0].body.data[0].user_data.client_ip_address, "203.0.113.9");
+    graph = [];
+    seenKeys = new Set();
+    await post(signup(), { "x-forwarded-for": "198.51.100.7" });
+    assert.equal(graph[0].body.data[0].user_data.client_ip_address, undefined, "a client-set XFF never reaches Meta");
+    graph = [];
+    seenKeys = new Set();
+    await post(signup(), ipH("garbage", { "x-forwarded-for": "198.51.100.7" }));
+    assert.equal(graph[0].body.data[0].user_data.client_ip_address, undefined);
+  });
+
+  it("item 8: the repeat path claims nothing (no ev key), so a stranger cannot unlock a step with a new eventId", async () => {
+    await post(signup());
+    const before = new Set(seenKeys);
+    const r = await post(signup({ eventId: "evt-str-0001" }));
+    assert.deepEqual(r.body, { ok: true, repeat: true });
+    assert.deepEqual([...seenKeys].sort(), [...before].sort(), "no new key");
+    assert.ok(!seenKeys.has(evKey("evt-str-0001")));
+    klaviyo = [];
+    const g = await post({ email: "parent.one+kid@example.com", step: "games", kidGames: "Roblox", eventId: "evt-str-0001" });
+    assert.deepEqual(g, { status: 200, body: { ok: true } });
+    assert.equal(events().length, 0, "nothing written");
+    // A retry (same eventId as the original) still holds its key.
+    assert.ok(seenKeys.has(evKey("evt-aaaa-1111")));
+  });
+
+  it("item 7: a step with an eventId needs that ev key; a match writes the event", async () => {
+    await post(signup());
+    klaviyo = [];
+    const ok = await post({ email: "parent.one+kid@example.com", step: "games", kidGames: "Minecraft", eventId: "evt-aaaa-1111" });
+    assert.deepEqual(ok, { status: 200, body: { ok: true } });
+    assert.equal(events().length, 1);
+    const lock = neonCalls.flat().filter((q) => /^select 1 from s1_rate_limits/.test(q.query)).pop()!;
+    assert.match(lock.query, /window_start > now\(\) - interval '24 hours' limit 1$/);
+    assert.deepEqual(lock.params, [evKey("evt-aaaa-1111")]);
+    klaviyo = [];
+    const wrong = await post({ email: "parent.one+kid@example.com", step: "age", kidAge: "10-12", eventId: "evt-zzzz-9999" });
+    assert.deepEqual(wrong, { status: 200, body: { ok: true } });
+    assert.equal(klaviyo.length, 0, "a wrong eventId writes nothing");
+  });
+
+  it("item 7: a step without an eventId (an old cached page) needs the email key, no more", async () => {
+    await post(signup());
+    klaviyo = [];
+    await post({ email: "parent.one+kid@example.com", step: "age", kidAge: "13-15" });
+    assert.equal(events().length, 1);
+    assert.deepEqual(neonCalls.flat().filter((q) => /^select 1 from/.test(q.query)).pop()!.params, [emailKey()]);
+    klaviyo = [];
+    const stranger = await post({ email: "never.signed.up@example.com", step: "age", kidAge: "13-15" });
+    assert.deepEqual(stranger, { status: 200, body: { ok: true } }, "same answer as a match: no oracle");
+    assert.equal(klaviyo.length, 0);
+  });
+
+  it("item 7: a dropped step logs step_dropped with the step name and a reason, no PII", async () => {
+    for (const step of ["games", "age", "text-karlin"] as const) {
+      const body = step === "games" ? { kidGames: "Roblox" } : step === "age" ? { kidAge: "10-12" } : { phone: "+15125550123" };
+      await post({ email: "stranger.pii@example.com", step, eventId: "evt-nope-0001", ...body }, ipH("203.0.113.77"));
+    }
+    const dropped = logs.filter((l) => l.includes("step_dropped"));
+    assert.deepEqual(dropped, [
+      "Season 01 step_dropped step=games reason=no_signup",
+      "Season 01 step_dropped step=age reason=no_signup",
+      "Season 01 step_dropped step=text-karlin reason=no_signup",
+    ]);
+  });
+
+  it("item 7: the step lock fails open on a database error and on an answer slower than 800 ms", async () => {
+    dbMode = "throw";
+    await post({ email: "o@example.com", step: "games", kidGames: "Roblox", eventId: "evt-open-0001" });
+    assert.equal(events().length, 1, "error: proceeds");
+    klaviyo = [];
+    dbMode = "hang";
+    const t0 = Date.now();
+    await post({ email: "o@example.com", step: "age", kidAge: "10-12", eventId: "evt-open-0001" });
+    const ms = Date.now() - t0;
+    assert.ok(ms >= 780 && ms < 1400, `capped at 800 ms, took ${ms}`);
+    assert.equal(events().length, 1, "slow: proceeds");
+    klaviyo = [];
+    delete process.env.DATABASE_URL;
+    try {
+      await post({ email: "o@example.com", step: "games", kidGames: "Roblox", eventId: "evt-open-0001" });
+    } finally {
+      process.env.DATABASE_URL = "postgresql://" + "unit" + ":" + "unit" + "@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+    }
+    assert.equal(events().length, 1, "no database: proceeds");
+  });
+
+  it("item 7: text-karlin is capped at 3 per email per 24 h (hashed key); the 4th is a silent drop", async () => {
+    seenKeys.add(emailKey("t@example.com"));
+    for (let i = 0; i < 3; i++) await post({ email: "t@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
+    assert.equal(events().length, 3);
+    const hitCall = neonCalls.flat().find((q) => /^\s*insert into s1_rate_limits/.test(q.query))!;
+    assert.deepEqual([hitCall.params[0], hitCall.params[1]], [`s1tk:${keyHash("t@example.com")}`, "86400"]);
+    klaviyo = [];
+    const r = await post({ email: "t@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(klaviyo.length, 0);
+    assert.ok(logs.includes("Season 01 step_dropped step=text-karlin reason=cap"));
+    klaviyo = [];
+    await post({ email: "t2@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19" });
+    assert.equal(events().length, 0, "another email without a sign-up is dropped, not counted against t@");
+  });
+
+  it("item 10: a cross-site browser POST is 403 with nothing written; same-site and no-Origin pass", async () => {
+    const cross = await post(signup(), { "sec-fetch-site": "cross-site" });
+    assert.equal(cross.status, 403);
+    const badOrigin = await post(signup(), { origin: "https://evil.example", host: "ekuzo.gg" });
+    assert.equal(badOrigin.status, 403);
+    assert.equal(klaviyo.length, 0);
+    assert.equal(neonCalls.length, 0);
+    assert.equal((await post(signup({ email: "s@example.com" }), { "sec-fetch-site": "same-origin" })).status, 200);
+    assert.equal((await post(signup({ email: "s2@example.com" }), { origin: "https://ekuzo.gg", host: "ekuzo.gg" })).status, 200);
+    assert.equal((await post(signup({ email: "s3@example.com" }))).status, 200, "curl: no Origin");
+  });
+
+  it("item 11: response keys are only ok plus repeat, quiet or error", async () => {
+    const allowed = new Set(["ok", "repeat", "quiet", "error"]);
+    ipCounts.set("s1ip:global", 150);
+    const rs = [
+      await post(signup({ email: "k1@example.com" })),
+      await post(signup({ email: "k1@example.com", eventId: "evt-keys-0002" })),
+      await post({ email: "k1@example.com", step: "games", kidGames: "Roblox", eventId: "evt-aaaa-1111" }),
+      await post({ email: "nope" }),
+    ];
+    for (const r of rs) for (const k of Object.keys(r.body)) assert.ok(allowed.has(k), `unexpected key ${k}`);
+    assert.deepEqual(Object.keys(rs[0].body).sort(), ["ok", "quiet"]);
+  });
+
+  it("item 9, 11: a sentinel email and IP never appear in any console call, across every path", async () => {
+    const EMAIL = "sentinel.person@example.com";
+    const IPS = ["203.0.113.77", "2001:db8:77:77::5"];
+    const H = ipH(IPS[0]);
+    // quiet and 429
+    ipCounts.set(ipKey(IPS[0]), 10);
+    await post(signup({ email: EMAIL }), H);
+    ipCounts.set(ipKey("v6:2001:0db8:0077:0077"), 30);
+    await post(signup({ email: "sentinel.two@example.com" }), ipH(IPS[1]));
+    // step drops and caps
+    await post({ email: EMAIL, step: "games", kidGames: "Roblox", eventId: "evt-sent-0001" }, H);
+    // Klaviyo failures whose body echoes the email, on every event path
+    eventStatus = 500;
+    eventBody = JSON.stringify({ errors: [{ detail: `bad profile ${EMAIL} from ${IPS[0]}` }] });
+    seenKeys.add(emailKey(EMAIL));
+    seenKeys.add(evKey("evt-sent-0001", EMAIL));
+    await post({ email: EMAIL, step: "games", kidGames: "Roblox", eventId: "evt-sent-0001" }, H);
+    await post({ email: EMAIL, step: "age", kidAge: "10-12", eventId: "evt-sent-0001" }, H);
+    await post({ email: EMAIL, step: "text-karlin", phone: "+15125550123", eventId: "evt-sent-0001" }, H);
+    await post(signup({ email: EMAIL, eventId: "evt-sent-0002" }), H); // repeat event fails
+    await post(signup({ email: "sentinel.three@example.com" }), H); // new event fails: 502
+    eventStatus = 200;
+    subscribeStatus = 500;
+    await post(signup({ email: "sentinel.four@example.com" }), H);
+    // database down
+    dbMode = "throw";
+    await post(signup({ email: "sentinel.five@example.com" }), H);
+    assert.ok(logs.length > 8, "the paths logged something");
+    for (const l of logs) {
+      assert.ok(!/sentinel|example\.com/i.test(l), `email in log: ${l}`);
+      for (const ip of IPS) assert.ok(!l.includes(ip) && !l.includes(ip.split(":").slice(0, 4).join(":")), `IP in log: ${l}`);
+    }
+    assert.ok(logs.some((l) => /Klaviyo games event failed: 500$/.test(l)), "failures log the status only");
+  });
+
+  it("item 9: the route source has no r.text() in a log and no raw email in the missing-key line", async () => {
+    const { readFileSync } = await import("node:fs");
+    const src = readFileSync(new URL("../../../app/api/season-one/route.ts", import.meta.url), "utf8");
+    assert.ok(!/\.text\(\)/.test(src), "no response body is read for logging");
+    assert.match(src, /console\.error\("KLAVIYO_PRIVATE_API_KEY not set: Season 01 sign-up lost"\);/);
+    assert.ok(!/x-forwarded-for['"]\)/.test(src), "x-forwarded-for is never read");
   });
 });

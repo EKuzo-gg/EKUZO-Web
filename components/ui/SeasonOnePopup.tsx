@@ -63,6 +63,8 @@ export default function SeasonOnePopup() {
   // email is a different sign-up and gets its own ID.
   const eventIdRef = useRef("");
   const eventIdForRef = useRef("");
+  // The email the sign-up was accepted for; the follow-up steps send it (not whatever the field says now) with the eventId.
+  const joinedEmailRef = useRef("");
   const inflightRef = useRef(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
 
@@ -131,13 +133,15 @@ export default function SeasonOnePopup() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
+        // A 429 carries the "text our founder" copy in `error`: show it as is, no auto-retry.
         throw new Error(data?.error || "That didn’t go through. Try again?");
       }
-      // repeat:true means this email already joined in the last 24 h: same
-      // confirmation, no second Lead.
+      // repeat:true means this email already joined in the last 24 h; quiet:true
+      // means this connection is signing up a lot. Both: same confirmation, no Lead.
       const body = await res.json().catch(() => ({}));
       try { localStorage.setItem(S1_JOINED_KEY, "1"); } catch { /* ignore */ }
-      if (body?.repeat !== true && !honeypotRef.current?.value) trackLead({ source: "season_one_popup", eventId });
+      joinedEmailRef.current = em;
+      if (body?.repeat !== true && body?.quiet !== true && !honeypotRef.current?.value) trackLead({ source: "season_one_popup", eventId });
       setStatus("done");
     } catch (err) {
       setStatus("idle");
@@ -157,7 +161,7 @@ export default function SeasonOnePopup() {
       fetch("/api/season-one", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ step: "games", email: email.trim(), kidGames: next.join(", ") }),
+        body: JSON.stringify({ step: "games", email: joinedEmailRef.current || email.trim(), eventId: eventIdRef.current, kidGames: next.join(", ") }),
       }).catch(() => {});
     }, 900);
   }
