@@ -19,7 +19,7 @@ const posts = [
     title: "How do I get my kid off the game without a fight?",
     date: "November 4, 2026",
     author: "Karlin Oei",
-    category: "Parenting",
+    category: "Guides",
     excerpt:
       "End at a natural stopping point, and agree on where that is before the game starts.",
     image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg",

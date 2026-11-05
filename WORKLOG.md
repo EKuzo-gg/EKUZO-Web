@@ -22,7 +22,7 @@
 
 - New post `/blog/how-to-get-your-kid-off-video-games-without-a-fight` (Karlin byline), `app/blog/how-to-get-your-kid-off-video-games-without-a-fight/page.tsx`, built on the Robux post's skeleton. Copy is Jamie's v6 copy of record, transcribed as is. Meta description is an interim string marked `// META: pending Jamie approval`.
 - Images: `public/images/how-to-get-your-kid-off-video-games-without-a-fight-hero.jpg` (1232x520) and `-card.jpg` (1200x630).
-- `app/blog/page.tsx`: new post added at the top with `featured: true`; Robux is `featured: false`. Category on the card and the page eyebrow is "Parenting".
+- `app/blog/page.tsx`: new post added at the top with `featured: true`; Robux is `featured: false`. Category on the card and the page eyebrow is "Guides" (Jamie 2026-11-05: no new category; it joins the how-to drawer with the League, homeschool and programs guides).
 - `app/blog/author/karlin-oei/page.tsx`: new post added at the top of the list.
 - `app/sitemap.ts`: new entry (priority 0.7, lastModified 2026-11-04); Robux lowered to 0.6 with the other non-featured posts; Karlin's author page lastModified bumped.
 - `public/llms.txt`: entry added above the Robux entry.

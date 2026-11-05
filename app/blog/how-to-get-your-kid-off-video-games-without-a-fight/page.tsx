@@ -171,7 +171,7 @@ export const metadata = {
     publishedTime: DATE_PUBLISHED,
     modifiedTime: DATE_MODIFIED,
     authors: ["Karlin Oei"],
-    section: "Parenting",
+    section: "Guides",
   },
   twitter: {
     card: "summary_large_image",
@@ -234,7 +234,7 @@ export default function PostGetKidOffVideoGames() {
         >
           <div className="max-w-[820px]">
             <span className="font-body text-xs font-bold text-red tracking-[0.15em] uppercase mb-4 block">
-              Parenting
+              Guides
             </span>
             <h1
               className="font-body font-bold text-black leading-tight mb-6"
