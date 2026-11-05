@@ -117,7 +117,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/league-of-legends-youth-development`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
