@@ -5,6 +5,7 @@ import TornPaperDivider from "@/components/ui/TornPaperDivider";
 import JsonLd from "@/components/JsonLd";
 import BlogPostBody from "@/components/blog/BlogPostBody";
 import ProgramLine from "@/components/blog/ProgramLine";
+import FactsBox from "@/components/blog/FactsBox";
 import InstagramEmbed from "@/components/blog/InstagramEmbed";
 import {
   buildBlogArticleSchema,
@@ -24,7 +25,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/blog-post-4-hero.jpg";
 const SHARE_IMAGE = "/images/blog-post-4-card.jpg";
 const DATE_PUBLISHED = "2026-05-16";
-const DATE_MODIFIED = "2026-10-13";
+const DATE_MODIFIED = "2026-11-05";
 
 // FAQPage schema — lets AI surfaces (Google AI Overviews, ChatGPT, Perplexity)
 // pull individual Q&A pairs as standalone citations. Answers are plain text
@@ -38,7 +39,7 @@ const FAQ_ITEMS = [
   {
     question: "Is League of Legends appropriate for kids?",
     answer:
-      "League is rated ESRB Teen for fantasy violence. It isn't a young children's game, and the rating is honest about that. The combat is set in Runeterra, a fictional world with swords, magic, dragons, and champion abilities that obviously don't exist outside the game. For many families and schools, that's a different conversation than a game with realistic firearms or modern military settings. We run League as a coached team activity with adults in the room.",
+      "League is rated ESRB Teen for blood, fantasy violence, mild suggestive themes and use of alcohol and tobacco. It isn't a young children's game, and the rating is honest about that. The combat is set in Runeterra, a fictional world with swords, magic, dragons, and champion abilities that obviously don't exist outside the game. For many families and schools, that's a different conversation than a game with realistic firearms or modern military settings. We run League as a coached team activity with adults in the room.",
   },
   {
     question:
@@ -243,6 +244,78 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 teach against, and the right structure around the game turns
                 a famously hard title into a developmental environment.
               </p>
+
+              {/* .blog-content styles ul as disc and li with margins; reset inside the facts box only. */}
+              <style>{`.blog-content [role="note"] ul{list-style:none;margin:0;padding:0}.blog-content [role="note"] li{margin:0;padding:0}`}</style>
+              <FactsBox
+                title="League of Legends for parents: the facts"
+                items={[
+                  {
+                    label: "Rating",
+                    content: (
+                      <>
+                        <a href="https://www.esrb.org/ratings/32211/league-of-legends/" target="_blank" rel="noopener noreferrer">Teen, from the ESRB</a>, for blood, fantasy violence, mild suggestive
+                        themes and use of alcohol and tobacco. Online interactions
+                        aren&apos;t rated.
+                      </>
+                    ),
+                  },
+                  {
+                    label: "Accounts",
+                    content: (
+                      <>
+                        Riot&apos;s <a href="https://www.riotgames.com/en/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a> (section 1.1) let a minor play with a
+                        parent&apos;s or guardian&apos;s consent, and the parent is
+                        responsible for all use of the account, including purchases.
+                      </>
+                    ),
+                  },
+                  {
+                    label: "Chat",
+                    content: (
+                      <>
+                        In a match, press Esc, then go to Interface and Chat to{" "}
+                        <a href="https://support.riotgames.com/en-us/league-of-legends/gameplay/using-allied-and-all-chat" target="_blank" rel="noopener noreferrer">turn chat with the other team on or off</a>. Typing /ignore all mutes every
+                        player for that game.
+                      </>
+                    ),
+                  },
+                  {
+                    label: "Honor",
+                    content: (
+                      <>
+                        A penalty lowers a player&apos;s <a href="https://support.riotgames.com/en-us/league-of-legends/rewards/league-of-legends-honor-guide" target="_blank" rel="noopener noreferrer">honor level</a>. At Honor 1 and 2
+                        they lose chat with the other team (Honor 1 also loses
+                        champion select and post-game chat) and get no Ranked Season
+                        Rewards.
+                      </>
+                    ),
+                  },
+                  {
+                    label: "Leaving early",
+                    content: (
+                      <>
+                        A game your kid leaves always counts as a loss, even if the
+                        team wins. Repeat leaving brings queue delays, then{" "}
+                        <a href="https://support.riotgames.com/en-us/league-of-legends/penalties/away-from-keyboard-afk-faq" target="_blank" rel="noopener noreferrer">lockouts of up to two weeks</a>.
+                      </>
+                    ),
+                  },
+                  {
+                    label: "Match length",
+                    content: (
+                      <>
+                        About 45 minutes, including champion select, so count
+                        matches, not minutes. Here&apos;s{" "}
+                        <Link href="/blog/how-to-get-your-kid-off-video-games-without-a-fight">
+                          how to get your kid off the game without a fight
+                        </Link>
+                        .
+                      </>
+                    ),
+                  },
+                ]}
+              />
 
               <h2>Is League of Legends really that toxic?</h2>
               <p>
@@ -574,7 +647,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 communication norms before the match starts and review them
                 after. We use{" "}
                 <a
-                  href="https://support-leagueoflegends.riotgames.com/hc/en-us/articles/115008474148-League-of-Legends-Honor-Guide"
+                  href="https://support.riotgames.com/en-us/league-of-legends/rewards/league-of-legends-honor-guide"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -634,7 +707,7 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 unmoderated solo queue with strangers. The same is true of
                 any unmanaged online space your tween or teen enters.{" "}
                 <a
-                  href="https://support-leagueoflegends.riotgames.com/hc/en-us/articles/115008474148-League-of-Legends-Honor-Guide"
+                  href="https://support.riotgames.com/en-us/league-of-legends/rewards/league-of-legends-honor-guide"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -651,13 +724,14 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
                 <strong>Is League of Legends appropriate for kids?</strong>{" "}
                 League is rated{" "}
                 <a
-                  href="https://www.esrb.org/ratings/27518/league-of-legends/"
+                  href="https://www.esrb.org/ratings/32211/league-of-legends/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   ESRB Teen
                 </a>{" "}
-                for fantasy violence. It isn&apos;t a young children&apos;s
+                for blood, fantasy violence, mild suggestive themes and use of
+                alcohol and tobacco. It isn&apos;t a young children&apos;s
                 game, and the rating is honest about that. The combat is set
                 in Runeterra, a fictional world with swords, magic, dragons,
                 and champion abilities that obviously don&apos;t exist

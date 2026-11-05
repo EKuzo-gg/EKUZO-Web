@@ -5,6 +5,10 @@
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
 ---
+## Jamie's Claude, 2026-11-05: League facts box
+
+- `app/blog/league-of-legends-youth-development/page.tsx`: new "League of Legends for parents: the facts" box after the opening answer (rating, accounts, chat, honor, leaving early, match length), each line sourced from Riot or ESRB pages read 2026-11-04. FAQ rating sentence now lists the full ESRB descriptors in both `FAQ_ITEMS` and the visible FAQ (JSON-LD matches), ESRB link repointed to listing 32211, both honor guide links moved to support.riotgames.com. The "under 10%" and "65% STEM" claims are unchanged on purpose. `DATE_MODIFIED`, sitemap lastModified, /blog card and Karlin author card date set to 2026-11-05. `public/llms.txt` untouched.
+- Aaron: new `components/blog/FactsBox.tsx` (div/span/ul, torn-corner clip, off-white, black top rule). Additive and identical on the Fortnite branch; restyle freely.
 ## Jamie's Claude, 2026-11-05: Fortnite search refresh
 
 - `app/blog/should-you-ban-fortnite/page.tsx`: "Short answer:" paragraph first in the body; five body H2s rewritten as parent search questions; the five-question aside moved to right after the first H2 and retitled "Try this tonight"; new "Fortnite at a glance" facts box (ESRB rating, Epic parental controls, FTC case, match length) after the FTC paragraph; the one product link now points to Season 01 (/season1/join) with the sentence rewritten; new paragraph linking /blog/how-to-get-your-kid-off-video-games-without-a-fight; FAQ "Should I ban Fortnite?" renamed and "Is Fortnite OK for kids?" added (visible FAQ and FAQPage schema both render from FAQ_ITEMS); meta description rewritten (marked pending Jamie final look); intro "senior" / "This fall"; DATE_MODIFIED 2026-11-05; listening CTA swapped to Karlin's 15-minute calendar (Muhammad's page had no open times).

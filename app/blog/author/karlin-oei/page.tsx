@@ -65,7 +65,7 @@ const POSTS: AuthorPost[] = [
   {
     slug: "league-of-legends-youth-development",
     title: "Is League of Legends OK for kids? Why we coach it",
-    date: "October 13, 2026",
+    date: "November 5, 2026",
     excerpt:
       "Why League of Legends works for youth development when the structure is right. The honest answer on toxicity and what coached play actually teaches kids.",
     image: "/images/blog-post-4-card.jpg",
