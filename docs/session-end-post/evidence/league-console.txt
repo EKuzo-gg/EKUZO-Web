@@ -1,0 +1,3 @@
+1440 console: Failed to load resource: the server responded with a status of 404 (Not Found)
+768 console: Failed to load resource: the server responded with a status of 404 (Not Found)
+375 console: Failed to load resource: the server responded with a status of 404 (Not Found)
