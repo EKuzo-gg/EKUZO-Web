@@ -1,0 +1,213 @@
+{
+ "blocked": 0,
+ "rows": [
+  {
+   "tag": "d18-375-fold",
+   "beforeVsAfter": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d18-375-full",
+   "beforeVsAfter": {
+    "size": "375x2616",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x2616",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d18-1440-fold",
+   "beforeVsAfter": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d18-1440-full",
+   "beforeVsAfter": {
+    "size": "1440x1970",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x1970",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d19-375-fold",
+   "beforeVsAfter": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d19-375-full",
+   "beforeVsAfter": {
+    "size": "375x2537",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x2537",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d19-1440-fold",
+   "beforeVsAfter": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d19-1440-full",
+   "beforeVsAfter": {
+    "size": "1440x1894",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x1894",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d21-375-fold",
+   "beforeVsAfter": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d21-375-full",
+   "beforeVsAfter": {
+    "size": "375x2537",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x2537",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d21-1440-fold",
+   "beforeVsAfter": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d21-1440-full",
+   "beforeVsAfter": {
+    "size": "1440x1894",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x1894",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d2-375-fold",
+   "beforeVsAfter": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x667",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d2-375-full",
+   "beforeVsAfter": {
+    "size": "375x2968",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "375x2968",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d2-1440-fold",
+   "beforeVsAfter": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x900",
+    "diffPx": 0,
+    "share": 0
+   }
+  },
+  {
+   "tag": "d2-1440-full",
+   "beforeVsAfter": {
+    "size": "1440x2786",
+    "diffPx": 0,
+    "share": 0
+   },
+   "noiseFloor_beforeVsBefore": {
+    "size": "1440x2786",
+    "diffPx": 0,
+    "share": 0
+   }
+  }
+ ]
+}
