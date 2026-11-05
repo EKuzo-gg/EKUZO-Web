@@ -1,0 +1,38 @@
+## retest 2 at 1fba3ec, claim SQL verbatim from route.ts, real Postgres 16
+-- new em1/ev1 from IP A
+new
+ip s1ip:A 1
+ip s1ip:global 1
+-- repeat em1/ev2: expect repeat, rp-ev2 claimed, no ev2 row, ip count unmoved
+repeat
+em1|1
+ev1|1
+rp-ev2|1
+s1ip:A|1
+s1ip:global|1
+-- same repeat again (ev2): must read repeat, not retry
+repeat
+-- real retry: em1/ev1 again: must read retry
+retry
+-- SA-9 repro: em1 known, 60 fresh ev ids each posted twice from IP A
+classified over 120 posts: repeat=120 retry=0 new=0 (extra full-path runs would be retry+new)
+s1ip:A|1
+s1ip:global|1
+-- step lock SQL on real PG (the route's select with any(keys)): returning parent evb7 via rp key => 1 row; ev ev1 => 1 row; stranger random => 0 rows
+rp-evb7: 1
+ev1: 1
+ev-random-zzz: 0
+-- 31 new + 20 repeats from IP X: ip count must be 31
+s1ip:X|31
+-- concurrent same email two ev ids one IP Z
+      1 ip s1ip:Z 1
+      1 ip s1ip:global 33
+      1 seen same 0
+evS1|1
+rp-evS2|1
+s1ip:Z|1
+same|1
+-- no eventId: new then repeat
+ip s1ip:N 1
+ip s1ip:global 34
+seen noev 0

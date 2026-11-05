@@ -1,0 +1,310 @@
+import { describe, it, before, after, beforeEach } from "node:test";
+import assert from "node:assert/strict";
+
+const ROOT = "/home/claude/wt-build";
+const realFetch = globalThis.fetch;
+const realConsole = { log: console.log, warn: console.warn, error: console.error, info: console.info };
+const SENT_EMAIL = "sentinel.zz9@example.com";
+const SENT_IP = "203.0.113.77";
+
+type Row = { key: string; ws: number; count: number };
+let rows: Row[] = [];
+let now = Date.UTC(2026, 10, 5, 18, 20, 0);
+let dbDelay = 0; let dbMode: "ok" | "hang" = "ok";
+let klaviyo: { path: string; body: any }[] = [];
+let graph: any[] = [];
+let logs: string[] = [];
+let eventDelay = 0, subDelay = 0, metaDelay = 0, eventHang = false, subHang = false, metaHang = false;
+let neon: any[] = [];
+
+const arr = (v: unknown) => String(v).replace(/^\{|\}$/g, "").split(",").map((x) => x.replace(/^"|"$/g, "")).filter(Boolean);
+const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
+const res = (cols: string[], rs: unknown[][]) => ({ command: "SELECT", rowCount: rs.length, fields: cols.map((n) => ({ name: n, dataTypeID: 25 })), rows: rs });
+const DAY = 86400000;
+function sleepSig(ms: number, sig?: AbortSignal | null, hang = false) {
+  return new Promise<void>((resolve, reject) => {
+    const t = hang ? undefined : setTimeout(resolve, ms);
+    sig?.addEventListener("abort", () => { if (t) clearTimeout(t); reject(sig.reason ?? new Error("aborted")); });
+  });
+}
+function runQ(q: { query: string; params: any[] }) {
+  const s = q.query;
+  if (/pg_advisory_xact_lock/.test(s)) return res(["x"], [[1]]);
+  if (/^\s*delete from/.test(s)) { const ks = arr(q.params[0]); rows = rows.filter((r) => !(ks.includes(r.key) && r.ws > now - DAY)); return { command: "DELETE", rowCount: 1, fields: [], rows: [] }; }
+  if (/^\s*select 1 from/.test(s)) { const ks = arr(q.params[0]); const h = rows.some((r) => ks.includes(r.key) && r.ws > now - DAY); return res(["c"], h ? [[1]] : []); }
+  if (/with seen as/.test(s)) {
+    const keys = arr(q.params[0]); const emailKey = String(q.params[2]); const counted = arr(q.params[3]);
+    const seen = keys.filter((k) => rows.some((r) => r.key === k && r.ws > now - DAY));
+    const out: unknown[][] = seen.map((k) => ["seen", k, 0]);
+    const rpKey = String(q.params[4]);
+    const emailSeen = seen.includes(emailKey);
+    for (const k of keys) if (!seen.includes(k) && (emailSeen ? k === rpKey : k !== rpKey)) rows.push({ key: k, ws: now, count: 1 }); // 1fba3ec
+    if (!seen.includes(emailKey)) {
+      const hr = Math.floor(now / 3600000) * 3600000;
+      for (const k of counted) { let r = rows.find((x) => x.key === k && x.ws === hr); if (!r) { r = { key: k, ws: hr, count: 0 }; rows.push(r); } r.count++; out.push(["ip", k, r.count]); }
+    }
+    return res(["kind", "key", "n"], out);
+  }
+  if (/^\s*insert into s1_rate_limits/.test(s)) { // hit()
+    const win = Number(q.params[1]); const ws = Math.floor(now / 1000 / win) * win * 1000;
+    let r = rows.find((x) => x.key === q.params[0] && x.ws === ws); if (!r) { r = { key: q.params[0], ws, count: 0 }; rows.push(r); } r.count++;
+    return { command: "INSERT", rowCount: 1, fields: [{ name: "count", dataTypeID: 23 }], rows: [[r.count]] };
+  }
+  return res(["x"], []);
+}
+async function fakeFetch(url: unknown, init?: RequestInit) {
+  const u = String(url); const sig = init?.signal;
+  const body = JSON.parse(String(init?.body ?? "{}"));
+  if (u.includes("neon.tech")) {
+    const qs = body.queries ?? [{ query: body.query, params: body.params }];
+    neon.push(qs);
+    if (dbMode === "hang") await sleepSig(0, sig, true);
+    if (dbDelay) await sleepSig(dbDelay, sig);
+    const results = qs.map(runQ);
+    return json(body.queries ? { results } : results[0]);
+  }
+  if (u.includes("a.klaviyo.com")) {
+    const isEv = u.endsWith("/events");
+    klaviyo.push({ path: u.split("/api/")[1], body });
+    if (isEv) { if (eventHang) await sleepSig(0, sig, true); if (eventDelay) await sleepSig(eventDelay, sig); }
+    else { if (subHang) await sleepSig(0, sig, true); if (subDelay) await sleepSig(subDelay, sig); }
+    return new Response(isEv ? "" : "{}", { status: isEv ? 200 : 202 });
+  }
+  if (u.includes("graph.facebook.com")) {
+    graph.push(body);
+    if (metaHang) await sleepSig(0, sig, true); if (metaDelay) await sleepSig(metaDelay, sig);
+    return json({ events_received: 1 });
+  }
+  throw new Error("unexpected network " + u);
+}
+let POST: any, NextRequest: any, keyHash: any;
+let n = 0;
+const post = async (payload: Record<string, unknown>, headers: Record<string, string> = {}) => {
+  const r = await POST(new NextRequest("http://localhost:3103/api/season-one", { method: "POST", headers: { "content-type": "application/json", ...headers }, body: JSON.stringify(payload) }));
+  return { status: r.status, body: await r.json() };
+};
+const su = (extra: Record<string, unknown> = {}) => { n++; return { email: `fam${n}@example.com`, source: "ad-landing", ad: "d19", eventId: `evt-${n}-aaaa`, ...extra }; };
+const nf = (ip: string) => ({ "x-nf-client-connection-ip": ip });
+const waitlistEvents = () => klaviyo.filter((c) => c.path === "events");
+
+describe("sentry-a adversarial S2", () => {
+  before(async () => {
+    process.env.DATABASE_URL = "postgresql://" + "unit" + ":" + "unit" + "@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+    process.env.KLAVIYO_PRIVATE_API_KEY = "unit-k"; process.env.S1_REF_SECRET = "unit-ref-secret-0123456789";
+    process.env.STRIPE_SECRET_KEY = "unit-not-live"; process.env.META_CAPI_ACCESS_TOKEN = "unit-meta"; process.env.META_PIXEL_ID = "1234567890";
+    globalThis.fetch = fakeFetch as typeof fetch;
+    const cap = (...a: unknown[]) => { logs.push(a.map((x) => (typeof x === "string" ? x : JSON.stringify(x))).join(" ")); };
+    console.log = console.warn = console.error = console.info = cap as any; (globalThis as any).__dbg = (m: string) => realConsole.error(m);
+    POST = (await import(ROOT + "/app/api/season-one/route.ts")).POST;
+    NextRequest = (await import("next/server")).NextRequest;
+    keyHash = (await import(ROOT + "/lib/season1/rules.ts")).keyHash;
+  });
+  let ka: any; before(() => { ka = setInterval(() => {}, 100); });
+  after(() => { clearInterval(ka); globalThis.fetch = realFetch; Object.assign(console, realConsole); });
+  beforeEach(() => { rows = []; klaviyo = []; graph = []; logs = []; neon = []; dbDelay = 0; dbMode = "ok"; eventDelay = subDelay = metaDelay = 0; eventHang = subHang = metaHang = false; });
+
+  it("A1 spoofed x-forwarded-for, no nf header: 40 sign-ups never quiet, no per-IP key, no IP to Meta", async () => {
+    for (let i = 0; i < 40; i++) { const r = await post(su(), { "x-forwarded-for": "9.9.9.9", "x-real-ip": "9.9.9.9" }); assert.deepEqual(r.body, { ok: true }); }
+    assert.equal(graph.length, 40);
+    assert.ok(graph.every((g) => g.data[0].user_data.client_ip_address === undefined), "no IP to Meta from xff");
+    assert.ok(!rows.some((r) => r.key.startsWith("s1ip:") && r.key !== "s1ip:global"), "no per-IP key");
+  });
+  it("A2 nf header with spoofed xff: Meta gets the nf IP, key from nf only", async () => {
+    await post(su(), { ...nf("198.51.100.4"), "x-forwarded-for": "9.9.9.9" });
+    assert.equal(graph[0].data[0].user_data.client_ip_address, "198.51.100.4");
+    assert.ok(rows.some((r) => r.key === `s1ip:${keyHash("198.51.100.4")}`));
+    assert.ok(!rows.some((r) => r.key === `s1ip:${keyHash("9.9.9.9")}`));
+  });
+  it("A3 junk nf values (not an IP, empty, list) are skipped, never one bucket", async () => {
+    for (const v of ["unknown", "", "1.2.3.4, 5.6.7.8", "999.1.1.1", "not-an-ip", "::::"]) await post(su(), { "x-nf-client-connection-ip": v });
+    assert.ok(!rows.some((r) => r.key.startsWith("s1ip:") && r.key !== "s1ip:global"), JSON.stringify(rows.map(r=>r.key)));
+  });
+  it("A4 IPv6 in one /64 share a bucket (compressed, expanded, upper case); another /64 does not", async () => {
+    const same = ["2001:db8:1:2::1", "2001:0DB8:0001:0002:ffff:ffff:ffff:ffff", "2001:db8:1:2:abcd::9", "2001:db8:1:2::"];
+    for (const ip of same) await post(su(), nf(ip));
+    const k = `s1ip:${keyHash("v6:2001:0db8:0001:0002")}`;
+    assert.equal(rows.find((r) => r.key === k)?.count, 4);
+    await post(su(), nf("2001:db8:1:3::1"));
+    assert.equal(rows.filter((r) => r.key.startsWith("s1ip:") && r.key !== "s1ip:global").length, 2);
+    // zone id
+    await post(su(), nf("2001:db8:1:2::5%eth0"));
+    assert.equal(rows.find((r) => r.key === k)?.count, 5);
+  });
+  it("A4b 11th from an IPv6 /64 using 11 different host bits is quiet", async () => {
+    let last: any;
+    for (let i = 1; i <= 11; i++) last = await post(su(), nf(`2001:db8:aa:bb::${i.toString(16)}`));
+    assert.deepEqual(last.body, { ok: true, quiet: true });
+  });
+  it("A5 ::ffff:1.2.3.4 == 1.2.3.4 == ::ffff:102:304", async () => {
+    await post(su(), nf("1.2.3.4")); await post(su(), nf("::ffff:1.2.3.4")); await post(su(), nf("::ffff:102:304")); await post(su(), nf("0:0:0:0:0:ffff:1.2.3.4"));
+    assert.equal(rows.find((r) => r.key === `s1ip:${keyHash("1.2.3.4")}`)?.count, 4);
+  });
+  it("A5b the Meta IP for a mapped address is still a valid IP (isIP) as given", async () => {
+    await post(su(), nf("::ffff:1.2.3.4"));
+    assert.equal(graph[0].data[0].user_data.client_ip_address, "::ffff:1.2.3.4");
+  });
+  it("B 11th new is quiet (events, subscribe, no Lead), 31st is 429 with nothing written; response keys", async () => {
+    const ip = nf("203.0.113.9"); const out: any[] = [];
+    for (let i = 1; i <= 31; i++) { klaviyo = []; graph = []; const r = await post(su(), ip); out.push({ r, ev: waitlistEvents().length, sub: klaviyo.length - waitlistEvents().length, lead: graph.length }); }
+    for (let i = 0; i < 10; i++) assert.deepEqual(out[i], { r: { status: 200, body: { ok: true } }, ev: 1, sub: 1, lead: 1 }, "sign-up " + (i + 1));
+    for (let i = 10; i < 30; i++) assert.deepEqual(out[i], { r: { status: 200, body: { ok: true, quiet: true } }, ev: 1, sub: 1, lead: 0 }, "sign-up " + (i + 1));
+    assert.equal(out[30].r.status, 429); assert.deepEqual(Object.keys(out[30].r.body).sort(), ["error", "ok"]);
+    assert.equal(out[30].ev + out[30].sub + out[30].lead, 0);
+    assert.match(out[30].r.body.error, /Text our founder at \(?\+?1?\)?/);
+    assert.ok(logs.some((l) => /rate limited: reason=ip_limit/.test(l))); assert.ok(logs.some((l) => /quiet: reason=ip_quiet/.test(l)));
+  });
+  it("B2 retries and repeats do not count: 50 retries + 50 repeats of one family stay at count 1", async () => {
+    const p = su(); const ip = nf("203.0.113.10");
+    await post(p, ip);
+    for (let i = 0; i < 50; i++) await post(p, ip);
+    for (let i = 0; i < 50; i++) await post({ ...p, eventId: "evt-rep-" + i }, ip);
+    assert.equal(rows.find((r) => r.key === `s1ip:${keyHash("203.0.113.10")}`)?.count, 1);
+  });
+  it("B3 a retry is never quiet even when its IP is over the quiet line (lost response still gets a Lead)", async () => {
+    const ip = nf("203.0.113.11"); const first = su(); await post(first, ip);
+    for (let i = 0; i < 12; i++) await post(su(), ip);
+    graph = []; const r = await post(first, ip);
+    assert.deepEqual(r.body, { ok: true }); assert.equal(graph.length, 1);
+  });
+  it("B4 a 429'd family's email claim is released so a hand-added or later attempt reads new", async () => {
+    const ip = nf("203.0.113.12"); for (let i = 0; i < 30; i++) await post(su(), ip);
+    const p = su(); const r = await post(p, ip); assert.equal(r.status, 429);
+    assert.ok(!rows.some((x) => x.key === `s1wl:em:${keyHash(p.email)}`));
+  });
+  it("C global: 151st new sign-up (all different IPs) is quiet, 150th is not", async () => {
+    let r150: any, r151: any;
+    for (let i = 1; i <= 151; i++) { const r = await post(su(), nf(`10.${i >> 8}.${i & 255}.1`)); if (i === 150) r150 = r; if (i === 151) r151 = r; }
+    assert.deepEqual(r150.body, { ok: true }); assert.deepEqual(r151.body, { ok: true, quiet: true });
+    assert.ok(logs.some((l) => /reason=global_quiet/.test(l)));
+  });
+  it("C2 global also counts no-IP sign-ups", async () => {
+    for (let i = 1; i <= 150; i++) await post(su());
+    assert.deepEqual((await post(su())).body, { ok: true, quiet: true });
+  });
+  it("D1 DB slow (claim 900 ms) is new, no limit, even over the line", async () => {
+    const ip = nf("203.0.113.13"); for (let i = 0; i < 35; i++) await post(su(), ip);
+    dbDelay = 900; const t = Date.now(); const r = await post(su(), ip);
+    assert.deepEqual(r.body, { ok: true }); assert.ok(Date.now() - t < 1500);
+    assert.equal(graph.length > 0, true);
+  });
+  it("D2 DB hang is new, no limit; DB throw too", async () => {
+    dbMode = "hang"; const r = await post(su(), nf("203.0.113.14")); assert.deepEqual(r.body, { ok: true });
+  });
+  it("E1 step with wrong eventId dropped silently, nothing written, step_dropped warn without PII", async () => {
+    const p = su({ email: SENT_EMAIL }); await post(p, nf(SENT_IP)); klaviyo = [];
+    for (const step of [{ step: "games", kidGames: "Valorant" }, { step: "age", kidAge: "11" }, { step: "text-karlin", phone: "+12125550123" }]) {
+      const r = await post({ ...step, email: SENT_EMAIL, eventId: "WRONG-id" }, nf(SENT_IP)); assert.deepEqual(r, { status: 200, body: { ok: true } });
+    }
+    assert.equal(klaviyo.length, 0);
+    assert.equal(logs.filter((l) => /step_dropped/.test(l)).length, 3);
+  });
+  it("E2 step with right eventId accepted; no eventId + recent email claim accepted; stranger email dropped", async () => {
+    const p = su({ email: SENT_EMAIL }); await post(p, nf(SENT_IP)); klaviyo = [];
+    await post({ step: "games", email: SENT_EMAIL, eventId: p.eventId, kidGames: "Valorant" }); assert.equal(klaviyo.length, 1);
+    await post({ step: "age", email: SENT_EMAIL, kidAge: "11" }); assert.equal(klaviyo.length, 2);
+    await post({ step: "games", email: "stranger@example.com", kidGames: "Valorant" }); assert.equal(klaviyo.length, 2);
+    await post({ step: "games", email: SENT_EMAIL.toUpperCase(), eventId: p.eventId, kidGames: "Valorant" }); assert.equal(klaviyo.length, 3, "case-insensitive email");
+  });
+  it("E3 step 24h+ later is dropped (claim older than 24 h)", async () => {
+    const p = su(); await post(p); now += DAY + 1000; klaviyo = [];
+    await post({ step: "age", email: p.email, eventId: p.eventId, kidAge: "11" }); assert.equal(klaviyo.length, 0); now -= DAY + 1000;
+  });
+  it("E4 repeat sign-up then step with the repeat's NEW eventId (the landing's card flow)", async () => {
+    const first = su(); await post(first); klaviyo = [];
+    const second = { ...first, eventId: "evt-second-view" }; const r = await post(second); assert.equal(r.body.repeat, true); klaviyo = [];
+    const tk = await post({ step: "text-karlin", email: first.email, eventId: second.eventId, phone: "+12125550123" });
+    console.info("E4 text-karlin after repeat: status", tk.status, "klaviyo writes", klaviyo.length);
+    realConsole.log("E4 RESULT: text-karlin after a repeat sign-up wrote events =", waitlistEvents().length, JSON.stringify(tk));
+  });
+  it("E5 text-karlin: 3 per email accepted, the 4th dropped silently with cap warn", async () => {
+    const p = su(); await post(p); klaviyo = [];
+    for (let i = 0; i < 4; i++) { const r = await post({ step: "text-karlin", email: p.email, eventId: p.eventId, phone: "+1212555012" + i }); assert.deepEqual(r, { status: 200, body: { ok: true } }); }
+    assert.equal(waitlistEvents().length, 3); assert.ok(logs.some((l) => /step_dropped step=text-karlin reason=cap/.test(l)));
+  });
+  it("E6 steps fail open on DB slow / hang", async () => {
+    dbDelay = 900; klaviyo = []; await post({ step: "age", email: "nobody@example.com", eventId: "x", kidAge: "11" }); assert.equal(klaviyo.length, 1);
+    dbDelay = 0; dbMode = "hang"; klaviyo = []; await post({ step: "games", email: "nobody@example.com", kidGames: "a" }); assert.equal(klaviyo.length, 1);
+  });
+  it("F origin guard: cross-site 403; same-site, same-origin, none, no Origin accepted; null origin 403", async () => {
+    const h = { host: "localhost:3103" };
+    assert.equal((await post(su(), { ...h, origin: "https://evil.example" })).status, 403);
+    assert.equal((await post(su(), { ...h, "sec-fetch-site": "cross-site" })).status, 403);
+    assert.equal((await post(su(), { ...h, origin: "null" })).status, 403);
+    assert.equal((await post(su(), { ...h, origin: "http://localhost:3103" })).status, 200);
+    assert.equal((await post(su(), { ...h, "sec-fetch-site": "same-site", origin: "https://evil.example" })).status, 200, "sfs wins");
+    assert.equal((await post(su(), { ...h, "sec-fetch-site": "same-origin" })).status, 200);
+    assert.equal((await post(su(), h)).status, 200);
+    assert.equal(klaviyo.filter((c)=>c.path==="events").length, 4);
+  });
+  it("G sentinel email and IP never appear in any console call (all branches)", async () => {
+    const ip = nf(SENT_IP); const p = su({ email: SENT_EMAIL });
+    for (let i = 0; i < 12; i++) await post(su(), ip);
+    await post(p, ip); await post(p, ip); await post({ ...p, eventId: "r2" }, ip);
+    for (let i = 0; i < 20; i++) await post(su(), ip);
+    await post(su({ email: SENT_EMAIL + "x" }), ip); // 429 branch
+    await post({ step: "text-karlin", email: SENT_EMAIL, eventId: "bad", phone: "+12125550123" }, ip);
+    for (let i = 0; i < 5; i++) await post({ step: "text-karlin", email: SENT_EMAIL, eventId: p.eventId, phone: "+12125550123" }, ip);
+    dbMode = "hang"; await post(su({ email: SENT_EMAIL + "y" }), ip); dbMode = "ok";
+    const bigfetch = globalThis.fetch;
+    globalThis.fetch = (async (u: any, i: any) => String(u).includes("klaviyo") ? new Response("echo " + SENT_EMAIL, { status: 500 }) : bigfetch(u, i)) as any;
+    await post(su({ email: SENT_EMAIL + "z" }), ip); await post({ step: "age", email: SENT_EMAIL, eventId: p.eventId, kidAge: "11" }, ip);
+    globalThis.fetch = bigfetch;
+    const all = logs.join("\n");
+    assert.ok(logs.length > 5, "logs captured: " + logs.length);
+    assert.ok(!all.includes("sentinel.zz9"), "email in logs"); assert.ok(!all.includes(SENT_IP), "IP in logs");
+    assert.ok(!all.includes(keyHash(SENT_IP)), "ip hash in logs"); realConsole.log("G log lines:", logs.length, "\n" + [...new Set(logs)].join("\n"));
+  });
+  it("H time: failed event path and success path worst cases", async () => {
+    dbDelay = 790; eventDelay = 3400; subHang = true; metaHang = true;
+    let t = Date.now(); let r = await post(su(), nf("203.0.113.20")); const ok = Date.now() - t; realConsole.log("H success worst (claim 790ms, event 3.4s, subscribe+meta hang):", ok, "ms", JSON.stringify(r));
+    dbDelay = 0; dbMode = "hang"; eventHang = true; subHang = false; metaHang = false;
+    t = Date.now(); r = await post(su(), nf("203.0.113.21")); realConsole.log("H db hang + event hang:", Date.now() - t, "ms", JSON.stringify(r));
+    dbMode = "ok"; dbDelay = 0; eventHang = false;
+    realConsole.log("note step worst case computed: 0.8 + 0.8 + 3.5 = 5.1 s");
+    assert.ok(ok < 7500);
+  });
+  it("H2 step worst: lock 790ms + cap 790ms + event hang", async () => {
+    const p = su(); await post(p); dbDelay = 790; eventHang = true; const t = Date.now();
+    const r = await post({ step: "text-karlin", email: p.email, eventId: p.eventId, phone: "+12125550123" }); realConsole.log("H2 step worst:", Date.now() - t, "ms", JSON.stringify(r));
+    assert.ok(Date.now() - t < 5600);
+  });
+
+  it("R1 retest: stranger with a random eventId and no sign-up is dropped (all three steps, with and without eventId)", async () => {
+    for (const step of [{ step: "games", kidGames: "Valorant" }, { step: "age", kidAge: "11" }, { step: "text-karlin", phone: "+12125550123" }]) {
+      const r = await post({ ...step, email: "nobody.at.all@example.com", eventId: "RANDOM-" + Math.random().toString(36).slice(2) }); assert.deepEqual(r, { status: 200, body: { ok: true } });
+      const r2 = await post({ ...step, email: "nobody.at.all@example.com" }); assert.deepEqual(r2, { status: 200, body: { ok: true } });
+    }
+    assert.equal(klaviyo.length, 0); assert.equal(logs.filter((l) => /step_dropped/.test(l)).length, 6);
+  });
+  it("R2 retest: repeat then step with the repeat's eventId is accepted; repeat claims no IP count; retry of the repeat is still a repeat", async () => {
+    const first = su(); const ip = nf("203.0.113.55"); await post(first, ip);
+    const second = { ...first, eventId: "evt-second-view" }; const r = await post(second, ip); assert.equal(r.body.repeat, true);
+    assert.equal(rows.find((x) => x.key === `s1ip:${keyHash("203.0.113.55")}`)?.count, 1, "repeat not counted");
+    klaviyo = [];
+    const tk = await post({ step: "text-karlin", email: first.email, eventId: second.eventId, phone: "+12125550123" }, ip);
+    const gm = await post({ step: "games", email: first.email, eventId: second.eventId, kidGames: "Valorant" }, ip);
+    assert.deepEqual([tk.body, gm.body], [{ ok: true }, { ok: true }]); assert.equal(waitlistEvents().length, 2, "both steps written");
+    assert.equal((await post(second, ip)).body.repeat, true, "second post of the same repeat is still a repeat");
+    const before = waitlistEvents().length; await post({ step: "age", email: first.email, eventId: "other-id", kidAge: "11" }, ip); assert.equal(waitlistEvents().length, before, "wrong id still dropped");
+    realConsole.log("R2 RESULT: step after repeat wrote events =", waitlistEvents().length);
+  });
+
+  it("R3 NEW: one known email, many fresh eventIds posted twice each: Leads without the IP limiter counting (repeat claims ev, second post reads retry)", async () => {
+    const ip = nf("203.0.113.66"); const email = "bot.owner@example.com"; await post({ email, source: "ad-landing", ad: "d19", eventId: "evt-first-0001" }, ip);
+    graph = []; klaviyo = [];
+    for (let i = 0; i < 60; i++) { const ev = "evt-bot-" + i; await post({ email, source: "ad-landing", ad: "d19", eventId: ev }, ip); await post({ email, source: "ad-landing", ad: "d19", eventId: ev }, ip); }
+    const wl = klaviyo.filter((c) => c.path === "events" && c.body.data.attributes.metric.data.attributes.name === "Season 01 Waitlist").length;
+    assert.equal(graph.length, 0, "no Lead from repeats"); assert.equal(wl, 0, "no full Waitlist event"); realConsole.log("R3 RESULT: 120 posts (60 pairs) from one IP, one email: extra Meta Leads =", graph.length, "; extra full Waitlist events (profile props rewritten) =", wl, "; ip count =", rows.find((x) => x.key === `s1ip:${keyHash("203.0.113.66")}`)?.count);
+  });
+
+  it("R4 a real retry (same email, same eventId as a new sign-up) still re-runs the full path with the same event_id", async () => {
+    const p = su(); const ip = nf("203.0.113.77"); await post(p, ip); klaviyo = []; graph = [];
+    const r = await post(p, ip); assert.deepEqual(r.body, { ok: true });
+    assert.equal(waitlistEvents().length, 1); assert.equal(graph.length, 1); assert.equal(graph[0].data[0].event_id, p.eventId);
+    assert.equal(rows.find((x) => x.key === `s1ip:${keyHash("203.0.113.77")}`)?.count, 1, "retry not counted");
+    realConsole.log("R4 RESULT: retry events =", waitlistEvents().length, "leads =", graph.length);
+  });
+  it("I order of checks: honeypot sign-up neither counted nor claimed", async () => {
+    const r = await post(su({ ekz_hp: "bot" }), nf("203.0.113.30")); assert.deepEqual(r.body, { ok: true }); assert.equal(rows.length, 0); assert.equal(klaviyo.length, 0);
+  });
+});
