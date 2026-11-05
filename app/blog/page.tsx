@@ -64,7 +64,7 @@ const posts = [
   {
     slug: "should-you-ban-fortnite",
     title: "She banned Fortnite and got her kid back. Then came a new problem.",
-    date: "October 26, 2026",
+    date: "November 5, 2026",
     author: "Muhammad Hossain",
     category: "Perspective",
     excerpt:
@@ -75,7 +75,7 @@ const posts = [
   {
     slug: "gaming-military-families",
     title: "Every move wiped their friend map. Gaming was the community that traveled.",
-    date: "July 31, 2026",
+    date: "November 5, 2026",
     author: "Muhammad Hossain",
     category: "Perspective",
     excerpt:

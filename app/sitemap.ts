@@ -156,13 +156,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 0.6.
     {
       url: `${baseUrl}/blog/should-you-ban-fortnite`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/blog/gaming-military-families`,
-      lastModified: new Date("2026-07-31"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.6,
     },

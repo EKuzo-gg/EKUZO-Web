@@ -99,9 +99,10 @@ const HERO_ALT =
 // actual file or the schema carries a lie.
 const SHARE_IMAGE = "/images/gaming-military-families-share.jpg";
 const DATE_PUBLISHED = "2026-07-25";
-const DATE_MODIFIED = "2026-07-31";
+const DATE_MODIFIED = "2026-11-05";
 // Listening-project CTA (final beat of the post). Not a product link.
-const LISTENING_CALENDAR = "https://calendar.app.google/mMJ5KoxcNdH6SR13A";
+// Swapped 2026-11-05 to Karlin's 15-minute booking page: Muhammad's page (mMJ5KoxcNdH6SR13A) had no open times.
+const LISTENING_CALENDAR = "https://calendar.app.google/7kkYBWxUJKH7RN6H6";
 
 // Every claim in the post that carries a number or an institutional fact.
 // Each one also resolves to an entry in knowledge-base ekuzo-fact-library.md.
@@ -340,9 +341,9 @@ export default function PostGamingMilitaryFamilies() {
         >
           <BlogPostBody author="muhammad-hossain" published={DATE_PUBLISHED} modified={DATE_MODIFIED}>
               <p>
-                Howdy. I’m Muhammad. I’m a rising senior at Texas A&amp;M, and I
+                Howdy. I’m Muhammad. I’m a senior at Texas A&amp;M, and I
                 coach kids in League of Legends for a youth esports startup
-                called EKUZO. My internship this summer comes with a listening
+                called EKUZO. My internship this fall comes with a listening
                 project: I sit down with parents, ask about gaming and screens,
                 and try to find the gap between what they see and what their
                 kids are living. I’m an English major, so getting to write the
@@ -634,7 +635,7 @@ export default function PostGamingMilitaryFamilies() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  put 20 minutes on my calendar
+                  put 15 minutes on our founder Karlin’s calendar
                 </a>
                 . I’d like to listen.
               </p>
