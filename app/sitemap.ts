@@ -183,7 +183,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // The session-end post, shipped 2026-11-04. Carries the featured slot on /blog.
     {
       url: `${baseUrl}/blog/how-to-get-your-kid-off-video-games-without-a-fight`,
-      lastModified: new Date("2026-11-04"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.7,
     },
