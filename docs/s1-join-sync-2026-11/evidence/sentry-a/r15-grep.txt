@@ -1,0 +1,15 @@
+## grep join/join.html and 'join\.html' (not join-b.html) outside docs
+./lib/season1/__tests__/joinRoutesMatch.test.ts:37:    assert.equal(fs.existsSync(path.join(root, "join.html")), false);
+[end exit 0]
+b
+jersey
+route.ts
+signup
+welcome
+## tests that name join-b.html
+lib/season1/__tests__/warmRoute.test.ts:81:    assert.doesNotMatch(read("season1", "join", "b", "join-b.html"), /\/api\/season1\/warm/);
+lib/season1/__tests__/devView.test.ts:17:    for (const p of [["season1", "join", "b", "join-b.html"], ["season1", "join", "signup", "signup
+lib/season1/__tests__/joinPage.test.ts:7:const tpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html"),
+lib/season1/__tests__/tags.test.ts:331:    ["join", ["season1", "join", "b", "join-b.html"]],
+app/season1/join/b/route.ts:21:const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html");
+app/season1/join/route.ts:23:const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html");

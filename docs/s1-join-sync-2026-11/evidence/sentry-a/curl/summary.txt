@@ -1,0 +1,6 @@
+/season1/join | branch HTTP/1.1 200 OK sha=a7ae369b278dd443 signuphref=href="/season1/join/signup"  | base HTTP/1.1 200 OK sha=6fb3adf333412fb5
+/season1/join/b | branch HTTP/1.1 200 OK sha=a7ae369b278dd443 signuphref=href="/season1/join/signup"  | base HTTP/1.1 200 OK sha=a7ae369b278dd443
+/season1/join?src=email | branch HTTP/1.1 200 OK sha=f8127b3cd0e785cc signuphref=href="/season1/join/signup?src=email"  | base HTTP/1.1 200 OK sha=fd14d704ae2b41c6
+/season1/join/b?src=email | branch HTTP/1.1 200 OK sha=f8127b3cd0e785cc signuphref=href="/season1/join/signup?src=email"  | base HTTP/1.1 200 OK sha=f8127b3cd0e785cc
+/season1/join?src=junk | branch HTTP/1.1 200 OK sha=a7ae369b278dd443 signuphref=href="/season1/join/signup"  | base HTTP/1.1 200 OK sha=6fb3adf333412fb5
+/season1/join/b?src=junk | branch HTTP/1.1 200 OK sha=a7ae369b278dd443 signuphref=href="/season1/join/signup"  | base HTTP/1.1 200 OK sha=a7ae369b278dd443

@@ -1,0 +1,21 @@
+-- _season1_join vs _season1_join_b (ignoring Date, cookie Expires)
+equal
+-- _season1_join vs base_season1_join_b (ignoring Date, cookie Expires)
+equal
+-- _season1_join vs base_season1_join (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_email vs _season1_join_b_src_email (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_email vs base_season1_join_b_src_email (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_email vs base_season1_join_src_email (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_junk vs _season1_join_b_src_junk (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_junk vs base_season1_join_b_src_junk (ignoring Date, cookie Expires)
+equal
+-- _season1_join_src_junk vs base_season1_join_src_junk (ignoring Date, cookie Expires)
+equal
+-- set-cookie names
+set-cookie: ekuzo_origin=direct; Path
+      3 set-cookie: ekuzo_origin=direct; Path=/;  Max-Age=31536000; Secure; SameSite=lax

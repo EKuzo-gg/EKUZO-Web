@@ -1,0 +1,4 @@
+closed/off mode (no STRIPE key, no DATABASE_URL), branch build, localhost:
+/season1/join   sha256 fdabcb4311b53eb7... signup links: 0
+/season1/join/b sha256 fdabcb4311b53eb7... (identical)
+open/test mode: see curl/summary.txt (a7ae369b278dd443 equal; ?src=email f8127b3cd0e785cc equal and signup href carries src=email; ?src=junk drops src)

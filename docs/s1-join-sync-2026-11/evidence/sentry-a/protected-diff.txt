@@ -1,0 +1,146 @@
+## git diff --stat c1f01e6 585617b (protected paths)
+[end, exit 0]
+## lib/season1 non-test
+ lib/season1/__tests__/devView.test.ts         |   2 +-
+ lib/season1/__tests__/joinPage.test.ts        |  15 +-
+ lib/season1/__tests__/joinRoutesMatch.test.ts |  49 ++++
+ lib/season1/__tests__/seasonOneRoute.test.ts  | 329 ++++++++++++++++++++++++++
+ lib/season1/__tests__/tags.test.ts            |   2 +-
+ lib/season1/__tests__/warmRoute.test.ts       |   2 +-
+ 6 files changed, 388 insertions(+), 11 deletions(-)
+[end]
+## lib/season1 all changed files
+lib/season1/__tests__/devView.test.ts
+lib/season1/__tests__/joinPage.test.ts
+lib/season1/__tests__/joinRoutesMatch.test.ts
+lib/season1/__tests__/seasonOneRoute.test.ts
+lib/season1/__tests__/tags.test.ts
+lib/season1/__tests__/warmRoute.test.ts
+## signup.html 8ce0e17 vs 585617b
+app/season1/early-access/signup/route.ts
+app/season1/early-access/signup/signup.html
+app/season1/join/signup/route.ts
+app/season1/join/signup/signup.html
+docs/s1-popup-attribution/evidence/f10-clarity-signup.md
+docs/s1-text-karlin-geo/evidence/sentry-browser/evidence/screens/branch-signup-1440.png
+docs/s1-text-karlin-geo/evidence/sentry-browser/evidence/screens/branch-signup-375.png
+docs/s1-text-karlin-geo/evidence/sentry-browser/evidence/screens/main-signup-1440.png
+docs/s1-text-karlin-geo/evidence/sentry-browser/evidence/screens/main-signup-375.png
+docs/season1-commit/analytics/evidence/atlas/signup-busy-1440.png
+docs/season1-commit/analytics/evidence/atlas/signup-busy-390.png
+docs/season1-commit/analytics/evidence/atlas/signup-in-progress-1440.png
+docs/season1-commit/analytics/evidence/atlas/signup-in-progress-390.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-3ds-challenge-1440.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-busyline-390.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-decline-390.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-f15-inprogress-1440.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-filled-1440.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-filled-390.png
+docs/season1-commit/analytics/evidence/sentry4/shots/signup-price-changed-390.png
+docs/season1-commit/evidence/parent-review/02-signup-full.png
+docs/season1-commit/evidence/parent-review/02-signup-top.png
+docs/season1-commit/evidence/parent-review/02b-signup-card-viewport.png
+docs/season1-commit/evidence/parent-review/03b-crew-signup-full.png
+docs/season1-commit/evidence/parent-review/03b-crew-signup-top.png
+docs/season1-commit/evidence/sentry-a11y/lh-season1_join_signup-1.json
+docs/season1-commit/evidence/sentry-a11y/shot-_season1_join_signup-375.png
+docs/season1-commit/evidence/sentry-a11y/signup-errors-375.png
+docs/season1-commit/evidence/sentry-final/b-02-signup-filled.png
+docs/season1-commit/evidence/sentry-regression/signup-banner.png
+docs/season1-commit/evidence/sentry-s1/j1-01-signup-loaded.png
+docs/season1-commit/evidence/sentry-s2/j4-02-signup-banner.png
+docs/season1-commit/final/00-inputs/2026-10-28-miro-season01-signup-funnel.pdf
+docs/season1-commit/final/evidence/canary-fix/signup-1440.png
+docs/season1-commit/final/evidence/canary-fix/signup-390.png
+docs/season1-commit/final/evidence/screens/canary-signup-1440.png
+docs/season1-commit/final/evidence/screens/canary-signup-390.png
+docs/season1-commit/final/evidence/screens/canary-signup-filled-1440.png
+docs/season1-commit/final/evidence/screens/signup-1440.png
+docs/season1-commit/final/evidence/screens/signup-390.png
+docs/season1-commit/final/evidence/screens/ws-D1-signup-390.png
+docs/season1-commit/final/evidence/screens/ws-M1-signup-1440.png
+docs/season1-commit/final/evidence/screens/ws-M2-signup-390.png
+docs/season1-commit/final/evidence/screens/ws-M3-signup-390.png
+docs/season1-commit/final/evidence/screens/ws-M4-signup-1440.png
+docs/season1-commit/final/evidence/screens/ws-R11-signup-390.png
+docs/season1-commit/final/evidence/screens/ws-R1cold-signup-1440.png
+docs/season1-commit/final/evidence/screens/ws-season1-join-signup-1440.png
+docs/season1-commit/final/evidence/screens/ws-season1-join-signup-390.png
+docs/season1-commit/screenshots/signup-1440-empty.png
+docs/season1-commit/screenshots/signup-1440-two-kids.png
+docs/season1-commit/screenshots/signup-1440-younger-or-older.png
+docs/season1-commit/screenshots/signup-375-after-a11y.png
+docs/season1-commit/screenshots/signup-375-duplicate-kid.png
+docs/season1-commit/screenshots/signup-375-empty.png
+docs/season1-commit/screenshots/signup-375-errors.png
+docs/season1-commit/screenshots/signup-375-ignored.png
+docs/season1-commit/screenshots/signup-375-invited-nameless.png
+docs/season1-commit/screenshots/signup-375-invited.png
+docs/season1-commit/screenshots/signup-375-payment-element.png
+docs/season1-commit/screenshots/signup-375-price-changed.png
+docs/season1-commit/screenshots/signup-375-removed.png
+docs/season1-commit/screenshots/signup-375-s4.png
+docs/season1-commit/screenshots/signup-375-text-karlin.png
+docs/season1-commit/screenshots/signup-375-two-kids.png
+docs/season1-commit/screenshots/signup-375-younger-or-older.png
+docs/season1-commit/screenshots/terms-375-signup-consent.png
+lib/season1/__tests__/signupCardCollapse.test.ts
+lib/season1/__tests__/signupCommit.test.ts
+lib/season1/__tests__/signupWallet.test.ts
+app/season1/early-access/signup/signup.html a412b16e9458c4e440a8b9239fabe03ebee1d768bf396a0529a6d5528d34e269  - | a412b16e9458c4e440a8b9239fabe03ebee1d768bf396a0529a6d5528d34e269  -
+app/season1/join/signup/signup.html 4ba02e723ace36338a307ad4e60cf8c59de16e5545d6e0ff59ba576da41113ae  - | 4ba02e723ace36338a307ad4e60cf8c59de16e5545d6e0ff59ba576da41113ae  -
+## full changed file list
+M	WORKLOG.md
+M	app/api/season-one/route.ts
+D	app/season1/join/join.html
+M	app/season1/join/route.ts
+M	app/season1/join/signup/signup.html
+M	app/season1/landing.html
+M	components/ui/SeasonOnePopup.tsx
+A	docs/s1-join-sync-2026-11/01-requirements.md
+A	docs/s1-join-sync-2026-11/02-frozen-spec.md
+A	docs/s1-join-sync-2026-11/03-decision-log.md
+A	docs/s1-join-sync-2026-11/04-evidence-ledger.md
+A	docs/s1-join-sync-2026-11/auditor-phase1.md
+A	docs/s1-join-sync-2026-11/evidence/atlas/cls-self.json
+A	docs/s1-join-sync-2026-11/evidence/atlas/npm-test.txt
+A	docs/s1-join-sync-2026-11/evidence/atlas/self-test.md
+A	docs/s1-join-sync-2026-11/evidence/atlas/tsc.txt
+A	docs/s1-join-sync-2026-11/evidence/baseline/npm-test.txt
+A	docs/s1-join-sync-2026-11/evidence/cls/before-probe.json
+A	docs/s1-join-sync-2026-11/evidence/cls/measure-cls.mjs
+A	docs/s1-join-sync-2026-11/evidence/hotfix/browser.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/build.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/diff.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/diffstat.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/normalize-ad.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/npm-test-8ce0e17.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/npm-test.txt
+A	docs/s1-join-sync-2026-11/evidence/hotfix/results.md
+A	docs/s1-join-sync-2026-11/evidence/hotfix/server-unchanged.txt
+A	docs/s1-join-sync-2026-11/evidence/relay/npm-test.txt
+A	docs/s1-join-sync-2026-11/evidence/relay/self-test.md
+A	docs/s1-join-sync-2026-11/evidence/relay/tsc.txt
+A	docs/s1-join-sync-2026-11/redteam-money.md
+A	docs/s1-join-sync-2026-11/redteam-ops.md
+A	docs/s1-join-sync-2026-11/redteam-trust.md
+A	docs/s1-join-sync-2026-11/screenshots/join-1440-open.png
+A	docs/s1-join-sync-2026-11/screenshots/join-375-open.png
+A	docs/s1-join-sync-2026-11/screenshots/join-b-1440-open.png
+A	docs/s1-join-sync-2026-11/screenshots/join-b-375-open.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d18-1440-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d18-375-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d19-1440-confirmation.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d19-1440-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d19-375-confirmation.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d19-375-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d21-1440-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/landing-d21-375-settled.png
+A	docs/s1-join-sync-2026-11/screenshots/signup-1440-hotfix.png
+A	docs/s1-join-sync-2026-11/screenshots/signup-375-hotfix.png
+M	lib/season1/__tests__/devView.test.ts
+M	lib/season1/__tests__/joinPage.test.ts
+A	lib/season1/__tests__/joinRoutesMatch.test.ts
+A	lib/season1/__tests__/seasonOneRoute.test.ts
+M	lib/season1/__tests__/tags.test.ts
+M	lib/season1/__tests__/warmRoute.test.ts

@@ -1,0 +1,8 @@
+## summary (file, kind, count)
+app/api/season-one/route.ts ('spaced-hyphen',) 1
+lib/season1/__tests__/seasonOneRoute.test.ts ('spaced-hyphen',) 2
+
+## lines
+app/api/season-one/route.ts ['spaced-hyphen']:            select key from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'),
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     assert.match(q, /window_start > now\(\) - interval '24 hours'/);
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     const ms = Date.now() - t0;

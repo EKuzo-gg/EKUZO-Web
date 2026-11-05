@@ -1,0 +1,15 @@
+## 1 new (em+ev1)
+
+## 2 retry (em+ev1 again) expect em1 ev1
+em1 ev1 
+## 3 repeat (em + ev2) expect em1 only
+em1 
+## 4 rows
+ key | count 
+-----+-------
+ em1 |     1
+ ev1 |     1
+ ev2 |     1
+(3 rows)
+
+## 5 concurrency: two simultaneous first sign-ups for em2 with different eventIds (A sleeps 1.5s inside tx before lock... lock is first statement so sleep after lock)

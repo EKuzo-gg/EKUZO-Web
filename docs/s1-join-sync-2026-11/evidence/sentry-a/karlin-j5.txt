@@ -1,0 +1,10 @@
+## branch /karlin
+HTTP/1.1 307 Temporary Redirect
+location: /season1/join/b?src=karlin
+## c1f01e6 /karlin
+HTTP/1.1 307 Temporary Redirect
+location: /season1/join/b?src=karlin
+## next.config.mjs diff
+[empty above = zero diff]
+95:      // Season 01 commit: Karlin's short link (temporary, 307). Lands on join B (pricing first); src=karlin carries to signup.
+96:      { source: "/karlin", destination: "/season1/join/b?src=karlin", permanent: false },

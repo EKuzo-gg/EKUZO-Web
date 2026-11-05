@@ -1,0 +1,12 @@
+### 24 h boundary on real Postgres 16
+first (expect none seen): []
+at 23h59m (expect em seen, repeat): [exm ]
+at 24h01m (expect none seen, new): []
+  row: exm|2
+  row: exv1|1
+  row: exv2|1
+  row: exv3|1
+right after the new claim (expect em seen): [exm ]
+### empty/odd keys: 'select key from seen' with keys array of one
+
+solo (second call returns solo = repeat)

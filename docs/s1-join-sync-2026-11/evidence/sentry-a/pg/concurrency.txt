@@ -1,0 +1,12 @@
+### lock: A (holds its tx open 2 s after the claim) and B start 0.4 s apart; same email, different eventIds. 'seen' = rows the claim statement saw as already claimed
+A seen: []
+B seen: [em-lock ]
+  row: em-lock|1
+  row: evA-lock|1
+  row: evB-lock|1
+### nolock: A (holds its tx open 2 s after the claim) and B start 0.4 s apart; same email, different eventIds. 'seen' = rows the claim statement saw as already claimed
+A seen: []
+B seen: []
+  row: em-nolock|2
+  row: evA-nolock|1
+  row: evB-nolock|1
