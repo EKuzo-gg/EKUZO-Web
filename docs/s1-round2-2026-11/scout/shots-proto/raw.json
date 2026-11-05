@@ -1,0 +1,583 @@
+{
+ "blocked": 0,
+ "res": {
+  "d2": {
+   "cls": 0.1521,
+   "total": 0.1521,
+   "shifts": [
+    {
+     "t": 7413,
+     "v": 0.0876,
+     "input": false,
+     "src": [
+      {
+       "n": "section.how",
+       "prev": [
+        8,
+        606,
+        359,
+        61
+       ],
+       "cur": [
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "t": 7712,
+     "v": 0.0333,
+     "input": false,
+     "src": [
+      {
+       "n": "div.ih-opts.quotes",
+       "prev": [
+        26,
+        245,
+        323,
+        225
+       ],
+       "cur": [
+        26,
+        273,
+        323,
+        225
+       ]
+      },
+      {
+       "n": "section#bridge.bridge",
+       "prev": [
+        8,
+        542,
+        359,
+        125
+       ],
+       "cur": [
+        8,
+        570,
+        359,
+        97
+       ]
+      },
+      {
+       "n": "h1#ih-q",
+       "prev": [
+        26,
+        124,
+        323,
+        73
+       ],
+       "cur": [
+        25,
+        123,
+        324,
+        101
+       ]
+      },
+      {
+       "n": "button.ih-skip",
+       "prev": [
+        26,
+        470,
+        242,
+        44
+       ],
+       "cur": [
+        26,
+        498,
+        242,
+        44
+       ]
+      },
+      {
+       "n": "p.ih-sub",
+       "prev": [
+        26,
+        203,
+        323,
+        24
+       ],
+       "cur": [
+        26,
+        231,
+        323,
+        24
+       ]
+      }
+     ]
+    },
+    {
+     "t": 7897,
+     "v": 0.0312,
+     "input": false,
+     "src": [
+      {
+       "n": "div.ih-opts.quotes",
+       "prev": [
+        26,
+        273,
+        323,
+        225
+       ],
+       "cur": [
+        26,
+        245,
+        323,
+        225
+       ]
+      },
+      {
+       "n": "section#bridge.bridge",
+       "prev": [
+        8,
+        570,
+        359,
+        97
+       ],
+       "cur": [
+        8,
+        542,
+        359,
+        125
+       ]
+      },
+      {
+       "n": "h1#ih-q",
+       "prev": [
+        25,
+        123,
+        324,
+        101
+       ],
+       "cur": [
+        25,
+        136,
+        324,
+        59
+       ]
+      },
+      {
+       "n": "button.ih-skip",
+       "prev": [
+        26,
+        498,
+        242,
+        43
+       ],
+       "cur": [
+        26,
+        470,
+        242,
+        44
+       ]
+      },
+      {
+       "n": "p.ih-sub",
+       "prev": [
+        26,
+        231,
+        323,
+        24
+       ],
+       "cur": [
+        26,
+        203,
+        323,
+        24
+       ]
+      }
+     ]
+    }
+   ],
+   "timeline": [
+    {
+     "t": 944,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loading"
+    },
+    {
+     "t": 1793,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loaded"
+    },
+    {
+     "t": 7455,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 7791,
+     "hero": 0,
+     "ih": 562,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 570,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 7904,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 7991,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loaded"
+    }
+   ]
+  },
+  "d4": {
+   "cls": 0.0272,
+   "total": 0.0272,
+   "shifts": [
+    {
+     "t": 7383,
+     "v": 0.0266,
+     "input": false,
+     "src": [
+      {
+       "n": "section.how",
+       "prev": [
+        8,
+        606,
+        359,
+        61
+       ],
+       "cur": [
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "t": 8012,
+     "v": 0.0006,
+     "input": false,
+     "src": [
+      {
+       "n": "#text",
+       "prev": [
+        26,
+        152,
+        323,
+        48
+       ],
+       "cur": [
+        26,
+        152,
+        323,
+        48
+       ]
+      }
+     ]
+    }
+   ],
+   "timeline": [
+    {
+     "t": 835,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loading"
+    },
+    {
+     "t": 1684,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loaded"
+    },
+    {
+     "t": 7436,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero light-top",
+     "fonts": "loading"
+    },
+    {
+     "t": 8084,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero light-top",
+     "fonts": "loaded"
+    }
+   ]
+  },
+  "d1": {
+   "cls": 0.0874,
+   "total": 0.0874,
+   "shifts": [
+    {
+     "t": 7373,
+     "v": 0.0874,
+     "input": false,
+     "src": [
+      {
+       "n": "section.how",
+       "prev": [
+        8,
+        606,
+        359,
+        61
+       ],
+       "cur": [
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   ],
+   "timeline": [
+    {
+     "t": 898,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loading"
+    },
+    {
+     "t": 1798,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loaded"
+    },
+    {
+     "t": 7413,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 7797,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loaded"
+    }
+   ]
+  },
+  "d3": {
+   "cls": 0.0247,
+   "total": 0.0247,
+   "shifts": [
+    {
+     "t": 7378,
+     "v": 0.0247,
+     "input": false,
+     "src": [
+      {
+       "n": "section.how",
+       "prev": [
+        8,
+        606,
+        359,
+        61
+       ],
+       "cur": [
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   ],
+   "timeline": [
+    {
+     "t": 795,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loading"
+    },
+    {
+     "t": 1688,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loaded"
+    },
+    {
+     "t": 7382,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 7986,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loaded"
+    }
+   ]
+  },
+  "d19-games": {
+   "cls": 0.0225,
+   "total": 0.0225,
+   "shifts": [
+    {
+     "t": 7422,
+     "v": 0.0225,
+     "input": false,
+     "src": [
+      {
+       "n": "section.how",
+       "prev": [
+        8,
+        606,
+        359,
+        61
+       ],
+       "cur": [
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   ],
+   "timeline": [
+    {
+     "t": 837,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loading"
+    },
+    {
+     "t": 1689,
+     "hero": 534,
+     "ih": 0,
+     "ihHidden": true,
+     "join": 0,
+     "joinParent": "lp pre-ih",
+     "bridgeY": 542,
+     "cls": "lp pre-ih",
+     "fonts": "loaded"
+    },
+    {
+     "t": 7430,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loading"
+    },
+    {
+     "t": 8217,
+     "hero": 0,
+     "ih": 534,
+     "ihHidden": false,
+     "join": 0,
+     "joinParent": "ih-slot",
+     "bridgeY": 542,
+     "cls": "lp pre-ih has-ihero",
+     "fonts": "loaded"
+    }
+   ]
+  }
+ }
+}
