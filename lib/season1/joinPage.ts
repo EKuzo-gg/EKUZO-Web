@@ -1,4 +1,5 @@
 import { OFFER, isOpen, formatDatePT, lockInDate, seasonLine } from "./offer";
+import { JOIN_CANONICAL, joinJsonLdScript, joinMetaDescription } from "../schema";
 
 /**
  * Pure renderer for /season1/join (app/season1/join/route.ts). Prices and
@@ -33,7 +34,7 @@ function blocks(tpl: string, flags: Record<string, boolean>): string {
 
 export function renderJoin(
   tpl: string,
-  opts: { now: Date; mode: "off" | "test" | "live"; src: string | null; tags?: { allow: string; tags: string } },
+  opts: { now: Date; mode: "off" | "test" | "live"; src: string | null; tags?: { allow: string; tags: string }; seo?: { indexable: boolean } },
 ): string {
   const { now, mode, src } = opts;
   const open = mode !== "off" && isOpen(now);
@@ -75,8 +76,15 @@ export function renderJoin(
     // Head blocks from lib/season1/tags.ts (the route renders them from the request host).
     URL_ALLOW: opts.tags?.allow ?? "",
     TAGS: opts.tags?.tags ?? "",
+    // Indexability head block (R2-D5): constants and escaped JSON-LD only, never request input.
+    // The canonical is the constant URL, so ?src= and utm params never reach it.
+    SEO: opts.seo?.indexable
+      ? `<link rel="canonical" href="${JOIN_CANONICAL}">` +
+        `<meta name="description" content="${esc(joinMetaDescription())}">` +
+        joinJsonLdScript(open)
+      : `<meta name="robots" content="noindex">`,
   };
-  const RAW = new Set(["CLOSED_BLOCK", "URL_ALLOW", "TAGS"]);
+  const RAW = new Set(["CLOSED_BLOCK", "URL_ALLOW", "TAGS", "SEO"]);
 
   let out = blocks(tpl, { open, jersey, test: mode === "test" });
   // CLOSED_BLOCK is built here from constants and the tag blocks by tags.ts; every other value is a

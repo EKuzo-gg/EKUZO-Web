@@ -63,3 +63,48 @@ describe("renderJoin", () => {
     assert.ok(h.includes("ages 9 to 17"));
   });
 });
+
+describe("renderJoin SEO block (R2-D5, R2-D6, R2-D8)", () => {
+  const seoOf = (h: string) => h.match(/<!--SEO:start-->([\s\S]*?)<!--SEO:end-->/)![1];
+  const ldOf = (h: string) => JSON.parse(seoOf(h).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)![1]);
+  const CLOSED = new Date("2027-01-02T12:00:00-08:00");
+
+  it("default and indexable:false give exactly the noindex meta", () => {
+    for (const seo of [undefined, { indexable: false }]) {
+      assert.equal(seoOf(renderJoin(tpl, { now: OPEN, mode: "live", src: null, seo })), '<meta name="robots" content="noindex">');
+    }
+  });
+  it("indexable: canonical constant, description, no robots meta, JSON-LD from offer.ts", () => {
+    const h = renderJoin(tpl, { now: OPEN, mode: "live", src: "email", seo: { indexable: true } });
+    const seo = seoOf(h);
+    assert.ok(seo.includes('<link rel="canonical" href="https://ekuzo.gg/season1/join">'));
+    assert.ok(seo.includes('<meta name="description" content="'));
+    assert.ok(!/robots/i.test(seo));
+    assert.ok(!h.includes("{{"));
+    const ld = ldOf(h);
+    const course = ld["@graph"].find((n: { "@type": string }) => n["@type"] === "Course");
+    assert.equal(course.provider["@id"], "https://ekuzo.gg/#organization");
+    assert.equal(course.courseMode, "online");
+    assert.equal(course.offers.price, 580);
+    assert.equal(course.offers.priceCurrency, "USD");
+    assert.equal(course.offers.description, "$100 today covers January, then $160 a month February to April");
+    assert.equal(course.offers.availability, "https://schema.org/InStock");
+    assert.equal(course.offers.validThrough, "2026-12-31T23:59:59-08:00");
+    assert.ok(ld["@graph"].some((n: { "@type": string }) => n["@type"] === "BreadcrumbList"));
+    assert.ok(!JSON.stringify(ld).includes("FAQPage"));
+  });
+  it("stays indexed when closed: Offer SoldOut, same canonical", () => {
+    for (const [now, mode] of [[CLOSED, "live"], [OPEN, "off"]] as const) {
+      const h = renderJoin(tpl, { now, mode, src: null, seo: { indexable: true } });
+      assert.ok(h.includes("Signups are paused"));
+      assert.equal(ldOf(h)["@graph"][0].offers.availability, "https://schema.org/SoldOut");
+      assert.ok(seoOf(h).includes("https://ekuzo.gg/season1/join"));
+    }
+  });
+  it("escaping: `</script>`, U+2028 and U+2029 cannot break the block", async () => {
+    const { escapeJsonLd } = await import("../../schema");
+    const out = escapeJsonLd({ a: "x</script><script>alert(1)//\u2028\u2029" });
+    assert.ok(!out.includes("<") && !out.includes("\u2028") && !out.includes("\u2029"));
+    assert.equal(JSON.parse(out).a, "x</script><script>alert(1)//\u2028\u2029");
+  });
+});

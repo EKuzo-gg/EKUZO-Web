@@ -13,6 +13,7 @@
  * Keep the transcripts inline — do NOT reintroduce fs access here.
  */
 import { testimonialTranscripts } from "./testimonialTranscripts";
+import { OFFER } from "./season1/offer";
 
 const SITE = "https://ekuzo.gg";
 const ORG_ID = `${SITE}/#organization`;
@@ -727,4 +728,74 @@ export function buildTestimonialVideoSchema(slug: string) {
   );
   if (!node) throw new Error(`Unknown testimonial slug: ${slug}`);
   return { "@context": "https://schema.org", ...node };
+}
+
+
+// ─── Season 01 join page (/season1/join) ───────────────────────────────────
+// The join page is a route handler outside app/layout.tsx, so it cannot use
+// components/JsonLd.tsx. joinJsonLdScript applies the same escaping (`<`) plus
+// U+2028/U+2029, and the page template receives the finished string.
+// Every price and date comes from lib/season1/offer.ts. No FAQPage (R2-D6).
+// The Offer price is the season total (R2-D8); the $100 and $160 are described.
+
+export const JOIN_CANONICAL = `${SITE}/season1/join`;
+
+/** JSON for a <script type="application/ld+json"> body: safe against `</script>` and JS line separators. */
+export function escapeJsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
+const dollars = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents / 100).toFixed(2)}`;
+
+/** The Offer description, from offer.ts: "$100 today covers January, then $160 a month February to April". */
+export function joinOfferDescription(): string {
+  return `${dollars(OFFER.firstKidCents)} today covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month February to April`;
+}
+
+/** The meta description for the indexable join page, from offer.ts. */
+export function joinMetaDescription(): string {
+  return (
+    `Season 01 is EKUZO's coach-led youth gaming league for ages ${OFFER.ageCopyMin} to ${OFFER.ageCopyMax}. ` +
+    `Two 90-minute online practices a week with the same coach and team, ${OFFER.seasonLabel}. ` +
+    `${joinOfferDescription()}.`
+  );
+}
+
+export function buildJoinSchemaGraph(open: boolean) {
+  const breadcrumb: Record<string, unknown> = { ...buildBreadcrumbSchema([{ name: "Home", path: "" }, { name: "Season 01", path: "/season1/join" }]) };
+  delete breadcrumb["@context"];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Course",
+        "@id": `${JOIN_CANONICAL}#course`,
+        name: "EKUZO Season 01",
+        description: joinMetaDescription(),
+        url: JOIN_CANONICAL,
+        provider: { "@id": ORG_ID },
+        courseMode: "online",
+        inLanguage: "en",
+        offers: {
+          "@type": "Offer",
+          price: OFFER.seasonCents / 100,
+          priceCurrency: OFFER.currency.toUpperCase(),
+          description: joinOfferDescription(),
+          url: JOIN_CANONICAL,
+          availability: open ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+          validFrom: OFFER.openAt,
+          validThrough: OFFER.closeAt,
+        },
+      },
+      breadcrumb,
+    ],
+  };
+}
+
+/** The indexable head block for /season1/join: canonical, description, escaped JSON-LD script. */
+export function joinJsonLdScript(open: boolean): string {
+  return `<script type="application/ld+json">${escapeJsonLd(buildJoinSchemaGraph(open))}</script>`;
 }

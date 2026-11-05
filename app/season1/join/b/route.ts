@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { renderJoin } from "@/lib/season1/joinPage";
-import { currentMode } from "@/lib/season1/mode";
+import { currentMode, isLiveHost } from "@/lib/season1/mode";
 import { SRC_VALUES } from "@/lib/season1/validate";
 import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 import { tagsForRequest } from "@/lib/season1/tags";
@@ -21,16 +21,18 @@ export const dynamic = "force-dynamic";
 const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html");
 
 export function GET(request: Request) {
-  const mode = currentMode(request.headers.get("host"));
+  const host = request.headers.get("host");
+  const mode = currentMode(host);
+  const indexable = false;
   const srcParam = new URL(request.url).searchParams.get("src");
   const src = srcParam && (SRC_VALUES as readonly string[]).includes(srcParam) ? srcParam : null;
   const tpl = fs.readFileSync(TEMPLATE_PATH, "utf8");
-  const html = renderJoin(tpl, { now: new Date(), mode, src, tags: tagsForRequest(request, "join", mode) });
+  const html = renderJoin(tpl, { now: new Date(), mode, src, tags: tagsForRequest(request, "join", mode), seo: { indexable } });
   return new Response(html, {
     headers: {
       "content-type": "text/html; charset=utf-8",
       "cache-control": "private, no-store",
-      "x-robots-tag": "noindex",
+      ...(indexable ? {} : { "x-robots-tag": "noindex" }),
       "referrer-policy": "origin",
       ...pageSecurityHeaders(mode),
     },

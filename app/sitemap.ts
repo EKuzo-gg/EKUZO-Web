@@ -74,6 +74,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
 
+    // Season 01 front door. Indexable only on the live host in live mode
+    // (app/season1/join/route.ts); stays indexed when closed (R2-D5). Bump the
+    // date with offer.ts or template changes. /season1, /season1/join/b,
+    // /jersey and /signup are noindex and stay out.
+    {
+      url: `${baseUrl}/season1/join`,
+      lastModified: new Date("2026-11-05"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+
     // Partners
     {
       url: `${baseUrl}/partners`,
