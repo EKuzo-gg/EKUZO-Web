@@ -29,6 +29,10 @@
 - `app/blog/gaming-military-families/page.tsx`: "senior", "internship this fall", calendar swapped to Karlin's, DATE_MODIFIED 2026-11-05.
 - `app/sitemap.ts`, `app/blog/page.tsx`, `app/blog/author/muhammad-hossain/page.tsx`: lastModified and card dates for both posts set to 2026-11-05.
 - Note for Aaron: new `components/blog/FactsBox.tsx` (additive, server component, div/span/ul markup so the .blog-content prose rules do not cascade). Restyle freely. The prose CSS still shows list bullets inside it.
+## Jamie's Claude, 2026-11-05: League facts box
+
+- `app/blog/league-of-legends-youth-development/page.tsx`: new "League of Legends for parents: the facts" box after the opening answer (rating, accounts, chat, honor, leaving early, match length), each line sourced from Riot or ESRB pages read 2026-11-04. FAQ rating sentence now lists the full ESRB descriptors in both `FAQ_ITEMS` and the visible FAQ (JSON-LD matches), ESRB link repointed to listing 32211, both honor guide links moved to support.riotgames.com. The "under 10%" and "65% STEM" claims are unchanged on purpose. `DATE_MODIFIED`, sitemap lastModified, /blog card and Karlin author card date set to 2026-11-05. `public/llms.txt` untouched.
+- Aaron: new `components/blog/FactsBox.tsx` (div/span/ul, torn-corner clip, off-white, black top rule). Additive and identical on the Fortnite branch; restyle freely.
 
 ## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
 

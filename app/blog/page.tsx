@@ -142,7 +142,7 @@ const posts = [
   {
     slug: "league-of-legends-youth-development",
     title: "Is League of Legends OK for kids? Why we coach it",
-    date: "October 13, 2026",
+    date: "November 5, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
