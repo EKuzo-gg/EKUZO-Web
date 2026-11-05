@@ -246,7 +246,6 @@ export default function PostLeagueOfLegendsYouthDevelopment() {
               </p>
 
               {/* .blog-content styles ul as disc and li with margins; reset inside the facts box only. */}
-              <style>{`.blog-content [role="note"] ul{list-style:none;margin:0;padding:0}.blog-content [role="note"] li{margin:0;padding:0}`}</style>
               <FactsBox
                 title="League of Legends for parents: the facts"
                 items={[
