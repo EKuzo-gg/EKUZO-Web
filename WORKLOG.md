@@ -192,6 +192,16 @@ Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only)
   - The season line copy is approved by Jamie.
   - Two doors on /season1 and "Ready now?" are his to ship.
 - **Merge rule:** never merge dev into main. Release = season1-commit plus a merge of origin/main; dev goes through `preview/season1-dev`.
+## Aaron's Claude, 2026-11-05: micro school lane brought in line with the new package (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only.
+
+1. **Outreach Lab, New-model schools lane:** the package is marked as built, with buttons to the deck and one-pager in Figma. The lead pilot is now a spring semester team (mid-January to mid-May, twice a week, 90 minutes) instead of a 6-week elective. Two new watch-fors: the only credit line is "schools have used EKUZO for class credit", and no price goes in the package.
+2. **Micro school one-pager:** semester instead of 6-week blocks, near-peer mentors, the class credit line above, and the founding-school rate line removed.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440 and 390: no horizontal overflow, no page errors. The one-pager still prints to one Letter page.
+
+---
 ## Aaron's Claude, 2026-10-30: Hometown Heroes in Outreach Lab (roadshow, dev only)
 
 Branch `dev`, `public/roadshow/outreach-lab.html` only.

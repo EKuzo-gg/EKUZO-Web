@@ -497,21 +497,22 @@ const LANES = [
   { id: "microschools", num: 3, name: "New-model schools", tag: "Microschools, hybrid, homeschool co-ops",
     quote: "They're not really part of a team and they don't have a way to do that.", who_said: "A microschool founder",
     why: "They're buyers, not just rooms. Three founders in two days named growth as their magic wand.",
-    stage: 6, owed: true, status: "2 want a pilot. Package owed.",
+    stage: 6, owed: true, status: "Package built 11-05. Goes out with Jamie's kids video.",
     roles: { champion: ["Founder or head of school", "Runs afternoons and electives too."], decider: ["The same founder", "Fast decisions, small budgets."], gate: ["Skeptical staff, screen-light families", "Lead with the team and the coach."] },
-    give: ["A team, which a school of 20 can't field alone", "An elective that fits their cycle", "Something to show parents", "A growth story for enrollment"],
+    give: ["A team, which a school of 20 can't field alone", "A semester program that runs itself", "Something to show parents", "A growth story for enrollment"],
     ask: ["A pilot afternoon or elective", "A family night", "An intro to other founders"],
     hook: { s: "Austin founder learning from microschool founders", t: "\"The kids already game, but a small school has no way to give them a team.\"" },
     firstYes: "Coffee, then a Karlin session with their students",
     karlin: "Karlin runs a session with their students",
     proposal: "Microschool partnership package",
+    figma: [["Deck", "https://www.figma.com/design/XMWB5mQXzMaHxPfMbgmMzD/EKUZO-Decks?node-id=939-1694"], ["One-pager", "https://www.figma.com/design/XMWB5mQXzMaHxPfMbgmMzD/EKUZO-Decks?node-id=939-1293"]],
     pilots: [
-      { n: "6-week elective", d: "One EKUZO team inside their cycle (some run six-week cycles). Weekly online play.", pic: "cal" },
+      { n: "Spring semester team", d: "Mid-January to mid-May, twice a week, 90 minutes. Kids in the room, mentor online.", pic: "cal" },
       { n: "Mixed-school team", d: "Kids from two or three small schools form one team, so everyone gets a roster.", pic: "reach" },
       { n: "Family showcase", d: "One in-person night at the end where parents watch the team play.", pic: "night" }
     ],
-    watch: ["Schools compete for the same families. Don't name one to another without an OK.", "Some are phone-free. Leave \"game\" out of the subject.", "The school leads any credit conversation."],
-    deliver: [["Microschool partnership package", "owed"], ["Skeptical-staff story", "owed"], ["Parent explainer", "build"], ["Pilot calendar", "build"]],
+    watch: ["Schools compete for the same families. Don't name one to another without an OK.", "Some are phone-free. Leave \"game\" out of the subject.", "Credit: only say \"schools have used EKUZO for class credit.\" Never \"approved.\"", "No price in the package. Who pays is still open."],
+    deliver: [["Microschool partnership package", "exists"], ["Skeptical-staff story", "owed"], ["Parent explainer", "build"], ["Pilot calendar", "build"]],
     austin: [] },
 
   { id: "rooms", num: 4, name: "Labs and rooms", tag: "Coding centers, gaming centers, franchisors",
@@ -906,7 +907,7 @@ function viewLane(l) {
   ${l.id === "college" ? `<section class="band black dark"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap"><div><h2 class="h2">Turn club members into Hometown Heroes</h2><p class="subhead">Recruiters and coaches for a team from their own hometown.</p></div><a class="btn red" href="#heroes">See the program ${AR}</a></div></section>` : ""}
   <section class="band"><div class="wrap two">
     <div><h2 class="h2">Watch for</h2><ul class="watch">${l.watch.map(w => `<li>${IC.warn}<span>${esc(w)}</span></li>`).join("")}</ul></div>
-    <div><h2 class="h2">Deliverables</h2><ul class="deliv" style="background:var(--grey);padding:10px">${l.deliver.map(d => `<li><span>${esc(d[0])}</span><span class="chip ${d[1]}">${d[1] === "owed" ? "Owed now" : d[1] === "exists" ? "Exists" : "To build"}</span></li>`).join("")}</ul></div>
+    <div><h2 class="h2">Deliverables</h2><ul class="deliv" style="background:var(--grey);padding:10px">${l.deliver.map(d => `<li><span>${esc(d[0])}</span><span class="chip ${d[1]}">${d[1] === "owed" ? "Owed now" : d[1] === "exists" ? "Exists" : "To build"}</span></li>`).join("")}</ul>${l.figma ? `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${l.figma.map(x => `<a class="btn ghost" style="padding:9px 14px;font-size:14px" href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])} in Figma ${AR}</a>`).join("")}</div>` : ""}</div>
   </div></section>
   <section class="band" style="padding-top:0"><div class="wrap">
     <div class="lane-nav" style="border-top:2px solid #000;padding-top:28px">
