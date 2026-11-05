@@ -31,6 +31,18 @@
 - Cards: `/blog` and Karlin's author page use `-card-clean.jpg` (no baked text; the text card was clipped in the featured slot). OG and Twitter keep `-card.jpg` with "I CAN'T PAUSE IT." for link previews.
 
 ---
+## Jamie's Claude, 2026-11-05: hotfix, sign-up honeypot no longer autofilled; ad codes past d12 recorded
+
+Re-applies `9f3e2e7` (2026-11-04), which was committed on Jamie's laptop but never reached a branch or `main`.
+- `app/season1/join/signup/signup.html`: the honeypot input was named `company` with the label "Company", so
+  browser autofill filled it and `/api/season1/commit` rejected real parents as bots (generic 422). A parent
+  reported a week of failed tries (Netlify: three honeypot rejections 11-04 06:14 to 06:15 CT). The input is now
+  `ekz_hp`, label "Leave this empty", with the password-manager ignore attributes (the waitlist landing pattern);
+  `collect()` reads `g('ekz_hp')`. The JSON key stays `company`, so the server and tests are unchanged.
+- `app/api/season-one/route.ts`: `normalizeAd` accepted d1..d12 only, so sign-ups and Text Karlin requests from
+  d13 on (the November batch, d16 to d21) saved the ad blank and Karlin's alerts lost it. Now d1..d99.
+- Checks: tsc clean; `npm test` 482 tests, 481 pass, 0 fail. Build Loop run: `docs/s1-join-sync-2026-11/`.
+
 ## Jamie's Claude, 2026-11-05: Fortnite search refresh
 
 - `app/blog/should-you-ban-fortnite/page.tsx`: "Short answer:" paragraph first in the body; five body H2s rewritten as parent search questions; the five-question aside moved to right after the first H2 and retitled "Try this tonight"; new "Fortnite at a glance" facts box (ESRB rating, Epic parental controls, FTC case, match length) after the FTC paragraph; the one product link now points to Season 01 (/season1/join) with the sentence rewritten; new paragraph linking /blog/how-to-get-your-kid-off-video-games-without-a-fight; FAQ "Should I ban Fortnite?" renamed and "Is Fortnite OK for kids?" added (visible FAQ and FAQPage schema both render from FAQ_ITEMS); meta description rewritten (marked pending Jamie final look); intro "senior" / "This fall"; DATE_MODIFIED 2026-11-05; listening CTA swapped to Karlin's 15-minute calendar (Muhammad's page had no open times).

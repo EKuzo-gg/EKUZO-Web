@@ -92,9 +92,10 @@ const SOURCES = new Set(["site-popup", "ad-landing"]);
 const clean = (v: unknown, max = 120) => String(v ?? "").trim().slice(0, max);
 // Only string values are kept; objects and arrays would stringify to junk.
 const text = (v: unknown, max = 120) => (typeof v === "string" ? clean(v, max) : "");
-// The 12 ads are d1..d12. Accepts any case and a leading zero (d01), returns "d1".."d12" or "".
+// Ad codes are d1..d99 (d1..d12 at launch; the November batch runs d16 to d21). Accepts any case and a
+// leading zero (d01), returns "d1".."d99" or "". It was capped at d12, which blanked the ad on d13+ sign-ups.
 const normalizeAd = (v: unknown) => {
-  const m = typeof v === "string" ? /^d(0?[1-9]|1[0-2])$/i.exec(v.trim()) : null;
+  const m = typeof v === "string" ? /^d(0?[1-9]|[1-9]\d)$/i.exec(v.trim()) : null;
   return m ? `d${Number(m[1])}` : "";
 };
 const FAIL = "We couldn’t save that. Please try again.";
