@@ -578,7 +578,7 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     const r = await post(signup({ email: em(31), eventId: "evt-r-1031" }), ipH("203.0.113.9"));
     assert.equal(r.status, 429);
     assert.deepEqual(Object.keys(r.body).sort(), ["error", "ok"]);
-    assert.deepEqual(r.body, { ok: false, error: `We couldn't save this one from here. Text our founder at ${OFFER_SMS} and we'll add you by hand.` });
+    assert.deepEqual(r.body, { ok: false, error: `We couldn’t save your sign-up just now. Text our founder at ${OFFER_SMS} and we’ll add you by hand.` });
     assert.equal(klaviyo.length, 0, "nothing written to Klaviyo");
     assert.equal(graph.length, 0);
     assert.ok(!seenKeys.has(emailKey(em(31))), "claim released, so a hand-added or later attempt reads as new");

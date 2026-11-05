@@ -752,7 +752,8 @@ const dollars = (cents: number) => `$${cents % 100 === 0 ? cents / 100 : (cents 
 
 /** The Offer description, from offer.ts: "$100 today covers January, then $160 a month February to April". */
 export function joinOfferDescription(): string {
-  return `${dollars(OFFER.firstKidCents)} today covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month February to April`;
+  const sibPct = Math.round((1 - OFFER.siblingMonthlyCents / OFFER.monthlyCents) * 100);
+  return `${dollars(OFFER.firstKidCents)} today covers ${OFFER.firstMonthLabel}, then ${dollars(OFFER.monthlyCents)} a month February to April, per kid. Siblings are ${sibPct}% off.`;
 }
 
 /** The meta description for the indexable join page, from offer.ts. */
@@ -776,7 +777,8 @@ export function buildJoinSchemaGraph(open: boolean) {
         name: "EKUZO Season 01",
         description: joinMetaDescription(),
         url: JOIN_CANONICAL,
-        provider: { "@id": ORG_ID },
+        // Inline because this route-handler page does not carry the site graph; the same @id merges with it.
+        provider: { "@type": "Organization", "@id": ORG_ID, name: "EKUZO", url: SITE },
         courseMode: "online",
         inLanguage: "en",
         offers: {

@@ -590,7 +590,7 @@ export async function POST(req: NextRequest) {
       await releaseClaim(claimed);
       return NextResponse.json({
         ok: false,
-        error: `We couldn't save this one from here. Text our founder at ${displayPhone(OFFER.textKarlinSms)} and we'll add you by hand.`,
+        error: `We couldn’t save your sign-up just now. Text our founder at ${displayPhone(OFFER.textKarlinSms)} and we’ll add you by hand.`,
       }, { status: 429 });
     }
     if (quiet) console.warn(`Season 01 sign-up quiet: reason=${reason}`);

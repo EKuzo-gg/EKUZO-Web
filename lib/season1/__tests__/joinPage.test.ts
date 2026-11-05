@@ -83,11 +83,11 @@ describe("renderJoin SEO block (R2-D5, R2-D6, R2-D8)", () => {
     assert.ok(!h.includes("{{"));
     const ld = ldOf(h);
     const course = ld["@graph"].find((n: { "@type": string }) => n["@type"] === "Course");
-    assert.equal(course.provider["@id"], "https://ekuzo.gg/#organization");
+    assert.deepEqual(course.provider, { "@type": "Organization", "@id": "https://ekuzo.gg/#organization", name: "EKUZO", url: "https://ekuzo.gg" });
     assert.equal(course.courseMode, "online");
     assert.equal(course.offers.price, 580);
     assert.equal(course.offers.priceCurrency, "USD");
-    assert.equal(course.offers.description, "$100 today covers January, then $160 a month February to April");
+    assert.equal(course.offers.description, "$100 today covers January, then $160 a month February to April, per kid. Siblings are 20% off.");
     assert.equal(course.offers.availability, "https://schema.org/InStock");
     assert.equal(course.offers.validThrough, "2026-12-31T23:59:59-08:00");
     assert.ok(ld["@graph"].some((n: { "@type": string }) => n["@type"] === "BreadcrumbList"));
