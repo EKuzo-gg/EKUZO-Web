@@ -1,0 +1,280 @@
+{
+ "apiPosts": [
+  {
+   "email": "qa-a-1105@example.com",
+   "source": "ad-landing",
+   "ad": "d19",
+   "adName": "Southie jersey, back",
+   "where": "top",
+   "attribution": {
+    "utm_source": "meta",
+    "utm_medium": "",
+    "utm_campaign": "",
+    "utm_content": "d19-final",
+    "utm_term": "",
+    "utm_id": "",
+    "site": ""
+   },
+   "page": "/season1?ad=d19&utm_source=meta&utm_content=d19-final",
+   "hero": "none",
+   "heroAnswer": "",
+   "heroFrom": "none",
+   "eventId": "205d82c9-3168-4d10-b49a-47654a29fed3",
+   "eventSourceUrl": "http://localhost:3110/season1?ad=d19&utm_source=meta&utm_content=d19-final",
+   "tz": "America/Chicago",
+   "ekz_hp": ""
+  },
+  {
+   "email": "qa-b-1105@example.com",
+   "source": "ad-landing",
+   "ad": "d19",
+   "adName": "Southie jersey, back",
+   "where": "top",
+   "attribution": {
+    "utm_source": "meta",
+    "utm_medium": "",
+    "utm_campaign": "",
+    "utm_content": "d19-final",
+    "utm_term": "",
+    "utm_id": "",
+    "site": ""
+   },
+   "page": "/season1?ad=d19&utm_source=meta&utm_content=d19-final",
+   "hero": "none",
+   "heroAnswer": "",
+   "heroFrom": "none",
+   "eventId": "c084a93e-d462-448b-a6fc-2e692ab7f939",
+   "eventSourceUrl": "http://localhost:3110/season1?ad=d19&utm_source=meta&utm_content=d19-final",
+   "tz": "America/Chicago",
+   "ekz_hp": ""
+  },
+  {
+   "step": "text-karlin",
+   "email": "qa-b-1105@example.com",
+   "phone": "+15125550123",
+   "ad": "d19",
+   "hero": "none",
+   "tz": "America/Chicago"
+  }
+ ],
+ "vendorRequests": [
+  {
+   "method": "GET",
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght",
+   "bodyLen": 0
+  },
+  {
+   "method": "GET",
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2",
+   "bodyLen": 0
+  },
+  {
+   "method": "GET",
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+   "bodyLen": 0
+  },
+  {
+   "method": "GET",
+   "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nBrXw.woff2",
+   "bodyLen": 0
+  }
+ ],
+ "blocked": [],
+ "rec": {
+  "fbq": [
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d19"
+    },
+    {
+     "eventID": "c084a93e-d462-448b-a6fc-2e692ab7f939"
+    }
+   ]
+  ],
+  "gtag": [
+   [
+    "event",
+    "signup_error",
+    {
+     "ad": "d19",
+     "hero": "none",
+     "reason": "server"
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d19",
+     "hero": "none"
+    }
+   ],
+   [
+    "event",
+    "text_karlin_start",
+    {
+     "ad": "d19",
+     "hero": "none"
+    }
+   ],
+   [
+    "event",
+    "text_karlin_submit",
+    {
+     "ad": "d19",
+     "hero": "none"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d19"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d19-final"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ],
+   [
+    "event",
+    "text_karlin"
+   ]
+  ]
+ },
+ "results": {
+  "step1 first POST for A failed (502), error shown, no confirmation": {
+   "pass": true,
+   "detail": {
+    "posts": 1
+   }
+  },
+  "R3.7 two main POSTs: A (failed) then B": {
+   "pass": true,
+   "detail": [
+    {
+     "email": "qa-a-1105@example.com",
+     "eventId": "205d82c9-3168-4d10-b49a-47654a29fed3"
+    },
+    {
+     "email": "qa-b-1105@example.com",
+     "eventId": "c084a93e-d462-448b-a6fc-2e692ab7f939"
+    }
+   ]
+  },
+  "R3.7 B got a new eventId": {
+   "pass": true,
+   "detail": null
+  },
+  "R3.7 Text Karlin POST carries email B, not A": {
+   "pass": true,
+   "detail": {
+    "email": "qa-b-1105@example.com",
+    "step": "text-karlin",
+    "ad": "d19",
+    "phoneShape": true
+   }
+  },
+  "Text Karlin done state visible": {
+   "pass": true,
+   "detail": null
+  },
+  "M6 no request to a non-local host carries email, phone or a kid field": {
+   "pass": true,
+   "detail": {
+    "vendorRequests": 4,
+    "blockedAnalytics": 0,
+    "hits": []
+   }
+  },
+  "M6 fbq, gtag and clarity calls carry no email, phone or kid field": {
+   "pass": true,
+   "detail": {
+    "fbq": [
+     [
+      "track",
+      "Lead",
+      {
+       "content_name": "season_one_d19"
+      }
+     ]
+    ],
+    "gtagEvents": [
+     "signup_error",
+     "generate_lead",
+     "text_karlin_start",
+     "text_karlin_submit"
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad"
+     ],
+     [
+      "set",
+      "hero"
+     ],
+     [
+      "set",
+      "utm_content"
+     ],
+     [
+      "event",
+      "signup"
+     ],
+     [
+      "set",
+      "signed_up"
+     ],
+     [
+      "event",
+      "text_karlin"
+     ]
+    ]
+   }
+  },
+  "M6 no page URL (local or address bar) carries email or kid field": {
+   "pass": true,
+   "detail": {
+    "url": "http://localhost:3110/season1?ad=d19&utm_source=meta&utm_content=d19-final",
+    "hits": []
+   }
+  },
+  "M6 email appears only in bodies POSTed to /api/season-one": {
+   "pass": true,
+   "detail": []
+  },
+  "M6 Lead pixel event_id shared with the successful POST (M3 sanity)": {
+   "pass": true,
+   "detail": [
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d19"
+     },
+     {
+      "eventID": "c084a93e-d462-448b-a6fc-2e692ab7f939"
+     }
+    ]
+   ]
+  }
+ }
+}

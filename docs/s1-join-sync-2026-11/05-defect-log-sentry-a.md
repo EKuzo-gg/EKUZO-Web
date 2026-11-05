@@ -9,7 +9,7 @@ Branch `build/s1-join-sync-funnel-fixes` at 585617b. Evidence: `evidence/sentry-
 | SA-3 | low | accepted-risk | R3.2 | Atlas or Relay | closed (retest cycle 1, first_name no longer sent on repeat) |
 | SA-4 | low | infra-gap | D16, R3.1 | Relay | open |
 | SA-5 | info | infra-gap | tsc evidence | Atlas | open |
-| SA-6 | low | code-bug | R3.5 budget | Relay | open (new, retest cycle 1) |
+| SA-6 | low | code-bug | R3.5 budget | Relay | closed (final pass, 56b24b9) |
 
 ## SA-1 (medium, code-bug): a failed first sign-up still claims the email, so the next attempt with a new eventId is a "repeat" and no Waitlist event, profile props or Lead ever land
 
@@ -48,3 +48,7 @@ On the 502 path the release delete is bounded only by the Neon driver's 8 s time
 ## Retest cycle 1
 
 SA-1, SA-2, SA-3 closed: see `evidence/sentry-a/retest-1.md`.
+
+## Final pass at 56b24b9
+
+SA-6 closed: release capped at 800 ms (repo test, scratch test, real Postgres). Remaining known gap, documented in the route header: a claim that commits after the 800 ms cap is not released. All checks in `evidence/sentry-a/final-56b24b9.md` pass. Optional note: one en dash in a quoted product string in `parent-review.md`.

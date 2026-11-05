@@ -1,0 +1,11 @@
+## nft
+1:{"files":["../../../../../app/season1/join/b/join-b.html"
+/season1/join HTTP/1.1 200 OK a7ae369b278dd443 cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+/season1/join/b HTTP/1.1 200 OK a7ae369b278dd443 cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+/season1/join?src=email HTTP/1.1 200 OK f8127b3cd0e785cc cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+/season1/join/b?src=email HTTP/1.1 200 OK f8127b3cd0e785cc cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+/season1/join?src=junk HTTP/1.1 200 OK a7ae369b278dd443 cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+/season1/join/b?src=junk HTTP/1.1 200 OK a7ae369b278dd443 cache-control: private, no-store referrer-policy: origin x-robots-tag: noindex 
+## /karlin
+HTTP/1.1 307 Temporary Redirect
+location: /season1/join/b?src=karlin

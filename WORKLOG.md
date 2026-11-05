@@ -16,6 +16,24 @@
 - Google indexing requested for 9 URLs, Bing 10 URLs (incl. llms.txt), 2026-11-05.
 - For Aaron: the new post's hero shows the full image below 1280px (page-local), so the baked-in text never crops. `components/blog/PullQuote.tsx` and `FactsBox.tsx` were created and then removed in review; the post uses the blog blockquote and GutCheckAside.
 
+## Jamie's Claude, 2026-11-05: Season 01 join sync and funnel fixes (Build Loop, docs/s1-join-sync-2026-11/)
+
+- `/season1/join` now serves join B's template (`app/season1/join/route.ts` is a copy of `b/route.ts`; `join.html`
+  removed). `joinRoutesMatch.test.ts` fails if the two routes ever render differently. GA4 `season1_join_view` on
+  /join now carries `{variant:'b'}`; /join and /join/b separate by page path.
+- `/api/season-one`: one sign-up per email per 24 h. Each main sign-up is classed new, retry or repeat in one
+  Postgres transaction on `s1_rate_limits` (advisory lock on the email key, then a claim). Repeat: a
+  `Season 01 Waitlist Repeat` event, the list subscribe, no Lead, `{ok:true, repeat:true}`. Retry (same eventId):
+  full path, so a lost response still ends in one Lead. A failed sign-up releases its claim; all DB steps fail
+  open at 800 ms. Klaviyo `unique_id` uses the eventId; subscribe and CAPI run concurrently.
+- Landing and popup: one POST per tap burst, eventId tied to the email, no Lead on a repeat; the landing sets
+  `ekuzo_s1_joined` so the site popup stops asking after a landing sign-up.
+- Landing hero: page A heroes reserve their 4:5 box on phones before the 1.2 MB script runs (`#hero.pa`), CLS
+  at 375 px from 0.79 to 0.85 down to 0.0013 or less; desktop and interactive heroes unchanged. `AD_HERO` now lives
+  in the small script after `#hero`.
+- Checks: `npm test` 516 tests, 515 pass, 0 fail; tsc clean; Sentry A and B, Steward and a fresh Parent review in
+  the docs folder. Hotfix `8ce0e17` (honeypot, ad codes) shipped separately at 10:16 CT.
+
 ## Jamie's Claude, 2026-11-05 (morning): review round 1
 
 - New post hero swapped for the text version (no logo); alt text includes the on-image text. Page-local fix: below xl (1280px) the hero renders at its natural 1232/520 ratio so the right-third text is not cropped; 520px from xl up (at 768 the 520px crop cut the text).

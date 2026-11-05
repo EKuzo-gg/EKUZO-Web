@@ -1,0 +1,20 @@
+## protected paths c1f01e6..56b24b9
+[end]
+## lib/season1 non-test (excluding __tests__)
+[end]
+## signup.html 8ce0e17 vs 56b24b9
+identical app/season1/join/signup/signup.html
+identical app/season1/early-access/signup/signup.html
+## changed non-doc files
+WORKLOG.md
+app/api/season-one/route.ts
+app/season1/join/route.ts
+app/season1/join/signup/signup.html
+app/season1/landing.html
+components/ui/SeasonOnePopup.tsx
+lib/season1/__tests__/devView.test.ts
+lib/season1/__tests__/joinPage.test.ts
+lib/season1/__tests__/joinRoutesMatch.test.ts
+lib/season1/__tests__/seasonOneRoute.test.ts
+lib/season1/__tests__/tags.test.ts
+lib/season1/__tests__/warmRoute.test.ts

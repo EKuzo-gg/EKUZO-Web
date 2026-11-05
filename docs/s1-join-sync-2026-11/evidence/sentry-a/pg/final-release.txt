@@ -1,0 +1,4 @@
+## SA-6 retest on real Postgres 16, release SQL unchanged at 56b24b9: delete from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'
+claim {em,evA}: seen=[]
+after release rows: 0
+reclaim {em,evB}: seen=[] (empty = new)

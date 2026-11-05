@@ -1,0 +1,8 @@
+7 hits
+app/api/season-one/route.ts ['spaced-hyphen']:            select key from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'),
+app/api/season-one/route.ts ['spaced-hyphen']:       "delete from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'",
+docs/s1-join-sync-2026-11/parent-review.md ['en']: | "Text me, Karlin" (phone number) | "Got it. I'll text you soon. – Karlin" | Yes. It's clear and personal. |
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     assert.match(q, /window_start > now\(\) - interval '24 hours'/);
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     const ms = Date.now() - t0;
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     assert.match(del.query, /window_start > now\(\) - interval '24 hours'/);
+lib/season1/__tests__/seasonOneRoute.test.ts ['spaced-hyphen']:     const ms = Date.now() - t0;
