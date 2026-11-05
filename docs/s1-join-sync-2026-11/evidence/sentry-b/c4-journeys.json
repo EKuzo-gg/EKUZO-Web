@@ -1,0 +1,66 @@
+{
+ "blocked": 0,
+ "results": {
+  "j1 main sign-up body ad d19, attribution utm_content d19-qa, source ad-landing": {
+   "pass": true,
+   "detail": {
+    "ad": "d19",
+    "utm": {
+     "utm_source": "meta",
+     "utm_medium": "",
+     "utm_campaign": "",
+     "utm_content": "d19-qa",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "hero": "none"
+   }
+  },
+  "j1 Text Karlin step POST carries ad:d19": {
+   "pass": true,
+   "detail": {
+    "ad": "d19",
+    "step": "text-karlin",
+    "hero": "none",
+    "phoneShape": true
+   }
+  },
+  "j1 Text Karlin done state visible": {
+   "pass": true,
+   "detail": true
+  },
+  "j4 address bar keeps src + UTMs after load": {
+   "pass": true,
+   "detail": "http://localhost:3101/season1/join?src=email&utm_source=klaviyo&utm_medium=email&utm_campaign=s1&utm_content=email-b"
+  },
+  "j4 every sign-up CTA href carries src=email": {
+   "pass": true,
+   "detail": {
+    "count": 4,
+    "sample": [
+     "/season1/join/signup?src=email"
+    ]
+   }
+  },
+  "j4 signup page loads 200": {
+   "pass": true,
+   "detail": {
+    "status": 200,
+    "url": "http://localhost:3101/season1/join/signup?src=email"
+   }
+  },
+  "j4 signup honeypot field is ekz_hp (hotfix present)": {
+   "pass": true,
+   "detail": {
+    "named": "ekz_hp"
+   }
+  },
+  "j4b non-whitelisted src dropped from CTA": {
+   "pass": true,
+   "detail": [
+    "/season1/join/signup"
+   ]
+  }
+ }
+}

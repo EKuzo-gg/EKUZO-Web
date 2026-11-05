@@ -1,0 +1,249 @@
+{
+ "blocked": 0,
+ "out": {
+  "3110 375 /season1/join": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 375 /season1/join/b": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 375 /season1/join/jersey?ad=d19": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "warning: The resource http://localhost:3110/images/season1/s1-crew-mobile.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an approp"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 375 /season1?ad=d18": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 375 /season1?ad=d19": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 375 /season1?ad=d21": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 375 /season1?ad=d2": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 375 /blog": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+   ]
+  },
+  "3110 1440 /season1/join": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 1440 /season1/join/b": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 1440 /season1/join/jersey?ad=d19": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "warning: The resource http://localhost:3110/images/season1/s1-crew-left.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropri"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3110 1440 /season1?ad=d18": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 1440 /season1?ad=d19": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 1440 /season1?ad=d21": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 1440 /season1?ad=d2": {
+   "errs": [],
+   "bad": []
+  },
+  "3110 1440 /blog": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+   ]
+  },
+  "3200 375 /season1/join": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 375 /season1/join/b": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 375 /season1/join/jersey?ad=d19": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "warning: The resource http://localhost:3200/images/season1/s1-crew-mobile.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an approp"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 375 /season1?ad=d18": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 375 /season1?ad=d19": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 375 /season1?ad=d21": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 375 /season1?ad=d2": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 375 /blog": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+   ]
+  },
+  "3200 1440 /season1/join": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 1440 /season1/join/b": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 1440 /season1/join/jersey?ad=d19": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "warning: The resource http://localhost:3200/images/season1/s1-crew-left.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropri"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-black-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-white-top-1@2x.png",
+    "404 /images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"
+   ]
+  },
+  "3200 1440 /season1?ad=d18": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 1440 /season1?ad=d19": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 1440 /season1?ad=d21": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 1440 /season1?ad=d2": {
+   "errs": [],
+   "bad": []
+  },
+  "3200 1440 /blog": {
+   "errs": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 /images/new%20torn%20paper/torn-paper-red-top-2@2x.png"
+   ]
+  }
+ }
+}

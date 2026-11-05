@@ -1,0 +1,144 @@
+{
+ "blocked": 0,
+ "results": {
+  "a1 triple click burst -> 1 POST": {
+   "pass": true,
+   "detail": {
+    "posts": 1,
+    "conf": true
+   }
+  },
+  "a2 Enter + click -> 1 POST": {
+   "pass": true,
+   "detail": {
+    "posts": 1
+   }
+  },
+  "a3 dblclick (mouse) -> 1 POST": {
+   "pass": true,
+   "detail": {
+    "posts": 1
+   }
+  },
+  "c1 retry carries same eventId": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "f729c423-3d01-434b-9a2d-fabf71300dad",
+     "f729c423-3d01-434b-9a2d-fabf71300dad"
+    ]
+   }
+  },
+  "c2 exactly one fbq Lead, eventID == posted eventId": {
+   "pass": true,
+   "detail": {
+    "leads": [
+     [
+      "track",
+      "Lead",
+      {
+       "content_name": "season_one_d19"
+      },
+      {
+       "eventID": "f729c423-3d01-434b-9a2d-fabf71300dad"
+      }
+     ]
+    ],
+    "leadsBeforeRetry": 0
+   }
+  },
+  "c3 one gtag generate_lead and one clarity signup": {
+   "pass": true,
+   "detail": {
+    "gl": 1,
+    "cs": 1
+   }
+  },
+  "c4 ls joined=1 after new": {
+   "pass": true,
+   "detail": "1"
+  },
+  "m3 posted body also has eventSourceUrl and ad d19": {
+   "pass": true,
+   "detail": {
+    "ad": "d19"
+   }
+  },
+  "d1 different email after failure -> new eventId + own Lead": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "56277540-94ef-43c9-8f1d-2d0d0ad36e50",
+     "9719578b-a823-4925-97c7-2b2c41351d7b"
+    ],
+    "lead": {
+     "eventID": "9719578b-a823-4925-97c7-2b2c41351d7b"
+    }
+   }
+  },
+  "d2 second email after success -> second Lead, different eventID": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "55413765-fd6e-4366-95f1-47cea3dad6d4",
+     "3a86f60f-6ae1-4af1-952a-4be3735cd3e9"
+    ],
+    "leads": [
+     "55413765-fd6e-4366-95f1-47cea3dad6d4",
+     "3a86f60f-6ae1-4af1-952a-4be3735cd3e9"
+    ]
+   }
+  },
+  "d3 same email (case/space) again -> same eventId, still one Lead": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "410e596a-0d65-4f90-b1c3-7f3f2937b6ff",
+     "410e596a-0d65-4f90-b1c3-7f3f2937b6ff"
+    ],
+    "leads": 1
+   }
+  },
+  "e1 repeat shows confirmation, zero Lead/generate_lead/signup": {
+   "pass": true,
+   "detail": {
+    "conf": true,
+    "fbq": 0,
+    "gtag": [],
+    "clarity": [
+     "set:ad:d19",
+     "set:hero:none",
+     "set:utm_content:d19-qa"
+    ]
+   }
+  },
+  "e2 ls joined=1 after repeat": {
+   "pass": true,
+   "detail": "1"
+  },
+  "g1 setItem throws -> confirmation still shows": {
+   "pass": true,
+   "detail": {
+    "conf": true,
+    "leads": 1
+   }
+  },
+  "h1 touch scroll starting on email field -> no form_start": {
+   "pass": true,
+   "detail": {
+    "form_start": 0,
+    "scrollY": 318
+   }
+  },
+  "h2 control: a real tap on the field -> form_start": {
+   "pass": true,
+   "detail": 1
+  },
+  "m5 load + autofocus fire no form_start or Lead": {
+   "pass": true,
+   "detail": {
+    "gtag": []
+   }
+  }
+ }
+}

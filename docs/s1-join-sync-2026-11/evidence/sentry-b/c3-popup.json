@@ -1,0 +1,99 @@
+{
+ "blocked": 0,
+ "results": {
+  "3a auto popup opens on /blog (mode on, delay 2.5 s)": {
+   "pass": true,
+   "detail": {
+    "earlyDialogs": 0,
+    "openedAfterMs": 2893
+   }
+  },
+  "3b repeat in popup: no Lead call anywhere, flag set, done state": {
+   "pass": true,
+   "detail": {
+    "posts": 1,
+    "lead": {
+     "fbq": 0,
+     "gtag": 0,
+     "clarity": 0
+    },
+    "ls": "1",
+    "dialog": "YOU’RE ON THE LIST |  | AWESOME. |  | We can’t wait to make screentime the highlight of "
+   }
+  },
+  "3c control: new in popup fires Lead pair with posted eventId": {
+   "pass": true,
+   "detail": {
+    "lead": {
+     "fbq": 1,
+     "gtag": 1,
+     "clarity": 0
+    },
+    "fbq": [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_popup"
+     },
+     {
+      "eventID": "f45e9b42-6a87-4b59-8ef1-310cdc92bfc0"
+     }
+    ],
+    "posted": "f45e9b42-6a87-4b59-8ef1-310cdc92bfc0"
+   }
+  },
+  "3d popup burst of 3 taps -> 1 POST": {
+   "pass": true,
+   "detail": {
+    "posts": 1
+   }
+  },
+  "3e popup retry same email: same eventId, one Lead, eventID matches": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "a7b3c7e3-7ee7-4594-a1be-13ea99810028",
+     "a7b3c7e3-7ee7-4594-a1be-13ea99810028"
+    ],
+    "leads": 1
+   }
+  },
+  "3f popup different email after failure: new eventId, own Lead": {
+   "pass": true,
+   "detail": {
+    "ids": [
+     "5299ac08-45c3-420e-9a8f-41ec7785238b",
+     "edd2b170-1e32-4536-a7b6-42ad8db324b5"
+    ]
+   }
+  },
+  "3g ?join=season-one opens immediately": {
+   "pass": true,
+   "detail": {
+    "ms": 87
+   }
+  },
+  "j2 landing sign-up (ok) then /blog: no auto popup in 5 s, flag set": {
+   "pass": true,
+   "detail": {
+    "dialogs": 0,
+    "ls": "1"
+   }
+  },
+  "j2 control (ok): without the flag the popup does open": {
+   "pass": true,
+   "detail": true
+  },
+  "j2 landing sign-up (repeat) then /blog: no auto popup in 5 s, flag set": {
+   "pass": true,
+   "detail": {
+    "dialogs": 0,
+    "ls": "1"
+   }
+  },
+  "j2 control (repeat): without the flag the popup does open": {
+   "pass": true,
+   "detail": true
+  }
+ }
+}
