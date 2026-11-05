@@ -58,7 +58,7 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
         return { command: "INSERT", rowCount: 1, fields: [{ name: "count", dataTypeID: 23 }], rows: [[n]] };
       }
       if (/^select 1 from s1_rate_limits/.test(q.query)) {
-        const hitRow = seenKeys.has(String(q.params[0]));
+        const hitRow = pgArray(q.params[0]).some((k) => seenKeys.has(k));
         return { command: "SELECT", rowCount: hitRow ? 1 : 0, fields: [{ name: "?column?", dataTypeID: 23 }], rows: hitRow ? [[1]] : [] };
       }
       if (!/with seen as/.test(q.query)) return rowsFor([]);
@@ -68,7 +68,8 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
       const emailKey = String(q.params[2]);
       const seen = wanted.filter((k) => seenKeys.has(k));
       const rows: unknown[][] = seen.map((k) => ["seen", k, 0]);
-      for (const k of wanted) seenKeys.add(k);
+      const rpKey = String(q.params[4]);
+      for (const k of wanted) if (seen.includes(emailKey) ? k === rpKey : k !== rpKey) seenKeys.add(k);
       if (!seen.includes(emailKey)) {
         for (const k of pgArray(q.params[3])) {
           const n = (ipCounts.get(k) ?? 0) + 1;
@@ -114,6 +115,7 @@ const post = async (payload: Record<string, unknown>, headers: Record<string, st
 const signup = (extra: Record<string, unknown> = {}) => ({ email: "Parent.One+kid@example.com", source: "ad-landing", ad: "d19", eventId: "evt-aaaa-1111", ...extra });
 const emailKey = (e = "parent.one+kid@example.com") => `s1wl:em:${keyHash(e)}`;
 const evKey = (id: string, e = "parent.one+kid@example.com") => `s1wl:ev:${keyHash(`${e}|${id}`)}`;
+const rpKey = (id: string, e = "parent.one+kid@example.com") => `s1wl:rp:${keyHash(`${e}|${id}`)}`;
 
 describe("POST /api/season-one: 24 h classification (W3)", () => {
   before(async () => {
@@ -171,7 +173,7 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     assert.match(lock.query, /pg_advisory_xact_lock\(hashtext\(\$1\)\)/);
     assert.deepEqual(lock.params, [emailKey()]);
     assert.match(claim.query, /from s1_rate_limits/);
-    assert.deepEqual(pgArray(claim.params[0]), [emailKey(), evKey("evt-aaaa-1111")]);
+    assert.deepEqual(pgArray(claim.params[0]), [emailKey(), evKey("evt-aaaa-1111"), rpKey("evt-aaaa-1111")]);
     assert.ok(!JSON.stringify(neonCalls).includes("example.com"), "no raw email reaches the database");
   });
 
@@ -185,7 +187,7 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
 
   it("'+' addresses hash like any other address (R3.11)", async () => {
     await post(signup({ email: "A+b@Example.com" }));
-    assert.deepEqual(pgArray(claimSql()!.params[0]), [emailKey("a+b@example.com"), evKey("evt-aaaa-1111", "a+b@example.com")]);
+    assert.deepEqual(pgArray(claimSql()!.params[0]), [emailKey("a+b@example.com"), evKey("evt-aaaa-1111", "a+b@example.com"), rpKey("evt-aaaa-1111", "a+b@example.com")]);
     assert.notEqual(emailKey("a+b@example.com"), emailKey("a@example.com"));
   });
 
@@ -636,7 +638,8 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     await post(signup());
     const r = await post(signup({ eventId: "evt-rep-0001" }));
     assert.deepEqual(r.body, { ok: true, repeat: true });
-    assert.ok(seenKeys.has(evKey("evt-rep-0001")), "the repeat's ev key is claimed");
+    assert.ok(seenKeys.has(rpKey("evt-rep-0001")), "the repeat claims an rp key");
+    assert.ok(!seenKeys.has(evKey("evt-rep-0001")), "never the ev key");
     assert.equal(ipCounts.get("s1ip:global"), 1, "the repeat still does not count toward the hour");
     klaviyo = [];
     await post({ email: "parent.one+kid@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19", eventId: "evt-rep-0001" });
@@ -649,6 +652,32 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     assert.ok(logs.includes("Season 01 step_dropped step=games reason=no_signup"));
   });
 
+  it("SA-9: a repeat posted twice with one eventId is a repeat both times; 60 fresh eventIds each posted twice add no Waitlist event and no Lead", async () => {
+    await post(signup({ eventId: "evt-base-0001" }), ipH("203.0.113.9"));
+    klaviyo = [];
+    graph = [];
+    for (let i = 0; i < 60; i++) {
+      for (let j = 0; j < 2; j++) {
+        const r = await post(signup({ eventId: `evt-fresh-${1000 + i}` }), ipH("203.0.113.9"));
+        assert.deepEqual(r.body, { ok: true, repeat: true });
+      }
+    }
+    assert.ok(events().every((e) => e.metric.data.attributes.name === "Season 01 Waitlist Repeat"), "no extra Waitlist event");
+    assert.equal(events().length, 120);
+    assert.equal(graph.length, 0, "no extra Lead");
+    assert.equal(ipCounts.get(ipKey("203.0.113.9")), 1, "only the one new sign-up counted");
+  });
+
+  it("SA-9: a real retry (same eventId as a new sign-up) still re-runs the full path", async () => {
+    await post(signup({ eventId: "evt-real-0001" }));
+    klaviyo = [];
+    graph = [];
+    const r = await post(signup({ eventId: "evt-real-0001" }));
+    assert.deepEqual(r.body, { ok: true });
+    assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist");
+    assert.equal(graph.length, 1);
+  });
+
   it("item 7: a step with an eventId needs that ev key; a match writes the event", async () => {
     await post(signup());
     klaviyo = [];
@@ -657,7 +686,7 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     assert.equal(events().length, 1);
     const lock = neonCalls.flat().filter((q) => /^select 1 from s1_rate_limits/.test(q.query)).pop()!;
     assert.match(lock.query, /window_start > now\(\) - interval '24 hours' limit 1$/);
-    assert.deepEqual(lock.params, [evKey("evt-aaaa-1111")]);
+    assert.deepEqual(pgArray(lock.params[0]), [evKey("evt-aaaa-1111"), rpKey("evt-aaaa-1111")]);
     klaviyo = [];
     const wrong = await post({ email: "parent.one+kid@example.com", step: "age", kidAge: "10-12", eventId: "evt-zzzz-9999" });
     assert.deepEqual(wrong, { status: 200, body: { ok: true } });
@@ -669,7 +698,7 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     klaviyo = [];
     await post({ email: "parent.one+kid@example.com", step: "age", kidAge: "13-15" });
     assert.equal(events().length, 1);
-    assert.deepEqual(neonCalls.flat().filter((q) => /^select 1 from/.test(q.query)).pop()!.params, [emailKey()]);
+    assert.deepEqual(pgArray(neonCalls.flat().filter((q) => /^select 1 from/.test(q.query)).pop()!.params[0]), [emailKey()]);
     klaviyo = [];
     const stranger = await post({ email: "never.signed.up@example.com", step: "age", kidAge: "13-15" });
     assert.deepEqual(stranger, { status: 200, body: { ok: true } }, "same answer as a match: no oracle");

@@ -30,9 +30,11 @@ import { keyIsLive } from "@/lib/season1/stripe";
  *              "Season 01 Waitlist Repeat" event with the same event props and
  *              no profile props, the idempotent subscribe, no Meta Lead;
  *              responds {ok:true, repeat:true}.
- *     `new` claims the email and ev keys; a repeat claims its own ev key again
- *     (R2-D11), so a parent who signs up again from a new page view still has
- *     working follow-up steps. Only `new` counts toward the IP hour. A stranger
+ *     `new` claims the email and ev keys; a repeat claims a separate rp key
+ *     (s1wl:rp:, never the ev key, so a second post of the same repeat reads as
+ *     a repeat again and not as a retry that skips the IP count). The step lock
+ *     accepts an ev or rp key (R2-D11), so a parent who signs up again from a new
+ *     page view still has working follow-up steps. Only a seen ev key is a retry. Only `new` counts toward the IP hour. A stranger
  *     re-signing a known email can therefore unlock its steps; text-karlin stays
  *     capped at 3 per email per 24 h (and before round 2 any step posted freely).
  *     The same statement counts `new` sign-ups per client IP and globally
@@ -83,7 +85,7 @@ import { keyIsLive } from "@/lib/season1/stripe";
  * kid's age band as a profile property (no new subscription).
  *
  * Step lock (games, age, text-karlin): the step must belong to a sign-up this
- * server claimed. With an `eventId`, the s1wl:ev: key for that email and id must
+ * server claimed. With an `eventId`, the s1wl:ev: or s1wl:rp: key for that email and id must
  * exist inside 24 h; without one (old cached pages) the s1wl:em: key must. One
  * `select 1 ... limit 1`, 800 ms cap, fail open on any error or no database. No
  * match is a silent 200 {ok:true} with nothing written and a `step_dropped` warn
@@ -213,7 +215,9 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     const emailKey = `s1wl:em:${keyHash(email)}`;
-    const keys = eventId ? [emailKey, `s1wl:ev:${keyHash(`${email}|${eventId}`)}`] : [emailKey];
+    const evKey = eventId ? `s1wl:ev:${keyHash(`${email}|${eventId}`)}` : "";
+    const rpKey = eventId ? `s1wl:rp:${keyHash(`${email}|${eventId}`)}` : "";
+    const keys = eventId ? [emailKey, evKey, rpKey] : [emailKey];
     const material = clientIpKeyMaterial(req);
     const ipKey = material ? `s1ip:${keyHash(material)}` : "";
     const counted = ipKey ? [ipKey, GLOBAL_KEY] : [GLOBAL_KEY];
@@ -227,6 +231,7 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
            insert into s1_rate_limits (key, window_start, count, livemode)
            select k, now(), 1, $2::boolean from unnest($1::text[]) k
             where k not in (select key from seen)
+              and (case when exists (select 1 from seen where key = $3::text) then k = $5::text else k <> $5::text end)
            on conflict do nothing returning key),
          counted as (
            insert into s1_rate_limits (key, window_start, count, livemode)
@@ -236,7 +241,7 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
            returning key, count)
          select 'seen' as kind, key, 0 as n from seen
          union all select 'ip', key, count from counted`,
-        [keys, keyIsLive(), emailKey, counted],
+        [keys, keyIsLive(), emailKey, counted, rpKey],
       ),
     ]);
     const timeout = new Promise<never>((_, reject) => {
@@ -246,14 +251,14 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
     const rows = results[1] ?? [];
     const seen = new Set(rows.filter((r) => r.kind === "seen").map((r) => r.key));
     if (seen.has(emailKey)) {
-      const kind = keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat";
-      return { kind, claimed: keys.filter((k) => !seen.has(k)), quiet: false, limited: false, reason: "" };
+      const kind = evKey && seen.has(evKey) ? "retry" : "repeat";
+      return { kind, claimed: kind === "repeat" && rpKey && !seen.has(rpKey) ? [rpKey] : [], quiet: false, limited: false, reason: "" };
     }
     const count = (k: string) => Number(rows.find((r) => r.kind === "ip" && r.key === k)?.n ?? 0);
     const ipN = ipKey ? count(ipKey) : 0;
     const globalN = count(GLOBAL_KEY);
     const reason = ipN > IP_LIMIT ? "ip_limit" : ipN > IP_QUIET ? "ip_quiet" : globalN > GLOBAL_QUIET ? "global_quiet" : "";
-    return { kind: "new", claimed: keys, quiet: reason !== "", limited: reason === "ip_limit", reason };
+    return { kind: "new", claimed: keys.filter((k) => k !== rpKey), quiet: reason !== "", limited: reason === "ip_limit", reason };
   } catch (err) {
     console.warn("Season 01 dedupe check skipped:", err instanceof Error ? err.message : err);
     return NOT_COUNTED;
@@ -286,10 +291,12 @@ async function capped<T>(what: string, fallback: T, work: () => Promise<T>): Pro
  */
 function stepAllowed(email: string, eventId: string): Promise<boolean> {
   return capped("step check", true, async () => {
-    const key = eventId ? `s1wl:ev:${keyHash(`${email}|${eventId}`)}` : `s1wl:em:${keyHash(email)}`;
+    const keys = eventId
+      ? [`s1wl:ev:${keyHash(`${email}|${eventId}`)}`, `s1wl:rp:${keyHash(`${email}|${eventId}`)}`]
+      : [`s1wl:em:${keyHash(email)}`];
     const rows = (await getSql().query(
-      "select 1 from s1_rate_limits where key = $1 and window_start > now() - interval '24 hours' limit 1",
-      [key],
+      "select 1 from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours' limit 1",
+      [keys],
     )) as unknown[];
     return rows.length > 0;
   });
