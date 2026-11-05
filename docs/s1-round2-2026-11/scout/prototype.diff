@@ -1,0 +1,13 @@
+654c654,656
+< @media (max-width:959px){.lp > #hero.pa:empty{aspect-ratio:4/5}}
+---
+> @media (max-width:959px){.lp > #hero.pa:empty{aspect-ratio:4/5}
+> .lp.pre-ih:not(.has-ihero) > #hero{min-height:80svh}
+> .lp.pre-ih:not(.has-ihero) > #hero ~ *{display:none}}
+907a910
+>       else if(HERO_KEYS.indexOf(qh)>=0||(own(AD_HERO,ad)&&typeof AD_HERO[ad]==="string")) document.getElementById("lp").classList.add("pre-ih");
+1347c1350,1351
+<   fitHero(); document.fonts&&document.fonts.ready.then(fitHero); addEventListener("load",fitHero);
+---
+>   ih.style.visibility="hidden"; const showIh=()=>{ ih.style.visibility=""; }; setTimeout(showIh,1500);
+>   fitHero(); document.fonts&&document.fonts.ready.then(()=>{ fitHero(); showIh(); }); addEventListener("load",fitHero);

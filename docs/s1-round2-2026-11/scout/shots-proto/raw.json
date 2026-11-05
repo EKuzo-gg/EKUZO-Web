@@ -2,51 +2,14 @@
  "blocked": 0,
  "res": {
   "d2": {
-   "cls": 0.1521,
-   "total": 0.1521,
+   "cls": 0.0159,
+   "total": 0.0159,
    "shifts": [
     {
-     "t": 7413,
-     "v": 0.0876,
+     "t": 7624,
+     "v": 0.0082,
      "input": false,
      "src": [
-      {
-       "n": "section.how",
-       "prev": [
-        8,
-        606,
-        359,
-        61
-       ],
-       "cur": [
-        0,
-        0,
-        0,
-        0
-       ]
-      }
-     ]
-    },
-    {
-     "t": 7712,
-     "v": 0.0333,
-     "input": false,
-     "src": [
-      {
-       "n": "div.ih-opts.quotes",
-       "prev": [
-        26,
-        245,
-        323,
-        225
-       ],
-       "cur": [
-        26,
-        273,
-        323,
-        225
-       ]
-      },
       {
        "n": "section#bridge.bridge",
        "prev": [
@@ -61,74 +24,14 @@
         359,
         97
        ]
-      },
-      {
-       "n": "h1#ih-q",
-       "prev": [
-        26,
-        124,
-        323,
-        73
-       ],
-       "cur": [
-        25,
-        123,
-        324,
-        101
-       ]
-      },
-      {
-       "n": "button.ih-skip",
-       "prev": [
-        26,
-        470,
-        242,
-        44
-       ],
-       "cur": [
-        26,
-        498,
-        242,
-        44
-       ]
-      },
-      {
-       "n": "p.ih-sub",
-       "prev": [
-        26,
-        203,
-        323,
-        24
-       ],
-       "cur": [
-        26,
-        231,
-        323,
-        24
-       ]
       }
      ]
     },
     {
-     "t": 7897,
-     "v": 0.0312,
+     "t": 8133,
+     "v": 0.0077,
      "input": false,
      "src": [
-      {
-       "n": "div.ih-opts.quotes",
-       "prev": [
-        26,
-        273,
-        323,
-        225
-       ],
-       "cur": [
-        26,
-        245,
-        323,
-        225
-       ]
-      },
       {
        "n": "section#bridge.bridge",
        "prev": [
@@ -142,51 +45,6 @@
         542,
         359,
         125
-       ]
-      },
-      {
-       "n": "h1#ih-q",
-       "prev": [
-        25,
-        123,
-        324,
-        101
-       ],
-       "cur": [
-        25,
-        136,
-        324,
-        59
-       ]
-      },
-      {
-       "n": "button.ih-skip",
-       "prev": [
-        26,
-        498,
-        242,
-        43
-       ],
-       "cur": [
-        26,
-        470,
-        242,
-        44
-       ]
-      },
-      {
-       "n": "p.ih-sub",
-       "prev": [
-        26,
-        231,
-        323,
-        24
-       ],
-       "cur": [
-        26,
-        203,
-        323,
-        24
        ]
       }
      ]
@@ -194,29 +52,29 @@
    ],
    "timeline": [
     {
-     "t": 944,
+     "t": 1114,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loading"
     },
     {
-     "t": 1793,
+     "t": 1798,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loaded"
     },
     {
-     "t": 7455,
+     "t": 7378,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -227,7 +85,7 @@
      "fonts": "loading"
     },
     {
-     "t": 7791,
+     "t": 7698,
      "hero": 0,
      "ih": 562,
      "ihHidden": false,
@@ -238,7 +96,7 @@
      "fonts": "loading"
     },
     {
-     "t": 7904,
+     "t": 8138,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -249,7 +107,7 @@
      "fonts": "loading"
     },
     {
-     "t": 7991,
+     "t": 8198,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -262,79 +120,34 @@
    ]
   },
   "d4": {
-   "cls": 0.0272,
-   "total": 0.0272,
-   "shifts": [
-    {
-     "t": 7383,
-     "v": 0.0266,
-     "input": false,
-     "src": [
-      {
-       "n": "section.how",
-       "prev": [
-        8,
-        606,
-        359,
-        61
-       ],
-       "cur": [
-        0,
-        0,
-        0,
-        0
-       ]
-      }
-     ]
-    },
-    {
-     "t": 8012,
-     "v": 0.0006,
-     "input": false,
-     "src": [
-      {
-       "n": "#text",
-       "prev": [
-        26,
-        152,
-        323,
-        48
-       ],
-       "cur": [
-        26,
-        152,
-        323,
-        48
-       ]
-      }
-     ]
-    }
-   ],
+   "cls": 0,
+   "total": 0,
+   "shifts": [],
    "timeline": [
     {
-     "t": 835,
+     "t": 809,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loading"
     },
     {
-     "t": 1684,
+     "t": 1488,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loaded"
     },
     {
-     "t": 7436,
+     "t": 7280,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -345,7 +158,7 @@
      "fonts": "loading"
     },
     {
-     "t": 8084,
+     "t": 8088,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -358,57 +171,34 @@
    ]
   },
   "d1": {
-   "cls": 0.0874,
-   "total": 0.0874,
-   "shifts": [
-    {
-     "t": 7373,
-     "v": 0.0874,
-     "input": false,
-     "src": [
-      {
-       "n": "section.how",
-       "prev": [
-        8,
-        606,
-        359,
-        61
-       ],
-       "cur": [
-        0,
-        0,
-        0,
-        0
-       ]
-      }
-     ]
-    }
-   ],
+   "cls": 0,
+   "total": 0,
+   "shifts": [],
    "timeline": [
     {
-     "t": 898,
+     "t": 812,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loading"
     },
     {
-     "t": 1798,
+     "t": 1487,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loaded"
     },
     {
-     "t": 7413,
+     "t": 7248,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -419,7 +209,7 @@
      "fonts": "loading"
     },
     {
-     "t": 7797,
+     "t": 7787,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -432,57 +222,34 @@
    ]
   },
   "d3": {
-   "cls": 0.0247,
-   "total": 0.0247,
-   "shifts": [
-    {
-     "t": 7378,
-     "v": 0.0247,
-     "input": false,
-     "src": [
-      {
-       "n": "section.how",
-       "prev": [
-        8,
-        606,
-        359,
-        61
-       ],
-       "cur": [
-        0,
-        0,
-        0,
-        0
-       ]
-      }
-     ]
-    }
-   ],
+   "cls": 0,
+   "total": 0,
+   "shifts": [],
    "timeline": [
     {
-     "t": 795,
+     "t": 801,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loading"
     },
     {
-     "t": 1688,
+     "t": 1486,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loaded"
     },
     {
-     "t": 7382,
+     "t": 7316,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -493,7 +260,7 @@
      "fonts": "loading"
     },
     {
-     "t": 7986,
+     "t": 7992,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -506,57 +273,34 @@
    ]
   },
   "d19-games": {
-   "cls": 0.0225,
-   "total": 0.0225,
-   "shifts": [
-    {
-     "t": 7422,
-     "v": 0.0225,
-     "input": false,
-     "src": [
-      {
-       "n": "section.how",
-       "prev": [
-        8,
-        606,
-        359,
-        61
-       ],
-       "cur": [
-        0,
-        0,
-        0,
-        0
-       ]
-      }
-     ]
-    }
-   ],
+   "cls": 0,
+   "total": 0,
+   "shifts": [],
    "timeline": [
     {
-     "t": 837,
+     "t": 987,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loading"
     },
     {
-     "t": 1689,
+     "t": 1686,
      "hero": 534,
      "ih": 0,
      "ihHidden": true,
      "join": 0,
      "joinParent": "lp pre-ih",
-     "bridgeY": 542,
+     "bridgeY": 0,
      "cls": "lp pre-ih",
      "fonts": "loaded"
     },
     {
-     "t": 7430,
+     "t": 7308,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
@@ -567,7 +311,7 @@
      "fonts": "loading"
     },
     {
-     "t": 8217,
+     "t": 8286,
      "hero": 0,
      "ih": 534,
      "ihHidden": false,
