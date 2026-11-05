@@ -4,6 +4,13 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-05 (10:00): blog release live
+
+- Released `release/blog-2026-11-05` to `main` (`147897a`, date fix `c1f01e6`): session-end post, Fortnite refresh, League FAQ additions, four inbound links, llms.txt fixes. `dev` carries the same blog commits cherry-picked (never merged: `main` and `dev` have diverged, and a merge would delete the ad lab and roadshow files on `dev`).
+- Verified live: all touched pages 200, sitemap lastmod, llms.txt entry. GA4 `page_view`, `blog_read_75`, `blog_link_click` proven on production from a container browser with beacons answered locally.
+- Google indexing requested for 9 URLs, Bing 10 URLs (incl. llms.txt), 2026-11-05.
+- For Aaron: the new post's hero shows the full image below 1280px (page-local), so the baked-in text never crops. `components/blog/PullQuote.tsx` and `FactsBox.tsx` were created and then removed in review; the post uses the blog blockquote and GutCheckAside.
+
 ## Jamie's Claude, 2026-11-05 (morning): review round 1
 
 - New post hero swapped for the text version (no logo); alt text includes the on-image text. Page-local fix: below xl (1280px) the hero renders at its natural 1232/520 ratio so the right-third text is not cropped; 520px from xl up (at 768 the 520px crop cut the text).
