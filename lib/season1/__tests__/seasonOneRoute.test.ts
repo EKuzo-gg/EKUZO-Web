@@ -62,14 +62,14 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
         return { command: "SELECT", rowCount: hitRow ? 1 : 0, fields: [{ name: "?column?", dataTypeID: 23 }], rows: hitRow ? [[1]] : [] };
       }
       if (!/with seen as/.test(q.query)) return rowsFor([]);
-      // The claim statement's contract: read seen keys; claim nothing when the email key was seen;
-      // otherwise claim the rest and bump the hour's counters for params[3].
+      // The claim statement's contract: read seen keys, claim the rest (a repeat claims its ev key),
+      // and bump the hour's counters for params[3] only when the email key was claimed (new).
       const wanted = pgArray(q.params[0]);
       const emailKey = String(q.params[2]);
       const seen = wanted.filter((k) => seenKeys.has(k));
       const rows: unknown[][] = seen.map((k) => ["seen", k, 0]);
+      for (const k of wanted) seenKeys.add(k);
       if (!seen.includes(emailKey)) {
-        for (const k of wanted) seenKeys.add(k);
         for (const k of pgArray(q.params[3])) {
           const n = (ipCounts.get(k) ?? 0) + 1;
           ipCounts.set(k, n);
@@ -632,19 +632,21 @@ describe("POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)", () =>
     assert.equal(graph[0].body.data[0].user_data.client_ip_address, undefined);
   });
 
-  it("item 8: the repeat path claims nothing (no ev key), so a stranger cannot unlock a step with a new eventId", async () => {
+  it("item 8 (R2-D11): a repeat claims its own ev key, so its Text Karlin and games steps are accepted; a stranger's random eventId with no sign-up is still dropped", async () => {
     await post(signup());
-    const before = new Set(seenKeys);
-    const r = await post(signup({ eventId: "evt-str-0001" }));
+    const r = await post(signup({ eventId: "evt-rep-0001" }));
     assert.deepEqual(r.body, { ok: true, repeat: true });
-    assert.deepEqual([...seenKeys].sort(), [...before].sort(), "no new key");
-    assert.ok(!seenKeys.has(evKey("evt-str-0001")));
+    assert.ok(seenKeys.has(evKey("evt-rep-0001")), "the repeat's ev key is claimed");
+    assert.equal(ipCounts.get("s1ip:global"), 1, "the repeat still does not count toward the hour");
     klaviyo = [];
-    const g = await post({ email: "parent.one+kid@example.com", step: "games", kidGames: "Roblox", eventId: "evt-str-0001" });
-    assert.deepEqual(g, { status: 200, body: { ok: true } });
-    assert.equal(events().length, 0, "nothing written");
-    // A retry (same eventId as the original) still holds its key.
-    assert.ok(seenKeys.has(evKey("evt-aaaa-1111")));
+    await post({ email: "parent.one+kid@example.com", step: "text-karlin", phone: "+15125550123", ad: "d19", eventId: "evt-rep-0001" });
+    await post({ email: "parent.one+kid@example.com", step: "games", kidGames: "Roblox", eventId: "evt-rep-0001" });
+    assert.deepEqual(events().map((e) => e.metric.data.attributes.name), ["Season 01 Text Karlin", "Season 01 Waitlist Games"]);
+    klaviyo = [];
+    const stranger = await post({ email: "nobody@example.com", step: "games", kidGames: "Roblox", eventId: "evt-rand-9999" });
+    assert.deepEqual(stranger, { status: 200, body: { ok: true } });
+    assert.equal(klaviyo.length, 0, "no sign-up, nothing written");
+    assert.ok(logs.includes("Season 01 step_dropped step=games reason=no_signup"));
   });
 
   it("item 7: a step with an eventId needs that ev key; a match writes the event", async () => {

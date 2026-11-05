@@ -30,8 +30,11 @@ import { keyIsLive } from "@/lib/season1/stripe";
  *              "Season 01 Waitlist Repeat" event with the same event props and
  *              no profile props, the idempotent subscribe, no Meta Lead;
  *              responds {ok:true, repeat:true}.
- *     Only `new` claims anything: a repeat inserts no keys at all (no ev key), so
- *     a stranger who types a known email cannot unlock its follow-up steps.
+ *     `new` claims the email and ev keys; a repeat claims its own ev key again
+ *     (R2-D11), so a parent who signs up again from a new page view still has
+ *     working follow-up steps. Only `new` counts toward the IP hour. A stranger
+ *     re-signing a known email can therefore unlock its steps; text-karlin stays
+ *     capped at 3 per email per 24 h (and before round 2 any step posted freely).
  *     The same statement counts `new` sign-ups per client IP and globally
  *     (round 2, S2 items 1 to 4): key s1ip:<keyHash(ip)>, fixed one-hour window
  *     floored to the hour (the hit() convention; a 2x burst across the edge is
@@ -200,7 +203,7 @@ function clientIpKeyMaterial(req: NextRequest): string | null {
  * 24 h sign-up classification plus the per-IP and global counters (see the
  * header). One transaction: an advisory lock on the email key serializes two
  * requests for one email, then one statement reads which keys were seen inside
- * the last 24 h, claims the rest when the email is new, and counts this new
+ * the last 24 h, claims the rest (a repeat claims its ev key), and counts this new
  * sign-up against the hour's IP and global keys. Fails open to "new" (and never
  * logs the email or the IP). `claimed` is the keys this call inserted, so a
  * failed or refused sign-up can release them (releaseClaim).
@@ -223,7 +226,7 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
          claimed as (
            insert into s1_rate_limits (key, window_start, count, livemode)
            select k, now(), 1, $2::boolean from unnest($1::text[]) k
-            where k not in (select key from seen) and not exists (select 1 from seen where key = $3::text)
+            where k not in (select key from seen)
            on conflict do nothing returning key),
          counted as (
            insert into s1_rate_limits (key, window_start, count, livemode)
@@ -243,7 +246,8 @@ async function classifySignup(req: NextRequest, email: string, eventId: string):
     const rows = results[1] ?? [];
     const seen = new Set(rows.filter((r) => r.kind === "seen").map((r) => r.key));
     if (seen.has(emailKey)) {
-      return { kind: keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat", claimed: [], quiet: false, limited: false, reason: "" };
+      const kind = keys.length > 1 && seen.has(keys[1]) ? "retry" : "repeat";
+      return { kind, claimed: keys.filter((k) => !seen.has(k)), quiet: false, limited: false, reason: "" };
     }
     const count = (k: string) => Number(rows.find((r) => r.kind === "ip" && r.key === k)?.n ?? 0);
     const ipN = ipKey ? count(ipKey) : 0;
