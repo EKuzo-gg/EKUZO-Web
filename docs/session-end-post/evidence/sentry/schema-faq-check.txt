@@ -1,0 +1,17 @@
+visible FAQ items 5, schema 5
+1 Q equal=True A equal=True
+2 Q equal=True A equal=True
+3 Q equal=True A equal=True
+4 Q equal=True A equal=True
+5 Q equal=True A equal=True
+copy has Q1: True; A in copy: True
+copy has Q2: True; A in copy: True
+copy has Q3: True; A in copy: True
+copy has Q4: True; A in copy: True
+copy has Q5: True; A in copy: True
+llms dash line 7: Founded in 2021 by Karlin "Faith" Oei — a former peak Challenger League of Legends jungler and natio
+llms dash line 13: - [EKUZO Camps](https://ekuzo.gg/programs/ekuzo-camps): Intensive 1-week online summer esports camp.
+llms section header lines: [(1, '# EKUZO'), (11, '## Programs'), (18, '## Methodology and philosophy'), (25, '## Blog and articles'), (42, '## Authors'), (48, '## Support and reference'), (54, '## Contact'), (60, '## Social and platforms')]
+card: (1200, 630)
+card-clean: (1200, 630)
+hero: (1232, 520)

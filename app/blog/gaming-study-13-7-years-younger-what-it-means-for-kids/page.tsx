@@ -46,7 +46,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/gaming-study-13-7-hero.jpg";
 const SHARE_IMAGE = "/images/gaming-study-13-7-card.jpg";
 const DATE_PUBLISHED = "2026-10-12";
-const DATE_MODIFIED = "2026-10-12";
+const DATE_MODIFIED = "2026-11-05";
 
 const REANALYSIS_SCRIPT = "/research/gaming-cognition-reanalysis.py";
 const REANALYSIS_OUTPUT = "/research/gaming-cognition-reanalysis-output.txt";
@@ -139,7 +139,12 @@ const KEEP_READING = [
 
 // Visible FAQ + FAQPage JSON-LD from one source. Answers are plain strings
 // because the schema only accepts plain text.
-const FAQ_ITEMS: { question: string; answer: string[] }[] = [
+const FAQ_ITEMS: {
+  question: string;
+  answer: string[];
+  // Anchor text inside the LAST answer string to render as a link (schema keeps plain text).
+  link?: { anchor: string; href: string };
+}[] = [
   {
     question: "Which games did the study look at?",
     answer: [
@@ -171,8 +176,12 @@ const FAQ_ITEMS: { question: string; answer: string[] }[] = [
     question: "How do I get my kid off the game without the attitude?",
     answer: [
       "Set the end before the start, and make the ending part of the activity instead of an interruption to it. Teams and coaches do this for sports without anyone thinking about it.",
-      "It's the single most useful thing I've borrowed from sports, and the reason my sessions have a schedule a kid can see.",
+      "It's the single most useful thing I've borrowed from sports, and the reason my sessions have a schedule a kid can see. The full routine is in how to get your kid off the game without a fight.",
     ],
+    link: {
+      anchor: "how to get your kid off the game without a fight",
+      href: "/blog/how-to-get-your-kid-off-video-games-without-a-fight",
+    },
   },
 ];
 
@@ -632,9 +641,20 @@ export default function PostGamingStudy137() {
             {FAQ_ITEMS.map((item) => (
               <Fragment key={item.question}>
                 <h3>{item.question}</h3>
-                {item.answer.map((text, i) => (
-                  <p key={i}>{text}</p>
-                ))}
+                {item.answer.map((text, i) => {
+                  const isLast = i === item.answer.length - 1;
+                  if (isLast && item.link && text.includes(item.link.anchor)) {
+                    const [before, after] = text.split(item.link.anchor);
+                    return (
+                      <p key={i}>
+                        {before}
+                        <Link href={item.link.href}>{item.link.anchor}</Link>
+                        {after}
+                      </p>
+                    );
+                  }
+                  return <p key={i}>{text}</p>;
+                })}
               </Fragment>
             ))}
 

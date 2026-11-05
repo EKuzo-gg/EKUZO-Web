@@ -4,6 +4,24 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-05: session-end post, approved copy and inbound links
+
+- New post: meta description now Jamie's approved option A ("Count matches, not minutes. Agree on a stopping point..."); `pending` comment removed. Coach section links "Season 01" to `/season1/join` (C3 option 2). Share graphic `public/images/count-matches-not-minutes.png` (1080x1350, rendered as the Robux in-body image) sits after the match table; 1200x630 variant saved beside it; source `count-matches-not-minutes.html` and `render.js` in `docs/session-end-post/assets/`.
+- Inbound links to the new post: gaming-study FAQ (FAQ items take an optional `link` for the last answer string; visible FAQ links the anchor, FAQPage JSON-LD stays plain text), what-your-kids-gaming-is-telling-you (new sentence in the logoff section), when-gaming-helps-homeschool-kids (existing words "a natural place to stop" linked), should-i-buy-my-kid-robux (new sentence in the closing paragraph). Each: DATE_MODIFIED 2026-11-05, sitemap lastModified, `/blog` card date and Karlin author-page card date.
+- `public/llms.txt`: Fortnite entry says "part of the loop"; company line now founded 2023, based in Austin, current program Season 01 (three-program list dropped); Jamie Fitch line says "exited edtech founder"; Season 01 entry added to Programs, Teams entry marked as earlier program; all em/en dashes removed (0 left). The intro paragraph on line 5 (three programs, Houston) is unchanged and now disagrees with line 7; needs a decision.
+
+## Jamie's Claude, 2026-11-04 (evening): session-end post
+
+- New post `/blog/how-to-get-your-kid-off-video-games-without-a-fight` (Karlin byline), `app/blog/how-to-get-your-kid-off-video-games-without-a-fight/page.tsx`, built on the Robux post's skeleton. Copy is Jamie's v6 copy of record, transcribed as is. Meta description is an interim string marked `// META: pending Jamie approval`.
+- Images: `public/images/how-to-get-your-kid-off-video-games-without-a-fight-hero.jpg` (1232x520) and `-card.jpg` (1200x630).
+- `app/blog/page.tsx`: new post added at the top with `featured: true`; Robux is `featured: false`. Category on the card and the page eyebrow is "Parenting".
+- `app/blog/author/karlin-oei/page.tsx`: new post added at the top of the list.
+- `app/sitemap.ts`: new entry (priority 0.7, lastModified 2026-11-04); Robux lowered to 0.6 with the other non-featured posts; Karlin's author page lastModified bumped.
+- `public/llms.txt`: entry added above the Robux entry.
+- No inbound links or edits in other posts yet (they wait on Jamie's approval).
+- For Aaron: New `components/blog/PullQuote.tsx` (additive; Aaron, restyle freely). Div/span markup only so the `.blog-content` prose CSS doesn't cascade into it.
+- Cards: `/blog` and Karlin's author page use `-card-clean.jpg` (no baked text; the text card was clipped in the featured slot). OG and Twitter keep `-card.jpg` with "I CAN'T PAUSE IT." for link previews.
+
 ---
 ## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
 

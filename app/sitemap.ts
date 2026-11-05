@@ -129,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/when-gaming-helps-homeschool-kids`,
-      lastModified: new Date("2026-10-13"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -141,7 +141,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/what-your-kids-gaming-is-telling-you`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -168,14 +168,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/gaming-study-13-7-years-younger-what-it-means-for-kids`,
-      lastModified: new Date("2026-10-12"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
-    // The Robux post, shipped 2026-10-26. Carries the featured slot on /blog.
+    // The Robux post, shipped 2026-10-26. Held the featured slot on /blog
+    // until the session-end post.
     {
       url: `${baseUrl}/blog/should-i-buy-my-kid-robux`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-05"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    // The session-end post, shipped 2026-11-04. Carries the featured slot on /blog.
+    {
+      url: `${baseUrl}/blog/how-to-get-your-kid-off-video-games-without-a-fight`,
+      lastModified: new Date("2026-11-04"),
       changeFrequency: "weekly",
       priority: 0.7,
     },
@@ -183,7 +191,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog author pages
     {
       url: `${baseUrl}/blog/author/karlin-oei`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-05"),
       changeFrequency: "monthly",
       priority: 0.5,
     },

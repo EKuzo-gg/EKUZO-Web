@@ -1,0 +1,45 @@
+INTERNAL nav      200 utm/source=False /  []
+INTERNAL nav      200 utm/source=False /programs  [Programs +]
+INTERNAL nav      200 utm/source=False /schools  [Schools]
+INTERNAL nav      200 utm/source=False /parents  [Families]
+INTERNAL nav      200 utm/source=False /methodology  [Methodology]
+INTERNAL nav      200 utm/source=False /faq  [FAQ]
+INTERNAL other    200 utm/source=False /programs/ekuzo-teams  [SCHOOLS EKUZO TEAMS School-based semester program]
+INTERNAL other    200 utm/source=False /programs/ekuzo100  [HOME EKUZO 100 4-week individual program]
+INTERNAL other    200 utm/source=False /programs/ekuzo-camps  [SUMMER EKUZO CAMPS Seasonal week-long camps]
+INTERNAL other    200 utm/source=False /programs  [ALL PROGRAMS]
+INTERNAL article  200 utm/source=False /blog/author/karlin-oei  [Karlin Oei]
+EXTERNAL article  blank=True noopener=True OK https://x.com/CoachDanGo/status/2099566382681866270
+INTERNAL article  200 utm/source=False /blog/should-you-ban-fortnite  [here's how one family handled Fortnite]
+INTERNAL article  200 utm/source=False /blog/what-your-kids-gaming-is-telling-you  [what your kid's gaming is telling you]
+INTERNAL article  200 utm/source=False /parents  [my coaches answer parent questions]
+EXTERNAL article  blank=True noopener=True OK https://www.healthychildren.org/English/family-life/Media/Pages/Screen-Time-and-Temper-Tantrums-Helpful-Tips-for-Parents.aspx
+EXTERNAL article  blank=True noopener=True OK https://www.aap.org/en/patient-care/media-and-children/center-of-excellence-on-social-media-and-youth-mental-health/qa-portal/qa-portal-library/qa-portal-library-questions/setting-limitations-on-tech-time/
+EXTERNAL article  blank=True noopener=True OK https://www.healthychildren.org/English/family-life/Media/Pages/How-to-Make-a-Family-Media-Use-Plan.aspx
+EXTERNAL article  blank=True noopener=True OK https://support.riotgames.com/en-us/league-of-legends/penalties/away-from-keyboard-afk-faq
+EXTERNAL article  blank=True noopener=True OK https://support.riotgames.com/en-us/league-of-legends/rewards/league-of-legends-honor-guide
+EXTERNAL article  blank=True noopener=True OK https://doi.org/10.1145/3748614
+EXTERNAL article  blank=True noopener=True OK https://www.washington.edu/news/2016/03/08/family-technology-rules-what-kids-expect-of-parents/
+EXTERNAL article  blank=True noopener=True OK https://create.roblox.com/docs/cloud-services/data-stores
+EXTERNAL article  blank=True noopener=True OK https://x.com/CoachDanGo/status/2099566382681866270
+INTERNAL other    200 utm/source=False /blog/should-you-ban-fortnite  [PERSPECTIVE She banned Fortnite and got her kid back. Then came a new ]
+INTERNAL other    200 utm/source=False /blog/what-your-kids-gaming-is-telling-you  [PERSPECTIVE What your kid’s gaming is telling you The game is visible.]
+INTERNAL other    200 utm/source=False /blog/should-i-buy-my-kid-robux  [PERSPECTIVE She asked for Robux to learn about money. Her dad said yes]
+EXTERNAL footer   blank=True noopener=True OK https://www.tiktok.com/@ekuzo.gg
+EXTERNAL footer   blank=True noopener=True OK https://www.instagram.com/ekuzo.gg/
+EXTERNAL footer   blank=True noopener=True OK https://www.linkedin.com/company/ekuzogg
+EXTERNAL footer   blank=True noopener=True OK https://www.youtube.com/@ekuzogg
+EXTERNAL footer   blank=True noopener=True OK https://x.com/ekuzogg
+EXTERNAL footer   blank=True noopener=True OK https://www.facebook.com/ekuzogg
+INTERNAL footer   200 utm/source=False /programs  [Programs]
+INTERNAL footer   200 utm/source=False /programs/ekuzo100  [EKUZO 100]
+INTERNAL footer   200 utm/source=False /programs/ekuzo-teams  [EKUZO Teams]
+INTERNAL footer   200 utm/source=False /programs/ekuzo-camps  [EKUZO Camps]
+INTERNAL footer   200 utm/source=False /methodology  [Methodology]
+INTERNAL footer   200 utm/source=False /games  [Games]
+INTERNAL footer   200 utm/source=False /blog  [Blog]
+INTERNAL footer   200 utm/source=False /parents  [Parents]
+INTERNAL footer   200 utm/source=False /schools  [Schools]
+INTERNAL footer   200 utm/source=False /faq  [FAQ]
+INTERNAL footer   200 utm/source=False /terms-of-service  [Terms of Service]
+INTERNAL footer   200 utm/source=False /privacy-policy  [Privacy Policy]

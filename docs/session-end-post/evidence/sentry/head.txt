@@ -1,0 +1,19 @@
+title: How to get your kid off video games without a fight
+description(161): Count matches, not minutes. How to end a game session without a fight: what to ask before your kid starts, what to say at the end, and what to do if it blows up.
+canonical: ['https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight']
+og:title: How to get your kid off video games without a fight
+og:type: article
+og:url: https://ekuzo.gg/blog/how-to-get-your-kid-off-video-games-without-a-fight
+og:image: https://ekuzo.gg/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg
+og:image:width: 1200
+og:image:height: 630
+og:image:alt: A boy of about 12 on a gray couch at night, headphones on and a controller in his hands, watching a game on a screen out of frame.
+article:published_time: 2026-11-04
+article:modified_time: 2026-11-04
+article:author: Karlin Oei
+twitter:card: summary_large_image
+twitter:title: How to get your kid off video games without a fight
+twitter:image: https://ekuzo.gg/images/how-to-get-your-kid-off-video-games-without-a-fight-card.jpg
+robots: index, follow
+googlebot: None
+all robots meta: ['<meta name="robots" content="index, follow"/>']
