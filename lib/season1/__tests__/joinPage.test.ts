@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { renderJoin } from "../joinPage";
 
-const tpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "join.html"), "utf8");
+const tpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html"), "utf8");
 const OPEN = new Date("2026-11-01T12:00:00-06:00");
 
 describe("renderJoin", () => {
@@ -13,11 +13,11 @@ describe("renderJoin", () => {
     assert.ok(h.includes("Season 01 is open"));
     assert.ok(!h.includes("Spots are limited."), "the jersey line is the urgency line before the cutoff");
     assert.ok(h.includes("until Nov 30"));
-    assert.ok(h.includes("Season 01 runs mid January to May 6, 2027. Your $100 covers January. Then about $20 a practice."));
+    assert.ok(h.includes("That's $580 for the whole season, which runs January to May, about $20 a practice."), "B's price FAQ carries the season total and the per-practice price");
     assert.ok(h.includes("Test mode. No real charges."));
     assert.ok(h.includes("<b>Free jersey</b> <small>First 100 families"));
     assert.ok(h.includes('href="/season1/join/signup"'));
-    assert.ok(h.includes("Save their spot &middot; $100"));
+    assert.ok(h.includes("Save their spot for $100"));
     assert.ok(!h.includes("Fully refundable"), "refund terms live in the terms, not the offer card");
     assert.ok(!h.includes("{{"));
     assert.ok(!h.includes("$522"));
@@ -55,12 +55,11 @@ describe("renderJoin", () => {
     const h = renderJoin(tpl, { now: OPEN, mode: "test", src: "karlin" });
     assert.ok(h.includes('href="/season1/join/signup?src=karlin"'));
   });
-  it("ladder and ages come from config", () => {
+  it("friend credit and ages come from config", () => {
     const h = renderJoin(tpl, { now: OPEN, mode: "test", src: null });
-    for (const [pct, price] of [["100", "$580"], ["76", "$420"], ["51", "$260"], ["27", "$100"]]) {
-      assert.ok(h.includes(`--w:${pct}%`) && h.includes(`<span class="bar">${price}</span>`), price);
-    }
-    assert.ok(h.includes("Four friends and we refund your $100."));
+    assert.ok(h.includes("1 free month"), "B shows the friend credit as one month per friend");
+    assert.ok(h.includes("Four friends, free season."));
+    assert.ok(h.includes("We send your $100 back too."));
     assert.ok(h.includes("ages 9 to 17"));
   });
 });

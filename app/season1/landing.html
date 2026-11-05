@@ -650,6 +650,8 @@ body{background:#0B0A0D;color:#F3F1F5;font:400 17px/1.5 var(--ui);overflow-x:cli
 .hero .art .logo{visibility:hidden}
 @media (prefers-reduced-motion:reduce){.lp header,.lp header .mark{transition:none}}
 .hero .art{width:100%}
+/* W4: reserve the page A hero's box on phones until the big script fills it, so the sign-up below does not jump. The class comes from the small script after #hero. */
+@media (max-width:959px){.lp > #hero.pa:empty{aspect-ratio:4/5}}
 .hero .art .cta{cursor:pointer}
 .join{scroll-margin-top:64px;padding:24px 16px 28px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid #2B2830}
 .join h2{margin:0;font:800 calc(34px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
@@ -892,6 +894,20 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   <header><svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg><button class="mini-cta" type="button" data-go>Join the list</button></header>
   <section class="ihero" id="ihero" aria-labelledby="ih-q" hidden></section>
   <section class="hero" id="hero"></section>
+  <script>
+  // Page A marker (W4). #hero is filled by the big script at the end of the body; on phones the join section below it used to drop about 450 px when that happened. Marking page A heroes here lets a phone-only CSS rule reserve the box first. Must agree with the HERO logic in the big script, which keeps using AD_HERO from here (one source).
+  // Ads not listed open page A. d10 is Aaron's B vs C test: each browser gets one of the two and keeps it.
+  const AD_HERO={d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]};
+  const HERO_KEYS=["amount","games","screentime","shortlist"];
+  (function(){
+    try{
+      const q=new URLSearchParams(location.search), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+      const qh=(q.get("hero")||"").trim().toLowerCase(), ad=(q.get("ad")||"").toLowerCase().replace(/^d0/,"d");
+      const pageA = HERO_KEYS.indexOf(qh)>=0 ? false : qh==="none" ? true : !own(AD_HERO,ad);
+      if(pageA) document.getElementById("hero").classList.add("pa");
+    }catch(_){}
+  })();
+  </script>
 
   <section class="join" id="join-top" aria-labelledby="jt">
     <div class="form-wrap">
@@ -1263,7 +1279,7 @@ const HERO_DEFS={
 };
 // Aaron's handoff 2026-10-13 (docs/s1-heroes/aaron-handoff.md): which hero each ad opens with when the link has no ?hero=.
 // Ads not listed open page A. d10 is Aaron's B vs C test: each browser gets one of the two and keeps it.
-const AD_HERO={d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]};
+// AD_HERO is defined once, in the small script right after #hero.
 // HERO: hero id or "" (page A). HERO_FROM: url | ad-map | split | none. adOk keeps the d1 fallback (no or invalid ad) from mapping.
 let HERO="", HERO_FROM="none";
 { const qh=(qs.get("hero")||"").trim().toLowerCase(), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -1275,6 +1291,8 @@ let HERO="", HERO_FROM="none";
       if(v.indexOf(s)<0){ s=v[Math.random()<.5?0:1]; try{ localStorage.setItem("ekuzo_s1_hero_"+id,s); }catch(_){} }
       HERO=s; HERO_FROM="split"; } } }
 const HD = HERO ? HERO_DEFS[HERO] : undefined;
+// The small script after #hero keeps its own list of hero ids; flag drift.
+{ const k=Object.keys(HERO_DEFS); if(k.length!==HERO_KEYS.length||k.some(x=>HERO_KEYS.indexOf(x)<0)) console.warn("HERO_KEYS out of sync with HERO_DEFS"); }
 let heroAnswer="";
 if(HD){
   const ih=document.getElementById("ihero"), joinTop=document.getElementById("join-top");
@@ -1407,28 +1425,36 @@ const post = async o => {
 const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||"",utm_id:qs.get("utm_id")||"",site:qs.get("site")||""});
 let savedEmail="";
 // One Meta event ID per sign-up, reused on retry and shared with the server (CAPI) Lead so Meta counts it once.
-let eventId="", leadSent=false;
+// The id belongs to the email it was made for (trimmed, lowercased): a different email is a different sign-up and gets its own id.
+let eventId="", leadSent=false, eventIdFor="", inflight=false;
 const newEventId = () => (window.crypto&&crypto.randomUUID) ? crypto.randomUUID() : Date.now()+"-"+Math.random().toString(36).slice(2,12);
 document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",async e=>{
   e.preventDefault();
   const em=f.email.value.trim(), err=f.querySelector(".err"), btn=f.querySelector("button");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ if(!hp(f)) ga("signup_error",{reason:"invalid_email"}); err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
+  if(inflight) return;
+  inflight=true;
   err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
-  if(!eventId) eventId=newEventId();
+  const emKey=em.toLowerCase();
+  if(!eventId||eventIdFor!==emKey){ eventId=newEventId(); eventIdFor=emKey; leadSent=false; savedEmail=""; }
   let why="network";
   try{
     const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
     why="server"; if(!r.ok) throw 0;
     why="";
+    // A repeat (same email already joined in the last 24 h) shows the normal confirmation but fires no Lead. Off LIVE, post() returns {ok:true} with no json: treated as new.
+    let repeat=false; try{ if(typeof r.json==="function"){ const j=await r.json(); repeat=!!(j&&j.repeat===true); } }catch(_){}
     // LIVE only: a design preview saves nothing, so it must not count as a Lead.
-    if(LIVE && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
+    if(LIVE && !repeat && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
       // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
       try{ window.gtag&&gtag("event","generate_lead",{lead_source:"season_one_"+d.id,hero:HERO||"none"}); }catch(_){}
       // Clarity: same moment, same gating. A named event and one session tag, nothing else.
       clr("event","signup"); clr("set","signed_up","yes"); }
+    try{ localStorage.setItem("ekuzo_s1_joined","1"); }catch(_){}
     savedEmail=em; joined=true; upd(); showDone();
     if(HERO==="games"&&heroAnswer&&heroAnswer!=="I have no idea"){ post({step:"games",email:em,kidGames:heroAnswer}).catch(()=>{}); }
   }catch(_){ if(why&&!hp(f)) ga("signup_error",{reason:why}); btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
+  finally{ inflight=false; }
 }));
 function showDone(){
   const c=document.getElementById("conf");

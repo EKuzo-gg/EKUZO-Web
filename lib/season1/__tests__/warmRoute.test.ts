@@ -78,7 +78,7 @@ describe("warm route", () => {
 describe("warm call sites", () => {
   const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), "app", ...p), "utf8");
   it("join page makes no warm call", () => {
-    assert.doesNotMatch(read("season1", "join", "join.html"), /\/api\/season1\/warm/);
+    assert.doesNotMatch(read("season1", "join", "b", "join-b.html"), /\/api\/season1\/warm/);
   });
   it("sign-up and crew pages still warm on load", () => {
     assert.match(read("season1", "join", "signup", "signup.html"), /fetch\('\/api\/season1\/warm'/);

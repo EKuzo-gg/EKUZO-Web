@@ -14,7 +14,7 @@ describe("dev phone preview", () => {
       assert.equal(devViewTarget(u), "/season1/join");
   });
   it("is loaded by every Season 01 funnel page", () => {
-    for (const p of [["season1", "join", "join.html"], ["season1", "join", "signup", "signup.html"], ["season1", "join", "welcome", "welcome.html"], ["crew", "[code]", "crew.html"]])
+    for (const p of [["season1", "join", "b", "join-b.html"], ["season1", "join", "signup", "signup.html"], ["season1", "join", "welcome", "welcome.html"], ["crew", "[code]", "crew.html"]])
       assert.ok(fs.readFileSync(path.join(process.cwd(), "app", ...p), "utf8").includes('<script src="/js/s1-devview.js" defer></script>'), p.join("/"));
   });
 });

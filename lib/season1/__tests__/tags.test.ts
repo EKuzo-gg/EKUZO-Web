@@ -328,7 +328,7 @@ describe("address bar allow list (C10)", () => {
 
 describe("templates (R1, C10, C16)", () => {
   const T: [string, string[]][] = [
-    ["join", ["season1", "join", "join.html"]],
+    ["join", ["season1", "join", "b", "join-b.html"]],
     ["signup", ["season1", "join", "signup", "signup.html"]],
     ["welcome", ["season1", "join", "welcome", "welcome.html"]],
     ["crew", ["crew", "[code]", "crew.html"]],

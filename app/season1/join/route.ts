@@ -6,6 +6,11 @@ import { SRC_VALUES } from "@/lib/season1/validate";
 import { pageSecurityHeaders } from "@/lib/season1/httpGuard";
 import { tagsForRequest } from "@/lib/season1/tags";
 
+// /season1/join serves B's template (decision D10 in
+// docs/s1-join-sync-2026-11/03-decision-log.md). This file must stay identical
+// to app/season1/join/b/route.ts apart from this comment and the template
+// path; lib/season1/__tests__/joinRoutesMatch.test.ts fails if they drift.
+// Original header of the B route:
 // Season 01 front door, /season1/join. Cloned from
 // /season1/early-access/early-access.html with the deltas in
 // docs/season1-commit/02d-spec-slice4.md (C1 to C5, C7, C8, C10, C15, closed
@@ -15,7 +20,7 @@ import { tagsForRequest } from "@/lib/season1/tags";
 // app/layout.tsx: its head tags (GA4, Pixel, Clarity) come from lib/season1/tags.ts.
 export const dynamic = "force-dynamic";
 
-const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "join.html");
+const TEMPLATE_PATH = path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html");
 
 export function GET(request: Request) {
   const mode = currentMode(request.headers.get("host"));

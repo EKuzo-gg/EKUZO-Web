@@ -59,7 +59,11 @@ export default function SeasonOnePopup() {
   const closeRef = useRef<HTMLButtonElement>(null);
   // One ID per sign-up attempt, reused on retry, shared by the browser and
   // server (CAPI) Leads so Meta counts the sign-up once.
+  // It belongs to the trimmed, lowercased email it was made for: a different
+  // email is a different sign-up and gets its own ID.
   const eventIdRef = useRef("");
+  const eventIdForRef = useRef("");
+  const inflightRef = useRef(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -94,9 +98,13 @@ export default function SeasonOnePopup() {
     e.preventDefault();
     const em = email.trim();
     if (!EMAIL_RE.test(em)) { setError("Check the email address and try again."); inputRef.current?.focus(); return; }
+    if (inflightRef.current) return;
+    inflightRef.current = true;
     setError("");
     setStatus("loading");
-    if (!eventIdRef.current) {
+    const emKey = em.toLowerCase();
+    if (!eventIdRef.current || eventIdForRef.current !== emKey) {
+      eventIdForRef.current = emKey;
       eventIdRef.current =
         typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
           ? crypto.randomUUID()
@@ -125,12 +133,17 @@ export default function SeasonOnePopup() {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.error || "That didn’t go through. Try again?");
       }
+      // repeat:true means this email already joined in the last 24 h: same
+      // confirmation, no second Lead.
+      const body = await res.json().catch(() => ({}));
       try { localStorage.setItem(S1_JOINED_KEY, "1"); } catch { /* ignore */ }
-      if (!honeypotRef.current?.value) trackLead({ source: "season_one_popup", eventId });
+      if (body?.repeat !== true && !honeypotRef.current?.value) trackLead({ source: "season_one_popup", eventId });
       setStatus("done");
     } catch (err) {
       setStatus("idle");
       setError(err instanceof Error ? err.message : "That didn’t go through. Try again?");
+    } finally {
+      inflightRef.current = false;
     }
   }
 
