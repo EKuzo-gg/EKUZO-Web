@@ -50,3 +50,9 @@ Self-testing is necessary, not final. Sentry verifies independently.
 - SA-3: the Repeat event passes no `firstName`; the Waitlist event still does.
 - Tests added: "SA-1: a failed first sign-up releases its claim...", "SA-1: a thrown event...", "SA-1: a release query failure still returns the 502...", "SA-1: a failed retry releases nothing", "SA-2: subscribe and the Meta Lead are both started...", "SA-3: the Repeat event sends no first_name...".
 - `npm test`: 514 pass, 0 fail (`npm-test-repair1.txt`). Not run against real Postgres.
+
+## Repair 2 (SA-6)
+
+- `releaseClaim` now races its delete against the same 800 ms timer as the claim; on timeout it warns ("Season 01 dedupe release failed: no answer in 800 ms", no email) and the 502 is unchanged. The 502 path is 0.8 + 3.5 + 0.8 s, inside the 6.8 s budget, so the budget line is unchanged.
+- The header comment states the known gap in one line: a claim that commits after the 800 ms cap is not released, so that family's next attempt reads as a repeat (accepted risk).
+- Test: "SA-6: a release slower than 800 ms is cut off...". `npm test` output in `npm-test-repair2.txt`.

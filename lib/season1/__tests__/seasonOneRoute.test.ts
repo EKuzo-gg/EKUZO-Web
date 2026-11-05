@@ -18,6 +18,7 @@ let seenKeys = new Set<string>();
 let dbMode: "ok" | "throw" | "hang" = "ok";
 let eventStatus = 200;
 let releaseFails = false;
+let releaseHangs = false;
 let subscribeGate: Promise<void> | null = null; // SA-2: holds the subscribe response
 
 // The Neon driver sends a JS array parameter as a Postgres array literal: {"a","b"}.
@@ -37,6 +38,10 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
       return json({ message: "late" }, 500);
     }
     if (queries.some((q) => /^delete from s1_rate_limits/.test(q.query))) {
+      if (releaseHangs) {
+        await new Promise((r) => setTimeout(r, 1500));
+        return json({ message: "late" }, 500);
+      }
       if (releaseFails) return json({ message: "db down" }, 500);
       for (const k of pgArray(queries[0].params[0])) seenKeys.delete(k);
       return json({ command: "DELETE", rowCount: 1, fields: [], rows: [] });
@@ -116,6 +121,7 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     dbMode = "ok";
     eventStatus = 200;
     releaseFails = false;
+    releaseHangs = false;
     subscribeGate = null;
   });
 
@@ -413,5 +419,25 @@ describe("POST /api/season-one: 24 h classification (W3)", () => {
     await post(signup({ eventId: "evt-eeee-5555", firstName: "Pat" }));
     assert.equal(events()[0].metric.data.attributes.name, "Season 01 Waitlist Repeat");
     assert.ok(!("first_name" in events()[0].profile.data.attributes));
+  });
+
+  it("SA-6: a release slower than 800 ms is cut off, warned without the email, and the 502 stands", async () => {
+    eventStatus = 500;
+    releaseHangs = true;
+    const warns: string[] = [];
+    console.warn = (...a: unknown[]) => void warns.push(a.map(String).join(" "));
+    const t0 = Date.now();
+    let r;
+    try {
+      r = await post(signup());
+    } finally {
+      console.warn = () => {};
+    }
+    const ms = Date.now() - t0;
+    assert.equal(r.status, 502);
+    assert.ok(ms >= 780 && ms < 1400, `release capped at 800 ms, took ${ms}`);
+    const line = warns.find((x) => x.startsWith("Season 01 dedupe release failed: no answer in 800 ms"));
+    assert.ok(line);
+    assert.ok(!line.includes("example.com"));
   });
 });

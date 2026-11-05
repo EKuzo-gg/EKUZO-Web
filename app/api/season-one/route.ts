@@ -27,6 +27,9 @@ import { keyIsLive } from "@/lib/season1/stripe";
  *              no profile props, the idempotent subscribe, no Meta Lead;
  *              responds {ok:true, repeat:true}.
  *     Fails open: no DATABASE_URL, any error, or no answer in 800 ms is "new".
+ *     A failed event releases this request's claim (also capped at 800 ms, so
+ *     the 502 path is 0.8 + 3.5 + 0.8 s). Known gap: a claim that commits after
+ *     the 800 ms cap is not released, so that one family's next attempt reads as a repeat.
  *     The log line never carries the email.
  *  1. POST /api/events, "Season 01 Waitlist". Upserts the profile with where
  *     they signed up and which ad sent them, so Karlin's first email and any
@@ -168,16 +171,23 @@ async function classifySignup(email: string, eventId: string): Promise<{ kind: S
   }
 }
 
-/** A failed sign-up must not leave its claim behind, or the next attempt would read as a repeat. Never throws, never logs the email. */
+/** A failed sign-up must not leave its claim behind, or the next attempt would read as a repeat. Same 800 ms cap as the claim. Never throws, never logs the email. */
 async function releaseClaim(keys: string[]) {
   if (!keys.length) return;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
-    await getSql().query(
+    const run = getSql().query(
       "delete from s1_rate_limits where key = any($1::text[]) and window_start > now() - interval '24 hours'",
       [keys],
     );
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`no answer in ${DEDUPE_TIMEOUT_MS} ms`)), DEDUPE_TIMEOUT_MS);
+    });
+    await Promise.race([run, timeout]);
   } catch (err) {
     console.warn("Season 01 dedupe release failed:", err instanceof Error ? err.message : err);
+  } finally {
+    clearTimeout(timer);
   }
 }
 
