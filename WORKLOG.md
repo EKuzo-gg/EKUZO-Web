@@ -23,6 +23,13 @@
 - Cards: `/blog` and Karlin's author page use `-card-clean.jpg` (no baked text; the text card was clipped in the featured slot). OG and Twitter keep `-card.jpg` with "I CAN'T PAUSE IT." for link previews.
 
 ---
+## Jamie's Claude, 2026-11-05: Fortnite search refresh
+
+- `app/blog/should-you-ban-fortnite/page.tsx`: "Short answer:" paragraph first in the body; five body H2s rewritten as parent search questions; the five-question aside moved to right after the first H2 and retitled "Try this tonight"; new "Fortnite at a glance" facts box (ESRB rating, Epic parental controls, FTC case, match length) after the FTC paragraph; the one product link now points to Season 01 (/season1/join) with the sentence rewritten; new paragraph linking /blog/how-to-get-your-kid-off-video-games-without-a-fight; FAQ "Should I ban Fortnite?" renamed and "Is Fortnite OK for kids?" added (visible FAQ and FAQPage schema both render from FAQ_ITEMS); meta description rewritten (marked pending Jamie final look); intro "senior" / "This fall"; DATE_MODIFIED 2026-11-05; listening CTA swapped to Karlin's 15-minute calendar (Muhammad's page had no open times).
+- `app/blog/gaming-military-families/page.tsx`: "senior", "internship this fall", calendar swapped to Karlin's, DATE_MODIFIED 2026-11-05.
+- `app/sitemap.ts`, `app/blog/page.tsx`, `app/blog/author/muhammad-hossain/page.tsx`: lastModified and card dates for both posts set to 2026-11-05.
+- Note for Aaron: new `components/blog/FactsBox.tsx` (additive, server component, div/span/ul markup so the .blog-content prose rules do not cascade). Restyle freely. The prose CSS still shows list bullets inside it.
+
 ## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
 
 - `app/season1/landing.html`: dropped the `mod` note ("If your kid seems lonely or down most days, talk with their doctor or a counselor too...") from the d15 and d16 entries in `T`. Jamie's call: not needed, and it risks Meta reading the page as health-related.
