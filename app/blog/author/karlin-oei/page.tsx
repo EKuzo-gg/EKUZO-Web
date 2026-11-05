@@ -14,7 +14,7 @@ const POSTS: AuthorPost[] = [
     excerpt:
       "End at a natural stopping point, and agree on where that is before the game starts.",
     image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg",
-    category: "Parenting",
+    category: "Guides",
   },
   {
     slug: "should-i-buy-my-kid-robux",
