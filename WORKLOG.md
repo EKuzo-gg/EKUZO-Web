@@ -4,6 +4,11 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-05 (10:45): IndexNow
+
+- `public/b170122d53c1cec5ebbc3a713e1b4854.txt` is the IndexNow key file (public by design) and `scripts/indexnow.mjs` sends changed URLs to api.indexnow.org, which shares them with Bing and the other IndexNow engines. `npm run indexnow -- <urls>` sends the URLs given; with no args it sends every sitemap URL whose lastmod is today (US Central). `--dry` prints without sending. The script refuses URLs off ekuzo.gg and stops if the key file is not live yet, so run it after the deploy.
+- Google does not use IndexNow: keep requesting indexing in Search Console.
+
 ## Jamie's Claude, 2026-11-05 (10:00): blog release live
 
 - Released `release/blog-2026-11-05` to `main` (`147897a`, date fix `c1f01e6`): session-end post, Fortnite refresh, League FAQ additions, four inbound links, llms.txt fixes. `dev` carries the same blog commits cherry-picked (never merged: `main` and `dev` have diverged, and a merge would delete the ad lab and roadshow files on `dev`).

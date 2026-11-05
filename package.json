@@ -16,7 +16,8 @@
     "s1:code": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-code.mjs",
     "s1:sweep": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-sweep.mjs",
     "s1:find": "node --env-file=.env.local --experimental-strip-types --no-warnings --import ./scripts/test-resolve.mjs scripts/s1-find.mjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
