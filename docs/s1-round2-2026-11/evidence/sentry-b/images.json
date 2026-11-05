@@ -1,0 +1,217 @@
+{
+ "blocked": 0,
+ "pages": {
+  "d1": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [
+    "mc-blocks",
+    "esports-room"
+   ],
+   "domBroken": []
+  },
+  "d2": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d3": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d4": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d5": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d6": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d7": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d8": {
+   "n": 3,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d9": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d10": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [
+    "kid-couch",
+    "team-walk"
+   ],
+   "domBroken": []
+  },
+  "d11": {
+   "n": 3,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d12": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d13": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [
+    "kid-couch",
+    "team-walk"
+   ],
+   "domBroken": []
+  },
+  "d14": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d15": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d16": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d17": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [
+    "team-walk",
+    "hands-in"
+   ],
+   "domBroken": []
+  },
+  "d18": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d19": {
+   "n": 3,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d20": {
+   "n": 3,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d21": {
+   "n": 3,
+   "bad": [],
+   "dataKeys": [],
+   "bgs": [],
+   "domBroken": []
+  },
+  "d2&hero=amount": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "domBroken": []
+  },
+  "d2&hero=games": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "domBroken": []
+  },
+  "d4&hero=shortlist": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "domBroken": []
+  },
+  "d4&hero=screentime": {
+   "n": 2,
+   "bad": [],
+   "dataKeys": [],
+   "domBroken": []
+  }
+ },
+ "bgKeys": {
+  "boys-girls-club": "200 image/webp 72884B /images/season1/landing/boys-girls-club.webp",
+  "laughing": "200 image/webp 40694B /images/season1/landing/laughing.webp",
+  "team-walk": "200 image/webp 65196B /images/season1/landing/team-walk.webp",
+  "hands-in": "200 image/webp 108708B /images/season1/landing/hands-in.webp",
+  "coach-and-mom": "200 image/webp 94600B /images/season1/landing/coach-and-mom.webp",
+  "couch": "200 image/webp 72824B /images/season1/landing/couch.webp",
+  "jersey-back": "200 image/webp 85874B /images/season1/landing/jersey-back.webp",
+  "green-team": "200 image/webp 36194B /images/season1/landing/green-team.webp",
+  "kid-couch": "200 image/webp 192046B /images/season1/landing/kid-couch.webp",
+  "mc-blocks": "200 image/webp 146650B /images/season1/landing/mc-blocks.webp",
+  "team-walk-hd": "200 image/webp 145602B /images/season1/jersey/team-walk-1600.webp",
+  "southie-back": "200 image/webp 92738B /images/season1/jersey/southie-back.webp",
+  "southie-front": "200 image/webp 104440B /images/season1/jersey/southie-front.webp",
+  "esports-room": "NOT IN IMG"
+ },
+ "beforeHasEsportsRoom": false,
+ "beforeDataKeys": [
+  "boys-girls-club",
+  "laughing",
+  "team-walk",
+  "hands-in",
+  "coach-and-mom",
+  "couch",
+  "jersey-back",
+  "green-team",
+  "kid-couch",
+  "mc-blocks"
+ ]
+}

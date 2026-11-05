@@ -1,0 +1,65 @@
+{
+ "R": [
+  {
+   "name": "landing control {ok:true} (Lead expected)",
+   "ok": true,
+   "detail": "leads=3 calls=[\"fbq:track/Lead\",\"gtag:event/generate_lead\",\"clarity:event/signup\"] posts=1 joined=1"
+  },
+  {
+   "name": "landing quiet {ok:true,quiet:true}",
+   "ok": true,
+   "detail": "leads=0 conf=true joined=1 posts=1"
+  },
+  {
+   "name": "landing repeat {ok:true,repeat:true}",
+   "ok": true,
+   "detail": "leads=0 conf=true joined=1 posts=1"
+  },
+  {
+   "name": "landing 429",
+   "ok": true,
+   "detail": "err=\"We couldn't save this one from here. Text our founder at (832) 271-0150 and we'll add you by hand.\" hidden=false btn=[false,\"Save their spot\"] posts=1 conf=false joined=null leads=0"
+  },
+  {
+   "name": "steps: games POST carries sign-up eventId+email",
+   "ok": true,
+   "detail": "{\"signupId\":\"b105073b-4c69-4140-9a3f-dddf729209d8\",\"games\":{\"step\":\"games\",\"email\":\"qa.sentry+one@example.com\",\"eventId\":\"b105073b-4c69-4140-9a3f-dddf729209d8\",\"kidGames\":\"Fortnite\"}}"
+  },
+  {
+   "name": "steps: text-karlin POST carries sign-up eventId+email",
+   "ok": true,
+   "detail": "{\"step\":\"text-karlin\",\"email\":\"qa.sentry+one@example.com\",\"eventId\":\"b105073b-4c69-4140-9a3f-dddf729209d8\",\"phone\":\"(redacted)\",\"ad\":\"d2\",\"hero\":\"games\",\"tz\":\"America/Chicago\"}"
+  },
+  {
+   "name": "steps: total POSTs = signup + games + text-karlin",
+   "ok": true,
+   "detail": "posts=3"
+  },
+  {
+   "name": "steps: text-karlin (default hero) eventId+email",
+   "ok": true,
+   "detail": "posts=2"
+  },
+  {
+   "name": "popup control {ok:true} (Lead expected)",
+   "ok": true,
+   "detail": "leads=[\"gtag:event/generate_lead\",\"clarity:event/generate_lead\",\"fbq:track/Lead\"] posts=1 joined=1"
+  },
+  {
+   "name": "popup quiet {ok:true,quiet:true}",
+   "ok": true,
+   "detail": "leads=0 done=1 joined=1 posts=1"
+  },
+  {
+   "name": "popup step games carries sign-up eventId+email",
+   "ok": true,
+   "detail": "{\"step\":\"games\",\"email\":\"qa.sentry+one@example.com\",\"eventId\":\"dc121cb9-2d9d-4af7-9b5a-b86ac6d24bb9\",\"kidGames\":\"Fortnite\"}"
+  },
+  {
+   "name": "popup 429",
+   "ok": true,
+   "detail": "err=\"We couldn't save this one from here. Text our founder at (832) 271-0150 and we'll add you by hand.\" btn=[false,\"Save their spot\"] posts=1 joined=null leads=0"
+  }
+ ],
+ "blocked": 0
+}
