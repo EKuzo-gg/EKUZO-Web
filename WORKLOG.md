@@ -4,6 +4,11 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-06: beta lab
+
+- New `public/roadshow/beta-lab.html` (noindex, static, same dark wall as the hub): Karlin's interest email for the free 4-week Season 01 beta shown as it lands in the inbox with copy buttons, a five-step "how it runs" track, and the open decisions with owners. Links to the pilot plan doc.
+- `public/roadshow/index.html`: Beta lab tile added after the Outreach lab tile. Nothing else touched.
+
 ## Jamie's Claude, 2026-11-05 (10:45): IndexNow
 
 - `public/b170122d53c1cec5ebbc3a713e1b4854.txt` is the IndexNow key file (public by design) and `scripts/indexnow.mjs` sends changed URLs to api.indexnow.org, which shares them with Bing and the other IndexNow engines. `npm run indexnow -- <urls>` sends the URLs given; with no args it sends every sitemap URL whose lastmod is today (US Central). `--dry` prints without sending. The script refuses URLs off ekuzo.gg and stops if the key file is not live yet, so run it after the deploy.
