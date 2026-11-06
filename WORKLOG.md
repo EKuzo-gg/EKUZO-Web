@@ -8,6 +8,7 @@
 
 - New `public/roadshow/beta-lab.html` (noindex, static, same dark wall as the hub): Karlin's interest email for the free 4-week Season 01 beta shown as it lands in the inbox with copy buttons, a five-step "how it runs" track, and the open decisions with owners. Links to the pilot plan doc.
 - `public/roadshow/index.html`: Beta lab tile added after the Outreach lab tile. Nothing else touched.
+- Follow-up: practice timing is open (weekdays or weekends), so the email and page ask for the days and times that work instead of weeknights.
 
 ## Jamie's Claude, 2026-11-05 (10:45): IndexNow
 
