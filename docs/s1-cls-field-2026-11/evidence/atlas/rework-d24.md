@@ -193,3 +193,29 @@ Notes on this run: team-walk-1600 now starts when the hero is injected (1796 ms)
 2.5 s), still earlier than main (3226). The document still ends about 534 ms
 later than main, the cost of the 93 KB southie-back sharing the link with the uncompressed HTML.
 One run only; Sentry's harness run is the gate.
+
+## Follow-up (Fable, after review)
+
+Commit bd7bc03 on `lane/atlas-2`:
+
+- `HERO_IMG.d11` is now `["jersey-back","green-team"]`, from the probe above (LCP `img.jb`). The
+  bootstrap comment reads "measured on d19 and d11: img.jb, on d21: img.ph".
+- The test asserts `HERO_IMG.d11[0]` is jersey-back (comment: measured once, unthrottled, Atlas probe
+  2026-11-09; d20's pair stays template-first because no measurement separates them). The d11 preload
+  expectation is `[[IMG["jersey-back"], true]]`.
+- The bootstrap writes the single link directly: `imgs[0]` with a plain `fetchpriority="high"`, and
+  nothing when the list is empty (shortlist). The unreachable `(i?"":...)` branch is gone.
+
+Tests: unit suite 589, 588 pass, 1 skipped, 0 fail; harness 5 of 5 pass. `tsc --noEmit` clean.
+Build marker `s1-build` = bd7bc03.
+
+Probe (port 3103, 412x915, fb-android UA, unthrottled):
+
+| URL | Head preloads | s1-build | data-s1-ready | LCP element | Hero images loaded | Console errors |
+|---|---|---|---|---|---|---|
+| `/season1?ad=d11` | 1: `jersey-back.webp` fp=high | bd7bc03 | 1 | img.jb | 2 of 2 | 0 |
+| `/season1?ad=d19` | 1: `southie-back.webp` fp=high | bd7bc03 | 1 | img.jb | 2 of 2 | 0 |
+| `/season1?ad=d18` | 1: `laughing.webp` fp=high | bd7bc03 | 1 | img.ph | 1 of 1 | 0 |
+| `/season1` | 1: `mc-blocks.webp` fp=high | bd7bc03 | 1 | img.ph | 1 of 1 | 0 |
+
+Server on 3103 stopped by PID; the port check printed "free".
