@@ -4,3 +4,10 @@
 
 [vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=small-script-throws target=8c41e65
 [vitals] fb-android-412__small-script-throws d18 run1: CLS 0.0035 (+in 0.7072, total 0.0036) src=h3 + div.row LCP 676 img.ph laughing.webp FCP 540 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__small-script-throws d19 run1: CLS 0.0001 (+in 0.354, total 0.0002) src=button #text LCP 884 img.jb southie-back.webp FCP 652 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (2 runs in label)
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure big-script-fails --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=big-script-fails target=275e4cb
