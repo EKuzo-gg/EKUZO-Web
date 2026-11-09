@@ -102,10 +102,18 @@ Key pairs (the table the brief asks for):
 |---|---|---|---|---|---|
 | d18 | 0 | 0 | 0 | 0 | 0 |
 | d19 | 0 | 0 | 0 | 0 (rerun; first pass 0.1083% 24x63, same noise) | 0 |
-| d2 | 0 | 0 | 0 | 0 | 0 |
+| d2 | 0 | 0 | 0 (recaptured twice, 0 both times; committed pair from run 1) | 0 (answer tapped first, recaptured) | 0 (answer tapped first, recaptured) |
 | d4 | 0 | 0 (rerun) | 0 | | |
 | d11 | 0 | 0 | 0 | | |
-| noad | 0 | 0 | 0.0253% region 9x13 (pass) | 0 | 0 |
+| noad | 0 | 0 | 0 (recaptured twice, 0 both times; committed pair from run 1; the first matrix run read 0.0253%, region 9x13) | 0 | 0 |
+
+Steward E-1 and E-2 follow-up (after the D19 preconnect move, branch build `021f438`, main from
+`wt-main` on 3103): on d2 the email field sits in the hidden answer panel until an answer is tapped,
+so the first d2 "email" captures equalled the initial ones. The email state on interactive heroes now
+taps the first `.ih-opt`, waits 1.2 s, then focuses `#em-top` and types one character. d2 email at 412
+and 1440: 0 and 0. The d2 and noad 1440 initial pairs were recaptured twice (0 and 0 both runs) and
+the files replaced, so every committed pair now diffs as the table says. d19 412 initial after the
+preconnect move: 0.
 
 Screenshots (lossless PNG, recompressed): `docs/s1-cls-field-2026-11/screenshots/`
 `{d18,d19,d2,noad}-{412,1440}-{initial,email}-{main,branch}.png` (32 files).
