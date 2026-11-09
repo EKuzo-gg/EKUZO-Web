@@ -220,6 +220,41 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
     assert.deepEqual(h.calls.serverErr, []);
   });
 
+  it("M-1: three declines, the webhook cancels the PaymentIntent, the next tap re-commits for a fresh one", async () => {
+    const h = harness();
+    let commits = 0;
+    const confirms: string[] = [];
+    h.set(
+      {
+        confirmPayment: async (o: { clientSecret: string }) => {
+          confirms.push(o.clientSecret);
+          const n = confirms.filter((s) => s === o.clientSecret).length;
+          if (o.clientSecret === "pi_1_secret_x" && n <= 3)
+            return { error: { type: "card_error", code: "card_declined", message: "Your card was declined." } };
+          if (o.clientSecret === "pi_1_secret_x")
+            return {
+              error: {
+                type: "invalid_request_error",
+                code: "payment_intent_unexpected_state",
+                message: "You cannot confirm this PaymentIntent because it has a status of canceled.",
+                payment_intent: { status: "canceled" },
+              },
+            };
+          return {}; // the fresh PaymentIntent confirms
+        },
+      },
+      async () => reply(200, { clientSecret: `pi_${++commits}_secret_x`, amountCents: 10000 }),
+    );
+    for (let tap = 1; tap <= 4; tap++) await h.pay(body("Maya"), null);
+    assert.equal(commits, 1, "taps 1 to 4 reuse the cached secret (same form)");
+    assert.match(h.dom["e-pay"].textContent, /status of canceled/, "Stripe's message stays on the error line");
+    const flagAfterCanceled = h.store.has(FLAG);
+    await h.pay(body("Maya"), null); // tap 5, same form
+    assert.equal(commits, 2, "the next tap after unexpected_state re-commits");
+    assert.deepEqual(confirms.slice(-1), ["pi_2_secret_x"], "and confirms the fresh PaymentIntent");
+    assert.equal(flagAfterCanceled, false, "a canceled PaymentIntent cannot have charged: the confirmed flag was cleared at the unexpected_state tap");
+  });
+
   it("a real 409 in_progress: the 'on its way' note, then the confirmation after 3 s", async () => {
     const h = harness();
     h.set({ confirmPayment: async () => ({}) }, async () => reply(409, { error: "in_progress" }));

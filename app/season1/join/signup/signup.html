@@ -565,6 +565,8 @@ async function pay(body,xev){
   confirming=true;
   var r=await stripe.confirmPayment({elements:els,clientSecret:secret,confirmParams:{return_url:window.location.origin+'/season1/join/welcome'}});
   if(!keepConfirmed(r)){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}
+  /* M-1: the webhook cancels the PaymentIntent after three declines. Drop the cached secret so the next tap re-commits for a fresh one; a canceled PI cannot have charged, so its flag goes too. */
+  if(r&&r.error&&r.error.code==='payment_intent_unexpected_state'){secret=null;secretSig='';if(r.error.payment_intent&&r.error.payment_intent.status==='canceled'){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}}
   if(r&&r.error){pf();var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
  }catch(err){
   if(wasConfirmed()){toWelcome(CHECKING_MSG);return}
