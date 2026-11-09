@@ -1,0 +1,348 @@
+[
+ {
+  "v": "noad",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/mc-blocks.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d1",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/mc-blocks.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d2",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d3",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/boys-girls-club.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Unbounded:wght@400;800&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d4",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [],
+  "fonts": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d5",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d6",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Syne:wght@600;800&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d7",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/hands-in.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d8",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d9",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik+Mono+One&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d10",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "ih",
+  "preload": [
+   "/images/season1/landing/kid-couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Sora:wght@400;800&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d11",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/jersey-back.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d12",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/coach-and-mom.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d13",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/kid-couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Sora:wght@400;800&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d14",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/couch.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Syne:wght@600;800&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d15",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/team-walk.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d16",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/hands-in.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d17",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/team-walk.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d18",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/landing/laughing.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d19",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/jersey/southie-back.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d20",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/jersey/southie-front.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ },
+ {
+  "v": "d21",
+  "status": 200,
+  "marker": "91f5503",
+  "ready": "1",
+  "pre": "pa",
+  "preload": [
+   "/images/season1/jersey/team-walk-1600.webp"
+  ],
+  "fonts": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&display=swap",
+  "errors": [],
+  "pageerrors": [],
+  "failed": [],
+  "analytics": [],
+  "warns": []
+ }
+]

@@ -1,0 +1,18 @@
+HTTP/1.1 200 Connection Established
+
+HTTP/2 308 
+age: 0
+cache-control: no-cache
+cache-status: "Netlify Durable"; fwd=bypass, "Netlify Edge"; fwd=miss; fwd-status=308; stored
+content-type: text/plain; charset=utf-8
+date: Mon, 09 Nov 2026 19:59:11 GMT
+location: /programs/ekuzo-camps
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+refresh: 0;url=/programs/ekuzo-camps
+server: Netlify
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Tue, 09 Nov 2027 19:59:11 GMT; Max-Age=31536000; Secure; SameSite=lax
+strict-transport-security: max-age=31536000
+vary: Accept-Encoding
+x-content-type-options: nosniff
+x-nf-request-id: 01M70Y9BGV4N9C0MA1ACYV580H
+
