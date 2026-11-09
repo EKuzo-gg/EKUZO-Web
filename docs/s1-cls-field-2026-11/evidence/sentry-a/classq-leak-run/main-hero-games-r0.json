@@ -1,0 +1,915 @@
+{
+ "label": "main",
+ "scenario": "hero-games-r0",
+ "url": "http://localhost:3101/season1?hero=games&s1qa=1",
+ "beforeSubmit": {
+  "url": "http://localhost:3101/season1?hero=games&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 25,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:42:00.326Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?hero=games&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 223,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 223,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "games"
+    ]
+   },
+   {
+    "seq": 11,
+    "t": 236,
+    "k": "dl",
+    "d": [
+     "event",
+     "hero_view",
+     {
+      "ad": "d1",
+      "hero": "games",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 558,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 560,
+    "k": "ss",
+    "d": "_cltk"
+   },
+   {
+    "seq": 17,
+    "t": 561,
+    "k": "cookie",
+    "d": "_clck"
+   },
+   {
+    "seq": 18,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 19,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "games"
+    ]
+   },
+   {
+    "seq": 20,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 21,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 22,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 23,
+    "t": 849,
+    "k": "cookie",
+    "d": "_clsk"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:42:00.326Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?hero=games&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d1",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarityQ": null,
+  "localStorage": {},
+  "sessionStorage": {
+   "_cltk": "163bxgh"
+  },
+  "cookie": "ekuzo_origin=direct; s1_qa=1; _clck=1m8a62x%5E2%5Egb0%5E0%5E2504; _clsk=86gp06%5E1794256921148%5E1%5E1%5Es.clarity.ms%2Fcollect"
+ },
+ "after": {
+  "url": "http://localhost:3101/season1?hero=games&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 25,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:42:00.326Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?hero=games&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 27,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 27,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 223,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 223,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "games"
+    ]
+   },
+   {
+    "seq": 11,
+    "t": 236,
+    "k": "dl",
+    "d": [
+     "event",
+     "hero_view",
+     {
+      "ad": "d1",
+      "hero": "games",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 237,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 558,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 560,
+    "k": "ss",
+    "d": "_cltk"
+   },
+   {
+    "seq": 17,
+    "t": 561,
+    "k": "cookie",
+    "d": "_clck"
+   },
+   {
+    "seq": 18,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 19,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "games"
+    ]
+   },
+   {
+    "seq": 20,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 21,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 22,
+    "t": 576,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 23,
+    "t": 849,
+    "k": "cookie",
+    "d": "_clsk"
+   },
+   {
+    "seq": 24,
+    "t": 3710,
+    "k": "dl",
+    "d": [
+     "event",
+     "form_start",
+     {
+      "ad": "d1",
+      "hero": "games",
+      "where": "bottom",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 25,
+    "t": 4139,
+    "k": "fbq",
+    "d": [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d1"
+     },
+     {
+      "eventID": "1ef977c1-458f-43a2-b0ef-2c03877160ee"
+     }
+    ]
+   },
+   {
+    "seq": 26,
+    "t": 4139,
+    "k": "dl",
+    "d": [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d1",
+      "hero": "games",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 27,
+    "t": 4139,
+    "k": "clarity",
+    "d": [
+     "event",
+     "signup"
+    ]
+   },
+   {
+    "seq": 28,
+    "t": 4139,
+    "k": "clarity",
+    "d": [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   },
+   {
+    "seq": 29,
+    "t": 4139,
+    "k": "ls",
+    "d": "ekuzo_s1_joined"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:42:00.326Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?hero=games&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d1",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d1",
+     "hero": "games",
+     "where": "bottom",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d1",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "1ef977c1-458f-43a2-b0ef-2c03877160ee"
+    }
+   ]
+  ],
+  "clarityQ": null,
+  "localStorage": {
+   "ekuzo_s1_joined": "1"
+  },
+  "sessionStorage": {
+   "_cltk": "163bxgh"
+  },
+  "cookie": "ekuzo_origin=direct; s1_qa=1; _clck=1m8a62x%5E2%5Egb0%5E0%5E2504; _clsk=86gp06%5E1794256921148%5E1%5E1%5Es.clarity.ms%2Fcollect"
+ },
+ "posts": [
+  {
+   "body": {
+    "email": "qa+sentry@example.com",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "",
+     "utm_medium": "",
+     "utm_campaign": "",
+     "utm_content": "",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?hero=games&s1qa=1",
+    "hero": "games",
+    "heroAnswer": "",
+    "heroFrom": "url",
+    "eventId": "1ef977c1-458f-43a2-b0ef-2c03877160ee",
+    "eventSourceUrl": "http://localhost:3101/season1?hero=games&s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   },
+   "status": 200,
+   "cookie": "ekuzo_origin=direct; s1_qa=1; _clck=1m8a62x%5E2%5Egb0%5E0%5E2504; _clsk=86gp06%5E1794256921148%5E1%5E1%5Es.clarity.ms%2Fcollect"
+  }
+ ],
+ "pageErrors": [],
+ "hosts": {
+  "hosts": {
+   "localhost": 4,
+   "fonts.googleapis.com": 1,
+   "www.googletagmanager.com": 1,
+   "connect.facebook.net": 1,
+   "www.clarity.ms": 1,
+   "fonts.gstatic.com": 3,
+   "scripts.clarity.ms": 1,
+   "c.clarity.ms": 2,
+   "s.clarity.ms": 2,
+   "c.bing.com": 1
+  },
+  "offenders": [
+   "www.clarity.ms",
+   "scripts.clarity.ms",
+   "c.clarity.ms",
+   "s.clarity.ms",
+   "c.bing.com"
+  ],
+  "stubbedHosts": [
+   "www.googletagmanager.com",
+   "connect.facebook.net"
+  ]
+ },
+ "stubbedCount": 2,
+ "cookies": [
+  {
+   "name": "ekuzo_origin",
+   "value": "direct",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825792920.308906,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "s1_qa",
+   "value": "1",
+   "domain": "localhost",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "CLID",
+   "value": "a635dd2d2f2e4e4c836a17bf482e4ae9.20261109.20271109",
+   "domain": "www.clarity.ms",
+   "path": "/",
+   "expires": 1825792920.483186,
+   "httpOnly": true,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "_clck",
+   "value": "1m8a62x%5E2%5Egb0%5E0%5E2504",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825792920,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "MUID",
+   "value": "06E7E7DF51726F6016EEFFD350FE6E70",
+   "domain": ".bing.com",
+   "path": "/",
+   "expires": 1827952922.11477,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MR",
+   "value": "0",
+   "domain": ".c.bing.com",
+   "path": "/",
+   "expires": 1794861722.114887,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "SRM_B",
+   "value": "06E7E7DF51726F6016EEFFD350FE6E70",
+   "domain": ".c.bing.com",
+   "path": "/",
+   "expires": 1827952922.11493,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "_clsk",
+   "value": "86gp06%5E1794256921148%5E1%5E1%5Es.clarity.ms%2Fcollect",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1794343321,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "SM",
+   "value": "C",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MUID",
+   "value": "06E7E7DF51726F6016EEFFD350FE6E70",
+   "domain": ".clarity.ms",
+   "path": "/",
+   "expires": 1827952921.251265,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MR",
+   "value": "0",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": 1794861721.251294,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "ANONCHK",
+   "value": "0",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": 1794257521.251306,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  }
+ ],
+ "formUsed": "#em-end"
+}

@@ -1,0 +1,224 @@
+[
+ {
+  "n": "d18-utm",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "j9": "equal",
+  "j9ad": {
+   "main": "d1",
+   "branch": "d1",
+   "first": "d18"
+  },
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    6,
+    4,
+    5
+   ],
+   "branch": [
+    6,
+    4,
+    5
+   ]
+  }
+ },
+ {
+  "n": "d19-utm",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    6,
+    4,
+    5
+   ],
+   "branch": [
+    6,
+    4,
+    5
+   ]
+  }
+ },
+ {
+  "n": "d2",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    7,
+    4,
+    4
+   ],
+   "branch": [
+    7,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "noad",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    6,
+    4,
+    4
+   ],
+   "branch": [
+    6,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "adzz",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    6,
+    4,
+    4
+   ],
+   "branch": [
+    6,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "hero-games-r0",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    7,
+    4,
+    4
+   ],
+   "branch": [
+    7,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "hero-games-r99",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    7,
+    4,
+    4
+   ],
+   "branch": [
+    7,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "d10-r0",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    7,
+    4,
+    4
+   ],
+   "branch": [
+    7,
+    4,
+    4
+   ]
+  }
+ },
+ {
+  "n": "d10-r99",
+  "dataLayer": "equal",
+  "fbq": "equal",
+  "clarity": "equal",
+  "post": "equal",
+  "order": "equal",
+  "ls": "equal",
+  "ss": "equal",
+  "mainOffenders": [],
+  "branchOffenders": [],
+  "counts": {
+   "main": [
+    7,
+    4,
+    4
+   ],
+   "branch": [
+    7,
+    4,
+    4
+   ]
+  }
+ }
+]

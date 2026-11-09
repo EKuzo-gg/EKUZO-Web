@@ -3,7 +3,8 @@ import { createRequire } from "module";
 const { chromium } = createRequire("/home/claude/")("playwright");
 export const FB_UA = "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]";
 export const ALLOWED_HOSTS = new Set(["localhost", "fonts.googleapis.com", "fonts.gstatic.com"]);
-export const STUBS = ["**/gtag/js*", "**/fbevents.js", "**/clarity.ms/**", "**/google-analytics.com/**", "**/googletagmanager.com/**", "**/connect.facebook.net/**", "**/www.facebook.com/**", "**/doubleclick.net/**"];
+// Regex routes on the host (the first version used globs like "**/clarity.ms/**", which do not match www.clarity.ms: see defects.md SA-2).
+export const STUBS = [/^https?:\/\/([^/]*\.)?(clarity\.ms|bing\.com|google-analytics\.com|analytics\.google\.com|googletagmanager\.com|google\.com\/g\/collect|doubleclick\.net|facebook\.net|facebook\.com|googleadservices\.com|g\.doubleclick\.net)(:\d+)?\//i, /\/gtag\/js/, /\/fbevents\.js/];
 
 export const launch = () => chromium.launch({ proxy: { server: process.env.HTTPS_PROXY, bypass: "localhost,127.0.0.1" } });
 
@@ -32,8 +33,10 @@ export async function newCtx(browser, { width = 412, height = 915, dpr = 2.625, 
 export function hostsLeft(rec) {
   const hosts = {};
   for (const u of rec.requests) { try { const h = new URL(u).hostname; hosts[h] = (hosts[h] || 0) + 1; } catch {} }
+  const stubbedUrls = new Set(rec.stubbed);
   const stubbedHosts = new Set(rec.stubbed.map((u) => { try { return new URL(u).hostname; } catch { return ""; } }));
-  const offenders = Object.keys(hosts).filter((h) => !ALLOWED_HOSTS.has(h) && !stubbedHosts.has(h));
+  // an offender is a request URL, not fulfilled by a stub, to a host outside the allowed set
+  const offenders = [...new Set(rec.requests.filter((u) => { try { return !ALLOWED_HOSTS.has(new URL(u).hostname) && !stubbedUrls.has(u.slice(0, 200)); } catch { return false; } }).map((u) => u.slice(0, 120)))];
   return { hosts, offenders, stubbedHosts: [...stubbedHosts] };
 }
 // Runs before any page script: a numbered timeline of tag calls, cookie and storage writes.
@@ -67,11 +70,18 @@ export async function snapshot(page) {
     };
   });
 }
-export async function typeAndSubmit(page, sel = "#em-top", btn = "#join-top button[type=submit]", email = "qa+sentry@example.com") {
-  await page.locator(sel).scrollIntoViewIfNeeded();
-  await page.locator(sel).tap();
+export async function typeAndSubmit(page, _s, _b, email = "qa+sentry@example.com") {
+  // first visible of the top and end forms (the top form is hidden on some variants); records which one
+  let which = null;
+  for (const [sel, form] of [["#em-top", "#join-top"], ["#em-end", "#join-end"]]) {
+    if (await page.locator(sel).isVisible()) { which = [sel, form + " button[type=submit]"]; break; }
+  }
+  if (!which) { await page.locator("#em-end").scrollIntoViewIfNeeded(); which = ["#em-end", "#join-end button[type=submit]"]; }
+  page.__form = which[0];
+  await page.locator(which[0]).scrollIntoViewIfNeeded();
+  await page.locator(which[0]).tap();
   await page.keyboard.type(email, { delay: 15 });
-  await page.locator(btn).tap();
+  await page.locator(which[1]).tap();
 }
 export async function waitPosts(rec, n, ms = 8000) {
   const t0 = Date.now();
@@ -80,6 +90,7 @@ export async function waitPosts(rec, n, ms = 8000) {
 export const sleep = (ms) => new Promise((s) => setTimeout(s, ms));
 // Normalisation for main vs branch comparison.
 export function norm(x, key = "") {
+  if (typeof x === "string") x = x.replace(/localhost:\d+/g, "localhost:PORT").replace(/\\?"at\\?":\d{13}/g, '"at":<ts>');
   if (Array.isArray(x)) return x.map((v) => norm(v));
   if (x && typeof x === "object") { const o = {}; for (const k of Object.keys(x)) o[k] = /^(eventID|event_id|eventId)$/.test(k) ? "<id>" : k === "gtm.start" ? "<ts>" : norm(x[k], k); return o; }
   if (typeof x === "number" && x > 1.6e12) return "<ts>";

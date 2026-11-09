@@ -1,0 +1,50 @@
++ git add docs/s1-cls-field-2026-11/evidence/sentry-a docs/s1-cls-field-2026-11/evidence/vitals -- ':!**/.server-*'
++ git commit -q -m 'evidence(sentry-a): block 2 on 2b9bc16 (fb-360, ig-412, fontdelay, cssdelay)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Gqf3jjjc9YH6iuozY1RUfA'
+++ cat .server-3100.pid
++ P=13504
++ grep -q next /proc/13504/cmdline
++ kill 13504
++ sleep 2
+++ fuser 3100/tcp
++ for q in $(fuser 3100/tcp 2> /dev/null)
++ tr '\0' ' '
++ grep -q next-server
+++ readlink /proc/13510/cwd
++ '[' /home/claude/wt-sentry = /home/claude/wt-sentry ']'
++ kill 13510
++ sleep 2
++ git fetch -q origin
++ git rebase 75473a2
+Rebasing (1/2)Rebasing (2/2)[KSuccessfully rebased and updated refs/heads/lane/sentry-a.
++ git diff --stat 2b9bc16 75473a2 -- package.json package-lock.json
+ package.json | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ git diff --stat 2b9bc16 75473a2 -- app lib components public
++ tail -15
+ app/season1/landing.html                  |  8 +++----
+ lib/season1/__tests__/landingHead.test.ts | 37 ++++++++++++++++++++++++-------
+ 2 files changed, 33 insertions(+), 12 deletions(-)
++ COMMIT_REF=75473a2
++ STRIPE_SECRET_KEY=sk_test_placeholder_build_only
++ npm run build
++ echo 28965
++ STRIPE_SECRET_KEY=sk_test_placeholder_build_only
++ ./node_modules/.bin/next start -p 3100
+++ seq 1 30
++ for i in $(seq 1 30)
+++ curl -s -o /dev/null -w '%{http_code}' localhost:3100/season1
++ '[' 000 = 200 ']'
++ sleep 2
++ for i in $(seq 1 30)
+++ curl -s -o /dev/null -w '%{http_code}' localhost:3100/season1
++ '[' 200 = 200 ']'
++ break
++ curl -s localhost:3100/season1
++ grep -o 's1-build" content="[^"]*'
+s1-build" content="75473a2
++ M=75473a2
++ npm run vitals -- --target local:3100 --ads d18,d19,d2,noad --profile fb-android-412 --runs 5 --label branch2-tier1 --expectMarker 75473a2 --requireReady
++ echo QUEUE2DONE

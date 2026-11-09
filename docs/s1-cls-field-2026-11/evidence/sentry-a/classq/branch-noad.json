@@ -1,0 +1,523 @@
+{
+ "label": "branch",
+ "scenario": "noad",
+ "url": "http://localhost:3100/season1?s1qa=1",
+ "beforeSubmit": {
+  "url": "http://localhost:3100/season1?s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 142,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:44:16.407Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 154,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 154,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:44:16.407Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarityQ": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ]
+  ],
+  "localStorage": {},
+  "sessionStorage": {},
+  "cookie": "ekuzo_origin=direct; s1_qa=1"
+ },
+ "after": {
+  "url": "http://localhost:3100/season1?s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 142,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:44:16.407Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 143,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 143,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 154,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d1"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 154,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   },
+   {
+    "seq": 11,
+    "t": 3553,
+    "k": "dl",
+    "d": [
+     "event",
+     "form_start",
+     {
+      "ad": "d1",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 3988,
+    "k": "fbq",
+    "d": [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d1"
+     },
+     {
+      "eventID": "d5e91c7a-5504-4e5c-b5ef-da2ef0f1faf3"
+     }
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 3988,
+    "k": "dl",
+    "d": [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d1",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 3988,
+    "k": "clarity",
+    "d": [
+     "event",
+     "signup"
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 3988,
+    "k": "clarity",
+    "d": [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 3988,
+    "k": "ls",
+    "d": "ekuzo_s1_joined"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:44:16.407Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d1",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d1",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "d5e91c7a-5504-4e5c-b5ef-da2ef0f1faf3"
+    }
+   ]
+  ],
+  "clarityQ": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "localStorage": {
+   "ekuzo_s1_joined": "1"
+  },
+  "sessionStorage": {},
+  "cookie": "ekuzo_origin=direct; s1_qa=1"
+ },
+ "posts": [
+  {
+   "body": {
+    "email": "qa+sentry@example.com",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "",
+     "utm_medium": "",
+     "utm_campaign": "",
+     "utm_content": "",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?s1qa=1",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "d5e91c7a-5504-4e5c-b5ef-da2ef0f1faf3",
+    "eventSourceUrl": "http://localhost:3100/season1?s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   },
+   "status": 200,
+   "cookie": "ekuzo_origin=direct; s1_qa=1"
+  }
+ ],
+ "pageErrors": [],
+ "hosts": {
+  "hosts": {
+   "localhost": 4,
+   "fonts.googleapis.com": 2,
+   "www.googletagmanager.com": 1,
+   "connect.facebook.net": 1,
+   "www.clarity.ms": 1,
+   "fonts.gstatic.com": 3
+  },
+  "offenders": [],
+  "stubbedHosts": [
+   "www.googletagmanager.com",
+   "connect.facebook.net",
+   "www.clarity.ms"
+  ]
+ },
+ "stubbedCount": 3,
+ "cookies": [
+  {
+   "name": "ekuzo_origin",
+   "value": "direct",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825793056.273737,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "s1_qa",
+   "value": "1",
+   "domain": "localhost",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  }
+ ],
+ "formUsed": "#em-top"
+}

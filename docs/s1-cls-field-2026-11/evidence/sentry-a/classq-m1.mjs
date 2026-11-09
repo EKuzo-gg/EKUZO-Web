@@ -42,7 +42,7 @@ for (const sc of SC) {
     await sleep(800);
     out.j9 = { secondVisitUrl: p2.url(), posts: rec.posts.slice(1), after: await snapshot(p2), storageNote: "second page of the same context; localStorage and cookies kept" };
   }
-  out.hosts = hostsLeft(rec);
+  out.formUsed = page.__form; out.hosts = hostsLeft(rec);
   fs.writeFileSync(`classq/${label}-${sc.name}.json`, JSON.stringify(out, null, 1));
   summary.push({ sc: sc.name, posts: rec.posts.length, dl: after.dataLayer.length, fbq: after.fbqQueue?.length, clr: after.clarityQ?.length, offenders: out.hosts.offenders, errs: rec.pageErrors.length });
   console.log(label, JSON.stringify(summary.at(-1)));

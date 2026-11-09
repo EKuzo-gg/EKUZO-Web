@@ -1,0 +1,1399 @@
+{
+ "label": "main",
+ "scenario": "d18-utm",
+ "url": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+ "beforeSubmit": {
+  "url": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 31,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:41:27.765Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 378,
+    "k": "ss",
+    "d": "ekuzo_attribution"
+   },
+   {
+    "seq": 10,
+    "t": 378,
+    "k": "ls",
+    "d": "ekuzo_s1_attribution"
+   },
+   {
+    "seq": 11,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d18"
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "utm_content",
+     "d18"
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 477,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 478,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 478,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 17,
+    "t": 678,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 18,
+    "t": 680,
+    "k": "ss",
+    "d": "_cltk"
+   },
+   {
+    "seq": 19,
+    "t": 680,
+    "k": "cookie",
+    "d": "_clck"
+   },
+   {
+    "seq": 20,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d18"
+    ]
+   },
+   {
+    "seq": 21,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   },
+   {
+    "seq": 22,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "utm_content",
+     "d18"
+    ]
+   },
+   {
+    "seq": 23,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 24,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 25,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 26,
+    "t": 989,
+    "k": "cookie",
+    "d": "_clsk"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:41:27.765Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarityQ": null,
+  "localStorage": {
+   "ekuzo_s1_attribution": "{\"at\":1794256888110,\"utm_source\":\"fb\",\"utm_medium\":\"paid\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d18\"}"
+  },
+  "sessionStorage": {
+   "ekuzo_attribution": "{\"utm_source\":\"fb\",\"utm_medium\":\"paid\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d18\"}",
+   "_cltk": "17324gx"
+  },
+  "cookie": "ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256888721%5E1%5E1%5Es.clarity.ms%2Fcollect"
+ },
+ "after": {
+  "url": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 31,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:41:27.765Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 33,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 47,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 378,
+    "k": "ss",
+    "d": "ekuzo_attribution"
+   },
+   {
+    "seq": 10,
+    "t": 378,
+    "k": "ls",
+    "d": "ekuzo_s1_attribution"
+   },
+   {
+    "seq": 11,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d18"
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 379,
+    "k": "clarity",
+    "d": [
+     "set",
+     "utm_content",
+     "d18"
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 477,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 478,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 478,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 17,
+    "t": 678,
+    "k": "clarity",
+    "d": [
+     "start",
+     {
+      "projectId": "wml8wll5ua",
+      "upload": "https://s.clarity.ms/collect",
+      "expire": 365,
+      "cookies": [
+       "_uetmsclkid",
+       "_uetvid",
+       "_clck"
+      ],
+      "track": true,
+      "content": true,
+      "dob": 2504
+     }
+    ]
+   },
+   {
+    "seq": 18,
+    "t": 680,
+    "k": "ss",
+    "d": "_cltk"
+   },
+   {
+    "seq": 19,
+    "t": 680,
+    "k": "cookie",
+    "d": "_clck"
+   },
+   {
+    "seq": 20,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d18"
+    ]
+   },
+   {
+    "seq": 21,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "none"
+    ]
+   },
+   {
+    "seq": 22,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "utm_content",
+     "d18"
+    ]
+   },
+   {
+    "seq": 23,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "metadata",
+     null,
+     false,
+     true
+    ]
+   },
+   {
+    "seq": 24,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 25,
+    "t": 690,
+    "k": "clarity",
+    "d": [
+     "set",
+     "C_IS",
+     "0"
+    ]
+   },
+   {
+    "seq": 26,
+    "t": 989,
+    "k": "cookie",
+    "d": "_clsk"
+   },
+   {
+    "seq": 27,
+    "t": 3959,
+    "k": "dl",
+    "d": [
+     "event",
+     "form_start",
+     {
+      "ad": "d18",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 28,
+    "t": 4425,
+    "k": "fbq",
+    "d": [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d18"
+     },
+     {
+      "eventID": "7713a1d1-3dcb-4534-bd17-9d9818bdf793"
+     }
+    ]
+   },
+   {
+    "seq": 29,
+    "t": 4426,
+    "k": "dl",
+    "d": [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d18",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 30,
+    "t": 4426,
+    "k": "clarity",
+    "d": [
+     "event",
+     "signup"
+    ]
+   },
+   {
+    "seq": 31,
+    "t": 4426,
+    "k": "clarity",
+    "d": [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   },
+   {
+    "seq": 32,
+    "t": 4426,
+    "k": "ls",
+    "d": "ekuzo_s1_joined"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:41:27.765Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d18",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d18",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d18"
+    },
+    {
+     "eventID": "7713a1d1-3dcb-4534-bd17-9d9818bdf793"
+    }
+   ]
+  ],
+  "clarityQ": null,
+  "localStorage": {
+   "ekuzo_s1_attribution": "{\"at\":1794256888110,\"utm_source\":\"fb\",\"utm_medium\":\"paid\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d18\"}",
+   "ekuzo_s1_joined": "1"
+  },
+  "sessionStorage": {
+   "ekuzo_attribution": "{\"utm_source\":\"fb\",\"utm_medium\":\"paid\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d18\"}",
+   "_cltk": "17324gx"
+  },
+  "cookie": "ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256888721%5E1%5E1%5Es.clarity.ms%2Fcollect"
+ },
+ "posts": [
+  {
+   "body": {
+    "email": "qa+sentry@example.com",
+    "source": "ad-landing",
+    "ad": "d18",
+    "adName": "Not a sports kid? Perfect.",
+    "where": "top",
+    "attribution": {
+     "utm_source": "fb",
+     "utm_medium": "paid",
+     "utm_campaign": "s1",
+     "utm_content": "d18",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "7713a1d1-3dcb-4534-bd17-9d9818bdf793",
+    "eventSourceUrl": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   },
+   "status": 200,
+   "cookie": "ekuzo_lc=%7B%22path%22%3A%22%2Fseason1%22%2C%22ts%22%3A1794256887742%2C%22utm_source%22%3A%22fb%22%2C%22utm_medium%22%3A%22paid%22%2C%22utm_campaign%22%3A%22s1%22%2C%22utm_content%22%3A%22d18%22%2C%22fbclid%22%3A%22TESTFBCLID%22%7D; ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256888721%5E1%5E1%5Es.clarity.ms%2Fcollect"
+  },
+  {
+   "body": {
+    "email": "qa+sentry@example.com",
+    "source": "ad-landing",
+    "ad": "d1",
+    "adName": "We've all said it",
+    "where": "top",
+    "attribution": {
+     "utm_source": "",
+     "utm_medium": "",
+     "utm_campaign": "",
+     "utm_content": "",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?s1qa=1",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "ecb1145b-fde1-468d-8a8b-a51cc42c2d24",
+    "eventSourceUrl": "http://localhost:3101/season1?s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   },
+   "status": 200,
+   "cookie": "ekuzo_lc=%7B%22path%22%3A%22%2Fseason1%22%2C%22ts%22%3A1794256887742%2C%22utm_source%22%3A%22fb%22%2C%22utm_medium%22%3A%22paid%22%2C%22utm_campaign%22%3A%22s1%22%2C%22utm_content%22%3A%22d18%22%2C%22fbclid%22%3A%22TESTFBCLID%22%7D; ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256894117%5E2%5E1%5Es.clarity.ms%2Fcollect"
+  }
+ ],
+ "pageErrors": [],
+ "hosts": {
+  "hosts": {
+   "localhost": 8,
+   "fonts.googleapis.com": 2,
+   "www.googletagmanager.com": 2,
+   "connect.facebook.net": 2,
+   "www.clarity.ms": 2,
+   "fonts.gstatic.com": 5,
+   "scripts.clarity.ms": 2,
+   "s.clarity.ms": 5,
+   "c.clarity.ms": 2,
+   "c.bing.com": 1
+  },
+  "offenders": [
+   "www.clarity.ms",
+   "scripts.clarity.ms",
+   "s.clarity.ms",
+   "c.clarity.ms",
+   "c.bing.com"
+  ],
+  "stubbedHosts": [
+   "www.googletagmanager.com",
+   "connect.facebook.net"
+  ]
+ },
+ "stubbedCount": 2,
+ "cookies": [
+  {
+   "name": "ekuzo_lc",
+   "value": "%7B%22path%22%3A%22%2Fseason1%22%2C%22ts%22%3A1794256887742%2C%22utm_source%22%3A%22fb%22%2C%22utm_medium%22%3A%22paid%22%2C%22utm_campaign%22%3A%22s1%22%2C%22utm_content%22%3A%22d18%22%2C%22fbclid%22%3A%22TESTFBCLID%22%7D",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1796848887.746552,
+   "httpOnly": true,
+   "secure": true,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "ekuzo_origin",
+   "value": "paid_meta",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825792887.746683,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "s1_qa",
+   "value": "1",
+   "domain": "localhost",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "CLID",
+   "value": "4e2fc3f6685845db9984ef73ddcf31d5.20261109.20271109",
+   "domain": "www.clarity.ms",
+   "path": "/",
+   "expires": 1825792888.206934,
+   "httpOnly": true,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "_clck",
+   "value": "7bdwqk%5E2%5Egb0%5E0%5E2504",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825792888,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "_clsk",
+   "value": "1x9rv0v%5E1794256888721%5E1%5E1%5Es.clarity.ms%2Fcollect",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1794343288,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "MUID",
+   "value": "0373C64C2BB360C32B39DE402A1E610D",
+   "domain": ".bing.com",
+   "path": "/",
+   "expires": 1827952888.805977,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MR",
+   "value": "0",
+   "domain": ".c.bing.com",
+   "path": "/",
+   "expires": 1794861688.806086,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "SRM_B",
+   "value": "0373C64C2BB360C32B39DE402A1E610D",
+   "domain": ".c.bing.com",
+   "path": "/",
+   "expires": 1827952888.806106,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "SM",
+   "value": "C",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MUID",
+   "value": "0373C64C2BB360C32B39DE402A1E610D",
+   "domain": ".clarity.ms",
+   "path": "/",
+   "expires": 1827952888.926798,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "MR",
+   "value": "0",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": 1794861688.926831,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  },
+  {
+   "name": "ANONCHK",
+   "value": "0",
+   "domain": ".c.clarity.ms",
+   "path": "/",
+   "expires": 1794257488.92685,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "None"
+  }
+ ],
+ "j9": {
+  "secondVisitUrl": "http://localhost:3101/season1?s1qa=1",
+  "posts": [
+   {
+    "body": {
+     "email": "qa+sentry@example.com",
+     "source": "ad-landing",
+     "ad": "d1",
+     "adName": "We've all said it",
+     "where": "top",
+     "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+     },
+     "page": "/season1?s1qa=1",
+     "hero": "none",
+     "heroAnswer": "",
+     "heroFrom": "none",
+     "eventId": "ecb1145b-fde1-468d-8a8b-a51cc42c2d24",
+     "eventSourceUrl": "http://localhost:3101/season1?s1qa=1",
+     "tz": "America/Chicago",
+     "ekz_hp": ""
+    },
+    "status": 200,
+    "cookie": "ekuzo_lc=%7B%22path%22%3A%22%2Fseason1%22%2C%22ts%22%3A1794256887742%2C%22utm_source%22%3A%22fb%22%2C%22utm_medium%22%3A%22paid%22%2C%22utm_campaign%22%3A%22s1%22%2C%22utm_content%22%3A%22d18%22%2C%22fbclid%22%3A%22TESTFBCLID%22%7D; ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256894117%5E2%5E1%5Es.clarity.ms%2Fcollect"
+   }
+  ],
+  "after": {
+   "url": "http://localhost:3101/season1?s1qa=1",
+   "timeline": [
+    {
+     "seq": 1,
+     "t": 29,
+     "k": "cookie",
+     "d": "s1_qa"
+    },
+    {
+     "seq": 2,
+     "t": 31,
+     "k": "dl",
+     "d": [
+      "js",
+      "2026-11-09T20:41:33.532Z"
+     ]
+    },
+    {
+     "seq": 3,
+     "t": 31,
+     "k": "dl",
+     "d": [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "t": 32,
+     "k": "dl",
+     "d": [
+      "set",
+      {
+       "page_location": "http://localhost:3101/season1?s1qa=1"
+      }
+     ]
+    },
+    {
+     "seq": 5,
+     "t": 32,
+     "k": "dl",
+     "d": [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ]
+    },
+    {
+     "seq": 6,
+     "t": 33,
+     "k": "fbq",
+     "d": [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ]
+    },
+    {
+     "seq": 7,
+     "t": 33,
+     "k": "fbq",
+     "d": [
+      "init",
+      "1284038230557204"
+     ]
+    },
+    {
+     "seq": 8,
+     "t": 33,
+     "k": "fbq",
+     "d": [
+      "track",
+      "PageView"
+     ]
+    },
+    {
+     "seq": 9,
+     "t": 190,
+     "k": "clarity",
+     "d": [
+      "metadata",
+      null,
+      false,
+      true
+     ]
+    },
+    {
+     "seq": 10,
+     "t": 191,
+     "k": "clarity",
+     "d": [
+      "start",
+      {
+       "projectId": "wml8wll5ua",
+       "upload": "https://p.clarity.ms/collect",
+       "expire": 365,
+       "cookies": [
+        "_uetmsclkid",
+        "_uetvid",
+        "_clck"
+       ],
+       "track": true,
+       "content": true,
+       "report": "https://report.clarity.ms/eus2-tag",
+       "dob": 2504
+      }
+     ]
+    },
+    {
+     "seq": 11,
+     "t": 191,
+     "k": "clarity",
+     "d": [
+      "set",
+      "C_IS",
+      "0"
+     ]
+    },
+    {
+     "seq": 12,
+     "t": 250,
+     "k": "clarity",
+     "d": [
+      "set",
+      "ad",
+      "d1"
+     ]
+    },
+    {
+     "seq": 13,
+     "t": 250,
+     "k": "clarity",
+     "d": [
+      "set",
+      "hero",
+      "none"
+     ]
+    },
+    {
+     "seq": 14,
+     "t": 333,
+     "k": "clarity",
+     "d": [
+      "start",
+      {
+       "projectId": "wml8wll5ua",
+       "upload": "https://p.clarity.ms/collect",
+       "expire": 365,
+       "cookies": [
+        "_uetmsclkid",
+        "_uetvid",
+        "_clck"
+       ],
+       "track": true,
+       "content": true,
+       "report": "https://report.clarity.ms/eus2-tag",
+       "dob": 2504
+      }
+     ]
+    },
+    {
+     "seq": 15,
+     "t": 335,
+     "k": "ss",
+     "d": "_cltk"
+    },
+    {
+     "seq": 16,
+     "t": 352,
+     "k": "clarity",
+     "d": [
+      "metadata",
+      null,
+      false,
+      true
+     ]
+    },
+    {
+     "seq": 17,
+     "t": 353,
+     "k": "clarity",
+     "d": [
+      "set",
+      "C_IS",
+      "0"
+     ]
+    },
+    {
+     "seq": 18,
+     "t": 353,
+     "k": "clarity",
+     "d": [
+      "set",
+      "C_IS",
+      "0"
+     ]
+    },
+    {
+     "seq": 19,
+     "t": 353,
+     "k": "clarity",
+     "d": [
+      "set",
+      "ad",
+      "d1"
+     ]
+    },
+    {
+     "seq": 20,
+     "t": 353,
+     "k": "clarity",
+     "d": [
+      "set",
+      "hero",
+      "none"
+     ]
+    },
+    {
+     "seq": 21,
+     "t": 616,
+     "k": "cookie",
+     "d": "_clsk"
+    },
+    {
+     "seq": 22,
+     "t": 3790,
+     "k": "dl",
+     "d": [
+      "event",
+      "form_start",
+      {
+       "ad": "d1",
+       "hero": "none",
+       "where": "top",
+       "debug_mode": true
+      }
+     ]
+    },
+    {
+     "seq": 23,
+     "t": 4237,
+     "k": "fbq",
+     "d": [
+      "track",
+      "Lead",
+      {
+       "content_name": "season_one_d1"
+      },
+      {
+       "eventID": "ecb1145b-fde1-468d-8a8b-a51cc42c2d24"
+      }
+     ]
+    },
+    {
+     "seq": 24,
+     "t": 4237,
+     "k": "dl",
+     "d": [
+      "event",
+      "generate_lead",
+      {
+       "lead_source": "season_one_d1",
+       "hero": "none",
+       "debug_mode": true
+      }
+     ]
+    },
+    {
+     "seq": 25,
+     "t": 4237,
+     "k": "clarity",
+     "d": [
+      "event",
+      "signup"
+     ]
+    },
+    {
+     "seq": 26,
+     "t": 4237,
+     "k": "clarity",
+     "d": [
+      "set",
+      "signed_up",
+      "yes"
+     ]
+    },
+    {
+     "seq": 27,
+     "t": 4237,
+     "k": "ls",
+     "d": "ekuzo_s1_joined"
+    }
+   ],
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-09T20:41:33.532Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "form_start",
+     {
+      "ad": "d1",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d1",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbqQueue": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d1"
+     },
+     {
+      "eventID": "ecb1145b-fde1-468d-8a8b-a51cc42c2d24"
+     }
+    ]
+   ],
+   "clarityQ": null,
+   "localStorage": {
+    "ekuzo_s1_attribution": "{\"at\":1794256888110,\"utm_source\":\"fb\",\"utm_medium\":\"paid\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\",\"ad\":\"d18\"}",
+    "ekuzo_s1_joined": "1"
+   },
+   "sessionStorage": {
+    "_cltk": "oa76js"
+   },
+   "cookie": "ekuzo_origin=paid_meta; s1_qa=1; _clck=7bdwqk%5E2%5Egb0%5E0%5E2504; _clsk=1x9rv0v%5E1794256894117%5E2%5E1%5Es.clarity.ms%2Fcollect"
+  },
+  "storageNote": "second page of the same context; localStorage and cookies kept"
+ },
+ "formUsed": "#em-top"
+}
