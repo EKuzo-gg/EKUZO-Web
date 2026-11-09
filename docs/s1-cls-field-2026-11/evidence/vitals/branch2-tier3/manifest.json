@@ -1,0 +1,91 @@
+{
+ "label": "branch2-tier3",
+ "invocations": [
+  {
+   "command": "node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2,noad --profile chrome-android-412 --runs 3 --label branch2-tier3 --expectMarker 75473a2 --requireReady",
+   "startedAt": "2026-11-09T21:39:34.123Z",
+   "harnessCommit": "ed84d3e",
+   "harnessDirty": false,
+   "target": "http://localhost:3100",
+   "targetCommit": {
+    "kind": "local",
+    "port": "3100",
+    "pid": 28965,
+    "cwd": "/home/claude/wt-sentry",
+    "ref": "ed84d3e",
+    "dirty": false
+   },
+   "versions": {
+    "node": "v22.23.4",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "os": "Linux 6.18.44-fc-v310 x64",
+    "cpus": "2 x Intel(R) Xeon(R) Processor @ 2.10GHz"
+   },
+   "calibration": {
+    "ms": 199,
+    "x": true
+   },
+   "options": {
+    "network": {
+     "name": "slow4g",
+     "conditions": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+     }
+    },
+    "cpu": 4,
+    "runs": 3,
+    "ads": [
+     "d18",
+     "d19",
+     "d2",
+     "noad"
+    ],
+    "profiles": [
+     "chrome-android-412"
+    ],
+    "viewport": null,
+    "failure": null,
+    "fontDelay": 0,
+    "fontCssDelay": 0,
+    "fontScale": null,
+    "toolbar": "on",
+    "journey": "full",
+    "wait": 10000,
+    "formCheck": true,
+    "expectMarker": "75473a2"
+   },
+   "finishedAt": "2026-11-09T21:48:12.708Z",
+   "totals": {
+    "posts": 0,
+    "leaks": 0,
+    "attempts": 0,
+    "readyMissing": 0
+   }
+  }
+ ],
+ "files": {
+  "chrome-android-412/d18-run1.json": "1c3bd2440abd7b2ca468f9b2bf84061228cc8061c7dc232bfbf7aa72544df02b",
+  "chrome-android-412/d18-run2.json": "db07eda5c27b27cd45f160255442c049da7fde989290203e201e0daeb7483fd7",
+  "chrome-android-412/d18-run3.json": "0cd2e08d9497b4f21503bca184051c6925c9665df7e11d3e2e0ceafbb0d1ed06",
+  "chrome-android-412/d19-run1.json": "c0bb8ecdba156c2457beac8f76674636042c215adee76fba11221c731228a5f8",
+  "chrome-android-412/d19-run2.json": "a2a5d27d4d19c8437b419c04a24cc5b26b8ae982319ff8f0f5ebaa4536ec2ef4",
+  "chrome-android-412/d19-run3.json": "6a4ec08c8cc90851f561d24341660cd2b0d3b31008f609bf3e3c0ef51be07ed4",
+  "chrome-android-412/d2-run1.json": "dbcf8d7fb894a3b359a98c3cb100aaa605b9808557146715a3c62bfb75e66db7",
+  "chrome-android-412/d2-run2.json": "aab0a0319e414a0a5052488afe79170830a2bd9dc65b8fcf51ed5606545076c5",
+  "chrome-android-412/d2-run3.json": "656e83ca77ed1303658a6ce42cb9202bfcc067d7badbbc0210436acc9d00560e",
+  "chrome-android-412/noad-run1.json": "6de05e3c0b8a1070348c1c47cdbe28af00534e7a3834d9f7439b7a8d829f53e4",
+  "chrome-android-412/noad-run2.json": "ce8ad883faf83bab88593b32c8027dd5eda07e0215f2d12a040e121699e83694",
+  "chrome-android-412/noad-run3.json": "f43890a32b2d04c9d19337ab90444023b97f17a846df38e74cae8e55e4d19798"
+ },
+ "blocked": {
+  "byHost": {},
+  "attempts": 0,
+  "leaks": 0,
+  "posts": 0
+ },
+ "runs": 12
+}

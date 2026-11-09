@@ -1,0 +1,9 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d8 --profile fb-android-412 --runs 3 --label branch2-d8 --expectMarker 75473a2
+
+[vitals] branch2-d8: http://localhost:3100 ads=d8 profiles=fb-android-412 runs=3 network=slow4g cpu=4x failure=none target=ed84d3e
+[vitals] fb-android-412 d8 run1: CLS 0.1066 (+in 0.1195, total 0.1067) src=div.ih-opts.games + h1#ih-q LCP 1580 img.ih-bg couch.webp FCP 1324 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d8 run2: CLS 0.1025 (+in 0.1195, total 0.1027) src=div.ih-opts.games + h1#ih-q LCP 1580 img.ih-bg couch.webp FCP 1380 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d8 run3: CLS 0.1066 (+in 0.1195, total 0.1067) src=div.ih-opts.games + h1#ih-q LCP 1572 img.ih-bg couch.webp FCP 1276 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-d8/table.md, manifest.json, blocked.json (3 runs in label)
