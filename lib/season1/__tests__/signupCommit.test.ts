@@ -245,9 +245,12 @@ describe("sign-up confirmed flag after a Stripe answer (lead 10-30)", () => {
       },
       async () => reply(200, { clientSecret: `pi_${++commits}_secret_x`, amountCents: 10000 }),
     );
-    for (let tap = 1; tap <= 4; tap++) await h.pay(body("Maya"), null);
+    for (let tap = 1; tap <= 3; tap++) await h.pay(body("Maya"), null);
+    assert.equal(h.dom["e-pay"].textContent, "Your card was declined.", "a plain decline still shows Stripe's message");
+    await h.pay(body("Maya"), null); // tap 4: the canceled PaymentIntent
     assert.equal(commits, 1, "taps 1 to 4 reuse the cached secret (same form)");
-    assert.match(h.dom["e-pay"].textContent, /status of canceled/, "Stripe's message stays on the error line");
+    assert.equal(h.dom["e-pay"].textContent, "The payment did not go through. Try again or use another card.", "unexpected_state shows the page's fallback line, not Stripe's developer text (D20)");
+    assert.ok(!h.calls.announce.some((m) => /status of canceled/.test(m)), "and it is announced the same way");
     const flagAfterCanceled = h.store.has(FLAG);
     await h.pay(body("Maya"), null); // tap 5, same form
     assert.equal(commits, 2, "the next tap after unexpected_state re-commits");

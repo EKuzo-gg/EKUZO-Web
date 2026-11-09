@@ -54,3 +54,34 @@ index 3af83ae..9752a6f 100644
   }catch(err){
    if(wasConfirmed()){toWelcome(CHECKING_MSG);return}
 ```
+
+## Follow-up D20 (Steward F-1): fallback line for `payment_intent_unexpected_state`
+
+Stripe's text for a canceled PI is developer wording a parent reads as "your sign-up was canceled". For this one code the page now shows its existing fallback line, "The payment did not go through. Try again or use another card." Every other error keeps Stripe's message. No new copy. Same one-line area as the M-1 change in `signup.html`.
+
+Test extended (same M-1 test): after taps 1 to 3 the error line equals "Your card was declined." (plain `card_declined` keeps Stripe's text); after the canceled tap it equals the fallback line and the announce log does not contain Stripe's text; re-commit and flag assertions unchanged.
+
+Output after rebase onto `origin/build/s1-cls-field` (ed1ea8f):
+
+```
+npm test:                 # tests 588  # pass 587  # fail 0  # skipped 1
+season1 scope (test:s1):  # tests 485  # pass 485  # fail 0  # skipped 0
+```
+
+Diff:
+
+```diff
+diff --git a/app/season1/join/signup/signup.html b/app/season1/join/signup/signup.html
+index 9752a6f..d702701 100644
+--- a/app/season1/join/signup/signup.html
++++ b/app/season1/join/signup/signup.html
+@@ -567,7 +567,7 @@ async function pay(body,xev){
+   if(!keepConfirmed(r)){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}
+   /* M-1: the webhook cancels the PaymentIntent after three declines. Drop the cached secret so the next tap re-commits for a fresh one; a canceled PI cannot have charged, so its flag goes too. */
+   if(r&&r.error&&r.error.code==='payment_intent_unexpected_state'){secret=null;secretSig='';if(r.error.payment_intent&&r.error.payment_intent.status==='canceled'){try{sessionStorage.removeItem(confirmedKey())}catch(_){}}}
+-  if(r&&r.error){pf();var msg=r.error.message||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
++  if(r&&r.error){pf();var msg=(r.error.code==='payment_intent_unexpected_state'?'':r.error.message)||'The payment did not go through. Try again or use another card.';errEl.textContent=msg;announce(msg);fail()}
+  }catch(err){
+   if(wasConfirmed()){toWelcome(CHECKING_MSG);return}
+   pf();announce(confirming?'We could not confirm your payment. Text our founder before you try again.':'Something hiccuped. Your card was not charged. Try again in a minute or text our founder.');fail()}
+```
