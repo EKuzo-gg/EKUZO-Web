@@ -108,6 +108,8 @@ push to `dev`. Then: Netlify build, marker check (OR7), S1b and N6 on dev. `main
 | Netlify credits | Team banner 10:30 CT: "over 75% of your credit allowance this month". Two builds needed tonight (dev, main). Jamie checks billing before the phone check (HA9). | Netlify UI |
 | Stripe on dev | test mode (publishable key `pk_test_`), Neon test database per the Oct ledgers; live impossible off `production` context (M, ops) | money lens live check |
 | Stripe test webhook `we_1TMYx4…` | points at dev `/api/webhooks/stripe` (legacy route); main's legacy guard arrives with the merge; Relay greps for it after merging (O-16) | ops lens |
+| Stripe live webhooks (read 10:34 CT, Jamie's browser) | Season 01 commit `https://ekuzo.gg/api/season1/stripe-webhook` Active; legacy `https://ekuzo.gg/api/webhooks/stripe` Active; `dev--ekuzo.netlify.app/api/webhooks/stripe` Disabled; two old WordPress endpoints Disabled. Matches money lens 4.1. | Stripe Workbench |
+| Stripe live failed or canceled payments | none since 2026-08-22 (pre Season 01). The M-1 path has not fired in live yet; frequency so far 0. | Stripe Payments, status filter |
 | Local builds | `next build` needs a placeholder `STRIPE_SECRET_KEY`; symlinked `node_modules` breaks Turbopack; real `npm ci` per worktree (in progress at freeze) | Fable |
 | Playwright | 1.63 global, Chromium only; WebKit absent and without layout-shift API | Scout |
 | Tests on main | `npm test` 575 tests, 574 pass, 1 skipped, 0 fail (money lens run) | `scratchpad/money-npmtest.log` |
