@@ -9,12 +9,14 @@ harness: `scripts/field-vitals/README.md`; Chronos's live run for comparison:
 
 ## Where things are
 
-- Worktree: `/home/claude/wt-sentry` (branch `lane/sentry-a` or detached; create `lane/sentry-b`
-  from the current HEAD and commit your files there, under
-  `docs/s1-cls-field-2026-11/evidence/sentry-b/`). Never push.
-- The dev deploy's expected marker: `DEV_SHA` (Fable fills this in the launch message; it is the
-  short sha of the integration merge commit pushed to `dev`). The local branch build on port 3100
-  carries marker `2b9bc16` (app code identical; see `03-decision-log.md` D23).
+- Worktree: `/home/claude/wt-sentry-b`, detached at `75473a2` (the build tip whose app code is on
+  dev). Create `lane/sentry-b` from it and commit your files there, under
+  `docs/s1-cls-field-2026-11/evidence/sentry-b/`. Never push. Do not touch `/home/claude/wt-sentry`
+  (Sentry A's servers run from it) or `/home/claude/wt-main`. The harness runs here without
+  `node_modules` (Playwright is global); `npm test` is not your job.
+- The dev deploy's expected marker: `DEV_SHA` = `91f5503` (the integration merge pushed to `dev`;
+  its app code equals `75473a2`, proven by `git diff --quiet` in the push log). The local server
+  on port 3100 belongs to Sentry A and may serve an older build; do not rely on it.
 - Playwright 1.63 and Chromium are global; every Playwright launch uses
   `proxy: { server: process.env.HTTPS_PROXY }`. `curl` reaches the dev deploy directly through the
   same proxy environment.
@@ -35,7 +37,7 @@ ekuzo.gg.
 ## Checks, in order
 
 1. **OR7 marker.** `curl -s https://dev--ekuzo.netlify.app/season1 | grep -o 'name="s1-build" content="[^"]*"'` equals `DEV_SHA` (prefix match on 7 characters). Also for `?ad=d18`, `?ad=d19`. Record `curl -sI` headers (`age`, `cache-status`, `x-nextjs-cache`, `cache-control`, `etag`) for `/season1` and `/season1?ad=d18`.
-2. **D1 body equality.** Save `curl -s https://dev--ekuzo.netlify.app/season1` and `curl -s localhost:3100/season1` to files; `diff` them. Pass: the only differing line is the `s1-build` marker. If anything else differs, list every differing line (the `{{TAGS}}` and `{{URL_ALLOW}}` fills come from `lib/season1/tags.ts` and `route.ts`; a difference there is a finding, not a stop). Repeat for `?ad=d19` (the HTML is the same file; confirm).
+2. **D1 body equality.** Save `curl -s https://dev--ekuzo.netlify.app/season1` to a file and `diff` it against `app/season1/landing.html` at `75473a2` (your worktree's copy). Pass: the only differing lines are the two placeholder lines, `{{BUILD}}` (filled with the marker) and `{{TAGS}}` (filled by `route.ts` from `lib/season1/tags.ts`); read `route.ts` to confirm those are the only fills, and check the filled tags block names GA4 `G-8LM45PX53W`, Pixel `1284038230557204` and Clarity `wml8wll5ua` and nothing else. Any other differing line is a finding. Repeat for `?ad=d19` (same HTML file; confirm the bodies are byte-identical to each other).
 3. **N6.** `curl -sI` on dev for `/season1`, `/season1?ad=d18`, `/season1?s1qa=1`, `/season1/join`, `/season1/thanks`, `/programs/ekuzo-camps`, and one legacy redirect from `next.config.mjs` (read the file for a source path). Record status, `location`, `x-robots-tag`, `link` (canonical) and compare with the same requests against `https://ekuzo.gg` (read-only GETs with `-I` are fine on ekuzo.gg; nothing else). Pass: identical apart from host and cache headers. Also confirm `?s1qa=1` on dev still returns the same HTML (the gate is in the browser, by hostname; do not load it in a browser).
 4. **Console, every variant.** Playwright, fb-android UA 412x915, no `?s1qa`: load `https://dev--ekuzo.netlify.app/season1?ad=dN` for N 1 to 21 and `/season1`; wait 8 s; record `console.error`, `pageerror`, failed requests (`requestfailed`), the `s1-build` marker read from the DOM, `document.documentElement.dataset.s1Ready`, `#lp` `data-s1-pre`, the head `link[rel=preload][as=image]` hrefs and the `#s1-fonts` href. One row per variant. Our errors versus third-party noise; expected: none of ours, no analytics requests at all.
 5. **S1b and the release L1.** Harness on dev, fb-android-412 at N=5 (this is the run that decides L1 for release, decision D25 in `03-decision-log.md`):
