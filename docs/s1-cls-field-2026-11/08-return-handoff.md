@@ -22,7 +22,8 @@ origin/build/s1-cls-field 480c8de   (main's code plus this run's docs and eviden
 
 This file's own commit, the `live-after-chrome` evidence and the final docs fast-forward of `main`
 land after this capture; the receiving session will see them at the top of the log and in
-`07-review-guide.md` § Git state.
+`07-review-guide.md` § Git state. Final: `main` = `3bf6c58` (live on ekuzo.gg 16:18 CT, same app code
+as 19b9963), `build/s1-cls-field` = `3bf6c58` plus the one commit that adds this paragraph.
 
 ## Prompt for the next session
 

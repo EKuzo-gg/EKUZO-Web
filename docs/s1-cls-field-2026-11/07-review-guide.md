@@ -181,3 +181,8 @@ entry are in the same bundle.
 
 See `08-return-handoff.md` for the embedded `git status --porcelain` and `git log --oneline -3`
 captured together; this file is committed in the same minute.
+
+Final state, 16:18 CT: `main` fast-forwarded to `3bf6c58` (this run's docs on top of the live code;
+`git diff --stat 19b9963 3bf6c58 -- app lib components public scripts package.json next.config.mjs
+context` is empty) and ekuzo.gg serves marker `3bf6c58` with the body equal to the source apart from
+the two fills (lines 3 and 46). `build/s1-cls-field` is this one note ahead of `main`.
