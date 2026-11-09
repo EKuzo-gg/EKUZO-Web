@@ -3,7 +3,7 @@
 <meta name="s1-build" content="{{BUILD}}">
 <script>
 // Season 01 head bootstrap (s1-cls-field Slice 2). One source for the ad tables the body scripts read (AD_HERO, HERO_KEYS, IMG), then, before any stylesheet, the chosen ad's hero image preloads and a stylesheet with only the font families that ad paints.
-// The all-families stylesheet in the body loads async as a safety net. Any failure here writes it as a blocking stylesheet instead, which is the page as it was.
+// The other families load async as a safety net (not all of them: a second @font-face for a family already in use sends its text back to the fallback while it reloads). Any failure here writes the all-families stylesheet as a blocking stylesheet instead, which is the page as it was; <noscript> in the body does the same without JS.
 // HERO_IMG: every ad's hero images in template order (the full-bleed .ph first, so the largest first). FONTS: families beyond FONT_BASE, from T's font, the template CSS and the module CSS. lib/season1/__tests__/landingHead.test.ts checks both against D, T and the CSS.
 window.S1={
  AD_HERO:{d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]},
@@ -32,6 +32,8 @@ window.S1={
     imgs.forEach(function(u,i){ out+='<link rel="preload" as="image" href="'+u+'"'+(i?"":' fetchpriority="high"')+'>'; });
     var want=S.FONT_BASE.concat(S.FONTS[id]);
     out+='<link id="s1-fonts" rel="stylesheet" href="'+CSS+S.FAM.filter(function(f){ return want.indexOf(name(f))>=0; }).join("&family=")+'&display=swap">';
+    var rest=S.FAM.filter(function(f){ return want.indexOf(name(f))<0; });
+    if(rest.length) out+='<link rel="stylesheet" href="'+CSS+rest.join("&family=")+'&display=swap" media="print" onload="this.media=\'all\'">';
     document.write(out);
   }catch(_){
     try{ document.write('<link rel="stylesheet" href="'+CSS+S.FAM.join("&family=")+'&display=swap">'); }catch(_){}
@@ -43,7 +45,6 @@ window.S1={
 </head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap"></noscript>
 <style>
 /* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */

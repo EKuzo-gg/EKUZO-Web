@@ -41,8 +41,9 @@ function runBoot(search: string, innerWidth = 412, extra: Record<string, unknown
   const out = written.join("");
   const preloads = [...out.matchAll(/<link rel="preload" as="image" href="([^"]+)"( fetchpriority="high")?>/g)].map((m) => [m[1], !!m[2]] as const);
   const fonts = /<link id="s1-fonts" rel="stylesheet" href="([^"]+)">/.exec(out)?.[1] ?? "";
+  const rest = /<link rel="stylesheet" href="([^"]+)" media="print" onload="this.media='all'">/.exec(out)?.[1] ?? "";
   // JSON round trip: plain objects of this realm, so deepEqual compares values, not vm prototypes.
-  return { S1: JSON.parse(JSON.stringify(win.S1)) as S1, out, preloads, fonts };
+  return { S1: JSON.parse(JSON.stringify(win.S1)) as S1, out, preloads, fonts, rest };
 }
 
 const S1 = runBoot("").S1;
@@ -122,11 +123,11 @@ describe("landing head bootstrap: one source for the ad tables", () => {
     assert.doesNotMatch(body, /IMG\["[\w-]+"\]=/);
   });
 
-  it("the async all-families stylesheet and its noscript copy name exactly FAM", () => {
+  it("the noscript all-families stylesheet names exactly FAM, and no blocking stylesheet is left in the markup", () => {
     const full = "https://fonts.googleapis.com/css2?family=" + S1.FAM.join("&family=") + "&display=swap";
     const body = html.slice(html.indexOf("<body>"));
-    assert.ok(body.includes(`<link rel="stylesheet" href="${full}" media="print" onload="this.media='all'">`));
     assert.ok(body.includes(`<noscript><link rel="stylesheet" href="${full}"></noscript>`));
+    assert.equal((body.replace(/<noscript>[\s\S]*?<\/noscript>/g, "").match(/<link rel="stylesheet"/g) ?? []).length, 0);
     assert.ok(head.indexOf("<script>") < head.indexOf("{{TAGS}}"));
     assert.equal((head.replace(bootSrc, "").match(/rel="stylesheet"/g) ?? []).length, 0, "no static stylesheet in the head");
   });
@@ -171,6 +172,15 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
     assert.deepEqual(runBoot("?ad=d2&hero=none").preloads, [[IMG["couch"], true]]);
     assert.deepEqual(runBoot("?ad=d8", 1440).preloads, [[IMG["couch"], true], [IMG["laughing"], false]]);
     assert.deepEqual(runBoot("?ad=d4", 1440).preloads, [[IMG["coach-and-mom"], true]]);
+  });
+
+  it("the async safety-net stylesheet carries every other family and none of the ad's (no duplicate @font-face)", () => {
+    for (const s of ["?ad=d19", "?ad=d2", "", "?ad=d7"]) {
+      const r = runBoot(s);
+      const a = new URL(r.fonts).searchParams.getAll("family"), b = new URL(r.rest).searchParams.getAll("family");
+      assert.deepEqual([...a, ...b].sort(), S1.FAM.map((f) => f.replace(/\+/g, " ")).sort(), s);
+      assert.ok(r.out.indexOf("s1-fonts") < r.out.indexOf('media="print"'), s);
+    }
   });
 
   it("preloads come before the fonts stylesheet, and only the chosen ad's images load (X1)", () => {
