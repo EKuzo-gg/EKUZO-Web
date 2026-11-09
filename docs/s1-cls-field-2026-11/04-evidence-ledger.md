@@ -1,170 +1,208 @@
 # 04 Evidence ledger: Season 01 landing page, field-faithful stability and load speed
 
-Owner: Auditor. Skeleton created 2026-11-09 after the phase 1 review (`auditor-phase1.md`). Rows follow
-the IDs in `01-requirements.md` as of the 10:25 CT version. Results stay blank until an artifact exists.
-Result values: pass, fail (defect id), human-pending, n/a (reason). A row is never marked pass from the
-author's own self-test; the "verified by" column names a different role.
+Owner: Auditor. Skeleton created 2026-11-09 after the phase 1 review (`auditor-phase1.md`); filled in phase 4 on branch `lane/auditor` from build tip `bfc0eeb`. Rows follow the IDs in `01-requirements.md`.
+
+How to read it. Every path is relative to `docs/s1-cls-field-2026-11/` unless it starts with `scripts/`, `app/` or `lib/`. Each cited file was checked with `test -f` at the commit this ledger sits on. A number is copied from the cited table; where two lanes give different numbers for one cell, both appear with their files and the row says "FLAG FABLE". A row is never PASS on the author's own self-test alone: the "verified by" column names the lane that produced the evidence first and the lane that checked or re-ran it second. Where only the author's file exists, the row is PARTIAL.
+
+Result values: PASS, FAIL, PARTIAL, N/A (with the decision id or the merge target), UNEVIDENCED (the cited file does not exist or does not contain the check; never filled from a hand-back), PENDING (with what it waits for). Rows split into sub-rows (S1, L3, M1) are counted individually in the totals at the end of "Coverage".
+
+Builds in play: `2b9bc16` (first build, Sentry A block 1, 2a, 2c, 2d), `75473a2` (after D24, Sentry A tiers, classq, failures), `91f5503` (dev deploy, Sentry B; app and lib equal to `75473a2` by `git diff --quiet`), `19b9963` (main, live since 15:21 CT). Main reference build `45dfe97`.
+
+Status of two items awaiting Fable: SA-3 (d8 windowed CLS about 0.10, pre-existing on main, d8 not a live ad) and J9 (fails on main and branch alike; attribution is carried server-side by the `ekuzo_lc` cookie). Their rows read "awaiting Fable's ruling" (D26 and D27 to be recorded after this pass).
 
 ## Parallel lanes
 
-Each parallel lane writes its own file; the Auditor merges them into this ledger and into
-`05-defect-log.md`. No two agents write the same file (build-loop.md, artifact contract).
+Each parallel lane writes its own file; the Auditor merges them into this ledger and into `05-defect-log.md`. The skeleton's planned file names differ from what the lanes wrote; the table gives the real paths.
 
-| Lane | Results file | Defect file |
+| Lane | Results file(s) as written | Defect file |
 |---|---|---|
-| Chronos (harness self-test, not final) | `evidence/chronos/results.md` | none (routes to Fable) |
-| Atlas (build self-test, not final) | `evidence/atlas/results.md` | none |
-| Relay (pre-flight, merge, cleanup) | `evidence/relay/results.md` | `06-cleanup-ledger.md` |
-| Sentry A (harness runs, lab, tiers) | `evidence/sentry-a/results.md` | `05-defect-log-sentry-a.md` |
-| Sentry B (dev deploy, console, redirects, tests, adversarial) | `evidence/sentry-b/results.md` | `05-defect-log-sentry-b.md` |
+| Chronos (harness self-test, not final) | `evidence/chronos/self-test.md`, `evidence/vitals/h7-proof.md`, `evidence/vitals/h7-ladder.md`, `evidence/vitals/failures-main.md` | none (findings 1 to 9 in the self-test; routed to Fable) |
+| Atlas (build self-test, not final) | `evidence/atlas/self-test.md`, `evidence/atlas/rework-d24.md` | none (lists "for Fable" in the same files) |
+| Relay (pre-flight, merge, cleanup) | `evidence/relay/hotfix-m1.md`, `evidence/relay/preflight.md`, `evidence/relay/dev-integration-runbook.md` | `06-cleanup-ledger.md` |
+| Sentry A (harness runs, lab, tiers, Class Q) | `evidence/sentry-a/results.md`, `interim.md`, `interim2.md`, `interim3.md` | `evidence/sentry-a/defects.md` (SA-1 to SA-5) |
+| Sentry B (dev deploy, console, redirects) | `evidence/sentry-b/results.md` | `evidence/sentry-b/defects.md` (SB-1, SB-2) |
 | Red-team lenses | `redteam-money.md`, `redteam-users.md`, `redteam-ops.md` | none |
-| Parent, Steward | `evidence/parent/review.md`, `evidence/steward/review.md` | routed through Sentry logs |
+| Parent, Steward | `parent-review.md`, `steward-review.md` | routed through `05-defect-log.md` |
+| Fable (probes) | `evidence/fable/preload-competition.md`, `evidence/fable/h2probe-dev--ekuzo.netlify.app-d18.json`, `evidence/fable/h2probe-dev--ekuzo.netlify.app-d19.json`, `evidence/fable/live/` | none |
 
-Gate checks the Auditor runs before phase 4 spawns: `screenshots/` non-empty; test output present; guard
-hook in `.claude/settings.json`; H7 row is pass or the "unvalidated" label is applied to every lab row.
+Gate checks the Auditor ran before this pass: `screenshots/` holds 32 PNGs (16 main and branch pairs; all 16 pairs are byte-identical by `md5sum`); test output is present in `evidence/relay/hotfix-m1.md`, `evidence/atlas/rework-d24.md` and `evidence/atlas/self-test.md` (author runs only, see N2); the guard hook is in `.claude/settings.json` line 6 (`bash scripts/guard-pattern-kill.sh`); the H7 row is PASS, so lab rows carry no "unvalidated" label.
 
 ## A. Harness
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| H1 | Harness script and README exist | `ls`, `npm run vitals -- --help`, README headings | | | | |
-| H2 | Named profiles, throttling, cold contexts | Per-run JSON shows UA, DPR, CPU, network | | | | iPhone row is human (HC3) |
-| H3 | Journey: load, scroll, tap, type, return | Timestamped step list in JSON | | | | Touch gestures and toolbar collapse per review |
-| H4 | Shift sources, CLS, LCP, INP, fonts | JSON keys; CLS fixture unit test | | | | |
-| H5 | JSON per run plus markdown table | Files at pattern; median and max columns | | | | |
-| H6 | Analytics hosts blocked, logged, abort | `blocked.json`; zero connections to hosts | | | | |
-| H7 | Reproduces pre-fix field CLS on a919b25 | 3 runs a919b25 vs 45dfe97, d18 and d19 | | | | Gate for all lab numbers |
-| H8 | Live ekuzo.gg runs for five ads | `evidence/vitals/live-*`; blocked log non-empty | | | | Egress unverified |
-| H7b | Fallback ladder if H7 fails (proposed) | `evidence/vitals/h7-ladder.md` | | | | Pending Fable |
-| H9 | Main baseline captured before edits (proposed) | `evidence/vitals/main-baseline/` | | | | Pending Fable |
+| H1 | Harness script and README exist | `ls`, README headings, runs | `scripts/field-vitals/run.mjs`, `scripts/field-vitals/README.md`, `evidence/chronos/self-test.md` | PASS | Chronos; Sentry A and B ran it from their own worktrees | README headings: run here, run on a Mac, options, journey, blocks, failure profiles, adding a profile, output, columns. `--help` itself was not executed by the Auditor (no runs) |
+| H2 | Named profiles, throttling, cold contexts | Per-run JSON shows UA, DPR, CPU, network | `evidence/vitals/branch2-d8/keep-fb-android-412-d8-run1.json` (`meta`: UA with `FB_IAB/FB4A`, 412x915, dpr 2.625, cpu 4, slow4g 150 ms / 200000 B/s down, `cdpReturns`) | PASS | Chronos; Sentry A | iPhone row is HC3 (PENDING below) |
+| H3 | Journey: load, scroll, tap, type, return | Timestamped step list in JSON | `evidence/vitals/branch2-d8/keep-fb-android-412-d8-run1.json` (`steps`, `timeline`), `evidence/chronos/self-test.md` finding 5 | PASS | Chronos; Sentry A | Deviation: raw CDP touch events replace `Input.synthesizeScrollGesture`, which does not scroll in this headless Chromium (finding 5). Toolbar collapse of 56 then 110 px is in the default journey |
+| H4 | Shift sources, CLS, LCP, INP, fonts | JSON keys; CLS fixture unit test | `scripts/field-vitals/__tests__/cls.test.ts`, `scripts/field-vitals/lib/cls.mjs`, `evidence/atlas/rework-d24.md` (harness suite 5 tests, 5 pass) | PASS | Chronos (5 tests); Atlas re-ran the suite in `rework-d24.md` | JSON keys `cls`, `shifts`, `lcp`, `inp`, `longTasks`, `fontEvents`, `resources` present in the keep file above |
+| H5 | JSON per run plus markdown table | Files at pattern; median and max columns | `evidence/vitals/branch2-tier1/table.md`, `evidence/vitals/branch2-tier1/manifest.json` | PASS | Chronos; Sentry A | Raw JSON gitignored with sha256 in each `manifest.json`; archive is outside the repo (scratchpad), so the raw runs cannot be re-read from this branch |
+| H6 | Analytics hosts blocked, logged, abort | `blocked.json`; zero connections to hosts | `evidence/vitals/live-before/blocked.json` (90 attempts, 30 each for googletagmanager.com, connect.facebook.net, clarity.ms; leaks `[]`; posts `[]`), `evidence/vitals/branch2-tier1/blocked.json`, `evidence/vitals/dev-tier1/blocked.json` | PASS | Chronos; Sentry A and B | Local and dev logs are empty by design (the page loads no tags there) and show 0 leaks |
+| H7 | Reproduces pre-fix field CLS on 3433a5b | 5 runs `3433a5b` vs `45dfe97`, d18 and d19 | `evidence/vitals/h7-proof.md`, `evidence/vitals/prefix-3433a5b/table.md`, `evidence/vitals/h7-main-45dfe97/table.md` | PASS | Chronos; Auditor re-read the tables | Pre-fix: d18 0.6776 and d19 0.6133 in 5 of 5 runs, sources `section#join-top.join` + `section.how`. Main: d18 0.0035, d19 0.0015, 0 runs at or above 0.1. Field values were 0.70 to 0.75 (`h7-proof.md` reading) |
+| H8 | Live ekuzo.gg runs for five ads | `evidence/vitals/live-*`; blocked log non-empty | `evidence/vitals/live-before/table.md`, `evidence/vitals/live-before/blocked.json`; after-push: `evidence/fable/live/h2probe-ekuzo.gg-d18.json`, `evidence/fable/live/h2probe-ekuzo.gg-d19.json` | PARTIAL | Chronos (before); Fable (after, probe only) | Before N=3 on d18, d19, d2, d4, d21 under fb-android-412 and chrome-android-412, blocked log non-empty. The "after the main push" harness run does not exist (`evidence/vitals/live-after` absent). Fable's two-run probes are not Class T harness runs. After-push LCP from the probes: d18 1500 ms, d19 1716 ms (run 1 of 2) |
+| H7b | Fallback ladder if H7 fails | `evidence/vitals/h7-ladder.md` | `evidence/vitals/h7-ladder.md` | N/A (not needed: H7 passed on the first pass) | Chronos | Attempt 0 reproduced; rungs 1 to 5 not run |
+| H9 | Main baseline captured before edits | `evidence/vitals/main-baseline/` | `evidence/vitals/main-baseline/table.md`, `evidence/vitals/main-baseline/manifest.json` | PASS | Chronos; Sentry A compared against it | Tier 1 on fb-android-412, fb-android-360, ig-android-412 at N=5 and chrome-android-412 at N=3 (`evidence/chronos/self-test.md` Numbers table). Local main serves HTML uncompressed (D25) |
 
 ## B. Layout stability
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| S1 | CLS under 0.1 across variants and profiles | Harness table by tier, lab and dev | | | | Tiers 1 to 3 per review |
-| S2 | Hero images and boxes reserve space | DOM check; images-blocked run | | | | Attribute edits need R-PROT |
-| S3 | Font swap does not shift hero | Text-node shifts after first paint | | | | |
-| S4 | Nothing below fold shifts during scroll | Shift sources outside hero | | | | |
-| S5 | Existing reserved boxes stay as shipped | `git diff` of CSS rules; decision log | | | | |
+| S1 | CLS under 0.1 across variants and profiles | Harness table by tier, lab and dev | see the four sub-rows | PARTIAL | Sentry A (lab), Sentry B (dev) | Tiers that ran: T1 fb-412 N=5 on `75473a2`; T1 fb-360 and ig-412 N=5 on `2b9bc16` only; T2 N=1 not N=3 on `75473a2`; T3 chrome-412 N=3; dev fb-412 N=5, dev fb-360 and ig-412 N=2. One cell over the line: d8 (see S1a-T2) |
+| S1a-T1 | Tier 1 lab: d18, d19, d2, noad | `evidence/vitals/branch2-tier1/table.md` | `evidence/vitals/branch2-tier1/table.md`, `evidence/vitals/branch-tier1/table.md`, `evidence/sentry-a/block2a-compare.md` | PASS | Sentry A; checked against Chronos `evidence/vitals/main-baseline/table.md` | fb-412 N=5 on `75473a2`: windowed CLS d18 0.0035, d19 0.0015, d2 0.0004, noad 0.0003 (med = max), equal to main. fb-360 and ig-412 N=5 on `2b9bc16` (not repeated on `75473a2`): largest d2 fb-360 0.0179 med / 0.0180 max, same as main (`main-baseline/table.md`). 0 runs at or above 0.1 in every cell |
+| S1a-T2 | Tier 2 lab: every other d variant, N=3 | `evidence/vitals/branch2-tier2/table.md` | `evidence/vitals/branch2-tier2/table.md`, `evidence/vitals/branch2-d8/table.md`, `evidence/vitals/main-d8/table.md` | FAIL | Sentry A | Ran at N=1 (spec asks N=3 lab). 17 of 18 variants under 0.1 (highest others: d14 0.0602, d9 0.0596). d8: 0.1066 on the branch tier run; the N=3 re-run `branch2-d8` and main `main-d8` are 3 of 3 over 0.1 on both (SA-3, main 0.1025). Pre-existing on main, not a regression; d8 is not a live ad. Awaiting Fable's ruling (D26). No main Tier 2 baseline exists for the other 17 variants, so "equal to main" is unproven there |
+| S1a-T3 | Tier 3 chrome-android-412, N=3 | `evidence/vitals/branch2-tier3/table.md` | `evidence/vitals/branch2-tier3/table.md` | PASS | Sentry A | d18 0.0035, d19 0.0015, d2 0.0004, noad 0.0003, equal to main (`main-baseline/table.md`). The `mid` network profile was not run |
+| S1b | Dev deploy Tier 1, N=5 | `evidence/vitals/dev-tier1/table.md` | `evidence/vitals/dev-tier1/table.md`, `evidence/vitals/dev-tier1b/table.md`, `evidence/sentry-b/results.md` | PASS | Sentry B | fb-412 N=5, marker `91f5503`: d18 0.0035, d19 0.0001, d2 0.0004, noad 0.0003. fb-360 and ig-412 at N=2 (not N=5): max fb-360 d2 0.0179, others at or under 0.0036. Dev Tier 2 not run |
+| S1c | Images blocked, Tier 1, CLS under 0.1 | Harness run with image requests aborted | none | UNEVIDENCED | Sentry A (named it in the did-not-run list) | No run with images blocked exists in `evidence/vitals/`. The S2 image-swap DOM test is the partial substitute (S2) |
+| S2 | Hero images and boxes reserve space | DOM check; images-blocked run | `evidence/vitals/branch2-tier1/table.md` (Checks), `evidence/sentry-a/defects.md` (SA-5), `evidence/sentry-b/defects.md` (SB-1), `evidence/chronos/self-test.md` finding 1 | PARTIAL | Chronos (check); Sentry A and B | Spec expects no offenders. d19 lists 1 (`img.jb southie-back.webp`), same on main, on dev and in `live-before`; d20, d21, d11 also list offenders. The hero box itself does not move (`boxDelta` 0). S1c unevidenced. Open as SA-5 and SB-1 for Atlas and Fable |
+| S3 | Font swap does not shift hero | Text-node shifts after first paint | `evidence/vitals/branch-fontdelay/table.md` | PASS | Sentry A | Build `2b9bc16`, N=3, `--fontDelay 3000`: windowed CLS d2 0.0004, d18 0.0035, d19 0.0014; sources `h1#ih-q`, `h3 + div.row`, `form + p`, none `section.join` or `section.how`. Not re-run on `75473a2` (D24 touched preload count only) |
+| S4 | Nothing below fold shifts during scroll | Shift sources outside hero | `evidence/vitals/branch2-tier1/table.md`, `evidence/chronos/self-test.md` finding 2 | PARTIAL | Chronos; Sentry A | Journey windowed CLS under 0.1 in every Tier 1 cell. No lane reported the three-crossing `.solid` header measurement or a per-source table for `header`, `svg.mark`, `#sticky`, `.faq`, `footer`. d2 shows a "+input" max of 0.1195 on main and branch alike (toolbar collapse and restore, flagged `hadRecentInput`; Chronos finding 2) |
+| S5 | Existing reserved boxes stay as shipped | `git diff` of CSS rules; decision log | `evidence/sentry-a/s5.txt`, `evidence/sentry-a/interim3.md` | PARTIAL | Sentry A | PASS part: the only touched rule is `min-height:80vh` added before `80svh`; `pa` and `pre-ih` otherwise unchanged. The ~5 px step at page A injection (requirement S5) was not measured at 360, 390 and 412 in any lane file |
 
 ## C. Load speed
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| L1 | LCP improves on main, targets met | Harness LCP vs main baseline, N >= 5 | | | | Thresholds pending Fable |
-| L2 | Hero image requested before big script | Head DOM; resource start vs long task | | | | |
-| L3 | Fonts per ad, stylesheet not blocking | Font requests; first-paint vs main | | | | |
-| L4 | Hero images sized for phones, WebP | Resource sizes vs rendered width x DPR | | | | Subordinate to N1 |
-| L5 | Big script long task not worse | Long-task start and duration vs main | | | | |
-| L6 | Tap and focus INP under 200 ms | INP table (report only) | | | | |
+| L1 | LCP improves on main, targets met | Harness LCP vs main baseline, N >= 5 | local: `evidence/vitals/branch2-tier1/table.md`, `evidence/sentry-a/interim2.md`; dev: `evidence/vitals/dev-tier1/table.md`, `evidence/vitals/live-before/table.md`, `evidence/sentry-b/results.md` § 5 | PARTIAL | Sentry A (local); Sentry B (dev, decides per D25) | Local `75473a2` vs main, medians: d18 1912 to 1424, d19 2732 to 1904, d2 2232 to 1768 (Sentry A's `interim2.md` quotes 1768; its results.md quotes -464), noad 2664 to 2288; no max over 4.0 s. Dev `91f5503` vs live-before (N=5 vs N=3): d18 2156 to 1352, d19 2836 to 1728, d2 2528 to 1612, all above the needed gain; noad has no baseline; d21 not run on dev (live-before 3184). On `2b9bc16` d19 failed (2732 to 2540, SA-1), fixed by D24. Photo-hero variants d11, d12, d16, d17, d20, d21 have no main baseline in the harness, so "every photo-hero variant" is unproven. Aspiration 2.5 s for d18 and d19: met on dev (1352, 1728) |
+| L2 | Hero image requested before big script | Head DOM; resource start vs long task | `evidence/sentry-a/classq/branch-head.json`, `evidence/vitals/branch2-tier1/table.md`, `evidence/sentry-b/run-extract.json` | PASS | Sentry A (local); Sentry B (dev) | Local: hero request starts 206 to 244 ms, fonts CSS ends 683 to 758 ms (tier table); head check 189 to 196 ms vs 433 to 524 ms. Dev: hero request before fonts CSS end in 20 of 20 runs (d18 572 vs 1052, d19 656 vs 1115, d2 604 vs 827, noad 646 vs 1115); exactly one preload link per run |
+| L3a | Per-ad fonts, stylesheet not blocking | Font requests; head check | `evidence/sentry-a/classq/branch-head.json`, `evidence/sentry-b/console-sweep.json` | PASS | Sentry A; Sentry B | `#s1-fonts` carries 2 to 4 families, other families arrive async (`media=print` swap, 11 to 13 families); gstatic files 2 to 4 by 6 s, same count as main. Dev: `#s1-fonts` href on all 22 variants, 12 distinct hrefs. The per-ad sheet still blocks (D12) but is about a ninth of the old parse |
+| L3b | First paint earlier than baseline by 100 ms | Harness first paint vs main | local: `evidence/sentry-a/interim2.md`, `evidence/vitals/branch2-d2rerun/table.md`; dev: `evidence/vitals/dev-tier1/table.md`, `evidence/vitals/live-before/table.md` | PARTIAL | Sentry A (local); Sentry B (dev) | Local deltas: d18 -192, d19 -124, noad -372, d2 -20 in the first batch and -112 on the re-run (noise from overlapping jobs). Dev d19 first paint 1164 vs live-before 912 and FCP 1228 vs 1020 (later); Sentry B did not re-measure. FLAG FABLE: local and dev disagree in sign on d19 (the baselines differ: local main vs live production) |
+| L4 | Hero images sized for phones, WebP | Resource sizes vs rendered width x DPR | `evidence/atlas/self-test.md` § 6, `evidence/atlas/l4-srcset-trial-d19-412x2-main.png`, `evidence/atlas/l4-srcset-trial-d19-412x2-branch.png`, `evidence/vitals/branch2-tier1/table.md` (hero KB) | PARTIAL | Atlas; Fable decision D16 | `srcset` tried and dropped: 0.591% (d19) and 0.589% (d21) pixel difference at 412x915 @2 (region 145x110), clone rule fails; recorded as D16, accepted. Hero KB per cell is in the tier tables (d18 39.7, d19 232.8, d2 71.1, noad 143.2). The per-image table of `encodedBodySize`, `naturalWidth` and width x DPR the requirement asks for was not produced |
+| L5 | Big script long task not worse | Long-task start and duration vs main | local: `evidence/vitals/branch2-tier1/table.md`, `evidence/vitals/main-baseline/table.md`; dev: `evidence/vitals/dev-tier1/table.md`, `evidence/vitals/live-before/table.md`; `03-decision-log.md` D25 | FAIL | Sentry A (local); Sentry B (dev) | Local first long task start / duration, main to branch: d18 1086/116 to 1277/132, d19 1069/123 to 1735/117, d2 1076/177 to 1595/117, noad 1076/119 to 1752/112: start later on all four cells. D25 attributes the local result to uncompressed HTML (137 KB vs 37.6 KB gzipped) and takes the dev result as deciding. Dev vs live-before (N=5 vs N=3): d18 1107/117 vs 1300/104 (earlier start, +13 ms duration), d2 884/151 vs 1266/126 (earlier start, +25 ms duration, over the 20 ms allowance), d19 1223/167 vs 987/148 (start 236 ms later, +19 ms duration). FLAG FABLE: on dev, d19 start and d2 duration miss the L5 pass rule; no lane or decision addresses it (D25 covers the local read only). Requirement text says "improvement reported, not required"; the pass rule is the 20 ms allowance |
+| L6 | Tap and focus INP under 200 ms | INP table (report only) | `evidence/vitals/branch2-tier1/table.md` (INP max), `evidence/vitals/dev-tier1/table.md` | PASS | Sentry A; Sentry B | Report only. INP max local 24 to 64 ms (d2 64, d18 32 on main-baseline column 96/32); dev 24 to 72 ms |
+| L7 | Hidden avatar no longer loads before hero | Resource timing | `evidence/atlas/self-test.md` § 4 | PARTIAL | Atlas only | Atlas probe: main fetches `karlin-oei-avatar.jpg` at 29 to 80 ms on every variant, the branch never requests it. Sentry A listed L7 as outside its brief and Sentry B did not check; no harness table carries it |
 
 ## D. Measurement
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| M1 | Landing measurement row identical to main | Class Q beacon lists, main vs branch diff | | | | Test Events and DebugView are HC4 |
-| M2 | No kid data in URLs, GA4, Meta | Beacon and URL log grep | | | | |
-| M3 | No new third-party host requested | Host set, branch minus main | | | | Same test as X5 |
+| M1a | Beacon lists identical to main | Class Q lists main vs branch | `evidence/sentry-a/classq/compare.json`, `evidence/sentry-a/interim3.md` | PASS | Sentry A | 9 scenarios (d18 with UTM and fbclid, d19, d2, noad, `?ad=zz`, `?hero=games` at random 0 and 0.99, d10 at 0 and 0.99): dataLayer, `fbq.queue`, `clarity.q`, storage and call order equal after removing timestamps and ids |
+| M1b | Attribution fields in POST body equal | Class Q POST bodies | `evidence/sentry-a/classq/compare.json` | PASS | Sentry A | `post` equal in all 9. `fbclid`, `fbp`, `fbc` are not in the body on either side; they travel as the `ekuzo_lc` cookie header |
+| M1c | `event_id` equal browser and server | Class Q or dev | `evidence/sentry-a/classq/branch-x11.json`, `evidence/sentry-a/classq/main-x11.json` | PARTIAL | Sentry A | Local: Pixel `Lead` eventID equals POST `eventId`, same id on the 429-then-200 retry. Dev run not done (D11: no sign-ups on dev); server-forwarded id is covered only by existing tests, which no lane re-ran independently |
+| M1d | Clarity mask on email and phone inputs | DOM check | `evidence/sentry-a/classq/branch-m1d.json`, `evidence/sentry-a/classq/main-m1d.json` | PASS | Sentry A | `data-clarity-mask="true"` on `#em-top`, `#em-end`, `#tk-ph`, `#tk` on d18, d19, d2, noad; main has none |
+| M1e | Destinations confirmed from tracking doc | Relay reads `season-one-tracking.md` | none | UNEVIDENCED | Relay (not delivered) | No Relay file mentions `season-one-tracking`. `evidence/relay/preflight.md` covers webhooks and cache, not event destinations |
+| M2 | No kid data in URLs, GA4, Meta | Beacon and URL grep | `evidence/sentry-a/classq/branch-d18-utm.json`, other `evidence/sentry-a/classq/branch-*.json` | PARTIAL | Sentry A produced; Auditor ran the grep | No lane reported an M2 verdict. Auditor grep of all 16 `classq/main-*.json` and `branch-*.json` for the typed test email: it appears only under `posts[].body.email`, never in dataLayer, fbq, clarity or any captured URL. Only an email was typed; kid name and game-chip fields were not exercised |
+| M3 | No new third-party host requested | Host set, branch minus main | `evidence/sentry-a/classq/branch-d18-utm.json` (`hosts`), `evidence/sentry-a/classq/main-d18-utm.json` | PASS | Sentry A produced; Auditor computed the diff | Auditor set difference over `hosts.hosts` for 9 scenarios: branch minus main empty, main minus branch empty. Hosts seen: localhost, fonts.googleapis.com, fonts.gstatic.com and the three stubbed tag hosts |
 
 ## E. Non-regression
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| N1 | Pixel parity with main, clone relationship | Pixel diff report; Steward verdict | | | | Judge: Steward |
-| N2 | Existing tests pass, failures match main | `npm test`, `npm run test:s1` outputs diffed | | | | Baseline main first (no env) |
-| N3 | Build, tsc clean, console clean | Build and tsc output; per-variant console log | | | | |
-| N4 | Protected surfaces unchanged | Diff stat; landing hunk hash | | | | Needs R-PROT |
-| N5 | Desktop behavior unchanged | Computed styles and shots at 960, 1280, 1440 | | | | |
-| N6 | Redirects, noindex, canonical, QA gate unchanged | `curl -sI` on dev vs main | | | | |
-| N7 | Accessibility tree unchanged (proposed) | Tree diff at 412 | | | | Optional |
-| N8 | Breakpoint boundary 959 and 960 (proposed) | Computed hero box at both widths | | | | Optional |
+| N1 | Pixel parity with main, clone relationship | Pixel diff report; Steward verdict | `evidence/atlas/self-test.md` § 3, `steward-review.md` § 1, `screenshots/` | PARTIAL | Atlas (66 pairs); Steward (N1b PASS) | N1b PASS on 16 key pairs by eye plus own diffs. N1a: 66 initial-state pairs (d1 to d21, noad at 360, 412, 1440): 63 at 0.0000% and 3 flagged on first pass (d4 412 0.0405%, d5 412 0.1126%, d13 360 0.0542%) that read 0 on re-run; control main vs main also flagged 2 of 44. Only the initial and email states ran (hero tapped, FAQ open, error state did not). Pixel diff not re-run after D24 (`evidence/atlas/rework-d24.md`: unchanged by construction). Auditor `md5sum`: all 16 committed pairs are byte-identical, so Steward E-1 and E-2 are corrected |
+| N2 | Existing tests pass, failures match main | `npm test`, `npm run test:s1` diffed | `evidence/atlas/rework-d24.md`, `evidence/relay/hotfix-m1.md`, `evidence/atlas/self-test.md` | PARTIAL | Atlas; Relay (authors) | Main baseline 575 tests, 574 pass, 1 skipped (`hotfix-m1.md`, `02-frozen-spec.md` § 2). Branch at `93d9cfd` plus D24: 589 tests, 588 pass, 1 skipped, 0 fail; harness suite 5 of 5. `test:s1` scope 485 pass (`hotfix-m1.md`). No lane re-ran `npm test` on the shipped tip `bfc0eeb` or `19b9963`; Sentry briefs excluded it |
+| N3 | Build, tsc clean, console clean | Build and tsc output; per-variant console log | `evidence/sentry-a/tsc.txt`, `evidence/sentry-a/build-75473a2.log`, `evidence/sentry-a/classq/branch-console.json`, `evidence/sentry-b/console-sweep.json` | PASS | Sentry A (local); Sentry B (dev) | `tsc --noEmit` exit 0, no output. Local: 22 variant loads, 0 page errors, 0 console errors or warnings, 0 failed requests, `s1Ready` = 1. Dev: 22 rows, HTTP 200, marker `91f5503`, 0 console errors, 0 page errors, 0 failed requests |
+| N4 | Protected surfaces unchanged | Diff stat; landing hunk hash | `evidence/sentry-a/n4-stat.txt`, `evidence/sentry-a/n4-hash.txt`, `evidence/sentry-a/n4-hash.mjs` | PASS | Sentry A | Protected-path diff vs `45dfe97`: `app/season1/join/signup/signup.html` +3 -1 (M-1 and D20) and `lib/season1/__tests__/signupCommit.test.ts` +38, nothing under `app/api`. `landing.html`: IMG paths and `AD_HERO` equal; differences are the listed head, noscript, `window.S1`, sentinel, `fitHero` and fetch-timeout hunks. The check is a listed-difference comparison, not a single equal hash. `app/season1/route.ts` also changed (build marker, outside R-PROT) |
+| N5 | Desktop behavior unchanged | Computed styles and shots at 960, 1280, 1440 | `evidence/atlas/self-test.md` § 3, `screenshots/` | PARTIAL | Atlas; Steward | 1440 pixel pairs byte-identical for d18, d19, d2, noad (initial and email). Computed `#hero` height at 960 and 1024, and screenshots at those widths, were not produced |
+| N6 | Redirects, noindex, canonical, QA gate unchanged | `curl -sI` on dev vs main | `evidence/sentry-b/headers/n6/`, `evidence/sentry-b/results.md` § 3 | PASS | Sentry B | Status identical on 8 paths; `/ekuzo-camps` and `/camps` 308 to `/programs/ekuzo-camps` on both. One difference, `/season1/join` `x-robots-tag: noindex` on dev only, is host-gated by design (`app/season1/join/route.ts` lines 30 and 39); no diff to that route since `45dfe97` |
+| N7 | Accessibility tree unchanged (proposed) | Tree diff at 412 | none | UNEVIDENCED | none (Sentry B listed it as other lane's) | Optional requirement; no lane ran it |
+| N8 | Breakpoint boundary 959 and 960 (proposed) | Computed hero box at both widths | none | UNEVIDENCED | none | Optional requirement; no lane ran it |
 
 ## F. Evaluation
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| E1 | Money red team reads paths end to end | File exists; columns; file:line; confidence | | | | Quality judged by Fable |
-| E2 | Users, trust, privacy red team | Same structure check | | | | |
-| E3 | Operations and failure red team | Same structure check | | | | |
-| E4 | Ranked findings table, questions only if money | One table; evidence paths exist | | | | Only sign-up or payment items go to Jamie |
+| E1 | Money red team reads paths end to end | File exists; columns; file:line; confidence | `redteam-money.md` | PASS | Auditor structure check (table at the end); ranking judged by Fable | 14 findings (M-1 to M-14), all cells filled |
+| E2 | Users, trust, privacy red team | Same structure check | `redteam-users.md` | PARTIAL | Auditor structure check; ranking judged by Fable | 19 findings (U-1 to U-19); the findings table has no "who acts" column for any row. U-6 gives a requirements reference instead of file:line |
+| E3 | Operations and failure red team | Same structure check | `redteam-ops.md` | PARTIAL | Auditor structure check; ranking judged by Fable | 16 findings (O-1 to O-16); all cells filled, but seven "Where" cells give no file:line or command (O-5, O-6, O-8, O-9, O-12, O-13, O-15) |
+| E4 | Ranked findings table, questions only if money | One table; evidence paths exist | `06-findings-ranked.md` | PARTIAL | Auditor path check | Three questions for Jamie (M-2, M-3, O-12), all payment or sign-up related. Every backtick path in the file was tested with `test -f`: all exist (some are written as short forms, for example `main-baseline/table.md` for `evidence/vitals/main-baseline/table.md`) except `probe-3declines.out.json`, cited in row 1 and in `steward-review.md` § 2, which is not in the repo (scratchpad only). The M-1 row still has `redteam-money.md` and `evidence/relay/hotfix-m1.md` behind it |
 
 ## G. Journeys
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| J1 | FB in-app d18 ad tap to thanks | Request log ends at `/season1/thanks` | | | | Writes: cleanup ledger |
-| J2 | Instagram in-app d19 same journey | Same | | | | |
-| J3 | Second visit, cold cache, same numbers | Two-visit comparison with band | | | | Band pending Fable |
-| J4 | No `?ad=` and unknown `?ad=zz` | Runs vs main behavior | | | | |
-| J5 | `?hero=games` and `?ad=d10` both reserved | Runs with random stubbed both ways | | | | |
-| J6 | Link out matches landing page promise | Screenshots; Parent note | | | | Judge: Parent |
-| J7 | Stripe return in in-app browser | Test mode run or human list | | | | Default HC5 |
-| J8 | Scroll with toolbar collapse (proposed) | Harness run, viewport resize | | | | |
-| J9 | Return visit keeps attribution (proposed) | Second session submit, `ad` equals first | | | | |
-| J10 | Back, forward, background resume (proposed) | No duplicate `page_view`, no shift | | | | |
-| J11 | Landing to join to jersey carries ad (proposed) | Param and cookie checks per page | | | | |
+| J1 | FB in-app d18 ad tap to thanks | Request log ends at `/season1/thanks` | `evidence/sentry-a/classq/branch-d18-utm.json`, `evidence/sentry-a/classq/compare.json`, `parent-review.md` § 5 | PARTIAL | Sentry A (local, stubbed POST); Parent | Dev submit not run (D11). Local: d18 with UTMs and `fbclid` reaches the in-page confirmation with the POST stubbed; the landing page has no link to `/season1/thanks` (Parent § 5), so "ends at thanks" is not a path the landing page offers |
+| J2 | Instagram in-app d19 same journey | Same | `evidence/sentry-a/classq/branch-d19-utm.json` | PARTIAL | Sentry A | Same as J1, d19; ig-android-412 harness cells cover load and journey but not a submit |
+| J3 | Second visit, cold cache, same numbers | Two-visit comparison with band | none | UNEVIDENCED | none | No file reports a second cold-cache visit comparison. Band was pending Fable |
+| J4 | No `?ad=` and unknown `?ad=zz` | Runs vs main behavior | `evidence/sentry-a/classq/compare.json`, `evidence/sentry-a/classq/branch-adzz.json`, `evidence/sentry-a/classq/branch-noad.json` | PASS | Sentry A | `noad` and `?ad=zz` beacon and POST lists equal main; `?ad=zz` preloads one image like `noad` (`branch-head.json`) |
+| J5 | `?hero=games` and `?ad=d10` both reserved | Runs with random stubbed both ways | `evidence/sentry-a/classq/branch-hero-games-r0.json`, `evidence/sentry-a/classq/branch-d10-r99.json` | PARTIAL | Sentry A | Equality with main at random 0 and 0.99 for both. No file asserts the reserved box for the two heroes |
+| J6 | Link out matches landing page promise | Screenshots; Parent note | `parent-review.md` § 5 | PASS | Parent | Landing has no link to join or thanks; only the footer link to ekuzo.gg. The Parent's mismatches (free jersey, price, "weekly") are in `05-defect-log.md` as P-1 to P-12 |
+| J7 | Stripe return in in-app browser | Test mode run or human list | none | PENDING (HC5, Jamie) | | Default per requirement; no test-mode run |
+| J8 | Scroll with toolbar collapse (proposed) | Harness run, viewport resize | `evidence/vitals/branch2-tier1/table.md` | PASS | Sentry A | Default journey includes the 56 then 110 px collapse. d18 and d19 windowed 0.0035 and 0.0015, "+input" max 0.0066. d2 "+input" 0.1195 on main and branch alike (Chronos finding 2) |
+| J9 | Return visit keeps attribution (proposed) | Second session submit, `ad` equals first | `evidence/sentry-a/classq/main-d18-utm.json` (`j9`), `evidence/sentry-a/classq/branch-d18-utm.json`, `evidence/sentry-a/classq/compare.json` | FAIL | Sentry A | Second page, no `?ad=`, posts `ad` = `d1`; first visit posted `d18`. Identical on main and branch, so not a regression. The landing derives `ad` only from the URL; the `ekuzo_lc` cookie header carries attribution server-side. Awaiting Fable's ruling (D27) |
+| J10 | Back, forward, background resume (proposed) | No duplicate `page_view`, no shift | `evidence/sentry-a/classq/branch-j10.json`, `evidence/sentry-a/classq/main-j10.json` | PARTIAL | Sentry A | Visibility hidden/visible: no new dataLayer entries, 0 hero shifts, `ad` and UTMs still in the next POST, equal main vs branch. Headless Chromium reloaded on back, so bfcache was not exercised |
+| J11 | Landing to join to jersey carries ad (proposed) | Param and cookie checks per page | none | UNEVIDENCED | none | No file tests the landing-to-join-to-jersey chain. N4 shows the join pages have no diff vs main (only the M-1 hotfix lines in `signup.html`) |
 
 ## H. Must-not cases
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| X1 | Preload only the chosen ad's hero | Image request list per ad | | | | |
-| X2 | Fonts render identically once loaded | Covered by N1 | | | | Merge into N1 |
-| X3 | No fallback font after fonts ready | `document.fonts.check`; computed family | | | | |
-| X4 | No analytics hit from lab runs | Blocked log; zero connections | | | | See H6 |
-| X5 | No new request to unseen hosts | Same as M3 | | | | Merge into M3 |
-| X6 | No reserved box on desktop widths | Computed hero height at 960 and above | | | | |
-| X7 | `form_start` only on real click | Touch matrix log | | | | Add scroll-start, paste, autofill, retry |
-| X8 | Waitlist POST and Klaviyo payload unchanged | POST body diff main vs branch; N4 | | | | |
-| X9 | `hero_view` not on load, restore, resize (proposed) | Beacon log | | | | |
-| X10 | `hero_answer` and `hero_skip` only on tap (proposed) | Touch matrix | | | | |
-| X11 | `generate_lead` and `Lead` not on failure (proposed) | 429, double tap, retry cases | | | | |
-| X12 | `cta_click`, `text_karlin_start`, `faq_open` guarded (proposed) | Touch matrix | | | | |
-| X13 | `signup_error` not on load, blur, autofill (proposed) | Beacon log | | | | |
-| X14 | Interaction matrix applied to every event (proposed) | Matrix log | | | | |
-| X15 | Capture of `ad`, UTMs, `fbclid` unchanged order (proposed) | Cookie and POST checks | | | | |
-| X16 | Only disposable identities written (proposed) | Cleanup ledger vs request log | | | | |
+| X1 | Preload only the chosen ad's hero | Image request list per ad | `evidence/sentry-a/classq/branch-head.json`, `evidence/sentry-b/console-sweep.json` | PASS | Sentry A (local sample); Sentry B (dev, all 22) | Local: d1, d2, d10, d18, d19, d21, noad, zz exactly one image link with `fetchpriority=high`; d4 none. Dev sweep covers d1 to d21 and noad, one preload each (d4, d5, d9 none, text-led heroes). Covers d11 and d20, which Sentry A did not sample |
+| X2 | Fonts render identically once loaded | Covered by N1 | `01-requirements.md` (N1a "Covers former X2") | N/A (merged into N1) | | See N1 |
+| X3 | No fallback font after fonts ready | `document.fonts.check`; computed family | `evidence/sentry-a/classq/branch-x3.json`, `evidence/sentry-a/classq/main-x3.json` | PASS | Sentry A | `fonts.check` true for every family used on d18, d19, d2; computed family and weight equal main; loaded faces 4, 6, 6 on both |
+| X4 | No analytics hit from lab runs | Blocked log; zero connections | `evidence/vitals/branch2-tier1/blocked.json`, `evidence/vitals/dev-tier1/blocked.json` | PASS | Chronos (guard); Sentry A and B | 0 leaks, 0 POSTs, 0 analytics attempts in the Tier 1 and dev cells. See X16 for the one Class Q slip (SA-2) |
+| X5 | No new request to unseen hosts | Same as M3 | `01-requirements.md` (M3 "covers former X5") | N/A (merged into M3) | | See M3 |
+| X6 | No reserved box on desktop widths | Computed hero height at 960 and above | `evidence/atlas/self-test.md` § 3 | PARTIAL | Atlas | Same gap as N5: 1440 pixel pairs equal, no computed height at 960 and 1024 |
+| X7 | `form_start` only on real click | Touch matrix log | `evidence/sentry-a/classq/branch-x-gestures.json`, `evidence/sentry-a/classq/main-x-gestures.json` | PASS | Sentry A | `form_start` only on tap and typing, not on paste, autofill, programmatic focus or scroll gesture; equal main vs branch (41 gesture cells) |
+| X8 | Waitlist POST and Klaviyo payload unchanged | POST body diff main vs branch; N4 | `evidence/sentry-a/classq/compare.json`, `evidence/sentry-a/n4-stat.txt` | PASS | Sentry A | POST bodies equal in 9 scenarios; no diff under `app/api`. The Klaviyo payload itself is server-side and not observed |
+| X9 | `hero_view` not on load, restore, resize (proposed) | Beacon log | `evidence/sentry-a/classq/compare.json`, `evidence/sentry-a/classq/branch-j10.json` | PARTIAL | Sentry A | Equal beacon lists and no new entries after visibility cycle; Sentry A states `hero_view` timing was not separately exercised. bfcache restore not exercised |
+| X10 | `hero_answer`, `hero_skip` only on tap (proposed) | Touch matrix | `evidence/sentry-a/classq/branch-x-gestures.json` | PASS | Sentry A | Equality with main across the gesture cells including raw touch scroll starting on the answer |
+| X11 | `generate_lead`, `Lead` not on failure (proposed) | 429, double tap, retry cases | `evidence/sentry-a/classq/branch-x11.json`, `evidence/sentry-a/classq/main-x11.json` | PASS | Sentry A | 429 then 200: error shown, no Lead on the 429, one `generate_lead` and one Pixel `Lead` after the 200, one event id; double tap one POST and one Lead; equal main |
+| X12 | `cta_click`, `text_karlin_start`, `faq_open` guarded (proposed) | Touch matrix | `evidence/sentry-a/classq/branch-x-gestures.json` | PARTIAL | Sentry A | `faq_open` and Text Karlin cells equal main. No CTA button was tappable at load on d18 or d2, so `cta_click` cells are empty on both servers |
+| X13 | `signup_error` not on load, blur, autofill (proposed) | Beacon log | `evidence/sentry-a/classq/branch-x-gestures.json` | PASS | Sentry A | Equality with main in the gesture matrix (no `signup_error` from load, blur or autofill on either side) |
+| X14 | Interaction matrix applied to every event (proposed) | Matrix log | `evidence/sentry-a/classq/branch-x-gestures.json`, `evidence/sentry-a/classq/branch-x.log` | PARTIAL | Sentry A | 41 cells equal main; the CTA row is empty (see X12) |
+| X15 | Capture of `ad`, UTMs, `fbclid` unchanged order (proposed) | Cookie and POST checks | `evidence/sentry-a/classq/branch-d18-utm.json` (`after.timeline`), `evidence/sentry-a/classq/main-d18-utm.json` | PASS | Sentry A | Event order identical to main: `s1_qa` cookie, dataLayer js, consent, set (`page_location` carries UTMs and `fbclid`), config, fbq init and PageView, then the attribution writes |
+| X16 | Only disposable identities written (proposed) | Cleanup ledger vs request log | `06-cleanup-ledger.md`, `evidence/sentry-a/defects.md` (SA-2), `evidence/sentry-a/classq-leak-run/` | FAIL | Relay (ledger); Sentry A (disclosed) | No sign-up, Klaviyo or Stripe write happened. The Clarity tag reached its real hosts from `localhost:3101` in Sentry A's first Class Q run (about 9 short sessions, SA-2), which is a test touching production analytics data. Ledgered, cause fixed, kept runs report 0 offenders; cleanup row is open (Clarity has no per-session delete; exclude host `localhost:3101` from the 11-10 readout) |
+| X17 | Small script failure keeps fallback render | Failure profile runs | `evidence/vitals/branch2-failures/table.md`, `evidence/sentry-a/results.md`, `evidence/vitals/failures-main.md` | PASS | Sentry A (branch); Chronos (main) | N=1 on d18 and d19 only (asked N=2; d2, noad and `fonts-slow` 20 s not run). fonts-blocked and hero-404 harmless; fonts-slow-8s FCP 8.6 s (main 8.9 to 9.0 s); small-script-throws reproduces main's W4 jump (0.7037 on d18 flagged `hadRecentInput`, so windowed reads 0.0035; main windowed 0.36 med, 0.7072 max); big-script-fails forms dead as on main. No branch-only degradation |
 
 ## I. Process gates
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| P1 | Auditor sign-off on requirements | `auditor-phase1.md` verdict | `auditor-phase1.md` | | | Verdict: sign-off with changes |
-| P2 | Three red teams before freeze | Three files; decision-log rows | | | | |
-| P3 | Screenshots, test output, one file per lane | `ls`; ledger rows; lane files | | | | |
-| P4 | Servers by PID; guard hook before phase 4 | Hook grep; `ss -ltnp` after each lane | | | | `.claude/settings.json` must be created |
-| P5 | Terminal artifacts embed git evidence | `git status --porcelain`, `git log --oneline -3` pasted | | | | |
-| P6 | Live means live on ekuzo.gg | `curl` ekuzo.gg; `git ls-remote origin refs/heads/main` | | | | Allowed end state: pending Jamie's push |
-| P7 | Guard script copied and registered (proposed) | Settings grep | | | | |
+| P1 | Auditor sign-off on requirements | `auditor-phase1.md` verdict | `auditor-phase1.md` | PASS | Auditor; Fable applied the changes | Verdict: sign-off with changes; applied in `01-requirements.md` v2 |
+| P2 | Three red teams before freeze | Three files; decision-log rows | `redteam-money.md`, `redteam-users.md`, `redteam-ops.md`, `02-frozen-spec.md` § 4, `03-decision-log.md` | PASS | Fable | Resolutions of every M, U and O finding are in the frozen spec § 4; the decision log points to it |
+| P3 | Screenshots, test output, one file per lane | `ls`; ledger rows; lane files | `screenshots/` (32 PNGs), lane table above | PASS | Auditor | Lane file names differ from the skeleton (no `results.md` per lane for Chronos, Atlas, Relay; `parent-review.md` and `steward-review.md` at top level); mapped in the lanes table |
+| P4 | Servers by PID; guard hook before phase 4 | Hook grep; `ss -ltnp` after each lane | `.claude/settings.json`, `scripts/guard-pattern-kill.sh`, `evidence/chronos/self-test.md`, `evidence/atlas/self-test.md` § 2, `parent-review.md` (server line), `steward-review.md` (runbook note) | PARTIAL | Relay (hook); Chronos, Atlas, Parent, Steward (own servers) | Hook: `.claude/settings.json` line 6 `bash scripts/guard-pattern-kill.sh`, script present. `ss` is not installed in the container; Chronos used `fuser` and `/proc/net/tcp` and reported no leftover listeners at 13:13 CT. Atlas, Steward and Parent each found a surviving `next-server` child after `kill` of the saved PID and killed it by PID. No committed file states the final listener state for Sentry A or Sentry B (Sentry B says it started no server and checked Chromium through `/proc`, but the hand-back is not in the repo) |
+| P5 | Terminal artifacts embed git evidence | `git status --porcelain`, `git log --oneline -3` pasted | none | UNEVIDENCED | none | `grep` for `porcelain` and `git log --oneline` over `evidence/` finds no lane file with the pasted output |
+| P6 | Live means live on ekuzo.gg | `curl` ekuzo.gg; `git ls-remote origin refs/heads/main` | `evidence/fable/live/season1.html`, `evidence/fable/live/season1_ad_d18.html`, `evidence/fable/live/season1_ad_d19.html`, `evidence/fable/live/headers.txt`, `06-cleanup-ledger.md` | PASS | Fable (probe at 15:23 CT); Auditor re-read the bodies and ran `git ls-remote` | All three saved live bodies carry `<meta name="s1-build" content="19b9963">`. `git ls-remote origin refs/heads/main` returns `19b9963dc04c23cf6395c7e2fb4372745e0898cc`. The sha256 comparison with a local build of the same commit (OR8) is not among the saved files |
+| P7 | Guard script copied and registered (proposed) | Settings grep | `.claude/settings.json` | PASS | Relay; Auditor grep | Line 6, matcher `Bash` on `PreToolUse` per `evidence/relay/preflight.md` § 5 |
 
 ## J. Proposed IDs awaiting Fable (from the phase 1 review)
 
 | ID | Requirement (8 words) | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|---|
-| R-PROT | Protected surfaces enumerated, landing hunk rule | Diff stat and template hash | | | | |
-| R-VIS | Clone reference is main 45dfe97 build | Reference build exists on port 3101 | | | | |
-| R-RUNCLASS | Class T and Class Q run definitions | Run metadata field per run | | | | |
-| D1 | Dev deploy equals local branch build | Landing hash after fill | | | | |
-| D2 | Only this build's commits proposed for main | `git log origin/main..branch`; diff stat | | | | |
-| D3 | Port plan, PIDs, no leftover listeners | `ss -ltnp` after each lane | | | | |
-| D4 | Cleanup ledger for every test write | Ledger rows vs request log | | | | |
-| HC1 | Jamie S25 Instagram in-app d19 check | Screenshot or recording | | human-pending | | Gates release to main |
-| HC2 | Jamie S25 Facebook in-app d18 check | Screenshot or recording | | human-pending | | |
-| HC3 | Aaron iPhone Safari check | Screenshot or recording | | human-pending | | Gates release to main |
-| HC4 | Test Events and DebugView confirmation | Screenshots | | human-pending | | |
-| HC5 | Stripe return in in-app browser | Human checklist | | human-pending | | |
+| R-PROT | Protected surfaces enumerated, landing hunk rule | Diff stat and template hash | `evidence/sentry-a/n4-stat.txt`, `evidence/sentry-a/n4-hash.txt` | PASS | Sentry A | See N4 |
+| R-VIS | Clone reference is main 45dfe97 build | Reference build exists on port 3101 | `evidence/vitals/main-baseline/manifest.json`, `evidence/sentry-a/block1.log` | PASS | Chronos (build); Sentry A (used it) | Sentry A kept main on 3101 throughout (`interim2.md`); Atlas's pixel reference was a second copy on 3103 |
+| R-RUNCLASS | Class T and Class Q run definitions | Run metadata field per run | `evidence/vitals/branch2-d8/keep-fb-android-412-d8-run1.json` (`meta`), `evidence/sentry-a/classq/branch-d18-utm.json` | PARTIAL | Chronos; Sentry A | Class T is evident from `blocked.json` per label; `meta` carries no explicit run-class field, and Class Q runs are identified by file name. The first Class Q run broke the class definition (SA-2) and was discarded |
+| D1 | Dev deploy equals local branch build | Landing hash after fill | `evidence/sentry-b/results.md` § 2, `evidence/sentry-b/bodies/landing-75473a2.html`, `evidence/sentry-b/bodies/season1.html` | PASS | Sentry B (against Atlas and Relay output) | `diff` shows exactly two hunks (build marker, `{{TAGS}}` fill); 4 bodies share one sha256; `git diff --quiet 75473a2 4d09e90 -- app lib` clean. The hash was reconstructed by diff and tag-id check, not through `lib/season1/tags.ts` |
+| D2 | Only this build's commits proposed for main | `git log origin/main..branch`; diff stat | `evidence/relay/dev-integration-runbook.md`, `06-cleanup-ledger.md` (15:21 row) | PARTIAL | Relay; Fable (push) | The runbook proves the dev merge touched only dev-only paths and lists the stop checks for roadshow files. Main moved 45dfe97 to 19b9963 with 47 commits; no file records the `git diff origin/main <ship-ref> --stat` roadshow check run at push time |
+| D3 | Port plan, PIDs, no leftover listeners | `ss -ltnp` after each lane | same files as P4 | PARTIAL | as P4 | As P4 |
+| D4 | Cleanup ledger for every test write | Ledger rows vs request log | `06-cleanup-ledger.md` | PASS | Relay; Fable | Rows: two dev pushes (13:42, 13:55), the Clarity leak (about 14:30, open), the main push (15:21). No Klaviyo, Stripe or Neon writes. See X16 for the open cleanup item |
+| HC1 | Jamie S25 Instagram in-app d19 check | Screenshot or recording | none | PENDING (Jamie: phone check on the live d19 link; now the first check after the main push per D21) | | |
+| HC2 | Jamie S25 Facebook in-app d18 check | Screenshot or recording | none | PENDING (Jamie: S25 Facebook in-app, d18, after HC1) | | |
+| HC3 | Aaron iPhone Safari check | Screenshot or recording | none | PENDING (Aaron: iPhone Safari and Instagram in-app, d18, d19, d2; follows the push per D21) | | WebKit has no layout-shift API here |
+| HC4 | Test Events and DebugView confirmation | Screenshots | none | PENDING (Jamie or Relay; optional per D11) | | |
+| HC5 | Stripe return in in-app browser | Human checklist | none | PENDING (Jamie: Stripe return check, J7) | | |
 
 ## K. Phase-4 gate rows (from build-loop.md)
 
 | Gate | Test | Evidence path | Result | Verified by | Notes |
 |---|---|---|---|---|---|
-| Visual-parity (side-by-side at 1440 and 375/412, key states) | Pair files in `screenshots/`; Steward verdict | | | | |
-| Browser-truth (console clean per page) | Console log per variant | | | | |
-| Fail-closed analytics (guard recorded before functional tests) | `blocked.json` before first functional run | | | | |
-| Touch-scroll case | Scroll gesture starting on each element | | | | |
-| Real-device | HC1 to HC5 | | | | |
-| Redirects on the deploy | `curl -sI` on dev | | | | |
-| Fresh-eyes Parent follows a link out | Parent note, J6 | | | | |
-| Cancelled-agent check (principle 10) | `ss -ltnp`, process list, file move log | | | | |
-| Secret scan before push (principle 11) | Scan output over branch diff | | | | |
+| Visual-parity (side-by-side at 1440 and 375/412, key states) | Pair files in `screenshots/`; Steward verdict | `screenshots/`, `steward-review.md` § 1 | PARTIAL | Atlas; Steward | See N1: key states d18, d19, d2, noad at 412 and 1440 (initial, email); 360 width pairs were not committed to `screenshots/` |
+| Browser-truth (console clean per page) | Console log per variant | `evidence/sentry-a/classq/branch-console.json`, `evidence/sentry-b/console-sweep.json` | PASS | Sentry A; Sentry B | 22 variants each, 0 errors |
+| Fail-closed analytics (guard recorded before functional tests) | `blocked.json` before first functional run | `evidence/vitals/live-before/blocked.json`, `evidence/vitals/branch2-tier1/blocked.json` | PASS | Chronos | Guard is built into the harness from the first request (`evidence/chronos/self-test.md`); exit codes 2, 3, 4, 5 tested for marker, POST and leak |
+| Touch-scroll case | Scroll gesture starting on each element | `evidence/sentry-a/classq/branch-x-gestures.json` | PARTIAL | Sentry A | Raw touch scroll starting on email field, hero answer, FAQ, Text Karlin; CTA cells empty |
+| Real-device | HC1 to HC5 | see HC rows | PENDING (Jamie, Aaron) | | |
+| Redirects on the deploy | `curl -sI` on dev | `evidence/sentry-b/headers/n6/` | PASS | Sentry B | See N6 |
+| Fresh-eyes Parent follows a link out | Parent note, J6 | `parent-review.md` | PASS | Parent | See J6 |
+| Cancelled-agent check (principle 10) | `ss -ltnp`, process list, file move log | see P4 | PARTIAL | as P4 | No file states a cancelled-agent check for the whole run |
+| Secret scan before push (principle 11) | Scan output over branch diff | none | UNEVIDENCED | none | No scan output exists in the repo, and main was pushed at 15:21 CT (`06-cleanup-ledger.md`) |
+
+## Coverage
+
+What ran. The harness (Chronos) reproduced the pre-fix field failure on `3433a5b` (5 of 5 at 0.6776 and 0.6133) and the main baseline; Sentry A ran Tier 1 on `75473a2` at N=5, Tier 2 at N=1, Tier 3 at N=3, failure profiles at N=1 on d18 and d19, and nine Class Q scenarios against main and branch; Sentry B ran the dev deploy at `91f5503` (marker, body equality, N6 on eight paths, 22-variant console sweep, Tier 1 at N=5 on fb-android-412, N=2 on fb-android-360 and ig-android-412, L2 on the network); Atlas ran 66 initial-state pixel pairs and the Steward and Parent reviewed the rendered result; Fable recorded the live marker `19b9963` and `git ls-remote` agrees.
+
+What did not run, and why. From the Sentry lists: S1c (images blocked) and the Tier 2 dev cells (not in the briefs); Tier 2 at N=3 and failure profiles at N=2 (time); fb-360 and ig-412 on `75473a2`, S3 and the cssdelay run on `75473a2` (they ran on `2b9bc16`); `mid` network; L4's per-image table, L7 by a harness table, N7, N8, N5 at 960 and 1024 (no lane assigned); J3, J11, M1e (no lane delivered); a dev submit for J1, J2 and M1c (D11: no dev sign-ups); bfcache for J10 and X9 (headless Chromium reloads); CTA gestures (the button was not tappable at load on d18 and d2). From the process rows: P5 pasted git evidence, the secret scan, and a committed listener check for Sentry A and Sentry B are missing. The live after-push harness run (H8) was replaced by Fable's two-run probes. No independent `npm test` ran on the shipped tip (N2).
+
+Counts. Rows counted: every row in sections A to K, sub-rows included (S1a-T1, S1a-T2, S1a-T3, S1b, S1c, L3a, L3b, M1a to M1e). The summary is in the hand-back and reproduced here after the final check:
+
+PASS 49, FAIL 4, PARTIAL 32, N/A 3, UNEVIDENCED 8, PENDING 7 (total 103 rows).
+
+## Structure check of E1 to E3 (Auditor)
+
+Required cells per finding: id, severity, type, effect, location (file:line or command), proposal, who acts. Checked by reading each findings table header and every row.
+
+| File | Findings | Columns present | Missing cells, by finding id | Verdict |
+|---|---|---|---|---|
+| `redteam-money.md` (E1) | 14 (M-1 to M-14) | ID, Sev, Type, Effect on sign-ups or money, Where, Proposed fix, Who acts | none | complete |
+| `redteam-users.md` (E2) | 19 (U-1 to U-19) | ID, Sev, Type, Effect on sign-ups, File:line, Proposal | "Who acts" column absent, so the cell is missing for all 19 (U-1 to U-19); U-6 location is a requirements reference (`01-requirements.md` L3, X2), not file:line | incomplete |
+| `redteam-ops.md` (E3) | 16 (O-1 to O-16) | ID, Sev, Type, Effect, Where, Proposal, Who acts | location lacks file:line or a command for O-5 (file named, no line), O-6 ("Netlify behavior; no build marker in `landing.html`"), O-8 (`package.json`, no line), O-9 (`.gitignore`, no line), O-12 ("no alert config in repo"), O-13 (requirement ids only), O-15 (requirement ids only) | incomplete |
+
+Severity vocabulary differs between files (money: major and minor; users: High, Med, Low; ops: high, medium, low); each is internally consistent. Ranking quality is Fable's to judge.
