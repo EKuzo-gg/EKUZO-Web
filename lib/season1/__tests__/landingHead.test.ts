@@ -104,6 +104,9 @@ describe("landing head bootstrap: one source for the ad tables", () => {
     // docs/s1-cls-field-2026-11/evidence/fable/preload-competition.md.
     assert.equal(S1.HERO_IMG.d19[0], S1.IMG["southie-back"]);
     assert.equal(S1.HERO_IMG.d21[0], S1.IMG["team-walk-hd"]);
+    // d11's LCP is img.jb (jersey-back): measured once, unthrottled, Atlas probe 2026-11-09
+    // (evidence/atlas/rework-d24.md). d20's pair stays template-first: no measurement separates them.
+    assert.equal(S1.HERO_IMG.d11[0], S1.IMG["jersey-back"]);
   });
 
   it("(b) every family an ad paints (T font, template CSS, module CSS, art) is in FONT_BASE + FONTS[id]", () => {
@@ -159,7 +162,7 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
     assert.deepEqual(runBoot("?ad=D019").preloads[0], [IMG["southie-back"], true]);
     assert.deepEqual(runBoot("?ad=d20").preloads, [[IMG["southie-front"], true]]);
     assert.deepEqual(runBoot("?ad=d21").preloads, [[IMG["team-walk-hd"], true]]);
-    assert.deepEqual(runBoot("?ad=d11").preloads, [[IMG["green-team"], true]]);
+    assert.deepEqual(runBoot("?ad=d11").preloads, [[IMG["jersey-back"], true]]);
   });
 
   it("no ad's bootstrap output contains more than one preload link (D24)", () => {

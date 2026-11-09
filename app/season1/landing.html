@@ -6,14 +6,14 @@
 <script>
 // Season 01 head bootstrap (s1-cls-field Slice 2). One source for the ad tables the body scripts read (AD_HERO, HERO_KEYS, IMG), then, before any stylesheet, the chosen ad's hero image preloads and a stylesheet with only the font families that ad paints.
 // The other families load async as a safety net (not all of them: a second @font-face for a family already in use sends its text back to the fallback while it reloads). Any failure here writes the all-families stylesheet as a blocking stylesheet instead, which is the page as it was; <noscript> in the body does the same without JS.
-// HERO_IMG: the ad's hero images, the LCP element first (measured on d19: img.jb, on d21: img.ph); only the first is preloaded, see D24. FONTS: families beyond FONT_BASE, from T's font, the template CSS and the module CSS. lib/season1/__tests__/landingHead.test.ts checks both against D, T and the CSS.
+// HERO_IMG: the ad's hero images, the LCP element first (measured on d19 and d11: img.jb, on d21: img.ph); only the first is preloaded, see D24. FONTS: families beyond FONT_BASE, from T's font, the template CSS and the module CSS. lib/season1/__tests__/landingHead.test.ts checks both against D, T and the CSS.
 window.S1={
  AD_HERO:{d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]},
  HERO_KEYS:["amount","games","screentime","shortlist"],
  IMG:{"boys-girls-club": "/images/season1/landing/boys-girls-club.webp", "laughing": "/images/season1/landing/laughing.webp", "team-walk": "/images/season1/landing/team-walk.webp", "hands-in": "/images/season1/landing/hands-in.webp", "coach-and-mom": "/images/season1/landing/coach-and-mom.webp", "couch": "/images/season1/landing/couch.webp", "jersey-back": "/images/season1/landing/jersey-back.webp", "green-team": "/images/season1/landing/green-team.webp", "kid-couch": "/images/season1/landing/kid-couch.webp", "mc-blocks": "/images/season1/landing/mc-blocks.webp",
   // Round 4 jersey ads (d19 to d21): photos served as files, not inlined.
   "team-walk-hd": "/images/season1/jersey/team-walk-1600.webp", "southie-back": "/images/season1/jersey/southie-back.webp", "southie-front": "/images/season1/jersey/southie-front.webp"},
- HERO_IMG:{d1:["mc-blocks"],d2:["couch"],d3:["boys-girls-club"],d4:["coach-and-mom"],d5:["laughing"],d6:["couch"],d7:["hands-in"],d8:["couch","laughing"],d9:["team-walk"],d10:["kid-couch"],d11:["green-team","jersey-back"],d12:["coach-and-mom"],d13:["kid-couch"],d14:["couch"],d15:["team-walk"],d16:["hands-in"],d17:["team-walk"],d18:["laughing"],d19:["southie-back","team-walk-hd"],d20:["southie-front","southie-back"],d21:["team-walk-hd","southie-front"]},
+ HERO_IMG:{d1:["mc-blocks"],d2:["couch"],d3:["boys-girls-club"],d4:["coach-and-mom"],d5:["laughing"],d6:["couch"],d7:["hands-in"],d8:["couch","laughing"],d9:["team-walk"],d10:["kid-couch"],d11:["jersey-back","green-team"],d12:["coach-and-mom"],d13:["kid-couch"],d14:["couch"],d15:["team-walk"],d16:["hands-in"],d17:["team-walk"],d18:["laughing"],d19:["southie-back","team-walk-hd"],d20:["southie-front","southie-back"],d21:["team-walk-hd","southie-front"]},
  FAM:["Anybody:wdth,wght@50..150,900","Archivo:wght@400;600;700","Archivo+Black","Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800","Dela+Gothic+One","Graduate","Hanken+Grotesk:wght@500;800","Inter+Tight:wght@500;700;800","JetBrains+Mono:wght@500;700","Rubik:wght@500;900","Rubik+Mono+One","Sora:wght@400;800","Space+Grotesk:wght@500;700","Syne:wght@600;800","Unbounded:wght@400;800"],
  FONT_BASE:["Inter Tight","JetBrains Mono"],
  FONTS:{d1:["Space Grotesk"],d2:["Archivo","Archivo Black"],d3:["Unbounded"],d4:["Bricolage Grotesque"],d5:[],d6:["Syne"],d7:["Anybody"],d8:["Dela Gothic One"],d9:["Rubik Mono One"],d10:["Sora"],d11:["Rubik"],d12:["Hanken Grotesk"],d13:["Sora"],d14:["Syne"],d15:["Hanken Grotesk"],d16:["Bricolage Grotesque"],d17:["Space Grotesk"],d18:[],d19:["Rubik"],d20:["Rubik"],d21:["Rubik"]}
@@ -31,8 +31,7 @@ window.S1={
     var imgs=H[id];
     if(hero && innerWidth<960) imgs = hero==="shortlist" ? [] : imgs.slice(0,1);
     imgs = imgs.slice(0,1);
-    var out="";
-    imgs.forEach(function(u,i){ out+='<link rel="preload" as="image" href="'+u+'"'+(i?"":' fetchpriority="high"')+'>'; });
+    var out=imgs.length ? '<link rel="preload" as="image" href="'+imgs[0]+'" fetchpriority="high">' : "";
     var want=S.FONT_BASE.concat(S.FONTS[id]);
     out+='<link id="s1-fonts" rel="stylesheet" href="'+CSS+S.FAM.filter(function(f){ return want.indexOf(name(f))>=0; }).join("&family=")+'&display=swap">';
     var rest=S.FAM.filter(function(f){ return want.indexOf(name(f))<0; });
