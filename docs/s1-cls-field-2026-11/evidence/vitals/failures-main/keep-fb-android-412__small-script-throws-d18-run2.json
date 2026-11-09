@@ -1,0 +1,1635 @@
+{
+ "meta": {
+  "label": "failures-main",
+  "cell": "fb-android-412__small-script-throws",
+  "profile": "fb-android-412",
+  "ad": "d18",
+  "run": 2,
+  "url": "http://localhost:3101/season1?ad=d18",
+  "target": "http://localhost:3101",
+  "ua": "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]",
+  "viewport": {
+   "width": 412,
+   "height": 915
+  },
+  "dpr": 2.625,
+  "cpu": 4,
+  "network": {
+   "name": "slow4g",
+   "conditions": {
+    "offline": false,
+    "latency": 150,
+    "downloadThroughput": 200000,
+    "uploadThroughput": 93750
+   }
+  },
+  "cdpReturns": {
+   "networkEnable": {},
+   "network": {},
+   "cpu": {}
+  },
+  "failure": "small-script-throws",
+  "failureDetail": "rewrite the HTML: a throw as the first statement inside the small script's first try block (the script that sets pa / pre-ih); runtime throw, caught by its own try/catch",
+  "rewriteApplied": "throw inside first try{ of the small script",
+  "fontDelay": 0,
+  "fontCssDelay": 0,
+  "fontScale": null,
+  "toolbar": "on",
+  "journey": "full",
+  "startedAt": "2026-11-09T18:27:17.874Z",
+  "calibMs": 220,
+  "browser": "153.0.8010.12",
+  "harnessCommit": "73dd9c5",
+  "targetCommit": "45dfe97",
+  "marker": null
+ },
+ "summary": {
+  "cell": "fb-android-412__small-script-throws",
+  "profile": "fb-android-412",
+  "ad": "d18",
+  "run": 2,
+  "failure": "small-script-throws",
+  "clsWin": 0.3609,
+  "clsWinIn": 0.3609,
+  "clsTot": 0.3611,
+  "clsTotIn": 0.3679,
+  "worstStart": 958,
+  "topSource": "section#join-top.join",
+  "firstPaint": 744,
+  "fcp": 804,
+  "lcp": 1644,
+  "lcpEl": "img.ph laughing.webp",
+  "heroImgStart": 949,
+  "heroImgEnd": 1609.5,
+  "heroImgBytes": 40694,
+  "fontsCssEnd": 662.3999999985099,
+  "lt1Start": 797.2999999988824,
+  "lt1Dur": 152,
+  "ltCount": 1,
+  "inp": 16,
+  "marker": null,
+  "s1Ready": null,
+  "s1Pre": null,
+  "heroState": "hero 495px",
+  "s2Off": 0,
+  "u6Off": [],
+  "formUsable": true,
+  "pageErrors": 0,
+  "posts": 0,
+  "analyticsAttempts": 0,
+  "leaks": 0,
+  "navError": null,
+  "journeyError": null
+ },
+ "cls": {
+  "windowed": 0.36090214161033024,
+  "windowedWithInput": 0.36090214161033024,
+  "total": 0.3611221927186206,
+  "totalWithInput": 0.3678687207566786,
+  "windows": 6,
+  "worstWindow": {
+   "start": 957.5,
+   "end": 1477.5,
+   "value": 0.36090214161033024,
+   "count": 2
+  }
+ },
+ "shifts": [
+  {
+   "startTime": 957.5,
+   "value": 0.3574469750536838,
+   "hadRecentInput": false,
+   "lastInputTime": 105.19999999925494,
+   "sources": [
+    {
+     "sel": "section#join-top.join",
+     "path": "section#join-top.join",
+     "prev": [
+      8,
+      8,
+      396,
+      258
+     ],
+     "cur": [
+      8,
+      503,
+      396,
+      371
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 1477.5,
+   "value": 0.0034551665566464806,
+   "hadRecentInput": false,
+   "lastInputTime": 105.19999999925494,
+   "sources": [
+    {
+     "sel": "h3",
+     "path": "section#hero.hero > div.art.k-feed.d5 > div.in > div.col > h3",
+     "prev": [
+      32,
+      316,
+      349,
+      79
+     ],
+     "cur": [
+      32,
+      335,
+      349,
+      79
+     ]
+    },
+    {
+     "sel": "div.row",
+     "path": "section#hero.hero > div.art.k-feed.d5 > div.in > div.col > div.row",
+     "prev": [
+      32,
+      405,
+      349,
+      74
+     ],
+     "cur": [
+      32,
+      424,
+      349,
+      56
+     ]
+    },
+    {
+     "sel": "button #text",
+     "path": "section#join-top.join > div.form-wrap > form > button > #text",
+     "prev": [
+      24,
+      758,
+      364,
+      21
+     ],
+     "cur": [
+      24,
+      758,
+      364,
+      21
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 11797,
+   "value": 0.00007133985561698712,
+   "hadRecentInput": false,
+   "lastInputTime": 105.19999999925494,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      283,
+      29,
+      101,
+      34
+     ],
+     "cur": [
+      286,
+      25,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      28,
+      28,
+      90,
+      18
+     ],
+     "cur": [
+      25,
+      24,
+      89,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 11808.39999999851,
+   "value": 0.000037489271792095604,
+   "hadRecentInput": true,
+   "lastInputTime": 11807.299999998882,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 19318.699999999255,
+   "value": 0.0033663964785649717,
+   "hadRecentInput": true,
+   "lastInputTime": 19308.299999998882,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      813,
+      412,
+      46
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 19468.299999998882,
+   "value": 0.0032106064677953957,
+   "hadRecentInput": true,
+   "lastInputTime": 19453.89999999851,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      867,
+      412,
+      48
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 23531.89999999851,
+   "value": 0.000021932284967067873,
+   "hadRecentInput": false,
+   "lastInputTime": 22514.599999999627,
+   "sources": [
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header > svg.mark",
+     "prev": [
+      17,
+      13,
+      84,
+      17
+     ],
+     "cur": [
+      20,
+      17,
+      86,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 25912,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 23930.299999998882,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 25955.39999999851,
+   "value": 0.00006601790995275365,
+   "hadRecentInput": true,
+   "lastInputTime": 25899.599999999627,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      289,
+      20,
+      101,
+      34
+     ],
+     "cur": [
+      292,
+      16,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      21,
+      19,
+      87,
+      17
+     ],
+     "cur": [
+      19,
+      16,
+      86,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 28075.299999998882,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 27033.299999998882,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 30197.39999999851,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 29196.199999999255,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 30235.699999999255,
+   "value": 0.00006601790995275365,
+   "hadRecentInput": true,
+   "lastInputTime": 30180.5,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      289,
+      20,
+      101,
+      34
+     ],
+     "cur": [
+      292,
+      16,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      21,
+      19,
+      87,
+      17
+     ],
+     "cur": [
+      19,
+      16,
+      86,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 30802.099999999627,
+   "value": 0.000027656433049890026,
+   "hadRecentInput": false,
+   "lastInputTime": 30180.5,
+   "sources": [
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header > svg.mark",
+     "prev": [
+      16,
+      12,
+      84,
+      16
+     ],
+     "cur": [
+      20,
+      17,
+      86,
+      17
+     ]
+    }
+   ]
+  }
+ ],
+ "lcp": [
+  {
+   "startTime": 804,
+   "renderTime": 804,
+   "loadTime": 0,
+   "size": 24566,
+   "sel": "p",
+   "path": "section#join-top.join > div.form-wrap > p",
+   "url": ""
+  },
+  {
+   "startTime": 1644,
+   "renderTime": 1644,
+   "loadTime": 1614.7999999988824,
+   "size": 85227,
+   "sel": "img.ph",
+   "path": "section#hero.hero > div.art.k-feed.d5 > div.in > div.frame > img.ph",
+   "url": "/images/season1/landing/laughing.webp"
+  }
+ ],
+ "paint": {
+  "firstPaint": 744,
+  "fcp": 804
+ },
+ "inp": {
+  "inp": 16,
+  "interactions": 2
+ },
+ "events": [
+  {
+   "name": "click",
+   "startTime": 31780.5,
+   "duration": 16,
+   "interactionId": 2002,
+   "target": "input#em-top"
+  },
+  {
+   "name": "click",
+   "startTime": 31780.5,
+   "duration": 16,
+   "interactionId": 2002,
+   "target": "input#em-top",
+   "firstInput": true
+  },
+  {
+   "name": "keydown",
+   "startTime": 32093.89999999851,
+   "duration": 16,
+   "interactionId": 2009,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keypress",
+   "startTime": 32093.89999999851,
+   "duration": 16,
+   "interactionId": 2009,
+   "target": "input#em-top"
+  }
+ ],
+ "longTasks": [
+  {
+   "startTime": 797.2999999988824,
+   "duration": 152,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  }
+ ],
+ "fontEvents": [
+  {
+   "t": 967.0999999996275,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 1607.5,
+   "type": "loadingdone",
+   "faces": [
+    "Inter Tight 700 normal",
+    "Inter Tight 500 normal",
+    "Inter Tight 800 normal",
+    "JetBrains Mono 700 normal"
+   ]
+  }
+ ],
+ "fontFaces": [
+  {
+   "family": "Inter Tight",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "800",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "JetBrains Mono",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  }
+ ],
+ "fontsStatus": "loaded",
+ "nav": {
+  "responseStart": 19.899999998509884,
+  "responseEnd": 19.899999998509884,
+  "domInteractive": 970.2999999988824,
+  "dcl": 970.2999999988824,
+  "load": 1618.0999999996275,
+  "encodedBodySize": 132629,
+  "transferSize": 132929
+ },
+ "resources": [
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "type": "link",
+   "start": 72.39999999850988,
+   "end": 662.3999999985099,
+   "encodedBodySize": 32782,
+   "transferSize": 33082,
+   "status": 0,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/authors/karlin-oei-avatar.jpg",
+   "type": "img",
+   "start": 75,
+   "end": 311,
+   "encodedBodySize": 14196,
+   "transferSize": 14496,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/landing/laughing.webp",
+   "type": "img",
+   "start": 949,
+   "end": 1609.5,
+   "encodedBodySize": 40694,
+   "transferSize": 40994,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  }
+ ],
+ "network": [
+  {
+   "url": "http://localhost:3101/season1?ad=d18",
+   "method": "GET",
+   "type": "Document",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "text/html",
+   "contentType": "text/html; charset=utf-8",
+   "bytes": 133064,
+   "start": 1
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "method": "GET",
+   "type": "Stylesheet",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/css",
+   "contentType": "text/css; charset=utf-8",
+   "bytes": 33587,
+   "start": 72
+  },
+  {
+   "url": "http://localhost:3101/images/authors/karlin-oei-avatar.jpg",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/jpeg",
+   "contentType": "image/jpeg",
+   "bytes": 14478,
+   "start": 75
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 45694,
+   "start": 759
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwgknk-4.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 32118,
+   "start": 839
+  },
+  {
+   "url": "http://localhost:3101/images/season1/landing/laughing.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 40976,
+   "start": 949
+  },
+  {
+   "url": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/gif",
+   "contentType": "image/gif",
+   "bytes": 0,
+   "start": 34000
+  }
+ ],
+ "hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "localhost:3101"
+ ],
+ "timeline": [
+  {
+   "t": 970,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1310,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1810,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2810,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3060,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3560,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3812,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4060,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5312,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6310,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9310,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9560,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10310,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11062,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11810,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12060,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12310,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12810,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13561,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13810,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14311,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14562,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 15061,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  }
+ ],
+ "steps": [
+  {
+   "name": "journey-start",
+   "t": 11661,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "toolbar-collapsed",
+   "t": 12380,
+   "innerHeight": 805,
+   "vvHeight": 805,
+   "svh": 805
+  },
+  {
+   "name": "scroll-down",
+   "t": 12390,
+   "startedOn": "cta",
+   "y": 358
+  },
+  {
+   "name": "scroll-down",
+   "t": 13712,
+   "startedOn": "email",
+   "y": 624
+  },
+  {
+   "name": "scroll-down",
+   "t": 15082,
+   "startedOn": null,
+   "y": 1213
+  },
+  {
+   "name": "scroll-down",
+   "t": 16441,
+   "startedOn": "faq-summary",
+   "y": 1686
+  },
+  {
+   "name": "scroll-down",
+   "t": 17765,
+   "startedOn": null,
+   "y": 1779
+  },
+  {
+   "name": "bottom",
+   "t": 18473
+  },
+  {
+   "name": "toolbar-restored",
+   "t": 19836,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "scroll-up",
+   "t": 19847,
+   "y": 1298
+  },
+  {
+   "name": "scroll-up",
+   "t": 21209,
+   "y": 764
+  },
+  {
+   "name": "scroll-up",
+   "t": 22526,
+   "y": 230
+  },
+  {
+   "name": "scroll-up",
+   "t": 23944,
+   "y": 0
+  },
+  {
+   "name": "top",
+   "t": 24654
+  },
+  {
+   "name": "header-crossings",
+   "t": 31775,
+   "y": 0
+  },
+  {
+   "name": "email-typed",
+   "t": 32112,
+   "active": "em-top"
+  },
+  {
+   "name": "journey-end",
+   "t": 32929
+  }
+ ],
+ "dom": {
+  "marker": null,
+  "sentinels": {
+   "s1Ready": null,
+   "s1Pre": null
+  },
+  "state": {
+   "heroPa": false,
+   "lpPreIh": false,
+   "lpHasIhero": false,
+   "heroFilled": true,
+   "heroH": 495,
+   "ihVisible": false,
+   "ihH": 0,
+   "ctaText": "Save their spot",
+   "bodyFont": "Inter Tight",
+   "bodyFontSize": "34px",
+   "scrollHeight": 2584
+  },
+  "heroImgs": [
+   {
+    "root": "#hero",
+    "sel": "img.ph",
+    "inS2": true,
+    "src": "/images/season1/landing/laughing.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1100,
+     619
+    ],
+    "rendered": [
+     349,
+     264
+    ],
+    "renderedDevicePx": 915,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": true,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": 0,
+     "imgDh": 0
+    }
+   }
+  ],
+  "heroBg": [],
+  "s2Offenders": [],
+  "fonts": {
+   "requestedFamilies": [
+    "Anybody",
+    "Archivo",
+    "Archivo Black",
+    "Bricolage Grotesque",
+    "Dela Gothic One",
+    "Graduate",
+    "Hanken Grotesk",
+    "Inter Tight",
+    "JetBrains Mono",
+    "Rubik",
+    "Rubik Mono One",
+    "Sora",
+    "Space Grotesk",
+    "Syne",
+    "Unbounded"
+   ],
+   "stylesheetLinks": [
+    {
+     "media": "",
+     "families": 15,
+     "inHead": false
+    }
+   ],
+   "textNodes": 36,
+   "offenders": {}
+  },
+  "preloads": []
+ },
+ "form": {
+  "attempted": true,
+  "errText": "Check the email address and try again.",
+  "errVisible": true,
+  "usable": true,
+  "why": null
+ },
+ "console": [],
+ "pageErrors": [],
+ "jsErrors": [],
+ "blocked": [],
+ "posts": [],
+ "leaks": [],
+ "failureHits": [
+  "throw inside first try{ of the small script"
+ ],
+ "collectError": null
+}

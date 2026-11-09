@@ -1,0 +1,1932 @@
+{
+ "meta": {
+  "label": "failures-main",
+  "cell": "fb-android-412__small-script-throws",
+  "profile": "fb-android-412",
+  "ad": "d2",
+  "run": 1,
+  "url": "http://localhost:3101/season1?ad=d2",
+  "target": "http://localhost:3101",
+  "ua": "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]",
+  "viewport": {
+   "width": 412,
+   "height": 915
+  },
+  "dpr": 2.625,
+  "cpu": 4,
+  "network": {
+   "name": "slow4g",
+   "conditions": {
+    "offline": false,
+    "latency": 150,
+    "downloadThroughput": 200000,
+    "uploadThroughput": 93750
+   }
+  },
+  "cdpReturns": {
+   "networkEnable": {},
+   "network": {},
+   "cpu": {}
+  },
+  "failure": "small-script-throws",
+  "failureDetail": "rewrite the HTML: a throw as the first statement inside the small script's first try block (the script that sets pa / pre-ih); runtime throw, caught by its own try/catch",
+  "rewriteApplied": "throw inside first try{ of the small script",
+  "fontDelay": 0,
+  "fontCssDelay": 0,
+  "fontScale": null,
+  "toolbar": "on",
+  "journey": "full",
+  "startedAt": "2026-11-09T18:30:45.548Z",
+  "calibMs": 199,
+  "browser": "153.0.8010.12",
+  "harnessCommit": "73dd9c5",
+  "targetCommit": "45dfe97",
+  "marker": null
+ },
+ "summary": {
+  "cell": "fb-android-412__small-script-throws",
+  "profile": "fb-android-412",
+  "ad": "d2",
+  "run": 1,
+  "failure": "small-script-throws",
+  "clsWin": 0.4962,
+  "clsWinIn": 0.4962,
+  "clsTot": 0.4963,
+  "clsTotIn": 0.8189,
+  "worstStart": 931,
+  "topSource": "section.how",
+  "firstPaint": 716,
+  "fcp": 808,
+  "lcp": 2072,
+  "lcpEl": "img.ih-bg couch.webp",
+  "heroImgStart": 929.5,
+  "heroImgEnd": 2016.800000000745,
+  "heroImgBytes": 72824,
+  "fontsCssEnd": 658.6999999992549,
+  "lt1Start": 799.3000000007451,
+  "lt1Dur": 130,
+  "ltCount": 1,
+  "inp": 48,
+  "marker": null,
+  "s1Ready": null,
+  "s1Pre": null,
+  "heroState": "ihero 882px",
+  "s2Off": 0,
+  "u6Off": [],
+  "formUsable": true,
+  "pageErrors": 0,
+  "posts": 0,
+  "analyticsAttempts": 0,
+  "leaks": 0,
+  "navError": null,
+  "journeyError": null
+ },
+ "cls": {
+  "windowed": 0.4962190975909493,
+  "windowedWithInput": 0.4962190975909493,
+  "total": 0.4963182201256057,
+  "totalWithInput": 0.8188896606432177,
+  "windows": 4,
+  "worstWindow": {
+   "start": 930.9000000003725,
+   "end": 1473.199999999255,
+   "value": 0.4962190975909493,
+   "count": 2
+  }
+ },
+ "shifts": [
+  {
+   "startTime": 930.9000000003725,
+   "value": 0.4958141015438485,
+   "hadRecentInput": false,
+   "lastInputTime": 94.19999999925494,
+   "sources": [
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.has-ihero > section.how",
+     "prev": [
+      8,
+      443,
+      396,
+      472
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 1473.199999999255,
+   "value": 0.0004049960471008159,
+   "hadRecentInput": false,
+   "lastInputTime": 94.19999999925494,
+   "sources": [
+    {
+     "sel": "h1#ih-q #text",
+     "path": "h1#ih-q > #text",
+     "prev": [
+      26,
+      265,
+      360,
+      126
+     ],
+     "cur": [
+      25,
+      268,
+      361,
+      126
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 12225.199999999255,
+   "value": 0.039458859844832765,
+   "hadRecentInput": true,
+   "lastInputTime": 12216.900000000373,
+   "sources": [
+    {
+     "sel": "div.ih-opts.quotes",
+     "path": "section#ihero.ihero > div.ih-opts.quotes",
+     "prev": [
+      26,
+      373,
+      360,
+      225
+     ],
+     "cur": [
+      26,
+      328,
+      360,
+      225
+     ]
+    },
+    {
+     "sel": "section#bridge.bridge",
+     "path": "section#bridge.bridge",
+     "prev": [
+      8,
+      670,
+      396,
+      189
+     ],
+     "cur": [
+      8,
+      625,
+      396,
+      234
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      25,
+      198,
+      361,
+      126
+     ],
+     "cur": [
+      25,
+      153,
+      361,
+      126
+     ]
+    },
+    {
+     "sel": "button.ih-skip",
+     "path": "section#ihero.ihero > button.ih-skip",
+     "prev": [
+      26,
+      598,
+      242,
+      27
+     ],
+     "cur": [
+      26,
+      553,
+      242,
+      44
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      331,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      286,
+      360,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 12294.599999999627,
+   "value": 0.00009720171812375407,
+   "hadRecentInput": true,
+   "lastInputTime": 12216.900000000373,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      289,
+      20,
+      101,
+      34
+     ],
+     "cur": [
+      293,
+      15,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp.has-ihero > header.solid > svg.mark",
+     "prev": [
+      21,
+      19,
+      87,
+      17
+     ],
+     "cur": [
+      18,
+      15,
+      85,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 12368.199999999255,
+   "value": 0.04508812249916943,
+   "hadRecentInput": true,
+   "lastInputTime": 12364.699999999255,
+   "sources": [
+    {
+     "sel": "section#bridge.bridge",
+     "path": "section#bridge.bridge",
+     "prev": [
+      8,
+      575,
+      396,
+      230
+     ],
+     "cur": [
+      8,
+      532,
+      396,
+      273
+     ]
+    },
+    {
+     "sel": "div.ih-opts.quotes",
+     "path": "section#ihero.ihero > div.ih-opts.quotes",
+     "prev": [
+      26,
+      278,
+      360,
+      225
+     ],
+     "cur": [
+      26,
+      235,
+      360,
+      225
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      25,
+      103,
+      361,
+      126
+     ],
+     "cur": [
+      25,
+      60,
+      361,
+      126
+     ]
+    },
+    {
+     "sel": "button.ih-skip",
+     "path": "section#ihero.ihero > button.ih-skip",
+     "prev": [
+      26,
+      503,
+      242,
+      29
+     ],
+     "cur": [
+      26,
+      460,
+      242,
+      44
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      236,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      193,
+      360,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 19719.099999999627,
+   "value": 0.06055321652294211,
+   "hadRecentInput": true,
+   "lastInputTime": 19696.5,
+   "sources": [
+    {
+     "sel": "section.faq",
+     "path": "div#lp.lp.has-ihero > section.faq",
+     "prev": [
+      8,
+      0,
+      396,
+      385
+     ],
+     "cur": [
+      8,
+      2,
+      396,
+      426
+     ]
+    },
+    {
+     "sel": "section#join-end.join.end",
+     "path": "section#join-end.join.end",
+     "prev": [
+      8,
+      385,
+      396,
+      338
+     ],
+     "cur": [
+      8,
+      428,
+      396,
+      338
+     ]
+    },
+    {
+     "sel": "footer",
+     "path": "div#lp.lp.has-ihero > footer",
+     "prev": [
+      8,
+      723,
+      396,
+      136
+     ],
+     "cur": [
+      8,
+      766,
+      396,
+      93
+     ]
+    },
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      813,
+      412,
+      46
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.has-ihero > section.how",
+     "prev": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "cur": [
+      8,
+      0,
+      396,
+      2
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 19849.400000000373,
+   "value": 0.058950085624405874,
+   "hadRecentInput": true,
+   "lastInputTime": 19842.5,
+   "sources": [
+    {
+     "sel": "section.faq",
+     "path": "div#lp.lp.has-ihero > section.faq",
+     "prev": [
+      8,
+      92,
+      396,
+      426
+     ],
+     "cur": [
+      8,
+      137,
+      396,
+      426
+     ]
+    },
+    {
+     "sel": "section#join-end.join.end",
+     "path": "section#join-end.join.end",
+     "prev": [
+      8,
+      518,
+      396,
+      338
+     ],
+     "cur": [
+      8,
+      563,
+      396,
+      338
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.has-ihero > section.how",
+     "prev": [
+      8,
+      0,
+      396,
+      92
+     ],
+     "cur": [
+      8,
+      0,
+      396,
+      137
+     ]
+    },
+    {
+     "sel": "footer",
+     "path": "div#lp.lp.has-ihero > footer",
+     "prev": [
+      8,
+      856,
+      396,
+      59
+     ],
+     "cur": [
+      8,
+      901,
+      396,
+      14
+     ]
+    },
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      867,
+      412,
+      48
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 27538.199999999255,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 25593,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 29655,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 28661.400000000373,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 31755.199999999255,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 30775.699999999255,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 33361.59999999963,
+   "value": 0.11842395430813828,
+   "hadRecentInput": true,
+   "lastInputTime": 33340,
+   "sources": [
+    {
+     "sel": "div.ih-opts.quotes",
+     "path": "section#ihero.ihero > div.ih-opts.quotes",
+     "prev": [
+      26,
+      443,
+      360,
+      225
+     ],
+     "cur": [
+      26,
+      297,
+      360,
+      225
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      25,
+      268,
+      361,
+      126
+     ],
+     "cur": [
+      25,
+      122,
+      361,
+      126
+     ]
+    },
+    {
+     "sel": "section#bridge.bridge",
+     "path": "section#bridge.bridge",
+     "prev": [
+      8,
+      740,
+      396,
+      175
+     ],
+     "cur": [
+      8,
+      890,
+      396,
+      25
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      401,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      255,
+      360,
+      24
+     ]
+    },
+    {
+     "sel": "span.kick",
+     "path": "section#ihero.ihero > span.kick",
+     "prev": [
+      26,
+      248,
+      360,
+      16
+     ],
+     "cur": [
+      26,
+      102,
+      360,
+      16
+     ]
+    }
+   ]
+  }
+ ],
+ "lcp": [
+  {
+   "startTime": 808,
+   "renderTime": 808,
+   "loadTime": 0,
+   "size": 20605,
+   "sel": "h3#hw",
+   "path": "h3#hw",
+   "url": ""
+  },
+  {
+   "startTime": 964,
+   "renderTime": 964,
+   "loadTime": 0,
+   "size": 37728,
+   "sel": "h1#ih-q",
+   "path": "h1#ih-q",
+   "url": ""
+  },
+  {
+   "startTime": 2072,
+   "renderTime": 2072,
+   "loadTime": 2022,
+   "size": 179715,
+   "sel": "img.ih-bg",
+   "path": "section#ihero.ihero > img.ih-bg",
+   "url": "/images/season1/landing/couch.webp"
+  }
+ ],
+ "paint": {
+  "firstPaint": 716,
+  "fcp": 808
+ },
+ "inp": {
+  "inp": 48,
+  "interactions": 3
+ },
+ "events": [
+  {
+   "name": "click",
+   "startTime": 33340,
+   "duration": 48,
+   "interactionId": 8714,
+   "target": "button.ih-opt"
+  },
+  {
+   "name": "click",
+   "startTime": 33340,
+   "duration": 48,
+   "interactionId": 8714,
+   "target": "button.ih-opt",
+   "firstInput": true
+  },
+  {
+   "name": "click",
+   "startTime": 34589.800000000745,
+   "duration": 32,
+   "interactionId": 8721,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keydown",
+   "startTime": 34911.800000000745,
+   "duration": 16,
+   "interactionId": 8728,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keypress",
+   "startTime": 34911.800000000745,
+   "duration": 16,
+   "interactionId": 8728,
+   "target": "input#em-top"
+  }
+ ],
+ "longTasks": [
+  {
+   "startTime": 799.3000000007451,
+   "duration": 130,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  }
+ ],
+ "fontEvents": [
+  {
+   "t": 939.9000000003725,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 1925.9000000003725,
+   "type": "loadingdone",
+   "faces": [
+    "Archivo Black 400 normal",
+    "Inter Tight 700 normal",
+    "Inter Tight 500 normal",
+    "Inter Tight 800 normal",
+    "JetBrains Mono 700 normal",
+    "Archivo 700 normal"
+   ]
+  }
+ ],
+ "fontFaces": [
+  {
+   "family": "Archivo",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Archivo Black",
+   "weight": "400",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "800",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "JetBrains Mono",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  }
+ ],
+ "fontsStatus": "loaded",
+ "nav": {
+  "responseStart": 18,
+  "responseEnd": 18,
+  "domInteractive": 958,
+  "dcl": 958.0999999996275,
+  "load": 2026.0999999996275,
+  "encodedBodySize": 132629,
+  "transferSize": 132929
+ },
+ "resources": [
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "type": "link",
+   "start": 69.69999999925494,
+   "end": 658.6999999992549,
+   "encodedBodySize": 32782,
+   "transferSize": 33082,
+   "status": 0,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/authors/karlin-oei-avatar.jpg",
+   "type": "img",
+   "start": 70.19999999925494,
+   "end": 306.59999999962747,
+   "encodedBodySize": 14196,
+   "transferSize": 14496,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/landing/couch.webp",
+   "type": "img",
+   "start": 929.5,
+   "end": 2016.800000000745,
+   "encodedBodySize": 72824,
+   "transferSize": 73124,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  }
+ ],
+ "network": [
+  {
+   "url": "http://localhost:3101/season1?ad=d2",
+   "method": "GET",
+   "type": "Document",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "text/html",
+   "contentType": "text/html; charset=utf-8",
+   "bytes": 133064,
+   "start": 0
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "method": "GET",
+   "type": "Stylesheet",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/css",
+   "contentType": "text/css; charset=utf-8",
+   "bytes": 33587,
+   "start": 69
+  },
+  {
+   "url": "http://localhost:3101/images/authors/karlin-oei-avatar.jpg",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/jpeg",
+   "contentType": "image/jpeg",
+   "bytes": 14478,
+   "start": 70
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 45695,
+   "start": 735
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwgknk-4.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 32119,
+   "start": 735
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/archivoblack/v23/HTxqL289NzCGg4MzN6KJ7eW6CYyF_jzx13E.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 10569,
+   "start": 820
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxKsv4Rn.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 35719,
+   "start": 826
+  },
+  {
+   "url": "http://localhost:3101/images/season1/landing/couch.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 73107,
+   "start": 930
+  },
+  {
+   "url": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/gif",
+   "contentType": "image/gif",
+   "bytes": 0,
+   "start": 36801
+  }
+ ],
+ "hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "localhost:3101"
+ ],
+ "timeline": [
+  {
+   "t": 947,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1310,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 2066,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2313,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3060,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5060,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5561,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6060,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6310,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6560,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7811,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9310,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10060,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12060,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12312,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 687,
+   "ihHidden": false,
+   "joinY": 95,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 244,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12809,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 394,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 394,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13310,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 394,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 394,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 681,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 945,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14309,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 983,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14559,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 983,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14810,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 983,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 15059,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 1157,
+   "lpCls": "lp has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  }
+ ],
+ "steps": [
+  {
+   "name": "journey-start",
+   "t": 12083,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "toolbar-collapsed",
+   "t": 12825,
+   "innerHeight": 805,
+   "vvHeight": 805,
+   "svh": 805
+  },
+  {
+   "name": "scroll-down",
+   "t": 12829,
+   "startedOn": "hero-answer",
+   "y": 394
+  },
+  {
+   "name": "scroll-down",
+   "t": 14175,
+   "startedOn": null,
+   "y": 983
+  },
+  {
+   "name": "scroll-down",
+   "t": 15491,
+   "startedOn": null,
+   "y": 1572
+  },
+  {
+   "name": "scroll-down",
+   "t": 16840,
+   "startedOn": "faq-summary",
+   "y": 2105
+  },
+  {
+   "name": "scroll-down",
+   "t": 18159,
+   "startedOn": "email",
+   "y": 2193
+  },
+  {
+   "name": "bottom",
+   "t": 18863
+  },
+  {
+   "name": "toolbar-restored",
+   "t": 20225,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "scroll-up",
+   "t": 20229,
+   "y": 1725
+  },
+  {
+   "name": "scroll-up",
+   "t": 21574,
+   "y": 1191
+  },
+  {
+   "name": "scroll-up",
+   "t": 22894,
+   "y": 657
+  },
+  {
+   "name": "scroll-up",
+   "t": 24203,
+   "y": 123
+  },
+  {
+   "name": "scroll-up",
+   "t": 25606,
+   "y": 0
+  },
+  {
+   "name": "top",
+   "t": 26315
+  },
+  {
+   "name": "header-crossings",
+   "t": 33338,
+   "y": 0
+  },
+  {
+   "name": "hero-tap",
+   "t": 33370
+  },
+  {
+   "name": "email-typed",
+   "t": 34930,
+   "active": "em-top"
+  },
+  {
+   "name": "journey-end",
+   "t": 35752
+  }
+ ],
+ "dom": {
+  "marker": null,
+  "sentinels": {
+   "s1Ready": null,
+   "s1Pre": null
+  },
+  "state": {
+   "heroPa": false,
+   "lpPreIh": false,
+   "lpHasIhero": true,
+   "heroFilled": true,
+   "heroH": 0,
+   "ihVisible": true,
+   "ihH": 882,
+   "ctaText": "Count me in",
+   "bodyFont": "Inter Tight",
+   "bodyFontSize": "30px",
+   "scrollHeight": 3236
+  },
+  "heroImgs": [
+   {
+    "root": "#hero",
+    "sel": "img.ph",
+    "inS2": true,
+    "src": "/images/season1/landing/couch.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1400,
+     933
+    ],
+    "rendered": [
+     0,
+     0
+    ],
+    "renderedDevicePx": 0,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": false,
+    "reserved": null
+   },
+   {
+    "root": "#ihero",
+    "sel": "img.ih-bg",
+    "inS2": true,
+    "src": "/images/season1/landing/couch.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1400,
+     933
+    ],
+    "rendered": [
+     396,
+     547
+    ],
+    "renderedDevicePx": 1040,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": true,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": 0,
+     "imgDh": 0
+    }
+   }
+  ],
+  "heroBg": [],
+  "s2Offenders": [],
+  "fonts": {
+   "requestedFamilies": [
+    "Anybody",
+    "Archivo",
+    "Archivo Black",
+    "Bricolage Grotesque",
+    "Dela Gothic One",
+    "Graduate",
+    "Hanken Grotesk",
+    "Inter Tight",
+    "JetBrains Mono",
+    "Rubik",
+    "Rubik Mono One",
+    "Sora",
+    "Space Grotesk",
+    "Syne",
+    "Unbounded"
+   ],
+   "stylesheetLinks": [
+    {
+     "media": "",
+     "families": 15,
+     "inHead": false
+    }
+   ],
+   "textNodes": 52,
+   "offenders": {}
+  },
+  "preloads": []
+ },
+ "form": {
+  "attempted": true,
+  "errText": "Check the email address and try again.",
+  "errVisible": true,
+  "usable": true,
+  "why": null
+ },
+ "console": [],
+ "pageErrors": [],
+ "jsErrors": [],
+ "blocked": [],
+ "posts": [],
+ "leaks": [],
+ "failureHits": [
+  "throw inside first try{ of the small script"
+ ],
+ "collectError": null
+}
