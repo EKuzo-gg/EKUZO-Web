@@ -42,7 +42,7 @@ export const INIT = () => {
     }),
   );
   obs("largest-contentful-paint", (e) =>
-    fv.lcp.push({ startTime: e.startTime, renderTime: e.renderTime, loadTime: e.loadTime, size: e.size, sel: seg(e.element), path: path(e.element), url: e.url ? e.url.replace(location.origin, "") : "" }),
+    fv.lcp.push({ startTime: e.startTime, renderTime: e.renderTime, loadTime: e.loadTime, size: e.size, sel: seg(e.element), path: path(e.element), url: e.url ? (e.url.startsWith("data:") ? e.url.slice(0, 40) + "…(data URI, " + e.url.length + " chars)" : e.url.replace(location.origin, "").slice(0, 200)) : "" }),
   );
   obs("event", (e) => { if (e.interactionId) fv.ev.push({ name: e.name, startTime: e.startTime, duration: e.duration, interactionId: e.interactionId, target: seg(e.target) }); }, { durationThreshold: 16 });
   obs("first-input", (e) => fv.ev.push({ name: e.name, startTime: e.startTime, duration: e.duration, interactionId: e.interactionId || -1, target: seg(e.target), firstInput: true }));

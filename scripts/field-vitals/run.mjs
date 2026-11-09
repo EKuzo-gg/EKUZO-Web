@@ -255,7 +255,7 @@ for (const profile of profiles) {
         worstStart: c.worstWindow ? Math.round(c.worstWindow.start) : null,
         topSource: big ? big.sources.slice(0, 2).map((s) => s.sel).join(" + ") || "(no sources)" : null,
         firstPaint: m.paint?.firstPaint ?? null, fcp: m.paint?.fcp ?? null,
-        lcp: lcpFinal ? lcpFinal.startTime : null, lcpEl: lcpFinal ? lcpFinal.sel + (lcpFinal.url ? " " + lcpFinal.url.split("/").pop() : "") : null,
+        lcp: lcpFinal ? lcpFinal.startTime : null, lcpEl: lcpFinal ? lcpFinal.sel + (lcpFinal.url ? " " + (lcpFinal.url.startsWith("data:") ? "(data URI)" : lcpFinal.url.split("/").pop().slice(0, 60)) : "") : null,
         heroImgStart: hero.length ? Math.min(...hero.map((r) => r.start)) : null,
         heroImgEnd: hero.length ? Math.max(...hero.map((r) => r.end)) : null,
         heroImgBytes: hero.length ? hero.reduce((a, r) => a + (r.encodedBodySize || 0), 0) : null,
