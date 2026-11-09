@@ -33,7 +33,7 @@ Conclusion: the layout shift on d18 and d19 is fixed in the field as of the Nov 
 | Dashboard performance panel | last 3 days, 24 page views scored | 86/100; LCP 2 s good; INP 250 ms needs improvement; CLS 0 good. |
 | Entry pages | last 3 days | /season1 386, /season1/join/jersey 15, / 14, /season1/join 14, /season1/thanks 7. |
 
-## Correction (Scout, 10:50 CT): the lab did reproduce the field failure
+## Correction (Scout, 10:15 CT): the lab did reproduce the field failure
 
 The first draft of this section said the lab harness never reproduced the d18/d19 shift. That was
 wrong, and the error was Fable's: it read Round 2's "before" column (`a919b25`: d18 0, d19 0.0013)

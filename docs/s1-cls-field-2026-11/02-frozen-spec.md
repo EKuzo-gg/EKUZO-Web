@@ -1,6 +1,6 @@
 # 02 Frozen spec: Season 01 landing page, stability proof, load speed, evaluation
 
-Fable, 2026-11-09 11:45 CT. Frozen after Scout, the Auditor (SIGN-OFF WITH CHANGES, applied in
+Fable, 2026-11-09 10:25 CT. Frozen after Scout, the Auditor (SIGN-OFF WITH CHANGES, applied in
 `01-requirements.md` v2) and the three red-team lenses (`redteam-money.md`, `redteam-users.md`,
 `redteam-ops.md`). Requirement IDs are those in `01-requirements.md` v2. Later deviations need a
 logged spec change in `03-decision-log.md`.
@@ -104,7 +104,8 @@ push to `dev`. Then: Netlify build, marker check (OR7), S1b and N6 on dev. `main
 | Netlify builds | `main` -> ekuzo.gg, `dev` -> dev--ekuzo.netlify.app; `build/*` 404 | Fable curl 10:20 |
 | Production landing cache | `s-maxage=31536000`, no ETag or Last-Modified; keyed per deploy; `age` and `x-nextjs-date` disagree by 24 h | ops lens § 2 |
 | Live tags on dev | none without `?s1qa=1`; with it, production Clarity, Pixel PageView and GA4 debug load (O-5) | ops lens |
-| Dev sign-up destinations | live Klaviyo list `XGTv2F`; Meta Lead live unless `META_CAPI_USE_TEST_CODE=true` on dev; env unreadable from here (O-2, M-4) | ops and money lenses |
+| Dev sign-up destinations | live Klaviyo list `XGTv2F`; Meta Lead live unless `META_CAPI_USE_TEST_CODE=true` on dev (O-2, M-4). **Read 10:30 CT in Netlify (Jamie's browser): neither `META_CAPI_USE_TEST_CODE` nor `META_CAPI_TEST_EVENT_CODE` exists in any deploy context; `KLAVIYO_PRIVATE_API_KEY` has 5 per-context values (unread). So a dev sign-up sends a live Meta Lead. D11 stands: no dev sign-ups.** | ops and money lenses; Netlify env page |
+| Netlify credits | Team banner 10:30 CT: "over 75% of your credit allowance this month". Two builds needed tonight (dev, main). Jamie checks billing before the phone check (HA9). | Netlify UI |
 | Stripe on dev | test mode (publishable key `pk_test_`), Neon test database per the Oct ledgers; live impossible off `production` context (M, ops) | money lens live check |
 | Stripe test webhook `we_1TMYx4…` | points at dev `/api/webhooks/stripe` (legacy route); main's legacy guard arrives with the merge; Relay greps for it after merging (O-16) | ops lens |
 | Local builds | `next build` needs a placeholder `STRIPE_SECRET_KEY`; symlinked `node_modules` breaks Turbopack; real `npm ci` per worktree (in progress at freeze) | Fable |
@@ -128,6 +129,8 @@ push to `dev`. Then: Netlify build, marker check (OR7), S1b and N6 on dev. `main
   guide; created only on his OK.
 - HA8 (Jamie, decision) Privacy Policy link in the landing footer (U-9) and the `sms:` link on the
   429 number (U-11): copy-adjacent, Aaron's lane; Fable's default is yes to both this week.
+- HA9 (Jamie, before the phone check) Netlify team billing: the team banner says over 75% of the
+  month's credit allowance is used; confirm two more builds (dev, main) will run, or enable recharge.
 
 ## 4. Resolutions of red-team and Auditor findings
 

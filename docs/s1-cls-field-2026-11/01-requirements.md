@@ -1,6 +1,6 @@
 # 01 Requirements: Season 01 landing page, field-faithful stability and load speed
 
-Fable, 2026-11-09. v1 10:25 CT; v2 11:05 CT after Scout (`scout/codebase-map.md`) and the Auditor
+Fable, 2026-11-09. v1 10:05 CT; v2 10:20 CT after Scout (`scout/codebase-map.md`) and the Auditor
 (`auditor-phase1.md`, SIGN-OFF WITH CHANGES, all thirteen applied). Brief: `00-brief.md`. Field
 evidence: `00-phase0-field-truth.md` (corrected). Every requirement has an ID; the ledger
 (`04-evidence-ledger.md`) carries a row per ID. Section names no longer collide with ID prefixes.
