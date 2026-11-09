@@ -1,0 +1,19 @@
+HTTP/1.1 200 Connection Established
+
+HTTP/2 200 
+age: 0
+cache-control: private,no-store
+cache-status: "Netlify Durable"; fwd=bypass, "Netlify Edge"; fwd=miss; fwd-status=200
+content-type: text/html; charset=utf-8
+date: Mon, 09 Nov 2026 19:59:08 GMT
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+referrer-policy: origin
+server: Netlify
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Tue, 09 Nov 2027 19:59:08 GMT; Max-Age=31536000; Secure; SameSite=lax
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nf-request-id: 01M70Y97ZXFAFWTZQ379AP4J57
+x-robots-tag: noindex
+

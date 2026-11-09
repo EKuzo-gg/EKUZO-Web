@@ -1,0 +1,26 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target https://dev--ekuzo.netlify.app --ads d18,d19,d2,noad --profile fb-android-412 --runs 5 --label dev-tier1 --expectMarker 91f5503 --requireReady --noForm
+
+[vitals] dev-tier1: https://dev--ekuzo.netlify.app ads=d18,d19,d2,noad profiles=fb-android-412 runs=5 network=slow4g cpu=4x failure=none target=?
+[vitals] fb-android-412 d18 run1: CLS 0.0035 (+in 0.0066, total 0.0037) src=h3 + div.row LCP 1412 img.ph laughing.webp FCP 1240 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d18 run2: CLS 0.0035 (+in 0.0066, total 0.0037) src=h3 + div.row LCP 1380 img.ph laughing.webp FCP 1148 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d18 run3: CLS 0.0035 (+in 0.0066, total 0.0038) src=h3 + div.row LCP 1188 img.ph laughing.webp FCP 900 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d18 run4: CLS 0.0035 (+in 0.0066, total 0.0037) src=h3 + div.row LCP 1352 img.ph laughing.webp FCP 1180 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d18 run5: CLS 0.0035 (+in 0.0066, total 0.0035) src=h3 + div.row LCP 1036 img.ph laughing.webp FCP 844 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d19 run1: CLS 0.0001 (+in 0.0066, total 0.0003) src=button #text LCP 1836 img.jb southie-back.webp FCP 1124 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d19 run2: CLS 0.0001 (+in 0.0066, total 0.0002) src=button #text LCP 1728 img.jb southie-back.webp FCP 1272 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d19 run3: CLS 0.0001 (+in 0.0066, total 0.0001) src=button #text LCP 1612 img.jb southie-back.webp FCP 1324 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d19 run4: CLS 0.0001 (+in 0.0066, total 0.0002) src=button #text LCP 1872 img.jb southie-back.webp FCP 1036 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d19 run5: CLS 0.0001 (+in 0.0066, total 0.0003) src=button.mini-cta + svg.mark LCP 1576 img.jb southie-back.webp FCP 1228 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1480 img.ih-bg couch.webp FCP 1268 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 2220 img.ih-bg couch.webp FCP 1120 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1612 img.ih-bg couch.webp FCP 1380 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d2 run4: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 2172 img.ih-bg couch.webp FCP 964 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 d2 run5: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1344 img.ih-bg couch.webp FCP 796 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 noad run1: CLS 0.0003 (+in 0.0066, total 0.0004) src=span.tag LCP 2388 img.ph mc-blocks.webp FCP 1520 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 noad run2: CLS 0.0003 (+in 0.0066, total 0.0003) src=span.tag LCP 2348 img.ph mc-blocks.webp FCP 1192 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 noad run3: CLS 0.0003 (+in 0.0066, total 0.0005) src=span.tag LCP 2408 img.ph mc-blocks.webp FCP 1388 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 noad run4: CLS 0.0003 (+in 0.0066, total 0.0004) src=span.tag LCP 2468 img.ph mc-blocks.webp FCP 1300 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] fb-android-412 noad run5: CLS 0.0003 (+in 0.0066, total 0.0006) src=button.mini-cta + svg.mark LCP 2012 img.ph mc-blocks.webp FCP 676 blocked=0 posts=0 leaks=0 form=null ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/dev-tier1/table.md, manifest.json, blocked.json (20 runs in label)
