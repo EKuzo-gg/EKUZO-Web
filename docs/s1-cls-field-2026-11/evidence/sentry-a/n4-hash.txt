@@ -1,0 +1,25 @@
+IMG paths equal (set compare): true
+AD_HERO equal: true
+lines only in main: 11 only in branch: 11
+- <link rel="preconnect" href="https://fonts.googleapis.com">
+- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500
+-   const AD_HERO={d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]};
+-   const HERO_KEYS=["amount","games","screentime","shortlist"];
+-       if(pageA) document.getElementById("hero").classList.add("pa");
+-       else if(HERO_KEYS.indexOf(qh)>=0||own(AD_HERO,ad)) /* d10 (array) too: both of its heroes are interactive and end at 80svh, so the split need not be known here */ document.getElementById("lp").c
+- const IMG = {"boys-girls-club": "/images/season1/landing/boys-girls-club.webp", "laughing": "/images/season1/landing/laughing.webp", "team-walk": "/images/season1/landing/team-walk.webp", "hands-in": 
+- // Round 4 jersey ads (d19 to d21): photos served as files, not inlined.
+- IMG["team-walk-hd"]="/images/season1/jersey/team-walk-1600.webp"; IMG["southie-back"]="/images/season1/jersey/southie-back.webp"; IMG["southie-front"]="/images/season1/jersey/southie-front.webp";
+-   return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});
++ <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@
++   // Both tables are defined once, in the head bootstrap (window.S1).
++   const AD_HERO=window.S1.AD_HERO;
++   const HERO_KEYS=window.S1.HERO_KEYS;
++       if(pageA){ document.getElementById("hero").classList.add("pa"); document.getElementById("lp").dataset.s1Pre="pa"; }
++       else if(HERO_KEYS.indexOf(qh)>=0||own(AD_HERO,ad)){ /* d10 (array) too: both of its heroes are interactive and end at 80svh, so the split need not be known here */ document.getElementById("lp").
++ const IMG = window.S1.IMG;
++   document.fonts&&document.fonts.addEventListener&&document.fonts.addEventListener("loadingdone",fitHero); document.getElementById("s1-fonts")?.addEventListener("load",fitHero);
++ 
++   return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o),signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined})
++ document.documentElement.dataset.s1Ready="1";

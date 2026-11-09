@@ -1,0 +1,64 @@
+{
+ "d18": {
+  "computed": {
+   "h1": "none",
+   "h3": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 800",
+   "cta": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 700",
+   "input": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 500"
+  },
+  "check": {
+   "none": true,
+   "Inter Tight": true
+  },
+  "loadedCount": 4,
+  "loaded": [
+   "Inter Tight 500",
+   "Inter Tight 700",
+   "Inter Tight 800",
+   "JetBrains Mono 700"
+  ]
+ },
+ "d19": {
+  "computed": {
+   "h1": "none",
+   "h3": "Rubik, \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 900",
+   "cta": "Rubik, \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 700",
+   "input": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 500"
+  },
+  "check": {
+   "none": true,
+   "Rubik": true,
+   "Inter Tight": true
+  },
+  "loadedCount": 6,
+  "loaded": [
+   "Inter Tight 500",
+   "Inter Tight 700",
+   "Inter Tight 800",
+   "JetBrains Mono 700",
+   "Rubik 500",
+   "Rubik 900"
+  ]
+ },
+ "d2": {
+  "computed": {
+   "h1": "\"Archivo Black\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 800",
+   "h3": "\"Archivo Black\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 800",
+   "cta": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 800",
+   "input": "\"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif | 500"
+  },
+  "check": {
+   "Archivo Black": true,
+   "Inter Tight": true
+  },
+  "loadedCount": 6,
+  "loaded": [
+   "Archivo 700",
+   "Archivo Black 400",
+   "Inter Tight 500",
+   "Inter Tight 700",
+   "Inter Tight 800",
+   "JetBrains Mono 700"
+  ]
+ }
+}

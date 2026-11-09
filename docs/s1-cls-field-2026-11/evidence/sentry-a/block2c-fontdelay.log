@@ -1,0 +1,15 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2 --profile fb-android-412 --runs 3 --label branch-fontdelay --fontDelay 3000 --expectMarker 2b9bc16
+
+[vitals] branch-fontdelay: http://localhost:3100 ads=d18,d19,d2 profiles=fb-android-412 runs=3 network=slow4g cpu=4x failure=none target=2b2df5c
+[vitals] fb-android-412__fontdelay3000 d18 run1: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1388 img.ph laughing.webp FCP 848 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d18 run2: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1376 img.ph laughing.webp FCP 912 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d18 run3: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1260 img.ph laughing.webp FCP 1056 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d19 run1: CLS 0.0014 (+in 0.0066, total 0.0017) src=form + p LCP 2252 img.jb southie-back.webp FCP 1012 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d19 run2: CLS 0.0014 (+in 0.0066, total 0.0017) src=form + p LCP 2240 img.jb southie-back.webp FCP 1016 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d19 run3: CLS 0.0014 (+in 0.0066, total 0.0017) src=form + p LCP 2160 img.jb southie-back.webp FCP 1044 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1572 img.ih-bg couch.webp FCP 812 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1560 img.ih-bg couch.webp FCP 800 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fontdelay3000 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1552 img.ih-bg couch.webp FCP 824 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch-fontdelay/table.md, manifest.json, blocked.json (9 runs in label)

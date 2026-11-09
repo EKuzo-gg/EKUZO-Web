@@ -1,0 +1,199 @@
+{
+ "d18/email/tap": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d18\",\"hero\":\"none\",\"where\":\"top\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d18/email/type": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d18\",\"hero\":\"none\",\"where\":\"top\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d18/email/paste": {
+  "events": [],
+  "errs": []
+ },
+ "d18/email/autofill": {
+  "events": [],
+  "errs": []
+ },
+ "d18/email/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d18/email/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d18/email/retry": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d18\",\"hero\":\"none\",\"where\":\"top\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d18/cta/tap": {
+  "events": [
+   "ERR TimeoutError: locator.tap: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting f"
+  ],
+  "errs": []
+ },
+ "d18/cta/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d18/cta/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d18/faq/tap": {
+  "events": [
+   "dl:[\"event\",\"faq_open\",{\"ad\":\"d18\",\"hero\":\"none\",\"question\":\"when_does_it_start\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d18/faq/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d18/faq/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d2/email/tap": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d2\",\"hero\":\"screentime\",\"where\":\"bottom\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d2/email/type": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d2\",\"hero\":\"screentime\",\"where\":\"bottom\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d2/email/paste": {
+  "events": [],
+  "errs": []
+ },
+ "d2/email/autofill": {
+  "events": [],
+  "errs": []
+ },
+ "d2/email/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d2/email/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d2/email/retry": {
+  "events": [
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d2\",\"hero\":\"screentime\",\"where\":\"bottom\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d2/heroAnswer/tap": {
+  "events": [
+   "dl:[\"event\",\"hero_answer\",{\"ad\":\"d2\",\"hero\":\"screentime\",\"debug_mode\":true}]",
+   "clarity:[\"event\",\"hero_answer\"]"
+  ],
+  "errs": []
+ },
+ "d2/heroAnswer/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d2/heroAnswer/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d2/cta/tap": {
+  "events": [
+   "ERR TimeoutError: locator.tap: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting f"
+  ],
+  "errs": []
+ },
+ "d2/cta/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d2/cta/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d2/faq/tap": {
+  "events": [
+   "dl:[\"event\",\"faq_open\",{\"ad\":\"d2\",\"hero\":\"screentime\",\"question\":\"when_does_it_start\",\"debug_mode\":true}]"
+  ],
+  "errs": []
+ },
+ "d2/faq/focus": {
+  "events": [],
+  "errs": []
+ },
+ "d2/faq/scroll": {
+  "events": [],
+  "errs": []
+ },
+ "d18/tkPhone/tap": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkPhone/type": {
+  "events": [
+   "dl:[\"event\",\"text_karlin_start\",{\"ad\":\"d18\",\"hero\":\"none\",\"debug_mode\":true}]"
+  ],
+  "posts": 1
+ },
+ "d18/tkPhone/paste": {
+  "events": [
+   "dl:[\"event\",\"text_karlin_start\",{\"ad\":\"d18\",\"hero\":\"none\",\"debug_mode\":true}]"
+  ],
+  "posts": 1
+ },
+ "d18/tkPhone/autofill": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkPhone/focus": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkPhone/scroll": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkButton/tap": {
+  "events": [
+   "dl:[\"event\",\"text_karlin_submit\",{\"ad\":\"d18\",\"hero\":\"none\",\"debug_mode\":true}]",
+   "clarity:[\"event\",\"text_karlin\"]"
+  ],
+  "posts": 2
+ },
+ "d18/tkButton/type": {
+  "events": [
+   "dl:[\"event\",\"text_karlin_submit\",{\"ad\":\"d18\",\"hero\":\"none\",\"debug_mode\":true}]",
+   "clarity:[\"event\",\"text_karlin\"]"
+  ],
+  "posts": 2
+ },
+ "d18/tkButton/paste": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkButton/autofill": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkButton/focus": {
+  "events": [],
+  "posts": 1
+ },
+ "d18/tkButton/scroll": {
+  "events": [],
+  "posts": 1
+ }
+}

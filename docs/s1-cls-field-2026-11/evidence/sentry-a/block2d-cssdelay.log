@@ -1,0 +1,15 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d1,d2,d4 --profile fb-android-412 --runs 3 --label branch-cssdelay --fontCssDelay 3000 --expectMarker 2b9bc16
+
+[vitals] branch-cssdelay: http://localhost:3100 ads=d1,d2,d4 profiles=fb-android-412 runs=3 network=slow4g cpu=4x failure=none target=2b2df5c
+[vitals] fb-android-412__csdelay3000 d1 run1: CLS 0 (+in 0.181, total 0.0001) src=button.mini-cta LCP 4088 img.ih-bg mc-blocks.webp FCP 3920 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d1 run2: CLS 0.0001 (+in 0.181, total 0.0002) src=button.mini-cta + svg.mark LCP 4180 img.ih-bg mc-blocks.webp FCP 4180 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d1 run3: CLS 0.0001 (+in 0.1812, total 0.0002) src=svg.mark LCP 3836 img.ih-bg mc-blocks.webp FCP 3836 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 4088 img.ih-bg couch.webp FCP 3824 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 4180 img.ih-bg couch.webp FCP 3972 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 4112 img.ih-bg couch.webp FCP 3876 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d4 run1: CLS 0.0017 (+in 0.1195, total 0.0019) src=i #text + button.ih-skip #text LCP 4012 h1#ih-q FCP 3868 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d4 run2: CLS 0.0017 (+in 0.1195, total 0.0018) src=i #text + button.ih-skip #text LCP 3780 h1#ih-q FCP 3632 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__csdelay3000 d4 run3: CLS 0.0017 (+in 0.1195, total 0.0018) src=i #text + button.ih-skip #text LCP 4000 h1#ih-q FCP 3632 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch-cssdelay/table.md, manifest.json, blocked.json (9 runs in label)

@@ -1,0 +1,40 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure small-script-throws --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=small-script-throws target=8c41e65
+[vitals] fb-android-412__small-script-throws d18 run1: CLS 0.0035 (+in 0.7072, total 0.0036) src=h3 + div.row LCP 676 img.ph laughing.webp FCP 540 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__small-script-throws d19 run1: CLS 0.0001 (+in 0.354, total 0.0002) src=button #text LCP 884 img.jb southie-back.webp FCP 652 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (2 runs in label)
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure big-script-fails --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=big-script-fails target=275e4cb
+[vitals] fb-android-412__big-script-fails d18 run1: CLS 0.0001 (+in 0.0066, total 0.0001) src=button #text LCP 724 p FCP 724 blocked=0 posts=0 leaks=0 form=false ready=null err=1
+[vitals] fb-android-412__big-script-fails d19 run1: CLS 0.0001 (+in 0.0066, total 0.0001) src=button #text LCP 772 p FCP 772 blocked=0 posts=0 leaks=0 form=false ready=null err=1
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (4 runs in label)
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure fonts-slow-8s --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=fonts-slow-8s target=ed84d3e
+[vitals] fb-android-412__fonts-slow-8s d18 run1: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 8732 img.ph laughing.webp FCP 8600 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fonts-slow-8s d19 run1: CLS 0.0014 (+in 0.0066, total 0.0016) src=form + p LCP 8744 img.jb southie-back.webp FCP 8604 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (6 runs in label)
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure fonts-blocked --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=fonts-blocked target=ed84d3e
+[vitals] fb-android-412__fonts-blocked d18 run1: CLS 0 (+in 0.0066, total 0.0001) src=button.mini-cta LCP 1220 img.ph laughing.webp FCP 780 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__fonts-blocked d19 run1: CLS 0.0014 (+in 0.0066, total 0.0016) src=form + p LCP 1488 img.jb southie-back.webp FCP 856 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (8 runs in label)
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19 --profile fb-android-412 --runs 1 --label branch2-failures --failure hero-404 --expectMarker 75473a2
+
+[vitals] branch2-failures: http://localhost:3100 ads=d18,d19 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=hero-404 target=ed84d3e
+[vitals] fb-android-412__hero-404 d18 run1: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 872 p FCP 872 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412__hero-404 d19 run1: CLS 0.0001 (+in 0.0066, total 0.0002) src=button #text LCP 832 p FCP 832 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-failures/table.md, manifest.json, blocked.json (10 runs in label)

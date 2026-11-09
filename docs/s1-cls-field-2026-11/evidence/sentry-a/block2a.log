@@ -1,0 +1,46 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2,noad --profile fb-android-360,ig-android-412 --runs 5 --label branch-tier1 --expectMarker 2b9bc16 --requireReady
+
+[vitals] branch-tier1: http://localhost:3100 ads=d18,d19,d2,noad profiles=fb-android-360,ig-android-412 runs=5 network=slow4g cpu=4x failure=none target=955fef7
+[vitals] fb-android-360 d18 run1: CLS 0.0036 (+in 0.0092, total 0.0036) src=h3 + div.row LCP 1404 img.ph laughing.webp FCP 796 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d18 run2: CLS 0.0036 (+in 0.0092, total 0.0037) src=h3 + div.row LCP 1336 img.ph laughing.webp FCP 856 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d18 run3: CLS 0.0036 (+in 0.0092, total 0.0036) src=h3 + div.row LCP 1404 img.ph laughing.webp FCP 876 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d18 run4: CLS 0.0036 (+in 0.0092, total 0.0036) src=h3 + div.row LCP 1436 img.ph laughing.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d18 run5: CLS 0.0036 (+in 0.0092, total 0.0036) src=h3 + div.row LCP 1496 img.ph laughing.webp FCP 844 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d19 run1: CLS 0.002 (+in 0.0092, total 0.002) src=form + p LCP 2584 img.jb southie-back.webp FCP 972 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d19 run2: CLS 0.002 (+in 0.0092, total 0.002) src=form + p LCP 2628 img.jb southie-back.webp FCP 1016 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d19 run3: CLS 0.002 (+in 0.0092, total 0.002) src=form + p LCP 2460 img.jb southie-back.webp FCP 908 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d19 run4: CLS 0.002 (+in 0.0092, total 0.002) src=form + p LCP 2556 img.jb southie-back.webp FCP 1036 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d19 run5: CLS 0.002 (+in 0.0092, total 0.002) src=form + p LCP 2568 img.jb southie-back.webp FCP 1088 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d2 run1: CLS 0.018 (+in 0.2683, total 0.0181) src=h1#ih-q #text + h3 #text LCP 1836 img.ih-bg couch.webp FCP 916 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d2 run2: CLS 0.018 (+in 0.2683, total 0.018) src=h1#ih-q #text + h3 #text LCP 1856 img.ih-bg couch.webp FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d2 run3: CLS 0.018 (+in 0.2683, total 0.018) src=h1#ih-q #text + h3 #text LCP 1892 img.ih-bg couch.webp FCP 784 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d2 run4: CLS 0.018 (+in 0.2683, total 0.0181) src=h1#ih-q #text + h3 #text LCP 1812 img.ih-bg couch.webp FCP 816 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 d2 run5: CLS 0.018 (+in 0.2683, total 0.0182) src=h1#ih-q #text + h3 #text LCP 1904 img.ih-bg couch.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 noad run1: CLS 0.0004 (+in 0.0092, total 0.0005) src=button #text + span.tag LCP 2368 img.ph mc-blocks.webp FCP 856 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 noad run2: CLS 0.0004 (+in 0.0092, total 0.0004) src=button #text + span.tag LCP 2368 img.ph mc-blocks.webp FCP 916 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 noad run3: CLS 0.0004 (+in 0.0092, total 0.0004) src=button #text + span.tag LCP 2240 img.ph mc-blocks.webp FCP 784 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 noad run4: CLS 0.0001 (+in 0.0092, total 0.0001) src=span.tag LCP 2216 img.ph mc-blocks.webp FCP 816 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-360 noad run5: CLS 0.0004 (+in 0.0092, total 0.0004) src=button #text + span.tag LCP 2268 img.ph mc-blocks.webp FCP 788 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run1: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1464 img.ph laughing.webp FCP 888 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run2: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1280 img.ph laughing.webp FCP 880 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run3: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1296 img.ph laughing.webp FCP 800 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run4: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1324 img.ph laughing.webp FCP 880 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run5: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1568 img.ph laughing.webp FCP 848 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run1: CLS 0.0014 (+in 0.0066, total 0.0016) src=form + p LCP 2572 img.jb southie-back.webp FCP 1032 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run2: CLS 0.0014 (+in 0.0066, total 0.0016) src=form + p LCP 2624 img.jb southie-back.webp FCP 1020 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run3: CLS 0.0014 (+in 0.0066, total 0.0015) src=form + p LCP 2580 img.jb southie-back.webp FCP 972 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run4: CLS 0.0014 (+in 0.0066, total 0.0017) src=form + p LCP 2548 img.jb southie-back.webp FCP 996 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run5: CLS 0.0014 (+in 0.0066, total 0.0017) src=form + p LCP 2564 img.jb southie-back.webp FCP 844 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1836 img.ih-bg couch.webp FCP 872 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1788 img.ih-bg couch.webp FCP 944 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 2032 img.ih-bg couch.webp FCP 892 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run4: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1956 img.ih-bg couch.webp FCP 944 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run5: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1672 img.ih-bg couch.webp FCP 1004 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run1: CLS 0.0003 (+in 0.0066, total 0.0004) src=button #text + span.tag LCP 2332 img.ph mc-blocks.webp FCP 832 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run2: CLS 0.0003 (+in 0.0066, total 0.0004) src=button #text + span.tag LCP 2404 img.ph mc-blocks.webp FCP 904 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run3: CLS 0.0003 (+in 0.0066, total 0.0004) src=button #text + span.tag LCP 2348 img.ph mc-blocks.webp FCP 868 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run4: CLS 0.0003 (+in 0.0066, total 0.0005) src=button #text + span.tag LCP 2348 img.ph mc-blocks.webp FCP 932 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run5: CLS 0.0003 (+in 0.0066, total 0.0005) src=button #text + span.tag LCP 2380 img.ph mc-blocks.webp FCP 868 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch-tier1/table.md, manifest.json, blocked.json (60 runs in label)

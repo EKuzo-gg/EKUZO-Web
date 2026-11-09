@@ -1,0 +1,26 @@
+{
+ "statuses": [
+  429,
+  200
+ ],
+ "errText": "Too many tries.",
+ "afterFirst": [],
+ "afterSecondCount": 2,
+ "leadCount": 1,
+ "generateLeadCount": 1,
+ "leadEventIds": [
+  "46526217-045a-4a40-a2f6-026dc95ae18b"
+ ],
+ "postEventIds": [
+  "46526217-045a-4a40-a2f6-026dc95ae18b",
+  "46526217-045a-4a40-a2f6-026dc95ae18b"
+ ],
+ "seqLeadAfter200": 12,
+ "seqPost": null,
+ "m1c": true,
+ "doubleTap": {
+  "posts": 1,
+  "leads": 1,
+  "generateLead": 1
+ }
+}

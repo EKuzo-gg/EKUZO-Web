@@ -1,0 +1,24 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d1,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16,d17,d20,d21 --profile fb-android-412 --runs 1 --label branch2-tier2 --expectMarker 75473a2 --requireReady
+
+[vitals] branch2-tier2: http://localhost:3100 ads=d1,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16,d17,d20,d21 profiles=fb-android-412 runs=1 network=slow4g cpu=4x failure=none target=ed84d3e
+[vitals] fb-android-412 d1 run1: CLS 0.0001 (+in 0.1811, total 0.0001) src=button.mini-cta LCP 2336 img.ih-bg mc-blocks.webp FCP 904 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d3 run1: CLS 0.0064 (+in 0.1195, total 0.0065) src=h1#ih-q #text + p LCP 1888 img.ih-bg boys-girls-club.webp FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d4 run1: CLS 0.0017 (+in 0.1195, total 0.0017) src=i #text + button.ih-skip #text LCP 1208 h1#ih-q FCP 800 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d5 run1: CLS 0.0009 (+in 0.1195, total 0.001) src=i #text + button.ih-skip #text LCP 1248 h1#ih-q FCP 740 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d6 run1: CLS 0.0137 (+in 0.1672, total 0.0139) src=h1#ih-q #text + p LCP 1812 img.ih-bg couch.webp FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d7 run1: CLS 0.0051 (+in 0.0066, total 0.0052) src=form + p LCP 884 p FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d8 run1: CLS 0.1066 (+in 0.1195, total 0.1067) src=div.ih-opts.games + h1#ih-q LCP 1564 img.ih-bg couch.webp FCP 1288 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d9 run1: CLS 0.0596 (+in 0.1195, total 0.0597) src=div.sl-list + p LCP 1188 p FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d10 run1: CLS 0.0012 (+in 0.181, total 0.0012) src=p LCP 2560 img.ih-bg kid-couch.webp FCP 776 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d11 run1: CLS 0.0015 (+in 0.0066, total 0.0016) src=form + p LCP 1888 img.jb jersey-back.webp FCP 796 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d12 run1: CLS 0 (+in 0.0066, total 0.0001) src=button.mini-cta LCP 1976 img.ph coach-and-mom.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d13 run1: CLS 0.0001 (+in 0.0066, total 0.0002) src=button #text LCP 2560 img.ph kid-couch.webp FCP 776 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d14 run1: CLS 0.0602 (+in 0.0602, total 0.0603) src=div + form LCP 1736 img.ph couch.webp FCP 796 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d15 run1: CLS 0 (+in 0.0066, total 0.0001) src=button.mini-cta LCP 1852 img.ph team-walk.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d16 run1: CLS 0.0013 (+in 0.0066, total 0.0015) src=span.sticker #text + button #text LCP 1984 img.ph hands-in.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d17 run1: CLS 0.0126 (+in 0.0126, total 0.0127) src=h3 + button #text LCP 3256 img.ph team-walk.webp FCP 3108 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d20 run1: CLS 0.0001 (+in 0.0066, total 0.0003) src=button #text LCP 1680 img.f southie-front.webp FCP 1044 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d21 run1: CLS 0.0015 (+in 0.0066, total 0.0016) src=form + p LCP 2408 img.ph team-walk-1600.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-tier2/table.md, manifest.json, blocked.json (18 runs in label)

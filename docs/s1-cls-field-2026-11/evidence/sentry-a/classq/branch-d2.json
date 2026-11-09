@@ -1,0 +1,569 @@
+{
+ "label": "branch",
+ "scenario": "d2",
+ "url": "http://localhost:3100/season1?ad=d2&s1qa=1",
+ "beforeSubmit": {
+  "url": "http://localhost:3100/season1?ad=d2&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 160,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:44:10.933Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d2&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 208,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d2"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 208,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "screentime"
+    ]
+   },
+   {
+    "seq": 11,
+    "t": 223,
+    "k": "dl",
+    "d": [
+     "event",
+     "hero_view",
+     {
+      "ad": "d2",
+      "hero": "screentime",
+      "debug_mode": true
+     }
+    ]
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:44:10.933Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?ad=d2&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d2",
+     "hero": "screentime",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarityQ": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ]
+  ],
+  "localStorage": {},
+  "sessionStorage": {},
+  "cookie": "ekuzo_origin=direct; s1_qa=1"
+ },
+ "after": {
+  "url": "http://localhost:3100/season1?ad=d2&s1qa=1",
+  "timeline": [
+   {
+    "seq": 1,
+    "t": 160,
+    "k": "cookie",
+    "d": "s1_qa"
+   },
+   {
+    "seq": 2,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "js",
+     "2026-11-09T20:44:10.933Z"
+    ]
+   },
+   {
+    "seq": 3,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ]
+   },
+   {
+    "seq": 4,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d2&s1qa=1"
+     }
+    ]
+   },
+   {
+    "seq": 5,
+    "t": 162,
+    "k": "dl",
+    "d": [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 6,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 7,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "init",
+     "1284038230557204"
+    ]
+   },
+   {
+    "seq": 8,
+    "t": 162,
+    "k": "fbq",
+    "d": [
+     "track",
+     "PageView"
+    ]
+   },
+   {
+    "seq": 9,
+    "t": 208,
+    "k": "clarity",
+    "d": [
+     "set",
+     "ad",
+     "d2"
+    ]
+   },
+   {
+    "seq": 10,
+    "t": 208,
+    "k": "clarity",
+    "d": [
+     "set",
+     "hero",
+     "screentime"
+    ]
+   },
+   {
+    "seq": 11,
+    "t": 223,
+    "k": "dl",
+    "d": [
+     "event",
+     "hero_view",
+     {
+      "ad": "d2",
+      "hero": "screentime",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 12,
+    "t": 3681,
+    "k": "dl",
+    "d": [
+     "event",
+     "form_start",
+     {
+      "ad": "d2",
+      "hero": "screentime",
+      "where": "bottom",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 13,
+    "t": 4145,
+    "k": "fbq",
+    "d": [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d2"
+     },
+     {
+      "eventID": "4bb7bd08-d6d3-408a-a739-bfbbd668c058"
+     }
+    ]
+   },
+   {
+    "seq": 14,
+    "t": 4145,
+    "k": "dl",
+    "d": [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d2",
+      "hero": "screentime",
+      "debug_mode": true
+     }
+    ]
+   },
+   {
+    "seq": 15,
+    "t": 4145,
+    "k": "clarity",
+    "d": [
+     "event",
+     "signup"
+    ]
+   },
+   {
+    "seq": 16,
+    "t": 4145,
+    "k": "clarity",
+    "d": [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   },
+   {
+    "seq": 17,
+    "t": 4145,
+    "k": "ls",
+    "d": "ekuzo_s1_joined"
+   }
+  ],
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-09T20:44:10.933Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?ad=d2&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d2",
+     "hero": "screentime",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d2",
+     "hero": "screentime",
+     "where": "bottom",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d2",
+     "hero": "screentime",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbqQueue": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d2"
+    },
+    {
+     "eventID": "4bb7bd08-d6d3-408a-a739-bfbbd668c058"
+    }
+   ]
+  ],
+  "clarityQ": [
+   [
+    "set",
+    "ad",
+    "d2"
+   ],
+   [
+    "set",
+    "hero",
+    "screentime"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "localStorage": {
+   "ekuzo_s1_joined": "1"
+  },
+  "sessionStorage": {},
+  "cookie": "ekuzo_origin=direct; s1_qa=1"
+ },
+ "posts": [
+  {
+   "body": {
+    "email": "qa+sentry@example.com",
+    "source": "ad-landing",
+    "ad": "d2",
+    "adName": "Overheard",
+    "where": "bottom",
+    "attribution": {
+     "utm_source": "",
+     "utm_medium": "",
+     "utm_campaign": "",
+     "utm_content": "",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?ad=d2&s1qa=1",
+    "hero": "screentime",
+    "heroAnswer": "",
+    "heroFrom": "ad-map",
+    "eventId": "4bb7bd08-d6d3-408a-a739-bfbbd668c058",
+    "eventSourceUrl": "http://localhost:3100/season1?ad=d2&s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   },
+   "status": 200,
+   "cookie": "ekuzo_origin=direct; s1_qa=1"
+  }
+ ],
+ "pageErrors": [],
+ "hosts": {
+  "hosts": {
+   "localhost": 4,
+   "fonts.googleapis.com": 2,
+   "www.googletagmanager.com": 1,
+   "connect.facebook.net": 1,
+   "www.clarity.ms": 1,
+   "fonts.gstatic.com": 4
+  },
+  "offenders": [],
+  "stubbedHosts": [
+   "www.googletagmanager.com",
+   "connect.facebook.net",
+   "www.clarity.ms"
+  ]
+ },
+ "stubbedCount": 3,
+ "cookies": [
+  {
+   "name": "ekuzo_origin",
+   "value": "direct",
+   "domain": "localhost",
+   "path": "/",
+   "expires": 1825793050.781548,
+   "httpOnly": false,
+   "secure": true,
+   "sameSite": "Lax"
+  },
+  {
+   "name": "s1_qa",
+   "value": "1",
+   "domain": "localhost",
+   "path": "/",
+   "expires": -1,
+   "httpOnly": false,
+   "secure": false,
+   "sameSite": "Lax"
+  }
+ ],
+ "formUsed": "#em-end"
+}

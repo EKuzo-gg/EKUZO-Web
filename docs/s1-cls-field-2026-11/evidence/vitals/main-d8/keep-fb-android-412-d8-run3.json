@@ -1,0 +1,1952 @@
+{
+ "meta": {
+  "label": "main-d8",
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d8",
+  "run": 3,
+  "url": "http://localhost:3101/season1?ad=d8",
+  "target": "http://localhost:3101",
+  "ua": "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]",
+  "viewport": {
+   "width": 412,
+   "height": 915
+  },
+  "dpr": 2.625,
+  "cpu": 4,
+  "network": {
+   "name": "slow4g",
+   "conditions": {
+    "offline": false,
+    "latency": 150,
+    "downloadThroughput": 200000,
+    "uploadThroughput": 93750
+   }
+  },
+  "cdpReturns": {
+   "networkEnable": {},
+   "network": {},
+   "cpu": {}
+  },
+  "failure": null,
+  "failureDetail": null,
+  "rewriteApplied": null,
+  "fontDelay": 0,
+  "fontCssDelay": 0,
+  "fontScale": null,
+  "toolbar": "on",
+  "journey": "full",
+  "startedAt": "2026-11-09T21:49:55.893Z",
+  "calibMs": 207,
+  "browser": "153.0.8010.12",
+  "harnessCommit": "ed84d3e",
+  "targetCommit": "45dfe97",
+  "marker": null
+ },
+ "summary": {
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d8",
+  "run": 3,
+  "failure": null,
+  "clsWin": 0.1025,
+  "clsWinIn": 0.1195,
+  "clsTot": 0.1026,
+  "clsTotIn": 0.392,
+  "worstStart": 2059,
+  "topSource": "div.ih-opts.games + h1#ih-q",
+  "firstPaint": 1088,
+  "fcp": 1316,
+  "lcp": 2524,
+  "lcpEl": "img.ih-bg couch.webp",
+  "heroImgStart": 1269.2000000029802,
+  "heroImgEnd": 2476.60000000149,
+  "heroImgBytes": 113518,
+  "fontsCssEnd": 1029.7000000029802,
+  "lt1Start": 1110.2000000029802,
+  "lt1Dur": 160,
+  "ltCount": 1,
+  "inp": 56,
+  "marker": null,
+  "s1Ready": null,
+  "s1Pre": null,
+  "heroState": "ihero 732px",
+  "s2Off": 0,
+  "u6Off": [],
+  "formUsable": true,
+  "pageErrors": 0,
+  "posts": 0,
+  "analyticsAttempts": 0,
+  "leaks": 0,
+  "navError": null,
+  "journeyError": null
+ },
+ "cls": {
+  "windowed": 0.10254308254239111,
+  "windowedWithInput": 0.11950330214734799,
+  "total": 0.10264220507704747,
+  "totalWithInput": 0.3919869498855375,
+  "windows": 4,
+  "worstWindow": {
+   "start": 2058.800000000745,
+   "end": 2409.2000000029802,
+   "value": 0.10254308254239111,
+   "count": 2
+  }
+ },
+ "shifts": [
+  {
+   "startTime": 2058.800000000745,
+   "value": 0.0006492785487888068,
+   "hadRecentInput": false,
+   "lastInputTime": 215.60000000149012,
+   "sources": [
+    {
+     "sel": "h1#ih-q #text",
+     "path": "h1#ih-q > #text",
+     "prev": [
+      26,
+      306,
+      360,
+      82
+     ],
+     "cur": [
+      26,
+      301,
+      360,
+      82
+     ]
+    },
+    {
+     "sel": "h3 #text",
+     "path": "section#bridge.bridge > h3 > #text",
+     "prev": [
+      24,
+      793,
+      364,
+      35
+     ],
+     "cur": [
+      24,
+      790,
+      364,
+      35
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 2409.2000000029802,
+   "value": 0.1018938039936023,
+   "hadRecentInput": false,
+   "lastInputTime": 215.60000000149012,
+   "sources": [
+    {
+     "sel": "div.ih-opts.games",
+     "path": "section#ihero.ihero > div.ih-opts.games",
+     "prev": [
+      26,
+      426,
+      360,
+      242
+     ],
+     "cur": [
+      26,
+      488,
+      360,
+      180
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      26,
+      301,
+      360,
+      82
+     ],
+     "cur": [
+      26,
+      363,
+      360,
+      82
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      384,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      446,
+      360,
+      24
+     ]
+    },
+    {
+     "sel": "span.kick #text",
+     "path": "section#ihero.ihero > span.kick > #text",
+     "prev": [
+      26,
+      288,
+      360,
+      16
+     ],
+     "cur": [
+      26,
+      349,
+      360,
+      16
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 12672.20000000298,
+   "value": 0.03457676786438963,
+   "hadRecentInput": true,
+   "lastInputTime": 12671.60000000149,
+   "sources": [
+    {
+     "sel": "section#bridge.bridge",
+     "path": "section#bridge.bridge",
+     "prev": [
+      8,
+      660,
+      396,
+      199
+     ],
+     "cur": [
+      8,
+      615,
+      396,
+      205
+     ]
+    },
+    {
+     "sel": "div.ih-opts.games",
+     "path": "section#ihero.ihero > div.ih-opts.games",
+     "prev": [
+      26,
+      408,
+      360,
+      180
+     ],
+     "cur": [
+      26,
+      363,
+      360,
+      180
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      26,
+      283,
+      360,
+      82
+     ],
+     "cur": [
+      26,
+      238,
+      360,
+      82
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      366,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      321,
+      360,
+      24
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.how",
+     "prev": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "cur": [
+      8,
+      820,
+      396,
+      39
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 12830.300000000745,
+   "value": 0.04192589118804972,
+   "hadRecentInput": true,
+   "lastInputTime": 12822,
+   "sources": [
+    {
+     "sel": "section#bridge.bridge",
+     "path": "section#bridge.bridge",
+     "prev": [
+      8,
+      531,
+      396,
+      205
+     ],
+     "cur": [
+      8,
+      488,
+      396,
+      205
+     ]
+    },
+    {
+     "sel": "div.ih-opts.games",
+     "path": "section#ihero.ihero > div.ih-opts.games",
+     "prev": [
+      26,
+      279,
+      360,
+      180
+     ],
+     "cur": [
+      26,
+      236,
+      360,
+      180
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      26,
+      154,
+      360,
+      82
+     ],
+     "cur": [
+      26,
+      111,
+      360,
+      82
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.how",
+     "prev": [
+      8,
+      736,
+      396,
+      69
+     ],
+     "cur": [
+      8,
+      693,
+      396,
+      112
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      237,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      194,
+      360,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 18802.300000000745,
+   "value": 0.06055321652294211,
+   "hadRecentInput": true,
+   "lastInputTime": 18782.800000000745,
+   "sources": [
+    {
+     "sel": "section.faq",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.faq",
+     "prev": [
+      8,
+      8,
+      396,
+      391
+     ],
+     "cur": [
+      8,
+      51,
+      396,
+      391
+     ]
+    },
+    {
+     "sel": "section#join-end.join.end",
+     "path": "section#join-end.join.end",
+     "prev": [
+      8,
+      399,
+      396,
+      324
+     ],
+     "cur": [
+      8,
+      442,
+      396,
+      324
+     ]
+    },
+    {
+     "sel": "footer",
+     "path": "div#lp.lp.pre-ih.has-ihero > footer",
+     "prev": [
+      8,
+      723,
+      396,
+      136
+     ],
+     "cur": [
+      8,
+      767,
+      396,
+      92
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.how",
+     "prev": [
+      8,
+      0,
+      396,
+      8
+     ],
+     "cur": [
+      8,
+      0,
+      396,
+      51
+     ]
+    },
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      813,
+      412,
+      46
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 18950.5,
+   "value": 0.058950085624405874,
+   "hadRecentInput": true,
+   "lastInputTime": 18930.5,
+   "sources": [
+    {
+     "sel": "section.faq",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.faq",
+     "prev": [
+      8,
+      172,
+      396,
+      391
+     ],
+     "cur": [
+      8,
+      217,
+      396,
+      391
+     ]
+    },
+    {
+     "sel": "section#join-end.join.end",
+     "path": "section#join-end.join.end",
+     "prev": [
+      8,
+      563,
+      396,
+      324
+     ],
+     "cur": [
+      8,
+      608,
+      396,
+      307
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp.pre-ih.has-ihero > section.how",
+     "prev": [
+      8,
+      0,
+      396,
+      172
+     ],
+     "cur": [
+      8,
+      0,
+      396,
+      217
+     ]
+    },
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      867,
+      412,
+      48
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 23958.70000000298,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 21967.300000000745,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.pre-ih.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 26090.400000002235,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 25078.60000000149,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.pre-ih.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 28192.900000002235,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 27210.20000000298,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.pre-ih.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 28233.400000002235,
+   "value": 0.00006601790995275365,
+   "hadRecentInput": true,
+   "lastInputTime": 28178.900000002235,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp.pre-ih.has-ihero > header.solid > button.mini-cta",
+     "prev": [
+      289,
+      20,
+      101,
+      34
+     ],
+     "cur": [
+      292,
+      16,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp.pre-ih.has-ihero > header.solid > svg.mark",
+     "prev": [
+      21,
+      19,
+      87,
+      17
+     ],
+     "cur": [
+      19,
+      16,
+      86,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 29814.5,
+   "value": 0.09327276569874994,
+   "hadRecentInput": true,
+   "lastInputTime": 29788.70000000298,
+   "sources": [
+    {
+     "sel": "div.ih-opts.games",
+     "path": "section#ihero.ihero > div.ih-opts.games",
+     "prev": [
+      26,
+      488,
+      360,
+      180
+     ],
+     "cur": [
+      26,
+      302,
+      360,
+      180
+     ]
+    },
+    {
+     "sel": "h1#ih-q",
+     "path": "h1#ih-q",
+     "prev": [
+      26,
+      363,
+      360,
+      82
+     ],
+     "cur": [
+      26,
+      176,
+      360,
+      82
+     ]
+    },
+    {
+     "sel": "p.ih-sub",
+     "path": "section#ihero.ihero > p.ih-sub",
+     "prev": [
+      26,
+      446,
+      360,
+      24
+     ],
+     "cur": [
+      26,
+      260,
+      360,
+      24
+     ]
+    },
+    {
+     "sel": "span.kick",
+     "path": "section#ihero.ihero > span.kick",
+     "prev": [
+      26,
+      349,
+      360,
+      16
+     ],
+     "cur": [
+      26,
+      162,
+      360,
+      16
+     ]
+    }
+   ]
+  }
+ ],
+ "lcp": [
+  {
+   "startTime": 1316,
+   "renderTime": 1316,
+   "loadTime": 0,
+   "size": 26700,
+   "sel": "p",
+   "path": "section#bridge.bridge > p",
+   "url": ""
+  },
+  {
+   "startTime": 2524,
+   "renderTime": 2524,
+   "loadTime": 2485,
+   "size": 179715,
+   "sel": "img.ih-bg",
+   "path": "section#ihero.ihero > img.ih-bg",
+   "url": "/images/season1/landing/couch.webp"
+  }
+ ],
+ "paint": {
+  "firstPaint": 1088,
+  "fcp": 1316
+ },
+ "inp": {
+  "inp": 56,
+  "interactions": 3
+ },
+ "events": [
+  {
+   "name": "click",
+   "startTime": 29788.70000000298,
+   "duration": 56,
+   "interactionId": 6545,
+   "target": "button.ih-opt"
+  },
+  {
+   "name": "click",
+   "startTime": 29788.70000000298,
+   "duration": 56,
+   "interactionId": 6545,
+   "target": "button.ih-opt",
+   "firstInput": true
+  },
+  {
+   "name": "click",
+   "startTime": 31044,
+   "duration": 24,
+   "interactionId": 6552,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keydown",
+   "startTime": 31358.5,
+   "duration": 16,
+   "interactionId": 6559,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keypress",
+   "startTime": 31358.5,
+   "duration": 16,
+   "interactionId": 6559,
+   "target": "input#em-top"
+  }
+ ],
+ "longTasks": [
+  {
+   "startTime": 1110.2000000029802,
+   "duration": 160,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  }
+ ],
+ "fontEvents": [
+  {
+   "t": 1307.800000000745,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 2421.2000000029802,
+   "type": "loadingdone",
+   "faces": [
+    "Dela Gothic One 400 normal",
+    "Inter Tight 500 normal",
+    "Inter Tight 700 normal",
+    "Inter Tight 800 normal",
+    "JetBrains Mono 700 normal"
+   ]
+  }
+ ],
+ "fontFaces": [
+  {
+   "family": "Dela Gothic One",
+   "weight": "400",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "800",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "JetBrains Mono",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  }
+ ],
+ "fontsStatus": "loaded",
+ "nav": {
+  "responseStart": 9.800000000745058,
+  "responseEnd": 1066.800000000745,
+  "domInteractive": 1311.6000000014901,
+  "dcl": 1312.6000000014901,
+  "load": 2489.400000002235,
+  "encodedBodySize": 132578,
+  "transferSize": 132878
+ },
+ "resources": [
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "type": "link",
+   "start": 208.20000000298023,
+   "end": 1029.7000000029802,
+   "encodedBodySize": 32782,
+   "transferSize": 33082,
+   "status": 0,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/authors/karlin-oei-avatar.jpg",
+   "type": "img",
+   "start": 566,
+   "end": 946.5,
+   "encodedBodySize": 14196,
+   "transferSize": 14496,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/landing/couch.webp",
+   "type": "img",
+   "start": 1269.2000000029802,
+   "end": 2476.60000000149,
+   "encodedBodySize": 72824,
+   "transferSize": 73124,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/landing/laughing.webp",
+   "type": "img",
+   "start": 1270.4000000022352,
+   "end": 2214.400000002235,
+   "encodedBodySize": 40694,
+   "transferSize": 40994,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  }
+ ],
+ "network": [
+  {
+   "url": "http://localhost:3101/season1?ad=d8",
+   "method": "GET",
+   "type": "Document",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/html",
+   "contentType": "text/html; charset=utf-8",
+   "bytes": 133025,
+   "start": 0
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "method": "GET",
+   "type": "Stylesheet",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/css",
+   "contentType": "text/css; charset=utf-8",
+   "bytes": 33587,
+   "start": 208
+  },
+  {
+   "url": "http://localhost:3101/images/authors/karlin-oei-avatar.jpg",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/jpeg",
+   "contentType": "image/jpeg",
+   "bytes": 14478,
+   "start": 566
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 45695,
+   "start": 1140
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/delagothicone/v19/hESp6XxvMDRA-2eD0lXpDa6QkBA2QkEIYgpLUQ.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 14578,
+   "start": 1142
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwgknk-4.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 32119,
+   "start": 1143
+  },
+  {
+   "url": "http://localhost:3101/images/season1/landing/couch.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 73107,
+   "start": 1269
+  },
+  {
+   "url": "http://localhost:3101/images/season1/landing/laughing.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 40976,
+   "start": 1270
+  },
+  {
+   "url": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/gif",
+   "contentType": "image/gif",
+   "bytes": 0,
+   "start": 33267
+  }
+ ],
+ "hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "localhost:3101"
+ ],
+ "timeline": [
+  {
+   "t": 1319,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 2192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 2442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3193,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3443,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6193,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7443,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7693,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8193,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9943,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11443,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11692,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11943,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 732,
+   "ihHidden": false,
+   "joinY": 0,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12695,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 687,
+   "ihHidden": false,
+   "joinY": 80,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 247,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13193,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 442,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 442,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13693,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 442,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 442,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 653,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14442,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 955,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14693,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 1031,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14942,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 1031,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 15192,
+   "heroH": 0,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 644,
+   "ihHidden": false,
+   "joinY": 1031,
+   "lpCls": "lp pre-ih has-ihero",
+   "fonts": "loaded",
+   "ready": null
+  }
+ ],
+ "steps": [
+  {
+   "name": "journey-start",
+   "t": 12534,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "toolbar-collapsed",
+   "t": 13244,
+   "innerHeight": 805,
+   "vvHeight": 805,
+   "svh": 805
+  },
+  {
+   "name": "scroll-down",
+   "t": 13248,
+   "startedOn": "hero-answer",
+   "y": 442
+  },
+  {
+   "name": "scroll-down",
+   "t": 14617,
+   "startedOn": null,
+   "y": 1031
+  },
+  {
+   "name": "scroll-down",
+   "t": 15923,
+   "startedOn": "faq-summary",
+   "y": 1380
+  },
+  {
+   "name": "scroll-down",
+   "t": 17241,
+   "startedOn": "email",
+   "y": 1461
+  },
+  {
+   "name": "bottom",
+   "t": 17949
+  },
+  {
+   "name": "toolbar-restored",
+   "t": 19292,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "scroll-up",
+   "t": 19295,
+   "y": 993
+  },
+  {
+   "name": "scroll-up",
+   "t": 20642,
+   "y": 459
+  },
+  {
+   "name": "scroll-up",
+   "t": 21996,
+   "y": 0
+  },
+  {
+   "name": "top",
+   "t": 22704
+  },
+  {
+   "name": "header-crossings",
+   "t": 29778,
+   "y": 0
+  },
+  {
+   "name": "hero-tap",
+   "t": 29834
+  },
+  {
+   "name": "email-typed",
+   "t": 31388,
+   "active": "em-top"
+  },
+  {
+   "name": "journey-end",
+   "t": 32198
+  }
+ ],
+ "dom": {
+  "marker": null,
+  "sentinels": {
+   "s1Ready": null,
+   "s1Pre": null
+  },
+  "state": {
+   "heroPa": false,
+   "lpPreIh": true,
+   "lpHasIhero": true,
+   "heroFilled": true,
+   "heroH": 0,
+   "ihVisible": true,
+   "ihH": 732,
+   "ctaText": "That’s my kid",
+   "bodyFont": "Inter Tight",
+   "bodyFontSize": "24px",
+   "scrollHeight": 2354
+  },
+  "heroImgs": [
+   {
+    "root": "#hero",
+    "sel": "img",
+    "inS2": true,
+    "src": "/images/season1/landing/couch.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1400,
+     933
+    ],
+    "rendered": [
+     0,
+     0
+    ],
+    "renderedDevicePx": 0,
+    "position": "static",
+    "aspectRatio": "auto",
+    "visible": false,
+    "reserved": null
+   },
+   {
+    "root": "#hero",
+    "sel": "img",
+    "inS2": true,
+    "src": "/images/season1/landing/laughing.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1100,
+     619
+    ],
+    "rendered": [
+     0,
+     0
+    ],
+    "renderedDevicePx": 0,
+    "position": "static",
+    "aspectRatio": "auto",
+    "visible": false,
+    "reserved": null
+   },
+   {
+    "root": "#ihero",
+    "sel": "img.ih-bg",
+    "inS2": true,
+    "src": "/images/season1/landing/couch.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1400,
+     933
+    ],
+    "rendered": [
+     396,
+     454
+    ],
+    "renderedDevicePx": 1040,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": true,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": 0,
+     "imgDh": 0
+    }
+   }
+  ],
+  "heroBg": [],
+  "s2Offenders": [],
+  "fonts": {
+   "requestedFamilies": [
+    "Anybody",
+    "Archivo",
+    "Archivo Black",
+    "Bricolage Grotesque",
+    "Dela Gothic One",
+    "Graduate",
+    "Hanken Grotesk",
+    "Inter Tight",
+    "JetBrains Mono",
+    "Rubik",
+    "Rubik Mono One",
+    "Sora",
+    "Space Grotesk",
+    "Syne",
+    "Unbounded"
+   ],
+   "stylesheetLinks": [
+    {
+     "media": "",
+     "families": 15,
+     "inHead": false
+    }
+   ],
+   "textNodes": 40,
+   "offenders": {}
+  },
+  "preloads": []
+ },
+ "form": {
+  "attempted": true,
+  "errText": "Check the email address and try again.",
+  "errVisible": true,
+  "usable": true,
+  "why": null
+ },
+ "console": [],
+ "pageErrors": [],
+ "jsErrors": [],
+ "blocked": [],
+ "posts": [],
+ "leaks": [],
+ "failureHits": [],
+ "collectError": null
+}

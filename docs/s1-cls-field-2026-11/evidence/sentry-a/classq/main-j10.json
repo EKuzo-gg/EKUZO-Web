@@ -1,0 +1,151 @@
+{
+ "d18": {
+  "initial": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "atDest": "https://ekuzo.gg/",
+  "restoredSameDocument": false,
+  "afterBack": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "afterVisibility": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "newDlAfterVisibility": 0,
+  "newDlSample": [],
+  "shifts": [
+   {
+    "v": 0.00003497163392587683,
+    "t": 246,
+    "src": [
+     "mini-cta"
+    ],
+    "input": true
+   },
+   {
+    "v": 0.0097253322131278,
+    "t": 293,
+    "src": [
+     "how",
+     "#text",
+     "mini-cta"
+    ],
+    "input": true
+   },
+   {
+    "v": 0.000033040844885452896,
+    "t": 312,
+    "src": [
+     "mini-cta"
+    ],
+    "input": true
+   }
+  ],
+  "heroShifts": [],
+  "submitPostAd": [
+   "d18"
+  ],
+  "submitAttribution": [
+   {
+    "utm_source": "fb",
+    "utm_medium": "paid",
+    "utm_campaign": "s1",
+    "utm_content": "d18",
+    "utm_term": "",
+    "utm_id": "",
+    "site": ""
+   }
+  ],
+  "page": "http://localhost:3101/season1?ad=d18&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d18&fbclid=TESTFBCLID&s1qa=1",
+  "hosts": [
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua",
+   "https://ekuzo.gg/",
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "pageErrors": []
+ },
+ "d19": {
+  "initial": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "atDest": "https://ekuzo.gg/",
+  "restoredSameDocument": false,
+  "afterBack": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "afterVisibility": {
+   "dl": 4,
+   "pageViewEvents": 0,
+   "configCalls": 1,
+   "fbqPageView": 1
+  },
+  "newDlAfterVisibility": 0,
+  "newDlSample": [],
+  "shifts": [
+   {
+    "v": 0.00003497163392587683,
+    "t": 284,
+    "src": [
+     "mini-cta"
+    ],
+    "input": true
+   },
+   {
+    "v": 0.05085189543472759,
+    "t": 350,
+    "src": [
+     "faq",
+     "join-end",
+     "FOOTER",
+     "mini-cta"
+    ],
+    "input": true
+   }
+  ],
+  "heroShifts": [],
+  "submitPostAd": [
+   "d19"
+  ],
+  "submitAttribution": [
+   {
+    "utm_source": "fb",
+    "utm_medium": "paid",
+    "utm_campaign": "s1",
+    "utm_content": "d19",
+    "utm_term": "",
+    "utm_id": "",
+    "site": ""
+   }
+  ],
+  "page": "http://localhost:3101/season1?ad=d19&utm_source=fb&utm_medium=paid&utm_campaign=s1&utm_content=d19&fbclid=TESTFBCLID&s1qa=1",
+  "hosts": [
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua",
+   "https://ekuzo.gg/",
+   "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.clarity.ms/tag/wml8wll5ua"
+  ],
+  "pageErrors": []
+ }
+}

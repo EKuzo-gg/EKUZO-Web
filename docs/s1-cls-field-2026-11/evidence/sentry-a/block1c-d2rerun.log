@@ -1,0 +1,11 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d2 --profile fb-android-412 --runs 5 --label branch2-d2rerun --expectMarker 75473a2 --requireReady
+
+[vitals] branch2-d2rerun: http://localhost:3100 ads=d2 profiles=fb-android-412 runs=5 network=slow4g cpu=4x failure=none target=6460b3f
+[vitals] fb-android-412 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1860 img.ih-bg couch.webp FCP 820 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1824 img.ih-bg couch.webp FCP 804 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1844 img.ih-bg couch.webp FCP 788 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run4: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1784 img.ih-bg couch.webp FCP 768 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run5: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1740 img.ih-bg couch.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/branch2-d2rerun/table.md, manifest.json, blocked.json (5 runs in label)

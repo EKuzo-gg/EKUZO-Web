@@ -1,0 +1,300 @@
+{
+ "main": {
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=zz&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d1",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d1",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "<id>"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "post": [
+   {
+    "body": {
+     "email": "qa+sentry@example.com",
+     "source": "ad-landing",
+     "ad": "d1",
+     "adName": "We've all said it",
+     "where": "top",
+     "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+     },
+     "page": "/season1?ad=zz&s1qa=1",
+     "hero": "none",
+     "heroAnswer": "",
+     "heroFrom": "none",
+     "eventId": "<id>",
+     "eventSourceUrl": "http://localhost:3101/season1?ad=zz&s1qa=1",
+     "tz": "America/Chicago",
+     "ekz_hp": ""
+    },
+    "status": 200
+   }
+  ],
+  "order": [
+   "cookie:s1_qa",
+   "dl:[\"js\",\"<date>\"]",
+   "dl:[\"consent\",\"default\",{\"ad_storage\":\"denied\",\"ad_user_data\":\"",
+   "dl:[\"set\",{\"page_location\":\"http://localhost:3101/season1?ad=zz",
+   "dl:[\"config\",\"G-8LM45PX53W\",{\"allow_google_signals\":false,\"allo",
+   "fbq:[\"set\",\"autoConfig\",false,\"1284038230557204\"]",
+   "fbq:[\"init\",\"1284038230557204\"]",
+   "fbq:[\"track\",\"PageView\"]",
+   "clarity:[\"set\",\"ad\",\"d1\"]",
+   "clarity:[\"set\",\"hero\",\"none\"]",
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d1\",\"hero\":\"none\",\"where\":\"top\"",
+   "fbq:[\"track\",\"Lead\",{\"content_name\":\"season_one_d1\"},{\"eventID\":",
+   "dl:[\"event\",\"generate_lead\",{\"lead_source\":\"season_one_d1\",\"her",
+   "clarity:[\"event\",\"signup\"]",
+   "clarity:[\"set\",\"signed_up\",\"yes\"]",
+   "ls:ekuzo_s1_joined"
+  ],
+  "ls": {
+   "ekuzo_s1_joined": "1"
+  },
+  "ss": {}
+ },
+ "branch": {
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?ad=zz&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d1",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d1",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d1"
+    },
+    {
+     "eventID": "<id>"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "post": [
+   {
+    "body": {
+     "email": "qa+sentry@example.com",
+     "source": "ad-landing",
+     "ad": "d1",
+     "adName": "We've all said it",
+     "where": "top",
+     "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+     },
+     "page": "/season1?ad=zz&s1qa=1",
+     "hero": "none",
+     "heroAnswer": "",
+     "heroFrom": "none",
+     "eventId": "<id>",
+     "eventSourceUrl": "http://localhost:3100/season1?ad=zz&s1qa=1",
+     "tz": "America/Chicago",
+     "ekz_hp": ""
+    },
+    "status": 200
+   }
+  ],
+  "order": [
+   "cookie:s1_qa",
+   "dl:[\"js\",\"<date>\"]",
+   "dl:[\"consent\",\"default\",{\"ad_storage\":\"denied\",\"ad_user_data\":\"",
+   "dl:[\"set\",{\"page_location\":\"http://localhost:3100/season1?ad=zz",
+   "dl:[\"config\",\"G-8LM45PX53W\",{\"allow_google_signals\":false,\"allo",
+   "fbq:[\"set\",\"autoConfig\",false,\"1284038230557204\"]",
+   "fbq:[\"init\",\"1284038230557204\"]",
+   "fbq:[\"track\",\"PageView\"]",
+   "clarity:[\"set\",\"ad\",\"d1\"]",
+   "clarity:[\"set\",\"hero\",\"none\"]",
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d1\",\"hero\":\"none\",\"where\":\"top\"",
+   "fbq:[\"track\",\"Lead\",{\"content_name\":\"season_one_d1\"},{\"eventID\":",
+   "dl:[\"event\",\"generate_lead\",{\"lead_source\":\"season_one_d1\",\"her",
+   "clarity:[\"event\",\"signup\"]",
+   "clarity:[\"set\",\"signed_up\",\"yes\"]",
+   "ls:ekuzo_s1_joined"
+  ],
+  "ls": {
+   "ekuzo_s1_joined": "1"
+  },
+  "ss": {}
+ }
+}

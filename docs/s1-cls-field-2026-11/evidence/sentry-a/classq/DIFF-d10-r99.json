@@ -1,0 +1,324 @@
+{
+ "main": {
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=d10&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d10",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d10",
+     "hero": "games",
+     "where": "bottom",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d10",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "<id>"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "post": [
+   {
+    "body": {
+     "email": "qa+sentry@example.com",
+     "source": "ad-landing",
+     "ad": "d10",
+     "adName": "Screen time with a purpose",
+     "where": "bottom",
+     "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+     },
+     "page": "/season1?ad=d10&s1qa=1",
+     "hero": "games",
+     "heroAnswer": "",
+     "heroFrom": "split",
+     "eventId": "<id>",
+     "eventSourceUrl": "http://localhost:3101/season1?ad=d10&s1qa=1",
+     "tz": "America/Chicago",
+     "ekz_hp": ""
+    },
+    "status": 200
+   }
+  ],
+  "order": [
+   "cookie:s1_qa",
+   "dl:[\"js\",\"<date>\"]",
+   "dl:[\"consent\",\"default\",{\"ad_storage\":\"denied\",\"ad_user_data\":\"",
+   "dl:[\"set\",{\"page_location\":\"http://localhost:3101/season1?ad=d1",
+   "dl:[\"config\",\"G-8LM45PX53W\",{\"allow_google_signals\":false,\"allo",
+   "fbq:[\"set\",\"autoConfig\",false,\"1284038230557204\"]",
+   "fbq:[\"init\",\"1284038230557204\"]",
+   "fbq:[\"track\",\"PageView\"]",
+   "ls:ekuzo_s1_hero_d10",
+   "clarity:[\"set\",\"ad\",\"d10\"]",
+   "clarity:[\"set\",\"hero\",\"games\"]",
+   "dl:[\"event\",\"hero_view\",{\"ad\":\"d10\",\"hero\":\"games\",\"debug_mode\"",
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d10\",\"hero\":\"games\",\"where\":\"bo",
+   "fbq:[\"track\",\"Lead\",{\"content_name\":\"season_one_d10\"},{\"eventID\"",
+   "dl:[\"event\",\"generate_lead\",{\"lead_source\":\"season_one_d10\",\"he",
+   "clarity:[\"event\",\"signup\"]",
+   "clarity:[\"set\",\"signed_up\",\"yes\"]",
+   "ls:ekuzo_s1_joined"
+  ],
+  "ls": {
+   "ekuzo_s1_joined": "1",
+   "ekuzo_s1_hero_d10": "games"
+  },
+  "ss": {}
+ },
+ "branch": {
+  "dataLayer": [
+   [
+    "js",
+    "<date>"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1?ad=d10&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "hero_view",
+    {
+     "ad": "d10",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d10",
+     "hero": "games",
+     "where": "bottom",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d10",
+     "hero": "games",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d10"
+    },
+    {
+     "eventID": "<id>"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d10"
+   ],
+   [
+    "set",
+    "hero",
+    "games"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "post": [
+   {
+    "body": {
+     "email": "qa+sentry@example.com",
+     "source": "ad-landing",
+     "ad": "d10",
+     "adName": "Screen time with a purpose",
+     "where": "bottom",
+     "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": "",
+      "utm_id": "",
+      "site": ""
+     },
+     "page": "/season1?ad=d10&s1qa=1",
+     "hero": "games",
+     "heroAnswer": "",
+     "heroFrom": "split",
+     "eventId": "<id>",
+     "eventSourceUrl": "http://localhost:3100/season1?ad=d10&s1qa=1",
+     "tz": "America/Chicago",
+     "ekz_hp": ""
+    },
+    "status": 200
+   }
+  ],
+  "order": [
+   "cookie:s1_qa",
+   "dl:[\"js\",\"<date>\"]",
+   "dl:[\"consent\",\"default\",{\"ad_storage\":\"denied\",\"ad_user_data\":\"",
+   "dl:[\"set\",{\"page_location\":\"http://localhost:3100/season1?ad=d1",
+   "dl:[\"config\",\"G-8LM45PX53W\",{\"allow_google_signals\":false,\"allo",
+   "fbq:[\"set\",\"autoConfig\",false,\"1284038230557204\"]",
+   "fbq:[\"init\",\"1284038230557204\"]",
+   "fbq:[\"track\",\"PageView\"]",
+   "ls:ekuzo_s1_hero_d10",
+   "clarity:[\"set\",\"ad\",\"d10\"]",
+   "clarity:[\"set\",\"hero\",\"games\"]",
+   "dl:[\"event\",\"hero_view\",{\"ad\":\"d10\",\"hero\":\"games\",\"debug_mode\"",
+   "dl:[\"event\",\"form_start\",{\"ad\":\"d10\",\"hero\":\"games\",\"where\":\"bo",
+   "fbq:[\"track\",\"Lead\",{\"content_name\":\"season_one_d10\"},{\"eventID\"",
+   "dl:[\"event\",\"generate_lead\",{\"lead_source\":\"season_one_d10\",\"he",
+   "clarity:[\"event\",\"signup\"]",
+   "clarity:[\"set\",\"signed_up\",\"yes\"]",
+   "ls:ekuzo_s1_joined"
+  ],
+  "ls": {
+   "ekuzo_s1_joined": "1",
+   "ekuzo_s1_hero_d10": "games"
+  },
+  "ss": {}
+ }
+}

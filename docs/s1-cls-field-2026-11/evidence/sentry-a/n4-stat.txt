@@ -1,0 +1,2 @@
+ app/season1/join/signup/signup.html | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
