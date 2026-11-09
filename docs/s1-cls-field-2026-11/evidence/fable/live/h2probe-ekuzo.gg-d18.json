@@ -1,0 +1,90 @@
+[
+ {
+  "run": 1,
+  "url": "https://ekuzo.gg/season1?ad=d18",
+  "docProto": "http/1.1",
+  "docResponseStart": 585,
+  "docResponseEnd": 769,
+  "docBytes": 37615,
+  "domInteractive": 1509,
+  "ready": 1507,
+  "lcp": {
+   "t": 1500,
+   "size": 85227,
+   "url": "https://ekuzo.gg/images/season1/landing/laughing.webp",
+   "tag": "IMG.ph"
+  },
+  "paint": {
+   "first-paint": 1232,
+   "first-contentful-paint": 1500
+  },
+  "marker": "19b9963",
+  "res": [
+   {
+    "name": "/images/season1/landing/laughing.webp",
+    "start": 686,
+    "end": 1175,
+    "bytes": 40694,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 687,
+    "end": 1183,
+    "bytes": 894,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 687,
+    "end": 1605,
+    "bytes": 32400,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 2,
+  "url": "https://ekuzo.gg/season1?ad=d18",
+  "docProto": "http/1.1",
+  "docResponseStart": 127,
+  "docResponseEnd": 416,
+  "docBytes": 37567,
+  "domInteractive": 1022,
+  "ready": 1007,
+  "lcp": {
+   "t": 1020,
+   "size": 85227,
+   "url": "https://ekuzo.gg/images/season1/landing/laughing.webp",
+   "tag": "IMG.ph"
+  },
+  "paint": {
+   "first-paint": 712,
+   "first-contentful-paint": 772
+  },
+  "marker": "19b9963",
+  "res": [
+   {
+    "name": "/images/season1/landing/laughing.webp",
+    "start": 324,
+    "end": 765,
+    "bytes": 40694,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 327,
+    "end": 629,
+    "bytes": 894,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 331,
+    "end": 1088,
+    "bytes": 32400,
+    "proto": "http/1.1"
+   }
+  ]
+ }
+]

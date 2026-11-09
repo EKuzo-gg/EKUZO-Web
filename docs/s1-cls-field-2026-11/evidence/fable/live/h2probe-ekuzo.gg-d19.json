@@ -1,0 +1,104 @@
+[
+ {
+  "run": 1,
+  "url": "https://ekuzo.gg/season1?ad=d19",
+  "docProto": "http/1.1",
+  "docResponseStart": 344,
+  "docResponseEnd": 552,
+  "docBytes": 37567,
+  "domInteractive": 1146,
+  "ready": 1124,
+  "lcp": {
+   "t": 1716,
+   "size": 102700,
+   "url": "https://ekuzo.gg/images/season1/jersey/southie-back.webp",
+   "tag": "IMG.jb"
+  },
+  "paint": {
+   "first-paint": 800,
+   "first-contentful-paint": 944
+  },
+  "marker": "19b9963",
+  "res": [
+   {
+    "name": "/images/season1/jersey/southie-back.webp",
+    "start": 456,
+    "end": 1667,
+    "bytes": 92738,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 458,
+    "end": 716,
+    "bytes": 1296,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 459,
+    "end": 1304,
+    "bytes": 31990,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 1091,
+    "end": 2589,
+    "bytes": 145602,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 2,
+  "url": "https://ekuzo.gg/season1?ad=d19",
+  "docProto": "http/1.1",
+  "docResponseStart": 198,
+  "docResponseEnd": 418,
+  "docBytes": 37567,
+  "domInteractive": 964,
+  "ready": 959,
+  "lcp": {
+   "t": 1776,
+   "size": 102700,
+   "url": "https://ekuzo.gg/images/season1/jersey/southie-back.webp",
+   "tag": "IMG.jb"
+  },
+  "paint": {
+   "first-paint": 676,
+   "first-contentful-paint": 764
+  },
+  "marker": "19b9963",
+  "res": [
+   {
+    "name": "/images/season1/jersey/southie-back.webp",
+    "start": 348,
+    "end": 1696,
+    "bytes": 92738,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 357,
+    "end": 609,
+    "bytes": 1296,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 360,
+    "end": 1361,
+    "bytes": 31990,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 900,
+    "end": 2469,
+    "bytes": 145602,
+    "proto": "http/1.1"
+   }
+  ]
+ }
+]
