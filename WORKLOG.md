@@ -19,6 +19,11 @@
 - `/season1/join` is indexable on ekuzo.gg in live mode (canonical, description, Course and Offer JSON-LD at $580
   per kid from offer.ts, SoldOut when closed); /join/b, /jersey, /season1, signup stay noindex; sitemap entry.
 - Checks: `npm test` 575 tests, 574 pass, 0 fail; Sentry A and B, Steward. Season 01 FAQ canon written in the KB.
+## Aaron's Claude, 2026-11-06: beta lab
+
+- New `public/roadshow/beta-lab.html` (noindex, static, same dark wall as the hub): Karlin's interest email for the free 4-week Season 01 beta shown as it lands in the inbox with copy buttons, a five-step "how it runs" track, and the open decisions with owners. Links to the pilot plan doc.
+- `public/roadshow/index.html`: Beta lab tile added after the Outreach lab tile. Nothing else touched.
+- Follow-up: practice timing is open (weekdays or weekends), so the email and page ask for the days and times that work instead of weeknights.
 
 ## Jamie's Claude, 2026-11-05 (10:45): IndexNow
 
@@ -58,6 +63,19 @@
 - League has no existing sentence about match length or stopping, so the link from League to the new post was not re-added (the only link lived in the removed box).
 - For Aaron: `components/blog/FactsBox.tsx` and `PullQuote.tsx` no longer exist; earlier notes about restyling them are moot.
 
+---
+## Jamie's Claude, 2026-11-05: League facts box
+
+- `app/blog/league-of-legends-youth-development/page.tsx`: new "League of Legends for parents: the facts" box after the opening answer (rating, accounts, chat, honor, leaving early, match length), each line sourced from Riot or ESRB pages read 2026-11-04. FAQ rating sentence now lists the full ESRB descriptors in both `FAQ_ITEMS` and the visible FAQ (JSON-LD matches), ESRB link repointed to listing 32211, both honor guide links moved to support.riotgames.com. The "under 10%" and "65% STEM" claims are unchanged on purpose. `DATE_MODIFIED`, sitemap lastModified, /blog card and Karlin author card date set to 2026-11-05. `public/llms.txt` untouched.
+- Aaron: new `components/blog/FactsBox.tsx` (div/span/ul, torn-corner clip, off-white, black top rule). Additive and identical on the Fortnite branch; restyle freely.
+## Jamie's Claude, 2026-11-05: Fortnite search refresh
+
+- `app/blog/should-you-ban-fortnite/page.tsx`: "Short answer:" paragraph first in the body; five body H2s rewritten as parent search questions; the five-question aside moved to right after the first H2 and retitled "Try this tonight"; new "Fortnite at a glance" facts box (ESRB rating, Epic parental controls, FTC case, match length) after the FTC paragraph; the one product link now points to Season 01 (/season1/join) with the sentence rewritten; new paragraph linking /blog/how-to-get-your-kid-off-video-games-without-a-fight; FAQ "Should I ban Fortnite?" renamed and "Is Fortnite OK for kids?" added (visible FAQ and FAQPage schema both render from FAQ_ITEMS); meta description rewritten (marked pending Jamie final look); intro "senior" / "This fall"; DATE_MODIFIED 2026-11-05; listening CTA swapped to Karlin's 15-minute calendar (Muhammad's page had no open times).
+- `app/blog/gaming-military-families/page.tsx`: "senior", "internship this fall", calendar swapped to Karlin's, DATE_MODIFIED 2026-11-05.
+- `app/sitemap.ts`, `app/blog/page.tsx`, `app/blog/author/muhammad-hossain/page.tsx`: lastModified and card dates for both posts set to 2026-11-05.
+- Note for Aaron: new `components/blog/FactsBox.tsx` (additive, server component, div/span/ul markup so the .blog-content prose rules do not cascade). Restyle freely. The prose CSS still shows list bullets inside it.
+
+## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
 ## Jamie's Claude, 2026-11-05: session-end post, approved copy and inbound links
 
 - New post: meta description now Jamie's approved option A ("Count matches, not minutes. Agree on a stopping point..."); `pending` comment removed. Coach section links "Season 01" to `/season1/join` (C3 option 2). Share graphic `public/images/count-matches-not-minutes.png` (1080x1350, rendered as the Robux in-body image) sits after the match table; 1200x630 variant saved beside it; source `count-matches-not-minutes.html` and `render.js` in `docs/session-end-post/assets/`.
@@ -185,6 +203,19 @@ Branch `season1-commit`. Karlin asked for price transparency and signed off on t
   - Signup, welcome and join tests: 70 pass.
 - **Klaviyo, both drafts, not sent:** `VYzgSh` (current layout) got the new friends section and the "Save their spot for $100" button. New `RN8KSq` follows Figma frame 871:175 ("602" layout, mixed-games hero art). Ask: A/B the campaign on template, metric click rate plus Placed Order per variation.
 - **Figma (EKUZO Marketing, frame 871:175):** friends section and offer-card line updated to match.
+## Aaron's Claude, 2026-11-03: ad lab round 4, the jersey ad again
+
+`public/roadshow/ad-lab.html` on dev. Ad 11 (the jersey ad) is one of the better performers in Meta, so Round 4 adds three variations of it, built on the d11 template:
+
+- **d19, Southie jersey back:** team walk photo, the new Southie jersey back, same hook.
+- **d20, front and back:** no photo, both sides of the jersey, "Free for the first 100 families."
+- **d21, their team:** jersey front, "Their team. Their name. On a real jersey."
+- All three: pink headline accent (#EA1CA7), blue button (#034FFF) with white text, and the small top line reads "Youth gaming league · 2027" in white.
+- Meta copy preloaded (adnames d19-a-southie-back, d20-a-southie-pair, d21-a-southie-team). Links keep `ad=d11` so the landing hero still matches the jersey ad.
+- New embedded images: `southie-front`, `southie-back` (jersey renders) and `team-walk-hd` (the full-size team walk photo). The old `team-walk` image used by d9, d15 and d17 is unchanged.
+- Small hook: art classes now also take an optional `cls` from the entry (`${d.tpl||d.id}${d.cls?" "+d.cls:""}`). New CSS is scoped to `.s1j`; d11 renders pixel-identical to before.
+- Finals at 1080 in `public/ads/season1/` (d19 to d21, feed and story).
+- To confirm before running: photo release for the team walk photo, and whether "free for the first 100 families" fits where the ad points (the jersey offer ends Nov 30).
 
 ---
 ## Jamie's Claude, 2026-10-30: Discord commit format
@@ -308,6 +339,46 @@ Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only)
   - The season line copy is approved by Jamie.
   - Two doors on /season1 and "Ready now?" are his to ship.
 - **Merge rule:** never merge dev into main. Release = season1-commit plus a merge of origin/main; dev goes through `preview/season1-dev`.
+## Aaron's Claude, 2026-11-05: micro school lane brought in line with the new package (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only.
+
+1. **Outreach Lab, New-model schools lane:** the package is marked as built, with buttons to the deck and one-pager in Figma. The lead pilot is now a spring semester team (mid-January to mid-May, twice a week, 90 minutes) instead of a 6-week elective. Two new watch-fors: the only credit line is "schools have used EKUZO for class credit", and no price goes in the package.
+2. **Micro school one-pager:** semester instead of 6-week blocks, near-peer mentors, the class credit line above, and the founding-school rate line removed, and the coach line now leads with near-peer mentor.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440 and 390: no horizontal overflow, no page errors. The one-pager still prints to one Letter page.
+
+---
+## Aaron's Claude, 2026-10-30: Hometown Heroes in Outreach Lab (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/outreach-lab.html` only.
+
+1. **Hometown Heroes** (`#heroes`, new Programs group in the nav): Karlin's idea for college players as recruiters and coaches for a team from their own hometown. The loop, the hero and family journeys, how it reaches kids and parents (kids only in person with a teacher there; everything they take home goes to a parent), wireframes of a hero page, a take-home card and a leaderboard (sample data), what heroes compete for, guardrails, a spring pilot and open decisions. The College lane links to it.
+2. **Widows:** a small `noWidows()` pass after each render keeps the last two words of running text together.
+
+- **For Jamie (your lane, nothing changed):** the hero page is proposed as a variant of the Season 01 crew-code page (`/crew/<code>`, "Join [Name]'s team"), so each family is credited to its hero through the existing referral cookie.
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, no page errors.
+
+---
+## Aaron's Claude, 2026-10-30: the other seven partner one-pagers (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only (never ships to main).
+
+1. **Seven one-pagers** in `public/roadshow/one-pagers/`: `center`, `college-club`, `franchisor`, `collegiate-pilot`, `school-club-kit`, `parent-explainer`, `skeptical-staff`. Same Letter layout as `microschool.html`, each with a lane visual (a month with a center partner, the player loop, how a franchise pilot grows, a pilot in a college market, the club kit, a 90-minute practice, gaming alone vs on a team). Public-safe: quotes credited by role, no partner names, no phone numbers. Drafts for the team: pricing, block length and per-player write-ups stay pending decisions.
+2. **Outreach Lab** (`public/roadshow/outreach-lab.html`): every one-pager card links to its page; card #2 shows its real headline; buttons align across a row.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter, each page at 1440 and 390: no horizontal overflow, nothing past the page edge, no missing assets; each prints to one Letter page.
+
+---
+## Aaron's Claude, 2026-10-30: Outreach Lab and the Austin microschool one-pager (roadshow, dev only)
+
+Branch `dev`. Everything is under `public/roadshow/`, which never ships to main (dev-runbook, releasing when dev carries work main must not get). No app, lib, components or API files touched.
+
+1. **Outreach Lab** (`public/roadshow/outreach-lab.html`, 481e4ba): hub for EKUZO's eight partner lanes: lane board, player pathway, journey map, a page per lane, message templates, one-pager specs, open decisions. Public-safe version with no partner names or contact details; the full version stays private. Linked from the Roadshow Hub (new tile under In review).
+2. **QA fixes** (ed3913a): notch clipping on one-pager thumbnail headlines; journey chevrons overflowing at 1024 px; widows on short headings.
+3. **Austin microschool one-pager** (`public/roadshow/one-pagers/microschool.html` + `karlin.jpg`, a2798b1): Letter page that prints to one page; Outreach Lab's one-pager #1 links to it. Draft: pricing, block length and the per-player write-up are pending team decisions.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, nothing past the page edge, no missing assets; the one-pager prints to one Letter page.
 
 ---
 ## Jamie's Claude, 2026-10-29: card form behind Or pay with card
