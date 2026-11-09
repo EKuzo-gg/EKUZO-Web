@@ -1,0 +1,155 @@
+[
+ {
+  "run": 1,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d19",
+  "docProto": "http/1.1",
+  "docResponseStart": 411,
+  "docResponseEnd": 594,
+  "docBytes": 37564,
+  "domInteractive": 1432,
+  "ready": 1432,
+  "lcp": {
+   "t": 2904,
+   "size": 102700,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/jersey/southie-back.webp",
+   "tag": "IMG.jb"
+  },
+  "paint": {
+   "first-paint": 1132,
+   "first-contentful-paint": 1516
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 550,
+    "end": 2695,
+    "bytes": 145602,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/images/season1/jersey/southie-back.webp",
+    "start": 556,
+    "end": 2739,
+    "bytes": 92738,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 557,
+    "end": 1065,
+    "bytes": 1296,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 562,
+    "end": 1975,
+    "bytes": 31990,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 2,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d19",
+  "docProto": "http/1.1",
+  "docResponseStart": 238,
+  "docResponseEnd": 444,
+  "docBytes": 37611,
+  "domInteractive": 899,
+  "ready": 886,
+  "lcp": {
+   "t": 2220,
+   "size": 102700,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/jersey/southie-back.webp",
+   "tag": "IMG.jb"
+  },
+  "paint": {
+   "first-paint": 620,
+   "first-contentful-paint": 732
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 337,
+    "end": 2439,
+    "bytes": 145602,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/images/season1/jersey/southie-back.webp",
+    "start": 337,
+    "end": 2188,
+    "bytes": 92738,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 338,
+    "end": 574,
+    "bytes": 1296,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 338,
+    "end": 1553,
+    "bytes": 31990,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 3,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d19",
+  "docProto": "http/1.1",
+  "docResponseStart": 204,
+  "docResponseEnd": 490,
+  "docBytes": 37564,
+  "domInteractive": 1197,
+  "ready": 1196,
+  "lcp": {
+   "t": 2568,
+   "size": 102700,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/jersey/southie-back.webp",
+   "tag": "IMG.jb"
+  },
+  "paint": {
+   "first-paint": 952,
+   "first-contentful-paint": 1080
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 365,
+    "end": 2499,
+    "bytes": 145602,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/images/season1/jersey/southie-back.webp",
+    "start": 368,
+    "end": 2485,
+    "bytes": 92738,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 371,
+    "end": 889,
+    "bytes": 1296,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 374,
+    "end": 1840,
+    "bytes": 31990,
+    "proto": "http/1.1"
+   }
+  ]
+ }
+]

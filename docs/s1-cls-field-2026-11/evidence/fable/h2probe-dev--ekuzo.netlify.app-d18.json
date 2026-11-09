@@ -1,0 +1,134 @@
+[
+ {
+  "run": 1,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d18",
+  "docProto": "http/1.1",
+  "docResponseStart": 1093,
+  "docResponseEnd": 1297,
+  "docBytes": 37564,
+  "domInteractive": 1935,
+  "ready": 1918,
+  "lcp": {
+   "t": 1924,
+   "size": 85227,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/landing/laughing.webp",
+   "tag": "IMG.ph"
+  },
+  "paint": {
+   "first-paint": 1540,
+   "first-contentful-paint": 1924
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/landing/laughing.webp",
+    "start": 1214,
+    "end": 1839,
+    "bytes": 40694,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 1217,
+    "end": 1467,
+    "bytes": 894,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 1218,
+    "end": 1939,
+    "bytes": 32400,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 2,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d18",
+  "docProto": "http/1.1",
+  "docResponseStart": 235,
+  "docResponseEnd": 440,
+  "docBytes": 37611,
+  "domInteractive": 982,
+  "ready": 979,
+  "lcp": {
+   "t": 1064,
+   "size": 85227,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/landing/laughing.webp",
+   "tag": "IMG.ph"
+  },
+  "paint": {
+   "first-paint": 628,
+   "first-contentful-paint": 800
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/landing/laughing.webp",
+    "start": 312,
+    "end": 789,
+    "bytes": 40694,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 315,
+    "end": 558,
+    "bytes": 894,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 315,
+    "end": 1175,
+    "bytes": 32400,
+    "proto": "http/1.1"
+   }
+  ]
+ },
+ {
+  "run": 3,
+  "url": "https://dev--ekuzo.netlify.app/season1?ad=d18",
+  "docProto": "http/1.1",
+  "docResponseStart": 414,
+  "docResponseEnd": 670,
+  "docBytes": 37611,
+  "domInteractive": 1105,
+  "ready": 1104,
+  "lcp": {
+   "t": 1132,
+   "size": 85227,
+   "url": "https://dev--ekuzo.netlify.app/images/season1/landing/laughing.webp",
+   "tag": "IMG.ph"
+  },
+  "paint": {
+   "first-paint": 852,
+   "first-contentful-paint": 956
+  },
+  "marker": "4635c89",
+  "res": [
+   {
+    "name": "/images/season1/landing/laughing.webp",
+    "start": 535,
+    "end": 977,
+    "bytes": 40694,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@5",
+    "start": 537,
+    "end": 784,
+    "bytes": 894,
+    "proto": "http/1.1"
+   },
+   {
+    "name": "/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600",
+    "start": 538,
+    "end": 1177,
+    "bytes": 32400,
+    "proto": "http/1.1"
+   }
+  ]
+ }
+]
