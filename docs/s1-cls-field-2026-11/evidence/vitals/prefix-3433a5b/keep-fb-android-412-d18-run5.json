@@ -1,0 +1,1557 @@
+{
+ "meta": {
+  "label": "prefix-3433a5b",
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d18",
+  "run": 5,
+  "url": "http://localhost:3102/season1?ad=d18",
+  "target": "http://localhost:3102",
+  "ua": "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]",
+  "viewport": {
+   "width": 412,
+   "height": 915
+  },
+  "dpr": 2.625,
+  "cpu": 4,
+  "network": {
+   "name": "slow4g",
+   "conditions": {
+    "offline": false,
+    "latency": 150,
+    "downloadThroughput": 200000,
+    "uploadThroughput": 93750
+   }
+  },
+  "cdpReturns": {
+   "networkEnable": {},
+   "network": {},
+   "cpu": {}
+  },
+  "failure": null,
+  "failureDetail": null,
+  "rewriteApplied": null,
+  "fontDelay": 0,
+  "fontCssDelay": 0,
+  "fontScale": null,
+  "toolbar": "on",
+  "journey": "full",
+  "startedAt": "2026-11-09T17:45:31.821Z",
+  "calibMs": 204,
+  "browser": "153.0.8010.12",
+  "harnessCommit": "5788c13",
+  "targetCommit": "3433a5b",
+  "marker": null
+ },
+ "summary": {
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d18",
+  "run": 5,
+  "failure": null,
+  "clsWin": 0.6776,
+  "clsWinIn": 0.6776,
+  "clsTot": 0.6848,
+  "clsTotIn": 0.6916,
+  "worstStart": 7715,
+  "topSource": "section#join-top.join + section.how",
+  "firstPaint": 1148,
+  "fcp": 1248,
+  "lcp": 7744,
+  "lcpEl": "img.ph webp;base64,UklGRu6eAABXRUJQVlA4IOKeAABwnwSdASpMBGsCPqVMoEumJDSvJVHsQpAUiWVuSNCtGjUr32d+A",
+  "heroImgStart": null,
+  "heroImgEnd": null,
+  "heroImgBytes": null,
+  "fontsCssEnd": 1089.5999999996275,
+  "lt1Start": 7555.299999999814,
+  "lt1Dur": 151,
+  "ltCount": 2,
+  "inp": 24,
+  "marker": null,
+  "s1Ready": null,
+  "s1Pre": null,
+  "heroState": "hero 495px",
+  "s2Off": 0,
+  "u6Off": [],
+  "formUsable": true,
+  "pageErrors": 0,
+  "posts": 0,
+  "analyticsAttempts": 0,
+  "leaks": 0,
+  "navError": null,
+  "journeyError": null
+ },
+ "cls": {
+  "windowed": 0.6776228122072833,
+  "windowedWithInput": 0.6776228122072833,
+  "total": 0.684794016644938,
+  "totalWithInput": 0.691611789974025,
+  "windows": 5,
+  "worstWindow": {
+   "start": 7714.699999999255,
+   "end": 7714.699999999255,
+   "value": 0.6776228122072833,
+   "count": 1
+  }
+ },
+ "shifts": [
+  {
+   "startTime": 2050.7999999998137,
+   "value": 0.007050232694868363,
+   "hadRecentInput": false,
+   "lastInputTime": 215.69999999925494,
+   "sources": [
+    {
+     "sel": "li",
+     "path": "div#lp.lp > section.how > ol > li",
+     "prev": [
+      24,
+      699,
+      364,
+      136
+     ],
+     "cur": [
+      24,
+      674,
+      364,
+      136
+     ]
+    },
+    {
+     "sel": "li",
+     "path": "div#lp.lp > section.how > ol > li",
+     "prev": [
+      24,
+      845,
+      364,
+      71
+     ],
+     "cur": [
+      24,
+      819,
+      364,
+      96
+     ]
+    },
+    {
+     "sel": "button #text",
+     "path": "section#join-top.join > div.form-wrap > form > button > #text",
+     "prev": [
+      24,
+      263,
+      364,
+      21
+     ],
+     "cur": [
+      24,
+      263,
+      364,
+      21
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 7714.699999999255,
+   "value": 0.6776228122072833,
+   "hadRecentInput": false,
+   "lastInputTime": 215.69999999925494,
+   "sources": [
+    {
+     "sel": "section#join-top.join",
+     "path": "section#join-top.join",
+     "prev": [
+      8,
+      8,
+      396,
+      371
+     ],
+     "cur": [
+      8,
+      503,
+      396,
+      371
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp > section.how",
+     "prev": [
+      8,
+      443,
+      396,
+      472
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 18019.099999999627,
+   "value": 0.00008063918678812406,
+   "hadRecentInput": true,
+   "lastInputTime": 17983.599999999627,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      283,
+      29,
+      101,
+      34
+     ],
+     "cur": [
+      286,
+      25,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      28,
+      28,
+      90,
+      18
+     ],
+     "cur": [
+      25,
+      24,
+      89,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 18036.099999999627,
+   "value": 0.000037489271792095604,
+   "hadRecentInput": true,
+   "lastInputTime": 17983.599999999627,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 18078.599999999627,
+   "value": 0.00012264192414639753,
+   "hadRecentInput": true,
+   "lastInputTime": 17983.599999999627,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      288,
+      22,
+      101,
+      34
+     ],
+     "cur": [
+      292,
+      16,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      23,
+      21,
+      88,
+      17
+     ],
+     "cur": [
+      19,
+      16,
+      86,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 25479.099999999627,
+   "value": 0.0033663964785649717,
+   "hadRecentInput": true,
+   "lastInputTime": 25458,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      813,
+      412,
+      46
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 25629.299999999814,
+   "value": 0.0032106064677953957,
+   "hadRecentInput": true,
+   "lastInputTime": 25605.699999999255,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      867,
+      412,
+      48
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 32018.199999999255,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 30040,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 34151.39999999944,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 33141.39999999944,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 36285.799999999814,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 35271.89999999944,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 36907.09999999963,
+   "value": 0.000021849208130071402,
+   "hadRecentInput": false,
+   "lastInputTime": 36273.59999999963,
+   "sources": [
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header > svg.mark",
+     "prev": [
+      17,
+      13,
+      84,
+      17
+     ],
+     "cur": [
+      20,
+      17,
+      86,
+      17
+     ]
+    }
+   ]
+  }
+ ],
+ "lcp": [
+  {
+   "startTime": 1248,
+   "renderTime": 1248,
+   "loadTime": 0,
+   "size": 24566,
+   "sel": "p",
+   "path": "section#join-top.join > div.form-wrap > p",
+   "url": ""
+  },
+  {
+   "startTime": 7744,
+   "renderTime": 7744,
+   "loadTime": 7707,
+   "size": 91746,
+   "sel": "img.ph",
+   "path": "section#hero.hero > div.art.k-feed.d5 > div.in > div.frame > img.ph",
+   "url": "data:image/webp;base64,UklGRu6eAABXRUJQVlA4IOKeAABwnwSdASpMBGsCPqVMoEumJDSvJVHsQpAUiWVuSNCtGjUr32d+A"
+  }
+ ],
+ "paint": {
+  "firstPaint": 1148,
+  "fcp": 1248
+ },
+ "inp": {
+  "inp": 24,
+  "interactions": 1
+ },
+ "events": [
+  {
+   "name": "click",
+   "startTime": 37875.09999999963,
+   "duration": 24,
+   "interactionId": 1478,
+   "target": "input#em-top"
+  },
+  {
+   "name": "click",
+   "startTime": 37875.09999999963,
+   "duration": 24,
+   "interactionId": 1478,
+   "target": "input#em-top",
+   "firstInput": true
+  }
+ ],
+ "longTasks": [
+  {
+   "startTime": 7555.299999999814,
+   "duration": 151,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  },
+  {
+   "startTime": 7723.299999999814,
+   "duration": 63,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  }
+ ],
+ "fontEvents": [
+  {
+   "t": 1238.199999999255,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 2152.7999999998137,
+   "type": "loadingdone",
+   "faces": [
+    "Inter Tight 700 normal",
+    "Inter Tight 500 normal",
+    "Inter Tight 800 normal",
+    "JetBrains Mono 700 normal"
+   ]
+  }
+ ],
+ "fontFaces": [
+  {
+   "family": "Inter Tight",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "800",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "JetBrains Mono",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  }
+ ],
+ "fontsStatus": "loaded",
+ "nav": {
+  "responseStart": 11.399999999441206,
+  "responseEnd": 7554.5,
+  "domInteractive": 7788.199999999255,
+  "dcl": 7788.299999999814,
+  "load": 7793.899999999441,
+  "encodedBodySize": 1350164,
+  "transferSize": 1350464
+ },
+ "resources": [
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "type": "link",
+   "start": 207.29999999981374,
+   "end": 1089.5999999996275,
+   "encodedBodySize": 32782,
+   "transferSize": 33082,
+   "status": 0,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/authors/karlin-oei-avatar.jpg",
+   "type": "img",
+   "start": 559.3999999994412,
+   "end": 939.3999999994412,
+   "encodedBodySize": 14196,
+   "transferSize": 14496,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  }
+ ],
+ "network": [
+  {
+   "url": "http://localhost:3102/season1?ad=d18",
+   "method": "GET",
+   "type": "Document",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/html",
+   "contentType": "text/html; charset=utf-8",
+   "bytes": 1350612,
+   "start": 0
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "method": "GET",
+   "type": "Stylesheet",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/css",
+   "contentType": "text/css; charset=utf-8",
+   "bytes": 33587,
+   "start": 207
+  },
+  {
+   "url": "http://localhost:3102/images/authors/karlin-oei-avatar.jpg",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/jpeg",
+   "contentType": "image/jpeg",
+   "bytes": 14478,
+   "start": 559
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 45694,
+   "start": 1165
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwgknk-4.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 32119,
+   "start": 1165
+  },
+  {
+   "url": "data:image/webp;base64,UklGRu6eAABXRUJQVlA4IOKeAABwnwSdASpMBGsCPqVMoEumJDSvJVHsQpAUiWVuSNCtGjUr32d+AGJwezlTl4kSfv0j/K9Md/jd874LZZ6Afm0UivBJ/QcfTCKz4a/r9HPPUDK9g/2fNF6of3hd3sdfvVX4X/3/Ox8c/xe1T+Y/5c2H8",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 0,
+   "start": 7706
+  },
+  {
+   "url": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/gif",
+   "contentType": "image/gif",
+   "bytes": 0,
+   "start": 40066
+  }
+ ],
+ "hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "localhost:3102"
+ ],
+ "timeline": [
+  {
+   "t": 1243,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1444,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 2194,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2445,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3193,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3444,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4194,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4443,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5194,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5444,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6194,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6444,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6694,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6944,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7194,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7444,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7798,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8444,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8698,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9445,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9694,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10444,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10694,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11444,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11694,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12445,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12694,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13444,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13694,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14194,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14444,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14695,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14944,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 15195,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  }
+ ],
+ "steps": [
+  {
+   "name": "journey-start",
+   "t": 17840,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "toolbar-collapsed",
+   "t": 18605,
+   "innerHeight": 805,
+   "vvHeight": 805,
+   "svh": 805
+  },
+  {
+   "name": "scroll-down",
+   "t": 18608,
+   "startedOn": "cta",
+   "y": 334
+  },
+  {
+   "name": "scroll-down",
+   "t": 19918,
+   "startedOn": "email",
+   "y": 624
+  },
+  {
+   "name": "scroll-down",
+   "t": 21253,
+   "startedOn": null,
+   "y": 1213
+  },
+  {
+   "name": "scroll-down",
+   "t": 22601,
+   "startedOn": "faq-summary",
+   "y": 1676
+  },
+  {
+   "name": "scroll-down",
+   "t": 23919,
+   "startedOn": null,
+   "y": 1779
+  },
+  {
+   "name": "bottom",
+   "t": 24626
+  },
+  {
+   "name": "toolbar-restored",
+   "t": 25988,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "scroll-up",
+   "t": 25994,
+   "y": 1311
+  },
+  {
+   "name": "scroll-up",
+   "t": 27324,
+   "y": 777
+  },
+  {
+   "name": "scroll-up",
+   "t": 28637,
+   "y": 243
+  },
+  {
+   "name": "scroll-up",
+   "t": 30054,
+   "y": 0
+  },
+  {
+   "name": "top",
+   "t": 30763
+  },
+  {
+   "name": "header-crossings",
+   "t": 37870,
+   "y": 0
+  },
+  {
+   "name": "email-typed",
+   "t": 38203,
+   "active": "em-top"
+  },
+  {
+   "name": "journey-end",
+   "t": 39017
+  }
+ ],
+ "dom": {
+  "marker": null,
+  "sentinels": {
+   "s1Ready": null,
+   "s1Pre": null
+  },
+  "state": {
+   "heroPa": false,
+   "lpPreIh": false,
+   "lpHasIhero": false,
+   "heroFilled": true,
+   "heroH": 495,
+   "ihVisible": false,
+   "ihH": 0,
+   "ctaText": "Save their spot",
+   "bodyFont": "Inter Tight",
+   "bodyFontSize": "34px",
+   "scrollHeight": 2584
+  },
+  "heroImgs": [
+   {
+    "root": "#hero",
+    "sel": "img.ph",
+    "inS2": true,
+    "src": "data:image/webp;base64,UklGRu6eAABXRUJQVlA4IOKeAABwnwSdASpMBGsCPqVMoEumJDSvJVHsQpAUiWVuSNCtGjUr32d+AGJwezlTl4kSfv0j/K9Md/jd874LZZ6Afm0UivBJ/",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1100,
+     619
+    ],
+    "rendered": [
+     349,
+     264
+    ],
+    "renderedDevicePx": 915,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": true,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": 0,
+     "imgDh": 0
+    }
+   }
+  ],
+  "heroBg": [],
+  "s2Offenders": [],
+  "fonts": {
+   "requestedFamilies": [
+    "Anybody",
+    "Archivo",
+    "Archivo Black",
+    "Bricolage Grotesque",
+    "Dela Gothic One",
+    "Graduate",
+    "Hanken Grotesk",
+    "Inter Tight",
+    "JetBrains Mono",
+    "Rubik",
+    "Rubik Mono One",
+    "Sora",
+    "Space Grotesk",
+    "Syne",
+    "Unbounded"
+   ],
+   "stylesheetLinks": [
+    {
+     "media": "",
+     "families": 15,
+     "inHead": false
+    }
+   ],
+   "textNodes": 36,
+   "offenders": {}
+  },
+  "preloads": []
+ },
+ "form": {
+  "attempted": true,
+  "errText": "Check the email address and try again.",
+  "errVisible": true,
+  "usable": true,
+  "why": null
+ },
+ "console": [],
+ "pageErrors": [],
+ "jsErrors": [],
+ "blocked": [],
+ "posts": [],
+ "leaks": [],
+ "failureHits": [],
+ "collectError": null
+}

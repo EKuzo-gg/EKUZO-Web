@@ -35,11 +35,12 @@ export function listRunFiles(dir) {
 const adOrder = (a) => (a === "noad" ? 999 : /^d(\d+)$/.test(a) ? +a.slice(1) : 500);
 const mode = (xs) => {
   const c = new Map();
-  for (const x of xs) if (x) c.set(x, (c.get(x) || 0) + 1);
+  for (const x0 of xs) { const x = clean(x0); if (x) c.set(x, (c.get(x) || 0) + 1); }
   let best = null, n = 0;
   for (const [k, v] of c) if (v > n) { best = k; n = v; }
   return best ? (n > 1 ? `${best} (${n}x)` : best) : "none";
 };
+const clean = (x) => (typeof x === "string" ? x.replace(/\S*base64,\S*/g, "(data URI)").replace(/\|/g, "/") : x);
 const uniq = (xs) => [...new Set(xs.filter((x) => x != null && x !== ""))];
 
 export function groupRuns(summaries) {

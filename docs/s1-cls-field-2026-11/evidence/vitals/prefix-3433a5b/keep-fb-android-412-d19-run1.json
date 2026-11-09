@@ -1,0 +1,1585 @@
+{
+ "meta": {
+  "label": "prefix-3433a5b",
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d19",
+  "run": 1,
+  "url": "http://localhost:3102/season1?ad=d19",
+  "target": "http://localhost:3102",
+  "ua": "Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]",
+  "viewport": {
+   "width": 412,
+   "height": 915
+  },
+  "dpr": 2.625,
+  "cpu": 4,
+  "network": {
+   "name": "slow4g",
+   "conditions": {
+    "offline": false,
+    "latency": 150,
+    "downloadThroughput": 200000,
+    "uploadThroughput": 93750
+   }
+  },
+  "cdpReturns": {
+   "networkEnable": {},
+   "network": {},
+   "cpu": {}
+  },
+  "failure": null,
+  "failureDetail": null,
+  "rewriteApplied": null,
+  "fontDelay": 0,
+  "fontCssDelay": 0,
+  "fontScale": null,
+  "toolbar": "on",
+  "journey": "full",
+  "startedAt": "2026-11-09T17:46:18.801Z",
+  "calibMs": 200,
+  "browser": "153.0.8010.12",
+  "harnessCommit": "5788c13",
+  "targetCommit": "3433a5b",
+  "marker": null
+ },
+ "summary": {
+  "cell": "fb-android-412",
+  "profile": "fb-android-412",
+  "ad": "d19",
+  "run": 1,
+  "failure": null,
+  "clsWin": 0.6133,
+  "clsWinIn": 0.6133,
+  "clsTot": 0.6204,
+  "clsTotIn": 0.6271,
+  "worstStart": 7805,
+  "topSource": "section#join-top.join + section.how",
+  "firstPaint": 1108,
+  "fcp": 1220,
+  "lcp": 9124,
+  "lcpEl": "img.jb southie-back.webp",
+  "heroImgStart": 7798.5,
+  "heroImgEnd": 9351.599999999627,
+  "heroImgBytes": 238340,
+  "fontsCssEnd": 1041.9000000003725,
+  "lt1Start": 7560.299999999814,
+  "lt1Dur": 67,
+  "ltCount": 2,
+  "inp": 24,
+  "marker": null,
+  "s1Ready": null,
+  "s1Pre": null,
+  "heroState": "hero 495px",
+  "s2Off": 1,
+  "u6Off": [],
+  "formUsable": true,
+  "pageErrors": 0,
+  "posts": 0,
+  "analyticsAttempts": 0,
+  "leaks": 0,
+  "navError": null,
+  "journeyError": null
+ },
+ "cls": {
+  "windowed": 0.6132795691209431,
+  "windowedWithInput": 0.6132795691209431,
+  "total": 0.6204289243504677,
+  "totalWithInput": 0.6271056125106264,
+  "windows": 5,
+  "worstWindow": {
+   "start": 7804.9000000003725,
+   "end": 7804.9000000003725,
+   "value": 0.6132795691209431,
+   "count": 1
+  }
+ },
+ "shifts": [
+  {
+   "startTime": 2007.7999999998137,
+   "value": 0.007050232694868363,
+   "hadRecentInput": false,
+   "lastInputTime": 241.70000000018626,
+   "sources": [
+    {
+     "sel": "li",
+     "path": "div#lp.lp > section.how > ol > li",
+     "prev": [
+      24,
+      699,
+      364,
+      136
+     ],
+     "cur": [
+      24,
+      674,
+      364,
+      136
+     ]
+    },
+    {
+     "sel": "li",
+     "path": "div#lp.lp > section.how > ol > li",
+     "prev": [
+      24,
+      845,
+      364,
+      71
+     ],
+     "cur": [
+      24,
+      819,
+      364,
+      96
+     ]
+    },
+    {
+     "sel": "button #text",
+     "path": "section#join-top.join > div.form-wrap > form > button > #text",
+     "prev": [
+      24,
+      263,
+      364,
+      21
+     ],
+     "cur": [
+      24,
+      263,
+      364,
+      21
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 7804.9000000003725,
+   "value": 0.6132795691209431,
+   "hadRecentInput": false,
+   "lastInputTime": 241.70000000018626,
+   "sources": [
+    {
+     "sel": "section#join-top.join",
+     "path": "section#join-top.join",
+     "prev": [
+      8,
+      8,
+      396,
+      371
+     ],
+     "cur": [
+      8,
+      503,
+      396,
+      365
+     ]
+    },
+    {
+     "sel": "section.how",
+     "path": "div#lp.lp > section.how",
+     "prev": [
+      8,
+      443,
+      396,
+      472
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 19576.299999999814,
+   "value": 0.00009968521379832039,
+   "hadRecentInput": true,
+   "lastInputTime": 19553.400000000373,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      289,
+      20,
+      101,
+      34
+     ]
+    },
+    {
+     "sel": "svg.mark",
+     "path": "div#lp.lp > header.solid > svg.mark",
+     "prev": [
+      25,
+      24,
+      89,
+      17
+     ],
+     "cur": [
+      21,
+      19,
+      87,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 26979.099999999627,
+   "value": 0.0033663964785649717,
+   "hadRecentInput": true,
+   "lastInputTime": 26976.400000000373,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      813,
+      412,
+      46
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 27130.700000000186,
+   "value": 0.0032106064677953957,
+   "hadRecentInput": true,
+   "lastInputTime": 27128.400000000373,
+   "sources": [
+    {
+     "sel": "div#sticky.sticky",
+     "path": "div#sticky.sticky",
+     "prev": [
+      0,
+      867,
+      412,
+      48
+     ],
+     "cur": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 33514.59999999963,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 31567.299999999814,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 35668,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 34633.90000000037,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "startTime": 37813.90000000037,
+   "value": 0.000033040844885452896,
+   "hadRecentInput": false,
+   "lastInputTime": 36816.40000000037,
+   "sources": [
+    {
+     "sel": "button.mini-cta",
+     "path": "div#lp.lp > header.solid > button.mini-cta",
+     "prev": [
+      286,
+      25,
+      101,
+      34
+     ],
+     "cur": [
+      288,
+      22,
+      101,
+      34
+     ]
+    }
+   ]
+  }
+ ],
+ "lcp": [
+  {
+   "startTime": 1220,
+   "renderTime": 1220,
+   "loadTime": 0,
+   "size": 24566,
+   "sel": "p",
+   "path": "section#join-top.join > div.form-wrap > p",
+   "url": ""
+  },
+  {
+   "startTime": 9124,
+   "renderTime": 9124,
+   "loadTime": 9100.200000000186,
+   "size": 102700,
+   "sel": "img.jb",
+   "path": "section#hero.hero > div.art.k-feed.d11 > img.jb",
+   "url": "/images/season1/jersey/southie-back.webp"
+  }
+ ],
+ "paint": {
+  "firstPaint": 1108,
+  "fcp": 1220
+ },
+ "inp": {
+  "inp": 24,
+  "interactions": 2
+ },
+ "events": [
+  {
+   "name": "click",
+   "startTime": 39404.40000000037,
+   "duration": 24,
+   "interactionId": 5293,
+   "target": "input#em-top"
+  },
+  {
+   "name": "click",
+   "startTime": 39404.40000000037,
+   "duration": 24,
+   "interactionId": 5293,
+   "target": "input#em-top",
+   "firstInput": true
+  },
+  {
+   "name": "keydown",
+   "startTime": 39716.799999999814,
+   "duration": 16,
+   "interactionId": 5300,
+   "target": "input#em-top"
+  },
+  {
+   "name": "keypress",
+   "startTime": 39716.799999999814,
+   "duration": 16,
+   "interactionId": 5300,
+   "target": "input#em-top"
+  }
+ ],
+ "longTasks": [
+  {
+   "startTime": 7560.299999999814,
+   "duration": 67,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  },
+  {
+   "startTime": 7628.200000000186,
+   "duration": 172,
+   "name": "self",
+   "attribution": [
+    "window"
+   ]
+  }
+ ],
+ "fontEvents": [
+  {
+   "t": 1209.2000000001863,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 2116.5999999996275,
+   "type": "loadingdone",
+   "faces": [
+    "Inter Tight 800 normal",
+    "Inter Tight 700 normal",
+    "Inter Tight 500 normal",
+    "JetBrains Mono 700 normal"
+   ]
+  },
+  {
+   "t": 7810.5,
+   "type": "loading",
+   "faces": []
+  },
+  {
+   "t": 8598.299999999814,
+   "type": "loadingdone",
+   "faces": [
+    "Rubik 900 normal",
+    "Rubik 500 normal"
+   ]
+  }
+ ],
+ "fontFaces": [
+  {
+   "family": "Inter Tight",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Inter Tight",
+   "weight": "800",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "JetBrains Mono",
+   "weight": "700",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Rubik",
+   "weight": "500",
+   "style": "normal",
+   "status": "loaded"
+  },
+  {
+   "family": "Rubik",
+   "weight": "900",
+   "style": "normal",
+   "status": "loaded"
+  }
+ ],
+ "fontsStatus": "loaded",
+ "nav": {
+  "responseStart": 15.900000000372529,
+  "responseEnd": 7559.799999999814,
+  "domInteractive": 7810.799999999814,
+  "dcl": 7810.799999999814,
+  "load": 9369.799999999814,
+  "encodedBodySize": 1350164,
+  "transferSize": 1350464
+ },
+ "resources": [
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "type": "link",
+   "start": 207.29999999981374,
+   "end": 1041.9000000003725,
+   "encodedBodySize": 32782,
+   "transferSize": 33082,
+   "status": 0,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/authors/karlin-oei-avatar.jpg",
+   "type": "img",
+   "start": 564,
+   "end": 937.2999999998137,
+   "encodedBodySize": 14196,
+   "transferSize": 14496,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/jersey/team-walk-1600.webp",
+   "type": "img",
+   "start": 7798.5,
+   "end": 9351.599999999627,
+   "encodedBodySize": 145602,
+   "transferSize": 145902,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  },
+  {
+   "url": "/images/season1/jersey/southie-back.webp",
+   "type": "img",
+   "start": 7800,
+   "end": 9096.700000000186,
+   "encodedBodySize": 92738,
+   "transferSize": 93038,
+   "status": 200,
+   "renderBlocking": "non-blocking"
+  }
+ ],
+ "network": [
+  {
+   "url": "http://localhost:3102/season1?ad=d19",
+   "method": "GET",
+   "type": "Document",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/html",
+   "contentType": "text/html; charset=utf-8",
+   "bytes": 1350612,
+   "start": 0
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothi",
+   "method": "GET",
+   "type": "Stylesheet",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "text/css",
+   "contentType": "text/css; charset=utf-8",
+   "bytes": 33587,
+   "start": 207
+  },
+  {
+   "url": "http://localhost:3102/images/authors/karlin-oei-avatar.jpg",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/jpeg",
+   "contentType": "image/jpeg",
+   "bytes": 14478,
+   "start": 563
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 45693,
+   "start": 1136
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwgknk-4.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 32119,
+   "start": 1137
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nBrXyw023e.woff2",
+   "method": "GET",
+   "type": "Font",
+   "priority": "VeryHigh",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "font/woff2",
+   "contentType": "font/woff2",
+   "bytes": 36103,
+   "start": 7709
+  },
+  {
+   "url": "http://localhost:3102/images/season1/jersey/team-walk-1600.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 145886,
+   "start": 7799
+  },
+  {
+   "url": "http://localhost:3102/images/season1/jersey/southie-back.webp",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": "127.0.0.1",
+   "byHarness": false,
+   "mime": "image/webp",
+   "contentType": "image/webp",
+   "bytes": 93021,
+   "start": 7800
+  },
+  {
+   "url": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+   "method": "GET",
+   "type": "Image",
+   "priority": "Low",
+   "status": 200,
+   "ip": null,
+   "byHarness": false,
+   "mime": "image/gif",
+   "contentType": "image/gif",
+   "bytes": 0,
+   "start": 41601
+  }
+ ],
+ "hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "localhost:3102"
+ ],
+ "timeline": [
+  {
+   "t": 1223,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1703,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 1952,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 2203,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2702,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 2953,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3202,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3452,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3703,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 3952,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4203,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4703,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 4952,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5203,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5703,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 5952,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6205,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6702,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 6952,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7202,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7453,
+   "heroH": 0,
+   "heroKids": 0,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 8,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 7811,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 7954,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 8203,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 8452,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loading",
+   "ready": null
+  },
+  {
+   "t": 8702,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 8953,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9203,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9452,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 9954,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10202,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10453,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 10954,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11204,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11453,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 11952,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12202,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12452,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 12952,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13203,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13453,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 13953,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14203,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14453,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14703,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 14953,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  },
+  {
+   "t": 15202,
+   "heroH": 495,
+   "heroKids": 1,
+   "heroCls": "hero",
+   "ihH": 0,
+   "ihHidden": true,
+   "joinY": 503,
+   "lpCls": "lp",
+   "fonts": "loaded",
+   "ready": null
+  }
+ ],
+ "steps": [
+  {
+   "name": "journey-start",
+   "t": 19415,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "toolbar-collapsed",
+   "t": 20135,
+   "innerHeight": 805,
+   "vvHeight": 805,
+   "svh": 805
+  },
+  {
+   "name": "scroll-down",
+   "t": 20146,
+   "startedOn": "cta",
+   "y": 365
+  },
+  {
+   "name": "scroll-down",
+   "t": 21466,
+   "startedOn": "email",
+   "y": 618
+  },
+  {
+   "name": "scroll-down",
+   "t": 22803,
+   "startedOn": null,
+   "y": 1207
+  },
+  {
+   "name": "scroll-down",
+   "t": 24116,
+   "startedOn": "faq-summary",
+   "y": 1630
+  },
+  {
+   "name": "scroll-down",
+   "t": 25432,
+   "startedOn": null,
+   "y": 1696
+  },
+  {
+   "name": "bottom",
+   "t": 26141
+  },
+  {
+   "name": "toolbar-restored",
+   "t": 27499,
+   "innerHeight": 915,
+   "vvHeight": 915,
+   "svh": 915
+  },
+  {
+   "name": "scroll-up",
+   "t": 27503,
+   "y": 1228
+  },
+  {
+   "name": "scroll-up",
+   "t": 28855,
+   "y": 694
+  },
+  {
+   "name": "scroll-up",
+   "t": 30166,
+   "y": 160
+  },
+  {
+   "name": "scroll-up",
+   "t": 31579,
+   "y": 0
+  },
+  {
+   "name": "top",
+   "t": 32285
+  },
+  {
+   "name": "header-crossings",
+   "t": 39397,
+   "y": 0
+  },
+  {
+   "name": "email-typed",
+   "t": 39738,
+   "active": "em-top"
+  },
+  {
+   "name": "journey-end",
+   "t": 40552
+  }
+ ],
+ "dom": {
+  "marker": null,
+  "sentinels": {
+   "s1Ready": null,
+   "s1Pre": null
+  },
+  "state": {
+   "heroPa": false,
+   "lpPreIh": false,
+   "lpHasIhero": false,
+   "heroFilled": true,
+   "heroH": 495,
+   "ihVisible": false,
+   "ihH": 0,
+   "ctaText": "Save their spot",
+   "bodyFont": "Inter Tight",
+   "bodyFontSize": "31.28px",
+   "scrollHeight": 2501
+  },
+  "heroImgs": [
+   {
+    "root": "#hero",
+    "sel": "img.ph",
+    "inS2": true,
+    "src": "/images/season1/jersey/team-walk-1600.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     1600,
+     900
+    ],
+    "rendered": [
+     396,
+     238
+    ],
+    "renderedDevicePx": 1040,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": true,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": 0,
+     "imgDh": 0
+    }
+   },
+   {
+    "root": "#hero",
+    "sel": "img.jb",
+    "inS2": true,
+    "src": "/images/season1/jersey/southie-back.webp",
+    "attrW": null,
+    "attrH": null,
+    "loading": null,
+    "fetchpriority": null,
+    "srcset": false,
+    "natural": [
+     846,
+     1100
+    ],
+    "rendered": [
+     233,
+     288
+    ],
+    "renderedDevicePx": 611,
+    "position": "absolute",
+    "aspectRatio": "auto",
+    "visible": true,
+    "reserved": false,
+    "swap": {
+     "boxDelta": 0,
+     "imgDw": -6.5,
+     "imgDh": -61.5
+    }
+   }
+  ],
+  "heroBg": [],
+  "s2Offenders": [
+   "#hero img.jb /images/season1/jersey/southie-back.webp"
+  ],
+  "fonts": {
+   "requestedFamilies": [
+    "Anybody",
+    "Archivo",
+    "Archivo Black",
+    "Bricolage Grotesque",
+    "Dela Gothic One",
+    "Graduate",
+    "Hanken Grotesk",
+    "Inter Tight",
+    "JetBrains Mono",
+    "Rubik",
+    "Rubik Mono One",
+    "Sora",
+    "Space Grotesk",
+    "Syne",
+    "Unbounded"
+   ],
+   "stylesheetLinks": [
+    {
+     "media": "",
+     "families": 15,
+     "inHead": false
+    }
+   ],
+   "textNodes": 36,
+   "offenders": {}
+  },
+  "preloads": []
+ },
+ "form": {
+  "attempted": true,
+  "errText": "Check the email address and try again.",
+  "errVisible": true,
+  "usable": true,
+  "why": null
+ },
+ "console": [],
+ "pageErrors": [],
+ "jsErrors": [],
+ "blocked": [],
+ "posts": [],
+ "leaks": [],
+ "failureHits": [],
+ "collectError": null
+}
