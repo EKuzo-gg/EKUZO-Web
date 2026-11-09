@@ -1,0 +1,16 @@
+{
+ "byHost": {
+  "googletagmanager.com": 12,
+  "connect.facebook.net": 12,
+  "clarity.ms": 12
+ },
+ "attempts": 36,
+ "leaks": [],
+ "posts": [],
+ "runs": 12,
+ "samples": {
+  "googletagmanager.com": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W",
+  "connect.facebook.net": "https://connect.facebook.net/en_US/fbevents.js",
+  "clarity.ms": "https://www.clarity.ms/tag/wml8wll5ua"
+ }
+}

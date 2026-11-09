@@ -20,7 +20,8 @@ defect to route.
   over 1.9 s. First paint earlier on d18, d2 and d4, later on d19 by 220 ms (ruled D29). The run
   stopped itself on the chrome profile's second d19 load when the page came back without a marker
   (a navigation failure read as a marker mismatch; harness fix OR-H3), so the chrome cells finished
-  in a second label, `live-after-chrome`.
+  in a second label, `live-after-chrome` (Chrome Android 412, N=3: LCP d19 3012 to 1824 ms, d2 2440
+  to 1276, d4 1164 to 1008, d21 3192 to 2504; CLS unchanged; 36 analytics attempts blocked, 0 leaks).
 - **What is live on ekuzo.gg since 15:23 CT** (build marker `19b9963`, `evidence/fable/live/`):
   1. The landing loads its hero photo and only the fonts the ad uses before anything else, and the
      stylesheet that used to block first paint is gone from the body. Same pixels (66 of 66 screenshot

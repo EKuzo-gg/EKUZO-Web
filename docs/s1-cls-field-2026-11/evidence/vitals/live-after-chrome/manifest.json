@@ -1,0 +1,91 @@
+{
+ "label": "live-after-chrome",
+ "invocations": [
+  {
+   "command": "node scripts/field-vitals/run.mjs --target https://ekuzo.gg --ads d19,d2,d4,d21 --profile chrome-android-412 --runs 3 --label live-after-chrome --expectMarker 19b9963 --requireReady --noForm",
+   "startedAt": "2026-11-09T22:08:43.000Z",
+   "harnessCommit": "2677bed",
+   "harnessDirty": false,
+   "target": "https://ekuzo.gg",
+   "targetCommit": {
+    "kind": "remote",
+    "ref": null
+   },
+   "versions": {
+    "node": "v22.23.4",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "os": "Linux 6.18.44-fc-v310 x64",
+    "cpus": "2 x Intel(R) Xeon(R) Processor @ 2.10GHz"
+   },
+   "calibration": {
+    "ms": 201,
+    "x": true
+   },
+   "options": {
+    "network": {
+     "name": "slow4g",
+     "conditions": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+     }
+    },
+    "cpu": 4,
+    "runs": 3,
+    "ads": [
+     "d19",
+     "d2",
+     "d4",
+     "d21"
+    ],
+    "profiles": [
+     "chrome-android-412"
+    ],
+    "viewport": null,
+    "failure": null,
+    "fontDelay": 0,
+    "fontCssDelay": 0,
+    "fontScale": null,
+    "toolbar": "on",
+    "journey": "full",
+    "wait": 10000,
+    "formCheck": false,
+    "expectMarker": "19b9963"
+   },
+   "finishedAt": "2026-11-09T22:15:55.199Z",
+   "totals": {
+    "posts": 0,
+    "leaks": 0,
+    "attempts": 36,
+    "readyMissing": 0
+   }
+  }
+ ],
+ "files": {
+  "chrome-android-412/d19-run1.json": "ff1cd59ef1c9b7e4c7bbc8ef2739b337e22d3d868704ba062f3051c27e87076b",
+  "chrome-android-412/d19-run2.json": "8b76da07c1fcb5fcce92acf8cb370613fea30ea621b9433ea3bccafa2ffd4030",
+  "chrome-android-412/d19-run3.json": "8f4465733db9b29b8211275ad7806d0e852c4c068e2c9f2b201717e0db704341",
+  "chrome-android-412/d2-run1.json": "084b2bb8939ec5c670c0ae62bf104f3de4232521f367f4db5a3ecc4446aa71f0",
+  "chrome-android-412/d2-run2.json": "ca6e0bcf79b59262539a1bfb08d12d2fad08f1ddfed288644d4d1b2e2e72631e",
+  "chrome-android-412/d2-run3.json": "fdfbc0a43c16f6999b052b3cb080d50fbc3f72d38bc95a8be2ceae86c39b37e1",
+  "chrome-android-412/d21-run1.json": "e61d0b80cb17bef62538e17f9fc02e2e567513d08fb804719b576c07c0fa17e2",
+  "chrome-android-412/d21-run2.json": "17920de79c3c0cee2abb8ed24b142e0da7bee7a5e1f1a2831d4e78096cb49f74",
+  "chrome-android-412/d21-run3.json": "980048e52b756c609bdca4ae862ce621a7b65e150d2cd45327e1c23f4b9f86f8",
+  "chrome-android-412/d4-run1.json": "6143c7bec83c5147502a8b56bbc11e6fab9230f4125b7c377490a0580e9bd8e7",
+  "chrome-android-412/d4-run2.json": "24eef23e379f259fb1773d608fc183bb56c85233c961734ce5b8dd2e4cc6a344",
+  "chrome-android-412/d4-run3.json": "8a89f477cca20d580827cfbc1076909ed87b7beb56a5b3f34de97bcfb70a4a60"
+ },
+ "blocked": {
+  "byHost": {
+   "googletagmanager.com": 12,
+   "connect.facebook.net": 12,
+   "clarity.ms": 12
+  },
+  "attempts": 36,
+  "leaks": 0,
+  "posts": 0
+ },
+ "runs": 12
+}
