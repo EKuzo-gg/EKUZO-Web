@@ -1,0 +1,787 @@
+{
+ "d1": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/mc-blocks.webp",
+    "start": 1193,
+    "end": 2316
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 196,
+    "end": 749
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/mc-blocks.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 768
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 769
+   },
+   {
+    "u": "FtoMM3T6r8E7mPbF4C_k3HqU.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1173
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 195
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d2": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/couch.webp",
+    "start": 1203,
+    "end": 2077
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 203,
+    "end": 750
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/couch.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 767
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 767
+   },
+   {
+    "u": "Gg4MzN6KJ7eW6CYyF_jzx13E.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1182
+   },
+   {
+    "u": "w6lQkqWY8Q82sLydOxKsv4Rn.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1183
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 202
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d4": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/coach-and-mom.webp",
+    "start": 1197,
+    "end": 2332
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 195,
+    "end": 749
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/coach-and-mom.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 772
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 772
+   },
+   {
+    "u": "9D4dj_x9PpZBMlGIInHWVyNJ.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1174
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 195
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d10": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/kid-couch.webp",
+    "start": 1091,
+    "end": 2587
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 194,
+    "end": 839
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/kid-couch.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 857
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 858
+   },
+   {
+    "u": "O5mnuyOo1lfiQwV6-xo6eeIw.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1071
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 194
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d18": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/laughing.webp",
+    "start": 1191,
+    "end": 1672
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 190,
+    "end": 734
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/laughing.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 751
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 751
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 189
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d19": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 1201,
+    "end": 2864
+   },
+   {
+    "n": "/images/season1/jersey/southie-back.webp",
+    "start": 1201,
+    "end": 2601
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 202,
+    "end": 756
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/jersey/team-walk-1600.webp",
+    "prio": "Low",
+    "type": "Image"
+   },
+   {
+    "u": "/images/season1/jersey/southie-back.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 773
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 773
+   },
+   {
+    "u": "iJWKBXyIfDnIV7nBrXyw023e.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1182
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 201
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "d21": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/jersey/team-walk-1600.webp",
+    "start": 1195,
+    "end": 2916
+   },
+   {
+    "n": "/images/season1/jersey/southie-front.webp",
+    "start": 1195,
+    "end": 2706
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 202,
+    "end": 756
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/jersey/team-walk-1600.webp",
+    "prio": "Low",
+    "type": "Image"
+   },
+   {
+    "u": "/images/season1/jersey/southie-front.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 772
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 773
+   },
+   {
+    "u": "iJWKBXyIfDnIV7nBrXyw023e.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1175
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 201
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "noad": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/mc-blocks.webp",
+    "start": 1091,
+    "end": 2369
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 194,
+    "end": 869
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/mc-blocks.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 886
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 887
+   },
+   {
+    "u": "FtoMM3T6r8E7mPbF4C_k3HqU.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1071
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 194
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ },
+ "zz": {
+  "preloadImages": [],
+  "fontLinks": [
+   {
+    "rel": "preconnect",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 0,
+    "fam": []
+   },
+   {
+    "rel": "stylesheet",
+    "id": "",
+    "media": "",
+    "parent": "BODY",
+    "families": 15,
+    "fam": [
+     "Anybody",
+     "Archivo",
+     "Archivo Black",
+     "Bricolage Grotesque",
+     "Dela Gothic One",
+     "Graduate",
+     "Hanken Grotesk",
+     "Inter Tight",
+     "JetBrains Mono",
+     "Rubik",
+     "Rubik Mono One",
+     "Sora",
+     "Space Grotesk",
+     "Syne",
+     "Unbounded"
+    ]
+   }
+  ],
+  "heroImg": [
+   {
+    "n": "/images/season1/landing/mc-blocks.webp",
+    "start": 1144,
+    "end": 2323
+   }
+  ],
+  "fontCss": [
+   {
+    "n": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght",
+    "start": 201,
+    "end": 793
+   }
+  ],
+  "gstatic": [],
+  "imageRequests": [
+   {
+    "u": "/images/season1/landing/mc-blocks.webp",
+    "prio": "Low",
+    "type": "Image"
+   }
+  ],
+  "gstaticPrio": [
+   {
+    "u": "AFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+    "prio": "VeryHigh",
+    "atMs": 810
+   },
+   {
+    "u": "kaToggR7BYRbKPxDcwgknk-4.woff2",
+    "prio": "VeryHigh",
+    "atMs": 810
+   },
+   {
+    "u": "FtoMM3T6r8E7mPbF4C_k3HqU.woff2",
+    "prio": "VeryHigh",
+    "atMs": 1121
+   }
+  ],
+  "cssPrio": [
+   {
+    "prio": "VeryHigh",
+    "atMs": 200
+   }
+  ],
+  "errors": [
+   "warning: Deprecated API for given entry type."
+  ]
+ }
+}
