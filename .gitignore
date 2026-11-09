@@ -55,6 +55,7 @@ public/place-these-in-ekuzo-web-public.zip
 # Claude working files — ignore everything under .claude/ except shared commands
 .claude/*
 !.claude/commands/
+!.claude/settings.json
 
 # Scratch/session files
 CAMPS-CLAUDE.md
