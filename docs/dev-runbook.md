@@ -196,10 +196,19 @@ After a release that removes dev-only files on main, main never merges directly 
 Release and integration branch scripts run with `set -e` and stop on the first merge conflict. Resolve conflicts by hand (WORKLOG conflicts keep both sides), then re-verify code-identical and fast-forward before any push. Re-run `git log --oneline -1` on main and dev right before asking for the go phrase: dev can move during the day.
 <!-- Added 2026-10-30, approved live by Jamie ("agree with the rules") in session 2026-10-30-season1-analytics-build: a chained command kept going after a WORKLOG conflict and force-pushed a staging branch to the wrong commit (no harm: staging only). -->
 
-**Pushes go through Jamie's terminal.** Neither Claude's cloud workspace nor the shell on Jamie's
-computer has GitHub write access to EKuzo-gg, so Claude prepares the commits and hands over the
-push commands. Installing the Claude GitHub App on the org
-(https://github.com/apps/claude/installations/select_target) would let Claude push; the go/no-go
-for main stays Jamie's either way.
+**Pushes.** Since 2026-11-09 Claude's cloud session can push to EKuzo-gg (the repo is attached with
+push access through the Claude GitHub App), and it did so for `dev` and `main` that day on Jamie's
+standing go ("push to prod assuming it passes all tests"). The go/no-go for main stays Jamie's either
+way: without a go in the session, Claude prepares the commits and hands over the push commands.
+<!-- Updated 2026-11-09 (docs/s1-cls-field-2026-11/03-decision-log.md D21): the earlier text said neither the cloud workspace nor the shell on Jamie's computer could push. -->
+
+**Dev-integration merge, as run on 2026-11-09.** Starting from the build branch and merging
+`origin/dev` in gives exactly three conflicts (`WORKLOG.md` keeps both sides; `public/roadshow/ad-lab.html`
+and `public/roadshow/index.html` take dev's copy) and needs `git checkout origin/dev -- public/ads/season1
+public/review.html public/roadshow` to restore the 77 dev-only files before the commit. Prove
+`git diff --quiet <build tip> HEAD -- app lib components scripts public/images` and
+`git merge-base --is-ancestor origin/dev HEAD` before pushing `HEAD:dev`. Step by step, with the
+expected counts: `docs/s1-cls-field-2026-11/evidence/relay/dev-integration-runbook.md`. The second
+integration of the same day had no conflicts (dev already held the first merge).
 
 **Preventing overwrites:** Aaron works in `components/` and `app/*/page.tsx`; Jamie works in `app/api/` and `context/`. Git auto-merges changes to different files — conflicts only happen when both edit the same lines in the same file. If either needs to touch the other's area, communicate first.

@@ -11,6 +11,8 @@ Entries (each is a scar from a real mistake):
 4. [Button States](#button-states)
 5. [Font Display](#font-display)
 6. [Sheets automation: poll, don't trust onChange](#sheets-automation-poll-dont-trust-onchange)
+7. [Netlify re-appends the query to a function's redirect Location](#netlify-re-appends-the-query-to-a-functions-redirect-location)
+8. [Preload one hero image, the LCP element, and measure load order on a gzipped page](#preload-one-hero-image-the-lcp-element-and-measure-load-order-on-a-gzipped-page)
 
 ---
 
@@ -142,3 +144,20 @@ Fixed in commit `a01929e` ("Fix Netlify deploy: inline testimonial transcripts, 
   `history.replaceState` before analytics load (welcome page), or answer 200 with a tiny page that navigates
   with `location.replace` plus `<meta name="referrer" content="no-referrer">` (`lib/season1/redirect.ts`).
 - Test any redirect on the branch deploy with `curl -sI` before calling it done.
+
+---
+
+## Preload one hero image, the LCP element, and measure load order on a gzipped page
+<!-- Added 2026-11-09, Season 01 landing speed run (docs/s1-cls-field-2026-11/03-decision-log.md D24, D25; evidence/fable/preload-competition.md) -->
+
+- On a bandwidth-bound link (Slow 4G, 1.6 Mbps) every byte fetched before the HTML finishes competes with
+  the HTML and with the big inline script at its end. Preloading two hero photos on d19 (238 KB) moved the
+  LCP photo's finish to 2.4 s and, in the local lab, the form handlers from 1.3 s to 2.5 s. One preload per
+  ad, the image Chrome reports as the LCP element (`img.jb` on d19 and d11, `img.ph` on d21, measured, not
+  assumed), with `fetchpriority="high"`; the other image loads when the hero is injected. Result on the live
+  CDN: d19 LCP 2.84 s to 1.73 s.
+- `next start` serves the route-handler HTML uncompressed (137 KB) while Netlify gzips it to 38 KB, so a
+  local lab overstates how much early image bytes delay the script (3.7x the wire size). Read load-order
+  effects (LCP vs script-ready trade-offs) on the dev deploy, or put a gzip proxy in front of the local
+  server; keep the local run for layout shift, forms and events. The harness and its options:
+  `scripts/field-vitals/README.md`.
