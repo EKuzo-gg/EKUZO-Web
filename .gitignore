@@ -76,3 +76,7 @@ docs/s1-cls-field-2026-11/evidence/vitals/**/*.json
 !docs/s1-cls-field-2026-11/evidence/vitals/**/manifest.json
 !docs/s1-cls-field-2026-11/evidence/vitals/**/blocked.json
 !docs/s1-cls-field-2026-11/evidence/vitals/**/keep-*.json
+
+# Local QA servers (Build Loop lanes): never committed
+.server-*.pid
+server-*.log
