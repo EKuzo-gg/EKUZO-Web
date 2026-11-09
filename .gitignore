@@ -68,3 +68,10 @@ extras/
 # Drafts
 tweet-video.*
 01-purchase-confirmation.html
+
+# Field-vitals harness (scripts/field-vitals): raw per-run JSON stays local; tables, manifests,
+# blocked logs and keep files are committed (OR10).
+docs/s1-cls-field-2026-11/evidence/vitals/**/*.json
+!docs/s1-cls-field-2026-11/evidence/vitals/**/manifest.json
+!docs/s1-cls-field-2026-11/evidence/vitals/**/blocked.json
+!docs/s1-cls-field-2026-11/evidence/vitals/**/keep-*.json
