@@ -1,6 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Season One</title>
 <style>html{background:#0B0A0D}</style>
 <meta name="s1-build" content="{{BUILD}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
 // Season 01 head bootstrap (s1-cls-field Slice 2). One source for the ad tables the body scripts read (AD_HERO, HERO_KEYS, IMG), then, before any stylesheet, the chosen ad's hero image preloads and a stylesheet with only the font families that ad paints.
 // The other families load async as a safety net (not all of them: a second @font-face for a family already in use sends its text back to the fallback while it reloads). Any failure here writes the all-families stylesheet as a blocking stylesheet instead, which is the page as it was; <noscript> in the body does the same without JS.
@@ -43,8 +45,6 @@ window.S1={
 <!-- Analytics: GA4, Meta Pixel (autoConfig off before init) and Clarity come from lib/season1/tags.ts (renderStaticTags), filled in by app/season1/route.ts. Live only when the browser's hostname is ekuzo.gg or www.ekuzo.gg; any other host loads nothing unless ?s1qa=1 (QA mode). The Lead fires from the form script below with an eventID shared with the server-side CAPI Lead in /api/season-one. -->
 {{TAGS}}
 </head><body>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap"></noscript>
 <style>
 /* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */
