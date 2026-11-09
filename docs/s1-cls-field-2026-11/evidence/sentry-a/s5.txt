@@ -1,0 +1,4 @@
+64:-.lp.pre-ih:not(.has-ihero) > #hero{min-height:80svh}}
+65:+.lp.pre-ih:not(.has-ihero) > #hero{min-height:80vh;min-height:80svh}}
+84:-      else if(HERO_KEYS.indexOf(qh)>=0||own(AD_HERO,ad)) /* d10 (array) too: both of its heroes are interactive and end at 80svh, so the split need not be known here */ document.getElementById("lp").classList.add("pre-ih");
+86:+      else if(HERO_KEYS.indexOf(qh)>=0||own(AD_HERO,ad)){ /* d10 (array) too: both of its heroes are interactive and end at 80svh, so the split need not be known here */ document.getElementById("lp").classList.add("pre-ih"); document.getElementById("lp").dataset.s1Pre="ih"; }
