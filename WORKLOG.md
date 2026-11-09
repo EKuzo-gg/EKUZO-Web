@@ -4,6 +4,42 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-09: Season 01 landing speed, checkout fix, field-vitals harness (Build Loop, docs/s1-cls-field-2026-11/)
+
+- Live on ekuzo.gg 15:23 CT (`main` 45dfe97 to 19b9963, fast-forward; marker `<meta name="s1-build">` now stamps
+  every landing build from `COMMIT_REF`). Field truth first: Clarity showed the d18/d19 jump already closed by the
+  Nov 5 releases (0 poor-CLS sessions since), so the run aimed at load speed, a regression harness and the ads and
+  payment evaluation.
+- Landing (`app/season1/landing.html`): a head bootstrap owns the ad tables (`window.S1`), preloads the one hero
+  image that is the ad's LCP element (d19 and d11 list the jersey photo first), and writes a per-ad Google Fonts
+  stylesheet (2 to 4 families) with the other families async; the all-families link that blocked first paint in the
+  body is now only a `<noscript>` copy. Preconnects moved to the head. `data-clarity-mask` on the email and phone
+  inputs; the hidden founder avatar is `loading="lazy"`; the waitlist fetch has a 15 s timeout; `min-height:80vh`
+  fallback before `80svh`; `fitHero` reruns on font load; `data-s1-ready` and `data-s1-pre` sentinels. Pixels
+  unchanged (66 screenshot pairs identical to main, Steward PASS). Live at Slow 4G, tags blocked: LCP d18 2.16 s to
+  about 1.0 to 1.5 s, d19 2.84 s to 1.72 s, first paint 0.2 to 0.4 s earlier; CLS unchanged under 0.004.
+- Checkout (`app/season1/join/signup/signup.html`, M-1): after the webhook cancels a PaymentIntent (three declines)
+  the page drops its cached client secret, so the next tap re-commits instead of re-confirming a dead intent; that
+  one error shows the page's existing fallback line instead of Stripe's text. Test in `signupCommit.test.ts`.
+  Stripe live showed no failed or canceled payment since Aug 22, so this is insurance.
+- `scripts/field-vitals/`: a Playwright harness that measures CLS, LCP, INP and the form on `/season1?ad=` the way
+  in-app Android browsers see it (fb and ig UAs, Slow 4G, CPU 4x, touch journey), blocks every analytics host,
+  aborts any POST to `/api/*`, and proves the pre-fix page (`3433a5b`) at CLS 0.61 to 0.68. `npm run vitals`;
+  `npm test` now also runs its fixture test. Raw run JSON is gitignored; tables and manifests are committed under
+  `docs/s1-cls-field-2026-11/evidence/vitals/`.
+- `.claude/settings.json` (new, committed) runs `scripts/guard-pattern-kill.sh` before every Bash call in Claude
+  Code: it blocks `pkill -f`, `pgrep -f` and `ps | grep` (kill servers by PID instead). Aaron: if it gets in your
+  way, delete the file locally; say so in the next standup.
+- `dev` carries the same code through two integration merges (`4635c89`, `91f5503`) with its roadshow, ad-lab and
+  review files kept; never merge `dev` into `main`.
+- For Aaron (no action needed today, details in `docs/s1-cls-field-2026-11/07-review-guide.md`): d19 and d21 ship
+  `team-walk-1600.webp` (146 KB) into a 400 px slot and the 900 px variant differs by 0.59% of pixels on DPR-2
+  phones, your call whether to accept it; the landing has no Privacy Policy link while it collects email and phone;
+  the sticky "Save their spot" reads as plain text in the Parent review; "Weekly practice" on d18/d19 still
+  conflicts with the twice-a-week FAQ (on record since 11-05).
+- Checks: `npm test` 589 + 5 tests, 588 pass, 1 skipped, 0 fail; tsc clean; Sentry A (local branch vs main) and
+  Sentry B (dev deploy vs this morning's live read) in the docs folder.
+
 ## Jamie's Claude, 2026-11-05 (afternoon): Season 01 round 2 (Build Loop, docs/s1-round2-2026-11/)
 
 - `/api/season-one`: per-IP limit inside the claim transaction, counting only new sign-ups (Netlify client IP only,
