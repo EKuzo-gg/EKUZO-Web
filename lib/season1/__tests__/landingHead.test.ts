@@ -6,7 +6,7 @@ import vm from "node:vm";
 
 /**
  * s1-cls-field Slice 2: the landing page's head bootstrap holds the ad tables the body scripts read
- * (one source) and, per ad, preloads the hero images and requests only the fonts that ad paints.
+ * (one source) and, per ad, preloads the hero's LCP image and requests only the fonts that ad paints.
  * These tests derive the truth from the page itself (D, T, the CSS) and check the head tables.
  */
 const html = fs.readFileSync(path.join(process.cwd(), "app", "season1", "landing.html"), "utf8");
@@ -91,13 +91,19 @@ describe("landing head bootstrap: one source for the ad tables", () => {
     assert.deepEqual(Object.keys(S1.FONTS).sort(), ids);
   });
 
-  it("(a) every D entry's art images, in template order, equal HERO_IMG[id]", () => {
+  it("(a) every D entry's art images, as a set, equal HERO_IMG[id], LCP element first", () => {
     for (const d of D) {
       const srcs = [...(d.art("feed").matchAll(/<img\b[^>]*?\bsrc="([^"]+)"/g) as Iterable<RegExpMatchArray>)].map((m) => m[1]);
       assert.ok(srcs.length > 0, d.id);
-      assert.deepEqual(S1.HERO_IMG[d.id], srcs, d.id);
+      assert.equal(S1.HERO_IMG[d.id].length, srcs.length, d.id);
+      assert.deepEqual([...S1.HERO_IMG[d.id]].sort(), [...srcs].sort(), d.id);
       for (const s of srcs) assert.ok(fs.existsSync(path.join(process.cwd(), "public", s)), s);
     }
+    // D24: the first entry is the measured LCP element, the only image preloaded. d19's LCP is img.jb
+    // (southie-back), d21's is img.ph (team-walk-hd); evidence in
+    // docs/s1-cls-field-2026-11/evidence/fable/preload-competition.md.
+    assert.equal(S1.HERO_IMG.d19[0], S1.IMG["southie-back"]);
+    assert.equal(S1.HERO_IMG.d21[0], S1.IMG["team-walk-hd"]);
   });
 
   it("(b) every family an ad paints (T font, template CSS, module CSS, art) is in FONT_BASE + FONTS[id]", () => {
@@ -143,14 +149,26 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
     "https://fonts.googleapis.com/css2?family=" + S1.FAM.filter((f) => fams.includes(famName(f))).join("&family=") + "&display=swap";
   const IMG = S1.IMG;
 
-  it("page A photo heroes preload their images, the first at high priority", () => {
+  it("page A photo heroes preload only their LCP image, at high priority (D24)", () => {
     let r = runBoot("?ad=d19&utm_source=fb");
-    assert.deepEqual(r.preloads, [[IMG["team-walk-hd"], true], [IMG["southie-back"], false]]);
+    assert.deepEqual(r.preloads, [[IMG["southie-back"], true]]);
     assert.equal(r.fonts, url(["Inter Tight", "JetBrains Mono", "Rubik"]));
     r = runBoot("?ad=d18");
     assert.deepEqual(r.preloads, [[IMG["laughing"], true]]);
     assert.equal(r.fonts, url(["Inter Tight", "JetBrains Mono"]));
-    assert.deepEqual(runBoot("?ad=D019").preloads[0], [IMG["team-walk-hd"], true]);
+    assert.deepEqual(runBoot("?ad=D019").preloads[0], [IMG["southie-back"], true]);
+    assert.deepEqual(runBoot("?ad=d20").preloads, [[IMG["southie-front"], true]]);
+    assert.deepEqual(runBoot("?ad=d21").preloads, [[IMG["team-walk-hd"], true]]);
+    assert.deepEqual(runBoot("?ad=d11").preloads, [[IMG["green-team"], true]]);
+  });
+
+  it("no ad's bootstrap output contains more than one preload link (D24)", () => {
+    for (const id of Object.keys(S1.HERO_IMG)) {
+      for (const w of [412, 1440]) {
+        const n = (runBoot(`?ad=${id}`, w).out.match(/rel="preload"/g) ?? []).length;
+        assert.ok(n <= 1, `${id} at ${w}px writes ${n} preloads`);
+      }
+    }
   });
 
   it("no ad or an unknown ad is d1 page A", () => {
@@ -170,7 +188,7 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
     assert.deepEqual(runBoot("?ad=d18&hero=shortlist").preloads, []);
     assert.deepEqual(runBoot("?ad=d18&hero=games").preloads, [[IMG["laughing"], true]]);
     assert.deepEqual(runBoot("?ad=d2&hero=none").preloads, [[IMG["couch"], true]]);
-    assert.deepEqual(runBoot("?ad=d8", 1440).preloads, [[IMG["couch"], true], [IMG["laughing"], false]]);
+    assert.deepEqual(runBoot("?ad=d8", 1440).preloads, [[IMG["couch"], true]]);
     assert.deepEqual(runBoot("?ad=d4", 1440).preloads, [[IMG["coach-and-mom"], true]]);
   });
 
@@ -186,7 +204,7 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
   it("preloads come before the fonts stylesheet, and only the chosen ad's images load (X1)", () => {
     const r = runBoot("?ad=d19");
     assert.ok(r.out.lastIndexOf("preload") < r.out.indexOf("s1-fonts"));
-    assert.equal((r.out.match(/rel="preload"/g) ?? []).length, 2);
+    assert.equal((r.out.match(/rel="preload"/g) ?? []).length, 1);
   });
 
   it("any failure writes the blocking all-families stylesheet, the page as it was (X17)", () => {
