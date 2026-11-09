@@ -1,0 +1,8 @@
+NAV http://localhost:3100/season1?ad=d18
+POST /api intercepted http://localhost:3100/api/season-one {"email":"parent@example.com","source":"ad-landing","ad":"d18","adName":"Not a sports kid? Perfect.","where":"top","attribution":{"utm_source":"","utm_medium":"","utm_campaign":"","utm_content":"","ut
+-> fulfilled locally with 200 {ok:true} (never left the machine)
+url after success: http://localhost:3100/season1?ad=d18
+Karlin visible: true
+karlin card text: YOU’RE ON THE LIST AWESOME. We can’t wait to make screentime the highlight of your day too. Check your inbox for a note from Karlin, our founder. CHAT WITH OUR FOUNDER Karlin Oei · Founder, EKUZO Have questions and want to talk to a human? Leave your number and I’ll text you myself. Your mobile number Text me, Karlin By submitting your number you agree to text a real human, and you are in fact a real human. Karlin texts you himself, from his own phone. No marketing list, no automated texts. Msg and data rates may apply. Reply STOP any time. Know a parent still figuring out screen time? Send th
+after Karlin tap url: http://localhost:3100/season1?ad=d18
+send-to-them visible; text near: Know a parent still figuring out screen time? Send this to them

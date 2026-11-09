@@ -1,0 +1,80 @@
+[
+ {
+  "tag": "BUTTON",
+  "text": "Join the list",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "SOCCER",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "BASEBALL",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "DANCE",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "GYMNASTICS",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "PIANO",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": false
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Just join the list",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "A",
+  "text": "ekuzo.gg",
+  "href": "https://ekuzo.gg",
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Text me, Karlin",
+  "href": null,
+  "visible": false
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Send this to them",
+  "href": null,
+  "visible": false
+ }
+]

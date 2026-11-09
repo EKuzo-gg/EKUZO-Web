@@ -1,0 +1,74 @@
+[
+ {
+  "tag": "BUTTON",
+  "text": "Join the list",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "“Five more minutes.”",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "“I can’t pause it.”",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "“Just one more game.”",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "“I’m almost done.”",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": false
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Skip the question and join the list",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "A",
+  "text": "ekuzo.gg",
+  "href": "https://ekuzo.gg",
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Save their spot",
+  "href": null,
+  "visible": true
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Text me, Karlin",
+  "href": null,
+  "visible": false
+ },
+ {
+  "tag": "BUTTON",
+  "text": "Send this to them",
+  "href": null,
+  "visible": false
+ }
+]
