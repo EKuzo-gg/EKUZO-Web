@@ -1,0 +1,42 @@
+{
+ "confirms": [
+  "pi_probe1_secret_x",
+  "pi_probe1_secret_x",
+  "pi_probe1_secret_x",
+  "pi_probe1_secret_x",
+  "pi_probe1_secret_x",
+  "pi_probe1_secret_x"
+ ],
+ "taps": [
+  {
+   "tap": 1,
+   "commitsSoFar": 1,
+   "ePay": "Your card was declined."
+  },
+  {
+   "tap": 2,
+   "commitsSoFar": 1,
+   "ePay": "Your card was declined."
+  },
+  {
+   "tap": 3,
+   "commitsSoFar": 1,
+   "ePay": "Your card was declined."
+  },
+  {
+   "tap": 4,
+   "commitsSoFar": 1,
+   "ePay": "You cannot confirm this PaymentIntent because it has a status of canceled."
+  },
+  {
+   "tap": 5,
+   "commitsSoFar": 1,
+   "ePay": "You cannot confirm this PaymentIntent because it has a status of canceled."
+  },
+  {
+   "tap": 6,
+   "commitsSoFar": 1,
+   "ePay": "You cannot confirm this PaymentIntent because it has a status of canceled."
+  }
+ ]
+}
