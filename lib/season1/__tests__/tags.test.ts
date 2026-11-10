@@ -312,14 +312,18 @@ describe("address bar allow list (C10)", () => {
     for (const s of scripts(html)) vm.runInContext(s, ctx);
     return calls;
   }
-  it("keeps the eight kept params plus src and s1qa, drops the rest, keeps a plain hash", () => {
-    assert.deepEqual([...URL_ALLOW_KEYS].sort(), ["fbclid", "gclid", "s1qa", "src", "utm_campaign", "utm_content", "utm_id", "utm_medium", "utm_source", "utm_term"]);
+  it("keeps the nine kept params plus src and s1qa, drops the rest, keeps a plain hash", () => {
+    assert.deepEqual([...URL_ALLOW_KEYS].sort(), ["ad", "fbclid", "gclid", "s1qa", "src", "utm_campaign", "utm_content", "utm_id", "utm_medium", "utm_source", "utm_term"]);
     const calls = runAllow(renderUrlAllow(), "https://ekuzo.gg/season1/join?utm_source=k&kid=Maya&_kx=abc.123&src=email&s1qa=1&from=Sam&fbclid=X1#faq");
     assert.deepEqual(calls, [[null, "", "/season1/join?utm_source=k&src=email&s1qa=1&fbclid=X1#faq"]]);
   });
   it("no call when nothing needs dropping; an odd hash is dropped", () => {
     assert.deepEqual(runAllow(renderUrlAllow(), "https://ekuzo.gg/season1/join?utm_campaign=a&src=ad"), []);
     assert.deepEqual(runAllow(renderUrlAllow(), "https://ekuzo.gg/crew/48271937#kid=Maya"), [[null, "", "/crew/48271937"]]);
+  });
+  it("join pages keep ?ad= (s1-fast-track A1, closes M-6)", () => {
+    assert.deepEqual(runAllow(renderUrlAllow(), "https://ekuzo.gg/season1/join/jersey?ad=d21&utm_source=x&utm_content=y"), []);
+    assert.deepEqual(runAllow(renderUrlAllow(), "https://ekuzo.gg/season1/join?src=ad&ad=d18&kid=Sam"), [[null, "", "/season1/join?src=ad&ad=d18"]]);
   });
   it("thanks keeps play", () => {
     assert.deepEqual(runAllow(renderUrlAllow(["play"]), "https://ekuzo.gg/season1/thanks?play=league&_kx=1"), [[null, "", "/season1/thanks?play=league"]]);

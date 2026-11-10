@@ -58,7 +58,7 @@ export const CREW_GA4 = false;
 /** P4 (Jamie, open): in QA mode, Purchase and InitiateCheckout become S1QA_ custom events. */
 export const QA_RENAME_CONVERSIONS = true;
 
-/** Address bar allow list (C10): the eight kept parameters plus src and s1qa. */
+/** Address bar allow list (C10): the nine kept parameters (ad included, s1-fast-track A1) plus src and s1qa. */
 export const URL_ALLOW_KEYS: readonly string[] = [...LC_KEYS, "src", QA_PARAM];
 
 interface PageSpec {

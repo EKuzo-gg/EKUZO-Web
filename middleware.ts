@@ -31,7 +31,7 @@ export function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
   // Season 01 last click (analytics S5, C3, C17): any request carrying a kept
-  // parameter (utm_*, gclid, fbclid) overwrites ekuzo_lc. Runs BEFORE the
+  // parameter (utm_*, gclid, fbclid, ad) overwrites ekuzo_lc. Runs BEFORE the
   // first-touch early return, so a parent who already has ekuzo_origin (the
   // waitlist landing) still records the email or ad click. Bots skipped.
   // HttpOnly: only the commit route reads it.

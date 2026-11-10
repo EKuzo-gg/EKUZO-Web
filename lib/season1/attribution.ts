@@ -18,8 +18,8 @@ export const LC_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 
 export const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"] as const;
 export const CLICK_ID_KEYS = ["gclid", "fbclid"] as const;
-/** The eight kept parameters (spec S2, S5). */
-export const LC_KEYS = [...UTM_KEYS, ...CLICK_ID_KEYS] as const;
+/** The nine kept parameters (spec S2, S5; `ad` added by s1-fast-track A1). */
+export const LC_KEYS = [...UTM_KEYS, ...CLICK_ID_KEYS, "ad"] as const;
 export type LcKey = (typeof LC_KEYS)[number];
 
 export const UTM_MAX = 160;
@@ -30,8 +30,8 @@ export const LC_MAX_BYTES = 2048;
 /** A raw cookie longer than this is not parsed at all. */
 const RAW_PARSE_MAX = 4096;
 
-/** When the cookie is over budget, keys are dropped in this order (utm_term first, C3). */
-const DROP_ORDER: LcKey[] = ["utm_term", "utm_id", "gclid", "utm_medium", "utm_source", "utm_content", "utm_campaign", "fbclid"];
+/** When the cookie is over budget, keys are dropped in this order (utm_term first, C3; ad last, 3 bytes). */
+const DROP_ORDER: LcKey[] = ["utm_term", "utm_id", "gclid", "utm_medium", "utm_source", "utm_content", "utm_campaign", "fbclid", "ad"];
 
 export type LastClick = Partial<Record<LcKey, string>> & { path: string; ts: number };
 
@@ -69,7 +69,15 @@ function cleanClickId(v: unknown): string | null {
   return typeof v === "string" && CLICK_ID_RE.test(v) ? v : null;
 }
 
+/** ad: the landing's ad id, normalized the way the landing does (lowercase, d0N to dN); d1 to d99 or dropped. */
+export function cleanAd(v: unknown): string | null {
+  if (typeof v !== "string") return null;
+  const s = v.toLowerCase().replace(/^d0/, "d");
+  return /^d[1-9]\d?$/.test(s) ? s : null;
+}
+
 function cleanValue(key: LcKey, v: unknown): string | null {
+  if (key === "ad") return cleanAd(v);
   return (CLICK_ID_KEYS as readonly string[]).includes(key) ? cleanClickId(v) : cleanUtm(v);
 }
 
@@ -81,7 +89,7 @@ export function cleanPath(p: unknown): string {
   return s || "/";
 }
 
-/** True when the request carries any of the eight kept parameters (raw presence, before cleaning). */
+/** True when the request carries any of the nine kept parameters (raw presence, before cleaning). */
 export function hasKeptParam(params: URLSearchParams): boolean {
   return LC_KEYS.some((k) => params.has(k));
 }
