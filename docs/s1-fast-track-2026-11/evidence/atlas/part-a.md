@@ -126,3 +126,42 @@ Both servers stopped by PID (the 3101 `next-server` child stopped by its PID aft
    join_view reports `d21`. Not in A1 to A6.
 5. The torn-paper 404s above on the join pages (same on main).
 6. `/home/claude/wt-main` is detached at 45dfe97, not at main 3bf6c58, and has a stale `.server-3101.pid`.
+
+## Follow-up (Fable, 2026-11-10): items 2 and 4 above
+
+Commits on top of cd0aa87: the A2 fix (branch c), the jersey switch fix, then this section. Build
+tested: 0699635 (`s1-build` marker on the served landing).
+
+1. **Branch (c) with `lc.ad`** (`lib/season1/senders/discord.ts`): `lcAd` now applies only when there
+   is no utm_content, `lc.ad` is set, and the last click is paid (`isPaidClick`) or `src` is `ad`.
+   `needsAdNameLookup` follows it, so share, email and bare-ad orders keep the Klaviyo lookup as on
+   main. This replaces assumption 8 and closes item 2 in "For Fable".
+   Tests (`outbox.test.ts`): for a share link, an email click, `src=email`, a paid first touch and an
+   empty order, each with and without a Klaviyo name, `formatSource` with `ad: "d19"` equals
+   `formatSource` with `ad: null` (10 pairs). Explicit cases: (a) share link, no name `organic`, with a
+   name `ad d11-a (via organic)`; (b) `utm_medium=email`, `utm_campaign=s01-open`: `email s01-open`,
+   with a name `ad d11-a (via email)`; (c) `src=ad`, `ad=d19`, no utm: `ad d19` (also with a name);
+   (d) `paid_social` or `cpc`, no content: `ad d19`. Lookup: false for the src=ad and paid cases, true
+   for share, email and bare ad.
+2. **Jersey hero switch** (`app/season1/join/jersey/join-jersey.html` line 286): the URL value is
+   lowercased and `d0N` becomes `dN` before the `d20`/`d21` comparison, the same normalization as
+   join_view. Test (`joinPage.test.ts`): the shipped script string, run in a vm, maps `d21` and `D021` to
+   `d21`, `d020` and `D20` to `d20`, and `d19`, bare, `zz` and `d0021` to the d19 default. Item 4 is
+   closed.
+
+| Run | Result | Source |
+|---|---|---|
+| `npm test` (0699635 code) | 607 tests, 606 pass, 1 skipped, 0 fail; field-vitals 5 of 5 | `STRIPE_SECRET_KEY=... npm test` |
+| `tsc --noEmit` | clean | |
+| Build `COMMIT_REF=0699635` | exit 0 | |
+
+Class Q re-run on 3103 (`part-a/ft-classq-followup.mjs`, result `part-a/classq-followup.json`):
+
+| Check | Result |
+|---|---|
+| (1) `/season1/join/jersey?ad=D021&utm_source=x&utm_content=y` | address bar keeps `?ad=D021&utm_source=x&utm_content=y`; `data-ad` `d21`, `.t-tag` hidden, `.t-team` inline, `.jh-back` hidden (screenshot `part-a/q1b-jersey-D021-412.png`); `season1_join_view {variant:"jersey", ad:"d21", src:""}` once. Pass |
+| (3) `ekuzo_lc` via CDP | `?ad=D019` with the four utms: HttpOnly, `ad:"d19"` beside the utms; `?ad=zz` in a fresh context: no `ekuzo_lc`. Pass |
+| Offender check | none |
+
+Console: the three torn-paper 404s on the jersey page (item 5, same on main). 3103 stopped by PID;
+`fuser 3103/tcp` exits 1, and curl to the port is refused (000).
