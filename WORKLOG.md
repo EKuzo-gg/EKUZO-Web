@@ -4,6 +4,35 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-10: Season 01 fast track, "interest first, join today" (Build Loop, docs/s1-fast-track-2026-11/)
+
+- Aaron's plan (his message and `landing-v2.html`, pushed to dev 5b94880) ported onto the live
+  `app/season1/landing.html` rather than served as a second file: his v2 was forked from a landing older
+  than Nov 5 (inline tags, base64 images, no jump fix, none of the Nov 9 speed work), so flipping to it
+  would have regressed everything. His copy is byte for byte his: "Get the season one details" and
+  "Send me the details" on both forms, the "Ready now? Save their spot for $100 →" link under each form
+  (`data-join="top|bottom"`), the lock-in card after a sign-up (`data-join="confirm"`), "Get the details"
+  on the sticky bar, header button and the two FAQ answers, and "Get the details →" on the hero buttons
+  of d6, d9, d11, d13, d14 and (his rule applied, F7) d19 to d21. The waitlist form stays the primary ask.
+- Attribution: `ad` is a kept last-click key (`lib/season1/attribution.ts`, normalised `d1` to `d99`,
+  dropped last), so the join pages keep `?ad=` (M-6 closed), orders carry the ad id, the Discord commit
+  line reads `ad <id>` for a paid or `src=ad` click without `utm_content` (never for share or email
+  links, F4), and the Klaviyo Committed event carries `ad`. `season1_join_view` carries `{variant, ad,
+  src}` on the three join pages. New GA4 event `s1_join_click {ad, hero, location}` plus Clarity
+  `join_click` on the fast-track links; `window.S1.joinHref()` builds `/season1/join?src=ad&ad=<id>` with
+  the landing's utms. Rows in `docs/season-one-tracking.md`.
+- Checks: 618 + 5 tests, tsc clean; Sentry Part A (nine checks, pixel-identical, beacons equal to main,
+  cookie and source line verified) and Part B (parity with the expected regions, journeys, Tier 1 on
+  two profiles, dev) in `docs/s1-fast-track-2026-11/evidence/`. Harness Tier 1 on the final build: CLS
+  under 0.004 on d18, d19, d2 and noad, LCP and first paint within noise of the Nov 9 numbers.
+- For Aaron: the sticky bar reads the hero's CTA ("Send me the details") once the script runs, as in his
+  file; on interactive-hero ads the top "Ready now?" link shows after the hero is answered (his
+  structure); "Save their spot" now appears only on the three links that lead to payment; the ported
+  copy carries dated claims ("until Dec 31", "mid January 2027") that the emails also carry and the
+  join pages template from `offer.ts`; the landing has them hardcoded.
+- Dev carries the same code through the integration merge `c4eabbe` on top of his roadshow and beta
+  commits; `landing-v2.html` stays dev-only and is never served.
+
 ## Jamie's Claude, 2026-11-09: Season 01 landing speed, checkout fix, field-vitals harness (Build Loop, docs/s1-cls-field-2026-11/)
 
 - Live on ekuzo.gg 15:23 CT (`main` 45dfe97 to 19b9963, fast-forward; marker `<meta name="s1-build">` now stamps
