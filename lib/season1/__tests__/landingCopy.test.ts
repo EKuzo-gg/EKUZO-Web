@@ -91,6 +91,11 @@ describe("landing copy relabel (Part B)", () => {
     for (const id of ["d19", "d20", "d21"]) assert.match(entry(id), /<span class="cta">Save their spot →<\/span>/, id);
   });
 
+  it("the header mini button reads Get the details", () => {
+    assert.match(body, /<button class="mini-cta" type="button" data-go>Get the details<\/button><\/header>|class="mini-cta" type="button" data-go>Get the details<\/button><\/header>/);
+    assert.equal(html.includes("data-go>Join the list</button>"), false);
+  });
+
   it("a hero button with Save their spot only remains on d19 to d21", () => {
     assert.equal((body.match(/<span class="cta">Save their spot →<\/span>/g) ?? []).length, 3);
   });
