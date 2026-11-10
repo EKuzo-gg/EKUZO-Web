@@ -768,6 +768,14 @@ button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset
 .conf{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;align-items:flex-start;justify-content:center;padding:24px 20px 120px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;margin:auto 0}
 /* Text Karlin: the parent leaves a number, Karlin texts them himself. Saved to Klaviyo as a profile property only, never SMS marketing consent, never sent to Meta. */
+.ready{display:block;margin-top:18px;font:600 16px/1.35 var(--ui);color:#BDB8C2;text-decoration:none}
+.ready span{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--acc);text-decoration-thickness:2px;text-underline-offset:5px}
+.ready-note{margin:6px 0 0;color:#8E8996;font-size:13px}
+.lock{margin-top:6px;padding:20px 16px;border-radius:16px;background:var(--acc);color:var(--acc-ink);display:flex;flex-direction:column;gap:10px}
+.conf .lock h3{margin:0;font:800 26px/1 var(--ui);text-transform:uppercase;letter-spacing:-.01em}
+.conf .lock p{margin:0;font-size:17px;line-height:1.4;color:var(--acc-ink)}
+.lock .lock-j{font-weight:700;font-size:15px}
+.lock-btn{display:block;text-align:center;margin-top:4px;padding:18px;border-radius:12px;background:#111013;color:#fff;font:800 17px/1 var(--ui);text-decoration:none}
 .tk{margin-top:6px;padding:18px 16px;border-radius:16px;background:#1B1920;border:1px solid #3a3640;display:flex;flex-direction:column;gap:12px}
 .tk-who{display:flex;align-items:center;gap:12px}
 .tk-av{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--acc);background:var(--acc)}
@@ -956,16 +964,17 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
   <section class="join" id="join-top" aria-labelledby="jt">
     <div class="form-wrap">
-      <h2 id="jt">Save their spot for season&nbsp;one.</h2>
-      <p>Join the list and you’ll hear first when sign-ups open. It’s free and doesn’t commit you to&nbsp;anything.</p>
+      <h2 id="jt">Get the season one&nbsp;details.</h2>
+      <p>Karlin sends you the schedule, the price and the coaches. Free, and it doesn’t sign them up for&nbsp;anything.</p>
       <form data-where="top" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
         <label class="sr" for="em-top">Your email</label>
         <input id="em-top" data-clarity-mask="true" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
         <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
-        <button type="submit">Save their spot</button>
+        <button type="submit">Send me the details</button>
         <p class="err" role="alert" hidden></p>
         <small>For parents. We only email about EKUZO, and you can unsubscribe&nbsp;anytime.</small>
       </form>
+      <a class="ready" href="/season1/join?src=ad" data-join="top">Ready now? <span>Save their spot for&nbsp;$100&nbsp;→</span></a><p class="ready-note">Covers January. Fully refundable until Dec&nbsp;31.</p>
     </div>
   </section>
 
@@ -985,8 +994,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   <section class="faq" aria-labelledby="fq">
     <span class="kick">Questions parents ask</span>
     <h3 id="fq">The short&nbsp;answers.</h3>
-    <details><summary>When does it start?</summary><p>Season 01 starts in January 2027. Everyone on the list hears first when sign-ups open.</p></details>
-    <details><summary>Do I pay anything now?</summary><p>This is a free interest list. It doesn’t sign your kid up for anything&nbsp;yet.</p></details>
+    <details><summary>When does it start?</summary><p>Season 01 starts in mid January 2027. Sign-ups are open&nbsp;now.</p></details>
+    <details><summary>Do I pay anything now?</summary><p>Not for the details. If you’re ready to save a spot, it’s $100 for January and fully refundable until Dec&nbsp;31.</p></details>
     <details><summary>What game do they play?</summary><p>Your kid might play Roblox, Minecraft or Fortnite, and they keep those. With us, they play League of Legends on a team of five. It’s free to download, and most kids start from scratch. League is our core game, and we’re looking at adding&nbsp;others.</p></details>
     <details><summary>Where does it happen?</summary><p>Online, from home, on a computer with a headset. Practice runs in the evening, in your time zone. No driving, no&nbsp;parking.</p></details>
     <details><summary>Who are the coaches?</summary><p>Passionate top 1% college esports players, background-checked and trained to coach kids. You’ll meet your coach before the season&nbsp;starts.</p></details>
@@ -994,31 +1003,33 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
   <section class="join end" id="join-end" aria-labelledby="je">
     <div class="form-wrap">
-      <h2 id="je">Get them on the&nbsp;list.</h2>
-      <p>Spots for season one are limited. The list hears&nbsp;first.</p>
+      <h2 id="je">Still thinking it&nbsp;over?</h2>
+      <p>Get the details from Karlin and decide when you’re&nbsp;ready.</p>
       <form data-where="bottom" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
         <label class="sr" for="em-end">Your email</label>
         <input id="em-end" data-clarity-mask="true" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
         <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
-        <button type="submit">Save their spot</button>
+        <button type="submit">Send me the details</button>
         <p class="err" role="alert" hidden></p>
         <small>Free. No commitment. Unsubscribe&nbsp;anytime.</small>
       </form>
+      <a class="ready" href="/season1/join?src=ad" data-join="bottom">Ready now? <span>Save their spot for&nbsp;$100&nbsp;→</span></a><p class="ready-note">Covers January. Fully refundable until Dec&nbsp;31.</p>
     </div>
   </section>
 
   <footer><span>EKUZO · Youth esports with real coaches</span><a href="https://ekuzo.gg">ekuzo.gg</a></footer>
 </div>
-<div class="sticky" id="sticky"><button type="button" data-go>Save their spot</button></div>
+<div class="sticky" id="sticky"><button type="button" data-go>Get the details</button></div>
 
 <div class="conf" id="conf" role="dialog" aria-modal="true" aria-labelledby="conf-h" hidden>
   <div class="conf-in">
-    <span class="kick">You’re on the list</span>
+    <span class="kick">Details on the way</span>
     <h2 id="conf-h" tabindex="-1">Awesome.</h2>
     <p>We can’t wait to make screentime the highlight of your day&nbsp;too.</p>
     <p class="inbox-h">Check your inbox for a note from Karlin, our&nbsp;founder.</p>
+    <div class="lock"><h3>Ready to lock it&nbsp;in?</h3><p>Save their spot for $100. It covers January and it’s fully refundable until Dec&nbsp;31.</p><p class="lock-j">First 100 families get a free&nbsp;jersey.</p><a class="lock-btn" href="/season1/join?src=ad" data-join="confirm">Save their spot · $100</a></div>
     <div class="tk" id="tk" data-clarity-mask="true">
-      <div class="tk-who"><img class="tk-av" loading="lazy" src="/images/authors/karlin-oei-avatar.jpg" alt="" width="52" height="52" onerror="this.style.visibility='hidden'"><div><h3>Chat with our founder</h3><p class="tk-sub">Karlin Oei · Founder, EKUZO</p></div></div>
+      <div class="tk-who"><img class="tk-av" loading="lazy" src="/images/authors/karlin-oei-avatar.jpg" alt="" width="52" height="52" onerror="this.style.visibility='hidden'"><div><h3>Questions first?</h3><p class="tk-sub">Karlin Oei · Founder, EKUZO</p></div></div>
       <p class="tk-ask">Have questions and want to talk to a human? Leave your number and I’ll text you myself.</p>
       <form id="tk-form" novalidate>
         <label class="sr" for="tk-ph">Your mobile number</label>
@@ -1093,7 +1104,7 @@ const D = [
   subject:"Practice over. Nobody yelled.",
   art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
-   <div><h3>The coach ends it.</h3><p class="sub">Practice has a start and an end. No doorway argument.</p><span class="cta">Save their spot →</span></div></div>`},
+   <div><h3>The coach ends it.</h3><p class="sub">Practice has a start and an end. No doorway argument.</p><span class="cta">Get the details →</span></div></div>`},
  {id:"d7", round:2, name:"Screen time, graded", photo:"hands-in",
   type:"Anybody, expanded black caps", palette:["#EFEEED","#49B41A","#F92524","#111013"], from:"Structure and progress in Karlin's email",
   why:"Parents know how to read a report card. It turns screen time into something with grades, a teacher and a reason to be proud.",
@@ -1127,7 +1138,7 @@ const D = [
    <div class="in"><div class="top">${logo()}<small>Parent-free league</small></div>
    <div class="tix"><div class="main"><span class="adm">Admit one player</span><h3>The only practice you <em>don’t</em> drive&nbsp;to.</h3></div>
    <div class="stub"><div><small>Drive</small><b>None</b></div><div><small>Cleats</small><b>None</b></div><div><small>Parking</small><b>None</b></div></div></div>
-   <span class="cta">Save their spot →</span></div>`},
+   <span class="cta">Get the details →</span></div>`},
  {id:"d10", round:2, name:"Screen time with a purpose", photo:"kid on the couch (Aaron's photos)",
   type:"Sora, extra bold caps", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Karlin: make you proud doing something they love",
   why:"A real kid on a real couch, in full colour, with the copy on a blue fade. Built from the Figma frame Aaron picked.",
@@ -1146,7 +1157,7 @@ const D = [
    <img class="jb" src="${IMG["jersey-back"]}" alt="">
    <div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
    <div class="copy"><h3>Their gamer tag.<em>On a real jersey.</em></h3>
-   <p class="sub">A coach, a team and a jersey with their name on the&nbsp;back.</p><span class="cta">Save their spot →</span></div></div>`},
+   <p class="sub">A coach, a team and a jersey with their name on the&nbsp;back.</p><span class="cta">Get the details →</span></div></div>`},
  {id:"d12", round:2, name:"The best excuse", photo:"coach-and-mom",
   type:"Hanken Grotesk, extra bold caps", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Overheard, from the kid’s side",
   why:"A text thread every parent has had, ending with the one excuse they’d be glad to hear.",
@@ -1164,14 +1175,14 @@ const D = [
    <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
    <div class="in"><div class="top">${logo()}</div>
    <h3>Screen time<br>you’re <em>proud&nbsp;of.</em></h3>
-   <p class="sub">A coach, a team that has their back, and a reason to log off on&nbsp;time.</p><span class="cta">Save their spot →</span></div>`},
+   <p class="sub">A coach, a team that has their back, and a reason to log off on&nbsp;time.</p><span class="cta">Get the details →</span></div>`},
  {id:"d14", tpl:"d6", round:3, problem:"They game too much", name:"Screen time. Coached.", photo:"couch",
   type:"Syne, extended caps (template 06)", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"Google: reduce screen time",
   why:"The structure answer, said loud. Practice starts on time and the coach ends it, so the parent stops being the timer.",
   subject:"Screen time. Coached.",
   art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
    <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
-   <div><h3 style="font-size:${k==="email"?"5.4cqw":"10cqw"}">Screen time. Coached.</h3><p class="sub">Practice starts on time and the coach ends it. No doorway&nbsp;argument.</p><span class="cta">Save their spot →</span></div></div>`},
+   <div><h3 style="font-size:${k==="email"?"5.4cqw":"10cqw"}">Screen time. Coached.</h3><p class="sub">Practice starts on time and the coach ends it. No doorway&nbsp;argument.</p><span class="cta">Get the details →</span></div></div>`},
  {id:"d15", tpl:"d12", round:3, problem:"They don’t have friends", name:"Online friends, real team", photo:"team-walk",
   type:"Hanken Grotesk, extra bold caps (template 12)", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Google: my kid only has online friends",
   why:"For the parent typing ‘my kid has no friends’. The kid already has people online. This makes them a team with a coach, told in a text a parent would love to get.",
@@ -1289,7 +1300,7 @@ document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.tpl||d.i
 document.getElementById("bridge").innerHTML = `<span class="kick">${t.k}</span><h3>${t.h}</h3><p>${t.p}</p>`;
 if(t.mod){ const m=document.getElementById("mod"); m.innerHTML=t.mod; m.hidden=false; }
 document.title = "EKUZO · " + d.name;
-const CTA = (qs.get("cta")||"Save their spot").slice(0,40);
+const CTA = (qs.get("cta")||"Send me the details").slice(0,40);
 document.querySelectorAll('.join button[type=submit], #sticky button').forEach(b=>b.textContent=CTA);
 // The hero keeps the ad's own button so the tap feels continuous; ?herocta= overrides it
 if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice(0,40)+" →");
@@ -1357,7 +1368,7 @@ if(HD){
    <h1 id="ih-q">They tried them all<i>.</i></h1>
    <p class="ih-sub">${HD.sub}</p>
    <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<div class="sl-row"><button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button><span class="sl-q" aria-live="polite" hidden>${o.q}</span></div>`).join("")}</div>
-   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say">${HD.say}</p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say">${HD.say}</p><p class="ih-list">Get the Season&nbsp;01&nbsp;details.</p><div class="ih-slot"></div></div></div>
    <button type="button" class="ih-skip">${HD.skip}</button>`;
   } else
   ih.innerHTML=`${bg?`<img class="ih-bg" src="${bg.src}" alt="">`:""}
@@ -1365,7 +1376,7 @@ if(HD){
    <h1 id="ih-q">${HD.q}</h1>
    <p class="ih-sub">${HD.sub}</p>
    <div class="ih-opts ${HERO==="screentime"?"quotes":HERO}" role="group" aria-label="${HD.q}">${HD.opts.map((o,i)=>`<button type="button" class="ih-opt${o.none?" wide":""}" aria-pressed="false" data-i="${i}">${o.a}</button>`).join("")}</div>
-   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2></h2><p class="ih-say"></p><p class="ih-list">Join the Season&nbsp;01 list.</p><div class="ih-slot"></div></div></div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2></h2><p class="ih-say"></p><p class="ih-list">Get the Season&nbsp;01&nbsp;details.</p><div class="ih-slot"></div></div></div>
    <button type="button" class="ih-skip">${HD.skip}</button>`;
   if(pos) ih.style.setProperty("--ihpos",pos);
   ih.querySelector(".ih-slot").appendChild(joinTop);
@@ -1410,17 +1421,17 @@ if(HD){
       heroAnswer=picked.join(", ");
       const listLine=resp.querySelector(".ih-list");
       if(picked.length===1&&HD.opts[+b.dataset.i].none&&on){ heroAnswer="I have no idea";
-        resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML=""; listLine.innerHTML="That’s normal. Join the Season&nbsp;01 list."; setCta(HD.noneCta);
+        resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML=""; listLine.innerHTML="That’s normal. Get the Season&nbsp;01&nbsp;details."; setCta(HD.noneCta);
         ga("hero_answer",{hero:HERO}); clr("event","hero_answer"); open(); return; }
       const named=picked.filter(x=>x!=="Something else"&&x!=="I have no idea");
       const lead=!picked.length?"":named.length===0?"Got it.":named.length===1?`${named[0]}. Got it.`:named.length===2?`${named[0]} and ${named[1]}. Got it.`:`${named[0]}, ${named[1]} and ${named.length-2} more. Got it.`;
       resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML="";
-      listLine.innerHTML="Join the Season&nbsp;01 list."; setCta(HD.cta);
+      listLine.innerHTML="Get the Season&nbsp;01&nbsp;details."; setCta(HD.cta);
     }
     ga("hero_answer",{hero:HERO}); clr("event","hero_answer");
     open();
   }));
-  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Save their spot."; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
+  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Get the details."; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
   // ga is defined further down this script; send hero_view once the whole script has run (the Clarity hero tag is set below with the ad tag)
   setTimeout(()=>{ ga("hero_view",{hero:HERO}); },0);
 }
