@@ -1,0 +1,79 @@
+{
+ "label": "live-check-1110",
+ "invocations": [
+  {
+   "command": "node scripts/field-vitals/run.mjs --target https://ekuzo.gg --ads d19,d18 --profile fb-android-412 --runs 1 --label live-check-1110 --expectMarker 3bf6c58 --requireReady --noForm",
+   "startedAt": "2026-11-10T09:22:56.890Z",
+   "harnessCommit": "3023e9d",
+   "harnessDirty": false,
+   "target": "https://ekuzo.gg",
+   "targetCommit": {
+    "kind": "remote",
+    "ref": null
+   },
+   "versions": {
+    "node": "v22.23.4",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "os": "Linux 6.18.44-fc-v338 x64",
+    "cpus": "2 x Intel(R) Xeon(R) Processor @ 2.10GHz"
+   },
+   "calibration": {
+    "ms": 225,
+    "x": true
+   },
+   "options": {
+    "network": {
+     "name": "slow4g",
+     "conditions": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+     }
+    },
+    "cpu": 4,
+    "runs": 1,
+    "ads": [
+     "d19",
+     "d18"
+    ],
+    "profiles": [
+     "fb-android-412"
+    ],
+    "viewport": null,
+    "failure": null,
+    "fontDelay": 0,
+    "fontCssDelay": 0,
+    "fontScale": null,
+    "toolbar": "on",
+    "journey": "full",
+    "wait": 10000,
+    "formCheck": false,
+    "expectMarker": "3bf6c58"
+   },
+   "finishedAt": "2026-11-10T09:24:08.420Z",
+   "totals": {
+    "posts": 0,
+    "leaks": 0,
+    "attempts": 6,
+    "readyMissing": 0
+   }
+  }
+ ],
+ "files": {
+  "fb-android-412/d18-run1.json": "c5ae3eefbe1a2fe771f5d127e93dfbfc98f9c44ab780cbe39a1730d14a5cb1d0",
+  "fb-android-412/d19-run1.json": "9a6e8737f106aff4dde25cf8d1752f42fcabeddf309ce3ecd21f4b9ec14b0a4e"
+ },
+ "blocked": {
+  "byHost": {
+   "googletagmanager.com": 2,
+   "connect.facebook.net": 2,
+   "clarity.ms": 2
+  },
+  "attempts": 6,
+  "leaks": 0,
+  "posts": 0
+ },
+ "runs": 2
+}
