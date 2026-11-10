@@ -51,6 +51,8 @@ export function renderJoin(
     TITLE: open ? "Season 01 is open" : "Season 01",
     EYEBROW: open ? "Season 01 is open" : "Season 01",
     SIGNUP: "/season1/join/signup" + (src ? `?src=${encodeURIComponent(src)}` : ""),
+    // season1_join_view's src (s1-fast-track A3): the whitelisted src or empty.
+    SRC: src ?? "",
     FIRST: usd(OFFER.firstKidCents),
     MONTHLY: usd(OFFER.monthlyCents),
     SEASON_FULL: usd(OFFER.seasonCents),
