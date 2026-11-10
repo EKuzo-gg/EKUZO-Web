@@ -217,3 +217,54 @@ describe("landing head bootstrap: per-ad preloads and fonts", () => {
     assert.ok(r.S1.AD_HERO && r.S1.IMG, "tables still defined for the body scripts");
   });
 });
+
+describe("fast track (s1-fast-track A4): href builder and the [data-join] click handler", () => {
+  const start = html.indexOf("window.S1.joinHref=");
+  const block = html.slice(start, html.indexOf("\n", html.indexOf('document.addEventListener("click"', start)));
+  function load(search: string, id: string, joins: Array<{ href?: string; dataset: Record<string, string> }> = []) {
+    const win: { S1: { joinHref?: () => string } } = { S1: {} };
+    const listeners: Array<[string, (e: unknown) => void]> = [];
+    const ga: unknown[][] = [];
+    const clr: unknown[][] = [];
+    const ctx = vm.createContext({
+      window: win,
+      d: { id },
+      qs: new URLSearchParams(search),
+      URLSearchParams,
+      ga: (...a: unknown[]) => ga.push(a),
+      clr: (...a: unknown[]) => clr.push(a),
+      document: {
+        querySelectorAll: (sel: string) => (sel === "[data-join]" ? joins : []),
+        addEventListener: (t: string, f: (e: unknown) => void) => listeners.push([t, f]),
+      },
+    });
+    vm.runInContext(block, ctx);
+    return { win, listeners, ga, clr };
+  }
+  it("is the block the page ships (three statements, after the CTA handlers)", () => {
+    assert.ok(start > html.indexOf('ga("cta_click",{location:"hero"})'));
+    assert.equal(block.split("\n").length, 3);
+  });
+  it("href: src=ad, the resolved ad id, then the landing's utm_* in a fixed order", () => {
+    const { win } = load("?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&kid=Sam&hero=amount", "d19");
+    assert.equal(win.S1.joinHref!(), "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a");
+    assert.equal(load("", "d1").win.S1.joinHref!(), "/season1/join?src=ad&ad=d1");
+    assert.equal(load("?utm_id=7&utm_term=t&utm_source=a", "d5").win.S1.joinHref!(), "/season1/join?src=ad&ad=d5&utm_source=a&utm_term=t&utm_id=7");
+  });
+  it("sets the href on [data-join] elements present at load", () => {
+    const el = { dataset: { join: "top" } } as { href?: string; dataset: Record<string, string> };
+    load("?ad=d18", "d18", [el]);
+    assert.equal(el.href, "/season1/join?src=ad&ad=d18");
+  });
+  it("click only: one s1_join_click plus one Clarity join_click per click on a [data-join], nothing elsewhere", () => {
+    const { listeners, ga, clr } = load("", "d19");
+    assert.deepEqual(listeners.map((l) => l[0]), ["click"], "no scroll, focus, input or autofill listener");
+    const el = { dataset: { join: "bottom" } };
+    const click = listeners[0][1];
+    click({ target: { closest: (s: string) => (s === "[data-join]" ? el : null) } });
+    click({ target: { closest: () => null } });
+    click({ target: null });
+    assert.deepEqual(JSON.parse(JSON.stringify(ga)), [["s1_join_click", { location: "bottom" }]]);
+    assert.deepEqual(JSON.parse(JSON.stringify(clr)), [["event", "join_click"]]);
+  });
+});
