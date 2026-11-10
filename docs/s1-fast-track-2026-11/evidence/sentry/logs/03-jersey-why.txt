@@ -1,0 +1,2 @@
+3101 { search: '', dataAd: 'd19' }
+3100 { search: '?ad=d21', dataAd: 'd21' }

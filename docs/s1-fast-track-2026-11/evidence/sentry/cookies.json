@@ -1,0 +1,37 @@
+{
+ "/season1?ad=D019&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d19-a": {
+  "httpOnly": true,
+  "path": "/",
+  "value": {
+   "path": "/season1",
+   "ts": 1794337587387,
+   "utm_source": "meta",
+   "utm_medium": "paid_social",
+   "utm_campaign": "season1",
+   "utm_content": "d19-a",
+   "ad": "d19"
+  }
+ },
+ "/season1/join?src=ad&ad=d18": {
+  "httpOnly": true,
+  "path": "/",
+  "value": {
+   "path": "/season1/join",
+   "ts": 1794337588285,
+   "ad": "d18"
+  }
+ },
+ "/season1?ad=zz": null,
+ "/season1?ad=d19&utm_source=share&utm_medium=referral": {
+  "httpOnly": true,
+  "path": "/",
+  "value": {
+   "path": "/season1",
+   "ts": 1794337589385,
+   "utm_source": "share",
+   "utm_medium": "referral",
+   "ad": "d19"
+  }
+ },
+ "_offenders": []
+}

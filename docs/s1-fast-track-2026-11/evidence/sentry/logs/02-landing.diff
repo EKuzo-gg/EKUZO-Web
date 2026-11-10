@@ -1,0 +1,15 @@
+diff --git a/app/season1/landing.html b/app/season1/landing.html
+index ebb0540..d2bb211 100644
+--- a/app/season1/landing.html
++++ b/app/season1/landing.html
+@@ -1451,6 +1451,10 @@ addEventListener("scroll",onScroll,{passive:true}); onScroll();
+ const goForm = ()=>{ if(HD&&!document.querySelector(".ih-resp.on")){ document.querySelector(".ih-skip")?.click(); document.getElementById("ihero").scrollIntoView({behavior:"smooth",block:"start"}); return; } const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}); },450); };
+ document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
+ document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
++// Fast track (s1-fast-track A4): the "ready now" links carry data-join="<location>" (they arrive with Part B; none in Part A). Click only, one event per tap; ga() adds ad and hero.
++window.S1.joinHref=()=>{ const u=new URLSearchParams({src:"ad",ad:d.id}); ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id"].forEach(k=>{ const v=qs.get(k); if(v) u.append(k,v); }); return "/season1/join?"+u.toString(); };
++document.querySelectorAll("[data-join]").forEach(a=>{ a.href=window.S1.joinHref(); });
++document.addEventListener("click",e=>{ const a=e.target&&e.target.closest&&e.target.closest("[data-join]"); if(!a) return; ga("s1_join_click",{location:a.dataset.join||"link"}); clr("event","join_click"); });
+ 
+ // Sticky CTA: shows once the top form is off screen, hides when the bottom form is on screen
+ const sticky = document.getElementById("sticky"); let topVis=true, endVis=false, joined=false;

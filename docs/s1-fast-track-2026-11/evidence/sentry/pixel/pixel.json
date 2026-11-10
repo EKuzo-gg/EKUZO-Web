@@ -1,0 +1,133 @@
+{
+ "rows": [
+  {
+   "path": "/season1",
+   "vp": "412",
+   "mainMd5": "e5eace7fc7ae27bedf5b67c4f2f48ff4",
+   "branchMd5": "e5eace7fc7ae27bedf5b67c4f2f48ff4",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1",
+   "vp": "1440",
+   "mainMd5": "af95a16f33d4fef533d187e51c21618e",
+   "branchMd5": "af95a16f33d4fef533d187e51c21618e",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d18",
+   "vp": "412",
+   "mainMd5": "28b78869dc2b24c88e2f87da21b9ba3a",
+   "branchMd5": "28b78869dc2b24c88e2f87da21b9ba3a",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d18",
+   "vp": "1440",
+   "mainMd5": "5e998b89d62dc469b40abe83cac17f2e",
+   "branchMd5": "5e998b89d62dc469b40abe83cac17f2e",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d19",
+   "vp": "412",
+   "mainMd5": "f04f2dedea9692e7ab4f67dafbf01b14",
+   "branchMd5": "f04f2dedea9692e7ab4f67dafbf01b14",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d19",
+   "vp": "1440",
+   "mainMd5": "e79d35754227cb92ee25a182cbdc3ccc",
+   "branchMd5": "e79d35754227cb92ee25a182cbdc3ccc",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d2",
+   "vp": "412",
+   "mainMd5": "0bc23f1e95abdd97a557e7a75aa7f6e3",
+   "branchMd5": "0bc23f1e95abdd97a557e7a75aa7f6e3",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d2",
+   "vp": "1440",
+   "mainMd5": "c79cd5575e015d24bacf0aec49565d51",
+   "branchMd5": "c79cd5575e015d24bacf0aec49565d51",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d4",
+   "vp": "412",
+   "mainMd5": "805f03a0ffa9a3f191c8829e98fecbb6",
+   "branchMd5": "805f03a0ffa9a3f191c8829e98fecbb6",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1?ad=d4",
+   "vp": "1440",
+   "mainMd5": "742a2afe545da7d455d9ac761e1cc2d2",
+   "branchMd5": "742a2afe545da7d455d9ac761e1cc2d2",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1/join",
+   "vp": "412",
+   "mainMd5": "d4aa5e006256fa919e97c756c9031118",
+   "branchMd5": "d4aa5e006256fa919e97c756c9031118",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1/join",
+   "vp": "1440",
+   "mainMd5": "998f73add636619adc76e5fba70f1f6f",
+   "branchMd5": "998f73add636619adc76e5fba70f1f6f",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1/join/b",
+   "vp": "412",
+   "mainMd5": "d4aa5e006256fa919e97c756c9031118",
+   "branchMd5": "d4aa5e006256fa919e97c756c9031118",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1/join/b",
+   "vp": "1440",
+   "mainMd5": "998f73add636619adc76e5fba70f1f6f",
+   "branchMd5": "998f73add636619adc76e5fba70f1f6f",
+   "equal": true,
+   "diff": null
+  },
+  {
+   "path": "/season1/join/jersey?ad=d21",
+   "vp": "412",
+   "mainMd5": "8e8a925f575dc34c4a110cba5823636b",
+   "branchMd5": "d4abe3aca47c631cb617146b616010e3",
+   "equal": false,
+   "diff": "size mismatch"
+  },
+  {
+   "path": "/season1/join/jersey?ad=d21",
+   "vp": "1440",
+   "mainMd5": "fbe9e93b95eaabd8eed4c84276c17ffe",
+   "branchMd5": "8d508556e7ea8b407e1f3ab3a0e26187",
+   "equal": false,
+   "diff": "size mismatch"
+  }
+ ],
+ "offenders": []
+}

@@ -1,0 +1,47 @@
+TAP version 13
+# Subtest: Sentry: formatSource with lc.ad (Atlas follow-up cases a to d)
+    # Subtest: (a) share link: no name organic; with a name ad d11-a (via organic)
+    ok 1 - (a) share link: no name organic; with a name ad d11-a (via organic)
+      ---
+      duration_ms: 3.438148
+      type: 'test'
+      ...
+    # Subtest: (b) email click: email s01-open; with a name ad d11-a (via email)
+    ok 2 - (b) email click: email s01-open; with a name ad d11-a (via email)
+      ---
+      duration_ms: 0.243291
+      type: 'test'
+      ...
+    # Subtest: (c) src=ad, ad=d19, no utm: ad d19, with and without a name
+    ok 3 - (c) src=ad, ad=d19, no utm: ad d19, with and without a name
+      ---
+      duration_ms: 0.275753
+      type: 'test'
+      ...
+    # Subtest: (d) paid_social and cpc without content: ad d19
+    ok 4 - (d) paid_social and cpc without content: ad d19
+      ---
+      duration_ms: 0.25074
+      type: 'test'
+      ...
+    # Subtest: extra: utm_content wins over lc.ad; ad null equals main behaviour
+    ok 5 - extra: utm_content wins over lc.ad; ad null equals main behaviour
+      ---
+      duration_ms: 0.203199
+      type: 'test'
+      ...
+    1..5
+ok 1 - Sentry: formatSource with lc.ad (Atlas follow-up cases a to d)
+  ---
+  duration_ms: 5.614763
+  type: 'suite'
+  ...
+1..1
+# tests 5
+# suites 1
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 238.902874

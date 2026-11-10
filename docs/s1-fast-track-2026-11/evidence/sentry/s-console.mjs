@@ -1,0 +1,20 @@
+import { createRequire } from "module"; import fs from "fs";
+const { chromium } = createRequire("/home/claude/")("playwright");
+const base="http://localhost:3100";
+const UA="Mozilla/5.0 (Linux; Android 14; SM-S921U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/490.0.0.50.109;]";
+const STUB=/(^|\.)googletagmanager\.com$|(^|\.)google-analytics\.com$|(^|\.)clarity\.ms$|(^|\.)facebook\.(net|com)$|(^|\.)doubleclick\.net$|(^|\.)bing\.com$/i;
+const ALLOWED=new Set(["localhost","fonts.googleapis.com","fonts.gstatic.com"]); const off=new Set();
+const b=await chromium.launch({proxy:{server:process.env.HTTPS_PROXY,bypass:"localhost,127.0.0.1"}});
+const paths=[...Array.from({length:21},(_,i)=>"/season1?ad=d"+(i+1)),"/season1","/season1/join","/season1/join/b","/season1/join/jersey?ad=d21","/season1/thanks"];
+const out={};
+for(const p of paths){ const ctx=await b.newContext({viewport:{width:412,height:915},deviceScaleFactor:2.625,isMobile:true,hasTouch:true,userAgent:UA});
+ await ctx.route("**/*",r=>{const u=new URL(r.request().url()); if(STUB.test(u.hostname)) return r.fulfill({status:204,body:""}); r.continue();});
+ ctx.on("response",rs=>{const u=new URL(rs.url()); if(u.protocol.startsWith("http")&&!ALLOWED.has(u.hostname)&&!STUB.test(u.hostname)) off.add(u.hostname);});
+ const page=await ctx.newPage(); const e={console:[],pageerror:[],requestfailed:[],http:[]};
+ page.on("console",m=>{if(m.type()==="error")e.console.push(m.text().slice(0,200)+" @"+(m.location().url||"").slice(0,120));});
+ page.on("pageerror",x=>e.pageerror.push(x.message)); page.on("requestfailed",r=>e.requestfailed.push(r.url().slice(0,140)+" "+(r.failure()?.errorText||"")));
+ page.on("response",r=>{if(r.status()>=400) e.http.push(r.status()+" "+decodeURIComponent(r.url()).slice(0,140));});
+ await page.goto(base+p,{waitUntil:"load"}); await page.waitForTimeout(2500); out[p]=e; await ctx.close(); }
+out._offenders=[...off]; fs.writeFileSync(process.argv[2],JSON.stringify(out,null,1));
+for(const [p,e] of Object.entries(out)) if(!p.startsWith("_")) console.log(p,"console",e.console.length,"pageerror",e.pageerror.length,"requestfailed",e.requestfailed.length,"http4xx",e.http.length);
+console.log("offenders",JSON.stringify(out._offenders)); await b.close();

@@ -1,0 +1,44 @@
+d18-utm dataLayer: equal (6 entries)
+d18-utm fbq: equal (4 entries)
+d18-utm clarity: equal (5 entries)
+d18-utm posts: equal (1 entries)
+d19-utm dataLayer: equal (6 entries)
+d19-utm fbq: equal (4 entries)
+d19-utm clarity: equal (5 entries)
+d19-utm posts: equal (1 entries)
+bare dataLayer: equal (4 entries)
+bare fbq: equal (3 entries)
+bare clarity: equal (2 entries)
+bare posts: equal (0 entries)
+zz dataLayer: equal (4 entries)
+zz fbq: equal (3 entries)
+zz clarity: equal (2 entries)
+zz posts: equal (0 entries)
+join-ad dataLayer: DIFFERENT
+   main only:   "page_location": "http://localhost:PORT/season1/join"
+   main only:   "page_location": "http://localhost:PORT/season1/join"
+   branch only: "page_location": "http://localhost:PORT/season1/join?ad=d18"
+   branch only: "page_location": "http://localhost:PORT/season1/join?ad=d18"
+   branch only: "ad": "d18",
+   branch only: "src": "ad",
+join-ad fbq: equal (4 entries)
+join-ad clarity: equal (2 entries)
+join-ad posts: equal (0 entries)
+join-b-email dataLayer: DIFFERENT
+   branch only: "ad": "",
+   branch only: "src": "email",
+join-b-email fbq: equal (4 entries)
+join-b-email clarity: equal (2 entries)
+join-b-email posts: equal (0 entries)
+jersey dataLayer: DIFFERENT
+   main only:   "page_location": "http://localhost:PORT/season1/join/jersey?utm_source=x"
+   main only:   "page_location": "http://localhost:PORT/season1/join/jersey?utm_source=x"
+   main only:   "ad": "d19",
+   branch only: "page_location": "http://localhost:PORT/season1/join/jersey?utm_source=x&ad=d21"
+   branch only: "page_location": "http://localhost:PORT/season1/join/jersey?utm_source=x&ad=d21"
+   branch only: "ad": "d21",
+   branch only: "src": "",
+jersey fbq: equal (4 entries)
+jersey clarity: equal (1 entries)
+jersey posts: equal (0 entries)
+differing lists: 3
