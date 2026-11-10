@@ -136,3 +136,18 @@ describe("season1_join_view fields (s1-fast-track A3)", () => {
     });
   }
 });
+
+describe("jersey hero switch (s1-fast-track follow-up)", () => {
+  const jerseyTpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "jersey", "join-jersey.html"), "utf8");
+  const sw = /<script>[^<]*getElementById\('jh'\)\.dataset\.ad=a[^<]*<\/script>/.exec(jerseyTpl)?.[0].slice(8, -9) ?? "";
+  const hero = (search: string) => {
+    const el = { dataset: { ad: "d19" } };
+    vm.runInContext(sw, vm.createContext({ URLSearchParams, location: { search }, document: { getElementById: () => el } }));
+    return el.dataset.ad;
+  };
+  it("normalizes like the landing before comparing, so D021 shows d21 and join_view agrees", () => {
+    assert.ok(sw.includes(".toLowerCase().replace(/^d0/,'d')"), sw);
+    for (const [q, want] of [["?ad=d21", "d21"], ["?ad=D021", "d21"], ["?ad=d020", "d20"], ["?ad=D20", "d20"], ["?ad=d19", "d19"], ["", "d19"], ["?ad=zz", "d19"], ["?ad=d0021", "d19"]] as const)
+      assert.equal(hero(q), want, q);
+  });
+});
