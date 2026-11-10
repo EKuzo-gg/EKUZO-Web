@@ -1,0 +1,12 @@
+d18-run1.json span #text
+d18-run2.json span #text
+d18-run3.json span #text
+d19-run1.json span #text
+d19-run2.json span #text
+d19-run3.json a.ready, p.ready-note, span #text
+d2-run1.json none
+d2-run2.json none
+d2-run3.json none
+noad-run1.json span #text
+noad-run2.json span #text
+noad-run3.json span #text

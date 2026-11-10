@@ -1,0 +1,23 @@
+noad-412 done 7s
+noad-1440 done 13s
+d18-412 done 22s
+d18-1440 done 30s
+d19-412 done 40s
+d19-1440 done 48s
+d2-412 done 55s
+d2-1440 done 61s
+d4-412 done 67s
+d4-1440 done 74s
+d6-412 done 80s
+d6-1440 done 86s
+d9-412 done 93s
+d9-1440 done 99s
+d11-412 done 106s
+d11-1440 done 112s
+d13-412 done 119s
+d13-1440 done 125s
+d14-412 done 131s
+d14-1440 done 138s
+d21-412 done 144s
+d21-1440 done 150s
+offenders []

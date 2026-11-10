@@ -1,0 +1,1083 @@
+{
+ "rows": [
+  {
+   "ad": "d11",
+   "vp": "412",
+   "pageH": {
+    "main": 2501,
+    "branch": 2501
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 503,
+    "mainMd5": "939b221081a2ccff5e60d8b980e848ea",
+    "branchMd5": "939b221081a2ccff5e60d8b980e848ea",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 64.609375,
+     "branchH": 64.609375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 495,
+     "branchH": 495,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 365.375,
+     "branchH": 365.375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 235.0625,
+     "branchH": 235.0625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 513.5625,
+     "branchH": 513.5625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 394.5,
+     "branchH": 394.5,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 301.734375,
+     "branchH": 301.734375,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 180,
+     "branchH": 180,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 212.09375,
+     "branchH": 212.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    },
+    "branch": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    }
+   },
+   "conf": null
+  },
+  {
+   "ad": "d11",
+   "vp": "1440",
+   "pageH": {
+    "main": 1894,
+    "branch": 1894
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 112,
+    "mainMd5": "b2b25e03ca6ddf3bef6a57a73b544ecb",
+    "branchMd5": "b2b25e03ca6ddf3bef6a57a73b544ecb",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 74.40625,
+     "branchH": 74.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 760,
+     "branchH": 760,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 319.1875,
+     "branchH": 319.1875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 181.03125,
+     "branchH": 181.03125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 488.0625,
+     "branchH": 488.0625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 394.5,
+     "branchH": 394.5,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 273.640625,
+     "branchH": 273.640625,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 118,
+     "branchH": 118,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 161.09375,
+     "branchH": 161.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "visible": false
+    },
+    "branch": {
+     "visible": false
+    }
+   },
+   "conf": null
+  },
+  {
+   "ad": "d19",
+   "vp": "412",
+   "pageH": {
+    "main": 2501,
+    "branch": 2501
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 503,
+    "mainMd5": "232d1dc146f528bcec7a587aefc99006",
+    "branchMd5": "232d1dc146f528bcec7a587aefc99006",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 64.609375,
+     "branchH": 64.609375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 495,
+     "branchH": 495,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 365.375,
+     "branchH": 365.375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 235.0625,
+     "branchH": 235.0625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 513.5625,
+     "branchH": 513.5625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 394.5,
+     "branchH": 394.5,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 301.734375,
+     "branchH": 301.734375,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 180,
+     "branchH": 180,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 212.09375,
+     "branchH": 212.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    },
+    "branch": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    }
+   },
+   "conf": {
+    "md5Equal": true,
+    "badPx": 0,
+    "boxes": [],
+    "confRect": {
+     "x": 0,
+     "y": 0,
+     "w": 412,
+     "h": 915
+    },
+    "lockRect": null,
+    "mainHasLock": false,
+    "allInsideConf": true
+   }
+  },
+  {
+   "ad": "d19",
+   "vp": "1440",
+   "pageH": {
+    "main": 1894,
+    "branch": 1894
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 112,
+    "mainMd5": "b2b25e03ca6ddf3bef6a57a73b544ecb",
+    "branchMd5": "b2b25e03ca6ddf3bef6a57a73b544ecb",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 74.40625,
+     "branchH": 74.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 760,
+     "branchH": 760,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 319.1875,
+     "branchH": 319.1875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 181.03125,
+     "branchH": 181.03125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 488.0625,
+     "branchH": 488.0625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 394.5,
+     "branchH": 394.5,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 273.640625,
+     "branchH": 273.640625,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 118,
+     "branchH": 118,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 161.09375,
+     "branchH": 161.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "visible": false
+    },
+    "branch": {
+     "visible": false
+    }
+   },
+   "conf": {
+    "md5Equal": true,
+    "badPx": 0,
+    "boxes": [],
+    "confRect": {
+     "x": 0,
+     "y": 0,
+     "w": 1440,
+     "h": 900
+    },
+    "lockRect": null,
+    "mainHasLock": false,
+    "allInsideConf": true
+   }
+  },
+  {
+   "ad": "noad",
+   "vp": "412",
+   "pageH": {
+    "main": 3011,
+    "branch": 3011
+   },
+   "ctaText": {
+    "main": [
+     "Be the hero →"
+    ],
+    "branch": [
+     "Be the hero →"
+    ]
+   },
+   "above": {
+    "y": 503,
+    "mainMd5": "92317550e295aea879f35ceba106f023",
+    "branchMd5": "92317550e295aea879f35ceba106f023",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 64.609375,
+     "branchH": 64.609375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 495,
+     "branchH": 495,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 370.71875,
+     "branchH": 370.71875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 266.78125,
+     "branchH": 266.78125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#mod.mod",
+     "mainH": 463.375,
+     "branchH": 463.375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 518.28125,
+     "branchH": 518.28125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 396.859375,
+     "branchH": 396.859375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 304.40625,
+     "branchH": 304.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 180,
+     "branchH": 180,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 212.09375,
+     "branchH": 212.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    },
+    "branch": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    }
+   },
+   "conf": null
+  },
+  {
+   "ad": "noad",
+   "vp": "1440",
+   "pageH": {
+    "main": 2307,
+    "branch": 2307
+   },
+   "ctaText": {
+    "main": [
+     "Be the hero →"
+    ],
+    "branch": [
+     "Be the hero →"
+    ]
+   },
+   "above": {
+    "y": 112,
+    "mainMd5": "bbaec6f2e35d3a8b6845fbac8ab7a2ee",
+    "branchMd5": "bbaec6f2e35d3a8b6845fbac8ab7a2ee",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 74.40625,
+     "branchH": 74.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 760,
+     "branchH": 760,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 325.46875,
+     "branchH": 325.46875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 210.390625,
+     "branchH": 210.390625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#mod.mod",
+     "mainH": 395.875,
+     "branchH": 395.875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 463.390625,
+     "branchH": 463.390625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 396.859375,
+     "branchH": 396.859375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 276.78125,
+     "branchH": 276.78125,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 118,
+     "branchH": 118,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 161.09375,
+     "branchH": 161.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "visible": false
+    },
+    "branch": {
+     "visible": false
+    }
+   },
+   "conf": null
+  },
+  {
+   "ad": "d14",
+   "vp": "412",
+   "pageH": {
+    "main": 2596,
+    "branch": 2596
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 503,
+    "mainMd5": "8e5ed13dad11f2fca0c9ce176a3a66bf",
+    "branchMd5": "8e5ed13dad11f2fca0c9ce176a3a66bf",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 64.609375,
+     "branchH": 64.609375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 495,
+     "branchH": 495,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 384.0625,
+     "branchH": 384.0625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 251.546875,
+     "branchH": 251.546875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 530.046875,
+     "branchH": 530.046875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 414.5,
+     "branchH": 414.5,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 324.40625,
+     "branchH": 324.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 180,
+     "branchH": 180,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 212.09375,
+     "branchH": 212.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    },
+    "branch": {
+     "md5": "c88c3e574213dd5c070ebb1cf6c7518f",
+     "text": "Save their spot"
+    }
+   },
+   "conf": null
+  },
+  {
+   "ad": "d14",
+   "vp": "1440",
+   "pageH": {
+    "main": 1980,
+    "branch": 1980
+   },
+   "ctaText": {
+    "main": [
+     "Save their spot →"
+    ],
+    "branch": [
+     "Save their spot →"
+    ]
+   },
+   "above": {
+    "y": 112,
+    "mainMd5": "29526e4bd24771128e4db66aae624db2",
+    "branchMd5": "29526e4bd24771128e4db66aae624db2",
+    "equal": true
+   },
+   "sections": [
+    {
+     "sec": "HEADER",
+     "mainH": 74.40625,
+     "branchH": 74.40625,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#hero.hero",
+     "mainH": 760,
+     "branchH": 760,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-top.join",
+     "mainH": 341.171875,
+     "branchH": 341.171875,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#bridge.bridge",
+     "mainH": 228.03125,
+     "branchH": 228.03125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.how",
+     "mainH": 481.03125,
+     "branchH": 481.03125,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION.faq",
+     "mainH": 390.984375,
+     "branchH": 390.984375,
+     "md5Equal": true
+    },
+    {
+     "sec": "SECTION#join-end.join",
+     "mainH": 300.3125,
+     "branchH": 300.3125,
+     "md5Equal": true
+    },
+    {
+     "sec": "FOOTER",
+     "mainH": 118,
+     "branchH": 118,
+     "md5Equal": true
+    }
+   ],
+   "faq": [
+    {
+     "i": 0,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 1,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 2,
+     "mainH": 161.09375,
+     "branchH": 161.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 3,
+     "mainH": 110.09375,
+     "branchH": 110.09375,
+     "md5Equal": true,
+     "badPx": 0
+    },
+    {
+     "i": 4,
+     "mainH": 135.59375,
+     "branchH": 135.59375,
+     "md5Equal": true,
+     "badPx": 0
+    }
+   ],
+   "faqProof": {
+    "answersChanged": [],
+    "allEqualAfterCopy": true,
+    "perDetails": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   },
+   "sticky": {
+    "main": {
+     "visible": false
+    },
+    "branch": {
+     "visible": false
+    }
+   },
+   "conf": null
+  }
+ ],
+ "offenders": []
+}

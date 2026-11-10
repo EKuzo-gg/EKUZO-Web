@@ -1,0 +1,9 @@
+d11-412 done 8s
+d11-1440 done 14s
+d19-412 done 24s
+d19-1440 done 32s
+noad-412 done 40s
+noad-1440 done 46s
+d14-412 done 54s
+d14-1440 done 60s
+offenders []

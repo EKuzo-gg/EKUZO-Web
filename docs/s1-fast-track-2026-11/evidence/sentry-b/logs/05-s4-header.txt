@@ -1,0 +1,2 @@
+ft-a-tier1 shifts naming header/svg.mark/#sticky/.faq/footer: 95 | with recent input: 49 | without input and value>0.01: 0 | max value without input: 0.00007 | max any: 0.0606 {"button.mini-cta":62,"svg.mark":29,"div#sticky.sticky":24,"section.faq":6,"footer":3}
+ft-b-tier1 shifts naming header/svg.mark/#sticky/.faq/footer: 134 | with recent input: 70 | without input and value>0.01: 0 | max value without input: 0.00004 | max any: 0.0606 {"button.mini-cta":90,"svg.mark":21,"div#sticky.sticky":40,"section.faq":10,"footer":5}

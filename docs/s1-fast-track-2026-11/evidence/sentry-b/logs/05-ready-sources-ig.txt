@@ -1,0 +1,12 @@
+d18-run1: span #text
+d18-run2: span #text
+d18-run3: span #text
+d19-run1: a.ready, p.ready-note, span #text
+d19-run2: a.ready, p.ready-note
+d19-run3: a.ready, p.ready-note
+d2-run1: none
+d2-run2: none
+d2-run3: none
+noad-run1: span #text
+noad-run2: span #text
+noad-run3: span #text
