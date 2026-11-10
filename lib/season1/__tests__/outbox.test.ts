@@ -377,13 +377,31 @@ describe("Discord messages", () => {
       assert.ok(s.length <= "Source: ad ".length + 80, s);
       assert.equal(m.split(" | ").length, 5, "no stray separators");
     });
-    it("c3 (s1-fast-track A2): no utm_content but lc.ad is ad <lc.ad>; utm_content still wins; a and b still first", () => {
-      assert.equal(src({ ad: "d19" }), "Source: ad d19");
-      assert.equal(src({ ad: "d19", utmSource: "share", utmMedium: "referral" }, "Waitlist Ad"), "Source: ad d19", "c beats d");
+    it("c3 (s1-fast-track A2): a paid or src=ad click with no utm_content is ad <lc.ad>; utm_content still wins; a and b still first", () => {
+      assert.equal(src({ ad: "d19", src: "ad" }), "Source: ad d19", "(c) src ad, no utm at all");
+      assert.equal(src({ ad: "d19", src: "ad" }, "Waitlist Ad"), "Source: ad d19", "c beats d");
+      assert.equal(src({ ad: "d19", utmMedium: "paid_social" }), "Source: ad d19", "(d) paid medium, no content");
+      assert.equal(src({ ad: "d19", utmMedium: "cpc", utmCampaign: "s01" }, "Waitlist Ad"), "Source: ad d19");
       assert.equal(src({ ad: "d19", utmMedium: "paid_social", utmContent: "d19-a" }), "Source: ad d19-a");
-      assert.equal(src({ ad: "d19", invited: true }), "Source: referral");
-      assert.equal(src({ ad: "d19", src: "karlin" }), "Source: karlin");
+      assert.equal(src({ ad: "d19", invited: true, src: "ad" }), "Source: referral");
+      assert.equal(src({ ad: "d19", src: "karlin", utmMedium: "cpc" }), "Source: karlin");
       assert.equal(src({ ad: null, utmMedium: "cpc" }), "Source: ad");
+    });
+    it("c3: a share or email link that carries ad keeps branches d to g, exactly as without ad", () => {
+      const cases: Partial<OrderCtx>[] = [
+        { utmSource: "share", utmMedium: "referral" },
+        { utmMedium: "email", utmCampaign: "s01-open" },
+        { src: "email" },
+        { firstTouch: "paid_meta" },
+        {},
+      ];
+      for (const c of cases)
+        for (const name of [null, "d11-a-toomuch-fl"])
+          assert.equal(src({ ...c, ad: "d19" }, name), src({ ...c, ad: null }, name), JSON.stringify({ c, name }));
+      assert.equal(src({ utmSource: "share", utmMedium: "referral", ad: "d19" }), "Source: organic", "(a) share, no name");
+      assert.equal(src({ utmSource: "share", utmMedium: "referral", ad: "d19" }, "d11-a"), "Source: ad d11-a (via organic)", "(a) share, name");
+      assert.equal(src({ utmMedium: "email", utmCampaign: "s01-open", ad: "d19" }), "Source: email s01-open", "(b) email, no name");
+      assert.equal(src({ utmMedium: "email", utmCampaign: "s01-open", ad: "d19" }, "d11-a"), "Source: ad d11-a (via email)", "(b) email, name");
     });
     it("needsAdNameLookup: only when a, b, c have not settled the source", () => {
       assert.equal(needsAdNameLookup(live({ invited: true })), false);
@@ -391,7 +409,11 @@ describe("Discord messages", () => {
       assert.equal(needsAdNameLookup(live({ utmMedium: "paid", utmContent: "x" })), false);
       assert.equal(needsAdNameLookup(live({ utmMedium: "paid" })), true);
       assert.equal(needsAdNameLookup(live({})), true);
-      assert.equal(needsAdNameLookup(live({ ad: "d19" })), false, "lc.ad settles (c)");
+      assert.equal(needsAdNameLookup(live({ ad: "d19", src: "ad" })), false, "lc.ad on a src=ad click settles (c)");
+      assert.equal(needsAdNameLookup(live({ ad: "d19", utmMedium: "paid" })), false, "lc.ad on a paid click settles (c)");
+      assert.equal(needsAdNameLookup(live({ ad: "d19", utmSource: "share", utmMedium: "referral" })), true, "share link: lookup as on main");
+      assert.equal(needsAdNameLookup(live({ ad: "d19", utmMedium: "email" })), true, "email link: lookup as on main");
+      assert.equal(needsAdNameLookup(live({ ad: "d19" })), true, "bare ad: lookup as on main");
     });
   });
 

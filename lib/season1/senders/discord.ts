@@ -69,8 +69,12 @@ const isPaidClick = (o: SourceInput) =>
   PAID_MEDIUMS.has(low(o.utmMedium)) || (PAID_SOURCES.has(low(o.utmSource)) && !!free(o.utmContent, 80));
 const isEmailClick = (o: SourceInput) => low(o.utmMedium) === "email" || low(o.src) === "email";
 
-/** The last click's ad id when (c) uses it: no utm_content, and `lc.ad` set (s1-fast-track A2). */
-const lcAd = (o: SourceInput): string => (free(o.utmContent, 80) ? "" : ident(o.ad, 3));
+/**
+ * The last click's ad id when (c) uses it (s1-fast-track A2): no utm_content, `lc.ad` set, and the
+ * click is paid or src is ad. A share or email link that carries `ad` keeps branches d to g.
+ */
+const lcAd = (o: SourceInput): string =>
+  free(o.utmContent, 80) || !(isPaidClick(o) || low(o.src) === "ad") ? "" : ident(o.ad, 3);
 
 /** Branches a to c settle the Source without the Klaviyo profile (referral, karlin, a named paid click or a last-click ad). */
 export function needsAdNameLookup(o: SourceInput): boolean {
@@ -80,7 +84,7 @@ export function needsAdNameLookup(o: SourceInput): boolean {
 
 /**
  * One Source value, first match wins: (a) referral, (b) karlin, (c) a paid last
- * click `ad <utm_content>` (with no utm_content, the last click's ad id `ad <lc.ad>`),
+ * click `ad <utm_content>` (with no utm_content, a paid or src=ad click's ad id `ad <lc.ad>`),
  * (d) the waitlist's Klaviyo `season1_ad_name` `ad <name>` plus ` (via <last click>)` when the last click was something else,
  * (e) email, (f) the first-touch bucket, (g) organic. A paid click with no
  * utm_content and no profile ad name reads `ad` plus the campaign when there is one.
