@@ -1,0 +1,5 @@
+cache-control: no-cache
+content-type: text/plain; charset=utf-8
+location: /programs/ekuzo-camps
+status 308 
+strict-transport-security: max-age=31536000

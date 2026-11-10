@@ -1,0 +1,28 @@
+== https://dev--ekuzo.netlify.app/season1?ad=d19
+HTTP/1.1 200 Connection Established
+
+HTTP/2 200 
+cache-control: s-maxage=31536000
+cache-status: "Netlify Durable"; hit; ttl=31535156, "Next.js"; hit, "Netlify Edge"; fwd=miss; fwd-status=200; stored
+content-type: text/html; charset=utf-8
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+server: Netlify
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+x-content-type-options: nosniff
+x-nextjs-date: Tue, 10 Nov 2026 20:03:19 GMT
+
+== https://ekuzo.gg/season1?ad=d19
+HTTP/1.1 200 Connection Established
+
+HTTP/2 200 
+cache-control: s-maxage=31536000
+cache-status: "Netlify Durable"; hit; ttl=31456826, "Next.js"; hit, "Netlify Edge"; fwd=stale; fwd-status=200; stored
+content-type: text/html; charset=utf-8
+netlify-vary: query=__nextDataReq|_rsc, header=x-nextjs-data|x-next-debug-logging|next-router-prefetch|next-router-segment-prefetch|next-router-state-tree|next-url|rsc, cookie=__prerender_bypass|__next_preview_data
+server: Netlify
+strict-transport-security: max-age=31536000
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+x-content-type-options: nosniff
+x-nextjs-date: Tue, 10 Nov 2026 20:07:29 GMT
+

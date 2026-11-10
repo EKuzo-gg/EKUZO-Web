@@ -1,0 +1,202 @@
+== noad 412 H 3011 3163 cta Be the hero → -> Be the hero →
+  above eq true y 503 
+  sec SECTION#join-top.join hD 59.1 hIn true bad 55525 boxes 24.4,530.8,326.5,109.3,in | 24.8,650.4,117.3,15.6,in | 123.8,761.3,163.8,16.8,in | 8,866,395,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION#mod.mod hD - hIn - bad 999 boxes 40,1246.8,156.6,3,OUT | 40,1385.9,100.6,3,OUT | 40,1524.9,159.6,3,OUT
+  sec SECTION.how hD - hIn - bad 141 boxes 40,1790.2,29.7,29.7,OUT | 40.4,1910.2,28.6,10.7,OUT | 47.6,1938,14.5,1.9,OUT | 40.4,2055.3,29,28.2,OUT
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 92.4 hIn true bad 206889 boxes 24,2606.7,363.4,265.1,in
+  sec FOOTER hD - hIn - bad 232 boxes 24.4,3029.8,51,12.2,OUT
+  faq d9383 d14903 d3358 d503 d4945 sticky Save their spot -> Send me the details
+== noad 1440 H 2307 2425 cta Be the hero → -> Be the hero →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 600 boxes 1180,21,105,31,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 6796 boxes 820,125,463,119,in | 978,341,163,15,in | 820,427,281,9,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION#mod.mod hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5230 boxes 820,1977.1,440,51,in | 978,2128.1,163,15,in | 820,2215.1,281,24,in
+  faq d481 d660 d0 d0 d0 sticky - -> -
+== d18 412 H 2584 2702 cta Find their team → -> Find their team →
+  above eq true y 503 
+  sec SECTION#join-top.join hD 59.1 hIn true bad 61518 boxes 24.4,531.2,326.5,109,in | 24.8,650.4,117.3,15.6,in | 123.8,761.3,163.8,16.8,in | 8,866,395,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.how hD - hIn - bad 96 boxes 44.6,1329.6,17.9,3.4,OUT | 41.1,1349.8,27.4,7.2,OUT | 45.3,1449.6,18.3,2.7,OUT | 41.1,1469.8,27.4,7.2,OUT | 41.1,1594,27.4,9.1,OUT | 48,1621.8,14.1,0.8,OUT
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 52520 boxes 24.4,2146.1,277.3,109,in | 24.8,2331.6,7.6,6.9,in | 379,2331.6,8.4,8.8,in | 123.8,2350.6,163.8,16.8,in | 25.1,2436.4,283.4,18.3,in
+  sec FOOTER hD - hIn - bad 99 boxes 24,2579.8,37.3,0,OUT
+  faq d9383 d14910 d1604 d640 d1714 sticky Save their spot -> Send me the details
+  conf bad 788892 insideConf true boxes 4 lock true mainLock false
+== d18 1440 H 1970 2088 cta Find their team → -> Find their team →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 600 boxes 1180,21,105,31,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 7646 boxes 820,124,463,120,in | 978,341,163,15,in | 820,427,281,9,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5740 boxes 820,1639,460,52,in | 978,1791,163,15,in | 820,1878,281,24,in
+  faq d461 d660 d0 d0 d0 sticky - -> -
+  conf bad 122930 insideConf true boxes 2 lock true mainLock false
+== d19 412 H 2501 2650 cta Save their spot → -> Get the details →
+  above eq false y 503 57.5,429.7,171.8,44.2,in
+  sec SECTION#hero.hero hD - hIn - bad 3279 boxes 57.5,429.7,171.8,44.2,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 50466 boxes 24.4,530,326.5,130.3,in | 123.8,755.6,163.8,16.8,in | 24.8,860.3,281.9,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 1920 boxes 24.8,1055.8,327.6,17.1,OUT | 24.4,1082.9,349.7,44.2,OUT
+  sec SECTION.how hD - hIn - bad 3685 boxes 26.7,1171.3,99.8,9.1,OUT | 139.8,1171.3,38.9,9.1,OUT | 24.4,1201.8,288.8,48.8,OUT | 47.2,1285.6,16.8,2.3,OUT | 41.1,1305.8,6.1,6.9,OUT | 62.9,1305.8,5.7,6.5,OUT | 47.2,1405.6,16.8,2.3,OUT | 41.1,1425.8,6.1,6.9,OUT | 62.9,1425.8,5.7,6.5,OUT | 41.1,1550,27.8,9.9,OUT | 48.4,1578.2,13,1.5,OUT
+  sec SECTION.faq hD - hIn - bad 2309 boxes 24.4,1976.3,362.7,0,OUT | 24.4,2005.6,172.6,13,OUT | 375.6,2008.3,10.3,11,OUT
+  sec SECTION#join-end.join hD 89.7 hIn true bad 202503 boxes 24,2099.2,363.8,233.5,in | 25.1,2347.5,251,11.4,in
+  sec FOOTER hD - hIn - bad 98 boxes 24,2528.7,37,0,OUT
+  faq d9358 d14033 d865 d0 d827 sticky Save their spot -> Send me the details
+  conf bad 790390 insideConf true boxes 4 lock true mainLock false
+== d19 1440 H 1894 2013 cta Save their spot → -> Get the details →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 565 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 883 boxes 216,760,263,68,OUT
+  sec SECTION#join-top.join hD 59.1 hIn true bad 6035 boxes 820,124,463,114,in | 979,335,161,15,in | 820,421,281,9,in
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5032 boxes 820,1566.9,465,49,in | 979,1715.9,161,15,in | 820,1802.9,281,23,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d473 d649 d0 d0 d0 sticky - -> -
+  conf bad 124961 insideConf true boxes 2 lock true mainLock false
+== d2 412 H 3086 3145 cta Play their game → -> Play their game →
+  above eq true y 0 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 63497 boxes 24.4,2588.4,300.2,109,in | 123.8,2793,163.8,16.8,in | 25.1,2879.1,283.4,18.3,in
+  sec FOOTER hD - hIn - bad 747 boxes 24,3011.9,51.8,12.6,OUT
+  faq d9383 d14909 d3088 d0 d0 sticky Save their spot -> Send me the details
+== d2 1440 H 2786 2845 cta Play their game → -> Play their game →
+  above eq true y 0 
+  sec HEADER hD - hIn - bad 597 boxes 1180,21,105,31,in
+  sec SECTION#join-end.join hD 59.1 hIn true bad 8988 boxes 820,2356.8,416,91,in | 978,2547.8,163,15,in | 820,2634.8,281,24,in
+  faq d481 d649 d0 d0 d0 sticky - -> -
+== d4 412 H 2387 2480 cta Find their team → -> Find their team →
+  above eq true y 0 
+  sec SECTION#join-end.join hD 92.4 hIn true bad 210808 boxes 24,1925.4,363.8,263.6,in
+  sec FOOTER hD - hIn - bad 96 boxes 24.4,2358,36.2,0,OUT
+  faq d9383 d14903 d4033 d640 d0 sticky Save their spot -> Send me the details
+== d4 1440 H 2196 2255 cta Find their team → -> Find their team →
+  above eq true y 0 
+  sec HEADER hD - hIn - bad 600 boxes 1180,21,105,31,in
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5424 boxes 820,1807.2,448,51,in | 978,1958.2,163,15,in | 820,2045.2,281,24,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d481 d660 d0 d0 d0 sticky - -> -
+== d6 412 H 2449 2508 cta Save their spot → -> Get the details →
+  above eq true y 0 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 52593 boxes 24.4,1965.4,346.3,95.2,in | 123.8,2156.3,163.8,16.8,in | 25.1,2242,283.4,18.3,in
+  sec FOOTER hD - hIn - bad 196 boxes 24,2384.7,37,1.1,OUT
+  faq d9383 d14909 d0 d539 d0 sticky Save their spot -> Send me the details
+== d6 1440 H 2115 2174 cta Save their spot → -> Get the details →
+  above eq true y 0 
+  sec HEADER hD - hIn - bad 598 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 1156 boxes 217,760,360,68,in
+  sec SECTION#join-end.join hD 59.1 hIn true bad 6867 boxes 820,1702.5,416,75,in | 978,1877.5,163,15,in | 820,1964.5,281,24,in
+  faq d481 d648 d0 d0 d0 sticky - -> -
+== d9 412 H 2348 2407 cta Save their spot → -> Get the details →
+  above eq true y 0 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 42413 boxes 24.4,1871.6,277.3,88,in | 123.8,2055.2,163.8,16.8,in | 25.1,2140.9,283.4,18.7,in
+  sec FOOTER hD - hIn - bad 755 boxes 24,2273.9,52.2,12.6,OUT
+  faq d9383 d14910 d781 d0 d0 sticky Save their spot -> Send me the details
+== d9 1440 H 2065 2150 cta Save their spot → -> Get the details →
+  above eq true y 0 
+  sec HEADER hD - hIn - bad 565 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 680 boxes 217,760,233,68,in
+  sec SECTION#join-end.join hD 85 hIn true bad 42613 boxes 820,1686.7,479,223,in
+  faq d481 d648 d0 d0 d0 sticky - -> -
+== d11 412 H 2501 2650 cta Save their spot → -> Get the details →
+  above eq false y 503 57.5,429.7,171.8,44.2,in
+  sec SECTION#hero.hero hD - hIn - bad 3247 boxes 57.5,429.7,171.8,44.2,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 50466 boxes 24.4,530,326.5,130.3,in | 123.8,755.6,163.8,16.8,in | 24.8,860.3,281.9,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 1920 boxes 24.8,1055.8,327.6,17.1,OUT | 24.4,1082.9,349.7,44.2,OUT
+  sec SECTION.how hD - hIn - bad 3685 boxes 26.7,1171.3,99.8,9.1,OUT | 139.8,1171.3,38.9,9.1,OUT | 24.4,1201.8,288.8,48.8,OUT | 47.2,1285.6,16.8,2.3,OUT | 41.1,1305.8,6.1,6.9,OUT | 62.9,1305.8,5.7,6.5,OUT | 47.2,1405.6,16.8,2.3,OUT | 41.1,1425.8,6.1,6.9,OUT | 62.9,1425.8,5.7,6.5,OUT | 41.1,1550,27.8,9.9,OUT | 48.4,1578.2,13,1.5,OUT
+  sec SECTION.faq hD - hIn - bad 2309 boxes 24.4,1976.3,362.7,0,OUT | 24.4,2005.6,172.6,13,OUT | 375.6,2008.3,10.3,11,OUT
+  sec SECTION#join-end.join hD 89.7 hIn true bad 202503 boxes 24,2099.2,363.8,233.5,in | 25.1,2347.5,251,11.4,in
+  sec FOOTER hD - hIn - bad 98 boxes 24,2528.7,37,0,OUT
+  faq d9358 d14033 d865 d0 d827 sticky Save their spot -> Send me the details
+== d11 1440 H 1894 2013 cta Save their spot → -> Get the details →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 565 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 858 boxes 216,760,263,68,OUT
+  sec SECTION#join-top.join hD 59.1 hIn true bad 6035 boxes 820,124,463,114,in | 979,335,161,15,in | 820,421,281,9,in
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5032 boxes 820,1566.9,465,49,in | 979,1715.9,161,15,in | 820,1802.9,281,23,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d473 d649 d0 d0 d0 sticky - -> -
+== d13 412 H 2611 2729 cta Save their spot → -> Get the details →
+  above eq false y 503 57.9,429.7,168.4,44.2,in
+  sec SECTION#hero.hero hD - hIn - bad 3634 boxes 57.9,429.7,168.4,44.2,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 66199 boxes 24.4,529.7,326.5,110.5,in | 24.8,650.4,117.3,15.6,in | 123.8,761.3,163.8,16.8,in | 8,866,395,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.how hD - hIn - bad 111 boxes 40.4,1355.8,29,30.1,OUT | 40.4,1475.8,29,11.4,OUT | 47.6,1504,14.5,1.9,OUT | 45.7,1621.4,18.3,2.7,OUT | 41.1,1641.6,27.4,7.2,OUT
+  sec SECTION.faq hD - hIn - bad 571 boxes 375.6,1898.9,10.3,11,OUT | 24,2017.7,178.7,13.3,OUT
+  sec SECTION#join-end.join hD 59.1 hIn true bad 57237 boxes 24.4,2171.6,277.3,110.1,in | 32,2358.2,2.3,0.4,in | 377.5,2358.2,2.3,0.4,in | 123.8,2377.3,163.8,17.1,in | 24.8,2403.9,362.3,8,in | 25.1,2463.4,283.4,18.3,in
+  sec FOOTER hD - hIn - bad 100 boxes 24,2605.7,46.5,1.1,OUT
+  faq d9356 d14911 d781 d539 d825 sticky Save their spot -> Send me the details
+== d13 1440 H 1970 2127 cta Save their spot → -> Get the details →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 600 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 865 boxes 217,760,257,68,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 8675 boxes 820,123,463,121,in | 978,341,163,15,in | 820,427,281,9,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 98.3 hIn true bad 61406 boxes 820,1638,479,248,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d461 d660 d0 d0 d0 sticky - -> -
+== d14 412 H 2596 2714 cta Save their spot → -> Get the details →
+  above eq false y 503 57.9,429.7,235.4,45,in
+  sec SECTION#hero.hero hD - hIn - bad 4031 boxes 57.9,429.7,235.4,45,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 59720 boxes 25.1,531.6,302.5,70.9,in | 24.4,612.7,326.5,66.7,in | 123.8,774.6,163.8,16.8,in | 24.8,879.4,281.9,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.how hD - hIn - bad 114 boxes 40,1336,29,29.7,OUT | 40.8,1456,27.8,9.9,OUT | 47.2,1483.8,14.9,1.9,OUT | 40.8,1601.9,28.6,11.8,OUT | 48,1629.7,14.1,0.8,OUT
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 54814 boxes 24.4,2171.6,354.7,105.9,in | 42.7,2296.9,79.6,13.7,in | 24.4,2343.4,8.4,8.4,in | 379,2343.4,8,7.6,in | 123.8,2362.4,163.8,16.8,in | 25.1,2448.2,283.4,18.3,in
+  sec FOOTER hD - hIn - bad 98 boxes 24,2590.9,37,0,OUT
+  faq d9383 d14909 d547 d0 d531 sticky Save their spot -> Send me the details
+== d14 1440 H 1980 2066 cta Save their spot → -> Get the details →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 598 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 1156 boxes 217,760,360,68,in
+  sec SECTION#join-top.join hD 27.7 hIn true bad 55678 boxes 820,125,479,315,in
+  sec SECTION#bridge.bridge hD - hIn - bad 0 boxes 
+  sec SECTION.how hD - hIn - bad 0 boxes 
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 6803 boxes 820,1595,416,75,in | 978,1770,163,15,in | 820,1856,281,24,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d460 d660 = = = sticky - -> -
+== d21 412 H 2501 2650 cta Save their spot → -> Get the details →
+  above eq false y 503 57.5,429.7,171.8,44.2,in
+  sec SECTION#hero.hero hD - hIn - bad 3279 boxes 57.5,429.7,171.8,44.2,in
+  sec SECTION#join-top.join hD 59.1 hIn true bad 50466 boxes 24.4,530,326.5,130.3,in | 123.8,755.6,163.8,16.8,in | 24.8,860.3,281.9,7.6,in
+  sec SECTION#bridge.bridge hD - hIn - bad 1920 boxes 24.8,1055.8,327.6,17.1,OUT | 24.4,1082.9,349.7,44.2,OUT
+  sec SECTION.how hD - hIn - bad 3685 boxes 26.7,1171.3,99.8,9.1,OUT | 139.8,1171.3,38.9,9.1,OUT | 24.4,1201.8,288.8,48.8,OUT | 47.2,1285.6,16.8,2.3,OUT | 41.1,1305.8,6.1,6.9,OUT | 62.9,1305.8,5.7,6.5,OUT | 47.2,1405.6,16.8,2.3,OUT | 41.1,1425.8,6.1,6.9,OUT | 62.9,1425.8,5.7,6.5,OUT | 41.1,1550,27.8,9.9,OUT | 48.4,1578.2,13,1.5,OUT
+  sec SECTION.faq hD - hIn - bad 2309 boxes 24.4,1976.3,362.7,0,OUT | 24.4,2005.6,172.6,13,OUT | 375.6,2008.3,10.3,11,OUT
+  sec SECTION#join-end.join hD 89.7 hIn true bad 202503 boxes 24,2099.2,363.8,233.5,in | 25.1,2347.5,251,11.4,in
+  sec FOOTER hD - hIn - bad 98 boxes 24,2528.7,37,0,OUT
+  faq d9358 d14033 d865 d0 d827 sticky Save their spot -> Send me the details
+== d21 1440 H 1894 2013 cta Save their spot → -> Get the details →
+  above eq false y 112 1180,21,105,31,in
+  sec HEADER hD - hIn - bad 565 boxes 1180,21,105,31,in
+  sec SECTION#hero.hero hD - hIn - bad 883 boxes 216,760,263,68,OUT
+  sec SECTION#join-top.join hD 59.1 hIn true bad 6035 boxes 820,124,463,114,in | 979,335,161,15,in | 820,421,281,9,in
+  sec SECTION.faq hD - hIn - bad 0 boxes 
+  sec SECTION#join-end.join hD 59.1 hIn true bad 5032 boxes 820,1566.9,465,49,in | 979,1715.9,161,15,in | 820,1802.9,281,23,in
+  sec FOOTER hD - hIn - bad 0 boxes 
+  faq d473 d649 d0 d0 d0 sticky - -> -
+faqProof noad 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof noad 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[true,true,true,true,false]}
+faqProof d18 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d18 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,true,true,true,true]}
+faqProof d19 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d19 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,true,true,true]}
+faqProof d2 412 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d2 1440 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d4 412 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d4 1440 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d6 412 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d6 1440 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d9 412 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d9 1440 {"answersChanged":[0,1],"allEqualAfterCopy":true,"perDetails":[true,true,true,true,true]}
+faqProof d11 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d11 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,true,true,true]}
+faqProof d13 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d13 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,true,true,true,true]}
+faqProof d14 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d14 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,true,false,false,false]}
+faqProof d21 412 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,false,false,false]}
+faqProof d21 1440 {"answersChanged":[0,1],"allEqualAfterCopy":false,"perDetails":[false,false,true,true,true]}

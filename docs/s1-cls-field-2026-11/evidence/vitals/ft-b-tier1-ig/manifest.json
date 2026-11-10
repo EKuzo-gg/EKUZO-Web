@@ -1,0 +1,91 @@
+{
+ "label": "ft-b-tier1-ig",
+ "invocations": [
+  {
+   "command": "node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2,noad --profile ig-android-412 --runs 3 --label ft-b-tier1-ig --expectMarker 0c02cf3 --requireReady",
+   "startedAt": "2026-11-10T20:42:40.305Z",
+   "harnessCommit": "0c02cf3",
+   "harnessDirty": false,
+   "target": "http://localhost:3100",
+   "targetCommit": {
+    "kind": "local",
+    "port": "3100",
+    "pid": 20492,
+    "cwd": "/home/claude/wt-sentry",
+    "ref": "0c02cf3",
+    "dirty": false
+   },
+   "versions": {
+    "node": "v22.23.4",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "os": "Linux 6.18.44-fc-v338 x64",
+    "cpus": "2 x Intel(R) Xeon(R) Processor @ 2.10GHz"
+   },
+   "calibration": {
+    "ms": 249,
+    "x": true
+   },
+   "options": {
+    "network": {
+     "name": "slow4g",
+     "conditions": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+     }
+    },
+    "cpu": 4,
+    "runs": 3,
+    "ads": [
+     "d18",
+     "d19",
+     "d2",
+     "noad"
+    ],
+    "profiles": [
+     "ig-android-412"
+    ],
+    "viewport": null,
+    "failure": null,
+    "fontDelay": 0,
+    "fontCssDelay": 0,
+    "fontScale": null,
+    "toolbar": "on",
+    "journey": "full",
+    "wait": 10000,
+    "formCheck": true,
+    "expectMarker": "0c02cf3"
+   },
+   "finishedAt": "2026-11-10T20:51:18.201Z",
+   "totals": {
+    "posts": 0,
+    "leaks": 0,
+    "attempts": 0,
+    "readyMissing": 0
+   }
+  }
+ ],
+ "files": {
+  "ig-android-412/d18-run1.json": "272e58b2a1ef014c52f8a674012802efeadef7ea45b939a2b88c598cef3658fd",
+  "ig-android-412/d18-run2.json": "396b1cde1cbdaf2ad95199dd772298a7802ebf703390367a05ccb6a78e8a5a9d",
+  "ig-android-412/d18-run3.json": "39a0574aa0c74b5142753c9cc99390c43d96eab18b52d8fb67846e9a8a7e026f",
+  "ig-android-412/d19-run1.json": "9bf8130003d22cf7626b03ab789e0d46e8e15295dd97b74349df413768ec0e7f",
+  "ig-android-412/d19-run2.json": "2c606ab2bb96699cb2f33d8b0a4c4026a5c653f8ad2d498e37b8e1e7312dd65d",
+  "ig-android-412/d19-run3.json": "fbdee7f7bd426d5a96ec1b747c0bc4f93d492550c32703d9c4eb5e2ef976a516",
+  "ig-android-412/d2-run1.json": "1c77a4b1b38d0fabbdaf7a43ef96d95a966ac1940f9394ad79618bb3b19b7eda",
+  "ig-android-412/d2-run2.json": "70683791887aeb243fcc275c781477ca900d2452219feaf13b9e9c0f31fe75f8",
+  "ig-android-412/d2-run3.json": "9edacaee863fca65d6e0c55cf423b668ebdcbcdc95ea51dd15f54a92c50d5db8",
+  "ig-android-412/noad-run1.json": "c07af1b0eb4c09e6f9c6ad8b12f8156f8d486757870eed88838028678dbf13d5",
+  "ig-android-412/noad-run2.json": "c7d88181838227b624c8c2c142793a69d8acc856f67a07b8d08978b1bd88a2b7",
+  "ig-android-412/noad-run3.json": "5b4da4e7b1331a0537b3a1c43e6fdb9788991481e533c2601bc99f99e238bd09"
+ },
+ "blocked": {
+  "byHost": {},
+  "attempts": 0,
+  "leaks": 0,
+  "posts": 0
+ },
+ "runs": 12
+}
