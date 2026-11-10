@@ -4,6 +4,14 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-10: Season 01 setup wizard lab (dev only)
+
+- New `public/roadshow/wizard-lab.html` (noindex, static): the setup wizard committed families reach from the soft welcome email. Overview of the family's kids, then five steps per kid: about the player (name and age prefilled from signup, games, League experience, a note for the coach), gamer tag with a live jersey preview plus jersey size, practice blocks with a starred best time, the League setup checklist from the camps Getting Started email, and a read-only billing screen. Done screen: a slot for the kid hype video and the crew link.
+- Sample family (Maya and Leo), sample practice blocks, sample card. Prices and dates follow `lib/season1/offer.ts` and `welcomeCopy.ts` ($100 then $160 on Feb 15, Mar 15, Apr 15; sibling $80 then $128; refundable until Dec 31; free jersey if paid before Nov 30). Answers save in localStorage only; nothing is posted.
+- `public/roadshow/index.html`: Setup wizard lab tile after the Beta lab tile.
+- **For Jamie (your lane, nothing changed):** to make it real it needs a per-family link from the welcome email (no login), a save endpoint, and the order's kids, card last four and credits read from the Season 01 db. Fields: games, xp, note, tag, size, tz, blocks, best, setup checklist.
+- Verified: Playwright Chromium at 390 and 1280, the full path for one kid, no page errors, no horizontal overflow.
+
 ## Jamie's Claude, 2026-11-05 (afternoon): Season 01 round 2 (Build Loop, docs/s1-round2-2026-11/)
 
 - `/api/season-one`: per-IP limit inside the claim transaction, counting only new sign-ups (Netlify client IP only,
