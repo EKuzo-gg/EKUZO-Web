@@ -1,6 +1,6 @@
 # 01 Handoff: Season 01 fast track, 2026-11-10
 
-Fable, 15:10 CT. Branch `build/s1-fast-track` 7297dc3; app code equals the tested build 0c02cf3
+Fable, 15:04 CT. Branch `build/s1-fast-track` 7297dc3; app code equals the tested build 0c02cf3
 (`git diff --stat 0c02cf3 7297dc3 -- app lib middleware.ts scripts package.json` is empty); a
 fast-forward of main 3bf6c58. Dev carries the same code as c4eabbe (integration merge on Aaron's
 roadshow and beta commits; `landing-v2.html` is dev-only and never served).
