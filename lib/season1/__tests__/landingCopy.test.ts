@@ -77,18 +77,17 @@ describe("landing copy relabel (Part B)", () => {
     assert.match(body, /<div class="sticky" id="sticky"><button type="button" data-go>Get the details<\/button><\/div>/);
   });
 
-  it("hero buttons on d6, d9, d11, d13 and d14 read Get the details; the round-4 jersey ads keep theirs", () => {
+  it("hero buttons on d6, d9, d11, d13, d14 and d19 to d21 read Get the details", () => {
     const entry = (id: string) => {
       const s = body.indexOf(`{id:"${id}",`);
       assert.ok(s > 0, id);
       const e = body.indexOf("\n {id:", s + 1);
       return body.slice(s, e > 0 ? e : body.indexOf("\n];", s));
     };
-    for (const id of ["d6", "d9", "d11", "d13", "d14"]) {
+    for (const id of ["d6", "d9", "d11", "d13", "d14", "d19", "d20", "d21"]) {
       assert.match(entry(id), /<span class="cta">Get the details →<\/span>/, id);
       assert.equal(entry(id).includes("Save their spot →"), false, id);
     }
-    for (const id of ["d19", "d20", "d21"]) assert.match(entry(id), /<span class="cta">Save their spot →<\/span>/, id);
   });
 
   it("the header mini button reads Get the details", () => {
@@ -96,7 +95,13 @@ describe("landing copy relabel (Part B)", () => {
     assert.equal(html.includes("data-go>Join the list</button>"), false);
   });
 
-  it("a hero button with Save their spot only remains on d19 to d21", () => {
-    assert.equal((body.match(/<span class="cta">Save their spot →<\/span>/g) ?? []).length, 3);
+  it("no hero template (the D array) contains Save their spot", () => {
+    const s = body.indexOf("const D = [");
+    const e = body.indexOf("\n];", s);
+    assert.ok(s > 0 && e > s);
+    const D = body.slice(s, e);
+    assert.ok((D.match(/\{id:"d\d+"/g) ?? []).length >= 21);
+    assert.equal(D.includes("Save their spot"), false);
+    assert.equal(D.includes("Save their"), false);
   });
 });
