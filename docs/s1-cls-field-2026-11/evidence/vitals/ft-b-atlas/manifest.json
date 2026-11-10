@@ -1,0 +1,91 @@
+{
+ "label": "ft-b-atlas",
+ "invocations": [
+  {
+   "command": "node scripts/field-vitals/run.mjs --target local:3103 --ads d18,d19,d2,noad --profile fb-android-412 --runs 3 --label ft-b-atlas --expectMarker 9c18894 --requireReady",
+   "startedAt": "2026-11-10T19:48:40.294Z",
+   "harnessCommit": "9c18894",
+   "harnessDirty": false,
+   "target": "http://localhost:3103",
+   "targetCommit": {
+    "kind": "local",
+    "port": "3103",
+    "pid": 15845,
+    "cwd": "/home/claude/wt-atlas",
+    "ref": "9c18894",
+    "dirty": false
+   },
+   "versions": {
+    "node": "v22.23.4",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "os": "Linux 6.18.44-fc-v338 x64",
+    "cpus": "2 x Intel(R) Xeon(R) Processor @ 2.10GHz"
+   },
+   "calibration": {
+    "ms": 204,
+    "x": true
+   },
+   "options": {
+    "network": {
+     "name": "slow4g",
+     "conditions": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+     }
+    },
+    "cpu": 4,
+    "runs": 3,
+    "ads": [
+     "d18",
+     "d19",
+     "d2",
+     "noad"
+    ],
+    "profiles": [
+     "fb-android-412"
+    ],
+    "viewport": null,
+    "failure": null,
+    "fontDelay": 0,
+    "fontCssDelay": 0,
+    "fontScale": null,
+    "toolbar": "on",
+    "journey": "full",
+    "wait": 10000,
+    "formCheck": true,
+    "expectMarker": "9c18894"
+   },
+   "finishedAt": "2026-11-10T19:57:20.276Z",
+   "totals": {
+    "posts": 0,
+    "leaks": 0,
+    "attempts": 0,
+    "readyMissing": 0
+   }
+  }
+ ],
+ "files": {
+  "fb-android-412/d18-run1.json": "4de24184f498177a8d43cb46094e1ac3d7da7926787a532a2714572f7cb9eb37",
+  "fb-android-412/d18-run2.json": "181ffc3fea50e0f2850ab0ca8b5f8693cf7d829875ffcde2143be1a7c8c67df0",
+  "fb-android-412/d18-run3.json": "1ff7e344a8b95691704534383ae49c77edbb549161a8e84e3dabaca76623cb10",
+  "fb-android-412/d19-run1.json": "435efd990c1059d8fe1cb3928bc09e1693b30366d6d6c0807a509889d86cd043",
+  "fb-android-412/d19-run2.json": "a9c1e45aba7a1089106c9b3d14a96d58d7dc0563b1fe2b87e2a834d6620cea5d",
+  "fb-android-412/d19-run3.json": "8014a211246a560ac7a2faebc31110fdab9cde385a8c75945eb024b05af886d3",
+  "fb-android-412/d2-run1.json": "94c63df26d02b0e9a39fd668a978686163a999aeebbd48412cc19c75696bd3f9",
+  "fb-android-412/d2-run2.json": "a3ebc77015699da0af9f37ff43773b857564de5eee243562c9482f4bb0800703",
+  "fb-android-412/d2-run3.json": "d5954ca0fe50d424c8798d1e9dcad4f40e496b8f9e011e91da6f3e52d40e4572",
+  "fb-android-412/noad-run1.json": "1bb0decd0c4fae0a17559596f0f42853c6f3a67596fe4325027000bb1d7577e3",
+  "fb-android-412/noad-run2.json": "2ca741efe281658e9fd6fc18c6bbe3c7aff137900e411c8637a6e40eca16c943",
+  "fb-android-412/noad-run3.json": "c892dec73c725336923600cec4117d375fe49fc9d8c9e58f4c0ffe743d69a9f6"
+ },
+ "blocked": {
+  "byHost": {},
+  "attempts": 0,
+  "leaks": 0,
+  "posts": 0
+ },
+ "runs": 12
+}

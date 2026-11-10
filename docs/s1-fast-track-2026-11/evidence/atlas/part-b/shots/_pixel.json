@@ -1,0 +1,509 @@
+{
+ "d18": {
+  "cmp": {
+   "first": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 371 -> 430)",
+     "#bridge (h 296 -> 296)",
+     "section.how (h 569 -> 569)",
+     "section.faq (h 397 -> 397)",
+     "#join-end (h 338 -> 397)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 371 -> 430)",
+     "#bridge (h 269 -> 269)",
+     "section.how (h 518 -> 518)",
+     "section.faq (h 397 -> 397)",
+     "#join-end (h 338 -> 397)",
+     "footer (h 180 -> 180)",
+     "_full (h 2584 -> 2702)"
+    ]
+   },
+   "conf": {
+    "same": [
+     "#conf-h"
+    ],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "p (h 56 -> 56)",
+     "p.inbox-h (h 48 -> 48)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1464,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Find their team →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1467,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Find their team →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d18",
+    "bottom /season1/join?src=ad&ad=d18",
+    "confirm /season1/join?src=ad&ad=d18"
+   ],
+   "errors": []
+  }
+ },
+ "d19": {
+  "cmp": {
+   "first": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 365 -> 424)",
+     "#bridge (h 235 -> 235)",
+     "section.how (h 565 -> 565)",
+     "section.faq (h 395 -> 395)",
+     "#join-end (h 302 -> 391)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 365 -> 424)",
+     "#bridge (h 235 -> 235)",
+     "section.how (h 514 -> 514)",
+     "section.faq (h 395 -> 395)",
+     "#join-end (h 302 -> 391)",
+     "footer (h 180 -> 180)",
+     "_full (h 2501 -> 2650)"
+    ]
+   },
+   "conf": {
+    "same": [],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "#conf-h (h 53 -> 53)",
+     "p (h 56 -> 56)",
+     "p.inbox-h (h 48 -> 48)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1840,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Save their spot →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1620,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Save their spot →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d19",
+    "bottom /season1/join?src=ad&ad=d19",
+    "confirm /season1/join?src=ad&ad=d19"
+   ],
+   "errors": []
+  }
+ },
+ "d2": {
+  "cmp": {
+   "first": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "#mod",
+     "section.faq",
+     "#sticky"
+    ],
+    "differ": [
+     "section.how (h 569 -> 569)",
+     "#join-end (h 338 -> 397)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "#mod",
+     "#sticky"
+    ],
+    "differ": [
+     "section.how (h 518 -> 518)",
+     "section.faq (h 426 -> 426)",
+     "#join-end (h 338 -> 397)",
+     "footer (h 180 -> 180)",
+     "_full (h 3086 -> 3145)"
+    ]
+   },
+   "conf": {
+    "same": [
+     "#conf-h"
+    ],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "p (h 56 -> 56)",
+     "p.inbox-h (h 48 -> 48)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1657,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Play their game →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1464,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Play their game →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d2",
+    "bottom /season1/join?src=ad&ad=d2",
+    "confirm /season1/join?src=ad&ad=d2"
+   ],
+   "errors": []
+  }
+ },
+ "d6": {
+  "cmp": {
+   "first": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "section.how",
+     "section.faq",
+     "#sticky"
+    ],
+    "differ": [
+     "#join-end (h 298 -> 357)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "section.how",
+     "#sticky"
+    ],
+    "differ": [
+     "section.faq (h 415 -> 415)",
+     "#join-end (h 324 -> 384)",
+     "footer (h 180 -> 180)",
+     "_full (h 2449 -> 2508)"
+    ]
+   },
+   "conf": {
+    "same": [
+     "p",
+     "p.inbox-h"
+    ],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "#conf-h (h 46 -> 46)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1412,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Save their spot →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1402,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Get the details →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d6",
+    "bottom /season1/join?src=ad&ad=d6",
+    "confirm /season1/join?src=ad&ad=d6"
+   ],
+   "errors": []
+  }
+ },
+ "d9": {
+  "cmp": {
+   "first": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "section.how",
+     "#sticky"
+    ],
+    "differ": [
+     "section.faq (h 387 -> 387)",
+     "#join-end (h 293 -> 352)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "_viewport",
+     "#ihero",
+     "#bridge",
+     "section.how",
+     "section.faq",
+     "#sticky"
+    ],
+    "differ": [
+     "#join-end (h 315 -> 374)",
+     "footer (h 180 -> 180)",
+     "_full (h 2348 -> 2407)"
+    ]
+   },
+   "conf": {
+    "same": [],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "#conf-h (h 38 -> 38)",
+     "p (h 56 -> 56)",
+     "p.inbox-h (h 48 -> 48)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1270,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Save their spot →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1385,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Get the details →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d9",
+    "bottom /season1/join?src=ad&ad=d9",
+    "confirm /season1/join?src=ad&ad=d9"
+   ],
+   "errors": []
+  }
+ },
+ "noad": {
+  "cmp": {
+   "first": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 371 -> 430)",
+     "#bridge (h 267 -> 267)",
+     "#mod (h 463 -> 463)",
+     "section.how (h 569 -> 569)",
+     "section.faq (h 397 -> 397)",
+     "#join-end (h 338 -> 397)",
+     "footer (h 180 -> 180)"
+    ]
+   },
+   "fit": {
+    "same": [
+     "#hero",
+     "#sticky"
+    ],
+    "differ": [
+     "_viewport (h absent -> absent)",
+     "#join-top (h 371 -> 430)",
+     "#bridge (h 267 -> 267)",
+     "#mod (h 463 -> 463)",
+     "section.how (h 518 -> 518)",
+     "section.faq (h 397 -> 397)",
+     "#join-end (h 304 -> 397)",
+     "footer (h 180 -> 180)",
+     "_full (h 3011 -> 3163)"
+    ]
+   },
+   "conf": {
+    "same": [
+     "#conf-h"
+    ],
+    "differ": [
+     "span.kick (h 12 -> 12)",
+     "p (h 56 -> 56)",
+     "p.inbox-h (h 48 -> 48)",
+     "#tk (h 373 -> 364)",
+     "div.age (h 100 -> 100)",
+     "_overlay (h absent -> absent)",
+     "div.lock (h absent -> 224)"
+    ]
+   }
+  },
+  "main": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1560,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Be the hero →"
+   ],
+   "joinHrefs": [],
+   "errors": []
+  },
+  "branch": {
+   "shifts": [
+    {
+     "v": 0.00014,
+     "t": 1587,
+     "src": [
+      "svg"
+     ]
+    }
+   ],
+   "heroCta": [
+    "Be the hero →"
+   ],
+   "joinHrefs": [
+    "top /season1/join?src=ad&ad=d1",
+    "bottom /season1/join?src=ad&ad=d1",
+    "confirm /season1/join?src=ad&ad=d1"
+   ],
+   "errors": []
+  }
+ },
+ "_offenders": []
+}
