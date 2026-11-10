@@ -57,7 +57,7 @@ export function sourceCategory(o: Pick<OrderCtx, "src" | "invited">): SourceCate
   return "organic";
 }
 
-type SourceInput = Pick<OrderCtx, "src" | "invited" | "utmSource" | "utmMedium" | "utmCampaign" | "utmContent" | "firstTouch">;
+type SourceInput = Pick<OrderCtx, "src" | "invited" | "utmSource" | "utmMedium" | "utmCampaign" | "utmContent" | "firstTouch" | "ad">;
 
 const PAID_MEDIUMS = new Set(["paid", "cpc", "ppc", "paid_social"]);
 const PAID_SOURCES = new Set(["meta", "facebook", "fb", "ig", "instagram"]);
@@ -69,16 +69,19 @@ const isPaidClick = (o: SourceInput) =>
   PAID_MEDIUMS.has(low(o.utmMedium)) || (PAID_SOURCES.has(low(o.utmSource)) && !!free(o.utmContent, 80));
 const isEmailClick = (o: SourceInput) => low(o.utmMedium) === "email" || low(o.src) === "email";
 
-/** Branches a to c settle the Source without the Klaviyo profile (referral, karlin, a named paid click). */
+/** The last click's ad id when (c) uses it: no utm_content, and `lc.ad` set (s1-fast-track A2). */
+const lcAd = (o: SourceInput): string => (free(o.utmContent, 80) ? "" : ident(o.ad, 3));
+
+/** Branches a to c settle the Source without the Klaviyo profile (referral, karlin, a named paid click or a last-click ad). */
 export function needsAdNameLookup(o: SourceInput): boolean {
   if (isReferral(o) || low(o.src) === "karlin") return false;
-  return !(isPaidClick(o) && !!free(o.utmContent, 80));
+  return !((isPaidClick(o) && !!free(o.utmContent, 80)) || !!lcAd(o));
 }
 
 /**
  * One Source value, first match wins: (a) referral, (b) karlin, (c) a paid last
- * click `ad <utm_content>`, (d) the waitlist's Klaviyo `season1_ad_name`
- * `ad <name>` plus ` (via <last click>)` when the last click was something else,
+ * click `ad <utm_content>` (with no utm_content, the last click's ad id `ad <lc.ad>`),
+ * (d) the waitlist's Klaviyo `season1_ad_name` `ad <name>` plus ` (via <last click>)` when the last click was something else,
  * (e) email, (f) the first-touch bucket, (g) organic. A paid click with no
  * utm_content and no profile ad name reads `ad` plus the campaign when there is one.
  */
@@ -87,6 +90,8 @@ export function formatSource(o: SourceInput, adName: string | null = null): stri
   if (low(o.src) === "karlin") return "karlin";
   const content = free(o.utmContent, 80);
   if (isPaidClick(o) && content) return `ad ${content}`;
+  const ad = lcAd(o);
+  if (ad) return `ad ${ad}`;
   const name = free(adName, 80);
   if (name) {
     const via = isEmailClick(o) ? "email" : sourceCategory(o);

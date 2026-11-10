@@ -65,6 +65,7 @@ const order = (over: Partial<OrderCtx> = {}): OrderCtx => ({
   utmCampaign: null,
   utmContent: null,
   firstTouch: null,
+  ad: null,
   origin: null,
   inviterKidName: "Zed",
   ...over,
@@ -146,6 +147,13 @@ describe("Klaviyo payloads", () => {
     assert.equal(e.props.amount_paid, 180);
     assert.equal(e.uniqueId, "abcd234567");
     assert.equal(e.metric, "Season 01 Committed");
+  });
+  it("A2: Committed event carries ad (empty when absent); the profile never does", () => {
+    assert.equal(buildCommittedEvent(order()).props.ad, "");
+    const e = buildCommittedEvent(order({ ad: "d19" }));
+    assert.equal(e.props.ad, "d19");
+    assert.equal("ad" in e.profileProps, false);
+    assert.equal(JSON.stringify(e.profileProps).includes("d19"), false);
   });
   it("S7: Committed event carries utm_source, utm_medium, utm_campaign, utm_content and first_touch; the profile never does", () => {
     const e = buildCommittedEvent(
@@ -369,12 +377,21 @@ describe("Discord messages", () => {
       assert.ok(s.length <= "Source: ad ".length + 80, s);
       assert.equal(m.split(" | ").length, 5, "no stray separators");
     });
+    it("c3 (s1-fast-track A2): no utm_content but lc.ad is ad <lc.ad>; utm_content still wins; a and b still first", () => {
+      assert.equal(src({ ad: "d19" }), "Source: ad d19");
+      assert.equal(src({ ad: "d19", utmSource: "share", utmMedium: "referral" }, "Waitlist Ad"), "Source: ad d19", "c beats d");
+      assert.equal(src({ ad: "d19", utmMedium: "paid_social", utmContent: "d19-a" }), "Source: ad d19-a");
+      assert.equal(src({ ad: "d19", invited: true }), "Source: referral");
+      assert.equal(src({ ad: "d19", src: "karlin" }), "Source: karlin");
+      assert.equal(src({ ad: null, utmMedium: "cpc" }), "Source: ad");
+    });
     it("needsAdNameLookup: only when a, b, c have not settled the source", () => {
       assert.equal(needsAdNameLookup(live({ invited: true })), false);
       assert.equal(needsAdNameLookup(live({ src: "karlin" })), false);
       assert.equal(needsAdNameLookup(live({ utmMedium: "paid", utmContent: "x" })), false);
       assert.equal(needsAdNameLookup(live({ utmMedium: "paid" })), true);
       assert.equal(needsAdNameLookup(live({})), true);
+      assert.equal(needsAdNameLookup(live({ ad: "d19" })), false, "lc.ad settles (c)");
     });
   });
 

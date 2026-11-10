@@ -44,6 +44,8 @@ export interface OrderCtx {
   utmCampaign: string | null;
   utmContent: string | null;
   firstTouch: string | null;
+  /** The last click's landing ad id (`lc.ad`, d1 to d99; s1-fast-track A2), when the order has one. */
+  ad: string | null;
   /** Request origin recorded for test orders, when known. */
   origin: string | null;
   /** First name of the inviter's first kid, when the order was referred. */

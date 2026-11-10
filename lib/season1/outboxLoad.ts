@@ -1,5 +1,5 @@
 import { getSql } from "./db";
-import { cleanFirstTouch, validFbc, validFbp } from "./attribution";
+import { cleanAd, cleanFirstTouch, validFbc, validFbp } from "./attribution";
 import type { FriendCtx, KidCtx, OrderCtx } from "./senders/context";
 
 /**
@@ -79,6 +79,7 @@ export async function loadOrderCtx(publicId: string): Promise<OrderCtx | null> {
     utmCampaign: utm("utm_campaign"),
     utmContent: utm("utm_content"),
     firstTouch: typeof oa.first_touch === "string" ? cleanFirstTouch(oa.first_touch) : null,
+    ad: cleanAd(lc.ad),
     // The test request origin (family attribution). Never the order's first touch.
     origin: str(attr.origin),
     inviterKidName: str(r.inviter_kid),
