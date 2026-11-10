@@ -1,0 +1,580 @@
+{
+ "summary": {
+  "hrefs": [
+   {
+    "where": "top",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "bottom",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "confirm",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Save their spot · $100"
+   }
+  ],
+  "tap": {
+   "s1_join_click": [
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top"
+     }
+    ]
+   ],
+   "clarity_join_click": 1,
+   "held": [
+    "http://localhost:3103/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a"
+   ],
+   "navigatedAway": false
+  },
+  "submit": {
+   "branch": {
+    "generate_lead": 1,
+    "Lead": 1,
+    "leadEventID": [
+     "a5bf5ecb-9e30-4b75-ad3e-6dd2d1181b1d"
+    ],
+    "postEventIds": [
+     "a5bf5ecb-9e30-4b75-ad3e-6dd2d1181b1d"
+    ]
+   },
+   "main": {
+    "generate_lead": 1,
+    "Lead": 1,
+    "leadEventID": [
+     "c92be991-e756-4101-a13c-f211487bf2e1"
+    ],
+    "postEventIds": [
+     "c92be991-e756-4101-a13c-f211487bf2e1"
+    ]
+   },
+   "conf": {
+    "kick": "Details on the way",
+    "lock": true,
+    "lockVisible": true,
+    "confirmHref": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "confirmText": "Save their spot · $100"
+   },
+   "confMain": {
+    "kick": "You’re on the list",
+    "lock": false,
+    "lockVisible": false,
+    "confirmHref": null,
+    "confirmText": null
+   }
+  },
+  "equalApartFromNew": {
+   "ga": true,
+   "gaParams": true,
+   "fbqNames": true,
+   "clarity": true
+  },
+  "gaListMain": [
+   "config G-8LM45PX53W",
+   "event generate_lead"
+  ],
+  "gaListBranch": [
+   "config G-8LM45PX53W",
+   "event s1_join_click",
+   "event generate_lead"
+  ],
+  "fbqMain": [
+   "set autoConfig",
+   "init 1284038230557204",
+   "track PageView",
+   "track Lead"
+  ],
+  "fbqBranch": [
+   "set autoConfig",
+   "init 1284038230557204",
+   "track PageView",
+   "track Lead"
+  ],
+  "clarityMain": [
+   "set ad",
+   "set hero",
+   "set utm_content",
+   "event signup",
+   "set signed_up"
+  ],
+  "clarityBranch": [
+   "set ad",
+   "set hero",
+   "set utm_content",
+   "event join_click",
+   "event signup",
+   "set signed_up"
+  ],
+  "errors": {
+   "main": [],
+   "branch": []
+  },
+  "offenders": [],
+  "stubbed": [
+   "www.googletagmanager.com",
+   "connect.facebook.net",
+   "www.clarity.ms"
+  ]
+ },
+ "main": {
+  "label": "main",
+  "base": "http://localhost:3101",
+  "hrefs": [],
+  "atLoad": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "afterTap": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "conf": {
+   "kick": "You’re on the list",
+   "lock": false,
+   "lockVisible": false,
+   "confirmHref": null,
+   "confirmText": null
+  },
+  "afterSubmit": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d19",
+      "hero": "none"
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d19"
+     },
+     {
+      "eventID": "c92be991-e756-4101-a13c-f211487bf2e1"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "posts": [
+   {
+    "email": "qa-classq@example.com",
+    "source": "ad-landing",
+    "ad": "d19",
+    "adName": "Southie jersey, back",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "s1",
+     "utm_content": "d19-a",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "c92be991-e756-4101-a13c-f211487bf2e1",
+    "eventSourceUrl": "http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   }
+  ],
+  "errors": [],
+  "navs": [
+   "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+  ]
+ },
+ "branch": {
+  "label": "branch",
+  "base": "http://localhost:3103",
+  "hrefs": [
+   {
+    "where": "top",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "bottom",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "confirm",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "text": "Save their spot · $100"
+   }
+  ],
+  "atLoad": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "held": [
+   "http://localhost:3103/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a"
+  ],
+  "afterTap": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ],
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top"
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ],
+    [
+     "event",
+     "join_click"
+    ]
+   ]
+  },
+  "conf": {
+   "kick": "Details on the way",
+   "lock": true,
+   "lockVisible": true,
+   "confirmHref": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+   "confirmText": "Save their spot · $100"
+  },
+  "afterSubmit": {
+   "ga": [
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false
+     }
+    ],
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top"
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d19",
+      "hero": "none"
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d19"
+     },
+     {
+      "eventID": "a5bf5ecb-9e30-4b75-ad3e-6dd2d1181b1d"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ],
+    [
+     "event",
+     "join_click"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "posts": [
+   {
+    "email": "qa-classq@example.com",
+    "source": "ad-landing",
+    "ad": "d19",
+    "adName": "Southie jersey, back",
+    "where": "top",
+    "attribution": {
+     "utm_source": "meta",
+     "utm_medium": "paid_social",
+     "utm_campaign": "s1",
+     "utm_content": "d19-a",
+     "utm_term": "",
+     "utm_id": "",
+     "site": ""
+    },
+    "page": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "hero": "none",
+    "heroAnswer": "",
+    "heroFrom": "none",
+    "eventId": "a5bf5ecb-9e30-4b75-ad3e-6dd2d1181b1d",
+    "eventSourceUrl": "http://localhost:3103/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "tz": "America/Chicago",
+    "ekz_hp": ""
+   }
+  ],
+  "errors": [],
+  "navs": [
+   "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+  ]
+ }
+}

@@ -1,0 +1,646 @@
+[
+ {
+  "shot": "d18-conf-overlay",
+  "size": "1082x2402 vs 1082x2974"
+ },
+ {
+  "shot": "d18-first-_bridge",
+  "size": "1040x780",
+  "rawPct": 0.857,
+  "blurPct": 1.218
+ },
+ {
+  "shot": "d18-first-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d18-first-_join-end",
+  "size": "1040x887 vs 1040x1042"
+ },
+ {
+  "shot": "d18-first-_join-top",
+  "size": "1040x974 vs 1040x1129"
+ },
+ {
+  "shot": "d18-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d18-first-footer",
+  "size": "1040x475",
+  "rawPct": 0.255,
+  "blurPct": 0.188
+ },
+ {
+  "shot": "d18-first-section_faq",
+  "size": "1040x1045",
+  "rawPct": 0.249,
+  "blurPct": 0.356
+ },
+ {
+  "shot": "d18-first-section_how",
+  "size": "1040x1499",
+  "rawPct": 0.402,
+  "blurPct": 0.53
+ },
+ {
+  "shot": "d18-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.818,
+  "blurPct": 6.005
+ },
+ {
+  "shot": "d18-fit-_bridge",
+  "size": "1040x709",
+  "rawPct": 3.803,
+  "blurPct": 5.228
+ },
+ {
+  "shot": "d18-fit-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d18-fit-_join-end",
+  "size": "1040x887 vs 1040x1042"
+ },
+ {
+  "shot": "d18-fit-_join-top",
+  "size": "1040x974 vs 1040x1129"
+ },
+ {
+  "shot": "d18-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d18-fit-footer",
+  "size": "1040x475",
+  "rawPct": 0.273,
+  "blurPct": 0.209
+ },
+ {
+  "shot": "d18-fit-full",
+  "size": "1082x6783 vs 1082x7093"
+ },
+ {
+  "shot": "d18-fit-section_faq",
+  "size": "1040x1045",
+  "rawPct": 0.751,
+  "blurPct": 1.269
+ },
+ {
+  "shot": "d18-fit-section_how",
+  "size": "1040x1365",
+  "rawPct": 1.121,
+  "blurPct": 1.237
+ },
+ {
+  "shot": "d18-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.745,
+  "blurPct": 5.931
+ },
+ {
+  "shot": "d19-conf-overlay",
+  "size": "1082x2402 vs 1082x2964"
+ },
+ {
+  "shot": "d19-first-_bridge",
+  "size": "1040x620",
+  "rawPct": 3.936,
+  "blurPct": 5.74
+ },
+ {
+  "shot": "d19-first-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-first-_join-end",
+  "size": "1040x795 vs 1040x1032"
+ },
+ {
+  "shot": "d19-first-_join-top",
+  "size": "1040x961 vs 1040x1116"
+ },
+ {
+  "shot": "d19-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-first-footer",
+  "size": "1040x475",
+  "rawPct": 0.043,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-first-section_faq",
+  "size": "1040x1037",
+  "rawPct": 1.055,
+  "blurPct": 1.082
+ },
+ {
+  "shot": "d19-first-section_how",
+  "size": "1040x1483 vs 1040x1486"
+ },
+ {
+  "shot": "d19-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.43,
+  "blurPct": 5.462
+ },
+ {
+  "shot": "d19-fit-_bridge",
+  "size": "1040x620",
+  "rawPct": 4.566,
+  "blurPct": 6.499
+ },
+ {
+  "shot": "d19-fit-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-fit-_join-end",
+  "size": "1040x795 vs 1040x1032"
+ },
+ {
+  "shot": "d19-fit-_join-top",
+  "size": "1040x961 vs 1040x1116"
+ },
+ {
+  "shot": "d19-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-fit-footer",
+  "size": "1040x475",
+  "rawPct": 0.04,
+  "blurPct": 0
+ },
+ {
+  "shot": "d19-fit-full",
+  "size": "1082x6565 vs 1082x6956"
+ },
+ {
+  "shot": "d19-fit-section_faq",
+  "size": "1040x1037",
+  "rawPct": 0.968,
+  "blurPct": 0.787
+ },
+ {
+  "shot": "d19-fit-section_how",
+  "size": "1040x1349 vs 1040x1352"
+ },
+ {
+  "shot": "d19-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.186,
+  "blurPct": 5.221
+ },
+ {
+  "shot": "d2-conf-overlay",
+  "size": "1082x2402 vs 1082x2974"
+ },
+ {
+  "shot": "d2-first-_bridge",
+  "size": "1040x780",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-first-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-first-_join-end",
+  "size": "1040x890 vs 1040x1045"
+ },
+ {
+  "shot": "d2-first-_mod",
+  "size": "1040x1530",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-first-footer",
+  "size": "1040x475",
+  "rawPct": 1.649,
+  "blurPct": 0.671
+ },
+ {
+  "shot": "d2-first-section_faq",
+  "size": "1040x1045",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-first-section_how",
+  "size": "1040x1496",
+  "rawPct": 0.55,
+  "blurPct": 0.716
+ },
+ {
+  "shot": "d2-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-fit-_bridge",
+  "size": "1040x780",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-fit-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-fit-_join-end",
+  "size": "1040x887 vs 1040x1045"
+ },
+ {
+  "shot": "d2-fit-_mod",
+  "size": "1040x1523",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d2-fit-footer",
+  "size": "1040x475",
+  "rawPct": 2.171,
+  "blurPct": 1.313
+ },
+ {
+  "shot": "d2-fit-full",
+  "size": "1082x8101 vs 1082x8256"
+ },
+ {
+  "shot": "d2-fit-section_faq",
+  "size": "1040x1124",
+  "rawPct": 0.742,
+  "blurPct": 0.948
+ },
+ {
+  "shot": "d2-fit-section_how",
+  "size": "1040x1362",
+  "rawPct": 0.612,
+  "blurPct": 0.781
+ },
+ {
+  "shot": "d2-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-conf-overlay",
+  "size": "1082x2402 vs 1082x2945"
+ },
+ {
+  "shot": "d6-first-_bridge",
+  "size": "1040x601",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-first-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-first-_join-end",
+  "size": "1040x785 vs 1040x940"
+ },
+ {
+  "shot": "d6-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-first-footer",
+  "size": "1040x475",
+  "rawPct": 0.764,
+  "blurPct": 0.395
+ },
+ {
+  "shot": "d6-first-section_faq",
+  "size": "1040x1029",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-first-section_how",
+  "size": "1040x1465",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-fit-_bridge",
+  "size": "1040x662",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-fit-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-fit-_join-end",
+  "size": "1040x853 vs 1040x1008"
+ },
+ {
+  "shot": "d6-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-fit-footer",
+  "size": "1040x475",
+  "rawPct": 0.766,
+  "blurPct": 0.479
+ },
+ {
+  "shot": "d6-fit-full",
+  "size": "1082x6429 vs 1082x6584"
+ },
+ {
+  "shot": "d6-fit-section_faq",
+  "size": "1040x1092",
+  "rawPct": 0.764,
+  "blurPct": 0.975
+ },
+ {
+  "shot": "d6-fit-section_how",
+  "size": "1040x1394",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d6-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-conf-overlay",
+  "size": "1082x2402 vs 1082x2924"
+ },
+ {
+  "shot": "d9-first-_bridge",
+  "size": "1040x528",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-first-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-first-_join-end",
+  "size": "1040x772 vs 1040x927"
+ },
+ {
+  "shot": "d9-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-first-footer",
+  "size": "1040x475",
+  "rawPct": 0.763,
+  "blurPct": 0.395
+ },
+ {
+  "shot": "d9-first-section_faq",
+  "size": "1040x1019",
+  "rawPct": 0.807,
+  "blurPct": 1.053
+ },
+ {
+  "shot": "d9-first-section_how",
+  "size": "1040x1394",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-_bridge",
+  "size": "1040x578",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-_ihero",
+  "size": "1040x1922",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-_join-end",
+  "size": "1040x830 vs 1040x987"
+ },
+ {
+  "shot": "d9-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-footer",
+  "size": "1040x475",
+  "rawPct": 2.382,
+  "blurPct": 1.311
+ },
+ {
+  "shot": "d9-fit-full",
+  "size": "1082x6164 vs 1082x6318"
+ },
+ {
+  "shot": "d9-fit-section_faq",
+  "size": "1040x1016",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-section_how",
+  "size": "1040x1313",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "d9-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-conf-overlay",
+  "size": "1082x2402 vs 1082x2974"
+ },
+ {
+  "shot": "noad-first-_bridge",
+  "size": "1040x704",
+  "rawPct": 0.829,
+  "blurPct": 1.196
+ },
+ {
+  "shot": "noad-first-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-first-_join-end",
+  "size": "1040x887 vs 1040x1042"
+ },
+ {
+  "shot": "noad-first-_join-top",
+  "size": "1040x974 vs 1040x1129"
+ },
+ {
+  "shot": "noad-first-_mod",
+  "size": "1040x1218",
+  "rawPct": 0.113,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-first-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-first-footer",
+  "size": "1040x475",
+  "rawPct": 0.066,
+  "blurPct": 0.001
+ },
+ {
+  "shot": "noad-first-section_faq",
+  "size": "1040x1045",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-first-section_how",
+  "size": "1040x1499",
+  "rawPct": 0.578,
+  "blurPct": 0.715
+ },
+ {
+  "shot": "noad-first-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.748,
+  "blurPct": 5.906
+ },
+ {
+  "shot": "noad-fit-_bridge",
+  "size": "1040x704",
+  "rawPct": 0.182,
+  "blurPct": 0.262
+ },
+ {
+  "shot": "noad-fit-_hero",
+  "size": "1040x1299",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-fit-_join-end",
+  "size": "1040x801 vs 1040x1042"
+ },
+ {
+  "shot": "noad-fit-_join-top",
+  "size": "1040x974 vs 1040x1129"
+ },
+ {
+  "shot": "noad-fit-_mod",
+  "size": "1040x1218",
+  "rawPct": 0.361,
+  "blurPct": 0.449
+ },
+ {
+  "shot": "noad-fit-_sticky",
+  "size": "1082x207",
+  "rawPct": 0,
+  "blurPct": 0
+ },
+ {
+  "shot": "noad-fit-footer",
+  "size": "1040x475",
+  "rawPct": 2.377,
+  "blurPct": 1.348
+ },
+ {
+  "shot": "noad-fit-full",
+  "size": "1082x7904 vs 1082x8303"
+ },
+ {
+  "shot": "noad-fit-section_faq",
+  "size": "1040x1045",
+  "rawPct": 0.435,
+  "blurPct": 0.649
+ },
+ {
+  "shot": "noad-fit-section_how",
+  "size": "1040x1365",
+  "rawPct": 0.643,
+  "blurPct": 0.779
+ },
+ {
+  "shot": "noad-fit-viewport",
+  "size": "1082x2402",
+  "rawPct": 4.432,
+  "blurPct": 5.54
+ }
+]
