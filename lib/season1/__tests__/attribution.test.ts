@@ -7,6 +7,7 @@ import {
   LC_MAX_BYTES,
   UTM_MAX,
   buildLastClick,
+  cleanAd,
   cleanFirstTouch,
   cleanPath,
   encodedSize,
@@ -84,6 +85,48 @@ describe("ekuzo_lc: buildLastClick (middleware logic)", () => {
 
 const UTM_KEYS_ALL = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"];
 
+describe("ekuzo_lc: ad (s1-fast-track A1)", () => {
+  it("cleanAd: lowercase, d0N to dN (as the landing does), d1 to d99 only", () => {
+    for (const [raw, want] of [["d19", "d19"], ["D019", "d19"], ["D7", "d7"], ["d07", "d7"], ["d99", "d99"]] as const)
+      assert.equal(cleanAd(raw), want, raw);
+    for (const bad of ["zz", "d0", "d00", "d100", "d1x", "19", " d19", "d19 ", "d", "", "d0019"]) assert.equal(cleanAd(bad), null, bad);
+    assert.equal(cleanAd(19), null);
+    assert.equal(cleanAd(null), null);
+  });
+  it("is kept, normalized, beside the utms", () => {
+    const r = buildLastClick(qs("ad=D019&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d19-a"), "/season1", NOW)!;
+    assert.equal(r.lc.ad, "d19");
+    assert.equal(r.lc.utm_content, "d19-a");
+  });
+  it("a bare valid ad is a last click on its own; an invalid one is dropped and alone writes nothing", () => {
+    assert.deepEqual(buildLastClick(qs("ad=d18"), "/season1/join", NOW)!.lc, { path: "/season1/join", ts: NOW, ad: "d18" });
+    assert.equal(buildLastClick(qs("ad=zz"), "/season1", NOW), null);
+    const r = buildLastClick(qs("ad=zz&utm_source=meta"), "/season1", NOW)!;
+    assert.equal(r.lc.ad, undefined);
+    assert.equal(r.lc.utm_source, "meta");
+  });
+  it("over budget: ad is dropped last, so it survives where fbclid does", () => {
+    const fat = "%22".repeat(UTM_MAX);
+    const p = UTM_KEYS_ALL.map((k) => `${k}=${fat}`).join("&") + `&fbclid=${"F".repeat(CLICK_ID_MAX)}&gclid=${"G".repeat(CLICK_ID_MAX)}&ad=d21`;
+    const r = buildLastClick(qs(p), "/season1/join", NOW)!;
+    assert.ok(encodedSize(r.value) <= LC_MAX_BYTES, `encoded ${encodedSize(r.value)}`);
+    assert.equal(r.lc.ad, "d21");
+    assert.equal(r.lc.fbclid, "F".repeat(CLICK_ID_MAX));
+    assert.equal(r.lc.utm_term, undefined);
+  });
+  it("parseLastClick re-validates ad: normalized when loose, dropped when hostile", () => {
+    assert.equal(parseLastClick(enc({ ad: "D019", utm_source: "x", path: "/", ts: NOW }), NOW + 1)!.ad, "d19");
+    const bad = parseLastClick(enc({ ad: "d19<script>", utm_source: "x", path: "/", ts: NOW }), NOW + 1)!;
+    assert.equal(bad.ad, undefined);
+    assert.equal(parseLastClick(enc({ ad: "zz", path: "/", ts: NOW }), NOW + 1), null, "no kept key left");
+  });
+  it("order attribution carries lc.ad from the cookie", () => {
+    const lc = buildLastClick(qs("ad=d19&utm_source=meta"), "/season1", NOW)!;
+    const a = orderAttribution(`${LC_COOKIE}=${encodeURIComponent(lc.value)}`, "ad", NOW + 1);
+    assert.equal(a.lc?.ad, "d19");
+  });
+});
+
 describe("middleware: ekuzo_lc written before the first-touch early return (C17)", () => {
   const run = (url: string, headers: Record<string, string> = {}) =>
     middleware(new NextRequest(url, { headers: { "user-agent": "Mozilla/5.0 (iPhone)", ...headers } }));
@@ -118,6 +161,12 @@ describe("middleware: ekuzo_lc written before the first-touch early return (C17)
     const res = run("https://ekuzo.gg/season1/join?utm_source=meta", { "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1)" });
     assert.equal(res.cookies.get(LC_COOKIE), undefined);
     assert.equal(res.cookies.get("ekuzo_origin"), undefined);
+  });
+
+  it("ad (A1): ?ad=D019 with utms writes ad=d19; ?ad=zz alone writes no cookie", () => {
+    const res = run("https://ekuzo.gg/season1?ad=D019&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d19-a");
+    assert.equal(JSON.parse(res.cookies.get(LC_COOKIE)!.value).ad, "d19");
+    assert.equal(run("https://ekuzo.gg/season1?ad=zz").cookies.get(LC_COOKIE), undefined);
   });
 
   it("crew path: stored as /crew/, the code never in the cookie", () => {

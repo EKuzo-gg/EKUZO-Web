@@ -1,0 +1,27 @@
+{
+ "rows": [
+  {
+   "ad": "d19",
+   "vp": "412x915@2.625",
+   "mainMd5": "394e78cfede0d3c4b01f0adc0e417dc9",
+   "branchMd5": "394e78cfede0d3c4b01f0adc0e417dc9",
+   "md5Equal": true,
+   "pct": 0,
+   "size": "1082x6565",
+   "mainErr": [],
+   "branchErr": []
+  },
+  {
+   "ad": "noad",
+   "vp": "412x915@2.625",
+   "mainMd5": "b2c19936bd57c874158532fc59622ce6",
+   "branchMd5": "b2c19936bd57c874158532fc59622ce6",
+   "md5Equal": true,
+   "pct": 0,
+   "size": "1082x7904",
+   "mainErr": [],
+   "branchErr": []
+  }
+ ],
+ "offenders": []
+}

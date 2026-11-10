@@ -63,6 +63,8 @@ export const COMMITTED_PROPERTY_KEYS = [
   "utm_campaign",
   "utm_content",
   "first_touch",
+  // s1-fast-track A2: the last click's landing ad id (d1 to d99), event only, never the profile.
+  "ad",
 ] as const;
 
 const iso = (v: string | null | undefined) => (v ? new Date(v).toISOString() : new Date().toISOString());
@@ -93,6 +95,7 @@ export function buildCommittedEvent(o: OrderCtx): KlaviyoEventInput {
     utm_campaign: o.utmCampaign ?? "",
     utm_content: o.utmContent ?? "",
     first_touch: o.firstTouch ?? "",
+    ad: o.ad ?? "",
   };
   const profileProps: Record<string, unknown> = {
     season1_status: "committed",

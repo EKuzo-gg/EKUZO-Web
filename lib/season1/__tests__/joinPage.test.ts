@@ -2,6 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { renderJoin } from "../joinPage";
 
 const tpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "b", "join-b.html"), "utf8");
@@ -112,5 +113,41 @@ describe("renderJoin SEO block (R2-D5, R2-D6, R2-D8)", () => {
     const out = escapeJsonLd({ a: "x</script><script>alert(1)//\u2028\u2029" });
     assert.ok(!out.includes("<") && !out.includes("\u2028") && !out.includes("\u2029"));
     assert.equal(JSON.parse(out).a, "x</script><script>alert(1)//\u2028\u2029");
+  });
+});
+
+describe("season1_join_view fields (s1-fast-track A3)", () => {
+  const jerseyTpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "jersey", "join-jersey.html"), "utf8");
+  const view = (h: string) => /<script>[^<]*season1_join_view[^<]*<\/script>/.exec(h)?.[0].slice(8, -9) ?? "";
+  const run = (h: string, search: string) => {
+    const calls: unknown[][] = [];
+    vm.runInContext(view(h), vm.createContext({ URLSearchParams, location: { search }, gtag: (...a: unknown[]) => calls.push(a) }));
+    return JSON.parse(JSON.stringify(calls));
+  };
+  for (const [name, t, variant] of [["join (b template)", tpl, "b"], ["jersey", jerseyTpl, "jersey"]] as const) {
+    it(`${name}: {variant, ad, src}, ad from the URL normalized, src the whitelisted one`, () => {
+      const withSrc = renderJoin(t, { now: OPEN, mode: "test", src: "ad" });
+      assert.ok(view(withSrc).includes(`variant:'${variant}',ad:a,src:'ad'`), view(withSrc));
+      assert.deepEqual(run(withSrc, "?src=ad&ad=D018"), [["event", "season1_join_view", { variant, ad: "d18", src: "ad" }]]);
+      const bare = renderJoin(t, { now: OPEN, mode: "test", src: null });
+      assert.deepEqual(run(bare, ""), [["event", "season1_join_view", { variant, ad: "", src: "" }]]);
+      assert.deepEqual(run(bare, "?ad=zz"), [["event", "season1_join_view", { variant, ad: "", src: "" }]]);
+      assert.deepEqual(run(bare, "?ad=d21&utm_source=x"), [["event", "season1_join_view", { variant, ad: "d21", src: "" }]]);
+    });
+  }
+});
+
+describe("jersey hero switch (s1-fast-track follow-up)", () => {
+  const jerseyTpl = fs.readFileSync(path.join(process.cwd(), "app", "season1", "join", "jersey", "join-jersey.html"), "utf8");
+  const sw = /<script>[^<]*getElementById\('jh'\)\.dataset\.ad=a[^<]*<\/script>/.exec(jerseyTpl)?.[0].slice(8, -9) ?? "";
+  const hero = (search: string) => {
+    const el = { dataset: { ad: "d19" } };
+    vm.runInContext(sw, vm.createContext({ URLSearchParams, location: { search }, document: { getElementById: () => el } }));
+    return el.dataset.ad;
+  };
+  it("normalizes like the landing before comparing, so D021 shows d21 and join_view agrees", () => {
+    assert.ok(sw.includes(".toLowerCase().replace(/^d0/,'d')"), sw);
+    for (const [q, want] of [["?ad=d21", "d21"], ["?ad=D021", "d21"], ["?ad=d020", "d20"], ["?ad=D20", "d20"], ["?ad=d19", "d19"], ["", "d19"], ["?ad=zz", "d19"], ["?ad=d0021", "d19"]] as const)
+      assert.equal(hero(q), want, q);
   });
 });

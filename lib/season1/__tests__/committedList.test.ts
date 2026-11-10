@@ -77,6 +77,7 @@ const order = (over: Partial<OrderCtx> = {}): OrderCtx => ({
   utmCampaign: "season1-early-access",
   utmContent: "email-b",
   firstTouch: "paid_meta",
+  ad: null,
   origin: null,
   inviterKidName: null,
   ...over,

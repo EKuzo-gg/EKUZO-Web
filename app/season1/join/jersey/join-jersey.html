@@ -283,7 +283,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 <body>
 <!--IF:test--><div class="pv" role="region" aria-label="Test mode">Test mode. No real charges.</div><!--/IF:test-->
 <header class="hero jh" id="jh" data-ad="d19">
-<script>(function(){try{var a=new URLSearchParams(location.search).get('ad');if(a==='d20'||a==='d21')document.getElementById('jh').dataset.ad=a}catch(e){}})()</script>
+<script>(function(){try{var a=(new URLSearchParams(location.search).get('ad')||'').toLowerCase().replace(/^d0/,'d');if(a==='d20'||a==='d21')document.getElementById('jh').dataset.ad=a}catch(e){}})()</script>
 <div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><!--IF:open--><a class="mini" href="{{SIGNUP}}">Sign up</a><!--/IF:open--></nav></div>
 <div class="jh-in wrap">
 <div class="jh-art">
@@ -383,7 +383,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 </main>
 <!--IF:open--><aside class="stick" id="stick" aria-label="Sign up"><div class="wrap"><p>Join the team!</p><a class="btn" href="{{SIGNUP}}">Save their spot</a></div></aside>
 <script>(function(){var b=document.getElementById('stick'),o=document.querySelector('.offer');if(!b||!o||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){b.classList.toggle('on',!e[0].isIntersecting&&e[0].boundingClientRect.top<0)}).observe(o)})()</script><!--/IF:open-->
-<script>try{gtag('event','season1_join_view',{variant:'jersey',ad:document.getElementById('jh').dataset.ad})}catch(e){}</script>
+<script>(function(){try{var a=(new URLSearchParams(location.search).get('ad')||'').toLowerCase().replace(/^d0/,'d');if(!/^d[1-9]\d?$/.test(a))a='';gtag('event','season1_join_view',{variant:'jersey',ad:a,src:'{{SRC}}'})}catch(e){}})()</script>
 <script src="/js/s1-devview.js" defer></script>
 </body>
 </html>

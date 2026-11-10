@@ -1,0 +1,47 @@
+{
+ "q1": {
+  "search": "?ad=D021&utm_source=x&utm_content=y",
+  "dataAd": "d21",
+  "tTag": "none",
+  "tTeam": "inline",
+  "back": "none",
+  "views": [
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "jersey",
+     "ad": "d21",
+     "src": "",
+     "debug_mode": true
+    }
+   ]
+  ]
+ },
+ "q3": {
+  "tagged": {
+   "httpOnly": true,
+   "value": {
+    "path": "/season1",
+    "ts": 1794337145338,
+    "utm_source": "meta",
+    "utm_medium": "paid_social",
+    "utm_campaign": "season1",
+    "utm_content": "d19-a",
+    "ad": "d19"
+   }
+  },
+  "zz": null
+ },
+ "offenders": [],
+ "stubbed": [
+  "www.googletagmanager.com",
+  "connect.facebook.net",
+  "www.clarity.ms"
+ ],
+ "errors": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}
