@@ -4,6 +4,17 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-10: BETA pathway (dev only)
+
+The team is shifting the ask from the paid Season 01 sign-up to BETA: a free 2-week session before Season 01 (week 1 setup, week 2 a couple of real practices). This replaces the earlier 4-week, invite-only beta plan.
+
+- `public/roadshow/beta-lab.html` rewritten: the pathway (email and ads, BETA page, sign-up, confirmation, two weeks, Season 01 offer), Karlin's personal email to the 400+ sign-ups, the confirmation email, the three BETA ads, and what is still to decide with owners.
+- New prototypes in `public/roadshow/beta/` (noindex, static, shared `beta.css` in the Season 01 look): `index.html` is the BETA landing page with a short form (email, player's first name, age, optional mobile, no card). `confirm.html` is the "you're in" page: times that work, setup list, share link. The form validates and passes the name through sessionStorage only. Nothing is posted or saved.
+- `public/roadshow/ad-lab.html`: Round 5, three BETA ads on ad 11's template (d22 Two weeks free, d23 Gaming either way, d24 See what we do), lime accent, blue button, Meta copy preloaded. Finals at 1080 in `public/ads/season1/` (d22 to d24, feed and story). Meta links point to `/season1/beta?ad=d22` (and d23, d24), which does not exist yet.
+- **For Jamie (your lane, nothing changed):** to make it real it needs a route (suggested `/season1/beta`), a save endpoint for the four fields plus the picked times, and a Klaviyo event for the confirmation email. `lib/season1/` and all live pages are untouched.
+- Open decisions are listed in the lab: dates and practice count, capacity, the paid page while BETA runs, the Nov 30 jersey deadline, the end-of-beta offer, photo releases.
+- Verified: Playwright Chromium at 390, 768 and 1440. Empty submit shows errors, a filled form reaches the confirmation with the player's name, no page errors, no horizontal overflow. Ad lab loads with no errors.
+
 ## Aaron's Claude, 2026-11-10: Season 01 setup wizard lab (dev only)
 
 - New `public/roadshow/wizard-lab.html` (noindex, static): the setup wizard committed families reach from the soft welcome email. Overview of the family's kids, then five steps per kid: about the player (name and age prefilled from signup, games, League experience, a note for the coach), gamer tag with a live jersey preview plus jersey size, practice blocks with a starred best time, the League setup checklist from the camps Getting Started email, and a read-only billing screen. Done screen: a slot for the kid hype video and the crew link.

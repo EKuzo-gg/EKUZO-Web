@@ -1,9 +1,9 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>EKUZO Beta Lab</title></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Beta lab | EKUZO Roadshow</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@300;400;500;600;700&display=swap">
 <style>
-/* Layout: one working page for the Season 01 beta. The email Karlin sends leads, shown as it lands in the inbox, then how the beta runs and what is still open. Same dark wall as the Roadshow hub. */
+/* Layout: one working page for BETA, the free 2-week session before Season 01. The pathway leads, then Karlin's email as it lands in the inbox, the confirmation email, the ads, and what is still open. Same dark wall as the Roadshow hub. */
 :root{
   --wall:#0B0A0D; --panel:#16141A; --panel2:#1E1B23; --line:#2A272E; --text:#F4F2F6; --muted:#A7A2AE;
   --lime:#E0FF4E; --violet:#9B6BFF; --blue:#034FFF; --ink:#111013; --paper:#F6F4F8; --paperline:#DEDAE3; --paperink:#1A181D; --papermuted:#5E5965;
@@ -81,6 +81,20 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
   .steps li::before{top:4px;left:-7px}
 }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
+
+/* BETA pathway (Nov 10) */
+.steps.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.steps a{display:inline-block;margin-top:10px;font:600 14px/1.3 var(--body);color:var(--lime)}
+.steps a:hover{color:var(--text)}
+.mail + .mail{margin-top:40px}
+.mailhead{font:600 17px/1.3 var(--body);margin:36px 0 14px}
+.ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ads figure{margin:0}
+.ads img{display:block;width:100%;height:auto;border-radius:10px}
+.ads figcaption{margin-top:10px;font-size:15px;color:var(--muted)}
+.ads figcaption b{display:block;color:var(--text);font-weight:600}
+.more{display:inline-block;margin-top:18px;font:600 15px/1.3 var(--body);color:var(--lime)}
+@media (max-width:900px){.steps.six{grid-template-columns:1fr}.ads{grid-template-columns:1fr;max-width:420px}}
 </style>
 
 <div class="wrap">
@@ -88,77 +102,114 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
     <a class="back" href="index.html">&larr; Roadshow hub</a>
     <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
     <h1>Beta lab</h1>
-    <p class="lede">A free four-week beta before Season 01: one practice a week, a small group, and families we know are a good fit. Committed families are in, and they pass it to friends who are still deciding.</p>
+    <p class="lede">BETA is a free two weeks before Season 01: a week to get set up, then a couple of real practices. The ads are getting clicks, but paying is too big a first step. So Karlin's email and the ads now ask for something smaller, and families see what we do before they decide.</p>
   </header>
 
   <div class="next">
     <strong>Next step</strong>
-    <span><b>Karlin</b> sends the interest email below to committed and interested families.</span>
+    <span><b>Karlin</b> sends the email below to the 400+ families who signed up for Season 01.</span>
   </div>
 
   <section>
-    <h2>The email</h2>
-    <p class="sub">Replies do the work of an application, so there is no form or page to build first.</p>
+    <h2>The pathway</h2>
+    <p class="sub">One path from the first email or ad to the Season 01 offer. Every step links to its draft.</p>
+    <ol class="steps six">
+      <li><b>Email and ads</b><span>Karlin's personal email to the 400+ sign-ups, and three new ads on Meta.</span><a href="ad-lab.html#d22">See the ads</a></li>
+      <li><b>BETA page</b><span>What the two weeks are, who coaches, and the sign-up form.</span><a href="beta/index.html">Open the page</a></li>
+      <li><b>Sign up</b><span>Email, player's first name and age. A mobile number is optional. No card.</span></li>
+      <li><b>You're in</b><span>The confirmation page asks for the times that work, then a confirmation email.</span><a href="beta/confirm.html">Open the page</a></li>
+      <li><b>Two weeks</b><span>Week 1 is setup and meeting the coach and team. Week 2 is real practices.</span></li>
+      <li><b>Season 01 offer</b><span>After the last practice, families get the Season 01 offer with a deadline.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>The emails</h2>
+    <p class="sub">Plain emails from Karlin. The first one opens the pathway, the second lands right after sign-up.</p>
     <div class="mail">
-      <article class="inbox" aria-label="Email preview">
+      <article class="inbox">
         <header>
-          <p class="subject" id="subject">A free EKUZO beta before Season 01</p>
-          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO, to <span>[First name]</span></span></div>
+          <p class="subject" id="subject">A free 2-week beta before Season 01</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO, to <span class="ph">[First name]</span></span></div>
         </header>
         <div class="body" id="emailbody">
           <p>Hi <span class="ph">[First name]</span>,</p>
-          <p>Before Season 01 starts, we're running a free 4-week beta: one practice a week with our coaches, playing as a squad.</p>
-          <p>We're keeping the group small on purpose, and we want to make sure it's a great fit for your player.</p>
-          <p>If you've already signed up for Season 01, you're in. Just reply with the days and times that work best for your player, weekdays or weekends.</p>
-          <p>If you haven't signed up yet and want to be considered, reply and tell me a little about your player:</p>
+          <p>Karlin here, founder of EKUZO. You signed up to hear about Season 01, and so did more than 400 other families.</p>
+          <p>I know a season is a lot to say yes to before you've seen what we do. So before Season 01 starts, we're running a free 2-week beta, and I'd like your player in it.</p>
           <ul>
-            <li>Their first name and age</li>
-            <li>What they play right now</li>
-            <li>What you'd most like them to get out of it</li>
-            <li>Which days and times work best for your family</li>
+            <li>Week 1: we get your player set up, and they meet their coach and team.</li>
+            <li>Week 2: real practices from home, playing as a squad.</li>
           </ul>
-          <p>We'll pick the practice day and time based on what works best for the group and follow up with everyone soon.</p>
-          <p>Know a family whose player would be a good fit? Feel free to pass this along.</p>
-          <p>Thanks,<br>Karlin</p>
+          <p>It's free. No card, and no commitment to Season 01.</p>
+          <p>Join the beta here: <span class="ph">[BETA page link]</span></p>
+          <p>If you have questions, just reply. This goes straight to me.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
         </div>
       </article>
       <aside class="side">
         <button class="btn" type="button" id="copyBody">Copy email</button>
         <button class="btn ghost" type="button" id="copySubject">Copy subject line</button>
         <div class="note">
-          <p><b>Send it as a personal email</b>From Karlin's own inbox, not a newsletter blast. It reads as a real invite and replies come straight to him.</p>
-          <p><b>Committed families reply too</b>Their availability sets the practice day and time, so everyone weighs in.</p>
+          <p><b>Send it as a personal email</b>From Karlin's own inbox, plain text, one link. It reads as a real invite and replies come straight to him.</p>
+          <p><b>One ask</b>The only thing to do is join the beta. Season 01 pricing stays out of this email.</p>
+        </div>
+      </aside>
+    </div>
+    <p class="mailhead">Right after sign-up</p>
+    <div class="mail">
+      <article class="inbox">
+        <header>
+          <p class="subject" id="subject2"><span class="ph">[Player]</span> is in the EKUZO beta</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO, to <span class="ph">[First name]</span></span></div>
+        </header>
+        <div class="body" id="emailbody2">
+          <p>Hi <span class="ph">[First name]</span>,</p>
+          <p><span class="ph">[Player]</span> has a spot in our free 2-week beta. Here's what happens next:</p>
+          <ul>
+            <li>Tell us when they can play: <span class="ph">[times link]</span></li>
+            <li>Check their setup: a computer that runs League of Legends (it's free), a headset with a mic, and solid internet. Their coach helps with this in week 1.</li>
+            <li>Before week 1, we'll email your practice times and your coach's name.</li>
+          </ul>
+          <p>Questions? Reply here or text me at (832) 271-0150.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
+        </div>
+      </article>
+      <aside class="side">
+        <button class="btn" type="button" id="copyBody2">Copy email</button>
+        <button class="btn ghost" type="button" id="copySubject2">Copy subject line</button>
+        <div class="note">
+          <p><b>Sent automatically</b>This one comes from Klaviyo when a family signs up, so it needs the sign-up form connected first.</p>
         </div>
       </aside>
     </div>
   </section>
 
   <section>
-    <h2>How it runs</h2>
-    <p class="sub">From the email to the Season 01 offer, mid-November through mid-December.</p>
-    <ol class="steps">
-      <li><b>Karlin sends</b><span>The interest email goes to committed families and families still deciding.</span><small>As soon as it's approved</small></li>
-      <li><b>Families reply</b><span>Committed families send the days and times that work. New families tell us about their player.</span><small>Reply within a few days</small></li>
-      <li><b>Pick the group</b><span>Karlin chooses the families that fit and the day and time that work for most.</span><small>Reply to every family</small></li>
-      <li><b>Four practices</b><span>One practice a week with our coaches, playing as a squad.</span><small>Skip Thanksgiving week</small></li>
-      <li><b>Season 01 offer</b><span>The last practice ends with families watching, then the Season 01 offer with a deadline.</span><small>Before winter break</small></li>
-    </ol>
+    <h2>The ads</h2>
+    <p class="sub">Three new versions on ad 11's layout. The ask is the free beta, and the button matches the page.</p>
+    <div class="ads">
+      <figure><img src="/ads/season1/d22-a-beta-two-weeks-feed.jpg" alt="Ad: Two weeks free. On a real team." width="1080" height="1350" loading="lazy"><figcaption><b>d22, Two weeks free</b>The same headline as the BETA page.</figcaption></figure>
+      <figure><img src="/ads/season1/d23-a-beta-either-way-feed.jpg" alt="Ad: They're gaming either way. Try a real team, free." width="1080" height="1350" loading="lazy"><figcaption><b>d23, Gaming either way</b>Starts from what the parent sees at home.</figcaption></figure>
+      <figure><img src="/ads/season1/d24-a-beta-see-it-feed.jpg" alt="Ad: See what we do. Free for two weeks." width="1080" height="1350" loading="lazy"><figcaption><b>d24, See what we do</b>For the curious parent who isn't sold yet.</figcaption></figure>
+    </div>
+    <a class="more" href="ad-lab.html#d22">Story sizes and Meta copy are in the ad lab</a>
   </section>
 
   <section>
     <h2>Still to decide</h2>
-    <p class="sub">Karlin's calls before the acceptance emails go out.</p>
+    <p class="sub">What the pathway needs before it goes live.</p>
     <ul class="open">
-      <li><b>Practice day, time and start week</b><span class="who">Karlin</span><p>Set from the availability families send back, weekdays or weekends.</p></li>
-      <li><b>How many spots</b><span class="who">Karlin</span><p>Around ten players, sized to what the coaches can run well.</p></li>
-      <li><b>What makes a good fit</b><span class="who">Karlin</span><p>Two or three simple rules, so every reply is judged the same way.</p></li>
-      <li><b>Families who aren't a fit this time</b><span class="who">Karlin</span><p>A warm reply with a GG Nights invite or a waitlist spot, never a flat no.</p></li>
-      <li><b>The acceptance email</b><span class="who">Aaron</span><p>Practice day and time, the four dates, setup, and a yes to all four weeks.</p></li>
-      <li><b>The Season 01 offer</b><span class="who">Karlin</span><p>What families get for enrolling at the end of the beta, and the deadline.</p></li>
+      <li><b>Dates and practice times</b><span class="who">Karlin</span><p>Which two weeks, and how many practices in week 2. The page and emails say "two weeks" until this is set.</p></li>
+      <li><b>How many players we can take</b><span class="who">Karlin</span><p>The drafts treat the beta as open to every family who signs up. If coach capacity sets a limit, the page needs a "full" state and a waitlist.</p></li>
+      <li><b>Saving sign-ups and sending the confirmation</b><span class="who">Jamie</span><p>The page and confirmation are prototypes. They need a real address, a save endpoint and the Klaviyo email.</p></li>
+      <li><b>The paid Season 01 page while BETA runs</b><span class="who">Team</span><p>The drafts assume it stays live for families who are ready, and every ad and email points to BETA.</p></li>
+      <li><b>The free jersey deadline</b><span class="who">Team</span><p>The jersey offer ends Nov 30, which may fall before the beta does. Decide if beta families still get it.</p></li>
+      <li><b>The Season 01 offer after the beta</b><span class="who">Karlin</span><p>What families get for enrolling at the end, and the deadline.</p></li>
+      <li><b>Photo releases for the ads</b><span class="who">Aaron</span><p>The three ad photos each need a release before they run.</p></li>
     </ul>
   </section>
 
-  <footer>Internal preview for the EKUZO team. The full plan lives in the <a href="https://claude.ai/artifact/U3PLrrRGwCLbrEuBM63sWc" target="_blank" rel="noopener">Season 01 pilot plan doc</a>.</footer>
+  <footer>Internal preview for the EKUZO team. This replaces the earlier four-week, invite-only beta plan.</footer>
 </div>
 
 <script>
@@ -171,12 +222,14 @@ function fallback(text, done){
   const t = document.createElement("textarea"); t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
   document.body.appendChild(t); t.select(); try { document.execCommand("copy"); done(); } catch (e) {} t.remove();
 }
-function bodyText(){
-  return [...document.querySelectorAll("#emailbody > *")].map(el =>
+function bodyText(id){
+  return [...document.querySelectorAll("#" + id + " > *")].map(el =>
     el.tagName === "UL" ? [...el.children].map(li => "- " + li.textContent.trim()).join("\n") : el.innerText.trim()
   ).join("\n\n");
 }
-document.getElementById("copyBody").addEventListener("click", e => copy(e.currentTarget, bodyText(), "Copy email"));
-document.getElementById("copySubject").addEventListener("click", e => copy(e.currentTarget, document.getElementById("subject").textContent.trim(), "Copy subject line"));
+[["copyBody","emailbody","subject","copySubject"],["copyBody2","emailbody2","subject2","copySubject2"]].forEach(([b,body,subj,s]) => {
+  document.getElementById(b).addEventListener("click", e => copy(e.currentTarget, bodyText(body), "Copy email"));
+  document.getElementById(s).addEventListener("click", e => copy(e.currentTarget, document.getElementById(subj).textContent.trim(), "Copy subject line"));
+});
 </script>
 </body></html>
