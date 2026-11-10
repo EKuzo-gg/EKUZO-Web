@@ -32,6 +32,10 @@
   join pages template from `offer.ts`; the landing has them hardcoded.
 - Dev carries the same code through the integration merge `c4eabbe` on top of his roadshow and beta
   commits; `landing-v2.html` stays dev-only and is never served.
+- Live on ekuzo.gg 15:20 CT (`main` 3bf6c58 to c1ae338, fast-forward, Jamie's go 15:18). Live body equals
+  the source apart from the two fills; harness on live: CLS d18 0.0038, d19 0.0002, d2 0.0004, LCP within
+  noise of Nov 9 (`docs/s1-cls-field-2026-11/evidence/vitals/live-ft*/`). Handoff and the notes for Aaron:
+  `docs/s1-fast-track-2026-11/01-handoff.md`.
 
 ## Jamie's Claude, 2026-11-09: Season 01 landing speed, checkout fix, field-vitals harness (Build Loop, docs/s1-cls-field-2026-11/)
 

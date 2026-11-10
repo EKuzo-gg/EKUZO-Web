@@ -14,7 +14,7 @@ roadshow and beta commits; `landing-v2.html` is dev-only and never served).
 | Part B (visible additions) | Eight checks pass; every pixel box inside an expected region | `evidence/sentry-b/results.md` |
 | Stability, local Tier 1 | CLS medians d2 0.0004, d18 0.0038, d19 0.0018, noad 0.0005 (fb, N=5; ig N=3 same); LCP within +12 to +132 ms of Part A | `../s1-cls-field-2026-11/evidence/vitals/ft-b-tier1*/table.md` |
 | Dev | Marker c4eabbe on three URLs; body equals the source apart from the two fills; CLS within 0.0003 of ekuzo.gg; console 0 on 22 variants | `evidence/sentry-b/dev/` |
-| Main | Waiting on Jamie's go after his phone look at `https://dev--ekuzo.netlify.app/season1?ad=d19` | this file |
+| Main | Live on ekuzo.gg: Jamie's go 15:18 CT, pushed 15:18 (3bf6c58 to c1ae338, fast-forward), marker `c1ae338` served 15:20; the three live bodies are byte-identical and equal the source apart from the `{{BUILD}}` and `{{TAGS}}` lines; brotli 38.2 KB (37.6 KB on Nov 9). Harness on live (fb-android-412, `--noForm`): d18 CLS 0.0038, LCP 1568 and 1640 ms; d2 CLS 0.0004, LCP 1316 and 1376; d19 CLS 0.0002, LCP over five runs 1336, 1420, 1540, 1924, 2636 (median 1540; Nov 9 live-after median 1420). | `../s1-cls-field-2026-11/evidence/vitals/live-ft/table.md`, `live-ft-d19/table.md` |
 
 Defects: 8, none blocker or high (`evidence/sentry-b/defects.md`). SG-1 accepted as F9, SG-2 and SG-3
 logged as F10 follow-ups, SG-4 to SG-8 are brief gaps or method notes.
@@ -28,7 +28,7 @@ logged as F10 follow-ups, SG-4 to SG-8 are brief gaps or method notes.
 4. Do not submit on dev (the API writes the live Klaviyo list). The confirmation card ("Ready to lock it
    in?", "Save their spot · $100") is in `evidence/sentry-b/pixel/d19-412-conf-branch.png`.
 
-## To ship (after the go)
+## Ship steps (as run, 15:18 to 15:26 CT)
 
 ```
 cd /home/claude/ekuzo-web && git fetch origin && git merge-base --is-ancestor origin/main HEAD \
