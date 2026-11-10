@@ -1,0 +1,73 @@
+{
+ "tagged": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+ "bare": "/season1/join?src=ad&ad=d1",
+ "joinEls": {
+  "?ad=d1": 0,
+  "?ad=d2": 0,
+  "?ad=d3": 0,
+  "?ad=d4": 0,
+  "?ad=d5": 0,
+  "?ad=d6": 0,
+  "?ad=d7": 0,
+  "?ad=d8": 0,
+  "?ad=d9": 0,
+  "?ad=d10": 0,
+  "?ad=d11": 0,
+  "?ad=d12": 0,
+  "?ad=d13": 0,
+  "?ad=d14": 0,
+  "?ad=d15": 0,
+  "?ad=d16": 0,
+  "?ad=d17": 0,
+  "?ad=d18": 0,
+  "?ad=d19": 0,
+  "?ad=d20": 0,
+  "?ad=d21": 0,
+  "noad": 0
+ },
+ "t0": {
+  "ga": [],
+  "clarity": 0
+ },
+ "scrollY": 446,
+ "tAfterScroll": {
+  "ga": [],
+  "clarity": 0
+ },
+ "tAfterFocusTabPaste": {
+  "ga": [],
+  "clarity": 0
+ },
+ "tClick1": {
+  "ga": [
+   {
+    "n": "s1_join_click",
+    "p": {
+     "location": "top",
+     "ad": "d19"
+    }
+   }
+  ],
+  "clarity": 1
+ },
+ "tClick2": {
+  "ga": [
+   {
+    "n": "s1_join_click",
+    "p": {
+     "location": "top",
+     "ad": "d19"
+    }
+   },
+   {
+    "n": "s1_join_click",
+    "p": {
+     "location": "top",
+     "ad": "d19"
+    }
+   }
+  ],
+  "clarity": 2
+ },
+ "_offenders": []
+}

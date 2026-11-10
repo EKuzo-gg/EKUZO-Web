@@ -1,0 +1,576 @@
+{
+ "d18-utm": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:05:40.554Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d18",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d18",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d18"
+    },
+    {
+     "eventID": "8170a9a5-c47a-4d87-9c23-bf4f96d270bf"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d18"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d18-a"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "search": "?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d18\",\"adName\":\"Not a sports kid? Perfect.\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"8170a9a5-c47a-4d87-9c23-bf4f96d270bf\",\"eventSourceUrl\":\"http://localhost:3101/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ]
+ },
+ "d19-utm": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:05:46.946Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "form_start",
+    {
+     "ad": "d19",
+     "hero": "none",
+     "where": "top",
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "generate_lead",
+    {
+     "lead_source": "season_one_d19",
+     "hero": "none",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "Lead",
+    {
+     "content_name": "season_one_d19"
+    },
+    {
+     "eventID": "570c799e-b192-4a5b-b3b4-9e752e5b8ed2"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d19"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d19-a"
+   ],
+   [
+    "event",
+    "signup"
+   ],
+   [
+    "set",
+    "signed_up",
+    "yes"
+   ]
+  ],
+  "search": "?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d19\",\"adName\":\"Southie jersey, back\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d19-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"570c799e-b192-4a5b-b3b4-9e752e5b8ed2\",\"eventSourceUrl\":\"http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ]
+ },
+ "bare": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:05:53.511Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ]
+  ],
+  "search": "?s1qa=1",
+  "posts": []
+ },
+ "zz": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:05:55.933Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1?ad=zz&s1qa=1"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "ad",
+    "d1"
+   ],
+   [
+    "set",
+    "hero",
+    "none"
+   ]
+  ],
+  "search": "?ad=zz&s1qa=1",
+  "posts": []
+ },
+ "join-ad": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:05:58.358Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1/join"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "page_location": "http://localhost:3101/season1/join",
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "b",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "ViewContent",
+    {
+     "content_name": "Season 01"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "page",
+    "join"
+   ],
+   [
+    "set",
+    "src",
+    "ad"
+   ]
+  ],
+  "search": "?src=ad&s1qa=1",
+  "posts": []
+ },
+ "join-b-email": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:06:00.730Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1/join/b"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "page_location": "http://localhost:3101/season1/join/b",
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "b",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "ViewContent",
+    {
+     "content_name": "Season 01"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "page",
+    "join"
+   ],
+   [
+    "set",
+    "src",
+    "email"
+   ]
+  ],
+  "search": "?src=email&s1qa=1",
+  "posts": []
+ },
+ "jersey": {
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T19:06:03.101Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3101/season1/join/jersey?utm_source=x"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "page_location": "http://localhost:3101/season1/join/jersey?utm_source=x",
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "jersey",
+     "ad": "d19",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "ViewContent",
+    {
+     "content_name": "Season 01"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "page",
+    "join"
+   ]
+  ],
+  "search": "?utm_source=x&s1qa=1",
+  "posts": []
+ },
+ "_offenders": [],
+ "_stubbed": [
+  "www.googletagmanager.com",
+  "connect.facebook.net",
+  "www.clarity.ms"
+ ]
+}

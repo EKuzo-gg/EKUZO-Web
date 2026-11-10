@@ -1,0 +1,18 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2,noad --profile fb-android-412 --runs 3 --label ft-a-tier1 --expectMarker 8550976 --requireReady
+
+[vitals] ft-a-tier1: http://localhost:3100 ads=d18,d19,d2,noad profiles=fb-android-412 runs=3 network=slow4g cpu=4x failure=none target=9631612
+[vitals] fb-android-412 d18 run1: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1292 img.ph laughing.webp FCP 984 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d18 run2: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1520 img.ph laughing.webp FCP 796 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d18 run3: CLS 0.0035 (+in 0.0066, total 0.0036) src=h3 + div.row LCP 1476 img.ph laughing.webp FCP 800 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d19 run1: CLS 0.0015 (+in 0.0066, total 0.0017) src=form + p LCP 1936 img.jb southie-back.webp FCP 784 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d19 run2: CLS 0.0015 (+in 0.0066, total 0.0017) src=form + p LCP 1984 img.jb southie-back.webp FCP 804 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d19 run3: CLS 0.0015 (+in 0.0066, total 0.0016) src=form + p LCP 1876 img.jb southie-back.webp FCP 920 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run1: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1924 img.ih-bg couch.webp FCP 812 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run2: CLS 0.0004 (+in 0.1195, total 0.0006) src=h1#ih-q #text LCP 1840 img.ih-bg couch.webp FCP 880 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 d2 run3: CLS 0.0004 (+in 0.1195, total 0.0005) src=h1#ih-q #text LCP 1896 img.ih-bg couch.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 noad run1: CLS 0.0003 (+in 0.0066, total 0.0004) src=button #text + span.tag LCP 2300 img.ph mc-blocks.webp FCP 880 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 noad run2: CLS 0.0001 (+in 0.0066, total 0.0002) src=span.tag LCP 2212 img.ph mc-blocks.webp FCP 800 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] fb-android-412 noad run3: CLS 0.0003 (+in 0.0066, total 0.0004) src=button #text + span.tag LCP 2240 img.ph mc-blocks.webp FCP 816 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/ft-a-tier1/table.md, manifest.json, blocked.json (12 runs in label)
