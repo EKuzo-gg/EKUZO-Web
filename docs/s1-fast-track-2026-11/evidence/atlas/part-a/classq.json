@@ -1,0 +1,145 @@
+{
+ "q1": {
+  "search": "?ad=d21&utm_source=x&utm_content=y",
+  "dataAd": "d21",
+  "tTag": "none",
+  "tTeam": "inline",
+  "back": "none",
+  "views": [
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "jersey",
+     "ad": "d21",
+     "src": "",
+     "debug_mode": true
+    }
+   ]
+  ]
+ },
+ "q2": {
+  "search": "?src=ad&ad=d18",
+  "views": [
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "b",
+     "ad": "d18",
+     "src": "ad",
+     "debug_mode": true
+    }
+   ]
+  ]
+ },
+ "q3": {
+  "tagged": {
+   "httpOnly": true,
+   "value": {
+    "path": "/season1",
+    "ts": 1794336841478,
+    "utm_source": "meta",
+    "utm_medium": "paid_social",
+    "utm_campaign": "season1",
+    "utm_content": "d19-a",
+    "ad": "d19"
+   }
+  },
+  "zz": null
+ },
+ "q4": {
+  "tagged": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+  "joinEls": 0,
+  "bare": "/season1/join?src=ad&ad=d1"
+ },
+ "q5": {
+  "before": {
+   "ga": [],
+   "clarity": 0
+  },
+  "afterNoClick": {
+   "ga": [],
+   "clarity": 0
+  },
+  "afterOne": {
+   "ga": [
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarity": 1
+  },
+  "afterTwo": {
+   "ga": [
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarity": 2
+  },
+  "afterOther": {
+   "ga": [
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "s1_join_click",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "location": "top",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "clarity": 2
+  }
+ },
+ "offenders": [],
+ "stubbed": [
+  "www.googletagmanager.com",
+  "connect.facebook.net",
+  "www.clarity.ms"
+ ],
+ "errors": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}
