@@ -196,3 +196,24 @@ child) still on 3101, stopped by its PID. (The first pass on d84a498 ran and sto
    on d2, d6 and d9 the top ready link appears only after an answer; the bottom link and the card are
    always there.
 5. WORKLOG not updated (the slice's earlier commits did not either); leaving it for the merge.
+
+## Follow-up (Fable, 2026-11-10): d19 to d21 hero buttons
+
+Commit 573c4c0. Fable accepted "For Fable" item 2: Aaron's rule ("Save their spot" only ever means
+paying) applies to the round-4 ads his file never had. The hero `.cta` on d19, d20 and d21
+(`landing.html` lines 1227, 1235, 1244) changes from `Save their spot →` to `Get the details →`, the same
+as d6 to d14. No hero template in the `D` array now contains "Save their spot"; the phrase remains only
+on the two ready links and the lock card, which lead to payment.
+
+Test (`landingCopy.test.ts`): the hero-label test now covers d6, d9, d11, d13, d14 and d19 to d21; the old
+"remains on d19 to d21" test became "no hero template contains Save their spot" (the `D` array slice,
+at least 21 entries, no "Save their"). `npm test`: 618 tests, 617 pass, 1 skipped, 0 fail; field-vitals 5
+of 5. `tsc --noEmit`: clean. Build `COMMIT_REF=573c4c0`: exit 0.
+
+Screenshot `part-b/followup-d19-412.png` (412x915 at 2.625, analytics stubbed, fonts and images
+settled), served marker 573c4c0: `.hero .cta` text `Get the details →`, in the viewport at
+(36, 430, 191x45) CSS px; no page errors, no offenders. 3103 (PID 18545) stopped by PID; `fuser
+3103/tcp` exits 1 and curl returns 000.
+
+Fable records the sticky-label behaviour (item 3) and the late top link on interactive heroes (item 4)
+as Aaron's design.
