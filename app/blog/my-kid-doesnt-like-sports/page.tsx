@@ -36,9 +36,6 @@ const HERO_IMAGE = "/images/my-kid-doesnt-like-sports-hero.jpg";
 const SHARE_IMAGE = "/images/my-kid-doesnt-like-sports-card.jpg";
 const HERO_ALT =
   "Karlin Oei as a teenager in a white concert shirt, beside a photo of his college esports team with their hands together before a match.";
-const GRAPHIC_IMAGE = "/images/what-a-team-gives-a-kid.png";
-const GRAPHIC_ALT =
-  "What a team gives a kid: the same people every week, a coach who knows them, a season that builds to something, and a job other kids count on.";
 const VIDEO_ID = "RVkSj6AYCDs";
 const DATE_PUBLISHED = "2026-11-11";
 const DATE_MODIFIED = "2026-11-11";
@@ -389,17 +386,6 @@ export default function PostMyKidDoesntLikeSports() {
                 only build something special with a team.
               </li>
             </ol>
-            {/* In-body graphic. Single removable block: Jamie judges it in the preview. */}
-            <div className="my-10 mx-auto w-full max-w-[560px]">
-              <Image
-                src={GRAPHIC_IMAGE}
-                alt={GRAPHIC_ALT}
-                width={1080}
-                height={1350}
-                sizes="(max-width: 640px) 100vw, 560px"
-                className="w-full h-auto"
-              />
-            </div>
 
             <h2>Could a video game team be your kid&apos;s team?</h2>
             <p>

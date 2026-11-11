@@ -105,3 +105,13 @@ offender check empty). No beacon may reach GA4, Meta or Clarity from QA.
 
 - Jamie: the hero and the in-body graphic in context; the YouTube embed on a real phone.
 - Karlin: courtesy OK on the "Inception" passage (already public in The Athletic).
+
+## Changes after the first build (Jamie, 2026-11-11)
+
+- P7 withdrawn 09:19 CT: the in-body graphic is cut for length and because it repeated the list
+  above it. `what-a-team-gives-a-kid.png` stays in `docs/sports-post/assets/` as a social asset
+  only and is removed from `public/images/`.
+- Hero keeps its natural 1232:520 ratio at every width (the fixed 520px height cropped the baked-in
+  text and captions).
+- Try this tonight box gained the subtitle "Three things before the next sign-up" to match the
+  sibling post; wording awaits Jamie's OK.
