@@ -191,10 +191,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
-    // The session-end post, shipped 2026-11-04. Carries the featured slot on /blog.
+    // The session-end post, shipped 2026-11-04. Held the featured slot on /blog
+    // until the sports post.
     {
       url: `${baseUrl}/blog/how-to-get-your-kid-off-video-games-without-a-fight`,
       lastModified: new Date("2026-11-05"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    // The sports post, shipped 2026-11-11. Carries the featured slot on /blog.
+    {
+      url: `${baseUrl}/blog/my-kid-doesnt-like-sports`,
+      lastModified: new Date("2026-11-11"),
       changeFrequency: "weekly",
       priority: 0.7,
     },
