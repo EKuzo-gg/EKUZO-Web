@@ -4,6 +4,17 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: /season1/beta rebuilt in the Join page's layout (dev)
+
+Aaron's direction: the page the beta ads drive to should be closer to our Join page and less like the ad landing. Same address, same email-only ask.
+
+- `app/season1/beta/beta.html` is now a Join-style page (look carried from `app/season1/join/jersey`): black hero with the team-walk photo, "Two weeks free. / With a pro coach.", the blue "Free beta" tag over a white notched card with one email field, then "How the beta works" (three steps), the coaches band with the safety line, seven short answers and the violet sticky bar. After a sign-up the card is replaced by "Awesome. Check your inbox for a note from Karlin."
+- The page no longer changes its hero per ad. `?ad=` is still read and saved (default d22).
+- The earlier version (a copy of the ad landing) is kept as `app/season1/beta/beta-ad-landing.html` for reference. It is not served. `route.ts` changed in its header comment only.
+- **Sign-up path unchanged (Jamie's lane, not edited):** posts to `/api/season-one` with `source: "ad-landing"`, the same payload fields, honeypot, 429 message and Lead / generate_lead / Clarity events as the ad landing. New values: `where: "beta"`, `adName: "BETA join page"`, `hero: "none"`, Lead `content_name` `season_one_beta_<ad>`. The asks of Jamie in the entry below still stand (beta follow-up email in Klaviyo with the wizard link).
+- `public/roadshow/beta-lab.html`: pathway text and "The screens" retaken from the new page (four phone screens and desktop).
+- **Checked:** rendered through `fillTags` and loaded at 390 and 1440: no sideways scroll, no console errors, a bad email shows the error, a good one shows the confirmation (off ekuzo.gg nothing is saved, so the live POST was not exercised). **Not run:** the repo test suite (no node_modules in this session).
+
 ## Aaron's Claude, 2026-11-11: /season1/beta, the BETA landing page (dev)
 
 Aaron's direction: reuse the existing ad landing page, focus it on the free 2-week beta, and ask for an email only. Karlin's follow-up email then links to a wizard (player basics, availability, what the beta is). The wizard is not built yet.

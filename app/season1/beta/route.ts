@@ -3,11 +3,12 @@ import fs from "fs";
 import path from "path";
 import { fillTags, renderStaticTags } from "@/lib/season1/tags";
 
-// BETA landing page, served at /season1/beta: the free 2-week beta before Season 01.
-// A copy of the Season 01 ad landing (app/season1/landing.html) with the ask changed
-// to the beta. Same script, same email-only form, same /api/season-one post (the
-// payload's `page` is /season1/beta, and BETA ads are d22 to d24). It opens on d22
-// when the link has no ?ad=. Original header:
+// BETA join page, served at /season1/beta: the free 2-week beta before Season 01.
+// Built like the Join page (app/season1/join/jersey: hero with the offer card, torn-paper
+// bands, coaches, FAQ, sticky bar) with one ask: the parent's email. The form posts to
+// /api/season-one exactly as the ad landing does (the payload's `page` is /season1/beta).
+// beta-ad-landing.html in this folder is the earlier version, a copy of the ad landing;
+// it is kept for reference and is not served. Original header:
 // Season 01 ad landing page, served natively at /season1.
 // It is a route handler (not a page.tsx) because the page is a self-contained
 // static HTML file that Aaron designs directly (own head, pixel, fonts, script),
