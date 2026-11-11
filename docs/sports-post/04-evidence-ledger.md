@@ -107,3 +107,11 @@ Observations that are not defects: at 1440 the H1 wraps with "now?" alone on the
 - D1 closed by amending the requirement: the shared tracker skips cross-origin links on every post.
 - D3 fixed (WORKLOG.md). D5 fixed (web-share removed from the iframe allow list). D8 fixed in 01-requirements.md.
 - D4, D6, D7 left as nits: no effect on readers.
+
+## Live (2026-11-11)
+
+- Released to main as 737330f (fast-forward), serving on ekuzo.gg 14:55 CT. Post, /blog, four edited posts, three images, /season1/join: all 200.
+- Live HTML carries GA4 `G-8LM45PX53W`, the Meta pixel and Clarity; BlogPosting, BreadcrumbList and FAQPage JSON-LD present; no noindex; sitemap and llms.txt list the URL.
+- Clip B01 (youtu.be/xSWJuBNC62c) embedded after the Inception paragraph; watched and approved by Jamie.
+- On Jamie's go: IndexNow sent six URLs (200 accepted); Search Console indexing requested for the new post 15:00 CT. Logged in the KB `company/marketing/search-console.md`.
+- Not run on live: a click-through of events against the real GA4 property (the same code passed locally behind the guard).
