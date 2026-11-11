@@ -4,6 +4,17 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: /season1/beta takes the Join page's purple hero (dev)
+
+Aaron's direction: use the Join page hero (`app/season1/join/b`) with the beta updates; the main CTA is "Join our free beta"; no Karlin by name in the page copy yet; ages read "kids ages 9+".
+
+- `app/season1/beta/beta.html`: hero is now the Join page's violet hero (centred headline, black sticker over the white card, crew art left, Jinx right, black band under it). The card holds the one-line pitch, the email field and a lime "Join our free beta" button. Buttons are lime with black text throughout, as on the Join page.
+- Band order is now black "How the beta works", off-white "Who coaches", white "Short answers".
+- Copy: "Karlin" removed from the card, steps, FAQ and confirmation ("we" instead). His coach card in "Who coaches" is unchanged. Ages read "9+" in the card and the FAQ.
+- Sign-up call and payload unchanged from the entry below.
+- Beta lab screens retaken. **Checked** at 390 and 1440 as before. **Not run:** the repo test suite.
+- **Still 9-17 elsewhere:** the BETA ads d22 in the ad lab and its finals, and the live Season 01 pages. Not changed here.
+
 ## Aaron's Claude, 2026-11-11: /season1/beta rebuilt in the Join page's layout (dev)
 
 Aaron's direction: the page the beta ads drive to should be closer to our Join page and less like the ad landing. Same address, same email-only ask.
