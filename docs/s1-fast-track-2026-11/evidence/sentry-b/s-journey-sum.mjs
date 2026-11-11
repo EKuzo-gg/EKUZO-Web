@@ -1,0 +1,32 @@
+import fs from "fs"; const r=JSON.parse(fs.readFileSync("journey.json","utf8"));
+const ga=L=>L.dataLayer.filter(a=>a[0]==="event"||a[0]==="config").map(a=>a[0]+" "+a[1]+(a[2]?" "+JSON.stringify(Object.fromEntries(Object.entries(a[2]).filter(([k])=>k!=="debug_mode"))):""));
+const cl=L=>L.clarity.map(a=>a.slice(0,3).join(" "));
+const fq=L=>L.fbq.map(a=>a.slice(0,2).join(" ")+(a[3]?" "+JSON.stringify(a[3]):""));
+const scrub=s=>s.replace(/[0-9a-f]{8}-[0-9a-f-]{27}/g,"<uuid>").replace(/\d{10,}/g,"<ts>");
+for(const ad of ["d18","d19"]){
+  const m=r[`J1-${ad}-main`], b=r[`J1-${ad}-branch`];
+  console.log("=====",ad);
+  console.log("hrefs branch:",JSON.stringify(b.hrefs));
+  console.log("confHref:",JSON.stringify(b.confHref));
+  const strip=a=>a.filter(x=>!/s1_join_click|join_click/.test(x));
+  console.log("GA main  :",ga(m.afterSubmit).map(scrub).join(" | "));
+  console.log("GA branch:",ga(b.afterSubmit).map(scrub).join(" | "));
+  console.log("GA equal apart from new:",JSON.stringify(strip(ga(m.afterSubmit)).map(scrub))===JSON.stringify(strip(ga(b.afterSubmit)).map(scrub)), "| at-scroll equal:",JSON.stringify(strip(ga(m.atScroll)).map(scrub))===JSON.stringify(strip(ga(b.atScroll)).map(scrub)));
+  console.log("fbq equal:",JSON.stringify(fq(m.afterSubmit).map(scrub))===JSON.stringify(fq(b.afterSubmit).map(scrub)),"| clarity equal:",JSON.stringify(strip(cl(m.afterSubmit)).map(scrub))===JSON.stringify(strip(cl(b.afterSubmit)).map(scrub)));
+  console.log("clarity main:",cl(m.afterSubmit).join(" | ")); console.log("clarity branch:",cl(b.afterSubmit).join(" | "));
+  const pm=m.posts.map(p=>scrub(p||"")), pb=b.posts.map(p=>scrub(p||"")); console.log("POST count",pm.length,pb.length,"equal(scrubbed):",JSON.stringify(pm)===JSON.stringify(pb)); console.log("POST branch:",pb[0]);
+  console.log("events before tap (branch at scroll):",ga(b.atScroll).filter(x=>/join_click/.test(x)).length);
+  const leadEv=b.afterSubmit.dataLayer.filter(a=>a[1]==="generate_lead"); const lead=b.afterSubmit.fbq.filter(a=>a[0]==="track"&&a[1]==="Lead");
+  const pid=JSON.parse(b.posts[0]||"{}").eventId; console.log("generate_lead",leadEv.length,"Lead",lead.length,"Lead eventID",lead.map(a=>a[3]&&a[3].eventID),"POST eventId",pid, "generate_lead params",JSON.stringify(leadEv.map(a=>a[2])));
+  console.log("lock tap doc snaps:",JSON.stringify((b.tapDoc.snaps||[]).map(s=>({url:s.url,ga:ga(s).filter(x=>/join_click/.test(x)),clarity:cl(s).filter(x=>/join_click/.test(x))}))),"-> join url",b.tapDoc.joinUrl);
+  console.log("join doc after lock tap GA:",ga(b.tapDoc.joinDoc).map(scrub).join(" | "));
+  console.log("errors main/branch",m.errors.length,b.errors.length, JSON.stringify(b.errors));
+  const j2=r[`J2-${ad}`]; console.log("J2 join url",j2.joinUrl,"back url",j2.backUrl);
+  console.log("J2 per-doc snaps:"); for(const s of j2.snaps) console.log("  ",s.url.slice(0,60),"| click GA:",ga(s).filter(x=>/join_click/.test(x)).join(";"),"| clarity jc:",cl(s).filter(x=>/join_click/.test(x)).length,"| lead:",s.dataLayer.filter(a=>a[1]==="generate_lead").length,s.fbq.filter(a=>a[1]==="Lead").length);
+  console.log("  final doc",j2.finalDoc.url.slice(0,70),"GA:",ga(j2.finalDoc).map(scrub).join(" | "));
+  console.log("J2 join doc GA:",ga(j2.joinDocAtJoin).map(scrub).join(" | "));
+  console.log("J2 posts",j2.posts.length);
+  console.log("J3",JSON.stringify(r[`J3-${ad}`]));
+}
+console.log("J4",JSON.stringify(Object.fromEntries(Object.entries(r).filter(([k])=>k.startsWith("J4")).map(([k,v])=>[k,v.dataLayer.map(a=>Array.from(a)).filter(a=>a[1]==="season1_join_view"||a[0]==="config").map(a=>a.slice(0,3))]))));
+console.log("offenders",r._offenders);

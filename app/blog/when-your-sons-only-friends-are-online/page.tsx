@@ -32,7 +32,7 @@ const SHARE_IMAGE = HERO_IMAGE;
 const HERO_ALT =
   "A mother stands in a bedroom doorway watching her teenage son play a video game at his desk, headset on, in the warm light of his room.";
 const DATE_PUBLISHED = "2026-05-28";
-const DATE_MODIFIED = "2026-10-26";
+const DATE_MODIFIED = "2026-11-11";
 
 // FAQ items. Each answer is front-loaded (first sentence answers the question)
 // for AI extraction. This same array drives both the visible <h3> Q&A and the
@@ -469,7 +469,12 @@ export default function PostSonsOnlyFriendsAreOnline() {
                   Ryan’s story in his mom’s words
                 </Link>
                 . It’s one family’s experience, not a guarantee, but the shape
-                of it is familiar.
+                of it is familiar. If sports never clicked for your kid either,
+                Karlin wrote about{" "}
+                <Link href="/blog/my-kid-doesnt-like-sports">
+                  what to do when your kid doesn’t like sports
+                </Link>
+                .
               </p>
 
               <h2>Where a coached team fits</h2>

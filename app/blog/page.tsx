@@ -15,17 +15,30 @@ export const metadata = {
 // Card dates match each post's DATE_MODIFIED (the date its byline shows). Update both together.
 const posts = [
   {
+    slug: "my-kid-doesnt-like-sports",
+    title: "My kid doesn't like sports. What now?",
+    date: "November 11, 2026",
+    author: "Karlin Oei",
+    category: "Guides",
+    excerpt:
+      "Fewer than half of kids play a team sport regularly. What a team gives a kid, and where else to find it.",
+    image: "/images/my-kid-doesnt-like-sports-card.jpg",
+    // Takes the featured slot from the session-end post at ship (2026-11-11).
+    // Only one post may carry it: the finder below takes the first match.
+    featured: true,
+  },
+  {
     slug: "how-to-get-your-kid-off-video-games-without-a-fight",
     title: "How do I get my kid off the game without a fight?",
-    date: "November 5, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
       "End at a natural stopping point, and agree on where that is before the game starts.",
     image: "/images/how-to-get-your-kid-off-video-games-without-a-fight-card-clean.jpg",
-    // Takes the featured slot from the Robux post at ship (2026-11-04). Only
-    // one post may carry it: the finder below takes the first match.
-    featured: true,
+    // Held the featured slot from 2026-11-04 until the sports post took it
+    // (2026-11-11).
+    featured: false,
   },
   {
     slug: "should-i-buy-my-kid-robux",
@@ -56,7 +69,7 @@ const posts = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "November 5, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -98,7 +111,7 @@ const posts = [
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",
-    date: "October 26, 2026",
+    date: "November 11, 2026",
     author: "Jamie Fitch",
     category: "Perspective",
     excerpt:
@@ -131,7 +144,7 @@ const posts = [
   {
     slug: "gaming-programs-for-kids",
     title: "Gaming programs for kids: a parent's guide, Fall 2026",
-    date: "October 26, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     excerpt:
       "What a kid who games can join in fall 2026: build classes, online clubs, school teams, local leagues and coached teams, with prices checked in October.",

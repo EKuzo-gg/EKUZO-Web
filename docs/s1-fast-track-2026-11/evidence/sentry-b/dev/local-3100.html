@@ -1,0 +1,1562 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>EKUZO Season One</title>
+<style>html{background:#0B0A0D}</style>
+<meta name="s1-build" content="0c02cf3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>
+// Season 01 head bootstrap (s1-cls-field Slice 2). One source for the ad tables the body scripts read (AD_HERO, HERO_KEYS, IMG), then, before any stylesheet, the chosen ad's hero image preloads and a stylesheet with only the font families that ad paints.
+// The other families load async as a safety net (not all of them: a second @font-face for a family already in use sends its text back to the fallback while it reloads). Any failure here writes the all-families stylesheet as a blocking stylesheet instead, which is the page as it was; <noscript> in the body does the same without JS.
+// HERO_IMG: the ad's hero images, the LCP element first (measured on d19 and d11: img.jb, on d21: img.ph); only the first is preloaded, see D24. FONTS: families beyond FONT_BASE, from T's font, the template CSS and the module CSS. lib/season1/__tests__/landingHead.test.ts checks both against D, T and the CSS.
+window.S1={
+ AD_HERO:{d1:"amount",d2:"screentime",d3:"games",d4:"shortlist",d5:"shortlist",d6:"amount",d8:"games",d9:"shortlist",d10:["amount","games"]},
+ HERO_KEYS:["amount","games","screentime","shortlist"],
+ IMG:{"boys-girls-club": "/images/season1/landing/boys-girls-club.webp", "laughing": "/images/season1/landing/laughing.webp", "team-walk": "/images/season1/landing/team-walk.webp", "hands-in": "/images/season1/landing/hands-in.webp", "coach-and-mom": "/images/season1/landing/coach-and-mom.webp", "couch": "/images/season1/landing/couch.webp", "jersey-back": "/images/season1/landing/jersey-back.webp", "green-team": "/images/season1/landing/green-team.webp", "kid-couch": "/images/season1/landing/kid-couch.webp", "mc-blocks": "/images/season1/landing/mc-blocks.webp",
+  // Round 4 jersey ads (d19 to d21): photos served as files, not inlined.
+  "team-walk-hd": "/images/season1/jersey/team-walk-1600.webp", "southie-back": "/images/season1/jersey/southie-back.webp", "southie-front": "/images/season1/jersey/southie-front.webp"},
+ HERO_IMG:{d1:["mc-blocks"],d2:["couch"],d3:["boys-girls-club"],d4:["coach-and-mom"],d5:["laughing"],d6:["couch"],d7:["hands-in"],d8:["couch","laughing"],d9:["team-walk"],d10:["kid-couch"],d11:["jersey-back","green-team"],d12:["coach-and-mom"],d13:["kid-couch"],d14:["couch"],d15:["team-walk"],d16:["hands-in"],d17:["team-walk"],d18:["laughing"],d19:["southie-back","team-walk-hd"],d20:["southie-front","southie-back"],d21:["team-walk-hd","southie-front"]},
+ FAM:["Anybody:wdth,wght@50..150,900","Archivo:wght@400;600;700","Archivo+Black","Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800","Dela+Gothic+One","Graduate","Hanken+Grotesk:wght@500;800","Inter+Tight:wght@500;700;800","JetBrains+Mono:wght@500;700","Rubik:wght@500;900","Rubik+Mono+One","Sora:wght@400;800","Space+Grotesk:wght@500;700","Syne:wght@600;800","Unbounded:wght@400;800"],
+ FONT_BASE:["Inter Tight","JetBrains Mono"],
+ FONTS:{d1:["Space Grotesk"],d2:["Archivo","Archivo Black"],d3:["Unbounded"],d4:["Bricolage Grotesque"],d5:[],d6:["Syne"],d7:["Anybody"],d8:["Dela Gothic One"],d9:["Rubik Mono One"],d10:["Sora"],d11:["Rubik"],d12:["Hanken Grotesk"],d13:["Sora"],d14:["Syne"],d15:["Hanken Grotesk"],d16:["Bricolage Grotesque"],d17:["Space Grotesk"],d18:[],d19:["Rubik"],d20:["Rubik"],d21:["Rubik"]}
+};
+(function(){
+  var S=window.S1, CSS="https://fonts.googleapis.com/css2?family=", name=function(f){ return f.split(":")[0].replace(/\+/g," "); };
+  try{
+    var I=S.IMG, H=S.HERO_IMG, k;
+    for(k in H) H[k]=H[k].map(function(x){ return I[x]; });
+    // Same reading of ?ad= and ?hero= as the small script and the big script (d1 for a missing or unknown ad).
+    var q=new URLSearchParams(location.search), own=function(o,k){ return Object.prototype.hasOwnProperty.call(o,k); };
+    var qh=(q.get("hero")||"").trim().toLowerCase(), ad=(q.get("ad")||"").toLowerCase().replace(/^d0/,"d"), id=own(H,ad)?ad:"d1";
+    var hero=S.HERO_KEYS.indexOf(qh)>=0 ? qh : qh==="none" ? "" : own(S.AD_HERO,ad) ? S.AD_HERO[ad] : "";
+    // Phones: an interactive hero hides #hero and repeats only its first image as .ih-bg; the shortlist hero shows no image. Desktop shows #hero as on page A.
+    var imgs=H[id];
+    if(hero && innerWidth<960) imgs = hero==="shortlist" ? [] : imgs.slice(0,1);
+    imgs = imgs.slice(0,1);
+    var out=imgs.length ? '<link rel="preload" as="image" href="'+imgs[0]+'" fetchpriority="high">' : "";
+    var want=S.FONT_BASE.concat(S.FONTS[id]);
+    out+='<link id="s1-fonts" rel="stylesheet" href="'+CSS+S.FAM.filter(function(f){ return want.indexOf(name(f))>=0; }).join("&family=")+'&display=swap">';
+    var rest=S.FAM.filter(function(f){ return want.indexOf(name(f))<0; });
+    if(rest.length) out+='<link rel="stylesheet" href="'+CSS+rest.join("&family=")+'&display=swap" media="print" onload="this.media=\'all\'">';
+    document.write(out);
+  }catch(_){
+    try{ document.write('<link rel="stylesheet" href="'+CSS+S.FAM.join("&family=")+'&display=swap">'); }catch(_){}
+  }
+})();
+</script>
+<!-- Analytics: GA4, Meta Pixel (autoConfig off before init) and Clarity come from lib/season1/tags.ts (renderStaticTags), filled in by app/season1/route.ts. Live only when the browser's hostname is ekuzo.gg or www.ekuzo.gg; any other host loads nothing unless ?s1qa=1 (QA mode). The Lead fires from the form script below with an eventID shared with the server-side CAPI Lead in /api/season-one. -->
+<script>/* s1 QA gate: tags load only after ?s1qa=1 (test deploys) */(function(){if(/^(?:www\.)?ekuzo\.gg$/i.test(location.hostname)){var g=document.createElement('script');g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W";(document.head||document.documentElement).appendChild(g);(function(){var w=window,d=document;w.s1once=function(k){if(!/^[A-Za-z0-9_-]{1,80}$/.test(k))return false;var s=false;try{s=!!w.localStorage.getItem(k)}catch(e){}if(!s){try{s=(' '+d.cookie.replace(/;\s*/g,' ')+' ').indexOf(' '+k+'=1 ')>=0}catch(e){}}if(s)return false;try{w.localStorage.setItem(k,'1')}catch(e){}try{d.cookie=k+'=1; Path=/season1; Max-Age=31536000; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'')}catch(e){}return true};w.dataLayer=w.dataLayer||[];var push=function(){w.dataLayer.push(arguments)};w.gtag=push;gtag('js',new Date());var q;try{q=new URLSearchParams(location.search)}catch(e){q={get:function(){return null}}}var K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","gclid","fbclid","ad"],o=[],i,v;for(i=0;i<K.length;i++){v=q.get(K[i]);if(v!==null)o.push(encodeURIComponent(K[i])+'='+encodeURIComponent(v))}var qs=o.length?'?'+o.join('&'):'';var L=location.origin+location.pathname+location.search;var rf='';try{rf=d.referrer?new URL(d.referrer).origin:''}catch(e){}var S={page_location:L};if(rf)S.page_referrer=rf;gtag('set',S);var c={};gtag('config',"G-8LM45PX53W",c);!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(w,d,'script',"https://connect.facebook.net/en_US/fbevents.js");fbq('set','autoConfig',false,"1284038230557204");fbq('init',"1284038230557204");w.s1px=function(ev,p,id){try{fbq('track',ev,p||{},id?{eventID:id}:{})}catch(e){}};fbq('track','PageView');(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(w,d,'clarity','script',"wml8wll5ua");})();return}var qa=false;try{var m=/(?:^|&)s1qa=([01])(?:&|$)/.exec(location.search.slice(1)),sec=location.protocol==='https:'?'; Secure':'';if(m)document.cookie=m[1]==='1'?'s1_qa=1; Path=/; SameSite=Lax'+sec:'s1_qa=; Path=/; Max-Age=0; SameSite=Lax'+sec;qa=/(?:^|;\s*)s1_qa=1(?:;|$)/.test(document.cookie)}catch(e){}if(!qa)return;var g=document.createElement('script');g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W";(document.head||document.documentElement).appendChild(g);(function(){var w=window,d=document;w.s1once=function(k){if(!/^[A-Za-z0-9_-]{1,80}$/.test(k))return false;var s=false;try{s=!!w.localStorage.getItem(k)}catch(e){}if(!s){try{s=(' '+d.cookie.replace(/;\s*/g,' ')+' ').indexOf(' '+k+'=1 ')>=0}catch(e){}}if(s)return false;try{w.localStorage.setItem(k,'1')}catch(e){}try{d.cookie=k+'=1; Path=/season1; Max-Age=31536000; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'')}catch(e){}return true};w.dataLayer=w.dataLayer||[];var push=function(){w.dataLayer.push(arguments)};w.gtag=function(a,b,c){if(a==='event'){var x={},k;if(c)for(k in c)x[k]=c[k];x.debug_mode=true;return push(a,b,x)}return push.apply(null,arguments)};gtag('js',new Date());gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});var q;try{q=new URLSearchParams(location.search)}catch(e){q={get:function(){return null}}}var K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","gclid","fbclid","ad"],o=[],i,v;for(i=0;i<K.length;i++){v=q.get(K[i]);if(v!==null)o.push(encodeURIComponent(K[i])+'='+encodeURIComponent(v))}var qs=o.length?'?'+o.join('&'):'';var L=location.origin+location.pathname+location.search;var rf='';try{rf=d.referrer?new URL(d.referrer).origin:''}catch(e){}var S={page_location:L};if(rf)S.page_referrer=rf;gtag('set',S);var c={};c.allow_google_signals=false;c.allow_ad_personalization_signals=false;c.debug_mode=true;gtag('config',"G-8LM45PX53W",c);!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(w,d,'script',"https://connect.facebook.net/en_US/fbevents.js");fbq('set','autoConfig',false,"1284038230557204");fbq('init',"1284038230557204");w.s1px=function(ev,p,id){try{var x=id?{eventID:id}:{};if(ev==='Purchase'||ev==='InitiateCheckout')fbq('trackCustom','S1QA_'+ev,p||{},x);else fbq('track',ev,p||{},x)}catch(e){}};fbq('track','PageView');(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(w,d,'clarity','script',"wml8wll5ua");})();})();</script>
+</head><body>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap"></noscript>
+<style>
+/* Layout: a creative lab wall. Six directions, each a row: notes on the left, then the same idea as feed ad, story, landing hero and email header. One dark look on purpose so the work carries the colour. */
+:root{
+  --wall:#0C0B0E; --panel:#17151B; --line:#2B2830; --text:#F3F1F5; --muted:#A39EAB;
+  --ink:#111013; --red:#F92524; --lime:#E0FF4E; --blue:#034FFF; --violet:#8E22E0; --teal:#3791A6;
+  --yellow:#FDE74C; --slate:#1C3745; --cyan:#60E1E0; --magenta:#FF2ECC; --cream:#F8F4E2; --green:#49B41A;
+  --ui:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+body{background:var(--wall);color:var(--text);font:400 15px/1.5 var(--ui)}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:40px 90px;display:flex;flex-direction:column;gap:64px}
+.mark{width:92px;display:block;margin-bottom:18px;color:var(--text)}
+header h1{font:800 clamp(48px,8vw,104px)/.86 var(--ui);text-transform:uppercase;letter-spacing:-.02em;margin:0}
+.lede{max-width:64ch;color:var(--muted);margin:16px 0 0;text-wrap:pretty}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.jump a{font:700 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:10px 12px;border:1px solid var(--line);border-radius:999px}
+.jump a:hover,.jump a:focus-visible{border-color:var(--lime);outline:none}
+
+.dir{display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:32px;padding-top:30px;border-top:1px solid var(--line)}
+.notes{display:flex;flex-direction:column;gap:14px;min-width:0}
+.num{font:700 12px/1 var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.notes h2{margin:0;font:800 38px/.92 var(--ui);text-transform:uppercase;letter-spacing:-.01em;text-wrap:balance}
+.notes p{margin:0;color:var(--muted);text-wrap:pretty}
+.notes p b{color:var(--text);font-weight:700}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin:0}
+.spec dt{font:700 10px/1.8 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.spec dd{margin:0}
+.sw{display:flex;gap:6px}
+.sw i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
+.boards{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;min-width:0}
+.b{display:flex;flex-direction:column;gap:8px}
+.b > span{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.b.feed .art{width:340px}
+.b.story .art{width:214px}
+.b.hero .art{width:200px;border-radius:26px;box-shadow:0 0 0 7px #000,0 0 0 8px #333}
+.b.email .art{width:340px}
+.b.email{gap:8px}
+.inbox{width:340px;background:#fff;color:#1c1e21;border-radius:10px;overflow:hidden;font:400 12px/1.35 var(--ui)}
+.inbox .meta{padding:10px 12px;border-bottom:1px solid #eee}
+.inbox .meta b{display:block;font-size:13px}
+.inbox .meta small{color:#65676b}
+.inbox .body{padding:12px;color:#333}
+.inbox .art{width:100%}
+
+/* ---- Artboards ---- */
+.art{container-type:inline-size;position:relative;overflow:hidden;max-width:100%;background:var(--bg,#111)}
+.k-feed{aspect-ratio:4/5}.k-story{aspect-ratio:9/16}.k-hero{aspect-ratio:9/19}.k-email{aspect-ratio:2/1}
+.art .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none}
+.art .in{position:absolute;inset:0;display:flex;flex-direction:column}
+.art .logo{width:22cqw;display:block}
+.art .logo svg{width:100%;display:block;fill:currentColor}
+.art .nav{display:none}
+.k-hero .nav{display:flex;justify-content:space-between;align-items:center;padding:7cqw 7cqw 0;position:relative;z-index:2}
+.k-hero .nav .logo{width:24cqw}
+.k-hero .nav .menu{font:700 3.6cqw/1 var(--mono);letter-spacing:.1em;padding:2.6cqw 4cqw;border-radius:99px;background:#fff;color:#111}
+.k-hero .in > .top .logo{display:none}
+.cta{display:inline-flex;align-items:center;gap:2cqw;font:700 4.2cqw/1 var(--ui);padding:3.6cqw 5.4cqw;border-radius:99px;white-space:nowrap;align-self:flex-start}
+.k-email .cta{font-size:2.6cqw;padding:2.2cqw 3.4cqw}
+.k-story .in{padding-top:23cqw !important;padding-bottom:31cqw !important}
+.safe{display:none}
+
+/* D1 We've all said it: Space Grotesk, ink + red + lime, full-bleed photo */
+.d1{--bg:var(--ink);color:#fff}
+.d1 .ph{filter:saturate(1.1) contrast(1.05)}
+.d1::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.25) 0%,rgba(17,16,19,.15) 30%,rgba(17,16,19,.92) 72%)}
+.d1 .in{z-index:1;padding:7cqw;justify-content:flex-end;gap:4cqw}
+.d1 .top{position:absolute;top:7cqw;left:7cqw;right:7cqw;display:flex;justify-content:space-between;align-items:center}
+.k-story.d1 .top{top:23cqw}
+.d1 .tag{font:700 3.6cqw/1 "Space Grotesk",var(--ui);text-transform:uppercase;letter-spacing:.04em;background:var(--red);padding:2cqw 3cqw}
+.d1 h3{margin:0;font:700 14.5cqw/.86 "Space Grotesk",var(--ui);text-transform:uppercase;letter-spacing:-.035em}
+.d1 h3 s{text-decoration:none;color:#BDB8C2;background:linear-gradient(var(--red),var(--red)) no-repeat 0 52%/100% 1.6cqw}
+.d1 h3 em{font-style:normal;color:var(--lime);display:block}
+.d1 .sub{font:500 4.4cqw/1.3 "Space Grotesk",var(--ui);margin:0;max-width:80%}
+.d1 .cta{background:#fff;color:var(--ink);font-family:"Space Grotesk",var(--ui)}
+.k-email.d1 h3{font-size:8.4cqw}.k-email.d1 .in{padding:5cqw;gap:2cqw}.k-email.d1 .sub{font-size:2.8cqw}.k-email.d1 .tag{font-size:2.4cqw}
+.k-email.d1::after{background:linear-gradient(90deg,rgba(17,16,19,.95) 0%,rgba(17,16,19,.7) 50%,rgba(17,16,19,.1) 100%)}
+.k-email.d1 .top{top:5cqw;left:5cqw}.k-email.d1 .logo{width:13cqw}
+
+/* D2 Overheard: Archivo Black, yellow + ink + red, photo multiplied into yellow */
+.d2{--bg:var(--yellow);color:var(--ink)}
+
+/* D3 Zero coaches: Unbounded wide, slate + cyan, photo tinted */
+.d3{--bg:var(--slate);color:#fff}
+.d3 .ph{filter:grayscale(1) contrast(1.2) brightness(.9);mix-blend-mode:luminosity;opacity:.55}
+.d3::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,55,69,0) 35%,rgba(28,55,69,.95) 80%)}
+.d3 .in{z-index:1;padding:7cqw;justify-content:space-between}
+.d3 .top{display:flex;justify-content:space-between;align-items:center}
+.d3 .count{font:400 3.2cqw/1 "Unbounded",var(--ui);letter-spacing:.06em;color:var(--cyan);text-transform:uppercase}
+.d3 h3{margin:0;font:800 10.4cqw/.98 "Unbounded",var(--ui);text-transform:uppercase;letter-spacing:-.02em}
+.d3 h3 em{font-style:normal;color:var(--cyan);display:block}
+.d3 .sub{margin:3cqw 0 4cqw;font:400 3.9cqw/1.35 "Unbounded",var(--ui);max-width:86%}
+.d3 .cta{background:var(--cyan);color:var(--slate);font-family:"Unbounded",var(--ui);font-weight:800;font-size:3.4cqw}
+.k-email.d3 h3{font-size:6cqw}.k-email.d3 .sub{font-size:2.4cqw;margin:1.5cqw 0 2.4cqw}.k-email.d3 .in{padding:5cqw}.k-email.d3 .count{font-size:2cqw}.k-email.d3 .logo{width:12cqw}
+.k-email.d3::after{background:linear-gradient(90deg,rgba(28,55,69,.96) 30%,rgba(28,55,69,.3))}
+
+/* D4 Team card: Bricolage Grotesque, violet + lime, photo top half */
+.d4{--bg:var(--violet);color:#fff}
+.d4 .ph{height:54%;bottom:auto;object-position:50% 30%}
+.d4 .in{padding:0}
+.d4 .photo-tag{position:absolute;top:6cqw;left:6cqw;display:flex;gap:2cqw;align-items:center}
+.d4 .photo-tag .logo{width:20cqw;background:var(--violet);padding:2.2cqw 3cqw;box-sizing:content-box}
+.d4 .panel{margin-top:auto;height:46%;box-sizing:border-box;padding:5.5cqw 7cqw 6cqw;display:flex;flex-direction:column;gap:2.6cqw;position:relative}
+.d4 .roster{font:700 3.2cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#E6D2FB}
+.d4 h3{margin:0;font:800 11.6cqw/.88 "Bricolage Grotesque",var(--ui);text-transform:uppercase;letter-spacing:-.025em;font-variation-settings:"opsz" 96}
+.d4 .sticker{position:absolute;right:5cqw;top:-8cqw;transform:rotate(-6deg);background:var(--lime);color:var(--ink);font:800 4cqw/1.05 "Bricolage Grotesque",var(--ui);padding:3cqw 4cqw;max-width:40cqw;text-align:center;border-radius:2cqw}
+.d4 .cta{background:var(--lime);color:var(--ink);font-family:"Bricolage Grotesque",var(--ui);margin-top:auto}
+.k-story.d4 .ph{height:58%}.k-story.d4 .panel{height:42%;padding-bottom:31cqw}.k-story.d4 .in{padding:0 !important}
+.k-story.d4 .photo-tag{top:23cqw}
+.k-hero.d4 .ph{top:17cqw;height:46%}.k-hero.d4 .panel{height:auto;flex:1;margin-top:calc(46% + 2cqw)}
+.k-email.d4 .ph{width:46%;height:100%;right:auto}.k-email.d4 .in{flex-direction:row}.k-email.d4 .panel{height:100%;width:54%;margin:0 0 0 auto;padding:4cqw;gap:1.6cqw}
+.k-email.d4 h3{font-size:6.2cqw}.k-email.d4 .roster{font-size:1.8cqw}.k-email.d4 .sticker{display:none}.k-email.d4 .photo-tag .logo{width:10cqw;padding:1.4cqw 2cqw}.k-email.d4 .photo-tag{top:3cqw;left:3cqw}
+
+/* D5 Ask them: Instrument Serif italic + Inter Tight caps, cream + teal, inset photo */
+
+/* D6 The coach ends it: Syne, magenta + ink + blue, duotone photo */
+.d6{--bg:var(--magenta);color:var(--ink)}
+.d6 .ph{filter:grayscale(1) contrast(1.25);mix-blend-mode:multiply;opacity:.9}
+.d6 .in{z-index:1;padding:7cqw;justify-content:space-between}
+.d6 .top{display:flex;justify-content:space-between;align-items:center}
+.d6 .stamp{font:800 3.4cqw/1 "Syne",var(--ui);text-transform:uppercase;background:var(--blue);color:#fff;padding:2.2cqw 3cqw;transform:rotate(3deg)}
+.d6 h3{margin:0;font:800 15cqw/.84 "Syne",var(--ui);text-transform:uppercase;letter-spacing:-.04em;color:#fff;text-shadow:0 .4cqw 0 rgba(17,16,19,.25)}
+.d6 .sub{margin:3cqw 0 4cqw;font:600 4.4cqw/1.25 "Syne",var(--ui);color:#fff;max-width:85%;text-wrap:balance}
+.d6 .cta{background:var(--ink);color:var(--magenta);font-family:"Syne",var(--ui)}
+.k-email.d6 h3{font-size:8.4cqw}.k-email.d6 .sub{font-size:2.6cqw;margin:1.4cqw 0 2.4cqw}.k-email.d6 .in{padding:5cqw}.k-email.d6 .stamp{font-size:2.2cqw}.k-email.d6 .logo{width:12cqw}
+
+.k-hero .in{padding-top:0 !important}
+.k-hero.d1 .top,.k-hero.d3 .top,.k-hero.d6 .top,.k-hero.d5 .top,.k-hero.d2 .top{display:none}
+.k-hero.d4 .photo-tag{display:none}
+.k-hero.d1::after{background:linear-gradient(180deg,rgba(17,16,19,.55) 0%,rgba(17,16,19,.1) 25%,rgba(17,16,19,.94) 66%)}
+.k-hero.d3 .in,.k-hero.d6 .in{justify-content:flex-end}
+
+
+/* fixes: hero content clears the nav; email layouts simplified */
+.k-hero .in{top:17cqw}
+.k-hero.d4 .ph{top:17cqw;height:44%}
+.k-hero.d4 .panel{margin-top:auto;height:56%;flex:none}
+.k-hero.d4 .in{top:17cqw}
+.k-email .tag,.k-email .stamp,.k-email .count,.k-email .sticker{display:none}
+.k-email.d1 .in{justify-content:center;padding-top:9cqw}
+.k-email.d1 h3{font-size:7cqw;max-width:66%}
+.k-email.d1 .sub{max-width:60%}
+.k-email.d6 .in{justify-content:space-between}
+.k-email.d6 h3{max-width:70%}
+.d1 h3 s{white-space:nowrap}
+.d6 h3{font-size:12cqw;letter-spacing:-.03em}
+.d6 .logo{color:#fff}
+.d6 .stamp{white-space:nowrap;font-size:3cqw}
+.k-story.d6 .stamp{font-size:2.6cqw}
+.k-email.d6 h3{font-size:6.2cqw}
+.k-hero.d4 .ph{height:52%}
+.k-hero.d4 .panel{height:48%}
+.k-hero.d4 .cta{margin-top:3cqw}
+.boards{display:grid;grid-template-columns:340px 340px 214px;gap:22px;align-items:start}
+.b.email{grid-column:1 / -1}
+@media (max-width:1100px){.boards{display:flex}}
+
+/* ===== Round 2 ===== */
+.round{display:flex;flex-direction:column;gap:10px;padding-top:10px}
+.round h2{margin:0;font:800 clamp(40px,6vw,72px)/.9 var(--ui);text-transform:uppercase;letter-spacing:-.02em}
+.round p{margin:0;color:var(--muted);max-width:62ch;text-wrap:pretty}
+
+/* D7 Report card: Anybody expanded black, bone + green + red marker */
+.d7{--bg:#EFEEED;color:var(--ink)}
+.d7 .in{padding:6cqw;gap:3cqw}
+.d7 .top{display:flex;justify-content:space-between;align-items:center}
+.d7 .top small{font:700 2.8cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#5d5a62}
+.d7 .pol{position:absolute;right:6cqw;top:15cqw;width:38cqw;aspect-ratio:1;background:#fff;padding:2cqw 2cqw 7cqw;transform:rotate(4deg);box-shadow:0 1.5cqw 4cqw rgba(0,0,0,.18);z-index:2}
+.d7 .pol img{width:100%;height:100%;object-fit:cover;display:block}
+.d7 .pol::before{content:"";position:absolute;top:-3cqw;left:30%;width:16cqw;height:6cqw;background:rgba(224,255,78,.75);transform:rotate(-5deg)}
+.d7 h3{margin:0;font:900 12.2cqw/.86 "Anybody","Anybody Variable",var(--ui);font-stretch:130%;font-variation-settings:"wdth" 130;text-transform:uppercase;letter-spacing:-.02em;max-width:56%}
+.d7 h3 em{font-style:normal;color:var(--green);display:block}
+.d7 .grades{margin-top:auto;display:flex;flex-direction:column;border-top:.6cqw solid var(--ink)}
+.d7 .grades div{display:flex;justify-content:space-between;align-items:center;padding:2.2cqw 0;border-bottom:.3cqw dashed #9b97a0;font:700 4cqw/1 var(--ui);text-transform:uppercase;letter-spacing:.02em}
+.d7 .grades b{font:900 6cqw/1 "Anybody","Anybody Variable",var(--ui);font-stretch:130%;font-variation-settings:"wdth" 130;color:var(--green);position:relative;padding:0 2cqw}
+.d7 .grades b.circ::after{content:"";position:absolute;inset:-2cqw -1cqw;border:.7cqw solid var(--red);border-radius:50%;transform:rotate(-8deg)}
+.d7 .cta{background:var(--ink);color:#fff;margin-top:1cqw}
+.d7 .bot{display:flex;justify-content:space-between;align-items:center;gap:3cqw}
+.d7 .bot p{margin:0;font:500 3.4cqw/1.3 var(--ui);max-width:48%}
+.k-story.d7 .pol{top:30cqw}
+.k-hero.d7 .pol{top:6cqw}
+.k-email.d7 .in{flex-direction:row;flex-wrap:wrap;padding:4cqw;gap:2cqw 4cqw;align-content:center}
+.k-email.d7 .top{display:none}.k-email.d7 .pol{display:none}
+.k-email.d7 h3{font-size:6.6cqw;max-width:46%}
+.k-email.d7 .grades{margin:0;flex:1}.k-email.d7 .grades div{font-size:2.2cqw;padding:1.3cqw 0}.k-email.d7 .grades b{font-size:3.4cqw}
+.k-email.d7 .bot{flex-basis:100%}.k-email.d7 .bot p{font-size:2.2cqw}
+
+/* D8 Same game, new team: Dela Gothic One, blue over red split */
+.d8{--bg:var(--blue);color:#fff}
+.d8 .half{position:absolute;left:0;right:0;height:50%;overflow:hidden}
+.d8 .half img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply}
+.d8 .h1{top:0;background:var(--blue)}.d8 .h2{bottom:0;background:var(--red)}
+.d8 .h2 img{filter:grayscale(1) contrast(1.15) brightness(1.05)}
+.d8 .in{z-index:1;padding:0}
+.d8 .row{height:50%;box-sizing:border-box;padding:6cqw 7cqw;display:flex;flex-direction:column;justify-content:flex-end;gap:2cqw}
+.d8 .row + .row{justify-content:flex-start}
+.d8 h3{margin:0;font:400 13cqw/.9 "Dela Gothic One",var(--ui);text-transform:uppercase;letter-spacing:-.01em}
+.d8 .lbl{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:#fff;color:var(--ink);padding:1.6cqw 2.4cqw;align-self:flex-start}
+.d8 .row:first-child .lbl{order:-1}
+.d8 .top{position:absolute;top:6cqw;left:7cqw;right:7cqw;display:flex;justify-content:space-between}
+.d8 .bottom{position:absolute;left:7cqw;right:7cqw;bottom:6cqw;display:flex;justify-content:space-between;align-items:center;gap:3cqw}
+.d8 .bottom p{margin:0;font:600 3.6cqw/1.25 var(--ui);max-width:46%}
+.d8 .cta{background:#fff;color:var(--ink);align-self:auto}
+.d8 .row:first-child{padding-top:16cqw}
+.k-story.d8 .row,.k-story.d8 .in{padding-top:0 !important;padding-bottom:0 !important}
+.k-story.d8 .top{top:23cqw}.k-story.d8 .bottom{bottom:31cqw}
+.k-story.d8 .row:first-child{padding-top:34cqw}
+.k-hero.d8 .top{display:none}
+.k-email.d8 .half{height:100%;width:50%;top:0;bottom:0}.k-email.d8 .h1{left:0;right:auto}.k-email.d8 .h2{left:auto;right:0}
+.k-email.d8 .in{flex-direction:row}.k-email.d8 .row{height:100%;width:50%;padding:4cqw;justify-content:center !important}
+.k-email.d8 h3{font-size:6.4cqw}.k-email.d8 .lbl{font-size:1.8cqw}.k-email.d8 .top{top:3.5cqw;left:4cqw}.k-email.d8 .logo{width:11cqw}
+.k-email.d8 .bottom{bottom:3.5cqw;left:54cqw;right:4cqw}.k-email.d8 .bottom p{display:none}.k-email.d8 .cta{font-size:2.4cqw;padding:1.8cqw 3cqw}
+.k-email.d8 .row:first-child{padding-top:4cqw}
+
+/* D9 Parent-free ticket: Rubik Mono One, green + cream ticket */
+.d9{--bg:var(--green);color:var(--ink)}
+.d9 .ph{filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply;opacity:.55}
+.d9 .in{z-index:1;padding:7cqw;justify-content:space-between}
+.d9 .top{display:flex;justify-content:space-between;align-items:center}
+.d9 .top small{font:400 2.8cqw/1 "Rubik Mono One",var(--ui);color:var(--ink)}
+.d9 .tix{background:var(--cream);border-radius:3cqw;position:relative;display:flex;flex-direction:column;box-shadow:0 2cqw 5cqw rgba(0,0,0,.25)}
+.d9 .tix::before,.d9 .tix::after{content:"";position:absolute;width:7cqw;height:7cqw;border-radius:50%;background:var(--green);top:calc(var(--cut) - 3.5cqw)}
+.d9 .tix{--cut:62%}
+.d9 .tix::before{left:-3.5cqw}.d9 .tix::after{right:-3.5cqw}
+.d9 .main{padding:6cqw 6cqw 5cqw;height:var(--cut);box-sizing:border-box;border-bottom:.6cqw dashed #b9b4a2;display:flex;flex-direction:column;gap:2.4cqw}
+.d9 .adm{font:700 2.8cqw/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#6d6a5e}
+.d9 h3{margin:0;font:400 7.8cqw/1.02 "Rubik Mono One",var(--ui);text-transform:uppercase;letter-spacing:-.03em}
+.d9 h3 em{font-style:normal;color:var(--green)}
+.d9 .stub{display:grid;grid-template-columns:repeat(3,1fr);padding:4cqw 6cqw 5cqw;gap:2cqw}
+.d9 .stub div{display:flex;flex-direction:column;gap:1.2cqw}
+.d9 .stub small{font:700 2.4cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#6d6a5e}
+.d9 .stub b{font:400 4cqw/1 "Rubik Mono One",var(--ui)}
+.d9 .cta{background:var(--ink);color:var(--cream)}
+.d9 .tix{--cut:60%}
+.k-story.d9 .in{justify-content:center;gap:6cqw}
+.k-hero.d9 .in{justify-content:flex-end;gap:5cqw;padding-bottom:9cqw}
+.k-email.d9 .in{flex-direction:row;align-items:center;padding:4cqw;gap:4cqw}.k-email.d9 .top{display:none}
+.k-email.d9 .tix{flex:1;flex-direction:row;--cut:68%}.k-email.d9 .tix::before,.k-email.d9 .tix::after{display:none}
+.k-email.d9 .main{height:auto;width:68%;border-bottom:0;border-right:.4cqw dashed #b9b4a2;padding:3.4cqw}
+.k-email.d9 h3{font-size:4.4cqw}.k-email.d9 .adm{font-size:1.7cqw}
+.k-email.d9 .stub{grid-template-columns:1fr;padding:3cqw;gap:1.4cqw}.k-email.d9 .stub small{font-size:1.5cqw}.k-email.d9 .stub b{font-size:2.4cqw}
+.k-email.d9 .cta{position:absolute;right:4cqw;bottom:3cqw;display:none}
+
+/* D10 Proud: Sora, blue + lime, outline word wall */
+.d10{--bg:var(--blue);color:#fff}
+.d10 .ph{filter:grayscale(1) contrast(1.15);mix-blend-mode:luminosity;opacity:.6;object-position:50% 25%}
+.d10::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,79,255,0) 40%,rgba(3,40,140,.9) 85%)}
+.d10 .wall{position:absolute;inset:-4cqw -10cqw auto;display:flex;flex-direction:column;z-index:1;pointer-events:none}
+.d10 .wall span{font:800 26cqw/.82 "Sora",var(--ui);text-transform:uppercase;color:transparent;-webkit-text-stroke:.35cqw rgba(224,255,78,.55);white-space:nowrap;letter-spacing:-.04em}
+.d10 .wall span:nth-child(2){margin-left:-30cqw}.d10 .wall span:nth-child(3){color:var(--lime);-webkit-text-stroke:0;margin-left:-8cqw}
+.d10 .in{z-index:2;padding:7cqw;justify-content:flex-end;gap:3.4cqw}
+.d10 .top{position:absolute;top:7cqw;left:7cqw}
+.d10 h3{margin:0;font:800 9.6cqw/.95 "Sora",var(--ui);text-transform:uppercase;letter-spacing:-.04em}
+.d10 h3 em{font-style:normal;color:var(--lime)}
+.d10 .sub{margin:0;font:400 4cqw/1.35 "Sora",var(--ui);max-width:88%}
+.d10 .cta{background:var(--lime);color:var(--ink);font-family:"Sora",var(--ui)}
+.k-story.d10 .wall{top:20cqw}.k-story.d10 .top{top:23cqw}
+.k-hero.d10 .top{display:none}.k-hero.d10 .wall{top:8cqw}
+.k-email.d10 .wall{inset:auto -6cqw auto auto;top:-4cqw;align-items:flex-end}.k-email.d10 .wall span{font-size:16cqw}
+.k-email.d10::after{background:linear-gradient(90deg,rgba(3,40,140,.95) 30%,rgba(3,79,255,.1))}
+.k-email.d10 .in{padding:5cqw;justify-content:center;gap:2cqw}.k-email.d10 h3{font-size:5.8cqw;max-width:60%}.k-email.d10 .sub{font-size:2.4cqw;max-width:55%}.k-email.d10 .top{display:none}
+
+/* D11 HUD: Chakra Petch, ink + cyan + red, game overlay */
+
+/* D12 Can't, practice: Hanken Grotesk, teal + cream, text thread */
+.d12{--bg:var(--teal);color:#fff}
+.d12 .ph{filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply;opacity:.5}
+.d12 .in{z-index:1;padding:7cqw;gap:2.6cqw}
+.d12 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2cqw}
+.d12 .thread{display:flex;flex-direction:column;gap:1.8cqw;font:500 4cqw/1.25 -apple-system,"Hanken Grotesk",var(--ui)}
+.d12 .thread small{align-self:center;font:600 2.6cqw/1 var(--ui);color:rgba(255,255,255,.75);margin-bottom:1cqw}
+.d12 .me,.d12 .them{max-width:70%;padding:2.4cqw 3.6cqw;border-radius:5cqw}
+.d12 .me{align-self:flex-end;background:#0A84FF;color:#fff;border-bottom-right-radius:1.4cqw}
+.d12 .them{align-self:flex-start;background:var(--cream);color:var(--ink);border-bottom-left-radius:1.4cqw}
+.d12 .them.big{font-weight:800}
+.d12 .foot{margin-top:auto;display:flex;flex-direction:column;gap:3cqw}
+.d12 h3{margin:0;font:800 12cqw/.88 "Hanken Grotesk",var(--ui);text-transform:uppercase;letter-spacing:-.035em}
+.d12 h3 em{font-style:normal;color:var(--yellow)}
+.d12 .cta{background:var(--yellow);color:var(--ink);font-family:"Hanken Grotesk",var(--ui)}
+.k-hero.d12 .top{display:none}
+.k-email.d12 .in{flex-direction:row;padding:4.5cqw;gap:4cqw;align-items:center}.k-email.d12 .top{display:none}
+.k-email.d12 .thread{flex:0 0 44%;font-size:2.3cqw;gap:1.2cqw;order:2}.k-email.d12 .thread small{font-size:1.6cqw}
+.k-email.d12 .foot{margin:0;flex:1;gap:2cqw}.k-email.d12 h3{font-size:7cqw}.k-email.d12 .cta{font-size:2.4cqw;padding:2cqw 3.2cqw}
+
+/* r2 fixes */
+.d7 h3{font-size:10cqw;font-stretch:115%;font-variation-settings:"wdth" 115;max-width:58%}
+.d7 .pol{width:30cqw;top:14cqw}
+.k-story.d7 .pol{width:44cqw;top:62cqw;right:auto;left:8cqw;transform:rotate(-3deg)}
+.k-hero.d7 .pol{width:50cqw;top:44cqw;right:auto;left:10cqw;transform:rotate(-3deg)}
+.k-hero.d7 .in{padding-top:2cqw}
+.d9 .tix::before,.d9 .tix::after{display:none}
+.d9 .main{height:auto;position:relative}
+.d9 .main::before,.d9 .main::after{content:"";position:absolute;width:7cqw;height:7cqw;border-radius:50%;background:var(--green);bottom:-3.8cqw}
+.d9 .main::before{left:-3.5cqw}.d9 .main::after{right:-3.5cqw}
+.k-email.d9 .main::before,.k-email.d9 .main::after{display:none}
+
+.d10 .wall{left:-3cqw;right:auto}
+.d10 .wall span:nth-child(2){margin-left:-46cqw}.d10 .wall span:nth-child(3){margin-left:0}
+.k-hero.d10 .wall{top:20cqw}
+.d12 h3{font-size:10.6cqw}
+
+.k-story.d7 .pol{width:28cqw;top:58cqw;left:12cqw}
+.k-hero.d7 .pol{width:46cqw;top:58cqw;left:14cqw}
+
+.k-hero.d9 .top{display:none}
+
+/* D2 v2: Overheard, white heavy quote over full-colour photo, yellow bar */
+.d2{--bg:var(--ink);color:#fff}
+.d2 .ph{object-position:38% 30%}
+.d2::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,14,.55) 0%,rgba(10,10,14,0) 22%,rgba(10,10,14,0) 38%,rgba(10,10,14,.9) 66%)}
+.d2 .in{z-index:1;padding:7cqw;gap:3cqw;justify-content:flex-end}
+.d2 .top{position:absolute;top:7cqw;left:7cqw;right:7cqw;display:flex}
+.k-story.d2 .top{top:23cqw}
+.d2 .who{font:700 3.4cqw/1.2 "Archivo",var(--ui);text-transform:uppercase;letter-spacing:.08em;margin:0;color:var(--yellow)}
+.d2 .q{font:400 15cqw/.86 "Archivo Black",var(--ui);text-transform:uppercase;letter-spacing:-.02em;margin:0;color:#fff;text-shadow:0 .6cqw 3cqw rgba(0,0,0,.45)}
+.d2 .bar{background:var(--yellow);color:var(--ink);padding:4.4cqw 5cqw;display:flex;align-items:center;justify-content:space-between;gap:3cqw;margin-top:1cqw}
+.d2 .bar p{margin:0;font:700 4.8cqw/1.1 "Archivo",var(--ui);text-wrap:balance}
+.d2 .cta{background:var(--ink);color:var(--yellow);font-family:"Archivo",var(--ui);font-size:3.6cqw;padding:3.2cqw 4.4cqw;flex:none;align-self:center}
+.k-story.d2 .bar{flex-direction:column;align-items:flex-start}
+.k-hero.d2 .bar{flex-direction:column;align-items:flex-start}
+.k-email.d2::after{background:linear-gradient(90deg,rgba(10,10,14,.92) 0%,rgba(10,10,14,.6) 45%,rgba(10,10,14,0) 75%)}
+.k-email.d2 .in{padding:4.5cqw;justify-content:center;gap:1.6cqw;align-items:flex-start}
+.k-email.d2 .top{top:4.5cqw;left:4.5cqw}.k-email.d2 .logo{width:11cqw}
+.k-email.d2 .q{font-size:7cqw;max-width:60%}.k-email.d2 .who{font-size:1.9cqw}
+.k-email.d2 .bar{padding:2cqw 2.6cqw;gap:2cqw}.k-email.d2 .bar p{font-size:2.5cqw}.k-email.d2 .cta{font-size:2.2cqw;padding:1.8cqw 2.8cqw}
+.d2 .left{display:contents}
+
+/* D1 strike on top of the words */
+.d1 h3 s{background:none;position:relative}
+.d1 h3 s::after{content:"";position:absolute;left:-1%;right:-1%;top:50%;height:1.8cqw;margin-top:-.9cqw;background:var(--red)}
+.k-email.d1 h3 s::after{height:1cqw;margin-top:-.5cqw}
+
+/* D3 v2 girl gamers */
+.d3 .ph{object-position:50% 25%}
+
+/* D4 crop the two kids on the left */
+.d4 .ph{width:165%;left:auto;right:0;object-position:100% 30%}
+.k-email.d4 .ph{width:46%;left:0;right:auto;object-position:100% 30%}
+.k-hero.d4 .panel{padding-top:7cqw}
+
+/* ===== Round of edits, Oct 8 pm ===== */
+/* D5 v2: red, handwritten answer */
+/* D6: neon button, couch photo */
+.d6 .cta{background:var(--lime);color:var(--ink)}
+.d6 .ph{object-position:30% 30%}
+/* D7: bigger polaroid */
+.d7 .pol{width:36cqw;top:12cqw;right:5cqw}
+.d7 h3{max-width:54%}
+/* D8 v2 */
+.d8 h3{font-size:10.4cqw}
+.d8 .h1 img{object-position:35% 30%}
+.k-email.d8 h3{font-size:5cqw}
+/* D11 v2 */
+/* D12 */
+.d12 .thread{font-size:3.8cqw}
+
+.d8 h3{font-size:9cqw}
+.k-story.d8 .row:first-child{padding-top:28cqw}
+.k-email.d8 h3{font-size:4.6cqw}
+
+.k-story.d8 .row:first-child{padding-bottom:5cqw !important}
+.k-story.d8 .row + .row{padding-top:5cqw !important}
+
+/* ===== Oct 8, round of edits 3 ===== */
+/* D5 v3: the team sport they'll actually show up for. Ink + lime, inset photo */
+.d5{--bg:var(--ink);color:#fff}
+.d5 .in{padding:6cqw;gap:3.6cqw}
+.d5 .top{display:flex;justify-content:space-between;align-items:center}
+.d5 .top small{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+.d5 .frame{position:relative;flex:1;min-height:0;border-radius:3cqw;overflow:hidden}
+.d5 .frame .ph{position:absolute}
+.d5 h3{margin:0;font:800 9.4cqw/.92 var(--ui);text-transform:uppercase;letter-spacing:-.03em;text-wrap:balance}
+.d5 h3 em{font-style:normal;color:var(--lime)}
+.d5 .row{display:flex;justify-content:space-between;align-items:center;gap:3cqw}
+.d5 .sub{margin:0;font:500 3.6cqw/1.3 var(--ui);color:#cfcbd4;max-width:52%}
+.d5 .cta{background:var(--lime);color:var(--ink)}
+.d5:not(.k-email) .col{display:contents}
+.k-hero.d5 .top{display:none}
+.k-email.d5 .in{flex-direction:row;padding:4cqw;gap:4cqw}.k-email.d5 .frame{flex:0 0 40%}.k-email.d5 .top{display:none}
+.k-email.d5 .col{display:flex;flex-direction:column;gap:2cqw;justify-content:center;flex:1}
+.k-email.d5 h3{font-size:5.2cqw}.k-email.d5 .sub{font-size:2.3cqw;max-width:none}.k-email.d5 .row{flex-direction:column;align-items:flex-start;gap:2cqw}
+
+/* D11 v3: their gamer tag on a real jersey. Red + blue jersey + lime */
+.d11{--bg:var(--red);color:#fff}
+.d11 .in{padding:7cqw;justify-content:space-between;gap:3cqw}
+.d11 .top{display:flex;justify-content:space-between;align-items:center}
+.d11 .top small{font:700 3cqw/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.d11 .jersey{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.d11 .jersey svg{height:100%;max-width:70%;transform:rotate(-5deg);filter:drop-shadow(0 2.4cqw 3cqw rgba(0,0,0,.3));overflow:visible}
+.d11 h3{margin:0;font:900 10cqw/.9 "Rubik",var(--ui);text-transform:uppercase;letter-spacing:-.02em}
+.d11 h3 em{font-style:normal;color:var(--lime);display:block}
+.d11 .sub{margin:2.4cqw 0 4cqw;font:500 3.8cqw/1.3 "Rubik",var(--ui);max-width:90%}
+.d11 .cta{background:#fff;color:var(--ink);font-family:"Rubik",var(--ui)}
+.k-hero.d11 .top{display:none}
+.k-email.d11 .in{flex-direction:row;padding:4cqw;align-items:center}.k-email.d11 .top{display:none}
+.k-email.d11 .jersey{flex:0 0 38%;height:100%}.k-email.d11 .jersey svg{max-width:90%}
+.k-email.d11 h3{font-size:5.6cqw}.k-email.d11 .sub{font-size:2.3cqw;margin:1.4cqw 0 2.4cqw}.k-email.d11 .cta{font-size:2.6cqw;padding:2cqw 3.2cqw}
+
+/* D3 v3 */
+.d3 .ph{object-position:50% 40%}
+
+/* D12: all bubbles match, headline in two set lines */
+.d12 .them.big{font-weight:500}
+.d12 h3{font-size:9.4cqw;line-height:.92}
+.d12 h3 span,.d12 h3 em{display:block;white-space:nowrap}
+.k-email.d12 h3{font-size:4.8cqw}
+.k-email.d12 .foot{flex:0 0 46%}
+.k-email.d12 .thread{flex:1}
+
+/* D8 alt lines */
+.alts{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px}
+.alts b{flex-basis:100%}
+.alts b{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.alts button{appearance:none;text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:600 13px/1.3 var(--ui);cursor:pointer}
+.alts button[aria-pressed="true"]{border-color:var(--lime);box-shadow:inset 3px 0 0 var(--lime)}
+.alts button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+
+.d10 .wall span{font-size:22cqw}
+.d10 .wall span:nth-child(2){margin-left:-40cqw}
+.k-email.d10 .wall span{font-size:13cqw}
+
+.d11 h3{font-size:8.4cqw}
+.k-email.d11 h3{font-size:4.8cqw}
+.k-email.d10 .sub{max-width:48%}
+
+/* D11 v4: real jersey + green team */
+.d11{--bg:var(--ink);color:#fff}
+.d11 .ph{height:48%;bottom:auto;object-position:42% 30%;filter:saturate(1.05)}
+.d11::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.45) 0%,rgba(17,16,19,0) 18%,rgba(17,16,19,0) 34%,var(--ink) 48%)}
+.d11 .jb{position:absolute;right:-6cqw;top:30%;width:56cqw;z-index:2;transform:rotate(6deg);filter:drop-shadow(0 2cqw 4cqw rgba(0,0,0,.5))}
+.d11 .in{z-index:3;justify-content:space-between}
+.d11 .jersey{display:none}
+.d11 .copy{max-width:58%}
+.d11 h3{font-size:8.6cqw}
+.d11 h3 em{color:var(--green)}
+.d11 .cta{background:var(--lime);color:var(--ink)}
+.d11 .top small{color:var(--lime)}
+.k-story.d11 .jb{top:34%;width:60cqw}
+.k-story.d11 .ph{height:44%}
+.k-hero.d11 .ph{top:17cqw;height:40%}.k-hero.d11 .jb{top:38%;width:58cqw}
+.k-email.d11 .ph{height:100%;width:46%;left:auto;right:0}
+.k-email.d11::after{background:linear-gradient(90deg,var(--ink) 50%,rgba(17,16,19,.2) 75%)}
+.k-email.d11 .jb{top:6%;right:28%;width:22cqw}
+.k-email.d11 .in{flex-direction:column;align-items:flex-start;justify-content:center}
+.k-email.d11 .copy{max-width:48%}
+.k-email.d11 h3{font-size:4.6cqw}
+
+.d11 .copy{margin-top:auto}
+.d11 .jb{top:26%}
+.k-story.d11 .jb{top:30%}
+.k-hero.d11 .jb{top:30%;width:54cqw}
+.k-email.d11 .copy{margin-top:0}
+.k-email.d11 .jb{right:4%;top:8%;width:24cqw}
+.k-email.d11 .ph{object-position:70% 30%}
+
+/* game backdrops, Oct 8 */
+.d1 .ph{object-position:50% 18%}
+.d1::after{background:linear-gradient(180deg,rgba(17,16,19,.35) 0%,rgba(17,16,19,0) 22%,rgba(17,16,19,.25) 45%,rgba(17,16,19,.95) 70%)}
+.k-email.d1 .ph{object-position:50% 25%}
+.d10 .ph{filter:saturate(1.05);mix-blend-mode:normal;opacity:1;object-position:50% 20%}
+.d10::after{background:linear-gradient(180deg,rgba(3,79,255,.35) 0%,rgba(3,79,255,.05) 28%,rgba(3,60,200,.55) 50%,rgba(3,40,140,.96) 76%)}
+.d10 .wall span{-webkit-text-stroke-color:rgba(224,255,78,.7)}
+.k-email.d10 .ph{object-position:50% 30%}
+
+.d1::after{background:linear-gradient(180deg,rgba(17,16,19,.35) 0%,rgba(17,16,19,.05) 18%,rgba(17,16,19,.6) 38%,rgba(17,16,19,.95) 62%)}
+.d1 h3,.d10 h3{text-shadow:0 .4cqw 2.4cqw rgba(0,0,0,.45)}
+.k-email.d1::after{background:linear-gradient(90deg,rgba(17,16,19,.95) 0%,rgba(17,16,19,.75) 50%,rgba(17,16,19,.1) 100%)}
+
+/* D10 kid photo, from Figma v3 */
+.d10.kid .wall{display:none}
+.d10.kid .ph{object-position:78% 30%}
+/* matches Figma 8:55: angled, clear top-right, deep blue bottom-left, washes behind the logo */
+.d10.kid::after{background:linear-gradient(244.1deg,rgba(3,79,255,0) 7%,rgba(3,79,255,.05) 35.8%,rgba(3,60,200,.55) 53.3%,rgba(3,40,140,.96) 70.8%,rgba(3,40,140,1) 109.9%)}
+.k-email.d10.kid::after{background:linear-gradient(90deg,rgba(3,40,140,.97) 0%,rgba(3,60,200,.85) 45%,rgba(3,79,255,0) 72%)}
+.k-email.d10.kid .ph{object-position:90% 25%}
+.d10.kid h3{font-size:10.4cqw}
+.k-email.d10.kid h3{font-size:5.4cqw}
+.k-email.d10.kid .sub{max-width:46%}
+
+/* From Aaron's Figma frames 21:7 (D01) and 22:7 (D02), Oct 9 */
+.d1 .sub{max-width:none}
+.k-email.d1 .sub{max-width:60%}
+.d2 .bar p{font-size:4.44cqw;text-wrap:wrap}
+.k-feed.d2 .bar{gap:0;padding-right:4cqw}
+.k-feed.d2 .ph{width:154.6cqw;height:auto;left:-10.4cqw;top:-4.8cqw;inset:auto;object-fit:fill}
+.k-feed.d2 .ph{position:absolute;left:-10.4cqw;top:-4.8cqw}
+
+/* ---- In the feed: the ad inside a Facebook / Instagram post, built live from the Meta copy ---- */
+.b.inmeta{width:340px;min-width:0}
+.b.inmeta > span,.b.story > span{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ptabs{display:inline-flex;gap:2px;background:#1B1920;border:1px solid var(--line);border-radius:99px;padding:2px}
+.ptabs button{appearance:none;border:0;background:none;color:var(--muted);font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:99px;cursor:pointer}
+.ptabs button[aria-pressed=true]{background:var(--text);color:var(--wall)}
+.post{background:#fff;color:#050505;border-radius:10px;overflow:hidden;font:400 13px/1.34 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.post .art{width:100%}
+.post .ph-h{display:flex;align-items:center;gap:8px;padding:10px 12px}
+.post .av{width:34px;height:34px;border-radius:50%;background:#111013;display:grid;place-items:center;flex:none;color:#fff}
+.post .av svg{width:24px;display:block;fill:currentColor}
+.post .pwho{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1}
+.post .pwho b{font-weight:600;font-size:13.5px}
+.post .pwho small{color:#65676B;font-size:11.5px}
+.post .dots{color:#65676B;font-weight:700;letter-spacing:1px}
+.post .pt{margin:0;padding:0 12px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.post .pt .more{color:#65676B;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+.post .pt.empty{color:#8a8d91;font-style:italic}
+.fbbar{display:flex;align-items:center;gap:10px;background:#F0F2F5;padding:10px 12px}
+.fbbar .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.fbbar small{color:#65676B;font-size:11px;text-transform:uppercase;letter-spacing:.02em}
+.fbbar b{font-size:14px;font-weight:600;line-height:1.25}
+.fbbar .t span{color:#65676B;font-size:12px}
+.fbbar .t .empty{color:#a0a3a8;font-style:italic;font-weight:400}
+.mbtn{flex:none;background:#E4E6EB;color:#050505;font-weight:600;font-size:13px;border-radius:6px;padding:8px 12px;white-space:nowrap}
+.fbact{display:flex;justify-content:space-around;border-top:1px solid #CED0D4;margin:0 12px;padding:6px 0 8px;color:#65676B;font-weight:600;font-size:12.5px}
+.igbar{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fff;border-bottom:1px solid #efefef;font-weight:600;font-size:13px;color:#0095F6}
+.igbar.tint{background:#0F2A6B;color:#fff}
+.igicons{display:flex;gap:14px;padding:9px 12px 4px}
+.igicons svg{width:22px;height:22px;fill:none;stroke:#050505;stroke-width:1.8}
+.igicons .sp{flex:1}
+.post.ig .pt{padding-top:2px}
+.post.ig .pt b{font-weight:600}
+/* Story with Instagram UI on top (not part of the export) */
+.stwrap{position:relative;width:214px}
+.igs{position:absolute;inset:0;pointer-events:none;color:#fff;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;justify-content:space-between}
+.igs .tp{height:14%;box-sizing:border-box;padding:6px 8px;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.15))}
+.igs .prog{height:2px;border-radius:2px;background:rgba(255,255,255,.45);margin-bottom:6px;overflow:hidden}
+.igs .prog i{display:block;width:38%;height:100%;background:#fff}
+.igs .who{display:flex;align-items:center;gap:6px}
+.igs .av{width:20px;height:20px;border-radius:50%;background:#111013;display:grid;place-items:center}
+.igs .av svg{width:14px;fill:#fff;display:block}
+.igs .who small{font-weight:400;opacity:.85}
+.igs .bt{height:20%;box-sizing:border-box;padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;background:linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,.15))}
+.stwrap .sz{position:absolute;left:6.02%;right:6.02%;top:21.875%;bottom:34.9%;outline:1.5px dashed #00E5FF;pointer-events:none;display:none;z-index:5}
+.stwrap .sz span{position:absolute;left:0;top:-15px;font:700 9px/1 var(--mono);letter-spacing:.1em;color:#00E5FF;text-transform:uppercase}
+.stwrap.safe .sz{display:block}
+.igs .bt .chev{width:12px;height:12px;border:solid #fff;border-width:2px 2px 0 0;transform:rotate(-45deg);margin-bottom:-2px}
+.igs .bt .pill{background:#fff;color:#050505;border-radius:99px;padding:6px 14px;font-size:10.5px}
+.stwrap.noui .igs{display:none}
+.post [hidden]{display:none!important}
+
+/* ---- Landing page preview: the real page in a phone frame ---- */
+.herobtn{appearance:none;border:0;background:none;padding:0;cursor:zoom-in;display:block;border-radius:26px}
+.herobtn:focus-visible{outline:2px solid var(--lime);outline-offset:9px}
+.lpgo{align-self:flex-start}
+.lpbtns{display:flex;flex-direction:column;gap:6px;margin-top:6px;align-items:flex-start}
+.lpm{position:fixed;inset:0;z-index:100;background:rgba(8,7,10,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;gap:28px;padding:20px;flex-wrap:wrap}
+.lpm[hidden]{display:none}
+.lpm .phone{--s:1;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(46px*var(--s));background:#000;box-shadow:0 0 0 calc(10px*var(--s)) #000,0 0 0 calc(11px*var(--s)) #3a3640,0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative;flex:none}
+.lpm iframe{width:390px;height:844px;border:0;transform:scale(var(--s));transform-origin:0 0;background:#0B0A0D;display:block}
+.lpm .side{display:flex;flex-direction:column;gap:10px;max-width:240px;color:var(--text)}
+.lpm .side b{font:800 22px/1 var(--ui);text-transform:uppercase}
+.lpm .side p{margin:0;color:var(--muted);font-size:13px}
+.lpm .side a{color:var(--ink);background:var(--lime);border-radius:999px;padding:11px 15px;font:800 13px/1 var(--ui);text-decoration:none;align-self:flex-start}
+@media (max-width:700px){.lpm .side{max-width:none;width:100%;align-items:center;text-align:center}}
+
+/* ===== Story safe zone (Jamie's brief, Oct 9): text and logo between y 420 and 1250 of 1920, 65px from the sides.
+   The copy block is laid out on a wider virtual canvas, then scaled to exactly fill that band. Photos stay full-bleed. ===== */
+.k-story .in{inset:auto !important;left:6.02cqw !important;top:38.9cqw !important;width:120cqw !important;height:104.85cqw !important;padding:3cqw !important;transform:scale(.733);transform-origin:0 0;box-sizing:border-box}
+.k-story .in .top{top:3cqw !important;left:3cqw !important;right:3cqw !important}
+
+/* Story safe-zone fixes for designs with structure outside the copy block */
+.k-story.d4 .ph{height:42% !important}
+.k-story.d4 .panel{height:54% !important;padding:6cqw 3cqw 3cqw !important}
+.k-story.d7 .pol{top:46.5cqw !important;right:9cqw !important;left:auto !important;width:23cqw !important;transform:rotate(4deg) !important}
+.k-story.d7 h3{max-width:58%}
+.k-story.d8 .h1{height:43.5% !important}.k-story.d8 .h2{height:56.5% !important}
+.k-story.d8 .row{height:50% !important;padding:3cqw 3cqw !important}
+.k-story.d8 .row:first-child{padding-top:14cqw !important}
+.k-story.d8 .bottom{bottom:3cqw !important;left:3cqw !important;right:3cqw !important}
+.k-story.d11 .jb{top:auto !important;bottom:6% !important;right:-6cqw !important;left:auto !important;width:54cqw !important}
+.k-story.d11 .copy{max-width:66%}
+/* ===== Round 4 (Nov 3): ad 11 with the Southie jersey. Scoped to .s1j so d11 is untouched ===== */
+.s1j{--sj-pink:#EA1CA7;--sj-blue:#034FFF}
+.s1j h3 em{color:var(--sj-pink)}
+.s1j .cta{background:var(--sj-blue);color:#fff}
+.s1j .top small{color:#fff}
+.s1j .ph{object-position:50% 30%;filter:saturate(1.05) contrast(1.05)}
+.k-story.s1j .ph{object-position:46% 30%}
+.s1j::after{background:linear-gradient(180deg,rgba(17,16,19,.62) 0%,rgba(17,16,19,.15) 14%,rgba(17,16,19,0) 22%,rgba(17,16,19,.35) 30%,var(--ink) 44%)}
+.k-story.s1j::after{background:linear-gradient(180deg,rgba(17,16,19,.35) 0%,rgba(17,16,19,0) 10%,rgba(17,16,19,.25) 18%,rgba(17,16,19,.55) 26%,rgba(17,16,19,.7) 34%,var(--ink) 43%)}
+.s1j-back .jb{width:52cqw;right:-3cqw;top:31%}
+.k-story.s1j-back .jb{top:35%;width:58cqw}
+.s1j-front .jb{width:50cqw;right:-7cqw;top:31%;transform:rotate(5deg)}
+.k-story.s1j-front .jb{top:42%;width:54cqw;right:-8cqw}
+.s1j-pair::after{display:none}
+.s1j-pair .pair{position:absolute;left:0;right:0;top:16cqw;height:52cqw;z-index:2}
+.s1j-pair .pair img{position:absolute;height:100%;filter:drop-shadow(0 2cqw 4cqw rgba(0,0,0,.55))}
+.s1j-pair .pair .f{left:9cqw;transform:rotate(-7deg)}
+.s1j-pair .pair .b{right:7cqw;top:3cqw;transform:rotate(6deg)}
+.k-story.s1j-pair .pair{top:auto;bottom:9cqw;height:54cqw}
+.k-story.s1j-pair .pair .f{left:5cqw}.k-story.s1j-pair .pair .b{right:3cqw}
+.s1j-pair .in{justify-content:space-between}
+.s1j-pair .copy{max-width:100%;margin-top:auto}
+.k-story.s1j-pair .copy{margin-top:0}
+.k-feed.s1j-pair h3{font-size:8.4cqw}
+.s1j-pair h3 em{display:block}
+.s1j-pair .sub{max-width:84%}
+
+/* ---- Builder: type your own button, edit words on the ad, Meta copy, download finals ---- */
+.ctain,.meta input,.meta textarea,.meta select{width:100%;box-sizing:border-box;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px;font:500 13px/1.35 var(--ui)}
+.ctain{margin-top:2px}
+.ctain:focus,.meta input:focus,.meta textarea:focus,.meta select:focus{outline:2px solid var(--lime);outline-offset:1px;border-color:transparent}
+.ctain::placeholder,.meta ::placeholder{color:#6f6a77}
+.meta{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;background:#121015}
+.meta > b{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta label{display:flex;flex-direction:column;gap:5px;font:600 12px/1.2 var(--ui);color:var(--text)}
+.meta label span.row{display:flex;justify-content:space-between;gap:8px}
+.meta small{font:500 11px/1 var(--mono);color:var(--muted)}
+.meta small.over{color:#FF8A7A}
+.meta textarea{min-height:92px;resize:vertical}
+.meta .opt[hidden]{display:none}
+.meta .addopt{appearance:none;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:10px;padding:8px 10px;font:600 12px/1 var(--ui);cursor:pointer;text-align:left}
+.meta .addopt:hover{color:var(--text);border-color:var(--muted)}
+.meta .addopt[hidden]{display:none}
+.meta .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dl{appearance:none;border:0;border-radius:999px;background:var(--lime);color:var(--ink);font:800 13px/1 var(--ui);padding:12px 16px;cursor:pointer}
+.dl[disabled]{opacity:.6;cursor:progress}
+.ghost{appearance:none;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:10px 13px;font:600 12px/1 var(--ui);cursor:pointer}
+.dl:focus-visible,.ghost:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.status{font:500 12px/1.35 var(--ui);color:var(--muted);min-height:1em}
+.hint{font:500 12px/1.4 var(--ui);color:var(--muted)}
+.b.feed [data-edit]{cursor:text;border-radius:2px;overflow-wrap:normal!important;word-wrap:normal!important;-webkit-line-break:auto!important;line-break:auto!important;-webkit-user-modify:read-write-plaintext-only}
+.b.feed [data-edit]:hover{outline:1px dashed rgba(224,255,78,.7);outline-offset:2px}
+.b.feed [data-edit]:focus{outline:2px solid var(--lime);outline-offset:2px}
+
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:860px){ .dir{grid-template-columns:1fr} }
+@media (max-width:420px){ .b.feed .art,.b.email .art,.inbox{width:100%} .b.feed,.b.email{width:100%} }
+
+/* ===== Landing page ===== */
+/* Layout: one mobile column. The ad they tapped, then the sign-up, then three short reasons, FAQ, sign-up again. Body stays ink so every ad's accent reads the same way. */
+body{background:#0B0A0D;color:#F3F1F5;font:400 17px/1.5 var(--ui);overflow-x:clip}
+.hero{overflow:hidden}
+.lp{--acc:var(--lime);--acc-ink:var(--ink);--disp:var(--ui);max-width:520px;margin:0 auto;background:var(--ink);min-height:100svh}
+.lp{--w:min(100vw,520px)}
+.lp header{position:fixed;top:0;left:50%;transform:translateX(-50%);width:var(--w);box-sizing:border-box;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(var(--w)*.07) calc(var(--w)*.07) 0;background:transparent;transition:background .25s,padding .25s}
+.lp header .mark{width:calc(var(--w)*.22);display:block;color:#fff;transition:width .25s}
+.lp .mini-cta{font:700 14px/1 var(--ui);color:var(--acc-ink);background:var(--acc);border:0;border-radius:99px;padding:10px 14px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s}
+.lp header.solid{background:rgba(17,16,19,.94);backdrop-filter:blur(8px);padding:12px 16px}
+.lp header.solid .mark{width:84px}
+.lp header.solid .mini-cta{opacity:1;visibility:visible}
+/* The nav logo stands in for the ad's own logo, so the ad's copy is hidden (layout kept so tags stay put) */
+.hero .art .logo{visibility:hidden}
+@media (prefers-reduced-motion:reduce){.lp header,.lp header .mark{transition:none}}
+.hero .art{width:100%}
+/* W4: reserve the page A hero's box on phones until the big script fills it, so the sign-up below does not jump. The class comes from the small script after #hero. */
+@media (max-width:959px){.lp > #hero.pa:empty{aspect-ratio:4/5}
+/* Interactive-hero pages (round 2 SC1): reserve the box #ihero will occupy (.ihero{min-height:80svh}) until the big script has built it, so the sections below do not jump. The form stays visible. */
+.lp.pre-ih:not(.has-ihero) > #hero{min-height:80vh;min-height:80svh}}
+.hero .art .cta{cursor:pointer}
+.join{scroll-margin-top:64px;padding:24px 16px 28px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid #2B2830}
+.join h2{margin:0;font:800 calc(34px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
+.join p{margin:0;color:#BDB8C2;text-wrap:pretty}
+.join form{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.join label.sr,.tk label.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* Honeypot: bots fill it, people never see it. A filled value makes /api/season-one drop the sign-up. */
+.join .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
+.join input[type=email]{font:500 18px/1.2 var(--ui);padding:16px;border-radius:12px;border:2px solid #3a3640;background:#1B1920;color:#fff;width:100%;box-sizing:border-box}
+.join input[type=email]:focus{outline:none;border-color:var(--acc)}
+.join button[type=submit]{font:800 18px/1 var(--ui);padding:18px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer;width:100%}
+.join button[disabled]{opacity:.6}
+.join small{color:#8E8996;font-size:13px}
+.join .err{color:#FF8B8B;font-size:14px;margin:0}
+.done{display:flex;flex-direction:column;gap:12px}
+.done h2 em{font-style:normal;color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:600 15px/1 var(--ui);padding:12px 16px;border-radius:99px;border:1px solid #3a3640;background:transparent;color:#fff;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.share{font:700 16px/1 var(--ui);padding:14px 18px;border-radius:12px;border:1px solid #3a3640;background:transparent;color:#fff;cursor:pointer;align-self:flex-start}
+.bridge{padding:32px 16px;display:flex;flex-direction:column;gap:12px}
+.kick{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.bridge h3,.how h3,.faq h3{margin:0;font:800 calc(30px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
+.bridge p{margin:0;color:#D6D2DA;font-size:18px;text-wrap:pretty}
+.how{padding:8px 16px 32px;display:flex;flex-direction:column;gap:16px}
+.how ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:s}
+.how li{counter-increment:s;background:#1B1920;border-radius:14px;padding:16px 16px 16px 60px;position:relative}
+.how li::before{content:counter(s);position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:800 15px/30px var(--ui);text-align:center}
+.how li b{display:block;font-size:18px}
+.how li span{color:#BDB8C2;font-size:15px}
+.faq{padding:8px 16px 32px;display:flex;flex-direction:column;gap:10px}
+.faq details{border-bottom:1px solid #2B2830;padding:14px 0}
+.faq summary{font:700 17px/1.3 var(--ui);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:8px 0 0;color:#BDB8C2}
+.join.end{border-top:1px solid #2B2830;border-bottom:0;padding-bottom:40px}
+.lp footer{padding:24px 16px 110px;color:#8E8996;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.lp footer a{color:#BDB8C2}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(17,16,19,0),rgba(17,16,19,.96) 35%);display:flex;justify-content:center;transform:translateY(110%);transition:transform .25s}
+.sticky.on{transform:none}
+.sticky button{max-width:488px;width:100%;font:800 18px/1 var(--ui);padding:18px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer}
+button:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
+/* Per-ad module: carries the ad's own idea one step further (01, 02, 10 so far) */
+.mod{padding:0 16px 34px;display:flex;flex-direction:column;gap:10px}
+.mod[hidden]{display:none}
+/* 01 cross-off list */
+.xo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.xo li{background:#1B1920;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.xo s{font:700 15px/1.3 var(--disp);text-transform:uppercase;letter-spacing:.01em;color:#8E8996;text-decoration:none;align-self:flex-start;background:linear-gradient(var(--red),var(--red)) no-repeat 0 55%/100% 3px}
+.xo b{font:700 22px/1.12 var(--disp);text-transform:uppercase;letter-spacing:-.02em;color:var(--acc)}
+.xo span{color:#BDB8C2;font-size:15px}
+/* 02 overheard pairs */
+.oh{display:flex;flex-direction:column;gap:12px}
+.oh .pair{display:flex;flex-direction:column}
+.oh .now{background:#1B1920;border-radius:14px 14px 0 0;padding:14px 16px}
+.oh .now small,.oh .then small{display:block;font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.oh .now small{color:#8E8996}
+.oh .now q{font:400 22px/1.05 "Archivo Black",var(--ui);text-transform:uppercase;color:#fff;quotes:"“" "”"}
+.oh .then{background:var(--acc);color:var(--ink);border-radius:0 0 14px 14px;padding:14px 16px}
+.oh .then small{color:rgba(17,16,19,.6)}
+.oh .then q{font:700 19px/1.2 "Archivo",var(--ui);quotes:"“" "”"}
+/* 10 skills */
+.sk{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.sk li{border-radius:14px;padding:18px 16px;background:linear-gradient(135deg,#0A2F9E,#034FFF);color:#fff;display:flex;flex-direction:column;gap:6px}
+.sk li b{font:800 24px/1 "Sora",var(--ui);text-transform:uppercase;letter-spacing:-.03em}
+.sk li b em{font-style:normal;color:var(--acc)}
+.sk li span{font-size:15px;color:rgba(255,255,255,.86)}
+/* Confirmation: full screen, one message, a small achievement easter egg */
+.conf{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;align-items:flex-start;justify-content:center;padding:24px 20px 120px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.conf-in{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;margin:auto 0}
+/* Text Karlin: the parent leaves a number, Karlin texts them himself. Saved to Klaviyo as a profile property only, never SMS marketing consent, never sent to Meta. */
+.ready{display:block;margin-top:18px;font:600 16px/1.35 var(--ui);color:#BDB8C2;text-decoration:none}
+.ready span{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--acc);text-decoration-thickness:2px;text-underline-offset:5px}
+.ready-note{margin:6px 0 0;color:#8E8996;font-size:13px}
+.lock{margin-top:6px;padding:20px 16px;border-radius:16px;background:var(--acc);color:var(--acc-ink);display:flex;flex-direction:column;gap:10px}
+.conf .lock h3{margin:0;font:800 26px/1 var(--ui);text-transform:uppercase;letter-spacing:-.01em}
+.conf .lock p{margin:0;font-size:17px;line-height:1.4;color:var(--acc-ink)}
+.lock .lock-j{font-weight:700;font-size:15px}
+.lock-btn{display:block;text-align:center;margin-top:4px;padding:18px;border-radius:12px;background:#111013;color:#fff;font:800 17px/1 var(--ui);text-decoration:none}
+.tk{margin-top:6px;padding:18px 16px;border-radius:16px;background:#1B1920;border:1px solid #3a3640;display:flex;flex-direction:column;gap:12px}
+.tk-who{display:flex;align-items:center;gap:12px}
+.tk-av{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--acc);background:var(--acc)}
+.tk h3{margin:0;font:800 22px/1.05 var(--ui);color:#fff;text-transform:uppercase;letter-spacing:-.01em}
+.tk .tk-sub{margin:2px 0 0;font:600 13px/1.3 var(--ui);color:#BDB8C2}
+.tk p.tk-ask{margin:0;font-size:17px;line-height:1.4;color:#fff}
+.tk form{display:flex;flex-direction:column;gap:10px}
+.tk input[type=tel]{font:500 18px/1.2 var(--ui);padding:16px;border-radius:12px;border:2px solid #3a3640;background:var(--ink);color:#fff;width:100%;box-sizing:border-box}
+.tk input[type=tel]:focus{outline:none;border-color:var(--acc)}
+.tk button[type=submit]{font:800 17px/1 var(--ui);padding:17px;border-radius:12px;border:0;background:var(--acc);color:var(--acc-ink);cursor:pointer;width:100%}
+.tk button[disabled]{opacity:.6}
+.tk .tk-err{color:#FF8B8B;font-size:14px;margin:0}
+.tk .tk-fine{margin:0;font-size:12px;line-height:1.45;color:#8E8996}
+.tk .tk-done{margin:0;font-size:17px;line-height:1.4;color:var(--acc);font-weight:700}
+.conf h2{margin:0;font:800 calc(min(15.5vw,80px)*var(--ds,1))/.9 var(--disp);overflow-wrap:normal;text-transform:uppercase;letter-spacing:-.03em;color:var(--acc);outline:none}
+.conf p{margin:0;font-size:20px;line-height:1.4;color:#fff;text-wrap:pretty}
+.conf .inbox-h{font-size:17px;color:#fff;margin-top:6px}
+.mail{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:#1B1920;border:1px solid #3a3640;animation:mailIn .5s .25s ease both}
+.mail-av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font:800 17px/1 var(--ui)}
+.mail-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mail-t b{font:700 15px/1.2 var(--ui);color:#fff}
+.mail-s{font:600 14px/1.3 var(--ui);color:#fff}
+.mail-p{font:400 14px/1.35 var(--ui);color:#C2BDC8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-n{font:500 12px/1.2 var(--ui);color:#C2BDC8}
+@keyframes mailIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mail{animation:none}}
+.conf .egg{font-size:16px;color:#BDB8C2}
+.conf .age{margin-top:10px;padding-top:16px;border-top:1px solid #2B2830;display:flex;flex-direction:column;gap:10px}
+.conf .age p{font-size:15px;color:#BDB8C2}
+.conf .age .thanks{color:#fff}
+.conf .share-btn{appearance:none;align-self:flex-start;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid var(--acc);background:none;color:var(--acc);font:800 17px/1 var(--ui);cursor:pointer}
+.conf .share-btn:hover{background:var(--acc);color:var(--acc-ink)}
+.conf .share-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.conf .back{margin-top:10px;color:#BDB8C2;font:600 15px/1 var(--ui);text-underline-offset:4px;align-self:flex-start}
+.ach{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);display:flex;align-items:center;gap:12px;width:min(340px,calc(100vw - 32px));box-sizing:border-box;padding:10px 14px 10px 10px;border-radius:99px;background:#1B1920;border:1px solid #3a3640;box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,1.3,.4,1)}
+.conf.on .ach{transform:translate(-50%,0)}
+.ach .tro{flex:none;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center}
+.ach .tro svg{width:22px;height:22px;fill:var(--acc-ink)}
+.ach .t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.ach small{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8E8996}
+.ach b{font:700 15px/1.2 var(--ui);color:#fff}
+.ach .xp{font:800 13px/1 var(--mono);color:var(--acc)}
+@media (prefers-reduced-motion:reduce){.ach{transition:none}}
+[hidden]{display:none !important}
+@media (prefers-reduced-motion:reduce){.sticky{transition:none}}
+/* ===== Desktop (960px+): ad pinned left, sign-up and the rest scroll on the right ===== */
+@media (min-width:960px){
+  .lp{--w:520px;max-width:1240px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);column-gap:clamp(40px,5vw,88px);align-items:start;padding:104px 40px 0;background:transparent;min-height:0;box-sizing:border-box}
+  .lp > section,.lp > footer{grid-column:2}
+  .lp > #hero{grid-column:1;grid-row:1 / span 8;position:sticky;top:104px;display:flex;justify-content:flex-end}
+  .lp > #hero .art{width:min(100%,calc((100vh - 140px)*.8));border-radius:6px}
+  .lp header,.lp header.solid{left:0;transform:none;width:100%;padding:18px max(40px,calc((100vw - 1240px)/2 + 40px));background:rgba(11,10,13,.94);backdrop-filter:blur(8px)}
+  .lp header .mark,.lp header.solid .mark{width:104px}
+  .lp header .mini-cta{opacity:1;visibility:visible}
+  .join{padding:8px 0 32px}.bridge{padding:32px 0}.mod{padding:0 0 34px}.how,.faq{padding:8px 0 32px}.join.end{padding-bottom:48px}
+  .lp footer{padding:24px 0 48px}
+  .sticky{display:none}
+  .join h2{font-size:calc(40px*var(--ds,1))}
+}
+
+
+/* ===== Interactive heroes (?hero=amount | ?hero=games). Off unless the link asks for one, so the live default is untouched. ===== */
+.ihero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 18px 28px;box-sizing:border-box;background:var(--ink)}
+.ihero[hidden]{display:none}
+.ihero .ih-bg{position:absolute;inset:0;width:100%;height:62%;object-fit:cover;object-position:var(--ihpos,50% 30%);opacity:.4;filter:saturate(.7);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.ihero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,19,.78) 0%,rgba(17,16,19,.6) 14%,rgba(17,16,19,.94) 32%,#111013 48%,#111013 100%);z-index:0}
+.ihero > *:not(.ih-bg){position:relative;z-index:1}
+.ihero .kick{margin-bottom:10px}
+.ihero h1{margin:0;font:800 calc(54px*var(--ds,1))/.92 var(--disp);text-transform:uppercase;letter-spacing:-.025em;color:#fff;text-wrap:balance}
+.ihero .ih-sub{margin:10px 0 18px;color:#ECE9EF;font-size:17px;line-height:1.4;text-wrap:pretty}
+.ih-opts{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.16)}
+.ih-opts.games{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;border-top:0;padding-top:4px}
+.ih-opt{appearance:none;display:flex;align-items:center;gap:14px;min-height:56px;padding:6px 2px;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:none;color:#fff;font:700 21px/1.15 var(--ui);text-align:left;cursor:pointer;transition:color .15s}
+.ih-opts.games .ih-opt{min-height:52px;padding:0 22px;border:1.5px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(17,16,19,.55);font:700 18px/1 var(--ui);gap:0;transition:background .15s,border-color .15s,color .15s}
+.ih-opts.games .ih-opt::before{display:none}
+.ih-opts.games .ih-opt:hover{border-color:#fff}
+.ih-opts.games .ih-opt[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.ih-opts.quotes .ih-opt{font:700 20px/1.2 var(--ui)}
+.ih-opt::before{content:"";width:22px;height:22px;flex:none;border-radius:50%;border:2px solid rgba(255,255,255,.5);box-sizing:border-box;transition:border-color .15s,box-shadow .15s}
+.ih-opt:hover::before{border-color:#fff}
+.ih-opt[aria-pressed="true"]{color:var(--acc)}
+.ih-opt[aria-pressed="true"]::before{border-color:var(--acc);box-shadow:inset 0 0 0 4px var(--ink),inset 0 0 0 11px var(--acc)}
+.ih-opt:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ih-skip{appearance:none;background:none;border:0;color:var(--acc);font:700 16px/1.3 var(--ui);min-height:44px;text-decoration:underline;text-underline-offset:4px;padding:14px 0 0;cursor:pointer;align-self:flex-start;text-align:left}
+.ih-resp{display:none}
+.ih-resp.on{display:block;animation:ihIn .35s ease both}
+@keyframes ihIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ih-skip[hidden]{display:none}
+.ih-resp h2{margin:20px 0 6px;font:800 calc(30px*var(--ds,1))/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em;color:var(--acc);text-wrap:balance}
+ .ih-resp .ih-got{margin:20px 0 0;font:700 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.ih-resp .ih-got + h2{margin-top:6px}
+.ih-resp .ih-got[hidden]{display:none}
+.ih-resp .ih-list{margin:4px 0 10px;font:700 14px/1.4 var(--ui);color:#E6E2EA}
+.ih-resp .ih-say:empty,.ih-resp h2:empty{display:none}
+.ih-opts.games + .ih-resp .ih-list{margin-top:22px}
+.ih-resp .ih-say{margin:0 0 12px;color:#fff;font-size:17px;line-height:1.45;text-wrap:pretty}
+.ihero .join{padding:0;border:0;scroll-margin-top:80px}
+.ihero .join h2,.ihero .join .form-wrap > p{display:none}
+.ihero .join small{color:#C2BDC8;font-size:13px}
+.ihero .join button[type=submit]{min-height:58px;border-radius:999px;font-size:18px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.ihero .join button[type=submit]::after{content:" →"}
+@media (prefers-reduced-motion:reduce){.ih-resp.on{animation:none}.ih-opt{transition:none}}
+/* Mobile: the interactive hero replaces the ad image at the top */
+.lp.has-ihero > #hero{display:none}
+@media (min-width:960px){
+  .lp.has-ihero > #hero{display:flex}
+  .lp > #ihero{grid-column:2;min-height:0;padding:8px 0 32px;background:transparent;justify-content:flex-start}
+  .lp > #ihero::before,.lp > #ihero .ih-bg{display:none}
+  .ihero h1{font-size:calc(60px*var(--ds,1))}
+}
+
+/* ---- Option 4: The shortlist. Solid colour from the ad, big words, tap to cross off. ---- */
+.ihero.light{background:var(--sl-bg,#111013);color:var(--sl-fg,#fff);justify-content:flex-start;padding-top:88px}
+.ihero.light::before,.ihero.light .ih-bg{display:none}
+.ihero.light .sl-kick{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--sl-fg)}
+.ihero.light .sl-kick::before{content:"";width:28px;height:3px;background:var(--acc)}
+.ihero.light h1{margin:14px 0 0;font:800 calc(min(15vw,76px)*var(--ds,1))/.9 var(--disp);letter-spacing:-.03em;color:var(--sl-fg);text-transform:uppercase;text-wrap:balance}
+.ihero.light h1 i{font-style:normal;color:var(--sl-acc,var(--acc))}
+.ihero.light .ih-sub{color:var(--sl-muted);font-size:17px;margin:12px 0 10px}
+.sl-list{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.sl-row{display:flex;flex-direction:column;align-items:flex-start}
+.ihero .sl-item.ih-opt::before{display:none}
+.ihero .sl-item.ih-opt{display:inline-block;min-height:0;gap:0;border:2px solid transparent;border-bottom:2px solid transparent}
+.sl-item{appearance:none;background:none;border-radius:8px;padding:0 6px;margin-left:-8px;cursor:pointer;position:relative;font:700 calc(36px*var(--ds,1))/1.12 var(--disp);letter-spacing:-.02em;text-transform:uppercase;color:var(--sl-fg);text-align:left;transition:color .2s}
+.sl-item::after{content:"";position:absolute;left:0;top:52%;height:.11em;width:0;background:var(--acc);transition:width .3s cubic-bezier(.6,0,.2,1)}
+.ihero .sl-item.ih-opt[aria-pressed="true"],.sl-item[aria-pressed="true"]{color:var(--sl-muted)}
+.sl-item[aria-pressed="true"]::after{width:100%}
+.sl-item:hover{border-color:var(--sl-line)}
+.sl-item:focus-visible{outline:none;border-color:var(--sl-fg)}
+.sl-q{margin:-2px 0 6px;font:500 15px/1.3 var(--ui);color:var(--sl-acc,var(--acc));animation:qIn .3s ease both}
+.sl-q[hidden]{display:none}
+@keyframes qIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ihero.light .ih-resp h2{color:var(--sl-acc,var(--acc));font:800 calc(30px*var(--ds,1))/1 var(--disp);text-transform:uppercase;letter-spacing:-.02em;margin:18px 0 6px}
+.ihero.light .ih-resp .ih-say{color:var(--sl-fg);font-size:17px}
+.ihero.light .ih-resp .ih-list{color:var(--sl-muted)}
+.ihero.light .join input[type=email]{background:var(--sl-field);color:var(--sl-fg);border-color:var(--sl-line)}
+.ihero.light .join input[type=email]::placeholder{color:var(--sl-muted)}
+.ihero.light .join input[type=email]:focus{border-color:var(--acc)}
+.ihero.light .join small,.ihero.light .join .err{color:var(--sl-muted)}
+.ihero.light .ih-skip{color:var(--sl-acc,var(--acc))}
+.lp.light-top header:not(.solid) .mark{color:var(--sl-fg,#fff)}
+@media (prefers-reduced-motion:reduce){.sl-q{animation:none}.sl-item::after{transition:none}}
+@media (min-width:960px){.lp > #ihero.light{border-radius:8px;padding:40px 36px}}
+/* ===== Above-the-fold fit (2026-10-15). In-app browsers (Messenger, Facebook, Instagram on Android) apply the phone's text-size setting to the page, so a 54px headline can render at 80px and push the choices off the first screen. fitHero() in the script shrinks only the hero's display type (--ds) until the whole hero (headline, choices, way forward) fits in 80% of the visible screen. Body text keeps the reader's size. ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Phones: the hero takes 80% of the screen (the next section peeks in below) and the headline starts at 80% of its old size */
+@media (max-width:959px){
+  .ihero{min-height:80svh}
+  .ihero h1{font-size:calc(54px*.8*var(--ds,1))}
+  .ihero.light h1{font-size:calc(min(15vw,76px)*.8*var(--ds,1))}
+}
+.ihero.tight{padding-top:72px}
+.ihero.tight .kick,.ihero.tight .sl-kick{margin-bottom:6px}
+.ihero.tight .ih-sub{margin:8px 0 10px}
+.ihero.tight .ih-opt{min-height:48px}
+/* Shortlist: each activity reads as tappable (box that fills on tap), and the way forward is a button */
+.ihero .sl-item.ih-opt{display:inline-flex;align-items:center;gap:.4em}
+.ihero .sl-item.ih-opt::before{display:block;content:"";width:.62em;height:.62em;flex:none;border:3px solid currentColor;border-radius:4px;box-sizing:border-box;opacity:.55}
+.ihero .sl-item.ih-opt[aria-pressed="true"]::before{background:var(--acc);border-color:var(--acc);opacity:1}
+.ihero.light .ih-skip{display:block;width:100%;align-self:stretch;margin-top:16px;padding:0 20px;min-height:54px;border:2px solid var(--sl-acc,var(--acc));border-radius:999px;text-decoration:none;text-align:center;font:800 17px/1 var(--ui);color:var(--sl-acc,var(--acc))}
+.ihero.light .ih-skip[hidden]{display:none}
+</style>
+
+
+
+<div class="lp" id="lp">
+  <header><svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg><button class="mini-cta" type="button" data-go>Get the details</button></header>
+  <section class="ihero" id="ihero" aria-labelledby="ih-q" hidden></section>
+  <section class="hero" id="hero"></section>
+  <script>
+  // Page A marker (W4). #hero is filled by the big script at the end of the body; on phones the join section below it used to drop about 450 px when that happened. Marking page A heroes here lets a phone-only CSS rule reserve the box first. Must agree with the HERO logic in the big script, which keeps using AD_HERO from here (one source).
+  // Ads not listed open page A. d10 is Aaron's B vs C test: each browser gets one of the two and keeps it.
+  // Both tables are defined once, in the head bootstrap (window.S1).
+  const AD_HERO=window.S1.AD_HERO;
+  const HERO_KEYS=window.S1.HERO_KEYS;
+  (function(){
+    try{
+      const q=new URLSearchParams(location.search), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+      const qh=(q.get("hero")||"").trim().toLowerCase(), ad=(q.get("ad")||"").toLowerCase().replace(/^d0/,"d");
+      const pageA = HERO_KEYS.indexOf(qh)>=0 ? false : qh==="none" ? true : !own(AD_HERO,ad);
+      if(pageA){ document.getElementById("hero").classList.add("pa"); document.getElementById("lp").dataset.s1Pre="pa"; }
+      else if(HERO_KEYS.indexOf(qh)>=0||own(AD_HERO,ad)){ /* d10 (array) too: both of its heroes are interactive and end at 80svh, so the split need not be known here */ document.getElementById("lp").classList.add("pre-ih"); document.getElementById("lp").dataset.s1Pre="ih"; }
+    }catch(_){}
+  })();
+  </script>
+
+  <section class="join" id="join-top" aria-labelledby="jt">
+    <div class="form-wrap">
+      <h2 id="jt">Get the season one&nbsp;details.</h2>
+      <p>Karlin sends you the schedule, the price and the coaches. Free, and it doesn’t sign them up for&nbsp;anything.</p>
+      <form data-where="top" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
+        <label class="sr" for="em-top">Your email</label>
+        <input id="em-top" data-clarity-mask="true" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
+        <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
+        <button type="submit">Send me the details</button>
+        <p class="err" role="alert" hidden></p>
+        <small>For parents. We only email about EKUZO, and you can unsubscribe&nbsp;anytime.</small>
+      </form>
+      <a class="ready" href="/season1/join?src=ad" data-join="top">Ready now? <span>Save their spot for&nbsp;$100&nbsp;→</span></a><p class="ready-note">Covers January. Fully refundable until Dec&nbsp;31.</p>
+    </div>
+  </section>
+
+  <section class="bridge" id="bridge"></section>
+  <section class="mod" id="mod" hidden></section>
+
+  <section class="how" aria-labelledby="hw">
+    <span class="kick">How a season works</span>
+    <h3 id="hw">A real team, online, from&nbsp;home.</h3>
+    <ol>
+      <li><b>Weekly practice with a coach</b><span>A real coach runs every practice and works on teamwork, communication and strategy.</span></li>
+      <li><b>Matches with their team</b><span>They play League of Legends with the same teammates all season, and play to&nbsp;win.</span></li>
+      <li><b>A season you can ask about</b><span>A schedule, a jersey with their gamer tag and something real to talk about at&nbsp;dinner.</span></li>
+    </ol>
+  </section>
+
+  <section class="faq" aria-labelledby="fq">
+    <span class="kick">Questions parents ask</span>
+    <h3 id="fq">The short&nbsp;answers.</h3>
+    <details><summary>When does it start?</summary><p>Season 01 starts in mid January 2027. Sign-ups are open&nbsp;now.</p></details>
+    <details><summary>Do I pay anything now?</summary><p>Not for the details. If you’re ready to save a spot, it’s $100 for January and fully refundable until Dec&nbsp;31.</p></details>
+    <details><summary>What game do they play?</summary><p>Your kid might play Roblox, Minecraft or Fortnite, and they keep those. With us, they play League of Legends on a team of five. It’s free to download, and most kids start from scratch. League is our core game, and we’re looking at adding&nbsp;others.</p></details>
+    <details><summary>Where does it happen?</summary><p>Online, from home, on a computer with a headset. Practice runs in the evening, in your time zone. No driving, no&nbsp;parking.</p></details>
+    <details><summary>Who are the coaches?</summary><p>Passionate top 1% college esports players, background-checked and trained to coach kids. You’ll meet your coach before the season&nbsp;starts.</p></details>
+  </section>
+
+  <section class="join end" id="join-end" aria-labelledby="je">
+    <div class="form-wrap">
+      <h2 id="je">Still thinking it&nbsp;over?</h2>
+      <p>Get the details from Karlin and decide when you’re&nbsp;ready.</p>
+      <form data-where="bottom" method="post" action="javascript:void(0)" onsubmit="return false" novalidate>
+        <label class="sr" for="em-end">Your email</label>
+        <input id="em-end" data-clarity-mask="true" type="email" name="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Your email" required>
+        <input class="hp" type="text" name="ekz_hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-1p-ignore data-lpignore="true" data-form-type="other">
+        <button type="submit">Send me the details</button>
+        <p class="err" role="alert" hidden></p>
+        <small>Free. No commitment. Unsubscribe&nbsp;anytime.</small>
+      </form>
+      <a class="ready" href="/season1/join?src=ad" data-join="bottom">Ready now? <span>Save their spot for&nbsp;$100&nbsp;→</span></a><p class="ready-note">Covers January. Fully refundable until Dec&nbsp;31.</p>
+    </div>
+  </section>
+
+  <footer><span>EKUZO · Youth esports with real coaches</span><a href="https://ekuzo.gg">ekuzo.gg</a></footer>
+</div>
+<div class="sticky" id="sticky"><button type="button" data-go>Get the details</button></div>
+
+<div class="conf" id="conf" role="dialog" aria-modal="true" aria-labelledby="conf-h" hidden>
+  <div class="conf-in">
+    <span class="kick">Details on the way</span>
+    <h2 id="conf-h" tabindex="-1">Awesome.</h2>
+    <p>We can’t wait to make screentime the highlight of your day&nbsp;too.</p>
+    <p class="inbox-h">Check your inbox for a note from Karlin, our&nbsp;founder.</p>
+    <div class="lock"><h3>Ready to lock it&nbsp;in?</h3><p>Save their spot for $100. It covers January and it’s fully refundable until Dec&nbsp;31.</p><p class="lock-j">First 100 families get a free&nbsp;jersey.</p><a class="lock-btn" href="/season1/join?src=ad" data-join="confirm">Save their spot · $100</a></div>
+    <div class="tk" id="tk" data-clarity-mask="true">
+      <div class="tk-who"><img class="tk-av" loading="lazy" src="/images/authors/karlin-oei-avatar.jpg" alt="" width="52" height="52" onerror="this.style.visibility='hidden'"><div><h3>Questions first?</h3><p class="tk-sub">Karlin Oei · Founder, EKUZO</p></div></div>
+      <p class="tk-ask">Have questions and want to talk to a human? Leave your number and I’ll text you myself.</p>
+      <form id="tk-form" novalidate>
+        <label class="sr" for="tk-ph">Your mobile number</label>
+        <input id="tk-ph" data-clarity-mask="true" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555" required>
+        <p class="tk-err" role="alert" hidden></p>
+        <button type="submit">Text me, Karlin</button>
+        <p class="tk-fine">By submitting your number you agree to text a real human, and you are in fact a real human. Karlin texts you himself, from his own phone. No marketing list, no automated texts. Msg and data rates may apply. Reply STOP any time.</p>
+      </form>
+      <p class="tk-done" role="status" hidden>Got it. I’ll text you soon. – Karlin</p>
+    </div>
+    <div class="age"><p>Know a parent still figuring out screen&nbsp;time?</p>
+      <button type="button" class="share-btn" id="share">Send this to them</button>
+      <p class="thanks" role="status" hidden></p></div>
+  </div>
+  <div class="ach" aria-hidden="true">
+    <span class="tro"><svg viewBox="0 0 24 24"><path d="M7 3h10v3h3v2a5 5 0 0 1-4.6 5A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1A5 5 0 0 1 8.6 13 5 5 0 0 1 4 8V6h3zm0 5V8H6a3 3 0 0 0 1 2.2zm10 0v2.2A3 3 0 0 0 18 8z"/></svg></span>
+    <span class="t"><small>Achievement unlocked</small><b>Parent of the year</b></span>
+    <span class="xp">+100 XP</span>
+  </div>
+</div>
+
+<script>
+const IMG = window.S1.IMG;
+const LOGO = document.querySelector("header .mark").outerHTML.replace('class="mark"','').replace(/role="img" aria-label="EKUZO"/,'aria-hidden="true"');
+const logo = () => `<span class="logo">${LOGO}</span>`;
+const D = [
+ {id:"d1", name:"We've all said it", photo:"Minecraft blocks (Aaron's image)",
+  type:"Space Grotesk, bold caps", palette:["#111013","#F92524","#E0FF4E","#FFFFFF"], from:"Cross-Off (02g) and The Shortlist",
+  why:"It says the thing every parent has said out loud, then crosses it out. The fix arrives in the same line, in neon.",
+  subject:"They game. Let’s make it count.",
+  bgs:[{k:"mc-blocks",l:"Block world (AI)"},{k:"esports-room",l:"Esports room (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["mc-blocks"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="tag">We’ve all said it</span></div>
+   <h3>They game <s>too much.</s><em>With a coach.</em></h3>
+   <p class="sub">Turn screentime into practice.${k==="email"?" ":"<br>"}Give them a coach, a team,${k==="email"?" ":"<br>"}and a mission to&nbsp;win.</p><span class="cta">Be the hero →</span></div>`},
+ {id:"d2", name:"Overheard", photo:"couch",
+  type:"Archivo Black, heavy caps", palette:["#111013","#FDE74C","#FFFFFF"], from:"C4 Ask Them About Tonight",
+  why:"A line every parent has heard from the couch, set huge. The parent reads their own living room before they read our name.",
+  subject:"“I can’t pause it.” Turn screentime into practice.",
+  art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
+   <div class="in"><div class="top">${logo()}</div>
+   <p class="who">Heard in every living room</p>
+   <p class="q">“I can’t pause&nbsp;it.”</p>
+   <div class="bar"><p>Turn screentime into practice.</p><span class="cta">Play their game →</span></div></div>`},
+ {id:"d3", name:"Play to win", photo:"boys-girls-club",
+  type:"Unbounded, wide caps", palette:["#1C3745","#60E1E0","#FFFFFF"], from:"Inventory (02f) and Lobby (03)",
+  why:"For every kid who already plays to win. A calm, confident colour that reads premium next to loud feeds, and a mixed squad in the photo.",
+  subject:"They play to win. Give them a team.",
+  art:k=>`<img class="ph" src="${IMG["boys-girls-club"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="count">Season one · 2027</span></div>
+   <div><h3>They play to win.<em>Give them a&nbsp;team.</em></h3>
+   <p class="sub">A coach, a team and a season of their&nbsp;own.</p><span class="cta">Find their team →</span></div></div>`},
+ {id:"d4", name:"Team card", photo:"coach-and-mom",
+  type:"Bricolage Grotesque, tight caps", palette:["#8E22E0","#E0FF4E","#FFFFFF"], from:"Roster cards (02c) and Lobby (03)",
+  why:"Looks like a team photo on the fridge. Answers Jamie's second question, who else is in it, before the parent asks.",
+  subject:"Every kid needs a team. Here’s theirs.",
+  art:k=>`<img class="ph" src="${IMG["coach-and-mom"]}" alt="">
+   <div class="in"><div class="photo-tag">${logo()}</div>
+   <div class="panel"><span class="sticker">Not every team needs a field.</span><span class="roster">Esports league</span>
+   <h3>Every kid needs a team.</h3><span class="cta">Find their team →</span></div></div>`},
+ {id:"d5", name:"They'll actually show up", photo:"laughing",
+  type:"Inter Tight, extra bold caps", palette:["#111013","#E0FF4E","#FFFFFF"], from:"B, They tried them all",
+  why:"For the parent who has signed them up for soccer, piano and scouts. This one comes with a team that expects them every week.",
+  subject:"The team sport they’ll actually show up for.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+   <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
+   <div class="col"><h3>The team sport they’ll <em>actually</em> show up&nbsp;for.</h3>
+   <div class="row"><p class="sub">A coach, a team and a season, in the game they already&nbsp;love.</p><span class="cta">Find their team →</span></div></div></div>`},
+ {id:"d6", name:"The coach ends it", photo:"couch",
+  type:"Syne, extended caps", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"C2 It Ends At 7:30, without the time",
+  why:"The loudest of the set. Promises the end of the doorway argument, without promising a time slot.",
+  subject:"Practice over. Nobody yelled.",
+  art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
+   <div><h3>The coach ends it.</h3><p class="sub">Practice has a start and an end. No doorway argument.</p><span class="cta">Get the details →</span></div></div>`},
+ {id:"d7", round:2, name:"Screen time, graded", photo:"hands-in",
+  type:"Anybody, expanded black caps", palette:["#EFEEED","#49B41A","#F92524","#111013"], from:"Structure and progress in Karlin's email",
+  why:"Parents know how to read a report card. It turns screen time into something with grades, a teacher and a reason to be proud.",
+  subject:"Screen time, graded.",
+  art:k=>`<div class="pol"><img src="${IMG["hands-in"]}" alt=""></div>
+   <div class="in"><div class="top">${logo()}<small>Progress report</small></div>
+   <h3>Screen time,<em>graded.</em></h3>
+   <div class="grades"><div>Teamwork<b>A</b></div><div>Talking it through<b class="circ">A</b></div><div>Showing up<b>A+</b></div></div>
+   <div class="bot"><p>A coach tracks what they learn every week.</p><span class="cta">See how →</span></div></div>`},
+ {id:"d8", round:2, name:"Screen time, team time", photo:"couch + laughing",
+  type:"Dela Gothic One", palette:["#034FFF","#F92524","#FFFFFF"], from:"Lobby (03) and the before and after idea",
+  why:"Before and after in one frame, keeping the red and blue split Karlin liked. Tap a line below to try it in every size.",
+  subject:"Screen time. Now team time.",
+  alts:[
+   {l1:"Screen time.",l2:"Team time.",a:"Now",b:"Season one",sub:"Same game. Now with a coach and a&nbsp;team."},
+   {l1:"Same screen.",l2:"New team.",a:"Now",b:"Season one",sub:"The game they love, with a coach and a&nbsp;team."},
+   {l1:"Solo.",l2:"Squad.",a:"Now",b:"Season one",sub:"Same game. Now with teammates and a&nbsp;coach."},
+   {l1:"Playing alone.",l2:"Playing for a&nbsp;team.",a:"Now",b:"Season one",sub:"Same game. Now with a coach and a&nbsp;season."},
+   {l1:"Screen time.",l2:"Practice.",a:"Before",b:"After",sub:"Same hours. Now with a coach and a&nbsp;team."}
+  ],
+  art:k=>`<div class="half h1"><img src="${IMG["couch"]}" alt=""></div><div class="half h2"><img src="${IMG["laughing"]}" alt=""></div>
+   <div class="in"><div class="top">${logo()}</div>
+   <div class="row"><span class="lbl" data-alt="a">Now</span><h3 data-alt="l1">Screen time.</h3></div>
+   <div class="row"><h3 data-alt="l2">Team time.</h3><span class="lbl" data-alt="b">Season one</span></div>
+   <div class="bottom"><p data-alt="sub">Same game. Now with a coach and a&nbsp;team.</p><span class="cta">Find their team →</span></div></div>`},
+ {id:"d9", round:2, name:"Admit one player", photo:"team-walk",
+  type:"Rubik Mono One", palette:["#49B41A","#F8F4E2","#111013"], from:"C, the parent-free league",
+  why:"A ticket for the kid, nothing for the parent to do. The stub does the work of the crossed-off list without a list.",
+  subject:"The only practice you don’t drive to.",
+  art:k=>`<img class="ph" src="${IMG["team-walk"]}" alt="">
+   <div class="in"><div class="top">${logo()}<small>Parent-free league</small></div>
+   <div class="tix"><div class="main"><span class="adm">Admit one player</span><h3>The only practice you <em>don’t</em> drive&nbsp;to.</h3></div>
+   <div class="stub"><div><small>Drive</small><b>None</b></div><div><small>Cleats</small><b>None</b></div><div><small>Parking</small><b>None</b></div></div></div>
+   <span class="cta">Get the details →</span></div>`},
+ {id:"d10", round:2, name:"Screen time with a purpose", photo:"kid on the couch (Aaron's photos)",
+  type:"Sora, extra bold caps", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Karlin: make you proud doing something they love",
+  why:"A real kid on a real couch, in full colour, with the copy on a blue fade. Built from the Figma frame Aaron picked.",
+  subject:"Be proud of their screen time.",
+  bgs:[{k:"kid-couch",l:"Kid on the couch (photo)",cls:"kid"},{k:"team-walk",l:"Team walk (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["kid-couch"]}" alt="">
+   <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
+   <div class="in"><div class="top">${logo()}</div>
+   <h3>Be proud<br>of their <em>screen&nbsp;time.</em></h3>
+   <p class="sub">Problem solving, teamwork and talking it through. Real skills doing something they&nbsp;love.</p><span class="cta">My kid games →</span></div>`},
+ {id:"d11", round:2, name:"Their name on a jersey", photo:"green-team + jersey-back",
+  type:"Rubik black caps", palette:["#111013","#49B41A","#E0FF4E","#FFFFFF"], from:"The jersey with gamer tag",
+  why:"A positive, proud one. A real EKUZO jersey back with the gamer tag spot, over a real team on stage in their greens.",
+  subject:"Their gamer tag. On a real jersey.",
+  art:k=>`<img class="ph" src="${IMG["green-team"]}" alt="">
+   <img class="jb" src="${IMG["jersey-back"]}" alt="">
+   <div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+   <div class="copy"><h3>Their gamer tag.<em>On a real jersey.</em></h3>
+   <p class="sub">A coach, a team and a jersey with their name on the&nbsp;back.</p><span class="cta">Get the details →</span></div></div>`},
+ {id:"d12", round:2, name:"The best excuse", photo:"coach-and-mom",
+  type:"Hanken Grotesk, extra bold caps", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Overheard, from the kid’s side",
+  why:"A text thread every parent has had, ending with the one excuse they’d be glad to hear.",
+  subject:"“Sorry! Practice is going over.”",
+  art:k=>`<img class="ph" src="${IMG["coach-and-mom"]}" alt="">
+   <div class="in"><div class="top">${logo()}</div>
+   <div class="thread"><small>Today</small><span class="me">Dinner’s ready!</span><span class="them">Just a minute</span><span class="me">It’s getting cold</span><span class="them">Sorry! Practice is going over. Be there in a&nbsp;minute.</span></div>
+   <div class="foot"><h3><span>The best excuse</span><em>you’ll ever hear.</em></h3><span class="cta">Join the team →</span></div></div>`},
+ {id:"d13", tpl:"d10", round:3, problem:"They game too much", name:"Screen time you're proud of", photo:"kid on the couch (Aaron's photos)",
+  type:"Sora, extra bold caps (template 10)", palette:["#034FFF","#E0FF4E","#FFFFFF"], from:"Google: screen time that matters",
+  why:"For the parent typing ‘how do I cut screen time’. We don’t take the game away. We give it a coach, a team that has their back and an end time.",
+  subject:"Screen time you’re proud of.",
+  bgs:[{k:"kid-couch",l:"Kid on the couch (photo)",cls:"kid"},{k:"team-walk",l:"Team walk (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["kid-couch"]}" alt="">
+   <div class="wall"><span>Gaming</span><span>Gaming gaming</span><span>Gaming</span></div>
+   <div class="in"><div class="top">${logo()}</div>
+   <h3>Screen time<br>you’re <em>proud&nbsp;of.</em></h3>
+   <p class="sub">A coach, a team that has their back, and a reason to log off on&nbsp;time.</p><span class="cta">Get the details →</span></div>`},
+ {id:"d14", tpl:"d6", round:3, problem:"They game too much", name:"Screen time. Coached.", photo:"couch",
+  type:"Syne, extended caps (template 06)", palette:["#FF2ECC","#E0FF4E","#111013","#034FFF"], from:"Google: reduce screen time",
+  why:"The structure answer, said loud. Practice starts on time and the coach ends it, so the parent stops being the timer.",
+  subject:"Screen time. Coached.",
+  art:k=>`<img class="ph" src="${IMG["couch"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="stamp">Practice over. GG.</span></div>
+   <div><h3 style="font-size:${k==="email"?"5.4cqw":"10cqw"}">Screen time. Coached.</h3><p class="sub">Practice starts on time and the coach ends it. No doorway&nbsp;argument.</p><span class="cta">Get the details →</span></div></div>`},
+ {id:"d15", tpl:"d12", round:3, problem:"They don’t have friends", name:"Online friends, real team", photo:"team-walk",
+  type:"Hanken Grotesk, extra bold caps (template 12)", palette:["#3791A6","#FDE74C","#F8F4E2","#0A84FF"], from:"Google: my kid only has online friends",
+  why:"For the parent typing ‘my kid has no friends’. The kid already has people online. This makes them a team with a coach, told in a text a parent would love to get.",
+  subject:"“We have practice tonight. They need me.”",
+  art:k=>`<img class="ph" src="${IMG["team-walk"]}" alt="">
+   <div class="in"><div class="top">${logo()}</div>
+   <div class="thread"><small>Today</small><span class="me">Who are you playing with?</span><span class="them">My team</span><span class="me">Your team??</span><span class="them">We have practice tonight. They need me on&nbsp;comms.</span></div>
+   <div class="foot"><h3><span>Online friends.</span><em>Now a real team.</em></h3><span class="cta">Find their team →</span></div></div>`},
+ {id:"d16", tpl:"d4", round:3, problem:"They don’t have friends", name:"Their people", photo:"hands-in",
+  type:"Bricolage Grotesque, tight caps (template 04)", palette:["#8E22E0","#E0FF4E","#FFFFFF"], from:"Google: help them find their people",
+  why:"The team photo on the fridge, for the kid who doesn’t have one yet. Sells belonging first: somewhere they feel seen.",
+  subject:"Their people. Their team.",
+  art:k=>`<img class="ph" src="${IMG["hands-in"]}" alt="">
+   <div class="in"><div class="photo-tag">${logo()}</div>
+   <div class="panel"><span class="sticker">A team that has their back.</span><span class="roster">Esports team</span>
+   <h3>Their people. Their team.</h3><span class="cta">Find their team →</span></div></div>`},
+ {id:"d17", tpl:"d1", round:3, problem:"They don’t fit the usual mold", name:"Not a sports kid", photo:"team-walk",
+  type:"Space Grotesk, bold caps (template 01)", palette:["#111013","#F92524","#E0FF4E","#FFFFFF"], from:"The Shortlist cross-off, for the kid who quit",
+  why:"The green-lit cross-off idea, pointed at the kid who never clicked with team sports. The list ends on the one team that fits.",
+  subject:"Not every kid plays soccer.",
+  bgs:[{k:"team-walk",l:"Team walk (photo)"},{k:"hands-in",l:"Hands in (photo)"}],
+  art:k=>`<img class="ph" data-bg src="${IMG["team-walk"]}" alt="">
+   <div class="in"><div class="top">${logo()}<span class="tag">Not a sports kid</span></div>
+   <h3><s>Soccer.</s> <s>Scouts.</s><em>Their team.</em></h3>
+   <p class="sub">For the kid who never clicked with team&nbsp;sports. A coach, a team and friends who get&nbsp;them.</p><span class="cta">Find their team →</span></div>`},
+ {id:"d18", tpl:"d5", round:3, problem:"They don’t fit the usual mold", name:"Not a sports kid? Perfect.", photo:"laughing",
+  type:"Inter Tight, extra bold caps (template 05)", palette:["#111013","#E0FF4E","#FFFFFF"], from:"Google: my kid doesn’t like sports",
+  why:"Turns the worry into a yes. The parent who has given up on sign-up sheets hears that their kid is exactly who this is for.",
+  subject:"Not a sports kid? Perfect.",
+  art:k=>`<div class="in"><div class="top">${logo()}<small>Season one · 2027</small></div>
+   <div class="frame"><img class="ph" src="${IMG["laughing"]}" alt=""></div>
+   <div class="col"><h3>Not a sports kid? <em>Perfect.</em></h3>
+   <div class="row"><p class="sub">A coach and a team that has their back, in the games they already&nbsp;love.</p><span class="cta">Find their team →</span></div></div></div>`},
+ {id:"d19", tpl:"d11", cls:"s1j s1j-back", round:4, problem:"Ad 11 is working", name:"Southie jersey, back", photo:"team-walk-hd + southie-back",
+  type:"Rubik black caps (template 11)", palette:["#111013","#EA1CA7","#034FFF","#FFFFFF"], from:"Ad 11, the jersey ad performing in Meta",
+  why:"The closest test against ad 11. Same layout and hook with the new Southie jersey back, the team walk photo and a blue button.",
+  subject:"Their gamer tag. On a real jersey.",
+  art:k=>`<img class="ph" src="${IMG["team-walk-hd"]}" alt="">
+   <img class="jb" src="${IMG["southie-back"]}" alt="">
+   <div class="in"><div class="top">${logo()}<small>Youth gaming league · 2027</small></div>
+   <div class="copy"><h3>Their gamer tag.<em>On a real jersey.</em></h3>
+   <p class="sub">A coach, a team and a custom jersey with their gamer tag on the&nbsp;back.</p><span class="cta">Get the details →</span></div></div>`},
+ {id:"d20", tpl:"d11", cls:"s1j s1j-pair", round:4, problem:"Ad 11 is working", name:"Southie jersey, front and back", photo:"southie-front + southie-back",
+  type:"Rubik black caps (template 11)", palette:["#111013","#EA1CA7","#034FFF","#FFFFFF"], from:"Ad 11, the jersey ad performing in Meta",
+  why:"No photo. Both sides of the jersey carry it, with the offer said plainly under the hook.",
+  subject:"Their gamer tag. On a real jersey.",
+  art:k=>`<div class="pair"><img class="f" src="${IMG["southie-front"]}" alt=""><img class="b" src="${IMG["southie-back"]}" alt=""></div>
+   <div class="in"><div class="top">${logo()}<small>Youth gaming league · 2027</small></div>
+   <div class="copy"><h3>Their gamer tag. <em>On a real jersey.</em></h3>
+   <p class="sub">A coach, a team and a custom jersey. Free for the first 100&nbsp;families.</p><span class="cta">Get the details →</span></div></div>`},
+ {id:"d21", tpl:"d11", cls:"s1j s1j-front", round:4, problem:"Ad 11 is working", name:"Their team. Their name.", photo:"team-walk-hd + southie-front",
+  type:"Rubik black caps (template 11)", palette:["#111013","#EA1CA7","#034FFF","#FFFFFF"], from:"Ad 11, the jersey ad performing in Meta",
+  why:"The jersey front and a team-first hook. Tests whether belonging pulls harder than the gamer tag.",
+  subject:"Their team. Their name. On a real jersey.",
+  art:k=>`<img class="ph" src="${IMG["team-walk-hd"]}" alt="">
+   <img class="jb" src="${IMG["southie-front"]}" alt="">
+   <div class="in"><div class="top">${logo()}<small>Youth gaming league · 2027</small></div>
+   <div class="copy"><h3>Their team.<br>Their name.<em>On a real jersey.</em></h3>
+   <p class="sub">Every player gets a custom jersey with their gamer tag on the&nbsp;back.</p><span class="cta">Get the details →</span></div></div>`}
+];
+// Per ad: accent, display font, and the bridge that continues the ad's line
+const T = {
+ d1:{acc:"#E0FF4E",font:'"Space Grotesk"',k:"We’ve all said it",h:"They’re going to play anyway.",p:"So make the hours count. EKUZO puts a real coach and a real team around the game they already love, and you get something to ask about at&nbsp;dinner.",
+  mod:`<span class="kick">Cross it off</span><ul class="xo">
+   <li><s>Alone in their room</s><b>With a team every week</b><span>The same teammates all season, counting on each&nbsp;other.</span></li>
+   <li><s>Just playing</s><b>Practicing with a plan</b><span>A coach sets the goal for each practice and reviews how it&nbsp;went.</span></li>
+   <li><s>“Five more minutes”</s><b>The coach calls time</b><span>Practice has a start and an end, and the coach runs&nbsp;both.</span></li></ul>`},
+ d2:{acc:"#FDE74C",font:'"Archivo Black"',k:"Heard in every living room",h:"They can’t pause it. Their team needs&nbsp;them.",p:"That’s already a team sport. EKUZO adds the coach, the weekly practice and the same teammates all season, so those hours build&nbsp;something.",
+  mod:`<span class="kick">What you’ll hear instead</span><div class="oh">
+   <div class="pair"><div class="now"><small>Now</small><q>I can’t pause&nbsp;it.</q></div><div class="then"><small>Season one</small><q>We ran the play we practiced and it&nbsp;worked.</q></div></div>
+   <div class="pair"><div class="now"><small>Now</small><q>Five more&nbsp;minutes.</q></div><div class="then"><small>Season one</small><q>Practice is done. Coach says we’re ready for the&nbsp;match.</q></div></div>
+   <div class="pair"><div class="now"><small>Now</small><q>I’m just&nbsp;playing.</q></div><div class="then"><small>Season one</small><q>I was shot caller tonight. Everyone listened to&nbsp;me.</q></div></div></div>`},
+ d3:{acc:"#60E1E0",font:'"Unbounded"',k:"For kids who play to win",h:"Give them a team to win with.",p:"A real coach helps them get better, and a team counts on them every week. Practice, matches and a season of their&nbsp;own."},
+ d4:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Esports league",h:"Not every team needs a field.",p:"EKUZO teams practice online with a real coach and compete together all season. Same teammates, same goal, every&nbsp;week."},
+ d5:{acc:"#E0FF4E",font:'"Inter Tight"',k:"After soccer, piano and&nbsp;scouts",h:"A team that expects them every&nbsp;week.",p:"They already love the game. We add the coach, the teammates and a weekly practice, so it works like a team sport because it&nbsp;is."},
+ d6:{acc:"#FF2ECC",font:'"Syne"',k:"Practice over. GG.",h:"The coach calls it, not you.",p:"Practice has a start and an end, and the coach runs both. No doorway argument, no “five more&nbsp;minutes.”"},
+ d7:{acc:"#49B41A",font:'"Anybody"',k:"Progress report",h:"Feedback from a coach, every&nbsp;week.",p:"Each practice works on teamwork, talking it through and showing up, and the coach tells you how they’re doing on each. In the game they already&nbsp;love."},
+ d8:{acc:"#FFFFFF",font:'"Dela Gothic One"',k:"Same game",h:"Now with a team.",p:"Same game they play every night. Now with teammates who count on them and a coach who helps them get&nbsp;better."},
+ d9:{acc:"#49B41A",font:'"Rubik Mono One"',k:"The parent-free league",h:"No drive. No cleats. No parking.",p:"They log in from home and practice with their team and coach. You get the season without the&nbsp;sideline."},
+ d10:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time with a purpose",h:"The skills are already there. A coach brings them&nbsp;out.",p:"Every practice works on the things you’d want them to get from any team sport. They just happen to love this&nbsp;one.",
+  mod:`<span class="kick">What a coach works on</span><ul class="sk">
+   <li><b>Problem <em>solving</em></b><span>Reviewing a lost match together and finding the call that changed&nbsp;it.</span></li>
+   <li><b><em>Team</em>work</b><span>Five players, one plan and the same teammates all&nbsp;season.</span></li>
+   <li><b>Talking it <em>through</em></b><span>Clear, calm callouts under pressure, practiced every&nbsp;week.</span></li></ul>`},
+ d11:{acc:"#49B41A",font:'"Rubik"',k:"Season one",h:"Their name on the back.",p:"A real team, a real coach and a jersey with their gamer tag on it. The kind of thing they’ll want you to take a picture&nbsp;of."},
+ d12:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"The best excuse",h:"“Sorry, practice is going over.”",p:"A team that counts on them, a coach who expects them there and a reason to log off on&nbsp;time."},
+ d13:{acc:"#E0FF4E",font:'"Sora"',k:"Screen time you’re proud of",h:"Don’t take the game away. Give it a&nbsp;coach.",p:"A real coach and a team that has their back turn the hours they already play into practice, with a start and an end. In the games they already&nbsp;love."},
+ d14:{acc:"#FF2ECC",font:'"Syne"',k:"Screen time. Coached.",h:"The coach calls time, not&nbsp;you.",p:"Practice starts on time, works on teamwork and talking it through, and ends when the coach says so. No doorway&nbsp;argument."},
+ d15:{acc:"#FDE74C",font:'"Hanken Grotesk"',k:"Online friends. Now a real team.",h:"They already have people. Give them a&nbsp;team.",p:"A team that practices together every week, with a coach who knows their name. The kind of friends who have their&nbsp;back."},
+ d16:{acc:"#E0FF4E",font:'"Bricolage Grotesque"',k:"Their people. Their team.",h:"A team that has their&nbsp;back.",p:"EKUZO teams practice online with a real coach and the same teammates all season. Somewhere they feel seen, doing what they&nbsp;love."},
+ d17:{acc:"#E0FF4E",font:'"Space Grotesk"',k:"Not a sports kid",h:"Some kids find their team somewhere&nbsp;else.",p:"For the kid who never clicked with soccer or scouts. A coach, a team that has their back and friends who get&nbsp;them.",mod:"<span class=\"kick\">Cross it off</span><ul class=\"xo\"><li><s>Sitting on the bench</s><b>A role on the team</b><span>Every player has a job, and the team needs&nbsp;it.</span></li><li><s>Alone in their room</s><b>With their team every week</b><span>The same teammates all season, with each other’s&nbsp;backs.</span></li><li><s>“Just playing games”</s><b>Practice with a coach</b><span>A real coach runs every practice and keeps it on&nbsp;track.</span></li></ul>"},
+ d18:{acc:"#E0FF4E",font:'"Inter Tight"',k:"Not a sports kid? Perfect.",h:"A team sport built around what they&nbsp;love.",p:"They don’t have to like soccer to love a team. A coach, teammates who have their back and a season, in the games they already&nbsp;play."}
+};
+// d19 to d21 are ad 11 with the new Southie jersey: same page as d11 below the hero.
+["d19","d20","d21"].forEach(k=>{ T[k]=T.d11; });
+const qs = new URLSearchParams(location.search);
+let id = (qs.get("ad")||"d1").toLowerCase().replace(/^d0/,"d"); if(!Object.prototype.hasOwnProperty.call(T,id)) id="d1";
+const adOk=Object.prototype.hasOwnProperty.call(T,(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d"));
+// Remember the ad keys for the site popup on other pages (this page is served outside the site layout, so nothing else stores them). The latest ad landing wins. Storage only, never blocks the page.
+{ const K=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","site","ad"], a={}, ra=(qs.get("ad")||"").toLowerCase().replace(/^d0/,"d");
+  K.forEach(k=>a[k]=k==="ad" ? (Object.prototype.hasOwnProperty.call(T,ra)?ra:"") : (qs.get(k)||"").slice(0,200));
+  if(K.slice(0,5).some(k=>a[k])){
+    try{ sessionStorage.setItem("ekuzo_attribution",JSON.stringify(a)); }catch(_){}
+    try{ localStorage.setItem("ekuzo_s1_attribution",JSON.stringify(Object.assign({at:Date.now()},a))); }catch(_){}
+  } }
+const d = D.find(x=>x.id===id), t = T[id];
+const lp = document.getElementById("lp");
+const themed=[lp,document.getElementById("conf")];
+themed.forEach(el=>el.style.setProperty("--acc", t.acc));
+themed.forEach(el=>el.style.setProperty("--acc-ink", t.acc==="#49B41A"||t.acc==="#FF2ECC" ? "#111013" : "#111013"));
+themed.forEach(el=>el.style.setProperty("--disp", `${t.font},var(--ui)`));
+themed.forEach(el=>el.style.setProperty("--ds", ({d3:.74,d6:.8,d7:.78,d8:.8,d9:.66,d11:.92})[d.tpl||id]||1));
+const heroCls = (d.cls ? " "+d.cls : "") + (d.bgs && d.bgs[0].cls ? " "+d.bgs[0].cls : "");
+document.getElementById("hero").innerHTML = `<div class="art k-feed ${d.tpl||d.id}${heroCls}" role="img" aria-label="${d.name}">${d.art("feed")}</div>`;
+document.getElementById("bridge").innerHTML = `<span class="kick">${t.k}</span><h3>${t.h}</h3><p>${t.p}</p>`;
+if(t.mod){ const m=document.getElementById("mod"); m.innerHTML=t.mod; m.hidden=false; }
+document.title = "EKUZO · " + d.name;
+const CTA = (qs.get("cta")||"Send me the details").slice(0,40);
+document.querySelectorAll('.join button[type=submit], #sticky button').forEach(b=>b.textContent=CTA);
+// The hero keeps the ad's own button so the tap feels continuous; ?herocta= overrides it
+if(qs.get("herocta")) document.querySelectorAll(".hero .cta").forEach(b=>b.textContent=qs.get("herocta").slice(0,40)+" →");
+
+// ===== Interactive heroes =====
+// ?hero=amount  "How much do they game?"  (A little / A lot / Way too much)
+// ?hero=games   "What do they play?"      (tap all that apply)
+// The answer comes first, then the email form slides in under it. The page's own top form is moved
+// into the hero, so the sign-up, tracking and confirmation run exactly as on the default page.
+// Only the hero name goes to GA and Clarity; the answer itself goes to Klaviyo with the sign-up (never to Meta or GA).
+const HERO_DEFS={
+ amount:{kick:"iPads, Switches, PS5s. Oh&nbsp;my.",q:"How much do they game?",sub:"Be honest. No judgment here.",skip:"Skip the question and join&nbsp;the&nbsp;list",
+  opts:[
+   {a:"A little",h:"Then let’s make it count.",say:"Give the time they do play a coach and a team that has their&nbsp;back.",cta:"Count me in"},
+   {a:"A lot",h:"Let’s add some structure.",say:"Weekly practice with a real coach, a start and an end, and a team that has their&nbsp;back.",cta:"Count me in"},
+   {a:"Way too much",h:"We hear that a lot.",say:"You don’t have to fight it alone. A coach, a schedule and a team that has their back turn those hours into&nbsp;practice.",cta:"Count me in"}]},
+ games:{kick:"Quick question",q:"What do they play?",sub:"Tap all that apply.",skip:"Just join the&nbsp;list",
+  opts:[{a:"Fortnite"},{a:"Minecraft"},{a:"Roblox"},{a:"Overwatch"},{a:"Super Smash Bros."},{a:"Something else"},{a:"I have no idea",none:true}],
+  h:"Sounds like a gamer. Let’s give them a&nbsp;team.",say:"We don’t teach the game. We coach the kid: teamwork, talking it through and practice with a start and an&nbsp;end.",cta:"That’s my kid",
+  noneH:"That’s normal.",noneSay:"Most parents don’t know what’s on the screen. A coach and a team give you something real to ask them&nbsp;about.",noneCta:"Count me in"},
+ shortlist:{q:"They tried them all",custom:true,sub:"Tap the ones you won’t&nbsp;miss.",skip:"Just join the&nbsp;list",
+  opts:[{a:"Soccer",q:"Bye, 7am Saturday kickoffs."},{a:"Baseball",q:"Four hours on a metal bleacher. Pass."},{a:"Dance",q:"Retiring from the dance-mom group chat."},{a:"Gymnastics",q:"No more 5am drop-offs."},{a:"Piano",q:"“Did you practice?” Not anymore."}],
+  keep:"",h:"Not every kid is a sports&nbsp;kid.",say:"No parking. No cleats. No sideline in the rain. Just their team and a real coach, from&nbsp;home.",cta:"Count me in"},
+ screentime:{kick:"Every house has one",q:"Which one do you hear the most?",sub:"Pick the line from your&nbsp;house.",skip:"Skip the question and join&nbsp;the&nbsp;list",
+  opts:[
+   {a:"“Five more minutes.”",h:"Let the coach call time.",say:"Practice starts on time and the coach ends it. One less doorway argument for&nbsp;you.",cta:"Count me in"},
+   {a:"“I can’t pause it.”",h:"Because their team needs them.",say:"That’s already teamwork. A coach and a weekly schedule turn it into&nbsp;practice.",cta:"Count me in"},
+   {a:"“Just one more game.”",h:"Make the games count.",say:"Weekly practice with a coach and a team that has their back, with a set end&nbsp;time.",cta:"Count me in"},
+   {a:"“I’m almost done.”",h:"Let’s add an end time that sticks.",say:"Practice has a start and an end, and the coach runs both. You don’t have to be the&nbsp;timer.",cta:"Count me in"}]}
+};
+// Aaron's handoff 2026-10-13 (docs/s1-heroes/aaron-handoff.md): which hero each ad opens with when the link has no ?hero=.
+// Ads not listed open page A. d10 is Aaron's B vs C test: each browser gets one of the two and keeps it.
+// AD_HERO is defined once, in the small script right after #hero.
+// HERO: hero id or "" (page A). HERO_FROM: url | ad-map | split | none. adOk keeps the d1 fallback (no or invalid ad) from mapping.
+let HERO="", HERO_FROM="none";
+{ const qh=(qs.get("hero")||"").trim().toLowerCase(), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+  if(own(HERO_DEFS,qh)){ HERO=qh; HERO_FROM="url"; }
+  else if(qh==="none"){ HERO_FROM="url"; }
+  else if(adOk&&own(AD_HERO,id)){ const v=AD_HERO[id];
+    if(typeof v==="string"){ HERO=v; HERO_FROM="ad-map"; }
+    else{ let s=""; try{ s=localStorage.getItem("ekuzo_s1_hero_"+id)||""; }catch(_){}
+      if(v.indexOf(s)<0){ s=v[Math.random()<.5?0:1]; try{ localStorage.setItem("ekuzo_s1_hero_"+id,s); }catch(_){} }
+      HERO=s; HERO_FROM="split"; } } }
+const HD = HERO ? HERO_DEFS[HERO] : undefined;
+// The small script after #hero keeps its own list of hero ids; flag drift.
+{ const k=Object.keys(HERO_DEFS); if(k.length!==HERO_KEYS.length||k.some(x=>HERO_KEYS.indexOf(x)<0)) console.warn("HERO_KEYS out of sync with HERO_DEFS"); }
+let heroAnswer="";
+if(HD){
+  const ih=document.getElementById("ihero"), joinTop=document.getElementById("join-top");
+  lp.classList.add("has-ihero"); ih.hidden=false;
+  const bg=document.querySelector("#hero img.ph, #hero img");
+  const pos=bg?getComputedStyle(bg).objectPosition:"";
+  if(HD.custom){ ih.classList.add("light"); lp.classList.add("light-top");
+  { // Take the ad's own colours: its background, text colour and accent
+    const art=document.querySelector("#hero .art"), cs=art?getComputedStyle(art):null;
+    const bgc=(cs&&cs.backgroundColor&&cs.backgroundColor!=="rgba(0, 0, 0, 0)")?cs.backgroundColor:"#111013";
+    const rgb=(bgc.match(/\d+/g)||[17,16,19]).slice(0,3).map(Number), L=(.2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2])/255, dark=L<.5;
+    const set=(k,v)=>ih.style.setProperty(k,v), lpset=(k,v)=>lp.style.setProperty(k,v);
+    set("--sl-bg",bgc); [set,lpset].forEach(f=>{ f("--sl-fg",dark?"#FFFFFF":"#111013"); });
+    if(!dark){ const a=getComputedStyle(lp).getPropertyValue("--acc").trim(); const m=a.match(/^#?([0-9a-f]{6})$/i);
+      if(m){ const n=parseInt(m[1],16), c=[n>>16,(n>>8)&255,n&255].map(v=>Math.round(v*.55)); set("--sl-acc",`rgb(${c.join(",")})`); } }
+    set("--sl-muted",dark?"rgba(255,255,255,.72)":"rgba(17,16,19,.68)"); set("--sl-line",dark?"rgba(255,255,255,.28)":"rgba(17,16,19,.25)"); set("--sl-field",dark?"rgba(255,255,255,.08)":"#FFFFFF");
+  }
+  ih.innerHTML=`<span class="sl-kick">Sound familiar?</span>
+   <h1 id="ih-q">They tried them all<i>.</i></h1>
+   <p class="ih-sub">${HD.sub}</p>
+   <div class="sl-list" role="group" aria-label="Activities that didn’t stick">${HD.opts.map((o,i)=>`<div class="sl-row"><button type="button" class="sl-item ih-opt" aria-pressed="false" data-i="${i}">${o.a}</button><span class="sl-q" aria-live="polite" hidden>${o.q}</span></div>`).join("")}</div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2>${HD.h}</h2><p class="ih-say">${HD.say}</p><p class="ih-list">Get the Season&nbsp;01&nbsp;details.</p><div class="ih-slot"></div></div></div>
+   <button type="button" class="ih-skip">${HD.skip}</button>`;
+  } else
+  ih.innerHTML=`${bg?`<img class="ih-bg" src="${bg.src}" alt="">`:""}
+   <span class="kick">${HD.kick}</span>
+   <h1 id="ih-q">${HD.q}</h1>
+   <p class="ih-sub">${HD.sub}</p>
+   <div class="ih-opts ${HERO==="screentime"?"quotes":HERO}" role="group" aria-label="${HD.q}">${HD.opts.map((o,i)=>`<button type="button" class="ih-opt${o.none?" wide":""}" aria-pressed="false" data-i="${i}">${o.a}</button>`).join("")}</div>
+   <div class="ih-resp" aria-live="polite"><div><p class="ih-got" hidden></p><h2></h2><p class="ih-say"></p><p class="ih-list">Get the Season&nbsp;01&nbsp;details.</p><div class="ih-slot"></div></div></div>
+   <button type="button" class="ih-skip">${HD.skip}</button>`;
+  if(pos) ih.style.setProperty("--ihpos",pos);
+  ih.querySelector(".ih-slot").appendChild(joinTop);
+  const resp=ih.querySelector(".ih-resp"), skip=ih.querySelector(".ih-skip"), btns=[...ih.querySelectorAll(".ih-opt")];
+  const setCta=label=>{ if(!qs.get("cta")) joinTop.querySelector("button[type=submit]").textContent=label; };
+  let opened=false;
+  const open=()=>{ resp.classList.add("on"); skip.hidden=true;
+    if(!opened){ opened=true; setTimeout(()=>{ const f=joinTop.querySelector("form"); const r=f.getBoundingClientRect();
+      if(r.bottom>innerHeight-8) f.scrollIntoView({behavior:"smooth",block:"end"}); },380); } };
+  // Above-the-fold fit: shrink the hero's display type until the whole hero, way forward included, fits in 80% of the screen.
+  // Runs before an answer only; once the form opens the page scrolls to it anyway. Phones only (the desktop hero sits in a column).
+  const fitHero=()=>{ try{
+    if(opened||innerWidth>=960) return;
+    ih.classList.remove("tight"); ih.style.removeProperty("--ds");
+    const base=parseFloat(getComputedStyle(ih).getPropertyValue("--ds"))||1, room=()=>Math.ceil(innerHeight*.8)+1;
+    const end=()=>ih.getBoundingClientRect().height;
+    if(end()<=room()) return;
+    let ds=base;
+    while(end()>room() && ds>base*.5){ ds=+(ds-.04).toFixed(2); ih.style.setProperty("--ds",ds); }
+    if(end()>room()) ih.classList.add("tight");
+  }catch(_){} };
+  fitHero(); document.fonts&&document.fonts.ready.then(fitHero); addEventListener("load",fitHero);
+  document.fonts&&document.fonts.addEventListener&&document.fonts.addEventListener("loadingdone",fitHero); document.getElementById("s1-fonts")?.addEventListener("load",fitHero);
+  let fitT; addEventListener("resize",()=>{ clearTimeout(fitT); fitT=setTimeout(fitHero,150); });
+  btns.forEach(b=>b.addEventListener("click",()=>{
+    const o=HD.opts[+b.dataset.i];
+    if(HERO==="shortlist"){
+      const onS=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",onS);
+      const q=b.parentElement.querySelector(".sl-q"); if(q) q.hidden=!onS;
+      heroAnswer=btns.filter(x=>x.getAttribute("aria-pressed")==="true").map(x=>x.textContent).join(", ");
+      setCta(HD.cta);
+      if(!heroAnswer){ return; }
+    }else if(HERO!=="games"){
+      btns.forEach(x=>x.setAttribute("aria-pressed",x===b));
+      heroAnswer=o.a; resp.querySelector("h2").innerHTML=o.h; resp.querySelector(".ih-say").innerHTML=o.say; setCta(o.cta);
+    }else{
+      const on=b.getAttribute("aria-pressed")!=="true";
+      b.setAttribute("aria-pressed",on);
+      // "I have no idea" stands alone: picking it clears the games, picking a game clears it
+      btns.forEach(x=>{ if(x!==b && on && (!!HD.opts[+x.dataset.i].none!==!!o.none)) x.setAttribute("aria-pressed","false"); });
+      const picked=btns.filter(x=>x.getAttribute("aria-pressed")==="true").map(x=>x.textContent);
+      heroAnswer=picked.join(", ");
+      const listLine=resp.querySelector(".ih-list");
+      if(picked.length===1&&HD.opts[+b.dataset.i].none&&on){ heroAnswer="I have no idea";
+        resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML=""; listLine.innerHTML="That’s normal. Get the Season&nbsp;01&nbsp;details."; setCta(HD.noneCta);
+        ga("hero_answer",{hero:HERO}); clr("event","hero_answer"); open(); return; }
+      const named=picked.filter(x=>x!=="Something else"&&x!=="I have no idea");
+      const lead=!picked.length?"":named.length===0?"Got it.":named.length===1?`${named[0]}. Got it.`:named.length===2?`${named[0]} and ${named[1]}. Got it.`:`${named[0]}, ${named[1]} and ${named.length-2} more. Got it.`;
+      resp.querySelector(".ih-got").hidden=true; resp.querySelector("h2").innerHTML=""; resp.querySelector(".ih-say").innerHTML="";
+      listLine.innerHTML="Get the Season&nbsp;01&nbsp;details."; setCta(HD.cta);
+    }
+    ga("hero_answer",{hero:HERO}); clr("event","hero_answer");
+    open();
+  }));
+  skip.addEventListener("click",()=>{ const g=resp.querySelector(".ih-got"); if(g) g.hidden=true; if(HERO!=="shortlist") resp.querySelector("h2").innerHTML="Get the details."; resp.querySelector(".ih-say").innerHTML=""; ga("hero_skip",{hero:HERO}); open(); setTimeout(()=>document.getElementById("em-top")?.focus({preventScroll:true}),400); });
+  // ga is defined further down this script; send hero_view once the whole script has run (the Clarity hero tag is set below with the ad tag)
+  setTimeout(()=>{ ga("hero_view",{hero:HERO}); },0);
+}
+
+// Funnel instrumentation (SC-3): GA4 events and Clarity tags only, all keyed by the ad id. Never sent to Meta, and never the email, the game chips or anything about the child. Every call is guarded so tracking can never break the page or the sign-up.
+const ga=(n,p)=>{ try{ window.gtag&&gtag("event",n,Object.assign({ad:d.id,hero:HERO||"none"},p)); }catch(_){} };
+const clr=(...a)=>{ try{ window.clarity&&clarity(...a); }catch(_){} };
+const hp=f=>!!(f.ekz_hp&&f.ekz_hp.value);
+clr("set","ad",d.id); clr("set","hero",HERO||"none");
+["utm_content","utm_term","site"].forEach(k=>{ const v=qs.get(k); if(v) clr("set",k,v.slice(0,100)); });
+const faqSeen=new Set();
+document.querySelectorAll(".faq details").forEach(el=>el.addEventListener("toggle",()=>{ try{
+  if(!el.open) return;
+  const q=(el.querySelector("summary")?.textContent||"").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,60);
+  if(!q||faqSeen.has(q)) return; faqSeen.add(q); ga("faq_open",{question:q});
+}catch(_){} }));
+const formSeen=new Set();
+document.querySelectorAll(".join form").forEach(f=>{
+  const start=()=>{ try{ const w=f.dataset.where; if(formSeen.has(w)) return; formSeen.add(w); ga("form_start",{where:w}); }catch(_){} };
+  const em=f.querySelector("input[type=email]"); if(!em) return;
+  // Autofill fires "input" (and the page focuses the field itself), so only a real tap, key press or paste counts as starting the form. "click", not "pointerdown": a phone scroll that starts on the field fires pointerdown too.
+  ["click","keydown","paste"].forEach(t=>em.addEventListener(t,e=>{ if(e.isTrusted) start(); }));
+});
+
+const hdr=document.querySelector(".lp header");
+const onScroll=()=>hdr.classList.toggle("solid", scrollY > 24);
+addEventListener("scroll",onScroll,{passive:true}); onScroll();
+const goForm = ()=>{ if(HD&&!document.querySelector(".ih-resp.on")){ document.querySelector(".ih-skip")?.click(); document.getElementById("ihero").scrollIntoView({behavior:"smooth",block:"start"}); return; } const el=document.getElementById("join-top"); el.scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>{ document.getElementById("em-top")?.focus({preventScroll:true}); },450); };
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{ ga("cta_click",{location:b.closest("#sticky")?"sticky":"header"}); goForm(); }));
+document.querySelector(".hero .cta")?.addEventListener("click",()=>{ ga("cta_click",{location:"hero"}); goForm(); });
+// Fast track (s1-fast-track A4): the "ready now" links carry data-join="<location>" (they arrive with Part B; none in Part A). Click only, one event per tap; ga() adds ad and hero.
+window.S1.joinHref=()=>{ const u=new URLSearchParams({src:"ad",ad:d.id}); ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id"].forEach(k=>{ const v=qs.get(k); if(v) u.append(k,v); }); return "/season1/join?"+u.toString(); };
+document.querySelectorAll("[data-join]").forEach(a=>{ a.href=window.S1.joinHref(); });
+document.addEventListener("click",e=>{ const a=e.target&&e.target.closest&&e.target.closest("[data-join]"); if(!a) return; ga("s1_join_click",{location:a.dataset.join||"link"}); clr("event","join_click"); });
+
+// Sticky CTA: shows once the top form is off screen, hides when the bottom form is on screen
+const sticky = document.getElementById("sticky"); let topVis=true, endVis=false, joined=false;
+const upd=()=>sticky.classList.toggle("on", !joined && !topVis && !endVis);
+new IntersectionObserver(e=>{topVis=e[0].isIntersecting;upd();}).observe(document.getElementById(HD?"ihero":"join-top"));
+new IntersectionObserver(e=>{endVis=e[0].isIntersecting;upd();}).observe(document.getElementById("join-end"));
+
+// Sign-ups go to the site's /api/season-one route (Klaviyo "Season 01 Waitlist" list).
+// Off ekuzo.gg (a branch deploy or a design preview) nothing is saved, so the form just shows the success state (analytics C12: test deploys send no Lead).
+const LIVE = /(^|\.)ekuzo\.gg$|^localhost$/.test(location.hostname);
+const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return ""}})();
+const post = async o => {
+  if(!LIVE) return {ok:true};
+  return fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o),signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined});
+};
+const utm = () => ({utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",utm_content:qs.get("utm_content")||"",utm_term:qs.get("utm_term")||"",utm_id:qs.get("utm_id")||"",site:qs.get("site")||""});
+let savedEmail="";
+// One Meta event ID per sign-up, reused on retry and shared with the server (CAPI) Lead so Meta counts it once.
+// The id belongs to the email it was made for (trimmed, lowercased): a different email is a different sign-up and gets its own id.
+let eventId="", leadSent=false, eventIdFor="", inflight=false;
+const newEventId = () => (window.crypto&&crypto.randomUUID) ? crypto.randomUUID() : Date.now()+"-"+Math.random().toString(36).slice(2,12);
+document.querySelectorAll(".join form").forEach(f=>f.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const em=f.email.value.trim(), err=f.querySelector(".err"), btn=f.querySelector("button");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ if(!hp(f)) ga("signup_error",{reason:"invalid_email"}); err.textContent="Check the email address and try again."; err.hidden=false; f.email.focus(); return; }
+  if(inflight) return;
+  inflight=true;
+  err.hidden=true; btn.disabled=true; btn.textContent="Saving…";
+  const emKey=em.toLowerCase();
+  if(!eventId||eventIdFor!==emKey){ eventId=newEventId(); eventIdFor=emKey; leadSent=false; savedEmail=""; }
+  let why="network";
+  try{
+    const r=await post({email:em,source:"ad-landing",ad:d.id,adName:d.name,where:f.dataset.where,attribution:utm(),page:location.pathname+location.search,hero:HD?HERO:"none",heroAnswer:HD?heroAnswer:"",heroFrom:HERO_FROM,eventId,eventSourceUrl:location.href,tz:TZ,ekz_hp:f.ekz_hp?f.ekz_hp.value:""});
+    why="server";
+    // 429 (rate limit): show the server's own text, re-enable the button, no auto retry. Nothing was saved.
+    if(r.status===429){ let msg=""; try{ const j=await r.json(); msg=(j&&typeof j.error==="string")?j.error:""; }catch(_){}
+      why=""; btn.disabled=false; btn.textContent=CTA; err.textContent=msg||"That didn’t go through. Try again in a little while."; err.hidden=false; return; }
+    if(!r.ok) throw 0;
+    why="";
+    // A repeat (same email already joined in the last 24 h) or a quiet sign-up (server rate limit) shows the normal confirmation but fires no Lead. Off LIVE, post() returns {ok:true} with no json: treated as new.
+    let repeat=false; try{ if(typeof r.json==="function"){ const j=await r.json(); repeat=!!(j&&(j.repeat===true||j.quiet===true)); } }catch(_){}
+    // LIVE only: a design preview saves nothing, so it must not count as a Lead.
+    if(LIVE && !repeat && !leadSent && !(f.ekz_hp&&f.ekz_hp.value)){ leadSent=true; try{ window.fbq&&fbq("track","Lead",{content_name:"season_one_"+d.id},{eventID:eventId}); }catch(_){}
+      // GA4 lead: same conditions, once per sign-up. Only the ad id goes to GA, never the game chips or anything about the child.
+      try{ window.gtag&&gtag("event","generate_lead",{lead_source:"season_one_"+d.id,hero:HERO||"none"}); }catch(_){}
+      // Clarity: same moment, same gating. A named event and one session tag, nothing else.
+      clr("event","signup"); clr("set","signed_up","yes"); }
+    try{ localStorage.setItem("ekuzo_s1_joined","1"); }catch(_){}
+    savedEmail=em; joined=true; upd(); showDone();
+    if(HERO==="games"&&heroAnswer&&heroAnswer!=="I have no idea"){ post({step:"games",email:em,eventId,kidGames:heroAnswer}).catch(()=>{}); }
+  }catch(_){ if(why&&!hp(f)) ga("signup_error",{reason:why}); btn.disabled=false; btn.textContent=CTA; err.textContent="That didn’t go through. Check your connection and try again."; err.hidden=false; }
+  finally{ inflight=false; }
+}));
+function showDone(){
+  const c=document.getElementById("conf");
+  c.hidden=false; document.body.style.overflow="hidden";
+  document.querySelectorAll(".lp header,#sticky").forEach(x=>x.hidden=true);
+  c.querySelector("h2").focus({preventScroll:true});
+  setTimeout(()=>c.classList.add("on"),700);
+  const tf=document.getElementById("tk-form");
+  if(tf && !tf.dataset.on){ tf.dataset.on="1"; let tkStarted=false;
+    tf.phone.addEventListener("input",()=>{ if(!tkStarted){ tkStarted=true; ga("text_karlin_start",{}); } });
+    tf.addEventListener("submit",async e=>{
+      e.preventDefault();
+      const err=tf.querySelector(".tk-err"), btn=tf.querySelector("button");
+      // US numbers: 10 digits, or 11 starting with 1. Anything else asks again.
+      let dg=tf.phone.value.replace(/\D/g,""); if(dg.length===11&&dg[0]==="1") dg=dg.slice(1);
+      if(dg.length!==10||/^[01]/.test(dg)){ err.textContent="Check the number and try again. US mobile numbers only for now."; err.hidden=false; tf.phone.focus(); return; }
+      err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
+      try{
+        // The number goes to Klaviyo only. GA and Clarity get the moment, never the number; Meta gets nothing.
+        const r=await post({step:"text-karlin",email:savedEmail,eventId,phone:"+1"+dg,ad:d.id,hero:HD?HERO:"none",tz:TZ});
+        if(!r.ok) throw 0;
+        ga("text_karlin_submit",{}); clr("event","text_karlin");
+        tf.hidden=true; document.querySelector("#tk .tk-done").hidden=false;
+      }catch(_){ btn.disabled=false; btn.textContent="Text me, Karlin"; err.textContent="That didn’t go through. Try again, or reply to Karlin’s email."; err.hidden=false; }
+    });
+  }
+  const sb=document.getElementById("share");
+  if(sb && !sb.dataset.on){ sb.dataset.on="1"; sb.addEventListener("click",async()=>{
+    // Clean link: the same ad and hero, tagged as a share. No email, no answers.
+    const u=new URL(location.origin+location.pathname); u.searchParams.set("ad",d.id); u.searchParams.set("hero",HD?HERO:"none"); u.searchParams.set("utm_source","share"); u.searchParams.set("utm_medium","referral");
+    const url=u.toString(), th=c.querySelector(".age .thanks");
+    ga("share_click",{}); clr("event","share_click");
+    try{ if(navigator.share){ await navigator.share({title:"EKUZO Season 01",text:"Saw this and thought of you. Real coaches and a team for kids who game.",url}); th.textContent="Thanks for passing it on."; th.hidden=false; return; } }catch(e){ if(e&&e.name==="AbortError") return; }
+    try{ await navigator.clipboard.writeText(url); sb.textContent="Link copied"; th.textContent="Paste it in a text to them."; th.hidden=false; }
+    catch(_){ th.textContent=url; th.hidden=false; }
+  }); }
+}
+// Design preview: ?preview=done opens straight to the confirmation (nothing is sent)
+if(qs.get("preview")==="done") showDone();
+document.documentElement.dataset.s1Ready="1";
+</script>
+</body></html>

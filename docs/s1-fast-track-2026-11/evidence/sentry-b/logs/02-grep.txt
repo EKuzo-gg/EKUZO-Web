@@ -1,0 +1,14 @@
+base64,: 0
+fbevents.js: 0
+gtag/js: 0
+netlify\.app: 0
+{{TAGS}}: 1
+{{BUILD}}: 1
+s1-fonts: 2
+HERO_IMG: 3
+d19: 7
+d21: 7
+dataset.s1Pre: 2
+main data-s1-pre literal: 0  main dataset.s1Pre: 2
+LIVE regex line: 1478:const LIVE = /(^|\.)ekuzo\.gg$|^localhost$/.test(location.hostname);
+diff +lines 41 -lines 26; hero button pairs: 8

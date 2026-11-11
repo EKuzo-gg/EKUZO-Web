@@ -1,0 +1,18 @@
+
+> ekuzo-web@0.1.0 vitals
+> node scripts/field-vitals/run.mjs --target local:3100 --ads d18,d19,d2,noad --profile ig-android-412 --runs 3 --label ft-b-tier1-ig --expectMarker 0c02cf3 --requireReady
+
+[vitals] ft-b-tier1-ig: http://localhost:3100 ads=d18,d19,d2,noad profiles=ig-android-412 runs=3 network=slow4g cpu=4x failure=none target=0c02cf3
+[vitals] ig-android-412 d18 run1: CLS 0.0038 (+in 0.0066, total 0.004) src=h3 + div.row LCP 1544 img.ph laughing.webp FCP 868 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run2: CLS 0.0038 (+in 0.0066, total 0.004) src=h3 + div.row LCP 1532 img.ph laughing.webp FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d18 run3: CLS 0.0038 (+in 0.0066, total 0.004) src=h3 + div.row LCP 1492 img.ph laughing.webp FCP 820 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run1: CLS 0.002 (+in 0.0066, total 0.0021) src=form + p LCP 1948 img.jb southie-back.webp FCP 796 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run2: CLS 0.0018 (+in 0.0066, total 0.0019) src=form + p LCP 1968 img.jb southie-back.webp FCP 848 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d19 run3: CLS 0.0018 (+in 0.0066, total 0.0019) src=form + p LCP 2024 img.jb southie-back.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run1: CLS 0.0004 (+in 0.1496, total 0.0005) src=h1#ih-q #text LCP 1836 img.ih-bg couch.webp FCP 788 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run2: CLS 0.0004 (+in 0.1496, total 0.0005) src=h1#ih-q #text LCP 1884 img.ih-bg couch.webp FCP 776 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 d2 run3: CLS 0.0004 (+in 0.1496, total 0.0005) src=h1#ih-q #text LCP 1900 img.ih-bg couch.webp FCP 812 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run1: CLS 0.0005 (+in 0.0066, total 0.0006) src=button #text + span #text LCP 2240 img.ph mc-blocks.webp FCP 808 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run2: CLS 0.0005 (+in 0.0066, total 0.0006) src=button #text + span #text LCP 2212 img.ph mc-blocks.webp FCP 788 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] ig-android-412 noad run3: CLS 0.0005 (+in 0.0066, total 0.0006) src=button #text + span #text LCP 2304 img.ph mc-blocks.webp FCP 792 blocked=0 posts=0 leaks=0 form=true ready=1 err=0
+[vitals] wrote docs/s1-cls-field-2026-11/evidence/vitals/ft-b-tier1-ig/table.md, manifest.json, blocked.json (12 runs in label)

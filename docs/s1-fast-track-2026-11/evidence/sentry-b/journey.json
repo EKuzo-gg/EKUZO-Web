@@ -1,0 +1,2841 @@
+{
+ "J1-d18-main": {
+  "hrefs": [],
+  "atScroll": {
+   "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:42.888Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d18"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ]
+   ]
+  },
+  "afterSubmit": {
+   "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:42.888Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "form_start",
+     {
+      "ad": "d18",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d18",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d18"
+     },
+     {
+      "eventID": "f438baf8-40dc-45bf-ad04-782d9fd19c59"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d18"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "confHref": {
+   "href": null,
+   "tag": null,
+   "tabIndex": null
+  },
+  "tapDoc": null,
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d18\",\"adName\":\"Not a sports kid? Perfect.\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"f438baf8-40dc-45bf-ad04-782d9fd19c59\",\"eventSourceUrl\":\"http://localhost:3101/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ],
+  "errors": []
+ },
+ "J1-d18-branch": {
+  "hrefs": [
+   {
+    "where": "top",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "tabIndex": 0,
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "bottom",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "tabIndex": 0,
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "confirm",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "tabIndex": 0,
+    "text": "Save their spot · $100"
+   }
+  ],
+  "atScroll": {
+   "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:47.449Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d18"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ]
+   ]
+  },
+  "afterSubmit": {
+   "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:47.449Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "form_start",
+     {
+      "ad": "d18",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d18",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d18"
+     },
+     {
+      "eventID": "c8d4d884-aadf-4167-8ae6-ff21a76c6a1d"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d18"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "confHref": {
+   "href": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+   "tag": "A",
+   "tabIndex": 0
+  },
+  "tapDoc": {
+   "snaps": [
+    {
+     "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+     "dataLayer": [
+      [
+       "js",
+       "2026-11-10T20:26:47.449Z"
+      ],
+      [
+       "consent",
+       "default",
+       {
+        "ad_storage": "denied",
+        "ad_user_data": "denied",
+        "ad_personalization": "denied"
+       }
+      ],
+      [
+       "set",
+       {
+        "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+       }
+      ],
+      [
+       "config",
+       "G-8LM45PX53W",
+       {
+        "allow_google_signals": false,
+        "allow_ad_personalization_signals": false,
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "form_start",
+       {
+        "ad": "d18",
+        "hero": "none",
+        "where": "top",
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "generate_lead",
+       {
+        "lead_source": "season_one_d18",
+        "hero": "none",
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "s1_join_click",
+       {
+        "ad": "d18",
+        "hero": "none",
+        "location": "confirm",
+        "debug_mode": true
+       }
+      ]
+     ],
+     "fbq": [
+      [
+       "set",
+       "autoConfig",
+       false,
+       "1284038230557204"
+      ],
+      [
+       "init",
+       "1284038230557204"
+      ],
+      [
+       "track",
+       "PageView"
+      ],
+      [
+       "track",
+       "Lead",
+       {
+        "content_name": "season_one_d18"
+       },
+       {
+        "eventID": "c8d4d884-aadf-4167-8ae6-ff21a76c6a1d"
+       }
+      ]
+     ],
+     "clarity": [
+      [
+       "set",
+       "ad",
+       "d18"
+      ],
+      [
+       "set",
+       "hero",
+       "none"
+      ],
+      [
+       "set",
+       "utm_content",
+       "d18-a"
+      ],
+      [
+       "event",
+       "signup"
+      ],
+      [
+       "set",
+       "signed_up",
+       "yes"
+      ],
+      [
+       "event",
+       "join_click"
+      ]
+     ]
+    }
+   ],
+   "joinUrl": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+   "joinDoc": {
+    "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:26:51.805Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d18",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ]
+    ]
+   }
+  },
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d18\",\"adName\":\"Not a sports kid? Perfect.\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"c8d4d884-aadf-4167-8ae6-ff21a76c6a1d\",\"eventSourceUrl\":\"http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ],
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+ },
+ "J2-d18": {
+  "joinUrl": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+  "joinDocAtJoin": {
+   "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:56.047Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+      "page_referrer": "http://localhost:3100"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_join_view",
+     {
+      "variant": "b",
+      "ad": "d18",
+      "src": "ad",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "src",
+     "ad"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ]
+   ]
+  },
+  "backUrl": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+  "backDoc": {
+   "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:26:57.840Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d18"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ]
+   ]
+  },
+  "snaps": [
+   {
+    "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:26:53.686Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d18",
+       "hero": "none",
+       "location": "top",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d18"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   },
+   {
+    "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:26:56.047Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d18",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ]
+    ]
+   },
+   {
+    "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:26:57.840Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d18",
+       "hero": "none",
+       "location": "top",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d18"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   },
+   {
+    "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:26:59.751Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d18",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ]
+    ]
+   },
+   {
+    "url": "/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:01.031Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "form_start",
+      {
+       "ad": "d18",
+       "hero": "none",
+       "where": "top",
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "generate_lead",
+      {
+       "lead_source": "season_one_d18",
+       "hero": "none",
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d18",
+       "hero": "none",
+       "location": "confirm",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "Lead",
+      {
+       "content_name": "season_one_d18"
+      },
+      {
+       "eventID": "2011600c-5360-4983-b3ec-3789f2e2d356"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d18"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d18-a"
+     ],
+     [
+      "event",
+      "signup"
+     ],
+     [
+      "set",
+      "signed_up",
+      "yes"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   }
+  ],
+  "finalDoc": {
+   "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:05.113Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+      "page_referrer": "http://localhost:3100"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&ad=d18",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_join_view",
+     {
+      "variant": "b",
+      "ad": "d18",
+      "src": "ad",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "src",
+     "ad"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d18-a"
+    ]
+   ]
+  },
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d18\",\"adName\":\"Not a sports kid? Perfect.\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d18-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"2011600c-5360-4983-b3ec-3789f2e2d356\",\"eventSourceUrl\":\"http://localhost:3100/season1?ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ]
+ },
+ "J3-d18": {
+  "top": {
+   "focused": true,
+   "tag": "A",
+   "hrefSet": true,
+   "tabIndex": 0,
+   "role": null,
+   "secondTab": {
+    "url": "about:blank",
+    "hrefAttr": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "joinView": [
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d18",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ]
+   }
+  },
+  "bottom": {
+   "focused": true,
+   "tag": "A",
+   "hrefSet": true,
+   "tabIndex": 0,
+   "role": null,
+   "secondTab": {
+    "url": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "hrefAttr": "/season1/join?src=ad&ad=d18&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d18-a",
+    "joinView": [
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d18",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ]
+   }
+  },
+  "tabOrderFromTopEmail": [
+   "BUTTON",
+   "A[data-join=top]",
+   "SUMMARY",
+   "SUMMARY"
+  ],
+  "enterNavigated": true
+ },
+ "J1-d19-main": {
+  "hrefs": [],
+  "atScroll": {
+   "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:15.124Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "afterSubmit": {
+   "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:15.124Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "form_start",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d19",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d19"
+     },
+     {
+      "eventID": "7b9a4538-5ba5-4c70-bdc7-091fd5da0d81"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "confHref": {
+   "href": null,
+   "tag": null,
+   "tabIndex": null
+  },
+  "tapDoc": null,
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d19\",\"adName\":\"Southie jersey, back\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d19-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"7b9a4538-5ba5-4c70-bdc7-091fd5da0d81\",\"eventSourceUrl\":\"http://localhost:3101/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ],
+  "errors": []
+ },
+ "J1-d19-branch": {
+  "hrefs": [
+   {
+    "where": "top",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "tabIndex": 0,
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "bottom",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "tabIndex": 0,
+    "text": "Ready now? Save their spot for $100 →"
+   },
+   {
+    "where": "confirm",
+    "tag": "A",
+    "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "tabIndex": 0,
+    "text": "Save their spot · $100"
+   }
+  ],
+  "atScroll": {
+   "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:19.648Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "afterSubmit": {
+   "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:19.648Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "form_start",
+     {
+      "ad": "d19",
+      "hero": "none",
+      "where": "top",
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "generate_lead",
+     {
+      "lead_source": "season_one_d19",
+      "hero": "none",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "Lead",
+     {
+      "content_name": "season_one_d19"
+     },
+     {
+      "eventID": "bbbef77f-b95e-428e-b3fe-141556bf1c45"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ],
+    [
+     "event",
+     "signup"
+    ],
+    [
+     "set",
+     "signed_up",
+     "yes"
+    ]
+   ]
+  },
+  "confHref": {
+   "href": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+   "tag": "A",
+   "tabIndex": 0
+  },
+  "tapDoc": {
+   "snaps": [
+    {
+     "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+     "dataLayer": [
+      [
+       "js",
+       "2026-11-10T20:27:19.648Z"
+      ],
+      [
+       "consent",
+       "default",
+       {
+        "ad_storage": "denied",
+        "ad_user_data": "denied",
+        "ad_personalization": "denied"
+       }
+      ],
+      [
+       "set",
+       {
+        "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+       }
+      ],
+      [
+       "config",
+       "G-8LM45PX53W",
+       {
+        "allow_google_signals": false,
+        "allow_ad_personalization_signals": false,
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "form_start",
+       {
+        "ad": "d19",
+        "hero": "none",
+        "where": "top",
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "generate_lead",
+       {
+        "lead_source": "season_one_d19",
+        "hero": "none",
+        "debug_mode": true
+       }
+      ],
+      [
+       "event",
+       "s1_join_click",
+       {
+        "ad": "d19",
+        "hero": "none",
+        "location": "confirm",
+        "debug_mode": true
+       }
+      ]
+     ],
+     "fbq": [
+      [
+       "set",
+       "autoConfig",
+       false,
+       "1284038230557204"
+      ],
+      [
+       "init",
+       "1284038230557204"
+      ],
+      [
+       "track",
+       "PageView"
+      ],
+      [
+       "track",
+       "Lead",
+       {
+        "content_name": "season_one_d19"
+       },
+       {
+        "eventID": "bbbef77f-b95e-428e-b3fe-141556bf1c45"
+       }
+      ]
+     ],
+     "clarity": [
+      [
+       "set",
+       "ad",
+       "d19"
+      ],
+      [
+       "set",
+       "hero",
+       "none"
+      ],
+      [
+       "set",
+       "utm_content",
+       "d19-a"
+      ],
+      [
+       "event",
+       "signup"
+      ],
+      [
+       "set",
+       "signed_up",
+       "yes"
+      ],
+      [
+       "event",
+       "join_click"
+      ]
+     ]
+    }
+   ],
+   "joinUrl": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+   "joinDoc": {
+    "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:23.981Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d19",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ]
+    ]
+   }
+  },
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d19\",\"adName\":\"Southie jersey, back\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d19-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"bbbef77f-b95e-428e-b3fe-141556bf1c45\",\"eventSourceUrl\":\"http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ],
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+ },
+ "J2-d19": {
+  "joinUrl": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+  "joinDocAtJoin": {
+   "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:28.341Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+      "page_referrer": "http://localhost:3100"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_join_view",
+     {
+      "variant": "b",
+      "ad": "d19",
+      "src": "ad",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "src",
+     "ad"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "backUrl": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+  "backDoc": {
+   "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:30.185Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "ad",
+     "d19"
+    ],
+    [
+     "set",
+     "hero",
+     "none"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "snaps": [
+   {
+    "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:25.905Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d19",
+       "hero": "none",
+       "location": "top",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d19"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   },
+   {
+    "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:28.341Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d19",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ]
+    ]
+   },
+   {
+    "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:30.185Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d19",
+       "hero": "none",
+       "location": "top",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d19"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   },
+   {
+    "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:32.304Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "page_referrer": "http://localhost:3100"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d19",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "ViewContent",
+      {
+       "content_name": "Season 01"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "page",
+      "join"
+     ],
+     [
+      "set",
+      "src",
+      "ad"
+     ],
+     [
+      "set",
+      "utm_campaign",
+      "s1"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ]
+    ]
+   },
+   {
+    "url": "/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+    "dataLayer": [
+     [
+      "js",
+      "2026-11-10T20:27:33.581Z"
+     ],
+     [
+      "consent",
+      "default",
+      {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     ],
+     [
+      "set",
+      {
+       "page_location": "http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1"
+      }
+     ],
+     [
+      "config",
+      "G-8LM45PX53W",
+      {
+       "allow_google_signals": false,
+       "allow_ad_personalization_signals": false,
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "form_start",
+      {
+       "ad": "d19",
+       "hero": "none",
+       "where": "top",
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "generate_lead",
+      {
+       "lead_source": "season_one_d19",
+       "hero": "none",
+       "debug_mode": true
+      }
+     ],
+     [
+      "event",
+      "s1_join_click",
+      {
+       "ad": "d19",
+       "hero": "none",
+       "location": "confirm",
+       "debug_mode": true
+      }
+     ]
+    ],
+    "fbq": [
+     [
+      "set",
+      "autoConfig",
+      false,
+      "1284038230557204"
+     ],
+     [
+      "init",
+      "1284038230557204"
+     ],
+     [
+      "track",
+      "PageView"
+     ],
+     [
+      "track",
+      "Lead",
+      {
+       "content_name": "season_one_d19"
+      },
+      {
+       "eventID": "fe5dfa79-91b0-4540-8765-49c73bbc7108"
+      }
+     ]
+    ],
+    "clarity": [
+     [
+      "set",
+      "ad",
+      "d19"
+     ],
+     [
+      "set",
+      "hero",
+      "none"
+     ],
+     [
+      "set",
+      "utm_content",
+      "d19-a"
+     ],
+     [
+      "event",
+      "signup"
+     ],
+     [
+      "set",
+      "signed_up",
+      "yes"
+     ],
+     [
+      "event",
+      "join_click"
+     ]
+    ]
+   }
+  ],
+  "finalDoc": {
+   "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+   "dataLayer": [
+    [
+     "js",
+     "2026-11-10T20:27:37.369Z"
+    ],
+    [
+     "consent",
+     "default",
+     {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    ],
+    [
+     "set",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+      "page_referrer": "http://localhost:3100"
+     }
+    ],
+    [
+     "config",
+     "G-8LM45PX53W",
+     {
+      "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+      "allow_google_signals": false,
+      "allow_ad_personalization_signals": false,
+      "debug_mode": true
+     }
+    ],
+    [
+     "event",
+     "season1_join_view",
+     {
+      "variant": "b",
+      "ad": "d19",
+      "src": "ad",
+      "debug_mode": true
+     }
+    ]
+   ],
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ],
+    [
+     "track",
+     "ViewContent",
+     {
+      "content_name": "Season 01"
+     }
+    ]
+   ],
+   "clarity": [
+    [
+     "set",
+     "page",
+     "join"
+    ],
+    [
+     "set",
+     "src",
+     "ad"
+    ],
+    [
+     "set",
+     "utm_campaign",
+     "s1"
+    ],
+    [
+     "set",
+     "utm_content",
+     "d19-a"
+    ]
+   ]
+  },
+  "posts": [
+   "{\"email\":\"qa+sentry@example.com\",\"source\":\"ad-landing\",\"ad\":\"d19\",\"adName\":\"Southie jersey, back\",\"where\":\"top\",\"attribution\":{\"utm_source\":\"meta\",\"utm_medium\":\"paid_social\",\"utm_campaign\":\"s1\",\"utm_content\":\"d19-a\",\"utm_term\":\"\",\"utm_id\":\"\",\"site\":\"\"},\"page\":\"/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"hero\":\"none\",\"heroAnswer\":\"\",\"heroFrom\":\"none\",\"eventId\":\"fe5dfa79-91b0-4540-8765-49c73bbc7108\",\"eventSourceUrl\":\"http://localhost:3100/season1?ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1\",\"tz\":\"America/Chicago\",\"ekz_hp\":\"\"}"
+  ]
+ },
+ "J3-d19": {
+  "top": {
+   "focused": true,
+   "tag": "A",
+   "hrefSet": true,
+   "tabIndex": 0,
+   "role": null,
+   "secondTab": {
+    "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "hrefAttr": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "joinView": [
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d19",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ]
+   }
+  },
+  "bottom": {
+   "focused": true,
+   "tag": "A",
+   "hrefSet": true,
+   "tabIndex": 0,
+   "role": null,
+   "secondTab": {
+    "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "hrefAttr": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a",
+    "joinView": [
+     [
+      "event",
+      "season1_join_view",
+      {
+       "variant": "b",
+       "ad": "d19",
+       "src": "ad",
+       "debug_mode": true
+      }
+     ]
+    ]
+   }
+  },
+  "tabOrderFromTopEmail": [
+   "BUTTON",
+   "A[data-join=top]",
+   "SUMMARY",
+   "SUMMARY"
+  ],
+  "enterNavigated": true
+ },
+ "J4&s1qa=1": {
+  "url": "/season1/join?src=ad&ad=d19&utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&s1qa=1",
+  "dataLayer": [
+   [
+    "js",
+    "2026-11-10T20:27:47.048Z"
+   ],
+   [
+    "consent",
+    "default",
+    {
+     "ad_storage": "denied",
+     "ad_user_data": "denied",
+     "ad_personalization": "denied"
+    }
+   ],
+   [
+    "set",
+    {
+     "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19"
+    }
+   ],
+   [
+    "config",
+    "G-8LM45PX53W",
+    {
+     "page_location": "http://localhost:3100/season1/join?utm_source=meta&utm_medium=paid_social&utm_campaign=s1&utm_content=d19-a&ad=d19",
+     "allow_google_signals": false,
+     "allow_ad_personalization_signals": false,
+     "debug_mode": true
+    }
+   ],
+   [
+    "event",
+    "season1_join_view",
+    {
+     "variant": "b",
+     "ad": "d19",
+     "src": "ad",
+     "debug_mode": true
+    }
+   ]
+  ],
+  "fbq": [
+   [
+    "set",
+    "autoConfig",
+    false,
+    "1284038230557204"
+   ],
+   [
+    "init",
+    "1284038230557204"
+   ],
+   [
+    "track",
+    "PageView"
+   ],
+   [
+    "track",
+    "ViewContent",
+    {
+     "content_name": "Season 01"
+    }
+   ]
+  ],
+  "clarity": [
+   [
+    "set",
+    "page",
+    "join"
+   ],
+   [
+    "set",
+    "src",
+    "ad"
+   ],
+   [
+    "set",
+    "utm_campaign",
+    "s1"
+   ],
+   [
+    "set",
+    "utm_content",
+    "d19-a"
+   ]
+  ]
+ },
+ "_offenders": [],
+ "_stubbed": [
+  "www.googletagmanager.com",
+  "connect.facebook.net",
+  "www.clarity.ms"
+ ]
+}

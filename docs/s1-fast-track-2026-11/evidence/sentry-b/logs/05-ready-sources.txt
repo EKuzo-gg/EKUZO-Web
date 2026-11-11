@@ -1,0 +1,35 @@
+d18-run1.json cls win {"windowed":0.0038459447776939947,"windowedWithInput":0.006577002946360367,"total":0.003964375202754593,"totalWithInput"
+d18-run2.json cls win {"windowed":0.0038459447776939947,"windowedWithInput":0.006577002946360367,"total":0.003964375202754593,"totalWithInput"
+d18-run3.json cls win {"windowed":0.0038459447776939947,"windowedWithInput":0.006577002946360367,"total":0.003964375202754593,"totalWithInput"
+d18-run4.json cls win {"windowed":0.00011574949838622565,"windowedWithInput":0.006577002946360367,"total":0.00023417992344682372,"totalWithInp
+d18-run5.json cls win {"windowed":0.00011574949838622565,"windowedWithInput":0.006577002946360367,"total":0.0002570710799981562,"totalWithInpu
+d19-run1.json cls win {"windowed":0.00175939237547063,"windowedWithInput":0.006577002946360367,"total":0.001877822800531228,"totalWithInput":0
+d19-run2.json cls win {"windowed":0.00175939237547063,"windowedWithInput":0.006577002946360367,"total":0.001877822800531228,"totalWithInput":0
+d19-run3.json cls win {"windowed":0.00175939237547063,"windowedWithInput":0.006577002946360367,"total":0.001877822800531228,"totalWithInput":0
+d19-run4.json cls win {"windowed":0.00175939237547063,"windowedWithInput":0.006577002946360367,"total":0.001877822800531228,"totalWithInput":0
+d19-run5.json cls win {"windowed":0.00175939237547063,"windowedWithInput":0.006577002946360367,"total":0.001877822800531228,"totalWithInput":0
+d2-run1.json cls win {"windowed":0.0004049960471008159,"windowedWithInput":0.14963093228409735,"total":0.0005234264721614139,"totalWithInput"
+d2-run2.json cls win {"windowed":0.0004049960471008159,"windowedWithInput":0.14963093228409735,"total":0.0005234264721614139,"totalWithInput"
+d2-run3.json cls win {"windowed":0.0004049960471008159,"windowedWithInput":0.14963093228409735,"total":0.0005234264721614139,"totalWithInput"
+d2-run4.json cls win {"windowed":0.0004049960471008159,"windowedWithInput":0.14963093228409735,"total":0.0005234264721614139,"totalWithInput"
+d2-run5.json cls win {"windowed":0.0004049960471008159,"windowedWithInput":0.14963093228409735,"total":0.0005503555978531713,"totalWithInput"
+noad-run1.json cls win {"windowed":0.000486038905834027,"windowedWithInput":0.006577002946360367,"total":0.0006044693308946249,"totalWithInput"
+noad-run2.json cls win {"windowed":0.000486038905834027,"windowedWithInput":0.006577002946360367,"total":0.0006044693308946249,"totalWithInput"
+noad-run3.json cls win {"windowed":0.000486038905834027,"windowedWithInput":0.006577002946360367,"total":0.0006044693308946249,"totalWithInput"
+noad-run4.json cls win {"windowed":0.0001831694771823352,"windowedWithInput":0.006577002946360367,"total":0.00032353218721000116,"totalWithInpu
+noad-run5.json cls win {"windowed":0.000486038905834027,"windowedWithInput":0.006577002946360367,"total":0.0006273604874459574,"totalWithInput"
+d18-run1 t=1688 value=0.00385 span>#text [24,863,364,20]->[24,863,364,20] | all sources: h3,div.row,button #text,span #text
+d18-run2 t=1546 value=0.00385 span>#text [24,863,364,20]->[24,863,364,20] | all sources: h3,div.row,button #text,span #text
+d18-run3 t=1690 value=0.00385 span>#text [24,863,364,20]->[24,863,364,20] | all sources: h3,div.row,button #text,span #text
+d18-run4 t=1718 value=0.00012 span>#text [24,863,364,20]->[24,863,364,20] | all sources: span #text
+d18-run5 t=1732 value=0.00012 span>#text [24,863,364,20]->[24,863,364,20] | all sources: span #text
+d19-run1 t=2008 value=0.00176 div.form-wrap>a.ready [24,863,364,23]->[24,857,364,23] ; div.form-wrap>p.ready-note [24,884,364,20]->[24,879,364,20] | all sources: form,p,a.ready,p.ready-note
+d19-run2 t=1983 value=0.00176 div.form-wrap>a.ready [24,863,364,23]->[24,857,364,23] ; div.form-wrap>p.ready-note [24,884,364,20]->[24,879,364,20] | all sources: form,p,a.ready,p.ready-note
+d19-run3 t=1992 value=0.00176 div.form-wrap>a.ready [24,863,364,23]->[24,857,364,23] ; div.form-wrap>p.ready-note [24,884,364,20]->[24,879,364,20] | all sources: form,p,a.ready,p.ready-note
+d19-run4 t=2013 value=0.00176 div.form-wrap>a.ready [24,863,364,23]->[24,857,364,23] ; div.form-wrap>p.ready-note [24,884,364,20]->[24,879,364,20] | all sources: form,p,a.ready,p.ready-note
+d19-run5 t=2022 value=0.00176 div.form-wrap>a.ready [24,863,364,23]->[24,857,364,23] ; div.form-wrap>p.ready-note [24,884,364,20]->[24,879,364,20] | all sources: form,p,a.ready,p.ready-note
+noad-run1 t=2057 value=0.00042 span>#text [24,863,364,20]->[24,863,364,20] | all sources: button #text,span #text,span.tag
+noad-run2 t=2047 value=0.00042 span>#text [24,863,364,20]->[24,863,364,20] | all sources: button #text,span #text,span.tag
+noad-run3 t=2051 value=0.00042 span>#text [24,863,364,20]->[24,863,364,20] | all sources: button #text,span #text,span.tag
+noad-run4 t=2077 value=0.00012 span>#text [24,863,364,20]->[24,863,364,20] | all sources: span #text
+noad-run5 t=2002 value=0.00042 span>#text [24,863,364,20]->[24,863,364,20] | all sources: button #text,span #text,span.tag
