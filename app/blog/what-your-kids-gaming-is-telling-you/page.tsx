@@ -27,7 +27,7 @@ const DESCRIPTION =
 const HERO_IMAGE = "/images/what-your-kids-gaming-is-telling-you-hero.jpg";
 const SHARE_IMAGE = "/images/what-your-kids-gaming-is-telling-you-card.jpg";
 const DATE_PUBLISHED = "2026-05-24";
-const DATE_MODIFIED = "2026-11-05";
+const DATE_MODIFIED = "2026-11-11";
 
 // FAQPage schema. The post's statement-shaped H2s ("They get more upset…")
 // don't extract well as standalone Q&A, so we surface six parent-shaped
@@ -583,7 +583,13 @@ export default function PostGamingHiddenMeaning() {
                   One NASEF-referenced finding put it at roughly 9 in 10
                   participants not in any other extracurricular
                 </a>
-                . It catches the kid who slipped through everything else.
+                . It catches the kid who slipped through everything else. I was
+                one of those kids. Here&apos;s{" "}
+                <Link href="/blog/my-kid-doesnt-like-sports">
+                  what I&apos;d tell a parent whose kid doesn&apos;t like
+                  sports
+                </Link>
+                .
               </p>
               <p>
                 The same move works on smaller asks. When his daughter wanted

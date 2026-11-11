@@ -134,7 +134,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/gaming-programs-for-kids`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-11"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -152,13 +152,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/what-your-kids-gaming-is-telling-you`,
-      lastModified: new Date("2026-11-05"),
+      lastModified: new Date("2026-11-11"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/when-your-sons-only-friends-are-online`,
-      lastModified: new Date("2026-10-26"),
+      lastModified: new Date("2026-11-11"),
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -195,7 +195,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // until the sports post.
     {
       url: `${baseUrl}/blog/how-to-get-your-kid-off-video-games-without-a-fight`,
-      lastModified: new Date("2026-11-05"),
+      lastModified: new Date("2026-11-11"),
       changeFrequency: "weekly",
       priority: 0.6,
     },

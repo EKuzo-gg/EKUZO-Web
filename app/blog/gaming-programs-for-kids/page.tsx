@@ -24,7 +24,7 @@ const HERO_IMAGE = "/images/blog-post-3-hero.jpg";
 // source of truth. Replace this file to update every surface at once.
 const SHARE_IMAGE = "/images/blog-post-3-card.jpg";
 const DATE_PUBLISHED = "2026-05-14";
-const DATE_MODIFIED = "2026-10-26";
+const DATE_MODIFIED = "2026-11-11";
 
 export const metadata = {
   alternates: { canonical: `/blog/${SLUG}` },
@@ -376,7 +376,11 @@ export default function PostGamingProgramsForKids() {
               <p>
                 A kid joins a small team, practices every week with a coach,
                 and plays real matches with teammates. It&apos;s the model of a
-                sports team.
+                sports team. That matters most for{" "}
+                <Link href="/blog/my-kid-doesnt-like-sports">
+                  a kid who doesn&apos;t like sports
+                </Link>{" "}
+                and still needs a team.
               </p>
               <p>In person:</p>
               <ul>

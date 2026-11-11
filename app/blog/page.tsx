@@ -30,7 +30,7 @@ const posts = [
   {
     slug: "how-to-get-your-kid-off-video-games-without-a-fight",
     title: "How do I get my kid off the game without a fight?",
-    date: "November 5, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     category: "Guides",
     excerpt:
@@ -69,7 +69,7 @@ const posts = [
   {
     slug: "what-your-kids-gaming-is-telling-you",
     title: "What your kid's gaming is telling you",
-    date: "November 5, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     category: "Perspective",
     excerpt:
@@ -111,7 +111,7 @@ const posts = [
   {
     slug: "when-your-sons-only-friends-are-online",
     title: "When your son's only friends are online",
-    date: "October 26, 2026",
+    date: "November 11, 2026",
     author: "Jamie Fitch",
     category: "Perspective",
     excerpt:
@@ -144,7 +144,7 @@ const posts = [
   {
     slug: "gaming-programs-for-kids",
     title: "Gaming programs for kids: a parent's guide, Fall 2026",
-    date: "October 26, 2026",
+    date: "November 11, 2026",
     author: "Karlin Oei",
     excerpt:
       "What a kid who games can join in fall 2026: build classes, online clubs, school teams, local leagues and coached teams, with prices checked in October.",

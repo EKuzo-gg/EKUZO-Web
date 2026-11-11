@@ -41,7 +41,7 @@ const HERO_ALT =
   "A boy of about 12 on a gray couch at night, headset on and a controller in his hands, watching a screen out of frame in a lamp-lit living room. Text on the image reads \"Heard in every living room\" and \"I can't pause it.\"";
 // Re-set both to the ship date if it ships another day.
 const DATE_PUBLISHED = "2026-11-05";
-const DATE_MODIFIED = "2026-11-05";
+const DATE_MODIFIED = "2026-11-11";
 
 const X_POST_URL = "https://x.com/CoachDanGo/status/2099566382681866270";
 
@@ -561,6 +561,11 @@ export default function PostGetKidOffVideoGames() {
               </Link>
               . And if you&apos;d rather ask a person,{" "}
               <Link href="/parents">my coaches answer parent questions</Link>.
+              And if your kid never clicked with a sport, read{" "}
+              <Link href="/blog/my-kid-doesnt-like-sports">
+                what a team gives a kid and where else to find one
+              </Link>
+              .
             </p>
 
             <h2>Common questions</h2>
