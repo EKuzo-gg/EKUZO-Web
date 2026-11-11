@@ -80,7 +80,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What if my daughter doesn't like sports?",
     answer:
-      "Same answer. Fewer girls than boys play a team sport regularly, so she has company too. Look for the same four things: the same people every week, a coach, a season and a role.",
+      "Same answer. Most girls don't play a team sport regularly either, so she has company too. Look for the same four things: the same people every week, a coach, a season and a role.",
   },
   {
     question: "Should I make my kid play a sport?",
@@ -289,8 +289,8 @@ export default function PostMyKidDoesntLikeSports() {
                 State of Play 2025
               </a>{" "}
               report, no more than 42% of boys ages 6 to 17 have played a team
-              sport regularly in any of the last nine years. For girls
-              it&apos;s 37%. Your kid has plenty of company.
+              sport regularly in any of the last nine years. For girls,
+              the high was 37%. Your kid has plenty of company.
             </p>
             <p>
               So the worry is usually about something else. An educator said it
@@ -355,7 +355,7 @@ export default function PostMyKidDoesntLikeSports() {
               in 2023.
             </p>
             <p>
-              I was 21. I started EKUZO so a kid could have that at 10, with a
+              I was 21. I started EKUZO so a kid could have that at 9, with a
               coach.
             </p>
 

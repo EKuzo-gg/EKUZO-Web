@@ -127,3 +127,5 @@ offender check empty). No beacon may reach GA4, Meta or Clarity from QA.
 - Inbound links (rows 1 to 4 of `03-inbound-links.md`) approved by Jamie 09:37 CT and applied in
   commit 5902d99; N1's file list extends to those four posts.
 
+
+- Copy changes approved by Jamie 11:15 CT ("yes to all 3"): girls stat reworded in the body and FAQ, "at 10" to "at 9", and the leading "And" dropped from inbound sentence 3. Deck and page changed together.

@@ -12,7 +12,7 @@ around that. For a lot of kids, that's video games.
 
 No. In the Aspen Institute's [State of Play 2025](https://projectplay.org/state-of-play-2025/participation-trends)
 report, no more than 42% of boys ages 6 to 17 have played a team sport regularly in any of the
-last nine years. For girls it's 37%. Your kid has plenty of company.
+last nine years. For girls, the high was 37%. Your kid has plenty of company.
 
 So the worry is usually about something else. An educator said it well in
 [a video we made about our program](https://www.youtube.com/watch?v=Pyicgs8RXnc&t=90s):
@@ -45,7 +45,7 @@ my room, queued up a game and cried. For the first time, I felt like my mom saw 
 [The Athletic opened a story with that moment](https://www.nytimes.com/athletic/5069385/2023/11/17/esports-league-of-legends-college-gaming/)
 in 2023.
 
-I was 21. I started EKUZO so a kid could have that at 10, with a coach.
+I was 21. I started EKUZO so a kid could have that at 9, with a coach.
 
 ## What should I look at before I sign my kid up for the next thing?
 
@@ -105,7 +105,7 @@ No. Most boys don't play a team sport regularly, and that's been true for years.
 built around something he does care about.
 
 **What if my daughter doesn't like sports?**
-Same answer. Fewer girls than boys play a team sport regularly, so she has company too. Look for
+Same answer. Most girls don't play a team sport regularly either, so she has company too. Look for
 the same four things: the same people every week, a coach, a season and a role.
 
 **Should I make my kid play a sport?**

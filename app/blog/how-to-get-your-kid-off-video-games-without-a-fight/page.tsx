@@ -561,7 +561,7 @@ export default function PostGetKidOffVideoGames() {
               </Link>
               . And if you&apos;d rather ask a person,{" "}
               <Link href="/parents">my coaches answer parent questions</Link>.
-              And if your kid never clicked with a sport, read{" "}
+              If your kid never clicked with a sport, read{" "}
               <Link href="/blog/my-kid-doesnt-like-sports">
                 what a team gives a kid and where else to find one
               </Link>
