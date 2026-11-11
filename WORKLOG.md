@@ -13,6 +13,7 @@ Aaron's direction: use the Join page hero (`app/season1/join/b`) with the beta u
 - Copy: "Karlin" removed from the card, steps, FAQ and confirmation ("we" instead). His coach card in "Who coaches" is unchanged. Ages read "9+" in the card and the FAQ.
 - Sign-up call and payload unchanged from the entry below.
 - Beta lab screens retaken. **Checked** at 390 and 1440 as before. **Not run:** the repo test suite.
+- `public/roadshow/beta-lab.html` (later the same day): "The ads" now shows Aaron's four Figma layouts (exports in `public/roadshow/beta/ads/`, 540 wide previews, not Meta finals), with the copy fixes made in Figma: "Game with a pro coach.", one button label "Join our free beta", ages 9+. "Still to decide" gains ad exports, Karlin on the page, and ages 9+ everywhere; the photo-release item is gone.
 - **Still 9-17 elsewhere:** the BETA ads d22 in the ad lab and its finals, and the live Season 01 pages. Not changed here.
 
 ## Aaron's Claude, 2026-11-11: /season1/beta rebuilt in the Join page's layout (dev)
