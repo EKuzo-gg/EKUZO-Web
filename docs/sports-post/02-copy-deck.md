@@ -59,12 +59,10 @@ For some kids that's drawing, taking things apart or the drums. Then stage crew,
 could be their team. For a lot of kids it's a video game. You may not love what you find. My
 parents didn't. Start there anyway.
 
-> **Try this tonight**
-> 1. Ask what they liked and didn't like about the last team or class they were on. Listen for
->    whether it was the activity, the coach or the other kids.
-> 2. Ask: "If you could be on a team for anything, what would it be?"
-> 3. Sit in on one game they play and count the people they're playing with. There may already be
->    a team in there.
+> **Try this tonight** (subtitle: Three things to do before the next sign-up)
+> 1. Ask what they liked about the last team or class, and what they didn't.
+> 2. Ask what team they'd join if they could pick anything.
+> 3. Watch one game with them and count who they're playing with.
 
 ## What does a team give a kid?
 

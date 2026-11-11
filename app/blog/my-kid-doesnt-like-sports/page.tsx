@@ -12,7 +12,7 @@ import {
   buildFAQPageSchema,
 } from "@/lib/schema";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 
 /**
  * "My kid doesn't like sports. What now?" Karlin byline. Copy of record:
@@ -34,6 +34,7 @@ const DESCRIPTION =
   "Fewer than half of kids play a team sport regularly. What a team gives a kid, where else to find it, and how to start with what your kid already loves.";
 const HERO_IMAGE = "/images/my-kid-doesnt-like-sports-hero.jpg";
 const SHARE_IMAGE = "/images/my-kid-doesnt-like-sports-card.jpg";
+const HERO_IMAGE_MOBILE = "/images/my-kid-doesnt-like-sports-hero-mobile.jpg";
 const HERO_ALT =
   "Karlin Oei as a teenager in a white concert shirt, beside a photo of his college esports team with their hands together before a match.";
 const VIDEO_ID = "RVkSj6AYCDs";
@@ -146,6 +147,21 @@ export const metadata = {
 };
 
 export default function PostMyKidDoesntLikeSports() {
+  const { props: heroDesktop } = getImageProps({
+    src: HERO_IMAGE,
+    alt: HERO_ALT,
+    width: 2464,
+    height: 1040,
+    sizes: "(max-width: 1264px) 100vw, 1232px",
+  });
+  const { props: heroMobile } = getImageProps({
+    src: HERO_IMAGE_MOBILE,
+    alt: HERO_ALT,
+    width: 1080,
+    height: 900,
+    sizes: "100vw",
+  });
+
   const articleSchema = buildBlogArticleSchema({
     slug: SLUG,
     title: TITLE_DISPLAY,
@@ -221,15 +237,20 @@ export default function PostMyKidDoesntLikeSports() {
         >
           {/* Page-local: the hero is three panels with text and captions baked in, so it keeps
               its natural 1232:520 ratio at every width and nothing is cropped. */}
-          <div className="relative w-full aspect-[1232/520]">
-            <Image
-              src={HERO_IMAGE}
-              alt={HERO_ALT}
-              fill
-              sizes="(max-width: 1040px) 992px, (max-width: 1264px) 100vw, 1232px"
-              className="object-cover"
-              priority
-            />
+          {/* Art direction: below md the three panels are too small to read, so phones get a
+              stacked version (quote on top, the two photos beneath). One <picture>, one request. */}
+          <div className="relative w-full aspect-[1080/900] md:aspect-[1232/520]">
+            <picture>
+              <source media="(min-width: 768px)" srcSet={heroDesktop.srcSet} sizes={heroDesktop.sizes} />
+              <source srcSet={heroMobile.srcSet} sizes={heroMobile.sizes} />
+              <img
+                src={heroMobile.src}
+                alt={HERO_ALT}
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </picture>
           </div>
         </div>
 
@@ -342,12 +363,11 @@ export default function PostMyKidDoesntLikeSports() {
             {/* Placement rule: directly after the H2 (no clear on .blog-content h2). */}
             <GutCheckAside
               title="Try this tonight"
-              subtitle="Three things before the next sign-up"
-              label="Try this tonight"
+              subtitle="Three things to do before the next sign-up"
               questions={[
-                "Ask what they liked and didn't like about the last team or class they were on. Listen for whether it was the activity, the coach or the other kids.",
-                "Ask: “If you could be on a team for anything, what would it be?”",
-                "Sit in on one game they play and count the people they're playing with. There may already be a team in there.",
+                "Ask what they liked about the last team or class, and what they didn't.",
+                "Ask what team they'd join if they could pick anything.",
+                "Watch one game with them and count who they're playing with.",
               ]}
             />
             <p>
