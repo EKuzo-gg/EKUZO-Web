@@ -99,6 +99,8 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
 /* The screens (Nov 11) */
 .ads.four{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:900px){.ads.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.screens.wiz{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.screens.wiz{grid-template-columns:1fr}}
 .screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
 .screens figure{margin:0}
 .screens img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
@@ -123,14 +125,14 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
 
   <section>
     <h2>The pathway</h2>
-    <p class="sub">One path from the first email or ad to the Season 01 offer. Every step links to its draft.</p>
+    <p class="sub">Two ways in, an ad or Karlin's email. Both end with an email address, which gets the wizard invite.</p>
     <ol class="steps six">
-      <li><b>Email and ads</b><span>Karlin's personal email to the 400+ sign-ups, and four new ads on Meta.</span><a href="#ads">See the ads</a></li>
-      <li><b>BETA page</b><span>Our Join page with the beta as the offer: the purple hero and the email card up top, then how it works, the coaches and short answers. Every beta ad lands here.</span><a href="/season1/beta">Open the page</a></li>
-      <li><b>Join</b><span>One field: the parent's email. No card.</span></li>
-      <li><b>Follow-up email</b><span>An email from Karlin with a link to a short wizard: the player's basics, the times that work, and what the beta is.</span><a href="beta/confirm.html">Early wizard draft</a></li>
-      <li><b>Two weeks</b><span>Week 1 is setup and meeting the coach and team. Week 2 is real practices.</span></li>
-      <li><b>Season 01 offer</b><span>After the last practice, families get the Season 01 offer with a deadline.</span></li>
+      <li><b>Beta ad</b><span>Four new ads on Meta. Each lands on the BETA page, where a parent joins with one email field.</span><a href="/season1/beta">Open the page</a></li>
+      <li><b>Karlin's email</b><span>A personal note to the 400+ Season 01 sign-ups. To join, they just reply.</span><a href="#emails">See the email</a></li>
+      <li><b>Wizard invite</b><span>Everyone whose email we now have gets a short email with the wizard link.</span></li>
+      <li><b>Sign-up wizard</b><span>Three steps: what the beta is, the player, and availability.</span><a href="beta/wizard.html">Open the wizard</a></li>
+      <li><b>Review and confirm</b><span>We check that each player's availability and our volume line up, then follow up with practice. How we confirm gets decided Nov 12.</span></li>
+      <li><b>The beta</b><span>Two weeks, four sessions. Then the Season 01 offer.</span></li>
     </ol>
   </section>
 
@@ -147,8 +149,20 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
   </section>
 
   <section>
-    <h2>The emails</h2>
-    <p class="sub">Short, plain emails from Karlin. The first opens the pathway, the second lands right after a parent joins.</p>
+    <h2>The wizard</h2>
+    <p class="sub">Three steps after we have a parent's email. It tells them what the beta is, then asks about the player and the times that work.</p>
+    <div class="screens wiz">
+      <figure><img src="beta/screens/wizard-1-beta.webp" alt="Wizard step 1: here's what the beta is, and what the player needs." width="390" height="878" loading="lazy"><figcaption><b>1. The beta</b>Two weeks, four sessions. A computer that runs League of Legends, a headset or headphones, a mouse. Tech setup comes later.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-2-player.webp" alt="Wizard step 2: the player's name, age, games and experience." width="390" height="1157" loading="lazy"><figcaption><b>2. Your player</b>Name, age, the games they play, and their experience with League and with a computer.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-3-availability.webp" alt="Wizard step 3: time zone, school schedule and the times that could work." width="390" height="1323" loading="lazy"><figcaption><b>3. Availability</b>Time zone, normal school schedule or not, then weekday or weekend, afternoons or evenings.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-4-done.webp" alt="Wizard end: Got it. We'll review your times and follow up with practice details." width="390" height="889" loading="lazy"><figcaption><b>After the last step</b>A holding message until the confirmation process is set.</figcaption></figure>
+    </div>
+    <a class="more" href="beta/wizard.html">Try the wizard</a>
+  </section>
+
+  <section>
+    <h2 id="emails">The emails</h2>
+    <p class="sub">Short, plain emails from Karlin. The first asks for a reply. The second invites everyone we have an email for into the wizard.</p>
     <div class="mail">
       <article class="inbox">
         <header>
@@ -159,8 +173,8 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
           <p>Hi,</p>
           <p>Thanks for signing up to learn more about Season 01.</p>
           <p>Before it starts, we're running a free 2-week beta, and I'd like your player in it. Two weeks with a pro coach, on a real team.</p>
-          <p>Join here: <span class="ph">[BETA page link]</span></p>
           <p>It's free. No card, no commitment.</p>
+          <p>Want in? Just reply to this email.</p>
           <p>Karlin<br>Founder, EKUZO</p>
         </div>
       </article>
@@ -168,12 +182,12 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
         <button class="btn" type="button" id="copyBody">Copy email</button>
         <button class="btn ghost" type="button" id="copySubject">Copy subject line</button>
         <div class="note">
-          <p><b>Send it as a personal email</b>From Karlin's own inbox, plain text, one link. It reads as a real invite and replies come straight to him.</p>
-          <p><b>Short on purpose</b>About 50 words and one link. People don't read the long ones.</p>
+          <p><b>Send it as a personal email</b>From Karlin's own inbox, plain text, no link. A reply is the sign-up, and it comes straight to him.</p>
+          <p><b>Short on purpose</b>About 50 words. People don't read the long ones.</p>
         </div>
       </aside>
     </div>
-    <p class="mailhead">Right after sign-up</p>
+    <p class="mailhead">The wizard invite</p>
     <div class="mail">
       <article class="inbox">
         <header>
@@ -182,7 +196,7 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
         </header>
         <div class="body" id="emailbody2">
           <p>Hi,</p>
-          <p>Thanks for joining the beta. A few quick questions get your player on a team:</p>
+          <p>Thanks for joining the beta. Three quick steps get your player on a team:</p>
           <p><span class="ph">[wizard link]</span></p>
           <p>Questions? Just reply.</p>
           <p>Karlin<br>Founder, EKUZO</p>
@@ -192,7 +206,7 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
         <button class="btn" type="button" id="copyBody2">Copy email</button>
         <button class="btn ghost" type="button" id="copySubject2">Copy subject line</button>
         <div class="note">
-          <p><b>Sent automatically</b>This one goes out from Klaviyo right after a parent joins with their email. The link opens the wizard.</p>
+          <p><b>Two senders</b>Page sign-ups can get this from Klaviyo right after they join. Parents who replied to Karlin get it from him by hand.</p>
         </div>
       </aside>
     </div>
@@ -214,9 +228,10 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
     <h2>Still to decide</h2>
     <p class="sub">What the pathway needs before it goes live.</p>
     <ul class="open">
-      <li><b>Dates and practice times</b><span class="who">Karlin</span><p>Which two weeks, and how many practices in week 2. The page and emails say "two weeks" until this is set.</p></li>
+      <li><b>How we confirm a player</b><span class="who">Team</span><p>Being decided the morning of Nov 12. Until then the wizard ends on "we'll review your times and follow up with practice details".</p></li>
+      <li><b>Dates and session times</b><span class="who">Karlin</span><p>It is two weeks and four sessions. Which two weeks, and the session times, come out of the availability answers.</p></li>
       <li><b>How many players we can take</b><span class="who">Karlin</span><p>The drafts treat the beta as open to every family who signs up. If coach capacity sets a limit, the page needs a "full" state and a waitlist.</p></li>
-      <li><b>The follow-up email and the wizard</b><span class="who">Jamie and Aaron</span><p>The BETA page posts to the same sign-up route as the Season 01 landing, marked with its page address. It still needs the beta follow-up email in Klaviyo and the wizard it links to.</p></li>
+      <li><b>Where the wizard saves</b><span class="who">Jamie</span><p>The wizard is a clickable draft and saves nothing yet. It needs a place for the answers, and the invite email in Klaviyo for page sign-ups.</p></li>
       <li><b>The paid Season 01 page while BETA runs</b><span class="who">Team</span><p>The drafts assume it stays live for families who are ready, and every ad and email points to BETA.</p></li>
       <li><b>The free jersey deadline</b><span class="who">Team</span><p>The jersey offer ends Nov 30, which may fall before the beta does. Decide if beta families still get it.</p></li>
       <li><b>The Season 01 offer after the beta</b><span class="who">Karlin</span><p>What families get for enrolling at the end, and the deadline.</p></li>

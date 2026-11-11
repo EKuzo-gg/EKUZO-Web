@@ -4,6 +4,17 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: BETA sign-up wizard draft and updated flow (dev)
+
+Aaron's flow: beta ad to the BETA page (email sign-up); Karlin's email to a plain reply. Once we have an email, we invite the parent to a 3-step wizard. Goal of the wizard: evaluate players and see if availability and volume line up. The confirmation process is being decided Nov 12.
+
+- **New draft:** `public/roadshow/beta/wizard.html` (static, saves nothing). Step 1 what the beta is (2 weeks, 4 sessions; a computer that runs League of Legends, a headset or headphones, a mouse; tech setup sent later). Step 2 the player (name, age, games, League experience, computer experience). Step 3 availability (time zone, normal school schedule or not, weekday or weekend by afternoons or evenings, optional note). Ends on "we'll review your times and follow up with practice details". `?email=` prefills and hides the email field; without it the field shows in step 2.
+- **Needed from Jamie:** where the wizard's answers are saved, and the wizard invite email in Klaviyo for page sign-ups. Nothing in `app/api` was touched.
+- `public/roadshow/beta-lab.html`: pathway redrawn for the two ways in, new "The wizard" section with screens, email 1 now asks for a reply (no link), email 2 is the wizard invite, "Still to decide" updated.
+- `app/season1/beta/beta.html` copy only: "Two weeks, four sessions", and the "What do they need?" answer now matches the wizard (graphics card, headset or headphones, mouse).
+- `public/roadshow/beta/confirm.html` and `index.html` are the older drafts and are no longer linked from the lab.
+- **Checked:** wizard run end to end at 390 and 1440 (required-field errors, time zone guess, final state), no sideways scroll or console errors. **Not run:** the repo test suite.
+
 ## Aaron's Claude, 2026-11-11: /season1/beta takes the Join page's purple hero (dev)
 
 Aaron's direction: use the Join page hero (`app/season1/join/b`) with the beta updates; the main CTA is "Join our free beta"; no Karlin by name in the page copy yet; ages read "kids ages 9+".
