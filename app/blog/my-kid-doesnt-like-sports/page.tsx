@@ -38,6 +38,8 @@ const HERO_IMAGE_MOBILE = "/images/my-kid-doesnt-like-sports-hero-mobile.jpg";
 const HERO_ALT =
   "Karlin Oei as a teenager in a white concert shirt, beside a photo of his college esports team with their hands together before a match.";
 const VIDEO_ID = "RVkSj6AYCDs";
+// Karlin telling the Inception story (UT interview clip B01), added 2026-11-11.
+const STORY_VIDEO_ID = "xSWJuBNC62c";
 const DATE_PUBLISHED = "2026-11-11";
 const DATE_MODIFIED = "2026-11-11";
 
@@ -354,6 +356,19 @@ export default function PostMyKidDoesntLikeSports() {
               </a>{" "}
               in 2023.
             </p>
+            <div className="my-8 mx-auto w-full max-w-[640px]">
+              <div className="relative w-full aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${STORY_VIDEO_ID}`}
+                  title="Karlin Oei: My mom just saw me for the first time"
+                  loading="lazy"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
+            </div>
             <p>
               I was 21. I started EKUZO so a kid could have that at 9, with a
               coach.

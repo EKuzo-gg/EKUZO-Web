@@ -129,3 +129,5 @@ offender check empty). No beacon may reach GA4, Meta or Clarity from QA.
 
 
 - Copy changes approved by Jamie 11:15 CT ("yes to all 3"): girls stat reworded in the body and FAQ, "at 10" to "at 9", and the leading "And" dropped from inbound sentence 3. Deck and page changed together.
+
+- 14:48 CT: Jamie uploaded clip B01 (https://youtu.be/xSWJuBNC62c, watched and approved by him) to embed after the Inception paragraph. Same iframe block as the other video; no copy change.
