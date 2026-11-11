@@ -4,6 +4,20 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: /season1/beta, the BETA landing page (dev)
+
+Aaron's direction: reuse the existing ad landing page, focus it on the free 2-week beta, and ask for an email only. Karlin's follow-up email then links to a wizard (player basics, availability, what the beta is). The wizard is not built yet.
+
+- **New route, live page untouched:** `app/season1/beta/route.ts` and `app/season1/beta/beta.html`. `beta.html` is a copy of `app/season1/landing.html` (as on dev today) with these changes only:
+  - Copy: both email forms, "How the beta works", three FAQ answers, the confirmation dialog, the header and sticky buttons. Every button reads "Join the free beta", including each ad hero's button.
+  - Removed: both "Ready now? Save their spot for $100" links and the "Ready to lock it in?" card in the confirmation. No price on the page.
+  - Ads: D gains d22 to d24 (the BETA ads from the ad lab) with T bridges, HERO_IMG and FONTS entries, and `.s1j.beta` CSS. With no or an unknown `?ad=` the page opens on d22 (the live landing opens on d1). d1 to d21 still work, so running ads can be repointed here.
+  - New image: `public/images/season1/landing/esports-room.webp` (d24's photo, taken out of the ad lab).
+- **Sign-up path is unchanged (Jamie's lane, not edited):** the form still posts to `/api/season-one` with `source: "ad-landing"`. Beta sign-ups can be told apart by `page` (`/season1/beta...`), the ad id (d22 to d24) and `utm_campaign=beta`. As it stands they join the Season 01 Waitlist list and get no beta email. **Needed from Jamie:** a beta follow-up from Karlin in Klaviyo with the wizard link, and where the wizard's answers are saved.
+- `public/roadshow/beta-lab.html`: pathway now points to `/season1/beta` and describes the email-only join and the wizard. The earlier static prototypes in `public/roadshow/beta/` stay as a draft for the wizard.
+- **Not run:** the repo test suite (no node_modules in this session). `lib/season1/__tests__/landingHead.test.ts` reads `landing.html` only, so `beta.html` has no test of its own yet.
+- **Verified:** rendered through `fillTags` and loaded in Playwright Chromium at 390 and 1440 with no `?ad=`, and at 390 with d23, d24, d11 and d1. No page errors, no horizontal overflow, no "$100" or "Save their spot" text, every button reads "Join the free beta". Submitting an email opens the confirmation dialog (off ekuzo.gg nothing is saved, as on the live landing).
+
 ## Jamie's Claude, 2026-11-09: Season 01 landing speed, checkout fix, field-vitals harness (Build Loop, docs/s1-cls-field-2026-11/)
 
 - Live on ekuzo.gg 15:23 CT (`main` 45dfe97 to 19b9963, fast-forward; marker `<meta name="s1-build">` now stamps
