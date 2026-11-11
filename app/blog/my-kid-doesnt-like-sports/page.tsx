@@ -434,7 +434,7 @@ export default function PostMyKidDoesntLikeSports() {
                   src={`https://www.youtube.com/embed/${VIDEO_ID}`}
                   title="Not Into Traditional Sports? That's Okay."
                   loading="lazy"
-                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   className="absolute inset-0 w-full h-full border-0"

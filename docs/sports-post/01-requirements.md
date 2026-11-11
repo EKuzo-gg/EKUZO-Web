@@ -113,5 +113,17 @@ offender check empty). No beacon may reach GA4, Meta or Clarity from QA.
   only and is removed from `public/images/`.
 - Hero keeps its natural 1232:520 ratio at every width (the fixed 520px height cropped the baked-in
   text and captions).
-- Try this tonight box gained the subtitle "Three things before the next sign-up" to match the
-  sibling post; wording awaits Jamie's OK.
+- Try this tonight box: subtitle "Three things to do before the next sign-up", three one-line
+  items, placed directly after the H2 (house pattern, see the Fortnite post's placement comment;
+  it floats right on desktop and reads first on phones, as on sibling posts). Jamie 09:37 CT:
+  "try to match them. i trust your instinct."
+- Phone hero (Jamie 09:37 CT: yes): `my-kid-doesnt-like-sports-hero-mobile.jpg` (1080x900) served
+  under 768px through `<picture>`.
+- Measurement row amended after QA: `blog_link_click` covers same-origin links only. The shared
+  tracker (`app/blog/BlogPostTracking.tsx`) skips cross-origin links by design on every post, so
+  the outbound-link expectation is withdrawn for this build. Not a regression.
+- GA4 page_view, Meta PageView and Clarity load only in the production deploy context
+  (`app/layout.tsx`), so they are checked on the preview or live site, not locally.
+- Inbound links (rows 1 to 4 of `03-inbound-links.md`) approved by Jamie 09:37 CT and applied in
+  commit 5902d99; N1's file list extends to those four posts.
+

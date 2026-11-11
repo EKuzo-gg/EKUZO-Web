@@ -4,6 +4,22 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-11: new blog post "My kid doesn't like sports. What now?" (Build Loop, docs/sports-post/)
+
+- New post at `/blog/my-kid-doesnt-like-sports` (Karlin byline, Guides), on branch
+  `blog/my-kid-doesnt-like-sports`. Built on the session-end post's template: no new component, no
+  new category. Featured on `/blog` (the session-end post steps down), added to `app/sitemap.ts` and
+  `public/llms.txt`. CTA link is `/season1/join` with no query string.
+- Assets in `public/images/`: hero (2464x1040), phone hero (1080x900, served under 768px through
+  `<picture>` with `getImageProps`), share card (1200x630). One YouTube embed (`RVkSj6AYCDs`) as a
+  plain lazy iframe.
+- Four existing posts gained one sentence each linking to the new post (approved by Jamie, list in
+  `docs/sports-post/03-inbound-links.md`); their `DATE_MODIFIED`, `/blog` card dates and sitemap
+  lastmod moved to 2026-11-11.
+- Checks: independent QA in `docs/sports-post/04-evidence-ledger.md` (copy equals the deck word for
+  word, FAQ schema equals visible text, `blog_link_click` and `blog_read_75` captured behind the
+  analytics guard, no beacons sent). For Aaron: nothing in `components/` or `globals.css` changed.
+
 ## Jamie's Claude, 2026-11-10: Season 01 fast track, "interest first, join today" (Build Loop, docs/s1-fast-track-2026-11/)
 
 - Aaron's plan (his message and `landing-v2.html`, pushed to dev 5b94880) ported onto the live
