@@ -95,7 +95,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .q.bad .vows label:not(:has(input:checked)) .box{border-color:var(--bad)}
 .err{display:none;font:600 14px/1.35 var(--body);color:var(--bad);margin-top:8px}
 .q.bad .err{display:block}
-.q.bad input[type=text],.q.bad input[type=number],.q.bad input[type=email]{border-color:var(--bad)}
+.q.bad input[type=text],.q.bad select,.q.bad input[type=email]{border-color:var(--bad)}
 .q.bad .opts label{border-color:var(--bad)}
 
 .acts{display:flex;gap:10px;margin-top:28px}
@@ -172,7 +172,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <div class="q" id="q-email" hidden><label for="email">Your email <i>(the one you joined with)</i></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"><p class="err">Enter the email you joined with.</p></div>
 <div class="row">
 <div class="q"><label for="pname">Player's first name</label><input id="pname" name="pname" type="text" autocomplete="off" autocapitalize="words" required><p class="err">Add your player's first name.</p></div>
-<div class="q"><label for="age">Age</label><input id="age" name="age" type="number" inputmode="numeric" min="9" max="19" required><p class="err">Ages 9 and up.</p></div>
+<div class="q"><label for="age">Age</label><select id="age" name="age" required><option value="" selected disabled hidden></option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option></select><p class="err">Pick their age.</p></div>
 </div>
 <fieldset class="q"><legend>Where do they game? <i>(pick any)</i></legend>
 <div class="opts">
@@ -211,11 +211,6 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <select id="tz" name="tz">
 <option value="Eastern">Eastern</option><option value="Central">Central</option><option value="Mountain">Mountain</option><option value="Pacific">Pacific</option><option value="Alaska">Alaska</option><option value="Hawaii">Hawaii</option><option value="Other">Outside the US</option>
 </select></div>
-<fieldset class="q" id="q-school"><legend>Is your player on a normal school schedule?</legend>
-<div class="opts">
-<label><input type="radio" name="school" value="Yes" required>Yes, a regular school day</label>
-<label><input type="radio" name="school" value="Flexible">No, homeschool or flexible</label>
-</div><p class="err">Pick one so we know which hours are open.</p></fieldset>
 <fieldset class="q" id="q-times"><legend>Times that could work <i>(pick any)</i></legend>
 <div class="opts col">
 <label><span><input type="checkbox" name="times" value="Weekday afternoons">Weekday afternoons<small>After school, before dinner</small></span></label>
@@ -263,10 +258,9 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
     if(i===1){
       var qe=document.getElementById("q-email"); if(!qe.hidden) mark(qe,!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim()));
       mark(f.pname.closest(".q"),!f.pname.value.trim());
-      var a=parseInt(f.age.value,10); mark(f.age.closest(".q"),!(a>=9&&a<=19));
+      mark(f.age.closest(".q"),!f.age.value);
     }
     if(i===2){
-      mark(document.getElementById("q-school"),!f.school.value);
       mark(document.getElementById("q-times"),!f.querySelector("[name=times]:checked"));
     }
     if(first){ var t=first.querySelector("input,select"); if(t) t.focus(); first.scrollIntoView({block:"center"}); }

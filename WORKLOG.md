@@ -10,6 +10,7 @@
   - Step 1 now says "Any laptop or Mac will work. League of Legends is free." and adds "What we expect from every player": No toxicity, Positive mindset, Winning attitude (show up, be kind, try your best). Each is a tap-to-agree checkbox whose mark draws itself; all three are needed to continue.
   - Step 2 (player card): choices are pills and the questions have more room between them.
   - Time zone is prefilled from the device's own time zone setting (no IP lookup, nothing sent anywhere). The parent can change it.
+  - Later (Aaron): age is a dropdown, 9 to 18. The school schedule question is removed from step 3. First needs bullet reads "Any laptop or Mac will work". Expectation checkboxes sit straight.
 - `app/season1/beta/beta.html`: the "What do they need?" answer now matches ("Any laptop or Mac will work, and League of Legends is free").
 - Beta lab wizard screens retaken. Checked at 390 and 1440.
 
