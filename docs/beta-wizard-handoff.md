@@ -7,7 +7,7 @@ Written 2026-11-12 by Aaron's Claude. Goal: get the BETA flow live so a few peop
 | Piece | Address | File |
 |---|---|---|
 | BETA page, one email field | `/season1/beta` | `app/season1/beta/beta.html` |
-| Details page, no form, buttons open the wizard | `/season1/beta/details` | `app/season1/beta/details/details.html` |
+| Beta launch page, no form, buttons open the wizard | `/season1/beta/launch` | `app/season1/beta/launch/launch.html` |
 | Sign-up wizard | `/season1/beta/start` | `app/season1/beta/start/start.html` |
 | Flow, screens, email copy | `/roadshow/beta-lab.html` | `public/roadshow/beta-lab.html` |
 
@@ -17,7 +17,7 @@ All three pages are static HTML served by a route handler, the same pattern as `
 
 1. **Beta ad** to `/season1/beta`. The parent joins with an email.
 2. **Karlin's email** to the 400+ Season 01 sign-ups. To join, they reply.
-3. Parents who reply yes get the **details page**, `/season1/beta/details`, from Karlin by hand. Page sign-ups get the **wizard invite** email with a link to `/season1/beta/start`.
+3. Parents who reply yes get the **beta launch page**, `/season1/beta/launch`, from Karlin by hand. Page sign-ups get the **wizard invite** email with a link to `/season1/beta/start`.
 4. **Wizard:** email, then what the beta is and three expectations, the player card, availability.
 5. **Wizard confirmation** email. It promises a review and a reply, not a spot.
 6. We review availability and volume, then follow up with practice. How we confirm a player is still being decided.

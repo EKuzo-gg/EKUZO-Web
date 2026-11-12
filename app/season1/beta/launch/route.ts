@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import { fillTags, renderStaticTags } from "@/lib/season1/tags";
 
-// BETA details page, served at /season1/beta/details. For parents who replied yes to
+// BETA launch page, served at /season1/beta/launch. For parents who replied yes to
 // Karlin's email and want the details before they sign up. Same static-HTML pattern as
 // /season1/beta. It has no form: every button links to the wizard at /season1/beta/start.
 export const dynamic = "force-static";
@@ -22,7 +22,7 @@ function buildRef(): string {
 
 export function GET() {
   const html = fillTags(
-    fs.readFileSync(path.join(process.cwd(), "app", "season1", "beta", "details", "details.html"), "utf8"),
+    fs.readFileSync(path.join(process.cwd(), "app", "season1", "beta", "launch", "launch.html"), "utf8"),
     "",
     renderStaticTags("landing"),
   ).split("{{BUILD}}").join(buildRef());
