@@ -4,6 +4,10 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: /season1/beta hero copy, fewer "free"s (dev)
+
+- `app/season1/beta/beta.html`, hero copy only (Aaron): headline "This is your chance / to try esports.", black sticker "Kids ages 9+" (was "Free beta, 2 weeks. No card needed."), card line "A free trial with a pro coach, their peers and real practice, just like sports.", nav button "Join the beta". The card button stays "Join our free beta". Beta lab screens retaken. Checked at 390 and 1440.
+
 ## Aaron's Claude, 2026-11-11: BETA sign-up wizard draft and updated flow (dev)
 
 Aaron's flow: beta ad to the BETA page (email sign-up); Karlin's email to a plain reply. Once we have an email, we invite the parent to a 3-step wizard. Goal of the wizard: evaluate players and see if availability and volume line up. The confirmation process is being decided Nov 12.
