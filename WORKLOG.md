@@ -4,6 +4,12 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: launch page frozen for the team, Option B started (dev)
+
+- **`/season1/beta/launch` is the version Aaron is sending to the team to push live.** Leave `app/season1/beta/launch/launch.html` as is; further design changes go to Option B.
+- **Option B:** `app/season1/beta/launch/b/{route.ts,launch-b.html}`, served at `/season1/beta/launch/b`. Starts as a copy of the launch page plus one change: Brad's parent video (`public/testimonial-videos/brad-parent-girl-gamer.mp4`, existing asset) sits beside his quote at the bottom of the black details band and hangs across the torn seam into "How the beta works". "What parents say" in B keeps Becky and Rajitha only, since Brad moved up. No captions track on the video yet.
+- Checked B at 390, 768 and 1440: no sideways scroll, the video clears the heading and the timeline, the seam still shows.
+
 ## Aaron's Claude, 2026-11-12: BETA launch page at /season1/beta/launch (dev)
 
 Aaron: the BETA page works for ad traffic, but parents who replied yes to Karlin's email are already interested and want details. They need a page whose button goes straight to the wizard.

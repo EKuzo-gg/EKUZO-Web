@@ -8,6 +8,7 @@ Written 2026-11-12 by Aaron's Claude. Goal: get the BETA flow live so a few peop
 |---|---|---|
 | BETA page, one email field | `/season1/beta` | `app/season1/beta/beta.html` |
 | Beta launch page, no form, buttons open the wizard | `/season1/beta/launch` | `app/season1/beta/launch/launch.html` |
+| Option B of the launch page. Aaron's working copy, **not for launch** | `/season1/beta/launch/b` | `app/season1/beta/launch/b/launch-b.html` |
 | Sign-up wizard | `/season1/beta/start` | `app/season1/beta/start/start.html` |
 | Flow, screens, email copy | `/roadshow/beta-lab.html` | `public/roadshow/beta-lab.html` |
 
