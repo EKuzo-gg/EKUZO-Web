@@ -4,6 +4,10 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: /season1/beta working headline (dev)
+
+- `app/season1/beta/beta.html` (Aaron): headline is now "Free beta. / Game with a pro coach." ("esports" may be a trigger word for parents). This is a working version; Karlin is deciding the final line. The card line became "A real team, their peers and real practice, just like sports." so "free" and "pro coach" are not said twice. Beta lab screens retaken.
+
 ## Aaron's Claude, 2026-11-12: /season1/beta, quotes in their own band, no fine print (dev)
 
 - `app/season1/beta/beta.html` (Aaron): the parent quotes moved out of "How the beta works" into their own white band, "What parents say", between it and "Who coaches". The fine print under the hero button ("Just your email. No card...") is removed. Checked at 390 and 1440.
