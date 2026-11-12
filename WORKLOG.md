@@ -11,6 +11,7 @@
   - Step 2 (player card): choices are pills and the questions have more room between them.
   - Time zone is prefilled from the device's own time zone setting (no IP lookup, nothing sent anywhere). The parent can change it.
   - Later (Aaron): age is a dropdown, 9 to 18. The school schedule question is removed from step 3. First needs bullet reads "Any laptop or Mac will work". Expectation checkboxes sit straight.
+  - Later (Aaron): the wizard now opens on "Get started. What's your email?" and continues to step 1. The email field is gone from step 2. `?email=` still prefills it.
 - `app/season1/beta/beta.html`: the "What do they need?" answer now matches ("Any laptop or Mac will work, and League of Legends is free").
 - Beta lab wizard screens retaken. Checked at 390 and 1440.
 

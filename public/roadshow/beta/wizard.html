@@ -139,14 +139,21 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 
 <main>
 <ol class="dots" id="dots" aria-label="Steps">
-<li class="on"><span>Step 1</span><b>The beta</b></li>
+<li><span>Step 1</span><b>The beta</b></li>
 <li><span>Step 2</span><b>Player card</b></li>
 <li><span>Step 3</span><b>Availability</b></li>
 </ol>
 
 <form class="card" id="wiz" novalidate>
 
-<section data-step="0">
+<section data-step="start">
+<h2 class="d" tabindex="-1">Get started</h2>
+<p class="lede">What's your email? It's how we reach you about your player's spot.</p>
+<div class="q" id="q-email"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" required><p class="err">Check the email address and try again.</p></div>
+<div class="acts"><button class="btn" type="button" data-next>Continue</button></div>
+</section>
+
+<section data-step="0" hidden>
 <h2 class="d" tabindex="-1">Here's what the beta is</h2>
 <p class="lede">Two weeks and four sessions with a pro coach, on a real team. It's online, from home, and free.</p>
 <p class="sub">What your player needs</p>
@@ -169,7 +176,6 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <section data-step="1" hidden>
 <h2 class="d" tabindex="-1">Build their player card</h2>
 <p class="lede">No wrong answers. This is how the coach gets to know them before day one.</p>
-<div class="q" id="q-email" hidden><label for="email">Your email <i>(the one you joined with)</i></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"><p class="err">Enter the email you joined with.</p></div>
 <div class="row">
 <div class="q"><label for="pname">Player's first name</label><input id="pname" name="pname" type="text" autocomplete="off" autocapitalize="words" required><p class="err">Add your player's first name.</p></div>
 <div class="q"><label for="age">Age</label><select id="age" name="age" required><option value="" selected disabled hidden></option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option></select><p class="err">Pick their age.</p></div>
@@ -241,26 +247,26 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 (function(){
   var f=document.getElementById("wiz"), steps=[].slice.call(f.querySelectorAll("[data-step]")), dots=[].slice.call(document.querySelectorAll("#dots li")), cur=0;
   var qs=new URLSearchParams(location.search), em=(qs.get("email")||"").trim();
-  if(em) f.email.value=em; else document.getElementById("q-email").hidden=false;
+  if(em) f.email.value=em;
   // Guess the time zone; the parent can change it.
   try{ var z=Intl.DateTimeFormat().resolvedOptions().timeZone||"", m={"America/New_York":"Eastern","America/Detroit":"Eastern","America/Chicago":"Central","America/Denver":"Mountain","America/Phoenix":"Mountain","America/Los_Angeles":"Pacific","America/Anchorage":"Alaska","Pacific/Honolulu":"Hawaii"};
     f.tz.value=m[z]||(/^America\/(Indiana|Kentucky)/.test(z)?"Eastern":(/^America\//.test(z)?f.tz.value:"Other")); }catch(_){}
   function show(i){
     cur=i; steps.forEach(function(s,n){s.hidden=n!==i});
-    dots.forEach(function(d,n){d.classList.toggle("on",n===i);d.classList.toggle("was",n<i||i===3);if(n===i)d.setAttribute("aria-current","step");else d.removeAttribute("aria-current")});
+    dots.forEach(function(d,n){d.classList.toggle("on",n===i-1);d.classList.toggle("was",n<i-1||i===4);if(n===i-1)d.setAttribute("aria-current","step");else d.removeAttribute("aria-current")});
     var h=steps[i].querySelector("h2"); h.focus({preventScroll:true});
     document.getElementById("dots").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
   }
   function bad(el,on){ el.classList.toggle("bad",on); return on; }
   function check(i){
     var first=null, mark=function(q,on){ if(bad(q,on)&&!first) first=q; };
-    if(i===0){ mark(document.getElementById("q-vow"),f.querySelectorAll("[name=vow]:checked").length<3); }
-    if(i===1){
-      var qe=document.getElementById("q-email"); if(!qe.hidden) mark(qe,!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim()));
+    if(i===0){ mark(document.getElementById("q-email"),!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())); }
+    if(i===1){ mark(document.getElementById("q-vow"),f.querySelectorAll("[name=vow]:checked").length<3); }
+    if(i===2){
       mark(f.pname.closest(".q"),!f.pname.value.trim());
       mark(f.age.closest(".q"),!f.age.value);
     }
-    if(i===2){
+    if(i===3){
       mark(document.getElementById("q-times"),!f.querySelector("[name=times]:checked"));
     }
     if(first){ var t=first.querySelector("input,select"); if(t) t.focus(); first.scrollIntoView({block:"center"}); }
@@ -293,10 +299,12 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
   // superpower: two at most
   document.getElementById("powers").addEventListener("change",function(e){ if(vals("power").length>2) e.target.checked=false; card(pc,false); });
   f.addEventListener("submit",function(e){
-    e.preventDefault(); if(cur!==2||!check(2)) return;
+    e.preventDefault();
+    if(cur<3){ if(check(cur)) show(cur+1); return; }
+    if(cur!==3||!check(3)) return;
     document.getElementById("doneh").textContent="Got it. Thanks for "+f.pname.value.trim()+"'s info.";
     card(document.getElementById("pc2"),true);
-    show(3);
+    show(4);
   });
   // Reaction test: three tries, best time. Just for fun; nothing is saved.
   var pad=document.getElementById("pad"), pb=pad.querySelector("b"), ps=pad.querySelector("span"), bestEl=document.getElementById("best"), t0=0, timer=0, tries=[], lock=0;
