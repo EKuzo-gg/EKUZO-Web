@@ -19,7 +19,7 @@
  --display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--body:"Inter",Arial,Helvetica,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--off);color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
-p,h1,h2,ul,ol,fieldset{margin:0;padding:0}
+p,h1,h2,ul,ol,fieldset,legend{margin:0;padding:0}
 p,li,span,legend{text-wrap:pretty}
 fieldset{border:0;min-width:0}
 [hidden]{display:none!important}
@@ -55,8 +55,8 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .need li small{display:block;font-size:14px;color:rgba(0,0,0,.65)}
 .later{font-size:15px;line-height:1.5;color:rgba(0,0,0,.72);margin-top:18px;padding-top:16px;border-top:2px solid var(--black)}
 
-.q{margin-top:24px}
-.q > label,.q > legend{display:block;font:700 16px/1.3 var(--body);margin-bottom:8px}
+.q{margin-top:36px}
+.q > label,.q > legend{display:block;font:700 17px/1.3 var(--body);margin-bottom:12px}
 .q i{font-style:normal;font-weight:500;color:rgba(0,0,0,.6)}
 .q input[type=text],.q input[type=email],.q input[type=number],.q select,.q textarea{width:100%;min-height:52px;font:500 17px var(--body);color:var(--black);background:#fff;border:2px solid rgba(0,0,0,.28);border-radius:4px;padding:10px 14px;appearance:none}
 .q textarea{min-height:84px;resize:vertical;line-height:1.4}
@@ -64,16 +64,35 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .q input:hover,.q select:hover,.q textarea:hover{border-color:rgba(0,0,0,.5)}
 .q input:focus,.q select:focus,.q textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(3,79,255,.22)}
 .row{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:12px}
-.row .q{margin-top:24px}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
+.row .q{margin-top:36px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
 .opts.col{display:grid;grid-template-columns:1fr}
-.opts label{position:relative;display:flex;align-items:center;min-height:48px;padding:10px 14px;border:2px solid rgba(0,0,0,.28);border-radius:4px;font:600 15px/1.25 var(--body);cursor:pointer;background:#fff;transition:background .15s,border-color .15s}
+.opts label{position:relative;display:flex;align-items:center;min-height:46px;padding:8px 18px;border:1.5px solid rgba(0,0,0,.3);border-radius:999px;font:600 15px/1.25 var(--body);cursor:pointer;background:#fff;transition:background .15s,border-color .15s}
+.opts.col label{border-radius:12px;padding:12px 16px}
 .opts label small{display:block;font-weight:500;font-size:13px;color:rgba(0,0,0,.62)}
 .opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
 .opts label:hover{border-color:rgba(0,0,0,.55)}
 .opts label:has(input:checked){background:var(--black);border-color:var(--black);color:#fff}
 .opts label:has(input:checked) small{color:rgba(255,255,255,.75)}
 .opts label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
+.opts label:active{transform:scale(.97)}
+/* expectations: tap to agree, the mark draws itself */
+.vow{margin-top:30px}
+.vow legend{float:left;width:100%;margin-bottom:2px!important;font:800 16px/1.3 var(--body)!important}
+.hint{clear:both;font-size:14px;color:rgba(0,0,0,.65)}
+.vows{display:grid;gap:10px;margin-top:14px}
+.vows label{position:relative;display:flex;align-items:center;gap:14px;min-height:64px;padding:12px 14px;background:var(--off);border-radius:12px;cursor:pointer;transition:background .2s}
+.vows input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.vows b{display:block;font:800 17px/1.2 var(--body)}
+.vows small{display:block;font-size:14px;line-height:1.35;color:rgba(0,0,0,.68);margin-top:2px}
+.box{flex:none;width:34px;height:34px;border-radius:8px;border:2px solid var(--black);background:#fff;display:grid;place-items:center;transition:background .2s,transform .35s var(--ease)}
+.box svg{width:22px;height:22px;fill:none;stroke:var(--black);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .3s var(--ease) .05s}
+.vows label:has(input:checked){background:var(--black);color:#fff}
+.vows label:has(input:checked) small{color:rgba(255,255,255,.75)}
+.vows label:has(input:checked) .box{background:var(--lime);border-color:var(--lime);transform:rotate(-6deg) scale(1.08)}
+.vows label:has(input:checked) .box svg{stroke-dashoffset:0}
+.vows label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
+.q.bad .vows label:not(:has(input:checked)) .box{border-color:var(--bad)}
 .err{display:none;font:600 14px/1.35 var(--body);color:var(--bad);margin-top:8px}
 .q.bad .err{display:block}
 .q.bad input[type=text],.q.bad input[type=number],.q.bad input[type=email]{border-color:var(--bad)}
@@ -132,11 +151,18 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <p class="lede">Two weeks and four sessions with a pro coach, on a real team. It's online, from home, and free.</p>
 <p class="sub">What your player needs</p>
 <ul class="need">
-<li>A computer that runs League of Legends<small>Anything with a graphics card works. The game is free.</small></li>
+<li>A computer<small>Any laptop or Mac will work. League of Legends is free.</small></li>
 <li>A headset or headphones</li>
 <li>A mouse</li>
 </ul>
 <p class="later">We'll send tech setup instructions at a later date. You don't need to install anything yet.</p>
+<fieldset class="q vow" id="q-vow"><legend>What we expect from every player</legend>
+<p class="hint">Tap each one to agree.</p>
+<div class="vows">
+<label><input type="checkbox" name="vow" value="No toxicity"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>No toxicity</b><small>Not in chat, not on voice, not ever.</small></span></label>
+<label><input type="checkbox" name="vow" value="Positive mindset"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Positive mindset</b><small>Losses happen. We learn from them.</small></span></label>
+<label><input type="checkbox" name="vow" value="Winning attitude"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Winning attitude</b><small>Show up, be kind, try your best.</small></span></label>
+</div><p class="err">Tap all three to continue.</p></fieldset>
 <div class="acts"><button class="btn" type="button" data-next>Next: player card</button></div>
 </section>
 
@@ -233,6 +259,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
   function bad(el,on){ el.classList.toggle("bad",on); return on; }
   function check(i){
     var first=null, mark=function(q,on){ if(bad(q,on)&&!first) first=q; };
+    if(i===0){ mark(document.getElementById("q-vow"),f.querySelectorAll("[name=vow]:checked").length<3); }
     if(i===1){
       var qe=document.getElementById("q-email"); if(!qe.hidden) mark(qe,!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim()));
       mark(f.pname.closest(".q"),!f.pname.value.trim());
@@ -250,7 +277,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
     if(b.hasAttribute("data-next")){ if(check(cur)) show(cur+1); }
     if(b.hasAttribute("data-back")) show(cur-1);
   });
-  f.addEventListener("input",function(e){ var q=e.target.closest(".q.bad"); if(q) q.classList.remove("bad"); });
+  f.addEventListener("input",function(e){ var q=e.target.closest(".q.bad"); if(q&&(q.id!=="q-vow"||f.querySelectorAll("[name=vow]:checked").length===3)) q.classList.remove("bad"); });
   function vals(n){return [].map.call(f.querySelectorAll("[name="+n+"]:checked"),function(x){return x.value})}
   function card(el,full){
     var name=f.pname.value.trim(), age=parseInt(f.age.value,10), rows=[];

@@ -4,6 +4,15 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: BETA wizard, expectations and a lighter player card (dev)
+
+- `public/roadshow/beta/wizard.html` (still a static draft, saves nothing):
+  - Step 1 now says "Any laptop or Mac will work. League of Legends is free." and adds "What we expect from every player": No toxicity, Positive mindset, Winning attitude (show up, be kind, try your best). Each is a tap-to-agree checkbox whose mark draws itself; all three are needed to continue.
+  - Step 2 (player card): choices are pills and the questions have more room between them.
+  - Time zone is prefilled from the device's own time zone setting (no IP lookup, nothing sent anywhere). The parent can change it.
+- `app/season1/beta/beta.html`: the "What do they need?" answer now matches ("Any laptop or Mac will work, and League of Legends is free").
+- Beta lab wizard screens retaken. Checked at 390 and 1440.
+
 ## Aaron's Claude, 2026-11-12: /season1/beta working headline (dev)
 
 - `app/season1/beta/beta.html` (Aaron): headline is now "Free beta. / Game with a pro coach." ("esports" may be a trigger word for parents). This is a working version; Karlin is deciding the final line. The card line became "A real team, their peers and real practice, just like sports." so "free" and "pro coach" are not said twice. Beta lab screens retaken.
