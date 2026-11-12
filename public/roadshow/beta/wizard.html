@@ -85,11 +85,11 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .vows input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
 .vows b{display:block;font:800 17px/1.2 var(--body)}
 .vows small{display:block;font-size:14px;line-height:1.35;color:rgba(0,0,0,.68);margin-top:2px}
-.box{flex:none;width:34px;height:34px;border-radius:8px;border:2px solid var(--black);background:#fff;display:grid;place-items:center;transition:background .2s,transform .35s var(--ease)}
+.box{flex:none;width:34px;height:34px;border-radius:8px;border:2px solid var(--black);background:#fff;display:grid;place-items:center;transition:background .2s}
 .box svg{width:22px;height:22px;fill:none;stroke:var(--black);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .3s var(--ease) .05s}
 .vows label:has(input:checked){background:var(--black);color:#fff}
 .vows label:has(input:checked) small{color:rgba(255,255,255,.75)}
-.vows label:has(input:checked) .box{background:var(--lime);border-color:var(--lime);transform:rotate(-6deg) scale(1.08)}
+.vows label:has(input:checked) .box{background:var(--lime);border-color:var(--lime)}
 .vows label:has(input:checked) .box svg{stroke-dashoffset:0}
 .vows label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
 .q.bad .vows label:not(:has(input:checked)) .box{border-color:var(--bad)}
