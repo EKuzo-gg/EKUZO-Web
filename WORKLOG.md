@@ -4,6 +4,16 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: BETA details page at /season1/beta/details (dev)
+
+Aaron: the BETA page works for ad traffic, but parents who replied yes to Karlin's email are already interested and want details. They need a page whose button goes straight to the wizard.
+
+- **New:** `app/season1/beta/details/{route.ts,details.html}`, served at `/season1/beta/details`. Built from the BETA page: same hero, no email form, every button links to `/season1/beta/start`. New black band "Two weeks. One coach. One team." with the Join page's four detail cards rewritten for the beta (2 weeks / 4 sessions, online, ages 9+, free). "How the beta works" is rewritten for this audience and lists what the player needs. Parent quotes, coaches, No toxic lobbies and short answers carry over.
+- It has no form and makes no API call.
+- `app/season1/beta/beta.html`: step 2 no longer mentions "the games they play" (the wizard stopped asking).
+- Beta lab: new "The details page" section, pathway and wizard-invite link updated. Handoff doc updated.
+- **Checked** at 390 and 1440: no sideways scroll, no errors, all four buttons point to the wizard. **Not run:** the repo test suite.
+
 ## Aaron's Claude, 2026-11-12: BETA wizard moved to /season1/beta/start, handoff for Jamie (dev)
 
 Goal (Aaron): get the BETA flow live so a few people can try it. **Jamie: read `docs/beta-wizard-handoff.md`.**
