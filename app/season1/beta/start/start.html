@@ -108,7 +108,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .btn{display:flex;align-items:center;justify-content:center;flex:1;min-height:60px;background:var(--lime);color:var(--black);font:800 18px var(--body);padding:14px 18px;border:0;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 0 2px var(--black);transition:background .15s}
 .btn:hover{background:#cdf03a}
 .btn:active{background:#bfe22f}
-.btn.back{flex:0 0 auto;background:#fff;padding-inline:20px}
+.btn.back{flex:0 0 auto;background:#fff;padding-inline:20px;text-decoration:none}
 .btn.back:hover{background:var(--off)}
 .ask{font-size:15px;text-align:center;margin-top:20px;color:rgba(0,0,0,.7)}
 .ask a{font-weight:800;color:var(--black);text-underline-offset:3px;display:inline-flex;min-height:44px;align-items:center}
@@ -156,7 +156,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <h2 class="d" tabindex="-1">Get started</h2>
 <p class="lede">What's your email? It's how we reach you about your player's spot.</p>
 <div class="q" id="q-email"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" required><p class="err">Check the email address and try again.</p></div>
-<div class="acts"><button class="btn" type="button" data-next>Continue</button></div>
+<div class="acts"><a class="btn back" id="leave" href="/season1/beta/launch">Back</a><button class="btn" type="button" data-next>Continue</button></div>
 </section>
 
 <section data-step="0" hidden>
@@ -176,7 +176,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <label><input type="checkbox" name="vow" value="Positive mindset"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Positive mindset</b><small>Losses happen. We learn from them.</small></span></label>
 <label><input type="checkbox" name="vow" value="Winning attitude"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Winning attitude</b><small>Show up, be kind, try your best.</small></span></label>
 </div><p class="err">Tap all three to continue.</p></fieldset>
-<div class="acts"><button class="btn" type="button" data-next>Next: player card</button></div>
+<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="button" data-next>Next: player card</button></div>
 </section>
 
 <section data-step="1" hidden>
@@ -278,6 +278,12 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
     if(first){ var t=first.querySelector("input,select"); if(t) t.focus(); first.scrollIntoView({block:"center"}); }
     return !first;
   }
+  // Back on the first screen: return to the page the parent came from when it was one of ours
+  // (the BETA page or the beta launch page); otherwise the link's own address, the launch page.
+  document.getElementById("leave").addEventListener("click",function(e){
+    var from=""; try{ from=new URL(document.referrer).origin }catch(_){}
+    if(from===location.origin&&history.length>1){ e.preventDefault(); history.back(); }
+  });
   f.addEventListener("click",function(e){
     var b=e.target.closest("button"); if(!b) return;
     if(b.hasAttribute("data-next")){ if(check(cur)) show(cur+1); }
