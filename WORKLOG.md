@@ -4,6 +4,12 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-11: /season1/beta gains parent quotes and "No toxic lobbies" (dev)
+
+- `app/season1/beta/beta.html`: three short parent pull quotes under "How the beta works" (Brad, Becky, Rajitha). Each is a verbatim excerpt from the transcripts in `public/testimonial-videos/*.txt`, credited "Name, Parent" as `TestimonialsCarousel` does; Brad's drops a spoken restart ("the team, the team atmosphere"). On phones the row swipes sideways; on desktop it is three across.
+- New black band under "Who coaches": "No toxic lobbies. Ever.", copied word for word from the Join page (`app/season1/join/b/join-b.html`), including the school-hallway line.
+- Band order is now hero, black (how it works + quotes), off-white (coaches), black (no toxic lobbies), white (short answers). Checked at 390 and 1440.
+
 ## Aaron's Claude, 2026-11-11: /season1/beta hero copy, fewer "free"s (dev)
 
 - `app/season1/beta/beta.html`, hero copy only (Aaron): headline "This is your chance / to try esports.", black sticker "Kids ages 9+" (was "Free beta, 2 weeks. No card needed."), card line "A free trial with a pro coach, their peers and real practice, just like sports.", nav button "Join the beta". The card button stays "Join our free beta". Beta lab screens retaken. Checked at 390 and 1440.
