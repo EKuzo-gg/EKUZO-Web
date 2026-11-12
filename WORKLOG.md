@@ -13,6 +13,7 @@ Goal (Aaron): get the BETA flow live so a few people can try it. **Jamie: read `
 - The email is typed on the first screen and is never read from the address (no `?email=`), so it cannot leak into GA4, the Pixel or Clarity through the URL.
 - Reaction test pad is blue at rest instead of black.
 - Beta lab: third email drafted ("After the wizard", Klaviyo, no promise of a spot, `[date]` to set), wizard invite shows the live link, open items updated.
+- Beta lab refreshed later the same day: page screens retaken with the current headline plus two new ones ("What parents say", "No toxic lobbies"), ad captions and open items brought up to date.
 - **Checked:** wizard end to end at 390 and 1440 on a local preview; the save call against a mocked `/api/season-one` on a faked ekuzo.gg host (200 shows the end state, 400 shows the error and stays on step 3). **Not run:** the repo test suite, and no real write.
 
 ## Aaron's Claude, 2026-11-12: BETA wizard, expectations and a lighter player card (dev)
