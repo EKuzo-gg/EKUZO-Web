@@ -87,10 +87,23 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .btn.back:hover{background:var(--off)}
 .ask{font-size:15px;text-align:center;margin-top:20px;color:rgba(0,0,0,.7)}
 .ask a{font-weight:800;color:var(--black);text-underline-offset:3px;display:inline-flex;min-height:44px;align-items:center}
-.recap{list-style:none;margin-top:20px;border-top:2px solid var(--black)}
-.recap li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.18);font-size:16px}
-.recap li span{color:rgba(0,0,0,.65)}
-.recap li b{text-align:right;font-weight:700}
+.pc{margin-top:28px;background:var(--black);color:#fff;padding:20px 20px 18px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.pc:empty{display:none}
+.pc .who{font:900 44px/.9 var(--display);letter-spacing:.03em;text-transform:uppercase;color:var(--lime);overflow-wrap:anywhere}
+.pc .who small{font:700 15px var(--body);letter-spacing:0;text-transform:none;color:rgba(255,255,255,.75);margin-left:8px}
+.pc dl{margin:14px 0 0;display:grid;gap:8px}
+.pc dl div{display:flex;gap:12px;justify-content:space-between;border-top:1px solid rgba(255,255,255,.22);padding-top:8px;font-size:15px;line-height:1.35}
+.pc dt{color:rgba(255,255,255,.7);flex:none}
+.pc dd{margin:0;font-weight:700;text-align:right;overflow-wrap:anywhere}
+.rx{margin-top:32px;padding-top:6px;border-top:2px solid var(--black)}
+.pad{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;min-height:200px;margin-top:16px;border:0;border-radius:4px;background:var(--black);color:#fff;cursor:pointer;font-family:var(--body);padding:20px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.pad b{font:900 52px/.9 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.pad span{font-size:15px;font-weight:600;color:rgba(255,255,255,.75)}
+.pad[data-s=wait]{background:var(--violet)}
+.pad[data-s=go]{background:var(--lime);color:var(--black)}
+.pad[data-s=go] span{color:rgba(0,0,0,.7)}
+.pad[data-s=early]{background:var(--bad)}
+.best{font:700 16px/1.4 var(--body);margin-top:12px;min-height:22px}
 @media (min-width:700px){
  .top{padding-bottom:104px}.nav{height:80px}.nav img{height:24px}
  .card{padding:40px 40px 36px}
@@ -102,13 +115,13 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <body>
 <header class="top"><div class="in">
 <div class="nav"><a href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><span>Free beta</span></div>
-<h1 class="d">You're on the list.<br><em>Three quick steps.</em></h1>
+<h1 class="d">Let's meet your player.<br><em>Three quick steps.</em></h1>
 </div></header>
 
 <main>
 <ol class="dots" id="dots" aria-label="Steps">
 <li class="on"><span>Step 1</span><b>The beta</b></li>
-<li><span>Step 2</span><b>Your player</b></li>
+<li><span>Step 2</span><b>Player card</b></li>
 <li><span>Step 3</span><b>Availability</b></li>
 </ol>
 
@@ -124,39 +137,44 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <li>A mouse</li>
 </ul>
 <p class="later">We'll send tech setup instructions at a later date. You don't need to install anything yet.</p>
-<div class="acts"><button class="btn" type="button" data-next>Next: your player</button></div>
+<div class="acts"><button class="btn" type="button" data-next>Next: player card</button></div>
 </section>
 
 <section data-step="1" hidden>
-<h2 class="d" tabindex="-1">Tell us about your player</h2>
-<p class="lede">This helps the coach put them on the right team.</p>
+<h2 class="d" tabindex="-1">Build their player card</h2>
+<p class="lede">No wrong answers. This is how the coach gets to know them before day one.</p>
 <div class="q" id="q-email" hidden><label for="email">Your email <i>(the one you joined with)</i></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"><p class="err">Enter the email you joined with.</p></div>
 <div class="row">
 <div class="q"><label for="pname">Player's first name</label><input id="pname" name="pname" type="text" autocomplete="off" autocapitalize="words" required><p class="err">Add your player's first name.</p></div>
 <div class="q"><label for="age">Age</label><input id="age" name="age" type="number" inputmode="numeric" min="9" max="19" required><p class="err">Ages 9 and up.</p></div>
 </div>
-<fieldset class="q"><legend>What games do they play? <i>(pick any)</i></legend>
+<fieldset class="q"><legend>Where do they game? <i>(pick any)</i></legend>
 <div class="opts">
-<label><input type="checkbox" name="games" value="Roblox">Roblox</label>
-<label><input type="checkbox" name="games" value="Minecraft">Minecraft</label>
-<label><input type="checkbox" name="games" value="Fortnite">Fortnite</label>
-<label><input type="checkbox" name="games" value="League of Legends">League of Legends</label>
-<label><input type="checkbox" name="games" value="Valorant">Valorant</label>
-<label><input type="checkbox" name="games" value="Rocket League">Rocket League</label>
-<label><input type="checkbox" name="games" value="Something else">Something else</label>
+<label><input type="checkbox" name="plays" value="Computer">Computer</label>
+<label><input type="checkbox" name="plays" value="Console">Console</label>
+<label><input type="checkbox" name="plays" value="Tablet">Tablet</label>
+<label><input type="checkbox" name="plays" value="Phone">Phone</label>
+<label><input type="checkbox" name="plays" value="Not much yet">Not much yet</label>
 </div></fieldset>
-<fieldset class="q" id="q-lol"><legend>Have they played League of Legends?</legend>
+<fieldset class="q"><legend>How have team sports gone for them?</legend>
 <div class="opts">
-<label><input type="radio" name="lol" value="Never" required>Never</label>
-<label><input type="radio" name="lol" value="A little">A little</label>
-<label><input type="radio" name="lol" value="Plays a lot">Plays a lot</label>
-</div><p class="err">Pick one. Never is a fine answer, most kids start from scratch.</p></fieldset>
-<fieldset class="q" id="q-pc"><legend>How much do they play on a computer?</legend>
-<div class="opts">
-<label><input type="radio" name="pc" value="Most days" required>Most days</label>
-<label><input type="radio" name="pc" value="Sometimes">Sometimes</label>
-<label><input type="radio" name="pc" value="Mostly console or phone">Mostly console or phone</label>
-</div><p class="err">Pick the closest one.</p></fieldset>
+<label><input type="radio" name="sports" value="Loves them">Loves them</label>
+<label><input type="radio" name="sports" value="Plays, not their thing">Plays, but it's not their thing</label>
+<label><input type="radio" name="sports" value="Tried, didn't stick">Tried, didn't stick</label>
+<label><input type="radio" name="sports" value="Hasn't tried yet">Hasn't tried yet</label>
+</div></fieldset>
+<fieldset class="q"><legend>What's their superpower? <i>(pick up to two)</i></legend>
+<div class="opts" id="powers">
+<label><input type="checkbox" name="power" value="Never gives up">Never gives up</label>
+<label><input type="checkbox" name="power" value="Makes everyone laugh">Makes everyone laugh</label>
+<label><input type="checkbox" name="power" value="Quick thinker">Quick thinker</label>
+<label><input type="checkbox" name="power" value="Natural leader">Natural leader</label>
+<label><input type="checkbox" name="power" value="Quiet strategist">Quiet strategist</label>
+<label><input type="checkbox" name="power" value="Builds anything">Builds anything</label>
+<label><input type="checkbox" name="power" value="Great teammate">Great teammate</label>
+</div></fieldset>
+<div class="q"><label for="fact">One fun fact about them <i>(optional)</i></label><input id="fact" name="fact" type="text" autocomplete="off" maxlength="120" placeholder="Knows every flag. Beat the whole family at chess."></div>
+<div class="pc" id="pc" aria-live="polite"></div>
 <div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="button" data-next>Next: availability</button></div>
 </section>
 
@@ -185,8 +203,14 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 
 <section data-step="3" hidden>
 <h2 class="d" tabindex="-1" id="doneh">Got it.</h2>
-<p class="lede">We'll review your times and follow up with practice details. Tech setup instructions come later, so there's nothing to install yet.</p>
-<ul class="recap" id="recap"></ul>
+<p class="lede">That's everything we need for now. We build teams around the times families share, so spots depend on what lines up. We'll review and email you either way.</p>
+<div class="pc" id="pc2"></div>
+<div class="rx">
+<p class="sub">One more thing, for your player</p>
+<p class="lede" style="margin-top:6px">Hand them the screen. How fast are their reactions? Three tries.</p>
+<button class="pad" type="button" id="pad" data-s="idle"><b>Tap to start</b><span>Wait for green, then tap as fast as you can</span></button>
+<p class="best" id="best" aria-live="polite"></p>
+</div>
 <p class="ask" style="text-align:left">Questions? <a href="sms:+18322710150">Text our founder</a></p>
 </section>
 </form>
@@ -213,8 +237,6 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
       var qe=document.getElementById("q-email"); if(!qe.hidden) mark(qe,!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim()));
       mark(f.pname.closest(".q"),!f.pname.value.trim());
       var a=parseInt(f.age.value,10); mark(f.age.closest(".q"),!(a>=9&&a<=19));
-      mark(document.getElementById("q-lol"),!f.lol.value);
-      mark(document.getElementById("q-pc"),!f.pc.value);
     }
     if(i===2){
       mark(document.getElementById("q-school"),!f.school.value);
@@ -229,16 +251,48 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
     if(b.hasAttribute("data-back")) show(cur-1);
   });
   f.addEventListener("input",function(e){ var q=e.target.closest(".q.bad"); if(q) q.classList.remove("bad"); });
+  function vals(n){return [].map.call(f.querySelectorAll("[name="+n+"]:checked"),function(x){return x.value})}
+  function card(el,full){
+    var name=f.pname.value.trim(), age=parseInt(f.age.value,10), rows=[];
+    el.textContent=""; if(!name) return;
+    var w=document.createElement("p"); w.className="who"; w.textContent=name;
+    if(age>=9){var sm=document.createElement("small"); sm.textContent="Age "+age; w.appendChild(sm);} el.appendChild(w);
+    if(vals("plays").length) rows.push(["Games on",vals("plays").join(", ")]);
+    if(f.sports.value) rows.push(["Team sports",f.sports.value]);
+    if(vals("power").length) rows.push(["Superpower",vals("power").join(" + ")]);
+    if(f.fact.value.trim()) rows.push(["Fun fact",f.fact.value.trim()]);
+    if(full){ rows.push(["Time zone",f.tz.value]); rows.push(["Could practice",vals("times").join(", ")]); }
+    if(!rows.length) return;
+    var dl=document.createElement("dl");
+    rows.forEach(function(r){var d=document.createElement("div"),t=document.createElement("dt"),v=document.createElement("dd");t.textContent=r[0];v.textContent=r[1];d.appendChild(t);d.appendChild(v);dl.appendChild(d)});
+    el.appendChild(dl);
+  }
+  var pc=document.getElementById("pc");
+  f.addEventListener("input",function(){ card(pc,false); });
+  // superpower: two at most
+  document.getElementById("powers").addEventListener("change",function(e){ if(vals("power").length>2) e.target.checked=false; card(pc,false); });
   f.addEventListener("submit",function(e){
     e.preventDefault(); if(cur!==2||!check(2)) return;
-    var name=f.pname.value.trim(), times=[].map.call(f.querySelectorAll("[name=times]:checked"),function(x){return x.value});
-    var games=[].map.call(f.querySelectorAll("[name=games]:checked"),function(x){return x.value});
-    document.getElementById("doneh").textContent="Got it. Thanks for "+name+"'s info.";
-    var rows=[["Player",name+", "+parseInt(f.age.value,10)],["Plays",games.join(", ")||"Not listed"],["League of Legends",f.lol.value],["Time zone",f.tz.value],["Times",times.join(", ")]];
-    var ul=document.getElementById("recap"); ul.textContent="";
-    rows.forEach(function(r){var li=document.createElement("li"),s=document.createElement("span"),b=document.createElement("b");s.textContent=r[0];b.textContent=r[1];li.appendChild(s);li.appendChild(b);ul.appendChild(li)});
+    document.getElementById("doneh").textContent="Got it. Thanks for "+f.pname.value.trim()+"'s info.";
+    card(document.getElementById("pc2"),true);
     show(3);
   });
+  // Reaction test: three tries, best time. Just for fun; nothing is saved.
+  var pad=document.getElementById("pad"), pb=pad.querySelector("b"), ps=pad.querySelector("span"), bestEl=document.getElementById("best"), t0=0, timer=0, tries=[], lock=0;
+  function set(st,big,small){ pad.setAttribute("data-s",st); pb.textContent=big; ps.textContent=small; }
+  function arm(){ set("wait","Wait for it","Tap when this turns green"); timer=setTimeout(function(){ t0=performance.now(); set("go","Tap!",""); },1200+Math.random()*2300); }
+  function hit(){
+    var st=pad.getAttribute("data-s"), now=performance.now();
+    if(now<lock) return;
+    if(st==="idle"||st==="early"||st==="res"){ if(tries.length>=3){ tries=[]; bestEl.textContent=""; } arm(); return; }
+    if(st==="wait"){ clearTimeout(timer); lock=now+350; set("early","Too soon","Tap to try again"); return; }
+    if(st==="go"){ var ms=Math.round(now-t0); tries.push(ms); lock=now+350;
+      var best=Math.min.apply(null,tries), left=3-tries.length;
+      set("res",ms+" ms",left?("Tap for try "+(tries.length+1)+" of 3"):"Tap to play again");
+      bestEl.textContent=left?("Best so far: "+best+" ms"):("Best of three: "+best+" ms. "+(best<280?"Lightning.":best<380?"Sharp.":"Warmed up now.")+" Bring that to practice."); }
+  }
+  pad.addEventListener("pointerdown",function(e){ e.preventDefault(); pad.focus(); hit(); });
+  pad.addEventListener("keydown",function(e){ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); if(!e.repeat) hit(); } });
 })();
 </script>
 </body>
