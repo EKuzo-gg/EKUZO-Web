@@ -4,6 +4,10 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: /season1/beta, quotes in their own band, no fine print (dev)
+
+- `app/season1/beta/beta.html` (Aaron): the parent quotes moved out of "How the beta works" into their own white band, "What parents say", between it and "Who coaches". The fine print under the hero button ("Just your email. No card...") is removed. Checked at 390 and 1440.
+
 ## Aaron's Claude, 2026-11-11: /season1/beta gains parent quotes and "No toxic lobbies" (dev)
 
 - `app/season1/beta/beta.html`: three short parent pull quotes under "How the beta works" (Brad, Becky, Rajitha). Each is a verbatim excerpt from the transcripts in `public/testimonial-videos/*.txt`, credited "Name, Parent" as `TestimonialsCarousel` does; Brad's drops a spoken restart ("the team, the team atmosphere"). On phones the row swipes sideways; on desktop it is three across.
