@@ -57,13 +57,13 @@ a{color:inherit}
 .hero-in{position:relative;z-index:4;text-align:center;padding-block:12px 0}
 .h1{font-size:clamp(38px,11.6vw,112px);margin-top:8px}
 .h1 em{font-style:normal;color:var(--black)}
-.chars{position:relative;z-index:0;display:flex;justify-content:center;margin-top:24px;pointer-events:none}
+.chars{position:relative;z-index:0;display:flex;justify-content:center;margin-top:8px;pointer-events:none}
 .chars .left{width:min(118vw,760px);height:auto;max-width:none;margin-bottom:max(-15vw,-96px);flex-shrink:0}
 .chars .right{display:none}
 .hero :focus-visible{outline-color:var(--black)}
 
 /* sign-up card */
-.join{position:relative;margin:40px auto 0;max-width:360px;text-align:left;scroll-margin-top:24px}
+.join{position:relative;margin:28px auto 0;max-width:360px;text-align:left;scroll-margin-top:24px}
 .tag{position:relative;z-index:5;margin:0;background:var(--black);color:#fff;padding:14px 20px 14px 30px;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;clip-path:polygon(22px 0,100% 0,100% 100%,0 100%,0 22px)}
 .tag b{color:var(--lime);font:900 30px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
 .tag small{font:700 15px/1.25 var(--body)}
@@ -146,12 +146,12 @@ a{color:inherit}
 
 @media (min-width:1000px){
  .nav{height:80px}.nav .logo img{height:24px}
- .hero{min-height:760px;padding-bottom:40px}
- .hero-in{padding-block:28px 150px;max-width:860px}
+ .hero{min-height:600px;padding-bottom:24px}
+ .hero-in{padding-block:20px 110px;max-width:860px}
  .chars{position:absolute;inset:0;margin:0;display:block;z-index:3}
- .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(420px,38vw,580px);width:auto;margin:0;flex-shrink:initial}
- .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:40px;height:clamp(340px,30vw,470px);width:auto}
- .join{max-width:360px;margin-top:84px}
+ .chars .left{position:absolute;left:max(-60px,calc(50% - 790px));bottom:-64px;height:clamp(380px,33vw,500px);width:auto;margin:0;flex-shrink:initial}
+ .chars .right{display:block;position:absolute;right:max(-90px,calc(50% - 820px));bottom:24px;height:clamp(300px,27vw,400px);width:auto}
+ .join{max-width:360px;margin-top:56px}
  .tag{position:absolute;right:-60px;top:-34px;transform:rotate(4deg);flex-wrap:nowrap;white-space:nowrap;padding:12px 18px;clip-path:none}
  .card{padding:44px 24px 24px;clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
  .pad{padding-block:80px calc(80px + max(36px,3.3vw))}
