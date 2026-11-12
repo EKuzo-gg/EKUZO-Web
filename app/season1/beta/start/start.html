@@ -31,7 +31,7 @@ fieldset{border:0;min-width:0}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .d{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.9;text-wrap:balance}
 
-.top{position:relative;background:var(--violet);color:#fff;padding:0 20px 84px}
+.top{--tear:max(36px,3.3vw);position:relative;background:var(--violet);color:#fff;padding:0 20px calc(var(--tear) + 104px)}
 .top .in{max-width:640px;margin-inline:auto}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav img{height:20px;width:auto;display:block}
@@ -40,7 +40,7 @@ fieldset{border:0;min-width:0}
 .top h1 em{font-style:normal;color:var(--black)}
 .top:after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:max(36px,3.3vw);background:url('/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png') center bottom/cover no-repeat;pointer-events:none}
 
-main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 20px 72px}
+main{position:relative;z-index:2;max-width:680px;margin:calc(-1 * (max(36px,3.3vw) + 76px)) auto 0;padding:0 20px 72px}
 .dots{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:0}
 .dots li{background:var(--black);color:rgba(255,255,255,.6);font:700 13px/1.2 var(--body);padding:11px 12px}
 .dots li b{display:block;font:900 22px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-top:2px}
@@ -130,7 +130,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .pad[data-s=early]{background:var(--bad)}
 .best{font:700 16px/1.4 var(--body);margin-top:12px;min-height:22px}
 @media (min-width:700px){
- .top{padding-bottom:104px}.nav{height:80px}.nav img{height:24px}
+ .top{padding-bottom:calc(var(--tear) + 116px)}.nav{height:80px}.nav img{height:24px}
  .card{padding:40px 40px 36px}
  .opts.col{grid-template-columns:repeat(2,1fr)}
 }
