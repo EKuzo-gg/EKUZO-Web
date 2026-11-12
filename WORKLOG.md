@@ -4,6 +4,17 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Aaron's Claude, 2026-11-12: BETA wizard moved to /season1/beta/start, handoff for Jamie (dev)
+
+Goal (Aaron): get the BETA flow live so a few people can try it. **Jamie: read `docs/beta-wizard-handoff.md`.**
+
+- **Wizard has a real address:** `app/season1/beta/start/{route.ts,start.html}`, served at `/season1/beta/start` (same route-handler pattern as `/season1/beta`, noindex, head tags from `lib/season1/tags.ts`). `public/roadshow/beta/wizard.html` is gone; the lab links to the new address.
+- **Wizard now sends its answers** on ekuzo.gg only: `POST /api/season-one` with `step: "beta-wizard"` (payload in the handoff doc). **The route does not accept this step yet and answers 400**, so the wizard must not be linked from a live email until Jamie adds it. `app/api` was not touched. Off ekuzo.gg nothing is sent.
+- The email is typed on the first screen and is never read from the address (no `?email=`), so it cannot leak into GA4, the Pixel or Clarity through the URL.
+- Reaction test pad is blue at rest instead of black.
+- Beta lab: third email drafted ("After the wizard", Klaviyo, no promise of a spot, `[date]` to set), wizard invite shows the live link, open items updated.
+- **Checked:** wizard end to end at 390 and 1440 on a local preview; the save call against a mocked `/api/season-one` on a faked ekuzo.gg host (200 shows the end state, 400 shows the error and stays on step 3). **Not run:** the repo test suite, and no real write.
+
 ## Aaron's Claude, 2026-11-12: BETA wizard, expectations and a lighter player card (dev)
 
 - `public/roadshow/beta/wizard.html` (still a static draft, saves nothing):

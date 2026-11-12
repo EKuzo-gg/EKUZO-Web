@@ -4,16 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="s1-build" content="{{BUILD}}">
 <title>Beta sign-up | EKUZO</title>
 <link rel="icon" href="/icon.png">
+{{TAGS}}
 <link rel="preload" as="font" type="font/otf" href="/fonts/TungstenNarrow-Black.otf" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap">
 <style>
-/* BETA sign-up wizard, prototype (roadshow). Three steps after a parent joins with their email:
-   what the beta is, the player, availability. Season 01 look, matching /season1/beta.
-   Nothing is saved yet: the last step only shows the "we'll follow up" state. */
+/* BETA sign-up wizard, served at /season1/beta/start. The parent's email first, then three
+   steps: what the beta is (with the expectations), the player card, availability.
+   Season 01 look, matching /season1/beta. On ekuzo.gg the last step POSTs the answers to
+   /api/season-one with step "beta-wizard" (see docs/beta-wizard-handoff.md). Anywhere else
+   (dev, localhost previews) nothing is sent and the end state just shows. */
 @font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Black.otf") format("opentype");font-weight:900;font-display:swap}
 :root{--blue:#034FFF;--black:#000;--ink:#222;--off:#F0EDEA;--white:#fff;--violet:#AE2CF2;--lime:#E0FF4F;--bad:#c8141c;
  --display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--body:"Inter",Arial,Helvetica,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
@@ -95,6 +99,8 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .q.bad .vows label:not(:has(input:checked)) .box{border-color:var(--bad)}
 .err{display:none;font:600 14px/1.35 var(--body);color:var(--bad);margin-top:8px}
 .q.bad .err{display:block}
+#senderr{display:block;margin-top:20px}
+.btn[disabled]{opacity:.6;cursor:default}
 .q.bad input[type=text],.q.bad select,.q.bad input[type=email]{border-color:var(--bad)}
 .q.bad .opts label{border-color:var(--bad)}
 
@@ -115,9 +121,9 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 .pc dt{color:rgba(255,255,255,.7);flex:none}
 .pc dd{margin:0;font-weight:700;text-align:right;overflow-wrap:anywhere}
 .rx{margin-top:32px;padding-top:6px;border-top:2px solid var(--black)}
-.pad{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;min-height:200px;margin-top:16px;border:0;border-radius:4px;background:var(--black);color:#fff;cursor:pointer;font-family:var(--body);padding:20px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.pad{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;min-height:200px;margin-top:16px;border:0;border-radius:4px;background:var(--blue);color:#fff;cursor:pointer;font-family:var(--body);padding:20px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
 .pad b{font:900 52px/.9 var(--display);letter-spacing:.03em;text-transform:uppercase}
-.pad span{font-size:15px;font-weight:600;color:rgba(255,255,255,.75)}
+.pad span{font-size:15px;font-weight:600;color:rgba(255,255,255,.85)}
 .pad[data-s=wait]{background:var(--violet)}
 .pad[data-s=go]{background:var(--lime);color:var(--black)}
 .pad[data-s=go] span{color:rgba(0,0,0,.7)}
@@ -225,7 +231,8 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <label><span><input type="checkbox" name="times" value="Weekend evenings">Weekend evenings<small>Saturday or Sunday</small></span></label>
 </div><p class="err">Pick at least one time.</p></fieldset>
 <div class="q"><label for="note">Anything we should know? <i>(optional)</i></label><textarea id="note" name="note" rows="2"></textarea></div>
-<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="submit">Send it</button></div>
+<p class="err" id="senderr" role="alert" hidden></p>
+<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="submit" id="send">Send it</button></div>
 </section>
 
 <section data-step="3" hidden>
@@ -246,8 +253,7 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
 <script>
 (function(){
   var f=document.getElementById("wiz"), steps=[].slice.call(f.querySelectorAll("[data-step]")), dots=[].slice.call(document.querySelectorAll("#dots li")), cur=0;
-  var qs=new URLSearchParams(location.search), em=(qs.get("email")||"").trim();
-  if(em) f.email.value=em;
+  var qs=new URLSearchParams(location.search); // utm_* only. The email is typed, never passed in the address.
   // Guess the time zone; the parent can change it.
   try{ var z=Intl.DateTimeFormat().resolvedOptions().timeZone||"", m={"America/New_York":"Eastern","America/Detroit":"Eastern","America/Chicago":"Central","America/Denver":"Mountain","America/Phoenix":"Mountain","America/Los_Angeles":"Pacific","America/Anchorage":"Alaska","Pacific/Honolulu":"Hawaii"};
     f.tz.value=m[z]||(/^America\/(Indiana|Kentucky)/.test(z)?"Eastern":(/^America\//.test(z)?f.tz.value:"Other")); }catch(_){}
@@ -298,10 +304,35 @@ main{position:relative;z-index:2;max-width:680px;margin:-56px auto 0;padding:0 2
   f.addEventListener("input",function(){ card(pc,false); });
   // superpower: two at most
   document.getElementById("powers").addEventListener("change",function(e){ if(vals("power").length>2) e.target.checked=false; card(pc,false); });
-  f.addEventListener("submit",function(e){
+  // Saving. Only ekuzo.gg talks to the API, the same rule the BETA page uses, so previews never write.
+  var LIVE=/(^|\.)ekuzo\.gg$/.test(location.hostname), sending=false, sendId="";
+  var utm=function(){var o={};["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){o[k]=qs.get(k)||""});return o};
+  function answers(){
+    var z=""; try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){}
+    return {step:"beta-wizard",email:f.email.value.trim(),eventId:sendId,
+      playerName:f.pname.value.trim(),playerAge:parseInt(f.age.value,10),
+      playsOn:vals("plays"),teamSports:f.sports.value||"",superpowers:vals("power"),funFact:f.fact.value.trim(),
+      expectations:vals("vow"),timeZone:f.tz.value,tz:z,times:vals("times"),note:f.note.value.trim(),
+      attribution:utm(),page:location.pathname,ekz_hp:""};
+  }
+  f.addEventListener("submit",async function(e){
     e.preventDefault();
     if(cur<3){ if(check(cur)) show(cur+1); return; }
-    if(cur!==3||!check(3)) return;
+    if(cur!==3||!check(3)||sending) return;
+    var btn=document.getElementById("send"), err=document.getElementById("senderr");
+    err.hidden=true;
+    if(LIVE){
+      sending=true; btn.disabled=true; btn.textContent="Sending…";
+      if(!sendId) sendId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():Date.now()+"-"+Math.random().toString(36).slice(2,12);
+      var ok=false, msg="";
+      try{
+        var r=await fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(answers()),signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined});
+        ok=r.ok; if(!ok){ try{ var j=await r.json(); msg=(j&&typeof j.error==="string")?j.error:""; }catch(_){} }
+      }catch(_){}
+      sending=false; btn.disabled=false; btn.textContent="Send it";
+      if(!ok){ err.textContent=msg||"That didn’t go through. Check your connection and try again."; err.hidden=false; return; }
+      try{ window.gtag&&gtag("event","beta_wizard_complete"); window.clarity&&clarity("event","beta_wizard_complete"); }catch(_){}
+    }
     document.getElementById("doneh").textContent="Got it. Thanks for "+f.pname.value.trim()+"'s info.";
     card(document.getElementById("pc2"),true);
     show(4);

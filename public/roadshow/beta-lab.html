@@ -130,7 +130,7 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
       <li><b>Beta ad</b><span>Four new ads on Meta. Each lands on the BETA page, where a parent joins with one email field.</span><a href="/season1/beta">Open the page</a></li>
       <li><b>Karlin's email</b><span>A personal note to the 400+ Season 01 sign-ups. To join, they just reply.</span><a href="#emails">See the email</a></li>
       <li><b>Wizard invite</b><span>Everyone whose email we now have gets a short email with the wizard link.</span></li>
-      <li><b>Sign-up wizard</b><span>Starts with the parent's email, then three steps: what the beta is, a player card, and availability. It ends with a reaction test for the kid.</span><a href="beta/wizard.html">Open the wizard</a></li>
+      <li><b>Sign-up wizard</b><span>Starts with the parent's email, then three steps: what the beta is, a player card, and availability. It ends with a reaction test for the kid.</span><a href="/season1/beta/start">Open the wizard</a></li>
       <li><b>Review and confirm</b><span>We check that each player's availability and our volume line up, then follow up with practice. How we confirm gets decided Nov 12.</span></li>
       <li><b>The beta</b><span>Two weeks, four sessions. Then the Season 01 offer.</span></li>
     </ol>
@@ -158,12 +158,12 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
       <figure><img src="beta/screens/wizard-3-availability.webp" alt="Wizard step 3: time zone, school schedule and the times that could work." width="390" height="1323" loading="lazy"><figcaption><b>3. Availability</b>Time zone (filled in from their device), then weekday or weekend, afternoons or evenings.</figcaption></figure>
       <figure><img src="beta/screens/wizard-4-done.webp" alt="Wizard end: Got it. We'll review your times and follow up with practice details." width="390" height="889" loading="lazy"><figcaption><b>After the last step</b>"We'll review and email you either way", so nobody reads it as a guaranteed spot. Then a reaction test for the player.</figcaption></figure>
     </div>
-    <a class="more" href="beta/wizard.html">Try the wizard</a>
+    <a class="more" href="/season1/beta/start">Try the wizard at /season1/beta/start</a>
   </section>
 
   <section>
     <h2 id="emails">The emails</h2>
-    <p class="sub">Short, plain emails from Karlin. The first asks for a reply. The second invites everyone we have an email for into the wizard.</p>
+    <p class="sub">Short, plain emails from Karlin. The first asks for a reply. The second invites everyone we have an email for into the wizard. The third confirms we got the player's info, without promising a spot.</p>
     <div class="mail">
       <article class="inbox">
         <header>
@@ -198,7 +198,7 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
         <div class="body" id="emailbody2">
           <p>Hi,</p>
           <p>Thanks for your interest in the beta. Three quick steps tell us about your player and the times that work:</p>
-          <p><span class="ph">[wizard link]</span></p>
+          <p>ekuzo.gg/season1/beta/start</p>
           <p>Questions? Just reply.</p>
           <p>Karlin<br>Founder, EKUZO</p>
         </div>
@@ -208,6 +208,31 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
         <button class="btn ghost" type="button" id="copySubject2">Copy subject line</button>
         <div class="note">
           <p><b>Two senders</b>Page sign-ups can get this from Klaviyo right after they join. Parents who replied to Karlin get it from him by hand.</p>
+        </div>
+      </aside>
+    </div>
+    <p class="mailhead">After the wizard</p>
+    <div class="mail">
+      <article class="inbox">
+        <header>
+          <p class="subject" id="subject3">We got <span class="ph">[player name]</span>'s info</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO</span></div>
+        </header>
+        <div class="body" id="emailbody3">
+          <p>Hi,</p>
+          <p>Thanks for telling us about <span class="ph">[player name]</span>.</p>
+          <p>Next, we look at the times families shared and build teams around them. Spots depend on what lines up. You'll hear from me by <span class="ph">[date]</span> either way.</p>
+          <p>Nothing to install yet. Tech setup comes later.</p>
+          <p>Questions? Just reply.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
+        </div>
+      </article>
+      <aside class="side">
+        <button class="btn" type="button" id="copyBody3">Copy email</button>
+        <button class="btn ghost" type="button" id="copySubject3">Copy subject line</button>
+        <div class="note">
+          <p><b>Sent from Klaviyo</b>Right after a parent finishes the wizard.</p>
+          <p><b>No promise of a spot</b>It says we will review and reply. The date is still to set.</p>
         </div>
       </aside>
     </div>
@@ -234,7 +259,8 @@ footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);paddin
       <li><b>How many players we can take</b><span class="who">Karlin</span><p>The drafts treat the beta as open to every family who signs up. If coach capacity sets a limit, the page needs a "full" state and a waitlist.</p></li>
       <li><b>The page headline</b><span class="who">Karlin</span><p>Working version: "Free beta. Game with a pro coach." It matches the ads. "Esports" is out of the headline because it may put parents off.</p></li>
       <li><b>Which questions we ask about the kid</b><span class="who">Team</span><p>For Nov 12. The draft asks where they game, how team sports have gone, their superpower and a fun fact. It no longer asks which games they play or about League. What do we need to filter players, and what can the coach learn at the intro?</p></li>
-      <li><b>Where the wizard saves</b><span class="who">Jamie</span><p>The wizard is a clickable draft and saves nothing yet. It needs a place for the answers, and the invite email in Klaviyo for page sign-ups.</p></li>
+      <li><b>Saving the wizard and the two emails</b><span class="who">Jamie</span><p>The wizard sends its answers on ekuzo.gg, but the sign-up route does not accept them yet. It also needs the wizard invite and the after-wizard email in Klaviyo. The full list is in <code>docs/beta-wizard-handoff.md</code>.</p></li>
+      <li><b>The reply-by date</b><span class="who">Team</span><p>The after-wizard email says "you'll hear from me by [date]". That date is not set.</p></li>
       <li><b>The paid Season 01 page while BETA runs</b><span class="who">Team</span><p>The drafts assume it stays live for families who are ready, and every ad and email points to BETA.</p></li>
       <li><b>The free jersey deadline</b><span class="who">Team</span><p>The jersey offer ends Nov 30, which may fall before the beta does. Decide if beta families still get it.</p></li>
       <li><b>The Season 01 offer after the beta</b><span class="who">Karlin</span><p>What families get for enrolling at the end, and the deadline.</p></li>
@@ -262,7 +288,7 @@ function bodyText(id){
     el.tagName === "UL" ? [...el.children].map(li => "- " + li.textContent.trim()).join("\n") : el.innerText.trim()
   ).join("\n\n");
 }
-[["copyBody","emailbody","subject","copySubject"],["copyBody2","emailbody2","subject2","copySubject2"]].forEach(([b,body,subj,s]) => {
+[["copyBody","emailbody","subject","copySubject"],["copyBody2","emailbody2","subject2","copySubject2"],["copyBody3","emailbody3","subject3","copySubject3"]].forEach(([b,body,subj,s]) => {
   document.getElementById(b).addEventListener("click", e => copy(e.currentTarget, bodyText(body), "Copy email"));
   document.getElementById(s).addEventListener("click", e => copy(e.currentTarget, document.getElementById(subj).textContent.trim(), "Copy subject line"));
 });
