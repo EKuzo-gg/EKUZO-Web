@@ -137,3 +137,31 @@ With `META_CAPI_USE_TEST_CODE=true` and no test code, the server Lead is skipped
 
 Posts have no FAQ accordion (their FAQ is open text), so `faq_open` does not apply there.
 GA4 admin steps that go with this (Jamie's go): register `post_slug`, `link_type`, `lead_source` and `cta_source` as event-scoped custom dimensions; mark `generate_lead` as a key event if it is not one already.
+
+## Free beta pages and the sign-up wizard (added 2026-11-12, docs/beta-wizard-go-live-2026-11)
+
+Three static pages served by route handlers, outside `app/layout.tsx`; tags come from `renderStaticTags("landing")` (GA4 with the full page URL, Pixel `PageView`, Clarity). Live tags on ekuzo.gg only; the pages' own saves are ekuzo.gg only too.
+
+| Page | Browser | Server |
+|---|---|---|
+| `/season1/beta` (one email field) | GA4 `page_view`, `generate_lead {lead_source: season_one_beta_<ad>}`, `signup_error`; Pixel `PageView` and `Lead` with `eventID`; Clarity `signup` | The existing waitlist sign-up, unchanged: "Season 01 Waitlist" event, list XGTv2F, CAPI `Lead` with the same id. Told apart by `where: beta` and `page` |
+| `/season1/beta/launch` (no form) | GA4 `page_view` (the page URL carries `?src=`), Pixel `PageView`, Clarity | Middleware: `ekuzo_bsrc` from `?src=`, `ekuzo_lc` from utm_* or `ad`, `ekuzo_origin` |
+| `/season1/beta/start` (wizard) | GA4 `page_view`; `beta_wizard_step {step: email \| expectations \| player_card}` once per step per run; `beta_wizard_resume {step}` on a restored visit; `beta_wizard_complete` after a saved submit. Pixel `PageView` only. Clarity session and `beta_wizard_complete` | `step: "beta-progress"` after each screen, `step: "beta-wizard"` at the end (`lib/season1/betaWizard.ts`) |
+
+**Source.** The link Karlin sends is `https://ekuzo.gg/season1/beta/launch?src=karlin-email` (texts: `?src=karlin-text`). Any lowercase tag of letters, digits, `-` and `_` (40 max) works on any `/season1/beta` page. Middleware keeps it for 30 days in the HttpOnly cookie `ekuzo_bsrc`; the launch page links to the wizard without a query and the wizard never sends `src`, so the cookie is how it reaches the record. `source` on the record is the tag, else `utm_source`, else `first-touch:<bucket>`, else `direct`. A parent who opens the link in a mail app's browser and finishes in another browser arrives without the cookie and reads as `direct` or first touch.
+
+**What a wizard writes.**
+
+| Where | Started or stopped part-way | Finished |
+|---|---|---|
+| Neon | `s1_beta_progress`: one row per email; `stage` (0 email, 1 expectations, 2 player card), `next_step`, `answers` so far, `source`, `attribution`; `completed_at` null | `s1_beta_families` (one per email, first `source`, `attribution`, `geo`), `s1_beta_players` (one per family and first name); the progress row gets `completed_at` |
+| Klaviyo event | "Beta Wizard Progress": `stage`, `step_done`, `next_step`, `next_step_number`, `session`, `source`, answers so far | "Beta Wizard Completed": every answer, `source`, `src`, utm_*, `first_touch`, `page`, `geo_city`, `geo_region`, `geo_country` |
+| Klaviyo profile | `beta_wizard_stage` (email, expectations, player card), `beta_wizard_next_step` (What the beta is, Player card, Availability), `beta_wizard_started_at`, `beta_wizard_updated_at`, `beta_source`, `beta_player_name`, `beta_player_age` once known | `beta_wizard: yes`, `beta_wizard_stage: done`, `beta_wizard_next_step: done`, `beta_completed_at`, `beta_time_zone`, `beta_tz`, `beta_times[]` |
+
+No list, no consent change, no "Season 01 Waitlist" event: the Day 0 (W5ciCB) and Day 4 (VE7DfC) flows and Karlin's founder note key on list XGTv2F and never see a wizard-only family. `player_name`, `fun_fact` and `note` are parent-typed text: escape them in any template.
+
+**Pick-up email (to build, Klaviyo).** Trigger "Beta Wizard Progress"; wait; continue only if `beta_wizard_stage` is not `done` (or the profile has not done "Beta Wizard Completed" since the flow started). The email can name the step from `beta_wizard_next_step` and the player from `beta_player_name` when present. On the device they started on, `https://ekuzo.gg/season1/beta/start` reopens at their step with answers filled in (browser storage, 14 days). A restart link that works on another device is not built yet.
+
+**Meta: wizard completion sends no event (decision, 2026-11-12).** No ads are running. When they return they land on `/season1/beta`, whose `Lead` is already paired browser and server, and that stays the optimisation event. A completion event would need a browser call in the wizard (Aaron's file) with an event id shared with a server CAPI send, parent email hash only and nothing about the player. Proposal for the Monday ad work: add it as a custom event `BetaWizardComplete` for reporting first, and test optimising on it only once completions pass about 50 a week; below that Meta has too few events to learn from.
+
+**Kid data.** The player's name, age and answers go to Neon and Klaviyo only. GA4 events carry a step name and nothing else; nothing about the player is in any URL; nothing goes to Meta.
