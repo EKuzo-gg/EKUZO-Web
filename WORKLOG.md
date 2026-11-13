@@ -4,6 +4,16 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-12: free beta sign-up goes live (Build Loop, docs/beta-wizard-go-live-2026-11/)
+
+- **For Aaron: your three pages ship as they are on dev 69d2032** (`beta.html`, `launch.html`, `start.html`, byte for byte) with their route handlers. `/launch/b`, the labs and `beta-ad-landing.html` are not in the release.
+- `/api/season-one` accepts the wizard: `step: "beta-wizard"` (your payload, checked against the values in `start.html`) and a new `step: "beta-progress"`. Logic lives in `lib/season1/betaWizard.ts`; the route gained three lines. The existing sign-up, games, age and text-karlin steps are untouched.
+- **Drop-off capture, added from our side.** `app/season1/beta/start/route.ts` appends a small script after the page's own (`lib/season1/betaProgressScript.ts`). It posts the answers so far each time a parent moves forward, keeps them in the browser for 14 days so a return visit reopens on their step, and fires GA4 `beta_wizard_step {step}`. It reads `#wiz`, `[data-step]`, `[data-next]` and the field names `email, pname, age, plays, sports, power, fact, vow, tz, times, note`. If you rename any of those, `lib/season1/__tests__/betaProgressScript.test.ts` fails: tell Jamie's Claude and it moves with you. Folding the calls into your page later is welcome.
+- Records: Neon `s1_beta_families`, `s1_beta_players`, `s1_beta_progress` (migration 0006, on production since 11-12 20:24 CT); Klaviyo events "Beta Wizard Completed" and "Beta Wizard Progress" with `beta_*` profile properties. No list, no consent change, no Meta event, no Discord (Jamie: Discord stays Season 01 sales only). Property names and how to build the pick-up flow: `docs/season-one-tracking.md`, last section.
+- Source: `?src=karlin-email` on any `/season1/beta` page is kept by `middleware.ts` in the cookie `ekuzo_bsrc` (beta paths only) and lands on the record.
+- For Aaron, from QA and a fresh parent read (your call, nothing changed): the wizard has no hidden `ekz_hp` field; a parent could not find a start date or session length; no line near the player card about who sees a kid's details; selected chips read as disabled; the end screen has no date for the answer. Detail: `docs/beta-wizard-go-live-2026-11/05-defect-log.md`.
+- `dev` does not have these commits yet. Recipe and hashes are in `08-return-handoff.md`.
+
 ## Jamie's Claude, 2026-11-11: new blog post "My kid doesn't like sports. What now?" (Build Loop, docs/sports-post/)
 
 - New post at `/blog/my-kid-doesnt-like-sports` (Karlin byline, Guides), on branch
