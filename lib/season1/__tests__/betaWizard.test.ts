@@ -24,7 +24,8 @@ let eventStatus = 202;
 let families = new Map<string, { id: string; source: string }>();
 let players = new Map<string, { id: string; eventId: string; age: number }>();
 let counters = new Map<string, number>();
-let progress = new Map<string, { session: string; stage: number; next: string; answers: Record<string, unknown>; completed: boolean }>();
+let progress = new Map<string, { session: string; stage: number; next: string; answers: Record<string, unknown>; completed: boolean; completedAt: number }>();
+let clock = 0; // fake "now" in ms for the two-minute straggler window
 
 const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
 const result = (fields: string[], rows: unknown[][]) => ({ command: "SELECT", rowCount: rows.length, fields: fields.map((name) => ({ name, dataTypeID: 25 })), rows });
@@ -40,8 +41,9 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
     if (dbMode === "hang") { await new Promise((r) => setTimeout(r, 3000)); return json({ message: "late" }, 500); }
     if (/insert into s1_beta_families/.test(q.query)) {
       const [email, source, , , , , nameKey, age, , , , , , , , , , , eventId] = q.params.map(String);
-      assert.match(q.query, /update s1_beta_progress set stage = 3, next_step = '', completed_at = now\(\)/);
-      const pr = progress.get(email); if (pr) { pr.stage = 3; pr.next = ""; pr.completed = true; }
+      assert.match(q.query, /insert into s1_beta_progress \(email, stage, next_step, source, attribution, page, livemode, completed_at\)/);
+      const pr = progress.get(email) ?? { session: "", stage: 3, next: "", answers: {}, completed: true, completedAt: clock };
+      pr.stage = 3; pr.next = ""; pr.completed = true; pr.completedAt = clock; progress.set(email, pr);
       let fam = families.get(email);
       const newFamily = !fam;
       if (!fam) { fam = { id: `fam-${families.size + 1}`, source }; families.set(email, fam); }
@@ -58,10 +60,11 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
     if (/^insert into s1_beta_progress/.test(q.query)) {
       const [email, session, stage, next, answers] = q.params.map(String);
       const old = progress.get(email);
-      const same = !!old && old.session === session;
+      assert.match(q.query, /p\.completed_at > now\(\) - interval '2 minutes'/);
+      const same = !!old && (old.session === session || (old.completed && clock - old.completedAt < 120000));
       const row = same
-        ? { session, stage: Math.max(old!.stage, Number(stage)), next: old!.stage > Number(stage) ? old!.next : next, answers: { ...old!.answers, ...JSON.parse(answers) }, completed: old!.completed }
-        : { session, stage: Number(stage), next, answers: JSON.parse(answers), completed: false };
+        ? { session, stage: Math.max(old!.stage, Number(stage)), next: old!.stage > Number(stage) ? old!.next : next, answers: { ...old!.answers, ...JSON.parse(answers) }, completed: old!.completed, completedAt: old!.completedAt }
+        : { session, stage: Number(stage), next, answers: JSON.parse(answers), completed: false, completedAt: 0 };
       progress.set(email, row);
       return json({ command: "INSERT", rowCount: 1, fields: [["id", 25], ["stage", 23], ["completed", 16]].map(([name, dataTypeID]) => ({ name, dataTypeID })), rows: [["pr-1", String(row.stage), row.completed ? "t" : "f"]] });
     }
@@ -127,7 +130,7 @@ describe("POST /api/season-one step beta-wizard", () => {
   });
   beforeEach(() => {
     klaviyo = []; discord = []; sheets = []; graph = 0; queries = []; dbMode = "ok"; eventStatus = 202;
-    families = new Map(); players = new Map(); counters = new Map(); progress = new Map(); logs.length = 0;
+    families = new Map(); players = new Map(); counters = new Map(); progress = new Map(); clock = 0; logs.length = 0;
     delete process.env.S1_BETA_SHEETS_WEBHOOK_URL;
   });
 
@@ -371,9 +374,21 @@ describe("POST /api/season-one step beta-wizard", () => {
 
     it("P4: a new run after finishing (a sibling) starts the row over, so stopping again is a drop-off again", async () => {
       await post(prog(0)); await post(wiz());
+      clock += 10 * 60 * 1000; // ten minutes later
       await post(prog(0, {}, { sessionId: "sess-0002" }));
       const row = progress.get(EMAIL)!;
       assert.equal(row.completed, false); assert.equal(row.stage, 0); assert.equal(row.session, "sess-0002");
+    });
+
+    it("P9: posts that arrive out of order never put a finished family back on a step", async () => {
+      // The wizard lands first (no progress row yet), then the three progress posts straggle in.
+      await post(wiz());
+      assert.equal(progress.get(EMAIL)!.completed, true);
+      klaviyo = [];
+      await post(prog(0)); await post(prog(1)); await post(prog(2, { playerName: "Maya", playerAge: 12 }));
+      const row = progress.get(EMAIL)!;
+      assert.equal(row.completed, true); assert.equal(row.stage, 3); assert.equal(row.next, "");
+      assert.equal(klaviyo.length, 0); // nothing sent: the profile keeps beta_wizard_stage "done"
     });
 
     it("P5: answers are filtered, never rejected: bad or hostile values are left out and the post still lands", async () => {

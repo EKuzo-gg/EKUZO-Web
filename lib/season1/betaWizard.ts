@@ -218,8 +218,9 @@ export const SAVE_SQL = `with fam as (
      last_event_id = excluded.last_event_id
    returning id, (xmax = 0) as new_player),
  done as (
-   update s1_beta_progress set stage = 3, next_step = '', completed_at = now(), updated_at = now()
-    where email = $1 and livemode = $5::boolean and completed_at is null
+   insert into s1_beta_progress (email, stage, next_step, source, attribution, page, livemode, completed_at)
+   values ($1, 3, '', $2, $3::jsonb, $18, $5::boolean, now())
+   on conflict (email, livemode) do update set stage = 3, next_step = '', completed_at = now(), updated_at = now()
    returning 1)
  select fam.id as family_id, fam.new_family, pl.id as player_id, pl.new_player,
         coalesce((select last_event_id from prev), '') as prev_event_id,
@@ -443,15 +444,18 @@ export function partialAnswers(raw: unknown): Record<string, unknown> {
  * One row per email. The same wizard session only ever moves forward (stage is the highest seen,
  * answers merge). A new session (the parent starts again, for a sibling or on another day) starts
  * the row over and clears completed_at, so a second, unfinished run is a drop-off again.
+ * A progress post that lands within two minutes after the wizard was sent is a straggler from
+ * the run that just finished (posts can arrive out of order): the row stays done, and the
+ * handler then sends nothing to Klaviyo, so a finished family is never put back on a step.
  */
-export const PROGRESS_SQL = `insert into s1_beta_progress (email, session_id, stage, next_step, answers, source, attribution, page, livemode)
+export const PROGRESS_SQL = `insert into s1_beta_progress as p (email, session_id, stage, next_step, answers, source, attribution, page, livemode)
  values ($1, $2, $3::int, $4, $5::jsonb, $6, $7::jsonb, $8, $9::boolean)
  on conflict (email, livemode) do update set
-   stage = case when s1_beta_progress.session_id = excluded.session_id then greatest(s1_beta_progress.stage, excluded.stage) else excluded.stage end,
-   next_step = case when s1_beta_progress.session_id = excluded.session_id and s1_beta_progress.stage > excluded.stage then s1_beta_progress.next_step else excluded.next_step end,
-   answers = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.answers || excluded.answers else excluded.answers end,
-   started_at = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.started_at else now() end,
-   completed_at = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.completed_at else null end,
+   stage = case when p.session_id = excluded.session_id or p.completed_at > now() - interval '2 minutes' then greatest(p.stage, excluded.stage) else excluded.stage end,
+   next_step = case when (p.session_id = excluded.session_id or p.completed_at > now() - interval '2 minutes') and p.stage > excluded.stage then p.next_step else excluded.next_step end,
+   answers = case when p.session_id = excluded.session_id or p.completed_at > now() - interval '2 minutes' then p.answers || excluded.answers else excluded.answers end,
+   started_at = case when p.session_id = excluded.session_id or p.completed_at > now() - interval '2 minutes' then p.started_at else now() end,
+   completed_at = case when p.session_id = excluded.session_id or p.completed_at > now() - interval '2 minutes' then p.completed_at else null end,
    session_id = excluded.session_id, page = excluded.page, updated_at = now()
  returning id, stage, (completed_at is not null) as completed`;
 
@@ -504,7 +508,10 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
     }
   })();
 
-  const kl = (async () => {
+  const row = await db;
+  // The wizard for this run is already sent (this post arrived late): the profile says done and stays that way.
+  if (row?.completed) return ok();
+  await (async () => {
     try {
       const now = new Date().toISOString();
       const profile: Record<string, unknown> = { beta_wizard_stage: st.done, beta_wizard_next_step: st.next, beta_wizard_updated_at: now, beta_source: source };
@@ -534,6 +541,5 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
     }
   })();
 
-  await Promise.all([db, kl]);
   return ok();
 }
