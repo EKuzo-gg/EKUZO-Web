@@ -1,0 +1,62 @@
+ok   zone America/Vancouver -> Pacific (want Pacific)
+ok   zone America/Toronto -> Eastern (want Eastern)
+ok   zone America/Winnipeg -> Central (want Central)
+ok   zone America/Regina -> Central (want Central)
+ok   zone America/Edmonton -> Mountain (want Mountain)
+ok   zone America/Boise -> Mountain (want Mountain)
+ok   zone America/Indiana/Tell_City -> Central (want Central)
+ok   zone America/Kentucky/Louisville -> Eastern (want Eastern)
+ok   zone America/Phoenix -> Mountain (want Mountain)
+ok   zone Pacific/Honolulu -> Hawaii (want Hawaii)
+ok   zone America/Anchorage -> Alaska (want Alaska)
+ok   zone America/Halifax -> Other (want Other)
+ok   zone America/St_Johns -> Other (want Other)
+ok   zone America/Puerto_Rico -> Other (want Other)
+ok   zone America/Mexico_City -> Other (want Other)
+ok   zone America/Bogota -> Other (want Other)
+ok   zone Europe/London -> Other (want Other)
+ok   zone US/Pacific -> Pacific (want Pacific)
+ok   zone Canada/Saskatchewan -> Central (want Central)
+ok   zone America/Whitehorse -> Mountain (want Mountain)
+ok   tzSet recorded on hand change
+ok   no flag, no restore call
+ok   panel shown with mask: Welcome back.Your answers are saved under j•••@gmail.com. Pick up where you left off?Start freshPick up where I left off
+ok   panel above the first screen's content
+ok   flag deleted after 200
+ok   nothing filled before the tap
+ok   nothing stored before the tap
+ok   no injected markup
+ok   landed on player card, visible=2
+ok   email filled
+ok   player filled
+ok   tz stays at the guess
+ok   panel gone
+ok   no progress post: ["/api/season1-beta/restore{}","/api/season1-beta/restore{\"confirm\":true}"]
+ok   ga: [["event","beta_wizard_resume",{"step":"expectations","via":"link"}]]
+ok   stored run uses the same session: {"sid":"sess-777","stage":1,"g":[0,1]}
+ok   focus on first field of step: pname
+ok   forward to availability
+ok   one post for the new step, same session: [[2,"sess-777"]]
+ok   only the new step event
+ok   start fresh clears and removes panel
+ok   still first screen
+ok   typed -> no panel
+ok   panel up
+ok   typing dismisses the panel
+ok   done: last step only, visible=4
+ok   dots final state
+ok   heading focused
+ok   done: no posts
+ok   ga done: [["event","beta_wizard_resume",{"step":"done","via":"link"}]]
+ok   generic end screen
+ok   none line
+ok   first screen
+ok   saved run wins: only a clear call
+ok   local answers kept
+ok   device resume event
+ok   no tzSet: guess, not the stored zone
+ok   tzSet true: stored zone restored over the guess
+ok   503 retried once then panel
+ok   two failures: flag stays, silent
+ok   restore call on a preview host
+ALL OK

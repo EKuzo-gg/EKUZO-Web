@@ -1,0 +1,5321 @@
+
+> ekuzo-web@0.1.0 test
+> node scripts/run-tests.mjs && node scripts/run-tests.mjs scripts/field-vitals
+
+TAP version 13
+# Subtest: isWeekEligible
+    # Subtest: Jul 21 is eligible at 6:59 PM ET on Jul 21
+    ok 1 - Jul 21 is eligible at 6:59 PM ET on Jul 21
+      ---
+      duration_ms: 8.142625
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:00 PM ET on Jul 21
+    ok 2 - Jul 21 is ineligible at 7:00 PM ET on Jul 21
+      ---
+      duration_ms: 1.316375
+      type: 'test'
+      ...
+    # Subtest: Jul 21 is ineligible at 7:01 PM ET on Jul 21
+    ok 3 - Jul 21 is ineligible at 7:01 PM ET on Jul 21
+      ---
+      duration_ms: 0.133916
+      type: 'test'
+      ...
+    # Subtest: a future Tuesday is eligible the day before
+    ok 4 - a future Tuesday is eligible the day before
+      ---
+      duration_ms: 0.10025
+      type: 'test'
+      ...
+    1..4
+ok 1 - isWeekEligible
+  ---
+  duration_ms: 10.134417
+  type: 'suite'
+  ...
+# Subtest: getEligibleWeeks
+    # Subtest: returns exactly 6 items
+    ok 1 - returns exactly 6 items
+      ---
+      duration_ms: 0.911792
+      type: 'test'
+      ...
+    # Subtest: all returned days are Tuesdays (UTC day-of-week === 2)
+    ok 2 - all returned days are Tuesdays (UTC day-of-week === 2)
+      ---
+      duration_ms: 0.684875
+      type: 'test'
+      ...
+    # Subtest: thursdays are always 2 days after their tuesday
+    ok 3 - thursdays are always 2 days after their tuesday
+      ---
+      duration_ms: 0.609541
+      type: 'test'
+      ...
+    # Subtest: skips a week that starts at exactly 7 PM ET
+    ok 4 - skips a week that starts at exactly 7 PM ET
+      ---
+      duration_ms: 0.76025
+      type: 'test'
+      ...
+    # Subtest: DST crossing Nov 1 2026 (EST transition) — should not crash
+    ok 5 - DST crossing Nov 1 2026 (EST transition) — should not crash
+      ---
+      duration_ms: 0.895042
+      type: 'test'
+      ...
+    1..5
+ok 2 - getEligibleWeeks
+  ---
+  duration_ms: 4.108125
+  type: 'suite'
+  ...
+# Subtest: buildWeeksLabel
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 0.223792
+      type: 'test'
+      ...
+    # Subtest: includes all week month-day values
+    ok 2 - includes all week month-day values
+      ---
+      duration_ms: 0.12475
+      type: 'test'
+      ...
+    # Subtest: includes the time string
+    ok 3 - includes the time string # SKIP pre-existing failure, see docs/season1-commit
+      ---
+      duration_ms: 0.02925
+      type: 'test'
+      ...
+    1..3
+ok 3 - buildWeeksLabel
+  ---
+  duration_ms: 0.44925
+  type: 'suite'
+  ...
+# Subtest: buildWeekDatesSpan
+    # Subtest: contains no en-dashes or em-dashes
+    ok 1 - contains no en-dashes or em-dashes
+      ---
+      duration_ms: 0.150583
+      type: 'test'
+      ...
+    # Subtest: starts with the first Tuesday and ends with the last Thursday
+    ok 2 - starts with the first Tuesday and ends with the last Thursday
+      ---
+      duration_ms: 0.089333
+      type: 'test'
+      ...
+    # Subtest: handles a single week
+    ok 3 - handles a single week
+      ---
+      duration_ms: 0.098833
+      type: 'test'
+      ...
+    1..3
+ok 4 - buildWeekDatesSpan
+  ---
+  duration_ms: 0.379083
+  type: 'suite'
+  ...
+# Subtest: constants
+    # Subtest: exposes the 7-day window and the storage keys
+    ok 1 - exposes the 7-day window and the storage keys
+      ---
+      duration_ms: 0.230291
+      type: 'test'
+      ...
+    1..1
+ok 5 - constants
+  ---
+  duration_ms: 0.54825
+  type: 'suite'
+  ...
+# Subtest: resolveSeasonOneAttribution
+    # Subtest: URL wins over session and local
+    ok 1 - URL wins over session and local
+      ---
+      duration_ms: 0.613542
+      type: 'test'
+      ...
+    # Subtest: URL with only utm_source counts, with ad empty
+    ok 2 - URL with only utm_source counts, with ad empty
+      ---
+      duration_ms: 0.056125
+      type: 'test'
+      ...
+    # Subtest: URL with only a valid ad is not an ad touch: none, or falls through to session
+    ok 3 - URL with only a valid ad is not an ad touch: none, or falls through to session
+      ---
+      duration_ms: 0.136917
+      type: 'test'
+      ...
+    # Subtest: URL with only utm_id and/or site is not an ad touch
+    ok 4 - URL with only utm_id and/or site is not an ad touch
+      ---
+      duration_ms: 0.053958
+      type: 'test'
+      ...
+    # Subtest: each of the five utm_* keys alone is an ad touch
+    ok 5 - each of the five utm_* keys alone is an ad touch
+      ---
+      duration_ms: 0.124667
+      type: 'test'
+      ...
+    # Subtest: URL with only an invalid ad is not a touch and falls through to session
+    ok 6 - URL with only an invalid ad is not a touch and falls through to session
+      ---
+      duration_ms: 0.079666
+      type: 'test'
+      ...
+    # Subtest: session fallback when the URL has nothing
+    ok 7 - session fallback when the URL has nothing
+      ---
+      duration_ms: 0.174125
+      type: 'test'
+      ...
+    # Subtest: session wins over local
+    ok 8 - session wins over local
+      ---
+      duration_ms: 0.087709
+      type: 'test'
+      ...
+    # Subtest: a session record written by captureAttribution (5 utm keys, no ad) resolves with empty ad
+    ok 9 - a session record written by captureAttribution (5 utm keys, no ad) resolves with empty ad
+      ---
+      duration_ms: 0.1515
+      type: 'test'
+      ...
+    # Subtest: an empty session record falls through to local
+    ok 10 - an empty session record falls through to local
+      ---
+      duration_ms: 0.056583
+      type: 'test'
+      ...
+    # Subtest: return-visit within 7 days, ad from the same record
+    ok 11 - return-visit within 7 days, ad from the same record
+      ---
+      duration_ms: 0.044625
+      type: 'test'
+      ...
+    # Subtest: return-visit at exactly 7 days is still valid
+    ok 12 - return-visit at exactly 7 days is still valid
+      ---
+      duration_ms: 0.029375
+      type: 'test'
+      ...
+    # Subtest: expired one millisecond past 7 days
+    ok 13 - expired one millisecond past 7 days
+      ---
+      duration_ms: 0.032041
+      type: 'test'
+      ...
+    # Subtest: expired after 8 days
+    ok 14 - expired after 8 days
+      ---
+      duration_ms: 0.028584
+      type: 'test'
+      ...
+    # Subtest: future `at` is rejected
+    ok 15 - future `at` is rejected
+      ---
+      duration_ms: 0.026375
+      type: 'test'
+      ...
+    # Subtest: `at` equal to now is valid (age 0)
+    ok 16 - `at` equal to now is valid (age 0)
+      ---
+      duration_ms: 0.062958
+      type: 'test'
+      ...
+    # Subtest: non-numeric or missing `at` is rejected
+    ok 17 - non-numeric or missing `at` is rejected
+      ---
+      duration_ms: 0.065958
+      type: 'test'
+      ...
+    # Subtest: local record with a valid `at` but no values is none
+    ok 18 - local record with a valid `at` but no values is none
+      ---
+      duration_ms: 0.032375
+      type: 'test'
+      ...
+    # Subtest: malformed JSON in either storage is ignored
+    ok 19 - malformed JSON in either storage is ignored
+      ---
+      duration_ms: 0.070375
+      type: 'test'
+      ...
+    # Subtest: non-object JSON (string, number, array, null) is ignored
+    ok 20 - non-object JSON (string, number, array, null) is ignored
+      ---
+      duration_ms: 0.473167
+      type: 'test'
+      ...
+    # Subtest: non-string stored values become empty strings
+    ok 21 - non-string stored values become empty strings
+      ---
+      duration_ms: 0.041958
+      type: 'test'
+      ...
+    # Subtest: a record holding only non-string values counts as empty
+    ok 22 - a record holding only non-string values counts as empty
+      ---
+      duration_ms: 0.034417
+      type: 'test'
+      ...
+    # Subtest: empty everything resolves to none with all-empty values
+    ok 23 - empty everything resolves to none with all-empty values
+      ---
+      duration_ms: 0.03575
+      type: 'test'
+      ...
+    # Subtest: `ad` always comes from the same source as the attribution values
+    ok 24 - `ad` always comes from the same source as the attribution values
+      ---
+      duration_ms: 0.062709
+      type: 'test'
+      ...
+    # Subtest: a record with only `ad` (or only utm_id / site) does not count
+    ok 25 - a record with only `ad` (or only utm_id / site) does not count
+      ---
+      duration_ms: 0.0565
+      type: 'test'
+      ...
+    # Subtest: a session record without utm but with ad falls through to the return-visit record
+    ok 26 - a session record without utm but with ad falls through to the return-visit record
+      ---
+      duration_ms: 0.03425
+      type: 'test'
+      ...
+    # Subtest: an invalid stored ad is dropped
+    ok 27 - an invalid stored ad is dropped
+      ---
+      duration_ms: 0.027042
+      type: 'test'
+      ...
+    # Subtest: caps every value at 200 chars
+    ok 28 - caps every value at 200 chars
+      ---
+      duration_ms: 0.065916
+      type: 'test'
+      ...
+    # Subtest: result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+    ok 29 - result carries exactly the seven attribution keys (no `at`, no `ad` inside attribution)
+      ---
+      duration_ms: 0.035375
+      type: 'test'
+      ...
+    1..29
+ok 6 - resolveSeasonOneAttribution
+  ---
+  duration_ms: 3.129125
+  type: 'suite'
+  ...
+# Subtest: cleanTz
+    # Subtest: accepts valid zones
+    ok 1 - accepts valid zones
+      ---
+      duration_ms: 6.949625
+      type: 'test'
+      ...
+    # Subtest: canonicalizes case
+    ok 2 - canonicalizes case
+      ---
+      duration_ms: 0.151125
+      type: 'test'
+      ...
+    # Subtest: drops every M1 value
+    ok 3 - drops every M1 value
+      ---
+      duration_ms: 0.093833
+      type: 'test'
+      ...
+    # Subtest: accepts a 64-character shape but rejects what Intl rejects
+    ok 4 - accepts a 64-character shape but rejects what Intl rejects
+      ---
+      duration_ms: 0.058208
+      type: 'test'
+      ...
+    # Subtest: never throws on a 1 MB string
+    ok 5 - never throws on a 1 MB string
+      ---
+      duration_ms: 0.032583
+      type: 'test'
+      ...
+    1..5
+ok 7 - cleanTz
+  ---
+  duration_ms: 7.704625
+  type: 'suite'
+  ...
+# Subtest: UTC_ALIASES
+    # Subtest: holds the 14 documented names
+    ok 1 - holds the 14 documented names
+      ---
+      duration_ms: 0.064208
+      type: 'test'
+      ...
+    # Subtest: every alias validates and cleans to an alias (ICU may canonicalize to UTC)
+    ok 2 - every alias validates and cleans to an alias (ICU may canonicalize to UTC)
+      ---
+      duration_ms: 0.366667
+      type: 'test'
+      ...
+    1..2
+ok 8 - UTC_ALIASES
+  ---
+  duration_ms: 0.641042
+  type: 'suite'
+  ...
+# Subtest: parseGeoHeader oracle (old readGeo)
+    # Subtest: matches the old readGeo on the four existing keys: null
+    ok 1 - matches the old readGeo on the four existing keys: null
+      ---
+      duration_ms: 0.504833
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: empty
+    ok 2 - matches the old readGeo on the four existing keys: empty
+      ---
+      duration_ms: 0.084583
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: base64 full
+    ok 3 - matches the old readGeo on the four existing keys: base64 full
+      ---
+      duration_ms: 0.314583
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: raw json full
+    ok 4 - matches the old readGeo on the four existing keys: raw json full
+      ---
+      duration_ms: 0.075791
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: bare string codes
+    ok 5 - matches the old readGeo on the four existing keys: bare string codes
+      ---
+      duration_ms: 0.120334
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: postal_code fallback
+    ok 6 - matches the old readGeo on the four existing keys: postal_code fallback
+      ---
+      duration_ms: 0.039834
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: postalCode beats postal_code
+    ok 7 - matches the old readGeo on the four existing keys: postalCode beats postal_code
+      ---
+      duration_ms: 0.034167
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: padded city
+    ok 8 - matches the old readGeo on the four existing keys: padded city
+      ---
+      duration_ms: 0.077709
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long city
+    ok 9 - matches the old readGeo on the four existing keys: long city
+      ---
+      duration_ms: 0.048083
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long region
+    ok 10 - matches the old readGeo on the four existing keys: long region
+      ---
+      duration_ms: 0.447042
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: long postal
+    ok 11 - matches the old readGeo on the four existing keys: long postal
+      ---
+      duration_ms: 0.033167
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: numeric fields
+    ok 12 - matches the old readGeo on the four existing keys: numeric fields
+      ---
+      duration_ms: 0.029917
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: null fields
+    ok 13 - matches the old readGeo on the four existing keys: null fields
+      ---
+      duration_ms: 0.036625
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: array
+    ok 14 - matches the old readGeo on the four existing keys: array
+      ---
+      duration_ms: 0.063917
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: raw array
+    ok 15 - matches the old readGeo on the four existing keys: raw array
+      ---
+      duration_ms: 0.040041
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: number
+    ok 16 - matches the old readGeo on the four existing keys: number
+      ---
+      duration_ms: 0.033875
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: string json
+    ok 17 - matches the old readGeo on the four existing keys: string json
+      ---
+      duration_ms: 0.036375
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: null json
+    ok 18 - matches the old readGeo on the four existing keys: null json
+      ---
+      duration_ms: 0.038542
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: garbage
+    ok 19 - matches the old readGeo on the four existing keys: garbage
+      ---
+      duration_ms: 0.04325
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: bad json
+    ok 20 - matches the old readGeo on the four existing keys: bad json
+      ---
+      duration_ms: 0.144417
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: nested array country
+    ok 21 - matches the old readGeo on the four existing keys: nested array country
+      ---
+      duration_ms: 0.033667
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: unicode city
+    ok 22 - matches the old readGeo on the four existing keys: unicode city
+      ---
+      duration_ms: 0.027458
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: timezone only
+    ok 23 - matches the old readGeo on the four existing keys: timezone only
+      ---
+      duration_ms: 0.076083
+      type: 'test'
+      ...
+    # Subtest: matches the old readGeo on the four existing keys: lat long ignored
+    ok 24 - matches the old readGeo on the four existing keys: lat long ignored
+      ---
+      duration_ms: 0.026792
+      type: 'test'
+      ...
+    # Subtest: differs from the old one only by the strip
+    ok 25 - differs from the old one only by the strip
+      ---
+      duration_ms: 0.048041
+      type: 'test'
+      ...
+    1..25
+ok 9 - parseGeoHeader oracle (old readGeo)
+  ---
+  duration_ms: 2.678458
+  type: 'suite'
+  ...
+# Subtest: parseGeoHeader
+    # Subtest: reads base64 JSON including timezone
+    ok 1 - reads base64 JSON including timezone
+      ---
+      duration_ms: 0.1025
+      type: 'test'
+      ...
+    # Subtest: reads raw JSON
+    ok 2 - reads raw JSON
+      ---
+      duration_ms: 0.104291
+      type: 'test'
+      ...
+    # Subtest: garbage, array, missing: all empty
+    ok 3 - garbage, array, missing: all empty
+      ---
+      duration_ms: 0.081625
+      type: 'test'
+      ...
+    # Subtest: timezone invalid gives empty geo_tz and keeps the rest
+    ok 4 - timezone invalid gives empty geo_tz and keeps the rest
+      ---
+      duration_ms: 0.073166
+      type: 'test'
+      ...
+    # Subtest: timezone case is canonicalized
+    ok 5 - timezone case is canonicalized
+      ---
+      duration_ms: 0.051459
+      type: 'test'
+      ...
+    # Subtest: strips quotes, backslashes and control characters from city and region
+    ok 6 - strips quotes, backslashes and control characters from city and region
+      ---
+      duration_ms: 0.031458
+      type: 'test'
+      ...
+    # Subtest: strip happens before trim and cap
+    ok 7 - strip happens before trim and cap
+      ---
+      duration_ms: 0.034291
+      type: 'test'
+      ...
+    # Subtest: keeps apostrophes and unicode in the city
+    ok 8 - keeps apostrophes and unicode in the city
+      ---
+      duration_ms: 0.027833
+      type: 'test'
+      ...
+    # Subtest: does not strip country or postal (unchanged from the old readGeo)
+    ok 9 - does not strip country or postal (unchanged from the old readGeo)
+      ---
+      duration_ms: 0.036833
+      type: 'test'
+      ...
+    # Subtest: never keeps latitude or longitude
+    ok 10 - never keeps latitude or longitude
+      ---
+      duration_ms: 0.032084
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 11 - never throws (fuzz)
+      ---
+      duration_ms: 17.22825
+      type: 'test'
+      ...
+    1..11
+ok 10 - parseGeoHeader
+  ---
+  duration_ms: 17.898584
+  type: 'suite'
+  ...
+# Subtest: tzProps
+    # Subtest: browser zone wins when valid
+    ok 1 - browser zone wins when valid
+      ---
+      duration_ms: 0.31925
+      type: 'test'
+      ...
+    # Subtest: browser zone is canonicalized
+    ok 2 - browser zone is canonicalized
+      ---
+      duration_ms: 0.096708
+      type: 'test'
+      ...
+    # Subtest: falls back to geo when the browser tz is missing or invalid
+    ok 3 - falls back to geo when the browser tz is missing or invalid
+      ---
+      duration_ms: 0.299834
+      type: 'test'
+      ...
+    # Subtest: neither gives empty
+    ok 4 - neither gives empty
+      ---
+      duration_ms: 0.746583
+      type: 'test'
+      ...
+    # Subtest: every UTC alias from the browser loses to a valid non-UTC geo zone
+    ok 5 - every UTC alias from the browser loses to a valid non-UTC geo zone
+      ---
+      duration_ms: 0.653
+      type: 'test'
+      ...
+    # Subtest: a UTC alias is used when geo is empty, invalid, or itself UTC
+    ok 6 - a UTC alias is used when geo is empty, invalid, or itself UTC
+      ---
+      duration_ms: 1.594708
+      type: 'test'
+      ...
+    # Subtest: a non-UTC browser zone beats a UTC geo zone
+    ok 7 - a non-UTC browser zone beats a UTC geo zone
+      ---
+      duration_ms: 0.07675
+      type: 'test'
+      ...
+    # Subtest: end to end with parseGeoHeader (J6: header with only a timezone)
+    ok 8 - end to end with parseGeoHeader (J6: header with only a timezone)
+      ---
+      duration_ms: 0.134959
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 9 - never throws (fuzz)
+      ---
+      duration_ms: 0.260959
+      type: 'test'
+      ...
+    1..9
+ok 11 - tzProps
+  ---
+  duration_ms: 4.32925
+  type: 'suite'
+  ...
+# Subtest: geoProfileProps
+    # Subtest: returns all three when present
+    ok 1 - returns all three when present
+      ---
+      duration_ms: 0.095292
+      type: 'test'
+      ...
+    # Subtest: drops empties (J4: no header, valid browser tz)
+    ok 2 - drops empties (J4: no header, valid browser tz)
+      ---
+      duration_ms: 0.0525
+      type: 'test'
+      ...
+    # Subtest: drops everything when all are empty (no key written, nothing blanked)
+    ok 3 - drops everything when all are empty (no key written, nothing blanked)
+      ---
+      duration_ms: 0.027667
+      type: 'test'
+      ...
+    # Subtest: city and region without tz
+    ok 4 - city and region without tz
+      ---
+      duration_ms: 0.026416
+      type: 'test'
+      ...
+    # Subtest: an invalid tz is dropped
+    ok 5 - an invalid tz is dropped
+      ---
+      duration_ms: 0.041375
+      type: 'test'
+      ...
+    # Subtest: never throws (fuzz)
+    ok 6 - never throws (fuzz)
+      ---
+      duration_ms: 0.247916
+      type: 'test'
+      ...
+    1..6
+ok 12 - geoProfileProps
+  ---
+  duration_ms: 0.544
+  type: 'suite'
+  ...
+# Subtest: season1 order attribution (integration)
+ok 13 - season1 order attribution (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.18225
+  type: 'suite'
+  ...
+# Subtest: ekuzo_lc: buildLastClick (middleware logic)
+    # Subtest: keeps only the eight kept keys, plus path and ts
+    ok 1 - keeps only the eight kept keys, plus path and ts
+      ---
+      duration_ms: 0.653083
+      type: 'test'
+      ...
+    # Subtest: returns null with no kept parameter, so a plain visit never overwrites an earlier click
+    ok 2 - returns null with no kept parameter, so a plain visit never overwrites an earlier click
+      ---
+      duration_ms: 0.053834
+      type: 'test'
+      ...
+    # Subtest: returns null when no kept value survives cleaning (%00, non-ASCII only)
+    ok 3 - returns null when no kept value survives cleaning (%00, non-ASCII only)
+      ---
+      duration_ms: 0.103709
+      type: 'test'
+      ...
+    # Subtest: utm values: printable ASCII only, capped at 160
+    ok 4 - utm values: printable ASCII only, capped at 160
+      ---
+      duration_ms: 0.13025
+      type: 'test'
+      ...
+    # Subtest: fbclid and gclid are kept whole up to 512 or dropped whole, never cut
+    ok 5 - fbclid and gclid are kept whole up to 512 or dropped whole, never cut
+      ---
+      duration_ms: 0.154125
+      type: 'test'
+      ...
+    # Subtest: path: /crew/<code> is stored as /crew/; others capped at 128
+    ok 6 - path: /crew/<code> is stored as /crew/; others capped at 128
+      ---
+      duration_ms: 0.042209
+      type: 'test'
+      ...
+    # Subtest: path: /season1/beta/r/<token> is stored as /season1/beta/r/ (the restart token never leaves)
+    ok 7 - path: /season1/beta/r/<token> is stored as /season1/beta/r/ (the restart token never leaves)
+      ---
+      duration_ms: 0.120583
+      type: 'test'
+      ...
+    # Subtest: the encoded cookie stays within 2048 bytes; utm_term is dropped first
+    ok 8 - the encoded cookie stays within 2048 bytes; utm_term is dropped first
+      ---
+      duration_ms: 0.285292
+      type: 'test'
+      ...
+    1..8
+ok 14 - ekuzo_lc: buildLastClick (middleware logic)
+  ---
+  duration_ms: 2.342667
+  type: 'suite'
+  ...
+# Subtest: ekuzo_lc: ad (s1-fast-track A1)
+    # Subtest: cleanAd: lowercase, d0N to dN (as the landing does), d1 to d99 only
+    ok 1 - cleanAd: lowercase, d0N to dN (as the landing does), d1 to d99 only
+      ---
+      duration_ms: 0.1685
+      type: 'test'
+      ...
+    # Subtest: is kept, normalized, beside the utms
+    ok 2 - is kept, normalized, beside the utms
+      ---
+      duration_ms: 1.483625
+      type: 'test'
+      ...
+    # Subtest: a bare valid ad is a last click on its own; an invalid one is dropped and alone writes nothing
+    ok 3 - a bare valid ad is a last click on its own; an invalid one is dropped and alone writes nothing
+      ---
+      duration_ms: 0.108208
+      type: 'test'
+      ...
+    # Subtest: over budget: ad is dropped last, so it survives where fbclid does
+    ok 4 - over budget: ad is dropped last, so it survives where fbclid does
+      ---
+      duration_ms: 0.138417
+      type: 'test'
+      ...
+    # Subtest: parseLastClick re-validates ad: normalized when loose, dropped when hostile
+    ok 5 - parseLastClick re-validates ad: normalized when loose, dropped when hostile
+      ---
+      duration_ms: 0.101625
+      type: 'test'
+      ...
+    # Subtest: order attribution carries lc.ad from the cookie
+    ok 6 - order attribution carries lc.ad from the cookie
+      ---
+      duration_ms: 0.565042
+      type: 'test'
+      ...
+    1..6
+ok 15 - ekuzo_lc: ad (s1-fast-track A1)
+  ---
+  duration_ms: 2.664
+  type: 'suite'
+  ...
+# Subtest: middleware: ekuzo_lc written before the first-touch early return (C17)
+    # Subtest: existing ekuzo_origin plus utm_campaign writes ekuzo_lc and leaves ekuzo_origin alone
+    ok 1 - existing ekuzo_origin plus utm_campaign writes ekuzo_lc and leaves ekuzo_origin alone
+      ---
+      duration_ms: 1.772167
+      type: 'test'
+      ...
+    # Subtest: a first visit with utms sets both cookies
+    ok 2 - a first visit with utms sets both cookies
+      ---
+      duration_ms: 0.549708
+      type: 'test'
+      ...
+    # Subtest: no kept parameter: no ekuzo_lc (the earlier click survives)
+    ok 3 - no kept parameter: no ekuzo_lc (the earlier click survives)
+      ---
+      duration_ms: 0.155041
+      type: 'test'
+      ...
+    # Subtest: bots get no ekuzo_lc
+    ok 4 - bots get no ekuzo_lc
+      ---
+      duration_ms: 0.139417
+      type: 'test'
+      ...
+    # Subtest: ad (A1): ?ad=D019 with utms writes ad=d19; ?ad=zz alone writes no cookie
+    ok 5 - ad (A1): ?ad=D019 with utms writes ad=d19; ?ad=zz alone writes no cookie
+      ---
+      duration_ms: 0.926209
+      type: 'test'
+      ...
+    # Subtest: restart link path: ekuzo_lc keeps /season1/beta/r/, the token never reaches the cookie
+    ok 6 - restart link path: ekuzo_lc keeps /season1/beta/r/, the token never reaches the cookie
+      ---
+      duration_ms: 0.232416
+      type: 'test'
+      ...
+    # Subtest: crew path: stored as /crew/, the code never in the cookie
+    ok 7 - crew path: stored as /crew/, the code never in the cookie
+      ---
+      duration_ms: 0.181792
+      type: 'test'
+      ...
+    1..7
+ok 16 - middleware: ekuzo_lc written before the first-touch early return (C17)
+  ---
+  duration_ms: 4.03925
+  type: 'suite'
+  ...
+# Subtest: ekuzo_lc: parseLastClick (commit side), hostile values
+    # Subtest: round-trips a cookie written by middleware
+    ok 1 - round-trips a cookie written by middleware
+      ---
+      duration_ms: 0.113667
+      type: 'test'
+      ...
+    # Subtest: %00, an unpaired surrogate and control characters are removed (utm) or dropped (click id)
+    ok 2 - %00, an unpaired surrogate and control characters are removed (utm) or dropped (click id)
+      ---
+      duration_ms: 0.114625
+      type: 'test'
+      ...
+    # Subtest: a raw %00 or lone-surrogate escape in the cookie is harmless
+    ok 3 - a raw %00 or lone-surrogate escape in the cookie is harmless
+      ---
+      duration_ms: 0.05175
+      type: 'test'
+      ...
+    # Subtest: a 10 KB cookie is not parsed
+    ok 4 - a 10 KB cookie is not parsed
+      ---
+      duration_ms: 0.066833
+      type: 'test'
+      ...
+    # Subtest: non-JSON, array, null, number and nested-object cookies give null or drop the nested key
+    ok 5 - non-JSON, array, null, number and nested-object cookies give null or drop the nested key
+      ---
+      duration_ms: 0.071
+      type: 'test'
+      ...
+    # Subtest: unknown keys are dropped; a bad or missing ts rejects the cookie
+    ok 6 - unknown keys are dropped; a bad or missing ts rejects the cookie
+      ---
+      duration_ms: 0.064292
+      type: 'test'
+      ...
+    # Subtest: a cookie with no kept key is null
+    ok 7 - a cookie with no kept key is null
+      ---
+      duration_ms: 0.037167
+      type: 'test'
+      ...
+    1..7
+ok 17 - ekuzo_lc: parseLastClick (commit side), hostile values
+  ---
+  duration_ms: 0.593583
+  type: 'suite'
+  ...
+# Subtest: order attribution
+    # Subtest: builds {src, lc, first_touch, fbp, fbc}; never the key origin
+    ok 1 - builds {src, lc, first_touch, fbp, fbc}; never the key origin
+      ---
+      duration_ms: 0.145959
+      type: 'test'
+      ...
+    # Subtest: prefers the Pixel's _fbc cookie over a built one
+    ok 2 - prefers the Pixel's _fbc cookie over a built one
+      ---
+      duration_ms: 0.596166
+      type: 'test'
+      ...
+    # Subtest: invalid fbp, fbc and first touch are dropped
+    ok 3 - invalid fbp, fbc and first touch are dropped
+      ---
+      duration_ms: 0.045709
+      type: 'test'
+      ...
+    # Subtest: no cookies at all: src only, everything else null
+    ok 4 - no cookies at all: src only, everything else null
+      ---
+      duration_ms: 0.0285
+      type: 'test'
+      ...
+    # Subtest: regexes per money red team 8
+    ok 5 - regexes per money red team 8
+      ---
+      duration_ms: 0.039166
+      type: 'test'
+      ...
+    1..5
+ok 18 - order attribution
+  ---
+  duration_ms: 0.905333
+  type: 'suite'
+  ...
+# Subtest: beta progress script: hooks into start.html
+    # Subtest: the form, the five steps, the Continue buttons and every field name are on the page
+    ok 1 - the form, the five steps, the Continue buttons and every field name are on the page
+      ---
+      duration_ms: 0.532917
+      type: 'test'
+      ...
+    # Subtest: the page's own gate is still ekuzo.gg only, the rule the script copies
+    ok 2 - the page's own gate is still ekuzo.gg only, the rule the script copies
+      ---
+      duration_ms: 0.050292
+      type: 'test'
+      ...
+    # Subtest: the script parses, cannot close its own script tag, and names no vendor but GA4
+    ok 3 - the script parses, cannot close its own script tag, and names no vendor but GA4
+      ---
+      duration_ms: 0.313209
+      type: 'test'
+      ...
+    # Subtest: GA4 calls are the two allowed shapes and nothing else: beta_wizard_step {step} and beta_wizard_resume {step, via}
+    ok 4 - GA4 calls are the two allowed shapes and nothing else: beta_wizard_step {step} and beta_wizard_resume {step, via}
+      ---
+      duration_ms: 0.201042
+      type: 'test'
+      ...
+    1..4
+ok 19 - beta progress script: hooks into start.html
+  ---
+  duration_ms: 1.416958
+  type: 'suite'
+  ...
+# Subtest: beta progress script: restart link (docs/beta-restart-link-2026-11)
+    # Subtest: builds its DOM with createElement and textContent: no innerHTML, outerHTML, insertAdjacentHTML or document.write
+    ok 1 - builds its DOM with createElement and textContent: no innerHTML, outerHTML, insertAdjacentHTML or document.write
+      ---
+      duration_ms: 0.147291
+      type: 'test'
+      ...
+    # Subtest: reads the flag cookie only, never the HttpOnly token cookie, and calls only the restore endpoint
+    ok 2 - reads the flag cookie only, never the HttpOnly token cookie, and calls only the restore endpoint
+      ---
+      duration_ms: 0.277625
+      type: 'test'
+      ...
+    # Subtest: the progress posts stay ekuzo.gg only; the restore call is not gated on the host
+    ok 3 - the progress posts stay ekuzo.gg only; the restore call is not gated on the host
+      ---
+      duration_ms: 0.072666
+      type: 'test'
+      ...
+    # Subtest: the three new strings are on the page script, spelled as in the decision log (D3)
+    ok 4 - the three new strings are on the page script, spelled as in the decision log (D3)
+      ---
+      duration_ms: 0.1505
+      type: 'test'
+      ...
+    # Subtest: a link restore sends no progress post and no step event: the walk runs with restoring set, and pickUp never calls post( or beta_wizard_step
+    ok 5 - a link restore sends no progress post and no step event: the walk runs with restoring set, and pickUp never calls post( or beta_wizard_step
+      ---
+      duration_ms: 0.096375
+      type: 'test'
+      ...
+    # Subtest: the page's own end-screen steps are matched: last section only, dots on, aria-current removed
+    ok 6 - the page's own end-screen steps are matched: last section only, dots on, aria-current removed
+      ---
+      duration_ms: 0.129542
+      type: 'test'
+      ...
+    1..6
+ok 20 - beta progress script: restart link (docs/beta-restart-link-2026-11)
+  ---
+  duration_ms: 1.029458
+  type: 'suite'
+  ...
+# Subtest: beta progress script: time zone guess (BETA_ZONE_LABELS)
+    # Subtest: maps the Canadian and US zones the page missed
+    ok 1 - maps the Canadian and US zones the page missed
+      ---
+      duration_ms: 12.553541
+      type: 'test'
+      ...
+    # Subtest: any other America/, US/ or Canada/ zone reads Other; a zone from elsewhere is left as the page set it
+    ok 2 - any other America/, US/ or Canada/ zone reads Other; a zone from elsewhere is left as the page set it
+      ---
+      duration_ms: 1.199416
+      type: 'test'
+      ...
+    # Subtest: the table is written into the script from the one exported object, and every label is a server option
+    ok 3 - the table is written into the script from the one exported object, and every label is a server option
+      ---
+      duration_ms: 0.052208
+      type: 'test'
+      ...
+    # Subtest: the table covers the named zones, with the US/ and Canada/ aliases, and the lookup ignores inherited names
+    ok 4 - the table covers the named zones, with the US/ and Canada/ aliases, and the lookup ignores inherited names
+      ---
+      duration_ms: 0.0805
+      type: 'test'
+      ...
+    # Subtest: tzSet is recorded only from a change event, and a restored zone is used only when it is set
+    ok 5 - tzSet is recorded only from a change event, and a restored zone is used only when it is set
+      ---
+      duration_ms: 0.030792
+      type: 'test'
+      ...
+    1..5
+ok 21 - beta progress script: time zone guess (BETA_ZONE_LABELS)
+  ---
+  duration_ms: 13.981666
+  type: 'suite'
+  ...
+# Subtest: beta restart token
+    # Subtest: is 65 URL-safe characters and round trips
+    ok 1 - is 65 URL-safe characters and round trips
+      ---
+      duration_ms: 0.996583
+      type: 'test'
+      ...
+    # Subtest: reads nothing about the family: no email, name or session in the text
+    ok 2 - reads nothing about the family: no email, name or session in the text
+      ---
+      duration_ms: 0.069584
+      type: 'test'
+      ...
+    # Subtest: a wrong session fails
+    ok 3 - a wrong session fails
+      ---
+      duration_ms: 0.146792
+      type: 'test'
+      ...
+    # Subtest: a wrong row fails
+    ok 4 - a wrong row fails
+      ---
+      duration_ms: 0.078291
+      type: 'test'
+      ...
+    # Subtest: a truncated token, 64 and 66 characters, an altered byte and a changed key all fail
+    ok 5 - a truncated token, 64 and 66 characters, an altered byte and a changed key all fail
+      ---
+      duration_ms: 0.294125
+      type: 'test'
+      ...
+    # Subtest: a non-canonical encoding of the same bytes is refused
+    ok 6 - a non-canonical encoding of the same bytes is refused
+      ---
+      duration_ms: 0.103875
+      type: 'test'
+      ...
+    # Subtest: a non-uuid id never throws: no token is made, parse and verify say no
+    ok 7 - a non-uuid id never throws: no token is made, parse and verify say no
+      ---
+      duration_ms: 0.101
+      type: 'test'
+      ...
+    # Subtest: the shape check and cookie strings
+    ok 8 - the shape check and cookie strings
+      ---
+      duration_ms: 0.160208
+      type: 'test'
+      ...
+    # Subtest: without any secret the token call throws (callers wrap) but parse does not
+    ok 9 - without any secret the token call throws (callers wrap) but parse does not
+      ---
+      duration_ms: 0.225667
+      type: 'test'
+      ...
+    1..9
+ok 22 - beta restart token
+  ---
+  duration_ms: 2.807625
+  type: 'suite'
+  ...
+# Subtest: restartLinkBase
+    # Subtest: production context is https://ekuzo.gg whatever else is set
+    ok 1 - production context is https://ekuzo.gg whatever else is set
+      ---
+      duration_ms: 0.091333
+      type: 'test'
+      ...
+    # Subtest: a preview uses DEPLOY_PRIME_URL only when it is an --ekuzo.netlify.app address
+    ok 2 - a preview uses DEPLOY_PRIME_URL only when it is an --ekuzo.netlify.app address
+      ---
+      duration_ms: 0.073458
+      type: 'test'
+      ...
+    # Subtest: anything else is null
+    ok 3 - anything else is null
+      ---
+      duration_ms: 0.559875
+      type: 'test'
+      ...
+    1..3
+ok 23 - restartLinkBase
+  ---
+  duration_ms: 0.789959
+  type: 'suite'
+  ...
+# Subtest: maskEmail
+    # Subtest: keeps the first character and the full domain
+    ok 1 - keeps the first character and the full domain
+      ---
+      duration_ms: 0.051334
+      type: 'test'
+      ...
+    # Subtest: never shows more than the first character, and survives odd input
+    ok 2 - never shows more than the first character, and survives odd input
+      ---
+      duration_ms: 0.0265
+      type: 'test'
+      ...
+    1..2
+ok 24 - maskEmail
+  ---
+  duration_ms: 0.103916
+  type: 'suite'
+  ...
+# Subtest: GET /season1/beta/r/<token>
+    # Subtest: a good shape: 302, relative Location with nothing in it, the three privacy headers, no body
+    ok 1 - a good shape: 302, relative Location with nothing in it, the three privacy headers, no body
+      ---
+      duration_ms: 10.42625
+      type: 'test'
+      ...
+    # Subtest: sets both cookies: the token HttpOnly on the API path, the flag readable on the page path
+    ok 2 - sets both cookies: the token HttpOnly on the API path, the flag readable on the page path
+      ---
+      duration_ms: 0.772167
+      type: 'test'
+      ...
+    # Subtest: a query string on the link changes nothing and is not carried
+    ok 3 - a query string on the link changes nothing and is not carried
+      ---
+      duration_ms: 0.465208
+      type: 'test'
+      ...
+    # Subtest: bad shapes (short, long, odd characters, empty) still land on the wizard and set no cookie
+    ok 4 - bad shapes (short, long, odd characters, empty) still land on the wizard and set no cookie
+      ---
+      duration_ms: 2.564125
+      type: 'test'
+      ...
+    # Subtest: does no database work and imports nothing but the dependency-free cookie module
+    ok 5 - does no database work and imports nothing but the dependency-free cookie module
+      ---
+      duration_ms: 0.369625
+      type: 'test'
+      ...
+    1..5
+ok 25 - GET /season1/beta/r/<token>
+  ---
+  duration_ms: 15.184084
+  type: 'suite'
+  ...
+# Subtest: POST /api/season1-beta/restore
+    # Subtest: a valid unfinished link without confirm: masked email and the next step only, cookies kept, no-store
+    ok 1 - a valid unfinished link without confirm: masked email and the next step only, cookies kept, no-store
+      ---
+      duration_ms: 139.289875
+      type: 'test'
+      ...
+    # Subtest: the step is the next one: stage 0 reads 1, stage 2 reads 3
+    ok 2 - the step is the next one: stage 0 reads 1, stage 2 reads 3
+      ---
+      duration_ms: 6.557916
+      type: 'test'
+      ...
+    # Subtest: confirm returns the run: email, session, stage, answers; never note, timeZone, tz or times; both cookies cleared
+    ok 3 - confirm returns the run: email, session, stage, answers; never note, timeZone, tz or times; both cookies cleared
+      ---
+      duration_ms: 7.599709
+      type: 'test'
+      ...
+    # Subtest: answers pass through the lenient filter: a stored value that is not allowed is dropped
+    ok 4 - answers pass through the lenient filter: a stored value that is not allowed is dropped
+      ---
+      duration_ms: 1.593459
+      type: 'test'
+      ...
+    # Subtest: a finished run reads done: no email, no answers, both cookies cleared
+    ok 5 - a finished run reads done: no email, no answers, both cookies cleared
+      ---
+      duration_ms: 1.449917
+      type: 'test'
+      ...
+    # Subtest: none for: clear, no cookie, bad shape, unknown row, wrong signature, superseded session
+    ok 6 - none for: clear, no cookie, bad shape, unknown row, wrong signature, superseded session
+      ---
+      duration_ms: 8.00475
+      type: 'test'
+      ...
+    # Subtest: clear needs no database and no cookie
+    ok 7 - clear needs no database and no cookie
+      ---
+      duration_ms: 0.568417
+      type: 'test'
+      ...
+    # Subtest: a link for a row last saved 13 days ago works, 15 days ago reads none
+    ok 8 - a link for a row last saved 13 days ago works, 15 days ago reads none
+      ---
+      duration_ms: 1.333417
+      type: 'test'
+      ...
+    # Subtest: a row of the other mode reads none
+    ok 9 - a row of the other mode reads none
+      ---
+      duration_ms: 0.810708
+      type: 'test'
+      ...
+    # Subtest: a database error is a 503 with the cookies kept and no detail in the answer or the log
+    ok 10 - a database error is a 503 with the cookies kept and no detail in the answer or the log
+      ---
+      duration_ms: 0.867375
+      type: 'test'
+      ...
+    # Subtest: a database that does not answer in time is a 503 with the cookies kept
+    ok 11 - a database that does not answer in time is a 503 with the cookies kept
+      ---
+      duration_ms: 2502.924793
+      type: 'test'
+      ...
+    # Subtest: a limiter that errors fails open
+    ok 12 - a limiter that errors fails open
+      ---
+      duration_ms: 0.896833
+      type: 'test'
+      ...
+    # Subtest: past 60 an hour from one address is a 429 with cookies kept; another address is unaffected
+    ok 13 - past 60 an hour from one address is a 429 with cookies kept; another address is unaffected
+      ---
+      duration_ms: 32.598667
+      type: 'test'
+      ...
+    # Subtest: the limiter key is a hash of the address, or one shared key with no address; neither names the address
+    ok 14 - the limiter key is a hash of the address, or one shared key with no address; neither names the address
+      ---
+      duration_ms: 1.050333
+      type: 'test'
+      ...
+    # Subtest: no limiter or database work runs for a cross-site POST: 403 first, no cookie touched
+    ok 15 - no limiter or database work runs for a cross-site POST: 403 first, no cookie touched
+      ---
+      duration_ms: 1.426625
+      type: 'test'
+      ...
+    # Subtest: the token comes from the cookie only: a token in the body is ignored
+    ok 16 - the token comes from the cookie only: a token in the body is ignored
+      ---
+      duration_ms: 0.442375
+      type: 'test'
+      ...
+    # Subtest: source cookie: set on confirm from the row's tag when the browser has none, with middleware's options
+    ok 17 - source cookie: set on confirm from the row's tag when the browser has none, with middleware's options
+      ---
+      duration_ms: 0.733041
+      type: 'test'
+      ...
+    # Subtest: source cookie: not set when the browser has one, when the tag is not a tag, without confirm, or when the row has none
+    ok 18 - source cookie: not set when the browser has one, when the tag is not a tag, without confirm, or when the row has none
+      ---
+      duration_ms: 4.474125
+      type: 'test'
+      ...
+    # Subtest: never writes to the progress table: every statement on it is a select; no update, delete or Klaviyo call
+    ok 19 - never writes to the progress table: every statement on it is a select; no update, delete or Klaviyo call
+      ---
+      duration_ms: 1.927167
+      type: 'test'
+      ...
+    # Subtest: only POST is exported
+    ok 20 - only POST is exported
+      ---
+      duration_ms: 0.201
+      type: 'test'
+      ...
+    # Subtest: logs never carry the email, the token or an answer, even on a confirm
+    ok 21 - logs never carry the email, the token or an answer, even on a confirm
+      ---
+      duration_ms: 0.911791
+      type: 'test'
+      ...
+    1..21
+ok 26 - POST /api/season1-beta/restore
+  ---
+  duration_ms: 2716.62246
+  type: 'suite'
+  ...
+# Subtest: middleware: ekuzo_bsrc on beta pages only
+    # Subtest: the module and the middleware agree on the cookie name and the pattern
+    ok 1 - the module and the middleware agree on the cookie name and the pattern
+      ---
+      duration_ms: 0.248917
+      type: 'test'
+      ...
+    # Subtest: sets the tag on the launch page, the wizard and the beta page; HttpOnly, 30 days, path /
+    ok 2 - sets the tag on the launch page, the wizard and the beta page; HttpOnly, 30 days, path /
+      ---
+      duration_ms: 2.75225
+      type: 'test'
+      ...
+    # Subtest: never on any other page, so the Season 01 pages behave exactly as before
+    ok 3 - never on any other page, so the Season 01 pages behave exactly as before
+      ---
+      duration_ms: 1.228708
+      type: 'test'
+      ...
+    # Subtest: drops anything that is not a short tag, and bots
+    ok 4 - drops anything that is not a short tag, and bots
+      ---
+      duration_ms: 0.588084
+      type: 'test'
+      ...
+    # Subtest: leaves ekuzo_lc and ekuzo_origin as they were on a beta page
+    ok 5 - leaves ekuzo_lc and ekuzo_origin as they were on a beta page
+      ---
+      duration_ms: 0.249625
+      type: 'test'
+      ...
+    1..5
+ok 27 - middleware: ekuzo_bsrc on beta pages only
+  ---
+  duration_ms: 5.501167
+  type: 'suite'
+  ...
+# Subtest: POST /api/season-one step beta-wizard
+    # Subtest: B1: an email with no earlier sign-up is saved: family, player, event; nothing goes to Discord
+    ok 1 - B1: an email with no earlier sign-up is saved: family, player, event; nothing goes to Discord
+      ---
+      duration_ms: 140.360125
+      type: 'test'
+      ...
+    # Subtest: B2 (P3): never the Season 01 Waitlist: no list relationship, no Waitlist metric, no step lock or 24 h claim query, no Meta call
+    ok 2 - B2 (P3): never the Season 01 Waitlist: no list relationship, no Waitlist metric, no step lock or 24 h claim query, no Meta call
+      ---
+      duration_ms: 4.235709
+      type: 'test'
+      ...
+    # Subtest: B3: a retry of the same submit records one player and one Sheets row
+    ok 3 - B3: a retry of the same submit records one player and one Sheets row
+      ---
+      duration_ms: 5.000791
+      type: 'test'
+      ...
+    # Subtest: B4: a second player on the same email records a second player
+    ok 4 - B4: a second player on the same email records a second player
+      ---
+      duration_ms: 1.8355
+      type: 'test'
+      ...
+    # Subtest: B5: the same player sent again with new answers updates the row
+    ok 5 - B5: the same player sent again with new answers updates the row
+      ---
+      duration_ms: 1.204417
+      type: 'test'
+      ...
+    # Subtest: B6: thirty families on one network in an hour are all saved
+    ok 6 - B6: thirty families on one network in an hour are all saved
+      ---
+      duration_ms: 24.655333
+      type: 'test'
+      ...
+    # Subtest: B6b: past the per-IP ceiling the answer is a 429 with the text-our-founder line and nothing is written
+    ok 7 - B6b: past the per-IP ceiling the answer is a 429 with the text-our-founder line and nothing is written
+      ---
+      duration_ms: 21.38025
+      type: 'test'
+      ...
+    # Subtest: A2: no per-email limit: 25 submissions for one address from different networks never lock the family out
+    ok 8 - A2: no per-email limit: 25 submissions for one address from different networks never lock the family out
+      ---
+      duration_ms: 16.135375
+      type: 'test'
+      ...
+    # Subtest: A3: past 200 an hour across everyone, answers are still saved but no Sheets row is written
+    ok 9 - A3: past 200 an hour across everyone, answers are still saved but no Sheets row is written
+      ---
+      duration_ms: 0.748875
+      type: 'test'
+      ...
+    # Subtest: A5: a utm_source is reduced to tag characters before it is stored as the source
+    ok 10 - A5: a utm_source is reduced to tag characters before it is stored as the source
+      ---
+      duration_ms: 0.991584
+      type: 'test'
+      ...
+    # Subtest: B7: the honeypot stops a bot: 200, nothing written anywhere
+    ok 11 - B7: the honeypot stops a bot: 200, nothing written anywhere
+      ---
+      duration_ms: 0.38725
+      type: 'test'
+      ...
+    # Subtest: B8: every field is checked against the wizard's allowed values
+    ok 12 - B8: every field is checked against the wizard's allowed values
+      ---
+      duration_ms: 8.198
+      type: 'test'
+      ...
+    # Subtest: B9: playerName, funFact and note are untrusted text: markup and control characters never reach a template
+    ok 13 - B9: playerName, funFact and note are untrusted text: markup and control characters never reach a template
+      ---
+      duration_ms: 0.746416
+      type: 'test'
+      ...
+    # Subtest: B10: source and attribution: the ?src= cookie wins, then the last click, then utm on the wizard URL
+    ok 14 - B10: source and attribution: the ?src= cookie wins, then the last click, then utm on the wizard URL
+      ---
+      duration_ms: 1.282791
+      type: 'test'
+      ...
+    # Subtest: B11: the database down: Klaviyo still saves and the parent gets ok
+    ok 15 - B11: the database down: Klaviyo still saves and the parent gets ok
+      ---
+      duration_ms: 2.039417
+      type: 'test'
+      ...
+    # Subtest: B12: Klaviyo down: the database still saves; both down is a 502 that names the founder
+    ok 16 - B12: Klaviyo down: the database still saves; both down is a 502 that names the founder
+      ---
+      duration_ms: 0.967666
+      type: 'test'
+      ...
+    # Subtest: D9: zero-width and text-direction marks are stripped from free text
+    ok 17 - D9: zero-width and text-direction marks are stripped from free text
+      ---
+      duration_ms: 0.522292
+      type: 'test'
+      ...
+    # Subtest: D8: a database failure logs a code or name, never the driver's message
+    ok 18 - D8: a database failure logs a code or name, never the driver's message
+      ---
+      duration_ms: 1.520916
+      type: 'test'
+      ...
+    # Subtest: B13: Sheets row only when S1_BETA_SHEETS_WEBHOOK_URL is set
+    ok 19 - B13: Sheets row only when S1_BETA_SHEETS_WEBHOOK_URL is set
+      ---
+      duration_ms: 1.090125
+      type: 'test'
+      ...
+    # Subtest: B14: logs never carry the email, the player's name or an answer
+    ok 20 - B14: logs never carry the email, the player's name or an answer
+      ---
+      duration_ms: 0.827416
+      type: 'test'
+      ...
+    # Subtest: drop-off capture (step beta-progress)
+        # Subtest: P1: the email screen alone puts the family on record with the step to pick up at
+        ok 1 - P1: the email screen alone puts the family on record with the step to pick up at
+          ---
+          duration_ms: 2.523833
+          type: 'test'
+          ...
+        # Subtest: P2: each step adds the answers so far; the stage only moves forward within one wizard run
+        ok 2 - P2: each step adds the answers so far; the stage only moves forward within one wizard run
+          ---
+          duration_ms: 1.606458
+          type: 'test'
+          ...
+        # Subtest: P3: finishing the wizard marks the progress row done and the profile stage done, so no pick-up email fires
+        ok 3 - P3: finishing the wizard marks the progress row done and the profile stage done, so no pick-up email fires
+          ---
+          duration_ms: 1.995334
+          type: 'test'
+          ...
+        # Subtest: P4: a new run after finishing (a sibling) starts the row over, so stopping again is a drop-off again
+        ok 4 - P4: a new run after finishing (a sibling) starts the row over, so stopping again is a drop-off again
+          ---
+          duration_ms: 1.20675
+          type: 'test'
+          ...
+        # Subtest: P9: posts that arrive out of order never put a finished family back on a step
+        ok 5 - P9: posts that arrive out of order never put a finished family back on a step
+          ---
+          duration_ms: 1.473917
+          type: 'test'
+          ...
+        # Subtest: P5: answers are filtered, never rejected: bad or hostile values are left out and the post still lands
+        ok 6 - P5: answers are filtered, never rejected: bad or hostile values are left out and the post still lands
+          ---
+          duration_ms: 0.443958
+          type: 'test'
+          ...
+        # Subtest: P6: a malformed post is a 400 and writes nothing; the honeypot is a silent 200
+        ok 7 - P6: a malformed post is a 400 and writes nothing; the honeypot is a silent 200
+          ---
+          duration_ms: 8.1375
+          type: 'test'
+          ...
+        # Subtest: P7: failures never reach the parent: database down, Klaviyo down, or over the per-IP ceiling are all a quiet 200
+        ok 8 - P7: failures never reach the parent: database down, Klaviyo down, or over the per-IP ceiling are all a quiet 200
+          ---
+          duration_ms: 0.971833
+          type: 'test'
+          ...
+        # Subtest: P8: progress posts never count against the sign-up limits, and logs stay clean
+        ok 9 - P8: progress posts never count against the sign-up limits, and logs stay clean
+          ---
+          duration_ms: 19.349917
+          type: 'test'
+          ...
+        1..9
+    ok 21 - drop-off capture (step beta-progress)
+      ---
+      duration_ms: 37.903375
+      type: 'suite'
+      ...
+    # Subtest: restart link on the Klaviyo profile (docs/beta-restart-link-2026-11)
+        # Subtest: production context: beta_restart_link is https://ekuzo.gg/season1/beta/r/<token> and verifies against the row and session
+        ok 1 - production context: beta_restart_link is https://ekuzo.gg/season1/beta/r/<token> and verifies against the row and session
+          ---
+          duration_ms: 1.704958
+          type: 'test'
+          ...
+        # Subtest: a deploy preview uses its own Netlify address
+        ok 2 - a deploy preview uses its own Netlify address
+          ---
+          duration_ms: 3.0665
+          type: 'test'
+          ...
+        # Subtest: no known origin: the property is left out and the event still goes
+        ok 3 - no known origin: the property is left out and the event still goes
+          ---
+          duration_ms: 0.503041
+          type: 'test'
+          ...
+        # Subtest: a failing link build leaves the property out and still sends the event
+        ok 4 - a failing link build leaves the property out and still sends the event
+          ---
+          duration_ms: 0.535625
+          type: 'test'
+          ...
+        # Subtest: a row that is already finished (a late straggler) sends no event and so no link
+        ok 5 - a row that is already finished (a late straggler) sends no event and so no link
+          ---
+          duration_ms: 2.671792
+          type: 'test'
+          ...
+        # Subtest: without a database row there is no link
+        ok 6 - without a database row there is no link
+          ---
+          duration_ms: 0.451459
+          type: 'test'
+          ...
+        # Subtest: a completed wizard sets the plain wizard address, never an empty value
+        ok 7 - a completed wizard sets the plain wizard address, never an empty value
+          ---
+          duration_ms: 2.1895
+          type: 'test'
+          ...
+        1..7
+    ok 22 - restart link on the Klaviyo profile (docs/beta-restart-link-2026-11)
+      ---
+      duration_ms: 11.268458
+      type: 'suite'
+      ...
+    # Subtest: regression: an unknown step is still a 400 and the other steps are untouched by this one
+    ok 23 - regression: an unknown step is still a 400 and the other steps are untouched by this one
+      ---
+      duration_ms: 0.378791
+      type: 'test'
+      ...
+    1..23
+ok 28 - POST /api/season-one step beta-wizard
+  ---
+  duration_ms: 284.992833
+  type: 'suite'
+  ...
+# Subtest: Damm check digit
+    # Subtest: known vector: 572 has check digit 4
+    ok 1 - known vector: 572 has check digit 4
+      ---
+      duration_ms: 0.335167
+      type: 'test'
+      ...
+    # Subtest: known vector: 4827193 has check digit 0
+    ok 2 - known vector: 4827193 has check digit 0
+      ---
+      duration_ms: 0.066084
+      type: 'test'
+      ...
+    1..2
+ok 29 - Damm check digit
+  ---
+  duration_ms: 0.682458
+  type: 'suite'
+  ...
+# Subtest: mintNumeric
+    # Subtest: makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+    ok 1 - makes 8-digit valid codes, first digit 1 to 9 (crypto default)
+      ---
+      duration_ms: 2.482541
+      type: 'test'
+      ...
+    # Subtest: accepts an injected rand and is deterministic
+    ok 2 - accepts an injected rand and is deterministic
+      ---
+      duration_ms: 0.104625
+      type: 'test'
+      ...
+    # Subtest: every single-digit substitution of a minted code fails
+    ok 3 - every single-digit substitution of a minted code fails
+      ---
+      duration_ms: 2.85725
+      type: 'test'
+      ...
+    # Subtest: every adjacent transposition of differing digits fails
+    ok 4 - every adjacent transposition of differing digits fails
+      ---
+      duration_ms: 0.857125
+      type: 'test'
+      ...
+    1..4
+ok 30 - mintNumeric
+  ---
+  duration_ms: 6.392167
+  type: 'suite'
+  ...
+# Subtest: isValidNumeric
+    # Subtest: rejects wrong length, leading zero, and non-digits
+    ok 1 - rejects wrong length, leading zero, and non-digits
+      ---
+      duration_ms: 0.11825
+      type: 'test'
+      ...
+    1..1
+ok 31 - isValidNumeric
+  ---
+  duration_ms: 0.197042
+  type: 'suite'
+  ...
+# Subtest: display
+    # Subtest: formats numeric codes as 4+4
+    ok 1 - formats numeric codes as 4+4
+      ---
+      duration_ms: 0.079042
+      type: 'test'
+      ...
+    # Subtest: leaves vanity codes as is
+    ok 2 - leaves vanity codes as is
+      ---
+      duration_ms: 0.076333
+      type: 'test'
+      ...
+    1..2
+ok 32 - display
+  ---
+  duration_ms: 0.258083
+  type: 'suite'
+  ...
+# Subtest: normalize
+    # Subtest: strips spaces and hyphens from numeric codes
+    ok 1 - strips spaces and hyphens from numeric codes
+      ---
+      duration_ms: 0.09925
+      type: 'test'
+      ...
+    # Subtest: rejects numeric codes with a bad check digit
+    ok 2 - rejects numeric codes with a bad check digit
+      ---
+      duration_ms: 0.030791
+      type: 'test'
+      ...
+    # Subtest: lowercases valid vanity codes
+    ok 3 - lowercases valid vanity codes
+      ---
+      duration_ms: 0.056875
+      type: 'test'
+      ...
+    # Subtest: rejects invalid vanity codes
+    ok 4 - rejects invalid vanity codes
+      ---
+      duration_ms: 0.057333
+      type: 'test'
+      ...
+    # Subtest: accepts vanity at the 3 and 20 char limits
+    ok 5 - accepts vanity at the 3 and 20 char limits
+      ---
+      duration_ms: 0.032417
+      type: 'test'
+      ...
+    1..5
+ok 33 - normalize
+  ---
+  duration_ms: 0.432333
+  type: 'suite'
+  ...
+# s1 step=commit.attempt_in_flight order=attemptord ok=false err=pi_succeeded
+# Subtest: commit hotfix 10-30: no double charge (no DB)
+    # Subtest: finding 1: changed details with the attempt's PI succeeded returns 409 in_progress, never cancels the PI or the order
+    ok 1 - finding 1: changed details with the attempt's PI succeeded returns 409 in_progress, never cancels the PI or the order
+      ---
+      duration_ms: 9.437958
+      type: 'test'
+      ...
+# s1 step=commit.attempt_in_flight order=attemptord ok=false err=pi_processing
+# s1 step=commit.attempt_in_flight order=attemptord ok=false err=pi_requires_capture
+    # Subtest: finding 1: changed details with the attempt's PI processing (or requires_capture) does the same
+    ok 2 - finding 1: changed details with the attempt's PI processing (or requires_capture) does the same
+      ---
+      duration_ms: 3.483709
+      type: 'test'
+      ...
+# s1 step=commit.attempt_in_flight order=attemptord ok=false err=pi_succeeded
+    # Subtest: finding 1: unchanged details with the PI succeeded returns 409 in_progress (F15: back and retap)
+    ok 3 - finding 1: unchanged details with the PI succeeded returns 409 in_progress (F15: back and retap)
+      ---
+      duration_ms: 1.094709
+      type: 'test'
+      ...
+# s1 step=commit.cancel_old_pi order=attemptord ok=false err=payment_intent_unexpected_state
+    # Subtest: finding 1: a failed PI cancel returns try_again and leaves the order pending
+    ok 4 - finding 1: a failed PI cancel returns try_again and leaves the order pending
+      ---
+      duration_ms: 0.958458
+      type: 'test'
+      ...
+# s1 step=commit.attempt_pi order=attemptord ok=false err=rate_limit
+    # Subtest: finding 1: a failed PI retrieve returns try_again and cancels nothing
+    ok 5 - finding 1: a failed PI retrieve returns try_again and cancels nothing
+      ---
+      duration_ms: 1.04825
+      type: 'test'
+      ...
+# s1 step=commit.cancel_old_order order=attemptord ok=true
+# s1 step=commit.order order=vb6tww2ts8 ok=true
+# s1 step=commit.customer order=vb6tww2ts8 ok=true
+# s1 step=commit.pi order=vb6tww2ts8 ok=true
+    # Subtest: finding 1: a successful cancel cancels the order and proceeds to a new order and PI (its own order is not re-checked)
+    ok 6 - finding 1: a successful cancel cancels the order and proceeds to a new order and PI (its own order is not re-checked)
+      ---
+      duration_ms: 2.851916
+      type: 'test'
+      ...
+# s1 step=commit.cancel_old_order order=attemptord ok=true
+# s1 step=commit.order order=z29w6hmyf2 ok=true
+# s1 step=commit.customer order=z29w6hmyf2 ok=true
+# s1 step=commit.pi order=z29w6hmyf2 ok=true
+    # Subtest: finding 1: an already-canceled attempt PI skips the Stripe cancel and proceeds
+    ok 7 - finding 1: an already-canceled attempt PI skips the Stripe cancel and proceeds
+      ---
+      duration_ms: 1.073791
+      type: 'test'
+      ...
+# s1 step=commit.email_in_flight order=- ok=false err=pi_succeeded
+# s1 step=commit.email_in_flight order=- ok=false err=pi_processing
+# s1 step=commit.email_in_flight order=- ok=false err=pi_requires_capture
+    # Subtest: finding 3: a new attempt while another pending order's PI succeeded returns 409 in_progress_other with no cookie
+    ok 8 - finding 3: a new attempt while another pending order's PI succeeded returns 409 in_progress_other with no cookie
+      ---
+      duration_ms: 12.428
+      type: 'test'
+      ...
+# s1 step=commit.order order=w3ptx2xmzp ok=true
+# s1 step=commit.customer order=w3ptx2xmzp ok=true
+# s1 step=commit.pi order=w3ptx2xmzp ok=true
+    # Subtest: finding 3: an unrelated pending order with a requires_payment_method PI does not block
+    ok 9 - finding 3: an unrelated pending order with a requires_payment_method PI does not block
+      ---
+      duration_ms: 1.195916
+      type: 'test'
+      ...
+# s1 step=commit.order order=cmn6dd33b3 ok=true
+# s1 step=commit.customer order=cmn6dd33b3 ok=true
+# s1 step=commit.pi order=cmn6dd33b3 ok=true
+# s1 step=commit.email_pi order=- ok=false err=api_connection_error
+    # Subtest: finding 3: a missing PI does not block; any other Stripe error fails closed with try_again
+    ok 10 - finding 3: a missing PI does not block; any other Stripe error fails closed with try_again
+      ---
+      duration_ms: 1.350583
+      type: 'test'
+      ...
+# s1 step=commit.email_in_flight order=- ok=false err=pi_succeeded
+    # Subtest: finding 3: one in-flight PI among several stops the commit; Stripe reads are bounded to the lookback
+    ok 11 - finding 3: one in-flight PI among several stops the commit; Stripe reads are bounded to the lookback
+      ---
+      duration_ms: 0.607292
+      type: 'test'
+      ...
+# s1 step=commit.attempt_in_flight order=attemptord ok=false err=pi_succeeded
+# s1 step=commit.attempt_in_flight_token order=attemptord ok=false err=Error
+    # Subtest: C2: in_progress still answers 409 when the view token cannot be issued (no cookie, never a 500)
+    ok 12 - C2: in_progress still answers 409 when the view token cannot be issued (no cookie, never a 500)
+      ---
+      duration_ms: 0.59175
+      type: 'test'
+      ...
+# s1 step=commit.order order=- ok=false err=attempt_race
+    # Subtest: C2: losing the double-tap insert race returns 503 attempt_busy, no PI, no cookie
+    ok 13 - C2: losing the double-tap insert race returns 503 attempt_busy, no PI, no cookie
+      ---
+      duration_ms: 0.619875
+      type: 'test'
+      ...
+# s1 step=commit.error order=- ok=false err=23505
+    # Subtest: C2: any other insert failure is still 500 server
+    ok 14 - C2: any other insert failure is still 500 server
+      ---
+      duration_ms: 2.224584
+      type: 'test'
+      ...
+    1..14
+ok 34 - commit hotfix 10-30: no double charge (no DB)
+  ---
+  duration_ms: 133.52075
+  type: 'suite'
+  ...
+# s1 step=commit.order order=dm6h4cujb5 ok=true
+# s1 step=commit.customer order=dm6h4cujb5 ok=true
+# s1 step=commit.pi order=dm6h4cujb5 ok=true
+# Subtest: commit attribution (analytics S6, C3; no DB)
+    # Subtest: writes {src, lc, first_touch, fbp, fbc} on a returning family's order; never the key origin
+    ok 1 - writes {src, lc, first_touch, fbp, fbc} on a returning family's order; never the key origin
+      ---
+      duration_ms: 0.96225
+      type: 'test'
+      ...
+# s1 step=commit.order order=2d9xn3swvc ok=true
+# s1 step=commit.customer order=2d9xn3swvc ok=true
+# s1 step=commit.pi order=2d9xn3swvc ok=true
+    # Subtest: writes it for a new family too (family attribution stays {src})
+    ok 2 - writes it for a new family too (family attribution stays {src})
+      ---
+      duration_ms: 1.116333
+      type: 'test'
+      ...
+# s1 step=commit.order order=udavu85ndf ok=true
+# s1 step=commit.customer order=udavu85ndf ok=true
+# s1 step=commit.pi order=udavu85ndf ok=true
+    # Subtest: hostile cookies (%00, lone surrogate, 10 KB, bad fbp) never fail the commit; they store nulls
+    ok 3 - hostile cookies (%00, lone surrogate, 10 KB, bad fbp) never fail the commit; they store nulls
+      ---
+      duration_ms: 0.776041
+      type: 'test'
+      ...
+# s1 step=commit.order order=avzng6fh2h ok=true
+# s1 step=commit.customer order=avzng6fh2h ok=true
+# s1 step=commit.pi order=avzng6fh2h ok=true
+# s1 step=commit.order order=7muz8fdgzq ok=true
+# s1 step=commit.customer order=7muz8fdgzq ok=true
+# s1 step=commit.pi order=7muz8fdgzq ok=true
+# s1 step=commit.order order=j42zbuep99 ok=true
+# s1 step=commit.customer order=j42zbuep99 ok=true
+# s1 step=commit.pi order=j42zbuep99 ok=true
+    # Subtest: non-JSON, array and nested-object ekuzo_lc store lc null or drop the bad keys
+    ok 4 - non-JSON, array and nested-object ekuzo_lc store lc null or drop the bad keys
+      ---
+      duration_ms: 2.91775
+      type: 'test'
+      ...
+# s1 step=commit.order order=8ajsrpffm4 ok=true
+# s1 step=commit.customer order=8ajsrpffm4 ok=true
+# s1 step=commit.pi order=8ajsrpffm4 ok=true
+# s1 step=commit.order order=2h3ww4dbf6 ok=true
+# s1 step=commit.customer order=2h3ww4dbf6 ok=true
+# s1 step=commit.pi order=2h3ww4dbf6 ok=true
+    # Subtest: a forged ekuzo_lc leaves the amount and the invite outcome unchanged
+    ok 5 - a forged ekuzo_lc leaves the amount and the invite outcome unchanged
+      ---
+      duration_ms: 2.7825
+      type: 'test'
+      ...
+    1..5
+ok 35 - commit attribution (analytics S6, C3; no DB)
+  ---
+  duration_ms: 8.988958
+  type: 'suite'
+  ...
+# s1 step=commit.honeypot order=- ok=false err=honeypot
+# s1 step=commit.ratelimit order=- ok=false err=NeonDbError
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.ratelimit order=- ok=false err=NeonDbError
+# s1 step=commit.origin order=- ok=false err=cross_site
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ratelimit order=- ok=false err=rate_limited
+# s1 step=commit.ceiling_alert order=- ok=false err=NeonDbError
+# Subtest: commit route guards (no DB)
+    # Subtest: D5: requests rejected by validation (422) never touch the limiters
+    ok 1 - D5: requests rejected by validation (422) never touch the limiters
+      ---
+      duration_ms: 5.142125
+      type: 'test'
+      ...
+    # Subtest: D5: a request that passes validation reaches the per-IP limiter, which fails closed
+    ok 2 - D5: a request that passes validation reaches the per-IP limiter, which fails closed
+      ---
+      duration_ms: 1.36475
+      type: 'test'
+      ...
+    # Subtest: L1: cross-site requests are 403 before anything else
+    ok 3 - L1: cross-site requests are 403 before anything else
+      ---
+      duration_ms: 0.624167
+      type: 'test'
+      ...
+    # Subtest: L1: a non-JSON content type is 415 (a text/plain form post cannot reach the route)
+    ok 4 - L1: a non-JSON content type is 415 (a text/plain form post cannot reach the route)
+      ---
+      duration_ms: 0.333625
+      type: 'test'
+      ...
+    # Subtest: same-origin browser posts pass the guard
+    ok 5 - same-origin browser posts pass the guard
+      ---
+      duration_ms: 0.238042
+      type: 'test'
+      ...
+    # Subtest: L7: every commit response carries X-Frame-Options DENY and nosniff
+    ok 6 - L7: every commit response carries X-Frame-Options DENY and nosniff
+      ---
+      duration_ms: 0.573167
+      type: 'test'
+      ...
+    # Subtest: M1: a tripped global ceiling (1000/h) returns 429 and enqueues one ops_alert per hour; per-IP key uses /48
+    ok 7 - M1: a tripped global ceiling (1000/h) returns 429 and enqueues one ops_alert per hour; per-IP key uses /48
+      ---
+      duration_ms: 3.649959
+      type: 'test'
+      ...
+    # Subtest: canary 10-29: every response carries Server-Timing with db round trips counted and no PII
+    ok 8 - canary 10-29: every response carries Server-Timing with db round trips counted and no PII
+      ---
+      duration_ms: 0.76575
+      type: 'test'
+      ...
+    # Subtest: M1: an ops_alert enqueue failure still returns 429 (never 500)
+    ok 9 - M1: an ops_alert enqueue failure still returns 429 (never 500)
+      ---
+      duration_ms: 0.563125
+      type: 'test'
+      ...
+# s1 step=commit.order order=8yn9v48zh2 ok=true
+# s1 step=commit.customer order=8yn9v48zh2 ok=true
+# s1 step=commit.pi order=8yn9v48zh2 ok=true
+    # Subtest: speed pass 10-29: a new family's commit takes 6 DB round trips (was 14), records in one transaction
+    ok 10 - speed pass 10-29: a new family's commit takes 6 DB round trips (was 14), records in one transaction
+      ---
+      duration_ms: 5.659375
+      type: 'test'
+      ...
+# s1 step=commit.order order=93mnztebqx ok=true
+# s1 step=commit.customer order=93mnztebqx ok=true
+# s1 step=commit.pi order=93mnztebqx ok=true
+    # Subtest: speed pass 10-29: a returning family with a Customer takes 5 DB round trips and no customer create
+    ok 11 - speed pass 10-29: a returning family with a Customer takes 5 DB round trips and no customer create
+      ---
+      duration_ms: 1.013417
+      type: 'test'
+      ...
+    1..11
+ok 36 - commit route guards (no DB)
+  ---
+  duration_ms: 118.254
+  type: 'suite'
+  ...
+# s1 step=klaviyo_list_add order=abcd234567 ok=false err=klaviyo_profile_http_503
+# s1 step=klaviyo_list_remove order=abcd234567 ok=false err=klaviyo_profile_http_500
+# Subtest: eventSrc: the Committed event's src
+    # Subtest: friend: invited, or src friend, even over a paid click
+    ok 1 - friend: invited, or src friend, even over a paid click
+      ---
+      duration_ms: 0.300375
+      type: 'test'
+      ...
+    # Subtest: karlin: src karlin (the /karlin short link)
+    ok 2 - karlin: src karlin (the /karlin short link)
+      ---
+      duration_ms: 0.043917
+      type: 'test'
+      ...
+    # Subtest: ad: a paid last click, src ad, or a paid first touch
+    ok 3 - ad: a paid last click, src ad, or a paid first touch
+      ---
+      duration_ms: 0.081666
+      type: 'test'
+      ...
+    # Subtest: email: the offer email links (src=email, utm_medium=email)
+    ok 4 - email: the offer email links (src=email, utm_medium=email)
+      ---
+      duration_ms: 0.041708
+      type: 'test'
+      ...
+    # Subtest: direct: nothing else (Bobby's order: organic_google first touch, no src)
+    ok 5 - direct: nothing else (Bobby's order: organic_google first touch, no src)
+      ---
+      duration_ms: 0.072125
+      type: 'test'
+      ...
+    1..5
+ok 37 - eventSrc: the Committed event's src
+  ---
+  duration_ms: 0.8455
+  type: 'suite'
+  ...
+# Subtest: Committed event carries src and utm_content
+    # Subtest: offer email order: src email, utm_content email-b
+    ok 1 - offer email order: src email, utm_content email-b
+      ---
+      duration_ms: 0.211084
+      type: 'test'
+      ...
+    # Subtest: an order with no src param still gets a source
+    ok 2 - an order with no src param still gets a source
+      ---
+      duration_ms: 0.111625
+      type: 'test'
+      ...
+    1..2
+ok 38 - Committed event carries src and utm_content
+  ---
+  duration_ms: 0.50075
+  type: 'suite'
+  ...
+# Subtest: isTeamTestEmail
+    # Subtest: skips team and test addresses
+    ok 1 - skips team and test addresses
+      ---
+      duration_ms: 0.09575
+      type: 'test'
+      ...
+    # Subtest: lets real parents through
+    ok 2 - lets real parents through
+      ---
+      duration_ms: 0.070708
+      type: 'test'
+      ...
+    1..2
+ok 39 - isTeamTestEmail
+  ---
+  duration_ms: 0.344625
+  type: 'suite'
+  ...
+# Subtest: Committed list membership (stubbed fetch)
+    # Subtest: add: upserts the profile, then POSTs it to WsfsxW
+    ok 1 - add: upserts the profile, then POSTs it to WsfsxW
+      ---
+      duration_ms: 10.221291
+      type: 'test'
+      ...
+    # Subtest: remove: DELETE with the same body
+    ok 2 - remove: DELETE with the same body
+      ---
+      duration_ms: 0.322834
+      type: 'test'
+      ...
+    # Subtest: skips test mode and team addresses without calling Klaviyo
+    ok 3 - skips test mode and team addresses without calling Klaviyo
+      ---
+      duration_ms: 0.107334
+      type: 'test'
+      ...
+    # Subtest: no API key: skipped_no_config
+    ok 4 - no API key: skipped_no_config
+      ---
+      duration_ms: 0.072583
+      type: 'test'
+      ...
+    # Subtest: errors throw PII-free codes
+    ok 5 - errors throw PII-free codes
+      ---
+      duration_ms: 0.612583
+      type: 'test'
+      ...
+    # Subtest: syncCommittedList never throws: a failure alerts Discord with the order ref
+    ok 6 - syncCommittedList never throws: a failure alerts Discord with the order ref
+      ---
+      duration_ms: 0.7975
+      type: 'test'
+      ...
+    # Subtest: syncCommittedList survives a failing Discord too
+    ok 7 - syncCommittedList survives a failing Discord too
+      ---
+      duration_ms: 0.546042
+      type: 'test'
+      ...
+    # Subtest: formatListAlert: test tag in test mode, remove wording
+    ok 8 - formatListAlert: test tag in test mode, remove wording
+      ---
+      duration_ms: 0.086083
+      type: 'test'
+      ...
+    1..8
+ok 40 - Committed list membership (stubbed fetch)
+  ---
+  duration_ms: 12.869792
+  type: 'suite'
+  ...
+# Subtest: season1 db (integration)
+ok 41 - season1 db (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.185792
+  type: 'suite'
+  ...
+# Subtest: dev phone preview
+    # Subtest: keeps same-site paths
+    ok 1 - keeps same-site paths
+      ---
+      duration_ms: 0.256167
+      type: 'test'
+      ...
+    # Subtest: rejects other sites, loops and empty values
+    ok 2 - rejects other sites, loops and empty values
+      ---
+      duration_ms: 0.050125
+      type: 'test'
+      ...
+    # Subtest: is loaded by every Season 01 funnel page
+    ok 3 - is loaded by every Season 01 funnel page
+      ---
+      duration_ms: 0.588583
+      type: 'test'
+      ...
+    1..3
+ok 42 - dev phone preview
+  ---
+  duration_ms: 1.303042
+  type: 'suite'
+  ...
+# Subtest: L7 page framing
+    # Subtest: test mode allows same-origin framing for the phone preview
+    ok 1 - test mode allows same-origin framing for the phone preview
+      ---
+      duration_ms: 0.04925
+      type: 'test'
+      ...
+    # Subtest: live and off keep DENY, and the shared constant is untouched
+    ok 2 - live and off keep DENY, and the shared constant is untouched
+      ---
+      duration_ms: 0.086083
+      type: 'test'
+      ...
+    1..2
+ok 43 - L7 page framing
+  ---
+  duration_ms: 0.183541
+  type: 'suite'
+  ...
+# Subtest: /season1/dev-view route
+    # Subtest: returns 404 when the mode is off or live
+    ok 1 - returns 404 when the mode is off or live
+      ---
+      duration_ms: 11.942291
+      type: 'test'
+      ...
+    # Subtest: serves the preview in test mode (control)
+    ok 2 - serves the preview in test mode (control)
+      ---
+      duration_ms: 1.2795
+      type: 'test'
+      ...
+    1..2
+ok 44 - /season1/dev-view route
+  ---
+  duration_ms: 13.34925
+  type: 'suite'
+  ...
+# s1 step=drain.auth order=- ok=false err=not_configured
+# s1 step=drain.auth order=- ok=false err=not_configured
+# s1 step=drain.auth order=- ok=false err=not_configured
+# Subtest: drain route auth and shape (C1)
+    # Subtest: 503 not_configured when S1_DRAIN_SECRET is unset or blank, and no drain runs
+    ok 1 - 503 not_configured when S1_DRAIN_SECRET is unset or blank, and no drain runs
+      ---
+      duration_ms: 84.813958
+      type: 'test'
+      ...
+# s1 step=drain.auth order=- ok=false err=unauthorized
+# s1 step=drain.auth order=- ok=false err=unauthorized
+# s1 step=drain.auth order=- ok=false err=unauthorized
+# s1 step=drain.auth order=- ok=false err=unauthorized
+# s1 step=drain.auth order=- ok=false err=unauthorized
+    # Subtest: 401 without the header, with a wrong secret, a prefix, or the secret in another header
+    ok 2 - 401 without the header, with a wrong secret, a prefix, or the secret in another header
+      ---
+      duration_ms: 2.864042
+      type: 'test'
+      ...
+# s1 step=drain.run order=- ok=true err=empty
+    # Subtest: 200 with the secret: drains with limit 50 and returns counts only
+    ok 3 - 200 with the secret: drains with limit 50 and returns counts only
+      ---
+      duration_ms: 1.883833
+      type: 'test'
+      ...
+    # Subtest: secretMatches: equal only on the exact secret
+    ok 4 - secretMatches: equal only on the exact secret
+      ---
+      duration_ms: 1.091833
+      type: 'test'
+      ...
+    1..4
+ok 45 - drain route auth and shape (C1)
+  ---
+  duration_ms: 91.283291
+  type: 'suite'
+  ...
+# Subtest: welcome drain (S9, C1)
+    # Subtest: the welcome route awaits no drain and schedules an order-scoped one
+    ok 1 - the welcome route awaits no drain and schedules an order-scoped one
+      ---
+      duration_ms: 0.2095
+      type: 'test'
+      ...
+    # Subtest: scheduleOrderDrain hands an order-scoped task to after() without running it
+    ok 2 - scheduleOrderDrain hands an order-scoped task to after() without running it
+      ---
+      duration_ms: 11.012417
+      type: 'test'
+      ...
+    # Subtest: the scheduled task drains only that order (order filter in the select)
+    ok 3 - the scheduled task drains only that order (order filter in the select)
+      ---
+      duration_ms: 0.801333
+      type: 'test'
+      ...
+# s1 step=welcome.drain order=ordref2345 ok=false err=no_after
+    # Subtest: outside a request scope, the real after() throws and the call is skipped (never breaks the page)
+    ok 4 - outside a request scope, the real after() throws and the call is skipped (never breaks the page)
+      ---
+      duration_ms: 1.558667
+      type: 'test'
+      ...
+    # Subtest: the Netlify scheduled function runs every 2 minutes and only POSTs to the route with the secret
+    ok 5 - the Netlify scheduled function runs every 2 minutes and only POSTs to the route with the secret
+      ---
+      duration_ms: 0.202833
+      type: 'test'
+      ...
+    1..5
+ok 46 - welcome drain (S9, C1)
+  ---
+  duration_ms: 14.007708
+  type: 'suite'
+  ...
+# Subtest: season1 gap closure (integration)
+ok 47 - season1 gap closure (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.157167
+  type: 'suite'
+  ...
+# Subtest: isCrossSite (security review L1, L2)
+    # Subtest: Sec-Fetch-Site wins when present
+    ok 1 - Sec-Fetch-Site wins when present
+      ---
+      duration_ms: 9.915791
+      type: 'test'
+      ...
+    # Subtest: without Sec-Fetch-Site, Origin must name the raw host (port included)
+    ok 2 - without Sec-Fetch-Site, Origin must name the raw host (port included)
+      ---
+      duration_ms: 0.442125
+      type: 'test'
+      ...
+    # Subtest: no Sec-Fetch-Site and no Origin passes (server-to-server, tests)
+    ok 3 - no Sec-Fetch-Site and no Origin passes (server-to-server, tests)
+      ---
+      duration_ms: 0.052709
+      type: 'test'
+      ...
+    1..3
+ok 48 - isCrossSite (security review L1, L2)
+  ---
+  duration_ms: 10.707084
+  type: 'suite'
+  ...
+# Subtest: isJsonContentType (L1)
+    # Subtest: accepts application/json with or without parameters
+    ok 1 - accepts application/json with or without parameters
+      ---
+      duration_ms: 0.124625
+      type: 'test'
+      ...
+    # Subtest: rejects form and text types and a missing header
+    ok 2 - rejects form and text types and a missing header
+      ---
+      duration_ms: 0.111333
+      type: 'test'
+      ...
+    1..2
+ok 49 - isJsonContentType (L1)
+  ---
+  duration_ms: 0.289333
+  type: 'suite'
+  ...
+# Subtest: shareOrigin (L3)
+    # Subtest: https from the raw host, http only for localhost
+    ok 1 - https from the raw host, http only for localhost
+      ---
+      duration_ms: 0.089791
+      type: 'test'
+      ...
+    1..1
+ok 50 - shareOrigin (L3)
+  ---
+  duration_ms: 0.260958
+  type: 'suite'
+  ...
+# Subtest: SECURITY_HEADERS (L7)
+    # Subtest: DENY framing and nosniff
+    ok 1 - DENY framing and nosniff
+      ---
+      duration_ms: 0.251958
+      type: 'test'
+      ...
+    1..1
+ok 51 - SECURITY_HEADERS (L7)
+  ---
+  duration_ms: 0.332791
+  type: 'suite'
+  ...
+# Subtest: season1 invite wiring (integration, Stripe test mode)
+ok 52 - season1 invite wiring (integration, Stripe test mode) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.16
+  type: 'suite'
+  ...
+# Subtest: renderJoin
+    # Subtest: open in test mode: CTAs, test bar, jersey line, config prices
+    ok 1 - open in test mode: CTAs, test bar, jersey line, config prices
+      ---
+      duration_ms: 6.929167
+      type: 'test'
+      ...
+    # Subtest: live mode has no test bar
+    ok 2 - live mode has no test bar
+      ---
+      duration_ms: 0.202125
+      type: 'test'
+      ...
+    # Subtest: jersey line: shown before the cutoff, hidden at and after it
+    ok 3 - jersey line: shown before the cutoff, hidden at and after it
+      ---
+      duration_ms: 0.670083
+      type: 'test'
+      ...
+    # Subtest: closed: mode off, before open, and at close
+    ok 4 - closed: mode off, before open, and at close
+      ---
+      duration_ms: 0.481916
+      type: 'test'
+      ...
+    # Subtest: opens exactly at openAt
+    ok 5 - opens exactly at openAt
+      ---
+      duration_ms: 0.291416
+      type: 'test'
+      ...
+    # Subtest: src is carried to the CTAs only when passed (the route whitelists it)
+    ok 6 - src is carried to the CTAs only when passed (the route whitelists it)
+      ---
+      duration_ms: 0.191542
+      type: 'test'
+      ...
+    # Subtest: friend credit and ages come from config
+    ok 7 - friend credit and ages come from config
+      ---
+      duration_ms: 0.1505
+      type: 'test'
+      ...
+    1..7
+ok 53 - renderJoin
+  ---
+  duration_ms: 9.291208
+  type: 'suite'
+  ...
+# Subtest: renderJoin SEO block (R2-D5, R2-D6, R2-D8)
+    # Subtest: default and indexable:false give exactly the noindex meta
+    ok 1 - default and indexable:false give exactly the noindex meta
+      ---
+      duration_ms: 0.428041
+      type: 'test'
+      ...
+    # Subtest: indexable: canonical constant, description, no robots meta, JSON-LD from offer.ts
+    ok 2 - indexable: canonical constant, description, no robots meta, JSON-LD from offer.ts
+      ---
+      duration_ms: 0.7215
+      type: 'test'
+      ...
+    # Subtest: stays indexed when closed: Offer SoldOut, same canonical
+    ok 3 - stays indexed when closed: Offer SoldOut, same canonical
+      ---
+      duration_ms: 0.355917
+      type: 'test'
+      ...
+    # Subtest: escaping: `</script>`, U+2028 and U+2029 cannot break the block
+    ok 4 - escaping: `</script>`, U+2028 and U+2029 cannot break the block
+      ---
+      duration_ms: 3.173
+      type: 'test'
+      ...
+    1..4
+ok 54 - renderJoin SEO block (R2-D5, R2-D6, R2-D8)
+  ---
+  duration_ms: 4.840792
+  type: 'suite'
+  ...
+# Subtest: season1_join_view fields (s1-fast-track A3)
+    # Subtest: join (b template): {variant, ad, src}, ad from the URL normalized, src the whitelisted one
+    ok 1 - join (b template): {variant, ad, src}, ad from the URL normalized, src the whitelisted one
+      ---
+      duration_ms: 1.579209
+      type: 'test'
+      ...
+    # Subtest: jersey: {variant, ad, src}, ad from the URL normalized, src the whitelisted one
+    ok 2 - jersey: {variant, ad, src}, ad from the URL normalized, src the whitelisted one
+      ---
+      duration_ms: 0.975333
+      type: 'test'
+      ...
+    1..2
+ok 55 - season1_join_view fields (s1-fast-track A3)
+  ---
+  duration_ms: 2.594709
+  type: 'suite'
+  ...
+# Subtest: jersey hero switch (s1-fast-track follow-up)
+    # Subtest: normalizes like the landing before comparing, so D021 shows d21 and join_view agrees
+    ok 1 - normalizes like the landing before comparing, so D021 shows d21 and join_view agrees
+      ---
+      duration_ms: 1.181834
+      type: 'test'
+      ...
+    1..1
+ok 56 - jersey hero switch (s1-fast-track follow-up)
+  ---
+  duration_ms: 1.209667
+  type: 'suite'
+  ...
+# Subtest: /season1/join matches /season1/join/b outside the SEO block
+    # Subtest: route files are identical apart from comments and the indexable line
+    ok 1 - route files are identical apart from comments and the indexable line
+      ---
+      duration_ms: 0.936709
+      type: 'test'
+      ...
+    # Subtest: the indexable line is the only code difference, and /b and /jersey are hard false
+    ok 2 - the indexable line is the only code difference, and /b and /jersey are hard false
+      ---
+      duration_ms: 0.276875
+      type: 'test'
+      ...
+    # Subtest: both read the same template path
+    ok 3 - both read the same template path
+      ---
+      duration_ms: 0.13175
+      type: 'test'
+      ...
+    # Subtest: the old A template is gone
+    ok 4 - the old A template is gone
+      ---
+      duration_ms: 0.03925
+      type: 'test'
+      ...
+    # Subtest: each template has exactly one SEO block, inside <head>
+    ok 5 - each template has exactly one SEO block, inside <head>
+      ---
+      duration_ms: 0.121416
+      type: 'test'
+      ...
+    # Subtest: mode=live host=ekuzo.gg qs=none: indexable; bodies match outside SEO
+    ok 6 - mode=live host=ekuzo.gg qs=none: indexable; bodies match outside SEO
+      ---
+      duration_ms: 75.713916
+      type: 'test'
+      ...
+    # Subtest: mode=live host=ekuzo.gg qs=?src=x&utm_source=y: indexable; bodies match outside SEO
+    ok 7 - mode=live host=ekuzo.gg qs=?src=x&utm_source=y: indexable; bodies match outside SEO
+      ---
+      duration_ms: 5.16975
+      type: 'test'
+      ...
+    # Subtest: mode=live host=www.ekuzo.gg qs=none: indexable; bodies match outside SEO
+    ok 8 - mode=live host=www.ekuzo.gg qs=none: indexable; bodies match outside SEO
+      ---
+      duration_ms: 2.857916
+      type: 'test'
+      ...
+    # Subtest: mode=live host=www.ekuzo.gg qs=?src=x&utm_source=y: indexable; bodies match outside SEO
+    ok 9 - mode=live host=www.ekuzo.gg qs=?src=x&utm_source=y: indexable; bodies match outside SEO
+      ---
+      duration_ms: 1.799209
+      type: 'test'
+      ...
+    # Subtest: mode=live host=localhost:3100 qs=none: noindex; bodies match outside SEO
+    ok 10 - mode=live host=localhost:3100 qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 2.432667
+      type: 'test'
+      ...
+    # Subtest: mode=live host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 11 - mode=live host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.29625
+      type: 'test'
+      ...
+    # Subtest: mode=live host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+    ok 12 - mode=live host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 4.584917
+      type: 'test'
+      ...
+    # Subtest: mode=live host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 13 - mode=live host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.437208
+      type: 'test'
+      ...
+    # Subtest: mode=live host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+    ok 14 - mode=live host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.380709
+      type: 'test'
+      ...
+    # Subtest: mode=live host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 15 - mode=live host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.778334
+      type: 'test'
+      ...
+    # Subtest: mode=test host=ekuzo.gg qs=none: noindex; bodies match outside SEO
+    ok 16 - mode=test host=ekuzo.gg qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.065292
+      type: 'test'
+      ...
+    # Subtest: mode=test host=ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 17 - mode=test host=ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.397667
+      type: 'test'
+      ...
+    # Subtest: mode=test host=www.ekuzo.gg qs=none: noindex; bodies match outside SEO
+    ok 18 - mode=test host=www.ekuzo.gg qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.198875
+      type: 'test'
+      ...
+    # Subtest: mode=test host=www.ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 19 - mode=test host=www.ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.508583
+      type: 'test'
+      ...
+    # Subtest: mode=test host=localhost:3100 qs=none: noindex; bodies match outside SEO
+    ok 20 - mode=test host=localhost:3100 qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 2.602833
+      type: 'test'
+      ...
+    # Subtest: mode=test host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 21 - mode=test host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.040042
+      type: 'test'
+      ...
+    # Subtest: mode=test host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+    ok 22 - mode=test host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.202833
+      type: 'test'
+      ...
+    # Subtest: mode=test host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 23 - mode=test host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.016458
+      type: 'test'
+      ...
+    # Subtest: mode=test host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+    ok 24 - mode=test host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.219041
+      type: 'test'
+      ...
+    # Subtest: mode=test host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 25 - mode=test host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.054042
+      type: 'test'
+      ...
+    # Subtest: mode=off host=ekuzo.gg qs=none: noindex; bodies match outside SEO
+    ok 26 - mode=off host=ekuzo.gg qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 2.326792
+      type: 'test'
+      ...
+    # Subtest: mode=off host=ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 27 - mode=off host=ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.078708
+      type: 'test'
+      ...
+    # Subtest: mode=off host=www.ekuzo.gg qs=none: noindex; bodies match outside SEO
+    ok 28 - mode=off host=www.ekuzo.gg qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.360625
+      type: 'test'
+      ...
+    # Subtest: mode=off host=www.ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 29 - mode=off host=www.ekuzo.gg qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 0.997291
+      type: 'test'
+      ...
+    # Subtest: mode=off host=localhost:3100 qs=none: noindex; bodies match outside SEO
+    ok 30 - mode=off host=localhost:3100 qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.368542
+      type: 'test'
+      ...
+    # Subtest: mode=off host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 31 - mode=off host=localhost:3100 qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.085
+      type: 'test'
+      ...
+    # Subtest: mode=off host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+    ok 32 - mode=off host=deploy-preview-9--ekuzo.netlify.app qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.328792
+      type: 'test'
+      ...
+    # Subtest: mode=off host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 33 - mode=off host=deploy-preview-9--ekuzo.netlify.app qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 0.974583
+      type: 'test'
+      ...
+    # Subtest: mode=off host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+    ok 34 - mode=off host=ekuzo.gg.evil.example qs=none: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.06675
+      type: 'test'
+      ...
+    # Subtest: mode=off host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+    ok 35 - mode=off host=ekuzo.gg.evil.example qs=?src=x&utm_source=y: noindex; bodies match outside SEO
+      ---
+      duration_ms: 1.20775
+      type: 'test'
+      ...
+    # Subtest: mutation check: a price edit outside the SEO block makes the comparison fail
+    ok 36 - mutation check: a price edit outside the SEO block makes the comparison fail
+      ---
+      duration_ms: 0.928458
+      type: 'test'
+      ...
+    # Subtest: mutation check: a header drift beyond x-robots-tag is detected
+    ok 37 - mutation check: a header drift beyond x-robots-tag is detected
+      ---
+      duration_ms: 0.837542
+      type: 'test'
+      ...
+    1..37
+ok 57 - /season1/join matches /season1/join/b outside the SEO block
+  ---
+  duration_ms: 128.76775
+  type: 'suite'
+  ...
+# Subtest: landing fast-track links (Part B)
+    # Subtest: has exactly three [data-join] elements: top, bottom, confirm
+    ok 1 - has exactly three [data-join] elements: top, bottom, confirm
+      ---
+      duration_ms: 0.520625
+      type: 'test'
+      ...
+    # Subtest: each link keeps the static no-JS href /season1/join?src=ad
+    ok 2 - each link keeps the static no-JS href /season1/join?src=ad
+      ---
+      duration_ms: 0.081375
+      type: 'test'
+      ...
+    # Subtest: the form links read Aaron's label and the confirm button reads his
+    ok 3 - the form links read Aaron's label and the confirm button reads his
+      ---
+      duration_ms: 0.047167
+      type: 'test'
+      ...
+    # Subtest: each form link is followed by its note and sits after its form, inside form-wrap
+    ok 4 - each form link is followed by its note and sits after its form, inside form-wrap
+      ---
+      duration_ms: 0.16325
+      type: 'test'
+      ...
+    # Subtest: the lock card sits in the confirmation dialog, before the Text Karlin card
+    ok 5 - the lock card sits in the confirmation dialog, before the Text Karlin card
+      ---
+      duration_ms: 0.059958
+      type: 'test'
+      ...
+    # Subtest: no data-ready attribute or handler remains
+    ok 6 - no data-ready attribute or handler remains
+      ---
+      duration_ms: 0.11
+      type: 'test'
+      ...
+    1..6
+ok 58 - landing fast-track links (Part B)
+  ---
+  duration_ms: 1.332791
+  type: 'suite'
+  ...
+# Subtest: landing copy relabel (Part B)
+    # Subtest: the waitlist-era labels are gone
+    ok 1 - the waitlist-era labels are gone
+      ---
+      duration_ms: 0.215084
+      type: 'test'
+      ...
+    # Subtest: both form buttons, the CTA default and the sticky bar use the new labels
+    ok 2 - both form buttons, the CTA default and the sticky bar use the new labels
+      ---
+      duration_ms: 0.208
+      type: 'test'
+      ...
+    # Subtest: hero buttons on d6, d9, d11, d13, d14 and d19 to d21 read Get the details
+    ok 3 - hero buttons on d6, d9, d11, d13, d14 and d19 to d21 read Get the details
+      ---
+      duration_ms: 0.591708
+      type: 'test'
+      ...
+    # Subtest: the header mini button reads Get the details
+    ok 4 - the header mini button reads Get the details
+      ---
+      duration_ms: 0.247
+      type: 'test'
+      ...
+    # Subtest: no hero template (the D array) contains Save their spot
+    ok 5 - no hero template (the D array) contains Save their spot
+      ---
+      duration_ms: 0.136709
+      type: 'test'
+      ...
+    1..5
+ok 59 - landing copy relabel (Part B)
+  ---
+  duration_ms: 1.601208
+  type: 'suite'
+  ...
+# Subtest: landing head bootstrap: one source for the ad tables
+    # Subtest: compiles and defines window.S1 with every D id
+    ok 1 - compiles and defines window.S1 with every D id
+      ---
+      duration_ms: 0.520875
+      type: 'test'
+      ...
+    # Subtest: (a) every D entry's art images, as a set, equal HERO_IMG[id], LCP element first
+    ok 2 - (a) every D entry's art images, as a set, equal HERO_IMG[id], LCP element first
+      ---
+      duration_ms: 0.970417
+      type: 'test'
+      ...
+    # Subtest: (b) every family an ad paints (T font, template CSS, module CSS, art) is in FONT_BASE + FONTS[id]
+    ok 3 - (b) every family an ad paints (T font, template CSS, module CSS, art) is in FONT_BASE + FONTS[id]
+      ---
+      duration_ms: 10.82575
+      type: 'test'
+      ...
+    # Subtest: (c) the small script no longer defines its own AD_HERO or HERO_KEYS, and the big script reads IMG from the head
+    ok 4 - (c) the small script no longer defines its own AD_HERO or HERO_KEYS, and the big script reads IMG from the head
+      ---
+      duration_ms: 0.174125
+      type: 'test'
+      ...
+    # Subtest: the noscript all-families stylesheet names exactly FAM, and no blocking stylesheet is left in the markup
+    ok 5 - the noscript all-families stylesheet names exactly FAM, and no blocking stylesheet is left in the markup
+      ---
+      duration_ms: 0.194083
+      type: 'test'
+      ...
+    # Subtest: only shortlist is a custom (imageless) interactive hero, as the bootstrap assumes
+    ok 6 - only shortlist is a custom (imageless) interactive hero, as the bootstrap assumes
+      ---
+      duration_ms: 0.097792
+      type: 'test'
+      ...
+    1..6
+ok 60 - landing head bootstrap: one source for the ad tables
+  ---
+  duration_ms: 13.185417
+  type: 'suite'
+  ...
+# Subtest: landing head bootstrap: per-ad preloads and fonts
+    # Subtest: page A photo heroes preload only their LCP image, at high priority (D24)
+    ok 1 - page A photo heroes preload only their LCP image, at high priority (D24)
+      ---
+      duration_ms: 1.479542
+      type: 'test'
+      ...
+    # Subtest: no ad's bootstrap output contains more than one preload link (D24)
+    ok 2 - no ad's bootstrap output contains more than one preload link (D24)
+      ---
+      duration_ms: 8.235875
+      type: 'test'
+      ...
+    # Subtest: no ad or an unknown ad is d1 page A
+    ok 3 - no ad or an unknown ad is d1 page A
+      ---
+      duration_ms: 0.587958
+      type: 'test'
+      ...
+    # Subtest: interactive heroes on phones: first image only, nothing for shortlist; desktop keeps the page A rule
+    ok 4 - interactive heroes on phones: first image only, nothing for shortlist; desktop keeps the page A rule
+      ---
+      duration_ms: 1.867083
+      type: 'test'
+      ...
+    # Subtest: the async safety-net stylesheet carries every other family and none of the ad's (no duplicate @font-face)
+    ok 5 - the async safety-net stylesheet carries every other family and none of the ad's (no duplicate @font-face)
+      ---
+      duration_ms: 1.097208
+      type: 'test'
+      ...
+    # Subtest: preloads come before the fonts stylesheet, and only the chosen ad's images load (X1)
+    ok 6 - preloads come before the fonts stylesheet, and only the chosen ad's images load (X1)
+      ---
+      duration_ms: 0.213083
+      type: 'test'
+      ...
+    # Subtest: any failure writes the blocking all-families stylesheet, the page as it was (X17)
+    ok 7 - any failure writes the blocking all-families stylesheet, the page as it was (X17)
+      ---
+      duration_ms: 0.272084
+      type: 'test'
+      ...
+    1..7
+ok 61 - landing head bootstrap: per-ad preloads and fonts
+  ---
+  duration_ms: 13.915625
+  type: 'suite'
+  ...
+# Subtest: fast track (s1-fast-track A4): href builder and the [data-join] click handler
+    # Subtest: is the block the page ships (three statements, after the CTA handlers)
+    ok 1 - is the block the page ships (three statements, after the CTA handlers)
+      ---
+      duration_ms: 0.067291
+      type: 'test'
+      ...
+    # Subtest: href: src=ad, the resolved ad id, then the landing's utm_* in a fixed order
+    ok 2 - href: src=ad, the resolved ad id, then the landing's utm_* in a fixed order
+      ---
+      duration_ms: 0.585458
+      type: 'test'
+      ...
+    # Subtest: sets the href on [data-join] elements present at load
+    ok 3 - sets the href on [data-join] elements present at load
+      ---
+      duration_ms: 0.213708
+      type: 'test'
+      ...
+    # Subtest: click only: one s1_join_click plus one Clarity join_click per click on a [data-join], nothing elsewhere
+    ok 4 - click only: one s1_join_click plus one Clarity join_click per click on a [data-join], nothing elsewhere
+      ---
+      duration_ms: 0.203708
+      type: 'test'
+      ...
+    1..4
+ok 62 - fast track (s1-fast-track A4): href builder and the [data-join] click handler
+  ---
+  duration_ms: 1.117041
+  type: 'suite'
+  ...
+# Subtest: shouldSkipLegacy
+    # Subtest: skips season1 PaymentIntents
+    ok 1 - skips season1 PaymentIntents
+      ---
+      duration_ms: 0.279
+      type: 'test'
+      ...
+    # Subtest: skips when parent_email is missing or empty
+    ok 2 - skips when parent_email is missing or empty
+      ---
+      duration_ms: 0.049083
+      type: 'test'
+      ...
+    # Subtest: processes camps and ekuzo100 with a parent_email
+    ok 3 - processes camps and ekuzo100 with a parent_email
+      ---
+      duration_ms: 0.070292
+      type: 'test'
+      ...
+    # Subtest: RT14: skips a set but unknown product even with a parent_email
+    ok 4 - RT14: skips a set but unknown product even with a parent_email
+      ---
+      duration_ms: 0.03825
+      type: 'test'
+      ...
+    # Subtest: RT14: known products with a parent_email are processed
+    ok 5 - RT14: known products with a parent_email are processed
+      ---
+      duration_ms: 0.036625
+      type: 'test'
+      ...
+    # Subtest: RT14: missing or empty product with a parent_email keeps camps behaviour
+    ok 6 - RT14: missing or empty product with a parent_email keeps camps behaviour
+      ---
+      duration_ms: 0.030958
+      type: 'test'
+      ...
+    1..6
+ok 63 - shouldSkipLegacy
+  ---
+  duration_ms: 0.853125
+  type: 'suite'
+  ...
+# Subtest: resolveMode
+    # Subtest: unset + sk_test -> test
+    ok 1 - unset + sk_test -> test
+      ---
+      duration_ms: 0.400333
+      type: 'test'
+      ...
+    # Subtest: unset + non-test key or no key -> off
+    ok 2 - unset + non-test key or no key -> off
+      ---
+      duration_ms: 0.045333
+      type: 'test'
+      ...
+    # Subtest: unset + sk_test but non-test DB -> off
+    ok 3 - unset + sk_test but non-test DB -> off
+      ---
+      duration_ms: 0.368667
+      type: 'test'
+      ...
+    # Subtest: test with non-test DB host or missing DB -> off
+    ok 4 - test with non-test DB host or missing DB -> off
+      ---
+      duration_ms: 0.10325
+      type: 'test'
+      ...
+    # Subtest: test with a live key -> off
+    ok 5 - test with a live key -> off
+      ---
+      duration_ms: 0.034667
+      type: 'test'
+      ...
+    # Subtest: test with good key and DB -> test (any host)
+    ok 6 - test with good key and DB -> test (any host)
+      ---
+      duration_ms: 0.034666
+      type: 'test'
+      ...
+    # Subtest: RT17: live only with every live condition met
+    ok 7 - RT17: live only with every live condition met
+      ---
+      duration_ms: 0.105417
+      type: 'test'
+      ...
+    # Subtest: RT17: live on a preview or other host -> off
+    ok 8 - RT17: live on a preview or other host -> off
+      ---
+      duration_ms: 0.083041
+      type: 'test'
+      ...
+    # Subtest: RT17: live with a test secret key -> off
+    ok 9 - RT17: live with a test secret key -> off
+      ---
+      duration_ms: 0.101333
+      type: 'test'
+      ...
+    # Subtest: RT17: live without a pk_live_ publishable key -> off
+    ok 10 - RT17: live without a pk_live_ publishable key -> off
+      ---
+      duration_ms: 0.174667
+      type: 'test'
+      ...
+    # Subtest: RT17: live pointed at the test DB, or no DB -> off
+    ok 11 - RT17: live pointed at the test DB, or no DB -> off
+      ---
+      duration_ms: 0.071625
+      type: 'test'
+      ...
+    # Subtest: RT17: live without the S1 webhook secret -> off
+    ok 12 - RT17: live without the S1 webhook secret -> off
+      ---
+      duration_ms: 0.031333
+      type: 'test'
+      ...
+    # Subtest: RT17: live outside the production deploy context -> off
+    ok 13 - RT17: live outside the production deploy context -> off
+      ---
+      duration_ms: 0.036333
+      type: 'test'
+      ...
+    # Subtest: live with only the old inputs (key + host) -> off
+    ok 14 - live with only the old inputs (key + host) -> off
+      ---
+      duration_ms: 0.024584
+      type: 'test'
+      ...
+    # Subtest: deployContext prefers S1_DEPLOY_CONTEXT, then CONTEXT
+    ok 15 - deployContext prefers S1_DEPLOY_CONTEXT, then CONTEXT
+      ---
+      duration_ms: 0.0335
+      type: 'test'
+      ...
+    # Subtest: explicit off and unknown values -> off
+    ok 16 - explicit off and unknown values -> off
+      ---
+      duration_ms: 0.028125
+      type: 'test'
+      ...
+    1..16
+ok 64 - resolveMode
+  ---
+  duration_ms: 2.117292
+  type: 'suite'
+  ...
+# Subtest: isTestDbUrl (security review L5: parsed hostname, not a substring)
+    # Subtest: the test endpoint host (direct or pooler) is test
+    ok 1 - the test endpoint host (direct or pooler) is test
+      ---
+      duration_ms: 0.045666
+      type: 'test'
+      ...
+    # Subtest: a prod URL with the marker in the password, user, path or query is NOT test
+    ok 2 - a prod URL with the marker in the password, user, path or query is NOT test
+      ---
+      duration_ms: 0.035375
+      type: 'test'
+      ...
+    # Subtest: missing or unparseable is NOT test
+    ok 3 - missing or unparseable is NOT test
+      ---
+      duration_ms: 0.042375
+      type: 'test'
+      ...
+    # Subtest: resolveMode: test refuses a prod URL carrying the marker in the password; live accepts it as non-test
+    ok 4 - resolveMode: test refuses a prod URL carrying the marker in the password; live accepts it as non-test
+      ---
+      duration_ms: 0.037416
+      type: 'test'
+      ...
+    1..4
+ok 65 - isTestDbUrl (security review L5: parsed hostname, not a substring)
+  ---
+  duration_ms: 0.206916
+  type: 'suite'
+  ...
+# Subtest: season1 money path (integration, Stripe test mode)
+ok 66 - season1 money path (integration, Stripe test mode) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.181083
+  type: 'suite'
+  ...
+# Subtest: OFFER config
+    # Subtest: has the frozen values
+    ok 1 - has the frozen values
+      ---
+      duration_ms: 0.286166
+      type: 'test'
+      ...
+    # Subtest: every window is an ISO instant with an explicit offset
+    ok 2 - every window is an ISO instant with an explicit offset
+      ---
+      duration_ms: 0.124292
+      type: 'test'
+      ...
+    1..2
+ok 67 - OFFER config
+  ---
+  duration_ms: 0.694959
+  type: 'suite'
+  ...
+# Subtest: isOpen (openAt <= now < closeAt)
+    # Subtest: openAt boundary
+    ok 1 - openAt boundary
+      ---
+      duration_ms: 0.114042
+      type: 'test'
+      ...
+    # Subtest: closeAt boundary
+    ok 2 - closeAt boundary
+      ---
+      duration_ms: 0.482542
+      type: 'test'
+      ...
+    # Subtest: mid window is open
+    ok 3 - mid window is open
+      ---
+      duration_ms: 0.03175
+      type: 'test'
+      ...
+    1..3
+ok 68 - isOpen (openAt <= now < closeAt)
+  ---
+  duration_ms: 0.728459
+  type: 'suite'
+  ...
+# Subtest: isJerseyEligible (created strictly before jerseyCutoffAt)
+    # Subtest: one ms before / at / after
+    ok 1 - one ms before / at / after
+      ---
+      duration_ms: 0.09025
+      type: 'test'
+      ...
+    # Subtest: accepts ISO strings, epoch ms and Stripe epoch seconds
+    ok 2 - accepts ISO strings, epoch ms and Stripe epoch seconds
+      ---
+      duration_ms: 0.184208
+      type: 'test'
+      ...
+    # Subtest: is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+    ok 3 - is Pacific, not UTC: 11:59 pm PT Nov 30 qualifies, 12:00 am PT Dec 1 does not
+      ---
+      duration_ms: 0.068125
+      type: 'test'
+      ...
+    # Subtest: garbage is not eligible
+    ok 4 - garbage is not eligible
+      ---
+      duration_ms: 0.061541
+      type: 'test'
+      ...
+    1..4
+ok 69 - isJerseyEligible (created strictly before jerseyCutoffAt)
+  ---
+  duration_ms: 0.567
+  type: 'suite'
+  ...
+# Subtest: lockInDate / formatDatePT
+    # Subtest: lockInDate is the lockInAt instant
+    ok 1 - lockInDate is the lockInAt instant
+      ---
+      duration_ms: 0.057791
+      type: 'test'
+      ...
+    # Subtest: formats in Pacific time regardless of process TZ
+    ok 2 - formats in Pacific time regardless of process TZ
+      ---
+      duration_ms: 5.831458
+      type: 'test'
+      ...
+    1..2
+ok 70 - lockInDate / formatDatePT
+  ---
+  duration_ms: 5.929333
+  type: 'suite'
+  ...
+# Subtest: seasonLine (canary 10-29)
+    # Subtest: states the season dates and what today's payment covers
+    ok 1 - states the season dates and what today's payment covers
+      ---
+      duration_ms: 0.054584
+      type: 'test'
+      ...
+    # Subtest: has no em or en dashes
+    ok 2 - has no em or en dashes
+      ---
+      duration_ms: 0.035917
+      type: 'test'
+      ...
+    1..2
+ok 71 - seasonLine (canary 10-29)
+  ---
+  duration_ms: 0.1245
+  type: 'suite'
+  ...
+# Subtest: max age (O11)
+    # Subtest: per kind
+    ok 1 - per kind
+      ---
+      duration_ms: 1.161834
+      type: 'test'
+      ...
+    # Subtest: stale just past the limit, fresh just inside
+    ok 2 - stale just past the limit, fresh just inside
+      ---
+      duration_ms: 0.129125
+      type: 'test'
+      ...
+    1..2
+ok 72 - max age (O11)
+  ---
+  duration_ms: 1.563083
+  type: 'suite'
+  ...
+# Subtest: test isolation regex
+    # Subtest: allows team+s1test and aaron+ at ekuzo.gg only
+    ok 1 - allows team+s1test and aaron+ at ekuzo.gg only
+      ---
+      duration_ms: 0.138583
+      type: 'test'
+      ...
+    # Subtest: a test-mode event to a real address is skipped before any network call
+    ok 2 - a test-mode event to a real address is skipped before any network call
+      ---
+      duration_ms: 0.359
+      type: 'test'
+      ...
+    1..2
+ok 73 - test isolation regex
+  ---
+  duration_ms: 0.58625
+  type: 'suite'
+  ...
+# Subtest: Klaviyo payloads
+    # Subtest: Committed property set is exactly the contract, with no invited_by_kid (T12)
+    ok 1 - Committed property set is exactly the contract, with no invited_by_kid (T12)
+      ---
+      duration_ms: 0.150333
+      type: 'test'
+      ...
+    # Subtest: A2: Committed event carries ad (empty when absent); the profile never does
+    ok 2 - A2: Committed event carries ad (empty when absent); the profile never does
+      ---
+      duration_ms: 0.10425
+      type: 'test'
+      ...
+    # Subtest: S7: Committed event carries utm_source, utm_medium, utm_campaign, utm_content and first_touch; the profile never does
+    ok 3 - S7: Committed event carries utm_source, utm_medium, utm_campaign, utm_content and first_touch; the profile never does
+      ---
+      duration_ms: 0.191292
+      type: 'test'
+      ...
+    # Subtest: share_url is the live domain in live mode and the recorded origin in test
+    ok 4 - share_url is the live domain in live mode and the recorded origin in test
+      ---
+      duration_ms: 0.249375
+      type: 'test'
+      ...
+    # Subtest: profile properties and phone without SMS marketing consent
+    ok 5 - profile properties and phone without SMS marketing consent
+      ---
+      duration_ms: 0.124709
+      type: 'test'
+      ...
+    # Subtest: request body shape
+    ok 6 - request body shape
+      ---
+      duration_ms: 0.120959
+      type: 'test'
+      ...
+    # Subtest: Friend Joined carries no kid names of the friend or of the joiner
+    ok 7 - Friend Joined carries no kid names of the friend or of the joiner
+      ---
+      duration_ms: 0.108458
+      type: 'test'
+      ...
+    # Subtest: Friend Joined caps credits at the ladder
+    ok 8 - Friend Joined caps credits at the ladder
+      ---
+      duration_ms: 0.031375
+      type: 'test'
+      ...
+    # Subtest: Refunded
+    ok 9 - Refunded
+      ---
+      duration_ms: 0.048958
+      type: 'test'
+      ...
+    1..9
+ok 74 - Klaviyo payloads
+  ---
+  duration_ms: 1.243209
+  type: 'suite'
+  ...
+# Subtest: Meta Purchase
+    # Subtest: user_data holds only hashed email, external_id, ip and ua
+    ok 1 - user_data holds only hashed email, external_id, ip and ua
+      ---
+      duration_ms: 0.676792
+      type: 'test'
+      ...
+    # Subtest: drops a bad IP, keeps fbp and fbc when stored and valid
+    ok 2 - drops a bad IP, keeps fbp and fbc when stored and valid
+      ---
+      duration_ms: 1.367125
+      type: 'test'
+      ...
+    # Subtest: money 8: a malformed fbp or fbc is omitted, never sent
+    ok 3 - money 8: a malformed fbp or fbc is omitted, never sent
+      ---
+      duration_ms: 0.13575
+      type: 'test'
+      ...
+    # Subtest: test code is forced when livemode is false, absent when true; default TEST_S1
+    ok 4 - test code is forced when livemode is false, absent when true; default TEST_S1
+      ---
+      duration_ms: 0.068541
+      type: 'test'
+      ...
+    # Subtest: event_source_url is the signup page
+    ok 5 - event_source_url is the signup page
+      ---
+      duration_ms: 0.0305
+      type: 'test'
+      ...
+    1..5
+ok 75 - Meta Purchase
+  ---
+  duration_ms: 2.332916
+  type: 'suite'
+  ...
+# Subtest: Discord messages
+    # Subtest: commit message: exact format, test tag, kid count, email, location, source
+    ok 1 - commit message: exact format, test tag, kid count, email, location, source
+      ---
+      duration_ms: 0.262583
+      type: 'test'
+      ...
+    # Subtest: kid count: 1 kid, 2 kids, 0 kids
+    ok 2 - kid count: 1 kid, 2 kids, 0 kids
+      ---
+      duration_ms: 0.08775
+      type: 'test'
+      ...
+    # Subtest: live messages carry no TEST tag; test messages do
+    ok 3 - live messages carry no TEST tag; test messages do
+      ---
+      duration_ms: 0.063041
+      type: 'test'
+      ...
+    # Subtest: location degrades gracefully
+    ok 4 - location degrades gracefully
+      ---
+      duration_ms: 0.09175
+      type: 'test'
+      ...
+    # Subtest: source branches (first match wins)
+        # Subtest: a: invited order or src friend is referral, even with a paid click
+        ok 1 - a: invited order or src friend is referral, even with a paid click
+          ---
+          duration_ms: 0.077417
+          type: 'test'
+          ...
+        # Subtest: b: src karlin
+        ok 2 - b: src karlin
+          ---
+          duration_ms: 0.03225
+          type: 'test'
+          ...
+        # Subtest: c: a paid last click is ad <utm_content>, by medium or by Meta source with content
+        ok 3 - c: a paid last click is ad <utm_content>, by medium or by Meta source with content
+          ---
+          duration_ms: 0.0935
+          type: 'test'
+          ...
+        # Subtest: d: the Klaviyo ad name, with (via <last click>) when the last click was something else
+        ok 4 - d: the Klaviyo ad name, with (via <last click>) when the last click was something else
+          ---
+          duration_ms: 0.069208
+          type: 'test'
+          ...
+        # Subtest: e: email, with the campaign when present
+        ok 5 - e: email, with the campaign when present
+          ---
+          duration_ms: 0.03125
+          type: 'test'
+          ...
+        # Subtest: c2: a paid click with no content and no profile name is ad plus the campaign
+        ok 6 - c2: a paid click with no content and no profile name is ad plus the campaign
+          ---
+          duration_ms: 0.030958
+          type: 'test'
+          ...
+        # Subtest: f and g: first-touch bucket, then organic
+        ok 7 - f and g: first-touch bucket, then organic
+          ---
+          duration_ms: 0.041291
+          type: 'test'
+          ...
+        # Subtest: sanitizes and caps every piece
+        ok 8 - sanitizes and caps every piece
+          ---
+          duration_ms: 0.053291
+          type: 'test'
+          ...
+        # Subtest: c3 (s1-fast-track A2): a paid or src=ad click with no utm_content is ad <lc.ad>; utm_content still wins; a and b still first
+        ok 9 - c3 (s1-fast-track A2): a paid or src=ad click with no utm_content is ad <lc.ad>; utm_content still wins; a and b still first
+          ---
+          duration_ms: 0.052708
+          type: 'test'
+          ...
+        # Subtest: c3: a share or email link that carries ad keeps branches d to g, exactly as without ad
+        ok 10 - c3: a share or email link that carries ad keeps branches d to g, exactly as without ad
+          ---
+          duration_ms: 0.123042
+          type: 'test'
+          ...
+        # Subtest: needsAdNameLookup: only when a, b, c have not settled the source
+        ok 11 - needsAdNameLookup: only when a, b, c have not settled the source
+          ---
+          duration_ms: 0.051542
+          type: 'test'
+          ...
+        1..11
+    ok 5 - source branches (first match wins)
+      ---
+      duration_ms: 0.744584
+      type: 'suite'
+      ...
+    # Subtest: email: markup stripped, @ kept, capped at 120
+    ok 6 - email: markup stripped, @ kept, capped at 120
+      ---
+      duration_ms: 0.051708
+      type: 'test'
+      ...
+    # Subtest: city and region are stripped of mentions and markup
+    ok 7 - city and region are stripped of mentions and markup
+      ---
+      duration_ms: 0.033167
+      type: 'test'
+      ...
+    # Subtest: Klaviyo ad-name lookup (stubbed fetch)
+        # Subtest: found: returns season1_ad_name, with the documented request
+        ok 1 - found: returns season1_ad_name, with the documented request
+          ---
+          duration_ms: 7.956541
+          type: 'test'
+          ...
+        # Subtest: not found, no property, blank property, non-string: null
+        ok 2 - not found, no property, blank property, non-string: null
+          ---
+          duration_ms: 0.505333
+          type: 'test'
+          ...
+        # Subtest: http error, bad json, network error and timeout all return null and never throw
+        ok 3 - http error, bad json, network error and timeout all return null and never throw
+          ---
+          duration_ms: 0.324583
+          type: 'test'
+          ...
+        # Subtest: no key, or a quote in the email: no request / safe filter
+        ok 4 - no key, or a quote in the email: no request / safe filter
+          ---
+          duration_ms: 0.151
+          type: 'test'
+          ...
+        # Subtest: test mode: only the allowlisted test addresses are looked up
+        ok 5 - test mode: only the allowlisted test addresses are looked up
+          ---
+          duration_ms: 0.365708
+          type: 'test'
+          ...
+        # Subtest: adNameFor skips the request when a, b or c settle the source
+        ok 6 - adNameFor skips the request when a, b or c settle the source
+          ---
+          duration_ms: 0.325334
+          type: 'test'
+          ...
+        # Subtest: end to end: lookup result lands in the line; a failed lookup falls through to email
+        ok 7 - end to end: lookup result lands in the line; a failed lookup falls through to email
+          ---
+          duration_ms: 0.204792
+          type: 'test'
+          ...
+        1..7
+    ok 8 - Klaviyo ad-name lookup (stubbed fetch)
+      ---
+      duration_ms: 9.909625
+      type: 'suite'
+      ...
+    # Subtest: source category: referral when a friend code was used, else src mapped
+    ok 9 - source category: referral when a friend code was used, else src mapped
+      ---
+      duration_ms: 0.034833
+      type: 'test'
+      ...
+    # Subtest: flag and ops alert messages
+    ok 10 - flag and ops alert messages
+      ---
+      duration_ms: 0.770458
+      type: 'test'
+      ...
+    # Subtest: webhook env: test vs live, unset means skipped_no_config
+    ok 11 - webhook env: test vs live, unset means skipped_no_config
+      ---
+      duration_ms: 0.10225
+      type: 'test'
+      ...
+    1..11
+ok 76 - Discord messages
+  ---
+  duration_ms: 12.292458
+  type: 'suite'
+  ...
+# Subtest: outbox: attribution read, skipped_refunded, order-scoped drain (no DB)
+    # Subtest: loadOrderCtx: the order's fbp/fbc win over the family's; utms and first touch come from the order
+    ok 1 - loadOrderCtx: the order's fbp/fbc win over the family's; utms and first touch come from the order
+      ---
+      duration_ms: 59.019833
+      type: 'test'
+      ...
+    # Subtest: loadOrderCtx: no order attribution (orders before 0005) falls back to the family's valid fbp/fbc
+    ok 2 - loadOrderCtx: no order attribution (orders before 0005) falls back to the family's valid fbp/fbc
+      ---
+      duration_ms: 0.838792
+      type: 'test'
+      ...
+    # Subtest: loadOrderCtx: geo city, region and time zone come from the family geo (Discord commit line)
+    ok 3 - loadOrderCtx: geo city, region and time zone come from the family geo (Discord commit line)
+      ---
+      duration_ms: 1.394
+      type: 'test'
+      ...
+    # Subtest: loadOrderCtx: invalid values are dropped (an invalid order value falls through to a valid family one)
+    ok 4 - loadOrderCtx: invalid values are dropped (an invalid order value falls through to a valid family one)
+      ---
+      duration_ms: 1.002708
+      type: 'test'
+      ...
+    # Subtest: C4: on a refunded order, unsent Committed and Purchase become skipped_refunded; Discord is unchanged
+    ok 5 - C4: on a refunded order, unsent Committed and Purchase become skipped_refunded; Discord is unchanged
+      ---
+      duration_ms: 14.538625
+      type: 'test'
+      ...
+# s1 step=klaviyo_list_add order=ordref2345 ok=true err=skipped_test
+# s1 step=klaviyo_list_add order=ordref2345 ok=true err=skipped_test
+    # Subtest: C4: partially_refunded still sends (reaches the senders: test isolation and no config here)
+    ok 6 - C4: partially_refunded still sends (reaches the senders: test isolation and no config here)
+      ---
+      duration_ms: 4.705792
+      type: 'test'
+      ...
+    # Subtest: C1: drainOutbox({orderId}) selects that order's rows only; without it, the global oldest-first queue
+    ok 7 - C1: drainOutbox({orderId}) selects that order's rows only; without it, the global oldest-first queue
+      ---
+      duration_ms: 0.613125
+      type: 'test'
+      ...
+    1..7
+ok 77 - outbox: attribution read, skipped_refunded, order-scoped drain (no DB)
+  ---
+  duration_ms: 82.787417
+  type: 'suite'
+  ...
+# Subtest: quote
+    # Subtest: first-time family totals for 1..4 kids
+    ok 1 - first-time family totals for 1..4 kids
+      ---
+      duration_ms: 0.352834
+      type: 'test'
+      ...
+    # Subtest: lines: first kid $100, siblings $80, zero-based kidIndex
+    ok 2 - lines: first kid $100, siblings $80, zero-based kidIndex
+      ---
+      duration_ms: 0.247416
+      type: 'test'
+      ...
+    # Subtest: priorPaidKids > 0 makes every kid a $80 sibling
+    ok 3 - priorPaidKids > 0 makes every kid a $80 sibling
+      ---
+      duration_ms: 0.167042
+      type: 'test'
+      ...
+    # Subtest: totals equal the sum of the lines
+    ok 4 - totals equal the sum of the lines
+      ---
+      duration_ms: 0.040708
+      type: 'test'
+      ...
+    # Subtest: ignores any client-supplied amount
+    ok 5 - ignores any client-supplied amount
+      ---
+      duration_ms: 0.036542
+      type: 'test'
+      ...
+    # Subtest: throws on 0 kids, more than 4 kids, and bad priorPaidKids
+    ok 6 - throws on 0 kids, more than 4 kids, and bad priorPaidKids
+      ---
+      duration_ms: 0.492958
+      type: 'test'
+      ...
+    1..6
+ok 78 - quote
+  ---
+  duration_ms: 1.683917
+  type: 'suite'
+  ...
+# Subtest: referral (integration)
+ok 79 - referral (integration) # SKIP set S1_DB_TESTS=1 to run
+  ---
+  duration_ms: 0.1625
+  type: 'suite'
+  ...
+# Subtest: refcookie
+    # Subtest: round-trips a numeric and a partner code
+    ok 1 - round-trips a numeric and a partner code
+      ---
+      duration_ms: 0.545417
+      type: 'test'
+      ...
+    # Subtest: rejects a tampered code, a tampered signature and a wrong secret
+    ok 2 - rejects a tampered code, a tampered signature and a wrong secret
+      ---
+      duration_ms: 0.097125
+      type: 'test'
+      ...
+    # Subtest: rejects unsigned, empty and malformed values
+    ok 3 - rejects unsigned, empty and malformed values
+      ---
+      duration_ms: 0.13475
+      type: 'test'
+      ...
+    # Subtest: cookie attributes are constant
+    ok 4 - cookie attributes are constant
+      ---
+      duration_ms: 0.25325
+      type: 'test'
+      ...
+    # Subtest: refSecret prefers S1_REF_SECRET, falls back (test key only), and throws when neither is set
+    ok 5 - refSecret prefers S1_REF_SECRET, falls back (test key only), and throws when neither is set
+      ---
+      duration_ms: 0.1525
+      type: 'test'
+      ...
+    1..5
+ok 80 - refcookie
+  ---
+  duration_ms: 1.50025
+  type: 'suite'
+  ...
+# Subtest: ipBucket
+    # Subtest: leaves IPv4 unchanged
+    ok 1 - leaves IPv4 unchanged
+      ---
+      duration_ms: 0.130084
+      type: 'test'
+      ...
+    # Subtest: reduces IPv6 to the /64
+    ok 2 - reduces IPv6 to the /64
+      ---
+      duration_ms: 0.304959
+      type: 'test'
+      ...
+    # Subtest: same /64 collides, different /64 does not
+    ok 3 - same /64 collides, different /64 does not
+      ---
+      duration_ms: 0.203459
+      type: 'test'
+      ...
+    # Subtest: handles compression at the front and IPv4-mapped addresses
+    ok 4 - handles compression at the front and IPv4-mapped addresses
+      ---
+      duration_ms: 0.078292
+      type: 'test'
+      ...
+    # Subtest: M1: the commit limiter buckets IPv6 at /48; IPv4 and /64 callers are unchanged
+    ok 5 - M1: the commit limiter buckets IPv6 at /48; IPv4 and /64 callers are unchanged
+      ---
+      duration_ms: 0.151834
+      type: 'test'
+      ...
+    # Subtest: missing or garbage input is noip
+    ok 6 - missing or garbage input is noip
+      ---
+      duration_ms: 0.040083
+      type: 'test'
+      ...
+    1..6
+ok 81 - ipBucket
+  ---
+  duration_ms: 1.068
+  type: 'suite'
+  ...
+# Subtest: computeFlags
+    # Subtest: no flags for an ordinary join
+    ok 1 - no flags for an ordinary join
+      ---
+      duration_ms: 0.078208
+      type: 'test'
+      ...
+    # Subtest: shared_card when the fingerprint is on the inviter's orders; not when null
+    ok 2 - shared_card when the fingerprint is on the inviter's orders; not when null
+      ---
+      duration_ms: 0.033709
+      type: 'test'
+      ...
+    # Subtest: same_zip compares the first five digits and ignores blanks
+    ok 3 - same_zip compares the first five digits and ignores blanks
+      ---
+      duration_ms: 0.032875
+      type: 'test'
+      ...
+    # Subtest: burst at 5 or more, not at 4
+    ok 4 - burst at 5 or more, not at 4
+      ---
+      duration_ms: 0.070209
+      type: 'test'
+      ...
+    # Subtest: free_reached only when crossing from below 4 to 4 or more
+    ok 5 - free_reached only when crossing from below 4 to 4 or more
+      ---
+      duration_ms: 0.076417
+      type: 'test'
+      ...
+    # Subtest: node only when crossing from below 10 to 10 or more
+    ok 6 - node only when crossing from below 10 to 10 or more
+      ---
+      duration_ms: 0.030416
+      type: 'test'
+      ...
+    # Subtest: stable order with several flags
+    ok 7 - stable order with several flags
+      ---
+      duration_ms: 0.366292
+      type: 'test'
+      ...
+    1..7
+ok 82 - computeFlags
+  ---
+  duration_ms: 0.75175
+  type: 'suite'
+  ...
+# Subtest: isCrawlerUa
+    # Subtest: detects known unfurl crawlers
+    ok 1 - detects known unfurl crawlers
+      ---
+      duration_ms: 0.159208
+      type: 'test'
+      ...
+    # Subtest: does not flag normal browsers or missing UA
+    ok 2 - does not flag normal browsers or missing UA
+      ---
+      duration_ms: 0.076167
+      type: 'test'
+      ...
+    1..2
+ok 83 - isCrawlerUa
+  ---
+  duration_ms: 0.260708
+  type: 'suite'
+  ...
+# Subtest: Season 01 route headers (no DB)
+    # Subtest: L7: join, signup, welcome and crew send SAMEORIGIN in test mode, terms DENY, all nosniff
+    ok 1 - L7: join, signup, welcome and crew send SAMEORIGIN in test mode, terms DENY, all nosniff
+      ---
+      duration_ms: 153.107625
+      type: 'test'
+      ...
+    # Subtest: /season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query
+    ok 2 - /season1/terms moves to the Terms of Service Season 01 anchor, keeping no-referrer and dropping the query
+      ---
+      duration_ms: 7.091833
+      type: 'test'
+      ...
+    # Subtest: L9: a crew lookup failure logs an error code only, never the message
+    ok 3 - L9: a crew lookup failure logs an error code only, never the message
+      ---
+      duration_ms: 1.279708
+      type: 'test'
+      ...
+    # Subtest: L2: invite/remove clears the cookie same-origin and refuses cross-site
+    ok 4 - L2: invite/remove clears the cookie same-origin and refuses cross-site
+      ---
+      duration_ms: 1.396542
+      type: 'test'
+      ...
+    # Subtest: L12: the welcome retry cookie is Secure and HttpOnly
+    ok 5 - L12: the welcome retry cookie is Secure and HttpOnly
+      ---
+      duration_ms: 0.704458
+      type: 'test'
+      ...
+    1..5
+ok 84 - Season 01 route headers (no DB)
+  ---
+  duration_ms: 164.263417
+  type: 'suite'
+  ...
+# Subtest: jerseyEligible (RT8)
+    # Subtest: created before the cutoff and paid within 24 h
+    ok 1 - created before the cutoff and paid within 24 h
+      ---
+      duration_ms: 0.331208
+      type: 'test'
+      ...
+    # Subtest: cutoff boundary is exclusive
+    ok 2 - cutoff boundary is exclusive
+      ---
+      duration_ms: 0.049209
+      type: 'test'
+      ...
+    # Subtest: Nov 30 create, Dec 20 pay: no jersey
+    ok 3 - Nov 30 create, Dec 20 pay: no jersey
+      ---
+      duration_ms: 0.035708
+      type: 'test'
+      ...
+    # Subtest: accepts Stripe epoch seconds
+    ok 4 - accepts Stripe epoch seconds
+      ---
+      duration_ms: 0.040042
+      type: 'test'
+      ...
+    # Subtest: bad input is false
+    ok 5 - bad input is false
+      ---
+      duration_ms: 0.031292
+      type: 'test'
+      ...
+    1..5
+ok 85 - jerseyEligible (RT8)
+  ---
+  duration_ms: 0.869
+  type: 'suite'
+  ...
+# Subtest: lateConfirm (RT8)
+    # Subtest: at or after closeAt
+    ok 1 - at or after closeAt
+      ---
+      duration_ms: 0.082042
+      type: 'test'
+      ...
+    1..1
+ok 86 - lateConfirm (RT8)
+  ---
+  duration_ms: 0.114667
+  type: 'suite'
+  ...
+# Subtest: isFullRefund (ops 4)
+    # Subtest: full only when amount_refunded reaches amount
+    ok 1 - full only when amount_refunded reaches amount
+      ---
+      duration_ms: 0.095666
+      type: 'test'
+      ...
+    # Subtest: split refunds that sum to the total read as full
+    ok 2 - split refunds that sum to the total read as full
+      ---
+      duration_ms: 0.03525
+      type: 'test'
+      ...
+    1..2
+ok 87 - isFullRefund (ops 4)
+  ---
+  duration_ms: 0.249292
+  type: 'suite'
+  ...
+# Subtest: kidsSignature (RT3)
+    # Subtest: is order independent
+    ok 1 - is order independent
+      ---
+      duration_ms: 0.102333
+      type: 'test'
+      ...
+    # Subtest: changes with a name, an age or a kid count
+    ok 2 - changes with a name, an age or a kid count
+      ---
+      duration_ms: 0.124834
+      type: 'test'
+      ...
+    1..2
+ok 88 - kidsSignature (RT3)
+  ---
+  duration_ms: 0.263167
+  type: 'suite'
+  ...
+# Subtest: view tokens (RT11)
+    # Subtest: 32 random bytes, base64url, hashed with sha256
+    ok 1 - 32 random bytes, base64url, hashed with sha256
+      ---
+      duration_ms: 0.2735
+      type: 'test'
+      ...
+    # Subtest: cookie attributes
+    ok 2 - cookie attributes
+      ---
+      duration_ms: 0.059
+      type: 'test'
+      ...
+    1..2
+ok 89 - view tokens (RT11)
+  ---
+  duration_ms: 0.369
+  type: 'suite'
+  ...
+# Subtest: safeEqual
+    # Subtest: compares exactly
+    ok 1 - compares exactly
+      ---
+      duration_ms: 0.068334
+      type: 'test'
+      ...
+    1..1
+ok 90 - safeEqual
+  ---
+  duration_ms: 0.093125
+  type: 'suite'
+  ...
+# Subtest: keyHash and cleanAttemptId
+    # Subtest: keyHash is case-insensitive and does not contain the input
+    ok 1 - keyHash is case-insensitive and does not contain the input
+      ---
+      duration_ms: 0.177625
+      type: 'test'
+      ...
+    # Subtest: L10: keyHash is an HMAC keyed by refSecret, not a bare sha256
+    ok 2 - L10: keyHash is an HMAC keyed by refSecret, not a bare sha256
+      ---
+      duration_ms: 0.099
+      type: 'test'
+      ...
+    # Subtest: L10: keyHash throws with a live key and no S1_REF_SECRET (no webhook-secret fallback)
+    ok 3 - L10: keyHash throws with a live key and no S1_REF_SECRET (no webhook-secret fallback)
+      ---
+      duration_ms: 0.082042
+      type: 'test'
+      ...
+    # Subtest: M1: the global ceiling alert key is one per UTC clock hour
+    ok 4 - M1: the global ceiling alert key is one per UTC clock hour
+      ---
+      duration_ms: 0.109541
+      type: 'test'
+      ...
+    # Subtest: attempt ids
+    ok 5 - attempt ids
+      ---
+      duration_ms: 0.06525
+      type: 'test'
+      ...
+    1..5
+ok 91 - keyHash and cleanAttemptId
+  ---
+  duration_ms: 0.586167
+  type: 'suite'
+  ...
+# Subtest: stepLine (ops 8)
+    # Subtest: formats and strips anything that could carry PII
+    ok 1 - formats and strips anything that could carry PII
+      ---
+      duration_ms: 0.092417
+      type: 'test'
+      ...
+    # Subtest: errCode prefers code, then type, then name
+    ok 2 - errCode prefers code, then type, then name
+      ---
+      duration_ms: 0.043125
+      type: 'test'
+      ...
+    1..2
+ok 92 - stepLine (ops 8)
+  ---
+  duration_ms: 0.165042
+  type: 'suite'
+  ...
+# Subtest: assertKeyMatchesMode
+    # Subtest: live needs sk_live_, test needs sk_test_, off never passes
+    ok 1 - live needs sk_live_, test needs sk_test_, off never passes
+      ---
+      duration_ms: 0.091542
+      type: 'test'
+      ...
+    # Subtest: keyIsLive
+    ok 2 - keyIsLive
+      ---
+      duration_ms: 0.031375
+      type: 'test'
+      ...
+    1..2
+ok 93 - assertKeyMatchesMode
+  ---
+  duration_ms: 0.151542
+  type: 'suite'
+  ...
+# Subtest: POST /api/season-one: 24 h classification (W3)
+    # Subtest: new: full path, one Waitlist event, one subscribe, one Lead, body {ok:true} only (R3.1, R3.2, R3.11)
+    ok 1 - new: full path, one Waitlist event, one subscribe, one Lead, body {ok:true} only (R3.1, R3.2, R3.11)
+      ---
+      duration_ms: 97.722001
+      type: 'test'
+      ...
+    # Subtest: the lock statement precedes the claim in one transaction; keys are keyHash values, no raw email (R3.1, R3.11, D16)
+    ok 2 - the lock statement precedes the claim in one transaction; keys are keyHash values, no raw email (R3.1, R3.11, D16)
+      ---
+      duration_ms: 1.798625
+      type: 'test'
+      ...
+    # Subtest: the 24 h boundary lives in the SQL (rolling interval, claim at now()) (R3.11, M4)
+    ok 3 - the 24 h boundary lives in the SQL (rolling interval, claim at now()) (R3.11, M4)
+      ---
+      duration_ms: 1.253125
+      type: 'test'
+      ...
+    # Subtest: '+' addresses hash like any other address (R3.11)
+    ok 4 - '+' addresses hash like any other address (R3.11)
+      ---
+      duration_ms: 7.566291
+      type: 'test'
+      ...
+    # Subtest: retry (same email, same eventId): the full path again, one Lead per attempt id, body {ok:true} (R3.1, R3.2, M1, M3)
+    ok 5 - retry (same email, same eventId): the full path again, one Lead per attempt id, body {ok:true} (R3.1, R3.2, M1, M3)
+      ---
+      duration_ms: 1.753625
+      type: 'test'
+      ...
+    # Subtest: repeat (same email, new eventId): Repeat event, no profile props, subscribe, no Lead, {ok:true,repeat:true} (R3.1, R3.2, R3.11)
+    ok 6 - repeat (same email, new eventId): Repeat event, no profile props, subscribe, no Lead, {ok:true,repeat:true} (R3.1, R3.2, R3.11)
+      ---
+      duration_ms: 1.290417
+      type: 'test'
+      ...
+    # Subtest: a failed Repeat event is logged and still returns repeat:true (R3.2)
+    ok 7 - a failed Repeat event is logged and still returns repeat:true (R3.2)
+      ---
+      duration_ms: 3.984875
+      type: 'test'
+      ...
+    # Subtest: no eventId: only the email key is claimed, and a second request is a repeat (R3.1)
+    ok 8 - no eventId: only the email key is claimed, and a second request is a repeat (R3.1)
+      ---
+      duration_ms: 1.271792
+      type: 'test'
+      ...
+    # Subtest: Waitlist unique_id is email-metric-eventId with a sanitized eventId, else today's timestamp form (R3.4)
+    ok 9 - Waitlist unique_id is email-metric-eventId with a sanitized eventId, else today's timestamp form (R3.4)
+      ---
+      duration_ms: 1.169458
+      type: 'test'
+      ...
+    # Subtest: fail open: no DATABASE_URL is new, and the database is never called (R3.3, M4)
+    ok 10 - fail open: no DATABASE_URL is new, and the database is never called (R3.3, M4)
+      ---
+      duration_ms: 4.437083
+      type: 'test'
+      ...
+    # Subtest: fail open: a database error is new, warned once without the email (R3.3, M4)
+    ok 11 - fail open: a database error is new, warned once without the email (R3.3, M4)
+      ---
+      duration_ms: 0.673333
+      type: 'test'
+      ...
+    # Subtest: fail open: a check slower than 800 ms is new (R3.3, M4)
+    ok 12 - fail open: a check slower than 800 ms is new (R3.3, M4)
+      ---
+      duration_ms: 800.723625
+      type: 'test'
+      ...
+    # Subtest: fail open: keyHash throwing (no secret) is new (R3.3)
+    ok 13 - fail open: keyHash throwing (no secret) is new (R3.3)
+      ---
+      duration_ms: 0.865583
+      type: 'test'
+      ...
+    # Subtest: honeypot never calls the database; steps with a matching sign-up write their events and send no Lead (R3.3, M7)
+    ok 14 - honeypot never calls the database; steps with a matching sign-up write their events and send no Lead (R3.3, M7)
+      ---
+      duration_ms: 2.275459
+      type: 'test'
+      ...
+    # Subtest: bad email and unknown step also skip the check and write nothing
+    ok 15 - bad email and unknown step also skip the check and write nothing
+      ---
+      duration_ms: 1.123209
+      type: 'test'
+      ...
+    # Subtest: Klaviyo event failure on a new sign-up is a 502 with no subscribe and no Lead (today's behavior)
+    ok 16 - Klaviyo event failure on a new sign-up is a 502 with no subscribe and no Lead (today's behavior)
+      ---
+      duration_ms: 0.648708
+      type: 'test'
+      ...
+    # Subtest: repeat payloads carry no profile data (M6)
+    ok 17 - repeat payloads carry no profile data (M6)
+      ---
+      duration_ms: 0.8505
+      type: 'test'
+      ...
+    # Subtest: the Lead keeps the shared event_id and a hashed email only (M3, M6)
+    ok 18 - the Lead keeps the shared event_id and a hashed email only (M3, M6)
+      ---
+      duration_ms: 0.5225
+      type: 'test'
+      ...
+    # Subtest: normalizeAd table through the sign-up: d1 to d99, any case, optional zero; others blank (R2.1, R2.2)
+    ok 19 - normalizeAd table through the sign-up: d1 to d99, any case, optional zero; others blank (R2.1, R2.2)
+      ---
+      duration_ms: 16.385417
+      type: 'test'
+      ...
+    # Subtest: R2.2: a main sign-up and a Text Karlin step with d19 write ad d19; the Lead content_name is season_one_d19
+    ok 20 - R2.2: a main sign-up and a Text Karlin step with d19 write ad d19; the Lead content_name is season_one_d19
+      ---
+      duration_ms: 2.03425
+      type: 'test'
+      ...
+    # Subtest: SA-1: a failed first sign-up releases its claim, so a new eventId is 'new' again (R3.1, M4)
+    ok 21 - SA-1: a failed first sign-up releases its claim, so a new eventId is 'new' again (R3.1, M4)
+      ---
+      duration_ms: 6.428208
+      type: 'test'
+      ...
+    # Subtest: SA-1: a thrown event (timeout) also releases the claim and returns 502
+    ok 22 - SA-1: a thrown event (timeout) also releases the claim and returns 502
+      ---
+      duration_ms: 2.412125
+      type: 'test'
+      ...
+    # Subtest: SA-1: a release query failure still returns the 502 and logs no email
+    ok 23 - SA-1: a release query failure still returns the 502 and logs no email
+      ---
+      duration_ms: 0.7625
+      type: 'test'
+      ...
+    # Subtest: SA-1: a failed retry releases nothing (it inserted nothing)
+    ok 24 - SA-1: a failed retry releases nothing (it inserted nothing)
+      ---
+      duration_ms: 3.737042
+      type: 'test'
+      ...
+    # Subtest: SA-2: subscribe and the Meta Lead are both started before either resolves (R3.5)
+    ok 25 - SA-2: subscribe and the Meta Lead are both started before either resolves (R3.5)
+      ---
+      duration_ms: 6.089125
+      type: 'test'
+      ...
+    # Subtest: SA-3: the Repeat event sends no first_name; the Waitlist event still does
+    ok 26 - SA-3: the Repeat event sends no first_name; the Waitlist event still does
+      ---
+      duration_ms: 4.808125
+      type: 'test'
+      ...
+    # Subtest: SA-6: a release slower than 800 ms is cut off, warned without the email, and the 502 stands
+    ok 27 - SA-6: a release slower than 800 ms is cut off, warned without the email, and the 502 stands
+      ---
+      duration_ms: 808.535376
+      type: 'test'
+      ...
+    1..27
+ok 94 - POST /api/season-one: 24 h classification (W3)
+  ---
+  duration_ms: 1793.227459
+  type: 'suite'
+  ...
+# Subtest: POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)
+    # Subtest: items 1, 3: the limiter rides the claim's one transaction, counts a floored hour window, key is a hash of the nf IP only
+    ok 1 - items 1, 3: the limiter rides the claim's one transaction, counts a floored hour window, key is a hash of the nf IP only
+      ---
+      duration_ms: 8.119792
+      type: 'test'
+      ...
+    # Subtest: item 1: no nf header means no per-IP key, even with x-forwarded-for; an invalid nf value is skipped too
+    ok 2 - item 1: no nf header means no per-IP key, even with x-forwarded-for; an invalid nf value is skipped too
+      ---
+      duration_ms: 49.884291
+      type: 'test'
+      ...
+    # Subtest: item 1: IPv6 keys on the /64; ::ffff: mapped v4 keys as v4
+    ok 3 - item 1: IPv6 keys on the /64; ::ffff: mapped v4 keys as v4
+      ---
+      duration_ms: 4.268042
+      type: 'test'
+      ...
+    # Subtest: item 4: 10 new sign-ups an hour from one IP are normal; the 11th to 30th are quiet (event, subscribe, no Lead, {ok:true,quiet:true})
+    ok 4 - item 4: 10 new sign-ups an hour from one IP are normal; the 11th to 30th are quiet (event, subscribe, no Lead, {ok:true,quiet:true})
+      ---
+      duration_ms: 18.17775
+      type: 'test'
+      ...
+    # Subtest: item 4: the 31st is a 429 with the founder-text copy, nothing sent, the claim released, a warn with no IP or email
+    ok 5 - item 4: the 31st is a 429 with the founder-text copy, nothing sent, the claim released, a warn with no IP or email
+      ---
+      duration_ms: 11.640125
+      type: 'test'
+      ...
+    # Subtest: item 4: repeats, retries and failed sign-ups do not count toward the IP hour
+    ok 6 - item 4: repeats, retries and failed sign-ups do not count toward the IP hour
+      ---
+      duration_ms: 2.258208
+      type: 'test'
+      ...
+    # Subtest: item 4: past 150 new sign-ups an hour across all IPs every further one is quiet, with or without an IP
+    ok 7 - item 4: past 150 new sign-ups an hour across all IPs every further one is quiet, with or without an IP
+      ---
+      duration_ms: 2.10125
+      type: 'test'
+      ...
+    # Subtest: items 1 to 4 fail open: a database error or a slow one is a normal sign-up (no quiet, no 429)
+    ok 8 - items 1 to 4 fail open: a database error or a slow one is a normal sign-up (no quiet, no 429)
+      ---
+      duration_ms: 804.421042
+      type: 'test'
+      ...
+    # Subtest: item 2: the Meta Lead takes the IP from x-nf-client-connection-ip only
+    ok 9 - item 2: the Meta Lead takes the IP from x-nf-client-connection-ip only
+      ---
+      duration_ms: 8.005166
+      type: 'test'
+      ...
+    # Subtest: item 8 (R2-D11): a repeat claims its own ev key, so its Text Karlin and games steps are accepted; a stranger's random eventId with no sign-up is still dropped
+    ok 10 - item 8 (R2-D11): a repeat claims its own ev key, so its Text Karlin and games steps are accepted; a stranger's random eventId with no sign-up is still dropped
+      ---
+      duration_ms: 8.098416
+      type: 'test'
+      ...
+    # Subtest: SA-9: a repeat posted twice with one eventId is a repeat both times; 60 fresh eventIds each posted twice add no Waitlist event and no Lead
+    ok 11 - SA-9: a repeat posted twice with one eventId is a repeat both times; 60 fresh eventIds each posted twice add no Waitlist event and no Lead
+      ---
+      duration_ms: 54.1075
+      type: 'test'
+      ...
+    # Subtest: SA-9: a real retry (same eventId as a new sign-up) still re-runs the full path
+    ok 12 - SA-9: a real retry (same eventId as a new sign-up) still re-runs the full path
+      ---
+      duration_ms: 0.977583
+      type: 'test'
+      ...
+    # Subtest: item 7: a step with an eventId needs that ev key; a match writes the event
+    ok 13 - item 7: a step with an eventId needs that ev key; a match writes the event
+      ---
+      duration_ms: 1.436334
+      type: 'test'
+      ...
+    # Subtest: item 7: a step without an eventId (an old cached page) needs the email key, no more
+    ok 14 - item 7: a step without an eventId (an old cached page) needs the email key, no more
+      ---
+      duration_ms: 2.707041
+      type: 'test'
+      ...
+    # Subtest: item 7: a dropped step logs step_dropped with the step name and a reason, no PII
+    ok 15 - item 7: a dropped step logs step_dropped with the step name and a reason, no PII
+      ---
+      duration_ms: 0.945917
+      type: 'test'
+      ...
+    # Subtest: item 7: the step lock fails open on a database error and on an answer slower than 800 ms
+    ok 16 - item 7: the step lock fails open on a database error and on an answer slower than 800 ms
+      ---
+      duration_ms: 814.176918
+      type: 'test'
+      ...
+    # Subtest: item 7: text-karlin is capped at 3 per email per 24 h (hashed key); the 4th is a silent drop
+    ok 17 - item 7: text-karlin is capped at 3 per email per 24 h (hashed key); the 4th is a silent drop
+      ---
+      duration_ms: 6.848625
+      type: 'test'
+      ...
+    # Subtest: item 10: a cross-site browser POST is 403 with nothing written; same-site and no-Origin pass
+    ok 18 - item 10: a cross-site browser POST is 403 with nothing written; same-site and no-Origin pass
+      ---
+      duration_ms: 4.908291
+      type: 'test'
+      ...
+    # Subtest: item 11: response keys are only ok plus repeat, quiet or error
+    ok 19 - item 11: response keys are only ok plus repeat, quiet or error
+      ---
+      duration_ms: 3.200458
+      type: 'test'
+      ...
+    # Subtest: item 9, 11: a sentinel email and IP never appear in any console call, across every path
+    ok 20 - item 9, 11: a sentinel email and IP never appear in any console call, across every path
+      ---
+      duration_ms: 6.665792
+      type: 'test'
+      ...
+    # Subtest: item 9: the route source has no r.text() in a log and no raw email in the missing-key line
+    ok 21 - item 9: the route source has no r.text() in a log and no raw email in the missing-key line
+      ---
+      duration_ms: 0.5095
+      type: 'test'
+      ...
+    1..21
+ok 95 - POST /api/season-one: round 2 relay (S2 items 1 to 4, 7 to 10)
+  ---
+  duration_ms: 1814.774751
+  type: 'suite'
+  ...
+# Subtest: sign-up card form behind Or pay with card
+    # Subtest: state: collapsed with the button while unknown or with Apple Pay or Google Pay
+    ok 1 - state: collapsed with the button while unknown or with Apple Pay or Google Pay
+      ---
+      duration_ms: 0.521708
+      type: 'test'
+      ...
+    # Subtest: state: opened by the parent stays open, whatever Stripe reports later
+    ok 2 - state: opened by the parent stays open, whatever Stripe reports later
+      ---
+      duration_ms: 0.080584
+      type: 'test'
+      ...
+    # Subtest: state: no wallet opens the card form and drops the button
+    ok 3 - state: no wallet opens the card form and drops the button
+      ---
+      duration_ms: 0.038041
+      type: 'test'
+      ...
+    # Subtest: state: Link only shows the card form open with no button (Link stays secondary)
+    ok 4 - state: Link only shows the card form open with no button (Link stays secondary)
+      ---
+      duration_ms: 0.299875
+      type: 'test'
+      ...
+    # Subtest: state: shown open, a later Apple Pay or Google Pay report never collapses it
+    ok 5 - state: shown open, a later Apple Pay or Google Pay report never collapses it
+      ---
+      duration_ms: 0.129166
+      type: 'test'
+      ...
+    # Subtest: markup: a plain-text divider for the Link-only state, swapped with the button
+    ok 6 - markup: a plain-text divider for the Link-only state, swapped with the button
+      ---
+      duration_ms: 0.038875
+      type: 'test'
+      ...
+    # Subtest: markup: a real button with aria wiring; card form and its pay button inside the collapsed section
+    ok 7 - markup: a real button with aria wiring; card form and its pay button inside the collapsed section
+      ---
+      duration_ms: 0.064
+      type: 'test'
+      ...
+    # Subtest: markup: terms above both pay paths; the toggle lives in the wallet block (hidden with it)
+    ok 8 - markup: terms above both pay paths; the toggle lives in the wallet block (hidden with it)
+      ---
+      duration_ms: 0.108166
+      type: 'test'
+      ...
+    # Subtest: submit never pays from a collapsed card form
+    ok 9 - submit never pays from a collapsed card form
+      ---
+      duration_ms: 0.104167
+      type: 'test'
+      ...
+    1..9
+ok 96 - sign-up card form behind Or pay with card
+  ---
+  duration_ms: 1.92425
+  type: 'suite'
+  ...
+# Subtest: sign-up commit answers (F15, C2)
+    # Subtest: in_progress always goes to the confirmation, before any 409 handling
+    ok 1 - in_progress always goes to the confirmation, before any 409 handling
+      ---
+      duration_ms: 0.604709
+      type: 'test'
+      ...
+    # Subtest: in_progress_other shows its own message (no cookie, no order), confirmed or not
+    ok 2 - in_progress_other shows its own message (no cookie, no order), confirmed or not
+      ---
+      duration_ms: 0.087042
+      type: 'test'
+      ...
+    # Subtest: attempt_busy retries once with the same attempt, then falls through
+    ok 3 - attempt_busy retries once with the same attempt, then falls through
+      ---
+      duration_ms: 0.082459
+      type: 'test'
+      ...
+    # Subtest: after confirmPayment was reached on this attempt, any other failure checks on it at the confirmation (never 'not charged')
+    ok 4 - after confirmPayment was reached on this attempt, any other failure checks on it at the confirmation (never 'not charged')
+      ---
+      duration_ms: 0.048875
+      type: 'test'
+      ...
+    # Subtest: without the flag, nothing can have been confirmed: the existing messages stay
+    ok 5 - without the flag, nothing can have been confirmed: the existing messages stay
+      ---
+      duration_ms: 0.031625
+      type: 'test'
+      ...
+    # Subtest: the confirmed flag is set just before confirmPayment, keyed by attempt
+    ok 6 - the confirmed flag is set just before confirmPayment, keyed by attempt
+      ---
+      duration_ms: 0.068667
+      type: 'test'
+      ...
+    # Subtest: the attempt id is reused for the tab (s1_attempt), cleared by welcome's paid state
+    ok 7 - the attempt id is reused for the tab (s1_attempt), cleared by welcome's paid state
+      ---
+      duration_ms: 0.088
+      type: 'test'
+      ...
+    # Subtest: copy, one constant each (Parent/Steward 10-30): on its way for a real 409, checking for the ambiguous case
+    ok 8 - copy, one constant each (Parent/Steward 10-30): on its way for a real 409, checking for the ambiguous case
+      ---
+      duration_ms: 0.156709
+      type: 'test'
+      ...
+    # Subtest: in-progress lines are a calm status: stone note box, polite status region, never the red alert; 3 s hold, button stays busy
+    ok 9 - in-progress lines are a calm status: stone note box, polite status region, never the red alert; 3 s hold, button stays busy
+      ---
+      duration_ms: 0.160083
+      type: 'test'
+      ...
+    # Subtest: Clarity masks the kid age select (finding 4)
+    ok 10 - Clarity masks the kid age select (finding 4)
+      ---
+      duration_ms: 0.152792
+      type: 'test'
+      ...
+    # Subtest: wallet: paymentFailed runs before any message (once)
+    ok 11 - wallet: paymentFailed runs before any message (once)
+      ---
+      duration_ms: 0.081375
+      type: 'test'
+      ...
+    1..11
+ok 97 - sign-up commit answers (F15, C2)
+  ---
+  duration_ms: 1.938625
+  type: 'suite'
+  ...
+# Subtest: sign-up busy line (S11, money 14)
+    # Subtest: after 2 s the label becomes the D5 line, announced once in the status region
+    ok 1 - after 2 s the label becomes the D5 line, announced once in the status region
+      ---
+      duration_ms: 0.049458
+      type: 'test'
+      ...
+    # Subtest: the timer is cleared in setBusy (true and false), fail() and pageshow
+    ok 2 - the timer is cleared in setBusy (true and false), fail() and pageshow
+      ---
+      duration_ms: 0.055375
+      type: 'test'
+      ...
+    1..2
+ok 98 - sign-up busy line (S11, money 14)
+  ---
+  duration_ms: 0.135084
+  type: 'suite'
+  ...
+# Subtest: sign-up InitiateCheckout and tap time (S3, C6, S8)
+    # Subtest: fires at the pay tap (same point as season1_pay_submit), once per attempt, eventID sha256(attemptId)
+    ok 1 - fires at the pay tap (same point as season1_pay_submit), once per attempt, eventID sha256(attemptId)
+      ---
+      duration_ms: 0.071375
+      type: 'test'
+      ...
+    # Subtest: stores s1_tap at the pay tap
+    ok 2 - stores s1_tap at the pay tap
+      ---
+      duration_ms: 0.022292
+      type: 'test'
+      ...
+    1..2
+ok 99 - sign-up InitiateCheckout and tap time (S3, C6, S8)
+  ---
+  duration_ms: 0.116625
+  type: 'suite'
+  ...
+# Subtest: sign-up confirmed flag after a Stripe answer (lead 10-30)
+    # Subtest: rule: an error answer clears the flag; success or redirect (no error) and unexpected_state keep it
+    ok 1 - rule: an error answer clears the flag; success or redirect (no error) and unexpected_state keep it
+      ---
+      duration_ms: 0.050959
+      type: 'test'
+      ...
+    # Subtest: decline, then a 429 on the same attempt: the normal message, no navigation
+    ok 2 - decline, then a 429 on the same attempt: the normal message, no navigation
+      ---
+      duration_ms: 0.536042
+      type: 'test'
+      ...
+    # Subtest: decline, then a network error on the re-commit: the existing 'not charged' line, no navigation
+    ok 3 - decline, then a network error on the re-commit: the existing 'not charged' line, no navigation
+      ---
+      duration_ms: 0.26475
+      type: 'test'
+      ...
+    # Subtest: network error after confirm (confirm throws): the flag stays and the parent goes to the confirmation
+    ok 4 - network error after confirm (confirm throws): the flag stays and the parent goes to the confirmation
+      ---
+      duration_ms: 0.130125
+      type: 'test'
+      ...
+    # Subtest: M-1: three declines, the webhook cancels the PaymentIntent, the next tap re-commits for a fresh one
+    ok 5 - M-1: three declines, the webhook cancels the PaymentIntent, the next tap re-commits for a fresh one
+      ---
+      duration_ms: 0.494875
+      type: 'test'
+      ...
+    # Subtest: a real 409 in_progress: the 'on its way' note, then the confirmation after 3 s
+    ok 6 - a real 409 in_progress: the 'on its way' note, then the confirmation after 3 s
+      ---
+      duration_ms: 0.09775
+      type: 'test'
+      ...
+    1..6
+ok 100 - sign-up confirmed flag after a Stripe answer (lead 10-30)
+  ---
+  duration_ms: 1.625292
+  type: 'suite'
+  ...
+# Subtest: F12 sign-up wallet row
+    # Subtest: holds the row's room and the divider from first paint
+    ok 1 - holds the row's room and the divider from first paint
+      ---
+      duration_ms: 0.360167
+      type: 'test'
+      ...
+    # Subtest: only collapses (display none), never clips to 0 px
+    ok 2 - only collapses (display none), never clips to 0 px
+      ---
+      duration_ms: 0.058625
+      type: 'test'
+      ...
+    1..2
+ok 101 - F12 sign-up wallet row
+  ---
+  duration_ms: 0.773042
+  type: 'suite'
+  ...
+# Subtest: sitemap and /season1/join
+    # Subtest: holds /season1/join with a real lastModified, not the clock
+    ok 1 - holds /season1/join with a real lastModified, not the clock
+      ---
+      duration_ms: 0.322667
+      type: 'test'
+      ...
+    # Subtest: holds none of the noindex Season 01 URLs
+    ok 2 - holds none of the noindex Season 01 URLs
+      ---
+      duration_ms: 0.101375
+      type: 'test'
+      ...
+    # Subtest: robots.txt has no Disallow for /season1 (a disallow would hide the canonical and noindex signals)
+    ok 3 - robots.txt has no Disallow for /season1 (a disallow would hide the canonical and noindex signals)
+      ---
+      duration_ms: 0.165959
+      type: 'test'
+      ...
+    # Subtest: llms.txt Season 01 line agrees with offer.ts
+    ok 4 - llms.txt Season 01 line agrees with offer.ts
+      ---
+      duration_ms: 3.114916
+      type: 'test'
+      ...
+    1..4
+ok 102 - sitemap and /season1/join
+  ---
+  duration_ms: 4.093958
+  type: 'suite'
+  ...
+# Subtest: tags renderer: live hosts
+    # Subtest: live only on ekuzo.gg or www and mode not test; mode off still measures; missing host is non-live
+    ok 1 - live only on ekuzo.gg or www and mode not test; mode off still measures; missing host is non-live
+      ---
+      duration_ms: 0.365542
+      type: 'test'
+      ...
+    # Subtest: join: live render has GA4, never debug_mode or the QA script, and parses
+    ok 2 - join: live render has GA4, never debug_mode or the QA script, and parses
+      ---
+      duration_ms: 0.34225
+      type: 'test'
+      ...
+    # Subtest: signup: live render has GA4, never debug_mode or the QA script, and parses
+    ok 3 - signup: live render has GA4, never debug_mode or the QA script, and parses
+      ---
+      duration_ms: 0.118875
+      type: 'test'
+      ...
+    # Subtest: welcome: live render has GA4, never debug_mode or the QA script, and parses
+    ok 4 - welcome: live render has GA4, never debug_mode or the QA script, and parses
+      ---
+      duration_ms: 0.089208
+      type: 'test'
+      ...
+    # Subtest: Pixel on join, sign-up and welcome only, autoConfig false before init (C11)
+    ok 5 - Pixel on join, sign-up and welcome only, autoConfig false before init (C11)
+      ---
+      duration_ms: 0.07125
+      type: 'test'
+      ...
+    # Subtest: Clarity per P1: join, sign-up, welcome, thanks; never crew
+    ok 6 - Clarity per P1: join, sign-up, welcome, thanks; never crew
+      ---
+      duration_ms: 0.353416
+      type: 'test'
+      ...
+    # Subtest: join queues page_view config with kept params only, PageView then ViewContent
+    ok 7 - join queues page_view config with kept params only, PageView then ViewContent
+      ---
+      duration_ms: 0.926125
+      type: 'test'
+      ...
+    # Subtest: sign-up: no ViewContent; Clarity utm tags fall back to the last-click cookie, never an email or code
+    ok 8 - sign-up: no ViewContent; Clarity utm tags fall back to the last-click cookie, never an email or code
+      ---
+      duration_ms: 0.502833
+      type: 'test'
+      ...
+    # Subtest: crew this release (CREW_GA4 false): no vendor tag at all, live or QA, on any host
+    ok 9 - crew this release (CREW_GA4 false): no vendor tag at all, live or QA, on any host
+      ---
+      duration_ms: 0.159875
+      type: 'test'
+      ...
+    # Subtest: crew re-enable path (crewGa4 true): GA4 only, /crew/ path plus kept params, signals off
+    ok 10 - crew re-enable path (crewGa4 true): GA4 only, /crew/ path plus kept params, signals off
+      ---
+      duration_ms: 0.419
+      type: 'test'
+      ...
+    # Subtest: welcome: page_referrer is the origin; Pixel PageView once per order
+    ok 11 - welcome: page_referrer is the origin; Pixel PageView once per order
+      ---
+      duration_ms: 0.774542
+      type: 'test'
+      ...
+    # Subtest: live s1px sends Purchase and InitiateCheckout as standard events with the eventID
+    ok 12 - live s1px sends Purchase and InitiateCheckout as standard events with the eventID
+      ---
+      duration_ms: 0.276834
+      type: 'test'
+      ...
+    1..12
+ok 103 - tags renderer: live hosts
+  ---
+  duration_ms: 4.866833
+  type: 'suite'
+  ...
+# Subtest: tags renderer: non-live hosts (QA gate)
+    # Subtest: host "season1-commit--ekuzo.netlify.app": one gated script, no vendor URL before the gate
+    ok 1 - host "season1-commit--ekuzo.netlify.app": one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.354917
+      type: 'test'
+      ...
+    # Subtest: host "ekuzo.netlify.app": one gated script, no vendor URL before the gate
+    ok 2 - host "ekuzo.netlify.app": one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.213042
+      type: 'test'
+      ...
+    # Subtest: host "localhost:3105": one gated script, no vendor URL before the gate
+    ok 3 - host "localhost:3105": one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.404583
+      type: 'test'
+      ...
+    # Subtest: host "ekuzo.gg.evil.example": one gated script, no vendor URL before the gate
+    ok 4 - host "ekuzo.gg.evil.example": one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.053667
+      type: 'test'
+      ...
+    # Subtest: host "": one gated script, no vendor URL before the gate
+    ok 5 - host "": one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.046208
+      type: 'test'
+      ...
+    # Subtest: host null: one gated script, no vendor URL before the gate
+    ok 6 - host null: one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.052792
+      type: 'test'
+      ...
+    # Subtest: host undefined: one gated script, no vendor URL before the gate
+    ok 7 - host undefined: one gated script, no vendor URL before the gate
+      ---
+      duration_ms: 0.044625
+      type: 'test'
+      ...
+    # Subtest: the live host in test mode also gets only the gate
+    ok 8 - the live host in test mode also gets only the gate
+      ---
+      duration_ms: 0.034042
+      type: 'test'
+      ...
+    # Subtest: without the flag nothing loads or queues
+    ok 9 - without the flag nothing loads or queues
+      ---
+      duration_ms: 0.31125
+      type: 'test'
+      ...
+    # Subtest: ?s1qa=1 sets a session cookie and loads GA4 (debug, consent denied, signals off), Pixel, Clarity
+    ok 10 - ?s1qa=1 sets a session cookie and loads GA4 (debug, consent denied, signals off), Pixel, Clarity
+      ---
+      duration_ms: 0.405042
+      type: 'test'
+      ...
+    # Subtest: a later page in the same session (cookie, no flag) still loads; ?s1qa=0 clears it
+    ok 11 - a later page in the same session (cookie, no flag) still loads; ?s1qa=0 clears it
+      ---
+      duration_ms: 0.482958
+      type: 'test'
+      ...
+    # Subtest: P4: QA Purchase and InitiateCheckout are S1QA_ custom events; PageView and ViewContent normal
+    ok 12 - P4: QA Purchase and InitiateCheckout are S1QA_ custom events; PageView and ViewContent normal
+      ---
+      duration_ms: 0.23625
+      type: 'test'
+      ...
+    1..12
+ok 104 - tags renderer: non-live hosts (QA gate)
+  ---
+  duration_ms: 2.737125
+  type: 'suite'
+  ...
+# Subtest: tags renderer: force-static pages (landing, thanks)
+    # Subtest: thanks: GA4 and Clarity, no Pixel; live on ekuzo.gg, gated elsewhere
+    ok 1 - thanks: GA4 and Clarity, no Pixel; live on ekuzo.gg, gated elsewhere
+      ---
+      duration_ms: 0.852417
+      type: 'test'
+      ...
+    # Subtest: landing: Pixel (autoConfig before init in both branches), Clarity, plain GA4 config
+    ok 2 - landing: Pixel (autoConfig before init in both branches), Clarity, plain GA4 config
+      ---
+      duration_ms: 0.56125
+      type: 'test'
+      ...
+    # Subtest: landing template: tags placeholder in the head, no hard-coded vendor tag, LIVE drops netlify.app
+    ok 3 - landing template: tags placeholder in the head, no hard-coded vendor tag, LIVE drops netlify.app
+      ---
+      duration_ms: 0.251292
+      type: 'test'
+      ...
+    1..3
+ok 105 - tags renderer: force-static pages (landing, thanks)
+  ---
+  duration_ms: 1.708
+  type: 'suite'
+  ...
+# Subtest: address bar allow list (C10)
+    # Subtest: keeps the nine kept params plus src and s1qa, drops the rest, keeps a plain hash
+    ok 1 - keeps the nine kept params plus src and s1qa, drops the rest, keeps a plain hash
+      ---
+      duration_ms: 0.302959
+      type: 'test'
+      ...
+    # Subtest: no call when nothing needs dropping; an odd hash is dropped
+    ok 2 - no call when nothing needs dropping; an odd hash is dropped
+      ---
+      duration_ms: 0.317125
+      type: 'test'
+      ...
+    # Subtest: join pages keep ?ad= (s1-fast-track A1, closes M-6)
+    ok 3 - join pages keep ?ad= (s1-fast-track A1, closes M-6)
+      ---
+      duration_ms: 0.316541
+      type: 'test'
+      ...
+    # Subtest: thanks keeps play
+    ok 4 - thanks keeps play
+      ---
+      duration_ms: 0.195541
+      type: 'test'
+      ...
+    1..4
+ok 106 - address bar allow list (C10)
+  ---
+  duration_ms: 1.1795
+  type: 'suite'
+  ...
+# Subtest: templates (R1, C10, C16)
+    # Subtest: join: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+    ok 1 - join: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+      ---
+      duration_ms: 0.151792
+      type: 'test'
+      ...
+    # Subtest: signup: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+    ok 2 - signup: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+      ---
+      duration_ms: 0.132584
+      type: 'test'
+      ...
+    # Subtest: welcome: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+    ok 3 - welcome: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+      ---
+      duration_ms: 0.070292
+      type: 'test'
+      ...
+    # Subtest: crew: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+    ok 4 - crew: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+      ---
+      duration_ms: 0.108041
+      type: 'test'
+      ...
+    # Subtest: thanks: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+    ok 5 - thanks: URL_ALLOW then TAGS in the head, no hard-coded vendor tag, no history call after TAGS
+      ---
+      duration_ms: 0.05425
+      type: 'test'
+      ...
+    # Subtest: P1 masks: every element that prints a kid's name
+    ok 6 - P1 masks: every element that prints a kid's name
+      ---
+      duration_ms: 0.186208
+      type: 'test'
+      ...
+    1..6
+ok 107 - templates (R1, C10, C16)
+  ---
+  duration_ms: 0.790416
+  type: 'suite'
+  ...
+# Subtest: route GET output per host (R1, R2, ops 4)
+    # Subtest: ekuzo.gg: GA4, Pixel init and Clarity on join, sign-up, welcome; no placeholder left; no debug_mode
+    ok 1 - ekuzo.gg: GA4, Pixel init and Clarity on join, sign-up, welcome; no placeholder left; no debug_mode
+      ---
+      duration_ms: 101.249083
+      type: 'test'
+      ...
+    # Subtest: crew on ekuzo.gg and on the branch host: no vendor URL, no GA4 id, no QA gate; the invite events are inert
+    ok 2 - crew on ekuzo.gg and on the branch host: no vendor URL, no GA4 id, no QA gate; the invite events are inert
+      ---
+      duration_ms: 6.166375
+      type: 'test'
+      ...
+    # Subtest: branch deploy host: no vendor URL outside the QA gate
+    ok 3 - branch deploy host: no vendor URL outside the QA gate
+      ---
+      duration_ms: 2.283583
+      type: 'test'
+      ...
+    # Subtest: thanks and landing (force-static) render the client rule; redirect pages stay tag-free (C8)
+    ok 4 - thanks and landing (force-static) render the client rule; redirect pages stay tag-free (C8)
+      ---
+      duration_ms: 6.4835
+      type: 'test'
+      ...
+    1..4
+ok 108 - route GET output per host (R1, R2, ops 4)
+  ---
+  duration_ms: 116.434708
+  type: 'suite'
+  ...
+# Subtest: site layout (S12, F2)
+    # Subtest: GA4, the Pixel and Clarity render only when the build context is production
+    ok 1 - GA4, the Pixel and Clarity render only when the build context is production
+      ---
+      duration_ms: 0.123208
+      type: 'test'
+      ...
+    1..1
+ok 109 - site layout (S12, F2)
+  ---
+  duration_ms: 0.144292
+  type: 'suite'
+  ...
+# Subtest: Google tag set before config (Sentry phase 4, round 3)
+    # Subtest: every page, live and QA: gtag('set', {page_location}) is queued before config, with the cleaned location
+    ok 1 - every page, live and QA: gtag('set', {page_location}) is queued before config, with the cleaned location
+      ---
+      duration_ms: 2.480583
+      type: 'test'
+      ...
+    # Subtest: crew re-enable path: the set value carries /crew/ plus kept params, never the family code (live and QA)
+    ok 2 - crew re-enable path: the set value carries /crew/ plus kept params, never the family code (live and QA)
+      ---
+      duration_ms: 0.3335
+      type: 'test'
+      ...
+    # Subtest: referrer: welcome sets its own origin; other pages reduce an outside referrer to its origin
+    ok 3 - referrer: welcome sets its own origin; other pages reduce an outside referrer to its origin
+      ---
+      duration_ms: 0.503
+      type: 'test'
+      ...
+    # Subtest: crew re-enable path: every event is sent to GA4 only (send_to), live and QA; other pages keep the default routing
+    ok 4 - crew re-enable path: every event is sent to GA4 only (send_to), live and QA; other pages keep the default routing
+      ---
+      duration_ms: 0.463417
+      type: 'test'
+      ...
+    1..4
+ok 110 - Google tag set before config (Sentry phase 4, round 3)
+  ---
+  duration_ms: 3.822708
+  type: 'suite'
+  ...
+# Subtest: validateCommit: happy path
+    # Subtest: normalizes email and returns clean values
+    ok 1 - normalizes email and returns clean values
+      ---
+      duration_ms: 1.319125
+      type: 'test'
+      ...
+    # Subtest: accepts up to 4 kids, rejects 0 and 5
+    ok 2 - accepts up to 4 kids, rejects 0 and 5
+      ---
+      duration_ms: 0.124375
+      type: 'test'
+      ...
+    # Subtest: company absent is fine
+    ok 3 - company absent is fine
+      ---
+      duration_ms: 0.038084
+      type: 'test'
+      ...
+    1..3
+ok 111 - validateCommit: happy path
+  ---
+  duration_ms: 1.769166
+  type: 'suite'
+  ...
+# Subtest: names
+    # Subtest: accents, apostrophes, hyphens, spaces pass
+    ok 1 - accents, apostrophes, hyphens, spaces pass
+      ---
+      duration_ms: 0.417834
+      type: 'test'
+      ...
+    # Subtest: digits, markup, symbols, empty, and 21 chars fail
+    ok 2 - digits, markup, symbols, empty, and 21 chars fail
+      ---
+      duration_ms: 0.073542
+      type: 'test'
+      ...
+    # Subtest: 20 chars passes and names are trimmed
+    ok 3 - 20 chars passes and names are trimmed
+      ---
+      duration_ms: 0.037833
+      type: 'test'
+      ...
+    1..3
+ok 112 - names
+  ---
+  duration_ms: 0.622083
+  type: 'suite'
+  ...
+# Subtest: email
+    # Subtest: rejects malformed and over-long
+    ok 1 - rejects malformed and over-long
+      ---
+      duration_ms: 0.119041
+      type: 'test'
+      ...
+    1..1
+ok 113 - email
+  ---
+  duration_ms: 0.193208
+  type: 'suite'
+  ...
+# Subtest: phone
+    # Subtest: optional; digits and +()- space only, max 20
+    ok 1 - optional; digits and +()- space only, max 20
+      ---
+      duration_ms: 0.074542
+      type: 'test'
+      ...
+    1..1
+ok 114 - phone
+  ---
+  duration_ms: 0.102792
+  type: 'suite'
+  ...
+# Subtest: ages
+    # Subtest: 8, 18, 19, 'outside' fail with age_outside
+    ok 1 - 8, 18, 19, 'outside' fail with age_outside
+      ---
+      duration_ms: 0.084459
+      type: 'test'
+      ...
+    # Subtest: garbage ages fail as invalid
+    ok 2 - garbage ages fail as invalid
+      ---
+      duration_ms: 0.121708
+      type: 'test'
+      ...
+    # Subtest: 9 passes with ageEdge true; 10..17 pass and are not edges
+    ok 3 - 9 passes with ageEdge true; 10..17 pass and are not edges
+      ---
+      duration_ms: 0.054166
+      type: 'test'
+      ...
+    # Subtest: numeric strings are accepted
+    ok 4 - numeric strings are accepted
+      ---
+      duration_ms: 0.038042
+      type: 'test'
+      ...
+    # Subtest: reports the index of the offending second kid
+    ok 5 - reports the index of the offending second kid
+      ---
+      duration_ms: 0.024791
+      type: 'test'
+      ...
+    1..5
+ok 115 - ages
+  ---
+  duration_ms: 0.369791
+  type: 'suite'
+  ...
+# Subtest: consent, honeypot, src
+    # Subtest: consent must be exactly true
+    ok 1 - consent must be exactly true
+      ---
+      duration_ms: 0.054042
+      type: 'test'
+      ...
+    # Subtest: filled honeypot fails
+    ok 2 - filled honeypot fails
+      ---
+      duration_ms: 0.02475
+      type: 'test'
+      ...
+    # Subtest: src from the fixed set, else rejected
+    ok 3 - src from the fixed set, else rejected
+      ---
+      duration_ms: 0.050125
+      type: 'test'
+      ...
+    # Subtest: non-object bodies fail
+    ok 4 - non-object bodies fail
+      ---
+      duration_ms: 0.025667
+      type: 'test'
+      ...
+    1..4
+ok 116 - consent, honeypot, src
+  ---
+  duration_ms: 0.461416
+  type: 'suite'
+  ...
+# Subtest: foldName
+    # Subtest: lowercases and strips diacritics
+    ok 1 - lowercases and strips diacritics
+      ---
+      duration_ms: 0.04875
+      type: 'test'
+      ...
+    1..1
+ok 117 - foldName
+  ---
+  duration_ms: 0.07725
+  type: 'suite'
+  ...
+# Subtest: warm route
+    # Subtest: runs select 1 once, answers 204 no-store with timing only, then skips the DB for 20 s
+    ok 1 - runs select 1 once, answers 204 no-store with timing only, then skips the DB for 20 s
+      ---
+      duration_ms: 3.404958
+      type: 'test'
+      ...
+    # Subtest: shows the region only in test mode
+    ok 2 - shows the region only in test mode
+      ---
+      duration_ms: 0.164125
+      type: 'test'
+      ...
+    1..2
+ok 118 - warm route
+  ---
+  duration_ms: 76.002292
+  type: 'suite'
+  ...
+# Subtest: warm call sites
+    # Subtest: join page makes no warm call
+    ok 1 - join page makes no warm call
+      ---
+      duration_ms: 0.116375
+      type: 'test'
+      ...
+    # Subtest: sign-up and crew pages still warm on load
+    ok 2 - sign-up and crew pages still warm on load
+      ---
+      duration_ms: 0.087958
+      type: 'test'
+      ...
+    1..2
+ok 119 - warm call sites
+  ---
+  duration_ms: 0.243625
+  type: 'suite'
+  ...
+# Subtest: welcome THEN_LINE
+    # Subtest: one kid, no friend code: $160 a month from Feb 15, about $20 a practice
+    ok 1 - one kid, no friend code: $160 a month from Feb 15, about $20 a practice
+      ---
+      duration_ms: 0.44625
+      type: 'test'
+      ...
+    # Subtest: siblings, no friend code: the family's monthly total
+    ok 2 - siblings, no friend code: the family's monthly total
+      ---
+      duration_ms: 0.091042
+      type: 'test'
+      ...
+    # Subtest: one kid through a friend's code: February free, then $160 on Mar 15 and Apr 15
+    ok 3 - one kid through a friend's code: February free, then $160 on Mar 15 and Apr 15
+      ---
+      duration_ms: 0.2
+      type: 'test'
+      ...
+    # Subtest: siblings through a friend's code: the plain family line, less the friend's credit
+    ok 4 - siblings through a friend's code: the plain family line, less the friend's credit
+      ---
+      duration_ms: 0.501792
+      type: 'test'
+      ...
+    # Subtest: F11: a returning family adding one kid gets the sibling monthly this order adds
+    ok 5 - F11: a returning family adding one kid gets the sibling monthly this order adds
+      ---
+      duration_ms: 0.053417
+      type: 'test'
+      ...
+    # Subtest: F11: a returning family adding two or three kids
+    ok 6 - F11: a returning family adding two or three kids
+      ---
+      duration_ms: 0.039333
+      type: 'test'
+      ...
+    # Subtest: F11: a returning family's order through a friend's code keeps the credit tail
+    ok 7 - F11: a returning family's order through a friend's code keeps the credit tail
+      ---
+      duration_ms: 0.07575
+      type: 'test'
+      ...
+    # Subtest: F11: the default (an order with a first kid) is unchanged
+    ok 8 - F11: the default (an order with a first kid) is unchanged
+      ---
+      duration_ms: 0.081875
+      type: 'test'
+      ...
+    1..8
+ok 120 - welcome THEN_LINE
+  ---
+  duration_ms: 2.113625
+  type: 'suite'
+  ...
+# Subtest: welcome discount ladder (PR-8)
+    # Subtest: one kid: no label; more than one kid: labelled for the first kid
+    ok 1 - one kid: no label; more than one kid: labelled for the first kid
+      ---
+      duration_ms: 0.161583
+      type: 'test'
+      ...
+    # Subtest: the template carries the label slot inside the save band
+    ok 2 - the template carries the label slot inside the save band
+      ---
+      duration_ms: 0.395084
+      type: 'test'
+      ...
+    1..2
+ok 121 - welcome discount ladder (PR-8)
+  ---
+  duration_ms: 0.63525
+  type: 'suite'
+  ...
+# Subtest: F1 welcome states
+    # Subtest: paid renders the paid page with the share link, no refresh
+    ok 1 - paid renders the paid page with the share link, no refresh
+      ---
+      duration_ms: 182.810875
+      type: 'test'
+      ...
+    # Subtest: partially_refunded renders the paid page; hero names the kid still in, receipt unchanged
+    ok 2 - partially_refunded renders the paid page; hero names the kid still in, receipt unchanged
+      ---
+      duration_ms: 3.058083
+      type: 'test'
+      ...
+    # Subtest: F10: partially_refunded two-kid order prices and labels only the kid still in
+    ok 3 - F10: partially_refunded two-kid order prices and labels only the kid still in
+      ---
+      duration_ms: 1.508167
+      type: 'test'
+      ...
+    # Subtest: paid two-kid order keeps the family line and the ladder label
+    ok 4 - paid two-kid order keeps the family line and the ladder label
+      ---
+      duration_ms: 3.350541
+      type: 'test'
+      ...
+    # Subtest: F11: a returning family adding a sibling ($80 today) sees the $128 sibling monthly, not $160
+    ok 5 - F11: a returning family adding a sibling ($80 today) sees the $128 sibling monthly, not $160
+      ---
+      duration_ms: 1.489542
+      type: 'test'
+      ...
+    # Subtest: F11: a returning family adding two siblings; a new family's first-plus-sibling order is unchanged
+    ok 6 - F11: a returning family adding two siblings; a new family's first-plus-sibling order is unchanged
+      ---
+      duration_ms: 1.250917
+      type: 'test'
+      ...
+    # Subtest: invited two-kid order: family line less the friend's credit
+    ok 7 - invited two-kid order: family line less the friend's credit
+      ---
+      duration_ms: 0.681375
+      type: 'test'
+      ...
+    # Subtest: refunded renders a static refunded page: no refresh, no share, no paid script, no Stripe check
+    ok 8 - refunded renders a static refunded page: no refresh, no share, no paid script, no Stripe check
+      ---
+      duration_ms: 1.783333
+      type: 'test'
+      ...
+    # Subtest: canceled renders the didn't-go-through page with try again and text links
+    ok 9 - canceled renders the didn't-go-through page with try again and text links
+      ---
+      duration_ms: 1.062958
+      type: 'test'
+      ...
+    # Subtest: failed renders the same didn't-go-through page
+    ok 10 - failed renders the same didn't-go-through page
+      ---
+      duration_ms: 2.224625
+      type: 'test'
+      ...
+    # Subtest: pending refreshes and counts renders; after the cap it stops refreshing
+    ok 11 - pending refreshes and counts renders; after the cap it stops refreshing
+      ---
+      duration_ms: 4.653959
+      type: 'test'
+      ...
+    # Subtest: a settled order clears a leftover pending counter
+    ok 12 - a settled order clears a leftover pending counter
+      ---
+      duration_ms: 2.526042
+      type: 'test'
+      ...
+    # Subtest: analytics: paid on ekuzo.gg renders GA4, the Pixel, Clarity, the Purchase script and the kid-name masks
+    ok 13 - analytics: paid on ekuzo.gg renders GA4, the Pixel, Clarity, the Purchase script and the kid-name masks
+      ---
+      duration_ms: 4.200333
+      type: 'test'
+      ...
+    # Subtest: analytics: paid on the branch deploy renders only the QA gate
+    ok 14 - analytics: paid on the branch deploy renders only the QA gate
+      ---
+      duration_ms: 1.881125
+      type: 'test'
+      ...
+    # Subtest: analytics: the paid script fires one Pixel Purchase (order id, server value) and one tap timing
+    ok 15 - analytics: the paid script fires one Pixel Purchase (order id, server value) and one tap timing
+      ---
+      duration_ms: 4.272041
+      type: 'test'
+      ...
+    1..15
+ok 122 - F1 welcome states
+  ---
+  duration_ms: 218.083375
+  type: 'suite'
+  ...
+1..122
+# tests 717
+# suites 126
+# pass 716
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 6802.290962
+TAP version 13
+# Subtest: session windows without input entries
+ok 1 - session windows without input entries
+  ---
+  duration_ms: 0.5135
+  type: 'test'
+  ...
+# Subtest: session windows with input entries
+ok 2 - session windows with input entries
+  ---
+  duration_ms: 0.098209
+  type: 'test'
+  ...
+# Subtest: summary: windowed and total, with and without input
+ok 3 - summary: windowed and total, with and without input
+  ---
+  duration_ms: 0.096417
+  type: 'test'
+  ...
+# Subtest: unsorted input and empty input
+ok 4 - unsorted input and empty input
+  ---
+  duration_ms: 0.084917
+  type: 'test'
+  ...
+# Subtest: the pre-fix shape: one 0.79 shift is a 0.79 window
+ok 5 - the pre-fix shape: one 0.79 shift is a 0.79 window
+  ---
+  duration_ms: 0.043375
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 89.864166
+
+real	0m7.049s
+user	0m8.545s
+sys	0m1.112s
