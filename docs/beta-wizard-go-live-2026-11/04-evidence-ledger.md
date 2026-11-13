@@ -23,5 +23,5 @@ Author is Fable unless noted. "Sentry" rows are independent: `evidence/sentry/re
 | N4 | cookie only on beta paths | unit betaSource; Sentry C1 to C3; deploy curl | pass | Sentry |
 | N5, N7 | no event or post on load, autofill, scroll, Back, failure; previews write nothing; QA beacons blocked | Sentry 2b, N7, OFF (offender set empty) | pass | Sentry |
 | M1 to M6 | measurement rows | Sentry 2e and J1 dumps; `docs/season-one-tracking.md` section. GA4 DebugView and Meta Test Events were not opened: the pages' saves are ekuzo.gg only, so the live check after release is the proof (row L-3) | pass on the harness; live row pending | Sentry |
-| Suite | full test suite | 660 tests: 655 pass, 1 skipped (same skip as on main), field-vitals 5 of 5; tsc clean; next build clean | pass | Fable at 7a37e34; Sentry at a386ee5 (653) |
+| Suite | full test suite | 656 tests: 655 pass, 1 skipped (same skip as on main), field-vitals 5 of 5; tsc clean; next build clean | pass | Fable at 7a37e34; Sentry at a386ee5 (653) |
 | Migration | 0006 | test branch 19:42 and 20:07; production 20:24 read back (cleanup ledger C8) | pass | Fable |
