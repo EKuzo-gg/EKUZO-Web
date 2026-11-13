@@ -36,7 +36,7 @@ Written 20:54 CT, 2026-11-12, by Fable, after the last gate.
 
 ## Before the pick-up email goes live (Monday)
 
-- Suppress or exclude the nine `team+s1test-1112-*` Klaviyo profiles (cleanup ledger C9). **This needs your go.**
+- Done 21:16 CT: the nine `team+s1test-1112-*` Klaviyo profiles are suppressed. **Open:** five of them were already suppressed a second after creation by something other than this build (ledger C9a); check the first real beta profile before switching on any flow.
 - Flow: trigger "Beta Wizard Progress"; wait; skip if "Beta Wizard Completed" since the flow started, or in the last 14 days; one send per profile per week. Step name is `beta_wizard_next_step`, player name `beta_player_name` (escape it).
 - Decide the restart link for another device (`03-decision-log.md` D12).
 
