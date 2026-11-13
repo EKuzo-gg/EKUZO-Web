@@ -4,6 +4,16 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-13: beta follow-through outside the repo (Klaviyo flows in draft, team sheet, GA4 dimension)
+
+- **For Aaron: no code changed in the 11-12 evening and 11-13 sessions.** Everything below lives in Klaviyo, Google, Netlify and GA4. Every write outside the repo is a row in `docs/beta-wizard-go-live-2026-11/06-cleanup-ledger.md` (C10 onward); ids and gotchas are in `docs/klaviyo-config.md` § Free beta flows (2026-11).
+- **Three Klaviyo flows, built in the Klaviyo UI and read back through the API.** W9LxM9 "Beta - We got it (wizard completed)" is Live, but a profile filter on one test address (since deleted) means no family can enter it, and its team alert to Karlin and Jamie is Draft. Wf7Nam "Beta - Pick up (wizard started, not finished)" and WjRNvd "Beta - Wizard link reminder (joined on beta page, no sign-up)" are Draft. A draft flow sends nothing.
+- **Klaviyo does send to wizard families.** On 11-13 W9LxM9 emailed a never-subscribed, unsuppressed test profile twice, about three to seven minutes after the event.
+- **Five library templates** (VFaZSx, QQh9Cj, XnXD3C, UXwGUw, W8VxNn) hold the first versions: "We got it" and the first reminder use your lab copy; the pick-up and reminders two and three are draft copy. The flow emails hold their own copies, so copy is edited in the flow's editor, not in the library. The "We got it" reply-by date reads "Monday, November 23" as a placeholder for Karlin.
+- **"Beta players" sheet** (Season 01 PM folder in the shared drive, tab `beta-players`): since the production deploy on 11-13 at 09:39 CT every finished wizard writes one row. Karlin has access. Env value and columns: `docs/season-one-tracking.md`, free beta section.
+- **GA4:** the event-scoped custom dimension "Wizard step" (parameter `step`) is registered, so `beta_wizard_step` can be broken out by step. The funnel exploration is not built yet.
+- **Yours:** the email copy (Karlin and you read it), and the items from Jamie's 11-13 walk-through of the wizard (age 8, adding your own superpower, where the reaction game sits), which are in the KB handoff `system/loops/handoffs/2026-11-12-beta-emails-and-restart.md`. The hold-out filters on the live Day 0 and Day 4 flows are not applied; they are your flows and wait for Jamie's go.
+
 ## Jamie's Claude, 2026-11-12 (21:30): beta FAQs rewritten on Jamie's go ("we need to make the updates")
 
 - **For Aaron: two of your files changed on `main`, FAQ block only.** `app/season1/beta/launch/launch.html` and `app/season1/beta/beta.html`: the seven `<details>` items became eleven, same markup, nothing else on the page touched. `dev` still has your seven, so pull `main` into your working copy of these two files before your next edit to them, or the merge will conflict on those lines.
