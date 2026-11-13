@@ -1,4 +1,4 @@
-import { describe, it, before, after, beforeEach } from "node:test";
+import { describe, it, before, after, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
 
 /**
@@ -27,6 +27,8 @@ let counters = new Map<string, number>();
 let progress = new Map<string, { session: string; stage: number; next: string; answers: Record<string, unknown>; completed: boolean; completedAt: number }>();
 let clock = 0; // fake "now" in ms for the two-minute straggler window
 
+// A real uuid: the restart link signs the row id, and a non-uuid id builds no link.
+const PROGRESS_ROW_ID = "3f2b8c1e-5a47-4d9e-9b0a-7c6d5e4f3a21";
 const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
 const result = (fields: string[], rows: unknown[][]) => ({ command: "SELECT", rowCount: rows.length, fields: fields.map((name) => ({ name, dataTypeID: 25 })), rows });
 const bump = (k: unknown) => { const n = (counters.get(String(k)) ?? 0) + 1; counters.set(String(k), n); return n; };
@@ -66,7 +68,7 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
         ? { session, stage: Math.max(old!.stage, Number(stage)), next: old!.stage > Number(stage) ? old!.next : next, answers: { ...old!.answers, ...JSON.parse(answers) }, completed: old!.completed, completedAt: old!.completedAt }
         : { session, stage: Number(stage), next, answers: JSON.parse(answers), completed: false, completedAt: 0 };
       progress.set(email, row);
-      return json({ command: "INSERT", rowCount: 1, fields: [["id", 25], ["stage", 23], ["completed", 16]].map(([name, dataTypeID]) => ({ name, dataTypeID })), rows: [["pr-1", String(row.stage), row.completed ? "t" : "f"]] });
+      return json({ command: "INSERT", rowCount: 1, fields: [["id", 25], ["stage", 23], ["completed", 16]].map(([name, dataTypeID]) => ({ name, dataTypeID })), rows: [[PROGRESS_ROW_ID, String(row.stage), row.completed ? "t" : "f"]] });
     }
     if (/^with a as/.test(q.query.trim())) {
       const a = bump(q.params[0]);
@@ -422,6 +424,78 @@ describe("POST /api/season-one step beta-wizard", () => {
       const r = await post(wiz(), { "x-nf-client-connection-ip": "203.0.113.31" });
       assert.equal(r.status, 200);
       for (const s of ["s1test", "Maya", "example.com"]) assert.equal(logs.join("\n").includes(s), false, s);
+    });
+  });
+
+  describe("restart link on the Klaviyo profile (docs/beta-restart-link-2026-11)", () => {
+    const prog = (stage: number, extra: Record<string, unknown> = {}) => ({
+      step: "beta-progress", email: "Team+S1Test-Unit@example.com", sessionId: "sess-0001", stage, answers: {},
+      attribution: {}, page: "/season1/beta/start", ekz_hp: "", ...extra,
+    });
+    const envSaved: Record<string, string | undefined> = {};
+    const setEnv = (o: Record<string, string | undefined>) => {
+      for (const [k, v] of Object.entries(o)) { if (!(k in envSaved)) envSaved[k] = process.env[k]; if (v === undefined) delete process.env[k]; else process.env[k] = v; }
+    };
+    afterEach(() => { for (const [k, v] of Object.entries(envSaved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; } for (const k of Object.keys(envSaved)) delete envSaved[k]; });
+    const profile = (i = 0) => events()[i].profile.data.attributes.properties;
+
+    it("production context: beta_restart_link is https://ekuzo.gg/season1/beta/r/<token> and verifies against the row and session", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: "production" });
+      await post(prog(0));
+      const link = profile().beta_restart_link as string;
+      assert.match(link, /^https:\/\/ekuzo\.gg\/season1\/beta\/r\/[A-Za-z0-9_-]{65}$/);
+      const { verifyRestartToken, parseRestartToken } = await import("../betaRestart");
+      const token = link.split("/").pop()!;
+      assert.equal(parseRestartToken(token), PROGRESS_ROW_ID);
+      assert.equal(verifyRestartToken(token, PROGRESS_ROW_ID, "sess-0001"), true);
+      assert.equal(verifyRestartToken(token, PROGRESS_ROW_ID, "sess-0002"), false);
+      // The same token goes on every step of one run, and nothing readable is in the event itself.
+      await post(prog(1));
+      assert.equal(profile(1).beta_restart_link, link);
+      assert.equal(JSON.stringify(events().map((e) => e.properties)).includes(token), false);
+    });
+    it("a deploy preview uses its own Netlify address", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: undefined, CONTEXT: "deploy-preview", DEPLOY_PRIME_URL: "https://deploy-preview-9--ekuzo.netlify.app" });
+      await post(prog(0));
+      assert.match(profile().beta_restart_link as string, /^https:\/\/deploy-preview-9--ekuzo\.netlify\.app\/season1\/beta\/r\//);
+    });
+    it("no known origin: the property is left out and the event still goes", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: undefined, CONTEXT: undefined, DEPLOY_PRIME_URL: "https://evil.example" });
+      const r = await post(prog(0));
+      assert.equal(r.status, 200); assert.equal(events().length, 1);
+      assert.equal("beta_restart_link" in profile(), false);
+    });
+    it("a failing link build leaves the property out and still sends the event", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: "production", S1_REF_SECRET: undefined, S1_STRIPE_WEBHOOK_SECRET: undefined });
+      const r = await post(prog(1));
+      assert.deepEqual(r, { status: 200, body: { ok: true } });
+      assert.equal(events().length, 1);
+      assert.equal(profile().beta_wizard_stage, "expectations");
+      assert.equal("beta_restart_link" in profile(), false);
+    });
+    it("a row that is already finished (a late straggler) sends no event and so no link", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: "production" });
+      await post(prog(2)); await post(wiz());
+      klaviyo = [];
+      await post(prog(1));
+      assert.equal(events().length, 0);
+    });
+    it("without a database row there is no link", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: "production" });
+      dbMode = "throw";
+      await post(prog(0));
+      assert.equal("beta_restart_link" in profile(), false);
+    });
+    it("a completed wizard sets the plain wizard address, never an empty value", async () => {
+      setEnv({ S1_DEPLOY_CONTEXT: "production" });
+      await post(prog(0)); await post(wiz());
+      const done = events().find((e) => e.metric.data.attributes.name === "Beta Wizard Completed")!;
+      assert.equal(done.profile.data.attributes.properties.beta_restart_link, "https://ekuzo.gg/season1/beta/start");
+      setEnv({ S1_DEPLOY_CONTEXT: undefined, CONTEXT: undefined });
+      klaviyo = [];
+      await post(wiz({ eventId: "evt-beta-0002", playerName: "Leo" }));
+      const again = events().find((e) => e.metric.data.attributes.name === "Beta Wizard Completed")!;
+      assert.equal(again.profile.data.attributes.properties.beta_restart_link, "https://ekuzo.gg/season1/beta/start");
     });
   });
 

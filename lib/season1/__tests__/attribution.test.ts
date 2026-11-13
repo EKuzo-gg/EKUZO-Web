@@ -73,6 +73,18 @@ describe("ekuzo_lc: buildLastClick (middleware logic)", () => {
     assert.equal(cleanPath("not-a-path"), "/");
   });
 
+  it("path: /season1/beta/r/<token> is stored as /season1/beta/r/ (the restart token never leaves)", () => {
+    const token = "A".repeat(65);
+    assert.equal(cleanPath(`/season1/beta/r/${token}`), "/season1/beta/r/");
+    assert.equal(cleanPath("/SEASON1/beta/R/abc"), "/season1/beta/r/");
+    assert.equal(cleanPath("/season1/beta/r"), "/season1/beta/r/");
+    assert.equal(buildLastClick(qs("utm_source=klaviyo"), `/season1/beta/r/${token}`, NOW)!.lc.path, "/season1/beta/r/");
+    assert.doesNotMatch(buildLastClick(qs("utm_source=klaviyo"), `/season1/beta/r/${token}`, NOW)!.value, /AAAAAAAA/);
+    // Neighbours are untouched.
+    assert.equal(cleanPath("/season1/beta/start"), "/season1/beta/start");
+    assert.equal(cleanPath("/season1/beta/rx/abc"), "/season1/beta/rx/abc");
+  });
+
   it("the encoded cookie stays within 2048 bytes; utm_term is dropped first", () => {
     const fat = "%22".repeat(UTM_MAX); // 160 quotes: 6 encoded bytes each once JSON-escaped
     const p = UTM_KEYS_ALL.map((k) => `${k}=${fat}`).join("&") + `&fbclid=${"F".repeat(CLICK_ID_MAX)}&gclid=${"G".repeat(CLICK_ID_MAX)}`;
@@ -167,6 +179,14 @@ describe("middleware: ekuzo_lc written before the first-touch early return (C17)
     const res = run("https://ekuzo.gg/season1?ad=D019&utm_source=meta&utm_medium=paid_social&utm_campaign=season1&utm_content=d19-a");
     assert.equal(JSON.parse(res.cookies.get(LC_COOKIE)!.value).ad, "d19");
     assert.equal(run("https://ekuzo.gg/season1?ad=zz").cookies.get(LC_COOKIE), undefined);
+  });
+
+  it("restart link path: ekuzo_lc keeps /season1/beta/r/, the token never reaches the cookie", () => {
+    const token = "Zq".repeat(32) + "Z";
+    const res = run(`https://ekuzo.gg/season1/beta/r/${token}?utm_source=klaviyo&utm_medium=email`);
+    const v = res.cookies.get(LC_COOKIE)!.value;
+    assert.equal(JSON.parse(v).path, "/season1/beta/r/");
+    assert.equal(v.includes("ZqZq"), false);
   });
 
   it("crew path: stored as /crew/, the code never in the cookie", () => {

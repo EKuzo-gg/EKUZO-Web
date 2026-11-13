@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { cleanTz, parseGeoHeader, text } from "@/lib/seasonOneGeo";
 import { ORIGIN_VALUES, type Origin } from "@/lib/originClassifier";
 import { LC_COOKIE, parseLastClick } from "./attribution";
+import { restartLinkBase, restartToken } from "./betaRestart";
 import { foldName, getSql } from "./db";
 import { OFFER } from "./offer";
 import { hit, hitPair } from "./ratelimit";
@@ -280,6 +281,8 @@ async function saveToKlaviyo(email: string, a: BetaAnswers, source: string, attr
                 properties: {
                   beta_wizard: "yes", beta_completed_at: now, beta_source: source,
                   beta_wizard_stage: "done", beta_wizard_next_step: "done",
+                  // Never empty: an empty value would leave the old restart link on the profile. The plain wizard address is the safe fallback.
+                  beta_restart_link: "https://ekuzo.gg/season1/beta/start",
                   beta_player_name: a.playerName, beta_player_age: a.playerAge,
                   beta_time_zone: a.timeZone, beta_tz: a.tz, beta_times: a.times,
                 },
@@ -494,14 +497,14 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
   const pageRaw = text(body.page, 120);
   const page = /^\/season1\/beta(\/[a-z0-9/-]*)?$/.test(pageRaw) ? pageRaw : "/season1/beta/start";
 
-  const db = (async (): Promise<{ completed: boolean } | null> => {
+  const db = (async (): Promise<{ completed: boolean; id: string } | null> => {
     if (!process.env.DATABASE_URL) return null;
     try {
       const rows = (await withTimeout(
         DB_TIMEOUT_MS,
         getSql().query(PROGRESS_SQL, [email, sessionId, stage, st.next, JSON.stringify(answers), source, JSON.stringify(attribution), page, keyIsLive()]) as Promise<Record<string, unknown>[]>,
       )) as Record<string, unknown>[];
-      return rows[0] ? { completed: rows[0].completed === true } : null;
+      return rows[0] ? { completed: rows[0].completed === true, id: String(rows[0].id ?? "") } : null;
     } catch (err) {
       console.error("Beta progress database save failed:", dbErrCode(err));
       return null;
@@ -511,6 +514,18 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
   const row = await db;
   // The wizard for this run is already sent (this post arrived late): the profile says done and stays that way.
   if (row?.completed) return ok();
+  // The parent's restart link (docs/beta-restart-link-2026-11): its own try/catch, so a failure here only leaves the
+  // property out and the progress event below still goes. Not built without a row (no database) or a known origin.
+  let restartLink = "";
+  if (row) {
+    try {
+      const base = restartLinkBase();
+      const token = base ? restartToken(row.id, sessionId) : null;
+      if (base && token) restartLink = `${base}/season1/beta/r/${token}`;
+    } catch {
+      restartLink = "";
+    }
+  }
   await (async () => {
     try {
       const now = new Date().toISOString();
@@ -518,6 +533,7 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
       if (stage === 0) profile.beta_wizard_started_at = now;
       if (answers.playerName) profile.beta_player_name = answers.playerName;
       if (answers.playerAge) profile.beta_player_age = answers.playerAge;
+      if (restartLink) profile.beta_restart_link = restartLink;
       const r = await klaviyo("events", {
         data: {
           type: "event",

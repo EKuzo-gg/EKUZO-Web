@@ -81,10 +81,14 @@ function cleanValue(key: LcKey, v: unknown): string | null {
   return (CLICK_ID_KEYS as readonly string[]).includes(key) ? cleanClickId(v) : cleanUtm(v);
 }
 
-/** Landing path: `/crew/<code>` becomes `/crew/` (the code never leaves); printable ASCII, 128 max. */
+/**
+ * Landing path: `/crew/<code>` becomes `/crew/` and `/season1/beta/r/<token>` becomes `/season1/beta/r/` (the code or
+ * token never leaves); printable ASCII, 128 max.
+ */
 export function cleanPath(p: unknown): string {
   if (typeof p !== "string" || !p.startsWith("/")) return "/";
   if (/^\/crew(\/|$)/i.test(p)) return "/crew/";
+  if (/^\/season1\/beta\/r(\/|$)/i.test(p)) return "/season1/beta/r/";
   const s = p.replace(/[^\x21-\x7e]/g, "").slice(0, PATH_MAX);
   return s || "/";
 }
