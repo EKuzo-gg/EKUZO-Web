@@ -219,3 +219,7 @@ integration of the same day had no conflicts (dev already held the first merge).
 **Netlify builds branch deploys only for `dev` and `season1-commit`.** Pushing any other branch (for example `preview/beta-wizard` on 2026-11-12) produces no deploy, and the five minutes spent waiting for one are lost. To get a deploy preview of another branch, open a draft pull request from it. The preview goes away with the PR: the PR closes itself when `main` receives its commits (PR #5 and PR #6 did on 2026-11-12), so a preview does not outlive the release it was for.
 
 **Production Neon deletes (test rows).** Run them in the Neon SQL Editor on the production branch, and only with Jamie's yes in the session. Run a read-only count of the affected tables before the delete and again after it, so the result (`DELETE n, n, n`) can be checked against the totals: a family, its player and its progress row for one test address read `DELETE 1, 1, 1`. Do several tables in one transaction, as on 2026-11-12 (`DELETE 2, 2, 2`). Record each delete, with its counts, in the build's cleanup ledger.
+
+### Rolling back the beta restart link
+
+A revert of the restart link must keep `app/season1/beta/r/[token]/route.ts` and `lib/season1/betaRestartCookies.ts` (the route imports nothing else). Links already written to Klaviyo profiles keep arriving; without the route they land on the site's 404 page, which loads GA4, Pixel and Clarity with the token in the address.

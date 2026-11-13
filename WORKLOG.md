@@ -4,6 +4,16 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-13 (15:35): beta restart link and time zone table (Build Loop, docs/beta-restart-link-2026-11/)
+
+- **For Aaron: `start.html`, `launch.html` and `beta.html` are not edited.** Everything below runs from the script the wizard's route handler appends (`lib/season1/betaProgressScript.ts`), the same arrangement as the drop-off capture.
+- Restart link. A parent who stops part-way gets a signed link on their Klaviyo profile (`beta_restart_link`, for the pick-up email). `/season1/beta/r/<token>` redirects to the clean wizard address; the wizard then shows a small panel above the first screen ("Welcome back. Your answers are saved under j•••@gmail.com. Pick up where you left off?" with "Start fresh" and "Pick up where I left off") and loads the saved answers only on the tap. A finished family sees your end screen. A dead link shows one line: "That link has run out. Start below and your answers will save as you go." **The three strings are drafts and yours to change** (search the script for "Welcome back"); the panel uses your `lede`, `acts`, `btn` and `btn back` classes.
+- Time zone. The page's guess is now corrected from a table of US and Canadian zones (Toronto reads Eastern, Vancouver Pacific, Boise Mountain). Halifax, St. John's and Puerto Rico read "Outside the US" because the select has no Atlantic option: adding one is your call, and the table and the server's `TIME_ZONES` follow.
+- New files: `lib/season1/betaRestart.ts`, `betaRestartCookies.ts`, `app/season1/beta/r/[token]/route.ts`, `app/api/season1-beta/restore/route.ts`. Small additive changes: `betaWizard.ts` (one profile property on the progress and completion saves), `attribution.ts` (`cleanPath` collapses the link path), `next.config.mjs` (inlines the preview address). `/api/season-one`, middleware and the Stripe webhook are untouched.
+- Rollback rule: a revert must keep `app/season1/beta/r/[token]/route.ts` and `betaRestartCookies.ts`, or links already in Klaviyo profiles land on a 404 page that loads tags with the token in the address.
+- Checks: 734 tests (733 pass, 1 skipped as on main), Sentry browser and attack pass, a real round trip on deploy preview 7. Detail and the one defect found on the preview: `docs/beta-restart-link-2026-11/`.
+- `dev` does not have these commits yet.
+
 ## Jamie's Claude, 2026-11-13: beta follow-through outside the repo (Klaviyo flows in draft, team sheet, GA4 dimension)
 
 - **For Aaron: no code changed in the 11-12 evening and 11-13 sessions.** Everything below lives in Klaviyo, Google, Netlify and GA4. Every write outside the repo is a row in `docs/beta-wizard-go-live-2026-11/06-cleanup-ledger.md` (C10 onward); ids and gotchas are in `docs/klaviyo-config.md` § Free beta flows (2026-11).
