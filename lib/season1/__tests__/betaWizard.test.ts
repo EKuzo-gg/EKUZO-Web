@@ -294,6 +294,18 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.match(String(both.body.error), /text our founder at \(832\) 271-0150/);
   });
 
+  it("D9: zero-width and text-direction marks are stripped from free text", async () => {
+    await post(wiz({ funFact: "abc\u202Edef\u200B", note: "x\u2066y\u2069\uFEFF" }));
+    assert.equal(events()[0].properties.fun_fact, "abc def"); assert.equal(events()[0].properties.note, "x y");
+  });
+
+  it("D8: a database failure logs a code or name, never the driver's message", async () => {
+    dbMode = "throw";
+    await post(wiz());
+    const line = logs.find((l) => /Beta wizard database save failed/.test(l))!;
+    assert.equal(/db down/.test(line), false); assert.match(line, /failed: [A-Za-z0-9_]+$/);
+  });
+
   it("B13: Sheets row only when S1_BETA_SHEETS_WEBHOOK_URL is set", async () => {
     await post(wiz());
     assert.equal(sheets.length, 0);

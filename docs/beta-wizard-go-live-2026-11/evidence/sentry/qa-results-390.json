@@ -50,7 +50,7 @@
  {
   "id": "390.J1.cardPreview",
   "what": "player card preview shows name and age",
-  "ok": false,
+  "ok": true,
   "detail": "ZEPHYRINEAge 13 |  | Games on | Console, Tablet | Team sports | Plays, not their thing | Superpower | Quick thinker + Natural leader | Fun fact | Knows every flag zq7"
  },
  {
@@ -63,13 +63,13 @@
   "id": "390.J1.sid",
   "what": "one sessionId across progress posts (non-empty, >8 chars)",
   "ok": true,
-  "detail": "1794536438339-7nzl5853eb"
+  "detail": "1794536702825-eeeag4pnfy"
  },
  {
   "id": "390.J1.final",
   "what": "final payload has eventId, name, age number, tz, times",
   "ok": true,
-  "detail": "{\"step\":\"beta-wizard\",\"email\":\"...\",\"eventId\":\"1794536441174-yhyy87kwg2\",\"playerName\":\"Zephyrine\",\"playerAge\":13,\"playsOn\":[\"Console\",\"Tablet\"],\"teamSports\":\"Plays, not their thing\",\"superpowers\":[\"Quick thinker\",\"Natural leader\"],\"funFact\":\"Knows every flag zq7\",\"expectations\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"timeZone\":\"Central\",\"tz\":\"America/Chicago\",\"times\":[\"Weekday evenings\",\"Weekend afternoons\"],\"note\":\"NOTE-mx42-private\",\"attribution\":{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\"},\"page\":\"/season1/beta/start\",\"ekz_hp\":\"\"}"
+  "detail": "{\"step\":\"beta-wizard\",\"email\":\"...\",\"eventId\":\"1794536705710-6lmyu96odo\",\"playerName\":\"Zephyrine\",\"playerAge\":13,\"playsOn\":[\"Console\",\"Tablet\"],\"teamSports\":\"Plays, not their thing\",\"superpowers\":[\"Quick thinker\",\"Natural leader\"],\"funFact\":\"Knows every flag zq7\",\"expectations\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"timeZone\":\"Central\",\"tz\":\"America/Chicago\",\"times\":[\"Weekday evenings\",\"Weekend afternoons\"],\"note\":\"NOTE-mx42-private\",\"attribution\":{\"utm_source\":\"\",\"utm_medium\":\"\",\"utm_campaign\":\"\",\"utm_content\":\"\",\"utm_term\":\"\"},\"page\":\"/season1/beta/start\",\"ekz_hp\":\"\"}"
  },
  {
   "id": "390.J1.finalEventNotSid",
@@ -180,10 +180,22 @@
   "detail": "email,expectations"
  },
  {
-  "id": "390.mustnot.harness",
-  "what": "mustnot ran without a harness error",
-  "ok": false,
-  "detail": "page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#email')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"email\" required=\"\" name=\"email\" type=\"email\" inputmode=\"email\" autocorrect=\"off\" spellcheck=\"false\" enterkeyhint=\"next\" autocomplete=\"email\" autocapitalize=\"off\"/>\u001b[22m\n\u001b[2m    - fill(\"enter@example.com\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    60 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:216:12\n    at async scenario (/home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:112:71)\n    at async file:///home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:175:1"
+  "id": "390.b.enter",
+  "what": "Enter in the email field advances once and posts stage 0 once",
+  "ok": true,
+  "detail": "idx=1 posts+=1"
+ },
+ {
+  "id": "390.b.noComplete",
+  "what": "no beta_wizard_complete without a final save",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "id": "390.b.badEmail",
+  "what": "invalid email: no post, stays on screen 0",
+  "ok": true,
+  "detail": ""
  },
  {
   "id": "390.c400.what",
@@ -213,7 +225,7 @@
   "id": "390.c400.sameEventId",
   "what": "400: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536480105-fy0rwdpknr\",\"1794536480105-fy0rwdpknr\"]"
+  "detail": "[\"1794536717208-buvzneraur\",\"1794536717208-buvzneraur\"]"
  },
  {
   "id": "390.c400.completeOnce",
@@ -255,7 +267,7 @@
   "id": "390.c429.sameEventId",
   "what": "429: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536484237-kcrwg8pnav\",\"1794536484237-kcrwg8pnav\"]"
+  "detail": "[\"1794536721293-bnk8mlrvxg\",\"1794536721293-bnk8mlrvxg\"]"
  },
  {
   "id": "390.c429.completeOnce",
@@ -297,7 +309,7 @@
   "id": "390.c502.sameEventId",
   "what": "502: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536488270-xpbpn5nucv\",\"1794536488270-xpbpn5nucv\"]"
+  "detail": "[\"1794536725327-zsd7671nuh\",\"1794536725327-zsd7671nuh\"]"
  },
  {
   "id": "390.c502.completeOnce",
@@ -339,7 +351,7 @@
   "id": "390.cabort.sameEventId",
   "what": "abort: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536492385-db1zzxa2d\",\"1794536492385-db1zzxa2d\"]"
+  "detail": "[\"1794536729531-nlv4zu37ag\",\"1794536729531-nlv4zu37ag\"]"
  },
  {
   "id": "390.cabort.completeOnce",
@@ -381,7 +393,7 @@
   "id": "390.chtml504.sameEventId",
   "what": "html504: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536496370-6ywknspyqj\",\"1794536496370-6ywknspyqj\"]"
+  "detail": "[\"1794536733557-dd4dr3xerv\",\"1794536733557-dd4dr3xerv\"]"
  },
  {
   "id": "390.chtml504.completeOnce",
@@ -423,7 +435,7 @@
   "id": "390.c500json.sameEventId",
   "what": "500json: retry reuses the same eventId",
   "ok": true,
-  "detail": "[\"1794536500383-5drg4122cm\",\"1794536500383-5drg4122cm\"]"
+  "detail": "[\"1794536737807-spnyvy2s9d\",\"1794536737807-spnyvy2s9d\"]"
  },
  {
   "id": "390.c500json.completeOnce",
@@ -447,7 +459,7 @@
   "id": "390.cFR.newEventId",
   "what": "reload then resend uses a NEW eventId (server cannot dedupe a lost-response retry across reload)",
   "ok": true,
-  "detail": "1794536504385-z08ljxyttb vs 1794536505932-gbm8ky94rb"
+  "detail": "1794536741841-yvv0vnn6il vs 1794536743422-2wmspn2cn8"
  },
  {
   "id": "390.cFR.note",
@@ -465,7 +477,7 @@
   "id": "390.d.R0",
   "what": "reload on screen 1 with email typed, not continued",
   "ok": null,
-  "detail": "{\"idx\":0,\"email\":\"\",\"ls\":\"{\\\"v\\\":1,\\\"at\\\":1794536512420,\\\"sid\\\":\\\"1794536511878-46x33vjs7w\\\",\\\"stage\\\":-1,\\\"a\\\":{\\\"email\\\":\\\"sentry+390@example.com\\\",\\\"playerName\\\":\\\"\\\",\\\"playerAge\\\":null,\\\"playsOn\\\":[],\\\"teamSports\\\":\\\"\\\",\\\"superpowers\\\":[],\\\"funFact\\\":\\\"\\\",\\\"expectations\\\":[],\\\"timeZone\\\":\\\"Central\\\",\\\"times\\\":[],\\\"note\\\":\\\"\\\"},\\\"g\\\":[]}\"}"
+  "detail": "{\"idx\":0,\"email\":\"\",\"ls\":\"{\\\"v\\\":1,\\\"at\\\":1794536749995,\\\"sid\\\":\\\"1794536749453-r7v0kf48v7\\\",\\\"stage\\\":-1,\\\"a\\\":{\\\"email\\\":\\\"sentry+390@example.com\\\",\\\"playerName\\\":\\\"\\\",\\\"playerAge\\\":null,\\\"playsOn\\\":[],\\\"teamSports\\\":\\\"\\\",\\\"superpowers\\\":[],\\\"funFact\\\":\\\"\\\",\\\"expectations\\\":[],\\\"timeZone\\\":\\\"Central\\\",\\\"times\\\":[],\\\"note\\\":\\\"\\\"},\\\"g\\\":[]}\"}"
  },
  {
   "id": "390.d.R0",
@@ -480,10 +492,64 @@
   "detail": "{\"idx\":1,\"vow\":[\"No toxicity\",\"Positive mindset\"],\"email\":\"sentry+390@example.com\"}"
  },
  {
-  "id": "390.restart.harness",
-  "what": "restart ran without a harness error",
-  "ok": false,
-  "detail": "page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#pname')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"pname\" type=\"text\" required=\"\" name=\"pname\" autocomplete=\"off\" autocapitalize=\"words\"/>\u001b[22m\n\u001b[2m    - fill(\"Zephyrine\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    60 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at doPlayer (/home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:89:11)\n    at /home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:302:9\n    at async scenario (/home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:112:71)\n    at async file:///home/claude/ekuzo-web/docs/beta-wizard-go-live-2026-11/evidence/sentry/qa.mjs:288:1"
+  "id": "390.d.R2",
+  "what": "screen 3 reload: reopens on player card; every field + preview restored",
+  "ok": true,
+  "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"Zephyrine\",\"age\":\"13\",\"plays\":[\"Console\",\"Tablet\"],\"sports\":[\"Plays, not their thing\"],\"power\":[\"Quick thinker\",\"Natural leader\"],\"fact\":\"Knows every flag zq7\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Central\",\"times\":[],\"note\":\"\",\"pc\":\"ZEPHYRINEAge 13\\n\\nGames on\\nConsole, Tablet\\nTeam sports\\nPlays, not their thing\\nSuperpower\\nQuick thinker + Natural leader\\nFun fact\\nKnows every flag zq7\"}"
+ },
+ {
+  "id": "390.d.R3",
+  "what": "screen 4 reload: reopens on availability; times, note, tz (changed from device Central to Pacific) restored",
+  "ok": true,
+  "detail": "{\"idx\":3,\"times\":[\"Weekday evenings\",\"Weekend afternoons\"],\"tz\":\"Pacific\",\"note\":\"NOTE-mx42-private\",\"devDefaultWas\":\"Central\"}"
+ },
+ {
+  "id": "390.d.R3back",
+  "what": "Back from restored availability: player card still filled with preview",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "id": "390.d.complete",
+  "what": "restored run completes: end screen",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "id": "390.d.sameSid",
+  "what": "one sessionId across reloads in the same run",
+  "ok": true,
+  "detail": "1794536749453-r7v0kf48v7"
+ },
+ {
+  "id": "390.d.finalTz",
+  "what": "final payload carries Pacific + device IANA tz America/Chicago",
+  "ok": true,
+  "detail": "Pacific America/Chicago"
+ },
+ {
+  "id": "390.d.restorePosts",
+  "what": "progress posts incl. restore re-posts",
+  "ok": null,
+  "detail": "[0,0,1,1,2,2,2]"
+ },
+ {
+  "id": "390.d.fresh",
+  "what": "after completing, a new visit starts fresh (screen 1, empty form)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "id": "390.d.twoKids",
+  "what": "second kid: NEW sessionId and NEW eventId, own name; complete fires again (2 total)",
+  "ok": true,
+  "detail": "sid 1794536749453-r7v0kf48v7 -> 1794536756710-dsbypk32hq; ev 1794536755854-94jarb7yvp -> 1794536758997-2phg6xyr4s"
+ },
+ {
+  "id": "390.d.twoKids.ga",
+  "what": "GA events across both runs (dl is per ctx)",
+  "ok": null,
+  "detail": "[\"beta_wizard_step\",\"beta_wizard_resume\",\"beta_wizard_step\",\"beta_wizard_resume\",\"beta_wizard_step\",\"beta_wizard_resume\",\"beta_wizard_complete\",\"beta_wizard_step\",\"beta_wizard_step\",\"beta_wizard_step\",\"beta_wizard_complete\"]"
  },
  {
   "id": "390.d.corruptJson.open",
@@ -494,8 +560,8 @@
  {
   "id": "390.d.corruptJson.noerr",
   "what": "corruptJson: no page errors",
-  "ok": false,
-  "detail": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+  "ok": true,
+  "detail": ""
  },
  {
   "id": "390.d.corruptJson.xss",
@@ -921,7 +987,7 @@
   "id": "390.e.hosts",
   "what": "third-party hosts the page tried to reach (all aborted)",
   "ok": null,
-  "detail": "{\"fonts.googleapis.com\":36,\"www.googletagmanager.com\":33,\"connect.facebook.net\":33,\"www.clarity.ms\":33}"
+  "detail": "{\"fonts.googleapis.com\":42,\"www.googletagmanager.com\":39,\"connect.facebook.net\":39,\"www.clarity.ms\":39}"
  },
  {
   "id": "390.e.collect",
@@ -938,8 +1004,8 @@
  {
   "id": "390.f.pageerrors",
   "what": "no uncaught page errors in any scenario",
-  "ok": false,
-  "detail": "ls-corruptJson: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+  "ok": true,
+  "detail": ""
  },
  {
   "id": "390.f.consoleAll",
@@ -950,7 +1016,7 @@
  {
   "id": "390.offender",
   "what": "hosts that actually got a response from the network: only local ekuzo.gg (127.0.0.1)",
-  "ok": false,
-  "detail": "ip:undefined,dev--ekuzo.netlify.app"
+  "ok": true,
+  "detail": ""
  }
 ]

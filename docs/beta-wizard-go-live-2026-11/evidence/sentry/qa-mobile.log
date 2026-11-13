@@ -10,8 +10,8 @@ PASS 390.J1.launchNoPost launch load posts nothing
 PASS 390.J1.url wizard URL has no query string / kid data :: http://ekuzo.gg:3100/season1/beta/start
 PASS 390.J1.cardPreview player card preview shows name and age :: ZEPHYRINEAge 13 |  | Games on | Console, Tablet | Team sports | Plays, not their thing | Superpower | Quick thinker + Natural leader | Fun fact | Knows every flag zq7
 PASS 390.J1.order posts in order: progress 0,1,2 then beta-wizard :: ["beta-progress:0","beta-progress:1","beta-progress:2","beta-wizard"]
-PASS 390.J1.sid one sessionId across progress posts (non-empty, >8 chars) :: 1794536601707-7tz46kiexz
-PASS 390.J1.final final payload has eventId, name, age number, tz, times :: {"step":"beta-wizard","email":"...","eventId":"1794536604414-zj8dl18gc","playerName":"Zephyrine","playerAge":13,"playsOn":["Console","Tablet"],"teamSports":"Plays, not their thing","superpowers":["Quick thinker","Natural leader"],"funFact":"Knows every flag zq7","expectations":["No toxicity","Positive mindset","Winning attitude"],"timeZone":"Central","tz":"America/Chicago","times":["Weekday evenin
+PASS 390.J1.sid one sessionId across progress posts (non-empty, >8 chars) :: 1794536702825-eeeag4pnfy
+PASS 390.J1.final final payload has eventId, name, age number, tz, times :: {"step":"beta-wizard","email":"...","eventId":"1794536705710-6lmyu96odo","playerName":"Zephyrine","playerAge":13,"playsOn":["Console","Tablet"],"teamSports":"Plays, not their thing","superpowers":["Quick thinker","Natural leader"],"funFact":"Knows every flag zq7","expectations":["No toxicity","Positive mindset","Winning attitude"],"timeZone":"Central","tz":"America/Chicago","times":["Weekday eveni
 PASS 390.J1.finalEventNotSid final eventId differs from sessionId
 PASS 390.J1.progressAnswersGrow progress answers grow by stage (0: email only; 2: name+age) :: [{"email":"sentry+390@example.com","playerName":"","playerAge":null,"playsOn":[],"teamSports":"","superpowers":[],"funFact":"","expectations":[],"timeZone":"Central","times":[],"note":""},{"email":"sentry+390@example.com","playerName":"","playerAge":null,"playsOn":[],"teamSports":"","superpowers":[],"funFact":"","expectations":["No toxicity","Positive mindset","Winning attitude"],"timeZone":"Centr
 INFO 390.J1.progressNote progress posts carry note? (answers at stage 2) :: false
@@ -39,7 +39,7 @@ INFO 390.c400.what what the parent sees on 400 :: {"shown":true,"msg":"Pick at l
 PASS 390.c400.stay 400: stays on availability, error shown, button usable again :: {"shown":true,"msg":"Pick at least one time.","btn":{"t":"Send it","d":false}}
 PASS 390.c400.noComplete 400: no beta_wizard_complete
 PASS 390.c400.lsKept 400: answers still in localStorage
-PASS 390.c400.sameEventId 400: retry reuses the same eventId :: ["1794536615900-3w58kplge8","1794536615900-3w58kplge8"]
+PASS 390.c400.sameEventId 400: retry reuses the same eventId :: ["1794536717208-buvzneraur","1794536717208-buvzneraur"]
 PASS 390.c400.completeOnce 400: complete fires once, after the successful retry; end screen shown
 PASS 390.c400.errCleared 400: error hidden on end screen
 --- fail429
@@ -47,7 +47,7 @@ INFO 390.c429.what what the parent sees on 429 :: {"shown":true,"msg":"We couldn
 PASS 390.c429.stay 429: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that just now. Text our founder at (832) 271-0150 and we’ll add your player by hand.","btn":{"t":"Send it","d":false}}
 PASS 390.c429.noComplete 429: no beta_wizard_complete
 PASS 390.c429.lsKept 429: answers still in localStorage
-PASS 390.c429.sameEventId 429: retry reuses the same eventId :: ["1794536619865-84zo465isl","1794536619865-84zo465isl"]
+PASS 390.c429.sameEventId 429: retry reuses the same eventId :: ["1794536721293-bnk8mlrvxg","1794536721293-bnk8mlrvxg"]
 PASS 390.c429.completeOnce 429: complete fires once, after the successful retry; end screen shown
 PASS 390.c429.errCleared 429: error hidden on end screen
 --- fail502
@@ -55,7 +55,7 @@ INFO 390.c502.what what the parent sees on 502 :: {"shown":true,"msg":"We couldn
 PASS 390.c502.stay 502: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that. Please try again, or text our founder at (832) 271-0150.","btn":{"t":"Send it","d":false}}
 PASS 390.c502.noComplete 502: no beta_wizard_complete
 PASS 390.c502.lsKept 502: answers still in localStorage
-PASS 390.c502.sameEventId 502: retry reuses the same eventId :: ["1794536623831-dyz4e5iz2f","1794536623831-dyz4e5iz2f"]
+PASS 390.c502.sameEventId 502: retry reuses the same eventId :: ["1794536725327-zsd7671nuh","1794536725327-zsd7671nuh"]
 PASS 390.c502.completeOnce 502: complete fires once, after the successful retry; end screen shown
 PASS 390.c502.errCleared 502: error hidden on end screen
 --- failabort
@@ -63,7 +63,7 @@ INFO 390.cabort.what what the parent sees on abort :: {"shown":true,"msg":"That 
 PASS 390.cabort.stay abort: stays on availability, error shown, button usable again :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false}}
 PASS 390.cabort.noComplete abort: no beta_wizard_complete
 PASS 390.cabort.lsKept abort: answers still in localStorage
-PASS 390.cabort.sameEventId abort: retry reuses the same eventId :: ["1794536627930-0p39cnkfva","1794536627930-0p39cnkfva"]
+PASS 390.cabort.sameEventId abort: retry reuses the same eventId :: ["1794536729531-nlv4zu37ag","1794536729531-nlv4zu37ag"]
 PASS 390.cabort.completeOnce abort: complete fires once, after the successful retry; end screen shown
 PASS 390.cabort.errCleared abort: error hidden on end screen
 --- failhtml504
@@ -71,7 +71,7 @@ INFO 390.chtml504.what what the parent sees on html504 :: {"shown":true,"msg":"T
 PASS 390.chtml504.stay html504: stays on availability, error shown, button usable again :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false}}
 PASS 390.chtml504.noComplete html504: no beta_wizard_complete
 PASS 390.chtml504.lsKept html504: answers still in localStorage
-PASS 390.chtml504.sameEventId html504: retry reuses the same eventId :: ["1794536631949-j1252y9b9f","1794536631949-j1252y9b9f"]
+PASS 390.chtml504.sameEventId html504: retry reuses the same eventId :: ["1794536733557-dd4dr3xerv","1794536733557-dd4dr3xerv"]
 PASS 390.chtml504.completeOnce html504: complete fires once, after the successful retry; end screen shown
 PASS 390.chtml504.errCleared html504: error hidden on end screen
 --- fail500json
@@ -79,15 +79,121 @@ INFO 390.c500json.what what the parent sees on 500json :: {"shown":true,"msg":"W
 PASS 390.c500json.stay 500json: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that. Please try again.","btn":{"t":"Send it","d":false}}
 PASS 390.c500json.noComplete 500json: no beta_wizard_complete
 PASS 390.c500json.lsKept 500json: answers still in localStorage
-PASS 390.c500json.sameEventId 500json: retry reuses the same eventId :: ["1794536635928-8h1h90ajxd","1794536635928-8h1h90ajxd"]
+PASS 390.c500json.sameEventId 500json: retry reuses the same eventId :: ["1794536737807-spnyvy2s9d","1794536737807-spnyvy2s9d"]
 PASS 390.c500json.completeOnce 500json: complete fires once, after the successful retry; end screen shown
 PASS 390.c500json.errCleared 500json: error hidden on end screen
 --- failReload
 PASS 390.cFR.restore after a failed send + reload: reopens on availability with times, tz, note restored :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker","Natural leader"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Pacific","times":["Weekday evenings","Weekend afternoons"],"note":"NOTE-mx42-private","pc":"ZephyrineAge 13Games onConsole, TabletT
-PASS 390.cFR.newEventId reload then resend uses a NEW eventId (server cannot dedupe a lost-response retry across reload) :: 1794536639916-cyvhbtf1uq vs 1794536641493-ay5crrqrxu
+PASS 390.cFR.newEventId reload then resend uses a NEW eventId (server cannot dedupe a lost-response retry across reload) :: 1794536741841-yvv0vnn6il vs 1794536743422-2wmspn2cn8
 INFO 390.cFR.note J4 variant: response lost then page reload then tap again = second Klaviyo event (new unique_id), same player row, submissions+1 :: see defect list
 --- slowDouble
 PASS 390.slow.once double tap / click / Enter during an in-flight send: one final post, one complete :: finals=1 disabled=true
 --- restart
-INFO 390.d.R0 reload on screen 1 with email typed, not continued :: {"idx":0,"email":"","ls":"{\"v\":1,\"at\":1794536647945,\"sid\":\"1794536647415-3ur9wiu7ow\",\"stage\":-1,\"a\":{\"email\":\"sentry+390@example.com\",\"playerName\":\"\",\"playerAge\":null,\"playsOn\":[],\"teamSports\":\"\",\"superpowers\":[],\"funFact\":\"\",\"expectations\":[],\"timeZone\":\"Central\",\"times\":[],\"note\":\"\"},\"g\":[]}"}
+INFO 390.d.R0 reload on screen 1 with email typed, not continued :: {"idx":0,"email":"","ls":"{\"v\":1,\"at\":1794536749995,\"sid\":\"1794536749453-r7v0kf48v7\",\"stage\":-1,\"a\":{\"email\":\"sentry+390@example.com\",\"playerName\":\"\",\"playerAge\":null,\"playsOn\":[],\"teamSports\":\"\",\"superpowers\":[],\"funFact\":\"\",\"expectations\":[],\"timeZone\":\"Central\",\"times\":[],\"note\":\"\"},\"g\":[]}"}
 PASS 390.d.R0 screen 1 reload: reopens on screen 1 (typed email not restored, nothing captured yet) :: idx=0 email=""
+PASS 390.d.R1 screen 2 reload: reopens on screen 2 with email + 2 expectations restored :: {"idx":1,"vow":["No toxicity","Positive mindset"],"email":"sentry+390@example.com"}
+PASS 390.d.R2 screen 3 reload: reopens on player card; every field + preview restored :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker","Natural leader"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Central","times":[],"note":"","pc":"ZEPHYRINEAge 13\n\nGames on\nConsole, Tablet\nTeam sports\nPlays, not their thing\nSuperpower\n
+PASS 390.d.R3 screen 4 reload: reopens on availability; times, note, tz (changed from device Central to Pacific) restored :: {"idx":3,"times":["Weekday evenings","Weekend afternoons"],"tz":"Pacific","note":"NOTE-mx42-private","devDefaultWas":"Central"}
+PASS 390.d.R3back Back from restored availability: player card still filled with preview
+PASS 390.d.complete restored run completes: end screen
+PASS 390.d.sameSid one sessionId across reloads in the same run :: 1794536749453-r7v0kf48v7
+PASS 390.d.finalTz final payload carries Pacific + device IANA tz America/Chicago :: Pacific America/Chicago
+INFO 390.d.restorePosts progress posts incl. restore re-posts :: [0,0,1,1,2,2,2]
+PASS 390.d.fresh after completing, a new visit starts fresh (screen 1, empty form)
+PASS 390.d.twoKids second kid: NEW sessionId and NEW eventId, own name; complete fires again (2 total) :: sid 1794536749453-r7v0kf48v7 -> 1794536756710-dsbypk32hq; ev 1794536755854-94jarb7yvp -> 1794536758997-2phg6xyr4s
+INFO 390.d.twoKids.ga GA events across both runs (dl is per ctx) :: ["beta_wizard_step","beta_wizard_resume","beta_wizard_step","beta_wizard_resume","beta_wizard_step","beta_wizard_resume","beta_wizard_complete","beta_wizard_step","beta_wizard_step","beta_wizard_step","beta_wizard_complete"]
+--- ls-corruptJson
+PASS 390.d.corruptJson.open corruptJson: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.corruptJson.noerr corruptJson: no page errors
+PASS 390.d.corruptJson.xss corruptJson: no script ran from stored values
+PASS 390.d.corruptJson.finish corruptJson: parent can still finish the wizard :: idx=4
+--- ls-v2
+PASS 390.d.v2.open v2: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.v2.noerr v2: no page errors
+PASS 390.d.v2.xss v2: no script ran from stored values
+PASS 390.d.v2.finish v2: parent can still finish the wizard :: idx=4
+--- ls-old15d
+PASS 390.d.old15d.open old15d: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.old15d.noerr old15d: no page errors
+PASS 390.d.old15d.xss old15d: no script ran from stored values
+PASS 390.d.old15d.finish old15d: parent can still finish the wizard :: idx=4
+--- ls-fresh13d
+PASS 390.d.fresh13d.open fresh13d: page opens on screen index 3 :: idx=3 {"email":"r@example.com","pname":"Rae","age":"11","plays":["Console"],"sports":["Loves them"],"power":["Quick thinker"],"fact":"f","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Mou
+PASS 390.d.fresh13d.noerr fresh13d: no page errors
+PASS 390.d.fresh13d.xss fresh13d: no script ran from stored values
+PASS 390.d.fresh13d.finish fresh13d: parent can still finish the wizard :: idx=4
+--- ls-noAt
+PASS 390.d.noAt.open noAt: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.noAt.noerr noAt: no page errors
+PASS 390.d.noAt.xss noAt: no script ran from stored values
+PASS 390.d.noAt.finish noAt: parent can still finish the wizard :: idx=4
+--- ls-lsThrowsGetter
+PASS 390.d.lsThrowsGetter.open lsThrowsGetter: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.lsThrowsGetter.noerr lsThrowsGetter: no page errors
+PASS 390.d.lsThrowsGetter.xss lsThrowsGetter: no script ran from stored values
+PASS 390.d.lsThrowsGetter.finish lsThrowsGetter: parent can still finish the wizard :: idx=4
+--- ls-lsMethodsThrow
+PASS 390.d.lsMethodsThrow.open lsMethodsThrow: page opens on screen index 0 :: idx=0 {"email":"","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":"","pc":""}
+PASS 390.d.lsMethodsThrow.noerr lsMethodsThrow: no page errors
+PASS 390.d.lsMethodsThrow.xss lsMethodsThrow: no script ran from stored values
+PASS 390.d.lsMethodsThrow.finish lsMethodsThrow: parent can still finish the wizard :: idx=4
+--- ls-weirdTypes
+INFO 390.d.weirdTypes.open weirdTypes: opens on :: idx=0 {"email":"r@example.com","pname":"Rae","age":"","plays":[],"sports":[],"power":[],"fact":"f","vow":[],"tz":"Mountain","times":[],"note":"n","pc":""}
+PASS 390.d.weirdTypes.noerr weirdTypes: no page errors
+PASS 390.d.weirdTypes.xss weirdTypes: no script ran from stored values
+PASS 390.d.weirdTypes.finish weirdTypes: parent can still finish the wizard :: idx=4
+--- ls-stage99
+INFO 390.d.stage99.open stage99: opens on :: idx=1 {"email":"r@example.com","pname":"Rae","age":"11","plays":["Console"],"sports":["Loves them"],"power":["Quick thinker"],"fact":"f","vow":[],"tz":"Mountain","times":["Weekday evenings"],"note":"n","pc":"RaeAge 11Games onConsoleTeam sportsLoves themSuperpowerQuick thinkerFun factf"}
+PASS 390.d.stage99.noerr stage99: no page errors
+PASS 390.d.stage99.xss stage99: no script ran from stored values
+PASS 390.d.stage99.finish stage99: parent can still finish the wizard :: idx=4
+--- ls-stageStr
+INFO 390.d.stageStr.open stageStr: opens on :: idx=3 {"email":"r@example.com","pname":"Rae","age":"11","plays":["Console"],"sports":["Loves them"],"power":["Quick thinker"],"fact":"f","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Mountain","times":["Weekday evenings"],"note":"n","pc":"RaeAge 11Games onConsoleTeam sportsLoves themSu
+PASS 390.d.stageStr.noerr stageStr: no page errors
+PASS 390.d.stageStr.xss stageStr: no script ran from stored values
+PASS 390.d.stageStr.finish stageStr: parent can still finish the wizard :: idx=4
+--- ls-hostileSid
+PASS 390.d.hostileSid.open hostileSid: page opens on screen index 3 :: idx=3 {"email":"r@example.com","pname":"Rae","age":"11","plays":["Console"],"sports":["Loves them"],"power":["Quick thinker"],"fact":"f","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Mou
+PASS 390.d.hostileSid.noerr hostileSid: no page errors
+PASS 390.d.hostileSid.xss hostileSid: no script ran from stored values
+INFO 390.d.hostileSid.post sessionId as posted from a hostile stored value :: ["../x'); DROP TABLE s1_beta_progress;--\r\nX"]
+PASS 390.d.hostileSid.finish hostileSid: parent can still finish the wizard :: idx=4
+--- ls-xssName
+PASS 390.d.xssName.open xssName: page opens on screen index 3 :: idx=3 {"email":"r@example.com","pname":"<img src=x onerror=window.__xss=1>","age":"11","plays":["Console"],"sports":["Loves them"],"power":["Quick thinker"],"fact":"<script>window.__xss=2</script>","vow":["
+PASS 390.d.xssName.noerr xssName: no page errors
+PASS 390.d.xssName.xss xssName: no script ran from stored values
+PASS 390.d.xssName.finish xssName: parent can still finish the wizard :: idx=4
+--- nonlive-localhost
+PASS 390.N7.localhost.noapi localhost: whole wizard run posts nothing to /api/season-one :: 0
+PASS 390.N7.localhost.noevents localhost: no GA beta_wizard_* events
+INFO 390.N7.localhost.vendors localhost: vendor requests attempted (all aborted) :: []
+PASS 390.N7.localhost.end localhost: end screen still shows
+--- nonlive-qa-flag
+PASS 390.N7.qa-flag.noapi qa-flag: whole wizard run posts nothing to /api/season-one :: 0
+PASS 390.N7.qa-flag.noevents qa-flag: no GA beta_wizard_* events
+INFO 390.N7.qa-flag.vendors qa-flag: vendor requests attempted (all aborted) :: ["www.googletagmanager.com/gtag/js","connect.facebook.net/en_US/fbevents.js","www.clarity.ms/tag/wml8wll5ua"]
+PASS 390.N7.qa-flag.end qa-flag: end screen still shows
+--- nonlive-preview
+PASS 390.N7.preview.noapi preview: whole wizard run posts nothing to /api/season-one :: 0
+PASS 390.N7.preview.noevents preview: no GA beta_wizard_* events
+INFO 390.N7.preview.vendors preview: vendor requests attempted (all aborted) :: []
+PASS 390.N7.preview.end preview: end screen still shows
+--- protected
+PASS 390.h./season1?ad=d19.200 /season1?ad=d19: HTTP 200 :: 200
+PASS 390.h./season1?ad=d19.noWiz /season1?ad=d19: HTML and DOM do not contain ekz_beta_wiz
+PASS 390.h./season1?ad=d19.noBsrc /season1?ad=d19: no ekuzo_bsrc set
+PASS 390.h./season1/join.200 /season1/join: HTTP 200 :: 200
+PASS 390.h./season1/join.noWiz /season1/join: HTML and DOM do not contain ekz_beta_wiz
+PASS 390.h./season1/join.noBsrc /season1/join: no ekuzo_bsrc set
+PASS 390.h./season1/join/jersey.200 /season1/join/jersey: HTTP 200 :: 200
+PASS 390.h./season1/join/jersey.noWiz /season1/join/jersey: HTML and DOM do not contain ekz_beta_wiz
+PASS 390.h./season1/join/jersey.noBsrc /season1/join/jersey: no ekuzo_bsrc set
+PASS 390.h.noerr protected pages: no page errors
+PASS 390.e.requests no recorded third-party request URL/body contains the email, kid name, fun fact or note
+INFO 390.e.hosts third-party hosts the page tried to reach (all aborted) :: {"fonts.googleapis.com":42,"www.googletagmanager.com":39,"connect.facebook.net":39,"www.clarity.ms":39}
+INFO 390.e.collect analytics beacon requests actually attempted (vendor libs are aborted, so none expected) :: []
+PASS 390.f.console no console errors originating from our pages (third-party aborted noise excluded) :: []
+PASS 390.f.pageerrors no uncaught page errors in any scenario
+INFO 390.f.consoleAll all console messages (type/text/url host) :: ["error|Failed to load resource: net::ERR_FAILED|fonts.googleapis.com","error|Failed to load resource: net::ERR_FAILED|www.googletagmanager.com","error|Failed to load resource: net::ERR_FAILED|connect.facebook.net","error|Failed to load resource: net::ERR_FAILED|www.clarity.ms","error|Failed to load resource: the server responded with a status of 404 (Not Found)|ekuzo.gg:3100","error|Failed to load resource: the server responded with a status of 400 (Bad Request)|ekuzo.gg:3100","error|Failed to load resource: the server responded with a status of 429 (Too Many Requests)|ekuzo.gg:3100","error|F
+PASS 390.offender hosts that actually got a response from the network: only local ekuzo.gg (127.0.0.1)
+DONE 390: pass=145 fail=0

@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: Sentry adversarial: beta-wizard and beta-progress
+    # Subtest: proto-pollution style keys in the body and the answers do not pollute or crash
+    ok 1 - proto-pollution style keys in the body and the answers do not pollute or crash
+      ---
+      duration_ms: 322.529002
+      type: 'test'
+      ...
+    # Subtest: huge arrays and 1 MB strings: bounded, no 5xx, caps hold
+    ok 2 - huge arrays and 1 MB strings: bounded, no 5xx, caps hold
+      ---
+      duration_ms: 118.985109
+      type: 'test'
+      ...
+    # Subtest: non-object / invalid JSON bodies: 400, nothing written
+    ok 3 - non-object / invalid JSON bodies: 400, nothing written
+      ---
+      duration_ms: 12.203937
+      type: 'test'
+      ...
+    # Subtest: arrays / objects where strings are expected: no 5xx, nothing malformed written
+    ok 4 - arrays / objects where strings are expected: no 5xx, nothing malformed written
+      ---
+      duration_ms: 159.25945
+      type: 'test'
+      ...
+# SENTRY-INFO bidi override kept in note: true
+    # Subtest: unicode tricks in playerName and free text
+    ok 5 - unicode tricks in playerName and free text
+      ---
+      duration_ms: 28.540213
+      type: 'test'
+      ...
+    # Subtest: stage as float / string / negative / large / null for beta-progress
+    ok 6 - stage as float / string / negative / large / null for beta-progress
+      ---
+      duration_ms: 23.239446
+      type: 'test'
+      ...
+    # Subtest: sessionId and eventId with path, SQL and CRLF characters are reduced to [A-Za-z0-9-]{<=64}
+    ok 7 - sessionId and eventId with path, SQL and CRLF characters are reduced to [A-Za-z0-9-]{<=64}
+      ---
+      duration_ms: 7.154867
+      type: 'test'
+      ...
+# SENTRY-INFO markup in email local part accepted: 200 <script>x</script>@b.co
+    # Subtest: email with CRLF / control characters / spaces is refused
+    ok 8 - email with CRLF / control characters / spaces is refused
+      ---
+      duration_ms: 18.64313
+      type: 'test'
+      ...
+# SENTRY-INFO sources: {"bsrcScript":"direct","bsrcRaw":"direct","bsrc5k":"direct","bsrcCaps":"karlin-email","bsrcMd":"direct","lcJson":"direct","lcPct":"direct","lc5k":"direct","lcMd":"xhttp:evilb","origin":"direct"}
+    # Subtest: hostile cookies ekuzo_bsrc, ekuzo_lc, ekuzo_origin
+    ok 9 - hostile cookies ekuzo_bsrc, ekuzo_lc, ekuzo_origin
+      ---
+      duration_ms: 36.839287
+      type: 'test'
+      ...
+    # Subtest: a beta-progress post for an email that never completes writes only progress rows
+    ok 10 - a beta-progress post for an email that never completes writes only progress rows
+      ---
+      duration_ms: 4.736191
+      type: 'test'
+      ...
+    # Subtest: neither step calls Discord, Graph API, Sheets, subscribe, or the s1wl: claim (afterEach enforces)
+    ok 11 - neither step calls Discord, Graph API, Sheets, subscribe, or the s1wl: claim (afterEach enforces)
+      ---
+      duration_ms: 3.024855
+      type: 'test'
+      ...
+# SENTRY-INFO distinct log lines: ["Beta wizard dropped: honeypot field filled","Beta wizard limit check skipped: Server error (HTTP status 500): {\\"message\\":\\"db down\\"}","Beta wizard database save failed: Server error (HTTP status 500): {\\"message\\":\\"db down\\"}","Beta progress database save failed: Server error (HTTP status 500): {\\"message\\":\\"db down\\"}","Klaviyo beta wizard event failed: 500","Klaviyo beta progress event failed: 500","Klaviyo beta wizard event failed: Error","Klaviyo beta progress event failed: Error","Beta wizard rate limited","Beta progress dropped: rate limited"]
+    # Subtest: logs never carry the email, name, fun fact or note (ok, db down, klaviyo 500, klaviyo throw, both down, rate limit, honeypot)
+    ok 12 - logs never carry the email, name, fun fact or note (ok, db down, klaviyo 500, klaviyo throw, both down, rate limit, honeypot)
+      ---
+      duration_ms: 348.347869
+      type: 'test'
+      ...
+    # Subtest: IP limits: 30/h wizard -> 429, 150/h progress dropped with ok and no write
+    ok 13 - IP limits: 30/h wizard -> 429, 150/h progress dropped with ok and no write
+      ---
+      duration_ms: 303.370775
+      type: 'test'
+      ...
+# SENTRY-INFO profile after stranger progress post: {"beta_wizard_stage":"email","beta_wizard_next_step":"What the beta is","beta_wizard_updated_at":"2026-11-13T02:31:41.139Z","beta_source":"direct","beta_wizard_started_at":"2026-11-13T02:31:41.139Z"}
+    # Subtest: stranger posting progress for a completed family resets the row and the profile (design finding)
+    ok 14 - stranger posting progress for a completed family resets the row and the profile (design finding)
+      ---
+      duration_ms: 3.997545
+      type: 'test'
+      ...
+    # Subtest: progress is open to any email: a Klaviyo event + profile is written with no proof of ownership (design finding)
+    ok 15 - progress is open to any email: a Klaviyo event + profile is written with no proof of ownership (design finding)
+      ---
+      duration_ms: 1.662361
+      type: 'test'
+      ...
+    1..15
+ok 1 - Sentry adversarial: beta-wizard and beta-progress
+  ---
+  duration_ms: 1394.932052
+  type: 'suite'
+  ...
+1..1
+# tests 15
+# suites 1
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1605.710248

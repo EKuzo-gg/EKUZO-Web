@@ -1,0 +1,2099 @@
+{
+ "allOtherReqs": [
+  {
+   "scenario": "beta",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "beta",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "beta",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "beta",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "J1",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "mustnot",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "fail400",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "fail400",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "fail400",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "fail400",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "fail429",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "fail429",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "fail429",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "fail429",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "fail502",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "fail502",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "fail502",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "fail502",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "failabort",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "failabort",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "failabort",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "failabort",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "failhtml504",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "failhtml504",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "failhtml504",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "failhtml504",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "fail500json",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "fail500json",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "fail500json",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "fail500json",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "failReload",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "slowDouble",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "slowDouble",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "slowDouble",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "slowDouble",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "restart",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-corruptJson",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-corruptJson",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-corruptJson",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-corruptJson",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-v2",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-v2",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-v2",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-v2",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-old15d",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-old15d",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-old15d",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-old15d",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-fresh13d",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-fresh13d",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-fresh13d",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-fresh13d",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-noAt",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-noAt",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-noAt",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-noAt",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-lsThrowsGetter",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-lsThrowsGetter",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-lsThrowsGetter",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-lsThrowsGetter",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-lsMethodsThrow",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-lsMethodsThrow",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-lsMethodsThrow",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-lsMethodsThrow",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-weirdTypes",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-weirdTypes",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-weirdTypes",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-weirdTypes",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-stage99",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-stage99",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-stage99",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-stage99",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-stageStr",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-stageStr",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-stageStr",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-stageStr",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-hostileSid",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-hostileSid",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-hostileSid",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-hostileSid",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "ls-xssName",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "ls-xssName",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "ls-xssName",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "ls-xssName",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "nonlive-localhost",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "nonlive-qa-flag",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "nonlive-qa-flag",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "nonlive-qa-flag",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "nonlive-qa-flag",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "nonlive-preview",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@500;900&display=swap"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,900&family=Archivo:wght@400;600;700&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Dela+Gothic+One&family=Graduate&family=Hanken+Grotesk:wght@500;800&family=Rubik+Mono+One&family=Sora:wght@400;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@600;800&family=Unbounded:wght@400;800&display=swap"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "fonts.googleapis.com",
+   "path": "/css2",
+   "hasBody": false,
+   "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.googletagmanager.com",
+   "path": "/gtag/js",
+   "hasBody": false,
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-8LM45PX53W"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "connect.facebook.net",
+   "path": "/en_US/fbevents.js",
+   "hasBody": false,
+   "url": "https://connect.facebook.net/en_US/fbevents.js"
+  },
+  {
+   "scenario": "protected",
+   "method": "GET",
+   "host": "www.clarity.ms",
+   "path": "/tag/wml8wll5ua",
+   "hasBody": false,
+   "url": "https://www.clarity.ms/tag/wml8wll5ua"
+  }
+ ],
+ "allVendor": [
+  {
+   "scenario": "beta",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta?src=karlin-email",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "J1",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "mustnot",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "fail400",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "fail429",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "fail502",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "failabort",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "failhtml504",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "fail500json",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "failReload",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "failReload",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "slowDouble",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "restart",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "restart",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "restart",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "restart",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "restart",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-corruptJson",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-v2",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-old15d",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-fresh13d",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-noAt",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-lsThrowsGetter",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-lsMethodsThrow",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-weirdTypes",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-stage99",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-stageStr",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-hostileSid",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "ls-xssName",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [
+    [
+     "event",
+     "beta_wizard_complete"
+    ]
+   ],
+   "href": "http://ekuzo.gg:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "nonlive-localhost",
+   "fbq": [],
+   "clarity": [],
+   "href": "http://localhost:3100/season1/beta/start",
+   "cookie": "ekuzo_origin=direct",
+   "hasGtag": "undefined"
+  },
+  {
+   "scenario": "nonlive-qa-flag",
+   "fbq": [
+    [
+     "set",
+     "autoConfig",
+     false,
+     "1284038230557204"
+    ],
+    [
+     "init",
+     "1284038230557204"
+    ],
+    [
+     "track",
+     "PageView"
+    ]
+   ],
+   "clarity": [],
+   "href": "http://localhost:3100/season1/beta/start?s1qa=1",
+   "cookie": "ekuzo_origin=direct; s1_qa=1",
+   "hasGtag": "function"
+  },
+  {
+   "scenario": "nonlive-preview",
+   "fbq": [],
+   "clarity": [],
+   "href": "http://dev--ekuzo.netlify.app:3100/season1/beta/start",
+   "cookie": "",
+   "hasGtag": "undefined"
+  }
+ ]
+}

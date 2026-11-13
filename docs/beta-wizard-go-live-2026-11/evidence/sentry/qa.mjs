@@ -331,7 +331,7 @@ await scenario("restart", async () => {
   await tap(p.locator("#send")); await wait(p, 700);
   const second = L.api.slice(nBefore);
   const sid2 = second.find((b) => b.step === "beta-progress").sessionId; const fin2 = second.find((b) => b.step === "beta-wizard");
-  chk("d.twoKids", "second kid: NEW sessionId and NEW eventId, own name; complete fires again (2 total)", sid2 !== sid1[0] && fin2.eventId !== fin1.eventId && fin2.playerName === "Orlando" && evs(L, "beta_wizard_complete").length === 1 /* per last page */, `sid ${sid1[0]} -> ${sid2}; ev ${fin1.eventId} -> ${fin2.eventId}`);
+  chk("d.twoKids", "second kid: NEW sessionId and NEW eventId, own name; complete fires again (2 total)", sid2 !== sid1[0] && fin2.eventId !== fin1.eventId && fin2.playerName === "Orlando" && evs(L, "beta_wizard_complete").length === 2, `sid ${sid1[0]} -> ${sid2}; ev ${fin1.eventId} -> ${fin2.eventId}`);
   info("d.twoKids.ga", "GA events across both runs (dl is per ctx)", JSON.stringify(evNames(L)));
   await flush(L, p); await done(L);
 });

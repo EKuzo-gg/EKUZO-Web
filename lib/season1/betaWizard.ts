@@ -71,8 +71,8 @@ const FAIL = "We couldn’t save that. Please try again.";
 
 // A first name: letters, marks, digits, spaces and . ' ’ - only.
 const NAME_STRIP_RE = /[^\p{L}\p{M}\p{N} .'’-]/gu;
-// Free text a parent typed: control characters and the markup characters < > go; everything else stays as typed.
-const FREE_STRIP_RE = /[\u0000-\u001f\u007f-\u009f<>]/g;
+// Free text a parent typed: control characters, zero-width and text-direction marks and the markup characters < > go; everything else stays as typed.
+const FREE_STRIP_RE = /[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff<>]/g;
 const freeText = (v: unknown, max: number): string =>
   typeof v === "string" ? v.replace(FREE_STRIP_RE, " ").replace(/\s+/g, " ").trim().slice(0, max).replace(/[\uD800-\uDBFF]$/, "").trim() : "";
 const cleanEventId = (v: unknown) => (typeof v === "string" ? v.replace(/[^A-Za-z0-9-]/g, "").slice(0, 64) : "");
@@ -169,6 +169,13 @@ export function betaAttribution(req: NextRequest, utm: Record<string, string>): 
   return { source, attribution: { src: src || null, ...merged, first_touch: firstTouch, lc_path: lc && typeof lc.path === "string" ? lc.path : null } };
 }
 
+/** A database failure for the log: the Postgres code or the error name, never the driver message (it can echo a parameter). */
+function dbErrCode(err: unknown): string {
+  const e = err as { code?: unknown; name?: unknown } | null;
+  const c = e && typeof e.code === "string" ? e.code : e && typeof e.name === "string" ? e.name : "error";
+  return /^no answer in/.test(String((err as Error)?.message ?? "")) ? "timeout" : c.replace(/[^A-Za-z0-9_]/g, "").slice(0, 40);
+}
+
 type Saved = { familyId: string; playerId: string; newFamily: boolean; newPlayer: boolean; sameEvent: boolean; players: number };
 
 async function withTimeout<T>(ms: number, work: Promise<T>): Promise<T> {
@@ -237,7 +244,7 @@ async function saveToDb(email: string, a: BetaAnswers, source: string, attributi
       sameEvent: r.new_player !== true && r.prev_event_id === a.eventId, players: Number(r.players) || 1,
     };
   } catch (err) {
-    console.error("Beta wizard database save failed:", err instanceof Error ? err.message : err);
+    console.error("Beta wizard database save failed:", dbErrCode(err));
     return null;
   }
 }
@@ -492,7 +499,7 @@ export async function handleBetaProgress(req: NextRequest, body: Record<string, 
       )) as Record<string, unknown>[];
       return rows[0] ? { completed: rows[0].completed === true } : null;
     } catch (err) {
-      console.error("Beta progress database save failed:", err instanceof Error ? err.message : err);
+      console.error("Beta progress database save failed:", dbErrCode(err));
       return null;
     }
   })();

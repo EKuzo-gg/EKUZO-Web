@@ -2,7 +2,7 @@
   {
     "step": "beta-progress",
     "email": "sentry+390@example.com",
-    "sessionId": "1794536601707-7tz46kiexz",
+    "sessionId": "1794536702825-eeeag4pnfy",
     "stage": 0,
     "answers": {
       "email": "sentry+390@example.com",
@@ -30,7 +30,7 @@
   {
     "step": "beta-progress",
     "email": "sentry+390@example.com",
-    "sessionId": "1794536601707-7tz46kiexz",
+    "sessionId": "1794536702825-eeeag4pnfy",
     "stage": 1,
     "answers": {
       "email": "sentry+390@example.com",
@@ -62,7 +62,7 @@
   {
     "step": "beta-progress",
     "email": "sentry+390@example.com",
-    "sessionId": "1794536601707-7tz46kiexz",
+    "sessionId": "1794536702825-eeeag4pnfy",
     "stage": 2,
     "answers": {
       "email": "sentry+390@example.com",
@@ -100,7 +100,7 @@
   {
     "step": "beta-wizard",
     "email": "sentry+390@example.com",
-    "eventId": "1794536604414-zj8dl18gc",
+    "eventId": "1794536705710-6lmyu96odo",
     "playerName": "Zephyrine",
     "playerAge": 13,
     "playsOn": [
