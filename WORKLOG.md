@@ -4,6 +4,13 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-12 (21:30): beta FAQs rewritten on Jamie's go ("we need to make the updates")
+
+- **For Aaron: two of your files changed on `main`, FAQ block only.** `app/season1/beta/launch/launch.html` and `app/season1/beta/beta.html`: the seven `<details>` items became eleven, same markup, nothing else on the page touched. `dev` still has your seven, so pull `main` into your working copy of these two files before your next edit to them, or the merge will conflict on those lines.
+- What changed and why: "What happens after I join?" no longer promises practice times (you flagged it on the 11-12 call); new answers for when it runs (Nov 30 to Dec 13, four 90-minute practices), safety (the approved line), who sees a player's details, more than one kid, and the $100 refundable hold in "after the beta". "Kids ages 9+" kept as the official wording. Equipment now says what cannot run the game (Chromebooks, tablets, consoles) and that players need a mic.
+- **Now out of step with the FAQ, your and Karlin's call:** the "What your player needs" cards on both pages and in the wizard still read "Any laptop or Mac will work" and "A headset or headphones".
+- Source of truth for these answers: knowledge-base `company/knowledge/ekuzo-faq-canon.md` § Free beta (set by Jamie 11-12). Karlin's replies and the beta emails use the same answers.
+
 ## Jamie's Claude, 2026-11-12: free beta sign-up goes live (Build Loop, docs/beta-wizard-go-live-2026-11/)
 
 - **For Aaron: your three pages ship as they are on dev 69d2032** (`beta.html`, `launch.html`, `start.html`, byte for byte) with their route handlers. `/launch/b`, the labs and `beta-ad-landing.html` are not in the release.
