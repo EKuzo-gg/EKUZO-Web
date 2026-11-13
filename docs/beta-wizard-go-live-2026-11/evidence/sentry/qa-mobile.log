@@ -1,0 +1,93 @@
+--- beta
+PASS 390.beta.noapi beta page load posts nothing to /api/season-one :: []
+PASS 390.beta.noprogress beta page load fires no beta_wizard_* GA events
+PASS 390.beta.noerr beta page: no page errors
+PASS 390.beta.nolsKey beta page does not write ekz_beta_wiz
+--- J1
+INFO 390.J1.links launch page links to wizard :: [{"href":"/season1/beta/start","vis":true,"text":"Sign up"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"}]
+PASS 390.J1.launchLinks launch page has a visible button to /season1/beta/start with no query :: [{"href":"/season1/beta/start","vis":true,"text":"Sign up"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"},{"href":"/season1/beta/start","vis":true,"text":"Sign up your player"}]
+PASS 390.J1.launchNoPost launch load posts nothing
+PASS 390.J1.url wizard URL has no query string / kid data :: http://ekuzo.gg:3100/season1/beta/start
+PASS 390.J1.cardPreview player card preview shows name and age :: ZEPHYRINEAge 13 |  | Games on | Console, Tablet | Team sports | Plays, not their thing | Superpower | Quick thinker + Natural leader | Fun fact | Knows every flag zq7
+PASS 390.J1.order posts in order: progress 0,1,2 then beta-wizard :: ["beta-progress:0","beta-progress:1","beta-progress:2","beta-wizard"]
+PASS 390.J1.sid one sessionId across progress posts (non-empty, >8 chars) :: 1794536601707-7tz46kiexz
+PASS 390.J1.final final payload has eventId, name, age number, tz, times :: {"step":"beta-wizard","email":"...","eventId":"1794536604414-zj8dl18gc","playerName":"Zephyrine","playerAge":13,"playsOn":["Console","Tablet"],"teamSports":"Plays, not their thing","superpowers":["Quick thinker","Natural leader"],"funFact":"Knows every flag zq7","expectations":["No toxicity","Positive mindset","Winning attitude"],"timeZone":"Central","tz":"America/Chicago","times":["Weekday evenin
+PASS 390.J1.finalEventNotSid final eventId differs from sessionId
+PASS 390.J1.progressAnswersGrow progress answers grow by stage (0: email only; 2: name+age) :: [{"email":"sentry+390@example.com","playerName":"","playerAge":null,"playsOn":[],"teamSports":"","superpowers":[],"funFact":"","expectations":[],"timeZone":"Central","times":[],"note":""},{"email":"sentry+390@example.com","playerName":"","playerAge":null,"playsOn":[],"teamSports":"","superpowers":[],"funFact":"","expectations":["No toxicity","Positive mindset","Winning attitude"],"timeZone":"Centr
+INFO 390.J1.progressNote progress posts carry note? (answers at stage 2) :: false
+PASS 390.J1.lsCleared localStorage key removed after completion
+PASS 390.J1.doneText end state promises review, not a spot
+PASS 390.J1.ga GA: beta_wizard_step x3 (email, expectations, player_card), beta_wizard_complete x1, no resume :: beta_wizard_step,beta_wizard_step,beta_wizard_step,beta_wizard_complete
+INFO 390.J1.gaDump all GA dataLayer entries (event name + params) :: [["set",{"page_location":"http://ekuzo.gg:3100/season1/beta/launch?src=karlin-email"}],["config","G-8LM45PX53W",{}],["set",{"page_location":"http://ekuzo.gg:3100/season1/beta/start","page_referrer":"http://ekuzo.gg:3100"}],["config","G-8LM45PX53W",{}],["event","beta_wizard_step",{"step":"email"}],["event","beta_wizard_step",{"step":"expectations"}],["event","beta_wizard_step",{"step":"player_card"}],["event","beta_wizard_complete"]]
+INFO 390.J1.vendor fbq queue / clarity queue :: {"fbq":[["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]],"clarity":[["event","beta_wizard_complete"]]}
+PASS 390.J1.metaClean Meta: only init/PageView, no Lead/other event :: [["set","autoConfig",false,"1284038230557204"],["init","1284038230557204"],["track","PageView"]]
+PASS 390.J1.errors no page errors
+PASS 390.J1.console no console errors from our page :: []
+--- mustnot
+PASS 390.b.load load: no /api post, no beta_wizard_* event, no localStorage key
+PASS 390.b.autofill script-set values without Continue: no post, no step event, nothing stored :: 0
+PASS 390.b.scroll scroll/drag gesture starting on field or Continue: no post, still on screen 0 :: posts=0 idx=0
+PASS 390.b.continue Continue tap posts stage 0 exactly once :: [0]
+PASS 390.b.back Back x2 posts nothing :: before=2 after=2 idx=0
+INFO 390.b.refwd forward again after Back re-posts stage 0 (server keys on stage, idempotent) :: [0,1,0]
+PASS 390.b.gaOnce GA beta_wizard_step once per step despite Back/forward :: email,expectations
+PASS 390.b.enter Enter in the email field advances once and posts stage 0 once :: idx=1 posts+=1
+PASS 390.b.noComplete no beta_wizard_complete without a final save
+PASS 390.b.badEmail invalid email: no post, stays on screen 0
+--- fail400
+INFO 390.c400.what what the parent sees on 400 :: {"shown":true,"msg":"Pick at least one time.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.c400.stay 400: stays on availability, error shown, button usable again :: {"shown":true,"msg":"Pick at least one time.","btn":{"t":"Send it","d":false}}
+PASS 390.c400.noComplete 400: no beta_wizard_complete
+PASS 390.c400.lsKept 400: answers still in localStorage
+PASS 390.c400.sameEventId 400: retry reuses the same eventId :: ["1794536615900-3w58kplge8","1794536615900-3w58kplge8"]
+PASS 390.c400.completeOnce 400: complete fires once, after the successful retry; end screen shown
+PASS 390.c400.errCleared 400: error hidden on end screen
+--- fail429
+INFO 390.c429.what what the parent sees on 429 :: {"shown":true,"msg":"We couldn’t save that just now. Text our founder at (832) 271-0150 and we’ll add your player by hand.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.c429.stay 429: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that just now. Text our founder at (832) 271-0150 and we’ll add your player by hand.","btn":{"t":"Send it","d":false}}
+PASS 390.c429.noComplete 429: no beta_wizard_complete
+PASS 390.c429.lsKept 429: answers still in localStorage
+PASS 390.c429.sameEventId 429: retry reuses the same eventId :: ["1794536619865-84zo465isl","1794536619865-84zo465isl"]
+PASS 390.c429.completeOnce 429: complete fires once, after the successful retry; end screen shown
+PASS 390.c429.errCleared 429: error hidden on end screen
+--- fail502
+INFO 390.c502.what what the parent sees on 502 :: {"shown":true,"msg":"We couldn’t save that. Please try again, or text our founder at (832) 271-0150.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.c502.stay 502: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that. Please try again, or text our founder at (832) 271-0150.","btn":{"t":"Send it","d":false}}
+PASS 390.c502.noComplete 502: no beta_wizard_complete
+PASS 390.c502.lsKept 502: answers still in localStorage
+PASS 390.c502.sameEventId 502: retry reuses the same eventId :: ["1794536623831-dyz4e5iz2f","1794536623831-dyz4e5iz2f"]
+PASS 390.c502.completeOnce 502: complete fires once, after the successful retry; end screen shown
+PASS 390.c502.errCleared 502: error hidden on end screen
+--- failabort
+INFO 390.cabort.what what the parent sees on abort :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.cabort.stay abort: stays on availability, error shown, button usable again :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false}}
+PASS 390.cabort.noComplete abort: no beta_wizard_complete
+PASS 390.cabort.lsKept abort: answers still in localStorage
+PASS 390.cabort.sameEventId abort: retry reuses the same eventId :: ["1794536627930-0p39cnkfva","1794536627930-0p39cnkfva"]
+PASS 390.cabort.completeOnce abort: complete fires once, after the successful retry; end screen shown
+PASS 390.cabort.errCleared abort: error hidden on end screen
+--- failhtml504
+INFO 390.chtml504.what what the parent sees on html504 :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.chtml504.stay html504: stays on availability, error shown, button usable again :: {"shown":true,"msg":"That didn’t go through. Check your connection and try again.","btn":{"t":"Send it","d":false}}
+PASS 390.chtml504.noComplete html504: no beta_wizard_complete
+PASS 390.chtml504.lsKept html504: answers still in localStorage
+PASS 390.chtml504.sameEventId html504: retry reuses the same eventId :: ["1794536631949-j1252y9b9f","1794536631949-j1252y9b9f"]
+PASS 390.chtml504.completeOnce html504: complete fires once, after the successful retry; end screen shown
+PASS 390.chtml504.errCleared html504: error hidden on end screen
+--- fail500json
+INFO 390.c500json.what what the parent sees on 500json :: {"shown":true,"msg":"We couldn’t save that. Please try again.","btn":{"t":"Send it","d":false},"idx":3}
+PASS 390.c500json.stay 500json: stays on availability, error shown, button usable again :: {"shown":true,"msg":"We couldn’t save that. Please try again.","btn":{"t":"Send it","d":false}}
+PASS 390.c500json.noComplete 500json: no beta_wizard_complete
+PASS 390.c500json.lsKept 500json: answers still in localStorage
+PASS 390.c500json.sameEventId 500json: retry reuses the same eventId :: ["1794536635928-8h1h90ajxd","1794536635928-8h1h90ajxd"]
+PASS 390.c500json.completeOnce 500json: complete fires once, after the successful retry; end screen shown
+PASS 390.c500json.errCleared 500json: error hidden on end screen
+--- failReload
+PASS 390.cFR.restore after a failed send + reload: reopens on availability with times, tz, note restored :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker","Natural leader"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Pacific","times":["Weekday evenings","Weekend afternoons"],"note":"NOTE-mx42-private","pc":"ZephyrineAge 13Games onConsole, TabletT
+PASS 390.cFR.newEventId reload then resend uses a NEW eventId (server cannot dedupe a lost-response retry across reload) :: 1794536639916-cyvhbtf1uq vs 1794536641493-ay5crrqrxu
+INFO 390.cFR.note J4 variant: response lost then page reload then tap again = second Klaviyo event (new unique_id), same player row, submissions+1 :: see defect list
+--- slowDouble
+PASS 390.slow.once double tap / click / Enter during an in-flight send: one final post, one complete :: finals=1 disabled=true
+--- restart
+INFO 390.d.R0 reload on screen 1 with email typed, not continued :: {"idx":0,"email":"","ls":"{\"v\":1,\"at\":1794536647945,\"sid\":\"1794536647415-3ur9wiu7ow\",\"stage\":-1,\"a\":{\"email\":\"sentry+390@example.com\",\"playerName\":\"\",\"playerAge\":null,\"playsOn\":[],\"teamSports\":\"\",\"superpowers\":[],\"funFact\":\"\",\"expectations\":[],\"timeZone\":\"Central\",\"times\":[],\"note\":\"\"},\"g\":[]}"}
+PASS 390.d.R0 screen 1 reload: reopens on screen 1 (typed email not restored, nothing captured yet) :: idx=0 email=""

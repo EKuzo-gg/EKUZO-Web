@@ -1,0 +1,46 @@
+== /season1/beta/launch?src=karlin-email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_bsrc=karlin-email; Path=/; Expires=Sun, 13 Dec 2026 02:17:21 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/start?src=karlin-text
+HTTP/1.1 200 OK
+set-cookie: ekuzo_bsrc=karlin-text; Path=/; Expires=Sun, 13 Dec 2026 02:17:21 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta?src=x
+HTTP/1.1 200 OK
+set-cookie: ekuzo_bsrc=x; Path=/; Expires=Sun, 13 Dec 2026 02:17:21 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1?src=karlin-email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/join?src=karlin-email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /?src=karlin-email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:21 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/launch?src=BAD%20TAG
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/launch?src=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/launch?src=%3Cscript%3E
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/launch?src=KARLIN-Email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_bsrc=karlin-email; Path=/; Expires=Sun, 13 Dec 2026 02:17:22 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/betaX?src=karlin-email
+HTTP/1.1 404 Not Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== /season1/beta/../join?src=karlin-email
+HTTP/1.1 200 OK
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax
+== bot UA
+HTTP/1.1 200 OK
+== curl default UA
+HTTP/1.1 200 OK
+set-cookie: ekuzo_bsrc=karlin-email; Path=/; Expires=Sun, 13 Dec 2026 02:17:22 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 02:17:22 GMT; Max-Age=31536000; Secure; SameSite=lax

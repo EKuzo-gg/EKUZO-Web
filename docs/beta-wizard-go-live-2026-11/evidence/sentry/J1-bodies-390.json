@@ -1,0 +1,138 @@
+[
+  {
+    "step": "beta-progress",
+    "email": "sentry+390@example.com",
+    "sessionId": "1794536601707-7tz46kiexz",
+    "stage": 0,
+    "answers": {
+      "email": "sentry+390@example.com",
+      "playerName": "",
+      "playerAge": null,
+      "playsOn": [],
+      "teamSports": "",
+      "superpowers": [],
+      "funFact": "",
+      "expectations": [],
+      "timeZone": "Central",
+      "times": [],
+      "note": ""
+    },
+    "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": ""
+    },
+    "page": "/season1/beta/start",
+    "ekz_hp": ""
+  },
+  {
+    "step": "beta-progress",
+    "email": "sentry+390@example.com",
+    "sessionId": "1794536601707-7tz46kiexz",
+    "stage": 1,
+    "answers": {
+      "email": "sentry+390@example.com",
+      "playerName": "",
+      "playerAge": null,
+      "playsOn": [],
+      "teamSports": "",
+      "superpowers": [],
+      "funFact": "",
+      "expectations": [
+        "No toxicity",
+        "Positive mindset",
+        "Winning attitude"
+      ],
+      "timeZone": "Central",
+      "times": [],
+      "note": ""
+    },
+    "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": ""
+    },
+    "page": "/season1/beta/start",
+    "ekz_hp": ""
+  },
+  {
+    "step": "beta-progress",
+    "email": "sentry+390@example.com",
+    "sessionId": "1794536601707-7tz46kiexz",
+    "stage": 2,
+    "answers": {
+      "email": "sentry+390@example.com",
+      "playerName": "Zephyrine",
+      "playerAge": 13,
+      "playsOn": [
+        "Console",
+        "Tablet"
+      ],
+      "teamSports": "Plays, not their thing",
+      "superpowers": [
+        "Quick thinker",
+        "Natural leader"
+      ],
+      "funFact": "Knows every flag zq7",
+      "expectations": [
+        "No toxicity",
+        "Positive mindset",
+        "Winning attitude"
+      ],
+      "timeZone": "Central",
+      "times": [],
+      "note": ""
+    },
+    "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": ""
+    },
+    "page": "/season1/beta/start",
+    "ekz_hp": ""
+  },
+  {
+    "step": "beta-wizard",
+    "email": "sentry+390@example.com",
+    "eventId": "1794536604414-zj8dl18gc",
+    "playerName": "Zephyrine",
+    "playerAge": 13,
+    "playsOn": [
+      "Console",
+      "Tablet"
+    ],
+    "teamSports": "Plays, not their thing",
+    "superpowers": [
+      "Quick thinker",
+      "Natural leader"
+    ],
+    "funFact": "Knows every flag zq7",
+    "expectations": [
+      "No toxicity",
+      "Positive mindset",
+      "Winning attitude"
+    ],
+    "timeZone": "Central",
+    "tz": "America/Chicago",
+    "times": [
+      "Weekday evenings",
+      "Weekend afternoons"
+    ],
+    "note": "NOTE-mx42-private",
+    "attribution": {
+      "utm_source": "",
+      "utm_medium": "",
+      "utm_campaign": "",
+      "utm_content": "",
+      "utm_term": ""
+    },
+    "page": "/season1/beta/start",
+    "ekz_hp": ""
+  }
+]

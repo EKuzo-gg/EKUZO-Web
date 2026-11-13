@@ -39,7 +39,7 @@ Order: cross-site guard, email check, key check (all existing), then honeypot, v
 
 | # | Who | What | When |
 |---|---|---|---|
-| H1 | Jamie | Run migration 0006 on production (command in the review guide) | before the release to `main` |
+| H1 | Jamie | Run migration 0006 on production | **Done 20:24 CT**, by Fable in the Neon SQL Editor on Jamie's permission (ledger C8) |
 | H2 | Jamie | Sheets: create the "Beta players" sheet and its small script, set `S1_BETA_SHEETS_WEBHOOK_URL` | after tonight |
 | H3 | Jamie, Aaron | Monday: the confirmation flow on "Beta Wizard Completed"; confirm Klaviyo sends a metric flow to these profiles | Mon 11-16 |
 | H4 | Aaron | Proposed, not built: a "sign up another player" link on the end screen (P4); forward the query from launch to wizard (then the cookie can go) | his call |

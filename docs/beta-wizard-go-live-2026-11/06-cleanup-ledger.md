@@ -10,3 +10,4 @@
 | C5 | 20:16 | Neon TEST branch | 1 family, 1 player, 2 progress rows | team+s1test-1112-pv2@, pv3@ekuzo.gg | to remove at close |
 | C6 | 20:16 | Klaviyo (live account) | profiles 01M79B2NZPX4QM3C8BAH1DF4BZ and 01M79B33A4SEAXECZE65MHHQZP with their events | team+s1test-1112-pv2@, pv3@ekuzo.gg | to suppress at close (Jamie's go) |
 | C7 | 20:11 | GitHub | branch `preview/beta-wizard`, draft PR #5 (deploy preview only) | none | close the PR and delete the branch after the release |
+| C8 | 20:24 | Neon PRODUCTION branch (br-wild-sky-b4er6sym, database ekuzo) | migration 0006 run in the SQL Editor on Jamie's permission (20:19, "you have permission to open neon in browser and handle"; he signed in as team@ekuzo.gg). One transaction, lock_timeout 3 s: BEGIN, SET, CREATE x4, INSERT 1, COMMIT. Read back: tables s1_beta_families, s1_beta_players, s1_beta_progress; s1_migrations 0001 to 0006 | none | stays (H1 done) |
