@@ -1,0 +1,133 @@
+# BETA sign-up: handoff to Jamie
+
+Updated 2026-11-12, 2:50pm ET, by Aaron's Claude. Aaron picks this back up Nov 13.
+
+## Status in one line
+
+The pages are done and on `dev`. **One thing blocks sending the link to real parents: the sign-up route rejects the wizard's last step.** Everything else is ready to merge.
+
+## The link to send
+
+`https://ekuzo.gg/season1/beta/launch`
+
+This is the page for parents who replied yes to Karlin's email. It has no form. Every button opens the wizard at `/season1/beta/start`. Aaron has signed off on it as is.
+
+## Next steps, in order
+
+1. **Make the route accept the wizard.** In `app/api/season-one/route.ts`, handle `step: "beta-wizard"` (payload below). Today it returns 400, so a parent finishes all three steps and gets an error on "Send it".
+   - It must work for an email with **no earlier sign-up**. Reply-yes parents never used a form, so `stepAllowed()` would drop them. Treat the wizard as the sign-up: upsert the profile, subscribe to the list.
+   - Suggested Klaviyo event: `Beta Wizard Completed`, fields as event properties, plus `beta_*` profile properties for age, times and time zone.
+   - Optional: a Sheets row per player so the team can sort by availability.
+2. **Test one real submit** on a preview with the live key. Check the profile and event in Klaviyo.
+3. **Merge** `dev` to `season1-commit` to `main`.
+4. **Check live:** open `/season1/beta/launch`, click through, submit the wizard once with a test email, confirm it lands.
+5. **Send the link.** Karlin replies to the yes emails by hand with the launch link. Copy is in the Beta lab under "The emails" ("The wizard invite").
+
+Can wait until after the first parents are in:
+
+- The "After the wizard" confirmation email in Klaviyo (trigger: `Beta Wizard Completed`). Its `[date]` is not set yet. Until it exists, parents only see the on-screen "We'll review and email you either way".
+- The automated wizard invite for ad sign-ups from `/season1/beta`.
+- Final headline. Working version is "Free beta. Game with a pro coach." Karlin is deciding.
+
+## Do not share
+
+- `/season1/beta/launch/b` is Aaron's working copy (Option B). It will keep changing.
+- `/roadshow/beta-lab.html` is the internal lab.
+
+## What is built (Aaron's lane, on `dev`)
+
+| Piece | Address | File |
+|---|---|---|
+| BETA page, one email field | `/season1/beta` | `app/season1/beta/beta.html` |
+| Beta launch page, no form, buttons open the wizard | `/season1/beta/launch` | `app/season1/beta/launch/launch.html` |
+| Option B of the launch page. Aaron's working copy, **not for launch** | `/season1/beta/launch/b` | `app/season1/beta/launch/b/launch-b.html` |
+| Sign-up wizard | `/season1/beta/start` | `app/season1/beta/start/start.html` |
+| Flow, screens, email copy | `/roadshow/beta-lab.html` | `public/roadshow/beta-lab.html` |
+
+All three pages are static HTML served by a route handler, the same pattern as `/season1`. None touches `app/api`.
+
+## The flow
+
+1. **Beta ad** to `/season1/beta`. The parent joins with an email.
+2. **Karlin's email** to the 400+ Season 01 sign-ups. To join, they reply.
+3. Parents who reply yes get the **beta launch page**, `/season1/beta/launch`, from Karlin by hand. Page sign-ups get the **wizard invite** email with a link to `/season1/beta/start`.
+4. **Wizard:** email, then what the beta is and three expectations, the player card, availability.
+5. **Wizard confirmation** email. It promises a review and a reply, not a spot.
+6. We review availability and volume, then follow up with practice. How we confirm a player is still being decided.
+
+## What already saves
+
+`/season1/beta` posts to `POST /api/season-one` exactly as the ad landing does (`source: "ad-landing"`), so those parents already land in Klaviyo as "Season 01 Waitlist" and join list `XGTv2F`. To tell a beta sign-up apart:
+
+- `page` starts with `/season1/beta`
+- `where` is `"beta"`, `adName` is `"BETA join page"`
+- Meta Lead `content_name` is `season_one_beta_<ad>`
+
+## What does not save yet (needs you)
+
+### 1. The wizard's answers
+
+On ekuzo.gg only, the wizard's last step sends this to `POST /api/season-one`. Off ekuzo.gg it sends nothing.
+
+```json
+{
+  "step": "beta-wizard",
+  "email": "parent@example.com",
+  "eventId": "uuid, stable across retries of the same submit",
+  "playerName": "Maya",
+  "playerAge": 12,
+  "playsOn": ["Console", "Phone"],
+  "teamSports": "Tried, didn't stick",
+  "superpowers": ["Makes everyone laugh", "Quick thinker"],
+  "funFact": "Knows every flag in the world",
+  "expectations": ["No toxicity", "Positive mindset", "Winning attitude"],
+  "timeZone": "Eastern",
+  "tz": "America/New_York",
+  "times": ["Weekday evenings", "Weekend afternoons"],
+  "note": "",
+  "attribution": { "utm_source": "", "utm_medium": "", "utm_campaign": "", "utm_content": "", "utm_term": "" },
+  "page": "/season1/beta/start",
+  "ekz_hp": ""
+}
+```
+
+Allowed values:
+
+- `playerAge`: 9 to 18
+- `playsOn` (any): Computer, Console, Tablet, Phone, Not much yet
+- `teamSports` (one, optional): Loves them / Plays, not their thing / Tried, didn't stick / Hasn't tried yet
+- `superpowers` (up to two): Never gives up, Makes everyone laugh, Quick thinker, Natural leader, Quiet strategist, Builds anything, Great teammate
+- `expectations`: always all three, the wizard will not continue without them
+- `timeZone`: Eastern, Central, Mountain, Pacific, Alaska, Hawaii, Other. `tz` is the device's IANA zone.
+- `times` (at least one): Weekday afternoons, Weekday evenings, Weekend afternoons, Weekend evenings
+- `playerName`, `funFact` (120 max), `note` are free text typed by a parent. Escape them in any template.
+
+**Today the route answers 400 to this**, because `beta-wizard` is not a known `step`. The wizard then shows the route's `error` text and the parent can retry. So the wizard should not be linked from a live email until the route handles the step.
+
+Things to decide in the route:
+
+- **It must work for a parent with no earlier sign-up.** The other follow-up steps call `stepAllowed()` and drop the write when there is no prior sign-up for that email. Parents who replied to Karlin never used the page, so for this step the wizard is the sign-up. Suggest: upsert the profile and subscribe to the list here.
+- **Event name.** Suggest a Klaviyo event `Beta Wizard Completed` with the fields above as event properties, and `beta_*` profile properties for the ones we filter on (age, times, time zone).
+- **Fulfillment view.** We need to sort players by availability and volume. A Sheets row per player (like `ekuzo-purchases`) would make that review easy. Your call on where it lives.
+- The wizard sends no Meta event. It fires `beta_wizard_complete` to GA4 and Clarity on success.
+
+### 2. Two Klaviyo emails
+
+Copy for both is in the Beta lab under "The emails". Per the platform split these are Klaviyo, not Beehiiv.
+
+- **Wizard invite.** Trigger: "Season 01 Waitlist" where `page` starts with `/season1/beta`. One link: `https://ekuzo.gg/season1/beta/start`. Parents who replied to Karlin get the same email from him by hand.
+- **Wizard confirmation.** Trigger: `Beta Wizard Completed`. Uses the player's name. It has a `[date]` placeholder for when we will reply, which the team still has to set.
+
+## Go-live checklist
+
+- [ ] Route handles `step: "beta-wizard"` and writes to Klaviyo (and Sheets if used)
+- [ ] One real submit on a preview with the live key, checked in Klaviyo
+- [ ] Wizard invite flow live, link points to `/season1/beta/start`
+- [ ] Wizard confirmation flow live, `[date]` filled in
+- [ ] `dev` merged through `season1-commit` to `main`
+- [ ] Final headline on `/season1/beta` (Karlin is deciding; working version is "Free beta. Game with a pro coach.")
+
+## Not tested
+
+- The repo test suite (no `node_modules` in the session that built this).
+- A real write. The wizard's save call was tested against a mocked `/api/season-one` on a faked ekuzo.gg host: a 200 shows the end state, a 400 shows the error and keeps the parent on step 3.

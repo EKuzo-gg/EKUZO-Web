@@ -4,6 +4,12 @@
 
 **Format:** Most recent entry at the top. Include your name, date, and what changed.
 
+## Jamie's Claude, 2026-11-12 (21:40): `dev` brought level with `main`
+
+- **For Aaron: pull `dev` before your next edit.** `dev` now holds everything that went live tonight: the wizard's backend (`lib/season1/betaWizard.ts`, the drop-off capture script the wizard's route handler appends), the source cookie in `middleware.ts`, migration 0006, the new FAQs on `beta.html` and `launch.html`, and the "What your player needs" wording on `launch.html` and `start.html` (now "A laptop or desktop that runs League of Legends" and "A headset with a mic", to match the FAQ; Jamie's call 11-12 21:32).
+- Nothing of yours was removed: `/launch/b`, `beta-ad-landing.html`, `landing-v2.html`, the labs and the roadshow files are as you left them. This was a merge of `main` and `dev` in a clean clone, pushed to `dev` only.
+- From here, `dev` to `main` merges cleanly again.
+
 ## Jamie's Claude, 2026-11-12 (21:30): beta FAQs rewritten on Jamie's go ("we need to make the updates")
 
 - **For Aaron: two of your files changed on `main`, FAQ block only.** `app/season1/beta/launch/launch.html` and `app/season1/beta/beta.html`: the seven `<details>` items became eleven, same markup, nothing else on the page touched. `dev` still has your seven, so pull `main` into your working copy of these two files before your next edit to them, or the merge will conflict on those lines.
@@ -20,6 +26,114 @@
 - Source: `?src=karlin-email` on any `/season1/beta` page is kept by `middleware.ts` in the cookie `ekuzo_bsrc` (beta paths only) and lands on the record.
 - For Aaron, from QA and a fresh parent read (your call, nothing changed): the wizard has no hidden `ekz_hp` field; a parent could not find a start date or session length; no line near the player card about who sees a kid's details; selected chips read as disabled; the end screen has no date for the answer. Detail: `docs/beta-wizard-go-live-2026-11/05-defect-log.md`.
 - `dev` does not have these commits yet. Recipe and hashes are in `08-return-handoff.md`.
+## Aaron's Claude, 2026-11-12: launch page frozen for the team, Option B started (dev)
+
+**Jamie, start here:** `docs/beta-wizard-handoff.md` has current status and next steps. Short version: the link for parents is `/season1/beta/launch`; it is blocked only by `app/api/season-one/route.ts` returning 400 for `step: "beta-wizard"`.
+
+- **`/season1/beta/launch` is the version Aaron is sending to the team to push live.** Leave `app/season1/beta/launch/launch.html` as is; further design changes go to Option B.
+- **Option B:** `app/season1/beta/launch/b/{route.ts,launch-b.html}`, served at `/season1/beta/launch/b`. Starts as a copy of the launch page plus one change: Brad's parent video (`public/testimonial-videos/brad-parent-girl-gamer.mp4`, existing asset) sits beside his quote at the bottom of the black details band and hangs across the torn seam into "How the beta works". "What parents say" in B keeps Becky and Rajitha only, since Brad moved up. No captions track on the video yet.
+- Checked B at 390, 768 and 1440: no sideways scroll, the video clears the heading and the timeline, the seam still shows.
+
+## Aaron's Claude, 2026-11-12: BETA launch page at /season1/beta/launch (dev)
+
+Aaron: the BETA page works for ad traffic, but parents who replied yes to Karlin's email are already interested and want details. They need a page whose button goes straight to the wizard.
+
+- **New:** `app/season1/beta/launch/{route.ts,launch.html}`, served at `/season1/beta/launch` (first pushed as `/season1/beta/details`, renamed the same hour; nothing linked to the old address). Built from the BETA page: same hero, no email form, every button links to `/season1/beta/start`. New black band "Two weeks. One coach. One team." with the Join page's four detail cards rewritten for the beta (2 weeks / 4 sessions, online, ages 9+, free). "How the beta works" is rewritten for this audience and lists what the player needs. Parent quotes, coaches, No toxic lobbies and short answers carry over.
+- It has no form and makes no API call.
+- `app/season1/beta/beta.html`: step 2 no longer mentions "the games they play" (the wizard stopped asking).
+- Beta lab: new "The beta launch page" section, pathway and wizard-invite link updated. Handoff doc updated.
+- **Checked** at 390 and 1440: no sideways scroll, no errors, all four buttons point to the wizard. **Not run:** the repo test suite.
+
+## Aaron's Claude, 2026-11-12: BETA wizard moved to /season1/beta/start, handoff for Jamie (dev)
+
+Goal (Aaron): get the BETA flow live so a few people can try it. **Jamie: read `docs/beta-wizard-handoff.md`.**
+
+- **Wizard has a real address:** `app/season1/beta/start/{route.ts,start.html}`, served at `/season1/beta/start` (same route-handler pattern as `/season1/beta`, noindex, head tags from `lib/season1/tags.ts`). `public/roadshow/beta/wizard.html` is gone; the lab links to the new address.
+- **Wizard now sends its answers** on ekuzo.gg only: `POST /api/season-one` with `step: "beta-wizard"` (payload in the handoff doc). **The route does not accept this step yet and answers 400**, so the wizard must not be linked from a live email until Jamie adds it. `app/api` was not touched. Off ekuzo.gg nothing is sent.
+- The email is typed on the first screen and is never read from the address (no `?email=`), so it cannot leak into GA4, the Pixel or Clarity through the URL.
+- Reaction test pad is blue at rest instead of black.
+- Beta lab: third email drafted ("After the wizard", Klaviyo, no promise of a spot, `[date]` to set), wizard invite shows the live link, open items updated.
+- Beta lab refreshed later the same day: page screens retaken with the current headline plus two new ones ("What parents say", "No toxic lobbies"), ad captions and open items brought up to date.
+- Wizard Back buttons (later, Aaron): the email screen has Back (returns to the page the parent came from, else `/season1/beta/launch`), and step 1 has Back to the email screen. Steps 2 and 3 already had it.
+- **Checked:** wizard end to end at 390 and 1440 on a local preview; the save call against a mocked `/api/season-one` on a faked ekuzo.gg host (200 shows the end state, 400 shows the error and stays on step 3). **Not run:** the repo test suite, and no real write.
+
+## Aaron's Claude, 2026-11-12: BETA wizard, expectations and a lighter player card (dev)
+
+- `public/roadshow/beta/wizard.html` (still a static draft, saves nothing):
+  - Step 1 now says "Any laptop or Mac will work. League of Legends is free." and adds "What we expect from every player": No toxicity, Positive mindset, Winning attitude (show up, be kind, try your best). Each is a tap-to-agree checkbox whose mark draws itself; all three are needed to continue.
+  - Step 2 (player card): choices are pills and the questions have more room between them.
+  - Time zone is prefilled from the device's own time zone setting (no IP lookup, nothing sent anywhere). The parent can change it.
+  - Later (Aaron): age is a dropdown, 9 to 18. The school schedule question is removed from step 3. First needs bullet reads "Any laptop or Mac will work". Expectation checkboxes sit straight.
+  - Later (Aaron): the wizard now opens on "Get started. What's your email?" and continues to step 1. The email field is gone from step 2. `?email=` still prefills it.
+- `app/season1/beta/beta.html`: the "What do they need?" answer now matches ("Any laptop or Mac will work, and League of Legends is free").
+- Beta lab wizard screens retaken. Checked at 390 and 1440.
+
+## Aaron's Claude, 2026-11-12: /season1/beta working headline (dev)
+
+- `app/season1/beta/beta.html` (Aaron): headline is now "Free beta. / Game with a pro coach." ("esports" may be a trigger word for parents). This is a working version; Karlin is deciding the final line. The card line became "A real team, their peers and real practice, just like sports." so "free" and "pro coach" are not said twice. Beta lab screens retaken.
+
+## Aaron's Claude, 2026-11-12: /season1/beta, quotes in their own band, no fine print (dev)
+
+- `app/season1/beta/beta.html` (Aaron): the parent quotes moved out of "How the beta works" into their own white band, "What parents say", between it and "Who coaches". The fine print under the hero button ("Just your email. No card...") is removed. Checked at 390 and 1440.
+
+## Aaron's Claude, 2026-11-11: /season1/beta gains parent quotes and "No toxic lobbies" (dev)
+
+- `app/season1/beta/beta.html`: three short parent pull quotes under "How the beta works" (Brad, Becky, Rajitha). Each is a verbatim excerpt from the transcripts in `public/testimonial-videos/*.txt`, credited "Name, Parent" as `TestimonialsCarousel` does; Brad's drops a spoken restart ("the team, the team atmosphere"). On phones the row swipes sideways; on desktop it is three across.
+- New black band under "Who coaches": "No toxic lobbies. Ever.", copied word for word from the Join page (`app/season1/join/b/join-b.html`), including the school-hallway line.
+- Band order is now hero, black (how it works + quotes), off-white (coaches), black (no toxic lobbies), white (short answers). Checked at 390 and 1440.
+
+## Aaron's Claude, 2026-11-11: /season1/beta hero copy, fewer "free"s (dev)
+
+- `app/season1/beta/beta.html`, hero copy only (Aaron): headline "This is your chance / to try esports.", black sticker "Kids ages 9+" (was "Free beta, 2 weeks. No card needed."), card line "A free trial with a pro coach, their peers and real practice, just like sports.", nav button "Join the beta". The card button stays "Join our free beta". Beta lab screens retaken. Checked at 390 and 1440.
+
+## Aaron's Claude, 2026-11-11: BETA sign-up wizard draft and updated flow (dev)
+
+Aaron's flow: beta ad to the BETA page (email sign-up); Karlin's email to a plain reply. Once we have an email, we invite the parent to a 3-step wizard. Goal of the wizard: evaluate players and see if availability and volume line up. The confirmation process is being decided Nov 12.
+
+- **New draft:** `public/roadshow/beta/wizard.html` (static, saves nothing). Step 1 what the beta is (2 weeks, 4 sessions; a computer that runs League of Legends, a headset or headphones, a mouse; tech setup sent later). Step 2 the player (name, age, games, League experience, computer experience). Step 3 availability (time zone, normal school schedule or not, weekday or weekend by afternoons or evenings, optional note). Ends on "we'll review your times and follow up with practice details". `?email=` prefills and hides the email field; without it the field shows in step 2.
+- **Later the same day (Aaron):** step 2 is now "Build their player card" and reads less like a survey. It asks where they game (computer, console, tablet, phone), how team sports have gone, their superpower (up to two) and a fun fact, and a card fills in as the parent answers. The games and League of Legends questions are gone. The end message promises a review and an email "either way", not a spot, and a three-try reaction test for the player follows it (for fun, nothing saved). The question set is a draft for the team to settle Nov 12.
+- **Needed from Jamie:** where the wizard's answers are saved, and the wizard invite email in Klaviyo for page sign-ups. Nothing in `app/api` was touched.
+- `public/roadshow/beta-lab.html`: pathway redrawn for the two ways in, new "The wizard" section with screens, email 1 now asks for a reply (no link), email 2 is the wizard invite, "Still to decide" updated.
+- `app/season1/beta/beta.html` copy only: "Two weeks, four sessions", and the "What do they need?" answer now matches the wizard (graphics card, headset or headphones, mouse).
+- `public/roadshow/beta/confirm.html` and `index.html` are the older drafts and are no longer linked from the lab.
+- **Checked:** wizard run end to end at 390 and 1440 (required-field errors, time zone guess, final state), no sideways scroll or console errors. **Not run:** the repo test suite.
+
+## Aaron's Claude, 2026-11-11: /season1/beta takes the Join page's purple hero (dev)
+
+Aaron's direction: use the Join page hero (`app/season1/join/b`) with the beta updates; the main CTA is "Join our free beta"; no Karlin by name in the page copy yet; ages read "kids ages 9+".
+
+- `app/season1/beta/beta.html`: hero is now the Join page's violet hero (centred headline, black sticker over the white card, crew art left, Jinx right, black band under it). The card holds the one-line pitch, the email field and a lime "Join our free beta" button. Buttons are lime with black text throughout, as on the Join page.
+- Band order is now black "How the beta works", off-white "Who coaches", white "Short answers".
+- Copy: "Karlin" removed from the card, steps, FAQ and confirmation ("we" instead). His coach card in "Who coaches" is unchanged. Ages read "9+" in the card and the FAQ.
+- Sign-up call and payload unchanged from the entry below.
+- Beta lab screens retaken. **Checked** at 390 and 1440 as before. **Not run:** the repo test suite.
+- `public/roadshow/beta-lab.html` (later the same day): "The ads" now shows Aaron's four Figma layouts (exports in `public/roadshow/beta/ads/`, 540 wide previews, not Meta finals), with the copy fixes made in Figma: "Game with a pro coach.", one button label "Join our free beta", ages 9+. "Still to decide" gains ad exports, Karlin on the page, and ages 9+ everywhere; the photo-release item is gone.
+- **Still 9-17 elsewhere:** the BETA ads d22 in the ad lab and its finals, and the live Season 01 pages. Not changed here.
+
+## Aaron's Claude, 2026-11-11: /season1/beta rebuilt in the Join page's layout (dev)
+
+Aaron's direction: the page the beta ads drive to should be closer to our Join page and less like the ad landing. Same address, same email-only ask.
+
+- `app/season1/beta/beta.html` is now a Join-style page (look carried from `app/season1/join/jersey`): black hero with the team-walk photo, "Two weeks free. / With a pro coach.", the blue "Free beta" tag over a white notched card with one email field, then "How the beta works" (three steps), the coaches band with the safety line, seven short answers and the violet sticky bar. After a sign-up the card is replaced by "Awesome. Check your inbox for a note from Karlin."
+- The page no longer changes its hero per ad. `?ad=` is still read and saved (default d22).
+- The earlier version (a copy of the ad landing) is kept as `app/season1/beta/beta-ad-landing.html` for reference. It is not served. `route.ts` changed in its header comment only.
+- **Sign-up path unchanged (Jamie's lane, not edited):** posts to `/api/season-one` with `source: "ad-landing"`, the same payload fields, honeypot, 429 message and Lead / generate_lead / Clarity events as the ad landing. New values: `where: "beta"`, `adName: "BETA join page"`, `hero: "none"`, Lead `content_name` `season_one_beta_<ad>`. The asks of Jamie in the entry below still stand (beta follow-up email in Klaviyo with the wizard link).
+- `public/roadshow/beta-lab.html`: pathway text and "The screens" retaken from the new page (four phone screens and desktop).
+- **Checked:** rendered through `fillTags` and loaded at 390 and 1440: no sideways scroll, no console errors, a bad email shows the error, a good one shows the confirmation (off ekuzo.gg nothing is saved, so the live POST was not exercised). **Not run:** the repo test suite (no node_modules in this session).
+
+## Aaron's Claude, 2026-11-11: /season1/beta, the BETA landing page (dev)
+
+Aaron's direction: reuse the existing ad landing page, focus it on the free 2-week beta, and ask for an email only. Karlin's follow-up email then links to a wizard (player basics, availability, what the beta is). The wizard is not built yet.
+
+- **New route, live page untouched:** `app/season1/beta/route.ts` and `app/season1/beta/beta.html`. `beta.html` is a copy of `app/season1/landing.html` (as on dev today) with these changes only:
+  - Copy: both email forms, "How the beta works", three FAQ answers, the confirmation dialog, the header and sticky buttons. Every button reads "Join the free beta", including each ad hero's button.
+  - Removed: both "Ready now? Save their spot for $100" links and the "Ready to lock it in?" card in the confirmation. No price on the page.
+  - Ads: D gains d22 to d24 (the BETA ads from the ad lab) with T bridges, HERO_IMG and FONTS entries, and `.s1j.beta` CSS. With no or an unknown `?ad=` the page opens on d22 (the live landing opens on d1). d1 to d21 still work, so running ads can be repointed here.
+  - New image: `public/images/season1/landing/esports-room.webp` (d24's photo, taken out of the ad lab).
+- **Sign-up path is unchanged (Jamie's lane, not edited):** the form still posts to `/api/season-one` with `source: "ad-landing"`. Beta sign-ups can be told apart by `page` (`/season1/beta...`), the ad id (d22 to d24) and `utm_campaign=beta`. As it stands they join the Season 01 Waitlist list and get no beta email. **Needed from Jamie:** a beta follow-up from Karlin in Klaviyo with the wizard link, and where the wizard's answers are saved.
+- `public/roadshow/beta-lab.html`: pathway now points to `/season1/beta` and describes the email-only join and the wizard. The earlier static prototypes in `public/roadshow/beta/` stay as a draft for the wizard.
+- **Not run:** the repo test suite (no node_modules in this session). `lib/season1/__tests__/landingHead.test.ts` reads `landing.html` only, so `beta.html` has no test of its own yet.
+- **Verified:** rendered through `fillTags` and loaded in Playwright Chromium at 390 and 1440 with no `?ad=`, and at 390 with d23, d24, d11 and d1. No page errors, no horizontal overflow, no "$100" or "Save their spot" text, every button reads "Join the free beta". Submitting an email opens the confirmation dialog (off ekuzo.gg nothing is saved, as on the live landing).
 
 ## Jamie's Claude, 2026-11-11: new blog post "My kid doesn't like sports. What now?" (Build Loop, docs/sports-post/)
 
@@ -105,6 +219,24 @@
   conflicts with the twice-a-week FAQ (on record since 11-05).
 - Checks: `npm test` 589 + 5 tests, 588 pass, 1 skipped, 0 fail; tsc clean; Sentry A (local branch vs main) and
   Sentry B (dev deploy vs this morning's live read) in the docs folder.
+## Aaron's Claude, 2026-11-10: BETA pathway (dev only)
+
+The team is shifting the ask from the paid Season 01 sign-up to BETA: a free 2-week session before Season 01 (week 1 setup, week 2 a couple of real practices). This replaces the earlier 4-week, invite-only beta plan.
+
+- `public/roadshow/beta-lab.html` rewritten: the pathway (email and ads, BETA page, sign-up, confirmation, two weeks, Season 01 offer), Karlin's personal email to the 400+ sign-ups, the confirmation email, the three BETA ads, and what is still to decide with owners.
+- New prototypes in `public/roadshow/beta/` (noindex, static, shared `beta.css` in the Season 01 look): `index.html` is the BETA landing page with a short form (email, player's first name, age, optional mobile, no card). `confirm.html` is the "you're in" page: times that work, setup list, share link. The form validates and passes the name through sessionStorage only. Nothing is posted or saved.
+- `public/roadshow/ad-lab.html`: Round 5, three BETA ads on ad 11's template (d22 Two weeks free, d23 Gaming either way, d24 See what we do), lime accent, blue button, Meta copy preloaded. Finals at 1080 in `public/ads/season1/` (d22 to d24, feed and story). Meta links point to `/season1/beta?ad=d22` (and d23, d24), which does not exist yet.
+- **For Jamie (your lane, nothing changed):** to make it real it needs a route (suggested `/season1/beta`), a save endpoint for the four fields plus the picked times, and a Klaviyo event for the confirmation email. `lib/season1/` and all live pages are untouched.
+- Open decisions are listed in the lab: dates and practice count, capacity, the paid page while BETA runs, the Nov 30 jersey deadline, the end-of-beta offer, photo releases.
+- Verified: Playwright Chromium at 390, 768 and 1440. Empty submit shows errors, a filled form reaches the confirmation with the player's name, no page errors, no horizontal overflow. Ad lab loads with no errors.
+
+## Aaron's Claude, 2026-11-10: Season 01 setup wizard lab (dev only)
+
+- New `public/roadshow/wizard-lab.html` (noindex, static): the setup wizard committed families reach from the soft welcome email. Overview of the family's kids, then five steps per kid: about the player (name and age prefilled from signup, games, League experience, a note for the coach), gamer tag with a live jersey preview plus jersey size, practice blocks with a starred best time, the League setup checklist from the camps Getting Started email, and a read-only billing screen. Done screen: a slot for the kid hype video and the crew link.
+- Sample family (Maya and Leo), sample practice blocks, sample card. Prices and dates follow `lib/season1/offer.ts` and `welcomeCopy.ts` ($100 then $160 on Feb 15, Mar 15, Apr 15; sibling $80 then $128; refundable until Dec 31; free jersey if paid before Nov 30). Answers save in localStorage only; nothing is posted.
+- `public/roadshow/index.html`: Setup wizard lab tile after the Beta lab tile.
+- **For Jamie (your lane, nothing changed):** to make it real it needs a per-family link from the welcome email (no login), a save endpoint, and the order's kids, card last four and credits read from the Season 01 db. Fields: games, xp, note, tag, size, tz, blocks, best, setup checklist.
+- Verified: Playwright Chromium at 390 and 1280, the full path for one kid, no page errors, no horizontal overflow.
 
 ## Jamie's Claude, 2026-11-05 (afternoon): Season 01 round 2 (Build Loop, docs/s1-round2-2026-11/)
 
@@ -121,6 +253,11 @@
 - `/season1/join` is indexable on ekuzo.gg in live mode (canonical, description, Course and Offer JSON-LD at $580
   per kid from offer.ts, SoldOut when closed); /join/b, /jersey, /season1, signup stay noindex; sitemap entry.
 - Checks: `npm test` 575 tests, 574 pass, 0 fail; Sentry A and B, Steward. Season 01 FAQ canon written in the KB.
+## Aaron's Claude, 2026-11-06: beta lab
+
+- New `public/roadshow/beta-lab.html` (noindex, static, same dark wall as the hub): Karlin's interest email for the free 4-week Season 01 beta shown as it lands in the inbox with copy buttons, a five-step "how it runs" track, and the open decisions with owners. Links to the pilot plan doc.
+- `public/roadshow/index.html`: Beta lab tile added after the Outreach lab tile. Nothing else touched.
+- Follow-up: practice timing is open (weekdays or weekends), so the email and page ask for the days and times that work instead of weeknights.
 
 ## Jamie's Claude, 2026-11-05 (10:45): IndexNow
 
@@ -160,6 +297,19 @@
 - League has no existing sentence about match length or stopping, so the link from League to the new post was not re-added (the only link lived in the removed box).
 - For Aaron: `components/blog/FactsBox.tsx` and `PullQuote.tsx` no longer exist; earlier notes about restyling them are moot.
 
+---
+## Jamie's Claude, 2026-11-05: League facts box
+
+- `app/blog/league-of-legends-youth-development/page.tsx`: new "League of Legends for parents: the facts" box after the opening answer (rating, accounts, chat, honor, leaving early, match length), each line sourced from Riot or ESRB pages read 2026-11-04. FAQ rating sentence now lists the full ESRB descriptors in both `FAQ_ITEMS` and the visible FAQ (JSON-LD matches), ESRB link repointed to listing 32211, both honor guide links moved to support.riotgames.com. The "under 10%" and "65% STEM" claims are unchanged on purpose. `DATE_MODIFIED`, sitemap lastModified, /blog card and Karlin author card date set to 2026-11-05. `public/llms.txt` untouched.
+- Aaron: new `components/blog/FactsBox.tsx` (div/span/ul, torn-corner clip, off-white, black top rule). Additive and identical on the Fortnite branch; restyle freely.
+## Jamie's Claude, 2026-11-05: Fortnite search refresh
+
+- `app/blog/should-you-ban-fortnite/page.tsx`: "Short answer:" paragraph first in the body; five body H2s rewritten as parent search questions; the five-question aside moved to right after the first H2 and retitled "Try this tonight"; new "Fortnite at a glance" facts box (ESRB rating, Epic parental controls, FTC case, match length) after the FTC paragraph; the one product link now points to Season 01 (/season1/join) with the sentence rewritten; new paragraph linking /blog/how-to-get-your-kid-off-video-games-without-a-fight; FAQ "Should I ban Fortnite?" renamed and "Is Fortnite OK for kids?" added (visible FAQ and FAQPage schema both render from FAQ_ITEMS); meta description rewritten (marked pending Jamie final look); intro "senior" / "This fall"; DATE_MODIFIED 2026-11-05; listening CTA swapped to Karlin's 15-minute calendar (Muhammad's page had no open times).
+- `app/blog/gaming-military-families/page.tsx`: "senior", "internship this fall", calendar swapped to Karlin's, DATE_MODIFIED 2026-11-05.
+- `app/sitemap.ts`, `app/blog/page.tsx`, `app/blog/author/muhammad-hossain/page.tsx`: lastModified and card dates for both posts set to 2026-11-05.
+- Note for Aaron: new `components/blog/FactsBox.tsx` (additive, server component, div/span/ul markup so the .blog-content prose rules do not cascade). Restyle freely. The prose CSS still shows list bullets inside it.
+
+## Jamie's Claude, 2026-11-03 (evening): counselor note removed from d15 and d16 heroes
 ## Jamie's Claude, 2026-11-05: session-end post, approved copy and inbound links
 
 - New post: meta description now Jamie's approved option A ("Count matches, not minutes. Agree on a stopping point..."); `pending` comment removed. Coach section links "Season 01" to `/season1/join` (C3 option 2). Share graphic `public/images/count-matches-not-minutes.png` (1080x1350, rendered as the Robux in-body image) sits after the match table; 1200x630 variant saved beside it; source `count-matches-not-minutes.html` and `render.js` in `docs/session-end-post/assets/`.
@@ -287,6 +437,19 @@ Branch `season1-commit`. Karlin asked for price transparency and signed off on t
   - Signup, welcome and join tests: 70 pass.
 - **Klaviyo, both drafts, not sent:** `VYzgSh` (current layout) got the new friends section and the "Save their spot for $100" button. New `RN8KSq` follows Figma frame 871:175 ("602" layout, mixed-games hero art). Ask: A/B the campaign on template, metric click rate plus Placed Order per variation.
 - **Figma (EKUZO Marketing, frame 871:175):** friends section and offer-card line updated to match.
+## Aaron's Claude, 2026-11-03: ad lab round 4, the jersey ad again
+
+`public/roadshow/ad-lab.html` on dev. Ad 11 (the jersey ad) is one of the better performers in Meta, so Round 4 adds three variations of it, built on the d11 template:
+
+- **d19, Southie jersey back:** team walk photo, the new Southie jersey back, same hook.
+- **d20, front and back:** no photo, both sides of the jersey, "Free for the first 100 families."
+- **d21, their team:** jersey front, "Their team. Their name. On a real jersey."
+- All three: pink headline accent (#EA1CA7), blue button (#034FFF) with white text, and the small top line reads "Youth gaming league · 2027" in white.
+- Meta copy preloaded (adnames d19-a-southie-back, d20-a-southie-pair, d21-a-southie-team). Links keep `ad=d11` so the landing hero still matches the jersey ad.
+- New embedded images: `southie-front`, `southie-back` (jersey renders) and `team-walk-hd` (the full-size team walk photo). The old `team-walk` image used by d9, d15 and d17 is unchanged.
+- Small hook: art classes now also take an optional `cls` from the entry (`${d.tpl||d.id}${d.cls?" "+d.cls:""}`). New CSS is scoped to `.s1j`; d11 renders pixel-identical to before.
+- Finals at 1080 in `public/ads/season1/` (d19 to d21, feed and story).
+- To confirm before running: photo release for the team walk photo, and whether "free for the first 100 families" fits where the ad points (the jersey offer ends Nov 30).
 
 ---
 ## Jamie's Claude, 2026-10-30: Discord commit format
@@ -410,6 +573,46 @@ Season 01 sign-ups are live on ekuzo.gg (`S1_COMMIT_MODE=live`, Production only)
   - The season line copy is approved by Jamie.
   - Two doors on /season1 and "Ready now?" are his to ship.
 - **Merge rule:** never merge dev into main. Release = season1-commit plus a merge of origin/main; dev goes through `preview/season1-dev`.
+## Aaron's Claude, 2026-11-05: micro school lane brought in line with the new package (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only.
+
+1. **Outreach Lab, New-model schools lane:** the package is marked as built, with buttons to the deck and one-pager in Figma. The lead pilot is now a spring semester team (mid-January to mid-May, twice a week, 90 minutes) instead of a 6-week elective. Two new watch-fors: the only credit line is "schools have used EKUZO for class credit", and no price goes in the package.
+2. **Micro school one-pager:** semester instead of 6-week blocks, near-peer mentors, the class credit line above, and the founding-school rate line removed, and the coach line now leads with near-peer mentor.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440 and 390: no horizontal overflow, no page errors. The one-pager still prints to one Letter page.
+
+---
+## Aaron's Claude, 2026-10-30: Hometown Heroes in Outreach Lab (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/outreach-lab.html` only.
+
+1. **Hometown Heroes** (`#heroes`, new Programs group in the nav): Karlin's idea for college players as recruiters and coaches for a team from their own hometown. The loop, the hero and family journeys, how it reaches kids and parents (kids only in person with a teacher there; everything they take home goes to a parent), wireframes of a hero page, a take-home card and a leaderboard (sample data), what heroes compete for, guardrails, a spring pilot and open decisions. The College lane links to it.
+2. **Widows:** a small `noWidows()` pass after each render keeps the last two words of running text together.
+
+- **For Jamie (your lane, nothing changed):** the hero page is proposed as a variant of the Season 01 crew-code page (`/crew/<code>`, "Join [Name]'s team"), so each family is credited to its hero through the existing referral cookie.
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, no page errors.
+
+---
+## Aaron's Claude, 2026-10-30: the other seven partner one-pagers (roadshow, dev only)
+
+Branch `dev`, `public/roadshow/` only (never ships to main).
+
+1. **Seven one-pagers** in `public/roadshow/one-pagers/`: `center`, `college-club`, `franchisor`, `collegiate-pilot`, `school-club-kit`, `parent-explainer`, `skeptical-staff`. Same Letter layout as `microschool.html`, each with a lane visual (a month with a center partner, the player loop, how a franchise pilot grows, a pilot in a college market, the club kit, a 90-minute practice, gaming alone vs on a team). Public-safe: quotes credited by role, no partner names, no phone numbers. Drafts for the team: pricing, block length and per-player write-ups stay pending decisions.
+2. **Outreach Lab** (`public/roadshow/outreach-lab.html`): every one-pager card links to its page; card #2 shows its real headline; buttons align across a row.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter, each page at 1440 and 390: no horizontal overflow, nothing past the page edge, no missing assets; each prints to one Letter page.
+
+---
+## Aaron's Claude, 2026-10-30: Outreach Lab and the Austin microschool one-pager (roadshow, dev only)
+
+Branch `dev`. Everything is under `public/roadshow/`, which never ships to main (dev-runbook, releasing when dev carries work main must not get). No app, lib, components or API files touched.
+
+1. **Outreach Lab** (`public/roadshow/outreach-lab.html`, 481e4ba): hub for EKUZO's eight partner lanes: lane board, player pathway, journey map, a page per lane, message templates, one-pager specs, open decisions. Public-safe version with no partner names or contact details; the full version stays private. Linked from the Roadshow Hub (new tile under In review).
+2. **QA fixes** (ed3913a): notch clipping on one-pager thumbnail headlines; journey chevrons overflowing at 1024 px; widows on short headings.
+3. **Austin microschool one-pager** (`public/roadshow/one-pagers/microschool.html` + `karlin.jpg`, a2798b1): Letter page that prints to one page; Outreach Lab's one-pager #1 links to it. Draft: pricing, block length and the per-player write-up are pending team decisions.
+
+- **Verified:** Playwright Chromium with Tungsten and Inter at 1440, 1024 and 390: no horizontal overflow, nothing past the page edge, no missing assets; the one-pager prints to one Letter page.
 
 ---
 ## Jamie's Claude, 2026-10-29: card form behind Or pay with card

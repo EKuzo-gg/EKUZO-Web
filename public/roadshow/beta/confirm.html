@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>You're in the beta | EKUZO</title>
+<link rel="icon" href="/icon.png">
+<link rel="preload" as="font" type="font/otf" href="/fonts/TungstenNarrow-Black.otf" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap">
+<link rel="stylesheet" href="beta.css">
+</head>
+<body>
+<p class="proto">Prototype for the EKUZO team. Nothing on this page is saved yet.</p>
+
+<header class="hero conf">
+<div class="wrap"><nav class="nav" aria-label="EKUZO"><a class="logo" href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a></nav></div>
+<div class="hero-in wrap">
+<h1 class="d h1"><span id="who">You're in.</span><em>Welcome to the beta.</em></h1>
+<p class="sub" id="sent">We'll email you the details. Three quick things get your player ready.</p>
+</div>
+</header>
+
+<main>
+<section class="band"><div class="paper" style="--paper:url('/images/new%20torn%20paper/torn-paper-white-top-1@2x.png')" aria-hidden="true"></div>
+<div class="wrap pad last">
+<ol class="steps">
+<li>
+<h2>Tell us when they can play</h2>
+<p>Pick every time that works. We build teams around what families choose and confirm your practice times by email.</p>
+<div class="chips" role="group" aria-label="Times that work">
+<button class="chip" type="button" aria-pressed="false">Weekday evenings</button>
+<button class="chip" type="button" aria-pressed="false">Saturday morning</button>
+<button class="chip" type="button" aria-pressed="false">Saturday afternoon</button>
+<button class="chip" type="button" aria-pressed="false">Sunday afternoon</button>
+</div>
+<button class="btn" type="button" id="save" disabled>Save times</button>
+<p class="note" id="saved" role="status"></p>
+</li>
+<li>
+<h2>Check their setup</h2>
+<p>Week 1 is for getting ready, and their coach helps. Here's what they'll need:</p>
+<ul class="need">
+<li>A computer that runs League of Legends (it's free)</li>
+<li>A headset with a mic</li>
+<li>Solid internet</li>
+</ul>
+</li>
+<li>
+<h2>Bring a friend</h2>
+<p>Teams are better with friends. Send this link to a family whose player would love it.</p>
+<div class="share">
+<input type="text" id="link" readonly value="https://ekuzo.gg/season1/beta" aria-label="Link to share">
+<button class="btn" type="button" id="copy">Copy link</button>
+</div>
+<p class="note" id="copied" role="status"></p>
+</li>
+</ol>
+<p class="ask" style="text-align:left;margin-top:8px">Questions? <a href="sms:+18322710150">Text our founder</a></p>
+</div></section>
+</main>
+
+<script>
+(function(){
+  var d={};try{d=JSON.parse(sessionStorage.getItem('ekuzoBeta')||'{}')}catch(_){}
+  if(d.player){document.getElementById('who').textContent=d.player+"'s in.";document.title=d.player+"'s in the beta | EKUZO"}
+  if(d.email){document.getElementById('sent').textContent="We sent the details to "+d.email+". Three quick things get "+(d.player||"your player")+" ready."}
+  var chips=[].slice.call(document.querySelectorAll('.chip')),save=document.getElementById('save'),saved=document.getElementById('saved');
+  chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');save.disabled=!chips.some(function(x){return x.getAttribute('aria-pressed')==='true'});save.textContent='Save times';saved.textContent=''})});
+  save.addEventListener('click',function(){save.textContent='Saved';saved.textContent="Got it. We'll confirm your practice times by email."});
+  document.getElementById('copy').addEventListener('click',function(){var i=document.getElementById('link'),n=document.getElementById('copied');
+    function ok(){n.textContent='Link copied.'}
+    if(navigator.clipboard){navigator.clipboard.writeText(i.value).then(ok,function(){i.select();n.textContent='Press Ctrl or Cmd + C to copy.'})}else{i.select();n.textContent='Press Ctrl or Cmd + C to copy.'}});
+})();
+</script>
+</body>
+</html>

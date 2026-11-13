@@ -1,0 +1,309 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Beta lab | EKUZO Roadshow</title></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: one working page for BETA, the free 2-week session before Season 01. The pathway leads, then Karlin's email as it lands in the inbox, the confirmation email, the ads, and what is still open. Same dark wall as the Roadshow hub. */
+:root{
+  --wall:#0B0A0D; --panel:#16141A; --panel2:#1E1B23; --line:#2A272E; --text:#F4F2F6; --muted:#A7A2AE;
+  --lime:#E0FF4E; --violet:#9B6BFF; --blue:#034FFF; --ink:#111013; --paper:#F6F4F8; --paperline:#DEDAE3; --paperink:#1A181D; --papermuted:#5E5965;
+  --display:"Big Shoulders Display","Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+::selection{background:var(--lime);color:var(--ink)}
+body{margin:0;background:var(--wall);color:var(--text);font:400 16px/1.55 var(--body)}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 20px 80px;display:flex;flex-direction:column;gap:64px}
+.back{font:500 14px/1 var(--body);color:var(--muted);text-decoration:none}
+.back:hover{color:var(--text)}
+.mark{width:96px;display:block;margin:22px 0 18px}
+h1{font:900 clamp(56px,9vw,112px)/.85 var(--display);text-transform:uppercase;margin:0}
+.lede{max-width:60ch;color:var(--muted);margin:16px 0 0;font-size:17px;text-wrap:pretty}
+h2{font:800 clamp(30px,4vw,40px)/1 var(--display);text-transform:uppercase;margin:0;letter-spacing:.01em;text-wrap:balance}
+.sub{font:300 18px/1.4 var(--body);color:var(--muted);margin:8px 0 22px;max-width:60ch;text-wrap:pretty}
+
+.next{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.next strong{font:800 24px/1 var(--display);text-transform:uppercase}
+.next span{color:var(--muted)}
+.next b{color:var(--text);font-weight:600}
+
+/* The email, shown as it lands in the inbox */
+.mail{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.inbox{background:var(--paper);color:var(--paperink);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
+.inbox header{padding:20px 26px;border-bottom:1px solid var(--paperline)}
+.inbox .subject{font:700 21px/1.25 var(--body);margin:0 0 10px;text-wrap:balance}
+.from{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--papermuted)}
+.from .av{flex:none;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center;font:800 17px/1 var(--display)}
+.from b{color:var(--paperink);font-weight:600}
+.body{padding:24px 26px 30px;max-width:66ch;font-size:16px;line-height:1.6}
+.body p{margin:0 0 14px}
+.body ul{margin:0 0 14px;padding-left:20px}
+.body li{margin:3px 0}
+.body .ph{background:#EEE9F7;color:#4B2FA8;border-radius:4px;padding:0 4px}
+.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
+.btn{appearance:none;border:0;cursor:pointer;font:600 15px/1 var(--body);min-height:48px;padding:0 20px;border-radius:999px;background:var(--lime);color:var(--ink);transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--muted)}
+.btn[data-done]{background:var(--text)}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--muted)}
+.note b{display:block;color:var(--text);font-weight:600;margin-bottom:4px}
+.note p{margin:0 0 10px}
+.note p:last-child{margin:0}
+
+/* How it runs */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:2px solid var(--line);counter-reset:s}
+.steps li{position:relative;padding:22px 18px 0 0;counter-increment:s}
+.steps li::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--wall);border:2px solid var(--muted)}
+.steps li:first-child::before{background:var(--lime);border-color:var(--lime)}
+.steps li:last-child::before{background:var(--violet);border-color:var(--violet)}
+.steps b{display:block;font:800 22px/1.05 var(--display);text-transform:uppercase;margin-bottom:8px}
+.steps span{color:var(--muted);font-size:15px;display:block;text-wrap:pretty}
+.steps small{display:block;margin-top:10px;font-size:13px;color:var(--text);font-variant-numeric:tabular-nums}
+
+/* Still open */
+.open{display:flex;flex-direction:column;border-top:1px solid var(--line);margin:0;padding:0;list-style:none}
+.open li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:baseline;padding:16px 4px;border-bottom:1px solid var(--line)}
+.open b{font:600 17px/1.35 var(--body)}
+.open p{grid-column:1;margin:0;color:var(--muted);font-size:15px;text-wrap:pretty}
+.open .who{grid-column:2;grid-row:1;font-size:14px;color:var(--muted)}
+
+footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:900px){
+  .mail{grid-template-columns:1fr}
+  .side{position:static}
+  .steps{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--line);margin-left:6px}
+  .steps li{padding:0 0 26px 24px}
+  .steps li::before{top:4px;left:-7px}
+}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
+
+/* BETA pathway (Nov 10) */
+.steps.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.steps a{display:inline-block;margin-top:10px;font:600 14px/1.3 var(--body);color:var(--lime)}
+.steps a:hover{color:var(--text)}
+.mail + .mail{margin-top:40px}
+.mailhead{font:600 17px/1.3 var(--body);margin:36px 0 14px}
+.ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ads figure{margin:0}
+.ads img{display:block;width:100%;height:auto;border-radius:10px}
+.ads figcaption{margin-top:10px;font-size:15px;color:var(--muted)}
+.ads figcaption b{display:block;color:var(--text);font-weight:600}
+.more{display:inline-block;margin-top:18px;font:600 15px/1.3 var(--body);color:var(--lime)}
+@media (max-width:900px){.steps.six{grid-template-columns:1fr}.ads{grid-template-columns:1fr;max-width:420px}}
+
+/* The screens (Nov 11) */
+.ads.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.ads.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.screens.wiz{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:900px){.screens.wiz{grid-template-columns:1fr}}
+.screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+.screens figure{margin:0}
+.screens img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.screens figcaption{margin-top:10px;font-size:15px;color:var(--muted);text-wrap:pretty}
+.screens figcaption b{display:block;color:var(--text);font-weight:600}
+.screens .wide{grid-column:1/-1}
+@media (max-width:900px){.screens{grid-template-columns:1fr;max-width:420px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">&larr; Roadshow hub</a>
+    <svg class="mark" viewBox="0 0 107 21" fill="currentColor" role="img" aria-label="EKUZO"><path d="M106.434 11.987C106.434 16.7588 102.697 20.352 96.5168 20.352C90.3078 20.352 86.5708 16.7588 86.5708 11.987V8.33627C86.5708 3.56448 90.3078 0 96.5168 0C102.697 0 106.434 3.56448 106.434 8.33627V11.987ZM98.3853 12.6769V7.67512C98.3853 6.29532 97.8104 5.54793 96.5168 5.54793C95.2233 5.54793 94.6196 6.29532 94.6196 7.67512V12.6769C94.6196 14.0279 95.2233 14.7753 96.5168 14.7753C97.8104 14.7753 98.3853 14.0279 98.3853 12.6769Z"/><path d="M83.8941 2.44324L75.9028 13.8266H83.8079V19.7482H65.3818V17.9085L73.7181 6.15145H65.813V0.603516H83.8941V2.44324Z"/><path d="M62.5816 12.9929C62.5816 17.2186 59.822 20.3519 53.0667 20.3519C46.3402 20.3519 43.3794 17.2186 43.3794 12.9929V0.603516H51.3132V12.6767C51.3132 14.1715 51.8306 14.8902 53.3254 14.8902C54.8202 14.8902 55.3089 14.1715 55.3089 12.6767V0.603516H62.5816V12.9929Z"/><path d="M40.8391 19.7482H32.5029L29.9732 13.4241L28.5359 15.3501V19.7482H20.6309V0.603516H28.5359V8.16365L32.5316 0.603516H40.7529L35.5499 8.93979L40.8391 19.7482Z"/><path d="M16.7588 19.7482H0V0.603516H16.7588V5.89274H7.90508V8.24989H13.4818V11.7281H7.90508V14.0853H16.7588V19.7482Z"/></svg>
+    <h1>Beta lab</h1>
+    <p class="lede">BETA is a free two weeks before Season 01 with a pro coach: play on a real team, build community, have fun. The ads are getting clicks, but paying is too big a first step. So the email, the ads and the page now ask for one small thing: join our free beta with an email. Families see what we do before they decide.</p>
+  </header>
+
+  <div class="next">
+    <strong>Next step</strong>
+    <span><b>Karlin</b> sends the email below to the 400+ families who signed up for Season 01.</span>
+  </div>
+
+  <section>
+    <h2>The pathway</h2>
+    <p class="sub">Two ways in, an ad or Karlin's email. Both end with an email address, which gets the wizard invite.</p>
+    <ol class="steps six">
+      <li><b>Beta ad</b><span>Four new ads on Meta. Each lands on the BETA page, where a parent joins with one email field.</span><a href="/season1/beta">Open the page</a></li>
+      <li><b>Karlin's email</b><span>A personal note to the 400+ Season 01 sign-ups. To join, they just reply. Parents who reply yes get the beta launch page, whose button opens the wizard.</span><a href="/season1/beta/launch">Open the beta launch page</a></li>
+      <li><b>Wizard invite</b><span>A short email with one link. Reply-yes parents get the beta launch page. Page sign-ups can go straight to the wizard.</span><a href="#emails">See the emails</a></li>
+      <li><b>Sign-up wizard</b><span>Starts with the parent's email, then three steps: what the beta is, a player card, and availability. It ends with a reaction test for the kid.</span><a href="/season1/beta/start">Open the wizard</a></li>
+      <li><b>Review and confirm</b><span>We check that each player's availability and our volume line up, then follow up with practice. How we confirm a player is still open.</span></li>
+      <li><b>The beta</b><span>Two weeks, four sessions. Then the Season 01 offer.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>The screens</h2>
+    <p class="sub">The BETA landing page as a parent sees it, from the ad to the confirmation.</p>
+    <div class="screens wiz">
+      <figure><img src="beta/screens/landing-phone.webp" alt="BETA page on a phone: purple hero, Free beta. Game with a pro coach., and the email card." width="390" height="844" loading="lazy"><figcaption><b>1. Landing</b>"Free beta. Game with a pro coach." over one email field and a "Join our free beta" button.</figcaption></figure>
+      <figure><img src="beta/screens/landing-phone-how.webp" alt="BETA page on a phone: how the beta works in three steps." width="390" height="844" loading="lazy"><figcaption><b>2. How the beta works</b>Join with your email, tell us about your player, two weeks and four sessions.</figcaption></figure>
+      <figure><img src="beta/screens/landing-phone-parents.webp" alt="BETA page on a phone: what parents say, three short quotes." width="390" height="844" loading="lazy"><figcaption><b>3. What parents say</b>Three real quotes from our parent videos. The row swipes sideways.</figcaption></figure>
+      <figure><img src="beta/screens/landing-phone-lobby.webp" alt="BETA page on a phone: No toxic lobbies. Ever." width="390" height="844" loading="lazy"><figcaption><b>4. No toxic lobbies</b>Under the coaches, word for word from the Join page.</figcaption></figure>
+      <figure><img src="beta/screens/confirmation-phone.webp" alt="Confirmation on a phone: Awesome. Check your inbox for a note from Karlin." width="390" height="844" loading="lazy"><figcaption><b>5. Confirmation</b>Replaces the form right after the email. It points to the inbox for the next step.</figcaption></figure>
+      <figure class="wide"><img src="beta/screens/landing-desktop.webp" alt="BETA page on desktop: purple hero with the headline and email card in the middle and the characters on each side." width="1440" height="900" loading="lazy"><figcaption><b>Desktop</b>The same page at 1440 wide.</figcaption></figure>
+    </div>
+    <a class="more" href="/season1/beta">Open the live draft</a>
+  </section>
+
+  <section>
+    <h2>The beta launch page</h2>
+    <p class="sub">For parents who already said yes and are asking for more. Same look as the BETA page, with no email form. Every button opens the wizard.</p>
+    <div class="screens">
+      <figure><img src="beta/screens/details-phone.webp" alt="Beta launch page on a phone: Free beta. Game with a pro coach., and a Sign up your player button." width="390" height="844" loading="lazy"><figcaption><b>Top</b>One button: "Sign up your player". It goes to the wizard.</figcaption></figure>
+      <figure><img src="beta/screens/details-phone-stats.webp" alt="Beta launch page on a phone: Two weeks. One coach. One team., with four detail cards." width="390" height="844" loading="lazy"><figcaption><b>The details</b>2 weeks and 4 sessions, online, ages 9+, free. Then how it works and what the player needs.</figcaption></figure>
+    </div>
+    <a class="more" href="/season1/beta/launch">Open the beta launch page at /season1/beta/launch</a>
+    <a class="more" href="/season1/beta/launch/b" style="margin-left:24px">Option B, the working copy, at /season1/beta/launch/b</a>
+  </section>
+
+  <section>
+    <h2>The wizard</h2>
+    <p class="sub">Three steps after we have a parent's email. It tells them what the beta is, then asks about the player and the times that work.</p>
+    <div class="screens wiz">
+      <figure><img src="beta/screens/wizard-0-start.webp" alt="Wizard start: Get started. What's your email?" width="390" height="650" loading="lazy"><figcaption><b>Get started</b>It opens by asking for the parent's email, then continues to step 1.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-1-beta.webp" alt="Wizard step 1: here's what the beta is, and what the player needs." width="390" height="878" loading="lazy"><figcaption><b>1. The beta</b>Two weeks, four sessions. Any laptop or Mac, a headset or headphones, a mouse. Then three expectations to tap: no toxicity, positive mindset, winning attitude.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-2-player.webp" alt="Wizard step 2: build their player card." width="390" height="1157" loading="lazy"><figcaption><b>2. Player card</b>Name, age, where they game, how team sports have gone, their superpower and a fun fact. The card fills in as they answer.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-3-availability.webp" alt="Wizard step 3: time zone, school schedule and the times that could work." width="390" height="1323" loading="lazy"><figcaption><b>3. Availability</b>Time zone (filled in from their device), then weekday or weekend, afternoons or evenings.</figcaption></figure>
+      <figure><img src="beta/screens/wizard-4-done.webp" alt="Wizard end: Got it. We'll review your times and follow up with practice details." width="390" height="889" loading="lazy"><figcaption><b>After the last step</b>"We'll review and email you either way", so nobody reads it as a guaranteed spot. Then a reaction test for the player.</figcaption></figure>
+    </div>
+    <a class="more" href="/season1/beta/start">Try the wizard at /season1/beta/start</a>
+  </section>
+
+  <section>
+    <h2 id="emails">The emails</h2>
+    <p class="sub">Short, plain emails from Karlin. The first asks for a reply. The second invites everyone we have an email for into the wizard. The third confirms we got the player's info, without promising a spot.</p>
+    <div class="mail">
+      <article class="inbox">
+        <header>
+          <p class="subject" id="subject">A free 2-week beta before Season 01</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO</span></div>
+        </header>
+        <div class="body" id="emailbody">
+          <p>Hi,</p>
+          <p>Thanks for signing up to learn more about Season 01.</p>
+          <p>Before it starts, we're running a free 2-week beta, and I'd like your player in it. Two weeks with a pro coach, on a real team.</p>
+          <p>It's free. No card, no commitment.</p>
+          <p>Want in? Just reply to this email.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
+        </div>
+      </article>
+      <aside class="side">
+        <button class="btn" type="button" id="copyBody">Copy email</button>
+        <button class="btn ghost" type="button" id="copySubject">Copy subject line</button>
+        <div class="note">
+          <p><b>Send it as a personal email</b>From Karlin's own inbox, plain text, no link. A reply is the sign-up, and it comes straight to him.</p>
+          <p><b>Short on purpose</b>About 50 words. People don't read the long ones.</p>
+        </div>
+      </aside>
+    </div>
+    <p class="mailhead">The wizard invite</p>
+    <div class="mail">
+      <article class="inbox">
+        <header>
+          <p class="subject" id="subject2">Your next step for the EKUZO beta</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO</span></div>
+        </header>
+        <div class="body" id="emailbody2">
+          <p>Hi,</p>
+          <p>Thanks for your interest in the beta. Three quick steps tell us about your player and the times that work:</p>
+          <p>ekuzo.gg/season1/beta/launch</p>
+          <p>Questions? Just reply.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
+        </div>
+      </article>
+      <aside class="side">
+        <button class="btn" type="button" id="copyBody2">Copy email</button>
+        <button class="btn ghost" type="button" id="copySubject2">Copy subject line</button>
+        <div class="note">
+          <p><b>Two senders</b>Parents who replied to Karlin get this from him by hand, with the beta launch page link. Page sign-ups can get it from Klaviyo with the wizard link instead: ekuzo.gg/season1/beta/start</p>
+        </div>
+      </aside>
+    </div>
+    <p class="mailhead">After the wizard</p>
+    <div class="mail">
+      <article class="inbox">
+        <header>
+          <p class="subject" id="subject3">We got <span class="ph">[player name]</span>'s info</p>
+          <div class="from"><span class="av" aria-hidden="true">K</span><span><b>Karlin</b> from EKUZO</span></div>
+        </header>
+        <div class="body" id="emailbody3">
+          <p>Hi,</p>
+          <p>Thanks for telling us about <span class="ph">[player name]</span>.</p>
+          <p>Next, we look at the times families shared and build teams around them. Spots depend on what lines up. You'll hear from me by <span class="ph">[date]</span> either way.</p>
+          <p>Nothing to install yet. Tech setup comes later.</p>
+          <p>Questions? Just reply.</p>
+          <p>Karlin<br>Founder, EKUZO</p>
+        </div>
+      </article>
+      <aside class="side">
+        <button class="btn" type="button" id="copyBody3">Copy email</button>
+        <button class="btn ghost" type="button" id="copySubject3">Copy subject line</button>
+        <div class="note">
+          <p><b>Sent from Klaviyo</b>Right after a parent finishes the wizard.</p>
+          <p><b>No promise of a spot</b>It says we will review and reply. The date is still to set.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="ads">The ads</h2>
+    <p class="sub">Aaron's four new layouts, from Figma. Every one asks for the free beta, says "pro coach" and "kids ages 9+", and uses the page's button: Join our free beta.</p>
+    <div class="ads four">
+      <figure><img src="beta/ads/two-weeks-free.webp" alt="Ad: Two weeks free. Game with a pro coach. A kid in a headset at a monitor." width="540" height="675" loading="lazy"><figcaption><b>Two weeks free</b>The only one that names the two weeks.</figcaption></figure>
+      <figure><img src="beta/ads/free-kids-beta-photo.webp" alt="Ad: Free kids beta. Game with a pro coach. A kid gaming at a desk." width="540" height="675" loading="lazy"><figcaption><b>Free kids beta, photo</b>Closest to the BETA page headline.</figcaption></figure>
+      <figure><img src="beta/ads/join-the-beta.webp" alt="Ad: Join the beta. Game with a pro coach. Drawn kid on a call with a coach." width="540" height="675" loading="lazy"><figcaption><b>Join the beta</b>The drawn style, with the coach on screen.</figcaption></figure>
+      <figure><img src="beta/ads/free-kids-beta-drawn.webp" alt="Ad: Free kids beta. Game with a pro coach. Drawn kid on a call with a coach." width="540" height="675" loading="lazy"><figcaption><b>Free kids beta, drawn</b>Same art, to test the headline.</figcaption></figure>
+    </div>
+    <a class="more" href="ad-lab.html#d22">The three earlier beta ads (d22 to d24) are still in the ad lab</a>
+  </section>
+
+  <section>
+    <h2>Still to decide</h2>
+    <p class="sub">What the pathway needs before it goes live.</p>
+    <ul class="open">
+      <li><b>How we confirm a player</b><span class="who">Team</span><p>Still open. Until then the wizard ends on "we'll review and email you either way", which promises a reply and not a spot.</p></li>
+      <li><b>Dates and session times</b><span class="who">Karlin</span><p>It is two weeks and four sessions. Which two weeks, and the session times, come out of the availability answers.</p></li>
+      <li><b>How many players we can take</b><span class="who">Karlin</span><p>The drafts treat the beta as open to every family who signs up. If coach capacity sets a limit, the page needs a "full" state and a waitlist.</p></li>
+      <li><b>The page headline</b><span class="who">Karlin</span><p>Working version: "Free beta. Game with a pro coach." It matches the ads. "Esports" is out of the headline because it may put parents off.</p></li>
+      <li><b>Which questions we ask about the kid</b><span class="who">Team</span><p>The wizard asks name, age (9 to 18), where they game, how team sports have gone, their superpower and a fun fact. Games played, League experience and school schedule are out. Open question: what do we need to filter players, beyond availability?</p></li>
+      <li><b>Saving the wizard and the two emails</b><span class="who">Jamie</span><p>The wizard sends its answers on ekuzo.gg, but the sign-up route does not accept them yet. It also needs the wizard invite and the after-wizard email in Klaviyo. The full list is in <code>docs/beta-wizard-handoff.md</code>.</p></li>
+      <li><b>The reply-by date</b><span class="who">Team</span><p>The after-wizard email says "you'll hear from me by [date]". That date is not set.</p></li>
+      <li><b>The paid Season 01 page while BETA runs</b><span class="who">Team</span><p>The drafts assume it stays live for families who are ready, and every ad and email points to BETA.</p></li>
+      <li><b>The free jersey deadline</b><span class="who">Team</span><p>The jersey offer ends Nov 30, which may fall before the beta does. Decide if beta families still get it.</p></li>
+      <li><b>The Season 01 offer after the beta</b><span class="who">Karlin</span><p>What families get for enrolling at the end, and the deadline.</p></li>
+      <li><b>Ad exports</b><span class="who">Aaron</span><p>The four new ads live in Figma. They still need feed and story exports for Meta, and a place in the ad lab.</p></li>
+      <li><b>Karlin on the page</b><span class="who">Team</span><p>The page copy says "we" until parents know him. His card in "Who coaches" still names him.</p></li>
+      <li><b>Ages 9+ everywhere</b><span class="who">Aaron</span><p>The BETA page and the new ads say "kids ages 9+". The earlier beta ads (d22 to d24) and the live Season 01 pages still say 9-17.</p></li>
+    </ul>
+  </section>
+
+  <footer>Internal preview for the EKUZO team. This replaces the earlier four-week, invite-only beta plan.</footer>
+</div>
+
+<script>
+function copy(btn, text, label){
+  const done = () => { btn.dataset.done = ""; btn.textContent = "Copied"; setTimeout(() => { delete btn.dataset.done; btn.textContent = label; }, 1800); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, () => fallback(text, done));
+  else fallback(text, done);
+}
+function fallback(text, done){
+  const t = document.createElement("textarea"); t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+  document.body.appendChild(t); t.select(); try { document.execCommand("copy"); done(); } catch (e) {} t.remove();
+}
+function bodyText(id){
+  return [...document.querySelectorAll("#" + id + " > *")].map(el =>
+    el.tagName === "UL" ? [...el.children].map(li => "- " + li.textContent.trim()).join("\n") : el.innerText.trim()
+  ).join("\n\n");
+}
+[["copyBody","emailbody","subject","copySubject"],["copyBody2","emailbody2","subject2","copySubject2"],["copyBody3","emailbody3","subject3","copySubject3"]].forEach(([b,body,subj,s]) => {
+  document.getElementById(b).addEventListener("click", e => copy(e.currentTarget, bodyText(body), "Copy email"));
+  document.getElementById(s).addEventListener("click", e => copy(e.currentTarget, document.getElementById(subj).textContent.trim(), "Copy subject line"));
+});
+</script>
+</body></html>
