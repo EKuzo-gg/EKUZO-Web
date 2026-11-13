@@ -1,0 +1,290 @@
+import { describe, it, before, after, beforeEach } from "node:test";
+import assert from "node:assert/strict";
+
+/**
+ * Step "beta-wizard" of POST /api/season-one (docs/beta-wizard-go-live-2026-11, requirements B1 to B14).
+ * fetch is mocked: Neon HTTP (an in-memory s1_beta_families / s1_beta_players that honors SAVE_SQL's
+ * contract, plus the hit() / hitPair() counters), Klaviyo, the Discord webhook, the Sheets webhook and
+ * the Meta Graph API (which must never be called). No real network or database.
+ */
+const saved: Record<string, string | undefined> = {};
+const realFetch = globalThis.fetch;
+const realConsole = { log: console.log, warn: console.warn, error: console.error };
+const logs: string[] = [];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let klaviyo: { path: string; body: any }[] = [];
+let discord: string[] = [];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let sheets: any[] = [];
+let graph = 0;
+let queries: { query: string; params: unknown[] }[] = [];
+let dbMode: "ok" | "throw" | "hang" = "ok";
+let eventStatus = 202;
+let families = new Map<string, { id: string; source: string }>();
+let players = new Map<string, { id: string; eventId: string; age: number }>();
+let counters = new Map<string, number>();
+
+const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
+const result = (fields: string[], rows: unknown[][]) => ({ command: "SELECT", rowCount: rows.length, fields: fields.map((name) => ({ name, dataTypeID: 25 })), rows });
+const bump = (k: unknown) => { const n = (counters.get(String(k)) ?? 0) + 1; counters.set(String(k), n); return n; };
+
+async function fakeFetch(url: unknown, init?: RequestInit) {
+  const u = String(url);
+  const body = JSON.parse(String(init?.body ?? "{}"));
+  if (u.includes("neon.tech")) {
+    const q = { query: String(body.query), params: body.params as unknown[] };
+    queries.push(q);
+    if (dbMode === "throw") return json({ message: "db down" }, 500);
+    if (dbMode === "hang") { await new Promise((r) => setTimeout(r, 3000)); return json({ message: "late" }, 500); }
+    if (/insert into s1_beta_families/.test(q.query)) {
+      const [email, source, , , , , nameKey, age, , , , , , , , , , , eventId] = q.params.map(String);
+      let fam = families.get(email);
+      const newFamily = !fam;
+      if (!fam) { fam = { id: `fam-${families.size + 1}`, source }; families.set(email, fam); }
+      const key = `${fam.id}|${nameKey}`;
+      const prev = players.get(key);
+      const pl = prev ?? { id: `pl-${players.size + 1}`, eventId: "", age: 0 };
+      const prevEvent = prev ? prev.eventId : "";
+      pl.eventId = eventId; pl.age = Number(age); players.set(key, pl);
+      const count = [...players.keys()].filter((k) => k.startsWith(`${fam!.id}|`)).length;
+      return json({ command: "SELECT", rowCount: 1,
+        fields: [["family_id", 25], ["new_family", 16], ["player_id", 25], ["new_player", 16], ["prev_event_id", 25], ["players", 23]].map(([name, dataTypeID]) => ({ name, dataTypeID })),
+        rows: [[fam.id, newFamily ? "t" : "f", pl.id, prev ? "f" : "t", prevEvent, String(count)]] });
+    }
+    if (/^with a as/.test(q.query.trim())) {
+      const a = bump(q.params[0]);
+      const b = a <= Number(q.params[2]) ? bump(q.params[3]) : null;
+      return json(result(["a_count", "b_count"], [[a, b]]));
+    }
+    if (/^\s*insert into s1_rate_limits/.test(q.query)) return json(result(["count"], [[bump(q.params[0])]]));
+    if (/^delete from s1_rate_limits/.test(q.query)) return json({ command: "DELETE", rowCount: 0, fields: [], rows: [] });
+    throw new Error("unit: unexpected query " + q.query.slice(0, 60));
+  }
+  if (u.includes("a.klaviyo.com")) {
+    klaviyo.push({ path: u.split("/api/")[1], body });
+    return new Response(u.endsWith("/events") ? "" : "{}", { status: u.endsWith("/events") ? eventStatus : 202 });
+  }
+  if (u.includes("discord.test")) { discord.push(body.content); assert.deepEqual(body.allowed_mentions, { parse: [] }); return new Response("", { status: 204 }); }
+  if (u.includes("sheets.test")) { sheets.push(body); return json({ ok: true }); }
+  if (u.includes("graph.facebook.com")) { graph++; return json({ events_received: 1 }); }
+  throw new Error("unit: unexpected network call " + u);
+}
+
+const events = () => klaviyo.filter((c) => c.path === "events").map((c) => c.body.data.attributes);
+const consents = () => klaviyo.filter((c) => c.path.startsWith("profile-subscription")).map((c) => c.body.data);
+const post = async (payload: unknown, headers: Record<string, string> = {}) => {
+  const { POST } = await import("../../../app/api/season-one/route");
+  const { NextRequest } = await import("next/server");
+  const r = await POST(new NextRequest("http://localhost:3103/api/season-one", {
+    method: "POST", headers: { "content-type": "application/json", ...headers }, body: JSON.stringify(payload),
+  }));
+  return { status: r.status, body: (await r.json()) as Record<string, unknown> };
+};
+const wiz = (extra: Record<string, unknown> = {}) => ({
+  step: "beta-wizard", email: "Team+S1Test-Unit@example.com", eventId: "evt-beta-0001",
+  playerName: "Maya", playerAge: 12, playsOn: ["Console", "Phone"], teamSports: "Tried, didn't stick",
+  superpowers: ["Makes everyone laugh", "Quick thinker"], funFact: "Knows every flag in the world",
+  expectations: ["No toxicity", "Positive mindset", "Winning attitude"], timeZone: "Eastern", tz: "America/New_York",
+  times: ["Weekday evenings", "Weekend afternoons"], note: "",
+  attribution: { utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "" },
+  page: "/season1/beta/start", ekz_hp: "", ...extra,
+});
+const EMAIL = "team+s1test-unit@example.com";
+
+describe("POST /api/season-one step beta-wizard", () => {
+  before(() => {
+    for (const k of ["DATABASE_URL", "KLAVIYO_PRIVATE_API_KEY", "S1_REF_SECRET", "STRIPE_SECRET_KEY", "S1_DISCORD_WEBHOOK_URL", "S1_DISCORD_WEBHOOK_URL_TEST", "S1_BETA_SHEETS_WEBHOOK_URL", "META_CAPI_ACCESS_TOKEN", "META_PIXEL_ID"]) saved[k] = process.env[k];
+    process.env.DATABASE_URL = "postgresql://" + "unit" + ":" + "unit" + "@ep-lively-boat-b4fak1h6.us-east-2.aws.neon.tech/neondb";
+    process.env.KLAVIYO_PRIVATE_API_KEY = "unit-klaviyo-key";
+    process.env.S1_REF_SECRET = "unit-ref-secret-0123456789";
+    process.env.STRIPE_SECRET_KEY = "unit-not-a-live-key";
+    process.env.S1_DISCORD_WEBHOOK_URL_TEST = "https://discord.test/hook";
+    process.env.META_CAPI_ACCESS_TOKEN = "unit-meta-token";
+    process.env.META_PIXEL_ID = "1234567890";
+    delete process.env.S1_DISCORD_WEBHOOK_URL;
+    delete process.env.S1_BETA_SHEETS_WEBHOOK_URL;
+    globalThis.fetch = fakeFetch as typeof fetch;
+    console.log = console.warn = console.error = (...a: unknown[]) => { logs.push(a.map(String).join(" ")); };
+  });
+  after(() => {
+    globalThis.fetch = realFetch;
+    Object.assign(console, realConsole);
+    for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
+  });
+  beforeEach(() => {
+    klaviyo = []; discord = []; sheets = []; graph = 0; queries = []; dbMode = "ok"; eventStatus = 202;
+    families = new Map(); players = new Map(); counters = new Map(); logs.length = 0;
+    delete process.env.S1_BETA_SHEETS_WEBHOOK_URL;
+  });
+
+  it("B1: an email with no earlier sign-up is saved: family, player, event, consent, one Discord line", async () => {
+    const r = await post(wiz());
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(families.size, 1); assert.equal(players.size, 1);
+    const ev = events(); assert.equal(ev.length, 1);
+    assert.equal(ev[0].metric.data.attributes.name, "Beta Wizard Completed");
+    assert.equal(ev[0].profile.data.attributes.email, EMAIL);
+    assert.equal(ev[0].unique_id, `${EMAIL}-Beta Wizard Completed-evt-beta-0001`);
+    assert.deepEqual(ev[0].properties.times, ["Weekday evenings", "Weekend afternoons"]);
+    assert.equal(ev[0].properties.player_age, 12);
+    assert.equal(ev[0].profile.data.attributes.properties.beta_wizard, "yes");
+    assert.equal(ev[0].profile.data.attributes.properties.beta_time_zone, "Eastern");
+    assert.equal(discord.length, 1);
+    assert.match(discord[0], /^\[TEST\] Beta sign-up \| Maya, 12 \| Time zone: Eastern \(America\/New_York\) \| Times: Weekday evenings, Weekend afternoons \| Email: team\+s1test-unit@example\.com \| Source: direct$/);
+  });
+
+  it("B2 (P3): never the Season 01 Waitlist: no list relationship, no Waitlist metric, no step lock or 24 h claim query, no Meta call", async () => {
+    await post(wiz());
+    const c = consents(); assert.equal(c.length, 1);
+    assert.equal(c[0].relationships, undefined);
+    assert.equal(JSON.stringify(klaviyo).includes("XGTv2F"), false);
+    assert.equal(c[0].attributes.custom_source, "Season 01 beta sign-up");
+    assert.equal(events().some((e) => /Season 01 Waitlist/.test(e.metric.data.attributes.name)), false);
+    assert.equal(queries.some((q) => /with seen as|select 1 from s1_rate_limits/.test(q.query)), false);
+    assert.equal(queries.some((q) => /s1wl:/.test(JSON.stringify(q.params))), false);
+    assert.equal(graph, 0);
+  });
+
+  it("B3: a retry of the same submit records one player and announces once", async () => {
+    await post(wiz()); const again = await post(wiz());
+    assert.equal(again.status, 200);
+    assert.equal(players.size, 1);
+    assert.equal(discord.length, 1);
+    const ids = events().map((e) => e.unique_id); assert.equal(ids.length, 2); assert.equal(ids[0], ids[1]); // Klaviyo dedupes on unique_id
+  });
+
+  it("B4: a second player on the same email records a second player, with a line that says so", async () => {
+    await post(wiz());
+    const r = await post(wiz({ eventId: "evt-beta-0002", playerName: "Leo", playerAge: 9 }));
+    assert.equal(r.status, 200);
+    assert.equal(families.size, 1); assert.equal(players.size, 2);
+    assert.equal(discord.length, 2);
+    assert.match(discord[1], /Beta sign-up \(player 2 for this family\) \| Leo, 9/);
+  });
+
+  it("B5: the same player sent again with new answers updates the row and says updated", async () => {
+    await post(wiz());
+    await post(wiz({ eventId: "evt-beta-0003", playerAge: 13 }));
+    assert.equal(players.size, 1);
+    assert.equal([...players.values()][0].age, 13);
+    assert.match(discord[1], /Beta sign-up updated \| Maya, 13/);
+  });
+
+  it("B6: forty families on one network in an hour are all saved", async () => {
+    for (let i = 0; i < 40; i++) {
+      const r = await post(wiz({ email: `team+s1test-unit-${i}@example.com`, eventId: `evt-school-${i}` }), { "x-nf-client-connection-ip": "203.0.113.7" });
+      assert.equal(r.status, 200, `family ${i}`);
+    }
+    assert.equal(families.size, 40);
+  });
+
+  it("B6b: past the per-IP ceiling the answer is a 429 with the text-our-founder line and nothing is written", async () => {
+    for (let i = 0; i < 60; i++) await post(wiz({ email: `team+s1test-unit-${i}@example.com`, eventId: `e-${i}` }), { "x-nf-client-connection-ip": "203.0.113.9" });
+    const before = families.size;
+    const r = await post(wiz({ email: "team+s1test-unit-x@example.com", eventId: "e-x" }), { "x-nf-client-connection-ip": "203.0.113.9" });
+    assert.equal(r.status, 429);
+    assert.match(String(r.body.error), /Text our founder at \(832\) 271-0150/);
+    assert.equal(families.size, before);
+  });
+
+  it("B7: the honeypot stops a bot: 200, nothing written anywhere", async () => {
+    const r = await post(wiz({ ekz_hp: "http://spam.example" }));
+    assert.deepEqual(r, { status: 200, body: { ok: true } });
+    assert.equal(queries.length + klaviyo.length + discord.length + sheets.length, 0);
+  });
+
+  it("B8: every field is checked against the wizard's allowed values", async () => {
+    const bad: Record<string, unknown>[] = [
+      { playerAge: 8 }, { playerAge: 19 }, { playerAge: "12" }, { playerAge: 12.5 }, { playerName: "" }, { playerName: "<>" }, { playerName: 5 },
+      { playsOn: ["Xbox"] }, { playsOn: "Console" }, { teamSports: "Great" }, { teamSports: 3 },
+      { superpowers: ["Never gives up", "Quick thinker", "Natural leader"] }, { superpowers: ["Flying"] },
+      { expectations: ["No toxicity", "Positive mindset"] }, { expectations: [] }, { expectations: ["No toxicity", "Positive mindset", "Other"] },
+      { timeZone: "Atlantic" }, { timeZone: undefined }, { times: [] }, { times: ["Weeknights"] }, { times: "Weekday evenings" },
+    ];
+    for (const b of bad) {
+      const r = await post(wiz(b));
+      assert.equal(r.status, 400, JSON.stringify(b));
+      assert.equal(typeof r.body.error, "string");
+    }
+    assert.equal(queries.length + klaviyo.length + discord.length, 0);
+    // Optional fields may be empty or absent.
+    const ok = await post(wiz({ playsOn: [], teamSports: "", superpowers: [], funFact: "", note: undefined, tz: "not/a-zone" }));
+    assert.equal(ok.status, 200);
+    assert.equal(events()[0].properties.tz, "");
+  });
+
+  it("B9: playerName, funFact and note are untrusted text: markup, controls and mentions never reach a template or the channel", async () => {
+    await post(wiz({
+      playerName: "<b>Ma@ya</b> `x` |", funFact: "<script>alert(1)</script> loves\u0000 chess " + "x".repeat(300),
+      note: "<img src=x onerror=1>\nCall me @everyone " + "y".repeat(900),
+    }));
+    const p = events()[0].properties;
+    assert.equal(p.player_name, "bMayab x");
+    assert.equal(/[<>\u0000-\u001f]/.test(p.fun_fact + p.note + p.player_name), false);
+    assert.ok(p.fun_fact.length <= 120); assert.ok(p.note.length <= 500);
+    assert.equal(/[<>`@*|]/.test(discord[0].split(" | ")[1]), false);
+    assert.equal(discord[0].includes("everyone"), false); // the note is not in the channel line at all
+  });
+
+  it("B10: source and attribution: the ?src= cookie wins, then the last click, then utm on the wizard URL", async () => {
+    const lc = encodeURIComponent(JSON.stringify({ utm_source: "newsletter", utm_medium: "email", path: "/season1/beta/launch", ts: Date.now() }));
+    await post(wiz(), { cookie: `ekuzo_bsrc=karlin-email; ekuzo_lc=${lc}; ekuzo_origin=direct` });
+    const q = queries.find((x) => /insert into s1_beta_families/.test(x.query))!;
+    assert.equal(q.params[1], "karlin-email");
+    const attr = JSON.parse(String(q.params[2]));
+    assert.equal(attr.src, "karlin-email"); assert.equal(attr.utm_source, "newsletter"); assert.equal(attr.lc_path, "/season1/beta/launch");
+    assert.equal(events()[0].properties.source, "karlin-email");
+    assert.equal(events()[0].profile.data.attributes.properties.beta_source, "karlin-email");
+    assert.match(discord[0], /Source: karlin-email$/);
+    klaviyo = []; discord = [];
+    await post(wiz({ email: "team+s1test-unit-b@example.com", eventId: "e-b", attribution: { utm_source: "partner-ams", utm_medium: "referral" } }), { cookie: "ekuzo_bsrc=Bad Value!!" });
+    assert.equal(events()[0].properties.source, "partner-ams");
+    assert.equal(events()[0].properties.src, "");
+  });
+
+  it("B11: the database down: Klaviyo still saves, the parent gets ok, the line says the database missed it", async () => {
+    dbMode = "throw";
+    const r = await post(wiz());
+    assert.equal(r.status, 200);
+    assert.equal(events().length, 1);
+    assert.match(discord[0], /NOT in the database \(Klaviyo only\)$/);
+  });
+
+  it("B12: Klaviyo down: the database still saves, no consent call, the line says Klaviyo missed it; both down is a 502", async () => {
+    eventStatus = 500;
+    const r = await post(wiz());
+    assert.equal(r.status, 200);
+    assert.equal(players.size, 1); assert.equal(consents().length, 0);
+    assert.match(discord[0], /NOT in Klaviyo \(database only\)$/);
+    dbMode = "throw"; discord = [];
+    const both = await post(wiz({ eventId: "evt-beta-0009" }));
+    assert.equal(both.status, 502);
+    assert.equal(discord.length, 0);
+  });
+
+  it("B13: Sheets row only when S1_BETA_SHEETS_WEBHOOK_URL is set", async () => {
+    await post(wiz());
+    assert.equal(sheets.length, 0);
+    process.env.S1_BETA_SHEETS_WEBHOOK_URL = "https://sheets.test/exec";
+    await post(wiz({ eventId: "evt-beta-0010", playerName: "Leo" }));
+    assert.equal(sheets.length, 1);
+    assert.equal(sheets[0].tab, "beta-players");
+    assert.equal(sheets[0].rows[0].weekday_evenings, "yes"); assert.equal(sheets[0].rows[0].weekday_afternoons, "");
+  });
+
+  it("B14: logs never carry the email, the player's name or an answer", async () => {
+    dbMode = "throw"; eventStatus = 500;
+    await post(wiz());
+    await post(wiz({ ekz_hp: "x" }));
+    const all = logs.join("\n");
+    assert.ok(all.length > 0);
+    for (const s of ["s1test", "Maya", "flag", "example.com"]) assert.equal(all.includes(s), false, s);
+  });
+
+  it("regression: an unknown step is still a 400 and the other steps are untouched by this one", async () => {
+    const r = await post({ email: EMAIL, step: "beta-wizzard" });
+    assert.equal(r.status, 400);
+    assert.equal(queries.length + klaviyo.length, 0);
+  });
+});

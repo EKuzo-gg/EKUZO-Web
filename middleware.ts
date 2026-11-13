@@ -3,6 +3,11 @@ import { classifyOrigin, isBotUserAgent } from "@/lib/originClassifier";
 import { LC_COOKIE, LC_MAX_AGE_SECONDS, buildLastClick } from "@/lib/season1/attribution";
 import { SEASON_ONE_MODE, SEASON_ONE_PARAM } from "@/lib/seasonOne";
 
+// Beta pages only: the link's own source tag (?src=karlin-email). Kept in step with lib/season1/betaWizard.ts,
+// which reads the cookie; not imported from there because that module pulls in the database client.
+const BETA_SRC_COOKIE = "ekuzo_bsrc";
+const BETA_SRC_RE = /^[a-z0-9][a-z0-9_-]{0,39}$/;
+
 /**
  * First-touch acquisition-origin tagging.
  *
@@ -40,6 +45,22 @@ export function middleware(req: NextRequest) {
     if (lc) {
       res.cookies.set(LC_COOKIE, lc.value, {
         maxAge: LC_MAX_AGE_SECONDS,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        path: "/",
+      });
+    }
+  }
+
+  // Free beta source tag: a beta page opened with ?src=<tag> remembers the tag for 30 days, so the
+  // wizard's sign-up carries it even though the launch page links to the wizard without a query.
+  // Beta paths only; every other route is untouched. HttpOnly: only /api/season-one reads it.
+  if (path === "/season1/beta" || path.startsWith("/season1/beta/")) {
+    const src = (req.nextUrl.searchParams.get("src") ?? "").trim().toLowerCase();
+    if (BETA_SRC_RE.test(src) && !isBotUserAgent(req.headers.get("user-agent"))) {
+      res.cookies.set(BETA_SRC_COOKIE, src, {
+        maxAge: 60 * 60 * 24 * 30,
         sameSite: "lax",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
