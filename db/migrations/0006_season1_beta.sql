@@ -1,4 +1,6 @@
--- Season 01 free beta: families and players from the sign-up wizard (/season1/beta/start).
+-- Season 01 free beta: families and players from the sign-up wizard (/season1/beta/start), and
+-- s1_beta_progress, the drop-off record: one row per email with the last step finished, the answers
+-- so far and the step to pick up at (completed_at is null until the wizard is sent).
 -- Separate from s1_families and s1_kids on purpose: those belong to checkout, and the
 -- never-paid sweep (scripts/s1-sweep.mjs) blanks kid names there. Additive only.
 -- Plain SQL, idempotent-safe. Statements end with a semicolon at end of line; no $$ blocks.
@@ -43,3 +45,20 @@ create table if not exists s1_beta_players (
 );
 
 create index if not exists s1_beta_players_family_id_idx on s1_beta_players (family_id);
+
+create table if not exists s1_beta_progress (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  session_id text not null default '',
+  stage int not null default 0,
+  next_step text not null default '',
+  answers jsonb not null default '{}',
+  source text not null default '',
+  attribution jsonb,
+  page text not null default '',
+  livemode boolean not null,
+  started_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  completed_at timestamptz,
+  unique (email, livemode)
+);

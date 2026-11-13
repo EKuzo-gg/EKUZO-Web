@@ -6,7 +6,6 @@ import { foldName, getSql } from "./db";
 import { OFFER } from "./offer";
 import { hit, hitPair } from "./ratelimit";
 import { keyHash } from "./rules";
-import { emailText, free, sendDiscord } from "./senders/discord";
 import { keyIsLive } from "./stripe";
 
 /**
@@ -24,9 +23,16 @@ import { keyIsLive } from "./stripe";
  *     consent change: never the Season 01 Waitlist list (XGTv2F), which the Day 0 and Day 4
  *     flows and Karlin's founder note all key on, so a wizard-only family gets none of them.
  *     (The endpoint is open, so it must not be a way to subscribe someone else's address.)
- *  3. Discord (the Season 01 ops channel): one line per new player or changed answers, so a
- *     person follows up. Never on a retry of the same submit.
- *  4. Sheets: one row per player, only when S1_BETA_SHEETS_WEBHOOK_URL is set (off by default).
+ *  3. Sheets: one row per player, only when S1_BETA_SHEETS_WEBHOOK_URL is set (off by default).
+ *     Never on a retry of the same submit. No Discord: that channel is for Season 01 sales only
+ *     (Jamie, 2026-11-12).
+ *
+ * Drop-off capture (step "beta-progress", handleBetaProgress below): the page posts after the
+ * email screen and after each step, so a family that stops is on record with the answers so far
+ * and the step to pick up at: s1_beta_progress in Neon, and a "Beta Wizard Progress" event plus
+ * beta_wizard_stage / beta_wizard_next_step on the Klaviyo profile. Completing the wizard marks
+ * the progress row done and sets beta_wizard_stage to "done", so a pick-up email never fires for
+ * a family that finished.
  * Nothing goes to Meta or GA4 from here, and nothing about the player is ever put in a URL.
  *
  * The parent sees ok when Neon or Klaviyo saved the answers; both failing is a 502 and a retry.
@@ -59,7 +65,7 @@ const LIMIT_TIMEOUT_MS = 800;
 const DB_TIMEOUT_MS = 2500;
 /** Submissions per client IP per clock hour (the waitlist's own ceiling). A school or library shares one address. */
 export const IP_PER_HOUR = 30;
-/** Submissions per clock hour across everyone: above this they are still saved, but no Discord line or Sheets row (a flood must not bury the channel). */
+/** Submissions per clock hour across everyone: above this they are still saved, but no Sheets row (a flood must not bury the team's sheet). */
 export const GLOBAL_QUIET_PER_HOUR = 200;
 const FAIL = "We couldn’t save that. Please try again.";
 
@@ -203,7 +209,11 @@ export const SAVE_SQL = `with fam as (
      page = excluded.page, updated_at = now(),
      submissions = s1_beta_players.submissions + (case when s1_beta_players.last_event_id = excluded.last_event_id then 0 else 1 end),
      last_event_id = excluded.last_event_id
-   returning id, (xmax = 0) as new_player)
+   returning id, (xmax = 0) as new_player),
+ done as (
+   update s1_beta_progress set stage = 3, next_step = '', completed_at = now(), updated_at = now()
+    where email = $1 and livemode = $5::boolean and completed_at is null
+   returning 1)
  select fam.id as family_id, fam.new_family, pl.id as player_id, pl.new_player,
         coalesce((select last_event_id from prev), '') as prev_event_id,
         (select count(*)::int from s1_beta_players p where p.family_id = fam.id) + (case when pl.new_player then 1 else 0 end) as players
@@ -261,6 +271,7 @@ async function saveToKlaviyo(email: string, a: BetaAnswers, source: string, attr
                 email,
                 properties: {
                   beta_wizard: "yes", beta_completed_at: now, beta_source: source,
+                  beta_wizard_stage: "done", beta_wizard_next_step: "",
                   beta_player_name: a.playerName, beta_player_age: a.playerAge,
                   beta_time_zone: a.timeZone, beta_tz: a.tz, beta_times: a.times,
                 },
@@ -286,30 +297,6 @@ async function saveToKlaviyo(email: string, a: BetaAnswers, source: string, attr
   } catch (err) {
     console.error("Klaviyo beta wizard event failed:", err instanceof Error ? err.name : "error");
     return false;
-  }
-}
-
-/** The ops-channel line. Team-only channel: parent email, the player's first name, age, time zone and times. */
-export function betaDiscordLine(email: string, a: BetaAnswers, source: string, saved: Saved | null, klaviyoOk: boolean, livemode: boolean): string {
-  const what = !saved ? "Beta sign-up" : saved.newPlayer ? (saved.players > 1 ? `Beta sign-up (player ${saved.players} for this family)` : "Beta sign-up") : "Beta sign-up updated";
-  const parts = [
-    `${livemode ? "" : "[TEST] "}${what}`,
-    `${free(a.playerName, 40)}, ${a.playerAge}`,
-    `Time zone: ${free(a.timeZone, 12)}${a.tz ? ` (${a.tz.replace(/[^A-Za-z0-9_/+.-]/g, "")})` : ""}`,
-    `Times: ${a.times.join(", ")}`,
-    `Email: ${emailText(email)}`,
-    `Source: ${free(source, 60) || "direct"}`,
-  ];
-  if (!saved) parts.push("NOT in the database (Klaviyo only)");
-  if (!klaviyoOk) parts.push("NOT in Klaviyo (database only)");
-  return parts.join(" | ");
-}
-
-async function notifyDiscord(line: string) {
-  try {
-    await sendDiscord(line, keyIsLive());
-  } catch (err) {
-    console.error("Beta wizard Discord line failed:", err instanceof Error ? err.message : "error");
   }
 }
 
@@ -396,17 +383,150 @@ export async function handleBetaWizard(req: NextRequest, body: Record<string, un
     }, { status: 502 });
   }
 
-  // A retry of the same submit announces nothing twice. Without the database we cannot tell, so we announce.
-  if (limits.quiet) console.warn("Beta wizard quiet: over the hourly ceiling, saved without a Discord line");
+  // A retry of the same submit writes no second Sheets row. Without the database we cannot tell, so we write.
+  if (limits.quiet) console.warn("Beta wizard quiet: over the hourly ceiling, saved without a Sheets row");
   const announce = !limits.quiet && (!saved || !saved.sameEvent);
-  await Promise.all([
-    announce ? notifyDiscord(betaDiscordLine(email, a, source, saved, klaviyoOk, keyIsLive())) : Promise.resolve(),
-    announce ? sheetsRow(email, a, source, saved) : Promise.resolve(),
-  ]);
+  if (announce) await sheetsRow(email, a, source, saved);
   return NextResponse.json({ ok: true });
 }
 
 function displayPhone(e164: string): string {
   const m = /^\+1(\d{3})(\d{3})(\d{4})$/.exec(e164);
   return m ? `(${m[1]}) ${m[2]}-${m[3]}` : e164;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Drop-off capture: step "beta-progress"
+ * ---------------------------------------------------------------------------------------- */
+
+export const PROGRESS_METRIC = "Beta Wizard Progress";
+/** stage = the last screen the parent finished: 0 the email screen, 1 "what the beta is", 2 the player card. (3, availability, is the completed wizard.) */
+export const STAGES = [
+  { done: "email", next: "What the beta is", nextStep: 1 },
+  { done: "expectations", next: "Player card", nextStep: 2 },
+  { done: "player card", next: "Availability", nextStep: 3 },
+] as const;
+/** Progress posts per client IP per clock hour (three per family). Over it they are dropped silently; the parent never sees it. */
+export const PROGRESS_IP_PER_HOUR = 150;
+
+/** The answers so far. Lenient on purpose: a field that is missing or not an allowed value is left out, never an error. */
+export function partialAnswers(raw: unknown): Record<string, unknown> {
+  const b = (raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {}) as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
+  const name = (typeof b.playerName === "string" ? b.playerName.replace(NAME_STRIP_RE, "") : "").replace(/\s+/g, " ").trim().slice(0, 40).trim();
+  if (name) out.playerName = name;
+  if (typeof b.playerAge === "number" && Number.isInteger(b.playerAge) && b.playerAge >= AGE_MIN && b.playerAge <= AGE_MAX) out.playerAge = b.playerAge;
+  const lists: [string, readonly string[], number][] = [["playsOn", PLAYS_ON, 5], ["superpowers", SUPERPOWERS, 2], ["expectations", EXPECTATIONS, 3], ["times", TIMES, 4]];
+  for (const [k, allowed, max] of lists) {
+    const v = subset(b[k], allowed, max);
+    if (v && v.length) out[k] = v;
+  }
+  if (typeof b.teamSports === "string" && (TEAM_SPORTS as readonly string[]).includes(b.teamSports)) out.teamSports = b.teamSports;
+  if (typeof b.timeZone === "string" && (TIME_ZONES as readonly string[]).includes(b.timeZone)) out.timeZone = b.timeZone;
+  const tz = cleanTz(b.tz);
+  if (tz) out.tz = tz;
+  const fact = freeText(b.funFact, 120);
+  if (fact) out.funFact = fact;
+  const note = freeText(b.note, 500);
+  if (note) out.note = note;
+  return out;
+}
+
+/**
+ * One row per email. The same wizard session only ever moves forward (stage is the highest seen,
+ * answers merge). A new session (the parent starts again, for a sibling or on another day) starts
+ * the row over and clears completed_at, so a second, unfinished run is a drop-off again.
+ */
+export const PROGRESS_SQL = `insert into s1_beta_progress (email, session_id, stage, next_step, answers, source, attribution, page, livemode)
+ values ($1, $2, $3::int, $4, $5::jsonb, $6, $7::jsonb, $8, $9::boolean)
+ on conflict (email, livemode) do update set
+   stage = case when s1_beta_progress.session_id = excluded.session_id then greatest(s1_beta_progress.stage, excluded.stage) else excluded.stage end,
+   next_step = case when s1_beta_progress.session_id = excluded.session_id and s1_beta_progress.stage > excluded.stage then s1_beta_progress.next_step else excluded.next_step end,
+   answers = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.answers || excluded.answers else excluded.answers end,
+   started_at = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.started_at else now() end,
+   completed_at = case when s1_beta_progress.session_id = excluded.session_id then s1_beta_progress.completed_at else null end,
+   session_id = excluded.session_id, page = excluded.page, updated_at = now()
+ returning id, stage, (completed_at is not null) as completed`;
+
+/**
+ * Handles step "beta-progress". Always answers {ok:true} for a well-formed post: the page ignores
+ * the answer and a parent is never interrupted by a capture failure. Nothing here goes to Meta.
+ */
+export async function handleBetaProgress(req: NextRequest, body: Record<string, unknown>, email: string, ipMaterial: string | null): Promise<NextResponse> {
+  const ok = () => NextResponse.json({ ok: true });
+  if (text(body.ekz_hp)) return ok();
+  const stage = body.stage;
+  if (typeof stage !== "number" || !Number.isInteger(stage) || stage < 0 || stage >= STAGES.length) return NextResponse.json({ ok: false, error: FAIL }, { status: 400 });
+  const sessionId = cleanEventId(body.sessionId);
+  if (!sessionId) return NextResponse.json({ ok: false, error: FAIL }, { status: 400 });
+
+  if (process.env.DATABASE_URL && ipMaterial) {
+    try {
+      if (!(await withTimeout(LIMIT_TIMEOUT_MS, hit(`s1bp:ip:${keyHash(ipMaterial)}`, PROGRESS_IP_PER_HOUR, 3600)))) {
+        console.warn("Beta progress dropped: rate limited");
+        return ok();
+      }
+    } catch (err) {
+      console.warn("Beta progress limit check skipped:", err instanceof Error ? err.message : err);
+    }
+  }
+
+  const st = STAGES[stage];
+  const answers = partialAnswers(body.answers);
+  const attr = (body.attribution && typeof body.attribution === "object" && !Array.isArray(body.attribution) ? body.attribution : {}) as Record<string, unknown>;
+  const utm: Record<string, string> = {};
+  for (const k of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) {
+    const v = text(attr[k], 160).replace(/[^\x20-\x7e]/g, "").replace(/[<>]/g, "").trim();
+    if (v) utm[k] = v;
+  }
+  const { source, attribution } = betaAttribution(req, utm);
+  const pageRaw = text(body.page, 120);
+  const page = /^\/season1\/beta(\/[a-z0-9/-]*)?$/.test(pageRaw) ? pageRaw : "/season1/beta/start";
+
+  const db = (async (): Promise<{ completed: boolean } | null> => {
+    if (!process.env.DATABASE_URL) return null;
+    try {
+      const rows = (await withTimeout(
+        DB_TIMEOUT_MS,
+        getSql().query(PROGRESS_SQL, [email, sessionId, stage, st.next, JSON.stringify(answers), source, JSON.stringify(attribution), page, keyIsLive()]) as Promise<Record<string, unknown>[]>,
+      )) as Record<string, unknown>[];
+      return rows[0] ? { completed: rows[0].completed === true } : null;
+    } catch (err) {
+      console.error("Beta progress database save failed:", err instanceof Error ? err.message : err);
+      return null;
+    }
+  })();
+
+  const kl = (async () => {
+    try {
+      const now = new Date().toISOString();
+      const profile: Record<string, unknown> = { beta_wizard_stage: st.done, beta_wizard_next_step: st.next, beta_wizard_updated_at: now, beta_source: source };
+      if (stage === 0) profile.beta_wizard_started_at = now;
+      if (answers.playerName) profile.beta_player_name = answers.playerName;
+      if (answers.playerAge) profile.beta_player_age = answers.playerAge;
+      const r = await klaviyo("events", {
+        data: {
+          type: "event",
+          attributes: {
+            metric: { data: { type: "metric", attributes: { name: PROGRESS_METRIC } } },
+            profile: { data: { type: "profile", attributes: { email, properties: profile } } },
+            properties: {
+              stage, step_done: st.done, next_step: st.next, next_step_number: st.nextStep, session: sessionId, source, page,
+              player_name: answers.playerName ?? "", player_age: answers.playerAge ?? "", plays_on: answers.playsOn ?? [],
+              team_sports: answers.teamSports ?? "", superpowers: answers.superpowers ?? [], fun_fact: answers.funFact ?? "",
+              expectations: answers.expectations ?? [],
+            },
+            time: now,
+            unique_id: `${email}-${PROGRESS_METRIC}-${sessionId}-${stage}`,
+          },
+        },
+      }, EVENT_TIMEOUT_MS);
+      if (!r.ok) console.error("Klaviyo beta progress event failed:", r.status);
+    } catch (err) {
+      console.error("Klaviyo beta progress event failed:", err instanceof Error ? err.name : "error");
+    }
+  })();
+
+  await Promise.all([db, kl]);
+  return ok();
 }

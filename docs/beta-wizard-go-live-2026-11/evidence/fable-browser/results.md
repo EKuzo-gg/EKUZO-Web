@@ -1,0 +1,5 @@
+# Injected capture script on the real wizard page (author self-test, Fable, 20:07 CT)
+
+`progress.mjs`: Chrome 390x844, local `next start` on :3100 opened as `http://ekuzo.gg:3100` (every host mapped to 127.0.0.1, every non-local request aborted), `/api/season-one` answered locally and recorded. 18 of 18 PASS:
+fresh load posts nothing; stage 0, 1, 2 posted as each screen is finished, one session id; Back posts nothing; a return visit reopens on availability with email, name, age, where they game and the three expectations filled in and the player card redrawn; "Send it" posts the page's own `beta-wizard` step; the end screen reads "review and email you either way"; saved answers are cleared after sending; the next visit starts fresh; no page errors. Hosts the page tried and the harness aborted: fonts.googleapis.com, www.googletagmanager.com, connect.facebook.net, www.clarity.ms (none answered from the network).
+Server stopped by PID; port 3100 free afterwards. Sentry repeats this independently.

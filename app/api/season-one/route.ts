@@ -6,7 +6,7 @@ import { geoProfileProps, parseGeoHeader, tzProps } from "@/lib/seasonOneGeo";
 import { getSql } from "@/lib/season1/db";
 import { isCrossSite } from "@/lib/season1/httpGuard";
 import { OFFER } from "@/lib/season1/offer";
-import { handleBetaWizard } from "@/lib/season1/betaWizard";
+import { handleBetaProgress, handleBetaWizard } from "@/lib/season1/betaWizard";
 import { hit } from "@/lib/season1/ratelimit";
 import { keyHash } from "@/lib/season1/rules";
 import { keyIsLive } from "@/lib/season1/stripe";
@@ -487,13 +487,15 @@ export async function POST(req: NextRequest) {
   }
 
   // A step that is present but not one we know is a client bug: do nothing rather than fall through to a sign-up.
-  if (body.step !== undefined && body.step !== "games" && body.step !== "age" && body.step !== "text-karlin" && body.step !== "beta-wizard") {
+  if (body.step !== undefined && body.step !== "games" && body.step !== "age" && body.step !== "text-karlin" && body.step !== "beta-wizard" && body.step !== "beta-progress") {
     return NextResponse.json({ ok: false, error: FAIL }, { status: 400 });
   }
 
   try {
     // The free beta sign-up wizard (lib/season1/betaWizard.ts). It is its own sign-up: no step lock, no 24 h email limit.
     if (body.step === "beta-wizard") return await handleBetaWizard(req, body, email, clientIpKeyMaterial(req));
+    // Drop-off capture for the same wizard: the answers so far and the step to pick up at.
+    if (body.step === "beta-progress") return await handleBetaProgress(req, body, email, clientIpKeyMaterial(req));
 
     const stepEventId = cleanEventId(body.eventId);
     // Follow-up: games they play (multi-select, comma-separated)

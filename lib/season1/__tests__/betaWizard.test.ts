@@ -24,6 +24,7 @@ let eventStatus = 202;
 let families = new Map<string, { id: string; source: string }>();
 let players = new Map<string, { id: string; eventId: string; age: number }>();
 let counters = new Map<string, number>();
+let progress = new Map<string, { session: string; stage: number; next: string; answers: Record<string, unknown>; completed: boolean }>();
 
 const json = (o: unknown, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json" } });
 const result = (fields: string[], rows: unknown[][]) => ({ command: "SELECT", rowCount: rows.length, fields: fields.map((name) => ({ name, dataTypeID: 25 })), rows });
@@ -39,6 +40,8 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
     if (dbMode === "hang") { await new Promise((r) => setTimeout(r, 3000)); return json({ message: "late" }, 500); }
     if (/insert into s1_beta_families/.test(q.query)) {
       const [email, source, , , , , nameKey, age, , , , , , , , , , , eventId] = q.params.map(String);
+      assert.match(q.query, /update s1_beta_progress set stage = 3, next_step = '', completed_at = now\(\)/);
+      const pr = progress.get(email); if (pr) { pr.stage = 3; pr.next = ""; pr.completed = true; }
       let fam = families.get(email);
       const newFamily = !fam;
       if (!fam) { fam = { id: `fam-${families.size + 1}`, source }; families.set(email, fam); }
@@ -51,6 +54,16 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
       return json({ command: "SELECT", rowCount: 1,
         fields: [["family_id", 25], ["new_family", 16], ["player_id", 25], ["new_player", 16], ["prev_event_id", 25], ["players", 23]].map(([name, dataTypeID]) => ({ name, dataTypeID })),
         rows: [[fam.id, newFamily ? "t" : "f", pl.id, prev ? "f" : "t", prevEvent, String(count)]] });
+    }
+    if (/^insert into s1_beta_progress/.test(q.query)) {
+      const [email, session, stage, next, answers] = q.params.map(String);
+      const old = progress.get(email);
+      const same = !!old && old.session === session;
+      const row = same
+        ? { session, stage: Math.max(old!.stage, Number(stage)), next: old!.stage > Number(stage) ? old!.next : next, answers: { ...old!.answers, ...JSON.parse(answers) }, completed: old!.completed }
+        : { session, stage: Number(stage), next, answers: JSON.parse(answers), completed: false };
+      progress.set(email, row);
+      return json({ command: "INSERT", rowCount: 1, fields: [["id", 25], ["stage", 23], ["completed", 16]].map(([name, dataTypeID]) => ({ name, dataTypeID })), rows: [["pr-1", String(row.stage), row.completed ? "t" : "f"]] });
     }
     if (/^with a as/.test(q.query.trim())) {
       const a = bump(q.params[0]);
@@ -65,7 +78,7 @@ async function fakeFetch(url: unknown, init?: RequestInit) {
     klaviyo.push({ path: u.split("/api/")[1], body });
     return new Response(u.endsWith("/events") ? "" : "{}", { status: u.endsWith("/events") ? eventStatus : 202 });
   }
-  if (u.includes("discord.test")) { discord.push(body.content); assert.deepEqual(body.allowed_mentions, { parse: [] }); return new Response("", { status: 204 }); }
+  if (u.includes("discord.test")) { discord.push(String(body.content)); return new Response("", { status: 204 }); } // must stay empty: no Discord in the beta
   if (u.includes("sheets.test")) { sheets.push(body); return json({ ok: true }); }
   if (u.includes("graph.facebook.com")) { graph++; return json({ events_received: 1 }); }
   throw new Error("unit: unexpected network call " + u);
@@ -114,11 +127,11 @@ describe("POST /api/season-one step beta-wizard", () => {
   });
   beforeEach(() => {
     klaviyo = []; discord = []; sheets = []; graph = 0; queries = []; dbMode = "ok"; eventStatus = 202;
-    families = new Map(); players = new Map(); counters = new Map(); logs.length = 0;
+    families = new Map(); players = new Map(); counters = new Map(); progress = new Map(); logs.length = 0;
     delete process.env.S1_BETA_SHEETS_WEBHOOK_URL;
   });
 
-  it("B1: an email with no earlier sign-up is saved: family, player, event, one Discord line", async () => {
+  it("B1: an email with no earlier sign-up is saved: family, player, event; nothing goes to Discord", async () => {
     const r = await post(wiz());
     assert.deepEqual(r, { status: 200, body: { ok: true } });
     assert.equal(families.size, 1); assert.equal(players.size, 1);
@@ -130,8 +143,8 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(ev[0].properties.player_age, 12);
     assert.equal(ev[0].profile.data.attributes.properties.beta_wizard, "yes");
     assert.equal(ev[0].profile.data.attributes.properties.beta_time_zone, "Eastern");
-    assert.equal(discord.length, 1);
-    assert.match(discord[0], /^\[TEST\] Beta sign-up \| Maya, 12 \| Time zone: Eastern \(America\/New_York\) \| Times: Weekday evenings, Weekend afternoons \| Email: team\+s1test-unit@example\.com \| Source: direct$/);
+    assert.equal(discord.length, 0);
+    assert.equal(ev[0].profile.data.attributes.properties.beta_wizard_stage, "done");
   });
 
   it("B2 (P3): never the Season 01 Waitlist: no list relationship, no Waitlist metric, no step lock or 24 h claim query, no Meta call", async () => {
@@ -145,29 +158,29 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(graph, 0);
   });
 
-  it("B3: a retry of the same submit records one player and announces once", async () => {
+  it("B3: a retry of the same submit records one player and one Sheets row", async () => {
+    process.env.S1_BETA_SHEETS_WEBHOOK_URL = "https://sheets.test/exec";
     await post(wiz()); const again = await post(wiz());
     assert.equal(again.status, 200);
     assert.equal(players.size, 1);
-    assert.equal(discord.length, 1);
+    assert.equal(sheets.length, 1);
     const ids = events().map((e) => e.unique_id); assert.equal(ids.length, 2); assert.equal(ids[0], ids[1]); // Klaviyo dedupes on unique_id
   });
 
-  it("B4: a second player on the same email records a second player, with a line that says so", async () => {
+  it("B4: a second player on the same email records a second player", async () => {
     await post(wiz());
     const r = await post(wiz({ eventId: "evt-beta-0002", playerName: "Leo", playerAge: 9 }));
     assert.equal(r.status, 200);
     assert.equal(families.size, 1); assert.equal(players.size, 2);
-    assert.equal(discord.length, 2);
-    assert.match(discord[1], /Beta sign-up \(player 2 for this family\) \| Leo, 9/);
+    assert.equal(events().length, 2);
   });
 
-  it("B5: the same player sent again with new answers updates the row and says updated", async () => {
+  it("B5: the same player sent again with new answers updates the row", async () => {
     await post(wiz());
     await post(wiz({ eventId: "evt-beta-0003", playerAge: 13 }));
     assert.equal(players.size, 1);
     assert.equal([...players.values()][0].age, 13);
-    assert.match(discord[1], /Beta sign-up updated \| Maya, 13/);
+    assert.equal(events().length, 2); // each submission keeps its own Klaviyo event
   });
 
   it("B6: thirty families on one network in an hour are all saved", async () => {
@@ -195,18 +208,18 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(queries.some((q) => /s1bw:em:/.test(JSON.stringify(q.params))), false);
   });
 
-  it("A3: past 200 an hour across everyone, answers are still saved but the channel stays quiet", async () => {
+  it("A3: past 200 an hour across everyone, answers are still saved but no Sheets row is written", async () => {
+    process.env.S1_BETA_SHEETS_WEBHOOK_URL = "https://sheets.test/exec";
     counters.set("s1bw:global", 200);
     const r = await post(wiz(), { "x-nf-client-connection-ip": "203.0.113.20" });
     assert.equal(r.status, 200);
     assert.equal(players.size, 1); assert.equal(events().length, 1);
-    assert.equal(discord.length, 0);
+    assert.equal(sheets.length, 0);
   });
 
-  it("A5: a utm_source cannot carry a link or markup into the channel line", async () => {
+  it("A5: a utm_source is reduced to tag characters before it is stored as the source", async () => {
     await post(wiz({ attribution: { utm_source: "[Verify](https://evil.example) @everyone" } }));
-    assert.match(discord[0], /Source: [a-z0-9_.:-]+$/);
-    assert.equal(/[\[\]()@ ]/.test(discord[0].split("Source: ")[1]), false);
+    assert.match(String(events()[0].properties.source), /^[a-z0-9_.:-]+$/);
   });
 
   it("B7: the honeypot stops a bot: 200, nothing written anywhere", async () => {
@@ -235,7 +248,7 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(events()[0].properties.tz, "");
   });
 
-  it("B9: playerName, funFact and note are untrusted text: markup, controls and mentions never reach a template or the channel", async () => {
+  it("B9: playerName, funFact and note are untrusted text: markup and control characters never reach a template", async () => {
     await post(wiz({
       playerName: "<b>Ma@ya</b> `x` |", funFact: "<script>alert(1)</script> loves\u0000 chess " + "x".repeat(300),
       note: "<img src=x onerror=1>\nCall me @everyone " + "y".repeat(900),
@@ -244,8 +257,6 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(p.player_name, "bMayab x");
     assert.equal(/[<>\u0000-\u001f]/.test(p.fun_fact + p.note + p.player_name), false);
     assert.ok(p.fun_fact.length <= 120); assert.ok(p.note.length <= 500);
-    assert.equal(/[<>`@*|]/.test(discord[0].split(" | ")[1]), false);
-    assert.equal(discord[0].includes("everyone"), false); // the note is not in the channel line at all
   });
 
   it("B10: source and attribution: the ?src= cookie wins, then the last click, then utm on the wizard URL", async () => {
@@ -257,32 +268,30 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.equal(attr.src, "karlin-email"); assert.equal(attr.utm_source, "newsletter"); assert.equal(attr.lc_path, "/season1/beta/launch");
     assert.equal(events()[0].properties.source, "karlin-email");
     assert.equal(events()[0].profile.data.attributes.properties.beta_source, "karlin-email");
-    assert.match(discord[0], /Source: karlin-email$/);
-    klaviyo = []; discord = [];
+    klaviyo = [];
     await post(wiz({ email: "team+s1test-unit-b@example.com", eventId: "e-b", attribution: { utm_source: "partner-ams", utm_medium: "referral" } }), { cookie: "ekuzo_bsrc=Bad Value!!" });
     assert.equal(events()[0].properties.source, "partner-ams");
     assert.equal(events()[0].properties.src, "");
   });
 
-  it("B11: the database down: Klaviyo still saves, the parent gets ok, the line says the database missed it", async () => {
+  it("B11: the database down: Klaviyo still saves and the parent gets ok", async () => {
     dbMode = "throw";
     const r = await post(wiz());
     assert.equal(r.status, 200);
     assert.equal(events().length, 1);
-    assert.match(discord[0], /NOT in the database \(Klaviyo only\)$/);
+    assert.ok(logs.some((l) => /Beta wizard database save failed/.test(l)));
   });
 
-  it("B12: Klaviyo down: the database still saves, the line says Klaviyo missed it; both down is a 502 that names the founder", async () => {
+  it("B12: Klaviyo down: the database still saves; both down is a 502 that names the founder", async () => {
     eventStatus = 500;
     const r = await post(wiz());
     assert.equal(r.status, 200);
     assert.equal(players.size, 1);
-    assert.match(discord[0], /NOT in Klaviyo \(database only\)$/);
-    dbMode = "throw"; discord = [];
+    assert.ok(logs.some((l) => /Klaviyo beta wizard event failed/.test(l)));
+    dbMode = "throw";
     const both = await post(wiz({ eventId: "evt-beta-0009" }));
     assert.equal(both.status, 502);
     assert.match(String(both.body.error), /text our founder at \(832\) 271-0150/);
-    assert.equal(discord.length, 0);
   });
 
   it("B13: Sheets row only when S1_BETA_SHEETS_WEBHOOK_URL is set", async () => {
@@ -302,6 +311,91 @@ describe("POST /api/season-one step beta-wizard", () => {
     const all = logs.join("\n");
     assert.ok(all.length > 0);
     for (const s of ["s1test", "Maya", "flag", "example.com"]) assert.equal(all.includes(s), false, s);
+  });
+
+  describe("drop-off capture (step beta-progress)", () => {
+    const prog = (stage: number, answers: Record<string, unknown> = {}, extra: Record<string, unknown> = {}) => ({
+      step: "beta-progress", email: "Team+S1Test-Unit@example.com", sessionId: "sess-0001", stage, answers,
+      attribution: {}, page: "/season1/beta/start", ekz_hp: "", ...extra,
+    });
+    const profile = (i: number) => events()[i].profile.data.attributes.properties;
+
+    it("P1: the email screen alone puts the family on record with the step to pick up at", async () => {
+      const r = await post(prog(0), { cookie: "ekuzo_bsrc=karlin-email" });
+      assert.deepEqual(r, { status: 200, body: { ok: true } });
+      const row = progress.get(EMAIL)!;
+      assert.equal(row.stage, 0); assert.equal(row.next, "What the beta is"); assert.equal(row.completed, false);
+      const ev = events(); assert.equal(ev.length, 1);
+      assert.equal(ev[0].metric.data.attributes.name, "Beta Wizard Progress");
+      assert.equal(ev[0].unique_id, `${EMAIL}-Beta Wizard Progress-sess-0001-0`);
+      assert.equal(ev[0].properties.next_step, "What the beta is"); assert.equal(ev[0].properties.next_step_number, 1);
+      assert.equal(profile(0).beta_wizard_stage, "email"); assert.equal(profile(0).beta_wizard_next_step, "What the beta is");
+      assert.equal(typeof profile(0).beta_wizard_started_at, "string"); assert.equal(profile(0).beta_source, "karlin-email");
+      assert.equal(families.size + players.size, 0); // not a sign-up yet
+      assert.equal(JSON.stringify(klaviyo).includes("XGTv2F"), false); assert.equal(consents().length, 0); assert.equal(graph, 0);
+    });
+
+    it("P2: each step adds the answers so far; the stage only moves forward within one wizard run", async () => {
+      await post(prog(0));
+      await post(prog(1, { expectations: ["No toxicity", "Positive mindset", "Winning attitude"] }));
+      await post(prog(2, { playerName: "Maya", playerAge: 12, playsOn: ["Console"], superpowers: ["Quick thinker"], funFact: "Knows flags" }));
+      await post(prog(1, { expectations: ["No toxicity", "Positive mindset", "Winning attitude"] })); // went back and forward again
+      const row = progress.get(EMAIL)!;
+      assert.equal(row.stage, 2); assert.equal(row.next, "Availability");
+      assert.equal(row.answers.playerName, "Maya"); assert.deepEqual(row.answers.expectations, ["No toxicity", "Positive mindset", "Winning attitude"]);
+      assert.equal(profile(2).beta_wizard_stage, "player card"); assert.equal(profile(2).beta_wizard_next_step, "Availability");
+      assert.equal(profile(2).beta_player_name, "Maya"); assert.equal(profile(2).beta_player_age, 12);
+      assert.equal(profile(2).beta_wizard_started_at, undefined); // only the first step stamps the start
+    });
+
+    it("P3: finishing the wizard marks the progress row done and the profile stage done, so no pick-up email fires", async () => {
+      await post(prog(0)); await post(prog(1)); await post(prog(2, { playerName: "Maya", playerAge: 12 }));
+      await post(wiz());
+      assert.equal(progress.get(EMAIL)!.completed, true); assert.equal(progress.get(EMAIL)!.stage, 3);
+      const done = events().find((e) => e.metric.data.attributes.name === "Beta Wizard Completed")!;
+      assert.equal(done.profile.data.attributes.properties.beta_wizard_stage, "done");
+      assert.equal(done.profile.data.attributes.properties.beta_wizard_next_step, "");
+    });
+
+    it("P4: a new run after finishing (a sibling) starts the row over, so stopping again is a drop-off again", async () => {
+      await post(prog(0)); await post(wiz());
+      await post(prog(0, {}, { sessionId: "sess-0002" }));
+      const row = progress.get(EMAIL)!;
+      assert.equal(row.completed, false); assert.equal(row.stage, 0); assert.equal(row.session, "sess-0002");
+    });
+
+    it("P5: answers are filtered, never rejected: bad or hostile values are left out and the post still lands", async () => {
+      const r = await post(prog(2, { playerName: "<b>Ma@ya</b>", playerAge: 44, playsOn: ["Xbox"], teamSports: "x", superpowers: "no", funFact: "<script>x</script>\u0000ok", timeZone: "Mars", junk: { a: 1 } }));
+      assert.equal(r.status, 200);
+      const a = progress.get(EMAIL)!.answers;
+      assert.deepEqual(Object.keys(a).sort(), ["funFact", "playerName"]);
+      assert.equal(a.playerName, "bMayab"); assert.equal(/[<>\u0000]/.test(String(a.funFact)), false);
+    });
+
+    it("P6: a malformed post is a 400 and writes nothing; the honeypot is a silent 200", async () => {
+      for (const b of [prog(3), prog(-1), prog(1.5), { ...prog(0), stage: "1" }, { ...prog(0), sessionId: "" }, { ...prog(0), sessionId: 7 }]) {
+        assert.equal((await post(b)).status, 400, JSON.stringify(b).slice(0, 80));
+      }
+      assert.equal((await post(prog(0, {}, { ekz_hp: "bot" }))).status, 200);
+      assert.equal(progress.size + klaviyo.length, 0);
+    });
+
+    it("P7: failures never reach the parent: database down, Klaviyo down, or over the per-IP ceiling are all a quiet 200", async () => {
+      dbMode = "throw"; eventStatus = 500;
+      assert.deepEqual(await post(prog(0)), { status: 200, body: { ok: true } });
+      dbMode = "ok"; eventStatus = 202; klaviyo = [];
+      const { keyHash } = await import("../rules");
+      counters.set(`s1bp:ip:${keyHash("203.0.113.30")}`, 150);
+      assert.equal((await post(prog(0), { "x-nf-client-connection-ip": "203.0.113.30" })).status, 200);
+      assert.equal(progress.size + klaviyo.length, 0);
+    });
+
+    it("P8: progress posts never count against the sign-up limits, and logs stay clean", async () => {
+      for (let i = 0; i < 40; i++) await post(prog(i % 3, { playerName: "Maya" }), { "x-nf-client-connection-ip": "203.0.113.31" });
+      const r = await post(wiz(), { "x-nf-client-connection-ip": "203.0.113.31" });
+      assert.equal(r.status, 200);
+      for (const s of ["s1test", "Maya", "example.com"]) assert.equal(logs.join("\n").includes(s), false, s);
+    });
   });
 
   it("regression: an unknown step is still a 400 and the other steps are untouched by this one", async () => {
