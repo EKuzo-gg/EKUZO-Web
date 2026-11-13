@@ -11,11 +11,11 @@ Code: `lib/season1/betaWizard.ts` (the module header is the behaviour contract),
 | 200 `{ok:true}` | saved in Neon or Klaviyo (or the honeypot was filled) |
 | 400 `{ok:false,error}` | bad email, or a field outside the allowed values. The wizard shows `error` and keeps the parent on step 3 |
 | 403 | cross-site browser POST (existing guard) |
-| 429 `{ok:false,error}` | over 60 per IP per hour or 20 per email per day; the text names the founder's number |
+| 429 `{ok:false,error}` | over 30 per IP per hour; the text names the founder's number |
 | 500 | Klaviyo key missing (existing check) |
 | 502 `{ok:false,error}` | neither store saved |
 
-Order: cross-site guard, email check, key check (all existing), then honeypot, validation, limits (one round trip, 0.8 s cap, fail open), Neon upsert and Klaviyo event together (2.5 s and 3.5 s caps), then consent, Discord and Sheets together (2.5 s caps). Worst case 6.8 s, inside Netlify's 10 s.
+Order: cross-site guard, email check, key check (all existing), then honeypot, validation, limits (one round trip, 0.8 s cap, fail open), Neon upsert and Klaviyo event together (2.5 s and 3.5 s caps), then Discord and Sheets together (2.5 s caps). Worst case 6.8 s, inside Netlify's 10 s.
 
 ## Data contract
 
@@ -46,4 +46,8 @@ Order: cross-site guard, email check, key check (all existing), then honeypot, v
 
 ## Spec changes after freeze
 
-(none yet)
+
+
+| Time CT | Change | Why |
+|---|---|---|
+| 19:45 | No Klaviyo consent call. Per-email limit removed; per-IP 30 an hour; global quiet above 200 an hour. Source reduced to tag characters. 502 names the founder's number | Red team A1, A2, A3, A5, B4 (`redteam-resolution.md`) |

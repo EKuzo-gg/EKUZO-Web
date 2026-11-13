@@ -20,9 +20,10 @@ import { keyIsLive } from "./stripe";
  *  1. Neon: s1_beta_families (one per email) and s1_beta_players (one per family and first
  *     name; a second submission for the same player updates that row). The first source and
  *     attribution stay on the family; each submission's own go on the player.
- *  2. Klaviyo: a "Beta Wizard Completed" event and beta_* profile properties, plus email
- *     consent with NO list. Never the Season 01 Waitlist list (XGTv2F): the Day 0 and Day 4
- *     flows and Karlin's founder note all key on that list, so a wizard-only family gets none.
+ *  2. Klaviyo: a "Beta Wizard Completed" event and beta_* profile properties. No list and no
+ *     consent change: never the Season 01 Waitlist list (XGTv2F), which the Day 0 and Day 4
+ *     flows and Karlin's founder note all key on, so a wizard-only family gets none of them.
+ *     (The endpoint is open, so it must not be a way to subscribe someone else's address.)
  *  3. Discord (the Season 01 ops channel): one line per new player or changed answers, so a
  *     person follows up. Never on a retry of the same submit.
  *  4. Sheets: one row per player, only when S1_BETA_SHEETS_WEBHOOK_URL is set (off by default).
@@ -53,14 +54,13 @@ export const AGE_MAX = 18;
 
 const KLAVIYO_REVISION = "2025-07-15";
 const EVENT_TIMEOUT_MS = 3500;
-const SUBSCRIBE_TIMEOUT_MS = 2500;
 const SHEETS_TIMEOUT_MS = 2500;
 const LIMIT_TIMEOUT_MS = 800;
 const DB_TIMEOUT_MS = 2500;
-/** Submissions per client IP per clock hour. Generous on purpose: a school or library shares one address. */
-export const IP_PER_HOUR = 60;
-/** Submissions per email per 24 h (players, edits and retries together). */
-export const EMAIL_PER_DAY = 20;
+/** Submissions per client IP per clock hour (the waitlist's own ceiling). A school or library shares one address. */
+export const IP_PER_HOUR = 30;
+/** Submissions per clock hour across everyone: above this they are still saved, but no Discord line or Sheets row (a flood must not bury the channel). */
+export const GLOBAL_QUIET_PER_HOUR = 200;
 const FAIL = "We couldn’t save that. Please try again.";
 
 // A first name: letters, marks, digits, spaces and . ' ’ - only.
@@ -157,8 +157,10 @@ export function betaAttribution(req: NextRequest, utm: Record<string, string>): 
     if (v) merged[k] = v;
   }
   // The source the team reads: the link's own tag first, then the campaign source, then how they first found us.
-  const source = src || merged.utm_source || (firstTouch ? `first-touch:${firstTouch}` : "") || "direct";
-  return { source: source.slice(0, 60), attribution: { src: src || null, ...merged, first_touch: firstTouch, lc_path: lc && typeof lc.path === "string" ? lc.path : null } };
+  // Plain tag characters only: this value is shown in the ops channel, so no link or markup can ride in on a utm_source.
+  const tag = (v: string) => v.toLowerCase().replace(/[^a-z0-9_.:-]/g, "").slice(0, 60);
+  const source = src || tag(merged.utm_source ?? "") || (firstTouch ? `first-touch:${tag(firstTouch)}` : "") || "direct";
+  return { source, attribution: { src: src || null, ...merged, first_touch: firstTouch, lc_path: lc && typeof lc.path === "string" ? lc.path : null } };
 }
 
 type Saved = { familyId: string; playerId: string; newFamily: boolean; newPlayer: boolean; sameEvent: boolean; players: number };
@@ -287,24 +289,6 @@ async function saveToKlaviyo(email: string, a: BetaAnswers, source: string, attr
   }
 }
 
-/** Email consent with no list relationship: the parent can be emailed about the beta and is on no Season 01 list. Never throws. */
-async function consentNoList(email: string) {
-  try {
-    const r = await klaviyo("profile-subscription-bulk-create-jobs", {
-      data: {
-        type: "profile-subscription-bulk-create-job",
-        attributes: {
-          custom_source: "Season 01 beta sign-up",
-          profiles: { data: [{ type: "profile", attributes: { email, subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } } } }] },
-        },
-      },
-    }, SUBSCRIBE_TIMEOUT_MS);
-    if (!r.ok) console.error("Klaviyo beta consent failed:", r.status);
-  } catch (err) {
-    console.error("Klaviyo beta consent failed:", err instanceof Error ? err.name : "error");
-  }
-}
-
 /** The ops-channel line. Team-only channel: parent email, the player's first name, age, time zone and times. */
 export function betaDiscordLine(email: string, a: BetaAnswers, source: string, saved: Saved | null, klaviyoOk: boolean, livemode: boolean): string {
   const what = !saved ? "Beta sign-up" : saved.newPlayer ? (saved.players > 1 ? `Beta sign-up (player ${saved.players} for this family)` : "Beta sign-up") : "Beta sign-up updated";
@@ -355,17 +339,21 @@ async function sheetsRow(email: string, a: BetaAnswers, source: string, saved: S
   }
 }
 
-/** Per-IP and per-email counters in one round trip. Fails open (allowed) on no database, an error or a slow answer. */
-async function withinLimits(email: string, ipMaterial: string | null): Promise<boolean> {
-  if (!process.env.DATABASE_URL) return true;
+/**
+ * Per-IP and global counters in one round trip. No per-email counter: anyone can type a parent's
+ * address, so a per-email limit would let a stranger lock a family out. Fails open on no database,
+ * an error or a slow answer. `quiet` means saved but not announced.
+ */
+async function checkLimits(ipMaterial: string | null): Promise<{ allowed: boolean; quiet: boolean }> {
+  if (!process.env.DATABASE_URL) return { allowed: true, quiet: false };
   try {
-    const em = { key: `s1bw:em:${keyHash(email)}`, limit: EMAIL_PER_DAY, windowSeconds: 86400 };
-    if (!ipMaterial) return await withTimeout(LIMIT_TIMEOUT_MS, hit(em.key, em.limit, em.windowSeconds));
-    const [ipOk, emOk] = await withTimeout(LIMIT_TIMEOUT_MS, hitPair({ key: `s1bw:ip:${keyHash(ipMaterial)}`, limit: IP_PER_HOUR, windowSeconds: 3600 }, em));
-    return ipOk && emOk !== false;
+    const global = { key: "s1bw:global", limit: GLOBAL_QUIET_PER_HOUR, windowSeconds: 3600 };
+    if (!ipMaterial) return { allowed: true, quiet: !(await withTimeout(LIMIT_TIMEOUT_MS, hit(global.key, global.limit, global.windowSeconds))) };
+    const [ipOk, globalOk] = await withTimeout(LIMIT_TIMEOUT_MS, hitPair({ key: `s1bw:ip:${keyHash(ipMaterial)}`, limit: IP_PER_HOUR, windowSeconds: 3600 }, global));
+    return { allowed: ipOk, quiet: globalOk === false };
   } catch (err) {
     console.warn("Beta wizard limit check skipped:", err instanceof Error ? err.message : err);
-    return true;
+    return { allowed: true, quiet: false };
   }
 }
 
@@ -384,7 +372,8 @@ export async function handleBetaWizard(req: NextRequest, body: Record<string, un
   if (!v.ok) return NextResponse.json({ ok: false, error: v.error }, { status: 400 });
   const a = v.value;
 
-  if (!(await withinLimits(email, ipMaterial))) {
+  const limits = await checkLimits(ipMaterial);
+  if (!limits.allowed) {
     console.warn("Beta wizard rate limited");
     return NextResponse.json({
       ok: false,
@@ -400,12 +389,17 @@ export async function handleBetaWizard(req: NextRequest, body: Record<string, un
     saveToDb(email, a, source, attribution, geo),
     saveToKlaviyo(email, a, source, attribution, geo),
   ]);
-  if (!saved && !klaviyoOk) return NextResponse.json({ ok: false, error: FAIL }, { status: 502 });
+  if (!saved && !klaviyoOk) {
+    return NextResponse.json({
+      ok: false,
+      error: `We couldn’t save that. Please try again, or text our founder at ${displayPhone(OFFER.textKarlinSms)}.`,
+    }, { status: 502 });
+  }
 
   // A retry of the same submit announces nothing twice. Without the database we cannot tell, so we announce.
-  const announce = !saved || !saved.sameEvent;
+  if (limits.quiet) console.warn("Beta wizard quiet: over the hourly ceiling, saved without a Discord line");
+  const announce = !limits.quiet && (!saved || !saved.sameEvent);
   await Promise.all([
-    klaviyoOk ? consentNoList(email) : Promise.resolve(),
     announce ? notifyDiscord(betaDiscordLine(email, a, source, saved, klaviyoOk, keyIsLive())) : Promise.resolve(),
     announce ? sheetsRow(email, a, source, saved) : Promise.resolve(),
   ]);

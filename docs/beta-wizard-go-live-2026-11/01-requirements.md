@@ -24,7 +24,7 @@ Start commits (fresh clone, 19:30 CT): `main` 737330f, `dev` 69d2032, `season1-c
 | B3 | A retry of the same submit (same `eventId`) records one player, one Klaviyo event, one Discord line | unit + preview |
 | B4 | A second player on the same email records a second player | unit + preview |
 | B5 | The same player sent again updates that player's row | unit + preview |
-| B6 | Families on one network are not blocked (60 per IP per hour); past that a 429 with a way to reach a person | unit |
+| B6 | Families on one network are not blocked (30 per IP per hour, the waitlist's own ceiling); past that a 429 with a way to reach a person | unit |
 | B7 | The honeypot stops a bot, silently | unit + preview |
 | B8 | Every field validated against the wizard's allowed values (read from `start.html`, not from the handoff) | unit |
 | B9 | `playerName`, `funFact`, `note` treated as untrusted text everywhere they are written | unit |

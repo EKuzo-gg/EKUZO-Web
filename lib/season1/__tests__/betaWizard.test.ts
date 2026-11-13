@@ -118,7 +118,7 @@ describe("POST /api/season-one step beta-wizard", () => {
     delete process.env.S1_BETA_SHEETS_WEBHOOK_URL;
   });
 
-  it("B1: an email with no earlier sign-up is saved: family, player, event, consent, one Discord line", async () => {
+  it("B1: an email with no earlier sign-up is saved: family, player, event, one Discord line", async () => {
     const r = await post(wiz());
     assert.deepEqual(r, { status: 200, body: { ok: true } });
     assert.equal(families.size, 1); assert.equal(players.size, 1);
@@ -136,10 +136,9 @@ describe("POST /api/season-one step beta-wizard", () => {
 
   it("B2 (P3): never the Season 01 Waitlist: no list relationship, no Waitlist metric, no step lock or 24 h claim query, no Meta call", async () => {
     await post(wiz());
-    const c = consents(); assert.equal(c.length, 1);
-    assert.equal(c[0].relationships, undefined);
+    assert.equal(consents().length, 0); // no subscribe or consent call of any kind: an open endpoint must not opt in someone else's address
+    assert.equal(klaviyo.every((c) => c.path === "events"), true);
     assert.equal(JSON.stringify(klaviyo).includes("XGTv2F"), false);
-    assert.equal(c[0].attributes.custom_source, "Season 01 beta sign-up");
     assert.equal(events().some((e) => /Season 01 Waitlist/.test(e.metric.data.attributes.name)), false);
     assert.equal(queries.some((q) => /with seen as|select 1 from s1_rate_limits/.test(q.query)), false);
     assert.equal(queries.some((q) => /s1wl:/.test(JSON.stringify(q.params))), false);
@@ -171,21 +170,43 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.match(discord[1], /Beta sign-up updated \| Maya, 13/);
   });
 
-  it("B6: forty families on one network in an hour are all saved", async () => {
-    for (let i = 0; i < 40; i++) {
+  it("B6: thirty families on one network in an hour are all saved", async () => {
+    for (let i = 0; i < 30; i++) {
       const r = await post(wiz({ email: `team+s1test-unit-${i}@example.com`, eventId: `evt-school-${i}` }), { "x-nf-client-connection-ip": "203.0.113.7" });
       assert.equal(r.status, 200, `family ${i}`);
     }
-    assert.equal(families.size, 40);
+    assert.equal(families.size, 30);
   });
 
   it("B6b: past the per-IP ceiling the answer is a 429 with the text-our-founder line and nothing is written", async () => {
-    for (let i = 0; i < 60; i++) await post(wiz({ email: `team+s1test-unit-${i}@example.com`, eventId: `e-${i}` }), { "x-nf-client-connection-ip": "203.0.113.9" });
+    for (let i = 0; i < 30; i++) await post(wiz({ email: `team+s1test-unit-${i}@example.com`, eventId: `e-${i}` }), { "x-nf-client-connection-ip": "203.0.113.9" });
     const before = families.size;
     const r = await post(wiz({ email: "team+s1test-unit-x@example.com", eventId: "e-x" }), { "x-nf-client-connection-ip": "203.0.113.9" });
     assert.equal(r.status, 429);
     assert.match(String(r.body.error), /Text our founder at \(832\) 271-0150/);
     assert.equal(families.size, before);
+  });
+
+  it("A2: no per-email limit: 25 submissions for one address from different networks never lock the family out", async () => {
+    for (let i = 0; i < 25; i++) {
+      const r = await post(wiz({ eventId: `e-a2-${i}` }), { "x-nf-client-connection-ip": `198.51.100.${i + 1}` });
+      assert.equal(r.status, 200, `submission ${i}`);
+    }
+    assert.equal(queries.some((q) => /s1bw:em:/.test(JSON.stringify(q.params))), false);
+  });
+
+  it("A3: past 200 an hour across everyone, answers are still saved but the channel stays quiet", async () => {
+    counters.set("s1bw:global", 200);
+    const r = await post(wiz(), { "x-nf-client-connection-ip": "203.0.113.20" });
+    assert.equal(r.status, 200);
+    assert.equal(players.size, 1); assert.equal(events().length, 1);
+    assert.equal(discord.length, 0);
+  });
+
+  it("A5: a utm_source cannot carry a link or markup into the channel line", async () => {
+    await post(wiz({ attribution: { utm_source: "[Verify](https://evil.example) @everyone" } }));
+    assert.match(discord[0], /Source: [a-z0-9_.:-]+$/);
+    assert.equal(/[\[\]()@ ]/.test(discord[0].split("Source: ")[1]), false);
   });
 
   it("B7: the honeypot stops a bot: 200, nothing written anywhere", async () => {
@@ -251,15 +272,16 @@ describe("POST /api/season-one step beta-wizard", () => {
     assert.match(discord[0], /NOT in the database \(Klaviyo only\)$/);
   });
 
-  it("B12: Klaviyo down: the database still saves, no consent call, the line says Klaviyo missed it; both down is a 502", async () => {
+  it("B12: Klaviyo down: the database still saves, the line says Klaviyo missed it; both down is a 502 that names the founder", async () => {
     eventStatus = 500;
     const r = await post(wiz());
     assert.equal(r.status, 200);
-    assert.equal(players.size, 1); assert.equal(consents().length, 0);
+    assert.equal(players.size, 1);
     assert.match(discord[0], /NOT in Klaviyo \(database only\)$/);
     dbMode = "throw"; discord = [];
     const both = await post(wiz({ eventId: "evt-beta-0009" }));
     assert.equal(both.status, 502);
+    assert.match(String(both.body.error), /text our founder at \(832\) 271-0150/);
     assert.equal(discord.length, 0);
   });
 
