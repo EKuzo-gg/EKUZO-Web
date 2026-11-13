@@ -69,9 +69,12 @@ export function verifyRestartToken(token: unknown, rowId: string, sessionId: str
  * address. Anything else: null, and the caller leaves the property out.
  */
 export function restartLinkBase(env?: Record<string, string | undefined>): string | null {
-  const e = env ?? process.env;
-  if (deployContext(e) === "production") return "https://ekuzo.gg";
-  const prime = (e.S1_DEPLOY_PRIME_URL || e.DEPLOY_PRIME_URL || "").trim();
+  // With no env passed, read the two build-inlined names literally: next.config `env` replaces only the literal
+  // process.env.NAME expression, so reading them through a variable finds nothing in the function runtime.
+  const context = env ? deployContext(env) : deployContext();
+  const primeRaw = env ? (env.S1_DEPLOY_PRIME_URL || env.DEPLOY_PRIME_URL) : (process.env.S1_DEPLOY_PRIME_URL || process.env.DEPLOY_PRIME_URL);
+  if (context === "production") return "https://ekuzo.gg";
+  const prime = (primeRaw ?? "").trim();
   return PREVIEW_BASE_RE.test(prime) ? prime : null;
 }
 
