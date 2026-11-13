@@ -31,7 +31,7 @@ import { keyIsLive } from "./stripe";
  * email screen and after each step, so a family that stops is on record with the answers so far
  * and the step to pick up at: s1_beta_progress in Neon, and a "Beta Wizard Progress" event plus
  * beta_wizard_stage / beta_wizard_next_step on the Klaviyo profile. Completing the wizard marks
- * the progress row done and sets beta_wizard_stage to "done", so a pick-up email never fires for
+ * the progress row done and sets beta_wizard_stage and beta_wizard_next_step to "done", so a pick-up email never fires for
  * a family that finished.
  * Nothing goes to Meta or GA4 from here, and nothing about the player is ever put in a URL.
  *
@@ -271,7 +271,7 @@ async function saveToKlaviyo(email: string, a: BetaAnswers, source: string, attr
                 email,
                 properties: {
                   beta_wizard: "yes", beta_completed_at: now, beta_source: source,
-                  beta_wizard_stage: "done", beta_wizard_next_step: "",
+                  beta_wizard_stage: "done", beta_wizard_next_step: "done",
                   beta_player_name: a.playerName, beta_player_age: a.playerAge,
                   beta_time_zone: a.timeZone, beta_tz: a.tz, beta_times: a.times,
                 },

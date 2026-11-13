@@ -354,7 +354,7 @@ describe("POST /api/season-one step beta-wizard", () => {
       assert.equal(progress.get(EMAIL)!.completed, true); assert.equal(progress.get(EMAIL)!.stage, 3);
       const done = events().find((e) => e.metric.data.attributes.name === "Beta Wizard Completed")!;
       assert.equal(done.profile.data.attributes.properties.beta_wizard_stage, "done");
-      assert.equal(done.profile.data.attributes.properties.beta_wizard_next_step, "");
+      assert.equal(done.profile.data.attributes.properties.beta_wizard_next_step, "done"); // never an empty string: Klaviyo can keep the old value
     });
 
     it("P4: a new run after finishing (a sibling) starts the row over, so stopping again is a drop-off again", async () => {
