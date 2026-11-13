@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="s1-build" content="{{BUILD}}">
+<title>Beta sign-up | EKUZO</title>
+<link rel="icon" href="/icon.png">
+{{TAGS}}
+<link rel="preload" as="font" type="font/otf" href="/fonts/TungstenNarrow-Black.otf" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap">
+<style>
+/* BETA sign-up wizard, served at /season1/beta/start. The parent's email first, then three
+   steps: what the beta is (with the expectations), the player card, availability.
+   Season 01 look, matching /season1/beta. On ekuzo.gg the last step POSTs the answers to
+   /api/season-one with step "beta-wizard" (see docs/beta-wizard-handoff.md). Anywhere else
+   (dev, localhost previews) nothing is sent and the end state just shows. */
+@font-face{font-family:"Tungsten Narrow";src:url("/fonts/TungstenNarrow-Black.otf") format("opentype");font-weight:900;font-display:swap}
+:root{--blue:#034FFF;--black:#000;--ink:#222;--off:#F0EDEA;--white:#fff;--violet:#AE2CF2;--lime:#E0FF4F;--bad:#c8141c;
+ --display:"Tungsten Narrow","Oswald",Impact,"Arial Narrow",sans-serif;--body:"Inter",Arial,Helvetica,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--off);color:var(--black);font-family:var(--body);-webkit-font-smoothing:antialiased}
+p,h1,h2,ul,ol,fieldset,legend{margin:0;padding:0}
+p,li,span,legend{text-wrap:pretty}
+fieldset{border:0;min-width:0}
+[hidden]{display:none!important}
+::selection{background:var(--lime);color:var(--black)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.d{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.9;text-wrap:balance}
+
+.top{--tear:max(36px,3.3vw);position:relative;background:var(--violet);color:#fff;padding:0 20px calc(var(--tear) + 104px)}
+.top .in{max-width:640px;margin-inline:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav img{height:20px;width:auto;display:block}
+.nav span{font:700 14px var(--body)}
+.top h1{font-size:clamp(48px,11vw,84px);margin-top:12px}
+.top h1 em{font-style:normal;color:var(--black)}
+.top:after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:max(36px,3.3vw);background:url('/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png') center bottom/cover no-repeat;pointer-events:none}
+
+main{position:relative;z-index:2;max-width:680px;margin:calc(-1 * (max(36px,3.3vw) + 76px)) auto 0;padding:0 20px 72px}
+.dots{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:0}
+.dots li{background:var(--black);color:rgba(255,255,255,.6);font:700 13px/1.2 var(--body);padding:11px 12px}
+.dots li b{display:block;font:900 22px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-top:2px}
+.dots li.on{background:var(--lime);color:rgba(0,0,0,.7)}
+.dots li.on b{color:var(--black)}
+.dots li.was span:after{content:" ✓"}
+.card{background:var(--white);padding:28px 22px 26px;clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%)}
+.card h2{font-size:clamp(38px,8vw,52px)}
+.card h2:focus{outline:0}
+.lede{font-size:17px;line-height:1.5;color:var(--ink);margin-top:10px;max-width:52ch}
+
+.sub{font:800 16px/1.3 var(--body);margin-top:26px}
+.need{list-style:none;margin-top:10px;display:grid;gap:10px}
+.need li{position:relative;padding-left:24px;font-size:16px;line-height:1.45;color:var(--ink)}
+.need li:before{content:"";position:absolute;left:0;top:.42em;width:10px;height:10px;background:var(--blue)}
+.need li small{display:block;font-size:14px;color:rgba(0,0,0,.65)}
+.later{font-size:15px;line-height:1.5;color:rgba(0,0,0,.72);margin-top:18px;padding-top:16px;border-top:2px solid var(--black)}
+
+.q{margin-top:36px}
+.q > label,.q > legend{display:block;font:700 17px/1.3 var(--body);margin-bottom:12px}
+.q i{font-style:normal;font-weight:500;color:rgba(0,0,0,.6)}
+.q input[type=text],.q input[type=email],.q input[type=number],.q select,.q textarea{width:100%;min-height:52px;font:500 17px var(--body);color:var(--black);background:#fff;border:2px solid rgba(0,0,0,.28);border-radius:4px;padding:10px 14px;appearance:none}
+.q textarea{min-height:84px;resize:vertical;line-height:1.4}
+.q select{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cpath d='M13 26.9l22 4.3 24-14.7-23.8 39z'/%3E%3C/svg%3E") right 12px center/18px no-repeat;padding-right:40px}
+.q input:hover,.q select:hover,.q textarea:hover{border-color:rgba(0,0,0,.5)}
+.q input:focus,.q select:focus,.q textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(3,79,255,.22)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:12px}
+.row .q{margin-top:36px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opts.col{display:grid;grid-template-columns:1fr}
+.opts label{position:relative;display:flex;align-items:center;min-height:46px;padding:8px 18px;border:1.5px solid rgba(0,0,0,.3);border-radius:999px;font:600 15px/1.25 var(--body);cursor:pointer;background:#fff;transition:background .15s,border-color .15s}
+.opts.col label{border-radius:12px;padding:12px 16px}
+.opts label small{display:block;font-weight:500;font-size:13px;color:rgba(0,0,0,.62)}
+.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opts label:hover{border-color:rgba(0,0,0,.55)}
+.opts label:has(input:checked){background:var(--black);border-color:var(--black);color:#fff}
+.opts label:has(input:checked) small{color:rgba(255,255,255,.75)}
+.opts label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
+.opts label:active{transform:scale(.97)}
+/* expectations: tap to agree, the mark draws itself */
+.vow{margin-top:30px}
+.vow legend{float:left;width:100%;margin-bottom:2px!important;font:800 16px/1.3 var(--body)!important}
+.hint{clear:both;font-size:14px;color:rgba(0,0,0,.65)}
+.vows{display:grid;gap:10px;margin-top:14px}
+.vows label{position:relative;display:flex;align-items:center;gap:14px;min-height:64px;padding:12px 14px;background:var(--off);border-radius:12px;cursor:pointer;transition:background .2s}
+.vows input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.vows b{display:block;font:800 17px/1.2 var(--body)}
+.vows small{display:block;font-size:14px;line-height:1.35;color:rgba(0,0,0,.68);margin-top:2px}
+.box{flex:none;width:34px;height:34px;border-radius:8px;border:2px solid var(--black);background:#fff;display:grid;place-items:center;transition:background .2s}
+.box svg{width:22px;height:22px;fill:none;stroke:var(--black);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .3s var(--ease) .05s}
+.vows label:has(input:checked){background:var(--black);color:#fff}
+.vows label:has(input:checked) small{color:rgba(255,255,255,.75)}
+.vows label:has(input:checked) .box{background:var(--lime);border-color:var(--lime)}
+.vows label:has(input:checked) .box svg{stroke-dashoffset:0}
+.vows label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
+.q.bad .vows label:not(:has(input:checked)) .box{border-color:var(--bad)}
+.err{display:none;font:600 14px/1.35 var(--body);color:var(--bad);margin-top:8px}
+.q.bad .err{display:block}
+#senderr{display:block;margin-top:20px}
+.btn[disabled]{opacity:.6;cursor:default}
+.q.bad input[type=text],.q.bad select,.q.bad input[type=email]{border-color:var(--bad)}
+.q.bad .opts label{border-color:var(--bad)}
+
+.acts{display:flex;gap:10px;margin-top:28px}
+.btn{display:flex;align-items:center;justify-content:center;flex:1;min-height:60px;background:var(--lime);color:var(--black);font:800 18px var(--body);padding:14px 18px;border:0;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 0 2px var(--black);transition:background .15s}
+.btn:hover{background:#cdf03a}
+.btn:active{background:#bfe22f}
+.btn.back{flex:0 0 auto;background:#fff;padding-inline:20px;text-decoration:none}
+.btn.back:hover{background:var(--off)}
+.ask{font-size:15px;text-align:center;margin-top:20px;color:rgba(0,0,0,.7)}
+.ask a{font-weight:800;color:var(--black);text-underline-offset:3px;display:inline-flex;min-height:44px;align-items:center}
+.pc{margin-top:28px;background:var(--black);color:#fff;padding:20px 20px 18px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.pc:empty{display:none}
+.pc .who{font:900 44px/.9 var(--display);letter-spacing:.03em;text-transform:uppercase;color:var(--lime);overflow-wrap:anywhere}
+.pc .who small{font:700 15px var(--body);letter-spacing:0;text-transform:none;color:rgba(255,255,255,.75);margin-left:8px}
+.pc dl{margin:14px 0 0;display:grid;gap:8px}
+.pc dl div{display:flex;gap:12px;justify-content:space-between;border-top:1px solid rgba(255,255,255,.22);padding-top:8px;font-size:15px;line-height:1.35}
+.pc dt{color:rgba(255,255,255,.7);flex:none}
+.pc dd{margin:0;font-weight:700;text-align:right;overflow-wrap:anywhere}
+.rx{margin-top:32px;padding-top:6px;border-top:2px solid var(--black)}
+.pad{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;min-height:200px;margin-top:16px;border:0;border-radius:4px;background:var(--blue);color:#fff;cursor:pointer;font-family:var(--body);padding:20px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.pad b{font:900 52px/.9 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.pad span{font-size:15px;font-weight:600;color:rgba(255,255,255,.85)}
+.pad[data-s=wait]{background:var(--violet)}
+.pad[data-s=go]{background:var(--lime);color:var(--black)}
+.pad[data-s=go] span{color:rgba(0,0,0,.7)}
+.pad[data-s=early]{background:var(--bad)}
+.best{font:700 16px/1.4 var(--body);margin-top:12px;min-height:22px}
+@media (min-width:700px){
+ .top{padding-bottom:calc(var(--tear) + 116px)}.nav{height:80px}.nav img{height:24px}
+ .card{padding:40px 40px 36px}
+ .opts.col{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+<div class="nav"><a href="/"><img src="/images/ekuzo-logo.svg" alt="EKUZO" width="107" height="21"></a><span>Free beta</span></div>
+<h1 class="d">Let's meet your player.<br><em>Three quick steps.</em></h1>
+</div></header>
+
+<main>
+<ol class="dots" id="dots" aria-label="Steps">
+<li><span>Step 1</span><b>The beta</b></li>
+<li><span>Step 2</span><b>Player card</b></li>
+<li><span>Step 3</span><b>Availability</b></li>
+</ol>
+
+<form class="card" id="wiz" novalidate>
+
+<section data-step="start">
+<h2 class="d" tabindex="-1">Get started</h2>
+<p class="lede">What's your email? It's how we reach you about your player's spot.</p>
+<div class="q" id="q-email"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" required><p class="err">Check the email address and try again.</p></div>
+<div class="acts"><a class="btn back" id="leave" href="/season1/beta/launch">Back</a><button class="btn" type="button" data-next>Continue</button></div>
+</section>
+
+<section data-step="0" hidden>
+<h2 class="d" tabindex="-1">Here's what the beta is</h2>
+<p class="lede">Two weeks and four sessions with a pro coach, on a real team. It's online, from home, and free.</p>
+<p class="sub">What your player needs</p>
+<ul class="need">
+<li>Any laptop or Mac will work<small>League of Legends is free.</small></li>
+<li>A headset or headphones</li>
+<li>A mouse</li>
+</ul>
+<p class="later">We'll send tech setup instructions at a later date. You don't need to install anything yet.</p>
+<fieldset class="q vow" id="q-vow"><legend>What we expect from every player</legend>
+<p class="hint">Tap each one to agree.</p>
+<div class="vows">
+<label><input type="checkbox" name="vow" value="No toxicity"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>No toxicity</b><small>Not in chat, not on voice, not ever.</small></span></label>
+<label><input type="checkbox" name="vow" value="Positive mindset"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Positive mindset</b><small>Losses happen. We learn from them.</small></span></label>
+<label><input type="checkbox" name="vow" value="Winning attitude"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Winning attitude</b><small>Show up, be kind, try your best.</small></span></label>
+</div><p class="err">Tap all three to continue.</p></fieldset>
+<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="button" data-next>Next: player card</button></div>
+</section>
+
+<section data-step="1" hidden>
+<h2 class="d" tabindex="-1">Build their player card</h2>
+<p class="lede">No wrong answers. This is how the coach gets to know them before day one.</p>
+<div class="row">
+<div class="q"><label for="pname">Player's first name</label><input id="pname" name="pname" type="text" autocomplete="off" autocapitalize="words" required><p class="err">Add your player's first name.</p></div>
+<div class="q"><label for="age">Age</label><select id="age" name="age" required><option value="" selected disabled hidden></option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option></select><p class="err">Pick their age.</p></div>
+</div>
+<fieldset class="q"><legend>Where do they game? <i>(pick any)</i></legend>
+<div class="opts">
+<label><input type="checkbox" name="plays" value="Computer">Computer</label>
+<label><input type="checkbox" name="plays" value="Console">Console</label>
+<label><input type="checkbox" name="plays" value="Tablet">Tablet</label>
+<label><input type="checkbox" name="plays" value="Phone">Phone</label>
+<label><input type="checkbox" name="plays" value="Not much yet">Not much yet</label>
+</div></fieldset>
+<fieldset class="q"><legend>How have team sports gone for them?</legend>
+<div class="opts">
+<label><input type="radio" name="sports" value="Loves them">Loves them</label>
+<label><input type="radio" name="sports" value="Plays, not their thing">Plays, but it's not their thing</label>
+<label><input type="radio" name="sports" value="Tried, didn't stick">Tried, didn't stick</label>
+<label><input type="radio" name="sports" value="Hasn't tried yet">Hasn't tried yet</label>
+</div></fieldset>
+<fieldset class="q"><legend>What's their superpower? <i>(pick up to two)</i></legend>
+<div class="opts" id="powers">
+<label><input type="checkbox" name="power" value="Never gives up">Never gives up</label>
+<label><input type="checkbox" name="power" value="Makes everyone laugh">Makes everyone laugh</label>
+<label><input type="checkbox" name="power" value="Quick thinker">Quick thinker</label>
+<label><input type="checkbox" name="power" value="Natural leader">Natural leader</label>
+<label><input type="checkbox" name="power" value="Quiet strategist">Quiet strategist</label>
+<label><input type="checkbox" name="power" value="Builds anything">Builds anything</label>
+<label><input type="checkbox" name="power" value="Great teammate">Great teammate</label>
+</div></fieldset>
+<div class="q"><label for="fact">One fun fact about them <i>(optional)</i></label><input id="fact" name="fact" type="text" autocomplete="off" maxlength="120" placeholder="Knows every flag. Beat the whole family at chess."></div>
+<div class="pc" id="pc" aria-live="polite"></div>
+<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="button" data-next>Next: availability</button></div>
+</section>
+
+<section data-step="2" hidden>
+<h2 class="d" tabindex="-1">When can they practice?</h2>
+<p class="lede">Pick every time that could work. We build teams around the times families share.</p>
+<div class="q"><label for="tz">Your time zone</label>
+<select id="tz" name="tz">
+<option value="Eastern">Eastern</option><option value="Central">Central</option><option value="Mountain">Mountain</option><option value="Pacific">Pacific</option><option value="Alaska">Alaska</option><option value="Hawaii">Hawaii</option><option value="Other">Outside the US</option>
+</select></div>
+<fieldset class="q" id="q-times"><legend>Times that could work <i>(pick any)</i></legend>
+<div class="opts col">
+<label><span><input type="checkbox" name="times" value="Weekday afternoons">Weekday afternoons<small>After school, before dinner</small></span></label>
+<label><span><input type="checkbox" name="times" value="Weekday evenings">Weekday evenings<small>After dinner</small></span></label>
+<label><span><input type="checkbox" name="times" value="Weekend afternoons">Weekend afternoons<small>Saturday or Sunday</small></span></label>
+<label><span><input type="checkbox" name="times" value="Weekend evenings">Weekend evenings<small>Saturday or Sunday</small></span></label>
+</div><p class="err">Pick at least one time.</p></fieldset>
+<div class="q"><label for="note">Anything we should know? <i>(optional)</i></label><textarea id="note" name="note" rows="2"></textarea></div>
+<p class="err" id="senderr" role="alert" hidden></p>
+<div class="acts"><button class="btn back" type="button" data-back>Back</button><button class="btn" type="submit" id="send">Send it</button></div>
+</section>
+
+<section data-step="3" hidden>
+<h2 class="d" tabindex="-1" id="doneh">Got it.</h2>
+<p class="lede">That's everything we need for now. We build teams around the times families share, so spots depend on what lines up. We'll review and email you either way.</p>
+<div class="pc" id="pc2"></div>
+<div class="rx">
+<p class="sub">One more thing, for your player</p>
+<p class="lede" style="margin-top:6px">Hand them the screen. How fast are their reactions? Three tries.</p>
+<button class="pad" type="button" id="pad" data-s="idle"><b>Tap to start</b><span>Wait for green, then tap as fast as you can</span></button>
+<p class="best" id="best" aria-live="polite"></p>
+</div>
+<p class="ask" style="text-align:left">Questions? <a href="sms:+18322710150">Text our founder</a></p>
+</section>
+</form>
+</main>
+
+<script>
+(function(){
+  var f=document.getElementById("wiz"), steps=[].slice.call(f.querySelectorAll("[data-step]")), dots=[].slice.call(document.querySelectorAll("#dots li")), cur=0;
+  var qs=new URLSearchParams(location.search); // utm_* only. The email is typed, never passed in the address.
+  // Guess the time zone; the parent can change it.
+  try{ var z=Intl.DateTimeFormat().resolvedOptions().timeZone||"", m={"America/New_York":"Eastern","America/Detroit":"Eastern","America/Chicago":"Central","America/Denver":"Mountain","America/Phoenix":"Mountain","America/Los_Angeles":"Pacific","America/Anchorage":"Alaska","Pacific/Honolulu":"Hawaii"};
+    f.tz.value=m[z]||(/^America\/(Indiana|Kentucky)/.test(z)?"Eastern":(/^America\//.test(z)?f.tz.value:"Other")); }catch(_){}
+  function show(i){
+    cur=i; steps.forEach(function(s,n){s.hidden=n!==i});
+    dots.forEach(function(d,n){d.classList.toggle("on",n===i-1);d.classList.toggle("was",n<i-1||i===4);if(n===i-1)d.setAttribute("aria-current","step");else d.removeAttribute("aria-current")});
+    var h=steps[i].querySelector("h2"); h.focus({preventScroll:true});
+    document.getElementById("dots").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+  }
+  function bad(el,on){ el.classList.toggle("bad",on); return on; }
+  function check(i){
+    var first=null, mark=function(q,on){ if(bad(q,on)&&!first) first=q; };
+    if(i===0){ mark(document.getElementById("q-email"),!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())); }
+    if(i===1){ mark(document.getElementById("q-vow"),f.querySelectorAll("[name=vow]:checked").length<3); }
+    if(i===2){
+      mark(f.pname.closest(".q"),!f.pname.value.trim());
+      mark(f.age.closest(".q"),!f.age.value);
+    }
+    if(i===3){
+      mark(document.getElementById("q-times"),!f.querySelector("[name=times]:checked"));
+    }
+    if(first){ var t=first.querySelector("input,select"); if(t) t.focus(); first.scrollIntoView({block:"center"}); }
+    return !first;
+  }
+  // Back on the first screen: return to the page the parent came from when it was one of ours
+  // (the BETA page or the beta launch page); otherwise the link's own address, the launch page.
+  document.getElementById("leave").addEventListener("click",function(e){
+    var from=""; try{ from=new URL(document.referrer).origin }catch(_){}
+    if(from===location.origin&&history.length>1){ e.preventDefault(); history.back(); }
+  });
+  f.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    if(b.hasAttribute("data-next")){ if(check(cur)) show(cur+1); }
+    if(b.hasAttribute("data-back")) show(cur-1);
+  });
+  f.addEventListener("input",function(e){ var q=e.target.closest(".q.bad"); if(q&&(q.id!=="q-vow"||f.querySelectorAll("[name=vow]:checked").length===3)) q.classList.remove("bad"); });
+  function vals(n){return [].map.call(f.querySelectorAll("[name="+n+"]:checked"),function(x){return x.value})}
+  function card(el,full){
+    var name=f.pname.value.trim(), age=parseInt(f.age.value,10), rows=[];
+    el.textContent=""; if(!name) return;
+    var w=document.createElement("p"); w.className="who"; w.textContent=name;
+    if(age>=9){var sm=document.createElement("small"); sm.textContent="Age "+age; w.appendChild(sm);} el.appendChild(w);
+    if(vals("plays").length) rows.push(["Games on",vals("plays").join(", ")]);
+    if(f.sports.value) rows.push(["Team sports",f.sports.value]);
+    if(vals("power").length) rows.push(["Superpower",vals("power").join(" + ")]);
+    if(f.fact.value.trim()) rows.push(["Fun fact",f.fact.value.trim()]);
+    if(full){ rows.push(["Time zone",f.tz.value]); rows.push(["Could practice",vals("times").join(", ")]); }
+    if(!rows.length) return;
+    var dl=document.createElement("dl");
+    rows.forEach(function(r){var d=document.createElement("div"),t=document.createElement("dt"),v=document.createElement("dd");t.textContent=r[0];v.textContent=r[1];d.appendChild(t);d.appendChild(v);dl.appendChild(d)});
+    el.appendChild(dl);
+  }
+  var pc=document.getElementById("pc");
+  f.addEventListener("input",function(){ card(pc,false); });
+  // superpower: two at most
+  document.getElementById("powers").addEventListener("change",function(e){ if(vals("power").length>2) e.target.checked=false; card(pc,false); });
+  // Saving. Only ekuzo.gg talks to the API, the same rule the BETA page uses, so previews never write.
+  var LIVE=/(^|\.)ekuzo\.gg$/.test(location.hostname), sending=false, sendId="";
+  var utm=function(){var o={};["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){o[k]=qs.get(k)||""});return o};
+  function answers(){
+    var z=""; try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){}
+    return {step:"beta-wizard",email:f.email.value.trim(),eventId:sendId,
+      playerName:f.pname.value.trim(),playerAge:parseInt(f.age.value,10),
+      playsOn:vals("plays"),teamSports:f.sports.value||"",superpowers:vals("power"),funFact:f.fact.value.trim(),
+      expectations:vals("vow"),timeZone:f.tz.value,tz:z,times:vals("times"),note:f.note.value.trim(),
+      attribution:utm(),page:location.pathname,ekz_hp:""};
+  }
+  f.addEventListener("submit",async function(e){
+    e.preventDefault();
+    if(cur<3){ if(check(cur)) show(cur+1); return; }
+    if(cur!==3||!check(3)||sending) return;
+    var btn=document.getElementById("send"), err=document.getElementById("senderr");
+    err.hidden=true;
+    if(LIVE){
+      sending=true; btn.disabled=true; btn.textContent="Sending…";
+      if(!sendId) sendId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():Date.now()+"-"+Math.random().toString(36).slice(2,12);
+      var ok=false, msg="";
+      try{
+        var r=await fetch("/api/season-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(answers()),signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined});
+        ok=r.ok; if(!ok){ try{ var j=await r.json(); msg=(j&&typeof j.error==="string")?j.error:""; }catch(_){} }
+      }catch(_){}
+      sending=false; btn.disabled=false; btn.textContent="Send it";
+      if(!ok){ err.textContent=msg||"That didn’t go through. Check your connection and try again."; err.hidden=false; return; }
+      try{ window.gtag&&gtag("event","beta_wizard_complete"); window.clarity&&clarity("event","beta_wizard_complete"); }catch(_){}
+    }
+    document.getElementById("doneh").textContent="Got it. Thanks for "+f.pname.value.trim()+"'s info.";
+    card(document.getElementById("pc2"),true);
+    show(4);
+  });
+  // Reaction test: three tries, best time. Just for fun; nothing is saved.
+  var pad=document.getElementById("pad"), pb=pad.querySelector("b"), ps=pad.querySelector("span"), bestEl=document.getElementById("best"), t0=0, timer=0, tries=[], lock=0;
+  function set(st,big,small){ pad.setAttribute("data-s",st); pb.textContent=big; ps.textContent=small; }
+  function arm(){ set("wait","Wait for it","Tap when this turns green"); timer=setTimeout(function(){ t0=performance.now(); set("go","Tap!",""); },1200+Math.random()*2300); }
+  function hit(){
+    var st=pad.getAttribute("data-s"), now=performance.now();
+    if(now<lock) return;
+    if(st==="idle"||st==="early"||st==="res"){ if(tries.length>=3){ tries=[]; bestEl.textContent=""; } arm(); return; }
+    if(st==="wait"){ clearTimeout(timer); lock=now+350; set("early","Too soon","Tap to try again"); return; }
+    if(st==="go"){ var ms=Math.round(now-t0); tries.push(ms); lock=now+350;
+      var best=Math.min.apply(null,tries), left=3-tries.length;
+      set("res",ms+" ms",left?("Tap for try "+(tries.length+1)+" of 3"):"Tap to play again");
+      bestEl.textContent=left?("Best so far: "+best+" ms"):("Best of three: "+best+" ms. "+(best<280?"Lightning.":best<380?"Sharp.":"Warmed up now.")+" Bring that to practice."); }
+  }
+  pad.addEventListener("pointerdown",function(e){ e.preventDefault(); pad.focus(); hit(); });
+  pad.addEventListener("keydown",function(e){ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); if(!e.repeat) hit(); } });
+})();
+</script>
+</body>
+</html>
