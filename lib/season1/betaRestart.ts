@@ -71,7 +71,7 @@ export function verifyRestartToken(token: unknown, rowId: string, sessionId: str
 export function restartLinkBase(env?: Record<string, string | undefined>): string | null {
   const e = env ?? process.env;
   if (deployContext(e) === "production") return "https://ekuzo.gg";
-  const prime = (e.DEPLOY_PRIME_URL ?? "").trim();
+  const prime = (e.S1_DEPLOY_PRIME_URL || e.DEPLOY_PRIME_URL || "").trim();
   return PREVIEW_BASE_RE.test(prime) ? prime : null;
 }
 

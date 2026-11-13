@@ -4,6 +4,8 @@ const nextConfig = {
   // tell production from previews (lib/season1/mode.ts).
   env: {
     S1_DEPLOY_CONTEXT: process.env.CONTEXT || "",
+    // The deploy preview's own address, for the beta restart link on previews (lib/season1/betaRestart.ts).
+    S1_DEPLOY_PRIME_URL: process.env.DEPLOY_PRIME_URL || "",
   },
   // Belt-and-suspenders: keep files under public/testimonial-videos/ out of
   // the serverless function bundle. public/ is already served from the CDN;

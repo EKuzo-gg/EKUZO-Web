@@ -43,3 +43,4 @@ Wf7Nam Draft, WjRNvd Draft, W9LxM9 Live (test-address filter). Netlify builds br
 | Time CT | Change | Why |
 |---|---|---|
 | 14:51 | Restore: a finished run reads `done` whatever its age; the 14 days apply to an unfinished run only | A finished family tapping an old link should not be told to start again (Fable, on the builder's note 3) |
+| 15:25 | `next.config.mjs` inlines Netlify's `DEPLOY_PRIME_URL` as `S1_DEPLOY_PRIME_URL`, read first by `restartLinkBase()` | On deploy preview 7 the progress save wrote no `beta_restart_link`: the preview address did not reach the function runtime, the same way `CONTEXT` does not. Production is unaffected (it uses the inlined deploy context). `S1_REF_SECRET` read in Netlify: Production context only, scoped to Builds, Functions, Runtime (C5 closed) |
