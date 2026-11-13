@@ -127,6 +127,10 @@ describe("POST /api/season1-beta/restore", () => {
       for (const leak of [EMAIL, "Maya", "example.com"]) assert.equal(r.text.includes(leak), false);
     }
   });
+  it("a finished run older than 14 days still reads done, never the dead-link state", async () => {
+    rows[0].completed = true; rows[0].ageDays = 40;
+    assert.deepEqual((await call({})).body, { ok: true, state: "done" });
+  });
   it("none for: clear, no cookie, bad shape, unknown row, wrong signature, superseded session", async () => {
     const none = (r: { status: number; body: Record<string, unknown>; cookies: string[] }) => {
       assert.equal(r.status, 200); assert.deepEqual(r.body, { ok: true, state: "none" }); assert.equal(cleared(r.cookies), true);

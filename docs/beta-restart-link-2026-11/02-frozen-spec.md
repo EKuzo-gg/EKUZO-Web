@@ -42,3 +42,4 @@ Wf7Nam Draft, WjRNvd Draft, W9LxM9 Live (test-address filter). Netlify builds br
 
 | Time CT | Change | Why |
 |---|---|---|
+| 14:51 | Restore: a finished run reads `done` whatever its age; the 14 days apply to an unfinished run only | A finished family tapping an old link should not be told to start again (Fable, on the builder's note 3) |

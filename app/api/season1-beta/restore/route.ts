@@ -134,8 +134,10 @@ export async function POST(req: NextRequest) {
     console.error("Beta restore key unavailable:", errCode(err));
     return answer({ ok: false }, 503, false);
   }
-  if (!signed || row.fresh !== true) return none();
+  if (!signed) return none();
+  // A finished family sees the end screen however old the link is; the 14 days apply to an unfinished run.
   if (row.completed === true) return answer({ ok: true, state: "done" }, 200, true);
+  if (row.fresh !== true) return none();
 
   const email = typeof row.email === "string" ? row.email : "";
   const stage = Number(row.stage);
