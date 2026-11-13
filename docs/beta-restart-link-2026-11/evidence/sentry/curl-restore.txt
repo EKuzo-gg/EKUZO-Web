@@ -1,0 +1,37 @@
+NOTE: first pass used a token whose last signature char had non-zero stray bits (not canonical), so it read none. This pass uses a canonical-shape token: AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBA
+### valid canonical shape, no DATABASE_URL, body {} (expect 503, cookies kept)
+HTTP/1.1 503 Service Unavailable
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+content-type: application/json
+Date: Fri, 13 Nov 2026 20:55:23 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"ok":false}
+### same, confirm
+HTTP/1.1 503 Service Unavailable
+{"ok":false}
+
+### same, clear:true
+HTTP/1.1 200 OK
+set-cookie: ekuzo_brt=; Path=/api/season1-beta; Max-Age=0; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_brf=; Path=/season1/beta; Max-Age=0; Secure; SameSite=Lax
+{"ok":true,"state":"none"}
+
+### Origin evil with valid canonical cookie: status and any set-cookie
+HTTP/1.1 403 Forbidden
+{"ok":false,"error":"Forbidden"}
+
+### redirect then restore using the redirect's own cookie via cookie jar (http, so Secure cookies are not replayed by curl; shown for completeness)
+
+### server log
+- Local:         http://localhost:3100
+- Network:       http://192.0.2.2:3100
+✓ Ready in 132ms
+✓ Running next.config.mjs took 17ms
+Beta restore limit check skipped: Error
+Beta restore database read failed: Error
+Beta restore limit check skipped: Error
+Beta restore database read failed: Error

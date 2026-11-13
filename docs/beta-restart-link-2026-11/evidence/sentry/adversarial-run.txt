@@ -1,0 +1,115 @@
+TAP version 13
+# Subtest: Sentry adversarial: restore
+    # Subtest: another family's row id with this family's signature reads none and returns nothing of either family
+    ok 1 - another family's row id with this family's signature reads none and returns nothing of either family
+      ---
+      duration_ms: 276.621116
+      type: 'test'
+      ...
+    # Subtest: a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+    ok 2 - a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+      ---
+      duration_ms: 27.804717
+      type: 'test'
+      ...
+    # Subtest: a token for a row of the other livemode reads none
+    ok 3 - a token for a row of the other livemode reads none
+      ---
+      duration_ms: 5.785803
+      type: 'test'
+      ...
+    # Subtest: replay after completion: the run reads done, with no email or answers, even with confirm
+    ok 4 - replay after completion: the run reads done, with no email or answers, even with confirm
+      ---
+      duration_ms: 40.688354
+      type: 'test'
+      ...
+    # Subtest: replay after a new session started: the old link reads none
+    ok 5 - replay after a new session started: the old link reads none
+      ---
+      duration_ms: 5.014856
+      type: 'test'
+      ...
+    # Subtest: confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+    ok 6 - confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+      ---
+      duration_ms: 6.982489
+      type: 'test'
+      ...
+    # Subtest: {confirm:true, clear:true} together: clear wins, nothing is read
+    ok 7 - {confirm:true, clear:true} together: clear wins, nothing is read
+      ---
+      duration_ms: 3.331281
+      type: 'test'
+      ...
+    # Subtest: extra body fields (email, rowId, sessionId, role, token) change nothing
+    ok 8 - extra body fields (email, rowId, sessionId, role, token) change nothing
+      ---
+      duration_ms: 5.114971
+      type: 'test'
+      ...
+    # Subtest: bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+    ok 9 - bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+      ---
+      duration_ms: 17.428919
+      type: 'test'
+      ...
+    # Subtest: two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+    ok 10 - two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+      ---
+      duration_ms: 4.687819
+      type: 'test'
+      ...
+# HOSTILE-ANSWERS-OBSERVED {"name":"scriptalert1scriptZed","factLen":120,"fact":"=1+1 txt.exe yyyyyyyyyyyyyyyyy","keys":["playerName","expectations","funFact"]}
+    # Subtest: unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+    ok 11 - unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+      ---
+      duration_ms: 14.799578
+      type: 'test'
+      ...
+    # Subtest: hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+    ok 12 - hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+      ---
+      duration_ms: 3.389091
+      type: 'test'
+      ...
+    # Subtest: note, timeZone, tz and times never come back on a confirm, whatever the row holds
+    ok 13 - note, timeZone, tz and times never come back on a confirm, whatever the row holds
+      ---
+      duration_ms: 4.699646
+      type: 'test'
+      ...
+    # Subtest: a cross-site POST gets 403 first: no database work, no cookie cleared
+    ok 14 - a cross-site POST gets 403 first: no database work, no cookie cleared
+      ---
+      duration_ms: 2.863251
+      type: 'test'
+      ...
+# NOIP-BUCKET-OBSERVED 429s after 605 calls with no address: 5
+    # Subtest: limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+    ok 15 - limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+      ---
+      duration_ms: 1247.333526
+      type: 'test'
+      ...
+    # Subtest: compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+    ok 16 - compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+      ---
+      duration_ms: 0.934495
+      type: 'test'
+      ...
+    1..16
+ok 1 - Sentry adversarial: restore
+  ---
+  duration_ms: 1669.70782
+  type: 'suite'
+  ...
+1..1
+# tests 16
+# suites 1
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1874.236851

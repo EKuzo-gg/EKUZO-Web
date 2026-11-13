@@ -1,0 +1,87 @@
+===== MUTATION 1: signature check disabled (signed = true) in a scratch copy in /tmp/sentry-scratch
+    not ok 1 - another family's row id with this family's signature reads none and returns nothing of either family
+      error: '{"ok":true,"state":"resume","email":"other.family@example.net","sessionId":"sess-B","stage":1,"answers":{"playerName":"Bobby","funFact":"B-secret"}}'
+    not ok 2 - a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+      error: 'forged signature accepted'
+    ok 3 - a token for a row of the other livemode reads none
+    ok 4 - replay after completion: the run reads done, with no email or answers, even with confirm
+    not ok 5 - replay after a new session started: the old link reads none
+      error: |-
+    ok 6 - confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+    ok 7 - {confirm:true, clear:true} together: clear wins, nothing is read
+    ok 8 - extra body fields (email, rowId, sessionId, role, token) change nothing
+    ok 9 - bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+    not ok 10 - two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+      error: |-
+    not ok 11 - unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+      error: |-
+    ok 12 - hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+    ok 13 - note, timeZone, tz and times never come back on a confirm, whatever the row holds
+    ok 14 - a cross-site POST gets 403 first: no database work, no cookie cleared
+    ok 15 - limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+    ok 16 - compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+  error: '5 subtests failed'
+# pass 11
+# fail 5
+===== MUTATION 2: Origin guard removed
+    ok 1 - another family's row id with this family's signature reads none and returns nothing of either family
+    ok 2 - a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+    ok 3 - a token for a row of the other livemode reads none
+    ok 4 - replay after completion: the run reads done, with no email or answers, even with confirm
+    ok 5 - replay after a new session started: the old link reads none
+    ok 6 - confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+    ok 7 - {confirm:true, clear:true} together: clear wins, nothing is read
+    ok 8 - extra body fields (email, rowId, sessionId, role, token) change nothing
+    ok 9 - bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+    ok 10 - two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+    ok 11 - unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+    ok 12 - hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+    ok 13 - note, timeZone, tz and times never come back on a confirm, whatever the row holds
+    not ok 14 - a cross-site POST gets 403 first: no database work, no cookie cleared
+      error: |-
+    ok 15 - limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+    ok 16 - compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+  error: '1 subtest failed'
+# pass 15
+# fail 1
+===== MUTATION 3: stripping note/timeZone/tz/times removed
+    ok 1 - another family's row id with this family's signature reads none and returns nothing of either family
+    ok 2 - a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+    ok 3 - a token for a row of the other livemode reads none
+    ok 4 - replay after completion: the run reads done, with no email or answers, even with confirm
+    ok 5 - replay after a new session started: the old link reads none
+    ok 6 - confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+    ok 7 - {confirm:true, clear:true} together: clear wins, nothing is read
+    ok 8 - extra body fields (email, rowId, sessionId, role, token) change nothing
+    ok 9 - bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+    ok 10 - two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+    ok 11 - unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+    not ok 12 - hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+      error: |-
+    not ok 13 - note, timeZone, tz and times never come back on a confirm, whatever the row holds
+      error: |-
+    ok 14 - a cross-site POST gets 403 first: no database work, no cookie cleared
+    ok 15 - limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+    ok 16 - compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+  error: '2 subtests failed'
+# pass 14
+# fail 2
+===== CONTROL: unmodified scratch copy
+    ok 1 - another family's row id with this family's signature reads none and returns nothing of either family
+    ok 2 - a signature made with the raw secret, or with another HKDF label, or with keyHash-style hashing, reads none
+    ok 3 - a token for a row of the other livemode reads none
+    ok 4 - replay after completion: the run reads done, with no email or answers, even with confirm
+    ok 5 - replay after a new session started: the old link reads none
+    ok 6 - confirm without a prior peek is honored (no server-side state links the two calls) and equals the confirm after a peek
+    ok 7 - {confirm:true, clear:true} together: clear wins, nothing is read
+    ok 8 - extra body fields (email, rowId, sessionId, role, token) change nothing
+    ok 9 - bodies that are an array, a string, a number, null, huge (100 KB) or invalid JSON read as {}: a peek, never a confirm
+    ok 10 - two ekuzo_brt values in one Cookie header: the outcome is the valid row's or none, never another row
+    ok 11 - unicode, percent-encoded and padded tokens: fullwidth and padded read none; a percent-encoded copy of the real token is the real token and nothing else
+    ok 12 - hostile stored answers: script tag, formula, RTL marks, a 10 KB fun fact come back as plain, capped JSON strings
+    ok 13 - note, timeZone, tz and times never come back on a confirm, whatever the row holds
+    ok 14 - a cross-site POST gets 403 first: no database work, no cookie cleared
+    ok 15 - limiter: 100 calls from one address, 61st on is a 429 with cookies kept; no address shares one bucket of 600
+    ok 16 - compare is constant-time by construction: timingSafeEqual on decoded bytes after a length check (read the code)
+# pass 16
+# fail 0

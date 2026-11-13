@@ -161,7 +161,7 @@ export const BETA_PROGRESS_JS = String.raw`(function(){
     };
     var runOut=function(){
       if(!untouched()) return;
-      var box=el("div"); box.setAttribute("role","status");
+      var box=el("div"); box.setAttribute("role","status"); box.style.cssText="margin-bottom:22px;padding-bottom:22px;border-bottom:2px solid #000";
       box.appendChild(el("p","lede","That link has run out. Start below and your answers will save as you go."));
       put(box);
     };

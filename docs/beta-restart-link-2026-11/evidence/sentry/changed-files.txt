@@ -1,0 +1,14 @@
+WORKLOG.md
+app/api/season1-beta/restore/route.ts
+app/season1/beta/r/[token]/route.ts
+lib/season1/__tests__/attribution.test.ts
+lib/season1/__tests__/betaProgressScript.test.ts
+lib/season1/__tests__/betaRestart.test.ts
+lib/season1/__tests__/betaRestartRedirect.test.ts
+lib/season1/__tests__/betaRestartRestore.test.ts
+lib/season1/__tests__/betaWizard.test.ts
+lib/season1/attribution.ts
+lib/season1/betaProgressScript.ts
+lib/season1/betaRestart.ts
+lib/season1/betaRestartCookies.ts
+lib/season1/betaWizard.ts

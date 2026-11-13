@@ -1,0 +1,707 @@
+[
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "plain"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "plain"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "plain"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "plain"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "plain"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "plain"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "resume0"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "resume0"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "resume0"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "resume1"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "resume1"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "resume1"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "resume2"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "resume2"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "resume2"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "fresh"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "fresh"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "fresh"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "fresh"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "fresh"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "fresh"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "slow-type"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "slow-type"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "slow-type"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "slow-leave"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "slow-leave"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "slow-leave"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "slow-done"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "slow-done"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "slow-done"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "slow-none"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "slow-none"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "slow-none"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "slow-confirm"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "slow-confirm"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "slow-confirm"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "done"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "done"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "done"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "none"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "none"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "none"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "503-then-200"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "503-then-200"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "503-then-200"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "503-503"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "503-503"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "503-503"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "503-503"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "503-503"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "503-503"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "network-fail"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "network-fail"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "network-fail"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "429"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "429"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "429"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "localwins"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "localwins"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "localwins"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "localwins"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "localwins"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "localwins"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "device"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "device"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "device"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "device"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "device"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "device"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Toronto"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Toronto"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Toronto"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Vancouver"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Vancouver"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Vancouver"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Edmonton"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Edmonton"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Edmonton"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Winnipeg"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Winnipeg"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Winnipeg"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Regina"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Regina"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Regina"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Halifax"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Halifax"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Halifax"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/St_Johns"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/St_Johns"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/St_Johns"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Boise"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Boise"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Boise"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Indiana/Tell_City"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Indiana/Tell_City"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Indiana/Tell_City"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Mexico_City"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Mexico_City"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Mexico_City"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/Puerto_Rico"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/Puerto_Rico"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/Puerto_Rico"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-America/New_York"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-America/New_York"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-America/New_York"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-Europe/London"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-Europe/London"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-Europe/London"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-hand"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-guess-a"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-guess-a"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-guess-a"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-guess-b"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-guess-b"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-guess-b"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-guess-c"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-guess-c"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-guess-c"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tz-link"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tz-link"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tz-link"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "a11y"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "a11y"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "a11y"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "a11y2"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "a11y2"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "a11y2"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "dlLeak"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "dlLeak"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "dlLeak"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tls"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tls"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tls"
+ },
+ {
+  "host": "www.googletagmanager.com",
+  "path": "/gtag/js",
+  "scenario": "tls"
+ },
+ {
+  "host": "connect.facebook.net",
+  "path": "/en_US/fbevents.js",
+  "scenario": "tls"
+ },
+ {
+  "host": "www.clarity.ms",
+  "path": "/tag/wml8wll5ua",
+  "scenario": "tls"
+ }
+]

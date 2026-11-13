@@ -1,0 +1,150 @@
+### 1 valid shape (65)
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+set-cookie: ekuzo_brt=AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### 2 with utm
+HTTP/1.1 302 Found
+set-cookie: ekuzo_lc=%7B%22path%22%3A%22%2Fseason1%2Fbeta%2Fr%2F%22%2C%22ts%22%3A1794603305741%2C%22utm_source%22%3A%22x%22%2C%22utm_medium%22%3A%22email%22%7D; Path=/; Expires=Sun, 13 Dec 2026 20:55:05 GMT; Max-Age=2592000; Secure; HttpOnly; SameSite=lax
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+set-cookie: ekuzo_brt=AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### bad: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### bad: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### bad: AAAAAAAAAAAAAAAAAAAAAABBBBBBBB.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### bad: AAAAAAAAAAAAAAAAAAAAAABBBBBBBB%2FBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### bad: AAAAAAAAAAAAAAAAAAAAAABBBBBBBB%00BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### empty token /season1/beta/r/
+HTTP/1.1 308 Permanent Redirect
+location: /season1/beta/r
+Refresh: 0;url=/season1/beta/r
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+/season1/beta/r
+### HEAD
+HTTP/1.1 302 Found
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+set-cookie: ekuzo_brt=AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+### POST
+HTTP/1.1 405 Method Not Allowed
+set-cookie: ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 20:55:05 GMT; Max-Age=31536000; Secure; SameSite=lax
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+### Googlebot UA GET
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+location: /season1/beta/start
+referrer-policy: no-referrer
+set-cookie: ekuzo_brt=AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax
+set-cookie: ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax
+x-robots-tag: noindex
+Date: Fri, 13 Nov 2026 20:55:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked

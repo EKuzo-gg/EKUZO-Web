@@ -1,0 +1,3 @@
+Added lines in app/ and lib/ (non-test) checked:
+em dash: none. innerHTML: none. console.log: none.
+console.warn/error added (4): "Beta restore rate limited"; "Beta restore limit check skipped:" + errCode; "Beta restore database read failed:" + errCode; "Beta restore key unavailable:" + errCode. errCode returns a code or error name only, never a message. No email, token, name, answer in any log.

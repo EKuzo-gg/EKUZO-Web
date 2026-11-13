@@ -1,0 +1,178 @@
+--- plain
+PASS 390.1.noflag.calls 1. no flag cookie: zero calls to the restore endpoint (M8) :: restore calls=0
+PASS 390.1.noflag.panel 1. no flag: no panel, no status region
+PASS 390.1.noflag.posts 1. no flag: no progress post, no GA beta_wizard_* event on load :: []
+PASS 390.1.noflag.reload 1. no flag, after reload: still zero restore calls
+--- resume0
+PASS 390.2.s0.panel 2. stage 0: panel shows masked email and the two buttons :: {"text":"Welcome back.\n\nYour answers are saved under s•••@example.com. Pick up where you left off?\n\nStart fresh\nPick up where I left off","b":[{"t":"Start fresh","c":"btn back"},{"t":"Pick up where I left off","c":"btn"}]}
+PASS 390.2.s0.role 2. stage 0: panel container has role=status :: <div role="status" style="margin-bottom: 22px; padding-bottom: 22px; border-bott
+PASS 390.2.s0.nokid 2. stage 0: nothing about the player in the DOM or fields before the tap :: []
+PASS 390.2.s0.pre 2. stage 0: before tap exactly one call ({}), no progress post, no GA event :: {"r":[{}],"api":0,"ga":[]}
+PASS 390.2.s0.cookieSent 2. stage 0: the HttpOnly token cookie is sent to the restore endpoint :: ekuzo_brt=<canary>
+PASS 390.2.s0.docCookie 2. stage 0: document.cookie does not expose the token
+INFO 390.13.tab 13. Tab order from page top (first 6 stops) :: ["A","Start fresh","Pick up where I left off","email","leave","Continue"]
+PASS 390.13.tabOrder 13. Tab reaches 'Start fresh' then 'Pick up' before the email field :: ["A","Start fresh","Pick up where I left off","email","leave","Continue"]
+PASS 390.2.s0.confirm 2. stage 0: tap sends exactly one confirm call :: [{},{"confirm":true}]
+PASS 390.2.s0.step 2. stage 0: lands on screen 1 :: idx=1
+PASS 390.2.s0.fields 2. stage 0: fields filled :: {"email":"sentry+390@example.com","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":""}
+PASS 390.2.s0.noPost 2. stage 0: NO progress post and NO beta_wizard_step on the restore (M2) :: {"api":0,"ga":[{"n":"beta_wizard_resume","p":{"step":"email","via":"link"}}]}
+PASS 390.2.s0.resumeEv 2. stage 0: beta_wizard_resume {step:email, via:link} exactly once, nothing else :: [{"n":"beta_wizard_resume","p":{"step":"email","via":"link"}}]
+PASS 390.2.s0.focus 2. stage 0: focus lands on a field after the tap :: {"tag":"INPUT","id":"","name":"vow"}
+PASS 390.2.s0.panelGone 2. stage 0: panel removed
+PASS 390.2.s0.sid 2. stage 0: saved run holds the session the restore returned :: {"sid":"sess-restored-390-0001","stage":0,"tzSet":false,"g":[0]}
+PASS 390.2.s0.next 2. stage 0: next step posts stage 1 with the restored session id, once :: [[1,"sess-restored-390-0001"]]
+PASS 390.2.s0.stepEv 2. stage 0: beta_wizard_step fires only for the newly completed step (expectations; email was already counted) :: [{"n":"beta_wizard_resume","p":{"step":"email","via":"link"}},{"n":"beta_wizard_step","p":{"step":"expectations"}}]
+PASS 390.11.s0.errors 11. stage 0: no page errors, no console errors from our pages :: [{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"}]
+--- resume1
+PASS 390.2.s1.panel 2. stage 1: panel shows masked email and the two buttons :: {"text":"Welcome back.\n\nYour answers are saved under s•••@example.com. Pick up where you left off?\n\nStart fresh\nPick up where I left off","b":[{"t":"Start fresh","c":"btn back"},{"t":"Pick up where I left off","c":"btn"}]}
+PASS 390.2.s1.role 2. stage 1: panel container has role=status :: <div role="status" style="margin-bottom: 22px; padding-bottom: 22px; border-bott
+PASS 390.2.s1.nokid 2. stage 1: nothing about the player in the DOM or fields before the tap :: []
+PASS 390.2.s1.pre 2. stage 1: before tap exactly one call ({}), no progress post, no GA event :: {"r":[{}],"api":0,"ga":[]}
+PASS 390.2.s1.cookieSent 2. stage 1: the HttpOnly token cookie is sent to the restore endpoint :: ekuzo_brt=<canary>
+PASS 390.2.s1.docCookie 2. stage 1: document.cookie does not expose the token
+PASS 390.2.s1.confirm 2. stage 1: tap sends exactly one confirm call :: [{},{"confirm":true}]
+PASS 390.2.s1.step 2. stage 1: lands on screen 2 :: idx=2
+PASS 390.2.s1.fields 2. stage 1: fields filled :: {"email":"sentry+390@example.com","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Central","times":[],"note":""}
+PASS 390.2.s1.noPost 2. stage 1: NO progress post and NO beta_wizard_step on the restore (M2) :: {"api":0,"ga":[{"n":"beta_wizard_resume","p":{"step":"expectations","via":"link"}}]}
+PASS 390.2.s1.resumeEv 2. stage 1: beta_wizard_resume {step:expectations, via:link} exactly once, nothing else :: [{"n":"beta_wizard_resume","p":{"step":"expectations","via":"link"}}]
+PASS 390.2.s1.focus 2. stage 1: focus lands on a field after the tap :: {"tag":"INPUT","id":"pname","name":"pname"}
+PASS 390.2.s1.panelGone 2. stage 1: panel removed
+PASS 390.2.s1.sid 2. stage 1: saved run holds the session the restore returned :: {"sid":"sess-restored-390-0001","stage":1,"tzSet":false,"g":[0,1]}
+PASS 390.2.s1.next 2. stage 1: next step posts stage 2 with the restored session id, once :: [[2,"sess-restored-390-0001"]]
+PASS 390.2.s1.final 2. stage 1: final beta-wizard post sent once; end screen shown :: finals=1 idx=4
+PASS 390.2.s1.complete 2. stage 1: beta_wizard_complete fires once :: ["beta_wizard_resume","beta_wizard_step","beta_wizard_complete"]
+PASS 390.2.s1.lsCleared 2. stage 1: saved run removed after the send
+PASS 390.11.s1.errors 11. stage 1: no page errors, no console errors from our pages :: [{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"}]
+--- resume2
+PASS 390.2.s2.panel 2. stage 2: panel shows masked email and the two buttons :: {"text":"Welcome back.\n\nYour answers are saved under s•••@example.com. Pick up where you left off?\n\nStart fresh\nPick up where I left off","b":[{"t":"Start fresh","c":"btn back"},{"t":"Pick up where I left off","c":"btn"}]}
+PASS 390.2.s2.role 2. stage 2: panel container has role=status :: <div role="status" style="margin-bottom: 22px; padding-bottom: 22px; border-bott
+PASS 390.2.s2.nokid 2. stage 2: nothing about the player in the DOM or fields before the tap :: []
+PASS 390.2.s2.pre 2. stage 2: before tap exactly one call ({}), no progress post, no GA event :: {"r":[{}],"api":0,"ga":[]}
+PASS 390.2.s2.cookieSent 2. stage 2: the HttpOnly token cookie is sent to the restore endpoint :: ekuzo_brt=<canary>
+PASS 390.2.s2.docCookie 2. stage 2: document.cookie does not expose the token
+PASS 390.2.s2.confirm 2. stage 2: tap sends exactly one confirm call :: [{},{"confirm":true}]
+PASS 390.2.s2.step 2. stage 2: lands on screen 3 :: idx=3
+PASS 390.2.s2.fields 2. stage 2: fields filled :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Central","times":[],"note":""}
+PASS 390.2.s2.noPost 2. stage 2: NO progress post and NO beta_wizard_step on the restore (M2) :: {"api":0,"ga":[{"n":"beta_wizard_resume","p":{"step":"player_card","via":"link"}}]}
+PASS 390.2.s2.resumeEv 2. stage 2: beta_wizard_resume {step:player_card, via:link} exactly once, nothing else :: [{"n":"beta_wizard_resume","p":{"step":"player_card","via":"link"}}]
+PASS 390.2.s2.focus 2. stage 2: focus lands on a field after the tap :: {"tag":"SELECT","id":"tz","name":"tz"}
+PASS 390.2.s2.panelGone 2. stage 2: panel removed
+PASS 390.2.s2.sid 2. stage 2: saved run holds the session the restore returned :: {"sid":"sess-restored-390-0001","stage":2,"tzSet":false,"g":[0,1,2]}
+PASS 390.11.s2.errors 11. stage 2: no page errors, no console errors from our pages :: [{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png"}]
+--- fresh
+PASS 390.3.clear 3. Start fresh: one clear call sent :: [{},{"clear":true}]
+PASS 390.3.panelGone 3. Start fresh: panel gone
+PASS 390.3.first 3. Start fresh: wizard on its first screen, usable (email field focused) :: {"tag":"INPUT","id":"email","name":"email"}
+PASS 390.3.nothingLoaded 3. Start fresh: nothing loaded, no post, no GA event :: []
+PASS 390.3.usable 3. wizard usable: posts stage 0 and 1 with one fresh session id (not the saved one) :: ["1794603987558-mmleteheae","1794603987558-mmleteheae"]
+PASS 390.3.laterRunNoPanel 3. later page load (flag cookie gone or cleared): no panel
+--- slow
+PASS 390.4.typed.nopanel 4. typed in email before the slow answer: panel never appears
+PASS 390.4.typed.kept 4. typed email not overwritten, still on the first screen :: {"email":"typed@example.com","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":[],"tz":"Central","times":[],"note":""}
+PASS 390.4.typed.noposts 4. no posts, no GA resume
+PASS 390.4.left.nopanel 4. left the first screen before the answer: panel never appears, wizard not moved back :: idx=1
+PASS 390.4.left.email 4. email still the typed one
+PASS 390.4.done.ignored 4. slow 'done' answer after typing does nothing :: idx=0
+PASS 390.4.none.ignored 4. slow 'none' answer after typing: no dead-link line over the typing
+INFO 390.4.confirmTyped 4. (extra) typed into email while a slow confirm is in flight, then the answer lands :: {"idx":2,"email":"sentry+390@example.com"}
+--- done
+PASS 390.5.endScreen 5. done: the end screen shows (last section only) :: idx=4
+PASS 390.5.nokid 5. done: no player name or card content anywhere :: {"pc2":"","kid":[]}
+PASS 390.5.noComplete 5. done: no beta_wizard_complete
+PASS 390.5.noPosts 5. done: no posts at all
+PASS 390.5.ev 5. done: beta_wizard_resume {step:done, via:link} once :: [{"n":"beta_wizard_resume","p":{"step":"done","via":"link"}}]
+PASS 390.5.dots 5. done: progress dots in final state (all 'was', none current) :: ["was","was","was"]
+PASS 390.5.nostored 5. done: nothing stored in the browser
+PASS 390.5.restoreCalls 5. done: exactly one restore call ({}), none with confirm
+INFO 390.5.pad 5. reaction pad visible on the done screen :: true
+--- none
+PASS 390.6.line 6. none: dead-link line on the first screen :: "That link has run out. Start below and your answers will save as you go."
+PASS 390.6.role 6. none: line sits in a role=status container
+PASS 390.6.usable 6. none: wizard usable from the first screen
+PASS 390.6.advance 6. none: can continue to screen 2 and a progress post goes
+PASS 390.6.noEv 6. none: no beta_wizard_resume event
+--- retry
+PASS 390.7.retry 7. 503 then 200: exactly one retry, panel appears :: {"calls":[{},{}],"gapMs":1518}
+INFO 390.7.gap 7. gap between the two calls (ms) :: 1518
+PASS 390.7.twice.calls 7. 503 twice: two calls only :: calls=2
+PASS 390.7.twice.noerr 7. 503 twice: no error shown, no panel, wizard usable :: Free beta
+LET'S MEET YOUR PLAYER.
+THREE QUICK STEPS.
+Step 1
+THE BETA
+Step 2
+PLAYER CARD
+Step 3
+AVAILABILITY
+GET STARTED
+
+What's your email? It's how we reach you about your player's spot.
+
+Your email
+
+PASS 390.7.twice.flag 7. 503 twice: flag cookie still present :: ekuzo_brf=1
+PASS 390.7.reload.again 7. reload after the double 503: asks again (flag kept) :: calls=4
+PASS 390.7.net 7. dropped connection then 200: retried once, panel appears
+PASS 390.7.429 7. 429: one call, no retry, no error shown, flag kept :: calls=1
+--- localwins
+PASS 390.8.clear 8. saved local run plus flag: exactly one restore call, {clear:true} :: [{"clear":true}]
+PASS 390.8.nopanel 8. no panel
+PASS 390.8.local 8. the local run won: local email, on the player card, nothing from the link :: {"idx":2,"f":{"email":"local@example.com","pname":"","age":"","plays":[],"sports":[],"power":[],"fact":"","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Central","times":[],"note":""}}
+PASS 390.8.via 8. resume event is via:device :: [{"n":"beta_wizard_resume","p":{"step":"expectations","via":"device"}}]
+--- device
+PASS 390.9.restored 9. same device, no flag: reopens on availability with answers :: {"idx":3,"f":{"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Central","times":[],"note":""}}
+PASS 390.9.via 9. resume event is {step:player_card, via:device} once :: [{"n":"beta_wizard_resume","p":{"step":"player_card","via":"device"}}]
+PASS 390.9.norestore 9. zero restore calls without the flag
+INFO 390.9.posts 9. posts after a device restore (existing behaviour: one repost of the last done stage) :: [["beta-progress",2,"1794604042314-dgs8ejum1x"]]
+--- zones
+PASS 390.10.zone.America/Toronto 10. America/Toronto: select reads Eastern :: {"v":"Eastern","zone":"America/Toronto"}
+PASS 390.10.zone.America/Vancouver 10. America/Vancouver: select reads Pacific :: {"v":"Pacific","zone":"America/Vancouver"}
+PASS 390.10.zone.America/Edmonton 10. America/Edmonton: select reads Mountain :: {"v":"Mountain","zone":"America/Edmonton"}
+PASS 390.10.zone.America/Winnipeg 10. America/Winnipeg: select reads Central :: {"v":"Central","zone":"America/Winnipeg"}
+PASS 390.10.zone.America/Regina 10. America/Regina: select reads Central :: {"v":"Central","zone":"America/Regina"}
+PASS 390.10.zone.America/Halifax 10. America/Halifax: select reads Other :: {"v":"Other","zone":"America/Halifax"}
+PASS 390.10.zone.America/St_Johns 10. America/St_Johns: select reads Other :: {"v":"Other","zone":"America/St_Johns"}
+PASS 390.10.zone.America/Boise 10. America/Boise: select reads Mountain :: {"v":"Mountain","zone":"America/Boise"}
+PASS 390.10.zone.America/Indiana/Tell_City 10. America/Indiana/Tell_City: select reads Central :: {"v":"Central","zone":"America/Indiana/Tell_City"}
+PASS 390.10.zone.America/Mexico_City 10. America/Mexico_City: select reads Other :: {"v":"Other","zone":"America/Mexico_City"}
+PASS 390.10.zone.America/Puerto_Rico 10. America/Puerto_Rico: select reads Other :: {"v":"Other","zone":"America/Puerto_Rico"}
+PASS 390.10.zone.America/New_York 10. America/New_York: select reads Eastern :: {"v":"Eastern","zone":"America/New_York"}
+PASS 390.10.zone.Europe/London 10. Europe/London: select reads Other :: {"v":"Other","zone":"Europe/London"}
+PASS 390.10.hand.guess 10. Toronto guess on the availability screen reads Eastern
+PASS 390.10.hand.nav 10. hand-picked Pacific survives Back and forward
+PASS 390.10.hand.reload 10. same-device restore after reload: hand-picked Pacific back in the select (guess was Eastern) :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Pacific","times":[],"note":""}
+PASS 390.10.hand.final 10. final post sends timeZone Pacific and tz America/Toronto :: {"tz":"Pacific","z":"America/Toronto"}
+PASS 390.10.guess.saved 10. a guess that was never hand-picked is saved with tzSet unset :: {"tz":"Eastern"}
+PASS 390.10.guess.new 10. reopened in Vancouver: the saved Eastern guess is NOT restored over the new Pacific guess :: {"tz":"Pacific","idx":2}
+PASS 390.10.hand.crossZone 10. hand-picked Alaska restored on a New York browser :: {"email":"sentry+390@example.com","pname":"Zephyrine","age":"13","plays":["Console","Tablet"],"sports":["Plays, not their thing"],"power":["Quick thinker"],"fact":"Knows every flag zq7","vow":["No toxicity","Positive mindset","Winning attitude"],"tz":"Alaska","times":[],"note":""}
+PASS 390.10.link.nozone 10. link restore keeps the browser guess (Mountain) and does not set tzSet :: {"tz":"Mountain"}
+--- a11y
+INFO 390.13.dom 13. panel structure :: {"statusCount":1,"buttonTypes":["button","button"],"accessible":["Start fresh","Pick up where I left off"],"live":null,"inFirstSection":true,"firstChildOfSection":true}
+PASS 390.13.status 13. exactly one role=status region, inside the first screen, above its content, buttons type=button :: {"statusCount":1,"buttonTypes":["button","button"],"accessible":["Start fresh","Pick up where I left off"],"live":null,"inFirstSection":true,"firstChildOfSection":true}
+INFO 390.13.target 13. 'Pick up' button size (px) :: {"w":161,"h":70,"font":"18px"}
+PASS 390.13.targetSize 13. both panel buttons at least 44px tall (touch target) :: [70,70]
+PASS 390.13.kbd 13. keyboard Enter on 'Pick up' works and focus lands on a field :: {"calls":2,"idx":2,"a":{"tag":"INPUT","id":"pname","name":"pname"}}
+PASS 390.13.kbdFresh 13. keyboard Space on 'Start fresh' works; focus on email :: {"tag":"INPUT","id":"email","name":"email"}
+--- leak
+PASS 390.11.urls 11. no request to the local server carries the kid's name, fun fact, note, the email or the token in its URL :: []
+PASS 390.11.vendor 11. no vendor/other request (GA4, Pixel, Clarity hosts) carries them or the token :: []
+INFO 390.11.vendorCount 11. vendor/other requests recorded and answered by stub or aborted :: {"vendor":132,"other":44,"hosts":["www.googletagmanager.com","connect.facebook.net","www.clarity.ms","fonts.googleapis.com"]}
+--- dlLeak
+PASS 390.11.dl 11. nothing in the dataLayer (GA4 events and config) carries name, fun fact, note, email or token :: [["js","2026-11-13T21:08:08.401Z"],["set",{"page_location":"http://ekuzo.gg:3100/season1/beta/start"}],["config","G-8LM45PX53W",{}],["event","beta_wizard_resume",{"step":"player_card","via":"link"}],["event","beta_wizard_complete"]]
+PASS 390.11.dlShapes 11. GA events are only beta_wizard_resume, beta_wizard_step, beta_wizard_complete with step/via params :: [{"n":"beta_wizard_resume","p":{"step":"player_card","via":"link"}},{"n":"beta_wizard_complete","p":{}}]
+PASS 390.11.cookieScope 11. the token cookie is sent to no request other than the restore endpoint (checked on page, script and /api/season-one requests) :: []
+--- tls
+PASS 390.14.redirect 14. real 302 lands on /season1/beta/start with no token and no query :: {"url":"https://ekuzo.gg:3101/season1/beta/start","nav":[{"url":"/season1/beta/r/AAAAAAAA","status":302},{"url":"/season1/beta/start","status":200}]}
+INFO 390.14.cookies 14. Set-Cookie headers of the 302 and cookies Chrome still holds :: {"setCk":["ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 21:08:12 GMT; Max-Age=31536000; Secure; SameSite=lax","ekuzo_brt=<tok>; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax","ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax"],"held":["ekuzo_brt"]}
+PASS 390.14.cookieAttrs 14. 302 sets the token cookie (HttpOnly, Secure, Lax, Path=/api/season1-beta, Max-Age=1800) and the flag (Secure, Lax, Path=/season1/beta, Max-Age=1800, not HttpOnly) :: ["ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 21:08:12 GMT; Max-Age=31536000; Secure; SameSite=lax","ekuzo_brt=<tok>; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax","ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax"]
+PASS 390.14.askedOnce 14. the page read the flag at the real path and asked the restore endpoint ({}) with the token cookie :: [[{},"ekuzo_brt=<tok>; ekuzo_origin=direct"]]
+PASS 390.14.flagDeleted 14. flag cookie deleted by the script after the 200 (real Secure delete) :: ["ekuzo_brt","ekuzo_origin"]
+PASS 390.14.panel 14. panel shown
+PASS 390.14.reload 14. reload after the flag was deleted: no second restore call (token cookie alone does nothing) :: calls=1
+INFO 390.14.nav 14. server responses seen :: [{"url":"/season1/beta/r/AAAAAAAA","status":302},{"url":"/season1/beta/start","status":200},{"url":"/season1/beta/start","status":200}]
+
+SUMMARY 390: pass=132 fail=0 info=10
+OFFENDERS (hosts answered from the network, minus localhost): []
+OTHER-HOST REQUESTS aborted: {"fonts.googleapis.com":47}
+PAGE ERRORS: []
+CONSOLE (our pages, error/warn): [{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"plain"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"plain"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"resume0"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"resume1"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"resume2"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"fresh"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"fresh"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"slow-type"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"slow-leave"},{"type":"error","text":"Failed to load resource: the server responded with a status of 404 (Not Found)","url":"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png","scenario":"slow-done"}]

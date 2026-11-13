@@ -1,0 +1,1469 @@
+{
+  "results": [
+    {
+      "id": "390.1.noflag.calls",
+      "what": "1. no flag cookie: zero calls to the restore endpoint (M8)",
+      "ok": true,
+      "detail": "restore calls=0"
+    },
+    {
+      "id": "390.1.noflag.panel",
+      "what": "1. no flag: no panel, no status region",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.1.noflag.posts",
+      "what": "1. no flag: no progress post, no GA beta_wizard_* event on load",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.1.noflag.reload",
+      "what": "1. no flag, after reload: still zero restore calls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s0.panel",
+      "what": "2. stage 0: panel shows masked email and the two buttons",
+      "ok": true,
+      "detail": "{\"text\":\"Welcome back.\\n\\nYour answers are saved under s•••@example.com. Pick up where you left off?\\n\\nStart fresh\\nPick up where I left off\",\"b\":[{\"t\":\"Start fresh\",\"c\":\"btn back\"},{\"t\":\"Pick up where I left off\",\"c\":\"btn\"}]}"
+    },
+    {
+      "id": "390.2.s0.role",
+      "what": "2. stage 0: panel container has role=status",
+      "ok": true,
+      "detail": "<div role=\"status\" style=\"margin-bottom: 22px; padding-bottom: 22px; border-bott"
+    },
+    {
+      "id": "390.2.s0.nokid",
+      "what": "2. stage 0: nothing about the player in the DOM or fields before the tap",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.2.s0.pre",
+      "what": "2. stage 0: before tap exactly one call ({}), no progress post, no GA event",
+      "ok": true,
+      "detail": "{\"r\":[{}],\"api\":0,\"ga\":[]}"
+    },
+    {
+      "id": "390.2.s0.cookieSent",
+      "what": "2. stage 0: the HttpOnly token cookie is sent to the restore endpoint",
+      "ok": true,
+      "detail": "ekuzo_brt=<canary>"
+    },
+    {
+      "id": "390.2.s0.docCookie",
+      "what": "2. stage 0: document.cookie does not expose the token",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.13.tab",
+      "what": "13. Tab order from page top (first 6 stops)",
+      "ok": null,
+      "detail": "[\"A\",\"Start fresh\",\"Pick up where I left off\",\"email\",\"leave\",\"Continue\"]"
+    },
+    {
+      "id": "390.13.tabOrder",
+      "what": "13. Tab reaches 'Start fresh' then 'Pick up' before the email field",
+      "ok": true,
+      "detail": "[\"A\",\"Start fresh\",\"Pick up where I left off\",\"email\",\"leave\",\"Continue\"]"
+    },
+    {
+      "id": "390.2.s0.confirm",
+      "what": "2. stage 0: tap sends exactly one confirm call",
+      "ok": true,
+      "detail": "[{},{\"confirm\":true}]"
+    },
+    {
+      "id": "390.2.s0.step",
+      "what": "2. stage 0: lands on screen 1",
+      "ok": true,
+      "detail": "idx=1"
+    },
+    {
+      "id": "390.2.s0.fields",
+      "what": "2. stage 0: fields filled",
+      "ok": true,
+      "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"\",\"age\":\"\",\"plays\":[],\"sports\":[],\"power\":[],\"fact\":\"\",\"vow\":[],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.2.s0.noPost",
+      "what": "2. stage 0: NO progress post and NO beta_wizard_step on the restore (M2)",
+      "ok": true,
+      "detail": "{\"api\":0,\"ga\":[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"email\",\"via\":\"link\"}}]}"
+    },
+    {
+      "id": "390.2.s0.resumeEv",
+      "what": "2. stage 0: beta_wizard_resume {step:email, via:link} exactly once, nothing else",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"email\",\"via\":\"link\"}}]"
+    },
+    {
+      "id": "390.2.s0.focus",
+      "what": "2. stage 0: focus lands on a field after the tap",
+      "ok": true,
+      "detail": "{\"tag\":\"INPUT\",\"id\":\"\",\"name\":\"vow\"}"
+    },
+    {
+      "id": "390.2.s0.panelGone",
+      "what": "2. stage 0: panel removed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s0.sid",
+      "what": "2. stage 0: saved run holds the session the restore returned",
+      "ok": true,
+      "detail": "{\"sid\":\"sess-restored-390-0001\",\"stage\":0,\"tzSet\":false,\"g\":[0]}"
+    },
+    {
+      "id": "390.2.s0.next",
+      "what": "2. stage 0: next step posts stage 1 with the restored session id, once",
+      "ok": true,
+      "detail": "[[1,\"sess-restored-390-0001\"]]"
+    },
+    {
+      "id": "390.2.s0.stepEv",
+      "what": "2. stage 0: beta_wizard_step fires only for the newly completed step (expectations; email was already counted)",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"email\",\"via\":\"link\"}},{\"n\":\"beta_wizard_step\",\"p\":{\"step\":\"expectations\"}}]"
+    },
+    {
+      "id": "390.11.s0.errors",
+      "what": "11. stage 0: no page errors, no console errors from our pages",
+      "ok": true,
+      "detail": "[{\"type\":\"error\",\"text\":\"Failed to load resource: the server responded with a status of 404 (Not Found)\",\"url\":\"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png\"}]"
+    },
+    {
+      "id": "390.2.s1.panel",
+      "what": "2. stage 1: panel shows masked email and the two buttons",
+      "ok": true,
+      "detail": "{\"text\":\"Welcome back.\\n\\nYour answers are saved under s•••@example.com. Pick up where you left off?\\n\\nStart fresh\\nPick up where I left off\",\"b\":[{\"t\":\"Start fresh\",\"c\":\"btn back\"},{\"t\":\"Pick up where I left off\",\"c\":\"btn\"}]}"
+    },
+    {
+      "id": "390.2.s1.role",
+      "what": "2. stage 1: panel container has role=status",
+      "ok": true,
+      "detail": "<div role=\"status\" style=\"margin-bottom: 22px; padding-bottom: 22px; border-bott"
+    },
+    {
+      "id": "390.2.s1.nokid",
+      "what": "2. stage 1: nothing about the player in the DOM or fields before the tap",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.2.s1.pre",
+      "what": "2. stage 1: before tap exactly one call ({}), no progress post, no GA event",
+      "ok": true,
+      "detail": "{\"r\":[{}],\"api\":0,\"ga\":[]}"
+    },
+    {
+      "id": "390.2.s1.cookieSent",
+      "what": "2. stage 1: the HttpOnly token cookie is sent to the restore endpoint",
+      "ok": true,
+      "detail": "ekuzo_brt=<canary>"
+    },
+    {
+      "id": "390.2.s1.docCookie",
+      "what": "2. stage 1: document.cookie does not expose the token",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s1.confirm",
+      "what": "2. stage 1: tap sends exactly one confirm call",
+      "ok": true,
+      "detail": "[{},{\"confirm\":true}]"
+    },
+    {
+      "id": "390.2.s1.step",
+      "what": "2. stage 1: lands on screen 2",
+      "ok": true,
+      "detail": "idx=2"
+    },
+    {
+      "id": "390.2.s1.fields",
+      "what": "2. stage 1: fields filled",
+      "ok": true,
+      "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"\",\"age\":\"\",\"plays\":[],\"sports\":[],\"power\":[],\"fact\":\"\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.2.s1.noPost",
+      "what": "2. stage 1: NO progress post and NO beta_wizard_step on the restore (M2)",
+      "ok": true,
+      "detail": "{\"api\":0,\"ga\":[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"expectations\",\"via\":\"link\"}}]}"
+    },
+    {
+      "id": "390.2.s1.resumeEv",
+      "what": "2. stage 1: beta_wizard_resume {step:expectations, via:link} exactly once, nothing else",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"expectations\",\"via\":\"link\"}}]"
+    },
+    {
+      "id": "390.2.s1.focus",
+      "what": "2. stage 1: focus lands on a field after the tap",
+      "ok": true,
+      "detail": "{\"tag\":\"INPUT\",\"id\":\"pname\",\"name\":\"pname\"}"
+    },
+    {
+      "id": "390.2.s1.panelGone",
+      "what": "2. stage 1: panel removed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s1.sid",
+      "what": "2. stage 1: saved run holds the session the restore returned",
+      "ok": true,
+      "detail": "{\"sid\":\"sess-restored-390-0001\",\"stage\":1,\"tzSet\":false,\"g\":[0,1]}"
+    },
+    {
+      "id": "390.2.s1.next",
+      "what": "2. stage 1: next step posts stage 2 with the restored session id, once",
+      "ok": true,
+      "detail": "[[2,\"sess-restored-390-0001\"]]"
+    },
+    {
+      "id": "390.2.s1.final",
+      "what": "2. stage 1: final beta-wizard post sent once; end screen shown",
+      "ok": true,
+      "detail": "finals=1 idx=4"
+    },
+    {
+      "id": "390.2.s1.complete",
+      "what": "2. stage 1: beta_wizard_complete fires once",
+      "ok": true,
+      "detail": "[\"beta_wizard_resume\",\"beta_wizard_step\",\"beta_wizard_complete\"]"
+    },
+    {
+      "id": "390.2.s1.lsCleared",
+      "what": "2. stage 1: saved run removed after the send",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.11.s1.errors",
+      "what": "11. stage 1: no page errors, no console errors from our pages",
+      "ok": true,
+      "detail": "[{\"type\":\"error\",\"text\":\"Failed to load resource: the server responded with a status of 404 (Not Found)\",\"url\":\"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png\"}]"
+    },
+    {
+      "id": "390.2.s2.panel",
+      "what": "2. stage 2: panel shows masked email and the two buttons",
+      "ok": true,
+      "detail": "{\"text\":\"Welcome back.\\n\\nYour answers are saved under s•••@example.com. Pick up where you left off?\\n\\nStart fresh\\nPick up where I left off\",\"b\":[{\"t\":\"Start fresh\",\"c\":\"btn back\"},{\"t\":\"Pick up where I left off\",\"c\":\"btn\"}]}"
+    },
+    {
+      "id": "390.2.s2.role",
+      "what": "2. stage 2: panel container has role=status",
+      "ok": true,
+      "detail": "<div role=\"status\" style=\"margin-bottom: 22px; padding-bottom: 22px; border-bott"
+    },
+    {
+      "id": "390.2.s2.nokid",
+      "what": "2. stage 2: nothing about the player in the DOM or fields before the tap",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.2.s2.pre",
+      "what": "2. stage 2: before tap exactly one call ({}), no progress post, no GA event",
+      "ok": true,
+      "detail": "{\"r\":[{}],\"api\":0,\"ga\":[]}"
+    },
+    {
+      "id": "390.2.s2.cookieSent",
+      "what": "2. stage 2: the HttpOnly token cookie is sent to the restore endpoint",
+      "ok": true,
+      "detail": "ekuzo_brt=<canary>"
+    },
+    {
+      "id": "390.2.s2.docCookie",
+      "what": "2. stage 2: document.cookie does not expose the token",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s2.confirm",
+      "what": "2. stage 2: tap sends exactly one confirm call",
+      "ok": true,
+      "detail": "[{},{\"confirm\":true}]"
+    },
+    {
+      "id": "390.2.s2.step",
+      "what": "2. stage 2: lands on screen 3",
+      "ok": true,
+      "detail": "idx=3"
+    },
+    {
+      "id": "390.2.s2.fields",
+      "what": "2. stage 2: fields filled",
+      "ok": true,
+      "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"Zephyrine\",\"age\":\"13\",\"plays\":[\"Console\",\"Tablet\"],\"sports\":[\"Plays, not their thing\"],\"power\":[\"Quick thinker\"],\"fact\":\"Knows every flag zq7\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.2.s2.noPost",
+      "what": "2. stage 2: NO progress post and NO beta_wizard_step on the restore (M2)",
+      "ok": true,
+      "detail": "{\"api\":0,\"ga\":[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"player_card\",\"via\":\"link\"}}]}"
+    },
+    {
+      "id": "390.2.s2.resumeEv",
+      "what": "2. stage 2: beta_wizard_resume {step:player_card, via:link} exactly once, nothing else",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"player_card\",\"via\":\"link\"}}]"
+    },
+    {
+      "id": "390.2.s2.focus",
+      "what": "2. stage 2: focus lands on a field after the tap",
+      "ok": true,
+      "detail": "{\"tag\":\"SELECT\",\"id\":\"tz\",\"name\":\"tz\"}"
+    },
+    {
+      "id": "390.2.s2.panelGone",
+      "what": "2. stage 2: panel removed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.2.s2.sid",
+      "what": "2. stage 2: saved run holds the session the restore returned",
+      "ok": true,
+      "detail": "{\"sid\":\"sess-restored-390-0001\",\"stage\":2,\"tzSet\":false,\"g\":[0,1,2]}"
+    },
+    {
+      "id": "390.11.s2.errors",
+      "what": "11. stage 2: no page errors, no console errors from our pages",
+      "ok": true,
+      "detail": "[{\"type\":\"error\",\"text\":\"Failed to load resource: the server responded with a status of 404 (Not Found)\",\"url\":\"http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png\"}]"
+    },
+    {
+      "id": "390.3.clear",
+      "what": "3. Start fresh: one clear call sent",
+      "ok": true,
+      "detail": "[{},{\"clear\":true}]"
+    },
+    {
+      "id": "390.3.panelGone",
+      "what": "3. Start fresh: panel gone",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.3.first",
+      "what": "3. Start fresh: wizard on its first screen, usable (email field focused)",
+      "ok": true,
+      "detail": "{\"tag\":\"INPUT\",\"id\":\"email\",\"name\":\"email\"}"
+    },
+    {
+      "id": "390.3.nothingLoaded",
+      "what": "3. Start fresh: nothing loaded, no post, no GA event",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.3.usable",
+      "what": "3. wizard usable: posts stage 0 and 1 with one fresh session id (not the saved one)",
+      "ok": true,
+      "detail": "[\"1794603987558-mmleteheae\",\"1794603987558-mmleteheae\"]"
+    },
+    {
+      "id": "390.3.laterRunNoPanel",
+      "what": "3. later page load (flag cookie gone or cleared): no panel",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.4.typed.nopanel",
+      "what": "4. typed in email before the slow answer: panel never appears",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.4.typed.kept",
+      "what": "4. typed email not overwritten, still on the first screen",
+      "ok": true,
+      "detail": "{\"email\":\"typed@example.com\",\"pname\":\"\",\"age\":\"\",\"plays\":[],\"sports\":[],\"power\":[],\"fact\":\"\",\"vow\":[],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.4.typed.noposts",
+      "what": "4. no posts, no GA resume",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.4.left.nopanel",
+      "what": "4. left the first screen before the answer: panel never appears, wizard not moved back",
+      "ok": true,
+      "detail": "idx=1"
+    },
+    {
+      "id": "390.4.left.email",
+      "what": "4. email still the typed one",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.4.done.ignored",
+      "what": "4. slow 'done' answer after typing does nothing",
+      "ok": true,
+      "detail": "idx=0"
+    },
+    {
+      "id": "390.4.none.ignored",
+      "what": "4. slow 'none' answer after typing: no dead-link line over the typing",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.4.confirmTyped",
+      "what": "4. (extra) typed into email while a slow confirm is in flight, then the answer lands",
+      "ok": null,
+      "detail": "{\"idx\":2,\"email\":\"sentry+390@example.com\"}"
+    },
+    {
+      "id": "390.5.endScreen",
+      "what": "5. done: the end screen shows (last section only)",
+      "ok": true,
+      "detail": "idx=4"
+    },
+    {
+      "id": "390.5.nokid",
+      "what": "5. done: no player name or card content anywhere",
+      "ok": true,
+      "detail": "{\"pc2\":\"\",\"kid\":[]}"
+    },
+    {
+      "id": "390.5.noComplete",
+      "what": "5. done: no beta_wizard_complete",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.5.noPosts",
+      "what": "5. done: no posts at all",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.5.ev",
+      "what": "5. done: beta_wizard_resume {step:done, via:link} once",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"done\",\"via\":\"link\"}}]"
+    },
+    {
+      "id": "390.5.dots",
+      "what": "5. done: progress dots in final state (all 'was', none current)",
+      "ok": true,
+      "detail": "[\"was\",\"was\",\"was\"]"
+    },
+    {
+      "id": "390.5.nostored",
+      "what": "5. done: nothing stored in the browser",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.5.restoreCalls",
+      "what": "5. done: exactly one restore call ({}), none with confirm",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.5.pad",
+      "what": "5. reaction pad visible on the done screen",
+      "ok": null,
+      "detail": "true"
+    },
+    {
+      "id": "390.6.line",
+      "what": "6. none: dead-link line on the first screen",
+      "ok": true,
+      "detail": "\"That link has run out. Start below and your answers will save as you go.\""
+    },
+    {
+      "id": "390.6.role",
+      "what": "6. none: line sits in a role=status container",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.6.usable",
+      "what": "6. none: wizard usable from the first screen",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.6.advance",
+      "what": "6. none: can continue to screen 2 and a progress post goes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.6.noEv",
+      "what": "6. none: no beta_wizard_resume event",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.7.retry",
+      "what": "7. 503 then 200: exactly one retry, panel appears",
+      "ok": true,
+      "detail": "{\"calls\":[{},{}],\"gapMs\":1518}"
+    },
+    {
+      "id": "390.7.gap",
+      "what": "7. gap between the two calls (ms)",
+      "ok": null,
+      "detail": "1518"
+    },
+    {
+      "id": "390.7.twice.calls",
+      "what": "7. 503 twice: two calls only",
+      "ok": true,
+      "detail": "calls=2"
+    },
+    {
+      "id": "390.7.twice.noerr",
+      "what": "7. 503 twice: no error shown, no panel, wizard usable",
+      "ok": true,
+      "detail": "Free beta\nLET'S MEET YOUR PLAYER.\nTHREE QUICK STEPS.\nStep 1\nTHE BETA\nStep 2\nPLAYER CARD\nStep 3\nAVAILABILITY\nGET STARTED\n\nWhat's your email? It's how we reach you about your player's spot.\n\nYour email\n"
+    },
+    {
+      "id": "390.7.twice.flag",
+      "what": "7. 503 twice: flag cookie still present",
+      "ok": true,
+      "detail": "ekuzo_brf=1"
+    },
+    {
+      "id": "390.7.reload.again",
+      "what": "7. reload after the double 503: asks again (flag kept)",
+      "ok": true,
+      "detail": "calls=4"
+    },
+    {
+      "id": "390.7.net",
+      "what": "7. dropped connection then 200: retried once, panel appears",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.7.429",
+      "what": "7. 429: one call, no retry, no error shown, flag kept",
+      "ok": true,
+      "detail": "calls=1"
+    },
+    {
+      "id": "390.8.clear",
+      "what": "8. saved local run plus flag: exactly one restore call, {clear:true}",
+      "ok": true,
+      "detail": "[{\"clear\":true}]"
+    },
+    {
+      "id": "390.8.nopanel",
+      "what": "8. no panel",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.8.local",
+      "what": "8. the local run won: local email, on the player card, nothing from the link",
+      "ok": true,
+      "detail": "{\"idx\":2,\"f\":{\"email\":\"local@example.com\",\"pname\":\"\",\"age\":\"\",\"plays\":[],\"sports\":[],\"power\":[],\"fact\":\"\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}}"
+    },
+    {
+      "id": "390.8.via",
+      "what": "8. resume event is via:device",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"expectations\",\"via\":\"device\"}}]"
+    },
+    {
+      "id": "390.9.restored",
+      "what": "9. same device, no flag: reopens on availability with answers",
+      "ok": true,
+      "detail": "{\"idx\":3,\"f\":{\"email\":\"sentry+390@example.com\",\"pname\":\"Zephyrine\",\"age\":\"13\",\"plays\":[\"Console\",\"Tablet\"],\"sports\":[\"Plays, not their thing\"],\"power\":[\"Quick thinker\"],\"fact\":\"Knows every flag zq7\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Central\",\"times\":[],\"note\":\"\"}}"
+    },
+    {
+      "id": "390.9.via",
+      "what": "9. resume event is {step:player_card, via:device} once",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"player_card\",\"via\":\"device\"}}]"
+    },
+    {
+      "id": "390.9.norestore",
+      "what": "9. zero restore calls without the flag",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.9.posts",
+      "what": "9. posts after a device restore (existing behaviour: one repost of the last done stage)",
+      "ok": null,
+      "detail": "[[\"beta-progress\",2,\"1794604042314-dgs8ejum1x\"]]"
+    },
+    {
+      "id": "390.10.zone.America/Toronto",
+      "what": "10. America/Toronto: select reads Eastern",
+      "ok": true,
+      "detail": "{\"v\":\"Eastern\",\"zone\":\"America/Toronto\"}"
+    },
+    {
+      "id": "390.10.zone.America/Vancouver",
+      "what": "10. America/Vancouver: select reads Pacific",
+      "ok": true,
+      "detail": "{\"v\":\"Pacific\",\"zone\":\"America/Vancouver\"}"
+    },
+    {
+      "id": "390.10.zone.America/Edmonton",
+      "what": "10. America/Edmonton: select reads Mountain",
+      "ok": true,
+      "detail": "{\"v\":\"Mountain\",\"zone\":\"America/Edmonton\"}"
+    },
+    {
+      "id": "390.10.zone.America/Winnipeg",
+      "what": "10. America/Winnipeg: select reads Central",
+      "ok": true,
+      "detail": "{\"v\":\"Central\",\"zone\":\"America/Winnipeg\"}"
+    },
+    {
+      "id": "390.10.zone.America/Regina",
+      "what": "10. America/Regina: select reads Central",
+      "ok": true,
+      "detail": "{\"v\":\"Central\",\"zone\":\"America/Regina\"}"
+    },
+    {
+      "id": "390.10.zone.America/Halifax",
+      "what": "10. America/Halifax: select reads Other",
+      "ok": true,
+      "detail": "{\"v\":\"Other\",\"zone\":\"America/Halifax\"}"
+    },
+    {
+      "id": "390.10.zone.America/St_Johns",
+      "what": "10. America/St_Johns: select reads Other",
+      "ok": true,
+      "detail": "{\"v\":\"Other\",\"zone\":\"America/St_Johns\"}"
+    },
+    {
+      "id": "390.10.zone.America/Boise",
+      "what": "10. America/Boise: select reads Mountain",
+      "ok": true,
+      "detail": "{\"v\":\"Mountain\",\"zone\":\"America/Boise\"}"
+    },
+    {
+      "id": "390.10.zone.America/Indiana/Tell_City",
+      "what": "10. America/Indiana/Tell_City: select reads Central",
+      "ok": true,
+      "detail": "{\"v\":\"Central\",\"zone\":\"America/Indiana/Tell_City\"}"
+    },
+    {
+      "id": "390.10.zone.America/Mexico_City",
+      "what": "10. America/Mexico_City: select reads Other",
+      "ok": true,
+      "detail": "{\"v\":\"Other\",\"zone\":\"America/Mexico_City\"}"
+    },
+    {
+      "id": "390.10.zone.America/Puerto_Rico",
+      "what": "10. America/Puerto_Rico: select reads Other",
+      "ok": true,
+      "detail": "{\"v\":\"Other\",\"zone\":\"America/Puerto_Rico\"}"
+    },
+    {
+      "id": "390.10.zone.America/New_York",
+      "what": "10. America/New_York: select reads Eastern",
+      "ok": true,
+      "detail": "{\"v\":\"Eastern\",\"zone\":\"America/New_York\"}"
+    },
+    {
+      "id": "390.10.zone.Europe/London",
+      "what": "10. Europe/London: select reads Other",
+      "ok": true,
+      "detail": "{\"v\":\"Other\",\"zone\":\"Europe/London\"}"
+    },
+    {
+      "id": "390.10.hand.guess",
+      "what": "10. Toronto guess on the availability screen reads Eastern",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.10.hand.nav",
+      "what": "10. hand-picked Pacific survives Back and forward",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.10.hand.reload",
+      "what": "10. same-device restore after reload: hand-picked Pacific back in the select (guess was Eastern)",
+      "ok": true,
+      "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"Zephyrine\",\"age\":\"13\",\"plays\":[\"Console\",\"Tablet\"],\"sports\":[\"Plays, not their thing\"],\"power\":[\"Quick thinker\"],\"fact\":\"Knows every flag zq7\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Pacific\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.10.hand.final",
+      "what": "10. final post sends timeZone Pacific and tz America/Toronto",
+      "ok": true,
+      "detail": "{\"tz\":\"Pacific\",\"z\":\"America/Toronto\"}"
+    },
+    {
+      "id": "390.10.guess.saved",
+      "what": "10. a guess that was never hand-picked is saved with tzSet unset",
+      "ok": true,
+      "detail": "{\"tz\":\"Eastern\"}"
+    },
+    {
+      "id": "390.10.guess.new",
+      "what": "10. reopened in Vancouver: the saved Eastern guess is NOT restored over the new Pacific guess",
+      "ok": true,
+      "detail": "{\"tz\":\"Pacific\",\"idx\":2}"
+    },
+    {
+      "id": "390.10.hand.crossZone",
+      "what": "10. hand-picked Alaska restored on a New York browser",
+      "ok": true,
+      "detail": "{\"email\":\"sentry+390@example.com\",\"pname\":\"Zephyrine\",\"age\":\"13\",\"plays\":[\"Console\",\"Tablet\"],\"sports\":[\"Plays, not their thing\"],\"power\":[\"Quick thinker\"],\"fact\":\"Knows every flag zq7\",\"vow\":[\"No toxicity\",\"Positive mindset\",\"Winning attitude\"],\"tz\":\"Alaska\",\"times\":[],\"note\":\"\"}"
+    },
+    {
+      "id": "390.10.link.nozone",
+      "what": "10. link restore keeps the browser guess (Mountain) and does not set tzSet",
+      "ok": true,
+      "detail": "{\"tz\":\"Mountain\"}"
+    },
+    {
+      "id": "390.13.dom",
+      "what": "13. panel structure",
+      "ok": null,
+      "detail": "{\"statusCount\":1,\"buttonTypes\":[\"button\",\"button\"],\"accessible\":[\"Start fresh\",\"Pick up where I left off\"],\"live\":null,\"inFirstSection\":true,\"firstChildOfSection\":true}"
+    },
+    {
+      "id": "390.13.status",
+      "what": "13. exactly one role=status region, inside the first screen, above its content, buttons type=button",
+      "ok": true,
+      "detail": "{\"statusCount\":1,\"buttonTypes\":[\"button\",\"button\"],\"accessible\":[\"Start fresh\",\"Pick up where I left off\"],\"live\":null,\"inFirstSection\":true,\"firstChildOfSection\":true}"
+    },
+    {
+      "id": "390.13.target",
+      "what": "13. 'Pick up' button size (px)",
+      "ok": null,
+      "detail": "{\"w\":161,\"h\":70,\"font\":\"18px\"}"
+    },
+    {
+      "id": "390.13.targetSize",
+      "what": "13. both panel buttons at least 44px tall (touch target)",
+      "ok": true,
+      "detail": "[70,70]"
+    },
+    {
+      "id": "390.13.kbd",
+      "what": "13. keyboard Enter on 'Pick up' works and focus lands on a field",
+      "ok": true,
+      "detail": "{\"calls\":2,\"idx\":2,\"a\":{\"tag\":\"INPUT\",\"id\":\"pname\",\"name\":\"pname\"}}"
+    },
+    {
+      "id": "390.13.kbdFresh",
+      "what": "13. keyboard Space on 'Start fresh' works; focus on email",
+      "ok": true,
+      "detail": "{\"tag\":\"INPUT\",\"id\":\"email\",\"name\":\"email\"}"
+    },
+    {
+      "id": "390.11.urls",
+      "what": "11. no request to the local server carries the kid's name, fun fact, note, the email or the token in its URL",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.11.vendor",
+      "what": "11. no vendor/other request (GA4, Pixel, Clarity hosts) carries them or the token",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.11.vendorCount",
+      "what": "11. vendor/other requests recorded and answered by stub or aborted",
+      "ok": null,
+      "detail": "{\"vendor\":132,\"other\":44,\"hosts\":[\"www.googletagmanager.com\",\"connect.facebook.net\",\"www.clarity.ms\",\"fonts.googleapis.com\"]}"
+    },
+    {
+      "id": "390.11.dl",
+      "what": "11. nothing in the dataLayer (GA4 events and config) carries name, fun fact, note, email or token",
+      "ok": true,
+      "detail": "[[\"js\",\"2026-11-13T21:08:08.401Z\"],[\"set\",{\"page_location\":\"http://ekuzo.gg:3100/season1/beta/start\"}],[\"config\",\"G-8LM45PX53W\",{}],[\"event\",\"beta_wizard_resume\",{\"step\":\"player_card\",\"via\":\"link\"}],[\"event\",\"beta_wizard_complete\"]]"
+    },
+    {
+      "id": "390.11.dlShapes",
+      "what": "11. GA events are only beta_wizard_resume, beta_wizard_step, beta_wizard_complete with step/via params",
+      "ok": true,
+      "detail": "[{\"n\":\"beta_wizard_resume\",\"p\":{\"step\":\"player_card\",\"via\":\"link\"}},{\"n\":\"beta_wizard_complete\",\"p\":{}}]"
+    },
+    {
+      "id": "390.11.cookieScope",
+      "what": "11. the token cookie is sent to no request other than the restore endpoint (checked on page, script and /api/season-one requests)",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "id": "390.14.redirect",
+      "what": "14. real 302 lands on /season1/beta/start with no token and no query",
+      "ok": true,
+      "detail": "{\"url\":\"https://ekuzo.gg:3101/season1/beta/start\",\"nav\":[{\"url\":\"/season1/beta/r/AAAAAAAA\",\"status\":302},{\"url\":\"/season1/beta/start\",\"status\":200}]}"
+    },
+    {
+      "id": "390.14.cookies",
+      "what": "14. Set-Cookie headers of the 302 and cookies Chrome still holds",
+      "ok": null,
+      "detail": "{\"setCk\":[\"ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 21:08:12 GMT; Max-Age=31536000; Secure; SameSite=lax\",\"ekuzo_brt=<tok>; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax\",\"ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax\"],\"held\":[\"ekuzo_brt\"]}"
+    },
+    {
+      "id": "390.14.cookieAttrs",
+      "what": "14. 302 sets the token cookie (HttpOnly, Secure, Lax, Path=/api/season1-beta, Max-Age=1800) and the flag (Secure, Lax, Path=/season1/beta, Max-Age=1800, not HttpOnly)",
+      "ok": true,
+      "detail": "[\"ekuzo_origin=direct; Path=/; Expires=Sat, 13 Nov 2027 21:08:12 GMT; Max-Age=31536000; Secure; SameSite=lax\",\"ekuzo_brt=<tok>; Path=/api/season1-beta; Max-Age=1800; HttpOnly; Secure; SameSite=Lax\",\"ekuzo_brf=1; Path=/season1/beta; Max-Age=1800; Secure; SameSite=Lax\"]"
+    },
+    {
+      "id": "390.14.askedOnce",
+      "what": "14. the page read the flag at the real path and asked the restore endpoint ({}) with the token cookie",
+      "ok": true,
+      "detail": "[[{},\"ekuzo_brt=<tok>; ekuzo_origin=direct\"]]"
+    },
+    {
+      "id": "390.14.flagDeleted",
+      "what": "14. flag cookie deleted by the script after the 200 (real Secure delete)",
+      "ok": true,
+      "detail": "[\"ekuzo_brt\",\"ekuzo_origin\"]"
+    },
+    {
+      "id": "390.14.panel",
+      "what": "14. panel shown",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "390.14.reload",
+      "what": "14. reload after the flag was deleted: no second restore call (token cookie alone does nothing)",
+      "ok": true,
+      "detail": "calls=1"
+    },
+    {
+      "id": "390.14.nav",
+      "what": "14. server responses seen",
+      "ok": null,
+      "detail": "[{\"url\":\"/season1/beta/r/AAAAAAAA\",\"status\":302},{\"url\":\"/season1/beta/start\",\"status\":200},{\"url\":\"/season1/beta/start\",\"status\":200}]"
+    }
+  ],
+  "offenders": [],
+  "other": {
+    "fonts.googleapis.com": 47
+  },
+  "pageErrors": [],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "plain"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "plain"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "plain"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "plain"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "resume0"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "resume0"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "resume1"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "resume1"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "resume2"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "resume2"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "fresh"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "fresh"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "fresh"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "fresh"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "slow-type"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "slow-type"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "slow-leave"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "slow-leave"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "slow-done"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "slow-done"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "slow-none"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "slow-none"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "slow-confirm"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "slow-confirm"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "done"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "done"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "none"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "none"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "503-then-200"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "503-then-200"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "503-then-200"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "503-503"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "network-fail"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_CONNECTION_RESET",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "network-fail"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "network-fail"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "429"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+      "url": "http://ekuzo.gg:3100/api/season1-beta/restore",
+      "scenario": "429"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "429"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "localwins"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "localwins"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "localwins"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "localwins"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "device"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "device"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "device"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "device"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Toronto"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Toronto"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Vancouver"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Vancouver"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Edmonton"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Edmonton"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Winnipeg"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Winnipeg"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Regina"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Regina"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Halifax"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Halifax"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/St_Johns"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/St_Johns"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Boise"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Boise"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Indiana/Tell_City"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Indiana/Tell_City"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Mexico_City"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Mexico_City"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/Puerto_Rico"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/Puerto_Rico"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-America/New_York"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-America/New_York"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-Europe/London"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-Europe/London"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-hand"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-hand"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-hand"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-hand"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-guess-a"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-guess-a"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-guess-b"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-guess-b"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-guess-c"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-guess-c"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tz-link"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tz-link"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "a11y"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "a11y"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "a11y2"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "a11y2"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "dlLeak"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://ekuzo.gg:3100/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "dlLeak"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tls"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "https://ekuzo.gg:3101/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tls"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap",
+      "scenario": "tls"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "https://ekuzo.gg:3101/images/new%20torn%20paper/torn-paper-grey-top-1@2x.png",
+      "scenario": "tls"
+    }
+  ]
+}
