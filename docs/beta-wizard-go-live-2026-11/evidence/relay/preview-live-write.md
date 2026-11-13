@@ -17,3 +17,10 @@ Host `deploy-preview-5--ekuzo.netlify.app` (draft PR #5; Netlify builds branch d
 | Klaviyo profile 01M79AY642DM9SZECBYMNKJGTG | consent NEVER_SUBSCRIBED; properties beta_wizard yes, beta_wizard_stage done, beta_source karlin-email, beta_time_zone Central, beta_times [Weekday evenings, Weekend afternoons], beta_player_name Testb, beta_player_age 9 |
 
 Defect found here: `beta_wizard_next_step` read "Player card" after completion (the completion wrote an empty string and the posts were a second apart). Fixed in a386ee5: completion writes "done". Retest is ledger row R-1.
+
+## Retest R-1 and a real drop-off (20:16 CT, deploy at a386ee5, Android user agent, `?src=karlin-text`, posts four seconds apart)
+
+| Identity | What was sent | Neon | Klaviyo profile |
+|---|---|---|---|
+| `team+s1test-1112-pv2@ekuzo.gg` | progress 0, 1, 2, then the finished wizard | progress stage 3, done; source karlin-text | 01M79B2NZPX4QM3C8BAH1DF4BZ: `beta_wizard_stage: done`, `beta_wizard_next_step: done` (R-1 PASS), NEVER_SUBSCRIBED |
+| `team+s1test-1112-pv3@ekuzo.gg` | progress 0 and 1, then nothing (a drop-off) | progress stage 1, next_step "Player card", not done; no family, no player | 01M79B33A4SEAXECZE65MHHQZP: `beta_wizard_stage: expectations`, `beta_wizard_next_step: Player card`, `beta_source: karlin-text`, NEVER_SUBSCRIBED. This is the profile a pick-up email would go to |
